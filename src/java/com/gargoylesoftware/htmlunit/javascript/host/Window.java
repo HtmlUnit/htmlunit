@@ -227,7 +227,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return The newly opened window
      */
     public static Object jsxFunction_open(
-        final Context context, final Scriptable scriptable, final Object[] args, final Function function ) {
+        final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
 
         final String url = getStringArg(0, args, null);
         final String windowName = getStringArg(1, args, "");
@@ -273,7 +273,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return The created popup
      */
     public static Popup jsxFunction_createPopup(
-        final Context context, final Scriptable scriptable, final Object[] args, final Function function ) {
+        final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
 
         final Window thisWindow = (Window) scriptable;
 
@@ -408,7 +408,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newLocation The url of the new content.
      * @throws IOException when location loading fails
      */
-    public void jsxSet_location( final String newLocation ) throws IOException {
+    public void jsxSet_location(final String newLocation) throws IOException {
         location_.jsxSet_href(newLocation);
     }
 
@@ -433,7 +433,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param webWindow The web window containing the javascript.
      * @exception Exception If an error occurs.
      */
-    public void initialize( final WebWindow webWindow ) throws Exception {
+    public void initialize(final WebWindow webWindow) throws Exception {
 
         webWindow_ = webWindow;
         webWindow_.setScriptObject(this);
@@ -468,7 +468,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Initialize the object.
      * @param enclosedPage The page containing the javascript.
      */
-    public void initialize( final Page enclosedPage ) {
+    public void initialize(final Page enclosedPage) {
         if (enclosedPage instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
@@ -477,7 +477,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // won't work properly
             setDomNode(htmlPage);
 
-            Assert.notNull( "document_", document_ );
+            Assert.notNull("document_", document_);
             document_.setDomNode(htmlPage);
         }
     }
@@ -581,7 +581,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Remove focus from this element
      */
     public void jsxFunction_blur() {
-        getLog().debug( "Window.blur() not implemented" );
+        getLog().debug("Window.blur() not implemented");
     }
 
     /**
@@ -605,7 +605,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y The vertical position
      */
     public void jsxFunction_moveTo(final int x, final int y) {
-        getLog().debug( "Window.moveTo() not implemented" );
+        getLog().debug("Window.moveTo() not implemented");
     }
 
     /**
@@ -614,7 +614,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y The vertical position
      */
     public void jsxFunction_moveBy(final int x, final int y) {
-        getLog().debug( "Window.moveBy() not implemented" );
+        getLog().debug("Window.moveBy() not implemented");
     }
 
     /**
@@ -623,7 +623,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param height The height of the Window in pixel after resize.
      */
     public void jsxFunction_resizeTo(final int width, final int height) {
-        getLog().debug( "Window.resizeTo() not implemented" );
+        getLog().debug("Window.resizeTo() not implemented");
     }
 
     /**
@@ -632,7 +632,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y The vertical position to scroll to
      */
     public void jsxFunction_scroll(final int x, final int y) {
-        getLog().debug( "Window.scroll() not implemented" );
+        getLog().debug("Window.scroll() not implemented");
     }
 
     /**
@@ -641,7 +641,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y The vertical distance to scroll by
      */
     public void jsxFunction_scrollBy(final int x, final int y) {
-        getLog().debug( "Window.scrollBy() not implemented" );
+        getLog().debug("Window.scrollBy() not implemented");
     }
 
     /**
@@ -649,7 +649,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param lines The number of lines to scroll down
      */
     public void jsxFunction_scrollByLines(final int lines) {
-        getLog().debug( "Window.scrollByLines() not implemented" );
+        getLog().debug("Window.scrollByLines() not implemented");
     }
 
     /**
@@ -657,7 +657,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pages The number of pages to scroll down
      */
     public void jsxFunction_scrollByPages(final int pages) {
-        getLog().debug( "Window.scrollByPages() not implemented" );
+        getLog().debug("Window.scrollByPages() not implemented");
     }
 
     /**
@@ -666,7 +666,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y The vertical position to scroll to
      */
     public void jsxFunction_scrollTo(final int x, final int y) {
-        getLog().debug( "Window.scrollTo() not implemented" );
+        getLog().debug("Window.scrollTo() not implemented");
     }
 
     /**
@@ -803,7 +803,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Set the value of the newName property
      * @param newName The new window name
      */
-    public void jsxSet_name( final String newName ) {
+    public void jsxSet_name(final String newName) {
         webWindow_.setName(newName);
     }
 
@@ -820,7 +820,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Set the value of the onerror property
      * @param newValue The value
      */
-    public void jsxSet_onerror( final String newValue) {
+    public void jsxSet_onerror(final String newValue) {
         getLog().debug("Window.onerror not implemented");
     }
 
@@ -832,7 +832,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         Object result = NOT_FOUND;
         final DomNode domNode = getDomNodeOrNull();
         if (domNode != null) {
-            result = getFrameByName( domNode.getPage(), name );
+            result = getFrameByName(domNode.getPage(), name);
         }
 
         // See if it is an attempt to access an element directly by name or id if we are emulating IE.
@@ -939,7 +939,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Set the text from the status line.
      * @param message the status line text
      */
-    public void jsxSet_status( final String message ) {
+    public void jsxSet_status(final String message) {
         status_ = message;
 
         final StatusHandler statusHandler = webWindow_.getWebClient().getStatusHandler();
@@ -1031,7 +1031,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * MSDN documentation</a>
      */
     public void jsxFunction_print() {
-        getLog().debug( "window.print() not implemented" );
+        getLog().debug("window.print() not implemented");
     }
 
     /**

@@ -63,8 +63,8 @@ public final class UrlUtils {
      * @return A new URL identical to the specified URL, except using the specified protocol.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
-    public static URL getUrlWithNewProtocol( final URL u, final String newProtocol ) throws MalformedURLException {
-        return createNewUrl( newProtocol, u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery() );
+    public static URL getUrlWithNewProtocol(final URL u, final String newProtocol) throws MalformedURLException {
+        return createNewUrl(newProtocol, u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
     }
 
     /**
@@ -74,8 +74,8 @@ public final class UrlUtils {
      * @return A new URL identical to the specified URL, except using the specified host.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
-    public static URL getUrlWithNewHost( final URL u, final String newHost ) throws MalformedURLException {
-        return createNewUrl( u.getProtocol(), newHost, u.getPort(), u.getPath(), u.getRef(), u.getQuery() );
+    public static URL getUrlWithNewHost(final URL u, final String newHost) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), newHost, u.getPort(), u.getPath(), u.getRef(), u.getQuery());
     }
 
     /**
@@ -85,8 +85,8 @@ public final class UrlUtils {
      * @return A new URL identical to the specified URL, except using the specified port.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
-    public static URL getUrlWithNewPort( final URL u, final int newPort ) throws MalformedURLException {
-        return createNewUrl( u.getProtocol(), u.getHost(), newPort, u.getPath(), u.getRef(), u.getQuery() );
+    public static URL getUrlWithNewPort(final URL u, final int newPort) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getHost(), newPort, u.getPath(), u.getRef(), u.getQuery());
     }
 
     /**
@@ -96,8 +96,8 @@ public final class UrlUtils {
      * @return A new URL identical to the specified URL, except using the specified path.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
-    public static URL getUrlWithNewPath( final URL u, final String newPath ) throws MalformedURLException {
-        return createNewUrl( u.getProtocol(), u.getHost(), u.getPort(), newPath, u.getRef(), u.getQuery() );
+    public static URL getUrlWithNewPath(final URL u, final String newPath) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getHost(), u.getPort(), newPath, u.getRef(), u.getQuery());
     }
 
     /**
@@ -107,8 +107,8 @@ public final class UrlUtils {
      * @return A new URL identical to the specified URL, except using the specified reference.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
-    public static URL getUrlWithNewRef( final URL u, final String newRef ) throws MalformedURLException {
-        return createNewUrl( u.getProtocol(), u.getHost(), u.getPort(), u.getPath(), newRef, u.getQuery() );
+    public static URL getUrlWithNewRef(final URL u, final String newRef) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getHost(), u.getPort(), u.getPath(), newRef, u.getQuery());
     }
 
     /**
@@ -118,8 +118,8 @@ public final class UrlUtils {
      * @return A new URL identical to the specified URL, except using the specified query string.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
-    public static URL getUrlWithNewQuery( final URL u, final String newQuery ) throws MalformedURLException {
-        return createNewUrl( u.getProtocol(), u.getHost(), u.getPort(), u.getPath(), u.getRef(), newQuery );
+    public static URL getUrlWithNewQuery(final URL u, final String newQuery) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getHost(), u.getPort(), u.getPath(), u.getRef(), newQuery);
     }
 
     /**
@@ -133,28 +133,28 @@ public final class UrlUtils {
      * @return A new URL based on the specified fragments.
      * @throws MalformedURLException If there is a problem creating the new URL.
      */
-    private static URL createNewUrl( final String protocol, final String host, final int port,
-            final String path, final String ref, final String query ) throws MalformedURLException {
+    private static URL createNewUrl(final String protocol, final String host, final int port,
+            final String path, final String ref, final String query) throws MalformedURLException {
         final StringBuffer s = new StringBuffer();
-        s.append( protocol );
-        s.append( "://" );
-        s.append( host );
+        s.append(protocol);
+        s.append("://");
+        s.append(host);
         if (port != -1) {
-            s.append( ":" ).append( port );
+            s.append(":").append(port);
         }
         if (path != null && path.length() > 0) {
             if (!path.startsWith("/")) {
-                s.append( "/" );
+                s.append("/");
             }
-            s.append( path );
+            s.append(path);
         }
         if (query != null) {
-            s.append( "?" ).append( query );
+            s.append("?").append(query);
         }
         if (ref != null) {
-            s.append( "#" ).append( ref );
+            s.append("#").append(ref);
         }
-        final URL url = new URL( s.toString() );
+        final URL url = new URL(s.toString());
         return url;
     }
 

@@ -70,7 +70,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public JavaScriptConfigurationTest( final String name ) {
+    public JavaScriptConfigurationTest(final String name) {
         super(name);
     }
     
@@ -446,12 +446,12 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final String directory = "src/java/com/gargoylesoftware/htmlunit/javascript/configuration/";
         parser.setFeature("http://xml.org/sax/features/validation", true);
         parser.setFeature("http://apache.org/xml/features/validation/schema", true);
-        parser.setEntityResolver( new EntityResolver() {
+        parser.setEntityResolver(new EntityResolver() {
             public InputSource resolveEntity(final String publicId, final String systemId) throws IOException {
                 return createInputSourceForFile(directory + "JavaScriptConfiguration.xsd");
             }
         });
-        parser.setErrorHandler( new ErrorHandler() {
+        parser.setErrorHandler(new ErrorHandler() {
             public void warning(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
@@ -467,8 +467,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     }
     
-    private InputSource createInputSourceForFile( final String fileName ) throws FileNotFoundException {
-        return new InputSource( getFileAsStream(fileName) );
+    private InputSource createInputSourceForFile(final String fileName) throws FileNotFoundException {
+        return new InputSource(getFileAsStream(fileName));
     }
 
     /**

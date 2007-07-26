@@ -62,7 +62,7 @@ public class DomText extends DomCharacterData {
      * @param page The HtmlPage that contains this element.
      * @param data the string data held by this node
      */
-    public DomText( final HtmlPage page, final String data) {
+    public DomText(final HtmlPage page, final String data) {
         super(page, data);
     }
 
@@ -72,7 +72,7 @@ public class DomText extends DomCharacterData {
      * @return The Text node that was split from this node.
      */
     public DomText splitText(final int offset) {
-        if (offset < 0 || offset > getLength() ) {
+        if (offset < 0 || offset > getLength()) {
             throw new IllegalArgumentException("offset: " + offset + " data.length: " + getLength());
         }
 
@@ -123,10 +123,10 @@ public class DomText extends DomCharacterData {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printXml( final String indent, final PrintWriter printWriter ) {
+    protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.println(StringEscapeUtils.escapeXml(getData()));
-        printChildrenAsXml( indent, printWriter );
+        printChildrenAsXml(indent, printWriter);
     }
 
     /**

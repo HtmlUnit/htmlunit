@@ -61,7 +61,7 @@ public class NavigatorTest extends WebTestCase {
      * Create an instance.
      * @param name The name of the test.
      */
-    public NavigatorTest( final String name ) {
+    public NavigatorTest(final String name) {
         super(name);
     }
 

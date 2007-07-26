@@ -78,7 +78,7 @@ public class Anchor extends FocusableHostElement {
      * Set the href property.
      * @param href href attribute value.
      */
-    public void jsxSet_href( final String href ) {
+    public void jsxSet_href(final String href) {
         getHtmlElementOrDie().setAttributeValue("href", href);
     }
 
@@ -121,7 +121,7 @@ public class Anchor extends FocusableHostElement {
      * @return The href property.
      */
     public String jsxGet_target() {
-        return getHtmlElementOrDie().getAttributeValue( "target" );
+        return getHtmlElementOrDie().getAttributeValue("target");
     }
 
     /**
@@ -206,8 +206,8 @@ public class Anchor extends FocusableHostElement {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_hash( final String hash ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewRef( getUrl(), hash ) );
+    public void jsxSet_hash(final String hash) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewRef(getUrl(), hash));
     }
 
     /**
@@ -237,21 +237,21 @@ public class Anchor extends FocusableHostElement {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_host( final String host ) throws Exception {
+    public void jsxSet_host(final String host) throws Exception {
         final String hostname;
         final int port;
         final int index = host.indexOf(':');
         if (index != -1) {
             hostname = host.substring(0, index);
-            port = Integer.parseInt( host.substring(index + 1) );
+            port = Integer.parseInt(host.substring(index + 1));
         }
         else {
             hostname = host;
             port = -1;
         }
-        final URL url1 = UrlUtils.getUrlWithNewHost( getUrl(), hostname );
-        final URL url2 = UrlUtils.getUrlWithNewPort( url1, port );
-        setUrl( url2 );
+        final URL url1 = UrlUtils.getUrlWithNewHost(getUrl(), hostname);
+        final URL url2 = UrlUtils.getUrlWithNewPort(url1, port);
+        setUrl(url2);
     }
 
     /**
@@ -272,7 +272,7 @@ public class Anchor extends FocusableHostElement {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_hostname( final String hostname ) throws Exception {
+    public void jsxSet_hostname(final String hostname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
     }
 
@@ -294,8 +294,8 @@ public class Anchor extends FocusableHostElement {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_pathname( final String pathname ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewPath( getUrl(), pathname ) );
+    public void jsxSet_pathname(final String pathname) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
     }
 
     /**
@@ -323,7 +323,7 @@ public class Anchor extends FocusableHostElement {
      * MSDN Documentation</a>
      */
     public void jsxSet_port(final String port) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewPort( getUrl(), Integer.parseInt( port ) ) );
+        setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
     }
 
     /**
@@ -344,7 +344,7 @@ public class Anchor extends FocusableHostElement {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_protocol( final String protocol ) throws Exception {
+    public void jsxSet_protocol(final String protocol) throws Exception {
         final String bareProtocol = StringUtils.substringBefore(protocol, ":");
         setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol));
     }

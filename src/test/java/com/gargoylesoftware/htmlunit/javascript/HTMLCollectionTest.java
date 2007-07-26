@@ -115,7 +115,7 @@ public class HTMLCollectionTest extends WebTestCase {
             = "<html><head><title>foo</title><script>"
             + "function doTest() {\n"
             + "    alert(document.all.length);\n"
-            + "    document.appendChild( document.createElement('div') );\n"
+            + "    document.appendChild(document.createElement('div'));\n"
             + "    alert(document.all.length);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -125,7 +125,7 @@ public class HTMLCollectionTest extends WebTestCase {
         loadPage(firstContent, collectedAlerts);
 
         final String[] expectedAlerts = {"5", "6"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
 }

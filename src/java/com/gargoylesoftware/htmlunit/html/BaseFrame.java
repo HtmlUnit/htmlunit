@@ -280,7 +280,7 @@ public abstract class BaseFrame extends StyledElement {
      * Set the value of the "src" attribute.  Also load the frame with the specified url if possible.
      * @param attribute The new value
      */
-    public final void setSrcAttribute( final String attribute ) {
+    public final void setSrcAttribute(final String attribute) {
         setAttributeValue("src", attribute);
         loadInnerPageIfPossible(attribute);
     }

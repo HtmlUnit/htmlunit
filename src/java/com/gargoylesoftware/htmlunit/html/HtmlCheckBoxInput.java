@@ -104,7 +104,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * @see SubmittableElement#reset()
      */
     public void reset() {
-        setChecked( defaultCheckedState_ );
+        setChecked(defaultCheckedState_);
     }
 
     /**
@@ -168,19 +168,19 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc} Also sets the value to the new default value.
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
-        super.setDefaultValue( defaultValue );
-        setValueAttribute( defaultValue );
+    public void setDefaultValue(final String defaultValue) {
+        super.setDefaultValue(defaultValue);
+        setValueAttribute(defaultValue);
     }
 
     /**
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultChecked(boolean)
      */
-    public void setDefaultChecked( final boolean defaultChecked ) {
+    public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
         if (getPage().getWebClient().getBrowserVersion().isNetscape()) {
-            setChecked( defaultChecked );
+            setChecked(defaultChecked);
         }
     }
 

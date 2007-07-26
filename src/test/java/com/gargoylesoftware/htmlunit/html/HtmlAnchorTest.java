@@ -65,8 +65,8 @@ public class HtmlAnchorTest extends WebTestCase {
      *
      * @param name Name of the test
      */
-    public HtmlAnchorTest( final String name ) {
-        super( name );
+    public HtmlAnchorTest(final String name) {
+        super(name);
     }
 
     /**
@@ -103,18 +103,18 @@ public class HtmlAnchorTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
+        final HtmlAnchor anchor = (HtmlAnchor )page.getHtmlElementById("a2");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage )anchor.click();
 
         final List expectedParameters = Collections.EMPTY_LIST;
         final MockWebConnection webConnection = getMockConnection(secondPage);
 
         assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
-        assertNotNull( secondPage );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        assertNotNull(secondPage);
     }
 
     /**
@@ -128,7 +128,7 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById( "a1" );
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a1");
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) anchor.click();
@@ -154,22 +154,22 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor )page.getHtmlElementById("a2");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage )anchor.click();
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
-        assertEquals( "Second", secondPage.getTitleText() );
+        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals("Second", secondPage.getTitleText());
     }
 
     /**
@@ -189,22 +189,22 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor )page.getHtmlElementById("a2");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage )anchor.click();
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
-        assertSame( page, secondPage );
+        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertSame(page, secondPage);
     }
 
     /**
@@ -223,26 +223,26 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setJavaScriptEnabled(false);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_GARGOYLE);
+        final HtmlAnchor anchor = (HtmlAnchor )page.getHtmlElementById("a2");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage )anchor.click();
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final List expectedParameters = Collections.EMPTY_LIST;
 
         assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
-        assertNotNull( secondPage );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        assertNotNull(secondPage);
     }
 
     /**
@@ -259,14 +259,14 @@ public class HtmlAnchorTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
+        final HtmlAnchor anchor = (HtmlAnchor )page.getHtmlElementById("a2");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage )anchor.click();
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
-        assertSame( page, secondPage );
+        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertSame(page, secondPage);
     }
 
     /**
@@ -284,21 +284,21 @@ public class HtmlAnchorTest extends WebTestCase {
         client.setJavaScriptEnabled(false);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = ( HtmlAnchor )page.getHtmlElementById( "a2" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_GARGOYLE);
+        final HtmlAnchor anchor = (HtmlAnchor )page.getHtmlElementById("a2");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage )anchor.click();
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
-        assertSame( page, secondPage );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        assertSame(page, secondPage);
     }
 
     /**

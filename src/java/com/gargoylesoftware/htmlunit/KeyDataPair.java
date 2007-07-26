@@ -63,7 +63,7 @@ public class KeyDataPair extends KeyValuePair {
      * @param contentType the content type
      * @param charset the charset encoding
      */
-    public KeyDataPair( final String key, final File file, final String contentType,
+    public KeyDataPair(final String key, final File file, final String contentType,
             final String charset) {
 
         super(key, file.getName());

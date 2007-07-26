@@ -69,7 +69,7 @@ public class FormTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public FormTest( final String name ) {
+    public FormTest(final String name) {
         super(name);
     }
 
@@ -86,7 +86,7 @@ public class FormTest extends WebTestCase {
             + "        if (element.type != 'radio' && element != document.form1[element.name]) {\n"
             + "            alert('name index not working for '+element.name);\n"
             + "        }\n"
-            + "        alert( element.name )\n"
+            + "        alert(element.name)\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -126,7 +126,7 @@ public class FormTest extends WebTestCase {
             "reset2", "submit1", "submit2", "textInput1", "textarea1"
         };
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -140,7 +140,7 @@ public class FormTest extends WebTestCase {
             + "    alert(radioArray.length)\n"
             + "    for (var i=0; i< radioArray.length; i++) {\n"
             + "        var element = radioArray[i];"
-            + "        alert( element.value )\n"
+            + "        alert(element.value)\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -160,7 +160,7 @@ public class FormTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         assertEquals("foo", page.getTitleText());
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -187,7 +187,7 @@ public class FormTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"1"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -199,8 +199,8 @@ public class FormTest extends WebTestCase {
         final String oldValue = "http://foo.com";
         final String newValue = "mailto:me@bar.com";
 
-        final HtmlForm form = doTestProperty( jsProperty, htmlProperty, oldValue, newValue );
-        assertEquals( newValue, form.getActionAttribute() );
+        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
+        assertEquals(newValue, form.getActionAttribute());
     }
 
     /**
@@ -212,8 +212,8 @@ public class FormTest extends WebTestCase {
         final String oldValue = "myForm";
         final String newValue = "testForm";
 
-        final HtmlForm form = doTestProperty( jsProperty, htmlProperty, oldValue, newValue );
-        assertEquals( newValue, form.getNameAttribute() );
+        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
+        assertEquals(newValue, form.getNameAttribute());
     }
 
     /**
@@ -225,8 +225,8 @@ public class FormTest extends WebTestCase {
         final String oldValue = "myEncoding";
         final String newValue = "newEncoding";
 
-        final HtmlForm form = doTestProperty( jsProperty, htmlProperty, oldValue, newValue );
-        assertEquals( newValue, form.getEnctypeAttribute() );
+        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
+        assertEquals(newValue, form.getEnctypeAttribute());
     }
 
     /**
@@ -238,8 +238,8 @@ public class FormTest extends WebTestCase {
         final String oldValue = "get";
         final String newValue = "post";
 
-        final HtmlForm form = doTestProperty( jsProperty, htmlProperty, oldValue, newValue );
-        assertEquals( newValue, form.getMethodAttribute() );
+        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
+        assertEquals(newValue, form.getMethodAttribute());
     }
 
     /**
@@ -251,15 +251,15 @@ public class FormTest extends WebTestCase {
         final String oldValue = "_top";
         final String newValue = "_parent";
 
-        final HtmlForm form = doTestProperty( jsProperty, htmlProperty, oldValue, newValue );
-        assertEquals( newValue, form.getTargetAttribute() );
+        final HtmlForm form = doTestProperty(jsProperty, htmlProperty, oldValue, newValue);
+        assertEquals(newValue, form.getTargetAttribute());
     }
 
     private HtmlForm doTestProperty(
             final String jsProperty,
             final String htmlProperty,
             final String oldValue,
-            final String newValue )
+            final String newValue)
         throws
             Exception {
 
@@ -283,7 +283,7 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
         return (HtmlForm) page.getForms().get(0);
     }
 
@@ -477,14 +477,14 @@ public class FormTest extends WebTestCase {
             "</html>\n";
 
         final List collected = new ArrayList();
-        loadPage( browserVersion, html, collected );
+        loadPage(browserVersion, html, collected);
 
         // The lists are too long to call assertEquals() on them directly and get meaningful failure info.
         for (int i = 0; i < expected.length; i++) {
             final String s1 = expected[i];
             final String s2;
             if (collected.size() > i) {
-                s2 = (String) collected.get( i );
+                s2 = (String) collected.get(i);
             }
             else {
                 s2 = null;
@@ -498,7 +498,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormSubmit() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -515,14 +515,14 @@ public class FormTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
-        assertEquals( "first", page.getTitleText() );
+        assertEquals("first", page.getTitleText());
 
         final HtmlPage secondPage
             = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
-        assertEquals( "second", secondPage.getTitleText() );
+        assertEquals("second", secondPage.getTitleText());
     }
 
     /**
@@ -530,7 +530,7 @@ public class FormTest extends WebTestCase {
      */
     public void testOnSubmitChangesAction() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String firstContent
             = "<html><body>\n"
@@ -542,7 +542,7 @@ public class FormTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(defaultContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("button1")).click();
@@ -555,7 +555,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormSubmit_target() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -571,15 +571,15 @@ public class FormTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
-        assertEquals( "first", page.getTitleText() );
+        assertEquals("first", page.getTitleText());
 
         final HtmlPage secondPage
             = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
-        assertEquals( "second", secondPage.getTitleText() );
-        assertEquals( "MyNewWindow", secondPage.getEnclosingWindow().getName() );
+        assertEquals("second", secondPage.getTitleText());
+        assertEquals("MyNewWindow", secondPage.getEnclosingWindow().getName());
     }
 
     /**
@@ -587,7 +587,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormSubmitDoesntCallOnSubmit() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -603,16 +603,16 @@ public class FormTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         final HtmlAnchor link = (HtmlAnchor)page.getHtmlElementById("link1");
         link.click();
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
     /**
@@ -629,7 +629,7 @@ public class FormTest extends WebTestCase {
         doTestInputWithName("action");
     }
 
-    private void doTestInputWithName( final String name ) throws Exception {
+    private void doTestInputWithName(final String name) throws Exception {
         final String content
             = "<html><head><title>foo</title><script>"
             + "function go() {\n"
@@ -649,7 +649,7 @@ public class FormTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
         final String[] expectedAlerts = {name + "2", "foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -658,10 +658,10 @@ public class FormTest extends WebTestCase {
      */
     public void testAccessingRadioButtonArrayByName_Regression() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
             = "<html><head><title>Button Test</title></head><body><form name='whatsnew'>"
@@ -682,13 +682,13 @@ public class FormTest extends WebTestCase {
             + "</script></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
         assertEquals("Button Test", page.getTitleText());
 
         final String[] expectedAlerts = {"value = 2"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -714,7 +714,7 @@ public class FormTest extends WebTestCase {
 
         assertEquals("foo", page.getTitleText());
         final String[] expectedAlerts = {"foo"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -722,7 +722,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormSubmit_MultipleButtons() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -739,14 +739,14 @@ public class FormTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
-        assertEquals( "first", page.getTitleText() );
+        assertEquals("first", page.getTitleText());
 
         final HtmlButton button = (HtmlButton)page.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage)button.click();
-        assertEquals( "second", secondPage.getTitleText() );
+        assertEquals("second", secondPage.getTitleText());
         assertEquals("http://second?button1=", secondPage.getWebResponse().getUrl());
     }
 
@@ -774,7 +774,7 @@ public class FormTest extends WebTestCase {
 
         final String[] expectedAlerts = {"2"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -797,7 +797,7 @@ public class FormTest extends WebTestCase {
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"button1"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -1072,7 +1072,7 @@ public class FormTest extends WebTestCase {
      */
     public void testFormAccessAfterBrowsing() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String firstContent = "<html><head><title>first</title>"
             + "<script>"
@@ -1101,9 +1101,9 @@ public class FormTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
 
@@ -1156,9 +1156,9 @@ public class FormTest extends WebTestCase {
             + "</body></html>";
 
         webConnection.setResponse(URL_FIRST, content);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         ((ClickableElement) page.getHtmlElementById("theButton")).click();
@@ -1197,11 +1197,11 @@ public class FormTest extends WebTestCase {
             + "<script>\n"
             + "  function handler() {}"
             + "  function test() {\n"
-            + "    var form = document.getElementById( 'myForm' );\n"
+            + "    var form = document.getElementById('myForm');\n"
             + "    form.onsubmit = handler;\n"
-            + "    alert( form.onsubmit );\n"
+            + "    alert(form.onsubmit);\n"
             + "    form.onsubmit = null;\n"
-            + "    alert( form.onsubmit );\n"
+            + "    alert(form.onsubmit);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"

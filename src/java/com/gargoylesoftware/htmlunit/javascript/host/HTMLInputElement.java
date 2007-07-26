@@ -112,8 +112,8 @@ public class HTMLInputElement extends FormField {
      *
      * @param checked  True if this input should have the "checked" attribute set
      */
-    public void jsxSet_checked( final boolean checked ) {
-        ((HtmlInput)getDomNodeOrDie()).setChecked( checked );
+    public void jsxSet_checked(final boolean checked) {
+        ((HtmlInput)getDomNodeOrDie()).setChecked(checked);
     }
 
     /**
@@ -166,8 +166,8 @@ public class HTMLInputElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_defaultValue( final String defaultValue ) {
-        ((HtmlInput)getDomNodeOrDie()).setDefaultValue( defaultValue );
+    public void jsxSet_defaultValue(final String defaultValue) {
+        ((HtmlInput)getDomNodeOrDie()).setDefaultValue(defaultValue);
     }
 
     /**
@@ -186,8 +186,8 @@ public class HTMLInputElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_defaultChecked( final boolean defaultChecked ) {
-        ((HtmlInput)getDomNodeOrDie()).setDefaultChecked( defaultChecked );
+    public void jsxSet_defaultChecked(final boolean defaultChecked) {
+        ((HtmlInput)getDomNodeOrDie()).setDefaultChecked(defaultChecked);
     }
 
 }

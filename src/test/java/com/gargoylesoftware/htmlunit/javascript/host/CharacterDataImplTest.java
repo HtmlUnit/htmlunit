@@ -58,7 +58,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public CharacterDataImplTest( final String name ) {
+    public CharacterDataImplTest(final String name) {
         super(name);
     }
 
@@ -68,7 +68,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_textNode() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -85,19 +85,19 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {
             "Some Text", "9", "3", "Some Text", "#text"
         };
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -106,7 +106,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_setData() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -121,19 +121,19 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {
             "Some New Text", "Some New Text"
         };
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -142,7 +142,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_setNodeValue() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -157,19 +157,19 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {
             "Some New Text", "Some New Text"
         };
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -178,7 +178,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_appendData() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -192,17 +192,17 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some Text Appended"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -211,7 +211,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_deleteData() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -225,17 +225,17 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some Text"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -244,7 +244,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_insertData() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -258,17 +258,17 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some New Text"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -277,7 +277,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_replaceData() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -291,17 +291,17 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Old Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some New Text"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -310,7 +310,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testCharacterDataImpl_substringData() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -324,17 +324,17 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some New Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"New", "Some New Text"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -343,7 +343,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     public void testTextImpl_splitText() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
             = "<html><head><title>First</title><script>"
@@ -359,16 +359,16 @@ public class CharacterDataImplTest extends WebTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
-        webClient.setWebConnection( webConnection );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = ( HtmlPage )webClient.getPage( URL_FIRST );
-        assertEquals( "First", firstPage.getTitleText() );
+        final HtmlPage firstPage = (HtmlPage)webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some ", "Text", "true"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

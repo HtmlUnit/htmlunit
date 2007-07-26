@@ -74,8 +74,8 @@ public class DocumentNavigatorTest extends WebTestCase {
      * @param name The name of the test
      * @throws Exception if initialisation fails
      */
-    public DocumentNavigatorTest( final String name ) throws Exception {
-        super( name );
+    public DocumentNavigatorTest(final String name) throws Exception {
+        super(name);
         page_ = loadPage(CONTENT);
     }
 

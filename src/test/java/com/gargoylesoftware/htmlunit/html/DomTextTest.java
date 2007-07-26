@@ -62,12 +62,12 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText_nbsp() throws Exception {
-        testPlainText( "a b&nbsp;c  d &nbsp;e",  "a b c d  e" );
-        testPlainText( "a b&nbsp;c  d &nbsp; e", "a b c d   e" );
+        testPlainText("a b&nbsp;c  d &nbsp;e",  "a b c d  e");
+        testPlainText("a b&nbsp;c  d &nbsp; e", "a b c d   e");
         
-        testPlainText( "&nbsp;a&nbsp;", " a " );
-        testPlainText( "&nbsp; a&nbsp;", "  a " );
-        testPlainText( "&nbsp;a &nbsp;", " a  " );
+        testPlainText("&nbsp;a&nbsp;", " a ");
+        testPlainText("&nbsp; a&nbsp;", "  a ");
+        testPlainText("&nbsp;a &nbsp;", " a  ");
     }
     
     /**
@@ -78,37 +78,37 @@ public class DomTextTest extends WebTestCase {
      */
     public void testAsText_fontFormat() throws Exception {
         // specific case reported by rgitzel
-        testAsText( "a <b>b</b> c",  "a b c" );
-        testAsText( "a <b>b</b>c",   "a bc" );
-        testAsText( "a<b>b</b> c",   "ab c" );
-        testAsText( "a<b>b</b>c",    "abc" );
+        testAsText("a <b>b</b> c",  "a b c");
+        testAsText("a <b>b</b>c",   "a bc");
+        testAsText("a<b>b</b> c",   "ab c");
+        testAsText("a<b>b</b>c",    "abc");
 
         // italics and teletype should work the same way
-        testAsText( "a <i>b</i> c",  "a b c" );
-        testAsText( "a <i>b</i>c",   "a bc" );
-        testAsText( "a<i>b</i> c",   "ab c" );
-        testAsText( "a<i>b</i>c",    "abc" );
+        testAsText("a <i>b</i> c",  "a b c");
+        testAsText("a <i>b</i>c",   "a bc");
+        testAsText("a<i>b</i> c",   "ab c");
+        testAsText("a<i>b</i>c",    "abc");
 
-        testAsText( "a <tt>b</tt> c",  "a b c" );
-        testAsText( "a <tt>b</tt>c",   "a bc" );
-        testAsText( "a<tt>b</tt> c",   "ab c" );
-        testAsText( "a<tt>b</tt>c",    "abc" );
+        testAsText("a <tt>b</tt> c",  "a b c");
+        testAsText("a <tt>b</tt>c",   "a bc");
+        testAsText("a<tt>b</tt> c",   "ab c");
+        testAsText("a<tt>b</tt>c",    "abc");
 
         // suggested by asashour ;-)
-        testAsText( "a <font>b</font> c",  "a b c" );
-        testAsText( "a<font>b</font> c",   "ab c" );
-        testAsText( "a <font>b</font>c",   "a bc" );
-        testAsText( "a<font>b</font>c",    "abc" );
+        testAsText("a <font>b</font> c",  "a b c");
+        testAsText("a<font>b</font> c",   "ab c");
+        testAsText("a <font>b</font>c",   "a bc");
+        testAsText("a<font>b</font>c",    "abc");
 
         // I guess 'span' should be just like 'font'
-        testAsText( "a <span>b</span> c",  "a b c" );
-        testAsText( "a<span>b</span> c",   "ab c" );
-        testAsText( "a <span>b</span>c",   "a bc" );
-        testAsText( "a<span>b</span>c",    "abc" );
+        testAsText("a <span>b</span> c",  "a b c");
+        testAsText("a<span>b</span> c",   "ab c");
+        testAsText("a <span>b</span>c",   "a bc");
+        testAsText("a<span>b</span>c",    "abc");
         
         // try some combinations
-        testAsText( "a<b><font><i>b</i></font></b>c",    "abc" );
-        testAsText( "a<b><font> <i>b</i></font></b>c",    "a bc" );
+        testAsText("a<b><font><i>b</i></font></b>c",    "abc");
+        testAsText("a<b><font> <i>b</i></font></b>c",    "a bc");
     }
     
     /**
@@ -117,12 +117,12 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText_regression() throws Exception {
-        testAsText( "a<ul><li>b</ul>c",                     "a b c" );
-        testAsText( "a<p>b<br>c",                           "a b c" );
-        testAsText( "a<table><tr><td>b</td></tr></table>c", "a b c" );
-        testAsText( "a<div>b</div>c",                       "a b c" );
+        testAsText("a<ul><li>b</ul>c",                     "a b c");
+        testAsText("a<p>b<br>c",                           "a b c");
+        testAsText("a<table><tr><td>b</td></tr></table>c", "a b c");
+        testAsText("a<div>b</div>c",                       "a b c");
 
-        testAsText( "a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", "a b b c" );
+        testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", "a b b c");
     }
     
     /**

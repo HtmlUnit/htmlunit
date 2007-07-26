@@ -72,7 +72,7 @@ public class SelectTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public SelectTest( final String name ) {
+    public SelectTest(final String name) {
         super(name);
     }
 
@@ -102,7 +102,7 @@ public class SelectTest extends WebTestCase {
 
         final String[] expectedAlerts = {"3", "1"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -135,7 +135,7 @@ public class SelectTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"3", "1", "3", "2"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         final HtmlPage newPage = (HtmlPage) button.click();
@@ -143,7 +143,7 @@ public class SelectTest extends WebTestCase {
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
 
         assertEquals("http://test?submit=button", newPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -203,7 +203,7 @@ public class SelectTest extends WebTestCase {
 
         final String[] expectedAlerts = {"value1", "One", "value2", "Two", "value3", "Three"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -235,7 +235,7 @@ public class SelectTest extends WebTestCase {
 
         final String[] expectedAlerts = {"value1", "OneLabel", "value2", "TwoLabel", "value3", "ThreeLabel"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -268,7 +268,7 @@ public class SelectTest extends WebTestCase {
 
         final String[] expectedAlerts = {"false", "true", "true", "false"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -293,7 +293,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         assertEquals("first", page.getTitleText());
-        assertEquals( Collections.singletonList("true"), collectedAlerts );
+        assertEquals(Collections.singletonList("true"), collectedAlerts);
     }
 
     /**
@@ -321,7 +321,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("first", page.getTitleText());
-        assertEquals( Collections.singletonList("One"), collectedAlerts );
+        assertEquals(Collections.singletonList("One"), collectedAlerts);
     }
 
     /**
@@ -354,7 +354,7 @@ public class SelectTest extends WebTestCase {
 
         final String[] expectedAlerts = {"4", "Four", "value4"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -396,7 +396,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -429,7 +429,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -465,7 +465,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -500,7 +500,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -531,7 +531,7 @@ public class SelectTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"2", "Three", "value3"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -562,7 +562,7 @@ public class SelectTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"2", "Three", "value3"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -591,7 +591,7 @@ public class SelectTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"0"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -629,7 +629,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -658,7 +658,7 @@ public class SelectTest extends WebTestCase {
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"One", "value1"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -701,7 +701,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -768,7 +768,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -832,7 +832,7 @@ public class SelectTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
         try {
             loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
@@ -880,7 +880,7 @@ public class SelectTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -943,10 +943,10 @@ public class SelectTest extends WebTestCase {
             "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var s = document.getElementById( 'mySelect' );\n"
+            + "    var s = document.getElementById('mySelect');\n"
             + "    s.options.length = 0;\n"
             + "    s.selectedIndex = 0;\n"
-            + "    alert( s.selectedIndex );\n"
+            + "    alert(s.selectedIndex);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
@@ -958,7 +958,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        loadPage( html, collectedAlerts );
-        assertEquals( expectedAlerts, collectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

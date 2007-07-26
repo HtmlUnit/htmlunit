@@ -62,7 +62,7 @@ public abstract class WebConnectionImpl implements WebConnection {
      * Creates a new web connection instance.
      * @param webClient The WebClient that is using this connection.
      */
-    public WebConnectionImpl( final WebClient webClient ) {
+    public WebConnectionImpl(final WebClient webClient) {
         webClient_ = webClient;
     }
 

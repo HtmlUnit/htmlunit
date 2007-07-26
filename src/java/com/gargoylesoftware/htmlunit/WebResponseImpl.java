@@ -80,7 +80,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
      */
     public WebResponseImpl(final WebResponseData responseData, final URL url,
             final SubmitMethod requestMethod, final long loadTime) {
-        this( responseData, TextUtil.DEFAULT_CHARSET, url, requestMethod, loadTime);
+        this(responseData, TextUtil.DEFAULT_CHARSET, url, requestMethod, loadTime);
     }
 
     /**
@@ -233,7 +233,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
                 charset = "UTF-16LE";
             }
             else {
-                log_.debug("No charset guessed, using " + charset_ );
+                log_.debug("No charset guessed, using " + charset_);
                 charset = charset_;
             }
         }

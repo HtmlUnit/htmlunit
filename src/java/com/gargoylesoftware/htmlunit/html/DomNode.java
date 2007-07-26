@@ -172,7 +172,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @deprecated
      */
     protected DomNode() {
-        this( null );
+        this(null);
     }
 
     /**
@@ -265,7 +265,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * DOM node.
      * @param scriptObject The javascript object.
      */
-    public void setScriptObject( final Object scriptObject ) {
+    public void setScriptObject(final Object scriptObject) {
         scriptObject_ = scriptObject;
     }
 
@@ -428,7 +428,7 @@ public abstract class DomNode implements Cloneable, Serializable {
                     buffer.append(node.asText());
                     buffer.append(" ");
                 }
-                else if (node.getNodeName().equals( "p" )) {
+                else if (node.getNodeName().equals("p")) {
                     // this is a bit kludgey, but we can't add the space
                     //  inside the node's asText(), since it doesn't belong
                     //  with the contents of the 'p' tag
@@ -454,8 +454,8 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param text The text to clean up.
      * @return The cleaned up text.
      */
-    protected static String reduceWhitespace( final String text ) {
-        final StringBuffer buffer = new StringBuffer( text.length() );
+    protected static String reduceWhitespace(final String text) {
+        final StringBuffer buffer = new StringBuffer(text.length());
         final int length = text.length();
         boolean whitespace = false;
         for (int i = 0; i < length; i++) {
@@ -463,7 +463,7 @@ public abstract class DomNode implements Cloneable, Serializable {
 
             // Translate non-breaking space to regular space.
             if (ch == (char)160) {
-                buffer.append( ' ' );
+                buffer.append(' ');
                 whitespace = false;
             }
             else {
@@ -516,10 +516,10 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printXml( final String indent, final PrintWriter printWriter ) {
+    protected void printXml(final String indent, final PrintWriter printWriter) {
 
         printWriter.println(indent + this);
-        printChildrenAsXml( indent, printWriter );
+        printChildrenAsXml(indent, printWriter);
     }
 
     /**
@@ -528,7 +528,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printChildrenAsXml( final String indent, final PrintWriter printWriter ) {
+    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
         DomNode child = getFirstChild();
         while (child != null) {
             child.printXml(indent + "  ", printWriter);
@@ -786,7 +786,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     //deprecated after 1.11
     public final synchronized void addPropertyChangeListener(
-        final PropertyChangeListener listener ) {
+        final PropertyChangeListener listener) {
 
         Assert.notNull("listener", listener);
         if (propertyChangeSupport_ == null) {
@@ -802,7 +802,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     //deprecated after 1.11
     public final synchronized void removePropertyChangeListener(
-        final PropertyChangeListener listener ) {
+        final PropertyChangeListener listener) {
 
         Assert.notNull("listener", listener);
         if (propertyChangeSupport_ != null) {
@@ -819,7 +819,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     //deprecated after 1.11
     protected final synchronized void firePropertyChange(
-        final String propertyName, final Object oldValue, final Object newValue ) {
+        final String propertyName, final Object oldValue, final Object newValue) {
 
         if (propertyChangeSupport_ != null) {
             propertyChangeSupport_.firePropertyChange(propertyName, oldValue, newValue);
@@ -910,7 +910,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             nextElement_ = next;
         }
 
-        private HtmlElement getNextElementUpwards( final DomNode startingNode ) {
+        private HtmlElement getNextElementUpwards(final DomNode startingNode) {
             if (startingNode == DomNode.this) {
                 return null;
             }
@@ -944,7 +944,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             return (HtmlElement)node;
         }
 
-        private HtmlElement getNextSibling( final HtmlElement element) {
+        private HtmlElement getNextSibling(final HtmlElement element) {
             DomNode node = element.getNextSibling();
             while (node != null && node instanceof HtmlElement == false) {
                 node = node.getNextSibling();
@@ -1020,13 +1020,13 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param listener the dom structure change listener to be added.
      * @see #removeDomChangeListener(DomChangeListener)
      */
-    public void addDomChangeListener( final DomChangeListener listener ) {
+    public void addDomChangeListener(final DomChangeListener listener) {
         Assert.notNull("listener", listener);
         synchronized (this) {
             if (domListeners_ == null) {
                 domListeners_ = new ArrayList();
             }
-            domListeners_.add( listener );
+            domListeners_.add(listener);
         }
     }
 
@@ -1038,11 +1038,11 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param listener the dom structure change listener to be removed.
      * @see #addDomChangeListener(DomChangeListener)
      */
-    public void removeDomChangeListener( final DomChangeListener listener ) {
+    public void removeDomChangeListener(final DomChangeListener listener) {
         Assert.notNull("listener", listener);
         synchronized (this) {
             if (domListeners_ != null) {
-                domListeners_.remove( listener );
+                domListeners_.remove(listener);
             }
         }
     }

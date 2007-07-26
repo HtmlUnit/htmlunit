@@ -52,7 +52,7 @@ public final class TextUtilTest extends WebTestCase {
      * Create an instance.
      * @param name The name of the test.
      */
-    public TextUtilTest( final String name ) {
+    public TextUtilTest(final String name) {
         super(name);
     }
 
@@ -161,8 +161,8 @@ public final class TextUtilTest extends WebTestCase {
 
             final InputStream inputStream = TextUtil.toInputStream(input, encoding);
             final String actualResult
-                = new BufferedReader( new InputStreamReader(inputStream, encoding) ).readLine();
-            assertEquals( expectedResult, actualResult);
+                = new BufferedReader(new InputStreamReader(inputStream, encoding)).readLine();
+            assertEquals(expectedResult, actualResult);
         }
     }
 }

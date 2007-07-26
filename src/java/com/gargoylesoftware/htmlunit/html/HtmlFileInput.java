@@ -82,9 +82,9 @@ public class HtmlFileInput extends HtmlInput {
     HtmlFileInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        setAttributeValue( "value", "" );
+        setAttributeValue("value", "");
         if (page.getWebClient().getBrowserVersion().isIE()) {
-            setDefaultValue( "" );
+            setDefaultValue("");
         }
     }
 
@@ -112,10 +112,10 @@ public class HtmlFileInput extends HtmlInput {
         
         final File file;
         try {
-            file = new File( new URI(value) );
+            file = new File(new URI(value));
         }
         catch (final Exception e) {
-            throw new IllegalArgumentException( "Invalid 'value' attribute: " + getValueAttribute() );
+            throw new IllegalArgumentException("Invalid 'value' attribute: " + getValueAttribute());
         }
 
         // contentType and charset are determined from browser and page
@@ -140,8 +140,8 @@ public class HtmlFileInput extends HtmlInput {
      * Netscape browsers.
      * @see HtmlInput#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
-        setDefaultValue( defaultValue, false );
+    public void setDefaultValue(final String defaultValue) {
+        setDefaultValue(defaultValue, false);
     }
 
 }

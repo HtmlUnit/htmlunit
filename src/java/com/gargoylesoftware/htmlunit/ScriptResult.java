@@ -55,7 +55,7 @@ public final class ScriptResult {
      * @param newPage The page that is currently loaded at the end of the script
      * execution.
      */
-    public ScriptResult( final Object javaScriptResult, final Page newPage ) {
+    public ScriptResult(final Object javaScriptResult, final Page newPage) {
         javaScriptResult_ = javaScriptResult;
         newPage_ = newPage;
     }

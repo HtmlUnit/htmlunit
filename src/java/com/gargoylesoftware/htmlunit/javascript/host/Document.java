@@ -232,7 +232,7 @@ public final class Document extends NodeImpl {
      * MSDN documentation</a>
      */
     public static void jsxFunction_write(
-        final Context context, final Scriptable thisObj, final Object[] args,  final Function function ) {
+        final Context context, final Scriptable thisObj, final Object[] args,  final Function function) {
 
         final Document thisAsDocument = getDocument(thisObj);
         thisAsDocument.write(concatArgsAsString(args));
@@ -262,7 +262,7 @@ public final class Document extends NodeImpl {
      * MSDN documentation</a>
      */
     public static void jsxFunction_writeln(
-        final Context context, final Scriptable thisObj, final Object[] args,  final Function function ) {
+        final Context context, final Scriptable thisObj, final Object[] args,  final Function function) {
 
         final Document thisAsDocument = getDocument(thisObj);
         thisAsDocument.write(concatArgsAsString(args) + "\n");
@@ -436,7 +436,7 @@ public final class Document extends NodeImpl {
 
         final Cookie[] cookies = CookiePolicy.getDefaultSpec().match(url.getHost(), port,
                 url.getPath(), secure, state.getCookies());
-        if (cookies == null ) {
+        if (cookies == null) {
             return "";
         }
 
@@ -446,9 +446,9 @@ public final class Document extends NodeImpl {
             if (i != 0) {
                 buffer.append(";");
             }
-            buffer.append( cookies[i].getName() );
-            buffer.append( "=" );
-            buffer.append( cookies[i].getValue() );
+            buffer.append(cookies[i].getName());
+            buffer.append("=");
+            buffer.append(cookies[i].getValue());
         }
         return buffer.toString();
     }
@@ -607,7 +607,7 @@ public final class Document extends NodeImpl {
      * MSDN documentation</a>
      */
     public static Object jsxFunction_open(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function ) {
+        final Context context, final Scriptable scriptable, final Object[] args,  final Function function) {
 
         final Document document = (Document) scriptable;
         if (!document.writeInCurrentDocument_) {
@@ -672,7 +672,7 @@ public final class Document extends NodeImpl {
      * @param tagName The tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported.
      */
-    public Object jsxFunction_createElement( final String tagName ) {
+    public Object jsxFunction_createElement(final String tagName) {
         Object result = NOT_FOUND;
         try {
             final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElement(tagName);
@@ -741,7 +741,7 @@ public final class Document extends NodeImpl {
      * @param newData The string value for the text node.
      * @return the new text node or NOT_FOUND if there is an error.
      */
-    public Object jsxFunction_createTextNode( final String newData ) {
+    public Object jsxFunction_createTextNode(final String newData) {
         Object result = NOT_FOUND;
         try {
             final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
@@ -768,7 +768,7 @@ public final class Document extends NodeImpl {
      * @param id The ID to search for
      * @return the element or null
      */
-    public Object jsxFunction_getElementById( final String id ) {
+    public Object jsxFunction_getElementById(final String id) {
         Object result = null;
         try {
             final HtmlElement htmlElement = ((HtmlPage)getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
@@ -806,7 +806,7 @@ public final class Document extends NodeImpl {
      * @param tagName The name to search for
      * @return the list of elements
      */
-    public Object jsxFunction_getElementsByTagName( final String tagName ) {
+    public Object jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
         try {
             final HtmlUnitXPath xpath = new HtmlUnitXPath("//*[lower-case(name()) = '" + tagName.toLowerCase() + "']");
@@ -830,7 +830,7 @@ public final class Document extends NodeImpl {
      * @param elementName - value of the "name" attribute to look for
      * @return NodeList of elements
      */
-    public Object jsxFunction_getElementsByName( final String elementName ) {
+    public Object jsxFunction_getElementsByName(final String elementName) {
         final HTMLCollection collection = new HTMLCollection(this);
         final String exp = "//*[@name='" + elementName + "']";
         try {
@@ -906,7 +906,7 @@ public final class Document extends NodeImpl {
      * Set the title.
      * @param message The new title
      */
-    public void jsxSet_title(final String message ) {
+    public void jsxSet_title(final String message) {
         getHtmlPage().setTitleText(message);
     }
 
@@ -977,7 +977,7 @@ public final class Document extends NodeImpl {
      * trimming to co.uk should not be possible.
      * @param newDomain the new domain to set
      */
-    public void jsxSet_domain( final String newDomain ) {
+    public void jsxSet_domain(final String newDomain) {
         final String currentDomain = jsxGet_domain();
         if (currentDomain.equalsIgnoreCase(newDomain)) {
             return;

@@ -56,7 +56,7 @@ public class StrictErrorReporter implements ErrorReporter {
      *
      * @param log The log to use when reporting errors
      */
-    public StrictErrorReporter( final Log log ) {
+    public StrictErrorReporter(final Log log) {
         Assert.notNull("log", log);
         log_ = log;
     }
@@ -73,7 +73,7 @@ public class StrictErrorReporter implements ErrorReporter {
     public void warning(
             final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
-        log_.warn(format( "warning", message, sourceName, line, lineSource, lineOffset ));
+        log_.warn(format("warning", message, sourceName, line, lineSource, lineOffset));
     }
 
     /**
@@ -89,7 +89,7 @@ public class StrictErrorReporter implements ErrorReporter {
             final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
 
-        log_.error(format( "error", message, sourceName, line, lineSource, lineOffset));
+        log_.error(format("error", message, sourceName, line, lineSource, lineOffset));
         throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
     }
 
@@ -107,7 +107,7 @@ public class StrictErrorReporter implements ErrorReporter {
             final String message, final String sourceName, final int line,
             final String lineSource, final int lineOffset) {
 
-        log_.error(format( "runtimeError", message, sourceName, line, lineSource, lineOffset ));
+        log_.error(format("runtimeError", message, sourceName, line, lineSource, lineOffset));
         return new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
     }
 

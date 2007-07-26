@@ -60,7 +60,7 @@ public interface WebWindow {
      *
      * @param name The new window name.
      */
-    void setName( final String name );
+    void setName(final String name);
 
     /**
      * Return the currently loaded page or null if no page has been loaded.
@@ -74,7 +74,7 @@ public interface WebWindow {
      *
      * @param page The new page or null if there is no page (ie empty window)
      */
-    void setEnclosedPage( final Page page );
+    void setEnclosedPage(final Page page);
 
     /**
      * Return the window that contains this window.  If this is a top
@@ -107,7 +107,7 @@ public interface WebWindow {
      * to be set even if there is a javascript object for this html element.
      * @param scriptObject The javascript object.
      */
-    void setScriptObject( final Object scriptObject );
+    void setScriptObject(final Object scriptObject);
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>

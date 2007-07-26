@@ -49,7 +49,7 @@ public class DefaultPageCreatorTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public DefaultPageCreatorTest( final String name ) {
+    public DefaultPageCreatorTest(final String name) {
         super(name);
     }
 

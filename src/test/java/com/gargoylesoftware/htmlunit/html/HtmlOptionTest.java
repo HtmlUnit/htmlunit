@@ -51,7 +51,7 @@ public class HtmlOptionTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public HtmlOptionTest( final String name ) {
+    public HtmlOptionTest(final String name) {
         super(name);
     }
 
@@ -71,25 +71,25 @@ public class HtmlOptionTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
-        final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
-        final HtmlOption option3 = ( HtmlOption )page.getHtmlElementById( "option3" );
+        final HtmlOption option1 = (HtmlOption )page.getHtmlElementById("option1");
+        final HtmlOption option2 = (HtmlOption )page.getHtmlElementById("option2");
+        final HtmlOption option3 = (HtmlOption )page.getHtmlElementById("option3");
 
-        assertFalse( option1.isSelected() );
-        assertTrue( option2.isSelected() );
-        assertFalse( option3.isSelected() );
+        assertFalse(option1.isSelected());
+        assertTrue(option2.isSelected());
+        assertFalse(option3.isSelected());
 
         option3.setSelected(true);
 
-        assertFalse( option1.isSelected() );
-        assertFalse( option2.isSelected() );
-        assertTrue( option3.isSelected() );
+        assertFalse(option1.isSelected());
+        assertFalse(option2.isSelected());
+        assertTrue(option3.isSelected());
 
         option3.setSelected(false);
 
-        assertFalse( option1.isSelected() );
-        assertFalse( option2.isSelected() );
-        assertFalse( option3.isSelected() );
+        assertFalse(option1.isSelected());
+        assertFalse(option2.isSelected());
+        assertFalse(option3.isSelected());
     }
 
     /**
@@ -108,8 +108,8 @@ public class HtmlOptionTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlOption option1 = ( HtmlOption )page.getHtmlElementById( "option1" );
-        final HtmlOption option2 = ( HtmlOption )page.getHtmlElementById( "option2" );
+        final HtmlOption option1 = (HtmlOption )page.getHtmlElementById("option1");
+        final HtmlOption option2 = (HtmlOption )page.getHtmlElementById("option2");
 
         assertEquals("option1", option1.getValueAttribute());
         assertEquals("Number Two", option2.getValueAttribute());

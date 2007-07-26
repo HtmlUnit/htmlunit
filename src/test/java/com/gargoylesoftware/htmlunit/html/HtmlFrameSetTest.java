@@ -64,8 +64,8 @@ public class HtmlFrameSetTest extends WebTestCase {
      *
      * @param name Name of the test
      */
-    public HtmlFrameSetTest( final String name ) {
-        super( name );
+    public HtmlFrameSetTest(final String name) {
+        super(name);
     }
 
     /**
@@ -89,24 +89,24 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
-        assertEquals( "First", firstPage.getTitleText() );
+        assertEquals("First", firstPage.getTitleText());
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
-        assertSame( firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage() );
-        assertEquals( "Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText() );
+        assertSame(firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage());
+        assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
 
         final WebWindow thirdWebWindow = webClient.getWebWindowByName("right");
-        assertInstanceOf( thirdWebWindow, FrameWindow.class );
-        assertSame( firstPage, ((FrameWindow) thirdWebWindow).getEnclosingPage() );
-        assertEquals( "Third", ((HtmlPage)thirdWebWindow.getEnclosedPage()).getTitleText() );
+        assertInstanceOf(thirdWebWindow, FrameWindow.class);
+        assertSame(firstPage, ((FrameWindow) thirdWebWindow).getEnclosingPage());
+        assertEquals("Third", ((HtmlPage)thirdWebWindow.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -125,19 +125,19 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
-        assertEquals( "First", firstPage.getTitleText() );
+        assertEquals("First", firstPage.getTitleText());
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
         assertInstanceOf(secondWebWindow, FrameWindow.class);
-        assertSame( firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage() );
-        assertEquals( "Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText() );
+        assertSame(firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage());
+        assertEquals("Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -185,27 +185,27 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(framesURL, framesContent);
         webConnection.setResponse(menuURL, menuContent);
         webConnection.setResponse(firstURL, firstContent);
         webConnection.setResponse(secondURL, secondContent);
 
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         final HtmlPage framesPage = (HtmlPage) webClient.getPage(framesURL);
-        assertEquals( "Frames", framesPage.getTitleText() );
+        assertEquals("Frames", framesPage.getTitleText());
 
         final WebWindow menuWebWindow = webClient.getWebWindowByName("menu");
         final HtmlPage menuPage = (HtmlPage) menuWebWindow.getEnclosedPage();
-        assertEquals( "Menu", menuPage.getTitleText() );
+        assertEquals("Menu", menuPage.getTitleText());
 
         final WebWindow testWebWindow = webClient.getWebWindowByName("test");
-        assertEquals( "First", ((HtmlPage) testWebWindow.getEnclosedPage()).getTitleText() );
+        assertEquals("First", ((HtmlPage) testWebWindow.getEnclosedPage()).getTitleText());
 
         final HtmlAnchor changePage = menuPage.getAnchorByName("changePage");
         changePage.click();
-        assertEquals( "Second", ((HtmlPage) testWebWindow.getEnclosedPage()).getTitleText() );
+        assertEquals("Second", ((HtmlPage) testWebWindow.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -239,7 +239,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"Success"};
@@ -248,10 +248,10 @@ public class HtmlFrameSetTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, framesContent);
         webConnection.setResponse(URL_SECOND, menuContent);
 
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         final HtmlPage framesPage = (HtmlPage) webClient.getPage(URL_FIRST);
-        assertEquals( "Main", framesPage.getTitleText());
+        assertEquals("Main", framesPage.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -307,18 +307,18 @@ public class HtmlFrameSetTest extends WebTestCase {
             = "alert('3');";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         
         final String[] expectedAlerts = {"2"};
         final ArrayList collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         
         client.getPage(URL_FIRST);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

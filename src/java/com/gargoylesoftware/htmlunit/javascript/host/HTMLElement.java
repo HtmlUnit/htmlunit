@@ -171,7 +171,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * Set the DOM node that corresponds to this javascript object
      * @param domNode The DOM node
      */
-    public void setDomNode( final DomNode domNode ) {
+    public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
         style_ = new Style(this);
@@ -209,8 +209,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * Set the identifier this element.
      * @param newId The new identifier of this element.
      */
-    public void jsxSet_id( final String newId ) {
-        getHtmlElementOrDie().setId( newId );
+    public void jsxSet_id(final String newId) {
+        getHtmlElementOrDie().setId(newId);
     }
 
     /**
@@ -241,7 +241,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * Set whether or not to disable this element
      * @param disabled True if this is to be disabled.
      */
-    public void jsxSet_disabled( final boolean disabled ) {
+    public void jsxSet_disabled(final boolean disabled) {
         final HtmlElement element = getHtmlElementOrDie();
         if (disabled) {
             element.setAttributeValue("disabled", "disabled");
@@ -308,7 +308,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         // can name be an attribute of current element?
         // first approximation: attribute are all lowercase
         // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
-        if ( htmlElement != null && name.toLowerCase().equals(name)) {
+        if (htmlElement != null && name.toLowerCase().equals(name)) {
             final String value = htmlElement.getAttributeValue(name);
             if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
                 getLog().debug("Found attribute for evalution of property \"" + name
@@ -388,7 +388,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param tagName The name to search for
      * @return the list of elements
      */
-    public Object jsxFunction_getElementsByTagName( final String tagName ) {
+    public Object jsxFunction_getElementsByTagName(final String tagName) {
         final HtmlElement element = (HtmlElement) getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
         try {
@@ -489,12 +489,12 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
             // the attributes
             for (final Iterator iterator = htmlElt.getAttributeEntriesIterator(); iterator.hasNext();) {
-                buffer.append(' ' );
+                buffer.append(' ');
                 final Map.Entry entry = (Map.Entry) iterator.next();
                 buffer.append(entry.getKey());
-                buffer.append( "=\"" );
+                buffer.append("=\"");
                 buffer.append(entry.getValue());
-                buffer.append( "\"" );
+                buffer.append("\"");
             }
             if (htmlElt.getFirstChild() == null) {
                 buffer.append("/");
@@ -630,7 +630,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @param text the HTML text to insert
      */
     public void jsxFunction_insertAdjacentHTML(final String where, final String text) {
-        final Object[] values = getInsertAdjacentLocation( where );
+        final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode)values[0];
         final boolean append = ((Boolean)values[1]).booleanValue();
 
@@ -650,7 +650,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     public Object jsxFunction_insertAdjacentElement(final String where, final Object object) {
         if (object instanceof NodeImpl) {
             final DomNode childNode = ((NodeImpl)object).getDomNodeOrDie();
-            final Object[] values = getInsertAdjacentLocation( where );
+            final Object[] values = getInsertAdjacentLocation(where);
             final DomNode node = (DomNode)values[0];
             final boolean append = ((Boolean)values[1]).booleanValue();
 

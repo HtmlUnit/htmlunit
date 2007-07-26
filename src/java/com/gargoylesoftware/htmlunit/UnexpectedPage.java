@@ -60,7 +60,7 @@ public class UnexpectedPage implements Page {
      *      required to create this page
      * @param enclosingWindow The window that this page is being loaded into.
      */
-    public UnexpectedPage( final WebResponse webResponse, final WebWindow enclosingWindow ) {
+    public UnexpectedPage(final WebResponse webResponse, final WebWindow enclosingWindow) {
         webResponse_ = webResponse;
         enclosingWindow_ = enclosingWindow;
     }

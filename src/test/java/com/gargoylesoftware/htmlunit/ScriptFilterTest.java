@@ -78,6 +78,6 @@ public class ScriptFilterTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         loadPage(content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

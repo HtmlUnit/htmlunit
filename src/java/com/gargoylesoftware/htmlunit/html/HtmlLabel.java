@@ -82,7 +82,7 @@ public class HtmlLabel extends FocusableElement {
      * @param attributes the initial attributes
      */
     HtmlLabel(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
-        super( namespaceURI, qualifiedName, page, attributes);
+        super(namespaceURI, qualifiedName, page, attributes);
     }
 
     /**

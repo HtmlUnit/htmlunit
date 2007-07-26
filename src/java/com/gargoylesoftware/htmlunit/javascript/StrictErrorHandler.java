@@ -53,7 +53,7 @@ public class StrictErrorHandler implements ErrorHandler {
      * @param rethrow An exception which will be rethrown.
      * @throws SAXParseException Always.
      */
-    public void warning( final SAXParseException rethrow ) throws SAXParseException {
+    public void warning(final SAXParseException rethrow) throws SAXParseException {
         throw rethrow;
     }
 
@@ -63,7 +63,7 @@ public class StrictErrorHandler implements ErrorHandler {
      * @param rethrow An exception which will be rethrown.
      * @throws SAXParseException Always.
      */
-    public void error( final SAXParseException rethrow ) throws SAXParseException {
+    public void error(final SAXParseException rethrow) throws SAXParseException {
         throw rethrow;
     }
 
@@ -73,7 +73,7 @@ public class StrictErrorHandler implements ErrorHandler {
      * @param rethrow An exception which will be rethrown.
      * @throws SAXParseException Always.
      */
-    public void fatalError( final SAXParseException rethrow ) throws SAXParseException {
+    public void fatalError(final SAXParseException rethrow) throws SAXParseException {
         throw rethrow;
     }
 }

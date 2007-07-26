@@ -116,7 +116,7 @@ public class HtmlImageInput extends HtmlInput {
                 new KeyValuePair(prefix + "y", String.valueOf(yPosition_))
             };
         }
-        return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
+        return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getValueAttribute())};
     }
 
     /**
@@ -165,7 +165,7 @@ public class HtmlImageInput extends HtmlInput {
      * @exception ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public Page click( final int x, final int y )
+    public Page click(final int x, final int y)
         throws
             IOException,
             ElementNotFoundException {
@@ -180,8 +180,8 @@ public class HtmlImageInput extends HtmlInput {
      * {@inheritDoc} Also sets the value to the new default value, just like IE.
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
-        super.setDefaultValue( defaultValue );
-        setValueAttribute( defaultValue );
+    public void setDefaultValue(final String defaultValue) {
+        super.setDefaultValue(defaultValue);
+        setValueAttribute(defaultValue);
     }
 }

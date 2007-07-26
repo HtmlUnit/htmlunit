@@ -86,7 +86,7 @@ public final class HtmlHtml extends HtmlElement {
      *      attribute isn't defined.
      */
     public String getLangAttribute() {
-        return getAttributeValue( "lang" );
+        return getAttributeValue("lang");
     }
 
     /**
@@ -98,7 +98,7 @@ public final class HtmlHtml extends HtmlElement {
      *      attribute isn't defined.
      */
     public String getXmlLangAttribute() {
-        return getAttributeValue( "xml:lang" );
+        return getAttributeValue("xml:lang");
     }
 
     /**
@@ -110,7 +110,7 @@ public final class HtmlHtml extends HtmlElement {
      *      attribute isn't defined.
      */
     public String getTextDirectionAttribute() {
-        return getAttributeValue( "dir" );
+        return getAttributeValue("dir");
     }
 }
 

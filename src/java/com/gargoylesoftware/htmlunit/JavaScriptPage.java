@@ -57,7 +57,7 @@ public class JavaScriptPage implements Page {
      * @param webResponse The response from the server
      * @param enclosingWindow The window that holds the page.
      */
-    public JavaScriptPage( final WebResponse webResponse, final WebWindow enclosingWindow ) {
+    public JavaScriptPage(final WebResponse webResponse, final WebWindow enclosingWindow) {
         webResponse_ = webResponse;
         content_ = webResponse.getContentAsString();
         enclosingWindow_ = enclosingWindow;

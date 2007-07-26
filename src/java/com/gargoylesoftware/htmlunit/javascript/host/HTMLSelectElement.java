@@ -87,7 +87,7 @@ public class HTMLSelectElement extends FormField {
         htmlSelect.setScriptObject(this);
         if (optionsArray_ == null) {
             optionsArray_ = new HTMLOptionsCollection(this);
-            optionsArray_.initialize( htmlSelect );
+            optionsArray_.initialize(htmlSelect);
         }
     }
 
@@ -170,7 +170,7 @@ public class HTMLSelectElement extends FormField {
 
         HtmlOption htmlOption = (HtmlOption) newOptionObject.getHtmlElementOrNull();
         if (htmlOption == null) {
-            htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
+            htmlOption = (HtmlOption)HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                     select.getPage(), HtmlOption.TAG_NAME, null);
         }
 
@@ -229,7 +229,7 @@ public class HTMLSelectElement extends FormField {
      * Set the value of the "selectedIndex" property
      * @param index The new value
      */
-    public void jsxSet_selectedIndex( final int index ) {
+    public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
         final Iterator iter = htmlSelect.getSelectedOptions().iterator();
@@ -283,11 +283,11 @@ public class HTMLSelectElement extends FormField {
      * Remove options by reducing the "length" property
      * @param newLength The new length property value
      */
-    public void jsxSet_length( final int newLength ) {
+    public void jsxSet_length(final int newLength) {
         if (optionsArray_ == null) {
             initialize();
         }
-        optionsArray_.jsxSet_length( newLength );
+        optionsArray_.jsxSet_length(newLength);
     }
 
     /**
@@ -296,11 +296,11 @@ public class HTMLSelectElement extends FormField {
      * @param start The scriptable object that was originally queried for this property
      * @return The property.
      */
-    public Object get( final int index, final Scriptable start ) {
+    public Object get(final int index, final Scriptable start) {
         if (optionsArray_ == null) {
             initialize();
         }
-        return optionsArray_.get( index, start );
+        return optionsArray_.get(index, start);
     }
 
     /**
@@ -309,11 +309,11 @@ public class HTMLSelectElement extends FormField {
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value
      */
-    public void put( final int index, final Scriptable start, final Object newValue ) {
+    public void put(final int index, final Scriptable start, final Object newValue) {
         if (optionsArray_ == null) {
             initialize();
         }
-        optionsArray_.put( index, start, newValue );
+        optionsArray_.put(index, start, newValue);
     }
 
     /**

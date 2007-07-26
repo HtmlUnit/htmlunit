@@ -160,8 +160,8 @@ public class SimpleScriptable extends ScriptableObject {
      * Set the DOM node that corresponds to this javascript object
      * @param domNode The DOM node
      */
-    public void setDomNode( final DomNode domNode ) {
-        setDomNode( domNode, true );
+    public void setDomNode(final DomNode domNode) {
+        setDomNode(domNode, true);
     }
 
     /**
@@ -169,7 +169,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param domNode The DOM node
      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
      */
-    protected void setDomNode( final DomNode domNode, final boolean assignScriptObject ) {
+    protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
         Assert.notNull("domNode", domNode);
         domNode_ = domNode;
         if (assignScriptObject) {
@@ -181,7 +181,7 @@ public class SimpleScriptable extends ScriptableObject {
      * Set the html element that corresponds to this javascript object
      * @param htmlElement The html element
      */
-    public void setHtmlElement( final HtmlElement htmlElement ) {
+    public void setHtmlElement(final HtmlElement htmlElement) {
         setDomNode(htmlElement);
     }
 
@@ -228,7 +228,7 @@ public class SimpleScriptable extends ScriptableObject {
         // Walk up the inheritance chain if necessary.
         Class javaScriptClass = null;
         for (Class c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
-            javaScriptClass = (Class) JavaScriptConfiguration.getHtmlJavaScriptMapping().get( c );
+            javaScriptClass = (Class) JavaScriptConfiguration.getHtmlJavaScriptMapping().get(c);
         }
 
         final SimpleScriptable scriptable;
@@ -293,7 +293,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param defaultValue The default value to return if the arg wasn't specified.
      * @return The specified object or null
      */
-    public static Object getObjectArg( final int index, final Object[] args, final Object defaultValue ) {
+    public static Object getObjectArg(final int index, final Object[] args, final Object defaultValue) {
         if (index >= args.length) {
             return defaultValue;
         }
@@ -311,7 +311,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param defaultValue The default value to return if the arg wasn't specified.
      * @return The specified string or null
      */
-    public static String getStringArg( final int index, final Object[] args, final String defaultValue ) {
+    public static String getStringArg(final int index, final Object[] args, final String defaultValue) {
         return Context.toString(getObjectArg(index, args, defaultValue));
     }
 
@@ -324,7 +324,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param defaultValue The default value to be used.
      * @return The specified boolean or the default value.
      */
-    public static boolean getBooleanArg( final int index, final Object[] args, final boolean defaultValue ) {
+    public static boolean getBooleanArg(final int index, final Object[] args, final boolean defaultValue) {
         final Boolean defaultBoolean = Boolean.valueOf(defaultValue);
 
         return Context.toBoolean(getObjectArg(index, args, defaultBoolean));
@@ -339,7 +339,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param defaultValue The default value to be used.
      * @return The specified int or the default value.
      */
-    public static int getIntArg( final int index, final Object[] args, final int defaultValue ) {
+    public static int getIntArg(final int index, final Object[] args, final int defaultValue) {
         return (int) Context.toNumber(getObjectArg(index, args, new Integer(defaultValue)));
     }
 
@@ -350,10 +350,10 @@ public class SimpleScriptable extends ScriptableObject {
      * @param hint A hint as to the format of the default value.  Ignored in this case.
      * @return The default value.
      */
-    public Object getDefaultValue( final Class hint ) {
+    public Object getDefaultValue(final Class hint) {
         if (String.class.equals(hint) || hint == null) {
             if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                return "[object]"; // the super helpfull IE solution
+                return "[object]"; // the super helpful IE solution
             }
             else {
                 return "[object " + getClassName() + "]"; // not fully correct as htmlunit names are not FF ones
@@ -370,7 +370,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @throws RuntimeException If the window cannot be found, which should never occur.
      */
     protected Window getWindow() throws RuntimeException {
-        return getWindow( this );
+        return getWindow(this);
     }
 
     /**
@@ -379,8 +379,8 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The window associated with the specified JavaScript object.
      * @throws RuntimeException If the window cannot be found, which should never occur.
      */
-    protected static Window getWindow( final Scriptable s ) throws RuntimeException {
-        final Scriptable top = ScriptableObject.getTopLevelScope( s );
+    protected static Window getWindow(final Scriptable s) throws RuntimeException {
+        final Scriptable top = ScriptableObject.getTopLevelScope(s);
         if (top instanceof Window) {
             return (Window) top;
         }

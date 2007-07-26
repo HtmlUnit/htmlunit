@@ -119,7 +119,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @return The page that occupies this window after setting checked status.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page setChecked( final boolean isChecked ) {
+    public Page setChecked(final boolean isChecked) {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = isChecked() != isChecked;
 
@@ -178,19 +178,19 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc} Also sets the value to the new default value.
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
-        super.setDefaultValue( defaultValue );
-        setValueAttribute( defaultValue );
+    public void setDefaultValue(final String defaultValue) {
+        super.setDefaultValue(defaultValue);
+        setValueAttribute(defaultValue);
     }
 
     /**
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultChecked(boolean)
      */
-    public void setDefaultChecked( final boolean defaultChecked ) {
+    public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
         if (getPage().getWebClient().getBrowserVersion().isNetscape()) {
-            setChecked( defaultChecked );
+            setChecked(defaultChecked);
         }
     }
 

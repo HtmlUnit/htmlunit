@@ -80,9 +80,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
 
     /**
      * Initialize this object
-     * @param select The HtmlSelect that this object will retrive elements from.
+     * @param select The HtmlSelect that this object will retrieve elements from.
      */
-    public void initialize( final HtmlSelect select ) {
+    public void initialize(final HtmlSelect select) {
         Assert.notNull("select", select);
         htmlSelect_ = select;
     }
@@ -94,7 +94,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param start The object that get is being called on.
      * @return The object or NOT_FOUND
      */
-    public Object get( final int index, final Scriptable start ) {
+    public Object get(final int index, final Scriptable start) {
         final Object response;
         if (index < 0) {
             throw Context.reportRuntimeError("Index or size is negative");
@@ -141,22 +141,21 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value
      */
-    public void put(
-            final int index, final Scriptable start, final Object newValue) {
-        if ( newValue == null ) {
+    public void put(final int index, final Scriptable start, final Object newValue) {
+        if (newValue == null) {
             // Remove the indexed option.
-            htmlSelect_.removeOption( index );
+            htmlSelect_.removeOption(index);
         }
         else {
             final Option option = (Option) newValue;
             final HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
-            if ( index >= jsxGet_length() ) {
+            if (index >= jsxGet_length()) {
                 // Add a new option at the end.
-                htmlSelect_.appendOption( htmlOption );
+                htmlSelect_.appendOption(htmlOption);
             }
             else {
                 // Replace the indexed option.
-                htmlSelect_.replaceOption( index, htmlOption );
+                htmlSelect_.replaceOption(index, htmlOption);
             }
         }
     }
@@ -176,16 +175,16 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * new length.
      * @param newLength The new length property value
      */
-    public void jsxSet_length( final int newLength ) {
+    public void jsxSet_length(final int newLength) {
         final int currentLength = htmlSelect_.getOptionSize();
         if (currentLength > newLength) {
-            htmlSelect_.setOptionSize( newLength );
+            htmlSelect_.setOptionSize(newLength);
         }
         else {
             for (int i = currentLength; i < newLength; i++) {
-                final HtmlOption option = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
+                final HtmlOption option = (HtmlOption)HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
-                htmlSelect_.appendOption( option );
+                htmlSelect_.appendOption(option);
             }
         }
     }
@@ -233,8 +232,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      *
      * @see #put
      */
-    public void jsxFunction_add(final Object newOptionObject, final Object newIndex)
-    {
+    public void jsxFunction_add(final Object newOptionObject, final Object newIndex) {
         // If newIndex is undefined, then the item will be appended to the end of
         // the list
         int index = jsxGet_length();

@@ -114,7 +114,7 @@ public interface WebResponse {
      * @param headerName The name of the header
      * @return The value of the specified header
      */
-    String getResponseHeaderValue( final String headerName );
+    String getResponseHeaderValue(final String headerName);
 
     /**
      * Return the time it took to load this web response in milliseconds.

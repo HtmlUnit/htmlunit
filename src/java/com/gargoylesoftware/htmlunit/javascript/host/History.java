@@ -82,7 +82,7 @@ public class History extends SimpleScriptable {
      * javascript function "go".  Currently not implemented
      * @param relativeUrl The relative url
      */
-    public void jsxFunction_go( final String relativeUrl) {
+    public void jsxFunction_go(final String relativeUrl) {
         getLog().debug("javascript: history.go(String) not implemented yet");
     }
 }

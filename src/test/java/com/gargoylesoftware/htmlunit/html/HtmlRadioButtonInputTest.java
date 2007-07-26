@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002, 2007 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2002-2007 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -59,8 +59,8 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlRadioButtonInputTest( final String name ) {
-        super( name );
+    public HtmlRadioButtonInputTest(final String name) {
+        super(name);
     }
 
     /**
@@ -192,17 +192,17 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById( "myRadio" );
+        final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) page.getHtmlElementById("myRadio");
 
-        final HtmlPage secondPage = (HtmlPage) radio.setChecked( true );
+        final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);
 
-        assertEquals( "Second", secondPage.getTitleText() );
+        assertEquals("Second", secondPage.getTitleText());
     }
 
     /**
@@ -232,7 +232,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         final String[] expectedAlerts = {"false,false", "true,false", "false,true"};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -254,43 +254,43 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         
-        final HtmlRadioButtonInput radio1 = (HtmlRadioButtonInput)page.getHtmlElementById( "radio1" );
-        final HtmlRadioButtonInput radio2 = (HtmlRadioButtonInput)page.getHtmlElementById( "radio2" );
-        final HtmlRadioButtonInput radio3 = (HtmlRadioButtonInput)page.getHtmlElementById( "radio3" );
-        final HtmlRadioButtonInput radio4 = (HtmlRadioButtonInput)page.getHtmlElementById( "radio4" );
+        final HtmlRadioButtonInput radio1 = (HtmlRadioButtonInput)page.getHtmlElementById("radio1");
+        final HtmlRadioButtonInput radio2 = (HtmlRadioButtonInput)page.getHtmlElementById("radio2");
+        final HtmlRadioButtonInput radio3 = (HtmlRadioButtonInput)page.getHtmlElementById("radio3");
+        final HtmlRadioButtonInput radio4 = (HtmlRadioButtonInput)page.getHtmlElementById("radio4");
 
-        assertFalse( radio1.isChecked() );
-        assertFalse( radio2.isChecked() );
-        assertFalse( radio3.isChecked() );
-        assertFalse( radio4.isChecked() );
+        assertFalse(radio1.isChecked());
+        assertFalse(radio2.isChecked());
+        assertFalse(radio3.isChecked());
+        assertFalse(radio4.isChecked());
         
-        radio1.setChecked( true );
+        radio1.setChecked(true);
        
-        assertTrue( radio1.isChecked() );
-        assertFalse( radio2.isChecked() );
-        assertFalse( radio3.isChecked() );
-        assertFalse( radio4.isChecked() );
+        assertTrue(radio1.isChecked());
+        assertFalse(radio2.isChecked());
+        assertFalse(radio3.isChecked());
+        assertFalse(radio4.isChecked());
         
-        radio2.setChecked( true );
+        radio2.setChecked(true);
         
-        assertFalse( radio1.isChecked() );
-        assertTrue( radio2.isChecked() );
-        assertFalse( radio3.isChecked() );
-        assertFalse( radio4.isChecked() );
+        assertFalse(radio1.isChecked());
+        assertTrue(radio2.isChecked());
+        assertFalse(radio3.isChecked());
+        assertFalse(radio4.isChecked());
 
-        radio3.setChecked( true );
+        radio3.setChecked(true);
         
-        assertFalse( radio1.isChecked() );
-        assertTrue( radio2.isChecked() );
-        assertTrue( radio3.isChecked() );
-        assertFalse( radio4.isChecked() );
+        assertFalse(radio1.isChecked());
+        assertTrue(radio2.isChecked());
+        assertTrue(radio3.isChecked());
+        assertFalse(radio4.isChecked());
 
-        radio4.setChecked( true );
+        radio4.setChecked(true);
         
-        assertFalse( radio1.isChecked() );
-        assertTrue( radio2.isChecked() );
-        assertFalse( radio3.isChecked() );
-        assertTrue( radio4.isChecked() );
+        assertFalse(radio1.isChecked());
+        assertTrue(radio2.isChecked());
+        assertFalse(radio3.isChecked());
+        assertTrue(radio4.isChecked());
     }
 
 }

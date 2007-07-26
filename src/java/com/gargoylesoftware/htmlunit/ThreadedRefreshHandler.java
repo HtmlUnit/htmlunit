@@ -62,13 +62,13 @@ public class ThreadedRefreshHandler implements RefreshHandler {
      * @param seconds The number of seconds to wait before reloading the page.
      */
     public void handleRefresh(final Page page, final URL url, final int seconds) {
-        final Thread thread = new Thread( "ThreadedRefreshHandler Thread" ) {
+        final Thread thread = new Thread("ThreadedRefreshHandler Thread") {
             public void run() {
                 try {
                     new WaitingRefreshHandler().handleRefresh(page, url, seconds);
                 }
                 catch (final IOException e) {
-                    page.getEnclosingWindow().getWebClient().getLog().error( "Unable to refresh page!", e );
+                    page.getEnclosingWindow().getWebClient().getLog().error("Unable to refresh page!", e);
                     throw new RuntimeException("Unable to refresh page!", e);
                 }
             }

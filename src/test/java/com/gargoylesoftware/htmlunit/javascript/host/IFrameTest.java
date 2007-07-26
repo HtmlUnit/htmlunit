@@ -58,7 +58,7 @@ public class IFrameTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public IFrameTest( final String name ) {
+    public IFrameTest(final String name) {
         super(name);
     }
 
@@ -78,7 +78,7 @@ public class IFrameTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"false"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -98,7 +98,7 @@ public class IFrameTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"1", "myIFrame"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -121,7 +121,7 @@ public class IFrameTest extends WebTestCase {
         final String[] expectedAlerts = {"about:blank", "about:blank"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -155,7 +155,7 @@ public class IFrameTest extends WebTestCase {
 
         final String[] expectedAlerts = {"IFRAME"};
         webClient.getPage(URL_FIRST);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

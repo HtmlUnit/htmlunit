@@ -75,7 +75,7 @@ public class HtmlUnitXPath extends BaseXPath {
      *          parsing the expression.
      */
     public HtmlUnitXPath(final String xpathExpr) throws JaxenException {
-        this( xpathExpr, DocumentNavigator.instance );
+        this(xpathExpr, DocumentNavigator.instance);
     }
 
     /**

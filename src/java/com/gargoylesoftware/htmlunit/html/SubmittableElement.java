@@ -69,7 +69,7 @@ public interface SubmittableElement {
      * Sets the default value to use when this element gets reset, if applicable.
      * @param defaultValue The default value to use when this element gets reset, if applicable.
      */
-    void setDefaultValue( final String defaultValue );
+    void setDefaultValue(final String defaultValue);
 
     /**
      * Returns the default value to use when this element gets reset, if applicable.
@@ -81,7 +81,7 @@ public interface SubmittableElement {
      * Sets the default checked state to use when this element gets reset, if applicable.
      * @param defaultChecked The default checked state to use when this element gets reset, if applicable.
      */
-    void setDefaultChecked( final boolean defaultChecked );
+    void setDefaultChecked(final boolean defaultChecked);
 
     /**
      * Returns the default checked state to use when this element gets reset, if applicable.

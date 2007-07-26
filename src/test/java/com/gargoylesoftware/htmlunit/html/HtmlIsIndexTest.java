@@ -59,8 +59,8 @@ public class HtmlIsIndexTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlIsIndexTest( final String name ) {
-        super( name );
+    public HtmlIsIndexTest(final String name) {
+        super(name);
     }
 
     /**
@@ -76,20 +76,20 @@ public class HtmlIsIndexTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
         
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlIsIndex isInput =
-            ( HtmlIsIndex )form.getHtmlElementsByAttribute(
-                "isindex", "prompt", "enterSomeText" ).get( 0 );
-        isInput.setValue( "Flintstone" );
+            (HtmlIsIndex )form.getHtmlElementsByAttribute(
+                "isindex", "prompt", "enterSomeText").get(0);
+        isInput.setValue("Flintstone");
         final Page secondPage = form.submit();
 
         final List expectedParameters = new ArrayList();
-        expectedParameters.add( new KeyValuePair( "enterSomeText", "Flintstone" ) );
+        expectedParameters.add(new KeyValuePair("enterSomeText", "Flintstone"));
 
         assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.POST, webConnection.getLastMethod() );
-        assertEquals( "parameters", expectedParameters, webConnection.getLastParameters() );
+        assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
+        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
     }
 }
 

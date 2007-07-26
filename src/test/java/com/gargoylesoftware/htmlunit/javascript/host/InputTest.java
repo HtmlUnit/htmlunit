@@ -72,7 +72,7 @@ public class InputTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test.
      */
-    public InputTest( final String name ) {
+    public InputTest(final String name) {
         super(name);
     }
 
@@ -105,7 +105,7 @@ public class InputTest extends WebTestCase {
             "foo", "text", "textfield1", "form1", "cat"
         };
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -166,7 +166,7 @@ public class InputTest extends WebTestCase {
         };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -191,12 +191,12 @@ public class InputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput)page.getHtmlElementById("checkbox1");
-        assertFalse( checkBox.isChecked() );
+        assertFalse(checkBox.isChecked());
         ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
-        assertTrue( checkBox.isChecked() );
+        assertTrue(checkBox.isChecked());
 
         final String[] expectedAlerts = {"false", "true"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -232,19 +232,19 @@ public class InputTest extends WebTestCase {
             = (HtmlRadioButtonInput)page.getHtmlElementById("radioB");
         final HtmlRadioButtonInput radioC
             = (HtmlRadioButtonInput)page.getHtmlElementById("radioC");
-        assertTrue( radioA.isChecked() );
-        assertFalse( radioB.isChecked() );
-        assertFalse( radioC.isChecked() );
+        assertTrue(radioA.isChecked());
+        assertFalse(radioB.isChecked());
+        assertFalse(radioC.isChecked());
         ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
-        assertFalse( radioA.isChecked() );
-        assertTrue( radioB.isChecked() );
-        assertFalse( radioC.isChecked() );
+        assertFalse(radioA.isChecked());
+        assertTrue(radioB.isChecked());
+        assertFalse(radioC.isChecked());
 
         final String[] expectedAlerts = {
             "true", "false", "false", "false", "true", "false"
         };
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -284,19 +284,19 @@ public class InputTest extends WebTestCase {
             = (HtmlSubmitInput)form.getInputByName("button2");
         final HtmlSubmitInput button3
             = (HtmlSubmitInput)form.getInputByName("button3");
-        assertFalse( button1.isDisabled() );
-        assertTrue( button2.isDisabled() );
-        assertFalse( button3.isDisabled() );
+        assertFalse(button1.isDisabled());
+        assertTrue(button2.isDisabled());
+        assertFalse(button3.isDisabled());
         ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
-        assertTrue( button1.isDisabled() );
-        assertFalse( button2.isDisabled() );
-        assertTrue( button3.isDisabled() );
+        assertTrue(button1.isDisabled());
+        assertFalse(button2.isDisabled());
+        assertTrue(button3.isDisabled());
 
         final String[] expectedAlerts = {
             "false", "true", "false", "true", "false", "true"
         };
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -525,7 +525,7 @@ public class InputTest extends WebTestCase {
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"on", "on"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -554,7 +554,7 @@ public class InputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
         assertInstanceOf(page.getFormByName("myForm").getInputByName("myRadio"), HtmlImageInput.class);
     }
@@ -590,7 +590,7 @@ public class InputTest extends WebTestCase {
                 + "  + ((String(_oInput.select).indexOf('function') > 0) ? 'function' : 'unknown') + ', '\n"
                 + "  + _oInput.defaultValue + ', '\n"
                 + "  + _oInput.value\n"
-                + "  );\n"
+                + " );\n"
                 + "}\n"
                 + "var oForm = document.myForm;\n"
                 + "details(oForm.myButton);\n"
@@ -615,7 +615,7 @@ public class InputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -640,7 +640,7 @@ public class InputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

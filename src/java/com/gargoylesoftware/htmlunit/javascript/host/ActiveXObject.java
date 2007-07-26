@@ -79,13 +79,13 @@ public class ActiveXObject extends SimpleScriptable {
             final boolean inNewExpr) {
         if (args.length < 1 || args.length > 2) {
             throw Context.reportRuntimeError(
-                    "ActiveXObject Error: constructor must have one or two String parameters." );
+                    "ActiveXObject Error: constructor must have one or two String parameters.");
         }
         if (args[0] == Context.getUndefinedValue()) {
-            throw Context.reportRuntimeError( "ActiveXObject Error: constructor parameter is undefined." );
+            throw Context.reportRuntimeError("ActiveXObject Error: constructor parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {
-            throw Context.reportRuntimeError( "ActiveXObject Error: constructor parameter must be a String." );
+            throw Context.reportRuntimeError("ActiveXObject Error: constructor parameter must be a String.");
         }
         final String activeXName = (String) args[0];
 
@@ -99,16 +99,16 @@ public class ActiveXObject extends SimpleScriptable {
             return buildXMLHTTPActiveX();
         }
 
-        final Map map = getWindow( ctorObj ).getWebWindow().getWebClient().getActiveXObjectMap();
+        final Map map = getWindow(ctorObj).getWebWindow().getWebClient().getActiveXObjectMap();
         if (map == null) {
             throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
         }
         final Object mapValue = map.get(activeXName);
         if (mapValue == null) {
-            throw Context.reportRuntimeError( "ActiveXObject Error: no value for " + activeXName + "." );
+            throw Context.reportRuntimeError("ActiveXObject Error: no value for " + activeXName + ".");
         }
         if (!(mapValue instanceof String)) {
-            throw Context.reportRuntimeError( "ActiveXObject Error: value for " + activeXName + " is not a String." );
+            throw Context.reportRuntimeError("ActiveXObject Error: value for " + activeXName + " is not a String.");
         }
 
         final String xClassString = (String)mapValue;
@@ -118,10 +118,10 @@ public class ActiveXObject extends SimpleScriptable {
             object = xClass.newInstance();
         }
         catch (final Exception e) {
-            throw Context.reportRuntimeError( "ActiveXObject Error: failed instantiating class " + xClassString +
-                    " because " + e.getMessage() + "." );
+            throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class " + xClassString +
+                    " because " + e.getMessage() + ".");
         }
-        return Context.toObject( object, ctorObj );
+        return Context.toObject(object, ctorObj);
     }
 
     /**

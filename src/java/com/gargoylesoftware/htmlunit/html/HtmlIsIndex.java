@@ -92,7 +92,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      *
      * @param newValue The value.
      */
-    public void setValue( final String newValue ) {
+    public void setValue(final String newValue) {
         Assert.notNull("newValue", newValue);
         value_ = newValue;
     }
@@ -116,7 +116,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair( getPromptAttribute(), getValue() )};
+        return new KeyValuePair[]{new KeyValuePair(getPromptAttribute(), getValue())};
     }
 
     /**
@@ -131,7 +131,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
+    public void setDefaultValue(final String defaultValue) {
         // The reset() method does nothing, so this method doesn't have to, either.
     }
 
@@ -151,7 +151,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
-    public void setDefaultChecked( final boolean defaultChecked ) {
+    public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
 

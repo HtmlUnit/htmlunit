@@ -55,8 +55,8 @@ public class PrototypeTest extends WebTestCase {
     /**
      * @param name The name of the test.
      */
-    public PrototypeTest( final String name ) {
-        super( name );
+    public PrototypeTest(final String name) {
+        super(name);
     }
 
     /**
@@ -66,21 +66,21 @@ public class PrototypeTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        test( "ajax.html", 3, 11 );
+        test("ajax.html", 3, 11);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testArray() throws Exception {
-        test( "array.html", 12, 49 );
+        test("array.html", 12, 49);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testBase() throws Exception {
-        test( "base.html", 4, 48 );
+        test("base.html", 4, 48);
     }
 
     /**

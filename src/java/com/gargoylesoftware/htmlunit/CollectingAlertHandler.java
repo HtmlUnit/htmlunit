@@ -53,7 +53,7 @@ public class CollectingAlertHandler implements AlertHandler {
      * Create an instance with an ArrayList
      */
     public CollectingAlertHandler() {
-        this( new ArrayList() );
+        this(new ArrayList());
     }
 
     /**
@@ -61,7 +61,7 @@ public class CollectingAlertHandler implements AlertHandler {
      *
      * @param list The list to store alerts in.
      */
-    public CollectingAlertHandler( final List list ) {
+    public CollectingAlertHandler(final List list) {
         Assert.notNull("list",list);
         collectedAlerts_ = list;
     }
@@ -73,7 +73,7 @@ public class CollectingAlertHandler implements AlertHandler {
      * @param page The page that triggered the alert
      * @param message The message in the alert.
      */
-    public void handleAlert( final Page page, final String message ) {
+    public void handleAlert(final Page page, final String message) {
         collectedAlerts_.add(message);
     }
 

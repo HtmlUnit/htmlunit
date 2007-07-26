@@ -53,7 +53,7 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public DefaultCredentialsProviderTest( final String name ) {
+    public DefaultCredentialsProviderTest(final String name) {
         super(name);
     }
 

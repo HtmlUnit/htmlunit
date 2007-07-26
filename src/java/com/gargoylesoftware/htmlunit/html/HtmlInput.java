@@ -96,9 +96,9 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @return the page that occupies this window after this value is set.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page setValueAttribute( final String newValue ) {
-        Assert.notNull( "newValue", newValue );
-        setAttributeValue( "value", newValue );
+    public Page setValueAttribute(final String newValue) {
+        Assert.notNull("newValue", newValue);
+        setAttributeValue("value", newValue);
 
         return executeOnChangeHandlerIfAppropriate(this);
     }
@@ -113,7 +113,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
+        return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getValueAttribute())};
     }
 
     /**
@@ -364,7 +364,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @see SubmittableElement#reset()
      */
     public void reset() {
-        setValueAttribute( defaultValue_ );
+        setValueAttribute(defaultValue_);
     }
 
     /**
@@ -372,9 +372,9 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @see SubmittableElement#setDefaultValue(String)
      * @see HtmlFileInput#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
+    public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = getPage().getWebClient().getBrowserVersion().isNetscape();
-        setDefaultValue( defaultValue, modifyValue );
+        setDefaultValue(defaultValue, modifyValue);
     }
 
     /**
@@ -382,7 +382,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @param defaultValue The new default value.
      * @param modifyValue Whether or not to set the current value to the default value.
      */
-    protected void setDefaultValue( final String defaultValue, final boolean modifyValue ) {
+    protected void setDefaultValue(final String defaultValue, final boolean modifyValue) {
         defaultValue_ = defaultValue;
         if (modifyValue) {
             setValueAttribute(defaultValue);
@@ -404,7 +404,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
-    public void setDefaultChecked( final boolean defaultChecked ) {
+    public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
 
@@ -426,7 +426,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @return The page that occupies this window after setting checked status.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page setChecked( final boolean isChecked ) {
+    public Page setChecked(final boolean isChecked) {
         // By default this returns the current page.  Derived classes will override.
         return getPage();
     }
@@ -451,7 +451,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @exception ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public Page click( final int x, final int y )
+    public Page click(final int x, final int y)
         throws
             IOException,
             ElementNotFoundException {

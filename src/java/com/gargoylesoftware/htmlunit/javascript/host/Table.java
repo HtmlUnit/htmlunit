@@ -147,7 +147,7 @@ public class Table extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption.
      */
     public Object jsxFunction_createCaption() {
-        return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("caption") );
+        return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("caption"));
     }
 
     /**
@@ -159,7 +159,7 @@ public class Table extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption.
      */
     public Object jsxFunction_createTFoot() {
-        return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("tfoot") );
+        return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("tfoot"));
     }
 
     /**
@@ -171,7 +171,7 @@ public class Table extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption.
      */
     public Object jsxFunction_createTHead() {
-        return getScriptableFor( getHtmlElementOrDie().appendChildIfNoneExists("thead") );
+        return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("thead"));
     }
 
     /**
@@ -229,7 +229,7 @@ public class Table extends RowContainer {
      */
     protected Object insertRow(final int index) {
         // check if a tbody should be created
-        final List tagNames = Arrays.asList(new String[] {"tbody", "thead", "tfoot"} );
+        final List tagNames = Arrays.asList(new String[] {"tbody", "thead", "tfoot"});
         final List rowContainers = getHtmlElementOrDie().getHtmlElementsByTagNames(tagNames);
         if (rowContainers.isEmpty() || index == 0) {
             final HtmlElement tBody = getHtmlElementOrDie().appendChildIfNoneExists("tbody");

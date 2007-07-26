@@ -64,8 +64,8 @@ public class SanityCheck extends WebTestCase {
      * Create an instance.
      * @param name The name of the test.
      */
-    public SanityCheck( final String name ) {
-        super( name );
+    public SanityCheck(final String name) {
+        super(name);
     }
 
     /**
@@ -73,10 +73,10 @@ public class SanityCheck extends WebTestCase {
      * @param args the arguments.
      * @throws Exception If a problem occurs.
      */
-    public static void main( final String args[] ) throws Exception {
+    public static void main(final String args[]) throws Exception {
         new MainTestSuite("foo").enableAllLogging();
-        TestRunner.run( SanityCheck.class );
-        System.exit( 0 );
+        TestRunner.run(SanityCheck.class);
+        System.exit(0);
     }
 
     /**
@@ -85,7 +85,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testYahooMail() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf(webClient.getPage( new URL( "http://mail.yahoo.com/" ) ), HtmlPage.class);
+        assertInstanceOf(webClient.getPage(new URL("http://mail.yahoo.com/")), HtmlPage.class);
     }
 
     /**
@@ -94,7 +94,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testYahoo() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf( webClient.getPage( new URL( "http://yahoo.com/" ) ), HtmlPage.class );
+        assertInstanceOf(webClient.getPage(new URL("http://yahoo.com/")), HtmlPage.class);
     }
 
     /**
@@ -104,7 +104,7 @@ public class SanityCheck extends WebTestCase {
     public void testYahoo_Spanish() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertInstanceOf(
-            webClient.getPage( new URL( "http://edit.europe.yahoo.com/config/mail?.intl=es" ) ), HtmlPage.class );
+            webClient.getPage(new URL("http://edit.europe.yahoo.com/config/mail?.intl=es")), HtmlPage.class);
     }
 
     /**
@@ -113,8 +113,8 @@ public class SanityCheck extends WebTestCase {
      */
     public void testIBM() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        webClient.setRedirectEnabled( true );
-        final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "http://www.ibm.com/" ) );
+        webClient.setRedirectEnabled(true);
+        final HtmlPage page = (HtmlPage)webClient.getPage(new URL("http://www.ibm.com/"));
         assertEquals("http://www.ibm.com/us/", page.getWebResponse().getUrl());
     }
 
@@ -124,7 +124,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testAlphaWorks() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf(webClient.getPage(new URL( "http://www.alphaworks.ibm.com" ) ), HtmlPage.class);
+        assertInstanceOf(webClient.getPage(new URL("http://www.alphaworks.ibm.com")), HtmlPage.class);
     }
 
     /**
@@ -133,7 +133,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testCNN() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf( webClient.getPage( new URL( "http://www.cnn.com" ) ), HtmlPage.class);
+        assertInstanceOf(webClient.getPage(new URL("http://www.cnn.com")), HtmlPage.class);
     }
 
     /**
@@ -142,7 +142,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testToyotaCanada() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf(webClient.getPage( new URL( "http://www.toyota.ca" ) ), HtmlPage.class);
+        assertInstanceOf(webClient.getPage(new URL("http://www.toyota.ca")), HtmlPage.class);
     }
 
     /**
@@ -154,8 +154,8 @@ public class SanityCheck extends WebTestCase {
             final WebClient webClient = new WebClient(BROWSER_VERSION);
             webClient.setPrintContentOnFailingStatusCode(true);
             assertInstanceOf(
-                webClient.getPage( new URL( "https://sourceforge.net/projects/htmlunit/" ) ),
-                HtmlPage.class );
+                webClient.getPage(new URL("https://sourceforge.net/projects/htmlunit/")),
+                HtmlPage.class);
         }
         catch (final MalformedURLException e) {
             System.out.println("Skipping https test: " + getName());
@@ -169,7 +169,7 @@ public class SanityCheck extends WebTestCase {
     public void testYahooLogin_secure() throws Exception {
         try {
             final WebClient webClient = new WebClient(BROWSER_VERSION);
-            final HtmlPage page = (HtmlPage)webClient.getPage( new URL( "https://login.yahoo.com/" ) );
+            final HtmlPage page = (HtmlPage)webClient.getPage(new URL("https://login.yahoo.com/"));
             final HtmlForm form = page.getFormByName("login_form");
             assertNotNull(form);
         }
@@ -184,7 +184,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testAmazonCanada() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf( webClient.getPage( new URL( "http://www.amazon.ca/" ) ), HtmlPage.class );
+        assertInstanceOf(webClient.getPage(new URL("http://www.amazon.ca/")), HtmlPage.class);
     }
 
     /**
@@ -193,7 +193,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testCnnAfterHours() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf( webClient.getPage( new URL( "http://money.cnn.com/markets/afterhours/" ) ), HtmlPage.class );
+        assertInstanceOf(webClient.getPage(new URL("http://money.cnn.com/markets/afterhours/")), HtmlPage.class);
     }
 
     /**
@@ -202,7 +202,7 @@ public class SanityCheck extends WebTestCase {
      */
     public void testHtmlUnitHomepage() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
-        assertInstanceOf( webClient.getPage( new URL( "http://htmlunit.sourceforge.net" ) ), HtmlPage.class );
+        assertInstanceOf(webClient.getPage(new URL("http://htmlunit.sourceforge.net")), HtmlPage.class);
     }
 
     /**
@@ -211,8 +211,8 @@ public class SanityCheck extends WebTestCase {
      */
     public void testAdobeAcrobatReaderDownloadStep2() throws Exception {
         final WebClient webClient = new WebClient();
-        assertInstanceOf( webClient.getPage( new URL( "http://www.adobe.com/products/acrobat/readstep2.html" ) ),
-                          HtmlPage.class );
+        assertInstanceOf(webClient.getPage(new URL("http://www.adobe.com/products/acrobat/readstep2.html")),
+                          HtmlPage.class);
     }
 
     /**
@@ -220,9 +220,9 @@ public class SanityCheck extends WebTestCase {
      */
     public void setUp() {
         System.out.println();
-        System.out.println( "=====================================" );
-        System.out.println( "==  Starting test: " + getName() );
-        System.out.println( "=====================================" );
+        System.out.println("=====================================");
+        System.out.println("==  Starting test: " + getName());
+        System.out.println("=====================================");
     }
 
     private URL getPrintEnvUrl() throws MalformedURLException {

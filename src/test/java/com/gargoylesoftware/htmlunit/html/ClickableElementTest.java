@@ -61,8 +61,8 @@ public class ClickableElementTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public ClickableElementTest( final String name ) {
-        super( name );
+    public ClickableElementTest(final String name) {
+        super(name);
     }
 
     /**
@@ -107,23 +107,23 @@ public class ClickableElementTest extends WebTestCase {
         final BrowserVersion bv = new BrowserVersion("Netscape", "7", "", "1.2", 7);
         final WebClient client = new WebClient(bv);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
         client.setThrowExceptionOnScriptError(exceptionOnError);
 
         final List collectedAlerts = new ArrayList();
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         client.setAlertHandler(alertHandler);
 
-        final HtmlPage page = ( HtmlPage ) client.getPage(URL_GARGOYLE);
-        final ClickableElement clickable = ( ClickableElement )page.getHtmlElementById( "clickId" );
+        final HtmlPage page = (HtmlPage ) client.getPage(URL_GARGOYLE);
+        final ClickableElement clickable = (ClickableElement )page.getHtmlElementById("clickId");
 
         for (int i = 0; i < numClicks; i++) {
             clickable.click();
         }
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

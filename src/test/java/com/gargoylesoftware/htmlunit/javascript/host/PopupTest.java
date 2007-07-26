@@ -55,7 +55,7 @@ public class PopupTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public PopupTest( final String name ) {
+    public PopupTest(final String name) {
         super(name);
     }
 

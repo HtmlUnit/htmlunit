@@ -78,7 +78,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      */
     public Page createPage(
             final WebResponse webResponse,
-            final WebWindow webWindow )
+            final WebWindow webWindow)
         throws
             IOException {
         final String contentType = webResponse.getContentType().toLowerCase();
@@ -126,7 +126,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      */
     protected JavaScriptPage createJavaScriptPage(final WebResponse webResponse, final WebWindow webWindow) {
         final JavaScriptPage newPage;
-        newPage = new JavaScriptPage( webResponse, webWindow );
+        newPage = new JavaScriptPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
@@ -140,7 +140,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      */
     protected TextPage createTextPage(final WebResponse webResponse, final WebWindow webWindow) {
         final TextPage newPage;
-        newPage = new TextPage( webResponse, webWindow );
+        newPage = new TextPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
@@ -154,7 +154,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      */
     protected UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
         final UnexpectedPage newPage;
-        newPage = new UnexpectedPage( webResponse, webWindow );
+        newPage = new UnexpectedPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
@@ -168,7 +168,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @throws IOException If the page could not be created
      */
     protected XmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final XmlPage newPage = new XmlPage( webResponse, webWindow );
+        final XmlPage newPage = new XmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
@@ -194,7 +194,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
                 || contentType.equals("text/vnd.wap.wml")) {
             return "xml";
         }
-        else if (contentType.startsWith( "text/" )) {
+        else if (contentType.startsWith("text/")) {
             return "text";
         }
         else {

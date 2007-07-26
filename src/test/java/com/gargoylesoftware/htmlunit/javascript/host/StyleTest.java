@@ -59,7 +59,7 @@ public class StyleTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public StyleTest( final String name ) {
+    public StyleTest(final String name) {
         super(name);
     }
 
@@ -85,9 +85,9 @@ public class StyleTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
-        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style") );
+        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
     }
 
     /**
@@ -109,11 +109,11 @@ public class StyleTest extends WebTestCase {
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
         final String[] expectedAlerts = {"black", "pink"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
         assertEquals(
             "background: blue; color: pink; foo: bar;",
-            page.getHtmlElementById("div1").getAttributeValue("style") );
+            page.getHtmlElementById("div1").getAttributeValue("style"));
     }
 
     /**
@@ -136,9 +136,9 @@ public class StyleTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
-        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style") );
+        assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
     }
 
     /**
@@ -188,7 +188,7 @@ public class StyleTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -231,7 +231,7 @@ public class StyleTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -253,7 +253,7 @@ public class StyleTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
     
     /**
@@ -274,7 +274,7 @@ public class StyleTest extends WebTestCase {
         final String content = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var oDiv1 = document.getElementById('div1');\n"
-            + "    alert(oDiv1.style.getPropertyValue( 'background' ));\n"
+            + "    alert(oDiv1.style.getPropertyValue('background'));\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"

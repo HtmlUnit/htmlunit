@@ -56,8 +56,8 @@ public class HtmlNoScriptTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlNoScriptTest( final String name ) {
-        super( name );
+    public HtmlNoScriptTest(final String name) {
+        super(name);
     }
 
     /**
@@ -68,7 +68,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert( document.getElementById( 'second' ) );\n"
+            + "    alert(document.getElementById('second'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -92,8 +92,8 @@ public class HtmlNoScriptTest extends WebTestCase {
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var noscript = document.getElementById( 'myDiv' ).childNodes.item(0);\n"
-            + "    alert( noscript.childNodes.length );"
+            + "    var noscript = document.getElementById('myDiv' ).childNodes.item(0);\n"
+            + "    alert(noscript.childNodes.length);"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -115,11 +115,11 @@ public class HtmlNoScriptTest extends WebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "  alert( 1 );"
+            + "  alert(1);"
             + "</script>\n"
             + "<noscript>\n"
             + "  <script>\n"
-            + "    alert( 2 );"
+            + "    alert(2);"
             + "  </script>\n"
             + "</noscript>\n"
             + "</head><body>\n"
@@ -151,7 +151,7 @@ public class HtmlNoScriptTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage)form.submit();
         
         final MockWebConnection mockWebConnection = getMockConnection(secondPage);
-        assertEquals( 1, mockWebConnection.getLastParameters().size() );
+        assertEquals(1, mockWebConnection.getLastParameters().size());
         assertTrue(secondPage.asXml().indexOf("__webpage_no_js__") > -1);
     }
 }

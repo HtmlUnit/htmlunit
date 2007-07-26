@@ -89,7 +89,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
             seconds = maxwait_;
         }
         try {
-            Thread.sleep( seconds * 1000 );
+            Thread.sleep(seconds * 1000);
         }
         catch (final InterruptedException e) {
             throw new RuntimeException("Unknown threading error during refresh", e);

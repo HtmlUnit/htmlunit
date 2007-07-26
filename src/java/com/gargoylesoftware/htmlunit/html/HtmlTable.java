@@ -95,8 +95,7 @@ public class HtmlTable extends ClickableElement {
      * @return The HtmlTableCell at that location or null if there are no cells
      *      at that location
      */
-    public final HtmlTableCell getCellAt( final int rowIndex, final int columnIndex )
-    {
+    public final HtmlTableCell getCellAt(final int rowIndex, final int columnIndex) {
         final RowIterator rowIterator = getRowIterator();
         for (int rowNo = 0; rowIterator.hasNext(); rowNo++) {
             final HtmlTableRow row = rowIterator.nextRow();
@@ -170,7 +169,7 @@ public class HtmlTable extends ClickableElement {
      * @return The row with the specified id.
      * @exception ElementNotFoundException If the row cannot be found.
      */
-    public final HtmlTableRow getRowById( final String id ) throws ElementNotFoundException {
+    public final HtmlTableRow getRowById(final String id) throws ElementNotFoundException {
         final RowIterator iterator = new RowIterator();
         while (iterator.hasNext()) {
             final HtmlTableRow row = (HtmlTableRow)iterator.next();
@@ -178,7 +177,7 @@ public class HtmlTable extends ClickableElement {
                 return row;
             }
         }
-        throw new ElementNotFoundException( "tr", "id", id );
+        throw new ElementNotFoundException("tr", "id", id);
     }
 
     /**
@@ -241,7 +240,7 @@ public class HtmlTable extends ClickableElement {
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
             if (element instanceof HtmlTableBody) {
-                bodies.add( element );
+                bodies.add(element);
             }
         }
         return bodies;

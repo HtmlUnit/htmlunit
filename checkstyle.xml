@@ -110,7 +110,9 @@
         <module name="NoWhitespaceAfter"/>
 
         <module name="NoWhitespaceBefore"/>
-        
+
+        <module name="ParenPad"/>
+
         <module name="TabCharacter"/>
         
         <module name="WhitespaceAround"/>

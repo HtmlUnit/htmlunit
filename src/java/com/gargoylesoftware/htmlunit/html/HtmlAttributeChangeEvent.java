@@ -63,7 +63,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
      * @param value the value of the attribute that has been added, removed, or replaced.
      */
     public HtmlAttributeChangeEvent(final HtmlElement element, final String name, final String value) {
-        super( element );
+        super(element);
         this.name_ = name;
         this.value_ = value;
     }

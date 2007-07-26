@@ -53,8 +53,8 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
      * @param key A key
      * @param value a Value
      */
-    public KeyValuePair( final String key, final String value ) {
-        super( key, value );
+    public KeyValuePair(final String key, final String value) {
+        super(key, value);
     }
 
     /**

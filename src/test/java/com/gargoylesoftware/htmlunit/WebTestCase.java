@@ -111,8 +111,8 @@ public abstract class WebTestCase extends BaseTestCase {
      * Create an instance.
      * @param name The name of the test.
      */
-    public WebTestCase( final String name ) {
-        super( name );
+    public WebTestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -121,7 +121,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception if something goes wrong.
      */
-    protected static final HtmlPage loadPage( final String html ) throws Exception {
+    protected static final HtmlPage loadPage(final String html) throws Exception {
         return loadPage(html, null);
     }
 
@@ -134,7 +134,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @throws Exception If something goes wrong.
      */
     protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
-            final String html, final List collectedAlerts )
+            final String html, final List collectedAlerts)
         throws Exception {
         return loadPage(browserVersion, html, collectedAlerts, URL_GARGOYLE);
     }
@@ -147,7 +147,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage( final String html, final List collectedAlerts )
+    protected static final HtmlPage loadPage(final String html, final List collectedAlerts)
         throws Exception {
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
     }
@@ -168,7 +168,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage( final String html, final List collectedAlerts,
+    protected static final HtmlPage loadPage(final String html, final List collectedAlerts,
             final URL url) throws Exception {
 
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, url);
@@ -192,9 +192,9 @@ public abstract class WebTestCase extends BaseTestCase {
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         }
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( html );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         return page;
@@ -204,7 +204,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * Assert that the specified object is null.
      * @param object The object to check.
      */
-    public static void assertNull( final Object object ) {
+    public static void assertNull(final Object object) {
         if (object != null) {
             throw new AssertionFailedError("Expected null but found [" + object + "]");
         }
@@ -282,7 +282,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The input stream.
      * @throws FileNotFoundException If the file cannot be found.
      */
-    public static InputStream getFileAsStream( final String fileName ) throws FileNotFoundException {
+    public static InputStream getFileAsStream(final String fileName) throws FileNotFoundException {
         return new BufferedInputStream(new FileInputStream(getFileObject(fileName)));
     }
 
@@ -295,8 +295,8 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new File object.
      * @throws FileNotFoundException if !file.exists()
      */
-    public static File getFileObject( final String fileName ) throws FileNotFoundException {
-        final String localizedName = fileName.replace( '/', File.separatorChar );
+    public static File getFileObject(final String fileName) throws FileNotFoundException {
+        final String localizedName = fileName.replace('/', File.separatorChar);
 
         File file = new File(localizedName);
         if (!file.exists()) {

@@ -84,11 +84,11 @@ public class HtmlFileInputTest extends WebTestCase {
         final String secondContent = "<html><head><title>second</title></head></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
     
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
@@ -114,11 +114,11 @@ public class HtmlFileInputTest extends WebTestCase {
         final String secondContent = "<html><head><title>second</title></head></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
     
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);

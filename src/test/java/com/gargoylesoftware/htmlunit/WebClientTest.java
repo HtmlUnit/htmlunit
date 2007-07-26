@@ -81,8 +81,8 @@ public class WebClientTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public WebClientTest( final String name ) {
-        super( name );
+    public WebClientTest(final String name) {
+        super(name);
     }
 
     /**
@@ -96,19 +96,19 @@ public class WebClientTest extends WebTestCase {
             = "<html><head><title>foo</title></head><body>"
             + "No access</body></html>";
         final WebClient client = new WebClient();
-        client.setPrintContentOnFailingStatusCode( false );
+        client.setPrintContentOnFailingStatusCode(false);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(
-            htmlContent, 401, "Credentials missing or just plain wrong", "text/plain" );
-        client.setWebConnection( webConnection );
+            htmlContent, 401, "Credentials missing or just plain wrong", "text/plain");
+        client.setWebConnection(webConnection);
 
         try {
             client.getPage(new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST));
-            fail( "Expected FailingHttpStatusCodeException" );
+            fail("Expected FailingHttpStatusCodeException");
         }
         catch (final FailingHttpStatusCodeException e) {
-            assertEquals( 401, e.getStatusCode() );
+            assertEquals(401, e.getStatusCode());
         }
     }
 
@@ -119,11 +119,11 @@ public class WebClientTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         try {
-            client.assertionFailed( "foobar" );
-            fail( "Expected AssertionFailedError" );
+            client.assertionFailed("foobar");
+            fail("Expected AssertionFailedError");
         }
         catch (final junit.framework.AssertionFailedError e) {
-            assertEquals( "foobar", e.getMessage() );
+            assertEquals("foobar", e.getMessage());
         }
     }
 
@@ -141,27 +141,27 @@ public class WebClientTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = ( HtmlAnchor )firstPage.getHtmlElementById( "a2" );
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_GARGOYLE);
+        final HtmlAnchor anchor = (HtmlAnchor )firstPage.getHtmlElementById("a2");
 
-        final List firstExpectedEvents = Arrays.asList( new Object[] {
+        final List firstExpectedEvents = Arrays.asList(new Object[] {
             new WebWindowEvent(
                 client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage),
-        } );
-        assertEquals( firstExpectedEvents, eventCatcher.getEvents() );
+        });
+        assertEquals(firstExpectedEvents, eventCatcher.getEvents());
 
         eventCatcher.clear();
-        final HtmlPage secondPage = ( HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage )anchor.click();
 
-        final List secondExpectedEvents = Arrays.asList( new Object[] {
+        final List secondExpectedEvents = Arrays.asList(new Object[] {
             new WebWindowEvent(
                 client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage),
-        } );
-        assertEquals( secondExpectedEvents, eventCatcher.getEvents() );
+        });
+        assertEquals(secondExpectedEvents, eventCatcher.getEvents());
     }
 
     /**
@@ -182,26 +182,26 @@ public class WebClientTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, page1Content);
         webConnection.setResponse(URL_SECOND, page2Content);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
         assertEquals("foo", firstPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
         final WebWindow secondWindow = client.getWebWindowByName("myNewWindow");
-        final List expectedEvents = Arrays.asList( new Object[] {
+        final List expectedEvents = Arrays.asList(new Object[] {
             new WebWindowEvent(
                 secondWindow, WebWindowEvent.OPEN, null, null),
             new WebWindowEvent(
                 secondWindow, WebWindowEvent.CHANGE, null, secondWindow.getEnclosedPage()),
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, null, firstPage),
-        } );
-        assertEquals( expectedEvents, eventCatcher.getEvents() );
+        });
+        assertEquals(expectedEvents, eventCatcher.getEvents());
     }
 
     /**
@@ -221,14 +221,14 @@ public class WebClientTest extends WebTestCase {
             = "<html><head><title>third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
         assertEquals("first", firstPage.getTitleText());
 
         final EventCatcher eventCatcher = new EventCatcher();
@@ -238,19 +238,19 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage thirdPage = (HtmlPage)frame.getEnclosedPage();
 
         // Load the second page
-        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById( "a2" );
+        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("a2");
         final HtmlPage secondPage = (HtmlPage)anchor.click();
         assertEquals("second", secondPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
-        final List expectedEvents = Arrays.asList( new Object[] {
+        final List expectedEvents = Arrays.asList(new Object[] {
             new WebWindowEvent(
                 frame.getEnclosedWindow(), WebWindowEvent.CLOSE, thirdPage, null),
             new WebWindowEvent(
                 firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
-        } );
-        assertEquals( expectedEvents.get(0), eventCatcher.getEvents().get(0) );
-        assertEquals( expectedEvents, eventCatcher.getEvents() );
+        });
+        assertEquals(expectedEvents.get(0), eventCatcher.getEvents().get(0));
+        assertEquals(expectedEvents, eventCatcher.getEvents());
     }
 
     /**
@@ -262,7 +262,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
 
     /**
@@ -280,7 +280,7 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final List headers = Collections.singletonList(
-                new KeyValuePair("Location", URL_FIRST.toExternalForm()) );
+                new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         
         // builds a webconnection that first sends a redirect and then a "normal" response for
         // the same requested url
@@ -300,8 +300,8 @@ public class WebClientTest extends WebTestCase {
         };
         webConnection.setResponse(
                 URL_FIRST, firstContent, statusCode,
-                "Some error", "text/html", headers );
-        webClient.setWebConnection( webConnection );
+                "Some error", "text/html", headers);
+        webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
         final WebResponse webResponse = page.getWebResponse();
@@ -325,7 +325,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
         doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
@@ -344,7 +344,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
         doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
@@ -357,7 +357,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
 
     /**
@@ -377,7 +377,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
 
     /**
@@ -389,7 +389,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
         doTestRedirectionSameUrlAfterPost(statusCode);
     }
 
@@ -402,7 +402,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
         final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
 
     /**
@@ -414,7 +414,7 @@ public class WebClientTest extends WebTestCase {
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
         final SubmitMethod expectedRedirectedRequestMethod = null;
 
-        doTestRedirection( statusCode, initialRequestMethod, expectedRedirectedRequestMethod );
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
 
     /**
@@ -429,7 +429,7 @@ public class WebClientTest extends WebTestCase {
     private void doTestRedirection(
             final int statusCode,
             final SubmitMethod initialRequestMethod,
-            final SubmitMethod expectedRedirectedRequestMethod )
+            final SubmitMethod expectedRedirectedRequestMethod)
         throws
              Exception {
 
@@ -450,7 +450,7 @@ public class WebClientTest extends WebTestCase {
             final int statusCode,
             final SubmitMethod initialRequestMethod,
             final SubmitMethod expectedRedirectedRequestMethod,
-            final String newLocation )
+            final String newLocation)
         throws
         Exception {
 
@@ -478,7 +478,7 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final URL url = URL_FIRST;
-        final List headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()) );
+        final List headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -498,7 +498,7 @@ public class WebClientTest extends WebTestCase {
             }
         };
         webConnection.setResponse(url, firstContent, 302, "Redirect needed", "text/html", headers);
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
         webClient.setThrowExceptionOnFailingStatusCode(false);
         
         return (HtmlPage) webClient.getPage(url);
@@ -545,14 +545,14 @@ public class WebClientTest extends WebTestCase {
         webClient.setPrintContentOnFailingStatusCode(false);
 
         final List headers = Collections.singletonList(
-            new KeyValuePair("Location", newLocation) );
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+            new KeyValuePair("Location", newLocation));
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(
             URL_FIRST, firstContent, statusCode,
-            "Some error", "text/html", headers );
+            "Some error", "text/html", headers);
         webConnection.setResponse(new URL(newLocation), secondContent);
 
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         final URL url = URL_FIRST;
 
@@ -566,15 +566,15 @@ public class WebClientTest extends WebTestCase {
         webResponse = page.getWebResponse();
         if (expectedRedirectedRequestMethod == null) {
             // No redirect should have happened
-            assertEquals( statusCode, webResponse.getStatusCode() );
-            assertEquals( initialRequestMethod, webConnection.getLastMethod() );
+            assertEquals(statusCode, webResponse.getStatusCode());
+            assertEquals(initialRequestMethod, webConnection.getLastMethod());
         }
         else {
             // A redirect should have happened
-            assertEquals( 200, webResponse.getStatusCode() );
-            assertEquals(newLocation, webResponse.getUrl() );
-            assertEquals( "Second", page.getTitleText() );
-            assertEquals( expectedRedirectedRequestMethod, webConnection.getLastMethod() );
+            assertEquals(200, webResponse.getStatusCode());
+            assertEquals(newLocation, webResponse.getUrl());
+            assertEquals("Second", page.getTitleText());
+            assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());
         }
         assertEquals(proxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
         assertEquals(proxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
@@ -585,8 +585,8 @@ public class WebClientTest extends WebTestCase {
         webClient.setRedirectEnabled(false);
         page = (HtmlPage) webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
         webResponse = page.getWebResponse();
-        assertEquals( statusCode, webResponse.getStatusCode() );
-        assertEquals( initialRequestMethod, webConnection.getLastMethod() );
+        assertEquals(statusCode, webResponse.getStatusCode());
+        assertEquals(initialRequestMethod, webConnection.getLastMethod());
         assertEquals(proxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
         assertEquals(proxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
     }
@@ -617,21 +617,21 @@ public class WebClientTest extends WebTestCase {
             + "</body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, page1Content);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         final List collectedPageCreationItems = new ArrayList();
-        client.setPageCreator( new CollectingPageCreator(collectedPageCreationItems) );
+        client.setPageCreator(new CollectingPageCreator(collectedPageCreationItems));
 
         final Page page = client.getPage(URL_FIRST);
-        assertTrue( "instanceof TextPage", page instanceof TextPage );
+        assertTrue("instanceof TextPage", page instanceof TextPage);
 
-        final List expectedPageCreationItems = Arrays.asList( new Object[] {
+        final List expectedPageCreationItems = Arrays.asList(new Object[] {
             page
-        } );
+        });
 
-        assertEquals( expectedPageCreationItems, collectedPageCreationItems );
+        assertEquals(expectedPageCreationItems, collectedPageCreationItems);
     }
 
     /** A PageCreator that collects data */
@@ -641,7 +641,7 @@ public class WebClientTest extends WebTestCase {
          * Create an instance
          * @param list The list that will contain the data
          */
-        public CollectingPageCreator( final List list ) {
+        public CollectingPageCreator(final List list) {
             collectedPages_ = list;
         }
         
@@ -652,7 +652,7 @@ public class WebClientTest extends WebTestCase {
          * @return The new page
          * @throws IOException If an IO problem occurs
          */
-        public Page createPage( final WebResponse webResponse, final WebWindow webWindow )
+        public Page createPage(final WebResponse webResponse, final WebWindow webWindow)
             throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
@@ -672,9 +672,9 @@ public class WebClientTest extends WebTestCase {
             + "</body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
 
         final String urlString = "http://first?a=b";
         final URL url = new URL(urlString);
@@ -820,11 +820,11 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         final URL url = URL_FIRST;
 
@@ -840,12 +840,12 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[0]);
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        assertNull( "original", page.getElementWithFocus() );
-        assertNull( "next", page.tabToNextElement() );
-        assertNull( "previous", page.tabToPreviousElement() );
-        assertNull( "accesskey", page.pressAccessKey('a') );
+        assertNull("original", page.getElementWithFocus());
+        assertNull("next", page.tabToNextElement());
+        assertNull("previous", page.tabToPreviousElement());
+        assertNull("accesskey", page.pressAccessKey('a'));
 
         final List expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
@@ -858,24 +858,24 @@ public class WebClientTest extends WebTestCase {
     public void testKeyboard_OneTabbableElement() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
         final HtmlElement element = page.getHtmlElementById("submit0");
 
-        assertNull( "original", page.getElementWithFocus() );
-        assertNull( "accesskey", page.pressAccessKey('x') );
+        assertNull("original", page.getElementWithFocus());
+        assertNull("accesskey", page.pressAccessKey('x'));
 
-        assertEquals( "next", element, page.tabToNextElement() );
-        assertEquals( "nextAgain", element, page.tabToNextElement() );
+        assertEquals("next", element, page.tabToNextElement());
+        assertEquals("nextAgain", element, page.tabToNextElement());
 
         page.getElementWithFocus().blur();
-        assertNull( "original", page.getElementWithFocus() );
+        assertNull("original", page.getElementWithFocus());
 
-        assertEquals( "previous", element, page.tabToPreviousElement() );
-        assertEquals( "previousAgain", element, page.tabToPreviousElement() );
+        assertEquals("previous", element, page.tabToPreviousElement());
+        assertEquals("previousAgain", element, page.tabToPreviousElement());
 
-        assertEquals( "accesskey", element, page.pressAccessKey('z') );
+        assertEquals("accesskey", element, page.pressAccessKey('z'));
 
         final String[] expectedAlerts = {"focus-0", "blur-0", "focus-0"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -888,18 +888,18 @@ public class WebClientTest extends WebTestCase {
     public void testAccessKeys() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
-        assertEquals( "submit0", page.pressAccessKey('a').getAttributeValue("name") );
-        assertEquals( "submit2", page.pressAccessKey('c').getAttributeValue("name") );
-        assertEquals( "submit1", page.pressAccessKey('b').getAttributeValue("name") );
+        assertEquals("submit0", page.pressAccessKey('a').getAttributeValue("name"));
+        assertEquals("submit2", page.pressAccessKey('c').getAttributeValue("name"));
+        assertEquals("submit1", page.pressAccessKey('b').getAttributeValue("name"));
 
         final String[] expectedAlerts = {
             "focus-0", "blur-0", "focus-2", "blur-2", "focus-1"
         };
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -909,18 +909,18 @@ public class WebClientTest extends WebTestCase {
     public void testTabNext() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
-        assertEquals( "submit0", page.tabToNextElement().getAttributeValue("name") );
-        assertEquals( "submit1", page.tabToNextElement().getAttributeValue("name") );
-        assertEquals( "submit2", page.tabToNextElement().getAttributeValue("name") );
+        assertEquals("submit0", page.tabToNextElement().getAttributeValue("name"));
+        assertEquals("submit1", page.tabToNextElement().getAttributeValue("name"));
+        assertEquals("submit2", page.tabToNextElement().getAttributeValue("name"));
 
         final String[] expectedAlerts = {
             "focus-0", "blur-0", "focus-1", "blur-1", "focus-2"
         };
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -930,18 +930,18 @@ public class WebClientTest extends WebTestCase {
     public void testTabPrevious() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
 
-        assertEquals( "submit2", page.tabToPreviousElement().getAttributeValue("name") );
-        assertEquals( "submit1", page.tabToPreviousElement().getAttributeValue("name") );
-        assertEquals( "submit0", page.tabToPreviousElement().getAttributeValue("name") );
+        assertEquals("submit2", page.tabToPreviousElement().getAttributeValue("name"));
+        assertEquals("submit1", page.tabToPreviousElement().getAttributeValue("name"));
+        assertEquals("submit0", page.tabToPreviousElement().getAttributeValue("name"));
 
         final String[] expectedAlerts = {
             "focus-2", "blur-2", "focus-1", "blur-1", "focus-0"
         };
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -951,7 +951,7 @@ public class WebClientTest extends WebTestCase {
     public void testPressAccessKey_Button() throws Exception {
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
         final HtmlElement button = page.getHtmlElementById("button1");
@@ -962,7 +962,7 @@ public class WebClientTest extends WebTestCase {
         button.removeAttribute("disabled");
         page.pressAccessKey('1');
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -974,7 +974,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     private HtmlPage getPageForKeyboardTest(
-        final WebClient webClient, final String[] tabIndexValues ) throws Exception {
+        final WebClient webClient, final String[] tabIndexValues) throws Exception {
 
         final StringBuffer buffer = new StringBuffer();
         buffer.append(
@@ -1004,9 +1004,9 @@ public class WebClientTest extends WebTestCase {
 
         buffer.append("</form></body></html>");
 
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, buffer.toString());
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         return (HtmlPage) webClient.getPage(URL_FIRST);
     }
@@ -1021,11 +1021,11 @@ public class WebClientTest extends WebTestCase {
             "<html><head><title>first</title></head><body></body></html>");
 
         final Page page = webClient.loadWebResponseInto(
-            webResponse, webClient.getCurrentWindow() );
-        assertInstanceOf( page, HtmlPage.class);
+            webResponse, webClient.getCurrentWindow());
+        assertInstanceOf(page, HtmlPage.class);
 
         final HtmlPage htmlPage = (HtmlPage)page;
-        assertEquals("first", htmlPage.getTitleText() );
+        assertEquals("first", htmlPage.getTitleText());
     }
 
     /**
@@ -1071,43 +1071,43 @@ public class WebClientTest extends WebTestCase {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
-        final WebClient webClient = new WebClient( BrowserVersion.INTERNET_EXPLORER_6_0,
-                defaultProxyHost, defaultProxyPort );
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
+                defaultProxyHost, defaultProxyPort);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        webConnection.setResponse( URL_FIRST, html );
+        webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
         // Make sure default proxy settings are used.
-        webClient.getPage( URL_FIRST );
-        assertEquals( defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        webClient.getPage(URL_FIRST);
+        assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
 
         // Make sure custom proxy settings are used.
         final String customProxyHost = "customProxyHost";
         final int customProxyPort = 1000;
-        final WebRequestSettings settings = new WebRequestSettings( URL_FIRST );
-        settings.setProxyHost( customProxyHost );
-        settings.setProxyPort( customProxyPort );
-        webClient.getPage( settings );
-        assertEquals( customProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( customProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
+        settings.setProxyHost(customProxyHost);
+        settings.setProxyPort(customProxyPort);
+        webClient.getPage(settings);
+        assertEquals(customProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(customProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
 
         // Make sure proxy bypass works with default proxy settings.
-        webClient.addHostsToProxyBypass( URL_FIRST.getHost() );
-        webClient.getPage( URL_FIRST );
-        assertEquals( null, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( 0, webConnection.getLastWebRequestSettings().getProxyPort() );
+        webClient.addHostsToProxyBypass(URL_FIRST.getHost());
+        webClient.getPage(URL_FIRST);
+        assertEquals(null, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(0, webConnection.getLastWebRequestSettings().getProxyPort());
 
         // Make sure proxy bypass doesn't work with custom proxy settings.
-        webClient.getPage( settings );
-        assertEquals( customProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( customProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        webClient.getPage(settings);
+        assertEquals(customProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(customProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
 
         // Make sure we can remove proxy bypass filters.
-        webClient.removeHostsFromProxyBypass( URL_FIRST.getHost() );
-        webClient.getPage( URL_FIRST );
-        assertEquals( defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        webClient.removeHostsFromProxyBypass(URL_FIRST.getHost());
+        webClient.getPage(URL_FIRST);
+        assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
     }
 
     /**
@@ -1134,16 +1134,16 @@ public class WebClientTest extends WebTestCase {
 
         final Page page2 = webClient.getPage(URL_FIRST);
         webClient.getPage(URL_FIRST);
-        assertEquals(null, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals(0, webConnection.getLastWebRequestSettings().getProxyPort() );
+        assertEquals(null, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(0, webConnection.getLastWebRequestSettings().getProxyPort());
         assertEquals(location2, page2.getWebResponse().getUrl());
 
         // Make sure default proxy settings are used.
         webClient.setThrowExceptionOnFailingStatusCode(false);
         webClient.setRedirectEnabled(false);
         final Page page1 = webClient.getPage(URL_FIRST);
-        assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
         assertEquals(URL_FIRST, page1.getWebResponse().getUrl());
     }
 
@@ -1157,29 +1157,29 @@ public class WebClientTest extends WebTestCase {
         final String html = "<html><head><title>Hello World</title>"
             + "<script language='javascript' type='text/javascript' src='foo.js'></script>"
             + "</head><body></body></html>";
-        final WebClient webClient = new WebClient( BrowserVersion.INTERNET_EXPLORER_6_0,
-                defaultProxyHost, defaultProxyPort );
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
+                defaultProxyHost, defaultProxyPort);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        webConnection.setResponse( URL_FIRST, html );
+        webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(new URL(URL_FIRST, "foo.js"), "", "text/javascript");
         webClient.setWebConnection(webConnection);
 
         // Make sure default proxy settings are used.
-        webClient.getPage( URL_FIRST );
-        assertEquals( defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        webClient.getPage(URL_FIRST);
+        assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
 
         // Make sure proxy bypass works with default proxy settings.
-        webClient.addHostsToProxyBypass( URL_FIRST.getHost() );
-        webClient.getPage( URL_FIRST );
-        assertEquals( null, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( 0, webConnection.getLastWebRequestSettings().getProxyPort() );
+        webClient.addHostsToProxyBypass(URL_FIRST.getHost());
+        webClient.getPage(URL_FIRST);
+        assertEquals(null, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(0, webConnection.getLastWebRequestSettings().getProxyPort());
 
         // Make sure we can remove proxy bypass filters.
-        webClient.removeHostsFromProxyBypass( URL_FIRST.getHost() );
-        webClient.getPage( URL_FIRST );
-        assertEquals( defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost() );
-        assertEquals( defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort() );
+        webClient.removeHostsFromProxyBypass(URL_FIRST.getHost());
+        webClient.getPage(URL_FIRST);
+        assertEquals(defaultProxyHost, webConnection.getLastWebRequestSettings().getProxyHost());
+        assertEquals(defaultProxyPort, webConnection.getLastWebRequestSettings().getProxyPort());
     }
 
     /**
@@ -1207,11 +1207,11 @@ public class WebClientTest extends WebTestCase {
     /** Test the accessors for refreshHandler */
     public void testRefreshHandlerAccessors() {
         final WebClient webClient = new WebClient();
-        assertInstanceOf( webClient.getRefreshHandler(), ImmediateRefreshHandler.class );
+        assertInstanceOf(webClient.getRefreshHandler(), ImmediateRefreshHandler.class);
 
         final RefreshHandler handler = new ImmediateRefreshHandler() { };
-        webClient.setRefreshHandler( handler );
-        assertSame( handler, webClient.getRefreshHandler() );
+        webClient.setRefreshHandler(handler);
+        assertSame(handler, webClient.getRefreshHandler());
     }
 
     /**
@@ -1220,7 +1220,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testScriptPreProcessor() throws IOException {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         final String alertText = "content";
         final String newAlertText = "newcontent";
         final String content
@@ -1234,43 +1234,43 @@ public class WebClientTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
 
         // Test null return from pre processor
-        client.setScriptPreProcessor( new ScriptPreProcessor() {
-            public String preProcess( final HtmlPage htmlPage, final String sourceCode, final String sourceName,
-                                      final HtmlElement htmlElement ) {
+        client.setScriptPreProcessor(new ScriptPreProcessor() {
+            public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                                      final HtmlElement htmlElement) {
                 return null;
             }
         });
-        client.setAlertHandler( new AlertHandler() {
-            public void handleAlert( final Page page, final String message ) {
+        client.setAlertHandler(new AlertHandler() {
+            public void handleAlert(final Page page, final String message) {
                 fail("The pre processor did not remove the javascript");
             }
 
         });
-        client.getPage( new URL( "http://www.yahoo.com" ) );
+        client.getPage(new URL("http://www.yahoo.com"));
 
         // Test modify script in pre processor
-        client.setScriptPreProcessor( new ScriptPreProcessor() {
-            public String preProcess( final HtmlPage htmlPage, final String sourceCode, final String sourceName,
-                                      final HtmlElement htmlElement ) {
-                final int start = sourceCode.indexOf( alertText );
+        client.setScriptPreProcessor(new ScriptPreProcessor() {
+            public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                                      final HtmlElement htmlElement) {
+                final int start = sourceCode.indexOf(alertText);
                 final int end = start + alertText.length();
 
-                return sourceCode.substring( 0, start ) + newAlertText + sourceCode.substring( end );
+                return sourceCode.substring(0, start) + newAlertText + sourceCode.substring(end);
             }
         });
-        client.setAlertHandler( new AlertHandler() {
-            public void handleAlert( final Page page, final String message ) {
-                if (!message.equals( newAlertText )) {
-                    fail( "The pre processor did not modify the javascript" );
+        client.setAlertHandler(new AlertHandler() {
+            public void handleAlert(final Page page, final String message) {
+                if (!message.equals(newAlertText)) {
+                    fail("The pre processor did not modify the javascript");
                 }
             }
 
         });
-        client.getPage( new URL( "http://www.yahoo.com" ) );
+        client.getPage(new URL("http://www.yahoo.com"));
     }
 
     /**
@@ -1282,19 +1282,19 @@ public class WebClientTest extends WebTestCase {
     public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         final String content = "<html><head><title>foo</title></head><body>"
             + "<p>hello world</p>"
             + "<script>document.unimplementedFunction();</script>"
             + "<script>alert('implemented function');</script>"
             + "</body></html>";
 
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
 
-        client.setScriptPreProcessor( new ScriptPreProcessor() {
-            public String preProcess( final HtmlPage htmlPage, final String sourceCode, final String sourceName,
-                                      final HtmlElement htmlElement ) {
+        client.setScriptPreProcessor(new ScriptPreProcessor() {
+            public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
+                                      final HtmlElement htmlElement) {
                 if (sourceCode.indexOf("unimplementedFunction") > -1) {
                     return "";
                 }
@@ -1302,8 +1302,8 @@ public class WebClientTest extends WebTestCase {
             }
         });
         final List alerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(alerts));
-        client.getPage( new URL( "http://page" ) );
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+        client.getPage(new URL("http://page"));
 
         assertEquals(1, alerts.size());
         assertEquals("implemented function", alerts.get(0).toString());
@@ -1320,10 +1320,10 @@ public class WebClientTest extends WebTestCase {
             + "</head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, page1Content, "text/html; charset=garbage");
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final Page page = client.getPage(URL_FIRST);
         assertInstanceOf(page, HtmlPage.class);
@@ -1335,7 +1335,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testExpandUrlHandlesColonsInRelativeUrl() throws Exception {
-        final URL newUrl = WebClient.expandUrl( new URL("http://host/foo"), "/bar/blah:de:blah");
+        final URL newUrl = WebClient.expandUrl(new URL("http://host/foo"), "/bar/blah:de:blah");
         assertEquals("http://host/bar/blah:de:blah", newUrl);
     }
 
@@ -1387,14 +1387,14 @@ public class WebClientTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final HtmlPage pageInFrame = (HtmlPage) ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
         ((HtmlAnchor) pageInFrame.getAnchors().get(0)).click();
 
         final String[] expectedAlerts = {"null", "null"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -1495,7 +1495,7 @@ public class WebClientTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(content);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         client.getPage(URL_FIRST);
         assertNull(webConnection.getLastAdditionalHeaders().get("foo-header"));
@@ -1524,20 +1524,20 @@ public class WebClientTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse("alert('foo')", 200, "OK", "Text/Javascript");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final String[] expectedAlerts = {"foo"};
 
         webConnection.setResponse(URL_FIRST, content, "Text/Html");
         assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
         webConnection.setResponse(URL_FIRST, content, "Text/XHtml");
         collectedAlerts.clear();
         assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
         webConnection.setResponse(URL_FIRST, content, "Text/Xml");
         assertInstanceOf(client.getPage(URL_FIRST), XmlPage.class);
@@ -1578,7 +1578,7 @@ public class WebClientTest extends WebTestCase {
         final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
         final WebClient webClient = new WebClient();
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.getPage(fileURL);
 
         final String[] expectedAlerts = {"foo"};

@@ -76,8 +76,8 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlFormTest( final String name ) {
-        super( name );
+    public HtmlFormTest(final String name) {
+        super(name);
     }
 
     /**
@@ -98,18 +98,18 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
-        final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
+        final HtmlSubmitInput pushButton = (HtmlSubmitInput )form.getInputByName("button");
 
         ((HtmlRadioButtonInput)form.getByXPath(
-                "//input[@type='radio' and @name='foo' and @value='2']" ).get(0)).setChecked(true);
+                "//input[@type='radio' and @name='foo' and @value='2']").get(0)).setChecked(true);
 
-        assertFalse( ((HtmlRadioButtonInput)page.getHtmlElementById("input1")).isChecked() );
-        assertTrue( ((HtmlRadioButtonInput)page.getHtmlElementById("input2")).isChecked() );
+        assertFalse(((HtmlRadioButtonInput)page.getHtmlElementById("input1")).isChecked());
+        assertTrue(((HtmlRadioButtonInput)page.getHtmlElementById("input2")).isChecked());
 
         // Test that only one value for the radio button is being passed back to the server
-        final HtmlPage secondPage = ( HtmlPage )pushButton.click();
+        final HtmlPage secondPage = (HtmlPage )pushButton.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getUrl());
@@ -133,13 +133,13 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
-        final HtmlInput pushButton = form.getInputByName( "button" );
+        final HtmlInput pushButton = form.getInputByName("button");
         assertNotNull(pushButton);
 
-        assertTrue( form.getByXPath(
-            "//input[@type='radio' and @name='foo' and @value='4']" ).isEmpty() );
+        assertTrue(form.getByXPath(
+            "//input[@type='radio' and @name='foo' and @value='4']").isEmpty());
     }
 
     /**
@@ -160,18 +160,18 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
+        final HtmlSubmitInput pushButton = (HtmlSubmitInput )form.getInputByName("button");
 
-        form.fakeCheckedRadioButton( "foo", "4" );
+        form.fakeCheckedRadioButton("foo", "4");
 
         // Test that only one value for the radio button is being passed back to the server
-        final HtmlPage secondPage = ( HtmlPage )pushButton.click();
+        final HtmlPage secondPage = (HtmlPage )pushButton.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo&foo=4",
             secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod() );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -186,10 +186,10 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         // Regression test: this used to blow up
-        form.submit( "button" );
+        form.submit("button");
     }
 
     /**
@@ -206,17 +206,17 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList( new Object[]{
+        final List expectedParameters = Arrays.asList(new Object[]{
             new KeyValuePair("textfield", "*"), new KeyValuePair("button", "foo")
-        } );
+        });
         final List collectedParameters = webConnection.getLastParameters();
 
-        assertEquals( expectedParameters, collectedParameters );
+        assertEquals(expectedParameters, collectedParameters);
     }
 
     /**
@@ -234,22 +234,22 @@ public class HtmlFormTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage)button.click();
-        assertEquals( "Second", secondPage.getTitleText() );
+        assertEquals("Second", secondPage.getTitleText());
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
+        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
     }
 
     /**
@@ -268,22 +268,22 @@ public class HtmlFormTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage)button.click();
-        assertEquals( firstPage.getTitleText(), secondPage.getTitleText() );
+        assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
+        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
     }
 
     /**
@@ -329,23 +329,23 @@ public class HtmlFormTest extends WebTestCase {
         client.setJavaScriptEnabled(false);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage)button.click();
-        assertEquals( "First", firstPage.getTitleText() );
-        assertEquals( "Second", secondPage.getTitleText() );
+        assertEquals("First", firstPage.getTitleText());
+        assertEquals("Second", secondPage.getTitleText());
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
     /**
@@ -362,22 +362,22 @@ public class HtmlFormTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage)button.click();
-        assertEquals( firstPage.getTitleText(), secondPage.getTitleText() );
+        assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
+        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
     }
 
     /**
@@ -395,19 +395,19 @@ public class HtmlFormTest extends WebTestCase {
         client.setJavaScriptEnabled(false);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput)firstPage.getHtmlElementById("button");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage)button.click();
-        assertSame( firstPage, secondPage );
+        assertSame(firstPage, secondPage);
     }
 
     /**
@@ -482,22 +482,22 @@ public class HtmlFormTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
         final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link1");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = (HtmlPage)anchor.click();
-        assertEquals( "Second", secondPage.getTitleText() );
+        assertEquals("Second", secondPage.getTitleText());
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
     /**
@@ -514,17 +514,17 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList( new Object[]{
+        final List expectedParameters = Arrays.asList(new Object[]{
             new KeyValuePair("textfield", ""), new KeyValuePair("button", "foo")
-        } );
+        });
         final List collectedParameters = webConnection.getLastParameters();
 
-        assertEquals( expectedParameters, collectedParameters );
+        assertEquals(expectedParameters, collectedParameters);
     }
 
     /**
@@ -541,16 +541,16 @@ public class HtmlFormTest extends WebTestCase {
             = "<html><head><title>Second</title></head><body'></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlForm form = ( HtmlForm )firstPage.getHtmlElementById( "form1" );
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlForm form = (HtmlForm )firstPage.getHtmlElementById("form1");
 
         final HtmlPage secondPage = (HtmlPage) form.submit("foo");
-        assertEquals( "Second", secondPage.getTitleText() );
+        assertEquals("Second", secondPage.getTitleText());
     }
 
     /**
@@ -567,17 +567,17 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList( new Object[]{
+        final List expectedParameters = Arrays.asList(new Object[]{
             new KeyValuePair("button", "foo")
-        } );
+        });
         final List collectedParameters = webConnection.getLastParameters();
 
-        assertEquals( expectedParameters, collectedParameters );
+        assertEquals(expectedParameters, collectedParameters);
     }
 
     /**
@@ -593,15 +593,15 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById( "button" );
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList( new Object[]{
+        final List expectedParameters = Arrays.asList(new Object[]{
             new KeyValuePair("textfield", "blah")
-        } );
+        });
         final List collectedParameters = webConnection.getLastParameters();
 
-        assertEquals( expectedParameters, collectedParameters );
+        assertEquals(expectedParameters, collectedParameters);
     }
 
     /**
@@ -622,18 +622,18 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList( new Object[]{
+        final List expectedParameters = Arrays.asList(new Object[]{
             new KeyValuePair("textfield", "blah"),
             new KeyValuePair("button", "foo")
-        } );
+        });
         final List collectedParameters = webConnection.getLastParameters();
 
-        assertEquals( expectedParameters, collectedParameters );
+        assertEquals(expectedParameters, collectedParameters);
     }
 
    /**
@@ -650,17 +650,17 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList( new Object[]{
+        final List expectedParameters = Arrays.asList(new Object[]{
             new KeyValuePair("button", "foo")
-        } );
+        });
         final List collectedParameters = webConnection.getLastParameters();
 
-        assertEquals( expectedParameters, collectedParameters );
+        assertEquals(expectedParameters, collectedParameters);
     }
     
     /**
@@ -714,32 +714,32 @@ public class HtmlFormTest extends WebTestCase {
             + "    <input type='submit' name='button' value='foo'/>"
             + "</form></body></html>";
 
-        final HtmlPage page1 = loadPage( htmlContent );
-        final MockWebConnection webConnection1 = getMockConnection( page1 );
-        final HtmlForm form1 = (HtmlForm) page1.getHtmlElementById( "form1" );
-        final HtmlSubmitInput button1 = (HtmlSubmitInput) form1.getInputByName( "button" );
+        final HtmlPage page1 = loadPage(htmlContent);
+        final MockWebConnection webConnection1 = getMockConnection(page1);
+        final HtmlForm form1 = (HtmlForm) page1.getHtmlElementById("form1");
+        final HtmlSubmitInput button1 = (HtmlSubmitInput) form1.getInputByName("button");
 
         final HtmlPage page2 = (HtmlPage) button1.click();
         final List collectedParameters1 = webConnection1.getLastParameters();
-        final List expectedParameters1 = Arrays.asList( new Object[] {
-            new KeyValuePair( "button", "foo" )
-        } );
+        final List expectedParameters1 = Arrays.asList(new Object[] {
+            new KeyValuePair("button", "foo")
+        });
 
-        final MockWebConnection webConnection2 = getMockConnection( page2 );
-        final HtmlForm form2 = (HtmlForm) page2.getHtmlElementById( "form1" );
-        final HtmlCheckBoxInput checkBox2 = (HtmlCheckBoxInput) form2.getInputByName( "Format" );
-        final HtmlSubmitInput button2 = (HtmlSubmitInput) form2.getInputByName( "button" );
+        final MockWebConnection webConnection2 = getMockConnection(page2);
+        final HtmlForm form2 = (HtmlForm) page2.getHtmlElementById("form1");
+        final HtmlCheckBoxInput checkBox2 = (HtmlCheckBoxInput) form2.getInputByName("Format");
+        final HtmlSubmitInput button2 = (HtmlSubmitInput) form2.getInputByName("button");
 
         checkBox2.click();
         button2.click();
         final List collectedParameters2 = webConnection2.getLastParameters();
-        final List expectedParameters2 = Arrays.asList( new Object[] {
-            new KeyValuePair( "Format", "html" ),
-            new KeyValuePair( "button", "foo" )
-        } );
+        final List expectedParameters2 = Arrays.asList(new Object[] {
+            new KeyValuePair("Format", "html"),
+            new KeyValuePair("button", "foo")
+        });
 
-        assertEquals( expectedParameters1, collectedParameters1 );
-        assertEquals( expectedParameters2, collectedParameters2 );
+        assertEquals(expectedParameters1, collectedParameters1);
+        assertEquals(expectedParameters2, collectedParameters2);
     }
 
     /**
@@ -757,20 +757,20 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final List allInputsByValue = form.getInputsByValue("foo");
         final ListIterator iterator = allInputsByValue.listIterator();
         while (iterator.hasNext()) {
             final HtmlInput input = (HtmlInput)iterator.next();
-            iterator.set( input.getNameAttribute() );
+            iterator.set(input.getNameAttribute());
         }
 
         final String[] expectedInputs = {"textfield", "button1", "button2"};
-        assertEquals( "Get all", expectedInputs, allInputsByValue );
-        assertEquals( Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
+        assertEquals("Get all", expectedInputs, allInputsByValue);
+        assertEquals(Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
 
-        assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute() );
+        assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
         try {
             form.getInputByValue("none-matching");
             fail("Expected ElementNotFoundException");
@@ -853,21 +853,21 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponseAsGenericHtml(URL_SECOND, "second");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlSubmitInput button = (HtmlSubmitInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)button.click();
         assertEquals("window2", secondPage.getEnclosingWindow().getName());
 
         final WebWindow firstWindow  = client.getCurrentWindow();
-        assertEquals("first window name", "", firstWindow.getName() );
-        assertSame( page, firstWindow.getEnclosedPage() );
+        assertEquals("first window name", "", firstWindow.getName());
+        assertSame(page, firstWindow.getEnclosedPage());
     }
 
     /**
@@ -883,10 +883,10 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlPage secondPage = ( HtmlPage ) page.getFormByName("form").submit();
+        final HtmlPage secondPage = (HtmlPage ) page.getFormByName("form").submit();
 
-        assertNotNull( secondPage );
-        assertEquals( "parameters", Collections.EMPTY_LIST, webConnection.getLastParameters() );
+        assertNotNull(secondPage);
+        assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
     }
 
     /**
@@ -904,7 +904,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit();
 
-        assertNotNull( secondPage );
+        assertNotNull(secondPage);
         assertEquals(page.getWebResponse().getUrl().toExternalForm() + "action.html?select=second+value",
                 secondPage.getWebResponse().getUrl());
     }
@@ -928,10 +928,10 @@ public class HtmlFormTest extends WebTestCase {
         submitButton.click();
 
         final List collectedParameters = webConnection.getLastParameters();
-        final List expectedParameters = Arrays.asList( new Object[] {
+        final List expectedParameters = Arrays.asList(new Object[] {
             new KeyValuePair("data", "NOT_SUBMITTED"),
             new KeyValuePair("submit", "Submit Query")
-        } );
+        });
         assertEquals(expectedParameters, collectedParameters);
     }
 
@@ -947,21 +947,21 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
 
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(settings);
+        final HtmlPage page = (HtmlPage )client.getPage(settings);
         final HtmlInput submitButton = (HtmlInput)page.getHtmlElementById("submitButton");
         submitButton.click();
 
         final List collectedParameters = webConnection.getLastParameters();
-        final List expectedParameters = Arrays.asList( new Object[] {
+        final List expectedParameters = Arrays.asList(new Object[] {
             new KeyValuePair("dispatch", "Save"),
             new KeyValuePair("dispatch", "TAB"),
-        } );
+        });
         assertCollectionsEqual(expectedParameters, collectedParameters);
     }
 
@@ -983,7 +983,7 @@ public class HtmlFormTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlSubmitInput button = (HtmlSubmitInput) firstPage.getHtmlElementById("button");
@@ -1137,8 +1137,8 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        client.setWebConnection(webConnection);
 
         String contentType = "text/html";
         if (headerCharset != null) {
@@ -1160,9 +1160,9 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testSumbit_submitInputValue() throws Exception {
-        testSumbit_submitInputValue( BrowserVersion.INTERNET_EXPLORER_6_0 );
+        testSumbit_submitInputValue(BrowserVersion.INTERNET_EXPLORER_6_0);
         //test FF separately as value is not to DEFAULT_VALUE if not specified.
-        testSumbit_submitInputValue( BrowserVersion.FIREFOX_2 );
+        testSumbit_submitInputValue(BrowserVersion.FIREFOX_2);
     }
 
     private void testSumbit_submitInputValue(final BrowserVersion browserVersion) throws Exception {
@@ -1175,9 +1175,9 @@ public class HtmlFormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage firstPage = loadPage(browserVersion, html, null );
-        final HtmlSubmitInput submitInput = (HtmlSubmitInput)firstPage.getHtmlElementById( "myButton" );
+        final HtmlPage firstPage = loadPage(browserVersion, html, null);
+        final HtmlSubmitInput submitInput = (HtmlSubmitInput)firstPage.getHtmlElementById("myButton");
         final HtmlPage secondPage = (HtmlPage)(submitInput).click();
-        assertEquals( URL_SECOND.toExternalForm() + "?Save=Submit+Query", secondPage.getWebResponse().getUrl() );
+        assertEquals(URL_SECOND.toExternalForm() + "?Save=Submit+Query", secondPage.getWebResponse().getUrl());
     }
 }

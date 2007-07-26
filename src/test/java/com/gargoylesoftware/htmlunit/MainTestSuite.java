@@ -63,8 +63,8 @@ public class MainTestSuite extends RecursiveTestSuite {
      * We don't actually use this field.
      * @exception IOException If an io error occurs.
      */
-    public MainTestSuite( final String name ) throws IOException {
-        super( new File("."), new AcceptAllTestFilter() );
+    public MainTestSuite(final String name) throws IOException {
+        super(new File("."), new AcceptAllTestFilter());
 
         //enableAllLogging();
     }

@@ -51,8 +51,8 @@ public class HtmlHtmlTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlHtmlTest( final String name ) {
-        super( name );
+    public HtmlHtmlTest(final String name) {
+        super(name);
     }
 
     /**

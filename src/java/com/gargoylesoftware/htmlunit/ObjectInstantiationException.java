@@ -55,7 +55,7 @@ public class ObjectInstantiationException extends RuntimeException {
      * @param message A message explaining the failure
      * @param cause The exception that was thrown
      */
-    public ObjectInstantiationException( final String message, final Throwable cause ) {
+    public ObjectInstantiationException(final String message, final Throwable cause) {
         super(message);
         causeException_ = cause;
     }
@@ -74,10 +74,10 @@ public class ObjectInstantiationException extends RuntimeException {
      *
      * @param writer  Where the stack trace will be written
      */
-    public void printStackTrace( final PrintWriter writer ) {
-        super.printStackTrace( writer );
+    public void printStackTrace(final PrintWriter writer) {
+        super.printStackTrace(writer);
         if (causeException_ != null) {
-            writer.write( "Enclosed exception: " );
+            writer.write("Enclosed exception: ");
             causeException_.printStackTrace(writer);
         }
     }
@@ -89,7 +89,7 @@ public class ObjectInstantiationException extends RuntimeException {
      * @param stream Where the stack trace will be written
      */
     public void printStackTrace(final PrintStream stream) {
-        super.printStackTrace( stream );
+        super.printStackTrace(stream);
         if (causeException_ != null) {
             stream.print("Enclosed exception: ");
             causeException_.printStackTrace(stream);

@@ -163,19 +163,19 @@ public final class JavaScriptConfiguration {
 
         try {
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware( true );
-            factory.setValidating( false );
+            factory.setNamespaceAware(true);
+            factory.setValidating(false);
 
             final DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-            documentBuilder.setErrorHandler( new StrictErrorHandler() );
+            documentBuilder.setErrorHandler(new StrictErrorHandler());
 
-            XmlDocument_ = documentBuilder.parse( inputSource );
+            XmlDocument_ = documentBuilder.parse(inputSource);
         }
         catch (final SAXParseException parseException) {
-            getLog().error( "line=[" + parseException.getLineNumber()
+            getLog().error("line=[" + parseException.getLineNumber()
                     + "] columnNumber=[" + parseException.getColumnNumber()
                     + "] systemId=[" + parseException.getSystemId()
-                    + "] publicId=[" + parseException.getPublicId() + "]", parseException );
+                    + "] publicId=[" + parseException.getPublicId() + "]", parseException);
         }
         catch (final Exception e) {
             getLog().error("Error when loading JavascriptConfiguration.xml", e);
@@ -188,7 +188,7 @@ public final class JavaScriptConfiguration {
      * @param browserVersion The {@link BrowserVersion}
      * @return The instance for the specified {@link BrowserVersion}
      */
-    public static synchronized JavaScriptConfiguration getInstance( final BrowserVersion browserVersion ) {
+    public static synchronized JavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
         if (browserVersion == null) {
             throw new IllegalStateException("BrowserVersion must be defined");
         }
@@ -196,7 +196,7 @@ public final class JavaScriptConfiguration {
 
         if (configuration == null) {
             configuration = new JavaScriptConfiguration(browserVersion);
-            ConfigurationMap_.put( browserVersion, configuration );
+            ConfigurationMap_.put(browserVersion, configuration);
         }
         return configuration;
     }
@@ -221,13 +221,13 @@ public final class JavaScriptConfiguration {
         return new InputStreamReader(getResourceAsStream(fileName));
     }
 
-    private static InputStream getResourceAsStream( final String name ) {
+    private static InputStream getResourceAsStream(final String name) {
         Assert.notNull("name", name);
         InputStream inputStream = JavaScriptConfiguration.class.getResourceAsStream(name);
         if (inputStream == null) {
             try {
-                final String localizedName = name.replace( '/', File.separatorChar );
-                inputStream = new FileInputStream( localizedName );
+                final String localizedName = name.replace('/', File.separatorChar);
+                inputStream = new FileInputStream(localizedName);
             }
             catch (final IOException e) {
                 // Fall through
@@ -237,8 +237,8 @@ public final class JavaScriptConfiguration {
         // If we are running maven tests then the path will be slightly different
         if (inputStream == null) {
             try {
-                final String localizedName = ("./src/java" + name).replace( '/', File.separatorChar );
-                inputStream = new FileInputStream( localizedName );
+                final String localizedName = ("./src/java" + name).replace('/', File.separatorChar);
+                inputStream = new FileInputStream(localizedName);
             }
             catch (final IOException e) {
                 // Fall through
@@ -295,7 +295,7 @@ public final class JavaScriptConfiguration {
             return null;
         }
         final String linkedClassname = element.getAttribute("classname");
-        final String jsConstructor = element.getAttribute( "jsConstructor" );
+        final String jsConstructor = element.getAttribute("jsConstructor");
         final String superclassName = element.getAttribute("extends");
         final String htmlClassname = element.getAttribute("htmlClass");
         boolean jsObjectFlag = false;
@@ -712,7 +712,7 @@ public final class JavaScriptConfiguration {
                         jsClassname = classConfig.getExtendedClass();
                         classConfig = configuration.getClassConfiguration(jsClassname);
                     }
-                    map.put( htmlClass, classConfig.getLinkedClass());
+                    map.put(htmlClass, classConfig.getLinkedClass());
                 }
                 catch (final ClassNotFoundException e) {
                     throw new NoClassDefFoundError(e.getMessage());

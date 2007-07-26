@@ -324,7 +324,7 @@ public final class HTMLParser {
             }
 
             try {
-                setFeature( "http://cyberneko.org/html/features/augmentations", true );
+                setFeature("http://cyberneko.org/html/features/augmentations", true);
                 setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature("http://cyberneko.org/html/features/balance-tags/ignore-outside-content",

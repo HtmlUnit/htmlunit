@@ -74,7 +74,7 @@ public class XmlPage implements Page {
      * @param enclosingWindow The window that holds the page.
      * @throws IOException If the page could not be created
      */
-    public XmlPage( final WebResponse webResponse, final WebWindow enclosingWindow ) throws IOException {
+    public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow) throws IOException {
         webResponse_ = webResponse;
         content_ = webResponse.getContentAsString();
         enclosingWindow_ = enclosingWindow;

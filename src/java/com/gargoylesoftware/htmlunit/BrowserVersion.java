@@ -134,7 +134,7 @@ public class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
-        "1.2", 6 );
+        "1.2", 6);
 
     /** Internet Explorer 6  */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
@@ -158,7 +158,7 @@ public class BrowserVersion implements Serializable {
      * @param javaScriptVersion The version of JavaScript
      * @param browserVersionNumeric The floating number version of the browser
      */
-    public BrowserVersion( final String applicationName, final String applicationVersion,
+    public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric) {
 
         applicationName_ = applicationName;
@@ -181,7 +181,7 @@ public class BrowserVersion implements Serializable {
      * Sets the default browser version that is used whenever a specific version isn't specified.
      * @param newBrowserVersion The new default browser version.
      */
-    public static void setDefault( final BrowserVersion newBrowserVersion ) {
+    public static void setDefault(final BrowserVersion newBrowserVersion) {
         Assert.notNull("newBrowserVersion", newBrowserVersion);
         DefaultBrowserVersion_ = newBrowserVersion;
     }
@@ -192,7 +192,7 @@ public class BrowserVersion implements Serializable {
      * @return Whether or not this version is a version of IE.
      */
     public final boolean isIE() {
-        return INTERNET_EXPLORER.equals( getApplicationName() );
+        return INTERNET_EXPLORER.equals(getApplicationName());
     }
 
     /**
@@ -201,7 +201,7 @@ public class BrowserVersion implements Serializable {
      * @return Whether or not this version is a version of a Netscape browser.
      */
     public final boolean isNetscape() {
-        return NETSCAPE.equals( getApplicationName() );
+        return NETSCAPE.equals(getApplicationName());
     }
 
     /**

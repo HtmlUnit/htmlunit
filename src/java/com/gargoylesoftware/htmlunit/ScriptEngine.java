@@ -56,7 +56,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class ScriptEngine {
 
-    private static final Log ScriptEngineLog_ = LogFactory.getLog( ScriptEngine.class );
+    private static final Log ScriptEngineLog_ = LogFactory.getLog(ScriptEngine.class);
 
     private final WebClient webClient_;
 
@@ -72,7 +72,7 @@ public abstract class ScriptEngine {
      * Create an instance for the specified web client
      * @param webClient The web client.
      */
-    protected ScriptEngine( final WebClient webClient ) {
+    protected ScriptEngine(final WebClient webClient) {
         Assert.notNull("webClient", webClient);
         webClient_ = webClient;
     }
@@ -100,7 +100,7 @@ public abstract class ScriptEngine {
      * @return The result of executing the specified code
      */
     public Object execute(
-            final HtmlPage htmlPage, final String sourceCode, final String sourceName ) {
+            final HtmlPage htmlPage, final String sourceCode, final String sourceName) {
 
         return execute(htmlPage, sourceCode, sourceName, null);
     }
@@ -115,7 +115,7 @@ public abstract class ScriptEngine {
      * @return The result of executing the specified code
      */
     public abstract Object execute(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement );
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement);
 
     /**
      * Call a JavaScript function and return the result.
@@ -131,7 +131,7 @@ public abstract class ScriptEngine {
         final Object javaScriptFunction,
         final Object thisObject,
         final Object [] args,
-        final DomNode htmlElementScope );
+        final DomNode htmlElementScope);
 
     /**
      * Return the log object that is being used to log information about the script engine.
@@ -154,13 +154,13 @@ public abstract class ScriptEngine {
      * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
      */
     public String preProcess(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement ) {
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement) {
 
         String newSourceCode = sourceCode;
         final ScriptPreProcessor preProcessor = getWebClient().getScriptPreProcessor();
-        if ( preProcessor != null ) {
+        if (preProcessor != null) {
             newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
-            if ( newSourceCode == null ) {
+            if (newSourceCode == null) {
                 newSourceCode = "";
             }
         }

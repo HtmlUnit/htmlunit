@@ -66,6 +66,6 @@ public class TableCell extends HTMLElement {
     public Integer jsxGet_cellIndex() {
         final HtmlTableCell cell = (HtmlTableCell) getHtmlElementOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
-        return new Integer( row.getCells().indexOf( cell ) );
+        return new Integer(row.getCells().indexOf(cell));
     }
 }

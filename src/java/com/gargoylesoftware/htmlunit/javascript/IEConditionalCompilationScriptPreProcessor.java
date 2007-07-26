@@ -63,14 +63,14 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      */
     public String preProcess(final HtmlPage htmlPage, String sourceCode,
             final String sourceName, final HtmlElement htmlElement) {
-        final SortedSet textConstants = initTextConstants( sourceCode );
+        final SortedSet textConstants = initTextConstants(sourceCode);
         int index = -1;
-        while (( index = sourceCode.indexOf( "/*@cc_on", index + 1 ) ) != -1) {
+        while ((index = sourceCode.indexOf("/*@cc_on", index + 1)) != -1) {
             addTextConstant(textConstants, index, index + "/*@cc_on".length(), "");
         }
         index = -1;
-        while (( index = sourceCode.indexOf( "@*/", index + 1 ) ) != -1) {
-            addTextConstant(textConstants, index, index + "@*/".length(), "" );
+        while ((index = sourceCode.indexOf("@*/", index + 1)) != -1) {
+            addTextConstant(textConstants, index, index + "@*/".length(), "");
         }
         sourceCode = restoreTextConstants(sourceCode, textConstants);
         return sourceCode;
@@ -93,13 +93,13 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         
         private final String textToReplace_;
         
-        TextConstant( final int startIndex, final int endIndex, final String textToReplace ) {
+        TextConstant(final int startIndex, final int endIndex, final String textToReplace) {
             this.startIndex_ = startIndex;
             this.endIndex_ = endIndex;
             this.textToReplace_ = textToReplace;
         }
 
-        public int compareTo( final Object o) {
+        public int compareTo(final Object o) {
             return startIndex_ - ((TextConstant)o).startIndex_;
         }
     }
@@ -113,27 +113,27 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      * @param endIndex end index
      * @param textToReplace text to use
      */
-    private void addTextConstant( final Set textConstants, final int startIndex,
-            final int endIndex, final String textToReplace ) {
+    private void addTextConstant(final Set textConstants, final int startIndex,
+            final int endIndex, final String textToReplace) {
         for (final Iterator it = textConstants.iterator(); it.hasNext();) {
             final TextConstant c = (TextConstant)it.next();
             if (startIndex >= c.startIndex_ && startIndex < c.endIndex_) {
                 return;
             }
         }
-        textConstants.add( new TextConstant( startIndex, endIndex, textToReplace) );
+        textConstants.add(new TextConstant(startIndex, endIndex, textToReplace));
     }
 
     /**
      * Stores all text constants, i.g. everything inside '' and "",
      * so that they are not replaced by subsequent changes.
      */
-    private SortedSet initTextConstants( final String sourceCode ) {
+    private SortedSet initTextConstants(final String sourceCode) {
         final SortedSet textConstants = new TreeSet();
         char boundaryChar = 0;
         int lastStartIndex = -1;
         for (int index = 0; index < sourceCode.length(); index++) {
-            final char currentChar = sourceCode.charAt( index );
+            final char currentChar = sourceCode.charAt(index);
             if (currentChar == '\'' || currentChar == '"') {
                 if (boundaryChar == 0 && index < sourceCode.length() - 1) {
                     boundaryChar = currentChar;
@@ -141,21 +141,21 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
                 }
                 else {
                     boundaryChar = 0;
-                    textConstants.add( new TextConstant(
-                            lastStartIndex, index, sourceCode.substring( lastStartIndex, index ) ) );
+                    textConstants.add(new TextConstant(
+                            lastStartIndex, index, sourceCode.substring(lastStartIndex, index)));
                 }
             }
         }
         return textConstants;
     }
 
-    private String restoreTextConstants( String sourceCode, final SortedSet textConstants ) {
+    private String restoreTextConstants(String sourceCode, final SortedSet textConstants) {
         int variation = 0;
         for (final Iterator iterator = textConstants.iterator(); iterator.hasNext();) {
             final TextConstant constant = (TextConstant)iterator.next();
-            sourceCode = sourceCode.substring( 0, constant.startIndex_ + variation )
+            sourceCode = sourceCode.substring(0, constant.startIndex_ + variation)
                 + constant.textToReplace_
-                + sourceCode.substring( constant.endIndex_ + variation );
+                + sourceCode.substring(constant.endIndex_ + variation);
                         
             variation += constant.textToReplace_.length() - (constant.endIndex_ - constant.startIndex_);
         }

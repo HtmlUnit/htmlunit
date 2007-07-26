@@ -61,8 +61,8 @@ public class HtmlElementTest extends WebTestCase {
      * Creates an instance.
      * @param name The name of the test.
      */
-    public HtmlElementTest( final String name ) {
-        super( name );
+    public HtmlElementTest(final String name) {
+        super(name);
     }
 
     /**
@@ -149,10 +149,10 @@ public class HtmlElementTest extends WebTestCase {
     /**
      */
     public void testConstants() {
-        assertEquals( "", HtmlElement.ATTRIBUTE_NOT_DEFINED );
-        assertEquals( "", HtmlElement.ATTRIBUTE_VALUE_EMPTY );
-        assertTrue( "Not the same object",
-            HtmlElement.ATTRIBUTE_NOT_DEFINED != HtmlElement.ATTRIBUTE_VALUE_EMPTY );
+        assertEquals("", HtmlElement.ATTRIBUTE_NOT_DEFINED);
+        assertEquals("", HtmlElement.ATTRIBUTE_VALUE_EMPTY);
+        assertTrue("Not the same object",
+            HtmlElement.ATTRIBUTE_NOT_DEFINED != HtmlElement.ATTRIBUTE_VALUE_EMPTY);
     }
 
     /**
@@ -229,17 +229,17 @@ public class HtmlElementTest extends WebTestCase {
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
         private final List collectedValues_ = new ArrayList();
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add( "attributeAdded: " + event.getHtmlElement().getTagName() + ',' +
-                    event.getName() + ',' + event.getValue() );
+            collectedValues_.add("attributeAdded: " + event.getHtmlElement().getTagName() + ',' +
+                    event.getName() + ',' + event.getValue());
         }
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add( "attributeRemoved: " + event.getHtmlElement().getTagName() + ',' +
-                    event.getName() + ',' + event.getValue() );
+            collectedValues_.add("attributeRemoved: " + event.getHtmlElement().getTagName() + ',' +
+                    event.getName() + ',' + event.getValue());
         }
     
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add( "attributeReplaced: " + event.getHtmlElement().getTagName() + ',' +
-                    event.getName() + ',' + event.getValue() );
+            collectedValues_.add("attributeReplaced: " + event.getHtmlElement().getTagName() + ',' +
+                    event.getName() + ',' + event.getValue());
         }
         List getCollectedValues() {
             return collectedValues_;

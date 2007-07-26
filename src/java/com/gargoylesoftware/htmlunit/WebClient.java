@@ -177,14 +177,14 @@ public class WebClient implements Serializable {
      * {@link BrowserVersion#getDefault()}.
      */
     public WebClient() {
-        this( BrowserVersion.getDefault() );
+        this(BrowserVersion.getDefault());
     }
 
     /**
      * Creates a web client instance using the specified {@link BrowserVersion}.
      * @param browserVersion The browser version to simulate.
      */
-    public WebClient( final BrowserVersion browserVersion ) {
+    public WebClient(final BrowserVersion browserVersion) {
         Assert.notNull("browserVersion", browserVersion);
 
         homePage_ = "http://www.gargoylesoftware.com/";
@@ -193,7 +193,7 @@ public class WebClient implements Serializable {
         proxyPort_ = 0;
         proxyBypassHosts_ = new HashMap();
         try {
-            scriptEngine_ = createJavaScriptEngineIfPossible( this );
+            scriptEngine_ = createJavaScriptEngineIfPossible(this);
         }
         catch (final NoClassDefFoundError e) {
             scriptEngine_ = null;
@@ -208,9 +208,9 @@ public class WebClient implements Serializable {
      * @param proxyHost The server that will act as proxy
      * @param proxyPort The port to use on the proxy server
      */
-    public WebClient( final BrowserVersion browserVersion, final String proxyHost, final int proxyPort ) {
+    public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
         Assert.notNull("browserVersion", browserVersion);
-        Assert.notNull( "proxyHost", proxyHost );
+        Assert.notNull("proxyHost", proxyHost);
 
         homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
@@ -218,7 +218,7 @@ public class WebClient implements Serializable {
         proxyPort_ = proxyPort;
         proxyBypassHosts_ = new HashMap();
         try {
-            scriptEngine_ = createJavaScriptEngineIfPossible( this );
+            scriptEngine_ = createJavaScriptEngineIfPossible(this);
         }
         catch (final NoClassDefFoundError e) {
             scriptEngine_ = null;
@@ -233,10 +233,10 @@ public class WebClient implements Serializable {
      * @param webClient The webclient that we are creating the script engine for.
      * @return A javascript engine or null if one could not be created.
      */
-    private static JavaScriptEngine createJavaScriptEngineIfPossible( final WebClient webClient ) {
+    private static JavaScriptEngine createJavaScriptEngineIfPossible(final WebClient webClient) {
         try {
-            Class.forName( "org.mozilla.javascript.Context" );
-            return new JavaScriptEngine( webClient );
+            Class.forName("org.mozilla.javascript.Context");
+            return new JavaScriptEngine(webClient);
         }
         catch (final ClassNotFoundException e) {
             return null;
@@ -254,7 +254,7 @@ public class WebClient implements Serializable {
      */
     public synchronized WebConnection getWebConnection() {
         if (webConnection_ == null) {
-            webConnection_ = new HttpWebConnection( this );
+            webConnection_ = new HttpWebConnection(this);
         }
         return webConnection_;
     }
@@ -267,8 +267,8 @@ public class WebClient implements Serializable {
      *
      * @param webConnection The new web connection
      */
-    public void setWebConnection( final WebConnection webConnection ) {
-        Assert.notNull( "webConnection", webConnection );
+    public void setWebConnection(final WebConnection webConnection) {
+        Assert.notNull("webConnection", webConnection);
         webConnection_ = webConnection;
     }
 
@@ -318,7 +318,7 @@ public class WebClient implements Serializable {
      *
      * @see WebRequestSettings
      */
-    public Page getPage( final WebWindow webWindow, final WebRequestSettings parameters )
+    public Page getPage(final WebWindow webWindow, final WebRequestSettings parameters)
         throws IOException, FailingHttpStatusCodeException {
 
         getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
@@ -334,12 +334,12 @@ public class WebClient implements Serializable {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
 
-        final boolean wasResponseSuccessful = ( statusCode >= 200 && statusCode < 300 );
+        final boolean wasResponseSuccessful = (statusCode >= 200 && statusCode < 300);
 
         if (printContentOnFailingStatusCode_ && !wasResponseSuccessful) {
-            getLog().info( "statusCode=[" + statusCode
-                + "] contentType=[" + contentType + "]" );
-            getLog().info( webResponse.getContentAsString() );
+            getLog().info("statusCode=[" + statusCode
+                + "] contentType=[" + contentType + "]");
+            getLog().info(webResponse.getContentAsString());
         }
 
         loadWebResponseInto(webResponse, webWindow);
@@ -428,7 +428,7 @@ public class WebClient implements Serializable {
      * @return The newly created page.
      */
     public Page loadWebResponseInto(
-            final WebResponse webResponse, final WebWindow webWindow )
+            final WebResponse webResponse, final WebWindow webWindow)
         throws
             IOException, FailingHttpStatusCodeException {
 
@@ -441,7 +441,7 @@ public class WebClient implements Serializable {
             oldPage.cleanUp();
         }
 
-        final Page newPage = pageCreator_.createPage( webResponse, webWindow );
+        final Page newPage = pageCreator_.createPage(webResponse, webWindow);
 
         synchronized (firstWindowStack_) {
             if (!firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
@@ -455,7 +455,7 @@ public class WebClient implements Serializable {
             newPage.initialize();
         }
 
-        fireWindowContentChanged( new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage) );
+        fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
         return newPage;
     }
 
@@ -466,7 +466,7 @@ public class WebClient implements Serializable {
      *
      * @param enabled True to enable this feature
      */
-    public void setPrintContentOnFailingStatusCode( final boolean enabled ) {
+    public void setPrintContentOnFailingStatusCode(final boolean enabled) {
         printContentOnFailingStatusCode_ = enabled;
     }
 
@@ -488,7 +488,7 @@ public class WebClient implements Serializable {
      *
      * @param enabled True to enable this feature
      */
-    public void setThrowExceptionOnFailingStatusCode( final boolean enabled ) {
+    public void setThrowExceptionOnFailingStatusCode(final boolean enabled) {
         throwExceptionOnFailingStatusCode_ = enabled;
     }
 
@@ -507,8 +507,8 @@ public class WebClient implements Serializable {
      * @param name The name of the header
      * @param value The value of the header
      */
-    public void addRequestHeader( final String name, final String value ) {
-        requestHeaders_.put( name, value );
+    public void addRequestHeader(final String name, final String value) {
+        requestHeaders_.put(name, value);
     }
 
     /**
@@ -517,8 +517,8 @@ public class WebClient implements Serializable {
      * @param name Name of the header
      * @see #addRequestHeader
      */
-    public void removeRequestHeader( final String name ) {
-        requestHeaders_.remove( name );
+    public void removeRequestHeader(final String name) {
+        requestHeaders_.remove(name);
     }
 
     /**
@@ -528,8 +528,8 @@ public class WebClient implements Serializable {
      * or Digest authentication.
      * @param credentialsProvider The new credentials provider to use to authenticate.
      */
-    public void setCredentialsProvider( final CredentialsProvider credentialsProvider ) {
-        Assert.notNull( "credentialsProvider", credentialsProvider );
+    public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
+        Assert.notNull("credentialsProvider", credentialsProvider);
         credentialsProvider_ = credentialsProvider;
     }
 
@@ -553,15 +553,15 @@ public class WebClient implements Serializable {
      *
      * @param message The failure message
      */
-    public void assertionFailed( final String message ) {
+    public void assertionFailed(final String message) {
         try {
             final Class clazz = junit.framework.AssertionFailedError.class;
-            final Constructor constructor = clazz.getConstructor( new Class[]{String.class} );
-            final Error error = ( Error )constructor.newInstance( new Object[]{message} );
+            final Constructor constructor = clazz.getConstructor(new Class[]{String.class});
+            final Error error = (Error )constructor.newInstance(new Object[]{message});
             throw error;
         }
         catch (final Exception e) {
-            throw new IllegalStateException( message );
+            throw new IllegalStateException(message);
         }
     }
 
@@ -579,7 +579,7 @@ public class WebClient implements Serializable {
      *
      * @param engine  The new script engine to use.
      */
-    public void setScriptEngine( final ScriptEngine engine ) {
+    public void setScriptEngine(final ScriptEngine engine) {
         scriptEngine_ = engine;
     }
 
@@ -588,7 +588,7 @@ public class WebClient implements Serializable {
      *
      * @param isEnabled true to enable javascript support.
      */
-    public void setJavaScriptEnabled( final boolean isEnabled ) {
+    public void setJavaScriptEnabled(final boolean isEnabled) {
         javaScriptEnabled_ = isEnabled;
     }
 
@@ -606,7 +606,7 @@ public class WebClient implements Serializable {
      *
      * @param isEnabled true to enable cookies support.
      */
-    public void setCookiesEnabled( final boolean isEnabled ) {
+    public void setCookiesEnabled(final boolean isEnabled) {
         cookiesEnabled_ = isEnabled;
     }
     
@@ -641,8 +641,8 @@ public class WebClient implements Serializable {
      * bypass the configured proxy.
      * @see Pattern
      */
-    public void addHostsToProxyBypass( final String pattern ) {
-        proxyBypassHosts_.put( pattern, Pattern.compile( pattern ) );
+    public void addHostsToProxyBypass(final String pattern) {
+        proxyBypassHosts_.put(pattern, Pattern.compile(pattern));
     }
 
     /**
@@ -650,8 +650,8 @@ public class WebClient implements Serializable {
      * @param pattern The previously added regular expression pattern.
      * @see Pattern
      */
-    public void removeHostsFromProxyBypass( final String pattern ) {
-        proxyBypassHosts_.remove( pattern );
+    public void removeHostsFromProxyBypass(final String pattern) {
+        proxyBypassHosts_.remove(pattern);
     }
 
     /**
@@ -661,11 +661,11 @@ public class WebClient implements Serializable {
      * @return <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
      * configured proxy, <tt>false</tt> otherwise.
      */
-    private boolean shouldBypassProxy( final String hostname ) {
+    private boolean shouldBypassProxy(final String hostname) {
         boolean bypass = false;
         for (final Iterator i = proxyBypassHosts_.values().iterator(); i.hasNext();) {
             final Pattern p = (Pattern) i.next();
-            if (p.matcher( hostname ).find()) {
+            if (p.matcher(hostname).find()) {
                 bypass = true;
                 break;
             }
@@ -677,7 +677,7 @@ public class WebClient implements Serializable {
      * Set the alert handler for this webclient.
      * @param alertHandler The new alerthandler or null if none is specified.
      */
-    public void setAlertHandler( final AlertHandler alertHandler ) {
+    public void setAlertHandler(final AlertHandler alertHandler) {
         alertHandler_ = alertHandler;
     }
 
@@ -693,7 +693,7 @@ public class WebClient implements Serializable {
      * Set the handler that will be executed when the javascript method Window.confirm() is called.
      * @param handler The new handler or null if no handler is to be used.
      */
-    public void setConfirmHandler( final ConfirmHandler handler ) {
+    public void setConfirmHandler(final ConfirmHandler handler) {
         confirmHandler_ = handler;
     }
 
@@ -709,7 +709,7 @@ public class WebClient implements Serializable {
      * Set the handler that will be executed when the javascript method Window.prompt() is called.
      * @param handler The new handler or null if no handler is to be used.
      */
-    public void setPromptHandler( final PromptHandler handler ) {
+    public void setPromptHandler(final PromptHandler handler) {
         promptHandler_ = handler;
     }
 
@@ -725,7 +725,7 @@ public class WebClient implements Serializable {
      * Set the status handler for this webclient.
      * @param statusHandler The new alerthandler or null if none is specified.
      */
-    public void setStatusHandler( final StatusHandler statusHandler ) {
+    public void setStatusHandler(final StatusHandler statusHandler) {
         statusHandler_ = statusHandler;
     }
 
@@ -759,7 +759,7 @@ public class WebClient implements Serializable {
      * getPage() is called without specifying a window.
      * @param window The new window.
      */
-    public void setCurrentWindow( final WebWindow window ) {
+    public void setCurrentWindow(final WebWindow window) {
         Assert.notNull("window", window);
         currentWindow_ = window;
     }
@@ -789,7 +789,7 @@ public class WebClient implements Serializable {
      * client will be sent to the specified listener.
      * @param listener A listener.
      */
-    public void addWebWindowListener( final WebWindowListener listener ) {
+    public void addWebWindowListener(final WebWindowListener listener) {
         Assert.notNull("listener", listener);
         webWindowListeners_.add(listener);
     }
@@ -798,12 +798,12 @@ public class WebClient implements Serializable {
      * Remove a listener for WebWindowEvent's.
      * @param listener A listener.
      */
-    public void removeWebWindowListener( final WebWindowListener listener ) {
+    public void removeWebWindowListener(final WebWindowListener listener) {
         Assert.notNull("listener", listener);
         webWindowListeners_.remove(listener);
     }
 
-    private void fireWindowContentChanged( final WebWindowEvent event ) {
+    private void fireWindowContentChanged(final WebWindowEvent event) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while (iterator.hasNext()) {
             final WebWindowListener listener = (WebWindowListener)iterator.next();
@@ -811,7 +811,7 @@ public class WebClient implements Serializable {
         }
     }
 
-    private void fireWindowOpened( final WebWindowEvent event ) {
+    private void fireWindowOpened(final WebWindowEvent event) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while (iterator.hasNext()) {
             final WebWindowListener listener = (WebWindowListener)iterator.next();
@@ -819,7 +819,7 @@ public class WebClient implements Serializable {
         }
     }
 
-    private void fireWindowClosed( final WebWindowEvent event ) {
+    private void fireWindowClosed(final WebWindowEvent event) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while (iterator.hasNext()) {
             final WebWindowListener listener = (WebWindowListener)iterator.next();
@@ -835,9 +835,9 @@ public class WebClient implements Serializable {
      * @param windowName The name of the new window
      * @return The new window.
      */
-    public WebWindow openWindow( final URL url, final String windowName ) {
+    public WebWindow openWindow(final URL url, final String windowName) {
         Assert.notNull("windowName", windowName);
-        return openWindow( url, windowName, getCurrentWindow() );
+        return openWindow(url, windowName, getCurrentWindow());
     }
 
     /**
@@ -849,13 +849,13 @@ public class WebClient implements Serializable {
      * @param opener The web window that is calling openWindow
      * @return The new window.
      */
-    public WebWindow openWindow( final URL url, final String windowName, final WebWindow opener ) {
-        final WebWindow window = openTargetWindow( opener, windowName, "_blank" );
+    public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
+        final WebWindow window = openTargetWindow(opener, windowName, "_blank");
         if (url != null) {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
                 final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
-                if (!getBrowserVersion().isIE() ) {
+                if (!getBrowserVersion().isIE()) {
                     settings.addAdditionalHeader("Referer", openerPage.getWebResponse().getUrl().toExternalForm());
                 }
                 getPage(window, settings);
@@ -920,7 +920,7 @@ public class WebClient implements Serializable {
 
         if (webWindow == null) {
             webWindow = new TopLevelWindow(windowToOpen, this);
-            fireWindowOpened( new WebWindowEvent(webWindow, WebWindowEvent.OPEN, null, null) );
+            fireWindowOpened(new WebWindowEvent(webWindow, WebWindowEvent.OPEN, null, null));
         }
 
         if (webWindow instanceof TopLevelWindow && webWindow != opener.getTopWindow()) {
@@ -935,7 +935,7 @@ public class WebClient implements Serializable {
      * a redirect status code from the server.
      * @param enabled true to enable automatic redirection.
      */
-    public void setRedirectEnabled( final boolean enabled ) {
+    public void setRedirectEnabled(final boolean enabled) {
         isRedirectEnabled_ = enabled;
     }
 
@@ -954,7 +954,7 @@ public class WebClient implements Serializable {
      *
      * @param pageCreator The new page creator
      */
-    public void setPageCreator( final PageCreator pageCreator ) {
+    public void setPageCreator(final PageCreator pageCreator) {
         Assert.notNull("pageCreator", pageCreator);
         pageCreator_ = pageCreator;
     }
@@ -975,7 +975,7 @@ public class WebClient implements Serializable {
      * @return The {@link WebWindow} with the specified name
      * @throws WebWindowNotFoundException If the {@link WebWindow} can't be found.
      */
-    public WebWindow getWebWindowByName( final String name ) throws WebWindowNotFoundException {
+    public WebWindow getWebWindowByName(final String name) throws WebWindowNotFoundException {
         Assert.notNull("name", name);
 
         final Iterator iterator = webWindows_.iterator();
@@ -995,7 +995,7 @@ public class WebClient implements Serializable {
      * Initialize a new web window for JavaScript.
      * @param webWindow The new WebWindow
      */
-    public void initialize( final WebWindow webWindow ) {
+    public void initialize(final WebWindow webWindow) {
         Assert.notNull("webWindow", webWindow);
         if (scriptEngine_ != null) {
             scriptEngine_.initialize(webWindow);
@@ -1008,7 +1008,7 @@ public class WebClient implements Serializable {
      * Initialize a new page for JavaScript.
      * @param newPage The new page.
      */
-    public void initialize( final Page newPage ) {
+    public void initialize(final Page newPage) {
         Assert.notNull("newPage", newPage);
         if (scriptEngine_ != null) {
             ((Window) newPage.getEnclosingWindow().getScriptObject()).initialize(newPage);
@@ -1021,7 +1021,7 @@ public class WebClient implements Serializable {
      * Initialize a new empty web window for JavaScript.
      * @param webWindow The new WebWindow
      */
-    public void initializeEmptyWindow( final WebWindow webWindow ) {
+    public void initializeEmptyWindow(final WebWindow webWindow) {
         Assert.notNull("webWindow", webWindow);
         if (scriptEngine_ != null) {
             initialize(webWindow);
@@ -1035,7 +1035,7 @@ public class WebClient implements Serializable {
      * Add a new web window to the list of available windows.
      * @param webWindow The new WebWindow
      */
-    public void registerWebWindow( final WebWindow webWindow ) {
+    public void registerWebWindow(final WebWindow webWindow) {
         Assert.notNull("webWindow", webWindow);
         webWindows_.add(webWindow);
     }
@@ -1046,7 +1046,7 @@ public class WebClient implements Serializable {
      * Remove a web window from the list of available windows.
      * @param webWindow The WebWindow to remove
      */
-    public void deregisterWebWindow( final WebWindow webWindow ) {
+    public void deregisterWebWindow(final WebWindow webWindow) {
         Assert.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
 
@@ -1070,7 +1070,7 @@ public class WebClient implements Serializable {
         return LogFactory.getLog(getClass());
     }
 
-    private static URL makeUrl( final String urlString ) throws MalformedURLException {
+    private static URL makeUrl(final String urlString) throws MalformedURLException {
         Assert.notNull("urlString", urlString);
 
         if (TextUtil.startsWithIgnoreCase(urlString, "javascript:")) {
@@ -1096,7 +1096,7 @@ public class WebClient implements Serializable {
      * @return See above
      * @throws MalformedURLException If an error occurred when creating a URL object
      */
-    public static URL expandUrl( final URL baseUrl, final String relativeUrl )
+    public static URL expandUrl(final URL baseUrl, final String relativeUrl)
         throws MalformedURLException {
 
         if (StringUtils.isEmpty(relativeUrl)) {
@@ -1115,7 +1115,7 @@ public class WebClient implements Serializable {
                 }
             }
             if (isProtocolSpecified) {
-                return makeUrl( parseUrl);
+                return makeUrl(parseUrl);
             }
         }
 
@@ -1168,7 +1168,7 @@ public class WebClient implements Serializable {
         final String pathToTokenize = stringToTokenize;
         final StringTokenizer tokenizer = new StringTokenizer(pathToTokenize, "/");
         while (tokenizer.hasMoreTokens()) {
-            tokens.add( tokenizer.nextToken() );
+            tokens.add(tokenizer.nextToken());
         }
 
         for (int i = 0; i < tokens.size(); i++) {
@@ -1185,13 +1185,13 @@ public class WebClient implements Serializable {
         }
 
         final StringBuffer buffer = new StringBuffer();
-        buffer.append( baseUrl.getProtocol() );
-        buffer.append( "://" );
-        buffer.append( baseUrl.getHost() );
+        buffer.append(baseUrl.getProtocol());
+        buffer.append("://");
+        buffer.append(baseUrl.getHost());
         final int port = baseUrl.getPort();
         if (port != -1) {
-            buffer.append( ":" );
-            buffer.append( port );
+            buffer.append(":");
+            buffer.append(port);
         }
 
         final Iterator iterator = tokens.iterator();
@@ -1214,7 +1214,7 @@ public class WebClient implements Serializable {
             buffer.append("#").append(reference);
         }
         final String newUrlString = buffer.toString();
-        return makeUrl( newUrlString );
+        return makeUrl(newUrlString);
     }
 
     private WebResponse makeWebResponseForAboutUrl(final URL url) {
@@ -1315,8 +1315,8 @@ public class WebClient implements Serializable {
         return contentType;
     }
 
-    private WebResponse makeWebResponseForJavaScriptUrl( final WebWindow webWindow, final URL url,
-            final String charset ) {
+    private WebResponse makeWebResponseForJavaScriptUrl(final WebWindow webWindow, final URL url,
+            final String charset) {
         if (!(webWindow instanceof FrameWindow)) {
             throw new IllegalArgumentException(
                 "javascript urls can only be used to load content into frames and iframes");
@@ -1380,8 +1380,8 @@ public class WebClient implements Serializable {
         if (webRequestSettings.getProxyHost() == null) {
             // ...unless the host needs to bypass the configured client proxy!
             if (!shouldBypassProxy(webRequestSettings.getURL().getHost())) {
-                webRequestSettings.setProxyHost( proxyHost_ );
-                webRequestSettings.setProxyPort( proxyPort_ );
+                webRequestSettings.setProxyHost(proxyHost_);
+                webRequestSettings.setProxyPort(proxyPort_);
             }
         }
 
@@ -1401,7 +1401,7 @@ public class WebClient implements Serializable {
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
-                newUrl = expandUrl( fixedUrl, locationString);
+                newUrl = expandUrl(fixedUrl, locationString);
             }
             catch (final MalformedURLException e) {
                 getIncorrectnessListener().notify("Got a redirect status code [" + statusCode + " "
@@ -1415,7 +1415,7 @@ public class WebClient implements Serializable {
             getLog().debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
 
             if (webRequestSettings.getSubmitMethod().equals(SubmitMethod.GET)
-                    && webResponse.getUrl().toExternalForm().equals(locationString) ) {
+                    && webResponse.getUrl().toExternalForm().equals(locationString)) {
 
                 if (nbAllowedRedirections == 0) {
                     getLog().warn("Max redirections allowed to the same location reached for ["
@@ -1428,7 +1428,7 @@ public class WebClient implements Serializable {
                 }
             }
             else if ((statusCode == 301 || statusCode == 307)
-                && method.equals(SubmitMethod.GET) ) {
+                && method.equals(SubmitMethod.GET)) {
 
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
@@ -1513,7 +1513,7 @@ public class WebClient implements Serializable {
      * @deprecated Use {@link HtmlPage#moveFocusToElement} with <code>null</code> as parameter
      * on the desired page instead
      */
-    public boolean moveFocusFromElement( final FocusableElement oldElement ) {
+    public boolean moveFocusFromElement(final FocusableElement oldElement) {
         if (oldElement != null && elementWithFocus_ == oldElement) {
             final HtmlPage page = oldElement.getPage();
             page.moveFocusToElement(null);
@@ -1576,7 +1576,7 @@ public class WebClient implements Serializable {
      * to the documentation for {@link RefreshHandler} for more details.
      * @param handler The new handler
      */
-    public void setRefreshHandler( final RefreshHandler handler ) {
+    public void setRefreshHandler(final RefreshHandler handler) {
         if (handler == null) {
             refreshHandler_ = new ImmediateRefreshHandler();
         }
@@ -1597,7 +1597,7 @@ public class WebClient implements Serializable {
      * Set the script pre processor for this webclient.
      * @param scriptPreProcessor The new preprocessor or null if none is specified
      */
-    public void setScriptPreProcessor( final ScriptPreProcessor scriptPreProcessor ) {
+    public void setScriptPreProcessor(final ScriptPreProcessor scriptPreProcessor) {
         scriptPreProcessor_ = scriptPreProcessor;
     }
 
@@ -1616,7 +1616,7 @@ public class WebClient implements Serializable {
      * name to a java class to emulate the active X object.
      * @param activeXObjectMap The new preprocessor or null if none is specified
      */
-    public void setActiveXObjectMap( final Map activeXObjectMap ) {
+    public void setActiveXObjectMap(final Map activeXObjectMap) {
         activeXObjectMap_ = activeXObjectMap;
     }
 

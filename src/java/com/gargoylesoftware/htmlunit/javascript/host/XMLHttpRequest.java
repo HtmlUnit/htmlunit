@@ -120,7 +120,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on every state change.
      * @param stateChangeHandler The event handler that fires on every state change.
      */
-    public void jsxSet_onreadystatechange( final Function stateChangeHandler ) {
+    public void jsxSet_onreadystatechange(final Function stateChangeHandler) {
         stateChangeHandler_ = stateChangeHandler;
     }
 
@@ -130,7 +130,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param context The context within which the state change handler is to be invoked;
      *                if <tt>null</tt>, the current thread's context is used.
      */
-    private void setState( final int state, Context context ) {
+    private void setState(final int state, Context context) {
         state_ = state;
         if (stateChangeHandler_ != null) {
             if (context == null) {
@@ -181,7 +181,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webResponse_.getContentAsString();
         }
         else {
-            getLog().debug( "XMLHttpRequest.responseText was retrieved before the response was available." );
+            getLog().debug("XMLHttpRequest.responseText was retrieved before the response was available.");
             return "";
         }
     }
@@ -218,7 +218,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webResponse_.getStatusCode();
         }
         else {
-            getLog().error( "XMLHttpRequest.status was retrieved before the response was available." );
+            getLog().error("XMLHttpRequest.status was retrieved before the response was available.");
             return 0;
         }
     }
@@ -232,7 +232,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webResponse_.getStatusMessage();
         }
         else {
-            getLog().error( "XMLHttpRequest.statusText was retrieved before the response was available." );
+            getLog().error("XMLHttpRequest.statusText was retrieved before the response was available.");
             return null;
         }
     }
@@ -259,7 +259,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             return buffer.toString();
         }
         else {
-            getLog().error( "XMLHttpRequest.getAllResponseHeaders() was called before the response was available." );
+            getLog().error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
             return null;
         }
     }
@@ -269,12 +269,12 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param headerName The (case-insensitive) name of the header to retrieve.
      * @return The value of the specified HTTP header.
      */
-    public String jsxFunction_getResponseHeader( final String headerName ) {
+    public String jsxFunction_getResponseHeader(final String headerName) {
         if (webResponse_ != null) {
             return webResponse_.getResponseHeaderValue(headerName);
         }
         else {
-            getLog().error( "XMLHttpRequest.getResponseHeader() was called before the response was available." );
+            getLog().error("XMLHttpRequest.getResponseHeader() was called before the response was available.");
             return null;
         }
     }
@@ -287,8 +287,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param user If authentication is needed for the specified URL, the username to use to authenticate.
      * @param password If authentication is needed for the specified URL, the password to use to authenticate.
      */
-    public void jsxFunction_open( final String method, final String url, final boolean async,
-        final String user, final String password ) {
+    public void jsxFunction_open(final String method, final String url, final boolean async,
+        final String user, final String password) {
         // (URL + Method + User + Password) become a WebRequestSettings instance.
         
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
@@ -302,29 +302,29 @@ public class XMLHttpRequest extends SimpleScriptable {
             else {
                 submitMethod = SubmitMethod.GET;
             }
-            settings.setSubmitMethod( submitMethod );
+            settings.setSubmitMethod(submitMethod);
             if (user != null) {
                 final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
-                dcp.addCredentials( user, password );
-                settings.setCredentialsProvider( dcp );
+                dcp.addCredentials(user, password);
+                settings.setCredentialsProvider(dcp);
             }
             requestSettings_ = settings;
         }
         catch (final MalformedURLException e) {
-            getLog().error( "Unable to initialize XMLHttpRequest using malformed URL '" + url + "'." );
+            getLog().error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
             return;
         }
         // Async stays a boolean.
         async_ = async;
         // Change the state!
-        setState( STATE_LOADING, null );
+        setState(STATE_LOADING, null);
     }
 
     /**
      * Sends the specified content to the server in an HTTP request and receives the response.
      * @param content The body of the message being sent with the request.
      */
-    public void jsxFunction_send( final Object content ) {
+    public void jsxFunction_send(final Object content) {
         prepareRequest(content);
 
         final AjaxController ajaxController = getWindow().getWebWindow().getWebClient().getAjaxController();
@@ -384,7 +384,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
-            setState( STATE_LOADED, context );
+            setState(STATE_LOADED, context);
             final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
             if (overridenMimeType_ == null) {
                 webResponse_ = webResponse;
@@ -400,8 +400,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             setState(STATE_COMPLETED, context);
         }
         catch (final IOException e) {
-            setState( STATE_LOADING, context );
-            throw Context.reportRuntimeError( "Unable to send the XMLHttpRequest: " + e );
+            setState(STATE_LOADING, context);
+            throw Context.reportRuntimeError("Unable to send the XMLHttpRequest: " + e);
         }
     }
 
@@ -411,12 +411,12 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param name The name of the header being set.
      * @param value The value of the header being set.
      */
-    public void jsxFunction_setRequestHeader( final String name, final String value ) {
+    public void jsxFunction_setRequestHeader(final String name, final String value) {
         if (requestSettings_ != null) {
             requestSettings_.addAdditionalHeader(name, value);
         }
         else {
-            throw Context.reportRuntimeError( "The open() method must be called before setRequestHeader()." );
+            throw Context.reportRuntimeError("The open() method must be called before setRequestHeader().");
         }
     }
     

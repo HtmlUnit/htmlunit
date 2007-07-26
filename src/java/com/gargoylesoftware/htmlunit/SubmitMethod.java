@@ -54,16 +54,16 @@ public final class SubmitMethod implements Serializable {
     /**
      *  POST
      */
-    public static final SubmitMethod POST = new SubmitMethod( "post" );
+    public static final SubmitMethod POST = new SubmitMethod("post");
 
     /**
      *  GET
      */
-    public static final SubmitMethod GET = new SubmitMethod( "get" );
+    public static final SubmitMethod GET = new SubmitMethod("get");
 
     private final String name_;
 
-    private SubmitMethod( final String name ) {
+    private SubmitMethod(final String name) {
         name_ = name;
     }
 
@@ -82,7 +82,7 @@ public final class SubmitMethod implements Serializable {
      * @param name The name to search by
      * @return See above
      */
-    public static SubmitMethod getInstance( final String name ) {
+    public static SubmitMethod getInstance(final String name) {
         final String lowerCaseName = name.toLowerCase();
         final SubmitMethod allInstances[] = new SubmitMethod[]{POST, GET};
 
@@ -93,11 +93,11 @@ public final class SubmitMethod implements Serializable {
         }
 
         // Special case: empty string defaults to get
-        if (name.equals( "" )) {
+        if (name.equals("")) {
             return GET;
         }
 
-        throw new IllegalArgumentException( "No method found for [" + name + "]" );
+        throw new IllegalArgumentException("No method found for [" + name + "]");
     }
 
     /**

@@ -52,7 +52,7 @@ public class WebWindowNotFoundException extends RuntimeException {
      * Create an instance
      * @param name The name that was searched by.
      */
-    public WebWindowNotFoundException( final String name ) {
+    public WebWindowNotFoundException(final String name) {
         super("Searching for [" + name + "]");
         name_ = name;
     }

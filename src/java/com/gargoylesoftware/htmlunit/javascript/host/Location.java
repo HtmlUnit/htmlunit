@@ -79,14 +79,14 @@ public class Location extends SimpleScriptable {
      * Initializes the object.
      * @param window The window that this location belongs to.
      */
-    public void initialize( final Window window ) {
+    public void initialize(final Window window) {
         window_ = window;
     }
 
     /**
      * {@inheritDoc}
      */
-    public Object getDefaultValue( final Class hint ) {
+    public Object getDefaultValue(final Class hint) {
         if (hint == null || String.class.equals(hint)) {
             return jsxGet_href();
         }
@@ -115,7 +115,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/assign.asp">
      * MSDN Documentation</a>
      */
-    public void jsxFunction_assign( final String url ) throws IOException {
+    public void jsxFunction_assign(final String url) throws IOException {
         jsxSet_href(url);
     }
 
@@ -127,13 +127,13 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/reload.asp">
      * MSDN Documentation</a>
      */
-    public void jsxFunction_reload( final boolean force ) throws IOException {
+    public void jsxFunction_reload(final boolean force) throws IOException {
         final String url = jsxGet_href();
         if (UNKNOWN.equals(url)) {
             getLog().error("Unable to reload location: current URL is unknown.");
         }
         else {
-            jsxSet_href( url );
+            jsxSet_href(url);
         }
     }
 
@@ -229,8 +229,8 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_search( final String search ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewQuery( getUrl(), search ) );
+    public void jsxSet_search(final String search) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewQuery(getUrl(), search));
     }
 
     /**
@@ -256,8 +256,8 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_hash( final String hash ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewRef( getUrl(), hash ) );
+    public void jsxSet_hash(final String hash) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewRef(getUrl(), hash));
     }
 
     /**
@@ -277,8 +277,8 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hostname.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_hostname( final String hostname ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewHost( getUrl(), hostname ) );
+    public void jsxSet_hostname(final String hostname) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
     }
 
     /**
@@ -307,21 +307,21 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_host( final String host ) throws Exception {
+    public void jsxSet_host(final String host) throws Exception {
         final String hostname;
         final int port;
-        final int index = host.indexOf( ':' );
+        final int index = host.indexOf(':');
         if (index != -1) {
-            hostname = host.substring( 0, index );
-            port = Integer.parseInt( host.substring( index + 1 ) );
+            hostname = host.substring(0, index);
+            port = Integer.parseInt(host.substring(index + 1));
         }
         else {
             hostname = host;
             port = -1;
         }
-        final URL url1 = UrlUtils.getUrlWithNewHost( getUrl(), hostname );
-        final URL url2 = UrlUtils.getUrlWithNewPort( url1, port );
-        setUrl( url2 );
+        final URL url1 = UrlUtils.getUrlWithNewHost(getUrl(), hostname);
+        final URL url2 = UrlUtils.getUrlWithNewPort(url1, port);
+        setUrl(url2);
     }
 
     /**
@@ -341,8 +341,8 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_pathname( final String pathname ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewPath( getUrl(), pathname ) );
+    public void jsxSet_pathname(final String pathname) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
     }
 
     /**
@@ -368,8 +368,8 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_port( final String port ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewPort( getUrl(), Integer.parseInt( port ) ) );
+    public void jsxSet_port(final String port) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
     }
 
     /**
@@ -389,8 +389,8 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_protocol( final String protocol ) throws Exception {
-        setUrl( UrlUtils.getUrlWithNewProtocol( getUrl(), protocol ) );
+    public void jsxSet_protocol(final String protocol) throws Exception {
+        setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
     }
 
     /**
@@ -407,8 +407,8 @@ public class Location extends SimpleScriptable {
      * @param url This location's new URL.
      * @throws IOException If there is a problem loading the new location.
      */
-    private void setUrl( final URL url ) throws IOException {
-        window_.getWebWindow().getWebClient().getPage( window_.getWebWindow(), new WebRequestSettings( url ) );
+    private void setUrl(final URL url) throws IOException {
+        window_.getWebWindow().getWebClient().getPage(window_.getWebWindow(), new WebRequestSettings(url));
     }
 
 }

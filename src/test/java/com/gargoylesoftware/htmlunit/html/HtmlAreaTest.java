@@ -61,11 +61,11 @@ public class HtmlAreaTest extends WebTestCase {
      *
      * @param name Name of the test
      */
-    public HtmlAreaTest( final String name ) {
-        super( name );
+    public HtmlAreaTest(final String name) {
+        super(name);
     }
 
-    private WebClient createWebClient( final String onClick ) {
+    private WebClient createWebClient(final String onClick) {
         final String firstContent
             = "<html><head><title>first</title></head><body>"
             + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>"
@@ -79,12 +79,12 @@ public class HtmlAreaTest extends WebTestCase {
             = "<html><head><title>third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         return client;
     }
 
@@ -95,11 +95,11 @@ public class HtmlAreaTest extends WebTestCase {
 
         final WebClient client = createWebClient("");
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "third" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlArea area = (HtmlArea )page.getHtmlElementById("third");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage thirdPage = ( HtmlPage )area.click();
+        final HtmlPage thirdPage = (HtmlPage )area.click();
         assertEquals("third", thirdPage.getTitleText());
     }
 
@@ -110,13 +110,13 @@ public class HtmlAreaTest extends WebTestCase {
 
         final WebClient client = createWebClient("alert('foo');return false;");
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts));
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "second" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlArea area = (HtmlArea )page.getHtmlElementById("second");
 
-        final HtmlPage thirdPage = ( HtmlPage )area.click();
-        assertEquals( Collections.singletonList("foo"), collectedAlerts);
+        final HtmlPage thirdPage = (HtmlPage )area.click();
+        assertEquals(Collections.singletonList("foo"), collectedAlerts);
         assertEquals("first", thirdPage.getTitleText());
     }
 
@@ -127,13 +127,13 @@ public class HtmlAreaTest extends WebTestCase {
 
         final WebClient client = createWebClient("alert('foo');return true;");
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts));
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "second" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlArea area = (HtmlArea )page.getHtmlElementById("second");
 
-        final HtmlPage thirdPage = ( HtmlPage )area.click();
-        assertEquals( Collections.singletonList("foo"), collectedAlerts);
+        final HtmlPage thirdPage = (HtmlPage )area.click();
+        assertEquals(Collections.singletonList("foo"), collectedAlerts);
         assertEquals("second", thirdPage.getTitleText());
     }
 
@@ -149,14 +149,14 @@ public class HtmlAreaTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "a2" );
+        final HtmlArea area = (HtmlArea )page.getHtmlElementById("a2");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = ( HtmlPage )area.click();
+        final HtmlPage secondPage = (HtmlPage )area.click();
 
-        assertEquals( Collections.singletonList("clicked"), collectedAlerts );
-        assertSame( page, secondPage );
+        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertSame(page, secondPage);
     }
 
     /**
@@ -172,21 +172,21 @@ public class HtmlAreaTest extends WebTestCase {
         client.setJavaScriptEnabled(false);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setDefaultResponse( htmlContent );
-        client.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_GARGOYLE);
-        final HtmlArea area = ( HtmlArea )page.getHtmlElementById( "a2" );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_GARGOYLE);
+        final HtmlArea area = (HtmlArea )page.getHtmlElementById("a2");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = ( HtmlPage )area.click();
+        final HtmlPage secondPage = (HtmlPage )area.click();
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
-        assertSame( page, secondPage );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        assertSame(page, secondPage);
     }
 
     /**

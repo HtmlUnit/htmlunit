@@ -82,7 +82,7 @@ public class Image extends HTMLElement {
         src_ = src;
         final HtmlImage htmlImageElement = (HtmlImage) getHtmlElementOrNull();
         if (htmlImageElement != null) {
-            htmlImageElement.setAttributeValue( "src", src );
+            htmlImageElement.setAttributeValue("src", src);
         }
     }
     

@@ -59,8 +59,8 @@ public final class HtmlInputTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlInputTest( final String name ) {
-        super( name );
+    public HtmlInputTest(final String name) {
+        super(name);
     }
 
     /**
@@ -80,22 +80,22 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput)form.getByXPath(
-            "//input[@type='radio' and @name='foo' and @value='2']" ).get(0);
+            "//input[@type='radio' and @name='foo' and @value='2']").get(0);
 
-        final HtmlSubmitInput pushButton = ( HtmlSubmitInput )form.getInputByName( "button" );
+        final HtmlSubmitInput pushButton = (HtmlSubmitInput )form.getInputByName("button");
 
-        radioButton.setChecked( true );
+        radioButton.setChecked(true);
 
         // Test that only one value for the radio button is being passed back to the server
-        final HtmlPage secondPage = ( HtmlPage )pushButton.click();
+        final HtmlPage secondPage = (HtmlPage )pushButton.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
-        assertNotNull( secondPage );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertNotNull(secondPage);
     }
 
     /**
@@ -111,14 +111,14 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
-        final HtmlCheckBoxInput checkbox = ( HtmlCheckBoxInput )form.getInputByName( "foo" );
-        assertFalse( "Initial state", checkbox.isChecked() );
-        checkbox.setChecked( true );
-        assertTrue( "After setSelected(true)", checkbox.isChecked() );
-        checkbox.setChecked( false );
-        assertFalse( "After setSelected(false)", checkbox.isChecked() );
+        final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput )form.getInputByName("foo");
+        assertFalse("Initial state", checkbox.isChecked());
+        checkbox.setChecked(true);
+        assertTrue("After setSelected(true)", checkbox.isChecked());
+        checkbox.setChecked(false);
+        assertFalse("After setSelected(false)", checkbox.isChecked());
     }
 
     /**
@@ -134,13 +134,13 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final List radioButtons = form.getRadioButtonsByName("radio1");
-        assertEquals( 2, radioButtons.size() );
+        assertEquals(2, radioButtons.size());
 
-        assertFalse( ((HtmlRadioButtonInput)radioButtons.get(0)).isChecked() );
-        assertTrue( ((HtmlRadioButtonInput)radioButtons.get(1)).isChecked() );
+        assertFalse(((HtmlRadioButtonInput)radioButtons.get(0)).isChecked());
+        assertTrue(((HtmlRadioButtonInput)radioButtons.get(1)).isChecked());
     }
 
     /**
@@ -156,12 +156,12 @@ public final class HtmlInputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
         final HtmlTextInput input = (HtmlTextInput)form.getInputByName("text1");
 
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         input.setValueAttribute("foo");
-        assertEquals( Collections.singletonList("changed"), collectedAlerts );
+        assertEquals(Collections.singletonList("changed"), collectedAlerts);
     }
 
     /**
@@ -175,9 +175,9 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
         final HtmlCheckBoxInput input = (HtmlCheckBoxInput)form.getInputByName("checkbox1");
-        assertEquals( "on", input.getValueAttribute() );
+        assertEquals("on", input.getValueAttribute());
     }
 
     /**
@@ -196,10 +196,10 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput)form.getByXPath(
-                "//input[@type='radio' and @name='foo' and @value='2']" ).get(0);
+                "//input[@type='radio' and @name='foo' and @value='2']").get(0);
 
         assertFalse("Should not be checked before click", radioButton.isChecked());
         radioButton.click();
@@ -236,7 +236,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
-        assertEquals( Collections.EMPTY_LIST, collectedAlerts );
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
     /**
@@ -266,11 +266,11 @@ public final class HtmlInputTest extends WebTestCase {
             + "<script>\n"
             + "  function handler() {}"
             + "  function test() {\n"
-            + "    var elem = document.getElementById( 'myInput' );\n"
+            + "    var elem = document.getElementById('myInput');\n"
             + "    elem.onchange = handler;\n"
-            + "    alert( elem.onchange );\n"
+            + "    alert(elem.onchange);\n"
             + "    elem.onchange = null;\n"
-            + "    alert( elem.onchange );\n"
+            + "    alert(elem.onchange);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"

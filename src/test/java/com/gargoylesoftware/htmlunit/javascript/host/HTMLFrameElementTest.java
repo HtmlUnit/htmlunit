@@ -63,7 +63,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public HTMLFrameElementTest( final String name ) {
+    public HTMLFrameElementTest(final String name) {
         super(name);
     }
 
@@ -214,7 +214,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      */
     public void testFrameLoadedAfterParent() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String mainContent
             = "<html><head><title>first</title></head><body>"
@@ -229,7 +229,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</body></html>";
 
         webConnection.setResponse(URL_GARGOYLE, mainContent);
-        webConnection.setResponse(new URL(URL_GARGOYLE.toString() + "testFrame.html" ), frameContent);
+        webConnection.setResponse(new URL(URL_GARGOYLE.toString() + "testFrame.html"), frameContent);
 
         webClient.setWebConnection(webConnection);
         final List collectedAlerts = new ArrayList();
@@ -237,7 +237,7 @@ public class HTMLFrameElementTest extends WebTestCase {
 
         final String[] expectedAlerts = {"DIV"};
 
-        webClient.getPage( URL_GARGOYLE );
+        webClient.getPage(URL_GARGOYLE);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -292,11 +292,11 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "<script>\n"
             + "  function handler() {}"
             + "  function test() {\n"
-            + "    var iframe = document.getElementById( 'myFrame' );\n"
+            + "    var iframe = document.getElementById('myFrame');\n"
             + "    iframe.onload = handler;\n"
-            + "    alert( iframe.onload );\n"
+            + "    alert(iframe.onload);\n"
             + "    iframe.onload = null;\n"
-            + "    alert( iframe.onload );\n"
+            + "    alert(iframe.onload);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"

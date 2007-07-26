@@ -73,12 +73,12 @@ public final class WebWindowEvent extends EventObject {
             final WebWindow webWindow,
             final int type,
             final Page oldPage,
-            final Page newPage ) {
+            final Page newPage) {
         super(webWindow);
         oldPage_ = oldPage;
         newPage_ = newPage;
 
-        switch( type ) {
+        switch(type) {
             case OPEN:
             case CLOSE:
             case CHANGE:
@@ -97,7 +97,7 @@ public final class WebWindowEvent extends EventObject {
      * @param object The object to compare against.
      * @return true if the two objects are equal.
      */
-    public boolean equals( final Object object ) {
+    public boolean equals(final Object object) {
         if (getClass() == object.getClass()) {
             final WebWindowEvent event = (WebWindowEvent)object;
             return isEqual(getSource(), event.getSource())
@@ -140,7 +140,7 @@ public final class WebWindowEvent extends EventObject {
         return (WebWindow)getSource();
     }
 
-    private boolean isEqual( final Object object1, final Object object2 ) {
+    private boolean isEqual(final Object object1, final Object object2) {
         final boolean result;
 
         if (object1 == null && object2 == null) {
@@ -165,7 +165,7 @@ public final class WebWindowEvent extends EventObject {
         buffer.append("WebWindowEvent(source=[");
         buffer.append(getSource());
         buffer.append("] type=[");
-        switch( type_ ) {
+        switch(type_) {
             case OPEN:
                 buffer.append("OPEN");
                 break;

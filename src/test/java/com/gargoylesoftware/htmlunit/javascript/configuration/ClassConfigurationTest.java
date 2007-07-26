@@ -51,7 +51,7 @@ public class ClassConfigurationTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public ClassConfigurationTest( final String name ) {
+    public ClassConfigurationTest(final String name) {
         super(name);
     }
     

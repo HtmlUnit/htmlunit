@@ -110,7 +110,7 @@ public class HTMLElementTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, firstContent, collectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
         
     /**
@@ -338,8 +338,8 @@ public class HTMLElementTest extends WebTestCase {
             + "{"
             + "  var form1 = document.getElementById('form1');"
             + "  var elements = form1.getElementsByTagName('input');"
-            + "  alert(elements['one'].name );"
-            + "  alert(elements['two'].name );"
+            + "  alert(elements['one'].name);"
+            + "  alert(elements['two'].name);"
             + "  alert(elements['three'].name);"
             + "}"
             + "</script></head>"
@@ -721,18 +721,18 @@ public class HTMLElementTest extends WebTestCase {
                 + "function test()\n"
                 + "{\n"
                 + "  var oDiv = document.getElementById('middle');\n"
-                + "  oDiv.insertAdjacentElement('" + beforeEnd + "', makeElement( 3, 'before end' ) );\n"
-                + "  oDiv.insertAdjacentElement('" + afterEnd + "', makeElement( 4, 'after end' ) );\n"
-                + "  oDiv.insertAdjacentElement('" + beforeBegin + "', makeElement( 1, 'before begin' ) );\n"
-                + "  oDiv.insertAdjacentElement('" + afterBegin + "', makeElement( 2, 'after begin' ) );\n"
+                + "  oDiv.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before end' ));\n"
+                + "  oDiv.insertAdjacentElement('" + afterEnd + "', makeElement(4, 'after end' ));\n"
+                + "  oDiv.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before begin' ));\n"
+                + "  oDiv.insertAdjacentElement('" + afterBegin + "', makeElement(2, 'after begin' ));\n"
                 + "  var coll = document.getElementsByTagName('DIV');\n"
                 + "  for (var i=0; i<coll.length; i++) {\n"
                 + "    alert(coll[i].id);\n"
                 + "  }\n"
                 + "}\n"
-                + "function makeElement( id, value ) {\n"
-                + "  var div = document.createElement( 'div' );\n"
-                + "  div.appendChild( document.createTextNode( value ) );\n"
+                + "function makeElement(id, value ) {\n"
+                + "  var div = document.createElement('div');\n"
+                + "  div.appendChild(document.createTextNode(value ));\n"
                 + "  div.id = id;\n"
                 + "  return div;\n"
                 + "}\n"
@@ -833,11 +833,11 @@ public class HTMLElementTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(content1Url, content1);
         webConnection.setResponse(content2Url, content2);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         final HtmlPage page = (HtmlPage) client.getPage(content1Url);
         final String[] expectedAlerts = {
             "isHomePage = false",
@@ -887,12 +887,12 @@ public class HTMLElementTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(content1Url, content1);
         webConnection.setResponse(content2Url, "foo");
         webConnection.setResponse(content3Url, "foo2");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         client.getPage(content1Url);
 
         final String[] expectedAlerts = {"Refused", "foo"};
@@ -905,7 +905,7 @@ public class HTMLElementTest extends WebTestCase {
             }
             Thread.sleep(waitTime);
         }
-        fail( "Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts );
+        fail("Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts);
     }
 
    /**
@@ -1150,9 +1150,9 @@ public class HTMLElementTest extends WebTestCase {
 
         // finally try via the client
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, content);
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
         final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
         webClient.setAlertHandler(clientCollectedAlertsHandler);
         final HtmlPage clientPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -1396,8 +1396,8 @@ public class HTMLElementTest extends WebTestCase {
             + "<body>"
             + "<div id='divID'/>"
             + "<script language=\"javascript\">"
-            + "    alert( document.getElementById( 'htmlID' ).parentElement );"
-            + "    alert( document.getElementById( 'divID'  ).parentElement );"
+            + "    alert(document.getElementById('htmlID' ).parentElement);"
+            + "    alert(document.getElementById('divID'  ).parentElement);"
             + "</script>"
             + "</body>"
             + "</html>";
@@ -1428,7 +1428,7 @@ public class HTMLElementTest extends WebTestCase {
                 "<head>\n" +
                 "<script>\n" +
                 "  function test() {\n" +
-                "    alert( document.getElementById('myDiv').currentStyle.color );\n" +
+                "    alert(document.getElementById('myDiv').currentStyle.color);\n" +
                 "  }\n" +
                 "</script>\n" +
                 "</head>\n" +

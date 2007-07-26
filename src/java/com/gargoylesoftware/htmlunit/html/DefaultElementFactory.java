@@ -87,11 +87,11 @@ class DefaultElementFactory implements IElementFactory {
 
         final HtmlElement element;
         final String tagName;
-        if (qualifiedName.indexOf( ':' ) == -1) {
+        if (qualifiedName.indexOf(':') == -1) {
             tagName = qualifiedName;
         }
         else {
-            tagName = qualifiedName.substring( qualifiedName.indexOf( ':' ) + 1 ).toLowerCase();
+            tagName = qualifiedName.substring(qualifiedName.indexOf(':') + 1).toLowerCase();
         }
         if (tagName.equals(HtmlAddress.TAG_NAME)) {
             element = new HtmlAddress(namespaceURI, qualifiedName, page, attributeMap);
@@ -334,7 +334,7 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlUnorderedList(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
-            throw new IllegalStateException( "Can not find HtmlElement for " + qualifiedName );
+            throw new IllegalStateException("Can not find HtmlElement for " + qualifiedName);
         }
         return element;
     }

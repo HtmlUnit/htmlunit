@@ -58,8 +58,8 @@ public class WebResponseImplTest extends WebTestCase {
      *  Create an instance
      * @param name The name of the test
      */
-    public WebResponseImplTest( final String name ) {
-        super( name );
+    public WebResponseImplTest(final String name) {
+        super(name);
     }
 
     /**
@@ -67,12 +67,12 @@ public class WebResponseImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRecognizeBOM() throws Exception {
-        testRecognizeBOM( "UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf} );
-        testRecognizeBOM( "UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff} );
-        testRecognizeBOM( "UTF-16LE", new byte[] {(byte) 0xff, (byte) 0xfe} );
+        testRecognizeBOM("UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf});
+        testRecognizeBOM("UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff});
+        testRecognizeBOM("UTF-16LE", new byte[] {(byte) 0xff, (byte) 0xfe});
     }
 
-    private void testRecognizeBOM(final String encoding, final byte[] markerBytes ) throws Exception {
+    private void testRecognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
     
         final WebClient webClient = new WebClient();
 
@@ -87,10 +87,10 @@ public class WebResponseImplTest extends WebTestCase {
 
         webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");
         webConnection.setResponse(URL_FIRST, html);
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webClient.getPage(URL_FIRST);
 
@@ -111,14 +111,14 @@ public class WebResponseImplTest extends WebTestCase {
 
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
-        webConnection.setResponse(URL_FIRST, content.getBytes( "UTF-8" ),
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"),
                 200, "OK", "text/html", Collections.EMPTY_LIST);
-        client.setWebConnection( webConnection );
-        final WebRequestSettings settings = new WebRequestSettings( URL_FIRST );
-        settings.setCharset( "UTF-8" );
+        client.setWebConnection(webConnection);
+        final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
+        settings.setCharset("UTF-8");
         final HtmlPage page = (HtmlPage) client.getPage(settings);
-        assertEquals( title, page.getTitleText() );
+        assertEquals(title, page.getTitleText());
     }
 
 }

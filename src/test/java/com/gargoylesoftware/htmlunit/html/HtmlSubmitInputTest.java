@@ -62,8 +62,8 @@ public class HtmlSubmitInputTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlSubmitInputTest( final String name ) {
-        super( name );
+    public HtmlSubmitInputTest(final String name) {
+        super(name);
     }
 
     /**
@@ -80,7 +80,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
         
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlSubmitInput submitInput = (HtmlSubmitInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)submitInput.click();
@@ -88,7 +88,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         assertEquals(
             Collections.singletonList(new KeyValuePair("button", "foo")),
-            webConnection.getLastParameters() );
+            webConnection.getLastParameters());
     }
 
     /**
@@ -103,13 +103,13 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
         final HtmlSubmitInput submitInput = (HtmlSubmitInput)form.getInputByName("button");
 
         submitInput.click();
 
         final String[] expectedAlerts = {"foo","bar"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -127,13 +127,13 @@ public class HtmlSubmitInputTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlSubmitInput input = (HtmlSubmitInput)firstPage.getHtmlElementById("button1");
@@ -146,18 +146,18 @@ public class HtmlSubmitInputTest extends WebTestCase {
      */
     public void testDefaultValue() throws Exception {
         final String[] expectedAlertsIE = {"Submit Query"};
-        testDefaultValue( BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE );
+        testDefaultValue(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
         final String[] expectedAlertsFF = {""};
-        testDefaultValue( BrowserVersion.FIREFOX_2, expectedAlertsFF );
+        testDefaultValue(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
 
-    private void testDefaultValue( final BrowserVersion browserVersion, final String[] expectedAlerts )
+    private void testDefaultValue(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert( document.getElementById('myId').value );\n"
+            + "    alert(document.getElementById('myId').value);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -170,7 +170,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
 
         final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
         assertTrue(page.asText().indexOf("Submit Query") > -1);
         assertFalse(page.asXml().indexOf("Submit Query") > -1);
     }
@@ -183,7 +183,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert( document.getElementById('myId').value );\n"
+            + "    alert(document.getElementById('myId').value);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -197,7 +197,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
 
         final HtmlPage page = loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
         assertFalse(page.asText().indexOf("Submit Query") > -1);
         assertTrue(page.asXml().indexOf("value=\"\"") > -1);
     }
@@ -215,7 +215,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlSubmitInput input = (HtmlSubmitInput)page.getHtmlElementById( "myInput" );
+        final HtmlSubmitInput input = (HtmlSubmitInput)page.getHtmlElementById("myInput");
         input.click();
         
         assertEquals(expectedAlerts, collectedAlerts);

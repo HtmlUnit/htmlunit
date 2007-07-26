@@ -61,7 +61,7 @@ public class TextareaTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public TextareaTest( final String name ) {
+    public TextareaTest(final String name) {
         super(name);
     }
 
@@ -87,7 +87,7 @@ public class TextareaTest extends WebTestCase {
 
         final String[] expectedAlerts = {"1234", "PoohBear"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
     
     /**
@@ -157,11 +157,11 @@ public class TextareaTest extends WebTestCase {
             + "<body>\n"
             + "<textarea id='myTextArea'></textarea>\n"
             + "<script>\n"
-            + "    var textarea = document.getElementById( 'myTextArea' );\n"
+            + "    var textarea = document.getElementById('myTextArea');\n"
             + "    textarea.value = 'hello there';\n"
-            + "    alert( textarea.textLength );\n"
+            + "    alert(textarea.textLength);\n"
             + "    textarea.value = '';\n"
-            + "    alert( textarea.textLength );\n"
+            + "    alert(textarea.textLength);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
@@ -200,13 +200,13 @@ public class TextareaTest extends WebTestCase {
             + "<body>\n"
             + "<textarea id='myTextArea'></textarea>\n"
             + "<script>\n"
-            + "    var textarea = document.getElementById( 'myTextArea' );\n"
+            + "    var textarea = document.getElementById('myTextArea');\n"
             + "    textarea.value = 'Hello there';\n"
-            + "    alert( textarea.selectionStart + ',' + textarea.selectionEnd );\n"
+            + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
             + "    textarea.selectionStart = " + selectionStart + ";\n"
-            + "    alert( textarea.selectionStart + ',' + textarea.selectionEnd );\n"
+            + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
             + "    textarea.selectionEnd = " + selectionEnd + ";\n"
-            + "    alert( textarea.selectionStart + ',' + textarea.selectionEnd );\n"
+            + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

@@ -86,7 +86,7 @@ public class HtmlForm extends ClickableElement {
     public static final String TAG_NAME = "form";
 
     private static final Collection SUBMITTABLE_ELEMENT_NAMES =
-        Arrays.asList( new String[]{"input", "button", "select", "textarea", "isindex"} );
+        Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
 
     private KeyValuePair fakeSelectedRadioButton_;
 
@@ -125,19 +125,19 @@ public class HtmlForm extends ClickableElement {
      * @throws IOException If an IO error occurs
      * @throws ElementNotFoundException If a button with the specified name cannot be found.
      */
-    public Page submit( final String buttonName ) throws IOException, ElementNotFoundException {
+    public Page submit(final String buttonName) throws IOException, ElementNotFoundException {
 
         final List inputList = getHtmlElementsByAttribute("input", "name", buttonName);
         final Iterator iterator = inputList.iterator();
         while (iterator.hasNext()) {
             final HtmlInput input = (HtmlInput)iterator.next();
             if (input.getTypeAttribute().equals("submit")) {
-                return submit( input );
+                return submit(input);
             }
         }
 
-        final HtmlButton button = (HtmlButton)getOneHtmlElementByAttribute( "button", "name", buttonName );
-        return submit( button );
+        final HtmlButton button = (HtmlButton)getOneHtmlElementByAttribute("button", "name", buttonName);
+        return submit(button);
     }
 
     /**
@@ -150,7 +150,7 @@ public class HtmlForm extends ClickableElement {
      * @exception IOException If an IO error occurs
      */
     public Page submit() throws IOException {
-        return submit( ( SubmittableElement )null );
+        return submit((SubmittableElement)null);
     }
 
     /**
@@ -162,7 +162,7 @@ public class HtmlForm extends ClickableElement {
      * @return A new Page that reflects the results of this submission
      * @exception IOException If an IO error occurs
      */
-    public Page submit( final SubmittableElement submitElement ) throws IOException {
+    public Page submit(final SubmittableElement submitElement) throws IOException {
 
         final HtmlPage htmlPage = getPage();
         if (htmlPage.getWebClient().isJavaScriptEnabled()) {
@@ -187,7 +187,7 @@ public class HtmlForm extends ClickableElement {
         }
 
         final List parameters = getParameterListForSubmit(submitElement);
-        final SubmitMethod method = SubmitMethod.getInstance( getAttributeValue("method"));
+        final SubmitMethod method = SubmitMethod.getInstance(getAttributeValue("method"));
 
         String actionUrl = getActionAttribute();
         if (SubmitMethod.GET.equals(method)) {
@@ -195,7 +195,7 @@ public class HtmlForm extends ClickableElement {
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
 
             final NameValuePair[] pairs = new NameValuePair[parameters.size()];
-            parameters.toArray( pairs );
+            parameters.toArray(pairs);
             final String queryFromFields = EncodingUtil.formUrlEncode(pairs, getPage().getPageEncoding());
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "?") + "?" + queryFromFields;
@@ -206,15 +206,15 @@ public class HtmlForm extends ClickableElement {
         }
         final URL url;
         try {
-            url = htmlPage.getFullyQualifiedUrl( actionUrl );
+            url = htmlPage.getFullyQualifiedUrl(actionUrl);
         }
         catch (final MalformedURLException e) {
-            throw new IllegalArgumentException( "Not a valid url: " + actionUrl );
+            throw new IllegalArgumentException("Not a valid url: " + actionUrl);
         }
 
         final WebRequestSettings settings = new WebRequestSettings(url, method);
         settings.setRequestParameters(parameters);
-        settings.setEncodingType(FormEncodingType.getInstance( getEnctypeAttribute() ));
+        settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         settings.setCharset(getSubmitCharset());
         settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getUrl().toExternalForm());
 
@@ -249,22 +249,22 @@ public class HtmlForm extends ClickableElement {
      * form or null if the form was submitted by javascript.
      * @return The list of {@link KeyValuePair}s.
      */
-    public final List getParameterListForSubmit( final SubmittableElement submitElement ) {
+    public final List getParameterListForSubmit(final SubmittableElement submitElement) {
         final Collection submittableElements = getSubmittableElements(submitElement);
 
-        final List parameterList = new ArrayList( submittableElements.size() );
+        final List parameterList = new ArrayList(submittableElements.size());
         final Iterator iterator = submittableElements.iterator();
         while (iterator.hasNext()) {
-            final SubmittableElement element = ( SubmittableElement )iterator.next();
+            final SubmittableElement element = (SubmittableElement)iterator.next();
             final KeyValuePair[] pairs = element.getSubmitKeyValuePairs();
 
             for (int i = 0; i < pairs.length; i++) {
-                parameterList.add( pairs[i] );
+                parameterList.add(pairs[i]);
             }
         }
 
         if (fakeSelectedRadioButton_ != null) {
-            adjustParameterListToAccountForFakeSelectedRadioButton( parameterList );
+            adjustParameterListToAccountForFakeSelectedRadioButton(parameterList);
         }
         return parameterList;
     }
@@ -307,7 +307,7 @@ public class HtmlForm extends ClickableElement {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = ( HtmlElement )iterator.next();
+            final HtmlElement element = (HtmlElement)iterator.next();
             if (isSubmittable(element, submitElement)) {
                 submittableElements.add(element);
             }
@@ -333,17 +333,17 @@ public class HtmlForm extends ClickableElement {
             return false;
         }
 
-        if (!tagName.equals( "isindex" ) && element.getAttributeValue("name").equals("")) {
+        if (!tagName.equals("isindex") && element.getAttributeValue("name").equals("")) {
             return false;
         }
 
         if (tagName.equals("input")) {
             final String type = element.getAttributeValue("type").toLowerCase();
-            if (type.equals( "radio" ) || type.equals("checkbox")) {
+            if (type.equals("radio") || type.equals("checkbox")) {
                 return element.isAttributeDefined("checked");
             }
         }
-        if ( tagName.equals("select") ) {
+        if (tagName.equals("select")) {
             return ((HtmlSelect) element).isValidForSubmission();
         }
         return true;
@@ -385,8 +385,8 @@ public class HtmlForm extends ClickableElement {
      * @param name The name of the input
      * @return A list of HtmlInputs
      */
-    public List getInputsByName( final String name ) {
-        return getHtmlElementsByAttribute( "input", "name", name );
+    public List getInputsByName(final String name) {
+        return getHtmlElementsByAttribute("input", "name", name);
     }
 
     /**
@@ -396,13 +396,13 @@ public class HtmlForm extends ClickableElement {
      * @return The input
      * @throws ElementNotFoundException If no inputs could be found with the specified name.
      */
-    public final HtmlInput getInputByName( final String name ) throws ElementNotFoundException {
-        final List inputs = getHtmlElementsByAttribute( "input", "name", name );
+    public final HtmlInput getInputByName(final String name) throws ElementNotFoundException {
+        final List inputs = getHtmlElementsByAttribute("input", "name", name);
         if (inputs.size() == 0) {
-            throw new ElementNotFoundException( "input", "name", name );
+            throw new ElementNotFoundException("input", "name", name);
         }
         else {
-            return ( HtmlInput )inputs.get( 0 );
+            return (HtmlInput)inputs.get(0);
         }
     }
 
@@ -419,7 +419,7 @@ public class HtmlForm extends ClickableElement {
      * you can use {@link #getByXPath(String)} instead.
      */
     //TODO: to be removed, deprecated in 4 June 2007
-    public HtmlRadioButtonInput getRadioButtonInput( final String name, final String value )
+    public HtmlRadioButtonInput getRadioButtonInput(final String name, final String value)
         throws
             ElementNotFoundException {
 
@@ -436,7 +436,7 @@ public class HtmlForm extends ClickableElement {
                 }
             }
         }
-        throw new ElementNotFoundException( "input", "value", value );
+        throw new ElementNotFoundException("input", "value", value);
     }
 
     /**
@@ -445,8 +445,8 @@ public class HtmlForm extends ClickableElement {
      * @param name The name
      * @return See above
      */
-    public List getSelectsByName( final String name ) {
-        return getHtmlElementsByAttribute( "select", "name", name );
+    public List getSelectsByName(final String name) {
+        return getHtmlElementsByAttribute("select", "name", name);
     }
 
     /**
@@ -455,13 +455,13 @@ public class HtmlForm extends ClickableElement {
      * @return The first select.
      * @throws ElementNotFoundException If the select cannot be found.
      */
-    public HtmlSelect getSelectByName( final String name ) throws ElementNotFoundException {
-        final List list = getSelectsByName( name );
+    public HtmlSelect getSelectByName(final String name) throws ElementNotFoundException {
+        final List list = getSelectsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException( "select", "name", name );
+            throw new ElementNotFoundException("select", "name", name);
         }
         else {
-            return ( HtmlSelect )list.get( 0 );
+            return (HtmlSelect)list.get(0);
         }
     }
 
@@ -472,9 +472,9 @@ public class HtmlForm extends ClickableElement {
      * @return See above
      * @exception ElementNotFoundException If no matching buttons were found
      */
-    public List getButtonsByName( final String name )
+    public List getButtonsByName(final String name)
         throws ElementNotFoundException {
-        return getHtmlElementsByAttribute( "button", "name", name );
+        return getHtmlElementsByAttribute("button", "name", name);
     }
 
     /**
@@ -483,13 +483,13 @@ public class HtmlForm extends ClickableElement {
      * @return The first button.
      * @throws ElementNotFoundException If the button cannot be found.
      */
-    public HtmlButton getButtonByName( final String name ) throws ElementNotFoundException {
-        final List list = getButtonsByName( name );
+    public HtmlButton getButtonByName(final String name) throws ElementNotFoundException {
+        final List list = getButtonsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException( "button", "name", name );
+            throw new ElementNotFoundException("button", "name", name);
         }
         else {
-            return ( HtmlButton )list.get( 0 );
+            return (HtmlButton)list.get(0);
         }
     }
     
@@ -499,8 +499,8 @@ public class HtmlForm extends ClickableElement {
      * @param name The name
      * @return See above
      */
-    public List getTextAreasByName( final String name ) {
-        return getHtmlElementsByAttribute( "textarea", "name", name );
+    public List getTextAreasByName(final String name) {
+        return getHtmlElementsByAttribute("textarea", "name", name);
     }
 
     /**
@@ -509,13 +509,13 @@ public class HtmlForm extends ClickableElement {
      * @return The first textarea.
      * @throws ElementNotFoundException If the textarea cannot be found.
      */
-    public HtmlTextArea getTextAreaByName( final String name ) throws ElementNotFoundException {
-        final List list = getTextAreasByName( name );
+    public HtmlTextArea getTextAreaByName(final String name) throws ElementNotFoundException {
+        final List list = getTextAreasByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException( "textarea", "name", name );
+            throw new ElementNotFoundException("textarea", "name", name);
         }
         else {
-            return ( HtmlTextArea )list.get( 0 );
+            return (HtmlTextArea)list.get(0);
         }
     }
         
@@ -526,15 +526,15 @@ public class HtmlForm extends ClickableElement {
      * @param name The name
      * @return See above
      */
-    public List getRadioButtonsByName( final String name ) {
+    public List getRadioButtonsByName(final String name) {
 
-        Assert.notNull( "name", name );
+        Assert.notNull("name", name);
 
         final List results = new ArrayList();
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = ( HtmlElement )iterator.next();
+            final HtmlElement element = (HtmlElement)iterator.next();
             if (element instanceof HtmlRadioButtonInput
                      && element.getAttributeValue("name").equals(name)) {
                 results.add(element);
@@ -563,13 +563,13 @@ public class HtmlForm extends ClickableElement {
     //TODO: to be removed, deprecated in 4 June 2007
     public void setCheckedRadioButton(
             final String name,
-            final String value )
+            final String value)
         throws
             ElementNotFoundException {
 
         //we could do this with one iterator, but that would set the state of the other
         //radios also in the case where the specified one is not found
-        final HtmlInput inputToSelect = getRadioButtonInput( name, value );
+        final HtmlInput inputToSelect = getRadioButtonInput(name, value);
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
@@ -596,7 +596,7 @@ public class HtmlForm extends ClickableElement {
      *
      * @param radioButtonInput The radio Button
      */
-    void setCheckedRadioButton( final HtmlRadioButtonInput radioButtonInput ) {
+    void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             boolean isChild = false;
              
@@ -607,7 +607,7 @@ public class HtmlForm extends ClickableElement {
                 }
             }
             if (!isChild) {
-                throw new IllegalArgumentException( "HtmlRadioButtonInput is not child of this HtmlForm" );
+                throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
             }
             final Iterator iterator = getByXPath(
                     "//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
@@ -639,27 +639,27 @@ public class HtmlForm extends ClickableElement {
      */
     public final void fakeCheckedRadioButton(
             final String name,
-            final String value )
+            final String value)
         throws
             ElementNotFoundException {
 
-        fakeSelectedRadioButton_ = new KeyValuePair( name, value );
+        fakeSelectedRadioButton_ = new KeyValuePair(name, value);
     }
 
-    private void adjustParameterListToAccountForFakeSelectedRadioButton( final List list ) {
+    private void adjustParameterListToAccountForFakeSelectedRadioButton(final List list) {
         final String fakeRadioButtonName = fakeSelectedRadioButton_.getKey();
 
         // Remove any pairs that match the name of the radio button
         final Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
-            final KeyValuePair pair = ( KeyValuePair )iterator.next();
+            final KeyValuePair pair = (KeyValuePair)iterator.next();
             if (pair.getKey().equals(fakeRadioButtonName)) {
                 iterator.remove();
             }
         }
 
         // Now add this one back in
-        list.add( fakeSelectedRadioButton_ );
+        list.add(fakeSelectedRadioButton_);
     }
 
     /**
@@ -669,7 +669,7 @@ public class HtmlForm extends ClickableElement {
      * @param name The name of the radio button
      * @return The first checked radio button.
      */
-    public HtmlRadioButtonInput getCheckedRadioButton( final String name ) {
+    public HtmlRadioButtonInput getCheckedRadioButton(final String name) {
 
         Assert.notNull("name", name);
 
@@ -697,7 +697,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getActionAttribute() {
-        return getAttributeValue( "action" );
+        return getAttributeValue("action");
     }
 
     /**
@@ -707,8 +707,8 @@ public class HtmlForm extends ClickableElement {
      *
      * @param action  The value of the attribute "action"
      */
-    public final void setActionAttribute( final String action ) {
-        setAttributeValue( "action", action );
+    public final void setActionAttribute(final String action) {
+        setAttributeValue("action", action);
     }
 
     /**
@@ -720,7 +720,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getMethodAttribute() {
-        return getAttributeValue( "method" );
+        return getAttributeValue("method");
     }
 
     /**
@@ -731,8 +731,8 @@ public class HtmlForm extends ClickableElement {
      * @param method  The value of the attribute "method" or an empty string if that
      *      attribute isn't defined.
      */
-    public final void setMethodAttribute( final String method ) {
-        setAttributeValue( "method", method );
+    public final void setMethodAttribute(final String method) {
+        setAttributeValue("method", method);
     }
 
     /**
@@ -744,7 +744,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeValue( "name" );
+        return getAttributeValue("name");
     }
 
     /**
@@ -769,7 +769,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getEnctypeAttribute() {
-        return getAttributeValue( "enctype" );
+        return getAttributeValue("enctype");
     }
 
     /**
@@ -782,8 +782,8 @@ public class HtmlForm extends ClickableElement {
      * @param encoding The value of the attribute "enctype" or an empty string if that
      *      attribute isn't defined.
      */
-    public final void setEnctypeAttribute( final String encoding ) {
-        setAttributeValue( "enctype", encoding );
+    public final void setEnctypeAttribute(final String encoding) {
+        setAttributeValue("enctype", encoding);
     }
 
     /**
@@ -795,7 +795,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getOnSubmitAttribute() {
-        return getAttributeValue( "onsubmit" );
+        return getAttributeValue("onsubmit");
     }
 
     /**
@@ -807,7 +807,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getOnResetAttribute() {
-        return getAttributeValue( "onreset" );
+        return getAttributeValue("onreset");
     }
 
     /**
@@ -819,7 +819,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getAcceptAttribute() {
-        return getAttributeValue( "accept" );
+        return getAttributeValue("accept");
     }
 
     /**
@@ -831,7 +831,7 @@ public class HtmlForm extends ClickableElement {
      *      if that attribute isn't defined.
      */
     public final String getAcceptCharsetAttribute() {
-        return getAttributeValue( "accept-charset" );
+        return getAttributeValue("accept-charset");
     }
 
     /**
@@ -843,7 +843,7 @@ public class HtmlForm extends ClickableElement {
      *      attribute isn't defined.
      */
     public final String getTargetAttribute() {
-        return getAttributeValue( "target" );
+        return getAttributeValue("target");
     }
 
     /**
@@ -854,8 +854,8 @@ public class HtmlForm extends ClickableElement {
      * @param target  The value of the attribute "target" or an empty string if that
      *      attribute isn't defined.
      */
-    public final void setTargetAttribute( final String target ) {
-        setAttributeValue( "target", target );
+    public final void setTargetAttribute(final String target) {
+        setAttributeValue("target", target);
     }
 
     /**
@@ -864,7 +864,7 @@ public class HtmlForm extends ClickableElement {
      * @return The first input with the specified value.
      * @throws ElementNotFoundException If no elements can be found with the specified value.
      */
-    public HtmlInput getInputByValue( final String value ) throws ElementNotFoundException {
+    public HtmlInput getInputByValue(final String value) throws ElementNotFoundException {
         return (HtmlInput)getOneHtmlElementByAttribute("input", "value", value);
     }
 
@@ -873,7 +873,7 @@ public class HtmlForm extends ClickableElement {
      * @param value The value
      * @return all the inputs with the specified value.
      */
-    public List getInputsByValue( final String value ) {
+    public List getInputsByValue(final String value) {
         return getHtmlElementsByAttribute("input", "value", value);
     }
 }

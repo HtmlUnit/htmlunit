@@ -67,24 +67,24 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testSimple() throws Exception {
-        final String script = "/*@cc_on alert( 'testing @cc_on' ); @*/";
+        final String script = "/*@cc_on alert('testing @cc_on'); @*/";
         
-        testScript( BrowserVersion.INTERNET_EXPLORER_6_0, script,
-                new String[] {"testing @cc_on"} );
-        testScript( BrowserVersion.FIREFOX_2, script,
-                new String[] {} );
+        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
+                new String[] {"testing @cc_on"});
+        testScript(BrowserVersion.FIREFOX_2, script,
+                new String[] {});
     }
     
     /**
      * @throws Exception If the test fails.
      */
     public void testReservedString() throws Exception {
-        final String script = "/*@cc_on alert( 'testing /*@cc_on' ); @*/";
+        final String script = "/*@cc_on alert('testing /*@cc_on'); @*/";
         
-        testScript( BrowserVersion.INTERNET_EXPLORER_6_0, script,
-                new String[] {"testing /*@cc_on"} );
-        testScript( BrowserVersion.FIREFOX_2, script,
-                new String[] {} );
+        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
+                new String[] {"testing /*@cc_on"});
+        testScript(BrowserVersion.FIREFOX_2, script,
+                new String[] {});
     }
 
     /**
@@ -95,15 +95,15 @@ public class IEConditionalCompilationTest extends WebTestCase {
             return;
         }
         
-        final String script = "/*@cc_on @set @mine = 12 alert( @mine ); @*/";
+        final String script = "/*@cc_on @set @mine = 12 alert(@mine); @*/";
         
-        testScript( BrowserVersion.INTERNET_EXPLORER_6_0, script,
-                new String[] {"12"} );
-        testScript( BrowserVersion.FIREFOX_2, script,
-                new String[] {} );
+        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
+                new String[] {"12"});
+        testScript(BrowserVersion.FIREFOX_2, script,
+                new String[] {});
     }
 
-    private void testScript( final BrowserVersion browserVersion, final String script, final String[] expectedAlerts )
+    private void testScript(final BrowserVersion browserVersion, final String script, final String[] expectedAlerts)
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
@@ -115,12 +115,12 @@ public class IEConditionalCompilationTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final WebClient client = new WebClient(browserVersion);
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
-        client.getPage( URL_FIRST );
-        assertEquals( expectedAlerts, collectedAlerts );
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
     
 }

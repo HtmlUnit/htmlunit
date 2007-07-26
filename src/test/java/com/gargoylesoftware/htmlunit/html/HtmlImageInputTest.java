@@ -59,8 +59,8 @@ public class HtmlImageInputTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlImageInputTest( final String name ) {
-        super( name );
+    public HtmlImageInputTest(final String name) {
+        super(name);
     }
 
     /**
@@ -77,20 +77,20 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
         
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)imageInput.click();
         assertNotNull(secondPage);
 
-        final List expectedPairs = Arrays.asList( new Object[]{
+        final List expectedPairs = Arrays.asList(new Object[]{
             new KeyValuePair("button.x", "0"),
             new KeyValuePair("button.y", "0")
         });
 
         assertEquals(
             expectedPairs,
-            webConnection.getLastParameters() );
+            webConnection.getLastParameters());
     }
 
     /**
@@ -107,20 +107,20 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = (HtmlImageInput)form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage)imageInput.click(100,200);
         assertNotNull(secondPage);
 
-        final List expectedPairs = Arrays.asList( new Object[]{
+        final List expectedPairs = Arrays.asList(new Object[]{
             new KeyValuePair("button.x", "100"),
             new KeyValuePair("button.y", "200")
         });
 
         assertEquals(
             expectedPairs,
-            webConnection.getLastParameters() );
+            webConnection.getLastParameters());
     }
 
     /**
@@ -143,14 +143,14 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List expectedPairs = Arrays.asList( new Object[]{
+        final List expectedPairs = Arrays.asList(new Object[]{
             new KeyValuePair("x", "100"),
             new KeyValuePair("y", "200")
         });
 
         assertEquals(
             expectedPairs,
-            webConnection.getLastParameters() );
+            webConnection.getLastParameters());
     }
 
     /**
@@ -166,7 +166,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlImageInput input = (HtmlImageInput)page.getHtmlElementById( "myInput" );
+        final HtmlImageInput input = (HtmlImageInput)page.getHtmlElementById("myInput");
         input.click();
         
         assertEquals(expectedAlerts, collectedAlerts);

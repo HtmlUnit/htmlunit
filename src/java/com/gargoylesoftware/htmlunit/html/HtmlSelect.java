@@ -159,7 +159,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             }
         }
 
-        return Collections.unmodifiableList( result );
+        return Collections.unmodifiableList(result);
     }
 
     /**
@@ -168,8 +168,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return See above
      */
     public List getOptions() {
-        final List elementList = getHtmlElementsByTagName( "option" );
-        return Collections.unmodifiableList( elementList );
+        final List elementList = getHtmlElementsByTagName("option");
+        return Collections.unmodifiableList(elementList);
     }
 
     /**
@@ -178,10 +178,10 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param index The index
      * @return The option specified by the index
      */
-    public HtmlOption getOption( final int index ) {
+    public HtmlOption getOption(final int index) {
 
-        final List elementList = getHtmlElementsByTagName( "option" );
-        return (HtmlOption) elementList.get( index );
+        final List elementList = getHtmlElementsByTagName("option");
+        return (HtmlOption) elementList.get(index);
     }
 
     /**
@@ -190,7 +190,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public int getOptionSize() {
 
-        final List elementList = getHtmlElementsByTagName( "option" );
+        final List elementList = getHtmlElementsByTagName("option");
         return elementList.size();
     }
 
@@ -199,8 +199,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * effect if the length is set to the same or greater.
      * @param newLength The new length property value
      */
-    public void setOptionSize( final int newLength ) {
-        final List elementList = getHtmlElementsByTagName( "option" );
+    public void setOptionSize(final int newLength) {
+        final List elementList = getHtmlElementsByTagName("option");
 
         for (int i = elementList.size() - 1; i >= newLength; i--) {
             ((HtmlElement)elementList.get(i)).remove();
@@ -211,7 +211,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * Remove an option at the given index.
      * @param index The index of the option to remove
      */
-    public void removeOption( final int index ) {
+    public void removeOption(final int index) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
         for (int i = 0; iterator.hasNext(); i++) {
             final HtmlElement element = iterator.nextElement();
@@ -227,7 +227,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param index The index of the option to remove
      * @param newOption The new option to replace to indexed option
      */
-    public void replaceOption( final int index, final HtmlOption newOption ) {
+    public void replaceOption(final int index, final HtmlOption newOption) {
 
         final ChildElementsIterator iterator = new ChildElementsIterator();
         for (int i = 0; iterator.hasNext(); i++) {
@@ -247,8 +247,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * Add a new option at the end.
      * @param newOption The new option to add
      */
-    public void appendOption( final HtmlOption newOption ) {
-        appendChild( newOption );
+    public void appendOption(final HtmlOption newOption) {
+        appendChild(newOption);
     }
 
     /**
@@ -280,9 +280,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return The page that occupies this window after this change is made.  It
      * may be the same window or it may be a freshly loaded one.
      */
-    public Page setSelectedAttribute( final String optionValue, final boolean isSelected ) {
+    public Page setSelectedAttribute(final String optionValue, final boolean isSelected) {
         try {
-            return setSelectedAttribute( getOptionByValue(optionValue), isSelected );
+            return setSelectedAttribute(getOptionByValue(optionValue), isSelected);
         }
         catch (final ElementNotFoundException e) {
             throw new IllegalArgumentException("No option found with value: " + optionValue);
@@ -303,7 +303,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return The page that occupies this window after this change is made.  It
      * may be the same window or it may be a freshly loaded one.
      */
-    public Page setSelectedAttribute( final HtmlOption selectedOption, final boolean isSelected ) {
+    public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         final boolean triggerHandler  = (selectedOption.isSelected() != isSelected);
 
         fakeSelectedValues_ = null;
@@ -316,7 +316,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         else {
             final Iterator iterator = getOptions().iterator();
             while (iterator.hasNext()) {
-                final HtmlOption option = ( HtmlOption )iterator.next();
+                final HtmlOption option = (HtmlOption )iterator.next();
                 option.setSelectedInternal(option == selectedOption && isSelected);
             }
         }
@@ -336,9 +336,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *
      * @param optionValue The value of the new "selected" option
      */
-    public void fakeSelectedAttribute( final String optionValue ) {
-        Assert.notNull( "optionValue", optionValue );
-        fakeSelectedAttribute( new String[]{optionValue} );
+    public void fakeSelectedAttribute(final String optionValue) {
+        Assert.notNull("optionValue", optionValue);
+        fakeSelectedAttribute(new String[]{optionValue});
     }
 
     /**
@@ -347,8 +347,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *
      * @param optionValues The values of the new "selected" options
      */
-    public void fakeSelectedAttribute( final String optionValues[] ) {
-        Assert.notNull( "optionValues", optionValues );
+    public void fakeSelectedAttribute(final String optionValues[]) {
+        Assert.notNull("optionValues", optionValues);
         fakeSelectedValues_ = optionValues;
     }
 
@@ -372,15 +372,15 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             pairs = new KeyValuePair[optionCount];
 
             for (int i = 0; i < optionCount; i++) {
-                final HtmlOption option = ( HtmlOption )selectedOptions.get( i );
-                pairs[i] = new KeyValuePair( name, option.getValueAttribute() );
+                final HtmlOption option = (HtmlOption )selectedOptions.get(i);
+                pairs[i] = new KeyValuePair(name, option.getValueAttribute());
             }
         }
         else {
             final List pairsList = new ArrayList();
             for (int i = 0; i < fakeSelectedValues_.length; i++) {
                 if (fakeSelectedValues_[i].length() > 0) {
-                    pairsList.add(new KeyValuePair( name, fakeSelectedValues_[i] ));
+                    pairsList.add(new KeyValuePair(name, fakeSelectedValues_[i]));
                 }
             }
             pairs = (KeyValuePair[]) pairsList.toArray(new KeyValuePair[pairsList.size()]);
@@ -411,8 +411,8 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
-        setSelectedAttribute( defaultValue, true );
+    public void setDefaultValue(final String defaultValue) {
+        setSelectedAttribute(defaultValue, true);
     }
 
     /**
@@ -422,7 +422,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public String getDefaultValue() {
         final List options = getSelectedOptions();
         if (options.size() > 0) {
-            return ( (HtmlOption) options.get(0) ).getValueAttribute();
+            return ((HtmlOption) options.get(0)).getValueAttribute();
         }
         else {
             return "";
@@ -436,7 +436,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
-    public void setDefaultChecked( final boolean defaultChecked ) {
+    public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
 
@@ -457,7 +457,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return See above
      */
     public boolean isMultipleSelectEnabled() {
-        return getAttributeValue( "multiple" ) != ATTRIBUTE_NOT_DEFINED;
+        return getAttributeValue("multiple") != ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
@@ -468,11 +468,11 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @exception ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
      */
-    public HtmlOption getOptionByValue( final String value )
+    public HtmlOption getOptionByValue(final String value)
         throws ElementNotFoundException {
         Assert.notNull("value", value);
 
-        return ( HtmlOption )getOneHtmlElementByAttribute( "option", "value", value );
+        return (HtmlOption )getOneHtmlElementByAttribute("option", "value", value);
     }
 
     /**
@@ -516,7 +516,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeValue( "name" );
+        return getAttributeValue("name");
     }
 
     /**
@@ -528,7 +528,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getSizeAttribute() {
-        return getAttributeValue( "size" );
+        return getAttributeValue("size");
     }
 
     /**
@@ -540,7 +540,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getMultipleAttribute() {
-        return getAttributeValue( "multiple" );
+        return getAttributeValue("multiple");
     }
 
     /**
@@ -552,7 +552,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getDisabledAttribute() {
-        return getAttributeValue( "disabled" );
+        return getAttributeValue("disabled");
     }
 
     /**
@@ -561,7 +561,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return Return true if this element is disabled.
      */
     public final boolean isDisabled() {
-        return isAttributeDefined( "disabled" );
+        return isAttributeDefined("disabled");
     }
 
     /**
@@ -573,7 +573,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
-        return getAttributeValue( "tabindex" );
+        return getAttributeValue("tabindex");
     }
 
     /**
@@ -585,7 +585,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
-        return getAttributeValue( "onfocus" );
+        return getAttributeValue("onfocus");
     }
 
     /**
@@ -597,7 +597,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
-        return getAttributeValue( "onblur" );
+        return getAttributeValue("onblur");
     }
 
     /**
@@ -609,6 +609,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *      attribute isn't defined.
      */
     public final String getOnChangeAttribute() {
-        return getAttributeValue( "onchange" );
+        return getAttributeValue("onchange");
     }
 }

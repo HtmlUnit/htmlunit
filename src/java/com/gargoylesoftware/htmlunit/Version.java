@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import java.net.URL;
 
 /**
  * Class to display version information about HtmlUnit.  This is the class
@@ -54,7 +53,7 @@ public class Version {
      * @param args The arguments passed on the command line
      * @throws Exception If an error occurs
      */
-    public static void main( final String args[] ) throws Exception {
+    public static void main(final String args[]) throws Exception {
         if (args.length == 1 && args[0].equals("-SanityCheck")) {
             new Version().runSanityCheck();
             return;
@@ -68,8 +67,7 @@ public class Version {
     
     private void runSanityCheck() throws Exception {
         final WebClient webClient = new WebClient();
-        final HtmlPage page = (HtmlPage)webClient.getPage(
-            new URL("http://htmlunit.sourceforge.net/index.html") );
+        final HtmlPage page = (HtmlPage)webClient.getPage("http://htmlunit.sourceforge.net/index.html");
         page.executeJavaScriptIfPossible("document.location", "SanityCheck", null);
         System.out.println("SanityCheck complete.");
     }

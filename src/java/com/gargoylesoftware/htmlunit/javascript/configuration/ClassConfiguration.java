@@ -92,14 +92,14 @@ public final class ClassConfiguration {
             Method foundCtor = null;
             final Method[] methods = linkedClass_.getMethods();
             for (int i = 0; i < methods.length; i++) {
-                if (methods[i].getName().equals( jsConstructor )) {
+                if (methods[i].getName().equals(jsConstructor)) {
                     foundCtor = methods[i];
                     break;
                 }
             }
             if (foundCtor == null) {
-                throw new IllegalStateException( "Constructor method \"" + jsConstructor +
-                        "\" in class \"" + implementingClass + " is not found." );
+                throw new IllegalStateException("Constructor method \"" + jsConstructor +
+                        "\" in class \"" + implementingClass + " is not found.");
             }
             jsConstructor_ = foundCtor;
         }

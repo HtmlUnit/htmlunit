@@ -63,18 +63,18 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class XMLHttpRequestTest extends WebTestCase {
 
-    private static final String UNINITIALIZED = String.valueOf( XMLHttpRequest.STATE_UNINITIALIZED );
-    private static final String LOADING = String.valueOf( XMLHttpRequest.STATE_LOADING );
-    private static final String LOADED = String.valueOf( XMLHttpRequest.STATE_LOADED );
-    private static final String INTERACTIVE = String.valueOf( XMLHttpRequest.STATE_INTERACTIVE );
-    private static final String COMPLETED = String.valueOf( XMLHttpRequest.STATE_COMPLETED );
+    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNINITIALIZED);
+    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_LOADING);
+    private static final String LOADED = String.valueOf(XMLHttpRequest.STATE_LOADED);
+    private static final String INTERACTIVE = String.valueOf(XMLHttpRequest.STATE_INTERACTIVE);
+    private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_COMPLETED);
 
     /**
      * Creates a new test instance.
      * @param name The name of the new test instance.
      */
-    public XMLHttpRequestTest( final String name ) {
-        super( name );
+    public XMLHttpRequestTest(final String name) {
+        super(name);
     }
 
     /**
@@ -122,7 +122,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(browser, html, collectedAlerts);
 
-        assertEquals( expected, collectedAlerts );
+        assertEquals(expected, collectedAlerts);
     }
 
     /**
@@ -163,15 +163,15 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection( webConnection );
-        client.getPage( URL_FIRST );
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
 
         final String[] alerts = {UNINITIALIZED, LOADING, COMPLETED, xml};
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 
     /**
@@ -218,18 +218,18 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</xml2>";
 
         final WebClient client = new WebClient(browserVersion);
-        final List collectedAlerts = Collections.synchronizedList( new ArrayList() );
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection( webConnection );
-        final Page page = client.getPage( URL_FIRST );
+        client.setWebConnection(webConnection);
+        final Page page = client.getPage(URL_FIRST);
 
         final String[] alerts = {UNINITIALIZED, LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml};
 
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 
     /**
@@ -268,16 +268,16 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
         webConnection.setResponse(urlPage2, xml, "text/xml");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
         final String[] alerts = {COMPLETED, xml};
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 
     /**
@@ -303,16 +303,16 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.txt");
         webConnection.setResponse(urlPage2, "bla bla", "text/plain");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
         final String[] alerts = {"bla bla"};
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 
     /**
@@ -349,17 +349,17 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
         webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>",
                 "text/xml");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
         final String[] alerts = {"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" };
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 
     /**
@@ -383,10 +383,10 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
     }
 
@@ -429,10 +429,10 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient(browserVersion);
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
     }
 
@@ -459,10 +459,10 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());
         assertEquals("foo", page.getTitleText());
@@ -493,17 +493,17 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml.txt");
         webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>",
                 "text/plain");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
         final String[] alerts = {"true", "false"};
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 
     /**
@@ -564,17 +564,17 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</updates>";
 
         final WebClient client = new WebClient(browserVersion);
-        final List collectedAlerts = Collections.synchronizedList( new ArrayList() );
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection( webConnection );
-        client.getPage( URL_FIRST );
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
 
         final String[] alerts = {"ibcdefg", "xxxxxfg" };
 
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 
     /**
@@ -656,8 +656,8 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
-        client.setAlertHandler( new CollectingAlertHandler( collectedAlerts ) );
-        final MockWebConnection webConnection = new MockWebConnection( client )
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client)
         {
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 collectedAlerts.add(webRequestSettings.getURL().toExternalForm());
@@ -667,13 +667,13 @@ public class XMLHttpRequestTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
         webConnection.setResponse(urlPage2, "<foo/>", "text/xml");
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
 
         assertTrue("thread failed to stop in 4 seconds", page.getEnclosingWindow().getThreadManager().joinAll(4000));
 
         final String[] alerts = {URL_FIRST.toExternalForm(), "before long loop", "after long loop",
                 urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
-        assertEquals( alerts, collectedAlerts );
+        assertEquals(alerts, collectedAlerts);
     }
 }

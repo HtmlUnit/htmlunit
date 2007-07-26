@@ -117,8 +117,8 @@ public class NodeImpl extends SimpleScriptable {
      * Set the JavaScript property "nodeValue" for the current node.
      * @param newValue The new node value
      */
-    public void jsxSet_nodeValue( final String newValue ) {
-        getDomNodeOrDie().setNodeValue( newValue );
+    public void jsxSet_nodeValue(final String newValue) {
+        getDomNodeOrDie().setNodeValue(newValue);
     }
 
     /**
@@ -152,7 +152,7 @@ public class NodeImpl extends SimpleScriptable {
      */
     public Object jsxFunction_cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
-        final DomNode clonedNode = domNode.cloneNode( deep );
+        final DomNode clonedNode = domNode.cloneNode(deep);
         return getJavaScriptNode(clonedNode);
     }
 
@@ -190,7 +190,7 @@ public class NodeImpl extends SimpleScriptable {
             }
 
             // Append the child to the parent node
-            if (refChildNode != null ) {
+            if (refChildNode != null) {
                 refChildNode.insertBefore(newChildNode);
                 appendedChild = newChildObject;
             }
@@ -280,7 +280,7 @@ public class NodeImpl extends SimpleScriptable {
      * @return The parent node
      */
     public Object jsxGet_parentNode() {
-        return getJavaScriptNode( getDomNodeOrDie().getParentNode() );
+        return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
 
     /**
@@ -290,7 +290,7 @@ public class NodeImpl extends SimpleScriptable {
      * no next sibling.
      */
     public Object jsxGet_nextSibling() {
-        return getJavaScriptNode( getDomNodeOrDie().getNextSibling() );
+        return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
     }
 
     /**
@@ -300,7 +300,7 @@ public class NodeImpl extends SimpleScriptable {
      * no previous sibling.
      */
     public Object jsxGet_previousSibling() {
-        return getJavaScriptNode( getDomNodeOrDie().getPreviousSibling() );
+        return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
     }
 
     /**
@@ -310,7 +310,7 @@ public class NodeImpl extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_firstChild() {
-        return getJavaScriptNode( getDomNodeOrDie().getFirstChild() );
+        return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
     }
 
     /**
@@ -320,7 +320,7 @@ public class NodeImpl extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_lastChild() {
-        return getJavaScriptNode( getDomNodeOrDie().getLastChild() );
+        return getJavaScriptNode(getDomNodeOrDie().getLastChild());
     }
 
     /**
@@ -328,11 +328,11 @@ public class NodeImpl extends SimpleScriptable {
      * @param domNode The DomNode
      * @return The JavaScript node or null if the DomNode was null.
      */
-    protected Object getJavaScriptNode( final DomNode domNode ) {
-        if ( domNode == null ) {
+    protected Object getJavaScriptNode(final DomNode domNode) {
+        if (domNode == null) {
             return null;
         }
-        return getScriptableFor( domNode );
+        return getScriptableFor(domNode);
     }
 
     /**

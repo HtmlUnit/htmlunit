@@ -84,7 +84,7 @@ public class WebResponseData implements Serializable {
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
 
         try {
-            body_ = getBody( new ByteArrayInputStream( body ), responseHeaders );
+            body_ = getBody(new ByteArrayInputStream(body), responseHeaders);
         }
         catch (final IOException e) {
             body_ = body;
@@ -108,7 +108,7 @@ public class WebResponseData implements Serializable {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
-        body_ = getBody( bodyStream, responseHeaders );
+        body_ = getBody(bodyStream, responseHeaders);
     }
 
     /**
@@ -142,7 +142,7 @@ public class WebResponseData implements Serializable {
             if (object instanceof NameValuePair == false) {
                 final String name = object.getClass().getName();
                 final String msg = "Only NameValuePairs may be in the response header list, but found a " + name + ".";
-                throw new IllegalArgumentException( msg );
+                throw new IllegalArgumentException(msg);
             }
         }
     }
@@ -157,7 +157,7 @@ public class WebResponseData implements Serializable {
      * @return The specified body stream, as a byte array.
      * @throws IOException If a stream error occurs.
      */
-    protected byte[] getBody( InputStream stream, final List headers ) throws IOException {
+    protected byte[] getBody(InputStream stream, final List headers) throws IOException {
         if (stream == null) {
             return null;
         }

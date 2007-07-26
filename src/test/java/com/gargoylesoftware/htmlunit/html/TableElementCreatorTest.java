@@ -51,8 +51,8 @@ public class TableElementCreatorTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public TableElementCreatorTest( final String name ) {
-        super( name );
+    public TableElementCreatorTest(final String name) {
+        super(name);
     }
 
     /**

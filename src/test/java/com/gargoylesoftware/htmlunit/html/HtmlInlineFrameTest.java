@@ -60,8 +60,8 @@ public class HtmlInlineFrameTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlInlineFrameTest( final String name ) {
-        super( name );
+    public HtmlInlineFrameTest(final String name) {
+        super(name);
     }
 
     /**
@@ -76,26 +76,26 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST);
         webConnection.setResponse(
-            URL_THIRD,thirdContent,200,"OK","text/html",Collections.EMPTY_LIST );
+            URL_THIRD,thirdContent,200,"OK","text/html",Collections.EMPTY_LIST);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        assertEquals( "First", page.getTitleText() );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame)page.getHtmlElementById("iframe1");
-        assertEquals( "http://second", iframe.getSrcAttribute() );
-        assertEquals( "Second", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
+        assertEquals("http://second", iframe.getSrcAttribute());
+        assertEquals("Second", ((HtmlPage)iframe.getEnclosedPage()).getTitleText());
 
         iframe.setSrcAttribute("http://third");
-        assertEquals( "http://third", iframe.getSrcAttribute() );
-        assertEquals( "Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
+        assertEquals("http://third", iframe.getSrcAttribute());
+        assertEquals("Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -137,19 +137,19 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_FIRST);
-        assertEquals( "First", page.getTitleText() );
+        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
-        assertEquals( "http://third", iframe.getSrcAttribute() );
-        assertEquals( "Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText() );
+        assertEquals("http://third", iframe.getSrcAttribute());
+        assertEquals("Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -170,19 +170,19 @@ public class HtmlInlineFrameTest extends WebTestCase {
             = "alert('3');";
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         
         final String[] expectedAlerts = {"2"};
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         
         client.getPage(URL_FIRST);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
 }

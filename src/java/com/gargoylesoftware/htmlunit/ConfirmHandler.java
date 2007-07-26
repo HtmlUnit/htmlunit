@@ -51,5 +51,5 @@ public interface ConfirmHandler {
      * @param message The message in the alert.
      * @return true if we are simulating the ok button.  False for the cancel button.
      */
-    boolean handleConfirm( final Page page, final String message );
+    boolean handleConfirm(final Page page, final String message);
 }

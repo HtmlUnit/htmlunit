@@ -52,7 +52,7 @@ public interface HtmlAttributeChangeListener {
      *
      * @param event The event.
      */
-    void attributeAdded( final HtmlAttributeChangeEvent event );
+    void attributeAdded(final HtmlAttributeChangeEvent event);
 
     /**
      * Notification that an existing attribute has been removed from the HtmlElement.
@@ -60,13 +60,13 @@ public interface HtmlAttributeChangeListener {
      *
      * @param event The event.
      */
-    void attributeRemoved( final HtmlAttributeChangeEvent event );
+    void attributeRemoved(final HtmlAttributeChangeEvent event);
 
     /**
      * Notification that an attribute on the HtmlElement has been replaced. Called after the attribute is replaced.
      *
      * @param event The event.
      */
-    void attributeReplaced( final HtmlAttributeChangeEvent event );
+    void attributeReplaced(final HtmlAttributeChangeEvent event);
 
 }

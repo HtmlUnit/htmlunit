@@ -161,7 +161,7 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         if (getNameAttribute().length() != 0 && !isAttributeDefined("value")) {
-            return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), DEFAULT_VALUE )};
+            return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), DEFAULT_VALUE)};
         }
         else {
             return super.getSubmitKeyValuePairs();

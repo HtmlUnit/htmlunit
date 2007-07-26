@@ -58,8 +58,8 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlCheckBoxInputTest( final String name ) {
-        super( name );
+    public HtmlCheckBoxInputTest(final String name) {
+        super(name);
     }
 
     /**
@@ -74,9 +74,9 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput )page.getHtmlElementById("checkbox");
 
-        assertFalse( checkBox.isChecked());
+        assertFalse(checkBox.isChecked());
     }
 
     /**
@@ -99,14 +99,14 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput )page.getHtmlElementById("checkbox");
         final HtmlPage secondPage = (HtmlPage)checkBox.click();
 
         final String[] expectedAlerts = {"foo", "click"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
 
-        assertSame( page, secondPage );
-        assertTrue( checkBox.isChecked());
+        assertSame(page, secondPage);
+        assertTrue(checkBox.isChecked());
     }
 
     /**
@@ -125,12 +125,12 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "onClick='document.form1.submit()'>Check me</input>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput )page.getHtmlElementById("checkbox");
 
         final HtmlPage secondPage = (HtmlPage)checkBox.click();
 
-        assertNotSame( page, secondPage );
-        assertTrue( checkBox.isChecked());
+        assertNotSame(page, secondPage);
+        assertTrue(checkBox.isChecked());
     }
 
     /**
@@ -146,7 +146,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlCheckBoxInput checkBox = ( HtmlCheckBoxInput )page.getHtmlElementById( "checkbox" );
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput )page.getHtmlElementById("checkbox");
         assertEquals("unchecked", checkBox.asText());
         checkBox.setChecked(true);
         assertEquals("checked", checkBox.asText());
@@ -188,17 +188,17 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         
         final WebClient client = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlCheckBoxInput radio = (HtmlCheckBoxInput) page.getHtmlElementById( "myCheckbox" );
+        final HtmlCheckBoxInput radio = (HtmlCheckBoxInput) page.getHtmlElementById("myCheckbox");
 
-        final HtmlPage secondPage = (HtmlPage) radio.setChecked( true );
+        final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);
 
-        assertEquals( "Second", secondPage.getTitleText() );
+        assertEquals("Second", secondPage.getTitleText());
     }
 
 }

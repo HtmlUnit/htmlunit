@@ -56,7 +56,7 @@ public class JavaScriptURLConnection extends URLConnection {
      * Create an instance
      * @param newUrl The javascript url.
      */
-    public JavaScriptURLConnection( final URL newUrl ) {
+    public JavaScriptURLConnection(final URL newUrl) {
         super(newUrl);
 
         content_ = newUrl.toExternalForm().substring("javascript:".length());

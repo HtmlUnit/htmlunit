@@ -119,7 +119,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public HtmlPage(
             final URL originatingUrl,
             final WebResponse webResponse,
-            final WebWindow webWindow ) {
+            final WebWindow webWindow) {
 
         super(null);
 
@@ -237,7 +237,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return the new HTML element.
      */
     public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
-        final String tagLower = qualifiedName.toLowerCase().substring(qualifiedName.indexOf( ':' ) + 1);
+        final String tagLower = qualifiedName.toLowerCase().substring(qualifiedName.indexOf(':') + 1);
         return HTMLParser.getFactory(tagLower).createElementNS(this, namespaceURI, qualifiedName, null);
     }
 
@@ -260,7 +260,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByHref(final String href) throws ElementNotFoundException {
-        return ( HtmlAnchor )getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
+        return (HtmlAnchor)getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
     }
 
     /**
@@ -296,13 +296,13 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return The first form.
      * @exception ElementNotFoundException If no forms match the specifed result.
      */
-    public HtmlForm getFormByName( final String name ) throws ElementNotFoundException {
-        final List forms = getDocumentElement().getHtmlElementsByAttribute( "form", "name", name );
+    public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
+        final List forms = getDocumentElement().getHtmlElementsByAttribute("form", "name", name);
         if (forms.size() == 0) {
-            throw new ElementNotFoundException( "form", "name", name );
+            throw new ElementNotFoundException("form", "name", name);
         }
         else {
-            return ( HtmlForm )forms.get( 0 );
+            return (HtmlForm)forms.get(0);
         }
     }
 
@@ -311,7 +311,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return All the forms.
      */
     public List getForms() {
-        return getDocumentElement().getHtmlElementsByTagNames( Arrays.asList(new String[]{"form"}) );
+        return getDocumentElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"form"}));
     }
 
     /**
@@ -332,7 +332,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @exception MalformedURLException If an error occurred when creating a
      *      URL object
      */
-    public URL getFullyQualifiedUrl( String relativeUrl )
+    public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
 
         final List baseElements = getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
@@ -376,16 +376,16 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         // to handle http: and http:/ in FF (Bug 1714767)
         if (getWebClient().getBrowserVersion().isNetscape()) {
             boolean incorrectnessNotified = false;
-            while (relativeUrl.startsWith( "http:" ) && !relativeUrl.startsWith( "http://" )) {
+            while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
                 if (!incorrectnessNotified) {
-                    notifyIncorrectness( "Incorrect URL \"" + relativeUrl + "\" has been corrected" );
+                    notifyIncorrectness("Incorrect URL \"" + relativeUrl + "\" has been corrected");
                     incorrectnessNotified = true;
                 }
-                relativeUrl = "http:/" + relativeUrl.substring( 5 );
+                relativeUrl = "http:/" + relativeUrl.substring(5);
             }
         }
 
-        return WebClient.expandUrl( baseUrl, relativeUrl );
+        return WebClient.expandUrl(baseUrl, relativeUrl);
     }
 
     /**
@@ -395,10 +395,10 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param elementTarget The target specified as an attribute of the element.
      * @return The resolved target to use for the element.
      */
-    public String getResolvedTarget( final String elementTarget ) {
+    public String getResolvedTarget(final String elementTarget) {
 
         final List baseElements =
-            getDocumentElement().getHtmlElementsByTagNames( Collections.singletonList("base"));
+            getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
         final String resolvedTarget;
         if (baseElements.isEmpty()) {
             resolvedTarget = elementTarget;
@@ -430,14 +430,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return The list of id's
      */
     public List getTabbableElementIds() {
-        final List list = new ArrayList( getTabbableElements() );
+        final List list = new ArrayList(getTabbableElements());
         final int listSize = list.size();
 
         for (int i = 0; i < listSize; i++) {
-            list.set( i, ( ( HtmlElement )list.get( i ) ).getAttributeValue( "id" ) );
+            list.set(i, ((HtmlElement)list.get(i)).getAttributeValue("id"));
         }
 
-        return Collections.unmodifiableList( list );
+        return Collections.unmodifiableList(list);
     }
 
     /**
@@ -470,7 +470,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public List getTabbableElements() {
 
         final List acceptableTagNames = Arrays.asList(
-                new Object[] {"a", "area", "button", "input", "object", "select", "textarea"} );
+                new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List tabbableElements = new ArrayList();
 
         final Iterator iterator = getAllHtmlChildElements();
@@ -485,19 +485,19 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 }
             }
         }
-        Collections.sort( tabbableElements, createTabOrderComparator() );
-        return Collections.unmodifiableList( tabbableElements );
+        Collections.sort(tabbableElements, createTabOrderComparator());
+        return Collections.unmodifiableList(tabbableElements);
     }
 
     private Comparator createTabOrderComparator() {
 
         return new Comparator() {
-            public int compare( final Object object1, final Object object2 ) {
-                final HtmlElement element1 = ( HtmlElement )object1;
-                final HtmlElement element2 = ( HtmlElement )object2;
+            public int compare(final Object object1, final Object object2) {
+                final HtmlElement element1 = (HtmlElement)object1;
+                final HtmlElement element2 = (HtmlElement)object2;
 
-                final int tabIndex1 = getTabIndex( element1 );
-                final int tabIndex2 = getTabIndex( element2 );
+                final int tabIndex1 = getTabIndex(element1);
+                final int tabIndex2 = getTabIndex(element2);
 
                 final int result;
                 if (tabIndex1 > 0 && tabIndex2 > 0) {
@@ -521,13 +521,13 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         };
     }
 
-    private int getTabIndex( final HtmlElement element ) {
-        final String tabIndexAttribute = element.getAttributeValue( "tabindex" );
+    private int getTabIndex(final HtmlElement element) {
+        final String tabIndexAttribute = element.getAttributeValue("tabindex");
         if (tabIndexAttribute == null || tabIndexAttribute.length() == 0) {
             return TAB_INDEX_NOT_SPECIFIED;
         }
 
-        final int tabIndex = Integer.parseInt( tabIndexAttribute );
+        final int tabIndex = Integer.parseInt(tabIndexAttribute);
         if (tabIndex >= 0 && tabIndex <= 32767) {
             return tabIndex;
         }
@@ -548,7 +548,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return The html element that is assigned to the specified key or null
      *      if no elements can be found that match the specified key.
      */
-    public HtmlElement getHtmlElementByAccessKey( final char accessKey ) {
+    public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
         final List elements = getHtmlElementsByAccessKey(accessKey);
         if (elements.isEmpty()) {
             return null;
@@ -575,21 +575,21 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param accessKey The key to look for
      * @return A list of html elements that are assigned to the specified accesskey.
      */
-    public List getHtmlElementsByAccessKey( final char accessKey ) {
+    public List getHtmlElementsByAccessKey(final char accessKey) {
 
         final List elements = new ArrayList();
 
-        final String searchString = ( "" + accessKey ).toLowerCase();
+        final String searchString = ("" + accessKey).toLowerCase();
         final List acceptableTagNames = Arrays.asList(
-                new Object[]{"a", "area", "button", "input", "label", "legend", "textarea"} );
+                new Object[]{"a", "area", "button", "input", "label", "legend", "textarea"});
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement)iterator.next();
-            if (acceptableTagNames.contains( element.getTagName())) {
+            if (acceptableTagNames.contains(element.getTagName())) {
                 final String accessKeyAttribute = element.getAttributeValue("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
-                    elements.add( element );
+                    elements.add(element);
                 }
             }
         }
@@ -610,20 +610,20 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public void assertAllTabIndexAttributesSet() {
 
         final List acceptableTagNames = Arrays.asList(
-                new Object[]{"a", "area", "button", "input", "object", "select", "textarea"} );
-        final List tabbableElements = getDocumentElement().getHtmlElementsByTagNames( acceptableTagNames );
+                new Object[]{"a", "area", "button", "input", "object", "select", "textarea"});
+        final List tabbableElements = getDocumentElement().getHtmlElementsByTagNames(acceptableTagNames);
 
         final Iterator iterator = tabbableElements.iterator();
         while (iterator.hasNext()) {
-            final HtmlElement htmlElement = ( HtmlElement )iterator.next();
-            final int tabIndex = getTabIndex( htmlElement );
+            final HtmlElement htmlElement = (HtmlElement)iterator.next();
+            final int tabIndex = getTabIndex(htmlElement);
             if (tabIndex == TAB_INDEX_OUT_OF_BOUNDS) {
                 webClient_.assertionFailed(
                     "Illegal value for tab index: "
-                    + htmlElement.getAttributeValue( "tabindex" ) );
+                    + htmlElement.getAttributeValue("tabindex"));
             }
             else if (tabIndex == TAB_INDEX_NOT_SPECIFIED) {
-                webClient_.assertionFailed( "tabindex not set for " + htmlElement );
+                webClient_.assertionFailed("tabindex not set for " + htmlElement);
             }
         }
     }
@@ -640,13 +640,13 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final String id = ((HtmlElement)iterator.next()).getAttributeValue("accesskey" );
+            final String id = ((HtmlElement)iterator.next()).getAttributeValue("accesskey");
             if (id != null && id.length() != 0) {
                 if (accessKeyList.contains(id)) {
-                    webClient_.assertionFailed( "Duplicate access key: " + id );
+                    webClient_.assertionFailed("Duplicate access key: " + id);
                 }
                 else {
-                    accessKeyList.add( id );
+                    accessKeyList.add(id);
                 }
             }
         }
@@ -667,10 +667,10 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             final String id = ((HtmlElement)iterator.next()).getAttributeValue("id");
             if (id != null && id.length() != 0) {
                 if (idList.contains(id)) {
-                    webClient_.assertionFailed( "Duplicate ID: " + id );
+                    webClient_.assertionFailed("Duplicate ID: " + id);
                 }
                 else {
-                    idList.add( id );
+                    idList.add(id);
                 }
             }
         }
@@ -700,7 +700,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     public ScriptResult executeJavaScriptIfPossible(
         String sourceCode, final String sourceName,
-        final HtmlElement htmlElement ) {
+        final HtmlElement htmlElement) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
         if (!getWebClient().isJavaScriptEnabled() || engine == null) {
@@ -717,14 +717,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
-        final Object result = engine.execute( this, sourceCode, sourceName, htmlElement );
+        final Object result = engine.execute(this, sourceCode, sourceName, htmlElement);
 
         WebWindow firstWindow = getWebClient().popFirstWindow();
-        if ( firstWindow == null) {
+        if (firstWindow == null) {
             firstWindow = window;
         }
 
-        return new ScriptResult( result, firstWindow.getEnclosedPage() );
+        return new ScriptResult(result, firstWindow.getEnclosedPage());
     }
 
     /**
@@ -758,7 +758,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
         WebWindow firstWindow = getWebClient().popFirstWindow();
-        if ( firstWindow == null) {
+        if (firstWindow == null) {
             firstWindow = window;
         }
         return new ScriptResult(result, firstWindow.getEnclosedPage());
@@ -778,8 +778,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
      */
-    void loadExternalJavaScriptFile( final String srcAttribute,
-                                            final String charset  ) {
+    void loadExternalJavaScriptFile(final String srcAttribute,
+                                            final String charset) {
         final ScriptEngine engine = getWebClient().getScriptEngine();
         if (getWebClient().isJavaScriptEnabled() && engine != null) {
             final URL scriptURL;
@@ -809,14 +809,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param languageAttribute The language attribute specified in the script tag.
      * @return true if the script is javascript
      */
-    public static boolean isJavaScript( final String typeAttribute, final String languageAttribute ) {
+    public static boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
         // Unless otherwise specified, we have to assume that any script is javascript
         final boolean isJavaScript;
         if (languageAttribute != null && languageAttribute.length() != 0) {
             isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
         }
         else if (typeAttribute != null && typeAttribute.length() != 0) {
-            isJavaScript = typeAttribute.equalsIgnoreCase( "text/javascript" );
+            isJavaScript = typeAttribute.equalsIgnoreCase("text/javascript");
         }
         else {
             isJavaScript = true;
@@ -831,7 +831,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param charset the charset to use to read the text
      * @return the content of the file
      */
-    private String loadJavaScriptFromUrl(final URL url, final String charset ) {
+    private String loadJavaScriptFromUrl(final URL url, final String charset) {
         String scriptEncoding = charset;
         getPageEncoding();
         try {
@@ -890,7 +890,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *
      * @param window The new frame or null if this page is being removed from a frame.
      */
-    public void setEnclosingWindow( final WebWindow window ) {
+    public void setEnclosingWindow(final WebWindow window) {
         enclosingWindow_ = window;
     }
 
@@ -981,8 +981,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         }
 
         // the onload of the contained frames or iframe tags
-        final List frames = getDocumentElement().getHtmlElementsByTagNames( Arrays.asList( new String[]{
-            "frame", "iframe" } ));
+        final List frames = getDocumentElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{
+            "frame", "iframe" }));
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
             final Function frameTagOnloadHandler = frame.getEventHandler("onload");
@@ -1016,16 +1016,16 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         final int time;
         final URL url;
 
-        int index = refreshString.indexOf( ";" );
-        final boolean timeOnly = ( index == -1 );
+        int index = refreshString.indexOf(";");
+        final boolean timeOnly = (index == -1);
 
         if (timeOnly) {
             // Format: <meta http-equiv='refresh' content='10'>
             try {
-                time = Integer.parseInt( refreshString );
+                time = Integer.parseInt(refreshString);
             }
             catch (final NumberFormatException e) {
-                getLog().error( "Malformed refresh string (no ';' but not a number): " + refreshString, e );
+                getLog().error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
                 return;
             }
             url = webResponse_.getUrl();
@@ -1033,44 +1033,44 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
             try {
-                time = Integer.parseInt( refreshString.substring( 0, index ).trim() );
+                time = Integer.parseInt(refreshString.substring(0, index).trim());
             }
             catch (final NumberFormatException e) {
                 getLog().error("Malformed refresh string (no valid number before ';') " + refreshString, e);
                 return;
             }
-            index = refreshString.indexOf( "URL=", index );
+            index = refreshString.indexOf("URL=", index);
             if (index == -1) {
-                index = refreshString.indexOf( "url=", index );
+                index = refreshString.indexOf("url=", index);
             }
             if (index == -1) {
-                getLog().error( "Malformed refresh string (found ';' but no 'url='): " + refreshString );
+                getLog().error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
                 return;
             }
-            final StringBuffer buffer = new StringBuffer( refreshString.substring( index + 4 ) );
+            final StringBuffer buffer = new StringBuffer(refreshString.substring(index + 4));
             if (buffer.toString().trim().length() == 0) {
                 //content='10; URL=' is treated as content='10'
                 url = webResponse_.getUrl();
             }
             else {
-                if (buffer.charAt( 0 ) == '"' || buffer.charAt( 0 ) == 0x27) {
-                    buffer.deleteCharAt( 0 );
+                if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {
+                    buffer.deleteCharAt(0);
                 }
-                if (buffer.charAt( buffer.length() - 1 ) == '"' || buffer.charAt( buffer.length() - 1 ) == 0x27) {
-                    buffer.deleteCharAt( buffer.length() - 1 );
+                if (buffer.charAt(buffer.length() - 1) == '"' || buffer.charAt(buffer.length() - 1) == 0x27) {
+                    buffer.deleteCharAt(buffer.length() - 1);
                 }
                 final String urlString = buffer.toString();
                 try {
-                    url = getFullyQualifiedUrl( urlString );
+                    url = getFullyQualifiedUrl(urlString);
                 }
                 catch (final MalformedURLException e) {
-                    getLog().error( "Malformed url in refresh string: " + refreshString, e );
+                    getLog().error("Malformed url in refresh string: " + refreshString, e);
                     throw e;
                 }
             }
         }
 
-        getWebClient().getRefreshHandler().handleRefresh( this, url, time );
+        getWebClient().getRefreshHandler().handleRefresh(this, url, time);
     }
 
     /**
@@ -1114,7 +1114,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public void deregisterFramesIfNeeded() {
         for (final Iterator iter = getFrames().iterator(); iter.hasNext();) {
             final WebWindow window = (WebWindow) iter.next();
-            webClient_.deregisterWebWindow( window );
+            webClient_.deregisterWebWindow(window);
             if (window.getEnclosedPage() instanceof HtmlPage) {
                 final HtmlPage page = (HtmlPage) window.getEnclosedPage();
                 if (page != null) {
@@ -1173,7 +1173,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @throws IOException If an io error occurs during the processing of this access key.  This
      * would only happen if the access key triggered a button which in turn caused a page load.
      */
-    public HtmlElement pressAccessKey( final char accessKey ) throws IOException {
+    public HtmlElement pressAccessKey(final char accessKey) throws IOException {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
         if (element != null) {
             if (element instanceof FocusableElement) {
@@ -1234,7 +1234,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             elementToGiveFocus = (HtmlElement) elements.get(0);
         }
         else {
-            final int index = elements.indexOf( elementWithFocus );
+            final int index = elements.indexOf(elementWithFocus);
             if (index == -1) {
                 // The element with focus isn't on this page
                 elementToGiveFocus = (HtmlElement)elements.get(0);
@@ -1304,14 +1304,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @exception ElementNotFoundException If no element was found that matches
      *      the id
      */
-    public HtmlElement getHtmlElementById( final String id )
+    public HtmlElement getHtmlElementById(final String id)
         throws ElementNotFoundException {
 
         final List elements = (List) idMap_.get(id);
         if (elements != null) {
             return (HtmlElement) elements.get(0);
         }
-        throw new ElementNotFoundException( "*", "id", id );
+        throw new ElementNotFoundException("*", "id", id);
     }
 
     /**
@@ -1503,7 +1503,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *
      * @param radioButtonInput The radio Button
      */
-    void setCheckedRadioButton( final HtmlRadioButtonInput radioButtonInput ) {
+    void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             //May be done in single xpath search?
             final List pageInputs = getByXPath("//input[lower-case(@type)='radio' "
@@ -1524,7 +1524,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             }
         }
         catch (final JaxenException e) {
-            getLog().error( e );
+            getLog().error(e);
         }
     }
 
@@ -1572,13 +1572,13 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param listener the attribute change listener to be added.
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
-    public void addHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+    public void addHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
         Assert.notNull("listener", listener);
         synchronized (this) {
             if (attributeListeners_ == null) {
                 attributeListeners_ = new ArrayList();
             }
-            attributeListeners_.add( listener );
+            attributeListeners_.add(listener);
         }
     }
 
@@ -1590,7 +1590,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param listener the attribute change listener to be removed.
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
-    public void removeHtmlAttributeChangeListener( final HtmlAttributeChangeListener listener ) {
+    public void removeHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
         Assert.notNull("listener", listener);
         synchronized (this) {
             if (attributeListeners_ != null) {

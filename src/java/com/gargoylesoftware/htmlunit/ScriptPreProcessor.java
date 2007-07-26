@@ -58,5 +58,5 @@ public interface ScriptPreProcessor {
      * @return The source code after pre processing
      */
     String preProcess(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement );
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement);
 }

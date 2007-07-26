@@ -120,7 +120,7 @@ public class WebRequestSettings {
     /**
      * @param proxyHost The new proxy host.
      */
-    public void setProxyHost( final String proxyHost ) {
+    public void setProxyHost(final String proxyHost) {
         proxyHost_ = proxyHost;
     }
 
@@ -134,7 +134,7 @@ public class WebRequestSettings {
     /**
      * @param proxyPort The new proxy port.
      */
-    public void setProxyPort( final int proxyPort ) {
+    public void setProxyPort(final int proxyPort) {
         proxyPort_ = proxyPort;
     }
 
@@ -167,7 +167,7 @@ public class WebRequestSettings {
         if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
                              + "the two are mutually exclusive!";
-            throw new RuntimeException( msg );
+            throw new RuntimeException(msg);
         }
         requestParameters_ = requestParameters;
     }
@@ -193,7 +193,7 @@ public class WebRequestSettings {
         }
         if (submitMethod_ != SubmitMethod.POST) {
             final String msg = "The request body may only be set for POST requests!";
-            throw new RuntimeException( msg );
+            throw new RuntimeException(msg);
         }
         requestBody_ = requestBody;
     }
@@ -232,7 +232,7 @@ public class WebRequestSettings {
      * @param value The value of the additional header.
      */
     public void addAdditionalHeader(final String name, final String value) {
-        additionalHeaders_.put( name, value );
+        additionalHeaders_.put(name, value);
     }
 
     /**

@@ -92,8 +92,8 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      *
      * @param newValue The new content
      */
-    public void setValueAttribute( final String newValue ) {
-        setAttributeValue( "value", newValue );
+    public void setValueAttribute(final String newValue) {
+        setAttributeValue("value", newValue);
     }
 
     /**
@@ -142,7 +142,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getValueAttribute() )};
+        return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getValueAttribute())};
     }
 
     /**
@@ -157,7 +157,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
+    public void setDefaultValue(final String defaultValue) {
         getLog().debug("setDefaultValue() not implemented for this element");
     }
 
@@ -177,7 +177,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
-    public void setDefaultChecked( final boolean defaultChecked ) {
+    public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
 

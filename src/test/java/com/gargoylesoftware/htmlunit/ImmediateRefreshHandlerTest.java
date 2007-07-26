@@ -50,7 +50,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
      * Create an instance.
      * @param name The name of the test.
      */
-    public ImmediateRefreshHandlerTest( final String name ) {
+    public ImmediateRefreshHandlerTest(final String name) {
         super(name);
     }
 
@@ -82,7 +82,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
                 };
             }
         };
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
         settings.setSubmitMethod(SubmitMethod.POST);

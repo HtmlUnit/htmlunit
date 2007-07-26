@@ -59,7 +59,7 @@ public class DomChangeEvent extends EventObject {
      * @param changedNode the node that has been added or deleted.
      */
     public DomChangeEvent(final DomNode parentNode, final DomNode changedNode) {
-        super( parentNode );
+        super(parentNode);
         this.changedNode_ = changedNode;
     }
     

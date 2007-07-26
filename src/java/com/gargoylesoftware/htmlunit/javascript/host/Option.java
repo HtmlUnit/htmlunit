@@ -80,7 +80,7 @@ public class Option extends HTMLElement {
             attributes.addAttribute(null, "selected", "selected", null, "selected");
         }
 
-        final HtmlOption htmlOption = (HtmlOption)HTMLParser.getFactory( HtmlOption.TAG_NAME ).createElement(
+        final HtmlOption htmlOption = (HtmlOption)HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                 page, HtmlOption.TAG_NAME, attributes);
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);
@@ -105,8 +105,8 @@ public class Option extends HTMLElement {
      * Set the value of the "value" property
      * @param newValue The value property
      */
-    public void jsxSet_value( final String newValue ) {
-        getHtmlOption().setValueAttribute( newValue );
+    public void jsxSet_value(final String newValue) {
+        getHtmlOption().setValueAttribute(newValue);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Option extends HTMLElement {
      */
     public String jsxGet_text() {
         final HtmlOption htmlOption = getHtmlOption();
-        if ( htmlOption.isAttributeDefined( "label" ) ) {
+        if (htmlOption.isAttributeDefined("label")) {
             return htmlOption.getLabelAttribute();
         }
         return htmlOption.asText();
@@ -145,8 +145,8 @@ public class Option extends HTMLElement {
      * Set the value of the "selected" property
      * @param selected The new selected property
      */
-    public void jsxSet_selected( final boolean selected ) {
-        getHtmlOption().setSelected( selected );
+    public void jsxSet_selected(final boolean selected) {
+        getHtmlOption().setSelected(selected);
     }
     
     /**

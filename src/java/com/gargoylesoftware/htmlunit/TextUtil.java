@@ -68,7 +68,7 @@ public final class TextUtil {
      * @param prefix The prefix
      * @return true if the string starts with the prefix.
      */
-    public static boolean startsWithIgnoreCase( final String stringToCheck, final String prefix ) {
+    public static boolean startsWithIgnoreCase(final String stringToCheck, final String prefix) {
         Assert.notNull("stringToCheck", stringToCheck);
         Assert.notNull("prefix", prefix);
 
@@ -90,7 +90,7 @@ public final class TextUtil {
      * @param content The string
      * @return The resulting input stream.
      */
-    public static InputStream toInputStream( final String content ) {
+    public static InputStream toInputStream(final String content) {
         try {
             return toInputStream(content, DEFAULT_CHARSET);
         }
@@ -109,7 +109,7 @@ public final class TextUtil {
      */
     public static InputStream toInputStream(
             final String content,
-            final String encoding )
+            final String encoding)
         throws
             UnsupportedEncodingException {
 
@@ -153,10 +153,10 @@ public final class TextUtil {
      * @return The String as a byte[]. If the specified encoding is not supported an
      *         empty byte[] will be returned.
      */
-    public static byte[] stringToByteArray(final String content, final String charset ) {
+    public static byte[] stringToByteArray(final String content, final String charset) {
         byte[] contentBytes;
         try {
-            contentBytes = content.getBytes( charset );
+            contentBytes = content.getBytes(charset);
         }
         catch (final UnsupportedEncodingException e) {
             contentBytes = new byte[0];

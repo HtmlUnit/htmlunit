@@ -121,11 +121,11 @@ public class HtmlArea extends FocusableElement {
             else {
                 final URL url;
                 try {
-                    url = enclosingPage.getFullyQualifiedUrl( getHrefAttribute() );
+                    url = enclosingPage.getFullyQualifiedUrl(getHrefAttribute());
                 }
                 catch (final MalformedURLException e) {
                     throw new IllegalStateException(
-                        "Not a valid url: " + getHrefAttribute() );
+                        "Not a valid url: " + getHrefAttribute());
                 }
                 final WebRequestSettings settings = new WebRequestSettings(url,
                         SubmitMethod.getInstance(getAttributeValue("method")));
@@ -275,10 +275,10 @@ public class HtmlArea extends FocusableElement {
         }
         else if ("rect".equals(shape) && getCoordsAttribute() != null) {
             final String[] coords = getCoordsAttribute().split(",");
-            final double leftX = Double.parseDouble( coords[0].trim() );
-            final double topY = Double.parseDouble( coords[1].trim() );
-            final double rightX = Double.parseDouble( coords[2].trim() );
-            final double bottomY = Double.parseDouble( coords[3].trim() );
+            final double leftX = Double.parseDouble(coords[0].trim());
+            final double topY = Double.parseDouble(coords[1].trim());
+            final double rightX = Double.parseDouble(coords[2].trim());
+            final double bottomY = Double.parseDouble(coords[3].trim());
             final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY,
                     rightX - leftX + 1, bottomY - topY + 1);
             if (rectangle.contains(x, y)) {
@@ -287,13 +287,13 @@ public class HtmlArea extends FocusableElement {
         }
         else if ("circle".equals(shape) && getCoordsAttribute() != null) {
             final String[] coords = getCoordsAttribute().split(",");
-            final double centerX = Double.parseDouble( coords[0].trim() );
-            final double centerY = Double.parseDouble( coords[1].trim() );
+            final double centerX = Double.parseDouble(coords[0].trim());
+            final double centerY = Double.parseDouble(coords[1].trim());
             final String radiusString = coords[2].trim();
             
             final int radius;
             try {
-                radius = Integer.parseInt( radiusString );
+                radius = Integer.parseInt(radiusString);
             }
             catch (final NumberFormatException nfe) {
                 throw new NumberFormatException("Circle radius of " + radiusString + " is not yet implemented.");
@@ -304,7 +304,7 @@ public class HtmlArea extends FocusableElement {
                 return true;
             }
         }
-        else if ("poly".equals(shape) && getCoordsAttribute() != null ) {
+        else if ("poly".equals(shape) && getCoordsAttribute() != null) {
             final String[] coords = getCoordsAttribute().split(",");
             final GeneralPath path = new GeneralPath();
             for (int i = 0; i + 1 < coords.length; i += 2) {

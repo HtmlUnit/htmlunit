@@ -80,7 +80,7 @@ public class ImmediateRefreshHandler implements RefreshHandler, Serializable  {
                 "Please use WaitingRefreshHandler or ThreadedRefreshHandler instead.";
             throw new RuntimeException(msg);
         }
-        client.getPage( window, new WebRequestSettings( url ) );
+        client.getPage(window, new WebRequestSettings(url));
     }
 
 }

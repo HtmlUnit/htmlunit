@@ -75,7 +75,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public SimpleScriptableTest( final String name ) {
+    public SimpleScriptableTest(final String name) {
         super(name);
     }
 
@@ -84,7 +84,7 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     public void testCallInheritedFunction() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String content
             = "<html><head><title>foo</title><script>"
@@ -99,21 +99,21 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</form>"
             + "</body></html>";
 
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
 
         final List expectedAlerts = Collections.singletonList("past focus");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = ( HtmlPage )client.getPage(URL_GARGOYLE);
+        final HtmlPage page = (HtmlPage )client.getPage(URL_GARGOYLE);
         assertEquals("foo", page.getTitleText());
         assertEquals("focus not changed to textfield1",
                      page.getFormByName("form1").getInputByName("textfield1"),
                      page.getElementWithFocus());
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -151,16 +151,16 @@ public class SimpleScriptableTest extends WebTestCase {
         };
         final Collection hostClassNames = new ArrayList(map.values());
         CollectionUtils.transform(hostClassNames, class2ShortName);
-        assertEquals( new TreeSet(names),  new TreeSet(hostClassNames));
+        assertEquals(new TreeSet(names),  new TreeSet(hostClassNames));
     }
 
-    private Set getFileNames( final String directoryName ) {
+    private Set getFileNames(final String directoryName) {
         File directory = new File("." + File.separatorChar + directoryName);
         if (!directory.exists()) {
-            directory = new File("./src/java/".replace('/', File.separatorChar) + directoryName );
+            directory = new File("./src/java/".replace('/', File.separatorChar) + directoryName);
         }
-        assertTrue("directory exists", directory.exists() );
-        assertTrue("is a directory", directory.isDirectory() );
+        assertTrue("directory exists", directory.exists());
+        assertTrue("is a directory", directory.isDirectory());
 
         final String fileNames[] = directory.list();
         final Set collection = new HashSet();
@@ -168,7 +168,7 @@ public class SimpleScriptableTest extends WebTestCase {
         for (int i = 0; i < fileNames.length; i++) {
             final String name = fileNames[i];
             if (name.endsWith(".java")) {
-                collection.add( name.substring(0, name.length() - 5) );
+                collection.add(name.substring(0, name.length() - 5));
             }
         }
         return collection;

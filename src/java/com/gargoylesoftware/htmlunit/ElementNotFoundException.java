@@ -60,10 +60,10 @@ public class ElementNotFoundException extends RuntimeException {
      * @param attributeValue The value of the attribute
      */
     public ElementNotFoundException(
-            final String elementName, final String attributeName, final String attributeValue ) {
-        super( "elementName=[" + elementName
+            final String elementName, final String attributeName, final String attributeValue) {
+        super("elementName=[" + elementName
                  + "] attributeName=[" + attributeName
-                 + "] attributeValue=[" + attributeValue + "]" );
+                 + "] attributeValue=[" + attributeValue + "]");
 
         elementName_ = elementName;
         attributeName_ = attributeName;

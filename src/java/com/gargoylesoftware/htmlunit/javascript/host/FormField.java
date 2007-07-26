@@ -80,7 +80,7 @@ public class FormField extends FocusableHostElement {
      *@return The value of this attribute.
      */
     public String jsxGet_value() {
-        return getHtmlElementOrDie().getAttributeValue( "value" );
+        return getHtmlElementOrDie().getAttributeValue("value");
     }
 
     /**
@@ -88,8 +88,8 @@ public class FormField extends FocusableHostElement {
      *
      *@param newValue  The new value.
      */
-    public void jsxSet_value( final String newValue ) {
-        getHtmlElementOrDie().setAttributeValue( "value", newValue );
+    public void jsxSet_value(final String newValue) {
+        getHtmlElementOrDie().setAttributeValue("value", newValue);
     }
 
     /**
@@ -98,7 +98,7 @@ public class FormField extends FocusableHostElement {
      *@return The value of this attribute.
      */
     public String jsxGet_name() {
-        return getHtmlElementOrDie().getAttributeValue( "name" );
+        return getHtmlElementOrDie().getAttributeValue("name");
     }
 
     /**
@@ -106,8 +106,8 @@ public class FormField extends FocusableHostElement {
      *
      *@param newName  The new name.
      */
-    public void jsxSet_name( final String newName ) {
-        getHtmlElementOrDie().setAttributeValue( "name", newName );
+    public void jsxSet_name(final String newName) {
+        getHtmlElementOrDie().setAttributeValue("name", newName);
     }
 
     /**
@@ -156,7 +156,7 @@ public class FormField extends FocusableHostElement {
      * Select this element.
      */
     public void jsxFunction_select() {
-        getLog().debug( "Input.jsxFunction_select() not implemented" );
+        getLog().debug("Input.jsxFunction_select() not implemented");
     }
 
     /**
@@ -171,7 +171,7 @@ public class FormField extends FocusableHostElement {
      * Set whether or not to disable this element
      * @param disabled True if this is to be disabled.
      */
-    public void jsxSet_disabled( final boolean disabled ) {
+    public void jsxSet_disabled(final boolean disabled) {
         final HtmlElement element = getHtmlElementOrDie();
         if (disabled) {
             element.setAttributeValue("disabled", "disabled");

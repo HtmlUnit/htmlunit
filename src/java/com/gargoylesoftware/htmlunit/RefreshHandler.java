@@ -58,6 +58,6 @@ public interface RefreshHandler {
      * @param seconds The number of seconds to wait before reloading the page.
      * @throws IOException if the refresh fails
      */
-    void handleRefresh( final Page page, final URL url, final int seconds ) throws IOException;
+    void handleRefresh(final Page page, final URL url, final int seconds) throws IOException;
 
 }

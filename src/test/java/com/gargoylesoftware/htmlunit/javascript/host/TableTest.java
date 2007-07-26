@@ -60,7 +60,7 @@ public class TableTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public TableTest( final String name ) {
+    public TableTest(final String name) {
         super(name);
     }
 
@@ -358,12 +358,12 @@ public class TableTest extends WebTestCase {
             + "</table></body></html>";
 
         final String[] expectedAlerts = {"0", "1", "0", "1"};
-        createTestPageForRealBrowserIfNeeded( htmlContent, expectedAlerts );
+        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
-        loadPage( htmlContent, collectedAlerts );
+        loadPage(htmlContent, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -608,7 +608,7 @@ public class TableTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
         final String xml = page.asXml();
-        assertTrue( xml.indexOf( "width=\"200\"" ) != -1 );
+        assertTrue(xml.indexOf("width=\"200\"") != -1);
     }
 
     /**
@@ -621,7 +621,7 @@ public class TableTest extends WebTestCase {
                 + "<script language='javascript'>\n"
                 + "    var table = document.getElementById('tableID');\n"
                 + "    table.cellSpacing += 1;\n"
-                + "    alert( table.cellSpacing );\n"
+                + "    alert(table.cellSpacing);\n"
                 + "</script></body></html>";
 
         final String[] expectedAlerts = {"21"};
@@ -640,7 +640,7 @@ public class TableTest extends WebTestCase {
                 + "<script language='javascript'>\n"
                 + "    var table = document.getElementById('tableID');\n"
                 + "    table.cellPadding += 1;\n"
-                + "    alert( table.cellPadding );\n"
+                + "    alert(table.cellPadding);\n"
                 + "</script></body></html>";
 
         final String[] expectedAlerts = {"21"};
@@ -656,7 +656,7 @@ public class TableTest extends WebTestCase {
         final String htmlContent
             = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    document.getElementById( 'myTable' ).refresh();"
+            + "    document.getElementById('myTable').refresh();"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<table id='myTable'></table>\n"

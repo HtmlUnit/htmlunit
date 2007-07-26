@@ -117,16 +117,16 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      *
      * @param webClient The webClient that will own this engine.
      */
-    public JavaScriptEngine( final WebClient webClient ) {
-        super( webClient );
+    public JavaScriptEngine(final WebClient webClient) {
+        super(webClient);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void initialize( final WebWindow webWindow ) {
+    public void initialize(final WebWindow webWindow) {
 
-        Assert.notNull( "webWindow", webWindow );
+        Assert.notNull("webWindow", webWindow);
 
         final ContextAction action = new ContextAction()
         {
@@ -182,7 +182,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         while (it.hasNext()) {
             final String jsClassName = (String) it.next();
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
-            final boolean isWindow = Window.class.getName().equals( config.getLinkedClass().getName() );
+            final boolean isWindow = Window.class.getName().equals(config.getLinkedClass().getName());
             if (isWindow) {
                 configurePropertiesAndFunctions(config, window);
             }
@@ -253,7 +253,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * @throws InvocationTargetException if an exception is thrown during creation of the new object.
      * @return the created prototype
      */
-    private Scriptable configureClass( final ClassConfiguration config, final Scriptable window, final String name )
+    private Scriptable configureClass(final ClassConfiguration config, final Scriptable window, final String name)
         throws InstantiationException, IllegalAccessException, InvocationTargetException {
 
         final Class jsHostClass = config.getLinkedClass();
@@ -308,12 +308,12 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * @param htmlElement The element that will be used as context.
      * @return The result of executing the specified code.
      */
-    public Object execute( final HtmlPage htmlPage,
+    public Object execute(final HtmlPage htmlPage,
                            String sourceCode,
                            final String sourceName,
-                           final HtmlElement htmlElement ) {
+                           final HtmlElement htmlElement) {
 
-        Assert.notNull( "sourceCode", sourceCode );
+        Assert.notNull("sourceCode", sourceCode);
 
         // Pre process the source code
         sourceCode = preProcess(htmlPage, sourceCode, sourceName, htmlElement);
@@ -338,17 +338,17 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                 // "statement-->", but not "statement//-->"
                 int lastLineIndex;
                 for (lastLineIndex = endIndex; lastLineIndex > startIndex; lastLineIndex--) {
-                    final char eachChar = sourceCode.charAt( lastLineIndex );
+                    final char eachChar = sourceCode.charAt(lastLineIndex);
                     if (eachChar == '\n' || eachChar == '\r') {
                         final String lastLine = sourceCode.substring(lastLineIndex + 1, endIndex);
-                        if (lastLine.indexOf( "//" ) == -1 && lastLine.trim().length() != 0) {
+                        if (lastLine.indexOf("//") == -1 && lastLine.trim().length() != 0) {
                             if (getWebClient().getBrowserVersion().isIE()) {
                                 //IE ignores last line
                                 endIndex = lastLineIndex;
                             }
                             else {
                                 //FF gives syntax error
-                                throw new IllegalArgumentException( "Syntax error for \"" + lastLine +  "-->" + '"');
+                                throw new IllegalArgumentException("Syntax error for \"" + lastLine +  "-->" + '"');
                             }
                         }
                         break;
@@ -407,7 +407,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
             final Object javaScriptFunction,
             final Object thisObject,
             final Object [] args,
-            final DomNode htmlElement ) {
+            final DomNode htmlElement) {
 
         final Scriptable scope = getScope(htmlPage, htmlElement);
         
@@ -507,7 +507,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                     return doRun(cx);
                 }
             }
-            catch (final Exception e ) {
+            catch (final Exception e) {
                 final ScriptException scriptException = new ScriptException(htmlPage_, e, getSourceCode(cx));
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw scriptException;

@@ -55,7 +55,7 @@ public class ImageTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test.
      */
-    public ImageTest( final String name ) {
+    public ImageTest(final String name) {
         super(name);
     }
     
@@ -82,7 +82,7 @@ public class ImageTest extends WebTestCase {
         };
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -136,7 +136,7 @@ public class ImageTest extends WebTestCase {
         };
         
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -161,6 +161,6 @@ public class ImageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

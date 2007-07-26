@@ -63,7 +63,7 @@ public class HTMLParserTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public HTMLParserTest( final String name ) {
+    public HTMLParserTest(final String name) {
         super(name);
     }
 
@@ -120,7 +120,7 @@ public class HTMLParserTest extends WebTestCase {
 
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -155,7 +155,7 @@ public class HTMLParserTest extends WebTestCase {
 
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -181,7 +181,7 @@ public class HTMLParserTest extends WebTestCase {
         }
         catch (final SocketException e) {
             /* Some systems do not have access to the sf.net's web page.  If the connection
-             * timesout, do not fail the test
+             * times out, do not fail the test
              */
             System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
             return;

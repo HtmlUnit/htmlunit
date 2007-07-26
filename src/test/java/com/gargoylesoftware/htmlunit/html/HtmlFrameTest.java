@@ -60,8 +60,8 @@ public class HtmlFrameTest extends WebTestCase {
      *
      * @param name Name of the test
      */
-    public HtmlFrameTest( final String name ) {
-        super( name );
+    public HtmlFrameTest(final String name) {
+        super(name);
     }
 
     /**
@@ -77,10 +77,10 @@ public class HtmlFrameTest extends WebTestCase {
         final HtmlPage page = loadPage(firstContent);
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
-        assertEquals( "frame1", "", ((HtmlPage)frame1.getEnclosedPage()).getTitleText() );
+        assertEquals("frame1", "", ((HtmlPage)frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
-        assertEquals( "frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText() );
+        assertEquals("frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -131,13 +131,13 @@ public class HtmlFrameTest extends WebTestCase {
             + "</frameset></html>";
         final HtmlPage page = loadPage(firstContent);
         
-        assertEquals( "first", page.getTitleText() );
+        assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
-        assertEquals( "frame1", "generated", ((HtmlPage)frame1.getEnclosedPage()).getTitleText() );
+        assertEquals("frame1", "generated", ((HtmlPage)frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
-        assertEquals( "frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText() );
+        assertEquals("frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -190,21 +190,21 @@ public class HtmlFrameTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setDefaultResponse(
-                failingContent, 404, "No Found", "text/html" );
+                failingContent, 404, "No Found", "text/html");
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 
-        webClient.setWebConnection( webConnection );
+        webClient.setWebConnection(webConnection);
 
         try {
             webClient.getPage(URL_FIRST);
-            fail( "Expected FailingHttpStatusCodeException" );
+            fail("Expected FailingHttpStatusCodeException");
         }
         catch (final FailingHttpStatusCodeException e) {
-            assertEquals( 404, e.getStatusCode() );
+            assertEquals(404, e.getStatusCode());
         }
     }
 }

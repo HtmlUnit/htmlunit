@@ -83,10 +83,10 @@ public class HTMLFormElement extends HTMLElement {
     /**
      * {@inheritDoc}
      */
-    public void setHtmlElement( final HtmlElement htmlElement ) {
-        super.setHtmlElement( htmlElement );
+    public void setHtmlElement(final HtmlElement htmlElement) {
+        super.setHtmlElement(htmlElement);
         final HtmlForm htmlForm = getHtmlForm();
-        htmlForm.setScriptObject( this );
+        htmlForm.setScriptObject(this);
     }
 
     /**
@@ -151,7 +151,7 @@ public class HTMLFormElement extends HTMLElement {
      * Set the value of the javascript attribute "action".
      * @param action The new value.
      */
-    public void jsxSet_action( final String action ) {
+    public void jsxSet_action(final String action) {
         Assert.notNull("action", action);
         getHtmlForm().setActionAttribute(action);
     }
@@ -168,7 +168,7 @@ public class HTMLFormElement extends HTMLElement {
      * Set the value of the javascript attribute "method".
      * @param method The new value.
      */
-    public void jsxSet_method( final String method ) {
+    public void jsxSet_method(final String method) {
         Assert.notNull("method", method);
         getHtmlForm().setMethodAttribute(method);
     }
@@ -201,7 +201,7 @@ public class HTMLFormElement extends HTMLElement {
      * Set the value of the javascript attribute "target".
      * @param target The new value.
      */
-    public void jsxSet_target( final String target ) {
+    public void jsxSet_target(final String target) {
         Assert.notNull("target", target);
         getHtmlForm().setTargetAttribute(target);
     }
@@ -218,7 +218,7 @@ public class HTMLFormElement extends HTMLElement {
      * Set the value of the javascript attribute "encoding".
      * @param encoding The new value.
      */
-    public void jsxSet_encoding( final String encoding ) {
+    public void jsxSet_encoding(final String encoding) {
         Assert.notNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
     }
@@ -295,7 +295,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param start The scriptable object that was originally queried for this property
      * @return The property.
      */
-    public Object get( final int index, final Scriptable start ) {
+    public Object get(final int index, final Scriptable start) {
         return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
     }
 }

@@ -102,7 +102,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * Create a new HTTP web connection instance.
      * @param webClient The WebClient that is using this connection
      */
-    public HttpWebConnection( final WebClient webClient ) {
+    public HttpWebConnection(final WebClient webClient) {
         super(webClient);
     }
 
@@ -151,7 +151,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             }
             else {
                 e.printStackTrace();
-                throw new RuntimeException( "HTTP Error: " + e.getMessage() );
+                throw new RuntimeException("HTTP Error: " + e.getMessage());
             }
         }
         finally {
@@ -189,7 +189,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         if (webRequestSettings.getProxyHost() != null) {
             final String proxyHost = webRequestSettings.getProxyHost();
             final int proxyPort = webRequestSettings.getProxyPort();
-            hostConfiguration.setProxy( proxyHost, proxyPort );
+            hostConfiguration.setProxy(proxyHost, proxyPort);
         }
         return hostConfiguration;
     }
@@ -209,30 +209,30 @@ public class HttpWebConnection extends WebConnectionImpl {
             path = "/";
         }
         if (SubmitMethod.GET == webRequestSettings.getSubmitMethod()) {
-            httpMethod = new GetMethod( path );
+            httpMethod = new GetMethod(path);
 
-            if (webRequestSettings.getRequestParameters().isEmpty() ) {
+            if (webRequestSettings.getRequestParameters().isEmpty()) {
                 final String queryString = webRequestSettings.getURL().getQuery();
-                httpMethod.setQueryString( queryString );
+                httpMethod.setQueryString(queryString);
             }
             else {
                 final NameValuePair[] pairs = new NameValuePair[webRequestSettings.getRequestParameters().size()];
-                webRequestSettings.getRequestParameters().toArray( pairs );
-                httpMethod.setQueryString( pairs );
+                webRequestSettings.getRequestParameters().toArray(pairs);
+                httpMethod.setQueryString(pairs);
             }
         }
         else if (SubmitMethod.POST  == webRequestSettings.getSubmitMethod()) {
-            final PostMethod postMethod = new PostMethod( path );
+            final PostMethod postMethod = new PostMethod(path);
             postMethod.getParams().setContentCharset(webRequestSettings.getCharset());
 
             final String queryString = webRequestSettings.getURL().getQuery();
             if (queryString != null) {
                 postMethod.setQueryString(queryString);
             }
-            if (webRequestSettings.getRequestBody() != null ) {
+            if (webRequestSettings.getRequestBody() != null) {
                 final String body = webRequestSettings.getRequestBody();
                 final String charset = webRequestSettings.getCharset();
-                postMethod.setRequestEntity( new StringRequestEntity(body, null, charset) );
+                postMethod.setRequestEntity(new StringRequestEntity(body, null, charset));
             }
 
             // Note that this has to be done in two loops otherwise it won't
@@ -240,14 +240,14 @@ public class HttpWebConnection extends WebConnectionImpl {
             if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED) {
                 Iterator iterator = webRequestSettings.getRequestParameters().iterator();
                 while (iterator.hasNext()) {
-                    final NameValuePair pair = ( NameValuePair )iterator.next();
-                    postMethod.removeParameter( pair.getName(), pair.getValue() );
+                    final NameValuePair pair = (NameValuePair )iterator.next();
+                    postMethod.removeParameter(pair.getName(), pair.getValue());
                 }
 
                 iterator = webRequestSettings.getRequestParameters().iterator();
                 while (iterator.hasNext()) {
-                    final NameValuePair pair = ( NameValuePair )iterator.next();
-                    postMethod.addParameter( pair.getName(), pair.getValue() );
+                    final NameValuePair pair = (NameValuePair )iterator.next();
+                    postMethod.addParameter(pair.getName(), pair.getValue());
                 }
             }
             else {
@@ -287,7 +287,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         }
 
         httpMethod.setRequestHeader(
-                "User-Agent", getWebClient().getBrowserVersion().getUserAgent() );
+                "User-Agent", getWebClient().getBrowserVersion().getUserAgent());
 
         writeRequestHeadersToHttpMethod(httpMethod, webRequestSettings.getAdditionalHeaders());
         httpMethod.setFollowRedirects(false);
@@ -299,7 +299,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         }
         
         if (!getWebClient().isCookiesEnabled()) {
-            httpMethod.getParams().setCookiePolicy( CookiePolicy.IGNORE_COOKIES );
+            httpMethod.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
         }
         return httpMethod;
     }
@@ -310,13 +310,13 @@ public class HttpWebConnection extends WebConnectionImpl {
      */
     protected synchronized HttpClient getHttpClient() {
 
-        if (httpClient_ == null ) {
+        if (httpClient_ == null) {
             httpClient_ = createHttpClient();
 
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
             if (log instanceof SimpleLog) {
-                ((SimpleLog)log).setLevel( SimpleLog.LOG_LEVEL_WARN );
+                ((SimpleLog)log).setLevel(SimpleLog.LOG_LEVEL_WARN);
             }
 
             httpClient_.getHttpConnectionManager().getParams().setSoTimeout(getTimeout());
@@ -329,7 +329,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
-        httpClient_.getParams().setParameter( CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider() );
+        httpClient_.getParams().setParameter(CredentialsProvider.PROVIDER, getWebClient().getCredentialsProvider());
 
         return httpClient_;
     }
@@ -415,7 +415,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Construct an appropriate WebResponseData.
-     * May be overridden by subclasses to return a specialised WebResponseData.
+     * May be overridden by subclasses to return a specialized WebResponseData.
      * @param statusMessage StatusMessage from the response
      * @param headers response headers
      * @param statusCode response status code
@@ -438,7 +438,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Construct an appropriate WebResponse.
-     * May be overridden by subclasses to return a specialised WebResponse.
+     * May be overridden by subclasses to return a specialized WebResponse.
      * @param responseData Data that was send back
      * @param charset Charset used if not returned in the response.
      * @param originatingURL Where this response came from
@@ -451,17 +451,16 @@ public class HttpWebConnection extends WebConnectionImpl {
             final WebResponseData responseData,
             final long loadTime,
             final SubmitMethod requestMethod,
-            final URL originatingURL
-    ) {
+            final URL originatingURL) {
         return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);
     }
 
-    private void writeRequestHeadersToHttpMethod( final HttpMethod httpMethod, final Map requestHeaders ) {
+    private void writeRequestHeadersToHttpMethod(final HttpMethod httpMethod, final Map requestHeaders) {
         synchronized (requestHeaders) {
             final Iterator iterator = requestHeaders.entrySet().iterator();
             while (iterator.hasNext()) {
-                final Map.Entry entry = ( Map.Entry )iterator.next();
-                httpMethod.setRequestHeader( ( String )entry.getKey(), ( String )entry.getValue() );
+                final Map.Entry entry = (Map.Entry )iterator.next();
+                httpMethod.setRequestHeader((String )entry.getKey(), (String )entry.getValue());
             }
         }
     }

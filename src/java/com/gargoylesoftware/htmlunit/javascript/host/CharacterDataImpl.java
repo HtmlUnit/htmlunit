@@ -70,7 +70,7 @@ public class CharacterDataImpl extends NodeImpl {
      * Set the JavaScript property "data" for this character data.
      * @param newValue The new String of data.
      */
-    public void jsxSet_data( final String newValue ) {
+    public void jsxSet_data(final String newValue) {
         final DomCharacterData domCharacterData =
             (DomCharacterData) getDomNodeOrDie();
         domCharacterData.setData(newValue);

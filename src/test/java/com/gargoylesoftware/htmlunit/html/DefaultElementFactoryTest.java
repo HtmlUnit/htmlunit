@@ -58,8 +58,8 @@ public class DefaultElementFactoryTest extends WebTestCase {
      * Create an instance.
      * @param name The name of the test.
      */
-    public DefaultElementFactoryTest( final String name ) {
-        super( name );
+    public DefaultElementFactoryTest(final String name) {
+        super(name);
     }
 
     /**
@@ -76,15 +76,15 @@ public class DefaultElementFactoryTest extends WebTestCase {
 
         // Creates the attributes of the 'anchor'.
         final AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute( null, "href", "href", null, "http://www.google.com" );
-        atts.addAttribute( null, "tabindex", "tabindex", null, "2" );
-        atts.addAttribute( null, "accesskey", "accesskey", null, "F" );
+        atts.addAttribute(null, "href", "href", null, "http://www.google.com");
+        atts.addAttribute(null, "tabindex", "tabindex", null, "2");
+        atts.addAttribute(null, "accesskey", "accesskey", null, "F");
 
         // Access the factory.
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
 
         // Create a anchor element
-        final HtmlAnchor anchor = (HtmlAnchor) defaultElementFactory.createElement( htmlPage, "a", atts );
+        final HtmlAnchor anchor = (HtmlAnchor) defaultElementFactory.createElement(htmlPage, "a", atts);
 
         verifyAttributes(anchor);
     }
@@ -98,16 +98,16 @@ public class DefaultElementFactoryTest extends WebTestCase {
 
         // Verify if the attributes are in ascending order of name.
         HtmlAttr htmlAttr = (HtmlAttr) attributeEntriesIterator.next();
-        assertEquals( "href", htmlAttr.getNodeName() );
-        assertEquals( "http://www.google.com", htmlAttr.getValue() );
+        assertEquals("href", htmlAttr.getNodeName());
+        assertEquals("http://www.google.com", htmlAttr.getValue());
 
         htmlAttr = (HtmlAttr) attributeEntriesIterator.next();
-        assertEquals( "tabindex", htmlAttr.getNodeName() );
-        assertEquals( "2", htmlAttr.getValue() );
+        assertEquals("tabindex", htmlAttr.getNodeName());
+        assertEquals("2", htmlAttr.getValue());
 
         htmlAttr = (HtmlAttr) attributeEntriesIterator.next();
-        assertEquals( "accesskey", htmlAttr.getNodeName() );
-        assertEquals( "F", htmlAttr.getValue() );
+        assertEquals("accesskey", htmlAttr.getNodeName());
+        assertEquals("F", htmlAttr.getValue());
     }
 
     /**

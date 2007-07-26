@@ -126,21 +126,21 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      *
      * @param newValue The new value.
      */
-    public final void setText( final String newValue ) {
+    public final void setText(final String newValue) {
         initDefaultValue();
         final DomText child = (DomText) getFirstChild();
         if (child == null) {
             final DomText newChild = new DomText(getPage(), newValue);
-            appendChild( newChild );
+            appendChild(newChild);
         }
         else {
-            child.setData( newValue );
+            child.setData(newValue);
         }
 
         HtmlInput.executeOnChangeHandlerIfAppropriate(this);
 
-        setSelectionStart( newValue.length() );
-        setSelectionEnd( newValue.length() );
+        setSelectionStart(newValue.length());
+        setSelectionEnd(newValue.length());
     }
 
     /**
@@ -153,7 +153,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * @return See above
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair( getNameAttribute(), getText() )};
+        return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getText())};
     }
 
     /**
@@ -162,14 +162,14 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      */
     public void reset() {
         initDefaultValue();
-        setText( defaultValue_ );
+        setText(defaultValue_);
     }
 
     /**
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultValue(String)
      */
-    public void setDefaultValue( final String defaultValue ) {
+    public void setDefaultValue(final String defaultValue) {
         initDefaultValue();
         if (defaultValue == null) {
             defaultValue_ = "";
@@ -195,7 +195,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
-    public void setDefaultChecked( final boolean defaultChecked ) {
+    public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
 
@@ -358,7 +358,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     public String getSelectedText() {
         String text = null;
         if (selectionStart_ != selectionEnd_) {
-            text = getText().substring( selectionStart_, selectionEnd_ );
+            text = getText().substring(selectionStart_, selectionEnd_);
         }
         return text;
     }

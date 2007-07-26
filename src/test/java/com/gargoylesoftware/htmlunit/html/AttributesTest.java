@@ -135,7 +135,7 @@ public class AttributesTest extends WebTestCase {
     private static void addTestsForClass(
             final Class clazz,
             final HtmlPage page,
-            final TestSuite suite )
+            final TestSuite suite)
         throws
             Exception {
 
@@ -186,9 +186,9 @@ public class AttributesTest extends WebTestCase {
             final String attributeName,
             final Class classUnderTest,
             final Method method,
-            final HtmlPage page ) {
+            final HtmlPage page) {
 
-        super( createTestName(classUnderTest, method) );
+        super(createTestName(classUnderTest, method));
         classUnderTest_ = classUnderTest;
         method_ = method;
         page_ = page;
@@ -201,7 +201,7 @@ public class AttributesTest extends WebTestCase {
      * @param method The getter method for the attribute.
      * @return The new name.
      */
-    private static String createTestName( final Class clazz, final Method method ) {
+    private static String createTestName(final Class clazz, final Method method) {
         String className = clazz.getName();
         final int index = className.lastIndexOf('.');
         className = className.substring(index + 1);
@@ -220,8 +220,8 @@ public class AttributesTest extends WebTestCase {
         objectToTest.setAttributeValue(attributeName_, value);
 
         final Object noObjects[] = new Object[0];
-        final Object result = method_.invoke( objectToTest, noObjects );
-        assertSame( value, result );
+        final Object result = method_.invoke(objectToTest, noObjects);
+        assertSame(value, result);
     }
 
     /**
@@ -232,20 +232,20 @@ public class AttributesTest extends WebTestCase {
     private Object getNewInstanceForClassUnderTest() throws Exception {
         final Object newInstance;
         if (classUnderTest_ == HtmlTableRow.class) {
-            newInstance = (HtmlTableRow)HTMLParser.getFactory( HtmlTableRow.TAG_NAME ).createElement(
+            newInstance = (HtmlTableRow)HTMLParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
                     page_, HtmlTableRow.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableHeaderCell.class) {
-            newInstance = (HtmlTableHeaderCell)HTMLParser.getFactory( HtmlTableHeaderCell.TAG_NAME ).createElement(
+            newInstance = (HtmlTableHeaderCell)HTMLParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
                     page_, HtmlTableHeaderCell.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableDataCell.class) {
-            newInstance = (HtmlTableDataCell)HTMLParser.getFactory( HtmlTableDataCell.TAG_NAME ).createElement(
+            newInstance = (HtmlTableDataCell)HTMLParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
                     page_, HtmlTableDataCell.TAG_NAME, null);
         }
         else {
             final Constructor constructor = classUnderTest_.getDeclaredConstructor(
-                new Class[]{HtmlPage.class, Map.class} );
+                new Class[]{HtmlPage.class, Map.class});
             try {
                 newInstance = constructor.newInstance(
                     new Object[]{page_, null});

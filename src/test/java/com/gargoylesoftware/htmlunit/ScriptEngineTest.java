@@ -59,7 +59,7 @@ public class ScriptEngineTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public ScriptEngineTest( final String name ) {
+    public ScriptEngineTest(final String name) {
         super(name);
     }
 
@@ -87,36 +87,36 @@ public class ScriptEngineTest extends WebTestCase {
         // NO MORE: The last expected is the dummy stub that is needed to initialize the javascript engine
         final String[] expectedScripts = {"One", "Two", "Three"};
 
-        assertEquals( expectedScripts, collectedScripts );
+        assertEquals(expectedScripts, collectedScripts);
     }
 
     private HtmlPage loadPageAndCollectScripts(
-            final String html, final List collectedScripts )
+            final String html, final List collectedScripts)
         throws Exception {
 
         final WebClient client = new WebClient();
-        client.setScriptEngine( new JavaScriptEngine(client) {
+        client.setScriptEngine(new JavaScriptEngine(client) {
             public Object execute(
                     final HtmlPage htmlPage, final String sourceCode,
-                    final String sourceName, final HtmlElement htmlElement ) {
-                collectedScripts.add( sourceCode );
+                    final String sourceName, final HtmlElement htmlElement) {
+                collectedScripts.add(sourceCode);
                 return null;
             }
             public Object callFunction(
                     final HtmlPage htmlPage, final Object javaScriptFunction,
                     final Object thisObject, final Object [] args,
-                    final DomNode htmlElement ) {
+                    final DomNode htmlElement) {
                 return null;
             }
             public boolean isScriptRunning() {
                 return false;
             }
-        } );
+        });
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
-        webConnection.setDefaultResponse( html );
-        client.setWebConnection( webConnection );
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST));
         return page;

@@ -73,12 +73,12 @@ public abstract class HtmlTableCell extends ClickableElement {
      * @return See above
      */
     public int getColumnSpan() {
-        final String spanString = getAttributeValue( "colspan" );
+        final String spanString = getAttributeValue("colspan");
         if (spanString == null || spanString.length() == 0) {
             return 1;
         }
         else {
-            return Integer.parseInt( spanString );
+            return Integer.parseInt(spanString);
         }
     }
 
@@ -89,12 +89,12 @@ public abstract class HtmlTableCell extends ClickableElement {
      * @return See above
      */
     public int getRowSpan() {
-        final String spanString = getAttributeValue( "rowspan" );
+        final String spanString = getAttributeValue("rowspan");
         if (spanString == null || spanString.length() == 0) {
             return 1;
         }
         else {
-            return Integer.parseInt( spanString );
+            return Integer.parseInt(spanString);
         }
     }
 
@@ -103,7 +103,7 @@ public abstract class HtmlTableCell extends ClickableElement {
      * @return The table row containing this cell.
      */
     public HtmlTableRow getEnclosingRow() {
-        return (HtmlTableRow) getEnclosingElement( "tr" );
+        return (HtmlTableRow) getEnclosingElement("tr");
     }
 
 }

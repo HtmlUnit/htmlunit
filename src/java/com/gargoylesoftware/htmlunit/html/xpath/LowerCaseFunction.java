@@ -63,10 +63,10 @@ public class LowerCaseFunction implements Function {
 
         // inspired for reference implementation of StringLengthFunction
         if (arguments.size() == 0) {
-            return evaluate( context.getNodeSet(), context.getNavigator() );
+            return evaluate(context.getNodeSet(), context.getNavigator());
         }
         else if (arguments.size() == 1) {
-            return evaluate( arguments.get(0), context.getNavigator() );
+            return evaluate(arguments.get(0), context.getNavigator());
         }
 
         throw new FunctionCallException("lower-case() requires one argument.");

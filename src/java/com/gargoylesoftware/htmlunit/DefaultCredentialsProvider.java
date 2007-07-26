@@ -90,8 +90,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param username The username for the new credentials.
      * @param password The password for the new credentials.
      */
-    public void addCredentials( final String username, final String password ) {
-        addCredentials( username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM );
+    public void addCredentials(final String username, final String password) {
+        addCredentials(username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
     }
 
     /**
@@ -104,11 +104,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param port The port to which to the new credentials apply (negative if applicable to any port).
      * @param realm The realm to which to the new credentials apply (<tt>null</tt> if applicable to any realm).
      */
-    public void addCredentials( final String username, final String password, final String host,
-            final int port, final String realm ) {
-        final AuthScope scope = new AuthScope( host, port, realm, AuthScope.ANY_SCHEME );
-        final Credentials c = new UsernamePasswordCredentials( username, password );
-        credentials_.put( scope, c );
+    public void addCredentials(final String username, final String password, final String host,
+            final int port, final String realm) {
+        final AuthScope scope = new AuthScope(host, port, realm, AuthScope.ANY_SCHEME);
+        final Credentials c = new UsernamePasswordCredentials(username, password);
+        credentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
 
@@ -117,8 +117,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param username The username for the new credentials.
      * @param password The password for the new credentials.
      */
-    public void addProxyCredentials( final String username, final String password ) {
-        addProxyCredentials( username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT );
+    public void addProxyCredentials(final String username, final String password) {
+        addProxyCredentials(username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT);
     }
 
     /**
@@ -128,10 +128,10 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param host The host to which to the new credentials apply (<tt>null</tt> if applicable to any host).
      * @param port The port to which to the new credentials apply (negative if applicable to any port).
      */
-    public void addProxyCredentials( final String username, final String password, final String host, final int port ) {
-        final AuthScope scope = new AuthScope( host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME );
-        final Credentials c = new UsernamePasswordCredentials( username, password );
-        proxyCredentials_.put( scope, c );
+    public void addProxyCredentials(final String username, final String password, final String host, final int port) {
+        final AuthScope scope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials c = new UsernamePasswordCredentials(username, password);
+        proxyCredentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
 
@@ -146,11 +146,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * this machine.
      * @param clientDomain The domain to authenticate within.
      */
-    public void addNTLMCredentials( final String username, final String password, final String host,
-            final int port, final String clientHost, final String clientDomain ) {
-        final AuthScope scope = new AuthScope( host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME );
-        final Credentials c = new NTCredentials( username, password, clientHost, clientDomain );
-        credentials_.put( scope, c );
+    public void addNTLMCredentials(final String username, final String password, final String host,
+            final int port, final String clientHost, final String clientDomain) {
+        final AuthScope scope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials c = new NTCredentials(username, password, clientHost, clientDomain);
+        credentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
 
@@ -165,11 +165,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * this machine.
      * @param clientDomain The domain to authenticate within.
      */
-    public void addNTLMProxyCredentials( final String username, final String password, final String host,
-            final int port, final String clientHost, final String clientDomain ) {
-        final AuthScope scope = new AuthScope( host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME );
-        final Credentials c = new NTCredentials( username, password, clientHost, clientDomain );
-        proxyCredentials_.put( scope, c );
+    public void addNTLMProxyCredentials(final String username, final String password, final String host,
+            final int port, final String clientHost, final String clientDomain) {
+        final AuthScope scope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials c = new NTCredentials(username, password, clientHost, clientDomain);
+        proxyCredentials_.put(scope, c);
         clearAnswered(); // don't need to be precise, will cause in worst case one extra request
     }
 
@@ -184,7 +184,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @throws CredentialsNotAvailableException If the specified credentials cannot be provided due to an error.
      * @see CredentialsProvider#getCredentials(AuthScheme, String, int, boolean)
      */
-    public Credentials getCredentials( final AuthScheme scheme, final String host, final int port, final boolean proxy )
+    public Credentials getCredentials(final AuthScheme scheme, final String host, final int port, final boolean proxy)
         throws CredentialsNotAvailableException {
 
         // it's the responsibility of the CredentialProvider to answer only once with a given Credentials
@@ -284,7 +284,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     protected void clearAnswered() {
         answerMarks_.clear();
-        getLog().debug( "Flushed marked answers" );
+        getLog().debug("Flushed marked answers");
     }
 
     /**

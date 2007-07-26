@@ -62,7 +62,7 @@ public class AnchorTest extends WebTestCase {
      * Create an instance
      * @param name The name of the test
      */
-    public AnchorTest( final String name ) {
+    public AnchorTest(final String name) {
         super(name);
     }
 
@@ -71,7 +71,7 @@ public class AnchorTest extends WebTestCase {
      */
     public void testAnchor_getAttribute_and_href() throws Exception {
         final WebClient client = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String content
             = "<html><head><title>AnchorTest</title><script>\n"
@@ -88,13 +88,13 @@ public class AnchorTest extends WebTestCase {
             + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>"
             + "</body></html>";
         
-        webConnection.setDefaultResponse( content );
-        client.setWebConnection( webConnection );
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
         
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage)(client.getPage( new URL("http://x")));
+        final HtmlPage page = (HtmlPage)(client.getPage(new URL("http://x")));
                 
         final HtmlAnchor anchor = page.getAnchorByName("testanchor");
         
@@ -102,7 +102,7 @@ public class AnchorTest extends WebTestCase {
         
         final String[] expectedAlerts = {"http://x/testsite1.html", "testsite1.html",
             "http://x/testsite2.html", "testsite2.html", "13", "testanchor"};
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -128,7 +128,7 @@ public class AnchorTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -159,7 +159,7 @@ public class AnchorTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

@@ -89,12 +89,12 @@ public class DomComment extends DomCharacterData {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
-    protected void printXml( final String indent, final PrintWriter printWriter ) {
+    protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.print("<!--");
         printWriter.print(getData());
         printWriter.print("-->");
-        printChildrenAsXml( indent, printWriter );
+        printChildrenAsXml(indent, printWriter);
     }
 
     /**

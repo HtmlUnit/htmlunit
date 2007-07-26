@@ -706,7 +706,7 @@ public class HtmlPageTest extends WebTestCase {
             "Element 'base' must appear in <head>, it is ignored."
         };
         assertEquals(expectedIncorrectness, collectedIncorrectness);
-        assertEquals( URL_FIRST + "/somepage.html", secondPage.getWebResponse().getUrl());
+        assertEquals(URL_FIRST + "/somepage.html", secondPage.getWebResponse().getUrl());
     }
 
     /**
@@ -1378,11 +1378,11 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNoSlashURL() throws Exception {
-        testNoSlashURL( "http:/second" );
-        testNoSlashURL( "http:second" );
+        testNoSlashURL("http:/second");
+        testNoSlashURL("http:second");
     }
 
-    private void testNoSlashURL( final String url ) throws Exception {
+    private void testNoSlashURL(final String url) throws Exception {
         final String firstContent
             = "<html><body>"
             + "<iframe id='myIFrame' src='" + url + "'></iframe>"
@@ -1392,16 +1392,16 @@ public class HtmlPageTest extends WebTestCase {
             = "<html><body></body></html>";
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
 
-        final MockWebConnection webConnection = new MockWebConnection( client );
+        final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
     
-        final HtmlPage firstPage = ( HtmlPage )client.getPage(URL_FIRST);
-        final HtmlInlineFrame iframe = (HtmlInlineFrame)firstPage.getHtmlElementById( "myIFrame" );
+        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlInlineFrame iframe = (HtmlInlineFrame)firstPage.getHtmlElementById("myIFrame");
         
-        assertEquals( URL_SECOND, iframe.getEnclosedPage().getWebResponse().getUrl() );
+        assertEquals(URL_SECOND, iframe.getEnclosedPage().getWebResponse().getUrl());
     }
 
     /**
@@ -1429,7 +1429,7 @@ public class HtmlPageTest extends WebTestCase {
                 };
             }
         };
-        client.setWebConnection( webConnection );
+        client.setWebConnection(webConnection);
         
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
         settings.setSubmitMethod(SubmitMethod.POST);
@@ -1447,11 +1447,11 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page1 = loadPage(content);
 
         final ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
-        final ObjectOutputStream objectOS = new ObjectOutputStream( byteOS );
-        objectOS.writeObject( page1 );
+        final ObjectOutputStream objectOS = new ObjectOutputStream(byteOS);
+        objectOS.writeObject(page1);
         
-        final ByteArrayInputStream byteIS = new ByteArrayInputStream( byteOS.toByteArray() );
-        final ObjectInputStream objectIS = new ObjectInputStream( byteIS );
+        final ByteArrayInputStream byteIS = new ByteArrayInputStream(byteOS.toByteArray());
+        final ObjectInputStream objectIS = new ObjectInputStream(byteIS);
         final HtmlPage page2 = (HtmlPage)objectIS.readObject();
         
         final Iterator iterator1 = page1.getAllHtmlChildElements();
@@ -1462,8 +1462,8 @@ public class HtmlPageTest extends WebTestCase {
             final HtmlElement element2 = (HtmlElement)iterator2.next();
             assertEquals(element1.getNodeName(), element2.getNodeName());
         }
-        assertFalse( iterator2.hasNext() );
-        assertEquals( "Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue() );
+        assertFalse(iterator2.hasNext());
+        assertEquals("Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue());
     }
 
     /**

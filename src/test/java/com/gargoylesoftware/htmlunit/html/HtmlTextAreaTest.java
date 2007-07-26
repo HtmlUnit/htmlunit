@@ -55,8 +55,8 @@ public class HtmlTextAreaTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlTextAreaTest( final String name ) {
-        super( name );
+    public HtmlTextAreaTest(final String name) {
+        super(name);
     }
 
     /**
@@ -71,16 +71,16 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm)page.getHtmlElementById("form1");
 
-        final HtmlTextArea textArea = form.getTextAreaByName( "textArea1" );
+        final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
 
         final Page secondPage = form.submit();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -95,15 +95,15 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
-        final HtmlTextArea textArea = form.getTextAreaByName( "textArea1" );
-        textArea.setText( "Flintstone" );
+        final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
+        textArea.setText("Flintstone");
         final Page secondPage = form.submit();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=Flintstone",
                 secondPage.getWebResponse().getUrl());
-        assertEquals( "method", SubmitMethod.GET, webConnection.getLastMethod() );
+        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
     
     /**
@@ -116,9 +116,9 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<textarea name='textArea1'> foo \n bar </textarea>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = ( HtmlForm )page.getHtmlElementById( "form1" );
+        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
 
-        final HtmlTextArea textArea = form.getTextAreaByName( "textArea1" );
+        final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
         assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
     }

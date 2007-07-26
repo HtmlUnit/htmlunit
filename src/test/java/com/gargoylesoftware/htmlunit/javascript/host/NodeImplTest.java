@@ -118,8 +118,8 @@ public class NodeImplTest extends WebTestCase {
      */
     public void testRemoveChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webClient.setWebConnection(webConnection);
 
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -134,17 +134,17 @@ public class NodeImplTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>"
             + "</body></html>";
         webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage page = (HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"true", "true"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -153,8 +153,8 @@ public class NodeImplTest extends WebTestCase {
      */
     public void testReplaceChild() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection( webClient );
-        webClient.setWebConnection( webConnection );
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webClient.setWebConnection(webConnection);
 
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -170,17 +170,17 @@ public class NodeImplTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>"
             + "</body><div id='newChild'/></html>";
         webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST );
+            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
 
         final List collectedAlerts = new ArrayList();
-        webClient.setAlertHandler( new CollectingAlertHandler(collectedAlerts) );
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = ( HtmlPage )webClient.getPage( URL_FIRST );
+        final HtmlPage page = (HtmlPage )webClient.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"true", "true"};
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

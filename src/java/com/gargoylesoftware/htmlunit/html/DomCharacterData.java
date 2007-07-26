@@ -72,7 +72,7 @@ public abstract class DomCharacterData extends DomNode {
      * Set the data character string to the new string.
      * @param newValue The new String of data.
      */
-    public void setData( final String newValue ) {
+    public void setData(final String newValue) {
         data_ = newValue;
     }
 

@@ -51,8 +51,8 @@ public class HtmlTableCellTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlTableCellTest( final String name ) {
-        super( name );
+    public HtmlTableCellTest(final String name) {
+        super(name);
     }
 
     /**

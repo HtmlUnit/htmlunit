@@ -105,7 +105,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return The page that occupies this window after this change is made.  It
      * may be the same window or it may be a freshly loaded one.
      */
-    public Page setSelected( final boolean selected ) {
+    public Page setSelected(final boolean selected) {
         if (selected == isSelected()) {
             return getPage();
         }
@@ -215,7 +215,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      *
      * @param newLabel The value of the attribute "label".
      */
-    public final void setLabelAttribute( final String newLabel ) {
+    public final void setLabelAttribute(final String newLabel) {
         setAttributeValue("label", newLabel);
     }
 
@@ -238,7 +238,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      *
      * @param newValue The value of the attribute "value".
      */
-    public final void setValueAttribute( final String newValue ) {
+    public final void setValueAttribute(final String newValue) {
         setAttributeValue("value", newValue);
     }
 

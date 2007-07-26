@@ -85,7 +85,7 @@ public class HTMLTextAreaElement extends FormField {
      * Set the value of the "value" attribute
      * @param value The new value
      */
-    public void jsxSet_value( final String value ) {
+    public void jsxSet_value(final String value) {
         ((HtmlTextArea)getHtmlElementOrDie()).setText(value);
     }
 
@@ -105,8 +105,8 @@ public class HTMLTextAreaElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_defaultValue( final String defaultValue ) {
-        ((HtmlTextArea)getHtmlElementOrDie()).setDefaultValue( defaultValue );
+    public void jsxSet_defaultValue(final String defaultValue) {
+        ((HtmlTextArea)getHtmlElementOrDie()).setDefaultValue(defaultValue);
     }
 
     /**
@@ -129,7 +129,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of "selectionStart" attribute
      * @param start selection start
      */
-    public void jsxSet_selectionStart( final int start) {
+    public void jsxSet_selectionStart(final int start) {
         ((HtmlTextArea)getHtmlElementOrDie()).setSelectionStart(start);
     }
 
@@ -145,7 +145,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of "selectionEnd" attribute
      * @param end selection end
      */
-    public void jsxSet_selectionEnd( final int end) {
+    public void jsxSet_selectionEnd(final int end) {
         ((HtmlTextArea)getHtmlElementOrDie()).setSelectionEnd(end);
     }
 

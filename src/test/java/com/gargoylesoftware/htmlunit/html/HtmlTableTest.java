@@ -54,8 +54,8 @@ public class HtmlTableTest extends WebTestCase {
      *
      * @param name The name of the test
      */
-    public HtmlTableTest( final String name ) {
-        super( name );
+    public HtmlTableTest(final String name) {
+        super(name);
     }
 
     /**
@@ -73,21 +73,21 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
-        final HtmlTableCell cell1 = table.getCellAt( 0, 0 );
-        assertEquals( "cell1 contents", "cell1", cell1.asText() );
+        final HtmlTableCell cell1 = table.getCellAt(0, 0);
+        assertEquals("cell1 contents", "cell1", cell1.asText());
 
-        final HtmlTableCell cell2 = table.getCellAt( 0, 1 );
-        assertEquals( "cell2 contents", "cell2", cell2.asText() );
+        final HtmlTableCell cell2 = table.getCellAt(0, 1);
+        assertEquals("cell2 contents", "cell2", cell2.asText());
 
-        final HtmlTableCell cell3 = table.getCellAt( 1, 0 );
-        assertEquals( "cell3 contents", "cell3", cell3.asText() );
-        assertSame( "cells (1,0) and (1,1)", cell3, table.getCellAt( 1, 1 ) );
+        final HtmlTableCell cell3 = table.getCellAt(1, 0);
+        assertEquals("cell3 contents", "cell3", cell3.asText());
+        assertSame("cells (1,0) and (1,1)", cell3, table.getCellAt(1, 1));
 
-        final HtmlTableCell cell4 = table.getCellAt( 0, 2 );
-        assertEquals( "cell4 contents", "cell4", cell4.asText() );
-        assertSame( "cells (0,2) and (1,2)", cell4, table.getCellAt( 1, 2 ) );
+        final HtmlTableCell cell4 = table.getCellAt(0, 2);
+        assertEquals("cell4 contents", "cell4", cell4.asText());
+        assertSame("cells (0,2) and (1,2)", cell4, table.getCellAt(1, 2));
     }
 
     /**
@@ -106,24 +106,24 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
-        final HtmlTableCell cell1 = table.getCellAt( 0, 0 );
-        assertEquals( "cell (0,0) contents", "row 1 col 1", cell1.asText() );
+        final HtmlTableCell cell1 = table.getCellAt(0, 0);
+        assertEquals("cell (0,0) contents", "row 1 col 1", cell1.asText());
 
-        final HtmlTableCell cell2 = table.getCellAt( 0, 1 );
-        assertEquals( "cell (0,1) contents", null, cell2 );
+        final HtmlTableCell cell2 = table.getCellAt(0, 1);
+        assertEquals("cell (0,1) contents", null, cell2);
 
-        final HtmlTableCell cell3 = table.getCellAt( 1, 0 );
-        assertEquals( "cell (1,0) contents", "row 2 col 1", cell3.asText() );
+        final HtmlTableCell cell3 = table.getCellAt(1, 0);
+        assertEquals("cell (1,0) contents", "row 2 col 1", cell3.asText());
 
-        final HtmlTableCell cell4 = table.getCellAt( 1, 1 );
-        assertEquals( "cell (1,1) contents", "row 2 col 2", cell4.asText() );
+        final HtmlTableCell cell4 = table.getCellAt(1, 1);
+        assertEquals("cell (1,1) contents", "row 2 col 2", cell4.asText());
 
-        final HtmlTableCell cell5 = table.getCellAt( 2, 0 );
-        assertEquals( "cell (2, 0) contents", "row 3 col 1&2", cell5.asText() );
-        final HtmlTableCell cell6 = table.getCellAt( 2, 1 );
-        assertEquals( "cell (2, 1) contents", null, cell6 );
+        final HtmlTableCell cell5 = table.getCellAt(2, 0);
+        assertEquals("cell (2, 0) contents", "row 3 col 1&2", cell5.asText());
+        final HtmlTableCell cell6 = table.getCellAt(2, 1);
+        assertEquals("cell (2, 1) contents", null, cell6);
     }
 
     /**
@@ -143,10 +143,10 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
-        final HtmlTableCell cell = table.getCellAt( 99, 0 );
-        assertNull( "cell", cell );
+        final HtmlTableCell cell = table.getCellAt(99, 0);
+        assertNull("cell", cell);
     }
 
     /**
@@ -168,17 +168,17 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
         final List expectedRows = new ArrayList();
-        expectedRows.add( table.getRowById( "row1" ) );
-        expectedRows.add( table.getRowById( "row2" ) );
-        expectedRows.add( table.getRowById( "row3" ) );
-        expectedRows.add( table.getRowById( "row4" ) );
-        expectedRows.add( table.getRowById( "row5" ) );
-        expectedRows.add( table.getRowById( "row6" ) );
+        expectedRows.add(table.getRowById("row1"));
+        expectedRows.add(table.getRowById("row2"));
+        expectedRows.add(table.getRowById("row3"));
+        expectedRows.add(table.getRowById("row4"));
+        expectedRows.add(table.getRowById("row5"));
+        expectedRows.add(table.getRowById("row6"));
 
-        assertEquals( expectedRows, table.getRows() );
+        assertEquals(expectedRows, table.getRows());
     }
 
     /**
@@ -206,17 +206,17 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
         final List expectedRows = new ArrayList();
-        expectedRows.add( table.getRowById( "row1" ) );
-        expectedRows.add( table.getRowById( "row2" ) );
-        expectedRows.add( table.getRowById( "row3" ) );
-        expectedRows.add( table.getRowById( "row4" ) );
-        expectedRows.add( table.getRowById( "row5" ) );
-        expectedRows.add( table.getRowById( "row6" ) );
+        expectedRows.add(table.getRowById("row1"));
+        expectedRows.add(table.getRowById("row2"));
+        expectedRows.add(table.getRowById("row3"));
+        expectedRows.add(table.getRowById("row4"));
+        expectedRows.add(table.getRowById("row5"));
+        expectedRows.add(table.getRowById("row6"));
 
-        assertEquals( expectedRows, table.getRows() );
+        assertEquals(expectedRows, table.getRows());
     }
 
     /**
@@ -246,11 +246,11 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
-        assertNotNull( table.getHeader() );
-        assertNotNull( table.getFooter() );
-        assertEquals( 2, table.getBodies().size() );
+        assertNotNull(table.getHeader());
+        assertNotNull(table.getFooter());
+        assertEquals(2, table.getBodies().size());
     }
 
     /**
@@ -274,11 +274,11 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
-        assertEquals( null, table.getHeader() );
-        assertEquals( null, table.getFooter() );
-        assertEquals( 1, table.getBodies().size() );
+        assertEquals(null, table.getHeader());
+        assertEquals(null, table.getFooter());
+        assertEquals(1, table.getBodies().size());
     }
 
     /**
@@ -297,7 +297,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = ( HtmlTable )page.getHtmlElementById( "table1" );
+        final HtmlTable table = (HtmlTable )page.getHtmlElementById("table1");
 
         assertEquals("MyCaption", table.getCaptionText());
     }
@@ -322,16 +322,16 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         // Check that a <tbody> was inserted properly
-        final HtmlTableDataCell cell1 = ( HtmlTableDataCell )page.getHtmlElementById( "cell1" );
-        assertInstanceOf( cell1.getParentNode(), HtmlTableRow.class );
-        assertInstanceOf( cell1.getParentNode().getParentNode(), HtmlTableBody.class );
-        assertInstanceOf( cell1.getParentNode().getParentNode().getParentNode(), HtmlTable.class );
+        final HtmlTableDataCell cell1 = (HtmlTableDataCell )page.getHtmlElementById("cell1");
+        assertInstanceOf(cell1.getParentNode(), HtmlTableRow.class);
+        assertInstanceOf(cell1.getParentNode().getParentNode(), HtmlTableBody.class);
+        assertInstanceOf(cell1.getParentNode().getParentNode().getParentNode(), HtmlTable.class);
 
         // Check that the existing <tbody> wasn't messed up.
-        final HtmlTableDataCell cell2 = ( HtmlTableDataCell )page.getHtmlElementById( "cell2" );
-        assertInstanceOf( cell2.getParentNode(), HtmlTableRow.class );
-        assertInstanceOf( cell2.getParentNode().getParentNode(), HtmlTableBody.class );
-        assertInstanceOf( cell2.getParentNode().getParentNode().getParentNode(), HtmlTable.class );
+        final HtmlTableDataCell cell2 = (HtmlTableDataCell )page.getHtmlElementById("cell2");
+        assertInstanceOf(cell2.getParentNode(), HtmlTableRow.class);
+        assertInstanceOf(cell2.getParentNode().getParentNode(), HtmlTableBody.class);
+        assertInstanceOf(cell2.getParentNode().getParentNode().getParentNode(), HtmlTable.class);
     }
 
     /**
@@ -357,7 +357,7 @@ public class HtmlTableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        assertEquals( expectedAlerts, collectedAlerts );
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
 

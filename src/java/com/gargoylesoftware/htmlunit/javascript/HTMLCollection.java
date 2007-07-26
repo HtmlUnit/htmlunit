@@ -142,9 +142,9 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             final Scriptable thisObj, final Object[] args)
         throws JavaScriptException {
         if (args.length == 0) {
-            throw Context.reportRuntimeError( "Zero arguments; need an index or a key." );
+            throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }
-        return get( args[0] );
+        return get(args[0]);
     }
 
     /**
@@ -162,15 +162,15 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @param o The index or key corresponding to the element or elements to return.
      * @return The element or elements corresponding to the specified index or key.
      */
-    private Object get( final Object o ) {
+    private Object get(final Object o) {
         if (o instanceof Number) {
             final Number n = (Number) o;
             final int i = n.intValue();
-            return get( i, this );
+            return get(i, this);
         }
         else {
-            final String key = String.valueOf( o );
-            return get( key, this );
+            final String key = String.valueOf(o);
+            return get(key, this);
         }
     }
 
@@ -179,7 +179,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * index is invalid.
      * {@inheritDoc}
      */
-    public final Object get( final int index, final Scriptable start ) {
+    public final Object get(final int index, final Scriptable start) {
         final HTMLCollection array = (HTMLCollection) start;
         final List elements = array.getElements();
 
@@ -245,7 +245,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                 final String id = element.getId();
                 if (id != null && id.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by id) to " + element);
-                    return getScriptableFor( element );
+                    return getScriptableFor(element);
                 }
             }
             else if (next instanceof WebWindow) {
@@ -253,7 +253,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                 final String windowName = window.getName();
                 if (windowName != null && windowName.equals(name)) {
                     getLog().debug("Property \"" + name + "\" evaluated (by name) to " + window);
-                    return getScriptableFor( window );
+                    return getScriptableFor(window);
                 }
             }
             else {
@@ -311,8 +311,8 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @return The element or elements corresponding to the specified index or key.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/item.asp">MSDN doc</a>
      */
-    public final Object jsxFunction_item( final Object index ) {
-        return get( index );
+    public final Object jsxFunction_item(final Object index) {
+        return get(index);
     }
 
     /**
@@ -322,8 +322,8 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @return The element or elements corresponding to the specified name or id.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/nameditem.asp">MSDN doc</a>
      */
-    public final Object jsxFunction_namedItem( final String name ) {
-        return get( name );
+    public final Object jsxFunction_namedItem(final String name) {
+        return get(name);
     }
 
     /**
@@ -334,7 +334,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @return All the elements in this element array that have the specified tag name.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
      */
-    public final Object jsxFunction_tags( final String tagName ) {
+    public final Object jsxFunction_tags(final String tagName) {
         final HTMLCollection array = new HTMLCollection(this);
         try {
             final String newXPathExpr = xpath_.toString() + "[name() = '" + tagName.toLowerCase() + "']";
