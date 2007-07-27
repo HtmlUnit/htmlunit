@@ -43,7 +43,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -66,8 +65,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Marc Guillemot
  * @author Bruce Faulkner
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class SelectTest extends WebTestCase {
+
     /**
      * Create an instance
      * @param name The name of the test
@@ -952,13 +953,44 @@ public class SelectTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<select id='mySelect'><option>hello</option></select>\n"
             + "</body></html>";
-
         final String[] expectedAlerts = {"-1"};
-        final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that if no option is specified as selected, the first option
+     * defaults to being the selected option.
+     * @throws Exception If the test fails.
+     */
+    public void testDefaultSelectedValue() throws Exception {
+        if(notYetImplemented()) {
+            // Strangely enough, needed for the jQuery selector module.
+            // TODO: Daniel Gredler
+            return;
+        }
+        final String html =
+            "<html><body onload='test()'><script>\r\n" +
+            "   function test(){\r\n" +
+            "      alert(document.getElementById('a').selected);\r\n" +
+            "      alert(document.getElementById('b').selected);\r\n" +
+            "      alert(document.getElementById('c').selected);\r\n" +
+            "      alert(document.getElementById('s').selectedIndex);\r\n" +
+            "   }\r\n" +
+            "</script>\r\n" +
+            "<form id='form'>\r\n" +
+            "   <select id='s'>\r\n" +
+            "      <option id='a' value='a'>a</option>\r\n" +
+            "      <option id='b' value='b'>b</option>\r\n" +
+            "      <option id='c' value='c'>c</option>\r\n" +
+            "   </select>\r\n" +
+            "</form>\r\n" +
+            "</body></html>\r\n";
+        final String[] expected = {"true", "false", "false", "0"};
+        final List actual = new ArrayList();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
