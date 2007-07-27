@@ -104,12 +104,15 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_MOUSE_UP = "mouseup";
 
     private static final long serialVersionUID = 4050485607908455730L;
+    // the button code for IE (1: left button, 4: middle button, 2: right button)
+    private static final int[] buttonCodeToIE = {1, 4, 2};
 
     private Object srcElement_;     // IE-only writeable equivalent of target.
     private Object target_;         // W3C standard read-only equivalent of srcElement.
     private Object currentTarget_;  // Changes during event capturing and bubbling.
     private String type_;           // The event type.
     private Object keyCode_;        // Key code for a keypress
+    private int button_; // the button code according to W3C (0: left button, 1: middle button, 2: right button)
     
     private boolean shiftKey_;
     private boolean ctrlKey_;
@@ -288,5 +291,25 @@ public class Event extends SimpleScriptable {
         buffer.append(");");
         return buffer.toString();
     }
+    
+    /**
+     * Gets the button code
+     * @return the button code
+     */
+    public int jsxGet_button() {
+        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            return buttonCodeToIE[button_];
+        }
 
+        return button_;
+    }
+
+    /**
+     * Special for FF (old stuff from Netscape time)
+     * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
+     * @return the button code
+     */
+    public int jsxGet_which() {
+        return button_ + 1;
+    }
 }

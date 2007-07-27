@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -456,22 +457,27 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testMouseDown() throws Exception {
+        testMouseDown(BrowserVersion.FIREFOX_2, "mousedown-0");
+        testMouseDown(BrowserVersion.INTERNET_EXPLORER_6_0, "mousedown-1");
+    }
+
+    private void testMouseDown(final BrowserVersion browserVersion, final String expected) throws Exception {
         final String content = "<html>" +
                 "<head>\n" +
                 "<script>\n" +
-                "  function mouseDownMe() {\n" +
-                "    document.getElementById('myTextarea').value+='mousedown-';\n" +
+                "  function mouseDownMe(e) {\n" +
+                "    document.getElementById('myTextarea').value+='mousedown-' + e.button;\n" +
                 "  }\n" +
                 "</script>\n" +
                 "</head>\n" +
-                "<body id='myBody' onmousedown='mouseDownMe()'>\n" +
+                "<body id='myBody' onmousedown='mouseDownMe(event)'>\n" +
                 "<textarea id='myTextarea'></textarea>\n" +
                 "</body></html>\n";
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(browserVersion, content, new ArrayList());
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseDown();
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
-        assertEquals("mousedown-", textArea.getText());
+        assertEquals(expected, textArea.getText());
     }
     
     /**

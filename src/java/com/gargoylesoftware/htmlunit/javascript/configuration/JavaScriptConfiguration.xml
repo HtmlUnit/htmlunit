@@ -181,6 +181,7 @@
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
             descr="W3C Document Object Model (DOM) Level 2"/>
+        <property name="button" readable="true" writable="false"/>
         <property name="target" readable="true" writable="false">
             <browser name="Netscape" min-version="6"/>
         </property>
@@ -200,6 +201,9 @@
         <property name="altKey" readable="true" writable="false"/>
         <property name="cancelBubble" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="which" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
         </property>
         <function name="stopPropagation">
             <browser name="Netscape" min-version="6"/>
