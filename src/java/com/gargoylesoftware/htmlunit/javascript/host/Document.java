@@ -802,22 +802,20 @@ public final class Document extends NodeImpl {
     }
 
     /**
-     * Return all the elements with the specified tag name
-     * @param tagName The name to search for
-     * @return the list of elements
+     * Returns all the descendant elements with the specified tag name.
+     * @param tagName the name to search for
+     * @return all the descendant elements with the specified tag name
      */
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
         try {
-            final HtmlUnitXPath xpath = new HtmlUnitXPath("//*[lower-case(name()) = '" + tagName.toLowerCase() + "']");
-            xpath.setFunctionContext(functionContext_);
-            collection.init(getHtmlPage(), xpath);
+            final String xpath = "//" + tagName.toLowerCase();
+            collection.init(getHtmlPage(), new HtmlUnitXPath(xpath));
         }
         catch (final JaxenException e) {
-            throw Context.reportRuntimeError(
-                    "Failed to initialize collection document.getElementsByTagName: " + e.getMessage());
+            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
+            throw Context.reportRuntimeError(msg + e.getMessage());
         }
-
         return collection;
     }
 

@@ -384,9 +384,9 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Return all the elements with the specified tag name
-     * @param tagName The name to search for
-     * @return the list of elements
+     * Returns all the descendant elements with the specified tag name.
+     * @param tagName the name to search for
+     * @return all the descendant elements with the specified tag name
      */
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final HtmlElement element = (HtmlElement) getDomNodeOrDie();
@@ -396,10 +396,9 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             collection.init(element, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(element)));
         }
         catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Failed to initialize collection getElementsByTagName("
-                    + tagName + "): " + e.getMessage());
+            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
+            throw Context.reportRuntimeError(msg + e.getMessage());
         }
-
         return collection;
     }
 

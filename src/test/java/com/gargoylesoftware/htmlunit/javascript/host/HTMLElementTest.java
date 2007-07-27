@@ -360,6 +360,27 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Tests that getElementsByTagName('*') returns all child elements, both
+     * at the document level and at the element level.
+     * @throws Exception if the test fails
+     */
+    public void testGetElementsByTagNameAsterisk() throws Exception {
+        final String html =
+            "<html><body onload='test()'><script>\r\n" +
+            "   function test() {\r\n" +
+            "      alert(document.getElementsByTagName('*').length);\r\n" +
+            "      alert(document.getElementById('div').getElementsByTagName('*').length);\r\n" +
+            "   }\r\n" +
+            "</script>\r\n" +
+            "<div id='div'><p>a</p><p>b</p><p>c</p></div>\r\n" +
+            "</body></html>\r\n";
+        final String[] expected = {"8", "3"};
+        final List actual = new ArrayList();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Test getting the class for the element
      * @throws Exception if the test fails
      */

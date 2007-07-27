@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig">
+                Fix getElementsByTagName('*') at the document level (it was returning an empty
+                collection).
+            </action>
             <action type="add" dev="asashour" id="1759750">
                 JavaScript: add support for style.getPropertyValue() (#1759750).
             </action>

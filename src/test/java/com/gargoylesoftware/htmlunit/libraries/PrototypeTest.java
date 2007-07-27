@@ -150,9 +150,6 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testSelector() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         test("selector.html", 18, 46);
     }
 
