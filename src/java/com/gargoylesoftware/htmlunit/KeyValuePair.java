@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- *  A container that holds a key and a value
+ * A container that holds a key and a value
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

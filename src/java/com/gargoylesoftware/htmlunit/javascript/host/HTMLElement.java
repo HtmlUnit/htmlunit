@@ -1022,7 +1022,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     /**
      * Implementation of the IE behavior #default#download
      * @param uri The URI of the download source
-     * @param callback the mehtod which should be called when the download is finished
+     * @param callback the method which should be called when the download is finished
      * @see <a href="http://msdn.microsoft.com/workshop/author/behaviors/reference/methods/startdownload.asp">
      * MSDN documentation</a>
      * @throws MalformedURLException If the url cannot be created
@@ -1040,11 +1040,11 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
     /**
      * A helper class for the IE behavior #default#download
-     * This represents a download action. The download is handeled
+     * This represents a download action. The download is handled
      * asynchronously, when the download is finished, the method specified
      * by callback is called with one argument - the content of the response as string.
      * @see #startDownload(String, Function)
-     * @author Stefan Anzinger <stefan@anzinger.net>
+     * @author <a href="mailto:stefan@anzinger.net">Stefan Anzinger</a>
      */
     private class DownloadBehaviorDownloader extends Thread {
         private final  URL url_;
