@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class IEConditionalCompilationTest extends WebTestCase {
 
@@ -74,6 +75,16 @@ public class IEConditionalCompilationTest extends WebTestCase {
         testScript(BrowserVersion.FIREFOX_2, script,
                 new String[] {});
     }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testIf() throws Exception {
+        final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
+        
+        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"5.6"});
+        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
+    }
     
     /**
      * @throws Exception If the test fails.
@@ -91,10 +102,6 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testSet() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        
         final String script = "/*@cc_on @set @mine = 12 alert(@mine); @*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,

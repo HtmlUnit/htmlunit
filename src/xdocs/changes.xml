@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="marc">
+                Add initial support for IE conditional compilation @if, @elif, @else, @end and @set instructions
+                as well as for conditional compilation variables.
+            </action>
             <action type="update" dev="sdanig">
                 Fix getElementsByTagName('*') at the document level (it was returning an empty
                 collection).

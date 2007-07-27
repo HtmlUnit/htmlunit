@@ -37,10 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -49,116 +51,134 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * A basic implementation for IE Conditional Compilation.
  *
- * <p>Currently supports only <b>@cc_on</b>, but not <b>@if</b> or <b>@set</b>.
+ * <p>Currently provides (basic) supports for <code>@cc_on</code>, <code>@if</code>,
+ * <code>@el_if</code>, <code>@else</code>, <code>@end</code> and <b>@set</b>,
+ * as well as for conditional compilation variables:
+ * "@_win16", "@_mac", "@_alpha", "@_mc680x0", "@_PowerPC", "@_debug", "@_fast",
+ * "@_win32", "@_x86", "@_jscript", "@_jscript_version" and "@_jscript_build"
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ahx1z4fs(VS.80).aspx">Microsoft Docs</a>
  */
 public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProcessor {
 
+    private static final String CC_VARIABLE_PREFIX = "htmlunit_cc_variable_";
+    private final Set setVariables_ = new HashSet();
+
     /**
      * {@inheritDoc}
      */
-    public String preProcess(final HtmlPage htmlPage, String sourceCode,
+    public String preProcess(final HtmlPage htmlPage, final String sourceCode,
             final String sourceName, final HtmlElement htmlElement) {
-        final SortedSet textConstants = initTextConstants(sourceCode);
-        int index = -1;
-        while ((index = sourceCode.indexOf("/*@cc_on", index + 1)) != -1) {
-            addTextConstant(textConstants, index, index + "/*@cc_on".length(), "");
+        
+        final Pattern p = Pattern.compile("/\\*@cc_on(.*)@\\*/", Pattern.DOTALL);
+        final Matcher m = p.matcher(sourceCode);
+        final StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(sb, processConditionalCompilation(m.group(1)));
         }
-        index = -1;
-        while ((index = sourceCode.indexOf("@*/", index + 1)) != -1) {
-            addTextConstant(textConstants, index, index + "@*/".length(), "");
-        }
-        sourceCode = restoreTextConstants(sourceCode, textConstants);
-        return sourceCode;
+        m.appendTail(sb);
+        return sb.toString();
     }
 
-    /**
-     * A class to represent a range of text to be replaced.
-     */
-    private static class TextConstant implements Comparable {
-
-        /**
-         * Inclusive
-         */
-        private final int startIndex_;
-        
-        /**
-         * Exclusive
-         */
-        private final int endIndex_;
-        
-        private final String textToReplace_;
-        
-        TextConstant(final int startIndex, final int endIndex, final String textToReplace) {
-            this.startIndex_ = startIndex;
-            this.endIndex_ = endIndex;
-            this.textToReplace_ = textToReplace;
-        }
-
-        public int compareTo(final Object o) {
-            return startIndex_ - ((TextConstant) o).startIndex_;
-        }
+    
+    private String processConditionalCompilation(final String precompilationBody) {
+        String body = processIfs(precompilationBody);
+        body = replaceCompilationVariables(body);
+        body = processSet(body);
+        body = replaceCustomCompilationVariables(body);
+        return body;
     }
 
-    /**
-     * Add the specified values in the given textConstants if it does not intersect
-     * with previously added textConstants.
-     *
-     * @param textConstants set of text constants to add the following values as a TextConstant to it.
-     * @param startIndex starting index
-     * @param endIndex end index
-     * @param textToReplace text to use
-     */
-    private void addTextConstant(final Set textConstants, final int startIndex,
-            final int endIndex, final String textToReplace) {
-        for (final Iterator it = textConstants.iterator(); it.hasNext();) {
-            final TextConstant c = (TextConstant) it.next();
-            if (startIndex >= c.startIndex_ && startIndex < c.endIndex_) {
-                return;
+
+    private String replaceCustomCompilationVariables(final String body) {
+        final Pattern p = Pattern.compile("@\\w+|'[^']*'|\"[^\"]*\"");
+        final Matcher m = p.matcher(body);
+        final StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            final String match = m.group();
+            if (match.startsWith("@")) {
+                m.appendReplacement(sb, replaceOneCustomCompilationVariable(match));
+            }
+            else {
+                m.appendReplacement(sb, match);
             }
         }
-        textConstants.add(new TextConstant(startIndex, endIndex, textToReplace));
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
+
+    private String replaceOneCustomCompilationVariable(final String variable) {
+        if (setVariables_.contains(variable)) {
+            return CC_VARIABLE_PREFIX + variable.substring(1);
+        }
+        return "NaN";
+    }
+
+    private String processSet(final String body) {
+        final Pattern p = Pattern.compile("@set\\s+(@\\w+)(\\s*=\\s*[\\d\\.]+)");
+        final Matcher m = p.matcher(body);
+        final StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            setVariables_.add(m.group(1));
+            m.appendReplacement(sb, CC_VARIABLE_PREFIX + m.group(1).substring(1) + m.group(2) + ";");
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
+
+    private String processIfs(String code) {
+        code = code.replaceAll("@if\\s*\\(([^\\)]+)\\)", "if ($1) {");
+        code = code.replaceAll("@elif\\s*\\([^\\)]+\\)", "} else if ($1) {");
+        code = code.replaceAll("@else", "} else {");
+        code = code.replaceAll("@end", "}");
+        return code;
+    }
+
+
+    String replaceCompilationVariables(final String source) {
+        final Pattern p = Pattern.compile("(@_\\w+)|'[^']*'|\"[^\"]*\"");
+        final Matcher m = p.matcher(source);
+        final StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            final String match = m.group();
+            if (match.startsWith("@")) {
+                m.appendReplacement(sb, replaceOneVariable(match));
+            }
+            else {
+                m.appendReplacement(sb, match);
+            }
+        }
+        m.appendTail(sb);
+        return sb.toString();
     }
 
     /**
-     * Stores all text constants, i.g. everything inside '' and "",
-     * so that they are not replaced by subsequent changes.
+     * Replace a single conditional compilation variable
+     * @param variable something like "@_win32"
+     * @return the value
      */
-    private SortedSet initTextConstants(final String sourceCode) {
-        final SortedSet textConstants = new TreeSet();
-        char boundaryChar = 0;
-        int lastStartIndex = -1;
-        for (int index = 0; index < sourceCode.length(); index++) {
-            final char currentChar = sourceCode.charAt(index);
-            if (currentChar == '\'' || currentChar == '"') {
-                if (boundaryChar == 0 && index < sourceCode.length() - 1) {
-                    boundaryChar = currentChar;
-                    lastStartIndex = index + 1;
-                }
-                else {
-                    boundaryChar = 0;
-                    textConstants.add(new TextConstant(
-                            lastStartIndex, index, sourceCode.substring(lastStartIndex, index)));
-                }
-            }
+    private String replaceOneVariable(final String variable) {
+        final String[] varNaN = {"@_win16", "@_mac", "@_alpha", "@_mc680x0", "@_PowerPC", "@_debug", "@_fast"};
+        final String[] varTrue = {"@_win32", "@_x86", "@_jscript"};
+        
+        if (ArrayUtils.contains(varTrue, variable)) {
+            return "true";
         }
-        return textConstants;
-    }
-
-    private String restoreTextConstants(String sourceCode, final SortedSet textConstants) {
-        int variation = 0;
-        for (final Iterator iterator = textConstants.iterator(); iterator.hasNext();) {
-            final TextConstant constant = (TextConstant) iterator.next();
-            sourceCode = sourceCode.substring(0, constant.startIndex_ + variation)
-                + constant.textToReplace_
-                + sourceCode.substring(constant.endIndex_ + variation);
-                        
-            variation += constant.textToReplace_.length() - (constant.endIndex_ - constant.startIndex_);
+        else if ("@_jscript_version".equals(variable)) {
+            return "5.6"; // seems to be the value of IE6. TODO: check for IE7
         }
-        return sourceCode;
+        else if ("@_jscript_build".equals(variable)) {
+            return "6626"; // that's what my IE6 currently returns
+        }
+        else if (ArrayUtils.contains(varNaN, variable)) {
+            return "NaN";
+        }
+        return variable;
     }
 }
