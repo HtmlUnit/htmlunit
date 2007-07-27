@@ -965,7 +965,7 @@ public class SelectTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testDefaultSelectedValue() throws Exception {
-        if(notYetImplemented()) {
+        if (notYetImplemented()) {
             // Strangely enough, needed for the jQuery selector module.
             // TODO: Daniel Gredler
             return;
