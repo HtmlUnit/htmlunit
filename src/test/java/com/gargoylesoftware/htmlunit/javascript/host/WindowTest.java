@@ -110,11 +110,11 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
-        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertNotNull("secondPage", secondPage);
         assertEquals("Second", secondPage.getTitleText());
         assertSame(webClient.getCurrentWindow(), secondPage.getEnclosingWindow());
@@ -149,29 +149,27 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
-        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertNotSame(firstPage, secondPage);
 
         // Expecting contentChanged, opened, contentChanged
         assertEquals(3, eventCatcher.getEventCount());
 
-        final WebWindow firstWebWindow
-            = (WebWindow)((WebWindowEvent)eventCatcher.getEventAt(0)).getSource();
-        final WebWindow secondWebWindow
-            = (WebWindow)((WebWindowEvent)eventCatcher.getEventAt(2)).getSource();
+        final WebWindow firstWebWindow = (WebWindow) ((WebWindowEvent) eventCatcher.getEventAt(0)).getSource();
+        final WebWindow secondWebWindow = (WebWindow) ((WebWindowEvent) eventCatcher.getEventAt(2)).getSource();
         assertSame(webClient.getCurrentWindow(), secondWebWindow);
         assertEquals("MyNewWindow", secondWebWindow.getName());
 
-        assertEquals("First", ((HtmlPage)firstWebWindow.getEnclosedPage()).getTitleText());
-        assertEquals("Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText());
+        assertEquals("First", ((HtmlPage) firstWebWindow.getEnclosedPage()).getTitleText());
+        assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
 
-        final WebWindowEvent changedEvent = (WebWindowEvent)eventCatcher.getEventAt(2);
+        final WebWindowEvent changedEvent = (WebWindowEvent) eventCatcher.getEventAt(2);
         assertNull(changedEvent.getOldPage());
-        assertEquals("Second", ((HtmlPage)changedEvent.getNewPage()).getTitleText());
+        assertEquals("Second", ((HtmlPage) changedEvent.getNewPage()).getTitleText());
 
         assertEquals(
             Collections.singletonList("MyNewWindow"),
@@ -203,13 +201,13 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
         assertEquals(firstWebWindow, firstWebWindow.getTopWindow());
 
-        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
-        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals("Second", secondPage.getTitleText());
         assertNotSame(firstPage, secondPage);
 
@@ -254,13 +252,12 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_THIRD, thirdContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
         final WebWindow firstWindow = firstPage.getEnclosingWindow();
 
-        final HtmlInlineFrame secondFrame =
-            (HtmlInlineFrame)firstPage.getHtmlElementById("secondFrame");
-        final HtmlPage secondPage = (HtmlPage)secondFrame.getEnclosedPage();
+        final HtmlInlineFrame secondFrame = (HtmlInlineFrame) firstPage.getHtmlElementById("secondFrame");
+        final HtmlPage secondPage = (HtmlPage) secondFrame.getEnclosedPage();
         assertEquals("Second", secondPage.getTitleText());
         try {
             assertEquals(secondFrame.getEnclosedWindow(),
@@ -270,8 +267,8 @@ public class WindowTest extends WebTestCase {
         catch (final WebWindowNotFoundException exception) {
             fail("Expected secondFrame would be found before click.");
         }
-        final HtmlAnchor anchor = (HtmlAnchor)secondPage.getHtmlElementById("link");
-        final HtmlPage thirdPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) secondPage.getHtmlElementById("link");
+        final HtmlPage thirdPage = (HtmlPage) anchor.click();
         assertEquals("Third", thirdPage.getTitleText());
         final WebWindow thirdWindow = thirdPage.getEnclosingWindow();
         assertNotSame(firstWindow, thirdWindow);
@@ -318,22 +315,21 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         eventCatcher.listenTo(webClient);
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
-        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("link");
-        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("Second", secondPage.getTitleText());
 
         assertEquals(1, eventCatcher.getEventCount());
 
-        final WebWindow secondWebWindow
-            = (WebWindow)((WebWindowEvent)eventCatcher.getEventAt(0)).getSource();
+        final WebWindow secondWebWindow = (WebWindow) ((WebWindowEvent) eventCatcher.getEventAt(0)).getSource();
         assertSame(webClient.getCurrentWindow(), firstWebWindow);
         assertSame(firstWebWindow, secondWebWindow);
     }
@@ -369,26 +365,23 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(new URL("http://fourth"), fourthContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
         assertEquals("First", firstPage.getTitleText());
-        final HtmlInlineFrame secondFrame =
-            (HtmlInlineFrame)firstPage.getHtmlElementById("secondFrame");
-        final HtmlPage secondPage = (HtmlPage)secondFrame.getEnclosedPage();
+        final HtmlInlineFrame secondFrame = (HtmlInlineFrame) firstPage.getHtmlElementById("secondFrame");
+        final HtmlPage secondPage = (HtmlPage) secondFrame.getEnclosedPage();
         assertEquals("Second", secondPage.getTitleText());
-        final HtmlInlineFrame thirdFrame =
-            (HtmlInlineFrame)secondPage.getHtmlElementById("thirdFrame");
-        final HtmlPage thirdPage = (HtmlPage)thirdFrame.getEnclosedPage();
+        final HtmlInlineFrame thirdFrame = (HtmlInlineFrame) secondPage.getHtmlElementById("thirdFrame");
+        final HtmlPage thirdPage = (HtmlPage) thirdFrame.getEnclosedPage();
         assertEquals("Third", thirdPage.getTitleText());
 
         assertSame(webClient.getCurrentWindow(), firstWebWindow);
         assertNotSame(firstWebWindow, secondPage);
 
-        final HtmlAnchor anchor =
-            (HtmlAnchor)thirdPage.getHtmlElementById("link");
-        final HtmlPage fourthPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) thirdPage.getHtmlElementById("link");
+        final HtmlPage fourthPage = (HtmlPage) anchor.click();
         final WebWindow fourthWebWindow = fourthPage.getEnclosingWindow();
         assertSame(firstWebWindow, fourthWebWindow);
         assertSame(fourthWebWindow, fourthWebWindow.getTopWindow());
@@ -439,26 +432,23 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(new URL("http://fourth"), fourthContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
         assertEquals("First", firstPage.getTitleText());
-        final HtmlInlineFrame secondFrame =
-            (HtmlInlineFrame)firstPage.getHtmlElementById("secondFrame");
-        final HtmlPage secondPage = (HtmlPage)secondFrame.getEnclosedPage();
+        final HtmlInlineFrame secondFrame = (HtmlInlineFrame) firstPage.getHtmlElementById("secondFrame");
+        final HtmlPage secondPage = (HtmlPage) secondFrame.getEnclosedPage();
         assertEquals("Second", secondPage.getTitleText());
-        final HtmlInlineFrame thirdFrame =
-            (HtmlInlineFrame)secondPage.getHtmlElementById("thirdFrame");
-        final HtmlPage thirdPage = (HtmlPage)thirdFrame.getEnclosedPage();
+        final HtmlInlineFrame thirdFrame = (HtmlInlineFrame) secondPage.getHtmlElementById("thirdFrame");
+        final HtmlPage thirdPage = (HtmlPage) thirdFrame.getEnclosedPage();
         assertEquals("Third", thirdPage.getTitleText());
 
         assertSame(webClient.getCurrentWindow(), firstWebWindow);
         assertNotSame(firstWebWindow, secondFrame);
 
-        final HtmlAnchor anchor =
-            (HtmlAnchor)thirdPage.getHtmlElementById("link");
-        final HtmlPage fourthPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) thirdPage.getHtmlElementById("link");
+        final HtmlPage fourthPage = (HtmlPage) anchor.click();
         final WebWindow fourthWebWindow = fourthPage.getEnclosingWindow();
         assertSame(secondFrame.getEnclosedWindow(), fourthWebWindow);
         try {
@@ -587,8 +577,8 @@ public class WindowTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow innermostWebWindow = webClient.getWebWindowByName("innermost");
-        final HtmlPage innermostPage = (HtmlPage)innermostWebWindow.getEnclosedPage();
-        ((HtmlAnchor)innermostPage.getHtmlElementById("clickme")).click();
+        final HtmlPage innermostPage = (HtmlPage) innermostWebWindow.getEnclosedPage();
+        ((HtmlAnchor) innermostPage.getHtmlElementById("clickme")).click();
 
         assertNotSame(innermostWebWindow.getParentWindow(), innermostWebWindow);
         assertNotSame(innermostWebWindow.getTopWindow(), innermostWebWindow);
@@ -626,7 +616,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(Collections.singletonList("foo"), collectedConfirms);
@@ -672,7 +662,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(Collections.singletonList("foo"), collectedPrompts);
@@ -698,7 +688,7 @@ public class WindowTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
         getLog().warn("Warning for no prompt handler expected next");
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(Collections.EMPTY_LIST, collectedPrompts);
@@ -749,7 +739,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(URL_THIRD, thirdContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"null", "one", "two", "three"};
@@ -1023,7 +1013,7 @@ public class WindowTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
         final String[] expectedAlerts = {
@@ -1080,7 +1070,7 @@ public class WindowTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         final String[] expectedAlerts = {
@@ -1149,7 +1139,7 @@ public class WindowTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         final String[] expectedAlerts = {
@@ -1186,17 +1176,16 @@ public class WindowTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(
-                new URL("http://opener/test/a.html"));
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage("http://opener/test/a.html");
         assertEquals("A", firstPage.getTitleText());
 
-        final HtmlButton buttonA = (HtmlButton)firstPage.getHtmlElementById("clickme");
-        final HtmlPage secondPage = (HtmlPage)buttonA.click();
+        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = (HtmlPage) buttonA.click();
         assertNotNull("B", secondPage);
         assertEquals("B", secondPage.getTitleText());
 
-        final HtmlButton buttonB = (HtmlButton)secondPage.getHtmlElementById("clickme");
-        final HtmlPage thirdPage = (HtmlPage)buttonB.click();
+        final HtmlButton buttonB = (HtmlButton) secondPage.getHtmlElementById("clickme");
+        final HtmlPage thirdPage = (HtmlPage) buttonB.click();
         assertNotNull("C", thirdPage);
         assertEquals("C", thirdPage.getTitleText());
     }
@@ -1707,7 +1696,7 @@ public class WindowTest extends WebTestCase {
                 collectedStatus.add(message);
             }
         });
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"", "newStatus"};
@@ -2037,7 +2026,7 @@ public class WindowTest extends WebTestCase {
         conn.setResponse(URL_SECOND, secondContent);
         
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlButton buttonA = (HtmlButton)firstPage.getHtmlElementById("clickme");
+        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
         
         buttonA.click();
         final Map lastAdditionalHeaders = conn.getLastAdditionalHeaders();
@@ -2264,7 +2253,7 @@ public class WindowTest extends WebTestCase {
         
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        ((ClickableElement)page.getHtmlElementById("myButton")).click();
+        ((ClickableElement) page.getHtmlElementById("myButton")).click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

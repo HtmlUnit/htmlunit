@@ -576,7 +576,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     void appendOption(final HtmlSelect select, final String value) {
-        final HtmlOption option = (HtmlOption)HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
+        final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                 select.getPage(), HtmlOption.TAG_NAME, null);
         option.setValueAttribute(value);
         option.setLabelAttribute(value);

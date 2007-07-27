@@ -129,7 +129,7 @@ public class HtmlImageInput extends HtmlInput {
      * @exception IOException If an io error occurs
      */
     public Page click() throws IOException {
-        return click(0,0);
+        return click(0, 0);
     }
 
     /**

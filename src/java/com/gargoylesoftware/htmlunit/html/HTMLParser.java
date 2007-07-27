@@ -183,7 +183,7 @@ public final class HTMLParser {
      * @return a factory for creating HtmlElements representing the given tag
      */
     public static IElementFactory getFactory(final String tagName) {
-        final IElementFactory result = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
+        final IElementFactory result = (IElementFactory) ELEMENT_FACTORIES.get(tagName);
 
         if (result != null) {
             return result;
@@ -419,7 +419,7 @@ public final class HTMLParser {
             }
 
             if (!stack_.isEmpty()) {
-                currentNode_ = (DomNode)stack_.peek();
+                currentNode_ = (DomNode) stack_.peek();
             }
         }
 
@@ -460,7 +460,7 @@ public final class HTMLParser {
          */
         private IElementFactory getElementFactory(final String tagName) {
 
-            final IElementFactory factory = (IElementFactory)ELEMENT_FACTORIES.get(tagName);
+            final IElementFactory factory = (IElementFactory) ELEMENT_FACTORIES.get(tagName);
 
             if (factory != null) {
                 return factory;

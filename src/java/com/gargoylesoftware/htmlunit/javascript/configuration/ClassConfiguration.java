@@ -261,7 +261,7 @@ public final class ClassConfiguration {
         final Iterator it = keys.iterator();
         while (it.hasNext()) {
             final String key = (String) it.next();
-            if (!(((PropertyInfo)config.propertyMap_.get(key)).valueEquals(propertyMap_.get(key)))) {
+            if (!(((PropertyInfo) config.propertyMap_.get(key)).valueEquals(propertyMap_.get(key)))) {
                 return false;
             }
         }
@@ -270,7 +270,7 @@ public final class ClassConfiguration {
         final Iterator fit = fkeys.iterator();
         while (fit.hasNext()) {
             final String fkey = (String) fit.next();
-            if (!(((FunctionInfo)config.functionMap_.get(fkey)).valueEquals(functionMap_.get(fkey)))) {
+            if (!(((FunctionInfo) config.functionMap_.get(fkey)).valueEquals(functionMap_.get(fkey)))) {
                 return false;
             }
         }
@@ -429,7 +429,7 @@ public final class ClassConfiguration {
                 final Iterator it = keys.iterator();
                 while (it.hasNext()) {
                     final String key = (String) it.next();
-                    if (!(((BrowserInfo)browserMap_.get(key)).valueEquals(info.browserMap_.get(key)))) {
+                    if (!(((BrowserInfo) browserMap_.get(key)).valueEquals(info.browserMap_.get(key)))) {
                         return false;
                     }
                 }
@@ -482,7 +482,7 @@ public final class ClassConfiguration {
                 final Iterator it = keys.iterator();
                 while (it.hasNext()) {
                     final String key = (String) it.next();
-                    if (!(((BrowserInfo)browserMap_.get(key)).valueEquals(info.browserMap_.get(key)))) {
+                    if (!(((BrowserInfo) browserMap_.get(key)).valueEquals(info.browserMap_.get(key)))) {
                         return false;
                     }
                 }

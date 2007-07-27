@@ -192,7 +192,7 @@ public final class JavaScriptConfiguration {
         if (browserVersion == null) {
             throw new IllegalStateException("BrowserVersion must be defined");
         }
-        JavaScriptConfiguration configuration = (JavaScriptConfiguration)ConfigurationMap_.get(browserVersion);
+        JavaScriptConfiguration configuration = (JavaScriptConfiguration) ConfigurationMap_.get(browserVersion);
 
         if (configuration == null) {
             configuration = new JavaScriptConfiguration(browserVersion);
@@ -260,7 +260,7 @@ public final class JavaScriptConfiguration {
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
         while (node != null) {
             if (node instanceof Element) {
-                final Element element = (Element)node;
+                final Element element = (Element) node;
                 if (element.getTagName().equals("class")) {
                     final String className = element.getAttribute("name");
                     if (!testToExcludeElement(element)) {
@@ -310,7 +310,7 @@ public final class JavaScriptConfiguration {
         Node node = element.getFirstChild();
         while (node != null) {
             if (node instanceof Element) {
-                final Element childElement = (Element)node;
+                final Element childElement = (Element) node;
                 final String tagName = childElement.getTagName();
                 if (tagName.equals("property")) {
                     parsePropertyElement(classConfiguration, childElement);
@@ -400,7 +400,7 @@ public final class JavaScriptConfiguration {
         boolean allowJavascriptConstraint = false;
         while (node != null) {
             if (node instanceof Element) {
-                final Element childElement = (Element)node;
+                final Element childElement = (Element) node;
                 if (childElement.getTagName().equals("browser")) {
                     browserConstraint = true;
                     if (testToIncludeForBrowserConstraint(childElement, browser_)) {

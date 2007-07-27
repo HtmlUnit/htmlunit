@@ -210,7 +210,7 @@ public class SimpleScriptable extends ScriptableObject {
 
         final Object scriptObject = domNode.getScriptObject();
         if (scriptObject != null) {
-            return (SimpleScriptable)scriptObject;
+            return (SimpleScriptable) scriptObject;
         }
         else {
             return makeScriptableFor(domNode);

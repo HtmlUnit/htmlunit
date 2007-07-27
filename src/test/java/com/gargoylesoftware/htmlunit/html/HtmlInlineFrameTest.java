@@ -80,22 +80,22 @@ public class HtmlInlineFrameTest extends WebTestCase {
         webConnection.setResponse(
             URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webConnection.setResponse(
-            URL_SECOND,secondContent,200,"OK","text/html",Collections.EMPTY_LIST);
+            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webConnection.setResponse(
-            URL_THIRD,thirdContent,200,"OK","text/html",Collections.EMPTY_LIST);
+            URL_THIRD, thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
-        final HtmlInlineFrame iframe = (HtmlInlineFrame)page.getHtmlElementById("iframe1");
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
         assertEquals("http://second", iframe.getSrcAttribute());
-        assertEquals("Second", ((HtmlPage)iframe.getEnclosedPage()).getTitleText());
+        assertEquals("Second", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
 
         iframe.setSrcAttribute("http://third");
         assertEquals("http://third", iframe.getSrcAttribute());
-        assertEquals("Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText());
+        assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -144,12 +144,12 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
         assertEquals("http://third", iframe.getSrcAttribute());
-        assertEquals("Third", ((HtmlPage)iframe.getEnclosedPage()).getTitleText());
+        assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
     }
 
     /**

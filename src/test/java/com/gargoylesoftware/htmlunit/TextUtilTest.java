@@ -95,10 +95,10 @@ public final class TextUtilTest extends WebTestCase {
      */
     public void testStartsWithIgnoreCase_ShouldReturnTrue() {
         final String[][] data = {
-            {"foo","foo"},
-            {"foo:bar","foo"},
-            {"FOO:BAR","foo"},
-            {"foo:bar","FOO"},
+            {"foo", "foo"},
+            {"foo:bar", "foo"},
+            {"FOO:BAR", "foo"},
+            {"foo:bar", "FOO"},
         };
 
         for (int i = 0; i < data.length; i++) {
@@ -116,9 +116,9 @@ public final class TextUtilTest extends WebTestCase {
      */
     public void testStartsWithIgnoreCase_ShouldReturnFalse() {
         final String[][] data = {
-            {"","foo"},
-            {"fobar","foo"},
-            {"fo","foo"},
+            {"", "foo"},
+            {"fobar", "foo"},
+            {"fo", "foo"},
         };
 
         for (int i = 0; i < data.length; i++) {

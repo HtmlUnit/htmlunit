@@ -133,7 +133,7 @@ public class LocationTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("test2", page.getTitleText());
 
         final List expectedAlerts = Collections.singletonList("ok");

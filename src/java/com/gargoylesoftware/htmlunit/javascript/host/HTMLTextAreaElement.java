@@ -78,7 +78,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return The value of the "value" attribute
      */
     public String jsxGet_value() {
-        return ((HtmlTextArea)getHtmlElementOrDie()).getText();
+        return ((HtmlTextArea) getHtmlElementOrDie()).getText();
     }
 
     /**
@@ -86,7 +86,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param value The new value
      */
     public void jsxSet_value(final String value) {
-        ((HtmlTextArea)getHtmlElementOrDie()).setText(value);
+        ((HtmlTextArea) getHtmlElementOrDie()).setText(value);
     }
 
     /**
@@ -96,7 +96,7 @@ public class HTMLTextAreaElement extends FormField {
      * MSDN Documentation</a>
      */
     public String jsxGet_defaultValue() {
-        return ((HtmlTextArea)getHtmlElementOrDie()).getDefaultValue();
+        return ((HtmlTextArea) getHtmlElementOrDie()).getDefaultValue();
     }
 
     /**
@@ -106,7 +106,7 @@ public class HTMLTextAreaElement extends FormField {
      * MSDN Documentation</a>
      */
     public void jsxSet_defaultValue(final String defaultValue) {
-        ((HtmlTextArea)getHtmlElementOrDie()).setDefaultValue(defaultValue);
+        ((HtmlTextArea) getHtmlElementOrDie()).setDefaultValue(defaultValue);
     }
 
     /**
@@ -122,7 +122,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the selection start
      */
     public int jsxGet_selectionStart() {
-        return ((HtmlTextArea)getHtmlElementOrDie()).getSelectionStart();
+        return ((HtmlTextArea) getHtmlElementOrDie()).getSelectionStart();
     }
 
     /**
@@ -130,7 +130,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param start selection start
      */
     public void jsxSet_selectionStart(final int start) {
-        ((HtmlTextArea)getHtmlElementOrDie()).setSelectionStart(start);
+        ((HtmlTextArea) getHtmlElementOrDie()).setSelectionStart(start);
     }
 
     /**
@@ -138,7 +138,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the selection end
      */
     public int jsxGet_selectionEnd() {
-        return ((HtmlTextArea)getHtmlElementOrDie()).getSelectionEnd();
+        return ((HtmlTextArea) getHtmlElementOrDie()).getSelectionEnd();
     }
 
     /**
@@ -146,7 +146,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param end selection end
      */
     public void jsxSet_selectionEnd(final int end) {
-        ((HtmlTextArea)getHtmlElementOrDie()).setSelectionEnd(end);
+        ((HtmlTextArea) getHtmlElementOrDie()).setSelectionEnd(end);
     }
 
 }

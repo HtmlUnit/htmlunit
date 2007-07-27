@@ -99,7 +99,7 @@ public class NodeImpl extends SimpleScriptable {
         // If this is an HtmlElement then flip the result to uppercase.  This should really be
         // changed in HtmlElement itself but that would break backwards compatibility fairly
         // significantly as that one is documented as always returning a lowercase value.
-        if (domNode instanceof HtmlElement && ((HtmlElement)domNode).getNamespaceURI() == null) {
+        if (domNode instanceof HtmlElement && ((HtmlElement) domNode).getNamespaceURI() == null) {
             nodeName = nodeName.toUpperCase();
         }
         return nodeName;

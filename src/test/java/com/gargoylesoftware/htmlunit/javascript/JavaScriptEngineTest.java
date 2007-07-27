@@ -111,7 +111,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
-        final HtmlTextInput textInput = (HtmlTextInput)page.getHtmlElementById("textfield1");
+        final HtmlTextInput textInput = (HtmlTextInput) page.getHtmlElementById("textfield1");
         assertEquals("foo", textInput.getValueAttribute());
     }
 
@@ -156,7 +156,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List collectedAlerts = null;
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final HtmlTextInput textInput = (HtmlTextInput)page.getHtmlElementById("textfield1");
+        final HtmlTextInput textInput = (HtmlTextInput) page.getHtmlElementById("textfield1");
         assertEquals("blue", textInput.getValueAttribute());
     }
 
@@ -333,7 +333,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final HtmlScript htmlScript = (HtmlScript)page.getHtmlElementById("script1");
+        final HtmlScript htmlScript = (HtmlScript) page.getHtmlElementById("script1");
         assertNotNull(htmlScript);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -433,7 +433,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/foo.js"),
         // make SJIS bytes as responsebody
-            new String(jsContent.getBytes("SJIS"),"8859_1"), "text/javascript");
+            new String(jsContent.getBytes("SJIS"), "8859_1"), "text/javascript");
 
         /*
          * foo2.js is same with foo.js
@@ -441,7 +441,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setResponse(
             new URL("http://www.gargoylesoftware.com/foo2.js"),
             // make SJIS bytes as responsebody
-            new String(jsContent.getBytes("SJIS"),"8859_1"),
+            new String(jsContent.getBytes("SJIS"), "8859_1"),
             "text/javascript");
 
         client.setWebConnection(webConnection);
@@ -454,8 +454,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * detect encoding from meta tag
          */
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final HtmlScript htmlScript =
-                     (HtmlScript)page.getHtmlElementById("script1");
+        final HtmlScript htmlScript = (HtmlScript) page.getHtmlElementById("script1");
 
         assertNotNull(htmlScript);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -464,10 +463,8 @@ public class JavaScriptEngineTest extends WebTestCase {
          * detect encoding from charset attribute of script tag
          */
         collectedAlerts.clear();
-        final HtmlPage page2 = (HtmlPage )client.getPage(
-             new URL("http://www.gargoylesoftware.com/hidden"));
-        final HtmlScript htmlScript2 =
-                     (HtmlScript)page2.getHtmlElementById("script2");
+        final HtmlPage page2 = (HtmlPage) client.getPage("http://www.gargoylesoftware.com/hidden");
+        final HtmlScript htmlScript2 = (HtmlScript) page2.getHtmlElementById("script2");
 
         assertNotNull(htmlScript2);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -549,8 +546,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(htmlContent, Collections.EMPTY_LIST);
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlPage page1 = (HtmlPage)((HtmlFrame)page.getHtmlElementById("frame1")).getEnclosedPage();
-        final HtmlPage page2 = (HtmlPage)((HtmlFrame)page.getHtmlElementById("frame2")).getEnclosedPage();
+        final HtmlPage page1 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame1")).getEnclosedPage();
+        final HtmlPage page2 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame2")).getEnclosedPage();
 
         assertNotNull("page1", page1);
         assertNotNull("page2", page2);
@@ -677,7 +674,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
-        ((HtmlSubmitInput)page.getFormByName("form1").getInputByName("button1")).click();
+        ((HtmlSubmitInput) page.getFormByName("form1").getInputByName("button1")).click();
 
         final List expectedAlerts = Collections.singletonList("button1");
         assertEquals(expectedAlerts, collectedAlerts);
@@ -772,10 +769,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals("First", page.getTitleText());
 
         final HtmlForm form = page.getFormByName("form1");
-        final HtmlTextInput textInput = (HtmlTextInput)form.getInputByName("text1");
+        final HtmlTextInput textInput = (HtmlTextInput) form.getInputByName("text1");
         textInput.setValueAttribute("flintstone");
 
-        final HtmlButtonInput button = (HtmlButtonInput)form.getInputByName("button1");
+        final HtmlButtonInput button = (HtmlButtonInput) form.getInputByName("button1");
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
         button.click();

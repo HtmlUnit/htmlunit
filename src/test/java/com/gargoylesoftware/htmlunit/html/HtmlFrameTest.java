@@ -76,11 +76,11 @@ public class HtmlFrameTest extends WebTestCase {
             + "</frameset></html>";
         final HtmlPage page = loadPage(firstContent);
 
-        final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
-        assertEquals("frame1", "", ((HtmlPage)frame1.getEnclosedPage()).getTitleText());
+        final HtmlFrame frame1 = (HtmlFrame) page.getHtmlElementById("frame1");
+        assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
-        final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
-        assertEquals("frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText());
+        final HtmlFrame frame2 = (HtmlFrame) page.getHtmlElementById("frame2");
+        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -108,11 +108,11 @@ public class HtmlFrameTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
-        final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
+        final HtmlFrame frame1 = (HtmlFrame) page.getHtmlElementById("frame1");
         assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
-        final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
-        assertEquals("frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText());
+        final HtmlFrame frame2 = (HtmlFrame) page.getHtmlElementById("frame2");
+        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -133,11 +133,11 @@ public class HtmlFrameTest extends WebTestCase {
         
         assertEquals("first", page.getTitleText());
 
-        final HtmlFrame frame1 = (HtmlFrame)page.getHtmlElementById("frame1");
-        assertEquals("frame1", "generated", ((HtmlPage)frame1.getEnclosedPage()).getTitleText());
+        final HtmlFrame frame1 = (HtmlFrame) page.getHtmlElementById("frame1");
+        assertEquals("frame1", "generated", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
-        final HtmlFrame frame2 = (HtmlFrame)page.getHtmlElementById("frame2");
-        assertEquals("frame2", "", ((HtmlPage)frame2.getEnclosedPage()).getTitleText());
+        final HtmlFrame frame2 = (HtmlFrame) page.getHtmlElementById("frame2");
+        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
     }
 
     /**

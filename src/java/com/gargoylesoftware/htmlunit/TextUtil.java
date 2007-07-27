@@ -81,7 +81,7 @@ public final class TextUtil {
             return false;
         }
         else {
-            return stringToCheck.substring(0,prefixLength).toLowerCase().equals(prefix.toLowerCase());
+            return stringToCheck.substring(0, prefixLength).toLowerCase().equals(prefix.toLowerCase());
         }
     }
 

@@ -269,14 +269,14 @@ public class HtmlElementTest extends WebTestCase {
             "attributeAdded: p,title,myTitle",
             "attributeAdded: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         final HtmlElement p1 = page.getHtmlElementById("p1");
         
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         p1.addHtmlAttributeChangeListener(listenerImpl);
         body.addHtmlAttributeChangeListener(listenerImpl);
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -305,13 +305,13 @@ public class HtmlElementTest extends WebTestCase {
             "attributeReplaced: p,title,myTitle",
             "attributeReplaced: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
         body.addHtmlAttributeChangeListener(listenerImpl);
         p1.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -341,13 +341,13 @@ public class HtmlElementTest extends WebTestCase {
             "attributeRemoved: p,title,myTitle",
             "attributeRemoved: p,title,myTitle"};
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
         body.addHtmlAttributeChangeListener(listenerImpl);
         p1.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -377,7 +377,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         p1.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         p1.removeHtmlAttributeChangeListener(listenerImpl);
@@ -402,9 +402,9 @@ public class HtmlElementTest extends WebTestCase {
                 "<textarea id='myTextarea'></textarea>\n" +
                 "</body></html>\n";
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseOver();
-        final HtmlTextArea textArea = (HtmlTextArea)page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mouseover-", textArea.getText());
     }
     
@@ -424,9 +424,9 @@ public class HtmlElementTest extends WebTestCase {
                 "<textarea id='myTextarea'></textarea>\n" +
                 "</body></html>\n";
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseMove();
-        final HtmlTextArea textArea = (HtmlTextArea)page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mousemove-", textArea.getText());
     }
     
@@ -446,9 +446,9 @@ public class HtmlElementTest extends WebTestCase {
                 "<textarea id='myTextarea'></textarea>\n" +
                 "</body></html>\n";
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseOut();
-        final HtmlTextArea textArea = (HtmlTextArea)page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mouseout-", textArea.getText());
     }
 
@@ -468,9 +468,9 @@ public class HtmlElementTest extends WebTestCase {
                 "<textarea id='myTextarea'></textarea>\n" +
                 "</body></html>\n";
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseDown();
-        final HtmlTextArea textArea = (HtmlTextArea)page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mousedown-", textArea.getText());
     }
     
@@ -490,9 +490,9 @@ public class HtmlElementTest extends WebTestCase {
                 "<textarea id='myTextarea'></textarea>\n" +
                 "</body></html>\n";
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody)page.getHtmlElementById("myBody");
+        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseUp();
-        final HtmlTextArea textArea = (HtmlTextArea)page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mouseup-", textArea.getText());
     }
 }

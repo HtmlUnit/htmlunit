@@ -113,8 +113,12 @@
 
         <module name="ParenPad"/>
 
+        <module name="TypecastParenPad"/>
+
         <module name="TabCharacter"/>
-        
+
+        <module name="WhitespaceAfter"/>
+
         <module name="WhitespaceAround"/>
 
         <!-- Checks for correct basic indentation                -->

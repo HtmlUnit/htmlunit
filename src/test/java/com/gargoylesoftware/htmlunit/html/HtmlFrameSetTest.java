@@ -106,7 +106,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final WebWindow thirdWebWindow = webClient.getWebWindowByName("right");
         assertInstanceOf(thirdWebWindow, FrameWindow.class);
         assertSame(firstPage, ((FrameWindow) thirdWebWindow).getEnclosingPage());
-        assertEquals("Third", ((HtmlPage)thirdWebWindow.getEnclosedPage()).getTitleText());
+        assertEquals("Third", ((HtmlPage) thirdWebWindow.getEnclosedPage()).getTitleText());
     }
 
     /**
@@ -137,7 +137,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
         assertInstanceOf(secondWebWindow, FrameWindow.class);
         assertSame(firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage());
-        assertEquals("Second", ((HtmlPage)secondWebWindow.getEnclosedPage()).getTitleText());
+        assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
     }
 
     /**

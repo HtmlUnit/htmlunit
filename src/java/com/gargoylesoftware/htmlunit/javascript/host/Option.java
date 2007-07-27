@@ -80,7 +80,7 @@ public class Option extends HTMLElement {
             attributes.addAttribute(null, "selected", "selected", null, "selected");
         }
 
-        final HtmlOption htmlOption = (HtmlOption)HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
+        final HtmlOption htmlOption = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                 page, HtmlOption.TAG_NAME, attributes);
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);

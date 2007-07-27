@@ -108,7 +108,7 @@ public class SimpleScriptableTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage )client.getPage(URL_GARGOYLE);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
         assertEquals("foo", page.getTitleText());
         assertEquals("focus not changed to textfield1",
                      page.getFormByName("form1").getInputByName("textfield1"),

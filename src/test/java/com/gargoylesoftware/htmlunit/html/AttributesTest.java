@@ -216,7 +216,7 @@ public class AttributesTest extends WebTestCase {
     protected void runTest() throws Exception {
         final String value = new String("value");
 
-        final HtmlElement objectToTest = (HtmlElement)getNewInstanceForClassUnderTest();
+        final HtmlElement objectToTest = (HtmlElement) getNewInstanceForClassUnderTest();
         objectToTest.setAttributeValue(attributeName_, value);
 
         final Object noObjects[] = new Object[0];
@@ -232,15 +232,15 @@ public class AttributesTest extends WebTestCase {
     private Object getNewInstanceForClassUnderTest() throws Exception {
         final Object newInstance;
         if (classUnderTest_ == HtmlTableRow.class) {
-            newInstance = (HtmlTableRow)HTMLParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
+            newInstance = (HtmlTableRow) HTMLParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
                     page_, HtmlTableRow.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableHeaderCell.class) {
-            newInstance = (HtmlTableHeaderCell)HTMLParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
+            newInstance = (HtmlTableHeaderCell) HTMLParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
                     page_, HtmlTableHeaderCell.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableDataCell.class) {
-            newInstance = (HtmlTableDataCell)HTMLParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
+            newInstance = (HtmlTableDataCell) HTMLParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
                     page_, HtmlTableDataCell.TAG_NAME, null);
         }
         else {
@@ -253,10 +253,10 @@ public class AttributesTest extends WebTestCase {
             catch (final InvocationTargetException e) {
                 final Throwable targetException = e.getTargetException();
                 if (targetException instanceof Exception) {
-                    throw (Exception)targetException;
+                    throw (Exception) targetException;
                 }
                 else if (targetException instanceof Error) {
-                    throw (Error)targetException;
+                    throw (Error) targetException;
                 }
                 else {
                     throw e;

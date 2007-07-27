@@ -99,7 +99,7 @@ public final class WebWindowEvent extends EventObject {
      */
     public boolean equals(final Object object) {
         if (getClass() == object.getClass()) {
-            final WebWindowEvent event = (WebWindowEvent)object;
+            final WebWindowEvent event = (WebWindowEvent) object;
             return isEqual(getSource(), event.getSource())
                 && getEventType() == event.getEventType()
                 && isEqual(getOldPage(), event.getOldPage())
@@ -137,7 +137,7 @@ public final class WebWindowEvent extends EventObject {
      * @return The web window that fired the event.
      */
     public WebWindow getWebWindow() {
-        return (WebWindow)getSource();
+        return (WebWindow) getSource();
     }
 
     private boolean isEqual(final Object object1, final Object object2) {

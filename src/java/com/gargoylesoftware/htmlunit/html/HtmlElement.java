@@ -140,7 +140,7 @@ public abstract class HtmlElement extends DomNode {
      */
     public final String getAttributeValue(final String attributeName) {
 
-        final String value = (String)attributes_.get(attributeName.toLowerCase());
+        final String value = (String) attributes_.get(attributeName.toLowerCase());
 
         if (value != null) {
             return value;
@@ -222,13 +222,13 @@ public abstract class HtmlElement extends DomNode {
         if (attributeListeners_ != null) {
             synchronized (this) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    ((HtmlAttributeChangeListener)iterator.next()).attributeAdded(event);
+                    ((HtmlAttributeChangeListener) iterator.next()).attributeAdded(event);
                 }
             }
         }
         final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
-            ((HtmlElement)parentNode).fireHtmlAttributeAdded(event);
+            ((HtmlElement) parentNode).fireHtmlAttributeAdded(event);
         }
     }
 
@@ -245,13 +245,13 @@ public abstract class HtmlElement extends DomNode {
         if (attributeListeners_ != null) {
             synchronized (this) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    ((HtmlAttributeChangeListener)iterator.next()).attributeReplaced(event);
+                    ((HtmlAttributeChangeListener) iterator.next()).attributeReplaced(event);
                 }
             }
         }
         final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
-            ((HtmlElement)parentNode).fireHtmlAttributeReplaced(event);
+            ((HtmlElement) parentNode).fireHtmlAttributeReplaced(event);
         }
     }
 
@@ -268,13 +268,13 @@ public abstract class HtmlElement extends DomNode {
         if (attributeListeners_ != null) {
             synchronized (this) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    ((HtmlAttributeChangeListener)iterator.next()).attributeRemoved(event);
+                    ((HtmlAttributeChangeListener) iterator.next()).attributeRemoved(event);
                 }
             }
         }
         final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
-            ((HtmlElement)parentNode).fireHtmlAttributeRemoved(event);
+            ((HtmlElement) parentNode).fireHtmlAttributeRemoved(event);
         }
     }
 
@@ -576,7 +576,7 @@ public abstract class HtmlElement extends DomNode {
             throw new ElementNotFoundException(elementName, attributeName, attributeValue);
         }
 
-        return (HtmlElement)list.get(0);
+        return (HtmlElement) list.get(0);
     }
 
     /**
@@ -748,7 +748,7 @@ public abstract class HtmlElement extends DomNode {
         public ChildElementsIterator() {
             if (getFirstChild() != null) {
                 if (getFirstChild() instanceof HtmlElement) {
-                    nextElement_ = (HtmlElement)getFirstChild();
+                    nextElement_ = (HtmlElement) getFirstChild();
                 }
                 else {
                     setNextElement(getFirstChild());
@@ -793,7 +793,7 @@ public abstract class HtmlElement extends DomNode {
             while (next != null && !(next instanceof HtmlElement)) {
                 next = next.getNextSibling();
             }
-            nextElement_ = (HtmlElement)next;
+            nextElement_ = (HtmlElement) next;
         }
     }
 

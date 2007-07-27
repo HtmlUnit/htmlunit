@@ -115,7 +115,7 @@ public class DomNodeTest extends WebTestCase {
         final DomNode node2 = page.getHtmlElementById("tag2");
         assertEquals("div", node2.getNodeName());
         
-        final DomNode node3 = (HtmlSpan)HTMLParser.getFactory(HtmlSpan.TAG_NAME).createElement(
+        final DomNode node3 = (HtmlSpan) HTMLParser.getFactory(HtmlSpan.TAG_NAME).createElement(
                 page, HtmlSpan.TAG_NAME, attributes);
         node2.replace(node3);
         assertEquals("span", page.getHtmlElementById("tag2").getTagName());
@@ -134,7 +134,7 @@ public class DomNodeTest extends WebTestCase {
 
         final AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(null, "id", "id", null, "newElt");
-        final DomNode newNode = (HtmlDivision)HTMLParser.getFactory(HtmlDivision.TAG_NAME).createElement(
+        final DomNode newNode = (HtmlDivision) HTMLParser.getFactory(HtmlDivision.TAG_NAME).createElement(
                 page, HtmlDivision.TAG_NAME, attributes);
         try {
             page.getHtmlElementById("newElt");
@@ -337,7 +337,7 @@ public class DomNodeTest extends WebTestCase {
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -368,7 +368,7 @@ public class DomNodeTest extends WebTestCase {
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -399,7 +399,7 @@ public class DomNodeTest extends WebTestCase {
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
         page.addDomChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());

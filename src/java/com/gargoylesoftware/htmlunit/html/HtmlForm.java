@@ -130,13 +130,13 @@ public class HtmlForm extends ClickableElement {
         final List inputList = getHtmlElementsByAttribute("input", "name", buttonName);
         final Iterator iterator = inputList.iterator();
         while (iterator.hasNext()) {
-            final HtmlInput input = (HtmlInput)iterator.next();
+            final HtmlInput input = (HtmlInput) iterator.next();
             if (input.getTypeAttribute().equals("submit")) {
                 return submit(input);
             }
         }
 
-        final HtmlButton button = (HtmlButton)getOneHtmlElementByAttribute("button", "name", buttonName);
+        final HtmlButton button = (HtmlButton) getOneHtmlElementByAttribute("button", "name", buttonName);
         return submit(button);
     }
 
@@ -150,7 +150,7 @@ public class HtmlForm extends ClickableElement {
      * @exception IOException If an IO error occurs
      */
     public Page submit() throws IOException {
-        return submit((SubmittableElement)null);
+        return submit((SubmittableElement) null);
     }
 
     /**
@@ -255,7 +255,7 @@ public class HtmlForm extends ClickableElement {
         final List parameterList = new ArrayList(submittableElements.size());
         final Iterator iterator = submittableElements.iterator();
         while (iterator.hasNext()) {
-            final SubmittableElement element = (SubmittableElement)iterator.next();
+            final SubmittableElement element = (SubmittableElement) iterator.next();
             final KeyValuePair[] pairs = element.getSubmitKeyValuePairs();
 
             for (int i = 0; i < pairs.length; i++) {
@@ -307,7 +307,7 @@ public class HtmlForm extends ClickableElement {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (isSubmittable(element, submitElement)) {
                 submittableElements.add(element);
             }
@@ -366,7 +366,7 @@ public class HtmlForm extends ClickableElement {
             return true;
         }
         if (tagName.equals("input")) {
-            final HtmlInput input = (HtmlInput)element;
+            final HtmlInput input = (HtmlInput) element;
             final String type = input.getTypeAttribute().toLowerCase();
             if (type.equals("submit") || type.equals("image") || type.equals("reset") || type.equals("button")) {
                 return false;
@@ -402,7 +402,7 @@ public class HtmlForm extends ClickableElement {
             throw new ElementNotFoundException("input", "name", name);
         }
         else {
-            return (HtmlInput)inputs.get(0);
+            return (HtmlInput) inputs.get(0);
         }
     }
 
@@ -425,12 +425,12 @@ public class HtmlForm extends ClickableElement {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
 
             if (element instanceof HtmlRadioButtonInput
                     && element.getAttributeValue("name").equals(name)) {
 
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) element;
                 if (input.getValueAttribute().equals(value)) {
                     return input;
                 }
@@ -461,7 +461,7 @@ public class HtmlForm extends ClickableElement {
             throw new ElementNotFoundException("select", "name", name);
         }
         else {
-            return (HtmlSelect)list.get(0);
+            return (HtmlSelect) list.get(0);
         }
     }
 
@@ -489,7 +489,7 @@ public class HtmlForm extends ClickableElement {
             throw new ElementNotFoundException("button", "name", name);
         }
         else {
-            return (HtmlButton)list.get(0);
+            return (HtmlButton) list.get(0);
         }
     }
     
@@ -515,7 +515,7 @@ public class HtmlForm extends ClickableElement {
             throw new ElementNotFoundException("textarea", "name", name);
         }
         else {
-            return (HtmlTextArea)list.get(0);
+            return (HtmlTextArea) list.get(0);
         }
     }
         
@@ -534,7 +534,7 @@ public class HtmlForm extends ClickableElement {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlRadioButtonInput
                      && element.getAttributeValue("name").equals(name)) {
                 results.add(element);
@@ -573,11 +573,11 @@ public class HtmlForm extends ClickableElement {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlRadioButtonInput
                      && element.getAttributeValue("name").equals(name)) {
 
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) element;
                 if (input == inputToSelect) {
                     input.setAttributeValue("checked", "checked");
                 }
@@ -614,7 +614,7 @@ public class HtmlForm extends ClickableElement {
             ).iterator();
             
             while (iterator.hasNext()) {
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) iterator.next();
                 if (input == radioButtonInput) {
                     input.setAttributeValue("checked", "checked");
                 }
@@ -652,7 +652,7 @@ public class HtmlForm extends ClickableElement {
         // Remove any pairs that match the name of the radio button
         final Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
-            final KeyValuePair pair = (KeyValuePair)iterator.next();
+            final KeyValuePair pair = (KeyValuePair) iterator.next();
             if (pair.getKey().equals(fakeRadioButtonName)) {
                 iterator.remove();
             }
@@ -675,11 +675,11 @@ public class HtmlForm extends ClickableElement {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlRadioButtonInput
                      && element.getAttributeValue("name").equals(name)) {
 
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)element;
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) element;
                 if (input.isChecked()) {
                     return input;
                 }
@@ -865,7 +865,7 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException If no elements can be found with the specified value.
      */
     public HtmlInput getInputByValue(final String value) throws ElementNotFoundException {
-        return (HtmlInput)getOneHtmlElementByAttribute("input", "value", value);
+        return (HtmlInput) getOneHtmlElementByAttribute("input", "value", value);
     }
 
     /**

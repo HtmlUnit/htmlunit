@@ -85,7 +85,7 @@ public class HTMLParserTest extends WebTestCase {
         assertEquals("TEST", stringVal);
 
         xpath = new HtmlUnitXPath("//*[./text() = 'TEST']");
-        final HtmlElement node = (HtmlElement)xpath.selectSingleNode(page);
+        final HtmlElement node = (HtmlElement) xpath.selectSingleNode(page);
 
         assertEquals(node.getTagName(), HtmlNoScript.TAG_NAME);
     }
@@ -202,11 +202,11 @@ public class HTMLParserTest extends WebTestCase {
         //see if the Google adds were added via Javascript
         /* google ads not on page anymore
         xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
-        final HtmlInlineFrame inline = (HtmlInlineFrame)xpath.selectSingleNode(page);
+        final HtmlInlineFrame inline = (HtmlInlineFrame) xpath.selectSingleNode(page);
 
         assertNotNull("find Google ads", inline);
 
-        final HtmlPage innerPage = (HtmlPage)inline.getEnclosedPage();
+        final HtmlPage innerPage = (HtmlPage) inline.getEnclosedPage();
         assertNotNull(innerPage);
         */
     }

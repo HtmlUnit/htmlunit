@@ -145,8 +145,8 @@ public class WebClientTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = (HtmlAnchor )firstPage.getHtmlElementById("a2");
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("a2");
 
         final List firstExpectedEvents = Arrays.asList(new Object[] {
             new WebWindowEvent(
@@ -155,7 +155,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals(firstExpectedEvents, eventCatcher.getEvents());
 
         eventCatcher.clear();
-        final HtmlPage secondPage = (HtmlPage )anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         final List secondExpectedEvents = Arrays.asList(new Object[] {
             new WebWindowEvent(
@@ -188,7 +188,7 @@ public class WebClientTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("foo", firstPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
@@ -228,18 +228,18 @@ public class WebClientTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("first", firstPage.getTitleText());
 
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final HtmlInlineFrame frame = (HtmlInlineFrame)firstPage.getHtmlElementById("frame1");
-        final HtmlPage thirdPage = (HtmlPage)frame.getEnclosedPage();
+        final HtmlInlineFrame frame = (HtmlInlineFrame) firstPage.getHtmlElementById("frame1");
+        final HtmlPage thirdPage = (HtmlPage) frame.getEnclosedPage();
 
         // Load the second page
-        final HtmlAnchor anchor = (HtmlAnchor)firstPage.getHtmlElementById("a2");
-        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("a2");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals("second", secondPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
@@ -828,7 +828,7 @@ public class WebClientTest extends WebTestCase {
 
         final URL url = URL_FIRST;
 
-        final HtmlPage page = (HtmlPage)webClient.getPage(url);
+        final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Second", page.getTitleText());
     }
 
@@ -993,7 +993,7 @@ public class WebClientTest extends WebTestCase {
             }
             buffer.append(" onblur='alert(\"blur-" + i + "\")'");
             buffer.append(" onfocus='alert(\"focus-" + i + "\")'");
-            buffer.append(" accesskey='" + (char)('a' + i) + "'");
+            buffer.append(" accesskey='" + (char) ('a' + i) + "'");
             buffer.append(">");
         }
         buffer.append("<div id='div1'>foo</div>"); // something that isn't tabbable
@@ -1024,7 +1024,7 @@ public class WebClientTest extends WebTestCase {
             webResponse, webClient.getCurrentWindow());
         assertInstanceOf(page, HtmlPage.class);
 
-        final HtmlPage htmlPage = (HtmlPage)page;
+        final HtmlPage htmlPage = (HtmlPage) page;
         assertEquals("first", htmlPage.getTitleText());
     }
 

@@ -630,8 +630,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public void jsxFunction_insertAdjacentHTML(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
-        final DomNode node = (DomNode)values[0];
-        final boolean append = ((Boolean)values[1]).booleanValue();
+        final DomNode node = (DomNode) values[0];
+        final boolean append = ((Boolean) values[1]).booleanValue();
 
         // add the new nodes
         parseHtmlSnippet(node, append, text);
@@ -648,10 +648,10 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public Object jsxFunction_insertAdjacentElement(final String where, final Object object) {
         if (object instanceof NodeImpl) {
-            final DomNode childNode = ((NodeImpl)object).getDomNodeOrDie();
+            final DomNode childNode = ((NodeImpl) object).getDomNodeOrDie();
             final Object[] values = getInsertAdjacentLocation(where);
-            final DomNode node = (DomNode)values[0];
-            final boolean append = ((Boolean)values[1]).booleanValue();
+            final DomNode node = (DomNode) values[0];
+            final boolean append = ((Boolean) values[1]).booleanValue();
 
             if (append) {
                 node.appendChild(childNode);

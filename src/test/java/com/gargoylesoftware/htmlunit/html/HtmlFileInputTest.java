@@ -95,7 +95,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
         fileInput.setValueAttribute(fileURL);
         f.submit();
-        final KeyDataPair pair = (KeyDataPair)webConnection.getLastParameters().get(0);
+        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertTrue(pair.getFile().length() != 0);
     }
 

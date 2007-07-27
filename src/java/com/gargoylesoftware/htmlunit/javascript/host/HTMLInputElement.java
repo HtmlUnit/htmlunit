@@ -113,7 +113,7 @@ public class HTMLInputElement extends FormField {
      * @param checked  True if this input should have the "checked" attribute set
      */
     public void jsxSet_checked(final boolean checked) {
-        ((HtmlInput)getDomNodeOrDie()).setChecked(checked);
+        ((HtmlInput) getDomNodeOrDie()).setChecked(checked);
     }
 
     /**
@@ -133,7 +133,7 @@ public class HTMLInputElement extends FormField {
      *@return The checked property.
      */
     public boolean jsxGet_checked() {
-        return ((HtmlInput)getDomNodeOrDie()).isChecked();
+        return ((HtmlInput) getDomNodeOrDie()).isChecked();
     }
 
     /**
@@ -157,7 +157,7 @@ public class HTMLInputElement extends FormField {
      * MSDN Documentation</a>
      */
     public String jsxGet_defaultValue() {
-        return ((HtmlInput)getDomNodeOrDie()).getDefaultValue();
+        return ((HtmlInput) getDomNodeOrDie()).getDefaultValue();
     }
 
     /**
@@ -167,7 +167,7 @@ public class HTMLInputElement extends FormField {
      * MSDN Documentation</a>
      */
     public void jsxSet_defaultValue(final String defaultValue) {
-        ((HtmlInput)getDomNodeOrDie()).setDefaultValue(defaultValue);
+        ((HtmlInput) getDomNodeOrDie()).setDefaultValue(defaultValue);
     }
 
     /**
@@ -177,7 +177,7 @@ public class HTMLInputElement extends FormField {
      * MSDN Documentation</a>
      */
     public boolean jsxGet_defaultChecked() {
-        return ((HtmlInput)getDomNodeOrDie()).isDefaultChecked();
+        return ((HtmlInput) getDomNodeOrDie()).isDefaultChecked();
     }
 
     /**
@@ -187,7 +187,7 @@ public class HTMLInputElement extends FormField {
      * MSDN Documentation</a>
      */
     public void jsxSet_defaultChecked(final boolean defaultChecked) {
-        ((HtmlInput)getDomNodeOrDie()).setDefaultChecked(defaultChecked);
+        ((HtmlInput) getDomNodeOrDie()).setDefaultChecked(defaultChecked);
     }
 
 }

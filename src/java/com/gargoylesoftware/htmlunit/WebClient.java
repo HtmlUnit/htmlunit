@@ -557,7 +557,7 @@ public class WebClient implements Serializable {
         try {
             final Class clazz = junit.framework.AssertionFailedError.class;
             final Constructor constructor = clazz.getConstructor(new Class[]{String.class});
-            final Error error = (Error )constructor.newInstance(new Object[]{message});
+            final Error error = (Error) constructor.newInstance(new Object[]{message});
             throw error;
         }
         catch (final Exception e) {
@@ -771,7 +771,7 @@ public class WebClient implements Serializable {
      */
     public WebWindow popFirstWindow() {
         synchronized (firstWindowStack_) {
-            return (WebWindow)firstWindowStack_.pop();
+            return (WebWindow) firstWindowStack_.pop();
         }
     }
 
@@ -806,7 +806,7 @@ public class WebClient implements Serializable {
     private void fireWindowContentChanged(final WebWindowEvent event) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while (iterator.hasNext()) {
-            final WebWindowListener listener = (WebWindowListener)iterator.next();
+            final WebWindowListener listener = (WebWindowListener) iterator.next();
             listener.webWindowContentChanged(event);
         }
     }
@@ -814,7 +814,7 @@ public class WebClient implements Serializable {
     private void fireWindowOpened(final WebWindowEvent event) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while (iterator.hasNext()) {
-            final WebWindowListener listener = (WebWindowListener)iterator.next();
+            final WebWindowListener listener = (WebWindowListener) iterator.next();
             listener.webWindowOpened(event);
         }
     }
@@ -822,7 +822,7 @@ public class WebClient implements Serializable {
     private void fireWindowClosed(final WebWindowEvent event) {
         final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
         while (iterator.hasNext()) {
-            final WebWindowListener listener = (WebWindowListener)iterator.next();
+            final WebWindowListener listener = (WebWindowListener) iterator.next();
             listener.webWindowClosed(event);
         }
     }
@@ -924,7 +924,7 @@ public class WebClient implements Serializable {
         }
 
         if (webWindow instanceof TopLevelWindow && webWindow != opener.getTopWindow()) {
-            ((TopLevelWindow)webWindow).setOpener(opener);
+            ((TopLevelWindow) webWindow).setOpener(opener);
         }
 
         return webWindow;
@@ -980,7 +980,7 @@ public class WebClient implements Serializable {
 
         final Iterator iterator = webWindows_.iterator();
         while (iterator.hasNext()) {
-            final WebWindow webWindow = (WebWindow)iterator.next();
+            final WebWindow webWindow = (WebWindow) iterator.next();
             if (webWindow.getName().equals(name)) {
                 return webWindow;
             }
@@ -1056,7 +1056,7 @@ public class WebClient implements Serializable {
                 setCurrentWindow(new TopLevelWindow("", this));
             }
             else {
-                setCurrentWindow((WebWindow)webWindows_.get(0));
+                setCurrentWindow((WebWindow) webWindows_.get(0));
             }
         }
         fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
@@ -1076,7 +1076,7 @@ public class WebClient implements Serializable {
         if (TextUtil.startsWithIgnoreCase(urlString, "javascript:")) {
             return new URL(null, urlString, JavaScriptUrlStreamHandler_);
         }
-        else if (TextUtil.startsWithIgnoreCase(urlString,"about:")) {
+        else if (TextUtil.startsWithIgnoreCase(urlString, "about:")) {
             return new URL(null, urlString, AboutUrlStreamHandler_);
         }
         else {
@@ -1172,7 +1172,7 @@ public class WebClient implements Serializable {
         }
 
         for (int i = 0; i < tokens.size(); i++) {
-            final String oneToken = (String)tokens.get(i);
+            final String oneToken = (String) tokens.get(i);
             if (oneToken.length() == 0 || oneToken.equals(".")) {
                 tokens.remove(i--);
             }

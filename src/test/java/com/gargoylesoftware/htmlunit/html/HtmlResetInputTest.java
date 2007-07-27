@@ -82,44 +82,44 @@ public class HtmlResetInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
-        final HtmlForm form = (HtmlForm )page.getHtmlElementById("form1");
-        final HtmlResetInput resetInput = (HtmlResetInput)form.getInputByName("resetButton");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlResetInput resetInput = (HtmlResetInput) form.getInputByName("resetButton");
 
         // change all the values to something else
-        ((HtmlRadioButtonInput)form.getByXPath(
+        ((HtmlRadioButtonInput) form.getByXPath(
                 "//input[@type='radio' and @name='radioButton' and @value='bar']").get(0)).setChecked(true);
-        ((HtmlCheckBoxInput)form.getInputByName("checkBox")).setChecked(true);
-        ((HtmlOption)page.getHtmlElementById("option1")).setSelected(false);
-        ((HtmlOption)page.getHtmlElementById("option2")).setSelected(true);
-        ((HtmlTextArea)page.getHtmlElementById("textarea1")).setText("Flintstone");
-        ((HtmlTextInput)page.getHtmlElementById("textfield1")).setValueAttribute("Flintstone");
-        ((HtmlHiddenInput)page.getHtmlElementById("hidden1")).setValueAttribute("Flintstone");
-        ((HtmlPasswordInput)page.getHtmlElementById("password1")).setValueAttribute("Flintstone");
-        ((HtmlIsIndex)page.getHtmlElementById("isindex1")).setValue("Flintstone");
+        ((HtmlCheckBoxInput) form.getInputByName("checkBox")).setChecked(true);
+        ((HtmlOption) page.getHtmlElementById("option1")).setSelected(false);
+        ((HtmlOption) page.getHtmlElementById("option2")).setSelected(true);
+        ((HtmlTextArea) page.getHtmlElementById("textarea1")).setText("Flintstone");
+        ((HtmlTextInput) page.getHtmlElementById("textfield1")).setValueAttribute("Flintstone");
+        ((HtmlHiddenInput) page.getHtmlElementById("hidden1")).setValueAttribute("Flintstone");
+        ((HtmlPasswordInput) page.getHtmlElementById("password1")).setValueAttribute("Flintstone");
+        ((HtmlIsIndex) page.getHtmlElementById("isindex1")).setValue("Flintstone");
 
         // Check to make sure they did get changed
         assertEquals("bar", form.getCheckedRadioButton("radioButton").getValueAttribute());
-        assertTrue(((HtmlCheckBoxInput)form.getInputByName("checkBox")).isChecked());
-        assertFalse(((HtmlOption)page.getHtmlElementById("option1")).isSelected());
-        assertTrue(((HtmlOption)page.getHtmlElementById("option2")).isSelected());
-        assertEquals("Flintstone", ((HtmlTextArea)page.getHtmlElementById("textarea1")).getText());
-        assertEquals("Flintstone", ((HtmlTextInput)page.getHtmlElementById("textfield1")).getValueAttribute());
-        assertEquals("Flintstone", ((HtmlHiddenInput)page.getHtmlElementById("hidden1")).getValueAttribute());
-        assertEquals("Flintstone", ((HtmlIsIndex)page.getHtmlElementById("isindex1")).getValue());
+        assertTrue(((HtmlCheckBoxInput) form.getInputByName("checkBox")).isChecked());
+        assertFalse(((HtmlOption) page.getHtmlElementById("option1")).isSelected());
+        assertTrue(((HtmlOption) page.getHtmlElementById("option2")).isSelected());
+        assertEquals("Flintstone", ((HtmlTextArea) page.getHtmlElementById("textarea1")).getText());
+        assertEquals("Flintstone", ((HtmlTextInput) page.getHtmlElementById("textfield1")).getValueAttribute());
+        assertEquals("Flintstone", ((HtmlHiddenInput) page.getHtmlElementById("hidden1")).getValueAttribute());
+        assertEquals("Flintstone", ((HtmlIsIndex) page.getHtmlElementById("isindex1")).getValue());
 
-        final HtmlPage secondPage = (HtmlPage)resetInput.click();
+        final HtmlPage secondPage = (HtmlPage) resetInput.click();
         assertSame(page, secondPage);
 
         // Check to make sure all the values have been set back to their original values.
         assertEquals("foo", form.getCheckedRadioButton("radioButton").getValueAttribute());
-        assertFalse(((HtmlCheckBoxInput)form.getInputByName("checkBox")).isChecked());
-        assertTrue(((HtmlOption)page.getHtmlElementById("option1")).isSelected());
-        assertFalse(((HtmlOption)page.getHtmlElementById("option2")).isSelected());
-        assertEquals("Foobar", ((HtmlTextArea)page.getHtmlElementById("textarea1")).getText());
-        assertEquals("foo", ((HtmlTextInput)page.getHtmlElementById("textfield1")).getValueAttribute());
-        assertEquals("foo", ((HtmlHiddenInput)page.getHtmlElementById("hidden1")).getValueAttribute());
-        assertEquals("foo", ((HtmlPasswordInput)page.getHtmlElementById("password1")).getValueAttribute());
-        assertEquals("", ((HtmlIsIndex)page.getHtmlElementById("isindex1")).getValue());
+        assertFalse(((HtmlCheckBoxInput) form.getInputByName("checkBox")).isChecked());
+        assertTrue(((HtmlOption) page.getHtmlElementById("option1")).isSelected());
+        assertFalse(((HtmlOption) page.getHtmlElementById("option2")).isSelected());
+        assertEquals("Foobar", ((HtmlTextArea) page.getHtmlElementById("textarea1")).getText());
+        assertEquals("foo", ((HtmlTextInput) page.getHtmlElementById("textfield1")).getValueAttribute());
+        assertEquals("foo", ((HtmlHiddenInput) page.getHtmlElementById("hidden1")).getValueAttribute());
+        assertEquals("foo", ((HtmlPasswordInput) page.getHtmlElementById("password1")).getValueAttribute());
+        assertEquals("", ((HtmlIsIndex) page.getHtmlElementById("isindex1")).getValue());
     }
 
     /**
@@ -135,7 +135,7 @@ public class HtmlResetInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlResetInput input = (HtmlResetInput)page.getHtmlElementById("myInput");
+        final HtmlResetInput input = (HtmlResetInput) page.getHtmlElementById("myInput");
         input.click();
         
         assertEquals(expectedAlerts, collectedAlerts);

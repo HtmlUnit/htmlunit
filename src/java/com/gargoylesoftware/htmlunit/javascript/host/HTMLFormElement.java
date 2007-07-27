@@ -224,7 +224,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     private HtmlForm getHtmlForm() {
-        return (HtmlForm)getHtmlElementOrDie();
+        return (HtmlForm) getHtmlElementOrDie();
     }
 
     /**

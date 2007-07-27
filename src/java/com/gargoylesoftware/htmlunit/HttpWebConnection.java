@@ -240,13 +240,13 @@ public class HttpWebConnection extends WebConnectionImpl {
             if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED) {
                 Iterator iterator = webRequestSettings.getRequestParameters().iterator();
                 while (iterator.hasNext()) {
-                    final NameValuePair pair = (NameValuePair )iterator.next();
+                    final NameValuePair pair = (NameValuePair) iterator.next();
                     postMethod.removeParameter(pair.getName(), pair.getValue());
                 }
 
                 iterator = webRequestSettings.getRequestParameters().iterator();
                 while (iterator.hasNext()) {
-                    final NameValuePair pair = (NameValuePair )iterator.next();
+                    final NameValuePair pair = (NameValuePair) iterator.next();
                     postMethod.addParameter(pair.getName(), pair.getValue());
                 }
             }
@@ -316,7 +316,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             // Disable informational messages from httpclient
             final Log log = LogFactory.getLog("httpclient.wire");
             if (log instanceof SimpleLog) {
-                ((SimpleLog)log).setLevel(SimpleLog.LOG_LEVEL_WARN);
+                ((SimpleLog) log).setLevel(SimpleLog.LOG_LEVEL_WARN);
             }
 
             httpClient_.getHttpConnectionManager().getParams().setSoTimeout(getTimeout());
@@ -459,8 +459,8 @@ public class HttpWebConnection extends WebConnectionImpl {
         synchronized (requestHeaders) {
             final Iterator iterator = requestHeaders.entrySet().iterator();
             while (iterator.hasNext()) {
-                final Map.Entry entry = (Map.Entry )iterator.next();
-                httpMethod.setRequestHeader((String )entry.getKey(), (String )entry.getValue());
+                final Map.Entry entry = (Map.Entry) iterator.next();
+                httpMethod.setRequestHeader((String) entry.getKey(), (String) entry.getValue());
             }
         }
     }

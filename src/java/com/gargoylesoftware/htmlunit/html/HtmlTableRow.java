@@ -254,12 +254,12 @@ public class HtmlTableRow extends ClickableElement {
             nextCell_ = null;
             for (DomNode next = node; next != null; next = next.getNextSibling()) {
                 if (next instanceof HtmlTableCell) {
-                    nextCell_ = (HtmlTableCell)next;
+                    nextCell_ = (HtmlTableCell) next;
                     return;
                 }
                 else if (currentForm_ == null && next instanceof HtmlForm) {
                     // Completely illegal html but some of the big sites (ie amazon) do this
-                    currentForm_ = (HtmlForm)next;
+                    currentForm_ = (HtmlForm) next;
                     setNextCell(next.getFirstChild());
                     return;
                 }

@@ -143,7 +143,7 @@ public final class Document extends NodeImpl {
      * @return The page.
      */
     public HtmlPage getHtmlPage() {
-        return (HtmlPage)getDomNodeOrDie();
+        return (HtmlPage) getDomNodeOrDie();
     }
 
     /**
@@ -152,7 +152,7 @@ public final class Document extends NodeImpl {
      * @return The page.
      */
     public HtmlPage getHtmlPageOrNull() {
-        return (HtmlPage)getDomNodeOrNull();
+        return (HtmlPage) getDomNodeOrNull();
     }
 
     /**
@@ -647,7 +647,7 @@ public final class Document extends NodeImpl {
      * @return The root node for the document.
      */
     public Object jsxGet_documentElement() {
-        return getScriptableFor(((HtmlPage)getDomNodeOrDie()).getDocumentElement());
+        return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentElement());
     }
 
     /**
@@ -771,7 +771,7 @@ public final class Document extends NodeImpl {
     public Object jsxFunction_getElementById(final String id) {
         Object result = null;
         try {
-            final HtmlElement htmlElement = ((HtmlPage)getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
+            final HtmlElement htmlElement = ((HtmlPage) getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {
@@ -887,7 +887,7 @@ public final class Document extends NodeImpl {
             return NOT_FOUND;
         }
         else {
-            final DomNode bodyElement = (DomNode)list.get(0);
+            final DomNode bodyElement = (DomNode) list.get(0);
             return getScriptableFor(bodyElement);
         }
     }

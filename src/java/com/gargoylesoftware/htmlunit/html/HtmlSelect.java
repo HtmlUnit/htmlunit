@@ -116,7 +116,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while (iterator.hasNext()) {
                 final HtmlElement element = iterator.nextElement();
-                if (element instanceof HtmlOption && ((HtmlOption)element).isSelected()) {
+                if (element instanceof HtmlOption && ((HtmlOption) element).isSelected()) {
                     result.add(element);
                 }
             }
@@ -203,7 +203,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         final List elementList = getHtmlElementsByTagName("option");
 
         for (int i = elementList.size() - 1; i >= newLength; i--) {
-            ((HtmlElement)elementList.get(i)).remove();
+            ((HtmlElement) elementList.get(i)).remove();
         }
     }
 
@@ -316,7 +316,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         else {
             final Iterator iterator = getOptions().iterator();
             while (iterator.hasNext()) {
-                final HtmlOption option = (HtmlOption )iterator.next();
+                final HtmlOption option = (HtmlOption) iterator.next();
                 option.setSelectedInternal(option == selectedOption && isSelected);
             }
         }
@@ -372,7 +372,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             pairs = new KeyValuePair[optionCount];
 
             for (int i = 0; i < optionCount; i++) {
-                final HtmlOption option = (HtmlOption )selectedOptions.get(i);
+                final HtmlOption option = (HtmlOption) selectedOptions.get(i);
                 pairs[i] = new KeyValuePair(name, option.getValueAttribute());
             }
         }
@@ -402,7 +402,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public void reset() {
         final Iterator iterator = getOptions().iterator();
         while (iterator.hasNext()) {
-            final HtmlOption option = (HtmlOption)iterator.next();
+            final HtmlOption option = (HtmlOption) iterator.next();
             option.reset();
         }
     }
@@ -472,7 +472,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         throws ElementNotFoundException {
         Assert.notNull("value", value);
 
-        return (HtmlOption )getOneHtmlElementByAttribute("option", "value", value);
+        return (HtmlOption) getOneHtmlElementByAttribute("option", "value", value);
     }
 
     /**

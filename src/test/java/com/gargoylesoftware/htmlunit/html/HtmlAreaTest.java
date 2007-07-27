@@ -95,11 +95,11 @@ public class HtmlAreaTest extends WebTestCase {
 
         final WebClient client = createWebClient("");
 
-        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
-        final HtmlArea area = (HtmlArea )page.getHtmlElementById("third");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlArea area = (HtmlArea) page.getHtmlElementById("third");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage thirdPage = (HtmlPage )area.click();
+        final HtmlPage thirdPage = (HtmlPage) area.click();
         assertEquals("third", thirdPage.getTitleText());
     }
 
@@ -112,10 +112,10 @@ public class HtmlAreaTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
-        final HtmlArea area = (HtmlArea )page.getHtmlElementById("second");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlArea area = (HtmlArea) page.getHtmlElementById("second");
 
-        final HtmlPage thirdPage = (HtmlPage )area.click();
+        final HtmlPage thirdPage = (HtmlPage) area.click();
         assertEquals(Collections.singletonList("foo"), collectedAlerts);
         assertEquals("first", thirdPage.getTitleText());
     }
@@ -129,10 +129,10 @@ public class HtmlAreaTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage )client.getPage(URL_FIRST);
-        final HtmlArea area = (HtmlArea )page.getHtmlElementById("second");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlArea area = (HtmlArea) page.getHtmlElementById("second");
 
-        final HtmlPage thirdPage = (HtmlPage )area.click();
+        final HtmlPage thirdPage = (HtmlPage) area.click();
         assertEquals(Collections.singletonList("foo"), collectedAlerts);
         assertEquals("second", thirdPage.getTitleText());
     }
@@ -149,11 +149,11 @@ public class HtmlAreaTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlArea area = (HtmlArea )page.getHtmlElementById("a2");
+        final HtmlArea area = (HtmlArea) page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = (HtmlPage )area.click();
+        final HtmlPage secondPage = (HtmlPage) area.click();
 
         assertEquals(Collections.singletonList("clicked"), collectedAlerts);
         assertSame(page, secondPage);
@@ -178,12 +178,12 @@ public class HtmlAreaTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage )client.getPage(URL_GARGOYLE);
-        final HtmlArea area = (HtmlArea )page.getHtmlElementById("a2");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlArea area = (HtmlArea) page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = (HtmlPage )area.click();
+        final HtmlPage secondPage = (HtmlPage) area.click();
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         assertSame(page, secondPage);

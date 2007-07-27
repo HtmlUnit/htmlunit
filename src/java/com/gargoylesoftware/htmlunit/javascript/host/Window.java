@@ -233,7 +233,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final String windowName = getStringArg(1, args, "");
         final String features = getStringArg(2, args, null);
         final boolean replaceCurrentEntryInBrowsingHistory = getBooleanArg(3, args, false);
-        final Window thisWindow = (Window)scriptable;
+        final Window thisWindow = (Window) scriptable;
 
         if (features != null || replaceCurrentEntryInBrowsingHistory) {
             thisWindow.getLog().debug(
@@ -299,7 +299,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         try {
             final Page page = webWindow_.getEnclosedPage();
             if (page != null && page instanceof HtmlPage) {
-                return ((HtmlPage)page).getFullyQualifiedUrl(urlString);
+                return ((HtmlPage) page).getFullyQualifiedUrl(urlString);
             }
             else {
                 return new URL(urlString);
@@ -494,7 +494,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public SimpleScriptable jsxGet_top() {
         final WebWindow topWebWindow = webWindow_.getTopWindow();
-        return (SimpleScriptable)topWebWindow.getScriptObject();
+        return (SimpleScriptable) topWebWindow.getScriptObject();
     }
 
     /**
@@ -503,7 +503,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public SimpleScriptable jsxGet_parent() {
         final WebWindow parentWebWindow = webWindow_.getParentWindow();
-        return (SimpleScriptable)parentWebWindow.getScriptObject();
+        return (SimpleScriptable) parentWebWindow.getScriptObject();
     }
 
     /**
@@ -512,7 +512,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public Object jsxGet_opener() {
         if (webWindow_ instanceof TopLevelWindow) {
-            final WebWindow opener = ((TopLevelWindow)webWindow_).getOpener();
+            final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
             if (opener != null) {
                 return opener.getScriptObject();
             }
@@ -1053,6 +1053,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the computed style.
      */
     public Object jsxFunction_getComputedStyle(final NodeImpl element, final String pseudoElt) {
-        return ((HTMLElement)element).jsxGet_style();
+        return ((HTMLElement) element).jsxGet_style();
     }
 }

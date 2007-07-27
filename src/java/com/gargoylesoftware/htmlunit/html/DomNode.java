@@ -409,9 +409,9 @@ public abstract class DomNode implements Cloneable, Serializable {
         boolean previousNodeWasText = false;
         final StringBuffer textBuffer = new StringBuffer();
         while (childIterator.hasNext()) {
-            final DomNode node = (DomNode)childIterator.next();
+            final DomNode node = (DomNode) childIterator.next();
             if (node instanceof DomText) {
-                textBuffer.append(((DomText)node).getData());
+                textBuffer.append(((DomText) node).getData());
                 previousNodeWasText = true;
             }
             else {
@@ -462,7 +462,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             final char ch = text.charAt(i);
 
             // Translate non-breaking space to regular space.
-            if (ch == (char)160) {
+            if (ch == (char) 160) {
                 buffer.append(' ');
                 whitespace = false;
             }
@@ -929,7 +929,7 @@ public abstract class DomNode implements Cloneable, Serializable {
                 return getNextElementUpwards(parent);
             }
             else {
-                return (HtmlElement)next;
+                return (HtmlElement) next;
             }
         }
 
@@ -941,7 +941,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             while (node != null && node instanceof HtmlElement == false) {
                 node = node.getNextSibling();
             }
-            return (HtmlElement)node;
+            return (HtmlElement) node;
         }
 
         private HtmlElement getNextSibling(final HtmlElement element) {
@@ -949,7 +949,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             while (node != null && node instanceof HtmlElement == false) {
                 node = node.getNextSibling();
             }
-            return (HtmlElement)node;
+            return (HtmlElement) node;
         }
     }
 
@@ -1062,7 +1062,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
             synchronized (this) {
                 for (final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
-                    final DomChangeListener listener = (DomChangeListener)iterator.next();
+                    final DomChangeListener listener = (DomChangeListener) iterator.next();
                     listener.nodeAdded(event);
                 }
             }
@@ -1087,7 +1087,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
             synchronized (this) {
                 for (final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
-                    final DomChangeListener listener = (DomChangeListener)iterator.next();
+                    final DomChangeListener listener = (DomChangeListener) iterator.next();
                     listener.nodeDeleted(event);
                 }
             }

@@ -202,7 +202,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         }
 
         final List list = getMetaTags("content-type");
-        for (int i = 0; i < list.size();i++) {
+        for (int i = 0; i < list.size(); i++) {
             final HtmlMeta meta = (HtmlMeta) list.get(i);
             final String contents = meta.getContentAttribute();
             final int pos = contents.toLowerCase().indexOf("charset=");
@@ -260,7 +260,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByHref(final String href) throws ElementNotFoundException {
-        return (HtmlAnchor)getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
+        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
     }
 
     /**
@@ -282,7 +282,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final Iterator iterator = getAnchors().iterator();
         while (iterator.hasNext()) {
-            final HtmlAnchor anchor = (HtmlAnchor)iterator.next();
+            final HtmlAnchor anchor = (HtmlAnchor) iterator.next();
             if (text.equals(anchor.asText())) {
                 return anchor;
             }
@@ -302,7 +302,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             throw new ElementNotFoundException("form", "name", name);
         }
         else {
-            return (HtmlForm)forms.get(0);
+            return (HtmlForm) forms.get(0);
         }
     }
 
@@ -407,7 +407,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             resolvedTarget = elementTarget;
         }
         else {
-            final HtmlBase htmlBase = (HtmlBase)baseElements.get(0);
+            final HtmlBase htmlBase = (HtmlBase) baseElements.get(0);
             resolvedTarget = htmlBase.getTargetAttribute();
         }
         return resolvedTarget;
@@ -434,7 +434,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         final int listSize = list.size();
 
         for (int i = 0; i < listSize; i++) {
-            list.set(i, ((HtmlElement)list.get(i)).getAttributeValue("id"));
+            list.set(i, ((HtmlElement) list.get(i)).getAttributeValue("id"));
         }
 
         return Collections.unmodifiableList(list);
@@ -475,7 +475,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             final String tagName = element.getTagName();
             if (acceptableTagNames.contains(tagName)) {
                 final boolean isDisabled = element.isAttributeDefined("disabled");
@@ -493,8 +493,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         return new Comparator() {
             public int compare(final Object object1, final Object object2) {
-                final HtmlElement element1 = (HtmlElement)object1;
-                final HtmlElement element2 = (HtmlElement)object2;
+                final HtmlElement element1 = (HtmlElement) object1;
+                final HtmlElement element2 = (HtmlElement) object2;
 
                 final int tabIndex1 = getTabIndex(element1);
                 final int tabIndex2 = getTabIndex(element2);
@@ -554,7 +554,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             return null;
         }
         else {
-            return (HtmlElement)elements.get(0);
+            return (HtmlElement) elements.get(0);
         }
     }
 
@@ -585,7 +585,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (acceptableTagNames.contains(element.getTagName())) {
                 final String accessKeyAttribute = element.getAttributeValue("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
@@ -615,7 +615,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final Iterator iterator = tabbableElements.iterator();
         while (iterator.hasNext()) {
-            final HtmlElement htmlElement = (HtmlElement)iterator.next();
+            final HtmlElement htmlElement = (HtmlElement) iterator.next();
             final int tabIndex = getTabIndex(htmlElement);
             if (tabIndex == TAB_INDEX_OUT_OF_BOUNDS) {
                 webClient_.assertionFailed(
@@ -640,7 +640,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final String id = ((HtmlElement)iterator.next()).getAttributeValue("accesskey");
+            final String id = ((HtmlElement) iterator.next()).getAttributeValue("accesskey");
             if (id != null && id.length() != 0) {
                 if (accessKeyList.contains(id)) {
                     webClient_.assertionFailed("Duplicate access key: " + id);
@@ -664,7 +664,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
-            final String id = ((HtmlElement)iterator.next()).getAttributeValue("id");
+            final String id = ((HtmlElement) iterator.next()).getAttributeValue("id");
             if (id != null && id.length() != 0) {
                 if (idList.contains(id)) {
                     webClient_.assertionFailed("Duplicate ID: " + id);
@@ -1182,25 +1182,25 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
             final Page newPage;
             if (element instanceof HtmlAnchor) {
-                newPage = ((HtmlAnchor)element).click();
+                newPage = ((HtmlAnchor) element).click();
             }
             else if (element instanceof HtmlArea) {
-                newPage = ((HtmlArea)element).click();
+                newPage = ((HtmlArea) element).click();
             }
             else if (element instanceof HtmlButton) {
-                newPage = ((HtmlButton)element).click();
+                newPage = ((HtmlButton) element).click();
             }
             else if (element instanceof HtmlInput) {
-                newPage = ((HtmlInput)element).click();
+                newPage = ((HtmlInput) element).click();
             }
             else if (element instanceof HtmlLabel) {
-                newPage = ((HtmlLabel)element).click();
+                newPage = ((HtmlLabel) element).click();
             }
             else if (element instanceof HtmlLegend) {
-                newPage = ((HtmlLegend)element).click();
+                newPage = ((HtmlLegend) element).click();
             }
             else if (element instanceof HtmlTextArea) {
-                newPage = ((HtmlTextArea)element).click();
+                newPage = ((HtmlTextArea) element).click();
             }
             else {
                 newPage = this;
@@ -1237,14 +1237,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             final int index = elements.indexOf(elementWithFocus);
             if (index == -1) {
                 // The element with focus isn't on this page
-                elementToGiveFocus = (HtmlElement)elements.get(0);
+                elementToGiveFocus = (HtmlElement) elements.get(0);
             }
             else {
                 if (index == elements.size() - 1) {
-                    elementToGiveFocus = (HtmlElement)elements.get(0);
+                    elementToGiveFocus = (HtmlElement) elements.get(0);
                 }
                 else {
-                    elementToGiveFocus = (HtmlElement)elements.get(index + 1);
+                    elementToGiveFocus = (HtmlElement) elements.get(index + 1);
                 }
             }
         }
@@ -1271,20 +1271,20 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         final HtmlElement elementToGiveFocus;
         final FocusableElement elementWithFocus = getElementWithFocus();
         if (elementWithFocus == null) {
-            elementToGiveFocus = (HtmlElement)elements.get(elements.size() - 1);
+            elementToGiveFocus = (HtmlElement) elements.get(elements.size() - 1);
         }
         else {
             final int index = elements.indexOf(elementWithFocus);
             if (index == -1) {
                 // The element with focus isn't on this page
-                elementToGiveFocus = (HtmlElement)elements.get(elements.size() - 1);
+                elementToGiveFocus = (HtmlElement) elements.get(elements.size() - 1);
             }
             else {
                 if (index == 0) {
-                    elementToGiveFocus = (HtmlElement)elements.get(elements.size() - 1);
+                    elementToGiveFocus = (HtmlElement) elements.get(elements.size() - 1);
                 }
                 else {
-                    elementToGiveFocus = (HtmlElement)elements.get(index - 1);
+                    elementToGiveFocus = (HtmlElement) elements.get(index - 1);
                 }
             }
         }
@@ -1514,7 +1514,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             pageInputs.removeAll(formInputs);
 
             for (final Iterator iterator = pageInputs.iterator(); iterator.hasNext();) {
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput)iterator.next();
+                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) iterator.next();
                 if (input == radioButtonInput) {
                     input.setAttributeValue("checked", "checked");
                 }
@@ -1536,7 +1536,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     protected Object clone() {
         try {
-            final HtmlPage result = (HtmlPage)super.clone();
+            final HtmlPage result = (HtmlPage) super.clone();
             result.documentElement_ = null;
             result.elementWithFocus_ = null;
             result.idMap_ = new HashMap();
@@ -1552,12 +1552,12 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * {@inheritDoc}
      */
     public DomNode cloneNode(final boolean deep) {
-        final HtmlPage result = (HtmlPage)super.cloneNode(deep);
+        final HtmlPage result = (HtmlPage) super.cloneNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s
             final Iterator it = result.getAllHtmlChildElements();
             while (it.hasNext()) {
-                final HtmlElement child = (HtmlElement)it.next();
+                final HtmlElement child = (HtmlElement) it.next();
                 removeIdElement(child);
                 result.addIdElement(child);
             }
@@ -1607,7 +1607,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         synchronized (this) {
             if (attributeListeners_ != null) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
+                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
                     listener.attributeAdded(event);
                 }
             }
@@ -1622,7 +1622,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         synchronized (this) {
             if (attributeListeners_ != null) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
+                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
                     listener.attributeReplaced(event);
                 }
             }
@@ -1637,7 +1637,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         synchronized (this) {
             if (attributeListeners_ != null) {
                 for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener)iterator.next();
+                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
                     listener.attributeRemoved(event);
                 }
             }

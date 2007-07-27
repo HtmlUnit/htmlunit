@@ -111,7 +111,7 @@ public class ActiveXObject extends SimpleScriptable {
             throw Context.reportRuntimeError("ActiveXObject Error: value for " + activeXName + " is not a String.");
         }
 
-        final String xClassString = (String)mapValue;
+        final String xClassString = (String) mapValue;
         Object object = null;
         try {
             final Class xClass = Class.forName(xClassString);

@@ -116,7 +116,7 @@ public class FormField extends FocusableHostElement {
      *@return The value of this attribute.
      */
     public HTMLFormElement jsxGet_form() {
-        return (HTMLFormElement)getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
+        return (HTMLFormElement) getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
     }
 
     /**

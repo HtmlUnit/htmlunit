@@ -663,8 +663,8 @@ public class HtmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
-        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor)page.getAnchors().get(0);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getAnchors().get(0);
         anchor.click();
         
         final String[] expectedIncorrectness = {
@@ -698,9 +698,9 @@ public class HtmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
-        final HtmlPage page = (HtmlPage)webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor)page.getAnchors().get(0);
-        final HtmlPage secondPage = (HtmlPage)anchor.click();
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getAnchors().get(0);
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
         
         final String[] expectedIncorrectness = {
             "Element 'base' must appear in <head>, it is ignored."
@@ -1398,8 +1398,8 @@ public class HtmlPageTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
     
-        final HtmlPage firstPage = (HtmlPage )client.getPage(URL_FIRST);
-        final HtmlInlineFrame iframe = (HtmlInlineFrame)firstPage.getHtmlElementById("myIFrame");
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) firstPage.getHtmlElementById("myIFrame");
         
         assertEquals(URL_SECOND, iframe.getEnclosedPage().getWebResponse().getUrl());
     }
@@ -1452,14 +1452,14 @@ public class HtmlPageTest extends WebTestCase {
         
         final ByteArrayInputStream byteIS = new ByteArrayInputStream(byteOS.toByteArray());
         final ObjectInputStream objectIS = new ObjectInputStream(byteIS);
-        final HtmlPage page2 = (HtmlPage)objectIS.readObject();
+        final HtmlPage page2 = (HtmlPage) objectIS.readObject();
         
         final Iterator iterator1 = page1.getAllHtmlChildElements();
         final Iterator iterator2 = page2.getAllHtmlChildElements();
         while (iterator1.hasNext()) {
             assertTrue(iterator2.hasNext());
-            final HtmlElement element1 = (HtmlElement)iterator1.next();
-            final HtmlElement element2 = (HtmlElement)iterator2.next();
+            final HtmlElement element1 = (HtmlElement) iterator1.next();
+            final HtmlElement element2 = (HtmlElement) iterator2.next();
             assertEquals(element1.getNodeName(), element2.getNodeName());
         }
         assertFalse(iterator2.hasNext());
@@ -1477,14 +1477,14 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
-        final HtmlElement id1 = (HtmlElement)page.getDocumentElement().getLastChild().getLastChild();
-        assertEquals("id1",id1.getId());
+        final HtmlElement id1 = (HtmlElement) page.getDocumentElement().getLastChild().getLastChild();
+        assertEquals("id1", id1.getId());
         assertTrue(id1 == page.getHtmlElementById("id1"));
-        final HtmlPage clone = (HtmlPage)page.cloneNode(true);
+        final HtmlPage clone = (HtmlPage) page.cloneNode(true);
         assertTrue(id1 == page.getHtmlElementById("id1"));
-        final HtmlElement id1clone = (HtmlElement)clone.getDocumentElement().getLastChild().getLastChild();
+        final HtmlElement id1clone = (HtmlElement) clone.getDocumentElement().getLastChild().getLastChild();
         assertFalse(id1 == id1clone);
-        assertEquals("id1",id1clone.getId());
+        assertEquals("id1", id1clone.getId());
         assertTrue(id1clone == clone.getHtmlElementById("id1"));
         assertTrue(id1clone != page.getHtmlElementById("id1"));
         assertTrue(id1 != clone.getHtmlElementById("id1"));
@@ -1511,10 +1511,10 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
-        final HtmlPage clone = (HtmlPage)page.cloneNode(true);
+        final HtmlPage clone = (HtmlPage) page.cloneNode(true);
         assertTrue(page != clone);
-        final HtmlElement doc = (HtmlElement)page.getDocumentElement();
-        final HtmlElement docclone = (HtmlElement)clone.getDocumentElement();
+        final HtmlElement doc = (HtmlElement) page.getDocumentElement();
+        final HtmlElement docclone = (HtmlElement) clone.getDocumentElement();
         assertTrue(doc != docclone);
     }
 
@@ -1540,7 +1540,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -1568,7 +1568,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -1596,7 +1596,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
@@ -1624,7 +1624,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlAttributeChangeListenerTestImpl listenerImpl = new HtmlAttributeChangeListenerTestImpl();
         page.addHtmlAttributeChangeListener(listenerImpl);
-        final HtmlButtonInput myButton = (HtmlButtonInput)page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
         
         myButton.click();
         page.removeHtmlAttributeChangeListener(listenerImpl);

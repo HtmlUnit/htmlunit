@@ -172,7 +172,7 @@ public class HtmlTable extends ClickableElement {
     public final HtmlTableRow getRowById(final String id) throws ElementNotFoundException {
         final RowIterator iterator = new RowIterator();
         while (iterator.hasNext()) {
-            final HtmlTableRow row = (HtmlTableRow)iterator.next();
+            final HtmlTableRow row = (HtmlTableRow) iterator.next();
             if (row.getIdAttribute().equals(id)) {
                 return row;
             }
@@ -188,7 +188,7 @@ public class HtmlTable extends ClickableElement {
     public String getCaptionText() {
         final Iterator iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlCaption) {
                 return element.asText();
             }
@@ -204,9 +204,9 @@ public class HtmlTable extends ClickableElement {
     public HtmlTableHeader getHeader() {
         final Iterator iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlTableHeader) {
-                return (HtmlTableHeader)element;
+                return (HtmlTableHeader) element;
             }
         }
         return null;
@@ -220,9 +220,9 @@ public class HtmlTable extends ClickableElement {
     public HtmlTableFooter getFooter() {
         final Iterator iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlTableFooter) {
-                return (HtmlTableFooter)element;
+                return (HtmlTableFooter) element;
             }
         }
         return null;
@@ -238,7 +238,7 @@ public class HtmlTable extends ClickableElement {
         final List bodies = new ArrayList();
         final Iterator iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement)iterator.next();
+            final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlTableBody) {
                 bodies.add(element);
             }
@@ -421,11 +421,11 @@ public class HtmlTable extends ClickableElement {
             nextRow_ = null;
             for (DomNode next = node; next != null; next = next.getNextSibling()) {
                 if (next instanceof HtmlTableRow) {
-                    nextRow_ = (HtmlTableRow)next;
+                    nextRow_ = (HtmlTableRow) next;
                     return;
                 }
                 else if (currentGroup_ == null && next instanceof TableRowGroup) {
-                    currentGroup_ = (TableRowGroup)next;
+                    currentGroup_ = (TableRowGroup) next;
                     setNextRow(next.getFirstChild());
                     return;
                 }

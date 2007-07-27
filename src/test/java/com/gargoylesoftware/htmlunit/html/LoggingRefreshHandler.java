@@ -68,7 +68,7 @@ public class LoggingRefreshHandler implements RefreshHandler {
      * @param seconds The number of seconds to wait before reloading the page.
      */
     public void handleRefresh(final Page page, final URL url, final int seconds) {
-        list_.add(((HtmlPage)page).getTitleText());
+        list_.add(((HtmlPage) page).getTitleText());
         list_.add(url);
         list_.add(new Integer(seconds));
     }

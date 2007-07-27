@@ -91,7 +91,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {
@@ -127,7 +127,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {
@@ -163,7 +163,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {
@@ -198,7 +198,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some Text Appended"};
@@ -231,7 +231,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some Text"};
@@ -264,7 +264,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some New Text"};
@@ -297,7 +297,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some New Text"};
@@ -330,7 +330,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"New", "Some New Text"};
@@ -365,7 +365,7 @@ public class CharacterDataImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage)webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"Some ", "Text", "true"};

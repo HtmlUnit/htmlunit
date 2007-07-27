@@ -129,7 +129,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
         node_.addDomChangeListener(listener);
         if (node_ instanceof HtmlElement) {
-            ((HtmlElement)node_).addHtmlAttributeChangeListener(listener);
+            ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
             cachedElements_ = null;
         }
     }

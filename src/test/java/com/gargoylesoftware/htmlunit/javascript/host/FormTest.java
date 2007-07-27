@@ -517,11 +517,11 @@ public class FormTest extends WebTestCase {
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
-        final HtmlPage secondPage
-            = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
+        final HtmlPage secondPage =
+            (HtmlPage) page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
         assertEquals("second", secondPage.getTitleText());
     }
 
@@ -544,7 +544,7 @@ public class FormTest extends WebTestCase {
         webConnection.setDefaultResponse(defaultContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("button1")).click();
 
         assertEquals("http://third", page2.getWebResponse().getUrl());
@@ -573,11 +573,11 @@ public class FormTest extends WebTestCase {
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         final HtmlPage secondPage
-            = (HtmlPage)page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
+            = (HtmlPage) page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
         assertEquals("second", secondPage.getTitleText());
         assertEquals("MyNewWindow", secondPage.getEnclosingWindow().getName());
     }
@@ -608,8 +608,8 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
-        final HtmlAnchor link = (HtmlAnchor)page.getHtmlElementById("link1");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor link = (HtmlAnchor) page.getHtmlElementById("link1");
         link.click();
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -684,7 +684,7 @@ public class FormTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("Button Test", page.getTitleText());
 
         final String[] expectedAlerts = {"value = 2"};
@@ -741,11 +741,11 @@ public class FormTest extends WebTestCase {
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
-        final HtmlButton button = (HtmlButton)page.getHtmlElementById("button1");
-        final HtmlPage secondPage = (HtmlPage)button.click();
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button1");
+        final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("second", secondPage.getTitleText());
         assertEquals("http://second?button1=", secondPage.getWebResponse().getUrl());
     }

@@ -80,7 +80,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getChildAxisIterator(final Object contextNode) {
-        return ((DomNode)contextNode).getChildIterator();
+        return ((DomNode) contextNode).getChildIterator();
     }
 
     /**
@@ -91,7 +91,7 @@ public class DocumentNavigator extends DefaultNavigator {
      */
     public Iterator getParentAxisIterator(final Object contextNode) {
         return new Iterator() {
-            private DomNode parent_ = ((DomNode)contextNode).getParentNode();
+            private DomNode parent_ = ((DomNode) contextNode).getParentNode();
 
             public boolean hasNext() {
                 return parent_ != null;
@@ -124,7 +124,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getPrecedingSiblingAxisIterator(final Object contextNode) {
-        return Util.getPrecedingSiblingAxisIterator((DomNode)contextNode);
+        return Util.getPrecedingSiblingAxisIterator((DomNode) contextNode);
     }
 
     /**
@@ -134,7 +134,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getFollowingAxisIterator(final Object contextNode) {
-        return Util.getFollowingAxisIterator((DomNode)contextNode);
+        return Util.getFollowingAxisIterator((DomNode) contextNode);
     }
 
     /**
@@ -144,7 +144,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     public Iterator getPrecedingAxisIterator(final Object contextNode) {
-        return Util.getPrecedingAxisIterator((DomNode)contextNode);
+        return Util.getPrecedingAxisIterator((DomNode) contextNode);
     }
 
     /**
@@ -155,7 +155,7 @@ public class DocumentNavigator extends DefaultNavigator {
      */
     public Iterator getAttributeAxisIterator(final Object contextNode) {
         if (contextNode instanceof HtmlElement) {
-            return ((HtmlElement)contextNode).getAttributeEntriesIterator();
+            return ((HtmlElement) contextNode).getAttributeEntriesIterator();
         }
         else {
             return Collections.EMPTY_LIST.iterator();
@@ -179,7 +179,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The root node.
      */
     public Object getDocumentNode(final Object contextNode) {
-        return ((DomNode)contextNode).getPage();
+        return ((DomNode) contextNode).getPage();
     }
 
     /**
@@ -206,7 +206,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * if the node is an element, or null otherwise.
      */
     public String getElementName(final Object object) {
-        return ((DomNode)object).getNodeName();
+        return ((DomNode) object).getNodeName();
     }
 
     /**
@@ -217,7 +217,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * prefixed) name if the node is an element, or null otherwise.
      */
     public String getElementQName(final Object object) {
-        return ((DomNode)object).getNodeName();
+        return ((DomNode) object).getNodeName();
     }
 
     /**
@@ -236,7 +236,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * if the node is an attribute, or null otherwise.
      */
     public String getAttributeName(final Object object) {
-        return (String)((Map.Entry)object).getKey();
+        return (String) ((Map.Entry) object).getKey();
     }
 
     /**
@@ -247,7 +247,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * prefixed) name if the node is an attribute, or null otherwise.
      */
     public String getAttributeQName(final Object object) {
-        return (String)((Map.Entry)object).getKey();
+        return (String) ((Map.Entry) object).getKey();
     }
 
     /**
@@ -328,7 +328,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * is an element, null otherwise.
      */
     public String getElementStringValue(final Object object) {
-        return ((DomNode)object).asText();
+        return ((DomNode) object).asText();
     }
 
     /**
@@ -339,7 +339,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * attribute, null otherwise.
      */
     public String getAttributeStringValue(final Object object) {
-        return (String)((Map.Entry)object).getValue();
+        return (String) ((Map.Entry) object).getValue();
     }
 
     /**
@@ -349,7 +349,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The string of text if the node is text, null otherwise.
      */
     public String getTextStringValue(final Object object) {
-        return ((DomText)object).asText();
+        return ((DomText) object).asText();
     }
 
     /**
@@ -404,7 +404,7 @@ public class DocumentNavigator extends DefaultNavigator {
      *  @see javax.xml.parsers.DocumentBuilderFactory
      */
     public Object getElementById(final Object contextNode, final String elementId) {
-        final HtmlPage page = ((DomNode)contextNode).getPage();
+        final HtmlPage page = ((DomNode) contextNode).getPage();
         return page.getHtmlElementById(elementId);
     }
 

@@ -139,7 +139,7 @@ public class NodeImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"true", "true"};
@@ -175,7 +175,7 @@ public class NodeImplTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"true", "true"};

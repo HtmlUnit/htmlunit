@@ -182,7 +182,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         }
         else {
             for (int i = currentLength; i < newLength; i++) {
-                final HtmlOption option = (HtmlOption)HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
+                final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
             }

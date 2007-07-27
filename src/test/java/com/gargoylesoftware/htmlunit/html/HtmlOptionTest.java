@@ -71,9 +71,9 @@ public class HtmlOptionTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlOption option1 = (HtmlOption )page.getHtmlElementById("option1");
-        final HtmlOption option2 = (HtmlOption )page.getHtmlElementById("option2");
-        final HtmlOption option3 = (HtmlOption )page.getHtmlElementById("option3");
+        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
+        final HtmlOption option2 = (HtmlOption) page.getHtmlElementById("option2");
+        final HtmlOption option3 = (HtmlOption) page.getHtmlElementById("option3");
 
         assertFalse(option1.isSelected());
         assertTrue(option2.isSelected());
@@ -108,8 +108,8 @@ public class HtmlOptionTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlOption option1 = (HtmlOption )page.getHtmlElementById("option1");
-        final HtmlOption option2 = (HtmlOption )page.getHtmlElementById("option2");
+        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
+        final HtmlOption option2 = (HtmlOption) page.getHtmlElementById("option2");
 
         assertEquals("option1", option1.getValueAttribute());
         assertEquals("Number Two", option2.getValueAttribute());

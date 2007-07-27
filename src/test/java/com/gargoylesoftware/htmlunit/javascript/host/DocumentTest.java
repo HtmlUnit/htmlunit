@@ -234,11 +234,11 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage)client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("", page.getTitleText());
 
         final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
-        final HtmlPage secondPage = (HtmlPage)testAnchor.click();
+        final HtmlPage secondPage = (HtmlPage) testAnchor.click();
         assertEquals("second", secondPage.getTitleText());
     }
 
@@ -803,7 +803,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final List expectedAlerts = Collections.singletonList("http://script");
@@ -1258,7 +1258,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         try {
@@ -1301,7 +1301,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage mainPage = (HtmlPage)webClient.getPage(new URL("http://main"));
+        final HtmlPage mainPage = (HtmlPage) webClient.getPage(new URL("http://main"));
         assertEquals("Main", mainPage.getTitleText());
 
         final HtmlInlineFrame iFrame =
@@ -1353,7 +1353,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(Collections.singletonList("http://ref"), collectedAlerts);
@@ -1661,7 +1661,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = (HtmlPage )webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"one", "two", "three", "four" };
@@ -2367,7 +2367,7 @@ public class DocumentTest extends WebTestCase {
 
         assertNotNull(frame);
         assertEquals(frameURL.toExternalForm(), frame.getEnclosedPage().getWebResponse().getUrl().toExternalForm());
-        assertEquals("frame", ((HtmlPage)frame.getEnclosedPage()).getTitleText());
+        assertEquals("frame", ((HtmlPage) frame.getEnclosedPage()).getTitleText());
     }
 
    /**

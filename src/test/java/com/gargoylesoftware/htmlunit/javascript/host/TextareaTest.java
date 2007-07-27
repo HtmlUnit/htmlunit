@@ -146,9 +146,9 @@ public class TextareaTest extends WebTestCase {
      * @throws Exception If test fails
      */
     public void testTextLength() throws Exception {
-        final String[] alertsIE = {"undefined","undefined"};
+        final String[] alertsIE = {"undefined", "undefined"};
         testTextLength(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
-        final String[] alertsFF = {"11","0"};
+        final String[] alertsFF = {"11", "0"};
         testTextLength(BrowserVersion.FIREFOX_2, alertsFF);
     }
 

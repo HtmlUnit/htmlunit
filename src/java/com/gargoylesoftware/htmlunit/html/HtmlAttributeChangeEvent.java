@@ -73,7 +73,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
      * @return the HtmlElement that sent the event.
      */
     public HtmlElement getHtmlElement() {
-        return (HtmlElement)getSource();
+        return (HtmlElement) getSource();
     }
     
     /**

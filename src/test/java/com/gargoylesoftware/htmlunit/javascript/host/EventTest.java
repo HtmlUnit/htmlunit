@@ -278,9 +278,9 @@ public class EventTest extends WebTestCase {
             + "</body></html>\n";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = (HtmlButton)page.getHtmlElementById("button");
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = (HtmlPage)button.click(shiftKey, ctrlKey, altKey);
+        final HtmlPage secondPage = (HtmlPage) button.click(shiftKey, ctrlKey, altKey);
 
         assertEquals(expectedAlerts, collectedAlerts);
 

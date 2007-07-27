@@ -190,9 +190,9 @@ public class InputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput)page.getHtmlElementById("checkbox1");
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
         assertFalse(checkBox.isChecked());
-        ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
+        ((HtmlAnchor) page.getHtmlElementById("clickme")).click();
         assertTrue(checkBox.isChecked());
 
         final String[] expectedAlerts = {"false", "true"};
@@ -226,16 +226,13 @@ public class InputTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlRadioButtonInput radioA
-            = (HtmlRadioButtonInput)page.getHtmlElementById("radioA");
-        final HtmlRadioButtonInput radioB
-            = (HtmlRadioButtonInput)page.getHtmlElementById("radioB");
-        final HtmlRadioButtonInput radioC
-            = (HtmlRadioButtonInput)page.getHtmlElementById("radioC");
+        final HtmlRadioButtonInput radioA = (HtmlRadioButtonInput) page.getHtmlElementById("radioA");
+        final HtmlRadioButtonInput radioB = (HtmlRadioButtonInput) page.getHtmlElementById("radioB");
+        final HtmlRadioButtonInput radioC = (HtmlRadioButtonInput) page.getHtmlElementById("radioC");
         assertTrue(radioA.isChecked());
         assertFalse(radioB.isChecked());
         assertFalse(radioC.isChecked());
-        ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
+        ((HtmlAnchor) page.getHtmlElementById("clickme")).click();
         assertFalse(radioA.isChecked());
         assertTrue(radioB.isChecked());
         assertFalse(radioC.isChecked());
@@ -278,16 +275,13 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlForm form = page.getFormByName("form1");
 
-        final HtmlSubmitInput button1
-            = (HtmlSubmitInput)form.getInputByName("button1");
-        final HtmlSubmitInput button2
-            = (HtmlSubmitInput)form.getInputByName("button2");
-        final HtmlSubmitInput button3
-            = (HtmlSubmitInput)form.getInputByName("button3");
+        final HtmlSubmitInput button1 = (HtmlSubmitInput) form.getInputByName("button1");
+        final HtmlSubmitInput button2 = (HtmlSubmitInput) form.getInputByName("button2");
+        final HtmlSubmitInput button3 = (HtmlSubmitInput) form.getInputByName("button3");
         assertFalse(button1.isDisabled());
         assertTrue(button2.isDisabled());
         assertFalse(button3.isDisabled());
-        ((HtmlAnchor)page.getHtmlElementById("clickme")).click();
+        ((HtmlAnchor) page.getHtmlElementById("clickme")).click();
         assertTrue(button1.isDisabled());
         assertFalse(button2.isDisabled());
         assertTrue(button3.isDisabled());

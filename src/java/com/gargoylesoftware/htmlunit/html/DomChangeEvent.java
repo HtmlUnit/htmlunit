@@ -68,7 +68,7 @@ public class DomChangeEvent extends EventObject {
      * @return the parent of the node that was changed.
      */
     public DomNode getParentNode() {
-        return (DomNode)getSource();
+        return (DomNode) getSource();
     }
     
     /**
