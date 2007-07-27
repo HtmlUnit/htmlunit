@@ -44,6 +44,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.ArrayUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -77,22 +78,22 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         final Pattern p = Pattern.compile("/\\*@cc_on(.*)@\\*/", Pattern.DOTALL);
         final Matcher m = p.matcher(sourceCode);
         final StringBuffer sb = new StringBuffer();
+        final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
         while (m.find()) {
-            m.appendReplacement(sb, processConditionalCompilation(m.group(1)));
+            m.appendReplacement(sb, processConditionalCompilation(m.group(1), browserVersion));
         }
         m.appendTail(sb);
         return sb.toString();
     }
-
     
-    private String processConditionalCompilation(final String precompilationBody) {
+    private String processConditionalCompilation(final String precompilationBody,
+            final BrowserVersion browserVersion) {
         String body = processIfs(precompilationBody);
-        body = replaceCompilationVariables(body);
+        body = replaceCompilationVariables(body, browserVersion);
         body = processSet(body);
         body = replaceCustomCompilationVariables(body);
         return body;
     }
-
 
     private String replaceCustomCompilationVariables(final String body) {
         final Pattern p = Pattern.compile("@\\w+|'[^']*'|\"[^\"]*\"");
@@ -110,7 +111,6 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         m.appendTail(sb);
         return sb.toString();
     }
-
 
     private String replaceOneCustomCompilationVariable(final String variable) {
         if (setVariables_.contains(variable)) {
@@ -131,7 +131,6 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         return sb.toString();
     }
 
-
     private String processIfs(String code) {
         code = code.replaceAll("@if\\s*\\(([^\\)]+)\\)", "if ($1) {");
         code = code.replaceAll("@elif\\s*\\([^\\)]+\\)", "} else if ($1) {");
@@ -140,15 +139,14 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         return code;
     }
 
-
-    String replaceCompilationVariables(final String source) {
+    String replaceCompilationVariables(final String source, final BrowserVersion browserVersion) {
         final Pattern p = Pattern.compile("(@_\\w+)|'[^']*'|\"[^\"]*\"");
         final Matcher m = p.matcher(source);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             final String match = m.group();
             if (match.startsWith("@")) {
-                m.appendReplacement(sb, replaceOneVariable(match));
+                m.appendReplacement(sb, replaceOneVariable(match, browserVersion));
             }
             else {
                 m.appendReplacement(sb, match);
@@ -163,7 +161,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      * @param variable something like "@_win32"
      * @return the value
      */
-    private String replaceOneVariable(final String variable) {
+    private String replaceOneVariable(final String variable, final BrowserVersion browserVersion) {
         final String[] varNaN = {"@_win16", "@_mac", "@_alpha", "@_mc680x0", "@_PowerPC", "@_debug", "@_fast"};
         final String[] varTrue = {"@_win32", "@_x86", "@_jscript"};
         
@@ -171,10 +169,20 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             return "true";
         }
         else if ("@_jscript_version".equals(variable)) {
-            return "5.6"; // seems to be the value of IE6. TODO: check for IE7
+            if (browserVersion.getBrowserVersionNumeric() <= 6) {
+                return "5.6";
+            }
+            else {
+                return "5.7";
+            }
         }
         else if ("@_jscript_build".equals(variable)) {
-            return "6626"; // that's what my IE6 currently returns
+            if (browserVersion.getBrowserVersionNumeric() <= 6) {
+                return "6626"; // that's what my IE6 currently returns
+            }
+            else {
+                return "5730";
+            }
         }
         else if (ArrayUtils.contains(varNaN, variable)) {
             return "NaN";

@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class IEConditionalCompilationTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      */
@@ -86,6 +86,28 @@ public class IEConditionalCompilationTest extends WebTestCase {
         testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
     }
     
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testVariables_jscript_version() throws Exception {
+        final String script = "/*@cc_on alert(@_jscript_version) @*/";
+        
+        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"5.6"});
+        testScript(BrowserVersion.INTERNET_EXPLORER_7_0, script, new String[] {"5.7"});
+        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testVariables_jscript_build() throws Exception {
+        final String script = "/*@cc_on alert(@_jscript_build) @*/";
+        
+        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"6626"});
+        testScript(BrowserVersion.INTERNET_EXPLORER_7_0, script, new String[] {"5730"});
+        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
+    }
+
     /**
      * @throws Exception If the test fails.
      */
