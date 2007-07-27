@@ -7,10 +7,10 @@
 
     <body>
         <release version="1.12-prerelease">
-            <action type="add" dev="marc">
+            <action type="add" dev="mguillem">
                 JavaScript: added support for properties button and which on mouse events.
             </action>
-            <action type="add" dev="marc">
+            <action type="add" dev="mguillem">
                 Add initial support for IE conditional compilation @if, @elif, @else, @end and @set instructions
                 as well as for conditional compilation variables.
             </action>
