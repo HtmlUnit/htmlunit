@@ -91,13 +91,12 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickBodyTest(final String htmlBodyContent) throws Exception {
-        onClickPageTest(
-                "<html><head><title>foo</title></head><body>" +
-                htmlBodyContent +
-                "<script type=\"text/javascript\" language=\"JavaScript\">\n" +
-                "document.getElementById('focusId').focus();\n" +
-                "document.getElementById('focusId').blur();\n" +
-                "</script></body></html>");
+        onClickPageTest("<html><head><title>foo</title></head><body>"
+                + htmlBodyContent
+                + "<script type=\"text/javascript\" language=\"JavaScript\">\n"
+                + "document.getElementById('focusId').focus();\n"
+                + "document.getElementById('focusId').blur();\n"
+                + "</script></body></html>");
     }
 
     /**
@@ -108,9 +107,8 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickSimpleTest(final String tagName, final String tagAttributes) throws Exception {
-        onClickBodyTest(
-                "<" + tagName + COMMON_ATTRIBUTES +
-                " " + tagAttributes + ">Text</" + tagName + ">");
+        onClickBodyTest("<" + tagName + COMMON_ATTRIBUTES
+                + " " + tagAttributes + ">Text</" + tagName + ">");
     }
 
     /**
@@ -128,10 +126,9 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testArea_onblur_onfocus() throws Exception {
-        onClickBodyTest(
-                "<map><area " + COMMON_ATTRIBUTES +
-                " shape=\"rect\" coords=\"0,0,1,1\" href=\".\">" +
-                "</area></map>");
+        onClickBodyTest("<map><area " + COMMON_ATTRIBUTES
+                + " shape=\"rect\" coords=\"0,0,1,1\" href=\".\">"
+                + "</area></map>");
     }
 
     /**
@@ -149,9 +146,8 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLabelContainsInput_onblur_onfocus() throws Exception {
-        onClickBodyTest(
-                "<form><label " + COMMON_ID + ">" +
-                "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>");
+        onClickBodyTest("<form><label " + COMMON_ID + ">"
+                + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>");
     }
 
     /**
@@ -160,9 +156,8 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLabelReferencesInput_onblur_onfocus() throws Exception {
-        onClickBodyTest(
-                "<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>" +
-                "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>");
+        onClickBodyTest("<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>"
+                + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>");
     }
 
     /**

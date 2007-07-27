@@ -1346,11 +1346,11 @@ public class WebClientTest extends WebTestCase {
      */
     public void testReusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
 
-        final String firstContent = "<html><head><title>First</title></head>" +
-                                    "<body onload='document.myform.mysubmit.focus()'>" +
-                                    "<form action='" + URL_SECOND + "' name='myform'>" +
-                                    "<input type='submit' name='mysubmit'>" +
-                                    "</form></body></html>";
+        final String firstContent = "<html><head><title>First</title></head>"
+            + "<body onload='document.myform.mysubmit.focus()'>"
+            + "<form action='" + URL_SECOND + "' name='myform'>"
+            + "<input type='submit' name='mysubmit'>"
+            + "</form></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body>Second</body></html>";
 
         final WebClient webClient = new WebClient();

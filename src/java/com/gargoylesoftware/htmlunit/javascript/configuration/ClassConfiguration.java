@@ -98,8 +98,8 @@ public final class ClassConfiguration {
                 }
             }
             if (foundCtor == null) {
-                throw new IllegalStateException("Constructor method \"" + jsConstructor +
-                        "\" in class \"" + implementingClass + " is not found.");
+                throw new IllegalStateException("Constructor method \"" + jsConstructor
+                        + "\" in class \"" + implementingClass + " is not found.");
             }
             jsConstructor_ = foundCtor;
         }
@@ -435,8 +435,8 @@ public final class ClassConfiguration {
                 }
 
             }
-            return (readable_ == info.readable_) &&
-                (writeable_ == info.writeable_);
+            return (readable_ == info.readable_)
+                && (writeable_ == info.writeable_);
         }
 
         /**

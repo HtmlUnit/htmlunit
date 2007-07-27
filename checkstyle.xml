@@ -111,6 +111,8 @@
 
         <module name="NoWhitespaceBefore"/>
 
+        <module name="OperatorWrap"/>
+
         <module name="ParenPad"/>
 
         <module name="TypecastParenPad"/>

@@ -1440,26 +1440,26 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testElementByNameFromWindow() throws Exception {
-        final String content = "<html>\n" +
-            "<head><title>test</title>\n" +
-            "<script>\n" +
-            "  function test() {\n" +
-            "    alert(window.form1.name);\n" +
-            "    alert(form2.name);\n" +
-            "    alert(window.input1.length);\n" +
-            "    alert(input2[1].value);\n" +
-            "  }\n" +
-            "</script>\n" +
-            "</head>\n" +
-            "<body onload='test()'>\n" +
-            "<form name='form1'></form>\n" +
-            "<form name='form2'></form>\n" +
-            "<input type='text' name='input1' value='1'/>\n" +
-            "<input type='text' name='input1' value='2'/>\n" +
-            "<input type='text' name='input2' value='3'/>\n" +
-            "<input type='text' name='input2' value='4'/>\n" +
-            "</body>\n" +
-            "</html>\n";
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(window.form1.name);\n"
+            + "    alert(form2.name);\n"
+            + "    alert(window.input1.length);\n"
+            + "    alert(input2[1].value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form name='form1'></form>\n"
+            + "<form name='form2'></form>\n"
+            + "<input type='text' name='input1' value='1'/>\n"
+            + "<input type='text' name='input1' value='2'/>\n"
+            + "<input type='text' name='input2' value='3'/>\n"
+            + "<input type='text' name='input2' value='4'/>\n"
+            + "</body>\n"
+            + "</html>\n";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"form1", "form2", "2", "4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -1473,26 +1473,26 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testElementByIdFromWindow() throws Exception {
-        final String content = "<html>\n" +
-            "<head><title>test</title>\n" +
-            "<script>\n" +
-            "  function test() {\n" +
-            "    alert(window.form1Id.name);\n" +
-            "    alert(form2Id.name);\n" +
-            "    alert(window.input1Id.value);\n" +
-            "    alert(myDiv.tagName);\n" +
-            "  }\n" +
-            "</script>\n" +
-            "</head>\n" +
-            "<body onload='test()'>\n" +
-            "<div id='myDiv'>\n" +
-            "<form name='form1' id='form1Id'></form>\n" +
-            "</div>\n" +
-            "<form name='form2' id='form2Id'></form>\n" +
-            "<input type='text' name='input1' id='input1Id' value='1'/>\n" +
-            "</form>\n" +
-            "</body>\n" +
-            "</html>\n";
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(window.form1Id.name);\n"
+            + "    alert(form2Id.name);\n"
+            + "    alert(window.input1Id.value);\n"
+            + "    alert(myDiv.tagName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'>\n"
+            + "<form name='form1' id='form1Id'></form>\n"
+            + "</div>\n"
+            + "<form name='form2' id='form2Id'></form>\n"
+            + "<input type='text' name='input1' id='input1Id' value='1'/>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>\n";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"form1", "form2", "1", "DIV"};
         loadPage(content, collectedAlerts);
@@ -2121,18 +2121,17 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEvalScopeEvent() throws Exception {
-        final String html =
-            "<html><body onload='test()'><script>\r\n" +
-            "   function test() {\r\n" +
-            "      var s = 'string';\r\n" +
-            "      var f = 'initial';\r\n" +
-            "      eval('f = function(){alert(s);}');\r\n" +
-            "      invoke(f);\r\n" +
-            "   };\r\n" +
-            "   function invoke(fn) {\r\n" +
-            "      fn();\r\n" +
-            "   }\r\n" +
-            "</script></body></html>";
+        final String html = "<html><body onload='test()'><script>\r\n"
+            + "   function test() {\r\n"
+            + "      var s = 'string';\r\n"
+            + "      var f = 'initial';\r\n"
+            + "      eval('f = function(){alert(s);}');\r\n"
+            + "      invoke(f);\r\n"
+            + "   };\r\n"
+            + "   function invoke(fn) {\r\n"
+            + "      fn();\r\n"
+            + "   }\r\n"
+            + "</script></body></html>";
         final String[] expected = {"string"};
         final List actual = new ArrayList();
         loadPage(html, actual);
@@ -2196,18 +2195,18 @@ public class WindowTest extends WebTestCase {
     }
 
     private void testGetComputedStyle(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html>" +
-                "<head>\n" +
-                "<script>\n" +
-                "  function test() {\n" +
-                "    var e = document.getElementById('myDiv');\n" +
-                "    alert(window.getComputedStyle(e,null).color);\n" +
-                "  }\n" +
-                "</script>\n" +
-                "</head>\n" +
-                "<body onload='test()'>\n" +
-                "<div id='myDiv'></div>\n" +
-                "</body></html>\n";
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myDiv');\n"
+            + "    alert(window.getComputedStyle(e,null).color);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'></div>\n"
+            + "</body></html>\n";
         
         final String[] expectedAlerts = {""};
         final List collectedAlerts = new ArrayList();
@@ -2221,12 +2220,10 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testOnLoadContext() throws Exception {
-
-        final String html =
-            "<html><body><script>" +
-            "var x = function() { alert(this==window) };" +
-            "window.onload = x;" +
-            "</script></body></html>";
+        final String html = "<html><body><script>"
+            + "var x = function() { alert(this==window) };"
+            + "window.onload = x;"
+            + "</script></body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);

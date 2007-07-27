@@ -73,18 +73,18 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testClonedNodeAttributes() throws Exception {
-        final String html = "<html><body id='a' title='b'><script>\n" +
-                "var x = document.body.cloneNode(true);\n" +
-                "alert(document.body==x);\n" +
-                "alert(document.getElementById('a')==document.body);\n" +
-                "alert(document.body.id);\n" +
-                "alert(x.id);\n" +
-                "alert(document.body.title);\n" +
-                "alert(x.title);\n" +
-                "x.title='c';\n" +
-                "alert(document.body.title);\n" +
-                "alert(x.title);\n" +
-                "</script></body></html>\n";
+        final String html = "<html><body id='a' title='b'><script>\n"
+            + "var x = document.body.cloneNode(true);\n"
+            + "alert(document.body==x);\n"
+            + "alert(document.getElementById('a')==document.body);\n"
+            + "alert(document.body.id);\n"
+            + "alert(x.id);\n"
+            + "alert(document.body.title);\n"
+            + "alert(x.title);\n"
+            + "x.title='c';\n"
+            + "alert(document.body.title);\n"
+            + "alert(x.title);\n"
+            + "</script></body></html>\n";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
         final String[] expectedAlerts = {"false", "true", "a", "a", "b", "b", "b", "c"};
@@ -230,17 +230,17 @@ public class HtmlElementTest extends WebTestCase {
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
         private final List collectedValues_ = new ArrayList();
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add("attributeAdded: " + event.getHtmlElement().getTagName() + ',' +
-                    event.getName() + ',' + event.getValue());
+            collectedValues_.add("attributeAdded: " + event.getHtmlElement().getTagName() + ','
+                    + event.getName() + ',' + event.getValue());
         }
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add("attributeRemoved: " + event.getHtmlElement().getTagName() + ',' +
-                    event.getName() + ',' + event.getValue());
+            collectedValues_.add("attributeRemoved: " + event.getHtmlElement().getTagName() + ','
+                    + event.getName() + ',' + event.getValue());
         }
     
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            collectedValues_.add("attributeReplaced: " + event.getHtmlElement().getTagName() + ',' +
-                    event.getName() + ',' + event.getValue());
+            collectedValues_.add("attributeReplaced: " + event.getHtmlElement().getTagName() + ','
+                    + event.getName() + ',' + event.getValue());
         }
         List getCollectedValues() {
             return collectedValues_;
@@ -391,17 +391,17 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testMouseOver() throws Exception {
-        final String content = "<html>" +
-                "<head>\n" +
-                "<script>\n" +
-                "  function mouseOverMe() {\n" +
-                "    document.getElementById('myTextarea').value+='mouseover-';\n" +
-                "  }\n" +
-                "</script>\n" +
-                "</head>\n" +
-                "<body id='myBody' onmouseover='mouseOverMe()'>\n" +
-                "<textarea id='myTextarea'></textarea>\n" +
-                "</body></html>\n";
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function mouseOverMe() {\n"
+            + "    document.getElementById('myTextarea').value+='mouseover-';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onmouseover='mouseOverMe()'>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>\n";
         final HtmlPage page = loadPage(content);
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseOver();
@@ -413,17 +413,17 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testMouseMove() throws Exception {
-        final String content = "<html>" +
-                "<head>\n" +
-                "<script>\n" +
-                "  function mouseMoveMe() {\n" +
-                "    document.getElementById('myTextarea').value+='mousemove-';\n" +
-                "  }\n" +
-                "</script>\n" +
-                "</head>\n" +
-                "<body id='myBody' onmousemove='mouseMoveMe()'>\n" +
-                "<textarea id='myTextarea'></textarea>\n" +
-                "</body></html>\n";
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function mouseMoveMe() {\n"
+            + "    document.getElementById('myTextarea').value+='mousemove-';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onmousemove='mouseMoveMe()'>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>\n";
         final HtmlPage page = loadPage(content);
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseMove();
@@ -435,17 +435,17 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testMouseOut() throws Exception {
-        final String content = "<html>" +
-                "<head>\n" +
-                "<script>\n" +
-                "  function mouseOutMe() {\n" +
-                "    document.getElementById('myTextarea').value+='mouseout-';\n" +
-                "  }\n" +
-                "</script>\n" +
-                "</head>\n" +
-                "<body id='myBody' onmouseout='mouseOutMe()'>\n" +
-                "<textarea id='myTextarea'></textarea>\n" +
-                "</body></html>\n";
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function mouseOutMe() {\n"
+            + "    document.getElementById('myTextarea').value+='mouseout-';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onmouseout='mouseOutMe()'>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>\n";
         final HtmlPage page = loadPage(content);
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseOut();
@@ -462,17 +462,17 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     private void testMouseDown(final BrowserVersion browserVersion, final String expected) throws Exception {
-        final String content = "<html>" +
-                "<head>\n" +
-                "<script>\n" +
-                "  function mouseDownMe(e) {\n" +
-                "    document.getElementById('myTextarea').value+='mousedown-' + e.button;\n" +
-                "  }\n" +
-                "</script>\n" +
-                "</head>\n" +
-                "<body id='myBody' onmousedown='mouseDownMe(event)'>\n" +
-                "<textarea id='myTextarea'></textarea>\n" +
-                "</body></html>\n";
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function mouseDownMe(e) {\n"
+            + "    document.getElementById('myTextarea').value+='mousedown-' + e.button;\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onmousedown='mouseDownMe(event)'>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>\n";
         final HtmlPage page = loadPage(browserVersion, content, new ArrayList());
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseDown();
@@ -484,17 +484,17 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testMouseUp() throws Exception {
-        final String content = "<html>" +
-                "<head>\n" +
-                "<script>\n" +
-                "  function mouseUpMe() {\n" +
-                "    document.getElementById('myTextarea').value+='mouseup-';\n" +
-                "  }\n" +
-                "</script>\n" +
-                "</head>\n" +
-                "<body id='myBody' onmouseup='mouseUpMe()'>\n" +
-                "<textarea id='myTextarea'></textarea>\n" +
-                "</body></html>\n";
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function mouseUpMe() {\n"
+            + "    document.getElementById('myTextarea').value+='mouseup-';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onmouseup='mouseUpMe()'>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>\n";
         final HtmlPage page = loadPage(content);
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseUp();

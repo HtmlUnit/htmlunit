@@ -117,25 +117,24 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void testGetAttribute() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       alert(myNode.title);\n" +
-                "       alert(myNode.getAttribute('title'));\n" +
-                "       alert(myNode.Title);\n" +
-                "       alert(myNode.getAttribute('class'));\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<p id='myNode' title='a'>\n" +
-                "</p>\n" +
-                "</body>\n" +
-                "</html>\n" +
-                "";
+        final String content = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       alert(myNode.title);\n"
+                + "       alert(myNode.getAttribute('title'));\n"
+                + "       alert(myNode.Title);\n"
+                + "       alert(myNode.getAttribute('class'));\n"
+                + "   }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "<p id='myNode' title='a'>\n"
+                + "</p>\n"
+                + "</body>\n"
+                + "</html>";
         final String[] expectedAlerts = {"a", "a", "undefined", "null"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -175,27 +174,26 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void testSetAttribute() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       alert(myNode.title);\n" +
-                "       myNode.setAttribute('title', 'b');\n" +
-                "       alert(myNode.title);\n" +
-                "       alert(myNode.Title);\n" +
-                "       myNode.Title = 'foo';\n" +
-                "       alert(myNode.Title);\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<p id='myNode' title='a'>\n" +
-                "</p>\n" +
-                "</body>\n" +
-                "</html>\n" +
-                "";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       alert(myNode.title);\n"
+            + "       myNode.setAttribute('title', 'b');\n"
+            + "       alert(myNode.title);\n"
+            + "       alert(myNode.Title);\n"
+            + "       myNode.Title = 'foo';\n"
+            + "       alert(myNode.Title);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode' title='a'>\n"
+            + "</p>\n"
+            + "</body>\n"
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("test", page.getTitleText());
@@ -365,15 +363,14 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetElementsByTagNameAsterisk() throws Exception {
-        final String html =
-            "<html><body onload='test()'><script>\r\n" +
-            "   function test() {\r\n" +
-            "      alert(document.getElementsByTagName('*').length);\r\n" +
-            "      alert(document.getElementById('div').getElementsByTagName('*').length);\r\n" +
-            "   }\r\n" +
-            "</script>\r\n" +
-            "<div id='div'><p>a</p><p>b</p><p>c</p></div>\r\n" +
-            "</body></html>\r\n";
+        final String html = "<html><body onload='test()'><script>\r\n"
+            + "   function test() {\r\n"
+            + "      alert(document.getElementsByTagName('*').length);\r\n"
+            + "      alert(document.getElementById('div').getElementsByTagName('*').length);\r\n"
+            + "   }\r\n"
+            + "</script>\r\n"
+            + "<div id='div'><p>a</p><p>b</p><p>c</p></div>\r\n"
+            + "</body></html>\r\n";
         final String[] expected = {"8", "3"};
         final List actual = new ArrayList();
         loadPage(html, actual);
@@ -432,23 +429,22 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHTMLSimple() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       alert('Old = ' + myNode.innerHTML);\n" +
-                "       myNode.innerHTML = 'New  cell value';\n" +
-                "       alert('New = ' + myNode.innerHTML);\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<p id='myNode'><b>Old innerHTML</b></p>\n" +
-                "</body>\n" +
-                "</html>\n" +
-                "";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       alert('Old = ' + myNode.innerHTML);\n"
+            + "       myNode.innerHTML = 'New  cell value';\n"
+            + "       alert('New = ' + myNode.innerHTML);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode'><b>Old innerHTML</b></p>\n"
+            + "</body>\n"
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"Old = <b>Old innerHTML</b>", "New = New cell value"};
@@ -460,23 +456,23 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHTMLComplex() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       alert('Old = ' + myNode.innerHTML);\n" +
-                "       myNode.innerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n" +
-                "       alert('New = ' + myNode.innerHTML);\n" +
-                "       alert(document.getElementById('newElt').tagName);\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n" +
-                "</body>\n" +
-                "</html>";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       alert('Old = ' + myNode.innerHTML);\n"
+            + "       myNode.innerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
+            + "       alert('New = ' + myNode.innerHTML);\n"
+            + "       alert(document.getElementById('newElt').tagName);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n"
+            + "</body>\n"
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"Old = <b>Old innerHTML</b><!-- old comment -->",
@@ -496,22 +492,21 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHTMLNewInput() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       myNode.innerHTML = '<input type=\"checkbox\" name=\"myCb\" checked>';\n" +
-                "       alert(myNode.myCb.checked);\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<form id='myNode'></form>\n" +
-                "</body>\n" +
-                "</html>\n" +
-                "";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       myNode.innerHTML = '<input type=\"checkbox\" name=\"myCb\" checked>';\n"
+            + "       alert(myNode.myCb.checked);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form id='myNode'></form>\n"
+            + "</body>\n"
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -523,23 +518,22 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testGetSetInnerHTMLChar() throws Exception {
-        final String content = "<html>\n" +
-            "<head>\n" +
-            "    <title>test</title>\n" +
-            "    <script>\n" +
-            "    function doTest(){\n" +
-            "       var myNode = document.getElementById('myNode');\n" +
-            "       alert('Old = ' + myNode.innerHTML);\n" +
-            "       myNode.innerHTML = 'New  cell value &amp; \\u0110 &#272;';\n" +
-            "       alert('New = ' + myNode.innerHTML);\n" +
-            "   }\n" +
-            "    </script>\n" +
-            "</head>\n" +
-            "<body onload='doTest()'>\n" +
-            "<p id='myNode'><b>Old innerHTML</b></p>\n" +
-            "</body>\n" +
-            "</html>\n" +
-            "";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       alert('Old = ' + myNode.innerHTML);\n"
+            + "       myNode.innerHTML = 'New  cell value &amp; \\u0110 &#272;';\n"
+            + "       alert('New = ' + myNode.innerHTML);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode'><b>Old innerHTML</b></p>\n"
+            + "</body>\n"
+            + "</html>";
         final String[] expectedAlerts = {
             "Old = <b>Old innerHTML</b>",
             "New = New cell value & \u0110 \u0110" // TODO this is wrong should be &amp;
@@ -607,24 +601,23 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetOuterHTMLSimple() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       var innerNode = document.getElementById('innerNode');\n" +
-                "       alert('Old = ' + innerNode.outerHTML);\n" +
-                "       innerNode.outerHTML = 'New  cell value';\n" +
-                "       alert('New = ' + myNode.innerHTML);\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n" +
-                "</body>\n" +
-                "</html>\n" +
-                "";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       var innerNode = document.getElementById('innerNode');\n"
+            + "       alert('Old = ' + innerNode.outerHTML);\n"
+            + "       innerNode.outerHTML = 'New  cell value';\n"
+            + "       alert('New = ' + myNode.innerHTML);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n"
+            + "</body>\n"
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {
             "Old = <b id=\"innerNode\">Old outerHTML</b>",
@@ -641,25 +634,24 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetOuterHTMLComplex() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       var innerNode = document.getElementById('innerNode');\n" +
-                "       alert('Old = ' + innerNode.outerHTML);\n" +
-                "       innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n" +
-                "       alert('New = ' + myNode.innerHTML);\n" +
-                "       alert(document.getElementById('newElt').tagName);\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n" +
-                "</body>\n" +
-                "</html>\n" +
-                "";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       var innerNode = document.getElementById('innerNode');\n"
+            + "       alert('Old = ' + innerNode.outerHTML);\n"
+            + "       innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
+            + "       alert('New = ' + myNode.innerHTML);\n"
+            + "       alert(document.getElementById('newElt').tagName);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n"
+            + "</body>\n"
+            + "</html>";
         final String[] expectedAlerts = {
             "Old = <b id=\"innerNode\">Old outerHTML</b>",
             "New =  <b><i id=\"newElt\">New cell value</i></b>",
@@ -782,23 +774,23 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAddBehaviorDefaultClientCaps() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>Test</title>\n" +
-                "    <script>\n" +
-                "    function doTest() {\n" +
-                "       var body = document.body;\n" +
-                "       alert('body.cpuClass = ' + body.cpuClass);\n" +
-                "       var id = body.addBehavior('#default#clientCaps');\n" +
-                "       alert('body.cpuClass = ' + body.cpuClass);\n" +
-                "       var id2 = body.addBehavior('#default#clientCaps');\n" +
-                "       body.removeBehavior(id);\n" +
-                "       alert('body.cpuClass = ' + body.cpuClass);\n" +
-                "    }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>Test</body>\n" +
-                "</html>";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "       var body = document.body;\n"
+            + "       alert('body.cpuClass = ' + body.cpuClass);\n"
+            + "       var id = body.addBehavior('#default#clientCaps');\n"
+            + "       alert('body.cpuClass = ' + body.cpuClass);\n"
+            + "       var id2 = body.addBehavior('#default#clientCaps');\n"
+            + "       body.removeBehavior(id);\n"
+            + "       alert('body.cpuClass = ' + body.cpuClass);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>Test</body>\n"
+            + "</html>";
         final String[] expectedAlerts = {
             "body.cpuClass = undefined",
             "body.cpuClass = " + BrowserVersion.getDefault().getCpuClass(),
@@ -935,22 +927,22 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRemoveBehavior() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>Test</title>\n" +
-                "    <script>\n" +
-                "    function doTest() {\n" +
-                "       var body = document.body;\n" +
-                "       alert('body.isHomePage = ' + body.isHomePage);\n" +
-                "       var id = body.addBehavior('#default#homePage');\n" +
-                "       alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n" +
-                "       body.removeBehavior(id);\n" +
-                "       alert('body.isHomePage = ' + body.isHomePage);\n" +
-                "    }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>Test</body>\n" +
-                "</html>";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "       var body = document.body;\n"
+            + "       alert('body.isHomePage = ' + body.isHomePage);\n"
+            + "       var id = body.addBehavior('#default#homePage');\n"
+            + "       alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n"
+            + "       body.removeBehavior(id);\n"
+            + "       alert('body.isHomePage = ' + body.isHomePage);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>Test</body>\n"
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {
@@ -1122,23 +1114,22 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerTextSimple() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       var myNode = document.getElementById('myNode');\n" +
-                "       alert('Old = ' + myNode.innerText);\n" +
-                "       myNode.innerText = 'New cell value';\n" +
-                "       alert('New = ' + myNode.innerText);\n" +
-                "   }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'>\n" +
-                "<div id='myNode'><b>Old <p>innerText</p></b></div>\n" +
-                "</body>\n" +
-                "</html>\n" +
-                "";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       alert('Old = ' + myNode.innerText);\n"
+            + "       myNode.innerText = 'New cell value';\n"
+            + "       alert('New = ' + myNode.innerText);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='myNode'><b>Old <p>innerText</p></b></div>\n"
+            + "</body>\n"
+            + "</html>";
         final String[] expectedAlerts = {"Old = Old \r\ninnerText", "New = New cell value"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1189,21 +1180,21 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRemoveAttribute() throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>Test</title>\n" +
-                "    <script>\n" +
-                "    function doTest() {\n" +
-                "       var myDiv = document.getElementById('aDiv');\n" +
-                "       alert(myDiv.getAttribute('name'));\n" +
-                "       myDiv.removeAttribute('name');\n" +
-               "       alert(myDiv.getAttribute('name'));\n" +
-                "    }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload='doTest()'><div id='aDiv' name='removeMe'>" +
-               "</div></body>\n" +
-                "</html>";
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "       var myDiv = document.getElementById('aDiv');\n"
+            + "       alert(myDiv.getAttribute('name'));\n"
+            + "       myDiv.removeAttribute('name');\n"
+            + "       alert(myDiv.getAttribute('name'));\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'><div id='aDiv' name='removeMe'>"
+            + "</div></body>\n"
+            + "</html>";
         final String[] expectedAlerts = {"removeMe", "null"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1445,17 +1436,17 @@ public class HTMLElementTest extends WebTestCase {
     }
     
     private void testCurrentStyle(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html>" +
-                "<head>\n" +
-                "<script>\n" +
-                "  function test() {\n" +
-                "    alert(document.getElementById('myDiv').currentStyle.color);\n" +
-                "  }\n" +
-                "</script>\n" +
-                "</head>\n" +
-                "<body onload='test()'>\n" +
-                "<div id='myDiv'></div>\n" +
-                "</body></html>\n";
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myDiv').currentStyle.color);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'></div>\n"
+            + "</body></html>";
         
         final String[] expectedAlerts = {""};
         final List collectedAlerts = new ArrayList();

@@ -1636,13 +1636,12 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testCaseInsensitiveRegexReplacement() throws Exception {
-        final String html =
-            "<html><body><script>" +
-            "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;" +
-            "var s = '#userAgent';" +
-            "s = s.replace(r, '');" +
-            "alert(s.length);" +
-            "</script></body></html>";
+        final String html = "<html><body><script>"
+            + "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;"
+            + "var s = '#userAgent';"
+            + "s = s.replace(r, '');"
+            + "alert(s.length);"
+            + "</script></body></html>";
         final List expected = Collections.singletonList("0");
         final List actual = new ArrayList();
         loadPage(html, actual);
@@ -1653,13 +1652,12 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRegexReplacementWithFunction() throws Exception {
-        final String html =
-            "<html><body><script>" +
-            "var r = /-([a-z])/ig;" +
-            "var s = 'font-size';" +
-            "s = s.replace(r, function(z,b){return b.toUpperCase();});" +
-            "alert(s);" +
-            "</script></body></html>";
+        final String html = "<html><body><script>"
+            + "var r = /-([a-z])/ig;"
+            + "var s = 'font-size';"
+            + "s = s.replace(r, function(z,b){return b.toUpperCase();});"
+            + "alert(s);"
+            + "</script></body></html>";
         final List expected = Collections.singletonList("fontSize");
         final List actual = new ArrayList();
         loadPage(html, actual);

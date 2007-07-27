@@ -67,25 +67,24 @@ public class ScriptTest extends WebTestCase {
      */
     public void testOnReadyStateChangeHandler() throws Exception {
 
-        final String html =
-            "<html>\n" +
-            "  <head>\n" +
-            "    <title>test</title>\n" +
-            "    <script id='a'>\n" +
-            "      var script = document.createElement('script');\n" +
-            "      script.id = 'b';\n" +
-            "      script.type = 'text/javascript';\n" +
-            "      script.onreadystatechange = function() {\n" +
-            "        alert(script.id + '=' + script.readyState);\n" +
-            "      }\n" +
-            "      alert('1');\n" +
-            "      script.src = '" + URL_SECOND + "';\n" +
-            "      alert('2');\n" +
-            "      document.getElementsByTagName('head')[0].appendChild(script);\n" +
-            "    </script>\n" +
-            "  </head>\n" +
-            "  <body>abc</body>\n" +
-            "</html>\n";
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <title>test</title>\n"
+            + "    <script id='a'>\n"
+            + "      var script = document.createElement('script');\n"
+            + "      script.id = 'b';\n"
+            + "      script.type = 'text/javascript';\n"
+            + "      script.onreadystatechange = function() {\n"
+            + "        alert(script.id + '=' + script.readyState);\n"
+            + "      }\n"
+            + "      alert('1');\n"
+            + "      script.src = '" + URL_SECOND + "';\n"
+            + "      alert('2');\n"
+            + "      document.getElementsByTagName('head')[0].appendChild(script);\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body>abc</body>\n"
+            + "</html>\n";
 
         final String js = "alert('3')";
 

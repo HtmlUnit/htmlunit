@@ -271,13 +271,12 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testGetAllHtmlChildElementsOrder() throws Exception {
-        final String html =
-            "<html><body id='0'>\n" +
-            "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>" +
-            "<span id='I.2'><span id='I.2.a'/></span></span>\n" +
-            "<span id='II'/>\n" +
-            "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n" +
-            "</body></html>\n";
+        final String html = "<html><body id='0'>\n"
+            + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>"
+            + "<span id='I.2'><span id='I.2.a'/></span></span>\n"
+            + "<span id='II'/>\n"
+            + "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n"
+            + "</body></html>";
         final HtmlPage page = loadPage(html);
         final DescendantElementsIterator iterator = (DescendantElementsIterator)
             page.getDocumentElement().getAllHtmlChildElements();
@@ -300,12 +299,12 @@ public class DomNodeTest extends WebTestCase {
     static class DomChangeListenerTestImpl implements DomChangeListener {
         private final List collectedValues_ = new ArrayList();
         public void nodeAdded(final DomChangeEvent event) {
-            collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ',' +
-                    event.getChangedNode().getNodeName());
+            collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ','
+                    + event.getChangedNode().getNodeName());
         }
         public void nodeDeleted(final DomChangeEvent event) {
-            collectedValues_.add("nodeDeleted: " + event.getParentNode().getNodeName() + ',' +
-                    event.getChangedNode().getNodeName());
+            collectedValues_.add("nodeDeleted: " + event.getParentNode().getNodeName() + ','
+                    + event.getChangedNode().getNodeName());
         }
         List getCollectedValues() {
             return collectedValues_;

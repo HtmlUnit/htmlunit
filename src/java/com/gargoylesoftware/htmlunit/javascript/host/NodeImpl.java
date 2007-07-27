@@ -257,8 +257,8 @@ public class NodeImpl extends SimpleScriptable {
             final Object newChildObject, final Object oldChildObject) {
         Object removedChild = null;
 
-        if (newChildObject instanceof NodeImpl &&
-            oldChildObject instanceof NodeImpl) {
+        if (newChildObject instanceof NodeImpl
+            && oldChildObject instanceof NodeImpl) {
             // Get XML nodes for the DOM nodes passed in
             final DomNode newChildNode =
                 ((NodeImpl) newChildObject).getDomNodeOrDie();

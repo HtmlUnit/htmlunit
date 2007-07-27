@@ -1418,9 +1418,9 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             // According to the Microsoft and Mozilla documentation, and from experimentation
             // in the IE and Firefox browsers, the offsetParent is the container
             // (<td>, <table>, <body>) nearest to the node
-            if ((parentNode instanceof HtmlTableDataCell) ||
-                (parentNode instanceof HtmlTable) ||
-                (parentNode instanceof HtmlBody)) {
+            if ((parentNode instanceof HtmlTableDataCell)
+                || (parentNode instanceof HtmlTable)
+                || (parentNode instanceof HtmlBody)) {
                 offsetParent = parentNode.getScriptObject();
                 break;
             }

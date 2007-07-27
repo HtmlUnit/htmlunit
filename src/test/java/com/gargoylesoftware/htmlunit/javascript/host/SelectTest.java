@@ -970,23 +970,22 @@ public class SelectTest extends WebTestCase {
             // TODO: Daniel Gredler
             return;
         }
-        final String html =
-            "<html><body onload='test()'><script>\r\n" +
-            "   function test(){\r\n" +
-            "      alert(document.getElementById('a').selected);\r\n" +
-            "      alert(document.getElementById('b').selected);\r\n" +
-            "      alert(document.getElementById('c').selected);\r\n" +
-            "      alert(document.getElementById('s').selectedIndex);\r\n" +
-            "   }\r\n" +
-            "</script>\r\n" +
-            "<form id='form'>\r\n" +
-            "   <select id='s'>\r\n" +
-            "      <option id='a' value='a'>a</option>\r\n" +
-            "      <option id='b' value='b'>b</option>\r\n" +
-            "      <option id='c' value='c'>c</option>\r\n" +
-            "   </select>\r\n" +
-            "</form>\r\n" +
-            "</body></html>\r\n";
+        final String html = "<html><body onload='test()'><script>\r\n"
+            + "   function test(){\r\n"
+            + "      alert(document.getElementById('a').selected);\r\n"
+            + "      alert(document.getElementById('b').selected);\r\n"
+            + "      alert(document.getElementById('c').selected);\r\n"
+            + "      alert(document.getElementById('s').selectedIndex);\r\n"
+            + "   }\r\n"
+            + "</script>\r\n"
+            + "<form id='form'>\r\n"
+            + "   <select id='s'>\r\n"
+            + "      <option id='a' value='a'>a</option>\r\n"
+            + "      <option id='b' value='b'>b</option>\r\n"
+            + "      <option id='c' value='c'>c</option>\r\n"
+            + "   </select>\r\n"
+            + "</form>\r\n"
+            + "</body></html>\r\n";
         final String[] expected = {"true", "false", "false", "0"};
         final List actual = new ArrayList();
         loadPage(html, actual);

@@ -224,9 +224,9 @@ public class HtmlScript extends HtmlElement {
             }
             final String handler = forr + "." + event;
             final String functionName = "htmlunit_event_handler_JJLL" + EventHandlerId_;
-            scriptCode = "function " + functionName + "()\n" +
-                "{" + textNode.getData() + "}\n" +
-                handler + "=" + functionName + ";";
+            scriptCode = "function " + functionName + "()\n"
+                + "{" + textNode.getData() + "}\n"
+                + handler + "=" + functionName + ";";
         }
         else {
             scriptCode = textNode.getData();

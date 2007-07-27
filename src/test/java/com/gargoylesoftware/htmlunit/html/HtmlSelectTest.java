@@ -608,14 +608,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testAsTextWithMultipleSelect() throws Exception {
-        final String html =
-            "<html><body><form>\n" +
-            "<select name='a' multiple>\n" +
-            "<option value='1'>foo</option>\n" +
-            "<option value='2'>bar</option>\n" +
-            "<option value='3'>baz</option>\n" +
-            "</select>\n" +
-            "</form></body></html>";
+        final String html = "<html><body><form>\n"
+            + "<select name='a' multiple>\n"
+            + "<option value='1'>foo</option>\n"
+            + "<option value='2'>bar</option>\n"
+            + "<option value='3'>baz</option>\n"
+            + "</select>\n"
+            + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlSelect select = (HtmlSelect) page.getDocumentElement().getHtmlElementsByTagName("select").get(0);
         assertEquals("foo\nbar\nbaz", select.asText());

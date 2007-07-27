@@ -118,8 +118,8 @@ public class ActiveXObject extends SimpleScriptable {
             object = xClass.newInstance();
         }
         catch (final Exception e) {
-            throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class " + xClassString +
-                    " because " + e.getMessage() + ".");
+            throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class " + xClassString
+                    + " because " + e.getMessage() + ".");
         }
         return Context.toObject(object, ctorObj);
     }

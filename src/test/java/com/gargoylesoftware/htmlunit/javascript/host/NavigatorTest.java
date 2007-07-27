@@ -222,18 +222,18 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception on test failure.
      */
     private void testAttribute(final String name, final String value) throws Exception {
-        final String content = "<html>\n" +
-                "<head>\n" +
-                "    <title>test</title>\n" +
-                "    <script>\n" +
-                "    function doTest(){\n" +
-                "       alert('" + name + " = ' + window.navigator." + name + ");\n" +
-                "    }\n" +
-                "    </script>\n" +
-                "</head>\n" +
-                "<body onload=\'doTest()\'>\n" +
-                "</body>\n" +
-                "</html>";
+        final String content = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       alert('" + name + " = ' + window.navigator." + name + ");\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload=\'doTest()\'>\n"
+                + "</body>\n"
+                + "</html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {name + " = " + value};

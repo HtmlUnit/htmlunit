@@ -389,92 +389,92 @@ public class FormTest extends WebTestCase {
     private void formResetTest(final BrowserVersion browserVersion, final String[] expected)
         throws Exception {
 
-        final String html = "<html>\n" +
-            "  <head>\n" +
-            "    <title>Reset Test</title>\n" +
-            "    <script>\n" +
-            "      var form1;\n" +
-            "      var text1;\n" +
-            "      var file1;\n" +
-            "      var image1;\n" +
-            "      var radio1;\n" +
-            "      var reset1;\n" +
-            "      var hidden1;\n" +
-            "      var button1;\n" +
-            "      var submit1;\n" +
-            "      var password1;\n" +
-            "      var checkbox1;\n" +
-            "      var textarea1;\n" +
-            "      function test() {\n" +
-            "        // --- initialize local variables, verify the initial default values --- //\n" +
-            "        form1 = document.getElementById('form1');\n" +
-            "        text1 = document.getElementById('text1');\n" +
-            "        file1 = document.getElementById('file1');\n" +
-            "        image1 = document.getElementById('image1');\n" +
-            "        radio1 = document.getElementById('radio1');\n" +
-            "        reset1 = document.getElementById('reset1');\n" +
-            "        hidden1 = document.getElementById('hidden1');\n" +
-            "        button1 = document.getElementById('button1');\n" +
-            "        submit1 = document.getElementById('submit1');\n" +
-            "        password1 = document.getElementById('password1');\n" +
-            "        checkbox1 = document.getElementById('checkbox1');\n" +
-            "        textarea1 = document.getElementById('textarea1');\n" +
-            "        alerts('before setting default values');\n" +
-            "        // --- change default values around, verify the new default values --- //\n" +
-            "        text1.defaultValue = 'default1';\n" +
-            "        file1.defaultValue = 'default2';\n" +
-            "        image1.defaultValue = 'default3';\n" +
-            "        radio1.defaultValue = 'default4';\n" +
-            "        radio1.defaultChecked = false;\n" +
-            "        reset1.defaultValue = 'default5';\n" +
-            "        hidden1.defaultValue = 'default6';\n" +
-            "        button1.defaultValue = 'default7';\n" +
-            "        submit1.defaultValue = 'default8';\n" +
-            "        password1.defaultValue = 'default9';\n" +
-            "        checkbox1.defaultValue = 'default10';\n" +
-            "        checkbox1.defaultChecked = false;\n" +
-            "        textarea1.defaultValue = 'default11';\n" +
-            "        alerts('after setting default values');\n" +
-            "        // --- reset the form, verify the input values were reset as appropriate --- //\n" +
-            "        form1.reset();\n" +
-            "        alerts('after resetting the form');\n" +
-            "      }\n" +
-            "      function alerts(caption) {\n" +
-            "        alert(caption);\n" +
-            "        alertOne('text', text1);\n" +
-            "        alertOne('file', file1);\n" +
-            "        alertOne('image', image1);\n" +
-            "        alertOne('radio', radio1);\n" +
-            "        alertOne('reset', reset1);\n" +
-            "        alertOne('hidden', hidden1);\n" +
-            "        alertOne('button', button1);\n" +
-            "        alertOne('submit', submit1);\n" +
-            "        alertOne('password', password1);\n" +
-            "        alertOne('checkbox', checkbox1);\n" +
-            "        alertOne('textarea', textarea1);\n" +
-            "      }\n" +
-            "      function alertOne(text, field) {\n" +
-            "        alert(text + ': ' + field.value + ' ' + field.defaultValue " +
-            "          + ' ' + field.checked + ' ' + field.defaultChecked);\n" +
-            "      }\n" +
-            "    </script>\n" +
-            "  </head>\n" +
-            "  <body onload='test()'>\n" +
-            "    <form id='form1' name='form1'>\n" +
-            "      <input type='text' id='text1' name='text1' value='initial1' />\n" +
-            "      <input type='file' id='file1' name='file1' value='initial2' />\n" +
-            "      <input type='image' id='image1' name='image1' value='initial3' />\n" +
-            "      <input type='radio' id='radio1' name='radio1' value='initial4' checked='checked' />\n" +
-            "      <input type='reset' id='reset1' name='reset1' value='initial5' />\n" +
-            "      <input type='hidden' id='hidden1' name='hidden1' value='initial6' />\n" +
-            "      <input type='button' id='button1' name='button1' value='initial7' />\n" +
-            "      <input type='submit' id='submit1' name='submit1' value='initial8' />\n" +
-            "      <input type='password' id='password1' name='password1' value='initial9' />\n" +
-            "      <input type='checkbox' id='checkbox1' name='checkbox1' value='initial10' checked='checked' />\n" +
-            "      <textarea id='textarea1' name='textarea1'>initial11</textarea>\n" +
-            "    </form>\n" +
-            "  </body>\n" +
-            "</html>\n";
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <title>Reset Test</title>\n"
+            + "    <script>\n"
+            + "      var form1;\n"
+            + "      var text1;\n"
+            + "      var file1;\n"
+            + "      var image1;\n"
+            + "      var radio1;\n"
+            + "      var reset1;\n"
+            + "      var hidden1;\n"
+            + "      var button1;\n"
+            + "      var submit1;\n"
+            + "      var password1;\n"
+            + "      var checkbox1;\n"
+            + "      var textarea1;\n"
+            + "      function test() {\n"
+            + "        // --- initialize local variables, verify the initial default values --- //\n"
+            + "        form1 = document.getElementById('form1');\n"
+            + "        text1 = document.getElementById('text1');\n"
+            + "        file1 = document.getElementById('file1');\n"
+            + "        image1 = document.getElementById('image1');\n"
+            + "        radio1 = document.getElementById('radio1');\n"
+            + "        reset1 = document.getElementById('reset1');\n"
+            + "        hidden1 = document.getElementById('hidden1');\n"
+            + "        button1 = document.getElementById('button1');\n"
+            + "        submit1 = document.getElementById('submit1');\n"
+            + "        password1 = document.getElementById('password1');\n"
+            + "        checkbox1 = document.getElementById('checkbox1');\n"
+            + "        textarea1 = document.getElementById('textarea1');\n"
+            + "        alerts('before setting default values');\n"
+            + "        // --- change default values around, verify the new default values --- //\n"
+            + "        text1.defaultValue = 'default1';\n"
+            + "        file1.defaultValue = 'default2';\n"
+            + "        image1.defaultValue = 'default3';\n"
+            + "        radio1.defaultValue = 'default4';\n"
+            + "        radio1.defaultChecked = false;\n"
+            + "        reset1.defaultValue = 'default5';\n"
+            + "        hidden1.defaultValue = 'default6';\n"
+            + "        button1.defaultValue = 'default7';\n"
+            + "        submit1.defaultValue = 'default8';\n"
+            + "        password1.defaultValue = 'default9';\n"
+            + "        checkbox1.defaultValue = 'default10';\n"
+            + "        checkbox1.defaultChecked = false;\n"
+            + "        textarea1.defaultValue = 'default11';\n"
+            + "        alerts('after setting default values');\n"
+            + "        // --- reset the form, verify the input values were reset as appropriate --- //\n"
+            + "        form1.reset();\n"
+            + "        alerts('after resetting the form');\n"
+            + "      }\n"
+            + "      function alerts(caption) {\n"
+            + "        alert(caption);\n"
+            + "        alertOne('text', text1);\n"
+            + "        alertOne('file', file1);\n"
+            + "        alertOne('image', image1);\n"
+            + "        alertOne('radio', radio1);\n"
+            + "        alertOne('reset', reset1);\n"
+            + "        alertOne('hidden', hidden1);\n"
+            + "        alertOne('button', button1);\n"
+            + "        alertOne('submit', submit1);\n"
+            + "        alertOne('password', password1);\n"
+            + "        alertOne('checkbox', checkbox1);\n"
+            + "        alertOne('textarea', textarea1);\n"
+            + "      }\n"
+            + "      function alertOne(text, field) {\n"
+            + "        alert(text + ': ' + field.value + ' ' + field.defaultValue "
+            + "          + ' ' + field.checked + ' ' + field.defaultChecked);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <form id='form1' name='form1'>\n"
+            + "      <input type='text' id='text1' name='text1' value='initial1' />\n"
+            + "      <input type='file' id='file1' name='file1' value='initial2' />\n"
+            + "      <input type='image' id='image1' name='image1' value='initial3' />\n"
+            + "      <input type='radio' id='radio1' name='radio1' value='initial4' checked='checked' />\n"
+            + "      <input type='reset' id='reset1' name='reset1' value='initial5' />\n"
+            + "      <input type='hidden' id='hidden1' name='hidden1' value='initial6' />\n"
+            + "      <input type='button' id='button1' name='button1' value='initial7' />\n"
+            + "      <input type='submit' id='submit1' name='submit1' value='initial8' />\n"
+            + "      <input type='password' id='password1' name='password1' value='initial9' />\n"
+            + "      <input type='checkbox' id='checkbox1' name='checkbox1' value='initial10' checked='checked' />\n"
+            + "      <textarea id='textarea1' name='textarea1'>initial11</textarea>\n"
+            + "    </form>\n"
+            + "  </body>\n"
+            + "</html>\n";
 
         final List collected = new ArrayList();
         loadPage(browserVersion, html, collected);

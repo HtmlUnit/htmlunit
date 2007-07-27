@@ -678,8 +678,8 @@ public final class JavaScriptConfiguration {
     private String getClassnameForClass(final Class clazz) {
         final String name = (String) ClassnameMap_.get(clazz.getName());
         if (name == null) {
-            throw new IllegalStateException("Did not find the mapping of the class to the classname for " +
-                clazz.getName());
+            throw new IllegalStateException("Did not find the mapping of the class to the classname for "
+                + clazz.getName());
         }
         return name;
     }

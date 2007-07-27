@@ -214,8 +214,8 @@ public class AttributeCaseTest extends WebTestCase {
             = "<html><head><title>AttributeCaseTest</title></head><body>\n"
              + "<p id=\"" + elementId + "\" " + attributeName + "=\"" + attributeValue + "\">\n"
              + "<script language=\"javascript\" type=\"text/javascript\">\n<!--\n"
-             + "  document.getElementById(\"" + elementId + "\").setAttribute(\"" + attributeName + "\", \"" +
-             newAttributeValue + "\");\n"
+             + "  document.getElementById(\"" + elementId + "\").setAttribute(\"" + attributeName + "\", \""
+             + newAttributeValue + "\");\n"
              + "\n// -->\n</script>\n"
              + "</body></html>";
 

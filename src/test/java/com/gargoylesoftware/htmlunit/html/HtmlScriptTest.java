@@ -165,8 +165,8 @@ public class HtmlScriptTest extends WebTestCase {
      */
     public void testScriptIsNotRunWhenCloned() throws Exception {
 
-        final String html = "<html><body onload='document.body.cloneNode(true)'>" +
-            "<script>alert('a')</script></body></html>";
+        final String html = "<html><body onload='document.body.cloneNode(true)'>"
+            + "<script>alert('a')</script></body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 

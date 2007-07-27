@@ -76,12 +76,12 @@ public class HtmlAnchorTest extends WebTestCase {
      */
     public void testHrefTrimmed() throws Exception {
 
-        final String html = "<html><body onload='" +
-            "alert(document.getElementById(\"a\").href.length);" +
-            "alert(document.getElementById(\"b\").href.length);'>" +
-            "<a href=' http://a/ ' id='a'>a</a> " +
-            "<a href='  http://b/    ' id='b'>b</a>" +
-            "</body></html>";
+        final String html = "<html><body onload='"
+            + "alert(document.getElementById(\"a\").href.length);"
+            + "alert(document.getElementById(\"b\").href.length);'>"
+            + "<a href=' http://a/ ' id='a'>a</a> "
+            + "<a href='  http://b/    ' id='b'>b</a>"
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
