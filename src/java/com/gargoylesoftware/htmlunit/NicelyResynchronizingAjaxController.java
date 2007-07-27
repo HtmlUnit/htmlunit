@@ -60,7 +60,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
 
     private final WeakReference originatedThread_;
 
-    NicelyResynchronizingAjaxController() {
+    public NicelyResynchronizingAjaxController() {
         originatedThread_ = new WeakReference(Thread.currentThread());
     }
 
