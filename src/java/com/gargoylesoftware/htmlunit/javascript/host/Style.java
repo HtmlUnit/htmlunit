@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A javascript object for a Style
+ * A JavaScript object for a Style.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -66,10 +66,10 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  */
 public class Style extends SimpleScriptable {
+
     private static final long serialVersionUID = -1976370264911039311L;
 
-    private static final MessageFormat URL_FORMAT = new MessageFormat(
-            "url({0})");
+    private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
 
     private HTMLElement jsElement_;
 
@@ -105,6 +105,7 @@ public class Style extends SimpleScriptable {
      * Create an instance. Javascript objects must have a default constructor.
      */
     public Style() {
+        // Empty.
     }
 
     /**
@@ -119,7 +120,7 @@ public class Style extends SimpleScriptable {
     }
 
     /**
-     * Initialize the object
+     * Initializes the object.
      *
      * @param htmlElement
      *            The element that this style describes
@@ -249,27 +250,48 @@ public class Style extends SimpleScriptable {
     }
 
     /**
-     * Gets the object's behavior
-     * @return the behavior.
+     * Gets the object's behavior (IE only).
+     * @return the object's behavior
      */
     public String jsxGet_behavior() {
         return getStyleAttribute("behavior");
     }
 
     /**
-     * Sets the object's behavior
-     * @param newValue the new behavior
+     * Sets the object's behavior (IE only).
+     * @param behavior the new behavior
      */
-    public void jsxSet_behavior(final String newValue) {
-        setStyleAttribute("behavior", newValue);
+    public void jsxSet_behavior(final String behavior) {
+        setStyleAttribute("behavior", behavior);
     }
-    
+
     /**
-     * Gets the style property value.
+     * Gets the object's filter (IE only). See the <a
+     * href="http://msdn2.microsoft.com/en-us/library/ms530752.aspx">MSDN documentation</a> for
+     * more information.
+     * @return the object's filter
+     */
+    public String jsxGet_filter() {
+        return getStyleAttribute("filter");
+    }
+
+    /**
+     * Sets the object's filter (IE only). See the <a
+     * href="http://msdn2.microsoft.com/en-us/library/ms530752.aspx">MSDN documentation</a> for
+     * more information.
+     * @param filter the new filter
+     */
+    public void jsxSet_filter(final String filter) {
+        setStyleAttribute("filter", filter);
+    }
+
+    /**
+     * Gets the value of the specified property of the style.
      * @param name the style property name
-     * @return empty string if noting found
+     * @return empty string if nothing found
      */
     public String jsxFunction_getPropertyValue(final String name) {
         return getStyleAttribute(name);
     }
+
 }

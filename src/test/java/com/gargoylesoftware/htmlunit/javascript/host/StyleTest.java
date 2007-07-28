@@ -255,7 +255,7 @@ public class StyleTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
@@ -269,7 +269,7 @@ public class StyleTest extends WebTestCase {
             //expected
         }
     }
-    
+
     private void testGetPropertyValue(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -286,4 +286,36 @@ public class StyleTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testStyleFilter_IE() throws Exception {
+        testStyleFilter(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"", "alpha(opacity=50)"});
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testStyleFilter_FF() throws Exception {
+        testStyleFilter(BrowserVersion.FIREFOX_2, new String[] {"undefined", "undefined"});
+    }
+
+    private void testStyleFilter(final BrowserVersion browserVersion, final String[] expected) throws Exception {
+        final String html = "<html><body onload='test()'><script>\r\n"
+            + "   function test(){\r\n"
+            + "      var div1 = document.getElementById('div1');\r\n"
+            + "      alert(div1.style.filter);\r\n"
+            + "      var div2 = document.getElementById('div2');\r\n"
+            + "      alert(div2.style.filter);\r\n"
+            + "   }\r\n"
+            + "</script>\r\n"
+            + "<div id='div1'>foo</div>\r\n"
+            + "<div id='div2' style='filter:alpha(opacity=50)'>bar</div>\r\n"
+            + "</body></html>\r\n";
+        final List actual = new ArrayList();
+        loadPage(browserVersion, html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

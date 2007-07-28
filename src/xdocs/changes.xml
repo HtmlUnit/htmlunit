@@ -7,8 +7,11 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig">
+                Add implementation of element.style.filter attribute (when emulating IE only).
+            </action>
             <action type="add" dev="mguillem">
-                JavaScript: added support for properties button and which on mouse events.
+                JavaScript: added support for properties "button" and "which" on mouse events.
             </action>
             <action type="add" dev="mguillem">
                 Add initial support for IE conditional compilation @if, @elif, @else, @end and @set instructions

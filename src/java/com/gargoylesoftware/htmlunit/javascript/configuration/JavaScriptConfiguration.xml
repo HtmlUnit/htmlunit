@@ -716,6 +716,9 @@
         <property name="behavior" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <property name="filter" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <function name="getPropertyValue">
             <browser name="Netscape"/>
         </function>
