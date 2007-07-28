@@ -102,25 +102,15 @@
         <module name="EmptyForInitializerPad">
             <property name="option" value="space"/>
         </module>
-        
         <module name="EmptyForIteratorPad"/>
-        
         <module name="MethodParamPad"/>
-
         <module name="NoWhitespaceAfter"/>
-
         <module name="NoWhitespaceBefore"/>
-
         <module name="OperatorWrap"/>
-
         <module name="ParenPad"/>
-
         <module name="TypecastParenPad"/>
-
         <module name="TabCharacter"/>
-
         <module name="WhitespaceAfter"/>
-
         <module name="WhitespaceAround"/>
 
         <!-- Checks for correct basic indentation                -->
@@ -140,9 +130,9 @@
         <!-- Checks for blocks. You know, those {}'s         -->
         <!-- See http://checkstyle.sf.net/config_blocks.html -->
         <module name="AvoidNestedBlocks"/>
-		<module name="EmptyBlock">
-		    <property name="option" value="text"/>
-		</module>        
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+        </module>
 
         <module name="NeedBraces"/>
 
@@ -156,13 +146,13 @@
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="MissingSwitchDefault"/>
-		<module name="RedundantThrows">
-		    <property name="allowUnchecked" value="true"/>
-		    <property name="allowSubclasses" value="true"/>
+        <module name="RedundantThrows">
+            <property name="allowUnchecked" value="true"/>
+            <property name="allowSubclasses" value="true"/>
             <property name="logLoadErrors" value="true"/>
             <property name="suppressLoadErrors" value="true"/>
-		</module>        
-		
+        </module>
+
         <module name="SimplifyBooleanReturn"/>
 
         <!-- Checks for class design                         -->
