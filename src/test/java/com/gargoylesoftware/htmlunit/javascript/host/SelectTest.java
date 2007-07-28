@@ -1016,24 +1016,23 @@ public class SelectTest extends WebTestCase {
         else {
             m = "";
         }
-        final String html =
-            "<html><body onload='test()'><script>\r\n" +
-            "   function test(){\r\n" +
-            "      alert(document.getElementById('s').size);\r\n" +
-            "      alert(document.getElementById('a').selected);\r\n" +
-            "      alert(document.getElementById('b').selected);\r\n" +
-            "      alert(document.getElementById('c').selected);\r\n" +
-            "      alert(document.getElementById('s').selectedIndex);\r\n" +
-            "   }\r\n" +
-            "</script>\r\n" +
-            "<form id='f'>\r\n" +
-            "   <select id='s' size='" + size + "'" + m + ">\r\n" +
-            "      <option id='a' value='a'>a</option>\r\n" +
-            "      <option id='b' value='b'>b</option>\r\n" +
-            "      <option id='c' value='c'>c</option>\r\n" +
-            "   </select>\r\n" +
-            "</form>\r\n" +
-            "</body></html>\r\n";
+        final String html = "<html><body onload='test()'><script>\r\n"
+            + "   function test(){\r\n"
+            + "      alert(document.getElementById('s').size);\r\n"
+            + "      alert(document.getElementById('a').selected);\r\n"
+            + "      alert(document.getElementById('b').selected);\r\n"
+            + "      alert(document.getElementById('c').selected);\r\n"
+            + "      alert(document.getElementById('s').selectedIndex);\r\n"
+            + "   }\r\n"
+            + "</script>\r\n"
+            + "<form id='f'>\r\n"
+            + "   <select id='s' size='" + size + "'" + m + ">\r\n"
+            + "      <option id='a' value='a'>a</option>\r\n"
+            + "      <option id='b' value='b'>b</option>\r\n"
+            + "      <option id='c' value='c'>c</option>\r\n"
+            + "   </select>\r\n"
+            + "</form>\r\n"
+            + "</body></html>";
         final List actual = new ArrayList();
         loadPage(html, actual);
         assertEquals(expected, actual);
