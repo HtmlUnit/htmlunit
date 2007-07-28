@@ -249,7 +249,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         setupWebServer(12345);
 
         final WebClient client = new WebClient();
-        final Page page = client.getPage(new URL("http://localhost:12345/"));
+        final Page page = client.getPage("http://localhost:12345/");
         final WebConnection defaultConnection = page
                 .getEnclosingWindow()
                 .getWebClient()
@@ -311,7 +311,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         };
 
         webClient.setWebConnection(myWebConnection);
-        webClient.getPage(new URL("http://localhost:12345/"));
+        webClient.getPage("http://localhost:12345/");
         assertTrue("createHttpClient as not been called", tabCalled[0]);
     }
 

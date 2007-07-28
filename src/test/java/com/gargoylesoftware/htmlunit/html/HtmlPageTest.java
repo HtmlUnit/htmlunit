@@ -576,15 +576,13 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals(urlString + "bbb", page.getFullyQualifiedUrl("aaa/../bbb"));
         assertEquals(urlString + "c/d", page.getFullyQualifiedUrl("c/./d"));
 
-        final HtmlPage secondPage = (HtmlPage) client
-                .getPage(new URL(urlString + "foo/bar?a=b&c=d"));
+        final HtmlPage secondPage = (HtmlPage) client.getPage(urlString + "foo/bar?a=b&c=d");
         assertEquals(urlString + "foo/bar?a=b&c=d", secondPage.getFullyQualifiedUrl(""));
         assertEquals(urlString + "foo/one", secondPage.getFullyQualifiedUrl("one"));
         assertEquals(urlString + "two", secondPage.getFullyQualifiedUrl("/two"));
         assertEquals(urlString + "foo/two?a=b", secondPage.getFullyQualifiedUrl("two?a=b"));
 
-        final HtmlPage thirdPage = (HtmlPage) client.getPage(new URL(
-                "http://foo.com/dog/cat/one.html"));
+        final HtmlPage thirdPage = (HtmlPage) client.getPage("http://foo.com/dog/cat/one.html");
         assertEquals("http://foo.com/dog/cat/one.html", thirdPage.getFullyQualifiedUrl(""));
         assertEquals("http://foo.com/dog/cat/two.html", thirdPage.getFullyQualifiedUrl("two.html"));
     }

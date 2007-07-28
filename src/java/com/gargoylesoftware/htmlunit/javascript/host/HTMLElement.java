@@ -1129,7 +1129,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public void navigateHomePage() throws IOException {
         final WebClient webClient = getDomNodeOrDie().getPage().getWebClient();
-        webClient.getPage(new URL(webClient.getHomePage()));
+        webClient.getPage(webClient.getHomePage());
     }
 
     //----------------------- END #default#homePage BEHAVIOR -----------------------

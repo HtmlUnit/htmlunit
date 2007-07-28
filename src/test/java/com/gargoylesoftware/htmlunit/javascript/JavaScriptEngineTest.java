@@ -710,7 +710,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) client.getPage(new URL("http://first/index.html"));
+        final HtmlPage page = (HtmlPage) client.getPage("http://first/index.html");
         assertEquals("foo", page.getTitleText());
         assertEquals(Collections.singletonList("Got to external method"), collectedAlerts);
     }
@@ -900,7 +900,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         webConnection.setDefaultResponse(getJavaScriptContent("new ActiveXObject('UnknownObject')"));
         try {
-            client.getPage(new URL("http://www.yahoo.com"));
+            client.getPage("http://www.yahoo.com");
             fail("An exception should be thrown for non existent object in the map.");
         }
         catch (final ScriptException e) {
@@ -909,7 +909,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         webConnection.setDefaultResponse(getJavaScriptContent("new ActiveXObject('BadObject', 'server')"));
         try {
-            client.getPage(new URL("http://www.yahoo.com"));
+            client.getPage("http://www.yahoo.com");
             fail("An exception should be thrown for an invalid object in the map.");
         }
         catch (final ScriptException e) {
@@ -919,7 +919,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         // Test for a non existent class in the map
         webConnection.setDefaultResponse(getJavaScriptContent("new ActiveXObject('FakeObject')"));
         try {
-            client.getPage(new URL("http://www.yahoo.com"));
+            client.getPage("http://www.yahoo.com");
             fail("An exception should be thrown for a non existent object in the map.");
         }
         catch (final ScriptException e) {
@@ -931,7 +931,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         // Try a valid object in the map
         webConnection.setDefaultResponse(getJavaScriptContent(
                 "var t = new ActiveXObject('MockActiveXObject'); alert(t.MESSAGE);"));
-        client.getPage(new URL("http://www.yahoo.com"));
+        client.getPage("http://www.yahoo.com");
         assertEquals(
                 "The active x object did not bind to the object.",
                 Collections.singletonList(MockActiveXObject.MESSAGE),
@@ -941,7 +941,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         webConnection.setDefaultResponse(getJavaScriptContent(
                 "var t = new ActiveXObject('MockActiveXObject', 'server'); alert(t.GetMessage());"));
-        client.getPage(new URL("http://www.yahoo.com"));
+        client.getPage("http://www.yahoo.com");
         assertEquals(
                 "The active x object did not bind to the object.",
                 Collections.singletonList(new MockActiveXObject().GetMessage()),

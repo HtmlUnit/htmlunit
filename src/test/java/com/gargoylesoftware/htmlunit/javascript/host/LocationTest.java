@@ -189,7 +189,7 @@ public class LocationTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // Try page with only a server name
-        client.getPage(new URL("http://first"));
+        client.getPage("http://first");
         String[] expectedAlerts = {
             "",               // hash
             "first",          // host
@@ -205,7 +205,7 @@ public class LocationTest extends WebTestCase {
         collectedAlerts.clear();
 
         // Try page with all the appropriate parts
-        client.getPage(new URL("http://www.first:77/foo?bar#wahoo"));
+        client.getPage("http://www.first:77/foo?bar#wahoo");
         expectedAlerts = new String[] {
             "wahoo",                             // hash
             "www.first:77",                      // host

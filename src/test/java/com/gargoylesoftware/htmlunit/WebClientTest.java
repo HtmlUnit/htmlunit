@@ -73,6 +73,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Chris Erskine
  * @author Hans Donner
  * @author Paul King
+ * @author Ahmed Ashour
  */
 public class WebClientTest extends WebTestCase {
 
@@ -721,31 +722,31 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         // with query string not encoded
-        HtmlPage page = (HtmlPage) client.getPage(new URL("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8)));
+        HtmlPage page = (HtmlPage) client.getPage("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8));
         assertEquals("http://first?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
 
         // with query string already encoded
-        page = (HtmlPage) client.getPage(new URL("http://first?a=b%20c&d=%C3%A9%C3%A8"));
+        page = (HtmlPage) client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
         assertEquals("http://first?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
 
         // with query string partially encoded
-        page = (HtmlPage) client.getPage(new URL("http://first?a=b%20c&d=e f"));
+        page = (HtmlPage) client.getPage("http://first?a=b%20c&d=e f");
         assertEquals("http://first?a=b%20c&d=e%20f", page.getWebResponse().getUrl());
 
         // with anchor
-        page = (HtmlPage) client.getPage(new URL("http://first?a=b c#myAnchor"));
+        page = (HtmlPage) client.getPage("http://first?a=b c#myAnchor");
         assertEquals("http://first?a=b%20c#myAnchor", page.getWebResponse().getUrl());
 
         // with query string containing encoded "&", "=", "+", ",", and "$"
-        page = (HtmlPage) client.getPage(new URL("http://first?a=%26%3D%20%2C%24"));
+        page = (HtmlPage) client.getPage("http://first?a=%26%3D%20%2C%24");
         assertEquals("http://first?a=%26%3D%20%2C%24", page.getWebResponse().getUrl());
 
         // with character to encode in path
-        page = (HtmlPage) client.getPage(new URL("http://first/page 1.html"));
+        page = (HtmlPage) client.getPage("http://first/page 1.html");
         assertEquals("http://first/page%201.html", page.getWebResponse().getUrl());
 
         // with character to encode in path
-        page = (HtmlPage) client.getPage(new URL("http://first/page 1.html"));
+        page = (HtmlPage) client.getPage("http://first/page 1.html");
         assertEquals("http://first/page%201.html", page.getWebResponse().getUrl());
     }
 
@@ -1250,7 +1251,7 @@ public class WebClientTest extends WebTestCase {
             }
 
         });
-        client.getPage(new URL("http://www.yahoo.com"));
+        client.getPage("http://www.yahoo.com");
 
         // Test modify script in pre processor
         client.setScriptPreProcessor(new ScriptPreProcessor() {
@@ -1270,7 +1271,7 @@ public class WebClientTest extends WebTestCase {
             }
 
         });
-        client.getPage(new URL("http://www.yahoo.com"));
+        client.getPage("http://www.yahoo.com");
     }
 
     /**
@@ -1303,7 +1304,7 @@ public class WebClientTest extends WebTestCase {
         });
         final List alerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
-        client.getPage(new URL("http://page"));
+        client.getPage("http://page");
 
         assertEquals(1, alerts.size());
         assertEquals("implemented function", alerts.get(0).toString());
