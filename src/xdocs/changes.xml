@@ -8,6 +8,9 @@
     <body>
         <release version="1.12-prerelease">
             <action type="update" dev="sdanig">
+                First option in a single-selection select input gets selected by default.
+            </action>
+            <action type="update" dev="sdanig">
                 Add implementation of element.style.filter attribute (when emulating IE only).
             </action>
             <action type="add" dev="mguillem">

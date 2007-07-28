@@ -960,33 +960,80 @@ public class SelectTest extends WebTestCase {
     }
 
     /**
-     * Verifies that if no option is specified as selected, the first option
-     * defaults to being the selected option.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
-    public void testDefaultSelectedValue() throws Exception {
-        if (notYetImplemented()) {
-            // Strangely enough, needed for the jQuery selector module.
-            // TODO: Daniel Gredler
-            return;
+    public void testDefaultSelectedValue_SizeNegativeOne() throws Exception {
+        testDefaultSelectedValue("-1", false, new String[] {"0", "true", "false", "false", "0"});
+        testDefaultSelectedValue("-1", true, new String[] {"0", "false", "false", "false", "-1"});
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDefaultSelectedValue_SizeZero() throws Exception {
+        testDefaultSelectedValue("0", false, new String[] {"0", "true", "false", "false", "0"});
+        testDefaultSelectedValue("0", true, new String[] {"0", "false", "false", "false", "-1"});
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDefaultSelectedValue_SizeOne() throws Exception {
+        testDefaultSelectedValue("1", false, new String[] {"1", "true", "false", "false", "0"});
+        testDefaultSelectedValue("1", true, new String[] {"1", "false", "false", "false", "-1"});
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDefaultSelectedValue_SizeTwo() throws Exception {
+        testDefaultSelectedValue("2", false, new String[] {"2", "false", "false", "false", "-1"});
+        testDefaultSelectedValue("2", true, new String[] {"2", "false", "false", "false", "-1"});
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDefaultSelectedValue_SizeInvalid() throws Exception {
+        testDefaultSelectedValue("x", false, new String[] {"0", "true", "false", "false", "0"});
+        testDefaultSelectedValue("x", true, new String[] {"0", "false", "false", "false", "-1"});
+    }
+
+    /**
+     * Tests default selection status for options in a select of the specified size, optionally
+     * allowing multiple selections.
+     * @param size the select input's size attribute
+     * @param multiple whether or not the select input should allow multiple selections
+     * @param expected the expected alerts
+     * @throws Exception if the test fails
+     */
+    private void testDefaultSelectedValue(final String size, final boolean multiple, final String[] expected)
+        throws Exception {
+        final String m;
+        if (multiple) {
+            m = " multiple";
         }
-        final String html = "<html><body onload='test()'><script>\r\n"
-            + "   function test(){\r\n"
-            + "      alert(document.getElementById('a').selected);\r\n"
-            + "      alert(document.getElementById('b').selected);\r\n"
-            + "      alert(document.getElementById('c').selected);\r\n"
-            + "      alert(document.getElementById('s').selectedIndex);\r\n"
-            + "   }\r\n"
-            + "</script>\r\n"
-            + "<form id='form'>\r\n"
-            + "   <select id='s'>\r\n"
-            + "      <option id='a' value='a'>a</option>\r\n"
-            + "      <option id='b' value='b'>b</option>\r\n"
-            + "      <option id='c' value='c'>c</option>\r\n"
-            + "   </select>\r\n"
-            + "</form>\r\n"
-            + "</body></html>\r\n";
-        final String[] expected = {"true", "false", "false", "0"};
+        else {
+            m = "";
+        }
+        final String html =
+            "<html><body onload='test()'><script>\r\n" +
+            "   function test(){\r\n" +
+            "      alert(document.getElementById('s').size);\r\n" +
+            "      alert(document.getElementById('a').selected);\r\n" +
+            "      alert(document.getElementById('b').selected);\r\n" +
+            "      alert(document.getElementById('c').selected);\r\n" +
+            "      alert(document.getElementById('s').selectedIndex);\r\n" +
+            "   }\r\n" +
+            "</script>\r\n" +
+            "<form id='f'>\r\n" +
+            "   <select id='s' size='" + size + "'" + m + ">\r\n" +
+            "      <option id='a' value='a'>a</option>\r\n" +
+            "      <option id='b' value='b'>b</option>\r\n" +
+            "      <option id='c' value='c'>c</option>\r\n" +
+            "   </select>\r\n" +
+            "</form>\r\n" +
+            "</body></html>\r\n";
         final List actual = new ArrayList();
         loadPage(html, actual);
         assertEquals(expected, actual);

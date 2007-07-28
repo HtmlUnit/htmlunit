@@ -410,8 +410,10 @@ public final class HTMLParser {
             throws SAXException {
 
             handleCharacters();
+
             final DomNode previousNode = (DomNode) stack_.pop(); //remove currentElement from stack
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
+            previousNode.onAllChildrenAddedToPage();
 
             // if we have added a extra node (tbody), we should remove it
             if (!currentNode_.getNodeName().equalsIgnoreCase(localName)) {

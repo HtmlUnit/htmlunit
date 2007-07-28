@@ -733,6 +733,17 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
+     * Lifecycle method invoked after a node and all its children have been added to a page, during
+     * parsing of the HTML. Intended to be overriden by nodes which need to perform custom logic
+     * after they and all their child nodes have been processed by the HTML parser. This method is
+     * not recursive, and the default implementation is empty, so there is no need to call
+     * <tt>super.onAllChildrenAddedToPage()</tt> if you implement this method.
+     */
+    protected void onAllChildrenAddedToPage() {
+        // Empty by default.
+    }
+
+    /**
      * @return an iterator over the children of this node
      */
     public Iterator getChildIterator() {

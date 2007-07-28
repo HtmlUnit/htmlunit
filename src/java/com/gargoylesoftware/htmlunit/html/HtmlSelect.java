@@ -70,6 +70,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "select";
 
+    /** @deprecated */
     private String[] fakeSelectedValues_;
 
     /**
@@ -98,6 +99,41 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
+     * If we were given an invalid <tt>size</tt> attribute, normalize it.
+     * Then set a default selected option if none was specified and the size is 1 or less
+     * and this isn't a multiple selection input.
+     */
+    protected void onAllChildrenAddedToPage() {
+
+        // Fix the size if necessary.
+        int size;
+        try {
+            size = Integer.parseInt(getSizeAttribute());
+            if (size < 0) {
+                setAttributeValue("size", "0");
+                size = 0;
+            }
+        }
+        catch (final NumberFormatException e) {
+            setAttributeValue("size", "0");
+            size = 0;
+        }
+
+        // Set a default selected option if necessary.
+        if (getSelectedOptions().isEmpty()) {
+            if (size <= 1) {
+                if (!isMultipleSelectEnabled()) {
+                    final List options = getOptions();
+                    if (!options.isEmpty()) {
+                        final HtmlOption first = (HtmlOption) options.get(0);
+                        first.setSelectedInternal(true);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Return a List containing all of the currently selected options. The following special
      * conditions can occur if the element is in single select mode:
      * <ul>
@@ -109,10 +145,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public List getSelectedOptions() {
         List result;
-
         if (isMultipleSelectEnabled()) {
+            // Multiple selections possible.
             result = new ArrayList();
-
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while (iterator.hasNext()) {
                 final HtmlElement element = iterator.nextElement();
@@ -122,43 +157,23 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             }
         }
         else {
+            // Only a single selection is possible.
             result = new ArrayList(1);
-
-            HtmlOption firstOption = null;
-            HtmlOption lastOption = null;
-
+            HtmlOption lastSelected = null;
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while (iterator.hasNext()) {
                 final HtmlElement element = iterator.nextElement();
                 if (element instanceof HtmlOption) {
                     final HtmlOption option = (HtmlOption) element;
-                    if (firstOption == null) {
-                        firstOption = option; //remember in case we need it
-                    }
                     if (option.isSelected()) {
-                        lastOption = option;
+                        lastSelected = option;
                     }
                 }
             }
-            if (lastOption != null) {
-                result.add(lastOption);
-            }
-            else if (firstOption != null) {
-                int theSize;
-                try {
-                    theSize = Integer.parseInt(getSizeAttribute());
-                }
-                catch (final NumberFormatException e) {
-                    // Different browsers have different (and odd) tolerances for invalid
-                    // size attributes so we'll just assume anything invalid is "1"
-                    theSize = 1;
-                }
-                if (theSize <= 1) {
-                    result.add(firstOption);
-                }
+            if (lastSelected != null) {
+                result.add(lastSelected);
             }
         }
-
         return Collections.unmodifiableList(result);
     }
 
@@ -335,6 +350,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *  in the document.
      *
      * @param optionValue The value of the new "selected" option
+     * @deprecated
      */
     public void fakeSelectedAttribute(final String optionValue) {
         Assert.notNull("optionValue", optionValue);
@@ -346,6 +362,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *  contained in the document.
      *
      * @param optionValues The values of the new "selected" options
+     * @deprecated
      */
     public void fakeSelectedAttribute(final String optionValues[]) {
         Assert.notNull("optionValues", optionValues);
