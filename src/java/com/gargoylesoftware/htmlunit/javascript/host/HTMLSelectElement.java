@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
@@ -238,11 +237,7 @@ public class HTMLSelectElement extends FormField {
             htmlSelect.setSelectedAttribute(itemToUnSelect, false);
         }
         if (index < 0) {
-            htmlSelect.fakeSelectedAttribute("");
             return;
-        }
-        else {
-            htmlSelect.fakeSelectedAttribute(ArrayUtils.EMPTY_STRING_ARRAY);
         }
 
         final List allOptions = htmlSelect.getOptions();
