@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * should be supported, see
  * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">DOM Level 2 Events</a>.
  *
- * @version $Revision: 1624 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class MouseEvent extends Event {

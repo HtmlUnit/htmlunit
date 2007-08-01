@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 /**
  * Tests for mouse events support.
  *
- * @version $Revision: 1620 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class MouseEventTest extends WebTestCase {
