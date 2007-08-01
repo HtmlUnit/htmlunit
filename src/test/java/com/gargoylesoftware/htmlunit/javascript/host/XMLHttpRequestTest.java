@@ -676,4 +676,39 @@ public class XMLHttpRequestTest extends WebTestCase {
                 urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
         assertEquals(alerts, collectedAlerts);
     }
+
+    /**
+     * Test that the Referer header is set correctly
+     * @throws Exception if the test fails.
+     */
+    public void testRefererHeader() throws Exception {
+
+        final String content = "<html><head><script>"
+            + "function getXMLHttpRequest() {"
+            + " if (window.XMLHttpRequest)"
+            + "        return new XMLHttpRequest();"
+            + " else if (window.ActiveXObject)"
+            + "        return new ActiveXObject('Microsoft.XMLHTTP');"
+            + "}"
+            + "function test()"
+            + "{"
+            + " req = getXMLHttpRequest();"
+            + " req.open('post', 'foo.xml', false);"
+            + " req.send('');"
+            + "}"
+            + "</script></head>"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, content);
+        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        webConnection.setResponse(urlPage2, "<foo/>", "text/xml");
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        final WebRequestSettings settings = webConnection.getLastWebRequestSettings();
+        assertEquals(urlPage2, settings.getURL());
+        assertEquals(URL_FIRST.toExternalForm(), settings.getAdditionalHeaders().get("Referer"));
+    }
 }

@@ -295,6 +295,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
+            settings.addAdditionalHeader("Referer", containingPage_.getWebResponse().getUrl().toExternalForm());
             final SubmitMethod submitMethod;
             if ("POST".equalsIgnoreCase(method)) {
                 submitMethod = SubmitMethod.POST;
