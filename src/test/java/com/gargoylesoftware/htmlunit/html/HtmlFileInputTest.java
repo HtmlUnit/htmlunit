@@ -62,11 +62,16 @@ public class HtmlFileInputTest extends WebTestCase {
      */
     public void testFileInput() throws Exception {
         String path = getClass().getResource("../testfiles/" + "tiny-png.img").toExternalForm();
+        testFileInput(path);
+        
         if (path.startsWith("file:")) {
             path = path.substring("file:".length());
         }
         while (path.startsWith("/")) {
             path = path.substring(1);
+        }
+        if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
+            testFileInput(path.replace('/', '\\'));
         }
         testFileInput("file:/" + path);
         testFileInput("file://" + path);

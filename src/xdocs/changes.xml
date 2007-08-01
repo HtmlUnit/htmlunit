@@ -88,7 +88,7 @@
                 Elements inside &lt;noscript&gt; are ignored if isJavaScriptEnabled() (#1186639).
             </action>
             <action type="update" dev="asashour" id="1748672">
-                Version: add getProductName(), getProductVersion() and getCopyRight() (#1748672).
+                Version: add getProductName(), getProductVersion() and getCopyright() (#1748672).
             </action>
             <action type="add" dev="asashour">
                 DomNode: add/remove DomChangeListener.

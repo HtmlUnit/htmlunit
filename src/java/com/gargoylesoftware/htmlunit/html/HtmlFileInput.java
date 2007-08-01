@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -110,12 +111,12 @@ public class HtmlFileInput extends HtmlInput {
             value = "file:///" + value.substring(7);
         }
         
-        final File file;
+        File file;
         try {
             file = new File(new URI(value));
         }
-        catch (final Exception e) {
-            throw new IllegalArgumentException("Invalid 'value' attribute: " + getValueAttribute());
+        catch (final URISyntaxException e) {
+            file = new File(value);
         }
 
         // contentType and charset are determined from browser and page
