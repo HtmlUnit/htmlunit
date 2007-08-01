@@ -11,6 +11,7 @@
     Brad Clarke
     Tony Graham
     Marc Guillemot
+    Ahmed Ashour
 -->
 
 <project name="HtmlUnit" default="jar" basedir=".">
@@ -79,6 +80,7 @@
     <copy todir="${test.classes.dir}">
         <fileset dir="${test.src.dir}/../resources">
             <include name="prototype/**/*"/>
+            <include name="*.htm*"/>
         </fileset>
     </copy>
 </target>
