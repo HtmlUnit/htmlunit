@@ -1365,22 +1365,84 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
     /**
      * Get the offsetHeight for this element.
-     * @return a dummy value
+     * @return a dummy value compatible with mouse events coordinates
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetwidth.asp">
      * MSDN documentation</a>
      */
     public int jsxGet_offsetHeight() {
-        return 1;
+        final MouseEvent event = MouseEvent.getCurrentMouseEvent();
+        if (event != null && isChildNode((HTMLElement) event.jsxGet_target())) {
+            // compute appropriate offsetHeight to make as if mouse event produced within this element
+            return event.jsxGet_clientY() - getPosY() + 50;
+        }
+        else {
+            return 1;
+        }
     }
 
     /**
      * Get the offsetWidth for this element.
-     * @return a dummy value
+     * @return a dummy value compatible with mouse events coordinates
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetWidth.asp">
      * MSDN documentation</a>
      */
     public int jsxGet_offsetWidth() {
-        return 1;
+        final MouseEvent event = MouseEvent.getCurrentMouseEvent();
+        if (event != null && isChildNode((HTMLElement) event.jsxGet_target())) {
+            // compute appropriate offsetwidth to make as if mouse event produced within this element
+            return event.jsxGet_clientX() - getPosX() + 50;
+        }
+        else {
+            return 1;
+        }
+    }
+    
+    /**
+     * Gets the x position of the element. The value returned doesn't need to be "correct" as it
+     * but just needs to be compatible with mouse event coordinates
+     * @return the x position
+     */
+    int getPosX() {
+        int cumulativeOffset = 0;
+        HTMLElement element = this;
+        while (element != null) {
+            cumulativeOffset += element.jsxGet_offsetLeft();
+            element = (HTMLElement) element.jsxGet_offsetParent();
+        }
+        return cumulativeOffset;
+    }
+
+    /**
+     * Gets the y position of the element. The value returned doesn't need to be "correct" as it
+     * but just needs to be compatible with mouse event coordinates
+     * @return the y position
+     */
+    int getPosY() {
+        int cumulativeOffset = 0;
+        HTMLElement element = this;
+        while (element != null) {
+            cumulativeOffset += element.jsxGet_offsetTop();
+            element = (HTMLElement) element.jsxGet_offsetParent();
+        }
+        return cumulativeOffset;
+    }
+
+    /**
+     * Indicates if the provided element is a child of this instance
+     * @param element the element to test
+     * @return <code>true</code> if this is a child node
+     */
+    private boolean isChildNode(final HTMLElement element) {
+        final HtmlElement thisHtmlElement = getHtmlElementOrDie();
+        DomNode htmlElement = element.getHtmlElementOrDie();
+        while (htmlElement != null) {
+            if (htmlElement == thisHtmlElement) {
+                return true;
+            }
+            htmlElement = htmlElement.getParentNode();
+        }
+
+        return false;
     }
 
     /**

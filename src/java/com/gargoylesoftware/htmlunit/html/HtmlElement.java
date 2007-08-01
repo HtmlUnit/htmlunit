@@ -50,6 +50,8 @@ import java.util.NoSuchElementException;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.mozilla.javascript.BaseFunction;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.Assert;
@@ -60,6 +62,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
 /**
  * An abstract wrapper for html elements
@@ -952,7 +955,14 @@ public abstract class HtmlElement extends DomNode {
         }
 
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
-        return jsElt.fireEvent(event);
+        final ContextAction action = new ContextAction()
+        {
+            public Object run(final Context cx) {
+                return jsElt.fireEvent(event);
+            }
+        };
+
+        return (ScriptResult) Context.call(action);
     }
 
     /**
@@ -976,7 +986,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(Event.TYPE_MOUSE_OVER, shiftKey, ctrlKey, altKey);
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_OVER, shiftKey, ctrlKey, altKey);
     }
 
     /**
@@ -1000,7 +1010,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseMove(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(Event.TYPE_MOUSE_MOVE, shiftKey, ctrlKey, altKey);
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_MOVE, shiftKey, ctrlKey, altKey);
     }
 
     /**
@@ -1024,7 +1034,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseOut(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(Event.TYPE_MOUSE_OUT, shiftKey, ctrlKey, altKey);
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_OUT, shiftKey, ctrlKey, altKey);
     }
 
     /**
@@ -1048,7 +1058,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(Event.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey);
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey);
     }
 
     /**
@@ -1072,7 +1082,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(Event.TYPE_MOUSE_UP, shiftKey, ctrlKey, altKey);
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_UP, shiftKey, ctrlKey, altKey);
     }
 
     /**
@@ -1094,7 +1104,7 @@ public abstract class HtmlElement extends DomNode {
         }
 
         final HtmlPage page = getPage();
-        final Event event = new Event(this, eventType, shiftKey, ctrlKey, altKey);
+        final Event event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey);
         final ScriptResult scriptResult = fireEvent(event);
         final Page currentPage;
         if (scriptResult == null) {

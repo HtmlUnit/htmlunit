@@ -438,6 +438,7 @@ public class NodeImpl extends SimpleScriptable {
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         final Object[] args = new Object[] {event};
 
+        event.startFire();
         ScriptResult result = null;
         if (isIE) {
             window.setEvent(event);
@@ -498,6 +499,7 @@ public class NodeImpl extends SimpleScriptable {
             result = defaultResult(windowsListeners.executeBubblingListeners(event, args, propHandlerArgs), result);
         }
         finally {
+            event.endFire();
             window.setEvent(null); // reset event
         }
 

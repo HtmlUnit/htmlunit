@@ -60,12 +60,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  */
 public class Event extends SimpleScriptable {
-
-    /** The click event type, triggered by "onclick" event handlers. */
-    public static final String TYPE_CLICK = "click";
-
-    /** The dblclick event type, triggered by "ondblclick" event handlers. */
-    public static final String TYPE_DBL_CLICK = "dblclick";
+    /**
+     * Key to place the event's target in the Context's scope during event processing
+     * to compute node coordinates compatible with those of the event.
+     */
+    static final String KEY_CURRENT_EVENT = "Event#current";
 
     /** The submit event type, triggered by "onsubmit" event handlers. */
     public static final String TYPE_SUBMIT = "submit";
@@ -87,21 +86,6 @@ public class Event extends SimpleScriptable {
 
     /** The submit event type, triggered by "onreset" event handlers. */
     public static final String TYPE_RESET = "reset";
-
-    /** The mouse over event type, triggered by "onmouseover" event handlers. */
-    public static final String TYPE_MOUSE_OVER = "mouseover";
-
-    /** The mouse move event type, triggered by "onmousemove" event handlers. */
-    public static final String TYPE_MOUSE_MOVE = "mousemove";
-    
-    /** The mouse out event type, triggered by "onmouseout" event handlers. */
-    public static final String TYPE_MOUSE_OUT = "mouseout";
-
-    /** The mouse down event type, triggered by "onmousedown" event handlers. */
-    public static final String TYPE_MOUSE_DOWN = "mousedown";
-
-    /** The mouse up event type, triggered by "onmouseup" event handlers. */
-    public static final String TYPE_MOUSE_UP = "mouseup";
 
     private static final long serialVersionUID = 4050485607908455730L;
     // the button code for IE (1: left button, 4: middle button, 2: right button)
@@ -173,6 +157,20 @@ public class Event extends SimpleScriptable {
     public Event() {
     }
 
+    /**
+     * Called when the event starts being fired
+     */
+    void startFire() {
+        Context.getCurrentContext().putThreadLocal(KEY_CURRENT_EVENT, this);
+    }
+
+    /**
+     * Called when the event starts being fired
+     */
+    void endFire() {
+        Context.getCurrentContext().removeThreadLocal(KEY_CURRENT_EVENT);
+    }
+    
     /**
      * Returns the object that fired the event. This is an IE-only property.
      * @return The object that fired the event.

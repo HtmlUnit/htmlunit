@@ -8,6 +8,11 @@
     <body>
         <release version="1.12-prerelease">
             <action type="update" dev="mguillem">
+                JavaScript added minimal support for MouseEvent properties 
+                clientX, clientY, pageX, pageY, screenX, screenY
+                coherent with position of event's target. 
+            </action>
+            <action type="update" dev="mguillem">
                 Set Referer header for requests from XMLHttpRequest.
             </action>
             <action type="update" dev="sdanig">

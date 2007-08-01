@@ -210,6 +210,22 @@
         </function>
     </class>
 
+    <class name="MouseEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.MouseEvent" JSObject="true">
+        <doclink
+            url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent"
+            descr="W3C Document Object Model (DOM) Level 2 - Mouse event types"/>
+        <property name="clientX" readable="true" writable="false"/>
+        <property name="clientY" readable="true" writable="false"/>
+        <property name="pageX" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="pageY" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
+        </property>
+        <property name="screenX" readable="true" writable="false"/>
+        <property name="screenY" readable="true" writable="false"/>
+    </class>
+
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
         JSObject="true">
         <function name="blur"/>
