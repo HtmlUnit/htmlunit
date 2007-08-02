@@ -314,8 +314,8 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     *  Test changing the selected option
-     *
+     * Test changing the selected option
+     * @deprecated Mark test as deprecated to avoid compiler warnings as this tests deprecated methods
      * @exception Exception If the test fails
      */
     public void testSetSelected_IllegalValue() throws Exception {
