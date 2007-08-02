@@ -425,8 +425,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     public String jsxGet_innerHTML() {
         final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, getDomNodeOrDie());
-
+        printChildren(buf, getDomNodeOrDie(), true);
         return buf.toString();
     }
 
@@ -438,7 +437,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie(), false);
-
         return buf.toString();
     }
 
@@ -446,77 +444,73 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * Gets the outerHTML of the node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
      * MSDN documentation</a>
-     * @return the contents of this node as html
-     * (note: the formatting isn't currently exactly the same as IE)
+     * @return the contents of this node as HTML
      */
     public String jsxGet_outerHTML() {
         final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printNode(buf, getDomNodeOrDie());
-
+        printNode(buf, getDomNodeOrDie(), true);
         return buf.toString();
     }
 
-    private void printChildren(final StringBuffer buffer, final DomNode node) {
-        printChildren(buffer, node, true);
-    }
-
-    private void printChildren(final StringBuffer buffer, final DomNode node, final boolean asInnerHTML) {
+    private void printChildren(final StringBuffer buffer, final DomNode node, final boolean html) {
         for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
-            printNode(buffer, (DomNode) iter.next(), asInnerHTML);
+            printNode(buffer, (DomNode) iter.next(), html);
         }
     }
 
-    private void printNode(final StringBuffer buffer, final DomNode node) {
-        printNode(buffer, node, true);
-    }
-
-    private void printNode(
-            final StringBuffer buffer, final DomNode node,
-            final boolean asInnerHTML) {
-
+    private void printNode(final StringBuffer buffer, final DomNode node, final boolean html) {
         if (node instanceof DomComment) {
-            buffer.append("<!--" + node.getNodeValue().replaceAll("  ", " ") + "-->");
+            // Remove whitespace sequences.
+            final String s = node.getNodeValue().replaceAll("  ", " ");
+            buffer.append("<!--").append(s).append("-->");
         }
         else if (node instanceof DomCharacterData) {
-            buffer.append(node.getNodeValue().replaceAll("  ", " ")); // remove white space sequences
-        }
-        else if (asInnerHTML) {
-            final HtmlElement htmlElt = (HtmlElement) node;
-            buffer.append("<");
-            buffer.append(htmlElt.getTagName());
-
-            // the attributes
-            for (final Iterator iterator = htmlElt.getAttributeEntriesIterator(); iterator.hasNext();) {
-                buffer.append(' ');
-                final Map.Entry entry = (Map.Entry) iterator.next();
-                buffer.append(entry.getKey());
-                buffer.append("=\"");
-                buffer.append(entry.getValue());
-                buffer.append("\"");
+            // Remove whitespace sequences, possibly escape XML characters.
+            String s = node.getNodeValue().replaceAll("  ", " ");
+            if (html) {
+                s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
             }
-            if (htmlElt.getFirstChild() == null) {
-                buffer.append("/");
+            buffer.append(s);
+        }
+        else if (html) {
+            // Start the tag name. IE does it in uppercase, FF in lowercase.
+            final HtmlElement element = (HtmlElement) node;
+            final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+            String tag = element.getTagName();
+            if (ie) {
+                tag = tag.toUpperCase();
+            }
+            buffer.append("<").append(tag);
+            // Add the attributes. IE does not use quotes, FF does.
+            for (final Iterator iterator = element.getAttributeEntriesIterator(); iterator.hasNext();) {
+                final Map.Entry entry = (Map.Entry) iterator.next();
+                final String name = (String) entry.getKey();
+                final String value = (String) entry.getValue();
+                final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
+                buffer.append(' ').append(name).append("=");
+                if (quote) {
+                    buffer.append("\"");
+                }
+                buffer.append(value);
+                if (quote) {
+                    buffer.append("\"");
+                }
             }
             buffer.append(">");
-
-            printChildren(buffer, node, asInnerHTML);
-            if (htmlElt.getFirstChild() != null) {
-                buffer.append("</");
-                buffer.append(htmlElt.getTagName());
-                buffer.append(">");
-            }
+            // Add the children.
+            printChildren(buffer, node, html);
+            // Close the tag. IE does it in uppercase, FF in lowercase.
+            buffer.append("</").append(tag).append(">");
         }
         else {
-            final HtmlElement htmlElement = (HtmlElement) node;
-            if (htmlElement.getTagName().equals("p")) {
+            final HtmlElement element = (HtmlElement) node;
+            if (element.getTagName().equals("p")) {
                 buffer.append("\r\n"); // \r\n because it's to implement something IE specific
             }
-
-            if (!htmlElement.getTagName().equals("script")) {
-                printChildren(buffer, node, asInnerHTML);
+            if (!element.getTagName().equals("script")) {
+                printChildren(buffer, node, html);
             }
-
         }
     }
 

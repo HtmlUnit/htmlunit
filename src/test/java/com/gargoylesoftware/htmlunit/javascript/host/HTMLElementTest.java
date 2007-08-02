@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public class HTMLElementTest extends WebTestCase {
+
     /**
      * @param name The name of the test case
      */
@@ -425,10 +426,22 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
-    public void testGetSetInnerHTMLSimple() throws Exception {
+    public void testGetSetInnerHTMLSimple_FF() throws Exception {
+        final String[] expected = {"Old = <b>Old innerHTML</b>", "New = New cell value"};
+        testGetSetInnerHTMLSimple(BrowserVersion.FIREFOX_2, expected);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHTMLSimple_IE() throws Exception {
+        final String[] expected = {"Old = <B>Old innerHTML</B>", "New = New cell value"};
+        testGetSetInnerHTMLSimple(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+    }
+
+    private void testGetSetInnerHTMLSimple(final BrowserVersion version, final String[] expected) throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
@@ -445,17 +458,37 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b>Old innerHTML</b></p>\n"
             + "</body>\n"
             + "</html>";
-        final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"Old = <b>Old innerHTML</b>", "New = New cell value"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        final List actual = new ArrayList();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
     }
 
     /**
-     * Test the use of innerHTML to set new html code
+     * Test the use of innerHTML to set new HTML code in Firefox.
      * @throws Exception if the test fails
      */
-    public void testGetSetInnerHTMLComplex() throws Exception {
+    public void testGetSetInnerHTMLComplex_FF() throws Exception {
+        final String[] expected = {
+            "Old = <b>Old innerHTML</b><!-- old comment -->",
+            "New =  <b><i id=\"newElt\">New cell value</i></b>",
+            "I" };
+        testGetSetInnerHTMLComplex(BrowserVersion.FIREFOX_2, expected);
+    }
+
+    /**
+     * Test the use of innerHTML to set new HTML code in IE.
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHTMLComplex_IE() throws Exception {
+        final String[] expected = {
+            "Old = <B>Old innerHTML</B><!-- old comment -->",
+            "New =  <B><I id=newElt>New cell value</I></B>",
+            "I" };
+        testGetSetInnerHTMLComplex(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+    }
+
+    private void testGetSetInnerHTMLComplex(BrowserVersion version, String[] expected) throws Exception {
+
         final String content = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
@@ -473,12 +506,10 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n"
             + "</body>\n"
             + "</html>";
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        final String[] expectedAlerts = {"Old = <b>Old innerHTML</b><!-- old comment -->",
-            "New =  <b><i id=\"newElt\">New cell value</i></b>",
-            "I"};
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        final List actual = new ArrayList();
+        final HtmlPage page = loadPage(version, content, actual);
+        assertEquals(expected, actual);
 
         final HtmlElement pElt = page.getHtmlElementById("myNode");
         assertEquals("p", pElt.getNodeName());
@@ -515,9 +546,26 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
-    public void testGetSetInnerHTMLChar() throws Exception {
+    public void testGetSetInnerHTMLChar_FF() throws Exception {
+        final String[] expected = {
+            "Old = <b>Old innerHTML</b>",
+            "New = New cell value &amp; \u0110 \u0110" };
+        testGetSetInnerHTMLChar(BrowserVersion.FIREFOX_2, expected);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHTMLChar_IE() throws Exception {
+        final String[] expected = {
+            "Old = <B>Old innerHTML</B>",
+            "New = New cell value &amp; \u0110 \u0110" };
+        testGetSetInnerHTMLChar(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+    }
+
+    private void testGetSetInnerHTMLChar(BrowserVersion version, String[] expected) throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
@@ -534,15 +582,78 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b>Old innerHTML</b></p>\n"
             + "</body>\n"
             + "</html>";
-        final String[] expectedAlerts = {
-            "Old = <b>Old innerHTML</b>",
-            "New = New cell value & \u0110 \u0110" // TODO this is wrong should be &amp;
-        };
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expected);
+        final List actual = new ArrayList();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
+    }
 
-        assertEquals(expectedAlerts, collectedAlerts);
+    /**
+     * Verifies that empty tags are not abbreviated into their &lt;tag/&gt; form.
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHtmlEmptyTag_FF() throws Exception {
+        final String[] expected = { "undefined", "<ul></ul>", "undefined" };
+        testGetSetInnerHtmlEmptyTag(BrowserVersion.FIREFOX_2, expected);
+    }
+
+    /**
+     * Verifies that empty tags are not abbreviated into their &lt;tag/&gt; form.
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHtmlEmptyTag_IE() throws Exception {
+        final String[] expected = { "<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" };
+        testGetSetInnerHtmlEmptyTag(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+    }
+
+    private void testGetSetInnerHtmlEmptyTag(BrowserVersion version, String[] expected) throws Exception {
+        final String content = "<html><body onload='test()'><script>\r\n"
+            + "   function test() {\r\n"
+            + "      var div = document.getElementById('div');\r\n"
+            + "      alert(div.outerHTML);\r\n"
+            + "      alert(div.innerHTML);\r\n"
+            + "      alert(div.innerText);\r\n"
+            + "   }\r\n"
+            + "</script>\r\n"
+            + "<div id='div'><ul/></div>\r\n"
+            + "</body></html>";
+        final List actual = new ArrayList();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that attributes containing whitespace are always quoted.
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
+        final String[] expected = { "undefined", "<span class=\"a b\"></span>", "undefined" };
+        testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.FIREFOX_2, expected);
+    }
+
+    /**
+     * Verifies that attributes containing whitespace are always quoted.
+     * @throws Exception if the test fails
+     */
+    public void testGetSetInnerHtmlAttributeWithWhitespace_IE() throws Exception {
+        final String[] expected = { "<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" };
+        testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+    }
+
+    private void testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion version, String[] expected) throws Exception {
+        final String content = "<html><body onload='test()'><script>\r\n"
+            + "   function test() {\r\n"
+            + "      var div = document.getElementById('div');\r\n"
+            + "      alert(div.outerHTML);\r\n"
+            + "      alert(div.innerHTML);\r\n"
+            + "      alert(div.innerText);\r\n"
+            + "   }\r\n"
+            + "</script>\r\n"
+            + "<div id='div'><span class='a b'></span></div>\r\n"
+            + "</body></html>";
+        final List actual = new ArrayList();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
     }
 
     /**
@@ -597,7 +708,6 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     public void testGetSetOuterHTMLSimple() throws Exception {
@@ -620,17 +730,16 @@ public class HTMLElementTest extends WebTestCase {
             + "</html>";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {
-            "Old = <b id=\"innerNode\">Old outerHTML</b>",
+            "Old = <B id=innerNode>Old outerHTML</B>",
             "New = New cell value"
         };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
-     * Test the use of outerHTML to set new html code
+     * Test the use of outerHTML to set new HTML code.
      * @throws Exception if the test fails
      */
     public void testGetSetOuterHTMLComplex() throws Exception {
@@ -653,8 +762,8 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final String[] expectedAlerts = {
-            "Old = <b id=\"innerNode\">Old outerHTML</b>",
-            "New =  <b><i id=\"newElt\">New cell value</i></b>",
+            "Old = <B id=innerNode>Old outerHTML</B>",
+            "New =  <B><I id=newElt>New cell value</I></B>",
             "I"
         };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);

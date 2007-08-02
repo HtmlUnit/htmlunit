@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="sdanig">
+                Fix element.innerHTML, element.innerText, element.outerHTML: uppercase tag names when
+                emulating IE; don't quote attributes when they don't contain whitespace and we're
+                emulating IE; always use separate open and close tags (even if the tag is empty);
+                escape XML characters inside text nodes.
+            </action>
             <action type="add" dev="asashour">
                 HtmlElement: add rightClick().
             </action>

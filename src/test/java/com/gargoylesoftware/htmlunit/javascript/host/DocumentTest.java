@@ -497,7 +497,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for createTextNode
      * @throws Exception if the test fails
      */
-    public void testDocumentCreateTextNode() throws Exception {
+    public void testCreateTextNode() throws Exception {
         final String htmlContent
             = "<html><head><title>First</title><script>"
             + "function doTest() {\n"
@@ -525,6 +525,57 @@ public class DocumentTest extends WebTestCase {
 
         final String[] expectedAlerts = {"Some Text", "9", "3", "Some Text", "#text"};
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateTextNodeWithHtml_FF() throws Exception {
+        final String undefined = "undefined";
+        final String original = "<p>a & b</p> &amp; \u0162 \" '";
+        final String escaped = "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '";
+        final String[] expected = { original, original, undefined, escaped, undefined };
+        testCreateTextNodeWithHtml(BrowserVersion.FIREFOX_2, expected);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateTextNodeWithHtml_IE() throws Exception {
+        final String original = "<p>a & b</p> &amp; \u0162 \" '";
+        final String escaped = "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '";
+        final String divPlusEscaped = "<DIV id=div>" + escaped + "</DIV>";
+        final String[] expected = { original, original, divPlusEscaped, escaped, original };
+        testCreateTextNodeWithHtml(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
+    }
+
+    /**
+     * Verifies that when we create a text node and append it to an existing DOM node,
+     * its <tt>outerHTML</tt>, <tt>innerHTML</tt> and <tt>innerText</tt> properties are
+     * properly escaped.
+     * @param browserVersion the browser version to use to run the test
+     * @param expected the expected alerts
+     * @throws Exception if the test fails
+     */
+    private void testCreateTextNodeWithHtml(BrowserVersion browserVersion, String[] expected) throws Exception {
+        final String html =
+            "<html><body onload='test()'><script>\r\n" +
+            "   function test() {\r\n" +
+            "      var node = document.createTextNode('<p>a & b</p> &amp; \\u0162 \" \\'');\r\n" +
+            "      alert(node.data);\r\n" +
+            "      alert(node.nodeValue);\r\n" +
+            "      var div = document.getElementById('div');\r\n" +
+            "      div.appendChild(node);\r\n" +
+            "      alert(div.outerHTML);\r\n" +
+            "      alert(div.innerHTML);\r\n" +
+            "      alert(div.innerText);\r\n" +
+            "   };\r\n" +
+            "</script>\r\n" +
+            "<div id='div'></div>\r\n" +
+            "</body></html>";
+        final List actual = new ArrayList();
+        loadPage(browserVersion, html, actual);
+        assertEquals(expected, actual);
     }
 
     /**
