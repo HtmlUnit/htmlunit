@@ -487,8 +487,8 @@ public class HTMLElementTest extends WebTestCase {
         testGetSetInnerHTMLComplex(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
     }
 
-    private void testGetSetInnerHTMLComplex(BrowserVersion version, String[] expected) throws Exception {
-
+    private void testGetSetInnerHTMLComplex(final BrowserVersion version, final String[] expected)
+        throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
@@ -565,7 +565,8 @@ public class HTMLElementTest extends WebTestCase {
         testGetSetInnerHTMLChar(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
     }
 
-    private void testGetSetInnerHTMLChar(BrowserVersion version, String[] expected) throws Exception {
+    private void testGetSetInnerHTMLChar(final BrowserVersion version, final String[] expected)
+        throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
@@ -593,7 +594,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHtmlEmptyTag_FF() throws Exception {
-        final String[] expected = { "undefined", "<ul></ul>", "undefined" };
+        final String[] expected = {"undefined", "<ul></ul>", "undefined"};
         testGetSetInnerHtmlEmptyTag(BrowserVersion.FIREFOX_2, expected);
     }
 
@@ -602,11 +603,12 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHtmlEmptyTag_IE() throws Exception {
-        final String[] expected = { "<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" };
+        final String[] expected = {"<DIV id=div><UL></UL></DIV>", "<UL></UL>", ""};
         testGetSetInnerHtmlEmptyTag(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
     }
 
-    private void testGetSetInnerHtmlEmptyTag(BrowserVersion version, String[] expected) throws Exception {
+    private void testGetSetInnerHtmlEmptyTag(final BrowserVersion version, final String[] expected)
+        throws Exception {
         final String content = "<html><body onload='test()'><script>\r\n"
             + "   function test() {\r\n"
             + "      var div = document.getElementById('div');\r\n"
@@ -627,7 +629,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
-        final String[] expected = { "undefined", "<span class=\"a b\"></span>", "undefined" };
+        final String[] expected = {"undefined", "<span class=\"a b\"></span>", "undefined"};
         testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.FIREFOX_2, expected);
     }
 
@@ -636,11 +638,12 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetSetInnerHtmlAttributeWithWhitespace_IE() throws Exception {
-        final String[] expected = { "<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" };
+        final String[] expected = {"<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", ""};
         testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
     }
 
-    private void testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion version, String[] expected) throws Exception {
+    private void testGetSetInnerHtmlAttributeWithWhitespace(final BrowserVersion version, final String[] expected)
+        throws Exception {
         final String content = "<html><body onload='test()'><script>\r\n"
             + "   function test() {\r\n"
             + "      var div = document.getElementById('div');\r\n"
