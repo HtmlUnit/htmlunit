@@ -181,7 +181,6 @@
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
             descr="W3C Document Object Model (DOM) Level 2"/>
-        <property name="button" readable="true" writable="false"/>
         <property name="target" readable="true" writable="false">
             <browser name="Netscape" min-version="6"/>
         </property>
@@ -202,9 +201,6 @@
         <property name="cancelBubble" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <property name="which" readable="true" writable="false">
-            <browser name="Netscape" min-version="6"/>
-        </property>
         <function name="stopPropagation">
             <browser name="Netscape" min-version="6"/>
         </function>
@@ -214,6 +210,7 @@
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent"
             descr="W3C Document Object Model (DOM) Level 2 - Mouse event types"/>
+        <property name="button" readable="true" writable="false"/>
         <property name="clientX" readable="true" writable="false"/>
         <property name="clientY" readable="true" writable="false"/>
         <property name="pageX" readable="true" writable="false">
@@ -224,6 +221,9 @@
         </property>
         <property name="screenX" readable="true" writable="false"/>
         <property name="screenY" readable="true" writable="false"/>
+        <property name="which" readable="true" writable="false">
+            <browser name="Netscape" min-version="6"/>
+        </property>
     </class>
 
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"

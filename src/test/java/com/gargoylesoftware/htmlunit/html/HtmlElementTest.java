@@ -501,4 +501,82 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("mouseup-", textArea.getText());
     }
+    
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testRightClick() throws Exception {
+        testRightClick(BrowserVersion.INTERNET_EXPLORER_7_0, "mousedown-2-mouseup-2-");
+        testRightClick(BrowserVersion.FIREFOX_2, "mousedown-3-mouseup-3-");
+    }
+
+    private void testRightClick(final BrowserVersion browserVersion, final String expected)
+        throws Exception {
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function divMouseEvent(e) {\n"
+            + "    var textarea = document.getElementById('myTextarea');\n"
+            + "    if(document.all)\n"
+            + "      textarea.value += event.type + '-' + event.button + '-';\n"
+            + "    else\n"
+            + "      textarea.value += e.type + '-' + e.which + '-';\n"
+            + "  }\n"
+            + "  function loadFunction(e) {\n"
+            + "     document.getElementById('myDiv').onmousedown=divMouseEvent;\n"
+            + "     document.getElementById('myDiv').onmouseup  =divMouseEvent;\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='loadFunction()'>\n"
+            + "  <div id='myDiv'>Hello</div><br>\n"
+            + "  <textarea id='myTextarea'></textarea>\n"
+            + "</body></html>\n";
+        final HtmlPage page = loadPage(browserVersion, content, null);
+        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("myDiv");
+        div.rightClick();
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
+        assertEquals(expected, textArea.getText());
+    }
+
+    /**
+     * Test the mouse down, then mouse up.
+     *
+     * @throws Exception If the test fails
+     */
+    public void testMouse_Down_Up() throws Exception {
+        testMouse_Down_Up(BrowserVersion.INTERNET_EXPLORER_7_0, "mousedown-1-mouseup-1-");
+        testMouse_Down_Up(BrowserVersion.FIREFOX_2, "mousedown-1-mouseup-1-");
+    }
+
+    private void testMouse_Down_Up(final BrowserVersion browserVersion, final String expected)
+        throws Exception {
+        final String content = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function divMouseEvent(e) {\n"
+            + "    var textarea = document.getElementById('myTextarea');\n"
+            + "    if(document.all)\n"
+            + "      textarea.value += event.type + '-' + event.button + '-';\n"
+            + "    else\n"
+            + "      textarea.value += e.type + '-' + e.which + '-';\n"
+            + "  }\n"
+            + "  function loadFunction(e) {\n"
+            + "     document.getElementById('myDiv').onmousedown=divMouseEvent;\n"
+            + "     document.getElementById('myDiv').onmouseup  =divMouseEvent;\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='loadFunction()'>\n"
+            + "  <div id='myDiv'>Hello</div><br>\n"
+            + "  <textarea id='myTextarea'></textarea>\n"
+            + "</body></html>\n";
+        final HtmlPage page = loadPage(browserVersion, content, null);
+        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("myDiv");
+        div.mouseDown();
+        div.mouseUp();
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
+        assertEquals(expected, textArea.getText());
+
+    }
 }

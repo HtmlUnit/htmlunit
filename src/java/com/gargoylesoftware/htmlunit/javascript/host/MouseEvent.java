@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class MouseEvent extends Event {
     /** The click event type, triggered by "onclick" event handlers. */
@@ -72,7 +73,20 @@ public class MouseEvent extends Event {
     /** The mouse up event type, triggered by "onmouseup" event handlers. */
     public static final String TYPE_MOUSE_UP = "mouseup";
 
+    /** The code for left mouse button. */
+    public static final int BUTTON_LEFT = 0;
+    
+    /** The code for middle mouse button. */
+    public static final int BUTTON_MIDDLE = 1;
+    
+    /** The code for right mouse button. */
+    public static final int BUTTON_RIGHT = 2;
+    
+    // the button code for IE (1: left button, 4: middle button, 2: right button)
+    private static final int[] buttonCodeToIE = {1, 4, 2};
+
     private final int screenX_, screenY_;
+    private int button_; // the button code according to W3C (0: left button, 1: middle button, 2: right button)
 
     /**
      * Used to build the prototype
@@ -89,15 +103,21 @@ public class MouseEvent extends Event {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link #BUTTON_LEFT}, {@link #BUTTON_MIDDLE} or {@link #BUTTON_RIGHT}
      */
     public MouseEvent(final DomNode domNode, final String type,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
         super(domNode, type, shiftKey, ctrlKey, altKey);
+
+        if (button != BUTTON_LEFT && button != BUTTON_MIDDLE && button != BUTTON_RIGHT) {
+            throw new IllegalArgumentException("Invalid button code: " + button);
+        }
 
         // compute coordinates from the node
         final HTMLElement target = (HTMLElement) jsxGet_target();
         screenX_ = target.getPosX() + 10;
         screenY_ = target.getPosY() + 10;
+        button_ = button;
     }
     
     /**
@@ -160,5 +180,26 @@ public class MouseEvent extends Event {
             return (MouseEvent) event;
         }
         return null;
+    }
+
+    /**
+     * Gets the button code
+     * @return the button code
+     */
+    public int jsxGet_button() {
+        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            return buttonCodeToIE[button_];
+        }
+
+        return button_;
+    }
+
+    /**
+     * Special for FF (old stuff from Netscape time)
+     * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
+     * @return the button code
+     */
+    public int jsxGet_which() {
+        return button_ + 1;
     }
 }

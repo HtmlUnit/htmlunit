@@ -114,7 +114,8 @@ public abstract class ClickableElement extends StyledElement {
             doClickAction(page);
             stateUpdated = true;
         }
-        final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey);
+        final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
+                MouseEvent.BUTTON_LEFT);
         final ScriptResult scriptResult = fireEvent(event);
         final Page currentPage;
         if (scriptResult == null) {
@@ -171,7 +172,8 @@ public abstract class ClickableElement extends StyledElement {
             return clickPage;
         }
 
-        final Event event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey);
+        final Event event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
+                MouseEvent.BUTTON_LEFT);
         final ScriptResult scriptResult = fireEvent(event);
         if (scriptResult == null) {
             return clickPage;

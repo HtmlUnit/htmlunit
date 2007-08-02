@@ -972,7 +972,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseOver() {
-        return mouseOver(false, false, false);
+        return mouseOver(false, false, false, MouseEvent.BUTTON_LEFT);
     }
     
     /**
@@ -981,12 +981,14 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
+     *        or {@link MouseEvent#BUTTON_RIGHT}
      *
      * @return The page that occupies this window after the mouse moves over this element.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(MouseEvent.TYPE_MOUSE_OVER, shiftKey, ctrlKey, altKey);
+    public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_OVER, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
@@ -996,7 +998,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseMove() {
-        return mouseMove(false, false, false);
+        return mouseMove(false, false, false, MouseEvent.BUTTON_LEFT);
     }
     
     /**
@@ -1005,12 +1007,14 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
+     *        or {@link MouseEvent#BUTTON_RIGHT}
      *
      * @return The page that occupies this window after the mouse moves inside this element.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page mouseMove(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(MouseEvent.TYPE_MOUSE_MOVE, shiftKey, ctrlKey, altKey);
+    public Page mouseMove(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_MOVE, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
@@ -1020,7 +1024,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseOut() {
-        return mouseOut(false, false, false);
+        return mouseOut(false, false, false, MouseEvent.BUTTON_LEFT);
     }
     
     /**
@@ -1029,12 +1033,14 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
+     *        or {@link MouseEvent#BUTTON_RIGHT}
      *
      * @return The page that occupies this window after the mouse moves out of this element.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page mouseOut(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(MouseEvent.TYPE_MOUSE_OUT, shiftKey, ctrlKey, altKey);
+    public Page mouseOut(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_OUT, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
@@ -1044,7 +1050,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseDown() {
-        return mouseDown(false, false, false);
+        return mouseDown(false, false, false, MouseEvent.BUTTON_LEFT);
     }
     
     /**
@@ -1053,12 +1059,14 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
+     *        or {@link MouseEvent#BUTTON_RIGHT}
      *
      * @return The page that occupies this window after the mouse is clicked in this element.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(MouseEvent.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey);
+    public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
@@ -1068,7 +1076,7 @@ public abstract class HtmlElement extends DomNode {
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page mouseUp() {
-        return mouseUp(false, false, false);
+        return mouseUp(false, false, false, MouseEvent.BUTTON_LEFT);
     }
     
     /**
@@ -1077,12 +1085,14 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
+     *        or {@link MouseEvent#BUTTON_RIGHT}
      *
      * @return The page that occupies this window after the mouse click is released in this element.
      * It may be the same window or it may be a freshly loaded one.
      */
-    public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        return doMouseEvent(MouseEvent.TYPE_MOUSE_UP, shiftKey, ctrlKey, altKey);
+    public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        return doMouseEvent(MouseEvent.TYPE_MOUSE_UP, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
@@ -1091,12 +1101,14 @@ public abstract class HtmlElement extends DomNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
+     *        or {@link MouseEvent#BUTTON_RIGHT}
      *
      * @return The page that occupies this window after the mouse event occur on this element.
      * It may be the same window or it may be a freshly loaded one.
      */
     private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
-        final boolean altKey) {
+        final boolean altKey, final int button) {
         if (this instanceof DisabledElement) {
             if (((DisabledElement) this).isDisabled()) {
                 return getPage();
@@ -1104,7 +1116,7 @@ public abstract class HtmlElement extends DomNode {
         }
 
         final HtmlPage page = getPage();
-        final Event event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey);
+        final Event event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
         final ScriptResult scriptResult = fireEvent(event);
         final Page currentPage;
         if (scriptResult == null) {
@@ -1116,4 +1128,35 @@ public abstract class HtmlElement extends DomNode {
         return currentPage;
     }
 
+    /**
+     * Simulate right clicking the mouse in this element.
+     *
+     * @return The page that occupies this window after the mouse is right clicked in this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page rightClick() {
+        return rightClick(false, false, false);
+    }
+
+    /**
+     * Simulate right clicking the mouse in this element.
+     *
+     * <p>This is equivalent to calling {@link #mouseDown(boolean, boolean, boolean, int)},
+     * then {@link #mouseUp(boolean, boolean, boolean, int)}
+     *
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     *
+     * @return The page that occupies this window after the mouse is right clicked in this element.
+     * It may be the same window or it may be a freshly loaded one.
+     */
+    public Page rightClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        final Page mouseDownPage = mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
+        if (mouseDownPage != getPage()) {
+            getLog().warn("rightClick() is ignored, as mouseDown() loaded a different page.");
+            return mouseDownPage;
+        }
+        return mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
+    }
 }
