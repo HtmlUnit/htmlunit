@@ -76,7 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Rodney Gitzel
  */
 public abstract class DomNode implements Cloneable, Serializable {
-    
+
     /** Node type constant for the <code>Document</code> node. */
     public static final short DOCUMENT_NODE = 9;
 
@@ -897,9 +897,8 @@ public abstract class DomNode implements Cloneable, Serializable {
             return nextElement();
         }
 
-        /** remove the current object.
-         @throw UnsupportedOperationException always*/
-        public void remove() {
+        /** @throws UnsupportedOperationException always */
+        public void remove() throws UnsupportedOperationException {
             throw new UnsupportedOperationException();
         }
 

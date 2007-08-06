@@ -52,6 +52,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @author Ahmed Ashour
  */
 public class MouseEvent extends Event {
+
+    private static final long serialVersionUID = 1990705559211878370L;
+
     /** The click event type, triggered by "onclick" event handlers. */
     public static final String TYPE_CLICK = "click";
 
@@ -63,7 +66,7 @@ public class MouseEvent extends Event {
 
     /** The mouse move event type, triggered by "onmousemove" event handlers. */
     public static final String TYPE_MOUSE_MOVE = "mousemove";
-    
+
     /** The mouse out event type, triggered by "onmouseout" event handlers. */
     public static final String TYPE_MOUSE_OUT = "mouseout";
 
@@ -75,21 +78,24 @@ public class MouseEvent extends Event {
 
     /** The code for left mouse button. */
     public static final int BUTTON_LEFT = 0;
-    
+
     /** The code for middle mouse button. */
     public static final int BUTTON_MIDDLE = 1;
-    
+
     /** The code for right mouse button. */
     public static final int BUTTON_RIGHT = 2;
-    
-    // the button code for IE (1: left button, 4: middle button, 2: right button)
+
+    /** The button code for IE (1: left button, 4: middle button, 2: right button). */
     private static final int[] buttonCodeToIE = {1, 4, 2};
 
+    /** The mouse event's horizontal and vertical coordinates. */
     private final int screenX_, screenY_;
-    private int button_; // the button code according to W3C (0: left button, 1: middle button, 2: right button)
+
+    /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
+    private int button_;
 
     /**
-     * Used to build the prototype
+     * Used to build the prototype.
      */
     public MouseEvent() {
         screenX_ = 0;
@@ -122,7 +128,7 @@ public class MouseEvent extends Event {
     
     /**
      * The horizontal coordinate at which the event occurred relative to the DOM implementation's client area.
-     * @return the horizontal coordinate (currently the same than {@link #jsxGet_screenX()).
+     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
      */
     public int jsxGet_clientX() {
         return screenX_;
@@ -138,7 +144,7 @@ public class MouseEvent extends Event {
 
     /**
      * Returns the horizontal coordinate of the event relative to whole document..
-     * @return the horizontal coordinate (currently the same than {@link #jsxGet_screenX()).
+     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageX">Mozilla doc</a>
      */
     public int jsxGet_pageX() {
@@ -147,7 +153,7 @@ public class MouseEvent extends Event {
 
     /**
      * The vertical coordinate at which the event occurred relative to the DOM implementation's client area.
-     * @return the horizontal coordinate (currently the same than {@link #jsxGet_screenY()).
+     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenY()})
      */
     public int jsxGet_clientY() {
         return screenY_;
@@ -163,7 +169,7 @@ public class MouseEvent extends Event {
 
     /**
      * Returns the vertical coordinate of the event relative to the whole document.
-     * @return the horizontal coordinate (currently the same than {@link #jsxGet_screenY()).
+     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenY()})
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageY">Mozilla doc</a>
      */
     public int jsxGet_pageY() {
@@ -171,7 +177,7 @@ public class MouseEvent extends Event {
     }
 
     /**
-     * Gets the mouse event currently firing
+     * Gets the mouse event currently firing.
      * @return <code>null</code> if no mouse event is being processed
      */
     static MouseEvent getCurrentMouseEvent() {
@@ -183,7 +189,7 @@ public class MouseEvent extends Event {
     }
 
     /**
-     * Gets the button code
+     * Gets the button code.
      * @return the button code
      */
     public int jsxGet_button() {
@@ -195,11 +201,12 @@ public class MouseEvent extends Event {
     }
 
     /**
-     * Special for FF (old stuff from Netscape time)
+     * Special for FF (old stuff from Netscape time).
      * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
      * @return the button code
      */
     public int jsxGet_which() {
         return button_ + 1;
     }
+
 }

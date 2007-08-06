@@ -911,11 +911,11 @@ public final class Document extends NodeImpl {
     /**
      * Returns the ready state of the document. This is an IE-only property.
      * @return The ready state of the document.
-     * @see {@link DomNode#STATE_UNINITIALIZED}
-     * @see {@link DomNode#STATE_LOADING}
-     * @see {@link DomNode#STATE_LOADED}
-     * @see {@link DomNode#STATE_INTERACTIVE}
-     * @see {@link DomNode#STATE_COMPLETE}
+     * @see DomNode#STATE_UNINITIALIZED
+     * @see DomNode#STATE_LOADING
+     * @see DomNode#STATE_LOADED
+     * @see DomNode#STATE_INTERACTIVE
+     * @see DomNode#STATE_COMPLETE
      */
     public String jsxGet_readyState() {
         final DomNode node = getDomNodeOrDie();

@@ -935,7 +935,7 @@ public abstract class HtmlElement extends DomNode {
     }
 
     /**
-     * Shortcut for {@link #fireEvent(Event)].
+     * Shortcut for {@link #fireEvent(Event)}.
      * @param eventType the event type (like "load", "click")
      * @return the execution result. <code>null</code> if nothing is executed.
      */
