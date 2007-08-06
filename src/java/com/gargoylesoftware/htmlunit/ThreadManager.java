@@ -38,12 +38,11 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,12 +56,15 @@ import org.apache.commons.logging.LogFactory;
  * @version $Revision$
  * @author Brad Clarke
  * @author Marc Guillemot
- *
+ * @author Daniel Gredler
  */
 public class ThreadManager {
 
-    private Map threadMap_ = Collections.synchronizedMap(new HashMap());
+    /** Logging support. */
     private static final Log LOG = LogFactory.getLog(ThreadManager.class);
+
+    /** Map of threads, keyed on thread ID. Use a tree map for deterministic iteration. */
+    private Map threadMap_ = Collections.synchronizedMap(new TreeMap());
 
     /**
      * @return The number of tracked threads.
@@ -89,8 +91,8 @@ public class ThreadManager {
             .getPriority() + 1);
 
     /**
-     * Gets the next thread id in a thread safe way
-     * @return the next id
+     * Gets the next thread ID in a threadsafe way.
+     * @return the next ID
      */
     private synchronized int getNextThreadId() {
         return nextThreadID_++;
@@ -156,30 +158,38 @@ public class ThreadManager {
      * @return true if all threads expired in the specified time
      */
     public boolean joinAll(long maxWaitMillis) {
-        while (maxWaitMillis > 0 && !threadMap_.isEmpty()) {
-
-            Iterator iter = threadMap_.values().iterator();
-            while (maxWaitMillis > 0 && iter.hasNext()) {
-                final Thread thread;
-                try {
-                    thread = (Thread) iter.next();
-                }
-                catch (final ConcurrentModificationException e) {
-                    iter = threadMap_.values().iterator();
-                    continue;
-                }
-                final long before = System.currentTimeMillis();
-                try {
-                    LOG.debug("Trying to join: " + thread);
-                    thread.join(maxWaitMillis);
-                }
-                catch (final InterruptedException e) {
-                    throw new RuntimeException("Thread " + thread + " interrupted", e);
-                }
-                maxWaitMillis = maxWaitMillis - (System.currentTimeMillis() - before);
+        for (Thread t = getNextThread(); t != null && maxWaitMillis > 0; t = getNextThread()) {
+            final long before = System.currentTimeMillis();
+            try {
+                LOG.debug("Trying to join: " + t);
+                t.join(maxWaitMillis);
             }
+            catch (final InterruptedException e) {
+                throw new RuntimeException("Thread " + t + " interrupted.", e);
+            }
+            maxWaitMillis = maxWaitMillis - (System.currentTimeMillis() - before);
         }
         return threadMap_.size() == 0;
+    }
+
+    /**
+     * Gets the next thread in the thread map in a threadsafe way. This method returns <tt>null</tt>
+     * if there are no more threads in the thread map.
+     *
+     * @return the next thread in the thread map
+     */
+    private Thread getNextThread() {
+        final Thread thread;
+        synchronized (threadMap_) {
+            final Iterator i = threadMap_.values().iterator();
+            if (i.hasNext()) {
+                thread = (Thread) i.next();
+            }
+            else {
+                thread = null;
+            }
+        }
+        return thread;
     }
 
     /**
@@ -187,17 +197,20 @@ public class ThreadManager {
      * Attempts to stop running threads.
      */
     public void interruptAll() {
-        final Set keys = new HashSet(threadMap_.keySet());
-        for (final Iterator iter = keys.iterator(); iter.hasNext();) {
-            stopThread(((Integer) iter.next()).intValue());
+        synchronized (threadMap_) {
+            final Set keys = new HashSet(threadMap_.keySet());
+            for (final Iterator i = keys.iterator(); i.hasNext();) {
+                final Integer id = (Integer) i.next();
+                stopThread(id.intValue());
+            }
         }
     }
 
     /**
-     * Gives a basic representation for debug purposes.
      * {@inheritDoc}
      */
     public String toString() {
         return "ThreadManager: " + threadMap_;
     }
+
 }
