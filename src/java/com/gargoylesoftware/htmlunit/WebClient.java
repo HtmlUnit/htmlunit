@@ -1254,12 +1254,15 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * A simple WebResponse created from a byte array.  Content is assumed to be
+     * A simple WebResponse created from a byte array. Content is assumed to be
      * of some binary type.
      *
      * @author Paul King
      */
     private static final class BinaryWebResponse extends WebResponseImpl {
+
+        private static final long serialVersionUID = 8000117717229261957L;
+
         private final byte[] data_;
 
         private static WebResponseData getWebResponseData(final byte[] data, final String contentType) {
