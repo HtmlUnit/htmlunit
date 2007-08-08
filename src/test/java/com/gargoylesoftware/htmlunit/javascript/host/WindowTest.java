@@ -877,6 +877,7 @@ public class WindowTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        page.getEnclosingWindow().getThreadManager().joinAll(2000);
         assertEquals("Second", page.getTitleText());
         assertEquals("no thread should be running", 0, page.getEnclosingWindow().getThreadManager().activeCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
