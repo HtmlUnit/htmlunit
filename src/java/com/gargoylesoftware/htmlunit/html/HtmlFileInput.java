@@ -106,16 +106,21 @@ public class HtmlFileInput extends HtmlInput {
             return new KeyValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
         }
         
-        //to tolerate file://
-        if (value.startsWith("file://") && !value.startsWith("file:///")) {
-            value = "file:///" + value.substring(7);
+        File file = null;
+        // to tolerate file://
+        if (value.startsWith("file:/")) {
+            if (value.startsWith("file://") && !value.startsWith("file:///")) {
+                value = "file:///" + value.substring(7);
+            }
+            try {
+                file = new File(new URI(value));
+            }
+            catch (final URISyntaxException e) {
+                // nothing here
+            }
         }
         
-        File file;
-        try {
-            file = new File(new URI(value));
-        }
-        catch (final URISyntaxException e) {
+        if (file == null) {
             file = new File(value);
         }
 

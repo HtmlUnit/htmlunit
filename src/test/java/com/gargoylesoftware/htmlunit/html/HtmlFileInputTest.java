@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
+import java.net.URI;
+
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -63,7 +66,9 @@ public class HtmlFileInputTest extends WebTestCase {
     public void testFileInput() throws Exception {
         String path = getClass().getResource("../testfiles/" + "tiny-png.img").toExternalForm();
         testFileInput(path);
-        
+        final File file = new File(new URI(path));
+        testFileInput(file.getCanonicalPath());
+
         if (path.startsWith("file:")) {
             path = path.substring("file:".length());
         }
@@ -101,6 +106,7 @@ public class HtmlFileInputTest extends WebTestCase {
         fileInput.setValueAttribute(fileURL);
         f.submit();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+        assertNotNull(pair.getFile());
         assertTrue(pair.getFile().length() != 0);
     }
 
