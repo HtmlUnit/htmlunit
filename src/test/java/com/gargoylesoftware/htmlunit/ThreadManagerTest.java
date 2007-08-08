@@ -187,6 +187,7 @@ public class ThreadManagerTest extends WebTestCase {
         assertEquals("new page should load", "Third", newPage.getTitleText());
         assertEquals("frame should be gone", 0, newPage.getFrames().size());
         // this thread manager really is not accessible anymore, but this is a unit test
+        innerThreadManager.joinAll(1000);
         assertEquals("thread should stop", 0, innerThreadManager.activeCount());
     }
 }
