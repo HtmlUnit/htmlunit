@@ -230,7 +230,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         String type = getAttributeValue("type");
         if (type == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
-            if (browser.getApplicationName().equals(BrowserVersion.INTERNET_EXPLORER)) {
+            if (browser.isIE()) {
                 type = "button";
             }
             else {
