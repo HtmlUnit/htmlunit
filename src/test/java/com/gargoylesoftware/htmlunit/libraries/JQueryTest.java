@@ -38,16 +38,18 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlListItem;
+import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 
 /**
  * Tests for compatibility with the <a href="http://jquery.com/">jQuery JavaScript library</a>.
@@ -67,39 +69,136 @@ public class JQueryTest extends WebTestCase {
     }
 
     /**
-     * Runs the jQuery unit tests while simulating IE6. Note that the number of failing unit tests,
-     * as well as the total number of unit tests run, vary according to the browser being used to
-     * run the tests.
-     *
      * @throws Exception If an error occurs.
      */
-    public void testJQueryWithIE6() throws Exception {
+    public void testJQueryWithIE7() throws Exception {
 
-        if (notYetImplemented()) {
-            return;
-        }
+        final Iterator i = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0);
+
+        ok(i, "core module: Basic requirements", 0, 7);
+        ok(i, "core module: $()", 0, 1);
+        ok(i, "core module: length", 0, 1);
+        ok(i, "core module: size()", 0, 1);
+        ok(i, "core module: get()", 0, 1);
+        ok(i, "core module: get(Number)", 0, 1);
+        ok(i, "core module: add(String|Element|Array)", 0, 7);
+        ok(i, "core module: each(Function)", 0, 1);
+        ok(i, "core module: index(Object)", 0, 8);
+        i.next(); // ok(i, "core module: attr(String)", 2, 13); // TODO: all 15 pass!
+        ok(i, "core module: attr(String, Function)", 0, 2);
+        ok(i, "core module: attr(Hash)", 0, 1);
+        ok(i, "core module: attr(String, Object)", 0, 7);
+        ok(i, "core module: css(String|Hash)", 0, 8);
+        ok(i, "core module: css(String, Object)", 0, 7);
+        ok(i, "core module: text()", 0, 1);
+        ok(i, "core module: wrap(String|Element)", 0, 4);
+        ok(i, "core module: append(String|Element|Array<Element>|jQuery)", 0, 10);
+        ok(i, "core module: appendTo(String|Element|Array<Element>|jQuery)", 0, 5);
+        ok(i, "core module: prepend(String|Element|Array<Element>|jQuery)", 0, 5);
+        ok(i, "core module: prependTo(String|Element|Array<Element>|jQuery)", 0, 5);
+        ok(i, "core module: before(String|Element|Array<Element>|jQuery)", 0, 4);
+        ok(i, "core module: insertBefore(String|Element|Array<Element>|jQuery)", 0, 4);
+        ok(i, "core module: after(String|Element|Array<Element>|jQuery)", 0, 4);
+        ok(i, "core module: insertAfter(String|Element|Array<Element>|jQuery)", 0, 4);
+        ok(i, "core module: end()", 0, 3);
+        ok(i, "core module: find(String)", 0, 1);
+        ok(i, "core module: clone()", 0, 3);
+        ok(i, "core module: is(String)", 2, 24);
+        ok(i, "core module: $.extend(Object, Object)", 0, 2);
+        ok(i, "core module: $.extend(Object, Object, Object, Object)", 0, 4);
+        ok(i, "core module: val()", 0, 2);
+        ok(i, "core module: val(String)", 0, 2);
+        ok(i, "core module: html(String)", 0, 1);
+        ok(i, "core module: filter()", 0, 4);
+        ok(i, "core module: not()", 0, 3);
+        ok(i, "core module: siblings([String])", 0, 4);
+        ok(i, "core module: children([String])", 0, 3);
+        ok(i, "core module: parent[s]([String])", 0, 8);
+        ok(i, "core module: next/prev([String])", 0, 8);
+        ok(i, "core module: show()", 0, 1);
+        ok(i, "core module: addClass(String)", 0, 1);
+        ok(i, "core module: removeClass(String) - simple", 0, 1);
+        ok(i, "core module: removeClass(String) - add three classes and remove again", 0, 1);
+        ok(i, "core module: toggleClass(String)", 0, 3);
+        ok(i, "core module: removeAttr(String", 0, 1);
+        ok(i, "core module: text(String)", 0, 1);
+        ok(i, "core module: $.each(Object,Function)", 0, 8);
+        ok(i, "core module: $.prop", 0, 2);
+        ok(i, "core module: $.className", 0, 6);
+        ok(i, "core module: remove()", 0, 4);
+        ok(i, "core module: empty()", 0, 2);
+        ok(i, "core module: eq(), gt(), lt(), contains()", 0, 4);
+        ok(i, "core module: click() context", 0, 2);
+
+        ok(i, "selector module: expressions - element", 0, 6);
+        ok(i, "selector module: expressions - id", 1, 12);
+        ok(i, "selector module: expressions - class", 0, 4);
+        ok(i, "selector module: expressions - multiple", 0, 4);
+        ok(i, "selector module: expressions - child and adjacent", 0, 14);
+        ok(i, "selector module: expressions - attributes", 0, 19);
+        ok(i, "selector module: expressions - pseudo (:) selctors", 0, 30);
+        ok(i, "selector module: expressions - basic xpath", 1, 14);
+
+        ok(i, "event module: toggle(Function, Function) - add toggle event and fake a few clicks", 3, 0);
+        ok(i, "event module: unbind(event)", 0, 4);
+        ok(i, "event module: trigger(event, [data]", 0, 3);
+        ok(i, "event module: bind() with data", 0, 2);
+        ok(i, "event module: bind() with data and trigger() with data", 0, 4);
+
+        ok(i, "fx module: animate(Hash, Object, Function) - assert that animate doesn't modify its arguments", 0, 1);
+        ok(i, "fx module: toggle()", 0, 3);
+    }
+
+    /**
+     * Loads the jQuery unit test index page using the specified browser version, allows its
+     * JavaScript to run to completion, and returns a list item iterator containing the test
+     * results.
+     *
+     * @param version the browser version to use
+     * @return a list item iterator containing the test results
+     * @throws Exception if an error occurs
+     */
+    private Iterator loadPage(final BrowserVersion version) throws Exception {
 
         final URL url = getClass().getClassLoader().getResource("jquery/1.1.2/test/index.html");
         assertNotNull(url);
 
-        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final WebClient client = new WebClient(version);
+        final List alerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
+
         final HtmlPage page = (HtmlPage) client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(60000);
+        page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
+        Thread.sleep(35000); // TODO: remove this! joinAll() should take care of it!
 
         final HtmlElement doc = page.getDocumentElement();
-        final HtmlParagraph p = (HtmlParagraph) doc.getHtmlElementsByAttribute("p", "class", "result").get(0);
-        final String status1 = p.getFirstChild().asText();
-        final String status2 = p.getFirstChild().getNextSibling().getNextSibling().asText();
-        getLog().info("Ran the jQuery unit tests. " + status1 + " " + status2);
+        final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
+        final Iterator i = tests.getChildElementsIterator();
 
-        final List failedGroups = doc.getHtmlElementsByAttribute("li", "class", "fail");
-        for (final Iterator i = failedGroups.iterator(); i.hasNext();) {
-            final DomNode group = (DomNode) i.next();
-            getLog().info("jQuery failure: " + group.asText());
+        return i;
+    }
+
+    /**
+     * Verifies that the next test group result list item has the specified name, the specified
+     * number of failed tests and the specified number of passed tests.
+     *
+     * @param i the iterator whose next element is the list item to be checked
+     * @param name the expected test group name
+     * @param failed the expected number of failed unit tests
+     * @param passed the expected number of passed unit tests
+     * @throws Exception if an error occurs
+     */
+    private void ok(final Iterator i, final String name, final int failed, final int passed) throws Exception {
+
+        final HtmlListItem li = (HtmlListItem) i.next();
+        final String n = li.getByXPath("b/text()").get(0).toString().trim();
+        assertEquals(name, n);
+
+        final int f = Integer.parseInt(li.getByXPath("b/b/b[@class='fail']/text()").get(0).toString());
+        final int p = Integer.parseInt(li.getByXPath("b/b/b[@class='pass']/text()").get(0).toString());
+        if (f != failed || p != passed) {
+            fail("Expected " + passed + " passed and " + failed + " failed for test: " + li.asText());
         }
-
-        assertTrue(status1.startsWith("Tests completed"));
-        assertEquals("9 tests of 350 failed.", status2);
     }
 
 }
