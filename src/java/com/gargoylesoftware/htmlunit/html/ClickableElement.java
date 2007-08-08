@@ -168,7 +168,7 @@ public abstract class ClickableElement extends StyledElement {
         //call click event first
         final Page clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
-            getLog().warn("dblClick() is ignored, as click() loaded a different page.");
+            getLog().debug("dblClick() is ignored, as click() loaded a different page.");
             return clickPage;
         }
 
