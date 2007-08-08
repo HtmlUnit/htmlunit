@@ -1342,6 +1342,22 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
+     * Set the oncontextmenu event handler for this element.
+     * @param handler the new handler
+     */
+    public void jsxSet_oncontextmenu(final Object handler) {
+        setEventHandlerProp("oncontextmenu", handler);
+    }
+
+    /**
+     * Get the oncontextmenu event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Object jsxGet_oncontextmenu() {
+        return getEventHandlerProp("oncontextmenu");
+    }
+
+    /**
      * Set the onresize event handler for this element.
      * @param handler the new handler
      */

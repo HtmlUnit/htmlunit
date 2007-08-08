@@ -506,8 +506,8 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testRightClick() throws Exception {
-        testRightClick(BrowserVersion.INTERNET_EXPLORER_7_0, "mousedown-2-mouseup-2-");
-        testRightClick(BrowserVersion.FIREFOX_2, "mousedown-3-mouseup-3-");
+        testRightClick(BrowserVersion.INTERNET_EXPLORER_7_0, "mousedown-2-mouseup-2-contextmenu-0-");
+        testRightClick(BrowserVersion.FIREFOX_2, "mousedown-3-mouseup-3-contextmenu-3-");
     }
 
     private void testRightClick(final BrowserVersion browserVersion, final String expected)
@@ -523,8 +523,9 @@ public class HtmlElementTest extends WebTestCase {
             + "      textarea.value += e.type + '-' + e.which + '-';\n"
             + "  }\n"
             + "  function loadFunction(e) {\n"
-            + "     document.getElementById('myDiv').onmousedown=divMouseEvent;\n"
-            + "     document.getElementById('myDiv').onmouseup  =divMouseEvent;\n"
+            + "     document.getElementById('myDiv').onmousedown   = divMouseEvent;\n"
+            + "     document.getElementById('myDiv').onmouseup     = divMouseEvent;\n"
+            + "     document.getElementById('myDiv').oncontextmenu = divMouseEvent;\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

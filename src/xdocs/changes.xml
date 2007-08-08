@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                Add support for oncontextmenu event type.
+            </action>
             <action type="update" dev="sdanig">
                 Fix element.innerHTML, element.innerText, element.outerHTML: uppercase tag names when
                 emulating IE; don't quote attributes when they don't contain whitespace and we're

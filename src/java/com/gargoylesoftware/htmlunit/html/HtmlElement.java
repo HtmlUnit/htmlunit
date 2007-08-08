@@ -1154,9 +1154,14 @@ public abstract class HtmlElement extends DomNode {
     public Page rightClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final Page mouseDownPage = mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseDownPage != getPage()) {
-            getLog().warn("rightClick() is ignored, as mouseDown() loaded a different page.");
+            getLog().warn("rightClick() is incomplete, as mouseDown() loaded a different page.");
             return mouseDownPage;
         }
-        return mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
+        final Page mouseUpPage = mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
+        if (mouseUpPage != getPage()) {
+            getLog().warn("rightClick() is incomplete, as mouseUp() loaded a different page.");
+            return mouseUpPage;
+        }
+        return doMouseEvent(MouseEvent.TYPE_CONTEXT_MENU, shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
     }
 }

@@ -424,6 +424,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>
         </property>
+        <property name="oncontextmenu" readable="true" writable="true"/>
         <property name="onresize" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Netscape" min-version="3"/>

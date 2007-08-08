@@ -76,6 +76,9 @@ public class MouseEvent extends Event {
     /** The mouse up event type, triggered by "onmouseup" event handlers. */
     public static final String TYPE_MOUSE_UP = "mouseup";
 
+    /** The context menu event type, triggered by "oncontextmenu" event handlers. */
+    public static final String TYPE_CONTEXT_MENU = "contextmenu";
+
     /** The code for left mouse button. */
     public static final int BUTTON_LEFT = 0;
 
@@ -194,6 +197,10 @@ public class MouseEvent extends Event {
      */
     public int jsxGet_button() {
         if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            //In IE7: oncontextmenu event.button is 0
+            if (jsxGet_type().equals(TYPE_CONTEXT_MENU)) {
+                return 0;
+            }
             return buttonCodeToIE[button_];
         }
 
