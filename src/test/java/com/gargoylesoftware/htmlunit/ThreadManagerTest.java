@@ -106,6 +106,7 @@ public class ThreadManagerTest extends WebTestCase {
         assertEquals(1, threadManager.activeCount());
         final HtmlAnchor a = (HtmlAnchor) page.getHtmlElementById("clickme");
         a.click();
+        threadManager.joinAll(10000);
         assertEquals(0, threadManager.activeCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         assertMaxTestRunTime(10000);
