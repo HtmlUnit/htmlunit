@@ -169,7 +169,6 @@ public class JQueryTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
-        Thread.sleep(60 * 1000); // TODO: remove this! joinAll() should take care of it!
 
         final HtmlElement doc = page.getDocumentElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
