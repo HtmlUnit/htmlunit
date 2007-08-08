@@ -911,7 +911,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Verifies that calling clearTimeout() on a callback which has already fired
-     * does not affect said callback. 
+     * does not affect said callback.
      * @throws Exception If the test fails
      */
     public void testClearTimeout_DoesNotStopExecutingCallback() throws Exception {
