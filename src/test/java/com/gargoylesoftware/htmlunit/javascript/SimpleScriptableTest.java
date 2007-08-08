@@ -144,6 +144,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("JavaScriptBackgroundJob");
         names.remove("Popup");
         names.remove("EventListenersContainer");
+        names.remove("DOMImplementation");
 
         final Transformer class2ShortName = new Transformer() {
             public Object transform(final Object obj) {
@@ -177,7 +178,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
     /**
      * This test fails on IE and FF but not by HtmlUnit because according to Ecma standard,
-     * attemps to set read only properties should be silently ignored.
+     * attempts to set read only properties should be silently ignored.
      * Furthermore document.body = document.body will work on FF but not on IE
      * @throws Exception if the test fails
      */

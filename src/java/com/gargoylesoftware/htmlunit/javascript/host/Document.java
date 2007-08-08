@@ -112,6 +112,7 @@ public final class Document extends NodeImpl {
     private Window window_;
 
     private final FunctionContextWrapper functionContext_;
+    private DOMImplementation implementation_;
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
@@ -1021,5 +1022,18 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_frames() {
         return getWindow().jsxGet_frames();
+    }
+    
+    /**
+     * Returns the implementation object of the current document.
+     * @return implementation-specific object.
+     */
+    public DOMImplementation jsxGet_implementation() {
+        if (implementation_ == null) {
+            implementation_ = new DOMImplementation();
+            implementation_.setParentScope(getParentScope());
+            implementation_.setPrototype(getPrototype(implementation_.getClass()));
+        }
+        return implementation_;
     }
 }
