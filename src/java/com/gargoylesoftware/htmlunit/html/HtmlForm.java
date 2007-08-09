@@ -88,6 +88,9 @@ public class HtmlForm extends ClickableElement {
     private static final Collection SUBMITTABLE_ELEMENT_NAMES =
         Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
 
+    /**
+     * @deprecated
+     */
     private KeyValuePair fakeSelectedRadioButton_;
 
     /**
@@ -273,7 +276,7 @@ public class HtmlForm extends ClickableElement {
      * Reset this form to its initial values.
      * @return The page that is loaded at the end of calling this method.  Typically this
      * will be the same page that had been loaded previously but since javascript might
-     * have run, this isn't guarenteed.
+     * have run, this isn't guaranteed.
      */
     public Page reset() {
         final HtmlPage htmlPage = getPage();
@@ -636,7 +639,9 @@ public class HtmlForm extends ClickableElement {
      * @param value The value to match
      * @exception ElementNotFoundException If a particular xml element could
      *      not be found in the dom model
+     * @deprecated after 1.11
      */
+    // it can be made package private if needed for testing.
     public final void fakeCheckedRadioButton(
             final String name,
             final String value)
@@ -646,6 +651,9 @@ public class HtmlForm extends ClickableElement {
         fakeSelectedRadioButton_ = new KeyValuePair(name, value);
     }
 
+    /**
+     * @deprecated
+     */
     private void adjustParameterListToAccountForFakeSelectedRadioButton(final List list) {
         final String fakeRadioButtonName = fakeSelectedRadioButton_.getKey();
 

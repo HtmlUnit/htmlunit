@@ -146,6 +146,7 @@ public class HtmlFormTest extends WebTestCase {
      *  Test setCheckedRadioButton() with a value that doesn't exist
      *
      * @exception Exception If the test fails
+     * @deprecated after 1.11
      */
     public void testSetSelectedRadioButton_ValueDoesNotExist_ForceSelection()
         throws Exception {

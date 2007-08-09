@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="asashour">
+                Deprecate HtmlForm.fakeCheckedRadioButton().
+            </action>
             <action type="update" dev="sdanig">
                 The method element.style.getPropertyValue('foo') should expect property names to be
                 delimiter-separated (ie 'font-size') rather than camel case (ie 'fontSize').
