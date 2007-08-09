@@ -451,6 +451,9 @@
         <property name="parentElement" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
+        <property name="runtimeStyle" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer" min-version="5"/>
+        </property>
         <property name="scrollHeight" readable="true" writable="false"/>
         <property name="scrollLeft" readable="true" writable="true"/>
         <property name="scrollTop" readable="true" writable="true"/>

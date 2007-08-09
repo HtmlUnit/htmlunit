@@ -1546,13 +1546,17 @@ public class HTMLElementTest extends WebTestCase {
             //expected
         }
     }
-    
+
     private void testCurrentStyle(final BrowserVersion browserVersion) throws Exception {
+        testIEStyle("currentStyle", browserVersion);
+    }
+    
+    private void testIEStyle(final String styleProperty, final BrowserVersion browserVersion) throws Exception {
         final String content = "<html>"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myDiv').currentStyle.color);\n"
+            + "    alert(document.getElementById('myDiv')." + styleProperty + ".color);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1564,5 +1568,23 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testRuntimeStyle() throws Exception {
+        testRuntimeStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
+        try {
+            testRuntimeStyle(BrowserVersion.FIREFOX_2);
+            fail("'runtimeStyle' is defined for only IE");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+
+    private void testRuntimeStyle(final BrowserVersion browserVersion) throws Exception {
+        testIEStyle("runtimeStyle", browserVersion);
     }
 }

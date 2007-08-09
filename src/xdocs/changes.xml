@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript: add basic support for element.runtimeStyle.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: add basic support for document.createStyleSheet (when emulating IE only). 
             </action>
