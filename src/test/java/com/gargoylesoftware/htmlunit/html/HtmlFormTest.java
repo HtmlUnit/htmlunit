@@ -58,7 +58,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 
 /**
  * Tests for {@link HtmlForm}.
@@ -191,7 +190,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         // Regression test: this used to blow up
-        ((HTMLFormElement) form.getScriptObject()).submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
+        form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
     }
 
     /**
@@ -859,8 +858,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlPage secondPage = (HtmlPage)
-            ((HTMLFormElement) page.getFormByName("form").getScriptObject()).submit(null);
+        final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
 
         assertNotNull(secondPage);
         assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
@@ -879,8 +877,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</select>"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlPage secondPage = (HtmlPage)
-            ((HTMLFormElement) page.getFormByName("form").getScriptObject()).submit(null);
+        final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
 
         assertNotNull(secondPage);
         assertEquals(page.getWebResponse().getUrl().toExternalForm() + "action.html?select=second+value",
@@ -1043,8 +1040,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent, null, url);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        final Page page2 = ((HTMLFormElement) form.getScriptObject()).submit(
-                (HtmlSubmitInput) page.getHtmlElementById("submitButton"));
+        final Page page2 = form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
 
         assertEquals(url.toExternalForm() + expectedUrlEnd,
                 page2.getWebResponse().getUrl());

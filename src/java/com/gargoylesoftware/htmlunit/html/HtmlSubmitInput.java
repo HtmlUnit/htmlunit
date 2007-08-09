@@ -37,16 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringEscapeUtils;
+
+import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  * Wrapper for the HTML element "input".
@@ -110,7 +109,7 @@ public class HtmlSubmitInput extends HtmlInput {
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
-            return ((HTMLFormElement) form.getScriptObject()).submit(this);
+            return form.submit(this);
         }
         else {
             return super.doClickAction(defaultPage);

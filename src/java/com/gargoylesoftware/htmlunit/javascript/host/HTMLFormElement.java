@@ -38,29 +38,15 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
 
-import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.util.EncodingUtil;
-import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.FormEncodingType;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
@@ -248,101 +234,9 @@ public class HTMLFormElement extends HTMLElement {
      * @throws IOException if an io error occurs
      */
     public void jsxFunction_submit() throws IOException {
-        submit(getHtmlForm(), null);
+        getHtmlForm().submit((SubmittableElement) null);
     }
     
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Submit this form to the appropriate server.  If submitElement is null then
-     * treat this as if it was called by javascript.  In this case, the onsubmit
-     * handler will not get executed.
-     *
-     * @param submitElement The element that caused the submit to occur
-     * @return A new Page that reflects the results of this submission
-     * @exception IOException If an IO error occurs
-     */
-    public Page submit(final SubmittableElement submitElement) throws IOException {
-        return submit(getHtmlForm(), submitElement);
-    }
-    
-    private Page submit(final HtmlForm form, final SubmittableElement submitElement) throws IOException {
-        final HtmlPage htmlPage = form.getPage();
-        if (htmlPage.getWebClient().isJavaScriptEnabled()) {
-            if (submitElement != null) {
-                final ScriptResult scriptResult = form.fireEvent(Event.TYPE_SUBMIT);
-                if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                    return scriptResult.getNewPage();
-                }
-            }
-
-            final String action = form.getActionAttribute();
-            if (TextUtil.startsWithIgnoreCase(action, "javascript:")) {
-                return htmlPage.executeJavaScriptIfPossible(action, "Form action", null).getNewPage();
-            }
-        }
-        else {
-            if (TextUtil.startsWithIgnoreCase(form.getActionAttribute(), "javascript:")) {
-                // The action is javascript but javascript isn't enabled.  Return
-                // the current page.
-                return htmlPage;
-            }
-        }
-
-        final List parameters = form.getParameterListForSubmit(submitElement);
-        final SubmitMethod method = SubmitMethod.getInstance(form.getAttributeValue("method"));
-
-        String actionUrl = form.getActionAttribute();
-        if (SubmitMethod.GET.equals(method)) {
-            final String anchor = StringUtils.substringAfter(actionUrl, "#");
-            actionUrl = StringUtils.substringBefore(actionUrl, "#");
-
-            final NameValuePair[] pairs = new NameValuePair[parameters.size()];
-            parameters.toArray(pairs);
-            final String queryFromFields = EncodingUtil.formUrlEncode(pairs, form.getPage().getPageEncoding());
-            // action may already contain some query parameters: they have to be removed
-            actionUrl = StringUtils.substringBefore(actionUrl, "?") + "?" + queryFromFields;
-            if (anchor.length() > 0) {
-                actionUrl += "#" + anchor;
-            }
-            parameters.clear(); // parameters have been added to query
-        }
-        final URL url;
-        try {
-            url = htmlPage.getFullyQualifiedUrl(actionUrl);
-        }
-        catch (final MalformedURLException e) {
-            throw new IllegalArgumentException("Not a valid url: " + actionUrl);
-        }
-
-        final WebRequestSettings settings = new WebRequestSettings(url, method);
-        settings.setRequestParameters(parameters);
-        settings.setEncodingType(FormEncodingType.getInstance(form.getEnctypeAttribute()));
-        settings.setCharset(getSubmitCharset(form));
-        settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getUrl().toExternalForm());
-
-        final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage(
-                webWindow,
-                htmlPage.getResolvedTarget(form.getTargetAttribute()),
-                settings);
-    }
-
-    /**
-     * Gets the charset to use for the form submission. This is the first one
-     * from the list provided in {@link #getAcceptCharsetAttribute()} if any
-     * or the page's charset else
-     * @return see above
-     */
-    private static String getSubmitCharset(final HtmlForm form) {
-        if (form.getAcceptCharsetAttribute().length() > 0) {
-            return form.getAcceptCharsetAttribute().trim().replaceAll("[ ,].*", "");
-        }
-        else {
-            return form.getPage().getPageEncoding();
-        }
-    }
-
     /**
      * Reset this form
      */

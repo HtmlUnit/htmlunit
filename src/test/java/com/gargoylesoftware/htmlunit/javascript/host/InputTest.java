@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 
 /**
  * Tests for Inputs and buttons.
@@ -320,7 +321,7 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
 
         final HtmlForm form = page.getFormByName("form1");
-        ((HTMLFormElement) form.getScriptObject()).submit(null);
+        form.submit((SubmittableElement) null);
     }
     
     /**
@@ -349,7 +350,7 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
 
         final HtmlForm form = page.getFormByName("form1");
-        ((HTMLFormElement) form.getScriptObject()).submit(null);
+        form.submit((SubmittableElement) null);
     }
 
     /**

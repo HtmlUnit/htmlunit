@@ -39,10 +39,10 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.FileInputStream;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
+import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -1365,7 +1365,7 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         for (int i = 0; i < 1000; i++) {
-            ((HTMLFormElement) page.getFormByName("myform").getScriptObject()).submit(null);
+            page.getFormByName("myform").submit((SubmittableElement) null);
         }
     }
 

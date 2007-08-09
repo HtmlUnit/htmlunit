@@ -45,7 +45,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 
 /**
  *  Tests for HtmlIsIndex
@@ -83,7 +82,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final HtmlIsIndex isInput = (HtmlIsIndex) form.getHtmlElementsByAttribute(
                 "isindex", "prompt", "enterSomeText").get(0);
         isInput.setValue("Flintstone");
-        final Page secondPage = ((HTMLFormElement) form.getScriptObject()).submit(null);
+        final Page secondPage = form.submit((SubmittableElement) null);
 
         final List expectedParameters = new ArrayList();
         expectedParameters.add(new KeyValuePair("enterSomeText", "Flintstone"));
