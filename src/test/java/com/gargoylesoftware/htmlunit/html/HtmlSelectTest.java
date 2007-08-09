@@ -74,7 +74,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1'>"
             + "<option value='option1'>Option1</option>"
@@ -109,7 +108,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_MultipleSelectNoneSelected() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1' multiple>"
             + "<option value='option1'>Option1</option>"
@@ -143,7 +141,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_ChangeSelectedOption_SingleSelect() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1'>"
             + "<option value='option1' selected='selected'>Option1</option>"
@@ -178,7 +175,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_ChangeSelectedOption_MultipleSelect() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1' multiple='multiple'>"
             + "<option value='option1' selected='selected'>Option1</option>"
@@ -215,7 +211,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_MultipleSelectMultipleSelected() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1' multiple>"
             + "<option value='option1' selected='selected'>Option1</option>"
@@ -243,7 +238,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectMultipleSelected() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1'>"
             + "<option value='option1' selected='selected'>Option1</option>"
@@ -270,7 +264,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectNoneSelected() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1'>"
             + "<option value='option1'>Option1</option>"
@@ -296,7 +289,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form>"
             + "<select name='select1' size='2' id='mySelect'>"
@@ -310,7 +302,10 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("mySelect");
 
-        assertEquals(Collections.EMPTY_LIST, select.getSelectedOptions());
+        final List expected = new ArrayList();
+        expected.add(select.getOptionByValue("option1"));
+        
+        assertEquals(expected, select.getSelectedOptions());
     }
 
     /**
@@ -319,7 +314,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSetSelected_IllegalValue() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1'>"
             + "<option value='option1' selected='selected'>Option1</option>"
@@ -367,7 +361,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetOptions() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1'>"
             + "<option value='option1' selected='selected'>Option1</option>"
@@ -396,7 +389,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelect_OptionMultiple_NoValueOnAttribute() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1' id='select1' multiple>"
             + "<option value='option1'>Option1</option>"
@@ -415,7 +407,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetOptionByValue() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>"
             + "<select name='select1'>"
             + "    <option value='option1'>s1o1</option>"
@@ -442,7 +433,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelect_SetSelected_OnChangeHandler() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'><select name='select1' onChange='alert(\"changing\")'>"
             + "<option value='option1' selected='selected'>Option1</option>"
@@ -469,7 +459,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetSelectionOnOptionWithNoName() throws Exception {
-
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>"
             + "<select name='select' multiple size='5'>"
             + "<option value='1'>111</option>"
@@ -497,7 +486,6 @@ public class HtmlSelectTest extends WebTestCase {
 
     /** @throws Exception if the test fails */
     public void testRemoveOptionsFromSelect() throws Exception {
-
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>"
             + "<select name='select' id='theSelect'>"
             + "<option value='a'>111</option>"
@@ -546,7 +534,6 @@ public class HtmlSelectTest extends WebTestCase {
 
     /** @throws Exception If the test fails */
     public void testEditOptions() throws Exception {
-
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>"
             + "<select name='select' id='theSelect'>"
             + "<option value='a'>111</option>"
@@ -655,7 +642,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnChangeResultPage() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>"
             + "<form id='form1'>"
@@ -669,5 +655,28 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
         assertEquals("about:blank", option1.click().getWebResponse().getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSelectedIndex() throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var oSelect = document.getElementById('main');\n"
+            + "    var oOption = new Option('bla', 1);\n"
+            + "    oSelect.options[oSelect.options.length] = oOption;\n"
+            + "    oOption.selected = false;\n"
+            + "    alert(oSelect.selectedIndex);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form action=''>\n"
+            + "  <select id='main'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"0"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

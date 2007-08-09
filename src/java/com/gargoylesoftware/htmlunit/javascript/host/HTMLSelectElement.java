@@ -105,7 +105,6 @@ public class HTMLSelectElement extends FormField {
      * for Internet Explorer: the index where the element should be placed (optional)
      */
     public void jsxFunction_add(final Option newOptionObject, final Object arg2) {
-
         if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
             add_IE(newOptionObject, arg2);
         }
@@ -164,7 +163,6 @@ public class HTMLSelectElement extends FormField {
      * @param beforeOption the option that should be after the option to add
      */
     protected void addBefore(final Option newOptionObject, final HtmlOption beforeOption) {
-
         final HtmlSelect select = getHtmlSelect();
 
         HtmlOption htmlOption = (HtmlOption) newOptionObject.getHtmlElementOrNull();
@@ -201,7 +199,6 @@ public class HTMLSelectElement extends FormField {
      * @return The options property
      */
     public HTMLOptionsCollection jsxGet_options() {
-
         if (optionsArray_ == null) {
             initialize();
         }
@@ -327,4 +324,3 @@ public class HTMLSelectElement extends FormField {
         getHtmlSelect().setSelectedAttribute(newValue, true);
     }
 }
-

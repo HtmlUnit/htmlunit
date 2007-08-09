@@ -173,6 +173,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             if (lastSelected != null) {
                 result.add(lastSelected);
             }
+            if (result.isEmpty() && getOptionSize() > 0) {
+                result.add(getOptions().get(0));
+            }
         }
         return Collections.unmodifiableList(result);
     }
@@ -204,7 +207,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return The number of options
      */
     public int getOptionSize() {
-
         final List elementList = getHtmlElementsByTagName("option");
         return elementList.size();
     }
@@ -501,7 +503,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return The element as text.
      */
     public String asText() {
-
         final List options;
         if (isMultipleSelectEnabled()) {
             options = getOptions();
