@@ -71,9 +71,34 @@ public class JQueryTest extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
-    public void testJQueryWithIE7() throws Exception {
+    public void testJQueryWithIE6() throws Exception {
+        final Iterator i = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0);
+        verify(i, true);
+    }
 
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testJQueryWithIE7() throws Exception {
         final Iterator i = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0);
+        verify(i, true);
+    }
+
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testJQueryWithFirefox2() throws Exception {
+        final Iterator i = loadPage(BrowserVersion.FIREFOX_2);
+        verify(i, false);
+    }
+
+    /**
+     * Verifies that the specified test result iterator contains the expected results.
+     * @param i the test result iterator
+     * @param ie whether or not the browser used was MSIE
+     * @throws Exception If an error occurs.
+     */
+    private void verify(final Iterator i, final boolean ie) throws Exception {
 
         ok(i, "core module: Basic requirements", 0, 7);
         ok(i, "core module: $()", 0, 1);
@@ -139,7 +164,18 @@ public class JQueryTest extends WebTestCase {
         ok(i, "selector module: expressions - pseudo (:) selctors", 0, 30);
         ok(i, "selector module: expressions - basic xpath", 1, 14);
 
-        ok(i, "event module: toggle(Function, Function) - add toggle event and fake a few clicks", 3, 0);
+        final int failed;
+        final int passed;
+        if (ie) {
+            failed = 3;
+            passed = 0;
+        }
+        else {
+            failed = 0;
+            passed = 1;
+        }
+
+        ok(i, "event module: toggle(Function, Function) - add toggle event and fake a few clicks", failed, passed);
         ok(i, "event module: unbind(event)", 0, 4);
         ok(i, "event module: trigger(event, [data]", 0, 3);
         ok(i, "event module: bind() with data", 0, 2);
