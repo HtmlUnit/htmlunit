@@ -115,7 +115,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             if (type.equals("submit")) {
-                ((HTMLFormElement) form.getScriptObject()).submit(this);
+                return ((HTMLFormElement) form.getScriptObject()).submit(this);
             }
             else if (type.equals("reset")) {
                 return form.reset();

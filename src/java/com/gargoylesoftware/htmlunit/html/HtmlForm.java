@@ -38,8 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -47,22 +45,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.util.EncodingUtil;
-import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.TextUtil;
-import com.gargoylesoftware.htmlunit.WebRequestSettings;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 
 /**
  * Wrapper for the html element "form"
@@ -169,81 +160,7 @@ public class HtmlForm extends ClickableElement {
      * @deprecated after 1.11, click on a specific input element instead.
      */
     public Page submit(final SubmittableElement submitElement) throws IOException {
-
-        final HtmlPage htmlPage = getPage();
-        if (htmlPage.getWebClient().isJavaScriptEnabled()) {
-            if (submitElement != null) {
-                final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
-                if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                    return scriptResult.getNewPage();
-                }
-            }
-
-            final String action = getActionAttribute();
-            if (TextUtil.startsWithIgnoreCase(action, "javascript:")) {
-                return htmlPage.executeJavaScriptIfPossible(action, "Form action", null).getNewPage();
-            }
-        }
-        else {
-            if (TextUtil.startsWithIgnoreCase(getActionAttribute(), "javascript:")) {
-                // The action is javascript but javascript isn't enabled.  Return
-                // the current page.
-                return htmlPage;
-            }
-        }
-
-        final List parameters = getParameterListForSubmit(submitElement);
-        final SubmitMethod method = SubmitMethod.getInstance(getAttributeValue("method"));
-
-        String actionUrl = getActionAttribute();
-        if (SubmitMethod.GET.equals(method)) {
-            final String anchor = StringUtils.substringAfter(actionUrl, "#");
-            actionUrl = StringUtils.substringBefore(actionUrl, "#");
-
-            final NameValuePair[] pairs = new NameValuePair[parameters.size()];
-            parameters.toArray(pairs);
-            final String queryFromFields = EncodingUtil.formUrlEncode(pairs, getPage().getPageEncoding());
-            // action may already contain some query parameters: they have to be removed
-            actionUrl = StringUtils.substringBefore(actionUrl, "?") + "?" + queryFromFields;
-            if (anchor.length() > 0) {
-                actionUrl += "#" + anchor;
-            }
-            parameters.clear(); // parameters have been added to query
-        }
-        final URL url;
-        try {
-            url = htmlPage.getFullyQualifiedUrl(actionUrl);
-        }
-        catch (final MalformedURLException e) {
-            throw new IllegalArgumentException("Not a valid url: " + actionUrl);
-        }
-
-        final WebRequestSettings settings = new WebRequestSettings(url, method);
-        settings.setRequestParameters(parameters);
-        settings.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
-        settings.setCharset(getSubmitCharset());
-        settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getUrl().toExternalForm());
-
-        final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage(
-                webWindow,
-                htmlPage.getResolvedTarget(getTargetAttribute()),
-                settings);
-    }
-
-    /**
-     * Gets the charset to use for the form submission. This is the first one
-     * from the list provided in {@link #getAcceptCharsetAttribute()} if any
-     * or the page's charset else
-     * @return see above
-     */
-    private String getSubmitCharset() {
-        if (getAcceptCharsetAttribute().length() > 0) {
-            return getAcceptCharsetAttribute().trim().replaceAll("[ ,].*", "");
-        }
-        else {
-            return getPage().getPageEncoding();
-        }
+        return ((HTMLFormElement) getScriptObject()).submit(submitElement);
     }
 
     /**
@@ -330,7 +247,7 @@ public class HtmlForm extends ClickableElement {
         if (element.isAttributeDefined("disabled")) {
             return false;
         }
-        // clicked input type="image" is submittted even if it hasn't a name
+        // clicked input type="image" is submitted even if it hasn't a name
         if (element == submitElement && element instanceof HtmlImageInput) {
             return true;
         }
