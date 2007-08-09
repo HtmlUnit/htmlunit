@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * A JavaScript object for a Stylesheet (currently minimal implementation).
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535871.aspx">MSDN doc</a>
- * @version $Revision: 1667 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class Stylesheet extends SimpleScriptable {
