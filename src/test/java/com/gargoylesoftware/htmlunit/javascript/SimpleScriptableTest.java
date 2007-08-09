@@ -134,6 +134,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("NodeImpl");
         names.remove("Screen");
         names.remove("Style");
+        names.remove("Stylesheet");
         names.remove("ActiveXObject");
         names.remove("XMLHttpRequest");
         names.remove("Window");

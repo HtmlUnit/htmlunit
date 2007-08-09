@@ -737,6 +737,22 @@ public final class Document extends NodeImpl {
     }
 
     /**
+     * Creates a new Stylesheet.
+     * Current implementation just creates an empty {@link Stylesheet} object.
+     * @param url the stylesheet url
+     * @param index where to insert the sheet in the collection
+     * @return the newly created stylesheet
+     */
+    public Stylesheet jsxFunction_createStyleSheet(final String url, final int index) {
+        // minimal implementation
+        final Stylesheet stylesheet = new Stylesheet();
+        stylesheet.setPrototype(getPrototype(Stylesheet.class));
+        stylesheet.setParentScope(getWindow());
+
+        return stylesheet;
+    }
+
+    /**
      * Create a new DOM text node with the given data.
      *
      * @param newData The string value for the text node.

@@ -2605,4 +2605,23 @@ public class DocumentTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateStyleSheet() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>"
+            + "var s = document.createStyleSheet('foo.css', 1);"
+            + "alert(s);"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        final String[] expectedAlerts = {"[object]"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

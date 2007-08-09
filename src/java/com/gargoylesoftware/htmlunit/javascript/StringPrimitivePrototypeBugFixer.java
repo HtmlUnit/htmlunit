@@ -121,7 +121,6 @@ public class StringPrimitivePrototypeBugFixer implements Scriptable {
     
     private Scriptable getRealScope() throws Exception {
         final Object o = FieldContextLastInterpreterFrame_.get(Context.getCurrentContext());
-        System.out.println("lastInterpreterFrame: " + o);
         if (FieldInterpreterCallFrameScope_ == null) {
             FieldInterpreterCallFrameScope_ = o.getClass().getDeclaredField("scope");
             FieldInterpreterCallFrameScope_.setAccessible(true);
