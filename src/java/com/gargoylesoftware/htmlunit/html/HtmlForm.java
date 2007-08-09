@@ -127,6 +127,7 @@ public class HtmlForm extends ClickableElement {
      * @return A new Page that reflects the results of this submission
      * @throws IOException If an IO error occurs
      * @throws ElementNotFoundException If a button with the specified name cannot be found.
+     * @deprecated after 1.11, click on the specific button instead.
      */
     public Page submit(final String buttonName) throws IOException, ElementNotFoundException {
 
@@ -151,6 +152,7 @@ public class HtmlForm extends ClickableElement {
      *
      * @return A new Page that reflects the results of this submission
      * @exception IOException If an IO error occurs
+     * @deprecated after 1.11, click on a specific input element instead.
      */
     public Page submit() throws IOException {
         return submit((SubmittableElement) null);
@@ -164,6 +166,7 @@ public class HtmlForm extends ClickableElement {
      * @param submitElement The element that caused the submit to occur
      * @return A new Page that reflects the results of this submission
      * @exception IOException If an IO error occurs
+     * @deprecated after 1.11, click on a specific input element instead.
      */
     public Page submit(final SubmittableElement submitElement) throws IOException {
 

@@ -40,6 +40,8 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -147,7 +149,7 @@ public class HtmlImageInput extends HtmlInput {
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
-            return form.submit(this);
+            return ((HTMLFormElement) form.getScriptObject()).submit(this);
         }
         else {
             return super.doClickAction(defaultPage);

@@ -43,6 +43,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 
 /**
  *  Wrapper for the html element "button"
@@ -114,7 +115,7 @@ public class HtmlButton extends FocusableElement implements DisabledElement, Sub
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             if (type.equals("submit")) {
-                return form.submit(this);
+                ((HTMLFormElement) form.getScriptObject()).submit(this);
             }
             else if (type.equals("reset")) {
                 return form.reset();

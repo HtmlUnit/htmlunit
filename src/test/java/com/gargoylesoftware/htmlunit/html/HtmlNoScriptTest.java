@@ -42,6 +42,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 
 /**
  * Tests for elements inside {@link HtmlNoScript}
@@ -148,7 +149,7 @@ public class HtmlNoScriptTest extends WebTestCase {
         
         final HtmlPage firstPage = loadPage(htmlContent);
         final HtmlForm form = (HtmlForm) firstPage.getForms().get(0);
-        final HtmlPage secondPage = (HtmlPage) form.submit();
+        final HtmlPage secondPage = (HtmlPage) ((HTMLFormElement) form.getScriptObject()).submit(null);
         
         final MockWebConnection mockWebConnection = getMockConnection(secondPage);
         assertEquals(1, mockWebConnection.getLastParameters().size());

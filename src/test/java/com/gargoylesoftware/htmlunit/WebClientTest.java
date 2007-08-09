@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -1364,7 +1365,7 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         for (int i = 0; i < 1000; i++) {
-            page.getFormByName("myform").submit();
+            ((HTMLFormElement) page.getFormByName("myform").getScriptObject()).submit(null);
         }
     }
 

@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class InputTest extends WebTestCase {
     /**
@@ -319,7 +320,7 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
 
         final HtmlForm form = page.getFormByName("form1");
-        form.submit();
+        ((HTMLFormElement) form.getScriptObject()).submit(null);
     }
     
     /**
@@ -348,7 +349,7 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
 
         final HtmlForm form = page.getFormByName("form1");
-        form.submit();
+        ((HTMLFormElement) form.getScriptObject()).submit(null);
     }
 
     /**

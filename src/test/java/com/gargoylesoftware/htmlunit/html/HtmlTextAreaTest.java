@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 
 /**
  *  Tests for HtmlTextArea
@@ -48,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlTextAreaTest extends WebTestCase {
     /**
@@ -76,7 +78,7 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
 
-        final Page secondPage = form.submit();
+        final Page secondPage = ((HTMLFormElement) form.getScriptObject()).submit(null);
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=foo",
                 secondPage.getWebResponse().getUrl());
@@ -99,7 +101,7 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         textArea.setText("Flintstone");
-        final Page secondPage = form.submit();
+        final Page secondPage = ((HTMLFormElement) form.getScriptObject()).submit(null);
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=Flintstone",
                 secondPage.getWebResponse().getUrl());

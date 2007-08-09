@@ -8,6 +8,9 @@
     <body>
         <release version="1.12-prerelease">
             <action type="update" dev="asashour">
+                Deprecate HtmlForm.submit().
+            </action>
+            <action type="update" dev="asashour">
                 Deprecate HtmlForm.fakeCheckedRadioButton().
             </action>
             <action type="update" dev="sdanig">

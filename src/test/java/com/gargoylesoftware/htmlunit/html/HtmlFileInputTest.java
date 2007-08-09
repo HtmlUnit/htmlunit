@@ -44,12 +44,14 @@ import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement;
 
 /**
  * Tests for {@link HtmlFileInput}.
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlFileInputTest extends WebTestCase {
     /**
@@ -104,7 +106,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
         fileInput.setValueAttribute(fileURL);
-        f.submit();
+        ((HTMLFormElement) f.getScriptObject()).submit(null);
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         assertTrue(pair.getFile().length() != 0);
@@ -133,7 +135,7 @@ public class HtmlFileInputTest extends WebTestCase {
     
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
-        f.submit();
+        ((HTMLFormElement) f.getScriptObject()).submit(null);
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertEquals("image", pair.getName());
         assertNull(pair.getFile());
