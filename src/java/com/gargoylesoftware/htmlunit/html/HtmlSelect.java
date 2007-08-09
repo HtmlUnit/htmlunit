@@ -173,9 +173,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             if (lastSelected != null) {
                 result.add(lastSelected);
             }
-            if (result.isEmpty() && getOptionSize() > 0) {
-                result.add(getOptions().get(0));
-            }
         }
         return Collections.unmodifiableList(result);
     }

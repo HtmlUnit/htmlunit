@@ -7,9 +7,6 @@
 
     <body>
         <release version="1.12-prerelease">
-            <action type="fix" dev="asashour">
-                HtmlSelect.getSelectedOptions() in single-selection returns the first option if none is selected.
-            </action>
             <action type="add" dev="mguillem">
                 JavaScript: add basic support for element.runtimeStyle.
             </action>
