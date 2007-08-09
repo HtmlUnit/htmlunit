@@ -159,7 +159,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Return the current style object for this element.
+     * Returns the current style object for this element.
      * @return The current style object
      */
     public Object jsxGet_currentStyle() {
@@ -167,8 +167,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Return the current style object for this element.
-     * @return The current style object
+     * Returns the runtime style object for this element.
+     * @return The runtime style object
      */
     public Object jsxGet_runtimeStyle() {
         return style_;

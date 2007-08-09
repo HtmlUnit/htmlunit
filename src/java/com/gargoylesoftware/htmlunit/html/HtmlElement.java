@@ -681,7 +681,6 @@ public abstract class HtmlElement extends DomNode {
      * @return The list of tag names
      */
     public final List getHtmlElementsByTagName(final String tagName) {
-
         final List list = new ArrayList();
         final DescendantElementsIterator iterator = new DescendantElementsIterator();
         final String lowerCaseTagName = tagName.toLowerCase();

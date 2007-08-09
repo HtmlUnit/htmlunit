@@ -197,7 +197,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return The option specified by the index
      */
     public HtmlOption getOption(final int index) {
-
         final List elementList = getHtmlElementsByTagName("option");
         return (HtmlOption) elementList.get(index);
     }
