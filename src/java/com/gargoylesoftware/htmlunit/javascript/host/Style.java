@@ -134,7 +134,7 @@ public class Style extends SimpleScriptable {
         if (htmlElement.getHtmlElementOrDie().getPage().getWebClient()
                 .getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
-            for (final Iterator i = getStyleMap().entrySet().iterator(); i.hasNext();) {
+            for (final Iterator i = getStyleMap(true).entrySet().iterator(); i.hasNext();) {
                 final Map.Entry entry = (Map.Entry) i.next();
                 final String key = (String) entry.getKey();
                 if ("behavior".equals(key)) {
@@ -159,18 +159,19 @@ public class Style extends SimpleScriptable {
      */
     protected Object getWithPreemption(final String name) {
         if (STYLE_ALLOWED_PROPERTIES.contains(name)) {
-            return getStyleAttribute(name);
+            return getStyleAttribute(name, true);
         }
         return super.getWithPreemption(name);
     }
     
     /**
-     * Gets the style attribute value
+     * Returns the named style attribute value.
      * @param name the style attribute name
+     * @param camelCase whether or not the name is expected to be in camel case
      * @return empty string if noting found
      */
-    protected String getStyleAttribute(final String name) {
-        final String value = (String) getStyleMap().get(name);
+    protected String getStyleAttribute(final String name, final boolean camelCase) {
+        final String value = (String) getStyleMap(camelCase).get(name);
         if (value == null) {
             return "";
         }
@@ -180,7 +181,7 @@ public class Style extends SimpleScriptable {
     }
 
     /**
-     * Set the specified property
+     * Set the specified property.
      *
      * @param name The name of the property
      * @param start The scriptable object that was originally invoked for this property
@@ -189,27 +190,25 @@ public class Style extends SimpleScriptable {
     public void put(final String name, final Scriptable start,
             final Object newValue) {
         // Some calls to put will happen during the initialization of the
-        // superclass.
-        // At this point, we don't have enough information to do our own
-        // initialization
-        // so we have to just pass this call through to the superclass.
+        // superclass. At this point, we don't have enough information to
+        // do our own initialization so we have to just pass this call
+        // through to the superclass.
         if (jsElement_ == null || !STYLE_ALLOWED_PROPERTIES.contains(name)) {
             super.put(name, start, newValue);
             return;
         }
-        
-        final String styleValue = (String) Context.jsToJava(newValue, String.class);
 
+        final String styleValue = (String) Context.jsToJava(newValue, String.class);
         setStyleAttribute(name, styleValue);
     }
 
     /**
-     * Sets the specified style attribute
+     * Sets the specified style attribute.
      * @param name the attribute name
      * @param newValue the attribute value
      */
     protected void setStyleAttribute(final String name, final String newValue) {
-        final Map styleMap = getStyleMap();
+        final Map styleMap = getStyleMap(true);
         styleMap.put(name, newValue);
 
         final StringBuffer buffer = new StringBuffer();
@@ -227,25 +226,30 @@ public class Style extends SimpleScriptable {
         jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
     }
 
-    private Map getStyleMap() {
-        // This must be a SortedMap so that the tests get results back in a
-        // defined order.
+    /**
+     * Returns a sorted map containing style elements, keyed on style element name. We use a sorted
+     * map so that results are deterministic and are thus testable.
+     *
+     * @param camelCase if <tt>true</tt>, the keys are camel cased (i.e. <tt>fontSize</tt>),
+     *        if <tt>false</tt>, the keys are delimiter-separated (i.e. <tt>font-size</tt>).
+     * @return a sorted map containing style elements, keyed on style element name
+     */
+    private SortedMap getStyleMap(final boolean camelCase) {
         final SortedMap styleMap = new TreeMap();
-
-        final String styleAttribute = jsElement_.getHtmlElementOrDie()
-                .getAttributeValue("style");
+        final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
         final StringTokenizer tokenizer = new StringTokenizer(styleAttribute, ";");
         while (tokenizer.hasMoreTokens()) {
             final String token = tokenizer.nextToken();
             final int index = token.indexOf(":");
             if (index != -1) {
-                final String key = token.substring(0, index).trim();
+                String key = token.substring(0, index).trim();
+                if (!camelCase) {
+                    key = key.replaceAll("([A-Z])", "-$1").toLowerCase();
+                }
                 final String value = token.substring(index + 1).trim();
-
                 styleMap.put(key, value);
             }
         }
-
         return styleMap;
     }
 
@@ -254,7 +258,7 @@ public class Style extends SimpleScriptable {
      * @return the object's behavior
      */
     public String jsxGet_behavior() {
-        return getStyleAttribute("behavior");
+        return getStyleAttribute("behavior", true);
     }
 
     /**
@@ -272,7 +276,7 @@ public class Style extends SimpleScriptable {
      * @return the object's filter
      */
     public String jsxGet_filter() {
-        return getStyleAttribute("filter");
+        return getStyleAttribute("filter", true);
     }
 
     /**
@@ -291,7 +295,7 @@ public class Style extends SimpleScriptable {
      * @return empty string if nothing found
      */
     public String jsxFunction_getPropertyValue(final String name) {
-        return getStyleAttribute(name);
+        return getStyleAttribute(name, false);
     }
 
 }

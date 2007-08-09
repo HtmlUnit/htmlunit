@@ -290,6 +290,32 @@ public class StyleTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testGetPropertyValue_WithDash() throws Exception {
+        final String html =
+              "<html><body onload='test()'><script>\r\n"
+            + "    function test() {\r\n"
+            + "        var span = document.getElementById('span');\r\n"
+            + "        span.style['fontSize'] = '30px';\r\n"
+            + "        alert(span.style.fontSize);\r\n"
+            + "        alert(span.style.getPropertyValue('fontSize'));\r\n"
+            + "        alert(span.style.getPropertyValue('font-size'));\r\n"
+            + "        span.style['fontFamily'] = 'arial';\r\n"
+            + "        alert(span.style.fontFamily);\r\n"
+            + "        alert(span.style.getPropertyValue('fontFamily'));\r\n"
+            + "        alert(span.style.getPropertyValue('font-family'));\r\n"
+            + "    }\r\n"
+            + "</script>\r\n"
+            + "<span id='span'>x</span>\r\n"
+            + "</body></html>\r\n";
+        final List actual = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final String[] expected = {"30px", "", "30px", "arial", "", "arial"};
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testStyleFilter_IE() throws Exception {
         testStyleFilter(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"", "alpha(opacity=50)"});
     }
