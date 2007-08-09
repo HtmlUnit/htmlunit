@@ -658,7 +658,7 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelectedIndex() throws Exception {
-        if(notYetImplemented()) {
+        if (notYetImplemented()) {
             return;
         }
         
