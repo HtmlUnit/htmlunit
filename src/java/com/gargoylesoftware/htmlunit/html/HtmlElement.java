@@ -954,6 +954,7 @@ public abstract class HtmlElement extends DomNode {
             return null;
         }
 
+        getLog().debug("Firing " + event);
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
         final ContextAction action = new ContextAction()
         {

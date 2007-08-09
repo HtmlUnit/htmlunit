@@ -159,6 +159,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         final Window window = new Window(this);
         final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
         context.initStandardObjects(window);
+        StringPrimitivePrototypeBugFixer.installWorkaround(window);
         
         // put custom object to be called as very last prototype to call the fallback getter (if any)
         final Scriptable fallbackCaller = new ScriptableObject()

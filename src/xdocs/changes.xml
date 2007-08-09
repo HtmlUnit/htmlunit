@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: implemented a workaround for Rhino bug in string primitive resolution (Rhino bug 374918). 
+            </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlForm.submit().
             </action>

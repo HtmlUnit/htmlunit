@@ -44,6 +44,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -1015,10 +1018,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      */
     public void testPrototypeScope() throws Exception {
 
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String content1
             = "<html><head>"
             + "<script>"
@@ -1259,5 +1258,35 @@ public class JavaScriptEngineTest extends WebTestCase {
             "rstlna-rstlna-rstlna" };
         
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test for Rhino bug https://bugzilla.mozilla.org/show_bug.cgi?id=374918
+     * Once this bug is fixed, {@link StringPrimitivePrototypeBugFixer} can be completely removed
+     * as well as this unit test.
+     * Correct string primitive prototype resolution within HtmlUnit is tested
+     * by {@link #testPrototypeScope()}
+     */
+    public void testStringPrimitivePrototypeScopeRhino() {
+        if (notYetImplemented()) {
+            return;
+        }
+        final Context cx = Context.enter();
+        final Scriptable scope1 = cx.initStandardObjects();
+        final Scriptable scope2 = cx.initStandardObjects();
+        final String str2 = "function f() { String.prototype.foo = 'from 2'; \n"
+            + "var s1 = new String('s1');\n"
+            + "if (s1.foo != 'from 2') throw 's1 got: ' + s1.foo;\n" // works
+            + "var s2 = 's2';\n"
+            + "if (s2.foo != 'from 2') throw 's2 got: ' + s2.foo;\n" // fails
+            + "}";
+        cx.evaluateString(scope2, str2, "source2", 1, null);
+
+        scope1.put("scope2", scope1, scope2);
+
+        final String str1 = "String.prototype.foo = 'from 1'; scope2.f()";
+        cx.evaluateString(scope1, str1, "source1", 1, null);
+
+        Context.exit();
     }
 }
