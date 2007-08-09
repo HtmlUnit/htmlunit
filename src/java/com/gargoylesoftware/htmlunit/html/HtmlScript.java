@@ -313,13 +313,13 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Sets the <tt>readyState</tt> to {@link DomNode#STATE_COMPLETE} and executes the
+     * Sets the <tt>readyState</tt> to {@link DomNode#READY_STATE_COMPLETE} and executes the
      * <tt>onreadystatechange</tt> handler when simulating IE. Note that script nodes go
-     * straight to the {@link DomNode#STATE_COMPLETE} state, skipping all previous states.
+     * straight to the {@link DomNode#READY_STATE_COMPLETE} state, skipping all previous states.
      */
     private void executeOnReadyStateChangeHandlerIfNecessary() {
         if (getPage().getWebClient().getBrowserVersion().isIE()) {
-            setReadyState(STATE_COMPLETE);
+            setReadyState(READY_STATE_COMPLETE);
             final Script script = (Script) getScriptObject();
             final Function handler = script.jsxGet_onreadystatechange();
             if (handler != null) {

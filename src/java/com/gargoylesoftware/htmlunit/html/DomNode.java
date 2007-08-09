@@ -93,19 +93,19 @@ public abstract class DomNode implements Cloneable, Serializable {
     public static final short COMMENT_NODE = 8;
 
     /** A ready state constant for IE (state 1). */
-    public static final String STATE_UNINITIALIZED = "uninitialized";
+    public static final String READY_STATE_UNINITIALIZED = "uninitialized";
 
     /** A ready state constant for IE (state 2). */
-    public static final String STATE_LOADING = "loading";
+    public static final String READY_STATE_LOADING = "loading";
 
     /** A ready state constant for IE (state 3). */
-    public static final String STATE_LOADED = "loaded";
+    public static final String READY_STATE_LOADED = "loaded";
 
     /** A ready state constant for IE (state 4). */
-    public static final String STATE_INTERACTIVE = "interactive";
+    public static final String READY_STATE_INTERACTIVE = "interactive";
 
     /** A ready state constant for IE (state 5). */
-    public static final String STATE_COMPLETE = "complete";
+    public static final String READY_STATE_COMPLETE = "complete";
 
     /** the owning page of this node */
     private final HtmlPage htmlPage_;
@@ -180,7 +180,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param htmlPage The page which contains this node.
      */
     protected DomNode(final HtmlPage htmlPage) {
-        readyState_ = STATE_LOADING;
+        readyState_ = READY_STATE_LOADING;
         htmlPage_ = htmlPage;
         startLineNumber_ = 0;
         startColumnNumber_ = 0;

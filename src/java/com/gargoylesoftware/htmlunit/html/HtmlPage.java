@@ -144,7 +144,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
-        getDocumentElement().setReadyState(STATE_COMPLETE);
+        getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
