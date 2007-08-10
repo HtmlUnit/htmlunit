@@ -37,16 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
+
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.javascript.host.Option;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement;
-
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Option;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -157,6 +157,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
                 // Replace the indexed option.
                 htmlSelect_.replaceOption(index, htmlOption);
             }
+        }
+        if (jsxGet_length() == 1 && !htmlSelect_.isMultipleSelectEnabled()) {
+            ((HTMLSelectElement) htmlSelect_.getScriptObject()).jsxSet_selectedIndex(0);
         }
     }
 

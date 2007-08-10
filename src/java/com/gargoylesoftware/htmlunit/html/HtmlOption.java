@@ -105,13 +105,16 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return The page that occupies this window after this change is made.  It
      * may be the same window or it may be a freshly loaded one.
      */
-    public Page setSelected(final boolean selected) {
+    public Page setSelected(boolean selected) {
         if (selected == isSelected()) {
             return getPage();
         }
         else {
             final HtmlSelect select = getEnclosingSelect();
             if (select != null) {
+                if (!select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
+                    selected = true;
+                }
                 return select.setSelectedAttribute(this, selected);
             }
             else {

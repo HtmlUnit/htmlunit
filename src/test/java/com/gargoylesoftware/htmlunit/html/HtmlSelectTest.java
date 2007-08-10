@@ -658,10 +658,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelectedIndex() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        
         final String content = "<html><head><title>foo</title><script>"
             + "  function test() {\n"
             + "    var oSelect = document.getElementById('main');\n"

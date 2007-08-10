@@ -225,9 +225,7 @@ public class HTMLSelectElement extends FormField {
     /**
      * Set the value of the "selectedIndex" property
      * @param index The new value
-     * @deprecated
      */
-    //remove deprecation when HtmlElement.fakeSelectedAttribute() is removed.
     public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
