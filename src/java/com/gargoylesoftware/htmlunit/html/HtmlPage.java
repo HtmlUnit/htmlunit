@@ -1314,12 +1314,12 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Returns the HTML elements with the specified name. If there are no elements
+     * Returns the HTML elements with the specified name attribute. If there are no elements
      * with the specified name, this method returns an empty list. Please note that
      * the lists returned by this method are immutable.
      *
      * @param name the name value to search by
-     * @return the HTML elements with the specified name
+     * @return the HTML elements with the specified name attribute
      */
     public List getHtmlElementsByName(final String name) {
         final List list = (List) nameMap_.get(name);
