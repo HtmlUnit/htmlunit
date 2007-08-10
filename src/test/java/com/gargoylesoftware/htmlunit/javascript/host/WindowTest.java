@@ -2306,4 +2306,26 @@ public class WindowTest extends WebTestCase {
         ((ClickableElement) page.getHtmlElementById("myButton")).click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testTypeOf() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    alert(window['something']);\n"
+            + "    alert(typeof window['something']);\n"
+            + "    alert(typeof window['something']=='undefined');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"undefined", "undefined", "true"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
