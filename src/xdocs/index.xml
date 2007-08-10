@@ -94,7 +94,7 @@
                         <a href="submittingPatches.html">Submitting patches</a>
                     </li>
                     <li>
-                        <a href="buildingFromSVN.html">Getting and building the most recent code from SVN</a>
+                        <a href="gettingLatestCode.html">Getting and building the most recent code</a>
                     </li>
                 </ul>
             </p>

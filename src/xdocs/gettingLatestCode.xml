@@ -3,7 +3,7 @@
 
     <properties>
         <revision>$Revision$</revision>
-        <title>Building HtmlUnit from SVN</title>
+        <title>Getting latest HtmlUnit build</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
         <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
@@ -13,8 +13,7 @@
     <body>
         <section>
             <p>
-                Building HtmlUnit from the SVN repository will give you the latest version of the code.  At
-                any time, all the code in SVN should be compilable and should pass all the unit tests.  There
+                At any time, all the code in SVN should be compilable and should pass all the unit tests.  There
                 is no guarantee that it will be full featured - this is a work in progress.
             </p>
         </section>
@@ -25,8 +24,9 @@
             </p>
         </section>
 
-        <section name="Checking out">
+        <section name="Checking out SVN repository">
             <p>
+            Another way to get the latest code is through SVN.
             Create a directory for HtmlUnit (for instance c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
             following commands.
             </p>
@@ -61,7 +61,7 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
             </p>
             <source>maven htmlunit:test</source>
             <p>
-            	Calling htmlunit:test will force a recompile of the java classes if needed.
+                Calling htmlunit:test will force a recompile of the java classes if needed.
             </p>
         </section>
 <!--
