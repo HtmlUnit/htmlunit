@@ -318,7 +318,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         if (htmlElement != null && name.toLowerCase().equals(name)) {
             final String value = htmlElement.getAttributeValue(name);
             if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
-                getLog().debug("Found attribute for evalution of property \"" + name
+                getLog().debug("Found attribute for evaluation of property \"" + name
                         + "\" for of " + this);
                 return value;
             }
