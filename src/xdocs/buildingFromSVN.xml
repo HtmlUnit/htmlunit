@@ -2,11 +2,12 @@
 <document>
 
     <properties>
+        <revision>$Revision$</revision>
         <title>Building HtmlUnit from SVN</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
         <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
-        <revision>$Revision$</revision>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
     </properties>
 
     <body>
@@ -15,6 +16,12 @@
                 Building HtmlUnit from the SVN repository will give you the latest version of the code.  At
                 any time, all the code in SVN should be compilable and should pass all the unit tests.  There
                 is no guarantee that it will be full featured - this is a work in progress.
+            </p>
+        </section>
+
+        <section name="Latest build">
+            <p>
+            You can get the latest build as a downloadable file from <a href="http://build.canoo.com/htmlunit">here</a>.
             </p>
         </section>
 
