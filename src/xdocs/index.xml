@@ -11,13 +11,12 @@
     <body>
         <section>
             <p>
-                HtmlUnit is a java unit testing framework for testing web based applications.  It is similar
-                in concept to
-                <a href="http://sourceforge.net/projects/httpunit">httpunit</a>
-                but is very different in implementation.  Which one is better for you depends on how
-                you like to write your tests.  HttpUnit models the http protocol so you deal with request and
-                response objects. HtmlUnit on the other hand, models the returned document so that you deal
-                with pages and forms and tables.
+                HtmlUnit is a java unit testing framework for web based applications.  It is similar
+                in concept to <a href="http://www.httpunit.org">httpunit</a>
+                but instead of modeling http protocol so you deal with request and response objects,
+                HtmlUnit models the returned document so that you deal
+                with pages, forms and tables.  HtmlUnit has continuously better JavaScript capabilities,
+                more active community, and supports AJAX features.
             </p>
             <p>
                 HtmlUnit was originally written by
