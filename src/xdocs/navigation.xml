@@ -30,7 +30,7 @@
             <item name="FAQ" href="/faq.html"/>
         </menu>
         <menu name="Developer docs">
-            <item name="Building from SVN" href="/buildingFromSVN.html"/>
+            <item name="Getting Latest Code" href="/gettingLatestCode.html"/>
             <item name="Coding conventions" href="/codingConventions.html"/>
             <item name="Submitting bugs" href="/submittingBugs.html"/>
             <item name="Submitting patches" href="/submittingPatches.html"/>
