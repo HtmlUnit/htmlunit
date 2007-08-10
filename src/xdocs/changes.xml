@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="1.12-prerelease">
+        <release version="1.12" date="Aug 10, 2007">
             <action type="add" dev="sdanig">
                 Add method HtmlPage.getHtmlElementsByName(String).
             </action>
