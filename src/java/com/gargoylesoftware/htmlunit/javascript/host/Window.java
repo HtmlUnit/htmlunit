@@ -850,6 +850,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 }
                 else {
                     result = document_.jsxFunction_getElementById(name);
+                    if (result == null) {
+                        result = NOT_FOUND;
+                    }
                 }
             }
         }

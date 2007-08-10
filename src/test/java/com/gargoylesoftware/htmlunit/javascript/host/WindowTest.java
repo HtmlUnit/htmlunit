@@ -2310,11 +2310,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
-    public void testTypeOf() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        
+    public void testUndefinedProperty() throws Exception {
         final String content = "<html><head><title>foo</title><script>"
             + "  function test() {\n"
             + "    alert(window['something']);\n"
