@@ -11,12 +11,26 @@
     <body>
         <section>
             <p>
-                HtmlUnit is a java unit testing framework for web based applications.  It is similar
-                in concept to <a href="http://www.httpunit.org">httpunit</a>
-                but instead of modeling http protocol so you deal with request and response objects,
-                HtmlUnit models the returned document so that you deal
-                with pages, forms and tables.  HtmlUnit has continuously better JavaScript capabilities,
-                more active community, and supports AJAX features.
+                HtmlUnit is a "browser for Java programs". 
+                It models the HTML documents and provides an API that allows you to invoke pages, fill forms, click links, etc. 
+                just like you do in your "normal" browser.
+            </p>
+            <p>
+				It has fairly good JavaScript support (which gets continuously improved) and is able to work even with quite complex AJAX libraries
+				simulating either Firefox or Internet Explorer depending on the configuration you want to use.
+			</p> 
+            <p>
+            	It is typically used for testing purposes or to retrieve information from web sites.
+            </p>
+            <p>
+                HtmlUnit is not a generic unit testing framework. It is specifically a way to simulate
+                a browser for testing purposes and is intended to be used within another testing
+                framework such as <a href="http://www.junit.org">JUnit</a>.  Refer to the document
+                <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a> for an introduction.
+            </p>
+            <p>
+            	HtmlUnit is used as the underlying "browser" by the Open Source testing tools <a href="http://webtest.canoo.com">Canoo WebTest</a>
+            	and <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>. 
             </p>
             <p>
                 HtmlUnit was originally written by
@@ -26,12 +40,6 @@
                 Since then, it has received many contributions from <a href="team-list.html">
                 other developers</a> and would not be where it is today without their
                 assistance.
-            </p>
-            <p>
-                HtmlUnit is not a generic unit testing framework.  It is specifically a way to simulate
-                a browser for testing purposes and is intended to be used within another testing
-                framework such as <a href="http://www.junit.org">JUnit</a>.  Refer to the document
-                <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a> for an introduction.
             </p>
         </section>
 
