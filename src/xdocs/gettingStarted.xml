@@ -33,8 +33,7 @@ public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient();
     final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
     assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
-}
-            ]]></source>
+}]]></source>
         </section>
 
         <section name="Imitating a specific browser">
@@ -49,8 +48,7 @@ public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient(BrowserVersion.MOZILLA_1_0);
     final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
     assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
-}
-            ]]></source>
+}]]></source>
             <p>
                 Specifying this BrowserVersion will change the user agent header that is sent up to the
                 server and will change the behaviour of some of the javascript.  Note that the version
@@ -69,8 +67,7 @@ public void testHomePage() throws Exception {
         BrowserVersion.MOZILLA_1_0, "http://myproxyserver", 8000);
     final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
     assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
-}
-            ]]></source>
+}]]></source>
             <p>
                 Specifying this BrowserVersion will change the user agent header that is sent up to the
                 server and will change the behaviour of some of the javascript.  Note that the version
@@ -104,10 +101,8 @@ public void testHomePage() throws Exception {
     // Now submit the form by clicking the button and get back the 
     // second page.
     final HtmlPage page2 = (HtmlPage) button.click();
-}
-            ]]></source>
+}]]></source>
 
         </section>
     </body>
 </document>
-
