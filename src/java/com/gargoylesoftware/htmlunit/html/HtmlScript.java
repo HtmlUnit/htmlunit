@@ -338,7 +338,7 @@ public class HtmlScript extends HtmlElement {
 
     /**
      * Indicates if a node without children should be written in expanded form as xml
-     * (i.e. with closing tag rather than with "/&gt;)
+     * (i.e. with closing tag rather than with "/&gt;")
      * @return <code>true</code> to make generated xml readable as html
      */
     protected boolean isEmptyXmlTagExpanded() {

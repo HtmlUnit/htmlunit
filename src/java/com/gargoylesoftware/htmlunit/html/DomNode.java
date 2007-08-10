@@ -502,7 +502,6 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @return The xml string.
      */
     public String asXml() {
-
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
         printXml("", printWriter);
@@ -517,7 +516,6 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param printWriter writer where child nodes are written
      */
     protected void printXml(final String indent, final PrintWriter printWriter) {
-
         printWriter.println(indent + this);
         printChildrenAsXml(indent, printWriter);
     }

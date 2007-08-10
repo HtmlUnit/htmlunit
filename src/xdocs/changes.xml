@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="update" dev="asashour">
+                HtmlTitle.asXml(): empty tag is expanded as required by Internet Explorer.
+            </action>
             <action type="update" dev="asashour" id="1771549">
                 JavaScript: if window object could not find a property or function, it returns 'undefined' instead of null (#1771549).
             </action>

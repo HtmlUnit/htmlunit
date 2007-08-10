@@ -98,4 +98,13 @@ public class HtmlTitle extends HtmlElement {
             throw new IllegalStateException("For title tag, this should be a text node");
         }
     }
+
+    /**
+     * Indicates if a node without children should be written in expanded form as xml
+     * (i.e. with closing tag rather than with "/&gt;")
+     * @return <code>true</code> as required by Microsoft Internet Explorer
+     */
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

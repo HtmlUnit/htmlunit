@@ -477,7 +477,7 @@ public abstract class HtmlElement extends DomNode {
     
     /**
      * Indicates if a node without children should be written in expanded form as xml
-     * (ie with closing tag rather than with "/&gt;)
+     * (i.e. with closing tag rather than with "/&gt;")
      * @return <code>false</code>
      */
     protected boolean isEmptyXmlTagExpanded() {
