@@ -3,8 +3,9 @@
 
     <properties>
         <title>Welcome to HtmlUnit</title>
-        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <revision>$Revision$</revision>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
     </properties>
 
     <body>
@@ -33,11 +34,6 @@
                 framework such as <a href="http://www.junit.org">JUnit</a>.  Refer to the document
                 <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a> for an introduction.
             </p>
-            <p>
-                NOTE: This documentation is for the current code in SVN and may not accurately
-                reflect the version of HtmlUnit that you have downloaded.  Refer to the
-                documentation that came with your download for the most correct information
-            </p>
         </section>
 
         <section name="Where to find...">
@@ -51,6 +47,11 @@
                         </a>.
                     </dd>
                 -->
+                    <dt>Latest build</dt>
+                    <dd>
+                        <a href="http://build.canoo.com/htmlunit">Cruise Control server</a> 
+                    </dd>
+                    
                     <dt>Latest stable release <date>Mar 15, 2007</date></dt>
                     <dd>
                         <a href="http://sourceforge.net/project/showfiles.php?group_id=47038">
