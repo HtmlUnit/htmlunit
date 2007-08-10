@@ -70,6 +70,9 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         these instructions</a>
                     </li>
                     <li>
+                        Update the Group number in SourceForge tracker system.
+                    </li>
+                    <li>
                         Assuming that everything has gone smoothly so far, make sure everything is checked
                         in and tag the repository with a name like this "HtmlUnit-1dot1" that reflects
                         the current build version.
