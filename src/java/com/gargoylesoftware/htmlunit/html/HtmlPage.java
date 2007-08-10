@@ -97,6 +97,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     private       String originalCharset_ = null;
     private final WebResponse webResponse_;
     private       Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
+    private       Map nameMap_ = new HashMap(); // a map of (name, List(HtmlElement))
     private       HtmlElement documentElement_ = null;
     private FocusableElement elementWithFocus_ = null;
 
@@ -1296,17 +1297,15 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     *  Return the html element with the specified id. If more than one element
-     *  has this id (not allowed by the html spec) then return the first one.
+     * Returns the HTML element with the specified ID. If more than one element
+     * has this ID (not allowed by the HTML spec), then this method returns the
+     * first one.
      *
-     * @param id The id value to search by
-     * @return The html element found
-     * @exception ElementNotFoundException If no element was found that matches
-     *      the id
+     * @param id the ID value to search by
+     * @return the HTML element with the specified ID
+     * @throws ElementNotFoundException if no element was found that matches the id
      */
-    public HtmlElement getHtmlElementById(final String id)
-        throws ElementNotFoundException {
-
+    public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
         final List elements = (List) idMap_.get(id);
         if (elements != null) {
             return (HtmlElement) elements.get(0);
@@ -1315,57 +1314,82 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Add an element to the ID map.
+     * Returns the HTML elements with the specified name. If there are no elements
+     * with the specified name, this method returns an empty list. Please note that
+     * the lists returned by this method are immutable.
      *
-     * @param idElement the element with an ID attribute to add.
+     * @param name the name value to search by
+     * @return the HTML elements with the specified name
      */
-    void addIdElement(final HtmlElement idElement) {
-        final String id = idElement.getId();
-        if (!StringUtils.isEmpty(id)) {
-            List elements = (List) idMap_.get(id);
+    public List getHtmlElementsByName(final String name) {
+        final List list = (List) nameMap_.get(name);
+        if (list != null) {
+            return Collections.unmodifiableList(list);
+        }
+        else {
+            return Collections.EMPTY_LIST;
+        }
+    }
+
+    /**
+     * Adds an element to the ID and name maps, if necessary.
+     * @param element the element to be added to the ID and name maps
+     */
+    void addMappedElement(final HtmlElement element) {
+        addElement(idMap_, element, "id");
+        addElement(nameMap_, element, "name");
+    }
+
+    private void addElement(final Map map, final HtmlElement element, final String attribute) {
+        final String value = element.getAttributeValue(attribute);
+        if (!StringUtils.isEmpty(value)) {
+            List elements = (List) map.get(value);
             if (elements == null) {
                 elements = new Vector();
-                elements.add(idElement);
-                idMap_.put(id, elements);
+                elements.add(element);
+                map.put(value, elements);
             }
-            else if (!elements.contains(idElement)) {
-                elements.add(idElement);
+            else if (!elements.contains(element)) {
+                elements.add(element);
             }
         }
     }
 
     /**
-     * Remove an element and optionally its children from the ID map.
-     * @param idElement the element with an ID attribute to remove.
-     * @param recursive indicates if children must be removed too
+     * Removes an element from the ID and name maps, if necessary.
+     * @param element the element to be removed from the ID and name maps
      */
-    void removeIdElement(final HtmlElement idElement, final boolean recursive) {
-        final List elements = (List) idMap_.remove(idElement.getAttributeValue("id"));
-        // if other elements have the same id (not legal for spec, but happens), then
-        // only one element to remove
-        if (elements != null && elements.size() != 1) {
-            elements.remove(idElement);
-            idMap_.put(idElement.getAttributeValue("id"), elements);
-        }
+    void removeMappedElement(final HtmlElement element) {
+        removeMappedElement(element, false);
+    }
 
-        // remove ids from children
-        if (recursive) {
-            for (final Iterator iter = idElement.getChildElementsIterator(); iter.hasNext();) {
-                final HtmlElement child = (HtmlElement) iter.next();
-                removeIdElement(child, true);
+    /**
+     * Removes an element and optionally its children from the ID and name maps, if necessary.
+     * @param element the element to be removed from the ID and name maps
+     * @param recurse indicates if children must be removed too
+     */
+    void removeMappedElement(final HtmlElement element, final boolean recurse) {
+        removeElement(idMap_, element, "id", recurse);
+        removeElement(nameMap_, element, "name", recurse);
+    }
+
+    private void removeElement(final Map map, final HtmlElement element, final String att, final boolean recurse) {
+        final String value = element.getAttributeValue(att);
+        if (!StringUtils.isEmpty(value)) {
+            final List elements = (List) map.remove(value);
+            if (elements != null && elements.size() != 1) {
+                elements.remove(element);
+                map.put(value, elements);
+            }
+        }
+        if (recurse) {
+            for (final Iterator i = element.getChildElementsIterator(); i.hasNext();) {
+                final HtmlElement child = (HtmlElement) i.next();
+                removeElement(map, child, att, true);
             }
         }
     }
-    
-    /**
-     * Remove an element from the ID map.
-     *
-     * @param idElement the element with an ID attribute to remove.
-     */
-    void removeIdElement(final HtmlElement idElement) {
-        removeIdElement(idElement, false);
-    }
-    
+
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
@@ -1383,7 +1407,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 }
             }
             if (!insideNoScript) {
-                addIdElement((HtmlElement) node);
+                addMappedElement((HtmlElement) node);
             }
         }
         node.onAddedToPage();
@@ -1396,7 +1420,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     void notifyNodeRemoved(final DomNode node) {
         if (node instanceof HtmlElement) {
-            removeIdElement((HtmlElement) node, true);
+            removeMappedElement((HtmlElement) node, true);
         }
     }
 
@@ -1540,6 +1564,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             result.documentElement_ = null;
             result.elementWithFocus_ = null;
             result.idMap_ = new HashMap();
+            result.nameMap_ = new HashMap();
             return result;
         }
         catch (final CloneNotSupportedException e) {
@@ -1558,8 +1583,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             final Iterator it = result.getAllHtmlChildElements();
             while (it.hasNext()) {
                 final HtmlElement child = (HtmlElement) it.next();
-                removeIdElement(child);
-                result.addIdElement(child);
+                removeMappedElement(child);
+                result.addMappedElement(child);
             }
         }
         return result;

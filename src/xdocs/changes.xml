@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.12-prerelease">
+            <action type="add" dev="sdanig">
+                Add method HtmlPage.getHtmlElementsByName(String).
+            </action>
             <action type="fix" dev="asashour">
                 HtmlSelect (in single-selection mode) selects the first option if none is selected.
             </action>

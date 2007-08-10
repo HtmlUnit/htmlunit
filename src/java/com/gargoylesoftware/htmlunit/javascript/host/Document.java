@@ -68,6 +68,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
@@ -837,7 +839,7 @@ public final class Document extends NodeImpl {
     }
 
     /**
-     * Returns all HTML elements that have a "name" attribute with the given value
+     * Returns all HTML elements that have a "name" attribute with the given value.
      *
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
@@ -856,32 +858,49 @@ public final class Document extends NodeImpl {
             throw Context.reportRuntimeError(
                     "Failed to initialize collection document.getElementsByName: " + e.getMessage());
         }
-
         return collection;
     }
 
     /**
-     * document.XXX should first look at elements named XXX before using standard functions.
+     * Calls to <tt>document.XYZ</tt> should first look at elements named <tt>XYZ</tt> before
+     * using standard functions.
+     *
      * {@inheritDoc}
      */
     protected Object getWithPreemption(final String name) {
-        final HtmlPage htmlPage = (HtmlPage) getDomNodeOrNull();
-        if (htmlPage == null) {
+        final HtmlPage page = (HtmlPage) getDomNodeOrNull();
+        if (page == null) {
             return NOT_FOUND;
         }
-
-        // document.xxx allows to retrieve some elements by name like img or form but not input, a, ...
-        // TODO: behaviour for iframe seems to differ between IE and Moz
+        // Try to satisfy this request using a map-backed operation before punting and using XPath.
+        // XPath operations are very expensive, and this method gets invoked quite a bit.
+        // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
+        final List elements = page.getHtmlElementsByName(name);
+        if (elements.isEmpty()) {
+            return NOT_FOUND;
+        }
+        if (elements.size() == 1) {
+            final HtmlElement element = (HtmlElement) elements.get(0);
+            final String tagName = element.getTagName();
+            if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName)) {
+                return getScriptableFor(element);
+            }
+            else {
+                return NOT_FOUND;
+            }
+        }
+        // The shortcut wasn't enough, which means we probably need to perform the XPath operation anyway.
+        // Note that the XPath expression below HAS TO MATCH the tag name checks performed in the shortcut above.
+        // TODO: Behavior for iframe seems to differ between IE and Moz.
         final HTMLCollection collection = new HTMLCollection(this);
-        final String xpathExpr = "//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
+        final String xpath = "//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
         try {
-            collection.init(htmlPage, new HtmlUnitXPath(xpathExpr));
+            collection.init(page, new HtmlUnitXPath(xpath));
         }
         catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Failed to initialize collection (using xpath " + xpathExpr
-                    + "): " + e.getMessage());
+            final String msg = "Failed to initialize collection (using xpath " + xpath + "): " + e.getMessage();
+            throw Context.reportRuntimeError(msg);
         }
-
         final int size = collection.jsxGet_length();
         if (size == 1) {
             return collection.get(0, collection);
@@ -889,13 +908,12 @@ public final class Document extends NodeImpl {
         else if (size > 1) {
             return collection;
         }
-        
         return NOT_FOUND;
     }
 
     /**
-     * Gets the body element this document
-     * @return body element
+     * Returns this document's <tt>body</tt> element.
+     * @return this document's <tt>body</tt> element
      */
     public Object jsxGet_body() {
         final List tagNames = Arrays.asList(new String[] {"body", "frameset"});
@@ -910,19 +928,19 @@ public final class Document extends NodeImpl {
     }
 
     /**
-     * Gets the title of this document
-     * @return body element
+     * Returns this document's title.
+     * @return this document's title
      */
     public String jsxGet_title() {
         return getHtmlPage().getTitleText();
     }
 
     /**
-     * Set the title.
-     * @param message The new title
+     * Sets this document's title.
+     * @param title the new title
      */
-    public void jsxSet_title(final String message) {
-        getHtmlPage().setTitleText(message);
+    public void jsxSet_title(final String title) {
+        getHtmlPage().setTitleText(title);
     }
 
     /**

@@ -169,14 +169,10 @@ public abstract class HtmlElement extends DomNode {
         if (value.length() == 0) {
             value = ATTRIBUTE_VALUE_EMPTY;
         }
-        final boolean isId = attributeName.equalsIgnoreCase("id");
-        if (isId) {
-            getPage().removeIdElement(this);
-        }
+
+        getPage().removeMappedElement(this);
         attributes_.put(attributeName.toLowerCase(), value);
-        if (isId) {
-            getPage().addIdElement(this);
-        }
+        getPage().addMappedElement(this);
 
         final HtmlAttributeChangeEvent event;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
@@ -197,23 +193,24 @@ public abstract class HtmlElement extends DomNode {
     }
 
     /**
-     * remove an attribute from this element
+     * Removes an attribute from this element.
      * @param attributeName the attribute attributeName
      */
     public final void removeAttribute(final String attributeName) {
-        if (attributeName.equalsIgnoreCase("id")) {
-            getPage().removeIdElement(this);
-        }
-        final String attributevalue = getAttributeValue(attributeName);
-        attributes_.remove(attributeName.toLowerCase());
 
-        final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, attributevalue);
+        final String value = getAttributeValue(attributeName);
+
+        getPage().removeMappedElement(this);
+        attributes_.remove(attributeName.toLowerCase());
+        getPage().addMappedElement(this);
+
+        final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
         fireHtmlAttributeRemoved(event);
         getPage().fireHtmlAttributeRemoved(event);
     }
-    
+
     /**
-     * Support for reporting html attribute changes.
+     * Support for reporting HTML attribute changes.
      * This method can be called when an attribute has been added and it will send the
      * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
      *
