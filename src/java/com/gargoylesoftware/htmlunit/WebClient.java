@@ -73,7 +73,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.html.FocusableElement;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
@@ -116,7 +115,6 @@ public class WebClient implements Serializable {
     private boolean javaScriptEnabled_ = true;
     private boolean cookiesEnabled_ = true;
     private String homePage_;
-    private FocusableElement elementWithFocus_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
 
@@ -1505,65 +1503,6 @@ public class WebClient implements Serializable {
         bits.set('%');
         bits.or(allowed);
         return URIUtil.encode(str, bits);
-    }
-
-    /**
-     * Remove the focus to the specified component.  This will trigger any relevant javascript
-     * event handlers.
-     * @param oldElement The element that will lose the focus.
-     * @see #moveFocusToElement(FocusableElement)
-     * @return true if the focus changed and a new page was not loaded
-     * @deprecated Use {@link HtmlPage#moveFocusToElement} with <code>null</code> as parameter
-     * on the desired page instead
-     */
-    public boolean moveFocusFromElement(final FocusableElement oldElement) {
-        if (oldElement != null && elementWithFocus_ == oldElement) {
-            final HtmlPage page = oldElement.getPage();
-            page.moveFocusToElement(null);
-            elementWithFocus_ = null;
-
-            // If a page reload happened as a result of the focus change then obviously this
-            // element will not have the focus because its page has gone away.
-            if (page != page.getEnclosingWindow().getEnclosedPage()) {
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Move the focus to the specified component.  This will trigger any relevant javascript
-     * event handlers.
-     *
-     * @param newElement The element that will receive the focus.
-     * @return true if the specified element now has the focus.
-     * @see #getElementWithFocus()
-     * @see HtmlPage#tabToNextElement()
-     * @see HtmlPage#tabToPreviousElement()
-     * @see HtmlPage#pressAccessKey(char)
-     * @see HtmlPage#assertAllTabIndexAttributesSet()
-     * @deprecated Use {@link HtmlPage#moveFocusToElement(FocusableElement)} on the desired page instead
-     */
-    public boolean moveFocusToElement(final FocusableElement newElement) {
-
-        if (newElement == null) {
-            throw new IllegalArgumentException("Cannot move focus to null");
-        }
-
-        elementWithFocus_ = newElement;
-        return newElement.getPage().moveFocusToElement(newElement);
-    }
-
-    /**
-     * Return the element with the focus or null if no elements have the focus.
-     *
-     * @return The element with focus or null.
-     * @see #moveFocusToElement(FocusableElement)
-     * @deprecated Use {link {@link HtmlPage#getElementWithFocus()} on the desired page instead.
-     */
-    public FocusableElement getElementWithFocus() {
-        return elementWithFocus_;
     }
 
     /**
