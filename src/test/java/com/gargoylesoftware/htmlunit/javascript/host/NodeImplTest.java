@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Bruce Faulkner
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class NodeImplTest extends WebTestCase {
 
@@ -411,4 +412,37 @@ public class NodeImplTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testIsSameNode() throws Exception {
+        testIsSameNode(BrowserVersion.FIREFOX_2);
+        try {
+            testIsSameNode(BrowserVersion.INTERNET_EXPLORER_7_0);
+            fail("'isSameNode' is not supported in IE7.");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+
+    private void testIsSameNode(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('div1');\n"
+            + "    var d2 = document.getElementById('div2');\n"
+            + "    alert(d1.isSameNode(d1));\n"
+            + "    alert(d1.isSameNode(d2));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='div1'/>\n"
+            + "<div id='div2'/>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"true", "false"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

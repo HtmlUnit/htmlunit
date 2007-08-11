@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add support for node.isSameNode().
+            </action>
             <action type="remove" dev="asashour">
                 WebClient: Remove deprecated moveFocusFromElement(), moveFocusToElement(), and getElementWithFocus().
             </action>

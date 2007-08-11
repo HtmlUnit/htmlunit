@@ -202,6 +202,21 @@ public class NodeImpl extends SimpleScriptable {
     }
 
     /**
+     * This method provides a way to determine whether two Node references returned by
+     * the implementation reference the same object.
+     * When two Node references are references to the same object, even if through a proxy,
+     * the references may be used completely interchangeably, such that all attributes
+     * have the same values and calling the same DOM method on either reference always has exactly the same effect.
+     *
+     * @param other The node to test against.
+     *
+     * @return whether this node is the same node as the given one.
+     */
+    public boolean jsxFunction_isSameNode(final Object other) {
+        return other == this;
+    }
+
+    /**
      * Remove a DOM node from this node
      * @param childObject The node to remove from this node
      * @return The removed child node.

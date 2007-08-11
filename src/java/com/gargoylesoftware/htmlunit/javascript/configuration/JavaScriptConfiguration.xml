@@ -645,6 +645,9 @@
         <function name="cloneNode"/>
         <function name="hasChildNodes"/>
         <function name="insertBefore"/>
+        <function name="isSameNode">
+            <browser name="Firefox"/>
+        </function>
         <function name="removeChild"/>
         <function name="replaceChild"/>
     </class>
