@@ -248,6 +248,16 @@ The reference stays the maven 1 build.
 	</contributors>
 	<build>
 		<sourceDirectory>src/java</sourceDirectory>		
+        <resources>
+            <resource>
+                <targetPath>com/gargoylesoftware/htmlunit/javascript/configuration</targetPath>
+                <filtering>false</filtering>
+                <directory>${basedir}/src/java/com/gargoylesoftware/htmlunit/javascript/configuration</directory>
+                <includes>
+                    <include>JavaScriptConfiguration.xml</include>
+                </includes>
+            </resource>
+        </resources>
 	</build>
 	<dependencies>
 		<dependency>
