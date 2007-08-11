@@ -105,7 +105,7 @@ public final class JavaScriptConfiguration {
         if (XmlDocument_ == null) {
             throw new IllegalStateException("Configuration was not initialized - see log for details");
         }
-        configuration_ = buildUsageMap(browser);
+        configuration_ = buildUsageMap();
     }
 
     /**
@@ -255,7 +255,7 @@ public final class JavaScriptConfiguration {
         return configuration_.keySet();
     }
 
-    private Map buildUsageMap(final BrowserVersion browser) {
+    private Map buildUsageMap() {
         final Map classMap = new HashMap(30);
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
         while (node != null) {
@@ -455,7 +455,8 @@ public final class JavaScriptConfiguration {
     }
 
     private boolean testToIncludeForBrowserConstraint(final Element element, final BrowserVersion browser) {
-        if (!browser.getApplicationName().equals(element.getAttribute("name"))) {
+        if (!browser.getApplicationName().equals(element.getAttribute("name"))
+            && (!browser.isNetscape() || !"Firefox".equals(element.getAttribute("name")))) {
             return false;
         }
         final String max = element.getAttribute("max-version");

@@ -57,25 +57,13 @@
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:string" use="required"/>
 		<xsd:attribute name="notImplemented" type="xsd:boolean" default="false"/>
-<!-- Removed since never used
-		<xsd:attribute name="return-type" default="void">
-			<xsd:simpleType>
-				<xsd:restriction base="xsd:string">
-					<xsd:enumeration value="void"/>
-					<xsd:enumeration value="array"/>
-					<xsd:enumeration value="string"/>
-					<xsd:enumeration value="int"/>
-				</xsd:restriction>
-			</xsd:simpleType>
-		</xsd:attribute>
--->
 	</xsd:complexType>
 
 	<xsd:complexType name="requiredBrowserType">
 		<xsd:attribute name="name" use="required">
 			<xsd:simpleType>
 				<xsd:restriction base="xsd:string">
-					<xsd:enumeration value="Netscape"/>
+					<xsd:enumeration value="Firefox"/>
 					<xsd:enumeration value="Microsoft Internet Explorer"/>
 				</xsd:restriction>
 			</xsd:simpleType>
