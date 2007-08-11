@@ -1587,4 +1587,56 @@ public class HTMLElementTest extends WebTestCase {
     private void testRuntimeStyle(final BrowserVersion browserVersion) throws Exception {
         testIEStyle("runtimeStyle", browserVersion);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testGetBoundingClientRect() throws Exception {
+        testGetBoundingClientRect(BrowserVersion.INTERNET_EXPLORER_7_0);
+        try {
+            testGetBoundingClientRect(BrowserVersion.FIREFOX_2);
+            fail("'getBoundingClientRect' is defined for only IE");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+
+    private void testGetBoundingClientRect(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('div1');\n"
+            + "    d1.getBoundingClientRect().left;\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='div1'/>\n"
+            + "</body></html>";
+        loadPage(browserVersion, content, null);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testGetClientRects() throws Exception {
+        testGetClientRects(BrowserVersion.INTERNET_EXPLORER_7_0);
+        try {
+            testGetClientRects(BrowserVersion.FIREFOX_2);
+            fail("'getClientRects' is defined for only IE");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+
+    private void testGetClientRects(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('div1');\n"
+            + "    d1.getClientRects();\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='div1'/>\n"
+            + "</body></html>";
+        loadPage(browserVersion, content, null);
+    }
 }

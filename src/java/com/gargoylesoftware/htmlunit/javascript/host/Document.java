@@ -1065,7 +1065,7 @@ public final class Document extends NodeImpl {
     public DOMImplementation jsxGet_implementation() {
         if (implementation_ == null) {
             implementation_ = new DOMImplementation();
-            implementation_.setParentScope(getParentScope());
+            implementation_.setParentScope(getWindow());
             implementation_.setPrototype(getPrototype(implementation_.getClass()));
         }
         return implementation_;

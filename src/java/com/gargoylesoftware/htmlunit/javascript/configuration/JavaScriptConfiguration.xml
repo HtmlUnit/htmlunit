@@ -494,6 +494,18 @@
             <browser name="Firefox"/>
         </function>
         <function name="getAttributeNode"/>
+        <function name="getBoundingClientRect">
+            <doclink
+                url="http://msdn2.microsoft.com/en-us/library/ms536433.aspx"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="getClientRects">
+            <doclink
+                url="http://msdn2.microsoft.com/en-us/library/ms536435.aspx"
+                descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="getElementsByTagName"/>
         <function name="handleEvent" notImplemented="true"/>
         <function name="insertAdjacentElement">
@@ -865,6 +877,22 @@
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
                 descr="MSDN documentation"/>
         </function>
+    </class>
+
+    <class name="TextRectangle" classname="com.gargoylesoftware.htmlunit.javascript.host.TextRectangle"
+        JSObject="true">
+        <property name="bottom" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="left" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="right" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="top" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
     </class>
 
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"

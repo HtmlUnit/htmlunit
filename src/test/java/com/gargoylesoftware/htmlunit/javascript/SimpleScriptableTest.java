@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class SimpleScriptableTest extends WebTestCase {
     /**
@@ -146,6 +147,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Popup");
         names.remove("EventListenersContainer");
         names.remove("DOMImplementation");
+        names.remove("TextRectangle");
 
         final Transformer class2ShortName = new Transformer() {
             public Object transform(final Object obj) {

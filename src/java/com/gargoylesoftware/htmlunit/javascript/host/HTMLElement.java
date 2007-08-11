@@ -54,6 +54,7 @@ import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -1595,4 +1596,25 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * is just to prevent scripts that call that method from failing
      */
     public void jsxFunction_scrollIntoView() { }
+    
+    /**
+     * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
+     * @return an object that specifies the bounds of a collection of TextRectangle objects.
+     */
+    public TextRectangle jsxFunction_getBoundingClientRect() {
+        final TextRectangle textRectangle = new TextRectangle();
+        textRectangle.setParentScope(getWindow());
+        textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
+        return textRectangle;
+    }
+
+    /**
+     * Retrieves a collection of rectangles that describes the layout of the contents of an object
+     * or range within the client. Each rectangle describes a single line.
+     * @return a collection of rectangles that describes the layout of the contents.
+     */
+    public Object jsxFunction_getClientRects() {
+        return new NativeArray(0);
+    }
+
 }

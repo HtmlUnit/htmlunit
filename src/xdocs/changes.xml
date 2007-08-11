@@ -8,6 +8,9 @@
     <body>
         <release version="1.13-prerelease">
             <action type="add" dev="asashour">
+                JavaScript: add basic support for element.getBoundingClientRect() and element.getClientRects().
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: add support for node.isSameNode().
             </action>
             <action type="remove" dev="asashour">
