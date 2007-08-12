@@ -35,17 +35,35 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.html;
 
 /**
  * A JavaScript object for DocumentFragment.
  *
  * @version $Revision$
  * @author Ahmed Ashour
- *
- * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-B63ED1A3">
- * W3C Dom Level 1</a>
  */
-public class HTMLDocumentFragment extends NodeImpl {
+public class DomDocumentFragment extends DomNode {
 
+    /**
+     * Creates an instance.
+     * @param htmlPage The page which contains this node.
+     */
+    public DomDocumentFragment(final HtmlPage htmlPage) {
+        super(htmlPage);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public String getNodeName() {
+        return "#document-fragment";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public short getNodeType() {
+        return DOCUMENT_FRAGMENT_NODE;
+    }
 }

@@ -220,11 +220,11 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Creates an empty {@link DocumentFragment} object.
-     * @return a newly created {@link DocumentFragment}.
+     * Creates an empty {@link DomDocumentFragment} object.
+     * @return a newly created {@link DomDocumentFragment}.
      */
-    public DocumentFragment createDocumentFragment() {
-        return new DocumentFragment(this);
+    public DomDocumentFragment createDocumentFragment() {
+        return new DomDocumentFragment(this);
     }
     
     /**

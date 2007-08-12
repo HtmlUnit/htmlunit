@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -730,7 +730,7 @@ public final class Document extends NodeImpl {
      * @return a newly created DocumentFragment.
      */
     public Object jsxFunction_createDocumentFragment() {
-        final DocumentFragment htmlElement = getDomNodeOrDie().getPage().createDocumentFragment();
+        final DomDocumentFragment htmlElement = getDomNodeOrDie().getPage().createDocumentFragment();
         return getScriptableFor(htmlElement);
     }
     

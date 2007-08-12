@@ -182,8 +182,8 @@
         <function name="writeln"/>
     </class>
 
-    <class name="DocumentFragment" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDocumentFragment"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DocumentFragment">
+    <class name="DocumentFragment" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomDocumentFragment">
     </class>
 
     <class name="DOMImplementation" classname="com.gargoylesoftware.htmlunit.javascript.host.DOMImplementation"
