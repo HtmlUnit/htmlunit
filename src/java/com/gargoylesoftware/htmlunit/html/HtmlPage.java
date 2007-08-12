@@ -164,7 +164,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return The node type
      */
     public short getNodeType() {
-        return DOCUMENT_NODE;
+        return org.w3c.dom.Node.DOCUMENT_NODE;
     }
 
     /**

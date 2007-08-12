@@ -1135,8 +1135,8 @@ public class HtmlPageTest extends WebTestCase {
 
         final HtmlElement root = page.getDocumentElement();
 
-        assertEquals(DomNode.DOCUMENT_NODE, page.getNodeType());
-        assertEquals(DomNode.ELEMENT_NODE, root.getNodeType());
+        assertEquals(org.w3c.dom.Node.DOCUMENT_NODE, page.getNodeType());
+        assertEquals(org.w3c.dom.Node.ELEMENT_NODE, root.getNodeType());
         assertEquals("#document", page.getNodeName());
     }
 

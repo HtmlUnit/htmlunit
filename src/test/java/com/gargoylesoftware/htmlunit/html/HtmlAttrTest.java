@@ -124,7 +124,7 @@ public class HtmlAttrTest extends WebTestCase {
     /**
      */
     public void testGetNodeType() {
-        assertEquals(DomNode.ATTRIBUTE_NODE, htmlAttr_.getNodeType());
+        assertEquals(org.w3c.dom.Node.ATTRIBUTE_NODE, htmlAttr_.getNodeType());
     }
 
     /**

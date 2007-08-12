@@ -69,7 +69,7 @@ public class HtmlAttr extends DomNode implements Map.Entry {
      * @return the node type
      */
     public short getNodeType() {
-        return DomNode.ATTRIBUTE_NODE;
+        return org.w3c.dom.Node.ATTRIBUTE_NODE;
     }
 
     /**

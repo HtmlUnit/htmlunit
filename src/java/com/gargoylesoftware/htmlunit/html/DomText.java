@@ -104,10 +104,10 @@ public class DomText extends DomCharacterData {
     }
 
     /**
-     * @return the node type constant, in this case {@link DomNode#TEXT_NODE}
+     * @return the node type constant, in this case {@link org.w3c.dom.Node#TEXT_NODE}
      */
     public short getNodeType() {
-        return DomNode.TEXT_NODE;
+        return org.w3c.dom.Node.TEXT_NODE;
     }
 
     /**

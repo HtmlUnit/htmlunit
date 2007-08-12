@@ -77,23 +77,35 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public abstract class DomNode implements Cloneable, Serializable {
 
-    /** Node type constant for the <code>Document</code> node. */
+    /**
+     * Node type constant for the <code>Document</code> node.
+     * @deprecated use {@link org.w3c.dom.Node#DOCUMENT_NODE} instead.
+     */
     public static final short DOCUMENT_NODE = 9;
 
-    /** Node type constant for <code>Element</code> nodes. */
+    /**
+     * Node type constant for <code>Element</code> nodes.
+     * @deprecated use {@link org.w3c.dom.Node#ELEMENT_NODE} instead.
+     */
     public static final short ELEMENT_NODE = 1;
 
-    /** Node type constant for <code>Text</code> nodes. */
+    /**
+     * Node type constant for <code>Text</code> nodes.
+     * @deprecated use {@link org.w3c.dom.Node#TEXT_NODE} instead.
+     */
     public static final short TEXT_NODE = 3;
 
-    /** Node type constant for <code>Attribute</code> nodes. */
+    /**
+     * Node type constant for <code>Attribute</code> nodes.
+     * @deprecated use {@link org.w3c.dom.Node#ATTRIBUTE_NODE} instead.
+     */
     public static final short ATTRIBUTE_NODE = 2;
 
-    /** Node type constant for <code>Comment</code> nodes. */
+    /**
+     * Node type constant for <code>Comment</code> nodes.
+     * @deprecated use {@link org.w3c.dom.Node#COMMENT_NODE} instead.
+     */
     public static final short COMMENT_NODE = 8;
-
-    /** Node type constant for <code>DocumentFragment</code> nodes. */
-    public static final short DOCUMENT_FRAGMENT_NODE = 11;
 
     /** A ready state constant for IE (state 1). */
     public static final String READY_STATE_UNINITIALIZED = "uninitialized";

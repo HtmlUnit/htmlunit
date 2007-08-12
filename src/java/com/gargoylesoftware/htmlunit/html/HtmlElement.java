@@ -353,7 +353,7 @@ public abstract class HtmlElement extends DomNode {
 
     /** @return the node type */
     public short getNodeType() {
-        return DomNode.ELEMENT_NODE;
+        return org.w3c.dom.Node.ELEMENT_NODE;
     }
 
     /**

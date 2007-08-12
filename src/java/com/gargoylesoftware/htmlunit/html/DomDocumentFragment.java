@@ -45,6 +45,9 @@ package com.gargoylesoftware.htmlunit.html;
  */
 public class DomDocumentFragment extends DomNode {
 
+    /** The symbolic node name */
+    public static final String NODE_NAME = "#document-fragment";
+
     /**
      * Creates an instance.
      * @param htmlPage The page which contains this node.
@@ -55,15 +58,17 @@ public class DomDocumentFragment extends DomNode {
     
     /**
      * {@inheritDoc}
+     * @return the node name, in this case {@link #NODE_NAME}
      */
     public String getNodeName() {
-        return "#document-fragment";
+        return NODE_NAME;
     }
 
     /**
      * {@inheritDoc}
+     * @return the node type constant, in this case {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE}
      */
     public short getNodeType() {
-        return DOCUMENT_FRAGMENT_NODE;
+        return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
     }
 }

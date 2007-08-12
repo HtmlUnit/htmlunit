@@ -44,6 +44,7 @@ import java.io.PrintWriter;
  *
  * @version $Revision$
  * @author Karel Kolman
+ * @author Ahmed Ashour
  */
 public class DomComment extends DomCharacterData {
 
@@ -63,10 +64,10 @@ public class DomComment extends DomCharacterData {
     }
     
     /**
-     * @return the node type constant, in this case {@link DomNode#COMMENT_NODE}
+     * @return the node type constant, in this case {@link org.w3c.dom.Node#COMMENT_NODE}
      */
     public short getNodeType() {
-        return DomNode.COMMENT_NODE;
+        return org.w3c.dom.Node.COMMENT_NODE;
     }
 
     /**
