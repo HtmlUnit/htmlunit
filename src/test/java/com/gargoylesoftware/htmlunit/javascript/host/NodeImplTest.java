@@ -445,4 +445,37 @@ public class NodeImplTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * element.appendChild: If the parent has a null parentNode,
+     * IE creates a DocumentFragment be the parent's parentNode.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testAppendChild_parentNode() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testAppendChild_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"null", "#document-fragment"});
+        testAppendChild_parentNode(BrowserVersion.FIREFOX_2, new String[] {"null", "null"});
+    }
+
+    private void testAppendChild_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var div1 = document.createElement('div');\n"
+            + "    var div2 = document.createElement('div');\n"
+            + "    alert(div1.parentNode);\n"
+            + "    div1.appendChild(div2);\n"
+            + "    if(div1.parentNode)\n"
+            + "      alert(div1.parentNode.nodeName);\n"
+            + "    else\n"
+            + "      alert(div1.parentNode);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
