@@ -92,7 +92,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private boolean async_;
     private int threadID_;
     private WebResponse webResponse_;
-    private String overridenMimeType_;
+    private String overriddenMimeType_;
     private HtmlPage containingPage_;
 
     /**
@@ -387,13 +387,13 @@ public class XMLHttpRequest extends SimpleScriptable {
         try {
             setState(STATE_LOADED, context);
             final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
-            if (overridenMimeType_ == null) {
+            if (overriddenMimeType_ == null) {
                 webResponse_ = webResponse;
             }
             else {
                 webResponse_ = new WebResponseWrapper(webResponse) {
                     public String getContentType() {
-                        return overridenMimeType_;
+                        return overriddenMimeType_;
                     }
                 };
             }
@@ -429,6 +429,6 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
      */
     public void jsxFunction_overrideMimeType(final String mimeType) {
-        overridenMimeType_ = mimeType;
+        overriddenMimeType_ = mimeType;
     }
 }
