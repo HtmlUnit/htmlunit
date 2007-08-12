@@ -92,6 +92,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     /** Node type constant for <code>Comment</code> nodes. */
     public static final short COMMENT_NODE = 8;
 
+    /** Node type constant for <code>DocumentFragment</code> nodes. */
+    public static final short DOCUMENT_FRAGMENT_NODE = 11;
+
     /** A ready state constant for IE (state 1). */
     public static final String READY_STATE_UNINITIALIZED = "uninitialized";
 

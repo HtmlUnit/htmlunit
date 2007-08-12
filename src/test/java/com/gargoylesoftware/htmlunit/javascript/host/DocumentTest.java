@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests for {@link Document}.
@@ -2606,7 +2607,6 @@ public class DocumentTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -2624,4 +2624,29 @@ public class DocumentTest extends WebTestCase {
         final String[] expectedAlerts = {"[object]"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateDocumentFragment() throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var textarea = document.getElementById('myTextarea');\n"
+            + "    textarea.value += fragment.nodeName + '_';\n"
+            + "    textarea.value += fragment.nodeValue + '_';\n"
+            + "    textarea.value += fragment.nodeType + '_';\n"
+            + "    textarea.value += fragment.parentNode + '_';\n"
+            + "    textarea.value += fragment.childNodes.length + '_';\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<textarea id='myTextarea' cols='40'></textarea>\n"
+            + "</body></html>";
+
+        final String expected = "#document-fragment_null_11_null_0_";
+        final HtmlPage page = (HtmlPage) loadPage(content);
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
+        assertEquals(expected, textArea.getText());
+    }
+
 }

@@ -220,6 +220,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
+     * Creates an empty {@link DocumentFragment} object.
+     * @return a newly created {@link DocumentFragment}.
+     */
+    public DocumentFragment createDocumentFragment() {
+        return new DocumentFragment(this);
+    }
+    
+    /**
      * Create a new HTML element with the given tag name.
      *
      * @param tagName The tag name, preferably in lowercase
