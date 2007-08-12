@@ -46,6 +46,7 @@ import java.util.Map;
  *
  * @version $Revision$
  * @author Denis N. Antonioli
+ * @author David K. Taylor
  */
 public class HtmlAttr extends DomNode implements Map.Entry {
 
@@ -95,8 +96,17 @@ public class HtmlAttr extends DomNode implements Map.Entry {
 
     /**
      * @return The value of wrapped map entry.
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use getHtmlValue instead.
      */
     public Object getValue() {
+        return (String) getHtmlValue();
+    }
+
+    /**
+     * @return The value of wrapped map entry.
+     */
+    public Object getHtmlValue() {
         return wrappedMappedEntry_.getValue();
     }
 
@@ -104,8 +114,19 @@ public class HtmlAttr extends DomNode implements Map.Entry {
      * Delegate to the wrapped map entry.
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use setHtmlValue instead.
      */
     public Object setValue(final Object value) {
+        return setHtmlValue(value);
+    }
+
+    /**
+     * Delegate to the wrapped map entry.
+     * @param value new value to be stored in this entry.
+     * @return old value corresponding to the entry.
+     */
+    public Object setHtmlValue(final Object value) {
         return wrappedMappedEntry_.setValue(value);
     }
 }

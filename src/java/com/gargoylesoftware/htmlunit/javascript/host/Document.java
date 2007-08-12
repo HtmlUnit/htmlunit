@@ -730,7 +730,7 @@ public final class Document extends NodeImpl {
      * @return a newly created DocumentFragment.
      */
     public Object jsxFunction_createDocumentFragment() {
-        final DomDocumentFragment htmlElement = getDomNodeOrDie().getPage().createDocumentFragment();
+        final DomDocumentFragment htmlElement = getDomNodeOrDie().getPage().createDomDocumentFragment();
         return getScriptableFor(htmlElement);
     }
     

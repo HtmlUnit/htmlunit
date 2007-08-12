@@ -7,6 +7,13 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="update" dev="dktaylor" id="1747878">
+                Deprecated methods that conflict with W3C DOM API: DomTest.splitText, HtmlPage.getDocumentElement,
+                createElement, createElementNS, HtmlAttr.getValue, setValue, DomNode.getLastChild,
+                getParentNode, getPreviousSibling, getNextSibling, getFirstChild, cloneNode, appendChild,
+                HtmlElement.cloneNode.  Added replacement Dom or Html methods.  Renamed
+                HtmlPage.createDocumentFragment to createDomDocumentFragment.  (#1747878).
+            </action>
             <action type="update" dev="asashour">
                 Deprecated DomNode.XXXX_NODE.
             </action>

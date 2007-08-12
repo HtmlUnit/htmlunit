@@ -70,8 +70,19 @@ public class DomText extends DomCharacterData {
      * Split a Text node in two.
      * @param offset The character position at which to split the Text node.
      * @return The Text node that was split from this node.
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use splitDomText instead.
      */
     public DomText splitText(final int offset) {
+        return splitDomText(offset);
+    }
+
+    /**
+     * Split a DomText node in two.
+     * @param offset The character position at which to split the DomText node.
+     * @return The DomText node that was split from this node.
+     */
+    public DomText splitDomText(final int offset) {
         if (offset < 0 || offset > getLength()) {
             throw new IllegalArgumentException("offset: " + offset + " data.length: " + getLength());
         }

@@ -288,8 +288,19 @@ public abstract class DomNode implements Cloneable, Serializable {
      * Get the last child node.
      * @return The last child node or null if the current node has
      * no children.
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use getLastDomChild instead.
      */
     public DomNode getLastChild() {
+        return getLastDomChild();
+    }
+
+    /**
+     * Get the last child DomNode.
+     * @return The last child node or null if the current node has
+     * no children.
+     */
+    public DomNode getLastDomChild() {
         if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
             return firstChild_.previousSibling_;
@@ -302,8 +313,18 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      * @return the parent of this node, which may be <code>null</code> if this
      * is the root node
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use getParentDomNode instead.
      */
     public DomNode getParentNode() {
+        return getParentDomNode();
+    }
+
+    /**
+     * @return the parent DomNode of this node, which may be <code>null</code> if this
+     * is the root node
+     */
+    public DomNode getParentDomNode() {
         return parent_;
     }
 
@@ -318,8 +339,18 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      * @return the previous sibling of this node, or <code>null</code> if this is
      * the first node
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use getPreviousDomSibling instead.
      */
     public DomNode getPreviousSibling() {
+        return getPreviousDomSibling();
+    }
+
+    /**
+     * @return the previous sibling of this node, or <code>null</code> if this is
+     * the first node
+     */
+    public DomNode getPreviousDomSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
             return null;
@@ -331,15 +362,33 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * @return the next sibling
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use getNextDomSibling instead.
      */
     public DomNode getNextSibling() {
+        return getNextDomSibling();
+    }
+
+    /**
+     * @return the next sibling
+     */
+    public DomNode getNextDomSibling() {
         return nextSibling_;
     }
 
     /**
      * @return the previous sibling
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use getFirstDomChild instead.
      */
     public DomNode getFirstChild() {
+        return getFirstDomChild();
+    }
+
+    /**
+     * @return the previous sibling
+     */
+    public DomNode getFirstDomChild() {
         return firstChild_;
     }
 
@@ -571,9 +620,22 @@ public abstract class DomNode implements Cloneable, Serializable {
      * below this one. Otherwise, the new node will not have any children. The page reference
      * will always be the same as this node's.
      * @return a new node
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use cloneDomNode instead.
      */
     public DomNode cloneNode(final boolean deep) {
+        return cloneDomNode(deep);
+    }
 
+    /**
+     * Make a clone of this node
+     *
+     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
+     * below this one. Otherwise, the new node will not have any children. The page reference
+     * will always be the same as this node's.
+     * @return a new node
+     */
+    public DomNode cloneDomNode(final boolean deep) {
         final DomNode newnode;
         try {
             newnode = (DomNode) clone();
@@ -619,8 +681,19 @@ public abstract class DomNode implements Cloneable, Serializable {
      * append a child node to the end of the current list
      * @param node the node to append
      * @return the node added
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use appendDomChild instead.
      */
     public DomNode appendChild(final DomNode node) {
+        return appendDomChild(node);
+    }
+
+    /**
+     * append a child node to the end of the current list
+     * @param node the node to append
+     * @return the node added
+     */
+    public DomNode appendDomChild(final DomNode node) {
 
         //clean up the new node, in case it is being moved
         if (node != this) {

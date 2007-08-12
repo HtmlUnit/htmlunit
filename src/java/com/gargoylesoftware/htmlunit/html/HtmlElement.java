@@ -120,9 +120,19 @@ public abstract class HtmlElement extends DomNode {
     /**
      * Overrides {@link DomNode#cloneNode(boolean)} so clone gets its own Map of attributes.
      * {@inheritDoc}
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use cloneDomNode instead.
      */
     public DomNode cloneNode(final boolean deep) {
-        final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
+        return cloneDomNode(deep);
+    }
+
+    /**
+     * Overrides {@link DomNode#cloneDomNode(boolean)} so clone gets its own Map of attributes.
+     * {@inheritDoc}
+     */
+    public DomNode cloneDomNode(final boolean deep) {
+        final HtmlElement newNode = (HtmlElement) super.cloneDomNode(deep);
         newNode.attributes_ = new HashMap();
         for (final Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
             final Object key = it.next();

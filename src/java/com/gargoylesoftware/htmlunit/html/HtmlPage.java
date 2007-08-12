@@ -178,8 +178,18 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Get the root element of this document.
      * @return The root element
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use getDocumentHtmlElement instead.
      */
     public HtmlElement getDocumentElement() {
+        return getDocumentHtmlElement();
+    }
+
+    /**
+     * Get the root HtmlElement of this document.
+     * @return The root element
+     */
+    public HtmlElement getDocumentHtmlElement() {
         if (documentElement_ == null) {
             DomNode childNode = getFirstChild();
             while (childNode != null && !(childNode instanceof HtmlElement)) {
@@ -223,8 +233,20 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * Creates an empty {@link DomDocumentFragment} object.
      * @return a newly created {@link DomDocumentFragment}.
      */
-    public DomDocumentFragment createDocumentFragment() {
+    public DomDocumentFragment createDomDocumentFragment() {
         return new DomDocumentFragment(this);
+    }
+
+    /**
+     * Create a new HTML element with the given tag name.
+     *
+     * @param tagName The tag name, preferrably in lowercase
+     * @return the new HTML element.
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use createHtmlElement instead.
+     */
+    public HtmlElement createElement(final String tagName) {
+        return createHtmlElement(tagName);
     }
     
     /**
@@ -233,7 +255,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param tagName The tag name, preferably in lowercase
      * @return the new HTML element.
      */
-    public HtmlElement createElement(final String tagName) {
+    public HtmlElement createHtmlElement(final String tagName) {
         final String tagLower = tagName.toLowerCase();
         return HTMLParser.getFactory(tagLower).createElement(this, tagLower, null);
     }
@@ -244,8 +266,21 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @return the new HTML element.
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use createHtmlElementNS instead.
      */
     public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
+        return createHtmlElementNS(namespaceURI, qualifiedName);
+    }
+
+    /**
+     * Create a new HtmlElement with the given namespace and qualified name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @return the new HTML element.
+     */
+    public HtmlElement createHtmlElementNS(final String namespaceURI, final String qualifiedName) {
         final String tagLower = qualifiedName.toLowerCase().substring(qualifiedName.indexOf(':') + 1);
         return HTMLParser.getFactory(tagLower).createElementNS(this, namespaceURI, qualifiedName, null);
     }
