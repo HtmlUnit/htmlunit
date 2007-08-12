@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="update" dev="asashour">
+                Change DomNode.ATTRIBUTE_NODE to be 2 in order to match W3C DOM Node.ATTRIBUTE_NODE.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for document.createDocumentFragment().
             </action>
