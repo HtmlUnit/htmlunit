@@ -127,9 +127,15 @@ public class NodeImpl extends SimpleScriptable {
      * @return The newly added child node.
      */
     public Object jsxFunction_appendChild(final Object childObject) {
-
         Object appendedChild = null;
-        if (childObject instanceof NodeImpl) {
+        if (childObject instanceof DocumentFragment) {
+            final DocumentFragment fragment = (DocumentFragment) childObject;
+            final HTMLCollection children = (HTMLCollection) fragment.jsxGet_childNodes();
+            for (int i = 0; i < children.jsxGet_length(); i++) {
+                jsxFunction_appendChild(children.jsxFunction_item(new Integer(i)));
+            }
+        }
+        else if (childObject instanceof NodeImpl) {
             // Get XML node for the DOM node passed in
             final DomNode childDomNode =
                 ((NodeImpl) childObject).getDomNodeOrDie();

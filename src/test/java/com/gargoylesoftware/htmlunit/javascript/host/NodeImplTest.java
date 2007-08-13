@@ -478,4 +478,31 @@ public class NodeImplTest extends WebTestCase {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAppencChild_of_DocumentFragment() throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div1 = document.createElement('div');\n"
+            + "    div1.id = 'div1';\n"
+            + "    var div2 = document.createElement('div');\n"
+            + "    div2.id = 'div2';\n"
+            + "    fragment.appendChild(div1);\n"
+            + "    fragment.appendChild(div2);\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    div.appendChild(fragment);\n"
+            + "    alert(div.childNodes.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv'></div>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"2"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
