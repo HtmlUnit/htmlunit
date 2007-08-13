@@ -173,7 +173,7 @@ public class HTMLSelectElement extends FormField {
         }
 
         if (beforeOption == null) {
-            select.appendChild(htmlOption);
+            select.appendDomChild(htmlOption);
         }
         else {
             beforeOption.insertBefore(htmlOption);

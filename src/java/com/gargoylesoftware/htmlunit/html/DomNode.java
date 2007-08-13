@@ -594,7 +594,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         DomNode child = getFirstChild();
         while (child != null) {
             child.printXml(indent + "  ", printWriter);
-            child = child.getNextSibling();
+            child = child.getNextDomSibling();
         }
     }
 
@@ -653,7 +653,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         // if deep, clone the kids too.
         if (deep) {
             for (DomNode child = firstChild_; child != null; child = child.nextSibling_) {
-                newnode.appendChild(child.cloneNode(true));
+                newnode.appendDomChild(child.cloneDomNode(true));
             }
         }
         return newnode;
@@ -704,7 +704,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             firstChild_.previousSibling_ = node;
         }
         else {
-            final DomNode last = getLastChild();
+            final DomNode last = getLastDomChild();
 
             last.nextSibling_ = node;
             node.previousSibling_ = last;
@@ -783,7 +783,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         if (nextSibling_ != null && nextSibling_.previousSibling_ == this) {
             nextSibling_.previousSibling_ = previousSibling_;
         }
-        if (parent_ != null && this == parent_.getLastChild()) {
+        if (parent_ != null && this == parent_.getLastDomChild()) {
             parent_.firstChild_.previousSibling_ = previousSibling_;
         }
 
@@ -998,7 +998,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         private void setNextElement() {
             HtmlElement next = getFirstChildElement(nextElement_);
             if (next == null) {
-                next = getNextSibling(nextElement_);
+                next = getNextDomSibling(nextElement_);
             }
             if (next == null) {
                 next = getNextElementUpwards(nextElement_);
@@ -1011,14 +1011,14 @@ public abstract class DomNode implements Cloneable, Serializable {
                 return null;
             }
 
-            final DomNode parent = startingNode.getParentNode();
+            final DomNode parent = startingNode.getParentDomNode();
             if (parent == DomNode.this) {
                 return null;
             }
 
-            DomNode next = parent.getNextSibling();
+            DomNode next = parent.getNextDomSibling();
             while (next != null && next instanceof HtmlElement == false) {
-                next = next.getNextSibling();
+                next = next.getNextDomSibling();
             }
 
             if (next == null) {
@@ -1033,17 +1033,17 @@ public abstract class DomNode implements Cloneable, Serializable {
             if (parent instanceof HtmlNoScript && getPage().getWebClient().isJavaScriptEnabled()) {
                 return null;
             }
-            DomNode node = parent.getFirstChild();
+            DomNode node = parent.getFirstDomChild();
             while (node != null && node instanceof HtmlElement == false) {
-                node = node.getNextSibling();
+                node = node.getNextDomSibling();
             }
             return (HtmlElement) node;
         }
 
-        private HtmlElement getNextSibling(final HtmlElement element) {
-            DomNode node = element.getNextSibling();
+        private HtmlElement getNextDomSibling(final HtmlElement element) {
+            DomNode node = element.getNextDomSibling();
             while (node != null && node instanceof HtmlElement == false) {
-                node = node.getNextSibling();
+                node = node.getNextDomSibling();
             }
             return (HtmlElement) node;
         }

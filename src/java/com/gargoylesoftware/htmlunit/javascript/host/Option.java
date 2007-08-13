@@ -86,7 +86,7 @@ public class Option extends HTMLElement {
         setDomNode(htmlOption);
 
         if (newText != null && !newText.equals("undefined")) {
-            htmlOption.appendChild(new DomText(page, newText));
+            htmlOption.appendDomChild(new DomText(page, newText));
         }
         if (newValue != null && !newValue.equals("undefined")) {
             htmlOption.setValueAttribute(newValue);

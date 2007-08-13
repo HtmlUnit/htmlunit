@@ -180,7 +180,7 @@ public class HtmlScript extends HtmlElement {
      * Executes the content as a script if said content is a text node.
      * {@inheritDoc}
      */
-    public DomNode appendChild(final DomNode node) {
+    public DomNode appendDomChild(final DomNode node) {
         final DomNode response = super.appendDomChild(node);
         executeInlineScriptIfNeeded();
         return response;

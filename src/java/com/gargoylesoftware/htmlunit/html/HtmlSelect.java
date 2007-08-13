@@ -261,14 +261,14 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param newOption The new option to add
      */
     public void appendOption(final HtmlOption newOption) {
-        appendChild(newOption);
+        appendDomChild(newOption);
     }
 
     /**
      * {@inheritDoc}
-     * @see DomNode#appendChild(DomNode)
+     * @see DomNode#appendDomChild(DomNode)
      */
-    public DomNode appendChild(final DomNode node) {
+    public DomNode appendDomChild(final DomNode node) {
         final DomNode response = super.appendDomChild(node);
         if (node instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) node;
