@@ -61,7 +61,7 @@
         </module>
         <module name="JavadocType">
             <property name="scope" value="protected"/>
-            <property name="authorFormat" value="\S"/>
+            <property name="authorFormat" value="\S \S"/>
             <property name="versionFormat" value="\$Revision.*\$"/>
         </module>
         <module name="JavadocVariable">
