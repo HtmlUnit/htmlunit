@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.Assert;
  * Intermediate base class for DOM Nodes that have namespaces.  That includes HtmlElement
  * and HtmlAttr.
  *
- * @version $Revision: 1529 $
+ * @version $Revision$
  * @author David K. Taylor
  */
 public abstract class DomNamespaceNode extends DomNode {
