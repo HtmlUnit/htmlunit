@@ -100,7 +100,7 @@ public class HtmlAttr extends DomNode implements Map.Entry {
      * different.  Use getHtmlValue instead.
      */
     public Object getValue() {
-        return (String) getHtmlValue();
+        return getHtmlValue();
     }
 
     /**
