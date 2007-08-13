@@ -78,16 +78,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public abstract class HtmlElement extends DomNode {
+public abstract class HtmlElement extends DomNamespaceNode {
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
     /** Constant meaning that the specified attribute was found but its value was empty. */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
-
-    private final String namespaceURI_;
-    private final String qualifiedName_;
     
     /** The map holding the attribute values, keyed by name. */
     private Map attributes_;
@@ -105,10 +102,7 @@ public abstract class HtmlElement extends DomNode {
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
             final Map attributes) {
-        super(htmlPage);
-        Assert.notNull("qualifiedName", qualifiedName);
-        namespaceURI_ = namespaceURI;
-        qualifiedName_ = qualifiedName;
+        super(namespaceURI, qualifiedName, htmlPage);
         if (attributes != null) {
             attributes_ = attributes;
         }
@@ -313,7 +307,7 @@ public abstract class HtmlElement extends DomNode {
      * Return the tag name of this element.  The tag name is the actual html name.  For example
      * the tag name for HtmlAnchor is "a" and the tag name for HtmlTable is "table".
      * This tag name will always be in lowercase, no matter what case was used in the original
-     * document.
+     * document, when no namespace is defined.
      *
      * @return the tag name of this element.
      */
@@ -322,42 +316,7 @@ public abstract class HtmlElement extends DomNode {
             return getLocalName().toLowerCase();
         }
         else {
-            return qualifiedName_;
-        }
-            
-    }
-
-    /**
-     * Returns The URI that identifies an XML namespace.
-     * @return The URI that identifies an XML namespace.
-     */
-    public String getNamespaceURI() {
-        return namespaceURI_;
-    }
-
-    /**
-     * Returns The local name (without prefix).
-     * @return The local name (without prefix).
-     */
-    public String getLocalName() {
-        if (getNamespaceURI() == null) {
-            return qualifiedName_;
-        }
-        else {
-            return qualifiedName_.substring(qualifiedName_.indexOf(':') + 1);
-        }
-    }
-
-    /**
-     * Returns The Namespace prefix
-     * @return The Namespace prefix.
-     */
-    public String getPrefix() {
-        if (getNamespaceURI() == null) {
-            return null;
-        }
-        else {
-            return qualifiedName_.substring(0, qualifiedName_.indexOf(':'));
+            return getQualifiedName();
         }
     }
 
