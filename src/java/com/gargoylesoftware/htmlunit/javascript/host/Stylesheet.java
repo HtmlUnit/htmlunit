@@ -48,5 +48,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Stylesheet extends SimpleScriptable {
 
+    private static final long serialVersionUID = -8341675386925348206L;
 
 }
