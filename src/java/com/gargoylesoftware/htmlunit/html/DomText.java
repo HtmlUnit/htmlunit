@@ -48,6 +48,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Rodney Gitzel
+ * @author Ahmed Ashour
  */
 public class DomText extends DomCharacterData {
 
@@ -92,10 +93,10 @@ public class DomText extends DomCharacterData {
         setData(getData().substring(0, offset));
 
         // insert new text node
-        if (getParentNode() != null) {
-            newText.setParentNode(getParentNode());
+        if (getParentDomNode() != null) {
+            newText.setParentNode(getParentDomNode());
             newText.setPreviousSibling(this);
-            newText.setNextSibling(getNextSibling());
+            newText.setNextSibling(getNextDomSibling());
             setNextSibling(newText);
         }
 
@@ -107,7 +108,7 @@ public class DomText extends DomCharacterData {
      */
     public String asText() {
         String text = getData();
-        if (!(getParentNode() instanceof HtmlTextArea)) {
+        if (!(getParentDomNode() instanceof HtmlTextArea)) {
             // Remove extra whitespace
             text = reduceWhitespace(text);
         }

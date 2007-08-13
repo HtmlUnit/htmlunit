@@ -142,14 +142,14 @@ public class HtmlAttrTest extends WebTestCase {
     /**
      */
     public void testGetValue() {
-        assertEquals(ENTRY_VALUE, htmlAttr_.getValue());
+        assertEquals(ENTRY_VALUE, htmlAttr_.getHtmlValue());
     }
 
     /**
      */
     public void testSetValue() {
         try {
-            htmlAttr_.setValue("foo");
+            htmlAttr_.setHtmlValue("foo");
             fail("Method not implemented!");
         }
         catch (final NoSuchMethodError nsme) {
@@ -160,6 +160,6 @@ public class HtmlAttrTest extends WebTestCase {
     /**
      */
     public void testGetParent() {
-        assertSame(HTML_ELEMENT, htmlAttr_.getParentNode());
+        assertSame(HTML_ELEMENT, htmlAttr_.getParentDomNode());
     }
 }

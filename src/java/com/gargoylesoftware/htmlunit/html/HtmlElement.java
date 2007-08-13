@@ -230,7 +230,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
                 }
             }
         }
-        final DomNode parentNode = getParentNode();
+        final DomNode parentNode = getParentDomNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeAdded(event);
         }
@@ -253,7 +253,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
                 }
             }
         }
-        final DomNode parentNode = getParentNode();
+        final DomNode parentNode = getParentDomNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeReplaced(event);
         }
@@ -276,7 +276,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
                 }
             }
         }
-        final DomNode parentNode = getParentNode();
+        final DomNode parentNode = getParentDomNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeRemoved(event);
         }
@@ -357,14 +357,14 @@ public abstract class HtmlElement extends DomNamespaceNode {
     public HtmlElement getEnclosingElement(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
 
-        DomNode currentNode = getParentNode();
+        DomNode currentNode = getParentDomNode();
         while (currentNode != null) {
             if (currentNode instanceof HtmlElement
                     && currentNode.getNodeName().equals(tagNameLC)) {
 
                 return (HtmlElement) currentNode;
             }
-            currentNode = currentNode.getParentNode();
+            currentNode = currentNode.getParentDomNode();
         }
         return null;
     }
@@ -430,7 +430,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      */
     protected void printXml(final String indent, final PrintWriter printWriter) {
 
-        final boolean hasChildren = (getFirstChild() != null);
+        final boolean hasChildren = (getFirstDomChild() != null);
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
 
@@ -673,8 +673,8 @@ public abstract class HtmlElement extends DomNamespaceNode {
         final List children = getHtmlElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
-            child = getPage().createElement(tagName);
-            appendChild(child);
+            child = getPage().createHtmlElement(tagName);
+            appendDomChild(child);
         }
         else {
             // Return the first existing child.
@@ -714,12 +714,12 @@ public abstract class HtmlElement extends DomNamespaceNode {
 
         /** constructor */
         public ChildElementsIterator() {
-            if (getFirstChild() != null) {
-                if (getFirstChild() instanceof HtmlElement) {
-                    nextElement_ = (HtmlElement) getFirstChild();
+            if (getFirstDomChild() != null) {
+                if (getFirstDomChild() instanceof HtmlElement) {
+                    nextElement_ = (HtmlElement) getFirstDomChild();
                 }
                 else {
-                    setNextElement(getFirstChild());
+                    setNextElement(getFirstDomChild());
                 }
             }
         }
@@ -739,8 +739,8 @@ public abstract class HtmlElement extends DomNamespaceNode {
             if (nextElement_ == null) {
                 throw new IllegalStateException();
             }
-            if (nextElement_.getPreviousSibling() != null) {
-                nextElement_.getPreviousSibling().remove();
+            if (nextElement_.getPreviousDomSibling() != null) {
+                nextElement_.getPreviousDomSibling().remove();
             }
         }
 
@@ -757,9 +757,9 @@ public abstract class HtmlElement extends DomNamespaceNode {
         }
 
         private void setNextElement(final DomNode node) {
-            DomNode next = node.getNextSibling();
+            DomNode next = node.getNextDomSibling();
             while (next != null && !(next instanceof HtmlElement)) {
-                next = next.getNextSibling();
+                next = next.getNextDomSibling();
             }
             nextElement_ = (HtmlElement) next;
         }

@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class TableRow extends HTMLElement {
     private static final long serialVersionUID = 3256441404401397812L;
@@ -122,9 +123,9 @@ public class TableRow extends HTMLElement {
 
         final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
         if (indexValid) {
-            final HtmlElement newCell = htmlRow.getPage().createElement("td");
+            final HtmlElement newCell = htmlRow.getPage().createHtmlElement("td");
             if (position == -1 || position == htmlRow.getCells().size()) {
-                htmlRow.appendChild(newCell);
+                htmlRow.appendDomChild(newCell);
             }
             else {
                 htmlRow.getCell(position).insertBefore(newCell);

@@ -269,7 +269,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @see DomNode#appendChild(DomNode)
      */
     public DomNode appendChild(final DomNode node) {
-        final DomNode response = super.appendChild(node);
+        final DomNode response = super.appendDomChild(node);
         if (node instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {

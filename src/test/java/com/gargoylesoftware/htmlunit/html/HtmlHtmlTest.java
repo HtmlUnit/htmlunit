@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlHtmlTest extends WebTestCase {
     /**
@@ -67,7 +68,7 @@ public class HtmlHtmlTest extends WebTestCase {
             + "<body></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlHtml root = (HtmlHtml) page.getDocumentElement();
+        final HtmlHtml root = (HtmlHtml) page.getDocumentHtmlElement();
         assertEquals("en", root.getLangAttribute());
         assertEquals("en", root.getXmlLangAttribute());
     }

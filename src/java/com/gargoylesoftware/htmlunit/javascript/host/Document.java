@@ -316,12 +316,12 @@ public final class Document extends NodeImpl {
 
                 final HtmlPage page = (HtmlPage) getDomNodeOrDie();
                 // get the node at which end the parsed content should be added
-                HtmlElement current = getLastHtmlElement(page.getDocumentElement());
+                HtmlElement current = getLastHtmlElement(page.getDocumentHtmlElement());
                 getLog().debug("current: " + current);
 
                 // quick and dirty workaround as long as IFRAME JS object aren't an HTMLElement
                 if (current instanceof HtmlInlineFrame) {
-                    current = (HtmlElement) current.getParentNode();
+                    current = (HtmlElement) current.getParentDomNode();
                 }
                 ((HTMLElement) getJavaScriptNode(current))
                 .jsxFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END, bufferedContent);
@@ -411,7 +411,7 @@ public final class Document extends NodeImpl {
      * @return the searched node
      */
     HtmlElement getLastHtmlElement(final HtmlElement node) {
-        final DomNode lastChild = node.getLastChild();
+        final DomNode lastChild = node.getLastDomChild();
         if (lastChild == null
                 || !(lastChild instanceof HtmlElement)
                 || lastChild instanceof HtmlScript) {
@@ -651,7 +651,7 @@ public final class Document extends NodeImpl {
      * @return The root node for the document.
      */
     public Object jsxGet_documentElement() {
-        return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentElement());
+        return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentHtmlElement());
     }
 
     /**
@@ -679,7 +679,7 @@ public final class Document extends NodeImpl {
     public Object jsxFunction_createElement(final String tagName) {
         Object result = NOT_FOUND;
         try {
-            final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElement(tagName);
+            final HtmlElement htmlElement = getDomNodeOrDie().getPage().createHtmlElement(tagName);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {
@@ -707,7 +707,8 @@ public final class Document extends NodeImpl {
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
         Object result = NOT_FOUND;
         try {
-            final HtmlElement htmlElement = getDomNodeOrDie().getPage().createElementNS(namespaceURI, qualifiedName);
+            final HtmlElement htmlElement =
+                getDomNodeOrDie().getPage().createHtmlElementNS(namespaceURI, qualifiedName);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {
@@ -800,7 +801,8 @@ public final class Document extends NodeImpl {
     public Object jsxFunction_getElementById(final String id) {
         Object result = null;
         try {
-            final HtmlElement htmlElement = ((HtmlPage) getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
+            final HtmlElement htmlElement =
+                ((HtmlPage) getDomNodeOrDie()).getDocumentHtmlElement().getHtmlElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {
@@ -927,7 +929,7 @@ public final class Document extends NodeImpl {
      */
     public Object jsxGet_body() {
         final List tagNames = Arrays.asList(new String[] {"body", "frameset"});
-        final List list = getHtmlPage().getDocumentElement().getHtmlElementsByTagNames(tagNames);
+        final List list = getHtmlPage().getDocumentHtmlElement().getHtmlElementsByTagNames(tagNames);
         if (list.size() == 0) {
             return NOT_FOUND;
         }
@@ -965,7 +967,7 @@ public final class Document extends NodeImpl {
     public String jsxGet_readyState() {
         final DomNode node = getDomNodeOrDie();
         if (node instanceof HtmlPage) {
-            return ((HtmlPage) node).getDocumentElement().getReadyState();
+            return ((HtmlPage) node).getDocumentHtmlElement().getReadyState();
         }
         else {
             return node.getReadyState();

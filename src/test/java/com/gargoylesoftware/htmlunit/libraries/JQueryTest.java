@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class JQueryTest extends WebTestCase {
 
@@ -206,7 +207,7 @@ public class JQueryTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
 
-        final HtmlElement doc = page.getDocumentElement();
+        final HtmlElement doc = page.getDocumentHtmlElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
         final Iterator i = tests.getChildElementsIterator();
 

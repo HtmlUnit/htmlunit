@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class HtmlTableTest extends WebTestCase {
     /**
@@ -323,15 +324,15 @@ public class HtmlTableTest extends WebTestCase {
 
         // Check that a <tbody> was inserted properly
         final HtmlTableDataCell cell1 = (HtmlTableDataCell) page.getHtmlElementById("cell1");
-        assertInstanceOf(cell1.getParentNode(), HtmlTableRow.class);
-        assertInstanceOf(cell1.getParentNode().getParentNode(), HtmlTableBody.class);
-        assertInstanceOf(cell1.getParentNode().getParentNode().getParentNode(), HtmlTable.class);
+        assertInstanceOf(cell1.getParentDomNode(), HtmlTableRow.class);
+        assertInstanceOf(cell1.getParentDomNode().getParentDomNode(), HtmlTableBody.class);
+        assertInstanceOf(cell1.getParentDomNode().getParentDomNode().getParentDomNode(), HtmlTable.class);
 
         // Check that the existing <tbody> wasn't messed up.
         final HtmlTableDataCell cell2 = (HtmlTableDataCell) page.getHtmlElementById("cell2");
-        assertInstanceOf(cell2.getParentNode(), HtmlTableRow.class);
-        assertInstanceOf(cell2.getParentNode().getParentNode(), HtmlTableBody.class);
-        assertInstanceOf(cell2.getParentNode().getParentNode().getParentNode(), HtmlTable.class);
+        assertInstanceOf(cell2.getParentDomNode(), HtmlTableRow.class);
+        assertInstanceOf(cell2.getParentDomNode().getParentDomNode(), HtmlTableBody.class);
+        assertInstanceOf(cell2.getParentDomNode().getParentDomNode().getParentDomNode(), HtmlTable.class);
     }
 
     /**

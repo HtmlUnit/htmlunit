@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.Util;
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Mike Bowler
+ * @author Ahmed Ashour
  * @see HtmlUnitXPath
  */
 public class DocumentNavigator extends DefaultNavigator {
@@ -91,7 +92,7 @@ public class DocumentNavigator extends DefaultNavigator {
      */
     public Iterator getParentAxisIterator(final Object contextNode) {
         return new Iterator() {
-            private DomNode parent_ = ((DomNode) contextNode).getParentNode();
+            private DomNode parent_ = ((DomNode) contextNode).getParentDomNode();
 
             public boolean hasNext() {
                 return parent_ != null;

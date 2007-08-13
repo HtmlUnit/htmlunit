@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class DocumentNavigatorTest extends WebTestCase {
     private static final Transformer NODE_TO_NODENAME = new Transformer() {
@@ -72,7 +73,7 @@ public class DocumentNavigatorTest extends WebTestCase {
      *  Create an instance
      *
      * @param name The name of the test
-     * @throws Exception if initialisation fails
+     * @throws Exception if initialization fails
      */
     public DocumentNavigatorTest(final String name) throws Exception {
         super(name);
@@ -86,7 +87,7 @@ public class DocumentNavigatorTest extends WebTestCase {
     public void testFollowingSiblingAxisIterator() throws Exception {
         final List expected = Arrays.asList(new String[] {"body"});
         final Collection received = CollectionUtils
-            .collect(NAVIGATOR.getFollowingSiblingAxisIterator(page_.getDocumentElement().getFirstChild()),
+            .collect(NAVIGATOR.getFollowingSiblingAxisIterator(page_.getDocumentHtmlElement().getFirstDomChild()),
                 NODE_TO_NODENAME);
         assertEquals(expected, received);
     }

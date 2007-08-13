@@ -150,7 +150,7 @@ public class DomTextTest extends WebTestCase {
         final HtmlElement elt = page.getHtmlElementById("foo");
         assertEquals(expectedText, elt.asText());
 
-        final DomNode node = elt.getFirstChild();
+        final DomNode node = elt.getFirstDomChild();
         assertEquals(expectedText, node.asText());
     }
 

@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Karel Kolman
+ * @author Ahmed Ashour
  */
 public class DomCommentTest extends WebTestCase {
     
@@ -75,7 +76,7 @@ public class DomCommentTest extends WebTestCase {
         final String content = "<html><body><span id='foo'>" + comment + "</span></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
-        final DomNode node = elt.getFirstChild();
+        final DomNode node = elt.getFirstDomChild();
         
         assertEquals(comment, node.asXml());
     }
@@ -87,8 +88,8 @@ public class DomCommentTest extends WebTestCase {
     public void testTextSibling() throws Exception {
         final String content = "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";
         final HtmlPage page = loadPage(content);
-        final DomNode node = page.getHtmlElementById("body").getFirstChild();
+        final DomNode node = page.getHtmlElementById("body").getFirstDomChild();
 
-        assertEquals(DomText.NODE_NAME, node.getNextSibling().getNodeName());
+        assertEquals(DomText.NODE_NAME, node.getNextDomSibling().getNodeName());
     }
 }

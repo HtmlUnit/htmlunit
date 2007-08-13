@@ -44,6 +44,7 @@ import java.util.NoSuchElementException;
  * Provides some utilities for working on the Html document.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public final class Util {
 
@@ -64,7 +65,7 @@ public final class Util {
                 return getNextNode(node);
             }
             protected DomNode getNextNode(final DomNode node) {
-                return node.getNextSibling();
+                return node.getNextDomSibling();
             }
         };
     }
@@ -81,7 +82,7 @@ public final class Util {
                 return getNextNode(node);
             }
             protected DomNode getNextNode(final DomNode node) {
-                return node.getPreviousSibling();
+                return node.getPreviousDomSibling();
             }
         };
     }
@@ -99,9 +100,9 @@ public final class Util {
                     return null;
                 }
                 else {
-                    final DomNode sibling = node.getNextSibling();
+                    final DomNode sibling = node.getNextDomSibling();
                     if (sibling == null) {
-                        return getFirstNode(node.getParentNode());
+                        return getFirstNode(node.getParentDomNode());
                     }
                     else {
                         return sibling;
@@ -114,12 +115,12 @@ public final class Util {
                     return null;
                 }
                 else {
-                    DomNode n = node.getFirstChild();
+                    DomNode n = node.getFirstDomChild();
                     if (n == null) {
-                        n = node.getNextSibling();
+                        n = node.getNextDomSibling();
                     }
                     if (n == null) {
-                        return getFirstNode(node.getParentNode());
+                        return getFirstNode(node.getParentDomNode());
                     }
                     else {
                         return n;
@@ -142,9 +143,9 @@ public final class Util {
                     return null;
                 }
                 else {
-                    final DomNode sibling = node.getPreviousSibling();
+                    final DomNode sibling = node.getPreviousDomSibling();
                     if (sibling == null) {
-                        return getFirstNode(node.getParentNode());
+                        return getFirstNode(node.getParentDomNode());
                     }
                     else {
                         return sibling;
@@ -156,12 +157,12 @@ public final class Util {
                     return null;
                 }
                 else {
-                    DomNode n = node.getLastChild();
+                    DomNode n = node.getLastDomChild();
                     if (n == null) {
-                        n = node.getPreviousSibling();
+                        n = node.getPreviousDomSibling();
                     }
                     if (n == null) {
-                        return getFirstNode(node.getParentNode());
+                        return getFirstNode(node.getParentDomNode());
                     }
                     else {
                         return n;

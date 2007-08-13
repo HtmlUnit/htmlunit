@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Brad Clarke
- *
+ * @author Ahmed Ashour
  */
 class JavaScriptBackgroundJob implements Runnable {
 
@@ -109,14 +109,14 @@ class JavaScriptBackgroundJob implements Runnable {
                     htmlPage.executeJavaScriptIfPossible(
                             script_,
                             "JavaScriptBackgroundJob",
-                            htmlPage.getDocumentElement());
+                            htmlPage.getDocumentHtmlElement());
                 }
                 else {
                     htmlPage.executeJavaScriptFunctionIfPossible(
                             function_,
                             window_,
                             new Object[0],
-                            htmlPage.getDocumentElement());
+                            htmlPage.getDocumentHtmlElement());
                 }
                 if (Thread.currentThread().isInterrupted()) {
                     getLog().debug("JavaScript timeout thread interrupted; clearTimeout() probably called.");

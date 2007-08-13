@@ -86,10 +86,10 @@ public class HtmlTitle extends HtmlElement {
      * {@inheritDoc}
      */
     public void setNodeValue(final String message) {
-        final DomNode child = getFirstChild();
+        final DomNode child = getFirstDomChild();
         if (child == null) {
             final DomNode textNode = new DomText(getPage() , message);
-            appendChild(textNode);
+            appendDomChild(textNode);
         }
         else if (child instanceof DomText) {
             ((DomText) child).setData(message);

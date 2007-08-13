@@ -203,8 +203,8 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
                 for (int i = 0; i < cachedElements_.size(); i++) {
                     final DomNode element = (DomNode) cachedElements_.get(i);
-                    for (DomNode parent = element.getParentNode(); parent != null;
-                        parent = parent.getParentNode()) {
+                    for (DomNode parent = element.getParentDomNode(); parent != null;
+                        parent = parent.getParentDomNode()) {
                         if (parent instanceof HtmlNoScript) {
                             cachedElements_.remove(i--);
                             break;

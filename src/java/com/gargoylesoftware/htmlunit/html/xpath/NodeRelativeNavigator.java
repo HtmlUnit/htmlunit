@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Mike Bowler
+ * @author Ahmed Ashour
  * @see HtmlUnitXPath
  */
 class NodeRelativeNavigator extends DocumentNavigator {
@@ -150,7 +151,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
             if (parent == rootNode_) {
                 return true;
             }
-            parent = parent.getParentNode();
+            parent = parent.getParentDomNode();
         }
         
         return false;

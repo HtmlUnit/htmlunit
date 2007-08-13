@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlUnitXPathTest extends WebTestCase {
 
@@ -82,9 +83,9 @@ public class HtmlUnitXPathTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
         HtmlUnitXPath xpath = new HtmlUnitXPath("/html");
-        assertEquals(page.getDocumentElement(), xpath.selectSingleNode(page));
+        assertEquals(page.getDocumentHtmlElement(), xpath.selectSingleNode(page));
         xpath = new HtmlUnitXPath("/html/head");
-        assertEquals(page.getDocumentElement().getFirstChild(), xpath.selectSingleNode(page));
+        assertEquals(page.getDocumentHtmlElement().getFirstDomChild(), xpath.selectSingleNode(page));
         xpath = new HtmlUnitXPath("/html/body/a");
         assertEquals(page.getHtmlElementById("myLink"), xpath.selectSingleNode(page));
         xpath = new HtmlUnitXPath("/html/head/title/text()");

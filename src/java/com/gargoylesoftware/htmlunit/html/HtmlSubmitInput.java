@@ -143,7 +143,7 @@ public class HtmlSubmitInput extends HtmlInput {
 
         for (final Iterator it = getAttributeEntriesIterator(); it.hasNext();) {
             final HtmlAttr attribute = (HtmlAttr) it.next();
-            if (!attribute.getNodeName().equals("value") || !attribute.getValue().equals(DEFAULT_VALUE)) {
+            if (!attribute.getNodeName().equals("value") || !attribute.getHtmlValue().equals(DEFAULT_VALUE)) {
                 printWriter.print(" ");
                 final String name = attribute.getNodeName();
                 printWriter.print(name);

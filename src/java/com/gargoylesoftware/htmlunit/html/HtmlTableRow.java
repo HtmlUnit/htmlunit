@@ -199,7 +199,7 @@ public class HtmlTableRow extends ClickableElement {
 
         /** create an instance */
         public CellIterator() {
-            setNextCell(getFirstChild());
+            setNextCell(getFirstDomChild());
         }
 
         /** @return whether there is another cell available */
@@ -223,8 +223,8 @@ public class HtmlTableRow extends ClickableElement {
             if (nextCell_ == null) {
                 throw new IllegalStateException();
             }
-            if (nextCell_.getPreviousSibling() != null) {
-                nextCell_.getPreviousSibling().remove();
+            if (nextCell_.getPreviousDomSibling() != null) {
+                nextCell_.getPreviousDomSibling().remove();
             }
         }
 
@@ -236,7 +236,7 @@ public class HtmlTableRow extends ClickableElement {
 
             if (nextCell_ != null) {
                 final HtmlTableCell result = nextCell_;
-                setNextCell(nextCell_.getNextSibling());
+                setNextCell(nextCell_.getNextDomSibling());
                 return result;
             }
             else {
@@ -252,7 +252,7 @@ public class HtmlTableRow extends ClickableElement {
         private void setNextCell(final DomNode node) {
 
             nextCell_ = null;
-            for (DomNode next = node; next != null; next = next.getNextSibling()) {
+            for (DomNode next = node; next != null; next = next.getNextDomSibling()) {
                 if (next instanceof HtmlTableCell) {
                     nextCell_ = (HtmlTableCell) next;
                     return;
@@ -260,14 +260,14 @@ public class HtmlTableRow extends ClickableElement {
                 else if (currentForm_ == null && next instanceof HtmlForm) {
                     // Completely illegal html but some of the big sites (ie amazon) do this
                     currentForm_ = (HtmlForm) next;
-                    setNextCell(next.getFirstChild());
+                    setNextCell(next.getFirstDomChild());
                     return;
                 }
             }
             if (currentForm_ != null) {
                 final DomNode form = currentForm_;
                 currentForm_ = null;
-                setNextCell(form.getNextSibling());
+                setNextCell(form.getNextDomSibling());
             }
         }
     }

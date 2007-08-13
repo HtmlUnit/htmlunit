@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
  * @version $Revision$
  * @author <a href="mailto:gallaherm@pragmatics.com">Mike Gallaher</a>
  * @author Mike Bowler
+ * @author Ahmed Ashour
  */
 public class HtmlTableRowTest extends WebTestCase {
 
@@ -83,11 +84,11 @@ public class HtmlTableRowTest extends WebTestCase {
         client_ = page_.getWebClient();
         
         table_ = (HtmlTable) page_.getHtmlElementById("table");
-        tbody_ = (HtmlTableBody) table_.getFirstChild();
+        tbody_ = (HtmlTableBody) table_.getFirstDomChild();
         row_ = table_.getRow(0);
         cell_ = row_.getCell(0);
 
-        rowClone_ = (HtmlTableRow) row_.cloneNode(true);
+        rowClone_ = (HtmlTableRow) row_.cloneDomNode(true);
         cellClone_ = rowClone_.getCell(0);
     }
 
@@ -95,8 +96,8 @@ public class HtmlTableRowTest extends WebTestCase {
      * Ensure that cloneNode leaves the original node unchanged.
      */
     public void testClonePreservesOriginal() {
-        assertSame(tbody_, row_.getParentNode());
-        assertSame(row_, cell_.getParentNode());
+        assertSame(tbody_, row_.getParentDomNode());
+        assertSame(row_, cell_.getParentDomNode());
         assertSame(cell_, row_.getCell(0));
         assertEquals("row", row_.getId());
         assertEquals("cell", cell_.getId());
@@ -124,7 +125,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testClonedRowHasNullParent() throws Exception {
-        assertNull(rowClone_.getParentNode());
+        assertNull(rowClone_.getParentDomNode());
     }
 
     /**
@@ -133,16 +134,16 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     public void testClonedRowHasDifferentChildren() throws Exception {
         assertEquals(row_.getCells().size(), rowClone_.getCells().size());
-        assertNotSame(row_.getFirstChild(), rowClone_.getFirstChild());
+        assertNotSame(row_.getFirstDomChild(), rowClone_.getFirstDomChild());
     }
 
     /**
      * Ensure that the cloned cell's children are not those of the original.
      */
     public void testClonedCellHasDifferentChildren() {
-        assertNotSame(cell_.getParentNode(), cellClone_.getParentNode());
-        assertNotNull(cell_.getFirstChild());
-        assertNotSame(cell_.getFirstChild(), cellClone_.getFirstChild());
+        assertNotSame(cell_.getParentDomNode(), cellClone_.getParentDomNode());
+        assertNotNull(cell_.getFirstDomChild());
+        assertNotSame(cell_.getFirstDomChild(), cellClone_.getFirstDomChild());
     }
 
     /**
@@ -150,7 +151,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testClonedCellHasClonedRowAsParent() throws Exception {
-        assertSame(rowClone_, cellClone_.getParentNode());
+        assertSame(rowClone_, cellClone_.getParentDomNode());
     }
 
     /**
@@ -302,10 +303,10 @@ public class HtmlTableRowTest extends WebTestCase {
         final String cmd = "document.getElementById('foo').value = 'Input!';document.getElementById('foo')";
         client_.getScriptEngine().execute(page_, cmd, "test");
 
-        final HtmlElement input = (HtmlElement) cell_.getFirstChild();
+        final HtmlElement input = (HtmlElement) cell_.getFirstDomChild();
         assertEquals("Input!", input.getAttributeValue("value"));
 
-        final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstChild();
+        final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstDomChild();
         assertFalse("Input!".equals(inputClone.getAttributeValue("value")));
     }
 }

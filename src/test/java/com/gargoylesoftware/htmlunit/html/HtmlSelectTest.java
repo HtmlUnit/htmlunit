@@ -472,12 +472,12 @@ public class HtmlSelectTest extends WebTestCase {
     private void checkOptions(final HtmlSelect select) {
         final List options = select.getOptions();
         if (options.isEmpty()) {
-            assertNull(select.getFirstChild());
-            assertNull(select.getLastChild());
+            assertNull(select.getFirstDomChild());
+            assertNull(select.getLastDomChild());
         }
         else {
-            assertEquals(options.get(0), select.getFirstChild());
-            assertEquals(options.get(options.size() - 1), select.getLastChild());
+            assertEquals(options.get(0), select.getFirstDomChild());
+            assertEquals(options.get(options.size() - 1), select.getLastDomChild());
         }
     }
 
@@ -600,7 +600,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlSelect select = (HtmlSelect) page.getDocumentElement().getHtmlElementsByTagName("select").get(0);
+        final HtmlSelect select = (HtmlSelect) page.getDocumentHtmlElement().getHtmlElementsByTagName("select").get(0);
         assertEquals("foo\nbar\nbaz", select.asText());
     }
 

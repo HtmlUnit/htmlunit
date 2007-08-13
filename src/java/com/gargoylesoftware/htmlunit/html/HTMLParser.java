@@ -385,14 +385,14 @@ public final class HTMLParser {
             else if (!headParsed_ && (tagLower.equals("body") || tagLower.equals("frameset"))) {
                 final IElementFactory factory = getElementFactory("head");
                 final HtmlElement newElement = factory.createElement(page_, "head", null);
-                currentNode_.appendChild(newElement);
+                currentNode_.appendDomChild(newElement);
                 headParsed_ = true;
             }
             // add a <tbody> if a <tr> is directly in <table>
             else if (tagLower.equals("tr") && currentNode_.getNodeName().equals("table")) {
                 final IElementFactory factory = getElementFactory("tbody");
                 final HtmlElement newElement = factory.createElement(page_, "tbody", null);
-                currentNode_.appendChild(newElement);
+                currentNode_.appendDomChild(newElement);
                 currentNode_ = newElement;
                 stack_.push(currentNode_);
             }
@@ -400,7 +400,7 @@ public final class HTMLParser {
             final IElementFactory factory = getElementFactory(tagLower);
             final HtmlElement newElement = factory.createElement(page_, tagLower, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
-            currentNode_.appendChild(newElement);
+            currentNode_.appendDomChild(newElement);
             currentNode_ = newElement;
             stack_.push(currentNode_);
         }
@@ -451,7 +451,7 @@ public final class HTMLParser {
 
             if (characters_ != null && characters_.length() > 0) {
                 final DomText text = new DomText(page_, characters_.toString());
-                currentNode_.appendChild(text);
+                currentNode_.appendDomChild(text);
                 characters_.setLength(0);
             }
         }
@@ -500,7 +500,7 @@ public final class HTMLParser {
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final DomComment comment = new DomComment(page_, String.valueOf(ch, start, length));
-            currentNode_.appendChild(comment);
+            currentNode_.appendDomChild(comment);
         }
         
         /** @inheritDoc LexicalHandler#endCDATA() */

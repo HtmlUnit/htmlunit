@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  * @version $Revision$
  * @author David K. Taylor
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public final class TextImpl extends CharacterDataImpl {
 
@@ -76,6 +77,6 @@ public final class TextImpl extends CharacterDataImpl {
      */
     public Object jsxFunction_splitText(final int offset) {
         final DomText domText = (DomText) getDomNodeOrDie();
-        return getScriptableFor(domText.splitText(offset));
+        return getScriptableFor(domText.splitDomText(offset));
     }
 }

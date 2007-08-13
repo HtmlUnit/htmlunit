@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.InputElementFactory;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class HTMLInputElement extends FormField {
 
@@ -87,7 +88,7 @@ public class HTMLInputElement extends FormField {
 
             // Added check to make sure there is a previous sibling before trying to replace
             // newly created input variable which has yet to be inserted into DOM tree
-            if (input.getPreviousSibling() != null) {
+            if (input.getPreviousDomSibling() != null) {
                 // if the input has a previous sibling, then it was already in the
                 // DOM tree and can be replaced
                 input.replace(newInput);

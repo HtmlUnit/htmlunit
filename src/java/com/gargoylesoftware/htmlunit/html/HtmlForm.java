@@ -606,7 +606,8 @@ public class HtmlForm extends ClickableElement {
         try {
             boolean isChild = false;
              
-            for (DomNode parent = radioButtonInput.getParentNode(); parent != null; parent = parent.getParentNode()) {
+            for (DomNode parent = radioButtonInput.getParentDomNode(); parent != null;
+                parent = parent.getParentDomNode()) {
                 if (parent == this) {
                     isChild = true;
                     break;

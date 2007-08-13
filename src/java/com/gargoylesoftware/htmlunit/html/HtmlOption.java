@@ -260,7 +260,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * {@inheritDoc}
      */
     public DomNode appendChild(final DomNode node) {
-        final DomNode addedNode = super.appendChild(node);
+        final DomNode addedNode = super.appendDomChild(node);
 
         // default value is the text of the option
         // see http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION

@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * Tests for {@link HtmlUnitRegExpProxy}.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlUnitRegExpProxyTest extends WebTestCase {
 
@@ -83,7 +84,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         topScope.put("str", topScope, str_);
         topScope.put("text", topScope, text_);
         topScope.put("expected", topScope, expected_);
-        page.executeJavaScriptIfPossible(src_, "custom", page.getDocumentElement());
+        page.executeJavaScriptIfPossible(src_, "custom", page.getDocumentHtmlElement());
     }
 
     /**

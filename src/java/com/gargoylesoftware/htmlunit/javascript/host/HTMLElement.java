@@ -552,7 +552,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         domNode.removeAllChildren();
 
         final DomNode node = new DomText(getDomNodeOrDie().getPage(), value);
-        domNode.appendChild(node);
+        domNode.appendDomChild(node);
     }
 
     /**
@@ -582,7 +582,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, target.getPage(), null) {
             public DomNode appendChild(final DomNode node) {
                 if (append) {
-                    return target.appendChild(node);
+                    return target.appendDomChild(node);
                 }
                 else {
                     target.insertBefore(node);
@@ -656,7 +656,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             final boolean append = ((Boolean) values[1]).booleanValue();
 
             if (append) {
-                node.appendChild(childNode);
+                node.appendDomChild(childNode);
             }
             else {
                 node.insertBefore(childNode);
@@ -685,14 +685,14 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         
         // compute the where and how the new nodes should be added
         if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
-            if (currentNode.getFirstChild() == null) {
+            if (currentNode.getFirstDomChild() == null) {
                 // new nodes should appended to the children of current node
                 node = currentNode;
                 append = true;
             }
             else {
                 // new nodes should be inserted before first child
-                node = currentNode.getFirstChild();
+                node = currentNode.getFirstDomChild();
                 append = false;
             }
         }
@@ -707,14 +707,14 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             append = true;
         }
         else if (POSITION_AFTER_END.equalsIgnoreCase(where)) {
-            if (currentNode.getNextSibling() == null) {
+            if (currentNode.getNextDomSibling() == null) {
                 // new nodes should appended to the children of parent node
-                node = currentNode.getParentNode();
+                node = currentNode.getParentDomNode();
                 append = true;
             }
             else {
                 // new nodes should be inserted before current node's next sibling
-                node = currentNode.getNextSibling();
+                node = currentNode.getNextDomSibling();
                 append = false;
             }
         }
@@ -1457,7 +1457,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             if (htmlElement == thisHtmlElement) {
                 return true;
             }
-            htmlElement = htmlElement.getParentNode();
+            htmlElement = htmlElement.getParentDomNode();
         }
 
         return false;
@@ -1494,7 +1494,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         DomNode currentElement = getHtmlElementOrDie();
         Object offsetParent = null;
         while (currentElement != null) {
-            final DomNode parentNode = currentElement.getParentNode();
+            final DomNode parentNode = currentElement.getParentDomNode();
             // According to the Microsoft and Mozilla documentation, and from experimentation
             // in the IE and Firefox browsers, the offsetParent is the container
             // (<td>, <table>, <body>) nearest to the node
@@ -1504,7 +1504,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
                 offsetParent = parentNode.getScriptObject();
                 break;
             }
-            currentElement = currentElement.getParentNode();
+            currentElement = currentElement.getParentDomNode();
         }
 
         return offsetParent;

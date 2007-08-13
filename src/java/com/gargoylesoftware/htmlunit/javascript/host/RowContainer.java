@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class RowContainer extends HTMLElement {
 
@@ -168,15 +169,15 @@ public class RowContainer extends HTMLElement {
     protected Object insertRow(final int index) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
-        final HtmlElement newRow = getDomNodeOrDie().getPage().createElement("tr");
+        final HtmlElement newRow = getDomNodeOrDie().getPage().createHtmlElement("tr");
         if (rowCount == 0) {
-            getDomNodeOrDie().appendChild(newRow);
+            getDomNodeOrDie().appendDomChild(newRow);
         }
         else {
             final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index >= rowCount - 1) {
-                row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+                row.getDomNodeOrDie().getParentDomNode().appendDomChild(newRow);
             }
             else {
                 row.getDomNodeOrDie().insertBefore(newRow);
