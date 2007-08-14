@@ -480,6 +480,40 @@ public class NodeImplTest extends WebTestCase {
     }
 
     /**
+     * element.appendChild: If the parent has a null parentNode,
+     * IE creates a DocumentFragment be the parent's parentNode.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testInsertBefore_parentNode() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testInsertBefore_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"null", "#document-fragment"});
+        testInsertBefore_parentNode(BrowserVersion.FIREFOX_2, new String[] {"null", "null"});
+    }
+
+    private void testInsertBefore_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var div1 = document.createElement('div');\n"
+            + "    var div2 = document.createElement('div');\n"
+            + "    alert(div1.parentNode);\n"
+            + "    div1.insertBefore(div2,null);\n"
+            + "    if(div1.parentNode)\n"
+            + "      alert(div1.parentNode.nodeName);\n"
+            + "    else\n"
+            + "      alert(div1.parentNode);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testAppencChild_of_DocumentFragment() throws Exception {
