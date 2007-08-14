@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
 import java.net.URI;
+import java.net.URLDecoder;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -77,7 +78,7 @@ public class HtmlFileInputTest extends WebTestCase {
             path = path.substring(1);
         }
         if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
-            testFileInput(path.replace('/', '\\'));
+            testFileInput(URLDecoder.decode(path.replace('/', '\\'), "UTF-8"));
         }
         testFileInput("file:/" + path);
         testFileInput("file://" + path);
