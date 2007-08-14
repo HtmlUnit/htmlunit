@@ -8,7 +8,7 @@
     <body>
         <release version="1.13-prerelease">
             <action type="update" dev="asashour">
-                JavaScript: element.insertBefore(), if the element parentNode is null, create a DocumentFragment to be the parentNode (IE only).
+                JavaScript: for element.insertBefore(), .innerHTML, and .innerText if the element parentNode is null, create a DocumentFragment to be the parentNode (IE only).
             </action>
             <action type="update" dev="dktaylor" id="1747878">
                 Deprecated methods that conflict with W3C DOM API: DomTest.splitText, HtmlPage.getDocumentElement,

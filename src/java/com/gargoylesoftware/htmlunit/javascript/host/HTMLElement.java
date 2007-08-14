@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -540,6 +541,14 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
             final String valueAsString = Context.toString(value);
             parseHtmlSnippet(domNode, true, valueAsString);
+
+            //if the parentNode has null parentNode in IE,
+            //create a DocumentFragment to be the parentNode's parentNode.
+            if (domNode.getParentDomNode() == null
+                    && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+                fragment.appendDomChild(domNode);
+            }
         }
     }
 
@@ -553,6 +562,14 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
         final DomNode node = new DomText(getDomNodeOrDie().getPage(), value);
         domNode.appendDomChild(node);
+
+        //if the parentNode has null parentNode in IE,
+        //create a DocumentFragment to be the parentNode's parentNode.
+        if (domNode.getParentDomNode() == null
+                && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+            fragment.appendDomChild(domNode);
+        }
     }
 
     /**

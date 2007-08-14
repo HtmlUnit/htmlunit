@@ -428,7 +428,7 @@ public class NodeImplTest extends WebTestCase {
     }
 
     private void testIsSameNode(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var d2 = document.getElementById('div2');\n"
@@ -455,13 +455,15 @@ public class NodeImplTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        testAppendChild_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"null", "#document-fragment"});
-        testAppendChild_parentNode(BrowserVersion.FIREFOX_2, new String[] {"null", "null"});
+        final String[] expectedAlertsIE = {"null", "#document-fragment"};
+        testAppendChild_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF = {"null", "null"};
+        testAppendChild_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
 
     private void testAppendChild_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
             + "    var div2 = document.createElement('div');\n"
@@ -486,13 +488,15 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testInsertBefore_parentNode() throws Exception {
-        testInsertBefore_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"null", "#document-fragment"});
-        testInsertBefore_parentNode(BrowserVersion.FIREFOX_2, new String[] {"null", "null"});
+        final String[] expectedAlertsIE = {"null", "#document-fragment"};
+        testInsertBefore_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF = {"null", "null"};
+        testInsertBefore_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
     }
 
     private void testInsertBefore_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
             + "    var div2 = document.createElement('div');\n"

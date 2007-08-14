@@ -1639,4 +1639,62 @@ public class HTMLElementTest extends WebTestCase {
             + "</body></html>";
         loadPage(browserVersion, content, null);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testInnerHTML_parentNode() throws Exception {
+        final String[] expectedAlertsIE = {"null", "#document-fragment"};
+        testInnerHTML_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF = {"null", "null"};
+        testInnerHTML_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+    }
+
+    private void testInnerHTML_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div1 = document.createElement('div');\n"
+            + "    alert(div1.parentNode);\n"
+            + "    div1.innerHTML='<p>hello</p>';\n"
+            + "    if(div1.parentNode)\n"
+            + "      alert(div1.parentNode.nodeName);\n"
+            + "    else\n"
+            + "      alert(div1.parentNode);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testInnerText_parentNode() throws Exception {
+        final String[] expectedAlertsIE = {"null", "#document-fragment"};
+        testInnerText_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF = {"null", "null"};
+        testInnerText_parentNode(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+    }
+
+    private void testInnerText_parentNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div1 = document.createElement('div');\n"
+            + "    alert(div1.parentNode);\n"
+            + "    div1.innerText='<p>hello</p>';\n"
+            + "    if(div1.parentNode)\n"
+            + "      alert(div1.parentNode.nodeName);\n"
+            + "    else\n"
+            + "      alert(div1.parentNode);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
