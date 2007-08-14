@@ -486,9 +486,6 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testInsertBefore_parentNode() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testInsertBefore_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"null", "#document-fragment"});
         testInsertBefore_parentNode(BrowserVersion.FIREFOX_2, new String[] {"null", "null"});
     }
