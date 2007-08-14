@@ -513,7 +513,7 @@ public class NodeImplTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testAppencChild_of_DocumentFragment() throws Exception {
+    public void testAppendChild_of_DocumentFragment() throws Exception {
         final String content = "<html><head><title>foo</title><script>"
             + "  function test() {\n"
             + "    var fragment = document.createDocumentFragment();\n"
