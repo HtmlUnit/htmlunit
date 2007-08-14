@@ -694,29 +694,36 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @return the node added
      */
     public DomNode appendDomChild(final DomNode node) {
-
-        //clean up the new node, in case it is being moved
-        if (node != this) {
-            node.basicRemove();
-        }
-        if (firstChild_ == null) {
-            firstChild_ = node;
-            firstChild_.previousSibling_ = node;
+        if (node instanceof DomDocumentFragment) {
+            final DomDocumentFragment fragment = (DomDocumentFragment) node;
+            for (final Iterator iterator = fragment.getChildIterator(); iterator.hasNext();) {
+                final DomNode child = (DomNode) iterator.next();
+                appendDomChild(child);
+            }
         }
         else {
-            final DomNode last = getLastDomChild();
+            //clean up the new node, in case it is being moved
+            if (node != this) {
+                node.basicRemove();
+            }
+            if (firstChild_ == null) {
+                firstChild_ = node;
+                firstChild_.previousSibling_ = node;
+            }
+            else {
+                final DomNode last = getLastDomChild();
 
-            last.nextSibling_ = node;
-            node.previousSibling_ = last;
-            node.nextSibling_ = null; //safety first
-            firstChild_.previousSibling_ = node; //new last node
-        }
-        node.parent_ = this;
+                last.nextSibling_ = node;
+                node.previousSibling_ = last;
+                node.nextSibling_ = null; //safety first
+                firstChild_.previousSibling_ = node; //new last node
+            }
+            node.parent_ = this;
 
-        getPage().notifyNodeAdded(node);
+            getPage().notifyNodeAdded(node);
         
-        fireNodeAddded(this, node);
-
+            fireNodeAddded(this, node);
+        }
         return node;
     }
 
