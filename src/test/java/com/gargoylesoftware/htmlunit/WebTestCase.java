@@ -362,7 +362,8 @@ public abstract class WebTestCase extends BaseTestCase {
                 throw new RuntimeException("Currently only content with a <head> and a </body> is supported");
             }
 
-            final File f = File.createTempFile("test", ".html");
+            final String testName = this.getName();
+            final File f = File.createTempFile(testName + "_", ".html");
             FileUtils.writeStringToFile(f, newContent, "ISO-8859-1");
             log.info("Test file written: " + f.getAbsolutePath());
         }
