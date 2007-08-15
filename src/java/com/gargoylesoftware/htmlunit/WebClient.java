@@ -138,7 +138,7 @@ public class WebClient implements Serializable {
 
     private WebWindow currentWindow_;
     private Stack firstWindowStack_ = new Stack();
-    private int timeout_ = 0;
+    private int timeout_;
     private HTMLParserListener htmlParserListener_;
 
     private static URLStreamHandler JavaScriptUrlStreamHandler_

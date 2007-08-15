@@ -76,7 +76,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 public class DebuggingWebConnection extends WebConnectionWrapper {
     private static final Log LOG = LogFactory.getLog(DebuggingWebConnection.class);
 
-    private int counter_ = 0;
+    private int counter_;
     private final WebConnection wrappedWebConnection_;
     private final String reportBaseName_;
     private final File javaScriptFile_;

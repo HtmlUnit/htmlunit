@@ -58,7 +58,7 @@ import org.apache.commons.lang.ClassUtils;
 public class WebRequestSettings {
     private URL url_;
     private String proxyHost_;
-    private int proxyPort_ = 0;
+    private int proxyPort_;
     private SubmitMethod submitMethod_ = SubmitMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map additionalHeaders_ = new HashMap();

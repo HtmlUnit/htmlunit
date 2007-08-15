@@ -59,7 +59,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private final Log log_;
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
     private static long Timeout_ = 0;
-    private static boolean DebuggerEnabled_ = false;
+    private static boolean DebuggerEnabled_;
 
     /**
      * Create a new instance of HtmlUnitContextFactory

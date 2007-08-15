@@ -89,7 +89,7 @@ import org.apache.commons.logging.impl.SimpleLog;
 public class HttpWebConnection extends WebConnectionImpl {
     private HttpClient httpClient_;
 
-    private String virtualHost_ = null;
+    private String virtualHost_;
 
     // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
     private static final HttpMethodRetryHandler NoAutoRetry = new HttpMethodRetryHandler() {

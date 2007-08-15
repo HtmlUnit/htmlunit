@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public final class HTMLParser {
 
     private static final Map ELEMENT_FACTORIES = new HashMap();
-    private static boolean IgnoreOutsideContent_ = false;
+    private static boolean IgnoreOutsideContent_;
 
     static {
         ELEMENT_FACTORIES.put("input", InputElementFactory.instance);

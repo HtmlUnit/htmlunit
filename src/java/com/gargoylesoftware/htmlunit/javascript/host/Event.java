@@ -98,7 +98,7 @@ public class Event extends SimpleScriptable {
     private boolean shiftKey_;
     private boolean ctrlKey_;
     private boolean altKey_;
-    private boolean stopPropagation_ = false;
+    private boolean stopPropagation_;
 
     /**
      * Creates a new event instance.

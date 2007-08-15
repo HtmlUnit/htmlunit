@@ -94,12 +94,12 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     private static final long serialVersionUID = 1779746292119944291L;
 
     private final WebClient webClient_;
-    private       String originalCharset_ = null;
+    private       String originalCharset_;
     private final WebResponse webResponse_;
     private       Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
     private       Map nameMap_ = new HashMap(); // a map of (name, List(HtmlElement))
-    private       HtmlElement documentElement_ = null;
-    private FocusableElement elementWithFocus_ = null;
+    private       HtmlElement documentElement_;
+    private FocusableElement elementWithFocus_;
 
     private WebWindow enclosingWindow_;
 

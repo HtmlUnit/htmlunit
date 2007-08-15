@@ -114,8 +114,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
     private final Set behaviors_ = new HashSet();
     private HTMLCollection all_; // has to be a member to have equality (==) working
-    private int scrollLeft_ = 0;
-    private int scrollTop_ = 0;
+    private int scrollLeft_;
+    private int scrollTop_;
 
     /**
      * The tag names of the objects for which outerHTML is readonly
