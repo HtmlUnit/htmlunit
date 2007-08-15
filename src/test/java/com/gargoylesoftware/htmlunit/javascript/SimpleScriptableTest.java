@@ -201,4 +201,24 @@ public class SimpleScriptableTest extends WebTestCase {
             // it's ok
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testArguments_toString() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(arguments);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object Object]"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
