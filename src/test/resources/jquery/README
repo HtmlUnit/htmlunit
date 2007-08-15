@@ -1,5 +1,5 @@
-This directory contains the resources necessary to run the JQuery JavaScript library unit tests.
+This directory contains the resources necessary to run the jQuery JavaScript library unit tests.
 
-Each subdirectory corresponds to a specific version of the JQuery library. Each of these subdirectories
+Each subdirectory corresponds to a specific version of the jQuery library. Each of these subdirectories
 was created by downloading the build distribution, building the release with ant, and copying the
 src, dist and test directories.
