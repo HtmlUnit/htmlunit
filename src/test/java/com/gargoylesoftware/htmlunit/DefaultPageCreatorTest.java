@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * Tests for {@link com.gargoylesoftware.htmlunit.DefaultPageCreator}.
+ * Tests for {@link DefaultPageCreator}.
  *
  * @version $Revision$
  * @author Marc Guillemot

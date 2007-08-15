@@ -43,7 +43,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for the Screen object.
+ * Tests for {@link Screen}.
  *
  * @version $Revision$
  * @author Daniel Gredler

@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 
 /**
- *  Tests for DomNode
+ *  Tests for {@link DomNode}.
  *
  * @version $Revision$
  * @author Chris Erskine

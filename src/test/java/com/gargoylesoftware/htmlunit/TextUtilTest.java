@@ -42,7 +42,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- *  Tests for TextUtil.
+ * Tests for {@link TextUtil}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

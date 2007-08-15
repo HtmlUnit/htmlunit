@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlTableCell
+ * Tests for {@link HtmlTableCell}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

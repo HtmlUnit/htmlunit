@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for Images
+ * Tests for {@link Images}.
  *
  * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>

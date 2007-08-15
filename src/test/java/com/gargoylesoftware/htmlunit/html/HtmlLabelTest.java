@@ -43,7 +43,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for {@link HtmlLabel}
+ * Tests for {@link HtmlLabel}.
  *
  * @version $Revision$
  * @author Marc Guillemot

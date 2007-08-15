@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 
 /**
- * Tests for JavaScriptConfiguration.
+ * Tests for {@link JavaScriptConfiguration}.
  *
  * @version $Revision$
  * @author Chris Erskine

@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlTextArea
+ * Tests for {@link HtmlTextArea}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

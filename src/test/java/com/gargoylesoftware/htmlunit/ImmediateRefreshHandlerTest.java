@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 
 /**
- * Tests for {@link com.gargoylesoftware.htmlunit.ImmediateRefreshHandler}.
+ * Tests for {@link ImmediateRefreshHandler}.
  *
  * @version $Revision$
  * @author Marc Guillemot

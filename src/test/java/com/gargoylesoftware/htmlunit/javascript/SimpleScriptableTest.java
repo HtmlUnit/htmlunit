@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
- * Tests for SimpleScriptable.
+ * Tests for {@link SimpleScriptable}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

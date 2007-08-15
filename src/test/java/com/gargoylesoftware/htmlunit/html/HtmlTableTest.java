@@ -43,7 +43,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for HtmlTable
+ * Tests for {@link HtmlTable}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

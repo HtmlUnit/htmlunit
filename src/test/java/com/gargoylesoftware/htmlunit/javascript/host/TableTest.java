@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for Table.
+ * Tests for {@link Table}.
  *
  * @version $Revision$
  * @author David D. Kilzer

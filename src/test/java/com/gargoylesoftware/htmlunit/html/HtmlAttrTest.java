@@ -45,7 +45,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for {@link HtmlAttr}
+ * Tests for {@link HtmlAttr}.
  *
  * @version $Revision$
  * @author Denis N. Antonioli

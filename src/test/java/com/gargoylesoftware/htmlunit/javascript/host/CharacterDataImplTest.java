@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for CharacterDataImpl
+ * Tests for {@link CharacterDataImpl}.
  *
  * @version $Revision$
  * @author David K. Taylor

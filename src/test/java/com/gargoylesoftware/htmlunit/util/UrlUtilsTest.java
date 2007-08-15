@@ -42,7 +42,7 @@ import java.net.URL;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for UrlUtils.
+ * Tests for {@link UrlUtils}.
  *
  * @version $Revision$
  * @author Daniel Gredler

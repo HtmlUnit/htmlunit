@@ -58,7 +58,7 @@ import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests methods in {@link HttpWebConnection} class.
+ * Tests methods in {@link HttpWebConnection}.
  *
  * @version $Revision$
  * @author David D. Kilzer

@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for HtmlRadioButtonInput
+ * Tests for {@link HtmlRadioButtonInput}.
  *
  * @version $Revision$
  * @author Mike Bresnahan

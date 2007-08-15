@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
- *  Tests for HtmlFrameSet
+ * Tests for {@link HtmlFrameSet}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for the DocumentNavigator
+ * Tests for the {@link DocumentNavigator}.
  *
  * @version $Revision$
  * @author Marc Guillemot

@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * <p>Tests for XPath evaluation on HtmlUnit DOM.
+ * Tests for XPath evaluation on HtmlUnit DOM.
  *
  * @version $Revision$
  * @author Marc Guillemot

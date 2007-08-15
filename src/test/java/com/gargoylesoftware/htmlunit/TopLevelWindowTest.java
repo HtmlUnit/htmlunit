@@ -43,7 +43,7 @@ import java.util.List;
 import com.gargoylesoftware.base.testing.EventCatcher;
 
 /**
- *  Tests for WebClient
+ * Tests for {@link WebClient}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

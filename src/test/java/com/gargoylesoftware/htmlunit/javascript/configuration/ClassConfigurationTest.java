@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for JavaScriptConfiguration.
+ * Tests for {@link JavaScriptConfiguration}.
  *
  * @version $Revision$
  * @author Chris Erskine

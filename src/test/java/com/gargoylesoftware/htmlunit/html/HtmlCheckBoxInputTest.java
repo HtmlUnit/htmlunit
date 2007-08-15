@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Tests for HtmlCheckBoxInput
+ * Tests for {@link HtmlCheckBoxInput}.
  *
  * @version $Revision$
  * @author Mike Bresnahan

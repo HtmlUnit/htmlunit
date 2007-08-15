@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for ThreadManager
+ * Tests for {@link ThreadManager}.
  *
  * @version $Revision$
  * @author Brad Clarke

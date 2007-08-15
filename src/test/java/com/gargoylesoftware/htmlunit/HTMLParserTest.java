@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 
 /**
- * test driver for the new HTMLParser implementation
+ * Test driver for {@link HTMLParser}.
  *
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>

@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for IFrame.
+ * Tests for {@link IFrame}.
  *
  * @version $Revision$
  * @author Marc Guillemot

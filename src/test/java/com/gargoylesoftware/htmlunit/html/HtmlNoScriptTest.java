@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for elements inside {@link HtmlNoScript}
+ * Tests for elements inside {@link HtmlNoScript}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
