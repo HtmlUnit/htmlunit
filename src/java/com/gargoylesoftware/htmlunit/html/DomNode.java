@@ -720,8 +720,9 @@ public abstract class DomNode implements Cloneable, Serializable {
             }
             node.parent_ = this;
 
-            getPage().notifyNodeAdded(node);
-        
+            if (!(this instanceof DomDocumentFragment)) {
+                getPage().notifyNodeAdded(node);
+            }
             fireNodeAddded(this, node);
         }
         return node;

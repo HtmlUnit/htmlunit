@@ -139,6 +139,14 @@ public class NodeImpl extends SimpleScriptable {
             // Append the child to the parent node
             parentNode.appendDomChild(childDomNode);
             appendedChild = childObject;
+            
+            //if the parentNode has null parentNode in IE,
+            //create a DocumentFragment to be the parentNode's parentNode.
+            if (!(this instanceof DocumentFragment) && parentNode.getParentDomNode() == null
+                    && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
+                fragment.appendDomChild(parentNode);
+            }
         }
         return appendedChild;
     }

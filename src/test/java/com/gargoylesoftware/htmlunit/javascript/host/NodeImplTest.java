@@ -452,9 +452,6 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testAppendChild_parentNode() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String[] expectedAlertsIE = {"null", "#document-fragment"};
         testAppendChild_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
         final String[] expectedAlertsFF = {"null", "null"};
