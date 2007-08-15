@@ -1,0 +1,278 @@
+<html>
+<head>
+
+<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />     
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />     
+
+<style>
+.everything { position:relative; height:420px; }
+.everything div { border:1px solid #888; }
+.topmain { position:absolute; top:10px; left:120px; height:75px; width:100px; }
+.duo1 { position:absolute; top:130px; left:20px; height:67px; width:100px; }
+#duo1 { background-image:url('http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/uluru.jpg'); }
+.duo2 { position:absolute; top:130px; left:220px; height:53px; width:100px; }
+.src { position:absolute; top:220px; left:120px; height:72px; width:100px; }
+.trigger { position:absolute; top:330px; left:120px; height:75px; width:100px; }
+.sizer { position:absolute; top:450px; left:20px; height:150px; width:200px; }
+.sharedTrigger1 { position:absolute; top:10px; left:420px; height:72px; width:100px; }
+.sharedTrigger2 { position:absolute; top:10px; left:550px; height:67px; width:100px; }
+.topLeft { position:absolute; top:0; left:0; height:15px; width:20px; }
+.offPage { position:absolute; top:5000px; left:4000px; height:53px; width:100px; }
+
+.yui-imgload { background:none !important; }
+</style>
+
+</head>
+
+<body>
+
+<div class='everything' id='everything'>
+	<div class='topmain' id='topmain'></div>
+	<div class='duo1 yui-imgload' id='duo1'></div>
+	<div class='duo2'>
+		<img class='yui-imgload' id='duo2' style='background-image:url("http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/katatjuta.jpg");' width='100' height='53' />
+	</div>
+	<div class='src' id='srcImgCont'>
+		<img id='srcImg' />
+	</div>
+	<div class='trigger' id='addlTrigger'></div>
+	<div class='sizer'>
+		<img id='sizerImg' style='visibility:hidden;' />
+	</div>
+	<div class='sharedTrigger1' id='sharedTrigger1'></div>
+	<div class='sharedTrigger2' id='sharedTrigger2'></div>
+	<div class='topLeft' id='topLeft'>
+		<img id='topLeftImg' />
+	</div>
+	<div class='offPage' id='offPage'></div>
+</div>
+
+<script type="text/javascript" src="../build/yahoo/yahoo.js"></script>
+<script type="text/javascript" src="../build/dom/dom.js"></script>
+<script type="text/javascript" src="../build/event/event.js"></script>
+<script type="text/javascript" src="../build/logger/logger.js"></script>
+<script type="text/javascript" src="../build/yuitest/yuitest-beta.js"></script>
+<script type="text/javascript" src="../build/imageloader/imageloader-experimental.js"></script>
+
+<script>
+
+var imgUrlsTestCase = new YAHOO.tool.TestCase({
+	/* 
+	 * Test case to check the URL setting in the different types of image objects
+	 */
+	
+	name: 'Setting Urls',
+
+	setUp: function() {
+		// background-image group
+		this.bgImgUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/museum.jpg';
+		this.mainGroup = new YAHOO.util.ImageLoader.group('topmain', 'mouseover');
+		this.mainGroup.registerBgImage('topmain', this.bgImgUrl);
+		this.mainGroup.name = 'imgUrlsTestBgImg';
+		this.mainGroupImage = document.getElementById('topmain');
+
+		// src-image group
+		this.srcImgUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/morraine.jpg';
+		this.srcGroup = new YAHOO.util.ImageLoader.group('srcImgCont', 'click');
+		this.srcGroup.registerSrcImage('srcImg', this.srcImgUrl);
+		this.srcGroup.name = 'imgUrlsTestSrcImg';
+		this.srcGroupImage = document.getElementById('srcImg');
+	},
+
+	testBgImg: function() {
+		YAHOO.util.UserAction.mouseover('topmain');
+		// style.bgImg is "url('...')", but we can't rely on those quotes across browsers. indexOf is sufficient
+		YAHOO.util.Assert.areNotEqual(this.mainGroupImage.style.backgroundImage.indexOf(this.bgImgUrl), -1);
+	},
+	
+	testSrcImg: function() {
+		YAHOO.util.UserAction.click('srcImgCont');
+		YAHOO.util.Assert.areEqual(this.srcGroupImage.src, this.srcImgUrl);
+	}
+
+});
+
+var classNameTestCase = new YAHOO.tool.TestCase({
+	/*
+	 * Test case to check fetching by CSS class name
+	 */
+
+	name: 'Class Name Fetching',
+
+	setUp: function() {
+		this.duo1Url = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/uluru.jpg';
+		this.duo2Url = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/katatjuta.jpg';
+		this.duo1Image = document.getElementById('duo1');
+		this.duo2Image = document.getElementById('duo2');
+		// classname group
+		this.classGroup = new YAHOO.util.ImageLoader.group('duo1', 'mouseover');
+		this.classGroup.className = 'yui-imgload';
+		this.classGroup.name = 'classNameTest';
+	},
+
+	testClassNames: function() {
+		// We have to just check for the classname. Nothing else in the element will indicate the difference between before and after url application
+		YAHOO.util.Assert.areEqual(this.duo1Image.className, 'duo1 yui-imgload');
+		YAHOO.util.Assert.areEqual(this.duo2Image.className, 'yui-imgload');
+		YAHOO.util.UserAction.mouseover('duo1');
+		YAHOO.util.Assert.areEqual(this.duo1Image.className, 'duo1');
+		YAHOO.util.Assert.areEqual(this.duo2Image.className, '');
+	}
+
+});
+
+var addTriggerTestCase = new YAHOO.tool.TestCase({
+	/*
+	 * Test case for checking the addTrigger method
+	 */
+
+	name: 'addTrigger test',
+
+	setUp: function() {
+		this.imageUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/museum.jpg';
+		this.triggerGroup = new YAHOO.util.ImageLoader.group('topmain', 'dblclick');
+		this.triggerGroup.registerBgImage('addlTrigger', this.imageUrl);
+		this.triggerGroup.addTrigger('addlTrigger', 'click');
+		this.triggerGroup.name = 'addTriggerGroup';
+		this.triggerImage = document.getElementById('addlTrigger');
+	},
+
+	testAddTrigger: function() {
+		YAHOO.util.Assert.areEqual(this.triggerImage.style.backgroundImage, '');
+		YAHOO.util.UserAction.click('addlTrigger');
+		YAHOO.util.Assert.areNotEqual(this.triggerImage.style.backgroundImage.indexOf(this.imageUrl), -1);
+	}
+
+});
+
+var imgSizingTestCase = new YAHOO.tool.TestCase({
+	/*
+	 * Test case to check post-fetch resizing of image, as well as 'visibility' setting
+	 */
+
+	name: 'Image Sizing',
+
+	setUp: function() {
+		this.imageUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/japan.jpg';
+		this.sizerGroup = new YAHOO.util.ImageLoader.group('sizerImg', 'mouseover');
+		this.sizerGroup.name = 'imgSizingGroup';
+		var sizerILImg = this.sizerGroup.registerSrcImage('sizerImg', this.imageUrl, 200, 150);
+		sizerILImg.setVisible = true;
+		this.sizerImage = document.getElementById('sizerImg');
+	},
+
+	testImageVisibility: function() {
+		YAHOO.util.UserAction.mouseover('sizerImg');
+		YAHOO.util.Assert.areEqual(this.sizerImage.style.visibility, 'visible');
+	},
+
+	testImageSizing: function() {
+		// not sure if we can trust order, so make sure trigger was fired
+		YAHOO.util.UserAction.mouseover('sizerImg');
+		YAHOO.util.Assert.areEqual(this.sizerImage.height, 150);
+		YAHOO.util.Assert.areEqual(this.sizerImage.width, 200);
+	}
+
+});
+
+var triggerRemovalTestCase = new YAHOO.tool.TestCase({
+	/*
+	 * Test case to check removing the trigger from groups that share the same trigger.
+	 * During development, there was an initial problem of when one group fired, the other group's trigger was removed.
+	 * This was due to the way the fetch() methods were passed to Event's addListener(); fixed by wrapping the fetch calls.
+	 * More details available in js code comments, in addTrigger() method
+	 */
+
+	name: "Trigger Removal for Competing Groups' Triggers",
+
+	setUp: function() {
+		this.imageAUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/morraine.jpg';
+		this.imageZUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/uluru.jpg';
+		this.groupA = new YAHOO.util.ImageLoader.group('sharedTrigger1', 'click');
+		this.groupA.registerBgImage('sharedTrigger1', this.imageAUrl);
+		this.groupA.name = 'triggerRemovalGroup(A)';
+		this.groupZ = new YAHOO.util.ImageLoader.group('sharedTrigger1', 'click');
+		this.groupZ.registerBgImage('sharedTrigger2', this.imageZUrl);
+		this.groupZ.addTrigger('sharedTrigger2', 'click');
+		this.groupZ.name = 'triggerRemovalGroup(Z)';
+		this.groupAImage = document.getElementById('sharedTrigger1');
+		this.groupZImage = document.getElementById('sharedTrigger2');
+	},
+
+	testCompetingTriggers: function() {
+		YAHOO.util.UserAction.click('sharedTrigger2');
+		YAHOO.util.Assert.areNotEqual(this.groupZImage.style.backgroundImage.indexOf(this.imageZUrl), -1);
+		YAHOO.util.Assert.areEqual(this.groupAImage.style.backgroundImage, '');
+		YAHOO.util.UserAction.click('sharedTrigger1');
+		YAHOO.util.Assert.areNotEqual(this.groupAImage.style.backgroundImage.indexOf(this.imageAUrl), -1);
+	}
+
+});
+
+var foldCheckTestCase = new YAHOO.tool.TestCase({
+	/*
+	 * Test case to check the foldConditional functionality.
+	 * Has an image at 0,0 and one at 4000,5000. The assumption is that 0,0 is in the viewport, while 4000,5000 can't possibly be.
+	 * Includes a test for 0,0 in the viewport anyway.
+	 *
+	 * Need to see what happens when this is run in an automated environment, without a real browser and viewport.
+	 */
+
+	name: 'Fold Check',
+
+	setUp: function() {
+		this.topLeftUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/japan.jpg';
+		this.botRightUrl = 'http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/small/katatjuta.jpg';
+		this.foldGroup = new YAHOO.util.ImageLoader.group('topLeft', 'dblclick');
+		this.foldGroup.foldConditional = true;
+		this.foldGroup.name = 'FoldCheckGroup';
+		this.foldGroup.registerSrcImage('topLeftImg', this.topLeftUrl, 20, 15);
+		this.foldGroup.registerBgImage('offPage', this.botRightUrl);
+		this.topLeftImage = document.getElementById('topLeftImg');
+		this.botRightImage = document.getElementById('offPage');
+	},
+
+	testFoldCheck: function() {
+		/* cheating a bit by calling the private _foldCheck method
+		 * reason: don't want to compete with the onload and don't want to set a timeout
+		 */
+		this.foldGroup._foldCheck();
+		var height = YAHOO.util.Dom.getViewportHeight();
+		// only checking viewport height, not scroll. technically, if the height were 0 but the scrollTop was > 0, then the image would be fetched in _foldCheck(). not sure that's possible. assume that's never the case in this test
+		if (height > 0) {
+			YAHOO.util.Assert.areEqual(this.topLeftImage.src, this.topLeftUrl);
+		}
+		else {
+			YAHOO.util.Assert.areEqual(this.topLeftImage.src, '');
+		}
+		YAHOO.util.Assert.areEqual(this.botRightImage.style.backgroundImage, '');
+	}
+	
+});
+
+
+var imageLoaderTestSuite = new YAHOO.tool.TestSuite('YUI ImageLoader Utility');
+imageLoaderTestSuite.add(imgUrlsTestCase);
+imageLoaderTestSuite.add(classNameTestCase);
+imageLoaderTestSuite.add(addTriggerTestCase);
+imageLoaderTestSuite.add(imgSizingTestCase);
+imageLoaderTestSuite.add(triggerRemovalTestCase);
+imageLoaderTestSuite.add(foldCheckTestCase);
+
+YAHOO.tool.TestRunner.add(imageLoaderTestSuite);
+
+YAHOO.util.Event.onDOMReady(function() {
+	var logger = new YAHOO.tool.TestLogger();
+    if (parent && parent != window) {
+        YAHOO.tool.TestManager.load();
+    } else {
+        YAHOO.tool.TestRunner.run();
+    }
+});
+
+
+</script>
+
+
+</body>
+</html>
