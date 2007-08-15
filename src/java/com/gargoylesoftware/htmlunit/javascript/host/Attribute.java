@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 public class Attribute extends SimpleScriptable {
 
@@ -153,7 +154,7 @@ public class Attribute extends SimpleScriptable {
      * @return the type of DOM node this attribute represents.
      */
     public int jsxGet_nodeType() {
-        return 2;
+        return org.w3c.dom.Node.ATTRIBUTE_NODE;
     }
 
     /**

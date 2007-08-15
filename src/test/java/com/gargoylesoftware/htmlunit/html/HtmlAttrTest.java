@@ -37,13 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for HtmlAttr
+ * Tests for {@link HtmlAttr}
  *
  * @version $Revision$
  * @author Denis N. Antonioli
@@ -161,5 +163,24 @@ public class HtmlAttrTest extends WebTestCase {
      */
     public void testGetParent() {
         assertSame(HTML_ELEMENT, htmlAttr_.getParentDomNode());
+    }
+
+    /**
+     * Test nodeType of {@link Attribute}.
+     *
+     * @throws Exception if the test fails
+     */
+    public void testNodeType() throws Exception {
+        final String content = "<html><head><title>foo</title><script>"
+            + "  function test() {\n"
+            + "    var attr = document.createAttribute('myAttrib');\n"
+            + "    alert(attr.nodeType);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"2"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
