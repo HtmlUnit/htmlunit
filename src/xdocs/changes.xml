@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="add" dev="asashour">
+                WebRequestSettings: add getter and setter of CookiePolicy.
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: for element.appendChild(), .insertBefore(), .innerHTML, and .innerText: if the element parentNode is null, create a DocumentFragment to be the parentNode (IE only).
             </action>

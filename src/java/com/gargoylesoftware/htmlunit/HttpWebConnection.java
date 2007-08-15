@@ -301,6 +301,12 @@ public class HttpWebConnection extends WebConnectionImpl {
         if (!getWebClient().isCookiesEnabled()) {
             httpMethod.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
         }
+        else {
+            if (webRequestSettings.getCookiePolicy() != CookiePolicy.DEFAULT) {
+                httpMethod.getParams().setCookiePolicy(webRequestSettings.getCookiePolicy());
+            }
+
+        }
         return httpMethod;
     }
 

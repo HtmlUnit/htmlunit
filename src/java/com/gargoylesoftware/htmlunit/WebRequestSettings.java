@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.auth.CredentialsProvider;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.ClassUtils;
 
 /**
@@ -56,17 +57,18 @@ import org.apache.commons.lang.ClassUtils;
  */
 public class WebRequestSettings {
     private URL url_;
-    private String proxyHost_ = null;
+    private String proxyHost_;
     private int proxyPort_ = 0;
     private SubmitMethod submitMethod_ = SubmitMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map additionalHeaders_ = new HashMap();
-    private CredentialsProvider credentialsProvider_ = null;
+    private CredentialsProvider credentialsProvider_;
     private String charset_ = TextUtil.DEFAULT_CHARSET;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List requestParameters_ = Collections.EMPTY_LIST;
-    private String requestBody_ = null;
+    private String requestBody_;
+    private String cookiePolicy_ = CookiePolicy.DEFAULT;
 
     /**
      * @param target The URL for this request
@@ -284,5 +286,21 @@ public class WebRequestSettings {
      */
     public void setCharset(final String charset) {
         charset_ = charset;
+    }
+
+    /**
+     * Gets the cookie policy to use to perform the request.
+     * @return the cookie policy.
+     */
+    public String getCookiePolicy() {
+        return cookiePolicy_;
+    }
+
+    /**
+     * Sets the cookie policy. Default value is {@link CookiePolicy#DEFAULT}
+     * @param cookiePolicy the new cookie policy.
+     */
+    public void setCookiePolicy(final String cookiePolicy) {
+        cookiePolicy_ = cookiePolicy;
     }
 }
