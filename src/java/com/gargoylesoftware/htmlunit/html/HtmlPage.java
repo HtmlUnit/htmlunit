@@ -1381,7 +1381,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     void addMappedElement(final HtmlElement element) {
         addMappedElement(element, false);
     }
-    
+
     /**
      * Adds an element to the ID and name maps, if necessary.
      * @param element the element to be added to the ID and name maps
@@ -1629,7 +1629,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             throw new IllegalStateException("Clone not supported");
         }
     }
-    
+
     /**
      * Override cloneNode to add cloned elements to the clone, not to the original.
      * {@inheritDoc}
@@ -1642,7 +1642,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             while (it.hasNext()) {
                 final HtmlElement child = (HtmlElement) it.next();
                 removeMappedElement(child);
-                result.addMappedElement(child, false);
+                result.addMappedElement(child);
             }
         }
         return result;

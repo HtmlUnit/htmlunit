@@ -724,7 +724,7 @@ public abstract class DomNode implements Cloneable, Serializable {
             if (!(this instanceof DomDocumentFragment)) {
                 getPage().notifyNodeAdded(node);
             }
-            fireNodeAddded(this, node);
+            fireNodeAdded(this, node);
         }
         return node;
     }
@@ -758,7 +758,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         newNode.parent_ = parent_;
 
         getPage().notifyNodeAdded(newNode);
-        fireNodeAddded(this, newNode);
+        fireNodeAdded(this, newNode);
     }
 
     /**
@@ -1152,16 +1152,15 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Support for reporting dom changes.
-     * This method can be called when a node has been added and it will send the
-     * appropriate DomChangeEvent to any registered DomChangeListeners.
+     * Support for reporting DOM changes. This method can be called when a node has been added and it
+     * will send the appropriate {@link DomChangeEvent} to any registered {@link DomChangeListener}s.
      *
-     * Note that this methods recursively calls this parent fireNoddeAdded.
+     * Note that this method recursively calls this node's parent's {@link #fireNodeAdded(DomNode, DomNode)}.
      *
      * @param parentNode the parent of the node that was added.
      * @param addedNode the node that was added.
      */
-    protected void fireNodeAddded(final DomNode parentNode, final DomNode addedNode) {
+    protected void fireNodeAdded(final DomNode parentNode, final DomNode addedNode) {
         if (domListeners_ != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
             synchronized (this) {
@@ -1172,16 +1171,15 @@ public abstract class DomNode implements Cloneable, Serializable {
             }
         }
         if (parent_ != null) {
-            parent_.fireNodeAddded(parentNode, addedNode);
+            parent_.fireNodeAdded(parentNode, addedNode);
         }
     }
 
     /**
-     * Support for reporting dom changes.
-     * This method can be called when a node has been deleted and it will send the
-     * appropriate DomChangeEvent to any registered DomChangeListeners.
+     * Support for reporting DOM changes. This method can be called when a node has been deleted and it
+     * will send the appropriate {@link DomChangeEvent} to any registered {@link DomChangeListener}s.
      *
-     * Note that this methods recursively calls this parent fireNoddeDeleted.
+     * Note that this method recursively calls this node's parent's {@link #fireNodeDeleted(DomNode, DomNode)}.
      *
      * @param parentNode the parent of the node that was deleted.
      * @param deletedNode the node that was deleted.
@@ -1200,4 +1198,5 @@ public abstract class DomNode implements Cloneable, Serializable {
             parent_.fireNodeDeleted(parentNode, deletedNode);
         }
     }
+
 }
