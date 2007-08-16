@@ -537,32 +537,4 @@ public class NodeImplTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
-    /**
-     * Tests getElementById() of child element after appendChild(), removeChild(), then appendChild()
-     * of the parent element.
-     *
-     * @throws Exception if the test fails
-     */
-    public void testAddRemoveAddChild() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var table = document.createElement('table');\n"
-            + "    var tr = document.createElement('tr');\n"
-            + "    tr.id='myTR';\n"
-            + "    table.appendChild(tr);\n"
-            + "    document.body.appendChild(table);\n"
-            + "    document.body.removeChild(table);\n"
-            + "    document.body.appendChild(table);\n"
-            + "    alert(document.getElementById('myTR'));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-        final List collectedAlerts = new ArrayList();
-        loadPage(content, collectedAlerts);
-        assertFalse(collectedAlerts.get(0).equals("null"));
-    }
 }

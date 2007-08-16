@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="fix" dev="asashour">
+                JavaScript: element.appendChild() and insertBefore() must recursively maintain document.getElementById() contract.
+            </action>
             <action type="add" dev="asashour">
                 WebRequestSettings: add getter and setter of CookiePolicy.
             </action>

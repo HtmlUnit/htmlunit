@@ -1377,13 +1377,23 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Adds an element to the ID and name maps, if necessary.
      * @param element the element to be added to the ID and name maps
+     * @param recurse indicates if children must be removed too
      */
     void addMappedElement(final HtmlElement element) {
-        addElement(idMap_, element, "id");
-        addElement(nameMap_, element, "name");
+        addMappedElement(element, false);
+    }
+    
+    /**
+     * Adds an element to the ID and name maps, if necessary.
+     * @param element the element to be added to the ID and name maps
+     * @param recurse indicates if children must be removed too
+     */
+    void addMappedElement(final HtmlElement element, final boolean recurse) {
+        addElement(idMap_, element, "id", recurse);
+        addElement(nameMap_, element, "name", recurse);
     }
 
-    private void addElement(final Map map, final HtmlElement element, final String attribute) {
+    private void addElement(final Map map, final HtmlElement element, final String attribute, final boolean recurse) {
         final String value = element.getAttributeValue(attribute);
         if (!StringUtils.isEmpty(value)) {
             List elements = (List) map.get(value);
@@ -1394,6 +1404,12 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             }
             else if (!elements.contains(element)) {
                 elements.add(element);
+            }
+        }
+        if (recurse) {
+            for (final Iterator i = element.getChildElementsIterator(); i.hasNext();) {
+                final HtmlElement child = (HtmlElement) i.next();
+                addElement(map, child, attribute, true);
             }
         }
     }
@@ -1450,7 +1466,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 }
             }
             if (!insideNoScript) {
-                addMappedElement((HtmlElement) node);
+                addMappedElement((HtmlElement) node, true);
             }
         }
         node.onAddedToPage();
@@ -1627,7 +1643,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             while (it.hasNext()) {
                 final HtmlElement child = (HtmlElement) it.next();
                 removeMappedElement(child);
-                result.addMappedElement(child);
+                result.addMappedElement(child, false);
             }
         }
         return result;
