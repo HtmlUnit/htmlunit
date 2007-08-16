@@ -1377,7 +1377,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Adds an element to the ID and name maps, if necessary.
      * @param element the element to be added to the ID and name maps
-     * @param recurse indicates if children must be removed too
      */
     void addMappedElement(final HtmlElement element) {
         addMappedElement(element, false);
@@ -1386,7 +1385,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Adds an element to the ID and name maps, if necessary.
      * @param element the element to be added to the ID and name maps
-     * @param recurse indicates if children must be removed too
+     * @param recurse indicates if children must be added too
      */
     void addMappedElement(final HtmlElement element, final boolean recurse) {
         addElement(idMap_, element, "id", recurse);
