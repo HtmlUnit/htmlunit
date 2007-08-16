@@ -435,7 +435,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
         printOpeningTagContentAsXml(printWriter);
 
         if (!hasChildren && !isEmptyXmlTagExpanded()) {
-            printWriter.print("/>");
+            printWriter.println("/>");
         }
         else {
             printWriter.println(">");

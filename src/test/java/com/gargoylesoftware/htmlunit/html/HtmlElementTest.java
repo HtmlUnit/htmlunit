@@ -578,6 +578,17 @@ public class HtmlElementTest extends WebTestCase {
         div.mouseUp();
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
+    }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAsXml_separateLineforEmptyElements() throws Exception {
+        final String content = "<html><head><title>foo</title></head>\n"
+            + "<body><table><tr><td></tr></table>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        assertTrue(page.asXml().indexOf("/> ") == -1);
     }
 }

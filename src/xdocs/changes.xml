@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="update" dev="asashour">
+                HtmlElement.asXml(): separate lines for empty element and the one after.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: element.appendChild() and insertBefore() must recursively maintain document.getElementById() contract.
             </action>
