@@ -52,6 +52,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
@@ -149,7 +150,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      *
      * It may be null if there isn't a corresponding javascript object.
      */
-    private transient Object scriptObject_;
+    private transient ScriptableObject scriptObject_;
 
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
@@ -280,7 +281,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * DOM node.
      * @param scriptObject The javascript object.
      */
-    public void setScriptObject(final Object scriptObject) {
+    public void setScriptObject(final ScriptableObject scriptObject) {
         scriptObject_ = scriptObject;
     }
 
@@ -667,7 +668,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * Return the javascript object that corresponds to this node.
      * @return The javascript object that corresponds to this node building it if necessary.
      */
-    public Object getScriptObject() {
+    public ScriptableObject getScriptObject() {
         if (scriptObject_ == null) {
             if (this == getPage()) {
                 throw new IllegalStateException("No script object associated with the HtmlPage");
