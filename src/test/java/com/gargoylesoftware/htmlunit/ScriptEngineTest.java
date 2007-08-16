@@ -73,7 +73,7 @@ public class ScriptEngineTest extends WebTestCase {
         final String content
             = "<html>"
             + "<head><title>foo</title>"
-            + "<script>One</script>" // no language specifed - assume javascript
+            + "<script>One</script>" // no language specified - assume javascript
             + "<script language='javascript'>Two</script>"
             + "<script type='text/javascript'>Three</script>"
             + "<script type='text/perl'>Four</script>" // type is unsupported language

@@ -145,7 +145,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
-        getDocumentElement().setReadyState(READY_STATE_COMPLETE);
+        getDocumentHtmlElement().setReadyState(READY_STATE_COMPLETE);
         executeOnLoadHandlersIfNeeded();
         executeRefreshIfNeeded();
     }
@@ -293,7 +293,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @throws com.gargoylesoftware.htmlunit.ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByName(final String name) throws ElementNotFoundException {
-        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "name", name);
+        return (HtmlAnchor) getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "name", name);
     }
 
     /**
@@ -304,7 +304,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByHref(final String href) throws ElementNotFoundException {
-        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
+        return (HtmlAnchor) getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "href", href);
     }
 
     /**
@@ -312,7 +312,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return the list of {@link HtmlAnchor} in this page.
      */
     public List getAnchors() {
-        return getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("a"));
+        return getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("a"));
     }
 
     /**
@@ -335,13 +335,13 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Return the first form that matches the specifed name
+     * Return the first form that matches the specified name
      * @param name The name to search for
      * @return The first form.
-     * @exception ElementNotFoundException If no forms match the specifed result.
+     * @exception ElementNotFoundException If no forms match the specified result.
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
-        final List forms = getDocumentElement().getHtmlElementsByAttribute("form", "name", name);
+        final List forms = getDocumentHtmlElement().getHtmlElementsByAttribute("form", "name", name);
         if (forms.size() == 0) {
             throw new ElementNotFoundException("form", "name", name);
         }
@@ -355,7 +355,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return All the forms.
      */
     public List getForms() {
-        return getDocumentElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"form"}));
+        return getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"form"}));
     }
 
     /**
@@ -442,7 +442,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public String getResolvedTarget(final String elementTarget) {
 
         final List baseElements =
-            getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
+            getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
         final String resolvedTarget;
         if (baseElements.isEmpty()) {
             resolvedTarget = elementTarget;
@@ -655,7 +655,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
 
         final List acceptableTagNames = Arrays.asList(
                 new Object[]{"a", "area", "button", "input", "object", "select", "textarea"});
-        final List tabbableElements = getDocumentElement().getHtmlElementsByTagNames(acceptableTagNames);
+        final List tabbableElements = getDocumentHtmlElement().getHtmlElementsByTagNames(acceptableTagNames);
 
         final Iterator iterator = tabbableElements.iterator();
         while (iterator.hasNext()) {
@@ -960,7 +960,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         HtmlTitle titleElement = getTitleElement();
         if (titleElement == null) {
             getLog().debug("No title element, creating one");
-            final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
+            final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentHtmlElement(), HtmlHead.class);
             if (head == null) {
                 // perhaps should we create head too?
                 throw new IllegalStateException("Headelement was not defined for this page");
@@ -1001,7 +1001,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return the title element for this page or null if this is not one.
      */
     private HtmlTitle getTitleElement() {
-        final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
+        final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentHtmlElement(), HtmlHead.class);
         if (head != null) {
             return (HtmlTitle) getFirstChildElement(head, HtmlTitle.class);
         }
@@ -1021,11 +1021,11 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         // onload for the window
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null) {
-            getDocumentElement().fireEvent(Event.TYPE_LOAD);
+            getDocumentHtmlElement().fireEvent(Event.TYPE_LOAD);
         }
 
         // the onload of the contained frames or iframe tags
-        final List frames = getDocumentElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{
+        final List frames = getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{
             "frame", "iframe" }));
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
@@ -1492,7 +1492,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     void loadFrames() throws FailingHttpStatusCodeException {
         final List frameTags = Arrays.asList(new String[] {"frame", "iframe"});
-        final List frames = getDocumentElement().getHtmlElementsByTagNames(frameTags);
+        final List frames = getDocumentHtmlElement().getHtmlElementsByTagNames(frameTags);
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             ((BaseFrame) iter.next()).loadInnerPage();
         }
@@ -1502,7 +1502,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * {@inheritDoc}
      */
     public String asXml() {
-        return getDocumentElement().asXml();
+        return getDocumentHtmlElement().asXml();
     }
 
     /**
@@ -1570,7 +1570,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     protected List getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
-        final List tags = getDocumentElement().getHtmlElementsByTagNames(Collections.singletonList("meta"));
+        final List tags = getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("meta"));
         for (final Iterator iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = (HtmlMeta) iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {
