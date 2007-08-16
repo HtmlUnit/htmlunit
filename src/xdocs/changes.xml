@@ -2398,9 +2398,7 @@
                 Added docs on configuring JSSE - contributed by Tom Hamilton
             </action>
         </release>
-    </body>
 
-    <body>
         <release version="1.2.2" date="March 29, 2003">
             <action type="add" dev="mbowler">
                 Started tracking more information about changes
