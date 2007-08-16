@@ -1698,7 +1698,7 @@ public class HtmlPageTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
-    public void testAddRemoveAddChild() throws Exception {
+    public void testGetElementById_AfterAppendRemoveAppendChild() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var table = document.createElement('table');\n"
@@ -1715,5 +1715,27 @@ public class HtmlPageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertFalse(collectedAlerts.get(0).equals("null"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetElementById_AfterAppendingToNewlyCreatedElement() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var table = document.createElement('table');\n"
+            + "    var tr = document.createElement('tr');\n"
+            + "    tr.id='myTR';\n"
+            + "    table.appendChild(tr);\n"
+            + "    alert(document.getElementById('myTR'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertTrue(collectedAlerts.get(0).equals("null"));
     }
 }

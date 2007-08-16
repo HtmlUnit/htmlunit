@@ -176,8 +176,7 @@ public class NodeImpl extends SimpleScriptable {
 
         if (newChildObject instanceof NodeImpl) {
 
-            final DomNode newChildNode =
-                ((NodeImpl) newChildObject).getDomNodeOrDie();
+            final DomNode newChildNode = ((NodeImpl) newChildObject).getDomNodeOrDie();
 
             final DomNode refChildNode;
             // IE accepts non standard calls with only one arg
@@ -240,8 +239,7 @@ public class NodeImpl extends SimpleScriptable {
 
         if (childObject instanceof NodeImpl) {
             // Get XML node for the DOM node passed in
-            final DomNode childNode =
-                ((NodeImpl) childObject).getDomNodeOrDie();
+            final DomNode childNode = ((NodeImpl) childObject).getDomNodeOrDie();
 
             // Remove the child from the parent node
             childNode.remove();
@@ -289,8 +287,7 @@ public class NodeImpl extends SimpleScriptable {
         if (newChildObject instanceof NodeImpl
             && oldChildObject instanceof NodeImpl) {
             // Get XML nodes for the DOM nodes passed in
-            final DomNode newChildNode =
-                ((NodeImpl) newChildObject).getDomNodeOrDie();
+            final DomNode newChildNode = ((NodeImpl) newChildObject).getDomNodeOrDie();
 
             final DomNode oldChildNode;
             if (oldChildObject != null) {
