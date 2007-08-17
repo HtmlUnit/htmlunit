@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add support for 'onunload' event handler.
+            </action>
+		</release>
         <release version="1.13" date="Aug 17, 2007" description="Fixes bad maven packaging of version 1.12 + different improvements">
             <action type="update" dev="sdanig" due-to="Rob Di Marco">
                 Add document.createEvent() and document.createEventObject().

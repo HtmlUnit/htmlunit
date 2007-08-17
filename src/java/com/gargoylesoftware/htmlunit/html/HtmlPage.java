@@ -146,7 +146,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
         getDocumentHtmlElement().setReadyState(READY_STATE_COMPLETE);
-        executeOnLoadHandlersIfNeeded();
+        executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         executeRefreshIfNeeded();
     }
 
@@ -155,8 +155,8 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @throws IOException If an IO problem occurs.
      */
     public void cleanUp() throws IOException {
+        executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
-        // TODO: executeBodyOnUnloadHandlerIfNeeded();
     }
 
     /**
@@ -1010,29 +1010,29 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Look for and execute any appropriate onload handlers.  Look for body
+     * Look for and execute any appropriate event handlers.  Look for body
      * and frame tags.
+     * @param eventType either {@link Event#TYPE_LOAD} or {@link Event#TYPE_UNLOAD}.
      */
-    private void executeOnLoadHandlersIfNeeded() {
+    private void executeEventHandlersIfNeeded(final String eventType) {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
         }
 
-        // onload for the window
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null) {
-            getDocumentHtmlElement().fireEvent(Event.TYPE_LOAD);
+            getDocumentHtmlElement().fireEvent(eventType);
         }
 
-        // the onload of the contained frames or iframe tags
+        // the event of the contained frames or iframe tags
         final List frames = getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{
             "frame", "iframe" }));
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
-            final Function frameTagOnloadHandler = frame.getEventHandler("onload");
-            if (frameTagOnloadHandler != null) {
-                getLog().debug("Executing onload handler for " + frame);
-                final Event event = new Event(frame, Event.TYPE_LOAD);
+            final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
+            if (frameTagEventHandler != null) {
+                getLog().debug("Executing on" + eventType + " handler for " + frame);
+                final Event event = new Event(frame, eventType);
                 ((NodeImpl) frame.getScriptObject()).executeEvent(event);
             }
         }

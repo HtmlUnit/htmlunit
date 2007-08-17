@@ -77,6 +77,9 @@ public class Event extends SimpleScriptable {
     /** The load event type, triggered by "onload" event handlers. */
     public static final String TYPE_LOAD = "load";
 
+    /** The load event type, triggered by "onunload" event handlers. */
+    public static final String TYPE_UNLOAD = "unload";
+
     /** The focus event type, triggered by "onfocus" event handlers. */
     public static final String TYPE_FOCUS = "focus";
 

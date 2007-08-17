@@ -57,6 +57,7 @@ import junit.framework.AssertionFailedError;
 import org.apache.commons.httpclient.Cookie;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
@@ -1737,5 +1738,27 @@ public class HtmlPageTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertTrue(collectedAlerts.get(0).equals("null"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testOnunLoadHandler() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "</head><body onunload='alert(\"foo\");alert(\"bar\")'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"foo", "bar"};
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, htmlContent);
+        client.setWebConnection(conn);
+        
+        client.getPage(URL_FIRST);
+        client.getPage(URL_FIRST);
+
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
