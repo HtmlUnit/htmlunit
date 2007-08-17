@@ -81,6 +81,7 @@
         <fileset dir="${test.src.dir}/../resources">
             <include name="prototype/**/*"/>
             <include name="jquery/**/*"/>
+            <include name="yui/**/*"/>
             <include name="*.htm*"/>
         </fileset>
     </copy>
