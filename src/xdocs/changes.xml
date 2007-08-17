@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.13-prerelease">
+            <action type="update" dev="sdanig" due-to="Robert Di Marco">
+                Add document.createEvent() and document.createEventObject().
+            </action>
             <action type="update" dev="asashour">
                 HtmlElement.asXml(): separate lines for empty element and the one after.
             </action>

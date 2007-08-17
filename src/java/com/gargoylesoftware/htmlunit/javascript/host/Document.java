@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +59,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.UniqueTag;
+import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -93,6 +95,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @author Michael Ottati
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
+ * @author Robert Di Marco
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
@@ -101,6 +104,16 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 public final class Document extends NodeImpl {
 
     private static final long serialVersionUID = -7646789903352066465L;
+
+    /**
+     * Map<String, Class> which maps strings a caller may use when calling into
+     * {@link #jsxFunction_createEvent(String)} to the associated event class. To support a new
+     * event creation type, the event type and associated class need to be added into this map in
+     * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
+     * have a no-arg constructor.
+     */
+    private static final Map SUPPORTED_EVENT_TYPE_MAP;
+
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private HTMLCollection forms_; // has to be a member to have equality (==) working
     private HTMLCollection links_; // has to be a member to have equality (==) working
@@ -116,6 +129,14 @@ public final class Document extends NodeImpl {
 
     private final FunctionContextWrapper functionContext_;
     private DOMImplementation implementation_;
+
+    /** Initializes the supported event type map. */
+    static {
+        final Map mouseEventMap = new HashMap();
+        mouseEventMap.put("Event", Event.class);
+        mouseEventMap.put("Events", Event.class);
+        SUPPORTED_EVENT_TYPE_MAP = Collections.unmodifiableMap(mouseEventMap);
+    }
 
     /**
      * Create an instance.  Javascript objects must have a default constructor.
@@ -1082,4 +1103,53 @@ public final class Document extends NodeImpl {
         }
         return implementation_;
     }
+
+    /**
+     * Implementation of the {@link DocumentEvent} interface's
+     * {@link org.w3c.dom.events.DocumentEvent#createEvent(String)} method. The method creates an
+     * event of the specified type.
+     *
+     * @link http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-DocumentEvent
+     * @param eventType The event type to create.
+     * @return The associated event object for that type. The event object will NOT have had its
+     *         initialization method called. It is up to the caller of the method to initialize the
+     *         event.
+     * @throws DOMException Thrown if the event type is not supported. The DOMException will have a
+     *         type of DOMException.NOT_SUPPORTED_ERR
+     */
+    public Event jsxFunction_createEvent(final String eventType) throws DOMException {
+        final Class clazz = (Class) SUPPORTED_EVENT_TYPE_MAP.get(eventType);
+        if (clazz == null) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Event Type is not supported: " + eventType);
+        }
+        try {
+            final Event e = (Event) clazz.newInstance();
+            e.setEventType(eventType);
+            e.setParentScope(getWindow());
+            return e;
+        }
+        catch (final InstantiationException e) {
+            throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
+                            + "' for event type of '" + eventType + "': " + e.getMessage());
+        }
+        catch (final IllegalAccessException e) {
+            throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
+                            + "' for event type of '" + eventType + "': " + e.getMessage());
+        }
+    }
+
+    /**
+     * Implementation of the <tt>createEventObject</tt> method supported by Internet Explorer.
+     *
+     * @link http://msdn2.microsoft.com/en-us/library/ms536390.aspx
+     * @return An instance of the event object.  The event object will NOT have its
+     *         member variables initialized.  It is up to the caller of the method to initialize
+     *         the properties of the event.
+     */
+    public Event jsxFunction_createEventObject() {
+        final Event e = new Event();
+        e.setParentScope(getWindow());
+        return e;
+    }
+
 }

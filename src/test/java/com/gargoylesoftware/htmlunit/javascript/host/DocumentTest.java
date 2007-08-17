@@ -75,6 +75,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Michael Ottati
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
+ * @author Robert Di Marco
  */
 public class DocumentTest extends WebTestCase {
 
@@ -2647,6 +2648,56 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) loadPage(content);
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testCreateEventsFF() throws Exception {
+        performCreateEventTest("Event", true, BrowserVersion.FIREFOX_2);
+        performCreateEventTest("Events", true, BrowserVersion.FIREFOX_2);
+        performCreateEventTest("Bogus", false, BrowserVersion.FIREFOX_2);
+    }
+
+    private void performCreateEventTest(final String eventType, final boolean isSupportedType,
+        final BrowserVersion version) throws Exception {
+        final String content =
+              "<html><head><title>foo</title><script>"
+            + "var s = document.createEvent('" + eventType + "');"
+            + "alert (s != null);"
+            + "alert (typeof(s));"
+            + "alert (s);"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        final List actual = new ArrayList();
+        try {
+            loadPage(version, content, actual);
+            assertTrue("Test was expected to fail, but did not: type=" + eventType, isSupportedType);
+            final String[] expected = {"true", "object", "[object Event]"};
+            assertEquals(expected, actual);
+        }
+        catch (final Exception e) {
+            assertTrue("Test was not expected to fail, but did with message " + e.getMessage() + " for type="
+                + eventType, !isSupportedType);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testCreateEventObjectsIE() throws Exception {
+        final String content =
+              "<html><head><title>foo</title><script>"
+            + "var s = document.createEventObject();"
+            + "alert (s != null);"
+            + "alert (typeof(s));"
+            + "alert (s);"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        final List actual = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, actual);
+        final String[] expected = {"true", "object", "[object]"};
+        assertEquals(expected, actual);
     }
 
 }

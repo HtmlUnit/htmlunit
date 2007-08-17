@@ -180,6 +180,12 @@
         </function>
         <function name="write"/>
         <function name="writeln"/>
+        <function name="createEvent">
+            <browser name="Firefox"/>
+        </function>
+        <function name="createEventObject">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+        </function>
     </class>
 
     <class name="DocumentFragment" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment"

@@ -58,8 +58,10 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Brad Murray
  * @author Ahmed Ashour
+ * @author Robert Di Marco
  */
 public class Event extends SimpleScriptable {
+
     /**
      * Key to place the event's target in the Context's scope during event processing
      * to compute node coordinates compatible with those of the event.
@@ -218,6 +220,14 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Sets the event type.
+     * @param eventType The event type.
+     */
+    public void setEventType(final String eventType) {
+        type_ = eventType;
+    }
+
+    /**
      * Returns the key code associated with the event.
      * @return The key code associated with the event.
      */
@@ -261,6 +271,7 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Stops the event from propagating.
      */
     public void jsxFunction_stopPropagation() {
         stopPropagation_ = true;
@@ -282,8 +293,9 @@ public class Event extends SimpleScriptable {
         buffer.append(jsxGet_type());
         buffer.append(" (");
         buffer.append("Current Target: ");
-        buffer.append(currentTarget_.toString());
+        buffer.append(currentTarget_);
         buffer.append(");");
         return buffer.toString();
     }
+
 }
