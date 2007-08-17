@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="1.13-prerelease">
+        <release version="1.13" date="Fri 17, Aug" description="Fixes bad maven packaging of version 1.12 + different improvements">
             <action type="update" dev="sdanig" due-to="Rob Di Marco">
                 Add document.createEvent() and document.createEventObject().
             </action>
@@ -54,7 +54,7 @@
                 JavaScript: if window object could not find a property or function, it returns 'undefined' instead of null (#1771549).
             </action>
         </release>
-        <release version="1.12" date="Aug 10, 2007">
+        <release version="1.12" date="Aug 10, 2007" description="Enormous improvements particularly in JavaScript support and execution speed">
             <action type="add" dev="sdanig">
                 Add method HtmlPage.getHtmlElementsByName(String).
             </action>
