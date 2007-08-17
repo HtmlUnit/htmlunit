@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Brad Murray
  * @author Ahmed Ashour
- * @author Robert Di Marco
+ * @author Rob Di Marco
  */
 public class Event extends SimpleScriptable {
 

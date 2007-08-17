@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Michael Ottati
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
- * @author Robert Di Marco
+ * @author Rob Di Marco
  */
 public class DocumentTest extends WebTestCase {
 

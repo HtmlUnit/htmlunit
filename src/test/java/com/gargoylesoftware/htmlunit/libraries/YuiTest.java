@@ -56,8 +56,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  *
  * TODO: add tests for IE6 and IE7
  *
- * @version $Revision: $
- * @author Robert Di Marco
+ * @version $Revision$
+ * @author Rob Di Marco
  */
 public class YuiTest extends WebTestCase {
 

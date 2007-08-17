@@ -95,7 +95,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @author Michael Ottati
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
- * @author Robert Di Marco
+ * @author Rob Di Marco
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_document.asp">
  * MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
