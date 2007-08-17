@@ -52,20 +52,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for compatibility with the <a href="http://jquery.com/">jQuery JavaScript library</a>.
+ * Tests for compatibility with version 1.1.2 of the <a href="http://jquery.com/">jQuery JavaScript library</a>.
  *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class JQueryTest extends WebTestCase {
+public class JQuery112Test extends WebTestCase {
 
     /**
      * Creates an instance.
      *
      * @param name The name of the test.
      */
-    public JQueryTest(final String name) {
+    public JQuery112Test(final String name) {
         super(name);
     }
 
