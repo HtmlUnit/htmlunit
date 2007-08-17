@@ -3,8 +3,9 @@
 
     <properties>
         <title>Submitting Patches</title>
-        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <revision>$Revision$</revision>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
     </properties>
 
     <body>
@@ -65,10 +66,15 @@
                         Patches should be in "unified diff" format.
                     </li>
                     <li>
-                    	   Please provide one patch only that contains all the files.  Some people
+                    	Please provide only one patch that contains all the files.  Some people
 	                    will submit separate patches for each file in the diff and this just
 	                    makes more work for the committer.  Please also submit it as one single diff, 
 	                    not zipped up - again because it's easier for the committers.
+                    </li>
+                    <li>
+                        For all newly added .java files, please make sure they have two SVN properties:
+                        <tt>svn:keywords</tt> with a value of "<tt>Author Date Id Revision</tt>"
+                        (without the double quotes), and <tt>svn:eol-style</tt> with a value of "<tt>native</tt>".
                     </li>
                 </ul>
             </p>
