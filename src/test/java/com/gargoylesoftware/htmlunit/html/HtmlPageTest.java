@@ -1722,9 +1722,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetElementById_AfterAppendingToNewlyCreatedElement() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var table = document.createElement('table');\n"

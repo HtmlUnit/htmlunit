@@ -1388,10 +1388,24 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param recurse indicates if children must be added too
      */
     void addMappedElement(final HtmlElement element, final boolean recurse) {
-        addElement(idMap_, element, "id", recurse);
-        addElement(nameMap_, element, "name", recurse);
+        if (isDescendant(element)) {
+            addElement(idMap_, element, "id", recurse);
+            addElement(nameMap_, element, "name", recurse);
+        }
     }
 
+    /**
+     * Checks whether the specified element is descendant of this HtmlPage or not.
+     */
+    private boolean isDescendant(final HtmlElement element) {
+        for (DomNode parent = element; parent != null; parent = parent.getParentDomNode()) {
+            if (parent == this) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private void addElement(final Map map, final HtmlElement element, final String attribute, final boolean recurse) {
         final String value = element.getAttributeValue(attribute);
         if (!StringUtils.isEmpty(value)) {
@@ -1418,17 +1432,20 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @param element the element to be removed from the ID and name maps
      */
     void removeMappedElement(final HtmlElement element) {
-        removeMappedElement(element, false);
+        removeMappedElement(element, false, false);
     }
 
     /**
      * Removes an element and optionally its children from the ID and name maps, if necessary.
      * @param element the element to be removed from the ID and name maps
      * @param recurse indicates if children must be removed too
+     * @param descendant indicates of the element was descendant of this HtmlPage, but now its parent might be null.
      */
-    void removeMappedElement(final HtmlElement element, final boolean recurse) {
-        removeElement(idMap_, element, "id", recurse);
-        removeElement(nameMap_, element, "name", recurse);
+    void removeMappedElement(final HtmlElement element, final boolean recurse, final boolean descendant) {
+        if (descendant || isDescendant(element)) {
+            removeElement(idMap_, element, "id", recurse);
+            removeElement(nameMap_, element, "name", recurse);
+        }
     }
 
     private void removeElement(final Map map, final HtmlElement element, final String att, final boolean recurse) {
@@ -1478,7 +1495,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      */
     void notifyNodeRemoved(final DomNode node) {
         if (node instanceof HtmlElement) {
-            removeMappedElement((HtmlElement) node, true);
+            removeMappedElement((HtmlElement) node, true, true);
         }
     }
 

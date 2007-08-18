@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="add" dev="asashour">
+                JavaScript: document.getElementById() must not return elements added to newly created ones (not yet added to document).
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: add support for 'onunload' event handler.
             </action>
 		</release>
