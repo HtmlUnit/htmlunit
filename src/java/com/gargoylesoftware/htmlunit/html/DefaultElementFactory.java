@@ -37,10 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.map.ListOrderedMap;
 import org.xml.sax.Attributes;
 
 /**
@@ -344,9 +342,10 @@ class DefaultElementFactory implements IElementFactory {
     static Map setAttributes(final Attributes attributes) {
         Map attributeMap = null;
         if (attributes != null) {
-            attributeMap = ListOrderedMap.decorate(new HashMap(attributes.getLength())); // preserve insertion order
+            attributeMap = HtmlElement.createAttributeMap(attributes.getLength());
             for (int i = 0; i < attributes.getLength(); i++) {
-                attributeMap.put(attributes.getQName(i), attributes.getValue(i));
+                HtmlElement.addAttributeToMap(attributeMap, attributes.getURI(i),
+                    attributes.getQName(i), attributes.getValue(i));
             }
         }
         return attributeMap;

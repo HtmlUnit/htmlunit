@@ -46,7 +46,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.mozilla.javascript.BaseFunction;
@@ -127,8 +129,9 @@ public abstract class HtmlElement extends DomNamespaceNode {
      */
     public DomNode cloneDomNode(final boolean deep) {
         final HtmlElement newNode = (HtmlElement) super.cloneDomNode(deep);
-        newNode.attributes_ = new HashMap();
-        for (final Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
+        final Set keySet = attributes_.keySet();
+        newNode.attributes_ = createAttributeMap(keySet.size());
+        for (final Iterator it = keySet.iterator(); it.hasNext();) {
             final Object key = it.next();
             newNode.setAttributeValue((String) key, (String) attributes_.get(key));
         }
@@ -168,14 +171,14 @@ public abstract class HtmlElement extends DomNamespaceNode {
         String value = attributeValue;
 
         if (attributes_ == Collections.EMPTY_MAP) {
-            attributes_ = new HashMap();
+            attributes_ = createAttributeMap(1);
         }
         if (value.length() == 0) {
             value = ATTRIBUTE_VALUE_EMPTY;
         }
 
         getPage().removeMappedElement(this);
-        attributes_.put(attributeName.toLowerCase(), value);
+        addAttributeToMap(attributes_, null, attributeName.toLowerCase(), value);
         getPage().addMappedElement(this);
 
         final HtmlAttributeChangeEvent event;
@@ -815,6 +818,27 @@ public abstract class HtmlElement extends DomNamespaceNode {
         public void remove() {
             baseIter_.remove();
         }
+    }
+
+    /**
+     * Create an attribute map as needed by HtmlElement.  This is just used by the element factories.
+     * @param attributeCount the initial number of attributes to be added to the map.
+     * @return the attribute map.
+     */
+    static Map createAttributeMap(final int attributeCount) {
+        return ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
+    }
+
+    /**
+      * Add an attribute to the attribute map.  This is just used by the element factories.
+     * @param attributeMap the attribute map where the attribute will be added.
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the attribute
+     * @param value The value of the attribute
+     */
+    static void addAttributeToMap(final Map attributeMap, final String namespaceURI,
+            final String qualifiedName, final String value) {
+        attributeMap.put(qualifiedName, value);
     }
 
     /**

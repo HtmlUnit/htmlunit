@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -159,7 +158,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      */
     public void testEmtpyMapEntryWrappingIterator() {
-        final Map attributsMap = new HashMap();
+        final Map attributsMap = HtmlElement.createAttributeMap(0);
         final HtmlElement.MapEntryWrappingIterator it =
             new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
         assertFalse(it.hasNext());
@@ -175,8 +174,8 @@ public class HtmlElementTest extends WebTestCase {
     /**
      */
     public void testMapEntryWrappingIterator() {
-        final Map attributsMap = new HashMap();
-        attributsMap.put("key", "value");
+        final Map attributsMap = HtmlElement.createAttributeMap(1);
+        HtmlElement.addAttributeToMap(attributsMap, null, "key", "value");
         final HtmlElement.MapEntryWrappingIterator it =
             new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
 
