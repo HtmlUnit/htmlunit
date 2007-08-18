@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour" id="1498419">
+                New interface com.gargoylesoftware.htmlunit.OnbeforeunloadHandler with associated WebClient getter and setter, to support 'onbeforeunload' event (#1498419).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: document.getElementById() must not return elements added to newly created ones (not yet added to document).
             </action>

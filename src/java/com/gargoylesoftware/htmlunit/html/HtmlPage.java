@@ -55,12 +55,14 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jaxen.JaxenException;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -1012,16 +1014,23 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     /**
      * Look for and execute any appropriate event handlers.  Look for body
      * and frame tags.
-     * @param eventType either {@link Event#TYPE_LOAD} or {@link Event#TYPE_UNLOAD}.
+     * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD},
+     *      or {@link Event#TYPE_BEFORE_UNLOAD}.
+     * @return true if user accepted onbeforeunload (not relevant to other events).
      */
-    private void executeEventHandlersIfNeeded(final String eventType) {
+    private boolean executeEventHandlersIfNeeded(final String eventType) {
         if (!getWebClient().isJavaScriptEnabled()) {
-            return;
+            return true;
         }
 
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null) {
-            getDocumentHtmlElement().fireEvent(eventType);
+            final HtmlElement element = getDocumentHtmlElement();
+            final Event event = new Event(element, eventType);
+            element.fireEvent(event);
+            if (!isOnbeforeunloadAccepted(this, event)) {
+                return false;
+            }
         }
 
         // the event of the contained frames or iframe tags
@@ -1034,10 +1043,29 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 getLog().debug("Executing on" + eventType + " handler for " + frame);
                 final Event event = new Event(frame, eventType);
                 ((NodeImpl) frame.getScriptObject()).executeEvent(event);
+                if (!isOnbeforeunloadAccepted(frame.getPage(), event)) {
+                    return false;
+                }
             }
         }
+        return true;
     }
 
+    private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event) {
+        if (event.jsxGet_type().equals(Event.TYPE_BEFORE_UNLOAD) && event.jsxGet_returnValue() != null) {
+            final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
+            if (handler == null) {
+                getLog().warn("document.onbeforeunload() returned a string in event.returnValue,"
+                        + " but no onbeforeunload handler installed.");
+            }
+            else {
+                final String message = Context.toString(event.jsxGet_returnValue());
+                return handler.handleEvent(page, message);
+            }
+        }
+        return true;
+    }
+    
     /**
      * If a refresh has been specified either through a meta tag or an http
      * response header, then perform that refresh.
@@ -1742,5 +1770,14 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 }
             }
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * @return true if the OnbeforeunloadHandler has accepted to change the page.
+     */
+    public boolean isOnbeforeunloadAccepted() {
+        return executeEventHandlersIfNeeded(Event.TYPE_BEFORE_UNLOAD);
     }
 }

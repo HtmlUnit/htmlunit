@@ -63,6 +63,8 @@ import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -1757,5 +1759,60 @@ public class HtmlPageTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testOnbeforeunloadHandler() throws Exception {
+        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7_0, false, "first");
+        testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7_0, true, "second");
+        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_2, false, "first");
+        testOnbeforeunloadHandler(BrowserVersion.FIREFOX_2, true, "second");
+    }
+
+    /**
+     * @param browserVersion BrowserVersion to use
+     * @param handlerOk whether OnbeforeunloadHandler.handleEvent will return true of false.
+     * @param expectedPageTitle the expected title of the page after clicking.
+     */
+    private void testOnbeforeunloadHandler(final BrowserVersion browserVersion, final boolean handlerOk,
+        final String expectedPageTitle) throws Exception {
+        final WebClient webClient = new WebClient(browserVersion);
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final List collectedConfirms = new ArrayList();
+
+        webClient.setOnbeforeunloadHandler(new OnbeforeunloadHandler() {
+            public boolean handleEvent(final Page page, final String message) {
+                collectedConfirms.add(message);
+                return handlerOk;
+            }
+        });
+
+        final String expectedMessage = "Any string value here forces a dialog box to appear before closing the window.";
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<script>\n"
+            + "  function closeIt(event) {\n"
+            + "     event.returnValue = '" + expectedMessage + "';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onbeforeunload='closeIt(event)'>\n"
+            + "  <a href='" + URL_SECOND + "'>Second page</a>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>second</title>\n"
+            + "</head><body>\n"
+            + "</body></html>";
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getAnchors().get(0);
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
+        
+        assertEquals(Collections.singletonList(expectedMessage), collectedConfirms);
+        assertEquals(expectedPageTitle, secondPage.getTitleText());
     }
 }

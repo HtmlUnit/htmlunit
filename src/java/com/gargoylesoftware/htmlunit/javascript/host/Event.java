@@ -77,7 +77,7 @@ public class Event extends SimpleScriptable {
     /** The load event type, triggered by "onload" event handlers. */
     public static final String TYPE_LOAD = "load";
 
-    /** The load event type, triggered by "onunload" event handlers. */
+    /** The unload event type, triggered by "onunload" event handlers. */
     public static final String TYPE_UNLOAD = "unload";
 
     /** The focus event type, triggered by "onfocus" event handlers. */
@@ -92,6 +92,9 @@ public class Event extends SimpleScriptable {
     /** The submit event type, triggered by "onreset" event handlers. */
     public static final String TYPE_RESET = "reset";
 
+    /** The beforeunload event type, triggered by "onbeforeunload" event handlers. */
+    public static final String TYPE_BEFORE_UNLOAD = "beforeunload";
+
     private static final long serialVersionUID = 4050485607908455730L;
 
     private Object srcElement_;     // IE-only writeable equivalent of target.
@@ -104,6 +107,7 @@ public class Event extends SimpleScriptable {
     private boolean ctrlKey_;
     private boolean altKey_;
     private boolean stopPropagation_;
+    private Object returnValue_;
 
     /**
      * Creates a new event instance.
@@ -286,6 +290,22 @@ public class Event extends SimpleScriptable {
      */
     public boolean isPropagationStopped() {
         return stopPropagation_;
+    }
+
+    /**
+     * Returns the return value associated with the event.
+     * @return The return value associated with the event.
+     */
+    public Object jsxGet_returnValue() {
+        return returnValue_;
+    }
+    
+    /**
+     * Sets the return value associated with the event.
+     * @param returnValue The return value associated with the event.
+     */
+    public void jsxSet_returnValue(final Object returnValue) {
+        returnValue_ = returnValue;
     }
 
     /**

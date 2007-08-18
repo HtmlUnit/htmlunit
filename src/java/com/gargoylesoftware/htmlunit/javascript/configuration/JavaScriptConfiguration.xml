@@ -218,6 +218,7 @@
         <property name="shiftKey" readable="true" writable="false"/>
         <property name="ctrlKey" readable="true" writable="false"/>
         <property name="altKey" readable="true" writable="false"/>
+        <property name="returnValue" readable="true" writable="true"/>
         <property name="cancelBubble" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>

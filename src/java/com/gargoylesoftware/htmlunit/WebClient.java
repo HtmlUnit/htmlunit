@@ -140,6 +140,7 @@ public class WebClient implements Serializable {
     private Stack firstWindowStack_ = new Stack();
     private int timeout_;
     private HTMLParserListener htmlParserListener_;
+    private OnbeforeunloadHandler onbeforeunloadHandler_;
 
     private static URLStreamHandler JavaScriptUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
@@ -318,6 +319,15 @@ public class WebClient implements Serializable {
      */
     public Page getPage(final WebWindow webWindow, final WebRequestSettings parameters)
         throws IOException, FailingHttpStatusCodeException {
+
+        final Page page = getCurrentWindow().getEnclosedPage();
+        if (page != null && page instanceof HtmlPage) {
+            final HtmlPage htmlPage = (HtmlPage) page;
+            if (!htmlPage.isOnbeforeunloadAccepted()) {
+                getLog().debug("The registered OnbeforeunloadHandler rejected to load a new page.");
+                return page;
+            }
+        }
 
         getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
 
@@ -1689,5 +1699,21 @@ public class WebClient implements Serializable {
             throw new NullPointerException();
         }
         ajaxController_ = newValue;
+    }
+
+    /**
+     * Set the onbeforeunload handler for this webclient.
+     * @param onbeforeunloadHandler The new onbeforeunloadHandler or null if none is specified.
+     */
+    public void setOnbeforeunloadHandler(final OnbeforeunloadHandler onbeforeunloadHandler) {
+        onbeforeunloadHandler_ = onbeforeunloadHandler;
+    }
+
+    /**
+     * Return the onbeforeunload handler for this webclient.
+     * @return the onbeforeunload handler or null if one hasn't been set.
+     */
+    public OnbeforeunloadHandler getOnbeforeunloadHandler() {
+        return onbeforeunloadHandler_;
     }
 }
