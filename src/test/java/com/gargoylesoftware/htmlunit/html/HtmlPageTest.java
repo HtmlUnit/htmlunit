@@ -1108,6 +1108,22 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
+     * Test that the parent of the DOM Document (HtmlPage) is null.
+     * @throws Exception if the test fails
+     */
+    public void testDocumentParentIsNull() throws Exception {
+
+        final String htmlContent = "<html>"
+            + "<head><title>foo</title></head>"
+            + "<body>"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        assertNotNull(page);
+        assertNull(page.getParentDomNode());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testDocumentElement() throws Exception {
