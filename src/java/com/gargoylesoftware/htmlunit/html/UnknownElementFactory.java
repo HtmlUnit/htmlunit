@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.html;
 import org.xml.sax.Attributes;
 
 import java.util.Map;
-import java.util.HashMap;
 
 /**
  * a factory for elements encountered in parsing the input which are not represented
@@ -49,6 +48,7 @@ import java.util.HashMap;
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author David K. Taylor
  */
 public final class UnknownElementFactory implements IElementFactory {
 
@@ -73,13 +73,7 @@ public final class UnknownElementFactory implements IElementFactory {
      */
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
-        Map attributeMap = null;
-        if (attributes != null) {
-            attributeMap = new HashMap(attributes.getLength());
-            for (int i = 0; i < attributes.getLength(); i++) {
-                attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
-            }
-        }
+        final Map attributeMap = DefaultElementFactory.setAttributes(attributes);
         return new UnknownHtmlElement(page, namespaceURI, qualifiedName, attributeMap);
     }
 }

@@ -54,6 +54,7 @@ import org.xml.sax.Attributes;
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author David K. Taylor
  */
 class DefaultElementFactory implements IElementFactory {
 
@@ -77,21 +78,16 @@ class DefaultElementFactory implements IElementFactory {
      */
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
-        Map attributeMap = null;
-        if (attributes != null) {
-            attributeMap = ListOrderedMap.decorate(new HashMap(attributes.getLength())); // preserve insertion order
-            for (int i = 0; i < attributes.getLength(); i++) {
-                attributeMap.put(attributes.getQName(i), attributes.getValue(i));
-            }
-        }
+        final Map attributeMap = setAttributes(attributes);
 
         final HtmlElement element;
         final String tagName;
-        if (qualifiedName.indexOf(':') == -1) {
+        final int colonIndex = qualifiedName.indexOf(':');
+        if (colonIndex == -1) {
             tagName = qualifiedName;
         }
         else {
-            tagName = qualifiedName.substring(qualifiedName.indexOf(':') + 1).toLowerCase();
+            tagName = qualifiedName.substring(colonIndex + 1).toLowerCase();
         }
         if (tagName.equals(HtmlAddress.TAG_NAME)) {
             element = new HtmlAddress(namespaceURI, qualifiedName, page, attributeMap);
@@ -334,8 +330,25 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlUnorderedList(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
-            throw new IllegalStateException("Can not find HtmlElement for " + qualifiedName);
+            throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);
         }
         return element;
+    }
+
+    /**
+     * Convert Attributes into the Map needed by HtmlElement.
+     *
+     * @param attributes the SAX attributes.
+     * @return the Map of attribute values for HtmlElement.
+     */
+    static Map setAttributes(final Attributes attributes) {
+        Map attributeMap = null;
+        if (attributes != null) {
+            attributeMap = ListOrderedMap.decorate(new HashMap(attributes.getLength())); // preserve insertion order
+            for (int i = 0; i < attributes.getLength(); i++) {
+                attributeMap.put(attributes.getQName(i), attributes.getValue(i));
+            }
+        }
+        return attributeMap;
     }
 }

@@ -51,6 +51,7 @@ import java.util.HashMap;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author David K. Taylor
  */
 public final class InputElementFactory implements IElementFactory {
 
@@ -81,6 +82,11 @@ public final class InputElementFactory implements IElementFactory {
      */
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
+
+        Map attributeMap = DefaultElementFactory.setAttributes(attributes);
+        if (attributeMap == null) {
+            attributeMap = new HashMap();
+        }
     
         String type = null;
         if (attributes != null) {
@@ -91,13 +97,6 @@ public final class InputElementFactory implements IElementFactory {
         }
         else {
             type = type.toLowerCase();
-        }
-
-        final Map attributeMap = new HashMap();
-        if (attributes != null) {
-            for (int i = 0; i < attributes.getLength(); i++) {
-                attributeMap.put(attributes.getLocalName(i), attributes.getValue(i));
-            }
         }
 
         final HtmlInput result;
