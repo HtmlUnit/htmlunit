@@ -44,7 +44,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -69,6 +68,7 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -191,8 +191,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
          */
         final HtmlElement htmlElt = (HtmlElement) domNode;
         for (final Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
-            final Map.Entry entry = (Map.Entry) iter.next();
-            final String eventName = (String) entry.getKey();
+            final HtmlAttr entry = (HtmlAttr) iter.next();
+            final String eventName = entry.getName();
             if (eventName.startsWith("on")) {
                 // TODO: check that it is an "allowed" event for the browser, and take care to the case
                 final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, (String) entry.getValue());
@@ -493,8 +493,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
             for (final Iterator iterator = element.getAttributeEntriesIterator(); iterator.hasNext();) {
-                final Map.Entry entry = (Map.Entry) iterator.next();
-                final String name = (String) entry.getKey();
+                final HtmlAttr entry = (HtmlAttr) iterator.next();
+                final String name = entry.getName();
                 final String value = (String) entry.getValue();
                 final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
                 buffer.append(' ').append(name).append("=");
@@ -630,8 +630,8 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     protected AttributesImpl readAttributes(final HtmlElement element) {
         final AttributesImpl attributes = new AttributesImpl();
         for (final Iterator iter = element.getAttributeEntriesIterator(); iter.hasNext();) {
-            final Map.Entry entry = (Map.Entry) iter.next();
-            final String name = (String) entry.getKey();
+            final HtmlAttr entry = (HtmlAttr) iter.next();
+            final String name = entry.getName();
             final String value = (String) entry.getValue();
             attributes.addAttribute(null, name, name, null, value);
         }

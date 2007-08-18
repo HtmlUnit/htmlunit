@@ -43,6 +43,8 @@ import java.util.Map;
  * A thin wrapper around attributes. Attributes are stored as {@link java.util.Map.Entry} in {@link
  * com.gargoylesoftware.htmlunit.html.HtmlElement}, but the xpath engine expects attributes to be in a {@link
  * com.gargoylesoftware.htmlunit.html.DomNode}.
+ * @deprecated The implements Map.Entry is deprecated since the return type of getValue conflicts with
+ * the W3C DOM API.
  *
  * @version $Revision$
  * @author Denis N. Antonioli
@@ -67,21 +69,21 @@ public class HtmlAttr extends DomNode implements Map.Entry {
     }
 
     /**
-     * @return the node type
+     * {@inheritDoc}
      */
     public short getNodeType() {
         return org.w3c.dom.Node.ATTRIBUTE_NODE;
     }
 
     /**
-     * @return The same value as returned by {@link #getKey()}.
+     * {@inheritDoc}
      */
     public String getNodeName() {
-        return (String) getKey();
+        return getName();
     }
 
     /**
-     * @return The same value as returned by {@link #getValue()}.
+     * {@inheritDoc}
      */
     public String getNodeValue() {
         return (String) getValue();
@@ -91,11 +93,18 @@ public class HtmlAttr extends DomNode implements Map.Entry {
      * @return The key of wrapped map entry.
      */
     public Object getKey() {
-        return wrappedMappedEntry_.getKey();
+        return getName();
     }
 
     /**
-     * @return The value of wrapped map entry.
+     * @return The qualified name of the attribute.
+     */
+    public String getName() {
+        return (String) wrappedMappedEntry_.getKey();
+    }
+
+    /**
+     * @return The value of the attribute.
      * @deprecated This method conflicts with the W3C DOM API since the return values are
      * different.  Use getHtmlValue instead.
      */

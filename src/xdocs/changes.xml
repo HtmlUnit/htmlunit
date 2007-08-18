@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="dktaylor" id="1747878">
+                Deprecate HtmlAttr implementing Map.Entry that conflicts with W3C DOM API.  Replace
+                uses of Map.Entry with HtmlAttr.  Add HtmlAttr.getName.  (#1747878).
+            </action>
             <action type="add" dev="asashour" id="1498419">
                 New interface com.gargoylesoftware.htmlunit.OnbeforeunloadHandler with associated WebClient getter and setter, to support 'onbeforeunload' event (#1498419).
             </action>

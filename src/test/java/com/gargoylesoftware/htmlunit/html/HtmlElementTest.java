@@ -180,8 +180,8 @@ public class HtmlElementTest extends WebTestCase {
             new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
 
         assertTrue(it.hasNext());
-        final Map.Entry me = (Map.Entry) it.next();
-        assertEquals("key", me.getKey());
+        final HtmlAttr me = (HtmlAttr) it.next();
+        assertEquals("key", me.getName());
         assertEquals("value", me.getValue());
         assertInstanceOf(me, HtmlAttr.class);
 

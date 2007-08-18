@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html.xpath;
 
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Collections;
 
 import org.jaxen.DefaultNavigator;
@@ -48,6 +47,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.Util;
 
@@ -237,7 +237,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * if the node is an attribute, or null otherwise.
      */
     public String getAttributeName(final Object object) {
-        return (String) ((Map.Entry) object).getKey();
+        return ((HtmlAttr) object).getName();
     }
 
     /**
@@ -248,7 +248,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * prefixed) name if the node is an attribute, or null otherwise.
      */
     public String getAttributeQName(final Object object) {
-        return (String) ((Map.Entry) object).getKey();
+        return ((HtmlAttr) object).getName();
     }
 
     /**
@@ -288,7 +288,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is an attribute, false otherwise.
      */
     public boolean isAttribute(final Object object) {
-        return (object instanceof Map.Entry);
+        return (object instanceof HtmlAttr);
     }
 
     /**
@@ -340,7 +340,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * attribute, null otherwise.
      */
     public String getAttributeStringValue(final Object object) {
-        return (String) ((Map.Entry) object).getValue();
+        return (String) ((HtmlAttr) object).getValue();
     }
 
     /**

@@ -119,6 +119,12 @@ public class HtmlAttrTest extends WebTestCase {
 
     /**
      */
+    public void testGetName() {
+        assertEquals(ENTRY_KEY, htmlAttr_.getName());
+    }
+
+    /**
+     */
     public void testGetNodeName() {
         assertEquals(ENTRY_KEY, htmlAttr_.getNodeName());
     }
