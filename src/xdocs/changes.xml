@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add support for element.uniqueID (IE only).
+            </action>
             <action type="update" dev="dktaylor" id="1747878">
                 Deprecate unused class MapEntryWrappingIterator.  (#1747878).
             </action>

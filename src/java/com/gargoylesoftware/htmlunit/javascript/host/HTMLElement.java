@@ -112,10 +112,16 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     static final String POSITION_BEFORE_END = "beforeEnd";
     static final String POSITION_AFTER_END = "afterEnd";
 
+    /**
+     * Static counter for {@link #uniqueID_}.
+     */
+    private static int UniqueID_Counter_ = 1;
+
     private final Set behaviors_ = new HashSet();
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_;
     private int scrollTop_;
+    private final String uniqueID_ = "ms__id" + UniqueID_Counter_++;
 
     /**
      * The tag names of the objects for which outerHTML is readonly
@@ -1634,4 +1640,12 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         return new NativeArray(0);
     }
 
+    /**
+     * Retrieves an auto-generated, unique identifier for the object.
+     * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
+     * @return an auto-generated, unique identifier for the object.
+     */
+    public String jsxGet_uniqueID() {
+        return uniqueID_;
+    }
 }

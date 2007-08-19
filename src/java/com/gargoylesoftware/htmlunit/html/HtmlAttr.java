@@ -61,7 +61,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
      *
      * @param htmlElement The parent element.
      * @param mapEntry The wrapped Map.Entry.
-     * @deprecated Use contructor with explicit names.
+     * @deprecated Use constructor with explicit names.
      */
     public HtmlAttr(final HtmlElement htmlElement, final Map.Entry mapEntry) {
         super(null, (String) mapEntry.getKey(), htmlElement.getPage());
@@ -73,7 +73,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
      * Instantiate a new attribute.
      *
      * @param page The page that the attribute belongs to.
-     * @param namespaceURI The namepsace that defines the attribute name.  May be null.
+     * @param namespaceURI The namespace that defines the attribute name.  May be null.
      * @param qualifiedName The name of the attribute.
      * @param value The value of the attribute.
      */

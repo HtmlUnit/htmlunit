@@ -1697,4 +1697,38 @@ public class HTMLElementTest extends WebTestCase {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testUniqueID() throws Exception {
+        testUniqueID(BrowserVersion.INTERNET_EXPLORER_6_0, false, new String[] {"true", "false"});
+        testUniqueID(BrowserVersion.FIREFOX_2, true, new String[] {"true", "true"});
+    }
+
+    private void testUniqueID(final BrowserVersion browserVersion, final boolean isUndefined,
+        final String[] expectedAlerts) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "     var div1 = document.getElementById('div1');\n"
+            + "     var div2 = document.getElementById('div2');\n"
+            + "     alert(div1.uniqueID);\n"
+            + "     alert(div1.uniqueID == div1.uniqueID);\n"
+            + "     alert(div1.uniqueID == div2.uniqueID);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "  <div id='div2'/>\n"
+            + "</body></html>";
+        
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        if (isUndefined) {
+            assertEquals("undefined", collectedAlerts.get(0));
+        }
+        else {
+            assertFalse("undefined".equals(collectedAlerts.get(0)));
+        }
+        assertEquals(expectedAlerts, collectedAlerts.subList(1, collectedAlerts.size()));
+    }
 }

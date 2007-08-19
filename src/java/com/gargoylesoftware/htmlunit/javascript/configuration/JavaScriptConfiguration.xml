@@ -494,6 +494,9 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
         </property>
+        <property name="uniqueID" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         
         <function name="addBehavior">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
