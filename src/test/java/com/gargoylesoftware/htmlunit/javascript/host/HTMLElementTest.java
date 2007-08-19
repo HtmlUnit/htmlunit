@@ -1731,4 +1731,33 @@ public class HTMLElementTest extends WebTestCase {
         }
         assertEquals(expectedAlerts, collectedAlerts.subList(1, collectedAlerts.size()));
     }
+
+    /**
+     * Tests if element.uniqueID starts with 'ms__id', and is lazily created.
+     *
+     * @throws Exception if the test fails
+     */
+    public void testUniqueIDFormatIE() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "     var div1 = document.getElementById('div1');\n"
+            + "     var div2 = document.getElementById('div2');\n"
+            + "     var id2 = div2.uniqueID;\n"
+            + "     //as id2 is retrieved before getting id1, id2 should be < id1;\n"
+            + "     var id1 = div1.uniqueID;\n"
+            + "     alert(id1.substring(0, 6) == 'ms__id');\n"
+            + "     var id1Int = parseInt(id1.substring(6, id1.length));\n"
+            + "     var id2Int = parseInt(id2.substring(6, id2.length));\n"
+            + "     alert(id2Int < id1Int);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "  <div id='div2'/>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"true", "true"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

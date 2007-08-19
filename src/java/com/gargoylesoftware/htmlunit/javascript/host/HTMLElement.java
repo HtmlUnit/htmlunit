@@ -121,7 +121,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_;
     private int scrollTop_;
-    private final String uniqueID_ = "ms__id" + UniqueID_Counter_++;
+    private String uniqueID_;
 
     /**
      * The tag names of the objects for which outerHTML is readonly
@@ -1646,6 +1646,9 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @return an auto-generated, unique identifier for the object.
      */
     public String jsxGet_uniqueID() {
+        if (uniqueID_ == null) {
+            uniqueID_ = "ms__id" + UniqueID_Counter_++;
+        }
         return uniqueID_;
     }
 }
