@@ -135,7 +135,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
     }
 
     /**
-     * Set the value of the attribvute.
+     * Set the value of the attribute.
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      * @deprecated This method conflicts with the W3C DOM API since the return values are
@@ -146,7 +146,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
     }
 
     /**
-     * Set the value of the attribvute.
+     * Set the value of the attribute.
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      */
