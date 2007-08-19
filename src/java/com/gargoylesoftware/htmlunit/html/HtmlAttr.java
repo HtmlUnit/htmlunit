@@ -57,7 +57,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
     private String value_;
 
     /**
-     * Instantiate a new wrapper.
+     * Instantiate a new attribute.
      *
      * @param htmlElement The parent element.
      * @param mapEntry The wrapped Map.Entry.
@@ -104,7 +104,8 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
     }
 
     /**
-     * @return The key of wrapped map entry.
+     * {@inheritDoc}
+     * @deprecated The implements Map.Entry is deprecated.  Use getName instead.
      */
     public Object getKey() {
         return getName();
@@ -134,7 +135,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
     }
 
     /**
-     * Delegate to the wrapped map entry.
+     * Set the value of the attribvute.
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      * @deprecated This method conflicts with the W3C DOM API since the return values are
@@ -145,7 +146,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
     }
 
     /**
-     * Delegate to the wrapped map entry.
+     * Set the value of the attribvute.
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      */

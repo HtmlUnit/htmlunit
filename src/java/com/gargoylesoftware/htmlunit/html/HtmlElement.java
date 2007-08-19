@@ -88,7 +88,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     /** Constant meaning that the specified attribute was found but its value was empty. */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
     
-    /** The map holding the attribute values, keyed by name. */
+    /** The map holding the attributes, keyed by name. */
     private Map attributes_;
     
     private List/* HtmlAttributeChangeListener */ attributeListeners_;
@@ -774,8 +774,9 @@ public abstract class HtmlElement extends DomNamespaceNode {
             if (nextElement_ == null) {
                 throw new IllegalStateException();
             }
-            if (nextElement_.getPreviousDomSibling() != null) {
-                nextElement_.getPreviousDomSibling().remove();
+            final DomNode sibling = nextElement_.getPreviousDomSibling();
+            if (sibling != null) {
+                sibling.remove();
             }
         }
 
@@ -802,7 +803,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
 
     /**
      * Converts an iteration of plain {@link java.util.Map.Entry} into an iteration of {@link HtmlAttr}.
-     *
+     * @deprecated This class is no longer used since attributes are now represented by HtmlAttr.
      * @author Denis N. Antonioli
      */
     public static class MapEntryWrappingIterator implements Iterator {
