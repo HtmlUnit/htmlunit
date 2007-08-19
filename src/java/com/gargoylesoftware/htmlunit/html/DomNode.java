@@ -416,6 +416,62 @@ public abstract class DomNode implements Cloneable, Serializable {
     public abstract String getNodeName();
 
     /**
+     * The namespace URI of this node, or null if it is unspecified (see ).  This is not a
+     * computed value that is the result of a namespace lookup based on an examination of the
+     * namespace declarations in scope.  It is merely the namespace URI given at creation time.
+     * For nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with
+     * a DOM Level 1 method, such as Document.createElement(), this is always null.
+     * @return The URI that identifies an XML namespace.
+     */
+    public String getNamespaceURI() {
+        return null;
+    }
+
+    /**
+     * Returns the local part of the qualified name of this node.  For nodes of any
+     * type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with a DOM Level 1
+     * method, such as Document.createElement(), this is always null.
+     * @return The local name (without prefix).
+     */
+    public String getLocalName() {
+        return null;
+    }
+
+    /**
+     * The namespace prefix of this node, or null if it is unspecified.
+     * @return The Namespace prefix.
+     */
+    public String getPrefix() {
+        return null;
+    }
+
+    /**
+     * Set the namespace prefix of this node, or null if it is unspecified.  When it is defined
+     * to be null, setting it has no effect, including if the node is read-only.  Note that setting
+     * this attribute, when permitted, changes the nodeName attribute, which holds the qualified
+     * name, as well as the tagName and name attributes of the Element and Attr interfaces, when
+     * applicable.  Setting the prefix to null makes it unspecified, setting it to an empty string
+     * is implementation dependent.  Note also that changing the prefix of an attribute that is
+     * known to have a default value, does not make a new attribute with the default value and the
+     * original prefix appear, since the namespaceURI and localName do not change.  For nodes of
+     * any type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with a DOM Level 1
+     * method, such as createElement from the Document interface, this is always null.
+     * @param prefix The namespace prefix of this node, or null if it is unspecified.
+     */
+    public void setPrefix(final String prefix) {
+    }
+
+    /**
+     * Return whether this node has any atributes.
+     *
+     * @return true if the node has attributes, false otherwise.
+     */
+    public boolean hasAttributes() {
+
+        return false;
+    }
+
+    /**
      *  Returns a flag indicating whether or not this node itself results
      *   in any space taken up in the browser windows; for instance, "<b>"
      *   affects the specified text, but does not use up any space itself

@@ -66,6 +66,111 @@ public class DomNodeTest extends WebTestCase {
     }
 
     /**
+     * Test hasAttributes() on an element with attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementHasAttributesWith() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should have attribute", true, node.hasAttributes());
+    }
+
+    /**
+     * Test hasAttributes() on an element with no attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementHasAttributesNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode parent = node.getParentDomNode();
+        assertEquals("Element should not have attribute", false, parent.hasAttributes());
+    }
+
+    /**
+     * Test hasAttributes on a node that is not defined to have attributes.
+     * @throws Exception if the test fails
+     */
+    public void testNonElementHasAttributes() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode child = node.getFirstDomChild();
+        assertEquals("Text should not have attribute", false, child.hasAttributes());
+    }
+
+    /**
+     * Test getPrefix on a node that is not defined to have a prefix.
+     * @throws Exception if the test fails
+     */
+    public void testNonElementGetPrefix() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode child = node.getFirstDomChild();
+        assertEquals("Text should not have a prefix", null, child.getPrefix());
+    }
+
+    /**
+     * Test getNamespaceURI on a node that is not defined to have a namespace.
+     * @throws Exception if the test fails
+     */
+    public void testNonElementGetNamespaceURI() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode child = node.getFirstDomChild();
+        assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
+    }
+
+    /**
+     * Test getLocalName on a node that is not defined to have a local name.
+     * @throws Exception if the test fails
+     */
+    public void testNonElementGetLocalName() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode child = node.getFirstDomChild();
+        assertEquals("Text should not have a prefix", null, child.getLocalName());
+    }
+
+    /**
+     * Test setPrefix on a node that is not defined to have a prefix.
+     * @throws Exception if the test fails
+     */
+    public void testNonElementSetPrefix() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode child = node.getFirstDomChild();
+        child.setPrefix("bar"); // This does nothing.
+        assertEquals("Text should not have a prefix", null, child.getPrefix());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testRemoveAllChildren() throws Exception {

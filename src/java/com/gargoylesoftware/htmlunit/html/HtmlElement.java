@@ -90,6 +90,9 @@ public abstract class HtmlElement extends DomNamespaceNode {
     
     /** The map holding the attributes, keyed by name. */
     private Map attributes_;
+
+    /** The map holding the namespaces, keyed by URI. */
+    private Map namespaces_ = new HashMap();
     
     private List/* HtmlAttributeChangeListener */ attributeListeners_;
 
@@ -110,11 +113,15 @@ public abstract class HtmlElement extends DomNamespaceNode {
         if (attributes != null) {
             attributes_ = upgradeAttributes(htmlPage, attributes);
             // The HtmlAttr objects are created before the HtmlElement, so we need to go set the
-            // parent HtmlElement, now.
+            // parent HtmlElement, now.  Also index the namespaces while we are at it.
             final Iterator entryIterator = attributes_.values().iterator();
             while (entryIterator.hasNext()) {
                 final HtmlAttr entry = (HtmlAttr) entryIterator.next();
                 entry.setParentNode(this);
+                final String attrNamespaceURI = entry.getNamespaceURI();
+                if (attrNamespaceURI != null) {
+                    namespaces_.put(attrNamespaceURI, entry.getPrefix());
+                }
             }
         }
         else {
@@ -165,9 +172,98 @@ public abstract class HtmlElement extends DomNamespaceNode {
         newNode.attributes_ = createAttributeMap(keySet.size());
         for (final Iterator it = keySet.iterator(); it.hasNext();) {
             final Object key = it.next();
-            newNode.setAttributeValue((String) key, ((HtmlAttr) attributes_.get(key)).getNodeValue());
+            final HtmlAttr attr = (HtmlAttr) attributes_.get(key);
+            newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue());
         }
         return newNode;
+    }
+
+    /**
+     * Return the value of the attribute specified by name or an empty string.  If the
+     * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
+     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
+     * attribute was specified but it was empty.
+     *
+     * @param attributeName the name of the attribute
+     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     * or {@link #ATTRIBUTE_VALUE_EMPTY}
+     */
+    public final String getAttribute(final String attributeName) {
+
+        return getAttributeValue(attributeName);
+    }
+
+    /**
+     * Return the qualified name (prefix:local) for the namespace and local name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param localName The name within the namespace.
+     * @return The qualified name or just local name if the namespace is not fully defined.
+     */
+    private String getQualifiedName(final String namespaceURI, final String localName) {
+
+        final String qualifiedName;
+        if (namespaceURI != null) {
+            final String prefix = (String) namespaces_.get(namespaceURI);
+            if (prefix != null) {
+                qualifiedName = prefix + ':' + localName;
+            }
+            else {
+                qualifiedName = localName;
+            }
+        }
+        else {
+            qualifiedName = localName;
+        }
+        return qualifiedName;
+    }
+
+    /**
+     * Return the value of the attribute specified by namespace and local name or an empty
+     * string.  If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
+     * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
+     * attribute was specified but it was empty.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param localName The name within the namespace.
+     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     * or {@link #ATTRIBUTE_VALUE_EMPTY}
+     */
+    public final String getAttributeNS(final String namespaceURI, final String localName) {
+
+        return getAttributeValue(getQualifiedName(namespaceURI, localName));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean hasAttributes() {
+
+        return attributes_.size() > 0;
+    }
+
+    /**
+     * Return whether the attribute specified by name has a value.
+     *
+     * @param attributeName the name of the attribute
+     * @return true if an attribute with the given name is specified on this element or has a
+     * default value, false otherwise.
+     */
+    public final boolean hasAttribute(final String attributeName) {
+        return attributes_.get(attributeName) != null;
+    }
+
+    /**
+     * Return whether the attribute specified by namespace and local name has a value.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param localName The name within the namespace.
+     * @return true if an attribute with the given name is specified on this element or has a
+     * default value, false otherwise.
+     */
+    public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
+
+        return attributes_.get(getQualifiedName(namespaceURI, localName)) != null;
     }
 
     /**
@@ -193,13 +289,47 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
+     * Set the value of the attribute specified by name.
+     *
+     * @param attributeName the name of the attribute
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttribute(final String attributeName, final String attributeValue) {
+        setAttributeValue(null, attributeName, attributeValue);
+    }
+
+    /**
+     * Set the value of the attribute specified by namespace and qualified name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name (prefix:local) of the attribute.
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttributeNS(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
+        setAttributeValue(namespaceURI, qualifiedName, attributeValue);
+    }
+
+    /**
      * Set the value of the specified attribute.
      *
      * @param attributeName the name of the attribute
      * @param attributeValue The value of the attribute
      */
     public final void setAttributeValue(final String attributeName, final String attributeValue) {
-        final String oldAttributeValue = getAttributeValue(attributeName);
+        setAttributeValue(null, attributeName, attributeValue);
+    }
+
+    /**
+     * Set the value of the specified attribute.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the attribute
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
+        final String oldAttributeValue = getAttributeValue(qualifiedName);
         String value = attributeValue;
 
         if (attributes_ == Collections.EMPTY_MAP) {
@@ -210,15 +340,19 @@ public abstract class HtmlElement extends DomNamespaceNode {
         }
 
         getPage().removeMappedElement(this);
-        addAttributeToMap(getPage(), attributes_, null, attributeName.toLowerCase(), value);
+        final HtmlAttr newAttr = addAttributeToMap(getPage(), attributes_, namespaceURI,
+            qualifiedName.toLowerCase(), value);
+        if (namespaceURI != null) {
+            namespaces_.put(namespaceURI, newAttr.getPrefix());
+        }
         getPage().addMappedElement(this);
 
         final HtmlAttributeChangeEvent event;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            event = new HtmlAttributeChangeEvent(this, attributeName, attributeValue);
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
         }
         else {
-            event = new HtmlAttributeChangeEvent(this, attributeName, oldAttributeValue);
+            event = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
         }
         
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
@@ -232,11 +366,10 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     * Removes an attribute from this element.
+     * Removes an attribute specified by name from this element.
      * @param attributeName the attribute attributeName
      */
     public final void removeAttribute(final String attributeName) {
-
         final String value = getAttributeValue(attributeName);
 
         getPage().removeMappedElement(this);
@@ -246,6 +379,16 @@ public abstract class HtmlElement extends DomNamespaceNode {
         final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
         fireHtmlAttributeRemoved(event);
         getPage().fireHtmlAttributeRemoved(event);
+    }
+
+    /**
+     * Removes an attribute specified by namespace and local name from this element.
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param localName The name within the namespace.
+     */
+    public final void removeAttributeNS(final String namespaceURI, final String localName) {
+
+        removeAttribute(getQualifiedName(namespaceURI, localName));
     }
 
     /**
@@ -869,9 +1012,11 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param qualifiedName The qualified name of the attribute
      * @param value The value of the attribute
      */
-    static void addAttributeToMap(final HtmlPage page, final Map attributeMap,
+    static HtmlAttr addAttributeToMap(final HtmlPage page, final Map attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
-        attributeMap.put(qualifiedName, new HtmlAttr(page, null, qualifiedName, value));
+        final HtmlAttr newAttr = new HtmlAttr(page, namespaceURI, qualifiedName, value);
+        attributeMap.put(qualifiedName, newAttr);
+        return newAttr;
     }
 
     /**

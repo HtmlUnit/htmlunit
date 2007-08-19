@@ -54,7 +54,7 @@ public abstract class DomNamespaceNode extends DomNode {
     private String prefix_;
 
     /**
-     *  Create an instance
+     *  Create an instance of a DOM node that can have a namespace.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -78,70 +78,28 @@ public abstract class DomNamespaceNode extends DomNode {
     }
 
     /**
-     * The namespace URI of this node, or null if it is unspecified (see ).  This is not a
-     * computed value that is the result of a namespace lookup based on an examination of the
-     * namespace declarations in scope.  It is merely the namespace URI given at creation time.
-     * For nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with
-     * a DOM Level 1 method, such as Document.createElement(), this is always null.
-     *
-     * This method is part of the W3C DOM API.
-     *
-     * @return The URI that identifies an XML namespace.
+     * {@inheritDoc}
      */
     public String getNamespaceURI() {
         return namespaceURI_;
     }
 
     /**
-     * Returns the local part of the qualified name of this node.  For nodes of any
-     * type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with a DOM Level 1
-     * method, such as Document.createElement(), this is always null.
-     *
-     * This method is part of the W3C DOM API.
-     *
-     * @return The local name (without prefix).
+     * {@inheritDoc}
      */
     public String getLocalName() {
         return localName_;
     }
 
     /**
-     * The namespace prefix of this node, or null if it is unspecified.  When it is defined
-     * to be null, setting it has no effect, including if the node is read-only. Note that
-     * setting this attribute, when permitted, changes the nodeName attribute, which holds
-     * the qualified name, as well as the tagName and name attributes of the Element and Attr
-     * interfaces, when applicable.  Setting the prefix to null makes it unspecified, setting
-     * it to an empty string is implementation dependent.  Note also that changing the prefix
-     * of an attribute that is known to have a default value, does not make a new attribute
-     * with the default value and the original prefix appear, since the namespaceURI and
-     * localName do not change. For nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE
-     * and nodes created with a DOM Level 1 method, such as createElement from the Document
-     * interface, this is always null.
-     *
-     * This method is part of the W3C DOM API.
-     *
-     * @return The Namespace prefix.
+     * {@inheritDoc}
      */
     public String getPrefix() {
         return prefix_;
     }
 
     /**
-     * Set the namespace prefix of this node, or null if it is unspecified.  When it is defined
-     * to be null, setting it has no effect, including if the node is read-only.  Note that setting
-     * this attribute, when permitted, changes the nodeName attribute, which holds the qualified
-     * name, as well as the tagName and name attributes of the Element and Attr interfaces, when
-     * applicable.  Setting the prefix to null makes it unspecified, setting it to an empty string
-     * is implementation dependent.  Note also that changing the prefix of an attribute that is
-     * known to have a default value, does not make a new attribute with the default value and the
-     * original prefix appear, since the namespaceURI and localName do not change.  For nodes of
-     * any type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with a DOM Level 1
-     * method, such as createElement from the Document interface, this is always null.
-     *
-     * This method is part of the W3C DOM API.
-     *
-     * @param prefix The namespace prefix of this node, or null if it is unspecified.
-     *
+     * {@inheritDoc}
      */
     public void setPrefix(final String prefix) {
         prefix_ = prefix;

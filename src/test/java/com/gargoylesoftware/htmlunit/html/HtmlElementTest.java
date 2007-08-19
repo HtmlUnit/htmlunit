@@ -66,6 +66,395 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     /**
+     * Test hasAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementHasAttributeWith() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should have attribute", true, node.hasAttribute("id"));
+    }
+
+    /**
+     * Test hasAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementHasAttributeNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should not have attribute", false, node.hasAttribute("foo"));
+    }
+
+    /**
+     * Test hasAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementHasAttributeNSWith() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should have attribute", true, node.hasAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
+     * Test hasAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementHasAttributeNSNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should not have attribute", false, node.hasAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
+     * Test getAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetAttributeWith() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
+    }
+
+    /**
+     * Test getAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetAttributeNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+    }
+    
+    /**
+     * Test getAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetAttributeNSWith() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
+     * Test getAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetAttributeNSNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
+     * Test getNamespaceURI on an attribute that has a namespace.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetNamespaceURIWith() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final Iterator attrIter = node.getAttributeEntriesIterator();
+        while (attrIter.hasNext()) {
+            final HtmlAttr attr = (HtmlAttr) attrIter.next();
+            if (attr.getName().equals("ns:foo")) {
+                assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
+                return;
+            }
+        }
+        assertFalse("Attribute ns:foo not found.", true);
+    }
+
+    /**
+     * Test getNamespaceURI on an attribute that has a namespace.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetNamespaceURINone() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final Iterator attrIter = node.getAttributeEntriesIterator();
+        while (attrIter.hasNext()) {
+            final HtmlAttr attr = (HtmlAttr) attrIter.next();
+            if (attr.getName().equals("id")) {
+                assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
+                return;
+            }
+        }
+        assertFalse("Attribute ns:foo not found.", true);
+    }
+
+    /**
+     * Test getLocalName on an attribute that has a local name.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetLocalNameWith() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final Iterator attrIter = node.getAttributeEntriesIterator();
+        while (attrIter.hasNext()) {
+            final HtmlAttr attr = (HtmlAttr) attrIter.next();
+            if (attr.getName().equals("ns:foo")) {
+                assertEquals("Element should have a local name", "foo", attr.getLocalName());
+                return;
+            }
+        }
+        assertFalse("Attribute ns:foo not found.", true);
+    }
+
+    /**
+     * Test getLocalName on an attribute that has a local name.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetLocalNameNone() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final Iterator attrIter = node.getAttributeEntriesIterator();
+        while (attrIter.hasNext()) {
+            final HtmlAttr attr = (HtmlAttr) attrIter.next();
+            if (attr.getName().equals("id")) {
+                // This is not standard, but to change it now would break backwards compatibility.
+                assertEquals("Element should not have a local name", "id", attr.getLocalName());
+                return;
+            }
+        }
+        assertFalse("Attribute ns:foo not found.", true);
+    }
+
+    /**
+     * Test getPrefix on an attribute that has a prefix.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetPrefixWith() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final Iterator attrIter = node.getAttributeEntriesIterator();
+        while (attrIter.hasNext()) {
+            final HtmlAttr attr = (HtmlAttr) attrIter.next();
+            if (attr.getName().equals("ns:foo")) {
+                assertEquals("Element should have a prefix", "ns", attr.getPrefix());
+                return;
+            }
+        }
+        assertFalse("Attribute ns:foo not found.", true);
+    }
+
+    /**
+     * Test getPrefix on an attribute that has a prefix.
+     * @throws Exception if the test fails
+     */
+    public void testElementGetPrefixNone() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final Iterator attrIter = node.getAttributeEntriesIterator();
+        while (attrIter.hasNext()) {
+            final HtmlAttr attr = (HtmlAttr) attrIter.next();
+            if (attr.getName().equals("id")) {
+                assertEquals("Element should not have a prefix", null, attr.getPrefix());
+                return;
+            }
+        }
+        assertFalse("Attribute ns:foo not found.", true);
+    }
+
+    /**
+     * Test setPrefix on an attribute that has a prefix.
+     * @throws Exception if the test fails
+     */
+    public void testElementSetPrefix() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final Iterator attrIter = node.getAttributeEntriesIterator();
+        while (attrIter.hasNext()) {
+            final HtmlAttr attr = (HtmlAttr) attrIter.next();
+            if (attr.getName().equals("ns:foo")) {
+                attr.setPrefix("other");
+                assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
+                assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());
+                return;
+            }
+        }
+        assertFalse("Attribute ns:foo not found.", true);
+    }
+
+    /**
+     * Test setAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementSetAttributeWith() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.setAttribute("id", "other");
+        assertEquals("Element should have attribute", "other", node.getAttribute("id"));
+    }
+
+    /**
+     * Test setAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementSetAttributeNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.setAttribute("foo", "other");
+        assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
+    }
+    
+    /**
+     * Test setAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementSetAttributeNSWith() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.setAttributeNS("http://foobar", "ns:foo", "other");
+        assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
+     * Test setAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementSetAttributeNSNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.setAttributeNS("http://foobar", "ns:foo", "other");
+        assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
+     * Test removeAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementRemoveAttributeWith() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.removeAttribute("id");
+        assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
+    }
+
+    /**
+     * Test removeAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementRemoveAttributeNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.removeAttribute("foo");
+        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+    }
+    
+    /**
+     * Test removeAttribute() on an element with the attribute.
+     * @throws Exception if the test fails
+     */
+    public void testElementRemoveAttributeNSWith() throws Exception {
+        final String content
+            = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.removeAttributeNS("http://foobar", "foo");
+        assertEquals("Element should not have removed attribute", "", node.getAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
+     * Test removeAttribute() on an element without the attributes.
+     * @throws Exception if the test fails
+     */
+    public void testElementRemoveAttributeNSNone() throws Exception {
+        final String content
+            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+
+        final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        node.removeAttributeNS("http://foobar", "foo");
+        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+    }
+
+    /**
      * Verifies that cloned node attributes have the same initial values, but changes can be made
      * to the clone without affecting the original node, and that the id attribute is treated the
      * same as all the other attributes. See bug 1707726.

@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="dktaylor" id="1747878">
+                Add namespace support for attributes: DomNode.getnamespaceURI, getLocalName, getPrefix,
+                setPrefix, hasAttributes, HtmlElement.getAttribute, getAttributeNS, hasAttributes,
+                hasAttribute, hasAttributeNS, setAttribute, setAttributeNS, setAttributeValue(NS),
+                and removeAttributeNS.  (#1747878).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for element.uniqueID (IE only).
             </action>
