@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -70,29 +69,11 @@ public class HtmlAttrTest extends WebTestCase {
     private static final String ENTRY_CANT_REMOVE = "Not implemented here";
 
     /**
-     * A single Map.Entry for all the tests.
-     */
-    private static final Map.Entry MAP_ENTRY;
-
-    /**
      * A single dummy HtmlElement. Necessary, because HtmlAttr's constructor calls the method getPage().
      */
     static final HtmlElement HTML_ELEMENT;
 
     static {
-        MAP_ENTRY = new Map.Entry() {
-            public Object getKey() {
-                return ENTRY_KEY;
-            }
-
-            public Object getValue() {
-                return ENTRY_VALUE;
-            }
-
-            public Object setValue(final Object o) {
-                throw new NoSuchMethodError(ENTRY_CANT_REMOVE);
-            }
-        };
         HTML_ELEMENT = new HtmlElement(null, "dummy", null, Collections.EMPTY_MAP) {
             public HtmlPage getPage() {
                 return null;
@@ -114,7 +95,8 @@ public class HtmlAttrTest extends WebTestCase {
      */
     protected void setUp() throws Exception {
         super.setUp();
-        htmlAttr_ = new HtmlAttr(HTML_ELEMENT, MAP_ENTRY);
+        htmlAttr_ = new HtmlAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
+        htmlAttr_.setParentNode(HTML_ELEMENT);
     }
 
     /**
@@ -156,13 +138,8 @@ public class HtmlAttrTest extends WebTestCase {
     /**
      */
     public void testSetValue() {
-        try {
-            htmlAttr_.setHtmlValue("foo");
-            fail("Method not implemented!");
-        }
-        catch (final NoSuchMethodError nsme) {
-            assertEquals(ENTRY_CANT_REMOVE, nsme.getMessage());
-        }
+        htmlAttr_.setHtmlValue("foo");
+        assertEquals("foo", htmlAttr_.getHtmlValue());
     }
 
     /**

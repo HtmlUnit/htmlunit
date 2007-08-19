@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * A thin wrapper around attributes. Attributes are stored as {@link java.util.Map.Entry} in {@link
+ * An attribute of an element. Attributes are stored in {@link
  * com.gargoylesoftware.htmlunit.html.HtmlElement}, but the xpath engine expects attributes to be in a {@link
  * com.gargoylesoftware.htmlunit.html.DomNode}.
  * @deprecated The implements Map.Entry is deprecated since the return type of getValue conflicts with
@@ -50,22 +50,36 @@ import java.util.Map;
  * @author Denis N. Antonioli
  * @author David K. Taylor
  */
-public class HtmlAttr extends DomNode implements Map.Entry {
+public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
 
     private static final long serialVersionUID = 4832218455328064213L;
 
-    private final Map.Entry wrappedMappedEntry_;
+    private String value_;
 
     /**
      * Instantiate a new wrapper.
      *
      * @param htmlElement The parent element.
      * @param mapEntry The wrapped Map.Entry.
+     * @deprecated Use contructor with explicit names.
      */
     public HtmlAttr(final HtmlElement htmlElement, final Map.Entry mapEntry) {
-        super(htmlElement.getPage());
-        wrappedMappedEntry_ = mapEntry;
+        super(null, (String) mapEntry.getKey(), htmlElement.getPage());
+        value_ = (String) mapEntry.getValue();
         setParentNode(htmlElement);
+    }
+
+    /**
+     * Instantiate a new attribute.
+     *
+     * @param page The page that the attribute belongs to.
+     * @param namespaceURI The namepsace that defines the attribute name.  May be null.
+     * @param qualifiedName The name of the attribute.
+     * @param value The value of the attribute.
+     */
+    public HtmlAttr(final HtmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
+        super(namespaceURI, qualifiedName, page);
+        value_ = value;
     }
 
     /**
@@ -100,7 +114,7 @@ public class HtmlAttr extends DomNode implements Map.Entry {
      * @return The qualified name of the attribute.
      */
     public String getName() {
-        return (String) wrappedMappedEntry_.getKey();
+        return getQualifiedName();
     }
 
     /**
@@ -116,7 +130,7 @@ public class HtmlAttr extends DomNode implements Map.Entry {
      * @return The value of wrapped map entry.
      */
     public Object getHtmlValue() {
-        return wrappedMappedEntry_.getValue();
+        return value_;
     }
 
     /**
@@ -136,6 +150,8 @@ public class HtmlAttr extends DomNode implements Map.Entry {
      * @return old value corresponding to the entry.
      */
     public Object setHtmlValue(final Object value) {
-        return wrappedMappedEntry_.setValue(value);
+        final String oldValue = value_;
+        value_ = (String) value;
+        return oldValue;
     }
 }

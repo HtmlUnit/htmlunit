@@ -101,16 +101,48 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param htmlPage The page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
+     * @deprecated The Map<String, String> is deprecated in favor of a Map<String, HtmlAttr> to
+     * support the W3C DOM API where attributes have namespaces.
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
             final Map attributes) {
         super(namespaceURI, qualifiedName, htmlPage);
         if (attributes != null) {
-            attributes_ = attributes;
+            attributes_ = upgradeAttributes(htmlPage, attributes);
+            // The HtmlAttr objects are created before the HtmlElement, so we need to go set the
+            // parent HtmlElement, now.
+            final Iterator entryIterator = attributes_.values().iterator();
+            while (entryIterator.hasNext()) {
+                final HtmlAttr entry = (HtmlAttr) entryIterator.next();
+                entry.setParentNode(this);
+            }
         }
         else {
             attributes_ = Collections.EMPTY_MAP;
         }
+    }
+
+    /**
+     * Convert old attribute Map<String, String> to Map<String, HtmlAttr> to support backwards
+     * compatibility.
+     * @param attributes old attributes to be upgraded
+     * @return upgraded attribute map
+     */
+    private Map upgradeAttributes(final HtmlPage htmlPage, final Map attributes) {
+        Map upgradedAttributes = attributes;
+        if (attributes != null && attributes.size() > 0) {
+            final Object firstValue = attributes.values().iterator().next();
+            if (firstValue instanceof String) {
+                upgradedAttributes = createAttributeMap(attributes.size());
+                final Iterator entryIterator = attributes.entrySet().iterator();
+                while (entryIterator.hasNext()) {
+                    final Map.Entry entry = (Map.Entry) entryIterator.next();
+                    addAttributeToMap(htmlPage, upgradedAttributes, null, (String) entry.getKey(),
+                        (String) entry.getValue());
+                }
+            }
+        }
+        return upgradedAttributes;
     }
 
     /**
@@ -133,7 +165,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
         newNode.attributes_ = createAttributeMap(keySet.size());
         for (final Iterator it = keySet.iterator(); it.hasNext();) {
             final Object key = it.next();
-            newNode.setAttributeValue((String) key, (String) attributes_.get(key));
+            newNode.setAttributeValue((String) key, ((HtmlAttr) attributes_.get(key)).getNodeValue());
         }
         return newNode;
     }
@@ -150,10 +182,10 @@ public abstract class HtmlElement extends DomNamespaceNode {
      */
     public final String getAttributeValue(final String attributeName) {
 
-        final String value = (String) attributes_.get(attributeName.toLowerCase());
+        final HtmlAttr attr = (HtmlAttr) attributes_.get(attributeName.toLowerCase());
 
-        if (value != null) {
-            return value;
+        if (attr != null) {
+            return attr.getNodeValue();
         }
         else {
             return ATTRIBUTE_NOT_DEFINED;
@@ -178,7 +210,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
         }
 
         getPage().removeMappedElement(this);
-        addAttributeToMap(attributes_, null, attributeName.toLowerCase(), value);
+        addAttributeToMap(getPage(), attributes_, null, attributeName.toLowerCase(), value);
         getPage().addMappedElement(this);
 
         final HtmlAttributeChangeEvent event;
@@ -303,7 +335,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * The elements are ordered as found in the html source code.
      */
     public Iterator getAttributeEntriesIterator() {
-        return new MapEntryWrappingIterator(attributes_.entrySet().iterator(), this);
+        return attributes_.values().iterator();
     }
 
     /**
@@ -469,7 +501,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
             final String name = (String) it.next();
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(attributes_.get(name).toString()));
+            printWriter.print(StringEscapeUtils.escapeXml(((HtmlAttr) attributes_.get(name)).getNodeValue()));
             printWriter.print("\"");
         }
     }
@@ -809,7 +841,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
          * @return Next entry.
          */
         public Object next() {
-            return new HtmlAttr(element_, (Map.Entry) baseIter_.next());
+            return (HtmlAttr) ((Map.Entry) baseIter_.next()).getValue();
         }
 
         /**
@@ -836,9 +868,9 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param qualifiedName The qualified name of the attribute
      * @param value The value of the attribute
      */
-    static void addAttributeToMap(final Map attributeMap, final String namespaceURI,
-            final String qualifiedName, final String value) {
-        attributeMap.put(qualifiedName, value);
+    static void addAttributeToMap(final HtmlPage page, final Map attributeMap,
+            final String namespaceURI, final String qualifiedName, final String value) {
+        attributeMap.put(qualifiedName, new HtmlAttr(page, null, qualifiedName, value));
     }
 
     /**

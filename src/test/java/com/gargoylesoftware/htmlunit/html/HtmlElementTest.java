@@ -175,7 +175,7 @@ public class HtmlElementTest extends WebTestCase {
      */
     public void testMapEntryWrappingIterator() {
         final Map attributsMap = HtmlElement.createAttributeMap(1);
-        HtmlElement.addAttributeToMap(attributsMap, null, "key", "value");
+        HtmlElement.addAttributeToMap(null, attributsMap, null, "key", "value");
         final HtmlElement.MapEntryWrappingIterator it =
             new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
 

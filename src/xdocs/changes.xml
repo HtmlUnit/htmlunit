@@ -8,6 +8,10 @@
     <body>
         <release version="1.14-prerelease">
             <action type="update" dev="dktaylor" id="1747878">
+                Deprecate String-to-String attribute map for HtmlElement.  Add initial support for
+                namespaces for attributes.  (#1747878).
+            </action>
+            <action type="update" dev="dktaylor" id="1747878">
                 Deprecate HtmlAttr implementing Map.Entry that conflicts with W3C DOM API.  Replace
                 uses of Map.Entry with HtmlAttr.  Add HtmlAttr.getName.  (#1747878).
             </action>
