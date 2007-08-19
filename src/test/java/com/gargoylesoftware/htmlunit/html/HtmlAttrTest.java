@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Denis N. Antonioli
  * @author Ahmed Ashour
+ * @author David K. Taylor
  */
 public class HtmlAttrTest extends WebTestCase {
     /**
@@ -63,10 +64,6 @@ public class HtmlAttrTest extends WebTestCase {
      * Single test attribute value.
      */
     private static final String ENTRY_VALUE = "value";
-    /**
-     * Single test error message.
-     */
-    private static final String ENTRY_CANT_REMOVE = "Not implemented here";
 
     /**
      * A single dummy HtmlElement. Necessary, because HtmlAttr's constructor calls the method getPage().

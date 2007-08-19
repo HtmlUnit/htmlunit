@@ -223,8 +223,9 @@ public class HtmlTableRow extends ClickableElement {
             if (nextCell_ == null) {
                 throw new IllegalStateException();
             }
-            if (nextCell_.getPreviousDomSibling() != null) {
-                nextCell_.getPreviousDomSibling().remove();
+            final DomNode sibling = nextCell_.getPreviousDomSibling();
+            if (sibling != null) {
+                sibling.remove();
             }
         }
 
