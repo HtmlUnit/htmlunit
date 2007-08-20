@@ -42,7 +42,7 @@ import java.util.Iterator;
 /**
  * Tests for compatibility with version 1.1.3.1 of the <a href="http://jquery.com/">jQuery JavaScript library</a>.
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public class JQuery1131Test extends JQueryTestBase {

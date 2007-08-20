@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Abstract base class for <a href="http://jquery.com/">jQuery JavaScript library</a> compatibility tests.
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public abstract class JQueryTestBase extends WebTestCase {
