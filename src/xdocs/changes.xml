@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add primitive support for document.elementFromPoint (IE only).
+            </action>
             <action type="add" dev="dktaylor" id="1747878">
                 Add namespace support for attributes: DomNode.getnamespaceURI, getLocalName, getPrefix,
                 setPrefix, hasAttributes, HtmlElement.getAttribute, getAttributeNS, hasAttributes,

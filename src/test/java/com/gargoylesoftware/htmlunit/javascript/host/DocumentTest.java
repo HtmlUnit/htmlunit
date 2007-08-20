@@ -2700,4 +2700,31 @@ public class DocumentTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testElementFromPoint() throws Exception {
+        testElementFromPoint(BrowserVersion.INTERNET_EXPLORER_7_0);
+        try {
+            testElementFromPoint(BrowserVersion.FIREFOX_2);
+            fail("elementFromPoint is not supported in Firefox.");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+
+    private void testElementFromPoint(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var e = document.elementFromPoint(-1,-1);\n"
+            + "    alert(e.nodeName);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals("BODY", collectedAlerts.get(0));
+    }
+
 }

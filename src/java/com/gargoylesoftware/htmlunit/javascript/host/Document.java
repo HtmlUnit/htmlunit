@@ -1152,4 +1152,16 @@ public final class Document extends NodeImpl {
         return e;
     }
 
+    /**
+     * Returns the element for the specified x coordinate and the specified y coordinate.
+     * The current implementation returns the &lt;body&gt; element.
+     *
+     * @param x Specifies the X-offset, in pixels.
+     * @param y Specifies the Y-offset, in pixels.
+     *
+     * @return the element for the specified x coordinate and the specified y coordinate.
+     */
+    public Object jsxFunction_elementFromPoint(final int x, final int y) {
+        return jsxGet_body();
+    }
 }

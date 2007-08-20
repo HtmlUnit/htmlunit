@@ -170,6 +170,9 @@
             <browser name="Microsoft Internet Explorer"/>
         </function>
         <function name="createTextNode"/>
+        <function name="elementFromPoint">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="getElementById"/>
         <function name="getElementsByName"/>        
         <function name="getElementsByTagName"/>
