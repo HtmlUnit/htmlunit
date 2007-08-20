@@ -37,19 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlListItem;
-import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for compatibility with version 1.1.2 of the <a href="http://jquery.com/">jQuery JavaScript library</a>.
@@ -58,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class JQuery112Test extends WebTestCase {
+public class JQuery112Test extends JQueryTestBase {
 
     /**
      * Creates an instance.
@@ -70,36 +58,16 @@ public class JQuery112Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * {@inheritDoc}
      */
-    public void testJQueryWithIE6() throws Exception {
-        final Iterator i = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0);
-        verify(i, true);
+    protected String getVersion() {
+        return "1.1.2";
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * {@inheritDoc}
      */
-    public void testJQueryWithIE7() throws Exception {
-        final Iterator i = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0);
-        verify(i, true);
-    }
-
-    /**
-     * @throws Exception If an error occurs.
-     */
-    public void testJQueryWithFirefox2() throws Exception {
-        final Iterator i = loadPage(BrowserVersion.FIREFOX_2);
-        verify(i, false);
-    }
-
-    /**
-     * Verifies that the specified test result iterator contains the expected results.
-     * @param i the test result iterator
-     * @param ie whether or not the browser used was MSIE
-     * @throws Exception If an error occurs.
-     */
-    private void verify(final Iterator i, final boolean ie) throws Exception {
+    protected void verify(final Iterator i, final boolean ie) throws Exception {
 
         ok(i, "core module: Basic requirements", 0, 7);
         ok(i, "core module: $()", 0, 1);
@@ -184,57 +152,6 @@ public class JQuery112Test extends WebTestCase {
 
         ok(i, "fx module: animate(Hash, Object, Function) - assert that animate doesn't modify its arguments", 0, 1);
         ok(i, "fx module: toggle()", 0, 3);
-    }
-
-    /**
-     * Loads the jQuery unit test index page using the specified browser version, allows its
-     * JavaScript to run to completion, and returns a list item iterator containing the test
-     * results.
-     *
-     * @param version the browser version to use
-     * @return a list item iterator containing the test results
-     * @throws Exception if an error occurs
-     */
-    private Iterator loadPage(final BrowserVersion version) throws Exception {
-
-        final URL url = getClass().getClassLoader().getResource("jquery/1.1.2/test/index.html");
-        assertNotNull(url);
-
-        final WebClient client = new WebClient(version);
-        final List alerts = new ArrayList();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-
-        final HtmlPage page = (HtmlPage) client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
-
-        final HtmlElement doc = page.getDocumentHtmlElement();
-        final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
-        final Iterator i = tests.getChildElementsIterator();
-
-        return i;
-    }
-
-    /**
-     * Verifies that the next test group result list item has the specified name, the specified
-     * number of failed tests and the specified number of passed tests.
-     *
-     * @param i the iterator whose next element is the list item to be checked
-     * @param name the expected test group name
-     * @param failed the expected number of failed unit tests
-     * @param passed the expected number of passed unit tests
-     * @throws Exception if an error occurs
-     */
-    private void ok(final Iterator i, final String name, final int failed, final int passed) throws Exception {
-
-        final HtmlListItem li = (HtmlListItem) i.next();
-        final String n = li.getByXPath("b/text()").get(0).toString().trim();
-        assertEquals(name, n);
-
-        final int f = Integer.parseInt(li.getByXPath("b/b/b[@class='fail']/text()").get(0).toString());
-        final int p = Integer.parseInt(li.getByXPath("b/b/b[@class='pass']/text()").get(0).toString());
-        if (f != failed || p != passed) {
-            fail("Expected " + passed + " passed and " + failed + " failed for test: " + li.asText());
-        }
     }
 
 }
