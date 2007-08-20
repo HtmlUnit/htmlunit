@@ -2324,4 +2324,30 @@ public class WindowTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Regression test for
+     * https://sourceforge.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
+     * @throws Exception If the test fails
+     */
+    public void testOverwriteFunctions() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content = "<html><head><script language='JavaScript'>"
+            + "function alert()"
+            + "{"
+            + "  scroll = 'xxx';"
+            + "  document.write(scroll);"
+            + "}"
+            + "function navigator()"
+            + "{"
+            + "  alert('xxx');"
+            + "}"
+            + "navigator();"
+            + "</script></head><body></body></html>";
+
+        loadPage(content);
+    }
 }
