@@ -541,4 +541,32 @@ public class EventTest extends WebTestCase {
         final String[] expectedAlerts2 = {"window capturing"};
         assertEquals(expectedAlerts2, collectedAlerts);
     }
+
+    /**
+     * Test value for null event handler: null for IE, while 'undefined' for Firefox.
+     * @throws Exception if the test fails
+     */
+    public void testNullEventHandler() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testNullEventHandler(BrowserVersion.INTERNET_EXPLORER_7_0, "null");
+        testNullEventHandler(BrowserVersion.FIREFOX_2, "undefined");
+    }
+    
+    private void testNullEventHandler(final BrowserVersion browserVersion, final String expectedAlert)
+        throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    alert(div.onclick);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + " <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlert, collectedAlerts.get(0));
+    }
 }
