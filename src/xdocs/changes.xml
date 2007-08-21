@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                JavaScript: element.setAttribute() sets corresponding event handler onXXX if found (FF only).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add primitive support for document.elementFromPoint (IE only).
             </action>

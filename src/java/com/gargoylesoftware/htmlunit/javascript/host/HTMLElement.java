@@ -38,6 +38,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -360,6 +362,25 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public void jsxFunction_setAttribute(final String name, final String value) {
         getHtmlElementOrDie().setAttributeValue(name, value);
+
+        //FF: call corresponding event handler jsxSet_onxxx if found
+        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isNetscape()) {
+            try {
+                final Method method = getClass().getMethod("jsxSet_" + name, new Class[] {Object.class});
+                final String source = "function(){" + value + "}";
+                method.invoke(this, new Object[] {
+                        Context.getCurrentContext().compileFunction(getWindow(), source, "", 0, null)});
+            }
+            catch (final NoSuchMethodException e) {
+                //silently ignore
+            }
+            catch (final IllegalAccessException e) {
+                //silently ignore
+            }
+            catch (final InvocationTargetException e) {
+                throw new RuntimeException(e.getCause());
+            }
+        }
     }
 
     /**

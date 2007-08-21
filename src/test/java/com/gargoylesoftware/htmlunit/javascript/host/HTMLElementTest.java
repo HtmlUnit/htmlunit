@@ -49,7 +49,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -1759,5 +1762,44 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Tests setAttribute() with name of event handler
+     * @throws Exception if the test fails
+     */
+    public void testSetAttribute_eventHandler() throws Exception {
+        testSetAttribute_eventHandler(BrowserVersion.INTERNET_EXPLORER_7_0, 0);
+        testSetAttribute_eventHandler(BrowserVersion.FIREFOX_2, 3);
+    }
+    
+    private void testSetAttribute_eventHandler(final BrowserVersion browserVersion, final int expectedAlertNumber)
+        throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+            + "    var password = document.getElementById('password');\n"
+            + "    text.setAttribute('onfocus', \"alert('onfocus1');\");\n"
+            + "    text.setAttribute('onblur', \"alert('onblur1');\");\n"
+            + "    password.setAttribute('onfocus', \"alert('onfocus2');\");\n"
+            + "    password.setAttribute('onblur', \"alert('onblur2');\");\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login'>\n"
+            + "    <input type='password' id='password' name='password'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
+        final HtmlForm form = (HtmlForm)page.getForms().get(0);
+        final HtmlTextInput inputLogin = (HtmlTextInput)form.getInputByName("login");
+        final HtmlPasswordInput inputPassword = (HtmlPasswordInput)form.getInputByName("password");
+
+        inputLogin.focus();
+        inputPassword.focus();
+
+        assertEquals(expectedAlertNumber, collectedAlerts.size());
     }
 }
