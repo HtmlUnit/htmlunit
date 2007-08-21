@@ -462,7 +462,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Return whether this node has any atributes.
+     * Return whether this node has any attributes.
      *
      * @return true if the node has attributes, false otherwise.
      */
@@ -648,7 +648,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param printWriter writer where child nodes are written
      */
     protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
-        DomNode child = getFirstChild();
+        DomNode child = getFirstDomChild();
         while (child != null) {
             child.printXml(indent + "  ", printWriter);
             child = child.getNextDomSibling();
@@ -1134,7 +1134,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      *
      */
     public void removeAllChildren() {
-        if (getFirstChild() == null) {
+        if (getFirstDomChild() == null) {
             return;
         }
         final Iterator it = getChildIterator();
