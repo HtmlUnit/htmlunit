@@ -1793,9 +1793,9 @@ public class HTMLElementTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
-        final HtmlForm form = (HtmlForm)page.getForms().get(0);
-        final HtmlTextInput inputLogin = (HtmlTextInput)form.getInputByName("login");
-        final HtmlPasswordInput inputPassword = (HtmlPasswordInput)form.getInputByName("password");
+        final HtmlForm form = (HtmlForm) page.getForms().get(0);
+        final HtmlTextInput inputLogin = (HtmlTextInput) form.getInputByName("login");
+        final HtmlPasswordInput inputPassword = (HtmlPasswordInput) form.getInputByName("password");
 
         inputLogin.focus();
         inputPassword.focus();
