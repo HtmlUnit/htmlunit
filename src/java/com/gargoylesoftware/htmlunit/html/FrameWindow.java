@@ -88,6 +88,13 @@ public class FrameWindow extends WebWindowImpl {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    protected boolean isJavaScriptInitializationNeeded() {
+        return this.getScriptObject() == null;
+    }
+
+    /**
      * Return the html page in which the &lt;frame&gt; or &lt;iframe&gt; tag is contained
      * for this frame window.
      * This is a facility method for <code>(HtmlPage) (getParentWindow().getEnclosedPage())</code>.

@@ -82,6 +82,13 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    protected boolean isJavaScriptInitializationNeeded() {
+        return true;
+    }
+
+    /**
      * Return a string representation of this object
      * @return A string representation of this object
      */

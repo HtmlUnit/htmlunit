@@ -111,9 +111,17 @@ public abstract class WebWindowImpl implements WebWindow {
         }
         destroyChildren();
         enclosedPage_ = page;
-        webClient_.initialize(this);
+        if (isJavaScriptInitializationNeeded()) {
+            webClient_.initialize(this);
+        }
         webClient_.initialize(page);
     }
+
+    /**
+     * Returns <tt>true</tt> if this window needs JavaScript initialization to occur when the enclosed page is set.
+     * @return <tt>true</tt> if this window needs JavaScript initialization to occur when the enclosed page is set
+     */
+    protected abstract boolean isJavaScriptInitializationNeeded();
 
     /**
      * {@inheritDoc}

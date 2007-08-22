@@ -213,9 +213,6 @@ public class IFrameTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testWriteToIFrame() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html =
               "<html><body onload='test()'><script>\r\n"
             + "    function test() {\r\n"
