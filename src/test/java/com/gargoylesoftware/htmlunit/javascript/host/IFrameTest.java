@@ -205,4 +205,47 @@ public class IFrameTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that writing to an iframe keeps the same intrinsic variables around (window,
+     * document, etc) and in a usable form. Bug detected via the jQuery 1.1.3.1 unit tests.
+     *
+     * @throws Exception if an error occurs
+     */
+    public void testWriteToIFrame() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html =
+              "<html><body onload='test()'><script>\r\n"
+            + "    function test() {\r\n"
+            + "        \r\n"
+            + "        var frame = document.createElement('iframe');\r\n"
+            + "        document.body.appendChild(frame);\r\n"
+            + "        var win = frame.contentWindow;\r\n"
+            + "        var doc = frame.contentWindow.document;\r\n"
+            + "        alert(win == window);\r\n"
+            + "        alert(doc == document);\r\n"
+            + "        \r\n"
+            + "        doc.open();\r\n"
+            + "        doc.write(\"<html><body><input type='text'/></body></html>\");\r\n"
+            + "        doc.close();\r\n"
+            + "        var win2 = frame.contentWindow;\r\n"
+            + "        var doc2 = frame.contentWindow.document;\r\n"
+            + "        alert(win == win2);\r\n"
+            + "        alert(doc == doc2);\r\n"
+            + "        \r\n"
+            + "        var input = doc.getElementsByTagName('input')[0];\r\n"
+            + "        var input2 = doc2.getElementsByTagName('input')[0];\r\n"
+            + "        alert(input == input2);\r\n"
+            + "        alert(typeof input);\r\n"
+            + "        alert(typeof input2);\r\n"
+            + "    }\r\n"
+            + "</script></body></html>\r\n";
+        final String[] expected = {"false", "false", "true", "true", "true", "object", "object"};
+        final List actual = new ArrayList();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
