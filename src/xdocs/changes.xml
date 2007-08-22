@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: document.createElement() to accept "&lt;tagName&gt;" as a valid parameter.
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: element.setAttribute() sets corresponding event handler onXXX if found (FF only).
             </action>

@@ -2727,4 +2727,19 @@ public class DocumentTest extends WebTestCase {
         assertEquals("BODY", collectedAlerts.get(0));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateElementWithAngleBrackets() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var select = document.createElement('<select>');\n"
+            + "    alert(select.add);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertFalse(collectedAlerts.get(0).equals("undefined"));
+    }
 }

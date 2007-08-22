@@ -697,9 +697,12 @@ public final class Document extends NodeImpl {
      * @param tagName The tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported.
      */
-    public Object jsxFunction_createElement(final String tagName) {
+    public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
+            if (tagName.startsWith("<") && tagName.endsWith(">")) {
+                tagName = tagName.substring(1, tagName.length() - 1);
+            }
             final HtmlElement htmlElement = getDomNodeOrDie().getPage().createHtmlElement(tagName);
             final Object jsElement = getScriptableFor(htmlElement);
 
