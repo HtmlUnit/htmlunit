@@ -218,9 +218,15 @@
         </property>
         <property name="type" readable="true" writable="false"/>
         <property name="keyCode" readable="true" writable="false"/>
-        <property name="shiftKey" readable="true" writable="false"/>
-        <property name="ctrlKey" readable="true" writable="false"/>
-        <property name="altKey" readable="true" writable="false"/>
+        <property name="shiftKey" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="ctrlKey" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="altKey" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="bubbles" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
@@ -252,6 +258,18 @@
         <property name="screenX" readable="true" writable="false"/>
         <property name="screenY" readable="true" writable="false"/>
         <property name="which" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="shiftKey" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="ctrlKey" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="altKey" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="metaKey" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
     </class>

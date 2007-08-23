@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.FocusableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -622,6 +623,49 @@ public class EventTest extends WebTestCase {
             + "</script></body></html>";
         final List actual = new ArrayList();
         loadPage(browser, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that in IE, the <tt>shiftKey</tt>, <tt>ctrlKey</tt> and <tt>altKey</tt>
+     * event attributes are defined for all events, but <tt>metaKey</tt> is not defined
+     * for any events.
+     * @throws Exception if an error occurs
+     */
+    public void testKeys_IE() throws Exception {
+        testKeys(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {
+            "object", "false", "false", "false", "undefined",
+            "object", "false", "false", "false", "undefined" });
+    }
+
+    /**
+     * Verifies that in FF, the <tt>shiftKey</tt>, <tt>ctrlKey</tt>, <tt>altKey</tt> and
+     * <tt>metaKey</tt> attributes are defined for mouse events only.
+     * @throws Exception if an error occurs
+     */
+    public void testKeys_FF() throws Exception {
+        testKeys(BrowserVersion.FIREFOX_2, new String[] {
+            "object", "undefined", "undefined", "undefined", "undefined",
+            "object", "false", "false", "false", "false" });
+    }
+
+    private void testKeys(final BrowserVersion browser, final String[] expected) throws Exception {
+        final String html =
+              "<html><body onload='test(event)'><script>\r\n"
+            + "    function test(e) {\r\n"
+            + "        alert(typeof e);\r\n"
+            + "        alert(e.shiftKey);\r\n"
+            + "        alert(e.ctrlKey);\r\n"
+            + "        alert(e.altKey);\r\n"
+            + "        alert(e.metaKey);\r\n"
+            + "    }\r\n"
+            + "</script>\r\n"
+            + "<div id='div' onclick='test(event)'>abc</div>\r\n"
+            + "</body></html>";
+        final List actual = new ArrayList();
+        final HtmlPage page = (HtmlPage) loadPage(browser, html, actual);
+        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("div");
+        div.click();
         assertEquals(expected, actual);
     }
 

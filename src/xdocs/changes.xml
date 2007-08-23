@@ -7,6 +7,11 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig">
+                JavaScript: Make event.shiftKey, event.ctrlKey and event.altKey IE-only attributes; add
+                mouseEvent.shiftKey, mouseEvent.ctrlKey, mouseEvent.altKey and mouseEvent.metaKey FF-only
+                attributes.
+            </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
                 JavaScript: add support for read-only attributes event.bubbles and event.cancelable (FF only).
             </action>

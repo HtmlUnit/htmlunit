@@ -97,6 +97,9 @@ public class MouseEvent extends Event {
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;
 
+    /** Whether or not the "meta" key was pressed during the firing of the event. */
+    private boolean metaKey_;
+
     /**
      * Used to build the prototype.
      */
@@ -114,19 +117,21 @@ public class MouseEvent extends Event {
      * @param altKey true if ALT is pressed
      * @param button the button code, must be {@link #BUTTON_LEFT}, {@link #BUTTON_MIDDLE} or {@link #BUTTON_RIGHT}
      */
-    public MouseEvent(final DomNode domNode, final String type,
-            final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+    public MouseEvent(final DomNode domNode, final String type, final boolean shiftKey,
+        final boolean ctrlKey, final boolean altKey, final int button) {
+
         super(domNode, type, shiftKey, ctrlKey, altKey);
 
         if (button != BUTTON_LEFT && button != BUTTON_MIDDLE && button != BUTTON_RIGHT) {
             throw new IllegalArgumentException("Invalid button code: " + button);
         }
+        button_ = button;
+        metaKey_ = false;
 
         // compute coordinates from the node
         final HTMLElement target = (HTMLElement) jsxGet_target();
         screenX_ = target.getPosX() + 10;
         screenY_ = target.getPosY() + 10;
-        button_ = button;
     }
     
     /**
@@ -203,8 +208,15 @@ public class MouseEvent extends Event {
             }
             return buttonCodeToIE[button_];
         }
-
         return button_;
+    }
+
+    /**
+     * Returns whether or not the "meta" key was pressed during the event firing.
+     * @return whether or not the "meta" key was pressed during the event firing
+     */
+    public boolean jsxGet_metaKey() {
+        return metaKey_;
     }
 
     /**

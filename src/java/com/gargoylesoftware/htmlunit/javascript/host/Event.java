@@ -98,15 +98,14 @@ public class Event extends SimpleScriptable {
 
     private static final long serialVersionUID = 4050485607908455730L;
 
-    private Object srcElement_;     // IE-only writeable equivalent of target.
-    private Object target_;         // W3C standard read-only equivalent of srcElement.
-    private Object currentTarget_;  // Changes during event capturing and bubbling.
-    private String type_;           // The event type.
-    private Object keyCode_;        // Key code for a keypress
-    
-    private boolean shiftKey_;
-    private boolean ctrlKey_;
-    private boolean altKey_;
+    private Object srcElement_;        // IE-only writeable equivalent of target.
+    private Object target_;            // W3C standard read-only equivalent of srcElement.
+    private Object currentTarget_;     // Changes during event capturing and bubbling.
+    private String type_;              // The event type.
+    private Object keyCode_;           // Key code for a keypress
+    private boolean shiftKey_;         // Exposed here in IE, only in mouse events in FF.
+    private boolean ctrlKey_;          // Exposed here in IE, only in mouse events in FF.
+    private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
     private boolean stopPropagation_;
     private Object returnValue_;
 
