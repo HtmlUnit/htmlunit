@@ -1064,7 +1064,7 @@ public final class Document extends NodeImpl {
      *             d3.gargoylesoftware.com
      *                gargoylesoftware.com
      *
-     *        tranformation to:        com
+     *        transformation to:        com
      *        will fail
      * </li>
      * </ol>
