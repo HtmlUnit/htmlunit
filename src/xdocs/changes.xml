@@ -13,7 +13,8 @@
                 attributes.
             </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
-                JavaScript: add support for read-only attributes event.bubbles and event.cancelable (FF only).
+                JavaScript: add support for read-only attributes event.timeStamp, event.bubbles and
+                event.cancelable (FF only).
             </action>
             <action type="add" dev="asashour">
                 JavaScript: document.createElement() to accept "&lt;tagName&gt;" as a valid parameter.

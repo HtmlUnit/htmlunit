@@ -216,6 +216,9 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </property>
+        <property name="timeStamp" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="type" readable="true" writable="false"/>
         <property name="keyCode" readable="true" writable="false"/>
         <property name="shiftKey" readable="true" writable="false">

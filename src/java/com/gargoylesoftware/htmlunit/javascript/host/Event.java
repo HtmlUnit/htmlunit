@@ -126,6 +126,11 @@ public class Event extends SimpleScriptable {
     private boolean cancelable_ = true;
 
     /**
+     * The time at which the event was created.
+     */
+    private long timeStamp_ = System.currentTimeMillis();
+
+    /**
      * Creates a new event instance.
      * @param domNode The DOM node that triggered the event.
      * @param type The event type.
@@ -248,6 +253,14 @@ public class Event extends SimpleScriptable {
      */
     public void setEventType(final String eventType) {
         type_ = eventType;
+    }
+
+    /**
+     * Returns the time at which this event was created.
+     * @return the time at which this event was created
+     */
+    public long jsxGet_timeStamp() {
+        return timeStamp_;
     }
 
     /**

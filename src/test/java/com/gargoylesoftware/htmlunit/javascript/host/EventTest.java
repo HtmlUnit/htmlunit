@@ -669,4 +669,31 @@ public class EventTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testTimeStamp_IE() throws Exception {
+        testTimeStamp(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testTimeStamp_FF() throws Exception {
+        testTimeStamp(BrowserVersion.FIREFOX_2, new String[] {"object", "number"});
+    }
+
+    private void testTimeStamp(final BrowserVersion browser, final String[] expected) throws Exception {
+        final String html =
+              "<html><body onload='test(event)'><script>\r\n"
+            + "    function test(e) {\r\n"
+            + "        alert(typeof e);\r\n"
+            + "        alert(typeof e.timeStamp);\r\n"
+            + "    }\r\n"
+            + "</script></body></html>";
+        final List actual = new ArrayList();
+        loadPage(browser, html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
