@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.ScriptableObject;
@@ -105,5 +108,26 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         catch (final JavaScriptException e) {
             assertTrue(e.getMessage().indexOf("Expected >") == 0);
         }
+    }
+
+    /**
+     * Test for bug http://sourceforge.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
+     * @throws Exception if the test fails
+     */
+    public void testBackSlash() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert('123456'.replace('/{\\d+}', ''));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"123456"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
