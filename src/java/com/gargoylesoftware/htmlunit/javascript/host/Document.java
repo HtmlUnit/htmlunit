@@ -47,6 +47,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.swing.event.DocumentEvent;
+
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
@@ -70,6 +72,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -700,19 +704,42 @@ public final class Document extends NodeImpl {
     public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
-            if (tagName.startsWith("<") && tagName.endsWith(">")) {
-                tagName = tagName.substring(1, tagName.length() - 1);
-            }
-            final HtmlElement htmlElement = getDomNodeOrDie().getPage().createHtmlElement(tagName);
-            final Object jsElement = getScriptableFor(htmlElement);
+            final BrowserVersion browserVersion = getDomNodeOrDie().getPage().getWebClient().getBrowserVersion();
 
-            if (jsElement == NOT_FOUND) {
-                getLog().debug("createElement(" + tagName
-                    + ") cannot return a result as there isn't a javascript object for the html element "
-                    + htmlElement.getClass().getName());
+            //IE can handle HTML
+            if (tagName.startsWith("<") && browserVersion.isIE()) {
+                try {
+                    HtmlElement proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, getDomNodeOrDie().getPage(), null);
+                    HTMLParser.parseFragment(proxyNode, tagName);
+                    final DomNode resultNode = proxyNode.getFirstDomChild();
+                    resultNode.removeAllChildren();
+                    result = resultNode.getScriptObject();
+                } catch( Exception e ) {
+                    getLog().error("Unexpected exception occurred while parsing html snippet", e);
+                    throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
+                            + e.getMessage());
+                }
             }
             else {
-                result = jsElement;
+                //Firefox handles only simple '<tagName>'
+                if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isNetscape()) {
+                    tagName = tagName.substring(1, tagName.length() - 1);
+                    if(!tagName.matches("\\w+")) {
+                        getLog().error("Unexpected exception occurred while parsing html snippet");
+                        throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: " + tagName);
+                    }
+                }
+                final HtmlElement htmlElement = getDomNodeOrDie().getPage().createHtmlElement(tagName);
+                final Object jsElement = getScriptableFor(htmlElement);
+
+                if (jsElement == NOT_FOUND) {
+                    getLog().debug("createElement(" + tagName
+                            + ") cannot return a result as there isn't a javascript object for the html element "
+                            + htmlElement.getClass().getName());
+                }
+                else {
+                    result = jsElement;
+                }
             }
         }
         catch (final ElementNotFoundException e) {

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: document.createElement() to accept html as a valid parameter (IE only).
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: Make event.shiftKey, event.ctrlKey and event.altKey IE-only attributes; add
                 mouseEvent.shiftKey, mouseEvent.ctrlKey, mouseEvent.altKey and mouseEvent.metaKey FF-only

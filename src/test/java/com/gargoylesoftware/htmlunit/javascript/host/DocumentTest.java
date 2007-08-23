@@ -2731,6 +2731,11 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testCreateElementWithAngleBrackets() throws Exception {
+        testCreateElementWithAngleBrackets(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testCreateElementWithAngleBrackets(BrowserVersion.FIREFOX_2);
+    }
+    
+    private void testCreateElementWithAngleBrackets(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var select = document.createElement('<select>');\n"
@@ -2741,5 +2746,37 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertFalse(collectedAlerts.get(0).equals("undefined"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateElementWithHtml() throws Exception {
+        testCreateElementWithHtml(BrowserVersion.INTERNET_EXPLORER_7_0);
+        try {
+            testCreateElementWithHtml(BrowserVersion.FIREFOX_2);
+            fail("document.createElement(html) is not supported with Firefox");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+
+    private void testCreateElementWithHtml(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var select = document.createElement(\"<select id='mySelect'><option>hello</option>\");\n"
+            + "    alert(select.add);\n"
+            + "    alert(select.id);\n"
+            + "    alert(select.childNodes.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertFalse(collectedAlerts.get(0).equals("undefined"));
+        assertEquals("mySelect", collectedAlerts.get(1));
+        //make sure the element has no children
+        assertEquals("0", collectedAlerts.get(2));
     }
 }
