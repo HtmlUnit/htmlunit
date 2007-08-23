@@ -598,4 +598,31 @@ public class EventTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testCancelable_IE() throws Exception {
+        testCancelable(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testCancelable_FF() throws Exception {
+        testCancelable(BrowserVersion.FIREFOX_2, new String[] {"object", "true"});
+    }
+
+    private void testCancelable(final BrowserVersion browser, final String[] expected) throws Exception {
+        final String html =
+              "<html><body onload='test(event)'><script>\r\n"
+            + "    function test(e) {\r\n"
+            + "        alert(typeof e);\r\n"
+            + "        alert(e.cancelable);\r\n"
+            + "    }\r\n"
+            + "</script></body></html>";
+        final List actual = new ArrayList();
+        loadPage(browser, html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

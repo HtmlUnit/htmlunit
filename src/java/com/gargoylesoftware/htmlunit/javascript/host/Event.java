@@ -119,6 +119,14 @@ public class Event extends SimpleScriptable {
     private boolean bubbles_ = true;
 
     /**
+     * Whether or not the event can be canceled. The value of this attribute depends on the event type. To
+     * determine if a certain event type can be canceled, see http://www.w3.org/TR/DOM-Level-2-Events/events.html
+     * The more common event types are cancelable, so this is true by default; event types which cannot be
+     * canceled should overwrite this value in their constructors.
+     */
+    private boolean cancelable_ = true;
+
+    /**
      * Creates a new event instance.
      * @param domNode The DOM node that triggered the event.
      * @param type The event type.
@@ -277,6 +285,13 @@ public class Event extends SimpleScriptable {
      */
     public boolean jsxGet_bubbles() {
         return bubbles_;
+    }
+
+    /**
+     * @return whether or not this event can be canceled.
+     */
+    public boolean jsxGet_cancelable() {
+        return cancelable_;
     }
 
     /**
