@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class EventTest extends WebTestCase {
 
@@ -562,11 +563,39 @@ public class EventTest extends WebTestCase {
             + "    alert(div.onclick);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + " <div id='myDiv'/>\n"
+            + "<div id='myDiv'/>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlert, collectedAlerts.get(0));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testBubbles_IE() throws Exception {
+        testBubbles(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testBubbles_FF() throws Exception {
+        testBubbles(BrowserVersion.FIREFOX_2, new String[] {"object", "true"});
+    }
+
+    private void testBubbles(final BrowserVersion browser, final String[] expected) throws Exception {
+        final String html =
+              "<html><body onload='test(event)'><script>\r\n"
+            + "    function test(e) {\r\n"
+            + "        alert(typeof e);\r\n"
+            + "        alert(e.bubbles);\r\n"
+            + "    }\r\n"
+            + "</script></body></html>";
+        final List actual = new ArrayList();
+        loadPage(browser, html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

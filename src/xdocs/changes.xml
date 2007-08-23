@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig" due-to="Rob Di Marco">
+                JavaScript: add support for read-only attribute Event.bubbles (FF only).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: document.createElement() to accept "&lt;tagName&gt;" as a valid parameter.
             </action>

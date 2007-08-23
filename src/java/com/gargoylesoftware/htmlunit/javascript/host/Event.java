@@ -44,11 +44,12 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * JavaScript object representing an Event that is passed into Event Handlers
- * when they are invoked. For general information on which properties and functions
- * should be supported, see <a href="www.mozilla.org/docs/dom/domref/dom_event_ref.html">
- * the mozilla docs</a> or <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event">
- * the W3C DOM Level 2 Event Documentation</a>.
+ * JavaScript object representing an event that is passed into event handlers when they are
+ * invoked. For general information on which properties and functions should be supported,
+ * see <a href="http://developer.mozilla.org/en/docs/DOM:event">the mozilla docs</a>,
+ * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event">the W3C DOM
+ * Level 2 Event Documentation</a> or <a href="http://msdn2.microsoft.com/en-us/library/aa703876.aspx">IE's
+ * IHTMLEventObj interface</a>.
  *
  * @version $Revision$
  * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
@@ -108,6 +109,14 @@ public class Event extends SimpleScriptable {
     private boolean altKey_;
     private boolean stopPropagation_;
     private Object returnValue_;
+
+    /**
+     * Whether or not the event bubbles. The value of this attribute depends on the event type. To
+     * determine if a certain event type bubbles, see http://www.w3.org/TR/DOM-Level-2-Events/events.html
+     * Most event types do bubble, so this is true by default; event types which do not bubble should
+     * overwrite this value in their constructors.
+     */
+    private boolean bubbles_ = true;
 
     /**
      * Creates a new event instance.
@@ -261,6 +270,13 @@ public class Event extends SimpleScriptable {
      */
     public boolean jsxGet_altKey() {
         return altKey_;
+    }
+
+    /**
+     * @return whether or not this event bubbles.
+     */
+    public boolean jsxGet_bubbles() {
+        return bubbles_;
     }
 
     /**
