@@ -47,8 +47,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import javax.swing.event.DocumentEvent;
-
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
@@ -709,12 +707,14 @@ public final class Document extends NodeImpl {
             //IE can handle HTML
             if (tagName.startsWith("<") && browserVersion.isIE()) {
                 try {
-                    HtmlElement proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, getDomNodeOrDie().getPage(), null);
+                    final HtmlElement proxyNode =
+                        new HtmlDivision(null, HtmlDivision.TAG_NAME, getDomNodeOrDie().getPage(), null);
                     HTMLParser.parseFragment(proxyNode, tagName);
                     final DomNode resultNode = proxyNode.getFirstDomChild();
                     resultNode.removeAllChildren();
                     result = resultNode.getScriptObject();
-                } catch( Exception e ) {
+                }
+                catch (final Exception e) {
                     getLog().error("Unexpected exception occurred while parsing html snippet", e);
                     throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
                             + e.getMessage());
@@ -724,9 +724,10 @@ public final class Document extends NodeImpl {
                 //Firefox handles only simple '<tagName>'
                 if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isNetscape()) {
                     tagName = tagName.substring(1, tagName.length() - 1);
-                    if(!tagName.matches("\\w+")) {
+                    if (!tagName.matches("\\w+")) {
                         getLog().error("Unexpected exception occurred while parsing html snippet");
-                        throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: " + tagName);
+                        throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
+                                + tagName);
                     }
                 }
                 final HtmlElement htmlElement = getDomNodeOrDie().getPage().createHtmlElement(tagName);
