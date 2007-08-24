@@ -111,7 +111,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
-     * Test for bug 
+     * Test for bug
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
