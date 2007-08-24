@@ -111,13 +111,11 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
-     * Test for bug http://sourceforge.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
+     * Test for bug 
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
-    public void testBackSlash() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void testReplaceNormalStringWithRegexpChars() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert('123456'.replace('/{\\d+}', ''));\n"
@@ -127,6 +125,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
 
         final String[] expectedAlerts = {"123456"};
         final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

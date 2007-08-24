@@ -78,7 +78,8 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             final String replacement = ((String) args[1]).replaceAll("\\\\", "\\\\\\\\");
             final Object arg0 = args[0];
             if (arg0 instanceof String) {
-                return thisString.replaceFirst((String) arg0, replacement);
+                // arg0 should not be interpreted as a RegExp
+                return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
             }
             else if (arg0 instanceof NativeRegExp) {
                 final String str = arg0.toString(); // the form is /regex/flags
