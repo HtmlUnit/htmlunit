@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="update" dev="asashour">
+                JavaScript: select.size is used when only needed.
+            </action>
+            <action type="update" dev="asashour">
                 Upgrade HttpClient to 3.1.
             </action>
             <action type="add" dev="asashour">

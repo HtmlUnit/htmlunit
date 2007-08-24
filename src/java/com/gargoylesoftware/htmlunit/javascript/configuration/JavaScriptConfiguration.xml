@@ -784,6 +784,7 @@
         <property name="length" readable="true" writable="true"/>
         <property name="options" readable="true" writable="false"/>
         <property name="selectedIndex" readable="true" writable="true"/>
+        <property name="size" readable="true" writable="true"/>
         
         <function name="add"/>
         <function name="remove"/>

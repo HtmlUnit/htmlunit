@@ -1038,4 +1038,21 @@ public class SelectTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSize() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var select = document.getElementById('mySelect');\n"
+            + "    alert(select.size + 5);//to test if int or string\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<select id='mySelect'/>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"5"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

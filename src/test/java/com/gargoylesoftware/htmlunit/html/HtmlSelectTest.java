@@ -676,4 +676,17 @@ public class HtmlSelectTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAsXml_size() throws Exception {
+        final String content = "<html><head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<select/>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        assertEquals(-1, page.asXml().indexOf("size"));
+    }
 }

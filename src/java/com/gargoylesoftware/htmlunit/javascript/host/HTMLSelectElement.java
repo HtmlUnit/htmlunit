@@ -328,4 +328,30 @@ public class HTMLSelectElement extends FormField {
     public void jsxSet_value(final String newValue) {
         getHtmlSelect().setSelectedAttribute(newValue, true);
     }
+
+    /**
+     * Returns the <tt>size</tt> attribute.
+     * @return the <tt>size</tt> attribute.
+     */
+    public int jsxGet_size() {
+        int size = 0;
+        final String sizeAttribute = getHtmlElementOrDie().getAttributeValue("size");
+        if (sizeAttribute != HtmlSelect.ATTRIBUTE_NOT_DEFINED && sizeAttribute != HtmlSelect.ATTRIBUTE_VALUE_EMPTY) {
+            try {
+                size = Integer.parseInt(sizeAttribute);
+            }
+            catch (final Exception e) {
+                //silently ignore
+            }
+        }
+        return size;
+    }
+    
+    /**
+     * Sets the <tt>size</tt> attribute.
+     * @param size The <tt>size</tt> attribute.
+     */
+    public void jsxSet_size(final String size) {
+        getHtmlElementOrDie().setAttributeValue("size", size);
+    }
 }

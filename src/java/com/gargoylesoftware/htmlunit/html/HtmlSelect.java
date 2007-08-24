@@ -110,12 +110,12 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         try {
             size = Integer.parseInt(getSizeAttribute());
             if (size < 0) {
-                setAttributeValue("size", "0");
+                removeAttribute("size");
                 size = 0;
             }
         }
         catch (final NumberFormatException e) {
-            setAttributeValue("size", "0");
+            removeAttribute("size");
             size = 0;
         }
 
