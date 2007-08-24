@@ -251,7 +251,16 @@
         </function>
     </class>
 
-    <class name="MouseEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.MouseEvent" JSObject="true">
+    <class name="UIEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.UIEvent" JSObject="true">
+        <doclink
+            url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent"
+            descr="W3C Document Object Model (DOM) Level 2 - UI event types"/>
+        <property name="view" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+    </class>
+
+    <class name="MouseEvent" extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.MouseEvent" JSObject="true">
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent"
             descr="W3C Document Object Model (DOM) Level 2 - Mouse event types"/>

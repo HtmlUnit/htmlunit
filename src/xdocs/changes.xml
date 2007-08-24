@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig" due-to="Rob Di Marco">
+                JavaScript: add support for read-only attribute uiEvent.view (FF only).
+            </action>
             <action type="update" dev="mguillem" id="1780089">
                 JavaScript: fixed bug in String.replace (due to custom RegExp proxy) when first arg is a String
                 with special characters and not a RegExp. 

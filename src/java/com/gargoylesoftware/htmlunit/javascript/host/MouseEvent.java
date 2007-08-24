@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class MouseEvent extends Event {
+public class MouseEvent extends UIEvent {
 
     private static final long serialVersionUID = 1990705559211878370L;
 
