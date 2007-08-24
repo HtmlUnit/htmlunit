@@ -103,7 +103,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C Dom Level 1</a>
  */
-public final class Document extends NodeImpl {
+public class Document extends NodeImpl {
 
     private static final long serialVersionUID = -7646789903352066465L;
 

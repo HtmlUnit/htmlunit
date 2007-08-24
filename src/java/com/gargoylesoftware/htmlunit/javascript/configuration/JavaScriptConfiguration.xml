@@ -197,6 +197,9 @@
 
     <class name="DOMImplementation" classname="com.gargoylesoftware.htmlunit.javascript.host.DOMImplementation"
         JSObject="true">
+        <function name="createDocument">
+            <browser name="Firefox"/>
+        </function>
         <function name="hasFeature"/>
     </class>
 
@@ -1076,6 +1079,10 @@
                 descr="MSDN documentation"/>
         </function>
         <function name="setTimeout"/>
+    </class>
+
+    <class name="XMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLDocument"
+        JSObject="true">
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"

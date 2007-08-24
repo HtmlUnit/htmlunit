@@ -148,6 +148,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("EventListenersContainer");
         names.remove("DOMImplementation");
         names.remove("TextRectangle");
+        names.remove("XMLDocument");
 
         final Transformer class2ShortName = new Transformer() {
             public Object transform(final Object obj) {

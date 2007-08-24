@@ -85,4 +85,21 @@ public class DOMImplementation extends SimpleScriptable {
         }
         return false;
     }
+
+    /**
+     * Creates an {@link XMLDocument}.
+     *
+     * @param namespaceURI The URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the document to instantiate.
+     * @param doctype The document types of the document.
+     * @return the newly created {@link XMLDocument}.
+     */
+    //TODO: change doctype type to "DocType"
+    public XMLDocument jsxFunction_createDocument(final String namespaceURI, final String qualifiedName,
+            final Object doctype) {
+        final XMLDocument document = new XMLDocument();
+        document.setParentScope(getParentScope());
+        document.setPrototype(document.getPrototype());
+        return document;
+    }
 }

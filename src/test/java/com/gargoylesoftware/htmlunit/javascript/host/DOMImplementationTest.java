@@ -94,5 +94,32 @@ public class DOMImplementationTest extends WebTestCase {
         assertEquals(Boolean.toString(expected), collectedAlerts.get(0));
     }
     
-    
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateDocument() throws Exception {
+        testCreateDocument(BrowserVersion.FIREFOX_2);
+        try {
+            testCreateDocument(BrowserVersion.INTERNET_EXPLORER_7_0);
+            fail("document.implementation.createDocument is not supported in IE.");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+
+    private void testCreateDocument(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
+            + "    alert(doc);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object XMLDocument]"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

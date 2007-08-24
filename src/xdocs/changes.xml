@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add basic support for 'document.implementation.createDocument()' (FF), and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: select.size is used when only needed.
             </action>

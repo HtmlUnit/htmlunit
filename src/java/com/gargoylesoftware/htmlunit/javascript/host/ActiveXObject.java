@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see com.gargoylesoftware.htmlunit.WebClient
  * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ahmed Ashour
  */
 public class ActiveXObject extends SimpleScriptable {
     private static final long serialVersionUID = 7327032075131452226L;
@@ -95,10 +96,14 @@ public class ActiveXObject extends SimpleScriptable {
         //   classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
         //   activeX="Microsoft.XMLHTTP">
         // and to build the object from the config
-        if (isXMLHttpRequest((String) args[0])) {
+        if (isXMLHttpRequest(activeXName)) {
             return buildXMLHTTPActiveX();
         }
 
+        if (isXMLDocument(activeXName)) {
+            return buildXMLDocument();
+        }
+        
         final Map map = getWindow(ctorObj).getWebWindow().getWebClient().getActiveXObjectMap();
         if (map == null) {
             throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
@@ -125,7 +130,7 @@ public class ActiveXObject extends SimpleScriptable {
     }
 
     /**
-     * Indicates if the ActiveX name is one flavour of XMLHttpRequest
+     * Indicates if the ActiveX name is one flavor of XMLHttpRequest
      * @param name the ActiveX name
      * @return <code>true</code> if this is an XMLHttpRequest
      */
@@ -133,29 +138,47 @@ public class ActiveXObject extends SimpleScriptable {
         return name != null && ("Microsoft.XMLHTTP".equals(name) || name.startsWith("Msxml2.XMLHTTP"));
     }
 
+    /**
+     * Indicates if the ActiveX name is one flavor of XMLDocument
+     * @param name the ActiveX name
+     * @return <code>true</code> if this is an XMLDocument
+     */
+    static boolean isXMLDocument(final String name) {
+        return name != null && ("Microsoft.XMLDOM".equalsIgnoreCase(name) || name.matches("MSXML\\d*\\.DOMDocument"));
+    }
+
     private static Scriptable buildXMLHTTPActiveX() {
         final SimpleScriptable resp = new XMLHttpRequest();
 
         // the properties
-        addProperty(resp, "onreadystatechange", "jsxGet_onreadystatechange", "jsxSet_onreadystatechange");
-        addProperty(resp, "readyState", "jsxGet_readyState", null);
-        addProperty(resp, "responseText", "jsxGet_responseText", null);
-        addProperty(resp, "responseXML", "jsxGet_responseXML", null);
-        addProperty(resp, "status", "jsxGet_status", null);
-        addProperty(resp, "statusText", "jsxGet_statusText", null);
+        addProperty(resp, "onreadystatechange", true, true);
+        addProperty(resp, "readyState", true, false);
+        addProperty(resp, "responseText", true, false);
+        addProperty(resp, "responseXML", true, false);
+        addProperty(resp, "status", true, false);
+        addProperty(resp, "statusText", true, false);
 
         // the functions
-        addFunction(resp, "abort", "jsxFunction_abort");
-        addFunction(resp, "abort", "jsxFunction_abort");
-        addFunction(resp, "getAllResponseHeaders", "jsxFunction_getAllResponseHeaders");
-        addFunction(resp, "getResponseHeader", "jsxFunction_getResponseHeader");
-        addFunction(resp, "open", "jsxFunction_open");
-        addFunction(resp, "send", "jsxFunction_send");
-        addFunction(resp, "setRequestHeader", "jsxFunction_setRequestHeader");
+        addFunction(resp, "abort");
+        addFunction(resp, "getAllResponseHeaders");
+        addFunction(resp, "getResponseHeader");
+        addFunction(resp, "open");
+        addFunction(resp, "send");
+        addFunction(resp, "setRequestHeader");
 
         return resp;
     }
 
+    private static Scriptable buildXMLDocument() {
+        final XMLDocument resp = new XMLDocument();
+        return resp;
+    }
+
+    private static void addFunction(final SimpleScriptable scriptable,
+            final String jsMethodName) {
+        addFunction(scriptable, jsMethodName, "jsxFunction_" + jsMethodName);
+    }
+    
     private static void addFunction(final SimpleScriptable scriptable,
             final String jsMethodName, final String javaMethodName) {
         final Method javaFunction = getMethod(scriptable.getClass(), javaMethodName);
@@ -163,6 +186,19 @@ public class ActiveXObject extends SimpleScriptable {
         scriptable.defineProperty(jsMethodName, fo, READONLY);
     }
 
+    static void addProperty(final SimpleScriptable scriptable, final String propertyName,
+            final boolean isGetter, final boolean isSetter) {
+        String getterName = null;
+        if (isGetter) {
+            getterName = "jsxGet_" + propertyName;
+        }
+        String setterName = null;
+        if (isSetter) {
+            setterName = "jsxSet_" + propertyName;
+        }
+        addProperty(scriptable, propertyName, getterName, setterName);
+    }
+    
     static void addProperty(final SimpleScriptable scriptable, final String propertyName,
             final String getterName, final String setterName) {
         scriptable.defineProperty(propertyName, null,

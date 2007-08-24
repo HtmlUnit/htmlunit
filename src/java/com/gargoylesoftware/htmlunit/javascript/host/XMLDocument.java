@@ -37,60 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-
 /**
- * Tests for {@link ActiveXObject}.
+ * A JavaScript object for XMLDocument.
  *
  * @version $Revision$
- * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class ActiveXObjectTest extends WebTestCase {
+public class XMLDocument extends Document {
 
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public ActiveXObjectTest(final String name) {
-        super(name);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    public void testXMLHttpRequestFlavours() throws Exception {
-        assertFalse(ActiveXObject.isXMLHttpRequest(null));
-        assertFalse(ActiveXObject.isXMLHttpRequest("foo"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Microsoft.XMLHTTP"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.3.0"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.4.0"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.5.0"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.6.0"));
-        assertTrue(ActiveXObject.isXMLDocument("Microsoft.XmlDom"));
-        assertTrue(ActiveXObject.isXMLDocument("MSXML4.DOMDocument"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    public void testXMLDocument() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    alert(doc);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object]"};
-        final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }
