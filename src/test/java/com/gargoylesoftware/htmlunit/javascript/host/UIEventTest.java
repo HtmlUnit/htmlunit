@@ -43,6 +43,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -60,6 +61,28 @@ public class UIEventTest extends WebTestCase {
      */
     public UIEventTest(final String name) {
         super(name);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testDetail() throws Exception {
+        final String html =
+              "<html><head><script>\r\n"
+            + "  function alertDetail(e) {\r\n"
+            + "    alert(e.detail);\r\n"
+            + "  }\r\n"
+            + "</script></head>\r\n"
+            + "<body onload='alertDetail(event)'>\r\n"
+            + "<div id='a' onclick='alertDetail(event)'>abc</div>\r\n"
+            + "<div id='b' ondblclick='alertDetail(event)'>xyz</div>\r\n"
+            + "</body></html>";
+        final String[] expected = {"undefined", "1", "2"};
+        final List actual = new ArrayList();
+        final HtmlPage page = (HtmlPage) loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        ((HtmlDivision) page.getHtmlElementById("a")).click();
+        ((HtmlDivision) page.getHtmlElementById("b")).dblClick();
+        assertEquals(expected, actual);
     }
 
     /**

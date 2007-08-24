@@ -255,6 +255,9 @@
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent"
             descr="W3C Document Object Model (DOM) Level 2 - UI event types"/>
+        <property name="detail" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="view" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>

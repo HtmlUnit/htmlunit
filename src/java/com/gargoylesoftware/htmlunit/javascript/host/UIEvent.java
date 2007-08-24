@@ -50,6 +50,9 @@ public class UIEvent extends Event {
 
     private static final long serialVersionUID = 269569851849033800L;
 
+    /** Specifies some detail information about the event. */
+    private long detail_;
+
     /**
      * Creates a new UI event instance.
      */
@@ -69,6 +72,26 @@ public class UIEvent extends Event {
     public UIEvent(final DomNode domNode, final String type, final boolean shiftKey, final boolean ctrlKey,
         final boolean altKey) {
         super(domNode, type, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * Returns some detail information about the event, depending on the event type. For mouse events,
+     * the detail property indicates how many times the mouse has been clicked in the same location for
+     * this event.
+     *
+     * @return some detail information about the event, depending on the event type
+     */
+    public long jsxGet_detail() {
+        return detail_;
+    }
+
+    /**
+     * Sets the detail information for this event.
+     *
+     * @param detail the detail information for this event
+     */
+    protected void setDetail(final long detail) {
+        detail_ = detail;
     }
 
     /**

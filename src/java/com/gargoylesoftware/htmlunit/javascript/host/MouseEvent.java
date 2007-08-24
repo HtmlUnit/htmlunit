@@ -106,6 +106,7 @@ public class MouseEvent extends UIEvent {
     public MouseEvent() {
         screenX_ = 0;
         screenY_ = 0;
+        setDetail(1);
     }
 
     /**
@@ -127,6 +128,13 @@ public class MouseEvent extends UIEvent {
         }
         button_ = button;
         metaKey_ = false;
+
+        if (TYPE_DBL_CLICK.equals(type)) {
+            setDetail(2);
+        }
+        else {
+            setDetail(1);
+        }
 
         // compute coordinates from the node
         final HTMLElement target = (HTMLElement) jsxGet_target();
