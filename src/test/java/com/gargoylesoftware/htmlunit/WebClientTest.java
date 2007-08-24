@@ -1362,7 +1362,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             page.getFormByName("myform").submit((SubmittableElement) null);
         }
     }
