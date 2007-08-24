@@ -70,8 +70,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testElementHasAttributesWith() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -84,8 +83,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testElementHasAttributesNone() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -99,8 +97,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNonElementHasAttributes() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -114,8 +111,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNonElementGetPrefix() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -129,8 +125,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNonElementGetNamespaceURI() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -144,8 +139,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNonElementGetLocalName() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -159,8 +153,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNonElementSetPrefix() throws Exception {
-        final String content
-            = "<html><head></head><body id='tag'>text</body></html>\n";
+        final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -179,7 +172,7 @@ public class DomNodeTest extends WebTestCase {
             + "<p id='tag'><table>\n"
             + "<tr><td>row 1</td></tr>\n"
             + "<tr><td>row 2</td></tr>\n"
-            + "</table></p></body></html>\n";
+            + "</table></p></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
@@ -194,7 +187,7 @@ public class DomNodeTest extends WebTestCase {
     public void testReplace() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div id='tag'/><br><div id='tag2'/></body></html>\n";
+            + "<br><div id='tag'/><br><div id='tag2'/></body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -232,7 +225,7 @@ public class DomNodeTest extends WebTestCase {
     public void testGetNewNodeById() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div id='tag'/></body></html>\n";
+            + "<br><div id='tag'/></body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -270,7 +263,7 @@ public class DomNodeTest extends WebTestCase {
     public void testAppendChild() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div><div id='tag'/></div><br></body></html>\n";
+            + "<br><div><div id='tag'/></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -299,7 +292,7 @@ public class DomNodeTest extends WebTestCase {
     public void testInsertBefore() throws Exception {
         final String content
             = "<html><head></head><body>\n"
-            + "<br><div id='tag'/><br></body></html>\n";
+            + "<br><div id='tag'/><br></body></html>";
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -346,9 +339,9 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testGetByXPath() throws Exception {
         final String htmlContent
-            = "<html><head><title>my title</title></head><body>"
-            + "<p id='p1'><ul><li>foo 1</li><li>foo 2</li></li></p>"
-            + "<div><span>bla</span></div>"
+            = "<html><head><title>my title</title></head><body>\n"
+            + "<p id='p1'><ul><li>foo 1</li><li>foo 2</li></li></p>\n"
+            + "<div><span>bla</span></div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -377,7 +370,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testGetAllHtmlChildElementsOrder() throws Exception {
         final String html = "<html><body id='0'>\n"
-            + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>"
+            + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>\n"
             + "<span id='I.2'><span id='I.2.a'/></span></span>\n"
             + "<span id='II'/>\n"
             + "<span id='III'><span id='III.1'><span id='III.1.a'/></span></span>\n"
@@ -426,7 +419,7 @@ public class DomNodeTest extends WebTestCase {
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
             + "    var div = document.createElement('DIV');\n"
-            + "    p1.insertBefore(div);"
+            + "    p1.insertBefore(div);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -457,7 +450,7 @@ public class DomNodeTest extends WebTestCase {
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
             + "    var div = document.createElement('DIV');\n"
-            + "    p1.appendChild(div);"
+            + "    p1.appendChild(div);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -488,7 +481,7 @@ public class DomNodeTest extends WebTestCase {
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
             + "    var div = document.getElementById('myDiv');\n"
-            + "    div.removeChild(p1);"
+            + "    div.removeChild(p1);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

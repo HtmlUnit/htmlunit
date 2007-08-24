@@ -68,16 +68,16 @@ public class FrameSetTest extends WebTestCase {
     public void testCols() throws Exception {
 
         final String framesetContent =
-            "<html><head><title>First</title></head>"
-            + "<frameset id='fs' cols='20%,*'>"
-            + "    <frame name='left' src='about:blank' />"
-            + "    <frame name='right' src='about:blank' />"
-            + "</frameset>"
-            + "<script>"
-            + "    alert(document.getElementById('fs').cols);"
-            + "    document.getElementById('fs').cols = '*,*';"
-            + "    alert(document.getElementById('fs').cols);"
-            + "</script>"
+            "<html><head><title>First</title></head>\n"
+            + "<frameset id='fs' cols='20%,*'>\n"
+            + "    <frame name='left' src='about:blank' />\n"
+            + "    <frame name='right' src='about:blank' />\n"
+            + "</frameset>\n"
+            + "<script>\n"
+            + "    alert(document.getElementById('fs').cols);\n"
+            + "    document.getElementById('fs').cols = '*,*';\n"
+            + "    alert(document.getElementById('fs').cols);\n"
+            + "</script>\n"
             + "</html>";
 
         final List collectedAlerts = new ArrayList();
@@ -93,22 +93,22 @@ public class FrameSetTest extends WebTestCase {
     public void testRows() throws Exception {
 
         final String framesetContent =
-            "<html><head><title>First</title></head>"
-            + "<frameset id='fs' rows='20%,*'>"
-            + "    <frame name='top' src='" + URL_SECOND + "' />"
-            + "    <frame name='bottom' src='about:blank' />"
-            + "</frameset>"
+            "<html><head><title>First</title></head>\n"
+            + "<frameset id='fs' rows='20%,*'>\n"
+            + "    <frame name='top' src='" + URL_SECOND + "' />\n"
+            + "    <frame name='bottom' src='about:blank' />\n"
+            + "</frameset>\n"
             + "</html>";
 
         final String frameContent =
-            "<html><head><title>TopFrame</title>"
+            "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
             + "function doTest() {"
-            + "    alert(parent.document.getElementById('fs').rows);"
-            + "    parent.document.getElementById('fs').rows = '*,*';"
-            + "    alert(parent.document.getElementById('fs').rows);"
-            + "}</script>"
-            + "</head>"
+            + "    alert(parent.document.getElementById('fs').rows);\n"
+            + "    parent.document.getElementById('fs').rows = '*,*';\n"
+            + "    alert(parent.document.getElementById('fs').rows);\n"
+            + "}</script>\n"
+            + "</head>\n"
             + "<body onload='doTest()'></body></html>";
 
         final List collectedAlerts = new ArrayList();

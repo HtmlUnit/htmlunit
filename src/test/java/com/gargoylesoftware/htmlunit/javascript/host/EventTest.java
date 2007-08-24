@@ -84,7 +84,7 @@ public class EventTest extends WebTestCase {
             + "<script>\n"
             + "function handler(event) { alert(this.getAttribute('id')); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         onClickPageTest(content, expectedAlerts);
     }
 
@@ -104,7 +104,7 @@ public class EventTest extends WebTestCase {
             + "document.getElementById('clickId').onclick = handler;\n"
             + "document.getElementById('clickId').madeUpProperty = 'foo';\n"
             + "</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         onClickPageTest(content, expectedAlerts);
     }
 
@@ -118,7 +118,7 @@ public class EventTest extends WebTestCase {
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId' onclick=\"alert(event ? 'defined' : 'undefined')\"/>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
         onClickPageTest(BrowserVersion.INTERNET_EXPLORER_6_0, content, expectedAlerts);
     }
@@ -135,7 +135,7 @@ public class EventTest extends WebTestCase {
             + "<script>\n"
             + "function handler(event) { alert(event ? 'defined' : 'undefined'); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
     }
 
@@ -151,7 +151,7 @@ public class EventTest extends WebTestCase {
             + "function handler(event) {\n"
             + "alert(event.target == this ? 'pass' : event.target + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
     }
 
@@ -168,7 +168,7 @@ public class EventTest extends WebTestCase {
             + "event = event ? event : window.event;\n"
             + "alert(event.srcElement == this ? 'pass' : event.srcElement + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         onClickPageTest(BrowserVersion.INTERNET_EXPLORER_6_0, content, expectedAlerts);
     }
 
@@ -185,7 +185,7 @@ public class EventTest extends WebTestCase {
             + "function handler(event) {\n"
             + "alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this); }\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         onClickPageTest(BrowserVersion.FIREFOX_2, content, expectedAlerts);
     }
 
@@ -199,16 +199,16 @@ public class EventTest extends WebTestCase {
             + "<button type='button' id='clickId'/>\n"
             + "<script>\n"
             + "function handler(_e) {\n"
-            + "  var e = _e ? _e : window.event;"
+            + "  var e = _e ? _e : window.event;\n"
             + "if (e.keyCode == 65) {\n"
-            + "    alert('pass');"
+            + "    alert('pass');\n"
             + "} else {"
-            + "    alert('fail:' + e.keyCode);"
+            + "    alert('fail:' + e.keyCode);\n"
             + "}"
             + "}\n"
-            + "document.getElementById('clickId').onkeydown = handler;"
+            + "document.getElementById('clickId').onkeydown = handler;\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -243,7 +243,7 @@ public class EventTest extends WebTestCase {
             + "}\n"
             + "document.getElementById('clickId').onkeydown = handler;\n"
             + "</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -266,7 +266,7 @@ public class EventTest extends WebTestCase {
     private void testEventOnClick_Shift_Ctrl_Alt(final boolean shiftKey,
             final boolean ctrlKey, final boolean altKey, final String[] expectedAlerts) throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body\n>"
+            = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <button name='button' id='button'>Push me</button>\n"
             + "</form>\n"
@@ -277,7 +277,7 @@ public class EventTest extends WebTestCase {
             + "}\n"
             + "document.getElementById('button').onclick = handler;\n"
             + "</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
@@ -299,7 +299,7 @@ public class EventTest extends WebTestCase {
             + "<input name='textField' id='textField' onblur='alert(event != null)'>\n"
             + "<input type='submit' id='otherField'>\n"
             + "</form>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -332,13 +332,13 @@ public class EventTest extends WebTestCase {
     public void testEventScope() throws Exception {
         final List expectedAlerts = Collections.singletonList("frame1");
         final String content
-            = "<html><head></head>"
-            + "<body>"
-            + "<button name='button1' id='button1' onclick='alert(this.name)'>1</button>"
-            + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>"
-            + "<script>"
-            + "document.getElementById('frame1').onload = document.getElementById('button1').onclick;"
-            + "</script>"
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<button name='button1' id='button1' onclick='alert(this.name)'>1</button>\n"
+            + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>\n"
+            + "<script>\n"
+            + "document.getElementById('frame1').onload = document.getElementById('button1').onclick;\n"
+            + "</script>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -362,7 +362,7 @@ public class EventTest extends WebTestCase {
             + "  var target = theEvent.target ? theEvent.target : theEvent.srcElement;\n"
             + "  alert(target.tagName);\n"
             + "}"
-            + "document.getElementById('clickMe').onclick = handler;"
+            + "document.getElementById('clickMe').onclick = handler;\n"
             + "</script></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -387,13 +387,13 @@ public class EventTest extends WebTestCase {
      */
     public void testIEWindowEvent() throws Exception {
         final String content =
-            "<html><head>"
+            "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  alert(window.event == null);\n"
             + "  alert(event == null);\n"
             + "}"
-            + "</script>"
+            + "</script>\n"
             + "</head><body onload='test()'></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -416,10 +416,10 @@ public class EventTest extends WebTestCase {
             return;
         }
         final String content
-            = "<html><head></head>"
+            = "<html><head></head>\n"
             + "<body onload='alert(1);\n"
             + "// a comment within the onload declaration\n"
-            + "alert(2)'>"
+            + "alert(2)'>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -434,28 +434,28 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFF_EventCapturingAndBubbling() throws Exception {
-        final String content = "<html><head><title>foo</title>"
-            + "<script>"
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "function t(_s)"
             + "{"
-            + "     return function() { alert(_s) };"
+            + "     return function() { alert(_s) };\n"
             + "}"
             + "function init()"
             + "{"
-            + "  window.addEventListener('click', t('window capturing'), true);"
-            + "  window.addEventListener('click', t('window bubbling'), false);"
-            + "  var oDiv = document.getElementById('theDiv');"
-            + "  oDiv.addEventListener('click', t('div capturing'), true);"
-            + "  oDiv.addEventListener('click', t('div bubbling'), false);"
-            + "  var oSpan = document.getElementById('theSpan');"
-            + "  oSpan.addEventListener('click', t('span capturing'), true);"
-            + "  oSpan.addEventListener('click', t('span bubbling'), false);"
+            + "  window.addEventListener('click', t('window capturing'), true);\n"
+            + "  window.addEventListener('click', t('window bubbling'), false);\n"
+            + "  var oDiv = document.getElementById('theDiv');\n"
+            + "  oDiv.addEventListener('click', t('div capturing'), true);\n"
+            + "  oDiv.addEventListener('click', t('div bubbling'), false);\n"
+            + "  var oSpan = document.getElementById('theSpan');\n"
+            + "  oSpan.addEventListener('click', t('span capturing'), true);\n"
+            + "  oSpan.addEventListener('click', t('span bubbling'), false);\n"
             + "}"
-            + "</script>"
-            + "</head><body onload='init()'>"
-            + "<div onclick=\"alert('div')\" id='theDiv'>"
-            + "<span id='theSpan'>blabla</span>"
-            + "</div>"
+            + "</script>\n"
+            + "</head><body onload='init()'>\n"
+            + "<div onclick=\"alert('div')\" id='theDiv'>\n"
+            + "<span id='theSpan'>blabla</span>\n"
+            + "</div>\n"
             + "</body></html>";
        
         final List collectedAlerts = new ArrayList();
@@ -476,25 +476,25 @@ public class EventTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        final String content = "<html><head><title>foo</title>"
-            + "<script>"
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "function t(_s)"
             + "{"
-            + "     return function() { alert(_s) };"
+            + "     return function() { alert(_s) };\n"
             + "}"
             + "function init()"
             + "{"
-            + "  window.attachEvent('onclick', t('window bubbling'));"
-            + "  var oDiv = document.getElementById('theDiv');"
-            + "  oDiv.attachEvent('onclick', t('div bubbling'));"
-            + "  var oSpan = document.getElementById('theSpan');"
-            + "  oSpan.attachEvent('onclick', t('span bubbling'));"
+            + "  window.attachEvent('onclick', t('window bubbling'));\n"
+            + "  var oDiv = document.getElementById('theDiv');\n"
+            + "  oDiv.attachEvent('onclick', t('div bubbling'));\n"
+            + "  var oSpan = document.getElementById('theSpan');\n"
+            + "  oSpan.attachEvent('onclick', t('span bubbling'));\n"
             + "}"
-            + "</script>"
-            + "</head><body onload='init()'>"
-            + "<div onclick=\"alert('div')\" id='theDiv'>"
-            + "<span id='theSpan'>blabla</span>"
-            + "</div>"
+            + "</script>\n"
+            + "</head><body onload='init()'>\n"
+            + "<div onclick=\"alert('div')\" id='theDiv'>\n"
+            + "<span id='theSpan'>blabla</span>\n"
+            + "</div>\n"
             + "</body></html>";
        
         final List collectedAlerts = new ArrayList();
@@ -510,26 +510,26 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFF_StopPropagation() throws Exception {
-        final String content = "<html><head><title>foo</title>"
-            + "<script>"
-            + "var counter = 0;"
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "var counter = 0;\n"
             + "function t(_s)"
             + "{"
-            + "     return function(e) { alert(_s); counter++; if (counter >= 4) e.stopPropagation(); };"
+            + "     return function(e) { alert(_s); counter++; if (counter >= 4) e.stopPropagation(); };\n"
             + "}"
             + "function init()"
             + "{"
-            + "  window.addEventListener('click', t('window capturing'), true);"
-            + "  var oDiv = document.getElementById('theDiv');"
-            + "  oDiv.addEventListener('click', t('div capturing'), true);"
-            + "  var oSpan = document.getElementById('theSpan');"
-            + "  oSpan.addEventListener('click', t('span capturing'), true);"
+            + "  window.addEventListener('click', t('window capturing'), true);\n"
+            + "  var oDiv = document.getElementById('theDiv');\n"
+            + "  oDiv.addEventListener('click', t('div capturing'), true);\n"
+            + "  var oSpan = document.getElementById('theSpan');\n"
+            + "  oSpan.addEventListener('click', t('span capturing'), true);\n"
             + "}"
-            + "</script>"
-            + "</head><body onload='init()'>"
-            + "<div onclick=\"alert('div')\" id='theDiv'>"
-            + "<span id='theSpan'>blabla</span>"
-            + "</div>"
+            + "</script>\n"
+            + "</head><body onload='init()'>\n"
+            + "<div onclick=\"alert('div')\" id='theDiv'>\n"
+            + "<span id='theSpan'>blabla</span>\n"
+            + "</div>\n"
             + "</body></html>";
    
         final List collectedAlerts = new ArrayList();

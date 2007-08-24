@@ -71,11 +71,11 @@ public class HtmlSubmitInputTest extends WebTestCase {
      */
     public void testSubmit() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1' method='post'>"
-            + "<input type='submit' name='aButton' value='foo'/>"
-            + "<input type='suBMit' name='button' value='foo'/>"
-            + "<input type='submit' name='anotherButton' value='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' method='post'>\n"
+            + "<input type='submit' name='aButton' value='foo'/>\n"
+            + "<input type='suBMit' name='button' value='foo'/>\n"
+            + "<input type='submit' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -96,9 +96,9 @@ public class HtmlSubmitInputTest extends WebTestCase {
      */
     public void testClick_onClick() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1' onSubmit='alert(\"bar\")'>"
-            + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' onSubmit='alert(\"bar\")'>\n"
+            + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -118,10 +118,10 @@ public class HtmlSubmitInputTest extends WebTestCase {
     public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<form name='form1' method='get' action='http://second'>"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1' method='get' action='http://second'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button1'"
-            + "onclick='return true'/></form>"
+            + "onclick='return true'/></form>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
@@ -210,7 +210,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             "<html><head></head>\n"
             + "<body>\n"
             + "<input id='myInput' type='submit' onclick='alert(1)'>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();

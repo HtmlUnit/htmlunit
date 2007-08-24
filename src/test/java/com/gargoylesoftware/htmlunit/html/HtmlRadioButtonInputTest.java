@@ -69,9 +69,9 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      */
     public void test_asTextWhenNotChecked() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "    <input type='radio' name='radio' id='radio'>Check me</input>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='radio' name='radio' id='radio'>Check me</input>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -87,10 +87,10 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      */
     public void testOnchangeHandlerInvoked() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
             + "    <input type='radio' name='radio' id='radio'"
-            + "onchange='this.value=\"new\" + this.checked'>Check me</input>"
+            + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -111,10 +111,10 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      */
     public void testOnchangeHandlerNotInvokedIfNotChanged() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
             + "    <input type='radio' name='radio' id='radio'"
-            + "onchange='this.value=\"new\" + this.checked'>Check me</input>"
+            + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -135,21 +135,21 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      */
     public void testUpdateStateFirstForOnclickHandler() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<script type='text/javascript'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<script type='text/javascript'>\n"
             + "    function itemOnClickHandler() {"
-            + "        var oneItem = document.getElementById('oneItem');"
-            + "        var twoItems = document.getElementById('twoItems');"
-            + "        alert('oneItem.checked: ' + oneItem.checked + ' twoItems.checked: ' + twoItems.checked);"
+            + "        var oneItem = document.getElementById('oneItem');\n"
+            + "        var twoItems = document.getElementById('twoItems');\n"
+            + "        alert('oneItem.checked: ' + oneItem.checked + ' twoItems.checked: ' + twoItems.checked);\n"
             + "    }"
-            + "</script>"
-            + "<form name='testForm'>"
+            + "</script>\n"
+            + "<form name='testForm'>\n"
             + "Number of items:"
             + "<input type='radio' name='numOfItems' value='1' checked='checked' "
-            + "  onclick='itemOnClickHandler()' id='oneItem'>"
-            + "<label for='oneItem'>1</label>"
-            + "<input type='radio' name='numOfItems' value='2' onclick='itemOnClickHandler()' id='twoItems'>"
-            + "<label for='twoItems'>2</label>"
+            + "  onclick='itemOnClickHandler()' id='oneItem'>\n"
+            + "<label for='oneItem'>1</label>\n"
+            + "<input type='radio' name='numOfItems' value='2' onclick='itemOnClickHandler()' id='twoItems'>\n"
+            + "<label for='twoItems'>2</label>\n"
             + "</form></body></html>";
         
         final List collectedAlerts = new ArrayList();
@@ -182,10 +182,10 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      */
     public void testSetChecked() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<form>"
-            + "<input id='myRadio' type='radio' onchange=\"window.location.href='http://second'\">"
-            + "</form>"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form>\n"
+            + "<input id='myRadio' type='radio' onchange=\"window.location.href='http://second'\">\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body></body></html>";
@@ -217,7 +217,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "<form name='myForm'>\n"
             + "  <input type='radio' name='myRadio'>\n"
             + "  <input type='radio' name='myRadio'>\n"
-            + "</form>"
+            + "</form>\n"
             + "<script>\n"
             + "  var r1 = document.forms.myForm.myRadio[0];\n"
             + "  var r2 = document.forms.myForm.myRadio[1];\n"
@@ -227,7 +227,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "  r2.checked = true;\n"
             + "  alert(r1.checked + ',' + r2.checked);\n"
             + "</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final String[] expectedAlerts = {"false,false", "true,false", "false,true"};
         final List collectedAlerts = new ArrayList();

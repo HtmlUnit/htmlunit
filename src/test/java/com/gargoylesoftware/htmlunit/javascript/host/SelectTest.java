@@ -82,19 +82,19 @@ public class SelectTest extends WebTestCase {
      */
     public void testGetSelectedIndex() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.form1.select1.length);\n"
             + "    alert(document.form1.select1.selectedIndex);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1'>One</option>"
-            + "        <option name='option2' selected>Two</option>"
-            + "        <option name='option3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1'>One</option>\n"
+            + "        <option name='option2' selected>Two</option>\n"
+            + "        <option name='option3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -111,7 +111,7 @@ public class SelectTest extends WebTestCase {
      */
     public void testSetSelectedIndex() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.form1.select1.length);\n"
             + "    alert(document.form1.select1.selectedIndex);\n"
@@ -119,16 +119,16 @@ public class SelectTest extends WebTestCase {
             + "    alert(document.form1.select1.length);\n"
             + "    alert(document.form1.select1.selectedIndex);\n"
             + "    document.form1.select1.selectedIndex = -1;\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1' action='http://test' method='get'>"
-            + "    <select name='select1'>"
-            + "        <option value='option1' name='option1'>One</option>"
-            + "        <option value='option2' name='option2' selected>Two</option>"
-            + "        <option value='option3' name='option3'>Three</option>"
-            + "    </select>"
-            + "    <input type='submit' id='clickMe' name='submit' value='button'>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' action='http://test' method='get'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option value='option1' name='option1'>One</option>\n"
+            + "        <option value='option2' name='option2' selected>Two</option>\n"
+            + "        <option value='option3' name='option3'>Three</option>\n"
+            + "    </select>\n"
+            + "    <input type='submit' id='clickMe' name='submit' value='button'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -152,20 +152,20 @@ public class SelectTest extends WebTestCase {
      */
     public void testSetSelectedIndexInvalidValue() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    document.form1.select1.selectedIndex = -1;\n"
             + "    document.form1.select1.selectedIndex = 2;\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1' action='http://test' method='get'>"
-            + "    <select name='select1'>"
-            + "        <option value='option1' name='option1'>One</option>"
-            + "        <option value='option2' name='option2' selected>Two</option>"
-            + "        <option value='option3' name='option3'>Three</option>"
-            + "    </select>"
-            + "    <input type='submit' id='clickMe' name='submit' value='button'>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' action='http://test' method='get'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option value='option1' name='option1'>One</option>\n"
+            + "        <option value='option2' name='option2' selected>Two</option>\n"
+            + "        <option value='option3' name='option3'>Three</option>\n"
+            + "    </select>\n"
+            + "    <input type='submit' id='clickMe' name='submit' value='button'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
@@ -180,22 +180,22 @@ public class SelectTest extends WebTestCase {
      */
     public void testGetOptions() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    for (i=0; i<options.length; i++) {\n"
             + "        alert(options[i].value);\n"
             + "        alert(options[i].text);\n"
             + "    }\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -212,22 +212,22 @@ public class SelectTest extends WebTestCase {
      */
     public void testGetOptionLabel() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    for (i=0; i<options.length; i++) {\n"
             + "        alert(options[i].value);\n"
             + "        alert(options[i].text);\n"
             + "    }\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1' label='OneLabel'>One</option>"
-            + "        <option name='option2' value='value2' label='TwoLabel' selected>Two</option>"
-            + "        <option name='option3' value='value3' label='ThreeLabel'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1' label='OneLabel'>One</option>\n"
+            + "        <option name='option2' value='value2' label='TwoLabel' selected>Two</option>\n"
+            + "        <option name='option3' value='value3' label='ThreeLabel'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -244,7 +244,7 @@ public class SelectTest extends WebTestCase {
      */
     public void testGetOptionSelected() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    alert(options[0].selected);\n"
@@ -253,15 +253,15 @@ public class SelectTest extends WebTestCase {
             + "    alert(options[0].selected);\n"
             + "    alert(options[1].selected);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -278,17 +278,17 @@ public class SelectTest extends WebTestCase {
      */
     public void testGetOptionByIndex() throws Exception {
         final String content
-            = "<html><head><title>first</title><script language='JavaScript'>"
+            = "<html><head><title>first</title><script language='JavaScript'>\n"
             //+ "//<!--"
             + "function buggy(){\n"
             + "var option1 = document.f1.elements['select'][0];\n"
             + "alert(option1!=null);\n"
             + "}\n"
             //+ "//-->\n"
-            + "</script></head><body onload='buggy();'>"
-            + "<form name='f1' action='xxx.html'><SELECT name='select'>"
-            + "<OPTION value='A'>111</OPTION>"
-            + "<OPTION value='B'>222</OPTION>"
+            + "</script></head><body onload='buggy();'>\n"
+            + "<form name='f1' action='xxx.html'><SELECT name='select'>\n"
+            + "<OPTION value='A'>111</OPTION>\n"
+            + "<OPTION value='B'>222</OPTION>\n"
             + "</SELECT></form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -303,21 +303,21 @@ public class SelectTest extends WebTestCase {
      */
     public void testGetOptionByOptionIndex() throws Exception {
         final String content
-            = "<html><head><title>first</title><script language='JavaScript'>"
+            = "<html><head><title>first</title><script language='JavaScript'>\n"
             //+ "//<!--"
             + "function buggy(){\n"
             + "var option1 = document.form1.select1.options[0];\n"
             + "alert(option1.text);\n"
             + "}\n"
             //+ "//-->\n"
-            + "</script></head><body onload='buggy();'>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "</script></head><body onload='buggy();'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -330,7 +330,7 @@ public class SelectTest extends WebTestCase {
      */
     public void testAddOption() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    var index = options.length;\n"
@@ -338,15 +338,15 @@ public class SelectTest extends WebTestCase {
             + "    alert(options.length);\n"
             + "    alert(options[index].text);\n"
             + "    alert(options[index].value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -363,7 +363,7 @@ public class SelectTest extends WebTestCase {
      */
     public void testAddOptionSelected() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var oSelect = document.form1.select1;\n"
             + "    var options = oSelect.options;\n"
@@ -380,15 +380,15 @@ public class SelectTest extends WebTestCase {
             + "    alert(options[index].selected);\n"
             + "    alert(oSelect.selectedIndex);\n"
             + "    alert(options[firstSelectedIndex].selected);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"1", "true", "4", "Four", "value4", "true", "3", "false"};
@@ -405,7 +405,7 @@ public class SelectTest extends WebTestCase {
      */
     public void testAddOptionWithAddMethod_FF() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1;\n"
             + "    options.add(new Option('Four','value4'), null);\n"
@@ -413,15 +413,15 @@ public class SelectTest extends WebTestCase {
             + "    var index = options.length - 1;\n"
             + "    alert(options[index].text);\n"
             + "    alert(options[index].value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"4", "Four", "value4"};
@@ -439,7 +439,7 @@ public class SelectTest extends WebTestCase {
      */
     public void testAddOptionWithAddMethod_IE() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var oSelect = document.form1.select1;\n"
             + "    oSelect.add(new Option('Four', 'value4'));\n"
@@ -449,15 +449,15 @@ public class SelectTest extends WebTestCase {
             + "    oSelect.add(new Option('Three b', 'value3b'), 3);\n"
             + "    alert(oSelect[3].text);\n"
             + "    alert(oSelect[3].value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"4", "Four", "value4", "Three b", "value3b"};
@@ -476,23 +476,23 @@ public class SelectTest extends WebTestCase {
      */
     public void testAddWith1Arg() throws Exception {
         final String content
-            = "<html><head>"
-            + "<script>"
+            = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + " var oSelect = document.forms.testForm.testSelect;"
-            + " alert(oSelect.length);"
-            + " var opt = new Option('foo', '123');"
-            + " oSelect.add(opt);"
-            + " alert(oSelect.length);"
+            + " var oSelect = document.forms.testForm.testSelect;\n"
+            + " alert(oSelect.length);\n"
+            + " var opt = new Option('foo', '123');\n"
+            + " oSelect.add(opt);\n"
+            + " alert(oSelect.length);\n"
             + "}"
-            + "</script>"
-            + "</head>"
+            + "</script>\n"
+            + "</head>\n"
             + ""
-            + "<body onload='test()'>"
-            + "<form name='testForm'>"
-            + "<select name='testSelect'></select>"
-            + "</form>"
+            + "<body onload='test()'>\n"
+            + "<form name='testForm'>\n"
+            + "<select name='testSelect'></select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"0", "1"};
@@ -509,22 +509,22 @@ public class SelectTest extends WebTestCase {
      */
     public void testRemoveOption() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    options[1]=null;\n"
             + "    alert(options.length);\n"
             + "    alert(options[1].text);\n"
             + "    alert(options[1].value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -540,22 +540,22 @@ public class SelectTest extends WebTestCase {
      */
     public void testRemoveOptionWithRemoveMethod() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1;\n"
             + "    options.remove(1);\n"
             + "    alert(options.length);\n"
             + "    alert(options[1].text);\n"
             + "    alert(options[1].value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -571,20 +571,20 @@ public class SelectTest extends WebTestCase {
      */
     public void testClearOptions() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    options.length=0;\n"
             + "    alert(options.length);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -602,7 +602,7 @@ public class SelectTest extends WebTestCase {
      */
     public void testIncreaseOptionsSettingLength() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    alert(options.length);\n"
@@ -615,13 +615,13 @@ public class SelectTest extends WebTestCase {
             + "    options[49].value = 'fooValue';\n"
             + "    alert(options[49].text);\n"
             + "    alert(options[49].value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"1", "2", "", "", "foo", "fooValue"};
@@ -638,20 +638,20 @@ public class SelectTest extends WebTestCase {
      */
     public void testOptionArrayHasItemMethod() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    alert(options.item(0).text);\n"
             + "    alert(options.item(0).value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -667,33 +667,33 @@ public class SelectTest extends WebTestCase {
      */
     public void testGetValue() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    for (var i=1; i<6; i++)\n"
             + "    alert(document.form1['select' + i].value);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1'>One</option>"
-            + "        <option name='option2' selected is='test'>Two</option>"
-            + "        <option name='option3'>Three</option>"
-            + "    </select>"
-            + "    <select name='select2'>"
-            + "    </select>"
-            + "    <select name='select3' multiple>"
-            + "        <option name='option1'>One</option>"
-            + "        <option name='option2' selected>Two</option>"
-            + "        <option name='option3' selected>Three</option>"
-            + "    </select>"
-            + "    <select name='select4' multiple>"
-            + "        <option name='option1'>One</option>"
-            + "        <option name='option2'>Two</option>"
-            + "        <option name='option3'>Three</option>"
-            + "    </select>"
-            + "    <select name='select5' multiple>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1'>One</option>\n"
+            + "        <option name='option2' selected is='test'>Two</option>\n"
+            + "        <option name='option3'>Three</option>\n"
+            + "    </select>\n"
+            + "    <select name='select2'>\n"
+            + "    </select>\n"
+            + "    <select name='select3' multiple>\n"
+            + "        <option name='option1'>One</option>\n"
+            + "        <option name='option2' selected>Two</option>\n"
+            + "        <option name='option3' selected>Three</option>\n"
+            + "    </select>\n"
+            + "    <select name='select4' multiple>\n"
+            + "        <option name='option1'>One</option>\n"
+            + "        <option name='option2'>Two</option>\n"
+            + "        <option name='option3'>Three</option>\n"
+            + "    </select>\n"
+            + "    <select name='select5' multiple>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"Two", "", "Two", "", ""};
@@ -710,18 +710,18 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNoOnchangeFromJS() throws Exception {
-        final String content = "<html><head><title>Test infinite loop on js onchange</title></head>"
-            + "<body><form name='myForm'>"
-            + "<select name='a' onchange='this.form.b.selectedIndex=0'>"
-            + "<option value='1'>one</option>"
-            + "<option value='2'>two</option>"
-            + "</select>"
-            + "<select name='b' onchange='alert(\"b changed\")'>"
-            + "<option value='G'>green</option>"
-            + "<option value='R' selected>red</option>"
-            + "</select>"
-            + "</form>"
-            + "</body>"
+        final String content = "<html><head><title>Test infinite loop on js onchange</title></head>\n"
+            + "<body><form name='myForm'>\n"
+            + "<select name='a' onchange='this.form.b.selectedIndex=0'>\n"
+            + "<option value='1'>one</option>\n"
+            + "<option value='2'>two</option>\n"
+            + "</select>\n"
+            + "<select name='b' onchange='alert(\"b changed\")'>\n"
+            + "<option value='G'>green</option>\n"
+            + "<option value='R' selected>red</option>\n"
+            + "</select>\n"
+            + "</form>\n"
+            + "</body>\n"
             + "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
@@ -748,19 +748,19 @@ public class SelectTest extends WebTestCase {
      */
     public void testSetValue() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.form1.select1.selectedIndex);\n"
             + "    document.form1.select1.value = 'option2';\n"
             + "    alert(document.form1.select1.selectedIndex);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1' action='http://test'>"
-            + "    <select name='select1'>"
-            + "        <option value='option1' name='option1'>One</option>"
-            + "        <option value='option2' name='option2'>Two</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' action='http://test'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option value='option1' name='option1'>One</option>\n"
+            + "        <option value='option2' name='option2'>Two</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"0", "1"};
@@ -778,14 +778,14 @@ public class SelectTest extends WebTestCase {
      */
     public void testRightPageAfterOnchange() throws Exception {
         final String content
-            = "<html><body>"
-            + "<iframe src='fooIFrame.html'></iframe>"
-            + "<form name='form1' action='http://first' method='post'>"
-            + "    <select name='select1' onchange='this.form.submit()'>"
-            + "        <option value='option1' selected='true' name='option1'>One</option>"
-            + "        <option value='option2' name='option2'>Two</option>"
-            + "    </select>"
-            + "</form>"
+            = "<html><body>\n"
+            + "<iframe src='fooIFrame.html'></iframe>\n"
+            + "<form name='form1' action='http://first' method='post'>\n"
+            + "    <select name='select1' onchange='this.form.submit()'>\n"
+            + "        <option value='option1' selected='true' name='option1'>One</option>\n"
+            + "        <option value='option2' name='option2'>Two</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
@@ -809,23 +809,23 @@ public class SelectTest extends WebTestCase {
     public void testOptionsDelegateToSelect() throws Exception {
 
         final String content
-            = "<html><head>"
-            + "<script>"
+            = "<html><head>\n"
+            + "<script>\n"
             + "function doTest() {"
-            + "  var s = document.getElementById('select1');"
-            + "  alert(s.childNodes.length);"
-            + "  alert(s.options.childNodes.length);"
-            + "  alert(s.selectedIndex);"
-            + "  alert(s.options.selectedIndex);"
+            + "  var s = document.getElementById('select1');\n"
+            + "  alert(s.childNodes.length);\n"
+            + "  alert(s.options.childNodes.length);\n"
+            + "  alert(s.selectedIndex);\n"
+            + "  alert(s.options.selectedIndex);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='doTest()'>"
-            + "<form name='test'>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='test'>\n"
             + "<select id='select1'>"
             + "<option>a</option>"
             + "<option selected='selected'>b</option>"
-            + "</select></form>"
+            + "</select></form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"2", "2", "1", "1"};
@@ -851,29 +851,29 @@ public class SelectTest extends WebTestCase {
     public void testOptionsArrayAdd() throws Exception {
 
         final String content
-            = "<html><head>"
-            + "<script>"
+            = "<html><head>\n"
+            + "<script>\n"
             + "function doTest() {"
-            + "  var s = document.getElementById('select1');"
-            + "  var lengthBefore = s.options.length;"
-            + "  alert(lengthBefore);"
-            + "  alert(s.options.item(lengthBefore - 1).text);"
-            + "  var opt = document.createElement(\"OPTION\");"
-            + "  opt.value = 'c';"
-            + "  opt.text = 'c';"
-            + "  s.options.add(opt);"
-            + "  var lengthAfterAdd = s.options.length;"
-            + "  alert(lengthAfterAdd);"
-            + "  alert(s.options.item(lengthAfterAdd - 1).text);"
+            + "  var s = document.getElementById('select1');\n"
+            + "  var lengthBefore = s.options.length;\n"
+            + "  alert(lengthBefore);\n"
+            + "  alert(s.options.item(lengthBefore - 1).text);\n"
+            + "  var opt = document.createElement(\"OPTION\");\n"
+            + "  opt.value = 'c';\n"
+            + "  opt.text = 'c';\n"
+            + "  s.options.add(opt);\n"
+            + "  var lengthAfterAdd = s.options.length;\n"
+            + "  alert(lengthAfterAdd);\n"
+            + "  alert(s.options.item(lengthAfterAdd - 1).text);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='doTest()'>"
-            + "<form name='test'>"
-            + "<select id='select1'>"
-            + "<option>a</option>"
-            + "<option selected='selected'>b</option>"
-            + "</select></form>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='test'>\n"
+            + "<select id='select1'>\n"
+            + "<option>a</option>\n"
+            + "<option selected='selected'>b</option>\n"
+            + "</select></form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"2", "b", "3", "c"};
@@ -891,14 +891,14 @@ public class SelectTest extends WebTestCase {
     public void testOnChangeCallsFormSubmit() throws Exception {
 
         final String content
-            = "<html><head>"
-            + "</head>"
-            + "<body>"
-            + "<form name='test' action='foo'>"
-            + "<select name='select1' onchange='submit()'>"
-            + "<option>a</option>"
-            + "<option selected='selected'>b</option>"
-            + "</select></form>"
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form name='test' action='foo'>\n"
+            + "<select name='select1' onchange='submit()'>\n"
+            + "<option>a</option>\n"
+            + "<option selected='selected'>b</option>\n"
+            + "</select></form>\n"
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
@@ -919,15 +919,15 @@ public class SelectTest extends WebTestCase {
      */
     public void testSelectedIndexReset() throws Exception {
         final String content
-            = "<html><head><title>first</title></head>"
+            = "<html><head><title>first</title></head>\n"
             + "<body onload='document.forms[0].testSelect.selectedIndex = -1; "
-            + "document.forms[0].testSelect.options[0].selected=true;'>"
-            + "<form>"
-            + "<select name='testSelect'>"
-            + "<option value='testValue'>value</option>"
-            + "</select>"
-            + "<input id='testButton' type='submit'>"
-            + "</form>"
+            + "document.forms[0].testSelect.options[0].selected=true;'>\n"
+            + "<form>\n"
+            + "<select name='testSelect'>\n"
+            + "<option value='testValue'>value</option>\n"
+            + "</select>\n"
+            + "<input id='testButton' type='submit'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);

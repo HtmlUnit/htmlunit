@@ -66,12 +66,12 @@ public class ImageTest extends WebTestCase {
      */
     public void test_getSrc() throws Exception {
         final String content
-            = "<html><head><title></title><script>"
+            = "<html><head><title></title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.getElementById('anImage').src);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "<img src='foo.gif' id='anImage'/>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -93,12 +93,12 @@ public class ImageTest extends WebTestCase {
      */
     public void test_setSrc() throws Exception {
         final String content
-            = "<html><head><title></title><script>"
+            = "<html><head><title></title><script>\n"
             + "function doTest(){\n"
             + "    document.getElementById('anImage').src = 'bar.gif';\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "<img src='foo.gif' id='anImage'/>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content, null);
@@ -119,13 +119,13 @@ public class ImageTest extends WebTestCase {
      */
     public void test_setSrc_newImage() throws Exception {
         final String content
-            = "<html><head><title></title><script>"
+            = "<html><head><title></title><script>\n"
             + "function doTest(){\n"
             + "    var preloadImage = new Image();\n"
             + "    preloadImage.src = 'bar.gif';\n"
             + "    alert(preloadImage.src);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
+            + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -144,15 +144,15 @@ public class ImageTest extends WebTestCase {
      */
     public void test_AttributeName() throws Exception {
         final String content
-            = "<html><head><title></title><script>"
+            = "<html><head><title></title><script>\n"
             + "function test()\n"
             + "{\n"
             + "  var oImg = document.getElementById('myImage');\n"
             + "  oImg.name = 'foo';\n"
             + "  alert(oImg.name);\n"
             + "}\n"
-            + "</script></head><body onload='test()'>"
-            + "<img src='foo.png' id='myImage'>"
+            + "</script></head><body onload='test()'>\n"
+            + "<img src='foo.png' id='myImage'>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"foo"};

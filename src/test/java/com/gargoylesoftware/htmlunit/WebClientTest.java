@@ -93,9 +93,8 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testCredentialProvider_NoCredentials() throws Exception {
-
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>\n"
             + "No access</body></html>";
         final WebClient client = new WebClient();
         client.setPrintContentOnFailingStatusCode(false);
@@ -136,8 +135,8 @@ public class WebClientTest extends WebTestCase {
      */
     public void testHtmlWindowEvents_changed() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final WebClient client = new WebClient();
         final EventCatcher eventCatcher = new EventCatcher();
@@ -173,10 +172,10 @@ public class WebClientTest extends WebTestCase {
      */
     public void testHtmlWindowEvents_opened() throws Exception {
         final String page1Content
-            = "<html><head><title>foo</title>"
-            + "<script>window.open('" + URL_SECOND.toExternalForm() + "', 'myNewWindow')</script>"
-            + "</head><body>"
-            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
+            = "<html><head><title>foo</title>\n"
+            + "<script>window.open('" + URL_SECOND.toExternalForm() + "', 'myNewWindow')</script>\n"
+            + "</head><body>\n"
+            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final String page2Content
             = "<html><head><title>foo</title></head><body></body></html>";
@@ -213,9 +212,9 @@ public class WebClientTest extends WebTestCase {
      */
     public void testHtmlWindowEvents_closedFromFrame() throws Exception {
         final String firstContent
-            = "<html><head><title>first</title></head><body>"
-            + "<iframe src='http://third' id='frame1'>"
-            + "<a href='http://second' id='a2'>link to foo2</a>"
+            = "<html><head><title>first</title></head><body>\n"
+            + "<iframe src='http://third' id='frame1'>\n"
+            + "<a href='http://second' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>second</title></head><body></body></html>";
@@ -613,9 +612,9 @@ public class WebClientTest extends WebTestCase {
      */
     public void testSetPageCreator() throws Exception {
         final String page1Content
-            = "<html><head><title>foo</title>"
-            + "</head><body>"
-            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>"
+            = "<html><head><title>foo</title>\n"
+            + "</head><body>\n"
+            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final WebClient client = new WebClient();
 
@@ -668,9 +667,8 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testLoadPage_PostWithParameters() throws Exception {
-
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>\n"
             + "</body></html>";
         final WebClient client = new WebClient();
 
@@ -691,8 +689,8 @@ public class WebClientTest extends WebTestCase {
      */
     public void testLoadPage_SlashesInQueryString() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head>"
-            + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>"
+            = "<html><head><title>foo</title></head>\n"
+            + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>\n"
             + "</body></html>";
 
         final WebClient client = new WebClient();
@@ -713,7 +711,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testLoadPage_EncodeRequest() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>\n"
             + "</body></html>";
 
         final WebClient client = new WebClient();
@@ -815,8 +813,8 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testRedirectViaJavaScriptDuringInitialPageLoad() throws Exception {
-        final String firstContent = "<html><head><title>First</title><script>"
-            + "location.href='http://second'"
+        final String firstContent = "<html><head><title>First</title><script>\n"
+            + "location.href='http://second'\n"
             + "</script></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
@@ -996,13 +994,13 @@ public class WebClientTest extends WebTestCase {
             buffer.append(" onblur='alert(\"blur-" + i + "\")'");
             buffer.append(" onfocus='alert(\"focus-" + i + "\")'");
             buffer.append(" accesskey='" + (char) ('a' + i) + "'");
-            buffer.append(">");
+            buffer.append(">\n");
         }
-        buffer.append("<div id='div1'>foo</div>"); // something that isn't tabbable
+        buffer.append("<div id='div1'>foo</div>\n"); // something that isn't tabbable
 
         // Elements that are tabbable but are disabled
         buffer.append("<button name='button1' id='button1' disabled onclick='alert(\"buttonPushed\")' ");
-        buffer.append("accesskey='1'>foo</button>");
+        buffer.append("accesskey='1'>foo</button>\n");
 
         buffer.append("</form></body></html>");
 
@@ -1156,8 +1154,8 @@ public class WebClientTest extends WebTestCase {
 
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
-        final String html = "<html><head><title>Hello World</title>"
-            + "<script language='javascript' type='text/javascript' src='foo.js'></script>"
+        final String html = "<html><head><title>Hello World</title>\n"
+            + "<script language='javascript' type='text/javascript' src='foo.js'></script>\n"
             + "</head><body></body></html>";
         final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0,
                 defaultProxyHost, defaultProxyPort);
@@ -1226,14 +1224,14 @@ public class WebClientTest extends WebTestCase {
         final String alertText = "content";
         final String newAlertText = "newcontent";
         final String content
-            = "<html><head><title>foo</title><script>"
-            + "<!--\n   alert('" + alertText + "');\n// -->"
-            + "</script></head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-            + "    <input type='text' name='textfield2' id='textfield2'/>"
-            + "</form>"
+            = "<html><head><title>foo</title><script>\n"
+            + "<!--\n   alert('" + alertText + "');\n// -->\n"
+            + "</script></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "</form>\n"
             + "</body></html>";
 
         webConnection.setDefaultResponse(content);
@@ -1285,10 +1283,10 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
-        final String content = "<html><head><title>foo</title></head><body>"
-            + "<p>hello world</p>"
-            + "<script>document.unimplementedFunction();</script>"
-            + "<script>alert('implemented function');</script>"
+        final String content = "<html><head><title>foo</title></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<script>document.unimplementedFunction();</script>\n"
+            + "<script>alert('implemented function');</script>\n"
             + "</body></html>";
 
         webConnection.setDefaultResponse(content);
@@ -1318,7 +1316,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testBadCharset() throws Exception {
         final String page1Content
-            = "<html><head><title>foo</title>"
+            = "<html><head><title>foo</title>\n"
             + "</head><body></body></html>";
         final WebClient client = new WebClient();
 
@@ -1348,10 +1346,10 @@ public class WebClientTest extends WebTestCase {
      */
     public void testReusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
 
-        final String firstContent = "<html><head><title>First</title></head>"
-            + "<body onload='document.myform.mysubmit.focus()'>"
-            + "<form action='" + URL_SECOND + "' name='myform'>"
-            + "<input type='submit' name='mysubmit'>"
+        final String firstContent = "<html><head><title>First</title></head>\n"
+            + "<body onload='document.myform.mysubmit.focus()'>\n"
+            + "<form action='" + URL_SECOND + "' name='myform'>\n"
+            + "<input type='submit' name='mysubmit'>\n"
             + "</form></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body>Second</body></html>";
 
@@ -1375,9 +1373,9 @@ public class WebClientTest extends WebTestCase {
      */
     public void testOpenerInFrameset() throws Exception {
 
-        final String firstContent = "<html><head><script>alert(window.opener)</script><frameset cols='*'>"
-                                    + "<frame src='" + URL_SECOND + "'>"
-                                    + "</frameset>"
+        final String firstContent = "<html><head><script>alert(window.opener)</script><frameset cols='*'>\n"
+                                    + "<frame src='" + URL_SECOND + "'>\n"
+                                    + "</frameset>\n"
                                     + "</html>";
         final String secondContent = "<html><body><a href='" + URL_FIRST + "' target='_top'>to top</a></body></html>";
 
@@ -1519,8 +1517,8 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testContentTypeCaseInsensitive() throws Exception {
-        final String content = "<html><head>"
-            + "<script type='Text/Javascript' src='foo.js'></script>"
+        final String content = "<html><head>\n"
+            + "<script type='Text/Javascript' src='foo.js'></script>\n"
             + "</head></html>";
         final WebClient client = new WebClient();
 
@@ -1570,8 +1568,8 @@ public class WebClientTest extends WebTestCase {
         FileUtils.writeStringToFile(tmpFileJS, "alert('foo')", encoding);
 
         // html file
-        final String html = "<html><head></head><body>"
-            + "<script language='javascript' type='text/javascript' src='" + tmpFileJS.getName() + "'></script>"
+        final String html = "<html><head></head><body>\n"
+            + "<script language='javascript' type='text/javascript' src='" + tmpFileJS.getName() + "'></script>\n"
             + "</body></html>";
         final File tmpFile = File.createTempFile("test", ".html", currentDirectory);
         tmpFile.deleteOnExit();

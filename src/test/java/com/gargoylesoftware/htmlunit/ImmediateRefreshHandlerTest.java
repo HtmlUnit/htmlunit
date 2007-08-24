@@ -67,11 +67,11 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client) {
             private int nbCalls_ = 0;
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
-                String content = "<html><head>";
+                String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='0;url="
                         + URL_GARGOYLE.toExternalForm()
-                        + "'>";
+                        + "'>\n";
                 }
                 content += "</head><body></body></html>";
                 nbCalls_++;

@@ -69,8 +69,8 @@ public class HtmlScriptTest extends WebTestCase {
      */
     public void testBadExternalScriptReference() throws Exception {
 
-        final String html = "<html><head><title>foo</title>"
-                + "<script src='notExisting.js'></script>"
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script src='notExisting.js'></script>\n"
                 + "</head><body></body></html>";
 
         final WebClient client = new WebClient();
@@ -103,9 +103,9 @@ public class HtmlScriptTest extends WebTestCase {
      */
     public void testAsText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<script id='script1'>"
-            + "    var foo = 132;"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<script id='script1'>\n"
+            + "    var foo = 132;\n"
             + "</script></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -131,16 +131,16 @@ public class HtmlScriptTest extends WebTestCase {
     public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
 
         final String firstPage
-            = "<html><head></head>"
-            + "<body onload='alert(\"body onload executing but should be skipped\")'>"
-            + "<script>alert('First script executes')</script>"
-            + "<script>window.location.href='" + URL_SECOND + "'</script>"
-            + "<script>alert('Third script executing but should be skipped')</script>"
+            = "<html><head></head>\n"
+            + "<body onload='alert(\"body onload executing but should be skipped\")'>\n"
+            + "<script>alert('First script executes')</script>\n"
+            + "<script>window.location.href='" + URL_SECOND + "'</script>\n"
+            + "<script>alert('Third script executing but should be skipped')</script>\n"
             + "</body></html>";
 
         final String secondPage
-            = "<html><head></head><body>"
-            + "<script>alert('Second page loading')</script>"
+            = "<html><head></head><body>\n"
+            + "<script>alert('Second page loading')</script>\n"
             + "</body></html>";
 
         final WebClient client = new WebClient();
@@ -165,7 +165,7 @@ public class HtmlScriptTest extends WebTestCase {
      */
     public void testScriptIsNotRunWhenCloned() throws Exception {
 
-        final String html = "<html><body onload='document.body.cloneNode(true)'>"
+        final String html = "<html><body onload='document.body.cloneNode(true)'>\n"
             + "<script>alert('a')</script></body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);

@@ -61,10 +61,10 @@ public class HtmlTableRowTest extends WebTestCase {
         super(name);
     }
 
-    private static final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<table id='table'><tr id='row'>"
-            + "<td id='cell' width='20'><input type='text' id='foo'/></td>"
-            + "</tr></table>" + "</body></html>";
+    private static final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<table id='table'><tr id='row'>\n"
+            + "<td id='cell' width='20'><input type='text' id='foo'/></td>\n"
+            + "</tr></table>\n" + "</body></html>";
 
     private WebClient client_;
 

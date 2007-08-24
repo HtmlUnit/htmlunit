@@ -83,7 +83,7 @@ public class InputTest extends WebTestCase {
      */
     public void testStandardProperties_Text() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.form1.textfield1.value)\n"
             + "    alert(document.form1.textfield1.type)\n"
@@ -92,11 +92,11 @@ public class InputTest extends WebTestCase {
             + "    document.form1.textfield1.value='cat'\n"
             + "    alert(document.form1.textfield1.value)\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <input type='text' name='textfield1' value='foo' />"
-            + "</form>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='text' name='textfield1' value='foo' />\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -115,7 +115,7 @@ public class InputTest extends WebTestCase {
      */
     public void testTextProperties() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.form1.button1.type)\n"
             + "    alert(document.form1.button2.type)\n"
@@ -132,29 +132,29 @@ public class InputTest extends WebTestCase {
             + "    alert(document.form1.textInput1.type)\n"
             + "    alert(document.form1.textarea1.type)\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <input type='button' name='button1'></button>"
-            + "    <button type='button' name='button2'></button>"
-            + "    <input type='checkbox' name='checkbox1' />"
-            + "    <input type='file' name='fileupload1' />"
-            + "    <input type='hidden' name='hidden1' />"
-            + "    <select name='select1'>"
-            + "        <option>foo</option>"
-            + "    </select>"
-            + "    <select multiple='multiple' name='select2'>"
-            + "        <option>foo</option>"
-            + "    </select>"
-            + "    <input type='password' name='password1' />"
-            + "    <input type='radio' name='radio1' />"
-            + "    <input type='reset' name='reset1' />"
-            + "    <button type='reset' name='reset2'></button>"
-            + "    <input type='submit' name='submit1' />"
-            + "    <button type='submit' name='submit2'></button>"
-            + "    <input type='text' name='textInput1' />"
-            + "    <textarea name='textarea1'>foo</textarea>"
-            + "</form>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='button' name='button1'></button>\n"
+            + "    <button type='button' name='button2'></button>\n"
+            + "    <input type='checkbox' name='checkbox1' />\n"
+            + "    <input type='file' name='fileupload1' />\n"
+            + "    <input type='hidden' name='hidden1' />\n"
+            + "    <select name='select1'>\n"
+            + "        <option>foo</option>\n"
+            + "    </select>\n"
+            + "    <select multiple='multiple' name='select2'>\n"
+            + "        <option>foo</option>\n"
+            + "    </select>\n"
+            + "    <input type='password' name='password1' />\n"
+            + "    <input type='radio' name='radio1' />\n"
+            + "    <input type='reset' name='reset1' />\n"
+            + "    <button type='reset' name='reset2'></button>\n"
+            + "    <input type='submit' name='submit1' />\n"
+            + "    <button type='submit' name='submit2'></button>\n"
+            + "    <input type='text' name='textInput1' />\n"
+            + "    <textarea name='textarea1'>foo</textarea>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -176,17 +176,17 @@ public class InputTest extends WebTestCase {
      */
     public void testCheckedAttribute_Checkbox() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function test() {"
             + "    alert(document.form1.checkbox1.checked)\n"
             + "    document.form1.checkbox1.checked=true\n"
             + "    alert(document.form1.checkbox1.checked)\n"
             + "}"
-            + "</script></head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <input type='cheCKbox' name='checkbox1' id='checkbox1' value='foo' />"
-            + "</form>"
+            + "</script></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='cheCKbox' name='checkbox1' id='checkbox1' value='foo' />\n"
+            + "</form>\n"
             + "<a href='javascript:test()' id='clickme'>click me</a>\n"
             + "</body></html>";
 
@@ -206,7 +206,7 @@ public class InputTest extends WebTestCase {
      */
     public void testCheckedAttribute_Radio() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function test() {"
             + "    alert(document.form1.radio1[0].checked)\n"
             + "    alert(document.form1.radio1[1].checked)\n"
@@ -216,13 +216,13 @@ public class InputTest extends WebTestCase {
             + "    alert(document.form1.radio1[1].checked)\n"
             + "    alert(document.form1.radio1[2].checked)\n"
             + "}"
-            + "</script></head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <input type='radio' name='radio1' id='radioA' value='a' checked='checked'/>"
-            + "    <input type='RADIO' name='radio1' id='radioB' value='b' />"
-            + "    <input type='radio' name='radio1' id='radioC' value='c' />"
-            + "</form>"
+            + "</script></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='radio' name='radio1' id='radioA' value='a' checked='checked'/>\n"
+            + "    <input type='RADIO' name='radio1' id='radioB' value='b' />\n"
+            + "    <input type='radio' name='radio1' id='radioC' value='c' />\n"
+            + "</form>\n"
             + "<a href='javascript:test()' id='clickme'>click me</a>\n"
             + "</body></html>";
 
@@ -251,7 +251,7 @@ public class InputTest extends WebTestCase {
      */
     public void testDisabledAttribute() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function test() {"
             + "    alert(document.form1.button1.disabled)\n"
             + "    alert(document.form1.button2.disabled)\n"
@@ -263,13 +263,13 @@ public class InputTest extends WebTestCase {
             + "    alert(document.form1.button2.disabled)\n"
             + "    alert(document.form1.button3.disabled)\n"
             + "}"
-            + "</script></head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <input type='submit' name='button1' value='1'/>"
-            + "    <input type='submit' name='button2' value='2' disabled/>"
-            + "    <input type='submit' name='button3' value='3'/>"
-            + "</form>"
+            + "</script></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='submit' name='button1' value='1'/>\n"
+            + "    <input type='submit' name='button2' value='2' disabled/>\n"
+            + "    <input type='submit' name='button3' value='3'/>\n"
+            + "</form>\n"
             + "<a href='javascript:test()' id='clickme'>click me</a>\n"
             + "</body></html>";
 
@@ -300,15 +300,15 @@ public class InputTest extends WebTestCase {
      */
     public void testInputValue() throws Exception {
         final String htmlContent =
-            "<html><head><title>foo</title><script>"
+            "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + " document.form1.textfield1.value = 'blue';"
+            + " document.form1.textfield1.value = 'blue';\n"
             + "}\n"
-            + "</script></head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1' method='post' onsubmit='doTest()'>"
-            + " <input type='text' name='textfield1' id='textfield1' value='foo' />"
-            + "</form>"
+            + "</script></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' method='post' onsubmit='doTest()'>\n"
+            + " <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "</form>\n"
             + "</body></html>";
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
@@ -329,15 +329,15 @@ public class InputTest extends WebTestCase {
      */
     public void testInputSelect_NotDefinedAsPropertyAndFunction() throws Exception {
         final String htmlContent =
-            "<html><head><title>foo</title><script>"
+            "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + " document.form1.textfield1.select();"
+            + " document.form1.textfield1.select();\n"
             + "}\n"
-            + "</script></head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1' method='post' onsubmit='doTest()'>"
-            + " <input type='text' name='textfield1' id='textfield1' value='foo' />"
-            + "</form>"
+            + "</script></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' method='post' onsubmit='doTest()'>\n"
+            + " <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "</form>\n"
             + "</body></html>";
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
@@ -357,12 +357,12 @@ public class InputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testThisDotFormInOnClick() throws Exception {
-        final String htmlContent = "<html>"
-            + "<head><title>First</title></head>"
-            + "<body>"
-            + "<form name='form1'>"
-            + "<input type='submit' name='button1' onClick=\"this.form.target='_blank'; return false;\">"
-            + "</form>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form name='form1'>\n"
+            + "<input type='submit' name='button1' onClick=\"this.form.target='_blank'; return false;\">\n"
+            + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -379,8 +379,8 @@ public class InputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFieldDotForm() throws Exception {
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title><script>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title><script>\n"
             + "function test(){\n"
             + "  var f = document.form1;\n"
             + "  alert(f == f.mySubmit.form);\n"
@@ -389,15 +389,15 @@ public class InputTest extends WebTestCase {
             + "  alert(f == document.getElementById('myImage').form);\n"
             + "  alert(f == f.myButton.form);\n"
             + "}\n"
-            + "</script></head>"
-            + "<body onload='test()'>"
-            + "<form name='form1'>"
-            + "<input type='submit' name='mySubmit'>"
-            + "<input type='text' name='myText'>"
-            + "<input type='password' name='myPassword'>"
-            + "<input type='button' name='myButton'>"
-            + "<input type='image' src='foo' name='myImage' id='myImage'>"
-            + "</form>"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<form name='form1'>\n"
+            + "<input type='submit' name='mySubmit'>\n"
+            + "<input type='text' name='myText'>\n"
+            + "<input type='password' name='myPassword'>\n"
+            + "<input type='button' name='myButton'>\n"
+            + "<input type='image' src='foo' name='myImage' id='myImage'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -411,17 +411,17 @@ public class InputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInputNameChange() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title><script>"
+        final String htmlContent = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
-            + " document.form1.textfield1.name = 'changed';"
-            + " alert(document.form1.changed.name);"
+            + " document.form1.textfield1.name = 'changed';\n"
+            + " alert(document.form1.changed.name);\n"
             + "}\n"
-            + "</script></head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1' method='post' onsubmit='doTest()'>"
-            + " <input type='text' name='textfield1' id='textfield1' value='foo' />"
-            + " <input type='submit' name='button1' value='pushme' />"
-            + "</form>"
+            + "</script></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' method='post' onsubmit='doTest()'>\n"
+            + " <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + " <input type='submit' name='button1' value='pushme' />\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -446,13 +446,13 @@ public class InputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnChange() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "</head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + " <input type='text' name='text1' onchange='alert(this.value)'>"
-            + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>"
-            + "</form>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "</head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + " <input type='text' name='text1' onchange='alert(this.value)'>\n"
+            + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -473,16 +473,16 @@ public class InputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnChangeSetByJavaScript() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "</head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + " <input type='text' name='text1' id='text1'>"
-            + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>"
-            + "</form>"
-            + "<script>"
-            + "document.getElementById('text1').onchange= function(event) { alert(this.value) };"
-            + "</script>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "</head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + " <input type='text' name='text1' id='text1'>\n"
+            + "<input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "document.getElementById('text1').onchange= function(event) { alert(this.value) };\n"
+            + "</script>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -510,11 +510,11 @@ public class InputTest extends WebTestCase {
             + "function doTest() {\n"
             + "    alert(document.myForm.myRadio.value);\n"
             + "    alert(document.myForm.myCheckbox.value);\n"
-            + "}\n</script></head>"
+            + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
-            + "<input type='radio' name='myRadio'/>"
-            + "<input type='checkbox' name='myCheckbox'/>"
+            + "<input type='radio' name='myRadio'/>\n"
+            + "<input type='checkbox' name='myCheckbox'/>\n"
             + "</form></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -539,10 +539,10 @@ public class InputTest extends WebTestCase {
             + "    alert(input.type);\n"
             + "    input.setAttribute('type', 'image');\n"
             + "    alert(input.type);\n"
-            + "}\n</script></head>"
+            + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
-            + "<input type='radio' name='myRadio'/>"
+            + "<input type='radio' name='myRadio'/>\n"
             + "</form></body></html>";
 
         final String[] expectedAlerts = {"radio", "hidden", "image"};
@@ -625,8 +625,8 @@ public class InputTest extends WebTestCase {
             + "    alert(input.type);\n"
             + "    input.type = 'hidden';\n"
             + "    alert(input.type);\n"
-            + "    myForm.appendChild(input);"
-            + "}\n</script></head>"
+            + "    myForm.appendChild(input);\n"
+            + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "</form></body></html>";
@@ -644,7 +644,7 @@ public class InputTest extends WebTestCase {
      */
     public void testButtonOutsideForm() throws Exception {
         final String content
-            = "<html><head><title>foo</title></head><body>"
+            = "<html><head><title>foo</title></head><body>\n"
             + "<button id='clickMe' onclick='alert(123)'>click me</button>\n"
             + "</body></html>";
 
@@ -666,12 +666,12 @@ public class InputTest extends WebTestCase {
     public void testOnChangeCallsFormSubmit() throws Exception {
 
         final String content
-            = "<html><head>"
-            + "</head>"
-            + "<body>"
-            + "<form name='test' action='foo'>"
-            + "<input name='field1' onchange='submit()'>"
-            + "</form>"
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form name='test' action='foo'>\n"
+            + "<input name='field1' onchange='submit()'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final WebClient webClient = new WebClient();

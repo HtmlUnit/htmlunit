@@ -69,10 +69,10 @@ public class HtmlFrameTest extends WebTestCase {
      */
     public void testSrcOfBlankAndEmpty() throws Exception {
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='20%,80%'>"
-            + "    <frame src='' id='frame1'>"
-            + "    <frame src='about:blank'  id='frame2'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frame src='' id='frame1'>\n"
+            + "    <frame src='about:blank'  id='frame2'>\n"
             + "</frameset></html>";
         final HtmlPage page = loadPage(firstContent);
 
@@ -95,10 +95,10 @@ public class HtmlFrameTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='20%,80%'>"
-            + "    <frame id='frame1'>"
-            + "    <frame onload='alert(this.tagName)' id='frame2'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frame id='frame1'>\n"
+            + "    <frame onload='alert(this.tagName)' id='frame2'>\n"
             + "</frameset></html>";
         final String[] expectedAlerts = {"FRAME"};
 
@@ -122,12 +122,12 @@ public class HtmlFrameTest extends WebTestCase {
      */
     public void testDocumentWrite() throws Exception {
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='20%,80%'>"
-            + "    <frame src='' name='frame1' id='frame1'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frame src='' name='frame1' id='frame1'>\n"
             + "    <frame onload=\"frame1.document.open();frame1.document.write("
             + "'<html><head><title>generated</title></head><body>generated</body></html>');"
-            + "frame1.document.close()\"  id='frame2'>"
+            + "frame1.document.close()\"  id='frame2'>\n"
             + "</frameset></html>";
         final HtmlPage page = loadPage(firstContent);
         
@@ -150,9 +150,9 @@ public class HtmlFrameTest extends WebTestCase {
             new MockWebConnection(webClient);
 
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='100%'>"
-            + "    <frame src='foo.txt'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='100%'>\n"
+            + "    <frame src='foo.txt'>\n"
             + "</frameset></html>";
         webConnection.setDefaultResponse("foo", 200, "OK", "text/plain");
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -175,14 +175,14 @@ public class HtmlFrameTest extends WebTestCase {
             = "<html><head><body>Not found</body></html>";
         
         final String firstContent
-            = "<html><head><title>First</title></head>"
-            + "<frameset cols='130,*'>"
-            + "  <frame scrolling='no' name='left' src='" + "failing_url" + "' frameborder='1' />"
-            + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />"
-            + "  <noframes>"
-            + "    <body>Frames not supported</body>"
-            + "  </noframes>"
-            + "</frameset>"
+            = "<html><head><title>First</title></head>\n"
+            + "<frameset cols='130,*'>\n"
+            + "  <frame scrolling='no' name='left' src='" + "failing_url" + "' frameborder='1' />\n"
+            + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
+            + "  <noframes>\n"
+            + "    <body>Frames not supported</body>\n"
+            + "  </noframes>\n"
+            + "</frameset>\n"
             + "</html>";
 
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";

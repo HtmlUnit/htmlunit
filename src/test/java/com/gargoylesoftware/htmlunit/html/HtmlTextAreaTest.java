@@ -66,9 +66,9 @@ public class HtmlTextAreaTest extends WebTestCase {
     public void testFormSubmission_OriginalData()
         throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<textarea name='textArea1'>foo</textarea>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1'>foo</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -90,9 +90,9 @@ public class HtmlTextAreaTest extends WebTestCase {
     public void testFormSubmission_NewValue()
         throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<textarea name='textArea1'>foo</textarea>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1'>foo</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -112,9 +112,9 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     public void testGetText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<textarea name='textArea1'> foo \n bar </textarea>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");

@@ -75,14 +75,14 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-            = "<html><head><title>First</title></head>"
-            + "<frameset cols='130,*'>"
-            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />"
-            + "  <frame scrolling='auto' name='right' src='http://third' frameborder='1' />"
-            + "  <noframes>"
-            + "    <body>Frames not supported</body>"
-            + "  </noframes>"
-            + "</frameset>"
+            = "<html><head><title>First</title></head>\n"
+            + "<frameset cols='130,*'>\n"
+            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />\n"
+            + "  <frame scrolling='auto' name='right' src='http://third' frameborder='1' />\n"
+            + "  <noframes>\n"
+            + "    <body>Frames not supported</body>\n"
+            + "  </noframes>\n"
+            + "</frameset>\n"
             + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
@@ -116,9 +116,9 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-            = "<html><head><title>First</title></head>"
-            + "<body>"
-            + "  <iframe name='left' src='http://second' />"
+            = "<html><head><title>First</title></head>\n"
+            + "<body>\n"
+            + "  <iframe name='left' src='http://second' />\n"
             + "  some stuff"
             + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -150,31 +150,31 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String framesContent
-            = "<html><head><title>Frames</title></head>"
-            + "<frameset rows='110,*'>"
-            + "  <frame src='subdir1/menu.html' name='menu' scrolling='no' border='0' noresize>"
-            + "  <frame src='subdir2/first.html' name='test' border='0' auto>"
-            + "</frameset>"
-            + "<noframes>"
-            + "  <body>Frames not supported</body>"
-            + "</noframes>"
+            = "<html><head><title>Frames</title></head>\n"
+            + "<frameset rows='110,*'>\n"
+            + "  <frame src='subdir1/menu.html' name='menu' scrolling='no' border='0' noresize>\n"
+            + "  <frame src='subdir2/first.html' name='test' border='0' auto>\n"
+            + "</frameset>\n"
+            + "<noframes>\n"
+            + "  <body>Frames not supported</body>\n"
+            + "</noframes>\n"
             + "</html>";
         final String menuContent
-            = "<html><head><title>Menu</title></head>"
-            + "<body>"
-            + "  <script language='javascript'>"
+            = "<html><head><title>Menu</title></head>\n"
+            + "<body>\n"
+            + "  <script language='javascript'>\n"
             + "    function changeEditPage() {parent.test.location='../second.html';}"
-            + "  </script>"
+            + "  </script>\n"
             + "  <a name ='changePage' onClick='javascript:changeEditPage();' href='#'>Click</a>."
-            + "</body>"
+            + "</body>\n"
             + "</html>";
         final String firstContent
-            = "<html><head><title>First</title></head>"
-            + "<body>First/body>"
+            = "<html><head><title>First</title></head>\n"
+            + "<body>First/body>\n"
             + "</html>";
         final String secondContent
-            = "<html><head><title>Second</title></head>"
-            + "<body>Second</body>"
+            = "<html><head><title>Second</title></head>\n"
+            + "<body>Second</body>\n"
             + "</html>";
         final String baseUrl = "http://framestest";
 
@@ -218,23 +218,23 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String framesContent
-            = "<html><head><title>Main</title>"
-            + "</head>"
-            + "  <frameset cols='18%,*'>"
-            + "    <frame name='menu' src='http://second'>"
-            + "    <frame name='button_pallete' src='about:blank'>"
-            + "  </frameset>"
+            = "<html><head><title>Main</title>\n"
+            + "</head>\n"
+            + "  <frameset cols='18%,*'>\n"
+            + "    <frame name='menu' src='http://second'>\n"
+            + "    <frame name='button_pallete' src='about:blank'>\n"
+            + "  </frameset>\n"
             + "</html>";
 
-        final String menuContent = "<html><head><title>Menu</title>"
-            + "  <script>"
+        final String menuContent = "<html><head><title>Menu</title>\n"
+            + "  <script>\n"
             + "    function init()"
             + "    {"
-            + "      var oFrame = top.button_pallete;"
+            + "      var oFrame = top.button_pallete;\n"
             + "      alert((oFrame == null) ? 'Failure' : 'Success'); "
             + "    }"
-            + "  </script>"
-            + "</head>"
+            + "  </script>\n"
+            + "</head>\n"
             + "<body onload='init()'></body></html>";
 
         final WebClient webClient = new WebClient();
@@ -263,13 +263,13 @@ public class HtmlFrameSetTest extends WebTestCase {
         throws Exception {
 
         final String firstContent
-            = "<html><head><title>First</title></head>"
-            + "<frameset cols='130,*'>"
-            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />"
-            + "  <noframes>"
-            + "    <body>Frames not supported</body>"
-            + "  </noframes>"
-            + "</frameset>"
+            = "<html><head><title>First</title></head>\n"
+            + "<frameset cols='130,*'>\n"
+            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />\n"
+            + "  <noframes>\n"
+            + "    <body>Frames not supported</body>\n"
+            + "  </noframes>\n"
+            + "</frameset>\n"
             + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
@@ -293,18 +293,18 @@ public class HtmlFrameSetTest extends WebTestCase {
      */
     public void testScriptUnderNoFrames() throws Exception {
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='100%'>"
-            + "  <frame src='http://second'' id='frame1'/>"
-            + "  <noframes>"
-            + "    <div><script>alert(1);</script></div>"
-            + "    <script src='http://third'></script>"
-            + "   </noframes>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='100%'>\n"
+            + "  <frame src='http://second'' id='frame1'/>\n"
+            + "  <noframes>\n"
+            + "    <div><script>alert(1);</script></div>\n"
+            + "    <script src='http://third'></script>\n"
+            + "   </noframes>\n"
             + "</frameset></html>";
         final String secondContent
             = "<html><body><script>alert(2);</script></body></html>";
         final String thirdContent
-            = "alert('3');";
+            = "alert('3');\n";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);

@@ -62,9 +62,9 @@ public class TableElementCreatorTest extends WebTestCase {
      */
     public void testGetTableCell() throws Exception {
         final String htmlContent
-            = "<html><head><title>test</title></head>"
-            + "<body><table>"
-            + "<tr><form><td>a</td></form></tr>"
+            = "<html><head><title>test</title></head>\n"
+            + "<body><table>\n"
+            + "<tr><form><td>a</td></form></tr>\n"
             + "</table></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 

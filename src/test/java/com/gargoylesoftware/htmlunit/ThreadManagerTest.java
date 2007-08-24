@@ -94,7 +94,7 @@ public class ThreadManagerTest extends WebTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<a onclick='clearTimeout(threadID);' id='clickme'/>"
+            + "<a onclick='clearTimeout(threadID);' id='clickme'/>\n"
             + "</body>\n"
             + "</html>";
 
@@ -124,11 +124,11 @@ public class ThreadManagerTest extends WebTestCase {
             + "    function test() {\n"
             + "      threadID = setInterval('doAlert()', 100);\n"
             + "    }\n"
-            + "    var iterationNumber=0;"
+            + "    var iterationNumber=0;\n"
             + "    function doAlert() {\n"
             + "      alert('blah');\n"
             + "      if (++iterationNumber >= 3) {"
-            + "        clearInterval(threadID);"
+            + "        clearInterval(threadID);\n"
             + "      }"
             + "    }\n"
             + "  </script>\n"
@@ -153,18 +153,18 @@ public class ThreadManagerTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testNavigationStopThreadsInChildWindows() throws Exception {
-        final String firstContent = "<html><head><title>First</title></head><body>"
+        final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND.toExternalForm()
-            + "'>"
+            + "'>\n"
             + "<a href='"
             + URL_THIRD.toExternalForm()
-            + "' id='clickme'>click me</a>"
+            + "' id='clickme'>click me</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body>"
-            + "<script>"
-            + "setInterval('', 10000);"
-            + "</script>"
+        final String secondContent = "<html><head><title>Second</title></head><body>\n"
+            + "<script>\n"
+            + "setInterval('', 10000);\n"
+            + "</script>\n"
             + "</body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = new WebClient();

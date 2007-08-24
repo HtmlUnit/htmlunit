@@ -62,7 +62,7 @@ public class OptionTest extends WebTestCase {
      */
     public void testReadPropsBeforeAdding() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var oOption = new Option('some text', 'some value');\n"
             + "    alert(oOption.text);\n"
@@ -74,8 +74,8 @@ public class OptionTest extends WebTestCase {
             + "    alert(oOption.text);\n"
             + "    alert(oOption.value);\n"
             + "    alert(oOption.selected);\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {
@@ -97,17 +97,17 @@ public class OptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelectingOrphanedOptionCreatedByDocument() throws Exception {
-        final String content = "<html>"
-            + "<body>"
-            + "<form name='myform'/>"
-            + "<script language='javascript'>"
-            + "var select = document.createElement('select');"
-            + "var opt = document.createElement('option');"
-            + "opt.value = 'x';"
-            + "opt.selected = true;"
-            + "select.appendChild(opt);"
-            + "document.myform.appendChild(select);"
-            + "</script>"
+        final String content = "<html>\n"
+            + "<body>\n"
+            + "<form name='myform'/>\n"
+            + "<script language='javascript'>\n"
+            + "var select = document.createElement('select');\n"
+            + "var opt = document.createElement('option');\n"
+            + "opt.value = 'x';\n"
+            + "opt.selected = true;\n"
+            + "select.appendChild(opt);\n"
+            + "document.myform.appendChild(select);\n"
+            + "</script>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -118,20 +118,20 @@ public class OptionTest extends WebTestCase {
      */
     public void testSetSelected() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  var sel = document.form1.select1;"
-            + "  alert(sel.selectedIndex);"
-            + "  sel.options[0].selected = false;"
-            + "  alert(sel.selectedIndex);"
-            + "}</script></head><body onload='doTest()'>"
-            + "<form name='form1'>"
-            + "    <select name='select1' onchange='this.form.submit()'>"
-            + "        <option value='option1' name='option1'>One</option>"
-            + "        <option value='option2' name='option2'>Two</option>"
-            + "        <option value='option3' name='option3' selected>Three</option>"
-            + "    </select>"
-            + "</form>"
+            + "  var sel = document.form1.select1;\n"
+            + "  alert(sel.selectedIndex);\n"
+            + "  sel.options[0].selected = false;\n"
+            + "  alert(sel.selectedIndex);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1' onchange='this.form.submit()'>\n"
+            + "        <option value='option1' name='option1'>One</option>\n"
+            + "        <option value='option2' name='option2'>Two</option>\n"
+            + "        <option value='option3' name='option3' selected>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"2", "2"};
@@ -150,17 +150,17 @@ public class OptionTest extends WebTestCase {
      */
     public void testSetAttribute() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  document.getElementById('option1').setAttribute('class', 'bla bla');"
-            + "  var o = new Option('some text', 'some value');"
+            + "  document.getElementById('option1').setAttribute('class', 'bla bla');\n"
+            + "  var o = new Option('some text', 'some value');\n"
             + "  o.setAttribute('class', 'myClass');\n"
-            + "}</script></head><body onload='doTest()'>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option value='option1' id='option1' name='option1'>One</option>"
-            + "    </select>"
-            + "</form>"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option value='option1' id='option1' name='option1'>One</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {};
@@ -178,26 +178,26 @@ public class OptionTest extends WebTestCase {
      */
     public void testOptionIndexOutOfBound() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest()"
             + "{"
-            + "  var options = document.getElementById('testSelect').options;"
-            + "  alert(options[55]);"
+            + "  var options = document.getElementById('testSelect').options;\n"
+            + "  alert(options[55]);\n"
             + "  try"
             + "  {"
-            + "    alert(options[-55]);"
+            + "    alert(options[-55]);\n"
             + "  }"
             + "  catch (e)"
             + "  {"
-            + "    alert('caught exception for negative index');"
+            + "    alert('caught exception for negative index');\n"
             + "  }"
             + "}"
-            + "</script></head><body onload='doTest()'>"
-            + "<form name='form1'>"
-            + "    <select name='select1' id='testSelect'>"
-            + "        <option value='option1' name='option1'>One</option>"
-            + "    </select>"
-            + "</form>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1' id='testSelect'>\n"
+            + "        <option value='option1' name='option1'>One</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"undefined", "caught exception for negative index"};

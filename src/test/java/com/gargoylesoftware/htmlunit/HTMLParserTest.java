@@ -96,22 +96,22 @@ public class HTMLParserTest extends WebTestCase {
      */
     public void testBadlyFormedHTML() throws Exception {
         final String content
-            = "<html><head><title>first</title>"
-            + "<script>"
+            = "<html><head><title>first</title>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
             + "  alert(document.getElementById('myInput').form.id);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
-            + "<table>"
-            + "<form name='myForm' action='foo' id='myForm'>"
-            + "<tr><td>"
-            + "<input type='text' name='myInput' id='myInput'/>"
-            + "</td></tr>"
-            + "</form>"
-            + "</table>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<table>\n"
+            + "<form name='myForm' action='foo' id='myForm'>\n"
+            + "<tr><td>\n"
+            + "<input type='text' name='myInput' id='myInput'/>\n"
+            + "</td></tr>\n"
+            + "</form>\n"
+            + "</table>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -136,17 +136,17 @@ public class HTMLParserTest extends WebTestCase {
         // I could adapt the TagBalancer to make it work except with this <meta http-equiv...
         // (it worked with <meta name=...)
         final String content
-            = "<html><head><mainA3>"
-            + "<meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>"
-            + "<title>first</title>"
-            + "<script>"
+            = "<html><head><mainA3>\n"
+            + "<meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
+            + "<title>first</title>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
             + "  alert(document.title);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();

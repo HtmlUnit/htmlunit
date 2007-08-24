@@ -81,32 +81,32 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAll_IndexByInt() throws Exception {
-        final String firstContent = "<html><head>"
-            + "<script>"
+        final String firstContent = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  dumpAll('body');"
-            + "  dumpAll('testDiv');"
-            + "  dumpAll('testA');"
-            + "  dumpAll('testImg');"
-            + "  dumpAll('testDiv2');"
+            + "  dumpAll('body');\n"
+            + "  dumpAll('testDiv');\n"
+            + "  dumpAll('testA');\n"
+            + "  dumpAll('testImg');\n"
+            + "  dumpAll('testDiv2');\n"
             + "}"
             + "function dumpAll(_id)"
             + "{"
-            + "  var oNode = document.getElementById(_id);"
-            + "  var col = oNode.all;"
-            + "  var str = 'all node for ' + _id + ': ';"
+            + "  var oNode = document.getElementById(_id);\n"
+            + "  var col = oNode.all;\n"
+            + "  var str = 'all node for ' + _id + ': ';\n"
             + "  for (var i=0; i<col.length; i++)"
             + "  {"
-            + "    str += col[i].tagName + ' ';"
+            + "    str += col[i].tagName + ' ';\n"
             + "  }"
-            + "  alert(str);"
+            + "  alert(str);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()' id='body'>"
-            + "<div id='testDiv'>foo<a href='foo.html' id='testA'><img src='foo.png' id='testImg'></a></div>"
-            + "<div id='testDiv2'>foo</div>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()' id='body'>\n"
+            + "<div id='testDiv'>foo<a href='foo.html' id='testA'><img src='foo.png' id='testImg'></a></div>\n"
+            + "<div id='testDiv2'>foo</div>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
@@ -157,8 +157,8 @@ public class HTMLElementTest extends WebTestCase {
             + "<script>\n"
             + "function test()"
             + "{"
-            + "    alert(document == document.body.ownerDocument);"
-            + "    alert(document == document.getElementById('foo').ownerDocument);"
+            + "    alert(document == document.body.ownerDocument);\n"
+            + "    alert(document == document.getElementById('foo').ownerDocument);\n"
             + "}"
             + "</script>\n"
             + "</head>\n"
@@ -318,7 +318,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<tr id='r1'><td>1</td><td>2</td></tr>\n"
             + "<tr id='r2'><td>3</td><td>4</td></tr>\n"
             + "</table>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         final String[] expectedAlerts = {"all = 4", "row = 2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
@@ -334,23 +334,23 @@ public class HTMLElementTest extends WebTestCase {
      */
     public void testGetElementsByTagNameCollection() throws Exception {
         final String content
-            = "<html><head>"
-            + "<script>"
+            = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var form1 = document.getElementById('form1');"
-            + "  var elements = form1.getElementsByTagName('input');"
-            + "  alert(elements['one'].name);"
-            + "  alert(elements['two'].name);"
-            + "  alert(elements['three'].name);"
+            + "  var form1 = document.getElementById('form1');\n"
+            + "  var elements = form1.getElementsByTagName('input');\n"
+            + "  alert(elements['one'].name);\n"
+            + "  alert(elements['two'].name);\n"
+            + "  alert(elements['three'].name);\n"
             + "}"
-            + "</script></head>"
-            + "<body onload='test()'>"
-            + "<form id='form1'>"
-            + "<input id='one' name='first' type='text'>"
-            + "<input id='two' name='second' type='text'>"
-            + "<input id='three' name='third' type='text'>"
-            + "</form>"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<input id='one' name='first' type='text'>\n"
+            + "<input id='two' name='second' type='text'>\n"
+            + "<input id='three' name='third' type='text'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"first", "second", "third"};
@@ -396,7 +396,7 @@ public class HTMLElementTest extends WebTestCase {
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p id='pid' class='x'>text</p>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -414,13 +414,13 @@ public class HTMLElementTest extends WebTestCase {
             + "<script>\n"
             + "function doTest() {\n"
             + "    var ele = document.getElementById('pid');\n"
-            + "    ele.className = 'z';"
+            + "    ele.className = 'z';\n"
             + "    var aClass = ele.className;\n"
             + "    alert('the class is ' + aClass);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p id='pid' class='x'>text</p>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -667,12 +667,12 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetInnerHTMLEmpty() throws Exception {
-        final String content = "<html><head></head><body>"
-                + "<div id='testDiv'>foo</div>"
-                + "<script language='javascript'>"
-                + "    var node = document.getElementById('testDiv');"
-                + "    node.innerHTML = '';"
-                + "    alert('Empty ChildrenLength: ' + node.childNodes.length);"
+        final String content = "<html><head></head><body>\n"
+                + "<div id='testDiv'>foo</div>\n"
+                + "<script language='javascript'>\n"
+                + "    var node = document.getElementById('testDiv');\n"
+                + "    node.innerHTML = '';\n"
+                + "    alert('Empty ChildrenLength: ' + node.childNodes.length);\n"
                 + "</script></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -699,12 +699,12 @@ public class HTMLElementTest extends WebTestCase {
      */
     private void testSetInnerHTMLNull(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
-        final String content = "<html><head></head><body>"
-                + "<div id='testDiv'>foo</div>"
-                + "<script language='javascript'>"
-                + "    var node = document.getElementById('testDiv');"
-                + "    node.innerHTML = null;"
-                + "    alert('Null ChildrenLength: ' + node.childNodes.length);"
+        final String content = "<html><head></head><body>\n"
+                + "<div id='testDiv'>foo</div>\n"
+                + "<script language='javascript'>\n"
+                + "    var node = document.getElementById('testDiv');\n"
+                + "    node.innerHTML = null;\n"
+                + "    alert('Null ChildrenLength: ' + node.childNodes.length);\n"
                 + "</script></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -1258,13 +1258,13 @@ public class HTMLElementTest extends WebTestCase {
      */
     public void testClickHashAnchor() throws Exception {
         final String content
-            = "<html><head><title>HashAnchor</title></head>"
-            + "<body>"
-            + "  <script language='javascript'>"
+            = "<html><head><title>HashAnchor</title></head>\n"
+            + "<body>\n"
+            + "  <script language='javascript'>\n"
             + "    function test() {alert('test hash');}"
-            + "  </script>"
-            + "  <a onClick='javascript:test();' href='#' name='hash'>Click</a>"
-            + "</body>"
+            + "  </script>\n"
+            + "  <a onClick='javascript:test();' href='#' name='hash'>Click</a>\n"
+            + "</body>\n"
             + "</html>";
         final String[] expectedAlerts = {"test hash"};
         // first use direct load
@@ -1307,7 +1307,7 @@ public class HTMLElementTest extends WebTestCase {
             + "    }\n"
             + "    </script>\n"
             + "</head>\n"
-            + "<body onload='doTest()'><div id='aDiv' name='removeMe'>"
+            + "<body onload='doTest()'><div id='aDiv' name='removeMe'>\n"
             + "</div></body>\n"
             + "</html>";
         final String[] expectedAlerts = {"removeMe", "null"};
@@ -1327,9 +1327,9 @@ public class HTMLElementTest extends WebTestCase {
               + "<head>\n"
               + "    <title>Test</title>\n"
               + "</head>\n"
-              + "<body>"
+              + "<body>\n"
               + "</div></body>\n"
-              + "<div id='div1'>foo</div>"
+              + "<div id='div1'>foo</div>\n"
               + "<script>\n"
               + "function alertOffsets(_oElt)\n"
               + "{\n"
@@ -1358,9 +1358,9 @@ public class HTMLElementTest extends WebTestCase {
               + "<head>\n"
               + "    <title>Test</title>\n"
               + "</head>\n"
-              + "<body>"
+              + "<body>\n"
               + "</div></body>\n"
-              + "<div id='div1'>foo</div>"
+              + "<div id='div1'>foo</div>\n"
               + "<script>\n"
               + "function alertScrolls(_oElt)\n"
               + "{\n"
@@ -1432,7 +1432,7 @@ public class HTMLElementTest extends WebTestCase {
             + "alertOffsetParent('div1');\n"
             + "alertOffsetParent('body1');\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body id='body1' onload='test()'>\n"
             + "<div id='div1'>\n"
             + "  <span id='span1'>\n"
@@ -1472,26 +1472,26 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testPrototype() throws Exception {
-        final String content = "<html><head><title>Prototype test</title>"
-            + "<script>"
+        final String content = "<html><head><title>Prototype test</title>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "    var d = document.getElementById('foo');"
+            + "    var d = document.getElementById('foo');\n"
             + "    alert(d.foo);\n"
-            + "    alert(d.myFunction);"
-            + "    var link = document.getElementById('testLink');"
+            + "    alert(d.myFunction);\n"
+            + "    var link = document.getElementById('testLink');\n"
             + "    alert(link.foo);\n"
-            + "    alert(link.myFunction);"
-            + "    HTMLElement.prototype.foo = 123;"
-            + "    HTMLElement.prototype.myFunction = function() { return 'from myFunction'; };"
-            + "    alert(d.foo);"
-            + "    alert(d.myFunction());"
+            + "    alert(link.myFunction);\n"
+            + "    HTMLElement.prototype.foo = 123;\n"
+            + "    HTMLElement.prototype.myFunction = function() { return 'from myFunction'; };\n"
+            + "    alert(d.foo);\n"
+            + "    alert(d.myFunction());\n"
             + "    alert(link.foo);\n"
-            + "    alert(link.myFunction());"
+            + "    alert(link.myFunction());\n"
             + "}"
-            + "</script></head><body onload='test()''>"
-            + "<div id='foo'>bla</div>"
-            + "<a id='testLink' href='foo'>bla</a>"
+            + "</script></head><body onload='test()''>\n"
+            + "<div id='foo'>bla</div>\n"
+            + "<a id='testLink' href='foo'>bla</a>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"undefined", "undefined", "undefined", "undefined",
@@ -1517,16 +1517,16 @@ public class HTMLElementTest extends WebTestCase {
         throws Exception {
 
         final String content
-            = "<html id='htmlID'>"
-            + "<head>"
-            + "</head>"
-            + "<body>"
-            + "<div id='divID'/>"
-            + "<script language=\"javascript\">"
-            + "    alert(document.getElementById('htmlID' ).parentElement);"
-            + "    alert(document.getElementById('divID'  ).parentElement);"
-            + "</script>"
-            + "</body>"
+            = "<html id='htmlID'>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<div id='divID'/>\n"
+            + "<script language=\"javascript\">\n"
+            + "    alert(document.getElementById('htmlID').parentElement);\n"
+            + "    alert(document.getElementById('divID' ).parentElement);\n"
+            + "</script>\n"
+            + "</body>\n"
             + "</html>";
 
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -1555,7 +1555,7 @@ public class HTMLElementTest extends WebTestCase {
     }
     
     private void testIEStyle(final String styleProperty, final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html>"
+        final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1606,7 +1606,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     private void testGetBoundingClientRect(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    d1.getBoundingClientRect().left;\n"
@@ -1632,7 +1632,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     private void testGetClientRects(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    d1.getClientRects();\n"

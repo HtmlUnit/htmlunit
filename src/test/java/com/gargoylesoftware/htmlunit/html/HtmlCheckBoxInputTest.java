@@ -69,9 +69,9 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     public void test_defaultState() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox");
@@ -91,10 +91,10 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
     public void test_onClick() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "    <input type='checkbox' name='checkbox' id='checkbox' "
-            + "onClick='alert(\"foo\");alert(event.type);'>Check me</input>"
+            + "onClick='alert(\"foo\");alert(event.type);'>Check me</input>\n"
             + "</form></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -119,10 +119,10 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     public void test_onClickThatSubmitsForm() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1' name='form1'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' name='form1'>\n"
             + "    <input type='checkbox' name='checkbox' id='checkbox' "
-            + "onClick='document.form1.submit()'>Check me</input>"
+            + "onClick='document.form1.submit()'>Check me</input>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox");
@@ -139,9 +139,9 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     public void testAsText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -156,11 +156,11 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnchangeFires() throws Exception {
-        final String content = "<html><head><title>foo</title>"
-            + "</head><body>"
-            + "<form>"
-            + "<input type='checkbox' id='chkbox' onchange='alert(\"foo\");' />"
-            + "</form>"
+        final String content = "<html><head><title>foo</title>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "<input type='checkbox' id='chkbox' onchange='alert(\"foo\");' />\n"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"foo"};
@@ -178,10 +178,10 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      */
     public void testSetChecked() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<form>"
-            + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='http://second'\">"
-            + "</form>"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form>\n"
+            + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='http://second'\">\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body></body></html>";

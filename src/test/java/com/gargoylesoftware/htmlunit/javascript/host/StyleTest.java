@@ -76,7 +76,7 @@ public class StyleTest extends WebTestCase {
             + "    style.color = 'pink';\n"
             + "    alert(style.color);\n"
             + "    alert(node.getAttribute('style'));\n"
-            + "}\n</script></head>"
+            + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
         final String[] expectedAlerts = {"black", "pink", "color: pink;"};
@@ -101,8 +101,8 @@ public class StyleTest extends WebTestCase {
             + "    alert(style.color);\n"
             + "    style.color = 'pink';\n"
             + "    alert(style.color);\n"
-            + "}\n</script></head>"
-            + "<body onload='doTest()'>"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -128,7 +128,7 @@ public class StyleTest extends WebTestCase {
             + "    alert(style.color);\n"
             + "    style.color = 'pink';\n"
             + "    alert(style.color);\n"
-            + "}\n</script></head>"
+            + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
         final String[] expectedAlerts = {"null", "", "pink"};
@@ -155,8 +155,8 @@ public class StyleTest extends WebTestCase {
             + "    oDiv.style.visibility = 'hidden';\n"
             + "    alert(oDiv.style.visibility);\n"
             + "    alert(oDiv.style.behavior);\n"
-            + "}\n</script></head>"
-            + "<body onload='doTest()'>"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
 
         final String[] expectedAlerts = {"", "hidden", "undefined"};
@@ -178,8 +178,8 @@ public class StyleTest extends WebTestCase {
             + "    var oDiv = document.getElementById('div1');\n"
             + "    alert(oDiv.style.behavior);\n"
             + "}\n"
-            + "</script></head>"
-            + "<body onload='doTest()'>"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
 
         final String[] expectedAlerts = {""};
@@ -196,16 +196,16 @@ public class StyleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnclickAccessStyle() throws Exception {
-        final String content = "<html><head><title>Color Change Page</title>"
-             + "<script>"
+        final String content = "<html><head><title>Color Change Page</title>\n"
+             + "<script>\n"
              + "function test(obj)"
              + "{"
-             + "   obj.style.backgroundColor = 'yellow';"
+             + "   obj.style.backgroundColor = 'yellow';\n"
              + "}"
-             + "</script>"
-             + "</head>"
-             + "<body>"
-             + "<span id='red' onclick='test(this)'>foo</span>"
+             + "</script>\n"
+             + "</head>\n"
+             + "<body>\n"
+             + "<span id='red' onclick='test(this)'>foo</span>\n"
              + "</body></html>";
 
         final HtmlPage page = loadPage(content);
@@ -222,8 +222,8 @@ public class StyleTest extends WebTestCase {
                 + "    alert(typeof oDiv.style.visibility);\n"
                 + "    alert(typeof oDiv.style.color);\n"
                 + "    alert(typeof oDiv.style.foo);\n"
-                + "}\n</script></head>"
-                + "<body onload='doTest()'>"
+                + "}\n</script></head>\n"
+                + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
 
         final String[] expectedAlerts = {"string", "string", "undefined"};
@@ -244,8 +244,8 @@ public class StyleTest extends WebTestCase {
                 + "    var oDiv1 = document.getElementById('div1');\n"
                 + "    oDiv1.style.pixelLeft = 123;\n"
                 + "    alert(oDiv1.style.pixelLeft);\n"
-                + "}\n</script></head>"
-                + "<body onload='doTest()'>"
+                + "}\n</script></head>\n"
+                + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
 
         final String[] expectedAlerts = {"123"};

@@ -70,8 +70,8 @@ public class IFrameTest extends WebTestCase {
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.getElementById('myIFrame').style == undefined);\n"
-            + "}\n</script></head>"
-            + "<body onload='doTest()'>"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "<iframe id='myIFrame' src='about:blank'></iframe></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -90,8 +90,8 @@ public class IFrameTest extends WebTestCase {
             + "function doTest() {\n"
             + "    alert(window.frames.length);\n"
             + "    alert(window.frames['myIFrame'].name);\n"
-            + "}\n</script></head>"
-            + "<body onload='doTest()'>"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "<iframe name='myIFrame' src='about:blank'></iframe></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -111,10 +111,10 @@ public class IFrameTest extends WebTestCase {
             + "function doTest() {\n"
             + "    alert(myIFrame.location);\n"
             + "    alert(Frame.location);\n"
-            + "}\n</script></head>"
-            + "<body onload='doTest()'>"
-            + "<iframe name='myIFrame' src='about:blank'></iframe>"
-            + "<iframe name='Frame' src='about:blank'></iframe>"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<iframe name='myIFrame' src='about:blank'></iframe>\n"
+            + "<iframe name='Frame' src='about:blank'></iframe>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -130,16 +130,16 @@ public class IFrameTest extends WebTestCase {
      */
     public void testOnLoadGetsIFrameElementByIdInParent() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head>"
-            + "<body>"
+            = "<html><head><title>First</title></head>\n"
+            + "<body>\n"
             + "<iframe id='myIFrame' src='frame.html'></iframe></body></html>";
 
         final String frameContent
             = "<html><head><title>Frame</title><script>\n"
             + "function doTest() {\n"
             + "    alert(parent.document.getElementById('myIFrame').tagName);\n"
-            + "}\n</script></head>"
-            + "<body onload='doTest()'>"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "</body></html>";
               
         final WebClient webClient = new WebClient();
@@ -163,15 +163,15 @@ public class IFrameTest extends WebTestCase {
      */
     public void testContentDocument() throws Exception {
         final String content
-            = "<html><head><title>first</title>"
-                + "<script>"
+            = "<html><head><title>first</title>\n"
+                + "<script>\n"
                 + "function test()\n"
                 + "{\n"
                 + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
                 + "}\n"
-                + "</script></head>"
-                + "<body onload='test()'>"
-                + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
                 + "</body></html>";
         final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -187,15 +187,15 @@ public class IFrameTest extends WebTestCase {
      */
     public void testFrameElement() throws Exception {
         final String content
-            = "<html><head><title>first</title>"
-                + "<script>"
+            = "<html><head><title>first</title>\n"
+                + "<script>\n"
                 + "function test()\n"
                 + "{\n"
                 + "  alert(document.getElementById('myFrame') == frames.foo.frameElement);\n"
                 + "}\n"
-                + "</script></head>"
-                + "<body onload='test()'>"
-                + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
                 + "</body></html>";
         final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);

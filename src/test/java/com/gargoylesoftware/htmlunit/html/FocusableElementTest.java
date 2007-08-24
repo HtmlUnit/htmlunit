@@ -91,7 +91,7 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickBodyTest(final String htmlBodyContent) throws Exception {
-        onClickPageTest("<html><head><title>foo</title></head><body>"
+        onClickPageTest("<html><head><title>foo</title></head><body>\n"
                 + htmlBodyContent
                 + "<script type=\"text/javascript\" language=\"JavaScript\">\n"
                 + "document.getElementById('focusId').focus();\n"
@@ -127,7 +127,7 @@ public class FocusableElementTest extends WebTestCase {
      */
     public void testArea_onblur_onfocus() throws Exception {
         onClickBodyTest("<map><area " + COMMON_ATTRIBUTES
-                + " shape=\"rect\" coords=\"0,0,1,1\" href=\".\">"
+                + " shape=\"rect\" coords=\"0,0,1,1\" href=\".\">\n"
                 + "</area></map>");
     }
 
@@ -147,7 +147,7 @@ public class FocusableElementTest extends WebTestCase {
      */
     public void testLabelContainsInput_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><label " + COMMON_ID + ">"
-                + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>");
+                + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>\n");
     }
 
     /**
@@ -156,8 +156,8 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLabelReferencesInput_onblur_onfocus() throws Exception {
-        onClickBodyTest("<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>"
-                + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>");
+        onClickBodyTest("<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>\n"
+                + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>\n");
     }
 
     /**
@@ -166,7 +166,7 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelect_onblur_onfocus() throws Exception {
-        onClickBodyTest("<form><select " + COMMON_ATTRIBUTES + "><option>1</option></select></form>");
+        onClickBodyTest("<form><select " + COMMON_ATTRIBUTES + "><option>1</option></select></form>\n");
     }
 
     /**
@@ -175,7 +175,7 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTextarea_onblur_onfocus() throws Exception {
-        onClickBodyTest("<form><textarea " + COMMON_ATTRIBUTES + ">Text</textarea></form>");
+        onClickBodyTest("<form><textarea " + COMMON_ATTRIBUTES + ">Text</textarea></form>\n");
     }
     
     /**
@@ -185,8 +185,8 @@ public class FocusableElementTest extends WebTestCase {
      */
     public void testOnBlurWith2Pages() throws Exception {
         final String html =
-            "<html>"
-            + "<head>"
+            "<html>\n"
+            + "<head>\n"
             + "<script>\n"
             + "var bCalled = false;\n"
             + "function testOnBlur()\n"
@@ -194,14 +194,14 @@ public class FocusableElementTest extends WebTestCase {
             + "  if (bCalled)\n"
             + "    throw 'problem!'; // to get the error immediately rather than an infinite loop\n"
             + "  bCalled = true;\n"
-            + "  document.getElementById('text2').focus()\n;"
+            + "  document.getElementById('text2').focus();\n"
             + "}\n"
-            + "</script>"
-            + "</head>"
-            + "<body onLoad='document.getElementById(\"text1\").focus()'>"
-            + "<input type='text' id='text1' onblur='testOnBlur()'>"
-            + "<input type='text' id='text2'>"
-            + "<a href='foo'>this page again</a>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onLoad='document.getElementById(\"text1\").focus()'>\n"
+            + "<input type='text' id='text1' onblur='testOnBlur()'>\n"
+            + "<input type='text' id='text2'>\n"
+            + "<a href='foo'>this page again</a>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);

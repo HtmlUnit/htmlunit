@@ -70,16 +70,16 @@ public class TextareaTest extends WebTestCase {
      */
     public void testGetValue() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "alert(document.form1.textarea1.value )\n"
             + "document.form1.textarea1.value='PoohBear';\n"
             + "alert(document.form1.textarea1.value )\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1' method='post' >"
-            + "<textarea name='textarea1' cols='45' rows='4'>1234</textarea>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' method='post' >\n"
+            + "<textarea name='textarea1' cols='45' rows='4'>1234</textarea>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -94,13 +94,13 @@ public class TextareaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnChange() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "</head><body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + " <textarea name='textarea1' onchange='alert(this.value)'></textarea>"
-            + "<input name='myButton' type='button' onclick='document.form1.textarea1.value=\"from button\"'>"
-            + "</form>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "</head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + " <textarea name='textarea1' onchange='alert(this.value)'></textarea>\n"
+            + "<input name='myButton' type='button' onclick='document.form1.textarea1.value=\"from button\"'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -121,18 +121,18 @@ public class TextareaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetValue() throws Exception {
-        final String content = "<html><head></head>"
-            + "<body>"
-            + "<form name='form1'>"
-            + "<textarea name='question'></textarea>"
-            + "<input type='button' name='btn_submit' value='Next'>"
-            + "</form>"
-            + "<script>"
-            + "document.form1.question.value = 'some text';"
-            + "alert(document.form1.elements[0].tagName);"
-            + "alert(document.form1.elements[1].tagName);"
-            + "</script>"
-            + "</body>"
+        final String content = "<html><head></head>\n"
+            + "<body>\n"
+            + "<form name='form1'>\n"
+            + "<textarea name='question'></textarea>\n"
+            + "<input type='button' name='btn_submit' value='Next'>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "document.form1.question.value = 'some text';\n"
+            + "alert(document.form1.elements[0].tagName);\n"
+            + "alert(document.form1.elements[1].tagName);\n"
+            + "</script>\n"
+            + "</body>\n"
             + "</html>";
         final String[] expectedAlerts = {"TEXTAREA", "INPUT"};
         final List collectedAlerts = new ArrayList();

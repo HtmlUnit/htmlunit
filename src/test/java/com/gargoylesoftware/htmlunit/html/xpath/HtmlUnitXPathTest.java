@@ -117,8 +117,8 @@ public class HtmlUnitXPathTest extends WebTestCase {
      */
     public void testElementOrder() throws Exception {
         final String content
-            = "<html><head><title>First</title><script>"
-            + "</script></head><body>"
+            = "<html><head><title>First</title><script>\n"
+            + "</script></head><body>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
@@ -141,23 +141,23 @@ public class HtmlUnitXPathTest extends WebTestCase {
      */
     public void testWhenJSChangesPage() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function addOption() {\n"
             + "    var options = document.form1.select1.options;\n"
             + "    var index = options.length;\n"
             + "    options[index] = new Option('Four','value4');\n"
             + "}</script>\n"
             + "</head>\n"
-            + "<body>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <select name='select1'>"
-            + "        <option name='option1' value='value1'>One</option>"
-            + "        <option name='option2' value='value2' selected>Two</option>"
-            + "        <option name='option3' value='value3'>Three</option>"
-            + "    </select>"
-            + "</form>"
-            + "<a href='javascript:addOption()'>add option</a>"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "<a href='javascript:addOption()'>add option</a>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
@@ -178,10 +178,10 @@ public class HtmlUnitXPathTest extends WebTestCase {
      */
     public void testListAttributesResult() throws Exception {
         final String content
-            = "<html><body>"
-            + "<img src='1.png'>"
-            + "<img src='2.png'>"
-            + "<img src='3.png'>"
+            = "<html><body>\n"
+            + "<img src='1.png'>\n"
+            + "<img src='2.png'>\n"
+            + "<img src='3.png'>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
@@ -215,8 +215,8 @@ public class HtmlUnitXPathTest extends WebTestCase {
      */
     public void testOptionText() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
-            + "<body><form name='foo'>"
-            + "<select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>"
+            + "<body><form name='foo'>\n"
+            + "<select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(content);
@@ -230,17 +230,17 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * @throws Exception if test fails
      */
     public void testFollowingAxis() throws Exception {
-        final String content = "<html><title>XPath tests</title><body>"
-            + "<table id='table1'>"
-            + "<tr id='tr1'>"
-            + "<td id='td11'>a3</td>"
-            + "<td id='td12'>c</td>"
-            + "</tr>"
-            + "<tr id='tr2'>"
-            + "<td id='td21'>a4</td>"
-            + "<td id='td22'>c</td>"
-            + "</tr>"
-            + "</table>"
+        final String content = "<html><title>XPath tests</title><body>\n"
+            + "<table id='table1'>\n"
+            + "<tr id='tr1'>\n"
+            + "<td id='td11'>a3</td>\n"
+            + "<td id='td12'>c</td>\n"
+            + "</tr>\n"
+            + "<tr id='tr2'>\n"
+            + "<td id='td21'>a4</td>\n"
+            + "<td id='td22'>c</td>\n"
+            + "</tr>\n"
+            + "</table>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);

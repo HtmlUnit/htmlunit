@@ -61,11 +61,11 @@ public class HtmlStyleTest extends WebTestCase {
      */
     public void testAsText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title>"
-            + "<style type='text/css' id='testStyle'>"
+            = "<html><head><title>foo</title>\n"
+            + "<style type='text/css' id='testStyle'>\n"
             + "img { border: 0px }"
-            + "</style>"
-            + "</head><body>"
+            + "</style>\n"
+            + "</head><body>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);

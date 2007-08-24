@@ -66,11 +66,11 @@ public class PopupTest extends WebTestCase {
     public void testPopup() throws Exception {
         final String content = "<html><head><title>First</title><body>\n"
             + "<script>\n"
-            + "var oPopup = window.createPopup();"
-            + "var oPopupBody = oPopup.document.body;"
-            + "oPopupBody.innerHTML = 'bla bla';"
-            + "oPopup.show(100, 100, 200, 50, document.body);"
-            + "</script>"
+            + "var oPopup = window.createPopup();\n"
+            + "var oPopupBody = oPopup.document.body;\n"
+            + "oPopupBody.innerHTML = 'bla bla';\n"
+            + "oPopup.show(100, 100, 200, 50, document.body);\n"
+            + "</script>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();

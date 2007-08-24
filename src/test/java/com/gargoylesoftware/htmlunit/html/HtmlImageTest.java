@@ -73,13 +73,13 @@ public class HtmlImageTest extends WebTestCase {
             final String urlSuffixClick, final String urlSuffixClickXY) throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<a href='http://server/foo'>"
-            + "<img id='img1' src='foo.png' ismap>"
-            + "<img id='img2' src='foo.png'>"
-            + "</a>"
-            + "<img id='img3' src='foo.png' ismap>"
-            + "<img id='img4' src='foo.png'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<a href='http://server/foo'>\n"
+            + "<img id='img1' src='foo.png' ismap>\n"
+            + "<img id='img2' src='foo.png'>\n"
+            + "</a>\n"
+            + "<img id='img3' src='foo.png' ismap>\n"
+            + "<img id='img4' src='foo.png'>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
@@ -114,12 +114,12 @@ public class HtmlImageTest extends WebTestCase {
      */
     private void testUseMapClick(final int x, final int y, final String urlSuffix) throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<img id='myImg' src='foo.png' usemap='#map1'>"
-            + "<map name='map1'>"
-            + "<area href='a.html' shape='rect' coords='5,5,20,20'>"
-            + "<area href='b.html' shape='circle' coords='25,10,10'>"
-            + "</map>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<img id='myImg' src='foo.png' usemap='#map1'>\n"
+            + "<map name='map1'>\n"
+            + "<area href='a.html' shape='rect' coords='5,5,20,20'>\n"
+            + "<area href='b.html' shape='circle' coords='25,10,10'>\n"
+            + "</map>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
@@ -140,12 +140,12 @@ public class HtmlImageTest extends WebTestCase {
         }
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<img id='myImg' src='foo.png' usemap='#map1'>"
-            + "<map name='map1'>"
-            + "<area href='a.html' shape='rect' coords='5,5,20,20'>"
-            + "<area href='b.html' shape='circle' coords='25,10,10%'>"
-            + "</map>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<img id='myImg' src='foo.png' usemap='#map1'>\n"
+            + "<map name='map1'>\n"
+            + "<area href='a.html' shape='rect' coords='5,5,20,20'>\n"
+            + "<area href='b.html' shape='circle' coords='25,10,10%'>\n"
+            + "</map>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         

@@ -77,11 +77,11 @@ public class LocationTest extends WebTestCase {
      */
     public void testDocumentLocationGet() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title><script>"
+            = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(top.document.location);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
+            + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -145,11 +145,11 @@ public class LocationTest extends WebTestCase {
      */
     public void testDocumentLocationHref() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title><script>"
+            = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(top.document.location.href);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
+            + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -170,7 +170,7 @@ public class LocationTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var location = document.location;"
+            + "    var location = document.location;\n"
             + "    alert(location.hash);\n"
             + "    alert(location.host);\n"
             + "    alert(location.hostname);\n"
@@ -179,7 +179,7 @@ public class LocationTest extends WebTestCase {
             + "    alert(location.port);\n"
             + "    alert(location.protocol);\n"
             + "    alert(location.search);\n"
-            + "}\n</script></head>"
+            + "}\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
         webConnection.setDefaultResponse(firstContent);
@@ -387,11 +387,11 @@ public class LocationTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
-            = "<html><head><title>First</title><script>"
+            = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    location.replace('" + URL_SECOND.toExternalForm() + "');\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
+            + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
         final String secondContent
@@ -464,16 +464,16 @@ public class LocationTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String mainContent
-            = " <html>"
-            + " <frameset rows='100,*'>"
-            + "     <frame name='menu' src='menu.html'/>"
-            + "     <frame name='content' src='content.html'/>"
-            + " </frameset>"
+            = " <html>\n"
+            + " <frameset rows='100,*'>\n"
+            + "     <frame name='menu' src='menu.html'/>\n"
+            + "     <frame name='content' src='content.html'/>\n"
+            + " </frameset>\n"
             + " </html>";
         final String frameMenu =
-            "<html><body>"
+            "<html><body>\n"
             + "<a href='#' id='myLink' target='content' "
-            + "onclick='parent.frames.content.location.replace(\"test.html\");'>Test2</a>"
+            + "onclick='parent.frames.content.location.replace(\"test.html\");'>Test2</a>\n"
             + "</body></html>";
         final String frameContent = "<html><head><title>Start content</title></head><body></body></html>";
         final String frameTest = "<html><head><title>Test</title></head><body></body></html>";
@@ -544,10 +544,10 @@ public class LocationTest extends WebTestCase {
      */
     public void testToString() throws Exception {
         final String content =
-            "<html><head>"
-            + "<script>"
-            + " alert(window.location.toString());"
-            + "</script>"
+            "<html><head>\n"
+            + "<script>\n"
+            + " alert(window.location.toString());\n"
+            + "</script>\n"
             + "<body>\n"
             + "</body></html>";
 

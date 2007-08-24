@@ -101,16 +101,16 @@ public class HtmlPageTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testConstructor() throws Exception {
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<p>hello world</p>"
-            + "<form id='form1' action='/formSubmit' method='post'>"
-            + "<input type='text' NAME='textInput1' value='textInput1'/>"
-            + "<input type='text' name='textInput2' value='textInput2'/>"
-            + "<input type='hidden' name='hidden1' value='hidden1'/>"
-            + "<input type='submit' name='submitInput1' value='push me'/>"
-            + "</form>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' action='/formSubmit' method='post'>\n"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "<input type='text' name='textInput2' value='textInput2'/>\n"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
+            + "<input type='submit' name='submitInput1' value='push me'/>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -121,16 +121,16 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetInputByName() throws Exception {
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<p>hello world</p>"
-            + "<form id='form1' action='/formSubmit' method='post'>"
-            + "<input type='text' NAME='textInput1' value='textInput1'/>"
-            + "<input type='text' name='textInput2' value='textInput2'/>"
-            + "<input type='hidden' name='hidden1' value='hidden1'/>"
-            + "<input type='submit' name='submitInput1' value='push me'/>"
-            + "</form>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' action='/formSubmit' method='post'>\n"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "<input type='text' name='textInput2' value='textInput2'/>\n"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
+            + "<input type='submit' name='submitInput1' value='push me'/>\n"
+            + "</form>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -147,16 +147,16 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testFormSubmit() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<p>hello world</p>"
-            + "<form id='form1' action='/formSubmit' method='PoSt'>"
-            + "<input type='text' NAME='textInput1' value='textInput1'/>"
-            + "<input type='text' name='textInput2' value='textInput2'/>"
-            + "<input type='hidden' name='hidden1' value='hidden1'/>"
-            + "<input type='submit' name='submitInput1' value='push me'/>"
-            + "</form>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' action='/formSubmit' method='PoSt'>\n"
+            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "<input type='text' name='textInput2' value='textInput2'/>\n"
+            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
+            + "<input type='submit' name='submitInput1' value='push me'/>\n"
+            + "</form>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -189,25 +189,25 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetHtmlElement() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "    <p>hello world</p>"
-            + "    <form id='form1' id='form1' action='/formSubmit' method='post'>"
-            + "    <input type='text' NAME='textInput1' value='textInput1'/>"
-            + "    <button type='submit' name='button1'>foobar</button>"
-            + "    <select name='select1'>"
-            + "        <option value='option1'>Option1</option>"
-            + "    </select>"
-            + "    <textarea name='textArea1'>foobar</textarea>"
-            + "    </form>"
-            + "    <a href='http://www.foo.com' name='anchor1'>foo.com</a>"
-            + "    <table id='table1'>"
-            + "        <tr>"
-            + "            <th id='header1'>Header</th>"
-            + "            <td id='data1'>Data</td>"
-            + "        </tr>"
-            + "    </table>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "    <p>hello world</p>\n"
+            + "    <form id='form1' id='form1' action='/formSubmit' method='post'>\n"
+            + "    <input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "    <button type='submit' name='button1'>foobar</button>\n"
+            + "    <select name='select1'>\n"
+            + "        <option value='option1'>Option1</option>\n"
+            + "    </select>\n"
+            + "    <textarea name='textArea1'>foobar</textarea>\n"
+            + "    </form>\n"
+            + "    <a href='http://www.foo.com' name='anchor1'>foo.com</a>\n"
+            + "    <table id='table1'>\n"
+            + "        <tr>\n"
+            + "            <th id='header1'>Header</th>\n"
+            + "            <td id='data1'>Data</td>\n"
+            + "        </tr>\n"
+            + "    </table>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -254,11 +254,11 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetTabbableElements_None() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<p>hello world</p>"
-            + "<table><tr><td>foo</td></tr></table>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<table><tr><td>foo</td></tr></table>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -271,12 +271,12 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetTabbableElements_OneEnabled_OneDisabled() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<form><p>hello world</p>"
-            + "<input name='foo' type='submit' disabled='disabled' id='foo'/>"
-            + "<input name='bar' type='submit' id='bar'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<form><p>hello world</p>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo'/>\n"
+            + "<input name='bar' type='submit' id='bar'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -291,22 +291,22 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetTabbableElements() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' tabindex='1'>foo</a>"
-            + "<a id='b'>foo</a>"
-            + "<form>"
-            + "<a id='c' tabindex='3'>foo</a>"
-            + "<a id='d' tabindex='2'>foo</a>"
-            + "<a id='e' tabindex='0'>foo</a>"
-            + "</form>"
-            + "<a id='f' tabindex='3'>foo</a>"
-            + "<a id='g' tabindex='1'>foo</a>"
-            + "<a id='q' tabindex='-1'>foo</a>"
-            + "<form><p>hello world</p>"
-            + "<input name='foo' type='submit' disabled='disabled' id='foo'/>"
-            + "<input name='bar' type='submit' id='bar'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' tabindex='1'>foo</a>\n"
+            + "<a id='b'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' tabindex='3'>foo</a>\n"
+            + "<a id='d' tabindex='2'>foo</a>\n"
+            + "<a id='e' tabindex='0'>foo</a>\n"
+            + "</form>\n"
+            + "<a id='f' tabindex='3'>foo</a>\n"
+            + "<a id='g' tabindex='1'>foo</a>\n"
+            + "<a id='q' tabindex='-1'>foo</a>\n"
+            + "<form><p>hello world</p>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo'/>\n"
+            + "<input name='bar' type='submit' id='bar'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -327,17 +327,17 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetHtmlElementByAccessKey() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' accesskey='a'>foo</a>"
-            + "<a id='b'>foo</a>"
-            + "<form>"
-            + "<a id='c' accesskey='c'>foo</a>"
-            + "</form>"
-            + "<form><p>hello world</p>"
-            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-            + "<input name='bar' type='submit' id='bar'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' accesskey='a'>foo</a>\n"
+            + "<a id='b'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
+            + "</form>\n"
+            + "<form><p>hello world</p>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>\n"
+            + "<input name='bar' type='submit' id='bar'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -351,12 +351,12 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetHtmlElementsByAccessKey() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head><body>"
-            + "<a id='a' accesskey='a'>foo</a>"
-            + "<a id='b' accesskey='a'>foo</a>"
-            + "<form>"
-            + "<a id='c' accesskey='c'>foo</a>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head><body>\n"
+            + "<a id='a' accesskey='a'>foo</a>\n"
+            + "<a id='b' accesskey='a'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -371,17 +371,17 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testAssertAllIdAttributesUnique() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' accesskey='a'>foo</a>"
-            + "<a id='b'>foo</a>"
-            + "<form>"
-            + "<a id='c' accesskey='c'>foo</a>"
-            + "</form>"
-            + "<form><p>hello world</p>"
-            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-            + "<input name='bar' type='submit' id='bar'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' accesskey='a'>foo</a>\n"
+            + "<a id='b'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
+            + "</form>\n"
+            + "<form><p>hello world</p>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>\n"
+            + "<input name='bar' type='submit' id='bar'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -393,17 +393,17 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testAssertAllIdAttributesUnique_Duplicates() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='dupeID' accesskey='a'>foo</a>"
-            + "<a id='b'>foo</a>"
-            + "<form>"
-            + "<a id='c' accesskey='c'>foo</a>"
-            + "</form>"
-            + "<form><p>hello world</p>"
-            + "<input name='foo' type='submit' disabled='disabled' id='dupeID' accesskey='f'/>"
-            + "<input name='bar' type='submit' id='bar'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='dupeID' accesskey='a'>foo</a>\n"
+            + "<a id='b'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
+            + "</form>\n"
+            + "<form><p>hello world</p>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='dupeID' accesskey='f'/>\n"
+            + "<input name='bar' type='submit' id='bar'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -421,17 +421,17 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testAssertAllAccessKeyAttributesUnique() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' accesskey='a'>foo</a>"
-            + "<a id='b'>foo</a>"
-            + "<form>"
-            + "<a id='c' accesskey='c'>foo</a>"
-            + "</form>"
-            + "<form><p>hello world</p>"
-            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-            + "<input name='bar' type='submit' id='bar'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' accesskey='a'>foo</a>\n"
+            + "<a id='b'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
+            + "</form>\n"
+            + "<form><p>hello world</p>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>\n"
+            + "<input name='bar' type='submit' id='bar'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -443,17 +443,17 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testAssertAllAccessKeyAttributesUnique_Duplicates() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' accesskey='a'>foo</a>"
-            + "<a id='b'>foo</a>"
-            + "<form>"
-            + "<a id='c' accesskey='c'>foo</a>"
-            + "</form>"
-            + "<form><p>hello world</p>"
-            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-            + "<input name='bar' type='submit' id='bar' accesskey='a'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' accesskey='a'>foo</a>\n"
+            + "<a id='b'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
+            + "</form>\n"
+            + "<form><p>hello world</p>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>\n"
+            + "<input name='bar' type='submit' id='bar' accesskey='a'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -471,19 +471,19 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testAssertAllTabIndexAttributesSet() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' tabindex='1'>foo</a>"
-            + "<form>"
-            + "<a id='c' tabindex='3'>foo</a>"
-            + "<a id='d' tabindex='2'>foo</a>"
-            + "<a id='e' tabindex='0'>foo</a>"
-            + "</form>"
-            + "<a id='f' tabindex='3'>foo</a>"
-            + "<a id='g' tabindex='1'>foo</a>"
-            + "<a id='q' tabindex='5'>foo</a>"
-            + "<form><p>hello world</p>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' tabindex='1'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' tabindex='3'>foo</a>\n"
+            + "<a id='d' tabindex='2'>foo</a>\n"
+            + "<a id='e' tabindex='0'>foo</a>\n"
+            + "</form>\n"
+            + "<a id='f' tabindex='3'>foo</a>\n"
+            + "<a id='g' tabindex='1'>foo</a>\n"
+            + "<a id='q' tabindex='5'>foo</a>\n"
+            + "<form><p>hello world</p>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -496,19 +496,19 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testAssertAllTabIndexAttributesSet_SomeMissing() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' tabindex='1'>foo</a>"
-            + "<form>"
-            + "<a id='c' tabindex='3'>foo</a>"
-            + "<a id='d' tabindex='2'>foo</a>"
-            + "<a id='e' tabindex='0'>foo</a>"
-            + "</form>"
-            + "<a id='f' tabindex='3'>foo</a>"
-            + "<a id='g'>foo</a>"
-            + "<a id='q' tabindex='1'>foo</a>"
-            + "<form><p>hello world</p>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' tabindex='1'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' tabindex='3'>foo</a>\n"
+            + "<a id='d' tabindex='2'>foo</a>\n"
+            + "<a id='e' tabindex='0'>foo</a>\n"
+            + "</form>\n"
+            + "<a id='f' tabindex='3'>foo</a>\n"
+            + "<a id='g'>foo</a>\n"
+            + "<a id='q' tabindex='1'>foo</a>\n"
+            + "<form><p>hello world</p>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -527,19 +527,19 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testAssertAllTabIndexAttributesSet_BadValue() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<a id='a' tabindex='1'>foo</a>"
-            + "<form>"
-            + "<a id='c' tabindex='3'>foo</a>"
-            + "<a id='d' tabindex='2'>foo</a>"
-            + "<a id='e' tabindex='0'>foo</a>"
-            + "</form>"
-            + "<a id='f' tabindex='3'>foo</a>"
-            + "<a id='g' tabindex='1'>foo</a>"
-            + "<a id='q' tabindex='300000'>foo</a>"
-            + "<form><p>hello world</p>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<a id='a' tabindex='1'>foo</a>\n"
+            + "<form>\n"
+            + "<a id='c' tabindex='3'>foo</a>\n"
+            + "<a id='d' tabindex='2'>foo</a>\n"
+            + "<a id='e' tabindex='0'>foo</a>\n"
+            + "</form>\n"
+            + "<a id='f' tabindex='3'>foo</a>\n"
+            + "<a id='g' tabindex='1'>foo</a>\n"
+            + "<a id='q' tabindex='300000'>foo</a>\n"
+            + "<form><p>hello world</p>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -557,9 +557,9 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetFullQualifiedUrl_NoBaseSpecified() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<table><tr><td><input type='text' id='foo'/></td></tr></table>\n"
             + "</form></body></html>";
         final WebClient client = new WebClient();
 
@@ -607,11 +607,11 @@ public class HtmlPageTest extends WebTestCase {
         throws Exception {
 
         final String baseUrl = baseProtocol + "://second" + basePortPart;
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "<base href='" + baseUrl + "'>"
-            + "</head><body>"
-            + "<form id='form1'>"
-            + "<table><tr><td><input type='text' id='foo'/></td></tr></table>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "<base href='" + baseUrl + "'>\n"
+            + "</head><body>\n"
+            + "<form id='form1'>\n"
+            + "<table><tr><td><input type='text' id='foo'/></td></tr></table>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -714,8 +714,8 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyStatement() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "</head><body onLoad='alert(\"foo\")'>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "</head><body onLoad='alert(\"foo\")'>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -730,8 +730,8 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_TwoBodyStatements() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -746,9 +746,9 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyName() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "<script type='text/javascript'>"
-            + "window.onload=function(){alert('foo')}</script>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "<script type='text/javascript'>\n"
+            + "window.onload=function(){alert('foo')}</script>\n"
             + "</head><body></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -763,9 +763,9 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_BodyName_NotAFunction() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head>"
-            + "<body onLoad='foo=4711'>"
-            + "<a name='alert' href='javascript:alert(foo)'/>"
+        final String htmlContent = "<html><head><title>foo</title></head>\n"
+            + "<body onLoad='foo=4711'>\n"
+            + "<a name='alert' href='javascript:alert(foo)'/>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -782,7 +782,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_ScriptName() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "load=function(){alert('foo')};\n"
             + "onload=load\n"
@@ -800,7 +800,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_ScriptNameRead() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "load=function(){};\n"
             + "onload=load;\n"
@@ -819,15 +819,15 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testEmbeddedMetaTag_Regression() throws Exception {
 
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "</head><body>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "</head><body>\n"
             + "<table><tr><td>\n"
-            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
-            + "<form name='form1'>"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-            + "    <input type='text' name='textfield2' id='textfield2'/>"
-            + "</form>"
-            + "</td></tr></table>"
+            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">\n"
+            + "<form name='form1'>\n"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "</form>\n"
+            + "</td></tr></table>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
 
@@ -844,17 +844,17 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetPageEncoding() throws Exception {
 
-        final String htmlContent = "<html><head>"
-            + "<title>foo</title>"
-            + "<meta http-equiv='Content-Type' content='text/html ;charset=Shift_JIS'>"
-            + "</head><body>"
+        final String htmlContent = "<html><head>\n"
+            + "<title>foo</title>\n"
+            + "<meta http-equiv='Content-Type' content='text/html ;charset=Shift_JIS'>\n"
+            + "</head><body>\n"
             + "<table><tr><td>\n"
-            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">"
-            + "<form name='form1'>"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-            + "    <input type='text' name='textfield2' id='textfield2'/>"
-            + "</form>"
-            + "</td></tr></table>"
+            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">\n"
+            + "<form name='form1'>\n"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "</form>\n"
+            + "</td></tr></table>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -866,17 +866,17 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testGetForms() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<form name='one'>"
-            + "<a id='c' accesskey='c'>foo</a>"
-            + "</form>"
-            + "<form name='two'>"
-            + "<a id='c' accesskey='c'>foo</a>"
-            + "</form>"
-            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>"
-            + "<input name='bar' type='submit' id='bar'/>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<form name='one'>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
+            + "</form>\n"
+            + "<form name='two'>\n"
+            + "<a id='c' accesskey='c'>foo</a>\n"
+            + "</form>\n"
+            + "<input name='foo' type='submit' disabled='disabled' id='foo' accesskey='f'/>\n"
+            + "<input name='bar' type='submit' id='bar'/>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -892,8 +892,8 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
 
-        final String firstContent = "<html><head><title>first</title>"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -915,8 +915,8 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_NoUrl() throws Exception {
 
-        final String firstContent = "<html><head><title>first</title>"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
 
         final WebClient client = new WebClient();
@@ -943,8 +943,8 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_ImmediateRefresh_AvoidOOME() throws Exception {
 
-        final String firstContent = "<html><head><title>first</title>"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
 
         final WebClient client = new WebClient();
@@ -964,8 +964,8 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTagQuoted() throws Exception {
-        final String firstContent = "<html><head><title>first</title>"
-            + "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"http://second\"'>"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"http://second\"'>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -986,8 +986,8 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTagPartlyQuoted() throws Exception {
-        final String firstContent = "<html><head><title>first</title>"
-            + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='http://second\">"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='http://second\">\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -1009,10 +1009,10 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTagNoScript() throws Exception {
 
-        final String firstContent = "<html><head><title>first</title>"
-            + "<noscript>"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=http://second\">"
-            + "</noscript>"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<noscript>\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=http://second\">\n"
+            + "</noscript>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -1037,8 +1037,8 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_CustomRefreshHandler() throws Exception {
 
-        final String firstContent = "<html><head><title>first</title>"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -1067,8 +1067,8 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTag_Whitespace() throws Exception {
-        final String firstContent = "<html><head><title>first</title>"
-            + "<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=http://second'>"
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=http://second'>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -1090,7 +1090,7 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_HttpResponseHeader() throws Exception {
 
-        final String firstContent = "<html><head><title>first</title>"
+        final String firstContent = "<html><head><title>first</title>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -1113,9 +1113,9 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testDocumentParentIsNull() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -1128,9 +1128,9 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testDocumentElement() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -1146,9 +1146,9 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testDocumentNodeType() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -1165,11 +1165,11 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testDeregisterFrameWithoutSrc() throws Exception {
 
-        final String htmlContent = "<html>"
-            + "<head><title>foo</title></head>"
-            + "<body>"
-            + "<iframe />"
-            + "<a href='about:blank'>link</a>"
+        final String htmlContent = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<iframe />\n"
+            + "<a href='about:blank'>link</a>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -1198,16 +1198,16 @@ public class HtmlPageTest extends WebTestCase {
             return;
         }
 
-        final String htmlContent = "<div>"
-            + "<html>"
-            + "<head><title>foo</title>"
-            + "<script>"
-            + "var toto = 12345;"
-            + "</script>"
-            + "</head>"
-            + "<body onload='alert(toto)'>"
+        final String htmlContent = "<div>\n"
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "var toto = 12345;\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='alert(toto)'>\n"
             + "blabla"
-            + "</body>"
+            + "</body>\n"
             + "</html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -1260,10 +1260,10 @@ public class HtmlPageTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testAsXml2() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>"
-            + "<script>var test = 15 < 16;</script></head>"
-            + "</head>"
-            + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld &amp;amp; helloall</p></body>"
+        final String htmlContent = "<html><head><title>foo</title>\n"
+            + "<script>var test = 15 < 16;</script></head>\n"
+            + "</head>\n"
+            + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld &amp;amp; helloall</p></body>\n"
             + "</html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -1309,12 +1309,12 @@ public class HtmlPageTest extends WebTestCase {
     public void testGetHtmlElementByIdAfterRemove() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
-            + "<body>"
-            + "<div id='div1'>"
-            + "<div id='div2'>"
-            + "</div>"
-            + "</div>"
-            + "</body>"
+            + "<body>\n"
+            + "<div id='div1'>\n"
+            + "<div id='div2'>\n"
+            + "</div>\n"
+            + "</div>\n"
+            + "</body>\n"
             + "</html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -1346,10 +1346,10 @@ public class HtmlPageTest extends WebTestCase {
     public void testGetHtmlElementById_idTwice() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
-            + "<body>"
-            + "<div id='id1'>foo</div>"
-            + "<span id='id1'>bla</span>"
-            + "</body>"
+            + "<body>\n"
+            + "<div id='id1'>foo</div>\n"
+            + "<span id='id1'>bla</span>\n"
+            + "</body>\n"
             + "</html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -1365,10 +1365,10 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testSetCookieMetaTag() throws Exception {
 
-        final String content = "<html><head><title>first</title>"
-            + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>"
-            + "</head><body>"
-            + "<script>alert(document.cookie)</script>"
+        final String content = "<html><head><title>first</title>\n"
+            + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>\n"
+            + "</head><body>\n"
+            + "<script>alert(document.cookie)</script>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"webm=none"};
@@ -1392,13 +1392,13 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnLoadHandler_idChange() throws Exception {
-        final String content = "<html><head><title>foo</title>"
+        final String content = "<html><head><title>foo</title>\n"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>'"
-            + "<script type='text/javascript'>"
-            + "document.getElementById('id1').id = 'id3';"
-            + "alert(document.getElementById('id2').className);"
-            + "alert(document.getElementById('id3').className);"
-            + "</script>"
+            + "<script type='text/javascript'>\n"
+            + "document.getElementById('id1').id = 'id3';\n"
+            + "alert(document.getElementById('id2').className);\n"
+            + "alert(document.getElementById('id3').className);\n"
+            + "</script>\n"
             + "</head><body></body></html>";
         
         final String[] expectedAlerts = {"cl2", "cl1"};
@@ -1421,8 +1421,8 @@ public class HtmlPageTest extends WebTestCase {
 
     private void testNoSlashURL(final String url) throws Exception {
         final String firstContent
-            = "<html><body>"
-            + "<iframe id='myIFrame' src='" + url + "'></iframe>"
+            = "<html><body>\n"
+            + "<iframe id='myIFrame' src='" + url + "'></iframe>\n"
             + "</body></html>";
     
         final String secondContent
@@ -1453,9 +1453,9 @@ public class HtmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client) {
             private int nbCalls_ = 0;
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
-                String content = "<html><head>";
+                String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
-                    content += "<meta http-equiv='refresh' content='1; URL='>";
+                    content += "<meta http-equiv='refresh' content='1; URL='>\n";
                 }
                 content += "</head><body></body></html>";
                 nbCalls_++;
@@ -1479,7 +1479,7 @@ public class HtmlPageTest extends WebTestCase {
     public void testSerialization() throws Exception {
         final String content = "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final HtmlPage page1 = loadPage(content);
 
@@ -1542,9 +1542,9 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClonedPageHasOwnDocumentElement() throws Exception {
-        final String content = "<html><head><title>foo</title>"
-            + "<body>"
-            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>"
+        final String content = "<html><head><title>foo</title>\n"
+            + "<body>\n"
+            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>\n"
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
@@ -1673,11 +1673,11 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testCaseInsensitiveRegexReplacement() throws Exception {
-        final String html = "<html><body><script>"
-            + "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;"
-            + "var s = '#userAgent';"
-            + "s = s.replace(r, '');"
-            + "alert(s.length);"
+        final String html = "<html><body><script>\n"
+            + "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;\n"
+            + "var s = '#userAgent';\n"
+            + "s = s.replace(r, '');\n"
+            + "alert(s.length);\n"
             + "</script></body></html>";
         final List expected = Collections.singletonList("0");
         final List actual = new ArrayList();
@@ -1689,11 +1689,11 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRegexReplacementWithFunction() throws Exception {
-        final String html = "<html><body><script>"
-            + "var r = /-([a-z])/ig;"
-            + "var s = 'font-size';"
-            + "s = s.replace(r, function(z,b){return b.toUpperCase();});"
-            + "alert(s);"
+        final String html = "<html><body><script>\n"
+            + "var r = /-([a-z])/ig;\n"
+            + "var s = 'font-size';\n"
+            + "s = s.replace(r, function(z,b){return b.toUpperCase();});\n"
+            + "alert(s);\n"
             + "</script></body></html>";
         final List expected = Collections.singletonList("fontSize");
         final List actual = new ArrayList();

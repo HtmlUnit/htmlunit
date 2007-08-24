@@ -63,10 +63,10 @@ public class HtmlHeadTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAddedWhenMissing() throws Exception {
-        final String htmlContent = "<html><body>"
-            + "<script>"
-            + "alert(document.firstChild.firstChild.tagName);"
-            + "</script>"
+        final String htmlContent = "<html><body>\n"
+            + "<script>\n"
+            + "alert(document.firstChild.firstChild.tagName);\n"
+            + "</script>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();

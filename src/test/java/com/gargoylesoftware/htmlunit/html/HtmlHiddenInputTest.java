@@ -61,9 +61,9 @@ public class HtmlHiddenInputTest extends WebTestCase {
      */
     public void testAsText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "    <input type='hidden' name='foo' id='foo' value='bla'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='hidden' name='foo' id='foo' value='bla'>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);

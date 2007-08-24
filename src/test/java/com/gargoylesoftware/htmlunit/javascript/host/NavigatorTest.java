@@ -116,14 +116,14 @@ public class NavigatorTest extends WebTestCase {
 
     private void testCookieEnabled(final boolean cookieEnabled) throws Exception {
         final String content
-            = "<html><head><title>First</title></head>"
-            + "<script>"
+            = "<html><head><title>First</title></head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  alert(navigator.cookieEnabled);"
+            + "  alert(navigator.cookieEnabled);\n"
             + "}"
-            + "</script>"
-            + "<body onload='test()'></body>"
+            + "</script>\n"
+            + "<body onload='test()'></body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {Boolean.toString(cookieEnabled)};
@@ -253,8 +253,8 @@ public class NavigatorTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
-            = "<html><head><title>First</title></head>"
-            + "<body onload='alert(window.navigator.appName)'></body>"
+            = "<html><head><title>First</title></head>\n"
+            + "<body onload='alert(window.navigator.appName)'></body>\n"
             + "</html>";
 
         webConnection.setDefaultResponse(content);
@@ -279,8 +279,8 @@ public class NavigatorTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
-            = "<html><head><title>First</title></head>"
-            + "<body onload='alert(window.navigator.language)'></body>"
+            = "<html><head><title>First</title></head>\n"
+            + "<body onload='alert(window.navigator.language)'></body>\n"
             + "</html>";
 
         webConnection.setDefaultResponse(content);
@@ -299,15 +299,15 @@ public class NavigatorTest extends WebTestCase {
     public void testMozilla() throws Exception {
 
         final String content
-            = "<html><head><title>First</title></head>"
-            + "<script>"
+            = "<html><head><title>First</title></head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  alert(typeof window.navigator.mimeTypes.length);"
-            + "  alert(typeof window.navigator.plugins.length);"
+            + "  alert(typeof window.navigator.mimeTypes.length);\n"
+            + "  alert(typeof window.navigator.plugins.length);\n"
             + "}"
-            + "</script>"
-            + "<body onload='test()'></body>"
+            + "</script>\n"
+            + "<body onload='test()'></body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {"number", "number"};

@@ -100,7 +100,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testLoadLocalConfiguration() {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -133,7 +133,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testGetInstance() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -167,7 +167,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testGetConditionalPropertyBrowser() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -198,7 +198,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testForSettingJSObject() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -222,7 +222,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testInstanceForTestVersion() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -255,7 +255,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testPropertyForNullBrowser() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -290,7 +290,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testGetConditionalPropertyMinBrowserVersion() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -324,7 +324,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testGetConditionalPropertyMaxBrowserVersion() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -358,7 +358,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testGetConditionalPropertyMaxJSVersion() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -391,7 +391,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testParseFunction() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -417,7 +417,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testParseFunctionForLimitedBrowser() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -552,7 +552,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testForPropertyExist() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
@@ -583,7 +583,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testForPropertyNotExist() throws Exception {
         final String configurationString
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"

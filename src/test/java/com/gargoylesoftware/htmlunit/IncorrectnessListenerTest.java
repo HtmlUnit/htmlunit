@@ -59,10 +59,10 @@ public final class IncorrectnessListenerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNotification() throws Exception {
-        final String html = "<html><head>"
-                + "<meta http-equiv='set-cookie' content='webm=none; path=/; expires=abcdef;'>"
-                + "</head>"
-                + "<body></body>"
+        final String html = "<html><head>\n"
+                + "<meta http-equiv='set-cookie' content='webm=none; path=/; expires=abcdef;'>\n"
+                + "</head>\n"
+                + "<body></body>\n"
                 + "</html>";
 
         final WebClient webClient = new WebClient();

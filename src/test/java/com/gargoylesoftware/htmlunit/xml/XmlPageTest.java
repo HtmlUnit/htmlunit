@@ -69,9 +69,9 @@ public class XmlPageTest extends WebTestCase {
             + "<RDF xmlns='http://www.w3.org/1999/02/22-rdf-syntax-ns#' "
             + "xmlns:em='http://www.mozilla.org/2004/em-rdf#'>"
             + "<Description about='urn:mozilla:install-manifest'>"
-            + "<em:name>My Plugin</em:name>\n"
+            + "<em:name>My Plugin</em:name>"
             + "</Description>\n"
-            + "</RDF>\n";
+            + "</RDF>";
 
         final XmlPage xmlPage = testXmlDocument(content, "text/xml");
         final Node node = xmlPage.getXmlDocument().getFirstChild().getFirstChild().getFirstChild();
@@ -86,7 +86,7 @@ public class XmlPageTest extends WebTestCase {
      */
     public void testValidDocument() throws Exception {
         final String content
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
              + "    <foofoo name='first'>something</foofoo>\n"
              + "    <foofoo name='second'>something else</foofoo>\n"
@@ -130,7 +130,7 @@ public class XmlPageTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String content
-            = "<?xml version=\"1.0\"?>"
+            = "<?xml version=\"1.0\"?>\n"
             + "<foo>\n"
             + "    <foofoo invalid\n"
             + "    <foofoo name='first'>something</foofoo>\n"
@@ -157,15 +157,15 @@ public class XmlPageTest extends WebTestCase {
      */
     public void testVoiceXML() throws Exception {
         final String content =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             + "<vxml xmlns=\"http://www.w3.org/2001/vxml\""
             + "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
             + "  xsi:schemaLocation=\"http://www.w3.org/2001/vxml "
             + "   http://www.w3.org/TR/voicexml20/vxml.xsd\""
-            + "   version=\"2.0\">"
-            + "  <form>"
-            + "    <block>Hello World!</block>"
-            + "  </form>"
+            + "   version=\"2.0\">\n"
+            + "  <form>\n"
+            + "    <block>Hello World!</block>\n"
+            + "  </form>\n"
             + "</vxml>";
 
         final XmlPage xmlPage = testXmlDocument(content, "application/voicexml+xml");

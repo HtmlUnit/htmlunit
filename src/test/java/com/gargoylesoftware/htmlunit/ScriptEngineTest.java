@@ -71,15 +71,15 @@ public class ScriptEngineTest extends WebTestCase {
      */
     public void testScriptTags_AllLocalContent() throws Exception {
         final String content
-            = "<html>"
-            + "<head><title>foo</title>"
-            + "<script>One</script>" // no language specified - assume javascript
-            + "<script language='javascript'>Two</script>"
-            + "<script type='text/javascript'>Three</script>"
-            + "<script type='text/perl'>Four</script>" // type is unsupported language
-            + "</head>"
-            + "<body>"
-            + "<p>hello world</p>"
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>One</script>\n" // no language specified - assume javascript
+            + "<script language='javascript'>Two</script>\n"
+            + "<script type='text/javascript'>Three</script>\n"
+            + "<script type='text/perl'>Four</script>\n" // type is unsupported language
+            + "</head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
             + "</body></html>";
         final List collectedScripts = new ArrayList();
         loadPageAndCollectScripts(content, collectedScripts);

@@ -68,7 +68,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
      */
     public void testAttributeOrder() throws Exception {
         // Construct the test page.
-        final String html = "<html><head><title>test page</title></head>"
+        final String html = "<html><head><title>test page</title></head>\n"
                 + "<body><div>test message</div></body></html>";
 
         // Load the test page.
@@ -115,8 +115,8 @@ public class DefaultElementFactoryTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAttributeOrderLive() throws Exception {
-        final String html = "<html><body>"
-            + "<a href='http://www.google.com' tabindex='2' accesskey='F'>foo</a>"
+        final String html = "<html><body>\n"
+            + "<a href='http://www.google.com' tabindex='2' accesskey='F'>foo</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlAnchor anchor = page.getFirstAnchorByText("foo");

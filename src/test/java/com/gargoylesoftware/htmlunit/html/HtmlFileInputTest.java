@@ -88,7 +88,7 @@ public class HtmlFileInputTest extends WebTestCase {
     private void testFileInput(final String fileURL) throws Exception {
         final String firstContent
             = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
             + "</form>\n"
             + "</body>\n"
@@ -119,7 +119,7 @@ public class HtmlFileInputTest extends WebTestCase {
     public void testEmptyField() throws Exception {
         final String firstContent
             = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
             + "</form>\n"
             + "</body>\n"

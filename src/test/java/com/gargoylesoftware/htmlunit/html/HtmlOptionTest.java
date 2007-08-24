@@ -61,13 +61,13 @@ public class HtmlOptionTest extends WebTestCase {
     public void testSelect() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1' id='select1'>"
-            + "<option value='option1' id='option1'>Option1</option>"
-            + "<option value='option2' id='option2' selected='selected'>Option2</option>"
-            + "<option value='option3' id='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' id='select1'>\n"
+            + "<option value='option1' id='option1'>Option1</option>\n"
+            + "<option value='option2' id='option2' selected='selected'>Option2</option>\n"
+            + "<option value='option3' id='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -98,12 +98,12 @@ public class HtmlOptionTest extends WebTestCase {
     public void testGetValue() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1' id='select1'>"
-            + "<option value='option1' id='option1'>Option1</option>"
-            + "<option id='option2' selected>Number Two</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' id='select1'>\n"
+            + "<option value='option1' id='option1'>Option1</option>\n"
+            + "<option id='option2' selected>Number Two</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -122,14 +122,14 @@ public class HtmlOptionTest extends WebTestCase {
     public void testGetValue_ContentsIsValue() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<select name='select1' id='select1'>"
-            + "     <option id='option1'>Option1</option>"
-            + "     <option id='option2' selected>Number Two</option>"
-            + "     <option id='option3'>\n  Number 3 with blanks </option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<select name='select1' id='select1'>\n"
+            + "     <option id='option1'>Option1</option>\n"
+            + "     <option id='option2' selected>Number Two</option>\n"
+            + "     <option id='option3'>\n  Number 3 with blanks </option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -150,13 +150,13 @@ public class HtmlOptionTest extends WebTestCase {
     public void testClick() throws Exception {
 
         final String htmlContent
-            = "<html><body>"
-            + "<form id='form1'>"
-            + "<select name='select1' id='select1'>"
-            + "     <option id='option1'>Option1</option>"
-            + "     <option id='option2' selected>Number Two</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+            = "<html><body>\n"
+            + "<form id='form1'>\n"
+            + "<select name='select1' id='select1'>\n"
+            + "     <option id='option1'>Option1</option>\n"
+            + "     <option id='option2' selected>Number Two</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -172,13 +172,13 @@ public class HtmlOptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form><select>"
-            + "<option id='option1'>option1</option>"
-            + "<option id='option2' label='Number Two'/>"
-            + "<option id='option3' label='overridden'>Number Three</option>"
-            + "<option id='option4'>Number&nbsp;4</option>"
-            + "</select>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form><select>\n"
+            + "<option id='option1'>option1</option>\n"
+            + "<option id='option2' label='Number Two'/>\n"
+            + "<option id='option3' label='overridden'>Number Three</option>\n"
+            + "<option id='option4'>Number&nbsp;4</option>\n"
+            + "</select>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);

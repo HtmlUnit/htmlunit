@@ -64,12 +64,12 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testImplicitToStringConversion() throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(document.links != 'foo')\n"
             + "}\n"
-            + "</script></head><body onload='test()'>"
-            + "<a href='bla.html'>link</a>"
+            + "</script></head><body onload='test()'>\n"
+            + "<a href='bla.html'>link</a>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"true"};
@@ -90,12 +90,12 @@ public class HTMLCollectionTest extends WebTestCase {
             return;
         }
 
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(typeof document.links.toString)\n"
             + "}\n"
-            + "</script></head><body onload='test()'>"
-            + "<a href='bla.html'>link</a>"
+            + "</script></head><body onload='test()'>\n"
+            + "<a href='bla.html'>link</a>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"function"};
@@ -112,7 +112,7 @@ public class HTMLCollectionTest extends WebTestCase {
      */
     public void testGetElements() throws Exception {
         final String firstContent
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all.length);\n"
             + "    document.appendChild(document.createElement('div'));\n"

@@ -88,7 +88,7 @@ public class TableTest extends WebTestCase {
             + "    alert(table.caption.innerHTML);\n"
             + "  // -->\n"
             + "  </script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -123,7 +123,7 @@ public class TableTest extends WebTestCase {
             + "    alert(table.tHead.id);\n"
             + "  // -->\n"
             + "  </script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -161,7 +161,7 @@ public class TableTest extends WebTestCase {
             + "    body1.insertRow(-1); // Add one to body1, as well.\n"
             + "    alert(table.rows.length + ' ' + body1.rows.length + ' ' + body2.rows.length);\n"
             + "  </script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final String[] expectedAlerts = {"2", "true", "4 2 2", "6 3 3"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
@@ -197,7 +197,7 @@ public class TableTest extends WebTestCase {
             + "    table.deleteRow(-1);\n"
             + "    alert(rows.length);\n"
             + "  </script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final String[] expectedAlerts = {"2", "true", "3", "2", "3", "2"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
@@ -215,22 +215,22 @@ public class TableTest extends WebTestCase {
      */
     public void testTableHeadRows() throws Exception {
 
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var t = document.getElementById('myTable');"
-            + "  alert(t.rows[0].cells.length);"
-            + "  alert(t.rows[1].cells.length);"
+            + "  var t = document.getElementById('myTable');\n"
+            + "  alert(t.rows[0].cells.length);\n"
+            + "  alert(t.rows[1].cells.length);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
-            + "<table id='myTable'>"
-            + "<tr><th>Some Heading</th></tr>"
-            + "<tr><td>some desc</td></tr>"
-            + "</table>"
-            + "</body>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<table id='myTable'>\n"
+            + "<tr><th>Some Heading</th></tr>\n"
+            + "<tr><td>some desc</td></tr>\n"
+            + "</table>\n"
+            + "</body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {"1", "1"};
@@ -292,7 +292,7 @@ public class TableTest extends WebTestCase {
             + "        + ' ' + body2.rows.length + ' ' + foot.rows.length);\n"
             + "  // -->\n"
             + "  </script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -328,7 +328,7 @@ public class TableTest extends WebTestCase {
             + "    alert(table.tFoot.id);\n"
             + "  // -->\n"
             + "  </script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -389,7 +389,7 @@ public class TableTest extends WebTestCase {
             + "    newRow.insertCell(newRow.cells.length);\n"
             + "    alert(newRow.cells.length);\n"
             + "  </script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final String[] expectedAlerts = {"1", "2", "1", "0", "TD", "1", "2"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
@@ -407,25 +407,25 @@ public class TableTest extends WebTestCase {
     public void testInsertRowNested() throws Exception {
 
         final String content =
-            "<html><head>"
-            + "<script>"
+            "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var container = document.getElementById('mytable');"
-            + "  alert(container.id);"
-            + "  var tableRow = container.insertRow(1);"
-            + "  alert(tableRow.parentNode.parentNode.id);"
+            + "  var container = document.getElementById('mytable');\n"
+            + "  alert(container.id);\n"
+            + "  var tableRow = container.insertRow(1);\n"
+            + "  alert(tableRow.parentNode.parentNode.id);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
-            + "<table id='mytable'>"
-            + "<tr>"
-            + "<td>"
-            + "  <table id='nested'><tr><td></td></tr></table>"
-            + "</td></tr>"
-            + "</table>"
-            + "</body>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<table id='mytable'>\n"
+            + "<tr>\n"
+            + "<td>\n"
+            + "  <table id='nested'><tr><td></td></tr></table>\n"
+            + "</td></tr>\n"
+            + "</table>\n"
+            + "</body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {"mytable", "mytable"};
@@ -444,21 +444,21 @@ public class TableTest extends WebTestCase {
     public void testInsertRowInEmtpyTable() throws Exception {
 
         final String content =
-            "<html><head>"
-            + "<script>"
+            "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var oTable = document.getElementById('mytable');"
-            + "  var tableRow = oTable.insertRow(0);"
-            + "  alert(tableRow.parentNode.tagName);"
-            + "  alert(tableRow.parentNode.parentNode.tagName);"
+            + "  var oTable = document.getElementById('mytable');\n"
+            + "  var tableRow = oTable.insertRow(0);\n"
+            + "  alert(tableRow.parentNode.tagName);\n"
+            + "  alert(tableRow.parentNode.parentNode.tagName);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
-            + "<table id='mytable'>"
-            + "</table>"
-            + "</body>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<table id='mytable'>\n"
+            + "</table>\n"
+            + "</body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {"TBODY", "TABLE"};
@@ -477,22 +477,21 @@ public class TableTest extends WebTestCase {
     public void testInsertRowInTableWithEmtpyTbody() throws Exception {
 
         final String content =
-            "<html><head>"
-            + "<script>"
+            "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var oTable = document.getElementById('mytable');"
-            + "  alert(oTable.lastChild.tagName);"
-            + "  var tableRow = oTable.insertRow(0);"
-            + "  alert(oTable.lastChild.tagName);"
-            + "  alert(tableRow.parentNode.tagName);"
+            + "  var oTable = document.getElementById('mytable');\n"
+            + "  alert(oTable.lastChild.tagName);\n"
+            + "  var tableRow = oTable.insertRow(0);\n"
+            + "  alert(oTable.lastChild.tagName);\n"
+            + "  alert(tableRow.parentNode.tagName);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
-            + "<table id='mytable'><tbody></tbody>"
-            + "</table>"
-            + "</body>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<table id='mytable'><tbody></tbody></table>\n"
+            + "</body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {"TBODY", "TBODY", "TBODY"};
@@ -511,24 +510,24 @@ public class TableTest extends WebTestCase {
     public void testNestedTables() throws Exception {
 
         final String content =
-            "<html><head>"
-            + "<script>"
+            "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var myTable = document.getElementById('mytable');"
-            + "  alert(myTable.rows.length);"
-            + "  alert(myTable.tBodies.length);"
+            + "  var myTable = document.getElementById('mytable');\n"
+            + "  alert(myTable.rows.length);\n"
+            + "  alert(myTable.tBodies.length);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
-            + "<table id='mytable'>"
-            + "<tr>"
-            + "<td>"
-            + "  <table id='nested'><tr><td></td></tr></table>"
-            + "</td></tr>"
-            + "</table>"
-            + "</body>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<table id='mytable'>\n"
+            + "<tr>\n"
+            + "<td>\n"
+            + "  <table id='nested'><tr><td></td></tr></table>\n"
+            + "</td></tr>\n"
+            + "</table>\n"
+            + "</body>\n"
             + "</html>";
 
         final String[] expectedAlerts = {"1", "1"};
@@ -568,23 +567,23 @@ public class TableTest extends WebTestCase {
      */
     private void testStringValues(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String content =
-            "<html><head>"
-            + "  <script>"
+            "<html><head>\n"
+            + "  <script>\n"
             + "    function test()"
             + "    {"
-            + "      alert('table: ' + document.getElementById('myTable'));"
-            + "      alert('row: ' + document.getElementById('myRow'));"
-            + "      alert('cell: ' + document.getElementById('myCell'));"
+            + "      alert('table: ' + document.getElementById('myTable'));\n"
+            + "      alert('row: ' + document.getElementById('myRow'));\n"
+            + "      alert('cell: ' + document.getElementById('myCell'));\n"
             + "    }"
-            + "  </script>"
-            + "  </head>"
-            + "  <body onload='test()'>"
-            + "    <table id='myTable'>"
-            + "      <tr id='myRow'>"
-            + "        <th id='myCell'>Foo</th>"
-            + "      </tr>"
-            + "    </table>"
-            + "  </body>"
+            + "  </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <table id='myTable'>\n"
+            + "      <tr id='myRow'>\n"
+            + "        <th id='myCell'>Foo</th>\n"
+            + "      </tr>\n"
+            + "    </table>\n"
+            + "  </body>\n"
             + "</html>";
         
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -656,7 +655,7 @@ public class TableTest extends WebTestCase {
         final String htmlContent
             = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    document.getElementById('myTable').refresh();"
+            + "    document.getElementById('myTable').refresh();\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<table id='myTable'></table>\n"

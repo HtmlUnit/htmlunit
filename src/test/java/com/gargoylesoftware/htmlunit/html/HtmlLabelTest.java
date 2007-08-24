@@ -64,10 +64,10 @@ public class HtmlLabelTest extends WebTestCase {
      */
     public void test_click() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + " <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>"
-            + " <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + " <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>\n"
+            + " <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -89,11 +89,11 @@ public class HtmlLabelTest extends WebTestCase {
      */
     public void test_getReferencedElement() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + " <input type='checkbox' name='checkbox' id='testCheckbox'/>"
-            + " <label for='testCheckbox' id='testLabel1'>Check me</label>"
-            + " <label for='notExisting' id='testLabel2'>Check me too</label>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + " <input type='checkbox' name='checkbox' id='testCheckbox'/>\n"
+            + " <label for='testCheckbox' id='testLabel1'>Check me</label>\n"
+            + " <label for='notExisting' id='testLabel2'>Check me too</label>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);

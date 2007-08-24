@@ -151,7 +151,7 @@ public class HtmlAttrTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNodeType() throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var attr = document.createAttribute('myAttrib');\n"
             + "    alert(attr.nodeType);\n"

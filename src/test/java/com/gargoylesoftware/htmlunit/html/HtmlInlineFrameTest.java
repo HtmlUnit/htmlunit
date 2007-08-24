@@ -69,8 +69,8 @@ public class HtmlInlineFrameTest extends WebTestCase {
      */
     public void testSetSrcAttribute() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<iframe id='iframe1' src='http://second'>"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<iframe id='iframe1' src='http://second'>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
@@ -129,9 +129,9 @@ public class HtmlInlineFrameTest extends WebTestCase {
      */
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<iframe id='iframe1' src='http://second'></iframe>"
-            + "<script type='text/javascript'>document.getElementById('iframe1').src = 'http://third';"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<iframe id='iframe1' src='http://second'></iframe>\n"
+            + "<script type='text/javascript'>document.getElementById('iframe1').src = 'http://third';\n"
             + "</script></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
@@ -158,11 +158,11 @@ public class HtmlInlineFrameTest extends WebTestCase {
      */
     public void testScriptUnderIFrame() throws Exception {
         final String firstContent
-            = "<html><body>"
-            + "<iframe src='http://second'>"
-            + "  <div><script>alert(1);</script></div>"
-            + "  <script src='http://third'></script>"
-            + "</iframe>"
+            = "<html><body>\n"
+            + "<iframe src='http://second'>\n"
+            + "  <div><script>alert(1);</script></div>\n"
+            + "  <script src='http://third'></script>\n"
+            + "</iframe>\n"
             + "</body></html>";
         final String secondContent
             = "<html><body><script>alert(2);</script></body></html>";

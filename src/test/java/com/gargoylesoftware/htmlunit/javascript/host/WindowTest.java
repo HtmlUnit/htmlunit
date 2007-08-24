@@ -98,10 +98,10 @@ public class WindowTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
-            + "    <a id='link' onClick='location=\"http://second\"; return false;'>Click me</a>"
-            + "</form>"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
+            + "    <a id='link' onClick='location=\"http://second\"; return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body></body></html>";
@@ -131,15 +131,15 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
             + "    <a id='link' onClick='open(\"http://second\", \"MyNewWindow\").focus(); "
-            + "return false;'>Click me</a>"
-            + "</form>"
+            + "return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title></head><body>"
-            + "<script>alert(self.name)</script>"
+            = "<html><head><title>Second</title></head><body>\n"
+            + "<script>alert(self.name)</script>\n"
             + "</body></html>";
 
         final EventCatcher eventCatcher = new EventCatcher();
@@ -187,14 +187,14 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title><base target='MyNewWindow'></head><body>"
-            + "<form name='form1'>"
-            + "    <a id='link' href='http://second'>Click me</a>"
-            + "</form>"
+            = "<html><head><title>First</title><base target='MyNewWindow'></head><body>\n"
+            + "<form name='form1'>\n"
+            + "    <a id='link' href='http://second'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title></head><body>"
-            + "<script>alert(self.name)</script>"
+            = "<html><head><title>Second</title></head><body>\n"
+            + "<script>alert(self.name)</script>\n"
             + "</body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -234,17 +234,17 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />"
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />\n"
             + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title></head><body>"
+            = "<html><head><title>Second</title></head><body>\n"
             + "  <a id='link' "
-            + "onClick='open(\"http://third\", \"_blank\").focus(); '>"
-            + "Click me</a>"
+            + "onClick='open(\"http://third\", \"_blank\").focus(); '>\n"
+            + "Click me</a>\n"
             + "</body></html>";
         final String thirdContent
-            = "<html><head><title>Third</title></head><body>"
+            = "<html><head><title>Third</title></head><body>\n"
             + "</body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -300,11 +300,11 @@ public class WindowTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
             + "    <a id='link' onClick='open(\"http://second\", \"_self\"); "
-            + "return false;'>Click me</a>"
-            + "</form>"
+            + "return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body></body></html>";
@@ -344,17 +344,17 @@ public class WindowTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />"
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />\n"
             + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title></head><body>"
-            + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />"
+            = "<html><head><title>Second</title></head><body>\n"
+            + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />\n"
             + "</body></html>";
         final String thirdContent
-            = "<html><head><title>Third</title></head><body>"
+            = "<html><head><title>Third</title></head><body>\n"
             + "    <a id='link' onClick='open(\"http://fourth\", \"_top\"); "
-            + "return false;'>Click me</a>"
+            + "return false;'>Click me</a>\n"
             + "</body></html>";
         final String fourthContent
             = "<html><head><title>Fourth</title></head><body></body></html>";
@@ -411,17 +411,17 @@ public class WindowTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />"
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />\n"
             + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title></head><body>"
-            + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />"
+            = "<html><head><title>Second</title></head><body>\n"
+            + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />\n"
             + "</body></html>";
         final String thirdContent
-            = "<html><head><title>Third</title></head><body>"
+            = "<html><head><title>Third</title></head><body>\n"
             + "    <a id='link' onClick='open(\"http://fourth\", \"_parent\"); "
-            + "return false;'>Click me</a>"
+            + "return false;'>Click me</a>\n"
             + "</body></html>";
         final String fourthContent
             = "<html><head><title>Fourth</title></head><body></body></html>";
@@ -476,18 +476,18 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow_existingWindow() throws Exception {
         final String content
-            = "<html><head><script>"
+            = "<html><head><script>\n"
             + "function test()"
             + "{"
-            + "  var w1 = window.open('about:blank', 'foo');"
-            + "  alert(w1 != null);"
-            + "  var w2 = window.open('', 'foo');"
-            + "  alert(w1 == w2);"
-            + "  var w3 = window.open('', 'myFrame');"
-            + "  alert(w3 == window.frames.myFrame);"
+            + "  var w1 = window.open('about:blank', 'foo');\n"
+            + "  alert(w1 != null);\n"
+            + "  var w2 = window.open('', 'foo');\n"
+            + "  alert(w1 == w2);\n"
+            + "  var w3 = window.open('', 'myFrame');\n"
+            + "  alert(w3 == window.frames.myFrame);\n"
             + "}"
-            + "</script></head><body onload='test()'>"
-            + "<iframe name='myFrame' id='myFrame'></iframe>"
+            + "</script></head><body onload='test()'>\n"
+            + "<iframe name='myFrame' id='myFrame'></iframe>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -503,10 +503,10 @@ public class WindowTest extends WebTestCase {
      */
     public void testOpenWindow_emptyUrl() throws Exception {
         final String content
-            = "<html><head><script>"
-            + "var w = window.open('');"
-            + "alert(w ? w.document.location : w);"
-            + "</script></head>"
+            = "<html><head><script>\n"
+            + "var w = window.open('');\n"
+            + "alert(w ? w.document.location : w);\n"
+            + "</script></head>\n"
             + "<body></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -528,7 +528,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testAlert_NoAlertHandler() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>"
+            = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
         getLog().warn("Warning for no alert handler expected next");
@@ -542,15 +542,15 @@ public class WindowTest extends WebTestCase {
     public void testParentAndTop() throws Exception {
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-            + "  <iframe name='left' src='http://second' />"
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <iframe name='left' src='http://second' />\n"
             + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title></head><body>"
-            + "  <iframe name='innermost' src='http://third' />"
+            = "<html><head><title>Second</title></head><body>\n"
+            + "  <iframe name='innermost' src='http://third' />\n"
             + "</body></html>";
         final String thirdContent
-            = "<html><head><title>Third</title><script>"
+            = "<html><head><title>Third</title><script>\n"
             + "function doAlert() {\n"
             + "    alert(parent != this);\n"
             + "    alert(top != this);\n"
@@ -559,7 +559,7 @@ public class WindowTest extends WebTestCase {
             + "    alert(parent.frames[0] == this);\n"
             + "    alert(top.frames[0] == parent);\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body><a id='clickme' onClick='doAlert()'>foo</a></body></html>";
 
         final WebClient webClient = new WebClient();
@@ -610,7 +610,7 @@ public class WindowTest extends WebTestCase {
         });
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>"
+            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -628,7 +628,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testConfirm_noConfirmHandler() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>"
+            = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         getLog().warn("Warning for no confirm handler expected next");
@@ -656,7 +656,7 @@ public class WindowTest extends WebTestCase {
         });
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>"
+            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -681,7 +681,7 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>"
+            = "<html><head><title>First</title><script>function doTest(){alert(prompt('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -706,7 +706,7 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title><script>"
+            = "<html><head><title>First</title><script>\n"
             + "function runtest() {\n"
             + "    alert(window.opener)\n"
             + "    alert('one')\n"
@@ -715,23 +715,23 @@ public class WindowTest extends WebTestCase {
             + "function callAlert(text) {\n"
             + "    alert(text)"
             + "}\n"
-            + "</script></head><body onload='runtest()'>"
+            + "</script></head><body onload='runtest()'>\n"
             + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title><script>"
+            = "<html><head><title>Second</title><script>\n"
             + "function runtest() {\n"
             + "    opener.callAlert('two')\n"
             + "    document.form1.submit()\n"
             + "}\n"
-            + "</script></head><body onload='runtest()'>"
-            + "<form name='form1' action='http://third' method='post'><input type='submit'></form>"
+            + "</script></head><body onload='runtest()'>\n"
+            + "<form name='form1' action='http://third' method='post'><input type='submit'></form>\n"
             + "</body></html>";
         final String thirdContent
-            = "<html><head><title>Third</title><script>"
+            = "<html><head><title>Third</title><script>\n"
             + "function runtest() {\n"
             + "    opener.callAlert('three')"
             + "}\n"
-            + "</script></head><body onload='runtest()'>"
+            + "</script></head><body onload='runtest()'>\n"
             + "</body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -751,7 +751,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testSetTimeout() throws Exception {
         final String content
-            = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',1);"
+            = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',1);\n"
             + "</script></body></html>";
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -764,9 +764,9 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testSetTimeoutByReference() throws Exception {
-        final String content = "<html><body><script language='JavaScript'>"
+        final String content = "<html><body><script language='JavaScript'>\n"
             + "function doTimeout() { alert('Yo!'); }"
-            + "window.setTimeout(doTimeout,1);"
+            + "window.setTimeout(doTimeout,1);\n"
             + "</script></body></html>";
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -783,10 +783,10 @@ public class WindowTest extends WebTestCase {
         final String content
             = "<html><body>\n"
             + "<script>\n"
-            + "window.setInterval('alert(\"Yo!\")', 500);"
+            + "window.setInterval('alert(\"Yo!\")', 500);\n"
             + "function foo() { alert('Yo2'); }\n"
-            + "var i = window.setInterval(foo, 500);"
-            + "window.clearInterval(i);"
+            + "var i = window.setInterval(foo, 500);\n"
+            + "window.clearInterval(i);\n"
             + "</script></body></html>";
 
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -805,11 +805,11 @@ public class WindowTest extends WebTestCase {
             + "    function test() {\n"
             + "      threadID = setInterval(doAlert, 100);\n"
             + "    }\n"
-            + "    var iterationNumber=0;"
+            + "    var iterationNumber=0;\n"
             + "    function doAlert() {\n"
             + "      alert('blah');\n"
             + "      if (++iterationNumber >= 3) {"
-            + "        clearInterval(threadID);"
+            + "        clearInterval(threadID);\n"
             + "      }"
             + "    }\n"
             + "  </script>\n"
@@ -861,8 +861,8 @@ public class WindowTest extends WebTestCase {
      */
     public void testSetTimeoutStopped() throws Exception {
         final String firstContent
-            = "<html><head>"
-            + "<script language='JavaScript'>window.setTimeout('alert(\"Yo!\")', 1000);</script>"
+            = "<html><head>\n"
+            + "<script language='JavaScript'>window.setTimeout('alert(\"Yo!\")', 1000);</script>\n"
             + "</head><body onload='document.location.replace(\"http://second\")'></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
@@ -943,11 +943,11 @@ public class WindowTest extends WebTestCase {
         final MockWebConnection webConnection =
             new MockWebConnection(webClient);
         final String firstContent =
-            "<html><body><script language='JavaScript'>"
-            + "w2 = window.open('about:blank', 'AboutBlank');"
-            + "w2.document.open();"
-            + "w2.document.write('<html><head><title>hello</title></head><body></body></html>');"
-            + "w2.document.close();"
+            "<html><body><script language='JavaScript'>\n"
+            + "w2 = window.open('about:blank', 'AboutBlank');\n"
+            + "w2.document.open();\n"
+            + "w2.document.write('<html><head><title>hello</title></head><body></body></html>');\n"
+            + "w2.document.close();\n"
             + "</script></body></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
@@ -966,9 +966,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testWindowFrames() throws Exception {
         final String firstContent =
-            "<html><body><script language='JavaScript'>"
+            "<html><body><script language='JavaScript'>\n"
             + "if (typeof top.frames['anyXXXname'] == 'undefined') {"
-            + "alert('one')};"
+            + "alert('one')};\n"
             + "</script></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -983,21 +983,21 @@ public class WindowTest extends WebTestCase {
     public void testWindowFramesLive() throws Exception {
 
         final String content =
-            "<html>"
-            + "<script>"
-            + "var oFrames = window.frames;"
-            + "alert(oFrames.length);"
+            "<html>\n"
+            + "<script>\n"
+            + "var oFrames = window.frames;\n"
+            + "alert(oFrames.length);\n"
             + "function test()"
             + "{"
-            + "    alert(oFrames.length);"
-            + "    alert(window.frames.length);"
-            + "    alert(oFrames == window.frames);"
+            + "    alert(oFrames.length);\n"
+            + "    alert(window.frames.length);\n"
+            + "    alert(oFrames == window.frames);\n"
             + "}"
-            + "</script>"
-            + "<frameset rows='50,*' onload='test()'>"
-            + "<frame src='about:blank'/>"
-            + "<frame src='about:blank'/>"
-            + "</frameset>"
+            + "</script>\n"
+            + "<frameset rows='50,*' onload='test()'>\n"
+            + "<frame src='about:blank'/>\n"
+            + "<frame src='about:blank'/>\n"
+            + "</frameset>\n"
             + "</html>";
 
         final String[] expectedAlerts = {"0", "2", "2", "true"};
@@ -1018,7 +1018,7 @@ public class WindowTest extends WebTestCase {
             "<html><head><title>first</title></head><body><script>\n"
             + "myVariable = 'foo';\n"
             + "alert(window.myVariable);\n"
-            + "</script></body></head>";
+            + "</script></body></head>\n";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
@@ -1039,27 +1039,27 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title></head><body><script>"
+            = "<html><head><title>First</title></head><body><script>\n"
             + "myVariable = 'first'"
-            + "  </script><iframe name='left' src='http://second' />"
+            + "  </script><iframe name='left' src='http://second' />\n"
             + "</body></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
         final String secondContent
-            = "<html><head><title>Second</title></head><body><script>"
+            = "<html><head><title>Second</title></head><body><script>\n"
             + "myVariable = 'second'"
-            + "  </script><iframe name='innermost' src='http://third' />"
+            + "  </script><iframe name='innermost' src='http://third' />\n"
             + "</body></html>";
         webConnection.setResponse(URL_SECOND, secondContent);
 
         final String thirdContent
-            = "<html><head><title>Third</title><script>"
+            = "<html><head><title>Third</title><script>\n"
             + "myVariable = 'third';\n"
             + "function doTest() {\n"
             + "alert('parent.myVariable = ' + parent.myVariable);\n"
             + "alert('top.myVariable = ' + top.myVariable);\n"
             + "}\n"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -1089,24 +1089,24 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='20%,80%'>"
-            + "    <frameset rows='30%,70%'>"
-            + "        <frame src='http://second' name='second'>"
-            + "        <frame src='http://third' name='third'>"
-            + "    </frameset>"
-            + "    <frame src='http://fourth' name='fourth'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frameset rows='30%,70%'>\n"
+            + "        <frame src='http://second' name='second'>\n"
+            + "        <frame src='http://third' name='third'>\n"
+            + "    </frameset>\n"
+            + "    <frame src='http://fourth' name='fourth'>\n"
             + "</frameset></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
         final String secondContent
-            = "<html><head><title>second</title></head><body><script>"
+            = "<html><head><title>second</title></head><body><script>\n"
             + "myVariable = 'second';\n"
             + "</script><p>second</p></body></html>";
         webConnection.setResponse(URL_SECOND, secondContent);
 
         final String thirdContent
-            = "<html><head><title>third</title></head><body><script>"
+            = "<html><head><title>third</title></head><body><script>\n"
             + "myVariable = 'third';\n"
             + "</script><p>third</p></body></html>";
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -1142,7 +1142,7 @@ public class WindowTest extends WebTestCase {
             "<html><head><title>first</title></head><body><script>\n"
             + "myVariable = 'foo';\n"
             + "alert(window.myOtherVariable == null);\n"
-            + "</script></body></head>";
+            + "</script></body></head>\n";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
@@ -1163,13 +1163,13 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='20%,80%'>"
-            + "    <frameset rows='30%,70%'>"
-            + "        <frame src='http://second' name='second'>"
-            + "        <frame src='http://third' name='third'>"
-            + "    </frameset>"
-            + "    <frame src='http://fourth' name='fourth'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frameset rows='30%,70%'>\n"
+            + "        <frame src='http://second' name='second'>\n"
+            + "        <frame src='http://third' name='third'>\n"
+            + "    </frameset>\n"
+            + "    <frame src='http://fourth' name='fourth'>\n"
             + "</frameset></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
@@ -1210,12 +1210,12 @@ public class WindowTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String aContent
-            = "<html><head><title>A</title></head><body>"
-            + "<button id='clickme' onClick='window.open(\"b/b.html\");'>Click me</a>"
+            = "<html><head><title>A</title></head><body>\n"
+            + "<button id='clickme' onClick='window.open(\"b/b.html\");'>Click me</a>\n"
             + "</body></html>";
         final String bContent
-            = "<html><head><title>B</title></head><body>"
-            + "<button id='clickme' onClick='opener.location.href=\"../c.html\";'>Click me</a>"
+            = "<html><head><title>B</title></head><body>\n"
+            + "<button id='clickme' onClick='opener.location.href=\"../c.html\";'>Click me</a>\n"
             + "</body></html>";
         final String cContent
             = "<html><head><title>C</title></head><body></body></html>";
@@ -1248,19 +1248,19 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testClosed() throws Exception {
-        final String content = "<html><head>"
-            + "<script>"
+        final String content = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  alert(window.closed);"
-            + "  var newWindow = window.open('about:blank', 'foo');"
-            + "  alert(newWindow.closed);"
-            + "  newWindow.close();"
-            + "  alert(newWindow.closed);"
+            + "  alert(window.closed);\n"
+            + "  var newWindow = window.open('about:blank', 'foo');\n"
+            + "  alert(newWindow.closed);\n"
+            + "  newWindow.close();\n"
+            + "  alert(newWindow.closed);\n"
             + "}"
-            + "</script>"
-            + "</head>"
-            + "<body onload='test()'>"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"false", "false", "true"};
@@ -1285,14 +1285,14 @@ public class WindowTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>First</title></head><body>"
-             + "<a href='" + URL_SECOND + "' id='link' target='_blank'>Link</a>"
+            = "<html><head><title>First</title></head><body>\n"
+             + "<a href='" + URL_SECOND + "' id='link' target='_blank'>Link</a>\n"
              + "</body></html>";
         final String secondContent
-            = "<html><head><title>Second</title></head><body>"
-             + "<h1>Second</h1><form>"
+            = "<html><head><title>Second</title></head><body>\n"
+             + "<h1>Second</h1><form>\n"
              + "<input type='submit' name='action' value='Close' id='button' "
-             + "onclick='window.close(); return false;'>"
+             + "onclick='window.close(); return false;'>\n"
              + "</form></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -1332,9 +1332,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testFramesLengthZero() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "alert(window.frames.length)"
-            + "</script></head><body>"
+            + "</script></head><body>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
@@ -1351,19 +1351,19 @@ public class WindowTest extends WebTestCase {
     public void testFramesLengthAndFrameAccess() throws Exception {
 
         final String content =
-            "<html>"
-            + "<script>"
+            "<html>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "    alert(window.frames.length);"
-            + "    alert(window.frames[0].name);"
-            + "    alert(window.frames.frame2.name);"
+            + "    alert(window.frames.length);\n"
+            + "    alert(window.frames[0].name);\n"
+            + "    alert(window.frames.frame2.name);\n"
             + "}"
-            + "</script>"
-            + "<frameset rows='50,*' onload='test()'>"
-            + "<frame name='frame1' src='about:blank'/>"
-            + "<frame name='frame2' src='about:blank'/>"
-            + "</frameset>"
+            + "</script>\n"
+            + "<frameset rows='50,*' onload='test()'>\n"
+            + "<frame name='frame1' src='about:blank'/>\n"
+            + "<frame name='frame2' src='about:blank'/>\n"
+            + "</frameset>\n"
             + "</html>";
 
         final List collectedAlerts = new ArrayList();
@@ -1380,9 +1380,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testMoveTo() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "window.moveTo(10, 20)"
-            + "</script></head><body>"
+            + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -1394,9 +1394,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testMoveBy() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "window.moveBy(10, 20)"
-            + "</script></head><body>"
+            + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -1421,9 +1421,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testScroll() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
-            + "window.scroll(10, 20);"
-            + "</script></head><body>"
+            = "<html><head><title>foo</title><script>\n"
+            + "window.scroll(10, 20);\n"
+            + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -1435,9 +1435,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testScrollBy() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
-            + "window.scrollBy(10, 20);"
-            + "</script></head><body>"
+            = "<html><head><title>foo</title><script>\n"
+            + "window.scrollBy(10, 20);\n"
+            + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -1449,9 +1449,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testScrollByLines() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
-            + "window.scrollByLines(2);"
-            + "</script></head><body>"
+            = "<html><head><title>foo</title><script>\n"
+            + "window.scrollByLines(2);\n"
+            + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -1463,9 +1463,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testScrollByPages() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
-            + "window.scrollByPages(2);"
-            + "</script></head><body>"
+            = "<html><head><title>foo</title><script>\n"
+            + "window.scrollByPages(2);\n"
+            + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -1477,9 +1477,9 @@ public class WindowTest extends WebTestCase {
      */
     public void testScrollTo() throws Exception {
         final String content
-            = "<html><head><title>foo</title><script>"
-            + "window.scrollTo(10, 20);"
-            + "</script></head><body>"
+            = "<html><head><title>foo</title><script>\n"
+            + "window.scrollTo(10, 20);\n"
+            + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
     }
@@ -1512,7 +1512,7 @@ public class WindowTest extends WebTestCase {
             + "<input type='text' name='input2' value='3'/>\n"
             + "<input type='text' name='input2' value='4'/>\n"
             + "</body>\n"
-            + "</html>\n";
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"form1", "form2", "2", "4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -1545,7 +1545,7 @@ public class WindowTest extends WebTestCase {
             + "<input type='text' name='input1' id='input1Id' value='1'/>\n"
             + "</form>\n"
             + "</body>\n"
-            + "</html>\n";
+            + "</html>";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"form1", "form2", "1", "DIV"};
         loadPage(content, collectedAlerts);
@@ -1577,7 +1577,7 @@ public class WindowTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='div1'>blah</div>\n"
             + "</body>\n"
-            + "</html>\n";
+            + "</html>";
         final String[] expectedAlerts = {"JavaScript", "JScript", "Invalid class string"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1609,7 +1609,7 @@ public class WindowTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</body>\n"
-            + "</html>\n";
+            + "</html>";
         final String[] expectedAlerts = {"test2", "test"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1624,10 +1624,10 @@ public class WindowTest extends WebTestCase {
      */
     public void testOnloadNotAFunction() throws Exception {
 
-        final String html = "<html><body><script>"
-            + "window.onload = new function() {alert('a')};"
-            + "window.onload = undefined;"
-            + "alert(window.onload);"
+        final String html = "<html><body><script>\n"
+            + "window.onload = new function() {alert('a')};\n"
+            + "window.onload = undefined;\n"
+            + "alert(window.onload);\n"
             + "</script></body></html>";
 
         final String[] expectedAlerts = {"a", "undefined"};
@@ -1649,17 +1649,17 @@ public class WindowTest extends WebTestCase {
             + "  function test1() { alert('test1'); }\n"
             + "  function test2() { alert('test2'); }\n"
             + "  function test3() { alert('test3'); }\n"
-            + "alert(window.addEventListener == null);"
-            + "alert(window.attachEvent == null);"
-            + "alert(window.removeEventListener == null);"
-            + "alert(window.detachEvent == null);"
-            + "window.addEventListener('load', test1, true);"
-            + "window.addEventListener('load', test1, true);"
-            + "window.addEventListener('load', test2, true);"
-            + "window.addEventListener('load', test3, true);"
-            + "window.removeEventListener('load', test3, true);"
+            + "alert(window.addEventListener == null);\n"
+            + "alert(window.attachEvent == null);\n"
+            + "alert(window.removeEventListener == null);\n"
+            + "alert(window.detachEvent == null);\n"
+            + "window.addEventListener('load', test1, true);\n"
+            + "window.addEventListener('load', test1, true);\n"
+            + "window.addEventListener('load', test2, true);\n"
+            + "window.addEventListener('load', test3, true);\n"
+            + "window.removeEventListener('load', test3, true);\n"
             + "</script></head>\n"
-            + "<body onload='alert(\"onload\")'></body></html>\n";
+            + "<body onload='alert(\"onload\")'></body></html>";
         final String[] expectedAlerts = {"false", "true", "false", "true", "test1", "test2", "onload"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1677,17 +1677,17 @@ public class WindowTest extends WebTestCase {
             + "  function test1(_e) { alert('test1, param null: ' + (_e == null)); }\n"
             + "  function test2() { alert('test2'); }\n"
             + "  function test3() { alert('test3'); }\n"
-            + "alert(window.addEventListener == null);"
-            + "alert(window.attachEvent == null);"
-            + "alert(window.removeEventListener == null);"
-            + "alert(window.detachEvent == null);"
-            + "window.attachEvent('onload', test1);"
-            + "window.attachEvent('onload', test1);"
-            + "window.attachEvent('onload', test2);"
-            + "window.attachEvent('onload', test3);"
-            + "window.detachEvent('onload', test3);"
+            + "alert(window.addEventListener == null);\n"
+            + "alert(window.attachEvent == null);\n"
+            + "alert(window.removeEventListener == null);\n"
+            + "alert(window.detachEvent == null);\n"
+            + "window.attachEvent('onload', test1);\n"
+            + "window.attachEvent('onload', test1);\n"
+            + "window.attachEvent('onload', test2);\n"
+            + "window.attachEvent('onload', test3);\n"
+            + "window.detachEvent('onload', test3);\n"
             + "</script></head>\n"
-            + "<body onload='alert(\"onload\")'></body></html>\n";
+            + "<body onload='alert(\"onload\")'></body></html>";
         final String[] expectedAlerts = {"true", "false", "true", "false",
             "onload", "test1, param null: false", "test2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -1706,12 +1706,12 @@ public class WindowTest extends WebTestCase {
             + "<script>\n"
             + "function test()"
             + "{"
-            + "  window.detachEvent('onload', test);"
-            + "  alert('detached');"
+            + "  window.detachEvent('onload', test);\n"
+            + "  alert('detached');\n"
             + "}"
-            + "window.attachEvent('onload', test);"
+            + "window.attachEvent('onload', test);\n"
             + "</script></head>\n"
-            + "<body></body></html>\n";
+            + "<body></body></html>";
         final String[] expectedAlerts = {"detached"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1727,13 +1727,13 @@ public class WindowTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
-            = "<html><head><title>First</title><script>"
+            = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(window.status);\n"
             + "    window.status = 'newStatus';\n"
             + "    alert(window.status);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
+            + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
         final URL url = URL_FIRST;
@@ -1775,7 +1775,7 @@ public class WindowTest extends WebTestCase {
             + "alert('window.name after: ' + window.name);\n"
             + "</script>\n"
             + "</body>\n"
-            + "</html>\n";
+            + "</html>";
         final String[] expectedAlerts = {"window.name before: ", "window.name after: " + windowName};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1799,7 +1799,7 @@ public class WindowTest extends WebTestCase {
             + "alert(typeof window.outerHeight);\n"
             + "</script>\n"
             + "</body>\n"
-            + "</html>\n";
+            + "</html>";
         final List expectedAlerts = Collections.nCopies(4, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
@@ -1818,7 +1818,7 @@ public class WindowTest extends WebTestCase {
             + "window.print();\n"
             + "</script>\n"
             + "</body>\n"
-            + "</html>\n";
+            + "</html>";
 
         loadPage(content);
     }
@@ -1832,11 +1832,11 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final String firstContent = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
+        final String firstContent = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
             + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
-            + "return false;'>Click me</a>"
-            + "</form>"
+            + "return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent = new String(new char[]{
             'G', 'I', 'F', '8', '9', 'a', 0x01, 0x00,
@@ -1881,11 +1881,11 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final String firstContent = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
+        final String firstContent = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
             + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
-            + "return false;'>Click me</a>"
-            + "</form>"
+            + "return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
         final String secondContent = "Hello World";
 
@@ -1924,13 +1924,13 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final String firstContent = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
+        final String firstContent = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
             + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
-            + "return false;'>Click me</a>"
-            + "</form>"
+            + "return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
-        final String secondContent = "<junk></junk>";
+        final String secondContent = "<junk></junk>\n";
 
         final EventCatcher eventCatcher = new EventCatcher();
 
@@ -1967,13 +1967,13 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final String firstContent = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
+        final String firstContent = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
             + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
-            + "return false;'>Click me</a>"
-            + "</form>"
+            + "return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
-        final String secondContent = "var x=1;";
+        final String secondContent = "var x=1;\n";
 
         final EventCatcher eventCatcher = new EventCatcher();
 
@@ -2010,14 +2010,14 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final String firstContent = "<html><head><title>First</title></head><body>"
-            + "<form name='form1'>"
+        final String firstContent = "<html><head><title>First</title></head><body>\n"
+            + "<form name='form1'>\n"
             + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
-            + "return false;'>Click me</a>"
-            + "</form>"
+            + "return false;'>Click me</a>\n"
+            + "</form>\n"
             + "</body></html>";
-        final String secondContent = new String("<html><head><title>Second</title></head><body>"
-            + "<p>Hello World</p>"
+        final String secondContent = new String("<html><head><title>Second</title></head><body>\n"
+            + "<p>Hello World</p>\n"
             + "</body></html>");
 
         final EventCatcher eventCatcher = new EventCatcher();
@@ -2063,9 +2063,9 @@ public class WindowTest extends WebTestCase {
      */
     private void testOpenWindow_refererHeader(final BrowserVersion browser,
             final String expectedRefererHeader) throws Exception {
-        final String firstContent = "<html><head></head>"
-            + "<body>"
-            + "<button id='clickme' onClick='window.open(\"http://second\");'>Click me</a>"
+        final String firstContent = "<html><head></head>\n"
+            + "<body>\n"
+            + "<button id='clickme' onClick='window.open(\"http://second\");'>Click me</a>\n"
             + "</body></html>";
 
         final String secondContent
@@ -2093,7 +2093,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testNestedSetTimeoutAboveMaxPriority() throws Exception {
         final int max = Thread.MAX_PRIORITY + 1;
-        final String content = "<html><body><script language='JavaScript'>"
+        final String content = "<html><body><script language='JavaScript'>\n"
             + "var depth = 0;\n"
             + "var maxdepth = " + max + ";\n"
             + "function addAnother() {\n"
@@ -2117,14 +2117,14 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testEvalScopeOtherWindow() throws Exception {
-        final String content = "<html><body>"
-            + "<iframe src='iframe.html'></iframe>"
+        final String content = "<html><body>\n"
+            + "<iframe src='iframe.html'></iframe>\n"
             + "</body></html>";
-        final String iframe = "<html><body>"
-            + "<script>"
-            + "window.parent.eval('var foo = 1');"
+        final String iframe = "<html><body>\n"
+            + "<script>\n"
+            + "window.parent.eval('var foo = 1');\n"
             + "alert(window.parent.foo)"
-            + "</script>"
+            + "</script>\n"
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
@@ -2147,9 +2147,9 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testEvalScopeLocal() throws Exception {
-        final String content = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>"
+        final String content = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>\n"
             + "<script> \n"
-            + "var docPatate = 'patate';"
+            + "var docPatate = 'patate';\n"
             + "function test() {\n"
             + " var f = document.forms['formtest']; \n"
             + " alert(eval(\"document.forms['formtest'].element.value\")); \n"
@@ -2157,7 +2157,7 @@ public class WindowTest extends WebTestCase {
             + " alert(eval('f.element.value')); \n"
             + "}\n"
             + "test(); \n"
-            + "</script>"
+            + "</script>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"elementValue", "elementValue", "elementValue"};
@@ -2195,10 +2195,10 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testFunctionEquality() throws Exception {
-        final String content = "<html><body>"
-            + "<script>"
+        final String content = "<html><body>\n"
+            + "<script>\n"
             + "alert(window.focus == window.focus)"
-            + "</script>"
+            + "</script>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -2213,16 +2213,16 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testCaptureEvents() throws Exception {
-        final String content = "<html><head><title>foo</title>"
-            + "<script>"
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "function t()"
             + "{"
-            + "    alert('captured');"
+            + "    alert('captured');\n"
             + "}"
-            + "window.captureEvents(Event.CLICK);"
-            + "window.onclick = t;"
-            + "</script></head><body>"
-            + "<div id='theDiv' onclick='alert(123)'>foo</div>"
+            + "window.captureEvents(Event.CLICK);\n"
+            + "window.onclick = t;\n"
+            + "</script></head><body>\n"
+            + "<div id='theDiv' onclick='alert(123)'>foo</div>\n"
             + "</body></html>";
         
         final List collectedAlerts = new ArrayList();
@@ -2248,7 +2248,7 @@ public class WindowTest extends WebTestCase {
     }
 
     private void testGetComputedStyle(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html>"
+        final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -2259,7 +2259,7 @@ public class WindowTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "<div id='myDiv'></div>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         
         final String[] expectedAlerts = {""};
         final List collectedAlerts = new ArrayList();
@@ -2273,9 +2273,9 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testOnLoadContext() throws Exception {
-        final String html = "<html><body><script>"
-            + "var x = function() { alert(this==window) };"
-            + "window.onload = x;"
+        final String html = "<html><body><script>\n"
+            + "var x = function() { alert(this==window) };\n"
+            + "window.onload = x;\n"
             + "</script></body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -2297,7 +2297,7 @@ public class WindowTest extends WebTestCase {
             + "   alert(eval('f.tagName'));\n"
             + "}"
             + "</script>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final String[] expectedAlerts = {"INPUT"};
         
@@ -2311,7 +2311,7 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testUndefinedProperty() throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(window['something']);\n"
             + "    alert(typeof window['something']);\n"
@@ -2335,17 +2335,17 @@ public class WindowTest extends WebTestCase {
             return;
         }
 
-        final String content = "<html><head><script language='JavaScript'>"
+        final String content = "<html><head><script language='JavaScript'>\n"
             + "function alert()"
             + "{"
-            + "  scroll = 'xxx';"
-            + "  document.write(scroll);"
+            + "  scroll = 'xxx';\n"
+            + "  document.write(scroll);\n"
             + "}"
             + "function navigator()"
             + "{"
-            + "  alert('xxx');"
+            + "  alert('xxx');\n"
             + "}"
-            + "navigator();"
+            + "navigator();\n"
             + "</script></head><body></body></html>";
 
         loadPage(content);

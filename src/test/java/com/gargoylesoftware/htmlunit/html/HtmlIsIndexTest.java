@@ -70,9 +70,9 @@ public class HtmlIsIndexTest extends WebTestCase {
     public void testFormSubmission()
         throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1' method='post'>"
-            + "<isindex prompt='enterSomeText'></isindex>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' method='post'>\n"
+            + "<isindex prompt='enterSomeText'></isindex>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);

@@ -131,7 +131,7 @@ public class DomTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAsText_table_elements() throws Exception {
-        final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>";
+        final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>\n";
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);

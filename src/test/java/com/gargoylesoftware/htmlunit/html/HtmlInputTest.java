@@ -70,12 +70,12 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testRadioButtonsAreMutuallyExclusive() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input type='radio' name='foo' value='1' selected='selected'/>"
-            + "<input type='radio' name='foo' value='2'/>"
-            + "<input type='radio' name='foo' value='3'/>"
-            + "<input type='submit' name='button' value='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='radio' name='foo' value='1' selected='selected'/>\n"
+            + "<input type='radio' name='foo' value='2'/>\n"
+            + "<input type='radio' name='foo' value='3'/>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -103,11 +103,11 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testSetChecked_CheckBox() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input type='checkbox' name='foo'/>"
-            + "<input type='checkbox' name='bar'/>"
-            + "<input type='submit' name='button' value='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='checkbox' name='foo'/>\n"
+            + "<input type='checkbox' name='bar'/>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -126,11 +126,11 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testGetChecked_RadioButton() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input type='radio' name='radio1'>"
-            + "<input type='RADIO' name='radio1' value='bar' checked>"
-            + "<input type='submit' name='button' value='foo'>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='radio' name='radio1'>\n"
+            + "<input type='RADIO' name='radio1' value='bar' checked>\n"
+            + "<input type='submit' name='button' value='foo'>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -149,9 +149,9 @@ public final class HtmlInputTest extends WebTestCase {
     public void testOnChangeHandler() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input type='text' name='text1' onchange='alert(\"changed\")')>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -169,9 +169,9 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testCheckboxDefaultValue() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input type='checkbox' name='checkbox1')>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='checkbox' name='checkbox1')>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -187,12 +187,12 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testClickRadioButton() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input type='radio' name='foo' value='1' selected='selected'/>"
-            + "<input type='radio' name='foo' value='2'/>"
-            + "<input type='radio' name='foo' value='3'/>"
-            + "<input type='submit' name='button' value='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='radio' name='foo' value='1' selected='selected'/>\n"
+            + "<input type='radio' name='foo' value='2'/>\n"
+            + "<input type='radio' name='foo' value='3'/>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -213,9 +213,9 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testInputNoType() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input name='foo'/>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input name='foo'/>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -230,9 +230,9 @@ public final class HtmlInputTest extends WebTestCase {
     public void testOnChangeHandlerNotFiredOnLoad() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<input type='file' name='text1' onchange='alert(\"changed\")')>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='file' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
@@ -245,10 +245,10 @@ public final class HtmlInputTest extends WebTestCase {
     public void testBadInputType() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head>"
-            + "<body onload='alert(document.form1.text1.type)'>"
-            + "<form name='form1'>"
-            + "<input type='foo' name='text1'>"
+            = "<html><head><title>foo</title></head>\n"
+            + "<body onload='alert(document.form1.text1.type)'>\n"
+            + "<form name='form1'>\n"
+            + "<input type='foo' name='text1'>\n"
             + "</form></body></html>";
         final List expectedAlerts = Collections.singletonList("text");
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
@@ -262,7 +262,7 @@ public final class HtmlInputTest extends WebTestCase {
      */
     public void testOnchangeNull() throws Exception {
         final String html =
-            "<html><head>"
+            "<html><head>\n"
             + "<script>\n"
             + "  function handler() {}"
             + "  function test() {\n"
@@ -275,7 +275,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</script>\n"
             + "<body onload=test()>\n"
             + "  <input id='myInput'>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);

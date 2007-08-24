@@ -84,7 +84,7 @@ public class ScriptTest extends WebTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body>abc</body>\n"
-            + "</html>\n";
+            + "</html>";
 
         final String js = "alert('3')";
 

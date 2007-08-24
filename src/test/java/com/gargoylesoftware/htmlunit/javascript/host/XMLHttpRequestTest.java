@@ -109,8 +109,8 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "          alert(new XMLHttpRequest());\n"
             + "        else if (window.ActiveXObject)\n"
             + "        {\n"
-            + "          new ActiveXObject('Microsoft.XMLHTTP');"
-            + "          alert('activeX created');"
+            + "          new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "          alert('activeX created');\n"
             + "        }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -159,7 +159,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<xml>\n"
             + "<content>blah</content>\n"
             + "<content>blah2</content>\n"
-            + "</xml>";
+            + "</xml>\n";
 
         final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = new ArrayList();
@@ -215,7 +215,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<xml2>\n"
             + "<content2>sdgxsdgx</content2>\n"
             + "<content2>sdgxsdgx2</content2>\n"
-            + "</xml2>";
+            + "</xml2>\n";
 
         final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -264,7 +264,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<xml>\n"
             + "<content>blah</content>\n"
             + "<content>blah2</content>\n"
-            + "</xml>";
+            + "</xml>\n";
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -284,21 +284,21 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testResponseText_NotXml() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var request;"
+            + "  var request;\n"
             + "  if (window.XMLHttpRequest)"
-            + "    request = new XMLHttpRequest();"
+            + "    request = new XMLHttpRequest();\n"
             + "  else if (window.ActiveXObject)"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
-            + "  request.open('GET', 'foo.txt', false);"
-            + "  request.send('');"
-            + "  alert(request.responseText);"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.open('GET', 'foo.txt', false);\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseText);\n"
             + "}"
-            + "</script>"
-            + "</head>"
+            + "</script>\n"
+            + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
@@ -321,30 +321,30 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     public void testResponseXML() throws Exception {
 
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var request;"
+            + "  var request;\n"
             + "  if (window.XMLHttpRequest)"
-            + "    request = new XMLHttpRequest();"
+            + "    request = new XMLHttpRequest();\n"
             + "  else if (window.ActiveXObject)"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
-            + "  request.open('GET', 'foo.xml', false);"
-            + "  request.send('');"
-            + "  var childNodes = request.responseXML.childNodes;"
-            + "  alert(childNodes.length);"
-            + "  var rootNode = childNodes[0];"
-            + "  alert(rootNode.nodeName);"
-            + "  alert(rootNode.attributes[0].nodeName);"
-            + "  alert(rootNode.attributes[0].nodeValue);"
-            + "  alert(rootNode.attributes['someAttr'] == rootNode.attributes[0]);"
-            + "  alert(rootNode.firstChild.nodeName);"
-            + "  alert(rootNode.firstChild.childNodes.length);"
-            + "  alert(request.responseXML.getElementsByTagName('fi').item(0).attributes[0].nodeValue);"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.open('GET', 'foo.xml', false);\n"
+            + "  request.send('');\n"
+            + "  var childNodes = request.responseXML.childNodes;\n"
+            + "  alert(childNodes.length);\n"
+            + "  var rootNode = childNodes[0];\n"
+            + "  alert(rootNode.nodeName);\n"
+            + "  alert(rootNode.attributes[0].nodeName);\n"
+            + "  alert(rootNode.attributes[0].nodeValue);\n"
+            + "  alert(rootNode.attributes['someAttr'] == rootNode.attributes[0]);\n"
+            + "  alert(rootNode.firstChild.nodeName);\n"
+            + "  alert(rootNode.firstChild.childNodes.length);\n"
+            + "  alert(request.responseXML.getElementsByTagName('fi').item(0).attributes[0].nodeValue);\n"
             + "}"
-            + "</script>"
-            + "</head>"
+            + "</script>\n"
+            + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
@@ -353,7 +353,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
-        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>",
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
                 "text/xml");
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
@@ -366,20 +366,20 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testSendNull() throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var request;"
+            + "  var request;\n"
             + "  if (window.XMLHttpRequest)"
-            + "    request = new XMLHttpRequest();"
+            + "    request = new XMLHttpRequest();\n"
             + "  else if (window.ActiveXObject)"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
-            + "  request.open('GET', 'foo.txt', false);"
-            + "  request.send(null);"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.open('GET', 'foo.txt', false);\n"
+            + "  request.send(null);\n"
             + "}"
-            + "</script>"
-            + "</head>"
+            + "</script>\n"
+            + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
@@ -412,20 +412,20 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     private void testSendNoArg(final BrowserVersion browserVersion) throws Exception {
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var request;"
+            + "  var request;\n"
             + "  if (window.XMLHttpRequest)"
-            + "    request = new XMLHttpRequest();"
+            + "    request = new XMLHttpRequest();\n"
             + "  else if (window.ActiveXObject)"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
-            + "  request.open('GET', 'foo.txt', false);"
-            + "  request.send();"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.open('GET', 'foo.txt', false);\n"
+            + "  request.send();\n"
             + "}"
-            + "</script>"
-            + "</head>"
+            + "</script>\n"
+            + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient(browserVersion);
@@ -442,20 +442,20 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testResponseNotInWindow() throws Exception {
-        final String html = "<html><head><title>foo</title>"
-            + "<script>"
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var request;"
+            + "  var request;\n"
             + "  if (window.XMLHttpRequest)"
-            + "    request = new XMLHttpRequest();"
+            + "    request = new XMLHttpRequest();\n"
             + "  else if (window.ActiveXObject)"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');"
-            + "  request.open('GET', 'foo.txt', false);"
-            + "  request.send();"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.open('GET', 'foo.txt', false);\n"
+            + "  request.send();\n"
             + "}"
-            + "</script>"
-            + "</head>"
+            + "</script>\n"
+            + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
@@ -474,21 +474,21 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     public void testOverrideMimeType() throws Exception {
 
-        final String html = "<html><head>"
-            + "<script>"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  var request = new XMLHttpRequest();"
-            + "  request.open('GET', 'foo.xml.txt', false);"
-            + "  request.send('');"
-            + "  alert(request.responseXML == null);"
-            + "  request.overrideMimeType('text/xml');"
-            + "  request.open('GET', 'foo.xml.txt', false);"
-            + "  request.send('');"
-            + "  alert(request.responseXML == null);"
+            + "  var request = new XMLHttpRequest();\n"
+            + "  request.open('GET', 'foo.xml.txt', false);\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseXML == null);\n"
+            + "  request.overrideMimeType('text/xml');\n"
+            + "  request.open('GET', 'foo.xml.txt', false);\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseXML == null);\n"
             + "}"
-            + "</script>"
-            + "</head>"
+            + "</script>\n"
+            + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
@@ -497,7 +497,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml.txt");
-        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>",
+        webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
                 "text/plain");
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
@@ -561,7 +561,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<updates>\n"
             + "<update>abcdefg</update>\n"
             + "<update>hijklmn</update>\n"
-            + "</updates>";
+            + "</updates>\n";
 
         final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -624,34 +624,34 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     public void testNoParallelJSExecutionInPage() throws Exception {
 
-        final String content = "<html><head><script>"
+        final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {"
             + " if (window.XMLHttpRequest)"
-            + "        return new XMLHttpRequest();"
+            + "        return new XMLHttpRequest();\n"
             + " else if (window.ActiveXObject)"
-            + "        return new ActiveXObject('Microsoft.XMLHTTP');"
+            + "        return new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "}"
-            + "var j = 0;"
+            + "var j = 0;\n"
             + "function test()"
             + "{"
-            + " req = getXMLHttpRequest();"
-            + " req.onreadystatechange = handler;"
-            + " req.open('post', 'foo.xml', true);"
-            + " req.send('');"
-            + " alert('before long loop');"
+            + " req = getXMLHttpRequest();\n"
+            + " req.onreadystatechange = handler;\n"
+            + " req.open('post', 'foo.xml', true);\n"
+            + " req.send('');\n"
+            + " alert('before long loop');\n"
             + " for (var i = 0; i < 5000; i++) {"
-            + "     j = j + 1;"
+            + "     j = j + 1;\n"
             + " }"
-            + " alert('after long loop');"
+            + " alert('after long loop');\n"
             + "}"
             + "function handler()"
             + "{"
             + " if (req.readyState == 4)"
             + " {"
-            + "     alert('ready state handler, content loaded: j=' + j);"
+            + "     alert('ready state handler, content loaded: j=' + j);\n"
             + " }"
             + "}"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
@@ -666,7 +666,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         };
         webConnection.setResponse(URL_FIRST, content);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
-        webConnection.setResponse(urlPage2, "<foo/>", "text/xml");
+        webConnection.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
 
@@ -683,27 +683,27 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     public void testRefererHeader() throws Exception {
 
-        final String content = "<html><head><script>"
+        final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {"
             + " if (window.XMLHttpRequest)"
-            + "        return new XMLHttpRequest();"
+            + "        return new XMLHttpRequest();\n"
             + " else if (window.ActiveXObject)"
-            + "        return new ActiveXObject('Microsoft.XMLHTTP');"
+            + "        return new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "}"
             + "function test()"
             + "{"
-            + " req = getXMLHttpRequest();"
-            + " req.open('post', 'foo.xml', false);"
-            + " req.send('');"
+            + " req = getXMLHttpRequest();\n"
+            + " req.open('post', 'foo.xml', false);\n"
+            + " req.send('');\n"
             + "}"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, content);
         final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
-        webConnection.setResponse(urlPage2, "<foo/>", "text/xml");
+        webConnection.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 

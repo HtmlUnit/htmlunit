@@ -74,13 +74,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1'>"
-            + "<option value='option1'>Option1</option>"
-            + "<option value='option2' selected='selected'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1'>\n"
+            + "<option value='option1'>Option1</option>\n"
+            + "<option value='option2' selected='selected'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -108,13 +108,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_MultipleSelectNoneSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1' multiple>"
-            + "<option value='option1'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' multiple>\n"
+            + "<option value='option1'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -141,13 +141,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_ChangeSelectedOption_SingleSelect() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1'>"
-            + "<option value='option1' selected='selected'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1'>\n"
+            + "<option value='option1' selected='selected'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -175,13 +175,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_ChangeSelectedOption_MultipleSelect() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1' multiple='multiple'>"
-            + "<option value='option1' selected='selected'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' multiple='multiple'>\n"
+            + "<option value='option1' selected='selected'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -211,13 +211,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_MultipleSelectMultipleSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1' multiple>"
-            + "<option value='option1' selected='selected'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3' selected='selected'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' multiple>\n"
+            + "<option value='option1' selected='selected'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3' selected='selected'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -238,13 +238,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectMultipleSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1'>"
-            + "<option value='option1' selected='selected'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3' selected='selected'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1'>\n"
+            + "<option value='option1' selected='selected'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3' selected='selected'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -264,13 +264,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectNoneSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1'>"
-            + "<option value='option1'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1'>\n"
+            + "<option value='option1'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -289,13 +289,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSelect_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form>"
-            + "<select name='select1' size='2' id='mySelect'>"
-            + "<option value='option1'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form>\n"
+            + "<select name='select1' size='2' id='mySelect'>\n"
+            + "<option value='option1'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -311,15 +311,15 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSetSelected_IllegalValue() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1'>"
-            + "<option value='option1' selected='selected'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<select name='select2'>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1'>\n"
+            + "<option value='option1' selected='selected'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<select name='select2'>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -358,15 +358,15 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetOptions() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1'>"
-            + "<option value='option1' selected='selected'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<optgroup label='group1'>"
-            + "    <option value='option3'>Option3</option>"
-            + "</optgroup>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1'>\n"
+            + "<option value='option1' selected='selected'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<optgroup label='group1'>\n"
+            + "    <option value='option3'>Option3</option>\n"
+            + "</optgroup>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -386,13 +386,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelect_OptionMultiple_NoValueOnAttribute() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1' id='select1' multiple>"
-            + "<option value='option1'>Option1</option>"
-            + "<option value='option2' >Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' id='select1' multiple>\n"
+            + "<option value='option1'>Option1</option>\n"
+            + "<option value='option2' >Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -404,17 +404,17 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetOptionByValue() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>"
-            + "<select name='select1'>"
-            + "    <option value='option1'>s1o1</option>"
-            + "    <option value='option2'>s1o2</option>"
-            + "</select>"
-            + "<select name='select2'>"
-            + "    <option value='option1'>s2o1</option>"
-            + "    <option value='option2'>s2o2</option>"
-            + "    <option>s2o3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>\n"
+            + "<select name='select1'>\n"
+            + "    <option value='option1'>s1o1</option>\n"
+            + "    <option value='option2'>s1o2</option>\n"
+            + "</select>\n"
+            + "<select name='select2'>\n"
+            + "    <option value='option1'>s2o1</option>\n"
+            + "    <option value='option2'>s2o2</option>\n"
+            + "    <option>s2o3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -430,13 +430,13 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelect_SetSelected_OnChangeHandler() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'><select name='select1' onChange='alert(\"changing\")'>"
-            + "<option value='option1' selected='selected'>Option1</option>"
-            + "<option value='option2'>Option2</option>"
-            + "<option value='option3'>Option3</option>"
-            + "</select>"
-            + "<input type='submit' name='button' value='foo'/>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' onChange='alert(\"changing\")'>\n"
+            + "<option value='option1' selected='selected'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -456,11 +456,11 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetSelectionOnOptionWithNoName() throws Exception {
-        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>"
-            + "<select name='select' multiple size='5'>"
-            + "<option value='1'>111</option>"
-            + "<option id='option2'>222</option>"
-            + "</select>"
+        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
+            + "<select name='select' multiple size='5'>\n"
+            + "<option value='1'>111</option>\n"
+            + "<option id='option2'>222</option>\n"
+            + "</select>\n"
             + "</form></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -483,13 +483,13 @@ public class HtmlSelectTest extends WebTestCase {
 
     /** @throws Exception if the test fails */
     public void testRemoveOptionsFromSelect() throws Exception {
-        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>"
+        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' id='theSelect'>"
             + "<option value='a'>111</option>"
             + "<option value='b'>222</option>"
             + "<option value='c'>333</option>"
             + "<option value='d'>444</option>"
-            + "</select>"
+            + "</select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -531,12 +531,12 @@ public class HtmlSelectTest extends WebTestCase {
 
     /** @throws Exception If the test fails */
     public void testEditOptions() throws Exception {
-        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>"
-            + "<select name='select' id='theSelect'>"
-            + "<option value='a'>111</option>"
-            + "<option value='b'>222</option>"
-            + "<option value='c'>333</option>"
-            + "</select>"
+        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
+            + "<select name='select' id='theSelect'>\n"
+            + "<option value='a'>111</option>\n"
+            + "<option value='b'>222</option>\n"
+            + "<option value='c'>333</option>\n"
+            + "</select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -573,10 +573,10 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testAsTextWhenNothingSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>"
-            + "<form>"
-            + "<select name='select1' size='1' id='mySelect'>"
-            + "</select>"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form>\n"
+            + "<select name='select1' size='1' id='mySelect'>\n"
+            + "</select>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -610,21 +610,21 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     public void testSetSelectedAttributeReturnedPage() throws Exception {
-        final String content = "<html><head><title>foo</title>"
-            + "<script>"
+        final String content = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "  document.getElementById('iframe').src = 'about:blank';"
+            + "  document.getElementById('iframe').src = 'about:blank';\n"
             + "}"
-            + "</script>"
-            + "</head><body>"
-            + "<form>"
-            + "<select name='select1' size='1' id='mySelect' onchange='test()'>"
-            + "<option value='option1'>option 1</option>"
-            + "<option value='option2'>option 2</option>"
-            + "</select>"
-            + "</form>"
-            + "<iframe id='iframe' src='about:blank'></iframe>"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "<select name='select1' size='1' id='mySelect' onchange='test()'>\n"
+            + "<option value='option1'>option 1</option>\n"
+            + "<option value='option2'>option 2</option>\n"
+            + "</select>\n"
+            + "</form>\n"
+            + "<iframe id='iframe' src='about:blank'></iframe>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
@@ -640,12 +640,12 @@ public class HtmlSelectTest extends WebTestCase {
      */
     public void testOnChangeResultPage() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>"
-            + "<form id='form1'>"
-            + "<select name='select1' id='select1' onchange='location=\"about:blank\"'>"
-            + "     <option id='option1'>Option1</option>"
-            + "     <option id='option2' selected>Number Two</option>"
-            + "</select>"
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<select name='select1' id='select1' onchange='location=\"about:blank\"'>\n"
+            + "     <option id='option1'>Option1</option>\n"
+            + "     <option id='option2' selected>Number Two</option>\n"
+            + "</select>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
@@ -658,7 +658,7 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelectedIndex() throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var oSelect = document.getElementById('main');\n"
             + "    var oOption = new Option('bla', 1);\n"

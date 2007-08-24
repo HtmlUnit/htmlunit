@@ -73,10 +73,10 @@ public class HTMLFrameElementTest extends WebTestCase {
     public void testFrameName() throws Exception {
 
         final String html
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='20%,80%'>"
-            + "    <frame id='frame1'>"
-            + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frame id='frame1'>\n"
+            + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
             + "</frameset></html>";
         final String[] expectedAlerts = {"Frame2"};
 
@@ -105,9 +105,9 @@ public class HTMLFrameElementTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
-            = "<html><head><title>first</title></head>"
-            + "<frameset cols='*' onload='" + jsExpr + "'>"
-            + "    <frame name='Frame1' src='subdir/frame.html'>"
+            = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='*' onload='" + jsExpr + "'>\n"
+            + "    <frame name='Frame1' src='subdir/frame.html'>\n"
             + "</frameset></html>";
         final String defaultContent
             = "<html><head><script>alert(location)</script></head></html>";
@@ -131,16 +131,16 @@ public class HTMLFrameElementTest extends WebTestCase {
      */
     public void testContentDocument() throws Exception {
         final String content
-            = "<html><head><title>first</title>"
-                + "<script>"
+            = "<html><head><title>first</title>\n"
+                + "<script>\n"
                 + "function test()\n"
                 + "{\n"
                 + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
                 + "}\n"
-                + "</script></head>"
-                + "<frameset rows='*' onload='test()'>"
-                + "<frame name='foo' id='myFrame' src='about:blank'/>"
-                + "</frameset>"
+                + "</script></head>\n"
+                + "<frameset rows='*' onload='test()'>\n"
+                + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
+                + "</frameset>\n"
                 + "</html>";
         final String[] expectedAlerts = {"true"};
 
@@ -155,16 +155,16 @@ public class HTMLFrameElementTest extends WebTestCase {
      */
     public void testContentWindow() throws Exception {
         final String content
-            = "<html><head><title>first</title>"
-                + "<script>"
+            = "<html><head><title>first</title>\n"
+                + "<script>\n"
                 + "function test()\n"
                 + "{\n"
                 + "  alert(document.getElementById('myFrame').contentWindow == frames.foo);\n"
                 + "}\n"
-                + "</script></head>"
-                + "<frameset rows='*' onload='test()'>"
-                + "<frame name='foo' id='myFrame' src='about:blank'/>"
-                + "</frameset>"
+                + "</script></head>\n"
+                + "<frameset rows='*' onload='test()'>\n"
+                + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
+                + "</frameset>\n"
                 + "</html>";
         final String[] expectedAlerts = {"true"};
 
@@ -180,12 +180,12 @@ public class HTMLFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testWriteFrameset() throws Exception {
-        final String content1 = "<html><head>"
-            + "<script>"
-            + "    document.write('<frameset>');"
-            + "    document.write('<frame src=\"page2.html\" name=\"leftFrame\">');"
-            + "    document.write('</frameset>');"
-            + "</script>"
+        final String content1 = "<html><head>\n"
+            + "<script>\n"
+            + "    document.write('<frameset>');\n"
+            + "    document.write('<frame src=\"page2.html\" name=\"leftFrame\">');\n"
+            + "    document.write('</frameset>');\n"
+            + "</script>\n"
             + "</head></html>";
         final String content2 = "<html><head><script>alert(2)</script></head></html>";
 
@@ -217,15 +217,15 @@ public class HTMLFrameElementTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String mainContent
-            = "<html><head><title>first</title></head><body>"
-            + "<iframe name='testFrame' src='testFrame.html'></iframe>"
-            + "<div id='aButton'>test text</div>"
+            = "<html><head><title>first</title></head><body>\n"
+            + "<iframe name='testFrame' src='testFrame.html'></iframe>\n"
+            + "<div id='aButton'>test text</div>\n"
             + "</body></html>";
         final String frameContent
-            = "<html><head></head><body>"
-            + "<script>"
-            + "alert(top.document.getElementById('aButton').tagName);"
-            + "</script>"
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "alert(top.document.getElementById('aButton').tagName);\n"
+            + "</script>\n"
             + "</body></html>";
 
         webConnection.setResponse(URL_GARGOYLE, mainContent);
@@ -249,7 +249,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final String htmlContent
             = "<html>\n"
             + "<script>\n"
-            + "var root=this;"
+            + "var root=this;\n"
             + "function listframes(frame) {\n"
             + "  if (frame == null) {\n"
             + "    alert('frame=null');\n"
@@ -288,7 +288,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      */
     public void testOnloadNull() throws Exception {
         final String html =
-            "<html><head>"
+            "<html><head>\n"
             + "<script>\n"
             + "  function handler() {}"
             + "  function test() {\n"
@@ -301,7 +301,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</script>\n"
             + "<body onload=test()>\n"
             + "  <iframe id='myFrame'></iframe>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);

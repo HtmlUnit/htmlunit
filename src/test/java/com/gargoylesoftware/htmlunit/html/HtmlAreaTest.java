@@ -67,11 +67,11 @@ public class HtmlAreaTest extends WebTestCase {
 
     private WebClient createWebClient(final String onClick) {
         final String firstContent
-            = "<html><head><title>first</title></head><body>"
-            + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>"
-            + "<map id='planetmap' name='planetmap'>"
-            + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' href='http://second'>"
-            + "<area shape='circle' coords='90,58,3' id='third' href='http://third'>"
+            = "<html><head><title>first</title></head><body>\n"
+            + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>\n"
+            + "<map id='planetmap' name='planetmap'>\n"
+            + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' href='http://second'>\n"
+            + "<area shape='circle' coords='90,58,3' id='third' href='http://third'>\n"
             + "</map></body></html>";
         final String secondContent
             = "<html><head><title>second</title></head><body></body></html>";
@@ -143,8 +143,8 @@ public class HtmlAreaTest extends WebTestCase {
     public void testClick_javascriptUrl() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>"
-            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>"
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -165,8 +165,8 @@ public class HtmlAreaTest extends WebTestCase {
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>"
-            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>"
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
@@ -196,8 +196,8 @@ public class HtmlAreaTest extends WebTestCase {
     public void testThisInJavascriptHRef() throws Exception {
 
         final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>"
-            + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>"
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
         final List collectedAlerts = new ArrayList();
         final String[] expectedAlerts = {"true"};

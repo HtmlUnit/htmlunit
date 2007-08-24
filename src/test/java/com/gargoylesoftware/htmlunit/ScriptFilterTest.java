@@ -66,11 +66,11 @@ public class ScriptFilterTest extends WebTestCase {
 
     private void testScriptForEvent(final String eventName) throws Exception {
         final String content
-            = "<html><head><title>foo</title>"
-            + "<script FOR='window' EVENT='" + eventName + "' LANGUAGE='javascript'>"
-            + " document.form1.txt.value='hello';"
-            + " alert(document.form1.txt.value);"
-            + "</script></head><body>"
+            = "<html><head><title>foo</title>\n"
+            + "<script FOR='window' EVENT='" + eventName + "' LANGUAGE='javascript'>\n"
+            + " document.form1.txt.value='hello';\n"
+            + " alert(document.form1.txt.value);\n"
+            + "</script></head><body>\n"
             + "<form name='form1'><input type=text name='txt'></form></body></html>";
         final List collectedAlerts = new ArrayList();
 

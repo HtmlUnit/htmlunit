@@ -76,7 +76,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "    <noscript>\n"
             + "    <input type='text' id='second' name='button'/>\n"
             + "    </noscript>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         
         final String[] expectedAlerts = {"null"};
         final List collectedAlerts = new ArrayList();
@@ -93,14 +93,14 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var noscript = document.getElementById('myDiv' ).childNodes.item(0);\n"
-            + "    alert(noscript.childNodes.length);"
+            + "    alert(noscript.childNodes.length);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "    <div id='myDiv'><noscript>\n"
             + "        <input type='text' name='button'/>\n"
             + "      </noscript></div>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         
         final String[] expectedAlerts = {"0"};
         final List collectedAlerts = new ArrayList();
@@ -115,15 +115,15 @@ public class HtmlNoScriptTest extends WebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "  alert(1);"
+            + "  alert(1);\n"
             + "</script>\n"
             + "<noscript>\n"
             + "  <script>\n"
-            + "    alert(2);"
+            + "    alert(2);\n"
             + "  </script>\n"
             + "</noscript>\n"
             + "</head><body>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         
         final String[] expectedAlerts = {"1"};
         final List collectedAlerts = new ArrayList();
@@ -144,7 +144,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "  <input type=hidden name='myParam' value='myValue'>\n"
             + "  <input type='submit'>\n"
             + "</form>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         
         final HtmlPage firstPage = loadPage(htmlContent);
         final HtmlForm form = (HtmlForm) firstPage.getForms().get(0);

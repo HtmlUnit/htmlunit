@@ -63,8 +63,8 @@ public class HtmlHtmlTest extends WebTestCase {
         final String htmlContent = "<?xml version=\"1.0\"?>\n"
             + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
             + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
-            + "<html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>"
-            + "<head><title>test</title></head>"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>\n"
+            + "<head><title>test</title></head>\n"
             + "<body></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);

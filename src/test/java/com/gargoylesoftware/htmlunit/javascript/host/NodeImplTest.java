@@ -73,14 +73,14 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void test_hasChildNodes_true() throws Exception {
-        final String content = "<html><head><title>test_hasChildNodes</title>"
-                + "<script>"
+        final String content = "<html><head><title>test_hasChildNodes</title>\n"
+                + "<script>\n"
                 + "function doTest(){"
-                + "    alert(document.getElementById('myNode').hasChildNodes());"
+                + "    alert(document.getElementById('myNode').hasChildNodes());\n"
                 + "}"
-                + "</script>"
-                + "</head><body onload='doTest()'>"
-                + "<p id='myNode'>hello world<span>Child Node</span></p>"
+                + "</script>\n"
+                + "</head><body onload='doTest()'>\n"
+                + "<p id='myNode'>hello world<span>Child Node</span></p>\n"
                 + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -95,14 +95,14 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void test_hasChildNodes_false() throws Exception {
-        final String content = "<html><head><title>test_hasChildNodes</title>"
-                + "<script>"
+        final String content = "<html><head><title>test_hasChildNodes</title>\n"
+                + "<script>\n"
                 + "function doTest(){"
-                + "    alert(document.getElementById('myNode').hasChildNodes());"
+                + "    alert(document.getElementById('myNode').hasChildNodes());\n"
                 + "}"
-                + "</script>"
-                + "</head><body onload='doTest()'>"
-                + "<p id='myNode'></p>"
+                + "</script>\n"
+                + "</head><body onload='doTest()'>\n"
+                + "<p id='myNode'></p>\n"
                 + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -132,7 +132,7 @@ public class NodeImplTest extends WebTestCase {
             + "    alert(form.firstChild==null);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
-            + "<form name='form1'><div id='formChild'/></form>"
+            + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body></html>";
         webConnection.setResponse(
             URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
@@ -168,7 +168,7 @@ public class NodeImplTest extends WebTestCase {
             + "    alert(form.firstChild==div2);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
-            + "<form name='form1'><div id='formChild'/></form>"
+            + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
         webConnection.setResponse(
             URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
@@ -189,14 +189,14 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void testNodeNameIsUppercase() throws Exception {
-        final String content = "<html><head><title>test_hasChildNodes</title>"
-                + "<script>"
+        final String content = "<html><head><title>test_hasChildNodes</title>\n"
+                + "<script>\n"
                 + "function doTest(){"
-                + "    alert(document.getElementById('myNode').nodeName);"
+                + "    alert(document.getElementById('myNode').nodeName);\n"
                 + "}"
-                + "</script>"
-                + "</head><body onload='doTest()'>"
-                + "<div id='myNode'>hello world<span>Child Node</span></div>"
+                + "</script>\n"
+                + "</head><body onload='doTest()'>\n"
+                + "<div id='myNode'>hello world<span>Child Node</span></div>\n"
                 + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -211,19 +211,19 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void test_getChildNodes() throws Exception {
-        final String content = "<html><head><title>test_getChildNodes</title>"
-            + "<script>"
+        final String content = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
             + "function doTest() {"
-            + "var aNode = document.getElementById('myNode');"
-            + "alert(aNode.childNodes.length);"
-            + "alert(aNode.childNodes[0].nodeName);"
-            + "alert(aNode.childNodes[0].childNodes.length);"
-            + "alert(aNode.childNodes[0].childNodes[0].nodeName);"
-            + "alert(aNode.childNodes[0].childNodes[1].nodeName);"
-            + "alert(aNode.childNodes[1].nodeName);"
+            + "var aNode = document.getElementById('myNode');\n"
+            + "alert(aNode.childNodes.length);\n"
+            + "alert(aNode.childNodes[0].nodeName);\n"
+            + "alert(aNode.childNodes[0].childNodes.length);\n"
+            + "alert(aNode.childNodes[0].childNodes[0].nodeName);\n"
+            + "alert(aNode.childNodes[0].childNodes[1].nodeName);\n"
+            + "alert(aNode.childNodes[1].nodeName);\n"
             + "}"
-            + "</script>"
-            + "</head><body onload='doTest()'>"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
             + "<div id='myNode'><span>Child Node 1-A"
             + "<h1>Child Node 1-B</h1></span>"
             + "<h2>Child Node 2-A</h2></div>"
@@ -243,14 +243,14 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void testChildNodes_Comments() throws Exception {
-        final String content = "<html><head><title>test</title>"
-            + "<html><head></head>"
-            + "<body><!-- comment --><script>"
-            + "var nodes = document.body.childNodes;"
-            + "alert('nb nodes: ' + nodes.length);"
+        final String content = "<html><head><title>test</title>\n"
+            + "<html><head></head>\n"
+            + "<body><!-- comment --><script>\n"
+            + "var nodes = document.body.childNodes;\n"
+            + "alert('nb nodes: ' + nodes.length);\n"
             + "for (var i=0; i<nodes.length; i++)"
             + "{"
-            + " alert(nodes[i].nodeType);"
+            + " alert(nodes[i].nodeType);\n"
             + "}"
             + "</script></body></html>";
 
@@ -267,24 +267,24 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void test_getChildNodesProperties() throws Exception {
-        final String content = "<html><head><title>test_getChildNodes</title>"
-            + "<script>"
+        final String content = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
             + "function doTest() {"
-            + "    var testForm = document.getElementById('testForm');"
-            + "    var childNodes = testForm.childNodes;"
-            + "    var length = childNodes.length;"
-            + "    alert('length: ' + length);"
+            + "    var testForm = document.getElementById('testForm');\n"
+            + "    var childNodes = testForm.childNodes;\n"
+            + "    var length = childNodes.length;\n"
+            + "    alert('length: ' + length);\n"
             + "    for (var i=0; i < length; i++) {"
-            + "        var tempNode = childNodes.item(i);"
-            + "        alert('tempNode.name: ' + tempNode.name);"
+            + "        var tempNode = childNodes.item(i);\n"
+            + "        alert('tempNode.name: ' + tempNode.name);\n"
             + "    }"
             + "}"
-            + "</script>"
-            + "</head><body onload='doTest()'>"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
             + "<form name='testForm' id='testForm'>foo\n" // some text, because IE doesn't see "\n" as a text node here
             + "<input type='hidden' name='input1' value='1'>\n"
             + "<input type='hidden' name='input2' value='2'>\n"
-            + "</form>"
+            + "</form>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"length: 5",
@@ -331,20 +331,20 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     void test_insertBefore(final BrowserVersion browserVersion, final String insertJSLine) throws Exception {
-        final String content = "<html><head><title>test_insertBefore</title>"
-            + "<script>"
+        final String content = "<html><head><title>test_insertBefore</title>\n"
+            + "<script>\n"
             + "function doTest() {"
-            + "var nodeToInsert = document.getElementById('nodeToInsert');"
-            + "var aNode = document.getElementById('myNode');"
+            + "var nodeToInsert = document.getElementById('nodeToInsert');\n"
+            + "var aNode = document.getElementById('myNode');\n"
             + insertJSLine
-            + "alert(aNode.childNodes.length);"
-            + "alert(aNode.childNodes[2].nodeName);"
+            + "alert(aNode.childNodes.length);\n"
+            + "alert(aNode.childNodes[2].nodeName);\n"
             + "}"
-            + "</script>"
-            + "</head><body onload='doTest()'>"
-            + "<h2 id='nodeToInsert'>Bottom</h2>"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "<h2 id='nodeToInsert'>Bottom</h2>\n"
             + "<div id='myNode'><span>Child Node 1-A</span>"
-            + "<h1>Child Node 2-A</h1></div>"
+            + "<h1>Child Node 2-A</h1></div>\n"
             + "</body></html>";
 
         final List collectedAlerts = new ArrayList();
@@ -361,17 +361,17 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void testNodeType() throws Exception {
-        final String content = "<html><head><title>test</title>"
-                + "<script>"
+        final String content = "<html><head><title>test</title>\n"
+                + "<script>\n"
                 + "function doTest(){\n"
                 + "    alert('document: ' + document.nodeType);\n"
                 + "    alert('document.body: ' + document.body.nodeType);\n"
                 + "    alert('body child 1: ' + document.body.childNodes[0].nodeType);\n"
                 + "    alert('body child 2: ' + document.body.childNodes[1].nodeType);\n"
                 + "}\n"
-                + "</script>"
-                + "</head><body onload='doTest()'>"
-                + "some text<!-- some comment -->"
+                + "</script>\n"
+                + "</head><body onload='doTest()'>\n"
+                + "some text<!-- some comment -->\n"
                 + "</body></html>";
 
         final String[] expectedAlerts = {"document: 9", "document.body: 1",
@@ -389,19 +389,19 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception on test failure
      */
     public void testAttachEvent() throws Exception {
-        final String content = "<html><head>"
-            + "<title>First</title>"
-            + "<script>"
+        final String content = "<html><head>\n"
+            + "<title>First</title>\n"
+            + "<script>\n"
             + "function test()"
             + "{"
-            + "    var oField = document.getElementById('div1');"
-            + "    oField.attachEvent('onclick', foo1);"
-            + "    oField.attachEvent('onclick', foo2);"
+            + "    var oField = document.getElementById('div1');\n"
+            + "    oField.attachEvent('onclick', foo1);\n"
+            + "    oField.attachEvent('onclick', foo2);\n"
             + "}"
             + "function foo1() { alert('in foo1');}"
             + "function foo2() { alert('in foo2');}"
-            + "</script></head><body onload='test()'>"
-            + "<div id='div1'>bla</div>"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='div1'>bla</div>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {"in foo1", "in foo2"};
@@ -515,7 +515,7 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAppendChild_of_DocumentFragment() throws Exception {
-        final String content = "<html><head><title>foo</title><script>"
+        final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var fragment = document.createDocumentFragment();\n"
             + "    var div1 = document.createElement('div');\n"

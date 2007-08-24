@@ -82,9 +82,9 @@ public class AnchorTest extends WebTestCase {
             + "    alert(anchorElement.getAttribute('href'));\n"
             + "    alert(anchorElement.getAttribute('id'));\n"
             + "    alert(anchorElement.getAttribute('name'));\n"
-            + "}\n</script></head>"
-            + "<body>"
-            + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>"
+            + "}\n</script></head>\n"
+            + "<body>\n"
+            + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>\n"
             + "</body></html>";
         
         webConnection.setDefaultResponse(content);
@@ -116,10 +116,10 @@ public class AnchorTest extends WebTestCase {
             + "        var onclick = document.links[i].onclick;\n"
             + "        alert(onclick ? (onclick.toString().indexOf('alert(') != -1) : 'not defined');\n"
             + "    }\n"
-            + "}\n</script></head>"
-            + "<body onload='test()'>"
-            + "<a href='foo.html' onClick='alert(\"on click\")'>"
-            + "<a href='foo2.html'>"
+            + "}\n</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<a href='foo.html' onClick='alert(\"on click\")'>\n"
+            + "<a href='foo2.html'>\n"
             + "</body></html>";
         
         final List collectedAlerts = new ArrayList();
@@ -142,12 +142,12 @@ public class AnchorTest extends WebTestCase {
             + "  {\n"
             + "    alert(document.links[i]);\n"
             + "  }\n"
-            + "}</script></head>"
-            + "<body onload='test()'>"
-            + "<a name='start' id='myAnchor'/>"
-            + "<a href='foo.html'>foo</a>"
-            + "<a href='javascript:void(0)'>void</a>"
-            + "<a href='#'>#</a>"
+            + "}</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<a name='start' id='myAnchor'/>\n"
+            + "<a href='foo.html'>foo</a>\n"
+            + "<a href='javascript:void(0)'>void</a>\n"
+            + "<a href='#'>#</a>\n"
             + "</body></html>";
         
         final List collectedAlerts = new ArrayList();
@@ -166,12 +166,12 @@ public class AnchorTest extends WebTestCase {
      */
     public void testOnClickAnchorHRef() throws Exception {
         final String content
-            = "<html>"
-            + "<body>"
-            + "<a href='#' onclick='document.form1.submit()'>link 1</a>"
-            + "<form name='form1' action='foo.html' method='post'>"
-            + "<input name='testText'>"
-            + "</form>"
+            = "<html>\n"
+            + "<body>\n"
+            + "<a href='#' onclick='document.form1.submit()'>link 1</a>\n"
+            + "<form name='form1' action='foo.html' method='post'>\n"
+            + "<input name='testText'>\n"
+            + "</form>\n"
             + "</body></html>";
         
         final HtmlPage page1 = loadPage(content);
@@ -188,9 +188,9 @@ public class AnchorTest extends WebTestCase {
      */
     public void testThisInJavascriptHRef() throws Exception {
         final String content
-            = "<html>"
-            + "<body>"
-            + "<a href='javascript:alert(this == window)'>link 1</a>"
+            = "<html>\n"
+            + "<body>\n"
+            + "<a href='javascript:alert(this == window)'>link 1</a>\n"
             + "</body></html>";
         
         final List collectedAlerts = new ArrayList();
@@ -207,9 +207,9 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWriteAnchorTarget() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].target += 'K';\">"
-            + "<a href='#' target='O'>link 1</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].target += 'K';\">\n"
+            + "<a href='#' target='O'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
@@ -221,9 +221,9 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWriteAnchorSearch() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].search += '&p2=2';\">"
-            + "<a href='foo.html?p1=1' target='O'>link 1</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].search += '&p2=2';\">\n"
+            + "<a href='foo.html?p1=1' target='O'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
@@ -235,9 +235,9 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWriteAnchorHash() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].hash += 'K';\">"
-            + "<a href='foo.html#O'>link 1</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].hash += 'K';\">\n"
+            + "<a href='foo.html#O'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
@@ -249,11 +249,11 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWriteAnchorPort() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].port += '80';"
-            + "    document.links[1].port += '80'; \">"
-            + "<a href='foo.html#O'>link 1</a>"
-            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 1</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].port += '80';\n"
+            + "    document.links[1].port += '80'; \">\n"
+            + "<a href='foo.html#O'>link 1</a>\n"
+            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
@@ -267,9 +267,9 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWritePathname() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].pathname = '/bar' + document.links[0].pathname;\">"
-            + "<a href='foo.html#B'>link 1</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].pathname = '/bar' + document.links[0].pathname;\">\n"
+            + "<a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
@@ -281,9 +281,9 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWriteProtocol() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].protocol = document.links[0].protocol.substring(0,4) + 's:';\">"
-            + "<a href='foo.html#B'>link 1</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].protocol = document.links[0].protocol.substring(0,4) + 's:';\">\n"
+            + "<a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
@@ -295,15 +295,15 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWriteAnchorHost() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].host += 'motion:8080';"
-            +    " document.links[1].host += 'motion';"
-            +    " document.links[2].host += '80';"
-            +    " document.links[3].host = 'www.gargoylesoftware.com'; \">"
-            + "<a href='foo.html#O'>link 0</a>"
-            + "<a href='foo.html#O'>link 1</a>"
-            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 2</a>"
-            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 3</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].host += 'motion:8080';\n"
+            +    " document.links[1].host += 'motion';\n"
+            +    " document.links[2].host += '80';\n"
+            +    " document.links[3].host = 'www.gargoylesoftware.com'; \">\n"
+            + "<a href='foo.html#O'>link 0</a>\n"
+            + "<a href='foo.html#O'>link 1</a>\n"
+            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 2</a>\n"
+            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 3</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
@@ -321,9 +321,9 @@ public class AnchorTest extends WebTestCase {
      */
     public void testReadWriteAnchorHostname() throws Exception {
         final String content
-            = "<html>"
-            + "<body onload=\"document.links[0].hostname += 'motion';\">"
-            + "<a href='foo.html#O'>link 1</a>"
+            = "<html>\n"
+            + "<body onload=\"document.links[0].hostname += 'motion';\">\n"
+            + "<a href='foo.html#O'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = (HtmlAnchor) page1.getAnchors().get(0);
