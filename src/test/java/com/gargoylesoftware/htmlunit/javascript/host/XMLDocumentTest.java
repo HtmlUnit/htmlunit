@@ -37,69 +37,55 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * A JavaScript object for DOMImplementation.
+ * Tests for {@link XMLDocument}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
- *
- * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-102161490">
- * W3C Dom Level 1</a>
  */
-public class DOMImplementation extends SimpleScriptable {
-
-    private static final long serialVersionUID = -6824157544527299635L;
+public class XMLDocumentTest extends WebTestCase {
 
     /**
-     * Javascript constructor.
+     * Creates a new test instance.
+     * @param name The name of the new test instance.
      */
-    public void jsConstructor() {
-        // Empty.
+    public XMLDocumentTest(final String name) {
+        super(name);
     }
 
     /**
-     * Test if the DOM implementation implements a specific feature.
-     * @param feature The name of the feature to test (case-insensitive).
-     * @param version The version number of the feature to test.
-     * @return true if the feature is implemented in the specified version, false otherwise.
+     * @throws Exception if the test fails
      */
-    public boolean jsxFunction_hasFeature(final String feature, final String version) {
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-            if ("HTML".equals(feature) && "1.0".equals(version)) {
-                return true;
-            }
-        }
-        else {
-            if ("HTML".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
-                return true;
-            }
-            else if ("XML".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
-                return true;
-            }
-            else if ("CSS2".equals(feature) && "2.0".equals(version)) {
-                return true;
-            }
-            //TODO: other features.
-        }
-        return false;
+    public void testAsync() throws Exception {
+        testAsync(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testAsync(BrowserVersion.FIREFOX_2);
     }
 
-    /**
-     * Creates an {@link XMLDocument}.
-     *
-     * @param namespaceURI The URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the document to instantiate.
-     * @param doctype The document types of the document.
-     * @return the newly created {@link XMLDocument}.
-     */
-    //TODO: change doctype type to "DocType"
-    public XMLDocument jsxFunction_createDocument(final String namespaceURI, final String qualifiedName,
-            final Object doctype) {
-        final XMLDocument document = new XMLDocument();
-        document.setParentScope(getParentScope());
-        document.setPrototype(getPrototype(document.getClass()));
-        return document;
+    private void testAsync(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    alert(document.async);\n"
+            + "    alert(doc.async);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"undefined", "true"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

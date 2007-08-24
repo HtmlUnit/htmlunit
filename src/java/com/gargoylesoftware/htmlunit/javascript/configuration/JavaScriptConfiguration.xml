@@ -1098,6 +1098,8 @@
 
     <class name="XMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLDocument"
         JSObject="true">
+        <browser name="Firefox"/>
+        <property name="async" readable="true" writable="true"/>
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"

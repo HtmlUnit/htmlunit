@@ -170,8 +170,12 @@ public class ActiveXObject extends SimpleScriptable {
     }
 
     private static Scriptable buildXMLDocument() {
-        final XMLDocument resp = new XMLDocument();
-        return resp;
+        final XMLDocument document = new XMLDocument();
+
+        // the properties
+        addProperty(document, "async", true, true);
+        
+        return document;
     }
 
     private static void addFunction(final SimpleScriptable scriptable,

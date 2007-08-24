@@ -45,4 +45,28 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class XMLDocument extends Document {
 
+    private boolean async_ = true;
+    
+    /**
+     * Creates a new instance. JavaScript objects must have a default constructor.
+     */
+    public XMLDocument() {
+    }
+
+    /**
+     * Sets the <tt>async</tt> attribute.
+     * @param async Whether or not to send the request to the server asynchronously.
+     */
+    public void jsxSet_async(final boolean async) {
+        this.async_ = async;
+    }
+
+    /**
+     * Returns Whether or not to send the request to the server asynchronously.
+     * @return the <tt>async</tt> attribute.
+     */
+    public boolean jsxGet_async() {
+        return async_;
+    }
+    
 }
