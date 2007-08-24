@@ -96,6 +96,15 @@ public class Event extends SimpleScriptable {
     /** The beforeunload event type, triggered by "onbeforeunload" event handlers. */
     public static final String TYPE_BEFORE_UNLOAD = "beforeunload";
 
+    /** The first event phase: the capturing phase. */
+    public static final short CAPTURING_PHASE = 1;
+
+    /** The second event phase: at the event target. */
+    public static final short AT_TARGET = 2;
+
+    /** The third (and final) event phase: the bubbling phase. */
+    public static final short BUBBLING_PHASE = 3;
+
     private static final long serialVersionUID = 4050485607908455730L;
 
     private Object srcElement_;        // IE-only writeable equivalent of target.
@@ -108,6 +117,12 @@ public class Event extends SimpleScriptable {
     private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
     private boolean stopPropagation_;
     private Object returnValue_;
+
+    /**
+     * The current event phase. This is a W3C standard attribute not implemented by IE. One of
+     * {@link #CAPTURING_PHASE}, {@link #AT_TARGET} or {@link #BUBBLING_PHASE}.
+     */
+    private short eventPhase_;
 
     /**
      * Whether or not the event bubbles. The value of this attribute depends on the event type. To
@@ -290,6 +305,26 @@ public class Event extends SimpleScriptable {
      */
     public boolean jsxGet_altKey() {
         return altKey_;
+    }
+
+    /**
+     * @return the current event phase for the event.
+     */
+    public int jsxGet_eventPhase() {
+        return eventPhase_;
+    }
+
+    /**
+     * Sets the current event phase. Must be one of {@link #CAPTURING_PHASE}, {@link #AT_TARGET} or
+     * {@link #BUBBLING_PHASE}.
+     *
+     * @param phase the phase the event is in
+     */
+    public void setEventPhase(final short phase) {
+        if (phase != CAPTURING_PHASE && phase != AT_TARGET && phase != BUBBLING_PHASE) {
+            throw new IllegalArgumentException("Illegal phase specified: " + phase);
+        }
+        eventPhase_ = phase;
     }
 
     /**

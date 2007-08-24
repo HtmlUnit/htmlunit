@@ -459,6 +459,7 @@ public class NodeImpl extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
+
         final HtmlPage page = getDomNodeOrDie().getPage();
         final boolean isIE = page.getWebClient().getBrowserVersion().isIE();
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
@@ -474,6 +475,7 @@ public class NodeImpl extends SimpleScriptable {
             final EventListenersContainer windowsListeners = getWindow().getEventListenersContainer();
     
             // capturing phase
+            event.setEventPhase(Event.CAPTURING_PHASE);
             result = windowsListeners.executeCapturingListeners(event, args);
             if (event.isPropagationStopped()) {
                 return result;
@@ -506,6 +508,7 @@ public class NodeImpl extends SimpleScriptable {
             }
     
             // bubbling phase
+            event.setEventPhase(Event.AT_TARGET);
             node = getHtmlElementOrDie();
             while (node != null) {
                 final NodeImpl jsNode = (NodeImpl) node.getScriptObject();
@@ -518,10 +521,11 @@ public class NodeImpl extends SimpleScriptable {
                         return result;
                     }
                 }
-    
+
                 node = node.getParentDomNode();
+                event.setEventPhase(Event.BUBBLING_PHASE);
             }
-            
+
             result = defaultResult(windowsListeners.executeBubblingListeners(event, args, propHandlerArgs), result);
         }
         finally {

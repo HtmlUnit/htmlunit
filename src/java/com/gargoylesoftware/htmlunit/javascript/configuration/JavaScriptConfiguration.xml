@@ -239,6 +239,9 @@
         <property name="cancelable" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="eventPhase" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="returnValue" readable="true" writable="true"/>
         <property name="cancelBubble" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>

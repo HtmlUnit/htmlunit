@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.FocusableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -694,6 +695,51 @@ public class EventTest extends WebTestCase {
         final List actual = new ArrayList();
         loadPage(browser, html, actual);
         assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testEventPhase() throws Exception {
+        final String html =
+              "<html><head><script>\r\n"
+            + "  function init() {\r\n"
+            + "    var form = document.forms[0];\r\n"
+            + "    form.addEventListener('click', alertPhase, true);\r\n"
+            + "    form.addEventListener('click', alertPhase, false);\r\n"
+            + "  }\r\n"
+            + "  function alertPhase(e) {\r\n"
+            + "    switch (e.eventPhase) {\r\n"
+            + "      case 1: alert('capturing'); break;\r\n"
+            + "      case 2: alert('at target'); break;\r\n"
+            + "      case 3: alert('bubbling'); break;\r\n"
+            + "      default: alert('unknown');\r\n"
+            + "    }\r\n"
+            + "  }\r\n"
+            + "</script></head>\r\n"
+            + "<body onload='init()'>\r\n"
+            + "<form><input type='button' onclick='alertPhase(event)' id='b'></form>\r\n"
+            + "</body></html>";
+        final String[] expected = {"capturing", "at target", "bubbling"};
+        final List actual = new ArrayList();
+        final HtmlPage page = (HtmlPage) loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("b");
+        button.click();
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testSetEventPhaseToInvalidValue() throws Exception {
+        boolean thrown = false;
+        try {
+            new Event().setEventPhase((short) 777);
+        }
+        catch (final IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
     }
 
 }

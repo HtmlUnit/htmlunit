@@ -183,8 +183,7 @@ class EventListenersContainer {
             final Object[] propHandlerArgs) {
         ScriptResult result = null;
 
-        // the handler declared as property if any (not on body, as handler declared on body
-        // goes to the window)
+        // the handler declared as property if any (not on body, as handler declared on body goes to the window)
         if (!(jsNode_.getDomNodeOrDie() instanceof HtmlBody)) {
             result = executeEventHandler(event, propHandlerArgs);
             if (event.isPropagationStopped()) {
@@ -226,13 +225,16 @@ class EventListenersContainer {
     }
 
     public ScriptResult executeListeners(final Event event, final Object[] args, final Object[] propHandlerArgs) {
+
         // the registered capturing listeners (if any)
+        event.setEventPhase(Event.CAPTURING_PHASE);
         ScriptResult result = executeEventListeners(true, event, args);
         if (event.isPropagationStopped()) {
             return result;
         }
 
-        // the handler declared as property if any
+        // the handler declared as property (if any)
+        event.setEventPhase(Event.AT_TARGET);
         ScriptResult newResult = executeEventHandler(event, propHandlerArgs);
         if (newResult != null) {
             result = newResult;
@@ -242,6 +244,7 @@ class EventListenersContainer {
         }
 
         // the registered bubbling listeners (if any)
+        event.setEventPhase(Event.BUBBLING_PHASE);
         newResult = executeEventListeners(false, event, args);
         if (newResult != null) {
             result = newResult;
@@ -249,4 +252,5 @@ class EventListenersContainer {
 
         return result;
     }
+
 }
