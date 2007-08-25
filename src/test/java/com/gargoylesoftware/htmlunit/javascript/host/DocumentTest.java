@@ -2653,27 +2653,28 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void testCreateEventsFF() throws Exception {
-        performCreateEventTest("Event", true, BrowserVersion.FIREFOX_2);
-        performCreateEventTest("Events", true, BrowserVersion.FIREFOX_2);
-        performCreateEventTest("Bogus", false, BrowserVersion.FIREFOX_2);
+    public void testCreateEvents_FF() throws Exception {
+        testCreateEvents_FF("Event", true, BrowserVersion.FIREFOX_2);
+        testCreateEvents_FF("Events", true, BrowserVersion.FIREFOX_2);
+        testCreateEvents_FF("Bogus", false, BrowserVersion.FIREFOX_2);
     }
 
-    private void performCreateEventTest(final String eventType, final boolean isSupportedType,
+    private void testCreateEvents_FF(final String eventType, final boolean isSupportedType,
         final BrowserVersion version) throws Exception {
         final String content =
               "<html><head><title>foo</title><script>\n"
-            + "var s = document.createEvent('" + eventType + "');\n"
-            + "alert (s != null);\n"
-            + "alert (typeof(s));\n"
-            + "alert (s);\n"
+            + "var e = document.createEvent('" + eventType + "');\n"
+            + "alert(e != null);\n"
+            + "alert(typeof e);\n"
+            + "alert(e);\n"
+            + "alert(e.cancelable);\n"
             + "</script></head><body>\n"
             + "</body></html>";
         final List actual = new ArrayList();
         try {
             loadPage(version, content, actual);
             assertTrue("Test was expected to fail, but did not: type=" + eventType, isSupportedType);
-            final String[] expected = {"true", "object", "[object Event]"};
+            final String[] expected = {"true", "object", "[object Event]", "true"};
             assertEquals(expected, actual);
         }
         catch (final Exception e) {
@@ -2685,13 +2686,13 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void testCreateEventObjectsIE() throws Exception {
+    public void testCreateEventObject_IE() throws Exception {
         final String content =
               "<html><head><title>foo</title><script>\n"
-            + "var s = document.createEventObject();\n"
-            + "alert (s != null);\n"
-            + "alert (typeof(s));\n"
-            + "alert (s);\n"
+            + "var e = document.createEventObject();\n"
+            + "alert(e != null);\n"
+            + "alert(typeof e);\n"
+            + "alert(e);\n"
             + "</script></head><body>\n"
             + "</body></html>";
         final List actual = new ArrayList();

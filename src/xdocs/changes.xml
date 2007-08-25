@@ -7,8 +7,12 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="sdanig">
+                Fix document.createEvent() and document.createEventObject(): set event prototypes correctly.
+            </action>
             <action type="add" dev="asashour">
-                JavaScript: add 'async' property for 'document.implementation.createDocument()' (FF), and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
+                JavaScript: add 'async' property for 'document.implementation.createDocument()' (FF), and
+                ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
                 JavaScript: add support for read-only attributes uiEvent.detail and uiEvent.view (FF only).
@@ -18,7 +22,8 @@
                 with special characters and not a RegExp. 
             </action>
             <action type="add" dev="asashour">
-                JavaScript: add basic support for 'document.implementation.createDocument()' (FF), and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
+                JavaScript: add basic support for 'document.implementation.createDocument()' (FF), and ActiveXObjects:
+                'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="update" dev="asashour">
                 JavaScript: select.size is used when only needed.

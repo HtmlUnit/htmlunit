@@ -1157,6 +1157,7 @@ public class Document extends NodeImpl {
             final Event e = (Event) clazz.newInstance();
             e.setEventType(eventType);
             e.setParentScope(getWindow());
+            e.setPrototype(getPrototype(clazz));
             return e;
         }
         catch (final InstantiationException e) {
@@ -1180,6 +1181,7 @@ public class Document extends NodeImpl {
     public Event jsxFunction_createEventObject() {
         final Event e = new Event();
         e.setParentScope(getWindow());
+        e.setPrototype(getPrototype(Event.class));
         return e;
     }
 
