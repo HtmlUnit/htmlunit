@@ -41,6 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -86,6 +89,55 @@ public class XMLDocumentTest extends WebTestCase {
         final String[] expectedAlerts = {"undefined", "true"};
         final List collectedAlerts = new ArrayList();
         loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testLoad() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testLoad(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testLoad(BrowserVersion.FIREFOX_2);
+    }
+    
+    private void testLoad(final BrowserVersion browserVersion) throws Exception {
+        final String firstContent = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    alert(doc.childNodes[0].nodeName);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String secondContent
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final String[] expectedAlerts = {"true", "books"};
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

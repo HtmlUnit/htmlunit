@@ -1099,7 +1099,14 @@
     <class name="XMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLDocument"
         JSObject="true">
         <browser name="Firefox"/>
-        <property name="async" readable="true" writable="true"/>
+        <property name="async" readable="true" writable="true">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms761398.aspx"
+                    descr="MSDN documentation"/>
+        </property>
+        <function name="load" notImplemented="true">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms762722.aspx"
+                    descr="MSDN documentation"/>
+        </function>
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
