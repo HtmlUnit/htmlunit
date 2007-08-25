@@ -249,6 +249,9 @@
         <function name="stopPropagation">
             <browser name="Firefox"/>
         </function>
+        <function name="initEvent">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="UIEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.UIEvent" JSObject="true">

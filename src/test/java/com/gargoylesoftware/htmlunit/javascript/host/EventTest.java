@@ -742,4 +742,29 @@ public class EventTest extends WebTestCase {
         assertTrue(thrown);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testInitEvent() throws Exception {
+        final String html =
+              "<html><body onload='test()'><script>\r\n"
+            + "  function test() {\r\n"
+            + "    var e = document.createEvent('Event');\r\n"
+            + "    e.initEvent('click', true, true);\r\n"
+            + "    doAlerts(e);\r\n"
+            + "    e.initEvent('dblclick', false, false);\r\n"
+            + "    doAlerts(e);\r\n"
+            + "  }\r\n"
+            + "  function doAlerts(e) {\r\n"
+            + "    alert(e.type);\r\n"
+            + "    alert(e.bubbles);\r\n"
+            + "    alert(e.cancelable);\r\n"
+            + "  }\r\n"
+            + "</script></body></html>";
+        final String[] expected = {"click", "true", "true", "dblclick", "false", "false"};
+        final List actual = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

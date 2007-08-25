@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig" due-to="Rob Di Marco">
+                JavaScript: add support for function event.initEvent() (FF only).
+            </action>
             <action type="fix" dev="sdanig">
                 Fix document.createEvent() and document.createEventObject(): set event prototypes correctly.
             </action>

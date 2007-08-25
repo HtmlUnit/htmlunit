@@ -387,6 +387,18 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Initializes this event.
+     * @param type the event type
+     * @param bubbles whether or not the event should bubble
+     * @param cancelable whether or not the event the event should be cancelable
+     */
+    public void jsxFunction_initEvent(final String type, final boolean bubbles, final boolean cancelable) {
+        type_ = type;
+        bubbles_ = bubbles;
+        cancelable_ = cancelable;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public String toString() {
