@@ -144,11 +144,8 @@ public abstract class DomNode implements Cloneable, Serializable {
     private DomNode firstChild_;
 
     /**
-     * This is the javascript object corresponding to this DOM node.  It is
-     * declared as Object so that we don't have a dependency on the rhino jar
-     * file.<p>
-     *
-     * It may be null if there isn't a corresponding javascript object.
+     * This is the JavaScript object corresponding to this DOM node. It may
+     * be null if there isn't a corresponding JavaScript object.
      */
     private transient ScriptableObject scriptObject_;
 
