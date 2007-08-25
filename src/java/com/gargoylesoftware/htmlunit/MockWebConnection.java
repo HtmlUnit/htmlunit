@@ -209,7 +209,6 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param title The title of the page
      */
     public void setResponseAsGenericHtml(final URL url, final String title) {
-
         final String content = "<html><head><title>" + title + "</title></head><body></body></html>";
         setResponse(url, content);
     }

@@ -82,7 +82,6 @@ public class HTMLSelectElement extends FormField {
      *
      */
     public void initialize() {
-
         final HtmlSelect htmlSelect = getHtmlSelect();
         htmlSelect.setScriptObject(this);
         if (optionsArray_ == null) {

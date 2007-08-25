@@ -92,7 +92,6 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick() throws Exception {
-
         final WebClient client = createWebClient("");
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
@@ -107,7 +106,6 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_onclickReturnsFalse() throws Exception {
-
         final WebClient client = createWebClient("alert('foo');return false;");
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -124,7 +122,6 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_onclickReturnsTrue() throws Exception {
-
         final WebClient client = createWebClient("alert('foo');return true;");
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -141,7 +138,6 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_javascriptUrl() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
@@ -163,7 +159,6 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
@@ -194,7 +189,6 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testThisInJavascriptHRef() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"

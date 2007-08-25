@@ -118,7 +118,6 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @throws Exception if an error occurs
      */
     protected Iterator loadPage(final BrowserVersion version) throws Exception {
-
         final String resource = "jquery/" + getVersion() + "/test/index.html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
@@ -148,7 +147,6 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @throws Exception if an error occurs
      */
     protected void ok(final Iterator i, final String name, final int failed, final int passed) throws Exception {
-
         final HtmlListItem li = (HtmlListItem) i.next();
         final String n = li.getByXPath("//text()").get(0).toString().trim();
         assertEquals(name, n);

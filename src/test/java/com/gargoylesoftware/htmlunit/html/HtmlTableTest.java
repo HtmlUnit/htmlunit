@@ -132,9 +132,7 @@ public class HtmlTableTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
-    public void testGetTableCell_NotFound()
-        throws Exception {
-
+    public void testGetTableCell_NotFound() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
@@ -153,9 +151,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetTableRows()
-        throws Exception {
-
+    public void testGetTableRows() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
@@ -185,9 +181,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetTableRows_WithHeadBodyFoot()
-        throws Exception {
-
+    public void testGetTableRows_WithHeadBodyFoot() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
@@ -223,9 +217,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testRowGroupings_AllDefined()
-        throws Exception {
-
+    public void testRowGroupings_AllDefined() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
@@ -285,9 +277,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testGetCaptionText()
-        throws Exception {
-
+    public void testGetCaptionText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
@@ -310,7 +300,6 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInsertionOfTbodyTags() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table>\n"
@@ -340,7 +329,6 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testJSInTable() throws Exception {
-
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<table>\n"
@@ -361,4 +349,3 @@ public class HtmlTableTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
-

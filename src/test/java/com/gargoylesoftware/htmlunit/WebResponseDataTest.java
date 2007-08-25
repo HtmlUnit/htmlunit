@@ -67,7 +67,6 @@ public class WebResponseDataTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testGZippedContent() throws Exception {
-
         final InputStream stream = getClass().getResourceAsStream(GZIPPED_FILE);
         final byte[] zippedContent = IOUtils.toByteArray(stream);
 

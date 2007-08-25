@@ -386,9 +386,7 @@ public class FormTest extends WebTestCase {
      * @param expected The expected results.
      * @throws Exception if the test fails
      */
-    private void formResetTest(final BrowserVersion browserVersion, final String[] expected)
-        throws Exception {
-
+    private void formResetTest(final BrowserVersion browserVersion, final String[] expected) throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <title>Reset Test</title>\n"
@@ -804,7 +802,6 @@ public class FormTest extends WebTestCase {
     * @throws Exception if the test fails
     */
     public void testLostFunction() throws Exception {
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + " function onSubmit() { alert('hi!'); return false; }"
@@ -827,7 +824,6 @@ public class FormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssignedOnsubmit() throws Exception {
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + " function onSubmit() { alert('hi!'); return false; }"
@@ -853,7 +849,6 @@ public class FormTest extends WebTestCase {
     * @throws Exception if the test fails
     */
     public void testElementsLive() throws Exception {
-
         final String content = "<html>\n"
             + "<body>\n"
             + "<form name='myForm'>\n"

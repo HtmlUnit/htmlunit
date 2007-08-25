@@ -147,7 +147,6 @@ public final class HtmlInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnChangeHandler() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -228,7 +227,6 @@ public final class HtmlInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testOnChangeHandlerNotFiredOnLoad() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -243,7 +241,6 @@ public final class HtmlInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testBadInputType() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
             + "<body onload='alert(document.form1.text1.type)'>\n"

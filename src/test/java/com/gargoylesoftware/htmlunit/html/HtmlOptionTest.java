@@ -59,7 +59,6 @@ public class HtmlOptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSelect() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' id='select1'>\n"
@@ -96,7 +95,6 @@ public class HtmlOptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetValue() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' id='select1'>\n"
@@ -120,7 +118,6 @@ public class HtmlOptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetValue_ContentsIsValue() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"

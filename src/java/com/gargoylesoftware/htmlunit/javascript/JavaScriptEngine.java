@@ -125,7 +125,6 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * {@inheritDoc}
      */
     public void initialize(final WebWindow webWindow) {
-
         Assert.notNull("webWindow", webWindow);
 
         final ContextAction action = new ContextAction()
@@ -437,7 +436,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
     }
 
     /**
-     * Calls the given function taking care of synchronisation issues.
+     * Calls the given function taking care of synchronization issues.
      * @param htmlPage the html page that caused this script to executed
      * @param function the js function to execute
      * @param context the context in which execution should occur

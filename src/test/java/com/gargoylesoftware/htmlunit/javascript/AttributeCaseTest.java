@@ -182,7 +182,6 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
     private void setupAttributeTest(final String content, final String elementId) throws IOException {
-
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
@@ -195,7 +194,6 @@ public class AttributeCaseTest extends WebTestCase {
     }
 
     private void setupGetAttributeTest(final String attributeName, final String attributeValue) throws IOException {
-
         final String elementId = "p-id";
         final String content = "<html><head><title>AttributeCaseTest</title></head><body>\n"
                           + "<p id=\"" + elementId + "\" " + attributeName + "=\"" + attributeValue + "\">\n"

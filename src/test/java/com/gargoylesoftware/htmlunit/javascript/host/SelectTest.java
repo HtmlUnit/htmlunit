@@ -807,7 +807,6 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testOptionsDelegateToSelect() throws Exception {
-
         final String content
             = "<html><head>\n"
             + "<script>\n"
@@ -849,7 +848,6 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testOptionsArrayAdd() throws Exception {
-
         final String content
             = "<html><head>\n"
             + "<script>\n"
@@ -889,7 +887,6 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testOnChangeCallsFormSubmit() throws Exception {
-
         final String content
             = "<html><head>\n"
             + "</head>\n"

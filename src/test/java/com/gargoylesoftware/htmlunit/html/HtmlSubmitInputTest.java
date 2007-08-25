@@ -116,7 +116,6 @@ public class HtmlSubmitInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1' method='get' action='http://second'>\n"

@@ -207,7 +207,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception If the test fails
      */
     public void testMakeWebResponse() throws Exception {
-
         final URL url = new URL("http://htmlunit.sourceforge.net/");
         final String content = "<html><head></head><body></body></html>";
         final int httpStatus = 200;
@@ -320,7 +319,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception if the test fails
      */
     public void testStateAccess() throws Exception {
-
         final WebClient webClient = new WebClient();
         webClient.getWebConnection().getState();
     }

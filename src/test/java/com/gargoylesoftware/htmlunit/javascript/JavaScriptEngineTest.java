@@ -310,7 +310,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testExternalScript() throws Exception {
-
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
@@ -504,7 +503,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReferencingVariablesFromOneScriptToAnother_Regression() throws Exception {
-
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
@@ -535,7 +533,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testJavaScriptUrl() throws Exception {
-
         final String htmlContent
             = "<html><head><script language='javascript'>\n"
             + "var f1 = '<html><head><title>frame1</title></head><body><h1>frame1</h1></body></html>';\n"
@@ -667,7 +664,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testThisDotInOnClick() throws Exception {
-
         final String htmlContent
             = "<html><head><title>First</title><script>function foo(message){alert(message);}</script><body>\n"
              + "<form name='form1'><input type='submit' name='button1' onClick='foo(this.name)'></form>\n"
@@ -687,7 +683,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFunctionDefinedInExternalFile_CalledFromInlineScript() throws Exception {
-
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
@@ -723,7 +718,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testExternalScriptWithNewLineBeforeClosingScriptTag() throws Exception {
-
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
@@ -837,7 +831,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testActiveXObjectNoMap() throws Exception {
-
         try {
             loadPage(getJavaScriptContent("new ActiveXObject()"));
             fail("An exception should be thrown for zero argument constructor.");
@@ -968,7 +961,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testScriptErrorIsolated() throws Exception {
-
         final String content
             = "<html>\n"
             + "<head>\n"
@@ -1017,7 +1009,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testPrototypeScope() throws Exception {
-
         final String content1
             = "<html><head>\n"
             + "<script>\n"
@@ -1057,7 +1048,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testTimeout() throws Exception {
-
         final long timeout = 2000;
         final long oldTimeout = JavaScriptEngine.getTimeout();
         JavaScriptEngine.setTimeout(timeout);

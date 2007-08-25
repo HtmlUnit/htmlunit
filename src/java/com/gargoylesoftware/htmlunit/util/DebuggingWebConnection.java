@@ -172,7 +172,6 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @throws IOException if a problem occurs writing the file
      */
     private void createOverview() throws IOException {
-
         FileUtils.writeStringToFile(javaScriptFile_, "var tab = [];\n", TextUtil.DEFAULT_CHARSET);
 
         final File summary = new File(javaScriptFile_.getParentFile(), reportBaseName_ + ".html");

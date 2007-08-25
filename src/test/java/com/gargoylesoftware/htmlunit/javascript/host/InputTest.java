@@ -664,7 +664,6 @@ public class InputTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testOnChangeCallsFormSubmit() throws Exception {
-
         final String content
             = "<html><head>\n"
             + "</head>\n"

@@ -114,7 +114,6 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @exception IOException If an IO error occurs
      */
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-
         final URL url = webRequestSettings.getURL();
 
         final HttpClient httpClient = getHttpClient();
@@ -315,7 +314,6 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @return the initialized client
      */
     protected synchronized HttpClient getHttpClient() {
-
         if (httpClient_ == null) {
             httpClient_ = createHttpClient();
 

@@ -649,8 +649,7 @@ public class Document extends NodeImpl {
      * @throws IOException If an IO problem occurs.
      */
     public void jsxFunction_close()
-        throws
-            IOException {
+        throws IOException {
 
         if (writeInCurrentDocument_) {
             getLog().warn("close() called when document is not open.");

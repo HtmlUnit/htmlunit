@@ -66,7 +66,6 @@ public class FrameSetTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testCols() throws Exception {
-
         final String framesetContent =
             "<html><head><title>First</title></head>\n"
             + "<frameset id='fs' cols='20%,*'>\n"
@@ -91,7 +90,6 @@ public class FrameSetTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testRows() throws Exception {
-
         final String framesetContent =
             "<html><head><title>First</title></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"

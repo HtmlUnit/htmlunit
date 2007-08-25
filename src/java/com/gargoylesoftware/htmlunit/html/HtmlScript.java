@@ -202,7 +202,6 @@ public class HtmlScript extends HtmlElement {
      * Executes this script node as inline script if necessary and/or possible.
      */
     private void executeInlineScriptIfNeeded() {
-
         if (!isExecutionNeeded()) {
             return;
         }
@@ -245,7 +244,6 @@ public class HtmlScript extends HtmlElement {
      * Executes this script node if necessary and/or possible.
      */
     private void executeScriptIfNeeded() {
-
         if (!isExecutionNeeded()) {
             return;
         }
@@ -270,7 +268,6 @@ public class HtmlScript extends HtmlElement {
      * @return <code>true</code> if the script should be executed.
      */
     private boolean isExecutionNeeded() {
-
         final HtmlPage page = getPage();
 
         // If JavaScript is disabled, we don't need to execute.

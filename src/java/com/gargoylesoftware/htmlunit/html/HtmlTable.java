@@ -359,7 +359,6 @@ public class HtmlTable extends ClickableElement {
      * enter into nested row group elements (header, footer and body)
      */
     private class RowIterator implements Iterator {
-
         private HtmlTableRow nextRow_;
         private TableRowGroup currentGroup_;
 

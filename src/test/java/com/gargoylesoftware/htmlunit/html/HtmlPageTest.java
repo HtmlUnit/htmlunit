@@ -146,7 +146,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFormSubmit() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -188,7 +187,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetHtmlElement() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -253,7 +251,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetTabbableElements_None() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -270,7 +267,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetTabbableElements_OneEnabled_OneDisabled() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -290,7 +286,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetTabbableElements() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -326,7 +321,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetHtmlElementByAccessKey() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -350,7 +344,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetHtmlElementsByAccessKey() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head><body>\n"
             + "<a id='a' accesskey='a'>foo</a>\n"
@@ -370,7 +363,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssertAllIdAttributesUnique() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -392,7 +384,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssertAllIdAttributesUnique_Duplicates() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -420,7 +411,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssertAllAccessKeyAttributesUnique() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -442,7 +432,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssertAllAccessKeyAttributesUnique_Duplicates() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -470,7 +459,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssertAllTabIndexAttributesSet() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -495,7 +483,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssertAllTabIndexAttributesSet_SomeMissing() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -526,7 +513,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testAssertAllTabIndexAttributesSet_BadValue() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -603,7 +589,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    private void testGetFullQualifiedUrl_WithBase(final String baseProtocol, final String basePortPart)
+    private void testGetFullQualifiedUrl_WithBase(final String baseProtocol, final String basePortPart) 
         throws Exception {
 
         final String baseUrl = baseProtocol + "://second" + basePortPart;
@@ -818,7 +804,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEmbeddedMetaTag_Regression() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<table><tr><td>\n"
@@ -843,7 +828,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetPageEncoding() throws Exception {
-
         final String htmlContent = "<html><head>\n"
             + "<title>foo</title>\n"
             + "<meta http-equiv='Content-Type' content='text/html ;charset=Shift_JIS'>\n"
@@ -865,7 +849,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetForms() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -891,7 +874,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
-
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">\n"
             + "</head><body></body></html>";
@@ -914,7 +896,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTag_NoUrl() throws Exception {
-
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
@@ -942,7 +923,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_ImmediateRefresh_AvoidOOME() throws Exception {
-
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
@@ -1008,7 +988,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTagNoScript() throws Exception {
-
         final String firstContent = "<html><head><title>first</title>\n"
             + "<noscript>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=http://second\">\n"
@@ -1036,7 +1015,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_MetaTag_CustomRefreshHandler() throws Exception {
-
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">\n"
             + "</head><body></body></html>";
@@ -1089,7 +1067,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testRefresh_HttpResponseHeader() throws Exception {
-
         final String firstContent = "<html><head><title>first</title>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
@@ -1112,7 +1089,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentParentIsNull() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -1127,7 +1103,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentElement() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -1145,7 +1120,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentNodeType() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -1164,7 +1138,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDeregisterFrameWithoutSrc() throws Exception {
-
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
@@ -1286,7 +1259,6 @@ public class HtmlPageTest extends WebTestCase {
      * @exception Exception if the test fails
      */
     public void testGetHtmlElementsByName() throws Exception {
-
         final String html = "<html><body><div name='a'>foo</div><div name='b'/><div name='b'/></body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals(1, page.getHtmlElementsByName("a").size());
@@ -1364,7 +1336,6 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSetCookieMetaTag() throws Exception {
-
         final String content = "<html><head><title>first</title>\n"
             + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>\n"
             + "</head><body>\n"

@@ -245,7 +245,6 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testUseConfiguredBrowser() throws Exception {
-
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -271,7 +270,6 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testLanguage() throws Exception {
-
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -297,7 +295,6 @@ public class NavigatorTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testMozilla() throws Exception {
-
         final String content
             = "<html><head><title>First</title></head>\n"
             + "<script>\n"

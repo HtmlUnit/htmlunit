@@ -97,7 +97,6 @@ public class HtmlAnchor extends FocusableElement {
      * @throws IOException If an IO error occurred
      */
     protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
-
         final String href = getHrefAttribute() + hrefSuffix;
 
         getLog().debug(

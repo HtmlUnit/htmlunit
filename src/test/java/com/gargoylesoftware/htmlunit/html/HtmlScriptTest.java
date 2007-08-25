@@ -68,7 +68,6 @@ public class HtmlScriptTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testBadExternalScriptReference() throws Exception {
-
         final String html = "<html><head><title>foo</title>\n"
                 + "<script src='notExisting.js'></script>\n"
                 + "</head><body></body></html>";
@@ -129,7 +128,6 @@ public class HtmlScriptTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
-
         final String firstPage
             = "<html><head></head>\n"
             + "<body onload='alert(\"body onload executing but should be skipped\")'>\n"
@@ -164,7 +162,6 @@ public class HtmlScriptTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testScriptIsNotRunWhenCloned() throws Exception {
-
         final String html = "<html><body onload='document.body.cloneNode(true)'>\n"
             + "<script>alert('a')</script></body></html>";
         final List collectedAlerts = new ArrayList();

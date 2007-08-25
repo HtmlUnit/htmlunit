@@ -66,7 +66,6 @@ public class DisabledElementTest extends WebTestCase {
      * @return The test suite to run
      */
     public static Test suite() {
-
         final TestSuite suite = new TestSuite();
         addTestCases(suite, "button", "<button id='element1' {0}>foo</button>");
         addTestCases(suite, "input_button", "<input type='button' id='element1' {0}>");

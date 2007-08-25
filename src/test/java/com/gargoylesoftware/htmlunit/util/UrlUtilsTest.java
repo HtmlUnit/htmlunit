@@ -97,7 +97,6 @@ public class UrlUtilsTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testGetUrlWithNewRef() throws Exception {
-
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewRef(a, "abc");
         assertEquals("http://my.home.com/index.html?query#abc", b.toExternalForm());

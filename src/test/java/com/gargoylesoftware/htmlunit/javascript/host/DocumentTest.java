@@ -368,7 +368,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testDocumentCreateElement() throws Exception {
-
         final String htmlContent
             = "<html>\n"
             + "  <head>\n"
@@ -1754,7 +1753,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentBody_read() throws Exception {
-
         final String html = "<html><head><title>First</title></head>\n"
             + "<body id='IAmTheBody' onload='alert(document.body.id)'>\n"
             + "</body></html>";
@@ -2276,7 +2274,6 @@ public class DocumentTest extends WebTestCase {
     * @throws Exception if the test fails
     */
     public void testDomainMixedCaseNetscape() throws Exception {
-
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM");
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);

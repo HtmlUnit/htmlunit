@@ -73,7 +73,6 @@ public class WebResponseImplTest extends WebTestCase {
     }
 
     private void testRecognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
-    
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);

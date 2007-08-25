@@ -1513,9 +1513,7 @@ public class HTMLElementTest extends WebTestCase {
         testParentElement(BrowserVersion.FIREFOX_2, alertsFF);
     }
 
-    private void testParentElement(final BrowserVersion browser, final String[] expectedAlerts)
-        throws Exception {
-
+    private void testParentElement(final BrowserVersion browser, final String[] expectedAlerts) throws Exception {
         final String content
             = "<html id='htmlID'>\n"
             + "<head>\n"

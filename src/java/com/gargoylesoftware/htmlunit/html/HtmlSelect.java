@@ -241,7 +241,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param newOption The new option to replace to indexed option
      */
     public void replaceOption(final int index, final HtmlOption newOption) {
-
         final ChildElementsIterator iterator = new ChildElementsIterator();
         for (int i = 0; iterator.hasNext(); i++) {
             final HtmlElement element = iterator.nextElement();

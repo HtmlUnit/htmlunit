@@ -165,7 +165,6 @@ public class HTMLParserTest extends WebTestCase {
      * @throws Exception failure
      */
     public static void testHtmlUnitHomePage() throws Exception {
-
         final URL htmlUnitSite = new URL("http://htmlunit.sourceforge.net");
         try {
             final URLConnection connection = htmlUnitSite.openConnection();

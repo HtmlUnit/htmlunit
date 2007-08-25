@@ -71,7 +71,6 @@ public class HTMLFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFrameName() throws Exception {
-
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"

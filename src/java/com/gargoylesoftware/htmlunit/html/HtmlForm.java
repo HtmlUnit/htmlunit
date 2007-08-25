@@ -130,7 +130,6 @@ public class HtmlForm extends ClickableElement {
      * @deprecated after 1.11, click on the specific button instead.
      */
     public Page submit(final String buttonName) throws IOException, ElementNotFoundException {
-
         final List inputList = getHtmlElementsByAttribute("input", "name", buttonName);
         final Iterator iterator = inputList.iterator();
         while (iterator.hasNext()) {
@@ -308,7 +307,6 @@ public class HtmlForm extends ClickableElement {
      * @return See above
      */
     public Collection getSubmittableElements(final SubmittableElement submitElement) {
-
         final List submittableElements = new ArrayList();
 
         final Iterator iterator = getAllHtmlChildElements();
@@ -426,8 +424,7 @@ public class HtmlForm extends ClickableElement {
      */
     //TODO: to be removed, deprecated in 4 June 2007
     public HtmlRadioButtonInput getRadioButtonInput(final String name, final String value)
-        throws
-            ElementNotFoundException {
+        throws ElementNotFoundException {
 
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
@@ -533,7 +530,6 @@ public class HtmlForm extends ClickableElement {
      * @return See above
      */
     public List getRadioButtonsByName(final String name) {
-
         Assert.notNull("name", name);
 
         final List results = new ArrayList();
@@ -682,7 +678,6 @@ public class HtmlForm extends ClickableElement {
      * @return The first checked radio button.
      */
     public HtmlRadioButtonInput getCheckedRadioButton(final String name) {
-
         Assert.notNull("name", name);
 
         final Iterator iterator = getAllHtmlChildElements();

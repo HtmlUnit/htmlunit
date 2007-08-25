@@ -540,7 +540,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testParentAndTop() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "  <iframe name='left' src='http://second' />\n"
@@ -981,7 +980,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testWindowFramesLive() throws Exception {
-
         final String content =
             "<html>\n"
             + "<script>\n"
@@ -1277,7 +1275,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testClose() throws Exception {
-
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -1349,7 +1346,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testFramesLengthAndFrameAccess() throws Exception {
-
         final String content =
             "<html>\n"
             + "<script>\n"
@@ -1623,7 +1619,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testOnloadNotAFunction() throws Exception {
-
         final String html = "<html><body><script>\n"
             + "window.onload = new function() {alert('a')};\n"
             + "window.onload = undefined;\n"

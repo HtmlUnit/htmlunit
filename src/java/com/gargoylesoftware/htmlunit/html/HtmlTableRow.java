@@ -193,7 +193,6 @@ public class HtmlTableRow extends ClickableElement {
      * into nested forms, even though that is illegal HTML
      */
     public class CellIterator implements Iterator {
-
         private HtmlTableCell nextCell_;
         private HtmlForm currentForm_;
 

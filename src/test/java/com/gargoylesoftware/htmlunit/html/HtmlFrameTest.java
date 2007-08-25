@@ -168,9 +168,7 @@ public class HtmlFrameTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testFailingHttpStatusCodeException()
-        throws Exception {
-
+    public void testFailingHttpStatusCodeException() throws Exception {
         final String failingContent
             = "<html><head><body>Not found</body></html>";
         

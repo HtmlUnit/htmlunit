@@ -130,7 +130,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     void testSyncUse(final BrowserVersion browserVersion) throws Exception {
-
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -320,7 +319,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testResponseXML() throws Exception {
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test()"
@@ -473,7 +471,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testOverrideMimeType() throws Exception {
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test()"
@@ -623,7 +620,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testNoParallelJSExecutionInPage() throws Exception {
-
         final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {"
             + " if (window.XMLHttpRequest)"
@@ -682,7 +678,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testRefererHeader() throws Exception {
-
         final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {"
             + " if (window.XMLHttpRequest)"

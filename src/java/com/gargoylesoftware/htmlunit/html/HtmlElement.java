@@ -189,7 +189,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttribute(final String attributeName) {
-
         return getAttributeValue(attributeName);
     }
 
@@ -201,7 +200,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @return The qualified name or just local name if the namespace is not fully defined.
      */
     private String getQualifiedName(final String namespaceURI, final String localName) {
-
         final String qualifiedName;
         if (namespaceURI != null) {
             final String prefix = (String) namespaces_.get(namespaceURI);
@@ -230,7 +228,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeNS(final String namespaceURI, final String localName) {
-
         return getAttributeValue(getQualifiedName(namespaceURI, localName));
     }
 
@@ -238,7 +235,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * {@inheritDoc}
      */
     public boolean hasAttributes() {
-
         return attributes_.size() > 0;
     }
 
@@ -262,7 +258,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * default value, false otherwise.
      */
     public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
-
         return attributes_.get(getQualifiedName(namespaceURI, localName)) != null;
     }
 
@@ -277,7 +272,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue(final String attributeName) {
-
         final HtmlAttr attr = (HtmlAttr) attributes_.get(attributeName.toLowerCase());
 
         if (attr != null) {
@@ -387,7 +381,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param localName The name within the namespace.
      */
     public final void removeAttributeNS(final String namespaceURI, final String localName) {
-
         removeAttribute(getQualifiedName(namespaceURI, localName));
     }
 
@@ -607,7 +600,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param printWriter writer where child nodes are written
      */
     protected void printXml(final String indent, final PrintWriter printWriter) {
-
         final boolean hasChildren = (getFirstDomChild() != null);
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
@@ -806,7 +798,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @return The list of tag names
      */
     public final List getHtmlElementsByTagNames(final List acceptableTagNames) {
-
         final List list = new ArrayList();
         final Iterator iterator = acceptableTagNames.iterator();
 

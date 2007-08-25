@@ -464,7 +464,6 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @return true if the node has attributes, false otherwise.
      */
     public boolean hasAttributes() {
-
         return false;
     }
 
@@ -943,9 +942,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @deprecated Not used
      */
     //deprecated after 1.11
-    public final synchronized void addPropertyChangeListener(
-        final PropertyChangeListener listener) {
-
+    public final synchronized void addPropertyChangeListener(final PropertyChangeListener listener) {
         Assert.notNull("listener", listener);
         if (propertyChangeSupport_ == null) {
             propertyChangeSupport_ = new PropertyChangeSupport(this);
@@ -959,9 +956,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @deprecated Not used
      */
     //deprecated after 1.11
-    public final synchronized void removePropertyChangeListener(
-        final PropertyChangeListener listener) {
-
+    public final synchronized void removePropertyChangeListener(final PropertyChangeListener listener) {
         Assert.notNull("listener", listener);
         if (propertyChangeSupport_ != null) {
             propertyChangeSupport_.removePropertyChangeListener(listener);

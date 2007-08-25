@@ -139,7 +139,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * {@inheritDoc}
      */
     protected Context makeContext() {
-
         final TimeoutContext cx = new TimeoutContext();
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.

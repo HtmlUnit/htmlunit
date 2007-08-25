@@ -89,7 +89,6 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void test_onClick() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"

@@ -75,7 +75,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testHrefTrimmed() throws Exception {
-
         final String html = "<html><body onload='"
             + "alert(document.getElementById(\"a\").href.length);\n"
             + "alert(document.getElementById(\"b\").href.length);'>\n"
@@ -94,7 +93,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -141,7 +139,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_onClickHandler() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -176,7 +173,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_onClickHandler_returnFalse() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -211,7 +207,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_onClickHandler_javascriptDisabled() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -249,7 +244,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_javascriptUrl() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -273,7 +267,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
@@ -305,7 +298,6 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testClick_javascriptUrl_InvalidReturn_RegressionTest() throws Exception {
-
         final String htmlContent
             = "<html><head><SCRIPT lang=\"JavaScript\">\n"
             + "function doSubmit(formName){"

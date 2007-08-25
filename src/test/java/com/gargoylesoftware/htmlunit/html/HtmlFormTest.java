@@ -293,7 +293,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_onSubmitHandler_fails() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='http://second' onSubmit='return null'>\n"
@@ -318,7 +317,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_onSubmitHandler_javascriptDisabled() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='http://second' onSubmit='alert(\"clicked\")'>\n"
@@ -353,7 +351,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_javascriptAction() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
@@ -385,7 +382,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_javascriptAction_javascriptDisabled() throws Exception {
-
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
@@ -436,9 +432,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testReset_onResetHandler()
-        throws Exception {
-
+    public void testReset_onResetHandler() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='http://second' "
@@ -468,9 +462,7 @@ public class HtmlFormTest extends WebTestCase {
      * supposed to be called so it doesn't matter what value it returns.</p>
      * @throws Exception if the test fails
      */
-    public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse()
-        throws Exception {
-
+    public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<script>function doalert(message){alert(message);}</script>\n"
@@ -670,7 +662,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_CheckboxClicked() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script language='javascript'>\n"
@@ -849,7 +840,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_SelectHasNoOptions() throws Exception {
-
         final String htmlContent
             = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select'>\n"
@@ -868,7 +858,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testSubmit_SelectOptionWithoutValueAttribute() throws Exception {
-
         final String htmlContent
             = "<html><body><form name='form' action='action.html'>\n"
             + "<select name='select'>\n"

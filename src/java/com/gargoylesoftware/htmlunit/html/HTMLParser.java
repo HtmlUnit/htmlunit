@@ -291,7 +291,6 @@ public final class HTMLParser {
      * consume SAX events to build the page DOM
      */
     private static final class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler, LexicalHandler {
-
         private final HtmlPage page_;
 
         private Locator locator_;

@@ -287,7 +287,6 @@ public class HtmlTableRowTest extends WebTestCase {
      * the clone.
      */
     public void testCloneHasDifferentScriptableObject() {
-
         final String cmd = "document.getElementById('cell')"; // force it to have a
         // scriptable object
         client_.getScriptEngine().execute(page_, cmd, "test");

@@ -66,7 +66,6 @@ public class ScriptTest extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testOnReadyStateChangeHandler() throws Exception {
-
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <title>test</title>\n"

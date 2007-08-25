@@ -68,7 +68,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableCaptions() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'><caption>caption1</caption><caption>caption2</caption>\n"
@@ -101,7 +100,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableHeaders() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -136,7 +134,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableBodies() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -176,7 +173,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableRows() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -214,7 +210,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableHeadRows() throws Exception {
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test()"
@@ -246,7 +241,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableRowsWithManySections() throws Exception {
-
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
             + "    <thead>\n"
@@ -306,7 +300,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTableFooters() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -341,7 +334,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testCellIndex() throws Exception {
-
         final String htmlContent
             = "<html><head><title>Test</title>\n"
             + "<script>\n"
@@ -370,7 +362,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInsertRow() throws Exception {
-
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -405,7 +396,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInsertRowNested() throws Exception {
-
         final String content =
             "<html><head>\n"
             + "<script>\n"
@@ -442,7 +432,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInsertRowInEmtpyTable() throws Exception {
-
         final String content =
             "<html><head>\n"
             + "<script>\n"
@@ -475,7 +464,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testInsertRowInTableWithEmtpyTbody() throws Exception {
-
         final String content =
             "<html><head>\n"
             + "<script>\n"
@@ -508,7 +496,6 @@ public class TableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNestedTables() throws Exception {
-
         final String content =
             "<html><head>\n"
             + "<script>\n"

@@ -71,9 +71,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testLoadingFrameSet()
-        throws Exception {
-
+    public void testLoadingFrameSet() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
@@ -112,9 +110,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testLoadingIFrames()
-        throws Exception {
-
+    public void testLoadingIFrames() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<body>\n"
@@ -146,9 +142,7 @@ public class HtmlFrameSetTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
-    public void testLoadingFrameSetWithRelativePaths()
-        throws Exception {
-
+    public void testLoadingFrameSetWithRelativePaths() throws Exception {
         final String framesContent
             = "<html><head><title>Frames</title></head>\n"
             + "<frameset rows='110,*'>\n"

@@ -423,7 +423,6 @@ public class NodeImpl extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult executeEvent(final Event event) {
-
         if (eventListenersContainer_ != null) {
             final HtmlPage page = getDomNodeOrDie().getPage();
             final boolean isIE = page.getWebClient().getBrowserVersion().isIE();
@@ -459,7 +458,6 @@ public class NodeImpl extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
-
         final HtmlPage page = getDomNodeOrDie().getPage();
         final boolean isIE = page.getWebClient().getBrowserVersion().isIE();
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();

@@ -434,7 +434,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @exception Exception If an error occurs.
      */
     public void initialize(final WebWindow webWindow) throws Exception {
-
         webWindow_ = webWindow;
         webWindow_.setScriptObject(this);
 
@@ -924,7 +923,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the evaluation result
      */
     public Object custom_eval(final String scriptCode) {
-        
         final Context context = Context.getCurrentContext();
         final org.mozilla.javascript.Script script = context.compileString(scriptCode, "eval body", 0, null);
         return script.exec(context, this);

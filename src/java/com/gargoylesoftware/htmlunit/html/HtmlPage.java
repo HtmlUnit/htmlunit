@@ -442,7 +442,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return The resolved target to use for the element.
      */
     public String getResolvedTarget(final String elementTarget) {
-
         final List baseElements =
             getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
         final String resolvedTarget;
@@ -490,7 +489,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  Return a list of all elements that are tabbable in the order that will
      *  be used for tabbing.<p>
      *
-     *  The rules for determing tab order are as follows:
+     *  The rules for determining tab order are as follows:
      *  <ol>
      *    <li> Those elements that support the tabindex attribute and assign a
      *    positive value to it are navigated first. Navigation proceeds from the
@@ -514,7 +513,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return A list containing all the tabbable elements in proper tab order.
      */
     public List getTabbableElements() {
-
         final List acceptableTagNames = Arrays.asList(
                 new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List tabbableElements = new ArrayList();
@@ -622,7 +620,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @return A list of html elements that are assigned to the specified accesskey.
      */
     public List getHtmlElementsByAccessKey(final char accessKey) {
-
         final List elements = new ArrayList();
 
         final String searchString = ("" + accessKey).toLowerCase();
@@ -654,7 +651,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  WebClient#assertionFailed(String)}
      */
     public void assertAllTabIndexAttributesSet() {
-
         final List acceptableTagNames = Arrays.asList(
                 new Object[]{"a", "area", "button", "input", "object", "select", "textarea"});
         final List tabbableElements = getDocumentHtmlElement().getHtmlElementsByTagNames(acceptableTagNames);
@@ -681,7 +677,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      *  {@link WebClient#assertionFailed(String)}
      */
     public void assertAllAccessKeyAttributesUnique() {
-
         final List accessKeyList = new ArrayList();
 
         final Iterator iterator = getAllHtmlChildElements();
@@ -1576,7 +1571,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
      * @see #assertAllTabIndexAttributesSet()
      */
     public boolean moveFocusToElement(final FocusableElement newElement) {
-
         if (elementWithFocus_ == newElement) {
             // nothing to do
             return true;
