@@ -589,7 +589,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    private void testGetFullQualifiedUrl_WithBase(final String baseProtocol, final String basePortPart) 
+    private void testGetFullQualifiedUrl_WithBase(final String baseProtocol, final String basePortPart)
         throws Exception {
 
         final String baseUrl = baseProtocol + "://second" + basePortPart;
