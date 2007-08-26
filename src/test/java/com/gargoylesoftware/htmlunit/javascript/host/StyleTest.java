@@ -292,21 +292,21 @@ public class StyleTest extends WebTestCase {
      */
     public void testGetPropertyValue_WithDash() throws Exception {
         final String html =
-              "<html><body onload='test()'><script>\r\n"
-            + "    function test() {\r\n"
-            + "        var span = document.getElementById('span');\r\n"
-            + "        span.style['fontSize'] = '30px';\r\n"
-            + "        alert(span.style.fontSize);\r\n"
-            + "        alert(span.style.getPropertyValue('fontSize'));\r\n"
-            + "        alert(span.style.getPropertyValue('font-size'));\r\n"
-            + "        span.style['fontFamily'] = 'arial';\r\n"
-            + "        alert(span.style.fontFamily);\r\n"
-            + "        alert(span.style.getPropertyValue('fontFamily'));\r\n"
-            + "        alert(span.style.getPropertyValue('font-family'));\r\n"
-            + "    }\r\n"
-            + "</script>\r\n"
-            + "<span id='span'>x</span>\r\n"
-            + "</body></html>\r\n";
+              "<html><body onload='test()'><script>\n"
+            + "    function test() {\n"
+            + "        var span = document.getElementById('span');\n"
+            + "        span.style['fontSize'] = '30px';\n"
+            + "        alert(span.style.fontSize);\n"
+            + "        alert(span.style.getPropertyValue('fontSize'));\n"
+            + "        alert(span.style.getPropertyValue('font-size'));\n"
+            + "        span.style['fontFamily'] = 'arial';\n"
+            + "        alert(span.style.fontFamily);\n"
+            + "        alert(span.style.getPropertyValue('fontFamily'));\n"
+            + "        alert(span.style.getPropertyValue('font-family'));\n"
+            + "    }\n"
+            + "</script>\n"
+            + "<span id='span'>x</span>\n"
+            + "</body></html>";
         final List actual = new ArrayList();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final String[] expected = {"30px", "", "30px", "arial", "", "arial"};
@@ -328,17 +328,17 @@ public class StyleTest extends WebTestCase {
     }
 
     private void testStyleFilter(final BrowserVersion browserVersion, final String[] expected) throws Exception {
-        final String html = "<html><body onload='test()'><script>\r\n"
-            + "   function test(){\r\n"
-            + "      var div1 = document.getElementById('div1');\r\n"
-            + "      alert(div1.style.filter);\r\n"
-            + "      var div2 = document.getElementById('div2');\r\n"
-            + "      alert(div2.style.filter);\r\n"
-            + "   }\r\n"
-            + "</script>\r\n"
-            + "<div id='div1'>foo</div>\r\n"
-            + "<div id='div2' style='filter:alpha(opacity=50)'>bar</div>\r\n"
-            + "</body></html>\r\n";
+        final String html = "<html><body onload='test()'><script>\n"
+            + "   function test(){\n"
+            + "      var div1 = document.getElementById('div1');\n"
+            + "      alert(div1.style.filter);\n"
+            + "      var div2 = document.getElementById('div2');\n"
+            + "      alert(div2.style.filter);\n"
+            + "   }\n"
+            + "</script>\n"
+            + "<div id='div1'>foo</div>\n"
+            + "<div id='div2' style='filter:alpha(opacity=50)'>bar</div>\n"
+            + "</body></html>";
         final List actual = new ArrayList();
         loadPage(browserVersion, html, actual);
         assertEquals(expected, actual);

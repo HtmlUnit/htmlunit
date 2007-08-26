@@ -68,14 +68,14 @@ public class UIEventTest extends WebTestCase {
      */
     public void testDetail() throws Exception {
         final String html =
-              "<html><head><script>\r\n"
-            + "  function alertDetail(e) {\r\n"
-            + "    alert(e.detail);\r\n"
-            + "  }\r\n"
-            + "</script></head>\r\n"
-            + "<body onload='alertDetail(event)'>\r\n"
-            + "<div id='a' onclick='alertDetail(event)'>abc</div>\r\n"
-            + "<div id='b' ondblclick='alertDetail(event)'>xyz</div>\r\n"
+              "<html><head><script>\n"
+            + "  function alertDetail(e) {\n"
+            + "    alert(e.detail);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='alertDetail(event)'>\n"
+            + "<div id='a' onclick='alertDetail(event)'>abc</div>\n"
+            + "<div id='b' ondblclick='alertDetail(event)'>xyz</div>\n"
             + "</body></html>";
         final String[] expected = {"undefined", "1", "2"};
         final List actual = new ArrayList();
@@ -90,12 +90,12 @@ public class UIEventTest extends WebTestCase {
      */
     public void testView() throws Exception {
         final String html =
-              "<html><body onload='alertView(event)'><script>\r\n"
-            + "  function alertView(e) {\r\n"
-            + "    alert(e.view);\r\n"
-            + "  }\r\n"
-            + "</script>\r\n"
-            + "<form><input type='button' id='b' onclick='alertView(event)'></form>\r\n"
+              "<html><body onload='alertView(event)'><script>\n"
+            + "  function alertView(e) {\n"
+            + "    alert(e.view);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<form><input type='button' id='b' onclick='alertView(event)'></form>\n"
             + "</body></html>";
         final String[] expected = {"undefined", "[object Window]"};
         final List actual = new ArrayList();
