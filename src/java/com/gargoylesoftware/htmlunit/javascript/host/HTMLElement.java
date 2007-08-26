@@ -1672,4 +1672,23 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         }
         return uniqueID_;
     }
+
+    /**
+     * Return the html element that corresponds to this javascript object or throw an exception
+     * if one cannot be found.
+     * @return The html element
+     * @exception IllegalStateException If the html element could not be found.
+     */
+    public final HtmlElement getHtmlElementOrDie() throws IllegalStateException {
+        return (HtmlElement) getDomNodeOrDie();
+    }
+    
+    /**
+     * Return the html element that corresponds to this javascript object
+     * or null if an element hasn't been set.
+     * @return The html element or null
+     */
+    public final HtmlElement getHtmlElementOrNull() {
+        return (HtmlElement) getDomNodeOrNull();
+    }
 }

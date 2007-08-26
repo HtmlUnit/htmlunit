@@ -507,7 +507,7 @@ public class NodeImpl extends SimpleScriptable {
     
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);
-            node = getHtmlElementOrDie();
+            node = getDomNodeOrDie();
             while (node != null) {
                 final NodeImpl jsNode = (NodeImpl) node.getScriptObject();
                 
