@@ -302,7 +302,7 @@ The reference stays the maven 1 build.
 		<dependency>
 			<groupId>rhino</groupId>
 			<artifactId>js</artifactId>
-			<version>1.6R5</version>
+			<version>1.6R7</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>

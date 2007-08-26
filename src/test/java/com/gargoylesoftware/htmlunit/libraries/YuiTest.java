@@ -76,10 +76,6 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testLogger() throws Exception {
-        if (notYetImplemented()) {
-            // TODO: works after upgrading Rhino
-            return;
-        }
         doTest(BrowserVersion.FIREFOX_2, "logger.html", Collections.EMPTY_LIST);
     }
 
@@ -87,10 +83,6 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testAnimation() throws Exception {
-        if (notYetImplemented()) {
-            // TODO: works after upgrading Rhino
-            return;
-        }
         final List l = new ArrayList();
         l.add("test_onStart");
         doTest(BrowserVersion.FIREFOX_2, "animation.html", l);

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                Upgrade Rhino to 1.6R7.
+            </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
                 JavaScript: add support for function event.initEvent() (FF only).
             </action>

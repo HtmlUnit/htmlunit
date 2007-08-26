@@ -123,9 +123,6 @@ public class PrototypeTest extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testHash() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         test("hash.html", 5, 19);
     }
 
