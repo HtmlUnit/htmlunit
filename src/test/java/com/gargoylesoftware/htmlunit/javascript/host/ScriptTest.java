@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -50,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class ScriptTest extends WebTestCase {
 
@@ -101,4 +103,31 @@ public class ScriptTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test for bug
+     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038
+     * @throws Exception if the test fails
+     */
+    public void testSrcWithJavaScriptProtocol() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testSrcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_7_0, "");
+        testSrcWithJavaScriptProtocol(BrowserVersion.FIREFOX_2, "1");
+    }
+
+    private void testSrcWithJavaScriptProtocol(final BrowserVersion browserVersion, final String expectedAlert) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var script=document.createElement('script');\n"
+            + "    script.src=\"javascript:'alert(1)'\";\n"
+            + "    document.getElementsByTagName('head')[0].appendChild(script);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(new String[] {expectedAlert}, collectedAlerts);
+    }
 }
