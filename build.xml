@@ -183,6 +183,12 @@ JUnit results available here: ${test.reports.dir}/index.html
 	<target name="get-jars" depends="setProxy"
         description="Get all the required dependencies from a remote repository">
     
+		<!--
+		    IMPORTANT: after changing any dependency, make sure 'cruise' task depends on 'initialize'
+			           in order to refresh all jars.
+					   Note that having 'cruise' always depends on 'initialize' leads
+					   to high rate of failure.
+		-->
 	    <!-- required -->
 	    <get-dependency project="commons-httpclient" jarName="commons-httpclient-3.1.jar"/>
 	    <get-dependency project="commons-codec" jarName="commons-codec-1.3.jar"/>
@@ -233,6 +239,6 @@ JUnit results available here: ${test.reports.dir}/index.html
 	</target>
 
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="cruise" depends="initialize,cruise-set-jar-suffix,jar" description="Called by Cruise Control during a build">
+	<target name="cruise" depends="cruise-set-jar-suffix,jar" description="Called by Cruise Control during a build">
 	</target>
 </project>
