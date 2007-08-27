@@ -112,11 +112,12 @@ public class ScriptTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        testSrcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_7_0, "");
-        testSrcWithJavaScriptProtocol(BrowserVersion.FIREFOX_2, "1");
+        testSrcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_7_0, new String[0]);
+        testSrcWithJavaScriptProtocol(BrowserVersion.FIREFOX_2, new String[] {"1"});
     }
 
-    private void testSrcWithJavaScriptProtocol(final BrowserVersion browserVersion, final String expectedAlert) throws Exception {
+    private void testSrcWithJavaScriptProtocol(final BrowserVersion browserVersion,
+            final String[] expectedAlerts) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var script=document.createElement('script');\n"
@@ -128,6 +129,6 @@ public class ScriptTest extends WebTestCase {
         
         final List collectedAlerts = new ArrayList();
         loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(new String[] {expectedAlert}, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
