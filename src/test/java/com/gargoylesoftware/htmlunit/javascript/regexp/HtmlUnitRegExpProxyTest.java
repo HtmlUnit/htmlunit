@@ -133,14 +133,33 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testMatch() throws Exception {
+    public void testReplaceWithUndefinedPattern() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var pattern;\n"
+            + "    alert('123456'.replace(pattern, ''));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"123456"};
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testReplace() throws Exception {
         if (notYetImplemented()) {
             return;
         }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var x = (/{\\d+}/g);\n"
-            + "    alert('123456'.replace(x[0], ''));\n"
+            + "    var pattern = /{\\d+}/g;\n"
+            + "    alert('123456'.replace(pattern, ''));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

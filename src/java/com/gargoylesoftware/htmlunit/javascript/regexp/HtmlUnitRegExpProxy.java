@@ -95,9 +95,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     return matcher.replaceFirst(replacement);
                 }
             }
-            else {
-                throw new RuntimeException("Unexpected first parameter: " + arg0);
-            }
         }
         
         return wrappedAction(cx, scope, thisObj, args, actionType);
