@@ -39,8 +39,11 @@ package com.gargoylesoftware.htmlunit.javascript.regexp;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RegExpProxy;
 import org.mozilla.javascript.ScriptRuntime;
@@ -49,9 +52,10 @@ import org.mozilla.javascript.regexp.NativeRegExp;
 import org.mozilla.javascript.regexp.RegExpImpl;
 
 /**
- * Begins customisation of JavaScript RegExp base on JDK regular expression support.
+ * Begins customization of JavaScript RegExp base on JDK regular expression support.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HtmlUnitRegExpProxy extends RegExpImpl {
     private final RegExpProxy wrapped_;
@@ -82,17 +86,22 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
             }
             else if (arg0 instanceof NativeRegExp) {
-                final String str = arg0.toString(); // the form is /regex/flags
-                final String regex = StringUtils.substringBeforeLast(str.substring(1), "/");
-                final String flagsStr = StringUtils.substringAfterLast(str, "/");
-                final int flags = jsFlagsToPatternFlags(flagsStr);
-                final Pattern pattern = Pattern.compile(regex, flags);
-                final Matcher matcher = pattern.matcher(thisString);
-                if (flagsStr.indexOf('g') != -1) {
-                    return matcher.replaceAll(replacement);
+                try {
+                    final String str = arg0.toString(); // the form is /regex/flags
+                    final String regex = StringUtils.substringBeforeLast(str.substring(1), "/");
+                    final String flagsStr = StringUtils.substringAfterLast(str, "/");
+                    final int flags = jsFlagsToPatternFlags(flagsStr);
+                    final Pattern pattern = Pattern.compile(regex, flags);
+                    final Matcher matcher = pattern.matcher(thisString);
+                    if (flagsStr.indexOf('g') != -1) {
+                        return matcher.replaceAll(replacement);
+                    }
+                    else {
+                        return matcher.replaceFirst(replacement);
+                    }
                 }
-                else {
-                    return matcher.replaceFirst(replacement);
+                catch (final PatternSyntaxException e) {
+                    getLog().warn(e);
                 }
             }
         }
@@ -162,4 +171,13 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     public Scriptable wrapRegExp(final Context cx, final Scriptable scope, final Object compiled) {
         return wrapped_.wrapRegExp(cx, scope, compiled);
     }
+
+    /**
+     * Return the log object for this object.
+     * @return The log object for this object.
+     */
+    protected final Log getLog() {
+        return LogFactory.getLog(getClass());
+    }
+
 }

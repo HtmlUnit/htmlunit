@@ -153,9 +153,6 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReplace() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var pattern = /{\\d+}/g;\n"

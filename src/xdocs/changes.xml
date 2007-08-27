@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="asashour">
+                Regular Expressions: allow 'undefined' pattern, and tolerate improper patterns (trigger warning).
+            </action>
             <action type="update" dev="asashour">
                 Upgrade Rhino to 1.6R7.
             </action>
