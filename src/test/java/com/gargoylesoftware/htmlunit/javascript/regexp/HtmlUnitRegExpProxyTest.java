@@ -145,7 +145,6 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        System.out.println( content);
         final String[] expectedAlerts = {"123456"};
         final List collectedAlerts = new ArrayList();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
