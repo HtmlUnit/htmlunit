@@ -112,6 +112,7 @@ public class ScriptTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
+        testSrcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1"});
         testSrcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_7_0, new String[0]);
         testSrcWithJavaScriptProtocol(BrowserVersion.FIREFOX_2, new String[] {"1"});
     }
