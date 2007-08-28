@@ -90,6 +90,12 @@ public class Event extends SimpleScriptable {
     /** The key down event type, triggered by "onkeydown" event handlers. */
     public static final String TYPE_KEY_DOWN = "keydown";
 
+    /** The key down event type, triggered by "onkeypress" event handlers. */
+    public static final String TYPE_KEY_PRESS = "keypress";
+
+    /** The key down event type, triggered by "onkeyup" event handlers. */
+    public static final String TYPE_KEY_UP = "keyup";
+
     /** The submit event type, triggered by "onreset" event handlers. */
     public static final String TYPE_RESET = "reset";
 

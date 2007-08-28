@@ -570,6 +570,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * Simulate pressing a key on this element
      *
      * @param keyCode the key you wish to press
+     * @deprecated use type(char) instead
      */
     public void keyDown(final int keyCode) {
         keyDown(keyCode, false, false, false);
@@ -582,6 +583,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @deprecated use type(char, boolean, boolean, boolean) instead
      */
     public void keyDown(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         if (this instanceof DisabledElement) {
@@ -589,8 +591,56 @@ public abstract class HtmlElement extends DomNamespaceNode {
                 return;
             }
         }
-
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey));
+    }
+
+    /**
+     * Simulates typing the specified text while this element has focus.
+     * @param text the text you with to simulate typing
+     */
+    public void type(final String text) {
+        for (int i = 0; i < text.length(); i++) {
+            type(text.charAt(i));
+        }
+    }
+
+    /**
+     * Simulates typing the specified text while this element has focus.
+     * @param text the text you with to simulate typing
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     */
+    public void type(final String text, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        for (int i = 0; i < text.length(); i++) {
+            type(text.charAt(i), shiftKey, ctrlKey, altKey);
+        }
+    }
+
+    /**
+     * Simulates typing the specified character while this element has focus.
+     * @param c the character you with to simulate typing
+     */
+    public void type(final char c) {
+        type(c, false, false, false);
+    }
+
+    /**
+     * Simulates typing the specified character while this element has focus.
+     * @param c the character you with to simulate typing
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     */
+    public void type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        if (this instanceof DisabledElement) {
+            if (((DisabledElement) this).isDisabled()) {
+                return;
+            }
+        }
+        fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
+        fireEvent(new Event(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
+        fireEvent(new Event(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey));
     }
 
     /**

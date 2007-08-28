@@ -7,8 +7,12 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="sdanig">
+                Add support for keypress and keyup events (keydown is already supported). Deprecate HtmlElement.keyDown()
+                methods in favor of HtmlElement.type() methods which simulate user typing rather than a single event type.
+            </action>
             <action type="add" dev="asashour">
-                Add SgmlPage: on moving towards having fully fledged XmlPage.
+                Add SgmlPage: moving towards having fully fledged XmlPage.
             </action>
             <action type="fix" dev="asashour">
                 Regular Expressions: allow 'undefined' pattern, and tolerate improper patterns (trigger warning).
