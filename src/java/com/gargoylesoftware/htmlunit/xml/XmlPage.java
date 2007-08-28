@@ -41,14 +41,16 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * A page that will be returned for response with content type "text/xml".
@@ -57,13 +59,10 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @version $Revision$
  * @author Marc Guillemot
  * @author David K. Taylor
+ * @author Ahmed Ashour
  */
-public class XmlPage implements Page {
-    private final String content_;
+public class XmlPage extends SgmlPage {
     private Document document_;
-
-    private WebWindow enclosingWindow_;
-    private final WebResponse webResponse_;
 
     /**
      * Create an instance.
@@ -75,9 +74,7 @@ public class XmlPage implements Page {
      * @throws IOException If the page could not be created
      */
     public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow) throws IOException {
-        webResponse_ = webResponse;
-        content_ = webResponse.getContentAsString();
-        enclosingWindow_ = enclosingWindow;
+        super(webResponse, enclosingWindow);
 
         try {
             document_ = XmlUtil.buildDocument(webResponse);
@@ -88,6 +85,46 @@ public class XmlPage implements Page {
         catch (final ParserConfigurationException e) {
             getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setScriptObject(final ScriptableObject scriptObject) {
+        super.setScriptObject(scriptObject);
+        final XmlElement childXml = createFrom(document_.getDocumentElement());
+        appendDomChild(childXml);
+        copy(document_.getDocumentElement(), childXml);
+    }
+
+    /**
+     * Copy all children from 'node' to 'xml'
+     * @param node The Node to copy from.
+     * @param xml The DomNode to copy to.
+     */
+    private void copy(final org.w3c.dom.Node node, final DomNode xml) {
+        final NodeList nodeChildren = node.getChildNodes();
+        for (int i = 0; i < nodeChildren.getLength(); i++) {
+            final Node child = nodeChildren.item(i);
+            switch (child.getNodeType()) {
+                case Node.ELEMENT_NODE:
+                    final XmlElement childXml = createFrom(child);
+                    xml.appendDomChild(childXml);
+                    copy(child, childXml);
+                    break;
+
+                case Node.TEXT_NODE:
+                    //ignore all text nodes
+                    break;
+
+                default:
+                    getLog().warn("NodeType " + child.getNodeType() + " is not yet supported.");
+            }
+        }
+    }
+    private XmlElement createFrom(final org.w3c.dom.Node node) {
+        final XmlElement element = new XmlElement(node.getNamespaceURI(), node.getLocalName(), this);
+        return element;
     }
 
     /**
@@ -102,33 +139,7 @@ public class XmlPage implements Page {
      * @return See above
      */
     public String getContent() {
-        return content_;
-    }
-
-    /**
-     * Return the window that this page is sitting inside.
-     *
-     * @return The enclosing frame or null if this page isn't inside a frame.
-     */
-    public WebWindow getEnclosingWindow() {
-        return enclosingWindow_;
-    }
-
-    /**
-     * Return the log object for this web client
-     * @return The log object
-     */
-    protected final Log getLog() {
-        return LogFactory.getLog(getClass());
-    }
-
-    /**
-     *  Return the web response that was originally used to create this page.
-     *
-     * @return The web response
-     */
-    public WebResponse getWebResponse() {
-        return webResponse_;
+        return getWebResponse().getContentAsString();
     }
 
     /**
@@ -139,10 +150,4 @@ public class XmlPage implements Page {
         return document_;
     }
 
-    /**
-     * Initialize this page.
-     */
-    public void initialize() {
-    }
 }
-

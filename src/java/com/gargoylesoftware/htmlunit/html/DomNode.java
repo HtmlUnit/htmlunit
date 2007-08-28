@@ -56,6 +56,7 @@ import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -123,14 +124,14 @@ public abstract class DomNode implements Cloneable, Serializable {
     /** A ready state constant for IE (state 5). */
     public static final String READY_STATE_COMPLETE = "complete";
 
-    /** the owning page of this node */
-    private final HtmlPage htmlPage_;
+    /** The owning page of this node. */
+    private final Page page_;
 
-    /** the parent node */
+    /** The parent node. */
     private DomNode parent_;
 
     /**
-     * the previous sibling. The first child's <code>previousSibling</code> points
+     * The previous sibling. The first child's <code>previousSibling</code> points
      * to the end of the list
      */
     private DomNode previousSibling_;
@@ -190,11 +191,11 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Creates an instance.
-     * @param htmlPage The page which contains this node.
+     * @param page The page which contains this node.
      */
-    protected DomNode(final HtmlPage htmlPage) {
+    protected DomNode(final Page page) {
         readyState_ = READY_STATE_LOADING;
-        htmlPage_ = htmlPage;
+        page_ = page;
         startLineNumber_ = 0;
         startColumnNumber_ = 0;
         endLineNumber_ = 0;
@@ -267,7 +268,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @return See above
      */
     public HtmlPage getPage() {
-        return htmlPage_;
+        return (HtmlPage) page_;
     }
 
     /**

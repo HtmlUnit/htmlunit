@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -91,19 +92,16 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public final class HtmlPage extends DomNode implements Page, Cloneable {
+public final class HtmlPage extends SgmlPage implements Cloneable {
 
     private static final long serialVersionUID = 1779746292119944291L;
 
     private final WebClient webClient_;
     private       String originalCharset_;
-    private final WebResponse webResponse_;
     private       Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
     private       Map nameMap_ = new HashMap(); // a map of (name, List(HtmlElement))
     private       HtmlElement documentElement_;
     private FocusableElement elementWithFocus_;
-
-    private WebWindow enclosingWindow_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
 
@@ -113,7 +111,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     private List/* HtmlAttributeChangeListener */ attributeListeners_;
 
     /**
-     *  Create an instance of HtmlPage
+     * Create an instance of HtmlPage
      *
      * @param originatingUrl The url that was used to load this page.
      * @param webResponse The web response that was used to create this page
@@ -124,11 +122,9 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             final WebResponse webResponse,
             final WebWindow webWindow) {
 
-        super(null);
+        super(webResponse, webWindow);
 
         webClient_ = webWindow.getWebClient();
-        webResponse_ = webResponse;
-        setEnclosingWindow(webWindow);
     }
 
     /**
@@ -159,22 +155,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     public void cleanUp() throws IOException {
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
-    }
-
-    /**
-     * Get the type of the current node.
-     * @return The node type
-     */
-    public short getNodeType() {
-        return org.w3c.dom.Node.DOCUMENT_NODE;
-    }
-
-    /**
-     * Get the name for the current node.
-     * @return The node name
-     */
-    public String getNodeName() {
-        return "#document";
     }
 
     /**
@@ -226,7 +206,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             }
         }
         if (originalCharset_ == null) {
-            originalCharset_ = webResponse_.getContentCharSet();
+            originalCharset_ = getWebResponse().getContentCharSet();
         }
         return originalCharset_;
     }
@@ -384,7 +364,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
         final List baseElements = getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
         URL baseUrl;
         if (baseElements.isEmpty()) {
-            baseUrl = webResponse_.getUrl();
+            baseUrl = getWebResponse().getUrl();
         }
         else {
             if (baseElements.size() > 1) {
@@ -406,7 +386,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             
             final String href = htmlBase.getHrefAttribute();
             if (!insideHead || StringUtils.isEmpty(href)) {
-                baseUrl = webResponse_.getUrl();
+                baseUrl = getWebResponse().getUrl();
             }
             else {
                 try {
@@ -414,7 +394,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 }
                 catch (final MalformedURLException e) {
                     notifyIncorrectness("Invalid base url: \"" + href + "\", ignoring it");
-                    baseUrl = webResponse_.getUrl();
+                    baseUrl = getWebResponse().getUrl();
                 }
             }
         }
@@ -456,15 +436,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             resolvedTarget = htmlBase.getTargetAttribute();
         }
         return resolvedTarget;
-    }
-
-    /**
-     *  Return the web response that was originally used to create this page.
-     *
-     * @return The web response
-     */
-    public WebResponse getWebResponse() {
-        return webResponse_;
     }
 
     /**
@@ -918,24 +889,6 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
     }
 
     /**
-     * Return the window that this page is sitting inside.
-     *
-     * @return The enclosing frame or null if this page isn't inside a frame.
-     */
-    public WebWindow getEnclosingWindow() {
-        return enclosingWindow_;
-    }
-
-    /**
-     * Set the window that contains this page.
-     *
-     * @param window The new frame or null if this page is being removed from a frame.
-     */
-    public void setEnclosingWindow(final WebWindow window) {
-        enclosingWindow_ = window;
-    }
-
-    /**
      * Return the title of this page or an empty string if the title wasn't specified.
      *
      * @return the title of this page or an empty string if the title wasn't specified.
@@ -1095,7 +1048,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
                 getLog().error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
                 return;
             }
-            url = webResponse_.getUrl();
+            url = getWebResponse().getUrl();
         }
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
@@ -1117,7 +1070,7 @@ public final class HtmlPage extends DomNode implements Page, Cloneable {
             final StringBuffer buffer = new StringBuffer(refreshString.substring(index + 4));
             if (buffer.toString().trim().length() == 0) {
                 //content='10; URL=' is treated as content='10'
-                url = webResponse_.getUrl();
+                url = getWebResponse().getUrl();
             }
             else {
                 if (buffer.charAt(0) == '"' || buffer.charAt(0) == 0x27) {

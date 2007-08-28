@@ -35,87 +35,54 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.xml;
 
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
 
 /**
- * Intermediate base class for DOM Nodes that have namespaces.  That includes HtmlElement
- * and HtmlAttr.
+ * An XML element.
  *
  * @version $Revision$
- * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public abstract class DomNamespaceNode extends DomNode {
-
-    private final String namespaceURI_;
-    private String qualifiedName_;
-    private final String localName_;
-    private String prefix_;
+public class XmlElement extends DomNamespaceNode {
 
     /**
-     *  Create an instance of a DOM node that can have a namespace.
+     * Create an instance of a DOM node that can have a namespace.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate.
-     * @param page The page that contains this element.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param xmlPage The page that contains this element
      */
-    protected DomNamespaceNode(final String namespaceURI, final String qualifiedName, final Page page) {
-        super(page);
-        Assert.notNull("qualifiedName", qualifiedName);
-        qualifiedName_ = qualifiedName;
-        if (namespaceURI != null && namespaceURI.length() > 0) {
-            namespaceURI_ = namespaceURI;
-            final int colonPosition = qualifiedName_.indexOf(':');
-            localName_ = qualifiedName_.substring(colonPosition + 1);
-            prefix_ = qualifiedName_.substring(0, colonPosition);
+    protected XmlElement(final String namespaceURI, final String qualifiedName, final XmlPage xmlPage) {
+        super(namespaceURI, qualifiedName, xmlPage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public short getNodeType() {
+        return org.w3c.dom.Node.ELEMENT_NODE;
+    }
+
+    /**
+     * @return The same value as returned by {@link #getTagName()},
+     */
+    public String getNodeName() {
+        return getTagName();
+    }
+
+    /**
+     * Return the tag name of this element.
+     * @return the tag name of this element.
+     */
+    public String getTagName() {
+        if (getNamespaceURI() == null) {
+            return getLocalName().toLowerCase();
         }
         else {
-            namespaceURI_ = null;
-            localName_ = qualifiedName_;
-            prefix_ = null;
+            return getQualifiedName();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getNamespaceURI() {
-        return namespaceURI_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getLocalName() {
-        return localName_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getPrefix() {
-        return prefix_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setPrefix(final String prefix) {
-        prefix_ = prefix;
-        if (prefix_ != null && localName_ != null) {
-            qualifiedName_ = prefix_ + ":" + localName_;
-        }
-    }
-
-    /**
-     * Returns the qualified name of this node.
-     *
-     * @return The prefix and local name.
-     */
-    public String getQualifiedName() {
-        return qualifiedName_;
-    }
 }

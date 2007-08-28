@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                Add SgmlPage: on moving towards having fully fledged XmlPage.
+            </action>
             <action type="fix" dev="asashour">
                 Regular Expressions: allow 'undefined' pattern, and tolerate improper patterns (trigger warning).
             </action>

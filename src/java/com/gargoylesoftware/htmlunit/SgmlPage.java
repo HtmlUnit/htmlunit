@@ -35,87 +35,86 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.htmlunit.Assert;
-import com.gargoylesoftware.htmlunit.Page;
+import java.io.IOException;
+
+import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
- * Intermediate base class for DOM Nodes that have namespaces.  That includes HtmlElement
- * and HtmlAttr.
- *
+ * A basic class to be implemented by {@link HtmlPage} and {@link XmlPage}.
  * @version $Revision$
- * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public abstract class DomNamespaceNode extends DomNode {
+public abstract class SgmlPage extends DomNode implements Page {
 
-    private final String namespaceURI_;
-    private String qualifiedName_;
-    private final String localName_;
-    private String prefix_;
+    private final WebResponse webResponse_;
+    private WebWindow enclosingWindow_;
+
 
     /**
-     *  Create an instance of a DOM node that can have a namespace.
+     * Create an instance of SgmlPage
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate.
-     * @param page The page that contains this element.
+     * @param webResponse The web response that was used to create this page
+     * @param webWindow The window that this page is being loaded into.
      */
-    protected DomNamespaceNode(final String namespaceURI, final String qualifiedName, final Page page) {
-        super(page);
-        Assert.notNull("qualifiedName", qualifiedName);
-        qualifiedName_ = qualifiedName;
-        if (namespaceURI != null && namespaceURI.length() > 0) {
-            namespaceURI_ = namespaceURI;
-            final int colonPosition = qualifiedName_.indexOf(':');
-            localName_ = qualifiedName_.substring(colonPosition + 1);
-            prefix_ = qualifiedName_.substring(0, colonPosition);
-        }
-        else {
-            namespaceURI_ = null;
-            localName_ = qualifiedName_;
-            prefix_ = null;
-        }
+    public SgmlPage(final WebResponse webResponse, final WebWindow webWindow) {
+        super(null);
+        webResponse_ = webResponse;
+        enclosingWindow_ = webWindow;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void cleanUp() throws IOException {
     }
 
     /**
      * {@inheritDoc}
      */
-    public String getNamespaceURI() {
-        return namespaceURI_;
+    public WebResponse getWebResponse() {
+        return webResponse_;
     }
 
     /**
      * {@inheritDoc}
      */
-    public String getLocalName() {
-        return localName_;
+    public void initialize() throws IOException {
     }
 
     /**
-     * {@inheritDoc}
+     * Get the name for the current node.
+     * @return The node name
      */
-    public String getPrefix() {
-        return prefix_;
+    public String getNodeName() {
+        return "#document";
     }
 
     /**
-     * {@inheritDoc}
+     * Get the type of the current node.
+     * @return The node type
      */
-    public void setPrefix(final String prefix) {
-        prefix_ = prefix;
-        if (prefix_ != null && localName_ != null) {
-            qualifiedName_ = prefix_ + ":" + localName_;
-        }
+    public short getNodeType() {
+        return org.w3c.dom.Node.DOCUMENT_NODE;
     }
 
     /**
-     * Returns the qualified name of this node.
+     * Return the window that this page is sitting inside.
      *
-     * @return The prefix and local name.
+     * @return The enclosing frame or null if this page isn't inside a frame.
      */
-    public String getQualifiedName() {
-        return qualifiedName_;
+    public WebWindow getEnclosingWindow() {
+        return enclosingWindow_;
     }
+
+    /**
+     * Set the window that contains this page.
+     *
+     * @param window The new frame or null if this page is being removed from a frame.
+     */
+    public void setEnclosingWindow(final WebWindow window) {
+        enclosingWindow_ = window;
+    }
+
 }

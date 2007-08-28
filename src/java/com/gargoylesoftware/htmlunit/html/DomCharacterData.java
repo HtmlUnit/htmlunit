@@ -37,12 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Page;
+
 /**
  * Wrapper for the DOM node CharacterData.
  *
  * @version $Revision$
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Ahmed Ashour
  */
 public abstract class DomCharacterData extends DomNode {
 
@@ -52,10 +55,10 @@ public abstract class DomCharacterData extends DomNode {
     /**
      * Create an instance of DomCharacterData
      *
-     * @param page The HtmlPage that contains this element.
+     * @param page The Page that contains this element.
      * @param data the data string wrapped by this node
      */
-    public DomCharacterData(final HtmlPage page, final String data) {
+    public DomCharacterData(final Page page, final String data) {
         super(page);
         data_ = data;
     }

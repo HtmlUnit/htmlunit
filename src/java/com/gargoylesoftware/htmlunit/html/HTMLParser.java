@@ -474,7 +474,8 @@ public final class HTMLParser {
         /** @inheritDoc ContentHandler#endDocument() */
         public void endDocument() throws SAXException {
             handleCharacters();
-            page_.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
+            final DomNode currentPage = page_;
+            currentPage.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
         }
 
         /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */
