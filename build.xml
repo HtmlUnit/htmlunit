@@ -79,6 +79,7 @@
     </copy>
     <copy todir="${test.classes.dir}">
         <fileset dir="${test.src.dir}/../resources">
+            <include name="dojo/**/*"/>
             <include name="gwt/**/*"/>
             <include name="jquery/**/*"/>
             <include name="prototype/**/*"/>
