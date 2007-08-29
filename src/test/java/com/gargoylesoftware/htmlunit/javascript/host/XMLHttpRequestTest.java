@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class XMLHttpRequestTest extends WebTestCase {
 
@@ -679,18 +680,18 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     public void testRefererHeader() throws Exception {
         final String content = "<html><head><script>\n"
-            + "function getXMLHttpRequest() {"
-            + " if (window.XMLHttpRequest)"
+            + "function getXMLHttpRequest() {\n"
+            + " if (window.XMLHttpRequest)\n"
             + "        return new XMLHttpRequest();\n"
             + " else if (window.ActiveXObject)"
             + "        return new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "}"
-            + "function test()"
-            + "{"
+            + "}\n"
+            + "function test()\n"
+            + "{\n"
             + " req = getXMLHttpRequest();\n"
             + " req.open('post', 'foo.xml', false);\n"
             + " req.send('');\n"
-            + "}"
+            + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
@@ -705,5 +706,26 @@ public class XMLHttpRequestTest extends WebTestCase {
         final WebRequestSettings settings = webConnection.getLastWebRequestSettings();
         assertEquals(urlPage2, settings.getURL());
         assertEquals(URL_FIRST.toExternalForm(), settings.getAdditionalHeaders().get("Referer"));
+    }
+
+    /**
+     * Test for bug
+     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1784330&group_id=47038
+     *
+     * @throws Exception if the test fails.
+     */
+    public void testCaseSensitivity() throws Exception {
+        final String content = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
+            + "  alert(req.readyState);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final String[] expectedAlerts = {"0"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

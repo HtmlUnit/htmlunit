@@ -134,8 +134,12 @@ public class ActiveXObject extends SimpleScriptable {
      * @param name the ActiveX name
      * @return <code>true</code> if this is an XMLHttpRequest
      */
-    static boolean isXMLHttpRequest(final String name) {
-        return name != null && ("Microsoft.XMLHTTP".equals(name) || name.startsWith("Msxml2.XMLHTTP"));
+    static boolean isXMLHttpRequest(String name) {
+        if (name == null) {
+            return false;
+        }
+        name = name.toLowerCase();
+        return "Microsoft.XMLHTTP".equalsIgnoreCase(name) || name.startsWith("Msxml2.XMLHTTP".toLowerCase());
     }
 
     /**
