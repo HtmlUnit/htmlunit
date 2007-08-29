@@ -79,8 +79,9 @@
     </copy>
     <copy todir="${test.classes.dir}">
         <fileset dir="${test.src.dir}/../resources">
-            <include name="prototype/**/*"/>
+            <include name="gwt/**/*"/>
             <include name="jquery/**/*"/>
+            <include name="prototype/**/*"/>
             <include name="yui/**/*"/>
             <include name="*.htm*"/>
         </fileset>
