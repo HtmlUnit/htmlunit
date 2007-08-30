@@ -38,7 +38,9 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -99,7 +101,9 @@ public class GWT14Test extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts, "I18N");
         testI18N(page, "numberFormatOutputText", "31,415,926,535.898");
-        testI18N(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM GMT+03:00");
+        String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+        timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
+        testI18N(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM GMT" + timeZone);
         testI18N(page, "messagesFormattedOutputText",
                 "User 'amelie' has security clearance 'guest' and cannot access '/secure/blueprints.xml'");
         testI18N(page, "constantsFirstNameText", "Amelie");
