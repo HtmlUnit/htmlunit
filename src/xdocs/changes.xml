@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add 'load' property for 'document.implementation.createDocument()' (FF), and
+                ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
+            </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
                 JavaScript: add support for function mouseEvent.initMouseEvent() (FF only).
             </action>

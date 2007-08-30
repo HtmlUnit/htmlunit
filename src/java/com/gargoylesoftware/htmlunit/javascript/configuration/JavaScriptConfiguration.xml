@@ -1109,10 +1109,15 @@
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms761398.aspx"
                     descr="MSDN documentation"/>
         </property>
-        <function name="load" notImplemented="true">
+        <function name="load">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms762722.aspx"
                     descr="MSDN documentation"/>
         </function>
+    </class>
+
+    <class name="XMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLElement"
+        htmlClass="com.gargoylesoftware.htmlunit.xml.XmlElement"
+        JSObject="true">
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"

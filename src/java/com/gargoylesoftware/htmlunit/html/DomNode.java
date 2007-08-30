@@ -273,6 +273,16 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Returns the Page interface, should be removed, and use {@link #getPage()} instead.
+     * @return the Page interface.
+     *
+     */
+    public Page getNativePage() {
+        return page_;
+    }
+    
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Set the javascript object that corresponds to this node.  This is not
      * guaranteed to be set even if there is a javascript object for this
@@ -723,10 +733,10 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     public ScriptableObject getScriptObject() {
         if (scriptObject_ == null) {
-            if (this == getPage()) {
-                throw new IllegalStateException("No script object associated with the HtmlPage");
+            if (this == page_) {
+                throw new IllegalStateException("No script object associated with the Page");
             }
-            scriptObject_ = ((SimpleScriptable) getPage().getScriptObject()).makeScriptableFor(this);
+            scriptObject_ = ((SimpleScriptable) ((DomNode) page_).getScriptObject()).makeScriptableFor(this);
         }
         return scriptObject_;
     }
@@ -774,7 +784,10 @@ public abstract class DomNode implements Cloneable, Serializable {
             }
             node.parent_ = this;
 
-            if (!(this instanceof DomDocumentFragment)) {
+            //TODO: should be
+            //  if (!(this instanceof DomDocumentFragment) && getPage() instanceof HtmlPage)
+            if (!(this instanceof DomDocumentFragment)
+                    && (page_ instanceof HtmlPage || this instanceof HtmlPage)) {
                 getPage().notifyNodeAdded(node);
             }
             fireNodeAdded(this, node);

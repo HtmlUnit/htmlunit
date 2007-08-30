@@ -37,6 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
+import java.net.URL;
+
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
 /**
  * A JavaScript object for XMLDocument.
  *
@@ -69,4 +78,45 @@ public class XMLDocument extends Document {
         return async_;
     }
     
+
+    /**
+     * Loads an XML document from the specified location.
+     *
+     * @param xmlSrouce A string containing a URL that specifies the location of the XML file.
+     * @return true if the load succeeded; false if the load failed.
+     */
+    public boolean jsxFunction_load(final String xmlSrouce) {
+        if (async_) {
+            getLog().debug("XMLDocument.load(): 'async' is true, currently treated as false.");
+        }
+        try {
+            final WebRequestSettings settings = new WebRequestSettings(new URL(xmlSrouce));
+            final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
+            final XmlPage page = new XmlPage(webResponse, null);
+            setDomNode(page);
+            return true;
+        }
+        catch (final IOException e) {
+            getLog().debug("Error parsing XML from '" + xmlSrouce + "'", e);
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected Object getWithPreemption(final String name) {
+        return NOT_FOUND;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SimpleScriptable makeScriptableFor(final DomNode domNode) {
+        final XMLElement element = new XMLElement();
+        element.setPrototype(getPrototype(element.getClass()));
+        element.setParentScope(getParentScope());
+        element.setDomNode(domNode);
+        return element;
+    }
 }

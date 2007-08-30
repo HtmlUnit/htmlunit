@@ -96,9 +96,6 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLoad() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testLoad(BrowserVersion.INTERNET_EXPLORER_7_0);
         testLoad(BrowserVersion.FIREFOX_2);
     }
@@ -110,6 +107,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    doc.async = false;\n"
             + "    alert(doc.load('" + URL_SECOND + "'));\n"
             + "    alert(doc.childNodes[0].nodeName);\n"
+            + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -128,7 +126,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"true", "books"};
+        final String[] expectedAlerts = {"true", "books", "book"};
         final List collectedAlerts = new ArrayList();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

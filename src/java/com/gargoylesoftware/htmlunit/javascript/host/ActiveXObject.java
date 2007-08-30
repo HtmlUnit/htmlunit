@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.mozilla.javascript.Context;
@@ -45,7 +46,10 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * This is the host object that allows javascript to instantiate java objects via the ActiveXObject
@@ -179,6 +183,27 @@ public class ActiveXObject extends SimpleScriptable {
         // the properties
         addProperty(document, "async", true, true);
         
+        // the functions
+        addFunction(document, "load");
+
+        final JavaScriptConfiguration jsConfig =
+            JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER_7_0);
+
+        for (String className = "Document"; className.trim().length() != 0;) {
+            final ClassConfiguration classConfig = jsConfig.getClassConfiguration(className);
+            for (final Iterator iterator = classConfig.functionKeys().iterator(); iterator.hasNext();) {
+                final String function = (String) iterator.next();
+                addFunction(document, function);
+            }
+            for (final Iterator iterator = classConfig.propertyKeys().iterator(); iterator.hasNext();) {
+                final String property = (String) iterator.next();
+                addProperty(document, property,
+                        classConfig.getPropertyReadMethod(property) != null,
+                        classConfig.getPropertyWriteMethod(property) != null);
+            }
+            className = classConfig.getExtendedClass();
+
+        }
         return document;
     }
 

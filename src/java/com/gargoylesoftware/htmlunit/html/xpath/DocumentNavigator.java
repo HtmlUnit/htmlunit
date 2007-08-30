@@ -278,7 +278,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is an element, false otherwise.
      */
     public boolean isElement(final Object object) {
-        return (object instanceof HtmlElement);
+        return object instanceof DomNode && ((DomNode) object).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE;
     }
 
     /**
@@ -288,7 +288,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is an attribute, false otherwise.
      */
     public boolean isAttribute(final Object object) {
-        return (object instanceof HtmlAttr);
+        return object instanceof HtmlAttr;
     }
 
     /**
@@ -298,7 +298,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is a comment, false otherwise.
      */
     public boolean isComment(final Object object) {
-        return (object instanceof DomComment);
+        return object instanceof DomComment;
     }
 
     /**
@@ -308,7 +308,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is a text node, false otherwise.
      */
     public boolean isText(final Object object) {
-        return (object instanceof DomText);
+        return object instanceof DomText;
     }
 
     /**
