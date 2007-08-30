@@ -134,10 +134,12 @@ public class Document extends NodeImpl {
 
     /** Initializes the supported event type map. */
     static {
-        final Map mouseEventMap = new HashMap();
-        mouseEventMap.put("Event", Event.class);
-        mouseEventMap.put("Events", Event.class);
-        SUPPORTED_EVENT_TYPE_MAP = Collections.unmodifiableMap(mouseEventMap);
+        final Map eventMap = new HashMap();
+        eventMap.put("Event", Event.class);
+        eventMap.put("Events", Event.class);
+        eventMap.put("MouseEvent", MouseEvent.class);
+        eventMap.put("MouseEvents", MouseEvent.class);
+        SUPPORTED_EVENT_TYPE_MAP = Collections.unmodifiableMap(eventMap);
     }
 
     /**
