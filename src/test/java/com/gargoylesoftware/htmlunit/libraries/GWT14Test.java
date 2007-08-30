@@ -45,6 +45,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -69,7 +71,13 @@ public class GWT14Test extends WebTestCase {
      */
     public void testHello() throws Exception {
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.getDefault(), collectedAlerts, "Hello");
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts, "Hello");
+        final HtmlButton button = (HtmlButton) page.getByXPath("//button").get(0);
+        final DomText buttonLabel = (DomText) button.getChildIterator().next();
+        assertEquals("Click me", buttonLabel.getData());
+        button.click();
+        final String[] expectedAlerts = {"Hello, AJAX"};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -81,7 +89,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * Loads the GWT unit test index page using the specified browser version, and subdirectory.
+     * Loads the GWT unit test index page using the specified browser version, and test name.
      *
      * @param version The browser version to use.
      * @param collectedAlerts The List to collect alerts into.
@@ -98,7 +106,9 @@ public class GWT14Test extends WebTestCase {
         final WebClient client = new WebClient(version);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        return (HtmlPage) client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+        page.getEnclosingWindow().getThreadManager().joinAll(1000);
+        return page;
     }
 
 }
