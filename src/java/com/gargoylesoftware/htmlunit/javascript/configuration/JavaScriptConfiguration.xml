@@ -296,6 +296,9 @@
         <property name="metaKey" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <function name="initMouseEvent">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"

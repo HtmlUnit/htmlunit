@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig" due-to="Rob Di Marco">
+                JavaScript: add support for function mouseEvent.initMouseEvent() (FF only).
+            </action>
             <action type="update" dev="asashour" id="1784330" due-to="Dan Fabulich">
                 ActiveXObject (XmlHttp): should not be created by case-sensitive string. (#1784330).
             </action>

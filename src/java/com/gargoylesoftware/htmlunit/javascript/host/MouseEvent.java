@@ -92,7 +92,7 @@ public class MouseEvent extends UIEvent {
     private static final int[] buttonCodeToIE = {1, 4, 2};
 
     /** The mouse event's horizontal and vertical coordinates. */
-    private final int screenX_, screenY_;
+    private int screenX_, screenY_;
 
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;
@@ -193,18 +193,6 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
-     * Gets the mouse event currently firing.
-     * @return <code>null</code> if no mouse event is being processed
-     */
-    static MouseEvent getCurrentMouseEvent() {
-        final Event event = (Event) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT);
-        if (event instanceof MouseEvent) {
-            return (MouseEvent) event;
-        }
-        return null;
-    }
-
-    /**
      * Gets the button code.
      * @return the button code
      */
@@ -234,6 +222,68 @@ public class MouseEvent extends UIEvent {
      */
     public int jsxGet_which() {
         return button_ + 1;
+    }
+
+    /**
+     * Implementation of the DOM Level 2 Event method for initializing the mouse event.
+     *
+     * @param type the event type
+     * @param bubbles can the event bubble
+     * @param cancelable can the event be canceled
+     * @param view the view to use for this event
+     * @param detail the detail to set for the event
+     * @param screenX the initial value of screenX
+     * @param screenY the initial value of screenY
+     * @param clientX the initial value of clientX
+     * @param clientY the initial value of clientY
+     * @param ctrlKey is the control key pressed
+     * @param altKey is the alt key pressed
+     * @param shiftKey is the shift key pressed
+     * @param metaKey is the meta key pressed
+     * @param button what mouse button is pressed
+     * @param relatedTarget is there a related target for the event
+     */
+    public void jsxFunction_initMouseEvent(
+            final String type,
+            final boolean bubbles,
+            final boolean cancelable,
+            final Object view,
+            final int detail,
+            final int screenX,
+            final int screenY,
+            final int clientX,
+            final int clientY,
+            final boolean ctrlKey,
+            final boolean altKey,
+            final boolean shiftKey,
+            final boolean metaKey,
+            final int button,
+            final Object relatedTarget) {
+        jsxFunction_initEvent(type, bubbles, cancelable);
+        // Ignore the view parameter; we always use the window.
+        setDetail(detail);
+        screenX_ = screenX;
+        screenY_ = screenY;
+        // Ignore the clientX parameter; we always use screenX.
+        // Ignore the clientY parameter; we always use screenY.
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
+        setShiftKey(shiftKey);
+        // Ignore the metaKey parameter; we don't support it yet.
+        button_ = button;
+        // Ignore the relatedTarget parameter; we don't support it yet.
+    }
+
+    /**
+     * Returns the mouse event currently firing, or <tt>null</tt> if no mouse event is being processed.
+     * @return the mouse event currently firing
+     */
+    static MouseEvent getCurrentMouseEvent() {
+        final Event event = (Event) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT);
+        if (event instanceof MouseEvent) {
+            return (MouseEvent) event;
+        }
+        return null;
     }
 
 }

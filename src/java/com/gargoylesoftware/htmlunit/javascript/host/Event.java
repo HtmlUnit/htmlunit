@@ -200,9 +200,10 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * Used to build the prototype
+     * Used to build the prototype.
      */
     public Event() {
+        // Empty.
     }
 
     /**
@@ -300,6 +301,13 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * @param shiftKey whether SHIFT has been pressed during this event or not.
+     */
+    protected void setShiftKey(final boolean shiftKey) {
+        shiftKey_ = shiftKey;
+    }
+
+    /**
      * @return whether CTRL has been pressed during this event or not.
      */
     public boolean jsxGet_ctrlKey() {
@@ -307,10 +315,24 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * @param ctrlKey whether CTRL has been pressed during this event or not.
+     */
+    protected void setCtrlKey(final boolean ctrlKey) {
+        ctrlKey_ = ctrlKey;
+    }
+
+    /**
      * @return whether ALT has been pressed during this event or not.
      */
     public boolean jsxGet_altKey() {
         return altKey_;
+    }
+
+    /**
+     * @param altKey whether ALT has been pressed during this event or not.
+     */
+    protected void setAltKey(final boolean altKey) {
+        altKey_ = altKey;
     }
 
     /**

@@ -11,4 +11,5 @@
     <suppress checks="Indentation" files="ThreadManager.java" lines="143"/>    
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
+    <suppress checks="ParameterNumber" files="MouseEvent.java"/>
 </suppressions>
