@@ -1825,7 +1825,7 @@ public class HTMLElementTest extends WebTestCase {
     public void testFireEvent_WithTemplate() throws Exception {
         final String html =
               "<html><body>\n"
-            + "<script>var template = document.createEventObject(); template.altKey = true;</script>\n"
+            + "<script>var template = document.createEventObject();</script>\n"
             + "<script>function doAlert(e) { alert(e.type); }</script>\n"
             + "<div id='a' onclick='doAlert(event)'>foo</div>\n"
             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
