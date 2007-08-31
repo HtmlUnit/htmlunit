@@ -251,7 +251,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception on failure
      */
     public void testJettyProofOfConcept() throws Exception {
-        setupWebServer();
+        httpServer_ = startWebServer("./");
 
         final WebClient client = new WebClient();
         final Page page = client.getPage("http://localhost:" + PORT);
@@ -268,23 +268,41 @@ public class HttpWebConnectionTest extends BaseTestCase {
     }
 
     /**
-     * Starts the webserver on the given port.
+     * Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resouceBase the base of resources for the default context.
+     * @return the started web server.
      * @throws Exception If the test fails.
      */
-    private void setupWebServer() throws Exception {
-        httpServer_ = new HttpServer();
+    public static HttpServer startWebServer(final String resouceBase) throws Exception {
+        final HttpServer httpServer = new HttpServer();
 
         final SocketListener listener = new SocketListener();
         listener.setPort(PORT);
-        httpServer_.addListener(listener);
+        httpServer.addListener(listener);
 
         final HttpContext context = new HttpContext();
         context.setContextPath("/");
-        context.setResourceBase("./");
+        context.setResourceBase(resouceBase);
         context.addHandler(new ResourceHandler());
-        httpServer_.addContext(context);
+        httpServer.addContext(context);
 
-        httpServer_.start();
+        httpServer.start();
+        return httpServer;
+    }
+
+    /**
+     * Stops the web server.
+     *
+     * @param httpServer the web server.
+     * @throws Exception If the test fails.
+     */
+    public static void stopWebServer(final HttpServer httpServer) throws Exception {
+        if (httpServer != null) {
+            httpServer.stop();
+        }
     }
 
     /**
@@ -293,9 +311,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      */
     protected void tearDown() throws Exception {
         super.tearDown();
-        if (httpServer_ != null) {
-            httpServer_.stop();
-        }
+        stopWebServer(httpServer_);
     }
 
     /**
@@ -303,7 +319,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception if the test fails
      */
     public void testDesignedForExtension() throws Exception {
-        setupWebServer();
+        httpServer_ = startWebServer("./");
 
         final WebClient webClient = new WebClient();
         final boolean[] tabCalled = {false};

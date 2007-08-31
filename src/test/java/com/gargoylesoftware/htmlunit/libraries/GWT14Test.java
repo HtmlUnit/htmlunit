@@ -47,8 +47,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.mortbay.http.HttpServer;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -69,6 +72,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  */
 public class GWT14Test extends WebTestCase {
 
+    private HttpServer httpServer_;
+    
     /**
      * Creates an instance.
      *
@@ -111,6 +116,50 @@ public class GWT14Test extends WebTestCase {
         testI18N(page, "constantsFavoriteColorList",
                 new String[] {"Red", "White", "Yellow", "Black", "Blue", "Green", "Grey", "Light Grey"});
         testI18N(page, "constantsWithLookupResultsText", "Red");
+        final Map map = new HashMap();
+        map.put("name", "Amelie Crutcher");
+        map.put("timeZone", "EST");
+        map.put("userID", "123");
+        map.put("lastLogOn", "2/2/2006");
+        testI18NDictionary(page, map);
+    }
+
+    /**
+     * Test I18N French language
+     *
+     * @throws Exception If an error occurs.
+     */
+    public void testI18N_fr() throws Exception {
+        httpServer_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/I18N.html?locale=fr";
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+        page.getEnclosingWindow().getThreadManager().joinAll(10000);
+
+        //visible space in browser is not normal space but '\u00A0' instead, as noted by the following test in browser:
+        //  var tr = document.getElementById('numberFormatOutputText');
+        //  var value = tr.childNodes[0].childNodes[0].nodeValue;
+        //  var output = '';
+        //  for( var i=0; i < value.length; i++ ) {
+        //    output += value.charCodeAt(i) + ' ';
+        //  }
+        //  alert(output);
+        testI18N(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
+        
+        String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+        timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
+        
+        testI18N(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00 h 00 GMT" + timeZone);
+        testI18N(page, "messagesFormattedOutputText",
+            "L'utilisateur 'amelie' a un niveau de securité 'guest', et ne peut accéder à '/secure/blueprints.xml'");
+        testI18N(page, "constantsFirstNameText", "Amelie");
+        testI18N(page, "constantsLastNameText", "Crutcher");
+        testI18N(page, "constantsFavoriteColorList",
+                new String[] {"Rouge", "Blanc", "Jaune", "Noir", "Bleu", "Vert", "Gris", "Gris clair"});
+        testI18N(page, "constantsWithLookupResultsText", "Rouge");
         final Map map = new HashMap();
         map.put("name", "Amelie Crutcher");
         map.put("timeZone", "EST");
@@ -210,6 +259,14 @@ public class GWT14Test extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         return page;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        HttpWebConnectionTest.stopWebServer(httpServer_);
     }
 
 }
