@@ -12,6 +12,9 @@
                 ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">
+                JavaScript: add support for function element.fireEvent() (IE only).
+            </action>
+            <action type="add" dev="sdanig" due-to="Rob Di Marco">
                 JavaScript: add support for function mouseEvent.initMouseEvent() (FF only).
             </action>
             <action type="update" dev="asashour" id="1784330" due-to="Dan Fabulich">

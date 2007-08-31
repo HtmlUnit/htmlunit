@@ -141,7 +141,21 @@ public class MouseEvent extends UIEvent {
         screenX_ = target.getPosX() + 10;
         screenY_ = target.getPosY() + 10;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    public void copyPropertiesFrom(final Event event) {
+        super.copyPropertiesFrom(event);
+        if (event instanceof MouseEvent) {
+            final MouseEvent mouseEvent = (MouseEvent) event;
+            screenX_ = mouseEvent.screenX_;
+            screenY_ = mouseEvent.screenY_;
+            button_ = mouseEvent.button_;
+            metaKey_ = mouseEvent.metaKey_;
+        }
+    }
+
     /**
      * The horizontal coordinate at which the event occurred relative to the DOM implementation's client area.
      * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
@@ -284,6 +298,21 @@ public class MouseEvent extends UIEvent {
             return (MouseEvent) event;
         }
         return null;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the specified event type should be managed as a mouse event.
+     * @param type the type of event to check
+     * @return <tt>true</tt> if the specified event type should be managed as a mouse event
+     */
+    static boolean isMouseEvent(final String type) {
+        return TYPE_CLICK.equals(type)
+            || TYPE_MOUSE_OVER.equals(type)
+            || TYPE_MOUSE_MOVE.equals(type)
+            || TYPE_MOUSE_OUT.equals(type)
+            || TYPE_MOUSE_DOWN.equals(type)
+            || TYPE_MOUSE_UP.equals(type)
+            || TYPE_CONTEXT_MENU.equals(type);
     }
 
 }

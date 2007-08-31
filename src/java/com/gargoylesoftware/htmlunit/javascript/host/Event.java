@@ -427,6 +427,27 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Copies properties from another event to this event. This method should
+     * be overriden in subclasses in order to account for extra properties.
+     * @param event the event to copy the properties from
+     */
+    public void copyPropertiesFrom(final Event event) {
+        srcElement_ = event.srcElement_;
+        target_ = event.target_;
+        currentTarget_ = event.currentTarget_;
+        type_ = event.type_;
+        keyCode_ = event.keyCode_;
+        shiftKey_ = event.shiftKey_;
+        ctrlKey_ = event.ctrlKey_;
+        altKey_ = event.altKey_;
+        stopPropagation_ = event.stopPropagation_;
+        returnValue_ = event.returnValue_;
+        eventPhase_ = event.eventPhase_;
+        bubbles_ = event.bubbles_;
+        cancelable_ = event.cancelable_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public String toString() {

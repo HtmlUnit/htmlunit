@@ -75,6 +75,17 @@ public class UIEvent extends Event {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public void copyPropertiesFrom(final Event event) {
+        super.copyPropertiesFrom(event);
+        if (event instanceof UIEvent) {
+            final UIEvent uiEvent = (UIEvent) event;
+            detail_ = uiEvent.detail_;
+        }
+    }
+
+    /**
      * Returns some detail information about the event, depending on the event type. For mouse events,
      * the detail property indicates how many times the mouse has been clicked in the same location for
      * this event.

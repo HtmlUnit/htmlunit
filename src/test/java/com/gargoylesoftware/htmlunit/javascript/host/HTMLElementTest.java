@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -1800,4 +1801,43 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlertNumber, collectedAlerts.size());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testFireEvent_WithoutTemplate() throws Exception {
+        final String html =
+              "<html><body>\n"
+            + "<div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
+            + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
+            + "</body></html>\n";
+        final List actual = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
+        ((HtmlDivision) page.getHtmlElementById("a")).click();
+        ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
+        final String[] expected = {"clicked", "clicked"};
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testFireEvent_WithTemplate() throws Exception {
+        final String html =
+              "<html><body>\n"
+            + "<script>var template = document.createEventObject(); template.altKey = true;</script>\n"
+            + "<script>function doAlert(e) { alert(e.type); }</script>\n"
+            + "<div id='a' onclick='doAlert(event)'>foo</div>\n"
+            + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
+            + "<div id='c' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\", template)'>baz</div>\n"
+            + "</body></html>\n";
+        final List actual = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
+        ((HtmlDivision) page.getHtmlElementById("a")).click();
+        ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
+        ((HtmlDivision) page.getHtmlElementById("c")).mouseOver();
+        final String[] expected = {"click", "click", "click"};
+        assertEquals(expected, actual);
+    }
+
 }

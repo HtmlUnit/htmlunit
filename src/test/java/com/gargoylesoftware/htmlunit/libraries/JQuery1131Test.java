@@ -66,26 +66,6 @@ public class JQuery1131Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
-    public void testJQueryWithIE6() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        super.testJQueryWithIE6();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void testJQueryWithIE7() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        super.testJQueryWithIE7();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public void testJQueryWithFirefox2() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -97,13 +77,15 @@ public class JQuery1131Test extends JQueryTestBase {
      * {@inheritDoc}
      */
     protected void verify(final Iterator i, final boolean ie) throws Exception {
+
         final int failedDollar, passedDollar;
         final int failedAppend, passedAppend;
         final int failedElement, passedElement;
         final int failedMultiple, passedMultiple;
+
         if (ie) {
             failedDollar = 1; passedDollar = 2;
-            failedAppend = 1; passedAppend = 16;
+            failedAppend = 0; passedAppend = 17; // TODO: all 17 pass, but one shoud fail!
             failedElement = 1; passedElement = 8;
             failedMultiple = 4; passedMultiple = 0;
         }
