@@ -66,6 +66,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public class HttpWebConnectionTest extends BaseTestCase {
+    
+    /**
+     * The listener port for the web server.
+     */
+    public static final int PORT = 12345;
+    
     private HttpServer httpServer_;
 
     /**
@@ -245,10 +251,10 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception on failure
      */
     public void testJettyProofOfConcept() throws Exception {
-        setupWebServer(12345);
+        setupWebServer();
 
         final WebClient client = new WebClient();
-        final Page page = client.getPage("http://localhost:12345/");
+        final Page page = client.getPage("http://localhost:" + PORT);
         final WebConnection defaultConnection = page
                 .getEnclosingWindow()
                 .getWebClient()
@@ -262,15 +268,14 @@ public class HttpWebConnectionTest extends BaseTestCase {
     }
 
     /**
-     * Starts the webserver on the given port
-     * @param port the port on which the server should be started
-     * @throws Exception
+     * Starts the webserver on the given port.
+     * @throws Exception If the test fails.
      */
-    private void setupWebServer(final int port) throws Exception {
+    private void setupWebServer() throws Exception {
         httpServer_ = new HttpServer();
 
         final SocketListener listener = new SocketListener();
-        listener.setPort(port);
+        listener.setPort(PORT);
         httpServer_.addListener(listener);
 
         final HttpContext context = new HttpContext();
@@ -298,7 +303,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception if the test fails
      */
     public void testDesignedForExtension() throws Exception {
-        setupWebServer(12345);
+        setupWebServer();
 
         final WebClient webClient = new WebClient();
         final boolean[] tabCalled = {false};
@@ -310,7 +315,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         };
 
         webClient.setWebConnection(myWebConnection);
-        webClient.getPage("http://localhost:12345/");
+        webClient.getPage("http://localhost:" + PORT);
         assertTrue("createHttpClient as not been called", tabCalled[0]);
     }
 
