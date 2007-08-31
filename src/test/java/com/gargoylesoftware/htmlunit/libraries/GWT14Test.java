@@ -88,7 +88,7 @@ public class GWT14Test extends WebTestCase {
      */
     public void testHello() throws Exception {
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts, "Hello");
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getByXPath("//button").get(0);
         final DomText buttonLabel = (DomText) button.getChildIterator().next();
         assertEquals("Click me", buttonLabel.getData());
@@ -104,7 +104,7 @@ public class GWT14Test extends WebTestCase {
      */
     public void testI18N() throws Exception {
         final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts, "I18N");
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
         testI18N(page, "numberFormatOutputText", "31,415,926,535.898");
         String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
@@ -243,12 +243,11 @@ public class GWT14Test extends WebTestCase {
      *
      * @param version The browser version to use.
      * @param collectedAlerts The List to collect alerts into.
-     * @param testName The name of the sample GWT test.
      * @throws Exception if an error occurs.
      * @return The loaded page.
      */
-    protected HtmlPage loadPage(final BrowserVersion version, final List collectedAlerts, final String testName)
-        throws Exception {
+    protected HtmlPage loadPage(final BrowserVersion version, final List collectedAlerts) throws Exception {
+        final String testName = getName().substring(4);
         final String resource = "gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
