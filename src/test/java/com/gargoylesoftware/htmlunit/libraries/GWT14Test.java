@@ -267,6 +267,7 @@ public class GWT14Test extends WebTestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
         HttpWebConnectionTest.stopWebServer(httpServer_);
+        httpServer_ = null;
     }
 
 }

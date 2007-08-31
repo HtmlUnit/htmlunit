@@ -312,6 +312,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
         stopWebServer(httpServer_);
+        httpServer_ = null;
     }
 
     /**
