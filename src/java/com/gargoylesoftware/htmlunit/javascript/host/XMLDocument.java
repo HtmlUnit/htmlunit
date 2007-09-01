@@ -39,9 +39,12 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebResponseData;
+import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -98,6 +101,27 @@ public class XMLDocument extends Document {
         }
         catch (final IOException e) {
             getLog().debug("Error parsing XML from '" + xmlSrouce + "'", e);
+            return false;
+        }
+    }
+
+    /**
+     * Loads an XML document using the supplied string
+     *
+     * @param strXML A string containing the XML string to load into this XML document object.
+     *      This string can contain an entire XML document or a well-formed fragment.
+     * @return true if the load succeeded; false if the load failed.
+     */
+    public boolean jsxFunction_loadXML(final String strXML) {
+        try {
+            final WebResponseData data = new WebResponseData(strXML.getBytes(), 200, null, new ArrayList());
+            final WebResponse webResponse = new WebResponseImpl(data, null, null, 0);
+            final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
+            setDomNode(page);
+            return true;
+        }
+        catch (final IOException e) {
+            getLog().debug("Error parsing XML\n" + strXML, e);
             return false;
         }
     }

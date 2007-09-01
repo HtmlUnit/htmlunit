@@ -146,7 +146,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
     }
 
     /**
-     * Initialises all the JS stuff for the window
+     * Initializes all the JS stuff for the window
      * @param webWindow the web window
      * @param context the current context
      * @throws Exception if something goes wrong

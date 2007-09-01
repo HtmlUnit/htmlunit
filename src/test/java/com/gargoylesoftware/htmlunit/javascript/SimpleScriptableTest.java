@@ -125,31 +125,32 @@ public class SimpleScriptableTest extends WebTestCase {
         final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
 
         // Now pull out those names that we know don't have html equivalents
+        names.remove("ActiveXObject");
+        names.remove("Attribute");
         names.remove("Document");
+        names.remove("DOMImplementation");
+        names.remove("DOMParser");
         names.remove("Event");
-        names.remove("UIEvent");
-        names.remove("MouseEvent");
         names.remove("EventHandler");
+        names.remove("EventListenersContainer");
+        names.remove("FormField");
         names.remove("History");
+        names.remove("JavaScriptBackgroundJob");
         names.remove("Location");
+        names.remove("MouseEvent");
         names.remove("Navigator");
         names.remove("NodeImpl");
+        names.remove("Popup");
+        names.remove("RowContainer");
         names.remove("Screen");
+        names.remove("ScoperFunctionObject");
         names.remove("Style");
         names.remove("Stylesheet");
-        names.remove("ActiveXObject");
-        names.remove("XMLHttpRequest");
-        names.remove("Window");
-        names.remove("Attribute");
-        names.remove("ScoperFunctionObject");
-        names.remove("RowContainer");
-        names.remove("FormField");
-        names.remove("JavaScriptBackgroundJob");
-        names.remove("Popup");
-        names.remove("EventListenersContainer");
-        names.remove("DOMImplementation");
         names.remove("TextRectangle");
+        names.remove("UIEvent");
+        names.remove("Window");
         names.remove("XMLDocument");
+        names.remove("XMLHttpRequest");
 
         final Transformer class2ShortName = new Transformer() {
             public Object transform(final Object obj) {

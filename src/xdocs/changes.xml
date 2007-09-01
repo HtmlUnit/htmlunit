@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add DOMParser, with implementation of parseFromString() (FF only).
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: add loadXML() for ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE only).
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: ignore text nodes of loaded XML by ActiveXObjects: 'Microsoft.XmlDom' and
 				'MSXML.DOMDocument' (IE).
@@ -20,7 +26,7 @@
 				and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="add" dev="asashour">
-                JavaScript: add 'load' property for 'document.implementation.createDocument()' (FF), and
+                JavaScript: add load() for 'document.implementation.createDocument()' (FF), and
                 ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">

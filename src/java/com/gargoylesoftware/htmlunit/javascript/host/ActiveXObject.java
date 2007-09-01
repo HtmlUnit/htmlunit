@@ -185,6 +185,7 @@ public class ActiveXObject extends SimpleScriptable {
         
         // the functions
         addFunction(document, "load");
+        addFunction(document, "loadXML");
 
         final JavaScriptConfiguration jsConfig =
             JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER_7_0);

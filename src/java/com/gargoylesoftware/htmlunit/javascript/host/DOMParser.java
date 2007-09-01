@@ -37,62 +37,37 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * Tests for {@link DOMParser}.
+ * A JavaScript object for DOMParser.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ *
+ * @see <a href="http://www.xulplanet.com/references/objref/DOMParser.html">XUL Planet</a>
  */
-public class DOMParserTest extends WebTestCase {
+public class DOMParser extends SimpleScriptable {
 
     /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
+     * Javascript constructor.
      */
-    public DOMParserTest(final String name) {
-        super(name);
+    public void jsConstructor() {
+        // Empty.
     }
 
     /**
-     * @throws Exception if the test fails
+     * The string passed in is parsed into a DOM document.
+     * @param str The UTF16 string to be parsed.
+     * @param contentType The content type of the string -
+     *      either <tt>text/xml</tt>, <tt>application/xml</tt>, or <tt>application/xhtml+xml</tt>. Must not be NULL.
+     * @return the generated document.
      */
-    public void testParseFromString() throws Exception {
-        testParseFromString(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"4"});
-        testParseFromString(BrowserVersion.FIREFOX_2, new String[] {"9"});
-    }
-    
-    private void testParseFromString(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var text='<note> ';\n"
-            + "    text += '<to>Tove</to> ';\n"
-            + "    text += '<from>Jani</from> ';\n"
-            + "    text += '<heading>Reminder</heading> ';\n"
-            + "    text += '<body>Do not forget me this weekend!</body> ';\n"
-            + "    text += '</note>';\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async='false';\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
-            + "    var x=doc.documentElement;\n"
-            + "    alert(x.childNodes.length);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-        
-        final List collectedAlerts = new ArrayList();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+    public Document jsxFunction_parseFromString(final String str, final String contentType) {
+        final XMLDocument document = new XMLDocument();
+        document.setParentScope(getParentScope());
+        document.setPrototype(getPrototype(document.getClass()));
+        document.jsxFunction_loadXML(str);
+        return document;
     }
 }
