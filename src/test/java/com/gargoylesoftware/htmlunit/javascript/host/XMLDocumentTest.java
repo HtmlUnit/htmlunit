@@ -106,6 +106,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
             + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    alert(doc.documentElement.nodeName);\n"
             + "    alert(doc.childNodes[0].nodeName);\n"
             + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
             + "  }\n"
@@ -126,7 +127,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"true", "books", "book"};
+        final String[] expectedAlerts = {"true", "books", "books", "book"};
         final List collectedAlerts = new ArrayList();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

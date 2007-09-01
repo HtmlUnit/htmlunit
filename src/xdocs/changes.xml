@@ -7,6 +7,11 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                JavaScript: correctly handle 'documentElement' property for
+				'document.implementation.createDocument()' (FF),
+				and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add 'load' property for 'document.implementation.createDocument()' (FF), and
                 ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).

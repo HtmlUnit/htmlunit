@@ -150,4 +150,17 @@ public class XmlPage extends SgmlPage {
         return document_;
     }
 
+    /**
+     * Get the root XmlElement of this document.
+     * @return The root element
+     */
+    //TODO: should be removed later to SgmlPage
+    public XmlElement getDocumentXmlElement() {
+        DomNode childNode = getFirstDomChild();
+        while (childNode != null && !(childNode instanceof XmlElement)) {
+            childNode = childNode.getNextDomSibling();
+        }
+        return (XmlElement) childNode;
+    }
+
 }

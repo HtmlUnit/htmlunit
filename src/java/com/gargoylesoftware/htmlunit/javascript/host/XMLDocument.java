@@ -119,4 +119,13 @@ public class XMLDocument extends Document {
         element.setDomNode(domNode);
         return element;
     }
+
+    /**
+     * Get the JavaScript property "documentElement" for the document.
+     * @return The root node for the document.
+     */
+    //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
+    public Object jsxGet_documentElement() {
+        return getScriptableFor(((XmlPage) getDomNodeOrDie()).getDocumentXmlElement());
+    }
 }
