@@ -50,6 +50,7 @@ public abstract class SgmlPage extends DomNode implements Page {
 
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
+    private final WebClient webClient_;
 
 
     /**
@@ -62,6 +63,7 @@ public abstract class SgmlPage extends DomNode implements Page {
         super(null);
         webResponse_ = webResponse;
         enclosingWindow_ = webWindow;
+        webClient_ = webWindow.getWebClient();
     }
     
     /**
@@ -115,6 +117,15 @@ public abstract class SgmlPage extends DomNode implements Page {
      */
     public void setEnclosingWindow(final WebWindow window) {
         enclosingWindow_ = window;
+    }
+
+    /**
+     *  Return the WebClient that originally loaded this page
+     *
+     * @return See above
+     */
+    public WebClient getWebClient() {
+        return webClient_;
     }
 
 }

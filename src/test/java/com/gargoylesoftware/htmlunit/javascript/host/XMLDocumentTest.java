@@ -96,11 +96,11 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLoad() throws Exception {
-        testLoad(BrowserVersion.INTERNET_EXPLORER_7_0);
-        testLoad(BrowserVersion.FIREFOX_2);
+        testLoad(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "books", "books", "1", "book"});
+        testLoad(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text"});
     }
     
-    private void testLoad(final BrowserVersion browserVersion) throws Exception {
+    private void testLoad(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String firstContent = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -108,6 +108,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    alert(doc.load('" + URL_SECOND + "'));\n"
             + "    alert(doc.documentElement.nodeName);\n"
             + "    alert(doc.childNodes[0].nodeName);\n"
+            + "    alert(doc.childNodes[0].childNodes.length);\n"
             + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
@@ -127,9 +128,8 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"true", "books", "books", "book"};
         final List collectedAlerts = new ArrayList();
-        final WebClient client = new WebClient();
+        final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
         conn.setResponse(URL_FIRST, firstContent);

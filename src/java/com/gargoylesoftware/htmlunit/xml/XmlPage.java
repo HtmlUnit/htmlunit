@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
  * A page that will be returned for response with content type "text/xml".
@@ -114,7 +115,11 @@ public class XmlPage extends SgmlPage {
                     break;
 
                 case Node.TEXT_NODE:
-                    //ignore all text nodes
+                    //IE ignores all text nodes
+                    if (getWebClient().getBrowserVersion().isNetscape()) {
+                        final DomText text = new DomText(this, child.getNodeValue());
+                        xml.appendDomChild(text);
+                    }
                     break;
 
                 default:

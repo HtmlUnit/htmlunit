@@ -96,7 +96,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
     private static final long serialVersionUID = 1779746292119944291L;
 
-    private final WebClient webClient_;
     private       String originalCharset_;
     private       Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
     private       Map nameMap_ = new HashMap(); // a map of (name, List(HtmlElement))
@@ -124,7 +123,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
         super(webResponse, webWindow);
 
-        webClient_ = webWindow.getWebClient();
     }
 
     /**
@@ -338,15 +336,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      */
     public List getForms() {
         return getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"form"}));
-    }
-
-    /**
-     *  Return the WebClient that originally loaded this page
-     *
-     * @return See above
-     */
-    public WebClient getWebClient() {
-        return webClient_;
     }
 
     /**
@@ -631,12 +620,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             final HtmlElement htmlElement = (HtmlElement) iterator.next();
             final int tabIndex = getTabIndex(htmlElement);
             if (tabIndex == TAB_INDEX_OUT_OF_BOUNDS) {
-                webClient_.assertionFailed(
+                getWebClient().assertionFailed(
                     "Illegal value for tab index: "
                     + htmlElement.getAttributeValue("tabindex"));
             }
             else if (tabIndex == TAB_INDEX_NOT_SPECIFIED) {
-                webClient_.assertionFailed("tabindex not set for " + htmlElement);
+                getWebClient().assertionFailed("tabindex not set for " + htmlElement);
             }
         }
     }
@@ -655,7 +644,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             final String id = ((HtmlElement) iterator.next()).getAttributeValue("accesskey");
             if (id != null && id.length() != 0) {
                 if (accessKeyList.contains(id)) {
-                    webClient_.assertionFailed("Duplicate access key: " + id);
+                    getWebClient().assertionFailed("Duplicate access key: " + id);
                 }
                 else {
                     accessKeyList.add(id);
@@ -679,7 +668,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             final String id = ((HtmlElement) iterator.next()).getAttributeValue("id");
             if (id != null && id.length() != 0) {
                 if (idList.contains(id)) {
-                    webClient_.assertionFailed("Duplicate ID: " + id);
+                    getWebClient().assertionFailed("Duplicate ID: " + id);
                 }
                 else {
                     idList.add(id);
@@ -1134,7 +1123,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     public void deregisterFramesIfNeeded() {
         for (final Iterator iter = getFrames().iterator(); iter.hasNext();) {
             final WebWindow window = (WebWindow) iter.next();
-            webClient_.deregisterWebWindow(window);
+            getWebClient().deregisterWebWindow(window);
             if (window.getEnclosedPage() instanceof HtmlPage) {
                 final HtmlPage page = (HtmlPage) window.getEnclosedPage();
                 if (page != null) {

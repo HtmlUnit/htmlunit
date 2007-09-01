@@ -92,7 +92,7 @@ public class XMLDocument extends Document {
         try {
             final WebRequestSettings settings = new WebRequestSettings(new URL(xmlSrouce));
             final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
-            final XmlPage page = new XmlPage(webResponse, null);
+            final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
             setDomNode(page);
             return true;
         }

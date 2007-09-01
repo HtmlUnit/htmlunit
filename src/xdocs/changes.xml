@@ -8,6 +8,13 @@
     <body>
         <release version="1.14-prerelease">
             <action type="update" dev="asashour">
+                JavaScript: ignore text nodes of loaded XML by ActiveXObjects: 'Microsoft.XmlDom' and
+				'MSXML.DOMDocument' (IE).
+            </action>
+            <action type="update" dev="asashour">
+                Move getWebClient() from HtmlPage to SgmlPage.
+            </action>
+            <action type="update" dev="asashour">
                 JavaScript: correctly handle 'documentElement' property for
 				'document.implementation.createDocument()' (FF),
 				and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
