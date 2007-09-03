@@ -55,10 +55,12 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -200,9 +202,24 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         if (cachedElements_ == null) {
             try {
                 cachedElements_ = xpath_.selectNodes(node_);
+                boolean isXmlPage = false;
+
+                //TODO: should be replaced by "getPage() instaceof XmlPage"
+                for (DomNode parent = node_; parent != null; parent = parent.getParentDomNode()) {
+                    if (parent instanceof XmlPage) {
+                        isXmlPage = true;
+                    }
+                }
+
+                final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
 
                 for (int i = 0; i < cachedElements_.size(); i++) {
                     final DomNode element = (DomNode) cachedElements_.get(i);
+                    //IE: XmlPage ignores all text nodes
+                    if (isIE && isXmlPage && element instanceof DomText) {
+                        cachedElements_.remove(i--);
+                        continue;
+                    }
                     for (DomNode parent = element.getParentDomNode(); parent != null;
                         parent = parent.getParentDomNode()) {
                         if (parent instanceof HtmlNoScript) {

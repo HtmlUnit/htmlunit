@@ -115,11 +115,8 @@ public class XmlPage extends SgmlPage {
                     break;
 
                 case Node.TEXT_NODE:
-                    //IE ignores all text nodes
-                    if (getWebClient().getBrowserVersion().isNetscape()) {
-                        final DomText text = new DomText(this, child.getNodeValue());
-                        xml.appendDomChild(text);
-                    }
+                    final DomText text = new DomText(this, child.getNodeValue());
+                    xml.appendDomChild(text);
                     break;
 
                 default:
@@ -139,7 +136,7 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     *  Return the content of the page
+     * Return the content of the page
      *
      * @return See above
      */

@@ -149,7 +149,18 @@ public class XMLDocument extends Document {
      * @return The root node for the document.
      */
     //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
-    public Object jsxGet_documentElement() {
+    public SimpleScriptable jsxGet_documentElement() {
         return getScriptableFor(((XmlPage) getDomNodeOrDie()).getDocumentXmlElement());
+    }
+    
+    /**
+     * Contains the XML representation of the node and all its descendants.
+     * @return An XML representation of this node and all its descendants.
+     */
+    public String jsxGet_xml() {
+        final XMLSerializer seralizer = new XMLSerializer();
+        seralizer.setParentScope(getWindow());
+        seralizer.setPrototype(getPrototype(seralizer.getClass()));
+        return seralizer.jsxFunction_serializeToString((NodeImpl) jsxGet_documentElement());
     }
 }

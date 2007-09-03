@@ -8,6 +8,10 @@
     <body>
         <release version="1.14-prerelease">
             <action type="add" dev="asashour">
+                JavaScript: add XMLSerializer (FF), and .xml property for ActiveXObjects: 'Microsoft.XmlDom' and
+                'MSXML.DOMDocument' (IE).
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: add DOMParser, with implementation of parseFromString() (FF only).
             </action>
             <action type="add" dev="asashour">

@@ -82,6 +82,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.FunctionContextWrapper;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.html.xpath.LowerCaseFunction;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A JavaScript object for a Document.
@@ -674,7 +675,7 @@ public class Document extends NodeImpl {
      * Get the JavaScript property "documentElement" for the document.
      * @return The root node for the document.
      */
-    public Object jsxGet_documentElement() {
+    public SimpleScriptable jsxGet_documentElement() {
         return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentHtmlElement());
     }
 

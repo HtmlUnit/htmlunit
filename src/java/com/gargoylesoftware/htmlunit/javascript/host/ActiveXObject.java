@@ -182,6 +182,7 @@ public class ActiveXObject extends SimpleScriptable {
 
         // the properties
         addProperty(document, "async", true, true);
+        addProperty(document, "xml", true, false);
         
         // the functions
         addFunction(document, "load");
