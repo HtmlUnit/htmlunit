@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -728,4 +729,52 @@ public class XMLHttpRequestTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Test that the different http methods are supported
+     * @throws Exception if the test fails.
+     */
+    public void testMethods() throws Exception {
+        testMethod(SubmitMethod.GET);
+        testMethod(SubmitMethod.HEAD);
+        testMethod(SubmitMethod.DELETE);
+        testMethod(SubmitMethod.POST);
+        testMethod(SubmitMethod.PUT);
+        testMethod(SubmitMethod.OPTIONS);
+        testMethod(SubmitMethod.TRACE);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    private void testMethod(final SubmitMethod method) throws Exception {
+        final String content = "<html><head><script>\n"
+            + "function getXMLHttpRequest() {\n"
+            + " if (window.XMLHttpRequest)\n"
+            + "        return new XMLHttpRequest();\n"
+            + " else if (window.ActiveXObject)"
+            + "        return new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "}\n"
+            + "function test()\n"
+            + "{\n"
+            + " req = getXMLHttpRequest();\n"
+            + " req.open('" + method.getName() + "', 'foo.xml', false);\n"
+            + " req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, content);
+        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        webConnection.setResponse(urlPage2, "<foo/>\n", "text/xml");
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        final WebRequestSettings settings = webConnection.getLastWebRequestSettings();
+        assertEquals(urlPage2, settings.getURL());
+        assertEquals(method, settings.getSubmitMethod());
+    }
+
 }

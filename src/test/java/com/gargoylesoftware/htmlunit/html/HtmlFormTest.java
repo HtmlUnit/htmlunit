@@ -223,6 +223,25 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testSubmit_BadSubmitMethod()
+        throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' method='put'>\n"
+            + "    <input type='text' name='textfield' value='*'/>\n"
+            + "    <input type='submit' name='button' id='button' value='foo'/>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final MockWebConnection webConnection = getMockConnection(page);
+
+        ((ClickableElement) page.getHtmlElementById("button")).click();
+
+        assertEquals(SubmitMethod.GET, webConnection.getLastMethod());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSubmit_onSubmitHandler()
         throws Exception {
 

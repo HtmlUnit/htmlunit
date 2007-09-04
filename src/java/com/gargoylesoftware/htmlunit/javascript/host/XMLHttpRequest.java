@@ -296,13 +296,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
             settings.addAdditionalHeader("Referer", containingPage_.getWebResponse().getUrl().toExternalForm());
-            final SubmitMethod submitMethod;
-            if ("POST".equalsIgnoreCase(method)) {
-                submitMethod = SubmitMethod.POST;
-            }
-            else {
-                submitMethod = SubmitMethod.GET;
-            }
+            final SubmitMethod submitMethod = SubmitMethod.getInstance(method);
             settings.setSubmitMethod(submitMethod);
             if (user != null) {
                 final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();

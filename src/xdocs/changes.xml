@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                Allow http methods DELETE, HEAD, OPTIONS, PUT and TRACE (in WebClient.getPage(WebRequestSettings) and in XMLHttpRequest).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add XMLSerializer (FF), and .xml property for ActiveXObjects: 'Microsoft.XmlDom' and
                 'MSXML.DOMDocument' (IE).

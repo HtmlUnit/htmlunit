@@ -38,30 +38,75 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- *  A collection of constants that represent the various ways a page can be
- *  submitted
+ * A collection of constants that represent the various ways a page can be
+ * submitted
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public final class SubmitMethod implements Serializable {
 
     private static final long serialVersionUID = 6202782549629170616L;
 
     /**
-     *  POST
+     * OPTIONS.
+     * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
+     */
+    public static final SubmitMethod OPTIONS = new SubmitMethod("options");
+
+    /**
+     * GET
+     * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
+     */
+    public static final SubmitMethod GET = new SubmitMethod("get");
+
+    /**
+     * HEAD.
+     * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
+     */
+    public static final SubmitMethod HEAD = new SubmitMethod("head");
+
+    /**
+     * POST
+     * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
      */
     public static final SubmitMethod POST = new SubmitMethod("post");
 
     /**
-     *  GET
+     * PUT
+     * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
      */
-    public static final SubmitMethod GET = new SubmitMethod("get");
+    public static final SubmitMethod PUT = new SubmitMethod("put");
+
+    /**
+     * DELETE.
+     * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
+     */
+    public static final SubmitMethod DELETE = new SubmitMethod("delete");
+
+    /**
+     * TRACE.
+     * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
+     */
+    public static final SubmitMethod TRACE = new SubmitMethod("trace");
+
 
     private final String name_;
+    private static final Map methods_ = toMap(new SubmitMethod[] {OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE});
+    
+    private static Map toMap(final SubmitMethod[] methods) {
+        final HashMap map = new HashMap(methods.length);
+        for (int i = 0; i < methods.length; ++i) {
+            map.put(methods[i].getName(), methods[i]);
+        }
+        return map;
+    }
 
     private SubmitMethod(final String name) {
         name_ = name;
@@ -77,27 +122,17 @@ public final class SubmitMethod implements Serializable {
     }
 
     /**
-     *  Return the constant that matches the given name
-     *
+     * Return the constant that matches the given name (case insensitive).
      * @param name The name to search by
-     * @return See above
+     * @return see above
      */
     public static SubmitMethod getInstance(final String name) {
-        final String lowerCaseName = name.toLowerCase();
-        final SubmitMethod allInstances[] = new SubmitMethod[]{POST, GET};
-
-        for (int i = 0; i < allInstances.length; i++) {
-            if (allInstances[i].getName().equals(lowerCaseName)) {
-                return allInstances[i];
-            }
+        final SubmitMethod method = (SubmitMethod) methods_.get(name.toLowerCase());
+        if (method == null) {
+            throw new IllegalArgumentException("No method found for [" + name + "]");
         }
-
-        // Special case: empty string defaults to get
-        if (name.equals("")) {
-            return GET;
-        }
-
-        throw new IllegalArgumentException("No method found for [" + name + "]");
+        
+        return method;
     }
 
     /**

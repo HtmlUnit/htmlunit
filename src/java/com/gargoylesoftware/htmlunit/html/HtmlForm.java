@@ -192,7 +192,17 @@ public class HtmlForm extends ClickableElement {
         }
 
         final List parameters = getParameterListForSubmit(submitElement);
-        final SubmitMethod method = SubmitMethod.getInstance(getAttributeValue("method"));
+        final SubmitMethod method;
+        if ("post".equalsIgnoreCase(getMethodAttribute())) {
+            method = SubmitMethod.POST;
+        }
+        else {
+            if (!"get".equalsIgnoreCase(getMethodAttribute())) {
+                getPage().getWebClient().getIncorrectnessListener().notify("Incorrect submit method >"
+                        + getMethodAttribute() + "<. Using >GET<.", this);
+            }
+            method = SubmitMethod.GET;
+        }
 
         String actionUrl = getActionAttribute();
         if (SubmitMethod.GET.equals(method)) {

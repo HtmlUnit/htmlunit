@@ -59,6 +59,7 @@ import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
@@ -202,13 +203,13 @@ public class HttpWebConnection extends WebConnectionImpl {
     private HttpMethodBase makeHttpMethod(final WebRequestSettings webRequestSettings)
         throws IOException {
 
-        final HttpMethodBase httpMethod;
         String path = webRequestSettings.getURL().getPath();
         if (path.length() == 0) {
             path = "/";
         }
-        if (SubmitMethod.GET == webRequestSettings.getSubmitMethod()) {
-            httpMethod = new GetMethod(path);
+        final HttpMethodBase httpMethod = buildHttpMethod(webRequestSettings.getSubmitMethod(), path);
+        if (!(httpMethod instanceof EntityEnclosingMethod)) {
+            // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
 
             if (webRequestSettings.getRequestParameters().isEmpty()) {
                 final String queryString = webRequestSettings.getURL().getQuery();
@@ -220,23 +221,25 @@ public class HttpWebConnection extends WebConnectionImpl {
                 httpMethod.setQueryString(pairs);
             }
         }
-        else if (SubmitMethod.POST  == webRequestSettings.getSubmitMethod()) {
-            final PostMethod postMethod = new PostMethod(path);
-            postMethod.getParams().setContentCharset(webRequestSettings.getCharset());
+        else { // POST as well as PUT
+            final EntityEnclosingMethod method = (EntityEnclosingMethod) httpMethod;
+            method.getParams().setContentCharset(webRequestSettings.getCharset());
 
             final String queryString = webRequestSettings.getURL().getQuery();
             if (queryString != null) {
-                postMethod.setQueryString(queryString);
+                method.setQueryString(queryString);
             }
             if (webRequestSettings.getRequestBody() != null) {
                 final String body = webRequestSettings.getRequestBody();
                 final String charset = webRequestSettings.getCharset();
-                postMethod.setRequestEntity(new StringRequestEntity(body, null, charset));
+                method.setRequestEntity(new StringRequestEntity(body, null, charset));
             }
 
             // Note that this has to be done in two loops otherwise it won't
             // be able to support two elements with the same name.
-            if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED) {
+            if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED
+                    && method instanceof PostMethod) {
+                final PostMethod postMethod = (PostMethod) httpMethod;
                 Iterator iterator = webRequestSettings.getRequestParameters().iterator();
                 while (iterator.hasNext()) {
                     final NameValuePair pair = (NameValuePair) iterator.next();
@@ -275,14 +278,10 @@ public class HttpWebConnection extends WebConnectionImpl {
                 }
                 Part[] parts = new Part[partList.size()];
                 parts = (Part[]) partList.toArray(parts);
-                postMethod.setRequestEntity(new MultipartRequestEntity(
+                method.setRequestEntity(new MultipartRequestEntity(
                         parts,
-                        postMethod.getParams()));
+                        method.getParams()));
             }
-            httpMethod = postMethod;
-        }
-        else {
-            throw new IllegalStateException("Submit method not yet supported: " + webRequestSettings.getSubmitMethod());
         }
 
         httpMethod.setRequestHeader(
@@ -307,6 +306,21 @@ public class HttpWebConnection extends WebConnectionImpl {
 
         }
         return httpMethod;
+    }
+
+    private HttpMethodBase buildHttpMethod(final SubmitMethod submitMethod, final String path) {
+        final HttpMethodBase method;
+
+        if (SubmitMethod.GET == submitMethod) {
+            method = new GetMethod(path);
+        }
+        else if (SubmitMethod.POST == submitMethod) {
+            method = new PostMethod(path);
+        }
+        else {
+            throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
+        }
+        return method;
     }
 
     /**

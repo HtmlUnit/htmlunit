@@ -48,7 +48,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -127,8 +126,7 @@ public class HtmlArea extends FocusableElement {
                     throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute());
                 }
-                final WebRequestSettings settings = new WebRequestSettings(url,
-                        SubmitMethod.getInstance(getAttributeValue("method")));
+                final WebRequestSettings settings = new WebRequestSettings(url);
                 final WebWindow webWindow = enclosingPage.getEnclosingWindow();
                 return webClient.getPage(
                     webWindow,
