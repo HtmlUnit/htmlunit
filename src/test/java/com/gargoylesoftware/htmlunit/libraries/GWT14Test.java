@@ -140,13 +140,15 @@ public class GWT14Test extends WebTestCase {
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         //visible space in browser is not normal space but '\u00A0' instead, as noted by the following test in browser:
-        //  var tr = document.getElementById('numberFormatOutputText');
-        //  var value = tr.childNodes[0].childNodes[0].nodeValue;
-        //  var output = '';
-        //  for( var i=0; i < value.length; i++ ) {
-        //    output += value.charCodeAt(i) + ' ';
-        //  }
-        //  alert(output);
+        /*
+            var tr = document.getElementById('numberFormatOutputText');
+            var value = tr.childNodes[0].childNodes[0].nodeValue;
+            var output = '';
+            for( var i=0; i < value.length; i++ ) {
+              output += value.charCodeAt(i) + ' ';
+            }
+           alert(output);
+        */
         testI18N(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
         
         String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
@@ -228,6 +230,19 @@ public class GWT14Test extends WebTestCase {
             headerNode = headerNode.getNextDomSibling();
         }
         assertEquals(expectedMap.size(), foundHeaders.size());
+    }
+
+    /**
+     * It seems to be related to {@link XMLHttpRequest}.
+     * @throws Exception If an error occurs.
+     */
+    public void testSimpleXML() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
+        assertFalse(page.getByXPath("//table").isEmpty());
     }
 
     /**
