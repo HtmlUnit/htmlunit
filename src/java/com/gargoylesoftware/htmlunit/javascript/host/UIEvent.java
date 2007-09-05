@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * JavaScript object representing a UI event. For general information on which properties and functions should be
- * supported, see <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent">DOM Level 2 Events</a>.
+ * supported, see <a href="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-UIEvent">DOM Level 3 Events</a>.
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -112,6 +112,26 @@ public class UIEvent extends Event {
      */
     public Object jsxGet_view() {
         return getWindow();
+    }
+
+    /**
+     * Implementation of the DOM Level 3 Event method for initializing the UI event.
+     *
+     * @param type the event type
+     * @param bubbles can the event bubble
+     * @param cancelable can the event be canceled
+     * @param view the view to use for this event
+     * @param detail the detail to set for the event
+     */
+    public void jsxFunction_initUIEvent(
+            final String type,
+            final boolean bubbles,
+            final boolean cancelable,
+            final Object view,
+            final int detail) {
+        jsxFunction_initEvent(type, bubbles, cancelable);
+        // Ignore the view parameter; we always use the window.
+        setDetail(detail);
     }
 
 }

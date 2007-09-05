@@ -105,4 +105,23 @@ public class UIEventTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testInitUIEvent() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "  var e = document.createEvent('UIEvents');\n"
+            + "  e.initUIEvent('click', true, true, window, 7);\n"
+            + "  alert(e.type);\n"
+            + "  alert(e.bubbles);\n"
+            + "  alert(e.cancelable);\n"
+            + "  alert(e.view == window);\n"
+            + "  alert(e.detail);\n"
+            + "</script></body></html>\n";
+        final List actual = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final String[] expected = {"click", "true", "true", "true", "7"};
+        assertEquals(expected, actual);
+    }
+
 }

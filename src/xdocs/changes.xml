@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig">
+                JavaScript: add UIEvent.initUIEvent() (FF only).
+            </action>
             <action type="add" dev="mguillem">
                 Allow http methods DELETE, HEAD, OPTIONS, PUT and TRACE (in WebClient.getPage(WebRequestSettings) and in XMLHttpRequest).
             </action>
@@ -22,15 +25,15 @@
             </action>
             <action type="update" dev="asashour">
                 JavaScript: ignore text nodes of loaded XML by ActiveXObjects: 'Microsoft.XmlDom' and
-				'MSXML.DOMDocument' (IE).
+                'MSXML.DOMDocument' (IE).
             </action>
             <action type="update" dev="asashour">
                 Move getWebClient() from HtmlPage to SgmlPage.
             </action>
             <action type="update" dev="asashour">
                 JavaScript: correctly handle 'documentElement' property for
-				'document.implementation.createDocument()' (FF),
-				and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
+                'document.implementation.createDocument()' (FF),
+                and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="add" dev="asashour">
                 JavaScript: add load() for 'document.implementation.createDocument()' (FF), and
