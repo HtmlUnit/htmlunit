@@ -1348,7 +1348,7 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
      */
-    public final WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
+    public WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
         throws
             IOException {
 

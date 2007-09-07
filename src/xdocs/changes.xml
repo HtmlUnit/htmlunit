@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem" id="1790312">
+                WebClient.loadWebResponse should not be final.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add UIEvent.initUIEvent() (FF only).
             </action>
