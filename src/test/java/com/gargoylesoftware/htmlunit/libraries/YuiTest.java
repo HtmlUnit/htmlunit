@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  */
 public class YuiTest extends WebTestCase {
 
+    private static final long DEFAULT_TIME_TO_WAIT = 2 * 60 * 1000L;
     private static final String BASE_FILE_PATH = "yui/2.3.0/tests/";
 
     /**
@@ -95,7 +96,10 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "tabview.html", Collections.EMPTY_LIST);
+        // The tabview YUI test has a background thread that runs.  We want to set the
+        // maximum wait time to 5 seconds as that gives enough time for execution without
+        // causing the test to run forever.
+        doTest(BrowserVersion.FIREFOX_2, "tabview.html", Collections.EMPTY_LIST, null, 5 * 1000);
     }
 
     /**
@@ -145,7 +149,12 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "config.html", Collections.EMPTY_LIST);
+        // Test currently commented out as there are problems with the YUI test.
+        // A bug has been filed against YUI regarding the problems with the test.
+        // See http://sourceforge.net/tracker/index.php?func=detail&aid=1788014&group_id=165715&atid=836476
+        // for more details.
+        fail("YUI test has a bug that causes this to fail.");
+        //doTest(BrowserVersion.FIREFOX_2, "config.html", Collections.EMPTY_LIST);
     }
 
     /**
@@ -231,16 +240,6 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void testYahoo() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "yahoo.html", Collections.EMPTY_LIST);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
     public void testModule() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -280,14 +279,21 @@ public class YuiTest extends WebTestCase {
      * TODO: get rid of the known failing test list, eventually
      */
     private void doTest(final BrowserVersion version, final String fileName, final List knownFailingTests,
-        final String buttonToPush) throws Exception {
+            final String buttonToPush) throws Exception {
+        doTest(version, fileName, knownFailingTests, buttonToPush, DEFAULT_TIME_TO_WAIT);
+    }
 
+    /**
+     * TODO: get rid of the known failing test list, eventually
+     */
+    private void doTest(final BrowserVersion version, final String fileName, final List knownFailingTests,
+            final String buttonToPush, final long timeToWait) throws Exception {
         final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);
         assertNotNull(url);
 
         final WebClient client = new WebClient(version);
         final HtmlPage page = (HtmlPage) client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
+        page.getEnclosingWindow().getThreadManager().joinAll(timeToWait);
         final HtmlElement doc = page.getDocumentHtmlElement();
 
         if (buttonToPush != null) {
