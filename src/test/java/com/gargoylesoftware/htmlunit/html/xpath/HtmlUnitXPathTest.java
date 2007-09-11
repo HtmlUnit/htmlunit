@@ -260,4 +260,23 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr);
         assertEquals(Arrays.asList(expectedNodes), xpath.selectNodes(page));
     }
+    
+    /**
+     * @throws Exception If test fails.
+     */
+    public void testID() throws Exception {
+        final String content = "<html><head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<div><a href='link.html' id='test'></div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+
+        final List xPathByAttributeCompare = page.getByXPath("//div[@id='doesNotExist']");
+        assertTrue(xPathByAttributeCompare.isEmpty());
+
+        final List xPathByID = page.getByXPath("id('doesNotExist')");
+        assertTrue(xPathByID.isEmpty());
+    }
+
 }

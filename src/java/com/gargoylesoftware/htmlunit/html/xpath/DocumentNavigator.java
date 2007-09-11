@@ -43,6 +43,8 @@ import java.util.Collections;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.XPath;
 import org.jaxen.JaxenException;
+
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -406,7 +408,12 @@ public class DocumentNavigator extends DefaultNavigator {
      */
     public Object getElementById(final Object contextNode, final String elementId) {
         final HtmlPage page = ((DomNode) contextNode).getPage();
-        return page.getHtmlElementById(elementId);
+        try {
+            return page.getHtmlElementById(elementId);
+        }
+        catch (final ElementNotFoundException e) {
+            return null;
+        }
     }
 
 }

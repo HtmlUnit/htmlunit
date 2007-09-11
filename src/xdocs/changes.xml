@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour" id="1790308">
+                DomNode.getByXPath() with 'id()' function should return empty list instead of throwing an exception (#1790308).
+            </action>
             <action type="add" dev="mguillem" id="1790312">
                 WebClient.loadWebResponse should not be final.
             </action>
