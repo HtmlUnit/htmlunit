@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class XMLDocument extends Document {
 
     private boolean async_ = true;
+    private boolean preserveWhiteSpace_;
     
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -163,4 +164,33 @@ public class XMLDocument extends Document {
         seralizer.setPrototype(getPrototype(seralizer.getClass()));
         return seralizer.jsxFunction_serializeToString((NodeImpl) jsxGet_documentElement());
     }
+
+    /**
+     * Gets the current white space handling.
+     * @return the current white space handling.
+     */
+    public boolean jsxGet_preserveWhiteSpace() {
+        return preserveWhiteSpace_;
+    }
+
+    /**
+     * Specifies the white space handling.
+     * @param preserveWhiteSpace white space handling.
+     */
+    public void jsxSet_preserveWhiteSpace(final boolean preserveWhiteSpace) {
+        this.preserveWhiteSpace_ = preserveWhiteSpace;
+    }
+    
+    /**
+     * This method is used to set
+     * <a href="http://msdn2.microsoft.com/en-us/library/ms766391.aspx">second-level properties</a>
+     * on the DOM object.
+     *
+     * @param name The name of the property to be set.
+     * @param value The value of the specified property.
+     */
+    public void jsxFunction_setProperty(final String name, final String value) {
+        //empty implementation
+    }
+    
 }

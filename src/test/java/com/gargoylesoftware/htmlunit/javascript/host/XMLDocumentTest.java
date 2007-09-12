@@ -139,4 +139,36 @@ public class XMLDocumentTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testPreserveWhiteSpace() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = new ActiveXObject('MSXML2.DOMDocument');\n"
+            + "    alert(doc.preserveWhiteSpace);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"false"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetProperty() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = new ActiveXObject('MSXML2.DOMDocument');\n"
+            + "    doc.setProperty('SelectionNamespaces', \"xmlns:xsl='http://www.w3.org/1999/XSL/Transform'\");\n"
+            + "    doc.setProperty('SelectionLanguage', 'XPath');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, null);
+    }
 }

@@ -182,11 +182,13 @@ public class ActiveXObject extends SimpleScriptable {
 
         // the properties
         addProperty(document, "async", true, true);
+        addProperty(document, "preserveWhiteSpace", true, true);
         addProperty(document, "xml", true, false);
         
         // the functions
         addFunction(document, "load");
         addFunction(document, "loadXML");
+        addFunction(document, "setProperty");
 
         final JavaScriptConfiguration jsConfig =
             JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER_7_0);
