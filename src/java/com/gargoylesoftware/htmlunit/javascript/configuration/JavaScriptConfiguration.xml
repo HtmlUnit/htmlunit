@@ -169,6 +169,12 @@
         <function name="createStyleSheet">
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="createRange">
+            <doclink
+                url="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange"
+                descr="XUL Planet"/>
+            <browser name="Firefox"/>
+        </function>
         <function name="createTextNode"/>
         <function name="elementFromPoint">
             <browser name="Microsoft Internet Explorer"/>
@@ -832,6 +838,27 @@
         
         <function name="add"/>
         <function name="remove"/>
+    </class>
+
+    <class name="Range" classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
+        <!-- NOT FINISHED -->
+        <property name="collapsed" readable="true" writable="false"/>
+        <property name="commonAncestorContainer" readable="true" writable="false"/>
+        <property name="endContainer" readable="true" writable="false"/>
+        <property name="endOffset" readable="true" writable="false"/>
+        <property name="startContainer" readable="true" writable="false"/>
+        <property name="startOffset" readable="true" writable="false"/>
+        
+        <function name="collapse"/>
+        <function name="createContextualFragment"/>
+        <function name="selectNode"/>
+        <function name="selectNodeContents"/>
+        <function name="setEnd"/>
+        <function name="setEndAfter"/>
+        <function name="setEndBefore"/>
+        <function name="setStart"/>
+        <function name="setStartAfter"/>
+        <function name="setStartBefore"/>
     </class>
 
     <class name="Script" classname="com.gargoylesoftware.htmlunit.javascript.host.Script" JSObject="true"

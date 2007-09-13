@@ -1201,4 +1201,17 @@ public class Document extends NodeImpl {
     public Object jsxFunction_elementFromPoint(final int x, final int y) {
         return jsxGet_body();
     }
+
+    /**
+     * Create a new range
+     * @return the range.
+     * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">
+     * XUL Planet</a>
+     */
+    public Object jsxFunction_createRange() {
+        final Range r = new Range();
+        r.setParentScope(getWindow());
+        r.setPrototype(getPrototype(Range.class));
+        return r;
+    }
 }

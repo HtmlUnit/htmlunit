@@ -141,6 +141,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Navigator");
         names.remove("NodeImpl");
         names.remove("Popup");
+        names.remove("Range");
         names.remove("RowContainer");
         names.remove("Screen");
         names.remove("ScoperFunctionObject");

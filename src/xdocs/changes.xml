@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript: added Document.createRange() and basic support for Range (Firefox only).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add selectNodes() (IE only) and .tagName property for XML elements.
             </action>
