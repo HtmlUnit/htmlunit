@@ -38,73 +38,74 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.io.IOException;
-
-import org.apache.commons.httpclient.HttpState;
+import java.net.URL;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebResponseData;
+import com.gargoylesoftware.htmlunit.WebResponseImpl;
 
 /**
- * Provides a convenient implementation of the {@link WebConnection} interface that can be subclassed by developers
- * wishing to adapt a particular WebConnection.
- * This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped
- * web connection object.
- * @version $Revision$
+ * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something else than
+ * what the wrapped connection would deliver.
+ * @version $Revision: 1592 $
  * @author Marc Guillemot
  */
-public class WebConnectionWrapper implements WebConnection {
-    private final WebConnection wrappedWebConnection_;
+public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
 
     /**
      * Constructs a WebConnection object wrapping provided WebConnection.
      * @param webConnection the webConnection that does the real work
      * @throws IllegalArgumentException if the connection is <code>null</code>
      */
-    public WebConnectionWrapper(final WebConnection webConnection) throws IllegalArgumentException {
-        if (webConnection == null) {
-            throw new IllegalArgumentException("Wrapped connection can't be null");
-        }
-        wrappedWebConnection_ = webConnection;
+    public FalsifyingWebConnection(final WebConnection webConnection) throws IllegalArgumentException {
+        super(webConnection);
     }
 
     /**
-     * Constructs a WebConnection object wrapping the connection of the WebClient and places itself as
-     * connection of the WebClient.
+     * Constructs an instance and places itself as connection of the WebClient.
      * @param webClient the WebClient which WebConnection should be wrapped
      * @throws IllegalArgumentException if the WebClient is <code>null</code>
      */
-    public WebConnectionWrapper(final WebClient webClient) throws IllegalArgumentException {
-        if (webClient == null) {
-            throw new IllegalArgumentException("WebClient can't be null");
-        }
-        wrappedWebConnection_ = webClient.getWebConnection();
-        webClient.setWebConnection(this);
+    public FalsifyingWebConnection(final WebClient webClient) throws IllegalArgumentException {
+        super(webClient);
     }
 
     /**
-     * {@inheritDoc}
-     * The default behavior of this method is to return getResponse() on the wrapped connection object.
+     * Delivers the content for an alternate url as if it would come from the requested one
+     * @param webRequestSettings the original web request settings
+     * @param url the url from which the content should be retrieved
+     * @return the response
+     * @throws IOException if a problem occured
      */
-    public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-        return wrappedWebConnection_.getResponse(webRequestSettings);
+    protected WebResponse deliverFromAlternateUrl(final WebRequestSettings webRequestSettings, final URL url)
+        throws IOException {
+        final URL originalUrl = webRequestSettings.getURL();
+        webRequestSettings.setURL(url);
+        final WebResponse resp = super.getResponse(webRequestSettings);
+        return new WebResponseWrapper(resp)
+        {
+            public URL getUrl() {
+                return originalUrl;
+            };
+        };
     }
 
     /**
-     * {@inheritDoc}
-     * The default behavior of this method is to return getState() on the wrapped connection object.
+     * Builds a WebResponse with a new content preserving the other informations
+     * @param webResponse the web response to adapt
+     * @param newContent the new content to place in the response
+     * @return a web response with the new content
+     * @throws IOException if an enconding problem occured
      */
-    public HttpState getState() {
-        return wrappedWebConnection_.getState();
+    protected WebResponse replaceContent(final WebResponse webResponse, final String newContent) throws IOException {
+        final byte[] body = newContent.getBytes(webResponse.getContentCharSet());
+        final WebResponseData wrd = new WebResponseData(body, webResponse.getStatusCode(),
+                webResponse.getStatusMessage(), webResponse.getResponseHeaders());
+        return new WebResponseImpl(wrd, webResponse.getUrl(), webResponse.getRequestMethod(),
+                webResponse.getLoadTimeInMilliSeconds());
+        
     }
-
-    /**
-     * {@inheritDoc}
-     * The default behavior of this method is to return getWebClient() on the wrapped connection object.
-     */
-    public WebClient getWebClient() {
-        return wrappedWebConnection_.getWebClient();
-    }
-
 }
