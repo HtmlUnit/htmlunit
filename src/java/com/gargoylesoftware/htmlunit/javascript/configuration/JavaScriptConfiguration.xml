@@ -1149,6 +1149,24 @@
         <function name="setTimeout"/>
     </class>
 
+    <class name="XMLAttribute" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLAttribute"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.xml.XmlAttr">
+        <property name="expando" readable="true" writable="false"/>
+        <property name="firstChild" readable="true" writable="false"/>
+        <property name="lastChild" readable="true" writable="false"/>
+        <property name="name" readable="true" writable="false"/>
+        <property name="nextSibling" readable="true" writable="false"/>
+        <property name="nodeName" readable="true" writable="false"/>
+        <property name="nodeType" readable="true" writable="false"/>
+        <property name="nodeValue" readable="true" writable="false"/>
+        <property name="ownerDocument" readable="true" writable="false"/>
+        <property name="parentNode" readable="true" writable="false"/>
+        <property name="previousSibling" readable="true" writable="false"/>
+        <property name="specified" readable="true" writable="false"/>
+        <!-- value should be writable -->
+        <property name="value" readable="true" writable="false"/>
+    </class>
+
     <class name="XMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLDocument"
         JSObject="true">
         <browser name="Firefox"/>
@@ -1185,6 +1203,7 @@
     <class name="XMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLElement"
         htmlClass="com.gargoylesoftware.htmlunit.xml.XmlElement"
         JSObject="true">
+        <property name="attributes" readable="true" writable="false"/>
         <property name="tagName" readable="true" writable="false"/>
         <function name="selectNodes">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"

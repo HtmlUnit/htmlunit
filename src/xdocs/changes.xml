@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add basic support for attributes of XML elements.
+            </action>
             <action type="add" dev="mguillem">
                 Added FalsifyingWebConnection, a WebConnection wrapper that provides facility methods to
                 provide other content than the "real" one.

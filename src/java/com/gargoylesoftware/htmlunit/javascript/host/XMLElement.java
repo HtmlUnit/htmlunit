@@ -37,11 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.NativeArray;
 
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
+import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
@@ -74,5 +81,19 @@ public class XMLElement extends NodeImpl {
      */
     public String jsxGet_tagName() {
         return ((XmlElement) getDomNodeOrDie()).getTagName();
+    }
+    
+    /**
+     * Returns the attributes of this XML element.
+     * @return the attributes of this XML element.
+     */
+    public Object jsxGet_attributes() {
+        final Map attributes = ((XmlElement) getDomNodeOrDie()).getAttributes();
+        final List list = new ArrayList();
+        for (final Iterator values = attributes.values().iterator(); values.hasNext();) {
+            final XmlAttr attr = (XmlAttr) values.next();
+            list.add(attr.getScriptObject());
+        }
+        return new NativeArray(list.toArray());
     }
 }

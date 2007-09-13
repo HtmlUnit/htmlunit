@@ -178,7 +178,7 @@ public class XMLDocumentTest extends WebTestCase {
     public void testSelectNodes() throws Exception {
         testSelectNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1", "title"});
         try {
-            testSelectNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text"});
+            testSelectNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1", "title"});
             fail("selectNodes is not supported in Firefox.");
         }
         catch (final Exception e) {

@@ -46,7 +46,10 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.xml.XmlAttr;
+import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -138,11 +141,27 @@ public class XMLDocument extends Document {
      * {@inheritDoc}
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
-        final XMLElement element = new XMLElement();
-        element.setPrototype(getPrototype(element.getClass()));
-        element.setParentScope(getParentScope());
-        element.setDomNode(domNode);
-        return element;
+        final SimpleScriptable scriptable;
+        
+        if (domNode instanceof XmlElement) {
+            scriptable = new XMLElement();
+        }
+        else if (domNode instanceof XmlAttr) {
+            final XMLAttribute attribute = new XMLAttribute();
+            attribute.init(domNode.getNodeName(), (XmlElement) domNode.getParentDomNode());
+            scriptable = attribute;
+        }
+        else if (domNode instanceof DomText) {
+            scriptable = new TextImpl();
+        }
+        else {
+            throw new IllegalArgumentException("Can not make scriptable for " + domNode);
+        }
+        
+        scriptable.setPrototype(getPrototype(scriptable.getClass()));
+        scriptable.setParentScope(getParentScope());
+        scriptable.setDomNode(domNode);
+        return scriptable;
     }
 
     /**

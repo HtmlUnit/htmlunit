@@ -37,93 +37,109 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
- * An XML element.
+ * An attribute of an element. Attributes are stored in {@link XmlElement},
+ * but the xpath engine expects attributes to be in a {@link DomNode}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XmlElement extends DomNamespaceNode {
+public class XmlAttr extends DomNamespaceNode implements Map.Entry {
 
-    /** Constant meaning that the specified attribute was not defined. */
-    public static final String ATTRIBUTE_NOT_DEFINED = new String("");
+    private static final long serialVersionUID = 4832218455328064213L;
 
-    /** The map holding the attributes, keyed by name. */
-    private Map/* String, XmlAttr*/ attributes_;
+    private String value_;
 
     /**
-     * Create an instance of a DOM node that can have a namespace.
+     * Instantiate a new attribute.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate.
-     * @param xmlPage The page that contains this element.
-     * @param attributes The attributes of this element.
+     * @param xmlElement The parent element.
+     * @param mapEntry The wrapped Map.Entry.
+     * @deprecated Use constructor with explicit names.
      */
-    protected XmlElement(final String namespaceURI, final String qualifiedName, final XmlPage xmlPage,
-            final Map/* String, XmlAttr*/ attributes) {
-        super(namespaceURI, qualifiedName, xmlPage);
-        attributes_ = attributes;
-        for (final Iterator values = attributes.values().iterator(); values.hasNext();) {
-            final XmlAttr attr = (XmlAttr) values.next();
-            attr.setParentNode(this);
-        }
+    public XmlAttr(final XmlElement xmlElement, final Map.Entry mapEntry) {
+        super(null, (String) mapEntry.getKey(), xmlElement.getPage());
+        value_ = (String) mapEntry.getValue();
+        setParentNode(xmlElement);
+    }
+
+    /**
+     * Instantiate a new attribute.
+     *
+     * @param page The page that the attribute belongs to.
+     * @param namespaceURI The namespace that defines the attribute name.  May be null.
+     * @param qualifiedName The name of the attribute.
+     * @param value The value of the attribute.
+     */
+    public XmlAttr(final XmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
+        super(namespaceURI, qualifiedName, page);
+        value_ = value;
     }
 
     /**
      * {@inheritDoc}
      */
     public short getNodeType() {
-        return org.w3c.dom.Node.ELEMENT_NODE;
+        return org.w3c.dom.Node.ATTRIBUTE_NODE;
     }
 
     /**
-     * @return The same value as returned by {@link #getTagName()},
+     * {@inheritDoc}
      */
     public String getNodeName() {
-        return getTagName();
+        return getName();
     }
 
     /**
-     * Return the tag name of this element.
-     * @return the tag name of this element.
+     * {@inheritDoc}
      */
-    public String getTagName() {
-        if (getNamespaceURI() == null) {
-            return getLocalName();
-        }
-        else {
-            return getQualifiedName();
-        }
+    public String getNodeValue() {
+        return (String) getValue();
     }
 
     /**
-     * Return the value of the specified attribute or an empty string.  If the
-     * result is an empty string then it will be {@link #ATTRIBUTE_NOT_DEFINED}
-     *
-     * @param attributeName the name of the attribute
-     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     * {@inheritDoc}
      */
-    public final String getAttributeValue(final String attributeName) {
-        final XmlAttr attr = (XmlAttr) attributes_.get(attributeName);
-
-        if (attr != null) {
-            return attr.getNodeValue();
-        }
-        else {
-            return ATTRIBUTE_NOT_DEFINED;
-        }
+    public Object getKey() {
+        return getName();
     }
 
     /**
-     * Returns the map holding the attributes, keyed by name.
-     * @return the attributes map.
+     * @return The qualified name of the attribute.
      */
-    public Map getAttributes() {
-        return attributes_;
+    public String getName() {
+        return getQualifiedName();
     }
+
+    /**
+     * @return The value of the attribute.
+     */
+    public Object getValue() {
+        return value_;
+    }
+
+    /**
+     * Set the value of the attribute.
+     * @param value new value to be stored in this entry.
+     * @return old value corresponding to the entry.
+     */
+    public Object setValue(final Object value) {
+        final String oldValue = value_;
+        value_ = (String) value;
+        return oldValue;
+    }
+
+    /**
+     * Set the parent node
+     * @param parent the parent node
+     */
+    protected void setParentNode(final DomNode parent) {
+        super.setParentNode(parent);
+    }
+
 }

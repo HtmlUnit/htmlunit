@@ -38,11 +38,14 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -124,8 +127,17 @@ public class XmlPage extends SgmlPage {
             }
         }
     }
+
     private XmlElement createFrom(final org.w3c.dom.Node node) {
-        final XmlElement element = new XmlElement(node.getNamespaceURI(), node.getLocalName(), this);
+        final Map attributes/* String, XmlAttr*/ = new HashMap();
+        final NamedNodeMap nodeAttributes = node.getAttributes();
+        for (int i = 0; i < nodeAttributes.getLength(); i++) {
+            final Node attribute = nodeAttributes.item(i);
+            final XmlAttr xmlAttribute =
+                new XmlAttr(this, attribute.getNamespaceURI(), attribute.getLocalName(), attribute.getNodeValue());
+            attributes.put(attribute.getNodeName(), xmlAttribute);
+        }
+        final XmlElement element = new XmlElement(node.getNamespaceURI(), node.getLocalName(), this, attributes);
         return element;
     }
 
