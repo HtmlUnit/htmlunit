@@ -221,12 +221,13 @@ public class StyleTest extends WebTestCase {
                 + "    var oDiv = document.getElementById('div1');\n"
                 + "    alert(typeof oDiv.style.visibility);\n"
                 + "    alert(typeof oDiv.style.color);\n"
+                + "    alert(typeof oDiv.style.backgroundImage);\n"
                 + "    alert(typeof oDiv.style.foo);\n"
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
 
-        final String[] expectedAlerts = {"string", "string", "undefined"};
+        final String[] expectedAlerts = {"string", "string", "string", "undefined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
