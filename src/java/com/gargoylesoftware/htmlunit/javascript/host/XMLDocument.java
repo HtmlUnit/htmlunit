@@ -192,5 +192,5 @@ public class XMLDocument extends Document {
     public void jsxFunction_setProperty(final String name, final String value) {
         //empty implementation
     }
-    
+
 }

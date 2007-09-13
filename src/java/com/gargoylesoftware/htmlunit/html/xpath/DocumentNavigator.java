@@ -37,21 +37,22 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
-import java.util.Iterator;
 import java.util.Collections;
+import java.util.Iterator;
 
 import org.jaxen.DefaultNavigator;
-import org.jaxen.XPath;
 import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAttr;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.Util;
+import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
  * Jaxen Navigator implementation for navigating around the HtmlUnit DOM object model
@@ -182,7 +183,12 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The root node.
      */
     public Object getDocumentNode(final Object contextNode) {
-        return ((DomNode) contextNode).getPage();
+        if(contextNode instanceof XmlElement) {
+            return ((DomNode) contextNode).getNativePage();
+        }
+        else {
+            return ((DomNode) contextNode).getPage();
+        }
     }
 
     /**
@@ -260,7 +266,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is the document root, false otherwise.
      */
     public boolean isDocument(final Object object) {
-        return (object instanceof HtmlPage);
+        return object instanceof HtmlPage;
     }
 
     /**

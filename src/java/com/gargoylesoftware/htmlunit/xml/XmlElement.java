@@ -78,7 +78,7 @@ public class XmlElement extends DomNamespaceNode {
      */
     public String getTagName() {
         if (getNamespaceURI() == null) {
-            return getLocalName().toLowerCase();
+            return getLocalName();
         }
         else {
             return getQualifiedName();

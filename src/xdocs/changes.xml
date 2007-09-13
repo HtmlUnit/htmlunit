@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="add" dev="asashour">
+                JavaScript: add selectNodes() (IE only) and .tagName property for XML elements.
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: add basic support of setProperty() function and .preserveWhiteSpace property for
 				ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE only).
             </action>

@@ -37,6 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.jaxen.JaxenException;
+import org.mozilla.javascript.Context;
+
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
+import com.gargoylesoftware.htmlunit.xml.XmlElement;
+
 /**
  * A JavaScript object for XMLElement.
  *
@@ -45,4 +52,27 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class XMLElement extends NodeImpl {
 
+    /**
+     * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
+     * @param expression A string specifying an XPath expression.
+     * @return list of the found elements.
+     */
+    public Object jsxFunction_selectNodes(final String expression) {
+        final HTMLCollection collection = new HTMLCollection(this);
+        try {
+            collection.init(getDomNodeOrDie(), new HtmlUnitXPath(expression));
+        }
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError("Failed to initialize collection 'selectNodes': " + e.getMessage());
+        }
+        return collection;
+    }
+
+    /**
+     * Return the tag name of this element.
+     * @return The tag name.
+     */
+    public String jsxGet_tagName() {
+        return ((XmlElement) getDomNodeOrDie()).getTagName();
+    }
 }

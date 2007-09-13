@@ -1158,6 +1158,12 @@
     <class name="XMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLElement"
         htmlClass="com.gargoylesoftware.htmlunit.xml.XmlElement"
         JSObject="true">
+        <property name="tagName" readable="true" writable="false"/>
+        <function name="selectNodes">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
+                    descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
     </class>
 
     <class name="XMLHttpRequest" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLHttpRequest"
