@@ -183,7 +183,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The root node.
      */
     public Object getDocumentNode(final Object contextNode) {
-        if(contextNode instanceof XmlElement) {
+        if (contextNode instanceof XmlElement) {
             return ((DomNode) contextNode).getNativePage();
         }
         else {
