@@ -321,17 +321,17 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the job
      */
     private static JavaScriptBackgroundJob createJavaScriptBackgroundJob(final Object codeToExec,
-            final int timeout, final Window thisWindow, final boolean loopForever) {
+            final int timeout, final Window thisWindow, final boolean loopForever, final String label) {
         if (codeToExec == null) {
             throw Context.reportRuntimeError("Function not provided");
         }
         else if (codeToExec instanceof String) {
             final String scriptString = (String) codeToExec;
-            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptString, loopForever);
+            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptString, loopForever, label);
         }
         else if (codeToExec instanceof Function) {
             final Function scriptFunction = (Function) codeToExec;
-            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptFunction, loopForever);
+            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptFunction, loopForever, label);
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function");
@@ -357,7 +357,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final Window thisWindow = (Window) scriptable;
         final Object codeToExec = getObjectArg(0, args, null);
         final int timeout = getIntArg(1, args, 0);
-        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, false);
+        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, false, "setTimeout");
         final int id = thisWindow.getWebWindow().getThreadManager().startThread(job, "window.setTimeout");
         return id;
     }
@@ -971,7 +971,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final Object codeToExec = getObjectArg(0, args, null);
         final int timeout = getIntArg(1, args, 0);
 
-        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, true);
+        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, true, "setInterval");
         final int id = thisWindow.getWebWindow().getThreadManager().startThread(job, "window.setInterval");
         return id;
     }

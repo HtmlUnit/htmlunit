@@ -62,23 +62,26 @@ class JavaScriptBackgroundJob implements Runnable {
     private final String script_;
     private final boolean loopForever_;
     private final Function function_;
+    private final String label_;
 
     JavaScriptBackgroundJob(final Window window, final int timeout, final String script,
-            final boolean loopForever) {
+            final boolean loopForever, final String label) {
         window_ = window;
         timeout_ = timeout;
         loopForever_ = loopForever;
         script_ = script;
         function_ = null;
+        label_ = label;
     }
     
     JavaScriptBackgroundJob(final Window window, final int timeout, final Function function,
-            final boolean loopForever) {
+            final boolean loopForever, final String label) {
         window_ = window;
         timeout_ = timeout;
         loopForever_ = loopForever;
         script_ = null;
         function_ = function;
+        label_ = label;
     }
     
     public void run() {
@@ -86,12 +89,14 @@ class JavaScriptBackgroundJob implements Runnable {
         try {
             do {
                 Thread.sleep(timeout_);
+                String message = "Executing JavaScriptBackgroundJob (" + label_ + "):";
                 if (function_ == null) {
-                    getLog().debug("Executing JavaScriptBackgroundJob: " + script_);
+                    message += script_;
                 }
                 else {
-                    getLog().debug("Executing JavaScriptBackgroundJob: (function reference) ");
+                    message += "(function reference)";
                 }
+                getLog().debug(message);
 
                 final WebWindow webWindow = window_.getWebWindow();
                 // test that the window is always opened and the page the same
