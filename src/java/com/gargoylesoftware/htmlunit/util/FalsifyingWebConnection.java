@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebResponseImpl;
 /**
  * Extension of {@link WebConnectionWrapper} providing facility methods to deliver something else than
  * what the wrapped connection would deliver.
- * @version $Revision: 1592 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public abstract class FalsifyingWebConnection extends WebConnectionWrapper {

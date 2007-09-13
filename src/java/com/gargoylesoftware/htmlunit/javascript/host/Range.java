@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://www.xulplanet.com/references/objref/Range.html">XULPlanet</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html">
  * DOM-Level-2-Traversal-Range</a>
- * @version $Revision: 1615 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class Range extends SimpleScriptable {

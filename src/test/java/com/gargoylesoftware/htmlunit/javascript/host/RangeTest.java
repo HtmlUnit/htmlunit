@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link Range}.
  *
- * @version $Revision: 1800 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class RangeTest extends WebTestCase {
