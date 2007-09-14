@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -47,6 +46,7 @@ import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
@@ -97,7 +97,8 @@ public class XMLDocument extends Document {
             getLog().debug("XMLDocument.load(): 'async' is true, currently treated as false.");
         }
         try {
-            final WebRequestSettings settings = new WebRequestSettings(new URL(xmlSrouce));
+            final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+            final WebRequestSettings settings = new WebRequestSettings(htmlPage.getFullyQualifiedUrl(xmlSrouce));
             final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
             setDomNode(page);

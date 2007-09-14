@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,6 +138,60 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testLoad_relativeURL() throws Exception {
+        testLoad_relativeURL(BrowserVersion.INTERNET_EXPLORER_7_0,
+                new String[] {"true", "books", "books", "1", "book"});
+        testLoad_relativeURL(BrowserVersion.FIREFOX_2,
+                new String[] {"true", "books", "books", "3", "#text"});
+    }
+    
+    private void testLoad_relativeURL(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final URL firstURL = new URL("http://htmlunit/first.html");
+        final URL secondURL = new URL("http://htmlunit/second.xml");
+        
+        final String firstContent = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    alert(doc.load('" + "second.xml" + "'));\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "    alert(doc.childNodes[0].nodeName);\n"
+            + "    alert(doc.childNodes[0].childNodes.length);\n"
+            + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String secondContent
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient(browserVersion);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(firstURL, firstContent);
+        conn.setResponse(secondURL, secondContent, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(firstURL);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
