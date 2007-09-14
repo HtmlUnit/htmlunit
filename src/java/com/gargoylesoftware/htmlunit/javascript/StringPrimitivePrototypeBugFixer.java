@@ -54,6 +54,7 @@ import org.mozilla.javascript.ScriptableObject;
  * a custom prototype is placed on the String object. It wraps the original one and fix bad scope resolution
  * when needed. For this purpose it needs to change the visibility of some Rhino private members to
  * access them and is likely to get broken on Rhino version updates.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */

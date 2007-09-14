@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 /**
  * This is a java object that is used to test the active x binding to java objects.
+ *
  * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */

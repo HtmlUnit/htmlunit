@@ -70,7 +70,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * <br>
  * This class (like all classes in this package) is specific for the javascript engine.
  * Users of HtmlUnit shouldn't use it directly.
- * 
+ *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot

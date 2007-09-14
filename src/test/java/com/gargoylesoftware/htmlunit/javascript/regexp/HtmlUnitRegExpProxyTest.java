@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour

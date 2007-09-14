@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
 
 /**
  * The web window for a frame or iframe.
+ *
  * @version $Revision$
  * @author Brad Clarke
  */

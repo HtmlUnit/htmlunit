@@ -42,6 +42,7 @@ import java.util.List;
 
 /**
  * Tests for {@link ScriptFilter}.
+ *
  * @version $Revision$
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
  */

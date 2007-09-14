@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * A basic class to be implemented by {@link HtmlPage} and {@link XmlPage}.
+ *
  * @version $Revision$
  * @author Ahmed Ashour
  */

@@ -53,6 +53,7 @@ import org.mozilla.javascript.regexp.RegExpImpl;
 
 /**
  * Begins customization of JavaScript RegExp base on JDK regular expression support.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour

@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Test class for {@link HTMLParser}.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */

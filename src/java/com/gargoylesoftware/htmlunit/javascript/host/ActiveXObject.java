@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * constructor. This host object enables a person to emulate ActiveXObjects in javascript with java
  * objects. See the <code>WebClient</code> class to see how ActiveXObject string parameter specifies
  * which java class is instantiated.
+ *
  * @see com.gargoylesoftware.htmlunit.WebClient
  * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>

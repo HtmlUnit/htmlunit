@@ -51,6 +51,7 @@ import org.jaxen.function.StringFunction;
  * This class will be removed as soon as we use Jaxen >= 1.1 because it already contains
  * a LowerFunction class doing the same job. This class is therefore not intended for
  * public use.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  */
