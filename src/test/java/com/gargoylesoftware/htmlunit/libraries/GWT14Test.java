@@ -61,8 +61,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.html.UnknownHtmlElement;
 
 /**
  * Tests for 1.4 version of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
@@ -103,8 +105,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testI18N() throws Exception {
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
         testI18N(page, "numberFormatOutputText", "31,415,926,535.898");
         String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
@@ -131,9 +132,7 @@ public class GWT14Test extends WebTestCase {
      */
     public void testI18N_fr() throws Exception {
         httpServer_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
-        final List collectedAlerts = new ArrayList();
         final WebClient client = new WebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/I18N.html?locale=fr";
         final HtmlPage page = (HtmlPage) client.getPage(url);
@@ -193,8 +192,18 @@ public class GWT14Test extends WebTestCase {
         final Object child = cell.getFirstDomChild();
         if (child instanceof HtmlDivision) {
             final HtmlDivision div = (HtmlDivision) child;
-            final DomText text = (DomText) div.getFirstDomChild();
-            assertEquals(expectedValue, text.getData());
+            DomNode firstChild = div.getFirstDomChild();
+            if (firstChild instanceof UnknownHtmlElement
+                    && (firstChild.getNodeName().equals("b") || firstChild.getNodeName().equals("i"))) {
+                firstChild = firstChild.getFirstDomChild();
+            }
+            if (firstChild instanceof DomText) {
+                final DomText text = (DomText) firstChild;
+                assertEquals(expectedValue, text.getData());
+            }
+            else {
+                fail("Could not find '" + expectedValue + "'");
+            }
         }
         else if (child instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) child;
@@ -254,20 +263,18 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * It seems to be related to {@link XMLHttpRequest}.
      * @throws Exception If an error occurs.
      */
     public void testSimpleXML() throws Exception {
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
 
-        //try 10 times to wait 1 second each for filling the page.
-        for (int i = 0; i < 10; i++) {
+        //try 20 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 20; i++) {
             if (!page.getByXPath("//table").isEmpty()) {
                 break;
             }
             synchronized (page) {
-                page.wait(1000);
+                page.wait(500);
             }
         }
         
@@ -282,6 +289,56 @@ public class GWT14Test extends WebTestCase {
         }
     }
 
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testMail() throws Exception {
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
+        final HtmlTableDataCell cell = (HtmlTableDataCell)
+            page.getByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..").get(0);
+        testTableDataCell(cell, "Welcome back, foo@example.com");
+
+        final String[] selectedRow = {"markboland05", "mark@example.com", "URGENT -[Mon, 24 Apr 2006 02:17:27 +0000]"};
+
+        final List selectedRowCells = page.getByXPath("//tr[@class='mail-SelectedRow']/td");
+        assertEquals(selectedRow.length, selectedRowCells.size());
+        for (int i = 0; i < selectedRow.length; i++) {
+            final HtmlTableDataCell selectedRowCell = (HtmlTableDataCell) selectedRowCells.get(i);
+            testTableDataCell(selectedRowCell, selectedRow[i]);
+        }
+        
+        final List detailsCells = page.getByXPath("//div[@class='mail-DetailBody']/text()");
+        final String[] details = {"Dear Friend,",
+            "I am Mr. Mark Boland the Bank Manager of ABN AMRO BANK 101 Moorgate, London, EC2M 6SB."};
+        for (int i = 0; i < details.length; i++) {
+            final DomText text = (DomText) detailsCells.get(i);
+            assertEquals(details[i], text.getData());
+        }
+    }
+
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testJSON() throws Exception {
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
+        final HtmlButton button = (HtmlButton) page.getByXPath("//button").get(0);
+        button.click();
+
+        //try 20 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 20; i++) {
+            if (!page.getByXPath("//div[@class='JSON-JSONResponseObject']").isEmpty()) {
+                break;
+            }
+            synchronized (page) {
+                page.wait(500);
+            }
+        }
+        
+        final HtmlSpan span = (HtmlSpan)
+            page.getByXPath("//div[@class='JSON-JSONResponseObject']/span/div/table//td[2]/span/span").get(0);
+        assertEquals("ResultSet", span.getFirstDomChild().getNodeValue());
+    }
+    
     /**
      * Returns the GWT directory being tested.
      * @return the GWT directory being tested.
@@ -305,7 +362,9 @@ public class GWT14Test extends WebTestCase {
         assertNotNull(url);
 
         final WebClient client = new WebClient(version);
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        if (collectedAlerts != null) {
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        }
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
