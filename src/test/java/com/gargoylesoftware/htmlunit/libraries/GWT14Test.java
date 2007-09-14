@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.html.UnknownHtmlElement;
  */
 public class GWT14Test extends WebTestCase {
 
-    private Server httpServer_;
+    private Server server_;
     
     /**
      * Creates an instance.
@@ -131,7 +131,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testI18N_fr() throws Exception {
-        httpServer_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
         final WebClient client = new WebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/I18N.html?locale=fr";
@@ -377,8 +377,8 @@ public class GWT14Test extends WebTestCase {
      */
     protected void tearDown() throws Exception {
         super.tearDown();
-        HttpWebConnectionTest.stopWebServer(httpServer_);
-        httpServer_ = null;
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
     }
 
 }

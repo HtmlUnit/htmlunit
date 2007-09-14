@@ -242,6 +242,6 @@ JUnit results available here: ${test.reports.dir}/index.html
 	</target>
 
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="cruise" depends="initialize,cruise-set-jar-suffix,jar" description="Called by Cruise Control during a build">
+	<target name="cruise" depends="cruise-set-jar-suffix,jar" description="Called by Cruise Control during a build">
 	</target>
 </project>

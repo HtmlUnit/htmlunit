@@ -73,7 +73,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      */
     public static final int PORT = 12345;
     
-    private Server httpServer_;
+    private Server server_;
 
     /**
      * Assert that the two byte arrays are equal
@@ -252,7 +252,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception on failure
      */
     public void testJettyProofOfConcept() throws Exception {
-        httpServer_ = startWebServer("./");
+        server_ = startWebServer("./");
 
         final WebClient client = new WebClient();
         final Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
@@ -264,7 +264,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
                 "HttpWebConnection should be the default",
                 defaultConnection,
                 HttpWebConnection.class);
-        assertInstanceOf("Response should be (mostly) valid HTML", page, HtmlPage.class);
+        assertInstanceOf("Response should be valid HTML", page, HtmlPage.class);
 
     }
 
@@ -314,8 +314,8 @@ public class HttpWebConnectionTest extends BaseTestCase {
      */
     protected void tearDown() throws Exception {
         super.tearDown();
-        stopWebServer(httpServer_);
-        httpServer_ = null;
+        stopWebServer(server_);
+        server_ = null;
     }
 
     /**
@@ -323,7 +323,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception if the test fails
      */
     public void testDesignedForExtension() throws Exception {
-        httpServer_ = startWebServer("./");
+        server_ = startWebServer("./");
 
         final WebClient webClient = new WebClient();
         final boolean[] tabCalled = {false};
@@ -336,7 +336,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
 
         webClient.setWebConnection(myWebConnection);
         webClient.getPage("http://localhost:" + PORT + "/README");
-        assertTrue("createHttpClient as not been called", tabCalled[0]);
+        assertTrue("createHttpClient has not been called", tabCalled[0]);
     }
 
     /**
