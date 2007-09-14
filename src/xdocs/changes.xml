@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="fix" dev="asashour">
+                JavaScript: XMLDocument should not ignore descendants non-empty DomText in IE.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: loadXML() supports relative URLs in ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE only).
             </action>
             <action type="add" dev="asashour">

@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * <br>
  * This class (like all classes in this package) is specific for the javascript engine.
  * Users of HtmlUnit shouldn't use it directly.
+ * 
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
@@ -204,7 +205,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                 cachedElements_ = xpath_.selectNodes(node_);
                 boolean isXmlPage = false;
 
-                //TODO: should be replaced by "getPage() instaceof XmlPage"
+                //TODO: should be replaced by "getPage() instanceof XmlPage"
                 for (DomNode parent = node_; parent != null; parent = parent.getParentDomNode()) {
                     if (parent instanceof XmlPage) {
                         isXmlPage = true;
@@ -215,8 +216,10 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
                 for (int i = 0; i < cachedElements_.size(); i++) {
                     final DomNode element = (DomNode) cachedElements_.get(i);
-                    //IE: XmlPage ignores all text nodes
-                    if (isIE && isXmlPage && element instanceof DomText) {
+                    
+                    //IE: XmlPage ignores all empty text nodes
+                    if (isIE && isXmlPage && element instanceof DomText
+                            && ((DomText) element).getNodeValue().trim().length() == 0) {
                         cachedElements_.remove(i--);
                         continue;
                     }
