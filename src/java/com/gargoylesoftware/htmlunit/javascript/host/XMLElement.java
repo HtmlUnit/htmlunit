@@ -46,6 +46,7 @@ import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeArray;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
@@ -95,5 +96,29 @@ public class XMLElement extends NodeImpl {
             list.add(attr.getScriptObject());
         }
         return new NativeArray(list.toArray());
+    }
+
+    /**
+     * Gets the specified attribute.
+     * @param attributeName attribute name.
+     * @return The value of the specified attribute, <code>null</code> if the attribute is not defined.
+     */
+    public String jsxFunction_getAttribute(final String attributeName) {
+        final String value = ((XmlElement) getDomNodeOrDie()).getAttributeValue(attributeName);
+        if (value == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            return null;
+        }
+        else {
+            return value;
+        }
+    }
+    /**
+     * Set an attribute.
+     *
+     * @param name Name of the attribute to set.
+     * @param value Value to set the attribute to.
+     */
+    public void jsxFunction_setAttribute(final String name, final String value) {
+        ((XmlElement) getDomNodeOrDie()).setAttributeValue(name, value);
     }
 }

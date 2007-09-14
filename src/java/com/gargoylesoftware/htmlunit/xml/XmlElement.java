@@ -37,8 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.apache.commons.collections.map.ListOrderedMap;
 
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
 
@@ -52,6 +56,9 @@ public class XmlElement extends DomNamespaceNode {
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
+
+    /** The map holding the namespaces, keyed by URI. */
+    private Map namespaces_ = new HashMap();
 
     /** The map holding the attributes, keyed by name. */
     private Map/* String, XmlAttr*/ attributes_;
@@ -126,4 +133,122 @@ public class XmlElement extends DomNamespaceNode {
     public Map getAttributes() {
         return attributes_;
     }
+    /**
+     * Set the value of the attribute specified by name.
+     *
+     * @param attributeName the name of the attribute
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttribute(final String attributeName, final String attributeValue) {
+        setAttributeValue(null, attributeName, attributeValue);
+    }
+
+    /**
+     * Set the value of the attribute specified by namespace and qualified name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name (prefix:local) of the attribute.
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttributeNS(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
+        setAttributeValue(namespaceURI, qualifiedName, attributeValue);
+    }
+
+    /**
+     * Set the value of the specified attribute.
+     *
+     * @param attributeName the name of the attribute
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttributeValue(final String attributeName, final String attributeValue) {
+        setAttributeValue(null, attributeName, attributeValue);
+    }
+
+    /**
+     * Set the value of the specified attribute.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the attribute
+     * @param attributeValue The value of the attribute
+     */
+    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
+        final String value = attributeValue;
+
+        if (attributes_ == Collections.EMPTY_MAP) {
+            attributes_ = createAttributeMap(1);
+        }
+        final XmlAttr newAttr = addAttributeToMap((XmlPage) getNativePage(), attributes_, namespaceURI,
+            qualifiedName, value);
+        if (namespaceURI != null) {
+            namespaces_.put(namespaceURI, newAttr.getPrefix());
+        }
+        attributes_.put(newAttr.getName(), newAttr);
+    }
+
+    /**
+     * Removes an attribute specified by name from this element.
+     * @param attributeName the attribute attributeName
+     */
+    public final void removeAttribute(final String attributeName) {
+        attributes_.remove(attributeName.toLowerCase());
+    }
+
+    /**
+     * Removes an attribute specified by namespace and local name from this element.
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param localName The name within the namespace.
+     */
+    public final void removeAttributeNS(final String namespaceURI, final String localName) {
+        removeAttribute(getQualifiedName(namespaceURI, localName));
+    }
+
+    /**
+     * Return the qualified name (prefix:local) for the namespace and local name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param localName The name within the namespace.
+     * @return The qualified name or just local name if the namespace is not fully defined.
+     */
+    private String getQualifiedName(final String namespaceURI, final String localName) {
+        final String qualifiedName;
+        if (namespaceURI != null) {
+            final String prefix = (String) namespaces_.get(namespaceURI);
+            if (prefix != null) {
+                qualifiedName = prefix + ':' + localName;
+            }
+            else {
+                qualifiedName = localName;
+            }
+        }
+        else {
+            qualifiedName = localName;
+        }
+        return qualifiedName;
+    }
+
+    /**
+     * Create an attribute map as needed by HtmlElement.  This is just used by the element factories.
+     * @param attributeCount the initial number of attributes to be added to the map.
+     * @return the attribute map.
+     */
+    static Map createAttributeMap(final int attributeCount) {
+        return ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
+    }
+
+    /**
+     * Add an attribute to the attribute map.  This is just used by the element factories.
+     * @param attributeMap the attribute map where the attribute will be added.
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the attribute
+     * @param value The value of the attribute
+     */
+    static XmlAttr addAttributeToMap(final XmlPage page, final Map attributeMap,
+            final String namespaceURI, final String qualifiedName, final String value) {
+        final XmlAttr newAttr = new XmlAttr(page, namespaceURI, qualifiedName, value);
+        attributeMap.put(qualifiedName, newAttr);
+        return newAttr;
+    }
+
 }

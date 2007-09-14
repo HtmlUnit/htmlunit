@@ -339,7 +339,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Gets the specified property.
+     * Gets the specified attribute.
      * @param attributeName attribute name.
      * @return The value of the specified attribute, <code>null</code> if the attribute is not defined
      */

@@ -14,7 +14,7 @@
                 JavaScript: loadXML() supports relative URLs in ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE only).
             </action>
             <action type="add" dev="asashour">
-                JavaScript: add basic support for attributes of XML elements.
+                Add basic support for attributes of XML elements.
             </action>
             <action type="add" dev="mguillem">
                 Added FalsifyingWebConnection, a WebConnection wrapper that provides facility methods to
