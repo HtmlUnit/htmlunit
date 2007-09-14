@@ -1,0 +1,12 @@
+com.google.gwt.sample.dynatable.client.Person, false
+[Lcom.google.gwt.sample.dynatable.client.Person;, true
+com.google.gwt.sample.dynatable.client.Professor, true
+[Lcom.google.gwt.sample.dynatable.client.Professor;, true
+com.google.gwt.sample.dynatable.client.Schedule, true
+com.google.gwt.sample.dynatable.client.Student, true
+[Lcom.google.gwt.sample.dynatable.client.Student;, true
+com.google.gwt.sample.dynatable.client.TimeSlot, true
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true
+java.lang.String, true
+java.util.ArrayList, true
+java.util.Vector, true
