@@ -177,8 +177,19 @@ public class GWT14Test extends WebTestCase {
      * @param expectedValue Expected value of the value inside the element
      * @throws Exception If the test fails.
      */
-    private void testI18N(final HtmlPage page, final String id, final String expectedValue) throws Exception {
+    private void testI18N(final HtmlPage page, final String id, final String expectedValue) {
         final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
+        testTableDataCell(cell, expectedValue);
+    }
+
+    /**
+     * Test value inside {@link HtmlDivision}, {@link HtmlInput} or {@link DomText}
+     *
+     * @param cell the cells to search in.
+     * @param expectedValue Expected value of the value inside the cell
+     * @throws Exception If the test fails.
+     */
+    private void testTableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
         final Object child = cell.getFirstDomChild();
         if (child instanceof HtmlDivision) {
             final HtmlDivision div = (HtmlDivision) child;
@@ -189,8 +200,15 @@ public class GWT14Test extends WebTestCase {
             final HtmlInput input = (HtmlInput) child;
             assertEquals(expectedValue, input.getValueAttribute());
         }
+        else if (child instanceof DomText) {
+            final DomText text = (DomText) child;
+            assertEquals(expectedValue, text.getData());
+        }
+        else {
+            fail("Could not find '" + expectedValue + "'");
+        }
     }
-
+    
     /**
      * Test value of {@link HtmlSelect}
      *
@@ -208,6 +226,9 @@ public class GWT14Test extends WebTestCase {
             for (int i = 0; i < expectedValues.length; i++) {
                 assertEquals(expectedValues[i], select.getOption(i).getFirstDomChild().getNodeValue());
             }
+        }
+        else {
+            fail("Could not find '" + expectedValues + "'");
         }
     }
 
@@ -237,12 +258,28 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testSimpleXML() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
-        assertFalse(page.getByXPath("//table").isEmpty());
+
+        //try 10 times to wait 1 second each for filling the page.
+        for (int i = 0; i < 10; i++) {
+            if (!page.getByXPath("//table").isEmpty()) {
+                break;
+            }
+            synchronized (page) {
+                page.wait(1000);
+            }
+        }
+        
+        final String[] pendingOrders =
+        {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
+
+        final List cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
+        assertEquals(pendingOrders.length, cells.size());
+        for (int i = 0; i < pendingOrders.length; i++) {
+            final HtmlTableDataCell cell = (HtmlTableDataCell) cells.get(i);
+            testTableDataCell(cell, pendingOrders[i]);
+        }
     }
 
     /**
