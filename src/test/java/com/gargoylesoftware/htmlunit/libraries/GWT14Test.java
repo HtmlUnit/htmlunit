@@ -268,19 +268,20 @@ public class GWT14Test extends WebTestCase {
     public void testSimpleXML() throws Exception {
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
 
-        //try 60 times to wait 1 second each for filling the page.
-        for (int i = 0; i < 60; i++) {
-            if (!page.getByXPath("//table").isEmpty()) {
-                break;
-            }
-            synchronized (page) {
-                page.wait(1000);
-            }
-        }
-        
         final String[] pendingOrders =
         {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
 
+
+        //try 20 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 20; i++) {
+            if (page.getByXPath("//table[@class='userTable'][1]//tr[2]/td").size() == pendingOrders.length) {
+                break;
+            }
+            synchronized (page) {
+                page.wait(500);
+            }
+        }
+        
         final List cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
         assertEquals(pendingOrders.length, cells.size());
         for (int i = 0; i < pendingOrders.length; i++) {
