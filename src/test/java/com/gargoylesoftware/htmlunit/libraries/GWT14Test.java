@@ -268,13 +268,13 @@ public class GWT14Test extends WebTestCase {
     public void testSimpleXML() throws Exception {
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
 
-        //try 20 times to wait .5 second each for filling the page.
-        for (int i = 0; i < 20; i++) {
+        //try 10 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 10; i++) {
             if (!page.getByXPath("//table").isEmpty()) {
                 break;
             }
             synchronized (page) {
-                page.wait(500);
+                page.wait(1000);
             }
         }
         
