@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.mortbay.http.HttpServer;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.html.UnknownHtmlElement;
  */
 public class GWT14Test extends WebTestCase {
 
-    private HttpServer httpServer_;
+    private Server httpServer_;
     
     /**
      * Creates an instance.

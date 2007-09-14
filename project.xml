@@ -380,15 +380,27 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>jetty</groupId>
-            <artifactId>org.mortbay.jetty</artifactId>
-            <version>5.1.4</version>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty</artifactId>
+            <version>6.1.5</version>
             <type>jar</type>
-            <url>http://jetty.mortbay.org/jetty/</url>
+            <url>http://jetty.mortbay.org</url>
             <properties>
 				<scope>test</scope>
                 <htmlunit.group>test</htmlunit.group>
                 <htmlunit.description>Jetty</htmlunit.description>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>6.1.5</version>
+            <type>jar</type>
+            <url>http://jetty.mortbay.org</url>
+            <properties>
+				<scope>test</scope>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Jetty Util</htmlunit.description>
             </properties>
         </dependency>
         <dependency>
@@ -400,7 +412,7 @@
             <properties>
 				<scope>test</scope>
                 <htmlunit.group>test</htmlunit.group>
-                <htmlunit.description>Jetty</htmlunit.description>
+                <htmlunit.description>Java Servlet API</htmlunit.description>
             </properties>
         </dependency>
     </dependencies>

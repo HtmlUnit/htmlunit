@@ -330,9 +330,15 @@ The reference stays the maven 1 build.
 			<version>1.3.1</version>
 		</dependency>
 		<dependency>
-			<groupId>jetty</groupId>
-			<artifactId>org.mortbay.jetty</artifactId>
-			<version>5.1.4</version>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty</artifactId>
+            <version>6.1.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>6.1.5</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

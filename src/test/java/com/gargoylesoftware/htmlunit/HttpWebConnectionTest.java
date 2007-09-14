@@ -49,10 +49,11 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.mortbay.http.HttpContext;
-import org.mortbay.http.HttpServer;
-import org.mortbay.http.SocketListener;
-import org.mortbay.http.handler.ResourceHandler;
+import org.mortbay.jetty.Handler;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.handler.HandlerList;
+import org.mortbay.jetty.handler.ResourceHandler;
+import org.mortbay.jetty.servlet.Context;
 
 import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -72,7 +73,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      */
     public static final int PORT = 12345;
     
-    private HttpServer httpServer_;
+    private Server httpServer_;
 
     /**
      * Assert that the two byte arrays are equal
@@ -254,7 +255,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         httpServer_ = startWebServer("./");
 
         final WebClient client = new WebClient();
-        final Page page = client.getPage("http://localhost:" + PORT);
+        final Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
         final WebConnection defaultConnection = page
                 .getEnclosingWindow()
                 .getWebClient()
@@ -276,21 +277,23 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @return the started web server.
      * @throws Exception If the test fails.
      */
-    public static HttpServer startWebServer(final String resouceBase) throws Exception {
-        final HttpServer httpServer = new HttpServer();
+    public static Server startWebServer(final String resouceBase) throws Exception {
+        final Server server = new Server(PORT);
 
-        final SocketListener listener = new SocketListener();
-        listener.setPort(PORT);
-        httpServer.addListener(listener);
-
-        final HttpContext context = new HttpContext();
+        final Context context = new Context();
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
-        context.addHandler(new ResourceHandler());
-        httpServer.addContext(context);
+        
+        final ResourceHandler resourceHandler = new ResourceHandler();
+        resourceHandler.setResourceBase(resouceBase);
 
-        httpServer.start();
-        return httpServer;
+        final HandlerList handlers = new HandlerList();
+        handlers.setHandlers(new Handler[]{resourceHandler, context});
+        server.setHandler(handlers);
+        server.setHandler(resourceHandler);
+        
+        server.start();
+        return server;
     }
 
     /**
@@ -299,7 +302,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @param httpServer the web server.
      * @throws Exception If the test fails.
      */
-    public static void stopWebServer(final HttpServer httpServer) throws Exception {
+    public static void stopWebServer(final Server httpServer) throws Exception {
         if (httpServer != null) {
             httpServer.stop();
         }
@@ -332,7 +335,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         };
 
         webClient.setWebConnection(myWebConnection);
-        webClient.getPage("http://localhost:" + PORT);
+        webClient.getPage("http://localhost:" + PORT + "/README");
         assertTrue("createHttpClient as not been called", tabCalled[0]);
     }
 

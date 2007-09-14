@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                Upgrade Jetty to 6.1.5.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: XMLDocument should not ignore descendants non-empty DomText in IE.
             </action>
