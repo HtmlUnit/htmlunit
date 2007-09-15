@@ -144,7 +144,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "        else if (window.ActiveXObject)\n"
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "        alert(request.readyState);\n"
-            + "        request.open('GET', '" + URL_SECOND.toExternalForm() + "', false);\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        alert(request.readyState);\n"
             + "        request.send('');\n"
             + "        alert(request.readyState);\n"
@@ -198,7 +198,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
             + "        alert(request.readyState);\n"
-            + "        request.open('GET', '" + URL_SECOND.toExternalForm() + "', true);\n"
+            + "        request.open('GET', '" + URL_SECOND + "', true);\n"
             + "        request.send('');\n"
             + "      }\n"
             + "      function onReadyStateChange() {\n"
@@ -272,7 +272,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
         webConnection.setResponse(urlPage2, xml, "text/xml");
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
@@ -307,7 +307,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.txt");
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.txt");
         webConnection.setResponse(urlPage2, "bla bla", "text/plain");
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
@@ -352,7 +352,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
         webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
                 "text/xml");
         client.setWebConnection(webConnection);
@@ -495,7 +495,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
-        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml.txt");
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml.txt");
         webConnection.setResponse(urlPage2, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
                 "text/plain");
         client.setWebConnection(webConnection);
@@ -534,14 +534,14 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "        else if (window.ActiveXObject)\n"
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
-            + "        request.open('GET', '" + URL_SECOND.toExternalForm() + "', false);\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "      }\n"
             + "      function onReadyStateChange() {\n"
             + "        if (request.readyState == 4){\n"
             + "          var theXML = request.responseXML;\n"
             + "          var theDoc = theXML.documentElement;\n"
-            + "          var theElements = theDoc.getElementsByTagName(\"update\");\n"
+            + "          var theElements = theDoc.getElementsByTagName('update');\n"
             + "          var theUpdate = theElements[0];\n"
             + "          var theData = theUpdate.firstChild.data;\n"
             + "          theResult = theData.replace('a','i');\n"
@@ -663,7 +663,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             }
         };
         webConnection.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
         webConnection.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
@@ -699,7 +699,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
         webConnection.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
@@ -767,7 +767,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST.toExternalForm() + "/foo.xml");
+        final URL urlPage2 = new URL(URL_FIRST + "/foo.xml");
         webConnection.setResponse(urlPage2, "<foo/>\n", "text/xml");
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
@@ -777,4 +777,51 @@ public class XMLHttpRequestTest extends WebTestCase {
         assertEquals(method, settings.getSubmitMethod());
     }
 
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testResponseXML_selectNodesIE() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "        alert(request.responseXML.selectNodes('//content').length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "</xml>\n";
+
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        final String[] alerts = {"2"};
+        assertEquals(alerts, collectedAlerts);
+    }
 }
