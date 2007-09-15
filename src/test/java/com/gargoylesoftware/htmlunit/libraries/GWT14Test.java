@@ -355,10 +355,14 @@ public class GWT14Test extends WebTestCase {
         final String[] firstRow = {"Inman Mendez",
             "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
 
-        //try 20 times to wait .5 second each for filling the page.
-        for (int i = 0; i < 20; i++) {
-            if (page.getByXPath("//table[@class='table']//tr[2]/td").size() == firstRow.length) {
-                break;
+        //try 40 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 40; i++) {
+            final List detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
+            if (detailsCells.size() == firstRow.length) {
+                final HtmlTableDataCell firstCell = (HtmlTableDataCell) detailsCells.get(0);
+                if (firstCell.getFirstDomChild().getNodeValue().equals(firstRow[0])) {
+                    break;
+                }
             }
             synchronized (page) {
                 page.wait(500);
