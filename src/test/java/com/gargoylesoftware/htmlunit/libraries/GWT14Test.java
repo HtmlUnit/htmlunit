@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -377,6 +378,27 @@ public class GWT14Test extends WebTestCase {
         }
     }
 
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testKitchenSink() throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/KitchenSink");
+        final WebClient client = new WebClient();
+
+        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/KitchenSink.html";
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+        page.getEnclosingWindow().getThreadManager().joinAll(3000);
+
+        HtmlDivision infoDiv = (HtmlDivision) page.getByXPath("//div[@class='ks-Info']").get(0);
+        assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
+
+        final HtmlAnchor widgetAnchor = page.getAnchorByHref("#Widgets");
+        widgetAnchor.click();
+
+        infoDiv = (HtmlDivision) page.getByXPath("//div[@class='ks-Info']").get(0);
+        assertEquals("Basic Widgets", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
+    }
+    
     /**
      * Returns the GWT directory being tested.
      * @return the GWT directory being tested.
