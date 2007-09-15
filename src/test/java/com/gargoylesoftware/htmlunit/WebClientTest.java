@@ -173,7 +173,7 @@ public class WebClientTest extends WebTestCase {
     public void testHtmlWindowEvents_opened() throws Exception {
         final String page1Content
             = "<html><head><title>foo</title>\n"
-            + "<script>window.open('" + URL_SECOND.toExternalForm() + "', 'myNewWindow')</script>\n"
+            + "<script>window.open('" + URL_SECOND + "', 'myNewWindow')</script>\n"
             + "</head><body>\n"
             + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
             + "</body></html>";

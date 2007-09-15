@@ -106,7 +106,7 @@ public class LocationTest extends WebTestCase {
             + "  <title>test1</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      document.location = '" + URL_SECOND.toExternalForm() + "';\n"
+            + "      document.location = '" + URL_SECOND + "';\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -381,7 +381,7 @@ public class LocationTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    location.replace('" + URL_SECOND.toExternalForm() + "');\n"
+            + "    location.replace('" + URL_SECOND + "');\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -407,7 +407,7 @@ public class LocationTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    location.assign('" + URL_SECOND.toExternalForm() + "');\n"
+            + "    location.assign('" + URL_SECOND + "');\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
@@ -502,7 +502,7 @@ public class LocationTest extends WebTestCase {
             + "<body></body></html>";
 
         webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "/foo.txt"), "bla bla", "text/plain");
+        webConnection.setResponse(new URL(URL_FIRST + "/foo.txt"), "bla bla", "text/plain");
         webClient.setWebConnection(webConnection);
 
         final Page page = webClient.getPage(URL_FIRST);

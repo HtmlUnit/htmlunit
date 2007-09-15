@@ -2191,7 +2191,7 @@ public class DocumentTest extends WebTestCase {
         final String[] expectedAlerts = {"foo", "foo2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final URL scriptUrl = new URL(URL_FIRST.toExternalForm() + "/script.js");
+        final URL scriptUrl = new URL(URL_FIRST + "/script.js");
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
         client.setWebConnection(webConnection);

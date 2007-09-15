@@ -1161,6 +1161,6 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(browserVersion, html, null);
         final HtmlSubmitInput submitInput = (HtmlSubmitInput) firstPage.getHtmlElementById("myButton");
         final HtmlPage secondPage = (HtmlPage) (submitInput).click();
-        assertEquals(URL_SECOND.toExternalForm() + "?Save=Submit+Query", secondPage.getWebResponse().getUrl());
+        assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getUrl());
     }
 }

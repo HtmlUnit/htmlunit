@@ -155,7 +155,7 @@ public class ThreadManagerTest extends WebTestCase {
     public void testNavigationStopThreadsInChildWindows() throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
-            + URL_SECOND.toExternalForm()
+            + URL_SECOND
             + "'>\n"
             + "<a href='"
             + URL_THIRD.toExternalForm()

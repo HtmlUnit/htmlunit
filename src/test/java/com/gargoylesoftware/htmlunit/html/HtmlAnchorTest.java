@@ -412,7 +412,7 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testCorrectLinkTargetWhenOnclickOpensWindow() throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<a href='"
-            + URL_SECOND.toExternalForm()
+            + URL_SECOND
             + "' id='clickme' onclick=\"window.open('', 'newWindow');\">X</a>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
