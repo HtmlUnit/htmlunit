@@ -83,6 +83,7 @@ public class XMLElementTest extends WebTestCase {
             + "    alert(root.getAttribute('attrName'));\n"
             + "    root.setAttribute('attrName', 'anotherValue');\n"
             + "    alert(root.getAttribute('attrName'));\n"
+            + "    alert(root.getElementsByTagName('book').length);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -101,7 +102,7 @@ public class XMLElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "anotherValue"};
+        final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "anotherValue", "1"};
         final List collectedAlerts = new ArrayList();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

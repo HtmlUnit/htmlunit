@@ -30,7 +30,7 @@
                 JavaScript: added Document.createRange() and basic support for Range (Firefox only).
             </action>
             <action type="add" dev="asashour">
-                JavaScript: add selectNodes() (IE only) and .tagName property for XML elements.
+                JavaScript: add selectNodes() (IE only), getElementsByTagName() and .tagName property for XML elements.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: add basic support of setProperty() function and .preserveWhiteSpace property for

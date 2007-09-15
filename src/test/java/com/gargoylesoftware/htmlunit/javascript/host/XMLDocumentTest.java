@@ -102,7 +102,7 @@ public class XMLDocumentTest extends WebTestCase {
     }
     
     private void testLoad(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
-        final String firstContent = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
@@ -121,7 +121,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         
-        final String secondContent
+        final String xml
             = "<books>\n"
             + "  <book>\n"
             + "    <title>Immortality</title>\n"
@@ -133,8 +133,8 @@ public class XMLDocumentTest extends WebTestCase {
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent, "text/xml");
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);

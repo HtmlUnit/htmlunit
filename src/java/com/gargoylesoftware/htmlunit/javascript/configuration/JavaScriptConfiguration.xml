@@ -1206,6 +1206,7 @@
         <property name="attributes" readable="true" writable="false"/>
         <property name="tagName" readable="true" writable="false"/>
         <function name="getAttribute"/>
+        <function name="getElementsByTagName"/>
         <function name="selectNodes">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
                     descr="MSDN documentation"/>

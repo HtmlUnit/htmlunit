@@ -46,6 +46,7 @@ import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeArray;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
@@ -120,5 +121,24 @@ public class XMLElement extends NodeImpl {
      */
     public void jsxFunction_setAttribute(final String name, final String value) {
         ((XmlElement) getDomNodeOrDie()).setAttributeValue(name, value);
+    }
+
+    /**
+     * Returns all the descendant elements with the specified tag name.
+     * @param tagName the name to search for
+     * @return all the descendant elements with the specified tag name
+     */
+    public Object jsxFunction_getElementsByTagName(final String tagName) {
+        final DomNode domNode = getDomNodeOrDie();
+        final HTMLCollection collection = new HTMLCollection(this);
+        try {
+            final String xpath = "//" + tagName;
+            collection.init(domNode, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(domNode)));
+        }
+        catch (final JaxenException e) {
+            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
+            throw Context.reportRuntimeError(msg + e.getMessage());
+        }
+        return collection;
     }
 }

@@ -426,11 +426,11 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @return all the descendant elements with the specified tag name
      */
     public Object jsxFunction_getElementsByTagName(final String tagName) {
-        final HtmlElement element = (HtmlElement) getDomNodeOrDie();
+        final DomNode node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
         try {
             final String xpath = "//" + tagName.toLowerCase();
-            collection.init(element, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(element)));
+            collection.init(node, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(node)));
         }
         catch (final JaxenException e) {
             final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
