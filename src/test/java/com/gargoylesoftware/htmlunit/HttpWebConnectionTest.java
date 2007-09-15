@@ -54,6 +54,8 @@ import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.HandlerList;
 import org.mortbay.jetty.handler.ResourceHandler;
 import org.mortbay.jetty.servlet.Context;
+import org.mortbay.jetty.webapp.WebAppClassLoader;
+import org.mortbay.jetty.webapp.WebAppContext;
 
 import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -292,6 +294,34 @@ public class HttpWebConnectionTest extends BaseTestCase {
         server.setHandler(handlers);
         server.setHandler(resourceHandler);
         
+        server.start();
+        return server;
+    }
+
+    /**
+     * Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resouceBase the base of resources for the default context.
+     * @param classpath additional classpath entries to add (may be null).
+     * @return the started web server.
+     * @throws Exception If the test fails.
+     */
+    public static Server startWebServer(final String resouceBase, final String[] classpath) throws Exception {
+        final Server server = new Server(PORT);
+
+        final WebAppContext context = new WebAppContext();
+        context.setContextPath("/");
+        context.setResourceBase(resouceBase);
+        final WebAppClassLoader loader = new WebAppClassLoader(context);
+        if (classpath != null) {
+            for (int i = 0; i < classpath.length; i++) {
+                loader.addClassPath(classpath[i]);
+            }
+        }
+        context.setClassLoader(loader);
+        server.setHandler(context);
         server.start();
         return server;
     }

@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.html.UnknownHtmlElement;
 public class GWT14Test extends WebTestCase {
 
     private Server server_;
-    
+
     /**
      * Creates an instance.
      *
@@ -111,7 +111,7 @@ public class GWT14Test extends WebTestCase {
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
         testI18N(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM GMT" + timeZone);
         testI18N(page, "messagesFormattedOutputText",
-                "User 'amelie' has security clearance 'guest' and cannot access '/secure/blueprints.xml'");
+            "User 'amelie' has security clearance 'guest' and cannot access '/secure/blueprints.xml'");
         testI18N(page, "constantsFirstNameText", "Amelie");
         testI18N(page, "constantsLastNameText", "Crutcher");
         testI18N(page, "constantsFavoriteColorList",
@@ -147,12 +147,12 @@ public class GWT14Test extends WebTestCase {
               output += value.charCodeAt(i) + ' ';
             }
            alert(output);
-        */
+         */
         testI18N(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
-        
+
         String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
-        
+
         testI18N(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00 h 00 GMT" + timeZone);
         testI18N(page, "messagesFormattedOutputText",
             "L'utilisateur 'amelie' a un niveau de securité 'guest', et ne peut accéder à '/secure/blueprints.xml'");
@@ -217,7 +217,7 @@ public class GWT14Test extends WebTestCase {
             fail("Could not find '" + expectedValue + "'");
         }
     }
-    
+
     /**
      * Test value of {@link HtmlSelect}
      *
@@ -251,11 +251,11 @@ public class GWT14Test extends WebTestCase {
         for (int i = 0; i < expectedMap.size(); i++) {
             final String header = headerNode.getFirstDomChild().getNodeValue();
             final String value = valueNode.getFirstDomChild().getNodeValue();
-            
+
             assertNotNull(expectedMap.get(header));
             assertEquals(expectedMap.get(header), value);
             foundHeaders.add(header);
-            
+
             valueNode = valueNode.getNextDomSibling();
             headerNode = headerNode.getNextDomSibling();
         }
@@ -281,7 +281,7 @@ public class GWT14Test extends WebTestCase {
                 page.wait(500);
             }
         }
-        
+
         final List cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
         assertEquals(pendingOrders.length, cells.size());
         for (int i = 0; i < pendingOrders.length; i++) {
@@ -307,7 +307,7 @@ public class GWT14Test extends WebTestCase {
             final HtmlTableDataCell selectedRowCell = (HtmlTableDataCell) selectedRowCells.get(i);
             testTableDataCell(selectedRowCell, selectedRow[i]);
         }
-        
+
         final List detailsCells = page.getByXPath("//div[@class='mail-DetailBody']/text()");
         final String[] details = {"Dear Friend,",
             "I am Mr. Mark Boland the Bank Manager of ABN AMRO BANK 101 Moorgate, London, EC2M 6SB."};
@@ -334,12 +334,44 @@ public class GWT14Test extends WebTestCase {
                 page.wait(500);
             }
         }
-        
+
         final HtmlSpan span = (HtmlSpan)
             page.getByXPath("//div[@class='JSON-JSONResponseObject']/span/div/table//td[2]/span/span").get(0);
         assertEquals("ResultSet", span.getFirstDomChild().getNodeValue());
     }
-    
+
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testDynaTable() throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
+                new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
+        final WebClient client = new WebClient();
+
+        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/DynaTable.html";
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+
+        final String[] firstRow = {"Inman Mendez",
+            "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
+
+        //try 20 times to wait .5 second each for filling the page.
+        for (int i = 0; i < 20; i++) {
+            if (page.getByXPath("//table[@class='table']//tr[2]/td").size() == firstRow.length) {
+                break;
+            }
+            synchronized (page) {
+                page.wait(500);
+            }
+        }
+
+        final List detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
+        assertEquals(firstRow.length, detailsCells.size());
+        for (int i = 0; i < firstRow.length; i++) {
+            final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);
+            testTableDataCell(cell, firstRow[i]);
+        }
+    }
+
     /**
      * Returns the GWT directory being tested.
      * @return the GWT directory being tested.

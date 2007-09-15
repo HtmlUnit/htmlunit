@@ -3,4 +3,5 @@ This directory contains the resources necessary to run the Google Web Toolkit un
 Each subdirectory corresponds to a specific version of GWT. Each of these subdirectories
 was created by downloading the distribution and copying the 'www' of sample directories.
 
-Notice that not all samples are included, because some samples require server-side implementation.
+Samples like 'DynaTable' require server-side implementation, so its folder is a complete web application,
+however gwt-user.jar is added at parent directory to be reused by different samples.
