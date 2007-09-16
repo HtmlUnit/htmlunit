@@ -195,7 +195,7 @@ public class Document extends NodeImpl {
         if (forms_ == null) {
             forms_ = new HTMLCollection(this);
             try {
-                forms_.init(getHtmlPage(), new HtmlUnitXPath("//form"));
+                forms_.init(getDomNodeOrDie(), new HtmlUnitXPath("//form"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection document.forms: " + e.getMessage());
@@ -214,8 +214,7 @@ public class Document extends NodeImpl {
         if (links_ == null) {
             links_ = new HTMLCollection(this);
             try {
-                links_.init(getHtmlPage(),
-                        new HtmlUnitXPath("//a[@href] | //area[@href]"));
+                links_.init(getDomNodeOrDie(), new HtmlUnitXPath("//a[@href] | //area[@href]"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection document.links: " + e.getMessage());
@@ -244,7 +243,7 @@ public class Document extends NodeImpl {
                     xpath = "//a[@name]";
                 }
 
-                anchors_.init(getHtmlPage(), new HtmlUnitXPath(xpath));
+                anchors_.init(getDomNodeOrDie(), new HtmlUnitXPath(xpath));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection document.anchors: " + e.getMessage());
@@ -580,7 +579,7 @@ public class Document extends NodeImpl {
         if (images_ == null) {
             images_ = new HTMLCollection(this);
             try {
-                images_.init(getHtmlPage(), new HtmlUnitXPath("//img"));
+                images_.init(getDomNodeOrDie(), new HtmlUnitXPath("//img"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection document.images: " + e.getMessage());
@@ -619,7 +618,7 @@ public class Document extends NodeImpl {
         if (all_ == null) {
             all_ = new HTMLCollection(this);
             try {
-                all_.init(getHtmlPage(), new HtmlUnitXPath("//*"));
+                all_.init(getDomNodeOrDie(), new HtmlUnitXPath("//*"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection document.all: " + e.getMessage());
@@ -897,7 +896,7 @@ public class Document extends NodeImpl {
         final HTMLCollection collection = new HTMLCollection(this);
         try {
             final String xpath = "//" + tagName.toLowerCase();
-            collection.init(getHtmlPage(), new HtmlUnitXPath(xpath));
+            collection.init(getDomNodeOrDie(), new HtmlUnitXPath(xpath));
         }
         catch (final JaxenException e) {
             final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
@@ -920,7 +919,7 @@ public class Document extends NodeImpl {
         final String exp = "//*[@name='" + elementName + "']";
         try {
             final HtmlUnitXPath xpath = new HtmlUnitXPath(exp);
-            collection.init(getHtmlPage(), xpath);
+            collection.init(getDomNodeOrDie(), xpath);
         }
         catch (final JaxenException e) {
             throw Context.reportRuntimeError(
@@ -1107,7 +1106,7 @@ public class Document extends NodeImpl {
         if (scripts_ == null) {
             scripts_ = new HTMLCollection(this);
             try {
-                scripts_.init(getHtmlPage(), new HtmlUnitXPath("//script"));
+                scripts_.init(getDomNodeOrDie(), new HtmlUnitXPath("//script"));
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection document.scripts: " + e.getMessage());
