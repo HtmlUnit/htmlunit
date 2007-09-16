@@ -189,6 +189,7 @@ public class ActiveXObject extends SimpleScriptable {
         // the functions
         addFunction(document, "load");
         addFunction(document, "loadXML");
+        addFunction(document, "selectNodes");
         addFunction(document, "setProperty");
 
         final JavaScriptConfiguration jsConfig =

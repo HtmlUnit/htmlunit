@@ -114,4 +114,57 @@ public class XMLElementTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSelectNodes() throws Exception {
+        testSelectNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1", "title"});
+        try {
+            testSelectNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1", "title"});
+            fail("selectNodes is not supported in Firefox.");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+    
+    private void testSelectNodes(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    var nodes = doc.documentElement.selectNodes('//title');\n"
+            + "    alert(nodes.length);\n"
+            + "    alert(nodes[0].tagName);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String xml
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient(browserVersion);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

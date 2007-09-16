@@ -40,6 +40,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.jaxen.JaxenException;
+import org.mozilla.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
@@ -47,6 +50,8 @@ import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
@@ -211,6 +216,22 @@ public class XMLDocument extends Document {
      */
     public void jsxFunction_setProperty(final String name, final String value) {
         //empty implementation
+    }
+
+    /**
+     * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
+     * @param expression A string specifying an XPath expression.
+     * @return list of the found elements.
+     */
+    public Object jsxFunction_selectNodes(final String expression) {
+        final HTMLCollection collection = new HTMLCollection(this);
+        try {
+            collection.init(getDomNodeOrDie().getFirstDomChild(), new HtmlUnitXPath(expression));
+        }
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError("Failed to initialize collection 'selectNodes': " + e.getMessage());
+        }
+        return collection;
     }
 
 }
