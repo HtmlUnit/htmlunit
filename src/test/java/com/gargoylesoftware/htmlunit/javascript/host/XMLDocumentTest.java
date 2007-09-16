@@ -97,8 +97,8 @@ public class XMLDocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testLoad() throws Exception {
-        testLoad(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "books", "books", "1", "book"});
-        testLoad(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text"});
+        testLoad(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "books", "books", "1", "book", "0"});
+        testLoad(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text", "0"});
     }
     
     private void testLoad(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
@@ -111,6 +111,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    alert(doc.childNodes[0].nodeName);\n"
             + "    alert(doc.childNodes[0].childNodes.length);\n"
             + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
+            + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"

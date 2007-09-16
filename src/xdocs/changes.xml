@@ -71,7 +71,7 @@
                 and ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="add" dev="asashour">
-                JavaScript: add load() for 'document.implementation.createDocument()' (FF), and
+                JavaScript: add load() and getElementsByTagName() for 'document.implementation.createDocument()' (FF), and
                 ActiveXObjects: 'Microsoft.XmlDom' and 'MSXML.DOMDocument' (IE).
             </action>
             <action type="add" dev="sdanig" due-to="Rob Di Marco">

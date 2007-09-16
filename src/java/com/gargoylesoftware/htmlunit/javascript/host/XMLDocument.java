@@ -234,4 +234,23 @@ public class XMLDocument extends Document {
         return collection;
     }
 
+    /**
+     * Returns all the descendant elements with the specified tag name.
+     * @param tagName the name to search for
+     * @return all the descendant elements with the specified tag name
+     */
+    public Object jsxFunction_getElementsByTagName(final String tagName) {
+        final HTMLCollection collection = new HTMLCollection(this);
+        try {
+            final String xpath = "//" + tagName;
+            collection.init(getDomNodeOrDie().getFirstDomChild(), new HtmlUnitXPath(xpath));
+        }
+        catch (final JaxenException e) {
+            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
+            throw Context.reportRuntimeError(msg + e.getMessage());
+        }
+        return collection;
+    }
+
+
 }

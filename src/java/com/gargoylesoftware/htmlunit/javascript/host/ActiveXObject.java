@@ -178,7 +178,7 @@ public class ActiveXObject extends SimpleScriptable {
         return resp;
     }
 
-    private static Scriptable buildXMLDocument() {
+    static XMLDocument buildXMLDocument() {
         final XMLDocument document = new XMLDocument();
 
         // the properties

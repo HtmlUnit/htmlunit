@@ -49,7 +49,6 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
-import org.w3c.dom.Document;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
@@ -61,7 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
-import com.gargoylesoftware.htmlunit.xml.XmlUtil;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * A JavaScript object for a XMLHttpRequest.
@@ -69,6 +68,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
 public class XMLHttpRequest extends SimpleScriptable {
@@ -193,8 +193,18 @@ public class XMLHttpRequest extends SimpleScriptable {
     public Object jsxGet_responseXML() {
         if (webResponse_.getContentType().indexOf("xml") != -1) {
             try {
-                final Document doc = XmlUtil.buildDocument(webResponse_);
-                return Context.javaToJS(doc, this);
+                final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
+                final XMLDocument doc;
+                if (page.getWebClient().getBrowserVersion().isIE()) {
+                    doc = ActiveXObject.buildXMLDocument();
+                }
+                else {
+                    doc = new XMLDocument();
+                    doc.setPrototype(getPrototype(doc.getClass()));
+                }
+                doc.setParentScope(getWindow());
+                doc.setDomNode(page);
+                return doc;
             }
             catch (final Exception e) {
                 getLog().warn("Failed parsing xml document " + webResponse_.getUrl() + ": " + e.getMessage());

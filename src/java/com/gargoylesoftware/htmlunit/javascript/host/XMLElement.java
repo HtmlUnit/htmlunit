@@ -45,6 +45,7 @@ import java.util.Map;
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeArray;
+import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -96,7 +97,20 @@ public class XMLElement extends NodeImpl {
             final XmlAttr attr = (XmlAttr) values.next();
             list.add(attr.getScriptObject());
         }
-        return new NativeArray(list.toArray());
+        return new NativeArray(list.toArray()) {
+            /**
+             * {@inheritDoc}
+             */
+            public Object get(final String name, final Scriptable start) {
+                for (int i = 0; i < getLength(); i++) {
+                    final XMLAttribute attribute = (XMLAttribute) get(i, start);
+                    if (attribute.jsxGet_name().equals(name)) {
+                        return attribute;
+                    }
+                }
+                return super.get(name, start);
+            }
+        };
     }
 
     /**

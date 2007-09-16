@@ -781,10 +781,6 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testResponseXML_selectNodesIE() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
         final String html =
               "<html>\n"
             + "  <head>\n"
