@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -120,4 +121,26 @@ public class WebResponseImplTest extends WebTestCase {
         assertEquals(title, page.getTitleText());
     }
 
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testQuotedCharset() throws Exception {
+        final String xml
+            = "<books id='myId'>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK",
+                "text/xml; charset=\"ISO-8859-1\"", Collections.EMPTY_LIST);
+        client.setWebConnection(conn);
+        client.getPage(URL_FIRST);
+    }
+ 
 }

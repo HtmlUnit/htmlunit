@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="asashour" id="1797235">
+                Fix loading content containing 'Content-Type' header with quoted charset (#1797235).
+            </action>
             <action type="update" dev="asashour">
                 Upgrade Jetty to 6.1.5.
             </action>

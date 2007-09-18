@@ -237,6 +237,10 @@ public class WebResponseImpl implements WebResponse, Serializable {
                 charset = charset_;
             }
         }
+        else if (charset.charAt(0) == '"' && charset.charAt(charset.length() - 1) == '"'
+            || charset.charAt(0) == '\'' && charset.charAt(charset.length() - 1) == '\'') {
+            charset = charset.substring(1, charset.length() - 1);
+        }
         return charset;
     }
 
