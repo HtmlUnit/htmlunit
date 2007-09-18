@@ -79,7 +79,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      * @param webRequestSettings the original web request settings
      * @param url the url from which the content should be retrieved
      * @return the response
-     * @throws IOException if a problem occured
+     * @throws IOException if a problem occurred
      */
     protected WebResponse deliverFromAlternateUrl(final WebRequestSettings webRequestSettings, final URL url)
         throws IOException {
@@ -99,7 +99,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      * @param webResponse the web response to adapt
      * @param newContent the new content to place in the response
      * @return a web response with the new content
-     * @throws IOException if an enconding problem occured
+     * @throws IOException if an encoding problem occurred
      */
     protected WebResponse replaceContent(final WebResponse webResponse, final String newContent) throws IOException {
         final byte[] body = newContent.getBytes(webResponse.getContentCharSet());

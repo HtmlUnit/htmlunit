@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -112,7 +113,7 @@ public class XmlPageTest extends WebTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
-        assertEquals(200, page.getWebResponse().getStatusCode());
+        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals(mimeType, page.getWebResponse().getContentType());
         assertInstanceOf(page, XmlPage.class);
         final XmlPage xmlPage = (XmlPage) page;
@@ -143,7 +144,7 @@ public class XmlPageTest extends WebTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
-        assertEquals(200, page.getWebResponse().getStatusCode());
+        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals("text/xml", page.getWebResponse().getContentType());
 
         assertInstanceOf(page, XmlPage.class);

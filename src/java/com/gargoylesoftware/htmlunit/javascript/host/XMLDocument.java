@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 
@@ -124,7 +125,8 @@ public class XMLDocument extends Document {
      */
     public boolean jsxFunction_loadXML(final String strXML) {
         try {
-            final WebResponseData data = new WebResponseData(strXML.getBytes(), 200, null, new ArrayList());
+            final WebResponseData data = new WebResponseData(strXML.getBytes(), HttpStatus.SC_OK, null,
+                    new ArrayList());
             final WebResponse webResponse = new WebResponseImpl(data, null, null, 0);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
             setDomNode(page);

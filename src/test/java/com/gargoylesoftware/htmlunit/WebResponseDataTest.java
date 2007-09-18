@@ -41,6 +41,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -73,7 +74,7 @@ public class WebResponseDataTest extends WebTestCase {
         final List headers = new ArrayList();
         headers.add(new KeyValuePair("Content-Encoding", "gzip"));
 
-        final WebResponseData data = new WebResponseData(zippedContent, 200, "OK", headers);
+        final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
         final String body = new String(data.getBody(), "UTF-8");
         assertTrue(StringUtils.contains(body, "Test"));
     }

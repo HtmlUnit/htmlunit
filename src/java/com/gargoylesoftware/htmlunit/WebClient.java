@@ -62,6 +62,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
@@ -342,7 +343,8 @@ public class WebClient implements Serializable {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
 
-        final boolean wasResponseSuccessful = (statusCode >= 200 && statusCode < 300);
+        final boolean wasResponseSuccessful =
+            statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
 
         if (printContentOnFailingStatusCode_ && !wasResponseSuccessful) {
             getLog().info("statusCode=[" + statusCode
@@ -1276,7 +1278,7 @@ public class WebClient implements Serializable {
         private static WebResponseData getWebResponseData(final byte[] data, final String contentType) {
             final List compiledHeaders = new ArrayList();
             compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-            return new WebResponseData(data, 200, "OK", compiledHeaders);
+            return new WebResponseData(data, HttpStatus.SC_OK, "OK", compiledHeaders);
         }
 
         private BinaryWebResponse(final byte[] data, final URL originatingURL, final String contentType) {
@@ -1407,8 +1409,9 @@ public class WebClient implements Serializable {
         final WebResponse webResponse = getWebConnection().getResponse(webRequestSettings);
         final int statusCode = webResponse.getStatusCode();
 
-        if (statusCode >= 301 && statusCode <= 307 && isRedirectEnabled()) {
-            URL newUrl = null;
+        if (statusCode >= HttpStatus.SC_MOVED_PERMANENTLY && statusCode <= HttpStatus.SC_TEMPORARY_REDIRECT
+                && isRedirectEnabled()) {
+            final URL newUrl;
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
@@ -1438,14 +1441,14 @@ public class WebClient implements Serializable {
                     return loadWebResponseFromWebConnection(webRequestSettings, nbAllowedRedirections - 1);
                 }
             }
-            else if ((statusCode == 301 || statusCode == 307)
+            else if ((statusCode == HttpStatus.SC_MOVED_PERMANENTLY || statusCode == HttpStatus.SC_TEMPORARY_REDIRECT)
                 && method.equals(SubmitMethod.GET)) {
 
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
                 return loadWebResponse(wrs);
             }
-            else if (statusCode <= 303) {
+            else if (statusCode <= HttpStatus.SC_SEE_OTHER) {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setSubmitMethod(SubmitMethod.GET);
                 return loadWebResponse(wrs);

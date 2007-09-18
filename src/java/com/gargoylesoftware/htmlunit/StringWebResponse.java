@@ -42,6 +42,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 
 /**
@@ -69,7 +70,7 @@ public class StringWebResponse extends WebResponseImpl {
         final byte[] content = TextUtil.stringToByteArray(contentString, charset);
         final List compiledHeaders = new ArrayList();
         compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
-        return new WebResponseData(content, 200, "OK", compiledHeaders);
+        return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
     }
 
     /**

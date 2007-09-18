@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -838,7 +839,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         try {
             final WebRequestSettings requestSettings = new WebRequestSettings(url);
             final WebResponse webResponse = getWebClient().loadWebResponse(requestSettings);
-            if (webResponse.getStatusCode() == 200) {
+            if (webResponse.getStatusCode() == HttpStatus.SC_OK) {
                 final String contentType = webResponse.getContentType();
                 final String contentCharset = webResponse.getContentCharSet();
                 if (!contentType.equalsIgnoreCase("text/javascript")

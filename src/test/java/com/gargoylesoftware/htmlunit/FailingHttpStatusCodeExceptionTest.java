@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.util.Collections;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -64,7 +65,7 @@ public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
      */
     public void testConstructorWitWebResponse() throws Exception {
         final WebResponseData webResponseData = new WebResponseData(
-                ArrayUtils.EMPTY_BYTE_ARRAY, 404, "not found",
+                ArrayUtils.EMPTY_BYTE_ARRAY, HttpStatus.SC_NOT_FOUND, "not found",
                 Collections.EMPTY_LIST);
         final WebResponse webResponse = new WebResponseImpl(webResponseData,
                 URL_FIRST, SubmitMethod.GET, 10);

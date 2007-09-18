@@ -50,6 +50,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -572,7 +573,7 @@ public class WebClientTest extends WebTestCase {
         }
         else {
             // A redirect should have happened
-            assertEquals(200, webResponse.getStatusCode());
+            assertEquals(HttpStatus.SC_OK, webResponse.getStatusCode());
             assertEquals(newLocation, webResponse.getUrl());
             assertEquals("Second", page.getTitleText());
             assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());

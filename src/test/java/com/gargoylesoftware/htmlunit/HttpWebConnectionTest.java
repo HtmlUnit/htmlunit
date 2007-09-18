@@ -47,6 +47,7 @@ import java.net.URL;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.mortbay.jetty.Handler;
@@ -218,7 +219,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
     public void testMakeWebResponse() throws Exception {
         final URL url = new URL("http://htmlunit.sourceforge.net/");
         final String content = "<html><head></head><body></body></html>";
-        final int httpStatus = 200;
+        final int httpStatus = HttpStatus.SC_OK;
         final long loadTime = 500L;
 
         final HttpMethodBase httpMethod = new GetMethod(url.toString());
