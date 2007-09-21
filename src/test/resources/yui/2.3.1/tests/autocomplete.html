@@ -1,0 +1,169 @@
+<html>
+<head>
+<title>YUI AutoComplete Tests</title>
+<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />
+<link type="text/css" rel="stylesheet" href="../build/autocomplete/assets/autocomplete.css" />
+
+<script type="text/javascript" src="../build/yahoo/yahoo-min.js"></script>
+<script type="text/javascript" src="../build/dom/dom-min.js"></script>
+<script type="text/javascript" src="../build/event/event-min.js"></script>
+<script type="text/javascript" src="../build/logger/logger-min.js"></script>
+<script type="text/javascript" src="../build/yuitest/yuitest-beta.js"></script>
+<script type="text/javascript" src="../build/autocomplete/autocomplete.js"></script>
+
+</head>
+<body>
+<h1>AutoComplete Tests</h1>
+<p><input type="button" value="Run Tests" id="btnRun" disabled="true" /></p>
+
+<script type="text/javascript">
+
+(function() {
+    
+    var Dom=YAHOO.util.Dom,
+        Assert=YAHOO.util.Assert,
+        ObjectAssert=YAHOO.util.ObjectAssert,
+        ArrayAssert=YAHOO.util.ArrayAssert,
+        DateAssert=YAHOO.util.DateAssert,
+        UserAction=YAHOO.util.UserAction,
+        TestCase = YAHOO.tool.TestCase,
+        TestLogger = YAHOO.tool.TestLogger,
+        TestRunner = YAHOO.tool.TestRunner,
+        TestSuite = YAHOO.tool.TestSuite,
+
+        DS_JSArray = YAHOO.widget.DS_JSArray,
+        DS_JSFunction = YAHOO.widget.DS_JSFunction,
+        DS_XHR = YAHOO.widget.DS_XHR,
+        AutoComplete = YAHOO.widget.AutoComplete;
+        
+    function AutoCompleteTestCase(template) {
+        AutoCompleteTestCase.superclass.constructor.call(this, template);
+    };
+    YAHOO.lang.extend(AutoCompleteTestCase, TestCase);
+
+    AutoCompleteTestCase.prototype.setUp = function() {
+        this.count = 0;
+        this.wrappers = [];
+        this.inputs = [];
+        this.containers = [];
+        this.instances = [];
+
+        this.datasource = new DS_JSArray(["aaa","abc","axyz"]);
+    };
+
+     AutoCompleteTestCase.prototype.tearDown = function() {
+        if (this.wrappers != null && (this.wrappers.length > 0)) {
+            for(var i=0; i<this.wrappers.length; i++) {
+                YAHOO.util.Event.purgeElement(this.wrappers[i], true);
+                document.body.removeChild(this.wrappers[i]);
+            }
+        }
+
+        this.datasource = null;
+        this.containers = null;
+        this.inputs = null;
+        this.wrappers = null;
+        this.instances = null;
+    };
+        
+    AutoCompleteTestCase.prototype.createInstance = function(oConfig) {
+        var nCount = this.count;
+        this.count++;
+        this.wrappers[nCount] = document.createElement("div");
+        this.wrappers[nCount].id = "acWrapper"+nCount;
+        document.body.appendChild(this.wrappers[nCount]);
+
+        this.inputs[nCount] = document.createElement("input");
+        this.inputs[nCount].id = "acInput"+nCount;
+        this.wrappers[nCount].appendChild(this.inputs[nCount]);
+
+        this.containers[nCount] = document.createElement("div");
+        this.containers[nCount].id = "acContainer"+nCount;
+        this.wrappers[nCount].appendChild(this.containers[nCount]);
+
+        this.instances[nCount] = new AutoComplete(this.inputs[nCount], this.containers[nCount], this.datasource, oConfig);
+        return this.instances[nCount];
+    };
+    
+    var acApiTemplate = {
+        name: "AutoComplete API Test Case",
+        
+        testConstruction: function() {
+            var ac = this.createInstance();
+            Assert.isObject(ac, "Failed to create basic instance");
+            Assert.isInstanceOf(AutoComplete, ac, "Failed to create basic instance");
+        },
+
+        testDestroy: function() {
+            var ac = this.createInstance();
+            ac.destroy();
+            Assert.isNull(ac.dataSource, "Expected datasource to be null");
+            Assert.isNull(ac._oContainer, "Expected container to be null");
+            Assert.isNull(ac._oTextbox, "Expected textbox to be null");
+            ac = null;
+        },
+
+        testSetHeader: function() {
+            var ac = this.createInstance();
+            ac.setHeader("header");
+            var el = YAHOO.util.Dom.getElementsByClassName("yui-ac-hd", "div", this.container)[0];
+            Assert.areSame("header", el.innerHTML, "Expected header content to be \"header\"");
+            ac = null;
+        },
+
+        testSetBody: function() {
+            var ac = this.createInstance();
+            ac.setBody("body");
+            var el = YAHOO.util.Dom.getElementsByClassName("yui-ac-bd", "div", this.container)[0];
+            Assert.areSame("body", el.innerHTML, "Expected body content to be \"body\"");
+            ac = null;
+        },
+
+        testSetFooter: function() {
+            var ac = this.createInstance();
+            ac.setFooter("footer");
+            var el = YAHOO.util.Dom.getElementsByClassName("yui-ac-ft", "div", this.container)[0];
+            Assert.areSame("footer", el.innerHTML, "Expected footer content to be \"footer\"");
+            ac = null;
+        },
+
+        testGetListItems: function() {
+            var ac = this.createInstance();
+            ac.sendQuery("a");
+            var els = ac.getListItems();
+            Assert.areSame(10, els.length, "Expected 10 items");
+            for(var i=0; i<els.length; i++) {
+                Assert.areSame("li", els[i].tagName.toLowerCase(), "Expected an LI element");
+            }
+            
+            ac.maxResultsDisplayed = 5;
+            ac.sendQuery("a");
+            var els = ac.getListItems();
+            Assert.areSame(5, els.length, "Expected 5 items");
+
+            ac = null;
+        }
+    };
+    var acApiTest = new AutoCompleteTestCase(acApiTemplate);
+
+    YAHOO.util.Event.addListener(window, "load", function() {
+        var logger = new TestLogger();
+        
+        var acsuite = new TestSuite("AutoComplete Test Suite");
+        acsuite.add(acApiTest);
+
+        TestRunner.add(acsuite);
+
+        YAHOO.util.Event.addListener("btnRun", "click", function(){TestRunner.run();});
+        YAHOO.util.Dom.get("btnRun").disabled = false;
+
+        if (parent && parent != window) {
+            YAHOO.tool.TestManager.load();
+        }
+    });
+})();
+
+</script>
+</body>
+</html>
