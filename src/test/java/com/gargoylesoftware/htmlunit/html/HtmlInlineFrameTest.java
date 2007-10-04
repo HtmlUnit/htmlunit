@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -52,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlInlineFrameTest extends WebTestCase {
 
@@ -77,12 +77,9 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
-        webConnection.setResponse(
-            URL_SECOND, secondContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
-        webConnection.setResponse(
-            URL_THIRD, thirdContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
 
         client.setWebConnection(webConnection);
 
@@ -109,6 +106,39 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("a");
         assertNotNull(iframe.getEnclosedPage());
+    }
+
+    /**
+     * Tests that a recursive src is prevented.
+     * @throws Exception if an error occurs
+     */
+    public void testRecursiveNestedFrames() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><body>\n"
+            + "<iframe id='iframe1' src='http://second'>\n"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head>"
+            + "<body><iframe id='iframe2_1' src='http://first'></iframe></body></html>";
+        final WebClient client = new WebClient();
+    
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+    
+        client.setWebConnection(webConnection);
+    
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
+    
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
+        assertEquals("http://second", iframe.getSrcAttribute());
+        final HtmlPage iframePage = (HtmlPage) iframe.getEnclosedPage();
+        assertEquals("Second", iframePage.getTitleText());
+    
+        // the nested frame should not have been loaded
+        final HtmlInlineFrame iframeIn2 = (HtmlInlineFrame) iframePage.getHtmlElementById("iframe2_1");
+        assertEquals("http://first", iframeIn2.getSrcAttribute());
+        assertEquals("about:blank", iframeIn2.getEnclosedPage().getWebResponse().getUrl());
     }
 
     /**

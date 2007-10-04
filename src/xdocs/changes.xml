@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="mguillem">
+                Fixed infinite loop triggered by recursive iframe/frame src attribute 
+                (where faulty frame's url is the same as the one of the ancestors, but not the direct parent).
+            </action>
             <action type="fix" dev="asashour" id="1797235">
                 Fix loading content containing 'Content-Type' header with quoted charset (#1797235).
             </action>

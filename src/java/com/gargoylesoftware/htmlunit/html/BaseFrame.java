@@ -104,9 +104,11 @@ public abstract class BaseFrame extends StyledElement {
             // Nothing to load
             source = "about:blank";
         }
-        getPage().getWebClient().pushClearFirstWindow();
-        loadInnerPageIfPossible(source);
-        getPage().getWebClient().popFirstWindow();
+        else {
+            getPage().getWebClient().pushClearFirstWindow();
+            loadInnerPageIfPossible(source);
+            getPage().getWebClient().popFirstWindow();
+        }
     }
 
     /**
@@ -124,8 +126,7 @@ public abstract class BaseFrame extends StyledElement {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
-            final URL pageUrl = getPage().getWebResponse().getUrl();
-            if (url.sameFile(pageUrl)) {
+            if (isAlreadyLoadedByAncestor(url)) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
@@ -139,6 +140,27 @@ public abstract class BaseFrame extends StyledElement {
                         + ": url=[" + url.toExternalForm() + "]", e);
             }
         }
+    }
+
+    /**
+     * Test if the provided url is the one of one of the parents which would cause an infinite loop.
+     * @param url the url to test
+     * @return <code>false</code> if no parent has already this url
+     */
+    private boolean isAlreadyLoadedByAncestor(final URL url) {
+        WebWindow window = getPage().getEnclosingWindow();
+        while (window != null) {
+            if (url.sameFile(window.getEnclosedPage().getWebResponse().getUrl())) {
+                return true;
+            }
+            if (window == window.getParentWindow()) { // should getParentWindow() return null on top windows?
+                window = null;
+            }
+            else {
+                window = window.getParentWindow();
+            }
+        }
+        return false;
     }
 
     /**
