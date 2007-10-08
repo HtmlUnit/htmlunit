@@ -1680,6 +1680,26 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception If the test fails.
+     */
+    public void testDocumentAll_NotExisting() throws Exception {
+        final String content = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(document.all('notExisting'));\n"
+            + "}\n"
+            + "</script><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"null"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testCookie_read() throws Exception {

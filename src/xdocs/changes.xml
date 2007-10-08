@@ -7,9 +7,8 @@
 
     <body>
         <release version="1.14-prerelease">
-            <action type="update" dev="mguillem">
-                Fixed infinite loop triggered by recursive iframe/frame src attribute 
-                (where faulty frame's url is the same as the one of the ancestors, but not the direct parent).
+            <action type="update" dev="mguillem" id="1802969">
+                JavaScript: document.all('notExistingElement') now returns null as IE does.
             </action>
             <action type="fix" dev="asashour" id="1797235">
                 Fix loading content containing 'Content-Type' header with quoted charset (#1797235).

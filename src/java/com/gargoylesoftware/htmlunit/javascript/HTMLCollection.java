@@ -147,7 +147,11 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }
-        return get(args[0]);
+        final Object response = get(args[0]);
+        if (response == NOT_FOUND) {
+            return null;
+        }
+        return response;
     }
 
     /**
