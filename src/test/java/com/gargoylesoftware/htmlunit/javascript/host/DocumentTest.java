@@ -2797,4 +2797,21 @@ public class DocumentTest extends WebTestCase {
         //make sure the element has no children
         assertEquals("0", collectedAlerts.get(2));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testStyleSheets() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.styleSheets.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"0"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

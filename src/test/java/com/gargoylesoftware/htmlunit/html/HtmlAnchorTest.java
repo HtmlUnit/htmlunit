@@ -131,7 +131,7 @@ public class HtmlAnchorTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
-        // The url shouldn't contain the anchor since that isn't sent to the server
+        // The url shouldn't contain the anchor since isn't sent to the server
         assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
         assertTrue(page == secondPage);
     }

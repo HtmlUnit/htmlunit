@@ -57,6 +57,7 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPathFunctionContext;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.UniqueTag;
 import org.w3c.dom.DOMException;
@@ -1136,6 +1137,18 @@ public class Document extends NodeImpl {
             implementation_.setPrototype(getPrototype(implementation_.getClass()));
         }
         return implementation_;
+    }
+
+    /**
+     * Retrieves a collection of styleSheet objects representing the style sheets that correspond
+     * to each instance of a Link or {@link Style} object in the document.
+     *
+     * The current implementation returns empty array.
+     *
+     * @return styleSheet collection.
+     */
+    public Object jsxGet_styleSheets() {
+        return new NativeArray(0);
     }
 
     /**

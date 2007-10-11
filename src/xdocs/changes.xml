@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour" id="1805817">
+                Add primitive support for document.styleSheets (#1805817).
+            </action>
             <action type="add" dev="asashour" id="1809522">
                 Add support of setExpression and removeExpression for element and style (#1809522).
             </action>
