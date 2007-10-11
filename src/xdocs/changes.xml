@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour" id="1809522">
+                Add support of setExpression and removeExpression for element and style (#1809522).
+            </action>
             <action type="update" dev="asashour" id="1802836">
                 Update window.frames so it does not throw ClassCastException (#1802836).
             </action>

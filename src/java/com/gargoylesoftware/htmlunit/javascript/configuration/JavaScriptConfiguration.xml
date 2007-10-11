@@ -628,6 +628,12 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
         </function>
+        <function name="removeExpression">
+        	<doclink
+            	url="http://msdn2.microsoft.com/en-us/library/aa358798.aspx"
+            	descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="scrollIntoView" >
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
@@ -639,6 +645,12 @@
         <function name="setAttributeNode"/>
         <function name="removeBehavior">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
+        </function>
+        <function name="setExpression">
+        	<doclink
+            	url="http://msdn2.microsoft.com/en-us/library/ms531196.aspx"
+            	descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
     </class>
 
@@ -882,6 +894,18 @@
         </property>
         <function name="getPropertyValue">
             <browser name="Firefox"/>
+        </function>
+        <function name="removeExpression">
+        	<doclink
+            	url="http://msdn2.microsoft.com/en-us/library/aa358798.aspx"
+            	descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="setExpression">
+        	<doclink
+            	url="http://msdn2.microsoft.com/en-us/library/ms531196.aspx"
+            	descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
         </function>
     </class>
 

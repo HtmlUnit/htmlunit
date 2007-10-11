@@ -1840,4 +1840,58 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testSetExpression() throws Exception {
+        testSetExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
+        try {
+            testSetExpression(BrowserVersion.FIREFOX_2);
+            fail("setExpression is not defined for Firefox");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+    
+    private void testSetExpression(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "     var div1 = document.getElementById('div1');\n"
+            + "     div1.setExpression('title','id');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "</body></html>";
+
+        loadPage(browserVersion, content, null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testRemoveExpression() throws Exception {
+        testRemoveExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
+        try {
+            testRemoveExpression(BrowserVersion.FIREFOX_2);
+            fail("removeExpression is not defined for Firefox");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+    
+    private void testRemoveExpression(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "     var div1 = document.getElementById('div1');\n"
+            + "     div1.setExpression('title','id');\n"
+            + "     div1.removeExpression('title');"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "</body></html>";
+
+        loadPage(browserVersion, content, null);
+    }
 }

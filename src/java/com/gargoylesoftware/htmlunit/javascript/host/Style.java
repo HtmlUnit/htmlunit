@@ -298,4 +298,27 @@ public class Style extends SimpleScriptable {
         return getStyleAttribute(name, false);
     }
 
+    /**
+     * Sets an expression for the specified Style.
+     *
+     * @param propertyName Specifies the name of the property to which expression is added.
+     * @param expression specifies any valid script statement without quotations or semicolons.
+     *        This string can include references to other properties on the current page.
+     *        Array references are not allowed on object properties included in this script.
+     * @param language specified the language used.
+     */
+    public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
+        //empty implementation
+    }
+    
+    /**
+     * Removes the expression from the specified property.
+     *
+     * @param propertyName Specifies the name of the property from which to remove an expression.
+     * @return true if the expression was successfully removed.
+     */
+    public boolean jsxFunction_removeExpression(final String propertyName) {
+        return true;
+    }
+
 }
