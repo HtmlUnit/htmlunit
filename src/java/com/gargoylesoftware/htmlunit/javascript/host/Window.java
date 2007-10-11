@@ -552,7 +552,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             frames_ = new HTMLCollection(this);
             final Transformer toEnclosedWindow = new Transformer() {
                 public Object transform(final Object obj) {
-                    return ((BaseFrame) obj).getEnclosedWindow();
+                    if (obj instanceof BaseFrame) {
+                        return ((BaseFrame) obj).getEnclosedWindow();
+                    }
+                    else {
+                        return ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
+                    }
                 }
             };
             frames_.init(page, xpath, toEnclosedWindow);

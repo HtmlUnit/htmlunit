@@ -2345,4 +2345,38 @@ public class WindowTest extends WebTestCase {
 
         loadPage(content);
     }
+
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testFrames() throws Exception {
+        final String framesetContent =
+            "<html><head><title>First</title></head>\n"
+            + "<frameset id='fs' rows='20%,*'>\n"
+            + "    <frame name='top' src='" + URL_SECOND + "' />\n"
+            + "    <frame name='bottom' src='about:blank' />\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String frameContent =
+            "<html><head><title>TopFrame</title>\n"
+            + "<script>\n"
+            + "function doTest() {"
+            + "    var bottomFrame = window.top.frames['bottom'];\n"
+            + "    bottomFrame.location = 'about:blank';\n"
+            + "}</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'></body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final WebClient webClient = new WebClient();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setResponse(URL_FIRST, framesetContent);
+        webConnection.setResponse(URL_SECOND, frameContent);
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage(URL_FIRST);
+    }
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour" id="1802836">
+                Update window.frames so it does not throw ClassCastException (#1802836).
+            </action>
             <action type="update" dev="mguillem" id="1802969">
                 JavaScript: document.all('notExistingElement') now returns null as IE does.
             </action>
