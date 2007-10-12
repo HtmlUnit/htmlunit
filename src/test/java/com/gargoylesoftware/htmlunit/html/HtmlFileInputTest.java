@@ -66,7 +66,7 @@ public class HtmlFileInputTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testFileInput() throws Exception {
-        String path = getClass().getResource("../testfiles/" + "tiny-png.img").toExternalForm();
+        String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
         testFileInput(path);
         final File file = new File(new URI(path));
         testFileInput(file.getCanonicalPath());

@@ -50,10 +50,11 @@ import org.apache.commons.lang.StringUtils;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class WebResponseDataTest extends WebTestCase {
 
-    private static final String GZIPPED_FILE = "test.html.gz";
+    private static final String GZIPPED_FILE = "testfiles/test.html.gz";
 
     /**
      * Create an instance.
@@ -68,7 +69,7 @@ public class WebResponseDataTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testGZippedContent() throws Exception {
-        final InputStream stream = getClass().getResourceAsStream(GZIPPED_FILE);
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(GZIPPED_FILE);
         final byte[] zippedContent = IOUtils.toByteArray(stream);
 
         final List headers = new ArrayList();

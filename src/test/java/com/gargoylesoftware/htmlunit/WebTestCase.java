@@ -380,8 +380,7 @@ public abstract class WebTestCase extends BaseTestCase {
      */
     private String createInstrumentationScript(final List expectedAlerts) throws IOException {
         // generate the js code
-        final InputStream is = getClass().getClassLoader().getResourceAsStream(
-                "com/gargoylesoftware/htmlunit/alertVerifier.js");
+        final InputStream is = getClass().getClassLoader().getResourceAsStream("alertVerifier.js");
         final String baseJS = IOUtils.toString(is);
         IOUtils.closeQuietly(is);
 

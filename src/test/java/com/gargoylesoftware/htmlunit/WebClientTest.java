@@ -1477,7 +1477,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception if a pb occurs
      */
     private File getTestFile(final String fileName) throws Exception {
-        final URL url = getClass().getResource("testfiles/" + fileName);
+        final URL url = getClass().getClassLoader().getResource("testfiles/" + fileName);
         if (url == null) {
             throw new FileNotFoundException(fileName);
         }

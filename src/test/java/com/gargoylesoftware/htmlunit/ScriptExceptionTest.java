@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public final class ScriptExceptionTest extends WebTestCase {
 
@@ -121,8 +122,7 @@ public final class ScriptExceptionTest extends WebTestCase {
     }
 
     private String getFileContent(final String fileName) throws IOException {
-        final String resource = "com/gargoylesoftware/htmlunit/" + fileName;
-        final InputStream stream = getClass().getClassLoader().getResourceAsStream(resource);
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(fileName);
         assertNotNull(fileName, stream);
         return IOUtils.toString(stream);
     }

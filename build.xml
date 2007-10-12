@@ -83,8 +83,10 @@
             <include name="gwt/**/*"/>
             <include name="jquery/**/*"/>
             <include name="prototype/**/*"/>
+            <include name="testfiles/**/*"/>
             <include name="yui/**/*"/>
             <include name="*.htm*"/>
+            <include name="*.txt*"/>
         </fileset>
     </copy>
 </target>
