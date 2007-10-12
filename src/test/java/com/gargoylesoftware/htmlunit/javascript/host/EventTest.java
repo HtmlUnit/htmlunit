@@ -215,8 +215,8 @@ public class EventTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
-        element.keyDown(65); // A
-        element.keyDown(66); // B
+        element.type('A');
+        element.type('B');
         element.click();
         final String[] expectedAlerts = {"pass", "fail:66", "fail:undefined"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -250,7 +250,7 @@ public class EventTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
-        element.keyDown(65, shiftKey, ctrlKey, altKey);
+        element.type('A', shiftKey, ctrlKey, altKey);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

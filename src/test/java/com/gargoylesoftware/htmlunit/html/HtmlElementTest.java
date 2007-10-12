@@ -545,6 +545,7 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     /**
+     * @deprecated
      */
     public void testEmtpyMapEntryWrappingIterator() {
         final Map attributsMap = HtmlElement.createAttributeMap(0);
@@ -561,6 +562,7 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     /**
+     * @deprecated
      */
     public void testMapEntryWrappingIterator() {
         final Map attributsMap = HtmlElement.createAttributeMap(1);
@@ -571,7 +573,7 @@ public class HtmlElementTest extends WebTestCase {
         assertTrue(it.hasNext());
         final HtmlAttr me = (HtmlAttr) it.next();
         assertEquals("key", me.getName());
-        assertEquals("value", me.getValue());
+        assertEquals("value", me.getHtmlValue());
         assertInstanceOf(me, HtmlAttr.class);
 
         assertFalse(it.hasNext());
@@ -585,6 +587,7 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     /**
+     * @deprecated
      */
     public void testMapEntryWrappingIteratorDelegatesRemove() {
         final boolean removed[] = {false};

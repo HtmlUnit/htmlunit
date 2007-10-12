@@ -104,8 +104,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param htmlPage The page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
-     * @deprecated The Map<String, String> is deprecated in favor of a Map<String, HtmlAttr> to
-     * support the W3C DOM API where attributes have namespaces.
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
             final Map attributes) {
@@ -156,7 +154,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * Overrides {@link DomNode#cloneNode(boolean)} so clone gets its own Map of attributes.
      * {@inheritDoc}
      * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use cloneDomNode instead.
+     * different.  Use {@link #cloneDomNode(boolean)} instead.
      */
     public DomNode cloneNode(final boolean deep) {
         return cloneDomNode(deep);
@@ -570,7 +568,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * Simulate pressing a key on this element
      *
      * @param keyCode the key you wish to press
-     * @deprecated use type(char) instead
+     * @deprecated use {@link #type(char)} instead
      */
     public void keyDown(final int keyCode) {
         keyDown(keyCode, false, false, false);
@@ -583,7 +581,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * @deprecated use type(char, boolean, boolean, boolean) instead
+     * @deprecated use {@link type(char, boolean, boolean, boolean)} instead
      */
     public void keyDown(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         if (this instanceof DisabledElement) {

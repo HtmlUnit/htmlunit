@@ -204,7 +204,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             final String eventName = entry.getName();
             if (eventName.startsWith("on")) {
                 // TODO: check that it is an "allowed" event for the browser, and take care to the case
-                final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, (String) entry.getValue());
+                final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, (String) entry.getHtmlValue());
                 setEventHandler(eventName, eventHandler);
                 // forward onload, onclick, ondblclick, ... to window
                 if ((domNode instanceof HtmlBody || domNode instanceof HtmlFrameSet)) {
@@ -523,7 +523,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             for (final Iterator iterator = element.getAttributeEntriesIterator(); iterator.hasNext();) {
                 final HtmlAttr entry = (HtmlAttr) iterator.next();
                 final String name = entry.getName();
-                final String value = (String) entry.getValue();
+                final String value = (String) entry.getHtmlValue();
                 final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
                 buffer.append(' ').append(name).append("=");
                 if (quote) {
@@ -660,7 +660,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         for (final Iterator iter = element.getAttributeEntriesIterator(); iter.hasNext();) {
             final HtmlAttr entry = (HtmlAttr) iter.next();
             final String name = entry.getName();
-            final String value = (String) entry.getValue();
+            final String value = (String) entry.getHtmlValue();
             attributes.addAttribute(null, name, name, null, value);
         }
 

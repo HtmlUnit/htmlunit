@@ -123,7 +123,7 @@ public class HtmlAttrTest extends WebTestCase {
     /**
      */
     public void testGetKey() {
-        assertEquals(ENTRY_KEY, htmlAttr_.getKey());
+        assertEquals(ENTRY_KEY, htmlAttr_.getName());
     }
 
     /**

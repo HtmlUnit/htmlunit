@@ -348,7 +348,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * attribute, null otherwise.
      */
     public String getAttributeStringValue(final Object object) {
-        return (String) ((HtmlAttr) object).getValue();
+        return (String) ((HtmlAttr) object).getHtmlValue();
     }
 
     /**

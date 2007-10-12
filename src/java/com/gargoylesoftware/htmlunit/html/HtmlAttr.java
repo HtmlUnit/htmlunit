@@ -43,12 +43,11 @@ import java.util.Map;
  * An attribute of an element. Attributes are stored in {@link
  * com.gargoylesoftware.htmlunit.html.HtmlElement}, but the xpath engine expects attributes to be in a {@link
  * com.gargoylesoftware.htmlunit.html.DomNode}.
- * @deprecated The implements Map.Entry is deprecated since the return type of getValue conflicts with
- * the W3C DOM API.
  *
  * @version $Revision$
  * @author Denis N. Antonioli
  * @author David K. Taylor
+ * @author Ahmed Ashour
  */
 public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
 
@@ -100,12 +99,12 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
      * {@inheritDoc}
      */
     public String getNodeValue() {
-        return (String) getValue();
+        return (String) getHtmlValue();
     }
 
     /**
      * {@inheritDoc}
-     * @deprecated The implements Map.Entry is deprecated.  Use getName instead.
+     * @deprecated The implements Map.Entry is deprecated.  Use @link {@link #getName()} instead.
      */
     public Object getKey() {
         return getName();
@@ -121,7 +120,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
     /**
      * @return The value of the attribute.
      * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use getHtmlValue instead.
+     * different.  Use {@link #getHtmlValue()} instead.
      */
     public Object getValue() {
         return getHtmlValue();
@@ -139,7 +138,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use setHtmlValue instead.
+     * different.  Use {@link #setHtmlValue(Object)} instead.
      */
     public Object setValue(final Object value) {
         return setHtmlValue(value);
