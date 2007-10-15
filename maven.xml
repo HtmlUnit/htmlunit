@@ -257,10 +257,10 @@
           </ant:zip>
     </goal>
 
-	<!-- copy resource files for the tests -->
+    <!-- copy resource files for the tests -->
     <postGoal name="test:compile">
-        <ant:copy todir="target/test-classes/com/gargoylesoftware/htmlunit/testfiles">
-            <ant:fileset dir="${basedir}/src/test/java/com/gargoylesoftware/htmlunit/testfiles">
+        <ant:copy todir="target/test-classes/testfiles">
+            <ant:fileset dir="${basedir}/src/test/resources/testfiles">
                 <ant:exclude name=".svn"/>
             </ant:fileset>
         </ant:copy>
@@ -320,7 +320,7 @@
         <attainGoal name="maven-simian-plugin:register"/>
         <attainGoal name="maven-pmd-plugin:register"/>
         <attainGoal name="maven-clover-plugin:register"/>
-		<attainGoal name="maven-changelog-plugin:deregister"/>        
+        <attainGoal name="maven-changelog-plugin:deregister"/>        
     </postGoal>
     
     <goal name="createJavaScriptConfigurationPage" description="Create the javascript configuration page">
@@ -400,7 +400,7 @@
             <tr>
               <th width="10%">Type</th>
               <th width="25%">Name</th>
-							<th width="17%">Not Implemented</th>
+              <th width="17%">Not Implemented</th>
               <th width="7%">Read</th>
               <th width="7%">Write</th>
               <th width="14%">Constraints</th>
