@@ -104,7 +104,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
 
     /**
      * {@inheritDoc}
-     * @deprecated The implements Map.Entry is deprecated.  Use @link {@link #getName()} instead.
+     * @deprecated The implements Map.Entry is deprecated. Use {@link #getName()} instead.
      */
     public Object getKey() {
         return getName();
