@@ -94,7 +94,7 @@ The reference stays the maven 1 build.
 			<name>Marc Guillemot</name>
 			<id>mguillem</id>
 			<email>mguillem@users.sourceforge.net</email>
-            <url>http://mguillem.wordpress.com/</url>
+			<url>http://mguillem.wordpress.com/</url>
 			<timezone>+1</timezone>
 		</developer>
 		<developer>
@@ -109,12 +109,12 @@ The reference stays the maven 1 build.
 			<email>sdanig@users.sourceforge.net</email>
 			<url>http://daniel.gredler.net/</url>
 			<timezone>-5</timezone>
-        </developer>
-        <developer>
-            <name>Ahmed Ashour</name>
-            <id>asashour</id>
-            <email>asashour@users.sourceforge.net</email>
-            <timezone>+3</timezone>
+		</developer>
+		<developer>
+			<name>Ahmed Ashour</name>
+			<id>asashour</id>
+			<email>asashour@users.sourceforge.net</email>
+			<timezone>+3</timezone>
 		</developer>
 	</developers>
 	<contributors>
@@ -218,49 +218,49 @@ The reference stays the maven 1 build.
 		<contributor>
 			<name>Andre Soereng</name>
 		</contributor>
-        <contributor>
-        	<name>Karel Kolman</name>
-        </contributor>
-        <contributor>
-        	<name>Bruce Chapman</name>
-        </contributor>
-        <contributor>
-        	<name>Kristian Muntau</name>
-        </contributor>
-        <contributor>
-        	<name>Sam Hough</name>
-        </contributor>
-        <contributor>
-        	<name>Deryk Sinotte</name>
-        </contributor>
-        <contributor>
-        	<name>Martin Tamme</name>
-        </contributor>
-        <contributor>
-        	<name>Philip Graf</name>
-        </contributor>
-        <contributor>
-        	<name>Rodney Gitzel</name>
-        </contributor>
-        <contributor>
-        	<name>Matt Ryall</name>
-        </contributor>
-        <contributor>
-        	<name>Rob Di Marco</name>
-        </contributor>
+		<contributor>
+			<name>Karel Kolman</name>
+		</contributor>
+		<contributor>
+			<name>Bruce Chapman</name>
+		</contributor>
+		<contributor>
+			<name>Kristian Muntau</name>
+		</contributor>
+		<contributor>
+			<name>Sam Hough</name>
+		</contributor>
+		<contributor>
+			<name>Deryk Sinotte</name>
+		</contributor>
+		<contributor>
+			<name>Martin Tamme</name>
+		</contributor>
+		<contributor>
+			<name>Philip Graf</name>
+		</contributor>
+		<contributor>
+			<name>Rodney Gitzel</name>
+		</contributor>
+		<contributor>
+			<name>Matt Ryall</name>
+		</contributor>
+		<contributor>
+			<name>Rob Di Marco</name>
+		</contributor>
 	</contributors>
 	<build>
 		<sourceDirectory>src/java</sourceDirectory>		
-        <resources>
-            <resource>
-                <targetPath>com/gargoylesoftware/htmlunit/javascript/configuration</targetPath>
-                <filtering>false</filtering>
-                <directory>${basedir}/src/java/com/gargoylesoftware/htmlunit/javascript/configuration</directory>
-                <includes>
-                    <include>JavaScriptConfiguration.xml</include>
-                </includes>
-            </resource>
-        </resources>
+		<resources>
+			<resource>
+				<targetPath>com/gargoylesoftware/htmlunit/javascript/configuration</targetPath>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/java/com/gargoylesoftware/htmlunit/javascript/configuration</directory>
+				<includes>
+					<include>JavaScriptConfiguration.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 	<dependencies>
 		<dependency>
@@ -330,15 +330,15 @@ The reference stays the maven 1 build.
 			<version>1.3.1</version>
 		</dependency>
 		<dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty</artifactId>
-            <version>6.1.5</version>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+			<version>6.1.5</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
-            <version>6.1.5</version>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>6.1.5</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
