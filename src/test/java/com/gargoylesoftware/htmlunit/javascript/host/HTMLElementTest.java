@@ -1880,7 +1880,7 @@ public class HTMLElementTest extends WebTestCase {
             //expected
         }
     }
-    
+
     private void testRemoveExpression(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1894,4 +1894,27 @@ public class HTMLElementTest extends WebTestCase {
 
         loadPage(browserVersion, content, null);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testDispatchEvent() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<script>\n"
+            + "  function click() {\n"
+            + "    var e = document.createEvent('MouseEvents');\n"
+            + "    e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var canceled = !d.dispatchEvent(e);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='click()'><div id='d' onclick='alert(\"clicked\")'>foo</div></body>\n"
+            + "</html>\n";
+        final List actual = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final String[] expected = {"clicked"};
+        assertEquals(expected, actual);
+    }
+
 }

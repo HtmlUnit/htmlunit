@@ -252,7 +252,7 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testElement() throws Exception {
-        doTest(BrowserVersion.FIREFOX_2, "element.html", Collections.singletonList("test_DomEvent"));
+        doTest(BrowserVersion.FIREFOX_2, "element.html", Collections.EMPTY_LIST);
     }
 
     /**

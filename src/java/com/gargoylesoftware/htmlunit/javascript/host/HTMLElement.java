@@ -1698,6 +1698,21 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
+     * Dispatches an event into the event system (standards-conformant browsers only). See
+     * <a href="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent">the Gecko
+     * DOM reference</a> for more information.
+     *
+     * @param event the event to be dispatched
+     * @return <tt>false</tt> if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     */
+    public boolean jsxFunction_dispatchEvent(final Event event) {
+        fireEvent(event);
+        // TODO: should not always return true! see the javadoc above!
+        return true;
+    }
+
+    /**
      * Fires a specified event on this element (IE only). See the
      * <a href="http://msdn2.microsoft.com/en-us/library/ms536423.aspx">MSDN documentation</a>
      * for more information.
