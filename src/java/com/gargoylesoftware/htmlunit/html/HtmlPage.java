@@ -1477,7 +1477,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final List frameTags = Arrays.asList(new String[] {"frame", "iframe"});
         final List frames = getDocumentHtmlElement().getHtmlElementsByTagNames(frameTags);
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
-            ((BaseFrame) iter.next()).loadInnerPage();
+            final BaseFrame frame = (BaseFrame) iter.next();
+            // test if the frame should really be loaded:
+            // if a script has already changed its content, it should be skipped
+            // use == and not equals(...) to identify initial content (versus url set to "about:blank")
+            if (frame.getEnclosedPage().getWebResponse().getUrl() == WebClient.URL_ABOUT_BLANK) {
+                frame.loadInnerPage();
+            }
         }
     }
 

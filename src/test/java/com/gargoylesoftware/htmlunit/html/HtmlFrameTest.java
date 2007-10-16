@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,5 +205,42 @@ public class HtmlFrameTest extends WebTestCase {
         catch (final FailingHttpStatusCodeException e) {
             assertEquals(404, e.getStatusCode());
         }
+    }
+
+    /**
+     * Regression test for bug 1518195
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1518195&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    public void testFrameScriptReplaceOtherFrame() throws Exception {
+        final String mainContent =
+            "<html><head><title>frames</title></head>"
+            + "<frameset cols='180,*'>"
+            + "<frame name='f1' src='1.html'/>"
+            + "<frame name='f2' src='2.html'/>"
+            + "</frameset>"
+            + "</html>";
+        
+        final String frame1 = "<html><head><title>1</title></head>"
+            + "<body>1"
+            + "<script>"
+            + "   parent.frames['f2'].location.href = '3.html';\n"
+            + "</script>"
+            + "</body></html>";
+
+        final String frame3 = "<html><head><title>page 3</title></head><body></body></html>";
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection conn = new MockWebConnection(webClient);
+        webClient.setWebConnection(conn);
+        
+        conn.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");
+        conn.setResponse(URL_FIRST, mainContent);
+        conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
+        conn.setResponse(new URL(URL_FIRST, "3.html"), frame3);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+
+        assertEquals("page 3", ((HtmlPage) page.getFrameByName("f2").getEnclosedPage()).getTitleText());
     }
 }
