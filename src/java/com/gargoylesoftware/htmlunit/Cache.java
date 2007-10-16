@@ -135,7 +135,7 @@ public class Cache implements Serializable {
         final boolean cacheableContent = (expires != null && (expires.getTime() - now > delay)
                 || (expires == null && lastModified != null && (now - lastModified.getTime() > delay)));
 
-        return cacheableContent;
+        return !cacheableContent;
     }
 
     /**
