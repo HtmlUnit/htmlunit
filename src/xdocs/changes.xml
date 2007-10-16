@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem" id="1716540">
+                Cache JS server responses to avoid useless requests (script caching will come later).
+            </action>
             <action type="fix" dev="mguillem" id="1518195">
                 Don't load the originally specified source of a frame, when its location has already been changed by javascript.
             </action>

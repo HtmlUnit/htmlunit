@@ -142,6 +142,7 @@ public class WebClient implements Serializable {
     private int timeout_;
     private HTMLParserListener htmlParserListener_;
     private OnbeforeunloadHandler onbeforeunloadHandler_;
+    private Cache cache_ = new Cache();
 
     private static URLStreamHandler JavaScriptUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
@@ -1354,6 +1355,11 @@ public class WebClient implements Serializable {
         throws
             IOException {
 
+        final WebResponse responseFromCache = cache_.getCachedContent(webRequestSettings);
+        if (responseFromCache != null) {
+            return responseFromCache;
+        }
+
         final WebResponse response;
         final String protocol = webRequestSettings.getURL().getProtocol();
         if (protocol.equals("about")) {
@@ -1366,6 +1372,7 @@ public class WebClient implements Serializable {
             response = loadWebResponseFromWebConnection(webRequestSettings, ALLOWED_REDIRECTIONS_SAME_URL);
         }
 
+        cache_.cacheIfNeeded(webRequestSettings, response);
         return response;
     }
 
@@ -1718,5 +1725,25 @@ public class WebClient implements Serializable {
      */
     public OnbeforeunloadHandler getOnbeforeunloadHandler() {
         return onbeforeunloadHandler_;
+    }
+
+
+    /**
+     * Gets the cache currently used
+     * @return the cache (may not be null)
+     */
+    public Cache getCache() {
+        return cache_;
+    }
+
+    /**
+     * Sets the cache to use
+     * @param cache the new cache (must not be <code>null</code>)
+     */
+    public void setCache(final Cache cache) {
+        if (cache == null) {
+            throw new IllegalArgumentException("cache should not be null!");
+        }
+        cache_ = cache;
     }
 }
