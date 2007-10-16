@@ -211,13 +211,13 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "yruiloader_rollup.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "yuiloader_rollup.html", Collections.EMPTY_LIST);
     }
 
     /**
      * @throws Exception if an error occurs
      */
-    public void testYuiloaderConfig() throws Exception {
+    public void testYuiLoaderConfig() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -228,20 +228,14 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testYuiLoader() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "yuiloader.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "yuiloader.html", Collections.singletonList("test_calculate"));
     }
 
     /**
      * @throws Exception if an error occurs
      */
     public void testModule() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "module.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "module.html", Collections.singletonList("testConstructor"));
     }
 
     /**
@@ -258,10 +252,7 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testElement() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "element.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "element.html", Collections.singletonList("test_DomEvent"));
     }
 
     /**
@@ -285,6 +276,7 @@ public class YuiTest extends WebTestCase {
      */
     private void doTest(final BrowserVersion version, final String fileName, final List knownFailingTests,
             final String buttonToPush, final long timeToWait) throws Exception {
+
         final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);
         assertNotNull(url);
 
