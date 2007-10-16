@@ -273,9 +273,7 @@ public class MouseEvent extends UIEvent {
             final boolean metaKey,
             final int button,
             final Object relatedTarget) {
-        jsxFunction_initEvent(type, bubbles, cancelable);
-        // Ignore the view parameter; we always use the window.
-        setDetail(detail);
+        jsxFunction_initUIEvent(type, bubbles, cancelable, view, detail);
         screenX_ = screenX;
         screenY_ = screenY;
         // Ignore the clientX parameter; we always use screenX.
