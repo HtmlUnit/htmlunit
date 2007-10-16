@@ -106,9 +106,6 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testDateMath() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest(BrowserVersion.FIREFOX_2, "datemath.html", Collections.EMPTY_LIST, "btnRun");
     }
 
@@ -293,13 +290,14 @@ public class YuiTest extends WebTestCase {
 
         final WebClient client = new WebClient(version);
         final HtmlPage page = (HtmlPage) client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(timeToWait);
         final HtmlElement doc = page.getDocumentHtmlElement();
 
         if (buttonToPush != null) {
             final HtmlButtonInput button = ((HtmlButtonInput) page.getHtmlElementById(buttonToPush));
             button.click();
         }
+
+        page.getEnclosingWindow().getThreadManager().joinAll(timeToWait);
 
         final List tests = doc.getByXPath("//span[@class='pass' or @class='fail']");
         if (tests.size() == 0) {
