@@ -679,6 +679,22 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
+     * Execute the specified javascript within the page.
+     * The usage would be similar to what can be achieved to execute javascript in the current page
+     * by entering a "javascript:...some js code..." in the url field of a "normal" browser.
+     * <p>
+     * <b>Note: </b> the provided code won't be executed if JavaScript has been disabled on the WebClient
+     * (see {@link WebClient#isJavaScriptEnabled()}.
+     * @param sourceCode The javascript code to execute.
+     * @return A ScriptResult which will contain both the current page (which may be different than
+     * the previous page) and a javascript result object.
+     */
+    public ScriptResult executeJavaScript(final String sourceCode) {
+
+        return executeJavaScriptIfPossible(sourceCode, "injected script", 1);
+    }
+
+    /**
      * <p>
      * Execute the specified javascript if a javascript engine was successfully
      * instantiated.  If this javascript causes the current page to be reloaded
@@ -699,10 +715,37 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * the context will default to the window.
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a javascript result object.
+     * @deprecated use {@link #executeJavaScript(String)} instead
+     */
+    public ScriptResult executeJavaScriptIfPossible(final String sourceCode, final String sourceName,
+        final HtmlElement htmlElement) {
+
+        return executeJavaScriptIfPossible(sourceCode, sourceName, 1);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * <p>
+     * Execute the specified javascript if a javascript engine was successfully
+     * instantiated.  If this javascript causes the current page to be reloaded
+     * (through location="" or form.submit()) then return the new page.  Otherwise
+     * return the current page.
+     * </p>
+     * <p><b>Please note:</b> Although this method is public, it is not intended for
+     * general execution of javascript.  Users of HtmlUnit should interact with the pages
+     * as a user would by clicking on buttons or links and having the javascript event
+     * handlers execute as needed..
+     * </p>
+     *
+     * @param sourceCode The javascript code to execute.
+     * @param sourceName The name for this chunk of code.  This name will be displayed
+     * in any error messages.
+     * @param startLine the line at which the script source starts
+     * @return A ScriptResult which will contain both the current page (which may be different than
+     * the previous page and a javascript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(
-        String sourceCode, final String sourceName,
-        final HtmlElement htmlElement) {
+        String sourceCode, final String sourceName, final int startLine) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
         if (!getWebClient().isJavaScriptEnabled() || engine == null) {
@@ -719,7 +762,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
-        final Object result = engine.execute(this, sourceCode, sourceName, htmlElement);
+        final Object result = engine.execute(this, sourceCode, sourceName, startLine);
 
         WebWindow firstWindow = getWebClient().popFirstWindow();
         if (firstWindow == null) {
@@ -796,7 +839,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 return;
             }
 
-            engine.execute(this, loadJavaScriptFromUrl(scriptURL, charset), scriptURL.toExternalForm(), null);
+            engine.execute(this, loadJavaScriptFromUrl(scriptURL, charset), scriptURL.toExternalForm(), 1);
         }
     }
 
