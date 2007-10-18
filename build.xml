@@ -87,6 +87,7 @@
             <include name="yui/**/*"/>
             <include name="*.htm*"/>
             <include name="*.txt*"/>
+            <include name="*.js"/>
         </fileset>
     </copy>
 </target>
