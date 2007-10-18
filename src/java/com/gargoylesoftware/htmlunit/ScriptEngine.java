@@ -97,25 +97,11 @@ public abstract class ScriptEngine {
      * @param sourceCode The code to execute.
      * @param sourceName A name for the chunk of code that is going to be executed.  This will be
      * used in error messages.
-     * @return The result of executing the specified code
-     */
-    public Object execute(
-            final HtmlPage htmlPage, final String sourceCode, final String sourceName) {
-
-        return execute(htmlPage, sourceCode, sourceName, null);
-    }
-
-    /**
-     * Execute the specified source code in the context of the given page.
-     * @param htmlPage The page
-     * @param sourceCode The code to execute.
-     * @param sourceName A name for the chunk of code that is going to be executed.  This will be
-     * used in error messages.
-     * @param htmlElement The html element that will act as the context.
+     * @param startLine the line at which the script source starts
      * @return The result of executing the specified code
      */
     public abstract Object execute(
-        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement);
+            final HtmlPage htmlPage, final String sourceCode, final String sourceName, int startLine);
 
     /**
      * Call a JavaScript function and return the result.

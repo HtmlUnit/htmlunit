@@ -357,6 +357,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final Window thisWindow = (Window) scriptable;
         final Object codeToExec = getObjectArg(0, args, null);
         final int timeout = getIntArg(1, args, 0);
+
+        thisWindow.getLog().debug("setTimeout(" + codeToExec + ", " + timeout + ")");
         final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, false, "setTimeout");
         final int id = thisWindow.getWebWindow().getThreadManager().startThread(job, "window.setTimeout");
         return id;

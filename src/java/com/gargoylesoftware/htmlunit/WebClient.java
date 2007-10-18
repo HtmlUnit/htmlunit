@@ -1339,7 +1339,7 @@ public class WebClient implements Serializable {
         final FrameWindow frameWindow = (FrameWindow) webWindow;
         final HtmlPage enclosingPage = frameWindow.getEnclosingPage();
         final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
-            url.toExternalForm(), "javascript url", null);
+            url.toExternalForm(), "javascript url", 1);
 
         final String contentString = scriptResult.getJavaScriptResult().toString();
         return new StringWebResponse(contentString, charset);

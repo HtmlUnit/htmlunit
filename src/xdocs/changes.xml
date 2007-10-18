@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript exceptions: line number information now relative to the page.
+            </action>
+            <action type="add" dev="mguillem">
+                Add HtmlPage.executeJavaScript to inject JavaScript code in a page.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for element.dispatchEvent(event) (Firefox only).
             </action>

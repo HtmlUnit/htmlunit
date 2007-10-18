@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
@@ -98,7 +97,7 @@ public class ScriptEngineTest extends WebTestCase {
         client.setScriptEngine(new JavaScriptEngine(client) {
             public Object execute(
                     final HtmlPage htmlPage, final String sourceCode,
-                    final String sourceName, final HtmlElement htmlElement) {
+                    final String sourceName, final int startLine) {
                 collectedScripts.add(sourceCode);
                 return null;
             }

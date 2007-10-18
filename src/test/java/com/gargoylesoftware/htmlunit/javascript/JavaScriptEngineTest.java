@@ -59,7 +59,6 @@ import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -378,7 +377,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             client.getPage(URL_GARGOYLE);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage().indexOf(urlScript.toString()) > -1);
+            assertTrue(e.getMessage(), e.getMessage().indexOf(urlScript.toString()) > -1);
         }
     }
 
@@ -1109,12 +1108,12 @@ public class JavaScriptEngineTest extends WebTestCase {
             delegate_.initialize(window);
         }
 
-        /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,HtmlElement) */
+        /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,int) */
         public Object execute(
                 final HtmlPage htmlPage, final String sourceCode,
-                final String sourceName, final HtmlElement htmlElement) {
+                final String sourceName, final int startLine) {
             scriptExecutionCount_++;
-            return delegate_.execute(htmlPage, sourceCode, sourceName, htmlElement);
+            return delegate_.execute(htmlPage, sourceCode, sourceName, startLine);
         }
 
         /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
@@ -1169,7 +1168,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             "<html><head>\n"
             + "<script><!-- alert(1);\n"
             + " alert(2);\n"
-            + "alert(3) --></script>\n"
+            + "alert(3) -->\n</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -1179,8 +1178,8 @@ public class JavaScriptEngineTest extends WebTestCase {
             loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
             fail();
         }
-        catch (final Exception e) {
-            //expected exception
+        catch (final ScriptException e) {
+            assertEquals(4, e.getFailingLineNumber());
         }
     }
 

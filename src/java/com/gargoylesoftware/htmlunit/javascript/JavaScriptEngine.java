@@ -64,7 +64,6 @@ import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -305,84 +304,47 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * @param htmlPage The page that the code will execute within
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name that will be displayed on error conditions.
-     * @param htmlElement The element that will be used as context.
+     * @param startLine the line at which the script source starts
      * @return The result of executing the specified code.
      */
     public Object execute(final HtmlPage htmlPage,
                            String sourceCode,
                            final String sourceName,
-                           final HtmlElement htmlElement) {
+                           final int startLine) {
 
         Assert.notNull("sourceCode", sourceCode);
 
         // Pre process the source code
-        sourceCode = preProcess(htmlPage, sourceCode, sourceName, htmlElement);
-
+        sourceCode = preProcess(htmlPage, sourceCode, sourceName, null);
+        
         // PreProcess IE Conditional Compilation if needed
         final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
         if (browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 4) {
             final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
-            sourceCode = ieCCPreProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
+            sourceCode = ieCCPreProcessor.preProcess(htmlPage, sourceCode, sourceName, null);
         }
 
-        // Remove html comments around the source if needed
-        sourceCode = sourceCode.trim();
-        if (sourceCode.startsWith("<!--")) {
-            int startIndex = 4;
-
-            int endIndex;
-            if (sourceCode.endsWith("-->")) {
-                endIndex = sourceCode.length() - 3;
-
-                // check for last line that has
-                // "statement-->", but not "statement//-->"
-                int lastLineIndex;
-                for (lastLineIndex = endIndex; lastLineIndex > startIndex; lastLineIndex--) {
-                    final char eachChar = sourceCode.charAt(lastLineIndex);
-                    if (eachChar == '\n' || eachChar == '\r') {
-                        final String lastLine = sourceCode.substring(lastLineIndex + 1, endIndex);
-                        if (lastLine.indexOf("//") == -1 && lastLine.trim().length() != 0) {
-                            if (getWebClient().getBrowserVersion().isIE()) {
-                                //IE ignores last line
-                                endIndex = lastLineIndex;
-                            }
-                            else {
-                                //FF gives syntax error
-                                throw new IllegalArgumentException("Syntax error for \"" + lastLine +  "-->" + '"');
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-            else {
-                endIndex = sourceCode.length();
-            }
-
-            if (startIndex >= endIndex) {
-                sourceCode = "";
-            }
-            else {
-                // Anything on the same line as the opening comment should be ignored
-                for ( ; startIndex < endIndex; startIndex++) {
-                    final char eachChar = sourceCode.charAt(startIndex);
-                    if (eachChar == '\n' || eachChar == '\r') {
-                        break;
-                    }
-                }
-
-                sourceCode = sourceCode.substring(startIndex, endIndex);
+        // Remove HTML comments around the source if needed
+        final String sourceCodeTrimmed = sourceCode.trim();
+        if (sourceCodeTrimmed.startsWith("<!--")) {
+            sourceCode = sourceCode.replaceFirst("<!--", "// <!--");
+        }
+        // IE ignores the last line containing uncommented -->
+        if (getWebClient().getBrowserVersion().isIE() && sourceCodeTrimmed.endsWith("-->")) {
+            final int lastDoubleSlash = sourceCode.lastIndexOf("//");
+            final int lastNewLine = Math.max(sourceCode.lastIndexOf('\n'), sourceCode.lastIndexOf('\r'));
+            if (lastNewLine > lastDoubleSlash) {
+                sourceCode = sourceCode.substring(0, lastNewLine);
             }
         }
 
-        final Scriptable scope = getScope(htmlPage, htmlElement);
-        final int lineNumber = 1;
+        final Scriptable scope = getScope(htmlPage, null);
 
         final String source = sourceCode;
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
         {
             public Object doRun(final Context cx) {
-                return cx.evaluateString(scope, source, sourceName, lineNumber, null);
+                return cx.evaluateString(scope, source, sourceName, startLine, null);
             }
 
             protected String getSourceCode(final Context cx) {

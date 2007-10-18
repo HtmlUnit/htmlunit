@@ -153,6 +153,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                 getLog().debug("Calling onreadystatechange handler for state " + state);
                 jsEngine.callFunction(containingPage_, stateChangeHandler_, context,
                         this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
+                getLog().debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
+                getLog().debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
         }
     }

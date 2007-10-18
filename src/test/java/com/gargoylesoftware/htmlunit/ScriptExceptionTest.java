@@ -41,9 +41,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -127,4 +129,28 @@ public final class ScriptExceptionTest extends WebTestCase {
         return IOUtils.toString(stream);
     }
 
+    /**
+     *
+     * @throws Exception if the test fails
+     */
+    public void testErrorLineNumber() throws Exception {
+        testErrorLineNumber("testJsError1.html", 6);
+        testErrorLineNumber("testJsError2.html", 7);
+        testErrorLineNumber("testJsError3.html", 6);
+        testErrorLineNumber("testJsError4.html", 8);
+    }
+
+    private void testErrorLineNumber(final String fileName, final int errorLine) throws Exception {
+        final WebClient webClient = new WebClient();
+        final URL url = getClass().getClassLoader().getResource(fileName);
+        assertNotNull(url);
+        try {
+            final HtmlPage page = (HtmlPage) webClient.getPage(url);
+            ((ClickableElement) page.getHtmlElementById("clickMe")).click();
+            fail();
+        }
+        catch (final ScriptException e) {
+            assertEquals(errorLine, e.getFailingLineNumber());
+        }
+    }
 }

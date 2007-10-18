@@ -519,7 +519,7 @@ public class FormTest extends WebTestCase {
         assertEquals("first", page.getTitleText());
 
         final HtmlPage secondPage =
-            (HtmlPage) page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
+            (HtmlPage) page.executeJavaScript("document.form1.submit()").getNewPage();
         assertEquals("second", secondPage.getTitleText());
     }
 
@@ -575,7 +575,7 @@ public class FormTest extends WebTestCase {
         assertEquals("first", page.getTitleText());
 
         final HtmlPage secondPage
-            = (HtmlPage) page.executeJavaScriptIfPossible("document.form1.submit()", "test", null).getNewPage();
+            = (HtmlPage) page.executeJavaScript("document.form1.submit()").getNewPage();
         assertEquals("second", secondPage.getTitleText());
         assertEquals("MyNewWindow", secondPage.getEnclosingWindow().getName());
     }

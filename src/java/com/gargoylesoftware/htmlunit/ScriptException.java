@@ -47,6 +47,7 @@ import java.util.StringTokenizer;
 
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.JavaScriptException;
+import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.WrappedException;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -241,13 +242,9 @@ public class ScriptException extends RuntimeException {
      * execution of a script.
      */
     public int getFailingLineNumber() {
-        if (scriptSourceCode_ == null) {
-            return -1;
-        }
-
-        if (getCause() instanceof EcmaError) {
-            final EcmaError ecmaError = (EcmaError) getCause();
-            return ecmaError.lineNumber();
+        if (getCause() instanceof RhinoException) {
+            final RhinoException cause = (RhinoException) getCause();
+            return cause.lineNumber();
         }
 
         return -1;
