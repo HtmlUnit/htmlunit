@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +75,8 @@ public class XMLElementTest extends WebTestCase {
         final String firstContent = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
-            + "    doc.async=false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    doc.async = false;\n"
+            + "    alert(doc.load('foo.xml'));\n"
             + "    var attributes = doc.documentElement.attributes;\n"
             + "    alert(attributes.length);\n"
             + "    alert(attributes[0].name + ' ' + attributes[0].value);\n"
@@ -84,6 +85,9 @@ public class XMLElementTest extends WebTestCase {
             + "    root.setAttribute('attrName', 'anotherValue');\n"
             + "    alert(root.getAttribute('attrName'));\n"
             + "    alert(root.getElementsByTagName('book').length);\n"
+            + "    var description = root.getElementsByTagName('description')[0];\n"
+            + "    alert(description.firstChild.nodeType);\n"
+            + "    alert(description.firstChild.nodeValue);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -99,16 +103,18 @@ public class XMLElementTest extends WebTestCase {
             + "  <book>\n"
             + "    <title>Immortality</title>\n"
             + "    <author>John Smith</author>\n"
+            + "    <description><![CDATA[<span id='label'>changed</span>]]></description>\n"
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "anotherValue", "1"};
+        final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "anotherValue",
+            "1", "4", "<span id='label'>changed</span>"};
         final List collectedAlerts = new ArrayList();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
         conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent, "text/xml");
+        conn.setResponse(new URL(URL_FIRST, "foo.xml"), secondContent, "text/xml");
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);

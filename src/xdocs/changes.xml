@@ -8,7 +8,10 @@
     <body>
         <release version="1.14-prerelease">
             <action type="add" dev="mguillem">
-                Added facility method DomNode.getFirstByXPath(xpathExpr).
+                Add support for CDATA sections of xml documents.
+            </action>
+            <action type="add" dev="mguillem">
+                Add facility method DomNode.getFirstByXPath(xpathExpr).
             </action>
             <action type="add" dev="mguillem">
                 JavaScript exceptions: line number information now relative to the page.

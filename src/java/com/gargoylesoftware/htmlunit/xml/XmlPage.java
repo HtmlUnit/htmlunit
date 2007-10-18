@@ -53,6 +53,7 @@ import org.xml.sax.SAXException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 
@@ -122,9 +123,15 @@ public class XmlPage extends SgmlPage {
                     final DomText text = new DomText(this, child.getNodeValue());
                     xml.appendDomChild(text);
                     break;
+                    
+                case Node.CDATA_SECTION_NODE:
+                    final DomCData cdata = new DomCData(this, child.getNodeValue());
+                    xml.appendDomChild(cdata);
+                    break;
 
                 default:
-                    getLog().warn("NodeType " + child.getNodeType() + " is not yet supported.");
+                    getLog().warn("NodeType " + child.getNodeType()
+                            + " (" + child.getNodeName() + ") is not yet supported.");
             }
         }
     }
