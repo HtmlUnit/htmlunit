@@ -839,7 +839,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 return;
             }
 
-            engine.execute(this, loadJavaScriptFromUrl(scriptURL, charset), scriptURL.toExternalForm(), 1);
+            final String code = loadJavaScriptFromUrl(scriptURL, charset);
+            if (code != null) {
+                engine.execute(this, code, scriptURL.toExternalForm(), 1);
+            }
         }
     }
 
@@ -871,54 +874,60 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
+     * Loads JavaScript from the specified URL. This method may return <tt>null</tt> if
+     * there is a problem loading the code from the specified URL.
      *
      * @param url the url of the script
      * @param charset the charset to use to read the text
      * @return the content of the file
      */
     private String loadJavaScriptFromUrl(final URL url, final String charset) {
+
         String scriptEncoding = charset;
         getPageEncoding();
+
+        WebResponse webResponse;
         try {
             final WebRequestSettings requestSettings = new WebRequestSettings(url);
-            final WebResponse webResponse = getWebClient().loadWebResponse(requestSettings);
-            if (webResponse.getStatusCode() == HttpStatus.SC_OK) {
-                final String contentType = webResponse.getContentType();
-                final String contentCharset = webResponse.getContentCharSet();
-                if (!contentType.equalsIgnoreCase("text/javascript")
-                        && !contentType.equalsIgnoreCase("application/x-javascript")) {
-                    getLog().warn(
-                        "Expected content type of text/javascript or application/x-javascript for remotely "
-                        + "loaded javascript element " + url + " but got [" + webResponse.getContentType() + "]");
-                }
-                if (StringUtils.isEmpty(scriptEncoding)) {
-                    if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
-                        scriptEncoding = contentCharset;
-                    }
-                    else if (!originalCharset_.equals(TextUtil.DEFAULT_CHARSET)) {
-                        scriptEncoding = originalCharset_;
-                    }
-                    else {
-                        scriptEncoding = TextUtil.DEFAULT_CHARSET;
-                    }
-                }
-                final byte [] data = webResponse.getResponseBody();
-                return EncodingUtil.getString(data, 0, data.length, scriptEncoding);
+            webResponse = getWebClient().loadWebResponse(requestSettings);
+        }
+        catch (final IOException e) {
+            getLog().error("Error loading JavaScript from [" + url.toExternalForm() + "].", e);
+            return null;
+        }
+
+        getWebClient().printContentIfNecessary(webResponse);
+        getWebClient().throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
+
+        final int statusCode = webResponse.getStatusCode();
+        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
+        if (!successful) {
+            return null;
+        }
+
+        final String contentType = webResponse.getContentType();
+        if (!contentType.equalsIgnoreCase("text/javascript")
+            && !contentType.equalsIgnoreCase("application/x-javascript")) {
+            getLog().warn("Expected content type of 'text/javascript' or 'application/x-javascript' for "
+                            + "remotely loaded JavaScript element at '" + url + "', "
+                            + "but got '" + contentType + "'.");
+        }
+
+        if (StringUtils.isEmpty(scriptEncoding)) {
+            final String contentCharset = webResponse.getContentCharSet();
+            if (!contentCharset.equals(TextUtil.DEFAULT_CHARSET)) {
+                scriptEncoding = contentCharset;
+            }
+            else if (!originalCharset_.equals(TextUtil.DEFAULT_CHARSET)) {
+                scriptEncoding = originalCharset_;
             }
             else {
-                getLog().error("Error loading javascript from [" + url.toExternalForm()
-                    + "] status=[" + webResponse.getStatusCode() + " "
-                    + webResponse.getStatusMessage() + "]");
-                throw new FailingHttpStatusCodeException(webResponse);
+                scriptEncoding = TextUtil.DEFAULT_CHARSET;
             }
         }
-        catch (final Exception e) {
-            getLog().error("Error loading javascript from [" + url.toExternalForm() + "]: ", e);
-            if (getWebClient().isThrowExceptionOnScriptError()) {
-                throw new ScriptException(this, e);
-            }
-        }
-        return "";
+
+        final byte[] data = webResponse.getResponseBody();
+        return EncodingUtil.getString(data, 0, data.length, scriptEncoding);
     }
 
     /**

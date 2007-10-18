@@ -341,23 +341,10 @@ public class WebClient implements Serializable {
         else {
             webResponse = loadWebResponse(parameters);
         }
-        final String contentType = webResponse.getContentType();
-        final int statusCode = webResponse.getStatusCode();
 
-        final boolean wasResponseSuccessful =
-            statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
-
-        if (printContentOnFailingStatusCode_ && !wasResponseSuccessful) {
-            getLog().info("statusCode=[" + statusCode
-                + "] contentType=[" + contentType + "]");
-            getLog().info(webResponse.getContentAsString());
-        }
-
+        printContentIfNecessary(webResponse);
         loadWebResponseInto(webResponse, webWindow);
-
-        if (isThrowExceptionOnFailingStatusCode() && !wasResponseSuccessful) {
-            throw new FailingHttpStatusCodeException(webResponse);
-        }
+        throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
 
         return webWindow.getEnclosedPage();
     }
@@ -493,6 +480,24 @@ public class WebClient implements Serializable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     *
+     * <p>Logs the response's content if its status code indicates a request failure and
+     * {@link #getPrintContentOnFailingStatusCode()} returns <tt>true</tt>.
+     *
+     * @param webResponse the response whose content may be logged
+     */
+    public void printContentIfNecessary(final WebResponse webResponse) {
+        final String contentType = webResponse.getContentType();
+        final int statusCode = webResponse.getStatusCode();
+        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
+        if (getPrintContentOnFailingStatusCode() && !successful) {
+            getLog().info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
+            getLog().info(webResponse.getContentAsString());
+        }
+    }
+
+    /**
      *  Specify whether or not an exception will be thrown in the event of a
      *  failing status code. Successful status codes are in the range 200-299.
      *  The default is true.
@@ -510,6 +515,22 @@ public class WebClient implements Serializable {
      */
     public boolean isThrowExceptionOnFailingStatusCode() {
         return throwExceptionOnFailingStatusCode_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     *
+     * <p>Throws a {@link FailingHttpStatusCodeException} if the request's status code indicates a request
+     * failure and {@link #isThrowExceptionOnFailingStatusCode()} returns <tt>true</tt>.
+     *
+     * @param webResponse the response which may trigger a {@link FailingHttpStatusCodeException}
+     */
+    public void throwFailingHttpStatusCodeExceptionIfNecessary(final WebResponse webResponse) {
+        final int statusCode = webResponse.getStatusCode();
+        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
+        if (isThrowExceptionOnFailingStatusCode() && !successful) {
+            throw new FailingHttpStatusCodeException(webResponse);
+        }
     }
 
     /**

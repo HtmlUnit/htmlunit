@@ -43,7 +43,6 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -65,35 +64,45 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * Verifies that a failing HTTP status code for a JavaScript file request (like a 404 response)
+     * results in a {@link FailingHttpStatusCodeException}, depending on how the client has been
+     * configured.
+     *
+     * @see HtmlPage#loadJavaScriptFromUrl(java.net.URL, String)
+     * @see WebClient#isThrowExceptionOnFailingStatusCode()
+     * @throws Exception if an error occurs
      */
     public void testBadExternalScriptReference() throws Exception {
+
         final String html = "<html><head><title>foo</title>\n"
-                + "<script src='notExisting.js'></script>\n"
+                + "<script src='inexistent.js'></script>\n"
                 + "</head><body></body></html>";
 
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setDefaultResponse("", 404, "not found", "text/html");
+        webConnection.setDefaultResponse("inexistent", 404, "Not Found", "text/html");
         webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
         try {
             client.getPage(URL_FIRST);
-            fail("Should throw");
+            fail("Should throw.");
         }
-        catch (final ScriptException e) {
-            assertTrue("exception contains url of failing script", e
-                    .getMessage().indexOf(URL_FIRST.toExternalForm()) > -1);
+        catch (final FailingHttpStatusCodeException e) {
+            final String url = URL_FIRST.toExternalForm();
+            assertTrue("exception contains url of failing script", e.getMessage().indexOf(url) > -1);
+            assertEquals(404, e.getStatusCode());
+            assertEquals("Not Found", e.getStatusMessage());
+        }
 
-            assertNotNull(e.getCause());
-            assertEquals(FailingHttpStatusCodeException.class, e.getCause()
-                    .getClass());
-            final FailingHttpStatusCodeException cause = (FailingHttpStatusCodeException) e
-                    .getCause();
-            assertEquals(404, cause.getStatusCode());
-            assertEquals("not found", cause.getStatusMessage());
+        client.setThrowExceptionOnFailingStatusCode(false);
+
+        try {
+            client.getPage(URL_FIRST);
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            fail("Should not throw.");
         }
     }
 
