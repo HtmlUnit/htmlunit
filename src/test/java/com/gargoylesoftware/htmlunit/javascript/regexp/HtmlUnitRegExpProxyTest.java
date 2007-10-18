@@ -88,7 +88,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         topScope.put("str", topScope, str_);
         topScope.put("text", topScope, text_);
         topScope.put("expected", topScope, expected_);
-        page.executeJavaScriptIfPossible(src_, "custom", page.getDocumentHtmlElement());
+        page.executeJavaScript(src_);
     }
 
     /**
