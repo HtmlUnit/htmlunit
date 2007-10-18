@@ -1168,7 +1168,25 @@ public abstract class DomNode implements Cloneable, Serializable {
         final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr, navigator);
         return xpath.selectNodes(this);
     }
-    
+
+    /**
+     * Facility to evaluate an xpath from the current node and get the first result.
+     * The current node is considered as the document root for the evaluation
+     * therefore parent nodes can't be reached.
+     * @param xpathExpr the xpath expression
+     * @return <code>null</code> if no result is found, the first one otherwise
+     * @throws JaxenException if the xpath expression can't be parsed/evaluated
+     */
+    public Object getFirstByXPath(final String xpathExpr) throws JaxenException {
+        final List results = getByXPath(xpathExpr);
+        if (results.isEmpty()) {
+            return null;
+        }
+        else {
+            return results.get(0);
+        }
+    }
+
     /**
      * Facility to notify the registered {@link IncorrectnessListener} of something that is not fully correct.
      * @param message the notification

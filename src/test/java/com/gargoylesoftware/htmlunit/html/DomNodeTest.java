@@ -356,12 +356,39 @@ public class DomNodeTest extends WebTestCase {
         assertEquals(results, head.getByXPath("title"));
 
         final HtmlParagraph p = (HtmlParagraph) page.getByXPath("//p").get(0);
-        assertEquals(p, page.getHtmlElementById("p1"));
+        assertSame(p, page.getHtmlElementById("p1"));
         final List lis = p.getByXPath("ul/li");
         assertEquals(2, lis.size());
         assertEquals(lis, page.getByXPath("//ul/li"));
 
         assertEquals(2, ((Number) p.getByXPath("count(//li)").get(0)).intValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetFirstByXPath() throws Exception {
+        final String htmlContent
+            = "<html><head><title>my title</title></head><body>\n"
+            + "<p id='p1'><ul><li>foo 1</li><li>foo 2</li></li></p>\n"
+            + "<div><span>bla</span></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTitle title = (HtmlTitle) page.getFirstByXPath("//title");
+        assertEquals("my title", title.asText());
+
+        final HtmlHead head = (HtmlHead) title.getParentDomNode();
+        assertSame(title, head.getFirstByXPath("//title"));
+        assertSame(title, head.getFirstByXPath("/title"));
+        assertSame(title, head.getFirstByXPath("title"));
+
+        final HtmlParagraph p = (HtmlParagraph) page.getFirstByXPath("//p");
+        assertSame(p, page.getHtmlElementById("p1"));
+        final HtmlListItem listItem = (HtmlListItem) p.getFirstByXPath("ul/li");
+        assertSame(listItem, page.getFirstByXPath("//ul/li"));
+
+        assertEquals(2, ((Number) p.getFirstByXPath("count(//li)")).intValue());
     }
 
     /**
