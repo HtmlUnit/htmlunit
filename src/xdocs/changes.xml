@@ -7,6 +7,11 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="mguillem" id="1753734">
+                Don't use custom RetryHandler anymore to allow standard retry when server drops the connection
+                what caused NoHttpResponseException.
+                (see http://jakarta.apache.org/httpcomponents/httpclient-3.x/exception-handling.html).
+            </action>
             <action type="fix" dev="sdanig">
                 Make the loading of external .js files referenced via script tags
                 listen to WebClient.getPrintContentOnFailingStatusCode() and

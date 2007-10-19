@@ -50,7 +50,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
@@ -68,7 +67,6 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.PartBase;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
-import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
@@ -91,13 +89,6 @@ public class HttpWebConnection extends WebConnectionImpl {
     private HttpClient httpClient_;
 
     private String virtualHost_;
-
-    // http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery
-    private static final HttpMethodRetryHandler NoAutoRetry = new HttpMethodRetryHandler() {
-        public boolean retryMethod(final HttpMethod arg0, final IOException arg1, final int arg2) {
-            return false;
-        }
-    };
 
     /**
      * Create a new HTTP web connection instance.
@@ -290,7 +281,6 @@ public class HttpWebConnection extends WebConnectionImpl {
         writeRequestHeadersToHttpMethod(httpMethod, webRequestSettings.getAdditionalHeaders());
         httpMethod.setFollowRedirects(false);
 
-        httpMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, NoAutoRetry);
         if (webRequestSettings.getCredentialsProvider() != null) {
             httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER,
                     webRequestSettings.getCredentialsProvider());
