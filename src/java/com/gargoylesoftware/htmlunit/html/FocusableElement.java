@@ -60,19 +60,4 @@ public abstract class FocusableElement extends ClickableElement {
             final Map attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
-
-    /**
-     * Remove focus from this element.
-     */
-    public void blur() {
-        getPage().moveFocusToElement(null);
-    }
-
-    /**
-     * Set the focus to this element.
-     */
-    public void focus() {
-        getPage().moveFocusToElement(this);
-    }
-
 }

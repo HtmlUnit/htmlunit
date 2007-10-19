@@ -993,10 +993,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
          * The original Iterator on the attribute map.
          */
         private final Iterator baseIter_;
-        /**
-         * The page enclosing the HtmlElement that contains these attributes.
-         */
-        private final HtmlElement element_;
 
         /**
          * Wraps a new iterator around an iterator of attributes.
@@ -1006,7 +1002,6 @@ public abstract class HtmlElement extends DomNamespaceNode {
          */
         public MapEntryWrappingIterator(final Iterator iterator, final HtmlElement htmlElement) {
             baseIter_ = iterator;
-            element_ = htmlElement;
         }
 
         /**
@@ -1370,5 +1365,19 @@ public abstract class HtmlElement extends DomNamespaceNode {
             return mouseUpPage;
         }
         return doMouseEvent(MouseEvent.TYPE_CONTEXT_MENU, shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
+    }
+    
+    /**
+     * Remove focus from this element.
+     */
+    public void blur() {
+        getPage().moveFocusToElement(null);
+    }
+
+    /**
+     * Set the focus to this element.
+     */
+    public void focus() {
+        getPage().moveFocusToElement(this);
     }
 }

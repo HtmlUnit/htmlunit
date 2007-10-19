@@ -324,8 +324,6 @@
 
     <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
         JSObject="true">
-        <function name="blur"/>
-        <function name="focus"/>
     </class>
 
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
@@ -576,6 +574,7 @@
         <function name="addBehavior">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </function>
+        <function name="blur"/>
         <function name="contains" notImplemented="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
@@ -591,6 +590,7 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="focus"/>
         <function name="getAttribute">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>

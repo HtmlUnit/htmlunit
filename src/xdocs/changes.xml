@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem" due-to="Sam Hough" id="1815275">
+                JavaScript: make focus and blur available on HtmlElement.
+            </action>
             <action type="fix" dev="mguillem" id="1753734">
                 Don't use custom RetryHandler anymore to allow standard retry when server drops the connection
                 what caused NoHttpResponseException.

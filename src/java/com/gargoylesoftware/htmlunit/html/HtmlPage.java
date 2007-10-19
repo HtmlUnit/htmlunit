@@ -101,7 +101,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     private       Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
     private       Map nameMap_ = new HashMap(); // a map of (name, List(HtmlElement))
     private       HtmlElement documentElement_;
-    private FocusableElement elementWithFocus_;
+    private       HtmlElement elementWithFocus_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
 
@@ -1291,7 +1291,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         final HtmlElement elementToGiveFocus;
-        final FocusableElement elementWithFocus = getElementWithFocus();
+        final HtmlElement elementWithFocus = getElementWithFocus();
         if (elementWithFocus == null) {
             elementToGiveFocus = (HtmlElement) elements.get(0);
         }
@@ -1331,7 +1331,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         final HtmlElement elementToGiveFocus;
-        final FocusableElement elementWithFocus = getElementWithFocus();
+        final HtmlElement elementWithFocus = getElementWithFocus();
         if (elementWithFocus == null) {
             elementToGiveFocus = (HtmlElement) elements.get(elements.size() - 1);
         }
@@ -1571,7 +1571,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @see #pressAccessKey(char)
      * @see #assertAllTabIndexAttributesSet()
      */
-    public boolean moveFocusToElement(final FocusableElement newElement) {
+    public boolean moveFocusToElement(final HtmlElement newElement) {
         if (elementWithFocus_ == newElement) {
             // nothing to do
             return true;
@@ -1597,9 +1597,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * Return the element with the focus or null if no element has the focus.
      * @return The element with focus or null.
-     * @see #moveFocusToElement(FocusableElement)
+     * @see #moveFocusToElement(HtmlElement)
      */
-    public FocusableElement getElementWithFocus() {
+    public HtmlElement getElementWithFocus() {
         return elementWithFocus_;
     }
 

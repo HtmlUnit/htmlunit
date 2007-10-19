@@ -37,9 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -205,5 +208,26 @@ public class FocusableElementTest extends WebTestCase {
 
         final HtmlPage page = loadPage(html);
         ((HtmlAnchor) page.getAnchors().get(0)).click();
+    }
+    
+    /**
+     * Test focus on all types of elements
+     * @throws Exception if the test fails
+     */
+    public void testOnAllElements() throws Exception {
+        final URL url = getClass().getResource("FocusableElementTest_onAllElements.html");
+        final String[] browserAlias = {"FIREFOX_2", "INTERNET_EXPLORER_6_0"};
+        for (int i = 0; i < browserAlias.length; i++) {
+            final BrowserVersion browserVersion =
+                (BrowserVersion) BrowserVersion.class.
+                    getDeclaredField(browserAlias[i]).get(null);
+            final WebClient client = new WebClient(browserVersion);
+        
+            final HtmlPage page = (HtmlPage) client.getPage(url);
+            final String want = page.getHtmlElementById(browserAlias[i]).asText();
+            final String got = page.getHtmlElementById("log").asText();
+   
+            assertEquals(browserAlias[i], want, got);
+        }
     }
 }

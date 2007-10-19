@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.FocusableElement;
-
 /**
  * An abstract base class for javascript objects that implement blur() and focus().
  *
@@ -49,21 +47,5 @@ import com.gargoylesoftware.htmlunit.html.FocusableElement;
 public class FocusableHostElement extends HTMLElement {
 
     private static final long serialVersionUID = 1978408728249963149L;
-
-    /**
-     * Remove focus from this element.
-     */
-    public void jsxFunction_blur() {
-        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
-        element.blur();
-    }
-
-    /**
-     * Set the focus to this element.
-     */
-    public void jsxFunction_focus() {
-        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
-        element.focus();
-    }
 
 }

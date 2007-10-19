@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.FocusableElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
@@ -1781,5 +1782,21 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public final HtmlElement getHtmlElementOrNull() {
         return (HtmlElement) getDomNodeOrNull();
+    }
+    
+    /**
+     * Remove focus from this element.
+     */
+    public void jsxFunction_blur() {
+        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        element.blur();
+    }
+
+    /**
+     * Set the focus to this element.
+     */
+    public void jsxFunction_focus() {
+        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        element.focus();
     }
 }
