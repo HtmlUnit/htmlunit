@@ -112,16 +112,6 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void testYUI() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "YUI.html", Collections.EMPTY_LIST);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
     public void testCalendar() throws Exception {
         if (notYetImplemented()) {
             return;
