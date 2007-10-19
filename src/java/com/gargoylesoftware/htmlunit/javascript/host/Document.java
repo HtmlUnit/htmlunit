@@ -57,7 +57,6 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPathFunctionContext;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.UniqueTag;
 import org.w3c.dom.DOMException;
@@ -124,6 +123,7 @@ public class Document extends NodeImpl {
     private HTMLCollection images_; // has to be a member to have equality (==) working
     private HTMLCollection scripts_; // has to be a member to have equality (==) working
     private HTMLCollection anchors_; // has to be a member to have equality (==) working
+    private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
     private final StringBuffer writeBuffer_ = new StringBuffer();
@@ -1143,12 +1143,13 @@ public class Document extends NodeImpl {
      * Retrieves a collection of styleSheet objects representing the style sheets that correspond
      * to each instance of a Link or {@link Style} object in the document.
      *
-     * The current implementation returns empty array.
-     *
      * @return styleSheet collection.
      */
     public Object jsxGet_styleSheets() {
-        return new NativeArray(0);
+        if (styleSheets_ == null) {
+            styleSheets_ = new StyleSheetList(this);
+        }
+        return styleSheets_;
     }
 
     /**

@@ -147,6 +147,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("ScoperFunctionObject");
         names.remove("Style");
         names.remove("Stylesheet");
+        names.remove("StyleSheetList");
         names.remove("TextRectangle");
         names.remove("UIEvent");
         names.remove("Window");

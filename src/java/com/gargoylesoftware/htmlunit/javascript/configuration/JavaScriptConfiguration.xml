@@ -923,6 +923,11 @@
         <browser name="Microsoft Internet Explorer"/>
     </class>
 
+    <class name="StyleSheetList" classname="com.gargoylesoftware.htmlunit.javascript.host.StyleSheetList" JSObject="true">
+        <property name="length" readable="true" writable="false"/>
+        <function name="item"/>
+    </class>
+
     <class name="Table" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.Table"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
         <property name="caption" readable="true" writable="false"/>
@@ -1275,5 +1280,5 @@
         <browser name="Firefox"/>
         <function name="serializeToString"/>
     </class>
-    
+
 </configuration>

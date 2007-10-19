@@ -2804,14 +2804,16 @@ public class DocumentTest extends WebTestCase {
     public void testStyleSheets() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    alert(document.styleSheets);\n"
             + "    alert(document.styleSheets.length);\n"
+            + "    alert(document.styleSheets == document.styleSheets);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
-        final String[] expectedAlerts = {"0"};
+        final String[] expectedAlerts = {"[object]", "0", "true"};
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
 }
