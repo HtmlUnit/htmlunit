@@ -49,6 +49,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
@@ -67,6 +68,8 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
+import org.apache.commons.httpclient.protocol.Protocol;
+import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -80,9 +83,10 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
 
 /**
- *  An object that represents a web browser
+ * An object that represents a web browser.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -978,6 +982,25 @@ public class WebClient implements Serializable {
      */
     public boolean isRedirectEnabled() {
         return isRedirectEnabled_;
+    }
+
+    /**
+     * If set to <tt>true</tt>, the client will accept connections to any host, regardless of
+     * whether they have valid certificates or not. This is especially useful when you are trying to
+     * connect to a server with expired or corrupt certificates.
+     *
+     * @param useInsecureSSL whether or not to use insecure SSL
+     * @throws GeneralSecurityException if a security error occurs
+     */
+    public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
+        if (useInsecureSSL) {
+            final ProtocolSocketFactory factory = new InsecureSSLProtocolSocketFactory();
+            final Protocol https = new Protocol("https", factory, 443);
+            Protocol.registerProtocol("https", https);
+        }
+        else {
+            Protocol.unregisterProtocol("https");
+        }
     }
 
     /**
