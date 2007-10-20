@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="add" dev="sdanig">
+                JavaScript: add support for the htmlElement.attributes collection.
+            </action>
+            <action type="add" dev="sdanig">
                 Add WebClient.setUseInsecureSSL(boolean): forces the client to trust all
                 hosts, regardless of their certificates. Makes it easy to work
                 around servers with expired or misconfigured certificates.

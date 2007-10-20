@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -89,6 +90,20 @@ public class Attribute extends SimpleScriptable {
         if (parent_ == null) {
             value_ = "";
         }
+    }
+
+    /**
+     * Ensures that all attributes are initialized correctly via {@link #init(String, HtmlElement)}.
+     *
+     * {@inheritDoc}
+     */
+    protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
+
+        super.setDomNode(domNode, assignScriptObject);
+
+        final String name = domNode.getNodeName();
+        final HtmlElement parent = (HtmlElement) domNode.getParentDomNode();
+        this.init(name, parent);
     }
 
     /**

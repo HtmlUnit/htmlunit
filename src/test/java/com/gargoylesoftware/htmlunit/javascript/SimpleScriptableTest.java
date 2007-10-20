@@ -126,7 +126,6 @@ public class SimpleScriptableTest extends WebTestCase {
 
         // Now pull out those names that we know don't have html equivalents
         names.remove("ActiveXObject");
-        names.remove("Attribute");
         names.remove("Document");
         names.remove("DOMImplementation");
         names.remove("DOMParser");
@@ -162,7 +161,7 @@ public class SimpleScriptableTest extends WebTestCase {
         };
         final Collection hostClassNames = new ArrayList(map.values());
         CollectionUtils.transform(hostClassNames, class2ShortName);
-        assertEquals(new TreeSet(names),  new TreeSet(hostClassNames));
+        assertEquals(new TreeSet(names), new TreeSet(hostClassNames));
     }
 
     private Set getFileNames(final String directoryName) {

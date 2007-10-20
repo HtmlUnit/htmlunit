@@ -44,11 +44,11 @@
     </class>
 
     <class name="Area" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
-        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
+        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
     </class>
 
     <class name="Attribute" classname="com.gargoylesoftware.htmlunit.javascript.host.Attribute"
-        JSObject="true">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAttr">
         <property name="expando" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -420,6 +420,7 @@
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
+        <property name="attributes" readable="true" writable="false"/>
         <property name="children" readable="true" writable="false">
             <doclink
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp"
@@ -703,6 +704,10 @@
         <function name="reload"/>
         <function name="replace"/>
         <function name="toString"/>
+    </class>
+
+    <class name="NamedNodeMap" classname="com.gargoylesoftware.htmlunit.javascript.NamedNodeMap" JSObject="true">
+        <property name="length" readable="true" writable="false"/>
     </class>
 
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"

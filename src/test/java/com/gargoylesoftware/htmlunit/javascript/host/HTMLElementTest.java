@@ -1917,4 +1917,30 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testAttributes() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var f = document.getElementById('f');\n"
+            + "    for(var i = 0; i < f.attributes.length; i++) {\n"
+            + "      alert(f.attributes[i].name + '=' + f.attributes[i].value);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form name='f' id='f' foo='bar' baz='blah'></form>\n"
+            + "</body>\n"
+            + "</html>";
+        final List actual = new ArrayList();
+        loadPage(html, actual);
+        final String[] expected = {"name=f", "id=f", "foo=bar", "baz=blah"};
+        assertEquals(expected, actual);
+    }
+
 }

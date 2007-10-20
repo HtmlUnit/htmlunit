@@ -82,6 +82,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 
 /**
@@ -337,6 +338,15 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         }
 
         return NOT_FOUND;
+    }
+
+    /**
+     * Returns a collection of the attributes of this element.
+     * @return a collection of the attributes of this element
+     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
+     */
+    public NamedNodeMap jsxGet_attributes() {
+        return new NamedNodeMap(getHtmlElementOrDie());
     }
 
     /**
