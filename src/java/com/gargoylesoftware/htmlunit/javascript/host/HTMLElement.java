@@ -1806,7 +1806,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * Set the focus to this element.
      */
     public void jsxFunction_focus() {
-        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        final HtmlElement element = (HtmlElement) getDomNodeOrDie();
         element.focus();
     }
 }
