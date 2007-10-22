@@ -2379,4 +2379,40 @@ public class WindowTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
     }
+
+    /**
+     * Verifies that <tt>this.arguments</tt> works from within a method invocation, in a
+     * function defined on the Function prototype object. This usage is required by the
+     * Ajax.NET Professional JavaScript library.
+     *
+     * @throws Exception if an error occurs
+     */
+    public void testFunctionPrototypeArguments() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html =
+            "<html>\n"
+          + "<body onload='test()'>\n"
+          + "<script>\n"
+          + "  function test() {\n"
+          + "    \n"
+          + "    Function.prototype.doAlerts = function() {\n"
+          + "      alert(this==o.f);\n"
+          + "      alert(this.arguments ? this.arguments.length : 'null');\n"
+          + "    }\n"
+          + "    \n"
+          + "    var o = function() {};\n"
+          + "    o.f = function(x, y, z) { this.f.doAlerts(); }\n"
+          + "    o.f('a', 'b');\n"
+          + "  }\n"
+          + "</script>\n"
+          + "</body>\n"
+          + "</html>";
+        final List actual = new ArrayList();
+        loadPage(html, actual);
+        final String[] expected = { "true", "2" };
+        assertEquals(expected, actual);
+    }
+
 }
