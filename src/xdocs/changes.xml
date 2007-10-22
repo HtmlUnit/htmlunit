@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                Add possibility to configure the mime type used when uploading a file.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for the htmlElement.attributes collection.
             </action>

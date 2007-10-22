@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
 import java.net.URI;
+import java.net.URL;
 import java.net.URLDecoder;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
@@ -140,4 +141,44 @@ public class HtmlFileInputTest extends WebTestCase {
         assertEquals("image", pair.getName());
         assertNull(pair.getFile());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testContentType() throws Exception {
+        final String firstContent
+            = "<html><head></head><body>\n"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
+            + "  <input type='file' name='image' />\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>second</title></head></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection(webConnection);
+    
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
+
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
+
+        fileInput.setValueAttribute(fileURL.toExternalForm());
+        f.submit((SubmittableElement) null);
+        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+        assertNotNull(pair.getFile());
+        assertFalse("Content type: " + pair.getContentType(), "text/webtest".equals(pair.getContentType()));
+
+        fileInput.setContentType("text/webtest");
+        f.submit((SubmittableElement) null);
+        final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
+        assertNotNull(pair2.getFile());
+        assertEquals("text/webtest", pair2.getContentType());
+    }
+
 }

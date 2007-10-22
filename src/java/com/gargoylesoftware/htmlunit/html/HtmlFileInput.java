@@ -55,10 +55,12 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HtmlFileInput extends HtmlInput {
 
     private static final long serialVersionUID = 7925479292349207154L;
+    private String contentType_;
 
     /**
      *  Create an instance
@@ -127,7 +129,13 @@ public class HtmlFileInput extends HtmlInput {
         // contentType and charset are determined from browser and page
         // perhaps it could be interesting to have setters for it in this class
         // to give finer control to user
-        final String contentType = getPage().getWebClient().guessContentType(file);
+        final String contentType;
+        if (contentType_ == null) {
+            contentType = getPage().getWebClient().guessContentType(file);
+        }
+        else {
+            contentType = contentType_;
+        }
         final String charset = getPage().getPageEncoding();
         return new KeyValuePair[] {new KeyDataPair(getNameAttribute(), file, contentType,
                 charset) };
@@ -150,4 +158,21 @@ public class HtmlFileInput extends HtmlInput {
         setDefaultValue(defaultValue, false);
     }
 
+    /**
+     * Sets the content type value that should be send together with the uploaded file.
+     * If content type is not explicitly set, HtmlUnit will try to guess it from the file content.
+     * @param contentType the content type, <code>null</code> resets it
+     */
+    public void setContentType(final String contentType) {
+        contentType_ = contentType;
+    }
+    
+    /**
+     * Gets the content type that should be send together with the uploaded file.
+     * @return the content type, <code>null</code> if this has not been explicitly set
+     * and should be guessed from file content.
+     */
+    public String getContentType() {
+        return contentType_;
+    }
 }
