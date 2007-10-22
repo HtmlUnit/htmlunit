@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,8 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link IFrame}.
@@ -245,4 +248,35 @@ public class IFrameTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Verifies that writing to an iframe keeps the same intrinsic variables around (window,
+     * document, etc) and in a usable form. Bug detected via the jQuery 1.1.3.1 unit tests.
+     *
+     * @throws Exception if an error occurs
+     */
+    public void testIFrameReinitialized() throws Exception {
+        final String html =
+              "<html><body><a href='2.html' target='theFrame'>page 2 in frame</a>"
+            + "<iframe name='theFrame' src='1.html'></iframe>"
+            + "</body></html>";
+        
+        final String frame1 = "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
+        final String frame2 = "<html><head><script>alert(window.foo);</script></head></html>";
+        final String[] expected = {"123", "undefined"};
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(new URL(URL_FIRST, "1.html"), frame1);
+        webConnection.setResponse(new URL(URL_FIRST, "2.html"), frame2);
+        webClient.setWebConnection(webConnection);
+
+        final List collectedAlerts = new ArrayList();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        ((HtmlAnchor) page.getAnchors().get(0)).click();
+        assertEquals(expected, collectedAlerts);
+    }
 }

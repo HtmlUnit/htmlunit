@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowImpl;
 
@@ -92,7 +93,9 @@ public class FrameWindow extends WebWindowImpl {
      * {@inheritDoc}
      */
     protected boolean isJavaScriptInitializationNeeded() {
-        return this.getScriptObject() == null;
+        return this.getScriptObject() == null
+            || !(getEnclosedPage().getWebResponse() instanceof StringWebResponse);
+        // TODO: find a better way to distinguish content written by document.open(),...
     }
 
     /**
