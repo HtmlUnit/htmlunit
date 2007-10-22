@@ -2392,26 +2392,26 @@ public class WindowTest extends WebTestCase {
             return;
         }
         final String html =
-            "<html>\n"
-          + "<body onload='test()'>\n"
-          + "<script>\n"
-          + "  function test() {\n"
-          + "    \n"
-          + "    Function.prototype.doAlerts = function() {\n"
-          + "      alert(this==o.f);\n"
-          + "      alert(this.arguments ? this.arguments.length : 'null');\n"
-          + "    }\n"
-          + "    \n"
-          + "    var o = function() {};\n"
-          + "    o.f = function(x, y, z) { this.f.doAlerts(); }\n"
-          + "    o.f('a', 'b');\n"
-          + "  }\n"
-          + "</script>\n"
-          + "</body>\n"
-          + "</html>";
+              "<html>\n"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    \n"
+            + "    Function.prototype.doAlerts = function() {\n"
+            + "      alert(this==o.f);\n"
+            + "      alert(this.arguments ? this.arguments.length : 'null');\n"
+            + "    }\n"
+            + "    \n"
+            + "    var o = function() {};\n"
+            + "    o.f = function(x, y, z) { this.f.doAlerts(); }\n"
+            + "    o.f('a', 'b');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
         final List actual = new ArrayList();
         loadPage(html, actual);
-        final String[] expected = { "true", "2" };
+        final String[] expected = {"true", "2"};
         assertEquals(expected, actual);
     }
 
