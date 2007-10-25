@@ -418,6 +418,18 @@
                 <htmlunit.description>Java Servlet API</htmlunit.description>
             </properties>
         </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2</version>
+            <type>jar</type>
+            <url>http://commons.apache.org/fileupload/</url>
+            <properties>
+                <scope>test</scope>
+                <htmlunit.group>test</htmlunit.group>
+                <htmlunit.description>Java Servlet API</htmlunit.description>
+            </properties>
+        </dependency>
     </dependencies>
     <build>
         <nagEmailAddress>htmlunit@GargoyleSoftware.com</nagEmailAddress>

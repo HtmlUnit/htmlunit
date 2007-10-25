@@ -44,6 +44,8 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
@@ -315,6 +317,43 @@ public class HttpWebConnectionTest extends BaseTestCase {
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
+        final WebAppClassLoader loader = new WebAppClassLoader(context);
+        if (classpath != null) {
+            for (int i = 0; i < classpath.length; i++) {
+                loader.addClassPath(classpath[i]);
+            }
+        }
+        context.setClassLoader(loader);
+        server.setHandler(context);
+        server.start();
+        return server;
+    }
+
+    /**
+     * Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resouceBase the base of resources for the default context.
+     * @param classpath additional classpath entries to add (may be null).
+     * @param servlets Map of <Class,String>, Class is the class, while String is the path spec.
+     * @return the started web server.
+     * @throws Exception If the test fails.
+     */
+    public static Server startWebServer(final String resouceBase, final String[] classpath, final Map servlets)
+        throws Exception {
+        final Server server = new Server(PORT);
+
+        final WebAppContext context = new WebAppContext();
+        context.setContextPath("/");
+        context.setResourceBase(resouceBase);
+        
+        for (final Iterator servletKeys = servlets.keySet().iterator(); servletKeys.hasNext();) {
+            final Class servlet = (Class) servletKeys.next();
+            final String pathSpec = (String) servlets.get(servlet);
+            context.addServlet(servlet, pathSpec);
+            
+        }
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
             for (int i = 0; i < classpath.length; i++) {

@@ -213,6 +213,7 @@ JUnit results available here: ${test.reports.dir}/index.html
 		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-6.1.5.jar"/>
 		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-util-6.1.5.jar"/>
 		<get-dependency type="test" project="javax.servlet" jarName="servlet-api-2.4.jar"/>
+		<get-dependency type="test" project="commons-fileupload" jarName="commons-fileupload-1.2.jar"/>
 		
 	</target>
 

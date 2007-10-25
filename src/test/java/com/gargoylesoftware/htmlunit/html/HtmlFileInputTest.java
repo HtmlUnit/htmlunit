@@ -38,14 +38,37 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadBase;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.mortbay.jetty.Server;
+
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -55,6 +78,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 public class HtmlFileInputTest extends WebTestCase {
+
+    private Server server_;
+
     /**
      *  Create an instance
      * @param name The name of the test
@@ -87,8 +113,7 @@ public class HtmlFileInputTest extends WebTestCase {
     }
 
     private void testFileInput(final String fileURL) throws Exception {
-        final String firstContent
-            = "<html><head></head><body>\n"
+        final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
             + "</form>\n"
@@ -102,7 +127,7 @@ public class HtmlFileInputTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection(webConnection);
-    
+
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
@@ -118,8 +143,7 @@ public class HtmlFileInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEmptyField() throws Exception {
-        final String firstContent
-            = "<html><head></head><body>\n"
+        final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
             + "</form>\n"
@@ -133,7 +157,7 @@ public class HtmlFileInputTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection(webConnection);
-    
+
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
         f.submit((SubmittableElement) null);
@@ -146,8 +170,7 @@ public class HtmlFileInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testContentType() throws Exception {
-        final String firstContent
-            = "<html><head></head><body>\n"
+        final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
             + "</form>\n"
@@ -161,7 +184,7 @@ public class HtmlFileInputTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         client.setWebConnection(webConnection);
-    
+
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
@@ -192,4 +215,104 @@ public class HtmlFileInputTest extends WebTestCase {
         assertTrue(new File(new URI(path)).exists());
     }
 
+    /**
+     * Test HttpClient for uploading a file with non-ASCII name, if it works it means HttpClient has fixed its bug.
+     *
+     * Test for http://issues.apache.org/jira/browse/HTTPCLIENT-293,
+     * which is related to http://sourceforge.net/tracker/index.php?func=detail&aid=1818569&group_id=47038&atid=448266
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        
+        final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
+        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
+        final File file = new File(new URI(path));
+        assertTrue(file.exists());
+        
+        
+        final Map servlets = new HashMap();
+        servlets.put(Upload2Servlet.class, "/upload2");
+
+        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+        final PostMethod filePost = new PostMethod("http://localhost:" + HttpWebConnectionTest.PORT + "/upload2");
+        
+        final FilePart part = new FilePart("myInput", file);
+        part.setCharSet("UTF-8");
+
+        filePost.setRequestEntity(new MultipartRequestEntity(new Part[] {part}, filePost.getParams()));
+        final HttpClient client = new HttpClient();
+        client.executeMethod(filePost);
+
+        final String response = filePost.getResponseBodyAsString();
+        //this is the value using ASCII encoding
+        assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
+    }
+
+    /**
+     * Servlet for '/upload1'
+     */
+    public static class Upload1Servlet extends ServletContentWrapper {
+
+        /**
+         * Creates an instance.
+         */
+        public Upload1Servlet() {
+            super("<form action='upload2' method='post' enctype='multipart/form-data'>\n"
+            + "Name: <input name='myInput' type='file'><br>\n"
+            + "<input type='submit' value='Upload' id='mySubmit'>\n"
+            + "</form>\n");
+        }
+    }
+
+    /**
+     * Servlet for '/upload2'
+     */
+    public static class Upload2Servlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            if (ServletFileUpload.isMultipartContent(request)) {
+                try {
+                    final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+                    for (final Iterator iterator = upload.parseRequest(request).iterator(); iterator.hasNext();) {
+                        final FileItem item = (FileItem) iterator.next();
+                        if (!item.isFormField()) {
+                            final Writer writer = response.getWriter();
+                            final String path = item.getName();
+                            for (int i = 0; i < path.length(); i++) {
+                                writer.write(Integer.toHexString(path.codePointAt(i)).toUpperCase() + " ");
+                            }
+                            writer.write("<br>");
+                            writer.write(item.getFieldName());
+                            writer.close();
+                        }
+                    }
+                }
+                catch (final FileUploadBase.SizeLimitExceededException e) {
+                    response.getWriter().write("SizeLimitExceeded");
+                }
+                catch (final Exception e) {
+                    response.getWriter().write("error");
+                }
+            }
+        }
+
+    }
+
+    /**
+     * {@inheritDoc}
+     * Stops the web server if it has been started.
+     */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
 }
