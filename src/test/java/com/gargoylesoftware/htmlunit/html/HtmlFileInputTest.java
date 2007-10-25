@@ -181,4 +181,15 @@ public class HtmlFileInputTest extends WebTestCase {
         assertEquals("text/webtest", pair2.getContentType());
     }
 
+    /**
+     * Checks whether the test file is correctly saved with a non-ASCII name or not.
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testFileWithNonASCIIName() throws Exception {
+        final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
+        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
+        assertTrue(new File(new URI(path)).exists());
+    }
+
 }
