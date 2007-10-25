@@ -279,8 +279,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final String response = secondPage.getWebResponse().getContentAsString();
 
         //this is the value with UTF-8 encoding
-        final String expectedResponse = "E6 AA 201D E6 A1 2C6 ED 152 152 EC FFFD BC E3 192 2022 E3 201A A1 E3 201A "
-            + "A4 E3 192 AB D9 2026 D9 201E D9 FFFD 2E 74 78 74 <br>myInput";
+        final String expectedResponse = "6A94 6848 D30C C77C 30D5 30A1 30A4 30EB 645 644 641 2E 74 78 74 <br>myInput";
         
         assertTrue("Invalid Response: " + response, response.indexOf(expectedResponse) != -1);
         
@@ -301,7 +300,7 @@ public class HtmlFileInputTest extends WebTestCase {
          * Creates an instance.
          */
         public Upload1Servlet() {
-            super("<html><head><meta http-equiv='Content-Type' content='text/html;charset=utf-8'/></head>\n"
+            super("<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>\n"
             + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
             + "Name: <input name='myInput' type='file'><br>\n"
             + "<input type='submit' value='Upload' id='mySubmit'>\n"
@@ -319,6 +318,7 @@ public class HtmlFileInputTest extends WebTestCase {
          */
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
             if (ServletFileUpload.isMultipartContent(request)) {

@@ -8,7 +8,7 @@
     <body>
         <release version="1.14-prerelease">
             <action type="add" dev="asashour" id="1818569">
-                HtmlFileInput: support for non-ASCII name of uploaded files (#1818569).
+                HtmlFileInput: add support for non-ASCII name of uploaded files (#1818569).
             </action>
             <action type="add" dev="mguillem">
                 JavaScript: accept ECMA reserved keywords like 'float' as normal identifier.
