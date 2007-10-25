@@ -184,4 +184,16 @@ public class HtmlUnitContextFactory extends ContextFactory {
         tcx.startClock();
         return super.doTopCall(callable, cx, scope, thisObj, args);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean hasFeature(final Context cx, final int featureIndex) {
+        if (Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER == featureIndex) {
+            return true;
+        }
+        else {
+            return super.hasFeature(cx, featureIndex);
+        }
+    }
 }

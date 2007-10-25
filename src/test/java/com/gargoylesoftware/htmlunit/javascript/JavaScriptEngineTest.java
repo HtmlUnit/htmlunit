@@ -1278,4 +1278,25 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         Context.exit();
     }
+
+    /**
+     * Test ECMA reserved keywords... that are accepted by "normal" browsers
+     * @throws Exception if the test fails
+     */
+    public void testECMAReservedKeywords() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "var o = {float: 123};"
+            + "alert(o.float);"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"123"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+            
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }

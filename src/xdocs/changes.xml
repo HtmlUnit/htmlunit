@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript: accept ECMA reserved keywords like 'float' as normal identifier.
+            </action>
             <action type="add" dev="mguillem" due-to="Sam Hough" id="1812960">
                 JavaScript: added support for DOMContentLoaded event (Firefox).
             </action>
