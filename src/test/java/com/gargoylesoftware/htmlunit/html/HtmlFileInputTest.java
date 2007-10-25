@@ -213,7 +213,7 @@ public class HtmlFileInputTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
-    public void _testUploadFileWithNonASCIIName_HttpClient() throws Exception {
+    public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
         if (notYetImplemented()) {
             return;
         }
