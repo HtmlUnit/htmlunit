@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -67,6 +68,7 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.PartBase;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.SimpleLog;
@@ -251,12 +253,42 @@ public class HttpWebConnection extends WebConnectionImpl {
                     final KeyValuePair pair = (KeyValuePair) iterator.next();
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
+                        final String charset = webRequestSettings.getCharset();
                         newPart = new FilePart(
                                 pairWithFile.getName(),
                                 pairWithFile.getValue(),
                                 pairWithFile.getFile(),
                                 pairWithFile.getContentType(),
-                                null);
+                                null) {
+
+                            /**
+                             * This implementation overrides the super one by encoding filename
+                             *  according to the page charset.
+                             *
+                             * @see http://issues.apache.org/jira/browse/HTTPCLIENT-293
+                             *
+                             * {@inheritDoc}
+                             */
+                            protected void sendDispositionHeader(final OutputStream out) throws IOException {
+                                out.write(CONTENT_DISPOSITION_BYTES);
+                                out.write(QUOTE_BYTES);
+                                out.write(EncodingUtil.getAsciiBytes(getName()));
+                                out.write(QUOTE_BYTES);
+                                final String filename = getSource().getFileName();
+                                if (filename != null) {
+                                    out.write(EncodingUtil.getAsciiBytes(FILE_NAME));
+                                    out.write(QUOTE_BYTES);
+                                    if (getWebClient().getBrowserVersion().isIE()) {
+                                        out.write(EncodingUtil.getBytes(
+                                            pairWithFile.getFile().getAbsolutePath(), charset));
+                                    }
+                                    else {
+                                        out.write(EncodingUtil.getBytes(filename, charset));
+                                    }
+                                    out.write(QUOTE_BYTES);
+                                }
+                            }
+                        };
                         // Firefox and IE seem not to specify a charset for a file part
                         newPart.setCharSet(null);
                     }

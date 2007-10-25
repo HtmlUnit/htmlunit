@@ -68,6 +68,7 @@ public abstract class ServletContentWrapper extends HttpServlet {
      */
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
         throws ServletException, IOException {
+        response.setContentType("text/html");
         response.getWriter().write(content_);
     }
 

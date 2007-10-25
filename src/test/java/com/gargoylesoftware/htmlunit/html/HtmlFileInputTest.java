@@ -63,6 +63,7 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.mortbay.jetty.Server;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -205,17 +206,6 @@ public class HtmlFileInputTest extends WebTestCase {
     }
 
     /**
-     * Checks whether the test file is correctly saved with a non-ASCII name or not.
-     *
-     * @throws Exception If the test fails.
-     */
-    public void testFileWithNonASCIIName() throws Exception {
-        final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
-        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
-        assertTrue(new File(new URI(path)).exists());
-    }
-
-    /**
      * Test HttpClient for uploading a file with non-ASCII name, if it works it means HttpClient has fixed its bug.
      *
      * Test for http://issues.apache.org/jira/browse/HTTPCLIENT-293,
@@ -223,7 +213,7 @@ public class HtmlFileInputTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
-    public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
+    public void _testUploadFileWithNonASCIIName_HttpClient() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -248,8 +238,58 @@ public class HtmlFileInputTest extends WebTestCase {
         client.executeMethod(filePost);
 
         final String response = filePost.getResponseBodyAsString();
-        //this is the value using ASCII encoding
+        //this is the value with ASCII encoding
         assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
+    }
+
+    /**
+     * Test uploading a file with non-ASCII name.
+     *
+     * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1818569&group_id=47038&atid=448266
+     *
+     * @throws Exception If the test fails.
+     */
+    public void testUploadFileWithNonASCIIName() throws Exception {
+        final Map servlets = new HashMap();
+        servlets.put(Upload1Servlet.class, "/upload1");
+        servlets.put(Upload2Servlet.class, "/upload2");
+        server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
+
+        testUploadFileWithNonASCIIName(BrowserVersion.FIREFOX_2);
+        testUploadFileWithNonASCIIName(BrowserVersion.INTERNET_EXPLORER_7_0);
+    }
+
+    private void testUploadFileWithNonASCIIName(final BrowserVersion browserVersion) throws Exception {
+        final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
+        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
+        final File file = new File(new URI(path));
+        assertTrue(file.exists());
+        
+        final WebClient client = new WebClient(browserVersion);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(
+                new URL("http://localhost:" + HttpWebConnectionTest.PORT + "/upload1"));
+
+        final HtmlForm form = (HtmlForm) firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = (HtmlFileInput) form.getInputByName("myInput");
+        fileInput.setValueAttribute(path);
+        
+        final HtmlSubmitInput submitInput = (HtmlSubmitInput) form.getInputByValue("Upload");
+        final HtmlPage secondPage = (HtmlPage) submitInput.click();
+
+        final String response = secondPage.getWebResponse().getContentAsString();
+
+        //this is the value with UTF-8 encoding
+        final String expectedResponse = "E6 AA 201D E6 A1 2C6 ED 152 152 EC FFFD BC E3 192 2022 E3 201A A1 E3 201A "
+            + "A4 E3 192 AB D9 2026 D9 201E D9 FFFD 2E 74 78 74 <br>myInput";
+        
+        assertTrue(response.indexOf(expectedResponse) != -1);
+        
+        if (browserVersion.isIE()) {
+            assertTrue(expectedResponse.length() < response.length());
+        }
+        else {
+            assertEquals(expectedResponse.length(), response.length());
+        }
     }
 
     /**
@@ -261,7 +301,8 @@ public class HtmlFileInputTest extends WebTestCase {
          * Creates an instance.
          */
         public Upload1Servlet() {
-            super("<form action='upload2' method='post' enctype='multipart/form-data'>\n"
+            super("<html><head><meta http-equiv='Content-Type' content='text/html;charset=utf-8'/></head>\n"
+            + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
             + "Name: <input name='myInput' type='file'><br>\n"
             + "<input type='submit' value='Upload' id='mySubmit'>\n"
             + "</form>\n");
@@ -278,30 +319,31 @@ public class HtmlFileInputTest extends WebTestCase {
          */
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
             if (ServletFileUpload.isMultipartContent(request)) {
                 try {
                     final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
                     for (final Iterator iterator = upload.parseRequest(request).iterator(); iterator.hasNext();) {
                         final FileItem item = (FileItem) iterator.next();
                         if (!item.isFormField()) {
-                            final Writer writer = response.getWriter();
                             final String path = item.getName();
                             for (int i = 0; i < path.length(); i++) {
                                 writer.write(Integer.toHexString(path.codePointAt(i)).toUpperCase() + " ");
                             }
                             writer.write("<br>");
                             writer.write(item.getFieldName());
-                            writer.close();
                         }
                     }
                 }
                 catch (final FileUploadBase.SizeLimitExceededException e) {
-                    response.getWriter().write("SizeLimitExceeded");
+                    writer.write("SizeLimitExceeded");
                 }
                 catch (final Exception e) {
-                    response.getWriter().write("error");
+                    writer.write("error");
                 }
             }
+            writer.close();
         }
 
     }
