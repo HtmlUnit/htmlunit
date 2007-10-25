@@ -101,6 +101,9 @@ public class Event extends SimpleScriptable {
 
     /** The beforeunload event type, triggered by "onbeforeunload" event handlers. */
     public static final String TYPE_BEFORE_UNLOAD = "beforeunload";
+    
+    /** after DOM has loaded but before images etc. */
+    public static final String TYPE_DOM_DOCUMENT_LOADED = "DOMContentLoaded";
 
     /** The first event phase: the capturing phase. */
     public static final short CAPTURING_PHASE = 1;

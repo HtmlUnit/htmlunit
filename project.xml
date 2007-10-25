@@ -232,6 +232,9 @@
         <contributor>
         	<name>Rob Di Marco</name>
         </contributor>
+		<contributor>
+			<name>Sam Hough</name>
+		</contributor>
     </contributors>
     <dependencies>
         <dependency>

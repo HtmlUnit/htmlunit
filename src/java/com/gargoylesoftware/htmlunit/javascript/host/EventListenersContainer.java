@@ -106,7 +106,7 @@ class EventListenersContainer {
     }
 
     private List getHandlers(final String eventType, final boolean useCapture) {
-        final Handlers handlers = (Handlers) eventHandlers_.get(eventType);
+        final Handlers handlers = (Handlers) eventHandlers_.get(eventType.toLowerCase());
         if (handlers != null) {
             return handlers.getHandlers(useCapture);
         }

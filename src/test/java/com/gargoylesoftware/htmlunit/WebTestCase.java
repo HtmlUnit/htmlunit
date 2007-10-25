@@ -47,9 +47,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import junit.framework.AssertionFailedError;
 
@@ -60,6 +64,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.base.testing.BaseTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -494,4 +499,45 @@ public abstract class WebTestCase extends BaseTestCase {
     }
 
     private static final ThreadLocal notYetImplementedFlag = new ThreadLocal();
+
+    /**
+     * Load the specified resource for the supported browsers and tests
+     * that the generated log corresponds to the expected one for this browser
+     * @param fileName the resource name
+     * @throws Exception if the test fails
+     */
+    protected void testHTMLFile(final String fileName) throws Exception {
+        final URL url = getClass().getResource(fileName);
+        
+        final Map testedBrowser = new HashMap();
+        testedBrowser.put("FIREFOX_2", BrowserVersion.FIREFOX_2);
+        testedBrowser.put("INTERNET_EXPLORER_6_0", BrowserVersion.INTERNET_EXPLORER_6_0);
+
+        for (final Iterator iter = testedBrowser.entrySet().iterator(); iter.hasNext();) {
+            final Map.Entry entry = (Map.Entry) iter.next();
+            final String browserKey = (String) entry.getKey();
+            final BrowserVersion browserVersion = (BrowserVersion) entry.getValue();
+
+            final WebClient client = new WebClient(browserVersion);
+        
+            final HtmlPage page = (HtmlPage) client.getPage(url);
+            final HtmlElement want = page.getHtmlElementById(browserKey);
+            
+            final HtmlElement got = page.getHtmlElementById("log");
+            
+            final List expected = readChildElementsText(want);
+            final List actual = readChildElementsText(got);
+            
+            assertEquals(expected, actual);
+        }
+    }
+
+    private List readChildElementsText(final HtmlElement elt) {
+        final List list = new ArrayList();
+        for (final Iterator iter = elt.getChildElementsIterator(); iter.hasNext();) {
+            final HtmlElement child = (HtmlElement) iter.next();
+            list.add(child.asText());
+        }
+        return list;
+    }
 }

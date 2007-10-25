@@ -143,6 +143,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
         getDocumentHtmlElement().setReadyState(READY_STATE_COMPLETE);
+        if (!getWebClient().getBrowserVersion().isIE()) {
+            executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
+        }
         executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         executeRefreshIfNeeded();
     }

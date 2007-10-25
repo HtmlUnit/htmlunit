@@ -792,4 +792,11 @@ public class EventTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test Mozilla DOMContentLoaded event
+     * @throws Exception if the test fails
+     */
+    public void testDOMContentLoaded() throws Exception {
+        testHTMLFile("EventTest_DOMContentLoaded.html");
+    }
 }
