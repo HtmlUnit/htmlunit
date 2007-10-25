@@ -47,11 +47,12 @@ import com.gargoylesoftware.base.testing.EventCatcher;
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class TopLevelWindowTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      */
@@ -79,7 +80,7 @@ public class TopLevelWindowTest extends WebTestCase {
         // Since this was the only open window, a new window should have
         // been created when this one was closed.  Verify this.
         assertNotNull(webClient.getCurrentWindow());
-        assertTrue(webClient.getCurrentWindow() != windowToClose);
+        assertNotSame(webClient.getCurrentWindow(), windowToClose);
 
         assertEquals(1, webClient.getWebWindows().size());
     }

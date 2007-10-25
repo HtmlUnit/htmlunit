@@ -1487,15 +1487,15 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement id1 = (HtmlElement) page.getDocumentHtmlElement().getLastDomChild().getLastDomChild();
         assertEquals("id1", id1.getId());
-        assertTrue(id1 == page.getHtmlElementById("id1"));
+        assertSame(id1, page.getHtmlElementById("id1"));
         final HtmlPage clone = (HtmlPage) page.cloneNode(true);
-        assertTrue(id1 == page.getHtmlElementById("id1"));
+        assertSame(id1, page.getHtmlElementById("id1"));
         final HtmlElement id1clone = (HtmlElement) clone.getDocumentHtmlElement().getLastDomChild().getLastDomChild();
         assertFalse(id1 == id1clone);
         assertEquals("id1", id1clone.getId());
-        assertTrue(id1clone == clone.getHtmlElementById("id1"));
-        assertTrue(id1clone != page.getHtmlElementById("id1"));
-        assertTrue(id1 != clone.getHtmlElementById("id1"));
+        assertSame(id1clone, clone.getHtmlElementById("id1"));
+        assertNotSame(id1clone, page.getHtmlElementById("id1"));
+        assertNotSame(id1, clone.getHtmlElementById("id1"));
 
         page.getHtmlElementById("id2").remove();
         try {
