@@ -282,7 +282,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final String expectedResponse = "E6 AA 201D E6 A1 2C6 ED 152 152 EC FFFD BC E3 192 2022 E3 201A A1 E3 201A "
             + "A4 E3 192 AB D9 2026 D9 201E D9 FFFD 2E 74 78 74 <br>myInput";
         
-        assertTrue(response.indexOf(expectedResponse) != -1);
+        assertTrue("Invalid Response: " + response, response.indexOf(expectedResponse) != -1);
         
         if (browserVersion.isIE()) {
             assertTrue(expectedResponse.length() < response.length());
