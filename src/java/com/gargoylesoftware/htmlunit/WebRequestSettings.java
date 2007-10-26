@@ -44,11 +44,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.auth.CredentialsProvider;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.ClassUtils;
 
 /**
- * Parameter object for making web requests
+ * Parameter object for making web requests.
  *
  * @version $Revision$
  * @author Brad Clarke
@@ -56,6 +55,7 @@ import org.apache.commons.lang.ClassUtils;
  * @author Ahmed Ashour
  */
 public class WebRequestSettings {
+
     private URL url_;
     private String proxyHost_;
     private int proxyPort_;
@@ -64,11 +64,11 @@ public class WebRequestSettings {
     private Map additionalHeaders_ = new HashMap();
     private CredentialsProvider credentialsProvider_;
     private String charset_ = TextUtil.DEFAULT_CHARSET;
+    private String cookiePolicy_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List requestParameters_ = Collections.EMPTY_LIST;
     private String requestBody_;
-    private String cookiePolicy_ = CookiePolicy.DEFAULT;
 
     /**
      * @param target The URL for this request
@@ -297,8 +297,10 @@ public class WebRequestSettings {
     }
 
     /**
-     * Sets the cookie policy. Default value is {@link CookiePolicy#DEFAULT}
+     * Sets the cookie policy.
      * @param cookiePolicy the new cookie policy.
+     * @deprecated
+     * @see WebClient#setCookiesEnabled(boolean)
      */
     public void setCookiePolicy(final String cookiePolicy) {
         cookiePolicy_ = cookiePolicy;

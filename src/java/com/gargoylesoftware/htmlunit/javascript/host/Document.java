@@ -50,6 +50,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.cookie.CookieSpec;
 import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
@@ -450,10 +451,11 @@ public class Document extends NodeImpl {
     }
 
     /**
-     * Return the cookie attribute.
+     * Returns the cookie attribute.
      * @return The cookie attribute
      */
     public String jsxGet_cookie() {
+
         final HtmlPage page = getHtmlPage();
         final HttpState state = page.getWebClient().getWebConnection().getState();
         final URL url = page.getWebResponse().getUrl();
@@ -466,8 +468,8 @@ public class Document extends NodeImpl {
             port = url.getDefaultPort();
         }
 
-        final Cookie[] cookies = CookiePolicy.getDefaultSpec().match(url.getHost(), port,
-                url.getPath(), secure, state.getCookies());
+        final CookieSpec spec = CookiePolicy.getCookieSpec(WebClient.HTMLUNIT_COOKIE_POLICY);
+        final Cookie[] cookies = spec.match(url.getHost(), port, url.getPath(), secure, state.getCookies());
         if (cookies == null) {
             return "";
         }
@@ -486,7 +488,7 @@ public class Document extends NodeImpl {
     }
 
     /**
-     * Adds a cookie
+     * Adds a cookie.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp">
      * MSDN documentation</a>
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]

@@ -7,6 +7,12 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="sdanig">
+                Use browser-compatibility cookie handling by default, deprecate unnecessary
+                cookie settings in WebRequestSettings, ensure cookie policy used during HTTP
+                communication matches the cookie policy used by the document.cookie attribute,
+                use a single cookie header during HTTP communication.
+            </action>
             <action type="add" dev="asashour" id="1818569">
                 HtmlFileInput: add support for non-ASCII name of uploaded files (#1818569).
             </action>

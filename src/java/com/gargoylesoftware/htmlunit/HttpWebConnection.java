@@ -68,6 +68,7 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.PartBase;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -317,16 +318,24 @@ public class HttpWebConnection extends WebConnectionImpl {
             httpMethod.getParams().setParameter(CredentialsProvider.PROVIDER,
                     webRequestSettings.getCredentialsProvider());
         }
-        
-        if (!getWebClient().isCookiesEnabled()) {
-            httpMethod.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
-        }
-        else {
-            if (webRequestSettings.getCookiePolicy() != CookiePolicy.DEFAULT) {
+
+        if (getWebClient().isCookiesEnabled()) {
+            // Cookies are enabled. Note that it's important that we enable single cookie headers,
+            // for compatibility purposes.
+            httpMethod.getParams().setBooleanParameter(HttpMethodParams.SINGLE_COOKIE_HEADER, true);
+            if (webRequestSettings.getCookiePolicy() != null) {
+                // TODO: remove this down the line; the setter is deprecated for now.
                 httpMethod.getParams().setCookiePolicy(webRequestSettings.getCookiePolicy());
             }
-
+            else {
+                httpMethod.getParams().setCookiePolicy(WebClient.HTMLUNIT_COOKIE_POLICY);
+            }
         }
+        else {
+            // Cookies are disabled.
+            httpMethod.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
+        }
+
         return httpMethod;
     }
 

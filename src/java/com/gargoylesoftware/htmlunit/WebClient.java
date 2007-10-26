@@ -68,6 +68,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.httpclient.util.URIUtil;
@@ -108,6 +109,13 @@ import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
 public class WebClient implements Serializable {
 
     private static final long serialVersionUID = -7214321203864969635L;
+
+    /**
+     * HtmlUnit's cookie policy is to be browser-compatible. Code which requires access to
+     * HtmlUnit's cookie policy should use this constant, rather than making assumptions
+     * and using one of the HttpClient {@link CookiePolicy} constants directly.
+     */
+    public static final String HTMLUNIT_COOKIE_POLICY = CookiePolicy.BROWSER_COMPATIBILITY;
 
     private transient WebConnection webConnection_;
     private boolean printContentOnFailingStatusCode_ = true;
