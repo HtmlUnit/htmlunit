@@ -37,10 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.net.ConnectException;
-import java.net.SocketException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,54 +155,19 @@ public class HTMLParserTest extends WebTestCase {
     }
 
     /**
-     * test the new HTMLParser by accessing the HtmlUnit home page and detecting the copyright
+     * Test the HTMLParser by accessing the HtmlUnit home page and detecting the copyright
      * string.
      *
      * @throws Exception failure
      */
-    public static void testHtmlUnitHomePage() throws Exception {
-        final URL htmlUnitSite = new URL("http://htmlunit.sourceforge.net");
-        try {
-            final URLConnection connection = htmlUnitSite.openConnection();
-            connection.connect();
+    public void testHtmlUnitHomePage() throws Exception {
+        final HtmlPage page = loadUrl("http://htmlunit.sourceforge.net");
+        if (page != null) {
+            // No connectivity issues.
+            final HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
+            final String stringVal = xpath.stringValueOf(page).trim();
+            assertEquals("\u00A9 2002-2007, Gargoyle Software Inc.", stringVal);
         }
-        catch (final ConnectException e) {
-            /* sf.net's flaky web servers and not being able to connect
-             * here from the shell server can cause this, doesn't mean something
-             * is broken
-             */
-            System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
-            return;
-        }
-        catch (final SocketException e) {
-            /* Some systems do not have access to the sf.net's web page.  If the connection
-             * times out, do not fail the test
-             */
-            System.out.println("Connection could not be made to " + htmlUnitSite.toExternalForm());
-            return;
-        }
-        
-        final WebClient webClient = new WebClient();
-        final WebResponse webResponse = new HttpWebConnection(webClient).getResponse(
-                new WebRequestSettings(htmlUnitSite)
-        );
-
-        final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
-
-        //find the copyright string
-        final HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
-        final String stringVal = xpath.stringValueOf(page).trim();
-        assertEquals("\u00A9 2002-2007, Gargoyle Software Inc.", stringVal);
-
-        //see if the Google adds were added via Javascript
-        /* google ads not on page anymore
-        xpath = new HtmlUnitXPath("//iframe[@name = 'google_ads_frame']");
-        final HtmlInlineFrame inline = (HtmlInlineFrame) xpath.selectSingleNode(page);
-
-        assertNotNull("find Google ads", inline);
-
-        final HtmlPage innerPage = (HtmlPage) inline.getEnclosedPage();
-        assertNotNull(innerPage);
-        */
     }
+
 }

@@ -45,8 +45,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
+import java.net.SocketException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -130,7 +133,7 @@ public abstract class WebTestCase extends BaseTestCase {
         return loadPage(html, null);
     }
 
-   /**
+    /**
      * Load a page with the specified html and collect alerts into the list.
      * @param browserVersion the browser version to use
      * @param html The HTML to use.
@@ -144,7 +147,7 @@ public abstract class WebTestCase extends BaseTestCase {
         return loadPage(browserVersion, html, collectedAlerts, URL_GARGOYLE);
     }
 
-   /**
+    /**
      * User the default browser version to load a page with the specified html
      * and collect alerts into the list.
      * @param html The HTML to use.
@@ -155,6 +158,36 @@ public abstract class WebTestCase extends BaseTestCase {
     protected static final HtmlPage loadPage(final String html, final List collectedAlerts)
         throws Exception {
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
+    }
+
+    /**
+     * Loads an external URL, accounting for the fact that the remote server may be down or the
+     * machine running the tests may not be connected to the internet.
+     * @param url the URL to load
+     * @return the loaded page, or <tt>null</tt> if there were connectivity issues
+     * @throws Exception if an error occurs
+     */
+    protected static final HtmlPage loadUrl(final String url) throws Exception {
+        try {
+            final WebClient client = new WebClient();
+            client.setUseInsecureSSL(true);
+            return (HtmlPage) client.getPage(url);
+        }
+        catch (final ConnectException e) {
+            // The remote server is probably down.
+            System.out.println("Connection could not be made to " + url);
+            return null;
+        }
+        catch (final SocketException e) {
+            // The local machine may not be online.
+            System.out.println("Connection could not be made to " + url);
+            return null;
+        }
+        catch (final UnknownHostException e) {
+            // The local machine may not be online.
+            System.out.println("Connection could not be made to " + url);
+            return null;
+        }
     }
 
     /**
