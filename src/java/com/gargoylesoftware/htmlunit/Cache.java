@@ -50,14 +50,21 @@ import org.apache.commons.lang.time.DateUtils;
 
 /**
  * Simple cache implementation.<br/>
- * Current implementation's main purpose is to provide the ability to cache js files.
+ * Current implementation's main purpose is to provide the ability to cache <tt>.js</tt> files.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class Cache implements Serializable {
+
+    private static final long serialVersionUID = -3864114727885057419L;
+
     private int nbMaxEntries_ = 20;
     private final Map entries_ = Collections.synchronizedMap(new HashMap(nbMaxEntries_));
-    
+
+    /**
+     * A cache entry.
+     */
     private class Entry implements Comparable {
         private final WebResponse response_;
         private long lastAccess_;
@@ -97,8 +104,8 @@ public class Cache implements Serializable {
     protected void deleteOverflow() {
         synchronized (entries_) {
             while (entries_.size() > nbMaxEntries_) {
-                final WebResponse oldestResponse = (WebResponse) Collections.min(entries_.entrySet());
-                entries_.remove(oldestResponse.getUrl());
+                final Entry oldestEntry = (Entry) Collections.min(entries_.values());
+                entries_.remove(oldestEntry.response_.getUrl());
             }
         }
     }
@@ -212,6 +219,13 @@ public class Cache implements Serializable {
         nbMaxEntries_ = nbMaxEntries;
         deleteOverflow();
     }
-    
-    
+
+    /**
+     * Returns the number of entries in the cache.
+     * @return the number of entries in the cache
+     */
+    public int getSize() {
+        return entries_.size();
+    }
+
 }

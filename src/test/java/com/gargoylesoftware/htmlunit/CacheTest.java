@@ -136,8 +136,7 @@ public class CacheTest extends WebTestCase {
     }
 
     /**
-     *
-     * @throws Exception if the test fails
+     *@throws Exception if the test fails
      */
     public void testUsage() throws Exception {
         final String content = "<html><head><title>page 1</title>"
@@ -183,6 +182,34 @@ public class CacheTest extends WebTestCase {
         assertEquals("no request for scripts should have been performed",
                 urlPage2, connection.getLastWebRequestSettings().getURL());
     }
+
+    /**
+     *@throws Exception if the test fails
+     */
+    public void testMaxSizeMaintained() throws Exception {
+
+        final String html = "<html><head><title>page 1</title>"
+            + "<script src='foo1.js' type='text/javascript'/>"
+            + "<script src='foo2.js' type='text/javascript'/>"
+            + "</head><body>abc</body></html>";
+
+        final WebClient client = new WebClient();
+        client.getCache().setNbMaxEntries(1);
+
+        final MockWebConnection connection = new MockWebConnection(client);
+        client.setWebConnection(connection);
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html);
+
+        final List headers = Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", "text/javascript", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", "text/javascript", headers);
+
+        client.getPage(pageUrl);
+        assertEquals(1, client.getCache().getSize());
+    }
+
 }
 
 class DummyWebResponse implements WebResponse {
