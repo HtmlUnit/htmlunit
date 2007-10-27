@@ -218,13 +218,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Open a new window
+     * Opens a new window.
      *
      * @param context The javascript Context
      * @param scriptable The object that the function was called on.
      * @param args The arguments passed to the function.
      * @param function The function object that was invoked.
-     * @return The newly opened window
+     * @return the newly opened window, or <tt>null</tt> if popup windows have been disabled
+     * @see WebClient#isPopupBlockerEnabled()
      */
     public static Object jsxFunction_open(
         final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
@@ -234,6 +235,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final String features = getStringArg(2, args, null);
         final boolean replaceCurrentEntryInBrowsingHistory = getBooleanArg(3, args, false);
         final Window thisWindow = (Window) scriptable;
+        final WebClient webClient = thisWindow.webWindow_.getWebClient();
+
+        if (webClient.isPopupBlockerEnabled()) {
+            thisWindow.getLog().debug("Ignoring window.open() invocation because popups are blocked.");
+            return null;
+        }
 
         if (features != null || replaceCurrentEntryInBrowsingHistory) {
             thisWindow.getLog().debug(
@@ -245,8 +252,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 + "]");
         }
 
-        final WebClient webClient = thisWindow.webWindow_.getWebClient();
-        // if specified name is the one of an existing window, the hold it
+        // if specified name is the name of an existing window, then hold it
         if (StringUtils.isEmpty(url) && !"".equals(windowName)) {
             final WebWindow webWindow;
             try {

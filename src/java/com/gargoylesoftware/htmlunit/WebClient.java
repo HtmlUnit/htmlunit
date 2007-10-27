@@ -127,6 +127,7 @@ public class WebClient implements Serializable {
     private ScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cookiesEnabled_ = true;
+    private boolean popupBlockerEnabled_;
     private String homePage_;
     private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
@@ -628,39 +629,59 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Enable/disable javascript support.  By default, this property is enabled.
+     * Enable/disable JavaScript support. By default, this property is enabled.
      *
-     * @param isEnabled true to enable javascript support.
+     * @param enabled <tt>true</tt> to enable JavaScript support
      */
-    public void setJavaScriptEnabled(final boolean isEnabled) {
-        javaScriptEnabled_ = isEnabled;
+    public void setJavaScriptEnabled(final boolean enabled) {
+        javaScriptEnabled_ = enabled;
     }
 
     /**
-     * Return true if javascript is enabled and the script engine was loaded successfully.
+     * Returns <tt>true</tt> if JavaScript is enabled and the script engine was loaded successfully.
      *
-     * @return true if javascript is enabled.
+     * @return <tt>true</tt> if JavaScript is enabled
      */
     public boolean isJavaScriptEnabled() {
         return javaScriptEnabled_ && scriptEngine_ != null;
     }
 
     /**
-     * Enable/disable cookies support.  By default, this property is enabled.
+     * Enable/disable cookie support. By default, this property is enabled.
      *
-     * @param isEnabled true to enable cookies support.
+     * @param enabled <tt>true</tt> to enable cookie support
      */
-    public void setCookiesEnabled(final boolean isEnabled) {
-        cookiesEnabled_ = isEnabled;
+    public void setCookiesEnabled(final boolean enabled) {
+        cookiesEnabled_ = enabled;
     }
-    
+
     /**
-     * Return true if cookies are enabled.
+     * Returns <tt>true</tt> if cookies are enabled.
      *
-     * @return true if cookies are enabled.
+     * @return <tt>true</tt> if cookies are enabled
      */
     public boolean isCookiesEnabled() {
         return cookiesEnabled_;
+    }
+
+    /**
+     * Enable/disable the popup window blocker. By default, the popup blocker is disabled, and popup
+     * windows are allowed. When set to <tt>true</tt>, <tt>window.open()</tt> has no effect and
+     * returns <tt>null</tt>.
+     *
+     * @param enabled <tt>true</tt> to enable the popup window blocker
+     */
+    public void setPopupBlockerEnabled(final boolean enabled) {
+        popupBlockerEnabled_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the popup window blocker is enabled.
+     *
+     * @return <tt>true</tt> if the popup window blocker is enabled
+     */
+    public boolean isPopupBlockerEnabled() {
+        return popupBlockerEnabled_;
     }
 
     /**
@@ -1299,12 +1320,14 @@ public class WebClient implements Serializable {
      * @throws IOException If an IO problem occurs
      */
     private WebResponse makeWebResponseForFileUrl(final URL url, final String charset) throws IOException {
+
         final File file = FileUtils.toFile(url);
         final String contentType = guessContentType(file);
 
         if (contentType.startsWith("text")) {
             final String str = IOUtils.toString(new FileInputStream(file), charset);
             return new StringWebResponse(str, charset, url) {
+                private static final long serialVersionUID = 5713127877370126236L;
                 public String getContentType() {
                     return contentType;
                 }

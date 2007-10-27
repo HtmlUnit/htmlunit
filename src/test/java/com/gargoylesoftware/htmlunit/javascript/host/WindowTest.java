@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -520,6 +521,41 @@ public class WindowTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlertsIE);
         assertEquals(expectedAlertsIE, collectedAlerts);
+    }
+
+    /**
+     * Verifies that <tt>window.open</tt> behaves correctly when popups are blocked.
+     * @throws Exception if an error occurs
+     */
+    public void testOpenWindow_blocked() throws Exception {
+
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var w;\n"
+            + "  function test() {\n"
+            + "    w = window.open('', 'foo');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='d' onclick='alert(w)'>test</div>\n"
+            + "</body></html>";
+
+        final List actual = new ArrayList();
+        final WebClient client = new WebClient();
+        client.setPopupBlockerEnabled(true);
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage("http://foo");
+        ((HtmlDivision) page.getHtmlElementById("d")).click();
+        final String[] expected = {"null"};
+        assertEquals(expected, actual);
     }
 
     /**

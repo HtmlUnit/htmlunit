@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig">
+                Add a popup blocker (WebClient.setPopupBlockerEnabled(boolean)).
+            </action>
             <action type="fix" dev="sdanig">
                 Use browser-compatibility cookie handling by default, deprecate unnecessary
                 cookie settings in WebRequestSettings, ensure cookie policy used during HTTP
