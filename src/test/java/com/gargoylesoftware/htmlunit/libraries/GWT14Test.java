@@ -440,4 +440,29 @@ public class GWT14Test extends WebTestCase {
         server_ = null;
     }
 
+    /**
+     * Test javascript: 'new Date().getTimezoneOffset()' compared to java.text.SimpleDateFormat.format().
+     *
+     * @throws Exception if the test fails
+     */
+    public void testDateGetTimezoneOffset() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var offset = -new Date().getTimezoneOffset();\n"
+            + "    var timezone = '' + (offset/60);\n"
+            + "    if (timezone.length == 1)\n"
+            + "      timezone = '0' + timezone;\n"
+            + "    alert(timezone);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+        timeZone = timeZone.substring(1, 3);
+        final String[] expectedAlerts = {timeZone};
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
