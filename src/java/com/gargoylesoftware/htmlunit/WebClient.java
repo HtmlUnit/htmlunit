@@ -600,7 +600,7 @@ public class WebClient implements Serializable {
      */
     public void assertionFailed(final String message) {
         try {
-            final Class clazz = junit.framework.AssertionFailedError.class;
+            final Class clazz = Class.forName("junit.framework.AssertionFailedError");
             final Constructor constructor = clazz.getConstructor(new Class[]{String.class});
             final Error error = (Error) constructor.newInstance(new Object[]{message});
             throw error;
