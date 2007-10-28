@@ -96,9 +96,9 @@ public class HtmlArea extends FocusableElement {
 
     /**
      * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true.  This is the default behaviour of clicking
+     * but the result of that handler was true.  This is the default behavior of clicking
      * the element.  The default implementation returns the current page - subclasses
-     * requiring different behaviour (like {@link HtmlSubmitInput}) will override this
+     * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
      * @param defaultPage The default page to return if the action does not

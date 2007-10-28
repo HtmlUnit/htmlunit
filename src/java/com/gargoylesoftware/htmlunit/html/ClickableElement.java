@@ -186,9 +186,9 @@ public abstract class ClickableElement extends StyledElement {
     /**
      * This method will be called if there either wasn't an onclick handler or
      * there was but the result of that handler wasn't <code>false</code>.
-     * This is the default behaviour of clicking the element.
+     * This is the default behavior of clicking the element.
      * The default implementation returns
-     * the current page - subclasses requiring different behaviour (like
+     * the current page - subclasses requiring different behavior (like
      * {@link HtmlSubmitInput}) will override this method.
      *
      * @param defaultPage The default page to return if the action does not

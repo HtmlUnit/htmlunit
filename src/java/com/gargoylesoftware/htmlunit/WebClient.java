@@ -590,11 +590,11 @@ public class WebClient implements Serializable {
     /**
      *  Throw an exception with the specified message. If junit is found in the
      *  classpath then a junit.framework.AssertionFailedError will be thrown
-     *  (the same behaviour as calling fail() in junit). If junit is not found
+     *  (the same behavior as calling fail() in junit). If junit is not found
      *  then an IllegalStateException will be thrown instead of the
      *  AssertionFailedError. <p>
      *
-     *  Override this to provide custom behaviour.
+     *  Override this to provide custom behavior.
      *
      * @param message The failure message
      */
