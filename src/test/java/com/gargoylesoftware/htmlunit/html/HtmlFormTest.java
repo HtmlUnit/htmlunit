@@ -1205,4 +1205,32 @@ public class HtmlFormTest extends WebTestCase {
         submit.click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Tests that submitting a form without parameters does not trail the URL with a question mark.
+     *
+     * @throws Exception If the test fails
+     */
+    public void testSubmitURLWithoutParameters() throws Exception {
+        final String firstContent = "<html><head><title>foo</title></haed><body>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
+            + "</form></body></html>";
+        
+        final String secondContent = "<html><head><title>second</title></head></html>";
+
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlForm form = (HtmlForm) page.getForms().get(0);
+        final HtmlSubmitInput submit = (HtmlSubmitInput) form.getInputByName("mySubmit");
+        final HtmlPage secondPage = (HtmlPage) submit.click();
+        assertEquals(URL_SECOND, secondPage.getWebResponse().getUrl());
+    }
 }
