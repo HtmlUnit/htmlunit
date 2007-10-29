@@ -52,8 +52,6 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import junit.framework.AssertionFailedError;
-
 import org.apache.commons.httpclient.Cookie;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -402,7 +400,7 @@ public class HtmlPageTest extends WebTestCase {
             page.assertAllIdAttributesUnique();
             fail("Expected AssertionFailedError");
         }
-        catch (final AssertionFailedError e) {
+        catch (final AssertionError e) {
             assertTrue("dupeID", e.getMessage().indexOf("dupeID") != -1);
         }
     }
@@ -450,7 +448,7 @@ public class HtmlPageTest extends WebTestCase {
             page.assertAllAccessKeyAttributesUnique();
             fail("Expected AssertionFailedError");
         }
-        catch (final AssertionFailedError e) {
+        catch (final AssertionError e) {
             //pass
         }
     }
@@ -502,9 +500,9 @@ public class HtmlPageTest extends WebTestCase {
 
         try {
             page.assertAllTabIndexAttributesSet();
-            fail("Expected AssertionFailedError");
+            fail("Expected AssertionError");
         }
-        catch (final AssertionFailedError e) {
+        catch (final AssertionError e) {
             //pass
         }
     }
@@ -532,9 +530,9 @@ public class HtmlPageTest extends WebTestCase {
 
         try {
             page.assertAllTabIndexAttributesSet();
-            fail("Expected AssertionFailedError");
+            fail("Expected AssertionError");
         }
-        catch (final AssertionFailedError e) {
+        catch (final AssertionError e) {
             //pass
         }
     }

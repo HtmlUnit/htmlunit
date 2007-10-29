@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -104,9 +105,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     private       HtmlElement elementWithFocus_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
-
-    private static final int TAB_INDEX_NOT_SPECIFIED = -10;
-    private static final int TAB_INDEX_OUT_OF_BOUNDS = -20;
 
     private List/* HtmlAttributeChangeListener */ attributeListeners_;
 
@@ -449,46 +447,44 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         return Collections.unmodifiableList(list);
     }
 
-    /**
-     *  Return a list of all elements that are tabbable in the order that will
-     *  be used for tabbing.<p>
-     *
-     *  The rules for determining tab order are as follows:
-     *  <ol>
-     *    <li> Those elements that support the tabindex attribute and assign a
-     *    positive value to it are navigated first. Navigation proceeds from the
-     *    element with the lowest tabindex value to the element with the highest
-     *    value. Values need not be sequential nor must they begin with any
-     *    particular value. Elements that have identical tabindex values should
-     *    be navigated in the order they appear in the character stream.
-     *    <li> Those elements that do not support the tabindex attribute or
-     *    support it and assign it a value of "0" are navigated next. These
-     *    elements are navigated in the order they appear in the character
-     *    stream.
-     *    <li> Elements that are disabled do not participate in the tabbing
-     *    order.
-     *  </ol>
-     *  Additionally, the value of tabindex must be within 0 and 32767. Any
-     *  values outside this range will be ignored.<p>
-     *
-     *  The following elements support the tabindex attribute: A, AREA, BUTTON,
-     *  INPUT, OBJECT, SELECT, and TEXTAREA.<p>
-     *
-     * @return A list containing all the tabbable elements in proper tab order.
-     */
+   /**
+    * Returns a list of all elements that are tabbable in the order that will
+    * be used for tabbing.<p>
+    *
+    * The rules for determining tab order are as follows:
+    * <ol>
+    *   <li>Those elements that support the tabindex attribute and assign a
+    *   positive value to it are navigated first. Navigation proceeds from the
+    *   element with the lowest tabindex value to the element with the highest
+    *   value. Values need not be sequential nor must they begin with any
+    *   particular value. Elements that have identical tabindex values should
+    *   be navigated in the order they appear in the character stream.
+    *   <li>Those elements that do not support the tabindex attribute or
+    *   support it and assign it a value of "0" are navigated next. These
+    *   elements are navigated in the order they appear in the character
+    *   stream.
+    *   <li>Elements that are disabled do not participate in the tabbing
+    *   order.
+    * </ol>
+    * Additionally, the value of tabindex must be within 0 and 32767. Any
+    * values outside this range will be ignored.<p>
+    *
+    * The following elements support the <tt>tabindex</tt> attribute: A, AREA, BUTTON,
+    * INPUT, OBJECT, SELECT, and TEXTAREA.<p>
+    *
+    * @return A list containing all the tabbable elements in proper tab order.
+    */
     public List getTabbableElements() {
-        final List acceptableTagNames = Arrays.asList(
-                new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
+        final List tags = Arrays
+            .asList(new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List tabbableElements = new ArrayList();
-
         final Iterator iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             final String tagName = element.getTagName();
-            if (acceptableTagNames.contains(tagName)) {
-                final boolean isDisabled = element.isAttributeDefined("disabled");
-
-                if (isDisabled == false && getTabIndex(element) != TAB_INDEX_OUT_OF_BOUNDS) {
+            if (tags.contains(tagName)) {
+                final boolean disabled = element.isAttributeDefined("disabled");
+                if (!disabled && element.getTabIndex() != HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
                     tabbableElements.add(element);
                 }
             }
@@ -498,30 +494,46 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     private Comparator createTabOrderComparator() {
-
         return new Comparator() {
             public int compare(final Object object1, final Object object2) {
+
                 final HtmlElement element1 = (HtmlElement) object1;
                 final HtmlElement element2 = (HtmlElement) object2;
 
-                final int tabIndex1 = getTabIndex(element1);
-                final int tabIndex2 = getTabIndex(element2);
+                final Short i1 = element1.getTabIndex();
+                final Short i2 = element2.getTabIndex();
+
+                final short index1;
+                if (i1 != null) {
+                    index1 = i1.shortValue();
+                }
+                else {
+                    index1 = -1;
+                }
+
+                final short index2;
+                if (i2 != null) {
+                    index2 = i2.shortValue();
+                }
+                else {
+                    index2 = -1;
+                }
 
                 final int result;
-                if (tabIndex1 > 0 && tabIndex2 > 0) {
-                    result = tabIndex1 - tabIndex2;
+                if (index1 > 0 && index2 > 0) {
+                    result = index1 - index2;
                 }
-                else if (tabIndex1 > 0) {
+                else if (index1 > 0) {
                     result = -1;
                 }
-                else if (tabIndex2 > 0) {
+                else if (index2 > 0) {
                     result = +1;
                 }
-                else if (tabIndex1 == tabIndex2) {
+                else if (index1 == index2) {
                     result = 0;
                 }
                 else {
-                    result = tabIndex2 - tabIndex1;
+                    result = index2 - index1;
                 }
 
                 return result;
@@ -529,33 +541,18 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         };
     }
 
-    private int getTabIndex(final HtmlElement element) {
-        final String tabIndexAttribute = element.getAttributeValue("tabindex");
-        if (tabIndexAttribute == null || tabIndexAttribute.length() == 0) {
-            return TAB_INDEX_NOT_SPECIFIED;
-        }
-
-        final int tabIndex = Integer.parseInt(tabIndexAttribute);
-        if (tabIndex >= 0 && tabIndex <= 32767) {
-            return tabIndex;
-        }
-        else {
-            return TAB_INDEX_OUT_OF_BOUNDS;
-        }
-    }
-
-    /**
-     *  Return the html element that is assigned to the specified access key. An
-     *  access key (aka mnemonic key) is used for keyboard navigation of the
-     *  page.<p>
-     *
-     *  Only the following html elements may have accesskey's defined: A, AREA,
-     *  BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
-     *
-     * @param accessKey The key to look for
-     * @return The html element that is assigned to the specified key or null
-     *      if no elements can be found that match the specified key.
-     */
+   /**
+    * Returns the HTML element that is assigned to the specified access key. An
+    * access key (aka mnemonic key) is used for keyboard navigation of the
+    * page.<p>
+    *
+    * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
+    * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
+    *
+    * @param accessKey The key to look for
+    * @return The HTML element that is assigned to the specified key or null
+    *      if no elements can be found that match the specified key.
+    */
     public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
         final List elements = getHtmlElementsByAccessKey(accessKey);
         if (elements.isEmpty()) {
@@ -566,23 +563,23 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
     }
 
-    /**
-     *  Return all the html elements that are assigned to the specified access key. An
-     *  access key (aka mnemonic key) is used for keyboard navigation of the
-     *  page.<p>
-     *
-     *  The html specification seems to indicate that one accesskey cannot be used
-     *  for multiple elements however Internet Explorer does seem to support this.
-     *  It's worth noting that Mozilla does not support multiple elements with one
-     *  access key so you are making your html browser specific if you rely on this
-     *  feature.<p>
-     *
-     *  Only the following html elements may have accesskey's defined: A, AREA,
-     *  BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
-     *
-     * @param accessKey The key to look for
-     * @return A list of html elements that are assigned to the specified accesskey.
-     */
+   /**
+    * Returns all the HTML elements that are assigned to the specified access key. An
+    * access key (aka mnemonic key) is used for keyboard navigation of the
+    * page.<p>
+    *
+    * The HTML specification seems to indicate that one accesskey cannot be used
+    * for multiple elements however Internet Explorer does seem to support this.
+    * It's worth noting that Mozilla does not support multiple elements with one
+    * access key so you are making your html browser specific if you rely on this
+    * feature.<p>
+    *
+    * Only the following html elements may have <tt>accesskey</tt>s defined: A, AREA,
+    * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
+    *
+    * @param accessKey The key to look for
+    * @return A list of HTML elements that are assigned to the specified accesskey.
+    */
     public List getHtmlElementsByAccessKey(final char accessKey) {
         final List elements = new ArrayList();
 
@@ -613,25 +610,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *  Assert that all tabbable elements have a valid value set for "tabindex".
      *  If they don't then throw an exception as per {@link
      *  WebClient#assertionFailed(String)}
+     *
+     * @deprecated
+     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
      */
     public void assertAllTabIndexAttributesSet() {
-        final List acceptableTagNames = Arrays.asList(
-                new Object[]{"a", "area", "button", "input", "object", "select", "textarea"});
-        final List tabbableElements = getDocumentHtmlElement().getHtmlElementsByTagNames(acceptableTagNames);
-
-        final Iterator iterator = tabbableElements.iterator();
-        while (iterator.hasNext()) {
-            final HtmlElement htmlElement = (HtmlElement) iterator.next();
-            final int tabIndex = getTabIndex(htmlElement);
-            if (tabIndex == TAB_INDEX_OUT_OF_BOUNDS) {
-                getWebClient().assertionFailed(
-                    "Illegal value for tab index: "
-                    + htmlElement.getAttributeValue("tabindex"));
-            }
-            else if (tabIndex == TAB_INDEX_NOT_SPECIFIED) {
-                getWebClient().assertionFailed("tabindex not set for " + htmlElement);
-            }
-        }
+        WebAssert.assertAllTabIndexAttributesSet(this);
     }
 
     /**
@@ -639,22 +623,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *  hot key for keyboard navigation. Assert that all access keys (mnemonics)
      *  in this page are unique. If they aren't then throw an exception as per
      *  {@link WebClient#assertionFailed(String)}
+     *
+     * @deprecated
+     * @see WebAssert#assertAllAccessKeyAttributesUnique(HtmlPage)
      */
     public void assertAllAccessKeyAttributesUnique() {
-        final List accessKeyList = new ArrayList();
-
-        final Iterator iterator = getAllHtmlChildElements();
-        while (iterator.hasNext()) {
-            final String id = ((HtmlElement) iterator.next()).getAttributeValue("accesskey");
-            if (id != null && id.length() != 0) {
-                if (accessKeyList.contains(id)) {
-                    getWebClient().assertionFailed("Duplicate access key: " + id);
-                }
-                else {
-                    accessKeyList.add(id);
-                }
-            }
-        }
+        WebAssert.assertAllAccessKeyAttributesUnique(this);
     }
 
     /**
@@ -663,22 +637,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *
      *  Assert that all ids in this page are unique. If they aren't then throw
      *  an exception as per {@link WebClient#assertionFailed(String)}
+     *
+     * @deprecated
+     * @see WebAssert#assertAllIdAttributesUnique(HtmlPage)
      */
     public void assertAllIdAttributesUnique() {
-        final List idList = new ArrayList();
-
-        final Iterator iterator = getAllHtmlChildElements();
-        while (iterator.hasNext()) {
-            final String id = ((HtmlElement) iterator.next()).getAttributeValue("id");
-            if (id != null && id.length() != 0) {
-                if (idList.contains(id)) {
-                    getWebClient().assertionFailed("Duplicate ID: " + id);
-                }
-                else {
-                    idList.add(id);
-                }
-            }
-        }
+        WebAssert.assertAllIdAttributesUnique(this);
     }
 
     /**

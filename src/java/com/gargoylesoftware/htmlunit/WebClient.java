@@ -597,6 +597,8 @@ public class WebClient implements Serializable {
      *  Override this to provide custom behavior.
      *
      * @param message The failure message
+     * @deprecated
+     * @see WebAssert
      */
     public void assertionFailed(final String message) {
         try {

@@ -87,13 +87,21 @@ public abstract class HtmlElement extends DomNamespaceNode {
 
     /** Constant meaning that the specified attribute was found but its value was empty. */
     public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
-    
+
+    /**
+     * Constant indicating that a tab index value is out of bounds (less than <tt>0</tt> or greater
+     * than <tt>32767</tt>).
+     *
+     * @see #getTabIndex()
+     */
+    public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
+
     /** The map holding the attributes, keyed by name. */
     private Map attributes_;
 
     /** The map holding the namespaces, keyed by URI. */
     private Map namespaces_ = new HashMap();
-    
+
     private List/* HtmlAttributeChangeListener */ attributeListeners_;
 
     /**
@@ -515,6 +523,33 @@ public abstract class HtmlElement extends DomNamespaceNode {
      */
     public final void setId(final String newId) {
         setAttributeValue("id", newId);
+    }
+
+    /**
+     * Returns this element's tab index, if it has one. If the tab index is outside of the
+     * valid range (less than <tt>0</tt> or greater than <tt>32767</tt>), this method
+     * returns {@link #TAB_INDEX_OUT_OF_BOUNDS}. If this element does not have
+     * a tab index, or its tab index is otherwise invalid, this method returns <tt>null</tt>.
+     *
+     * @return this element's tab index
+     */
+    public Short getTabIndex() {
+        final String index = getAttributeValue("tabindex");
+        if (index == null || index.length() == 0) {
+            return null;
+        }
+        try {
+            final long l = Long.parseLong(index);
+            if (l >= 0 && l <= Short.MAX_VALUE) {
+                return new Short(new Long(l).shortValue());
+            }
+            else {
+                return TAB_INDEX_OUT_OF_BOUNDS;
+            }
+        }
+        catch (final NumberFormatException e) {
+            return null;
+        }
     }
 
     /**

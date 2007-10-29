@@ -512,4 +512,85 @@ public class WebAssertTest extends WebTestCase {
         assertTrue(caught);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testAssertAllTabIndexAttributesSet() throws Exception {
+
+        final String html1 = "<html><body><a href='#' tabindex='1'>foo</a></body></html>";
+        final HtmlPage page1 = loadPage(html1);
+
+        WebAssert.assertAllTabIndexAttributesSet(page1);
+
+        final String html2 = "<html><body><a href='#'>foo</a></body></html>";
+        final HtmlPage page2 = loadPage(html2);
+
+        boolean caught = false;
+        try {
+            WebAssert.assertAllTabIndexAttributesSet(page2);
+        }
+        catch (final AssertionError e) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        final String html3 = "<html><body><a href='#' tabindex='x'>foo</a></body></html>";
+        final HtmlPage page3 = loadPage(html3);
+
+        caught = false;
+        try {
+            WebAssert.assertAllTabIndexAttributesSet(page3);
+        }
+        catch (final AssertionError e) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testAssertAllAccessKeyAttributesUnique() throws Exception {
+
+        final String html1 = "<html><body><a accesskey='k'>foo</a></body></html>";
+        final HtmlPage page1 = loadPage(html1);
+
+        WebAssert.assertAllAccessKeyAttributesUnique(page1);
+
+        final String html2 = "<html><body><a accesskey='k'>foo</a><a accesskey='k'>bar</a></body></html>";
+        final HtmlPage page2 = loadPage(html2);
+
+        boolean caught = false;
+        try {
+            WebAssert.assertAllAccessKeyAttributesUnique(page2);
+        }
+        catch (final AssertionError e) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testAssertAllIdAttributesUnique() throws Exception {
+
+        final String html1 = "<html><body><a id='k'>foo</a></body></html>";
+        final HtmlPage page1 = loadPage(html1);
+
+        WebAssert.assertAllIdAttributesUnique(page1);
+
+        final String html2 = "<html><body><a id='k'>foo</a><a id='k'>bar</a></body></html>";
+        final HtmlPage page2 = loadPage(html2);
+
+        boolean caught = false;
+        try {
+            WebAssert.assertAllIdAttributesUnique(page2);
+        }
+        catch (final AssertionError e) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
 }

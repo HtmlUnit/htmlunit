@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -452,6 +454,74 @@ public final class WebAssert {
         }
         catch (final JaxenException e) {
             throw new AssertionError("Unable to process XPath expression '" + xpath + "'.");
+        }
+    }
+
+    /**
+     * <p>Many HTML elements are "tabbable" and can have a <tt>tabindex</tt> attribute
+     * that determines the order in which the components are navigated when
+     * pressing the tab key. To ensure good usability for keyboard navigation,
+     * all tabbable elements should have the <tt>tabindex</tt> attribute set.</p>
+     *
+     * <p>This method verifies that all tabbable elements have a valid value set for
+     * the <tt>tabindex</tt> attribute.</p>
+     *
+     * @param page the page to check
+     */
+    public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
+        final List tags = Arrays.asList(new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
+        final List tabbableElements = page.getDocumentHtmlElement().getHtmlElementsByTagNames(tags);
+        for (final Iterator i = tabbableElements.iterator(); i.hasNext();) {
+            final HtmlElement element = (HtmlElement) i.next();
+            final Short tabIndex = element.getTabIndex();
+            if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
+                final String s = element.getAttributeValue("tabindex");
+                throw new AssertionError("Illegal value for tab index: '" + s + "'.");
+            }
+        }
+    }
+
+    /**
+     * Many HTML components can have an <tt>accesskey</tt> attribute which defines a hot key for
+     * keyboard navigation. This method verifies that all the <tt>accesskey</tt> attributes on the
+     * specified page are unique.
+     *
+     * @param page the page to check
+     */
+    public static void assertAllAccessKeyAttributesUnique(final HtmlPage page) {
+        final List list = new ArrayList();
+        for (final Iterator i = page.getAllHtmlChildElements(); i.hasNext();) {
+            final HtmlElement element = (HtmlElement) i.next();
+            final String key = element.getAttributeValue("accesskey");
+            if (key != null && key.length() != 0) {
+                if (list.contains(key)) {
+                    throw new AssertionError("The access key '" + key + "' is not unique.");
+                }
+                else {
+                    list.add(key);
+                }
+            }
+        }
+    }
+
+    /**
+     * Verifies that all element IDs in the specified page are unique.
+     *
+     * @param page the page to check
+     */
+    public static void assertAllIdAttributesUnique(final HtmlPage page) {
+        final List list = new ArrayList();
+        for (final Iterator i = page.getAllHtmlChildElements(); i.hasNext();) {
+            final HtmlElement element = (HtmlElement) i.next();
+            final String id = element.getAttributeValue("id");
+            if (id != null && id.length() != 0) {
+                if (list.contains(id)) {
+                    throw new AssertionError("The element ID '" + id + "' is not unique.");
+                }
+                else {
+                    list.add(id);
+                }
+            }
         }
     }
 

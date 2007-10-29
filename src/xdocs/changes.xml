@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig">
+                Add WebAssert utility class for domain-specific assertions; deprecate assertion methods
+                in HtmlPage and move them to this new utility class.
+            </action>
             <action type="update" dev="asashour">
                 HtmlForm: on submitting a form without parameters, URL should not end with a question mark (IE7 only).
             </action>
