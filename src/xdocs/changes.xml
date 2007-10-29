@@ -8,7 +8,7 @@
     <body>
         <release version="1.14-prerelease">
             <action type="update" dev="asashour">
-                HtmlForm: on submitting a form without parameters, URL should not end with a question mark.
+                HtmlForm: on submitting a form without parameters, URL should not end with a question mark (IE only).
             </action>
             <action type="add" dev="mguillem">
                 JavaScript: getElementsByTagName now returns empty collection when called with 'incorrect' name.

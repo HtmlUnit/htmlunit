@@ -215,7 +215,7 @@ public class HtmlForm extends ClickableElement {
             
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
-            if (queryFromFields.length() > 0) {
+            if (!getPage().getWebClient().getBrowserVersion().isIE() || queryFromFields.length() > 0) {
                 actionUrl += "?" + queryFromFields;
             }
             if (anchor.length() > 0) {
