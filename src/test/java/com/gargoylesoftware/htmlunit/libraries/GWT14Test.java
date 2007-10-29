@@ -108,8 +108,11 @@ public class GWT14Test extends WebTestCase {
     public void testI18N() throws Exception {
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
         testI18N(page, "numberFormatOutputText", "31,415,926,535.898");
-        String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+
+        String timeZone = new SimpleDateFormat("Z").format(
+                new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
+
         testI18N(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM GMT" + timeZone);
         testI18N(page, "messagesFormattedOutputText",
             "User 'amelie' has security clearance 'guest' and cannot access '/secure/blueprints.xml'");
@@ -151,7 +154,8 @@ public class GWT14Test extends WebTestCase {
          */
         testI18N(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
 
-        String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+        String timeZone = new SimpleDateFormat("Z").format(
+                new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
 
         testI18N(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00 h 00 GMT" + timeZone);
