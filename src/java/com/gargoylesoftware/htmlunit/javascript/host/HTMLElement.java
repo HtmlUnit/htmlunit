@@ -365,6 +365,31 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
+     * Test for attribute.
+     * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-ElHasAttr">
+     * the DOM reference</a>
+     *
+     * @param name Name of the attribute to test
+     * @return <code>true</code> if the node has this attribute
+     */
+    public boolean jsxFunction_hasAttribute(final String name) {
+        return getHtmlElementOrDie().getAttribute(name) != HtmlElement.ATTRIBUTE_NOT_DEFINED;
+    }
+
+    /**
+     * Test for attribute.
+     * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-ElHasAttrNS">
+     * the DOM reference</a>
+     *
+     * @param namespaceURI the namespace URI
+     * @param localName the local name of the attribute to look for
+     * @return <code>true</code> if the node has this attribute
+     */
+    public boolean jsxFunction_hasAttributeNS(final String namespaceURI, final String localName) {
+        return getHtmlElementOrDie().getAttributeNS(namespaceURI, localName) != HtmlElement.ATTRIBUTE_NOT_DEFINED;
+    }
+
+    /**
      * Set an attribute.
      * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-F68F082">
      * the DOM reference</a>
@@ -440,7 +465,13 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         final DomNode node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
         try {
-            final String xpath = "//" + tagName.toLowerCase();
+            final String xpath;
+            if ("*".equals(tagName)) {
+                xpath = "//*";
+            }
+            else {
+                xpath = "//node()[name() = '" + tagName.toLowerCase() + "']";
+            }
             collection.init(node, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(node)));
         }
         catch (final JaxenException e) {

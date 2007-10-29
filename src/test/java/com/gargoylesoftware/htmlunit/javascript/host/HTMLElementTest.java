@@ -308,11 +308,12 @@ public class HTMLElementTest extends WebTestCase {
         final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "var a1 = document.getElementsByTagName('td');\n"
-            + "alert('all = ' + a1.length);\n"
-            + "var firstRow = document.getElementById('r1');\n"
-            + "var rowOnly = firstRow.getElementsByTagName('td');\n"
-            + "alert('row = ' + rowOnly.length);\n"
+            + "  var a1 = document.getElementsByTagName('td');\n"
+            + "  alert('all = ' + a1.length);\n"
+            + "  var firstRow = document.getElementById('r1');\n"
+            + "  var rowOnly = firstRow.getElementsByTagName('td');\n"
+            + "  alert('row = ' + rowOnly.length);\n"
+            + "  alert('by wrong name: ' + firstRow.getElementsByTagName('>').length);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<table>\n"
@@ -320,7 +321,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<tr id='r2'><td>3</td><td>4</td></tr>\n"
             + "</table>\n"
             + "</body></html>";
-        final String[] expectedAlerts = {"all = 4", "row = 2"};
+        final String[] expectedAlerts = {"all = 4", "row = 2", "by wrong name: 0"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
@@ -1920,27 +1921,28 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void testAttributes() throws Exception {
+    public void testHasAttribute() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var f = document.getElementById('f');\n"
-            + "    for(var i = 0; i < f.attributes.length; i++) {\n"
-            + "      alert(f.attributes[i].name + '=' + f.attributes[i].value);\n"
-            + "    }\n"
+            + "    var elt = document.body;\n"
+            + "    alert(elt.hasAttribute('onload'));\n"
+            + "    alert(elt.hasAttribute('onLoad'));\n"
+            + "    alert(elt.hasAttribute('foo'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<form name='f' id='f' foo='bar' baz='blah'></form>\n"
-            + "</body>\n"
+            + "<body onload='test()'></body>\n"
             + "</html>";
-        final List actual = new ArrayList();
-        loadPage(html, actual);
-        final String[] expected = {"name=f", "id=f", "foo=bar", "baz=blah"};
-        assertEquals(expected, actual);
-    }
 
+        final String[] expectedAlerts = {"true", "true", "false"};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final List actual = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+
+        assertEquals(expectedAlerts, actual);
+    }
 }

@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
-public class NamedNodeMap extends SimpleScriptable {
+public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -1910087049570242560L;
 
@@ -102,14 +102,28 @@ public class NamedNodeMap extends SimpleScriptable {
      *
      * {@inheritDoc}
      */
-    public Object get(final String name, final Scriptable start) {
-        final NamedNodeMap map = (NamedNodeMap) start;
-        final HtmlAttr attr = (HtmlAttr) map.nodes_.get(name);
+    public Object getWithFallback(final String name) {
+        final HtmlAttr attr = (HtmlAttr) nodes_.get(name);
         if (attr != null) {
-            return attr;
+            return attr.getScriptObject();
         }
         else {
-            return super.get(name, start);
+            return NOT_FOUND;
+        }
+    }
+    
+    /**
+     * Gets the specified attribute.
+     * @param name attribute name.
+     * @return The attribute node, <code>null</code> if the attribute is not defined
+     */
+    public Object jsxFunction_getNamedItem(final String name) {
+        final HtmlAttr attr = (HtmlAttr) nodes_.get(name);
+        if (attr != null) {
+            return attr.getScriptObject();
+        }
+        else {
+            return null;
         }
     }
 

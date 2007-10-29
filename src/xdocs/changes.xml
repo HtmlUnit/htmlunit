@@ -7,6 +7,13 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript: getElementsByTagName now returns empty collection when called with 'incorrect' name.
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: add support for hasAttribute and hasAttributeNS on node (Firefox), 
+                getNamedItem on NamedNodeMap.
+            </action>
             <action type="add" dev="sdanig">
                 Add a popup blocker (WebClient.setPopupBlockerEnabled(boolean)).
             </action>
