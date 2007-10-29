@@ -49,8 +49,10 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
 
 /**
- * Simple cache implementation.<br/>
- * Current implementation's main purpose is to provide the ability to cache <tt>.js</tt> files.
+ * <p>Simple cache implementation.</p>
+ *
+ * <p>The current implementation's main purpose is to provide the ability to cache <tt>.js</tt> files.</p>
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
@@ -59,8 +61,8 @@ public class Cache implements Serializable {
 
     private static final long serialVersionUID = -3864114727885057419L;
 
-    private int nbMaxEntries_ = 20;
-    private final Map entries_ = Collections.synchronizedMap(new HashMap(nbMaxEntries_));
+    private int maxSize_ = 20;
+    private final Map entries_ = Collections.synchronizedMap(new HashMap(maxSize_));
 
     /**
      * A cache entry.
@@ -87,7 +89,8 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Cache the response if needed. Current implementation only caches JavaScript files
+     * Cache the response if needed. The current implementation only caches JavaScript files.
+     *
      * @param request the request
      * @param response the response
      */
@@ -99,11 +102,11 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Truncates the cache to the maximal number of entries
+     * Truncates the cache to the maximal number of entries.
      */
     protected void deleteOverflow() {
         synchronized (entries_) {
-            while (entries_.size() > nbMaxEntries_) {
+            while (entries_.size() > maxSize_) {
                 final Entry oldestEntry = (Entry) Collections.min(entries_.values());
                 entries_.remove(oldestEntry.response_.getUrl());
             }
@@ -111,7 +114,8 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Determines if the response should be cached
+     * Determines if the response should be cached.
+     *
      * @param request the performed request
      * @param response the received response
      * @return <code>true</code> if the response should be cached
@@ -122,15 +126,19 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Tries to guess if the content is dynamic or not.<br/>
-     * "Since origin servers do not always provide explicit expiration times, HTTP caches typically assign heuristic
-     * expiration times, employing algorithms that use other header values (such as the Last-Modified time) to
-     * estimate a plausible expiration time". <br/>
-     * Current implementation consider as dynamic content everything except responses with a Last-Modified header with
-     * a date older than 10 minutes or with an Expires header specifying expiration in more than 10 minutes.
+     * <p>Tries to guess if the content is dynamic or not.</p>
+     *
+     * <p>"Since origin servers do not always provide explicit expiration times, HTTP caches typically
+     * assign heuristic expiration times, employing algorithms that use other header values (such as the
+     * <tt>Last-Modified</tt> time) to estimate a plausible expiration time".</p>
+     *
+     * <p>The current implementation considers as dynamic content everything except responses with a
+     * <tt>Last-Modified</tt> header with a date older than 10 minutes or with an <tt>Expires</tt> header
+     * specifying expiration in more than 10 minutes.</p>
+     *
      * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">
      * @param response the response to examine
-     * @return <code>true</code> if the response should be considered as dynamic and therefore uncachable
+     * @return <code>true</code> if the response should be considered as dynamic and therefore uncacheable
      */
     protected boolean isDynamicContent(final WebResponse response) {
         final Date lastModified = parseDateHeader(response, "Last-Modified");
@@ -146,10 +154,13 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Parses the specified date header of the response
+     * Parses and returns the specified date header of the specified response. This method
+     * returns <tt>null</tt> if the specified header cannot be found or cannot be parsed as
+     * a date.
+     *
      * @param response the response
      * @param headerName the header name
-     * @return <code>null</code> if no header found or if it can't be parsed as a date, otherwise the date
+     * @return the specified date header of the specified response
      */
     protected Date parseDateHeader(final WebResponse response, final String headerName) {
         final String value = response.getResponseHeaderValue(headerName);
@@ -166,7 +177,8 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Indicates if the provided response is javascript content
+     * Indicates if the provided response is JavaScript content.
+     *
      * @param webResponse the response to analyze
      * @return <code>true</code> if it can be considered as JavaScript
      */
@@ -180,9 +192,11 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Gets the cached content (if any)
-     * @param request the request being performed
-     * @return <code>null</code> if no cached content is available
+     * Returns the cached content corresponding to the specified request. If there is
+     * no corresponding cached content, this method returns <tt>null</tt>.
+     *
+     * @param request the request whose cached content is sought
+     * @return the cached content corresponding to the specified request
      */
     public WebResponse getCachedContent(final WebRequestSettings request) {
         if (!SubmitMethod.GET.equals(request.getSubmitMethod())) {
@@ -201,27 +215,32 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Gets the maximal number of entries in cache (doesn't depend on their size)
-     * @return the number of entries. Default is 20.
+     * Returns the cache's maximum size. This is the maximum number of files that will
+     * be cached. The default is <tt>20</tt>.
+     *
+     * @return the cache's maximum size
      */
-    public int getNbMaxEntries() {
-        return nbMaxEntries_;
+    public int getMaxSize() {
+        return maxSize_;
     }
 
     /**
-     * Sets the maximal number of entries in cache
-     * @param nbMaxEntries the new value (must be &gt;= 0)
+     * Sets the cache's maximum size. This is the maximum number of files that will
+     * be cached. The default is <tt>20</tt>.
+     *
+     * @param maxSize the cache's maximum size (must be &gt;= 0)
      */
-    public void setNbMaxEntries(final int nbMaxEntries) {
-        if (nbMaxEntries < 0) {
-            throw new IllegalArgumentException("Illegal value for nbMaxEntries: " + nbMaxEntries);
+    public void setMaxSize(final int maxSize) {
+        if (maxSize < 0) {
+            throw new IllegalArgumentException("Illegal value for maxSize: " + maxSize);
         }
-        nbMaxEntries_ = nbMaxEntries;
+        maxSize_ = maxSize;
         deleteOverflow();
     }
 
     /**
      * Returns the number of entries in the cache.
+     *
      * @return the number of entries in the cache
      */
     public int getSize() {

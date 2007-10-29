@@ -194,7 +194,7 @@ public class CacheTest extends WebTestCase {
             + "</head><body>abc</body></html>";
 
         final WebClient client = new WebClient();
-        client.getCache().setNbMaxEntries(1);
+        client.getCache().setMaxSize(1);
 
         final MockWebConnection connection = new MockWebConnection(client);
         client.setWebConnection(connection);
