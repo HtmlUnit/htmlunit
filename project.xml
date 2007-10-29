@@ -176,65 +176,65 @@
             <name>Bruce Faulkner</name>
         </contributor>
         <contributor>
-        	<name>Ray Suliteanu</name>
+            <name>Ray Suliteanu</name>
         </contributor>
         <contributor>
-        	<name>Denis N. Antonioli</name>
+            <name>Denis N. Antonioli</name>
         </contributor>
         <contributor>
-        	<name>Stefan Anzinger</name>
+            <name>Stefan Anzinger</name>
         </contributor>
         <contributor>
-        	<name>Paul King</name>
+            <name>Paul King</name>
         </contributor>
         <contributor>
-        	<name>Vikram Shitole</name>
+            <name>Vikram Shitole</name>
         </contributor>
         <contributor>
-        	<name>Mark van Leeuwen</name>
+            <name>Mark van Leeuwen</name>
         </contributor>
         <contributor>
-        	<name>Brad Murray</name>
+            <name>Brad Murray</name>
         </contributor>
         <contributor>
-        	<name>Julien Henry</name>
+            <name>Julien Henry</name>
         </contributor>
         <contributor>
-        	<name>Andre Soereng</name>
+            <name>Andre Soereng</name>
         </contributor>
         <contributor>
-        	<name>Karel Kolman</name>
+            <name>Karel Kolman</name>
         </contributor>
         <contributor>
-        	<name>Bruce Chapman</name>
+            <name>Bruce Chapman</name>
         </contributor>
         <contributor>
-        	<name>Kristian Muntau</name>
+            <name>Kristian Muntau</name>
         </contributor>
         <contributor>
-        	<name>Sam Hough</name>
+            <name>Sam Hough</name>
         </contributor>
         <contributor>
-        	<name>Deryk Sinotte</name>
+            <name>Deryk Sinotte</name>
         </contributor>
         <contributor>
-        	<name>Martin Tamme</name>
+            <name>Martin Tamme</name>
         </contributor>
         <contributor>
-        	<name>Philip Graf</name>
+            <name>Philip Graf</name>
         </contributor>
         <contributor>
-        	<name>Rodney Gitzel</name>
+            <name>Rodney Gitzel</name>
         </contributor>
         <contributor>
-        	<name>Matt Ryall</name>
+            <name>Matt Ryall</name>
         </contributor>
         <contributor>
-        	<name>Rob Di Marco</name>
+            <name>Rob Di Marco</name>
         </contributor>
-		<contributor>
-			<name>Sam Hough</name>
-		</contributor>
+        <contributor>
+            <name>Sam Hough</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -244,7 +244,7 @@
             <type>jar</type>
             <url>http://www.junit.org/</url>
             <properties>
-				<scope>test</scope>
+                <scope>test</scope>
                 <htmlunit.group>test</htmlunit.group>
                 <htmlunit.description>JUnit testing framework</htmlunit.description>
             </properties>
@@ -311,7 +311,7 @@
             <type>jar</type>
             <url>http://gsbase.sourceforge.net</url>
             <properties>
-				<scope>test</scope>
+                <scope>test</scope>
                 <htmlunit.group>test</htmlunit.group>
                 <htmlunit.description>Misc testing support classes</htmlunit.description>
             </properties>
@@ -389,7 +389,7 @@
             <type>jar</type>
             <url>http://jetty.mortbay.org</url>
             <properties>
-				<scope>test</scope>
+                <scope>test</scope>
                 <htmlunit.group>test</htmlunit.group>
                 <htmlunit.description>Jetty</htmlunit.description>
             </properties>
@@ -401,7 +401,7 @@
             <type>jar</type>
             <url>http://jetty.mortbay.org</url>
             <properties>
-				<scope>test</scope>
+                <scope>test</scope>
                 <htmlunit.group>test</htmlunit.group>
                 <htmlunit.description>Jetty Util</htmlunit.description>
             </properties>
@@ -413,7 +413,7 @@
             <type>jar</type>
             <url>http://java.sun.com/products/servlet/index.jsp</url>
             <properties>
-				<scope>test</scope>
+                <scope>test</scope>
                 <htmlunit.group>test</htmlunit.group>
                 <htmlunit.description>Java Servlet API</htmlunit.description>
             </properties>
