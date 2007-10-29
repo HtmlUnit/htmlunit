@@ -1213,6 +1213,7 @@ public class HtmlFormTest extends WebTestCase {
      */
     public void testSubmitURLWithoutParameters() throws Exception {
         testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_7_0, URL_SECOND.toExternalForm());
+        testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_6_0, URL_SECOND.toExternalForm() + '?');
         testSubmitURLWithoutParameters(BrowserVersion.FIREFOX_2, URL_SECOND.toExternalForm() + '?');
     }
 

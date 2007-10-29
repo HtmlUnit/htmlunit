@@ -53,6 +53,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -215,7 +216,9 @@ public class HtmlForm extends ClickableElement {
             
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
-            if (!getPage().getWebClient().getBrowserVersion().isIE() || queryFromFields.length() > 0) {
+            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+            if (!(browserVersion.isIE() && browserVersion.getBrowserVersionNumeric() >= 7)
+                    || queryFromFields.length() > 0) {
                 actionUrl += "?" + queryFromFields;
             }
             if (anchor.length() > 0) {
