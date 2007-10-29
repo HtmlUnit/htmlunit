@@ -1163,4 +1163,46 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) (submitInput).click();
         assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getUrl());
     }
+
+    /**
+     * Regression test for
+     *   https://sourceforge.net/tracker/index.php?func=detail&aid=1822108&group_id=47038&atid=448266
+     *
+     * @throws Exception If the test fails
+     */
+    public void testSubmitWithOnClickThatReturnsFalse() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String firstContent = "<html><head><title>foo</title></haed><body>\n"
+            + "<form action='" + URL_SECOND + "' method='post'>\n"
+            + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
+            + "</form></body></html>";
+        
+        final String secondContent = "<html><head><title>foo</title><script>\n"
+            + "  Number.prototype.gn = false;"
+            + "  function test() {\n"
+            + "    var v = 0;\n"
+            + "    alert(typeof v);\n"
+            + "    alert(v.gn);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+
+        final String[] expectedAlerts = {"number", "false"};
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, firstContent);
+        conn.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlForm form = (HtmlForm) page.getForms().get(0);
+        final HtmlSubmitInput submit = (HtmlSubmitInput) form.getInputByName("mySubmit");
+        submit.click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
