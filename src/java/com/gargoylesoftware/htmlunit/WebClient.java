@@ -335,7 +335,7 @@ public class WebClient implements Serializable {
     public Page getPage(final WebWindow webWindow, final WebRequestSettings parameters)
         throws IOException, FailingHttpStatusCodeException {
 
-        final Page page = getCurrentWindow().getEnclosedPage();
+        final Page page = webWindow.getEnclosedPage();
         if (page != null && page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (!htmlPage.isOnbeforeunloadAccepted()) {

@@ -1602,4 +1602,17 @@ public class WebClientTest extends WebTestCase {
         wc.getPage(URL_GARGOYLE.toExternalForm());
         assertEquals(URL_GARGOYLE, calledUrls[0]);
     }
+
+    /**
+     * Verifies that {@link WebClient#getPage(WebWindow, WebRequestSettings)} calls OnBeforeUnload
+     * on the specified window's page, not on the client's "current" page.
+     * @throws Exception if an error occurs
+     */
+    public void testOnBeforeUnloadCalledOnCorrectPage() throws Exception{
+        final String html = "<html><body onbeforeunload='alert(7)'><iframe></iframe></body></html>";
+        final List alerts = new ArrayList();
+        loadPage(html, alerts);
+        assertTrue(alerts.isEmpty());
+    }
+
 }
