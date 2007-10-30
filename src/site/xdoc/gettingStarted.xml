@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Getting Started with HtmlUnit</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <revision>$Revision: 1685 $</revision>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
+                to have in your classpath.
+            </p>
+            <p>
+                The class <javadoc>com.gargoylesoftware.htmlunit.WebClient</javadoc> is the
+                main starting point.  This simulates a web browser and will be used to execute
+                all of the tests.
+            </p>
+            <p>
+                Most unit testing will be done within a framework like <a href="http://www.junit.org">JUnit</a>
+                so all the examples here will assume that we are using that.
+            </p>
+            <p>
+                In the first sample, we create the web client and have it load the homepage from the HtmlUnit website.
+                We then verify that this page has the correct title.  Note that getPage() can return different types
+                of pages based on the content type of the returned data.  In this case we are expecting a content
+                type of text/html so we cast the result to an <javadoc>com.gargoylesoftware.htmlunit.html.HtmlPage</javadoc>.
+            </p>
+            <source><![CDATA[
+public void testHomePage() throws Exception {
+    final WebClient webClient = new WebClient();
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
+    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
+}]]></source>
+        </section>
+
+        <section name="Imitating a specific browser">
+            <p>
+                Often you will want to simulate a specific browser.  This is done by passing a
+                <javadoc>com.gargoylesoftware.htmlunit.BrowserVersion</javadoc> into the WebClient constructor.
+                Constants have been provided for some common browsers but you can create your own specific
+                version by instantiating a BrowserVersion.
+            </p>
+            <source><![CDATA[
+public void testHomePage() throws Exception {
+    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
+    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
+}]]></source>
+            <p>
+                Specifying this BrowserVersion will change the user agent header that is sent up to the
+                server and will change the behaviour of some of the JavaScript.
+            </p>
+        </section>
+
+        <section name="Using a proxy server">
+            <p>
+                The last WebClient constructor allows you to specify proxy server information in those cases
+                where you need to connect through one.
+            </p>
+            <source><![CDATA[
+public void testHomePage() throws Exception {
+    final WebClient webClient = new WebClient(
+        BrowserVersion.MOZILLA_1_0, "http://myproxyserver", 8000);
+    final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
+    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
+}]]></source>
+            <p>
+                Specifying this BrowserVersion will change the user agent header that is sent up to the
+                server and will change the behaviour of some of the JavaScript.
+            </p>
+        </section>
+
+        <section name="Submitting a form">
+            <p>
+                Frequently we want to change values in a form and submit the form back to the server.  The
+                following example shows how you might do this.
+            </p>
+            <source><![CDATA[
+public void testHomePage() throws Exception {
+    final WebClient webClient = new WebClient();
+
+    // Get the first page
+    final HtmlPage page1 = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
+
+    // Get the form that we are dealing with and within that form, 
+    // find the submit button and the field that we want to change.
+    final HtmlForm form = page1.getFormByName("myform");
+    final HtmlSubmitInput button 
+        = (HtmlSubmitInput) form.getInputByName("submitbutton");
+    final HtmlTextInput textField 
+        = (HtmlTextInput) form.getInputByName("userid");
+
+    // Change the value of the text field
+    textField.setValueAttribute("root");
+
+    // Now submit the form by clicking the button and get back the 
+    // second page.
+    final HtmlPage page2 = (HtmlPage) button.click();
+}]]></source>
+
+        </section>
+    </body>
+</document>

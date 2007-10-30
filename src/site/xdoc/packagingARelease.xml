@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Packaging a release</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+        <revision>$Revision: 1701 $</revision>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                This document is intended for committers who are packaging a release.  It likely won't be
+                of much use to anyone else.
+            </p>
+            <p>
+            	If this is the first time you're doing a release you'll need to perform
+            	some setup.
+            	<ol>
+	            	<li>
+	            		Get a new version of the maven clover plugin:
+	            		<source>maven plugin:download -DartifactId=maven-clover-plugin -DgroupId=maven -Dversion=1.9.1</source>
+            		</li>
+           			<li>
+           				You might also need to specify the following properties to maven.
+           				You can do this with a build.properties file, in the project
+           				directory or in your home directory, or on the command line
+           				with the -D option.
+<source>
+maven.username=(your sf.net username)
+maven.scp.executable=(full path to a scp app if no "scp" on your path)
+maven.ssh.executable=(full path to a ssh app if no "ssh" on your path)
+</source>
+
+						As an example, my setup is:
+<source>
+maven.username=yourgod
+maven.scp.executable=C:/programs/ssh/pscp.exe
+maven.ssh.executable=C:/programs/ssh/plink.exe
+</source>
+						Also, since I am using putty I needed to manually connect to
+						the server once to authorize the host. You may need to do something
+						similar for your ssh client.
+						<source>c:\programs\ssh\plink.exe -l yourgod projects.sourceforge.net</source>
+           			</li>
+           		</ol>
+       		</p>
+            <p>
+                Now do this for each release:
+                <ol>
+                    <li>
+                        Update the version number in project.xml
+                    </li>
+                    <li>
+                        Update the version number and release date in src/xdocs/changes.xml
+                    </li>
+                    <li>
+                        Update the version number and release date in src/xdocs/index.xml
+                    </li>
+                    <li>
+                        Update the version number and release date in src/xdocs/changes.xml
+                    </li>
+                    <li>
+                        Build the zip
+                        <source>maven clean htmlunit:build-bin-dist htmlunit:build-src-dist</source>
+                    </li>
+                    <li>
+                        Upload the two zip files to SourceForge following 
+                        <a href="http://sourceforge.net/docman/display_doc.php?docid=6445&amp;group_id=1">
+                        these instructions</a>
+                    </li>
+                    <li>
+                        Add a new Group in SourceForge tracker system.
+                    </li>
+                    <li>
+                        Assuming that everything has gone smoothly so far, make sure everything is checked
+                        in and tag the repository with a name like this "HtmlUnit-1dot1" that reflects
+                        the current build version.
+                    </li>
+                    <li>
+                        Rebuild and redeploy the site documentation.
+                        <source>maven site:deploy</source>
+                    </li>
+                    <li>
+                        Deploy this new version to the maven repository as 
+                        <a href="http://maven.apache.org/maven-1.x/reference/repository-upload.html">described here</a>.
+                    </li>
+                </ol>
+            </p>
+        </section>
+    </body>
+</document>
+
