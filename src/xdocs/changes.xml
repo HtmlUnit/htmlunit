@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="mguillem">
+                HtmlTextArea.asXml() now preserves content and expands empty tag to make generated xml interpretable as html by browsers.
+            </action>
             <action type="add" dev="sdanig">
                 Add WebAssert utility class for domain-specific assertions; deprecate assertion methods
                 in HtmlPage and move them to this new utility class.

@@ -123,4 +123,24 @@ public class HtmlTextAreaTest extends WebTestCase {
         assertNotNull(textArea);
         assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testAsXml() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea name='textArea1'> foo \n bar </textarea>\n"
+            + "<textarea name='textArea2'></textarea>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+
+        final HtmlTextArea textArea1 = form.getTextAreaByName("textArea1");
+        assertEquals("<textarea name=\"textArea1\"> foo \n bar </textarea>", textArea1.asXml());
+
+        final HtmlTextArea textArea2 = form.getTextAreaByName("textArea2");
+        assertEquals("<textarea name=\"textArea2\"></textarea>", textArea2.asXml());
+    }
 }

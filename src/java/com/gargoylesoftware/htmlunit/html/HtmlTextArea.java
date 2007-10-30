@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -414,5 +415,20 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
             selectionStart_ = selectionEnd;
         }
         this.selectionEnd_ = selectionEnd;
+    }
+    
+    /**
+     * recursively write the XML data for the node tree starting at <code>node</code>
+     *
+     * @param indent white space to indent child nodes
+     * @param printWriter writer where child nodes are written
+     */
+    protected void printXml(final String indent, final PrintWriter printWriter) {
+        printWriter.print(indent + "<");
+        printOpeningTagContentAsXml(printWriter);
+
+        printWriter.print(">");
+        printWriter.print(getText());
+        printWriter.print(indent + "</textarea>");
     }
 }
