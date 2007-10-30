@@ -851,6 +851,16 @@ public class Document extends NodeImpl {
     }
 
     /**
+     * Returns the {@link BoxObject} for the specific element.
+     *
+     * @param element target for BoxObject.
+     * @return the BoxObject
+     */
+    public BoxObject jsxFunction_getBoxObjectFor(final HTMLElement element) {
+        return element.getBoxObject();
+    }
+    
+    /**
      * Return the element with the specified id or null if that element could
      * not be found
      * @param id The ID to search for

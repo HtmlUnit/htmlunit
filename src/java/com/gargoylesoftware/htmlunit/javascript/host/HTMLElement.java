@@ -123,6 +123,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     private static int UniqueID_Counter_ = 1;
 
     private final Set behaviors_ = new HashSet();
+    private BoxObject boxObject_; // lazy init
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_;
     private int scrollTop_;
@@ -950,6 +951,19 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         return getWindow().jsxGet_screen().jsxGet_bufferDepth();
     }
 
+    /**
+     * Returns BoxObject for this element.
+     * @return BoxObject for this element.
+     */
+    public BoxObject getBoxObject() {
+        if (boxObject_ == null) {
+            boxObject_ = new BoxObject();
+            boxObject_.setParentScope(getWindow());
+            boxObject_.setPrototype(getPrototype(boxObject_.getClass()));
+        }
+        return boxObject_;
+    }
+    
     /**
      * Returns the screen's color depth. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.

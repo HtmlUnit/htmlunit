@@ -692,6 +692,13 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testGetBoxObjectFor() throws Exception {
+        testHTMLFile("DocumentTest_getBoxObjectFor.html");
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
     public void testGetElementById() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"

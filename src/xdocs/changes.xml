@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour" id="1815602" due-to="Sam Hough">
+                Add basic support for document.getBoxObjectFor() (FF only) (#1815602).
+            </action>
             <action type="update" dev="mguillem">
                 HtmlTextArea.asXml() now preserves content and expands empty tag to make generated xml interpretable as html by browsers.
             </action>

@@ -67,6 +67,11 @@
     <class name="Button" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.Button"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton"/>
 
+    <class name="BoxObject" classname="com.gargoylesoftware.htmlunit.javascript.host.BoxObject" JSObject="true">	
+        <property name="screenX" readable="true" writable="false"/>
+        <property name="screenY" readable="true" writable="false"/>
+    </class>
+
     <class name="CharacterDataImpl" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
         <property name="data" readable="true" writable="true"/>
@@ -179,6 +184,12 @@
         <function name="createTextNode"/>
         <function name="elementFromPoint">
             <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="getBoxObjectFor">
+            <doclink
+                url="http://www.xulplanet.com/references/xpcomref/ifaces/nsIDOMNSDocument.html#method_getBoxObjectFor"
+                descr="XUL Planet"/>
+        	<browser name="Firefox"/>
         </function>
         <function name="getElementById"/>
         <function name="getElementsByName"/>        
