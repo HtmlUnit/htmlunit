@@ -168,7 +168,7 @@ public class SimpleScriptableTest extends WebTestCase {
     private Set getFileNames(final String directoryName) {
         File directory = new File("." + File.separatorChar + directoryName);
         if (!directory.exists()) {
-            directory = new File("./src/java/".replace('/', File.separatorChar) + directoryName);
+            directory = new File("./src/main/java/".replace('/', File.separatorChar) + directoryName);
         }
         assertTrue("directory exists", directory.exists());
         assertTrue("is a directory", directory.isDirectory());
