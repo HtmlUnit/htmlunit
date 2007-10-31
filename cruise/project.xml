@@ -5,6 +5,9 @@ Available entities are:
 basedir
 hostname
 defaultmailhost
+mvnhome
+mvn2home
+
 -->
 
 
