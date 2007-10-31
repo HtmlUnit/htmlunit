@@ -430,8 +430,13 @@
     </dependencies>
     <build>
         <nagEmailAddress>htmlunit@GargoyleSoftware.com</nagEmailAddress>
-        <sourceDirectory>src/java</sourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
         <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
+        <resources>
+              <resource>
+                    <directory>src/main/resources</directory>
+              </resource>
+        </resources>
         <unitTest>
             <includes>
                 <include>**/*Test.java</include>

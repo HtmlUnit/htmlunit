@@ -342,7 +342,7 @@
         </p>
       </section>
       <x:parse var="doc"
-        xml="src/java/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml" />
+        xml="src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml" />
 
 
       <x:set var="javascriptDocLinks" select="$doc/configuration/doclink" />
