@@ -138,8 +138,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlInput pushButton = form.getInputByName("button");
         assertNotNull(pushButton);
 
-        assertTrue(form.getByXPath(
-            "//input[@type='radio' and @name='foo' and @value='4']").isEmpty());
+        assertTrue(form.getByXPath("//input[@type='radio' and @name='foo' and @value='4']").isEmpty());
     }
 
     /**
@@ -308,7 +307,7 @@ public class HtmlFormTest extends WebTestCase {
 
     /**
      * Regression test for bug 1628521
-     * Nullpointer exception when submitting forms
+     * NullPointerException when submitting forms
      * @throws Exception if the test fails
      */
     public void testSubmit_onSubmitHandler_fails() throws Exception {
@@ -558,9 +557,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{
-            new KeyValuePair("button", "foo")
-        });
+        final List expectedParameters = Arrays.asList(new Object[]{new KeyValuePair("button", "foo")});
         final List collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
@@ -582,9 +579,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{
-            new KeyValuePair("textfield", "blah")
-        });
+        final List expectedParameters = Arrays.asList(new Object[]{new KeyValuePair("textfield", "blah")});
         final List collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
@@ -641,16 +636,14 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{
-            new KeyValuePair("button", "foo")
-        });
+        final List expectedParameters = Arrays.asList(new Object[]{new KeyValuePair("button", "foo")});
         final List collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
     
     /**
-     * Reset buttons should not be sucessful controls.
+     * Reset buttons should not be successful controls.
      * @see <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.2">Spec</a>
      * @throws Exception if the test fails
      */
@@ -669,9 +662,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submit");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[] {new KeyValuePair(
-                "submit",
-                "submit")});
+        final List expectedParameters = Arrays.asList(new Object[] {new KeyValuePair("submit", "submit")});
         final List collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
@@ -706,9 +697,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlPage page2 = (HtmlPage) button1.click();
         final List collectedParameters1 = webConnection1.getLastParameters();
-        final List expectedParameters1 = Arrays.asList(new Object[] {
-            new KeyValuePair("button", "foo")
-        });
+        final List expectedParameters1 = Arrays.asList(new Object[] {new KeyValuePair("button", "foo")});
 
         final MockWebConnection webConnection2 = getMockConnection(page2);
         final HtmlForm form2 = (HtmlForm) page2.getHtmlElementById("form1");
