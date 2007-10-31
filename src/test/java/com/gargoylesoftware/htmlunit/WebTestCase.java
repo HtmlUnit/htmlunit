@@ -535,12 +535,16 @@ public abstract class WebTestCase extends BaseTestCase {
 
     /**
      * Load the specified resource for the supported browsers and tests
-     * that the generated log corresponds to the expected one for this browser
-     * @param fileName the resource name
+     * that the generated log corresponds to the expected one for this browser.
+     *
+     * @param fileName the resource name which resides in /resources folder and
+     *        belongs to the same package as the test class.
+     *
      * @throws Exception if the test fails
      */
     protected void testHTMLFile(final String fileName) throws Exception {
-        final URL url = getClass().getResource(fileName);
+        final String resourcePath = getClass().getPackage().getName().replace('.', '/') + '/' + fileName;
+        final URL url = getClass().getClassLoader().getResource(resourcePath);
         
         final Map testedBrowser = new HashMap();
         testedBrowser.put("FIREFOX_2", BrowserVersion.FIREFOX_2);
