@@ -38,7 +38,7 @@ The reference stays the maven 1 build.
 		<developerConnection>
 			scm:svn:https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit
 		</developerConnection>
-		<url>http://svn.sourceforge.net/viewvc/htmlunit/</url>
+		<url>http://htmlunit.svn.sourceforge.net/viewvc/htmlunit</url>
 	</scm>
 	<mailingLists>
 		<mailingList>
