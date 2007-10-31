@@ -1041,7 +1041,7 @@ public class HtmlFormTest extends WebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='" + method + "' action='" + action + "'>\n"
             + "<input type='text' name='textField' value='foo'/>\n"
-            + "<input type='text' name='nonAscii' value='Floßfahrt'/>\n"
+            + "<input type='text' name='nonAscii' value='Flo\u00DFfahrt'/>\n"
             + "<input id='submitButton' type='submit' name='button' value='foo'/>\n"
             + "<input type='button' name='inputButton' value='foo'/>\n"
             + "<button type='button' name='buttonButton' value='foo'/>\n"
@@ -1115,7 +1115,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<form name='form1' method='post' action='foo'"
             + formAcceptCharset + ">\n"
             + "<input type='text' name='textField' value='foo'/>\n"
-            + "<input type='text' name='nonAscii' value='Floßfahrt'/>\n"
+            + "<input type='text' name='nonAscii' value='Floï¿½fahrt'/>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final WebClient client = new WebClient();

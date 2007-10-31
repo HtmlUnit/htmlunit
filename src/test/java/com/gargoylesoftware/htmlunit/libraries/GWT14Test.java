@@ -160,7 +160,7 @@ public class GWT14Test extends WebTestCase {
 
         testI18N(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00 h 00 GMT" + timeZone);
         testI18N(page, "messagesFormattedOutputText",
-            "L'utilisateur 'amelie' a un niveau de securité 'guest', et ne peut accéder à '/secure/blueprints.xml'");
+            "L'utilisateur 'amelie' a un niveau de securit\u00E9 'guest', et ne peut accÃ©der Ã  '/secure/blueprints.xml'");
         testI18N(page, "constantsFirstNameText", "Amelie");
         testI18N(page, "constantsLastNameText", "Crutcher");
         testI18N(page, "constantsFavoriteColorList",
