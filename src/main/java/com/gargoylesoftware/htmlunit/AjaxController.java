@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision: 1165 $
  * @author Marc Guillemot
- */
+ */ 
 public class AjaxController implements Serializable {
 
     private static final long serialVersionUID = 2170842485774504546L;
