@@ -1115,7 +1115,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<form name='form1' method='post' action='foo'"
             + formAcceptCharset + ">\n"
             + "<input type='text' name='textField' value='foo'/>\n"
-            + "<input type='text' name='nonAscii' value='Flo�fahrt'/>\n"
+            + "<input type='text' name='nonAscii' value='Flo\u00DFfahrt'/>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
         final WebClient client = new WebClient();
