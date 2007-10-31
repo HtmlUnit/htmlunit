@@ -42,8 +42,8 @@ import org.mozilla.javascript.Scriptable;
 /**
  * Provides a clean way to specify a fallback property getter when the "normal way" failed.
  * Most properties are "cleanly" defined but some host objects like Document or Window are
- * able to return a value that has not been configured has property (ex: the DOM node which id
- * or name match the property name.
+ * able to return a value that has not been configured as a property (ex: the DOM node whose
+ * ID or name matches the property name).
  *
  * @version $Revision$
  * @author Marc Guillemot
