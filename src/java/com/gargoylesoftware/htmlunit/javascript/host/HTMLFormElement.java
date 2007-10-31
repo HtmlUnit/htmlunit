@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
@@ -45,8 +46,14 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
@@ -70,7 +77,7 @@ public class HTMLFormElement extends HTMLElement {
     private HTMLCollection elements_; // has to be a member to have equality (==) working
 
     /**
-     * Create an instance.  A default constructor is required for all javascript objects.
+     * Creates an instance. A default constructor is required for all JavaScript objects.
      */
     public HTMLFormElement() { }
 
@@ -245,47 +252,79 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the specified property or NOT_FOUND if it could not be found.
-     * @param name The name of the property
-     * @return The property.
+     * Overridden to allow the retrieval of certain form elements by ID or name.
+     *
+     * @param name {@inheritDoc}
+     * @return {@inheritDoc}
      */
     protected Object getWithPreemption(final String name) {
-        // Try to get the element or elements specified from the form element array
-        // (except input type="image" that can't be accessed this way)
-        final HTMLCollection elements = new HTMLCollection(this);
-        final HtmlForm htmlForm = getHtmlForm();
+        final HtmlForm form = getHtmlForm();
+        final HtmlPage page = form.getPage();
+        if (page != null) {
+            // Try to satisfy this request using a map-backed operation before punting and using XPath.
+            // XPath operations are very expensive, and this method gets invoked quite a bit.
+            // Approach: Try to match the string to a name or ID, accepting only inputs (not type=image),
+            // buttons, selects and textareas that are in this form. We also include img elements
+            // (the second XPath search below) in the search, because any results with more than one element
+            // will end up using the XPath search anyway, so it doesn't hurt when looking for single elements.
+            final List elements = page.getHtmlElementsByIdAndOrName(name);
+            if (elements.isEmpty()) {
+                return NOT_FOUND;
+            }
+            if (elements.size() == 1) {
+                final HtmlElement element = (HtmlElement) elements.get(0);
+                final String tagName = element.getTagName();
+                final String type = element.getAttribute("type").toLowerCase();
+                if ((HtmlInput.TAG_NAME.equals(tagName) && !"image".equals(type))
+                        || HtmlButton.TAG_NAME.equals(tagName)
+                        || HtmlSelect.TAG_NAME.equals(tagName)
+                        || HtmlTextArea.TAG_NAME.equals(tagName)
+                        || HtmlImage.TAG_NAME.equals(tagName)) {
+                    if (form.isAncestorOf(element)) {
+                        return getScriptableFor(element);
+                    }
+                }
+                else {
+                    return NOT_FOUND;
+                }
+            }
+        }
+        // The shortcut wasn't enough, which means we probably need to perform the XPath operation anyway.
+        // Note that the XPath expression below HAS TO MATCH the tag name checks performed in the shortcut above.
+        // Approach: Try to match the string to a name or ID, accepting only inputs (not type=image),
+        // buttons, selects and textareas that are in this form. We *don't* include img elements, which will
+        // only be searched if the first search fails.
+        HTMLCollection collection = new HTMLCollection(this);
         try {
             final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"
-                    + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
-                    + " or name() = 'select' or name() = 'textarea')]",
-                    HtmlUnitXPath.buildSubtreeNavigator(htmlForm));
-            elements.init(htmlForm, xpath);
+                + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
+                + " or name() = 'select' or name() = 'textarea')]", HtmlUnitXPath.buildSubtreeNavigator(form));
+            collection.init(form, xpath);
         }
         catch (final JaxenException e) {
             throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
         }
-
-        int nbElements = elements.jsxGet_length();
-        // if no form field is found, IE and Firefox are able to find img by id or name
-        if (nbElements == 0) {
+        int length = collection.jsxGet_length();
+        // If no form fields are found, IE and Firefox are able to find img elements by ID or name.
+        if (length == 0) {
+            collection = new HTMLCollection(this);
             try {
                 final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"
-                        + " and name() = 'img']",
-                        HtmlUnitXPath.buildSubtreeNavigator(htmlForm));
-                elements.init(htmlForm, xpath);
+                    + " and name() = 'img']", HtmlUnitXPath.buildSubtreeNavigator(form));
+                collection.init(form, xpath);
             }
             catch (final JaxenException e) {
                 throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
             }
         }
-
-        Object result = elements;
-        nbElements = elements.jsxGet_length();
-        if (nbElements == 0) {
+        // Return whatever we have at this point.
+        Object result = collection;
+        length = collection.jsxGet_length();
+        if (length == 0) {
             result = NOT_FOUND;
         }
-        else if (nbElements == 1) {
-            result = elements.get(0, elements);
+        else if (length == 1) {
+            result = collection.get(0, collection);
         }
         return result;
     }

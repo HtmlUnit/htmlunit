@@ -352,7 +352,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
 
-        final List baseElements = getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
+        final List baseElements = getDocumentHtmlElement().getHtmlElementsByTagName("base");
         URL baseUrl;
         if (baseElements.isEmpty()) {
             baseUrl = getWebResponse().getUrl();
@@ -1357,6 +1357,27 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         else {
             return Collections.EMPTY_LIST;
         }
+    }
+
+    /**
+     * Returns the HTML elemens with the specified string for their name or ID. If there are
+     * no elements with the specified name or ID, this method returns an empty list. Please note
+     * that lists returned by this method are immutable.
+     *
+     * @param idAndOrName the value to search for
+     * @return the HTML elements with the specified string for their name or ID
+     */
+    public List getHtmlElementsByIdAndOrName(final String idAndOrName) {
+        final List list1 = (List) idMap_.get(idAndOrName);
+        final List list2 = (List) nameMap_.get(idAndOrName);
+        final List list = new ArrayList();
+        if (list1 != null) {
+            list.addAll(list1);
+        }
+        if (list2 != null) {
+            list.addAll(list2);
+        }
+        return Collections.unmodifiableList(list);
     }
 
     /**

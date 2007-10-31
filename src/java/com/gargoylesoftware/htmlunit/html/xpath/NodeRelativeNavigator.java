@@ -134,26 +134,10 @@ class NodeRelativeNavigator extends DocumentNavigator {
      */
     public Object getElementById(final Object contextNode, final String elementId) {
         final DomNode node = (DomNode) super.getElementById(contextNode, elementId);
-        if (isChild(node)) {
+        if (rootNode_.isAncestorOf(node)) {
             return node;
         }
         return null;
     }
 
-    /**
-     * Tests if the document's node is a child of the node considered as the root by this Navigator
-     * @param node the node to test
-     * @return <code>true</code> if it is a child of the root.
-     */
-    private boolean isChild(final DomNode node) {
-        DomNode parent = node;
-        while (parent != null) {
-            if (parent == rootNode_) {
-                return true;
-            }
-            parent = parent.getParentDomNode();
-        }
-        
-        return false;
-    }
 }

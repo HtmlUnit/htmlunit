@@ -90,8 +90,12 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Called by {@link #get(String, Scriptable)} to allow to retrieve property before the prototype
-     * chain is searched.
+     * <p>Called by {@link #get(String, Scriptable)} to allow retrieval of the property before the prototype
+     * chain is searched.</p>
+     *
+     * <p>IMPORTANT: This method is invoked *very* often by Rhino. If you override this method, the implementation
+     * needs to be as fast as possible!</p>
+     *
      * @param name the property name
      * @return {@link Scriptable#NOT_FOUND} if not found
      */

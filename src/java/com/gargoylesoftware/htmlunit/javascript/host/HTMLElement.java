@@ -1490,7 +1490,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public int jsxGet_offsetHeight() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
-        if (event != null && isChildNode((HTMLElement) event.jsxGet_target())) {
+        if (isAncestorOfEventTarget(event)) {
             // compute appropriate offsetHeight to make as if mouse event produced within this element
             return event.jsxGet_clientY() - getPosY() + 50;
         }
@@ -1507,7 +1507,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      */
     public int jsxGet_offsetWidth() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
-        if (event != null && isChildNode((HTMLElement) event.jsxGet_target())) {
+        if (isAncestorOfEventTarget(event)) {
             // compute appropriate offsetwidth to make as if mouse event produced within this element
             return event.jsxGet_clientX() - getPosX() + 50;
         }
@@ -1515,10 +1515,24 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             return 1;
         }
     }
-    
+
+    /**
+     * Returns <tt>true</tt> if this element's node is an ancestor of the specified event's target node.
+     * @param event the event whose target node is to be checked
+     * @return <tt>true</tt> if this element's node is an ancestor of the specified event's target node
+     */
+    private boolean isAncestorOfEventTarget(final MouseEvent event) {
+        if (event == null) {
+            return false;
+        }
+        final HTMLElement target = (HTMLElement) event.jsxGet_target();
+        return getHtmlElementOrDie().isAncestorOf(target.getHtmlElementOrDie());
+    }
+
     /**
      * Gets the x position of the element. The value returned doesn't need to be "correct" as it
-     * but just needs to be compatible with mouse event coordinates
+     * just needs to be compatible with mouse event coordinates.
+     *
      * @return the x position
      */
     int getPosX() {
@@ -1533,7 +1547,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
 
     /**
      * Gets the y position of the element. The value returned doesn't need to be "correct" as it
-     * but just needs to be compatible with mouse event coordinates
+     * just needs to be compatible with mouse event coordinates.
      * @return the y position
      */
     int getPosY() {
@@ -1544,24 +1558,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             element = (HTMLElement) element.jsxGet_offsetParent();
         }
         return cumulativeOffset;
-    }
-
-    /**
-     * Indicates if the provided element is a child of this instance
-     * @param element the element to test
-     * @return <code>true</code> if this is a child node
-     */
-    private boolean isChildNode(final HTMLElement element) {
-        final HtmlElement thisHtmlElement = getHtmlElementOrDie();
-        DomNode htmlElement = element.getHtmlElementOrDie();
-        while (htmlElement != null) {
-            if (htmlElement == thisHtmlElement) {
-                return true;
-            }
-            htmlElement = htmlElement.getParentDomNode();
-        }
-
-        return false;
     }
 
     /**

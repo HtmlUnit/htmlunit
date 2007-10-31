@@ -401,6 +401,22 @@ public abstract class DomNode implements Cloneable, Serializable {
         return firstChild_;
     }
 
+    /**
+     * Returns <tt>true</tt> if this node is an ancestor of the specified node.
+     *
+     * @param node the node to check
+     * @return <tt>true</tt> if this node is an ancestor of the specified node
+     */
+    public boolean isAncestorOf(DomNode node) {
+        while (node != null) {
+            if (node == this) {
+                return true;
+            }
+            node = node.getParentDomNode();
+        }
+        return false;
+    }
+
     /** @param previous set the previousSibling field value */
     protected void setPreviousSibling(final DomNode previous) {
         previousSibling_ = previous;

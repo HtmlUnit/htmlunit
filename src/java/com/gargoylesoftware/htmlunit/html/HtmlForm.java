@@ -617,16 +617,7 @@ public class HtmlForm extends ClickableElement {
      */
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
-            boolean isChild = false;
-             
-            for (DomNode parent = radioButtonInput.getParentDomNode(); parent != null;
-                parent = parent.getParentDomNode()) {
-                if (parent == this) {
-                    isChild = true;
-                    break;
-                }
-            }
-            if (!isChild) {
+            if (!isAncestorOf(radioButtonInput)) {
                 throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
             }
             final Iterator iterator = getByXPath(
