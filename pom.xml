@@ -248,9 +248,6 @@ The reference stays the maven 1 build.
 		<contributor>
 			<name>Rob Di Marco</name>
 		</contributor>
-		<contributor>
-			<name>Sam Hough</name>
-		</contributor>
 	</contributors>
 	<build>
 		<sourceDirectory>src/java</sourceDirectory>		
