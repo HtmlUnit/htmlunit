@@ -250,17 +250,6 @@ The reference stays the maven 1 build.
 		</contributor>
 	</contributors>
 	<build>
-		<sourceDirectory>src/java</sourceDirectory>		
-		<resources>
-			<resource>
-				<targetPath>com/gargoylesoftware/htmlunit/javascript/configuration</targetPath>
-				<filtering>false</filtering>
-				<directory>${basedir}/src/java/com/gargoylesoftware/htmlunit/javascript/configuration</directory>
-				<includes>
-					<include>JavaScriptConfiguration.xml</include>
-				</includes>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<!-- Please use one of profiles in http://maven.apache.org/guides/development/guide-plugin-snapshot-repositories.html-->
