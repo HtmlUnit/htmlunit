@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="sdanig">
+                JavaScript: delegate select.options.xxx property modifications to the parent select element
+                (property accesses were already being delegated correctly; IE only).
+            </action>
             <action type="add" dev="asashour" id="1815602" due-to="Sam Hough">
                 Add basic support for document.getBoxObjectFor() (FF only) (#1815602).
             </action>

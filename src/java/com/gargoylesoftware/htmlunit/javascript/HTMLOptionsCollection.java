@@ -60,17 +60,19 @@ import com.gargoylesoftware.htmlunit.javascript.host.Option;
  * @author Ahmed Ashour
  */
 public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
+
     private static final long serialVersionUID = -4790255174217201235L;
     private HtmlSelect htmlSelect_;
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public HTMLOptionsCollection() {
+        // Empty.
     }
 
     /**
-     * Create an instance
+     * Creates an instance.
      * @param parentScope parent scope
      */
     public HTMLOptionsCollection(final SimpleScriptable parentScope) {
@@ -79,7 +81,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * Initialize this object
+     * Initializes this object.
      * @param select The HtmlSelect that this object will retrieve elements from.
      */
     public void initialize(final HtmlSelect select) {
@@ -88,7 +90,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * <p>Return the object at the specified index.</p>
+     * Returns the object at the specified index.
      *
      * @param index The index
      * @param start The object that get is being called on.
@@ -110,18 +112,52 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * If IE is emulated, this method delegates the call to the parent select.
-     * @param name The name of the object to return.
-     * @return The object corresponding to the specified name or <tt>NOT_FOUND</tt>.
+     * <p>If IE is emulated, and this class does not have the specified property, and the owning
+     * select *does* have the specified property, this method delegates the call to the parent
+     * select element.</p>
+     *
+     * <p>See {@link #getWithFallback(String)} for the corresponding getter behavior.</p>
+     *
+     * @param name {@inheritDoc}
+     * @param start {@inheritDoc}
+     * @param value {@inheritDoc}
+     */
+    public void put(final String name, final Scriptable start, final Object value) {
+
+        if (htmlSelect_ == null) {
+            // This object hasn't been initialized; it's probably being used as a prototype.
+            // Just pretend we didn't even see this invocation and let Rhino handle it.
+            super.put(name, start, value);
+            return;
+        }
+
+        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        final HTMLSelectElement parent = (HTMLSelectElement) htmlSelect_.getScriptObject();
+
+        if (ie && !has(name, start) && ScriptableObject.hasProperty(parent, name)) {
+            ScriptableObject.putProperty(parent, name, value);
+        }
+        else {
+            super.put(name, start, value);
+        }
+    }
+
+    /**
+     * <p>If IE is emulated, this method delegates the call to the parent select element.</p>
+     *
+     * <p>See {@link #put(String, Scriptable, Object)} for the corresponding setter behavior.</p>
+     *
+     * @param name {@inheritDoc}
+     * @return {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        if (ie) {
             // If the name was NOT_FOUND on the prototype, then just drop through
-            // to search on the Select for IE only
+            // to search on the select element for IE only.
             final HTMLSelectElement select = (HTMLSelectElement) htmlSelect_.getScriptObject();
             return ScriptableObject.getProperty(select, name);
         }
-
         return NOT_FOUND;
     }
 

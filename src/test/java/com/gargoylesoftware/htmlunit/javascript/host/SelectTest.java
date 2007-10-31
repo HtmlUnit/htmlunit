@@ -807,15 +807,24 @@ public class SelectTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testOptionsDelegateToSelect() throws Exception {
+
         final String content
             = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {"
+            + "  \n"
             + "  var s = document.getElementById('select1');\n"
-            + "  alert(s.childNodes.length);\n"
-            + "  alert(s.options.childNodes.length);\n"
-            + "  alert(s.selectedIndex);\n"
-            + "  alert(s.options.selectedIndex);\n"
+            + "  doAlerts(s);\n"
+            + "  \n"
+            + "  s.selectedIndex = 0;\n"
+            + "  doAlerts(s);\n"
+            + "  \n"
+            + "  s.options.selectedIndex = 1;\n"
+            + "  doAlerts(s);\n"
+            + "}"
+            + "function doAlerts(s) {"
+            + "  alert(s.childNodes.length + '-' + s.options.childNodes.length);\n"
+            + "  alert(s.selectedIndex + '-' + s.options.selectedIndex);\n"
             + "}"
             + "</script>\n"
             + "</head>\n"
@@ -827,7 +836,7 @@ public class SelectTest extends WebTestCase {
             + "</select></form>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"2", "2", "1", "1"};
+        final String[] expectedAlerts = {"2-2", "1-1", "2-2", "0-0", "2-2", "1-1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();
