@@ -8,12 +8,6 @@
     xmlns:x="jelly:xml"
     >
 
-    <postGoal name="java:compile">
-        <ant:copy
-            file="src/java/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml"
-            toFile="${maven.build.dest}/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml"/>
-    </postGoal>
-
     <preGoal name="xdoc:transform">
         <attainGoal name="faq"/>
         <attainGoal name="createDependenciesPage"/>

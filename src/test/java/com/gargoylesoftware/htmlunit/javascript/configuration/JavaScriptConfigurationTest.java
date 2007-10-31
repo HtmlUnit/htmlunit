@@ -443,7 +443,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      */
     public void testConfigurationFileAgainstSchema() throws Exception {
         final XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
-        final String directory = "src/java/com/gargoylesoftware/htmlunit/javascript/configuration/";
+        final String directory = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/";
         parser.setFeature("http://xml.org/sax/features/validation", true);
         parser.setFeature("http://apache.org/xml/features/validation/schema", true);
         parser.setEntityResolver(new EntityResolver() {

@@ -61,7 +61,6 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 
@@ -218,13 +217,9 @@ public final class JavaScriptConfiguration {
     }
 
     private static Reader getConfigurationFileAsReader() {
-        final String fileName = "/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml";
-        return new InputStreamReader(getResourceAsStream(fileName));
-    }
-
-    private static InputStream getResourceAsStream(final String name) {
-        Assert.notNull("name", name);
-        InputStream inputStream = JavaScriptConfiguration.class.getResourceAsStream(name);
+        final Class clazz = JavaScriptConfiguration.class;
+        final String name = clazz.getPackage().getName().replace('.', '/') + '/' + "JavaScriptConfiguration.xml";
+        InputStream inputStream = clazz.getClassLoader().getResourceAsStream(name);
         if (inputStream == null) {
             try {
                 final String localizedName = name.replace('/', File.separatorChar);
@@ -245,7 +240,7 @@ public final class JavaScriptConfiguration {
                 // Fall through
             }
         }
-        return inputStream;
+        return new InputStreamReader(inputStream);
     }
 
     /**

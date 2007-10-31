@@ -20,7 +20,8 @@
 <property name="build.compiler.pedantic" value="true"/>
 
 <property environment="env"/>
-<property name="base.src.dir" value ="src/java"/>
+<property name="base.src.dir" value ="src/main/java"/>
+<property name="base.src.resources" value ="src/main/resources"/>
 <property name="test.src.dir" value ="src/test/java"/>
 <property name="jars.dir" value ="ant-jars"/>
 <property name="target.dir" value ="ant-target"/>
@@ -80,6 +81,9 @@
     <copy todir="${test.classes.dir}">
         <fileset dir="${test.src.dir}/../resources"/>
     </copy>
+    <copy todir="${base.classes.dir}">
+        <fileset dir="${base.src.resources}"/>
+    </copy>
 </target>
 <target name="cruise-set-jar-suffix">
     <tstamp>
@@ -108,14 +112,14 @@
 <target name="validate" description="Validate JavaScript config file (currently broken)">
     <xmlvalidate
         failonerror="yes" lenient="no" warn="yes"
-        file="${base.src.dir}/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xml"
+        file="${base.src.resources}/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml"
         classname="org.apache.xerces.parsers.SAXParser"
         classpathref="base.class.path">
 
         <xmlcatalog>
             <entity
                 publicId="JavaScriptConfiguration.xsd"
-                location="${base.src.dir}/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
+                location="${base.src.resources}/com/gargoylesoftware/htmlunit/javascript/JavaScriptConfiguration.xsd"/>
         </xmlcatalog>
     </xmlvalidate>
 </target>
