@@ -1360,7 +1360,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Returns the HTML elemens with the specified string for their name or ID. If there are
+     * Returns the HTML elements with the specified string for their name or ID. If there are
      * no elements with the specified name or ID, this method returns an empty list. Please note
      * that lists returned by this method are immutable.
      *
