@@ -26,7 +26,7 @@ mvn2home
                     <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
             </ant>
 -->
-			<maven2 mvnhome="mvn2home" pomfile="&basedir;/htmlunit/cruisecontrol/checkout/pom.xml"
+			<maven2 mvnhome="&mvn2home;" pomfile="&basedir;/htmlunit/cruisecontrol/checkout/pom.xml"
 				goal="scm:update clean package source:jar" activateprofiles="apache"/>
 		</schedule>
 		<listeners>
