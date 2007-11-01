@@ -170,10 +170,8 @@ public class WebResponseData implements Serializable {
                 break;
             }
         }
-        if (encoding != null) {
-            if (StringUtils.contains(encoding, "gzip")) {
-                stream = new GZIPInputStream(stream);
-            }
+        if (encoding != null && StringUtils.contains(encoding, "gzip")) {
+            stream = new GZIPInputStream(stream);
         }
         return IOUtils.toByteArray(stream);
     }

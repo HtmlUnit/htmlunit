@@ -186,7 +186,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
                 configurePropertiesAndFunctions(config, window);
             }
             else {
-                final Scriptable prototype = configureClass(config, window, jsClassName);
+                final Scriptable prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     prototypes.put(config.getLinkedClass(), prototype);
                     
@@ -246,13 +246,12 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * Configures the specified class for access via JavaScript.
      * @param config The configuration settings for the class to be configured.
      * @param window The scope within which to configure the class.
-     * @param name The name under which the class will be available in JavaScript.
      * @throws InstantiationException If the new class cannot be instantiated
      * @throws IllegalAccessException If we don't have access to create the new instance.
      * @throws InvocationTargetException if an exception is thrown during creation of the new object.
      * @return the created prototype
      */
-    private Scriptable configureClass(final ClassConfiguration config, final Scriptable window, final String name)
+    private Scriptable configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException, InvocationTargetException {
 
         final Class jsHostClass = config.getLinkedClass();

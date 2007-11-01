@@ -524,20 +524,14 @@ public final class ClassConfiguration {
                 return false;
             }
             final BrowserInfo info = (BrowserInfo) obj;
-            if (minVersion_ != null) {
-                if (!minVersion_.equals(info.minVersion_)) {
-                    return false;
-                }
+            if (minVersion_ != null && !minVersion_.equals(info.minVersion_)) {
+                return false;
             }
-            if (maxVersion_ != null) {
-                if (!maxVersion_.equals(info.maxVersion_)) {
-                    return false;
-                }
+            if (maxVersion_ != null && !maxVersion_.equals(info.maxVersion_)) {
+                return false;
             }
-            if (lessThanVersion_ != null) {
-                if (!lessThanVersion_.equals(info.lessThanVersion_)) {
-                    return false;
-                }
+            if (lessThanVersion_ != null && !lessThanVersion_.equals(info.lessThanVersion_)) {
+                return false;
             }
             return (browserName_ == info.browserName_);
         }

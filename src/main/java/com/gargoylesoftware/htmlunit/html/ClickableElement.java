@@ -101,10 +101,8 @@ public abstract class ClickableElement extends StyledElement {
      */
     public Page click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
-        if (this instanceof DisabledElement) {
-            if (((DisabledElement) this).isDisabled()) {
-                return getPage();
-            }
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return getPage();
         }
 
         final HtmlPage page = getPage();
@@ -159,10 +157,8 @@ public abstract class ClickableElement extends StyledElement {
      */
     public Page dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
-        if (this instanceof DisabledElement) {
-            if (((DisabledElement) this).isDisabled()) {
-                return getPage();
-            }
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return getPage();
         }
         
         //call click event first

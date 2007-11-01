@@ -339,16 +339,6 @@ public final class HTMLParser {
         }
 
         /**
-         * parse the input source. This is the only parse() method that should be called.
-         *
-         * @param inputSource an XMLInputSource
-         * @throws java.io.IOException
-         */
-        public void parse(final XMLInputSource inputSource) throws IOException {
-            super.parse(inputSource);
-        }
-
-        /**
          * @return the document locator
          */
         public Locator getLocator() {

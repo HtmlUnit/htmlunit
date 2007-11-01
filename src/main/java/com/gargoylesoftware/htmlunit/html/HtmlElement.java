@@ -619,10 +619,8 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @deprecated use {@link type(char, boolean, boolean, boolean)} instead
      */
     public void keyDown(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        if (this instanceof DisabledElement) {
-            if (((DisabledElement) this).isDisabled()) {
-                return;
-            }
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return;
         }
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey));
     }
@@ -666,10 +664,8 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param altKey true if ALT is pressed
      */
     public void type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        if (this instanceof DisabledElement) {
-            if (((DisabledElement) this).isDisabled()) {
-                return;
-            }
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return;
         }
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
         fireEvent(new Event(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
@@ -1346,10 +1342,8 @@ public abstract class HtmlElement extends DomNamespaceNode {
      */
     private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
         final boolean altKey, final int button) {
-        if (this instanceof DisabledElement) {
-            if (((DisabledElement) this).isDisabled()) {
-                return getPage();
-            }
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return getPage();
         }
 
         final HtmlPage page = getPage();

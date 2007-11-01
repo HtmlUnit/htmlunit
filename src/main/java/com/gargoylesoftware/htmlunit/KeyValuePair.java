@@ -42,6 +42,7 @@ package com.gargoylesoftware.htmlunit;
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
 
@@ -64,15 +65,6 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
      */
     public String getKey() {
         return getName();
-    }
-
-    /**
-     *  Return the value
-     *
-     * @return Return the value
-     */
-    public String getValue() {
-        return super.getValue();
     }
 
     /**
