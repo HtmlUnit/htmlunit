@@ -36,6 +36,14 @@ mvn2home
 			<merge dir="&basedir;/htmlunit/cruisecontrol/checkout/target/surefire-reports/"/>
 		</log>
 		<publishers>
+		    <antpublisher 
+				buildfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/antpublisher.xml"
+				antWorkingDir="&basedir;/htmlunit/cruisecontrol/checkout"
+				usedebug="false"
+				uselogger="true"
+		        >
+                    <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
+            </ant>
 			<artifactspublisher dir="&basedir;/htmlunit/cruisecontrol/checkout/target" dest="htmlunit" />
 			<!-- htmlemail is used only for explicit subscribers -->
 			<htmlemail
