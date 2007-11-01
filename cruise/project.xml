@@ -36,7 +36,7 @@ mvn2home
 			<merge dir="&basedir;/htmlunit/cruisecontrol/checkout/target/surefire-reports/"/>
 		</log>
 		<publishers>
-			<artifactspublisher dir="&basedir;/target" dest="htmlunit" />
+			<artifactspublisher dir="&basedir;/htmlunit/cruisecontrol/checkout/target" dest="htmlunit" />
 			<!-- htmlemail is used only for explicit subscribers -->
 			<htmlemail
 				buildresultsurl="http://&hostname;/htmlunit/"
