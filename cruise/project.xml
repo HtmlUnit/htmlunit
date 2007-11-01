@@ -33,7 +33,7 @@ mvn2home
 	        <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status.txt"/>
         </listeners>
         <log dir="&basedir;/htmlunit/cruisecontrol/logs">
-			<merge dir="&basedir;/htmlunit/cruisecontrol/checkout/ant-target/junit-results/"/>
+			<merge dir="&basedir;/htmlunit/cruisecontrol/checkout/target/surefire-reports/"/>
 		</log>
 		<publishers>
 			<artifactspublisher dir="&basedir;/target" dest="htmlunit" />
