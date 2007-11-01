@@ -152,7 +152,7 @@ public class NodeImplTest extends WebTestCase {
      * Regression test for replaceChild
      * @throws Exception if the test fails
      */
-    public void testReplaceChild() throws Exception {
+    public void testReplaceChild_Normal() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webClient.setWebConnection(webConnection);
@@ -182,6 +182,22 @@ public class NodeImplTest extends WebTestCase {
         final String[] expectedAlerts = {"true", "true"};
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testReplaceChild_WithSameNode() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    var a = document.getElementById('a');\n"
+            + "    var b = document.getElementById('b');\n"
+            + "    a.replaceChild(b, b);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'><div id='a'><div id='b'/></div></html>";
+        final HtmlPage page = (HtmlPage) loadPage(html);
+        assertNotNull(page.getHtmlElementById("b").getParentDomNode());
     }
 
     /**

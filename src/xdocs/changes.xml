@@ -8,6 +8,10 @@
     <body>
         <release version="1.14-prerelease">
             <action type="fix" dev="sdanig">
+                Avoid leaving the DOM in an inconsistent state when DomNode.replace(DomNode) is called and the
+                target node is used as the parameter.
+            </action>
+            <action type="fix" dev="sdanig">
                 JavaScript: delegate select.options.xxx property modifications to the parent select element
                 (property accesses were already being delegated correctly; IE only).
             </action>

@@ -275,20 +275,18 @@ public class NodeImpl extends SimpleScriptable {
     }
 
     /**
-     * Replace a child DOM node with another DOM node.
-     * @param newChildObject The node to add as a child of this node
-     * @param oldChildObject The node to remove as a child of this node
-     * @return The removed child node.
+     * Replaces a child DOM node with another DOM node.
+     * @param newChildObject the node to add as a child of this node
+     * @param oldChildObject the node to remove as a child of this node
+     * @return the removed child node
      */
-    public Object jsxFunction_replaceChild(
-            final Object newChildObject, final Object oldChildObject) {
+    public Object jsxFunction_replaceChild(final Object newChildObject, final Object oldChildObject) {
+
         Object removedChild = null;
 
-        if (newChildObject instanceof NodeImpl
-            && oldChildObject instanceof NodeImpl) {
+        if (newChildObject instanceof NodeImpl && oldChildObject instanceof NodeImpl) {
             // Get XML nodes for the DOM nodes passed in
             final DomNode newChildNode = ((NodeImpl) newChildObject).getDomNodeOrDie();
-
             final DomNode oldChildNode;
             if (oldChildObject != null) {
                 // Replace the old child with the new child.
@@ -297,6 +295,7 @@ public class NodeImpl extends SimpleScriptable {
                 removedChild = oldChildObject;
             }
         }
+
         return removedChild;
     }
 

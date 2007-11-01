@@ -813,20 +813,23 @@ public abstract class DomNode implements Cloneable, Serializable {
 
     /**
      * Inserts a new child node before this node into the child relationship this node is a
-     * part of.
+     * part of. If the specified node is this node, this method is a no-op.
      *
      * @param newNode the new node to insert
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void insertBefore(final DomNode newNode) throws IllegalStateException {
+
         if (previousSibling_ == null) {
             throw new IllegalStateException();
         }
 
-        //clean up the new node, in case it is being moved
-        if (newNode != this) {
-            newNode.basicRemove();
+        if (newNode == this) {
+            return;
         }
+
+        //clean up the new node, in case it is being moved
+        newNode.basicRemove();
 
         if (parent_.firstChild_ == this) {
             parent_.firstChild_ = newNode;
@@ -844,7 +847,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * remove this node from all relationships this node has with siblings an parents
+     * Removes this node from all relationships with other nodes.
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void remove() throws IllegalStateException {
@@ -861,7 +864,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * cut off all relationships this node has with siblings an parents
+     * Cuts off all relationships this node has with siblings and parents.
      */
     private void basicRemove() {
         if (parent_ != null && parent_.firstChild_ == this) {
@@ -883,14 +886,17 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Replaces this node with another node.
+     * Replaces this node with another node. If the specified node is this node, this
+     * method is a no-op.
      *
      * @param newNode the node to replace this one
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void replace(final DomNode newNode) throws IllegalStateException {
-        insertBefore(newNode);
-        remove();
+        if (newNode != this) {
+            insertBefore(newNode);
+            remove();
+        }
     }
 
     /**
