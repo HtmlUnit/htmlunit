@@ -120,7 +120,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         }
 
         // Set a default selected option if necessary.
-        if (getSelectedOptions().isEmpty() && size <= 1 && isMultipleSelectEnabled()) {
+        if (getSelectedOptions().isEmpty() && size <= 1 && !isMultipleSelectEnabled()) {
             final List options = getOptions();
             if (!options.isEmpty()) {
                 final HtmlOption first = (HtmlOption) options.get(0);
