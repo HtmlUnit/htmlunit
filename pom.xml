@@ -15,7 +15,7 @@ The reference stays the maven 1 build.
 		<url>http://www.GargoyleSoftware.com/</url>
 	</organization>
 	<packaging>jar</packaging>
-	<description>A tool for testing web based applications</description>
+	<description>A headless browser intended for use in testing web-based applications.</description>
 	<url>http://htmlunit.sourceforge.net</url>
 	<issueManagement>
 		<system>sourceforge</system>
@@ -259,7 +259,6 @@ The reference stays the maven 1 build.
 				<configuration>
 					<configLocation>checkstyle.xml</configLocation>
 					<suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
-					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
