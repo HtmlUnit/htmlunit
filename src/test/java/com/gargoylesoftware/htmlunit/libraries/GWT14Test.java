@@ -453,7 +453,7 @@ public class GWT14Test extends WebTestCase {
     public void testDateGetTimezoneOffset() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var offset = -new Date().getTimezoneOffset();\n"
+            + "    var offset = Math.abs(new Date().getTimezoneOffset());\n"
             + "    var timezone = '' + (offset/60);\n"
             + "    if (timezone.length == 1)\n"
             + "      timezone = '0' + timezone;\n"
@@ -461,7 +461,6 @@ public class GWT14Test extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
         String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
         timeZone = timeZone.substring(1, 3);
         final String[] expectedAlerts = {timeZone};
