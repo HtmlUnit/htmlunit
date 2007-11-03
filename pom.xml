@@ -8,7 +8,7 @@ The reference stays the maven 1 build.
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>htmlunit</artifactId>
 	<groupId>net.sourceforge.htmlunit</groupId>
-	<version>1.13</version>
+	<version>1.14-SNAPSHOT</version>
 	<name>HtmlUnit</name>
 	<organization>
 		<name>Gargoyle Software Inc.</name>
@@ -252,11 +252,10 @@ The reference stays the maven 1 build.
 	<build>
 		<plugins>
 			<plugin>
-				<!-- Please use one of profiles in http://maven.apache.org/guides/development/guide-plugin-snapshot-repositories.html-->
+				<!-- Requires that the Maven snapshot repo be configured; see below. -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>2.2-SNAPSHOT</version>
-				
 				<configuration>
 					<configLocation>checkstyle.xml</configLocation>
 					<suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
@@ -274,7 +273,7 @@ The reference stays the maven 1 build.
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 			</plugin>
-            <plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
 			</plugin>
@@ -297,7 +296,7 @@ The reference stays the maven 1 build.
 					</reportSet>
 				</reportSets>
 			</plugin>
-  			<plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
 			</plugin>
@@ -413,4 +412,15 @@ The reference stays the maven 1 build.
 			<name>HtmlUnit Maven 2 Snapshots Repository</name>
 		</snapshotRepository>
 	</distributionManagement>
+	<!-- Maven plugin snapshot repo required for Checkstyle plugin 2.2-SNAPSHOT. -->
+	<!-- See http://maven.apache.org/guides/development/guide-plugin-snapshot-repositories.html -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>apache.org</id>
+			<name>Maven Plugin Snapshots</name>
+			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
