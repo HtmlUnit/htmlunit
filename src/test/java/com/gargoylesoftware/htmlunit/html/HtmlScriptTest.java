@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -178,6 +179,29 @@ public class HtmlScriptTest extends WebTestCase {
 
         final String[] expectedAlerts = {"a"};
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testDefer() throws Exception {
+
+        final String html = "<html><head>\n"
+            + "<script defer>alert('deferred')</script>\n"
+            + "<script>alert('normal')</script>\n"
+            + "</head>\n"
+            + "<body onload='alert(\"onload\")'>test</body>\n"
+            + "</html>";
+
+        final List actualFF = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, actualFF);
+        final String[] expectedFF = new String[] {"deferred", "normal", "onload"};
+        assertEquals(expectedFF, actualFF);
+
+        final List actualIE = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actualIE);
+        final String[] expectedIE = new String[] {"normal", "deferred", "onload"};
+        assertEquals(expectedIE, actualIE);
     }
 
 }

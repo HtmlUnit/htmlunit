@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="sdanig">
+                Add support for deferred script elements (IE only).
+            </action>
             <action type="fix" dev="sdanig">
                 Avoid leaving the DOM in an inconsistent state when DomNode.replace(DomNode) is called and the
                 target node is used as the parameter.

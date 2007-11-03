@@ -182,7 +182,7 @@ public class HtmlScript extends HtmlElement {
      */
     public DomNode appendDomChild(final DomNode node) {
         final DomNode response = super.appendDomChild(node);
-        executeInlineScriptIfNeeded();
+        executeInlineScriptIfNeeded(false);
         return response;
     }
 
@@ -194,15 +194,24 @@ public class HtmlScript extends HtmlElement {
     protected void onAddedToPage() {
         getLog().debug("Script node added: " + asXml());
         executeOnReadyStateChangeHandlerIfNecessary();
-        executeScriptIfNeeded();
+        executeScriptIfNeeded(true);
         super.onAddedToPage();
     }
 
     /**
      * Executes this script node as inline script if necessary and/or possible.
+     *
+     * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
+     *        attribute is defined, the script is not executed
      */
-    private void executeInlineScriptIfNeeded() {
+    private void executeInlineScriptIfNeeded(final boolean executeIfDeferred) {
         if (!isExecutionNeeded()) {
+            return;
+        }
+
+        final String defer = getDeferAttribute();
+        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        if (!executeIfDeferred && defer != ATTRIBUTE_NOT_DEFINED && ie) {
             return;
         }
 
@@ -242,9 +251,18 @@ public class HtmlScript extends HtmlElement {
 
     /**
      * Executes this script node if necessary and/or possible.
+     *
+     * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
+     *        attribute is defined, the script is not executed
      */
-    private void executeScriptIfNeeded() {
+    void executeScriptIfNeeded(final boolean executeIfDeferred) {
         if (!isExecutionNeeded()) {
+            return;
+        }
+
+        final String defer = getDeferAttribute();
+        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        if (!executeIfDeferred && defer != ATTRIBUTE_NOT_DEFINED && ie) {
             return;
         }
 
@@ -253,12 +271,12 @@ public class HtmlScript extends HtmlElement {
             return;
         }
 
-        if (src != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+        if (src != ATTRIBUTE_NOT_DEFINED) {
             getLog().debug("Loading external javascript: " + src);
             getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
         }
         else if (getFirstDomChild() != null) {
-            executeInlineScriptIfNeeded();
+            executeInlineScriptIfNeeded(executeIfDeferred);
         }
     }
 

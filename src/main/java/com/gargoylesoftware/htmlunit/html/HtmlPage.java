@@ -144,6 +144,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         if (!getWebClient().getBrowserVersion().isIE()) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
+        executeDeferredScriptsIfNeeded();
         executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         executeRefreshIfNeeded();
     }
@@ -1116,8 +1117,27 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 return meta.getContentAttribute();
             }
         }
-
         return getWebResponse().getResponseHeaderValue("Refresh");
+    }
+
+    /**
+     * Executes any deferred scripts, if necessary.
+     */
+    private void executeDeferredScriptsIfNeeded() {
+        if (!getWebClient().isJavaScriptEnabled()) {
+            return;
+        }
+        if (!getWebClient().getBrowserVersion().isIE()) {
+            return;
+        }
+        final List scripts = getDocumentHtmlElement().getHtmlElementsByTagName("script");
+        for (final Iterator i = scripts.iterator(); i.hasNext();) {
+            final HtmlScript script = (HtmlScript) i.next();
+            final String defer = script.getDeferAttribute();
+            if (defer != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                script.executeScriptIfNeeded(true);
+            }
+        }
     }
 
     /**
