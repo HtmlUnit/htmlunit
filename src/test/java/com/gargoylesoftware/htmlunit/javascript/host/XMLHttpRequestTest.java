@@ -53,6 +53,8 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -819,5 +821,90 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final String[] alerts = {"2"};
         assertEquals(alerts, collectedAlerts);
+    }
+
+    /**
+     * Was causing a deadlock on 03.11.2007 (and probably with release 1.13 too)
+     * @throws Exception if the test fails
+     */
+    public void testXMLHttpRequestWithDomChangeListenerDeadlock() throws Exception {
+        final String content
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    frames[0].test('foo1.txt', true);\n"
+            + "    frames[0].test('foo2.txt', false);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle' onclick='test()'></p>\n"
+            + "<iframe src='page2.html'></iframe>\n"
+            + "</body></html>";
+
+        final String content2
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test(_src, _async)\n"
+            + "{\n"
+            + "  var request;\n"
+            + "  if (window.XMLHttpRequest)\n"
+            + "    request = new XMLHttpRequest();\n"
+            + "  else if (window.ActiveXObject)\n"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.onreadystatechange = onReadyStateChange;\n"
+            + "  request.open('GET', _src, _async);\n"
+            + "  request.send('');\n"
+            + "}\n"
+            + "function onReadyStateChange()\n"
+            + "{\n"
+            + "  parent.document.getElementById('p1').title = 'new title';\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "</body></html>";
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection connection = new MockWebConnection(webClient)
+        {
+            private boolean gotFoo1_ = false;
+
+            public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+                final String url = webRequestSettings.getURL().toExternalForm();
+                
+                synchronized (this) {
+                    while (!gotFoo1_ && url.endsWith("foo2.txt")) {
+                        try {
+                            wait(100);
+                        }
+                        catch (final InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                if (url.endsWith("foo1.txt")) {
+                    gotFoo1_ = true;
+                }
+                return super.getResponse(webRequestSettings);
+            }
+        };
+        connection.setDefaultResponse("");
+        connection.setResponse(URL_FIRST, content);
+        connection.setResponse(new URL(URL_FIRST, "page2.html"), content2);
+        webClient.setWebConnection(connection);
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final DomChangeListener listener = new DomChangeListener() {
+            public void nodeAdded(com.gargoylesoftware.htmlunit.html.DomChangeEvent event) {
+                // nothing
+            }
+            public void nodeDeleted(com.gargoylesoftware.htmlunit.html.DomChangeEvent event) {
+                // nothing
+            }
+        };
+        page.addDomChangeListener(listener);
+        ((ClickableElement) page.getHtmlElementById("p1")).click();
     }
 }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="mguillem">
+                Fixed possible ConcurrentModificationException and dead lock with HtmlAttributeChangeListener and DomChangeListener.
+            </action>
             <action type="add" dev="sdanig">
                 Add support for deferred script elements (IE only).
             </action>

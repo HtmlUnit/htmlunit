@@ -180,6 +180,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     private int endColumnNumber_;
 
     private List/* DomChangeListener */ domListeners_;
+    private final transient Object domListeners_lock_ = new Object();
 
     /**
      * Never call this, used for Serialization.
@@ -1228,11 +1229,13 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     public void addDomChangeListener(final DomChangeListener listener) {
         Assert.notNull("listener", listener);
-        synchronized (this) {
+        synchronized (domListeners_lock_) {
             if (domListeners_ == null) {
                 domListeners_ = new ArrayList();
             }
-            domListeners_.add(listener);
+            if (!domListeners_.contains(listener)) {
+                domListeners_.add(listener);
+            }
         }
     }
 
@@ -1246,7 +1249,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     public void removeDomChangeListener(final DomChangeListener listener) {
         Assert.notNull("listener", listener);
-        synchronized (this) {
+        synchronized (domListeners_lock_) {
             if (domListeners_ != null) {
                 domListeners_.remove(listener);
             }
@@ -1263,13 +1266,12 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param addedNode the node that was added.
      */
     protected void fireNodeAdded(final DomNode parentNode, final DomNode addedNode) {
-        if (domListeners_ != null) {
+        final List listeners = safeGetDomListeners();
+        if (listeners != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
-            synchronized (this) {
-                for (final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
-                    final DomChangeListener listener = (DomChangeListener) iterator.next();
-                    listener.nodeAdded(event);
-                }
+            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
+                final DomChangeListener listener = (DomChangeListener) iterator.next();
+                listener.nodeAdded(event);
             }
         }
         if (parent_ != null) {
@@ -1287,13 +1289,12 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param deletedNode the node that was deleted.
      */
     protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
-        if (domListeners_ != null) {
+        final List listeners = safeGetDomListeners();
+        if (listeners != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
-            synchronized (this) {
-                for (final Iterator iterator = domListeners_.iterator(); iterator.hasNext();) {
-                    final DomChangeListener listener = (DomChangeListener) iterator.next();
-                    listener.nodeDeleted(event);
-                }
+            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
+                final DomChangeListener listener = (DomChangeListener) iterator.next();
+                listener.nodeDeleted(event);
             }
         }
         if (parent_ != null) {
@@ -1301,4 +1302,15 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
     }
 
+    private List safeGetDomListeners() {
+        synchronized (domListeners_lock_) {
+            if (domListeners_ != null) {
+                return new ArrayList(domListeners_);
+            }
+            else {
+                return null;
+            }
+        }
+    }
+        
 }

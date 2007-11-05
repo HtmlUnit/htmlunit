@@ -107,6 +107,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
 
     private List/* HtmlAttributeChangeListener */ attributeListeners_;
+    private final transient Object lock_ = new Object(); // used for synchronization
 
     /**
      * Create an instance of HtmlPage
@@ -1705,11 +1706,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      */
     public void addHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
         Assert.notNull("listener", listener);
-        synchronized (this) {
+        synchronized (lock_) {
             if (attributeListeners_ == null) {
                 attributeListeners_ = new ArrayList();
             }
-            attributeListeners_.add(listener);
+            if (!attributeListeners_.contains(listener)) {
+                attributeListeners_.add(listener);
+            }
         }
     }
 
@@ -1723,7 +1726,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      */
     public void removeHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
         Assert.notNull("listener", listener);
-        synchronized (this) {
+        synchronized (lock_) {
             if (attributeListeners_ != null) {
                 attributeListeners_.remove(listener);
             }
@@ -1735,12 +1738,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param event the event to fire
      */
     void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
-        synchronized (this) {
-            if (attributeListeners_ != null) {
-                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
-                    listener.attributeAdded(event);
-                }
+        final List listeners = safeGetAttributeListeners();
+        if (listeners != null) {
+            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
+                final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
+                listener.attributeAdded(event);
             }
         }
     }
@@ -1750,12 +1752,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param event the event to fire
      */
     void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
-        synchronized (this) {
-            if (attributeListeners_ != null) {
-                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
-                    listener.attributeReplaced(event);
-                }
+        final List listeners = safeGetAttributeListeners();
+        if (listeners != null) {
+            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
+                final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
+                listener.attributeReplaced(event);
             }
         }
     }
@@ -1765,12 +1766,22 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param event the event to fire
      */
     void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
-        synchronized (this) {
+        final List listeners = safeGetAttributeListeners();
+        if (listeners != null) {
+            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
+                final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
+                listener.attributeRemoved(event);
+            }
+        }
+    }
+
+    private List safeGetAttributeListeners() {
+        synchronized (lock_) {
             if (attributeListeners_ != null) {
-                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
-                    listener.attributeRemoved(event);
-                }
+                return new ArrayList(attributeListeners_);
+            }
+            else {
+                return null;
             }
         }
     }

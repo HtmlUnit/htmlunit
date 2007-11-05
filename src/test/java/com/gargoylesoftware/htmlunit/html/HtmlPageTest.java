@@ -1641,6 +1641,46 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testHtmlAttributeChangeListener_ListenerRegistersNewListener() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final List collector = new ArrayList();
+        final HtmlAttributeChangeListener listener2 = new HtmlAttributeChangeListenerTestImpl() {
+            public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+                collector.add("in listener 2");
+            }
+        };
+        final HtmlAttributeChangeListener listener1 = new HtmlAttributeChangeListenerTestImpl() {
+            public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+                collector.add("in listener 1");
+                page.addHtmlAttributeChangeListener(listener2);
+            }
+        };
+
+        page.addHtmlAttributeChangeListener(listener1);
+
+        final HtmlElement p = page.getHtmlElementById("p1");
+        p.setAttributeValue("title", "new title");
+
+        final String[] expectedValues = {"in listener 1"};
+        assertEquals(expectedValues, collector);
+        collector.clear();
+
+        p.setAttributeValue("title", "new new title");
+        final String[] expectedValues2 = {"in listener 1", "in listener 2"};
+        assertEquals(expectedValues2, collector);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testCaseInsensitiveRegexReplacement() throws Exception {
         final String html = "<html><body><script>\n"
             + "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;\n"

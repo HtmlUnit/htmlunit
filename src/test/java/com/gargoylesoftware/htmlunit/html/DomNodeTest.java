@@ -528,4 +528,52 @@ public class DomNodeTest extends WebTestCase {
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testDomChangeListenerRegisterNewListener() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function clickMe() {\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    var div = document.createElement('DIV');\n"
+            + "    p1.appendChild(div);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p id='p1' title='myTitle'></p>\n"
+            + "<input id='myButton' type='button' onclick='clickMe()'>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final List l = new ArrayList();
+        final DomChangeListener listener2 = new DomChangeListenerTestImpl() {
+            public void nodeAdded(final DomChangeEvent event) {
+                l.add("in listener 2");
+            }
+        };
+        final DomChangeListener listener1 = new DomChangeListenerTestImpl() {
+            public void nodeAdded(final DomChangeEvent event) {
+                l.add("in listener 1");
+                page.addDomChangeListener(listener2);
+            }
+        };
+
+        page.addDomChangeListener(listener1);
+
+        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        myButton.click();
+
+        final String[] expectedValues = {"in listener 1"};
+        assertEquals(expectedValues, l);
+        l.clear();
+
+        myButton.click();
+        final String[] expectedValues2 = {"in listener 1", "in listener 2"};
+        assertEquals(expectedValues2, l);
+    }
 }
