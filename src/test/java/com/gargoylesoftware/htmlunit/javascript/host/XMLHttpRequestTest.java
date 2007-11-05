@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -897,10 +898,10 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final DomChangeListener listener = new DomChangeListener() {
-            public void nodeAdded(com.gargoylesoftware.htmlunit.html.DomChangeEvent event) {
+            public void nodeAdded(final DomChangeEvent event) {
                 // nothing
             }
-            public void nodeDeleted(com.gargoylesoftware.htmlunit.html.DomChangeEvent event) {
+            public void nodeDeleted(final DomChangeEvent event) {
                 // nothing
             }
         };
