@@ -93,9 +93,6 @@
                 JavaScript exceptions: line number information now relative to the page.
             </action>
             <action type="add" dev="mguillem">
-                JavaScript exceptions: line number information now relative to the page.
-            </action>
-            <action type="add" dev="mguillem">
                 Add HtmlPage.executeJavaScript to inject JavaScript code in a page.
             </action>
             <action type="add" dev="sdanig">
