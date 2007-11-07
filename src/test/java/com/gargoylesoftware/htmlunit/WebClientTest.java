@@ -751,14 +751,16 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test loading a file page
+     * Test loading a file page.
+     *
      * @throws Exception If something goes wrong.
      */
     public void testLoadFilePage() throws Exception {
 
-        // create a real file to read
-        // it could be useful to have existing files to test in a special location in filesystem.
+        // Create a real file to read.
+        // It could be useful to have existing files to test in a special location in filesystem.
         // It will be really needed when we have to test binary files using the file protocol.
+
         final String htmlContent = "<html><head><title>foo</title></head><body></body></html>";
         final File currentDirectory = new File((new File("")).getAbsolutePath());
         final File tmpFile = File.createTempFile("test", ".html", currentDirectory);
@@ -766,20 +768,41 @@ public class WebClientTest extends WebTestCase {
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
         FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
 
-        final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
+        // Test a normal file URL.
 
         final WebClient client = new WebClient();
-        final HtmlPage page = (HtmlPage) client.getPage(fileURL);
+        final URL url = new URL("file://" + tmpFile.getCanonicalPath());
+        final HtmlPage page = (HtmlPage) client.getPage(url);
 
         assertEquals(htmlContent, page.getWebResponse().getContentAsString());
         assertEquals("text/html", page.getWebResponse().getContentType());
         assertEquals(200, page.getWebResponse().getStatusCode());
         assertEquals("foo", page.getTitleText());
+
+        // Test a file URL with a query portion (needs to work for Dojo, for example).
+
+        final URL url2 = new URL(url.toExternalForm() + "?with=query");
+        final HtmlPage page2 = (HtmlPage) client.getPage(url2);
+
+        assertEquals(htmlContent, page2.getWebResponse().getContentAsString());
+        assertEquals("text/html", page2.getWebResponse().getContentType());
+        assertEquals(200, page2.getWebResponse().getStatusCode());
+        assertEquals("foo", page2.getTitleText());
+
+        // Test a file URL with a ref portion (needs to work for Dojo, for example).
+
+        final URL url3 = new URL(url.toExternalForm() + "#reference");
+        final HtmlPage page3 = (HtmlPage) client.getPage(url3);
+
+        assertEquals(htmlContent, page3.getWebResponse().getContentAsString());
+        assertEquals("text/html", page3.getWebResponse().getContentType());
+        assertEquals(200, page3.getWebResponse().getStatusCode());
+        assertEquals("foo", page3.getTitleText());
     }
 
     /**
-     * Test loading a file page with xml content.
-     * Regression test for bug 1113487.
+     * Test loading a file page with xml content. Regression test for bug 1113487.
+     *
      * @throws Exception If something goes wrong.
      */
     public void testLoadFilePageXml() throws Exception {

@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * An object that represents a web browser.
@@ -1321,11 +1322,20 @@ public class WebClient implements Serializable {
      * @return The web response
      * @throws IOException If an IO problem occurs
      */
-    private WebResponse makeWebResponseForFileUrl(final URL url, final String charset) throws IOException {
+    private WebResponse makeWebResponseForFileUrl(URL url, final String charset) throws IOException {
+
+        if (url.getQuery() != null) {
+            // Get rid of the query portion before trying to load the file.
+            url = UrlUtils.getUrlWithNewQuery(url, null);
+        }
+
+        if (url.getRef() != null) {
+            // Get rid of the ref portion before trying to load the file.
+            url = UrlUtils.getUrlWithNewRef(url, null);
+        }
 
         final File file = FileUtils.toFile(url);
         final String contentType = guessContentType(file);
-
         if (contentType.startsWith("text")) {
             final String str = IOUtils.toString(new FileInputStream(file), charset);
             return new StringWebResponse(str, charset, url) {
