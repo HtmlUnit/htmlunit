@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlScriptTest extends WebTestCase {
 
@@ -185,7 +186,6 @@ public class HtmlScriptTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testDefer() throws Exception {
-
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"
             + "<script>alert('normal')</script>\n"
@@ -204,4 +204,18 @@ public class HtmlScriptTest extends WebTestCase {
         assertEquals(expectedIE, actualIE);
     }
 
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testSrcJavaScript() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<script id='ie_ready' src='javascript:void(0)'></script>\n"
+            + "</body></html>";
+
+        loadPage(htmlContent);
+    }
 }
