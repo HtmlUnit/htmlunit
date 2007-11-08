@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="asashour">
+                Ignore &lt;script&gt; src that starts with "javascript:".
+            </action>
             <action type="fix" dev="sdanig">
                 Handle file URLs with query portions (file://my/path?a=b) and ref portions (file://my/path#ref) without breaking.
             </action>

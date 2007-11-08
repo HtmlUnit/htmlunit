@@ -1840,4 +1840,16 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals(Collections.singletonList(expectedMessage), collectedConfirms);
         assertEquals(expectedPageTitle, secondPage.getTitleText());
     }
+
+    /**
+     * @throws Exception If an error occurs.
+     */
+    public void testSrcJavaScript() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<script id='ie_ready' src='javascript:void(0)'></script>\n"
+            + "</body></html>";
+
+        loadPage(htmlContent);
+    }
 }

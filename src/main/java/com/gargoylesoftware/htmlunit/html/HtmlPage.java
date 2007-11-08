@@ -116,13 +116,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param webResponse The web response that was used to create this page
      * @param webWindow The window that this page is being loaded into.
      */
-    public HtmlPage(
-            final URL originatingUrl,
-            final WebResponse webResponse,
-            final WebWindow webWindow) {
-
+    public HtmlPage(final URL originatingUrl, final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
-
     }
 
     /**
@@ -274,7 +269,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *
      * @param name The name to search by
      * @return See above
-     * @throws com.gargoylesoftware.htmlunit.ElementNotFoundException If the anchor could not be found.
+     * @throws ElementNotFoundException If the anchor could not be found.
      */
     public HtmlAnchor getAnchorByName(final String name) throws ElementNotFoundException {
         return (HtmlAnchor) getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "name", name);
@@ -713,8 +708,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a javascript result object.
      */
-    public ScriptResult executeJavaScriptIfPossible(
-        String sourceCode, final String sourceName, final int startLine) {
+    public ScriptResult executeJavaScriptIfPossible(String sourceCode, final String sourceName, final int startLine) {
 
         final ScriptEngine engine = getWebClient().getScriptEngine();
         if (!getWebClient().isJavaScriptEnabled() || engine == null) {
@@ -755,11 +749,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a javascript result object.
      */
-    public ScriptResult executeJavaScriptFunctionIfPossible(
-            final Function function,
-            final Scriptable thisObject,
-            final Object[] args,
-            final DomNode htmlElementScope) {
+    public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
+            final Object[] args, final DomNode htmlElementScope) {
 
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
@@ -792,13 +783,16 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param srcAttribute The source attribute from the script tag.
      * @param charset The charset attribute from the script tag.
      */
-    void loadExternalJavaScriptFile(final String srcAttribute,
-                                            final String charset) {
+    void loadExternalJavaScriptFile(final String srcAttribute, final String charset) {
         final ScriptEngine engine = getWebClient().getScriptEngine();
         if (getWebClient().isJavaScriptEnabled() && engine != null) {
             final URL scriptURL;
             try {
                 scriptURL = getFullyQualifiedUrl(srcAttribute);
+                if (scriptURL.getProtocol().equals("javascript")) {
+                    getLog().info("Ignoring script src [" + srcAttribute + "]");
+                    return;
+                }
             }
             catch (final MalformedURLException e) {
                 getLog().error("Unable to build url for script src tag [" + srcAttribute + "]");
@@ -851,7 +845,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return the content of the file
      */
     private String loadJavaScriptFromUrl(final URL url, final String charset) {
-
         String scriptEncoding = charset;
         getPageEncoding();
 

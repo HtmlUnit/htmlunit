@@ -53,7 +53,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
- * @author Ahmed Ashour
  */
 public class HtmlScriptTest extends WebTestCase {
 
@@ -202,20 +201,5 @@ public class HtmlScriptTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actualIE);
         final String[] expectedIE = new String[] {"normal", "deferred", "onload"};
         assertEquals(expectedIE, actualIE);
-    }
-
-    /**
-     * @throws Exception If an error occurs.
-     */
-    public void testSrcJavaScript() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<script id='ie_ready' src='javascript:void(0)'></script>\n"
-            + "</body></html>";
-
-        loadPage(htmlContent);
     }
 }
