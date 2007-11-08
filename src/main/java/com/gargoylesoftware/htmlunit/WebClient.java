@@ -1314,28 +1314,29 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Builds a WebResponse for a file url.
+     * Builds a WebResponse for a file URL.
      * This first implementation is basic.
-     * It assumes that the file contains an html page encoded with given encoding.
+     * It assumes that the file contains an html page encoded with the specified encoding.
      * @param url The file url
      * @param charset encoding to use
      * @return The web response
      * @throws IOException If an IO problem occurs
      */
-    private WebResponse makeWebResponseForFileUrl(URL url, final String charset) throws IOException {
+    private WebResponse makeWebResponseForFileUrl(final URL url, final String charset) throws IOException {
 
-        if (url.getQuery() != null) {
+        URL cleanUrl = url;
+        if (cleanUrl.getQuery() != null) {
             // Get rid of the query portion before trying to load the file.
-            url = UrlUtils.getUrlWithNewQuery(url, null);
+            cleanUrl = UrlUtils.getUrlWithNewQuery(cleanUrl, null);
         }
-
-        if (url.getRef() != null) {
+        if (cleanUrl.getRef() != null) {
             // Get rid of the ref portion before trying to load the file.
-            url = UrlUtils.getUrlWithNewRef(url, null);
+            cleanUrl = UrlUtils.getUrlWithNewRef(cleanUrl, null);
         }
 
-        final File file = FileUtils.toFile(url);
+        final File file = FileUtils.toFile(cleanUrl);
         final String contentType = guessContentType(file);
+
         if (contentType.startsWith("text")) {
             final String str = IOUtils.toString(new FileInputStream(file), charset);
             return new StringWebResponse(str, charset, url) {
