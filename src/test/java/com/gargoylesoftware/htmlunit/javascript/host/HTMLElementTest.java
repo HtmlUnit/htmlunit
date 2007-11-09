@@ -151,6 +151,36 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    public void testGetSetAttributeNS() throws Exception {
+        final String content = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       alert(myNode.getAttributeNS('myNamespaceURI', 'my:foo'));\n"
+                + "       myNode.setAttributeNS('myNamespaceURI', 'my:foo', 'bla');\n"
+                + "       alert(myNode.getAttributeNS('myNamespaceURI', 'foo'));\n"
+                + "   }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "<p id='myNode' title='a'>\n"
+                + "</p>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final String[] expectedAlerts = {"", "bla"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
     public void testOwnerDocument() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -427,6 +457,34 @@ public class HTMLElementTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"the class is z"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetInnerHTML() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script id='theScript'>"
+            + "if (1 > 2 & 3 < 2) willNotHappen('yo');"
+            + "</script>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('theScript');\n"
+            + "       alert(myNode.innerHTML);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form id='myNode'></form>\n"
+            + "</body>\n"
+            + "</html>";
+        final List collectedAlerts = new ArrayList();
+        final String[] expectedAlerts = {"if (1 > 2 & 3 < 2) willNotHappen('yo');"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

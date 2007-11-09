@@ -366,6 +366,16 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
+     * Gets the specified attribute.
+     * @param namespaceURI the namespace URI
+     * @param localName the local name of the attribute to look for
+     * @return The value of the specified attribute, <code>null</code> if the attribute is not defined
+     */
+    public String jsxFunction_getAttributeNS(final String namespaceURI, final String localName) {
+        return getHtmlElementOrDie().getAttributeNS(namespaceURI, localName);
+    }
+
+    /**
      * Test for attribute.
      * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-ElHasAttr">
      * the DOM reference</a>
@@ -419,6 +429,16 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
                 throw new RuntimeException(e.getCause());
             }
         }
+    }
+
+    /**
+     * Sets the specified attribute.
+     * @param namespaceURI the namespace URI
+     * @param qualifiedName the local name of the attribute to look for
+     * @param value the new attribute value
+     */
+    public void jsxFunction_setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
+        getHtmlElementOrDie().setAttributeValue(namespaceURI, qualifiedName, value);
     }
 
     /**
@@ -505,7 +525,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     public String jsxGet_innerHTML() {
         final StringBuffer buf = new StringBuffer();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, getDomNodeOrDie(), true);
+        printChildren(buf, getDomNodeOrDie(), !"SCRIPT".equals(jsxGet_tagName()));
         return buf.toString();
     }
 
