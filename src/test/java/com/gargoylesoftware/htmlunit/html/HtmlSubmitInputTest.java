@@ -118,7 +118,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<form name='form1' method='get' action='http://second'>\n"
+            + "<form name='form1' method='get' action='" + URL_SECOND + "'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button1'"
             + "onclick='return true'/></form>\n"
             + "</body></html>";

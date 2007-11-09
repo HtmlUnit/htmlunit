@@ -179,7 +179,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
-            + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='http://second'\">\n"
+            + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent

@@ -75,8 +75,8 @@ public class HtmlFrameSetTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
-            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />\n"
-            + "  <frame scrolling='auto' name='right' src='http://third' frameborder='1' />\n"
+            + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
+            + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
             + "  <noframes>\n"
             + "    <body>Frames not supported</body>\n"
             + "  </noframes>\n"
@@ -114,7 +114,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<body>\n"
-            + "  <iframe name='left' src='http://second' />\n"
+            + "  <iframe name='left' src='" + URL_SECOND + "' />\n"
             + "  some stuff"
             + "</html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -215,7 +215,7 @@ public class HtmlFrameSetTest extends WebTestCase {
             = "<html><head><title>Main</title>\n"
             + "</head>\n"
             + "  <frameset cols='18%,*'>\n"
-            + "    <frame name='menu' src='http://second'>\n"
+            + "    <frame name='menu' src='" + URL_SECOND + "'>\n"
             + "    <frame name='button_pallete' src='about:blank'>\n"
             + "  </frameset>\n"
             + "</html>";
@@ -259,7 +259,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
-            + "  <frame scrolling='no' name='left' src='http://second' frameborder='1' />\n"
+            + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
             + "  <noframes>\n"
             + "    <body>Frames not supported</body>\n"
             + "  </noframes>\n"
@@ -289,10 +289,10 @@ public class HtmlFrameSetTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='100%'>\n"
-            + "  <frame src='http://second'' id='frame1'/>\n"
+            + "  <frame src='" + URL_SECOND + "'' id='frame1'/>\n"
             + "  <noframes>\n"
             + "    <div><script>alert(1);</script></div>\n"
-            + "    <script src='http://third'></script>\n"
+            + "    <script src='" + URL_THIRD + "'></script>\n"
             + "   </noframes>\n"
             + "</frameset></html>";
         final String secondContent

@@ -143,7 +143,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
-            + "<a href='http://second' id='a2' "
+            + "<a href='" + URL_SECOND + "' id='a2' "
             + "onClick='alert(\"clicked\")'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
@@ -177,7 +177,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
-            + "<a href='http://second' id='a2' "
+            + "<a href='" + URL_SECOND + "' id='a2' "
             + "onClick='alert(\"clicked\");return false;'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
@@ -323,12 +323,12 @@ public class HtmlAnchorTest extends WebTestCase {
         final String firstContent
             = " <html>\n"
             + "<head><title>Page A</title></head>\n"
-            + "<body><a href='#' onclick=\"document.location.href='http://second'\" id='link'>link</a></body>\n"
+            + "<body><a href='#' onclick=\"document.location.href='" + URL_SECOND + "'\" id='link'>link</a></body>\n"
             + "</html>";
         final String secondContent
             = "<html>\n"
             + "<head><title>Page B</title></head>\n"
-            + "<body><iframe src='http://third'></iframe></body>\n"
+            + "<body><iframe src='" + URL_THIRD + "'></iframe></body>\n"
             + "</html>";
         final String thirdContent
             = "<html>\n"
@@ -382,7 +382,7 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testClick_refererHeader() throws Exception {
         final String firstContent
             = "<html><head><title>Page A</title></head>\n"
-            + "<body><a href='http://second' id='link'>link</a></body>\n"
+            + "<body><a href='" + URL_SECOND + "' id='link'>link</a></body>\n"
             + "</html>";
         final String secondContent
             = "<html><head><title>Page B</title></head>\n"

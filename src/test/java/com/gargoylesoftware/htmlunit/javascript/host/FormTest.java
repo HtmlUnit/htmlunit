@@ -501,7 +501,7 @@ public class FormTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
-            + "<form name='form1' method='get' action='http://second'>\n"
+            + "<form name='form1' method='get' action='" + URL_SECOND + "'>\n"
             + "    <input type='button' name='button1' />\n"
             + "    <input type='button' name='button2' />\n"
             + "</form>\n"
@@ -532,7 +532,8 @@ public class FormTest extends WebTestCase {
 
         final String firstContent
             = "<html><body>\n"
-            + "<form name='form1' action='http://second' onsubmit='this.action = \"http://third\"' method='post'>\n"
+            + "<form name='form1' action='" + URL_SECOND + "' onsubmit='this.action=\"" + URL_THIRD + "\"' "
+            + "method='post'>\n"
             + "    <input type='submit' id='button1' />\n"
             + "</form>\n"
             + "</body></html>";
@@ -545,7 +546,7 @@ public class FormTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("button1")).click();
 
-        assertEquals("http://third", page2.getWebResponse().getUrl());
+        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getUrl());
     }
 
     /**
@@ -558,7 +559,7 @@ public class FormTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
-            + "<form name='form1' method='get' action='http://second' target='MyNewWindow'>\n"
+            + "<form name='form1' method='get' action='" + URL_SECOND + "' target='MyNewWindow'>\n"
             + "    <input type='button' name='button1' />\n"
             + "</form>\n"
             + "</body></html>";
@@ -589,7 +590,7 @@ public class FormTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
-            + "<form name='form1' method='get' action='http://second' onsubmit=\"alert('onsubmit called')\">\n"
+            + "<form name='form1' method='get' action='" + URL_SECOND + "' onsubmit=\"alert('onsubmit called')\">\n"
             + "    <input type='submit' />\n"
             + "</form>\n"
             + "<a href='javascript:document.form1.submit()' id='link1'>Click me</a>\n"
@@ -725,7 +726,7 @@ public class FormTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
-            + "<form name='form1' method='get' action='http://second'>\n"
+            + "<form name='form1' method='get' action='" + URL_SECOND + "'>\n"
             + "    <button type='submit' name='button1' id='button1'/>\n"
             + "    <button type='submit' name='button2' />\n"
             + "</form>\n"
@@ -745,7 +746,7 @@ public class FormTest extends WebTestCase {
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("second", secondPage.getTitleText());
-        assertEquals("http://second?button1=", secondPage.getWebResponse().getUrl());
+        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getUrl());
     }
 
     /**

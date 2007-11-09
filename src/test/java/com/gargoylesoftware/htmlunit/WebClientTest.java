@@ -214,8 +214,8 @@ public class WebClientTest extends WebTestCase {
     public void testHtmlWindowEvents_closedFromFrame() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
-            + "<iframe src='http://third' id='frame1'>\n"
-            + "<a href='http://second' id='a2'>link to foo2</a>\n"
+            + "<iframe src='" + URL_THIRD + "' id='frame1'>\n"
+            + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>second</title></head><body></body></html>";
@@ -367,7 +367,7 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception If something goes wrong.
      */
     public void testRedirection302_MovedTemporarily_CommaInParameters() throws Exception {
-        doTestRedirection(302, SubmitMethod.GET, SubmitMethod.GET, "http://second/foo.html?foo1=abc&foo2=1,2,3,4");
+        doTestRedirection(302, SubmitMethod.GET, SubmitMethod.GET, URL_SECOND + "/foo.html?foo1=abc&foo2=1,2,3,4");
     }
 
     /**
@@ -432,10 +432,10 @@ public class WebClientTest extends WebTestCase {
             final int statusCode,
             final SubmitMethod initialRequestMethod,
             final SubmitMethod expectedRedirectedRequestMethod)
-        throws
-             Exception {
+        throws Exception {
 
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, "http://second");
+        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod,
+                URL_SECOND.toExternalForm());
     }
 
     /**
@@ -838,7 +838,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testRedirectViaJavaScriptDuringInitialPageLoad() throws Exception {
         final String firstContent = "<html><head><title>First</title><script>\n"
-            + "location.href='http://second'\n"
+            + "location.href='" + URL_SECOND + "'\n"
             + "</script></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 

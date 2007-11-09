@@ -184,7 +184,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
-            + "<input id='myRadio' type='radio' onchange=\"window.location.href='http://second'\">\n"
+            + "<input id='myRadio' type='radio' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent

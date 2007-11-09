@@ -101,7 +101,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='location=\"http://second\"; return false;'>Click me</a>\n"
+            + "    <a id='link' onClick='location=\"" + URL_SECOND + "\"; return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent
@@ -134,7 +134,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"http://second\", \"MyNewWindow\").focus(); "
+            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"MyNewWindow\").focus(); "
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -190,7 +190,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title><base target='MyNewWindow'></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' href='http://second'>Click me</a>\n"
+            + "    <a id='link' href='" + URL_SECOND + "'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
         final String secondContent
@@ -236,12 +236,12 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "' />\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
             + "  <a id='link' "
-            + "onClick='open(\"http://third\", \"_blank\").focus(); '>\n"
+            + "onClick='open(\"" + URL_THIRD + "\", \"_blank\").focus(); '>\n"
             + "Click me</a>\n"
             + "</body></html>";
         final String thirdContent
@@ -303,7 +303,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"http://second\", \"_self\"); "
+            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_self\"); "
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -346,11 +346,11 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "' />\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
-            + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />\n"
+            + "  <iframe name='thirdFrame' id='thirdFrame' src='" + URL_THIRD + "' />\n"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title></head><body>\n"
@@ -413,11 +413,11 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='secondFrame' id='secondFrame' src='http://second' />\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "' />\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
-            + "  <iframe name='thirdFrame' id='thirdFrame' src='http://third' />\n"
+            + "  <iframe name='thirdFrame' id='thirdFrame' src='" + URL_THIRD + "' />\n"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title></head><body>\n"
@@ -578,11 +578,11 @@ public class WindowTest extends WebTestCase {
     public void testParentAndTop() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='left' src='http://second' />\n"
+            + "  <iframe name='left' src='" + URL_SECOND + "' />\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
-            + "  <iframe name='innermost' src='http://third' />\n"
+            + "  <iframe name='innermost' src='" + URL_THIRD + "' />\n"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title><script>\n"
@@ -745,7 +745,7 @@ public class WindowTest extends WebTestCase {
             + "function runtest() {\n"
             + "    alert(window.opener)\n"
             + "    alert('one')\n"
-            + "    open('http://second', 'foo')"
+            + "    open('" + URL_SECOND + "', 'foo')"
             + "}\n"
             + "function callAlert(text) {\n"
             + "    alert(text)"
@@ -759,7 +759,7 @@ public class WindowTest extends WebTestCase {
             + "    document.form1.submit()\n"
             + "}\n"
             + "</script></head><body onload='runtest()'>\n"
-            + "<form name='form1' action='http://third' method='post'><input type='submit'></form>\n"
+            + "<form name='form1' action='" + URL_THIRD + "' method='post'><input type='submit'></form>\n"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title><script>\n"
@@ -899,7 +899,7 @@ public class WindowTest extends WebTestCase {
         final String firstContent
             = "<html><head>\n"
             + "<script language='JavaScript'>window.setTimeout('alert(\"Yo!\")', 1000);</script>\n"
-            + "</head><body onload='document.location.replace(\"http://second\")'></body></html>";
+            + "</head><body onload='document.location.replace(\"" + URL_SECOND + "\")'></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient = new WebClient();
@@ -1076,14 +1076,14 @@ public class WindowTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body><script>\n"
             + "myVariable = 'first'"
-            + "  </script><iframe name='left' src='http://second' />\n"
+            + "  </script><iframe name='left' src='" + URL_SECOND + "' />\n"
             + "</body></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
         final String secondContent
             = "<html><head><title>Second</title></head><body><script>\n"
             + "myVariable = 'second'"
-            + "  </script><iframe name='innermost' src='http://third' />\n"
+            + "  </script><iframe name='innermost' src='" + URL_THIRD + "' />\n"
             + "</body></html>";
         webConnection.setResponse(URL_SECOND, secondContent);
 
@@ -1127,8 +1127,8 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "    <frameset rows='30%,70%'>\n"
-            + "        <frame src='http://second' name='second'>\n"
-            + "        <frame src='http://third' name='third'>\n"
+            + "        <frame src='" + URL_SECOND + "' name='second'>\n"
+            + "        <frame src='" + URL_THIRD + "' name='third'>\n"
             + "    </frameset>\n"
             + "    <frame src='http://fourth' name='fourth'>\n"
             + "</frameset></html>";
@@ -1201,8 +1201,8 @@ public class WindowTest extends WebTestCase {
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "    <frameset rows='30%,70%'>\n"
-            + "        <frame src='http://second' name='second'>\n"
-            + "        <frame src='http://third' name='third'>\n"
+            + "        <frame src='" + URL_SECOND + "' name='second'>\n"
+            + "        <frame src='" + URL_THIRD + "' name='third'>\n"
             + "    </frameset>\n"
             + "    <frame src='http://fourth' name='fourth'>\n"
             + "</frameset></html>";
@@ -1230,10 +1230,7 @@ public class WindowTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
-        final String[] expectedAlerts = {
-            "fourth-second=http://second",
-            "fourth-third=http://third",
-        };
+        final String[] expectedAlerts = {"fourth-second=" + URL_SECOND, "fourth-third=" + URL_THIRD};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1866,7 +1863,7 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1915,7 +1912,7 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1958,7 +1955,7 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -2001,7 +1998,7 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -2044,7 +2041,7 @@ public class WindowTest extends WebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"http://second\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -2097,7 +2094,7 @@ public class WindowTest extends WebTestCase {
             final String expectedRefererHeader) throws Exception {
         final String firstContent = "<html><head></head>\n"
             + "<body>\n"
-            + "<button id='clickme' onClick='window.open(\"http://second\");'>Click me</a>\n"
+            + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
             + "</body></html>";
 
         final String secondContent

@@ -70,7 +70,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     public void testSetSrcAttribute() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<iframe id='iframe1' src='http://second'>\n"
+            + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
@@ -87,11 +87,11 @@ public class HtmlInlineFrameTest extends WebTestCase {
         assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
-        assertEquals("http://second", iframe.getSrcAttribute());
+        assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
         assertEquals("Second", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
 
-        iframe.setSrcAttribute("http://third");
-        assertEquals("http://third", iframe.getSrcAttribute());
+        iframe.setSrcAttribute(URL_THIRD.toExternalForm());
+        assertEquals(URL_THIRD.toExternalForm(), iframe.getSrcAttribute());
         assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
     }
 
@@ -115,10 +115,10 @@ public class HtmlInlineFrameTest extends WebTestCase {
     public void testRecursiveNestedFrames() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<iframe id='iframe1' src='http://second'>\n"
+            + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head>"
-            + "<body><iframe id='iframe2_1' src='http://first'></iframe></body></html>";
+            + "<body><iframe id='iframe2_1' src='" + URL_FIRST + "'></iframe></body></html>";
         final WebClient client = new WebClient();
     
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -131,13 +131,13 @@ public class HtmlInlineFrameTest extends WebTestCase {
         assertEquals("First", page.getTitleText());
     
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
-        assertEquals("http://second", iframe.getSrcAttribute());
+        assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
         final HtmlPage iframePage = (HtmlPage) iframe.getEnclosedPage();
         assertEquals("Second", iframePage.getTitleText());
     
         // the nested frame should not have been loaded
         final HtmlInlineFrame iframeIn2 = (HtmlInlineFrame) iframePage.getHtmlElementById("iframe2_1");
-        assertEquals("http://first", iframeIn2.getSrcAttribute());
+        assertEquals(URL_FIRST.toExternalForm(), iframeIn2.getSrcAttribute());
         assertEquals("about:blank", iframeIn2.getEnclosedPage().getWebResponse().getUrl());
     }
 
@@ -160,8 +160,8 @@ public class HtmlInlineFrameTest extends WebTestCase {
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<iframe id='iframe1' src='http://second'></iframe>\n"
-            + "<script type='text/javascript'>document.getElementById('iframe1').src = 'http://third';\n"
+            + "<iframe id='iframe1' src='" + URL_SECOND + "'></iframe>\n"
+            + "<script type='text/javascript'>document.getElementById('iframe1').src = '" + URL_THIRD + "';\n"
             + "</script></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
@@ -178,7 +178,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
-        assertEquals("http://third", iframe.getSrcAttribute());
+        assertEquals(URL_THIRD.toExternalForm(), iframe.getSrcAttribute());
         assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
     }
 
@@ -189,9 +189,9 @@ public class HtmlInlineFrameTest extends WebTestCase {
     public void testScriptUnderIFrame() throws Exception {
         final String firstContent
             = "<html><body>\n"
-            + "<iframe src='http://second'>\n"
+            + "<iframe src='" + URL_SECOND + "'>\n"
             + "  <div><script>alert(1);</script></div>\n"
-            + "  <script src='http://third'></script>\n"
+            + "  <script src='" + URL_THIRD + "'></script>\n"
             + "</iframe>\n"
             + "</body></html>";
         final String secondContent

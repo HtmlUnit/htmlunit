@@ -221,7 +221,7 @@ public class DocumentTest extends WebTestCase {
             + "        form.submit()"
             + "}"
             + "</SCRIPT></head><body><form name='formName' method='POST' "
-            + "action='http://second'>\n"
+            + "action='" + URL_SECOND + "'>\n"
             + "<a href='.' id='testJavascript' name='testJavascript' "
             + "onclick=\" doSubmit('formName');return false;\">\n"
             + "Test Link </a><input type='submit' value='Login' "
@@ -1349,12 +1349,10 @@ public class DocumentTest extends WebTestCase {
             = "<html><body><h1 id='first'>First</h1></body></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
-        final String secondContent
-            = "<html><body><h1 id='second'>Second</h1></body></html>";
+        final String secondContent = "<html><body><h1 id='second'>Second</h1></body></html>";
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        final String scriptContent
-            = "document.getElementById('iframe').src = 'http://second';\n";
+        final String scriptContent = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
         webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
 
         final List collectedAlerts = new ArrayList();
@@ -1363,10 +1361,9 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage mainPage = (HtmlPage) webClient.getPage("http://main");
         assertEquals("Main", mainPage.getTitleText());
 
-        final HtmlInlineFrame iFrame =
-            (HtmlInlineFrame) mainPage.getHtmlElementById("iframe");
+        final HtmlInlineFrame iFrame = (HtmlInlineFrame) mainPage.getHtmlElementById("iframe");
 
-        assertEquals("http://second", iFrame.getSrcAttribute());
+        assertEquals(URL_SECOND.toExternalForm(), iFrame.getSrcAttribute());
 
         final HtmlPage enclosedPage = (HtmlPage) iFrame.getEnclosedPage();
         // This will blow up if the script hasn't been written to the document

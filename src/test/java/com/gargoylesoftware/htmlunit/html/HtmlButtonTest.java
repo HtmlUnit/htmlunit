@@ -244,7 +244,7 @@ public class HtmlButtonTest extends WebTestCase {
             final String expectedType) throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<form id='form1' action='http://second' method='post'>\n"
+            + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
             + "    <button name='button' id='button' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
         final String secondContent

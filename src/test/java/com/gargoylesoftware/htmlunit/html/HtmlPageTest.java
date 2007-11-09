@@ -873,7 +873,7 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=" + URL_SECOND + "\">\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -943,7 +943,7 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTagQuoted() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"http://second\"'>\n"
+            + "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"" + URL_SECOND + "\"'>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -965,7 +965,7 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTagPartlyQuoted() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='http://second\">\n"
+            + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='" + URL_SECOND + "\">\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -988,7 +988,7 @@ public class HtmlPageTest extends WebTestCase {
     public void testRefresh_MetaTagNoScript() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<noscript>\n"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=http://second\">\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=" + URL_SECOND + "\">\n"
             + "</noscript>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
@@ -1014,7 +1014,7 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_CustomRefreshHandler() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=http://second\">\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=" + URL_SECOND + "\">\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -1044,7 +1044,7 @@ public class HtmlPageTest extends WebTestCase {
      */
     public void testRefresh_MetaTag_Whitespace() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=http://second'>\n"
+            + "<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=" + URL_SECOND + "'>\n"
             + "</head><body></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
@@ -1073,7 +1073,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
-                .singletonList(new KeyValuePair("Refresh", "3;URL=http://second")));
+                .singletonList(new KeyValuePair("Refresh", "3;URL=" + URL_SECOND + "")));
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 

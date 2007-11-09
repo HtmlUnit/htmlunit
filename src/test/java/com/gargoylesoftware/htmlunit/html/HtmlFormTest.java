@@ -246,7 +246,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<form method='get' action='http://second' onSubmit='alert(\"clicked\")'>\n"
+            + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -279,7 +279,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<form method='get' action='http://second' "
+            + "<form method='get' action='" + URL_SECOND + "' "
             + "onSubmit='alert(\"clicked\");return false;'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
@@ -313,7 +313,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSubmit_onSubmitHandler_fails() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<form method='get' action='http://second' onSubmit='return null'>\n"
+            + "<form method='get' action='" + URL_SECOND + "' onSubmit='return null'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -337,7 +337,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSubmit_onSubmitHandler_javascriptDisabled() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<form method='get' action='http://second' onSubmit='alert(\"clicked\")'>\n"
+            + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -453,7 +453,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testReset_onResetHandler() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
-            + "<form method='get' action='http://second' "
+            + "<form method='get' action='" + URL_SECOND + "' "
             + "onReset='alert(\"clicked\");alert(event.type)'>\n"
             + "<input name='button' type='reset' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
@@ -484,7 +484,7 @@ public class HtmlFormTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<script>function doalert(message){alert(message);}</script>\n"
-            + "<body><form name='form1' method='get' action='http://second' "
+            + "<body><form name='form1' method='get' action='" + URL_SECOND + "' "
             + "onSubmit='doalert(\"clicked\");return false;'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "<a id='link1' href='javascript:document.form1.submit()'>Click me</a>\n"
@@ -822,7 +822,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSubmitToTargetWindow() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
-            + "<form id='form1' target='window2' action='http://second' method='post'>\n"
+            + "<form id='form1' target='window2' action='" + URL_SECOND + "' method='post'>\n"
             + "    <input type='submit' name='button' value='push me'/>\n"
             + "</form></body></html>";
         final WebClient client = new WebClient();
@@ -944,7 +944,7 @@ public class HtmlFormTest extends WebTestCase {
     public void testSubmit_refererHeader() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "<form method='post' action='http://second'>\n"
+            + "<form method='post' action='" + URL_SECOND + "'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
