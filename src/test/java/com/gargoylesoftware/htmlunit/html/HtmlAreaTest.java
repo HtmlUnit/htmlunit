@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author Ahmed Ashour
  */
 public class HtmlAreaTest extends WebTestCase {
 
@@ -70,7 +71,7 @@ public class HtmlAreaTest extends WebTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>\n"
             + "<map id='planetmap' name='planetmap'>\n"
-            + "<area shape='rect' onClick='" + onClick + "' coords='0,0,82,126' id='second' "
+            + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' "
             + "href='" + URL_SECOND + "'>\n"
             + "<area shape='circle' coords='90,58,3' id='third' href='" + URL_THIRD + "'>\n"
             + "</map></body></html>";
