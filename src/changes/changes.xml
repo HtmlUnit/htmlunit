@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="asashour" id="1828914">
+                JavaScript: &lt;iframe&gt; src is now correctly handled via setAttribute() (#1828914).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: add support for getAttributeNS and setAttributeNS on node (Firefox). 
             </action>

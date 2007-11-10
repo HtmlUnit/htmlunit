@@ -327,7 +327,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param qualifiedName The qualified name of the attribute
      * @param attributeValue The value of the attribute
      */
-    public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
+    public void setAttributeValue(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
         final String oldAttributeValue = getAttributeValue(qualifiedName);
         String value = attributeValue;

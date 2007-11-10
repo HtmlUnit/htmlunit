@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -54,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class IFrameTest extends WebTestCase {
 
@@ -278,5 +280,42 @@ public class IFrameTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         ((HtmlAnchor) page.getAnchors().get(0)).click();
         assertEquals(expected, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSetSrcAttribute() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><script>\n"
+            + "  function test() {\n"
+            + "   document.getElementById('iframe1').setAttribute('src', '" + URL_SECOND + "');\n"
+            + "  }"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<iframe id='iframe1'>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
+
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
+        assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
+        assertEquals("Second", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
+
+        iframe.setSrcAttribute(URL_THIRD.toExternalForm());
+        assertEquals(URL_THIRD.toExternalForm(), iframe.getSrcAttribute());
+        assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
     }
 }
