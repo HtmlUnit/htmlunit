@@ -266,6 +266,15 @@ The reference stays the maven 1 build.
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<!-- Update the links reference in javadoc plugin, when this changes -->
+					<source>1.4</source>
+					<target>1.4</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
@@ -283,6 +292,16 @@ The reference stays the maven 1 build.
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl</excludePackageNames>
+					<links>
+						<link>http://java.sun.com/j2se/1.4.2/docs/api/</link>
+						<link>http://jakarta.apache.org/commons/logging/apidocs/</link>
+						<link>http://jakarta.apache.org/commons/codec/apidocs/</link>
+						<link>http://jakarta.apache.org/commons/httpclient/apidocs/</link>
+						<link>http://www.jaxen.org/apidocs/</link>
+					</links>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
