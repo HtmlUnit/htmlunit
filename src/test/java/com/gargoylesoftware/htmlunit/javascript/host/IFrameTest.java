@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link IFrame}.
+ * Tests for {@link HTMLFrameElement} when used for {@link HtmlInlineFrame}.
  *
  * @version $Revision$
  * @author Marc Guillemot
