@@ -301,6 +301,7 @@ The reference stays the maven 1 build.
 						<link>http://jakarta.apache.org/commons/httpclient/apidocs/</link>
 						<link>http://www.jaxen.org/apidocs/</link>
 					</links>
+					<stylesheet>maven</stylesheet>
 				</configuration>
 			</plugin>
 			<plugin>
