@@ -123,7 +123,7 @@ class JavaScriptBackgroundJob implements Runnable {
                             htmlPage.getDocumentHtmlElement());
                 }
                 if (Thread.currentThread().isInterrupted()) {
-                    getLog().debug("JavaScript timeout thread interrupted; clearTimeout() probably called.");
+                    getLog().debug("JavaScript " + label_ + " thread interrupted; clearTimeout() probably called.");
                     break;
                 }
             }
