@@ -330,7 +330,7 @@ public class HtmlFileInputTest extends WebTestCase {
                         if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
                             for (int i = 0; i < path.length(); i++) {
-                                writer.write(Integer.toHexString(path.codePointAt(i)).toUpperCase() + " ");
+                                writer.write(Integer.toHexString(path.charAt(i)).toUpperCase() + " ");
                             }
                             writer.write("<br>");
                             writer.write(item.getFieldName());
