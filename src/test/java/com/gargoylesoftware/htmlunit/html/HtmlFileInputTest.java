@@ -303,6 +303,7 @@ public class HtmlFileInputTest extends WebTestCase {
             super("<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>\n"
             + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
             + "Name: <input name='myInput' type='file'><br>\n"
+            + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
             + "<input type='submit' value='Upload' id='mySubmit'>\n"
             + "</form>\n");
         }
@@ -326,7 +327,7 @@ public class HtmlFileInputTest extends WebTestCase {
                     final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
                     for (final Iterator iterator = upload.parseRequest(request).iterator(); iterator.hasNext();) {
                         final FileItem item = (FileItem) iterator.next();
-                        if (!item.isFormField()) {
+                        if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
                             for (int i = 0; i < path.length(); i++) {
                                 writer.write(Integer.toHexString(path.codePointAt(i)).toUpperCase() + " ");
