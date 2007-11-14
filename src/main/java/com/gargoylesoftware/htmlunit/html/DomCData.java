@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DomCData extends DomText {
+public class DomCData extends DomCharacterData {
 
 
     /** the symbolic node name */
@@ -87,5 +87,70 @@ public class DomCData extends DomText {
         printWriter.print("<![CDATA[");
         printWriter.print(getData());
         printWriter.print("]]>");
+    }
+    
+    
+//-------------------------------------------------------------
+    /**
+     * Split a Text node in two.
+     * @param offset The character position at which to split the Text node.
+     * @return The Text node that was split from this node.
+     * @deprecated This method conflicts with the W3C DOM API since the return values are
+     * different.  Use splitDomText instead.
+     */
+    public DomText splitText(final int offset) {
+        return splitDomText(offset);
+    }
+
+    /**
+     * Split a DomText node in two.
+     * @param offset The character position at which to split the DomText node.
+     * @return The DomText node that was split from this node.
+     */
+    public DomText splitDomText(final int offset) {
+        if (offset < 0 || offset > getLength()) {
+            throw new IllegalArgumentException("offset: " + offset + " data.length: " + getLength());
+        }
+
+        // split text into two separate nodes
+        final DomText newText = new DomText(getPage(), getData().substring(offset));
+        setData(getData().substring(0, offset));
+
+        // insert new text node
+        if (getParentDomNode() != null) {
+            newText.setParentNode(getParentDomNode());
+            newText.setPreviousSibling(this);
+            newText.setNextSibling(getNextDomSibling());
+            setNextSibling(newText);
+        }
+
+        return newText;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String asText() {
+        String text = getData();
+        if (!(getParentDomNode() instanceof HtmlTextArea)) {
+            // Remove extra whitespace
+            text = reduceWhitespace(text);
+        }
+        return text;
+    }
+
+    /**
+     * Gives a simple representation to facilitate debugging
+     * @return a simple representation
+     */
+    public String toString() {
+        return asText();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isTrimmedText() {
+        return false;
     }
 }

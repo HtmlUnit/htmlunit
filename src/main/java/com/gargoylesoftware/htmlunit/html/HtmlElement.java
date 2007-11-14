@@ -1050,7 +1050,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
          * @return Next entry.
          */
         public Object next() {
-            return (HtmlAttr) ((Map.Entry) baseIter_.next()).getValue();
+            return ((Map.Entry) baseIter_.next()).getValue();
         }
 
         /**

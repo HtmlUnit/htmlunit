@@ -229,7 +229,7 @@ public class Range extends SimpleScriptable {
         final List endContainerAncestor = getAncestorsAndSelf(endContainer_);
         
         final List commonAncestors = ListUtils.intersection(startContainerAncestor, endContainerAncestor);
-        return (NodeImpl) commonAncestors.get(commonAncestors.size() - 1);
+        return commonAncestors.get(commonAncestors.size() - 1);
     }
 
     /**
@@ -239,7 +239,7 @@ public class Range extends SimpleScriptable {
      */
     protected List getAncestorsAndSelf(final NodeImpl node) {
         final List ancestors = new ArrayList();
-        NodeImpl ancestor = (NodeImpl) node;
+        NodeImpl ancestor = node;
         while (ancestor != null) {
             ancestors.add(0, ancestor);
             ancestor = (NodeImpl) ancestor.jsxGet_parentNode();

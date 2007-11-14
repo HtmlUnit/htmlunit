@@ -2666,7 +2666,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String expected = "#document-fragment_null_11_null_0_";
-        final HtmlPage page = (HtmlPage) loadPage(content);
+        final HtmlPage page = loadPage(content);
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
     }

@@ -1293,7 +1293,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         if (elementToGiveFocus instanceof FocusableElement) {
-            moveFocusToElement((FocusableElement) elementToGiveFocus);
+            moveFocusToElement(elementToGiveFocus);
         }
         return elementToGiveFocus;
     }
@@ -1333,7 +1333,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         if (elementToGiveFocus instanceof FocusableElement) {
-            moveFocusToElement((FocusableElement) elementToGiveFocus);
+            moveFocusToElement(elementToGiveFocus);
         }
         return elementToGiveFocus;
     }
@@ -1675,6 +1675,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * Override cloneNode to add cloned elements to the clone, not to the original.
      * {@inheritDoc}
+     * @deprecated
      */
     public DomNode cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneDomNode(deep);

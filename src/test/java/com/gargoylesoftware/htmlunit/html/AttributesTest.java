@@ -233,15 +233,15 @@ public class AttributesTest extends WebTestCase {
     private Object getNewInstanceForClassUnderTest() throws Exception {
         final Object newInstance;
         if (classUnderTest_ == HtmlTableRow.class) {
-            newInstance = (HtmlTableRow) HTMLParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
+            newInstance = HTMLParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
                     page_, HtmlTableRow.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableHeaderCell.class) {
-            newInstance = (HtmlTableHeaderCell) HTMLParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
+            newInstance = HTMLParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
                     page_, HtmlTableHeaderCell.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableDataCell.class) {
-            newInstance = (HtmlTableDataCell) HTMLParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
+            newInstance = HTMLParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
                     page_, HtmlTableDataCell.TAG_NAME, null);
         }
         else {

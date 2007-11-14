@@ -359,6 +359,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
+     * @deprecated
      */
     public void testAssertAllIdAttributesUnique() throws Exception {
         final String htmlContent = "<html>\n"
@@ -380,6 +381,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
+     * @deprecated
      */
     public void testAssertAllIdAttributesUnique_Duplicates() throws Exception {
         final String htmlContent = "<html>\n"
@@ -407,6 +409,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
+     * @deprecated
      */
     public void testAssertAllAccessKeyAttributesUnique() throws Exception {
         final String htmlContent = "<html>\n"
@@ -428,6 +431,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
+     * @deprecated
      */
     public void testAssertAllAccessKeyAttributesUnique_Duplicates() throws Exception {
         final String htmlContent = "<html>\n"
@@ -455,6 +459,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
+     * @deprecated
      */
     public void testAssertAllTabIndexAttributesSet() throws Exception {
         final String htmlContent = "<html>\n"
@@ -479,6 +484,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
+     * @deprecated
      */
     public void testAssertAllTabIndexAttributesSet_SomeMissing() throws Exception {
         final String htmlContent = "<html>\n"
@@ -509,6 +515,7 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
+     * @deprecated
      */
     public void testAssertAllTabIndexAttributesSet_BadValue() throws Exception {
         final String htmlContent = "<html>\n"
@@ -1486,7 +1493,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlElement id1 = (HtmlElement) page.getDocumentHtmlElement().getLastDomChild().getLastDomChild();
         assertEquals("id1", id1.getId());
         assertSame(id1, page.getHtmlElementById("id1"));
-        final HtmlPage clone = (HtmlPage) page.cloneNode(true);
+        final HtmlPage clone = (HtmlPage) page.cloneDomNode(true);
         assertSame(id1, page.getHtmlElementById("id1"));
         final HtmlElement id1clone = (HtmlElement) clone.getDocumentHtmlElement().getLastDomChild().getLastDomChild();
         assertNotSame(id1, id1clone);
@@ -1517,10 +1524,10 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
-        final HtmlPage clone = (HtmlPage) page.cloneNode(true);
+        final HtmlPage clone = (HtmlPage) page.cloneDomNode(true);
         assertTrue(page != clone);
-        final HtmlElement doc = (HtmlElement) page.getDocumentHtmlElement();
-        final HtmlElement docclone = (HtmlElement) clone.getDocumentHtmlElement();
+        final HtmlElement doc = page.getDocumentHtmlElement();
+        final HtmlElement docclone = clone.getDocumentHtmlElement();
         assertTrue(doc != docclone);
     }
 

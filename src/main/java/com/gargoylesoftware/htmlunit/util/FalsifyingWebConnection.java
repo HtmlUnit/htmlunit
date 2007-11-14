@@ -90,7 +90,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         {
             public URL getUrl() {
                 return originalUrl;
-            };
+            }
         };
     }
 

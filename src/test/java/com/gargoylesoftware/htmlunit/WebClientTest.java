@@ -116,6 +116,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test that {@link WebClient#assertionFailed(String)} actually throws an exception.
+     * @deprecated
      */
     public void testAssertionFailed() {
         final WebClient client = new WebClient();

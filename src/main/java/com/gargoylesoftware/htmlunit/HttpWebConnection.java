@@ -279,12 +279,12 @@ public class HttpWebConnection extends WebConnectionImpl {
                                 if (filename != null) {
                                     out.write(EncodingUtil.getAsciiBytes(FILE_NAME));
                                     out.write(QUOTE_BYTES);
-                                    out.write(EncodingUtil.getBytes(getFileName(pairWithFile), charset));
+                                    out.write(EncodingUtil.getBytes(getFileName(), charset));
                                     out.write(QUOTE_BYTES);
                                 }
                             }
 
-                            private String getFileName(final KeyDataPair pairWithFile) {
+                            private String getFileName() {
                                 if (pairWithFile.getFile() == null) {
                                     return "";
                                 }

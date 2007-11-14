@@ -240,7 +240,7 @@ public class SimpleScriptable extends ScriptableObject {
         }
         else {
             scriptable.setParentScope(ScriptableObject.getTopLevelScope(
-                    (Scriptable) domNode.getPage().getScriptObject()));
+                    domNode.getPage().getScriptObject()));
         }
         
         scriptable.setPrototype(getPrototype(javaScriptClass));

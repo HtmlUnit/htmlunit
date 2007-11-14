@@ -388,7 +388,7 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
     private Scriptable getScope(final HtmlPage htmlPage, final DomNode htmlElement) {
         final Scriptable scope;
         if (htmlElement != null) {
-            scope = (Scriptable) htmlElement.getScriptObject();
+            scope = htmlElement.getScriptObject();
         }
         else {
             scope = (Window) htmlPage.getEnclosingWindow().getScriptObject();
