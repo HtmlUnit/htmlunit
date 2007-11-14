@@ -43,8 +43,10 @@
                 HtmlTextArea.asXml() now preserves content and expands empty tag to make generated xml interpretable as html by browsers.
             </action>
             <action type="add" dev="sdanig">
-                Add WebAssert utility class for domain-specific assertions; deprecate assertion methods
-                in HtmlPage and move them to this new utility class.
+                Add WebAssert utility class for domain-specific assertions. 
+                INCOMPATIBLE CHANGE: Deprecate assertion methods in HtmlPage in favor of using
+                WebAssert. The exceptions thrown are now java.lang classes instead of junit classes,
+                though they still function as before.
             </action>
             <action type="update" dev="asashour">
                 HtmlForm: on submitting a form without parameters, URL should not end with a question mark (IE7 only).
