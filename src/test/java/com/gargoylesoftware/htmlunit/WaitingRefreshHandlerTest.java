@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for {@link WaitingRefreshHandlerTest}.
  *
- * @version $Revision: 1 $
+ * @version $Revision$
  * @author Brad Clarke
  */
 public final class WaitingRefreshHandlerTest extends WebTestCase {
