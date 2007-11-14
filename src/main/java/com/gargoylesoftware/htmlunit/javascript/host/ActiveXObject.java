@@ -152,8 +152,12 @@ public class ActiveXObject extends SimpleScriptable {
      * @param name the ActiveX name
      * @return <code>true</code> if this is an XMLDocument
      */
-    static boolean isXMLDocument(final String name) {
-        return name != null && ("Microsoft.XMLDOM".equalsIgnoreCase(name) || name.matches("MSXML\\d*\\.DOMDocument"));
+    static boolean isXMLDocument(String name) {
+        if (name == null) {
+            return false;
+        }
+        name = name.toLowerCase();
+        return name != null && ("Microsoft.XMLDOM".equalsIgnoreCase(name) || name.matches("msxml\\d*\\.domdocument.*"));
     }
 
     private static Scriptable buildXMLHTTPActiveX() {

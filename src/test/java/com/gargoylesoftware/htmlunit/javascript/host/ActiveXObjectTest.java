@@ -74,6 +74,7 @@ public class ActiveXObjectTest extends WebTestCase {
         assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.6.0"));
         assertTrue(ActiveXObject.isXMLDocument("Microsoft.XmlDom"));
         assertTrue(ActiveXObject.isXMLDocument("MSXML4.DOMDocument"));
+        assertTrue(ActiveXObject.isXMLDocument("Msxml2.DOMDocument.6.0"));
     }
 
     /**
