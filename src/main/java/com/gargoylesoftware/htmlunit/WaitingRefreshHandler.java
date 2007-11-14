@@ -40,6 +40,9 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.net.URL;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * This refresh handler waits the specified number of seconds (or a user defined maximum)
  * before refreshing the specified page, using the specified URL. Waiting happens
@@ -53,6 +56,10 @@ import java.net.URL;
  * @author Daniel Gredler
  */
 public class WaitingRefreshHandler implements RefreshHandler {
+
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(ThreadManager.class);
+
     private final int maxwait_;
     /**
      * Create a WaitingRefreshHandler that will wait whatever time the server or
@@ -92,7 +99,13 @@ public class WaitingRefreshHandler implements RefreshHandler {
             Thread.sleep(seconds * 1000);
         }
         catch (final InterruptedException e) {
-            throw new RuntimeException("Unknown threading error during refresh", e);
+            /* This can happen when the refresh is happening from a navigation that started
+             * from a setTimeout or setInterval. The navigation will cause all threads to get
+             * interrupted, including the current thread in this case. It should be safe to
+             * ignore it since this is the thread now doing the navigation. Eventually we should
+             * refactor to force all navigation to happen back on the main thread.
+             */
+            LOG.debug("Waiting thread was interrupted. Ignoring interruption to continue navigation.");
         }
         final WebWindow window = page.getEnclosingWindow();
         if (window == null) {
