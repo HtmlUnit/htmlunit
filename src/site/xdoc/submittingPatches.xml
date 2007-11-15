@@ -16,8 +16,8 @@
                 or additional test cases are just as valuable as code patches.
             </p>
             <p>
-                In order to be successfully merged, patches must be generated from the most recent code in cvs.
-                Refer to <a href="buildingFromCvs.html">"Building from CVS"</a> for information on retrieving
+                In order to be successfully merged, patches must be generated from the most recent code in svn.
+                Refer to <a href="gettingLatestCode.html">"Getting Latest Code"</a> for information on retrieving
                 and building the latest code.
             </p>
         </section>
