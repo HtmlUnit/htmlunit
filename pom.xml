@@ -285,6 +285,13 @@ The reference stays the maven 1 build.
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<templateFile>${basedir}/src/site/maven-site.vm</templateFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>

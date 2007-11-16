@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <project name="HtmlUnit">
+    <publishDate format="dd MMMMMMMMM yyyy" />
+    <bannerLeft>
+        <name>Gargoyle Software Inc.</name>
+        <src>/images/GargoyleSoftwareLogo.jpg</src>
+        <href>http://www.GargoyleSoftware.com/</href>
+    </bannerLeft>
+    <bannerRight>
+        <name>${project.name}</name>
+        <href>http://htmlunit.sourceforge.net/</href>
+    </bannerRight>
+
     <body>
         <menu name="SourceForge.net">
-            <item
-                name="SourceForge project page"
-                href="http://www.sourceforge.net/projects/htmlunit"/>
-            <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=47038"/>
+            <item name="SourceForge project page"
+                href="http://www.sourceforge.net/projects/htmlunit" />
+            <item name="Download"
+                href="http://sourceforge.net/project/showfiles.php?group_id=47038" />
         </menu>
         <menu name="How do I...">
-            <item name="Get started" href="/gettingStarted.html"/>
-            <item name="Use the Keyboard" href="/keyboard-howto.html"/>
-            <item name="Use Tables" href="/table-howto.html"/>
-            <item name="Use Windows" href="/window-howto.html"/>
-            <item name="Use JavaScript" href="/javascript-howto.html"/>
-            <item name="Configure JSSE" href="/jsse.html"/>
+            <item name="Get started" href="/gettingStarted.html" />
+            <item name="Use the Keyboard" href="/keyboard-howto.html" />
+            <item name="Use Tables" href="/table-howto.html" />
+            <item name="Use Windows" href="/window-howto.html" />
+            <item name="Use JavaScript" href="/javascript-howto.html" />
+            <item name="Configure JSSE" href="/jsse.html" />
         </menu>
         <menu name="User docs">
-            <item name="Logging" href="/logging.html"/>
-            <item name="FAQ" href="/faq.html"/>
+            <item name="Logging" href="/logging.html" />
+            <item name="FAQ" href="/faq.html" />
         </menu>
         <menu name="Developer docs">
-            <item name="Getting Latest Code" href="/gettingLatestCode.html"/>
-            <item name="Coding conventions" href="/codingConventions.html"/>
-            <item name="Submitting bugs" href="/submittingBugs.html"/>
-            <item name="Submitting patches" href="/submittingPatches.html"/>
-            <item name="JavaScript engine" href="/javascript.html"/>
-            <item name="JavaScript configuration" href="/javascriptConfiguration.html"/>
-            <item name="Packaging a release" href="/packagingARelease.html"/>
-            <item name="TODO" href="/todo.html"/>
+            <item name="Getting Latest Code" href="/gettingLatestCode.html" />
+            <item name="Coding conventions" href="/codingConventions.html" />
+            <item name="Submitting bugs" href="/submittingBugs.html" />
+            <item name="Submitting patches" href="/submittingPatches.html" />
+            <item name="JavaScript engine" href="/javascript.html" />
+            <item name="JavaScript configuration" href="/javascriptConfiguration.html" />
+            <item name="Packaging a release" href="/packagingARelease.html" />
+            <item name="TODO" href="/todo.html" />
         </menu>
-		<menu ref="reports"/>
-		<menu ref="parent"/>
-		<menu ref="modules"/>
+        <menu ref="reports" />
+        <menu ref="parent" />
+        <menu ref="modules" />
 
     </body>
 </project>
