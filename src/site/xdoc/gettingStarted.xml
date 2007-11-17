@@ -32,7 +32,7 @@
 public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient();
     final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
-    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
+    assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
 }]]></source>
         </section>
 
@@ -47,7 +47,7 @@ public void testHomePage() throws Exception {
 public void testHomePage() throws Exception {
     final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
     final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
-    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
+    assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
 }]]></source>
             <p>
                 Specifying this BrowserVersion will change the user agent header that is sent up to the
@@ -62,14 +62,13 @@ public void testHomePage() throws Exception {
             </p>
             <source><![CDATA[
 public void testHomePage() throws Exception {
-    final WebClient webClient = new WebClient(
-        BrowserVersion.MOZILLA_1_0, "http://myproxyserver", 8000);
+    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2, "http://myproxyserver", 8000);
     final HtmlPage page = (HtmlPage) webClient.getPage("http://htmlunit.sourceforge.net");
-    assertEquals( "htmlunit - Welcome to HtmlUnit", page.getTitleText() );
+    assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
 }]]></source>
             <p>
                 Specifying this BrowserVersion will change the user agent header that is sent up to the
-                server and will change the behaviour of some of the JavaScript.
+                server and will change the behavior of some of the JavaScript.
             </p>
         </section>
 
