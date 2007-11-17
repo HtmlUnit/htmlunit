@@ -3,7 +3,7 @@
 
     <properties>
         <title>Submitting Patches</title>
-        <revision>$Revision: 1762 $</revision>
+        <revision>$Revision$</revision>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
     </properties>

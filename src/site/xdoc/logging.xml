@@ -4,7 +4,7 @@
     <properties>
         <title>Logging</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-        <revision>$Revision: 936 $</revision>
+        <revision>$Revision$</revision>
     </properties>
 
     <body>

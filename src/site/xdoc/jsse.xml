@@ -5,7 +5,7 @@
         <title>Configuring JSSE</title>
         <author>Tom Hamilton</author>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
-        <revision>$Revision: 1556 $</revision>
+        <revision>$Revision$</revision>
     </properties>
 
     <body>

@@ -3,7 +3,7 @@
 
     <properties>
         <title>Welcome to HtmlUnit</title>
-        <revision>$Revision: 1757 $</revision>
+        <revision>$Revision$</revision>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
     </properties>

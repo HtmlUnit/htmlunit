@@ -5,7 +5,7 @@
         <title>Packaging a release</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
-        <revision>$Revision: 1701 $</revision>
+        <revision>$Revision$</revision>
     </properties>
 
     <body>
