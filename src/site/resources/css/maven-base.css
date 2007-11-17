@@ -98,7 +98,7 @@ div.clear hr{
   margin-top: 10px;
   margin-bottom: 3px;
 }
-#poweredBy img {
+.poweredBy img {
   display:block;
   margin: 20px 0 20px 17px;
   border: 1px solid black;

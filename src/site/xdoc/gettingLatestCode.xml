@@ -2,12 +2,12 @@
 <document>
 
     <properties>
-        <revision>$Revision: 1690 $</revision>
         <title>Getting latest HtmlUnit build</title>
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="BarnabyCourt@users.sourceforge.net">BarnabyCourt</author>
         <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+        <revision>$Revision: 1690 $</revision>
     </properties>
 
     <body>
