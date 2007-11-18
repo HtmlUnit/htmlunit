@@ -24,7 +24,7 @@
                 We use <a href="http://checkstyle.sourceforge.net">checkstyle</a> to check as many coding
                 conventions as possible.  Things covered by checkstyle are only documented below if we feel
                 that they require explanation.  You can run checkstyle with the following target.
-                <source>maven htmlunit:checkstyle</source>
+                <source>mvn checkstyle:checkstyle</source>
             </p>
         </section>
 
@@ -33,7 +33,7 @@
                 All code must have 100% automated test coverage using the <a href="http://www.junit.org">JUnit</a>
                 testing framework.  I strongly suggest that you write the code test-first but I'll be happy
                 as long as there are full tests for everything.  Run the tests with the following target.
-                <source>maven htmlunit:test</source>
+                <source>mvn test</source>
             </p>
             <p>
                 There are a couple of tests that hit live web servers as a final sanity check but the vast

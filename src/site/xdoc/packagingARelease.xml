@@ -40,7 +40,7 @@ maven.scp.executable=C:/programs/ssh/pscp.exe
 maven.ssh.executable=C:/programs/ssh/plink.exe
 </source>
 						Also, since I am using putty I needed to manually connect to
-						the server once to authorize the host. You may need to do something
+						the server once to trust the host. You may need to do something
 						similar for your ssh client.
 						<source>c:\programs\ssh\plink.exe -l yourgod projects.sourceforge.net</source>
            			</li>
@@ -53,13 +53,10 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         Update the version number in project.xml
                     </li>
                     <li>
-                        Update the version number and release date in src/xdocs/changes.xml
+                        Update the version number and release date in src/site/xdoc/index.xml
                     </li>
                     <li>
-                        Update the version number and release date in src/xdocs/index.xml
-                    </li>
-                    <li>
-                        Update the version number and release date in src/xdocs/changes.xml
+                        Update the version number and release date in src/changes/changes.xml
                     </li>
                     <li>
                         Build the zip

@@ -40,13 +40,13 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
             <p>
                 Although it is still possible to compile the code with 
                 <a href="http://ant.apache.org">Ant</a> 1.5 or higher, the preferred way
-                to build HtmlUnit is with <a href="http://maven.apache.org">maven 1</a>.
+                to build HtmlUnit is with <a href="http://maven.apache.org">maven 2</a>.
             </p>
-            <source>maven java:compile</source>
+            <source>mvn compile</source>
             <p>
                 This will do an incremental compile of all the code.
             </p>
-            <source>maven clean java:compile</source>
+            <source>mvn clean compile</source>
             <p>
                 This will do a clean compile of all the code.
             </p>
@@ -60,21 +60,27 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .
                 to provide a quick run of the tests that dumps easy status information to the command
                 line.
             </p>
-            <source>maven htmlunit:test</source>
+            <source>mvn test</source>
             <p>
-                Calling htmlunit:test will force a recompile of the java classes if needed.
+                This will force a recompile of the java classes if needed.
             </p>
         </section>
-<!--
-        <section name="Packaging the code">
-            <source>ant build</source>
+
+        <section name="Packaging">
+            <source>mvn package</source>
             <p>
-                The build target will create a directory at the same level as src, lib and docs with the
-                name "HtmlUnit-" followed by the version number.  There will also be a zip file of the
-                same name that contains the contents of the directory.  Finally, there will be a zip
-                called projectdocs.zip that contains all the generated documentation.
+                In the project's target directory you'll able to see the generated jar file with the
+                name "htmlunit-" followed by the version number.
+            </p>
+            <source>mvn source:jar</source>
+            <p>
+                This generates a source jar file.
+            </p>
+            <source>mvn source:test-jar</source>
+            <p>
+                This will generate a jar file of the test sources.
             </p>
         </section>
--->        
+
     </body>
 </document>
