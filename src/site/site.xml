@@ -23,7 +23,6 @@
             <item name="Use Tables" href="/table-howto.html"/>
             <item name="Use Windows" href="/window-howto.html"/>
             <item name="Use JavaScript" href="/javascript-howto.html"/>
-            <item name="Configure JSSE" href="/jsse.html"/>
         </menu>
         <menu name="User docs">
             <item name="Logging" href="/logging.html"/>
