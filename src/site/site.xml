@@ -35,7 +35,6 @@
             <item name="Submitting bugs" href="/submittingBugs.html"/>
             <item name="Submitting patches" href="/submittingPatches.html"/>
             <item name="JavaScript engine" href="/javascript.html"/>
-            <item name="JavaScript configuration" href="/javascriptConfiguration.html"/>
             <item name="Packaging a release" href="/packagingARelease.html"/>
             <item name="TODO" href="/todo.html"/>
         </menu>
