@@ -358,6 +358,17 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>net.sourceforge.cssparser</groupId>
+            <artifactId>cssparser</artifactId>
+            <version>0.9.4</version>
+            <type>jar</type>
+            <url>http://cssparser.sourceforge.net/</url>
+            <properties>
+                <htmlunit.group>required</htmlunit.group>
+                <htmlunit.description>Parses CSS</htmlunit.description>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.1</version>
