@@ -687,7 +687,9 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @return collection of {@link DomNode}: the parsed nodes
      */
     private void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
+
         DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, target.getPage(), null) {
+            private static final long serialVersionUID = 2108037256628269797L;
             public DomNode appendDomChild(final DomNode node) {
                 if (append) {
                     return target.appendDomChild(node);
@@ -698,6 +700,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
                 }
             }
         };
+
         try {
             HTMLParser.parseFragment(proxyNode, source);
         }
@@ -1503,10 +1506,12 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Get the offsetHeight for this element.
-     * @return a dummy value compatible with mouse events coordinates
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetwidth.asp">
-     * MSDN documentation</a>
+     * Returns this element's <tt>offsetHeight</tt>, which is the element height plus the element's padding
+     * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
+     * during mouse events.
+     * @return this element's <tt>offsetHeight</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534199.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
     public int jsxGet_offsetHeight() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
@@ -1520,10 +1525,12 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Get the offsetWidth for this element.
-     * @return a dummy value compatible with mouse events coordinates
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetWidth.asp">
-     * MSDN documentation</a>
+     * Returns this element's <tt>offsetWidth</tt>, which is the element width plus the element's padding
+     * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
+     * during mouse events.
+     * @return this element's <tt>offsetWidth</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534304.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
     public int jsxGet_offsetWidth() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
@@ -1581,31 +1588,35 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     }
 
     /**
-     * Get the offsetLeft for this element.
-     * @return a dummy value
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetLeft.asp">
-     * MSDN documentation</a>
+     * Returns this element's <tt>offsetLeft</tt>, which is the calculated left position of this
+     * element relative to the <tt>offsetParent</tt>.
+     * @return this element's <tt>offsetLeft</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
     public int jsxGet_offsetLeft() {
         return 1;
     }
 
     /**
-     * Get the offsetTop for this element.
-     * @return a dummy value
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetTop.asp">
-     * MSDN documentation</a>
+     * Returns this element's <tt>offsetTop</tt>, which is the calculated top position of this
+     * element relative to the <tt>offsetParent</tt>.
+     * @return this element's <tt>offsetTop</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534303.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
     public int jsxGet_offsetTop() {
         return 1;
     }
 
     /**
-     * Get the offsetParent for this element
-     * @return the offsetParent for this element
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/offsetparent.asp">
-     * MSDN documentation</a>
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM reference</a>
+     * Returns this element's <tt>offsetParent</tt>. The <tt>offsetLeft</tt> and <tt>offsetTop</tt>
+     * attributes are relative to the <tt>offsetParent</tt>.
+     * @return this element's <tt>offsetParent</tt>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     * @see <a href="http://www.w3.org/TR/REC-CSS2/box.html">Box Model</a>
      */
     public Object jsxGet_offsetParent() {
         DomNode currentElement = getHtmlElementOrDie();
@@ -1623,7 +1634,6 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
             }
             currentElement = currentElement.getParentDomNode();
         }
-
         return offsetParent;
     }
 
