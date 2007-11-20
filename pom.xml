@@ -60,6 +60,16 @@ The reference stays the maven 1 build.
 					<templateFile>${basedir}/src/site/maven-site.vm</templateFile>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>${basedir}/src/assembly/bin-distribution.xml</descriptor>
+						<descriptor>${basedir}/src/assembly/src-distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>

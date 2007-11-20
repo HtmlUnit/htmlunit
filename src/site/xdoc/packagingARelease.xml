@@ -50,7 +50,7 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                 Now do this for each release:
                 <ol>
                     <li>
-                        Update the version number in project.xml
+                        Update the version number in pom.xml
                     </li>
                     <li>
                         Update the version number and release date in src/site/xdoc/index.xml
@@ -60,7 +60,7 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                     </li>
                     <li>
                         Build the zip
-                        <source>maven clean htmlunit:build-bin-dist htmlunit:build-src-dist</source>
+                        <source>maven clean assembly:assembly</source>
                     </li>
                     <li>
                         Upload the two zip files to SourceForge following 

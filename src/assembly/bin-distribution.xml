@@ -1,0 +1,32 @@
+<assembly xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/assembly-1.0.0.xsd">
+	<id></id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<files>
+		<file>
+			<source>LICENSE.txt</source>
+		</file>
+		<file>
+			<source>LICENSE.txt</source>
+		</file>
+		<file>
+			<source>${basedir}/target/${project.artifactId}-${project.version}.${project.packaging}</source>
+			<outputDirectory>/lib</outputDirectory>
+		</file>
+	</files>
+	<fileSets>
+		<fileSet>
+			<directory>${basedir}/target/site</directory>
+			<outputDirectory>/docs</outputDirectory>
+		</fileSet>
+	</fileSets>
+	<dependencySets>
+		<dependencySet>
+			<includes></includes>
+			<outputDirectory>/lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+</assembly>
