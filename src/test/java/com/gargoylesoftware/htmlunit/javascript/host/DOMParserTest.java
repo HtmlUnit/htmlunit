@@ -95,4 +95,32 @@ public class DOMParserTest extends WebTestCase {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testParseFromString_EmptyString() throws Exception {
+        testParseFromString_EmptyString(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testParseFromString_EmptyString(BrowserVersion.FIREFOX_2);
+    }
+    
+    private void testParseFromString_EmptyString(final BrowserVersion browserVersion)
+        throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='';\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async='false';\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPage(browserVersion, content, null);
+    }
+
 }

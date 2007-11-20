@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.mozilla.javascript.ScriptableObject;
@@ -83,7 +84,12 @@ public class XmlPage extends SgmlPage {
         super(webResponse, enclosingWindow);
 
         try {
-            document_ = XmlUtil.buildDocument(webResponse);
+            if (webResponse.getContentAsString().trim().length() == 0) {
+                document_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+            }
+            else {
+                document_ = XmlUtil.buildDocument(webResponse);
+            }
         }
         catch (final SAXException e) {
             getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
@@ -98,9 +104,11 @@ public class XmlPage extends SgmlPage {
      */
     public void setScriptObject(final ScriptableObject scriptObject) {
         super.setScriptObject(scriptObject);
-        final XmlElement childXml = createFrom(document_.getDocumentElement());
-        appendDomChild(childXml);
-        copy(document_.getDocumentElement(), childXml);
+        if (document_.getDocumentElement() != null) {
+            final XmlElement childXml = createFrom(document_.getDocumentElement());
+            appendDomChild(childXml);
+            copy(document_.getDocumentElement(), childXml);
+        }
     }
 
     /**
