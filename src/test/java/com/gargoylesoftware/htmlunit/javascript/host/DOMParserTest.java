@@ -117,6 +117,7 @@ public class DOMParserTest extends WebTestCase {
             + "      var parser=new DOMParser();\n"
             + "      var doc=parser.parseFromString(text,'text/xml');\n"
             + "    }\n"
+            + "    var x = doc.getElementsByTagName('test').length;\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

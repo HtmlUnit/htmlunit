@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -126,14 +127,16 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * evaluation
      */
     public void init(final DomNode node, final XPath xpath, final Transformer transformer) {
-        node_ = node;
-        xpath_ = xpath;
-        transformer_ = transformer;
-        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-        node_.addDomChangeListener(listener);
-        if (node_ instanceof HtmlElement) {
-            ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
-            cachedElements_ = null;
+        if (node != null) {
+            node_ = node;
+            xpath_ = xpath;
+            transformer_ = transformer;
+            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+            node_.addDomChangeListener(listener);
+            if (node_ instanceof HtmlElement) {
+                ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
+                cachedElements_ = null;
+            }
         }
     }
 
@@ -206,7 +209,12 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     private List getElements() {
         if (cachedElements_ == null) {
             try {
-                cachedElements_ = xpath_.selectNodes(node_);
+                if (node_ != null) {
+                    cachedElements_ = xpath_.selectNodes(node_);
+                }
+                else {
+                    cachedElements_ = new ArrayList();
+                }
                 boolean isXmlPage = false;
 
                 //TODO: should be replaced by "getPage() instanceof XmlPage"
