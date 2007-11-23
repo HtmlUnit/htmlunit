@@ -1038,8 +1038,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Prints the current page.
-     * Current implementation does nothing.
+     * Prints the current page. The current implementation does nothing.
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref85.html">
      * Mozilla documentation</a>
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/print.asp">
@@ -1050,7 +1049,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Does nothing special anymore... just like FF
+     * Does nothing special anymore... just like FF.
      * @param type the type of events
      */
     public void jsxFunction_captureEvents(final String type) {
@@ -1059,15 +1058,28 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns computed style of the element. Computed style represents the final computed values
-     * of all CSS properties for the element.
-     *
-     * The current implementation returns the element 'style' property.
+     * of all CSS properties for the element. This method's return value is of the same type as
+     * that of <tt>element.style</tt>, but the value returned by this method is read-only.
      *
      * @param element the element
      * @param pseudoElt is a string specifying the pseudo-element to match, can be null.
      * @return the computed style.
      */
     public Object jsxFunction_getComputedStyle(final NodeImpl element, final String pseudoElt) {
-        return ((HTMLElement) element).jsxGet_style();
+
+        final HTMLElement e = (HTMLElement) element;
+        final Style original = (Style) e.jsxGet_style();
+        final Style style = original.createClone();
+        style.setWriteMode(Style.WRITE_MODE_DO_NOT_UPDATE_ELEMENT);
+
+        final StyleSheetList sheets = (StyleSheetList) document_.jsxGet_styleSheets();
+        for (int i = 0; i < sheets.jsxGet_length(); i++) {
+            final Stylesheet sheet = sheets.jsxFunction_item(i);
+            sheet.modifyIfNecessary(style, e);
+        }
+
+        style.setWriteMode(Style.WRITE_MODE_NOT_WRITEABLE);
+        return style;
     }
+
 }

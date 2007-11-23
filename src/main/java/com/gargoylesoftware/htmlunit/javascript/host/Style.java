@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -65,16 +66,45 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class Style extends SimpleScriptable {
+public class Style extends SimpleScriptable implements Cloneable {
+
+    /**
+     * Write mode which indicates that all changes to this object write through to the element to
+     * which it belongs.
+     */
+    public static final short WRITE_MODE_UPDATE_ELEMENT = 0;
+
+    /**
+     * Write mode which indicates that changes to this object are allowed, but should not write
+     * through to the element to which it belongs.
+     */
+    public static final short WRITE_MODE_DO_NOT_UPDATE_ELEMENT = 1;
+
+    /** Write mode which indicates that changes to this object are not allowed. */
+    public static final short WRITE_MODE_NOT_WRITEABLE = 2;
 
     private static final long serialVersionUID = -1976370264911039311L;
 
+    /** Used to parse URLs. */
     private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
 
+    /** The element to which this style belongs. */
     private HTMLElement jsElement_;
 
     /**
-     * These are IE properties, this should be configured per browser
+     * The write mode for this style object. The default write mode is
+     * {@link WRITE_MODE_UPDATE_ELEMENT}.
+     */
+    private short writeMode_ = WRITE_MODE_UPDATE_ELEMENT;
+
+    /**
+     * Local modifications maintained here rather than in the element when we are in
+     * {@link WRITE_MODE_DO_NOT_UPDATE_ELEMENT} write mode.
+     */
+    private Map localModifications_ = new HashMap();
+
+    /**
+     * These are IE properties, this should be configured per browser.
      */
     private static final String[] STYLE_PROPERTIES = {"backgroundColor",
         "backgroundImage", "bottom", "clear", "clip", "color", "direction",
@@ -94,7 +124,7 @@ public class Style extends SimpleScriptable {
         "width", "wordSpacing", "wordWrap", "zoom" };
 
     private static final Set STYLE_ALLOWED_PROPERTIES;
-    
+
     static {
         final Set set = new HashSet();
         CollectionUtils.addAll(set, STYLE_PROPERTIES);
@@ -155,6 +185,29 @@ public class Style extends SimpleScriptable {
     }
 
     /**
+     * Creates a clone of this style.
+     * @return a clone of this style
+     */
+    Style createClone() {
+        try {
+            return (Style) this.clone();
+        }
+        catch (final CloneNotSupportedException e) {
+            // Should never happen.
+            getLog().error(e.getMessage(), e);
+            return null;
+        }
+    }
+
+    /**
+     * Sets the style's write mode.
+     * @param writeMode the style's write mode
+     */
+    void setWriteMode(final short writeMode) {
+        writeMode_ = writeMode;
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected Object getWithPreemption(final String name) {
@@ -187,8 +240,7 @@ public class Style extends SimpleScriptable {
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value
      */
-    public void put(final String name, final Scriptable start,
-            final Object newValue) {
+    public void put(final String name, final Scriptable start, final Object newValue) {
         // Some calls to put will happen during the initialization of the
         // superclass. At this point, we don't have enough information to
         // do our own initialization so we have to just pass this call
@@ -197,7 +249,6 @@ public class Style extends SimpleScriptable {
             super.put(name, start, newValue);
             return;
         }
-
         final String styleValue = (String) Context.jsToJava(newValue, String.class);
         setStyleAttribute(name, styleValue);
     }
@@ -208,22 +259,30 @@ public class Style extends SimpleScriptable {
      * @param newValue the attribute value
      */
     protected void setStyleAttribute(final String name, final String newValue) {
-        final Map styleMap = getStyleMap(true);
-        styleMap.put(name, newValue);
+        if (writeMode_ == WRITE_MODE_UPDATE_ELEMENT) {
 
-        final StringBuffer buffer = new StringBuffer();
+            final Map styleMap = getStyleMap(true);
+            styleMap.put(name, newValue);
 
-        final Iterator iterator = styleMap.entrySet().iterator();
-        while (iterator.hasNext()) {
-            final Map.Entry entry = (Map.Entry) iterator.next();
-            buffer.append(" ");
-            buffer.append(entry.getKey());
-            buffer.append(": ");
-            buffer.append(entry.getValue());
-            buffer.append(";");
+            final StringBuffer buffer = new StringBuffer();
+            final Iterator iterator = styleMap.entrySet().iterator();
+            while (iterator.hasNext()) {
+                final Map.Entry entry = (Map.Entry) iterator.next();
+                buffer.append(" ");
+                buffer.append(entry.getKey());
+                buffer.append(": ");
+                buffer.append(entry.getValue());
+                buffer.append(";");
+            }
+            buffer.deleteCharAt(0);
+
+            jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
         }
-        buffer.deleteCharAt(0);
-        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+        else if (writeMode_ == WRITE_MODE_DO_NOT_UPDATE_ELEMENT) {
+
+            localModifications_.put(name, newValue);
+
+        }
     }
 
     /**
@@ -249,6 +308,15 @@ public class Style extends SimpleScriptable {
                 final String value = token.substring(index + 1).trim();
                 styleMap.put(key, value);
             }
+        }
+        for (final Iterator i = localModifications_.entrySet().iterator(); i.hasNext();) {
+            final Map.Entry entry = (Map.Entry) i.next();
+            String key = (String) entry.getKey();
+            if (!camelCase) {
+                key = key.replaceAll("([A-Z])", "-$1").toLowerCase();
+            }
+            final String value = (String) entry.getValue();
+            styleMap.put(key, value);
         }
         return styleMap;
     }
@@ -308,7 +376,7 @@ public class Style extends SimpleScriptable {
      * @param language specified the language used.
      */
     public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
-        //empty implementation
+        // empty implementation
     }
     
     /**

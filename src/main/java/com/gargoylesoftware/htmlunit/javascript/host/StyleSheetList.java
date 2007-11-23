@@ -37,15 +37,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.StringReader;
+import java.util.WeakHashMap;
 
+import org.jaxen.JaxenException;
+import org.w3c.css.sac.InputSource;
+
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * An ordered list of stylesheets, accessible via <tt>document.styleSheets</tt>, as specified by the
- * <a href="http://www.w3.org/TR/DOM-Level-2-Style/stylesheets.html#StyleSheets-StyleSheetList">DOM Level 2 Style
- * spec</a> and the <a href="http://developer.mozilla.org/en/docs/DOM:document.styleSheets">Gecko DOM Guide</a>.
+ * <a href="http://www.w3.org/TR/DOM-Level-2-Style/stylesheets.html#StyleSheets-StyleSheetList">DOM
+ * Level 2 Style spec</a> and the <a href="http://developer.mozilla.org/en/docs/DOM:document.styleSheets">Gecko
+ * DOM Guide</a>.
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -55,9 +64,16 @@ public class StyleSheetList extends SimpleScriptable {
     private static final long serialVersionUID = -8607630805490604483L;
 
     /**
-     * A list of the {@link Stylesheet}s in the owning document.
+     * We back the stylesheet list with an {@link HTMLCollection} of styles/links because this list
+     * must be "live".
      */
-    private List styleSheets_;
+    private HTMLCollection nodes_;
+
+    /**
+     * Cache the stylesheets parsed for each style/link node, but don't keep the garbage collector
+     * from releasing the associated nodes if they are removed from the document.
+     */
+    private WeakHashMap sheets_ = new WeakHashMap();
 
     /**
      * Rhino requires default constructors.
@@ -72,9 +88,15 @@ public class StyleSheetList extends SimpleScriptable {
      * @param document the owning document
      */
     public StyleSheetList(final Document document) {
-        styleSheets_ = new ArrayList(); // TODO
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
+        try {
+            nodes_ = new HTMLCollection(document);
+            nodes_.init(document.getHtmlPage(), new HtmlUnitXPath("//style | //link[lower-case(@rel)='stylesheet']"));
+        }
+        catch (final JaxenException e) {
+            getLog().error(e.getMessage(), e);
+        }
     }
 
     /**
@@ -83,7 +105,7 @@ public class StyleSheetList extends SimpleScriptable {
      * @return the list's length
      */
     public int jsxGet_length() {
-        return styleSheets_.size();
+        return nodes_.jsxGet_length();
     }
 
     /**
@@ -93,7 +115,22 @@ public class StyleSheetList extends SimpleScriptable {
      * @return the style sheet at the specified index
      */
     public Stylesheet jsxFunction_item(final int index) {
-        return (Stylesheet) styleSheets_.get(index);
+        HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
+        final DomNode node = (DomNode) element.getDomNodeOrDie();
+        Stylesheet sheet = (Stylesheet) sheets_.get(node);
+        if (sheet == null) {
+            if (node instanceof HtmlStyle) {
+                final HtmlStyle style = (HtmlStyle) node;
+                final String s = style.getFirstDomChild().asText();
+                sheet = new Stylesheet(new InputSource(new StringReader(s)));
+            }
+            else {
+                final HtmlLink link = (HtmlLink) node;
+                sheet = new Stylesheet(new InputSource(link.getHrefAttribute()));
+            }
+            sheets_.put(node, sheet);
+        }
+        return sheet;
     }
 
 }

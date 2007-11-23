@@ -2297,6 +2297,25 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    public void testGetComputedStyle_WithComputedColor() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <style>div.x { color: red; }</style>\n"
+            + "  </head>\n"
+            + "  <body onload='alert(window.getComputedStyle(document.getElementById(\"d\"), \"\").color)'>\n"
+            + "    <div id='d' class='x'>foo bar</div>\n"
+            + "  </body>\n"
+            + "</html>\n";
+        final String[] expectedAlerts = {"red"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Verifies that the onload handler is executed with "this" referring to the window.
      *
      * @throws Exception If an error occurs.

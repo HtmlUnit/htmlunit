@@ -37,17 +37,295 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.StringReader;
+import java.util.List;
+
+import org.jaxen.JaxenException;
+import org.w3c.css.sac.AttributeCondition;
+import org.w3c.css.sac.CombinatorCondition;
+import org.w3c.css.sac.Condition;
+import org.w3c.css.sac.ConditionalSelector;
+import org.w3c.css.sac.DescendantSelector;
+import org.w3c.css.sac.ElementSelector;
+import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SelectorList;
+import org.w3c.dom.css.CSSRule;
+import org.w3c.dom.css.CSSRuleList;
+import org.w3c.dom.css.CSSStyleDeclaration;
+import org.w3c.dom.css.CSSStyleRule;
+import org.w3c.dom.css.CSSStyleSheet;
+
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.steadystate.css.dom.CSSStyleSheetImpl;
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SelectorListImpl;
 
 /**
- * A JavaScript object for a Stylesheet (currently minimal implementation).
+ * A JavaScript object for a stylesheet.
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535871.aspx">MSDN doc</a>
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Daniel Gredler
  */
 public class Stylesheet extends SimpleScriptable {
 
     private static final long serialVersionUID = -8341675386925348206L;
+
+    /** The parser used to parse CSS; its parent stylesheet and parent rule should not be set. */
+    private static final CSSOMParser PARSER = new CSSOMParser();
+
+    /**
+     * The input source which contains the CSS stylesheet which this stylesheet host object
+     * represents.
+     */
+    private InputSource source_;
+
+    /** The parsed stylesheet which this host object wraps (initialized lazily). */
+    private CSSStyleSheet wrapped_;
+
+    /**
+     * Creates a new empty stylesheet.
+     */
+    public Stylesheet() {
+        this(null);
+    }
+
+    /**
+     * Creates a new stylesheet representing the CSS stylesheet at the specified input source.
+     *
+     * @param source the input source which contains the CSS stylesheet which this stylesheet host
+     *        object represents
+     */
+    public Stylesheet(final InputSource source) {
+        source_ = source;
+    }
+
+    /**
+     * Returns the wrapped stylesheet, initializing it first if necessary.
+     *
+     * @return the wrapped stylesheet
+     */
+    private CSSStyleSheet getWrappedSheet() {
+        if (wrapped_ == null) {
+            if (source_ != null) {
+                wrapped_ = parseCSS(source_);
+            }
+            else {
+                wrapped_ = new CSSStyleSheetImpl();
+            }
+        }
+        return wrapped_;
+    }
+
+    /**
+     * Modifies the specified style object by adding any style rules which apply to the specified
+     * element.
+     *
+     * @param style the style to modify
+     * @param element the element to which style rules must apply in order for them to be added to
+     *        the specified style
+     */
+    void modifyIfNecessary(final Style style, final HTMLElement element) {
+        final HtmlElement e = element.getHtmlElementOrDie();
+        final HtmlPage page = e.getPage();
+        final CSSRuleList rules = getWrappedSheet().getCssRules();
+        if (rules == null) {
+            return;
+        }
+        for (int i = 0; i < rules.getLength(); i++) {
+            final CSSRule rule = rules.item(i);
+            if (rule.getType() == CSSRule.STYLE_RULE) {
+                final CSSStyleRule styleRule = (CSSStyleRule) rule;
+                final String s = styleRule.getSelectorText();
+                final SelectorList selectors = parseSelectors(new InputSource(new StringReader(s)));
+                for (int j = 0; j < selectors.getLength(); j++) {
+                    final Selector selector = selectors.item(j);
+                    final String xpath = translateToXPath(selector);
+                    if (xpath == null) {
+                        continue;
+                    }
+                    try {
+                        final List results = page.getByXPath(xpath);
+                        if (!results.contains(e)) {
+                            continue;
+                        }
+                        final CSSStyleDeclaration dec = styleRule.getStyle();
+                        for (int k = 0; k < dec.getLength(); k++) {
+                            final String name = dec.item(k);
+                            final String value = dec.getPropertyValue(name);
+                            style.setStyleAttribute(name, value);
+                        }
+                    }
+                    catch (final JaxenException je) {
+                        getLog().error(je.getMessage(), je);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Parses the CSS at the specified input source. If anything at all goes wrong, this method
+     * returns an empty stylesheet.
+     *
+     * @param source the source from which to retrieve the CSS to be parsed
+     * @return the stylesheet parsed from the specified input source
+     */
+    private CSSStyleSheet parseCSS(final InputSource source) {
+        CSSStyleSheet ss;
+        try {
+            ss = PARSER.parseStyleSheet(source);
+        }
+        catch (final Exception e) {
+            getLog().error(e.getMessage(), e);
+            ss = new CSSStyleSheetImpl();
+        }
+        return ss;
+    }
+
+    /**
+     * Parses the selectors at the specified input source. If anything at all goes wrong, this
+     * method returns an empty stylesheet.
+     *
+     * @param source the source from which to retrieve the selectors to be parsed
+     * @return the selectors parsed from the specified input source
+     */
+    private SelectorList parseSelectors(final InputSource source) {
+        SelectorList selectors;
+        try {
+            selectors = PARSER.parseSelectors(source);
+        }
+        catch (final Exception e) {
+            getLog().error(e.getMessage(), e);
+            selectors = new SelectorListImpl();
+        }
+        return selectors;
+    }
+
+    /**
+     * Translates the specified selector to an XPath expression. If the specified selector is a type
+     * of selector that we don't care about, this method returns <tt>null</tt>. See <a
+     * href="http://plasmasturm.org/log/444/">this page</a> for more information.
+     *
+     * @param selector the selector to be translated
+     * @return an XPath version of the specified selector
+     */
+    private String translateToXPath(final Selector selector) {
+        switch (selector.getSelectorType()) {
+            case Selector.SAC_ANY_NODE_SELECTOR:
+                return "*";
+            case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
+                return null;
+            case Selector.SAC_CHILD_SELECTOR:
+                final DescendantSelector cs = (DescendantSelector) selector;
+                final String p = translateToXPath(cs.getAncestorSelector());
+                final String c = translateToXPath(cs.getSimpleSelector());
+                return p + "/" + c;
+            case Selector.SAC_COMMENT_NODE_SELECTOR:
+                return null;
+            case Selector.SAC_CONDITIONAL_SELECTOR:
+                final ConditionalSelector conditional = (ConditionalSelector) selector;
+                final String e = translateToXPath(conditional.getSimpleSelector());
+                final String cond = translateToXPath(conditional.getCondition());
+                if (cond != null) {
+                    return e + "[" + cond + "]";
+                }
+                else {
+                    return e;
+                }
+            case Selector.SAC_DESCENDANT_SELECTOR:
+                final DescendantSelector ds = (DescendantSelector) selector;
+                final String a = translateToXPath(ds.getAncestorSelector());
+                final String d = translateToXPath(ds.getSimpleSelector());
+                return a + "//" + d;
+            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
+                return null;
+            case Selector.SAC_ELEMENT_NODE_SELECTOR:
+                final ElementSelector es = (ElementSelector) selector;
+                final String name = es.getLocalName();
+                if (name != null) {
+                    return "//" + name;
+                }
+                else {
+                    return "*";
+                }
+            case Selector.SAC_NEGATIVE_SELECTOR:
+                return null;
+            case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
+                return null;
+            case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
+                return null;
+            case Selector.SAC_ROOT_NODE_SELECTOR:
+                return "html";
+            case Selector.SAC_TEXT_NODE_SELECTOR:
+                return null;
+            default:
+                getLog().error("Unknown selector type '" + selector.getSelectorType() + "'.");
+                return null;
+        }
+    }
+
+    /**
+     * Translates the specified selector condition to an XPath expression. If the specified
+     * condition is a type of condition that we don't care about, this method returns <tt>null</tt>.
+     * See <a href="http://plasmasturm.org/log/444/">this page</a> for more information.
+     *
+     * @param condition the selector condition to be translated
+     * @return an XPath version of the specified selector condition
+     */
+    private String translateToXPath(final Condition condition) {
+        switch (condition.getConditionType()) {
+            case Condition.SAC_AND_CONDITION:
+                final CombinatorCondition cc1 = (CombinatorCondition) condition;
+                return "(" + translateToXPath(cc1.getFirstCondition()) + ") and ("
+                                + translateToXPath(cc1.getSecondCondition()) + ")";
+            case Condition.SAC_ATTRIBUTE_CONDITION:
+                final AttributeCondition ac1 = (AttributeCondition) condition;
+                if (ac1.getSpecified()) {
+                    return "@" + ac1.getLocalName() + "='" + ac1.getValue() + "'";
+                }
+                else {
+                    return "@" + ac1.getLocalName();
+                }
+            case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
+                final AttributeCondition ac2 = (AttributeCondition) condition;
+                return "@" + ac2.getLocalName() + " = '" + ac2.getValue() + "' " + "or starts-with( @"
+                                + ac2.getLocalName() + ", concat( '" + ac2.getValue() + "', '-' ) )";
+            case Condition.SAC_CLASS_CONDITION:
+                final AttributeCondition ac3 = (AttributeCondition) condition;
+                return "contains( concat( ' ', @class, ' ' ), concat( ' ', '" + ac3.getValue() + "', ' ' ) )";
+            case Condition.SAC_CONTENT_CONDITION:
+                return null;
+            case Condition.SAC_ID_CONDITION:
+                final AttributeCondition ac4 = (AttributeCondition) condition;
+                return "@id='" + ac4.getValue() + "'";
+            case Condition.SAC_LANG_CONDITION:
+                return null;
+            case Condition.SAC_NEGATIVE_CONDITION:
+                return null;
+            case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
+                final AttributeCondition ac5 = (AttributeCondition) condition;
+                return "contains( concat( ' ', @" + ac5.getLocalName() + ", ' ' ), " + "concat( ' ', '"
+                                + ac5.getValue() + "', ' ' ) )";
+            case Condition.SAC_ONLY_CHILD_CONDITION:
+                return null;
+            case Condition.SAC_ONLY_TYPE_CONDITION:
+                return null;
+            case Condition.SAC_OR_CONDITION:
+                final CombinatorCondition cc2 = (CombinatorCondition) condition;
+                return "(" + translateToXPath(cc2.getFirstCondition()) + ") or ("
+                                + translateToXPath(cc2.getSecondCondition()) + ")";
+            case Condition.SAC_POSITIONAL_CONDITION:
+                return null;
+            case Condition.SAC_PSEUDO_CLASS_CONDITION:
+                return null;
+            default:
+                return null;
+        }
+    }
 
 }
