@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Unit tests for {@link StyleSheetList}.
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Daniel Gredler
  */
 public class StyleSheetListTest extends WebTestCase {
