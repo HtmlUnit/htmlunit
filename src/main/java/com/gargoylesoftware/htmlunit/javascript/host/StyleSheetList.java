@@ -115,7 +115,7 @@ public class StyleSheetList extends SimpleScriptable {
      * @return the style sheet at the specified index
      */
     public Stylesheet jsxFunction_item(final int index) {
-        HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
+        final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
         final DomNode node = (DomNode) element.getDomNodeOrDie();
         Stylesheet sheet = (Stylesheet) sheets_.get(node);
         if (sheet == null) {

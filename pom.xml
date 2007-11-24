@@ -329,6 +329,9 @@ The reference stays the maven 1 build.
 		<contributor>
 			<name>Rob Di Marco</name>
 		</contributor>
+		<contributor>
+			<name>Gareth Davis</name>
+		</contributor>
 	</contributors>
 	<dependencies>
 		<dependency>
