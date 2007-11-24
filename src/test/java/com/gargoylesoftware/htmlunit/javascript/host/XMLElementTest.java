@@ -177,12 +177,12 @@ public class XMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testRemoveNode() throws Exception {
-        testRemoveNode(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "2", "1"});
-        testRemoveNode(BrowserVersion.FIREFOX_2, new String[] {"true", "2", "1"});
+    public void testRemoveChild() throws Exception {
+        testRemoveChild(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "2", "1"});
+        testRemoveChild(BrowserVersion.FIREFOX_2, new String[] {"true", "2", "1"});
     }
     
-    private void testRemoveNode(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+    private void testRemoveChild(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
