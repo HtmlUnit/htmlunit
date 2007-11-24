@@ -399,4 +399,40 @@ public class StyleTest extends WebTestCase {
 
         loadPage(browserVersion, content, null);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testBorderStyles() throws Exception {
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var oDiv = document.getElementById('div1');\n"
+            + "    alert(oDiv.style.borderBottom);\n"
+            + "    alert(oDiv.style.borderBottomColor);\n"
+            + "    alert(oDiv.style.borderBottomStyle);\n"
+            + "    alert(oDiv.style.borderBottomWidth);\n"
+            + "    alert(oDiv.style.borderLeft);\n"
+            + "    alert(oDiv.style.borderLeftColor);\n"
+            + "    alert(oDiv.style.borderLeftStyle);\n"
+            + "    alert(oDiv.style.borderLeftWidth);\n"
+            + "    alert(oDiv.style.borderRight);\n"
+            + "    alert(oDiv.style.borderRightColor);\n"
+            + "    alert(oDiv.style.borderRightStyle);\n"
+            + "    alert(oDiv.style.borderRightWidth);\n"
+            + "    alert(oDiv.style.borderTop);\n"
+            + "    alert(oDiv.style.borderTopColor);\n"
+            + "    alert(oDiv.style.borderTopStyle);\n"
+            + "    alert(oDiv.style.borderTopWidth);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1'>foo</div></body></html>";
+
+        final String[] expectedAlerts = {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

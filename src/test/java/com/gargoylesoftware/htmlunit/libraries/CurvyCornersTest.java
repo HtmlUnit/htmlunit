@@ -64,9 +64,6 @@ public class CurvyCornersTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testDemoIE7() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest("demo.html", BrowserVersion.INTERNET_EXPLORER_7_0);
     }
 
@@ -74,9 +71,6 @@ public class CurvyCornersTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testDemo2IE7() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest("demo2.html", BrowserVersion.INTERNET_EXPLORER_7_0);
     }
 
@@ -84,9 +78,6 @@ public class CurvyCornersTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testDemoDefault() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest("demo.html", BrowserVersion.getDefault());
     }
 
@@ -94,9 +85,6 @@ public class CurvyCornersTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testDemo2Default() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest("demo2.html", BrowserVersion.getDefault());
     }
 

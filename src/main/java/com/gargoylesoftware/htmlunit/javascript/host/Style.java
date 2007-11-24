@@ -107,7 +107,11 @@ public class Style extends SimpleScriptable implements Cloneable {
      * These are IE properties, this should be configured per browser.
      */
     private static final String[] STYLE_PROPERTIES = {"backgroundColor",
-        "backgroundImage", "bottom", "clear", "clip", "color", "direction",
+        "backgroundImage", "borderBottom", "borderBottomColor", "borderBottomStyle", "borderBottomWidth",
+        "borderLeft", "borderLeftColor", "borderLeftStyle", "borderLeftWidth",
+        "borderRight", "borderRightColor", "borderRightStyle", "borderRightWidth",
+        "borderTop", "borderTopColor", "borderTopStyle", "borderTopWidth",
+        "bottom", "clear", "clip", "color", "direction",
         "display", "font", "fontFamily", "fontSize", "fontStyle",
         "fontWeight", "fontWeight", "hasLayout", "height", "layoutFlow",
         "layoutGrid", "layoutGridMode", "left", "letterSpacing",
