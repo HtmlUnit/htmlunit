@@ -173,4 +173,46 @@ public class XMLElementTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testRemoveNode() throws Exception {
+        testRemoveNode(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "2", "1"});
+        testRemoveNode(BrowserVersion.FIREFOX_2, new String[] {"true", "2", "1"});
+    }
+    
+    private void testRemoveNode(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    var parent = doc.documentElement.firstChild;\n"
+            + "    alert(parent.childNodes.length);\n"
+            + "    parent.removeChild(parent.firstChild);\n"
+            + "    alert(parent.childNodes.length);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
+
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient(browserVersion);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

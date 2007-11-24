@@ -275,8 +275,8 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Returns the Page interface, should be removed, and use {@link #getPage()} instead.
-     * @return the Page interface.
      *
+     * @return the Page interface.
      */
     public Page getNativePage() {
         return page_;
@@ -857,7 +857,10 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
         final DomNode exParent = parent_;
         basicRemove();
-        getPage().notifyNodeRemoved(this);
+        
+        if (getNativePage() instanceof HtmlPage) {
+            getPage().notifyNodeRemoved(this);
+        }
         
         fireNodeDeleted(exParent, this);
         //ask ex-parent to fire event (because we don't have parent now)
