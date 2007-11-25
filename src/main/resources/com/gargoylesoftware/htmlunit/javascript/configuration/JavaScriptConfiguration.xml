@@ -708,8 +708,10 @@
         </property>
     </class>
 
-    <class name="Label" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
-        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
+    <class name="Label" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Label"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
+        <property name="htmlFor" readable="true" writable="true"/>
+        <function name="click"/>
     </class>
 
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"

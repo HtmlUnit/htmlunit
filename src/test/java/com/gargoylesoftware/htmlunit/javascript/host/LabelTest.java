@@ -45,18 +45,18 @@ import com.gargoylesoftware.htmlunit.html.HtmlLabel;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link HTMLLabel}.
+ * Tests for {@link Label}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLLabelTest extends WebTestCase {
+public class LabelTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public HTMLLabelTest(final String name) {
+    public LabelTest(final String name) {
         super(name);
     }
 
@@ -64,18 +64,47 @@ public class HTMLLabelTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testHtmlFor() throws Exception {
+        testHtmlFor(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testHtmlFor(BrowserVersion.FIREFOX_2);
+    }
+
+    private void testHtmlFor(final BrowserVersion browserVersion) throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    document.getElementById('label1').htmlFor = 'checkbox1';\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<label id='label1'>My Label</label>\n"
+            + "<input type='checkbox' id='checkbox1'><br>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("label1");
+        final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
+        assertFalse(checkbox.isChecked());
+        label.click();
+        assertTrue(checkbox.isChecked());
+    }
+
+    /**
+     * Tests that clicking the label by javascript does not change 'htmlFor' attribute in FF!!
+     *
+     * @throws Exception if the test fails
+     */
+    public void testHtmlFor_click() throws Exception {
         if (notYetImplemented()) {
             return;
         }
-        testHtmlFor(BrowserVersion.INTERNET_EXPLORER_7_0, true);
-        testHtmlFor(BrowserVersion.FIREFOX_2, false);
+        testHtmlFor_click(BrowserVersion.INTERNET_EXPLORER_7_0, true);
+        testHtmlFor_click(BrowserVersion.FIREFOX_2, false);
     }
 
     /**
      * @param changedByClick if 'label.click()' javascript causes the associated 'htmlFor' element to be changed.
      */
-    private void testHtmlFor(final BrowserVersion browserVersion, final boolean changedByClick) throws Exception {
-        final String firstContent
+    private void testHtmlFor_click(final BrowserVersion browserVersion, final boolean changedByClick) throws Exception {
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    document.getElementById('label1').htmlFor = 'checkbox1';\n"
@@ -86,14 +115,11 @@ public class HTMLLabelTest extends WebTestCase {
             + "<input type=button id='button1' value='Test' onclick='document.getElementById(\"label1\").click()'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(firstContent);
-        final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("label1");
+        final HtmlPage page = loadPage(html);
         final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
         final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("button1");
         assertFalse(checkbox.isChecked());
-        label.click();
-        assertTrue(checkbox.isChecked());
         button.click();
-        assertTrue(checkbox.isChecked() != changedByClick);
+        assertTrue(checkbox.isChecked() == changedByClick);
     }
 }

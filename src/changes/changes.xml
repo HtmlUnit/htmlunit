@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour" id="1835550">
+                JavaScript: add support for label.htmlFor (#1835550).
+            </action>
             <action type="fix" dev="asashour" id="1836922">
                 JavaScript: fix removeChild() for XML elements (#1836922).
             </action>

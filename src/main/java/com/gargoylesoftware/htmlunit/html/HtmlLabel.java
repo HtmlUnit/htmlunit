@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlLabel extends FocusableElement {
+public class HtmlLabel extends ClickableElement {
 
     private static final long serialVersionUID = -3007176633287091652L;
 

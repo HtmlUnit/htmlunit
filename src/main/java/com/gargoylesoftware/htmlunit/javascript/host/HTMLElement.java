@@ -1869,7 +1869,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * Remove focus from this element.
      */
     public void jsxFunction_blur() {
-        final FocusableElement element = (FocusableElement) getDomNodeOrDie();
+        final HtmlElement element = (HtmlElement) getDomNodeOrDie();
         element.blur();
     }
 

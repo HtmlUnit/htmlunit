@@ -74,7 +74,7 @@ public class FocusableElementTest extends WebTestCase {
     private void onClickPageTest(final String htmlContent) throws Exception {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final FocusableElement element = (FocusableElement) page.getHtmlElementById("focusId");
+        final HtmlElement element = (HtmlElement) page.getHtmlElementById("focusId");
 
         element.focus();
         element.blur();

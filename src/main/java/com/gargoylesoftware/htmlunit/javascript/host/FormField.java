@@ -146,7 +146,7 @@ public class FormField extends FocusableHostElement {
 
     /**
      * Click this element.  This simulates the action of the user clicking with the mouse.
-     * @throws IOException if this click triggers a page load that encouters problems
+     * @throws IOException if this click triggers a page load that encounters problems
      */
     public void jsxFunction_click() throws IOException {
         ((ClickableElement) getHtmlElementOrDie()).click();
