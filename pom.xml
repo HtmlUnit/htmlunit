@@ -36,7 +36,7 @@ The reference stays the maven 1 build.
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<!-- Update the links reference in javadoc plugin, when this changes -->
+					<!-- Update the links reference in javadoc and clover plugins when this changes -->
 					<source>1.4</source>
 					<target>1.4</target>
 				</configuration>
@@ -70,11 +70,28 @@ The reference stays the maven 1 build.
 					</descriptors>
 				</configuration>
 			</plugin>
+			<plugin>
+				<!-- There is clover plugin in 'reporting' section -->
+				<artifactId>maven-clover-plugin</artifactId>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<configuration>
+					<licenseLocation>${basedir}/clover2.license</licenseLocation>
+					<jdk>1.4</jdk>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+				</executions>
+        	</plugin>
 		</plugins>
 	</build>
 	<reporting>
 		<plugins>
-			<plugin>
+ 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
@@ -116,7 +133,15 @@ The reference stays the maven 1 build.
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+			<plugin>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<artifactId>maven-clover-plugin</artifactId>
+				<configuration>
+					<licenseLocation>${basedir}/clover2.license</licenseLocation>
+					<jdk>1.4</jdk>
+				</configuration>
+			</plugin>
+ 		</plugins>
 	</reporting>
 	<issueManagement>
 		<system>sourceforge</system>
@@ -485,6 +510,11 @@ The reference stays the maven 1 build.
 			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
 			<releases><enabled>false</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>atlassian-m2-repository</id>
+			<name>Atlassian Maven 2.x Repository</name>
+			<url>http://repository.atlassian.com/maven2</url>
 		</pluginRepository>
 	</pluginRepositories>
 </project>

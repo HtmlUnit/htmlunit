@@ -18,12 +18,8 @@
             	If this is the first time you're doing a release you'll need to perform
             	some setup.
             	<ol>
-	            	<li>
-	            		Get a new version of the maven clover plugin:
-	            		<source>maven plugin:download -DartifactId=maven-clover-plugin -DgroupId=maven -Dversion=1.9.1</source>
-            		</li>
            			<li>
-           				You might also need to specify the following properties to maven.
+           				[Maven1] You might need to specify the following properties to maven.
            				You can do this with a build.properties file, in the project
            				directory or in your home directory, or on the command line
            				with the -D option.
@@ -60,7 +56,7 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                     </li>
                     <li>
                         Build the zip
-                        <source>maven clean assembly:assembly</source>
+                        <source>mvn clean assembly:assembly</source>
                     </li>
                     <li>
                         Upload the two zip files to SourceForge following 
