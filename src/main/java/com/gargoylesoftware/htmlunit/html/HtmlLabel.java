@@ -137,7 +137,7 @@ public class HtmlLabel extends ClickableElement {
      * Remove focus from this element.
      */
     public void blur() {
-        final FocusableElement element = getReferencedElement();
+        final HtmlElement element = getReferencedElement();
         if (element != null) {
             element.blur();
         }
@@ -147,7 +147,7 @@ public class HtmlLabel extends ClickableElement {
      * Set the focus to this element.
      */
     public void focus() {
-        final FocusableElement element = getReferencedElement();
+        final HtmlElement element = getReferencedElement();
         if (element != null) {
             element.focus();
         }
@@ -158,13 +158,13 @@ public class HtmlLabel extends ClickableElement {
      * equal to the value of the for attribute of this label.
      * @return the element, <code>null</code> if not found
      */
-    public FocusableElement getReferencedElement() {
+    public ClickableElement getReferencedElement() {
         final String elementId = getForAttribute();
         if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
             try {
                 final HtmlElement element = getHtmlElementById(elementId);
-                if (element instanceof FocusableElement) {
-                    return (FocusableElement) element;
+                if (element instanceof ClickableElement) {
+                    return (ClickableElement) element;
                 }
             }
             catch (final ElementNotFoundException e) {
@@ -176,7 +176,7 @@ public class HtmlLabel extends ClickableElement {
             while (childIterator.hasNext()) {
                 final DomNode element = (DomNode) childIterator.next();
                 if (element instanceof HtmlInput) {
-                    return (FocusableElement) element;
+                    return (HtmlInput) element;
                 }
             }
         }
@@ -195,7 +195,7 @@ public class HtmlLabel extends ClickableElement {
         final Page response;
 
         // then the click on the referenced element
-        final FocusableElement element = getReferencedElement();
+        final ClickableElement element = getReferencedElement();
         if (element != null) {
             response = element.click();
         }

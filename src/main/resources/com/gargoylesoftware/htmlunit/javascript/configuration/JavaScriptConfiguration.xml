@@ -21,7 +21,7 @@
         <browser name="Microsoft Internet Explorer" min-version="4"/>
     </class>
 
-    <class name="Anchor" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Anchor"
+    <class name="Anchor" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Anchor"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <javascript min-version="1.2"/>
         
@@ -43,7 +43,7 @@
         </property>
     </class>
 
-    <class name="Area" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
+    <class name="Area" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
         JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
     </class>
 
@@ -333,10 +333,6 @@
         </function>
     </class>
 
-    <class name="FocusableHostElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FocusableHostElement"
-        JSObject="true">
-    </class>
-
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
@@ -371,7 +367,7 @@
         <function name="submit"/>
     </class>
 
-    <class name="FormField" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
+    <class name="FormField" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
         JSObject="false">
         <property name="disabled" readable="true" writable="true"/>
         <property name="form" notImplemented="true" readable="true" writable="true"/>
@@ -708,7 +704,7 @@
         </property>
     </class>
 
-    <class name="Label" extends="FocusableHostElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Label"
+    <class name="Label" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Label"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
         <property name="htmlFor" readable="true" writable="true"/>
         <function name="click"/>

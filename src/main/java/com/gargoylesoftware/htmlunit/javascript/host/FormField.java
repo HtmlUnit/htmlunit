@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class FormField extends FocusableHostElement {
+public class FormField extends HTMLElement {
 
     private static final long serialVersionUID = 3712016051364495710L;
 

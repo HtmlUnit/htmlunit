@@ -1219,10 +1219,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     public HtmlElement pressAccessKey(final char accessKey) throws IOException {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
         if (element != null) {
-            if (element instanceof FocusableElement) {
-                ((FocusableElement) element).focus();
-            }
-
+            element.focus();
             final Page newPage;
             if (element instanceof HtmlAnchor) {
                 newPage = ((HtmlAnchor) element).click();
@@ -1292,9 +1289,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             }
         }
 
-        if (elementToGiveFocus instanceof FocusableElement) {
-            moveFocusToElement(elementToGiveFocus);
-        }
+        moveFocusToElement(elementToGiveFocus);
         return elementToGiveFocus;
     }
 
@@ -1332,9 +1327,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             }
         }
 
-        if (elementToGiveFocus instanceof FocusableElement) {
-            moveFocusToElement(elementToGiveFocus);
-        }
+        moveFocusToElement(elementToGiveFocus);
         return elementToGiveFocus;
     }
 

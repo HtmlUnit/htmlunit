@@ -56,8 +56,9 @@ import java.net.URL;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
-public class Anchor extends FocusableHostElement {
+public class Anchor extends HTMLElement {
 
     private static final long serialVersionUID = -816365374422492967L;
 

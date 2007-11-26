@@ -45,10 +45,10 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
-import com.gargoylesoftware.htmlunit.html.FocusableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
@@ -329,9 +329,9 @@ public class EventTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final FocusableElement element = (FocusableElement) page.getHtmlElementById("textField");
+        final HtmlElement element = (HtmlElement) page.getHtmlElementById("textField");
         element.focus();
-        final FocusableElement otherElement = (FocusableElement) page.getHtmlElementById("otherField");
+        final HtmlElement otherElement = (HtmlElement) page.getHtmlElementById("otherField");
         otherElement.focus();
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);

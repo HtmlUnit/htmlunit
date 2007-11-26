@@ -45,6 +45,7 @@ import java.util.Map;
  * @version $Revision$
  * @author David D. Kilzer
  * @author Ahmed Ashour
+ * @deprecated As of 1.14, please use {@link ClickableElement} instead.
  */
 public abstract class FocusableElement extends ClickableElement {
 

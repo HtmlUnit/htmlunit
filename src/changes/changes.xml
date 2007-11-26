@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                Deprecate FocusableElement.
+            </action>
             <action type="add" dev="asashour" id="1835550">
                 JavaScript: add support for label.htmlFor (#1835550).
             </action>
