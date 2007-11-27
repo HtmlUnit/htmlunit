@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
 
+import com.gargoylesoftware.htmlunit.Page;
+
 /**
  * Wrapper for the DOM node Comment.
  *
@@ -56,10 +58,10 @@ public class DomComment extends DomCharacterData {
     /**
      * Create an instance of DomComment
      *
-     * @param page The HtmlPage that contains this element.
+     * @param page The Page that contains this element.
      * @param data the string data held by this node
      */
-    public DomComment(final HtmlPage page, final String data) {
+    public DomComment(final Page page, final String data) {
         super(page, data);
     }
     

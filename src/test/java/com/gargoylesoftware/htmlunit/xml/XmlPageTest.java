@@ -37,9 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.httpclient.HttpStatus;
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -50,6 +56,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class XmlPageTest extends WebTestCase {
     /**
@@ -171,5 +178,48 @@ public class XmlPageTest extends WebTestCase {
 
         final XmlPage xmlPage = testXmlDocument(content, "application/voicexml+xml");
         assertEquals("vxml", xmlPage.getXmlDocument().getFirstChild().getNodeName());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testLoad_XMLComment() throws Exception {
+        testLoad_XMLComment(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "8"});
+        testLoad_XMLComment(BrowserVersion.FIREFOX_2, new String[] {"true", "8"});
+    }
+    
+    private void testLoad_XMLComment(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final URL firstURL = new URL("http://htmlunit/first.html");
+        final URL secondURL = new URL("http://htmlunit/second.xml");
+        
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    alert(doc.load('" + "second.xml" + "'));\n"
+            + "    alert(doc.documentElement.childNodes[0].nodeType);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String xml = "<test><!-- --></test>";
+
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient(browserVersion);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(firstURL, html);
+        conn.setResponse(secondURL, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(firstURL);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

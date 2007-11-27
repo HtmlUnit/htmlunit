@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.html.DomCData;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -160,7 +161,7 @@ public class XMLDocument extends Document {
             attribute.init(domNode.getNodeName(), (XmlElement) domNode.getParentDomNode());
             scriptable = attribute;
         }
-        else if (domNode instanceof DomText || domNode instanceof DomCData) {
+        else if (domNode instanceof DomText || domNode instanceof DomCData || domNode instanceof DomComment) {
             scriptable = new TextImpl();
         }
         else {

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                XMLPage: add support for comment node.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate FocusableElement.
             </action>

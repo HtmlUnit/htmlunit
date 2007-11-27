@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomCData;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 
@@ -137,6 +138,11 @@ public class XmlPage extends SgmlPage {
                     xml.appendDomChild(cdata);
                     break;
 
+                case Node.COMMENT_NODE:
+                    final DomComment comment = new DomComment(this, child.getNodeValue());
+                    xml.appendDomChild(comment);
+                    break;
+                    
                 default:
                     getLog().warn("NodeType " + child.getNodeType()
                             + " (" + child.getNodeName() + ") is not yet supported.");
