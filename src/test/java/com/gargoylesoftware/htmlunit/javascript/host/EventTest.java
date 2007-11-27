@@ -202,11 +202,10 @@ public class EventTest extends WebTestCase {
             + "<script>\n"
             + "function handler(_e) {\n"
             + "  var e = _e ? _e : window.event;\n"
-            + "if (e.keyCode == 65) {\n"
+            + "if (e.keyCode == 65)\n"
             + "    alert('pass');\n"
-            + "} else {"
+            + "else\n"
             + "    alert('fail:' + e.keyCode);\n"
-            + "}"
             + "}\n"
             + "document.getElementById('clickId').onkeydown = handler;\n"
             + "document.getElementById('clickId').onclick = handler;</script>\n"
@@ -614,11 +613,11 @@ public class EventTest extends WebTestCase {
 
     private void testBubbles(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
-              "<html><body onload='test(event)'><script>\r\n"
-            + "    function test(e) {\r\n"
-            + "        alert(typeof e);\r\n"
-            + "        alert(e.bubbles);\r\n"
-            + "    }\r\n"
+              "<html><body onload='test(event)'><script>\n"
+            + "    function test(e) {\n"
+            + "        alert(typeof e);\n"
+            + "        alert(e.bubbles);\n"
+            + "    }\n"
             + "</script></body></html>";
         final List actual = new ArrayList();
         loadPage(browser, html, actual);
@@ -641,11 +640,11 @@ public class EventTest extends WebTestCase {
 
     private void testCancelable(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
-              "<html><body onload='test(event)'><script>\r\n"
-            + "    function test(e) {\r\n"
-            + "        alert(typeof e);\r\n"
-            + "        alert(e.cancelable);\r\n"
-            + "    }\r\n"
+              "<html><body onload='test(event)'><script>\n"
+            + "    function test(e) {\n"
+            + "        alert(typeof e);\n"
+            + "        alert(e.cancelable);\n"
+            + "    }\n"
             + "</script></body></html>";
         final List actual = new ArrayList();
         loadPage(browser, html, actual);
@@ -677,16 +676,16 @@ public class EventTest extends WebTestCase {
 
     private void testKeys(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
-              "<html><body onload='test(event)'><script>\r\n"
-            + "    function test(e) {\r\n"
-            + "        alert(typeof e);\r\n"
-            + "        alert(e.shiftKey);\r\n"
-            + "        alert(e.ctrlKey);\r\n"
-            + "        alert(e.altKey);\r\n"
-            + "        alert(e.metaKey);\r\n"
-            + "    }\r\n"
-            + "</script>\r\n"
-            + "<div id='div' onclick='test(event)'>abc</div>\r\n"
+              "<html><body onload='test(event)'><script>\n"
+            + "    function test(e) {\n"
+            + "        alert(typeof e);\n"
+            + "        alert(e.shiftKey);\n"
+            + "        alert(e.ctrlKey);\n"
+            + "        alert(e.altKey);\n"
+            + "        alert(e.metaKey);\n"
+            + "    }\n"
+            + "</script>\n"
+            + "<div id='div' onclick='test(event)'>abc</div>\n"
             + "</body></html>";
         final List actual = new ArrayList();
         final HtmlPage page = loadPage(browser, html, actual);
@@ -711,11 +710,11 @@ public class EventTest extends WebTestCase {
 
     private void testTimeStamp(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
-              "<html><body onload='test(event)'><script>\r\n"
-            + "    function test(e) {\r\n"
-            + "        alert(typeof e);\r\n"
-            + "        alert(typeof e.timeStamp);\r\n"
-            + "    }\r\n"
+              "<html><body onload='test(event)'><script>\n"
+            + "    function test(e) {\n"
+            + "        alert(typeof e);\n"
+            + "        alert(typeof e.timeStamp);\n"
+            + "    }\n"
             + "</script></body></html>";
         final List actual = new ArrayList();
         loadPage(browser, html, actual);
@@ -727,23 +726,23 @@ public class EventTest extends WebTestCase {
      */
     public void testEventPhase() throws Exception {
         final String html =
-              "<html><head><script>\r\n"
-            + "  function init() {\r\n"
-            + "    var form = document.forms[0];\r\n"
-            + "    form.addEventListener('click', alertPhase, true);\r\n"
-            + "    form.addEventListener('click', alertPhase, false);\r\n"
-            + "  }\r\n"
-            + "  function alertPhase(e) {\r\n"
-            + "    switch (e.eventPhase) {\r\n"
-            + "      case 1: alert('capturing'); break;\r\n"
-            + "      case 2: alert('at target'); break;\r\n"
-            + "      case 3: alert('bubbling'); break;\r\n"
-            + "      default: alert('unknown');\r\n"
-            + "    }\r\n"
-            + "  }\r\n"
-            + "</script></head>\r\n"
-            + "<body onload='init()'>\r\n"
-            + "<form><input type='button' onclick='alertPhase(event)' id='b'></form>\r\n"
+              "<html><head><script>\n"
+            + "  function init() {\n"
+            + "    var form = document.forms[0];\n"
+            + "    form.addEventListener('click', alertPhase, true);\n"
+            + "    form.addEventListener('click', alertPhase, false);\n"
+            + "  }\n"
+            + "  function alertPhase(e) {\n"
+            + "    switch (e.eventPhase) {\n"
+            + "      case 1: alert('capturing'); break;\n"
+            + "      case 2: alert('at target'); break;\n"
+            + "      case 3: alert('bubbling'); break;\n"
+            + "      default: alert('unknown');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<form><input type='button' onclick='alertPhase(event)' id='b'></form>\n"
             + "</body></html>";
         final String[] expected = {"capturing", "at target", "bubbling"};
         final List actual = new ArrayList();
@@ -772,19 +771,19 @@ public class EventTest extends WebTestCase {
      */
     public void testInitEvent() throws Exception {
         final String html =
-              "<html><body onload='test()'><script>\r\n"
-            + "  function test() {\r\n"
-            + "    var e = document.createEvent('Event');\r\n"
-            + "    e.initEvent('click', true, true);\r\n"
-            + "    doAlerts(e);\r\n"
-            + "    e.initEvent('dblclick', false, false);\r\n"
-            + "    doAlerts(e);\r\n"
-            + "  }\r\n"
-            + "  function doAlerts(e) {\r\n"
-            + "    alert(e.type);\r\n"
-            + "    alert(e.bubbles);\r\n"
-            + "    alert(e.cancelable);\r\n"
-            + "  }\r\n"
+              "<html><body onload='test()'><script>\n"
+            + "  function test() {\n"
+            + "    var e = document.createEvent('Event');\n"
+            + "    e.initEvent('click', true, true);\n"
+            + "    doAlerts(e);\n"
+            + "    e.initEvent('dblclick', false, false);\n"
+            + "    doAlerts(e);\n"
+            + "  }\n"
+            + "  function doAlerts(e) {\n"
+            + "    alert(e.type);\n"
+            + "    alert(e.bubbles);\n"
+            + "    alert(e.cancelable);\n"
+            + "  }\n"
             + "</script></body></html>";
         final String[] expected = {"click", "true", "true", "dblclick", "false", "false"};
         final List actual = new ArrayList();

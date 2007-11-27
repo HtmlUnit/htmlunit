@@ -50,29 +50,29 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 public class RangeTest extends WebTestCase {
-    private static final String contentStart = "<html><head><title>Range Test</title>"
-        + "<script>"
-        + "function safeTagName(o)"
-        + "{"
-        + "  return o ? o.tagName : undefined"
-        + "}"
-        + "function alertRange(r)"
-        + "{"
+    private static final String contentStart = "<html><head><title>Range Test</title>\n"
+        + "<script>\n"
+        + "function safeTagName(o)\n"
+        + "{\n"
+        + "  return o ? o.tagName : undefined\n"
+        + "}\n"
+        + "function alertRange(r)\n"
+        + "{\n"
         + "  alert(r.collapsed);\n"
         + "  alert(safeTagName(r.commonAncestorContainer));\n"
         + "  alert(safeTagName(r.startContainer));\n"
         + "  alert(r.startOffset);\n"
         + "  alert(safeTagName(r.endContainer));\n"
         + "  alert(r.endOffset);\n"
-        + "}"
+        + "}\n"
         + "function test() {\n"
         + "var r = document.createRange();\n";
     private static final String contentEnd = "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
         + "<a  id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
-        +  "</div>"
-        + "<p id='theP'>for Range</p>"
+        +  "</div>\n"
+        + "<p id='theP'>for Range</p>\n"
         + "</body></html>";
 
     /**

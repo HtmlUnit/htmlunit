@@ -55,29 +55,23 @@ public final class WaitingRefreshHandlerTest extends WebTestCase {
     }
 
     /**
-     * Trying to cause an interrupt on a javscript thread due to meta redirect navigation.
+     * Trying to cause an interrupt on a javascript thread due to meta redirect navigation.
      * @throws Exception if the test fails
      */
     public void testRefreshOnJavscriptThread() throws Exception {
         final String firstContent = " <html>\n"
-            + "<head><title>First Page</title>"
-            + "<script>"
-            + "function doRedirect() {"
-            + "    window.location.href='"
-            + URL_SECOND
-            + "';"
-            + "}"
-            + "</script>"
+            + "<head><title>First Page</title>\n"
+            + "<script>\n"
+            + "function doRedirect() {\n"
+            + "    window.location.href='" + URL_SECOND + "';\n"
+            + "}\n"
+            + "</script>\n"
             + "</head>\n"
-            + "<body onload='"
-            + "setTimeout(\"doRedirect()\", 1);"
-            + "'>first page body</body>\n"
+            + "<body onload='setTimeout(\"doRedirect()\", 1);'>first page body</body>\n"
             + "</html>";
         final String secondContent = "<html>\n"
             + "<head><title>Meta Redirect Page</title>\n"
-            + "<meta http-equiv='Refresh' content='1; URL="
-            + URL_THIRD
-            + "'>\n"
+            + "<meta http-equiv='Refresh' content='1; URL=" + URL_THIRD + "'>\n"
             + "</head>\n"
             + "<body>redirect page body</body>\n"
             + "</html>";

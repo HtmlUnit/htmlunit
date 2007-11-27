@@ -198,10 +198,10 @@ public class StyleTest extends WebTestCase {
     public void testOnclickAccessStyle() throws Exception {
         final String content = "<html><head><title>Color Change Page</title>\n"
              + "<script>\n"
-             + "function test(obj)"
-             + "{"
+             + "function test(obj)\n"
+             + "{\n"
              + "   obj.style.backgroundColor = 'yellow';\n"
-             + "}"
+             + "}\n"
              + "</script>\n"
              + "</head>\n"
              + "<body>\n"
