@@ -138,7 +138,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("1");
+        final String[] expectedAlerts = {"1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -768,7 +768,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("bar");
+        final String[] expectedAlerts = {"bar"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -790,7 +790,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("id1");
+        final String[] expectedAlerts = {"id1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -811,7 +811,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("script1");
+        final String[] expectedAlerts = {"script1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -833,7 +833,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("text/javascript");
+        final String[] expectedAlerts = {"text/javascript"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -865,7 +865,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("http://script");
+        final String[] expectedAlerts = {"http://script"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -913,7 +913,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("true");
+        final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1103,7 +1103,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("childDiv",
             ((HtmlElement) parentDiv.getLastDomChild()).getAttributeValue("id"));
 
-        final List expectedAlerts = Collections.singletonList("childDiv");
+        final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1127,10 +1127,9 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv",
-            ((HtmlElement) div1.getNextDomSibling()).getAttributeValue("id"));
+        assertEquals("nextDiv", ((HtmlElement) div1.getNextDomSibling()).getAttributeValue("id"));
 
-        final List expectedAlerts = Collections.singletonList("nextDiv");
+        final String[] expectedAlerts = {"nextDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1161,7 +1160,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("nextDiv",
             ((HtmlElement) previousDiv.getNextDomSibling()).getAttributeValue("id"));
 
-        final List expectedAlerts = Collections.singletonList("nextDiv");
+        final String[] expectedAlerts = {"nextDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1188,7 +1187,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("previousDiv",
             ((HtmlElement) div1.getPreviousDomSibling()).getAttributeValue("id"));
 
-        final List expectedAlerts = Collections.singletonList("previousDiv");
+        final String[] expectedAlerts = {"previousDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1219,7 +1218,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("previousDiv",
             ((HtmlElement) nextDiv.getPreviousDomSibling()).getAttributeValue("id"));
 
-        final List expectedAlerts = Collections.singletonList("previousDiv");
+        final String[] expectedAlerts = {"previousDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1264,7 +1263,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("DIV");
+        final String[] expectedAlerts = {"DIV"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1387,7 +1386,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(mainContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        assertEquals(collectedAlerts, Collections.singletonList("A"));
+        assertEquals(new String[] {"A"}, collectedAlerts);
     }
 
     /**
@@ -1402,8 +1401,7 @@ public class DocumentTest extends WebTestCase {
             + "</form></body></html>";
 
         final List responseHeaders = Collections.singletonList(new KeyValuePair("referrer", "http://ref"));
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders);
         webClient.setWebConnection(webConnection);
 
         final List collectedAlerts = new ArrayList();
@@ -1412,7 +1410,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        assertEquals(Collections.singletonList("http://ref"), collectedAlerts);
+        assertEquals(new String[] {"http://ref"}, collectedAlerts);
     }
 
     /**
@@ -1427,7 +1425,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        assertEquals(Collections.singletonList(""), collectedAlerts);
+        assertEquals(new String[] {""}, collectedAlerts);
     }
 
     /**
@@ -1442,7 +1440,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        assertEquals(Collections.singletonList(URL_GARGOYLE.toExternalForm()), collectedAlerts);
+        assertEquals(new String[] {URL_GARGOYLE.toExternalForm()}, collectedAlerts);
     }
 
     /**
@@ -1492,7 +1490,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("button");
+        final String[] expectedAlerts = {"button"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1508,7 +1506,7 @@ public class DocumentTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(firstContent, collectedAlerts);
-        final List expectedAlerts = Collections.singletonList("1");
+        final String[] expectedAlerts = {"1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1534,7 +1532,7 @@ public class DocumentTest extends WebTestCase {
 
         webClient.getPage(URL_FIRST);
 
-        final List expectedAlerts = Collections.singletonList("1");
+        final String[] expectedAlerts = {"1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1996,7 +1994,7 @@ public class DocumentTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(content, collectedAlerts);
 
-        final List expectedAlerts = Collections.singletonList("undefined");
+        final String[] expectedAlerts = {"undefined"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -2487,7 +2485,7 @@ public class DocumentTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         loadPage(htmlContent, collectedAlerts);
-        assertEquals(Collections.singletonList("2"), collectedAlerts);
+        assertEquals(new String[] {"2"}, collectedAlerts);
     }
 
     /**
@@ -2539,7 +2537,7 @@ public class DocumentTest extends WebTestCase {
         // test for Mozilla
         collectedAlerts.clear();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(Collections.singletonList("not defined"), collectedAlerts);
+        assertEquals(new String[] {"not defined"}, collectedAlerts);
     }
 
     /**

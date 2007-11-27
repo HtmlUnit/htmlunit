@@ -294,7 +294,7 @@ public class SelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         assertEquals("first", page.getTitleText());
-        assertEquals(Collections.singletonList("true"), collectedAlerts);
+        assertEquals(new String[] {"true"}, collectedAlerts);
     }
 
     /**
@@ -322,7 +322,7 @@ public class SelectTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("first", page.getTitleText());
-        assertEquals(Collections.singletonList("One"), collectedAlerts);
+        assertEquals(new String[] {"One"}, collectedAlerts);
     }
 
     /**

@@ -1695,10 +1695,10 @@ public class HtmlPageTest extends WebTestCase {
             + "s = s.replace(r, '');\n"
             + "alert(s.length);\n"
             + "</script></body></html>";
-        final List expected = Collections.singletonList("0");
-        final List actual = new ArrayList();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        final String[] expectedAlerts = {"0"};
+        final List actualAlerts = new ArrayList();
+        loadPage(html, actualAlerts);
+        assertEquals(expectedAlerts, actualAlerts);
     }
 
     /**
@@ -1711,10 +1711,10 @@ public class HtmlPageTest extends WebTestCase {
             + "s = s.replace(r, function(z,b){return b.toUpperCase();});\n"
             + "alert(s);\n"
             + "</script></body></html>";
-        final List expected = Collections.singletonList("fontSize");
-        final List actual = new ArrayList();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        final String[] expectedAlerts = {"fontSize"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -1844,7 +1844,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlAnchor anchor = (HtmlAnchor) page.getAnchors().get(0);
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         
-        assertEquals(Collections.singletonList(expectedMessage), collectedConfirms);
+        assertEquals(new String[] {expectedMessage}, collectedConfirms);
         assertEquals(expectedPageTitle, secondPage.getTitleText());
     }
 

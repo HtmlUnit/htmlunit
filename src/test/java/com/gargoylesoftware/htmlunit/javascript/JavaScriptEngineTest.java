@@ -208,7 +208,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testScopeOfNestedNewFunction() throws Exception {
-        final List expectedAlerts = Collections.singletonList("foo");
+        final String[] expectedAlerts = {"foo"};
         final String content
             = "<html><head>\n"
             + "<script>\n"
@@ -329,7 +329,7 @@ public class JavaScriptEngineTest extends WebTestCase {
                 "text/javascript");
         client.setWebConnection(webConnection);
 
-        final List expectedAlerts = Collections.singletonList("got here");
+        final String[] expectedAlerts = {"got here"};
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -447,7 +447,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final List expectedAlerts = Collections.singletonList("\u8868");
+        final String[] expectedAlerts = {"\u8868"};
         final List collectedAlerts = new ArrayList();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -674,7 +674,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         ((HtmlSubmitInput) page.getFormByName("form1").getInputByName("button1")).click();
 
-        final List expectedAlerts = Collections.singletonList("button1");
+        final String[] expectedAlerts = {"button1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -709,7 +709,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage("http://first/index.html");
         assertEquals("foo", page.getTitleText());
-        assertEquals(Collections.singletonList("Got to external method"), collectedAlerts);
+        assertEquals(new String[] {"Got to external method"}, collectedAlerts);
     }
 
     /**
@@ -740,7 +740,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
-        assertEquals(Collections.singletonList("Got to external method"), collectedAlerts);
+        assertEquals(new String[] {"Got to external method"}, collectedAlerts);
     }
 
     /**
@@ -773,7 +773,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         button.click();
 
-        assertEquals(Collections.singletonList("Foo is: |flintstone|"), collectedAlerts);
+        assertEquals(new String[] {"Foo is: |flintstone|"}, collectedAlerts);
     }
 
     /**
@@ -927,20 +927,16 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse(getJavaScriptContent(
                 "var t = new ActiveXObject('MockActiveXObject'); alert(t.MESSAGE);\n"));
         client.getPage("http://www.yahoo.com");
-        assertEquals(
-                "The active x object did not bind to the object.",
-                Collections.singletonList(MockActiveXObject.MESSAGE),
-                collectedAlerts);
+        assertEquals("The active x object did not bind to the object.",
+                new String[] {MockActiveXObject.MESSAGE}, collectedAlerts);
 
         collectedAlerts.clear();
 
         webConnection.setDefaultResponse(getJavaScriptContent(
                 "var t = new ActiveXObject('MockActiveXObject', 'server'); alert(t.GetMessage());\n"));
         client.getPage("http://www.yahoo.com");
-        assertEquals(
-                "The active x object did not bind to the object.",
-                Collections.singletonList(new MockActiveXObject().GetMessage()),
-                collectedAlerts);
+        assertEquals("The active x object did not bind to the object.",
+                new String[] {new MockActiveXObject().GetMessage()}, collectedAlerts);
     }
 
     private String getJavaScriptContent(final String javascript) {
@@ -990,7 +986,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         catch (final Exception e) {
             // nothing
         }
-        assertEquals(Collections.singletonList("1"), collectedAlerts);
+        assertEquals(new String[] {"1"}, collectedAlerts);
         collectedAlerts.clear();
 
         // and with script exception not thrown

@@ -268,7 +268,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("Second", secondPage.getTitleText());
 
-        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
     }
 
     /**
@@ -302,7 +302,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
 
-        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
     }
 
     /**
@@ -393,7 +393,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
 
-        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
     }
 
     /**
@@ -981,7 +981,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List expectedAlerts = Collections.singletonList("clicked");
+        final String[] expectedAlerts = {"clicked"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

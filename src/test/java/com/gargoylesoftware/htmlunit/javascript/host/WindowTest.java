@@ -172,9 +172,7 @@ public class WindowTest extends WebTestCase {
         assertNull(changedEvent.getOldPage());
         assertEquals("Second", ((HtmlPage) changedEvent.getNewPage()).getTitleText());
 
-        assertEquals(
-            Collections.singletonList("MyNewWindow"),
-            collectedAlerts);
+        assertEquals(new String[] {"MyNewWindow"}, collectedAlerts);
     }
 
     /**
@@ -217,9 +215,7 @@ public class WindowTest extends WebTestCase {
         assertEquals("MyNewWindow", secondWebWindow.getName());
         assertEquals(secondWebWindow, secondWebWindow.getTopWindow());
 
-        assertEquals(
-            Collections.singletonList("MyNewWindow"),
-            collectedAlerts);
+        assertEquals(new String[] {"MyNewWindow"}, collectedAlerts);
     }
 
     /**
@@ -654,8 +650,8 @@ public class WindowTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        assertEquals(Collections.singletonList("foo"), collectedConfirms);
-        assertEquals(Collections.singletonList("true"), collectedAlerts);
+        assertEquals(new String[] {"foo"}, collectedConfirms);
+        assertEquals(new String[] {"true"}, collectedAlerts);
     }
 
     /**
@@ -670,7 +666,7 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
-        assertEquals(Collections.singletonList("true"), collectedAlerts);
+        assertEquals(new String[] {"true"}, collectedAlerts);
     }
 
     /**
@@ -700,8 +696,8 @@ public class WindowTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        assertEquals(Collections.singletonList("foo"), collectedPrompts);
-        assertEquals(Collections.singletonList("Flintstone"), collectedAlerts);
+        assertEquals(new String[] {"foo"}, collectedPrompts);
+        assertEquals(new String[] {"Flintstone"}, collectedAlerts);
     }
 
     /**
@@ -727,7 +723,7 @@ public class WindowTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(Collections.EMPTY_LIST, collectedPrompts);
-        assertEquals(Collections.singletonList("null"), collectedAlerts);
+        assertEquals(new String[] {"null"}, collectedAlerts);
     }
 
     /**
@@ -792,7 +788,7 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
-        assertEquals(Collections.singletonList("Yo!"), collectedAlerts);
+        assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
     /**
@@ -807,7 +803,7 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
-        assertEquals(Collections.singletonList("Yo!"), collectedAlerts);
+        assertEquals(new String[] {"Yo!"}, collectedAlerts);
     }
 
     /**
@@ -1057,7 +1053,7 @@ public class WindowTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
-        assertEquals(Collections.singletonList("foo"), collectedAlerts);
+        assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals("first", page.getTitleText());
     }
 
@@ -1181,7 +1177,7 @@ public class WindowTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
-        assertEquals(Collections.singletonList("true"), collectedAlerts);
+        assertEquals(new String[] {"true"}, collectedAlerts);
         assertEquals("first", page.getTitleText());
     }
 
@@ -2329,7 +2325,7 @@ public class WindowTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         loadPage(html, collectedAlerts);
 
-        final List expectedAlerts = Collections.singletonList("true");
+        final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

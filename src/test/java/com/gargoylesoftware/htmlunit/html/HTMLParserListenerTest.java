@@ -137,14 +137,12 @@ public class HTMLParserListenerTest extends WebTestCase {
         final HTMLParserListener collecter = new HTMLParserListener() {
             public void error(final String message, final URL url,
                     final int line, final int column, final String key) {
-                messages.add(new MessageInfo(true, message, url, line, column,
-                        key));
+                messages.add(new MessageInfo(true, message, url, line, column, key));
             }
 
             public void warning(final String message, final URL url,
                     final int line, final int column, final String key) {
-                messages.add(new MessageInfo(false, message, url, line, column,
-                        key));
+                messages.add(new MessageInfo(false, message, url, line, column, key));
             }
         };
         webClient.setHTMLParserListener(collecter);

@@ -814,10 +814,9 @@ public class FormTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlSubmitInput button = (HtmlSubmitInput)
-            page.getHtmlElementById("clickMe");
+        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         button.click();
-        final List expectedAlerts = Collections.singletonList("hi!");
+        final String[] expectedAlerts = {"hi!"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -838,10 +837,9 @@ public class FormTest extends WebTestCase {
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlSubmitInput button = (HtmlSubmitInput)
-            page.getHtmlElementById("clickMe");
+        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         button.click();
-        final List expectedAlerts = Collections.singletonList("hi!");
+        final String[] expectedAlerts = {"hi!"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

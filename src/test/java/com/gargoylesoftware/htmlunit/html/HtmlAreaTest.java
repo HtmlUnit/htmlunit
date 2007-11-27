@@ -114,7 +114,7 @@ public class HtmlAreaTest extends WebTestCase {
         final HtmlArea area = (HtmlArea) page.getHtmlElementById("second");
 
         final HtmlPage thirdPage = (HtmlPage) area.click();
-        assertEquals(Collections.singletonList("foo"), collectedAlerts);
+        assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals("first", thirdPage.getTitleText());
     }
 
@@ -130,7 +130,7 @@ public class HtmlAreaTest extends WebTestCase {
         final HtmlArea area = (HtmlArea) page.getHtmlElementById("second");
 
         final HtmlPage thirdPage = (HtmlPage) area.click();
-        assertEquals(Collections.singletonList("foo"), collectedAlerts);
+        assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals("second", thirdPage.getTitleText());
     }
 
@@ -151,7 +151,7 @@ public class HtmlAreaTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage) area.click();
 
-        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertSame(page, secondPage);
     }
 

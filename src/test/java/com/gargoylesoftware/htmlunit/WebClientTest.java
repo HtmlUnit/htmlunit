@@ -282,8 +282,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final List headers = Collections.singletonList(
-                new KeyValuePair("Location", URL_FIRST.toExternalForm()));
+        final List headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         
         // builds a webconnection that first sends a redirect and then a "normal" response for
         // the same requested url
@@ -547,8 +546,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setThrowExceptionOnFailingStatusCode(false);
         webClient.setPrintContentOnFailingStatusCode(false);
 
-        final List headers = Collections.singletonList(
-            new KeyValuePair("Location", newLocation));
+        final List headers = Collections.singletonList(new KeyValuePair("Location", newLocation));
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(
             URL_FIRST, firstContent, statusCode,
@@ -981,7 +979,7 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
         final HtmlElement button = page.getHtmlElementById("button1");
 
-        final List expectedAlerts = Collections.singletonList("buttonPushed");
+        final String[] expectedAlerts = {"buttonPushed"};
         collectedAlerts.clear();
 
         button.removeAttribute("disabled");

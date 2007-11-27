@@ -166,7 +166,7 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
-        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertEquals("Second", secondPage.getTitleText());
     }
 
@@ -200,7 +200,7 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
-        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertSame(page, secondPage);
     }
 
@@ -260,7 +260,7 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
-        assertEquals(Collections.singletonList("clicked"), collectedAlerts);
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertSame(page, secondPage);
     }
 

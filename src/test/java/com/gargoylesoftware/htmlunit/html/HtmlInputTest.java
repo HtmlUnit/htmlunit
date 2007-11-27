@@ -160,7 +160,7 @@ public final class HtmlInputTest extends WebTestCase {
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         input.setValueAttribute("foo");
-        assertEquals(Collections.singletonList("changed"), collectedAlerts);
+        assertEquals(new String[] {"changed"}, collectedAlerts);
     }
 
     /**
@@ -247,7 +247,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "<form name='form1'>\n"
             + "<input type='foo' name='text1'>\n"
             + "</form></body></html>";
-        final List expectedAlerts = Collections.singletonList("text");
+        final String[] expectedAlerts = {"text"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List collectedAlerts = new ArrayList();

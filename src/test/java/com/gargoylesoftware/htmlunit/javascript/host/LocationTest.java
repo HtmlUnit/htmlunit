@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -89,7 +88,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList(URL_GARGOYLE.toExternalForm());
+        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -135,7 +134,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("test2", page.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList("ok");
+        final String[] expectedAlerts = {"ok"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -155,7 +154,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final List expectedAlerts = Collections.singletonList(URL_GARGOYLE.toExternalForm());
+        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

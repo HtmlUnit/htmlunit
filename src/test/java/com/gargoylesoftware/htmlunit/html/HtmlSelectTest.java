@@ -448,7 +448,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Change the value
         select.setSelectedAttribute("option3", true);
 
-        final List expectedAlerts = Collections.singletonList("changing");
+        final String[] expectedAlerts = {"changing"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
