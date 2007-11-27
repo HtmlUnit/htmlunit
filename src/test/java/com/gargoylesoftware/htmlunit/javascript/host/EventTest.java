@@ -78,7 +78,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testThisDefined() throws Exception {
-        final List expectedAlerts = Collections.singletonList("clickId");
+        final String[] expectedAlerts = {"clickId"};
 
         final String content
             = "<html><head></head><body>\n"
@@ -91,12 +91,12 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  Verify setting a previously undefined/non-existant property on an Element
+     *  Verify setting a previously undefined/non-existent property on an Element
      * is accessible from inside an event handler
      * @throws Exception if the test fails
      */
     public void testSetPropOnThisDefined() throws Exception {
-        final List expectedAlerts = Collections.singletonList("foo");
+        final String[] expectedAlerts = {"foo"};
 
         final String content
             = "<html><head></head><body>\n"
@@ -115,7 +115,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEventArgDefinedByWrapper() throws Exception {
-        final List expectedAlerts = Collections.singletonList("defined");
+        final String[] expectedAlerts = {"defined"};
 
         final String content
             = "<html><head></head><body>\n"
@@ -130,7 +130,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEventArgDefined() throws Exception {
-        final List expectedAlerts = Collections.singletonList("defined");
+        final String[] expectedAlerts = {"defined"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -145,7 +145,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEventTargetSameAsThis() throws Exception {
-        final List expectedAlerts = Collections.singletonList("pass");
+        final String[] expectedAlerts = {"pass"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -161,7 +161,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEventSrcElementSameAsThis() throws Exception {
-        final List expectedAlerts = Collections.singletonList("pass");
+        final String[] expectedAlerts = {"pass"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -179,7 +179,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEventCurrentTargetSameAsThis() throws Exception {
-        final List expectedAlerts = Collections.singletonList("pass");
+        final String[] expectedAlerts = {"pass"};
         final String content
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
@@ -337,11 +337,11 @@ public class EventTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-    private void onClickPageTest(final String content, final List expectedAlerts) throws Exception, IOException {
+    private void onClickPageTest(final String content, final String[] expectedAlerts) throws Exception, IOException {
         onClickPageTest(BrowserVersion.getDefault(), content, expectedAlerts);
     }
 
-    private void onClickPageTest(final BrowserVersion version, final String content, final List expectedAlerts)
+    private void onClickPageTest(final BrowserVersion version, final String content, final String[] expectedAlerts)
         throws Exception, IOException {
 
         final List collectedAlerts = new ArrayList();
