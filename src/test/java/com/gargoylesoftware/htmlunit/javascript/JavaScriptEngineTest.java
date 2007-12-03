@@ -53,7 +53,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -67,7 +69,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
- * Tests for the {@link JavascriptEngine}.
+ * Tests for the {@link JavaScriptEngine}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -1346,5 +1348,62 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(new String[] {"page 2"}, collectedAlerts);
         assertEquals(2, countingJavaScriptEngine.getExecuteScriptCount());
         assertEquals(1, countingJavaScriptEngine.getCompileCount());
+    }
+
+    /**
+     * Test that code in script tags is executed on page load.  Try different combinations
+     * of the script tag except for the case where a remote javascript page is loaded.  That
+     * one will be tested separately.
+     * @throws Exception If something goes wrong.
+     */
+    public void testScriptTags_AllLocalContent() throws Exception {
+        final String content
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>One</script>\n" // no language specified - assume javascript
+            + "<script language='javascript'>Two</script>\n"
+            + "<script type='text/javascript'>Three</script>\n"
+            + "<script type='text/perl'>Four</script>\n" // type is unsupported language
+            + "</head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+        final List collectedScripts = new ArrayList();
+        loadPageAndCollectScripts(content, collectedScripts);
+
+        // NO MORE: The last expected is the dummy stub that is needed to initialize the javascript engine
+        final String[] expectedScripts = {"One", "Two", "Three"};
+
+        assertEquals(expectedScripts, collectedScripts);
+    }
+
+    private HtmlPage loadPageAndCollectScripts(final String html, final List collectedScripts)
+        throws Exception {
+
+        final WebClient client = new WebClient();
+        client.setJavaScriptEngine(new JavaScriptEngine(client) {
+            public Object execute(final HtmlPage htmlPage, final String sourceCode,
+                    final String sourceName, final int startLine) {
+                collectedScripts.add(sourceCode);
+                return null;
+            }
+            public Object callFunction(
+                    final HtmlPage htmlPage, final Object javaScriptFunction,
+                    final Object thisObject, final Object [] args,
+                    final DomNode htmlElement) {
+                return null;
+            }
+            public boolean isScriptRunning() {
+                return false;
+            }
+        });
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST));
+        return page;
     }
 }
