@@ -58,6 +58,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.Assert;
@@ -800,9 +801,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 return;
             }
 
-            final String code = loadJavaScriptFromUrl(scriptURL, charset);
-            if (code != null) {
-                getWebClient().getJavaScriptEngine().execute(this, code, scriptURL.toExternalForm(), 1);
+            final Script script = loadJavaScriptFromUrl(scriptURL, charset);
+            if (script != null) {
+                getWebClient().getJavaScriptEngine().execute(this, script);
             }
         }
     }
@@ -842,7 +843,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param charset the charset to use to read the text
      * @return the content of the file
      */
-    private String loadJavaScriptFromUrl(final URL url, final String charset) {
+    private Script loadJavaScriptFromUrl(final URL url, final String charset) {
         String scriptEncoding = charset;
         getPageEncoding();
 
@@ -854,6 +855,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         catch (final IOException e) {
             getLog().error("Error loading JavaScript from [" + url.toExternalForm() + "].", e);
             return null;
+        }
+
+        final JavaScriptEngine javaScriptEngine = getWebClient().getJavaScriptEngine();
+        final Script cachedScript = javaScriptEngine.getCachedScript(webResponse);
+        if (cachedScript != null) {
+            return cachedScript;
         }
 
         getWebClient().printContentIfNecessary(webResponse);
@@ -887,7 +894,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         final byte[] data = webResponse.getResponseBody();
-        return EncodingUtil.getString(data, 0, data.length, scriptEncoding);
+        final String scriptCode = EncodingUtil.getString(data, 0, data.length, scriptEncoding);
+        
+        final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
+        javaScriptEngine.cacheScript(webResponse, script);
+        return script;
     }
 
     /**

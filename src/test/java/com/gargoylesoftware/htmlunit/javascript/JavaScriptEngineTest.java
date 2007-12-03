@@ -44,7 +44,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -53,7 +55,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -803,8 +804,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
-        final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(
-                client.getJavaScriptEngine());
+        final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
         client.setJavaScriptEngine(countingJavaScriptEngine);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
@@ -1082,25 +1082,17 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     private static final class CountingJavaScriptEngine extends JavaScriptEngine {
-        private JavaScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;
         private int scriptCallCount_ = 0;
+        private int scriptCompileCount_ = 0;
+        private int scriptExecuteScriptCount_ = 0;
 
         /**
          * Create an instance
-         * @param delegate The ScriptEngine that we're wrapping.
+         * @param client the WebClient
          */
-        protected CountingJavaScriptEngine(final JavaScriptEngine delegate) {
-            super(delegate.getWebClient());
-            delegate_ = delegate;
-        }
-
-        /**
-         * Initialize with a given window.
-         * @param window The window.
-         */
-        public void initialize(final WebWindow window) {
-            delegate_.initialize(window);
+        protected CountingJavaScriptEngine(final WebClient client) {
+            super(client);
         }
 
         /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,int) */
@@ -1108,16 +1100,27 @@ public class JavaScriptEngineTest extends WebTestCase {
                 final HtmlPage htmlPage, final String sourceCode,
                 final String sourceName, final int startLine) {
             scriptExecutionCount_++;
-            return delegate_.execute(htmlPage, sourceCode, sourceName, startLine);
+            return super.execute(htmlPage, sourceCode, sourceName, startLine);
         }
-
+        /** @inheritDoc ScriptEngine#execute(HtmlPage,Script) */
+        public Object execute(final HtmlPage htmlPage, final Script script) {
+            scriptExecuteScriptCount_++;
+            return super.execute(htmlPage, script);
+        }
+        /** @inheritDoc ScriptEngine#compile(HtmlPage,String,String,int) */
+        public Script compile(final HtmlPage htmlPage, final String sourceCode,
+                final String sourceName, final int startLine) {
+            scriptCompileCount_++;
+            return super.compile(htmlPage, sourceCode, sourceName, startLine);
+        }
+        
         /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
         public Object callFunction(
                 final HtmlPage htmlPage, final Object javaScriptFunction,
                 final Object thisObject, final Object[] args,
                 final DomNode htmlElementScope) {
             scriptCallCount_++;
-            return delegate_.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
+            return super.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
         /** @return The number of times that this engine has called functions */
@@ -1130,9 +1133,14 @@ public class JavaScriptEngineTest extends WebTestCase {
             return scriptExecutionCount_;
         }
 
-        /** @return true if the script is running */
-        public boolean isScriptRunning() {
-            return false;
+        /** @return The number of times that this engine has compiled code */
+        public int getCompileCount() {
+            return scriptCompileCount_;
+        }
+
+        /** @return The number of times that this engine has executed a compiled script */
+        public int getExecuteScriptCount() {
+            return scriptExecuteScriptCount_;
         }
     }
 
@@ -1294,4 +1302,49 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * Test that compiled script are cached.
+     * @throws Exception if the test fails
+     */
+    public void testCompiledScriptCached() throws Exception {
+        final String content1
+            = "<html><head><title>foo</title>\n"
+            + "<script src='script.js'></script>"
+            + "</head><body>\n"
+            + "<a href='page2.html'>to page 2</a>"
+            + "</body></html>";
+        final String content2
+            = "<html><head><title>page 2</title>\n"
+            + "<script src='script.js'></script>"
+            + "</head><body>\n"
+            + "</body></html>";
+        final String script = "alert(document.title)";
+        
+        final WebClient client = new WebClient();
+        final MockWebConnection connection = new MockWebConnection(client);
+        client.setWebConnection(connection);
+        connection.setResponse(URL_FIRST, content1);
+        connection.setResponse(new URL(URL_FIRST, "page2.html"), content2);
+
+        final List headersAllowingCache = new ArrayList();
+        headersAllowingCache.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        connection.setResponse(new URL(URL_FIRST, "script.js"), script,
+                200, "ok", "text/javascript", headersAllowingCache);
+
+        final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
+        client.setJavaScriptEngine(countingJavaScriptEngine);
+
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final HtmlPage page1 = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals(new String[] {"foo"}, collectedAlerts);
+        assertEquals(1, countingJavaScriptEngine.getExecuteScriptCount());
+        assertEquals(1, countingJavaScriptEngine.getCompileCount());
+        
+        collectedAlerts.clear();
+        ((ClickableElement) page1.getAnchors().get(0)).click();
+        assertEquals(new String[] {"page 2"}, collectedAlerts);
+        assertEquals(2, countingJavaScriptEngine.getExecuteScriptCount());
+        assertEquals(1, countingJavaScriptEngine.getCompileCount());
+    }
 }

@@ -41,9 +41,11 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -53,6 +55,7 @@ import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.FunctionObject;
+import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -61,6 +64,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -95,6 +99,12 @@ public class JavaScriptEngine implements Serializable {
     private static final Log ScriptEngineLog_ = LogFactory.getLog(JavaScriptEngine.class);
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
+    /**
+     * Cache parsed scripts (only for js files, not for js code embedded in html code)
+     * The WeakHashMap allows cached scripts to be GCed when the WebResponses are not retained
+     * in the {@link com.gargoylesoftware.htmlunit.Cache} anymore.
+     */
+    private final transient Map cachedScripts_ = Collections.synchronizedMap(new WeakHashMap());
 
     /**
      * Key used to place the scope in which the execution of some javascript code
@@ -310,7 +320,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Execute the specified javascript code in the context of a given html page.
+     * Compiles the specified javascript code in the context of a given html page.
      *
      * @param htmlPage The page that the code will execute within
      * @param sourceCode The javascript code to execute.
@@ -318,7 +328,7 @@ public class JavaScriptEngine implements Serializable {
      * @param startLine the line at which the script source starts
      * @return The result of executing the specified code.
      */
-    public Object execute(final HtmlPage htmlPage,
+    public Script compile(final HtmlPage htmlPage,
                            String sourceCode,
                            final String sourceName,
                            final int startLine) {
@@ -350,16 +360,58 @@ public class JavaScriptEngine implements Serializable {
         }
 
         final Scriptable scope = getScope(htmlPage, null);
-
         final String source = sourceCode;
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
         {
             public Object doRun(final Context cx) {
-                return cx.evaluateString(scope, source, sourceName, startLine, null);
+                return cx.compileString(source, sourceName, startLine, null);
             }
 
             protected String getSourceCode(final Context cx) {
                 return source;
+            }
+        };
+
+        return (Script) Context.call(action);
+    }
+
+    /**
+     * Execute the specified javascript code in the context of a given html page.
+     *
+     * @param htmlPage The page that the code will execute within
+     * @param sourceCode The javascript code to execute.
+     * @param sourceName The name that will be displayed on error conditions.
+     * @param startLine the line at which the script source starts
+     * @return The result of executing the specified code.
+     */
+    public Object execute(final HtmlPage htmlPage,
+                           final String sourceCode,
+                           final String sourceName,
+                           final int startLine) {
+
+        final Script script = compile(htmlPage, sourceCode, sourceName, startLine);
+        return execute(htmlPage, script);
+    }
+
+    /**
+     * Execute the specified javascript code in the context of a given html page.
+     *
+     * @param htmlPage The page that the code will execute within
+     * @param script the script to execute
+     * @return The result of executing the specified code.
+     */
+    public Object execute(final HtmlPage htmlPage, final Script script) {
+
+        final Scriptable scope = getScope(htmlPage, null);
+
+        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
+        {
+            public Object doRun(final Context cx) {
+                return script.exec(cx, scope);
+            }
+
+            protected String getSourceCode(final Context cx) {
+                return null;
             }
         };
         
@@ -543,5 +595,25 @@ public class JavaScriptEngine implements Serializable {
             }
         }
         return newSourceCode;
+    }
+
+
+    /**
+     * Get the cached script for the given response.
+     * @param webResponse the response corresponding to the script code
+     * @return the parsed script
+     */
+    public Script getCachedScript(final WebResponse webResponse) {
+        return (Script) cachedScripts_.get(webResponse);
+    }
+
+    /**
+     * Cache a parsed script
+     * @param webResponse the response corresponding to the script code. A weak reference to this object
+     * will be used as key for the cache.
+     * @param script the parsed script to cache
+     */
+    public void cacheScript(final WebResponse webResponse, final Script script) {
+        cachedScripts_.put(webResponse, script);
     }
 }
