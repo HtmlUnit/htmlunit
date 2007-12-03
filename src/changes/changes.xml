@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                HtmlTextInput: type() appends text to the value.
+            </action>
             <action type="add" dev="mguillem" id="1716540">
                 JavaScript: cache parsed javascript responses.
             </action>

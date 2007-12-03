@@ -37,59 +37,38 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Map;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- *  Wrapper for the html element "input"
+ * Tests for {@link HtmlTextInput}.
  *
  * @version $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlTextInput extends HtmlInput {
-
-    private static final long serialVersionUID = -2473799124286935674L;
+public class HtmlTextInputTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
-     * @param page The page that contains this element
-     * @param attributes the initial attributes
-     * @deprecated You should not directly construct HtmlTextInput.
+     * @param name The name of the test
      */
-    //TODO: to be removed, deprecated in 23 June 2007
-    public HtmlTextInput(final HtmlPage page, final Map attributes) {
-        this(null, TAG_NAME, page, attributes);
+    public HtmlTextInputTest(final String name) {
+        super(name);
     }
 
     /**
-     *  Create an instance
-     *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
-     * @param attributes the initial attributes
+     * @throws Exception if the test fails
      */
-    HtmlTextInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+    public void testType() throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "<input id='text1'/>\n"
+            + "</body></html>";
+        final HtmlPage page = (HtmlPage) loadPage(html);
+        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
+        text1.type("abcd");
+        assertEquals("abcd", text1.getValueAttribute());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return;
-        }
-        super.type(c, shiftKey, ctrlKey, altKey);
-
-        //TODO: handle backspace
-        if (!Character.isWhitespace(c)) {
-            setValueAttribute(getValueAttribute() + c);
-        }
-    }
 }
