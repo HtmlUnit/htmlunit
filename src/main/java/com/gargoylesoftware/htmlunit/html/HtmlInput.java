@@ -44,8 +44,8 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
@@ -472,8 +472,8 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
         final HtmlPage page = htmlElement.getPage();
 
-        final ScriptEngine engine = htmlElement.getPage().getWebClient().getScriptEngine();
-        if (engine != null && engine.isScriptRunning()) {
+        final JavaScriptEngine engine = htmlElement.getPage().getWebClient().getJavaScriptEngine();
+        if (engine.isScriptRunning()) {
             return page;
         }
         final ScriptResult scriptResult = htmlElement.fireEvent(Event.TYPE_CHANGE);

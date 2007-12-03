@@ -58,12 +58,12 @@ import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -88,9 +88,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
-public class JavaScriptEngine extends ScriptEngine implements Serializable {
+public class JavaScriptEngine implements Serializable {
 
     private static final long serialVersionUID = -5414040051465432088L;
+    private final WebClient webClient_;
+    private static final Log ScriptEngineLog_ = LogFactory.getLog(JavaScriptEngine.class);
 
     private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
 
@@ -117,11 +119,21 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
      * @param webClient The webClient that will own this engine.
      */
     public JavaScriptEngine(final WebClient webClient) {
-        super(webClient);
+        webClient_ = webClient;
+    }
+
+
+    /**
+     * Return the web client that this engine is associated with.
+     * @return The web client.
+     */
+    public final WebClient getWebClient() {
+        return webClient_;
     }
 
     /**
-     * {@inheritDoc}
+     * Perform initialization for the given webWindow
+     * @param webWindow the web window to initialize for
      */
     public void initialize(final WebWindow webWindow) {
         Assert.notNull("webWindow", webWindow);
@@ -497,5 +509,39 @@ public class JavaScriptEngine extends ScriptEngine implements Serializable {
         protected abstract Object doRun(final Context cx);
 
         protected abstract String getSourceCode(final Context cx);
+    }
+
+    /**
+     * Return the log object that is being used to log information about the script engine.
+     * @return The log
+     */
+    public static Log getScriptEngineLog() {
+        return ScriptEngineLog_;
+    }
+
+    /**
+     * Pre process the specified source code in the context of the given page using the processor specified
+     * in the webclient. This method delegates to the pre processor handler specified in the
+     * <code>WebClient</code>. If no pre processor handler is defined, the original source code is returned
+     * unchanged.
+     * @param htmlPage The page
+     * @param sourceCode The code to process.
+     * @param sourceName A name for the chunk of code.  This will be used in error messages.
+     * @param htmlElement The html element that will act as the context.
+     * @return The source code after being pre processed
+     * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
+     */
+    public String preProcess(
+        final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement) {
+
+        String newSourceCode = sourceCode;
+        final ScriptPreProcessor preProcessor = getWebClient().getScriptPreProcessor();
+        if (preProcessor != null) {
+            newSourceCode = preProcessor.preProcess(htmlPage, sourceCode, sourceName, htmlElement);
+            if (newSourceCode == null) {
+                newSourceCode = "";
+            }
+        }
+        return newSourceCode;
     }
 }

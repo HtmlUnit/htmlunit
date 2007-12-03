@@ -125,7 +125,7 @@ public class WebClient implements Serializable {
     private final String proxyHost_;
     private final int proxyPort_;
     private final Map proxyBypassHosts_;
-    private ScriptEngine scriptEngine_;
+    private JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cookiesEnabled_ = true;
     private boolean popupBlockerEnabled_;
@@ -614,11 +614,10 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  This method is intended for testing only - use at your own risk.
-     *
-     * @return the current script engine
+     * This method is intended for testing only - use at your own risk.
+     * @return the current JavaScript engine (never <code>null</code>).
      */
-    public ScriptEngine getScriptEngine() {
+    public JavaScriptEngine getJavaScriptEngine() {
         return scriptEngine_;
     }
 
@@ -627,7 +626,10 @@ public class WebClient implements Serializable {
      *
      * @param engine  The new script engine to use.
      */
-    public void setScriptEngine(final ScriptEngine engine) {
+    public void setJavaScriptEngine(final JavaScriptEngine engine) {
+        if (engine == null) {
+            throw new NullPointerException("Can't set JavaScriptEngine to null");
+        }
         scriptEngine_ = engine;
     }
 

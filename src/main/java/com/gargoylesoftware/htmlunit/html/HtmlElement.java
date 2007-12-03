@@ -59,7 +59,6 @@ import org.mozilla.javascript.Function;
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
@@ -1181,8 +1180,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @return the execution result. <code>null</code> if nothing is executed.
      */
     public ScriptResult fireEvent(final Event event) {
-        final ScriptEngine engine = getPage().getWebClient().getScriptEngine();
-        if (!getPage().getWebClient().isJavaScriptEnabled() || engine == null) {
+        if (!getPage().getWebClient().isJavaScriptEnabled()) {
             return null;
         }
 

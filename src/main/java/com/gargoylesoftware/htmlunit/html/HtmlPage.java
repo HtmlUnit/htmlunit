@@ -65,7 +65,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -75,6 +74,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeImpl;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -710,8 +710,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      */
     public ScriptResult executeJavaScriptIfPossible(String sourceCode, final String sourceName, final int startLine) {
 
-        final ScriptEngine engine = getWebClient().getScriptEngine();
-        if (!getWebClient().isJavaScriptEnabled() || engine == null) {
+        if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
 
@@ -725,7 +724,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
         final WebWindow window = getEnclosingWindow();
         getWebClient().pushClearFirstWindow();
-        final Object result = engine.execute(this, sourceCode, sourceName, startLine);
+        final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);
 
         WebWindow firstWindow = getWebClient().popFirstWindow();
         if (firstWindow == null) {
@@ -759,7 +758,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             return new ScriptResult(null, this);
         }
 
-        final ScriptEngine engine = getWebClient().getScriptEngine();
+        final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
         WebWindow firstWindow = getWebClient().popFirstWindow();
@@ -784,8 +783,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param charset The charset attribute from the script tag.
      */
     void loadExternalJavaScriptFile(final String srcAttribute, final String charset) {
-        final ScriptEngine engine = getWebClient().getScriptEngine();
-        if (getWebClient().isJavaScriptEnabled() && engine != null) {
+        if (getWebClient().isJavaScriptEnabled()) {
             final URL scriptURL;
             try {
                 scriptURL = getFullyQualifiedUrl(srcAttribute);
@@ -804,7 +802,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
 
             final String code = loadJavaScriptFromUrl(scriptURL, charset);
             if (code != null) {
-                engine.execute(this, code, scriptURL.toExternalForm(), 1);
+                getWebClient().getJavaScriptEngine().execute(this, code, scriptURL.toExternalForm(), 1);
             }
         }
     }

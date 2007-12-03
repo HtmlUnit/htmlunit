@@ -50,7 +50,6 @@ import org.mozilla.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.ScriptEngine;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -805,8 +804,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(
-                client.getScriptEngine());
-        client.setScriptEngine(countingJavaScriptEngine);
+                client.getJavaScriptEngine());
+        client.setJavaScriptEngine(countingJavaScriptEngine);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
@@ -1082,8 +1081,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
     }
 
-    private static final class CountingJavaScriptEngine extends ScriptEngine {
-        private ScriptEngine delegate_;
+    private static final class CountingJavaScriptEngine extends JavaScriptEngine {
+        private JavaScriptEngine delegate_;
         private int scriptExecutionCount_ = 0;
         private int scriptCallCount_ = 0;
 
@@ -1091,7 +1090,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * Create an instance
          * @param delegate The ScriptEngine that we're wrapping.
          */
-        protected CountingJavaScriptEngine(final ScriptEngine delegate) {
+        protected CountingJavaScriptEngine(final JavaScriptEngine delegate) {
             super(delegate.getWebClient());
             delegate_ = delegate;
         }

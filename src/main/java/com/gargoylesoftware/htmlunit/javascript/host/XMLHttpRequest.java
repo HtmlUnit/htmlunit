@@ -137,7 +137,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 context = Context.getCurrentContext();
             }
             final Scriptable scope = stateChangeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getScriptEngine();
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
             
             final int nbExecutions;
             if (async_ && STATE_LOADING == state) {

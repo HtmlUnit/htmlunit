@@ -94,7 +94,7 @@ public class ScriptEngineTest extends WebTestCase {
         throws Exception {
 
         final WebClient client = new WebClient();
-        client.setScriptEngine(new JavaScriptEngine(client) {
+        client.setJavaScriptEngine(new JavaScriptEngine(client) {
             public Object execute(
                     final HtmlPage htmlPage, final String sourceCode,
                     final String sourceName, final int startLine) {
