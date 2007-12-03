@@ -145,13 +145,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
-        if (isChecked()) {
-            setChecked(false);
-        }
-        else {
-            setChecked(true);
-        }
-
+        setChecked(!isChecked());
         return super.doClickAction(defaultPage);
     }
 
@@ -162,6 +156,13 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     protected boolean isStateUpdateFirst() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected void preventDefault() {
+        setChecked(!isChecked());
     }
 
     /**
@@ -193,4 +194,3 @@ public class HtmlCheckBoxInput extends HtmlInput {
     }
 
 }
-

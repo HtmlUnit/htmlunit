@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 public class EventTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name Name of the test
      */
@@ -73,7 +73,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  Verify the "this" object refers to the Element being clicked when an
+     * Verify the "this" object refers to the Element being clicked when an
      * event handler is invoked.
      * @throws Exception if the test fails
      */
@@ -91,7 +91,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  Verify setting a previously undefined/non-existent property on an Element
+     * Verify setting a previously undefined/non-existent property on an Element
      * is accessible from inside an event handler
      * @throws Exception if the test fails
      */
@@ -126,7 +126,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  Verify that when event handler is invoked an argument is passed in.
+     * Verify that when event handler is invoked an argument is passed in.
      * @throws Exception if the test fails
      */
     public void testEventArgDefined() throws Exception {
@@ -175,7 +175,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     *  event.currentTarget == this inside javascript event handler
+     * event.currentTarget == this inside javascript event handler
      * @throws Exception if the test fails
      */
     public void testEventCurrentTargetSameAsThis() throws Exception {

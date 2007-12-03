@@ -275,10 +275,13 @@
         <property name="cancelBubble" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        <function name="stopPropagation">
+        <function name="initEvent">
             <browser name="Firefox"/>
         </function>
-        <function name="initEvent">
+        <function name="preventDefault">
+            <browser name="Firefox"/>
+        </function>
+        <function name="stopPropagation">
             <browser name="Firefox"/>
         </function>
     </class>

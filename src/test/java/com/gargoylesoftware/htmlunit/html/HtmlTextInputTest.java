@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -71,4 +72,34 @@ public class HtmlTextInputTest extends WebTestCase {
         assertEquals("abcd", text1.getValueAttribute());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testPreventDefault() throws Exception {
+        testPreventDefault(BrowserVersion.FIREFOX_2);
+        testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7_0);
+    }
+
+    private void testPreventDefault(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e && e.target.value.length > 2)\n"
+            + "      e.preventDefault();\n"
+            + "    else if (!e && window.event.srcElement.value.length > 2)\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('text1').onkeydown = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<input id='text1'/>\n"
+            + "</body></html>";
+
+        final HtmlPage page = (HtmlPage) loadPage(browserVersion, html, null);
+        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
+        text1.type("abcd");
+        assertEquals("abc", text1.getValueAttribute());
+    }
 }

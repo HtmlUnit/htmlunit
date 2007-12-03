@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- *  Wrapper for the html element "input"
+ * Wrapper for the html element "input".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -52,6 +52,7 @@ import java.util.Map;
 public class HtmlTextInput extends HtmlInput {
 
     private static final long serialVersionUID = -2473799124286935674L;
+    private boolean preventDefault_;
 
     /**
      *  Create an instance
@@ -85,11 +86,19 @@ public class HtmlTextInput extends HtmlInput {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return;
         }
+        preventDefault_ = false;
         super.type(c, shiftKey, ctrlKey, altKey);
 
         //TODO: handle backspace
-        if (!Character.isWhitespace(c)) {
+        if (!Character.isWhitespace(c) && !preventDefault_) {
             setValueAttribute(getValueAttribute() + c);
         }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    protected void preventDefault() {
+        preventDefault_ = true;
     }
 }

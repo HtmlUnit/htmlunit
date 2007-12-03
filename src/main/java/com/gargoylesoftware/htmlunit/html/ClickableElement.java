@@ -362,4 +362,5 @@ public abstract class ClickableElement extends StyledElement {
     protected boolean isStateUpdateFirst() {
         return false;
     }
+    
 }

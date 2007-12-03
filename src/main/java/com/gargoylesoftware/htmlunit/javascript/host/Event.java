@@ -126,6 +126,7 @@ public class Event extends SimpleScriptable {
     private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
     private boolean stopPropagation_;
     private Object returnValue_;
+    private boolean preventDefault_;
 
     /**
      * The current event phase. This is a W3C standard attribute not implemented by IE. One of
@@ -430,8 +431,25 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * If, during any stage of event flow, this method is called the event is canceled.
+     * Any default action associated with the event will not occur.
+     * Calling this method for a non-cancelable event has no effect.
+     */
+    public void jsxFunction_preventDefault() {
+        preventDefault_ = true;
+    }
+
+    /**
+     * Returns if the preventDefault() method has been called for this event.
+     * @return if the preventDefault() method has been called for this event.
+     */
+    public boolean isPreventDefault() {
+        return preventDefault_;
+    }
+    
+    /**
      * Copies properties from another event to this event. This method should
-     * be overriden in subclasses in order to account for extra properties.
+     * be overridden in subclasses in order to account for extra properties.
      * @param event the event to copy the properties from
      */
     public void copyPropertiesFrom(final Event event) {

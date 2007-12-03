@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -200,4 +201,33 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         assertEquals("Second", secondPage.getTitleText());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testPreventDefault() throws Exception {
+        testPreventDefault(BrowserVersion.FIREFOX_2);
+        testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7_0);
+    }
+
+    private void testPreventDefault(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e)\n"
+            + "      e.preventDefault();\n"
+            + "    else\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('checkbox1').onclick = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<input type='checkbox' id='checkbox1'/>\n"
+            + "</body></html>";
+        final HtmlPage page = (HtmlPage) loadPage(browserVersion, html, null);
+        final HtmlCheckBoxInput checkbox1 = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
+        checkbox1.click();
+        assertFalse(checkbox1.isChecked());
+    }
 }

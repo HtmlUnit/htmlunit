@@ -1186,14 +1186,27 @@ public abstract class HtmlElement extends DomNamespaceNode {
 
         getLog().debug("Firing " + event);
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
-        final ContextAction action = new ContextAction()
-        {
+        final ContextAction action = new ContextAction() {
             public Object run(final Context cx) {
                 return jsElt.fireEvent(event);
             }
         };
 
-        return (ScriptResult) Context.call(action);
+        final ScriptResult result = (ScriptResult) Context.call(action);
+        final boolean isIE = getPage().getWebClient().getBrowserVersion().isIE();
+        if ((!isIE && event.isPreventDefault()) || (isIE && ScriptResult.isFalse(result))) {
+            preventDefault();
+        }
+        return result;
+    }
+
+    /**
+     * This method is called if the current fired event is canceled by <tt>preventDefault()</tt> in FireFox,
+     * or by returning <tt>false</tt> in Internet Explorer.
+     *
+     * The default implementation does nothing.
+     */
+    protected void preventDefault() {
     }
 
     /**
