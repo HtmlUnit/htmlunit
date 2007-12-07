@@ -43,7 +43,7 @@ mvn2home
 				uselogger="true"
 		        >
                     <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
-            </ant>
+            </antpublisher>
 			<artifactspublisher dir="&basedir;/htmlunit/cruisecontrol/checkout/target" dest="htmlunit" />
 			<!-- htmlemail is used only for explicit subscribers -->
 			<htmlemail
