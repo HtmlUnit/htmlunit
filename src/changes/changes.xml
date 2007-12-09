@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: element.dispatchEvent() should exactly behave as calling ClickableElement.click() and .dblClick().
+            </action>
             <action type="add" dev="asashour" id="1813007">
                 JavaScript: add initial support for event.preventDefault() (checkbox, text input, others to follow) (#1813007).
             </action>

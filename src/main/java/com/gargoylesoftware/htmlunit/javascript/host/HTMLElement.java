@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
@@ -1788,7 +1789,33 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
     public boolean jsxFunction_dispatchEvent(final Event event) {
-        fireEvent(event);
+        final HtmlElement element = getHtmlElementOrDie();
+        if (event instanceof MouseEvent && element instanceof ClickableElement) {
+            if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {
+                try {
+                    ((ClickableElement) element).click(event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(),
+                            event.jsxGet_altKey());
+                }
+                catch (final IOException e) {
+                    throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());
+                }
+            }
+            else if (event.jsxGet_type().equals(MouseEvent.TYPE_DBL_CLICK)) {
+                try {
+                    ((ClickableElement) element).dblClick(event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(),
+                            event.jsxGet_altKey());
+                }
+                catch (final IOException e) {
+                    throw Context.reportRuntimeError("Error calling dblClick(): " + e.getMessage());
+                }
+            }
+            else {
+                fireEvent(event);
+            }
+        }
+        else {
+            fireEvent(event);
+        }
         // TODO: should not always return true! see the javadoc above!
         return true;
     }
