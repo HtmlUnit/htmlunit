@@ -2004,4 +2004,14 @@ public class HTMLElementTest extends WebTestCase {
 
         assertEquals(expectedAlerts, actual);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testDispatchEvent2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testHTMLFile("HTMLElementTest_dispatchEvent2.html");
+    }
 }
