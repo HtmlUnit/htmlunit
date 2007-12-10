@@ -798,4 +798,11 @@ public class EventTest extends WebTestCase {
     public void testDOMContentLoaded() throws Exception {
         testHTMLFile("EventTest_DOMContentLoaded.html");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testPreventDefault() throws Exception {
+        testHTMLFile("EventTest_preventDefault.html");
+    }
 }

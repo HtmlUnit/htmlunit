@@ -107,13 +107,34 @@ public abstract class ClickableElement extends StyledElement {
 
         final HtmlPage page = getPage();
 
+        final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
+                MouseEvent.BUTTON_LEFT);
+        return click(event);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Simulate clicking this element.
+     *
+     * @param event the click event used.
+     *
+     * @return The page that occupies this window after this element is
+     * clicked. It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
+     */
+    public Page click(final Event event)
+        throws IOException {
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return getPage();
+        }
+
+        final HtmlPage page = getPage();
+
         boolean stateUpdated = false;
         if (isStateUpdateFirst()) {
             doClickAction(page);
             stateUpdated = true;
         }
-        final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
-                MouseEvent.BUTTON_LEFT);
         final ScriptResult scriptResult = fireEvent(event);
         final Page currentPage;
         if (scriptResult == null) {

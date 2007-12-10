@@ -1793,8 +1793,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         if (event instanceof MouseEvent && element instanceof ClickableElement) {
             if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {
                 try {
-                    ((ClickableElement) element).click(event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(),
-                            event.jsxGet_altKey());
+                    ((ClickableElement) element).click(event);
                 }
                 catch (final IOException e) {
                     throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());
@@ -1816,8 +1815,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
         else {
             fireEvent(event);
         }
-        // TODO: should not always return true! see the javadoc above!
-        return true;
+        return !event.isPreventDefault();
     }
 
     /**

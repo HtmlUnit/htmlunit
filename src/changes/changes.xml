@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour" id="1813007">
+                JavaScript: element.dispatchEvent() returns correct value (based on event.preventDefault()) (#1813007).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: element.dispatchEvent() should exactly behave as calling ClickableElement.click() and .dblClick().
             </action>
