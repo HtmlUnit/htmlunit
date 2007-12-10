@@ -68,6 +68,8 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     
     private int selectionEnd_;
     
+    private boolean preventDefault_;
+
     /**
      *  Create an instance
      *
@@ -430,5 +432,28 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
         printWriter.print(">");
         printWriter.print(getText());
         printWriter.print(indent + "</textarea>");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return;
+        }
+        preventDefault_ = false;
+        super.type(c, shiftKey, ctrlKey, altKey);
+
+        //TODO: handle backspace
+        if (!Character.isWhitespace(c) && !preventDefault_) {
+            setText(getText() + c);
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    protected void preventDefault() {
+        preventDefault_ = true;
     }
 }
