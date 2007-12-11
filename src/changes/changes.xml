@@ -12,7 +12,7 @@
 				and returns correct value (based on event.preventDefault()) (#1813007).
             </action>
             <action type="add" dev="asashour" id="1813007">
-                JavaScript: add initial support for event.preventDefault() (checkbox, text input, textarea, others to follow) (#1813007).
+                JavaScript: add initial support for event.preventDefault() (anchor, checkbox, text input, textarea, others to follow) (#1813007).
             </action>
             <action type="add" dev="asashour">
                 HtmlTextInput: type() appends text to the value.

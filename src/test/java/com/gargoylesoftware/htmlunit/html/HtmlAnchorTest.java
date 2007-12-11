@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -436,5 +437,36 @@ public class HtmlAnchorTest extends WebTestCase {
         assertEquals("Wrong new Page returned", "Second", secondPage.getTitleText());
         assertSame("New Page not in correct WebWindow", firstPage.getEnclosingWindow(), secondPage
                 .getEnclosingWindow());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testPreventDefault() throws Exception {
+        testPreventDefault(BrowserVersion.FIREFOX_2);
+        testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7_0);
+    }
+
+    private void testPreventDefault(final BrowserVersion browserVersion) throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e)\n"
+            + "      e.preventDefault();\n"
+            + "    else\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('a1').onclick = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<a href='" + URL_SECOND + "' id='a1'>Test</a>\n"
+            + "</body></html>";
+
+        final HtmlPage page = (HtmlPage) loadPage(browserVersion, html, null);
+        final HtmlAnchor a1 = (HtmlAnchor) page.getHtmlElementById("a1");
+        final HtmlPage secondPage = (HtmlPage) a1.click();
+        assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getUrl());
     }
 }

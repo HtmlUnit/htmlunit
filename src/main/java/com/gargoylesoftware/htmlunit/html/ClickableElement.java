@@ -143,7 +143,8 @@ public abstract class ClickableElement extends StyledElement {
         else {
             currentPage = scriptResult.getNewPage();
         }
-        if (stateUpdated || ScriptResult.isFalse(scriptResult)) {
+
+        if (stateUpdated || ScriptResult.isFalse(scriptResult) || event.isPreventDefault()) {
             return currentPage;
         }
         else {
