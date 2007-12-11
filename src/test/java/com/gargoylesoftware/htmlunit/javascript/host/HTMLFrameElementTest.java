@@ -227,7 +227,7 @@ public class HTMLFrameElementTest extends WebTestCase {
             + "</body></html>";
 
         webConnection.setResponse(URL_GARGOYLE, mainContent);
-        webConnection.setResponse(new URL(URL_GARGOYLE.toString() + "testFrame.html"), frameContent);
+        webConnection.setResponse(new URL(URL_GARGOYLE + "testFrame.html"), frameContent);
 
         webClient.setWebConnection(webConnection);
         final List collectedAlerts = new ArrayList();

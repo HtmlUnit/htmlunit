@@ -113,8 +113,8 @@ public class HtmlImageInput extends HtmlInput {
             
         if (wasPositionSpecified_) {
             return new KeyValuePair[]{
-                new KeyValuePair(prefix + "x", String.valueOf(xPosition_)),
-                new KeyValuePair(prefix + "y", String.valueOf(yPosition_))
+                new KeyValuePair(prefix + 'x', String.valueOf(xPosition_)),
+                new KeyValuePair(prefix + 'y', String.valueOf(yPosition_))
             };
         }
         return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getValueAttribute())};

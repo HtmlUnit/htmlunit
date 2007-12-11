@@ -646,7 +646,7 @@ public class FormTest extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
-        final String[] expectedAlerts = {name + "2", "foo"};
+        final String[] expectedAlerts = {name + '2', "foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

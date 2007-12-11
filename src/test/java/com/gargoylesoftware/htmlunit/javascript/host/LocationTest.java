@@ -469,9 +469,9 @@ public class LocationTest extends WebTestCase {
         final String frameTest = "<html><head><title>Test</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, mainContent);
-        webConnection.setResponse(new URL(URL_FIRST.toString() + "/menu.html"), frameMenu);
-        webConnection.setResponse(new URL(URL_FIRST.toString() + "/content.html"), frameContent);
-        webConnection.setResponse(new URL(URL_FIRST.toString() + "/test.html"), frameTest);
+        webConnection.setResponse(new URL(URL_FIRST + "/menu.html"), frameMenu);
+        webConnection.setResponse(new URL(URL_FIRST + "/content.html"), frameContent);
+        webConnection.setResponse(new URL(URL_FIRST + "/test.html"), frameTest);
 
         webClient.setWebConnection(webConnection);
 

@@ -369,7 +369,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     public final Object jsxFunction_tags(final String tagName) {
         final HTMLCollection array = new HTMLCollection(this);
         try {
-            final String newXPathExpr = xpath_.toString() + "[name() = '" + tagName.toLowerCase() + "']";
+            final String newXPathExpr = xpath_ + "[name() = '" + tagName.toLowerCase() + "']";
             array.init(node_, xpath_.getNavigator().parseXPath(newXPathExpr));
         }
         catch (final SAXPathException e) {
@@ -386,7 +386,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     public String toString() {
         if (xpath_ != null) {
-            return super.toString() + "<" + xpath_.toString() + ">";
+            return super.toString() + '<' + xpath_ + '>';
         }
         return super.toString();
     }

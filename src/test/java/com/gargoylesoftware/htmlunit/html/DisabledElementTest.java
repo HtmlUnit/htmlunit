@@ -98,7 +98,7 @@ public class DisabledElementTest extends WebTestCase {
             final TestSuite suite, final String elementName,
             final String elementHtml) {
 
-        final TestSuite subsuite = new TestSuite(DisabledElementTest.class.getName() + "_" + elementName);
+        final TestSuite subsuite = new TestSuite(DisabledElementTest.class.getName() + '_' + elementName);
 
         final Method[] methods = DisabledElementTest.class.getMethods();
         for (int i = 0; i < methods.length; i++) {

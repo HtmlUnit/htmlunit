@@ -207,7 +207,7 @@ public class AttributesTest extends WebTestCase {
         final int index = className.lastIndexOf('.');
         className = className.substring(index + 1);
 
-        return "testAttributes_" + className + "_" + method.getName();
+        return "testAttributes_" + className + '_' + method.getName();
     }
 
     /**
