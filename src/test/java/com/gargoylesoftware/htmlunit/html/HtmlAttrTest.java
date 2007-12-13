@@ -72,6 +72,8 @@ public class HtmlAttrTest extends WebTestCase {
 
     static {
         HTML_ELEMENT = new HtmlElement(null, "dummy", null, Collections.EMPTY_MAP) {
+            private static final long serialVersionUID = -3099722791571459332L;
+
             public HtmlPage getPage() {
                 return null;
             }

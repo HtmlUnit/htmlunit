@@ -48,6 +48,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
  */
 public class XMLAttribute extends SimpleScriptable {
 
+    private static final long serialVersionUID = -5235485258901782888L;
+
     /**
      * The name of this attribute.
      */

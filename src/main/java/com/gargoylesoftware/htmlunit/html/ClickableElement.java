@@ -105,8 +105,6 @@ public abstract class ClickableElement extends StyledElement {
             return getPage();
         }
 
-        final HtmlPage page = getPage();
-
         final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT);
         return click(event);

@@ -296,6 +296,8 @@ public class HtmlFileInputTest extends WebTestCase {
      */
     public static class Upload1Servlet extends ServletContentWrapper {
 
+        private static final long serialVersionUID = 6693252829875297263L;
+
         /**
          * Creates an instance.
          */
@@ -313,6 +315,8 @@ public class HtmlFileInputTest extends WebTestCase {
      * Servlet for '/upload2'
      */
     public static class Upload2Servlet extends HttpServlet {
+
+        private static final long serialVersionUID = -1350878755076138012L;
 
         /**
          * {@inheritDoc}

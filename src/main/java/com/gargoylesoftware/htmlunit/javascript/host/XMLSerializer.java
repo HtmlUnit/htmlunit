@@ -50,6 +50,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class XMLSerializer extends SimpleScriptable {
 
+    private static final long serialVersionUID = -934136191731299896L;
+
     /**
      * Javascript constructor.
      */

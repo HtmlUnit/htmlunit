@@ -1232,7 +1232,9 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         assertInstanceOf(webClient.getRefreshHandler(), ImmediateRefreshHandler.class);
 
-        final RefreshHandler handler = new ImmediateRefreshHandler() { };
+        final RefreshHandler handler = new ImmediateRefreshHandler() {
+            private static final long serialVersionUID = 5357553245330318812L;
+        };
         webClient.setRefreshHandler(handler);
         assertSame(handler, webClient.getRefreshHandler());
     }
@@ -1615,6 +1617,8 @@ public class WebClientTest extends WebTestCase {
     public void testGetPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
         final WebClient wc = new WebClient() {
+            private static final long serialVersionUID = -8065766721260679248L;
+
             public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
                 calledUrls[0] = url;
                 return null;

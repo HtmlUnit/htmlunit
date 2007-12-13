@@ -76,6 +76,8 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
                 content += "</head><body></body></html>";
                 nbCalls_++;
                 return new StringWebResponse(content, settings.getURL()) {
+                    private static final long serialVersionUID = -4739710581533574855L;
+
                     public SubmitMethod getRequestMethod() {
                         return settings.getSubmitMethod();
                     }

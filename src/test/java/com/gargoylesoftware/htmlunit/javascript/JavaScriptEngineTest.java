@@ -1084,6 +1084,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     private static final class CountingJavaScriptEngine extends JavaScriptEngine {
+        private static final long serialVersionUID = 7010508171587446215L;
         private int scriptExecutionCount_ = 0;
         private int scriptCallCount_ = 0;
         private int scriptCompileCount_ = 0;
@@ -1382,6 +1383,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         client.setJavaScriptEngine(new JavaScriptEngine(client) {
+            private static final long serialVersionUID = -3069321085262318962L;
             public Object execute(final HtmlPage htmlPage, final String sourceCode,
                     final String sourceName, final int startLine) {
                 collectedScripts.add(sourceCode);

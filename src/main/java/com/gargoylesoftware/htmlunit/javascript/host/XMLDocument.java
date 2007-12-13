@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class XMLDocument extends Document {
 
+    private static final long serialVersionUID = 1225601711396578064L;
     private boolean async_ = true;
     private boolean preserveWhiteSpace_;
     

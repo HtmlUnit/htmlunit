@@ -54,6 +54,8 @@ import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
  */
 public class XmlElement extends DomNamespaceNode {
 
+    private static final long serialVersionUID = -8119109851558707854L;
+
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 

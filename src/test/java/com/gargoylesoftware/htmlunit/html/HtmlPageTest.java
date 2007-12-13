@@ -1436,6 +1436,8 @@ public class HtmlPageTest extends WebTestCase {
                 content += "</head><body></body></html>";
                 nbCalls_++;
                 return new StringWebResponse(content, settings.getURL()) {
+                    private static final long serialVersionUID = 4945986137562358686L;
+
                     public SubmitMethod getRequestMethod() {
                         return settings.getSubmitMethod();
                     }

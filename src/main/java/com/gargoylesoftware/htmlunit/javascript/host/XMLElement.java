@@ -62,6 +62,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
  */
 public class XMLElement extends NodeImpl {
 
+    private static final long serialVersionUID = 5616690634173934926L;
+
     /**
      * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
      * @param expression A string specifying an XPath expression.
@@ -98,6 +100,8 @@ public class XMLElement extends NodeImpl {
             list.add(attr.getScriptObject());
         }
         return new NativeArray(list.toArray()) {
+            private static final long serialVersionUID = 4370316794526432724L;
+
             /**
              * {@inheritDoc}
              */

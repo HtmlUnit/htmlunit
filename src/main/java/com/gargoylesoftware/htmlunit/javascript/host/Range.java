@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Marc Guillemot
  */
 public class Range extends SimpleScriptable {
+    private static final long serialVersionUID = 4326375945958952177L;
     private NodeImpl startContainer_, endContainer_;
     private int startOffset_, endOffset_;
 

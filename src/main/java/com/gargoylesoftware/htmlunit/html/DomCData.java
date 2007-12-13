@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.Page;
  */
 public class DomCData extends DomCharacterData {
 
+    private static final long serialVersionUID = 4941214369614888520L;
 
     /** the symbolic node name */
     public static final String NODE_NAME = "#cdata-section";

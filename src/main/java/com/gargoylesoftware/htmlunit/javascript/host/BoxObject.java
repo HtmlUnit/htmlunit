@@ -47,6 +47,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class BoxObject extends SimpleScriptable {
 
+    private static final long serialVersionUID = -6650009325965623469L;
+
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
