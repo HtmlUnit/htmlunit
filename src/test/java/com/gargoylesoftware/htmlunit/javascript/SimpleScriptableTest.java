@@ -227,4 +227,25 @@ public class SimpleScriptableTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testStringWithExclamationMark() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var x = '<!>';\n"
+            + "    alert(x.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"3"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
