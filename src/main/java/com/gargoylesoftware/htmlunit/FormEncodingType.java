@@ -55,7 +55,7 @@ public final class FormEncodingType {
         new FormEncodingType(PostMethod.FORM_URL_ENCODED_CONTENT_TYPE);
     /**
      * MULTIPART
-     * This used to be a constant in httpcommons but it was deprecated with no alternative.
+     * This used to be a constant in HttpClient but it was deprecated with no alternative.
      */
     public static final FormEncodingType MULTIPART = new FormEncodingType("multipart/form-data");
 
