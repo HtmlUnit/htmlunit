@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                JavaScript: &lt;frame&gt; and &lt;iframe&gt; should trim values in 'src' attribute.
+            </action>
             <action type="update" dev="asashour" id="1813007">
                 JavaScript: element.dispatchEvent() exactly behaves as calling ClickableElement.click() and .dblClick()
 				and returns correct value (based on event.preventDefault()) (#1813007).

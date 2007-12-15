@@ -306,12 +306,14 @@ public abstract class BaseFrame extends StyledElement {
         setAttributeValue("src", attribute);
     }
 
-
     /**
      * {@inheritDoc}
      */
     public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
-            final String attributeValue) {
+            String attributeValue) {
+        if (qualifiedName.equals("src")) {
+            attributeValue = attributeValue.trim();
+        }
         super.setAttributeValue(namespaceURI, qualifiedName, attributeValue);
         if (qualifiedName.equals("src")) {
             loadInnerPageIfPossible(attributeValue);

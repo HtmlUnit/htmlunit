@@ -96,6 +96,37 @@ public class HtmlInlineFrameTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    public void testSetSrcAttributeWithWhiteSpaces() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><body>\n"
+            + "<iframe id='iframe1' src='\n" + URL_SECOND + "\n'>\n"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        webConnection.setResponse(URL_THIRD, thirdContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        assertEquals("First", page.getTitleText());
+
+        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
+        assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
+        assertEquals("Second", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
+
+        iframe.setSrcAttribute(URL_THIRD.toExternalForm());
+        assertEquals(URL_THIRD.toExternalForm(), iframe.getSrcAttribute());
+        assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
+    }
+
+    /**
      * Tests that a recursive src attribute (i.e. src="#xyz") doesn't result in an
      * infinite loop (bug 1699125).
      *
