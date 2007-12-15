@@ -160,9 +160,11 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlForm(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlFrame.TAG_NAME)) {
-            final HtmlAttr srcAttribute = (HtmlAttr) attributeMap.get("src");
-            if (srcAttribute != null) {
-                srcAttribute.setHtmlValue(((String)srcAttribute.getHtmlValue()).trim());
+            if (attributeMap != null) {
+                final HtmlAttr srcAttribute = (HtmlAttr) attributeMap.get("src");
+                if (srcAttribute != null) {
+                    srcAttribute.setHtmlValue(((String) srcAttribute.getHtmlValue()).trim());
+                }
             }
             element = new HtmlFrame(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -206,9 +208,11 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlImageInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlInlineFrame.TAG_NAME)) {
-            final HtmlAttr srcAttribute = (HtmlAttr) attributeMap.get("src");
-            if (srcAttribute != null) {
-                srcAttribute.setHtmlValue(((String)srcAttribute.getHtmlValue()).trim());
+            if (attributeMap != null) {
+                final HtmlAttr srcAttribute = (HtmlAttr) attributeMap.get("src");
+                if (srcAttribute != null) {
+                    srcAttribute.setHtmlValue(((String) srcAttribute.getHtmlValue()).trim());
+                }
             }
             element = new HtmlInlineFrame(namespaceURI, qualifiedName, page, attributeMap);
         }
