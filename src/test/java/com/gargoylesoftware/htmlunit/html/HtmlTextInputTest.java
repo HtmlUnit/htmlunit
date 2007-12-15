@@ -38,6 +38,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -101,5 +103,34 @@ public class HtmlTextInputTest extends WebTestCase {
         final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTypeNewLine() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form action='" + URL_SECOND + "'>\n"
+            + "<input name='myText' id='myText'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setDefaultResponse(secondContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        
+        final HtmlTextInput textInput = (HtmlTextInput) firstPage.getHtmlElementById("myText");
+
+        final HtmlPage secondPage = (HtmlPage) textInput.type('\n');
+        assertEquals("Second", secondPage.getTitleText());
+
     }
 }

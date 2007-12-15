@@ -85,8 +85,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
-    public void testSetSelectedRadioButton_ValueExists()
-        throws Exception {
+    public void testSetSelectedRadioButton_ValueExists() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -121,8 +120,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
-    public void testSetSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection()
-        throws Exception {
+    public void testSetSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -147,8 +145,7 @@ public class HtmlFormTest extends WebTestCase {
      * @exception Exception If the test fails
      * @deprecated after 1.11
      */
-    public void testSetSelectedRadioButton_ValueDoesNotExist_ForceSelection()
-        throws Exception {
+    public void testSetSelectedRadioButton_ValueDoesNotExist_ForceSelection() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -177,8 +174,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_String()
-        throws Exception {
+    public void testSubmit_String() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -195,8 +191,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_ExtraParameters()
-        throws Exception {
+    public void testSubmit_ExtraParameters() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -222,8 +217,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_BadSubmitMethod()
-        throws Exception {
+    public void testSubmit_BadSubmitMethod() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='put'>\n"
@@ -241,9 +235,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_onSubmitHandler()
-        throws Exception {
-
+    public void testSubmit_onSubmitHandler() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
@@ -274,9 +266,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_onSubmitHandler_returnFalse()
-        throws Exception {
-
+    public void testSubmit_onSubmitHandler_returnFalse() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' "
@@ -514,8 +504,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_NoDefaultValue()
-        throws Exception {
+    public void testSubmit_NoDefaultValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -541,8 +530,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_NoNameOnControl()
-        throws Exception {
+    public void testSubmit_NoNameOnControl() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -588,8 +576,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testSubmit_NestedInput()
-        throws Exception {
+    public void testSubmit_NestedInput() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -620,8 +607,7 @@ public class HtmlFormTest extends WebTestCase {
    /**
     * @throws Exception if the test fails
     */
-    public void testSubmit_IgnoresDisabledControls()
-        throws Exception {
+    public void testSubmit_IgnoresDisabledControls() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -1024,8 +1010,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void testUrlAfterSubmit(final URL url, final String method, final String action,
-            final String expectedUrlEnd)
-        throws Exception {
+            final String expectedUrlEnd) throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='" + method + "' action='" + action + "'>\n"

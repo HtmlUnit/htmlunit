@@ -37,7 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  * Wrapper for the html element "input".
@@ -82,17 +85,19 @@ public class HtmlTextInput extends HtmlInput {
     /**
      * {@inheritDoc}
      */
-    public void type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return;
+            return getPage();
         }
         preventDefault_ = false;
-        super.type(c, shiftKey, ctrlKey, altKey);
+        final Page page = super.type(c, shiftKey, ctrlKey, altKey);
 
         //TODO: handle backspace
         if (!Character.isWhitespace(c) && !preventDefault_) {
             setValueAttribute(getValueAttribute() + c);
         }
+        return page;
     }
     
     /**
@@ -100,5 +105,12 @@ public class HtmlTextInput extends HtmlInput {
      */
     protected void preventDefault() {
         preventDefault_ = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isSubmittableByEnter() {
+        return true;
     }
 }

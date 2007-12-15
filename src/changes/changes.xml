@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="update" dev="asashour">
+                HtmlTextInput and HtmlPasswordInput: type('\n') submits the enclosed form.
+            </action>
+            <action type="update" dev="asashour">
                 JavaScript: &lt;frame&gt; and &lt;iframe&gt; should trim values in 'src' attribute.
             </action>
             <action type="update" dev="asashour" id="1813007">

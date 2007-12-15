@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -627,8 +628,9 @@ public abstract class HtmlElement extends DomNamespaceNode {
     /**
      * Simulates typing the specified text while this element has focus.
      * @param text the text you with to simulate typing
+     * @exception IOException If an IO error occurs
      */
-    public void type(final String text) {
+    public void type(final String text) throws IOException {
         for (int i = 0; i < text.length(); i++) {
             type(text.charAt(i));
         }
@@ -640,8 +642,10 @@ public abstract class HtmlElement extends DomNamespaceNode {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @exception IOException If an IO error occurs
      */
-    public void type(final String text, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    public void type(final String text, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         for (int i = 0; i < text.length(); i++) {
             type(text.charAt(i), shiftKey, ctrlKey, altKey);
         }
@@ -650,25 +654,50 @@ public abstract class HtmlElement extends DomNamespaceNode {
     /**
      * Simulates typing the specified character while this element has focus.
      * @param c the character you with to simulate typing
+     * @return The page that occupies this window after typing.
+     * It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
      */
-    public void type(final char c) {
-        type(c, false, false, false);
+    public Page type(final char c) throws IOException {
+        return type(c, false, false, false);
     }
 
     /**
      * Simulates typing the specified character while this element has focus.
+     * Note that for some elements, typing '\n' submits the enclosed form.
      * @param c the character you with to simulate typing
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @return The page that occupies this window after typing.
+     * It may be the same window or it may be a freshly loaded one.
+     * @exception IOException If an IO error occurs
      */
-    public void type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return;
+            return getPage();
         }
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
         fireEvent(new Event(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
         fireEvent(new Event(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey));
+        
+        final HtmlForm form = getEnclosingForm();
+        if (form != null && c == '\n' && isSubmittableByEnter()) {
+            return form.submit((SubmittableElement) this);
+        }
+        else {
+            return getPage();
+        }
+    }
+
+    /**
+     * Returns true if clicking Enter (ASCII 10, or '\n') should submit the enclosed form (if any).
+     * Default implementation is false.
+     * @return true if clicking Enter should submit the enclosed form (if any).
+     */
+    protected boolean isSubmittableByEnter() {
+        return false;
     }
 
     /**

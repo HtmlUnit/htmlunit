@@ -83,8 +83,7 @@ public abstract class ClickableElement extends StyledElement {
      * clicked. It may be the same window or it may be a freshly loaded one.
      * @exception IOException If an IO error occurs
      */
-    public Page click()
-        throws IOException {
+    public Page click() throws IOException {
         return click(false, false, false);
     }
 

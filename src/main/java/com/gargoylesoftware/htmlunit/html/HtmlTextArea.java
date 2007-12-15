@@ -37,10 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  *  Wrapper for the html element "textarea"
@@ -437,17 +439,19 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     /**
      * {@inheritDoc}
      */
-    public void type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return;
+            return getPage();
         }
         preventDefault_ = false;
-        super.type(c, shiftKey, ctrlKey, altKey);
+        final Page page = super.type(c, shiftKey, ctrlKey, altKey);
 
         //TODO: handle backspace
         if (!Character.isWhitespace(c) && !preventDefault_) {
             setText(getText() + c);
         }
+        return page;
     }
     
     /**
