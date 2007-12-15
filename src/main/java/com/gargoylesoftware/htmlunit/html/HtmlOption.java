@@ -63,7 +63,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     private final boolean initialSelectedState_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -75,7 +75,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -89,7 +89,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     *  Return true if this option is currently selected
+     * Return true if this option is currently selected
      *
      * @return See above
      */

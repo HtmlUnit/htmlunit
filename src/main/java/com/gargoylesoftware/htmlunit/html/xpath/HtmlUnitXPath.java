@@ -70,9 +70,8 @@ public class HtmlUnitXPath extends BaseXPath {
 
     /**
      * Construct given an XPath expression string.
-     *  @param xpathExpr The XPath expression.
-     *  @throws org.jaxen.JaxenException if there is a syntax error while
-     *          parsing the expression.
+     * @param xpathExpr The XPath expression.
+     * @throws org.jaxen.JaxenException if there is a syntax error while parsing the expression.
      */
     public HtmlUnitXPath(final String xpathExpr) throws JaxenException {
         this(xpathExpr, DocumentNavigator.instance);
@@ -82,8 +81,7 @@ public class HtmlUnitXPath extends BaseXPath {
      * Construct given an XPath expression string and a Document Navigator.
      * @param xpathExpr The XPath expression.
      * @param navigator the document navigator to use for evaluation
-     * @throws org.jaxen.JaxenException if there is a syntax error while
-     *          parsing the expression.
+     * @throws org.jaxen.JaxenException if there is a syntax error while parsing the expression.
      */
     public HtmlUnitXPath(final String xpathExpr, final Navigator navigator) throws JaxenException {
         super(xpathExpr, navigator);

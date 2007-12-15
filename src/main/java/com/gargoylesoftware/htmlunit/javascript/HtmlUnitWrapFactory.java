@@ -63,8 +63,7 @@ public class HtmlUnitWrapFactory extends WrapFactory {
      * parent class.
      * {@inheritDoc}
      * @see org.mozilla.javascript.WrapFactory#wrapAsJavaObject(org.mozilla.javascript.Context,
-     *      org.mozilla.javascript.Scriptable, java.lang.Object,
-     *      java.lang.Class)
+     * org.mozilla.javascript.Scriptable, java.lang.Object, java.lang.Class)
      */
     public Scriptable wrapAsJavaObject(final Context context,
             final Scriptable scope, final Object javaObject,

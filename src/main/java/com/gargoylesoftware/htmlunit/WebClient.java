@@ -218,7 +218,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Create an instance that will use the specified {@link BrowserVersion} and proxy server
+     * Create an instance that will use the specified {@link BrowserVersion} and proxy server
      * @param browserVersion The browser version to simulate
      * @param proxyHost The server that will act as proxy
      * @param proxyPort The port to use on the proxy server
@@ -243,7 +243,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Create a javascript engine if possible.
+     * Create a javascript engine if possible.
      *
      * @param webClient The webclient that we are creating the script engine for.
      * @return A javascript engine or null if one could not be created.
@@ -275,7 +275,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Set the object that will resolve all url requests <p />
+     * Set the object that will resolve all url requests <p />
      *
      * This method is intended for unit testing HtmlUnit itself.  It is not expected
      * to change but you shouldn't need to call it during normal use of HtmlUnit.
@@ -288,8 +288,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Send a request to a server and return a Page that represents the
-     *  response from the server. This page will be used to populate this frame.<p>
+     * Send a request to a server and return a Page that represents the
+     * response from the server. This page will be used to populate this frame.<p>
      *
      * The type of Page will depend on the content type of the http response. <p />
      *
@@ -327,9 +327,8 @@ public class WebClient implements Serializable {
      * @param parameters Parameter object for the web request
      * @return See above
      * @throws IOException If an IO error occurs
-     * @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      *
      * @see WebRequestSettings
      */
@@ -369,15 +368,14 @@ public class WebClient implements Serializable {
      * <p>Open a new web window and populate it with a page loaded by
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
      *
-     *  @param opener The web window that initiated the request.
-     *  @param target The name of the window to be opened.  This is the name that would
-     *  be passed into the javascript open() method.
-     *  @param params Any parameters
-     *  @return The new page.
-     *  @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     *  @throws IOException If an IO problem occurs.
+     * @param opener The web window that initiated the request.
+     * @param target The name of the window to be opened.  This is the name that would
+     * be passed into the javascript open() method.
+     * @param params Any parameters
+     * @return The new page.
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws IOException If an IO problem occurs.
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
@@ -388,9 +386,8 @@ public class WebClient implements Serializable {
      * Convenient method to build an URL and load it into the current WebWindow
      * @param url The url of the new content.
      * @return The new page.
-     * @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException If an IO problem occurs.
      * @throws MalformedURLException if no url can be created from the provided string
      */
@@ -402,9 +399,8 @@ public class WebClient implements Serializable {
      * Convenient method to load a URL into the current WebWindow
      * @param url The url of the new content.
      * @return The new page.
-     * @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException If an IO problem occurs.
      */
     public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
@@ -413,13 +409,12 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to load a web request into the current WebWindow
-     *  @param request The request parameters
-     *  @return The new page.
-     *  @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     *  @throws IOException If an IO problem occurs.
-     *  @see #getPage(WebWindow,WebRequestSettings)
+     * @param request The request parameters
+     * @return The new page.
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws IOException If an IO problem occurs.
+     * @see #getPage(WebWindow,WebRequestSettings)
      */
     public Page getPage(final WebRequestSettings request) throws IOException,
             FailingHttpStatusCodeException {
@@ -434,9 +429,8 @@ public class WebClient implements Serializable {
      * @param webResponse The response that will be used to create the new page.
      * @param webWindow The window that the new page will be placed within.
      * @throws IOException If an IO error occurs.
-     * @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return The newly created page.
      */
     public Page loadWebResponseInto(
@@ -472,9 +466,9 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Specify whether or not the content of the resulting document will be
-     *  printed to the console in the event of a failing response code.
-     *  Successful response codes are in the range 200-299. The default is true.
+     * Specify whether or not the content of the resulting document will be
+     * printed to the console in the event of a failing response code.
+     * Successful response codes are in the range 200-299. The default is true.
      *
      * @param enabled True to enable this feature
      */
@@ -483,8 +477,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Return true if the content of the resulting document will be printed to
-     *  the console in the event of a failing response code.
+     * Return true if the content of the resulting document will be printed to
+     * the console in the event of a failing response code.
      *
      * @return See above
      * @see #setPrintContentOnFailingStatusCode
@@ -512,9 +506,9 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Specify whether or not an exception will be thrown in the event of a
-     *  failing status code. Successful status codes are in the range 200-299.
-     *  The default is true.
+     * Specify whether or not an exception will be thrown in the event of a
+     * failing status code. Successful status codes are in the range 200-299.
+     * The default is true.
      *
      * @param enabled True to enable this feature
      */
@@ -548,7 +542,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Set a header which will be sent up on EVERY request from this client.
+     * Set a header which will be sent up on EVERY request from this client.
      *
      * @param name The name of the header
      * @param value The value of the header
@@ -558,7 +552,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Remove a header
+     * Remove a header
      *
      * @param name Name of the header
      * @see #addRequestHeader
@@ -589,13 +583,13 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  Throw an exception with the specified message. If junit is found in the
-     *  classpath then a junit.framework.AssertionFailedError will be thrown
-     *  (the same behavior as calling fail() in junit). If junit is not found
-     *  then an IllegalStateException will be thrown instead of the
-     *  AssertionFailedError. <p>
+     * Throw an exception with the specified message. If junit is found in the
+     * classpath then a junit.framework.AssertionFailedError will be thrown
+     * (the same behavior as calling fail() in junit). If junit is not found
+     * then an IllegalStateException will be thrown instead of the
+     * AssertionFailedError. <p>
      *
-     *  Override this to provide custom behavior.
+     * Override this to provide custom behavior.
      *
      * @param message The failure message
      * @deprecated
@@ -622,7 +616,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     *  This method is intended for testing only - use at your own risk.
+     * This method is intended for testing only - use at your own risk.
      *
      * @param engine  The new script engine to use.
      */
@@ -1705,7 +1699,7 @@ public class WebClient implements Serializable {
      * Set the flag on the HtmlParse to ignore the content that is outside of the BODY
      * and HTML tags.
      * @param ignoreOutsideContent The boolean flag to enable or disable the support of
-     *          content outside of the HTML and BODY tags
+     * content outside of the HTML and BODY tags
      */
     public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
         HTMLParser.setIgnoreOutsideContent(ignoreOutsideContent);

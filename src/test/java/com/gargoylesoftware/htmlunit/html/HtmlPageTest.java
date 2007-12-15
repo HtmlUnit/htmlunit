@@ -87,7 +87,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
 public class HtmlPageTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      */
@@ -180,7 +180,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     *  Test getHtmlElement() for all elements that can be loaded
+     * Test getHtmlElement() for all elements that can be loaded
      *
      * @throws Exception if the test fails
      */

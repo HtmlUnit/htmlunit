@@ -202,7 +202,7 @@ public class HtmlScript extends HtmlElement {
      * Executes this script node as inline script if necessary and/or possible.
      *
      * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
-     *        attribute is defined, the script is not executed
+     * attribute is defined, the script is not executed
      */
     private void executeInlineScriptIfNeeded(final boolean executeIfDeferred) {
         if (!isExecutionNeeded()) {
@@ -253,7 +253,7 @@ public class HtmlScript extends HtmlElement {
      * Executes this script node if necessary and/or possible.
      *
      * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
-     *        attribute is defined, the script is not executed
+     * attribute is defined, the script is not executed
      */
     void executeScriptIfNeeded(final boolean executeIfDeferred) {
         if (!isExecutionNeeded()) {

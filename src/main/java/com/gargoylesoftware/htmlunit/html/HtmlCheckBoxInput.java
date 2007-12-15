@@ -108,7 +108,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     }
 
     /**
-     *  Set the "checked" attribute
+     * Set the "checked" attribute
      *
      * @param isChecked true if this element is to be selected
      * @return The page that occupies this window after setting checked status.

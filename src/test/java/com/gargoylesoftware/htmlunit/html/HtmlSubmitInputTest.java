@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  */
 public class HtmlSubmitInputTest extends WebTestCase {
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      */

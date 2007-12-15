@@ -83,7 +83,7 @@ public class HtmlFileInputTest extends WebTestCase {
     private Server server_;
 
     /**
-     *  Create an instance
+     * Create an instance
      * @param name The name of the test
      */
     public HtmlFileInputTest(final String name) {

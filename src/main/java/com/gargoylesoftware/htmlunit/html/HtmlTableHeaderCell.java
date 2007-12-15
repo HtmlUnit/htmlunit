@@ -56,7 +56,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
     public static final String TAG_NAME = "th";
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that this element is contained within
      * @param attributes the initial attributes
@@ -68,7 +68,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

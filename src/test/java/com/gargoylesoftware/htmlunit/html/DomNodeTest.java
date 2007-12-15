@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 public class DomNodeTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name Name of the test
      */

@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class WebResponseImplTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      * @param name The name of the test
      */
     public WebResponseImplTest(final String name) {

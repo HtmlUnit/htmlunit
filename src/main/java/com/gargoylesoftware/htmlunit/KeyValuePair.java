@@ -49,7 +49,7 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
     private static final long serialVersionUID = 6163390788878023849L;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param key A key
      * @param value a Value
@@ -59,7 +59,7 @@ public class KeyValuePair extends org.apache.commons.httpclient.NameValuePair {
     }
 
     /**
-     *  Return the key
+     * Return the key
      *
      * @return Return the key
      */

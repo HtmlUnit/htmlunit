@@ -113,7 +113,7 @@ public final class SubmitMethod implements Serializable {
     }
 
     /**
-     *  Return the name of this SubmitMethod
+     * Return the name of this SubmitMethod
      *
      * @return See above
      */
@@ -136,7 +136,7 @@ public final class SubmitMethod implements Serializable {
     }
 
     /**
-     *  Return a string representation of this object
+     * Return a string representation of this object
      *
      * @return See above
      */

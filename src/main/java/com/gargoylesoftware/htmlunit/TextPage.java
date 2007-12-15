@@ -52,7 +52,7 @@ public class TextPage implements Page {
     private WebWindow enclosingWindow_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param webResponse The response from the server
      * @param enclosingWindow The window that holds the page.

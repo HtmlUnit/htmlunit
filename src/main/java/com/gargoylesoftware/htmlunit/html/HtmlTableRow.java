@@ -61,7 +61,7 @@ public class HtmlTableRow extends ClickableElement {
     public static final String TAG_NAME = "tr";
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that this element is contained within
      * @param attributes the initial attributes
@@ -73,7 +73,7 @@ public class HtmlTableRow extends ClickableElement {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

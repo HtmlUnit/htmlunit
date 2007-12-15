@@ -52,8 +52,7 @@ public class ElementNotFoundException extends RuntimeException {
     private final String attributeValue_;
 
     /**
-     *  Create an instance from the variables that were used to search for the
-     *  xml element
+     * Create an instance from the variables that were used to search for the xml element
      *
      * @param elementName The name of the element
      * @param attributeName The name of the attribute
@@ -71,7 +70,7 @@ public class ElementNotFoundException extends RuntimeException {
     }
 
     /**
-     *  Return the name of the element
+     * Return the name of the element
      *
      * @return See above
      */
@@ -80,7 +79,7 @@ public class ElementNotFoundException extends RuntimeException {
     }
 
     /**
-     *  Return the name of the attribute
+     * Return the name of the attribute
      *
      * @return See above
      */
@@ -89,7 +88,7 @@ public class ElementNotFoundException extends RuntimeException {
     }
 
     /**
-     *  Return the value of the attribute
+     * Return the value of the attribute
      *
      * @return See above
      */

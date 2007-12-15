@@ -52,7 +52,7 @@ public class JavaScriptPage implements Page {
     private WebWindow enclosingWindow_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param webResponse The response from the server
      * @param enclosingWindow The window that holds the page.
@@ -76,7 +76,7 @@ public class JavaScriptPage implements Page {
     }
 
     /**
-     *  Return the content of the page
+     * Return the content of the page
      *
      * @return See above
      */
@@ -85,7 +85,7 @@ public class JavaScriptPage implements Page {
     }
 
     /**
-     *  Return the web response that was originally used to create this page.
+     * Return the web response that was originally used to create this page.
      *
      * @return The web response
      */

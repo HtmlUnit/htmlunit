@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 public abstract class ClickableElement extends StyledElement {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

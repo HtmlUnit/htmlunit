@@ -67,7 +67,7 @@ public class HtmlImageInput extends HtmlInput {
     private int yPosition_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -79,7 +79,7 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -92,11 +92,11 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     *  Return an array of KeyValuePairs that are the values that will be sent
-     *  back to the server whenever the current form is submitted.<p>
+     * Return an array of KeyValuePairs that are the values that will be sent
+     * back to the server whenever the current form is submitted.<p>
      *
-     *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return See above
      */
@@ -125,8 +125,7 @@ public class HtmlImageInput extends HtmlInput {
      * support this method so it is made protected here.  Those subclasses
      * that wish to expose it will override and make it public.
      *
-     * @return The Page that is the result of submitting this page to the
-     *      server
+     * @return The Page that is the result of submitting this page to the server
      * @exception IOException If an io error occurs
      */
     public Page click() throws IOException {
@@ -163,8 +162,7 @@ public class HtmlImageInput extends HtmlInput {
      * @param y The y coordinate of the pointing device at the time of clicking
      * @return The page that is loaded after the click has taken place.
      * @exception IOException If an io error occurs
-     * @exception ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
      */
     public Page click(final int x, final int y)
         throws

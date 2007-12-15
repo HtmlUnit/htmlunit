@@ -97,8 +97,7 @@ public class Stylesheet extends SimpleScriptable {
     /**
      * Creates a new stylesheet representing the CSS stylesheet at the specified input source.
      *
-     * @param source the input source which contains the CSS stylesheet which this stylesheet host
-     *        object represents
+     * @param source the input source which contains the CSS stylesheet which this stylesheet host object represents
      */
     public Stylesheet(final InputSource source) {
         source_ = source;

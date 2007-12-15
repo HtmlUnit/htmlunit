@@ -72,7 +72,7 @@ public class DomTextTest extends WebTestCase {
     
     /**
      * Test font formats, as per bug #1731042
-     *  (http://sourceforge.net/tracker/index.php?func=detail&aid=1731042&group_id=47038&atid=448266)
+     * (http://sourceforge.net/tracker/index.php?func=detail&aid=1731042&group_id=47038&atid=448266)
      *
      * @throws Exception if the test fails
      */

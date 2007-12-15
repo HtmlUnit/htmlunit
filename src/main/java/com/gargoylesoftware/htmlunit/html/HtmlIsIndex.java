@@ -107,11 +107,11 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     *  Return an array of KeyValuePairs that are the values that will be sent
-     *  back to the server whenever the current form is submitted.<p>
+     * Return an array of KeyValuePairs that are the values that will be sent
+     * back to the server whenever the current form is submitted.<p>
      *
-     *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return See above
      */

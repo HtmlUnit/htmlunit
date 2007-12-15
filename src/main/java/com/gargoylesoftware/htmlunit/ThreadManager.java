@@ -154,7 +154,7 @@ public class ThreadManager {
      * Wait for any executing background threads to complete.
      *
      * @param maxWaitMillis The maximum time that should be waited, in milliseconds.
-     *        This is not an exact time but will be fairly close.
+     * This is not an exact time but will be fairly close.
      * @return true if all threads expired in the specified time
      */
     public boolean joinAll(long maxWaitMillis) {

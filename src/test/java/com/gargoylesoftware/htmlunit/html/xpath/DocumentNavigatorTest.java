@@ -70,7 +70,7 @@ public class DocumentNavigatorTest extends WebTestCase {
     private final HtmlPage page_;
     
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      * @throws Exception if initialization fails

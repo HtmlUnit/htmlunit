@@ -161,8 +161,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see org.mozilla.javascript.ScriptableObject#has(java.lang.String,
-     *      org.mozilla.javascript.Scriptable)
+     * @see org.mozilla.javascript.ScriptableObject#has(java.lang.String, org.mozilla.javascript.Scriptable)
      */
     public boolean has(final String name, final Scriptable start) {
         return properties_.containsKey(name) || super.has(name, start);

@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlSelectTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name Name of the test
      */
@@ -69,7 +69,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     *  Test the good path of submitting a select
+     * Test the good path of submitting a select
      *
      * @exception Exception If the test fails
      */
@@ -103,7 +103,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     *  Test submitting the select with no options selected
+     * Test submitting the select with no options selected
      *
      * @exception Exception If the test fails
      */
@@ -136,7 +136,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     *  Test changing the selected option
+     * Test changing the selected option
      *
      * @exception Exception If the test fails
      */
@@ -170,7 +170,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     *  Test changing the selected option
+     * Test changing the selected option
      *
      * @exception Exception If the test fails
      */
@@ -206,7 +206,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     *  Test multiple selected options on multiple select lists
+     * Test multiple selected options on multiple select lists
      *
      * @exception Exception If the test fails
      */

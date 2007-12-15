@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class HtmlUnitXPathTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      */

@@ -738,7 +738,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536452.aspx">
      * MSDN documentation</a>
      * @param where specifies where to insert the HTML text, using one of the following value:
-     *         beforeBegin, afterBegin, beforeEnd, afterEnd
+     *        beforeBegin, afterBegin, beforeEnd, afterEnd
      * @param text the HTML text to insert
      */
     public void jsxFunction_insertAdjacentHTML(final String where, final String text) {
@@ -755,7 +755,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536451.aspx">
      * MSDN documentation</a>
      * @param where specifies where to insert the element, using one of the following value:
-     *         beforeBegin, afterBegin, beforeEnd, afterEnd
+     *        beforeBegin, afterBegin, beforeEnd, afterEnd
      * @param object the element to insert
      * @return an element object
      */
@@ -785,7 +785,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
      * {@link #jsxFunction_insertAdjacentElement(String, Object)}.
      *
      * @param where specifies where to insert the element, using one of the following value:
-     *         beforeBegin, afterBegin, beforeEnd, afterEnd
+     *        beforeBegin, afterBegin, beforeEnd, afterEnd
      *
      * @return an array of 1-DomNode:parentNode and 2-Boolean:append
      */
@@ -1704,7 +1704,7 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     /**
      * Get the JavaScript property "parentElement".
      * <p>It is identical to {@link #jsxGet_parentNode()}
-     *    with the exception of <tt>HTML</tt>, which has a <tt>null</tt> parent element.
+     * with the exception of <tt>HTML</tt>, which has a <tt>null</tt> parent element.
      * @return The parent element
      * @see #jsxGet_parentNode()
      */

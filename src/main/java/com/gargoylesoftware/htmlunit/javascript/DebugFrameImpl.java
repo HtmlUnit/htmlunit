@@ -178,8 +178,7 @@ public class DebugFrameImpl implements DebugFrame {
      * corresponding name.
      *
      * @param index the index of the parameter whose name is to be returned
-     * @return the name of the parameter at the specified index, or <tt>???</tt> if there is no
-     *         corresponding name
+     * @return the name of the parameter at the specified index, or <tt>???</tt> if there is no corresponding name
      */
     private String getParamName(final int index) {
         if (index >= 0 && this.functionOrScript_.getParamCount() > index) {
@@ -201,8 +200,7 @@ public class DebugFrameImpl implements DebugFrame {
 
     /**
      * Returns the line number of the first line in this frame's function or script, or <tt>???</tt>
-     * if it cannot be determined. This is necessary because the line numbers provided by Rhino are
-     * unordered.
+     * if it cannot be determined. This is necessary because the line numbers provided by Rhino are unordered.
      *
      * @return the line number of the first line in this frame's function or script, or <tt>???</tt>
      *         if it cannot be determined

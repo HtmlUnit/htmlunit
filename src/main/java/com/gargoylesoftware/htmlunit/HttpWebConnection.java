@@ -102,7 +102,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     *  Submit a request and retrieve a response
+     * Submit a request and retrieve a response
      *
      * @param webRequestSettings Settings to make the request with
      * @return See above
@@ -264,7 +264,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
                             /**
                              * This implementation overrides the super one by encoding filename
-                             *  according to the page charset.
+                             * according to the page charset.
                              *
                              * @see http://issues.apache.org/jira/browse/HTTPCLIENT-293
                              *

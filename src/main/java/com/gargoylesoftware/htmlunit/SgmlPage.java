@@ -121,7 +121,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     *  Return the WebClient that originally loaded this page
+     * Return the WebClient that originally loaded this page
      *
      * @return See above
      */

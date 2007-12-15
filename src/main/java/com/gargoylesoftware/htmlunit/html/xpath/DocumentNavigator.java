@@ -169,7 +169,7 @@ public class DocumentNavigator extends DefaultNavigator {
     /**
      * @param xpath an xpath expression
      * @return a parsed form of the given xpath string, which will be suitable
-     *  for queries on DOM documents.
+     * for queries on DOM documents.
      * @throws JaxenException if the expression could not be parsed
      */
     public XPath parseXPath(final String xpath) throws JaxenException {
@@ -376,8 +376,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * Get the string value of a Namespace node.
      *
      * @param object The target node.
-     * @return The Namespace URI as a (possibly empty) string if the
-     * node is a namespace node, null otherwise.
+     * @return The Namespace URI as a (possibly empty) string if the node is a namespace node, null otherwise.
      */
     public String getNamespaceStringValue(final Object object) {
         return null;
@@ -395,17 +394,16 @@ public class DocumentNavigator extends DefaultNavigator {
     }
 
     /**
-     *  Returns the element whose ID is given by elementId.
-     *  If no such element exists, returns null.
-     *  Attributes with the name "ID" are not of type ID unless so defined.
-     *  Attribute types are only known if when the parser understands DTD's or
-     *  schemas that declare attributes of type ID. When JAXP is used, you
-     *  must call <code>setValidating(true)</code> on the
-     *  DocumentBuilderFactory.
+     * Returns the element whose ID is given by elementId.
+     * If no such element exists, returns null.
+     * Attributes with the name "ID" are not of type ID unless so defined.
+     * Attribute types are only known if when the parser understands DTD's or
+     * schemas that declare attributes of type ID. When JAXP is used, you
+     * must call <code>setValidating(true)</code> on the
+     * DocumentBuilderFactory.
      *
-     *  @param contextNode   a node from the document in which to look for the
-     *                       id
-     *  @param elementId   id to look for
+     * @param contextNode   a node from the document in which to look for the id
+     * @param elementId   id to look for
      *
      *  @return element whose ID is given by elementId, or null if no such
      *            element exists in the document or if the implementation

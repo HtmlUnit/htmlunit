@@ -131,9 +131,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * Initialize this page.
      * @throws IOException If an IO problem occurs.
-     * @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
@@ -266,7 +265,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     *  Return the HtmlAnchor with the specified name
+     * Return the HtmlAnchor with the specified name
      *
      * @param name The name to search by
      * @return See above
@@ -339,13 +338,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     *  Given a relative url (ie /foo), return a fully qualified url based on
-     *  the url that was used to load this page
+     * Given a relative url (ie /foo), return a fully qualified url based on
+     * the url that was used to load this page
      *
      * @param relativeUrl The relative url
      * @return See above
-     * @exception MalformedURLException If an error occurred when creating a
-     *      URL object
+     * @exception MalformedURLException If an error occurred when creating a URL object
      */
     public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
@@ -404,8 +402,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     *  Given a target attribute value, resolve the target using a base
-     *  target for the page.
+     * Given a target attribute value, resolve the target using a base target for the page.
      *
      * @param elementTarget The target specified as an attribute of the element.
      * @return The resolved target to use for the element.
@@ -428,9 +425,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     *  Return a list of ids (strings) that correspond to the tabbable elements
-     *  in this page. Return them in the same order specified in {@link
-     *  #getTabbableElements}
+     * Return a list of ids (strings) that correspond to the tabbable elements
+     * in this page. Return them in the same order specified in {@link #getTabbableElements}
      *
      * @return The list of id's
      */
@@ -600,14 +596,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     *  Many html elements are "tabbable" and can have a "tabindex" attribute
-     *  that determines the order in which the components are navigated when
-     *  pressing the tab key. To ensure good usability for keyboard navigation,
-     *  all tabbable elements should have the tabindex attribute set.<p>
+     * Many html elements are "tabbable" and can have a "tabindex" attribute
+     * that determines the order in which the components are navigated when
+     * pressing the tab key. To ensure good usability for keyboard navigation,
+     * all tabbable elements should have the tabindex attribute set.<p>
      *
-     *  Assert that all tabbable elements have a valid value set for "tabindex".
-     *  If they don't then throw an exception as per {@link
-     *  WebClient#assertionFailed(String)}
+     * Assert that all tabbable elements have a valid value set for "tabindex".
+     * If they don't then throw an exception as per {@link
+     * WebClient#assertionFailed(String)}
      *
      * @deprecated
      * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
@@ -617,10 +613,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     *  Many html components can have an "accesskey" attribute which defines a
-     *  hot key for keyboard navigation. Assert that all access keys (mnemonics)
-     *  in this page are unique. If they aren't then throw an exception as per
-     *  {@link WebClient#assertionFailed(String)}
+     * Many html components can have an "accesskey" attribute which defines a
+     * hot key for keyboard navigation. Assert that all access keys (mnemonics)
+     * in this page are unique. If they aren't then throw an exception as per
+     * {@link WebClient#assertionFailed(String)}
      *
      * @deprecated
      * @see WebAssert#assertAllAccessKeyAttributesUnique(HtmlPage)
@@ -630,11 +626,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     *  Each html element can have an id attribute and by definition, all ids
-     *  must be unique within the document. <p>
+     * Each html element can have an id attribute and by definition, all ids
+     * must be unique within the document. <p>
      *
-     *  Assert that all ids in this page are unique. If they aren't then throw
-     *  an exception as per {@link WebClient#assertionFailed(String)}
+     * Assert that all ids in this page are unique. If they aren't then throw
+     * an exception as per {@link WebClient#assertionFailed(String)}
      *
      * @deprecated
      * @see WebAssert#assertAllIdAttributesUnique(HtmlPage)
@@ -975,8 +971,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * Look for and execute any appropriate event handlers.  Look for body
      * and frame tags.
-     * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD},
-     *      or {@link Event#TYPE_BEFORE_UNLOAD}.
+     * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}.
      * @return true if user accepted onbeforeunload (not relevant to other events).
      */
     private boolean executeEventHandlersIfNeeded(final String eventType) {
@@ -1525,9 +1520,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Loads the content of the contained frames. This is done after the page is completely
      * loaded to allow script contained in the frames to reference elements from the
      * page located after the closing </frame> tag.
-     * @throws FailingHttpStatusCodeException If the server returns a
-     *      failing status code AND the property
-     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
     void loadFrames() throws FailingHttpStatusCodeException {
         final List frameTags = Arrays.asList(new String[] {"frame", "iframe"});

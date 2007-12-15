@@ -63,7 +63,7 @@ public class HtmlTable extends ClickableElement {
     public static final String TAG_NAME = "table";
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -75,7 +75,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -87,13 +87,11 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     *  Return the first cell that matches the specified row and column,
-     *  searching left to right, top to bottom.
+     * Return the first cell that matches the specified row and column, searching left to right, top to bottom.
      *
      * @param rowIndex The row index
      * @param columnIndex The column index
-     * @return The HtmlTableCell at that location or null if there are no cells
-     *      at that location
+     * @return The HtmlTableCell at that location or null if there are no cells at that location
      */
     public final HtmlTableCell getCellAt(final int rowIndex, final int columnIndex) {
         final RowIterator rowIterator = getRowIterator();

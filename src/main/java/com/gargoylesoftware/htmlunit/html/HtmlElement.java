@@ -574,8 +574,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Return the form that enclosed this element or null if this element is
-     *  not within a form.
+     * Return the form that enclosed this element or null if this element is not within a form.
      *
      * @return See above
      */
@@ -584,8 +583,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Return the form that enclosed this element or throw an exception if this element is
-     *  not within a form.
+     * Return the form that enclosed this element or throw an exception if this element is not within a form.
      *
      * @return See above
      * @throws IllegalStateException If the element is not within a form.
@@ -749,7 +747,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Return a string representation of this object
+     * Return a string representation of this object
      *
      * @return See above
      */
@@ -770,19 +768,17 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Throw an exception. This is a convenience during development only - it
-     *  will likely be removed in the future.
+     * Throw an exception. This is a convenience during development only - it
+     * will likely be removed in the future.
      */
     protected final void notImplemented() {
         throw new RuntimeException("Not implemented yet");
     }
 
     /**
-     *  Assert that the specified string is not empty. Throw an exception if it
-     *  is.
+     * Assert that the specified string is not empty. Throw an exception if it is.
      *
-     * @param description The description to pass into the exception if this
-     *      string is empty
+     * @param description The description to pass into the exception if this string is empty
      * @param string The string to check
      * @throws IllegalArgumentException If the string is empty
      */
@@ -795,15 +791,13 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Search by the specified criteria and return the first HtmlElement that
-     *  is found
+     * Search by the specified criteria and return the first HtmlElement that is found
      *
      * @param elementName The name of the element
      * @param attributeName The name of the attribute
      * @param attributeValue The value of the attribute
      * @return The HtmlElement
-     * @exception ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
      */
     public final HtmlElement getOneHtmlElementByAttribute(
             final String elementName,
@@ -826,13 +820,12 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Return the html element with the specified id. If more than one element
-     *  has this id (not allowed by the html spec) then return the first one.
+     * Return the html element with the specified id. If more than one element
+     * has this id (not allowed by the html spec) then return the first one.
      *
      * @param id The id value to search by
      * @return The html element found
-     * @exception ElementNotFoundException If no element was found that matches
-     *      the id
+     * @exception ElementNotFoundException If no element was found that matches the id
      */
     public HtmlElement getHtmlElementById(final String id)
         throws ElementNotFoundException {
@@ -841,7 +834,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Return true if there is a element with the specified id. This method
+     * Return true if there is a element with the specified id. This method
      * is intended for situations where it is enough to know whether a specific
      * element is present in the document.<p>
      *
@@ -868,8 +861,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Search by the specified criteria and return all the HtmlElement that
-     *  are found
+     * Search by the specified criteria and return all the HtmlElement that are found
      *
      * @param elementName The name of the element
      * @param attributeName The name of the attribute
@@ -898,8 +890,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Given a list of tag names, return the html elements that correspond to
-     *  any matching element
+     * Given a list of tag names, return the html elements that correspond to any matching element
      *
      * @param acceptableTagNames The list of tag names to search by.
      * @return The list of tag names
@@ -916,8 +907,7 @@ public abstract class HtmlElement extends DomNamespaceNode {
     }
 
     /**
-     *  Given a list of tag names, return the html elements that correspond to
-     *  any matching element
+     * Given a list of tag names, return the html elements that correspond to any matching element
      *
      * @param tagName the tag name to match
      * @return The list of tag names

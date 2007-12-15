@@ -264,7 +264,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     *  Return the HtmlPage that contains this node
+     * Return the HtmlPage that contains this node
      *
      * @return See above
      */
@@ -496,9 +496,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     *  Returns a flag indicating whether or not this node itself results
-     *   in any space taken up in the browser windows; for instance, "<b>"
-     *   affects the specified text, but does not use up any space itself
+     * Returns a flag indicating whether or not this node itself results
+     * in any space taken up in the browser windows; for instance, "<b>"
+     * affects the specified text, but does not use up any space itself
      *
      * @return The flag
      */
@@ -507,10 +507,10 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     *  Returns a flag indicating whether or not this node should
-     *   have any leading and trailing whitespace removed when asText()
-     *   is called; mostly this should be true, but must be false for
-     *   such things as text formatting tags
+     * Returns a flag indicating whether or not this node should
+     * have any leading and trailing whitespace removed when asText()
+     * is called; mostly this should be true, but must be false for
+     * such things as text formatting tags
      *
      * @return The flag
      */

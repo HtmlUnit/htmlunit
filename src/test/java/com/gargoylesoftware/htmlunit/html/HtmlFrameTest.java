@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlFrameTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name Name of the test
      */

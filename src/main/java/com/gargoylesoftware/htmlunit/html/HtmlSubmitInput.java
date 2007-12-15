@@ -67,7 +67,7 @@ public class HtmlSubmitInput extends HtmlInput {
     private static final String DEFAULT_VALUE = "Submit Query";
     
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -79,7 +79,7 @@ public class HtmlSubmitInput extends HtmlInput {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -157,8 +157,7 @@ public class HtmlSubmitInput extends HtmlInput {
     /**
      * {@inheritDoc}
      *
-     *  Returns "Submit Query" if <tt>name</tt> attribute is defined
-     *  and <tt>value</tt> attribute is not defined.
+     * Returns "Submit Query" if <tt>name</tt> attribute is defined and <tt>value</tt> attribute is not defined.
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         if (getNameAttribute().length() != 0 && !isAttributeDefined("value")) {

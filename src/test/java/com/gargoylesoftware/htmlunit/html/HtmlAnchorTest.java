@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlAnchorTest extends WebTestCase {
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name Name of the test
      */

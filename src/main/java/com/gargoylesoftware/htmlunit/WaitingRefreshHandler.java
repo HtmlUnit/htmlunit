@@ -66,8 +66,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
      * content asks unless it it longer than maxwait.
      *
      * @param maxwait The maximum wait time before the refresh (in seconds). A value
-     *                less than one (1) will cause WaitingRefreshHandler to wait for
-     *                whatever time the server or content asks.
+     * less than one (1) will cause WaitingRefreshHandler to wait for whatever time the server or content asks.
      */
     public WaitingRefreshHandler(final int maxwait) {
         maxwait_ = maxwait;
@@ -87,7 +86,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
      * @param page The page that is going to be refreshed.
      * @param url The URL where the new page will be loaded.
      * @param requestedWait The number of seconds to wait before reloading the page. If this is
-     *                      greater than maxwait than maxwait will be used instead.
+     * greater than maxwait than maxwait will be used instead.
      * @throws IOException if the refresh fails
      */
     public void handleRefresh(final Page page, final URL url, final int requestedWait) throws IOException {

@@ -1069,8 +1069,7 @@ public class Document extends NodeImpl {
      * <p>
      * The domain will be set according to the following rules:
      * <ol>
-     * <li>If the newDomain.equalsIgnoreCase(currentDomain)
-     *       the method returns with no error.</li>
+     * <li>If the newDomain.equalsIgnoreCase(currentDomain) the method returns with no error.</li>
      * <li>If the browser version is netscape, the newDomain is downshifted.</li>
      * <li>The change will take place if and only if the suffixes of the
      *       current domain and the new domain match AND there are at least

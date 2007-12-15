@@ -69,8 +69,8 @@ public class ObjectInstantiationException extends RuntimeException {
     }
 
     /**
-     *  Print the stack trace. If this exception contains another exception then
-     *  the stack traces for both will be printed.
+     * Print the stack trace. If this exception contains another exception then
+     * the stack traces for both will be printed.
      *
      * @param writer  Where the stack trace will be written
      */
@@ -83,8 +83,8 @@ public class ObjectInstantiationException extends RuntimeException {
     }
 
     /**
-     *  Print the stack trace. If this exception contains another exception then
-     *  the stack traces for both will be printed.
+     * Print the stack trace. If this exception contains another exception then
+     * the stack traces for both will be printed.
      *
      * @param stream Where the stack trace will be written
      */

@@ -72,7 +72,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class HtmlFormTest extends WebTestCase {
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      */
@@ -81,7 +81,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     *  Test the good case for setCheckedRadioButton()
+     * Test the good case for setCheckedRadioButton()
      *
      * @exception Exception If the test fails
      */

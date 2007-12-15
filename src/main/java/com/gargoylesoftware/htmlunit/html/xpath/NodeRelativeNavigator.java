@@ -77,7 +77,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
     /**
      * @param xpath an xpath expression
      * @return a parsed form of the given xpath string, which will be suitable
-     *  for queries on DOM documents.
+     * for queries on DOM documents.
      * @throws JaxenException if the expression could not be parsed
      */
     public XPath parseXPath(final String xpath) throws JaxenException {
@@ -115,22 +115,21 @@ class NodeRelativeNavigator extends DocumentNavigator {
     }
 
     /**
-     *  Returns the element whose ID is given by elementId.
-     *  If no such element exists, returns null.
-     *  Attributes with the name "ID" are not of type ID unless so defined.
-     *  Attribute types are only known if when the parser understands DTD's or
-     *  schemas that declare attributes of type ID. When JAXP is used, you
-     *  must call <code>setValidating(true)</code> on the
-     *  DocumentBuilderFactory.
+     * Returns the element whose ID is given by elementId.
+     * If no such element exists, returns null.
+     * Attributes with the name "ID" are not of type ID unless so defined.
+     * Attribute types are only known if when the parser understands DTD's or
+     * schemas that declare attributes of type ID. When JAXP is used, you
+     * must call <code>setValidating(true)</code> on the
+     * DocumentBuilderFactory.
      *
-     *  @param contextNode   a node from the document in which to look for the
-     *                       id
-     *  @param elementId   id to look for
+     * @param contextNode   a node from the document in which to look for the id
+     * @param elementId   id to look for
      *
-     *  @return element whose ID is given by elementId, or null if no such
-     *            element exists in the document or if the implementation
-     *            does not know about attribute types
-     *  @see javax.xml.parsers.DocumentBuilderFactory
+     * @return element whose ID is given by elementId, or null if no such
+     *           element exists in the document or if the implementation
+     *           does not know about attribute types
+     * @see javax.xml.parsers.DocumentBuilderFactory
      */
     public Object getElementById(final Object contextNode, final String elementId) {
         final DomNode node = (DomNode) super.getElementById(contextNode, elementId);

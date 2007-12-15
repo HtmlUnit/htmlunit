@@ -55,7 +55,7 @@ public class UnknownHtmlElement extends ClickableElement {
     private static final long serialVersionUID = 5504784230513084888L;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param tagName the HTML tag represented by this object
@@ -66,7 +66,7 @@ public class UnknownHtmlElement extends ClickableElement {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param namespaceURI the URI that identifies an XML namespace.

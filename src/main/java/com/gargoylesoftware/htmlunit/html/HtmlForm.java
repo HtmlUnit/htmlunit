@@ -95,7 +95,7 @@ public class HtmlForm extends ClickableElement {
     private KeyValuePair fakeSelectedRadioButton_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param htmlPage The page that contains this element
      * @param attributes the initial attributes
@@ -107,7 +107,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -120,8 +120,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Submit this form to the appropriate server as if a submit button had
-     *  been pressed
+     * Submit this form to the appropriate server as if a submit button had been pressed
      *
      * @param buttonName The name of a submit input element or a button element
      *      which will be sent back up with the response
@@ -145,10 +144,9 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Submit this form to the appropriate server as if it had been submitted
-     *  by javascript - ie no submit buttons were pressed.  Note that because we
-     *  are simulating a javascript submit, the onsubmit handler will not get
-     *  executed.
+     * Submit this form to the appropriate server as if it had been submitted
+     * by javascript - ie no submit buttons were pressed.  Note that because we
+     * are simulating a javascript submit, the onsubmit handler will not get executed.
      *
      * @return A new Page that reflects the results of this submission
      * @exception IOException If an IO error occurs
@@ -316,8 +314,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return a collection of elements that represent all the "submittable"
-     *  elements in this form
+     * Return a collection of elements that represent all the "submittable" elements in this form
      *
      * @param submitElement The element that would have been pressed to submit the
      * form or null if the form was submitted by javascript.
@@ -401,7 +398,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return the input tags that have the specified name
+     * Return the input tags that have the specified name
      *
      * @param name The name of the input
      * @return A list of HtmlInputs
@@ -411,7 +408,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return the first input with the specified name
+     * Return the first input with the specified name
      *
      * @param name The name of the input
      * @return The input
@@ -428,7 +425,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return the "radio" type input field that matches the specified name and value
+     * Return the "radio" type input field that matches the specified name and value
      *
      * @param name The name of the HtmlInput
      * @param value The value of the HtmlInput
@@ -460,7 +457,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return all the HtmlSelect that match the specified name
+     * Return all the HtmlSelect that match the specified name
      *
      * @param name The name
      * @return See above
@@ -486,7 +483,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return all the HtmlButtons that match the specified name
+     * Return all the HtmlButtons that match the specified name
      *
      * @param name The name
      * @return See above
@@ -514,7 +511,7 @@ public class HtmlForm extends ClickableElement {
     }
     
     /**
-     *  Return all the HtmlTextAreas that match the specified name
+     * Return all the HtmlTextAreas that match the specified name
      *
      * @param name The name
      * @return See above
@@ -540,8 +537,7 @@ public class HtmlForm extends ClickableElement {
     }
         
     /**
-     *  Return a list of HtmlInputs that are of type radio and match the
-     *  specified name
+     * Return a list of HtmlInputs that are of type radio and match the specified name
      *
      * @param name The name
      * @return See above
@@ -564,12 +560,11 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Select the specified radio button in the form. <p/>
+     * Select the specified radio button in the form. <p/>
      *
-     *  Only a radio button that is actually contained in the form can be
-     *  selected. If you need to be able to select a button that really isn't
-     *  there (ie during testing of error cases) then use {@link
-     *  #fakeCheckedRadioButton(String,String)} instead
+     * Only a radio button that is actually contained in the form can be
+     * selected. If you need to be able to select a button that really isn't
+     * there (ie during testing of error cases) then use {@link #fakeCheckedRadioButton(String,String)} instead
      *
      * @param name The name of the radio buttons
      * @param value The value to match
@@ -608,10 +603,9 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Select the specified radio button in the form.
+     * Select the specified radio button in the form.
      *
-     *  Only a radio button that is actually contained in the form can be
-     *  selected.
+     * Only a radio button that is actually contained in the form can be selected.
      *
      * @param radioButtonInput The radio Button
      */
@@ -640,13 +634,12 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Set the "selected radio button" to a value that doesn't actually exist
-     *  in the page. This is useful primarily for testing error cases.
+     * Set the "selected radio button" to a value that doesn't actually exist
+     * in the page. This is useful primarily for testing error cases.
      *
      * @param name The name of the radio buttons
      * @param value The value to match
-     * @exception ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
      * @deprecated after 1.11
      */
     // it can be made package private if needed for testing.
@@ -704,21 +697,20 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return the value of the attribute "action". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "action". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @return The value of the attribute "action" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "action" or an empty string if that attribute isn't defined.
      */
     public final String getActionAttribute() {
         return getAttributeValue("action");
     }
 
     /**
-     *  Set the value of the attribute "action". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Set the value of the attribute "action". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
      * @param action  The value of the attribute "action"
      */
@@ -727,9 +719,9 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return the value of the attribute "method". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "method". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
      * @return The value of the attribute "method" or an empty string if that
      *      attribute isn't defined.
@@ -739,33 +731,30 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Set the value of the attribute "method". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Set the value of the attribute "method". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @param method  The value of the attribute "method" or an empty string if that
-     *      attribute isn't defined.
+     * @param method  The value of the attribute "method" or an empty string if that attribute isn't defined.
      */
     public final void setMethodAttribute(final String method) {
         setAttributeValue("method", method);
     }
 
     /**
-     *  Return the value of the attribute "name". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "name". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @return The value of the attribute "name" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "name" or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
 
     /**
-     *  Set the value of the attribute "name". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.<p>
+     * Set the value of the attribute "name". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.<p>
      *
      * @param name the new value
      */
@@ -774,64 +763,56 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     *  Return the value of the attribute "enctype". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.<p>
+     * Return the value of the attribute "enctype". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.<p>
      *
      *  Enctype is the encoding type used when submitting a form back to the server
      *
-     * @return The value of the attribute "enctype" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "enctype" or an empty string if that attribute isn't defined.
      */
     public final String getEnctypeAttribute() {
         return getAttributeValue("enctype");
     }
 
     /**
-     *  Set the value of the attribute "enctype". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.<p>
+     * Set the value of the attribute "enctype". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.<p>
      *
-     *  Enctype is the encoding type used when submitting a form back to the server
+     * Enctype is the encoding type used when submitting a form back to the server
      *
-     * @param encoding The value of the attribute "enctype" or an empty string if that
-     *      attribute isn't defined.
+     * @param encoding The value of the attribute "enctype" or an empty string if that attribute isn't defined.
      */
     public final void setEnctypeAttribute(final String encoding) {
         setAttributeValue("enctype", encoding);
     }
 
     /**
-     *  Return the value of the attribute "onsubmit". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "onsubmit". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @return The value of the attribute "onsubmit" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "onsubmit" or an empty string if that attribute isn't defined.
      */
     public final String getOnSubmitAttribute() {
         return getAttributeValue("onsubmit");
     }
 
     /**
-     *  Return the value of the attribute "onreset". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "onreset". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onreset" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "onreset" or an empty string if that attribute isn't defined.
      */
     public final String getOnResetAttribute() {
         return getAttributeValue("onreset");
     }
 
     /**
-     *  Return the value of the attribute "accept". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "accept". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accept" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "accept" or an empty string if that attribute isn't defined.
      */
     public final String getAcceptAttribute() {
         return getAttributeValue("accept");
@@ -842,32 +823,27 @@ public class HtmlForm extends ClickableElement {
      * href='http://www.w3.org/TR/html401/interact/forms.html#adef-accept-charset'>
      * HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accept-charset" or an empty string
-     *      if that attribute isn't defined.
+     * @return The value of the attribute "accept-charset" or an empty string if that attribute isn't defined.
      */
     public final String getAcceptCharsetAttribute() {
         return getAttributeValue("accept-charset");
     }
 
     /**
-     *  Return the value of the attribute "target". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "target". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "target" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "target" or an empty string if that attribute isn't defined.
      */
     public final String getTargetAttribute() {
         return getAttributeValue("target");
     }
 
     /**
-     *  Set the value of the attribute "target". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Set the value of the attribute "target". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @param target  The value of the attribute "target" or an empty string if that
-     *      attribute isn't defined.
+     * @param target  The value of the attribute "target" or an empty string if that attribute isn't defined.
      */
     public final void setTargetAttribute(final String target) {
         setAttributeValue("target", target);

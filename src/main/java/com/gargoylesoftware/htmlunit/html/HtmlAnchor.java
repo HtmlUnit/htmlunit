@@ -64,7 +64,7 @@ public class HtmlAnchor extends FocusableElement {
     public static final String TAG_NAME = "a";
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -76,7 +76,7 @@ public class HtmlAnchor extends FocusableElement {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -323,8 +323,7 @@ public class HtmlAnchor extends FocusableElement {
      * have no real href and rely on javascript to do their work will fail.
      *
      * @return The Page opened by this link, nested in a new TopLevelWindow
-     * @throws MalformedURLException if the href could not be converted to
-     *         a valid URL
+     * @throws MalformedURLException if the href could not be converted to a valid URL
      */
     public final Page openLinkInNewWindow() throws MalformedURLException {
         final URL target = getPage().getFullyQualifiedUrl(getHrefAttribute());

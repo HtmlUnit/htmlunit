@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  */
 public class HtmlTableCellTest extends WebTestCase {
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param name The name of the test
      */
@@ -56,7 +56,7 @@ public class HtmlTableCellTest extends WebTestCase {
     }
 
     /**
-     *  Place holder for some real tests
+     * Place holder for some real tests
      */
     public void testFoo() {
     }

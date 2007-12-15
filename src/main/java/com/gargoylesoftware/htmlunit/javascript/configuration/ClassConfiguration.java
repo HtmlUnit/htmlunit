@@ -244,7 +244,7 @@ public final class ClassConfiguration {
      *
      * @param obj   the reference object with which to compare.
      * @return <code>true</code> if the value of this object is the same as the obj
-     *          argument; <code>false</code> otherwise.
+     * argument; <code>false</code> otherwise.
      */
     public boolean equals(final Object obj) {
         if (!(obj instanceof ClassConfiguration)) {
@@ -411,7 +411,7 @@ public final class ClassConfiguration {
          *
          * @param obj   the reference object with which to compare.
          * @return <code>true</code> if the value of this object is the same as the obj
-         *          argument; <code>false</code> otherwise.
+         * argument; <code>false</code> otherwise.
          */
         private boolean valueEquals(final Object obj) {
             if (!(obj instanceof PropertyInfo)) {
@@ -464,7 +464,7 @@ public final class ClassConfiguration {
          *
          * @param obj   the reference object with which to compare.
          * @return <code>true</code> if the value of this object is the same as the obj
-         *          argument; <code>false</code> otherwise.
+         * argument; <code>false</code> otherwise.
          */
         private boolean valueEquals(final Object obj) {
             if (!(obj instanceof FunctionInfo)) {
@@ -517,7 +517,7 @@ public final class ClassConfiguration {
          *
          * @param obj the reference object with which to compare.
          * @return <code>true</code> if the value of this object is the same as the obj
-         *          argument; <code>false</code> otherwise.
+         * argument; <code>false</code> otherwise.
          */
         private boolean valueEquals(final Object obj) {
             if (!(obj instanceof BrowserInfo)) {

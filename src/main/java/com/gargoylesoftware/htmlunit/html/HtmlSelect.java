@@ -74,7 +74,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     private String[] fakeSelectedValues_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -86,7 +86,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -174,7 +174,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Return a List containing all the options
+     * Return a List containing all the options
      *
      * @return See above
      */
@@ -184,7 +184,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Return the indexed option.
+     * Return the indexed option.
      *
      * @param index The index
      * @return The option specified by the index
@@ -275,13 +275,13 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Set the "selected" state of the specified option. If this "select" is
-     *  single select then calling this will deselect all other options <p>
+     * Set the "selected" state of the specified option. If this "select" is
+     * single select then calling this will deselect all other options <p>
      *
-     *  Only options that are actually in the document may be selected. If you
-     *  need to select an option that really isn't there (ie testing error
-     *  cases) then use {@link #fakeSelectedAttribute(String)} or {@link
-     *  #fakeSelectedAttribute(String[])} instead.
+     * Only options that are actually in the document may be selected. If you
+     * need to select an option that really isn't there (ie testing error
+     * cases) then use {@link #fakeSelectedAttribute(String)} or {@link
+     * #fakeSelectedAttribute(String[])} instead.
      *
      * @param isSelected true if the option is to become selected
      * @param optionValue The value of the option that is to change
@@ -298,13 +298,13 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Set the "selected" state of the specified option. If this "select" is
-     *  single select then calling this will deselect all other options <p>
+     * Set the "selected" state of the specified option. If this "select" is
+     * single select then calling this will deselect all other options <p>
      *
-     *  Only options that are actually in the document may be selected. If you
-     *  need to select an option that really isn't there (ie testing error
-     *  cases) then use {@link #fakeSelectedAttribute(String)} or {@link
-     *  #fakeSelectedAttribute(String[])} instead.
+     * Only options that are actually in the document may be selected. If you
+     * need to select an option that really isn't there (ie testing error
+     * cases) then use {@link #fakeSelectedAttribute(String)} or {@link
+     * #fakeSelectedAttribute(String[])} instead.
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption The value of the option that is to change
@@ -339,8 +339,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Set the selected value to be something that was not originally contained
-     *  in the document.
+     * Set the selected value to be something that was not originally contained in the document.
      *
      * @param optionValue The value of the new "selected" option
      * @deprecated
@@ -351,8 +350,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Set the selected values to be something that were not originally
-     *  contained in the document.
+     * Set the selected values to be something that were not originally contained in the document.
      *
      * @param optionValues The values of the new "selected" options
      * @deprecated
@@ -363,11 +361,11 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Return an array of KeyValuePairs that are the values that will be sent
-     *  back to the server whenever the current form is submitted.<p>
+     * Return an array of KeyValuePairs that are the values that will be sent
+     * back to the server whenever the current form is submitted.<p>
      *
-     *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return See above
      */
@@ -462,7 +460,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Return true if this select is using "multiple select"
+     * Return true if this select is using "multiple select"
      *
      * @return See above
      */
@@ -471,12 +469,11 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Return the HtmlOption object that corresponds to the specified value
+     * Return the HtmlOption object that corresponds to the specified value
      *
      * @param value The value to search by
      * @return See above
-     * @exception ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
      */
     public HtmlOption getOptionByValue(final String value)
         throws ElementNotFoundException {
@@ -486,10 +483,10 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Returns a text representation of this element that represents what would
-     *  be visible to the user if this page was shown in a web browser. If the user
-     *  can only select one option at a time, this method returns the selected option.
-     *  If the user can select multiple options, this method returns all options.
+     * Returns a text representation of this element that represents what would
+     * be visible to the user if this page was shown in a web browser. If the user
+     * can only select one option at a time, this method returns the selected option.
+     * If the user can select multiple options, this method returns all options.
      *
      * @return The element as text.
      */
@@ -517,48 +514,41 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Return the value of the attribute "name". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "name". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "name" or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
 
     /**
-     *  Return the value of the attribute "size". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "size". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @return The value of the attribute "size" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "size" or an empty string if that attribute isn't defined.
      */
     public final String getSizeAttribute() {
         return getAttributeValue("size");
     }
 
     /**
-     *  Return the value of the attribute "multiple". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "multiple". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "multiple" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "multiple" or an empty string if that attribute isn't defined.
      */
     public final String getMultipleAttribute() {
         return getAttributeValue("multiple");
     }
 
     /**
-     *  Return the value of the attribute "disabled". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "disabled". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "disabled" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "disabled" or an empty string if that attribute isn't defined.
      */
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
@@ -574,48 +564,40 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Return the value of the attribute "tabindex". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "tabindex". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "tabindex" or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
     }
 
     /**
-     *  Return the value of the attribute "onfocus". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "onfocus". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "onfocus" or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
         return getAttributeValue("onfocus");
     }
 
     /**
-     *  Return the value of the attribute "onblur". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "onblur". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "onblur" or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
     }
 
     /**
-     *  Return the value of the attribute "onchange". Refer to the <a
-     *  href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
-     *  details on the use of this attribute.
+     * Return the value of the attribute "onchange". Refer to the <a
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onchange" or an empty string if that
-     *      attribute isn't defined.
+     * @return The value of the attribute "onchange" or an empty string if that attribute isn't defined.
      */
     public final String getOnChangeAttribute() {
         return getAttributeValue("onchange");

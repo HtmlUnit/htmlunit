@@ -84,12 +84,10 @@ public final class StringUtils {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified string contains whitespace, <tt>false</tt>
-     * otherwise.
+     * Returns <tt>true</tt> if the specified string contains whitespace, <tt>false</tt> otherwise.
      *
      * @param s the string to check for whitespace
-     * @return <tt>true</tt> if the specified string contains whitespace, <tt>false</tt>
-     *         otherwise
+     * @return <tt>true</tt> if the specified string contains whitespace, <tt>false</tt> otherwise
      */
     public static boolean containsWhitespace(final String s) {
         for (int i = 0; i < s.length(); i++) {

@@ -56,7 +56,7 @@ public class HtmlResetInput extends HtmlInput {
     private static final long serialVersionUID = 1055766612574450754L;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -68,7 +68,7 @@ public class HtmlResetInput extends HtmlInput {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

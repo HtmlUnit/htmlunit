@@ -52,35 +52,35 @@ import java.util.List;
  */
 public interface WebResponse {
     /**
-     *  Return the status code that was returned by the server
+     * Return the status code that was returned by the server
      *
      * @return See above.
      */
     int getStatusCode();
 
     /**
-     *  Return the status message that was returned from the server
+     * Return the status message that was returned from the server
      *
      * @return See above
      */
     String getStatusMessage();
 
     /**
-     *  Return the content type returned from the server. Ie "text/html"
+     * Return the content type returned from the server. Ie "text/html"
      *
      * @return See above
      */
     String getContentType();
 
     /**
-     *  Return the content from the server as a string
+     * Return the content from the server as a string
      *
      * @return See above
      */
     String getContentAsString();
 
     /**
-     *  Return the content from the server as an input stream
+     * Return the content from the server as an input stream
      *
      * @return See above
      * @exception IOException If an IO problem occurs

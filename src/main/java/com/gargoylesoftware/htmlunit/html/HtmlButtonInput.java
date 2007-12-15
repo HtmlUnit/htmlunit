@@ -53,7 +53,7 @@ public class HtmlButtonInput extends HtmlInput {
     private static final long serialVersionUID = 6218252462789212481L;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -65,7 +65,7 @@ public class HtmlButtonInput extends HtmlInput {
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

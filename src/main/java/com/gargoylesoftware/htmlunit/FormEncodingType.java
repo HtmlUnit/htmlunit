@@ -49,13 +49,13 @@ import org.apache.commons.httpclient.methods.PostMethod;
 public final class FormEncodingType {
 
     /**
-     *  URL_ENCODED
+     * URL_ENCODED
      */
     public static final FormEncodingType URL_ENCODED =
         new FormEncodingType(PostMethod.FORM_URL_ENCODED_CONTENT_TYPE);
     /**
-     *  MULTIPART
-     *  This used to be a constant in httpcommons but it was deprecated with no alternative.
+     * MULTIPART
+     * This used to be a constant in httpcommons but it was deprecated with no alternative.
      */
     public static final FormEncodingType MULTIPART = new FormEncodingType("multipart/form-data");
 
@@ -66,7 +66,7 @@ public final class FormEncodingType {
     }
 
     /**
-     *  Return the name of this EncodingType
+     * Return the name of this EncodingType
      *
      * @return See above
      */
@@ -75,7 +75,7 @@ public final class FormEncodingType {
     }
 
     /**
-     *  Return the constant that matches the given name
+     * Return the constant that matches the given name
      *
      * @param name The name to search by
      * @return See above
@@ -100,7 +100,7 @@ public final class FormEncodingType {
     }
 
     /**
-     *  Return a string representation of this object
+     * Return a string representation of this object
      *
      * @return See above
      */

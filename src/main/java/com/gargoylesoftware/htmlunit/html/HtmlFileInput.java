@@ -63,7 +63,7 @@ public class HtmlFileInput extends HtmlInput {
     private String contentType_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -75,7 +75,7 @@ public class HtmlFileInput extends HtmlInput {
     }
     
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -92,12 +92,12 @@ public class HtmlFileInput extends HtmlInput {
     }
 
     /**
-     *  Return an array of KeyValuePairs that are the values that will be sent
-     *  back to the server whenever the current form is submitted. Some of the
-     *  values may be KeyDataPairs indicating that a File will be uploaded<p>
+     * Return an array of KeyValuePairs that are the values that will be sent
+     * back to the server whenever the current form is submitted. Some of the
+     * values may be KeyDataPairs indicating that a File will be uploaded<p>
      *
-     *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return See above
      */

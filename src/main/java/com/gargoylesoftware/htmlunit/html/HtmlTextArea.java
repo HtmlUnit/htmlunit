@@ -73,7 +73,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     private boolean preventDefault_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -85,7 +85,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -127,7 +127,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     }
 
     /**
-     *  Set the new value of this text area.
+     * Set the new value of this text area.
      *
      * @param newValue The new value.
      */
@@ -149,11 +149,11 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     }
 
     /**
-     *  Return an array of KeyValuePairs that are the values that will be sent
-     *  back to the server whenever the current form is submitted.<p>
+     * Return an array of KeyValuePairs that are the values that will be sent
+     * back to the server whenever the current form is submitted.<p>
      *
-     *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return See above
      */

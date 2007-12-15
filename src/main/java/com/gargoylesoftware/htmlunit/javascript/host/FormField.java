@@ -75,7 +75,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     *  Return the value of the javascript attribute "value".
+     * Return the value of the javascript attribute "value".
      *
      *@return The value of this attribute.
      */
@@ -84,7 +84,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     *  Set the value of the javascript attribute "value".
+     * Set the value of the javascript attribute "value".
      *
      *@param newValue  The new value.
      */
@@ -93,7 +93,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     *  Return the value of the javascript attribute "name".
+     * Return the value of the javascript attribute "name".
      *
      *@return The value of this attribute.
      */
@@ -102,7 +102,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     *  Set the value of the javascript attribute "name".
+     * Set the value of the javascript attribute "name".
      *
      *@param newName  The new name.
      */
@@ -111,7 +111,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     *  Return the value of the javascript attribute "form".
+     * Return the value of the javascript attribute "form".
      *
      *@return The value of this attribute.
      */

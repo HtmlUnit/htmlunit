@@ -123,7 +123,7 @@ public class XMLDocument extends Document {
      * Loads an XML document using the supplied string
      *
      * @param strXML A string containing the XML string to load into this XML document object.
-     *      This string can contain an entire XML document or a well-formed fragment.
+     *        This string can contain an entire XML document or a well-formed fragment.
      * @return true if the load succeeded; false if the load failed.
      */
     public boolean jsxFunction_loadXML(final String strXML) {

@@ -68,7 +68,7 @@ public class MockWebConnection extends WebConnectionImpl {
     private HttpState httpState_ = new HttpState();
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param webClient The web client
      */
@@ -85,7 +85,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     *  Submit a request and retrieve a response
+     * Submit a request and retrieve a response
      *
      * @param webRequestSettings Settings to make the request with
      * @return See above
@@ -113,7 +113,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     *  Return the method that was used in the last call to submitRequest()
+     * Return the method that was used in the last call to submitRequest()
      *
      * @return See above
      */
@@ -122,7 +122,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     *  Return the parameters that were used in the last call to submitRequest()
+     * Return the parameters that were used in the last call to submitRequest()
      *
      * @return See above
      */
@@ -269,8 +269,8 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     *  Return the additional headers that were used in the in the last call
-     *  to {@link #getResponse(WebRequestSettings)}.
+     * Return the additional headers that were used in the in the last call
+     * to {@link #getResponse(WebRequestSettings)}.
      * @return See above
      */
     public Map getLastAdditionalHeaders() {

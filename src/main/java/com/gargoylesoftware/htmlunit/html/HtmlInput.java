@@ -68,7 +68,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     private String defaultValue_;
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param page The page that contains this element
      * @param attributes the initial attributes
@@ -78,7 +78,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     }
 
     /**
-     *  Create an instance
+     * Create an instance
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -104,11 +104,11 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     }
 
     /**
-     *  Return an array of KeyValuePairs that are the values that will be sent
-     *  back to the server whenever the current form is submitted.<p>
+     * Return an array of KeyValuePairs that are the values that will be sent
+     * back to the server whenever the current form is submitted.<p>
      *
-     *  THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     *  BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
      *
      * @return See above
      */
@@ -420,7 +420,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     }
 
     /**
-     *  Set the "checked" attribute
+     * Set the "checked" attribute
      *
      * @param isChecked true if this element is to be selected
      * @return The page that occupies this window after setting checked status.
@@ -432,7 +432,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     }
 
     /**
-     *  Return true if this element is currently selected
+     * Return true if this element is currently selected
      *
      * @return See above
      */
@@ -448,8 +448,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @param y The y coordinate of the pointing device at the time of clicking
      * @return The page that is loaded after the click has taken place.
      * @exception IOException If an io error occurs
-     * @exception ElementNotFoundException If a particular xml element could
-     *      not be found in the dom model
+     * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
      */
     public Page click(final int x, final int y)
         throws

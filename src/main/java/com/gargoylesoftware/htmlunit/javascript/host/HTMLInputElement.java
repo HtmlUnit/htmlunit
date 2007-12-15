@@ -57,15 +57,14 @@ public class HTMLInputElement extends FormField {
     private static final long serialVersionUID = 3712016051364495710L;
 
     /**
-     *  Create an instance.
+     * Create an instance.
      */
     public HTMLInputElement() {
     }
 
     /**
-     *  Javascript constructor. This must be declared in every javascript file
-     *  because the rhino engine won't walk up the hierarchy looking for
-     *  constructors.
+     * Javascript constructor. This must be declared in every javascript file
+     * because the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
     }
@@ -106,10 +105,10 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     *  Set the checked property. Although this property is defined in Input it
-     *  doesn't make any sense for input's other than checkbox and radio. This
-     *  implementation does nothing. The implementations in Checkbox and Radio
-     *  actually do the work.
+     * Set the checked property. Although this property is defined in Input it
+     * doesn't make any sense for input's other than checkbox and radio. This
+     * implementation does nothing. The implementations in Checkbox and Radio
+     * actually do the work.
      *
      * @param checked  True if this input should have the "checked" attribute set
      */
@@ -126,10 +125,10 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     *  Return the value of the checked property. Although this property is
-     *  defined in Input it doesn't make any sense for input's other than
-     *  checkbox and radio. This implementation does nothing. The
-     *  implementations in Checkbox and Radio actually do the work.
+     * Return the value of the checked property. Although this property is
+     * defined in Input it doesn't make any sense for input's other than
+     * checkbox and radio. This implementation does nothing. The
+     * implementations in Checkbox and Radio actually do the work.
      *
      *@return The checked property.
      */

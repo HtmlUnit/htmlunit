@@ -180,7 +180,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param port The port we are authenticating for.
      * @param proxy Whether or not we are authenticating using a proxy.
      * @return The credentials corresponding to the specified scheme, host and port or <code>null</code>
-     *   if already asked for it to avoid infinite loop
+     * if already asked for it to avoid infinite loop
      * @throws CredentialsNotAvailableException If the specified credentials cannot be provided due to an error.
      * @see CredentialsProvider#getCredentials(AuthScheme, String, int, boolean)
      */

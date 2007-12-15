@@ -156,8 +156,7 @@ public class Style extends SimpleScriptable implements Cloneable {
     /**
      * Initializes the object.
      *
-     * @param htmlElement
-     *            The element that this style describes
+     * @param htmlElement The element that this style describes
      */
     void initialize(final HTMLElement htmlElement) {
         // Initialize.

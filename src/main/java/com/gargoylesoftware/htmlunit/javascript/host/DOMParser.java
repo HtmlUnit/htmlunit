@@ -62,7 +62,7 @@ public class DOMParser extends SimpleScriptable {
      * The string passed in is parsed into a DOM document.
      * @param str The UTF16 string to be parsed.
      * @param contentType The content type of the string -
-     *      either <tt>text/xml</tt>, <tt>application/xml</tt>, or <tt>application/xhtml+xml</tt>. Must not be NULL.
+     *        either <tt>text/xml</tt>, <tt>application/xml</tt>, or <tt>application/xhtml+xml</tt>. Must not be NULL.
      * @return the generated document.
      */
     public Document jsxFunction_parseFromString(final String str, final String contentType) {
