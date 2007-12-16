@@ -1861,4 +1861,20 @@ public class HtmlPageTest extends WebTestCase {
 
         loadPage(htmlContent);
     }
+
+    /**
+     * Regression test for asText() which would blow up.
+     *
+     * @exception Exception If the test fails
+     */
+    public void testAsText() throws Exception {
+        final String htmlContent
+            = "<html><head><title>test</title></head>\n"
+            + "<body><table>\n"
+            + "<tr><form><td>a</td></form></tr>\n"
+            + "</table></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        page.asText();
+    }
 }
