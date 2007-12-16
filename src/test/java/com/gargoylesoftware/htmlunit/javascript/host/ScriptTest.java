@@ -132,4 +132,30 @@ public class ScriptTest extends WebTestCase {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testScriptForEvent() throws Exception {
+        // IE accepts it with () or without
+        testScriptForEvent("onload");
+        testScriptForEvent("onload()");
+    }
+
+    private void testScriptForEvent(final String eventName) throws Exception {
+        final String content
+            = "<html><head><title>foo</title>\n"
+            + "<script FOR='window' EVENT='" + eventName + "' LANGUAGE='javascript'>\n"
+            + " document.form1.txt.value='hello';\n"
+            + " alert(document.form1.txt.value);\n"
+            + "</script></head><body>\n"
+            + "<form name='form1'><input type=text name='txt'></form></body></html>";
+        final List collectedAlerts = new ArrayList();
+
+        final String[] expectedAlerts = {"hello"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

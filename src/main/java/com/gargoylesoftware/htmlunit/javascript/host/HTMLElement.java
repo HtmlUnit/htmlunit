@@ -684,11 +684,10 @@ public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGette
     /**
      * Parses the html code
      * @param htmlSnippet the html code extract to parse
-     * @return collection of {@link DomNode}: the parsed nodes
      */
     private void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
 
-        DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, target.getPage(), null) {
+        final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, target.getPage(), null) {
             private static final long serialVersionUID = 2108037256628269797L;
             public DomNode appendDomChild(final DomNode node) {
                 if (append) {
