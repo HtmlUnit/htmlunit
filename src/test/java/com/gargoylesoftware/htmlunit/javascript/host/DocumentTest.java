@@ -2675,6 +2675,7 @@ public class DocumentTest extends WebTestCase {
     public void testCreateEvents_FF() throws Exception {
         testCreateEvents_FF("Event", true, BrowserVersion.FIREFOX_2);
         testCreateEvents_FF("Events", true, BrowserVersion.FIREFOX_2);
+        testCreateEvents_FF("HTMLEvents", true, BrowserVersion.FIREFOX_2);
         testCreateEvents_FF("Bogus", false, BrowserVersion.FIREFOX_2);
     }
 
@@ -2691,9 +2692,10 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
         final List actual = new ArrayList();
         try {
+            final String[] expected = {"true", "object", "[object Event]", "true"};
+            createTestPageForRealBrowserIfNeeded(content, expected);
             loadPage(version, content, actual);
             assertTrue("Test was expected to fail, but did not: type=" + eventType, isSupportedType);
-            final String[] expected = {"true", "object", "[object Event]", "true"};
             assertEquals(expected, actual);
         }
         catch (final Exception e) {

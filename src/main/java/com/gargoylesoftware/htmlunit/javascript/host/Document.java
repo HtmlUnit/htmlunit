@@ -140,6 +140,7 @@ public class Document extends NodeImpl {
         final Map eventMap = new HashMap();
         eventMap.put("Event", Event.class);
         eventMap.put("Events", Event.class);
+        eventMap.put("HTMLEvents", Event.class);
         eventMap.put("UIEvent", UIEvent.class);
         eventMap.put("UIEvents", UIEvent.class);
         eventMap.put("MouseEvent", MouseEvent.class);

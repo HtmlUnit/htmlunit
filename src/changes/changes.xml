@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="update" dev="mguillem">
+                JavaScript: added 'HTMLEvents' to the event types supported by document.createEvent (Firefox).
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: use custom JDK based regular expression evaluation for String.match
                 to avoid Rhino problems (speed and wrong evaluation).
             </action>
