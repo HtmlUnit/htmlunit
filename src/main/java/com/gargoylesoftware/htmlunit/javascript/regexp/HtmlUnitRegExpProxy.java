@@ -88,8 +88,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             }
             else if (arg0 instanceof NativeRegExp) {
                 try {
-                    final String str = arg0.toString(); // the form is /regex/flags
-                    final String regex = StringUtils.substringBeforeLast(str.substring(1), "/");
+                    final NativeRegExp regexp = (NativeRegExp) arg0;
+                    final String str = arg0.toString();
+                    final String regex = readNativeRegExpPattern(regexp);
                     final String flagsStr = StringUtils.substringAfterLast(str, "/");
                     final int flags = jsFlagsToPatternFlags(flagsStr);
                     final Pattern pattern = Pattern.compile(regex, flags);
@@ -106,10 +107,50 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 }
             }
         }
+        else if (RA_MATCH == actionType) {
+            if (args.length == 0) {
+                return null;
+            }
+            final Object arg0 = args[0];
+            final String thisString = Context.toString(thisObj);
+            final String regex;
+            final int flags;
+            if (arg0 instanceof NativeRegExp) {
+                regex = readNativeRegExpPattern((NativeRegExp) arg0);
+                flags = readNativeRegExpFlags((NativeRegExp) arg0);
+            }
+            else {
+                regex = Context.toString(arg0);
+                flags = 0;
+            }
+            final Pattern pattern = Pattern.compile(regex, flags);
+            final Matcher matcher = pattern.matcher(thisString);
+            if (!matcher.find()) {
+                return null;
+            }
+            final Object[] groups = new Object[matcher.groupCount() + 1];
+            for (int i = 0; i <= matcher.groupCount(); ++i) {
+                groups[i] = matcher.group(i);
+                if (groups[i] == null) {
+                    groups[i] = Context.getUndefinedValue();
+                }
+            }
+            return cx.newArray(scope, groups);
+        }
         
         return wrappedAction(cx, scope, thisObj, args, actionType);
     }
     
+    private int readNativeRegExpFlags(final NativeRegExp nativeRegExp) {
+        final String str = nativeRegExp.toString(); // the form is /regex/flags
+        return jsFlagsToPatternFlags(str);
+    }
+
+    private String readNativeRegExpPattern(final NativeRegExp nativeRegExp) {
+        final String str = nativeRegExp.toString(); // the form is /regex/flags
+        return StringUtils.substringBeforeLast(str.substring(1), "/");
+    }
+
     /**
      * Calls action on the wrapped RegExp proxy.
      */

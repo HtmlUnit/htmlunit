@@ -69,6 +69,43 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         + "if (s != expected)"
         + " throw 'Expected >' + expected + '< but got >' + s + '<';";
 
+    private final String scriptTestMatch_ = "function arrayToString(_arr)\n"
+        + "{\n"
+        + "  if (_arr == null) return null;\n"
+        + "  var s = '[';"
+        + "  for (var i=0; i<_arr.length; ++i)"
+        + "  {\n"
+        + "    if (i != 0) s += ', '\n"
+        + "    s += _arr[i];\n"
+        + "  }\n"
+        + "  s += ']';\n"
+        + "  return s;\n"
+        + "}\n"
+        + "function assertArrEquals(actual, expected)\n"
+        + "{\n"
+        + "  if (expected == null)\n"
+        + "  {\n"
+        + "    if (actual != null)\n"
+        + "      throw 'Expected >null< got >' + actual + '<';\n"
+        + "    else return;\n"
+        + "  }\n"
+        + "  var expectedStr = arrayToString(expected);\n"
+        + "  var actualStr = arrayToString(actual);\n"
+        + "  if (expectedStr != actualStr)\n"
+        + "    throw 'Expected >' + expectedStr + '< got >' + actualStr + '<';\n"
+        + "}\n"
+        + "assertArrEquals('ab'.match(), null);\n"
+        + "assertArrEquals('ab'.match('foo'), null);\n"
+        + "assertArrEquals('ab'.match('a'), ['a']);\n"
+        + "assertArrEquals('abab'.match('a'), ['a']);\n"
+        + "assertArrEquals('abab'.match('.a'), ['ba']);\n"
+        + "assertArrEquals('abab'.match(/.a/), ['ba']);\n"
+        + "assertArrEquals('li'.match(/^([^a-z0-9_-])?([a-z0-9_-]+)(.*)/i), ['li', undefined, 'li', '']);\n"
+        + "assertArrEquals('abab'.match(new RegExp('.a')), ['ba']);\n"
+        + "var s = '<script>var a = 1;</' + 'script>';\n"
+        + "var re = '(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)';\n"
+        + "assertArrEquals(s.match(re), [s, 'var a = 1;', ';']);\n";
+
     /**
      * Create an instance
      * @param name The name of the test
@@ -167,5 +204,40 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testMatch() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + scriptTestMatch_
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {};
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
+    /**
+     * Test if the custom fix is needed or not. When this test fails, then it means that the problem is solved in
+     * Rhino and that custom fix for String.match in {@link HtmlUnitRegExpProxy} is not needed anymore (and that
+     * this test can be removed, or turned positive).
+     * @throws Exception if the test fails
+     */
+    public void testMatchFixNeeded() throws Exception {
+        final Context ctx = Context.enter();
+        final ScriptableObject topScope = ctx.initStandardObjects();
+        
+        ctx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+        try {
+            ctx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
+        }
+        catch (final JavaScriptException e) {
+            assertTrue(e.getMessage().indexOf("Expected >") == 0);
+        }
     }
 }
