@@ -399,14 +399,14 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetElementsByTagNameAsterisk() throws Exception {
-        final String html = "<html><body onload='test()'><script>\r\n"
-            + "   function test() {\r\n"
-            + "      alert(document.getElementsByTagName('*').length);\r\n"
-            + "      alert(document.getElementById('div').getElementsByTagName('*').length);\r\n"
-            + "   }\r\n"
-            + "</script>\r\n"
-            + "<div id='div'><p>a</p><p>b</p><p>c</p></div>\r\n"
-            + "</body></html>\r\n";
+        final String html = "<html><body onload='test()'><script>\n"
+            + "   function test() {\n"
+            + "      alert(document.getElementsByTagName('*').length);\n"
+            + "      alert(document.getElementById('div').getElementsByTagName('*').length);\n"
+            + "   }\n"
+            + "</script>\n"
+            + "<div id='div'><p>a</p><p>b</p><p>c</p></div>\n"
+            + "</body></html>";
         final String[] expected = {"8", "3"};
         final List actual = new ArrayList();
         loadPage(html, actual);
@@ -672,15 +672,15 @@ public class HTMLElementTest extends WebTestCase {
 
     private void testGetSetInnerHtmlEmptyTag(final BrowserVersion version, final String[] expected)
         throws Exception {
-        final String content = "<html><body onload='test()'><script>\r\n"
-            + "   function test() {\r\n"
-            + "      var div = document.getElementById('div');\r\n"
-            + "      alert(div.outerHTML);\r\n"
-            + "      alert(div.innerHTML);\r\n"
-            + "      alert(div.innerText);\r\n"
-            + "   }\r\n"
-            + "</script>\r\n"
-            + "<div id='div'><ul/></div>\r\n"
+        final String content = "<html><body onload='test()'><script>\n"
+            + "   function test() {\n"
+            + "      var div = document.getElementById('div');\n"
+            + "      alert(div.outerHTML);\n"
+            + "      alert(div.innerHTML);\n"
+            + "      alert(div.innerText);\n"
+            + "   }\n"
+            + "</script>\n"
+            + "<div id='div'><ul/></div>\n"
             + "</body></html>";
         final List actual = new ArrayList();
         loadPage(version, content, actual);
@@ -707,15 +707,15 @@ public class HTMLElementTest extends WebTestCase {
 
     private void testGetSetInnerHtmlAttributeWithWhitespace(final BrowserVersion version, final String[] expected)
         throws Exception {
-        final String content = "<html><body onload='test()'><script>\r\n"
-            + "   function test() {\r\n"
-            + "      var div = document.getElementById('div');\r\n"
-            + "      alert(div.outerHTML);\r\n"
-            + "      alert(div.innerHTML);\r\n"
-            + "      alert(div.innerText);\r\n"
-            + "   }\r\n"
-            + "</script>\r\n"
-            + "<div id='div'><span class='a b'></span></div>\r\n"
+        final String content = "<html><body onload='test()'><script>\n"
+            + "   function test() {\n"
+            + "      var div = document.getElementById('div');\n"
+            + "      alert(div.outerHTML);\n"
+            + "      alert(div.innerHTML);\n"
+            + "      alert(div.innerText);\n"
+            + "   }\n"
+            + "</script>\n"
+            + "<div id='div'><span class='a b'></span></div>\n"
             + "</body></html>";
         final List actual = new ArrayList();
         loadPage(version, content, actual);

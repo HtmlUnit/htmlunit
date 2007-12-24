@@ -861,20 +861,20 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testClearInterval() throws Exception {
-        final String html = "<html><body onload='test()'><script>\r\n"
-            + "  var count;\r\n"
-            + "  var id;\r\n"
-            + "  function test() {\r\n"
-            + "    count = 0;\r\n"
-            + "    id = setInterval(callback, 100);\r\n"
-            + "  };\r\n"
-            + "  function callback() {\r\n"
-            + "    count++;\r\n"
-            + "    clearInterval(id);\r\n"
-            + "    // Give the callback time to show its ugly face.\r\n"
-            + "    // If it fires between now and then, we'll know.\r\n"
-            + "    setTimeout('alert(count)', 500);\r\n"
-            + "  }\r\n"
+        final String html = "<html><body onload='test()'><script>\n"
+            + "  var count;\n"
+            + "  var id;\n"
+            + "  function test() {\n"
+            + "    count = 0;\n"
+            + "    id = setInterval(callback, 100);\n"
+            + "  };\n"
+            + "  function callback() {\n"
+            + "    count++;\n"
+            + "    clearInterval(id);\n"
+            + "    // Give the callback time to show its ugly face.\n"
+            + "    // If it fires between now and then, we'll know.\n"
+            + "    setTimeout('alert(count)', 500);\n"
+            + "  }\n"
             + "</script></body></html>";
         final String[] expected = {"1"};
         final List actual = Collections.synchronizedList(new ArrayList());
@@ -948,17 +948,17 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testClearTimeout_DoesNotStopExecutingCallback() throws Exception {
-        final String html = "<html><body onload='test()'><script>\r\n"
-            + "  var id;\r\n"
-            + "  function test() {\r\n"
-            + "    id = setTimeout(callback, 1);\r\n"
-            + "  };\r\n"
-            + "  function callback() {\r\n"
-            + "    alert(id != 0);\r\n"
-            + "    clearTimeout(id);\r\n"
-            + "    // Make sure we weren't stopped.\r\n"
-            + "    alert('completed');\r\n"
-            + "  }\r\n"
+        final String html = "<html><body onload='test()'><script>\n"
+            + "  var id;\n"
+            + "  function test() {\n"
+            + "    id = setTimeout(callback, 1);\n"
+            + "  };\n"
+            + "  function callback() {\n"
+            + "    alert(id != 0);\n"
+            + "    clearTimeout(id);\n"
+            + "    // Make sure we weren't stopped.\n"
+            + "    alert('completed');\n"
+            + "  }\n"
             + "</script><div id='a'></div></body></html>";
         final String[] expected = {"true", "completed"};
         final List actual = Collections.synchronizedList(new ArrayList());
@@ -2199,16 +2199,16 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEvalScopeEvent() throws Exception {
-        final String html = "<html><body onload='test()'><script>\r\n"
-            + "   function test() {\r\n"
-            + "      var s = 'string';\r\n"
-            + "      var f = 'initial';\r\n"
-            + "      eval('f = function(){alert(s);}');\r\n"
-            + "      invoke(f);\r\n"
-            + "   };\r\n"
-            + "   function invoke(fn) {\r\n"
-            + "      fn();\r\n"
-            + "   }\r\n"
+        final String html = "<html><body onload='test()'><script>\n"
+            + "   function test() {\n"
+            + "      var s = 'string';\n"
+            + "      var f = 'initial';\n"
+            + "      eval('f = function(){alert(s);}');\n"
+            + "      invoke(f);\n"
+            + "   };\n"
+            + "   function invoke(fn) {\n"
+            + "      fn();\n"
+            + "   }\n"
             + "</script></body></html>";
         final String[] expected = {"string"};
         final List actual = new ArrayList();
