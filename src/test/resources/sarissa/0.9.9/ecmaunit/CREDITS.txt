@@ -1,0 +1,10 @@
+================
+ecmaunit credits
+================
+
+This package was written by Guido Wesdorp (guido@infrae.com), with the help of 
+Philipp von Weitershausen (philikon@philikon.de).
+
+Inspiration came from the jsUnit package by Edward Hieatt (edward@jsunit.net),
+a unit test suite for JavaScript, and Python's pyunit package written by
+Steve Purcell.

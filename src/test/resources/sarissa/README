@@ -1,0 +1,4 @@
+This directory contains the resources necessary to run the Sarissa unit tests.
+
+Each subdirectory corresponds to a specific version of Sarissa. Each of these subdirectories
+was created by downloading the distribution and copying all files needed to run 'test/testsarissa.html'.
