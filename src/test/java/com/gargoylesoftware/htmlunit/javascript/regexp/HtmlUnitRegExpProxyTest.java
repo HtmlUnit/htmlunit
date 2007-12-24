@@ -66,14 +66,14 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     private final String expected_ = begin_ + end_;
     private final String src_ = "var re = new RegExp(str, 'img');\n"
         + "var s = text.replace(re, '');\n"
-        + "if (s != expected)"
+        + "if (s != expected)\n"
         + " throw 'Expected >' + expected + '< but got >' + s + '<';";
 
     private final String scriptTestMatch_ = "function arrayToString(_arr)\n"
         + "{\n"
         + "  if (_arr == null) return null;\n"
-        + "  var s = '[';"
-        + "  for (var i=0; i<_arr.length; ++i)"
+        + "  var s = '[';\n"
+        + "  for (var i=0; i<_arr.length; ++i)\n"
         + "  {\n"
         + "    if (i != 0) s += ', '\n"
         + "    s += _arr[i];\n"

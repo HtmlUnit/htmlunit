@@ -261,7 +261,7 @@ public final class HtmlInputTest extends WebTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + "  function handler() {}"
+            + "  function handler() {}\n"
             + "  function test() {\n"
             + "    var elem = document.getElementById('myInput');\n"
             + "    elem.onchange = handler;\n"

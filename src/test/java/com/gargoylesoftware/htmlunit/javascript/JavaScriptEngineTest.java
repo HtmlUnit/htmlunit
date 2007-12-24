@@ -170,7 +170,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testAlert() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "alert('foo')"
+            + "alert('foo')\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -483,7 +483,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    document.form1.textfield1.value=1;\n"
-            + "    alert(document.form1.textfield1.value)"
+            + "    alert(document.form1.textfield1.value)\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -1318,7 +1318,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</body></html>";
         final String content2
             = "<html><head><title>page 2</title>\n"
-            + "<script src='script.js'></script>"
+            + "<script src='script.js'></script>\n"
             + "</head><body>\n"
             + "</body></html>";
         final String script = "alert(document.title)";

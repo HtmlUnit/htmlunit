@@ -612,10 +612,10 @@ public class HtmlSelectTest extends WebTestCase {
     public void testSetSelectedAttributeReturnedPage() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "  document.getElementById('iframe').src = 'about:blank';\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<form>\n"

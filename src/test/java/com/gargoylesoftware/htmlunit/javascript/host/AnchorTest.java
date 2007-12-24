@@ -111,7 +111,7 @@ public class AnchorTest extends WebTestCase {
         final String content
             = "<html><head><title>AnchorTest</title><script>\n"
             + "function test() {\n"
-            + "    for (var i=0; i<document.links.length; ++i)"
+            + "    for (var i=0; i<document.links.length; ++i)\n"
             + "    {\n"
             + "        var onclick = document.links[i].onclick;\n"
             + "        alert(onclick ? (onclick.toString().indexOf('alert(') != -1) : 'not defined');\n"
@@ -138,7 +138,7 @@ public class AnchorTest extends WebTestCase {
             = "<html><head><title>AnchorTest</title><script>\n"
             + "function test() {\n"
             + "  alert(document.getElementById('myAnchor'));\n"
-            + "  for (var i=0; i<document.links.length; ++i)"
+            + "  for (var i=0; i<document.links.length; ++i)\n"
             + "  {\n"
             + "    alert(document.links[i]);\n"
             + "  }\n"

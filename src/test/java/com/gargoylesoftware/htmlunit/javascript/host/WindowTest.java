@@ -474,15 +474,15 @@ public class WindowTest extends WebTestCase {
     public void testOpenWindow_existingWindow() throws Exception {
         final String content
             = "<html><head><script>\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "  var w1 = window.open('about:blank', 'foo');\n"
             + "  alert(w1 != null);\n"
             + "  var w2 = window.open('', 'foo');\n"
             + "  alert(w1 == w2);\n"
             + "  var w3 = window.open('', 'myFrame');\n"
             + "  alert(w3 == window.frames.myFrame);\n"
-            + "}"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<iframe name='myFrame' id='myFrame'></iframe>\n"
             + "</body></html>";
@@ -741,10 +741,10 @@ public class WindowTest extends WebTestCase {
             + "function runtest() {\n"
             + "    alert(window.opener)\n"
             + "    alert('one')\n"
-            + "    open('" + URL_SECOND + "', 'foo')"
+            + "    open('" + URL_SECOND + "', 'foo')\n"
             + "}\n"
             + "function callAlert(text) {\n"
-            + "    alert(text)"
+            + "    alert(text)\n"
             + "}\n"
             + "</script></head><body onload='runtest()'>\n"
             + "</body></html>";
@@ -760,7 +760,7 @@ public class WindowTest extends WebTestCase {
         final String thirdContent
             = "<html><head><title>Third</title><script>\n"
             + "function runtest() {\n"
-            + "    opener.callAlert('three')"
+            + "    opener.callAlert('three')\n"
             + "}\n"
             + "</script></head><body onload='runtest()'>\n"
             + "</body></html>";
@@ -796,7 +796,7 @@ public class WindowTest extends WebTestCase {
      */
     public void testSetTimeoutByReference() throws Exception {
         final String content = "<html><body><script language='JavaScript'>\n"
-            + "function doTimeout() { alert('Yo!'); }"
+            + "function doTimeout() {alert('Yo!');}\n"
             + "window.setTimeout(doTimeout,1);\n"
             + "</script></body></html>";
 
@@ -839,9 +839,9 @@ public class WindowTest extends WebTestCase {
             + "    var iterationNumber=0;\n"
             + "    function doAlert() {\n"
             + "      alert('blah');\n"
-            + "      if (++iterationNumber >= 3) {"
+            + "      if (++iterationNumber >= 3) {\n"
             + "        clearInterval(threadID);\n"
-            + "      }"
+            + "      }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -999,7 +999,7 @@ public class WindowTest extends WebTestCase {
     public void testWindowFrames() throws Exception {
         final String firstContent =
             "<html><body><script language='JavaScript'>\n"
-            + "if (typeof top.frames['anyXXXname'] == 'undefined') {"
+            + "if (typeof top.frames['anyXXXname'] == 'undefined') {\n"
             + "alert('one')};\n"
             + "</script></body></html>";
 
@@ -1018,12 +1018,12 @@ public class WindowTest extends WebTestCase {
             + "<script>\n"
             + "var oFrames = window.frames;\n"
             + "alert(oFrames.length);\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "    alert(oFrames.length);\n"
             + "    alert(window.frames.length);\n"
             + "    alert(oFrames == window.frames);\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "<frameset rows='50,*' onload='test()'>\n"
             + "<frame src='about:blank'/>\n"
@@ -1278,14 +1278,14 @@ public class WindowTest extends WebTestCase {
     public void testClosed() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "  alert(window.closed);\n"
             + "  var newWindow = window.open('about:blank', 'foo');\n"
             + "  alert(newWindow.closed);\n"
             + "  newWindow.close();\n"
             + "  alert(newWindow.closed);\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -1360,7 +1360,7 @@ public class WindowTest extends WebTestCase {
     public void testFramesLengthZero() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "alert(window.frames.length)"
+            + "alert(window.frames.length)\n"
             + "</script></head><body>\n"
             + "</body></html>";
         final List collectedAlerts = new ArrayList();
@@ -1379,12 +1379,12 @@ public class WindowTest extends WebTestCase {
         final String content =
             "<html>\n"
             + "<script>\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "    alert(window.frames.length);\n"
             + "    alert(window.frames[0].name);\n"
             + "    alert(window.frames.frame2.name);\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "<frameset rows='50,*' onload='test()'>\n"
             + "<frame name='frame1' src='about:blank'/>\n"
@@ -1407,7 +1407,7 @@ public class WindowTest extends WebTestCase {
     public void testMoveTo() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "window.moveTo(10, 20)"
+            + "window.moveTo(10, 20)\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
@@ -1421,7 +1421,7 @@ public class WindowTest extends WebTestCase {
     public void testMoveBy() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "window.moveBy(10, 20)"
+            + "window.moveBy(10, 20)\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPage(content);
@@ -1729,11 +1729,11 @@ public class WindowTest extends WebTestCase {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
             + "<script>\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "  window.detachEvent('onload', test);\n"
             + "  alert('detached');\n"
-            + "}"
+            + "}\n"
             + "window.attachEvent('onload', test);\n"
             + "</script></head>\n"
             + "<body></body></html>";
@@ -2148,7 +2148,7 @@ public class WindowTest extends WebTestCase {
         final String iframe = "<html><body>\n"
             + "<script>\n"
             + "window.parent.eval('var foo = 1');\n"
-            + "alert(window.parent.foo)"
+            + "alert(window.parent.foo)\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -2222,7 +2222,7 @@ public class WindowTest extends WebTestCase {
     public void testFunctionEquality() throws Exception {
         final String content = "<html><body>\n"
             + "<script>\n"
-            + "alert(window.focus == window.focus)"
+            + "alert(window.focus == window.focus)\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -2240,10 +2240,10 @@ public class WindowTest extends WebTestCase {
     public void testCaptureEvents() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "function t()"
-            + "{"
+            + "function t()\n"
+            + "{\n"
             + "    alert('captured');\n"
-            + "}"
+            + "}\n"
             + "window.captureEvents(Event.CLICK);\n"
             + "window.onclick = t;\n"
             + "</script></head><body>\n"
@@ -2337,9 +2337,9 @@ public class WindowTest extends WebTestCase {
         final String content = "<html><body>\n"
             + "<input type='button' id='myButton' value='Click Me' onclick='test(this)'>\n"
             + "<script>\n"
-            + "function test(f) {"
+            + "function test(f) {\n"
             + "   alert(eval('f.tagName'));\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -2380,15 +2380,15 @@ public class WindowTest extends WebTestCase {
         }
 
         final String content = "<html><head><script language='JavaScript'>\n"
-            + "function alert()"
-            + "{"
+            + "function alert()\n"
+            + "{\n"
             + "  scroll = 'xxx';\n"
             + "  document.write(scroll);\n"
-            + "}"
-            + "function navigator()"
-            + "{"
+            + "}\n"
+            + "function navigator()\n"
+            + "{\n"
             + "  alert('xxx');\n"
-            + "}"
+            + "}\n"
             + "navigator();\n"
             + "</script></head><body></body></html>";
 
@@ -2410,7 +2410,7 @@ public class WindowTest extends WebTestCase {
         final String frameContent =
             "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
-            + "function doTest() {"
+            + "function doTest() {\n"
             + "    var bottomFrame = window.top.frames['bottom'];\n"
             + "    bottomFrame.location = 'about:blank';\n"
             + "}</script>\n"

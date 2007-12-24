@@ -190,10 +190,10 @@ public class DocumentTest extends WebTestCase {
             + "function doTheFoo() {\n"
             + "var d = document.writeln\n"
             + "try {\n"
-            + "d('foo')\n"
+            + "  d('foo')\n"
             + "} catch (e) { alert('exception occurred') }\n"
-            + "document.writeln('foo')\n"
-            + "}"
+            + "  document.writeln('foo')\n"
+            + "}\n"
             + "</script></head><body onload='doTheFoo()'>\n"
             + "<p>hello world</p>\n"
             + "</body></html>";
@@ -216,10 +216,10 @@ public class DocumentTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><SCRIPT lang='JavaScript'>\n"
-            + "    function doSubmit(formName){"
+            + "    function doSubmit(formName){\n"
             + "        var form = document.forms[formName];\n" // This line used to blow up
-            + "        form.submit()"
-            + "}"
+            + "        form.submit()\n"
+            + "}\n"
             + "</SCRIPT></head><body><form name='formName' method='POST' "
             + "action='" + URL_SECOND + "'>\n"
             + "<a href='.' id='testJavascript' name='testJavascript' "
@@ -255,12 +255,12 @@ public class DocumentTest extends WebTestCase {
             + "<script>\n"
             + "var oCol = document.forms;\n"
             + "alert(oCol.length);\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "    alert(oCol.length);\n"
             + "    alert(document.forms.length);\n"
             + "    alert(document.forms == oCol);\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -299,16 +299,16 @@ public class DocumentTest extends WebTestCase {
             + "<script>\n"
             + "var oCol = document.anchors;\n"
             + "alert(oCol.length);\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "    alert(oCol.length);\n"
             + "    alert(document.anchors.length);\n"
             + "    alert(document.anchors == oCol);\n"
-            + "    if (document.anchors[0].name)"
+            + "    if (document.anchors[0].name)\n"
             + "     alert('name: ' + document.anchors[0].name);\n"
-            + "    else"
+            + "    else\n"
             + "     alert('id: ' + document.anchors[0].id);\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -338,13 +338,13 @@ public class DocumentTest extends WebTestCase {
             + "<script>\n"
             + "var oCol = document.links;\n"
             + "alert(oCol.length);\n"
-            + "function test()"
-            + "{"
+            + "function test()\n"
+            + "{\n"
             + "    alert(oCol.length);\n"
             + "    alert(document.links.length);\n"
             + "    alert(document.links == oCol);\n"
             + "    alert(document.links[0].id);\n"
-            + "}"
+            + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -560,19 +560,19 @@ public class DocumentTest extends WebTestCase {
      */
     private void testCreateTextNodeWithHtml(final BrowserVersion browserVersion, final String[] expected)
         throws Exception {
-        final String html = "<html><body onload='test()'><script>\r\n"
-            + "   function test() {\r\n"
-            + "      var node = document.createTextNode('<p>a & b</p> &amp; \\u0162 \" \\'');\r\n"
-            + "      alert(node.data);\r\n"
-            + "      alert(node.nodeValue);\r\n"
-            + "      var div = document.getElementById('div');\r\n"
-            + "      div.appendChild(node);\r\n"
-            + "      alert(div.outerHTML);\r\n"
-            + "      alert(div.innerHTML);\r\n"
-            + "      alert(div.innerText);\r\n"
-            + "   };\r\n"
-            + "</script>\r\n"
-            + "<div id='div'></div>\r\n"
+        final String html = "<html><body onload='test()'><script>\n"
+            + "   function test() {\n"
+            + "      var node = document.createTextNode('<p>a & b</p> &amp; \\u0162 \" \\'');\n"
+            + "      alert(node.data);\n"
+            + "      alert(node.nodeValue);\n"
+            + "      var div = document.getElementById('div');\n"
+            + "      div.appendChild(node);\n"
+            + "      alert(div.outerHTML);\n"
+            + "      alert(div.innerHTML);\n"
+            + "      alert(div.innerText);\n"
+            + "   };\n"
+            + "</script>\n"
+            + "<div id='div'></div>\n"
             + "</body></html>";
         final List actual = new ArrayList();
         loadPage(browserVersion, html, actual);
@@ -889,8 +889,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv",
-            ((HtmlElement) div1.getParentDomNode()).getAttributeValue("id"));
+        assertEquals("parentDiv", ((HtmlElement) div1.getParentDomNode()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"parentDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -961,8 +960,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement childDiv = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv",
-            ((HtmlElement) childDiv.getParentDomNode()).getAttributeValue("id"));
+        assertEquals("parentDiv", ((HtmlElement) childDiv.getParentDomNode()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"parentDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1011,8 +1009,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv",
-            ((HtmlElement) div1.getFirstDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) div1.getFirstDomChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1042,8 +1039,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement parentDiv = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv",
-            ((HtmlElement) parentDiv.getFirstDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getFirstDomChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1069,8 +1065,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv",
-            ((HtmlElement) parentDiv.getLastDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastDomChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1100,8 +1095,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv",
-            ((HtmlElement) parentDiv.getLastDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastDomChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1157,8 +1151,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement previousDiv = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv",
-            ((HtmlElement) previousDiv.getNextDomSibling()).getAttributeValue("id"));
+        assertEquals("nextDiv", ((HtmlElement) previousDiv.getNextDomSibling()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"nextDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1184,8 +1177,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("nextDiv");
-        assertEquals("previousDiv",
-            ((HtmlElement) div1.getPreviousDomSibling()).getAttributeValue("id"));
+        assertEquals("previousDiv", ((HtmlElement) div1.getPreviousDomSibling()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"previousDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1215,8 +1207,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement nextDiv = lastPage.getHtmlElementById("nextDiv");
-        assertEquals("previousDiv",
-            ((HtmlElement) nextDiv.getPreviousDomSibling()).getAttributeValue("id"));
+        assertEquals("previousDiv", ((HtmlElement) nextDiv.getPreviousDomSibling()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"previousDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -2476,9 +2467,9 @@ public class DocumentTest extends WebTestCase {
      */
     public void testScriptsArray() throws Exception {
         final String htmlContent = "<html><head><script lang='JavaScript'>\n"
-            + "    function doTest(){"
+            + "    function doTest(){\n"
             + "        alert(document.scripts.length);\n" // This line used to blow up
-            + "}"
+            + "}\n"
             + "</script></head><body onload='doTest();'>\n"
             + "<script>var scriptTwo = 1;</script>\n"
             + "</body></html> ";
@@ -2511,17 +2502,17 @@ public class DocumentTest extends WebTestCase {
      */
     public void testFrames() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){"
-            + "  if (document.frames)"
-            + "  {"
+            + "function test(){\n"
+            + "  if (document.frames)\n"
+            + "  {\n"
             + "    alert(document.frames == window.frames);\n"
             + "    alert(document.frames.length);\n"
             + "    alert(document.frames(0).location);\n"
             + "    alert(document.frames('foo').location);\n"
-            + "  }"
-            + "  else"
+            + "  }\n"
+            + "  else\n"
             + "    alert('not defined');\n"
-            + "}"
+            + "}\n"
             + "</script></head><body onload='test();'>\n"
             + "<iframe src='about:blank' name='foo'></iframe>\n"
             + "</body></html> ";
@@ -2545,10 +2536,10 @@ public class DocumentTest extends WebTestCase {
      */
     public void testDefaultViewAndParentWindow() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test(){"
+            + "function test(){\n"
             + "    alert(document.defaultView == window);\n"
             + "    alert(document.parentWindow == window);\n"
-            + "}"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html> ";
 

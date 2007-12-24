@@ -111,7 +111,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    alert(doc.childNodes[0].nodeName);\n"
             + "    alert(doc.childNodes[0].childNodes.length);\n"
             + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
-            + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);"
+            + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"

@@ -661,14 +661,14 @@ public class HtmlFormTest extends WebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
             + "<script language='javascript'>\n"
-            + "function setFormat()"
-            + "{"
-            + "    if (document.form1.Format.checked) {"
+            + "function setFormat()\n"
+            + "{\n"
+            + "    if (document.form1.Format.checked) {\n"
             + "        document.form1.Format.value='html';\n"
-            + "    } else {"
+            + "    } else {\n"
             + "        document.form1.Format.value='plain';\n"
-            + "    }"
-            + "}"
+            + "    }\n"
+            + "}\n"
             + "</script>\n"
             + "</head><body>\n"
             + "<form name='form1' id='form1' method='post'>\n"
@@ -1154,7 +1154,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         
         final String secondContent = "<html><head><title>foo</title><script>\n"
-            + "  Number.prototype.gn = false;"
+            + "  Number.prototype.gn = false;\n"
             + "  function test() {\n"
             + "    var v = 0;\n"
             + "    alert(typeof v);\n"
@@ -1162,7 +1162,6 @@ public class HtmlFormTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
 
         final String[] expectedAlerts = {"number", "false"};
         final List collectedAlerts = new ArrayList();
