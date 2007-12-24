@@ -157,7 +157,9 @@ public class ActiveXObject extends SimpleScriptable {
             return false;
         }
         name = name.toLowerCase();
-        return name != null && ("Microsoft.XMLDOM".equalsIgnoreCase(name) || name.matches("msxml\\d*\\.domdocument.*"));
+        return "Microsoft.XMLDOM".equalsIgnoreCase(name)
+            || name.matches("msxml\\d*\\.domdocument.*")
+            || name.matches("msxml\\d*\\.freethreadeddomdocument.*");
     }
 
     private static Scriptable buildXMLHTTPActiveX() {

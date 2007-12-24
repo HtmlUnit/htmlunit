@@ -37,9 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -110,8 +107,66 @@ public class XMLSerializerTest extends WebTestCase {
             + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
         
-        final List collectedAlerts = new ArrayList();
-        final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
+        final HtmlPage page = loadPage(browserVersion, content, null);
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
+        assertEquals(expectedString, textArea.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testNameSpaces() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String expectedStringIE =
+            "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
+            + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>1310999"
+            + "<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
+        testNameSpaces(BrowserVersion.INTERNET_EXPLORER_7_0, expectedStringIE);
+        final String expectedStringFF =
+            "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232"
+            + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
+            + "</xsl:template>10</xsl:stylesheet>";
+        testNameSpaces(BrowserVersion.FIREFOX_2, expectedStringFF);
+    }
+    
+    private void testNameSpaces(final BrowserVersion browserVersion, final String expectedString) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += '  <html>\\n';\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async='false';\n"
+            + "      doc.loadXML(text);\n"
+            + "      var xml = doc.xml;\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "      var serializer = new XMLSerializer();\n"
+            + "      var xml = serializer.serializeToString(doc.documentElement);\n"
+            + "    }\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    for (var i=0; i < xml.length; i++) {\n"
+            + "      if (xml.charCodeAt(i) < 33)\n"
+            + "        ta.value += xml.charCodeAt(i);\n"
+            + "      else\n"
+            + "        ta.value += xml.charAt(i);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
