@@ -284,15 +284,12 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testLoadXML() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        testLoadXML(BrowserVersion.INTERNET_EXPLORER_7_0);
-        testLoadXML(BrowserVersion.FIREFOX_2);
+    public void testLoadXML_Namespace() throws Exception {
+        testLoadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testLoadXML_Namespace(BrowserVersion.FIREFOX_2);
     }
 
-    private void testLoadXML(final BrowserVersion browserVersion) throws Exception {
+    private void testLoadXML_Namespace(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<someprefix:test xmlns:someprefix=\"http://myNS\"/>';\n"

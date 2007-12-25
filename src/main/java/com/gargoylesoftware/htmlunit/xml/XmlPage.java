@@ -160,8 +160,14 @@ public class XmlPage extends SgmlPage {
                 new XmlAttr(this, attribute.getNamespaceURI(), attribute.getLocalName(), attribute.getNodeValue());
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
-        final XmlElement element = new XmlElement(node.getNamespaceURI(), node.getLocalName(), this, attributes);
-        return element;
+        final String qualifiedName;
+        if (node.getPrefix() == null) {
+            qualifiedName = node.getLocalName();
+        }
+        else {
+            qualifiedName = node.getPrefix() + ':' + node.getLocalName();
+        }
+        return new XmlElement(node.getNamespaceURI(), qualifiedName, this, attributes);
     }
 
     /**

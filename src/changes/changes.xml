@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                XMLPage handles qualified tag names.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added 'HTMLEvents' to the event types supported by document.createEvent (Firefox).
             </action>

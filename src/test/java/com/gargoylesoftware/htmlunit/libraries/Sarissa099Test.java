@@ -155,9 +155,10 @@ public class Sarissa099Test extends WebTestCase {
         final HtmlButton button = (HtmlButton) page.getByXPath("//button").get(0);
         button.click();
         
-        final List l = page.getByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]");
-        assertEquals(1, l.size());
-        final HtmlDivision div = (HtmlDivision) l.get(0);
+        final List divList =
+            page.getByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]");
+        assertEquals(1, divList.size());
+        final HtmlDivision div = (HtmlDivision) divList.get(0);
         assertEquals("OK!", div.asText());
     }
 
