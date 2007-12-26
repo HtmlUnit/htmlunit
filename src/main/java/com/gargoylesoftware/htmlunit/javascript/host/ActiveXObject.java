@@ -189,6 +189,7 @@ public class ActiveXObject extends SimpleScriptable {
 
         // the properties
         addProperty(document, "async", true, true);
+        addProperty(document, "parseError", true, false);
         addProperty(document, "preserveWhiteSpace", true, true);
         addProperty(document, "xml", true, false);
         

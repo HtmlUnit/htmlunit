@@ -152,6 +152,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("UIEvent");
         names.remove("Window");
         names.remove("XMLDocument");
+        names.remove("XMLDOMParseError");
         names.remove("XMLHttpRequest");
         names.remove("XMLSerializer");
 

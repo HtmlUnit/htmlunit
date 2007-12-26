@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                XMLDocument: add support for .parseError property (IE only).
+            </action>
             <action type="update" dev="asashour">
                 XMLPage handles qualified tag names.
             </action>

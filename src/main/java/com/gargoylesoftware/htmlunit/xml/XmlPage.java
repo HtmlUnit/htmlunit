@@ -83,6 +83,21 @@ public class XmlPage extends SgmlPage {
      * @throws IOException If the page could not be created
      */
     public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow) throws IOException {
+        this(webResponse, enclosingWindow, true);
+    }
+
+    /**
+     * Create an instance.
+     * A warning is logged if an exception is thrown while parsing the xml content
+     * (for instance when the content is not a valid xml and can't be parsed).
+     *
+     * @param webResponse The response from the server
+     * @param enclosingWindow The window that holds the page.
+     * @param ignoreSAXException Whether to ignore {@link SAXException} or throw it as {@link IOException}.
+     * @throws IOException If the page could not be created
+     */
+    public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow, final boolean ignoreSAXException)
+        throws IOException {
         super(webResponse, enclosingWindow);
 
         try {
@@ -95,6 +110,9 @@ public class XmlPage extends SgmlPage {
         }
         catch (final SAXException e) {
             getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
+            if (!ignoreSAXException) {
+                throw new IOException(e.getMessage());
+            }
         }
         catch (final ParserConfigurationException e) {
             getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());

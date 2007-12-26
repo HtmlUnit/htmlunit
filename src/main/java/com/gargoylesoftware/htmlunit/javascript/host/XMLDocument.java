@@ -71,6 +71,7 @@ public class XMLDocument extends Document {
     private static final long serialVersionUID = 1225601711396578064L;
     private boolean async_ = true;
     private boolean preserveWhiteSpace_;
+    private XMLDOMParseError parseError_;
     
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -93,7 +94,6 @@ public class XMLDocument extends Document {
     public boolean jsxGet_async() {
         return async_;
     }
-    
 
     /**
      * Loads an XML document from the specified location.
@@ -109,11 +109,19 @@ public class XMLDocument extends Document {
             final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
             final WebRequestSettings settings = new WebRequestSettings(htmlPage.getFullyQualifiedUrl(xmlSrouce));
             final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
-            final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
+            final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow(), false);
             setDomNode(page);
             return true;
         }
         catch (final IOException e) {
+            final XMLDOMParseError parseError = jsxGet_parseError();
+            parseError.setErrorCode(-1);
+            parseError.setFilepos(1);
+            parseError.setLine(1);
+            parseError.setLinepos(1);
+            parseError.setReason(e.getMessage());
+            parseError.setSrcText("xml");
+            parseError.setUrl(xmlSrouce);
             getLog().debug("Error parsing XML from '" + xmlSrouce + "'", e);
             return false;
         }
@@ -181,9 +189,25 @@ public class XMLDocument extends Document {
      */
     //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
     public SimpleScriptable jsxGet_documentElement() {
+        if (getDomNodeOrNull() == null) {
+            return null;
+        }
         return getScriptableFor(((XmlPage) getDomNodeOrDie()).getDocumentXmlElement());
     }
     
+    /**
+     * Get the JavaScript property "parseError" for the document.
+     * @return The ParserError object for the document.
+     */
+    public XMLDOMParseError jsxGet_parseError() {
+        if (parseError_ == null) {
+            parseError_ = new XMLDOMParseError();
+            parseError_.setPrototype(getPrototype(parseError_.getClass()));
+            parseError_.setParentScope(getParentScope());
+        }
+        return parseError_;
+    }
+
     /**
      * Contains the XML representation of the node and all its descendants.
      * @return An XML representation of this node and all its descendants.
