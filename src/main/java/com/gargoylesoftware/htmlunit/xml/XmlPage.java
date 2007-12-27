@@ -151,7 +151,7 @@ public class XmlPage extends SgmlPage {
                     final DomText text = new DomText(this, child.getNodeValue());
                     xml.appendDomChild(text);
                     break;
-                    
+
                 case Node.CDATA_SECTION_NODE:
                     final DomCData cdata = new DomCData(this, child.getNodeValue());
                     xml.appendDomChild(cdata);
@@ -161,7 +161,7 @@ public class XmlPage extends SgmlPage {
                     final DomComment comment = new DomComment(this, child.getNodeValue());
                     xml.appendDomChild(comment);
                     break;
-                    
+
                 default:
                     getLog().warn("NodeType " + child.getNodeType()
                             + " (" + child.getNodeName() + ") is not yet supported.");

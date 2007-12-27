@@ -45,6 +45,7 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -316,7 +317,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is a text node, false otherwise.
      */
     public boolean isText(final Object object) {
-        return object instanceof DomText;
+        return object instanceof DomText || object instanceof DomCharacterData;
     }
 
     /**

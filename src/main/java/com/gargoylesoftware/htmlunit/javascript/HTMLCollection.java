@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -232,8 +233,13 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                     //IE: XmlPage ignores all empty text nodes
                     if (isIE && isXmlPage && element instanceof DomText
                             && ((DomText) element).getNodeValue().trim().length() == 0) {
-                        cachedElements_.remove(i--);
-                        continue;
+
+                        //if 'xml:space' is 'default'
+                        final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentDomNode());
+                        if (xmlSpaceDefault == null || xmlSpaceDefault == Boolean.TRUE) {
+                            cachedElements_.remove(i--);
+                            continue;
+                        }
                     }
                     for (DomNode parent = element.getParentDomNode(); parent != null;
                         parent = parent.getParentDomNode()) {
@@ -251,6 +257,27 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         return cachedElements_;
     }
 
+    /**
+     * Recursively checks whether "xml:space" attribute is set to "default".
+     * @param node node to start checking from.
+     * @return {@link Boolean#TRUE} if "default" is set, {@link Boolean#FALSE} for other value,
+     *         or null if nothing is set.
+     */
+    private static Boolean isXMLSpaceDefault(DomNode node) {
+        for ( ; node instanceof XmlElement; node = node.getParentDomNode()) {
+            final String value = ((XmlElement) node).getAttributeValue("xml:space");
+            if (value.length() != 0) {
+                if (value.equals("default")) {
+                    return Boolean.TRUE;
+                }
+                else {
+                    return Boolean.FALSE;
+                }
+            }
+        }
+        return null;
+    }
+    
     /**
      * Returns the element or elements that match the specified key. If it is the name
      * of a property, the property value is returned. If it is the id of an element in

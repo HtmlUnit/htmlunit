@@ -313,6 +313,39 @@ public class XMLDocumentTest extends WebTestCase {
     }
 
     /**
+     * Tests "xml:space" attribute.
+     * @throws Exception if the test fails
+     */
+    public void testLoadXML_XMLSpaceAttribute() throws Exception {
+        testLoadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testLoadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
+    }
+
+    private void testLoadXML_XMLSpaceAttribute(final BrowserVersion browserVersion) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<root xml:space=\\'preserve\\'>This t"
+            + "<elem>ext has</elem> <![CDATA[ CDATA ]]>in<elem /> it</root>';\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async='false';\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "    alert(doc.documentElement.childNodes.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"7"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     public void testParseError() throws Exception {
