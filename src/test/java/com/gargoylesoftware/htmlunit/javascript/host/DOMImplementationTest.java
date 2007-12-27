@@ -83,7 +83,7 @@ public class DOMImplementationTest extends WebTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert( document.implementation.hasFeature('" + feature + "', '" + version + "') );\n"
+            + "    alert(document.implementation.hasFeature('" + feature + "', '" + version + "'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -120,6 +120,27 @@ public class DOMImplementationTest extends WebTestCase {
         final String[] expectedAlerts = {"[object XMLDocument]"};
         final List collectedAlerts = new ArrayList();
         loadPage(browserVersion, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateDocument_qualifiedName() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = document.implementation.createDocument('', 'mydoc', null);\n"
+            + "    alert(doc.documentElement.tagName);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"mydoc"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
