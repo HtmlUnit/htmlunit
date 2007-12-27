@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public abstract class JQueryTestBase extends WebTestCase {
 
@@ -148,11 +149,11 @@ public abstract class JQueryTestBase extends WebTestCase {
      */
     protected void ok(final Iterator i, final String name, final int failed, final int passed) throws Exception {
         final HtmlListItem li = (HtmlListItem) i.next();
-        final String n = li.getByXPath("//text()").get(0).toString().trim();
+        final String n = li.getFirstByXPath("//text()").toString().trim();
         assertEquals(name, n);
 
-        final int f = Integer.parseInt(li.getByXPath("//b[@class='fail']/text()").get(0).toString());
-        final int p = Integer.parseInt(li.getByXPath("//b[@class='pass']/text()").get(0).toString());
+        final int f = Integer.parseInt(li.getFirstByXPath("//b[@class='fail']/text()").toString());
+        final int p = Integer.parseInt(li.getFirstByXPath("//b[@class='pass']/text()").toString());
         if (f != failed || p != passed) {
             fail("Expected " + passed + " passed and " + failed + " failed for test: " + li.asText());
         }

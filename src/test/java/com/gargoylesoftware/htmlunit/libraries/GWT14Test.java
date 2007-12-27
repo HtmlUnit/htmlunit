@@ -92,7 +92,7 @@ public class GWT14Test extends WebTestCase {
     public void testHello() throws Exception {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
-        final HtmlButton button = (HtmlButton) page.getByXPath("//button").get(0);
+        final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         final DomText buttonLabel = (DomText) button.getChildIterator().next();
         assertEquals("Click me", buttonLabel.getData());
         button.click();
@@ -249,7 +249,7 @@ public class GWT14Test extends WebTestCase {
 
     private void testI18NDictionary(final HtmlPage page, final Map expectedMap) throws Exception {
         final HtmlTableRow headerRow =
-            (HtmlTableRow) page.getByXPath("//*[@class='i18n-dictionary-header-row']").get(0);
+            (HtmlTableRow) page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
         final HtmlTableRow valueRow = (HtmlTableRow) headerRow.getNextDomSibling();
         DomNode headerNode = headerRow.getFirstDomChild();
         DomNode valueNode = valueRow.getFirstDomChild();
@@ -302,7 +302,7 @@ public class GWT14Test extends WebTestCase {
     public void testMail() throws Exception {
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
         final HtmlTableDataCell cell = (HtmlTableDataCell)
-            page.getByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..").get(0);
+            page.getFirstByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..");
         testTableDataCell(cell, "Welcome back, foo@example.com");
 
         final String[] selectedRow = {"markboland05", "mark@example.com", "URGENT -[Mon, 24 Apr 2006 02:17:27 +0000]"};
@@ -328,12 +328,12 @@ public class GWT14Test extends WebTestCase {
      */
     public void testJSON() throws Exception {
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
-        final HtmlButton button = (HtmlButton) page.getByXPath("//button").get(0);
+        final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         button.click();
 
         //try 20 times to wait .5 second each for filling the page.
         for (int i = 0; i < 20; i++) {
-            if (!page.getByXPath("//div[@class='JSON-JSONResponseObject']").isEmpty()) {
+            if (page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']") != null) {
                 break;
             }
             synchronized (page) {
@@ -342,7 +342,7 @@ public class GWT14Test extends WebTestCase {
         }
 
         final HtmlSpan span = (HtmlSpan)
-            page.getByXPath("//div[@class='JSON-JSONResponseObject']/span/div/table//td[2]/span/span").get(0);
+            page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/span/div/table//td[2]/span/span");
         assertEquals("ResultSet", span.getFirstDomChild().getNodeValue());
     }
 
@@ -394,13 +394,13 @@ public class GWT14Test extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(3000);
 
-        HtmlDivision infoDiv = (HtmlDivision) page.getByXPath("//div[@class='ks-Info']").get(0);
+        HtmlDivision infoDiv = (HtmlDivision) page.getFirstByXPath("//div[@class='ks-Info']");
         assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
         final HtmlAnchor widgetAnchor = page.getAnchorByHref("#Widgets");
         widgetAnchor.click();
 
-        infoDiv = (HtmlDivision) page.getByXPath("//div[@class='ks-Info']").get(0);
+        infoDiv = (HtmlDivision) page.getFirstByXPath("//div[@class='ks-Info']");
         assertEquals("Basic Widgets", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
     }
     

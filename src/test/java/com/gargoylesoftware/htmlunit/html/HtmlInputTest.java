@@ -82,8 +82,8 @@ public final class HtmlInputTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getByXPath(
-            "//input[@type='radio' and @name='foo' and @value='2']").get(0);
+        final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getFirstByXPath(
+            "//input[@type='radio' and @name='foo' and @value='2']");
 
         final HtmlSubmitInput pushButton = (HtmlSubmitInput) form.getInputByName("button");
 
@@ -197,8 +197,8 @@ public final class HtmlInputTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getByXPath(
-                "//input[@type='radio' and @name='foo' and @value='2']").get(0);
+        final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getFirstByXPath(
+                "//input[@type='radio' and @name='foo' and @value='2']");
 
         assertFalse("Should not be checked before click", radioButton.isChecked());
         radioButton.click();

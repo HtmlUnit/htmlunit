@@ -149,7 +149,7 @@ public class Sarissa099Test extends WebTestCase {
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
         final HtmlPage page = (HtmlPage) client.getPage(url);
-        final HtmlButton button = (HtmlButton) page.getByXPath("//button").get(0);
+        final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         button.click();
         
         final List divList =

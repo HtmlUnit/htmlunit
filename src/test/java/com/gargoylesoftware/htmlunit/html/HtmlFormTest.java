@@ -101,8 +101,8 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlSubmitInput pushButton = (HtmlSubmitInput) form.getInputByName("button");
 
-        ((HtmlRadioButtonInput) form.getByXPath(
-                "//input[@type='radio' and @name='foo' and @value='2']").get(0)).setChecked(true);
+        ((HtmlRadioButtonInput) form.getFirstByXPath(
+                "//input[@type='radio' and @name='foo' and @value='2']")).setChecked(true);
 
         assertFalse(((HtmlRadioButtonInput) page.getHtmlElementById("input1")).isChecked());
         assertTrue(((HtmlRadioButtonInput) page.getHtmlElementById("input2")).isChecked());
@@ -136,7 +136,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlInput pushButton = form.getInputByName("button");
         assertNotNull(pushButton);
 
-        assertTrue(form.getByXPath("//input[@type='radio' and @name='foo' and @value='4']").isEmpty());
+        assertNull(form.getFirstByXPath("//input[@type='radio' and @name='foo' and @value='4']"));
     }
 
     /**

@@ -355,13 +355,13 @@ public class DomNodeTest extends WebTestCase {
         assertEquals(results, head.getByXPath("/title"));
         assertEquals(results, head.getByXPath("title"));
 
-        final HtmlParagraph p = (HtmlParagraph) page.getByXPath("//p").get(0);
+        final HtmlParagraph p = (HtmlParagraph) page.getFirstByXPath("//p");
         assertSame(p, page.getHtmlElementById("p1"));
         final List lis = p.getByXPath("ul/li");
         assertEquals(2, lis.size());
         assertEquals(lis, page.getByXPath("//ul/li"));
 
-        assertEquals(2, ((Number) p.getByXPath("count(//li)").get(0)).intValue());
+        assertEquals(2, ((Number) p.getFirstByXPath("count(//li)")).intValue());
     }
 
     /**
