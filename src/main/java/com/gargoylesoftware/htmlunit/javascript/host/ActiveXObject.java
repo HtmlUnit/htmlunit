@@ -47,6 +47,7 @@ import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -106,7 +107,7 @@ public class ActiveXObject extends SimpleScriptable {
         }
 
         if (isXMLDocument(activeXName)) {
-            return buildXMLDocument();
+            return buildXMLDocument(getWindow(ctorObj).getWebWindow());
         }
         
         final Map map = getWindow(ctorObj).getWebWindow().getWebClient().getActiveXObjectMap();
@@ -184,8 +185,8 @@ public class ActiveXObject extends SimpleScriptable {
         return resp;
     }
 
-    static XMLDocument buildXMLDocument() {
-        final XMLDocument document = new XMLDocument();
+    static XMLDocument buildXMLDocument(final WebWindow enclosingWindow) {
+        final XMLDocument document = new XMLDocument(enclosingWindow);
 
         // the properties
         addProperty(document, "async", true, true);

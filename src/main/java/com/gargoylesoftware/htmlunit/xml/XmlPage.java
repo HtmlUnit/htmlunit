@@ -101,7 +101,7 @@ public class XmlPage extends SgmlPage {
         super(webResponse, enclosingWindow);
 
         try {
-            if (webResponse.getContentAsString().trim().length() == 0) {
+            if (webResponse == null || webResponse.getContentAsString().trim().length() == 0) {
                 document_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             }
             else {
@@ -222,6 +222,27 @@ public class XmlPage extends SgmlPage {
             childNode = childNode.getNextDomSibling();
         }
         return (XmlElement) childNode;
+    }
+
+    /**
+     * Create a new XML element with the given tag name.
+     *
+     * @param tagName The tag name.
+     * @return the new XML element.
+     */
+    public XmlElement createXmlElement(final String tagName) {
+        return createXmlElementNS(null, tagName);
+    }
+
+    /**
+     * Create a new HtmlElement with the given namespace and qualified name.
+     *
+     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param qualifiedName The qualified name of the element type to instantiate
+     * @return the new HTML element.
+     */
+    public XmlElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
+        return new XmlElement(namespaceURI, qualifiedName, this, new HashMap());
     }
 
 }

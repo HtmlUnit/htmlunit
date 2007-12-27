@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -77,6 +78,23 @@ public class XMLDocument extends Document {
      * Creates a new instance. JavaScript objects must have a default constructor.
      */
     public XMLDocument() {
+        this(null);
+    }
+
+    /**
+     * Creates a new instance, with associated XmlPage.
+     * @param enclosingWindow
+     */
+    XMLDocument(final WebWindow enclosingWindow) {
+        if (enclosingWindow != null) {
+            try {
+                final XmlPage page = new XmlPage(null, enclosingWindow);
+                setDomNode(page);
+            }
+            catch (final IOException e) {
+                throw Context.reportRuntimeError("IOException: " + e);
+            }
+        }
     }
 
     /**
@@ -189,10 +207,11 @@ public class XMLDocument extends Document {
      */
     //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
     public SimpleScriptable jsxGet_documentElement() {
-        if (getDomNodeOrNull() == null) {
+        final XmlElement documentElement = ((XmlPage) getDomNodeOrDie()).getDocumentXmlElement();
+        if (documentElement == null) {
             return null;
         }
-        return getScriptableFor(((XmlPage) getDomNodeOrDie()).getDocumentXmlElement());
+        return getScriptableFor(documentElement);
     }
     
     /**

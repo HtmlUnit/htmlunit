@@ -64,6 +64,7 @@ import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -84,6 +85,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.html.xpath.LowerCaseFunction;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * A JavaScript object for a Document.
@@ -709,7 +711,8 @@ public class Document extends NodeImpl {
     public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
-            final BrowserVersion browserVersion = getDomNodeOrDie().getPage().getWebClient().getBrowserVersion();
+            final SgmlPage page = (SgmlPage) getDomNodeOrDie().getNativePage();
+            final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
 
             //IE can handle HTML
             if (tagName.startsWith("<") && browserVersion.isIE()) {
@@ -737,13 +740,20 @@ public class Document extends NodeImpl {
                                 + tagName);
                     }
                 }
-                final HtmlElement htmlElement = getDomNodeOrDie().getPage().createHtmlElement(tagName);
-                final Object jsElement = getScriptableFor(htmlElement);
+
+                final DomNode element;
+                if (page instanceof HtmlPage) {
+                    element = ((HtmlPage) page).createHtmlElement(tagName);
+                }
+                else {
+                    element = ((XmlPage) page).createXmlElement(tagName);
+                }
+                final Object jsElement = getScriptableFor(element);
 
                 if (jsElement == NOT_FOUND) {
                     getLog().debug("createElement(" + tagName
-                            + ") cannot return a result as there isn't a javascript object for the html element "
-                            + htmlElement.getClass().getName());
+                            + ") cannot return a result as there isn't a javascript object for the element "
+                            + element.getClass().getName());
                 }
                 else {
                     result = jsElement;

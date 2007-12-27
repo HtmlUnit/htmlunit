@@ -47,6 +47,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -144,7 +145,8 @@ public class NodeImpl extends SimpleScriptable {
             //create a DocumentFragment to be the parentNode's parentNode.
             if (!(this instanceof DocumentFragment) && parentNode.getParentDomNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
+                final DomDocumentFragment fragment =
+                    ((SgmlPage) parentNode.getNativePage()).createDomDocumentFragment();
                 fragment.appendDomChild(parentNode);
             }
         }

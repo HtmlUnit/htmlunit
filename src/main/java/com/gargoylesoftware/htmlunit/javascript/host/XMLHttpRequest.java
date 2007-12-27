@@ -198,7 +198,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;
                 if (page.getWebClient().getBrowserVersion().isIE()) {
-                    doc = ActiveXObject.buildXMLDocument();
+                    doc = ActiveXObject.buildXMLDocument(null);
                 }
                 else {
                     doc = new XMLDocument();

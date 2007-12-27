@@ -97,7 +97,7 @@ public class DOMImplementation extends SimpleScriptable {
     //TODO: change doctype type to "DocType"
     public XMLDocument jsxFunction_createDocument(final String namespaceURI, final String qualifiedName,
             final Object doctype) {
-        final XMLDocument document = new XMLDocument();
+        final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(document.getClass()));
         return document;

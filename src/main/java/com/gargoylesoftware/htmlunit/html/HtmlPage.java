@@ -209,14 +209,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Creates an empty {@link DomDocumentFragment} object.
-     * @return a newly created {@link DomDocumentFragment}.
-     */
-    public DomDocumentFragment createDomDocumentFragment() {
-        return new DomDocumentFragment(this);
-    }
-
-    /**
      * Create a new HTML element with the given tag name.
      *
      * @param tagName The tag name, preferably in lowercase

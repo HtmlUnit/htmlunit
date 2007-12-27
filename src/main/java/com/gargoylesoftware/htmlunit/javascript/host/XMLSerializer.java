@@ -75,8 +75,13 @@ public class XMLSerializer extends SimpleScriptable {
     }
 
     private void toXml(final int indent, final DomNode node, final StringBuffer buffer, final boolean isIE) {
-        buffer.append('<').append(node.getNodeName()).append('>');
+        buffer.append('<').append(node.getNodeName());
+        boolean startTagClosed = false;
         for (final Iterator iterator = node.getChildIterator(); iterator.hasNext();) {
+            if (!startTagClosed) {
+                buffer.append('>');
+                startTagClosed = true;
+            }
             final DomNode child = (DomNode) iterator.next();
             switch (child.getNodeType()) {
                 case org.w3c.dom.Node.ELEMENT_NODE:
@@ -103,7 +108,12 @@ public class XMLSerializer extends SimpleScriptable {
                         
             }
         }
-        buffer.append('<').append('/').append(node.getNodeName()).append('>');
+        if (!startTagClosed) {
+            buffer.append('/').append('>');
+        }
+        else {
+            buffer.append('<').append('/').append(node.getNodeName()).append('>');
+        }
     }
 
 }

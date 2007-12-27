@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
@@ -129,4 +130,19 @@ public abstract class SgmlPage extends DomNode implements Page {
         return webClient_;
     }
 
+    /**
+     * Creates an empty {@link DomDocumentFragment} object.
+     * @return a newly created {@link DomDocumentFragment}.
+     */
+    public DomDocumentFragment createDomDocumentFragment() {
+        return new DomDocumentFragment(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Page getNativePage() {
+        return this;
+    }
+    
 }

@@ -98,9 +98,6 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testXMLSerializer() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         test("XMLSerializerTestCase");
     }
 

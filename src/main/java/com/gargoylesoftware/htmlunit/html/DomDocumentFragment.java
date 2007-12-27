@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Page;
+
 /**
  * A JavaScript object for DocumentFragment.
  *
@@ -52,10 +54,10 @@ public class DomDocumentFragment extends DomNode {
 
     /**
      * Creates an instance.
-     * @param htmlPage The page which contains this node.
+     * @param page The page which contains this node.
      */
-    public DomDocumentFragment(final HtmlPage htmlPage) {
-        super(htmlPage);
+    public DomDocumentFragment(final Page page) {
+        super(page);
     }
     
     /**
