@@ -1623,7 +1623,12 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentAll_tags() throws Exception {
-        final String firstContent
+    	testDocumentAll_tags(BrowserVersion.INTERNET_EXPLORER_6_0);
+    	testDocumentAll_tags(BrowserVersion.FIREFOX_2);
+    }
+
+    private void testDocumentAll_tags(final BrowserVersion browerVersion) throws Exception {
+        final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var inputs = document.all.tags('input');\n"
@@ -1642,11 +1647,13 @@ public class DocumentTest extends WebTestCase {
             + "<input type='text' name='b' value='1'>\n"
             + "</body></html>";
 
+        final String[] expectedAlerts = {"a", "b", "a", "b", "0"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        
         final List collectedAlerts = new ArrayList();
-        final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
+        final HtmlPage firstPage = loadPage(browerVersion, content, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
-        final String[] expectedAlerts = {"a", "b", "a", "b", "0"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

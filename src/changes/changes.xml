@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: activate document.all for Firefox too.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add initial support for 'Element' prototype.
             </action>

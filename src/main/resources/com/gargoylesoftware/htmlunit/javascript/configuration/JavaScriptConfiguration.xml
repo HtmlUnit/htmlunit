@@ -98,6 +98,7 @@
 
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Firefox" min-version="1.5"/>
         </property>
         <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
         <property name="anchors" readable="true" writable="false">
