@@ -81,6 +81,9 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testSarissa() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         test("SarissaTestCase");
     }
 
@@ -88,6 +91,9 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testXmlHttpRequest() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         test("XmlHttpRequestTestCase");
     }
 
@@ -95,6 +101,9 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testXMLSerializer() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         test("XMLSerializerTestCase");
     }
 
@@ -102,6 +111,9 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testDOMParser() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         test("DOMParserTestCase");
     }
 
