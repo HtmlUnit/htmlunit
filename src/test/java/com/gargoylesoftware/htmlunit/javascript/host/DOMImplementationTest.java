@@ -67,6 +67,7 @@ public class DOMImplementationTest extends WebTestCase {
         testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "2.0", false);
         testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XML", "1.0", false);
         testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "CSS2", "1.0", false);
+        testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XPath", "3.0", false);
         testGetFeature(BrowserVersion.FIREFOX_2, "HTML", "1.0", true);
         testGetFeature(BrowserVersion.FIREFOX_2, "HTML", "2.0", true);
         testGetFeature(BrowserVersion.FIREFOX_2, "HTML", "3.0", false);
@@ -76,6 +77,7 @@ public class DOMImplementationTest extends WebTestCase {
         testGetFeature(BrowserVersion.FIREFOX_2, "CSS2", "1.0", false);
         testGetFeature(BrowserVersion.FIREFOX_2, "CSS2", "2.0", true);
         testGetFeature(BrowserVersion.FIREFOX_2, "CSS2", "3.0", false);
+        testGetFeature(BrowserVersion.FIREFOX_2, "XPath", "3.0", true);
     }
 
     private void testGetFeature(final BrowserVersion browserVersion, final String feature, final String version,

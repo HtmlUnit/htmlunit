@@ -82,6 +82,9 @@ public class DOMImplementation extends SimpleScriptable {
             else if ("CSS2".equals(feature) && "2.0".equals(version)) {
                 return true;
             }
+            else if ("XPath".equals(feature) && "3.0".equals(version)) {
+                return true;
+            }
             //TODO: other features.
         }
         return false;

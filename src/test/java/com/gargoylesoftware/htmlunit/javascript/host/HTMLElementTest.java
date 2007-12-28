@@ -1564,6 +1564,33 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * 'Element' and 'HTMLElement' prototypes are synonyms.
+     *
+     * @throws Exception if the test fails
+     */
+    public void testPrototype_Element() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    Element.prototype.selectNodes = function(sExpr){\n"
+            + "      alert('in selectNodes');\n"
+            + "    }\n"
+            + "    document.getElementById('myDiv').selectNodes();\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"in selectNodes"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+
+    /**
      * @throws Exception If the test fails
      */
     public void testParentElement() throws Exception {

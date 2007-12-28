@@ -214,7 +214,7 @@ public class ScriptException extends RuntimeException {
      */
     public String getFailingLine() {
         final int lineNumber = getFailingLineNumber();
-        if (lineNumber == -1) {
+        if (lineNumber == -1 || scriptSourceCode_ == null) {
             return "<no source>";
         }
 
