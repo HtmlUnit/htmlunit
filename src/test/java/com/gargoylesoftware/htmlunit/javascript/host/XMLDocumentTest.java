@@ -295,7 +295,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "    var text='<someprefix:test xmlns:someprefix=\"http://myNS\"/>';\n"
             + "    if (window.ActiveXObject) {\n"
             + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async='false';\n"
+            + "      doc.async=false;\n"
             + "      doc.loadXML(text);\n"
             + "    } else {\n"
             + "      var parser=new DOMParser();\n"
@@ -328,7 +328,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "<elem>ext has</elem> <![CDATA[ CDATA ]]>in<elem /> it</root>';\n"
             + "    if (window.ActiveXObject) {\n"
             + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async='false';\n"
+            + "      doc.async=false;\n"
             + "      doc.loadXML(text);\n"
             + "    } else {\n"
             + "      var parser=new DOMParser();\n"
@@ -392,6 +392,50 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateNSResolver() throws Exception {
+        testCreateNSResolver(BrowserVersion.FIREFOX_2, new String[] {"http://myNS"});
+        try {
+            testCreateNSResolver(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"http://myNS"});
+            fail("'createNSResolver' is not supported in IE.");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+    private void testCreateNSResolver(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += '  <html>\\n';\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async=false;\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "    alert(doc.createNSResolver(doc.documentElement).lookupNamespaceURI('xsl'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

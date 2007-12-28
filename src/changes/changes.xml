@@ -17,7 +17,8 @@
                 XPath: DomCharacterData is treated as text node.
             </action>
             <action type="add" dev="asashour">
-                XMLDocument: add support for .parseError property (IE only), createElement(), and 'xml:space' attribute (IE only).
+                XMLDocument: add support for .parseError property (IE only), createElement(), createNSResolver() (FF only),
+                and 'xml:space' attribute (IE only).
             </action>
             <action type="update" dev="asashour">
                 XMLPage handles qualified tag names.

@@ -1220,7 +1220,7 @@ public class Document extends NodeImpl {
     public Event jsxFunction_createEventObject() {
         final Event e = new Event();
         e.setParentScope(getWindow());
-        e.setPrototype(getPrototype(Event.class));
+        e.setPrototype(getPrototype(e.getClass()));
         return e;
     }
 
@@ -1238,7 +1238,7 @@ public class Document extends NodeImpl {
     }
 
     /**
-     * Create a new range
+     * Create a new range.
      * @return the range.
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">
      * XUL Planet</a>
@@ -1248,5 +1248,19 @@ public class Document extends NodeImpl {
         r.setParentScope(getWindow());
         r.setPrototype(getPrototype(Range.class));
         return r;
+    }
+
+    /**
+     * Adapts any DOM node to resolve namespaces so that an XPath expression
+     * can be easily evaluated relative to the context of the node where it appeared within the document.
+     * @param nodeResolver The node to be used as a context for namespace resolution.
+     * @return XPathNSResolver which resolves namespaces with respect to the definitions in scope for a specified node.
+     */
+    public XPathNSResolver jsxFunction_createNSResolver(final NodeImpl nodeResolver) {
+        final XPathNSResolver resolver = new XPathNSResolver();
+        resolver.setElement(nodeResolver);
+        resolver.setParentScope(getWindow());
+        resolver.setPrototype(getPrototype(resolver.getClass()));
+        return resolver;
     }
 }

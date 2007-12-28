@@ -173,6 +173,9 @@
         <function name="createElementNS">
             <browser name="Firefox"/>
         </function>
+        <function name="createNSResolver">
+            <browser name="Firefox"/>
+        </function>
         <function name="createStyleSheet">
             <browser name="Microsoft Internet Explorer"/>
         </function>
@@ -1331,6 +1334,12 @@
         jsConstructor="jsConstructor" JSObject="true">
         <browser name="Firefox"/>
         <function name="serializeToString"/>
+    </class>
+
+    <class name="XPathNSResolver" classname="com.gargoylesoftware.htmlunit.javascript.host.XPathNSResolver"
+        JSObject="true">
+        <browser name="Firefox"/>
+        <function name="lookupNamespaceURI"/>
     </class>
 
 </configuration>
