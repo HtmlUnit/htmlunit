@@ -232,6 +232,10 @@
         <function name="parseFromString"/>
     </class>
 
+    <class name="Element" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
+        JSObject="true">
+    </class>
+
     <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event" JSObject="true">
         <doclink
             url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
@@ -425,7 +429,7 @@
         <function name="go"/>
     </class>
 
-    <class name="HTMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
+    <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
         <property name="all" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>

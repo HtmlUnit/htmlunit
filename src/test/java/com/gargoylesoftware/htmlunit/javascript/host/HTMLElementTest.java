@@ -1569,9 +1569,6 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testPrototype_Element() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    Element.prototype.selectNodes = function(sExpr){\n"

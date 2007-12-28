@@ -102,7 +102,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-public class HTMLElement extends NodeImpl implements ScriptableWithFallbackGetter {
+public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
     private static final long serialVersionUID = -6864034414262085851L;
     private static final int BEHAVIOR_ID_UNKNOWN = -1;

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add initial support for 'Element' prototype.
+            </action>
             <action type="fix" dev="asashour">
                 XPath: DomCharacterData is treated as text node.
             </action>
