@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * A JavaScript object for DOMImplementation.
@@ -100,6 +101,10 @@ public class DOMImplementation extends SimpleScriptable {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(document.getClass()));
+        if (qualifiedName != null && qualifiedName.length() != 0) {
+            final XmlPage page = (XmlPage) document.getDomNodeOrDie();
+            page.appendDomChild(page.createXmlElementNS(namespaceURI, qualifiedName));
+        }
         return document;
     }
 }

@@ -127,9 +127,6 @@ public class DOMImplementationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testCreateDocument_qualifiedName() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', 'mydoc', null);\n"

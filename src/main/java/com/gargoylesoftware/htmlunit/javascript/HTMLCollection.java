@@ -234,9 +234,9 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                     if (isIE && isXmlPage && element instanceof DomText
                             && ((DomText) element).getNodeValue().trim().length() == 0) {
 
-                        //if 'xml:space' is 'default'
+                        //and 'xml:space' is 'default'
                         final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentDomNode());
-                        if (xmlSpaceDefault == null || xmlSpaceDefault == Boolean.TRUE) {
+                        if (xmlSpaceDefault != Boolean.FALSE) {
                             cachedElements_.remove(i--);
                             continue;
                         }

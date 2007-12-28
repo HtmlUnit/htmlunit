@@ -81,9 +81,6 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testSarissa() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         test("SarissaTestCase");
     }
 
