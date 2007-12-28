@@ -1623,8 +1623,8 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testDocumentAll_tags() throws Exception {
-    	testDocumentAll_tags(BrowserVersion.INTERNET_EXPLORER_6_0);
-    	testDocumentAll_tags(BrowserVersion.FIREFOX_2);
+        testDocumentAll_tags(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testDocumentAll_tags(BrowserVersion.FIREFOX_2);
     }
 
     private void testDocumentAll_tags(final BrowserVersion browerVersion) throws Exception {
