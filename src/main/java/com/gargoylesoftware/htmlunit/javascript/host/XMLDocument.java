@@ -88,7 +88,7 @@ public class XMLDocument extends Document {
     XMLDocument(final WebWindow enclosingWindow) {
         if (enclosingWindow != null) {
             try {
-                final XmlPage page = new XmlPage(null, enclosingWindow);
+                final XmlPage page = new XmlPage((WebResponse) null, enclosingWindow);
                 setDomNode(page);
             }
             catch (final IOException e) {

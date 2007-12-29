@@ -158,6 +158,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("XMLSerializer");
         names.remove("XPathNSResolver");
         names.remove("XPathResult");
+        names.remove("XSLTProcessor");
 
         final Transformer class2ShortName = new Transformer() {
             public Object transform(final Object obj) {

@@ -1364,4 +1364,13 @@
         <function name="snapshotItem"/>
     </class>
 
+    <class name="XSLTProcessor" classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor"
+        jsConstructor="jsConstructor" JSObject="true">
+        <browser name="Firefox"/>
+        <function name="getParameter"/>
+        <function name="importStylesheet"/>
+        <function name="transformToDocument"/>
+        <function name="setParameter"/>
+    </class>
+
 </configuration>

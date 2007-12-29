@@ -91,6 +91,19 @@ public class XmlPage extends SgmlPage {
      * A warning is logged if an exception is thrown while parsing the xml content
      * (for instance when the content is not a valid xml and can't be parsed).
      *
+     * @param document DOM document to initialize this page with.
+     * @param enclosingWindow The window that holds the page.
+     */
+    public XmlPage(final Document document, final WebWindow enclosingWindow) {
+        super(null, enclosingWindow);
+        document_ = document;
+    }
+
+    /**
+     * Create an instance.
+     * A warning is logged if an exception is thrown while parsing the xml content
+     * (for instance when the content is not a valid xml and can't be parsed).
+     *
      * @param webResponse The response from the server
      * @param enclosingWindow The window that holds the page.
      * @param ignoreSAXException Whether to ignore {@link SAXException} or throw it as {@link IOException}.
@@ -174,8 +187,15 @@ public class XmlPage extends SgmlPage {
         final NamedNodeMap nodeAttributes = node.getAttributes();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
             final Node attribute = nodeAttributes.item(i);
+            final String qualifiedName;
+            if (attribute.getPrefix() != null) {
+                qualifiedName = attribute.getPrefix() + ':' + attribute.getLocalName();
+            }
+            else {
+                qualifiedName = attribute.getLocalName();
+            }
             final XmlAttr xmlAttribute =
-                new XmlAttr(this, attribute.getNamespaceURI(), attribute.getLocalName(), attribute.getNodeValue());
+                new XmlAttr(this, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
         final String qualifiedName;
