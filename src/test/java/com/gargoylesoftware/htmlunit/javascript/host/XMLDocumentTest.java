@@ -284,6 +284,31 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testSelectNodes_Asterisk() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<book/>';\n"
+            + "    var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    doc.async=false;\n"
+            + "    doc.loadXML(text);\n"
+            + "    alert(doc.selectNodes('*')[0].nodeName);\n"
+            + "    alert(doc.selectNodes('/')[0].nodeName);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"book", "#document"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testLoadXML_Namespace() throws Exception {
         testLoadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7_0);
         testLoadXML_Namespace(BrowserVersion.FIREFOX_2);
