@@ -1349,6 +1349,9 @@
         JSObject="true">
         <browser name="Firefox"/>
         <property name="resultType" readable="true" writable="false"/>
+        <property name="singleNodeValue" readable="true" writable="false"/>
+        <property name="snapshotLength" readable="true" writable="false"/>
+        <function name="snapshotItem"/>
     </class>
 
 </configuration>

@@ -1283,7 +1283,7 @@ public class Document extends NodeImpl {
                 xPathResult = new XPathResult();
                 xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
             }
-            xPathResult.setResult(contextNode.getDomNodeOrDie().getByXPath(expression));
+            xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
         }
         catch (final JaxenException e) {
             throw Context.reportRuntimeError("Error using exression: " + expression);

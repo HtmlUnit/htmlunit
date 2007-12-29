@@ -95,4 +95,72 @@ public class XPathResultTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(new String[] {expectedAlert}, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSnapshotType() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += '  <html>\\n';\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '      <div id=\\'id1\\'/>\\n';\n"
+            + "    text += '      <div id=\\'id2\\'/>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    var parser=new DOMParser();\n"
+            + "    var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    var result = doc.evaluate('//div',doc.documentElement, null,"
+            + " XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n"
+            + "    alert(result.resultType);\n"
+            + "    for (var i=0; i < result.snapshotLength; i++) {\n"
+            + "      alert(result.snapshotItem(i).getAttribute('id'));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"7", "id1", "id2"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testSingleNodeValue() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += '  <html>\\n';\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '      <div id=\\'id1\\'/>\\n';\n"
+            + "    text += '      <div id=\\'id2\\'/>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    var parser=new DOMParser();\n"
+            + "    var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    var result = doc.evaluate('//div',doc.documentElement, null,"
+            + " XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
+            + "    alert(result.resultType);\n"
+            + "    alert(result.singleNodeValue.getAttribute('id'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"9", "id1"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

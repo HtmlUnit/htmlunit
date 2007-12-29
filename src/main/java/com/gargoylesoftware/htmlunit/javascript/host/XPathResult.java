@@ -39,6 +39,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.List;
 
+import org.mozilla.javascript.Context;
+
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -111,6 +114,7 @@ public class XPathResult extends SimpleScriptable {
     public static final int FIRST_ORDERED_NODE_TYPE = 9;
 
     private List result_;
+    private int resultType_;
 
     /**
      * Default constructor.
@@ -126,11 +130,37 @@ public class XPathResult extends SimpleScriptable {
         defineProperty("UNORDERED_NODE_SNAPSHOT_TYPE", new Integer(6), CONST);
         defineProperty("ORDERED_NODE_SNAPSHOT_TYPE", new Integer(7), CONST);
         defineProperty("ANY_UNORDERED_NODE_TYPE", new Integer(8), CONST);
-        defineProperty("FIRST_ORDERED_NODE_TYPE ", new Integer(9), CONST);
+        defineProperty("FIRST_ORDERED_NODE_TYPE", new Integer(9), CONST);
     }
 
-    void setResult(final List result) {
+    /**
+     * @param result the evaluation result.
+     * @param type If a specific type is specified, then the result will be returned as the corresponding type.
+     */
+    void init(final List result, final int type) {
         result_ = result;
+        resultType_ = -1;
+        if (result_.size() == 1) {
+            final Object o = result_.get(0);
+            if (o instanceof Number) {
+                resultType_ = NUMBER_TYPE;
+            }
+            else if (o instanceof String) {
+                resultType_ = STRING_TYPE;
+            }
+            else if (o instanceof Boolean) {
+                resultType_ = BOOLEAN_TYPE;
+            }
+        }
+        
+        if (resultType_ == -1) {
+            if (type != ANY_TYPE) {
+                resultType_ = type;
+            }
+            else {
+                resultType_ = UNORDERED_NODE_ITERATOR_TYPE;
+            }
+        }
     }
     
     /**
@@ -138,18 +168,51 @@ public class XPathResult extends SimpleScriptable {
      * @return The code representing the type of this result.
      */
     public int jsxGet_resultType() {
-        if (result_.size() == 1) {
-            final Object o = result_.get(0);
-            if (o instanceof Number) {
-                return NUMBER_TYPE;
-            }
-            else if (o instanceof String) {
-                return STRING_TYPE;
-            }
-            else if (o instanceof Boolean) {
-                return BOOLEAN_TYPE;
-            }
+        return resultType_;
+    }
+    
+    /**
+     * The number of nodes in the result snapshot.
+     * @return The number of nodes in the result snapshot.
+     */
+    public int jsxGet_snapshotLength() {
+        if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
+            throw Context.reportRuntimeError("Can not get snapshotLength for type: " + resultType_);
         }
-        return UNORDERED_NODE_ITERATOR_TYPE;
+        return result_.size();
+    }
+    
+    /**
+     * The value of this single node result, which may be null.
+     * @return The value of this single node result, which may be null.
+     */
+    public NodeImpl jsxGet_singleNodeValue() {
+        if (resultType_ != ANY_UNORDERED_NODE_TYPE && resultType_ != FIRST_ORDERED_NODE_TYPE) {
+            throw Context.reportRuntimeError("Can not get singleNodeValue for type: " + resultType_);
+        }
+        if (!result_.isEmpty()) {
+            return (NodeImpl) ((DomNode) result_.get(0)).getScriptObject();
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns the index<sup>th</sup> item in the snapshot collection.
+     * If index is greater than or equal to the number of nodes in the list, this method returns null.
+     * @param index Index into the snapshot collection.
+     * @return The node at the index<sup>th</sup> position in the NodeList, or null if that is not a valid index.
+     */
+    public NodeImpl jsxFunction_snapshotItem(final int index) {
+        if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
+            throw Context.reportRuntimeError("Can not get snapshotLength for type: " + resultType_);
+        }
+        if (index >= 0 && index < result_.size()) {
+            return (NodeImpl) ((DomNode) result_.get(index)).getScriptObject();
+        }
+        else {
+            return null;
+        }
     }
 }
