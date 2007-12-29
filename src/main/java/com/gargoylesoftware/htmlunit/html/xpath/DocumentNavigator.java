@@ -45,6 +45,7 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -184,6 +185,9 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return The root node.
      */
     public Object getDocumentNode(final Object contextNode) {
+        if (contextNode instanceof Page) {
+            return (Page) contextNode;
+        }
         if (contextNode instanceof XmlElement) {
             return ((DomNode) contextNode).getNativePage();
         }

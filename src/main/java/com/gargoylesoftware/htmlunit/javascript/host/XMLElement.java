@@ -69,7 +69,7 @@ public class XMLElement extends NodeImpl {
      * @param expression A string specifying an XPath expression.
      * @return list of the found elements.
      */
-    public Object jsxFunction_selectNodes(final String expression) {
+    public HTMLCollection jsxFunction_selectNodes(final String expression) {
         final HTMLCollection collection = new HTMLCollection(this);
         try {
             collection.init(getDomNodeOrDie(), new HtmlUnitXPath(expression));
@@ -78,6 +78,22 @@ public class XMLElement extends NodeImpl {
             throw Context.reportRuntimeError("Failed to initialize collection 'selectNodes': " + e.getMessage());
         }
         return collection;
+    }
+
+    /**
+     * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
+     * @param expression A string specifying an XPath expression.
+     * @return the first node that matches the given pattern-matching operation.
+     *         If no nodes match the expression, returns a null value.
+     */
+    public Object jsxFunction_selectSingleNode(final String expression) {
+        final HTMLCollection collection = jsxFunction_selectNodes(expression);
+        if (collection.jsxGet_length() > 0) {
+            return collection.get(0, collection);
+        }
+        else {
+            return null;
+        }
     }
 
     /**

@@ -109,9 +109,6 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testXMLDocument() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         test("XMLDocumentTestCase");
     }
 
@@ -119,9 +116,6 @@ public class Sarissa099Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testXMLElement() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         test("XMLElementTestCase");
     }
 

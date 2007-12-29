@@ -280,14 +280,11 @@ public class XMLDocumentTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
+    
     /**
      * @throws Exception if the test fails
      */
-    public void testSelectNodes_Asterisk() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void testSelectSingleNode() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<book/>';\n"
@@ -296,11 +293,13 @@ public class XMLDocumentTest extends WebTestCase {
             + "    doc.loadXML(text);\n"
             + "    alert(doc.selectNodes('*')[0].nodeName);\n"
             + "    alert(doc.selectNodes('/')[0].nodeName);\n"
+            + "    alert(doc.selectSingleNode('*').nodeName);\n"
+            + "    alert(doc.selectNodes('*')[0].selectSingleNode('/').nodeName);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"book", "#document"};
+        final String[] expectedAlerts = {"book", "#document", "book", "#document"};
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

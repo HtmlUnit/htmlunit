@@ -1280,6 +1280,11 @@
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="selectSingleNode">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms757846.aspx"
+                    descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="setProperty">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms760290.aspx"
                     descr="MSDN documentation"/>
@@ -1308,6 +1313,11 @@
         <function name="getElementsByTagName"/>
         <function name="selectNodes">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
+                    descr="MSDN documentation"/>
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="selectSingleNode">
+            <doclink url="http://msdn2.microsoft.com/en-us/library/ms757846.aspx"
                     descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
