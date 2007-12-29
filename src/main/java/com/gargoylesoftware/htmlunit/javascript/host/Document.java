@@ -1263,4 +1263,31 @@ public class Document extends NodeImpl {
         resolver.setPrototype(getPrototype(resolver.getClass()));
         return resolver;
     }
+    
+    /**
+     * Evaluates an XPath expression string and returns a result of the specified type if possible.
+     * @param expression The XPath expression string to be parsed and evaluated.
+     * @param contextNode The context node for the evaluation of this XPath expression.
+     * @param resolver The resolver permits translation of all prefixes, including the xml namespace prefix,
+     *        within the XPath expression into appropriate namespace URIs.
+     * @param type If a specific type is specified, then the result will be returned as the corresponding type.
+     * @param result The result object which may be reused and returned by this method.
+     * @return The result of the evaluation of the XPath expression.
+     */
+    public XPathResult jsxFunction_evaluate(final String expression, final NodeImpl contextNode,
+            final Object resolver, final int type, final Object result) {
+        XPathResult xPathResult = (XPathResult) result;
+        
+        try {
+            if (xPathResult == null) {
+                xPathResult = new XPathResult();
+                xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
+            }
+            xPathResult.setResult(contextNode.getDomNodeOrDie().getByXPath(expression));
+        }
+        catch (final JaxenException e) {
+            throw Context.reportRuntimeError("Error using exression: " + expression);
+        }
+        return xPathResult;
+    }
 }

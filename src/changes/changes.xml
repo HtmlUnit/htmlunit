@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add initial support for XPathResult (FF only).
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: activate document.all for Firefox too.
             </action>
@@ -18,7 +21,7 @@
             </action>
             <action type="add" dev="asashour">
                 XMLDocument: add support for .parseError property (IE only), createElement(), createNSResolver() (FF only),
-                and 'xml:space' attribute (IE only).
+                evaluate() (FF only), and 'xml:space' attribute (IE only).
             </action>
             <action type="update" dev="asashour">
                 XMLPage handles qualified tag names.

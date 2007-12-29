@@ -189,6 +189,9 @@
         <function name="elementFromPoint">
             <browser name="Microsoft Internet Explorer"/>
         </function>
+        <function name="evaluate">
+            <browser name="Firefox"/>
+        </function>
         <function name="getBoxObjectFor">
             <doclink
                 url="http://www.xulplanet.com/references/xpcomref/ifaces/nsIDOMNSDocument.html#method_getBoxObjectFor"
@@ -1340,6 +1343,12 @@
         JSObject="true">
         <browser name="Firefox"/>
         <function name="lookupNamespaceURI"/>
+    </class>
+
+    <class name="XPathResult" classname="com.gargoylesoftware.htmlunit.javascript.host.XPathResult"
+        JSObject="true">
+        <browser name="Firefox"/>
+        <property name="resultType" readable="true" writable="false"/>
     </class>
 
 </configuration>
