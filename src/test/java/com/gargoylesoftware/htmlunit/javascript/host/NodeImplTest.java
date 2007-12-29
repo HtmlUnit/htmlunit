@@ -553,4 +553,34 @@ public class NodeImplTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testNodePrototype() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testNodePrototype(BrowserVersion.FIREFOX_2, new String[] {"3"});
+        try {
+            testNodePrototype(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"3"});
+            fail("'Node' is not supported in IE.");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+    private void testNodePrototype(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(Node.TEXT_NODE);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
