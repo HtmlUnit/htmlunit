@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.Util;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
+import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * Jaxen Navigator implementation for navigating around the HtmlUnit DOM object model
@@ -197,17 +198,21 @@ public class DocumentNavigator extends DefaultNavigator {
     }
 
     /**
-     * Get the Namespace URI of an element.
-     *
-     * @param object The target node.
-     * @return A string (possibly empty) if the node is an element,
-     * and null otherwise.
+     * Retrieve the namespace URI of the given element node.
+     * @param element the context element node
+     * @return the namespace URI of the element node
      */
-    public String getElementNamespaceUri(final Object object) {
-        if (object instanceof HtmlElement) {
+    public String getElementNamespaceUri(final Object element) {
+        if (element instanceof HtmlElement) {
             return "";
         }
         else {
+            if (element instanceof XmlElement) {
+                final XmlElement e = (XmlElement) element;
+                if (e.getPrefix() != null) {
+                    return XmlUtil.lookupNamespaceURI(e, e.getPrefix());
+                }
+            }
             return null;
         }
     }
@@ -220,6 +225,9 @@ public class DocumentNavigator extends DefaultNavigator {
      * if the node is an element, or null otherwise.
      */
     public String getElementName(final Object object) {
+        if (object instanceof XmlElement) {
+            return ((XmlElement) object).getLocalName();
+        }
         return ((DomNode) object).getNodeName();
     }
 
@@ -231,6 +239,9 @@ public class DocumentNavigator extends DefaultNavigator {
      * prefixed) name if the node is an element, or null otherwise.
      */
     public String getElementQName(final Object object) {
+        if (object instanceof XmlElement) {
+            return ((XmlElement) object).getQualifiedName();
+        }
         return ((DomNode) object).getNodeName();
     }
 
@@ -395,6 +406,9 @@ public class DocumentNavigator extends DefaultNavigator {
      * node is a namespace node, null otherwise.
      */
     public String getNamespacePrefix(final Object object) {
+        if (object instanceof XmlElement) {
+            return ((XmlElement) object).getPrefix();
+        }
         return null;
     }
 

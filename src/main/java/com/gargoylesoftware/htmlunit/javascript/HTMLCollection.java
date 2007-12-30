@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -61,6 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -131,12 +133,50 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         if (node != null) {
             node_ = node;
             xpath_ = xpath;
+            try {
+                if (node instanceof XmlPage) {
+                    final XmlElement documentElement = ((XmlPage) node).getDocumentXmlElement();
+                    if (documentElement != null) {
+                        addNamespace(documentElement);
+                    }
+                }
+                else if (node instanceof XmlElement) {
+                    addNamespace((XmlElement) node);
+                }
+            }
+            catch (final JaxenException e) {
+                throw Context.reportRuntimeError("Exception adding namespaces: " + e);
+            }
             transformer_ = transformer;
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
             node_.addDomChangeListener(listener);
             if (node_ instanceof HtmlElement) {
                 ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
                 cachedElements_ = null;
+            }
+        }
+    }
+
+    /**
+     * Adds all namespaces defined in the given element and its all descendants to the XPath.
+     * @param element root element
+     * @throws JaxenException if a <code>NamespaceContext</code>
+     *         used by the XPath has been explicitly installed
+     */
+    private void addNamespace(final XmlElement element) throws JaxenException {
+        final Map attributes = element.getAttributes();
+        for (final Iterator keys = attributes.keySet().iterator(); keys.hasNext();) {
+            final String name = (String) keys.next();
+            final String value = (String) ((XmlAttr) attributes.get(name)).getValue();
+            if (name.startsWith("xmlns:")) {
+                final String prefix = name.substring("xmlns:".length());
+                xpath_.addNamespace(prefix, value);
+            }
+        }
+        for (final Iterator children = element.getChildIterator(); children.hasNext();) {
+            final DomNode child = (DomNode) children.next();
+            if (child instanceof XmlElement) {
+                addNamespace((XmlElement) child);
             }
         }
     }

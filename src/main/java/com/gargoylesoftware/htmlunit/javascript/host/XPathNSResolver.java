@@ -37,10 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
+import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A JavaScript object for XPathNSResolver.
@@ -69,32 +69,11 @@ public class XPathNSResolver extends SimpleScriptable {
      */
     public String jsxFunction_lookupNamespaceURI(final String prefix) {
         if (element_ instanceof HTMLElement) {
-            return lookupNamespaceURI((HtmlElement) ((HTMLElement) element_).getDomNodeOrDie(), prefix);
+            return XmlUtil.lookupNamespaceURI((HtmlElement) ((HTMLElement) element_).getDomNodeOrDie(), prefix);
         }
         else {
-            return lookupNamespaceURI((XmlElement) ((XMLElement) element_).getDomNodeOrDie(), prefix);
+            return XmlUtil.lookupNamespaceURI((XmlElement) ((XMLElement) element_).getDomNodeOrDie(), prefix);
         }
     }
 
-    private static String lookupNamespaceURI(final XmlElement element, final String prefix) {
-        String uri = element.getAttributeValue("xmlns:" + prefix);
-        if (uri == null) {
-            final DomNode parentNode = element.getParentDomNode();
-            if (parentNode instanceof XmlElement) {
-                uri = lookupNamespaceURI((XmlElement) parentNode, prefix);
-            }
-        }
-        return uri;
-    }
-
-    private static String lookupNamespaceURI(final HtmlElement element, final String prefix) {
-        String uri = element.getAttributeValue("xmlns:" + prefix);
-        if (uri == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            final DomNode parentNode = element.getParentDomNode();
-            if (parentNode instanceof HtmlElement) {
-                uri = lookupNamespaceURI((HtmlElement) parentNode, prefix);
-            }
-        }
-        return uri;
-    }
 }

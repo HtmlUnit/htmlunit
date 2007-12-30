@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="update" dev="asashour">
+                XPath: is now namespace aware for XmlElements.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add initial support for XPathResult, and XSLTProcessor (FF only).
             </action>

@@ -284,6 +284,55 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    public void testSelectNodes_Namespace() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    alert(doc.selectNodes('//ns1:title').length)\n"
+            + "    alert(doc.selectNodes('//ns2:title').length)\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final String xml
+            = "<ns1:books xmlns:ns1=\"http://one\">\n"
+            + "  <ns2:book xmlns:ns2=\"http://two\">\n"
+            + "    <ns2:title>Immortality</ns2:title>\n"
+            + "    <ns2:author>John Smith</ns2:author>\n"
+            + "  </ns2:book>\n"
+            + "  <ns1:book>\n"
+            + "    <ns1:title>The Hidden Secrets</ns1:title>\n"
+            + "    <ns1:author>William Adams</ns1:author>\n"
+            + "  </ns1:book>\n"
+            + "  <ns1:book>\n"
+            + "    <ns1:title>So What?</ns1:title>\n"
+            + "    <ns1:author>Tony Walas</ns1:author>\n"
+            + "  </ns1:book>\n"
+            + "</ns1:books>";
+
+        final String[] expectedAlerts = {"true", "2", "1"};
+        final List collectedAlerts = new ArrayList();
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     public void testSelectSingleNode() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

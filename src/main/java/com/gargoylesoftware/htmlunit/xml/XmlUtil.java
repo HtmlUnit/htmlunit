@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -225,4 +226,39 @@ public final class XmlUtil {
         }
     }
 
+    /**
+     * Search for the namespace URI of the given prefix, starting from the specified element.
+     * @param element The element to start searching from.
+     * @param prefix The namespace prefix.
+     * @return the namespace URI bound to the prefix; or null if there is no such namespace.
+     * @see #lookupNamespaceURI(HtmlElement, String)
+     */
+    public static String lookupNamespaceURI(final XmlElement element, final String prefix) {
+        String uri = element.getAttributeValue("xmlns:" + prefix);
+        if (uri == XmlElement.ATTRIBUTE_NOT_DEFINED) {
+            final DomNode parentNode = element.getParentDomNode();
+            if (parentNode instanceof XmlElement) {
+                uri = lookupNamespaceURI((XmlElement) parentNode, prefix);
+            }
+        }
+        return uri;
+    }
+
+    /**
+     * Search for the namespace URI of the given prefix, starting from the specified element.
+     * @param element The element to start searching from.
+     * @param prefix The namespace prefix.
+     * @return the namespace URI bound to the prefix; or null if there is no such namespace.
+     * @see #lookupNamespaceURI(XmlElement, String)
+     */
+    public static String lookupNamespaceURI(final HtmlElement element, final String prefix) {
+        String uri = element.getAttributeValue("xmlns:" + prefix);
+        if (uri == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            final DomNode parentNode = element.getParentDomNode();
+            if (parentNode instanceof HtmlElement) {
+                uri = lookupNamespaceURI((HtmlElement) parentNode, prefix);
+            }
+        }
+        return uri;
+    }
 }
