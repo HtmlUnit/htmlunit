@@ -38,20 +38,30 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.mozilla.javascript.Context;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A JavaScript object for XSLTProcessor.
@@ -93,29 +103,84 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return The result of the transformation.
      */
     public XMLDocument jsxFunction_transformToDocument(final NodeImpl source) {
+        final XMLDocument doc = new XMLDocument();
+        doc.setPrototype(getPrototype(doc.getClass()));
+        doc.setParentScope(getParentScope());
+
+        final org.w3c.dom.Node transformedDoc = (org.w3c.dom.Node) transform(source);
+        final XmlPage page = new XmlPage(transformedDoc.getFirstChild(), getWindow().getWebWindow());
+        doc.setDomNode(page);
+        return doc;
+    }
+
+    /**
+     * @return {@link Node} or {@link String}.
+     */
+    private Object transform(final NodeImpl source) {
         try {
-            final Source xmlSource = new StreamSource(new StringReader(((XMLDocument) source).jsxGet_xml()));
+            Source xmlSource = new StreamSource(new StringReader(((XMLDocument) source).jsxGet_xml()));
             final Source xsltSource = new StreamSource(new StringReader(((XMLDocument) style_).jsxGet_xml()));
-            final DOMResult result = new DOMResult();
-     
-            final TransformerFactory transFact = TransformerFactory.newInstance();
-            final Transformer trans = transFact.newTransformer(xsltSource);
+
+            final org.w3c.dom.Document containerDocument =
+                DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+            final org.w3c.dom.Element containerElement = containerDocument.createElement("container");
+            containerDocument.appendChild(containerElement);
+
+            final DOMResult result = new DOMResult(containerElement);
+ 
+            final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
             for (final Iterator keys = parameters_.keySet().iterator(); keys.hasNext();) {
                 final String qualifiedName = (String) keys.next();
-                trans.setParameter(qualifiedName, parameters_.get(qualifiedName));
+                transformer.setParameter(qualifiedName, parameters_.get(qualifiedName));
             }
-            trans.transform(xmlSource, result);
-
-            final XMLDocument doc = new XMLDocument();
-            doc.setPrototype(getPrototype(doc.getClass()));
-            doc.setParentScope(getParentScope());
-
-            final XmlPage page = new XmlPage((org.w3c.dom.Document) result.getNode(), getWindow().getWebWindow());
-            doc.setDomNode(page);
-            return doc;
+            transformer.transform(xmlSource, result);
+            
+            final Node transformedNode = (Node) result.getNode();
+            if (transformedNode.getFirstChild().getNodeType() == Node.ELEMENT_NODE) {
+                return transformedNode;
+            }
+            else {
+                //output is not DOM (text)
+                xmlSource = new StreamSource(new StringReader(((XMLDocument) source).jsxGet_xml()));
+                final StringWriter writer = new StringWriter();
+                final Result streamResult = new StreamResult(writer);
+                transformer.transform(xmlSource, streamResult);
+                return writer.toString();
+            }
         }
         catch (final Exception e) {
             throw Context.reportRuntimeError("Exception: " + e);
+        }
+    }
+    /**
+     * Transforms the node source applying the stylesheet given by the importStylesheet() function.
+     * The owner document of the output node owns the returned document fragment.
+     * @param source The node to be transformed.
+     * @param output This document is used to generate the output.
+     * @return The result of the transformation.
+     */
+    public DocumentFragment jsxFunction_transformToFragment(final NodeImpl source, final Object output) {
+        final SgmlPage page = (SgmlPage) ((Document) output).getDomNodeOrDie();
+        final DomDocumentFragment fragment = page.createDomDocumentFragment();
+        
+        final DocumentFragment rv = new DocumentFragment();
+        rv.setPrototype(getPrototype(rv.getClass()));
+        rv.setParentScope(getParentScope());
+        
+        rv.setDomNode(fragment);
+
+        final Object result = transform(source);
+        if (result instanceof Node) {
+            final NodeList children = (NodeList) ((Node) result).getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                XmlUtil.appendChild(page, fragment, children.item(i));
+            }
+            return rv;
+        }
+        else {
+            final DomText text = new DomText(page, (String) result);
+            fragment.appendDomChild(text);
+            return rv;
         }
     }
 
@@ -128,14 +193,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return
      */
     public void jsxFunction_setParameter(final String namespaceURI, final String localName, final Object value) {
-        final String qualifiedName;
-        if (namespaceURI.length() != 0 && !namespaceURI.equals("null")) {
-            qualifiedName = '{' + namespaceURI + '}' + localName;
-        }
-        else {
-            qualifiedName = localName;
-        }
-        parameters_.put(qualifiedName, value);
+        parameters_.put(getQualifiedName(namespaceURI, localName), value);
     }
 
     /**
@@ -145,6 +203,10 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return The value of the XSLT parameter.
      */
     public Object jsxFunction_getParameter(final String namespaceURI, final String localName) {
+        return parameters_.get(getQualifiedName(namespaceURI, localName));
+    }
+
+    private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI.length() != 0 && !namespaceURI.equals("null")) {
             qualifiedName = '{' + namespaceURI + '}' + localName;
@@ -152,6 +214,6 @@ public class XSLTProcessor extends SimpleScriptable {
         else {
             qualifiedName = localName;
         }
-        return parameters_.get(qualifiedName);
+        return qualifiedName;
     }
 }

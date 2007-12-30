@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
@@ -76,7 +77,7 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry {
      * @param qualifiedName The name of the attribute.
      * @param value The value of the attribute.
      */
-    public XmlAttr(final XmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
+    public XmlAttr(final Page page, final String namespaceURI, final String qualifiedName, final String value) {
         super(namespaceURI, qualifiedName, page);
         value_ = value;
     }

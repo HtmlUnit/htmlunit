@@ -1370,6 +1370,7 @@
         <function name="getParameter"/>
         <function name="importStylesheet"/>
         <function name="transformToDocument"/>
+        <function name="transformToFragment"/>
         <function name="setParameter"/>
     </class>
 

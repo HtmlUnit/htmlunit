@@ -39,25 +39,19 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DomCData;
-import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
  * A page that will be returned for response with content type "text/xml".
@@ -71,7 +65,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  */
 public class XmlPage extends SgmlPage {
     private static final long serialVersionUID = -1430136241030261308L;
-    private Document document_;
+    private Node node_;
 
     /**
      * Create an instance.
@@ -91,12 +85,12 @@ public class XmlPage extends SgmlPage {
      * A warning is logged if an exception is thrown while parsing the xml content
      * (for instance when the content is not a valid xml and can't be parsed).
      *
-     * @param document DOM document to initialize this page with.
+     * @param node The node to initialize this page with.
      * @param enclosingWindow The window that holds the page.
      */
-    public XmlPage(final Document document, final WebWindow enclosingWindow) {
+    public XmlPage(final Node node, final WebWindow enclosingWindow) {
         super(null, enclosingWindow);
-        document_ = document;
+        node_ = node;
     }
 
     /**
@@ -115,10 +109,11 @@ public class XmlPage extends SgmlPage {
 
         try {
             if (webResponse == null || webResponse.getContentAsString().trim().length() == 0) {
-                document_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+                node_ =
+                    DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().getDocumentElement();
             }
             else {
-                document_ = XmlUtil.buildDocument(webResponse);
+                node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();
             }
         }
         catch (final SAXException e) {
@@ -137,75 +132,9 @@ public class XmlPage extends SgmlPage {
      */
     public void setScriptObject(final ScriptableObject scriptObject) {
         super.setScriptObject(scriptObject);
-        if (document_.getDocumentElement() != null) {
-            final XmlElement childXml = createFrom(document_.getDocumentElement());
-            appendDomChild(childXml);
-            copy(document_.getDocumentElement(), childXml);
+        if (node_ != null) {
+            XmlUtil.appendChild(this, this, node_);
         }
-    }
-
-    /**
-     * Copy all children from 'node' to 'xml'
-     * @param node The Node to copy from.
-     * @param xml The DomNode to copy to.
-     */
-    private void copy(final org.w3c.dom.Node node, final DomNode xml) {
-        final NodeList nodeChildren = node.getChildNodes();
-        for (int i = 0; i < nodeChildren.getLength(); i++) {
-            final Node child = nodeChildren.item(i);
-            switch (child.getNodeType()) {
-                case Node.ELEMENT_NODE:
-                    final XmlElement childXml = createFrom(child);
-                    xml.appendDomChild(childXml);
-                    copy(child, childXml);
-                    break;
-
-                case Node.TEXT_NODE:
-                    final DomText text = new DomText(this, child.getNodeValue());
-                    xml.appendDomChild(text);
-                    break;
-
-                case Node.CDATA_SECTION_NODE:
-                    final DomCData cdata = new DomCData(this, child.getNodeValue());
-                    xml.appendDomChild(cdata);
-                    break;
-
-                case Node.COMMENT_NODE:
-                    final DomComment comment = new DomComment(this, child.getNodeValue());
-                    xml.appendDomChild(comment);
-                    break;
-
-                default:
-                    getLog().warn("NodeType " + child.getNodeType()
-                            + " (" + child.getNodeName() + ") is not yet supported.");
-            }
-        }
-    }
-
-    private XmlElement createFrom(final org.w3c.dom.Node node) {
-        final Map attributes/* String, XmlAttr*/ = new HashMap();
-        final NamedNodeMap nodeAttributes = node.getAttributes();
-        for (int i = 0; i < nodeAttributes.getLength(); i++) {
-            final Node attribute = nodeAttributes.item(i);
-            final String qualifiedName;
-            if (attribute.getPrefix() != null) {
-                qualifiedName = attribute.getPrefix() + ':' + attribute.getLocalName();
-            }
-            else {
-                qualifiedName = attribute.getLocalName();
-            }
-            final XmlAttr xmlAttribute =
-                new XmlAttr(this, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
-            attributes.put(attribute.getNodeName(), xmlAttribute);
-        }
-        final String qualifiedName;
-        if (node.getPrefix() == null) {
-            qualifiedName = node.getLocalName();
-        }
-        else {
-            qualifiedName = node.getPrefix() + ':' + node.getLocalName();
-        }
-        return new XmlElement(node.getNamespaceURI(), qualifiedName, this, attributes);
     }
 
     /**
@@ -228,7 +157,12 @@ public class XmlPage extends SgmlPage {
      * @return <code>null</code> if the content couldn't be parsed.
      */
     public Document getXmlDocument() {
-        return document_;
+        if (node_ != null) {
+            return node_.getOwnerDocument();
+        }
+        else {
+            return null;
+        }
     }
 
     /**

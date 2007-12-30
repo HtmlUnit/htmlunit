@@ -44,6 +44,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
 
 /**
@@ -70,12 +71,12 @@ public class XmlElement extends DomNamespaceNode {
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate.
-     * @param xmlPage The page that contains this element.
+     * @param page The page that contains this element.
      * @param attributes The attributes of this element.
      */
-    protected XmlElement(final String namespaceURI, final String qualifiedName, final XmlPage xmlPage,
+    protected XmlElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map/* String, XmlAttr*/ attributes) {
-        super(namespaceURI, qualifiedName, xmlPage);
+        super(namespaceURI, qualifiedName, page);
         attributes_ = attributes;
         for (final Iterator values = attributes.values().iterator(); values.hasNext();) {
             final XmlAttr attr = (XmlAttr) values.next();
