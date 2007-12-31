@@ -73,6 +73,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public final class XmlUtil {
     private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {

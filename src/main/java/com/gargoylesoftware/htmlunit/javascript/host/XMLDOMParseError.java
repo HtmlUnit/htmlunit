@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A JavaScript object for XMLDOMParseError.
- * @see <a href="http://msdn2.microsoft.com/en-us/library/ms757019(VS.85).aspx">MSDN documentation</a>
+ * @see <a href="http://msdn2.microsoft.com/en-us/library/ms757019.aspx">MSDN documentation</a>
  *
  * @version $Revision$
  * @author Ahmed Ashour

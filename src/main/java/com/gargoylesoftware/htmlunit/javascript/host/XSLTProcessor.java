@@ -58,6 +58,7 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -74,6 +75,8 @@ public class XSLTProcessor extends SimpleScriptable {
     private static final long serialVersionUID = -5870183094839129375L;
 
     private NodeImpl style_;
+    private NodeImpl input_;
+    private Object output_;
     private Map/*String,Object*/ parameters_ = new HashMap();
     
     /**
@@ -161,26 +164,28 @@ public class XSLTProcessor extends SimpleScriptable {
      */
     public DocumentFragment jsxFunction_transformToFragment(final NodeImpl source, final Object output) {
         final SgmlPage page = (SgmlPage) ((Document) output).getDomNodeOrDie();
+
         final DomDocumentFragment fragment = page.createDomDocumentFragment();
-        
         final DocumentFragment rv = new DocumentFragment();
         rv.setPrototype(getPrototype(rv.getClass()));
         rv.setParentScope(getParentScope());
-        
         rv.setDomNode(fragment);
 
+        transform(page, source, fragment);
+        return rv;
+    }
+
+    private void transform(final SgmlPage page, final NodeImpl source, final DomNode parent) {
         final Object result = transform(source);
         if (result instanceof Node) {
             final NodeList children = (NodeList) ((Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                XmlUtil.appendChild(page, fragment, children.item(i));
+                XmlUtil.appendChild(page, parent, children.item(i));
             }
-            return rv;
         }
         else {
             final DomText text = new DomText(page, (String) result);
-            fragment.appendDomChild(text);
-            return rv;
+            parent.appendDomChild(text);
         }
     }
 
@@ -208,12 +213,100 @@ public class XSLTProcessor extends SimpleScriptable {
 
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
-        if (namespaceURI.length() != 0 && !namespaceURI.equals("null")) {
+        if (namespaceURI != null && namespaceURI.length() != 0 && !namespaceURI.equals("null")) {
             qualifiedName = '{' + namespaceURI + '}' + localName;
         }
         else {
             qualifiedName = localName;
         }
         return qualifiedName;
+    }
+
+    /**
+     * Specifies which XML input tree to transform.
+     * @param input the input tree.
+     */
+    public void jsxSet_input(final NodeImpl input) {
+        input_ = input;
+    }
+
+    /**
+     * Returns which XML input tree to transform.
+     * @return which XML input tree to transform.
+     */
+    public NodeImpl jsxGet_input() {
+        return input_;
+    }
+
+    /**
+     * Sets the object to which to write the output of the transformation.
+     * @param output The object to which to write the output of the transformation.
+     */
+    public void jsxSet_output(final Object output) {
+        output_ = output;
+    }
+
+    /**
+     * Gets a custom output to write the result of the transformation.
+     * @return the output of the transformation.
+     */
+    public Object jsxGet_output() {
+        return output_;
+    }
+    
+    /**
+     * Adds parameters into an XSL Transformations (XSLT) style sheet.
+     *
+     * @param baseName The name that will be used inside the style sheet to identify the parameter context.
+     * @param parameter The parameter value.
+     *        To remove a parameter previously added to the processor, provide a value of Empty or Null instead.
+     * @param namespaceURI An optional namespace.
+     */
+    public void jsxFunction_addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
+        final String nsString;
+        if (namespaceURI instanceof String) {
+            nsString = (String) namespaceURI;
+        }
+        else {
+            nsString = null;
+        }
+        jsxFunction_setParameter(nsString, baseName, parameter);
+    }
+    
+    /**
+     * Starts the transformation process or resumes a previously failed transformation.
+     */
+    public void jsxFunction_transform() {
+        final SgmlPage page = (SgmlPage) ((Document) input_).getDomNodeOrDie();
+        if (output_ == null) {
+            final DomDocumentFragment fragment = page.createDomDocumentFragment();
+            final DocumentFragment node = new DocumentFragment();
+            node.setParentScope(getParentScope());
+            node.setPrototype(getPrototype(node.getClass()));
+            node.setDomNode(fragment);
+            output_ = (NodeImpl) fragment.getScriptObject();
+        }
+        transform(page, input_, ((NodeImpl) output_).getDomNodeOrDie());
+        final XMLSerializer serializer = new XMLSerializer();
+        serializer.setParentScope(getParentScope());
+        String output = "";
+        for (final Iterator it = ((NodeImpl) output_).getDomNodeOrDie().getChildIterator(); it.hasNext();) {
+            final DomNode child = (DomNode) it.next();
+            if (child instanceof DomText) {
+                //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
+                //Maybe this should be changed for 'xml:space' = preserve
+                //See XMLDocumentTest.testLoadXML_XMLSpaceAttribute()
+                if (((DomText) child).getData().trim().length() != 0) {
+                    output += ((DomText) child).getData();
+                }
+            }
+            else {
+                //remove trailing "\r\n"
+                final String serializedString =
+                    serializer.jsxFunction_serializeToString((NodeImpl) child.getScriptObject());
+                output += serializedString.substring(0, serializedString.length() - 2);
+            }
+        }
+        output_ = output;
     }
 }

@@ -1364,14 +1364,42 @@
         <function name="snapshotItem"/>
     </class>
 
+    <class name="XSLTemplate" classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate"
+        jsConstructor="jsConstructor" JSObject="true">
+        <browser name="Microsoft Internet Explorer"/>
+        <property name="stylesheet" readable="true" writable="true"/>
+        <function name="createProcessor"/>
+    </class>
+    
     <class name="XSLTProcessor" classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor"
         jsConstructor="jsConstructor" JSObject="true">
-        <browser name="Firefox"/>
-        <function name="getParameter"/>
-        <function name="importStylesheet"/>
-        <function name="transformToDocument"/>
-        <function name="transformToFragment"/>
-        <function name="setParameter"/>
+        <property name="input" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="output" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <function name="addParameter">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="getParameter">
+            <browser name="Firefox"/>
+        </function>
+        <function name="importStylesheet">
+            <browser name="Firefox"/>
+        </function>
+        <function name="transform">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
+        <function name="transformToDocument">
+            <browser name="Firefox"/>
+        </function>
+        <function name="transformToFragment">
+            <browser name="Firefox"/>
+        </function>
+        <function name="setParameter">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
 </configuration>

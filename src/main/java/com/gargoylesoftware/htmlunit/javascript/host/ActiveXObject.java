@@ -103,13 +103,17 @@ public class ActiveXObject extends SimpleScriptable {
         //   activeX="Microsoft.XMLHTTP">
         // and to build the object from the config
         if (isXMLHttpRequest(activeXName)) {
-            return buildXMLHTTPActiveX();
+            return buildXMLHttpRequest();
         }
 
         if (isXMLDocument(activeXName)) {
             return buildXMLDocument(getWindow(ctorObj).getWebWindow());
         }
         
+        if (isXMLTemplate(activeXName)) {
+            return buildXSLTemplate();
+        }
+
         final Map map = getWindow(ctorObj).getWebWindow().getWebClient().getActiveXObjectMap();
         if (map == null) {
             throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
@@ -163,26 +167,48 @@ public class ActiveXObject extends SimpleScriptable {
             || name.matches("msxml\\d*\\.freethreadeddomdocument.*");
     }
 
-    private static Scriptable buildXMLHTTPActiveX() {
-        final SimpleScriptable resp = new XMLHttpRequest();
+    /**
+     * Indicates if the ActiveX name is one flavor of XMLTemplate.
+     * @param name the ActiveX name.
+     * @return <code>true</code> if this is an XMLTemplate.
+     */
+    static boolean isXMLTemplate(String name) {
+        if (name == null) {
+            return false;
+        }
+        name = name.toLowerCase();
+        return name.matches("msxml\\d*\\.xsltemplate.*");
+    }
+
+    private static Scriptable buildXMLHttpRequest() {
+        final SimpleScriptable scriptable = new XMLHttpRequest();
 
         // the properties
-        addProperty(resp, "onreadystatechange", true, true);
-        addProperty(resp, "readyState", true, false);
-        addProperty(resp, "responseText", true, false);
-        addProperty(resp, "responseXML", true, false);
-        addProperty(resp, "status", true, false);
-        addProperty(resp, "statusText", true, false);
+        addProperty(scriptable, "onreadystatechange", true, true);
+        addProperty(scriptable, "readyState", true, false);
+        addProperty(scriptable, "responseText", true, false);
+        addProperty(scriptable, "responseXML", true, false);
+        addProperty(scriptable, "status", true, false);
+        addProperty(scriptable, "statusText", true, false);
 
         // the functions
-        addFunction(resp, "abort");
-        addFunction(resp, "getAllResponseHeaders");
-        addFunction(resp, "getResponseHeader");
-        addFunction(resp, "open");
-        addFunction(resp, "send");
-        addFunction(resp, "setRequestHeader");
+        addFunction(scriptable, "abort");
+        addFunction(scriptable, "getAllResponseHeaders");
+        addFunction(scriptable, "getResponseHeader");
+        addFunction(scriptable, "open");
+        addFunction(scriptable, "send");
+        addFunction(scriptable, "setRequestHeader");
 
-        return resp;
+        return scriptable;
+    }
+
+    private static Scriptable buildXSLTemplate() {
+        final SimpleScriptable scriptable = new XSLTemplate();
+
+        addProperty(scriptable, "stylesheet", true, true);
+        addFunction(scriptable, "createProcessor");
+
+        return scriptable;
     }
 
     static XMLDocument buildXMLDocument(final WebWindow enclosingWindow) {

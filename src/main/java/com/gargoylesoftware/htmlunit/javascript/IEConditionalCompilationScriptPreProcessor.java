@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  *
- * @see <a href="http://msdn2.microsoft.com/en-us/library/ahx1z4fs(VS.80).aspx">Microsoft Docs</a>
+ * @see <a href="http://msdn2.microsoft.com/en-us/library/ahx1z4fs.aspx">Microsoft Docs</a>
  */
 public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProcessor {
 

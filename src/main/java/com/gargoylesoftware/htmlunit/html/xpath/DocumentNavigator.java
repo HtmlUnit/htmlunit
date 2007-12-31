@@ -208,9 +208,9 @@ public class DocumentNavigator extends DefaultNavigator {
         }
         else {
             if (element instanceof XmlElement) {
-                final XmlElement e = (XmlElement) element;
-                if (e.getPrefix() != null) {
-                    return XmlUtil.lookupNamespaceURI(e, e.getPrefix());
+                final XmlElement xmlElement = (XmlElement) element;
+                if (xmlElement.getPrefix() != null) {
+                    return XmlUtil.lookupNamespaceURI(xmlElement, xmlElement.getPrefix());
                 }
             }
             return null;

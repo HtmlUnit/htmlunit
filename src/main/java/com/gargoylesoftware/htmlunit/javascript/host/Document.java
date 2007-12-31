@@ -800,8 +800,12 @@ public class Document extends NodeImpl {
      * @return a newly created DocumentFragment.
      */
     public Object jsxFunction_createDocumentFragment() {
-        final DomDocumentFragment htmlElement = getDomNodeOrDie().getPage().createDomDocumentFragment();
-        return getScriptableFor(htmlElement);
+        final DomDocumentFragment fragment = ((SgmlPage) getDomNodeOrDie().getNativePage()).createDomDocumentFragment();
+        final DocumentFragment node = new DocumentFragment();
+        node.setParentScope(getParentScope());
+        node.setPrototype(getPrototype(node.getClass()));
+        node.setDomNode(fragment);
+        return getScriptableFor(fragment);
     }
     
     /**
@@ -843,7 +847,7 @@ public class Document extends NodeImpl {
     public Object jsxFunction_createTextNode(final String newData) {
         Object result = NOT_FOUND;
         try {
-            final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
+            final DomNode domNode = new DomText(getDomNodeOrDie().getNativePage(), newData);
             final Object jsElement = getScriptableFor(domNode);
 
             if (jsElement == NOT_FOUND) {
@@ -1193,11 +1197,11 @@ public class Document extends NodeImpl {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Event Type is not supported: " + eventType);
         }
         try {
-            final Event e = (Event) clazz.newInstance();
-            e.setEventType(eventType);
-            e.setParentScope(getWindow());
-            e.setPrototype(getPrototype(clazz));
-            return e;
+            final Event event = (Event) clazz.newInstance();
+            event.setEventType(eventType);
+            event.setParentScope(getWindow());
+            event.setPrototype(getPrototype(clazz));
+            return event;
         }
         catch (final InstantiationException e) {
             throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
@@ -1218,10 +1222,10 @@ public class Document extends NodeImpl {
      *         the properties of the event.
      */
     public Event jsxFunction_createEventObject() {
-        final Event e = new Event();
-        e.setParentScope(getWindow());
-        e.setPrototype(getPrototype(e.getClass()));
-        return e;
+        final Event event = new Event();
+        event.setParentScope(getWindow());
+        event.setPrototype(getPrototype(event.getClass()));
+        return event;
     }
 
     /**

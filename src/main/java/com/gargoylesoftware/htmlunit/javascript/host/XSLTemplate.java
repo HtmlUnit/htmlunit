@@ -35,42 +35,54 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Collections;
-
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.lang.ArrayUtils;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * Tests for {@link FailingHttpStatusCodeException}..
+ * A JavaScript object for XSLTemplate.
+ * @see <a href="http://msdn2.microsoft.com/en-us/library/ms767644.aspx">MSDN documentation</a>
  *
  * @version $Revision$
- * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
+public class XSLTemplate extends SimpleScriptable {
+
+    private static final long serialVersionUID = 2820794481694666278L;
+
+    private NodeImpl stylesheet_;
+    
     /**
-     * Create an instance.
-     *
-     * @param name The name of the test.
+     * Javascript constructor.
      */
-    public FailingHttpStatusCodeExceptionTest(final String name) {
-        super(name);
+    public void jsConstructor() {
+        // Empty.
     }
 
     /**
-     * @throws Exception if the test fails
+     * Sets the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
+     * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      */
-    public void testConstructorWitWebResponse() throws Exception {
-        final WebResponseData webResponseData = new WebResponseData(
-                ArrayUtils.EMPTY_BYTE_ARRAY, HttpStatus.SC_NOT_FOUND, "not found",
-                Collections.EMPTY_LIST);
-        final WebResponse webResponse = new WebResponseImpl(webResponseData, URL_FIRST, SubmitMethod.GET, 10);
-        final FailingHttpStatusCodeException e = new FailingHttpStatusCodeException(webResponse);
+    public void jsxSet_stylesheet(final NodeImpl node) {
+        stylesheet_ = node;
+    }
+    /**
+     * Returns the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
+     * @return the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
+     */
+    public NodeImpl jsxGet_stylesheet() {
+        return stylesheet_;
+    }
 
-        assertEquals(webResponse, e.getResponse());
-        assertEquals(webResponse.getStatusMessage(), e.getStatusMessage());
-        assertEquals(webResponse.getStatusCode(), e.getStatusCode());
-        assertTrue("message doesn't contain failing url", e.getMessage().indexOf(URL_FIRST.toExternalForm()) > -1);
+    /**
+     * Creates a rental-model XSLProcessor object that will use this template.
+     * @return the XSLTProcessor.
+     */
+    public XSLTProcessor jsxFunction_createProcessor() {
+        final XSLTProcessor processor = new XSLTProcessor();
+        processor.setPrototype(getPrototype(processor.getClass()));
+        processor.setParentScope(getParentScope());
+        processor.jsxFunction_importStylesheet(stylesheet_);
+        return processor;
     }
 }

@@ -300,8 +300,8 @@ public class XMLDocument extends Document {
 
     /**
      * Returns all the descendant elements with the specified tag name.
-     * @param tagName the name to search for
-     * @return all the descendant elements with the specified tag name
+     * @param tagName the name to search for.
+     * @return all the descendant elements with the specified tag name.
      */
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
@@ -314,6 +314,14 @@ public class XMLDocument extends Document {
             throw Context.reportRuntimeError(msg + e.getMessage());
         }
         return collection;
+    }
+
+    /**
+     * Returns {@link Scriptable#NOT_FOUND}
+     * {@inheritDoc}
+     */
+    public Object jsxGet_body() {
+        return NOT_FOUND;
     }
 
 }
