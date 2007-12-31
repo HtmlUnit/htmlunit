@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2007 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2002-2008 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -101,7 +101,7 @@ public class HtmlForm extends ClickableElement {
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlForm.
      */
-    //TODO: to be removed, deprecated in 23 June 2007
+    //TODO: to be removed, deprecated after 1.11
     public HtmlForm(final HtmlPage htmlPage, final Map attributes) {
         this(null, TAG_NAME, htmlPage, attributes);
     }
@@ -436,7 +436,7 @@ public class HtmlForm extends ClickableElement {
      * HtmlRadioButtonInput, it should not be called,
      * you can use {@link #getByXPath(String)} instead.
      */
-    //TODO: to be removed, deprecated in 4 June 2007
+    //TODO: to be removed, deprecated after 1.11
     public HtmlRadioButtonInput getRadioButtonInput(final String name, final String value)
         throws ElementNotFoundException {
 
@@ -574,7 +574,7 @@ public class HtmlForm extends ClickableElement {
      * HtmlRadioButtonInput, it should not be called,
      * you can use {@link #getByXPath(String)} instead.
      */
-    //TODO: to be removed, deprecated in 4 June 2007
+    //TODO: to be removed, deprecated after 1.11
     public void setCheckedRadioButton(
             final String name,
             final String value)

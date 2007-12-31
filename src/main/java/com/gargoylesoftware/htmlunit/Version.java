@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2007 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2002-2008 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -93,6 +93,6 @@ public class Version {
      * @return the copyright notice.
      */
     public static String getCopyright() {
-        return "Copyright (C) 2002-2007 Gargoyle Software Inc. All rights reserved.";
+        return "Copyright (C) 2002-2008 Gargoyle Software Inc. All rights reserved.";
     }
 }

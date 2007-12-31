@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2007 Gargoyle Software Inc. All rights reserved.
+ * Copyright (c) 2002-2008 Gargoyle Software Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -82,7 +82,7 @@ public class HtmlScript extends HtmlElement {
      * @param attributes the initial attributes
      * @deprecated You should not directly construct HtmlScript.
      */
-    //TODO: to be removed, deprecated in 23 June 2007
+    //TODO: to be removed, deprecated after 1.11
     public HtmlScript(final HtmlPage page, final Map attributes) {
         this(null, TAG_NAME, page, attributes);
     }
