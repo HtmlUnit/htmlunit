@@ -163,7 +163,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<xml>\n"
             + "<content>blah</content>\n"
             + "<content>blah2</content>\n"
-            + "</xml>\n";
+            + "</xml>";
 
         final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = new ArrayList();
@@ -219,7 +219,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<xml2>\n"
             + "<content2>sdgxsdgx</content2>\n"
             + "<content2>sdgxsdgx2</content2>\n"
-            + "</xml2>\n";
+            + "</xml2>";
 
         final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -268,7 +268,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<xml>\n"
             + "<content>blah</content>\n"
             + "<content>blah2</content>\n"
-            + "</xml>\n";
+            + "</xml>";
 
         final WebClient client = new WebClient();
         final List collectedAlerts = new ArrayList();
@@ -563,7 +563,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<updates>\n"
             + "<update>abcdefg</update>\n"
             + "<update>hijklmn</update>\n"
-            + "</updates>\n";
+            + "</updates>";
 
         final WebClient client = new WebClient(browserVersion);
         final List collectedAlerts = Collections.synchronizedList(new ArrayList());
@@ -809,7 +809,7 @@ public class XMLHttpRequestTest extends WebTestCase {
               "<xml>\n"
             + "<content>blah</content>\n"
             + "<content>blah2</content>\n"
-            + "</xml>\n";
+            + "</xml>";
 
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         final List collectedAlerts = new ArrayList();
@@ -907,5 +907,49 @@ public class XMLHttpRequestTest extends WebTestCase {
         };
         page.addDomChangeListener(listener);
         ((ClickableElement) page.getHtmlElementById("p1")).click();
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testResponseXML_getElementById_FF() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "        alert(request.responseXML.getElementById('myID'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "</xml>";
+
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
+        final List collectedAlerts = new ArrayList();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        final String[] alerts = {"null"};
+        assertEquals(alerts, collectedAlerts);
     }
 }

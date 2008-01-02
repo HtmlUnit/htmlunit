@@ -109,7 +109,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "        <property name=\"readyState\" readable=\"true\" writable=\"false\">\n"
             + "        </property>\n"
             + "    </class>\n"
-            + "</configuration>\n";
+            + "</configuration>";
         final Reader reader = new StringReader(configurationString);
         assertFalse("Document should not be loaded", JavaScriptConfiguration.isDocumentLoaded());
         JavaScriptConfiguration.loadConfiguration(reader);

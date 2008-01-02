@@ -74,7 +74,7 @@ public class StyleSheetListTest extends WebTestCase {
             + "  <body onload='alert(document.styleSheets.length)'>\n"
             + "    <style>div.y { color: green; }</style>\n"
             + "  </body>\n"
-            + "</html>\n";
+            + "</html>";
         final List actual = new ArrayList();
         loadPage(html, actual);
         final String[] expected = {"4"};

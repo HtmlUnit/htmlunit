@@ -1894,7 +1894,7 @@ public class HTMLElementTest extends WebTestCase {
               "<html><body>\n"
             + "<div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         final List actual = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
         ((HtmlDivision) page.getHtmlElementById("a")).click();
@@ -1914,7 +1914,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='a' onclick='doAlert(event)'>foo</div>\n"
             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
             + "<div id='c' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\", template)'>baz</div>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         final List actual = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
         ((HtmlDivision) page.getHtmlElementById("a")).click();
@@ -1994,7 +1994,7 @@ public class HTMLElementTest extends WebTestCase {
             + "  }\n"
             + "</script>\n"
             + "<body onload='click()'><div id='d' onclick='alert(\"clicked\")'>foo</div></body>\n"
-            + "</html>\n";
+            + "</html>";
         final List actual = new ArrayList();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final String[] expected = {"clicked"};

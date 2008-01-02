@@ -263,7 +263,7 @@ public class EventTest extends WebTestCase {
             + "<script>var x = '';</script>\n"
             + "<form><input type='text' id='t' onkeydown='x+=\"1\"' onkeypress='x+=\"2\"' onkeyup='x+=\"3\"'/></form>\n"
             + "<div id='d' onclick='alert(x)'>abc</div>\n"
-            + "</body></html>\n";
+            + "</body></html>";
 
         final String[] expected = {"123", "123123123"};
         final List actual = new ArrayList();

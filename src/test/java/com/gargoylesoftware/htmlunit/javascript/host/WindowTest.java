@@ -1049,7 +1049,7 @@ public class WindowTest extends WebTestCase {
             "<html><head><title>first</title></head><body><script>\n"
             + "myVariable = 'foo';\n"
             + "alert(window.myVariable);\n"
-            + "</script></body></head>\n";
+            + "</script></body></head>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
@@ -1173,7 +1173,7 @@ public class WindowTest extends WebTestCase {
             "<html><head><title>first</title></head><body><script>\n"
             + "myVariable = 'foo';\n"
             + "alert(window.myOtherVariable == null);\n"
-            + "</script></body></head>\n";
+            + "</script></body></head>";
 
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
@@ -2304,7 +2304,7 @@ public class WindowTest extends WebTestCase {
             + "  <body onload='alert(window.getComputedStyle(document.getElementById(\"d\"), \"\").color)'>\n"
             + "    <div id='d' class='x'>foo bar</div>\n"
             + "  </body>\n"
-            + "</html>\n";
+            + "</html>";
         final String[] expectedAlerts = {"red"};
         final List collectedAlerts = new ArrayList();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);

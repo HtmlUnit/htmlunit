@@ -117,7 +117,7 @@ public class UIEventTest extends WebTestCase {
             + "  alert(e.cancelable);\n"
             + "  alert(e.view == window);\n"
             + "  alert(e.detail);\n"
-            + "</script></body></html>\n";
+            + "</script></body></html>";
         final List actual = new ArrayList();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final String[] expected = {"click", "true", "true", "true", "7"};

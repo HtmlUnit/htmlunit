@@ -856,7 +856,7 @@ public class DocumentTest extends WebTestCase {
         final String scriptContent
             = "doTest=function () {\n"
             + "    alert(top.document.getElementById('script1').src);\n"
-            + "}\n";
+            + "}";
         webConnection.setResponse(new URL("http://script"), scriptContent, "text/javascript");
 
         final List collectedAlerts = new ArrayList();

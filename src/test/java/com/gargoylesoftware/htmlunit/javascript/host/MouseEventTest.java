@@ -118,7 +118,7 @@ public class MouseEventTest extends WebTestCase {
             + "  alert(e.ctrlKey);\n"
             + "  alert(e.altKey);\n"
             + "  alert(e.shiftKey);\n"
-            + "</script></body></html>\n";
+            + "</script></body></html>";
         final List actual = new ArrayList();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final String[] expected = {"click", "true", "true", "true", "0", "0", "0", "0", "true", "true", "true"};

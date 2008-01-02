@@ -324,4 +324,11 @@ public class XMLDocument extends Document {
         return NOT_FOUND;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public Object jsxFunction_getElementById(final String id) {
+        return null;
+    }
+
 }
