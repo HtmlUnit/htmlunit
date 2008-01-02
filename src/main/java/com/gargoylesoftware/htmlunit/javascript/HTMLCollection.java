@@ -480,7 +480,87 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
         return super.equivalentValues(other);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean has(final String name, final Scriptable start) {
+        return name.equals("length") || getWithPreemption(name) != NOT_FOUND;
+    }
+
+    /**
+     * Returns the element or elements that match the specified key. If it is the name
+     * of a property, the property value is returned. If it is the id of an element in
+     * the array, that element is returned. Finally, if it is the name of an element or
+     * elements in the array, then all those elements are returned. Otherwise,
+     * {@inheritDoc}.
+     */
+    public Object[] getIds() {
+        final List idList = new ArrayList();
+        idList.add("length");
+
+        final List elements = getElements();
+        CollectionUtils.transform(elements, transformer_);
+
+        // See if there is an element in the element array with the specified id.
+        for (final Iterator iter = elements.iterator(); iter.hasNext();) {
+            final Object next = iter.next();
+            if (next instanceof HtmlElement) {
+                final HtmlElement element = (HtmlElement) next;
+                final String id = element.getId();
+                if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                    idList.add(id);
+                }
+            }
+            else if (next instanceof WebWindow) {
+                final WebWindow window = (WebWindow) next;
+                final String windowName = window.getName();
+                if (windowName != null) {
+                    idList.add(windowName);
+                }
+            }
+            else {
+                getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
+            }
+        }
+
+        if (xpath_ != null) {
+            // See if there are any elements in the element array with the specified name.
+            final HTMLCollection array = new HTMLCollection(this);
+            try {
+                final String newCondition = "@name";
+                final String currentXPathExpr = xpath_.toString();
+                final String xpathExpr;
+                if (currentXPathExpr.endsWith("]")) {
+                    xpathExpr =
+                        currentXPathExpr.substring(0, currentXPathExpr.length() - 1) + " and " + newCondition + "]";
+                }
+                else {
+                    xpathExpr = currentXPathExpr + "[" + newCondition + "]";
+                }
+                final XPath xpathName = xpath_.getNavigator().parseXPath(xpathExpr);
+                array.init(node_, xpathName);
+            }
+            catch (final SAXPathException e) {
+                throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
+            }
+
+            final List subElements = array.getElements();
+            for (final Iterator it = subElements.iterator(); it.hasNext();) {
+                final DomNode next = (DomNode) it.next();
+                if (next instanceof HtmlElement) {
+                    final HtmlElement element = (HtmlElement) next;
+                    final String id = element.getAttribute("name");
+                    if (id != null) {
+                        idList.add(id);
+                    }
+                }
+            }
+        }
+        return idList.toArray();
+    }
+
+
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
         /**
          * {@inheritDoc}

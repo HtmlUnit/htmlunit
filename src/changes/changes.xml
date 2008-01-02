@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="asashour" id="1862054">
+                JavaScript: add support for "for (i in collection)" (to be used with IE only) (#1862054).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: XSLT support (ActiveXObject 'Msxml2.XSLTemplate') (IE only).
             </action>

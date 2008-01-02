@@ -175,9 +175,6 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFor_in() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    for (i in document.forms) {\n"

@@ -298,7 +298,7 @@ public class JavaScriptEngine implements Serializable {
             final String entryKey = (String) propertiesIterator.next();
             final Method readMethod = config.getPropertyReadMethod(entryKey);
             final Method writeMethod = config.getPropertyWriteMethod(entryKey);
-            scriptable.defineProperty(entryKey, null, readMethod, writeMethod, 0);
+            scriptable.defineProperty(entryKey, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
         // the functions
@@ -307,7 +307,7 @@ public class JavaScriptEngine implements Serializable {
             final String entryKey = (String) functionsIterator.next();
             final Method method = config.getFunctionMethod(entryKey);
             final FunctionObject functionObject = new FunctionObject(entryKey, method, scriptable);
-            scriptable.defineProperty(entryKey, functionObject, 0);
+            scriptable.defineProperty(entryKey, functionObject, ScriptableObject.DONTENUM);
         }
     }
 
