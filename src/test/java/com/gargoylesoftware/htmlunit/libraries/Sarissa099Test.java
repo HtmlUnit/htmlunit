@@ -37,9 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import java.io.StringReader;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.stream.StreamSource;
+
 import org.mortbay.jetty.Server;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
@@ -120,6 +130,7 @@ public class Sarissa099Test extends WebTestCase {
     }
 
     /**
+     * Fails because of XSL, Jaxen and Maven 2, see {@link #testXSLTWithJaxen()}.
      * @throws Exception If an error occurs.
      */
     public void testXSLTProcessor() throws Exception {
@@ -157,5 +168,44 @@ public class Sarissa099Test extends WebTestCase {
         super.tearDown();
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
+    }
+
+    /**
+     * This case is independent of Jaxen and it succeeds in newly created maven 2 project (and Eclipse),
+     * however once Jaxen 1.1.1 is added as a dependency, it fails with maven!!
+     * @throws Exception If the test fails.
+     */
+    public void testXSLTWithJaxen() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String input = "<root><element attribute=\"value\"/></root>";
+        final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">"
+            + "<xsl:output method=\"xml\" omit-xml-declaration=\"yes\"/>"
+            + "<xsl:param select=\"'anonymous'\" name=\"user\"/>"
+            + "<xsl:template match=\"/\">"
+            + "<p id=\"user\">User: <xsl:value-of select=\"$user\"/>"
+            + "</p>"
+            + "<xsl:apply-templates/>"
+            + "<hr/>"
+            + "</xsl:template>"
+            + "<xsl:template match=\"greeting\">"
+            + "<p>"
+            + "<xsl:apply-templates/>"
+            + "</p>"
+            + "</xsl:template>"
+            + "</xsl:stylesheet>";
+
+        final Source xmlSource = new StreamSource(new StringReader(input));
+        final Source xsltSource = new StreamSource(new StringReader(style));
+
+        final Document containerDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+        final Element containerElement = containerDocument.createElement("container");
+        containerDocument.appendChild(containerElement);
+
+        final DOMResult result = new DOMResult(containerElement);
+
+        final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
+        transformer.transform(xmlSource, result);
     }
 }
