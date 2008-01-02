@@ -170,4 +170,27 @@ public class HTMLCollectionTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFor_in() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    for (i in document.forms) {\n"
+            + "      alert(i);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"length", "myForm"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

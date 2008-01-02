@@ -171,7 +171,7 @@ public class Sarissa099Test extends WebTestCase {
     }
 
     /**
-     * This case is independent of Jaxen and it succeeds in newly created maven 2 project (and Eclipse),
+     * This case is independent of Jaxen and HtmlUnit, it succeeds in newly created maven 2 project (and Eclipse),
      * however once Jaxen 1.1.1 is added as a dependency, it fails with maven!!
      * @throws Exception If the test fails.
      */
