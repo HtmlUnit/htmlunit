@@ -19,7 +19,8 @@
             </p>
             <p>
                 Before reporting an error, make sure that you are up to the latest version of the software.  If
-                you can, build the latest code from Subversion to see if the error still occurs.  Check the 
+                you can, get the <a href="http://build.canoo.com/htmlunit">latest snapshot</a>,
+                or build it from Subversion to see if the error still occurs.  Check the 
                 <a href="dependencies.html">dependencies</a> to be sure that you have all the required jar files.
                 Also, review the list of bugs and recently closed bugs to see if someone else has already reported
                 the bug.  If they have, you may want to just add more detail to it. 
