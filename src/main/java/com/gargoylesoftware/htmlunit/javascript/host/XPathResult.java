@@ -117,23 +117,6 @@ public class XPathResult extends SimpleScriptable {
     private int resultType_;
 
     /**
-     * Default constructor.
-     */
-    public XPathResult() {
-        //TODO: should be defined in config.xml.
-        defineProperty("ANY_TYPE", new Integer(0), CONST);
-        defineProperty("NUMBER_TYPE", new Integer(1), CONST);
-        defineProperty("STRING_TYPE", new Integer(2), CONST);
-        defineProperty("BOOLEAN_TYPE", new Integer(3), CONST);
-        defineProperty("UNORDERED_NODE_ITERATOR_TYPE", new Integer(4), CONST);
-        defineProperty("ORDERED_NODE_ITERATOR_TYPE", new Integer(5), CONST);
-        defineProperty("UNORDERED_NODE_SNAPSHOT_TYPE", new Integer(6), CONST);
-        defineProperty("ORDERED_NODE_SNAPSHOT_TYPE", new Integer(7), CONST);
-        defineProperty("ANY_UNORDERED_NODE_TYPE", new Integer(8), CONST);
-        defineProperty("FIRST_ORDERED_NODE_TYPE", new Integer(9), CONST);
-    }
-
-    /**
      * @param result the evaluation result.
      * @param type If a specific type is specified, then the result will be returned as the corresponding type.
      */

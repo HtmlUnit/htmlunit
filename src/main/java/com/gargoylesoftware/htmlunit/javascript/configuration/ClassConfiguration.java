@@ -38,8 +38,10 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -56,8 +58,9 @@ public final class ClassConfiguration {
     private static final String SETTER_PREFIX = "jsxSet_";
     private static final String FUNCTION_PREFIX = "jsxFunction_";
 
-    private HashMap propertyMap_ = new HashMap();
-    private HashMap functionMap_ = new HashMap();
+    private Map propertyMap_ = new HashMap();
+    private Map functionMap_ = new HashMap();
+    private List constants_ = new ArrayList();
     private String extendedClass_;
     /**
      * The fully qualified name of the class that implements this class.
@@ -161,8 +164,16 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Add the constant to the configuration.
+     * @param name - Name of the configuration.
+     */
+    public void addConstant(final String name) {
+        constants_.add(name);
+    }
+
+    /**
      * Return the set of keys for the defined properties.
-     * @return a set
+     * @return a set.
      */
     public Set propertyKeys() {
         return propertyMap_.keySet();
@@ -170,12 +181,20 @@ public final class ClassConfiguration {
 
     /**
      * Return the set of keys for the defined functions
-     * @return a set
+     * @return a set.
      */
     public Set functionKeys() {
         return functionMap_.keySet();
     }
     
+    /**
+     * Return the constant list.
+     * @return a list.
+     */
+    public List constants() {
+        return constants_;
+    }
+
     /**
      * Add the function to the configuration
      * @param name - Name of the function

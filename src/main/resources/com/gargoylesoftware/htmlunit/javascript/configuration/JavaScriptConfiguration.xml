@@ -1358,6 +1358,16 @@
     <class name="XPathResult" classname="com.gargoylesoftware.htmlunit.javascript.host.XPathResult"
         JSObject="true">
         <browser name="Firefox"/>
+        <constant name="ANY_TYPE"/>
+        <constant name="NUMBER_TYPE"/>
+        <constant name="STRING_TYPE"/>
+        <constant name="BOOLEAN_TYPE"/>
+        <constant name="UNORDERED_NODE_ITERATOR_TYPE"/>
+        <constant name="ORDERED_NODE_ITERATOR_TYPE"/>
+        <constant name="UNORDERED_NODE_SNAPSHOT_TYPE"/>
+        <constant name="ORDERED_NODE_SNAPSHOT_TYPE"/>
+        <constant name="ANY_UNORDERED_NODE_TYPE"/>
+        <constant name="FIRST_ORDERED_NODE_TYPE"/>
         <property name="resultType" readable="true" writable="false"/>
         <property name="singleNodeValue" readable="true" writable="false"/>
         <property name="snapshotLength" readable="true" writable="false"/>

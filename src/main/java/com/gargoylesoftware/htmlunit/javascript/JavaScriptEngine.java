@@ -205,7 +205,7 @@ public class JavaScriptEngine implements Serializable {
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final boolean isWindow = Window.class.getName().equals(config.getLinkedClass().getName());
             if (isWindow) {
-                configurePropertiesAndFunctions(config, window);
+                configureConstantsPropertiesAndFunctions(config, window);
             }
             else {
                 final Scriptable prototype = configureClass(config, window);
@@ -280,21 +280,34 @@ public class JavaScriptEngine implements Serializable {
         final ScriptableObject prototype = (ScriptableObject) jsHostClass.newInstance();
         prototype.setParentScope(window);
 
-        configurePropertiesAndFunctions(config, prototype);
+        configureConstantsPropertiesAndFunctions(config, prototype);
         
         return prototype;
     }
 
     /**
-     * Configure properties and functions on the object
+     * Configure constants, properties and functions on the object
      * @param config the configuration for the object
      * @param scriptable the object to configure
      */
-    private void configurePropertiesAndFunctions(final ClassConfiguration config, final ScriptableObject scriptable) {
+    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
+            final ScriptableObject scriptable) {
         
+        // the constants
+        for (final Iterator constantsIterator = config.constants().iterator(); constantsIterator.hasNext();) {
+            final String constant = (String) constantsIterator.next();
+            final Class linkedClass = config.getLinkedClass();
+            try {
+                final Object value = linkedClass.getField(constant).get(null);
+                scriptable.defineProperty(constant, value, ScriptableObject.CONST);
+            }
+            catch (final Exception e) {
+                throw Context.reportRuntimeError("Can not get field '" + constant + "' for type: "
+                    + config.getClassName());
+            }
+        }
         // the properties
-        final Iterator propertiesIterator = config.propertyKeys().iterator();
-        while (propertiesIterator.hasNext()) {
+        for (final Iterator propertiesIterator = config.propertyKeys().iterator(); propertiesIterator.hasNext();) {
             final String entryKey = (String) propertiesIterator.next();
             final Method readMethod = config.getPropertyReadMethod(entryKey);
             final Method writeMethod = config.getPropertyWriteMethod(entryKey);
@@ -302,8 +315,7 @@ public class JavaScriptEngine implements Serializable {
         }
 
         // the functions
-        final Iterator functionsIterator = config.functionKeys().iterator();
-        while (functionsIterator.hasNext()) {
+        for (final Iterator functionsIterator = config.functionKeys().iterator(); functionsIterator.hasNext();) {
             final String entryKey = (String) functionsIterator.next();
             final Method method = config.getFunctionMethod(entryKey);
             final FunctionObject functionObject = new FunctionObject(entryKey, method, scriptable);

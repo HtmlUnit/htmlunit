@@ -314,6 +314,9 @@ public final class JavaScriptConfiguration {
                 else if (tagName.equals("function")) {
                     parseFunctionElement(classConfiguration, childElement);
                 }
+                else if (tagName.equals("constant")) {
+                    parseConstantElement(classConfiguration, childElement);
+                }
                 else if (tagName.equals("javascript")) {
                     getLog().debug("javascript tag not yet handled for class " + linkedClassname);
                 }
@@ -377,6 +380,20 @@ public final class JavaScriptConfiguration {
             return;
         }
         classConfiguration.addFunction(propertyName);
+    }
+
+    /**
+     * Parse out the values for the property.
+     *
+     * @param classConfiguration The configuration that is being built
+     * @param element The property element
+     */
+    private void parseConstantElement(final ClassConfiguration classConfiguration, final Element element) {
+        if (testToExcludeElement(element)) {
+            return;
+        }
+        final String constantName = element.getAttribute("name");
+        classConfiguration.addConstant(constantName);
     }
 
     /**
