@@ -7,6 +7,10 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript: add configurable support for supported plugins and mime types (FF only). 
+                Per default a Shockwave Flash plugin is "configured" for Firefox 2.
+            </action>
             <action type="fix" dev="asashour" id="1854975">
                 JavaScript: XMLHttpRequest.responseXML.getElementById should always return null (#1854975).
             </action>

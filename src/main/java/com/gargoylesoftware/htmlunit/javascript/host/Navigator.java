@@ -37,9 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.mozilla.javascript.NativeArray;
+import java.util.Iterator;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -50,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  *
  * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp">
  * MSDN documentation</a>
@@ -57,6 +59,9 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public final class Navigator extends SimpleScriptable {
 
     private static final long serialVersionUID = 6741787912716453833L;
+
+    private PluginArray plugins_;
+    private MimeTypeArray mimeTypes_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -172,7 +177,41 @@ public final class Navigator extends SimpleScriptable {
      * @return an empty array.
      */
     public Object jsxGet_plugins() {
-        return new NativeArray(0);
+        initPlugins();
+        return plugins_;
+    }
+
+    private void initPlugins() {
+        if (plugins_ != null) {
+            return;
+        }
+        plugins_ = new PluginArray();
+        plugins_.setParentScope(this);
+        plugins_.setPrototype(getPrototype(PluginArray.class));
+
+        mimeTypes_ = new MimeTypeArray();
+        mimeTypes_.setParentScope(this);
+        mimeTypes_.setPrototype(getPrototype(MimeTypeArray.class));
+
+        for (final Iterator iter = getBrowserVersion().getPlugins().iterator(); iter.hasNext();) {
+            final PluginConfiguration pluginConfig = (PluginConfiguration) iter.next();
+            final Plugin plugin = new Plugin(pluginConfig.getName(), pluginConfig.getDescription(),
+                pluginConfig.getFilename());
+            plugin.setParentScope(this);
+            plugin.setPrototype(getPrototype(Plugin.class));
+            plugins_.add(plugin);
+
+            for (final Iterator iterMimeTypes = pluginConfig.getMimeTypes().iterator(); iterMimeTypes.hasNext();) {
+                final PluginConfiguration.MimeType mimeTypeConfig
+                    = (PluginConfiguration.MimeType) iterMimeTypes.next();
+                final MimeType mimeType = new MimeType(mimeTypeConfig.getType(), mimeTypeConfig.getDescription(),
+                    mimeTypeConfig.getSuffixes(), plugin);
+                mimeType.setParentScope(this);
+                mimeType.setPrototype(getPrototype(MimeType.class));
+                mimeTypes_.add(mimeType);
+                plugin.add(mimeType);
+            }
+        }
     }
 
     /**
@@ -180,7 +219,8 @@ public final class Navigator extends SimpleScriptable {
      * @return an empty array.
      */
     public Object jsxGet_mimeTypes() {
-        return new NativeArray(0);
+        initPlugins();
+        return mimeTypes_;
     }
 
     /**

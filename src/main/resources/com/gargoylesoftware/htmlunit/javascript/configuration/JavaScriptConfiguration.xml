@@ -745,7 +745,40 @@
         <property name="length" readable="true" writable="false"/>
         <function name="getNamedItem"/>
     </class>
+ 
+    <class name="MimeType" classname="com.gargoylesoftware.htmlunit.javascript.host.MimeType"
+        JSObject="true">
+        <browser name="Firefox"/>
+        <property name="description" readable="true" writable="false"/>
+        <property name="enabledPlugin" readable="true" writable="false"/>
+        <property name="suffixes" readable="true" writable="false"/>
+        <property name="type" readable="true" writable="false"/>
+	</class>
+	
+    <class name="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.SimpleArray"
+        JSObject="false">
+        <property name="length" readable="true" writable="false"/>
+        <function name="item"/>
+        <function name="namedItem"/>
+	</class>
 
+    <class name="MimeTypeArray" extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray"
+        JSObject="true">
+	</class>
+
+    <class name="PluginArray" extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.PluginArray"
+        JSObject="true">
+        <function name="refresh"/>
+	</class>
+
+    <class name="Plugin" extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.Plugin"
+        JSObject="true">
+        <browser name="Firefox"/>
+        <property name="description" readable="true" writable="false"/>
+        <property name="filename" readable="true" writable="false"/>
+        <property name="name" readable="true" writable="false"/>
+	</class>
+ 
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
         JSObject="true">
         <doclink

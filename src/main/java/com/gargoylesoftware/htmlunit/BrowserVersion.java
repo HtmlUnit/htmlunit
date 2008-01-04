@@ -38,6 +38,8 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -77,6 +79,7 @@ public class BrowserVersion implements Serializable {
     private String javaScriptVersion_;
     private float javaScriptVersionNumeric_;
     private float browserVersionNumeric_;
+    private Set plugins_ = new HashSet();
 
     /** Application code name for both Microsoft Internet Explorer and Netscape series */
     public static final String APP_CODE_NAME = "Mozilla";
@@ -135,6 +138,14 @@ public class BrowserVersion implements Serializable {
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
         "1.2", 6);
+    
+    static {
+        final PluginConfiguration pluginFlash = new PluginConfiguration("Shockwave Flash",
+            "Shockwave Flash 9.0 r31", "libflashplayer.so");
+        pluginFlash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+            "Shockwave Flash", "swf"));
+        FIREFOX_2.getPlugins().add(pluginFlash);
+    }
 
     /** Internet Explorer 6  */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
@@ -446,5 +457,14 @@ public class BrowserVersion implements Serializable {
      */
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
+    }
+    
+    /**
+     * Gets the configured plugins. This makes only sense for Firefox as only this browser makes this kind
+     * of information available through javascript
+     * @return the available plugins
+     */
+    public Set getPlugins() {
+        return plugins_;
     }
 }
