@@ -1559,7 +1559,8 @@ public class WebClient implements Serializable {
      */
     protected URL encodeUrl(final URL url) throws MalformedURLException, URIException {
         final String path = url.getPath();
-        final String fixedPath = encode(path, URI.allowed_abs_path);
+        String fixedPath = encode(path, URI.allowed_abs_path);
+        fixedPath = fixedPath.replaceAll("//", "/"); // workaround for bug HTTPCLIENT-727
         final String query = url.getQuery();
         final String fixedQuery = encode(query, URI.allowed_query);
 

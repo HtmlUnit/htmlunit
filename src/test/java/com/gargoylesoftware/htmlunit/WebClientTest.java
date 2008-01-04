@@ -1641,4 +1641,26 @@ public class WebClientTest extends WebTestCase {
         assertTrue(alerts.isEmpty());
     }
 
+    /**
+     * Test that HtmlUnit contains a workaround for HttpClient's bug
+     * http://issues.apache.org/jira/browse/HTTPCLIENT-727
+     * causing request to something like
+     * http://my.server/foo//mydir/myfile.html
+     * to be performed to
+     * http://my.server/foo/myfile.html
+     * @throws Exception if the test fails
+     */
+    public void testWorkaroundHttpClientBugWithDoubleSlash() throws Exception {
+        final URL url = new URL("http://first//dir1/dir2/file.html");
+        final org.apache.commons.httpclient.URI uri
+            = new org.apache.commons.httpclient.URI("//dir1/dir2/file.html", false);
+        assertEquals("//dir1/dir2/file.html", uri.toString()); // is correct
+        // following is wrong, but when this fails,
+        // then bug has been fixed and custom workaround can be removed in encodeUrl
+        assertEquals("/dir2/file.html", uri.getPath()); // as used in
+
+        final HtmlPage page = loadPage("<html></html>", new ArrayList(), url);
+        // in fact this is wrong as the double // should be kept... but better that nothing
+        assertEquals("http://first/dir1/dir2/file.html", page.getWebResponse().getUrl());
+    }
 }

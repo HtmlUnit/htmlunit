@@ -8,6 +8,9 @@
     <body>
         <release version="1.14-prerelease">
             <action type="add" dev="mguillem">
+                Add workaround for HttpClient's bug HTTPCLIENT-727 with urls containing double slash in path.
+            </action>
+            <action type="add" dev="mguillem">
                 JavaScript: add configurable support for supported plugins and mime types (FF only). 
                 Per default a Shockwave Flash plugin is "configured" for Firefox 2.
             </action>
