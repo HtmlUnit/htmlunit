@@ -123,11 +123,11 @@ public class HtmlForm extends ClickableElement {
      * Submit this form to the appropriate server as if a submit button had been pressed
      *
      * @param buttonName The name of a submit input element or a button element
-     *      which will be sent back up with the response
+     *        which will be sent back up with the response
      * @return A new Page that reflects the results of this submission
      * @throws IOException If an IO error occurs
      * @throws ElementNotFoundException If a button with the specified name cannot be found.
-     * @deprecated after 1.11, click on the specific button instead.
+     * @deprecated after 1.11, click on the specific {@link SubmittableElement} instead.
      */
     public Page submit(final String buttonName) throws IOException, ElementNotFoundException {
         final List inputList = getHtmlElementsByAttribute("input", "name", buttonName);
@@ -145,12 +145,12 @@ public class HtmlForm extends ClickableElement {
 
     /**
      * Submit this form to the appropriate server as if it had been submitted
-     * by javascript - ie no submit buttons were pressed.  Note that because we
+     * by javascript - i.e. no submit buttons were pressed.  Note that because we
      * are simulating a javascript submit, the onsubmit handler will not get executed.
      *
      * @return A new Page that reflects the results of this submission
      * @exception IOException If an IO error occurs
-     * @deprecated after 1.11, click on a specific input element instead.
+     * @deprecated after 1.11, click on a specific {@link SubmittableElement} instead.
      */
     public Page submit() throws IOException {
         return submit((SubmittableElement) null);
