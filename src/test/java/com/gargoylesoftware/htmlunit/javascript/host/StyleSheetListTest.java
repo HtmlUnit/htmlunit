@@ -40,6 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -47,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class StyleSheetListTest extends WebTestCase {
 
@@ -81,4 +86,38 @@ public class StyleSheetListTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testgetComputedStyle_Link() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var div = document.getElementById('myDiv');\n"
+            + "        alert(window.getComputedStyle(div, null).color);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div id='myDiv'/>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String css = "div {color:red}";
+        
+        final String[] expectedAlerts = {"red"};
+        final List collectedAlerts = new ArrayList();
+        final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, css, "text/css");
+        webClient.setWebConnection(webConnection);
+
+        webClient.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

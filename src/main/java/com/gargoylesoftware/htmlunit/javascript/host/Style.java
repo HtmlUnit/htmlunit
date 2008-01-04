@@ -143,9 +143,8 @@ public class Style extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * Create an instance and set its parent scope to the one of the provided
-     * element
-     * @param htmlElement the element to which this style is bound
+     * Create an instance and set its parent scope to the one of the provided element.
+     * @param htmlElement the element to which this style is bound.
      */
     Style(final HTMLElement htmlElement) {
         setParentScope(htmlElement.getParentScope());
@@ -156,7 +155,7 @@ public class Style extends SimpleScriptable implements Cloneable {
     /**
      * Initializes the object.
      *
-     * @param htmlElement The element that this style describes
+     * @param htmlElement The element that this style describes.
      */
     void initialize(final HTMLElement htmlElement) {
         // Initialize.
@@ -189,7 +188,7 @@ public class Style extends SimpleScriptable implements Cloneable {
 
     /**
      * Creates a clone of this style.
-     * @return a clone of this style
+     * @return a clone of this style.
      */
     Style createClone() {
         try {
@@ -204,7 +203,7 @@ public class Style extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the style's write mode.
-     * @param writeMode the style's write mode
+     * @param writeMode the style's write mode.
      */
     void setWriteMode(final short writeMode) {
         writeMode_ = writeMode;

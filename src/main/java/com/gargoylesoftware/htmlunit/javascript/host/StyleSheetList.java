@@ -41,10 +41,13 @@ import java.io.StringReader;
 import java.util.WeakHashMap;
 
 import org.jaxen.JaxenException;
+import org.mozilla.javascript.Context;
 import org.w3c.css.sac.InputSource;
 
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
@@ -58,6 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class StyleSheetList extends SimpleScriptable {
 
@@ -126,7 +130,18 @@ public class StyleSheetList extends SimpleScriptable {
             }
             else {
                 final HtmlLink link = (HtmlLink) node;
-                sheet = new Stylesheet(new InputSource(link.getHrefAttribute()));
+                try {
+                    final HtmlPage htmlPage = link.getPage();
+                    final WebRequestSettings webRequestSettings =
+                        new WebRequestSettings(htmlPage.getFullyQualifiedUrl(link.getHrefAttribute()));
+                    final String content =
+                        htmlPage.getWebClient().loadWebResponse(webRequestSettings).getContentAsString();
+                    final InputSource source = new InputSource(new StringReader(content));
+                    sheet = new Stylesheet(source);
+                }
+                catch (final Exception e) {
+                    throw Context.reportRuntimeError("Exception: " + e);
+                }
             }
             sheets_.put(node, sheet);
         }
