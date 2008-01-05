@@ -2464,4 +2464,32 @@ public class WindowTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test window properties that match Prototypes.
+     *
+     * @throws Exception if the test fails
+     */
+    public void testWindowProperties() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testWindowProperties(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"undefined", "undefined"});
+        testWindowProperties(BrowserVersion.FIREFOX_2, new String[] {"[Node]", "[Element]"});
+    }
+
+    private void testWindowProperties(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(window.Node);\n"
+            + "    alert(window.Element);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
