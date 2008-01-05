@@ -45,19 +45,18 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for compatibility with version 1.5.0-rc1 of
+ * Tests for compatibility with version 1.6.0 of
  * <a href="http://prototype.conio.net/">Prototype JavaScript library</a>.
  *
  * @version $Revision$
- * @author Daniel Gredler
- * @author Ahmed Ashour
+ * @author ahmed Ashour
  */
-public class Prototype150rc1Test extends WebTestCase {
+public class Prototype160Test extends WebTestCase {
 
     /**
      * @param name The name of the test.
      */
-    public Prototype150rc1Test(final String name) {
+    public Prototype160Test(final String name) {
         super(name);
     }
 
@@ -69,26 +68,32 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "ajax.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 3, 5, 2, 2);
-        test(BrowserVersion.FIREFOX_2, filename, 3, 11, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 15, 14, 10, 7);
+        test(BrowserVersion.FIREFOX_2, filename, 15, 32, 0, 0);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testArray() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String filename = "array.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 12, 49, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 12, 49, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 97, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 19, 97, 0, 0);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testBase() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String filename = "base.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 48, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 4, 48, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 35, 255, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 35, 225, 0, 0);
     }
 
     /**
@@ -99,26 +104,44 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "dom.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 25, 253, 1, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 25, 254, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 87, 819, 3, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 87, 811, 0, 0);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testElementMixins() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String filename = "element_mixins.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 7, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 4, 7, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 12, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 4, 12, 0, 0);
     }
 
     /**
      * @throws Exception If test fails.
      */
     public void testEnumerable() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String filename = "enumerable.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  23, 67, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename,  23, 67, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  25, 82, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename,  25, 82, 0, 0);
+    }
+
+    /**
+     * @throws Exception If test fails.
+     */
+    public void testEvent() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String filename = "event.html";
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  12, 43, 1, 0);
+        test(BrowserVersion.FIREFOX_2, filename,  12, 44, 0, 0);
     }
 
     /**
@@ -129,19 +152,32 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "form.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 21, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 4, 21, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 15, 110, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 15, 109, 0, 0);
     }
 
     /**
-     * Blocked by Rhino bug 370279
-     * https://bugzilla.mozilla.org/show_bug.cgi?id=370279
      * @throws Exception If test fails.
      */
     public void testHash() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String filename = "hash.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 5, 19, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 5, 19, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 16, 87, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 16, 87, 0, 0);
+    }
+
+    /**
+     * @throws Exception If test fails.
+     */
+    public void testNumber() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String filename = "number.html";
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 20, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 4, 20, 0, 0);
     }
 
     /**
@@ -152,8 +188,8 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "position.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 5, 25, 3, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 5, 28, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 2, 16, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 2, 16, 0, 0);
     }
 
     /**
@@ -169,16 +205,15 @@ public class Prototype150rc1Test extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testSelector() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String filename = "selector.html";
-        //HtmlUnit with IE succeeds for all :)
-        // It should be test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 18, 35, 9, 1);
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 18, 46, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 18, 46, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 37, 169, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 37, 171, 0, 0);
     }
 
     /**
-     * Blocked by Rhino bug 369860
-     * https://bugzilla.mozilla.org/show_bug.cgi?id=369860
      * @throws Exception If test fails.
      */
     public void testString() throws Exception {
@@ -186,8 +221,20 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "string.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 76, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 19, 76, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 40, 220, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 40, 220, 0, 0);
+    }
+
+    /**
+     * @throws Exception If test fails.
+     */
+    public void testUnitTests() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String filename = "unit_tests.html";
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 10, 38, 0, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 10, 38, 0, 0);
     }
 
     private void test(final BrowserVersion browserVersion, final String filename, final int tests,
