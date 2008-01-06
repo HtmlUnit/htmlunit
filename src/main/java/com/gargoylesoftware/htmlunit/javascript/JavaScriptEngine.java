@@ -217,6 +217,7 @@ public class JavaScriptEngine implements Serializable {
                         final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
                         obj.put("prototype", obj, prototype);
                         obj.setPrototype(prototype);
+                        obj.setParentScope(window);
                         ScriptableObject.defineProperty(window,
                                 config.getClassName(), obj, ScriptableObject.DONTENUM);
                     }
