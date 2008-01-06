@@ -163,7 +163,7 @@ public class Style extends SimpleScriptable implements Cloneable {
         jsElement_ = htmlElement;
         setDomNode(htmlElement.getDomNodeOrNull(), false);
 
-        if (htmlElement.getHtmlElementOrDie().getPage().getWebClient()
+        if (htmlElement.getDomNodeOrDie().getPage().getWebClient()
                 .getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
             for (final Iterator i = getStyleMap(true).entrySet().iterator(); i.hasNext();) {

@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public abstract class HtmlElement extends DomNamespaceNode {
+public abstract class HtmlElement extends DomElement {
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");

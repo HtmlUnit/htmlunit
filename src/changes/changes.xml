@@ -36,7 +36,7 @@
                 JavaScript: activate document.all for Firefox too.
             </action>
             <action type="add" dev="asashour">
-                JavaScript: add initial support for 'Element' prototype.
+                Add DomElement with its javascript 'Element' prototype.
             </action>
             <action type="fix" dev="asashour">
                 XPath: DomCharacterData is treated as text node.

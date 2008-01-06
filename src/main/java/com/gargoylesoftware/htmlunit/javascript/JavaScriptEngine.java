@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -220,6 +221,13 @@ public class JavaScriptEngine implements Serializable {
                         obj.setParentScope(window);
                         ScriptableObject.defineProperty(window,
                                 config.getClassName(), obj, ScriptableObject.DONTENUM);
+                        if (obj.getClass() == Element.class) {
+                            final DomNode domNode =
+                                new HtmlElement(null, "", (HtmlPage) webWindow.getEnclosedPage(), null) {
+                                    private static final long serialVersionUID = -5614158965497997095L;
+                                };
+                            ((SimpleScriptable) obj).setDomNode(domNode);
+                        }
                     }
                 }
                 prototypesPerJSName.put(config.getClassName(), prototype);

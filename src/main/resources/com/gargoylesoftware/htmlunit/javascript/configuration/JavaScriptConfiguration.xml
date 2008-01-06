@@ -240,7 +240,7 @@
     </class>
 
     <class name="Element" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
-        JSObject="true">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomElement">
     </class>
 
     <class name="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.Event" JSObject="true">
