@@ -240,4 +240,27 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             assertTrue(e.getMessage().indexOf("Expected >") == 0);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testIndex() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var match = '#{tests} tests'.match(/(^|.|\\r|\\n)(#\\{(.*?)\\})/);\n"
+            + "    alert(match.index);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"0"};
+        final List collectedAlerts = new ArrayList();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
