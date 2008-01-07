@@ -76,9 +76,6 @@ public class Prototype160Test extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testArray() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "array.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 97, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 19, 97, 0, 0);
@@ -172,9 +169,6 @@ public class Prototype160Test extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testNumber() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "number.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 20, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 20, 0, 0);
@@ -240,7 +234,7 @@ public class Prototype160Test extends WebTestCase {
     private void test(final BrowserVersion browserVersion, final String filename, final int tests,
             final int assertions, final int failures, final int errors) throws Exception {
         final WebClient client = new WebClient(browserVersion);
-        final URL url = getClass().getClassLoader().getResource("prototype/1.5.0-rc1/test/unit/" + filename);
+        final URL url = getClass().getClassLoader().getResource("prototype/1.6.0/test/unit/" + filename);
         assertNotNull(url);
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
