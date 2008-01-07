@@ -109,9 +109,6 @@ public class Prototype160Test extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testElementMixins() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "element_mixins.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 12, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 12, 0, 0);
@@ -121,9 +118,6 @@ public class Prototype160Test extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testEnumerable() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "enumerable.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  25, 82, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename,  25, 82, 0, 0);

@@ -152,9 +152,9 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private String readNativeRegExpPattern(final NativeRegExp nativeRegExp) {
         final String str = nativeRegExp.toString(); // the form is /regex/flags
-        return StringUtils.substringBeforeLast(str.substring(1), "/");
+        return StringUtils.substringBeforeLast(str.substring(1), "/").replaceAll("\\[\\^\\\\\\d\\]", ".");
     }
-
+    
     /**
      * Calls action on the wrapped RegExp proxy.
      */
