@@ -357,7 +357,9 @@
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
         <function name="namedItem"/>
-        <function name="tags"/>
+        <function name="tags">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
     </class>
 
     <class name="HTMLFormElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement"

@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * The javascript object "NodeImpl" which is the base class for all DOM
+ * The javascript object "Node" which is the base class for all DOM
  * objects.  This will typically wrap an instance of {@link DomNode}.
  *
  * @version $Revision$

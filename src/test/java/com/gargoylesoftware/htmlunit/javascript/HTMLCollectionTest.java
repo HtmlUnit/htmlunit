@@ -190,4 +190,26 @@ public class HTMLCollectionTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testTags() throws Exception {
+        testTags(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true"});
+        testTags(BrowserVersion.FIREFOX_2, new String[] {"false"});
+    }
+
+    private void testTags(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.forms.tags != undefined);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "</body></html>";
+
+        final List collectedAlerts = new ArrayList();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
