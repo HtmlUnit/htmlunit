@@ -7,9 +7,6 @@
 
     <body>
         <release version="1.14-prerelease">
-            <action type="update" dev="asashour">
-                JavaScript: HTMLCollection.tags is supported in only IE.
-            </action>
             <action type="add" dev="mguillem">
                 JavaScript: add support for 'Node' prototype.
             </action>
