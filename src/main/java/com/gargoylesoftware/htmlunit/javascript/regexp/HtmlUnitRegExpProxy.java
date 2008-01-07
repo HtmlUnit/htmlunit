@@ -135,7 +135,11 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     groups[i] = Context.getUndefinedValue();
                 }
             }
-            return cx.newArray(scope, groups);
+            final Scriptable response = cx.newArray(scope, groups);
+            // the additional properties (cf ECMA script reference 15.10.6.2 13)
+            response.put("index", response, new Integer(matcher.start(0)));
+            response.put("input", response, thisString);
+            return response;
         }
         
         return wrappedAction(cx, scope, thisObj, args, actionType);

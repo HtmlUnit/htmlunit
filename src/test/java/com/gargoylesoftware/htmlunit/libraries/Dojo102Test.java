@@ -63,9 +63,6 @@ public class Dojo102Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testDojo() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         final URL url = getClass().getClassLoader().getResource("dojo/1.0.2/util/doh/runner.html");
         assertNotNull(url);

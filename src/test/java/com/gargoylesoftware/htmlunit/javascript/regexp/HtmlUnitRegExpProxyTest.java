@@ -245,9 +245,6 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testIndex() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var match = '#{tests} tests'.match(/(^|.|\\r|\\n)(#\\{(.*?)\\})/);\n"
