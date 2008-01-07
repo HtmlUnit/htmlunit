@@ -74,8 +74,8 @@ public class XSLTProcessor extends SimpleScriptable {
 
     private static final long serialVersionUID = -5870183094839129375L;
 
-    private NodeImpl style_;
-    private NodeImpl input_;
+    private com.gargoylesoftware.htmlunit.javascript.host.Node style_;
+    private com.gargoylesoftware.htmlunit.javascript.host.Node input_;
     private Object output_;
     private Map/*String,Object*/ parameters_ = new HashMap();
     
@@ -94,7 +94,7 @@ public class XSLTProcessor extends SimpleScriptable {
      *              If the argument is an element node it must be the xsl:stylesheet (or xsl:transform) element
      *              of an XSLT stylesheet.
      */
-    public void jsxFunction_importStylesheet(final NodeImpl style) {
+    public void jsxFunction_importStylesheet(final com.gargoylesoftware.htmlunit.javascript.host.Node style) {
         style_ = style;
     }
 
@@ -105,7 +105,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param source The node to be transformed.
      * @return The result of the transformation.
      */
-    public XMLDocument jsxFunction_transformToDocument(final NodeImpl source) {
+    public XMLDocument jsxFunction_transformToDocument(final com.gargoylesoftware.htmlunit.javascript.host.Node source) {
         final XMLDocument doc = new XMLDocument();
         doc.setPrototype(getPrototype(doc.getClass()));
         doc.setParentScope(getParentScope());
@@ -119,7 +119,7 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * @return {@link Node} or {@link String}.
      */
-    private Object transform(final NodeImpl source) {
+    private Object transform(final com.gargoylesoftware.htmlunit.javascript.host.Node source) {
         try {
             Source xmlSource = new StreamSource(new StringReader(((XMLDocument) source).jsxGet_xml()));
             final Source xsltSource = new StreamSource(new StringReader(((XMLDocument) style_).jsxGet_xml()));
@@ -162,7 +162,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param output This document is used to generate the output.
      * @return The result of the transformation.
      */
-    public DocumentFragment jsxFunction_transformToFragment(final NodeImpl source, final Object output) {
+    public DocumentFragment jsxFunction_transformToFragment(final com.gargoylesoftware.htmlunit.javascript.host.Node source, final Object output) {
         final SgmlPage page = (SgmlPage) ((Document) output).getDomNodeOrDie();
 
         final DomDocumentFragment fragment = page.createDomDocumentFragment();
@@ -175,7 +175,7 @@ public class XSLTProcessor extends SimpleScriptable {
         return rv;
     }
 
-    private void transform(final SgmlPage page, final NodeImpl source, final DomNode parent) {
+    private void transform(final SgmlPage page, final com.gargoylesoftware.htmlunit.javascript.host.Node source, final DomNode parent) {
         final Object result = transform(source);
         if (result instanceof Node) {
             final NodeList children = (NodeList) ((Node) result).getChildNodes();
@@ -226,7 +226,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Specifies which XML input tree to transform.
      * @param input the input tree.
      */
-    public void jsxSet_input(final NodeImpl input) {
+    public void jsxSet_input(final com.gargoylesoftware.htmlunit.javascript.host.Node input) {
         input_ = input;
     }
 
@@ -234,7 +234,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Returns which XML input tree to transform.
      * @return which XML input tree to transform.
      */
-    public NodeImpl jsxGet_input() {
+    public com.gargoylesoftware.htmlunit.javascript.host.Node jsxGet_input() {
         return input_;
     }
 
@@ -284,13 +284,13 @@ public class XSLTProcessor extends SimpleScriptable {
             node.setParentScope(getParentScope());
             node.setPrototype(getPrototype(node.getClass()));
             node.setDomNode(fragment);
-            output_ = (NodeImpl) fragment.getScriptObject();
+            output_ = (Node) fragment.getScriptObject();
         }
-        transform(page, input_, ((NodeImpl) output_).getDomNodeOrDie());
+        transform(page, input_, ((com.gargoylesoftware.htmlunit.javascript.host.Node) output_).getDomNodeOrDie());
         final XMLSerializer serializer = new XMLSerializer();
         serializer.setParentScope(getParentScope());
         String output = "";
-        for (final Iterator it = ((NodeImpl) output_).getDomNodeOrDie().getChildIterator(); it.hasNext();) {
+        for (final Iterator it = ((com.gargoylesoftware.htmlunit.javascript.host.Node) output_).getDomNodeOrDie().getChildIterator(); it.hasNext();) {
             final DomNode child = (DomNode) it.next();
             if (child instanceof DomText) {
                 //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
@@ -303,7 +303,7 @@ public class XSLTProcessor extends SimpleScriptable {
             else {
                 //remove trailing "\r\n"
                 final String serializedString =
-                    serializer.jsxFunction_serializeToString((NodeImpl) child.getScriptObject());
+                    serializer.jsxFunction_serializeToString((com.gargoylesoftware.htmlunit.javascript.host.Node) child.getScriptObject());
                 output += serializedString.substring(0, serializedString.length() - 2);
             }
         }

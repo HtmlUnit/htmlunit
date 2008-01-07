@@ -77,7 +77,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.NodeImpl;
+import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -990,7 +990,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             if (frameTagEventHandler != null) {
                 getLog().debug("Executing on" + eventType + " handler for " + frame);
                 final Event event = new Event(frame, eventType);
-                ((NodeImpl) frame.getScriptObject()).executeEvent(event);
+                ((Node) frame.getScriptObject()).executeEvent(event);
                 if (!isOnbeforeunloadAccepted(frame.getPage(), event)) {
                     return false;
                 }

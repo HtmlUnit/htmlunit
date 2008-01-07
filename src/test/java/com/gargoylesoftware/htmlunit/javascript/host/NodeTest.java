@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link NodeImpl}.
+ * Tests for {@link Node}.
  *
  * @version $Revision$
  * @author Brad Clarke
@@ -60,12 +60,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class NodeImplTest extends WebTestCase {
+public class NodeTest extends WebTestCase {
 
     /**
      * @param name The name of the test case
      */
-    public NodeImplTest(final String name) {
+    public NodeTest(final String name) {
         super(name);
     }
 
@@ -558,9 +558,6 @@ public class NodeImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testNodePrototype() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testNodePrototype(BrowserVersion.FIREFOX_2, new String[] {"3"});
         try {
             testNodePrototype(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"3"});

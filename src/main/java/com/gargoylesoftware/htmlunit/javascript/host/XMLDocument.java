@@ -235,7 +235,7 @@ public class XMLDocument extends Document {
         final XMLSerializer seralizer = new XMLSerializer();
         seralizer.setParentScope(getWindow());
         seralizer.setPrototype(getPrototype(seralizer.getClass()));
-        return seralizer.jsxFunction_serializeToString((NodeImpl) jsxGet_documentElement());
+        return seralizer.jsxFunction_serializeToString((Node) jsxGet_documentElement());
     }
 
     /**

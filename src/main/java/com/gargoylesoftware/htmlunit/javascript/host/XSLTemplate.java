@@ -50,7 +50,7 @@ public class XSLTemplate extends SimpleScriptable {
 
     private static final long serialVersionUID = 2820794481694666278L;
 
-    private NodeImpl stylesheet_;
+    private Node stylesheet_;
     
     /**
      * Javascript constructor.
@@ -63,14 +63,14 @@ public class XSLTemplate extends SimpleScriptable {
      * Sets the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      */
-    public void jsxSet_stylesheet(final NodeImpl node) {
+    public void jsxSet_stylesheet(final Node node) {
         stylesheet_ = node;
     }
     /**
      * Returns the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      * @return the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      */
-    public NodeImpl jsxGet_stylesheet() {
+    public Node jsxGet_stylesheet() {
         return stylesheet_;
     }
 

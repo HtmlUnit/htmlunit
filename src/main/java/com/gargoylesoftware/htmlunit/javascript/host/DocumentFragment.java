@@ -46,7 +46,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-B63ED1A3">
  * W3C Dom Level 1</a>
  */
-public class DocumentFragment extends NodeImpl {
+public class DocumentFragment extends Node {
 
     private static final long serialVersionUID = -9081976556072827541L;
 

@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Range extends SimpleScriptable {
     private static final long serialVersionUID = 4326375945958952177L;
-    private NodeImpl startContainer_, endContainer_;
+    private Node startContainer_, endContainer_;
     private int startOffset_, endOffset_;
 
     /**
@@ -113,7 +113,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      * @param offset the offset value within the node
      */
-    public void jsxFunction_setStart(final NodeImpl refNode, final int offset) {
+    public void jsxFunction_setStart(final Node refNode, final int offset) {
         startContainer_ = refNode;
         startOffset_ = offset;
     }
@@ -122,8 +122,8 @@ public class Range extends SimpleScriptable {
      * Sets the start of the range to be after the node
      * @param refNode the reference node
      */
-    public void jsxFunction_setStartAfter(final NodeImpl refNode) {
-        startContainer_ = (NodeImpl) refNode.jsxGet_parentNode();
+    public void jsxFunction_setStartAfter(final Node refNode) {
+        startContainer_ = (Node) refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode) + 1;
     }
 
@@ -131,16 +131,16 @@ public class Range extends SimpleScriptable {
      * Sets the start of the range to be before the node
      * @param refNode the reference node
      */
-    public void jsxFunction_setStartBefore(final NodeImpl refNode) {
-        startContainer_ = (NodeImpl) refNode.jsxGet_parentNode();
+    public void jsxFunction_setStartBefore(final Node refNode) {
+        startContainer_ = (Node) refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode);
     }
 
-    private int getPositionInContainer(final NodeImpl refNode) {
+    private int getPositionInContainer(final Node refNode) {
         int i = 0;
-        NodeImpl node = refNode;
+        Node node = refNode;
         while (node.jsxGet_previousSibling() != null) {
-            node = (NodeImpl) node.jsxGet_previousSibling();
+            node = (Node) node.jsxGet_previousSibling();
             ++i;
         }
         return i;
@@ -159,7 +159,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      * @param offset the offset value within the node
      */
-    public void jsxFunction_setEnd(final NodeImpl refNode, final int offset) {
+    public void jsxFunction_setEnd(final Node refNode, final int offset) {
         endContainer_ = refNode;
         endOffset_ = offset;
     }
@@ -168,8 +168,8 @@ public class Range extends SimpleScriptable {
      * Sets the end of the range to be after the node
      * @param refNode the reference node
      */
-    public void jsxFunction_setEndAfter(final NodeImpl refNode) {
-        endContainer_ = (NodeImpl) refNode.jsxGet_parentNode();
+    public void jsxFunction_setEndAfter(final Node refNode) {
+        endContainer_ = (Node) refNode.jsxGet_parentNode();
         endOffset_ = getPositionInContainer(refNode) + 1;
     }
 
@@ -177,8 +177,8 @@ public class Range extends SimpleScriptable {
      * Sets the end of the range to be before the node
      * @param refNode the reference node
      */
-    public void jsxFunction_setEndBefore(final NodeImpl refNode) {
-        startContainer_ = (NodeImpl) refNode.jsxGet_parentNode();
+    public void jsxFunction_setEndBefore(final Node refNode) {
+        startContainer_ = (Node) refNode.jsxGet_parentNode();
         startOffset_ = getPositionInContainer(refNode);
     }
 
@@ -186,7 +186,7 @@ public class Range extends SimpleScriptable {
      * Select the contents within a node
      * @param refNode Node to select from
      */
-    public void jsxFunction_selectNodeContents(final NodeImpl refNode) {
+    public void jsxFunction_selectNodeContents(final Node refNode) {
         startContainer_ = refNode;
         startOffset_ = 0;
         endContainer_ = refNode;
@@ -197,7 +197,7 @@ public class Range extends SimpleScriptable {
      * Select a node and its contents
      * @param refNode the node to select
      */
-    public void jsxFunction_selectNode(final NodeImpl refNode) {
+    public void jsxFunction_selectNode(final Node refNode) {
         jsxFunction_setStartBefore(refNode);
         jsxFunction_setEndAfter(refNode);
     }
@@ -238,12 +238,12 @@ public class Range extends SimpleScriptable {
      * @param node the node to start with
      * @return a list of node
      */
-    protected List getAncestorsAndSelf(final NodeImpl node) {
+    protected List getAncestorsAndSelf(final Node node) {
         final List ancestors = new ArrayList();
-        NodeImpl ancestor = node;
+        Node ancestor = node;
         while (ancestor != null) {
             ancestors.add(0, ancestor);
-            ancestor = (NodeImpl) ancestor.jsxGet_parentNode();
+            ancestor = (Node) ancestor.jsxGet_parentNode();
         }
         return ancestors;
     }

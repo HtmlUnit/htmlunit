@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XMLElement extends NodeImpl {
+public class XMLElement extends Node {
 
     private static final long serialVersionUID = 5616690634173934926L;
 

@@ -1074,7 +1074,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pseudoElt is a string specifying the pseudo-element to match, can be null.
      * @return the computed style.
      */
-    public Object jsxFunction_getComputedStyle(final NodeImpl element, final String pseudoElt) {
+    public Object jsxFunction_getComputedStyle(final Node element, final String pseudoElt) {
 
         final HTMLElement e = (HTMLElement) element;
         final Style original = (Style) e.jsxGet_style();

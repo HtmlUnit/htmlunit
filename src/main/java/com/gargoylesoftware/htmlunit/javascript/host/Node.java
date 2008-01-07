@@ -70,16 +70,65 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-public class NodeImpl extends SimpleScriptable {
+public class Node extends SimpleScriptable {
 
     private HTMLCollection childNodes_; //has to be a member to have equality (==) working
     private static final long serialVersionUID = -5695262053081637445L;
     private EventListenersContainer eventListenersContainer_;
 
     /**
+     * @see {@link org.w3c.dom.Node#ELEMENT_NODE}.
+     */
+    public static final short ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#ATTRIBUTE_NODE}.
+     */
+    public static final short ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#TEXT_NODE}.
+     */
+    public static final short TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#CDATA_SECTION_NODE}.
+     */
+    public static final short CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#ENTITY_REFERENCE_NODE}.
+     */
+    public static final short ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#ENTITY_NODE}.
+     */
+    public static final short ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE}.
+     */
+    public static final short PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#COMMENT_NODE}.
+     */
+    public static final short COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#DOCUMENT_NODE}.
+     */
+    public static final short DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#DOCUMENT_TYPE_NODE}.
+     */
+    public static final short DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE}.
+     */
+    public static final short DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
+    /**
+     * @see {@link org.w3c.dom.Node#NOTATION_NODE}.
+     */
+    public static final short NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
+    
+    /**
      * Create an instance.
      */
-    public NodeImpl() {
+    public Node() {
     }
 
     /**
@@ -130,9 +179,9 @@ public class NodeImpl extends SimpleScriptable {
      */
     public Object jsxFunction_appendChild(final Object childObject) {
         Object appendedChild = null;
-        if (childObject instanceof NodeImpl) {
+        if (childObject instanceof Node) {
             // Get XML node for the DOM node passed in
-            final DomNode childDomNode = ((NodeImpl) childObject).getDomNodeOrDie();
+            final DomNode childDomNode = ((Node) childObject).getDomNodeOrDie();
 
             // Get the parent XML node that the child should be added to.
             final DomNode parentNode = getDomNodeOrDie();
@@ -176,9 +225,9 @@ public class NodeImpl extends SimpleScriptable {
             final Object newChildObject, final Object refChildObject) {
         Object appendedChild = null;
 
-        if (newChildObject instanceof NodeImpl) {
+        if (newChildObject instanceof Node) {
 
-            final DomNode newChildNode = ((NodeImpl) newChildObject).getDomNodeOrDie();
+            final DomNode newChildNode = ((Node) newChildObject).getDomNodeOrDie();
 
             final DomNode refChildNode;
             // IE accepts non standard calls with only one arg
@@ -191,7 +240,7 @@ public class NodeImpl extends SimpleScriptable {
                 }
             }
             else if (refChildObject != null) {
-                refChildNode = ((NodeImpl) refChildObject).getDomNodeOrDie();
+                refChildNode = ((Node) refChildObject).getDomNodeOrDie();
             }
             else {
                 refChildNode = null;
@@ -239,9 +288,9 @@ public class NodeImpl extends SimpleScriptable {
     public Object jsxFunction_removeChild(final Object childObject) {
         Object removedChild = null;
 
-        if (childObject instanceof NodeImpl) {
+        if (childObject instanceof Node) {
             // Get XML node for the DOM node passed in
-            final DomNode childNode = ((NodeImpl) childObject).getDomNodeOrDie();
+            final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
 
             // Remove the child from the parent node
             childNode.remove();
@@ -286,13 +335,13 @@ public class NodeImpl extends SimpleScriptable {
 
         Object removedChild = null;
 
-        if (newChildObject instanceof NodeImpl && oldChildObject instanceof NodeImpl) {
+        if (newChildObject instanceof Node && oldChildObject instanceof Node) {
             // Get XML nodes for the DOM nodes passed in
-            final DomNode newChildNode = ((NodeImpl) newChildObject).getDomNodeOrDie();
+            final DomNode newChildNode = ((Node) newChildObject).getDomNodeOrDie();
             final DomNode oldChildNode;
             if (oldChildObject != null) {
                 // Replace the old child with the new child.
-                oldChildNode = ((NodeImpl) oldChildObject).getDomNodeOrDie();
+                oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();
                 oldChildNode.replace(newChildNode);
                 removedChild = oldChildObject;
             }
@@ -487,7 +536,7 @@ public class NodeImpl extends SimpleScriptable {
             }
             for (int i = parents.size() - 1; i >= 0; i--) {
                 final DomNode curNode = (DomNode) parents.get(i);
-                final NodeImpl jsNode = (NodeImpl) curNode.getScriptObject();
+                final Node jsNode = (Node) curNode.getScriptObject();
                 if (jsNode.eventListenersContainer_ != null) {
                     result = defaultResult(jsNode.eventListenersContainer_.executeCapturingListeners(event, args),
                             result);
@@ -510,7 +559,7 @@ public class NodeImpl extends SimpleScriptable {
             event.setEventPhase(Event.AT_TARGET);
             node = getDomNodeOrDie();
             while (node != null) {
-                final NodeImpl jsNode = (NodeImpl) node.getScriptObject();
+                final Node jsNode = (Node) node.getScriptObject();
                 
                 if (jsNode.eventListenersContainer_ != null) {
                     result = defaultResult(

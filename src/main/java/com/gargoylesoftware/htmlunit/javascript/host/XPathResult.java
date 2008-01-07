@@ -169,12 +169,12 @@ public class XPathResult extends SimpleScriptable {
      * The value of this single node result, which may be null.
      * @return The value of this single node result, which may be null.
      */
-    public NodeImpl jsxGet_singleNodeValue() {
+    public Node jsxGet_singleNodeValue() {
         if (resultType_ != ANY_UNORDERED_NODE_TYPE && resultType_ != FIRST_ORDERED_NODE_TYPE) {
             throw Context.reportRuntimeError("Can not get singleNodeValue for type: " + resultType_);
         }
         if (!result_.isEmpty()) {
-            return (NodeImpl) ((DomNode) result_.get(0)).getScriptObject();
+            return (Node) ((DomNode) result_.get(0)).getScriptObject();
         }
         else {
             return null;
@@ -187,12 +187,12 @@ public class XPathResult extends SimpleScriptable {
      * @param index Index into the snapshot collection.
      * @return The node at the index<sup>th</sup> position in the NodeList, or null if that is not a valid index.
      */
-    public NodeImpl jsxFunction_snapshotItem(final int index) {
+    public Node jsxFunction_snapshotItem(final int index) {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
             throw Context.reportRuntimeError("Can not get snapshotLength for type: " + resultType_);
         }
         if (index >= 0 && index < result_.size()) {
-            return (NodeImpl) ((DomNode) result_.get(index)).getScriptObject();
+            return (Node) ((DomNode) result_.get(index)).getScriptObject();
         }
         else {
             return null;

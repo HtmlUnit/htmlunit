@@ -759,8 +759,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return an element object
      */
     public Object jsxFunction_insertAdjacentElement(final String where, final Object object) {
-        if (object instanceof NodeImpl) {
-            final DomNode childNode = ((NodeImpl) object).getDomNodeOrDie();
+        if (object instanceof Node) {
+            final DomNode childNode = ((Node) object).getDomNodeOrDie();
             final Object[] values = getInsertAdjacentLocation(where);
             final DomNode node = (DomNode) values[0];
             final boolean append = ((Boolean) values[1]).booleanValue();

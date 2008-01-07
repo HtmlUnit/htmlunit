@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.DomCharacterData;
  * @author David K. Taylor
  * @author Chris Erskine
  */
-public class CharacterDataImpl extends NodeImpl {
+public class CharacterDataImpl extends Node {
 
     private static final long serialVersionUID = 5413850371617638797L;
 

@@ -44,7 +44,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class Element extends NodeImpl {
+public class Element extends Node {
 
     private static final long serialVersionUID = 197496194060742641L;
 

@@ -67,7 +67,7 @@ public class XMLSerializer extends SimpleScriptable {
      * @param root The root of the subtree to be serialized. This could be any node, including a Document.
      * @return The serialized string.
      */
-    public String jsxFunction_serializeToString(final NodeImpl root) {
+    public String jsxFunction_serializeToString(final Node root) {
         final StringBuffer buffer = new StringBuffer();
         final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
         toXml(1, root.getDomNodeOrDie(), buffer, isIE);
