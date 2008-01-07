@@ -107,7 +107,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C Dom Level 1</a>
  */
-public class Document extends NodeImpl {
+public class Document extends Node {
 
     private static final long serialVersionUID = -7646789903352066465L;
 
@@ -1013,7 +1013,7 @@ public class Document extends NodeImpl {
     public Object jsxGet_body() {
         final List tagNames = Arrays.asList(new String[] {"body", "frameset"});
         final List list = getHtmlPage().getDocumentHtmlElement().getHtmlElementsByTagNames(tagNames);
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             return NOT_FOUND;
         }
         else {
@@ -1260,7 +1260,7 @@ public class Document extends NodeImpl {
      * @param nodeResolver The node to be used as a context for namespace resolution.
      * @return XPathNSResolver which resolves namespaces with respect to the definitions in scope for a specified node.
      */
-    public XPathNSResolver jsxFunction_createNSResolver(final NodeImpl nodeResolver) {
+    public XPathNSResolver jsxFunction_createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
         resolver.setElement(nodeResolver);
         resolver.setParentScope(getWindow());
@@ -1278,7 +1278,7 @@ public class Document extends NodeImpl {
      * @param result The result object which may be reused and returned by this method.
      * @return The result of the evaluation of the XPath expression.
      */
-    public XPathResult jsxFunction_evaluate(final String expression, final NodeImpl contextNode,
+    public XPathResult jsxFunction_evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
         

@@ -72,7 +72,7 @@
         <property name="screenY" readable="true" writable="false"/>
     </class>
 
-    <class name="CharacterDataImpl" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
+    <class name="CharacterDataImpl" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
@@ -85,7 +85,7 @@
         <function name="substringData"/>
     </class>
 
-    <class name="Document" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Document"
+    <class name="Document" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.Document"
         JSObject="true">
         <!-- NOT FINISHED -->
 
@@ -216,7 +216,7 @@
         </function>
     </class>
 
-    <class name="DocumentFragment" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment"
+    <class name="DocumentFragment" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomDocumentFragment">
     </class>
 
@@ -239,7 +239,7 @@
         <function name="parseFromString"/>
     </class>
 
-    <class name="Element" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
+    <class name="Element" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomElement">
     </class>
 
@@ -809,8 +809,20 @@
         <function name="taintEnabled"/>
     </class>
 
-    <class name="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.NodeImpl"
-        JSObject="false">
+    <class name="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.Node"
+        JSObject="true">
+        <constant name="ELEMENT_NODE"/>
+        <constant name="ATTRIBUTE_NODE"/>
+        <constant name="TEXT_NODE"/>
+        <constant name="CDATA_SECTION_NODE"/>
+        <constant name="ENTITY_REFERENCE_NODE"/>
+        <constant name="ENTITY_NODE"/>
+        <constant name="PROCESSING_INSTRUCTION_NODE"/>
+        <constant name="COMMENT_NODE"/>
+        <constant name="DOCUMENT_NODE"/>
+        <constant name="DOCUMENT_TYPE_NODE"/>
+        <constant name="DOCUMENT_FRAGMENT_NODE"/>
+        <constant name="NOTATION_NODE"/>
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -1338,7 +1350,7 @@
         <property name="url" readable="true" writable="false"/>
     </class>
 
-    <class name="XMLElement" extends="NodeImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLElement"
+    <class name="XMLElement" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLElement"
         htmlClass="com.gargoylesoftware.htmlunit.xml.XmlElement"
         JSObject="true">
         <property name="attributes" readable="true" writable="false"/>
