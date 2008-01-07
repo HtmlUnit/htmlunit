@@ -328,7 +328,7 @@ public class JavaScriptEngine implements Serializable {
             final String entryKey = (String) functionsIterator.next();
             final Method method = config.getFunctionMethod(entryKey);
             final FunctionObject functionObject = new FunctionObject(entryKey, method, scriptable);
-            scriptable.defineProperty(entryKey, functionObject, ScriptableObject.DONTENUM);
+            scriptable.defineProperty(entryKey, functionObject, ScriptableObject.EMPTY);
         }
     }
 

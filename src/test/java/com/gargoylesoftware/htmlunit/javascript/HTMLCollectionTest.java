@@ -175,33 +175,44 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testFor_in() throws Exception {
+        final String[] expectedAlertsIE = {"string length", "string myForm"};
+        testFor_in(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF = {"string 0", "string length", "string item", "string namedItem"};
+        testFor_in(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+    }
+
+    private void testFor_in(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    for (i in document.forms) {\n"
-            + "      alert(i);\n"
+            + "      alert((typeof i) + ' ' + i);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"length", "myForm"};
         final List collectedAlerts = new ArrayList();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
+     * <code>document.all.tags</code> is different from <code>document.forms.tags</code>!
      * @throws Exception if the test fails
      */
     public void testTags() throws Exception {
-        testTags(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true"});
-        testTags(BrowserVersion.FIREFOX_2, new String[] {"false"});
+        if (notYetImplemented()) {
+            return;
+        }
+        testTags(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "true"});
+        testTags(BrowserVersion.FIREFOX_2, new String[] {"true", "false"});
     }
 
     private void testTags(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    alert(document.all.tags != undefined);\n"
             + "    alert(document.forms.tags != undefined);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

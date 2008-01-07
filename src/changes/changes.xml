@@ -30,7 +30,7 @@
                 JavaScript: XMLHttpRequest.responseXML.getElementById should always return null (#1854975).
             </action>
             <action type="add" dev="asashour" id="1862054">
-                JavaScript: add support for "for (i in collection)" (to be used with IE only) (#1862054).
+                JavaScript: add support for "for (i in collection)" (#1862054).
             </action>
             <action type="add" dev="asashour">
                 JavaScript: XSLT support (ActiveXObject 'Msxml2.XSLTemplate') (IE only).

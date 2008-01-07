@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -53,6 +54,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -62,6 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -485,7 +488,23 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * {@inheritDoc}
      */
     public boolean has(final String name, final Scriptable start) {
-        return name.equals("length") || getWithPreemption(name) != NOT_FOUND;
+        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            if (name.equals("0") || name.equals("length")) {
+                return true;
+            }
+            final JavaScriptConfiguration jsConfig =
+                JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
+            final Set functionKeys = jsConfig.getClassConfiguration(getClassName()).functionKeys();
+            for (final Iterator functionIt = functionKeys.iterator(); functionIt.hasNext();) {
+                if (name.equals(functionIt.next())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return name.equals("length") || getWithPreemption(name) != NOT_FOUND;
+        }
     }
 
     /**
@@ -497,62 +516,79 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     public Object[] getIds() {
         final List idList = new ArrayList();
-        idList.add("length");
 
-        final List elements = getElements();
-        CollectionUtils.transform(elements, transformer_);
-
-        // See if there is an element in the element array with the specified id.
-        for (final Iterator iter = elements.iterator(); iter.hasNext();) {
-            final Object next = iter.next();
-            if (next instanceof HtmlElement) {
-                final HtmlElement element = (HtmlElement) next;
-                final String id = element.getId();
-                if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-                    idList.add(id);
-                }
+        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            idList.add("0");
+            idList.add("length");
+            final JavaScriptConfiguration jsConfig =
+                JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
+            final Set functionKeys = jsConfig.getClassConfiguration(getClassName()).functionKeys();
+            for (final Iterator functionIt = functionKeys.iterator(); functionIt.hasNext();) {
+                idList.add(functionIt.next());
             }
-            else if (next instanceof WebWindow) {
-                final WebWindow window = (WebWindow) next;
-                final String windowName = window.getName();
-                if (windowName != null) {
-                    idList.add(windowName);
-                }
-            }
-            else {
-                getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
-            }
+            //'document.all.tags' is different from 'document.forms.tags'
+            //See HTMLCollectionTest.testTags()
+            idList.remove("tags");
         }
+        else {
+            idList.add("length");
 
-        if (xpath_ != null) {
-            // See if there are any elements in the element array with the specified name.
-            final HTMLCollection array = new HTMLCollection(this);
-            try {
-                final String newCondition = "@name";
-                final String currentXPathExpr = xpath_.toString();
-                final String xpathExpr;
-                if (currentXPathExpr.endsWith("]")) {
-                    xpathExpr =
-                        currentXPathExpr.substring(0, currentXPathExpr.length() - 1) + " and " + newCondition + "]";
-                }
-                else {
-                    xpathExpr = currentXPathExpr + "[" + newCondition + "]";
-                }
-                final XPath xpathName = xpath_.getNavigator().parseXPath(xpathExpr);
-                array.init(node_, xpathName);
-            }
-            catch (final SAXPathException e) {
-                throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
-            }
+            final List elements = getElements();
+            CollectionUtils.transform(elements, transformer_);
 
-            final List subElements = array.getElements();
-            for (final Iterator it = subElements.iterator(); it.hasNext();) {
-                final DomNode next = (DomNode) it.next();
+            // See if there is an element in the element array with the specified id.
+            for (final Iterator iter = elements.iterator(); iter.hasNext();) {
+                final Object next = iter.next();
                 if (next instanceof HtmlElement) {
                     final HtmlElement element = (HtmlElement) next;
-                    final String id = element.getAttribute("name");
-                    if (id != null) {
+                    final String id = element.getId();
+                    if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
                         idList.add(id);
+                    }
+                }
+                else if (next instanceof WebWindow) {
+                    final WebWindow window = (WebWindow) next;
+                    final String windowName = window.getName();
+                    if (windowName != null) {
+                        idList.add(windowName);
+                    }
+                }
+                else {
+                    getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
+                }
+            }
+
+            if (xpath_ != null) {
+                // See if there are any elements in the element array with the specified name.
+                final HTMLCollection array = new HTMLCollection(this);
+                try {
+                    final String newCondition = "@name";
+                    final String currentXPathExpr = xpath_.toString();
+                    final String xpathExpr;
+                    if (currentXPathExpr.endsWith("]")) {
+                        xpathExpr =
+                            currentXPathExpr.substring(0, currentXPathExpr.length() - 1)
+                            + " and " + newCondition + "]";
+                    }
+                    else {
+                        xpathExpr = currentXPathExpr + "[" + newCondition + "]";
+                    }
+                    final XPath xpathName = xpath_.getNavigator().parseXPath(xpathExpr);
+                    array.init(node_, xpathName);
+                }
+                catch (final SAXPathException e) {
+                    throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
+                }
+
+                final List subElements = array.getElements();
+                for (final Iterator it = subElements.iterator(); it.hasNext();) {
+                    final DomNode next = (DomNode) it.next();
+                    if (next instanceof HtmlElement) {
+                        final HtmlElement element = (HtmlElement) next;
+                        final String id = element.getAttribute("name");
+                        if (id != null) {
+                            idList.add(id);
+                        }
                     }
                 }
             }
