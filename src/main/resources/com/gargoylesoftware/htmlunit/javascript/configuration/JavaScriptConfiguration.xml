@@ -1245,6 +1245,7 @@
                     descr="Mozilla documentation"/>
             <browser name="Firefox"/>
         </function>
+        <function name="resizeBy"/>
         <function name="resizeTo"/>
         <function name="scroll"/>
         <function name="scrollBy"/>

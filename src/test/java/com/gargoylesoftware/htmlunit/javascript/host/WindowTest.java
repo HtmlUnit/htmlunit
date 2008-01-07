@@ -1441,6 +1441,19 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
+     * Tests that the Window.resizeBy method gets correctly called and
+     * handled by the scripting engine.
+     * @throws Exception if the test fails
+     */
+    public void testResizeBy() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "window.resizeBy(10, 20);\n"
+            + "window.resizeBy(-10, 20);\n"
+            + "</script></head><body></body></html>";
+        loadPage(content);
+    }
+
+    /**
      * Test that Window.scroll method gets correctly called and handled
      * by the scripting engine.
      * @throws Exception if the test fails

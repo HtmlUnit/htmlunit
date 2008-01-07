@@ -631,6 +631,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
+     * @param width The width offset
+     * @param height The height offset.
+     */
+    public void jsxFunction_resizeBy(final int width, final int height) {
+        getLog().debug("Window.resizeBy() not implemented");
+    }
+
+    /**
+     * Does nothing.
      * @param width The width of the Window in pixel after resize.
      * @param height The height of the Window in pixel after resize.
      */

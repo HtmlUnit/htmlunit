@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript: add support for window.resizeBy.
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: StyleSheetList correctly loads CSS content (FF only).
             </action>
