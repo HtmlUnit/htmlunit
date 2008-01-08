@@ -193,7 +193,7 @@ public class Stylesheet extends SimpleScriptable {
      * @param source the source from which to retrieve the selectors to be parsed
      * @return the selectors parsed from the specified input source
      */
-    private SelectorList parseSelectors(final InputSource source) {
+    SelectorList parseSelectors(final InputSource source) {
         SelectorList selectors;
         try {
             selectors = PARSER.parseSelectors(source);
@@ -213,7 +213,8 @@ public class Stylesheet extends SimpleScriptable {
      * @param selector the selector to be translated
      * @return an XPath version of the specified selector
      */
-    private String translateToXPath(final Selector selector) {
+    String translateToXPath(final Selector selector) {
+        final String response;
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return "*";
@@ -223,7 +224,8 @@ public class Stylesheet extends SimpleScriptable {
                 final DescendantSelector cs = (DescendantSelector) selector;
                 final String p = translateToXPath(cs.getAncestorSelector());
                 final String c = translateToXPath(cs.getSimpleSelector());
-                return p + "/" + c;
+                response = p + "/" + c;
+                break;
             case Selector.SAC_COMMENT_NODE_SELECTOR:
                 return null;
             case Selector.SAC_CONDITIONAL_SELECTOR:
@@ -231,27 +233,30 @@ public class Stylesheet extends SimpleScriptable {
                 final String e = translateToXPath(conditional.getSimpleSelector());
                 final String cond = translateToXPath(conditional.getCondition());
                 if (cond != null) {
-                    return e + "[" + cond + "]";
+                    response = e + "[" + cond + "]";
                 }
                 else {
-                    return e;
+                    response = e;
                 }
+                break;
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 final String a = translateToXPath(ds.getAncestorSelector());
                 final String d = translateToXPath(ds.getSimpleSelector());
-                return a + "//" + d;
+                response = a + "//" + d;
+                break;
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 return null;
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
                 if (name != null) {
-                    return "//" + name;
+                    response = "//" + name;
                 }
                 else {
-                    return "*";
+                    response = "*";
                 }
+                break;
             case Selector.SAC_NEGATIVE_SELECTOR:
                 return null;
             case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
@@ -266,6 +271,8 @@ public class Stylesheet extends SimpleScriptable {
                 getLog().error("Unknown selector type '" + selector.getSelectorType() + "'.");
                 return null;
         }
+        
+        return response.replaceAll("/{3,}", "//");
     }
 
     /**
@@ -285,7 +292,7 @@ public class Stylesheet extends SimpleScriptable {
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
-                    return "@" + ac1.getLocalName() + "='" + ac1.getValue() + "'";
+                    return "@" + ac1.getLocalName() + " = '" + ac1.getValue() + "'";
                 }
                 else {
                     return "@" + ac1.getLocalName();
@@ -296,7 +303,7 @@ public class Stylesheet extends SimpleScriptable {
                                 + ac2.getLocalName() + ", concat( '" + ac2.getValue() + "', '-' ) )";
             case Condition.SAC_CLASS_CONDITION:
                 final AttributeCondition ac3 = (AttributeCondition) condition;
-                return "contains( concat( ' ', @class, ' ' ), concat( ' ', '" + ac3.getValue() + "', ' ' ) )";
+                return "contains( concat(' ', @class, ' '), concat(' ', '" + ac3.getValue() + "', ' ') )";
             case Condition.SAC_CONTENT_CONDITION:
                 return null;
             case Condition.SAC_ID_CONDITION:
@@ -308,8 +315,8 @@ public class Stylesheet extends SimpleScriptable {
                 return null;
             case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac5 = (AttributeCondition) condition;
-                return "contains( concat( ' ', @" + ac5.getLocalName() + ", ' ' ), " + "concat( ' ', '"
-                                + ac5.getValue() + "', ' ' ) )";
+                return "contains( concat(' ', @" + ac5.getLocalName() + ", ' '), " + "concat(' ', '"
+                                + ac5.getValue() + "', ' ') )";
             case Condition.SAC_ONLY_CHILD_CONDITION:
                 return null;
             case Condition.SAC_ONLY_TYPE_CONDITION:
