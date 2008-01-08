@@ -46,26 +46,16 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 public class Script extends HTMLElement {
 
     private static final long serialVersionUID = -4626517931702326308L;
 
-    /** The <tt>onreadystatechange</tt> handler. */
-    private Function stateChangeHandler_;
-
     /**
      * Creates an instance.
      */
     public Script() {
-        // Empty.
-    }
-
-    /**
-     * JavaScript constructor. This must be declared in every JavaScript file because the Rhino
-     * engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
         // Empty.
     }
 
@@ -105,16 +95,24 @@ public class Script extends HTMLElement {
      * Returns the event handler that fires on every state change.
      * @return The event handler that fires on every state change.
      */
-    public Function jsxGet_onreadystatechange() {
-        return stateChangeHandler_;
+    public Object jsxGet_onreadystatechange() {
+        return getEventHandlerProp("onreadystatechange");
+    }
+
+    /**
+     * Returns the event handler that fires on every state change.
+     * @return The event handler that fires on every state change.
+     */
+    public Function getOnReadyStateChangeHandler() {
+        return getEventHandler("onreadystatechange");
     }
 
     /**
      * Sets the event handler that fires on every state change.
-     * @param stateChangeHandler The event handler that fires on every state change.
+     * @param handler The event handler that fires on every state change.
      */
-    public void jsxSet_onreadystatechange(final Function stateChangeHandler) {
-        stateChangeHandler_ = stateChangeHandler;
+    public void jsxSet_onreadystatechange(final Object handler) {
+        setEventHandlerProp("onreadystatechange", handler);
     }
 
     /**

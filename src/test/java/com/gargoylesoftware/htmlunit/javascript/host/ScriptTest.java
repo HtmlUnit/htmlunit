@@ -75,6 +75,7 @@ public class ScriptTest extends WebTestCase {
             + "      var script = document.createElement('script');\n"
             + "      script.id = 'b';\n"
             + "      script.type = 'text/javascript';\n"
+            + "      script.onreadystatechange = null;"
             + "      script.onreadystatechange = function() {\n"
             + "        alert(script.id + '=' + script.readyState);\n"
             + "      }\n"

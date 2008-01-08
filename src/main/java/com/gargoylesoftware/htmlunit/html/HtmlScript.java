@@ -336,7 +336,7 @@ public class HtmlScript extends HtmlElement {
         if (getPage().getWebClient().getBrowserVersion().isIE()) {
             setReadyState(READY_STATE_COMPLETE);
             final Script script = (Script) getScriptObject();
-            final Function handler = script.jsxGet_onreadystatechange();
+            final Function handler = script.getOnReadyStateChangeHandler();
             if (handler != null) {
                 getPage().executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
             }
