@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -132,5 +135,35 @@ public class HtmlTextInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) textInput.type('\n');
         assertEquals("Second", secondPage.getTitleText());
 
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    public void testSelection() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html =
+              "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(getSelection(document.getElementById('text1')).length);\n"
+            + "  }\n"
+            + "  function getSelection(element) {\n"
+            + "    if (typeof element.selectionStart == 'number') {\n"
+            + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
+            + "    } else if (document.selection && document.selection.createRange) {\n"
+            + "      return document.selection.createRange().text;\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<input id='text1'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"0"};
+        final List collectedAlerts = new ArrayList();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
