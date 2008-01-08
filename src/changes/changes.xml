@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.14-prerelease">
+            <action type="fix" dev="mguillem" due-to="David (bylsmad)" id="1866448">
+                Don't escape '+' in URL path.
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: add support for 'Node' prototype.
             </action>

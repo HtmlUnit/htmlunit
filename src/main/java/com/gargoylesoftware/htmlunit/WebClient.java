@@ -1605,6 +1605,7 @@ public class WebClient implements Serializable {
         }
         final BitSet bits = new BitSet(str.length());
         bits.set('%');
+        bits.set('+');
         bits.or(allowed);
         return URIUtil.encode(str, bits);
     }

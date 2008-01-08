@@ -1640,4 +1640,15 @@ public class WebClientTest extends WebTestCase {
         loadPage(html, alerts);
         assertTrue(alerts.isEmpty());
     }
+
+    /**
+     * Test that '+' is not encoded in urls
+     * @throws Exception if the test fails
+     */
+    public void testPlusNotEncodedInUrl() throws Exception {
+        final URL url = new URL("http://host/search/my+category/");
+
+        final HtmlPage page = loadPage("<html></html>", new ArrayList(), url);
+        assertEquals("http://host/search/my+category/", page.getWebResponse().getUrl());
+    }
 }
