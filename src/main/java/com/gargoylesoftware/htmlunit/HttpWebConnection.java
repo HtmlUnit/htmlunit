@@ -201,6 +201,9 @@ public class HttpWebConnection extends WebConnectionImpl {
         if (path.length() == 0) {
             path = "/";
         }
+        else if (path.startsWith("//")) {
+            path = "//" + path; // cf https://issues.apache.org/jira/browse/HTTPCLIENT-727
+        }
         final HttpMethodBase httpMethod = buildHttpMethod(webRequestSettings.getSubmitMethod(), path);
         if (!(httpMethod instanceof EntityEnclosingMethod)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD

@@ -260,17 +260,18 @@ public class HttpWebConnectionTest extends BaseTestCase {
         server_ = startWebServer("./");
 
         final WebClient client = new WebClient();
-        final Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
-        final WebConnection defaultConnection = page
-                .getEnclosingWindow()
-                .getWebClient()
-                .getWebConnection();
+        Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
+        final WebConnection defaultConnection = client.getWebConnection();
         assertInstanceOf(
                 "HttpWebConnection should be the default",
                 defaultConnection,
                 HttpWebConnection.class);
         assertInstanceOf("Response should be valid HTML", page, HtmlPage.class);
 
+        // test that // is escaped
+        final URL url = new URL("http://localhost:" + PORT + "//src/test/resources/event_coordinates.html");
+        page = client.getPage(url);
+        assertEquals(url.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
 
     /**

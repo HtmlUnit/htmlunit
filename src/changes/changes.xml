@@ -17,7 +17,7 @@
                 JavaScript: StyleSheetList correctly loads CSS content (FF only).
             </action>
             <action type="add" dev="mguillem">
-                Add workaround for HttpClient's bug HTTPCLIENT-727 with urls containing double slash in path.
+                Correctly handle URLs with path starting with double slash.
             </action>
             <action type="add" dev="mguillem">
                 JavaScript: add configurable support for supported plugins and mime types (FF only). 
