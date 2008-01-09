@@ -195,7 +195,7 @@ public class Node extends SimpleScriptable {
             if (!(this instanceof DocumentFragment) && parentNode.getParentDomNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment =
-                    ((SgmlPage) parentNode.getNativePage()).createDomDocumentFragment();
+                    ((SgmlPage) parentNode.getPage()).createDomDocumentFragment();
                 fragment.appendDomChild(parentNode);
             }
         }
@@ -258,7 +258,7 @@ public class Node extends SimpleScriptable {
             //if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (getDomNodeOrDie().getParentDomNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
+                final DomDocumentFragment fragment = ((HtmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
                 fragment.appendDomChild(getDomNodeOrDie());
             }
         }
@@ -474,7 +474,7 @@ public class Node extends SimpleScriptable {
      */
     public ScriptResult executeEvent(final Event event) {
         if (eventListenersContainer_ != null) {
-            final HtmlPage page = getDomNodeOrDie().getPage();
+            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
             final boolean isIE = page.getWebClient().getBrowserVersion().isIE();
             final Window window = (Window) page.getEnclosingWindow().getScriptObject();
             final Object[] args = new Object[] {event};
@@ -508,7 +508,7 @@ public class Node extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
-        final HtmlPage page = getDomNodeOrDie().getPage();
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
         final boolean isIE = page.getWebClient().getBrowserVersion().isIE();
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         final Object[] args = new Object[] {event};

@@ -182,7 +182,7 @@ public class XmlElement extends DomNamespaceNode {
         if (attributes_ == Collections.EMPTY_MAP) {
             attributes_ = createAttributeMap(1);
         }
-        final XmlAttr newAttr = addAttributeToMap((XmlPage) getNativePage(), attributes_, namespaceURI,
+        final XmlAttr newAttr = addAttributeToMap((XmlPage) getPage(), attributes_, namespaceURI,
             qualifiedName, value);
         if (namespaceURI != null) {
             namespaces_.put(namespaceURI, newAttr.getPrefix());

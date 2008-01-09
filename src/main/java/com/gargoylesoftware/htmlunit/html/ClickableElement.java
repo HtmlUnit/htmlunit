@@ -125,7 +125,7 @@ public abstract class ClickableElement extends StyledElement {
             return getPage();
         }
 
-        final HtmlPage page = getPage();
+        final HtmlPage page = (HtmlPage) getPage();
 
         boolean stateUpdated = false;
         if (isStateUpdateFirst()) {

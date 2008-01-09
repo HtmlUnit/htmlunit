@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -240,7 +241,7 @@ public class SimpleScriptable extends ScriptableObject {
         }
         else {
             scriptable.setParentScope(ScriptableObject.getTopLevelScope(
-                    domNode.getPage().getScriptObject()));
+                    ((HtmlPage) domNode.getPage()).getScriptObject()));
         }
         
         scriptable.setPrototype(getPrototype(javaScriptClass));

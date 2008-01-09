@@ -43,6 +43,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -169,7 +170,7 @@ public class RowContainer extends HTMLElement {
     protected Object insertRow(final int index) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
-        final HtmlElement newRow = getDomNodeOrDie().getPage().createHtmlElement("tr");
+        final HtmlElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createHtmlElement("tr");
         if (rowCount == 0) {
             getDomNodeOrDie().appendDomChild(newRow);
         }

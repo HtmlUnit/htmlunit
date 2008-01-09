@@ -79,9 +79,10 @@ public abstract class BaseFrame extends StyledElement {
         try {
             // put about:blank in the window to allow JS to run on this frame before the
             // real content is loaded
-            getPage().getWebClient().pushClearFirstWindow();
-            getPage().getWebClient().getPage(enclosedWindow_, new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
-            getPage().getWebClient().popFirstWindow();
+            final WebClient webClient = getPage().getEnclosingWindow().getWebClient();
+            webClient.pushClearFirstWindow();
+            webClient.getPage(enclosedWindow_, new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+            webClient.popFirstWindow();
         }
         catch (final FailingHttpStatusCodeException e) {
             // should never occur
@@ -105,9 +106,9 @@ public abstract class BaseFrame extends StyledElement {
             source = "about:blank";
         }
         else {
-            getPage().getWebClient().pushClearFirstWindow();
+            getPage().getEnclosingWindow().getWebClient().pushClearFirstWindow();
             loadInnerPageIfPossible(source);
-            getPage().getWebClient().popFirstWindow();
+            getPage().getEnclosingWindow().getWebClient().popFirstWindow();
         }
     }
 
@@ -120,7 +121,7 @@ public abstract class BaseFrame extends StyledElement {
         if (src.length() != 0) {
             final URL url;
             try {
-                url = getPage().getFullyQualifiedUrl(src);
+                url = ((HtmlPage) getPage()).getFullyQualifiedUrl(src);
             }
             catch (final MalformedURLException e) {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
@@ -133,7 +134,7 @@ public abstract class BaseFrame extends StyledElement {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
                 settings.addAdditionalHeader("Referer", getPage().getWebResponse().getUrl().toExternalForm());
-                getPage().getWebClient().getPage(enclosedWindow_, settings);
+                getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);
             }
             catch (final IOException e) {
                 getLog().error("IOException when getting content for " + getTagName()

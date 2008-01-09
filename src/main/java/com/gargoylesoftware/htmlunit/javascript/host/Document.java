@@ -667,7 +667,7 @@ public class Document extends Node {
         else {
             final WebResponse webResponse
                 = new StringWebResponse(writeBuffer_.toString());
-            final HtmlPage page = getDomNodeOrDie().getPage();
+            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
 
@@ -711,14 +711,14 @@ public class Document extends Node {
     public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
-            final SgmlPage page = (SgmlPage) getDomNodeOrDie().getNativePage();
+            final SgmlPage page = (SgmlPage) getDomNodeOrDie().getPage();
             final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
 
             //IE can handle HTML
             if (tagName.startsWith("<") && browserVersion.isIE()) {
                 try {
                     final HtmlElement proxyNode =
-                        new HtmlDivision(null, HtmlDivision.TAG_NAME, getDomNodeOrDie().getPage(), null);
+                        new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) getDomNodeOrDie().getPage(), null);
                     HTMLParser.parseFragment(proxyNode, tagName);
                     final DomNode resultNode = proxyNode.getFirstDomChild();
                     resultNode.removeAllChildren();
@@ -777,7 +777,7 @@ public class Document extends Node {
         Object result = NOT_FOUND;
         try {
             final HtmlElement htmlElement =
-                getDomNodeOrDie().getPage().createHtmlElementNS(namespaceURI, qualifiedName);
+                ((HtmlPage) getDomNodeOrDie().getPage()).createHtmlElementNS(namespaceURI, qualifiedName);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {
@@ -800,7 +800,7 @@ public class Document extends Node {
      * @return a newly created DocumentFragment.
      */
     public Object jsxFunction_createDocumentFragment() {
-        final DomDocumentFragment fragment = ((SgmlPage) getDomNodeOrDie().getNativePage()).createDomDocumentFragment();
+        final DomDocumentFragment fragment = ((SgmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));
@@ -847,7 +847,7 @@ public class Document extends Node {
     public Object jsxFunction_createTextNode(final String newData) {
         Object result = NOT_FOUND;
         try {
-            final DomNode domNode = new DomText(getDomNodeOrDie().getNativePage(), newData);
+            final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
             final Object jsElement = getScriptableFor(domNode);
 
             if (jsElement == NOT_FOUND) {

@@ -307,7 +307,7 @@ public final class HTMLParser {
          */
         private HtmlUnitDOMBuilder(final DomNode page, final URL url) {
             super(new HTMLConfiguration());
-            this.page_ = page.getPage();
+            this.page_ = (HtmlPage) page.getPage();
 
             currentNode_ = page;
             stack_.push(currentNode_);

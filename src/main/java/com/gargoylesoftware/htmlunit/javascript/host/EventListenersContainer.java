@@ -150,7 +150,7 @@ class EventListenersContainer {
 
             ScriptResult result;
             final DomNode node = jsNode_.getDomNodeOrDie();
-            final HtmlPage page = node.getPage();
+            final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
             final List handlersToExecute = new ArrayList(handlers);
             for (final Iterator iter = handlersToExecute.iterator(); iter.hasNext();) {
@@ -170,7 +170,7 @@ class EventListenersContainer {
         final Function handler = getEventHandler(event.jsxGet_type());
         if (handler != null) {
             final DomNode node = jsNode_.getDomNodeOrDie();
-            final HtmlPage page = node.getPage();
+            final HtmlPage page = (HtmlPage) node.getPage();
             getLog().debug("Executing " + event.jsxGet_type() + " handler for " + node);
             return page.executeJavaScriptFunctionIfPossible(
                     handler, jsNode_, propHandlerArgs, node);

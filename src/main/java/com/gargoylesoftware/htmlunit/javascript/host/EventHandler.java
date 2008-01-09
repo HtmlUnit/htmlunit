@@ -73,7 +73,7 @@ public class EventHandler extends BaseFunction {
         eventName_ = eventName;
 
         final String functionSignature;
-        if (node.getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (node.getPage().getEnclosingWindow().getWebClient().getBrowserVersion().isIE()) {
             functionSignature = "function()";
         }
         else {

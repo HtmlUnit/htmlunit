@@ -637,7 +637,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             //create a DocumentFragment to be the parentNode's parentNode.
             if (domNode.getParentDomNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+                final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
                 fragment.appendDomChild(domNode);
             }
         }
@@ -658,7 +658,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         //create a DocumentFragment to be the parentNode's parentNode.
         if (domNode.getParentDomNode() == null
                 && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-            final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+            final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
             fragment.appendDomChild(domNode);
         }
     }
@@ -687,7 +687,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     private void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
 
-        final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, target.getPage(), null) {
+        final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) target.getPage(), null) {
             private static final long serialVersionUID = 2108037256628269797L;
             public DomNode appendDomChild(final DomNode node) {
                 if (append) {
@@ -1228,7 +1228,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         try {
             final URL newUrl = new URL(url);
             final URL currentUrl = getDomNodeOrDie().getPage().getWebResponse().getUrl();
-            final String home = getDomNodeOrDie().getPage().getWebClient().getHomePage();
+            final String home = getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().getHomePage();
             final boolean sameDomains = newUrl.getHost().equalsIgnoreCase(currentUrl.getHost());
             final boolean isHomePage = (home != null && home.equals(url));
             return (sameDomains && isHomePage);
@@ -1244,7 +1244,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param url the new homepage URL
      */
     public void setHomePage(final String url) {
-        getDomNodeOrDie().getPage().getWebClient().setHomePage(url);
+        getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().setHomePage(url);
     }
 
     /**
@@ -1253,7 +1253,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @throws IOException if loading home page fails
      */
     public void navigateHomePage() throws IOException {
-        final WebClient webClient = getDomNodeOrDie().getPage().getWebClient();
+        final WebClient webClient = getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient();
         webClient.getPage(webClient.getHomePage());
     }
 

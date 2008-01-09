@@ -1439,4 +1439,13 @@ public abstract class HtmlElement extends DomElement {
     public void focus() {
         getPage().moveFocusToElement(this);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlPage getPage() {
+        return (HtmlPage) super.getPage();
+    }
+
 }

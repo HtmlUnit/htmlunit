@@ -189,12 +189,7 @@ public class DocumentNavigator extends DefaultNavigator {
         if (contextNode instanceof Page) {
             return (Page) contextNode;
         }
-        if (contextNode instanceof XmlElement) {
-            return ((DomNode) contextNode).getNativePage();
-        }
-        else {
-            return ((DomNode) contextNode).getPage();
-        }
+        return ((DomNode) contextNode).getPage();
     }
 
     /**
@@ -430,7 +425,7 @@ public class DocumentNavigator extends DefaultNavigator {
      *  @see javax.xml.parsers.DocumentBuilderFactory
      */
     public Object getElementById(final Object contextNode, final String elementId) {
-        final HtmlPage page = ((DomNode) contextNode).getPage();
+        final HtmlPage page = (HtmlPage) ((DomNode) contextNode).getPage();
         try {
             return page.getHtmlElementById(elementId);
         }

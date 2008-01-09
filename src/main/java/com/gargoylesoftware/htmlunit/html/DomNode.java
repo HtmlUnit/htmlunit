@@ -234,24 +234,13 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Return the HtmlPage that contains this node
+     * Return the Page that contains this node
      *
      * @return See above
      */
-    public HtmlPage getPage() {
-        return (HtmlPage) page_;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * Returns the Page interface, should be removed, and use {@link #getPage()} instead.
-     *
-     * @return the Page interface.
-     */
-    public Page getNativePage() {
+    public Page getPage() {
         return page_;
     }
-    
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
@@ -771,11 +760,9 @@ public abstract class DomNode implements Cloneable, Serializable {
             }
             node.parent_ = this;
 
-            //TODO: should be
-            //  if (!(this instanceof DomDocumentFragment) && getPage() instanceof HtmlPage)
             if (!(this instanceof DomDocumentFragment)
-                    && (page_ instanceof HtmlPage || this instanceof HtmlPage)) {
-                getPage().notifyNodeAdded(node);
+                    && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
+                ((HtmlPage) getPage()).notifyNodeAdded(node);
             }
             fireNodeAdded(this, node);
         }
@@ -813,7 +800,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         previousSibling_ = newNode;
         newNode.parent_ = parent_;
 
-        getPage().notifyNodeAdded(newNode);
+        ((HtmlPage) getPage()).notifyNodeAdded(newNode);
         fireNodeAdded(this, newNode);
     }
 
@@ -828,8 +815,8 @@ public abstract class DomNode implements Cloneable, Serializable {
         final DomNode exParent = parent_;
         basicRemove();
         
-        if (getNativePage() instanceof HtmlPage) {
-            getPage().notifyNodeRemoved(this);
+        if (getPage() instanceof HtmlPage) {
+            ((HtmlPage) getPage()).notifyNodeRemoved(this);
         }
         
         fireNodeDeleted(exParent, this);
@@ -1096,7 +1083,8 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
 
         private HtmlElement getFirstChildElement(final DomNode parent) {
-            if (parent instanceof HtmlNoScript && getPage().getWebClient().isJavaScriptEnabled()) {
+            if (parent instanceof HtmlNoScript
+                    && getPage().getEnclosingWindow().getWebClient().isJavaScriptEnabled()) {
                 return null;
             }
             DomNode node = parent.getFirstDomChild();
@@ -1188,7 +1176,8 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param message the notification
      */
     protected void notifyIncorrectness(final String message) {
-        final IncorrectnessListener incorrectnessListener = getPage().getWebClient().getIncorrectnessListener();
+        final IncorrectnessListener incorrectnessListener =
+            getPage().getEnclosingWindow().getWebClient().getIncorrectnessListener();
         incorrectnessListener.notify(message, this);
     }
 
