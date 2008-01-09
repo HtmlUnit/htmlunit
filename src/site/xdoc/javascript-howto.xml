@@ -129,8 +129,8 @@ public void testAlerts() throws Exception {
 
         <section name="Event handlers">
             <p>
-                Some event handlers are already implemented and will 
-                be triggered at the appropriate time (see table below).  
+                Most event handlers are already implemented: onload, onclick, ondblclick, onmouseup, onsubmit, onreadystatechange, ... 
+                They will be triggered at the appropriate time just like in a "real browser".  
             </p>
             <p>
             	If the event that you wish to test is not yet supported then you can 
@@ -140,108 +140,6 @@ public void testAlerts() throws Exception {
                 other choice.  It is much better to manipulate the page as a user would
                 by clicking on elements and shifting the focus around.
             </p>
-            <table>            
-                <tr>
-                    <th>Event</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>onload</td>
-                    <td>
-                    	"onload" handlers on body or frameset elements will be triggered 
-                    	after the page has been loaded but before it is returned 
-                    	to the caller.
-                    </td>
-                </tr>
-                <tr>
-                    <td>onunload</td>
-                    <td>Not implemented yet</td>
-                </tr>
-                <tr>
-                    <td>onclick</td>
-                    <td>
-                    	This will be triggered when the click() method of a ClickableElement
-                    	is called.
-                    </td>
-                </tr>
-                <tr>
-                    <td>ondblclick</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onmousedown</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onmouseup</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onmouseover</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onmousemove</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onmouseout</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onfocus</td>
-                    <td>
-	                    The method WebClient.moveFocusToElement(...) will change the focus
-    		            to the appropriate element.  This event will be triggered when
-    		            an element gets focus.
-                    </td>
-                </tr>
-                <tr>
-                    <td>onblur</td>
-                    <td>
-	                    The method WebClient.moveFocusToElement(...) will change the focus
-    		            to the appropriate element.  This event will be triggered when
-    		            an element loses focus.
-                    </td>
-                </tr>
-                <tr>
-                    <td>onkeypress</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onkeydown</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onkeyup</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onsubmit</td>
-                    <td>
-                    	This will be triggered when a form is submitted using a control
-                    	on the form.
-                    </td>
-                </tr>
-                <tr>
-                    <td>onreset</td>
-                    <td>
-                    	This will be triggered when a form is reset either by
-                    	HtmlForm.reset() or via the javascript reset() method.
-                    </td>
-                </tr>
-                <tr>
-                    <td>onselect</td>
-                    <td>Not implemented yet.</td>
-                </tr>
-                <tr>
-                    <td>onchange</td>
-                    <td>
-                    	This will be triggered when the appropriate setValueAttribute()
-                    	method is called.
-                    </td>
-                </tr>
-            </table>
         </section>
     </body>
 
