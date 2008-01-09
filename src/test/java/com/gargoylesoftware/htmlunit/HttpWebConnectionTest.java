@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -52,6 +54,7 @@ import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.mortbay.jetty.Handler;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.HandlerList;
@@ -417,5 +420,25 @@ public class HttpWebConnectionTest extends BaseTestCase {
     public void testStateAccess() throws Exception {
         final WebClient webClient = new WebClient();
         webClient.getWebConnection().getState();
+    }
+
+    /**
+     * Test that the right file part is built for a file that doesn't exist
+     * @throws Exception if the test fails
+     */
+    public void testBuildFilePart() throws Exception {
+        final String encoding = "ISO8859-1";
+        final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "text/plain", encoding);
+        final FilePart part = new HttpWebConnection(new WebClient()).buildFilePart(pair, encoding);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        part.send(baos);
+        
+        final String expected = "------------------314159265358979323846\r\n"
+            + "Content-Disposition: form-data; name=\"myFile\"; filename=\"doesnt_exist.txt\"\r\n"
+            + "Content-Type: text/plain\r\n"
+            + "Content-Transfer-Encoding: binary\r\n"
+            + "\r\n"
+            + "\r\n";
+        assertEquals(expected, baos.toString(encoding));
     }
 }
