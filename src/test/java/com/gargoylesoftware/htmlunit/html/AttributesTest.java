@@ -37,12 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -245,24 +242,8 @@ public class AttributesTest extends WebTestCase {
                     page_, HtmlTableDataCell.TAG_NAME, null);
         }
         else {
-            final Constructor constructor = classUnderTest_.getDeclaredConstructor(
-                new Class[]{HtmlPage.class, Map.class});
-            try {
-                newInstance = constructor.newInstance(
-                    new Object[]{page_, null});
-            }
-            catch (final InvocationTargetException e) {
-                final Throwable targetException = e.getTargetException();
-                if (targetException instanceof Exception) {
-                    throw (Exception) targetException;
-                }
-                else if (targetException instanceof Error) {
-                    throw (Error) targetException;
-                }
-                else {
-                    throw e;
-                }
-            }
+            final String tagName = (String) classUnderTest_.getField("TAG_NAME").get(null);
+            newInstance = new DefaultElementFactory().createElement(page_, tagName, null);
         }
 
         return newInstance;
