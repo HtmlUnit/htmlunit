@@ -10,7 +10,7 @@
             <action type="fix" dev="mguillem">
                 JavaScript: allow script node's onreadystatechange handler to be set to null.
             </action>
-            <action type="fix" dev="mguillem" due-to="David (bylsmad)" id="1866448">
+            <action type="fix" dev="mguillem" due-to="David Bylsma" id="1866448">
                 Don't escape '+' in URL path.
             </action>
             <action type="add" dev="mguillem">
