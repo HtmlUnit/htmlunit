@@ -6,6 +6,11 @@
     </properties>
 
     <body>
+        <release version="1.15-prerelease">
+            <action type="remove" dev="asashour">
+                Remove the public (deprecated) constructor of HtmlElement and its subclasses.
+            </action>
+        </release>
         <release version="1.14">
             <action type="fix" dev="mguillem">
                 JavaScript: allow script node's onreadystatechange handler to be set to null.

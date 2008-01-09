@@ -68,20 +68,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * If no value is specified, it is set to "on" as browsers do (eg IE6 and Mozilla 1.7)
      * even if spec says that it is not allowed
      * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
-     * @param page The page that contains this element
-     * @param attributes the initial attributes
-     * @deprecated You should not directly construct HtmlRadioButtonInput.
-     */
-    //TODO: to be removed, deprecated after 1.11
-    public HtmlRadioButtonInput(final HtmlPage page, final Map attributes) {
-        this(null, TAG_NAME, page, attributes);
-    }
-    
-    /**
-     * Create an instance
-     * If no value is specified, it is set to "on" as browsers do (eg IE6 and Mozilla 1.7)
-     * even if spec says that it is not allowed
-     * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The page that contains this element

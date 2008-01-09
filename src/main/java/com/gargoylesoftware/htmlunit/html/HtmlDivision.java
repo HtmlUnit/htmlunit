@@ -56,18 +56,6 @@ public class HtmlDivision extends ClickableElement {
     public static final String TAG_NAME = "div";
 
     /**
-     * Create an instance of HtmlDivision
-     *
-     * @param page The HtmlPage that contains this element.
-     * @param attributes the initial attributes
-     * @deprecated You should not directly construct HtmlDivision.
-     */
-    //TODO: to be removed, deprecated after 1.11
-    public HtmlDivision(final HtmlPage page, final Map attributes) {
-        this(null, TAG_NAME, page, attributes);
-    }
-
-    /**
      * Create an instance of HtmlDivision.
      *
      * <p><b>Don't directly construct, it is public as an implementation side-effect.</b>

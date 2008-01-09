@@ -57,17 +57,6 @@ public class HtmlFrame extends BaseFrame {
     public static final String TAG_NAME = "frame";
 
     /**
-     * Create an instance of HtmlFrame
-     *
-     * @param page The HtmlPage that contains this element.
-     * @param attributes the initial attributes
-     * @deprecated You should not directly construct HtmlFrame.
-     */
-    //TODO: to be removed, deprecated after 1.11
-    public HtmlFrame(final HtmlPage page, final Map attributes) {
-        this(null, TAG_NAME, page, attributes);
-    }
-
     /**
      * Create an instance of HtmlFrame
      *

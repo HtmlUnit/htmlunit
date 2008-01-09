@@ -55,17 +55,6 @@ public class HtmlPasswordInput extends HtmlInput {
 
     /**
      * Create an instance.
-     * @param page The page that contains this element
-     * @param attributes the initial attributes
-     * @deprecated You should not directly construct HtmlPasswordInput.
-     */
-    //TODO: to be removed, deprecated after 1.11
-    public HtmlPasswordInput(final HtmlPage page, final Map attributes) {
-        this(null, TAG_NAME, page, attributes);
-    }
-
-    /**
-     * Create an instance.
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The page that contains this element

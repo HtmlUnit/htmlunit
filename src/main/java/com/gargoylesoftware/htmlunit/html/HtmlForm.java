@@ -97,18 +97,6 @@ public class HtmlForm extends ClickableElement {
     /**
      * Create an instance
      *
-     * @param htmlPage The page that contains this element
-     * @param attributes the initial attributes
-     * @deprecated You should not directly construct HtmlForm.
-     */
-    //TODO: to be removed, deprecated after 1.11
-    public HtmlForm(final HtmlPage htmlPage, final Map attributes) {
-        this(null, TAG_NAME, htmlPage, attributes);
-    }
-
-    /**
-     * Create an instance
-     *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param htmlPage The page that contains this element
