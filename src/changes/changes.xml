@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="1.14-prerelease">
+        <release version="1.14">
             <action type="fix" dev="mguillem">
                 JavaScript: allow script node's onreadystatechange handler to be set to null.
             </action>
