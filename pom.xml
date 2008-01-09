@@ -160,7 +160,11 @@ The reference stays the maven 1 build.
 		<developerConnection>scm:svn:https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit</developerConnection>
 		<url>http://htmlunit.svn.sourceforge.net/viewvc/htmlunit</url>
 	</scm>
-	<mailingLists>
+  	<ciManagement>
+  	  	<system>Cruise Control</system>
+  	  	<url>http://build.canoo.com/htmlunit</url>
+  	</ciManagement>
+  	<mailingLists>
 		<mailingList>
 			<name>HtmlUnit Users</name>
 			<subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
@@ -366,6 +370,24 @@ The reference stays the maven 1 build.
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 			<version>1.1.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>dom4j</groupId>
+					<artifactId>dom4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>jdom</groupId>
+					<artifactId>jdom</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xom</groupId>
+					<artifactId>xom</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
