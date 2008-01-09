@@ -8,6 +8,9 @@
     <body>
         <release version="1.15-prerelease">
             <action type="remove" dev="asashour">
+                Remove deprecated DomNode.XXXX_NODE, use org.w3c.dom.Node instead.
+            </action>
+            <action type="remove" dev="asashour">
                 Remove the public (deprecated) constructor of HtmlElement and its subclasses.
             </action>
         </release>

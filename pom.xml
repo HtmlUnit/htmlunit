@@ -37,8 +37,8 @@ The reference stays the maven 1 build.
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<!-- Update the links reference in javadoc and clover plugins when this changes -->
-					<source>1.4</source>
-					<target>1.4</target>
+					<source>1.5</source>
+					<target>1.5</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -76,7 +76,7 @@ The reference stays the maven 1 build.
 				<groupId>com.atlassian.maven.plugins</groupId>
 				<configuration>
 					<licenseLocation>${basedir}/clover2.license</licenseLocation>
-					<jdk>1.4</jdk>
+					<jdk>1.5</jdk>
 				</configuration>
 				<executions>
 					<execution>
@@ -97,7 +97,7 @@ The reference stays the maven 1 build.
 				<configuration>
 					<excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl</excludePackageNames>
 					<links>
-						<link>http://java.sun.com/j2se/1.4.2/docs/api/</link>
+						<link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
 						<link>http://jakarta.apache.org/commons/logging/apidocs/</link>
 						<link>http://jakarta.apache.org/commons/codec/apidocs/</link>
 						<link>http://jakarta.apache.org/commons/httpclient/apidocs/</link>
@@ -138,7 +138,7 @@ The reference stays the maven 1 build.
 				<artifactId>maven-clover-plugin</artifactId>
 				<configuration>
 					<licenseLocation>${basedir}/clover2.license</licenseLocation>
-					<jdk>1.4</jdk>
+					<jdk>1.5</jdk>
 				</configuration>
 			</plugin>
  		</plugins>
