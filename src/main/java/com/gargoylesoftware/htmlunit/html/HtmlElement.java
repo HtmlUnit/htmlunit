@@ -912,8 +912,8 @@ public abstract class HtmlElement extends DomElement {
      * @param tagName the tag name to match
      * @return The list of tag names
      */
-    public final List getHtmlElementsByTagName(final String tagName) {
-        final List list = new ArrayList();
+    public final List< ? extends HtmlElement> getHtmlElementsByTagName(final String tagName) {
+        final List<HtmlElement> list = new ArrayList<HtmlElement>();
         final DescendantElementsIterator iterator = new DescendantElementsIterator();
         final String lowerCaseTagName = tagName.toLowerCase();
 
@@ -936,7 +936,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public final HtmlElement appendChildIfNoneExists(final String tagName) {
         final HtmlElement child;
-        final List children = getHtmlElementsByTagName(tagName);
+        final List< ? extends HtmlElement> children = getHtmlElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
             child = getPage().createHtmlElement(tagName);
@@ -944,7 +944,7 @@ public abstract class HtmlElement extends DomElement {
         }
         else {
             // Return the first existing child.
-            child = (HtmlElement) children.get(0);
+            child = children.get(0);
         }
         return child;
     }
@@ -956,9 +956,9 @@ public abstract class HtmlElement extends DomElement {
      * @param i the index of the child to remove
      */
     public final void removeChild(final String tagName, final int i) {
-        final List children = getHtmlElementsByTagName(tagName);
+        final List< ? extends HtmlElement> children = getHtmlElementsByTagName(tagName);
         if (i >= 0 && i < children.size()) {
-            final HtmlElement child = (HtmlElement) children.get(i);
+            final HtmlElement child = children.get(i);
             child.remove();
         }
     }

@@ -337,10 +337,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return See above
      * @exception MalformedURLException If an error occurred when creating a URL object
      */
+    @SuppressWarnings("unchecked")
     public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
 
-        final List baseElements = getDocumentHtmlElement().getHtmlElementsByTagName("base");
+        final List<HtmlBase> baseElements = (List<HtmlBase>) getDocumentHtmlElement().getHtmlElementsByTagName("base");
         URL baseUrl;
         if (baseElements.isEmpty()) {
             baseUrl = getWebResponse().getUrl();
@@ -1113,6 +1114,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * Executes any deferred scripts, if necessary.
      */
+    @SuppressWarnings("unchecked")
     private void executeDeferredScriptsIfNeeded() {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
@@ -1120,9 +1122,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         if (!getWebClient().getBrowserVersion().isIE()) {
             return;
         }
-        final List scripts = getDocumentHtmlElement().getHtmlElementsByTagName("script");
-        for (final Iterator i = scripts.iterator(); i.hasNext();) {
-            final HtmlScript script = (HtmlScript) i.next();
+        for (final HtmlScript script : (List<HtmlScript>)
+                getDocumentHtmlElement().getHtmlElementsByTagName("script")) {
             final String defer = script.getDeferAttribute();
             if (defer != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
                 script.executeScriptIfNeeded(true);

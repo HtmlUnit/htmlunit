@@ -166,8 +166,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *
      * @return See above
      */
-    public List getOptions() {
-        final List elementList = getHtmlElementsByTagName("option");
+    @SuppressWarnings("unchecked")
+    public List<HtmlOption> getOptions() {
+        final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
         return Collections.unmodifiableList(elementList);
     }
 
@@ -177,9 +178,10 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param index The index
      * @return The option specified by the index
      */
+    @SuppressWarnings("unchecked")
     public HtmlOption getOption(final int index) {
-        final List elementList = getHtmlElementsByTagName("option");
-        return (HtmlOption) elementList.get(index);
+        final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
+        return elementList.get(index);
     }
 
     /**
@@ -187,7 +189,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return The number of options
      */
     public int getOptionSize() {
-        final List elementList = getHtmlElementsByTagName("option");
+        final List< ? extends HtmlElement> elementList = getHtmlElementsByTagName("option");
         return elementList.size();
     }
 
@@ -197,10 +199,10 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param newLength The new length property value
      */
     public void setOptionSize(final int newLength) {
-        final List elementList = getHtmlElementsByTagName("option");
+        final List< ? extends HtmlElement> elementList = getHtmlElementsByTagName("option");
 
         for (int i = elementList.size() - 1; i >= newLength; i--) {
-            ((HtmlElement) elementList.get(i)).remove();
+            elementList.get(i).remove();
         }
     }
 
