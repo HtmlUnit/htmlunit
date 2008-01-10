@@ -37,12 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import java.io.File;
 import java.net.URL;
+
+import org.apache.commons.io.FileUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 
 /**
  * Tests for compatibility with version 1.6.0 of
@@ -231,12 +235,23 @@ public class Prototype160Test extends WebTestCase {
         final URL url = getClass().getClassLoader().getResource("prototype/1.6.0/test/unit/" + filename);
         assertNotNull(url);
 
+        HtmlUnitContextFactory.setDebuggerEnabled(true);
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         final String summary = page.getHtmlElementById("logsummary").asText();
         final String expected = tests + " tests, " + assertions + " assertions, " + failures + " failures, "
              + errors + " errors";
+
+        // dump the result page if not ok
+        if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null && !expected.equals(summary)) {
+            final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
+            final File f = new File(tmpDir, "prototype160_result_" + filename);
+            FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
+            getLog().info("Test result for " + filename + " written to: " + f.getAbsolutePath());
+        }
+            
+        
         assertEquals(expected, summary);
     }
 
