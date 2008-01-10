@@ -103,10 +103,10 @@ public class SimpleScriptableTest extends WebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
-        final List expectedAlerts = Collections.singletonList("past focus");
+        final List<String> expectedAlerts = Collections.singletonList("past focus");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
@@ -122,7 +122,7 @@ public class SimpleScriptableTest extends WebTestCase {
     public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map map = JavaScriptConfiguration.getHtmlJavaScriptMapping();
         final String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
-        final Set names = getFileNames(directoryName.replace('/', File.separatorChar));
+        final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
 
         // Now pull out those names that we know don't have html equivalents
         names.remove("ActiveXObject");
@@ -149,10 +149,12 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("RowContainer");
         names.remove("Screen");
         names.remove("ScoperFunctionObject");
+        names.remove("Selection");
         names.remove("SimpleArray");
         names.remove("Style");
         names.remove("Stylesheet");
         names.remove("StyleSheetList");
+        names.remove("TextRange");
         names.remove("TextRectangle");
         names.remove("UIEvent");
         names.remove("Window");
@@ -175,7 +177,7 @@ public class SimpleScriptableTest extends WebTestCase {
         assertEquals(new TreeSet(names), new TreeSet(hostClassNames));
     }
 
-    private Set getFileNames(final String directoryName) {
+    private Set<String> getFileNames(final String directoryName) {
         File directory = new File("." + File.separatorChar + directoryName);
         if (!directory.exists()) {
             directory = new File("./src/main/java/".replace('/', File.separatorChar) + directoryName);
@@ -184,7 +186,7 @@ public class SimpleScriptableTest extends WebTestCase {
         assertTrue("is a directory", directory.isDirectory());
 
         final String fileNames[] = directory.list();
-        final Set collection = new HashSet();
+        final Set<String> collection = new HashSet<String>();
 
         for (int i = 0; i < fileNames.length; i++) {
             final String name = fileNames[i];
@@ -233,7 +235,7 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"[object Object]"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -254,7 +256,7 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"3"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

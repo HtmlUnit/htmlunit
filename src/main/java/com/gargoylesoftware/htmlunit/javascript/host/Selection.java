@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+
 
 /**
  * A JavaScript object for a Selection.
@@ -45,7 +47,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class Selection extends HTMLElement {
+public class Selection extends SimpleScriptable {
 
     private static final long serialVersionUID = 3712755502782559551L;
 
