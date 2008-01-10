@@ -108,43 +108,6 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Submit this form to the appropriate server as if a submit button had been pressed
-     *
-     * @param buttonName The name of a submit input element or a button element
-     *        which will be sent back up with the response
-     * @return A new Page that reflects the results of this submission
-     * @throws IOException If an IO error occurs
-     * @throws ElementNotFoundException If a button with the specified name cannot be found.
-     * @deprecated after 1.11, click on the specific {@link SubmittableElement} instead.
-     */
-    public Page submit(final String buttonName) throws IOException, ElementNotFoundException {
-        final List inputList = getHtmlElementsByAttribute("input", "name", buttonName);
-        final Iterator iterator = inputList.iterator();
-        while (iterator.hasNext()) {
-            final HtmlInput input = (HtmlInput) iterator.next();
-            if (input.getTypeAttribute().equals("submit")) {
-                return submit(input);
-            }
-        }
-
-        final HtmlButton button = (HtmlButton) getOneHtmlElementByAttribute("button", "name", buttonName);
-        return submit(button);
-    }
-
-    /**
-     * Submit this form to the appropriate server as if it had been submitted
-     * by javascript - i.e. no submit buttons were pressed.  Note that because we
-     * are simulating a javascript submit, the onsubmit handler will not get executed.
-     *
-     * @return A new Page that reflects the results of this submission
-     * @exception IOException If an IO error occurs
-     * @deprecated after 1.11, click on a specific {@link SubmittableElement} instead.
-     */
-    public Page submit() throws IOException {
-        return submit((SubmittableElement) null);
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Submit this form to the appropriate server.  If submitElement is null then

@@ -8,7 +8,7 @@
     <body>
         <release version="2.0-prerelease">
             <action type="remove" dev="asashour">
-                Remove deprecated constants in BrowserVersion.
+                Remove deprecated constants in BrowserVersion, in addition to HtmlForm.submit().
             </action>
             <action type="update" dev="asashour">
                 Deprecate DomNode.getChildIterator(), use getChildren() instead.
