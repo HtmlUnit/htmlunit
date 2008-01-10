@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.15-prerelease">
+            <action type="remove" dev="asashour">
+                Remove deprecated constants in BrowserVersion.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate DomNode.getChildIterator(), use getChildren() instead.
             </action>

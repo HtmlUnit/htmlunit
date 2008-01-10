@@ -1061,14 +1061,15 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @return See {@link XPath#selectNodes(Object)}
      * @throws JaxenException if the xpath expression can't be parsed/evaluated
      */
-    public List getByXPath(final String xpathExpr) throws JaxenException {
+    @SuppressWarnings("unchecked")
+    public List<Object> getByXPath(final String xpathExpr) throws JaxenException {
         if (xpathExpr == null) {
             throw new NullPointerException("Null is not a valid xpath expression");
         }
 
         final Navigator navigator = HtmlUnitXPath.buildSubtreeNavigator(this);
         final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr, navigator);
-        return xpath.selectNodes(this);
+        return (List<Object>) xpath.selectNodes(this);
     }
 
     /**
@@ -1080,7 +1081,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @throws JaxenException if the xpath expression can't be parsed/evaluated
      */
     public Object getFirstByXPath(final String xpathExpr) throws JaxenException {
-        final List results = getByXPath(xpathExpr);
+        final List<Object> results = getByXPath(xpathExpr);
         if (results.isEmpty()) {
             return null;
         }
@@ -1111,7 +1112,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         Assert.notNull("listener", listener);
         synchronized (domListeners_lock_) {
             if (domListeners_ == null) {
-                domListeners_ = new ArrayList();
+                domListeners_ = new ArrayList<DomChangeListener>();
             }
             if (!domListeners_.contains(listener)) {
                 domListeners_.add(listener);
@@ -1146,11 +1147,10 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param addedNode the node that was added.
      */
     protected void fireNodeAdded(final DomNode parentNode, final DomNode addedNode) {
-        final List listeners = safeGetDomListeners();
+        final List<DomChangeListener> listeners = safeGetDomListeners();
         if (listeners != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
-            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
-                final DomChangeListener listener = (DomChangeListener) iterator.next();
+            for (final DomChangeListener listener : listeners) {
                 listener.nodeAdded(event);
             }
         }
@@ -1169,11 +1169,10 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @param deletedNode the node that was deleted.
      */
     protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
-        final List listeners = safeGetDomListeners();
+        final List<DomChangeListener> listeners = safeGetDomListeners();
         if (listeners != null) {
             final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
-            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
-                final DomChangeListener listener = (DomChangeListener) iterator.next();
+            for (final DomChangeListener listener : listeners) {
                 listener.nodeDeleted(event);
             }
         }
@@ -1182,10 +1181,10 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
     }
 
-    private List safeGetDomListeners() {
+    private List<DomChangeListener> safeGetDomListeners() {
         synchronized (domListeners_lock_) {
             if (domListeners_ != null) {
-                return new ArrayList(domListeners_);
+                return new ArrayList<DomChangeListener>(domListeners_);
             }
             else {
                 return null;

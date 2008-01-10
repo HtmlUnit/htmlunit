@@ -53,7 +53,7 @@ public class PluginConfiguration {
     private String description_;
     private String filename_;
     private String name_;
-    private Set mimeTypes_ = new HashSet();
+    private Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<PluginConfiguration.MimeType>();
     
     /**
      * Holds information about a single mime type associated with a plugin
@@ -147,7 +147,7 @@ public class PluginConfiguration {
      * Gets the associated mime types
      * @return a set of {@link MimeType}
      */
-    public Set getMimeTypes() {
+    public Set<PluginConfiguration.MimeType> getMimeTypes() {
         return mimeTypes_;
     }
     

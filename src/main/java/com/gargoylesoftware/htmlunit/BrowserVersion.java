@@ -79,7 +79,7 @@ public class BrowserVersion implements Serializable {
     private String javaScriptVersion_;
     private float javaScriptVersionNumeric_;
     private float browserVersionNumeric_;
-    private Set plugins_ = new HashSet();
+    private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
 
     /** Application code name for both Microsoft Internet Explorer and Netscape series */
     public static final String APP_CODE_NAME = "Mozilla";
@@ -98,40 +98,6 @@ public class BrowserVersion implements Serializable {
 
     /** The WIN32 platform. */
     public static final String PLATFORM_WIN32 = "Win32";
-
-    /**
-     * A fake browser that supports all the new features. This constant is used whenever
-     * you don't care which browser is being simulated.
-     * @deprecated please use INTERNET_EXPLORER_7_0
-     */
-    public static final BrowserVersion FULL_FEATURED_BROWSER = new BrowserVersion(
-        INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
-        "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)", "1.2", 6);
-
-    /**
-     * Mozilla 1.0
-     * @deprecated please use FIREFOX_2
-     */
-    public static final BrowserVersion MOZILLA_1_0 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.0) Gecko/20020530", "1.2", 6);
-
-    /**
-     * Netscape 4.79
-     * @deprecated please use FIREFOX_2
-     */
-    public static final BrowserVersion NETSCAPE_4_7_9 = new BrowserVersion(
-        NETSCAPE, "4.79 [en] (Windows NT 5.0; U)",
-        "Mozilla/4.79 [en] (Windows NT 5.0; U)", "1.2", 4.79f);
-
-    /**
-     * Netscape 6.2.3
-     * @deprecated please use FIREFOX_2
-     */
-    public static final BrowserVersion NETSCAPE_6_2_3 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US;rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3",
-        "1.2", 6);
 
     /** Firefox 2 */
     public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
@@ -464,7 +430,7 @@ public class BrowserVersion implements Serializable {
      * of information available through javascript
      * @return the available plugins
      */
-    public Set getPlugins() {
+    public Set<PluginConfiguration> getPlugins() {
         return plugins_;
     }
 }
