@@ -19,26 +19,25 @@
             	some setup.
             	<ol>
            			<li>
-           				[Maven1] You might need to specify the following properties to maven.
-           				You can do this with a build.properties file, in the project
-           				directory or in your home directory, or on the command line
-           				with the -D option.
+           				Configure your SourceForge username in ~/.m2/settings.xml (see <a href="http://maven.apache.org/guides/mini/guide-deployment-security-settings.html">Security and Deployment Settings</a>). 
+						As an example, my settings.xml looks like:
 <source>
-maven.username=(your sf.net username)
-maven.scp.executable=(full path to a scp app if no "scp" on your path)
-maven.ssh.executable=(full path to a ssh app if no "ssh" on your path)
+<![CDATA[
+<settings>
+  ...
+  <servers>
+    <server>
+      <id>htmlunit-website</id>
+      <username>mguillem</username>
+      <!-- optional element:
+        <password>my_login_password</password>
+      -->
+    </server>
+  </servers>
+  ...
+</settings>
+]]>
 </source>
-
-						As an example, my setup is:
-<source>
-maven.username=yourgod
-maven.scp.executable=C:/programs/ssh/pscp.exe
-maven.ssh.executable=C:/programs/ssh/plink.exe
-</source>
-						Also, since I am using putty I needed to manually connect to
-						the server once to trust the host. You may need to do something
-						similar for your ssh client.
-						<source>c:\programs\ssh\plink.exe -l yourgod projects.sourceforge.net</source>
            			</li>
            		</ol>
        		</p>
@@ -55,8 +54,8 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                         Update the version number and release date in src/changes/changes.xml
                     </li>
                     <li>
-                        Build the zip
-                        <source>mvn clean assembly:assembly</source>
+                        Build the zip files
+                        <source>mvn clean site:site assembly:assembly</source>
                     </li>
                     <li>
                         Upload the two zip files to SourceForge following 
@@ -68,16 +67,18 @@ maven.ssh.executable=C:/programs/ssh/plink.exe
                     </li>
                     <li>
                         Assuming that everything has gone smoothly so far, make sure everything is checked
-                        in and tag the repository with a name like this "HtmlUnit-1dot1" that reflects
-                        the current build version.
+                        in and tag the repository (to https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/tags/) 
+                        with a name like this "HtmlUnit-1dot1" that reflects the current build version.
                     </li>
                     <li>
-                        Rebuild and redeploy the site documentation.
-                        <source>maven site:deploy</source>
+                    	Build the maven bundle with 
+                        <source> mvn source:jar javadoc:jar repository:bundle-create</source>
+                        and open an upload request to the maven repository as 
+                        <a href="http://maven.apache.org/guides/mini/guide-central-repository-upload.html">described here</a>.
                     </li>
                     <li>
-                        Deploy this new version to the maven repository as 
-                        <a href="http://maven.apache.org/maven-1.x/reference/repository-upload.html">described here</a>.
+                        Deploy the site documentation.
+                        <source>mvn site:deploy</source>
                     </li>
                 </ol>
             </p>
