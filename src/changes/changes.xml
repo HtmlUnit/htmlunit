@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="add" dev="asashour">
+                Add initial support for document.selection.createRange() (IE only).
+            </action>
             <action type="remove" dev="asashour">
                 Remove deprecated constants in BrowserVersion, in addition to HtmlForm.submit().
             </action>

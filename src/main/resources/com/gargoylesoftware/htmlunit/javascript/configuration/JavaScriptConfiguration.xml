@@ -160,6 +160,9 @@
         </property>
         <property name="referrer" readable="true" writable="false"/>
         <property name="scripts" readable="true" writable="false"/>
+        <property name="selection" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="styleSheets" readable="true" writable="false"/>
         <property name="title" readable="true" writable="true"/>
         <property name="URL" readable="true" writable="false"/>
@@ -987,6 +990,10 @@
         <property name="type" readable="true" writable="true"/>
     </class>
 
+    <class name="Selection" classname="com.gargoylesoftware.htmlunit.javascript.host.Selection" JSObject="true">
+        <function name="createRange"/>
+    </class>
+
     <class name="Style" classname="com.gargoylesoftware.htmlunit.javascript.host.Style" JSObject="true">
         <property name="behavior" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
@@ -1125,6 +1132,11 @@
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
                 descr="MSDN documentation"/>
         </function>
+    </class>
+
+    <class name="TextRange" classname="com.gargoylesoftware.htmlunit.javascript.host.TextRange" JSObject="true">
+        <browser name="Microsoft Internet Explorer"/>
+        <property name="text" readable="true" writable="true"/>
     </class>
 
     <class name="TextRectangle" classname="com.gargoylesoftware.htmlunit.javascript.host.TextRectangle"

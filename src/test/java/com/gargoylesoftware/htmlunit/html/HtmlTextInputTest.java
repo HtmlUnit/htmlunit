@@ -141,9 +141,6 @@ public class HtmlTextInputTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testSelection() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testSelection(BrowserVersion.INTERNET_EXPLORER_7_0);
         testSelection(BrowserVersion.FIREFOX_2);
     }

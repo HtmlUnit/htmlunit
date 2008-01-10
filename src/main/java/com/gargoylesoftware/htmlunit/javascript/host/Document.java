@@ -1143,6 +1143,17 @@ public class Document extends Node {
     }
 
     /**
+     * Return the value of the javascript attribute "selection".
+     * @return The value of this attribute.
+     */
+    public Selection jsxGet_selection() {
+        final Selection selection = new Selection();
+        selection.setParentScope(getParentScope());
+        selection.setPrototype(getPrototype(selection.getClass()));
+        return selection;
+    }
+
+    /**
      * Return the value of the frames property.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp">
      * MSDN documentation</a>
