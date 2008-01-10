@@ -86,8 +86,8 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the child axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getChildAxisIterator(final Object contextNode) {
-        return ((DomNode) contextNode).getChildIterator();
+    public Iterator<DomNode> getChildAxisIterator(final Object contextNode) {
+        return ((DomNode) contextNode).getChildren().iterator();
     }
 
     /**
@@ -96,14 +96,14 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode the context node for the parent axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getParentAxisIterator(final Object contextNode) {
-        return new Iterator() {
+    public Iterator<DomNode> getParentAxisIterator(final Object contextNode) {
+        return new Iterator<DomNode>() {
             private DomNode parent_ = ((DomNode) contextNode).getParentDomNode();
 
             public boolean hasNext() {
                 return parent_ != null;
             }
-            public Object next() {
+            public DomNode next() {
                 final DomNode next = parent_;
                 parent_ = null;
                 return next;
@@ -120,7 +120,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode the context node for the sibling iterator.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getFollowingSiblingAxisIterator(final Object contextNode) {
+    public Iterator<DomNode> getFollowingSiblingAxisIterator(final Object contextNode) {
         return Util.getFollowingSiblingAxisIterator((DomNode) contextNode);
     }
 
@@ -130,7 +130,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the preceding sibling axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getPrecedingSiblingAxisIterator(final Object contextNode) {
+    public Iterator<DomNode> getPrecedingSiblingAxisIterator(final Object contextNode) {
         return Util.getPrecedingSiblingAxisIterator((DomNode) contextNode);
     }
 
@@ -140,7 +140,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getFollowingAxisIterator(final Object contextNode) {
+    public Iterator<DomNode> getFollowingAxisIterator(final Object contextNode) {
         return Util.getFollowingAxisIterator((DomNode) contextNode);
     }
 
@@ -150,7 +150,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the preceding axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getPrecedingAxisIterator(final Object contextNode) {
+    public Iterator<DomNode> getPrecedingAxisIterator(final Object contextNode) {
         return Util.getPrecedingAxisIterator((DomNode) contextNode);
     }
 

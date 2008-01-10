@@ -93,7 +93,7 @@ public class GWT14Test extends WebTestCase {
         final List collectedAlerts = new ArrayList();
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
-        final DomText buttonLabel = (DomText) button.getChildIterator().next();
+        final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
         assertEquals("Click me", buttonLabel.getData());
         button.click();
         final String[] expectedAlerts = {"Hello, AJAX"};
@@ -121,7 +121,7 @@ public class GWT14Test extends WebTestCase {
         testI18N(page, "constantsFavoriteColorList",
                 new String[] {"Red", "White", "Yellow", "Black", "Blue", "Green", "Grey", "Light Grey"});
         testI18N(page, "constantsWithLookupResultsText", "Red");
-        final Map map = new HashMap();
+        final Map<String, String> map = new HashMap<String, String>();
         map.put("name", "Amelie Crutcher");
         map.put("timeZone", "EST");
         map.put("userID", "123");
@@ -167,7 +167,7 @@ public class GWT14Test extends WebTestCase {
         testI18N(page, "constantsFavoriteColorList",
                 new String[] {"Rouge", "Blanc", "Jaune", "Noir", "Bleu", "Vert", "Gris", "Gris clair"});
         testI18N(page, "constantsWithLookupResultsText", "Rouge");
-        final Map map = new HashMap();
+        final Map<String, String> map = new HashMap<String, String>();
         map.put("name", "Amelie Crutcher");
         map.put("timeZone", "EST");
         map.put("userID", "123");

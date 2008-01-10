@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Iterator;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -160,9 +159,7 @@ public class HtmlLabel extends ClickableElement {
             }
         }
         else {
-            final Iterator childIterator = getChildIterator();
-            while (childIterator.hasNext()) {
-                final DomNode element = (DomNode) childIterator.next();
+            for (final DomNode element : getChildren()) {
                 if (element instanceof HtmlInput) {
                     return (HtmlInput) element;
                 }

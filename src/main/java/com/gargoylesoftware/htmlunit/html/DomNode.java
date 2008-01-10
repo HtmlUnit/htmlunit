@@ -499,15 +499,10 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     protected final String getChildrenAsText() {
         final StringBuffer buffer = new StringBuffer();
-        final Iterator childIterator = getChildIterator();
-
-        if (!childIterator.hasNext()) {
-            return "";
-        }
-        boolean previousNodeWasText = false;
         final StringBuffer textBuffer = new StringBuffer();
-        while (childIterator.hasNext()) {
-            final DomNode node = (DomNode) childIterator.next();
+
+        boolean previousNodeWasText = false;
+        for (final DomNode node : getChildren()) {
             if (node instanceof DomText) {
                 textBuffer.append(((DomText) node).getData());
                 previousNodeWasText = true;
@@ -730,8 +725,7 @@ public abstract class DomNode implements Cloneable, Serializable {
     public DomNode appendDomChild(final DomNode node) {
         if (node instanceof DomDocumentFragment) {
             final DomDocumentFragment fragment = (DomDocumentFragment) node;
-            for (final Iterator iterator = fragment.getChildIterator(); iterator.hasNext();) {
-                final DomNode child = (DomNode) iterator.next();
+            for (final DomNode child : fragment.getChildren()) {
                 appendDomChild(child);
             }
         }
@@ -862,8 +856,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     protected void onAddedToPage() {
         if (firstChild_ != null) {
-            for (final Iterator i = getChildIterator(); i.hasNext();) {
-                final DomNode child = (DomNode) i.next();
+            for (final DomNode child : getChildren()) {
                 child.onAddedToPage();
             }
         }
@@ -881,7 +874,19 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
+     * @return an Iterable over the children of this node
+     */
+    public final Iterable<DomNode> getChildren() {
+        return new Iterable<DomNode>() {
+            public Iterator<DomNode> iterator() {
+                return new ChildIterator();
+            }
+        };
+    }
+
+    /**
      * @return an iterator over the children of this node
+     * @deprecated After 1.14, use {@link #getChildren()}.
      */
     public Iterator<DomNode> getChildIterator() {
         return new ChildIterator();
@@ -1041,10 +1046,9 @@ public abstract class DomNode implements Cloneable, Serializable {
         if (getFirstDomChild() == null) {
             return;
         }
-        final Iterator<DomNode> it = getChildIterator();
-        DomNode child;
+        final Iterator<DomNode> it = getChildren().iterator();
         while (it.hasNext()) {
-            child = (DomNode) it.next();
+            final DomNode child = (DomNode) it.next();
             child.removeAllChildren();
             it.remove();
         }

@@ -53,7 +53,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.mozilla.javascript.Context;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -74,8 +73,8 @@ public class XSLTProcessor extends SimpleScriptable {
 
     private static final long serialVersionUID = -5870183094839129375L;
 
-    private com.gargoylesoftware.htmlunit.javascript.host.Node style_;
-    private com.gargoylesoftware.htmlunit.javascript.host.Node input_;
+    private Node style_;
+    private Node input_;
     private Object output_;
     private Map/*String,Object*/ parameters_ = new HashMap();
     
@@ -94,7 +93,7 @@ public class XSLTProcessor extends SimpleScriptable {
      *              If the argument is an element node it must be the xsl:stylesheet (or xsl:transform) element
      *              of an XSLT stylesheet.
      */
-    public void jsxFunction_importStylesheet(final com.gargoylesoftware.htmlunit.javascript.host.Node style) {
+    public void jsxFunction_importStylesheet(final Node style) {
         style_ = style;
     }
 
@@ -106,7 +105,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return The result of the transformation.
      */
     public XMLDocument jsxFunction_transformToDocument(
-            final com.gargoylesoftware.htmlunit.javascript.host.Node source) {
+            final Node source) {
         final XMLDocument doc = new XMLDocument();
         doc.setPrototype(getPrototype(doc.getClass()));
         doc.setParentScope(getParentScope());
@@ -120,7 +119,7 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * @return {@link Node} or {@link String}.
      */
-    private Object transform(final com.gargoylesoftware.htmlunit.javascript.host.Node source) {
+    private Object transform(final Node source) {
         try {
             Source xmlSource = new StreamSource(new StringReader(((XMLDocument) source).jsxGet_xml()));
             final Source xsltSource = new StreamSource(new StringReader(((XMLDocument) style_).jsxGet_xml()));
@@ -139,7 +138,7 @@ public class XSLTProcessor extends SimpleScriptable {
             }
             transformer.transform(xmlSource, result);
             
-            final Node transformedNode = (Node) result.getNode();
+            final org.w3c.dom.Node transformedNode = (org.w3c.dom.Node) result.getNode();
             if (transformedNode.getFirstChild().getNodeType() == Node.ELEMENT_NODE) {
                 return transformedNode;
             }
@@ -164,7 +163,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return The result of the transformation.
      */
     public DocumentFragment jsxFunction_transformToFragment(
-            final com.gargoylesoftware.htmlunit.javascript.host.Node source, final Object output) {
+            final Node source, final Object output) {
         final SgmlPage page = (SgmlPage) ((Document) output).getDomNodeOrDie();
 
         final DomDocumentFragment fragment = page.createDomDocumentFragment();
@@ -178,10 +177,10 @@ public class XSLTProcessor extends SimpleScriptable {
     }
 
     private void transform(final SgmlPage page,
-            final com.gargoylesoftware.htmlunit.javascript.host.Node source, final DomNode parent) {
+            final Node source, final DomNode parent) {
         final Object result = transform(source);
-        if (result instanceof Node) {
-            final NodeList children = (NodeList) ((Node) result).getChildNodes();
+        if (result instanceof org.w3c.dom.Node) {
+            final NodeList children = (NodeList) ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
                 XmlUtil.appendChild(page, parent, children.item(i));
             }
@@ -229,7 +228,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Specifies which XML input tree to transform.
      * @param input the input tree.
      */
-    public void jsxSet_input(final com.gargoylesoftware.htmlunit.javascript.host.Node input) {
+    public void jsxSet_input(final Node input) {
         input_ = input;
     }
 
@@ -237,7 +236,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Returns which XML input tree to transform.
      * @return which XML input tree to transform.
      */
-    public com.gargoylesoftware.htmlunit.javascript.host.Node jsxGet_input() {
+    public Node jsxGet_input() {
         return input_;
     }
 
@@ -289,13 +288,11 @@ public class XSLTProcessor extends SimpleScriptable {
             node.setDomNode(fragment);
             output_ = (Node) fragment.getScriptObject();
         }
-        transform(page, input_, ((com.gargoylesoftware.htmlunit.javascript.host.Node) output_).getDomNodeOrDie());
+        transform(page, input_, ((Node) output_).getDomNodeOrDie());
         final XMLSerializer serializer = new XMLSerializer();
         serializer.setParentScope(getParentScope());
         String output = "";
-        for (final Iterator it = ((com.gargoylesoftware.htmlunit.javascript.host.Node) output_).getDomNodeOrDie()
-                .getChildIterator(); it.hasNext();) {
-            final DomNode child = (DomNode) it.next();
+        for (final DomNode child : ((Node) output_).getDomNodeOrDie().getChildren()) {
             if (child instanceof DomText) {
                 //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
                 //Maybe this should be changed for 'xml:space' = preserve
@@ -306,8 +303,8 @@ public class XSLTProcessor extends SimpleScriptable {
             }
             else {
                 //remove trailing "\r\n"
-                final String serializedString = serializer.jsxFunction_serializeToString(
-                        (com.gargoylesoftware.htmlunit.javascript.host.Node) child.getScriptObject());
+                final String serializedString =
+                    serializer.jsxFunction_serializeToString((Node) child.getScriptObject());
                 output += serializedString.substring(0, serializedString.length() - 2);
             }
         }

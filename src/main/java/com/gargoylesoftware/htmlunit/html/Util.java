@@ -60,7 +60,7 @@ public final class Util {
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
      */
-    public static Iterator getFollowingSiblingAxisIterator(final DomNode contextNode) {
+    public static Iterator<DomNode> getFollowingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
             protected DomNode getFirstNode(final DomNode node) {
                 return getNextNode(node);
@@ -77,7 +77,7 @@ public final class Util {
      * @param contextNode The context node for the preceding sibling axis.
      * @return A possibly-empty iterator (not null).
      */
-    public static Iterator getPrecedingSiblingAxisIterator(final DomNode contextNode) {
+    public static Iterator<DomNode> getPrecedingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
             protected DomNode getFirstNode(final DomNode node) {
                 return getNextNode(node);
@@ -94,7 +94,7 @@ public final class Util {
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
      */
-    public static Iterator getFollowingAxisIterator(final DomNode contextNode) {
+    public static Iterator<DomNode> getFollowingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
             protected DomNode getFirstNode(final DomNode node) {
                 if (node == null) {
@@ -137,7 +137,7 @@ public final class Util {
      * @param contextNode The context node for the preceding axis.
      * @return A possibly-empty iterator (not null).
      */
-    public static Iterator getPrecedingAxisIterator(final DomNode contextNode) {
+    public static Iterator<DomNode> getPrecedingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
             protected DomNode getFirstNode(final DomNode node) {
                 if (node == null) {
@@ -181,7 +181,7 @@ public final class Util {
  * and {@link #getNextNode} methods for a specific iteration
  * strategy.</p>
  */
-abstract class NodeIterator implements Iterator {
+abstract class NodeIterator implements Iterator<DomNode> {
 
     private DomNode node_;
 
@@ -198,7 +198,7 @@ abstract class NodeIterator implements Iterator {
     }
     
     /** @inheritDoc Iterator#next() */
-    public Object next() {
+    public DomNode next() {
         if (node_ == null) {
             throw new NoSuchElementException();
         }

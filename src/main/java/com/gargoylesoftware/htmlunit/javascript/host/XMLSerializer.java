@@ -89,12 +89,11 @@ public class XMLSerializer extends SimpleScriptable {
             }
         }
         boolean startTagClosed = false;
-        for (final Iterator iterator = node.getChildIterator(); iterator.hasNext();) {
+        for (final DomNode child : node.getChildren()) {
             if (!startTagClosed) {
                 buffer.append('>');
                 startTagClosed = true;
             }
-            final DomNode child = (DomNode) iterator.next();
             switch (child.getNodeType()) {
                 case org.w3c.dom.Node.ELEMENT_NODE:
                     toXml(indent + 1, child, buffer, isIE);

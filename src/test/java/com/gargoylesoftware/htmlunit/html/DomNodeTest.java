@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.xml.sax.helpers.AttributesImpl;
@@ -323,8 +322,7 @@ public class DomNodeTest extends WebTestCase {
      */
     private int readPositionAmongParentChildren(final DomNode node) {
         int i = 0;
-        for (final Iterator iter = node.getParentDomNode().getChildIterator(); iter.hasNext();) {
-            final DomNode child = (DomNode) iter.next();
+        for (final DomNode child : node.getParentDomNode().getChildren()) {
             if (child == node) {
                 return i;
             }

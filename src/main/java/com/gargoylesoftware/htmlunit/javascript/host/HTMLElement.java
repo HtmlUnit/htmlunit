@@ -554,8 +554,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     private void printChildren(final StringBuffer buffer, final DomNode node, final boolean html) {
-        for (final Iterator iter = node.getChildIterator(); iter.hasNext();) {
-            printNode(buffer, (DomNode) iter.next(), html);
+        for (final DomNode child : node.getChildren()) {
+            printNode(buffer, child, html);
         }
     }
 

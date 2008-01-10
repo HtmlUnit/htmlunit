@@ -305,7 +305,7 @@ public class Node extends SimpleScriptable {
      * @return boolean true if this node has any children, false otherwise.
      */
     public boolean jsxFunction_hasChildNodes() {
-        return getDomNodeOrDie().getChildIterator().hasNext();
+        return getDomNodeOrDie().getChildren().iterator().hasNext();
     }
 
     /**

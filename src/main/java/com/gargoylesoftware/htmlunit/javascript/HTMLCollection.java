@@ -176,8 +176,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                 xpath_.addNamespace(prefix, value);
             }
         }
-        for (final Iterator children = element.getChildIterator(); children.hasNext();) {
-            final DomNode child = (DomNode) children.next();
+        for (final DomNode child : element.getChildren()) {
             if (child instanceof XmlElement) {
                 addNamespace((XmlElement) child);
             }
