@@ -98,7 +98,7 @@ public class ThreadManagerTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         startTimedTest();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
@@ -137,7 +137,7 @@ public class ThreadManagerTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         startTimedTest();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();

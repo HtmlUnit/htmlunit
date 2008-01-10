@@ -42,6 +42,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
+
 /**
  *  A response from a web server
  *
@@ -106,7 +108,7 @@ public interface WebResponse {
      *
      * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s.
      */
-    List getResponseHeaders();
+    List<NameValuePair> getResponseHeaders();
 
     /**
      * Return the value of the specified header from this response.

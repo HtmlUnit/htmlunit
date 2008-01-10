@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.time.DateUtils;
 
@@ -244,7 +245,7 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
-    public List getResponseHeaders() {
+    public List<NameValuePair> getResponseHeaders() {
         throw new RuntimeException("not implemented");
     }
 

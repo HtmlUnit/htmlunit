@@ -151,7 +151,7 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_GARGOYLE);
         final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("a2");
 
-        final List firstExpectedEvents = Arrays.asList(new Object[] {
+        final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(
                 client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage),
         });
@@ -160,7 +160,7 @@ public class WebClientTest extends WebTestCase {
         eventCatcher.clear();
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
-        final List secondExpectedEvents = Arrays.asList(new Object[] {
+        final List<WebWindowEvent> secondExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(
                 client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage),
         });
@@ -196,7 +196,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebWindow firstWindow = client.getCurrentWindow();
         final WebWindow secondWindow = client.getWebWindowByName("myNewWindow");
-        final List expectedEvents = Arrays.asList(new Object[] {
+        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(
                 secondWindow, WebWindowEvent.OPEN, null, null),
             new WebWindowEvent(
@@ -246,7 +246,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals("second", secondPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
-        final List expectedEvents = Arrays.asList(new Object[] {
+        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(
                 frame.getEnclosedWindow(), WebWindowEvent.CLOSE, thirdPage, null),
             new WebWindowEvent(
@@ -282,7 +282,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final List headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
+        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         
         // builds a webconnection that first sends a redirect and then a "normal" response for
         // the same requested url
@@ -480,7 +480,7 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final URL url = URL_FIRST;
-        final List headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
+        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -546,7 +546,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setThrowExceptionOnFailingStatusCode(false);
         webClient.setPrintContentOnFailingStatusCode(false);
 
-        final List headers = Collections.singletonList(new KeyValuePair("Location", newLocation));
+        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", newLocation));
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(
             URL_FIRST, firstContent, statusCode,
@@ -622,13 +622,13 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, page1Content);
 
         client.setWebConnection(webConnection);
-        final List collectedPageCreationItems = new ArrayList();
+        final List<Page> collectedPageCreationItems = new ArrayList<Page>();
         client.setPageCreator(new CollectingPageCreator(collectedPageCreationItems));
 
         final Page page = client.getPage(URL_FIRST);
         assertTrue("instanceof TextPage", page instanceof TextPage);
 
-        final List expectedPageCreationItems = Arrays.asList(new Object[] {
+        final List<Page> expectedPageCreationItems = Arrays.asList(new Page[] {
             page
         });
 
@@ -637,12 +637,12 @@ public class WebClientTest extends WebTestCase {
 
     /** A PageCreator that collects data */
     private class CollectingPageCreator implements PageCreator {
-        private final List collectedPages_;
+        private final List<Page> collectedPages_;
         /**
          * Create an instance
          * @param list The list that will contain the data
          */
-        public CollectingPageCreator(final List list) {
+        public CollectingPageCreator(final List<Page> list) {
             collectedPages_ = list;
         }
         
@@ -862,7 +862,7 @@ public class WebClientTest extends WebTestCase {
     public void testKeyboard_NoTabbableElements() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[0]);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         assertNull("original", page.getElementWithFocus());
@@ -870,7 +870,7 @@ public class WebClientTest extends WebTestCase {
         assertNull("previous", page.tabToPreviousElement());
         assertNull("accesskey", page.pressAccessKey('a'));
 
-        final List expectedAlerts = Collections.EMPTY_LIST;
+        final List< ? > expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -880,7 +880,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testKeyboard_OneTabbableElement() throws Exception {
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
@@ -910,7 +910,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testAccessKeys() throws Exception {
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
@@ -931,7 +931,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testTabNext() throws Exception {
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
@@ -952,7 +952,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testTabPrevious() throws Exception {
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
@@ -973,7 +973,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testPressAccessKey_Button() throws Exception {
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{"1", "2", "3"});
@@ -1149,7 +1149,7 @@ public class WebClientTest extends WebTestCase {
         webClient.addHostsToProxyBypass("hostToByPass");
         
         final String location2 = "http://hostToByPass/foo.html";
-        final List headers = Collections.singletonList(new KeyValuePair("Location", location2));
+        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", location2));
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, html, 302, "Some error", "text/html", headers);
         webConnection.setResponse(new URL(location2), "<html><head><title>2nd page</title></head></html>");
@@ -1326,7 +1326,7 @@ public class WebClientTest extends WebTestCase {
                 return sourceCode;
             }
         });
-        final List alerts = new ArrayList();
+        final List<String> alerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         client.getPage("http://page");
 
@@ -1411,7 +1411,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -1551,7 +1551,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setDefaultResponse("alert('foo')", 200, "OK", "Text/Javascript");
         client.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final String[] expectedAlerts = {"foo"};
 
@@ -1602,7 +1602,7 @@ public class WebClientTest extends WebTestCase {
 
         final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.getPage(fileURL);
 
@@ -1636,7 +1636,7 @@ public class WebClientTest extends WebTestCase {
      */
     public void testOnBeforeUnloadCalledOnCorrectPage() throws Exception {
         final String html = "<html><body onbeforeunload='alert(7)'><iframe></iframe></body></html>";
-        final List alerts = new ArrayList();
+        final List<String> alerts = new ArrayList<String>();
         loadPage(html, alerts);
         assertTrue(alerts.isEmpty());
     }
@@ -1648,7 +1648,7 @@ public class WebClientTest extends WebTestCase {
     public void testPlusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
 
-        final HtmlPage page = loadPage("<html></html>", new ArrayList(), url);
+        final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
         assertEquals("http://host/search/my+category/", page.getWebResponse().getUrl());
     }
 }

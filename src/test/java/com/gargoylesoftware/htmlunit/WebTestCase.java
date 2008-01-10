@@ -425,7 +425,7 @@ public abstract class WebTestCase extends BaseTestCase {
         final StringBuffer sb = new StringBuffer();
         sb.append("\n<script type='text/javascript'>\n");
         sb.append("var htmlunitReserved_tab = [");
-        for (final ListIterator iter = expectedAlerts.listIterator(); iter.hasNext();) {
+        for (final ListIterator<String> iter = expectedAlerts.listIterator(); iter.hasNext();) {
             if (iter.hasPrevious()) {
                 sb.append(", ");
             }
@@ -473,7 +473,7 @@ public abstract class WebTestCase extends BaseTestCase {
         final Method testMethod = findRunningJUnitTestMethod();
         try {
             getLog().info("Running " + testMethod.getName() + " as not yet implemented");
-            testMethod.invoke(this, new Class[] {});
+            testMethod.invoke(this, (Object[]) new Class[] {});
             fail(testMethod.getName() + " is marked as not implemented but already works");
         }
         catch (final Exception e) {
@@ -493,8 +493,8 @@ public abstract class WebTestCase extends BaseTestCase {
      * @throws RuntimeException if no method could be found.
      */
     private Method findRunningJUnitTestMethod() {
-        final Class cl = getClass();
-        final Class[] args = new Class[] {};
+        final Class< ? > cl = getClass();
+        final Class< ? >[] args = new Class[] {};
 
         // search the initial junit test
         final Throwable t = new Exception();
@@ -523,8 +523,8 @@ public abstract class WebTestCase extends BaseTestCase {
      */
     private boolean isPublicTestMethod(final Method method) {
         final String name = method.getName();
-        final Class[] parameters = method.getParameterTypes();
-        final Class returnType = method.getReturnType();
+        final Class< ? >[] parameters = method.getParameterTypes();
+        final Class< ? > returnType = method.getReturnType();
 
         return parameters.length == 0 && name.startsWith("test")
             && returnType.equals(Void.TYPE)

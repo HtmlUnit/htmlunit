@@ -89,7 +89,7 @@ public class WebResponseImplTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webClient.getPage(URL_FIRST);
@@ -133,7 +133,7 @@ public class WebResponseImplTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);

@@ -72,7 +72,7 @@ public class WebResponseDataTest extends WebTestCase {
         final InputStream stream = getClass().getClassLoader().getResourceAsStream(GZIPPED_FILE);
         final byte[] zippedContent = IOUtils.toByteArray(stream);
 
-        final List headers = new ArrayList();
+        final List<KeyValuePair> headers = new ArrayList<KeyValuePair>();
         headers.add(new KeyValuePair("Content-Encoding", "gzip"));
 
         final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
@@ -87,7 +87,7 @@ public class WebResponseDataTest extends WebTestCase {
      */
     public void testNullBody() throws Exception {
         final InputStream body = null;
-        final List headers = new ArrayList();
+        final List<KeyValuePair> headers = new ArrayList<KeyValuePair>();
         final WebResponseData data = new WebResponseData(body, 304, "NOT_MODIFIED", headers);
         assertNull(data.getBody());
     }

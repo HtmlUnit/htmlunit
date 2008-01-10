@@ -72,7 +72,7 @@ public class TopLevelWindowTest extends WebTestCase {
         final WebWindow windowToClose = webClient.getCurrentWindow();
         ((TopLevelWindow) windowToClose).close();
 
-        final List expectedEvents = Arrays.asList(new Object[] {
+        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(windowToClose, WebWindowEvent.CLOSE, null, null)
         });
         assertEquals(expectedEvents, eventCatcher.getEvents());
