@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.util.Iterator;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+
 /**
  * Tests for compatibility with version 1.1.3.1 of the <a href="http://jquery.com/">jQuery JavaScript library</a>.
  *
@@ -76,7 +78,7 @@ public class JQuery1131Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
-    protected void verify(final Iterator i, final boolean ie) throws Exception {
+    protected void verify(final Iterator<HtmlElement> i, final boolean ie) throws Exception {
 
         final int failedDollar, passedDollar;
         final int failedAppend, passedAppend;

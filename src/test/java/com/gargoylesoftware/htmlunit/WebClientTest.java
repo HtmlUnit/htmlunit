@@ -282,7 +282,8 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
+        final List<KeyValuePair> headers =
+            Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         
         // builds a webconnection that first sends a redirect and then a "normal" response for
         // the same requested url
@@ -480,7 +481,8 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final URL url = URL_FIRST;
-        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
+        final List<KeyValuePair> headers =
+            Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {

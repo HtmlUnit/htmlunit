@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.15-prerelease">
+            <action type="update" dev="asashour">
+                Deprecate HtmlElement.getChildElementsIterator(), use getChildElements() instead.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for input.selectionStart, input.selectionEnd, and input.textLength.
             </action>

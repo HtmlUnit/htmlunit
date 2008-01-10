@@ -172,9 +172,7 @@ public class HtmlTable extends ClickableElement {
      * @return The caption text
      */
     public String getCaptionText() {
-        final Iterator<HtmlElement> iterator = getChildElementsIterator();
-        while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement) iterator.next();
+        for (final HtmlElement element : getChildElements()) {
             if (element instanceof HtmlCaption) {
                 return element.asText();
             }
@@ -188,9 +186,7 @@ public class HtmlTable extends ClickableElement {
      * @return The table header
      */
     public HtmlTableHeader getHeader() {
-        final Iterator<HtmlElement> iterator = getChildElementsIterator();
-        while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement) iterator.next();
+        for (final HtmlElement element : getChildElements()) {
             if (element instanceof HtmlTableHeader) {
                 return (HtmlTableHeader) element;
             }
@@ -204,9 +200,7 @@ public class HtmlTable extends ClickableElement {
      * @return The table footer
      */
     public HtmlTableFooter getFooter() {
-        final Iterator<HtmlElement> iterator = getChildElementsIterator();
-        while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement) iterator.next();
+        for (final HtmlElement element : getChildElements()) {
             if (element instanceof HtmlTableFooter) {
                 return (HtmlTableFooter) element;
             }
@@ -220,13 +214,11 @@ public class HtmlTable extends ClickableElement {
      *
      * @return A list of {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody} objects.
      */
-    public List getBodies() {
-        final List bodies = new ArrayList();
-        final Iterator<HtmlElement> iterator = getChildElementsIterator();
-        while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement) iterator.next();
+    public List<HtmlTableBody> getBodies() {
+        final List<HtmlTableBody> bodies = new ArrayList<HtmlTableBody>();
+        for (final HtmlElement element : getChildElements()) {
             if (element instanceof HtmlTableBody) {
-                bodies.add(element);
+                bodies.add((HtmlTableBody) element);
             }
         }
         return bodies;

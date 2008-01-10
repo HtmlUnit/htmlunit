@@ -73,7 +73,7 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testJQueryWithIE6() throws Exception {
-        final Iterator i = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final Iterator<HtmlElement> i = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0);
         verify(i, true);
     }
 
@@ -81,7 +81,7 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testJQueryWithIE7() throws Exception {
-        final Iterator i = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0);
+        final Iterator<HtmlElement> i = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0);
         verify(i, true);
     }
 
@@ -89,7 +89,7 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testJQueryWithFirefox2() throws Exception {
-        final Iterator i = loadPage(BrowserVersion.FIREFOX_2);
+        final Iterator<HtmlElement> i = loadPage(BrowserVersion.FIREFOX_2);
         verify(i, false);
     }
 
@@ -107,7 +107,7 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @param ie whether or not the browser used was MSIE
      * @throws Exception If an error occurs.
      */
-    protected abstract void verify(final Iterator i, final boolean ie) throws Exception;
+    protected abstract void verify(final Iterator<HtmlElement> i, final boolean ie) throws Exception;
 
     /**
      * Loads the jQuery unit test index page using the specified browser version, allows its
@@ -124,7 +124,7 @@ public abstract class JQueryTestBase extends WebTestCase {
         assertNotNull(url);
 
         final WebClient client = new WebClient(version);
-        final List alerts = new ArrayList();
+        final List<String> alerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
@@ -132,9 +132,8 @@ public abstract class JQueryTestBase extends WebTestCase {
 
         final HtmlElement doc = page.getDocumentHtmlElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
-        final Iterator<HtmlElement> i = tests.getChildElementsIterator();
-
-        return i;
+        final Iterable<HtmlElement> i = tests.getChildElements();
+        return i.iterator();
     }
 
     /**

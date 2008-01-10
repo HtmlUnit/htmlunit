@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.util.Iterator;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+
 /**
  * Tests for compatibility with version 1.1.2 of the <a href="http://jquery.com/">jQuery JavaScript library</a>.
  *
@@ -67,7 +69,7 @@ public class JQuery112Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
-    protected void verify(final Iterator i, final boolean ie) throws Exception {
+    protected void verify(final Iterator<HtmlElement> i, final boolean ie) throws Exception {
         ok(i, "core module: Basic requirements", 0, 7);
         ok(i, "core module: $()", 0, 1);
         ok(i, "core module: length", 0, 1);

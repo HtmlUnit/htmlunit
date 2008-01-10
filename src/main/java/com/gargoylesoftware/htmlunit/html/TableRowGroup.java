@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -71,14 +70,12 @@ public abstract class TableRowGroup extends ClickableElement {
      *
      * @return a list of table rows
      */
-    public final List getRows() {
-        final List resultList = new ArrayList();
+    public final List<HtmlTableRow> getRows() {
+        final List<HtmlTableRow> resultList = new ArrayList<HtmlTableRow>();
 
-        final Iterator<HtmlElement> iterator = getChildElementsIterator();
-        while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement) iterator.next();
+        for (final HtmlElement element : getChildElements()) {
             if (element instanceof HtmlTableRow) {
-                resultList.add(element);
+                resultList.add((HtmlTableRow) element);
             }
         }
 

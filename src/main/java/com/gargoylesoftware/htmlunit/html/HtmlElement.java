@@ -964,14 +964,26 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * @return an Iterable over the HtmlElement children of this object, i.e. excluding the non-element nodes.
+     */
+    public final Iterable<HtmlElement> getChildElements() {
+        return new Iterable<HtmlElement>() {
+            public Iterator<HtmlElement> iterator() {
+                return new ChildElementsIterator();
+            }
+        };
+    }
+
+    /**
      * @return an iterator over the HtmlElement children of this object, i.e. excluding the
      * non-element nodes
+     * @deprecated After 1.14, use {@link #getChildElements()}.
      */
     public final Iterator<HtmlElement> getChildElementsIterator() {
         return new ChildElementsIterator();
     }
 
-   /**
+    /**
      * an iterator over the HtmlElement children
      */
     protected class ChildElementsIterator implements Iterator<HtmlElement> {

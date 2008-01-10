@@ -572,8 +572,7 @@ public abstract class WebTestCase extends BaseTestCase {
 
     private List<String> readChildElementsText(final HtmlElement elt) {
         final List<String> list = new ArrayList<String>();
-        for (final Iterator<HtmlElement> iter = elt.getChildElementsIterator(); iter.hasNext();) {
-            final HtmlElement child = (HtmlElement) iter.next();
+        for (final HtmlElement child : elt.getChildElements()) {
             list.add(child.asText());
         }
         return list;
