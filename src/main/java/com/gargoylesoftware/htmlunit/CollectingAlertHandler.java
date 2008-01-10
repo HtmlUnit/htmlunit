@@ -47,13 +47,13 @@ import java.util.List;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class CollectingAlertHandler implements AlertHandler {
-    private final List collectedAlerts_;
+    private final List<String> collectedAlerts_;
 
     /**
      * Create an instance with an ArrayList
      */
     public CollectingAlertHandler() {
-        this(new ArrayList());
+        this(new ArrayList<String>());
     }
 
     /**
@@ -61,7 +61,7 @@ public class CollectingAlertHandler implements AlertHandler {
      *
      * @param list The list to store alerts in.
      */
-    public CollectingAlertHandler(final List list) {
+    public CollectingAlertHandler(final List<String> list) {
         Assert.notNull("list", list);
         collectedAlerts_ = list;
     }
@@ -81,7 +81,7 @@ public class CollectingAlertHandler implements AlertHandler {
      * Return a list containing the message portion of any collected alerts.
      * @return a list of alert messages
      */
-    public List getCollectedAlerts() {
+    public List<String> getCollectedAlerts() {
         return collectedAlerts_;
     }
 }
