@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.15-prerelease">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: DomNode.getAllHtmlChildElements() returns Iterable instead of Iterator.
+            </action>
             <action type="remove" dev="asashour">
                 DomNode: remove unused EventHandler, and deprecated PropertyChange methods.
             </action>

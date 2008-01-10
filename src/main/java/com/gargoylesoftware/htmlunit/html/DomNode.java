@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
@@ -51,7 +49,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
-import org.mozilla.javascript.Function;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.Assert;
@@ -123,9 +120,6 @@ public abstract class DomNode implements Cloneable, Serializable {
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
 
-    /** We do lazy initialization on this since the vast majority of HtmlElement instances won't need it. */
-    private PropertyChangeSupport propertyChangeSupport_;
-
     /** The name of the "element" property.  Used when watching property change events. */
     public static final String PROPERTY_ELEMENT = "element";
 
@@ -149,7 +143,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      */
     private int endColumnNumber_;
 
-    private List/* DomChangeListener */ domListeners_;
+    private List<DomChangeListener> domListeners_;
     private final transient Object domListeners_lock_ = new Object();
 
     /**
@@ -889,14 +883,14 @@ public abstract class DomNode implements Cloneable, Serializable {
     /**
      * @return an iterator over the children of this node
      */
-    public Iterator getChildIterator() {
+    public Iterator<DomNode> getChildIterator() {
         return new ChildIterator();
     }
     
     /**
      * an iterator over all children of this node
      */
-    protected class ChildIterator implements Iterator {
+    protected class ChildIterator implements Iterator<DomNode> {
 
         private DomNode nextNode_ = firstChild_;
         private DomNode currentNode_ = null;
@@ -907,7 +901,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
 
         /** @return the next object */
-        public Object next() {
+        public DomNode next() {
             if (nextNode_ != null) {
                 currentNode_ = nextNode_;
                 nextNode_ = nextNode_.nextSibling_;
@@ -928,12 +922,15 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Return an iterator that will recursively iterate over every child element
-     * below this one.
+     * Return an Iterable that will recursively iterate over every child element below this one.
      * @return The iterator.
      */
-    public Iterator<HtmlElement> getAllHtmlChildElements() {
-        return new DescendantElementsIterator();
+    public final Iterable<HtmlElement> getAllHtmlChildElements() {
+        return new Iterable<HtmlElement>() {
+            public Iterator<HtmlElement> iterator() {
+                return new DescendantElementsIterator();
+            }
+        };
     }
 
     /**
@@ -1044,7 +1041,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         if (getFirstDomChild() == null) {
             return;
         }
-        final Iterator it = getChildIterator();
+        final Iterator<DomNode> it = getChildIterator();
         DomNode child;
         while (it.hasNext()) {
             child = (DomNode) it.next();

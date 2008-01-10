@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public final class WebAssert {
 
@@ -469,9 +470,10 @@ public final class WebAssert {
      * @param page the page to check
      */
     public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
-        final List tags = Arrays.asList(new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
-        final List tabbableElements = page.getDocumentHtmlElement().getHtmlElementsByTagNames(tags);
-        for (final Iterator i = tabbableElements.iterator(); i.hasNext();) {
+        final List<String> tags =
+            Arrays.asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
+        final List<HtmlElement> tabbableElements = page.getDocumentHtmlElement().getHtmlElementsByTagNames(tags);
+        for (final Iterator<HtmlElement> i = tabbableElements.iterator(); i.hasNext();) {
             final HtmlElement element = (HtmlElement) i.next();
             final Short tabIndex = element.getTabIndex();
             if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
@@ -489,9 +491,8 @@ public final class WebAssert {
      * @param page the page to check
      */
     public static void assertAllAccessKeyAttributesUnique(final HtmlPage page) {
-        final List list = new ArrayList();
-        for (final Iterator<HtmlElement> i = page.getAllHtmlChildElements(); i.hasNext();) {
-            final HtmlElement element = (HtmlElement) i.next();
+        final List<String> list = new ArrayList<String>();
+        for (final HtmlElement element : page.getAllHtmlChildElements()) {
             final String key = element.getAttributeValue("accesskey");
             if (key != null && key.length() != 0) {
                 if (list.contains(key)) {
@@ -510,9 +511,8 @@ public final class WebAssert {
      * @param page the page to check
      */
     public static void assertAllIdAttributesUnique(final HtmlPage page) {
-        final List list = new ArrayList();
-        for (final Iterator<HtmlElement> i = page.getAllHtmlChildElements(); i.hasNext();) {
-            final HtmlElement element = (HtmlElement) i.next();
+        final List<String> list = new ArrayList<String>();
+        for (final HtmlElement element : page.getAllHtmlChildElements()) {
             final String id = element.getAttributeValue("id");
             if (id != null && id.length() != 0) {
                 if (list.contains(id)) {

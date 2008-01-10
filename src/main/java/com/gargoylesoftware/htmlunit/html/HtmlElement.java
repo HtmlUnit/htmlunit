@@ -1459,5 +1459,4 @@ public abstract class HtmlElement extends DomElement {
     public HtmlPage getPage() {
         return (HtmlPage) super.getPage();
     }
-
 }

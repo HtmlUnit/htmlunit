@@ -464,9 +464,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final List<String> tags = Arrays
             .asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List<HtmlElement> tabbableElements = new ArrayList<HtmlElement>();
-        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
-        while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement) iterator.next();
+        for (final HtmlElement element : getAllHtmlChildElements()) {
             final String tagName = element.getTagName();
             if (tags.contains(tagName)) {
                 final boolean disabled = element.isAttributeDefined("disabled");
@@ -570,9 +568,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final List<String> acceptableTagNames = Arrays.asList(
                 new String[]{"a", "area", "button", "input", "label", "legend", "textarea"});
 
-        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
-        while (iterator.hasNext()) {
-            final HtmlElement element = (HtmlElement) iterator.next();
+        for (final HtmlElement element : getAllHtmlChildElements()) {
             if (acceptableTagNames.contains(element.getTagName())) {
                 final String accessKeyAttribute = element.getAttributeValue("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
@@ -1662,9 +1658,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final HtmlPage result = (HtmlPage) super.cloneDomNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s
-            final Iterator<HtmlElement> it = result.getAllHtmlChildElements();
-            while (it.hasNext()) {
-                final HtmlElement child = (HtmlElement) it.next();
+            for (final HtmlElement child : result.getAllHtmlChildElements()) {
                 removeMappedElement(child);
                 result.addMappedElement(child);
             }

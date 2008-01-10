@@ -404,7 +404,7 @@ public class DomNodeTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(html);
         final DescendantElementsIterator iterator = (DescendantElementsIterator)
-            page.getDocumentHtmlElement().getAllHtmlChildElements();
+            page.getDocumentHtmlElement().getAllHtmlChildElements().iterator();
         assertEquals("", iterator.nextElement().getId());
         assertEquals("0", iterator.nextElement().getId());
         assertEquals("I", iterator.nextElement().getId());
@@ -422,7 +422,7 @@ public class DomNodeTest extends WebTestCase {
     }
 
     static class DomChangeListenerTestImpl implements DomChangeListener {
-        private final List collectedValues_ = new ArrayList();
+        private final List<String> collectedValues_ = new ArrayList<String>();
         public void nodeAdded(final DomChangeEvent event) {
             collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
@@ -431,7 +431,7 @@ public class DomNodeTest extends WebTestCase {
             collectedValues_.add("nodeDeleted: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
         }
-        List getCollectedValues() {
+        List<String> getCollectedValues() {
             return collectedValues_;
         }
     }
@@ -550,7 +550,7 @@ public class DomNodeTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final List l = new ArrayList();
+        final List<String> l = new ArrayList<String>();
         final DomChangeListener listener2 = new DomChangeListenerTestImpl() {
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 2");
