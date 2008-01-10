@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.15-prerelease">
+            <action type="remove" dev="asashour">
+                DomNode: remove unused EventHandler, and deprecated PropertyChange methods.
+            </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlElement.getChildElementsIterator(), use getChildElements() instead.
             </action>
