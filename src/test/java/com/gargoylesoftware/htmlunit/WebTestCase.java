@@ -142,7 +142,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @throws Exception If something goes wrong.
      */
     protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
-            final String html, final List collectedAlerts)
+            final String html, final List<String> collectedAlerts)
         throws Exception {
         return loadPage(browserVersion, html, collectedAlerts, URL_GARGOYLE);
     }
@@ -155,7 +155,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage(final String html, final List collectedAlerts)
+    protected static final HtmlPage loadPage(final String html, final List<String> collectedAlerts)
         throws Exception {
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
     }
@@ -206,7 +206,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage(final String html, final List collectedAlerts,
+    protected static final HtmlPage loadPage(final String html, final List<String> collectedAlerts,
             final URL url) throws Exception {
 
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, url);
@@ -222,7 +222,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @throws Exception If something goes wrong.
      */
     protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
-            final String html, final List collectedAlerts, final URL url)
+            final String html, final List<String> collectedAlerts, final URL url)
         throws Exception {
 
         final WebClient client = new WebClient(browserVersion);
@@ -286,7 +286,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @param expected the expected strings
      * @param actual the collection of strings to test
      */
-    protected void assertEquals(final String[] expected, final List actual) {
+    protected void assertEquals(final String[] expected, final List<String> actual) {
         assertEquals(Arrays.asList(expected), actual);
     }
 
@@ -299,7 +299,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @param expected the expected strings
      * @param actual the collection of strings to test
      */
-    protected void assertEquals(final String message, final String[] expected, final List actual) {
+    protected void assertEquals(final String message, final String[] expected, final List<String> actual) {
         assertEquals(message, Arrays.asList(expected), actual);
     }
 
@@ -372,7 +372,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @param expectedAlerts the expected alerts
      * @throws IOException if writing file fails
      */
-    protected void createTestPageForRealBrowserIfNeeded(final String content, final List expectedAlerts)
+    protected void createTestPageForRealBrowserIfNeeded(final String content, final List<String> expectedAlerts)
         throws IOException {
         final Log log = LogFactory.getLog(WebTestCase.class);
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
@@ -416,7 +416,7 @@ public abstract class WebTestCase extends BaseTestCase {
      * @return the script to be included at the beginning of the generated html file
      * @throws IOException in case of problem
      */
-    private String createInstrumentationScript(final List expectedAlerts) throws IOException {
+    private String createInstrumentationScript(final List<String> expectedAlerts) throws IOException {
         // generate the js code
         final InputStream is = getClass().getClassLoader().getResourceAsStream("alertVerifier.js");
         final String baseJS = IOUtils.toString(is);
@@ -531,7 +531,7 @@ public abstract class WebTestCase extends BaseTestCase {
             && Modifier.isPublic(method.getModifiers());
     }
 
-    private static final ThreadLocal notYetImplementedFlag = new ThreadLocal();
+    private static final ThreadLocal<Boolean> notYetImplementedFlag = new ThreadLocal<Boolean>();
 
     /**
      * Load the specified resource for the supported browsers and tests
@@ -546,12 +546,13 @@ public abstract class WebTestCase extends BaseTestCase {
         final String resourcePath = getClass().getPackage().getName().replace('.', '/') + '/' + fileName;
         final URL url = getClass().getClassLoader().getResource(resourcePath);
         
-        final Map testedBrowser = new HashMap();
+        final Map<String, BrowserVersion> testedBrowser = new HashMap<String, BrowserVersion>();
         testedBrowser.put("FIREFOX_2", BrowserVersion.FIREFOX_2);
         testedBrowser.put("INTERNET_EXPLORER_6_0", BrowserVersion.INTERNET_EXPLORER_6_0);
 
-        for (final Iterator iter = testedBrowser.entrySet().iterator(); iter.hasNext();) {
-            final Map.Entry entry = (Map.Entry) iter.next();
+        for (final Iterator<Map.Entry<String, BrowserVersion>> iter =
+                testedBrowser.entrySet().iterator(); iter.hasNext();) {
+            final Map.Entry<String, BrowserVersion> entry = iter.next();
             final String browserKey = (String) entry.getKey();
             final BrowserVersion browserVersion = (BrowserVersion) entry.getValue();
 
@@ -562,16 +563,16 @@ public abstract class WebTestCase extends BaseTestCase {
             
             final HtmlElement got = page.getHtmlElementById("log");
             
-            final List expected = readChildElementsText(want);
-            final List actual = readChildElementsText(got);
+            final List<String> expected = readChildElementsText(want);
+            final List<String> actual = readChildElementsText(got);
             
             assertEquals(expected, actual);
         }
     }
 
-    private List readChildElementsText(final HtmlElement elt) {
-        final List list = new ArrayList();
-        for (final Iterator iter = elt.getChildElementsIterator(); iter.hasNext();) {
+    private List<String> readChildElementsText(final HtmlElement elt) {
+        final List<String> list = new ArrayList<String>();
+        for (final Iterator<HtmlElement> iter = elt.getChildElementsIterator(); iter.hasNext();) {
             final HtmlElement child = (HtmlElement) iter.next();
             list.add(child.asText());
         }

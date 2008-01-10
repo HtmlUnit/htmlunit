@@ -936,7 +936,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return <code>null</code> if no child found
      */
     private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class clazz) {
-        final Iterator iterator = startElement.getChildElementsIterator();
+        final Iterator<HtmlElement> iterator = startElement.getChildElementsIterator();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (clazz.isInstance(element)) {
@@ -1430,7 +1430,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             }
         }
         if (recurse) {
-            for (final Iterator i = element.getChildElementsIterator(); i.hasNext();) {
+            for (final Iterator<HtmlElement> i = element.getChildElementsIterator(); i.hasNext();) {
                 final HtmlElement child = (HtmlElement) i.next();
                 addElement(map, child, attribute, true);
             }
@@ -1468,7 +1468,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             }
         }
         if (recurse) {
-            for (final Iterator i = element.getChildElementsIterator(); i.hasNext();) {
+            for (final Iterator<HtmlElement> i = element.getChildElementsIterator(); i.hasNext();) {
                 final HtmlElement child = (HtmlElement) i.next();
                 removeElement(map, child, att, true);
             }

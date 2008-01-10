@@ -172,7 +172,7 @@ public class HtmlTable extends ClickableElement {
      * @return The caption text
      */
     public String getCaptionText() {
-        final Iterator iterator = getChildElementsIterator();
+        final Iterator<HtmlElement> iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlCaption) {
@@ -188,7 +188,7 @@ public class HtmlTable extends ClickableElement {
      * @return The table header
      */
     public HtmlTableHeader getHeader() {
-        final Iterator iterator = getChildElementsIterator();
+        final Iterator<HtmlElement> iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlTableHeader) {
@@ -204,7 +204,7 @@ public class HtmlTable extends ClickableElement {
      * @return The table footer
      */
     public HtmlTableFooter getFooter() {
-        final Iterator iterator = getChildElementsIterator();
+        final Iterator<HtmlElement> iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlTableFooter) {
@@ -222,7 +222,7 @@ public class HtmlTable extends ClickableElement {
      */
     public List getBodies() {
         final List bodies = new ArrayList();
-        final Iterator iterator = getChildElementsIterator();
+        final Iterator<HtmlElement> iterator = getChildElementsIterator();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlTableBody) {

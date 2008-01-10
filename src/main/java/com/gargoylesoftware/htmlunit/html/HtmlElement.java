@@ -967,14 +967,14 @@ public abstract class HtmlElement extends DomElement {
      * @return an iterator over the HtmlElement children of this object, i.e. excluding the
      * non-element nodes
      */
-    public final Iterator getChildElementsIterator() {
+    public final Iterator<HtmlElement> getChildElementsIterator() {
         return new ChildElementsIterator();
     }
 
    /**
      * an iterator over the HtmlElement children
      */
-    protected class ChildElementsIterator implements Iterator {
+    protected class ChildElementsIterator implements Iterator<HtmlElement> {
 
         private HtmlElement nextElement_;
 
@@ -996,7 +996,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         /** @return the next one */
-        public Object next() {
+        public HtmlElement next() {
             return nextElement();
         }
 

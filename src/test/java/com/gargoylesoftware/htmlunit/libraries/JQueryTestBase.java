@@ -118,7 +118,7 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @return a list item iterator containing the test results
      * @throws Exception if an error occurs
      */
-    protected Iterator loadPage(final BrowserVersion version) throws Exception {
+    protected Iterator<HtmlElement> loadPage(final BrowserVersion version) throws Exception {
         final String resource = "jquery/" + getVersion() + "/test/index.html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
@@ -132,7 +132,7 @@ public abstract class JQueryTestBase extends WebTestCase {
 
         final HtmlElement doc = page.getDocumentHtmlElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
-        final Iterator i = tests.getChildElementsIterator();
+        final Iterator<HtmlElement> i = tests.getChildElementsIterator();
 
         return i;
     }
