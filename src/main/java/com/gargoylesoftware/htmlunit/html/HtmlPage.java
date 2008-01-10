@@ -424,12 +424,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return The list of id's
      */
     public List<String> getTabbableElementIds() {
-        final List<HtmlElement> elementList = getTabbableElements();
-        final List<String> list = new ArrayList<String>(elementList.size());
-        final int listSize = list.size();
+        final List<String> list = new ArrayList<String>();
 
-        for (int i = 0; i < listSize; i++) {
-            list.set(i, elementList.get(i).getAttributeValue("id"));
+        for (final HtmlElement element : getTabbableElements()) {
+            list.add(element.getAttributeValue("id"));
         }
 
         return Collections.unmodifiableList(list);
