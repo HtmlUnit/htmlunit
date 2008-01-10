@@ -57,6 +57,10 @@ public class HtmlTextInput extends HtmlInput {
     private static final long serialVersionUID = -2473799124286935674L;
     private boolean preventDefault_;
 
+    private int selectionStart_;
+    
+    private int selectionEnd_;
+
     /**
      * Create an instance
      *
@@ -101,4 +105,82 @@ public class HtmlTextInput extends HtmlInput {
     protected boolean isSubmittableByEnter() {
         return true;
     }
+
+    /**
+     * Returns the selected text contained in this HtmlTextInput, <code>null</code> if no selection (Firefox only).
+     * @return the text
+     */
+    public String getSelectedText() {
+        String text = null;
+        if (selectionStart_ != selectionEnd_) {
+            text = getValueAttribute().substring(selectionStart_, selectionEnd_);
+        }
+        return text;
+    }
+    
+    /**
+     * Returns the selected text's start position (Firefox only).
+     * @return the start position >= 0
+     */
+    public int getSelectionStart() {
+        return selectionStart_;
+    }
+
+    /**
+     * Sets the selection start to the specified position (Firefox only).
+     * @param selectionStart the start position of the text >= 0
+     */
+    public void setSelectionStart(int selectionStart) {
+        if (selectionStart < 0) {
+            selectionStart = 0;
+        }
+        final int length = getValueAttribute().length();
+        if (selectionStart > length) {
+            selectionStart = length;
+        }
+        if (selectionEnd_ < selectionStart) {
+            selectionEnd_ = selectionStart;
+        }
+        this.selectionStart_ = selectionStart;
+    }
+    
+    /**
+     * Returns the selected text's end position (Firefox only).
+     * @return the end position >= 0
+     */
+    public int getSelectionEnd() {
+        return selectionEnd_;
+    }
+ 
+    /**
+     * Sets the selection end to the specified position (Firefox only).
+     * @param selectionEnd the end position of the text >= 0
+     */
+    public void setSelectionEnd(int selectionEnd) {
+        if (selectionEnd < 0) {
+            selectionEnd = 0;
+        }
+        final int length = getValueAttribute().length();
+        if (selectionEnd > length) {
+            selectionEnd = length;
+        }
+        if (selectionEnd < selectionStart_) {
+            selectionStart_ = selectionEnd;
+        }
+        this.selectionEnd_ = selectionEnd;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeValue(final String namespaceURI, final String qualifiedName,
+            final String attributeValue) {
+        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue);
+        if (qualifiedName.equals("value")) {
+            setSelectionStart(attributeValue.length());
+            setSelectionEnd(attributeValue.length());
+        }
+    }
+
 }

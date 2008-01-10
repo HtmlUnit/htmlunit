@@ -144,6 +144,11 @@ public class HtmlTextInputTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
+        testSelection(BrowserVersion.INTERNET_EXPLORER_7_0);
+        testSelection(BrowserVersion.FIREFOX_2);
+    }
+
+    private void testSelection(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function test() {\n"
@@ -163,7 +168,49 @@ public class HtmlTextInputTest extends WebTestCase {
 
         final String[] expectedAlerts = {"0"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(html, collectedAlerts);
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception If test fails
+     */
+    public void testSelection2() throws Exception {
+        testSelection2(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0,
+                new String[] {"undefined,undefined", "3,undefined", "3,10"});
+        testSelection2(3, 10, BrowserVersion.FIREFOX_2,
+                new String[] {"11,11", "3,11", "3,10"});
+        
+        testSelection2(-3, 15, BrowserVersion.INTERNET_EXPLORER_6_0,
+                new String[] {"undefined,undefined", "-3,undefined", "-3,15"});
+        testSelection2(-3, 15, BrowserVersion.FIREFOX_2,
+                new String[] {"11,11", "0,11", "0,11"});
+
+        testSelection2(10, 5, BrowserVersion.INTERNET_EXPLORER_6_0,
+                new String[] {"undefined,undefined", "10,undefined", "10,5"});
+        testSelection2(10, 5, BrowserVersion.FIREFOX_2,
+                new String[] {"11,11", "10,11", "5,5"});
+    }
+
+    private void testSelection2(final int selectionStart, final int selectionEnd,
+            final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<input id='myTextInput'>\n"
+            + "<script>\n"
+            + "    var input = document.getElementById('myTextInput');\n"
+            + "    input.value = 'Hello there';\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    input.selectionStart = " + selectionStart + ";\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    input.selectionEnd = " + selectionEnd + ";\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

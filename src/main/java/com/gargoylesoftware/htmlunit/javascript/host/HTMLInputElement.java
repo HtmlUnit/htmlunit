@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
 
 /**
@@ -190,5 +191,44 @@ public class HTMLInputElement extends FormField {
         ((HtmlInput) getDomNodeOrDie()).setDefaultChecked(defaultChecked);
     }
 
-}
+    /**
+     * Gets the value of "textLength" attribute.
+     * @return the text length.
+     */
+    public int jsxGet_textLength() {
+        return jsxGet_value().length();
+    }
 
+    /**
+     * Gets the value of "selectionStart" attribute.
+     * @return the selection start.
+     */
+    public int jsxGet_selectionStart() {
+        return ((HtmlTextInput) getHtmlElementOrDie()).getSelectionStart();
+    }
+
+    /**
+     * Sets the value of "selectionStart" attribute.
+     * @param start selection start.
+     */
+    public void jsxSet_selectionStart(final int start) {
+        ((HtmlTextInput) getHtmlElementOrDie()).setSelectionStart(start);
+    }
+
+    /**
+     * Gets the value of "selectionEnd" attribute.
+     * @return the selection end.
+     */
+    public int jsxGet_selectionEnd() {
+        return ((HtmlTextInput) getHtmlElementOrDie()).getSelectionEnd();
+    }
+
+    /**
+     * Sets the value of "selectionEnd" attribute.
+     * @param end selection end.
+     */
+    public void jsxSet_selectionEnd(final int end) {
+        ((HtmlTextInput) getHtmlElementOrDie()).setSelectionEnd(end);
+    }
+
+}

@@ -7,6 +7,9 @@
 
     <body>
         <release version="1.15-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add support for input.selectionStart, input.selectionEnd, and input.textLength.
+            </action>
             <action type="remove" dev="asashour">
                 Remove deprecated DomNode.XXXX_NODE, use org.w3c.dom.Node instead.
             </action>

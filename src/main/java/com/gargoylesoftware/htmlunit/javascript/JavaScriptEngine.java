@@ -176,7 +176,7 @@ public class JavaScriptEngine implements Serializable {
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
         final Map prototypes = new HashMap();
-        final Map prototypesPerJSName = new HashMap();
+        final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
         final Window window = new Window(this);
         final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
         context.initStandardObjects(window);
@@ -236,8 +236,9 @@ public class JavaScriptEngine implements Serializable {
 
         // once all prototypes have been build, it's possible to configure the chains
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Iterator iter = prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
-            final Map.Entry entry = (Map.Entry) iter.next();
+        for (final Iterator<Map.Entry<String, Scriptable>> iter =
+                prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
+            final Map.Entry<String, Scriptable> entry = iter.next();
             final String name = (String) entry.getKey();
             final ClassConfiguration config = jsConfig.getClassConfiguration(name);
             final Scriptable prototype = (Scriptable) entry.getValue();
@@ -251,12 +252,12 @@ public class JavaScriptEngine implements Serializable {
         }
         
         // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal
-        final Class[] evalFnTypes = {String.class};
+        final Class< ? >[] evalFnTypes = {String.class};
         final Member evalFn = Window.class.getMethod("custom_eval", evalFnTypes);
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
         window.associateValue("custom_eval", jsCustomEval);
         
-        for (final Iterator classnames = jsConfig.keySet().iterator(); classnames.hasNext();) {
+        for (final Iterator<String> classnames = jsConfig.keySet().iterator(); classnames.hasNext();) {
             final String jsClassName = (String) classnames.next();
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final Method jsConstructor = config.getJsConstructor();
@@ -303,7 +304,7 @@ public class JavaScriptEngine implements Serializable {
             final ScriptableObject scriptable) {
         
         // the constants
-        for (final Iterator constantsIterator = config.constants().iterator(); constantsIterator.hasNext();) {
+        for (final Iterator<String> constantsIterator = config.constants().iterator(); constantsIterator.hasNext();) {
             final String constant = (String) constantsIterator.next();
             final Class linkedClass = config.getLinkedClass();
             try {

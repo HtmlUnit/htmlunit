@@ -85,11 +85,12 @@ public final class JavaScriptConfiguration {
     /** Constant indicating that this function/property is not defined in the configuration file */
     public static final int NOT_FOUND = 3;
 
-    private static Map ConfigurationMap_ = new HashMap(11);
-    private static HashMap ClassnameMap_ = new HashMap();
+    private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
+        new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
+    private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
     private static Map HtmlJavaScriptMap_;
 
-    private final Map configuration_;
+    private final Map<String, ClassConfiguration> configuration_;
     private final BrowserVersion browser_;
 
     /**
@@ -124,7 +125,7 @@ public final class JavaScriptConfiguration {
      */
     protected static void resetClassForTesting() {
         XmlDocument_ = null;
-        ConfigurationMap_ = new HashMap(11);
+        ConfigurationMap_ = new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
     }
 
     /**
@@ -192,7 +193,7 @@ public final class JavaScriptConfiguration {
         if (browserVersion == null) {
             throw new IllegalStateException("BrowserVersion must be defined");
         }
-        JavaScriptConfiguration configuration = (JavaScriptConfiguration) ConfigurationMap_.get(browserVersion);
+        JavaScriptConfiguration configuration = ConfigurationMap_.get(browserVersion);
 
         if (configuration == null) {
             configuration = new JavaScriptConfiguration(browserVersion);
@@ -217,7 +218,7 @@ public final class JavaScriptConfiguration {
     }
 
     private static Reader getConfigurationFileAsReader() {
-        final Class clazz = JavaScriptConfiguration.class;
+        final Class< ? > clazz = JavaScriptConfiguration.class;
         final String name = clazz.getPackage().getName().replace('.', '/') + '/' + "JavaScriptConfiguration.xml";
         InputStream inputStream = clazz.getClassLoader().getResourceAsStream(name);
         if (inputStream == null) {
@@ -247,12 +248,12 @@ public final class JavaScriptConfiguration {
      * Get the set of keys for the class configurations.
      * @return Set
      */
-    public Set keySet() {
+    public Set<String> keySet() {
         return configuration_.keySet();
     }
 
-    private Map buildUsageMap() {
-        final Map classMap = new HashMap(30);
+    private Map<String, ClassConfiguration> buildUsageMap() {
+        final Map<String, ClassConfiguration> classMap = new HashMap<String, ClassConfiguration>(30);
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
         while (node != null) {
             if (node instanceof Element) {
@@ -529,7 +530,7 @@ public final class JavaScriptConfiguration {
      * Get an iterator over the keys in the configuration - For testing only
      * @return Iterator
      */
-    protected Iterator keyIterator() {
+    protected Iterator<String> keyIterator() {
         return configuration_.keySet().iterator();
     }
 
@@ -538,7 +539,7 @@ public final class JavaScriptConfiguration {
      * @param classname The classname that you want the implementing class for.  For testing only.
      * @return Class
      */
-    protected Class getClassObject(final String classname) {
+    protected Class< ? > getClassObject(final String classname) {
         final ClassConfiguration config = (ClassConfiguration) configuration_.get(classname);
         return config.getLinkedClass();
     }
@@ -549,7 +550,7 @@ public final class JavaScriptConfiguration {
      * @param propertyName The property to find the getter for
      * @return Method
      */
-    public Method getPropertyReadMethod(final Class clazz, final String propertyName) {
+    public Method getPropertyReadMethod(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
         return getPropertyReadMethod(classname, propertyName);
     }
@@ -662,7 +663,7 @@ public final class JavaScriptConfiguration {
      * @param propertyName The name of the property
      * @return boolean True if the property exists
      */
-    public boolean propertyExists(final Class clazz, final String propertyName) {
+    public boolean propertyExists(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
         return propertyExists(classname, propertyName);
     }
@@ -689,7 +690,7 @@ public final class JavaScriptConfiguration {
      * @param clazz
      * @return the classname
      */
-    private String getClassnameForClass(final Class clazz) {
+    private String getClassnameForClass(final Class< ? > clazz) {
         final String name = (String) ClassnameMap_.get(clazz.getName());
         if (name == null) {
             throw new IllegalStateException("Did not find the mapping of the class to the classname for "
@@ -711,7 +712,7 @@ public final class JavaScriptConfiguration {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
         final Iterator it = configuration.keyIterator();
-        final Map map = new HashMap();
+        final Map<Class < ? >, Class < ? >> map = new HashMap<Class < ? >, Class < ? >>();
 
         while (it.hasNext()) {
             String jsClassname = (String) it.next();

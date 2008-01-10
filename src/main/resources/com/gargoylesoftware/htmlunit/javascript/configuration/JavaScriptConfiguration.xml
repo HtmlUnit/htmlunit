@@ -713,8 +713,17 @@
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
                 descr="MSDN documentation"/>
         </property>
+        <property name="textLength" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="type" readable="true" writable="true">
             <javascript min-version="1.1"/>
+        </property>
+        <property name="selectionStart" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="selectionEnd" readable="true" writable="true">
+            <browser name="Firefox"/>
         </property>
     </class>
 

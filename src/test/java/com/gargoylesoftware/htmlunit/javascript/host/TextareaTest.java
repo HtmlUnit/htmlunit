@@ -81,12 +81,12 @@ public class TextareaTest extends WebTestCase {
             + "<form name='form1' method='post' >\n"
             + "<textarea name='textarea1' cols='45' rows='4'>1234</textarea>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"1234", "PoohBear"};
-
         assertEquals(expectedAlerts, collectedAlerts);
     }
     
@@ -103,7 +103,7 @@ public class TextareaTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getFormByName("form1");
@@ -134,8 +134,9 @@ public class TextareaTest extends WebTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
+
         final String[] expectedAlerts = {"TEXTAREA", "INPUT"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -166,11 +167,8 @@ public class TextareaTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
-
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -196,7 +194,7 @@ public class TextareaTest extends WebTestCase {
 
     private void testSelection(final int selectionStart, final int selectionEnd,
             final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<body>\n"
             + "<textarea id='myTextArea'></textarea>\n"
             + "<script>\n"
@@ -211,11 +209,8 @@ public class TextareaTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List collectedAlerts = new ArrayList();
-        loadPage(browserVersion, content, collectedAlerts);
-
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
