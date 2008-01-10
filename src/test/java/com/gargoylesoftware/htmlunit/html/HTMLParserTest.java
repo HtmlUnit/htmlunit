@@ -166,7 +166,7 @@ public class HTMLParserTest extends WebTestCase {
             // No connectivity issues.
             final HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
             final String stringVal = xpath.stringValueOf(page).trim();
-            assertEquals("\u00A9 2002-2008 Gargoyle Software Inc.", stringVal);
+            assertTrue(stringVal.matches("\u00A9 2002-\\d\\d\\d\\d Gargoyle Software Inc."));
         }
     }
 
