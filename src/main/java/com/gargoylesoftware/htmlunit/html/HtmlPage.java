@@ -464,7 +464,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final List tags = Arrays
             .asList(new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
         final List tabbableElements = new ArrayList();
-        final Iterator iterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             final String tagName = element.getTagName();
@@ -573,7 +573,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final List acceptableTagNames = Arrays.asList(
                 new Object[]{"a", "area", "button", "input", "label", "legend", "textarea"});
 
-        final Iterator iterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (acceptableTagNames.contains(element.getTagName())) {
@@ -1669,7 +1669,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final HtmlPage result = (HtmlPage) super.cloneDomNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s
-            final Iterator it = result.getAllHtmlChildElements();
+            final Iterator<HtmlElement> it = result.getAllHtmlChildElements();
             while (it.hasNext()) {
                 final HtmlElement child = (HtmlElement) it.next();
                 removeMappedElement(child);

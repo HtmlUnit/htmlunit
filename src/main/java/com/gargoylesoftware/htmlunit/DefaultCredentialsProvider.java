@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -70,9 +69,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     private static final long serialVersionUID = 1036331144926557053L;
 
-    private final Map credentials_ = new HashMap();
-    private final Map proxyCredentials_ = new HashMap();
-    private final Set answerMarks_ = Collections.synchronizedSortedSet(new TreeSet());
+    private final Map<AuthScope, Credentials> credentials_ = new HashMap<AuthScope, Credentials>();
+    private final Map<AuthScope, Credentials> proxyCredentials_ = new HashMap<AuthScope, Credentials>();
+    private final Set<Object> answerMarks_ = Collections.synchronizedSortedSet(new TreeSet<Object>());
 
     /**
      * Creates a new <tt>DefaultCredentialsProvider</tt> instance.
@@ -196,7 +195,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             return null;
         }
 
-        final Map credentials;
+        final Map<AuthScope, Credentials> credentials;
         if (proxy) {
             credentials = proxyCredentials_;
         }
@@ -204,10 +203,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             credentials = credentials_;
         }
 
-        for (final Iterator i = credentials.entrySet().iterator(); i.hasNext();) {
-            final Map.Entry entry = (Map.Entry) i.next();
-            final AuthScope scope = (AuthScope) entry.getKey();
-            final Credentials c = (Credentials) entry.getValue();
+        for (final Map.Entry<AuthScope, Credentials> entry : credentials.entrySet()) {
+            final AuthScope scope = entry.getKey();
+            final Credentials c = entry.getValue();
             if (matchScheme(scope, scheme) && matchHost(scope, host)
                     && matchPort(scope, port) && matchRealm(scope, scheme)) {
 

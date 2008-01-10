@@ -1015,14 +1015,14 @@ public abstract class DomNode implements Cloneable, Serializable {
      * below this one.
      * @return The iterator.
      */
-    public Iterator getAllHtmlChildElements() {
+    public Iterator<HtmlElement> getAllHtmlChildElements() {
         return new DescendantElementsIterator();
     }
 
     /**
      * An iterator over all HtmlElement descendants in document order.
      */
-    protected class DescendantElementsIterator implements Iterator {
+    protected class DescendantElementsIterator implements Iterator<HtmlElement> {
 
         private HtmlElement nextElement_ = getFirstChildElement(DomNode.this);
 
@@ -1032,7 +1032,7 @@ public abstract class DomNode implements Cloneable, Serializable {
         }
 
         /** @return the next one */
-        public Object next() {
+        public HtmlElement next() {
             return nextElement();
         }
 

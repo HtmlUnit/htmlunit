@@ -96,7 +96,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     private Transformer transformer_;
     
-    private List cachedElements_;
+    private List<DomNode> cachedElements_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.

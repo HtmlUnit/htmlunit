@@ -61,10 +61,10 @@ public class XmlElement extends DomNamespaceNode {
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
     /** The map holding the namespaces, keyed by URI. */
-    private Map namespaces_ = new HashMap();
+    private Map<String, String> namespaces_ = new HashMap<String, String>();
 
     /** The map holding the attributes, keyed by name. */
-    private Map/* String, XmlAttr*/ attributes_;
+    private Map<String, XmlAttr> attributes_;
 
     /**
      * Create an instance of a DOM node that can have a namespace.
@@ -75,11 +75,11 @@ public class XmlElement extends DomNamespaceNode {
      * @param attributes The attributes of this element.
      */
     protected XmlElement(final String namespaceURI, final String qualifiedName, final Page page,
-            final Map/* String, XmlAttr*/ attributes) {
+            final Map<String, XmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
         attributes_ = attributes;
-        for (final Iterator values = attributes.values().iterator(); values.hasNext();) {
-            final XmlAttr attr = (XmlAttr) values.next();
+        for (final Iterator<XmlAttr> values = attributes.values().iterator(); values.hasNext();) {
+            final XmlAttr attr = values.next();
             attr.setParentNode(this);
         }
     }
@@ -133,7 +133,7 @@ public class XmlElement extends DomNamespaceNode {
      * Returns the map holding the attributes, keyed by name.
      * @return the attributes map.
      */
-    public Map getAttributes() {
+    public Map<String, XmlAttr> getAttributes() {
         return attributes_;
     }
     /**
@@ -236,8 +236,9 @@ public class XmlElement extends DomNamespaceNode {
      * @param attributeCount the initial number of attributes to be added to the map.
      * @return the attribute map.
      */
-    static Map createAttributeMap(final int attributeCount) {
-        return ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
+    @SuppressWarnings("unchecked")
+    static Map<String, XmlAttr> createAttributeMap(final int attributeCount) {
+        return (Map<String, XmlAttr>) ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
     }
 
     /**
@@ -247,7 +248,7 @@ public class XmlElement extends DomNamespaceNode {
      * @param qualifiedName The qualified name of the attribute
      * @param value The value of the attribute
      */
-    static XmlAttr addAttributeToMap(final XmlPage page, final Map attributeMap,
+    static XmlAttr addAttributeToMap(final XmlPage page, final Map<String, XmlAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
         final XmlAttr newAttr = new XmlAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);

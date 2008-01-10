@@ -85,7 +85,7 @@ public class DocumentNavigatorTest extends WebTestCase {
      * @throws Exception if test fails
      */
     public void testFollowingSiblingAxisIterator() throws Exception {
-        final List expected = Arrays.asList(new String[] {"body"});
+        final List<String> expected = Arrays.asList(new String[] {"body"});
         final Collection received = CollectionUtils
             .collect(NAVIGATOR.getFollowingSiblingAxisIterator(page_.getDocumentHtmlElement().getFirstDomChild()),
                 NODE_TO_NODENAME);

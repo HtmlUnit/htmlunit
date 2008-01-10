@@ -178,7 +178,7 @@ public class HtmlForm extends ClickableElement {
             }
         }
 
-        final List parameters = getParameterListForSubmit(submitElement);
+        final List<KeyValuePair> parameters = getParameterListForSubmit(submitElement);
         final SubmitMethod method;
         final String methodAttribute = getMethodAttribute();
         if ("post".equalsIgnoreCase(methodAttribute)) {
@@ -257,11 +257,11 @@ public class HtmlForm extends ClickableElement {
      * form or null if the form was submitted by javascript.
      * @return The list of {@link KeyValuePair}s.
      */
-    public final List getParameterListForSubmit(final SubmittableElement submitElement) {
-        final Collection submittableElements = getSubmittableElements(submitElement);
+    public final List<KeyValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
+        final Collection<SubmittableElement> submittableElements = getSubmittableElements(submitElement);
 
-        final List parameterList = new ArrayList(submittableElements.size());
-        final Iterator iterator = submittableElements.iterator();
+        final List<KeyValuePair> parameterList = new ArrayList<KeyValuePair>(submittableElements.size());
+        final Iterator<SubmittableElement> iterator = submittableElements.iterator();
         while (iterator.hasNext()) {
             final SubmittableElement element = (SubmittableElement) iterator.next();
             final KeyValuePair[] pairs = element.getSubmitKeyValuePairs();
@@ -290,7 +290,7 @@ public class HtmlForm extends ClickableElement {
             return scriptResult.getNewPage();
         }
 
-        final Iterator elementIterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> elementIterator = getAllHtmlChildElements();
         while (elementIterator.hasNext()) {
             final Object next = elementIterator.next();
             if (next instanceof SubmittableElement) {
@@ -308,14 +308,14 @@ public class HtmlForm extends ClickableElement {
      * form or null if the form was submitted by javascript.
      * @return See above
      */
-    public Collection getSubmittableElements(final SubmittableElement submitElement) {
-        final List submittableElements = new ArrayList();
+    public Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
+        final List<SubmittableElement> submittableElements = new ArrayList<SubmittableElement>();
 
-        final Iterator iterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (isSubmittable(element, submitElement)) {
-                submittableElements.add(element);
+                submittableElements.add((SubmittableElement) element);
             }
         }
 
@@ -428,7 +428,7 @@ public class HtmlForm extends ClickableElement {
     public HtmlRadioButtonInput getRadioButtonInput(final String name, final String value)
         throws ElementNotFoundException {
 
-        final Iterator iterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
 
@@ -535,7 +535,7 @@ public class HtmlForm extends ClickableElement {
 
         final List results = new ArrayList();
 
-        final Iterator iterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlRadioButtonInput
@@ -573,7 +573,7 @@ public class HtmlForm extends ClickableElement {
         //radios also in the case where the specified one is not found
         final HtmlInput inputToSelect = getRadioButtonInput(name, value);
 
-        final Iterator iterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlRadioButtonInput
@@ -669,7 +669,7 @@ public class HtmlForm extends ClickableElement {
     public HtmlRadioButtonInput getCheckedRadioButton(final String name) {
         Assert.notNull("name", name);
 
-        final Iterator iterator = getAllHtmlChildElements();
+        final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlRadioButtonInput
