@@ -107,7 +107,7 @@ public class HtmlAreaTest extends WebTestCase {
      */
     public void testClick_onclickReturnsFalse() throws Exception {
         final WebClient client = createWebClient("alert('foo');return false;");
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
@@ -123,7 +123,7 @@ public class HtmlAreaTest extends WebTestCase {
      */
     public void testClick_onclickReturnsTrue() throws Exception {
         final WebClient client = createWebClient("alert('foo');return true;");
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
@@ -142,7 +142,7 @@ public class HtmlAreaTest extends WebTestCase {
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlArea area = (HtmlArea) page.getHtmlElementById("a2");
@@ -166,7 +166,7 @@ public class HtmlAreaTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -193,7 +193,7 @@ public class HtmlAreaTest extends WebTestCase {
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final Page page2 = ((HtmlArea) page.getHtmlElementById("a2")).click();

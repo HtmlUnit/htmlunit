@@ -165,7 +165,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submitInput1");
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List expectedParameters = new ArrayList();
+        final List<KeyValuePair> expectedParameters = new ArrayList<KeyValuePair>();
         expectedParameters.add(new KeyValuePair("textInput1", "foo"));
         expectedParameters.add(new KeyValuePair("textInput2", "textInput2"));
         expectedParameters.add(new KeyValuePair("hidden1", "hidden1"));
@@ -274,7 +274,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final List expectedElements = new ArrayList();
+        final List<HtmlElement> expectedElements = new ArrayList<HtmlElement>();
         expectedElements.add(page.getHtmlElementById("bar"));
 
         assertEquals(expectedElements, page.getTabbableElements());
@@ -303,7 +303,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final List expectedElements = Arrays.asList(new Object[] {page.getHtmlElementById("a"),
+        final List<HtmlElement> expectedElements = Arrays.asList(new HtmlElement[] {page.getHtmlElementById("a"),
                 page.getHtmlElementById("g"), page.getHtmlElementById("d"),
                 page.getHtmlElementById("c"), page.getHtmlElementById("f"),
                 page.getHtmlElementById("e"), page.getHtmlElementById("b"),
@@ -351,9 +351,9 @@ public class HtmlPageTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final List expectedElements = Arrays.asList(new Object[] {page.getHtmlElementById("a"),
+        final List<HtmlElement> expectedElements = Arrays.asList(new HtmlElement[] {page.getHtmlElementById("a"),
                 page.getHtmlElementById("b")});
-        final List collectedElements = page.getHtmlElementsByAccessKey('a');
+        final List<HtmlElement> collectedElements = page.getHtmlElementsByAccessKey('a');
         assertEquals(expectedElements, collectedElements);
     }
 
@@ -643,9 +643,8 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
-        final List collectedIncorrectness = new ArrayList();
-        final IncorrectnessListener listener = new IncorrectnessListener()
-        {
+        final List<String> collectedIncorrectness = new ArrayList<String>();
+        final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -678,9 +677,8 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
-        final List collectedIncorrectness = new ArrayList();
-        final IncorrectnessListener listener = new IncorrectnessListener()
-        {
+        final List<String> collectedIncorrectness = new ArrayList<String>();
+        final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -708,7 +706,7 @@ public class HtmlPageTest extends WebTestCase {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\")'>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -724,7 +722,7 @@ public class HtmlPageTest extends WebTestCase {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -741,7 +739,7 @@ public class HtmlPageTest extends WebTestCase {
             + "<script type='text/javascript'>\n"
             + "window.onload=function(){alert('foo')}</script>\n"
             + "</head><body></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -758,7 +756,7 @@ public class HtmlPageTest extends WebTestCase {
             + "<body onLoad='foo=4711'>\n"
             + "<a name='alert' href='javascript:alert(foo)'/>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -778,7 +776,7 @@ public class HtmlPageTest extends WebTestCase {
             + "load=function(){alert('foo')};\n"
             + "onload=load\n"
             + "</script></head><body></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -797,7 +795,7 @@ public class HtmlPageTest extends WebTestCase {
             + "onload=load;\n"
             + "alert(onload);\n"
             + "</script></head><body></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -819,13 +817,13 @@ public class HtmlPageTest extends WebTestCase {
             + "</form>\n"
             + "</td></tr></table>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         // This used to blow up on page load
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List expectedAlerts = Collections.EMPTY_LIST;
+        final List< ? > expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -869,7 +867,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final List expectedForms = Arrays.asList(new HtmlForm[] {page.getFormByName("one"),
+        final List<HtmlForm> expectedForms = Arrays.asList(new HtmlForm[] {page.getFormByName("one"),
                 page.getFormByName("two")});
         assertEquals(expectedForms, page.getForms());
     }
@@ -906,7 +904,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedItems = new ArrayList();
+        final List<Object> collectedItems = new ArrayList<Object>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1026,7 +1024,7 @@ public class HtmlPageTest extends WebTestCase {
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedItems = new ArrayList();
+        final List<Object> collectedItems = new ArrayList<Object>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1187,7 +1185,7 @@ public class HtmlPageTest extends WebTestCase {
             + "blabla"
             + "</body>\n"
             + "</html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final String[] expectedAlerts = {"12345"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
@@ -1350,7 +1348,7 @@ public class HtmlPageTest extends WebTestCase {
         final String[] expectedAlerts = {"webm=none"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
         
@@ -1380,7 +1378,7 @@ public class HtmlPageTest extends WebTestCase {
         final String[] expectedAlerts = {"cl2", "cl1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1660,7 +1658,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final List collector = new ArrayList();
+        final List<String> collector = new ArrayList<String>();
         final HtmlAttributeChangeListener listener2 = new HtmlAttributeChangeListenerTestImpl() {
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 2");
@@ -1698,7 +1696,7 @@ public class HtmlPageTest extends WebTestCase {
             + "alert(s.length);\n"
             + "</script></body></html>";
         final String[] expectedAlerts = {"0"};
-        final List actualAlerts = new ArrayList();
+        final List<String> actualAlerts = new ArrayList<String>();
         loadPage(html, actualAlerts);
         assertEquals(expectedAlerts, actualAlerts);
     }
@@ -1714,7 +1712,7 @@ public class HtmlPageTest extends WebTestCase {
             + "alert(s);\n"
             + "</script></body></html>";
         final String[] expectedAlerts = {"fontSize"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1749,7 +1747,7 @@ public class HtmlPageTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertFalse(collectedAlerts.get(0).equals("null"));
     }
@@ -1768,7 +1766,7 @@ public class HtmlPageTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertTrue(collectedAlerts.get(0).equals("null"));
     }
@@ -1782,7 +1780,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"foo", "bar"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -1814,7 +1812,7 @@ public class HtmlPageTest extends WebTestCase {
         final String expectedPageTitle) throws Exception {
         final WebClient webClient = new WebClient(browserVersion);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedConfirms = new ArrayList();
+        final List<String> collectedConfirms = new ArrayList<String>();
 
         webClient.setOnbeforeunloadHandler(new OnbeforeunloadHandler() {
             public boolean handleEvent(final Page page, final String message) {

@@ -67,7 +67,7 @@ public class WebRequestSettings {
     private String cookiePolicy_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
-    private List requestParameters_ = Collections.EMPTY_LIST;
+    private List<KeyValuePair> requestParameters_ = Collections.EMPTY_LIST;
     private String requestBody_;
 
     /**
@@ -157,7 +157,7 @@ public class WebRequestSettings {
     /**
      * @return Returns the requestParameters.
      */
-    public List getRequestParameters() {
+    public List<KeyValuePair> getRequestParameters() {
         return requestParameters_;
     }
 

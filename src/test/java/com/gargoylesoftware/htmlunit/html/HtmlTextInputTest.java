@@ -162,7 +162,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"0"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

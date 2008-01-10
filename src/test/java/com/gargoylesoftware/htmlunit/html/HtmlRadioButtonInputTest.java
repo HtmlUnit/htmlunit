@@ -152,7 +152,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "<label for='twoItems'>2</label>\n"
             + "</form></body></html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlRadioButtonInput oneItem = (HtmlRadioButtonInput) page.getHtmlElementById("oneItem");
@@ -230,7 +230,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"false,false", "true,false", "false,true"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -251,7 +251,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         
         final HtmlRadioButtonInput radio1 = (HtmlRadioButtonInput) page.getHtmlElementById("radio1");

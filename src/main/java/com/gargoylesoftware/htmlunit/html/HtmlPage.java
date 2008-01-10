@@ -423,12 +423,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *
      * @return The list of id's
      */
-    public List getTabbableElementIds() {
-        final List list = new ArrayList(getTabbableElements());
+    public List<String> getTabbableElementIds() {
+        final List<HtmlElement> elementList = getTabbableElements();
+        final List<String> list = new ArrayList<String>(elementList.size());
         final int listSize = list.size();
 
         for (int i = 0; i < listSize; i++) {
-            list.set(i, ((HtmlElement) list.get(i)).getAttributeValue("id"));
+            list.set(i, elementList.get(i).getAttributeValue("id"));
         }
 
         return Collections.unmodifiableList(list);
@@ -461,10 +462,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     *
     * @return A list containing all the tabbable elements in proper tab order.
     */
-    public List getTabbableElements() {
-        final List tags = Arrays
-            .asList(new Object[] {"a", "area", "button", "input", "object", "select", "textarea"});
-        final List tabbableElements = new ArrayList();
+    public List<HtmlElement> getTabbableElements() {
+        final List<String> tags = Arrays
+            .asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
+        final List<HtmlElement> tabbableElements = new ArrayList<HtmlElement>();
         final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
@@ -480,12 +481,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         return Collections.unmodifiableList(tabbableElements);
     }
 
-    private Comparator createTabOrderComparator() {
-        return new Comparator() {
-            public int compare(final Object object1, final Object object2) {
-
-                final HtmlElement element1 = (HtmlElement) object1;
-                final HtmlElement element2 = (HtmlElement) object2;
+    private Comparator<HtmlElement> createTabOrderComparator() {
+        return new Comparator<HtmlElement>() {
+            public int compare(final HtmlElement element1, final HtmlElement element2) {
 
                 final Short i1 = element1.getTabIndex();
                 final Short i2 = element2.getTabIndex();
@@ -541,7 +539,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     *      if no elements can be found that match the specified key.
     */
     public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
-        final List elements = getHtmlElementsByAccessKey(accessKey);
+        final List<HtmlElement> elements = getHtmlElementsByAccessKey(accessKey);
         if (elements.isEmpty()) {
             return null;
         }
@@ -567,12 +565,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     * @param accessKey The key to look for
     * @return A list of HTML elements that are assigned to the specified accesskey.
     */
-    public List getHtmlElementsByAccessKey(final char accessKey) {
-        final List elements = new ArrayList();
+    public List<HtmlElement> getHtmlElementsByAccessKey(final char accessKey) {
+        final List<HtmlElement> elements = new ArrayList<HtmlElement>();
 
         final String searchString = ("" + accessKey).toLowerCase();
-        final List acceptableTagNames = Arrays.asList(
-                new Object[]{"a", "area", "button", "input", "label", "legend", "textarea"});
+        final List<String> acceptableTagNames = Arrays.asList(
+                new String[]{"a", "area", "button", "input", "label", "legend", "textarea"});
 
         final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
@@ -935,7 +933,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param clazz The class to search for.
      * @return <code>null</code> if no child found
      */
-    private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class clazz) {
+    private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class< ? > clazz) {
         final Iterator<HtmlElement> iterator = startElement.getChildElementsIterator();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();

@@ -136,7 +136,7 @@ public final class HtmlInputTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final List radioButtons = form.getRadioButtonsByName("radio1");
+        final List<HtmlRadioButtonInput> radioButtons = form.getRadioButtonsByName("radio1");
         assertEquals(2, radioButtons.size());
 
         assertFalse(((HtmlRadioButtonInput) radioButtons.get(0)).isChecked());
@@ -152,7 +152,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "<form id='form1'>\n"
             + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
@@ -232,7 +232,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "<form id='form1'>\n"
             + "<input type='file' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
@@ -250,7 +250,7 @@ public final class HtmlInputTest extends WebTestCase {
         final String[] expectedAlerts = {"text"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
     }
 
@@ -274,7 +274,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "  <input id='myInput'>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

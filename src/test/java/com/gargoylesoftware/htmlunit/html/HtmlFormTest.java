@@ -206,7 +206,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{
+        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("textfield", "*"), new KeyValuePair("button", "foo")
         });
         final List collectedParameters = webConnection.getLastParameters();
@@ -244,7 +244,7 @@ public class HtmlFormTest extends WebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -276,7 +276,7 @@ public class HtmlFormTest extends WebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -335,7 +335,7 @@ public class HtmlFormTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -367,7 +367,7 @@ public class HtmlFormTest extends WebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -399,7 +399,7 @@ public class HtmlFormTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -448,7 +448,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input name='button' type='reset' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final HtmlPage firstPage = loadPage(html, collectedAlerts);
         final HtmlResetInput button = (HtmlResetInput) firstPage.getHtmlElementById("button");
@@ -482,7 +482,7 @@ public class HtmlFormTest extends WebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -519,7 +519,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{
+        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("textfield", ""), new KeyValuePair("button", "foo")
         });
         final List collectedParameters = webConnection.getLastParameters();
@@ -545,8 +545,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{new KeyValuePair("button", "foo")});
-        final List collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> expectedParameters =
+            Arrays.asList(new KeyValuePair[]{new KeyValuePair("button", "foo")});
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -567,8 +568,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{new KeyValuePair("textfield", "blah")});
-        final List collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> expectedParameters =
+            Arrays.asList(new KeyValuePair[]{new KeyValuePair("textfield", "blah")});
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -595,11 +597,11 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{
+        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("textfield", "blah"),
             new KeyValuePair("button", "foo")
         });
-        final List collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -622,8 +624,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[]{new KeyValuePair("button", "foo")});
-        final List collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> expectedParameters =
+            Arrays.asList(new KeyValuePair[]{new KeyValuePair("button", "foo")});
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -648,8 +651,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submit");
         button.click();
 
-        final List expectedParameters = Arrays.asList(new Object[] {new KeyValuePair("submit", "submit")});
-        final List collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> expectedParameters =
+            Arrays.asList(new KeyValuePair[] {new KeyValuePair("submit", "submit")});
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -692,8 +696,8 @@ public class HtmlFormTest extends WebTestCase {
 
         checkBox2.click();
         button2.click();
-        final List collectedParameters2 = webConnection2.getLastParameters();
-        final List expectedParameters2 = Arrays.asList(new Object[] {
+        final List<KeyValuePair> collectedParameters2 = webConnection2.getLastParameters();
+        final List<KeyValuePair> expectedParameters2 = Arrays.asList(new KeyValuePair[] {
             new KeyValuePair("Format", "html"),
             new KeyValuePair("button", "foo")
         });
@@ -885,8 +889,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlInput submitButton = (HtmlInput) page.getHtmlElementById("submitButton");
         submitButton.click();
 
-        final List collectedParameters = webConnection.getLastParameters();
-        final List expectedParameters = Arrays.asList(new Object[] {
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[] {
             new KeyValuePair("data", "NOT_SUBMITTED"),
             new KeyValuePair("submit", "Submit Query")
         });
@@ -915,8 +919,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlInput submitButton = (HtmlInput) page.getHtmlElementById("submitButton");
         submitButton.click();
 
-        final List collectedParameters = webConnection.getLastParameters();
-        final List expectedParameters = Arrays.asList(new Object[] {
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[] {
             new KeyValuePair("dispatch", "Save"),
             new KeyValuePair("dispatch", "TAB"),
         });
@@ -1164,7 +1168,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"number", "false"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -1199,7 +1203,7 @@ public class HtmlFormTest extends WebTestCase {
         
         final String secondContent = "<html><head><title>second</title></head></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);

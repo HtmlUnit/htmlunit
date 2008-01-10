@@ -83,7 +83,7 @@ public class HtmlAnchorTest extends WebTestCase {
             + "<a href='  http://b/    ' id='b'>b</a>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
         final String[] expectedAlerts = {"9", "9"};
@@ -152,7 +152,7 @@ public class HtmlAnchorTest extends WebTestCase {
             = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -186,7 +186,7 @@ public class HtmlAnchorTest extends WebTestCase {
             = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -219,7 +219,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -234,7 +234,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final List expectedParameters = Collections.EMPTY_LIST;
+        final List< ? > expectedParameters = Collections.EMPTY_LIST;
 
         assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
         assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
@@ -252,7 +252,7 @@ public class HtmlAnchorTest extends WebTestCase {
             + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a2");
@@ -278,7 +278,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -420,7 +420,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);

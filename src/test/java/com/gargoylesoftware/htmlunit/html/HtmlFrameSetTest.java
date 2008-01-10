@@ -235,7 +235,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"Success"};
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -309,7 +309,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         client.setWebConnection(webConnection);
         
         final String[] expectedAlerts = {"2"};
-        final ArrayList collectedAlerts = new ArrayList();
+        final ArrayList<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         
         client.getPage(URL_FIRST);

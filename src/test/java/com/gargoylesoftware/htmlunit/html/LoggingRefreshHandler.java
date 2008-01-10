@@ -52,12 +52,12 @@ import com.gargoylesoftware.htmlunit.RefreshHandler;
  * @author Daniel Gredler
  */
 public class LoggingRefreshHandler implements RefreshHandler {
-    private final List list_;
+    private final List<Object> list_;
     
     /**
      * @param list The list to add data to
      */
-    public LoggingRefreshHandler(final List list) {
+    public LoggingRefreshHandler(final List<Object> list) {
         list_ = list;
     }
     

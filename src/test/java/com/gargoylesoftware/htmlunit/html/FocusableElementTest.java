@@ -72,7 +72,7 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlElement element = (HtmlElement) page.getHtmlElementById("focusId");
 

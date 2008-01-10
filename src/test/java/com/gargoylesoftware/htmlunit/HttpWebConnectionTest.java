@@ -49,6 +49,8 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.Servlet;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
@@ -344,7 +346,8 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @return the started web server.
      * @throws Exception If the test fails.
      */
-    public static Server startWebServer(final String resouceBase, final String[] classpath, final Map servlets)
+    public static Server startWebServer(final String resouceBase, final String[] classpath,
+            final Map<Class<Servlet>, String> servlets)
         throws Exception {
         final Server server = new Server(PORT);
 
@@ -352,8 +355,8 @@ public class HttpWebConnectionTest extends BaseTestCase {
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
         
-        for (final Iterator servletKeys = servlets.keySet().iterator(); servletKeys.hasNext();) {
-            final Class servlet = (Class) servletKeys.next();
+        for (final Iterator<Class<Servlet>> servletKeys = servlets.keySet().iterator(); servletKeys.hasNext();) {
+            final Class<Servlet> servlet = servletKeys.next();
             final String pathSpec = (String) servlets.get(servlet);
             context.addServlet(servlet, pathSpec);
             

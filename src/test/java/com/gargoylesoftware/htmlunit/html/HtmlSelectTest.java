@@ -224,7 +224,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
-        final List expected = new ArrayList();
+        final List<HtmlOption> expected = new ArrayList<HtmlOption>();
         expected.add(select.getOptionByValue("option1"));
         expected.add(select.getOptionByValue("option3"));
 
@@ -251,7 +251,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
-        final List expected = new ArrayList();
+        final List<HtmlOption> expected = new ArrayList<HtmlOption>();
         expected.add(select.getOptionByValue("option3"));
 
         assertEquals(expected, select.getSelectedOptions());
@@ -277,7 +277,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
-        final List expected = new ArrayList();
+        final List<HtmlOption> expected = new ArrayList<HtmlOption>();
         expected.add(select.getOptionByValue("option1"));
 
         assertEquals(expected, select.getSelectedOptions());
@@ -345,7 +345,7 @@ public class HtmlSelectTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List expectedParameters = new ArrayList();
+        final List<KeyValuePair> expectedParameters = new ArrayList<KeyValuePair>();
         expectedParameters.add(new KeyValuePair("select1", "newOption"));
         expectedParameters.add(new KeyValuePair("button", "foo"));
 
@@ -374,7 +374,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
 
-        final List expectedOptions = new ArrayList();
+        final List<HtmlOption> expectedOptions = new ArrayList<HtmlOption>();
         expectedOptions.add(select.getOptionByValue("option1"));
         expectedOptions.add(select.getOptionByValue("option2"));
         expectedOptions.add(select.getOptionByValue("option3"));
@@ -438,7 +438,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</select>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
@@ -462,7 +462,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "<option id='option2'>222</option>\n"
             + "</select>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlOption option = (HtmlOption) page.getHtmlElementById("option2");
@@ -470,7 +470,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     private void checkOptions(final HtmlSelect select) {
-        final List options = select.getOptions();
+        final List<HtmlOption> options = select.getOptions();
         if (options.isEmpty()) {
             assertNull(select.getFirstDomChild());
             assertNull(select.getLastDomChild());
@@ -672,7 +672,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"0"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

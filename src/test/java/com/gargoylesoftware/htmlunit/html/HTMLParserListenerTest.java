@@ -133,7 +133,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         assertNull(webClient.getHTMLParserListener());
         WebClient.setIgnoreOutsideContent(true);
 
-        final List messages = new ArrayList();
+        final List<MessageInfo> messages = new ArrayList<MessageInfo>();
         final HTMLParserListener collecter = new HTMLParserListener() {
             public void error(final String message, final URL url,
                     final int line, final int column, final String key) {

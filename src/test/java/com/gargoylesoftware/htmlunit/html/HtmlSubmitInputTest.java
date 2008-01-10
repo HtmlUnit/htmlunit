@@ -100,7 +100,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "<form id='form1' onSubmit='alert(\"bar\")'>\n"
             + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
@@ -125,7 +125,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -166,7 +166,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -193,7 +193,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {""};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final HtmlPage page = loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -212,7 +212,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"1"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlSubmitInput input = (HtmlSubmitInput) page.getHtmlElementById("myInput");
         input.click();

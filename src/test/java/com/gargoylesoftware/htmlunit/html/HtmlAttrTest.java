@@ -161,7 +161,7 @@ public class HtmlAttrTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"2"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

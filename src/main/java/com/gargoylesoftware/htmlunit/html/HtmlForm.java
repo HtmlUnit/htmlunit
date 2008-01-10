@@ -530,17 +530,17 @@ public class HtmlForm extends ClickableElement {
      * @param name The name
      * @return See above
      */
-    public List getRadioButtonsByName(final String name) {
+    public List<HtmlRadioButtonInput> getRadioButtonsByName(final String name) {
         Assert.notNull("name", name);
 
-        final List results = new ArrayList();
+        final List<HtmlRadioButtonInput> results = new ArrayList<HtmlRadioButtonInput>();
 
         final Iterator<HtmlElement> iterator = getAllHtmlChildElements();
         while (iterator.hasNext()) {
             final HtmlElement element = (HtmlElement) iterator.next();
             if (element instanceof HtmlRadioButtonInput
                      && element.getAttributeValue("name").equals(name)) {
-                results.add(element);
+                results.add((HtmlRadioButtonInput) element);
             }
         }
 

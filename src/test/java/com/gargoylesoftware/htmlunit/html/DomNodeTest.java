@@ -71,7 +71,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testElementHasAttributesWith() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -84,7 +84,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testElementHasAttributesNone() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -98,7 +98,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testNonElementHasAttributes() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -112,7 +112,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testNonElementGetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -126,7 +126,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testNonElementGetNamespaceURI() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -140,7 +140,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testNonElementGetLocalName() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -154,7 +154,7 @@ public class DomNodeTest extends WebTestCase {
      */
     public void testNonElementSetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
@@ -173,7 +173,7 @@ public class DomNodeTest extends WebTestCase {
             + "<tr><td>row 1</td></tr>\n"
             + "<tr><td>row 2</td></tr>\n"
             + "</table></p></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");

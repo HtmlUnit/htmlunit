@@ -68,7 +68,7 @@ public class AttributesTest extends WebTestCase {
     private final HtmlPage page_;
     private final String attributeName_;
 
-    private static final List EXCLUDED_METHODS = new ArrayList();
+    private static final List<String> EXCLUDED_METHODS = new ArrayList<String>();
     static {
         EXCLUDED_METHODS.add("getHtmlElementsByAttribute");
         EXCLUDED_METHODS.add("getOneHtmlElementByAttribute");

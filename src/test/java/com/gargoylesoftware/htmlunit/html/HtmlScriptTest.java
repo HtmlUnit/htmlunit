@@ -158,7 +158,7 @@ public class HtmlScriptTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondPage);
         client.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -174,7 +174,7 @@ public class HtmlScriptTest extends WebTestCase {
     public void testScriptIsNotRunWhenCloned() throws Exception {
         final String html = "<html><body onload='document.body.cloneNode(true)'>\n"
             + "<script>alert('a')</script></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
         final String[] expectedAlerts = {"a"};
@@ -192,12 +192,12 @@ public class HtmlScriptTest extends WebTestCase {
             + "<body onload='alert(\"onload\")'>test</body>\n"
             + "</html>";
 
-        final List actualFF = new ArrayList();
+        final List<String> actualFF = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actualFF);
         final String[] expectedFF = new String[] {"deferred", "normal", "onload"};
         assertEquals(expectedFF, actualFF);
 
-        final List actualIE = new ArrayList();
+        final List<String> actualIE = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actualIE);
         final String[] expectedIE = new String[] {"normal", "deferred", "onload"};
         assertEquals(expectedIE, actualIE);

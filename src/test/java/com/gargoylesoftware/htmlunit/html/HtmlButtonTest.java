@@ -78,7 +78,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "    <button type='button' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
@@ -100,7 +100,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "    <button type='submit' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
@@ -122,7 +122,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "    <button type='reset' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
@@ -206,7 +206,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "    <button type='submit' name='button' id='button' value='foo'"
             + "    >Push me</button>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
@@ -216,10 +216,10 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertNotSame(page, secondPage);
-        final List expectedParameters = Arrays.asList(new Object[]{
+        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("button", "foo")
         });
-        final List collectedParameters = getMockConnection(secondPage).getLastParameters();
+        final List<KeyValuePair> collectedParameters = getMockConnection(secondPage).getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -261,7 +261,7 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals(expectedType, button.getTypeAttribute());
         
         final HtmlPage page2 = (HtmlPage) button.click();
-        final List expectedParameters;
+        final List<KeyValuePair> expectedParameters;
         final String expectedSecondPageTitle;
         if (expectedType.equals("submit")) {
             expectedParameters = Collections.singletonList(new KeyValuePair("button", "pushme"));

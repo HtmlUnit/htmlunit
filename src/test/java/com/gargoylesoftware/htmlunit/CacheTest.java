@@ -75,7 +75,7 @@ public class CacheTest extends WebTestCase {
      */
     public void testIsDynamicContent() throws Exception {
         final Cache cache = new Cache();
-        final Map headers = new HashMap();
+        final Map<String, String> headers = new HashMap<String, String>();
         final WebResponse response = new DummyWebResponse() {
             public String getResponseHeaderValue(final String headerName) {
                 return (String) headers.get(headerName);
@@ -164,11 +164,12 @@ public class CacheTest extends WebTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "page2.html");
         connection.setResponse(urlPage2, content2);
         
-        final List headers = Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final List<Header> headers =
+            Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", "text/javascript", headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok", "text/javascript", headers);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page1 = (HtmlPage) webClient.getPage(urlPage1);
@@ -202,7 +203,8 @@ public class CacheTest extends WebTestCase {
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html);
 
-        final List headers = Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final List<Header> headers =
+            Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", "text/javascript", headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", "text/javascript", headers);
 

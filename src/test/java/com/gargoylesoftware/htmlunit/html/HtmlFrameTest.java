@@ -91,7 +91,7 @@ public class HtmlFrameTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
             new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 

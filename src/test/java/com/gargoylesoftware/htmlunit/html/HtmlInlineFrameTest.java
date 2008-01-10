@@ -239,7 +239,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
         client.setWebConnection(webConnection);
         
         final String[] expectedAlerts = {"2"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         
         client.getPage(URL_FIRST);

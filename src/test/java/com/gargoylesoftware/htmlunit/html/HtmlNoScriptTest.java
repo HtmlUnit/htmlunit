@@ -79,7 +79,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {"null"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -103,7 +103,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {"0"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -126,7 +126,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {"1"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

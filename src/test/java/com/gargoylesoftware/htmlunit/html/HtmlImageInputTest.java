@@ -83,7 +83,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click();
         assertNotNull(secondPage);
 
-        final List expectedPairs = Arrays.asList(new Object[]{
+        final List<KeyValuePair> expectedPairs = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("button.x", "0"),
             new KeyValuePair("button.y", "0")
         });
@@ -113,7 +113,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List expectedPairs = Arrays.asList(new Object[]{
+        final List<KeyValuePair> expectedPairs = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("button.x", "100"),
             new KeyValuePair("button.y", "200")
         });
@@ -143,7 +143,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List expectedPairs = Arrays.asList(new Object[]{
+        final List<KeyValuePair> expectedPairs = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("x", "100"),
             new KeyValuePair("y", "200")
         });
@@ -164,7 +164,7 @@ public class HtmlImageInputTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"1"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlImageInput input = (HtmlImageInput) page.getHtmlElementById("myInput");
         input.click();

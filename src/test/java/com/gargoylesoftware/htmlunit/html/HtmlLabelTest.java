@@ -69,7 +69,7 @@ public class HtmlLabelTest extends WebTestCase {
             + " <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>\n"
             + " <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("testCheckbox");
 
@@ -95,7 +95,7 @@ public class HtmlLabelTest extends WebTestCase {
             + " <label for='testCheckbox' id='testLabel1'>Check me</label>\n"
             + " <label for='notExisting' id='testLabel2'>Check me too</label>\n"
             + "</form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("testCheckbox");
 
