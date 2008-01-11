@@ -79,7 +79,7 @@ public class HTMLCollectionTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
     
         assertEquals(expectedAlerts, collectedAlerts);
@@ -105,7 +105,7 @@ public class HTMLCollectionTest extends WebTestCase {
         final String[] expectedAlerts = {"function"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
     
         assertEquals(expectedAlerts, collectedAlerts);
@@ -125,7 +125,7 @@ public class HTMLCollectionTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(firstContent, collectedAlerts);
 
         final String[] expectedAlerts = {"5", "6"};
@@ -159,7 +159,7 @@ public class HTMLCollectionTest extends WebTestCase {
         
         final String secondContent = "<title>Immortality</title>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -192,7 +192,44 @@ public class HTMLCollectionTest extends WebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFor_in2() throws Exception {
+        final String[] expectedAlertsIE = {"string length", "string val1", "string 1", "string val2",
+            "string first_submit", "string second_submit", "string action"};
+        testFor_in2(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+            "string length", "string item", "string namedItem"};
+        testFor_in2(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+    }
+
+    private void testFor_in2(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var form = document.getElementById('myForm');\n"
+            + "    var x = form.getElementsByTagName('*');\n"
+            + "    for (i in x){\n"
+            + "      alert((typeof i) + ' ' + i);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form id='myForm'>\n"
+            + "  <input type='text' id='id1' name='val1' id='input_enabled' value='4'>\n"
+            + "  <div>This is not a form element</div>\n"
+            + "  <input type='text' name='val2' id='input_disabled' disabled='disabled' value='5'>\n"
+            + "  <input type='submit' name='first_submit' value='Commit it!'>\n"
+            + "  <input type='submit' id='second_submit' value='Delete it!'>\n"
+            + "  <input type='text' name='action' value='blah'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -219,7 +256,7 @@ public class HTMLCollectionTest extends WebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

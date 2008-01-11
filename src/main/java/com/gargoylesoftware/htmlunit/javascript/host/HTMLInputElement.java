@@ -138,6 +138,13 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
+     * Select this element.
+     */
+    public void jsxFunction_select() {
+        ((HtmlTextInput) getDomNodeOrDie()).select();
+    }
+
+    /**
      * Uses {@link #jsxSet_type(String)} if attribute's name is type to
      * replace DOM node as well as long as we have subclasses of {@link HtmlInput}.
      * {@inheritDoc}

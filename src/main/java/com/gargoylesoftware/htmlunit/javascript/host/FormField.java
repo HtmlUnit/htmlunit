@@ -77,7 +77,7 @@ public class FormField extends HTMLElement {
     /**
      * Return the value of the javascript attribute "value".
      *
-     *@return The value of this attribute.
+     * @return The value of this attribute.
      */
     public String jsxGet_value() {
         return getHtmlElementOrDie().getAttributeValue("value");
@@ -86,7 +86,7 @@ public class FormField extends HTMLElement {
     /**
      * Set the value of the javascript attribute "value".
      *
-     *@param newValue  The new value.
+     * @param newValue  The new value.
      */
     public void jsxSet_value(final String newValue) {
         getHtmlElementOrDie().setAttributeValue("value", newValue);
@@ -95,7 +95,7 @@ public class FormField extends HTMLElement {
     /**
      * Return the value of the javascript attribute "name".
      *
-     *@return The value of this attribute.
+     * @return The value of this attribute.
      */
     public String jsxGet_name() {
         return getHtmlElementOrDie().getAttributeValue("name");
@@ -104,7 +104,7 @@ public class FormField extends HTMLElement {
     /**
      * Set the value of the javascript attribute "name".
      *
-     *@param newName  The new name.
+     * @param newName  The new name.
      */
     public void jsxSet_name(final String newName) {
         getHtmlElementOrDie().setAttributeValue("name", newName);
@@ -113,7 +113,7 @@ public class FormField extends HTMLElement {
     /**
      * Return the value of the javascript attribute "form".
      *
-     *@return The value of this attribute.
+     * @return The value of this attribute.
      */
     public HTMLFormElement jsxGet_form() {
         return (HTMLFormElement) getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
@@ -122,7 +122,7 @@ public class FormField extends HTMLElement {
     /**
      * Return the value of the javascript attribute "type".
      *
-     *@return The value of this attribute.
+     * @return The value of this attribute.
      */
     public String jsxGet_type() {
         return getHtmlElementOrDie().getAttributeValue("type");
@@ -153,13 +153,6 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Select this element.
-     */
-    public void jsxFunction_select() {
-        getLog().debug("Input.jsxFunction_select() not implemented");
-    }
-
-    /**
      * Return true if this element is disabled.
      * @return True if this element is disabled.
      */
@@ -182,10 +175,17 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Return the value of the tabindex attribute.
-     * @return the value of the tabindex attribute.
+     * Return the value of the tabIndex attribute.
+     * @return the value of the tabIndex attribute.
      */
-    public String jsxGet_tabindex() {
-        return getHtmlElementOrDie().getAttributeValue("tabindex");
+    public int jsxGet_tabIndex() {
+        int index = 0;
+        try {
+            index = Integer.parseInt(getHtmlElementOrDie().getAttributeValue("tabindex"));
+        }
+        catch (final Exception e) {
+            //ignore
+        }
+        return index;
     }
 }

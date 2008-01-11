@@ -37,6 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -55,6 +59,16 @@ public class TextRange extends SimpleScriptable {
      * @return the text contained within the range.
      */
     public String jsxGet_text() {
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
+        final HtmlElement focused = page.getElementWithFocus();
+        if (focused instanceof HtmlTextInput) {
+            final HtmlTextInput input = (HtmlTextInput) focused;
+            return input.getValueAttribute().substring(input.getSelectionStart(), input.getSelectionEnd());
+        }
+        else if (focused instanceof HtmlTextArea) {
+            final HtmlTextArea input = (HtmlTextArea) focused;
+            return input.getText().substring(input.getSelectionStart(), input.getSelectionEnd());
+        }
         return "";
     }
 

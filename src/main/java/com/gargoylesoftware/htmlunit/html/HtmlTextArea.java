@@ -448,4 +448,13 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     protected void preventDefault() {
         preventDefault_ = true;
     }
+
+    /**
+     * Select all the text in this input.
+     */
+    public void select() {
+        focus();
+        setSelectionStart(0);
+        setSelectionEnd(getText().length());
+    }
 }

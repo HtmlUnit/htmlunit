@@ -183,4 +183,12 @@ public class HtmlTextInput extends HtmlInput {
         }
     }
 
+    /**
+     * Select all the text in this input.
+     */
+    public void select() {
+        focus();
+        setSelectionStart(0);
+        setSelectionEnd(getValueAttribute().length());
+    }
 }

@@ -34,10 +34,8 @@
         <property name="host" readable="true" writable="true"/>
         <property name="hostname" readable="true" writable="true"/>
         <property name="protocol" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="true">
-        </property>
-        <property name="tabindex" notImplemented="true" readable="true" writable="true">
-        </property>
+        <property name="name" readable="true" writable="true"/>
+        <property name="tabIndex" notImplemented="true" readable="true" writable="true"/>
         <property name="text" notImplemented="true" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -76,7 +74,7 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
-        <property name="tabindex" notImplemented="true" readable="true" writable="true"/>
+        <property name="tabIndex" notImplemented="true" readable="true" writable="true"/>
         
         <function name="appendData"/>
         <function name="deleteData"/>
@@ -394,8 +392,7 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
         </property>
-        <property name="tabindex" readable="true" writable="false"/>
-        <property name="tabindex" notImplemented="true" readable="true" writable="true"/>
+        <property name="tabIndex" readable="true" writable="false"/>
         <property name="type" readable="true" writable="false">
             <javascript min-version="1.1"/>
         </property>
@@ -403,7 +400,6 @@
         <!-- This property is only in DOM1 so it  -->
 
         <function name="click"/>
-        <function name="select"/>
     </class>
 
     <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
@@ -728,6 +724,7 @@
         <property name="selectionEnd" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <function name="select"/>
     </class>
 
     <class name="Label" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Label"
@@ -1172,6 +1169,7 @@
         <property name="selectionEnd" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <function name="select"/>
     </class>
 
     <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl"

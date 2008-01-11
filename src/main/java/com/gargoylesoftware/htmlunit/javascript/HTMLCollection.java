@@ -38,10 +38,8 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -96,7 +94,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     private Transformer transformer_;
     
-    private List<DomNode> cachedElements_;
+    private List<Object> cachedElements_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -167,10 +165,9 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      *         used by the XPath has been explicitly installed
      */
     private void addNamespace(final XmlElement element) throws JaxenException {
-        final Map attributes = element.getAttributes();
-        for (final Iterator keys = attributes.keySet().iterator(); keys.hasNext();) {
-            final String name = (String) keys.next();
-            final String value = (String) ((XmlAttr) attributes.get(name)).getValue();
+        final Map<String, XmlAttr> attributes = element.getAttributes();
+        for (final String name : attributes.keySet()) {
+            final String value = (String) attributes.get(name).getValue();
             if (name.startsWith("xmlns:")) {
                 final String prefix = name.substring("xmlns:".length());
                 xpath_.addNamespace(prefix, value);
@@ -234,7 +231,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     public final Object get(final int index, final Scriptable start) {
         final HTMLCollection array = (HTMLCollection) start;
-        final List elements = array.getElements();
+        final List<Object> elements = array.getElements();
 
         if (index >= 0 && index < elements.size()) {
             return getScriptableFor(transformer_.transform(elements.get(index)));
@@ -249,14 +246,14 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * needs to be performed each time again
      * @return the list of {@link HtmlElement} contained in this collection
      */
-    private List getElements() {
+    private List<Object> getElements() {
         if (cachedElements_ == null) {
             try {
                 if (node_ != null) {
                     cachedElements_ = xpath_.selectNodes(node_);
                 }
                 else {
-                    cachedElements_ = new ArrayList();
+                    cachedElements_ = new ArrayList<Object>();
                 }
                 boolean isXmlPage = false;
 
@@ -335,12 +332,11 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             return NOT_FOUND;
         }
 
-        final List elements = getElements();
+        final List<Object> elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
         // See if there is an element in the element array with the specified id.
-        for (final Iterator iter = elements.iterator(); iter.hasNext();) {
-            final Object next = iter.next();
+        for (final Object next : elements) {
             if (next instanceof HtmlElement) {
                 final HtmlElement element = (HtmlElement) next;
                 final String id = element.getId();
@@ -381,7 +377,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
         }
 
-        final List subElements = array.getElements();
+        final List<Object> subElements = array.getElements();
         if (subElements.size() > 1) {
             getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
                     + subElements.size() + " elements");
@@ -487,22 +483,36 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * {@inheritDoc}
      */
     public boolean has(final String name, final Scriptable start) {
-        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-            if (name.equals("0") || name.equals("length")) {
-                return true;
+        try {
+            int index = Integer.parseInt(name);
+            final List<Object> elements = getElements();
+            CollectionUtils.transform(elements, transformer_);
+
+            for (@SuppressWarnings("unused")
+                 final Object child : elements) {
+                if (index-- == 0) {
+                    return true;
+                }
             }
-            final JavaScriptConfiguration jsConfig =
-                JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
-            final Set functionKeys = jsConfig.getClassConfiguration(getClassName()).functionKeys();
-            for (final Iterator functionIt = functionKeys.iterator(); functionIt.hasNext();) {
-                if (name.equals(functionIt.next())) {
+        }
+        catch (final Exception e) {
+            //ignore
+        }
+        
+        if (name.equals("length")) {
+            return true;
+        }
+        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
+            for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
+                if (name.equals(functionName)) {
                     return true;
                 }
             }
             return false;
         }
         else {
-            return name.equals("length") || getWithPreemption(name) != NOT_FOUND;
+            return getWithPreemption(name) != NOT_FOUND;
         }
     }
 
@@ -514,17 +524,23 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * {@inheritDoc}.
      */
     public Object[] getIds() {
-        final List idList = new ArrayList();
+        final List<String> idList = new ArrayList<String>();
+
+        final List<Object> elements = getElements();
+        CollectionUtils.transform(elements, transformer_);
 
         if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-            idList.add("0");
-            idList.add("length");
-            final JavaScriptConfiguration jsConfig =
-                JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
-            final Set functionKeys = jsConfig.getClassConfiguration(getClassName()).functionKeys();
-            for (final Iterator functionIt = functionKeys.iterator(); functionIt.hasNext();) {
-                idList.add(functionIt.next());
+            int index = 0;
+            for (@SuppressWarnings("unused") final Object child : elements) {
+                idList.add(Integer.toString(index++));
             }
+            
+            idList.add("length");
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
+            for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
+                idList.add(name);
+            }
+
             //'document.all.tags' is different from 'document.forms.tags'
             //See HTMLCollectionTest.testTags()
             idList.remove("tags");
@@ -532,18 +548,24 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         else {
             idList.add("length");
 
-            final List elements = getElements();
-            CollectionUtils.transform(elements, transformer_);
-
-            // See if there is an element in the element array with the specified id.
-            for (final Iterator iter = elements.iterator(); iter.hasNext();) {
-                final Object next = iter.next();
+            int index = 0;
+            for (final Object next : elements) {
                 if (next instanceof HtmlElement) {
                     final HtmlElement element = (HtmlElement) next;
-                    final String id = element.getId();
-                    if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-                        idList.add(id);
+                    final String name = element.getAttribute("name");
+                    if (name != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                        idList.add(name);
                     }
+                    else {
+                        final String id = element.getId();
+                        if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                            idList.add(id);
+                        }
+                        else {
+                            idList.add(Integer.toString(index));
+                        }
+                    }
+                    index++;
                 }
                 else if (next instanceof WebWindow) {
                     final WebWindow window = (WebWindow) next;
@@ -556,6 +578,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                     getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
                 }
             }
+
 
             if (xpath_ != null) {
                 // See if there are any elements in the element array with the specified name.
@@ -579,14 +602,12 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                     throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
                 }
 
-                final List subElements = array.getElements();
-                for (final Iterator it = subElements.iterator(); it.hasNext();) {
-                    final DomNode next = (DomNode) it.next();
+                for (final Object next : array.getElements()) {
                     if (next instanceof HtmlElement) {
                         final HtmlElement element = (HtmlElement) next;
-                        final String id = element.getAttribute("name");
-                        if (id != null) {
-                            idList.add(id);
+                        final String name = element.getAttribute("name");
+                        if (name != null && !idList.contains(name)) {
+                            idList.add(name);
                         }
                     }
                 }

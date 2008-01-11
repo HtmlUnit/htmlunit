@@ -58,8 +58,8 @@ public final class ClassConfiguration {
     private static final String SETTER_PREFIX = "jsxSet_";
     private static final String FUNCTION_PREFIX = "jsxFunction_";
 
-    private Map propertyMap_ = new HashMap();
-    private Map functionMap_ = new HashMap();
+    private Map<String, PropertyInfo> propertyMap_ = new HashMap<String, PropertyInfo>();
+    private Map<String, FunctionInfo> functionMap_ = new HashMap<String, FunctionInfo>();
     private List constants_ = new ArrayList();
     private String extendedClass_;
     /**
@@ -175,7 +175,7 @@ public final class ClassConfiguration {
      * Return the set of keys for the defined properties.
      * @return a set.
      */
-    public Set propertyKeys() {
+    public Set<String> propertyKeys() {
         return propertyMap_.keySet();
     }
 
@@ -183,7 +183,7 @@ public final class ClassConfiguration {
      * Return the set of keys for the defined functions
      * @return a set.
      */
-    public Set functionKeys() {
+    public Set<String> functionKeys() {
         return functionMap_.keySet();
     }
     
@@ -276,20 +276,15 @@ public final class ClassConfiguration {
         if (functionMap_.size() != config.functionMap_.size()) {
             return false;
         }
-        final Set keys = config.propertyMap_.keySet();
-        final Iterator it = keys.iterator();
-        while (it.hasNext()) {
-            final String key = (String) it.next();
+        final Set<String> keys = config.propertyMap_.keySet();
+        for (final String key : keys) {
             if (!(((PropertyInfo) config.propertyMap_.get(key)).valueEquals(propertyMap_.get(key)))) {
                 return false;
             }
         }
 
-        final Set fkeys = config.functionMap_.keySet();
-        final Iterator fit = fkeys.iterator();
-        while (fit.hasNext()) {
-            final String fkey = (String) fit.next();
-            if (!(((FunctionInfo) config.functionMap_.get(fkey)).valueEquals(functionMap_.get(fkey)))) {
+        for (final String key : config.functionMap_.keySet()) {
+            if (!(((FunctionInfo) config.functionMap_.get(key)).valueEquals(functionMap_.get(key)))) {
                 return false;
             }
         }

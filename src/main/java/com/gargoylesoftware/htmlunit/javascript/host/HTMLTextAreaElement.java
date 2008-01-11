@@ -149,4 +149,11 @@ public class HTMLTextAreaElement extends FormField {
         ((HtmlTextArea) getHtmlElementOrDie()).setSelectionEnd(end);
     }
 
+    /**
+     * Select this element.
+     */
+    public void jsxFunction_select() {
+        ((HtmlTextArea) getDomNodeOrDie()).select();
+    }
+
 }

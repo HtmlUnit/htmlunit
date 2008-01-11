@@ -78,6 +78,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "    <button type='button' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
