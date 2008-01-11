@@ -282,7 +282,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Return a list of all anchors contained in this page.
      * @return the list of {@link HtmlAnchor} in this page.
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlAnchor> getAnchors() {
         return (List<HtmlAnchor>)
             getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("a"));
@@ -339,7 +338,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return See above
      * @exception MalformedURLException If an error occurred when creating a URL object
      */
-    @SuppressWarnings("unchecked")
     public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
 
@@ -1106,7 +1104,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * Executes any deferred scripts, if necessary.
      */
-    @SuppressWarnings("unchecked")
     private void executeDeferredScriptsIfNeeded() {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
@@ -1589,7 +1586,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param httpEquiv the http-equiv value
      * @return a list of {@link HtmlMeta}
      */
-    @SuppressWarnings("unchecked")
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
         final List<HtmlMeta> tags = (List<HtmlMeta>)
@@ -1608,7 +1604,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *
      * @param radioButtonInput The radio Button
      */
-    @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             //May be done in single xpath search?

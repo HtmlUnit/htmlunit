@@ -166,7 +166,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *
      * @return See above
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlOption> getOptions() {
         final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
         return Collections.unmodifiableList(elementList);
@@ -178,7 +177,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param index The index
      * @return The option specified by the index
      */
-    @SuppressWarnings("unchecked")
     public HtmlOption getOption(final int index) {
         final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
         return elementList.get(index);

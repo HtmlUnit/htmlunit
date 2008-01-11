@@ -236,7 +236,6 @@ public class XmlElement extends DomNamespaceNode {
      * @param attributeCount the initial number of attributes to be added to the map.
      * @return the attribute map.
      */
-    @SuppressWarnings("unchecked")
     static Map<String, XmlAttr> createAttributeMap(final int attributeCount) {
         return (Map<String, XmlAttr>) ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
     }

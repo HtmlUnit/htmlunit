@@ -179,7 +179,6 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param url The url that will return the given response
      * @param content The content to return
      */
-    @SuppressWarnings("unchecked")
     public void setResponse(final URL url, final String content) {
         setResponse(url, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
     }
@@ -193,7 +192,6 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param content The content to return
      * @param contentType The content type to return
      */
-    @SuppressWarnings("unchecked")
     public void setResponse(final URL url, final String content, final String contentType) {
         setResponse(url, content, 200, "OK", contentType, Collections.EMPTY_LIST);
     }

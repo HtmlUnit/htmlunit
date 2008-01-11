@@ -183,7 +183,6 @@ public class WebClient implements Serializable {
 
     private ScriptPreProcessor scriptPreProcessor_;
 
-    @SuppressWarnings("unchecked")
     private Map<String, String> activeXObjectMap_ = Collections.EMPTY_MAP;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;

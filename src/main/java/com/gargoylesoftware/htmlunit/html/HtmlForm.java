@@ -547,7 +547,6 @@ public class HtmlForm extends ClickableElement {
      *
      * @param radioButtonInput The radio Button
      */
-    @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             if (!isAncestorOf(radioButtonInput)) {

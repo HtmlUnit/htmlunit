@@ -139,7 +139,6 @@ public class CacheTest extends WebTestCase {
     /**
      *@throws Exception if the test fails
      */
-    @SuppressWarnings("unchecked")
     public void testUsage() throws Exception {
         final String content = "<html><head><title>page 1</title>"
             + "<script src='foo1.js' type='text/javascript'/>"
@@ -189,7 +188,6 @@ public class CacheTest extends WebTestCase {
     /**
      *@throws Exception if the test fails
      */
-    @SuppressWarnings("unchecked")
     public void testMaxSizeMaintained() throws Exception {
 
         final String html = "<html><head><title>page 1</title>"
