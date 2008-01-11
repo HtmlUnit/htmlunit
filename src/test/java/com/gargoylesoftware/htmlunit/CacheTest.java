@@ -139,6 +139,7 @@ public class CacheTest extends WebTestCase {
     /**
      *@throws Exception if the test fails
      */
+    @SuppressWarnings("unchecked")
     public void testUsage() throws Exception {
         final String content = "<html><head><title>page 1</title>"
             + "<script src='foo1.js' type='text/javascript'/>"
@@ -165,7 +166,7 @@ public class CacheTest extends WebTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "page2.html");
         connection.setResponse(urlPage2, content2);
         
-        final List<Header> headers =
+        final List< ? extends KeyValuePair> headers = (List< ? extends KeyValuePair>)
             Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", "text/javascript", headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok", "text/javascript", headers);
@@ -188,6 +189,7 @@ public class CacheTest extends WebTestCase {
     /**
      *@throws Exception if the test fails
      */
+    @SuppressWarnings("unchecked")
     public void testMaxSizeMaintained() throws Exception {
 
         final String html = "<html><head><title>page 1</title>"
@@ -204,7 +206,7 @@ public class CacheTest extends WebTestCase {
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html);
 
-        final List<Header> headers =
+        final List< ? extends KeyValuePair> headers = (List< ? extends KeyValuePair>)
             Collections.singletonList(new Header("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", "text/javascript", headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", "text/javascript", headers);

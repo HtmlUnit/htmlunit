@@ -42,7 +42,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -238,24 +237,18 @@ public class HttpWebConnection extends WebConnectionImpl {
             if (webRequestSettings.getEncodingType() == FormEncodingType.URL_ENCODED
                     && method instanceof PostMethod) {
                 final PostMethod postMethod = (PostMethod) httpMethod;
-                Iterator iterator = webRequestSettings.getRequestParameters().iterator();
-                while (iterator.hasNext()) {
-                    final NameValuePair pair = (NameValuePair) iterator.next();
+                for (final NameValuePair pair : webRequestSettings.getRequestParameters()) {
                     postMethod.removeParameter(pair.getName(), pair.getValue());
                 }
 
-                iterator = webRequestSettings.getRequestParameters().iterator();
-                while (iterator.hasNext()) {
-                    final NameValuePair pair = (NameValuePair) iterator.next();
+                for (final NameValuePair pair : webRequestSettings.getRequestParameters()) {
                     postMethod.addParameter(pair.getName(), pair.getValue());
                 }
             }
             else {
-                final List partList = new ArrayList();
-                final Iterator iterator = webRequestSettings.getRequestParameters().iterator();
-                while (iterator.hasNext()) {
+                final List<PartBase> partList = new ArrayList<PartBase>();
+                for (final KeyValuePair pair : webRequestSettings.getRequestParameters()) {
                     final PartBase newPart;
-                    final KeyValuePair pair = (KeyValuePair) iterator.next();
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
                         final String charset = webRequestSettings.getCharset();
@@ -270,14 +263,11 @@ public class HttpWebConnection extends WebConnectionImpl {
                 }
                 Part[] parts = new Part[partList.size()];
                 parts = (Part[]) partList.toArray(parts);
-                method.setRequestEntity(new MultipartRequestEntity(
-                        parts,
-                        method.getParams()));
+                method.setRequestEntity(new MultipartRequestEntity(parts, method.getParams()));
             }
         }
 
-        httpMethod.setRequestHeader(
-                "User-Agent", getWebClient().getBrowserVersion().getUserAgent());
+        httpMethod.setRequestHeader("User-Agent", getWebClient().getBrowserVersion().getUserAgent());
 
         writeRequestHeadersToHttpMethod(httpMethod, webRequestSettings.getAdditionalHeaders());
         httpMethod.setFollowRedirects(false);
@@ -461,7 +451,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         if (statusMessage == null) {
             statusMessage = "Unknown status code";
         }
-        final List headers = new ArrayList();
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         final Header[] array = method.getResponseHeaders();
         for (int i = 0; i < array.length; i++) {
             headers.add(new NameValuePair(array[i].getName(), array[i].getValue()));
@@ -484,15 +474,11 @@ public class HttpWebConnection extends WebConnectionImpl {
      */
     protected WebResponseData newWebResponseDataInstance(
             final String statusMessage,
-            final List headers,
+            final List<NameValuePair> headers,
             final int statusCode,
             final HttpMethodBase method
     ) throws IOException {
-        return new WebResponseData(
-                method.getResponseBodyAsStream(),
-                statusCode,
-                statusMessage,
-                headers);
+        return new WebResponseData(method.getResponseBodyAsStream(), statusCode, statusMessage, headers);
     }
 
     /**
@@ -514,12 +500,11 @@ public class HttpWebConnection extends WebConnectionImpl {
         return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);
     }
 
-    private void writeRequestHeadersToHttpMethod(final HttpMethod httpMethod, final Map requestHeaders) {
+    private void writeRequestHeadersToHttpMethod(final HttpMethod httpMethod,
+            final Map<String, String> requestHeaders) {
         synchronized (requestHeaders) {
-            final Iterator iterator = requestHeaders.entrySet().iterator();
-            while (iterator.hasNext()) {
-                final Map.Entry entry = (Map.Entry) iterator.next();
-                httpMethod.setRequestHeader((String) entry.getKey(), (String) entry.getValue());
+            for (final Map.Entry<String, String> entry : requestHeaders.entrySet()) {
+                httpMethod.setRequestHeader(entry.getKey(), entry.getValue());
             }
         }
     }

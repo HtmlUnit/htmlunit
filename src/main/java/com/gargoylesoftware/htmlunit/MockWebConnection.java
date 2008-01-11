@@ -61,7 +61,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Ahmed Ashour
  */
 public class MockWebConnection extends WebConnectionImpl {
-    private final Map responseMap_ = new HashMap(10);
+    private final Map<String, WebResponseData> responseMap_ = new HashMap<String, WebResponseData>(10);
     private WebResponseData defaultResponse_;
 
     private WebRequestSettings lastRequest_;
@@ -141,7 +141,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * response headers.
      */
     public void setResponse(final URL url, final String content, final int statusCode,
-            final String statusMessage, final String contentType, final List responseHeaders) {
+            final String statusMessage, final String contentType, final List< ? extends KeyValuePair> responseHeaders) {
 
         setResponse(
                 url,
@@ -163,15 +163,11 @@ public class MockWebConnection extends WebConnectionImpl {
      * response headers.
      */
     public void setResponse(final URL url, final byte[] content, final int statusCode,
-            final String statusMessage, final String contentType, final List responseHeaders) {
+            final String statusMessage, final String contentType, final List< ? extends KeyValuePair> responseHeaders) {
 
-        final List compiledHeaders = new ArrayList(responseHeaders);
+        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-        final WebResponseData responseEntry = new WebResponseData(
-                content,
-                statusCode,
-                statusMessage,
-                compiledHeaders);
+        final WebResponseData responseEntry = new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
         responseMap_.put(url.toExternalForm(), responseEntry);
     }
 
@@ -183,6 +179,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param url The url that will return the given response
      * @param content The content to return
      */
+    @SuppressWarnings("unchecked")
     public void setResponse(final URL url, final String content) {
         setResponse(url, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
     }
@@ -196,6 +193,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param content The content to return
      * @param contentType The content type to return
      */
+    @SuppressWarnings("unchecked")
     public void setResponse(final URL url, final String content, final String contentType) {
         setResponse(url, content, 200, "OK", contentType, Collections.EMPTY_LIST);
     }
@@ -240,13 +238,9 @@ public class MockWebConnection extends WebConnectionImpl {
     public void setDefaultResponse(final byte[] content, final int statusCode,
             final String statusMessage, final String contentType) {
 
-        final List compiledHeaders = new ArrayList();
+        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-        final WebResponseData responseEntry = new WebResponseData(
-                content,
-                statusCode,
-                statusMessage,
-                compiledHeaders);
+        final WebResponseData responseEntry = new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
         defaultResponse_ = responseEntry;
     }
 
@@ -273,7 +267,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * to {@link #getResponse(WebRequestSettings)}.
      * @return See above
      */
-    public Map getLastAdditionalHeaders() {
+    public Map<String, String> getLastAdditionalHeaders() {
         return lastRequest_.getAdditionalHeaders();
     }
 

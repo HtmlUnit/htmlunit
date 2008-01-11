@@ -100,14 +100,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     private static final long serialVersionUID = 1779746292119944291L;
 
     private       String originalCharset_;
-    private       Map idMap_ = new HashMap(); // a map of (id, List(HtmlElement))
-    private       Map nameMap_ = new HashMap(); // a map of (name, List(HtmlElement))
+    private       Map<String, List<HtmlElement>> idMap_ = new HashMap<String, List<HtmlElement>>();
+    private       Map<String, List<HtmlElement>> nameMap_ = new HashMap<String, List<HtmlElement>>();
     private       HtmlElement documentElement_;
     private       HtmlElement elementWithFocus_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
 
-    private List/* HtmlAttributeChangeListener */ attributeListeners_;
+    private List<HtmlAttributeChangeListener> attributeListeners_;
     private final transient Object lock_ = new Object(); // used for synchronization
 
     /**
@@ -282,8 +282,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Return a list of all anchors contained in this page.
      * @return the list of {@link HtmlAnchor} in this page.
      */
-    public List getAnchors() {
-        return getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("a"));
+    @SuppressWarnings("unchecked")
+    public List<HtmlAnchor> getAnchors() {
+        return (List<HtmlAnchor>)
+            getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("a"));
     }
 
     /**
@@ -1343,8 +1345,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param name the name value to search by
      * @return the HTML elements with the specified name attribute
      */
-    public List getHtmlElementsByName(final String name) {
-        final List list = (List) nameMap_.get(name);
+    public List<HtmlElement> getHtmlElementsByName(final String name) {
+        final List<HtmlElement> list = (List<HtmlElement>) nameMap_.get(name);
         if (list != null) {
             return Collections.unmodifiableList(list);
         }
@@ -1505,7 +1507,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
     void loadFrames() throws FailingHttpStatusCodeException {
-        final List frameTags = Arrays.asList(new String[] {"frame", "iframe"});
+        final List<String> frameTags = Arrays.asList(new String[] {"frame", "iframe"});
         final List frames = getDocumentHtmlElement().getHtmlElementsByTagNames(frameTags);
         for (final Iterator iter = frames.iterator(); iter.hasNext();) {
             final BaseFrame frame = (BaseFrame) iter.next();
@@ -1587,11 +1589,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param httpEquiv the http-equiv value
      * @return a list of {@link HtmlMeta}
      */
-    protected List getMetaTags(final String httpEquiv) {
+    @SuppressWarnings("unchecked")
+    protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
-        final List tags = getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("meta"));
-        for (final Iterator iter = tags.iterator(); iter.hasNext();) {
-            final HtmlMeta element = (HtmlMeta) iter.next();
+        final List<HtmlMeta> tags = (List<HtmlMeta>)
+            getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("meta"));
+        for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
+            final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {
                 iter.remove();
             }
@@ -1604,18 +1608,20 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *
      * @param radioButtonInput The radio Button
      */
+    @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             //May be done in single xpath search?
-            final List pageInputs = getByXPath("//input[lower-case(@type)='radio' "
+            final List<HtmlRadioButtonInput> pageInputs =
+                (List<HtmlRadioButtonInput>) getByXPath("//input[lower-case(@type)='radio' "
                     + "and @name='" + radioButtonInput.getNameAttribute() + "']");
-            final List formInputs = getByXPath("//form//input[lower-case(@type)='radio' "
+            final List<HtmlRadioButtonInput> formInputs =
+                (List<HtmlRadioButtonInput>) getByXPath("//form//input[lower-case(@type)='radio' "
                     + "and @name='" + radioButtonInput.getNameAttribute() + "']");
             
             pageInputs.removeAll(formInputs);
 
-            for (final Iterator iterator = pageInputs.iterator(); iterator.hasNext();) {
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) iterator.next();
+            for (final HtmlRadioButtonInput input : pageInputs) {
                 if (input == radioButtonInput) {
                     input.setAttributeValue("checked", "checked");
                 }

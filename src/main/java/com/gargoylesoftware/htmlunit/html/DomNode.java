@@ -1046,8 +1046,8 @@ public abstract class DomNode implements Cloneable, Serializable {
         if (getFirstDomChild() == null) {
             return;
         }
-        final Iterator<DomNode> it = getChildren().iterator();
-        while (it.hasNext()) {
+        
+        for (final Iterator<DomNode> it = getChildren().iterator(); it.hasNext();) {
             final DomNode child = (DomNode) it.next();
             child.removeAllChildren();
             it.remove();
@@ -1062,7 +1062,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @throws JaxenException if the xpath expression can't be parsed/evaluated
      */
     @SuppressWarnings("unchecked")
-    public List<Object> getByXPath(final String xpathExpr) throws JaxenException {
+    public List< ? > getByXPath(final String xpathExpr) throws JaxenException {
         if (xpathExpr == null) {
             throw new NullPointerException("Null is not a valid xpath expression");
         }
@@ -1081,7 +1081,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @throws JaxenException if the xpath expression can't be parsed/evaluated
      */
     public Object getFirstByXPath(final String xpathExpr) throws JaxenException {
-        final List<Object> results = getByXPath(xpathExpr);
+        final List< ? > results = getByXPath(xpathExpr);
         if (results.isEmpty()) {
             return null;
         }

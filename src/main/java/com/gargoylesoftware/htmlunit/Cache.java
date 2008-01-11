@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,12 +63,12 @@ public class Cache implements Serializable {
     private static final long serialVersionUID = -3864114727885057419L;
 
     private int maxSize_ = 20;
-    private final Map entries_ = Collections.synchronizedMap(new HashMap(maxSize_));
+    private final Map<URL, Entry> entries_ = Collections.synchronizedMap(new HashMap<URL, Entry>(maxSize_));
 
     /**
      * A cache entry.
      */
-    private class Entry implements Comparable {
+    private class Entry implements Comparable<Entry> {
         private final WebResponse response_;
         private long lastAccess_;
         
@@ -76,8 +77,8 @@ public class Cache implements Serializable {
             lastAccess_ = System.currentTimeMillis();
         }
         
-        public int compareTo(final Object other) {
-            return NumberUtils.compare(lastAccess_, ((Entry) other).lastAccess_);
+        public int compareTo(final Entry other) {
+            return NumberUtils.compare(lastAccess_, other.lastAccess_);
         }
 
         /**

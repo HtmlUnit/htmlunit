@@ -343,7 +343,7 @@ public class DomNodeTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final List results = page.getByXPath("//title");
+        final List< ? > results = page.getByXPath("//title");
         assertEquals(1, results.size());
         final HtmlTitle title = (HtmlTitle) results.get(0);
         assertEquals("my title", title.asText());
@@ -355,7 +355,7 @@ public class DomNodeTest extends WebTestCase {
 
         final HtmlParagraph p = (HtmlParagraph) page.getFirstByXPath("//p");
         assertSame(p, page.getHtmlElementById("p1"));
-        final List lis = p.getByXPath("ul/li");
+        final List< ? > lis = p.getByXPath("ul/li");
         assertEquals(2, lis.size());
         assertEquals(lis, page.getByXPath("//ul/li"));
 

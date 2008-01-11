@@ -114,7 +114,7 @@ public class ActiveXObject extends SimpleScriptable {
             return buildXSLTemplate();
         }
 
-        final Map map = getWindow(ctorObj).getWebWindow().getWebClient().getActiveXObjectMap();
+        final Map<String, String> map = getWindow(ctorObj).getWebWindow().getWebClient().getActiveXObjectMap();
         if (map == null) {
             throw Context.reportRuntimeError("ActiveXObject Error: the map is null.");
         }
@@ -122,14 +122,11 @@ public class ActiveXObject extends SimpleScriptable {
         if (mapValue == null) {
             throw Context.reportRuntimeError("ActiveXObject Error: no value for " + activeXName + ".");
         }
-        if (!(mapValue instanceof String)) {
-            throw Context.reportRuntimeError("ActiveXObject Error: value for " + activeXName + " is not a String.");
-        }
 
         final String xClassString = (String) mapValue;
         Object object = null;
         try {
-            final Class xClass = Class.forName(xClassString);
+            final Class< ? > xClass = Class.forName(xClassString);
             object = xClass.newInstance();
         }
         catch (final Exception e) {

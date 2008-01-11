@@ -102,7 +102,7 @@ public abstract class HtmlElement extends DomElement {
     /** The map holding the namespaces, keyed by URI. */
     private Map namespaces_ = new HashMap();
 
-    private List/* HtmlAttributeChangeListener */ attributeListeners_;
+    private List<HtmlAttributeChangeListener> attributeListeners_;
 
     /**
      * Creates an instance.
@@ -174,7 +174,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public DomNode cloneDomNode(final boolean deep) {
         final HtmlElement newNode = (HtmlElement) super.cloneDomNode(deep);
-        final Set keySet = attributes_.keySet();
+        final Set<String> keySet = attributes_.keySet();
         newNode.attributes_ = createAttributeMap(keySet.size());
         for (final Iterator it = keySet.iterator(); it.hasNext();) {
             final Object key = it.next();
@@ -402,8 +402,8 @@ public abstract class HtmlElement extends DomElement {
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
             synchronized (this) {
-                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    ((HtmlAttributeChangeListener) iterator.next()).attributeAdded(event);
+                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                    listener.attributeAdded(event);
                 }
             }
         }
@@ -425,8 +425,8 @@ public abstract class HtmlElement extends DomElement {
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
             synchronized (this) {
-                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    ((HtmlAttributeChangeListener) iterator.next()).attributeReplaced(event);
+                for (final HtmlAttributeChangeListener listner : attributeListeners_) {
+                    listner.attributeReplaced(event);
                 }
             }
         }
@@ -448,8 +448,8 @@ public abstract class HtmlElement extends DomElement {
     protected void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
             synchronized (this) {
-                for (final Iterator iterator = attributeListeners_.iterator(); iterator.hasNext();) {
-                    ((HtmlAttributeChangeListener) iterator.next()).attributeRemoved(event);
+                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                    listener.attributeRemoved(event);
                 }
             }
         }
@@ -476,7 +476,7 @@ public abstract class HtmlElement extends DomElement {
      * attributes of this element. Each entry holds a string key and a string value.
      * The elements are ordered as found in the html source code.
      */
-    public Iterator getAttributeEntriesIterator() {
+    public Iterator<HtmlAttributeChangeListener> getAttributeEntriesIterator() {
         return attributes_.values().iterator();
     }
 
@@ -736,9 +736,9 @@ public abstract class HtmlElement extends DomElement {
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
-        for (final Iterator it = attributes_.keySet().iterator(); it.hasNext();) {
+        for (final Iterator<String> it = attributes_.keySet().iterator(); it.hasNext();) {
             printWriter.print(" ");
-            final String name = (String) it.next();
+            final String name = it.next();
             printWriter.print(name);
             printWriter.print("=\"");
             printWriter.print(StringEscapeUtils.escapeXml(((HtmlAttr) attributes_.get(name)).getNodeValue()));
@@ -810,13 +810,13 @@ public abstract class HtmlElement extends DomElement {
         Assert.notNull("attributeName", attributeName);
         Assert.notNull("attributeValue", attributeValue);
 
-        final List list = getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
+        final List<HtmlElement> list = getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
         final int listSize = list.size();
         if (listSize == 0) {
             throw new ElementNotFoundException(elementName, attributeName, attributeValue);
         }
 
-        return (HtmlElement) list.get(0);
+        return list.get(0);
     }
 
     /**
@@ -868,17 +868,15 @@ public abstract class HtmlElement extends DomElement {
      * @param attributeValue The value of the attribute
      * @return A list of HtmlElements
      */
-    public final List getHtmlElementsByAttribute(
+    public final List<HtmlElement> getHtmlElementsByAttribute(
             final String elementName,
             final String attributeName,
             final String attributeValue) {
 
-        final List list = new ArrayList();
-        final DescendantElementsIterator iterator = new DescendantElementsIterator();
+        final List<HtmlElement> list = new ArrayList<HtmlElement>();
         final String lowerCaseTagName = elementName.toLowerCase();
 
-        while (iterator.hasNext()) {
-            final HtmlElement next = iterator.nextElement();
+        for (final HtmlElement next : getAllHtmlChildElements()) {
             if (next.getTagName().equals(lowerCaseTagName)) {
                 final String attValue = next.getAttributeValue(attributeName);
                 if (attValue != null && attValue.equals(attributeValue)) {
@@ -895,13 +893,11 @@ public abstract class HtmlElement extends DomElement {
      * @param acceptableTagNames The list of tag names to search by.
      * @return The list of tag names
      */
-    public final List getHtmlElementsByTagNames(final List acceptableTagNames) {
-        final List list = new ArrayList();
-        final Iterator iterator = acceptableTagNames.iterator();
+    public final List< ? extends HtmlElement> getHtmlElementsByTagNames(final List<String> acceptableTagNames) {
+        final List<HtmlElement> list = new ArrayList<HtmlElement>();
 
-        while (iterator.hasNext()) {
-            final String next = iterator.next().toString().toLowerCase();
-            list.addAll(getHtmlElementsByTagName(next));
+        for (final String tagName : acceptableTagNames) {
+            list.addAll(getHtmlElementsByTagName(tagName.toLowerCase()));
         }
         return list;
     }
@@ -1107,7 +1103,7 @@ public abstract class HtmlElement extends DomElement {
      * @param qualifiedName The qualified name of the attribute
      * @param value The value of the attribute
      */
-    static HtmlAttr addAttributeToMap(final HtmlPage page, final Map attributeMap,
+    static HtmlAttr addAttributeToMap(final HtmlPage page, final Map<String, HtmlAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
         final HtmlAttr newAttr = new HtmlAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
@@ -1173,7 +1169,7 @@ public abstract class HtmlElement extends DomElement {
         Assert.notNull("listener", listener);
         synchronized (this) {
             if (attributeListeners_ == null) {
-                attributeListeners_ = new ArrayList();
+                attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
             }
             attributeListeners_.add(listener);
         }

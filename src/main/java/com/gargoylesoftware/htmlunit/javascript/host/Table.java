@@ -229,7 +229,7 @@ public class Table extends RowContainer {
      */
     protected Object insertRow(final int index) {
         // check if a tbody should be created
-        final List tagNames = Arrays.asList(new String[] {"tbody", "thead", "tfoot"});
+        final List<String> tagNames = Arrays.asList(new String[] {"tbody", "thead", "tfoot"});
         final List rowContainers = getHtmlElementOrDie().getHtmlElementsByTagNames(tagNames);
         if (rowContainers.isEmpty() || index == 0) {
             final HtmlElement tBody = getHtmlElementOrDie().appendChildIfNoneExists("tbody");

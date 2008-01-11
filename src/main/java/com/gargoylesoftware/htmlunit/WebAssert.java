@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.jaxen.JaxenException;
@@ -131,7 +130,7 @@ public final class WebAssert {
      */
     public static void assertElementPresentByXPath(final HtmlPage page, final String xpath) {
         try {
-            final List elements = page.getByXPath(xpath);
+            final List< ? > elements = page.getByXPath(xpath);
             if (elements.isEmpty()) {
                 final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
                                 + "'.";
@@ -170,7 +169,7 @@ public final class WebAssert {
      */
     public static void assertElementNotPresentByXPath(final HtmlPage page, final String xpath) {
         try {
-            final List elements = page.getByXPath(xpath);
+            final List< ? > elements = page.getByXPath(xpath);
             if (!elements.isEmpty()) {
                 final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
                                 + "'.";
@@ -298,8 +297,7 @@ public final class WebAssert {
      */
     public static void assertLinkPresentWithText(final HtmlPage page, final String text) {
         boolean found = false;
-        for (final Iterator i = page.getAnchors().iterator(); i.hasNext();) {
-            final HtmlAnchor a = (HtmlAnchor) i.next();
+        for (final HtmlAnchor a : page.getAnchors()) {
             if (a.asText().indexOf(text) != -1) {
                 found = true;
                 break;
@@ -320,8 +318,7 @@ public final class WebAssert {
      */
     public static void assertLinkNotPresentWithText(final HtmlPage page, final String text) {
         boolean found = false;
-        for (final Iterator i = page.getAnchors().iterator(); i.hasNext();) {
-            final HtmlAnchor a = (HtmlAnchor) i.next();
+        for (final HtmlAnchor a : page.getAnchors()) {
             if (a.asText().indexOf(text) != -1) {
                 found = true;
                 break;
@@ -375,7 +372,7 @@ public final class WebAssert {
     public static void assertInputPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
         try {
-            final List list = page.getByXPath(xpath);
+            final List< ? > list = page.getByXPath(xpath);
             if (list.isEmpty()) {
                 throw new AssertionError("Unable to find an input element named '" + name + "'.");
             }
@@ -394,7 +391,7 @@ public final class WebAssert {
     public static void assertInputNotPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
         try {
-            final List list = page.getByXPath(xpath);
+            final List< ? > list = page.getByXPath(xpath);
             if (!list.isEmpty()) {
                 throw new AssertionError("Unable to find an input element named '" + name + "'.");
             }
@@ -415,7 +412,7 @@ public final class WebAssert {
     public static void assertInputContainsValue(final HtmlPage page, final String name, final String value) {
         final String xpath = "//input[@name='" + name + "']";
         try {
-            final List list = page.getByXPath(xpath);
+            final List< ? > list = page.getByXPath(xpath);
             if (list.isEmpty()) {
                 throw new AssertionError("Unable to find an input element named '" + name + "'.");
             }
@@ -442,7 +439,7 @@ public final class WebAssert {
     public static void assertInputDoesNotContainValue(final HtmlPage page, final String name, final String value) {
         final String xpath = "//input[@name='" + name + "']";
         try {
-            final List list = page.getByXPath(xpath);
+            final List< ? > list = page.getByXPath(xpath);
             if (list.isEmpty()) {
                 throw new AssertionError("Unable to find an input element named '" + name + "'.");
             }
@@ -472,9 +469,7 @@ public final class WebAssert {
     public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
         final List<String> tags =
             Arrays.asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
-        final List<HtmlElement> tabbableElements = page.getDocumentHtmlElement().getHtmlElementsByTagNames(tags);
-        for (final Iterator<HtmlElement> i = tabbableElements.iterator(); i.hasNext();) {
-            final HtmlElement element = (HtmlElement) i.next();
+        for (final HtmlElement element : page.getDocumentHtmlElement().getHtmlElementsByTagNames(tags)) {
             final Short tabIndex = element.getTabIndex();
             if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
                 final String s = element.getAttributeValue("tabindex");

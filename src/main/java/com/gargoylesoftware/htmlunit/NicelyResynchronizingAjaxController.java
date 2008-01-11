@@ -60,13 +60,13 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
 
     private static final long serialVersionUID = -5406000795046341395L;
 
-    private final WeakReference originatedThread_;
+    private final WeakReference<Thread> originatedThread_;
 
     /**
      * Create an instance.
      */
     public NicelyResynchronizingAjaxController() {
-        originatedThread_ = new WeakReference(Thread.currentThread());
+        originatedThread_ = new WeakReference<Thread>(Thread.currentThread());
     }
 
     /**

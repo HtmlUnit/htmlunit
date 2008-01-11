@@ -224,9 +224,7 @@ public class HtmlForm extends ClickableElement {
         final Collection<SubmittableElement> submittableElements = getSubmittableElements(submitElement);
 
         final List<KeyValuePair> parameterList = new ArrayList<KeyValuePair>(submittableElements.size());
-        final Iterator<SubmittableElement> iterator = submittableElements.iterator();
-        while (iterator.hasNext()) {
-            final SubmittableElement element = (SubmittableElement) iterator.next();
+        for (final SubmittableElement element : submittableElements) {
             final KeyValuePair[] pairs = element.getSubmitKeyValuePairs();
 
             for (int i = 0; i < pairs.length; i++) {
@@ -549,17 +547,17 @@ public class HtmlForm extends ClickableElement {
      *
      * @param radioButtonInput The radio Button
      */
+    @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             if (!isAncestorOf(radioButtonInput)) {
                 throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
             }
-            final Iterator iterator = getByXPath(
+            final List<HtmlRadioButtonInput> radios = (List<HtmlRadioButtonInput>) getByXPath(
                     "//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
-            ).iterator();
+            );
             
-            while (iterator.hasNext()) {
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) iterator.next();
+            for (final HtmlRadioButtonInput input : radios) {
                 if (input == radioButtonInput) {
                     input.setAttributeValue("checked", "checked");
                 }

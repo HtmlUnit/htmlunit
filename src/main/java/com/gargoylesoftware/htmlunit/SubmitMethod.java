@@ -98,10 +98,11 @@ public final class SubmitMethod implements Serializable {
 
 
     private final String name_;
-    private static final Map methods_ = toMap(new SubmitMethod[] {OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE});
+    private static final Map<String, SubmitMethod> methods_ =
+        toMap(new SubmitMethod[] {OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE});
     
-    private static Map toMap(final SubmitMethod[] methods) {
-        final HashMap map = new HashMap(methods.length);
+    private static Map<String, SubmitMethod> toMap(final SubmitMethod[] methods) {
+        final HashMap<String, SubmitMethod> map = new HashMap<String, SubmitMethod>(methods.length);
         for (int i = 0; i < methods.length; ++i) {
             map.put(methods[i].getName(), methods[i]);
         }

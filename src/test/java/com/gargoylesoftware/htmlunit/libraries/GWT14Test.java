@@ -288,7 +288,7 @@ public class GWT14Test extends WebTestCase {
             }
         }
 
-        final List cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
+        final List< ? > cells = page.getByXPath("//table[@class='userTable'][1]//tr[2]/td");
         assertEquals(pendingOrders.length, cells.size());
         for (int i = 0; i < pendingOrders.length; i++) {
             final HtmlTableDataCell cell = (HtmlTableDataCell) cells.get(i);
@@ -307,14 +307,14 @@ public class GWT14Test extends WebTestCase {
 
         final String[] selectedRow = {"markboland05", "mark@example.com", "URGENT -[Mon, 24 Apr 2006 02:17:27 +0000]"};
 
-        final List selectedRowCells = page.getByXPath("//tr[@class='mail-SelectedRow']/td");
+        final List< ? > selectedRowCells = page.getByXPath("//tr[@class='mail-SelectedRow']/td");
         assertEquals(selectedRow.length, selectedRowCells.size());
         for (int i = 0; i < selectedRow.length; i++) {
             final HtmlTableDataCell selectedRowCell = (HtmlTableDataCell) selectedRowCells.get(i);
             testTableDataCell(selectedRowCell, selectedRow[i]);
         }
 
-        final List detailsCells = page.getByXPath("//div[@class='mail-DetailBody']/text()");
+        final List< ? > detailsCells = page.getByXPath("//div[@class='mail-DetailBody']/text()");
         final String[] details = {"Dear Friend,",
             "I am Mr. Mark Boland the Bank Manager of ABN AMRO BANK 101 Moorgate, London, EC2M 6SB."};
         for (int i = 0; i < details.length; i++) {
@@ -363,7 +363,7 @@ public class GWT14Test extends WebTestCase {
 
         //try 40 times to wait .5 second each for filling the page.
         for (int i = 0; i < 40; i++) {
-            final List detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
+            final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
             if (detailsCells.size() == firstRow.length) {
                 final HtmlTableDataCell firstCell = (HtmlTableDataCell) detailsCells.get(0);
                 if (firstCell.getFirstDomChild().getNodeValue().equals(firstRow[0])) {
@@ -375,7 +375,7 @@ public class GWT14Test extends WebTestCase {
             }
         }
 
-        final List detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
+        final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
         assertEquals(firstRow.length, detailsCells.size());
         for (int i = 0; i < firstRow.length; i++) {
             final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);

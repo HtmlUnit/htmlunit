@@ -139,7 +139,7 @@ public class Document extends Node {
 
     /** Initializes the supported event type map. */
     static {
-        final Map eventMap = new HashMap();
+        final Map<String, Class< ? extends Event>> eventMap = new HashMap<String, Class< ? extends Event>>();
         eventMap.put("Event", Event.class);
         eventMap.put("Events", Event.class);
         eventMap.put("HTMLEvents", Event.class);
@@ -517,7 +517,7 @@ public class Document extends Node {
         final String name = StringUtils.substringBefore(nameValue, "=").trim();
         final String value = StringUtils.substringAfter(nameValue, "=").trim();
 
-        final Map attributes = new HashMap();
+        final Map<String, Object> attributes = new HashMap<String, Object>();
         // default values
         attributes.put("domain", currentURL.getHost());
         // default value "" as it seems that org.apache.commons.httpclient.cookie.CookieSpec
@@ -970,7 +970,7 @@ public class Document extends Node {
         // Try to satisfy this request using a map-backed operation before punting and using XPath.
         // XPath operations are very expensive, and this method gets invoked quite a bit.
         // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
-        final List elements = page.getHtmlElementsByName(name);
+        final List<HtmlElement> elements = page.getHtmlElementsByName(name);
         if (elements.isEmpty()) {
             return NOT_FOUND;
         }
@@ -1011,7 +1011,7 @@ public class Document extends Node {
      * @return this document's <tt>body</tt> element
      */
     public Object jsxGet_body() {
-        final List tagNames = Arrays.asList(new String[] {"body", "frameset"});
+        final List<String> tagNames = Arrays.asList(new String[] {"body", "frameset"});
         final List list = getHtmlPage().getDocumentHtmlElement().getHtmlElementsByTagNames(tagNames);
         if (list.isEmpty()) {
             return NOT_FOUND;

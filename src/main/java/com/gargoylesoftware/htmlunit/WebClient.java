@@ -55,7 +55,6 @@ import java.util.BitSet;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -124,13 +123,13 @@ public class WebClient implements Serializable {
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private final String proxyHost_;
     private final int proxyPort_;
-    private final Map proxyBypassHosts_;
+    private final Map<String, Pattern> proxyBypassHosts_;
     private JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cookiesEnabled_ = true;
     private boolean popupBlockerEnabled_;
     private String homePage_;
-    private final Map requestHeaders_ = Collections.synchronizedMap(new HashMap(89));
+    private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
 
     /**
@@ -148,11 +147,11 @@ public class WebClient implements Serializable {
     private boolean isRedirectEnabled_ = true;
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
-    private final Set webWindowListeners_ = new HashSet(5);
-    private final List webWindows_ = Collections.synchronizedList(new ArrayList());
+    private final Set<WebWindowListener> webWindowListeners_ = new HashSet<WebWindowListener>(5);
+    private final List<WebWindow> webWindows_ = Collections.synchronizedList(new ArrayList<WebWindow>());
 
     private WebWindow currentWindow_;
-    private Stack firstWindowStack_ = new Stack();
+    private Stack<WebWindow> firstWindowStack_ = new Stack<WebWindow>();
     private int timeout_;
     private HTMLParserListener htmlParserListener_;
     private OnbeforeunloadHandler onbeforeunloadHandler_;
@@ -183,7 +182,9 @@ public class WebClient implements Serializable {
     private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new StringWebResponse("", URL_ABOUT_BLANK);
 
     private ScriptPreProcessor scriptPreProcessor_;
-    private Map activeXObjectMap_ = Collections.EMPTY_MAP;
+
+    @SuppressWarnings("unchecked")
+    private Map<String, String> activeXObjectMap_ = Collections.EMPTY_MAP;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
 
@@ -206,7 +207,7 @@ public class WebClient implements Serializable {
         browserVersion_ = browserVersion;
         proxyHost_ = null;
         proxyPort_ = 0;
-        proxyBypassHosts_ = new HashMap();
+        proxyBypassHosts_ = new HashMap<String, Pattern>();
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible(this);
         }
@@ -231,7 +232,7 @@ public class WebClient implements Serializable {
         browserVersion_ = browserVersion;
         proxyHost_ = proxyHost;
         proxyPort_ = proxyPort;
-        proxyBypassHosts_ = new HashMap();
+        proxyBypassHosts_ = new HashMap<String, Pattern>();
         try {
             scriptEngine_ = createJavaScriptEngineIfPossible(this);
         }
@@ -597,8 +598,8 @@ public class WebClient implements Serializable {
      */
     public void assertionFailed(final String message) {
         try {
-            final Class clazz = Class.forName("junit.framework.AssertionFailedError");
-            final Constructor constructor = clazz.getConstructor(new Class[]{String.class});
+            final Class< ? > clazz = Class.forName("junit.framework.AssertionFailedError");
+            final Constructor< ? > constructor = clazz.getConstructor(new Class[]{String.class});
             final Error error = (Error) constructor.newInstance(new Object[]{message});
             throw error;
         }
@@ -727,8 +728,7 @@ public class WebClient implements Serializable {
      */
     private boolean shouldBypassProxy(final String hostname) {
         boolean bypass = false;
-        for (final Iterator i = proxyBypassHosts_.values().iterator(); i.hasNext();) {
-            final Pattern p = (Pattern) i.next();
+        for (final Pattern p : proxyBypassHosts_.values()) {
             if (p.matcher(hostname).find()) {
                 bypass = true;
                 break;
@@ -868,25 +868,19 @@ public class WebClient implements Serializable {
     }
 
     private void fireWindowContentChanged(final WebWindowEvent event) {
-        final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
-        while (iterator.hasNext()) {
-            final WebWindowListener listener = (WebWindowListener) iterator.next();
+        for (final WebWindowListener listener : new ArrayList<WebWindowListener>(webWindowListeners_)) {
             listener.webWindowContentChanged(event);
         }
     }
 
     private void fireWindowOpened(final WebWindowEvent event) {
-        final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
-        while (iterator.hasNext()) {
-            final WebWindowListener listener = (WebWindowListener) iterator.next();
+        for (final WebWindowListener listener : new ArrayList<WebWindowListener>(webWindowListeners_)) {
             listener.webWindowOpened(event);
         }
     }
 
     private void fireWindowClosed(final WebWindowEvent event) {
-        final Iterator iterator = new ArrayList(webWindowListeners_).iterator();
-        while (iterator.hasNext()) {
-            final WebWindowListener listener = (WebWindowListener) iterator.next();
+        for (final WebWindowListener listener : new ArrayList<WebWindowListener>(webWindowListeners_)) {
             listener.webWindowClosed(event);
         }
     }
@@ -1061,9 +1055,7 @@ public class WebClient implements Serializable {
     public WebWindow getWebWindowByName(final String name) throws WebWindowNotFoundException {
         Assert.notNull("name", name);
 
-        final Iterator iterator = webWindows_.iterator();
-        while (iterator.hasNext()) {
-            final WebWindow webWindow = (WebWindow) iterator.next();
+        for (final WebWindow webWindow : webWindows_) {
             if (webWindow.getName().equals(name)) {
                 return webWindow;
             }
@@ -1232,7 +1224,7 @@ public class WebClient implements Serializable {
         }
 
         // section 2.4.6 - parse path
-        final List tokens = new ArrayList();
+        final List<String> tokens = new ArrayList<String>();
         final String stringToTokenize;
         if (parseUrl.trim().length() == 0) {
             stringToTokenize = baseUrl.getPath();
@@ -1277,10 +1269,9 @@ public class WebClient implements Serializable {
             buffer.append(port);
         }
 
-        final Iterator iterator = tokens.iterator();
-        while (iterator.hasNext()) {
+        for (final String token : tokens) {
             buffer.append("/");
-            buffer.append(iterator.next());
+            buffer.append(token);
         }
 
         if (pathToTokenize.endsWith("/")) {
@@ -1361,7 +1352,7 @@ public class WebClient implements Serializable {
         private final byte[] data_;
 
         private static WebResponseData getWebResponseData(final byte[] data, final String contentType) {
-            final List compiledHeaders = new ArrayList();
+            final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
             compiledHeaders.add(new NameValuePair("Content-Type", contentType));
             return new WebResponseData(data, HttpStatus.SC_OK, "OK", compiledHeaders);
         }
@@ -1472,7 +1463,7 @@ public class WebClient implements Serializable {
             IOException {
         final URL url = webRequestSettings.getURL();
         final SubmitMethod method = webRequestSettings.getSubmitMethod();
-        final List parameters = webRequestSettings.getRequestParameters();
+        final List<KeyValuePair> parameters = webRequestSettings.getRequestParameters();
 
         Assert.notNull("url", url);
         Assert.notNull("method", method);
@@ -1663,7 +1654,7 @@ public class WebClient implements Serializable {
      * name to a java class to emulate the active X object.
      * @param activeXObjectMap The new preprocessor or null if none is specified
      */
-    public void setActiveXObjectMap(final Map activeXObjectMap) {
+    public void setActiveXObjectMap(final Map<String, String> activeXObjectMap) {
         activeXObjectMap_ = activeXObjectMap;
     }
 
@@ -1671,7 +1662,7 @@ public class WebClient implements Serializable {
      * Return the active X object map for this webclient.
      * @return the active X object map.
      */
-    public Map getActiveXObjectMap() {
+    public Map<String, String> getActiveXObjectMap() {
         return activeXObjectMap_;
     }
 

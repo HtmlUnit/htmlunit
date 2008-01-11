@@ -61,7 +61,7 @@ public class WebRequestSettings {
     private int proxyPort_;
     private SubmitMethod submitMethod_ = SubmitMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
-    private Map additionalHeaders_ = new HashMap();
+    private Map<String, String> additionalHeaders_ = new HashMap<String, String>();
     private CredentialsProvider credentialsProvider_;
     private String charset_ = TextUtil.DEFAULT_CHARSET;
     private String cookiePolicy_;
@@ -217,14 +217,14 @@ public class WebRequestSettings {
     /**
      * @return Returns the additionalHeaders.
      */
-    public Map getAdditionalHeaders() {
+    public Map<String, String> getAdditionalHeaders() {
         return additionalHeaders_;
     }
 
     /**
      * @param additionalHeaders The additionalHeaders to set.
      */
-    public void setAdditionalHeaders(final Map additionalHeaders) {
+    public void setAdditionalHeaders(final Map<String, String> additionalHeaders) {
         additionalHeaders_ = additionalHeaders;
     }
 

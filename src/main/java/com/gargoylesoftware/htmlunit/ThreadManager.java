@@ -41,7 +41,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
@@ -64,7 +63,7 @@ public class ThreadManager {
     private static final Log LOG = LogFactory.getLog(ThreadManager.class);
 
     /** Map of threads, keyed on thread ID. Use a tree map for deterministic iteration. */
-    private Map threadMap_ = Collections.synchronizedMap(new TreeMap());
+    private Map<Integer, Thread> threadMap_ = Collections.synchronizedMap(new TreeMap<Integer, Thread>());
 
     /**
      * @return The number of tracked threads.
@@ -181,9 +180,9 @@ public class ThreadManager {
     private Thread getNextThread() {
         final Thread thread;
         synchronized (threadMap_) {
-            final Iterator i = threadMap_.values().iterator();
+            final Iterator<Thread> i = threadMap_.values().iterator();
             if (i.hasNext()) {
-                thread = (Thread) i.next();
+                thread = i.next();
             }
             else {
                 thread = null;
@@ -198,9 +197,7 @@ public class ThreadManager {
      */
     public void interruptAll() {
         synchronized (threadMap_) {
-            final Set keys = new HashSet(threadMap_.keySet());
-            for (final Iterator i = keys.iterator(); i.hasNext();) {
-                final Integer id = (Integer) i.next();
+            for (final Integer id : new HashSet<Integer>(threadMap_.keySet())) {
                 stopThread(id.intValue());
             }
         }
