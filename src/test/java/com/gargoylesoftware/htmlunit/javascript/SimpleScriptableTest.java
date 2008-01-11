@@ -260,4 +260,32 @@ public class SimpleScriptableTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testArrayedMap() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var map = {};\n"
+            + "    map['x1'] = 'y1';\n"
+            + "    map['x2'] = 'y2';\n"
+            + "    map['x3'] = 'y3';\n"
+            + "    map['x4'] = 'y4';\n"
+            + "    map['x5'] = 'y5';\n"
+            + "    for (var i in map) {\n"
+            + "      alert(i);\n"
+            + "    }"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"x1", "x2", "x3", "x4", "x5"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
