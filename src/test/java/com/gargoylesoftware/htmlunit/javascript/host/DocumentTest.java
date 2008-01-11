@@ -1658,6 +1658,40 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * Firefox supports document.all ... but
+     * @throws Exception If the test fails.
+     */
+    public void testDocumentAll_AsBoolean() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String[] alertsIE = {"true", "true"};
+        testDocumentAll_AsBoolean(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
+        final String[] alertsFF = {"false", "true"};
+        testDocumentAll_AsBoolean(BrowserVersion.FIREFOX_2, alertsFF);
+    }
+
+    /**
+     */
+    private void testDocumentAll_AsBoolean(final BrowserVersion browser,
+        final String[] expectedAlerts) throws Exception {
+        final String content = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(1);\n"
+            + "    alert(document.all ? true : false);\n"
+            + "    alert(Boolean(document.all));\n"
+            + "}\n"
+            + "</script><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List collectedAlerts = new ArrayList();
+        final HtmlPage firstPage = loadPage(browser, content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Makes sure that the document.all collection contents are not cached if the
      * collection is accessed before the page has finished loading.
      * @throws Exception If the test fails.
