@@ -60,13 +60,13 @@ public final class ClassConfiguration {
 
     private Map<String, PropertyInfo> propertyMap_ = new HashMap<String, PropertyInfo>();
     private Map<String, FunctionInfo> functionMap_ = new HashMap<String, FunctionInfo>();
-    private List constants_ = new ArrayList();
+    private List<String> constants_ = new ArrayList<String>();
     private String extendedClass_;
     /**
      * The fully qualified name of the class that implements this class.
      */
     private final String className_;
-    private final Class linkedClass_;
+    private final Class< ? > linkedClass_;
     /**
      * The constructor method in the {@link #linkedClass_}
      */
@@ -191,7 +191,7 @@ public final class ClassConfiguration {
      * Return the constant list.
      * @return a list.
      */
-    public List constants() {
+    public List<String> constants() {
         return constants_;
     }
 
@@ -345,7 +345,7 @@ public final class ClassConfiguration {
      * Gets the class of the Javascript host object
      * @return Returns the linkedClass.
      */
-    public Class getLinkedClass() {
+    public Class< ? > getLinkedClass() {
         return linkedClass_;
     }
 

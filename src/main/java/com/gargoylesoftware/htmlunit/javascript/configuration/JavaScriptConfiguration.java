@@ -599,7 +599,7 @@ public final class JavaScriptConfiguration {
      * @param propertyName The property to find the getter for
      * @return Method
      */
-    public Method getPropertyWriteMethod(final Class clazz, final String propertyName) {
+    public Method getPropertyWriteMethod(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
         return getPropertyWriteMethod(classname, propertyName);
     }
@@ -631,7 +631,7 @@ public final class JavaScriptConfiguration {
      * @param functionName The function to find the method for
      * @return Method
      */
-    public Method getFunctionMethod(final Class clazz, final String functionName) {
+    public Method getFunctionMethod(final Class< ? > clazz, final String functionName) {
         final String classname = getClassnameForClass(clazz);
         return getFunctionMethod(classname, functionName);
     }

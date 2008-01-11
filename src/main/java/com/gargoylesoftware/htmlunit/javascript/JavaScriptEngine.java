@@ -99,13 +99,14 @@ public class JavaScriptEngine implements Serializable {
     private final WebClient webClient_;
     private static final Log ScriptEngineLog_ = LogFactory.getLog(JavaScriptEngine.class);
 
-    private static final ThreadLocal javaScriptRunning_ = new ThreadLocal();
+    private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
     /**
      * Cache parsed scripts (only for js files, not for js code embedded in html code)
      * The WeakHashMap allows cached scripts to be GCed when the WebResponses are not retained
      * in the {@link com.gargoylesoftware.htmlunit.Cache} anymore.
      */
-    private final transient Map cachedScripts_ = Collections.synchronizedMap(new WeakHashMap());
+    private final transient Map<WebResponse, Script> cachedScripts_ =
+        Collections.synchronizedMap(new WeakHashMap<WebResponse, Script>());
 
     /**
      * Key used to place the scope in which the execution of some javascript code
@@ -175,7 +176,7 @@ public class JavaScriptEngine implements Serializable {
      */
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
-        final Map prototypes = new HashMap();
+        final Map<Class< ? >, Scriptable> prototypes = new HashMap<Class< ? >, Scriptable>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
         final Window window = new Window(this);
         final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
@@ -200,9 +201,7 @@ public class JavaScriptEngine implements Serializable {
         };
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
         
-        final Iterator it = jsConfig.keySet().iterator();
-        while (it.hasNext()) {
-            final String jsClassName = (String) it.next();
+        for (final String jsClassName : jsConfig.keySet()) {
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final boolean isWindow = Window.class.getName().equals(config.getLinkedClass().getName());
             if (isWindow) {
@@ -286,7 +285,7 @@ public class JavaScriptEngine implements Serializable {
     private Scriptable configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException, InvocationTargetException {
 
-        final Class jsHostClass = config.getLinkedClass();
+        final Class< ? > jsHostClass = config.getLinkedClass();
         final ScriptableObject prototype = (ScriptableObject) jsHostClass.newInstance();
         prototype.setParentScope(window);
 
@@ -304,9 +303,8 @@ public class JavaScriptEngine implements Serializable {
             final ScriptableObject scriptable) {
         
         // the constants
-        for (final Iterator<String> constantsIterator = config.constants().iterator(); constantsIterator.hasNext();) {
-            final String constant = (String) constantsIterator.next();
-            final Class linkedClass = config.getLinkedClass();
+        for (final String constant : config.constants()) {
+            final Class< ? > linkedClass = config.getLinkedClass();
             try {
                 final Object value = linkedClass.getField(constant).get(null);
                 scriptable.defineProperty(constant, value, ScriptableObject.CONST);
@@ -317,16 +315,14 @@ public class JavaScriptEngine implements Serializable {
             }
         }
         // the properties
-        for (final Iterator propertiesIterator = config.propertyKeys().iterator(); propertiesIterator.hasNext();) {
-            final String entryKey = (String) propertiesIterator.next();
+        for (final String entryKey : config.propertyKeys()) {
             final Method readMethod = config.getPropertyReadMethod(entryKey);
             final Method writeMethod = config.getPropertyWriteMethod(entryKey);
             scriptable.defineProperty(entryKey, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
         // the functions
-        for (final Iterator functionsIterator = config.functionKeys().iterator(); functionsIterator.hasNext();) {
-            final String entryKey = (String) functionsIterator.next();
+        for (final String entryKey : config.functionKeys()) {
             final Method method = config.getFunctionMethod(entryKey);
             final FunctionObject functionObject = new FunctionObject(entryKey, method, scriptable);
             scriptable.defineProperty(entryKey, functionObject, ScriptableObject.EMPTY);
