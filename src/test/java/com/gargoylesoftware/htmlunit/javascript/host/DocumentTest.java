@@ -1681,7 +1681,6 @@ public class DocumentTest extends WebTestCase {
             + "</script><body onload='doTest()'>\n"
             + "</body></html>";
 
-        System.out.println(content);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         final HtmlPage firstPage = loadPage(browser, content, collectedAlerts);
