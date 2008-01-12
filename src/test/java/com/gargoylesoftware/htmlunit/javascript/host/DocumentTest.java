@@ -1671,19 +1671,17 @@ public class DocumentTest extends WebTestCase {
         testDocumentAll_AsBoolean(BrowserVersion.FIREFOX_2, alertsFF);
     }
 
-    /**
-     */
     private void testDocumentAll_AsBoolean(final BrowserVersion browser,
         final String[] expectedAlerts) throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(1);\n"
             + "    alert(document.all ? true : false);\n"
             + "    alert(Boolean(document.all));\n"
             + "}\n"
             + "</script><body onload='doTest()'>\n"
             + "</body></html>";
 
+        System.out.println(content);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List collectedAlerts = new ArrayList();
         final HtmlPage firstPage = loadPage(browser, content, collectedAlerts);
