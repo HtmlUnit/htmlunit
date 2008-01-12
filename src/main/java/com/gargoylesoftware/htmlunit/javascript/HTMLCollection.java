@@ -246,6 +246,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * needs to be performed each time again
      * @return the list of {@link HtmlElement} contained in this collection
      */
+    @SuppressWarnings("unchecked")
     private List<Object> getElements() {
         if (cachedElements_ == null) {
             try {
@@ -255,14 +256,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
                 else {
                     cachedElements_ = new ArrayList<Object>();
                 }
-                boolean isXmlPage = false;
-
-                //TODO: should be replaced by "getPage() instanceof XmlPage"
-                for (DomNode parent = node_; parent != null; parent = parent.getParentDomNode()) {
-                    if (parent instanceof XmlPage) {
-                        isXmlPage = true;
-                    }
-                }
+                final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
 
                 final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
 
@@ -488,7 +482,8 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             final List<Object> elements = getElements();
             CollectionUtils.transform(elements, transformer_);
 
-            for (final Object child : elements) {
+            for (@SuppressWarnings("unused")
+            final Object child : elements) {
                 if (index-- == 0) {
                     return true;
                 }
@@ -530,7 +525,8 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
         if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
             int index = 0;
-            for (final Object child : elements) {
+            for (@SuppressWarnings("unused")
+            final Object child : elements) {
                 idList.add(Integer.toString(index++));
             }
             
