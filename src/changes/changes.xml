@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="fix" dev="asashour">
+                JavaScript: HTMLCollection should not have 'tags' property in Firefox
+                (except for <code>document.all</code>).
+            </action>
             <action type="add" dev="asashour">
                 HtmlTextInput and HtmlTextArea: Add support for select(), and fix tabIndex JavaScript property.
             </action>

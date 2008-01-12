@@ -48,7 +48,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.util.EncodingUtil;
@@ -1159,12 +1158,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Return a list containing all the frames (from frame and iframe tags) in this page.
      * @return a list of {@link FrameWindow}
      */
-    public List getFrames() {
-        final List list = new ArrayList();
+    public List<WebWindow> getFrames() {
+        final List<WebWindow> list = new ArrayList<WebWindow>();
         final WebWindow enclosingWindow = getEnclosingWindow();
-        for (final Iterator iter = getWebClient().getWebWindows().iterator(); iter.hasNext();)
-        {
-            final WebWindow window = (WebWindow) iter.next();
+        for (final WebWindow window : getWebClient().getWebWindows()) {
             // quite strange but for a TopLevelWindow parent == self
             if (enclosingWindow == window.getParentWindow()
                     && enclosingWindow != window) {
@@ -1248,7 +1245,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return The element that has focus after calling this method.
      */
     public HtmlElement tabToNextElement() {
-        final List elements = getTabbableElements();
+        final List<HtmlElement> elements = getTabbableElements();
         if (elements.isEmpty()) {
             moveFocusToElement(null);
             return null;
@@ -1257,20 +1254,20 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final HtmlElement elementToGiveFocus;
         final HtmlElement elementWithFocus = getElementWithFocus();
         if (elementWithFocus == null) {
-            elementToGiveFocus = (HtmlElement) elements.get(0);
+            elementToGiveFocus = elements.get(0);
         }
         else {
             final int index = elements.indexOf(elementWithFocus);
             if (index == -1) {
                 // The element with focus isn't on this page
-                elementToGiveFocus = (HtmlElement) elements.get(0);
+                elementToGiveFocus = elements.get(0);
             }
             else {
                 if (index == elements.size() - 1) {
-                    elementToGiveFocus = (HtmlElement) elements.get(0);
+                    elementToGiveFocus = elements.get(0);
                 }
                 else {
-                    elementToGiveFocus = (HtmlElement) elements.get(index + 1);
+                    elementToGiveFocus = elements.get(index + 1);
                 }
             }
         }
@@ -1286,7 +1283,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return The element that has focus after calling this method.
      */
     public HtmlElement tabToPreviousElement() {
-        final List elements = getTabbableElements();
+        final List<HtmlElement> elements = getTabbableElements();
         if (elements.isEmpty()) {
             moveFocusToElement(null);
             return null;
@@ -1295,20 +1292,20 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         final HtmlElement elementToGiveFocus;
         final HtmlElement elementWithFocus = getElementWithFocus();
         if (elementWithFocus == null) {
-            elementToGiveFocus = (HtmlElement) elements.get(elements.size() - 1);
+            elementToGiveFocus = elements.get(elements.size() - 1);
         }
         else {
             final int index = elements.indexOf(elementWithFocus);
             if (index == -1) {
                 // The element with focus isn't on this page
-                elementToGiveFocus = (HtmlElement) elements.get(elements.size() - 1);
+                elementToGiveFocus = elements.get(elements.size() - 1);
             }
             else {
                 if (index == 0) {
-                    elementToGiveFocus = (HtmlElement) elements.get(elements.size() - 1);
+                    elementToGiveFocus = elements.get(elements.size() - 1);
                 }
                 else {
-                    elementToGiveFocus = (HtmlElement) elements.get(index - 1);
+                    elementToGiveFocus = elements.get(index - 1);
                 }
             }
         }
@@ -1327,9 +1324,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @throws ElementNotFoundException if no element was found that matches the id
      */
     public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
-        final List elements = (List) idMap_.get(id);
+        final List<HtmlElement> elements = (List<HtmlElement>) idMap_.get(id);
         if (elements != null) {
-            return (HtmlElement) elements.get(0);
+            return elements.get(0);
         }
         throw new ElementNotFoundException("*", "id", id);
     }
@@ -1342,6 +1339,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param name the name value to search by
      * @return the HTML elements with the specified name attribute
      */
+    @SuppressWarnings("unchecked")
     public List<HtmlElement> getHtmlElementsByName(final String name) {
         final List<HtmlElement> list = (List<HtmlElement>) nameMap_.get(name);
         if (list != null) {
@@ -1360,10 +1358,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param idAndOrName the value to search for
      * @return the HTML elements with the specified string for their name or ID
      */
-    public List getHtmlElementsByIdAndOrName(final String idAndOrName) {
-        final List list1 = (List) idMap_.get(idAndOrName);
-        final List list2 = (List) nameMap_.get(idAndOrName);
-        final List list = new ArrayList();
+    public List<HtmlElement> getHtmlElementsByIdAndOrName(final String idAndOrName) {
+        final List<HtmlElement> list1 = (List<HtmlElement>) idMap_.get(idAndOrName);
+        final List<HtmlElement> list2 = (List<HtmlElement>) nameMap_.get(idAndOrName);
+        final List<HtmlElement> list = new ArrayList<HtmlElement>();
         if (list1 != null) {
             list.addAll(list1);
         }
@@ -1405,12 +1403,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         return false;
     }
     
-    private void addElement(final Map map, final HtmlElement element, final String attribute, final boolean recurse) {
+    private void addElement(final Map<String, List<HtmlElement>> map, final HtmlElement element,
+            final String attribute, final boolean recurse) {
         final String value = element.getAttributeValue(attribute);
         if (!StringUtils.isEmpty(value)) {
-            List elements = (List) map.get(value);
+            List<HtmlElement> elements = map.get(value);
             if (elements == null) {
-                elements = new Vector();
+                elements = new ArrayList<HtmlElement>();
                 elements.add(element);
                 map.put(value, elements);
             }
@@ -1446,10 +1445,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
     }
 
-    private void removeElement(final Map map, final HtmlElement element, final String att, final boolean recurse) {
+    private void removeElement(final Map<String, List<HtmlElement>> map, final HtmlElement element, final String att,
+            final boolean recurse) {
         final String value = element.getAttributeValue(att);
         if (!StringUtils.isEmpty(value)) {
-            final List elements = (List) map.remove(value);
+            final List<HtmlElement> elements = map.remove(value);
             if (elements != null && elements.size() != 1) {
                 elements.remove(element);
                 map.put(value, elements);
@@ -1505,9 +1505,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      */
     void loadFrames() throws FailingHttpStatusCodeException {
         final List<String> frameTags = Arrays.asList(new String[] {"frame", "iframe"});
-        final List frames = getDocumentHtmlElement().getHtmlElementsByTagNames(frameTags);
-        for (final Iterator iter = frames.iterator(); iter.hasNext();) {
-            final BaseFrame frame = (BaseFrame) iter.next();
+        final List< ? extends HtmlElement> frames = getDocumentHtmlElement().getHtmlElementsByTagNames(frameTags);
+        for (final HtmlElement element : frames) {
+            final BaseFrame frame = (BaseFrame) element;
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus url set to "about:blank")
@@ -1641,8 +1641,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             final HtmlPage result = (HtmlPage) super.clone();
             result.documentElement_ = null;
             result.elementWithFocus_ = null;
-            result.idMap_ = new HashMap();
-            result.nameMap_ = new HashMap();
+            result.idMap_ = new HashMap<String, List<HtmlElement>>();
+            result.nameMap_ = new HashMap<String, List<HtmlElement>>();
             return result;
         }
         catch (final CloneNotSupportedException e) {
@@ -1678,7 +1678,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         Assert.notNull("listener", listener);
         synchronized (lock_) {
             if (attributeListeners_ == null) {
-                attributeListeners_ = new ArrayList();
+                attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
             }
             if (!attributeListeners_.contains(listener)) {
                 attributeListeners_.add(listener);
@@ -1708,10 +1708,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param event the event to fire
      */
     void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
-        final List listeners = safeGetAttributeListeners();
+        final List<HtmlAttributeChangeListener> listeners = safeGetAttributeListeners();
         if (listeners != null) {
-            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
-                final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
+            for (final HtmlAttributeChangeListener listener : listeners) {
                 listener.attributeAdded(event);
             }
         }
@@ -1722,10 +1721,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param event the event to fire
      */
     void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
-        final List listeners = safeGetAttributeListeners();
+        final List<HtmlAttributeChangeListener> listeners = safeGetAttributeListeners();
         if (listeners != null) {
-            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
-                final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
+            for (final HtmlAttributeChangeListener listener : listeners) {
                 listener.attributeReplaced(event);
             }
         }
@@ -1736,19 +1734,18 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param event the event to fire
      */
     void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
-        final List listeners = safeGetAttributeListeners();
+        final List<HtmlAttributeChangeListener> listeners = safeGetAttributeListeners();
         if (listeners != null) {
-            for (final Iterator iterator = listeners.iterator(); iterator.hasNext();) {
-                final HtmlAttributeChangeListener listener = (HtmlAttributeChangeListener) iterator.next();
+            for (final HtmlAttributeChangeListener listener : listeners) {
                 listener.attributeRemoved(event);
             }
         }
     }
 
-    private List safeGetAttributeListeners() {
+    private List<HtmlAttributeChangeListener> safeGetAttributeListeners() {
         synchronized (lock_) {
             if (attributeListeners_ != null) {
-                return new ArrayList(attributeListeners_);
+                return new ArrayList<HtmlAttributeChangeListener>(attributeListeners_);
             }
             else {
                 return null;

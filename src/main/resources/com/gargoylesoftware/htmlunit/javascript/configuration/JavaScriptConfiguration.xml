@@ -358,6 +358,13 @@
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
         <function name="namedItem"/>
+        <function name="tags">
+        	<browser name="Microsoft Internet Explorer"/>
+        </function>
+    </class>
+
+    <class name="HTMLCollectionTags" extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLCollectionTags"
+    	JSObject="true">
         <function name="tags"/>
     </class>
 

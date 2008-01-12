@@ -88,7 +88,7 @@ public final class JavaScriptConfiguration {
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
         new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
-    private static Map HtmlJavaScriptMap_;
+    private static Map<Class < ? >, Class < ? >> HtmlJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
     private final BrowserVersion browser_;
@@ -705,7 +705,7 @@ public final class JavaScriptConfiguration {
      * are the javascript class names (ie "Anchor").
      * @return the mappings
      */
-    public static synchronized Map getHtmlJavaScriptMapping() {
+    public static synchronized Map<Class < ? >, Class < ? >> getHtmlJavaScriptMapping() {
         if (HtmlJavaScriptMap_ != null) {
             return HtmlJavaScriptMap_;
         }

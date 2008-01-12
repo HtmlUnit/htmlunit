@@ -84,6 +84,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.FunctionContextWrapper;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.html.xpath.LowerCaseFunction;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.HTMLCollectionTags;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -118,7 +119,7 @@ public class Document extends Node {
      * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
      * have a no-arg constructor.
      */
-    private static final Map SUPPORTED_EVENT_TYPE_MAP;
+    private static final Map<String, Class< ? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
 
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private HTMLCollection forms_; // has to be a member to have equality (==) working
@@ -622,7 +623,7 @@ public class Document extends Node {
      */
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
-            all_ = new HTMLCollection(this);
+            all_ = new HTMLCollectionTags(this);
             try {
                 all_.init(getDomNodeOrDie(), new HtmlUnitXPath("//*"));
             }
@@ -1012,12 +1013,13 @@ public class Document extends Node {
      */
     public Object jsxGet_body() {
         final List<String> tagNames = Arrays.asList(new String[] {"body", "frameset"});
-        final List list = getHtmlPage().getDocumentHtmlElement().getHtmlElementsByTagNames(tagNames);
+        final List< ? extends HtmlElement> list =
+            getHtmlPage().getDocumentHtmlElement().getHtmlElementsByTagNames(tagNames);
         if (list.isEmpty()) {
             return NOT_FOUND;
         }
         else {
-            final DomNode bodyElement = (DomNode) list.get(0);
+            final DomNode bodyElement = list.get(0);
             return getScriptableFor(bodyElement);
         }
     }
@@ -1203,12 +1205,12 @@ public class Document extends Node {
      *         type of DOMException.NOT_SUPPORTED_ERR
      */
     public Event jsxFunction_createEvent(final String eventType) throws DOMException {
-        final Class clazz = (Class) SUPPORTED_EVENT_TYPE_MAP.get(eventType);
+        final Class< ? extends Event> clazz = (Class< ? extends Event>) SUPPORTED_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Event Type is not supported: " + eventType);
         }
         try {
-            final Event event = (Event) clazz.newInstance();
+            final Event event = clazz.newInstance();
             event.setEventType(eventType);
             event.setParentScope(getWindow());
             event.setPrototype(getPrototype(clazz));

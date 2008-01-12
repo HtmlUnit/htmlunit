@@ -1604,7 +1604,7 @@ public class WebClient implements Serializable {
      * Return an immutable list of open web windows (top windows or not).
      * @return The web windows
      */
-    public List getWebWindows() {
+    public List<WebWindow> getWebWindows() {
         return Collections.unmodifiableList(webWindows_);
     }
 

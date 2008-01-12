@@ -239,9 +239,6 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTags() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testTags(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "true"});
         testTags(BrowserVersion.FIREFOX_2, new String[] {"true", "false"});
     }

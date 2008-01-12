@@ -98,7 +98,9 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
+     * Don't call.
      */
+    @Deprecated
     public HTMLCollection() {
         // nothing
     }
@@ -425,7 +427,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @return All the elements in this element array that have the specified tag name.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
      */
-    public final Object jsxFunction_tags(final String tagName) {
+    public Object jsxFunction_tags(final String tagName) {
         final HTMLCollection array = new HTMLCollection(this);
         try {
             final String newXPathExpr = xpath_ + "[name() = '" + tagName.toLowerCase() + "']";
@@ -647,5 +649,26 @@ public class HTMLCollection extends SimpleScriptable implements Function {
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             cachedElements_ = null;
         }
+    }
+
+    /**
+     * @return the XPath.
+     */
+    protected XPath getXpath() {
+        return xpath_;
+    }
+
+    /**
+     * @return the node.
+     */
+    protected DomNode getNode() {
+        return node_;
+    }
+
+    /**
+     * @return the transformer.
+     */
+    protected Transformer getTransformer() {
+        return transformer_;
     }
 }

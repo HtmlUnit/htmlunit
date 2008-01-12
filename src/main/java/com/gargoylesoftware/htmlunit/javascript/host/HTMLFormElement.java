@@ -267,12 +267,12 @@ public class HTMLFormElement extends HTMLElement {
             // buttons, selects and textareas that are in this form. We also include img elements
             // (the second XPath search below) in the search, because any results with more than one element
             // will end up using the XPath search anyway, so it doesn't hurt when looking for single elements.
-            final List elements = page.getHtmlElementsByIdAndOrName(name);
+            final List<HtmlElement> elements = page.getHtmlElementsByIdAndOrName(name);
             if (elements.isEmpty()) {
                 return NOT_FOUND;
             }
             if (elements.size() == 1) {
-                final HtmlElement element = (HtmlElement) elements.get(0);
+                final HtmlElement element = elements.get(0);
                 final String tagName = element.getTagName();
                 final String type = element.getAttribute("type").toLowerCase();
                 if ((HtmlInput.TAG_NAME.equals(tagName) && !"image".equals(type))
