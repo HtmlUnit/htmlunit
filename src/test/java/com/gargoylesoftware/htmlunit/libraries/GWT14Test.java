@@ -44,6 +44,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -106,6 +107,9 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testI18N() throws Exception {
+        final Locale locale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
         testI18N(page, "numberFormatOutputText", "31,415,926,535.898");
 
@@ -127,6 +131,8 @@ public class GWT14Test extends WebTestCase {
         map.put("userID", "123");
         map.put("lastLogOn", "2/2/2006");
         testI18NDictionary(page, map);
+        
+        Locale.setDefault(locale);
     }
 
     /**
@@ -135,6 +141,9 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testI18N_fr() throws Exception {
+        final Locale locale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+        
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
         final WebClient client = new WebClient();
 
@@ -173,6 +182,8 @@ public class GWT14Test extends WebTestCase {
         map.put("userID", "123");
         map.put("lastLogOn", "2/2/2006");
         testI18NDictionary(page, map);
+        
+        Locale.setDefault(locale);
     }
 
     /**
