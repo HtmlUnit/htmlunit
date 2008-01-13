@@ -54,7 +54,9 @@
                         Update the version number and release date in src/changes/changes.xml
                     </li>
                     <li>
-                        Build the zip files
+                        Increase Java heap space by setting the environment variable
+                        <source>MAVEN_OPTS="-Xmx512m -Xms256m"</source>
+                        Then build the zip files
                         <source>mvn clean site:site assembly:assembly</source>
                     </li>
                     <li>
