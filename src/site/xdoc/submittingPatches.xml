@@ -42,7 +42,7 @@
                     </li>
                     <li>
                     	If you are fixing a bug but not adding new functionality then we still require
-                    	tests that would fail with the old behaviour.
+                    	tests that would fail with the old behavior.
                     </li>
                     <li>
                         All existing unit tests must pass.

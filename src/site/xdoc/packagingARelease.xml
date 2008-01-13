@@ -55,9 +55,9 @@
                     </li>
                     <li>
                         Increase Java heap space by setting the environment variable
-                        <source>MAVEN_OPTS="-Xmx512m -Xms256m"</source>
+                        <source>MAVEN_OPTS="-Xms256m -Xmx512m"</source>
                         Then build the zip files
-                        <source>mvn clean site:site assembly:assembly</source>
+                        <source>mvn clean site assembly:assembly</source>
                     </li>
                     <li>
                         Upload the two zip files to SourceForge following 
