@@ -43,7 +43,6 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
@@ -179,7 +178,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
     /**
      * {@inheritDoc}
      */
-    public List getResponseHeaders() {
+    public List<NameValuePair> getResponseHeaders() {
         return responseData_.getResponseHeaders();
     }
 
@@ -187,9 +186,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * {@inheritDoc}
      */
     public String getResponseHeaderValue(final String headerName) {
-        final Iterator iterator = responseData_.getResponseHeaders().iterator();
-        while (iterator.hasNext()) {
-            final NameValuePair pair = (NameValuePair) iterator.next();
+        for (final NameValuePair pair : responseData_.getResponseHeaders()) {
             if (pair.getName().equalsIgnoreCase(headerName)) {
                 return pair.getValue();
             }

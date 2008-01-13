@@ -278,7 +278,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final Map lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
+        final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
     }
 

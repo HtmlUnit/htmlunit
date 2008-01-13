@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XmlAttr extends DomNamespaceNode implements Map.Entry {
+public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, String> {
 
     private static final long serialVersionUID = 4832218455328064213L;
 
@@ -63,9 +63,9 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry {
      * @param mapEntry The wrapped Map.Entry.
      * @deprecated Use constructor with explicit names.
      */
-    public XmlAttr(final XmlElement xmlElement, final Map.Entry mapEntry) {
-        super(null, (String) mapEntry.getKey(), xmlElement.getPage());
-        value_ = (String) mapEntry.getValue();
+    public XmlAttr(final XmlElement xmlElement, final Map.Entry<String, String> mapEntry) {
+        super(null, mapEntry.getKey(), xmlElement.getPage());
+        value_ = mapEntry.getValue();
         setParentNode(xmlElement);
     }
 
@@ -106,7 +106,7 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry {
     /**
      * {@inheritDoc}
      */
-    public Object getKey() {
+    public String getKey() {
         return getName();
     }
 
@@ -120,7 +120,7 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry {
     /**
      * @return The value of the attribute.
      */
-    public Object getValue() {
+    public String getValue() {
         return value_;
     }
 
@@ -129,9 +129,9 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry {
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      */
-    public Object setValue(final Object value) {
+    public String setValue(final String value) {
         final String oldValue = value_;
-        value_ = (String) value;
+        value_ = value;
         return oldValue;
     }
 

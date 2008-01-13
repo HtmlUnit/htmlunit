@@ -399,7 +399,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlAnchor a = (HtmlAnchor) firstPage.getHtmlElementById("link");
         a.click();
 
-        final Map lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
     }
     

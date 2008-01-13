@@ -952,7 +952,7 @@ public class HtmlFormTest extends WebTestCase {
 
         button.click();
 
-        final Map lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
+        final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
     }
 

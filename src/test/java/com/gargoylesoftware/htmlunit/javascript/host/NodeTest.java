@@ -134,8 +134,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -170,8 +169,7 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
-        webConnection.setResponse(
-            URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

@@ -222,7 +222,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</xml2>";
 
         final WebClient client = new WebClient(browserVersion);
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -566,7 +566,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</updates>";
 
         final WebClient client = new WebClient(browserVersion);
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -656,7 +656,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client)
         {

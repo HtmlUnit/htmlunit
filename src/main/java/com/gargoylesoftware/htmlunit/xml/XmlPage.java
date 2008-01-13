@@ -196,7 +196,7 @@ public class XmlPage extends SgmlPage {
      * @return the new HTML element.
      */
     public XmlElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
-        return new XmlElement(namespaceURI, qualifiedName, this, new HashMap());
+        return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, XmlAttr>());
     }
 
 }

@@ -474,7 +474,7 @@ public class FormTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final List collected = new ArrayList();
+        final List<String> collected = new ArrayList<String>();
         loadPage(browserVersion, html, collected);
 
         // The lists are too long to call assertEquals() on them directly and get meaningful failure info.

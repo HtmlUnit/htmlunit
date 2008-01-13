@@ -42,7 +42,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
@@ -65,7 +64,7 @@ public class WebResponseData implements Serializable {
     private byte[] body_;
     private int statusCode_;
     private String statusMessage_;
-    private List responseHeaders_;
+    private List<NameValuePair> responseHeaders_;
 
     /**
      * Construct with a raw byte[] (mostly for testing)
@@ -76,9 +75,7 @@ public class WebResponseData implements Serializable {
      * @param responseHeaders   Headers in this response
      */
     public WebResponseData(final byte[] body, final int statusCode, final String statusMessage,
-            final List responseHeaders) {
-
-        validateHeaders(responseHeaders);
+            final List<NameValuePair> responseHeaders) {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
@@ -102,9 +99,7 @@ public class WebResponseData implements Serializable {
      * @throws IOException on stream errors
      */
     public WebResponseData(final InputStream bodyStream, final int statusCode,
-            final String statusMessage, final List responseHeaders) throws IOException {
-
-        validateHeaders(responseHeaders);
+            final String statusMessage, final List<NameValuePair> responseHeaders) throws IOException {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
@@ -121,32 +116,12 @@ public class WebResponseData implements Serializable {
      * @throws IOException on stream errors
      */
     protected WebResponseData(final int statusCode,
-            final String statusMessage, final List responseHeaders) throws IOException {
-
-        validateHeaders(responseHeaders);
+            final String statusMessage, final List<NameValuePair> responseHeaders) throws IOException {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
     }
     
-    /**
-     * Validate that the response header list only contains KeyValuePairs
-     * (Java5 generics will obsolete this method)
-     *
-     * @param responseHeaders Header list to be validated
-     */
-    private void validateHeaders(final List responseHeaders) {
-        final Iterator iterator = responseHeaders.iterator();
-        while (iterator.hasNext()) {
-            final Object object = iterator.next();
-            if (object instanceof NameValuePair == false) {
-                final String name = object.getClass().getName();
-                final String msg = "Only NameValuePairs may be in the response header list, but found a " + name + ".";
-                throw new IllegalArgumentException(msg);
-            }
-        }
-    }
-
     /**
      * Returns the body byte array contained by the specified input stream.
      * If the response headers indicate that the data has been compressed,
@@ -157,13 +132,12 @@ public class WebResponseData implements Serializable {
      * @return The specified body stream, as a byte array.
      * @throws IOException If a stream error occurs.
      */
-    protected byte[] getBody(InputStream stream, final List headers) throws IOException {
+    protected byte[] getBody(InputStream stream, final List<NameValuePair> headers) throws IOException {
         if (stream == null) {
             return null;
         }
         String encoding = null;
-        for (final Iterator i = headers.iterator(); i.hasNext();) {
-            final NameValuePair header = (NameValuePair) i.next();
+        for (final NameValuePair header : headers) {
             final String headerName = header.getName().trim();
             if (headerName.equalsIgnoreCase("content-encoding")) {
                 encoding = header.getValue();
@@ -188,7 +162,7 @@ public class WebResponseData implements Serializable {
      *
      * @return response headers
      */
-    public List getResponseHeaders() {
+    public List<NameValuePair> getResponseHeaders() {
         return responseHeaders_;
     }
 

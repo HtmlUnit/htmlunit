@@ -245,7 +245,7 @@ public class IFrameTest extends WebTestCase {
             + "    }\n"
             + "</script></body></html>";
         final String[] expected = {"false", "false", "true", "true", "true", "object", "object"};
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }

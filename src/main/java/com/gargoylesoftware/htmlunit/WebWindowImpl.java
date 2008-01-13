@@ -60,7 +60,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private Page enclosedPage_;
     private Object scriptObject_;
     private ThreadManager threadManager_ = new ThreadManager();
-    private List childWindows_ = new ArrayList();
+    private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
     private String name_ = "";
 
     /**
@@ -157,9 +157,9 @@ public abstract class WebWindowImpl implements WebWindow {
 
     void destroyChildren() {
         getThreadManager().interruptAll();
-        final ListIterator iter = childWindows_.listIterator();
+        final ListIterator<WebWindowImpl> iter = childWindows_.listIterator();
         while (iter.hasNext()) {
-            final WebWindowImpl child = (WebWindowImpl) iter.next();
+            final WebWindowImpl child = iter.next();
             child.destroyChildren();
             iter.remove();
         }

@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -105,7 +106,8 @@ public class MimeTypeTest extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         
         final List<String> collectedAlerts = new ArrayList<String>();
-        final Set plugins = new HashSet(BrowserVersion.FIREFOX_2.getPlugins());
+        final Set<PluginConfiguration> plugins =
+            new HashSet<PluginConfiguration>(BrowserVersion.FIREFOX_2.getPlugins());
         BrowserVersion.FIREFOX_2.getPlugins().clear();
         try {
             loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);

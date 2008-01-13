@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -72,7 +73,7 @@ public class WebResponseDataTest extends WebTestCase {
         final InputStream stream = getClass().getClassLoader().getResourceAsStream(GZIPPED_FILE);
         final byte[] zippedContent = IOUtils.toByteArray(stream);
 
-        final List<KeyValuePair> headers = new ArrayList<KeyValuePair>();
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         headers.add(new KeyValuePair("Content-Encoding", "gzip"));
 
         final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
@@ -87,7 +88,7 @@ public class WebResponseDataTest extends WebTestCase {
      */
     public void testNullBody() throws Exception {
         final InputStream body = null;
-        final List<KeyValuePair> headers = new ArrayList<KeyValuePair>();
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         final WebResponseData data = new WebResponseData(body, 304, "NOT_MODIFIED", headers);
         assertNull(data.getBody());
     }

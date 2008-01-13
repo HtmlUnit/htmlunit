@@ -157,7 +157,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
-        final List collectedAlerts = null;
+        final List<String> collectedAlerts = null;
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlTextInput textInput = (HtmlTextInput) page.getHtmlElementById("textfield1");

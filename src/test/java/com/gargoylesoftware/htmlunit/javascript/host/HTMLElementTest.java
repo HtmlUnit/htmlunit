@@ -408,7 +408,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='div'><p>a</p><p>b</p><p>c</p></div>\n"
             + "</body></html>";
         final String[] expected = {"8", "3"};
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }
@@ -521,7 +521,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<p id='myNode'><b>Old innerHTML</b></p>\n"
             + "</body>\n"
             + "</html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(version, content, actual);
         assertEquals(expected, actual);
     }
@@ -570,7 +570,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(version, content, actual);
         assertEquals(expected, actual);
 
@@ -647,7 +647,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         createTestPageForRealBrowserIfNeeded(content, expected);
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(version, content, actual);
         assertEquals(expected, actual);
     }
@@ -682,7 +682,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div'><ul/></div>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(version, content, actual);
         assertEquals(expected, actual);
     }
@@ -717,7 +717,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div'><span class='a b'></span></div>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(version, content, actual);
         assertEquals(expected, actual);
     }
@@ -1329,7 +1329,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</html>";
         final String[] expectedAlerts = {"test hash"};
         // first use direct load
-        final List loadCollectedAlerts = new ArrayList();
+        final List<String> loadCollectedAlerts = new ArrayList<String>();
         final HtmlPage loadPage = loadPage(content, loadCollectedAlerts);
         final HtmlAnchor loadHashAnchor = loadPage.getAnchorByName("hash");
         loadHashAnchor.click();
@@ -1402,7 +1402,7 @@ public class HTMLElementTest extends WebTestCase {
               + "alertOffsets(document.body);\n"
               + "alertOffsets(document.getElementById('div1'));\n"
               + "</script></body></html>";
-        final List expectedAlerts = Collections.nCopies(8, "number");
+        final List<String> expectedAlerts = Collections.nCopies(8, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
@@ -1435,7 +1435,7 @@ public class HTMLElementTest extends WebTestCase {
               + "alertScrolls(document.body);\n"
               + "alertScrolls(document.getElementById('div1'));\n"
               + "</script></body></html>";
-        final List expectedAlerts = Collections.nCopies(8, "number");
+        final List<String> expectedAlerts = Collections.nCopies(8, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
@@ -1895,7 +1895,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
         ((HtmlDivision) page.getHtmlElementById("a")).click();
         ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
@@ -1915,7 +1915,7 @@ public class HTMLElementTest extends WebTestCase {
             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
             + "<div id='c' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\", template)'>baz</div>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actual);
         ((HtmlDivision) page.getHtmlElementById("a")).click();
         ((HtmlDivision) page.getHtmlElementById("b")).mouseOver();
@@ -1995,7 +1995,7 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "<body onload='click()'><div id='d' onclick='alert(\"clicked\")'>foo</div></body>\n"
             + "</html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final String[] expected = {"clicked"};
         assertEquals(expected, actual);
@@ -2023,7 +2023,7 @@ public class HTMLElementTest extends WebTestCase {
         final String[] expectedAlerts = {"true", "true", "false"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
 
         assertEquals(expectedAlerts, actual);

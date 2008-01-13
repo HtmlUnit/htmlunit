@@ -2120,7 +2120,7 @@ public class WindowTest extends WebTestCase {
         final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
         
         buttonA.click();
-        final Map lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(expectedRefererHeader, lastAdditionalHeaders.get("Referer"));
     }
 
