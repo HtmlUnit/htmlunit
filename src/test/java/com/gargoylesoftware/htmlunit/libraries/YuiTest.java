@@ -76,6 +76,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testLogger() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "logger.html", Collections.EMPTY_LIST);
     }
@@ -84,7 +85,7 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testAnimation() throws Exception {
-        final List l = new ArrayList();
+        final List<String> l = new ArrayList<String>();
         l.add("test_onStart");
         doTest(BrowserVersion.FIREFOX_2, "animation.html", l);
     }
@@ -92,6 +93,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testTabView() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -105,6 +107,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testDateMath() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "datemath.html", Collections.EMPTY_LIST, "btnRun");
     }
@@ -112,6 +115,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testCalendar() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -122,6 +126,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testColorPicker() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -147,6 +152,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testDataSource() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -157,6 +163,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testDataTable() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -167,6 +174,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testDom() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -177,6 +185,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testDragDrop() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -187,6 +196,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testEditor() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -197,6 +207,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testYuiLoaderRollup() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -207,6 +218,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testYuiLoaderConfig() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -231,6 +243,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testImageLoader() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -241,6 +254,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @SuppressWarnings("unchecked")
     public void testElement() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "element.html", Collections.EMPTY_LIST);
     }
@@ -248,7 +262,7 @@ public class YuiTest extends WebTestCase {
     /**
      * TODO: get rid of the known failing test list, eventually
      */
-    private void doTest(final BrowserVersion version, final String fileName, final List knownFailingTests)
+    private void doTest(final BrowserVersion version, final String fileName, final List<String> knownFailingTests)
         throws Exception {
         doTest(version, fileName, knownFailingTests, null);
     }
@@ -256,7 +270,7 @@ public class YuiTest extends WebTestCase {
     /**
      * TODO: get rid of the known failing test list, eventually
      */
-    private void doTest(final BrowserVersion version, final String fileName, final List knownFailingTests,
+    private void doTest(final BrowserVersion version, final String fileName, final List<String> knownFailingTests,
             final String buttonToPush) throws Exception {
         doTest(version, fileName, knownFailingTests, buttonToPush, DEFAULT_TIME_TO_WAIT);
     }
@@ -264,7 +278,7 @@ public class YuiTest extends WebTestCase {
     /**
      * TODO: get rid of the known failing test list, eventually
      */
-    private void doTest(final BrowserVersion version, final String fileName, final List knownFailingTests,
+    private void doTest(final BrowserVersion version, final String fileName, final List<String> knownFailingTests,
             final String buttonToPush, final long timeToWait) throws Exception {
 
         final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);

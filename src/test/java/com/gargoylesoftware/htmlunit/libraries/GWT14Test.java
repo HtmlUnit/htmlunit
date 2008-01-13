@@ -258,13 +258,13 @@ public class GWT14Test extends WebTestCase {
         }
     }
 
-    private void testI18NDictionary(final HtmlPage page, final Map expectedMap) throws Exception {
+    private void testI18NDictionary(final HtmlPage page, final Map<String, String> expectedMap) throws Exception {
         final HtmlTableRow headerRow =
             (HtmlTableRow) page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
         final HtmlTableRow valueRow = (HtmlTableRow) headerRow.getNextDomSibling();
         DomNode headerNode = headerRow.getFirstDomChild();
         DomNode valueNode = valueRow.getFirstDomChild();
-        final Set foundHeaders = new HashSet();
+        final Set<String> foundHeaders = new HashSet<String>();
         for (int i = 0; i < expectedMap.size(); i++) {
             final String header = headerNode.getFirstDomChild().getNodeValue();
             final String value = valueNode.getFirstDomChild().getNodeValue();
@@ -431,7 +431,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception if an error occurs.
      * @return The loaded page.
      */
-    protected HtmlPage loadPage(final BrowserVersion version, final List collectedAlerts) throws Exception {
+    protected HtmlPage loadPage(final BrowserVersion version, final List<String> collectedAlerts) throws Exception {
         final String testName = getName().substring(4);
         final String resource = "gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);

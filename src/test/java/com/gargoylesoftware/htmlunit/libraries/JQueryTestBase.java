@@ -146,7 +146,8 @@ public abstract class JQueryTestBase extends WebTestCase {
      * @param passed the expected number of passed unit tests
      * @throws Exception if an error occurs
      */
-    protected void ok(final Iterator i, final String name, final int failed, final int passed) throws Exception {
+    protected void ok(final Iterator<HtmlElement> i, final String name, final int failed, final int passed)
+        throws Exception {
         final HtmlListItem li = (HtmlListItem) i.next();
         final String n = li.getFirstByXPath("//text()").toString().trim();
         assertEquals(name, n);
