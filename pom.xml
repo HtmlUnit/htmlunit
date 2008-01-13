@@ -36,7 +36,7 @@ The reference stays the maven 1 build.
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<!-- Update the links reference in javadoc and clover plugins when this changes -->
+					<!-- Update the links reference in javadoc, PDM and clover plugins when this changes -->
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
@@ -113,6 +113,9 @@ The reference stays the maven 1 build.
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<targetJdk>1.5</targetJdk>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
