@@ -91,7 +91,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     public void testHello() throws Exception {
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
@@ -475,7 +475,7 @@ public class GWT14Test extends WebTestCase {
         String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
         timeZone = timeZone.substring(1, 3);
         final String[] expectedAlerts = {timeZone};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

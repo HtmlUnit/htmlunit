@@ -133,7 +133,7 @@ public class NavigatorTest extends WebTestCase {
         }
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webConnection.setDefaultResponse(content);
@@ -234,7 +234,7 @@ public class NavigatorTest extends WebTestCase {
                 + "<body onload=\'doTest()\'>\n"
                 + "</body>\n"
                 + "</html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {name + " = " + value};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -248,7 +248,7 @@ public class NavigatorTest extends WebTestCase {
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
@@ -273,7 +273,7 @@ public class NavigatorTest extends WebTestCase {
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
@@ -310,7 +310,7 @@ public class NavigatorTest extends WebTestCase {
         final String[] expectedAlerts = {"number", "number"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);

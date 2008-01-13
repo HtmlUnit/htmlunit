@@ -142,7 +142,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);

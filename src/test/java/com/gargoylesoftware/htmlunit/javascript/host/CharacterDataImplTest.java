@@ -84,11 +84,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -120,11 +119,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -156,11 +154,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -191,11 +188,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -224,11 +220,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -257,11 +252,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -290,11 +284,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Old Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -323,11 +316,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some New Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -358,11 +350,10 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(
-            URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);

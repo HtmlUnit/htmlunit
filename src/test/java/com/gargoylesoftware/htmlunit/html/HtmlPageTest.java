@@ -1721,7 +1721,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testTitle_EmptyXmlTagExpanded() throws Exception {
-        final String content = "<html><head><title/></head>"
+        final String content = "<html><head><title/></head>\n"
             + "<body>Hello World!</body></html>";
         final HtmlPage page = loadPage(content);
         assertTrue(page.asXml().indexOf("</title>") != -1);

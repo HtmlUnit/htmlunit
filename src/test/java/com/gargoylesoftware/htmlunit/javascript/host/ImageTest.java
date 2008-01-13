@@ -74,7 +74,7 @@ public class ImageTest extends WebTestCase {
             + "<img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {
@@ -128,7 +128,7 @@ public class ImageTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {
@@ -158,7 +158,7 @@ public class ImageTest extends WebTestCase {
         final String[] expectedAlerts = {"foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);

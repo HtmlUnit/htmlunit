@@ -90,7 +90,7 @@ public class ActiveXObjectTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"[object]"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

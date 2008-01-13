@@ -76,12 +76,12 @@ public class MimeTypeTest extends WebTestCase {
             + "  alert(pluginFlash == navigator.plugins[pluginFlash.name]);"
             + "  alert(pluginFlash == navigator.plugins.namedItem(pluginFlash.name));"
             + "}"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'></body></html>";
         final String[] expectedAlerts = {"[object MimeType]", "swf", "Shockwave Flash", "true", "true"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -99,12 +99,12 @@ public class MimeTypeTest extends WebTestCase {
             + "  alert(navigator.plugins['Shockwave Flash']);"
             + "  alert(navigator.plugins.namedItem('Shockwave Flash'));"
             + "}"
-            + "</script></head>"
+            + "</script></head>\n"
             + "<body onload='test()'></body></html>";
         final String[] expectedAlerts = {"undefined", "undefined", "null"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final Set plugins = new HashSet(BrowserVersion.FIREFOX_2.getPlugins());
         BrowserVersion.FIREFOX_2.getPlugins().clear();
         try {

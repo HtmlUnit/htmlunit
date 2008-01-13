@@ -128,7 +128,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -182,7 +182,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -227,7 +227,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -487,7 +487,7 @@ public class WindowTest extends WebTestCase {
             + "<iframe name='myFrame' id='myFrame'></iframe>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true", "true", "true"};
         loadPage(content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -506,7 +506,7 @@ public class WindowTest extends WebTestCase {
             + "</script></head>\n"
             + "<body></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlertsMoz = {"null"};
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlertsMoz);
@@ -594,7 +594,7 @@ public class WindowTest extends WebTestCase {
             + "<body><a id='clickme' onClick='doAlert()'>foo</a></body></html>";
 
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -629,7 +629,7 @@ public class WindowTest extends WebTestCase {
     public void testConfirm() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final List collectedConfirms = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -663,7 +663,7 @@ public class WindowTest extends WebTestCase {
             + "</head><body onload='doTest()'></body></html>";
 
         getLog().warn("Warning for no confirm handler expected next");
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
         assertEquals(new String[] {"true"}, collectedAlerts);
@@ -675,7 +675,7 @@ public class WindowTest extends WebTestCase {
     public void testPrompt() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final List collectedPrompts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -706,7 +706,7 @@ public class WindowTest extends WebTestCase {
     public void testPrompt_noPromptHandler() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final List collectedPrompts = new ArrayList();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -732,7 +732,7 @@ public class WindowTest extends WebTestCase {
     public void testOpener() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -1003,7 +1003,7 @@ public class WindowTest extends WebTestCase {
             + "alert('one')};\n"
             + "</script></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(firstContent, collectedAlerts);
         assertEquals(1, collectedAlerts.size());
     }
@@ -1033,7 +1033,7 @@ public class WindowTest extends WebTestCase {
 
         final String[] expectedAlerts = {"0", "2", "2", "true"};
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1051,7 +1051,7 @@ public class WindowTest extends WebTestCase {
             + "alert(window.myVariable);\n"
             + "</script></body></head>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
         assertEquals(new String[] {"foo"}, collectedAlerts);
         assertEquals("first", page.getTitleText());
@@ -1065,7 +1065,7 @@ public class WindowTest extends WebTestCase {
     public void testJavascriptVariableFromTopAndParentFrame() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -1115,7 +1115,7 @@ public class WindowTest extends WebTestCase {
     public void testJavascriptVariableFromNamedFrame() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -1175,7 +1175,7 @@ public class WindowTest extends WebTestCase {
             + "alert(window.myOtherVariable == null);\n"
             + "</script></body></head>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
         assertEquals(new String[] {"true"}, collectedAlerts);
         assertEquals("first", page.getTitleText());
@@ -1189,7 +1189,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
             new MockWebConnection(webClient);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -1294,7 +1294,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"false", "false", "true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1308,7 +1308,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -1363,7 +1363,7 @@ public class WindowTest extends WebTestCase {
             + "alert(window.frames.length)\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"0"};
@@ -1392,7 +1392,7 @@ public class WindowTest extends WebTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"2", "frame1", "frame2"};
@@ -1552,7 +1552,7 @@ public class WindowTest extends WebTestCase {
             + "<input type='text' name='input2' value='4'/>\n"
             + "</body>\n"
             + "</html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"form1", "form2", "2", "4"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -1585,7 +1585,7 @@ public class WindowTest extends WebTestCase {
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"form1", "form2", "1", "DIV"};
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1619,7 +1619,7 @@ public class WindowTest extends WebTestCase {
             + "</html>";
         final String[] expectedAlerts = {"JavaScript", "JScript", "Invalid class string"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1651,7 +1651,7 @@ public class WindowTest extends WebTestCase {
             + "</html>";
         final String[] expectedAlerts = {"test2", "test"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1671,7 +1671,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"a", "undefined"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1700,7 +1700,7 @@ public class WindowTest extends WebTestCase {
             + "<body onload='alert(\"onload\")'></body></html>";
         final String[] expectedAlerts = {"false", "true", "false", "true", "test1", "test2", "onload"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1729,7 +1729,7 @@ public class WindowTest extends WebTestCase {
         final String[] expectedAlerts = {"true", "false", "true", "false",
             "onload", "test1, param null: false", "test2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1752,7 +1752,7 @@ public class WindowTest extends WebTestCase {
             + "<body></body></html>";
         final String[] expectedAlerts = {"detached"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1778,7 +1778,7 @@ public class WindowTest extends WebTestCase {
         webConnection.setResponse(url, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final List collectedStatus = new ArrayList();
@@ -1816,7 +1816,7 @@ public class WindowTest extends WebTestCase {
             + "</html>";
         final String[] expectedAlerts = {"window.name before: ", "window.name after: " + windowName};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1840,7 +1840,7 @@ public class WindowTest extends WebTestCase {
             + "</html>";
         final List expectedAlerts = Collections.nCopies(4, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2166,7 +2166,7 @@ public class WindowTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -2200,7 +2200,7 @@ public class WindowTest extends WebTestCase {
 
         final String[] expectedAlerts = {"elementValue", "elementValue", "elementValue"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2239,7 +2239,7 @@ public class WindowTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         loadPage(content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -2263,7 +2263,7 @@ public class WindowTest extends WebTestCase {
             + "<div id='theDiv' onclick='alert(123)'>foo</div>\n"
             + "</body></html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theDiv")).click();
 
@@ -2300,7 +2300,7 @@ public class WindowTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {""};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2319,7 +2319,7 @@ public class WindowTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
         final String[] expectedAlerts = {"red"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2335,7 +2335,7 @@ public class WindowTest extends WebTestCase {
             + "window.onload = x;\n"
             + "</script></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
         final String[] expectedAlerts = {"true"};
@@ -2358,7 +2358,7 @@ public class WindowTest extends WebTestCase {
 
         final String[] expectedAlerts = {"INPUT"};
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("myButton")).click();
         assertEquals(expectedAlerts, collectedAlerts);
@@ -2377,7 +2377,7 @@ public class WindowTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"undefined", "undefined", "true"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -2430,7 +2430,7 @@ public class WindowTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient webClient = new WebClient();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -2501,7 +2501,7 @@ public class WindowTest extends WebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

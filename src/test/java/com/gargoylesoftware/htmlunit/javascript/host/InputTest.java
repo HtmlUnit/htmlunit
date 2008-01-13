@@ -99,7 +99,7 @@ public class InputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -157,7 +157,7 @@ public class InputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -190,7 +190,7 @@ public class InputTest extends WebTestCase {
             + "<a href='javascript:test()' id='clickme'>click me</a>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
         assertFalse(checkBox.isChecked());
@@ -226,7 +226,7 @@ public class InputTest extends WebTestCase {
             + "<a href='javascript:test()' id='clickme'>click me</a>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlRadioButtonInput radioA = (HtmlRadioButtonInput) page.getHtmlElementById("radioA");
         final HtmlRadioButtonInput radioB = (HtmlRadioButtonInput) page.getHtmlElementById("radioB");
@@ -273,7 +273,7 @@ public class InputTest extends WebTestCase {
             + "<a href='javascript:test()' id='clickme'>click me</a>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlForm form = page.getFormByName("form1");
 
@@ -400,7 +400,7 @@ public class InputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true", "true", "true", "true", "true"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
         loadPage(htmlContent, collectedAlerts);
@@ -424,7 +424,7 @@ public class InputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final MockWebConnection connection = (MockWebConnection) page.getWebClient()
                 .getWebConnection();
@@ -455,7 +455,7 @@ public class InputTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getFormByName("form1");
@@ -485,7 +485,7 @@ public class InputTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getFormByName("form1");
@@ -517,7 +517,7 @@ public class InputTest extends WebTestCase {
             + "<input type='checkbox' name='myCheckbox'/>\n"
             + "</form></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"on", "on"};
@@ -548,7 +548,7 @@ public class InputTest extends WebTestCase {
         final String[] expectedAlerts = {"radio", "hidden", "image"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -609,7 +609,7 @@ public class InputTest extends WebTestCase {
         };
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -634,7 +634,7 @@ public class InputTest extends WebTestCase {
         final String[] expectedAlerts = {"text", "hidden"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -648,7 +648,7 @@ public class InputTest extends WebTestCase {
             + "<button id='clickMe' onclick='alert(123)'>click me</button>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("clickMe")).click();
 

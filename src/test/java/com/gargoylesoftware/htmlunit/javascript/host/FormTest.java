@@ -115,7 +115,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -152,7 +152,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final String[] expectedAlerts = {"3", "1", "2", "3"};
 
@@ -182,7 +182,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -280,7 +280,7 @@ public class FormTest extends WebTestCase {
         final String[] expectedAlerts = {oldValue, newValue};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -604,7 +604,7 @@ public class FormTest extends WebTestCase {
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
@@ -643,7 +643,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
         final String[] expectedAlerts = {name + '2', "foo"};
@@ -659,7 +659,7 @@ public class FormTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -707,7 +707,7 @@ public class FormTest extends WebTestCase {
             + "    <input name='login' size='17' value='foo'>\n"
             + "</form></td></tr></table>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
@@ -768,7 +768,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"2"};
@@ -792,7 +792,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"button1"};
@@ -812,7 +812,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         button.click();
@@ -835,7 +835,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
         button.click();
@@ -865,7 +865,7 @@ public class FormTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         final String[] expectedAlerts = {"0", "1", "1", "true"};
@@ -885,7 +885,7 @@ public class FormTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"foo.html"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -907,7 +907,7 @@ public class FormTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"text"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -960,7 +960,7 @@ public class FormTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {expected};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -992,7 +992,7 @@ public class FormTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final String[] expectedAlerts = {"before", "2"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -1026,7 +1026,7 @@ public class FormTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
         final String[] expectedAlerts = {"INPUT", "idImg1", "img2", "true"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
@@ -1096,7 +1096,7 @@ public class FormTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setDefaultResponse(secondContent);
         client.setWebConnection(webConnection);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -1151,7 +1151,7 @@ public class FormTest extends WebTestCase {
 
         webConnection.setResponse(URL_FIRST, content);
         client.setWebConnection(webConnection);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
@@ -1173,7 +1173,7 @@ public class FormTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(content, collectedAlerts);
         final Page page2 = ((ClickableElement) page1.getHtmlElementById("theButton")).click();
@@ -1203,7 +1203,7 @@ public class FormTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {"\nfunction handler() {\n}\n", "null"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

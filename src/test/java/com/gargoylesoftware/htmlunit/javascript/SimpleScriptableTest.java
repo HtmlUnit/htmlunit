@@ -88,16 +88,16 @@ public class SimpleScriptableTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String content
-            = "<html><head><title>foo</title><script>"
+            = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    document.form1.textfield1.focus();\n"
             + "    alert('past focus');\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>"
-            + "<p>hello world</p>"
-            + "<form name='form1'>"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />"
-            + "</form>"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo'/>\n"
+            + "</form>\n"
             + "</body></html>";
 
         webConnection.setDefaultResponse(content);
@@ -172,9 +172,9 @@ public class SimpleScriptableTest extends WebTestCase {
                 return ClassUtils.getShortClassName((Class) obj);
             }
         };
-        final Collection hostClassNames = new ArrayList(map.values());
+        final Collection<String> hostClassNames = new ArrayList<String>(map.values());
         CollectionUtils.transform(hostClassNames, class2ShortName);
-        assertEquals(new TreeSet(names), new TreeSet(hostClassNames));
+        assertEquals(new TreeSet<String>(names), new TreeSet<String>(hostClassNames));
     }
 
     private Set<String> getFileNames(final String directoryName) {

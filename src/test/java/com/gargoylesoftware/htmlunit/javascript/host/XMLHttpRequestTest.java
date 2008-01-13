@@ -124,7 +124,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         createTestPageForRealBrowserIfNeeded(html, expected);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browser, html, collectedAlerts);
 
         assertEquals(expected, collectedAlerts);
@@ -166,7 +166,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</xml>";
 
         final WebClient client = new WebClient(browserVersion);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -271,7 +271,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</xml>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -306,7 +306,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -351,7 +351,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -494,7 +494,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -728,7 +728,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "<body onload='test()'></body></html>";
 
         final String[] expectedAlerts = {"0"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -812,7 +812,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</xml>";
 
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);
@@ -941,7 +941,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</xml>";
 
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, html);

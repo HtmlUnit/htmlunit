@@ -97,7 +97,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "onClick='alert(\"foo\");alert(event.type);'>Check me</input>\n"
             + "</form></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox");
         final HtmlPage secondPage = (HtmlPage) checkBox.click();
@@ -165,7 +165,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
 
         final String[] expectedAlerts = {"foo"};
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) page.getHtmlElementById("chkbox");
         checkbox.setChecked(true);

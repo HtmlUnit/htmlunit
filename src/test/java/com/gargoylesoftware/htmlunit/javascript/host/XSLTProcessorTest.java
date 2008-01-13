@@ -128,7 +128,7 @@ public class XSLTProcessorTest extends WebTestCase {
 
         final String xsl
             = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n"
-            + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
+            + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n"
             + "  <xsl:template match=\"/\">\n"
             + "  <html>\n"
             + "    <body>\n"
@@ -150,7 +150,7 @@ public class XSLTProcessorTest extends WebTestCase {
             + "  </xsl:template>\n"
             + "</xsl:stylesheet>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);

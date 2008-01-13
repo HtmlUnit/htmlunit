@@ -100,7 +100,7 @@ public abstract class HtmlElement extends DomElement {
     private Map attributes_;
 
     /** The map holding the namespaces, keyed by URI. */
-    private Map namespaces_ = new HashMap();
+    private Map<String, String> namespaces_ = new HashMap<String, String>();
 
     private List<HtmlAttributeChangeListener> attributeListeners_;
 
@@ -476,7 +476,7 @@ public abstract class HtmlElement extends DomElement {
      * attributes of this element. Each entry holds a string key and a string value.
      * The elements are ordered as found in the html source code.
      */
-    public Iterator<HtmlAttributeChangeListener> getAttributeEntriesIterator() {
+    public Iterator getAttributeEntriesIterator() {
         return attributes_.values().iterator();
     }
 

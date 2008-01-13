@@ -91,7 +91,7 @@ public class ScriptTest extends WebTestCase {
         final String js = "alert('3')";
 
         final WebClient client = new WebClient();
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -129,7 +129,7 @@ public class ScriptTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -151,7 +151,7 @@ public class ScriptTest extends WebTestCase {
             + " alert(document.form1.txt.value);\n"
             + "</script></head><body>\n"
             + "<form name='form1'><input type=text name='txt'></form></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final String[] expectedAlerts = {"hello"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);

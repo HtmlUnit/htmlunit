@@ -79,7 +79,7 @@ public class FrameSetTest extends WebTestCase {
             + "</script>\n"
             + "</html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(framesetContent, collectedAlerts);
 
         final String[] expectedAlerts = {"20%,*", "*,*"};
@@ -109,7 +109,7 @@ public class FrameSetTest extends WebTestCase {
             + "</head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient webClient = new WebClient();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 

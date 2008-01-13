@@ -89,7 +89,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         final String[] expectedAlerts = {"caption1", "caption2", "null", "caption3"};
@@ -123,7 +123,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         final String[] expectedAlerts = {"thead1", "thead2", "null", "thead3"};
@@ -163,7 +163,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"2", "true", "4 2 2", "6 3 3"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -198,7 +198,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"2", "true", "3", "2", "3", "2"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -231,7 +231,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"1", "1"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -288,7 +288,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         final String[] expectedAlerts = {"2", "true", "8 2 2 2 2",
@@ -323,7 +323,7 @@ public class TableTest extends WebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         final String[] expectedAlerts = {"tfoot1", "tfoot2", "null", "tfoot3"};
@@ -352,7 +352,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"0", "1", "0", "1"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -385,7 +385,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"1", "2", "1", "0", "TD", "1", "2"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -421,7 +421,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"mytable", "mytable"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -453,7 +453,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"TBODY", "TABLE"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -485,7 +485,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"TBODY", "TBODY", "TBODY"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -520,7 +520,7 @@ public class TableTest extends WebTestCase {
         final String[] expectedAlerts = {"1", "1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -575,7 +575,7 @@ public class TableTest extends WebTestCase {
         
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -611,7 +611,7 @@ public class TableTest extends WebTestCase {
                 + "</script></body></html>";
 
         final String[] expectedAlerts = {"21"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts).asXml();
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -630,7 +630,7 @@ public class TableTest extends WebTestCase {
                 + "</script></body></html>";
 
         final String[] expectedAlerts = {"21"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts).asXml();
         assertEquals(expectedAlerts, collectedAlerts);
     }

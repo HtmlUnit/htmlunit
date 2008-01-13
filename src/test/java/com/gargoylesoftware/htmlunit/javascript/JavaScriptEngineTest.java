@@ -134,7 +134,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String[] expectedAlerts = {"foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -178,7 +178,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -200,7 +200,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String[] expectedAlerts = {"foo"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -222,7 +222,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -261,7 +261,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final String[] expectedAlerts = {"foo", "foo", "foo"};
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage(URL_FIRST);
 
@@ -295,7 +295,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final String[] expectedAlerts = {"foo"};
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final ClickableElement div = ((ClickableElement) page.getHtmlElementById("testdiv"));
@@ -332,7 +332,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final String[] expectedAlerts = {"got here"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
@@ -450,7 +450,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final String[] expectedAlerts = {"\u8868"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         /*
@@ -492,7 +492,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -585,7 +585,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"1"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -620,7 +620,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String[] expectedAlerts = {};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -642,7 +642,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "  <body onload='alert(test)'>\n"
             + "  </body>\n"
             + "</html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"undefined"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -654,7 +654,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testEventHandlerWithComment() throws Exception {
         final String content = "<html><body onLoad='alert(\"test\"); // xxx'></body></html>";
         final String[] expectedAlerts = {"test"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -670,7 +670,7 @@ public class JavaScriptEngineTest extends WebTestCase {
              + "<form name='form1'><input type='submit' name='button1' onClick='foo(this.name)'></form>\n"
              + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
@@ -706,7 +706,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage("http://first/index.html");
@@ -738,7 +738,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setDefaultResponse(jsContent, 200, "OK", "text/javascript");
         client.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -761,7 +761,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<input name='button1' type='button' onclick='showFoo(document.form1.text1.value);'>\n"
             + "</form></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
@@ -786,7 +786,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
@@ -891,7 +891,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         client.setWebConnection(webConnection);
         client.setActiveXObjectMap(activexToJavaMapping);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webConnection.setDefaultResponse(getJavaScriptContent("new ActiveXObject('UnknownObject')"));
@@ -976,7 +976,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // first test with script exceptions thrown
@@ -1033,7 +1033,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content1);
         client.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -1161,7 +1161,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlert = {"2"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlert, collectedAlerts);
     }
@@ -1179,7 +1179,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         try {
             loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
             fail();
@@ -1211,7 +1211,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlert = {"2", "3"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlert, collectedAlerts);
     }
@@ -1241,7 +1241,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "  <body>abc</body>\n"
             + "</html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         
         final String[] expectedAlerts = {
@@ -1299,7 +1299,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final String[] expectedAlerts = {"123"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
             
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1312,9 +1312,9 @@ public class JavaScriptEngineTest extends WebTestCase {
     public void testCompiledScriptCached() throws Exception {
         final String content1
             = "<html><head><title>foo</title>\n"
-            + "<script src='script.js'></script>"
+            + "<script src='script.js'></script>\n"
             + "</head><body>\n"
-            + "<a href='page2.html'>to page 2</a>"
+            + "<a href='page2.html'>to page 2</a>\n"
             + "</body></html>";
         final String content2
             = "<html><head><title>page 2</title>\n"
@@ -1337,7 +1337,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
         client.setJavaScriptEngine(countingJavaScriptEngine);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final HtmlPage page1 = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals(new String[] {"foo"}, collectedAlerts);

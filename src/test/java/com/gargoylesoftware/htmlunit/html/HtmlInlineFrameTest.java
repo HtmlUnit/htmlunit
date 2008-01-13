@@ -148,7 +148,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
             = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head>"
+        final String secondContent = "<html><head><title>Second</title></head>\n"
             + "<body><iframe id='iframe2_1' src='" + URL_FIRST + "'></iframe></body></html>";
         final WebClient client = new WebClient();
     

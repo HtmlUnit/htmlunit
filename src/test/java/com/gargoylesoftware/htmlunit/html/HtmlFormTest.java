@@ -974,7 +974,7 @@ public class HtmlFormTest extends WebTestCase {
         final String[] expectedAlerts = {"clicked"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(htmlContent, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);

@@ -91,7 +91,7 @@ public class XPathResultTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(new String[] {expectedAlert}, collectedAlerts);
     }
@@ -126,7 +126,7 @@ public class XPathResultTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"7", "id1", "id2"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -159,7 +159,7 @@ public class XPathResultTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"9", "id1"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

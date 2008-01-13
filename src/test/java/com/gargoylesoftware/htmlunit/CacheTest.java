@@ -140,17 +140,17 @@ public class CacheTest extends WebTestCase {
      *@throws Exception if the test fails
      */
     public void testUsage() throws Exception {
-        final String content = "<html><head><title>page 1</title>"
-            + "<script src='foo1.js' type='text/javascript'/>"
-            + "<script src='foo2.js' type='text/javascript'/>"
-            + "</head><body>"
-            + "<a href='page2.html'>to page 2</a>"
+        final String content = "<html><head><title>page 1</title>\n"
+            + "<script src='foo1.js' type='text/javascript'/>\n"
+            + "<script src='foo2.js' type='text/javascript'/>\n"
+            + "</head><body>\n"
+            + "<a href='page2.html'>to page 2</a>\n"
             + "</body></html>";
 
-        final String content2 = "<html><head><title>page 2</title>"
-            + "<script src='foo2.js' type='text/javascript'/>"
-            + "</head><body>"
-            + "<a href='page1.html'>to page 1</a>"
+        final String content2 = "<html><head><title>page 2</title>\n"
+            + "<script src='foo2.js' type='text/javascript'/>\n"
+            + "</head><body>\n"
+            + "<a href='page1.html'>to page 1</a>\n"
             + "</body></html>";
 
         final String script1 = "alert('in foo1');";
@@ -189,10 +189,9 @@ public class CacheTest extends WebTestCase {
      *@throws Exception if the test fails
      */
     public void testMaxSizeMaintained() throws Exception {
-
-        final String html = "<html><head><title>page 1</title>"
-            + "<script src='foo1.js' type='text/javascript'/>"
-            + "<script src='foo2.js' type='text/javascript'/>"
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<script src='foo1.js' type='text/javascript'/>\n"
+            + "<script src='foo2.js' type='text/javascript'/>\n"
             + "</head><body>abc</body></html>";
 
         final WebClient client = new WebClient();

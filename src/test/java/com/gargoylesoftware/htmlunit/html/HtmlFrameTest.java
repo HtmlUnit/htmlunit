@@ -214,18 +214,18 @@ public class HtmlFrameTest extends WebTestCase {
      */
     public void testFrameScriptReplaceOtherFrame() throws Exception {
         final String mainContent =
-            "<html><head><title>frames</title></head>"
-            + "<frameset cols='180,*'>"
-            + "<frame name='f1' src='1.html'/>"
-            + "<frame name='f2' src='2.html'/>"
-            + "</frameset>"
+            "<html><head><title>frames</title></head>\n"
+            + "<frameset cols='180,*'>\n"
+            + "<frame name='f1' src='1.html'/>\n"
+            + "<frame name='f2' src='2.html'/>\n"
+            + "</frameset>\n"
             + "</html>";
         
-        final String frame1 = "<html><head><title>1</title></head>"
+        final String frame1 = "<html><head><title>1</title></head>\n"
             + "<body>1"
-            + "<script>"
+            + "<script>\n"
             + "   parent.frames['f2'].location.href = '3.html';\n"
-            + "</script>"
+            + "</script>\n"
             + "</body></html>";
 
         final String frame3 = "<html><head><title>page 3</title></head><body></body></html>";

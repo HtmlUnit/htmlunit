@@ -109,7 +109,7 @@ public class XMLElementTest extends WebTestCase {
 
         final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "anotherValue",
             "1", "4", "<span id='label'>changed</span>"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -162,7 +162,7 @@ public class XMLElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -204,7 +204,7 @@ public class XMLElementTest extends WebTestCase {
         
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);

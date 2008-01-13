@@ -164,7 +164,7 @@ public class DisabledElementTest extends WebTestCase {
         throws Exception {
 
         final String htmlContent = MessageFormat.format(htmlContent_, new String[]{disabledAttribute});
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");

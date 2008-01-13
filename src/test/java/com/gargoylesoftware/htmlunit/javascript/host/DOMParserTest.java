@@ -91,7 +91,7 @@ public class DOMParserTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
   
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

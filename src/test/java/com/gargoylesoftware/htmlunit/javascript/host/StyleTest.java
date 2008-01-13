@@ -82,7 +82,7 @@ public class StyleTest extends WebTestCase {
         final String[] expectedAlerts = {"black", "pink", "color: pink;"};
         createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -105,7 +105,7 @@ public class StyleTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(firstContent, collectedAlerts);
 
         final String[] expectedAlerts = {"black", "pink"};
@@ -133,7 +133,7 @@ public class StyleTest extends WebTestCase {
 
         final String[] expectedAlerts = {"null", "", "pink"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -162,7 +162,7 @@ public class StyleTest extends WebTestCase {
         final String[] expectedAlerts = {"", "hidden", "undefined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -185,7 +185,7 @@ public class StyleTest extends WebTestCase {
         final String[] expectedAlerts = {""};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -229,7 +229,7 @@ public class StyleTest extends WebTestCase {
 
         final String[] expectedAlerts = {"string", "string", "string", "undefined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -251,7 +251,7 @@ public class StyleTest extends WebTestCase {
 
         final String[] expectedAlerts = {"123"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -282,7 +282,7 @@ public class StyleTest extends WebTestCase {
             + "<div id='div1' style='background: blue'>foo</div></body></html>";
 
         final String[] expectedAlerts = {"blue"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -430,7 +430,7 @@ public class StyleTest extends WebTestCase {
             + "<div id='div1'>foo</div></body></html>";
 
         final String[] expectedAlerts = {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);

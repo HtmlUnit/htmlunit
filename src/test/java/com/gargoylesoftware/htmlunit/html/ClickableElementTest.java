@@ -112,7 +112,7 @@ public class ClickableElementTest extends WebTestCase {
         client.setWebConnection(webConnection);
         client.setThrowExceptionOnScriptError(exceptionOnError);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         client.setAlertHandler(alertHandler);
 

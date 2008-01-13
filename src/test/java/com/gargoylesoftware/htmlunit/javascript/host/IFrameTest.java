@@ -79,7 +79,7 @@ public class IFrameTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "<iframe id='myIFrame' src='about:blank'></iframe></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"false"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -99,7 +99,7 @@ public class IFrameTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "<iframe name='myIFrame' src='about:blank'></iframe></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"1", "myIFrame"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -122,7 +122,7 @@ public class IFrameTest extends WebTestCase {
             + "<iframe name='Frame' src='about:blank'></iframe>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"about:blank", "about:blank"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -155,7 +155,7 @@ public class IFrameTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String[] expectedAlerts = {"IFRAME"};
@@ -181,7 +181,7 @@ public class IFrameTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -205,7 +205,7 @@ public class IFrameTest extends WebTestCase {
         final String[] expectedAlerts = {"true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -258,8 +258,8 @@ public class IFrameTest extends WebTestCase {
      */
     public void testIFrameReinitialized() throws Exception {
         final String html =
-              "<html><body><a href='2.html' target='theFrame'>page 2 in frame</a>"
-            + "<iframe name='theFrame' src='1.html'></iframe>"
+              "<html><body><a href='2.html' target='theFrame'>page 2 in frame</a>\n"
+            + "<iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
         
         final String frame1 = "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
@@ -274,7 +274,7 @@ public class IFrameTest extends WebTestCase {
         webConnection.setResponse(new URL(URL_FIRST, "2.html"), frame2);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);

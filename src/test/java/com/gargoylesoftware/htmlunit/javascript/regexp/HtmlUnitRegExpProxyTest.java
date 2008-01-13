@@ -60,9 +60,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     private final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
     private final String begin_ = "<div>bla</div>";
     private final String end_ = "foo\n<span>bla2</span>";
-    private final String text_ = begin_
-        + "<script>var a = 123;</script>"
-        + end_;
+    private final String text_ = begin_ + "<script>var a = 123;</script>" + end_;
     private final String expected_ = begin_ + end_;
     private final String src_ = "var re = new RegExp(str, 'img');\n"
         + "var s = text.replace(re, '');\n"
@@ -162,7 +160,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"123456"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -181,7 +179,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {"123456"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -200,7 +198,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"123456"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -216,7 +214,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -254,7 +252,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {"0"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -272,7 +270,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
             + "</body></html>";
         
         final String[] expectedAlerts = {"ab,a"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

@@ -90,7 +90,7 @@ public class AnchorTest extends WebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) (client.getPage("http://x"));
@@ -122,7 +122,7 @@ public class AnchorTest extends WebTestCase {
             + "<a href='foo2.html'>\n"
             + "</body></html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true", "not defined"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
@@ -150,7 +150,7 @@ public class AnchorTest extends WebTestCase {
             + "<a href='#'>#</a>\n"
             + "</body></html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"",
             "http://www.gargoylesoftware.com/foo.html",
             "javascript:void(0)",
@@ -193,7 +193,7 @@ public class AnchorTest extends WebTestCase {
             + "<a href='javascript:alert(this == window)'>link 1</a>\n"
             + "</body></html>";
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(content, collectedAlerts);
         final Page page2 = ((HtmlAnchor) page1.getAnchors().get(0)).click();

@@ -88,7 +88,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"undefined", "true"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -130,7 +130,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -184,7 +184,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -208,7 +208,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"false"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -269,7 +269,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -318,7 +318,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</ns1:books>";
 
         final String[] expectedAlerts = {"true", "2", "1"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -349,7 +349,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"book", "#document", "book", "#document"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -380,7 +380,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"someprefix:test"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -413,7 +413,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"7"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -456,7 +456,7 @@ public class XMLDocumentTest extends WebTestCase {
             "false",
             "true", "true", "true", "true", "true", "true", "true", "true"};
         
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
@@ -507,7 +507,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

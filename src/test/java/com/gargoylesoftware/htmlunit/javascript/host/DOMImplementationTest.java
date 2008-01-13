@@ -90,7 +90,7 @@ public class DOMImplementationTest extends WebTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
 
         assertEquals(Boolean.toString(expected), collectedAlerts.get(0));
@@ -120,7 +120,7 @@ public class DOMImplementationTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"[object XMLDocument]"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -138,7 +138,7 @@ public class DOMImplementationTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"mydoc"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

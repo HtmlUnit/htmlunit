@@ -83,7 +83,7 @@ public class LocationTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
@@ -128,7 +128,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, html2);
         webClient.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
@@ -150,7 +150,7 @@ public class LocationTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage firstPage = loadPage(firstContent, collectedAlerts);
         assertEquals("First", firstPage.getTitleText());
 
@@ -183,7 +183,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setDefaultResponse(firstContent);
         client.setWebConnection(webConnection);
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // Try page with only a server name
@@ -521,7 +521,7 @@ public class LocationTest extends WebTestCase {
             + "<body></body></html>";
 
         final String[] expectedAlerts = {"foo"};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
         
         assertEquals(expectedAlerts, collectedAlerts);
@@ -540,9 +540,8 @@ public class LocationTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm()};
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 }

@@ -172,20 +172,20 @@ public class Sarissa099Test extends WebTestCase {
      */
     public void testXSLTWithJaxen() throws Exception {
         final String input = "<root><element attribute=\"value\"/></root>";
-        final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">"
-            + "<xsl:output method=\"xml\" omit-xml-declaration=\"yes\"/>"
-            + "<xsl:param select=\"'anonymous'\" name=\"user\"/>"
-            + "<xsl:template match=\"/\">"
-            + "<p id=\"user\">User: <xsl:value-of select=\"$user\"/>"
-            + "</p>"
-            + "<xsl:apply-templates/>"
-            + "<hr/>"
-            + "</xsl:template>"
-            + "<xsl:template match=\"greeting\">"
-            + "<p>"
-            + "<xsl:apply-templates/>"
-            + "</p>"
-            + "</xsl:template>"
+        final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n"
+            + "<xsl:output method=\"xml\" omit-xml-declaration=\"yes\"/>\n"
+            + "<xsl:param select=\"'anonymous'\" name=\"user\"/>\n"
+            + "<xsl:template match=\"/\">\n"
+            + "<p id=\"user\">User: <xsl:value-of select=\"$user\"/>\n"
+            + "</p>\n"
+            + "<xsl:apply-templates/>\n"
+            + "<hr/>\n"
+            + "</xsl:template>\n"
+            + "<xsl:template match=\"greeting\">\n"
+            + "<p>\n"
+            + "<xsl:apply-templates/>\n"
+            + "</p>\n"
+            + "</xsl:template>\n"
             + "</xsl:stylesheet>";
 
         final Source xmlSource = new StreamSource(new StringReader(input));

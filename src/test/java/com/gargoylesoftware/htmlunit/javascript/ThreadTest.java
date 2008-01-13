@@ -151,7 +151,7 @@ public class ThreadTest extends WebTestCase {
                 + "</form>\n"
                 + "</body></html>";
 
-            final List collectedAlerts = new ArrayList();
+            final List<String> collectedAlerts = new ArrayList<String>();
             final HtmlPage page = loadPage(content, collectedAlerts);
             
             assertEquals("foo", page.getTitleText());

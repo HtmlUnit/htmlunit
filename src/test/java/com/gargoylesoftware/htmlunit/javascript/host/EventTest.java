@@ -211,7 +211,7 @@ public class EventTest extends WebTestCase {
             + "document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
         element.type('A');
@@ -246,7 +246,7 @@ public class EventTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
         element.type('A', shiftKey, ctrlKey, altKey);
@@ -303,7 +303,7 @@ public class EventTest extends WebTestCase {
             + "document.getElementById('button').onclick = handler;\n"
             + "</script>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
@@ -326,7 +326,7 @@ public class EventTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlElement element = (HtmlElement) page.getHtmlElementById("textField");
         element.focus();
@@ -343,7 +343,7 @@ public class EventTest extends WebTestCase {
     private void onClickPageTest(final BrowserVersion version, final String content, final String[] expectedAlerts)
         throws Exception, IOException {
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(version, content, collectedAlerts);
         final ClickableElement clickable = (ClickableElement) page.getHtmlElementById("clickId");
         clickable.click();
@@ -365,7 +365,7 @@ public class EventTest extends WebTestCase {
             + "document.getElementById('frame1').onload = document.getElementById('button1').onclick;\n"
             + "</script>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
@@ -390,7 +390,7 @@ public class EventTest extends WebTestCase {
             + "document.getElementById('clickMe').onclick = handler;\n"
             + "</script></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("clickMe")).click();
 
@@ -421,7 +421,7 @@ public class EventTest extends WebTestCase {
             + "</script>\n"
             + "</head><body onload='test()'></body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
 
         final String[] expectedAlerts = {"false", "false"};
@@ -446,7 +446,7 @@ public class EventTest extends WebTestCase {
             + "// a comment within the onload declaration\n"
             + "alert(2)'>\n"
             + "</body></html>";
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         final String[] expectedAlerts = {"1", "2"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
@@ -483,7 +483,7 @@ public class EventTest extends WebTestCase {
             + "</div>\n"
             + "</body></html>";
        
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
 
@@ -522,7 +522,7 @@ public class EventTest extends WebTestCase {
             + "</div>\n"
             + "</body></html>";
        
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
 
@@ -557,7 +557,7 @@ public class EventTest extends WebTestCase {
             + "</div>\n"
             + "</body></html>";
    
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         ((ClickableElement) page.getHtmlElementById("theSpan")).click();
         final String[] expectedAlerts1 = {"window capturing", "div capturing", "span capturing", "div"};
@@ -592,7 +592,7 @@ public class EventTest extends WebTestCase {
             + "<div id='myDiv'/>\n"
             + "</body></html>";
 
-        final List collectedAlerts = new ArrayList();
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlert, collectedAlerts.get(0));
     }
