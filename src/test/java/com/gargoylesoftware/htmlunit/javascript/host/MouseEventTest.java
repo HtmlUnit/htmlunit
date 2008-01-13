@@ -119,7 +119,7 @@ public class MouseEventTest extends WebTestCase {
             + "  alert(e.altKey);\n"
             + "  alert(e.shiftKey);\n"
             + "</script></body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final String[] expected = {"click", "true", "true", "true", "0", "0", "0", "0", "true", "true", "true"};
         assertEquals(expected, actual);

@@ -266,7 +266,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expected = {"123", "123123123"};
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
         ((HtmlTextInput) page.getHtmlElementById("t")).type('A');
         ((HtmlDivision) page.getHtmlElementById("d")).click();
@@ -619,7 +619,7 @@ public class EventTest extends WebTestCase {
             + "        alert(e.bubbles);\n"
             + "    }\n"
             + "</script></body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(browser, html, actual);
         assertEquals(expected, actual);
     }
@@ -646,7 +646,7 @@ public class EventTest extends WebTestCase {
             + "        alert(e.cancelable);\n"
             + "    }\n"
             + "</script></body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(browser, html, actual);
         assertEquals(expected, actual);
     }
@@ -687,7 +687,7 @@ public class EventTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div' onclick='test(event)'>abc</div>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(browser, html, actual);
         final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("div");
         div.click();
@@ -716,7 +716,7 @@ public class EventTest extends WebTestCase {
             + "        alert(typeof e.timeStamp);\n"
             + "    }\n"
             + "</script></body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(browser, html, actual);
         assertEquals(expected, actual);
     }
@@ -745,7 +745,7 @@ public class EventTest extends WebTestCase {
             + "<form><input type='button' onclick='alertPhase(event)' id='b'></form>\n"
             + "</body></html>";
         final String[] expected = {"capturing", "at target", "bubbling"};
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("b");
         button.click();
@@ -786,7 +786,7 @@ public class EventTest extends WebTestCase {
             + "  }\n"
             + "</script></body></html>";
         final String[] expected = {"click", "true", "true", "dblclick", "false", "false"};
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         assertEquals(expected, actual);
     }

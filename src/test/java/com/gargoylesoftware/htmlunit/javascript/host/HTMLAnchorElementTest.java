@@ -49,19 +49,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link Anchor}.
+ * Tests for {@link HTMLAnchorElement}.
  *
  * @version $Revision$
  * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  * @author Marc Guillemot
  */
-public class AnchorTest extends WebTestCase {
+public class HTMLAnchorElementTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public AnchorTest(final String name) {
+    public HTMLAnchorElementTest(final String name) {
         super(name);
     }
 

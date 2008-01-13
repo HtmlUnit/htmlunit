@@ -79,7 +79,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public final class HTMLParser {
 
-    private static final Map ELEMENT_FACTORIES = new HashMap();
+    private static final Map<String, IElementFactory> ELEMENT_FACTORIES = new HashMap<String, IElementFactory>();
     private static boolean IgnoreOutsideContent_;
 
     static {

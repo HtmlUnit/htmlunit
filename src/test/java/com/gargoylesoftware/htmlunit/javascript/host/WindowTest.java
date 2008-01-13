@@ -539,7 +539,7 @@ public class WindowTest extends WebTestCase {
             + "<div id='d' onclick='alert(w)'>test</div>\n"
             + "</body></html>";
 
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         final WebClient client = new WebClient();
         client.setPopupBlockerEnabled(true);
         client.setAlertHandler(new CollectingAlertHandler(actual));
@@ -630,7 +630,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         final List<String> collectedAlerts = new ArrayList<String>();
-        final List collectedConfirms = new ArrayList();
+        final List<String> collectedConfirms = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.setConfirmHandler(new ConfirmHandler() {
@@ -676,7 +676,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         final List<String> collectedAlerts = new ArrayList<String>();
-        final List collectedPrompts = new ArrayList();
+        final List<String> collectedPrompts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.setPromptHandler(new PromptHandler() {
@@ -707,7 +707,7 @@ public class WindowTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         final List<String> collectedAlerts = new ArrayList<String>();
-        final List collectedPrompts = new ArrayList();
+        final List<String> collectedPrompts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -785,7 +785,7 @@ public class WindowTest extends WebTestCase {
             = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',1);\n"
             + "</script></body></html>";
 
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
@@ -800,7 +800,7 @@ public class WindowTest extends WebTestCase {
             + "window.setTimeout(doTimeout,1);\n"
             + "</script></body></html>";
 
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
@@ -820,7 +820,7 @@ public class WindowTest extends WebTestCase {
             + "window.clearInterval(i);\n"
             + "</script></body></html>";
 
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         loadPage(content, collectedAlerts);
     }
 
@@ -849,7 +849,7 @@ public class WindowTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
         threadManager.joinAll(1000);
@@ -877,7 +877,7 @@ public class WindowTest extends WebTestCase {
             + "  }\n"
             + "</script></body></html>";
         final String[] expected = {"1"};
-        final List actual = Collections.synchronizedList(new ArrayList());
+        final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(html, actual);
         final ThreadManager threadManager = page.getEnclosingWindow().getThreadManager();
         threadManager.joinAll(1000);
@@ -900,7 +900,7 @@ public class WindowTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -936,7 +936,7 @@ public class WindowTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         page.getEnclosingWindow().getThreadManager().joinAll(2000);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -961,7 +961,7 @@ public class WindowTest extends WebTestCase {
             + "  }\n"
             + "</script><div id='a'></div></body></html>";
         final String[] expected = {"true", "completed"};
-        final List actual = Collections.synchronizedList(new ArrayList());
+        final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(html, actual);
         page.getEnclosingWindow().getThreadManager().joinAll(5000);
         assertEquals(expected, actual);
@@ -1342,7 +1342,7 @@ public class WindowTest extends WebTestCase {
         eventCatcher.listenTo(webClient);
         ((HtmlSubmitInput) secondPage.getHtmlElementById("button")).click();
 
-        final List expectedEvents = Arrays.asList(new Object[]{
+        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[]{
             new WebWindowEvent(secondWindow, WebWindowEvent.CLOSE, secondPage, null)
         });
         assertEquals(expectedEvents, eventCatcher.getEvents());
@@ -1781,7 +1781,7 @@ public class WindowTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final List collectedStatus = new ArrayList();
+        final List<String> collectedStatus = new ArrayList<String>();
         webClient.setStatusHandler(new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -1838,7 +1838,7 @@ public class WindowTest extends WebTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        final List expectedAlerts = Collections.nCopies(4, "number");
+        final List<String> expectedAlerts = Collections.nCopies(4, "number");
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
@@ -2144,7 +2144,7 @@ public class WindowTest extends WebTestCase {
             + "addAnother();\n"
             + "</script></body></html>";
 
-        final List collectedAlerts = Collections.synchronizedList(new ArrayList());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue("threads did not stop in time", page.getEnclosingWindow()
                 .getThreadManager().joinAll((max + 1) * 1000));
@@ -2224,7 +2224,7 @@ public class WindowTest extends WebTestCase {
             + "   }\n"
             + "</script></body></html>";
         final String[] expected = {"string"};
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }
@@ -2471,7 +2471,7 @@ public class WindowTest extends WebTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         final String[] expected = {"true", "2"};
         assertEquals(expected, actual);

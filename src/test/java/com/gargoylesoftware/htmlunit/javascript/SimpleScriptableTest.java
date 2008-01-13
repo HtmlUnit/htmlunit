@@ -51,6 +51,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.ClassUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -258,6 +259,32 @@ public class SimpleScriptableTest extends WebTestCase {
         final String[] expectedAlerts = {"3"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    /**
+     * Test the host class names match the Firefox (w3c names).
+     * @see <a
+     *   href="http://java.sun.com/j2se/1.5.0/docs/guide/plugin/dom/org/w3c/dom/html/package-summary.html">DOM API</a>
+     * @throws Exception if the test fails.
+     */
+    public void testHostClassNames() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testHostClassNames("HTMLAnchorElement");
+    }
+
+    private void testHostClassNames(final String className) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(" + className + ");\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {className};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

@@ -308,7 +308,7 @@ public class StyleTest extends WebTestCase {
             + "</script>\n"
             + "<span id='span'>x</span>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
         final String[] expected = {"30px", "", "30px", "arial", "", "arial"};
         assertEquals(expected, actual);
@@ -340,7 +340,7 @@ public class StyleTest extends WebTestCase {
             + "<div id='div1'>foo</div>\n"
             + "<div id='div2' style='filter:alpha(opacity=50)'>bar</div>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(browserVersion, html, actual);
         assertEquals(expected, actual);
     }

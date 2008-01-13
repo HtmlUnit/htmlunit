@@ -80,7 +80,7 @@ public class StyleSheetListTest extends WebTestCase {
             + "    <style>div.y { color: green; }</style>\n"
             + "  </body>\n"
             + "</html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         final String[] expected = {"4"};
         assertEquals(expected, actual);

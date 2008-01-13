@@ -1038,7 +1038,7 @@ public class SelectTest extends WebTestCase {
             + "   </select>\n"
             + "</form>\n"
             + "</body></html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }

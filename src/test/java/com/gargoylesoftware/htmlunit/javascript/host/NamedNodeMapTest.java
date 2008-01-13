@@ -77,7 +77,7 @@ public class NamedNodeMapTest extends WebTestCase {
             + "<form name='f' id='f' foo='bar' baz='blah'></form>\n"
             + "</body>\n"
             + "</html>";
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         final String[] expected = {"name=f", "id=f", "foo=bar", "baz=blah"};
         assertEquals(expected, actual);
@@ -106,7 +106,7 @@ public class NamedNodeMapTest extends WebTestCase {
         final String[] expected = {"name", "f", "null"};
         createTestPageForRealBrowserIfNeeded(html, expected);
 
-        final List actual = new ArrayList();
+        final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);
     }

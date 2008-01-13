@@ -58,14 +58,14 @@ import java.net.URL;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class Anchor extends HTMLElement {
+public class HTMLAnchorElement extends HTMLElement {
 
     private static final long serialVersionUID = -816365374422492967L;
 
     /**
      * Create an instance.
      */
-    public Anchor() {
+    public HTMLAnchorElement() {
     }
 
     /**

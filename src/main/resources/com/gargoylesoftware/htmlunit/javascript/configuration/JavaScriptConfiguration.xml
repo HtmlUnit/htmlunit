@@ -21,7 +21,7 @@
         <browser name="Microsoft Internet Explorer" min-version="4"/>
     </class>
 
-    <class name="Anchor" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Anchor"
+    <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <javascript min-version="1.2"/>
         
