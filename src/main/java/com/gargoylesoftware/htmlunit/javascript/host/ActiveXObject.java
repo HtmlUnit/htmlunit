@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.lang.reflect.Method;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.mozilla.javascript.Context;
@@ -229,12 +228,10 @@ public class ActiveXObject extends SimpleScriptable {
 
         for (String className = "Document"; className.trim().length() != 0;) {
             final ClassConfiguration classConfig = jsConfig.getClassConfiguration(className);
-            for (final Iterator iterator = classConfig.functionKeys().iterator(); iterator.hasNext();) {
-                final String function = (String) iterator.next();
+            for (final String function : classConfig.functionKeys()) {
                 addFunction(document, function);
             }
-            for (final Iterator iterator = classConfig.propertyKeys().iterator(); iterator.hasNext();) {
-                final String property = (String) iterator.next();
+            for (final String property : classConfig.propertyKeys()) {
                 addProperty(document, property,
                         classConfig.getPropertyReadMethod(property) != null,
                         classConfig.getPropertyWriteMethod(property) != null);
@@ -283,7 +280,7 @@ public class ActiveXObject extends SimpleScriptable {
      * @param name the name of the searched method
      * @return <code>null</code> if not found
      */
-    static Method getMethod(final Class clazz, final String name) {
+    static Method getMethod(final Class < ? extends SimpleScriptable> clazz, final String name) {
         if (name == null) {
             return null;
         }
