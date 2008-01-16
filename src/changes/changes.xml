@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="asashour">
+                Deprecate HtmlElement.getAttributeEntriesIterator(), use .getAttributes() instead.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: HTMLCollection should not have 'tags' property in Firefox
                 (except for <code>document.all</code>).

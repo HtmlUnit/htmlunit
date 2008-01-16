@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -444,11 +445,20 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * @return an iterator over the {@link HtmlAttr} objects representing the
-     * attributes of this element. Each entry holds a string key and a string value.
+     * attributes of this element.
      * The elements are ordered as found in the html source code.
+     * @deprecated As of version 2.0
      */
-    public Iterator getAttributeEntriesIterator() {
-        return attributes_.values().iterator();
+    public Iterator<HtmlAttr> getAttributeEntriesIterator() {
+        return getAttributes().iterator();
+    }
+
+    /**
+     * @return a collection of {@link HtmlAttr} objects representing the
+     * attributes of this element. The elements are ordered as found in the html source code.
+     */
+    public Collection<HtmlAttr> getAttributes() {
+        return attributes_.values();
     }
 
     /**

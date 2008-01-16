@@ -44,7 +44,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -122,7 +121,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     private static int UniqueID_Counter_ = 1;
 
-    private final Set behaviors_ = new HashSet();
+    private final Set<String> behaviors_ = new HashSet<String>();
     private BoxObject boxObject_; // lazy init
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_;
@@ -132,7 +131,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * The tag names of the objects for which outerHTML is readonly
      */
-    private static final List OUTER_HTML_READONLY =
+    private static final List<String> OUTER_HTML_READONLY =
         Arrays.asList(new String[] {
             "caption", "col", "colgroup", "frameset", "html",
             "tbody", "td", "tfoot", "th", "thead", "tr"});
@@ -202,12 +201,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
          * Should be called only on construction.
          */
         final HtmlElement htmlElt = (HtmlElement) domNode;
-        for (final Iterator iter = htmlElt.getAttributeEntriesIterator(); iter.hasNext();) {
-            final HtmlAttr entry = (HtmlAttr) iter.next();
-            final String eventName = entry.getName();
+        for (final HtmlAttr attr : htmlElt.getAttributes()) {
+            final String eventName = attr.getName();
             if (eventName.startsWith("on")) {
                 // TODO: check that it is an "allowed" event for the browser, and take care to the case
-                final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, (String) entry.getHtmlValue());
+                final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attr.getHtmlValue());
                 setEventHandler(eventName, eventHandler);
                 // forward onload, onclick, ondblclick, ... to window
                 if ((domNode instanceof HtmlBody || domNode instanceof HtmlFrameSet)) {
@@ -583,10 +581,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
-            for (final Iterator iterator = element.getAttributeEntriesIterator(); iterator.hasNext();) {
-                final HtmlAttr entry = (HtmlAttr) iterator.next();
-                final String name = entry.getName();
-                final String value = (String) entry.getHtmlValue();
+            for (final HtmlAttr attr : element.getAttributes()) {
+                final String name = attr.getName();
+                final String value = (String) attr.getHtmlValue();
                 final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
                 buffer.append(' ').append(name).append("=");
                 if (quote) {
@@ -722,10 +719,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected AttributesImpl readAttributes(final HtmlElement element) {
         final AttributesImpl attributes = new AttributesImpl();
-        for (final Iterator iter = element.getAttributeEntriesIterator(); iter.hasNext();) {
-            final HtmlAttr entry = (HtmlAttr) iter.next();
+        for (final HtmlAttr entry : element.getAttributes()) {
             final String name = entry.getName();
-            final String value = (String) entry.getHtmlValue();
+            final String value = entry.getHtmlValue();
             attributes.addAttribute(null, name, name, null, value);
         }
 
@@ -857,8 +853,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return 0;
         }
 
+        final Class< ? extends HTMLElement> c = getClass();
         if (BEHAVIOR_CLIENT_CAPS.equalsIgnoreCase(behavior)) {
-            final Class c = getClass();
             defineProperty("availHeight", c, 0);
             defineProperty("availWidth", c, 0);
             defineProperty("bufferDepth", c, 0);
@@ -882,7 +878,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return BEHAVIOR_ID_CLIENT_CAPS;
         }
         else if (BEHAVIOR_HOMEPAGE.equalsIgnoreCase(behavior)) {
-            final Class c = getClass();
             defineFunctionProperties(new String[] {"isHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"setHomePage"}, c, 0);
             defineFunctionProperties(new String[] {"navigateHomePage"}, c, 0);
@@ -890,7 +885,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return BEHAVIOR_ID_HOMEPAGE;
         }
         else if (BEHAVIOR_DOWNLOAD.equalsIgnoreCase(behavior)) {
-            final Class c = getClass();
             defineFunctionProperties(new String[] {"startDownload"}, c, 0);
             behaviors_.add(BEHAVIOR_DOWNLOAD);
             return BEHAVIOR_ID_DOWNLOAD;

@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -129,8 +128,7 @@ public class HtmlSubmitInput extends HtmlInput {
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
-        for (final Iterator it = getAttributeEntriesIterator(); it.hasNext();) {
-            final HtmlAttr attribute = (HtmlAttr) it.next();
+        for (final HtmlAttr attribute : getAttributes()) {
             if (!attribute.getNodeName().equals("value") || !attribute.getHtmlValue().equals(DEFAULT_VALUE)) {
                 printWriter.print(" ");
                 final String name = attribute.getNodeName();

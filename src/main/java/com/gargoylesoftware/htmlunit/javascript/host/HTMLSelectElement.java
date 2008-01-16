@@ -211,12 +211,12 @@ public class HTMLSelectElement extends FormField {
      */
     public int jsxGet_selectedIndex() {
         final HtmlSelect htmlSelect = getHtmlSelect();
-        final List selectedOptions = htmlSelect.getSelectedOptions();
+        final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
         if (selectedOptions.isEmpty()) {
             return -1;
         }
         else {
-            final List allOptions = htmlSelect.getOptions();
+            final List<HtmlOption> allOptions = htmlSelect.getOptions();
             return allOptions.indexOf(selectedOptions.get(0));
         }
     }
@@ -228,9 +228,9 @@ public class HTMLSelectElement extends FormField {
     public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
-        final Iterator iter = htmlSelect.getSelectedOptions().iterator();
+        final Iterator<HtmlOption> iter = htmlSelect.getSelectedOptions().iterator();
         while (iter.hasNext()) {
-            final HtmlOption itemToUnSelect = (HtmlOption) iter.next();
+            final HtmlOption itemToUnSelect = iter.next();
             htmlSelect.setSelectedAttribute(itemToUnSelect, false);
         }
         if (index < 0) {
@@ -255,12 +255,12 @@ public class HTMLSelectElement extends FormField {
      */
     public String jsxGet_value() {
         final HtmlSelect htmlSelect = getHtmlSelect();
-        final List selectedOptions = htmlSelect.getSelectedOptions();
+        final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
         if (selectedOptions.isEmpty()) {
             return "";
         }
         else {
-            return ((HtmlOption) selectedOptions.get(0)).getValueAttribute();
+            return selectedOptions.get(0).getValueAttribute();
         }
     }
 

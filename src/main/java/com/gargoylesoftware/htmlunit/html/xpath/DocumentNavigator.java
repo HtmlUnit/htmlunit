@@ -160,9 +160,10 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the attribute axis.
      * @return A possibly-empty iterator (not null).
      */
-    public Iterator getAttributeAxisIterator(final Object contextNode) {
+    @SuppressWarnings("unchecked")
+    public Iterator<HtmlAttr> getAttributeAxisIterator(final Object contextNode) {
         if (contextNode instanceof HtmlElement) {
-            return ((HtmlElement) contextNode).getAttributeEntriesIterator();
+            return ((HtmlElement) contextNode).getAttributes().iterator();
         }
         else {
             return Collections.EMPTY_LIST.iterator();

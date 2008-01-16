@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.util.Iterator;
-
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.mozilla.javascript.Scriptable;
 
@@ -73,8 +71,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     public NamedNodeMap(final HtmlElement element) {
         nodes_ = new ListOrderedMap();
-        for (final Iterator i = element.getAttributeEntriesIterator(); i.hasNext();) {
-            final HtmlAttr attr = (HtmlAttr) i.next();
+        for (final HtmlAttr attr : element.getAttributes()) {
             nodes_.put(attr.getName(), attr);
         }
         setParentScope(element.getScriptObject());
