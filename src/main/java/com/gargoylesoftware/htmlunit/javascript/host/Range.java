@@ -221,15 +221,16 @@ public class Range extends SimpleScriptable {
      * Gets the deepest common ancestor container of the Range's two boundary-points.
      * @return the ancestor
      */
+    @SuppressWarnings("unchecked")
     public Object jsxGet_commonAncestorContainer() {
         if (startContainer_ == null) {
             return Context.getUndefinedValue();
         }
 
-        final List startContainerAncestor = getAncestorsAndSelf(startContainer_);
-        final List endContainerAncestor = getAncestorsAndSelf(endContainer_);
+        final List<Node> startContainerAncestor = getAncestorsAndSelf(startContainer_);
+        final List<Node> endContainerAncestor = getAncestorsAndSelf(endContainer_);
         
-        final List commonAncestors = ListUtils.intersection(startContainerAncestor, endContainerAncestor);
+        final List<Node> commonAncestors = ListUtils.intersection(startContainerAncestor, endContainerAncestor);
         return commonAncestors.get(commonAncestors.size() - 1);
     }
 
@@ -238,8 +239,8 @@ public class Range extends SimpleScriptable {
      * @param node the node to start with
      * @return a list of node
      */
-    protected List getAncestorsAndSelf(final Node node) {
-        final List ancestors = new ArrayList();
+    protected List<Node> getAncestorsAndSelf(final Node node) {
+        final List<Node> ancestors = new ArrayList<Node>();
         Node ancestor = node;
         while (ancestor != null) {
             ancestors.add(0, ancestor);

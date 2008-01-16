@@ -529,14 +529,14 @@ public class Node extends SimpleScriptable {
             if (event.isPropagationStopped()) {
                 return result;
             }
-            final List parents = new ArrayList();
+            final List<DomNode> parents = new ArrayList<DomNode>();
             DomNode node = getDomNodeOrDie();
             while (node != null) {
                 parents.add(node);
                 node = node.getParentDomNode();
             }
             for (int i = parents.size() - 1; i >= 0; i--) {
-                final DomNode curNode = (DomNode) parents.get(i);
+                final DomNode curNode = parents.get(i);
                 final Node jsNode = (Node) curNode.getScriptObject();
                 if (jsNode.eventListenersContainer_ != null) {
                     result = defaultResult(jsNode.eventListenersContainer_.executeCapturingListeners(event, args),

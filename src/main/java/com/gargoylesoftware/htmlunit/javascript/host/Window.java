@@ -743,7 +743,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
             final List<String> listTagNames = Arrays.asList(new String[] {"body", "frameset"});
-            final List listElements = page.getDocumentHtmlElement().getHtmlElementsByTagNames(listTagNames);
+            final List< ? extends HtmlElement> listElements =
+                page.getDocumentHtmlElement().getHtmlElementsByTagNames(listTagNames);
             if (!listElements.isEmpty()) {
                 return ((HtmlElement) listElements.get(0)).getEventHandler("onload");
             }

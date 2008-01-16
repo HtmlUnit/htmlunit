@@ -209,7 +209,7 @@ public class HtmlFormTest extends WebTestCase {
         final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("textfield", "*"), new KeyValuePair("button", "foo")
         });
-        final List collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -522,7 +522,7 @@ public class HtmlFormTest extends WebTestCase {
         final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
             new KeyValuePair("textfield", ""), new KeyValuePair("button", "foo")
         });
-        final List collectedParameters = webConnection.getLastParameters();
+        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -686,8 +686,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button1 = (HtmlSubmitInput) form1.getInputByName("button");
 
         final HtmlPage page2 = (HtmlPage) button1.click();
-        final List collectedParameters1 = webConnection1.getLastParameters();
-        final List expectedParameters1 = Arrays.asList(new Object[] {new KeyValuePair("button", "foo")});
+        final List<KeyValuePair> collectedParameters1 = webConnection1.getLastParameters();
+        final List<KeyValuePair> expectedParameters1 =
+            Arrays.asList(new KeyValuePair[] {new KeyValuePair("button", "foo")});
 
         final MockWebConnection webConnection2 = getMockConnection(page2);
         final HtmlForm form2 = (HtmlForm) page2.getHtmlElementById("form1");
