@@ -62,7 +62,8 @@ public class HtmlBase extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    HtmlBase(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlBase(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

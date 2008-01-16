@@ -71,7 +71,7 @@ public class HtmlFileInput extends HtmlInput {
      * @param attributes the initial attributes
      */
     HtmlFileInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttributeValue("value", "");
         if (page.getWebClient().getBrowserVersion().isIE()) {

@@ -61,7 +61,7 @@ public class UnknownHtmlElement extends ClickableElement {
      * @param tagName the HTML tag represented by this object
      * @param attributes the initial attributes
      */
-    UnknownHtmlElement(final HtmlPage page, final String tagName, final Map attributes) {
+    UnknownHtmlElement(final HtmlPage page, final String tagName, final Map<String, HtmlAttr> attributes) {
         this(page, null, tagName, attributes);
     }
 
@@ -74,7 +74,7 @@ public class UnknownHtmlElement extends ClickableElement {
      * @param attributes the initial attributes
      */
     UnknownHtmlElement(final HtmlPage page, final String namespaceURI, final String qualifiedName,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

@@ -64,7 +64,7 @@ public class HtmlResetInput extends HtmlInput {
      * @param attributes the initial attributes
      */
     HtmlResetInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

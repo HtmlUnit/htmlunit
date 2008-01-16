@@ -46,7 +46,6 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -355,9 +354,8 @@ public class HttpWebConnectionTest extends BaseTestCase {
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
         
-        for (final Iterator<Class<Servlet>> servletKeys = servlets.keySet().iterator(); servletKeys.hasNext();) {
-            final Class<Servlet> servlet = servletKeys.next();
-            final String pathSpec = (String) servlets.get(servlet);
+        for (final Class<Servlet> servlet : servlets.keySet()) {
+            final String pathSpec = servlets.get(servlet);
             context.addServlet(servlet, pathSpec);
             
         }

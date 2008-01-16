@@ -103,7 +103,7 @@ public class HtmlForm extends ClickableElement {
      * @param attributes the initial attributes
      */
     HtmlForm(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, htmlPage, attributes);
     }
 

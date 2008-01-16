@@ -429,7 +429,7 @@ public abstract class WebTestCase extends BaseTestCase {
             if (iter.hasPrevious()) {
                 sb.append(", ");
             }
-            final String message = (String) iter.next();
+            final String message = iter.next();
             sb.append("{expected: \"").append(message).append("\"}");
         }
         sb.append("];\n\n");

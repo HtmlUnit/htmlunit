@@ -82,7 +82,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @param attributes the initial attributes
      */
     HtmlSelect(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

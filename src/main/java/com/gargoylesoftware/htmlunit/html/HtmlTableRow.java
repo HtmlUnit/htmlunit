@@ -69,7 +69,7 @@ public class HtmlTableRow extends ClickableElement {
      * @param attributes the initial attributes
      */
     HtmlTableRow(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

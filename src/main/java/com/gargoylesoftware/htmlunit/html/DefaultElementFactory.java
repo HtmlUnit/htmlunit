@@ -76,7 +76,7 @@ class DefaultElementFactory implements IElementFactory {
      */
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
-        final Map attributeMap = setAttributes(page, attributes);
+        final Map<String, HtmlAttr> attributeMap = setAttributes(page, attributes);
 
         final HtmlElement element;
         final String tagName;
@@ -351,8 +351,8 @@ class DefaultElementFactory implements IElementFactory {
      * @param attributes the SAX attributes.
      * @return the Map of attribute values for HtmlElement.
      */
-    static Map setAttributes(final HtmlPage page, final Attributes attributes) {
-        Map attributeMap = null;
+    static Map<String, HtmlAttr> setAttributes(final HtmlPage page, final Attributes attributes) {
+        Map<String, HtmlAttr> attributeMap = null;
         if (attributes != null) {
             attributeMap = HtmlElement.createAttributeMap(attributes.getLength());
             for (int i = 0; i < attributes.getLength(); i++) {

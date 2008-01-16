@@ -73,7 +73,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @param page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlInput(final HtmlPage page, final Map attributes) {
+    public HtmlInput(final HtmlPage page, final Map<String, HtmlAttr> attributes) {
         this(null, TAG_NAME, page, attributes);
     }
 
@@ -85,7 +85,8 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * @param page The page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlInput(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    public HtmlInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         defaultValue_ = getValueAttribute();
     }

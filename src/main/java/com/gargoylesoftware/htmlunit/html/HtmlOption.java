@@ -71,7 +71,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @param attributes the initial attributes
      */
     HtmlOption(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         initialSelectedState_ = isAttributeDefined("selected");
     }

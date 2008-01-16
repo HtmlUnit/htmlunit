@@ -44,7 +44,6 @@ import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
@@ -485,9 +484,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     public void testConfigurationFile() throws Exception {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
         
-        final Iterator it = configuration.keyIterator();
-        while (it.hasNext()) {
-            final String classname = (String) it.next();
+        for (final String classname : configuration.keySet()) {
             getLog().debug("Now testing for class " + classname);
             final Class clazz = configuration.getClassObject(classname);
             final Method[] methods = clazz.getMethods();

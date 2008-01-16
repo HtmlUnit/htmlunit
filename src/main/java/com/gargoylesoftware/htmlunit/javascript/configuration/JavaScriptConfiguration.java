@@ -46,7 +46,6 @@ import java.io.Reader;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -527,14 +526,6 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Get an iterator over the keys in the configuration - For testing only
-     * @return Iterator
-     */
-    protected Iterator<String> keyIterator() {
-        return configuration_.keySet().iterator();
-    }
-
-    /**
      * Return the class for the given class name
      * @param classname The classname that you want the implementing class for.  For testing only.
      * @return Class
@@ -711,11 +702,9 @@ public final class JavaScriptConfiguration {
         }
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
-        final Iterator it = configuration.keyIterator();
         final Map<Class < ? >, Class < ? >> map = new HashMap<Class < ? >, Class < ? >>();
 
-        while (it.hasNext()) {
-            String jsClassname = (String) it.next();
+        for (String jsClassname : configuration.keySet()) {
             ClassConfiguration classConfig = configuration.getClassConfiguration(jsClassname);
             final String htmlClassname = classConfig.getHtmlClassname();
             if (htmlClassname != null) {

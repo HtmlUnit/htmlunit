@@ -294,7 +294,7 @@ public final class HTMLParser {
         private final HtmlPage page_;
 
         private Locator locator_;
-        private final Stack stack_ = new Stack();
+        private final Stack<DomNode> stack_ = new Stack<DomNode>();
 
         private DomNode currentNode_;
         private StringBuffer characters_;

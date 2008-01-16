@@ -63,7 +63,7 @@ public abstract class StyledElement extends HtmlElement {
      * @param attributes the initial attributes
      */
     protected StyledElement(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

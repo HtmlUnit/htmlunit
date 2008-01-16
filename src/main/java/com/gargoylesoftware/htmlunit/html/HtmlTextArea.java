@@ -81,7 +81,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * @param attributes the initial attributes
      */
     HtmlTextArea(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

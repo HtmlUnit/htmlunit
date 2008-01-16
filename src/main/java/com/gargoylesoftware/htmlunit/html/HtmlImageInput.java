@@ -75,7 +75,7 @@ public class HtmlImageInput extends HtmlInput {
      * @param attributes the initial attributes
      */
     HtmlImageInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

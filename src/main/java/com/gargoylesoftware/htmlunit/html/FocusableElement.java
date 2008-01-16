@@ -58,7 +58,7 @@ public abstract class FocusableElement extends ClickableElement {
      * @param attributes The attributes
      */
     public FocusableElement(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 }

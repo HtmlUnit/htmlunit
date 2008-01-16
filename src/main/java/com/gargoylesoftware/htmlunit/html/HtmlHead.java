@@ -62,7 +62,8 @@ public class HtmlHead extends HtmlElement {
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    HtmlHead(final String namespaceURI, final String qualifiedName, final HtmlPage page, final Map attributes) {
+    HtmlHead(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

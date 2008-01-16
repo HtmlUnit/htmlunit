@@ -47,7 +47,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
@@ -97,7 +96,7 @@ public abstract class HtmlElement extends DomElement {
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
     /** The map holding the attributes, keyed by name. */
-    private Map attributes_;
+    private Map<String, HtmlAttr> attributes_;
 
     /** The map holding the namespaces, keyed by URI. */
     private Map<String, String> namespaces_ = new HashMap<String, String>();
@@ -114,15 +113,13 @@ public abstract class HtmlElement extends DomElement {
      * <code>null</code>. The map will be stored as is, not copied.
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
-            final Map attributes) {
+            final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, htmlPage);
         if (attributes != null) {
-            attributes_ = upgradeAttributes(htmlPage, attributes);
+            attributes_ = attributes;
             // The HtmlAttr objects are created before the HtmlElement, so we need to go set the
             // parent HtmlElement, now.  Also index the namespaces while we are at it.
-            final Iterator entryIterator = attributes_.values().iterator();
-            while (entryIterator.hasNext()) {
-                final HtmlAttr entry = (HtmlAttr) entryIterator.next();
+            for (final HtmlAttr entry : attributes_.values()) {
                 entry.setParentNode(this);
                 final String attrNamespaceURI = entry.getNamespaceURI();
                 if (attrNamespaceURI != null) {
@@ -133,29 +130,6 @@ public abstract class HtmlElement extends DomElement {
         else {
             attributes_ = Collections.EMPTY_MAP;
         }
-    }
-
-    /**
-     * Convert old attribute Map<String, String> to Map<String, HtmlAttr> to support backwards
-     * compatibility.
-     * @param attributes old attributes to be upgraded
-     * @return upgraded attribute map
-     */
-    private Map upgradeAttributes(final HtmlPage htmlPage, final Map attributes) {
-        Map upgradedAttributes = attributes;
-        if (attributes != null && attributes.size() > 0) {
-            final Object firstValue = attributes.values().iterator().next();
-            if (firstValue instanceof String) {
-                upgradedAttributes = createAttributeMap(attributes.size());
-                final Iterator entryIterator = attributes.entrySet().iterator();
-                while (entryIterator.hasNext()) {
-                    final Map.Entry entry = (Map.Entry) entryIterator.next();
-                    addAttributeToMap(htmlPage, upgradedAttributes, null, (String) entry.getKey(),
-                        (String) entry.getValue());
-                }
-            }
-        }
-        return upgradedAttributes;
     }
 
     /**
@@ -174,11 +148,8 @@ public abstract class HtmlElement extends DomElement {
      */
     public DomNode cloneDomNode(final boolean deep) {
         final HtmlElement newNode = (HtmlElement) super.cloneDomNode(deep);
-        final Set<String> keySet = attributes_.keySet();
-        newNode.attributes_ = createAttributeMap(keySet.size());
-        for (final Iterator it = keySet.iterator(); it.hasNext();) {
-            final Object key = it.next();
-            final HtmlAttr attr = (HtmlAttr) attributes_.get(key);
+        newNode.attributes_ = createAttributeMap(attributes_.size());
+        for (final HtmlAttr attr : attributes_.values()) {
             newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue());
         }
         return newNode;
@@ -1092,8 +1063,9 @@ public abstract class HtmlElement extends DomElement {
      * @param attributeCount the initial number of attributes to be added to the map.
      * @return the attribute map.
      */
-    static Map createAttributeMap(final int attributeCount) {
-        return ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
+    @SuppressWarnings("unchecked")
+    static Map<String, HtmlAttr> createAttributeMap(final int attributeCount) {
+        return ListOrderedMap.decorate(new HashMap<String, HtmlAttr>(attributeCount)); // preserve insertion order
     }
 
     /**
