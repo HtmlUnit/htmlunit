@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -137,7 +136,7 @@ public final class ClassConfiguration {
         info.setWriteable(writeable);
         try {
             if (readable) {
-                info.setReadMethod(linkedClass_.getMethod(GETTER_PREFIX + name, null));
+                info.setReadMethod(linkedClass_.getMethod(GETTER_PREFIX + name, (Class []) null));
             }
         }
         catch (final NoSuchMethodException e) {
@@ -278,13 +277,13 @@ public final class ClassConfiguration {
         }
         final Set<String> keys = config.propertyMap_.keySet();
         for (final String key : keys) {
-            if (!(((PropertyInfo) config.propertyMap_.get(key)).valueEquals(propertyMap_.get(key)))) {
+            if (!config.propertyMap_.get(key).valueEquals(propertyMap_.get(key))) {
                 return false;
             }
         }
 
         for (final String key : config.functionMap_.keySet()) {
-            if (!(((FunctionInfo) config.functionMap_.get(key)).valueEquals(functionMap_.get(key)))) {
+            if (!config.functionMap_.get(key).valueEquals(functionMap_.get(key))) {
                 return false;
             }
         }
@@ -379,7 +378,7 @@ public final class ClassConfiguration {
         private boolean readable_ = false;
         private boolean writeable_ = false;
         private boolean hasBrowsers_ = false;
-        private Map browserMap_;
+        private Map<String, BrowserInfo> browserMap_;
         private Method readMethod_;
         private Method writeMethod_;
 
@@ -414,7 +413,7 @@ public final class ClassConfiguration {
         private void setBrowser(final BrowserInfo browserInfo) {
             if (browserMap_ == null) {
                 hasBrowsers_ = true;
-                browserMap_ = new HashMap();
+                browserMap_ = new HashMap<String, BrowserInfo>();
             }
 
             browserMap_.put(browserInfo.getBrowserName(), browserInfo);
@@ -439,11 +438,8 @@ public final class ClassConfiguration {
                 if (browserMap_.size() != info.browserMap_.size()) {
                     return false;
                 }
-                final Set keys = browserMap_.keySet();
-                final Iterator it = keys.iterator();
-                while (it.hasNext()) {
-                    final String key = (String) it.next();
-                    if (!(((BrowserInfo) browserMap_.get(key)).valueEquals(info.browserMap_.get(key)))) {
+                for (final String key : browserMap_.keySet()) {
+                    if (!browserMap_.get(key).valueEquals(info.browserMap_.get(key))) {
                         return false;
                     }
                 }
@@ -470,7 +466,7 @@ public final class ClassConfiguration {
 
     private class FunctionInfo {
         private boolean hasBrowsers_ = false;
-        private Map browserMap_;
+        private Map<String, BrowserInfo> browserMap_;
         private Method functionMethod_;
 
         /**
@@ -492,11 +488,8 @@ public final class ClassConfiguration {
                 if (browserMap_.size() != info.browserMap_.size()) {
                     return false;
                 }
-                final Set keys = browserMap_.keySet();
-                final Iterator it = keys.iterator();
-                while (it.hasNext()) {
-                    final String key = (String) it.next();
-                    if (!(((BrowserInfo) browserMap_.get(key)).valueEquals(info.browserMap_.get(key)))) {
+                for (final String key : browserMap_.keySet()) {
+                    if (browserMap_.get(key).valueEquals(info.browserMap_.get(key))) {
                         return false;
                     }
                 }

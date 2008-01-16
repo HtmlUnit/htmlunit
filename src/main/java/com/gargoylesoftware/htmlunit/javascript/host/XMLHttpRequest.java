@@ -40,8 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
@@ -263,9 +261,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     public String jsxFunction_getAllResponseHeaders() {
         if (webResponse_ != null) {
             final StringBuffer buffer = new StringBuffer();
-            final List headers = webResponse_.getResponseHeaders();
-            for (final Iterator i = headers.iterator(); i.hasNext();) {
-                final NameValuePair header = (NameValuePair) i.next();
+            for (final NameValuePair header : webResponse_.getResponseHeaders()) {
                 buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
             }
             return buffer.toString();

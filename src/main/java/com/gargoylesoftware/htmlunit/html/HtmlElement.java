@@ -717,9 +717,8 @@ public abstract class HtmlElement extends DomElement {
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
-        for (final Iterator<String> it = attributes_.keySet().iterator(); it.hasNext();) {
+        for (final String name : attributes_.keySet()) {
             printWriter.print(" ");
-            final String name = it.next();
             printWriter.print(name);
             printWriter.print("=\"");
             printWriter.print(StringEscapeUtils.escapeXml(((HtmlAttr) attributes_.get(name)).getNodeValue()));
@@ -891,11 +890,9 @@ public abstract class HtmlElement extends DomElement {
      */
     public final List< ? extends HtmlElement> getHtmlElementsByTagName(final String tagName) {
         final List<HtmlElement> list = new ArrayList<HtmlElement>();
-        final DescendantElementsIterator iterator = new DescendantElementsIterator();
         final String lowerCaseTagName = tagName.toLowerCase();
 
-        while (iterator.hasNext()) {
-            final HtmlElement next = iterator.nextElement();
+        for (final HtmlElement next : getAllHtmlChildElements()) {
             if (lowerCaseTagName.equals(next.getTagName())) {
                 list.add(next);
             }

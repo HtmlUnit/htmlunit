@@ -84,8 +84,8 @@ public class HtmlTableRow extends ClickableElement {
      * @return an immutable list containing all the HtmlTableCells held by this object
      * @see #getCellIterator
      */
-    public List getCells() {
-        final List result = new ArrayList();
+    public List<HtmlTableCell> getCells() {
+        final List<HtmlTableCell> result = new ArrayList<HtmlTableCell>();
         for (final CellIterator iterator = getCellIterator(); iterator.hasNext();) {
             result.add(iterator.next());
         }
@@ -180,7 +180,7 @@ public class HtmlTableRow extends ClickableElement {
      * an Iterator over the HtmlTableCells contained in this row. It will also dive
      * into nested forms, even though that is illegal HTML
      */
-    public class CellIterator implements Iterator {
+    public class CellIterator implements Iterator<HtmlTableCell> {
         private HtmlTableCell nextCell_;
         private HtmlForm currentForm_;
 
@@ -198,7 +198,7 @@ public class HtmlTableRow extends ClickableElement {
          * @return the next cell
          * @throws NoSuchElementException if no cell is available
          */
-        public Object next() throws NoSuchElementException {
+        public HtmlTableCell next() throws NoSuchElementException {
             return nextCell();
         }
 

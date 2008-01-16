@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.mozilla.javascript.Context;
@@ -57,7 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class SimpleArray extends SimpleScriptable implements ScriptableWithFallbackGetter {
     private static final long serialVersionUID = 8025124211062703153L;
-    private final List elements_ = new ArrayList();
+    private final List<Object> elements_ = new ArrayList<Object>();
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -95,7 +94,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      */
     public final Object get(final int index, final Scriptable start) {
         final SimpleArray array = (SimpleArray) start;
-        final List elements = array.elements_;
+        final List<Object> elements = array.elements_;
 
         if (index >= 0 && index < elements.size()) {
             return elements.get(index);
@@ -111,8 +110,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      * @return the item with the given name.
      */
     public Object jsxFunction_namedItem(final String name) {
-        for (final Iterator iterator = elements_.iterator(); iterator.hasNext();) {
-            final Object element = iterator.next();
+        for (final Object element : elements_) {
             if (name.equals(getItemName(element))) {
                 return element;
             }

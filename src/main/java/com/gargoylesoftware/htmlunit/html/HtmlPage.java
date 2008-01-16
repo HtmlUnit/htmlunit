@@ -295,9 +295,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     public HtmlAnchor getFirstAnchorByText(final String text) throws ElementNotFoundException {
         Assert.notNull("text", text);
 
-        final Iterator iterator = getAnchors().iterator();
-        while (iterator.hasNext()) {
-            final HtmlAnchor anchor = (HtmlAnchor) iterator.next();
+        for (final HtmlAnchor anchor : getAnchors()) {
             if (text.equals(anchor.asText())) {
                 return anchor;
             }
@@ -956,6 +954,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}.
      * @return true if user accepted onbeforeunload (not relevant to other events).
      */
+    @SuppressWarnings("unchecked")
     private boolean executeEventHandlersIfNeeded(final String eventType) {
         if (!getWebClient().isJavaScriptEnabled()) {
             return true;
@@ -972,10 +971,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
         }
 
         // the event of the contained frames or iframe tags
-        final List frames = getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{
-            "frame", "iframe" }));
-        for (final Iterator iter = frames.iterator(); iter.hasNext();) {
-            final BaseFrame frame = (BaseFrame) iter.next();
+        final List<BaseFrame> frames = (List<BaseFrame>)
+            getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"frame", "iframe" }));
+        for (final BaseFrame frame : frames) {
             final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
             if (frameTagEventHandler != null) {
                 getLog().debug("Executing on" + eventType + " handler for " + frame);
@@ -1089,10 +1087,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return the auto-refresh string.
      */
     private String getRefreshStringOrNull() {
-        final Iterator iterator = getMetaTags("refresh").iterator();
         final boolean javaScriptEnabled = getWebClient().isJavaScriptEnabled();
-        while (iterator.hasNext()) {
-            final HtmlMeta meta = (HtmlMeta) iterator.next();
+        for (final HtmlMeta meta : getMetaTags("refresh")) {
             if ((!javaScriptEnabled || getFirstParent(meta, HtmlNoScript.TAG_NAME) == null)) {
                 return meta.getContentAttribute();
             }
@@ -1140,8 +1136,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Deregister frames that are no longer in use.
      */
     public void deregisterFramesIfNeeded() {
-        for (final Iterator iter = getFrames().iterator(); iter.hasNext();) {
-            final WebWindow window = (WebWindow) iter.next();
+        for (final WebWindow window : getFrames()) {
             getWebClient().deregisterWebWindow(window);
             if (window.getEnclosedPage() instanceof HtmlPage) {
                 final HtmlPage page = (HtmlPage) window.getEnclosedPage();
@@ -1178,8 +1173,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @exception ElementNotFoundException If no frame exist in this page with the specified name.
      */
     public FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
-        final List frames = getFrames();
-        for (final Iterator iter = frames.iterator(); iter.hasNext();) {
+        for (final Iterator<WebWindow> iter = getFrames().iterator(); iter.hasNext();) {
             final FrameWindow frame = (FrameWindow) iter.next();
             if (frame.getName().equals(name)) {
                 return frame;

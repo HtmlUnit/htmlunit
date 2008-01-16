@@ -583,8 +583,7 @@ public class HtmlForm extends ClickableElement {
     public final void fakeCheckedRadioButton(
             final String name,
             final String value)
-        throws
-            ElementNotFoundException {
+        throws ElementNotFoundException {
 
         fakeSelectedRadioButton_ = new KeyValuePair(name, value);
     }

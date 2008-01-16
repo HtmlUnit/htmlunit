@@ -110,8 +110,8 @@ public class HtmlTable extends ClickableElement {
      * @return an immutable list containing all the HtmlTableRow objects
      * @see #getRowIterator
      */
-    public List getRows() {
-        final List result = new ArrayList();
+    public List<HtmlTableRow> getRows() {
+        final List<HtmlTableRow> result = new ArrayList<HtmlTableRow>();
         for (final RowIterator iterator = getRowIterator(); iterator.hasNext();) {
             result.add(iterator.next());
         }
@@ -337,7 +337,7 @@ public class HtmlTable extends ClickableElement {
      * an iterator that moves over all rows in this table. The iterator will also
      * enter into nested row group elements (header, footer and body)
      */
-    private class RowIterator implements Iterator {
+    private class RowIterator implements Iterator<HtmlTableRow> {
         private HtmlTableRow nextRow_;
         private TableRowGroup currentGroup_;
 
@@ -357,7 +357,7 @@ public class HtmlTable extends ClickableElement {
          * @return the next row from this iterator
          * @throws NoSuchElementException if no more rows are available
          */
-        public Object next() throws NoSuchElementException {
+        public HtmlTableRow next() throws NoSuchElementException {
             return nextRow();
         }
 

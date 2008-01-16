@@ -132,9 +132,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         if (isMultipleSelectEnabled()) {
             // Multiple selections possible.
             result = new ArrayList<HtmlOption>();
-            final DescendantElementsIterator iterator = new DescendantElementsIterator();
-            while (iterator.hasNext()) {
-                final HtmlElement element = iterator.nextElement();
+            for (final HtmlElement element : getAllHtmlChildElements()) {
                 if (element instanceof HtmlOption && ((HtmlOption) element).isSelected()) {
                     result.add((HtmlOption) element);
                 }
@@ -144,9 +142,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             // Only a single selection is possible.
             result = new ArrayList<HtmlOption>(1);
             HtmlOption lastSelected = null;
-            final DescendantElementsIterator iterator = new DescendantElementsIterator();
-            while (iterator.hasNext()) {
-                final HtmlElement element = iterator.nextElement();
+            for (final HtmlElement element : getAllHtmlChildElements()) {
                 if (element instanceof HtmlOption) {
                     final HtmlOption option = (HtmlOption) element;
                     if (option.isSelected()) {
@@ -487,7 +483,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
         final StringBuffer buffer = new StringBuffer();
         for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
-            final HtmlOption currentOption = (HtmlOption) i.next();
+            final HtmlOption currentOption = i.next();
             if (currentOption != null) {
                 buffer.append(currentOption.asText());
             }

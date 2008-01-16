@@ -43,7 +43,6 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -235,12 +234,10 @@ public class JavaScriptEngine implements Serializable {
 
         // once all prototypes have been build, it's possible to configure the chains
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Iterator<Map.Entry<String, Scriptable>> iter =
-                prototypesPerJSName.entrySet().iterator(); iter.hasNext();) {
-            final Map.Entry<String, Scriptable> entry = iter.next();
-            final String name = (String) entry.getKey();
+        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
+            final String name = entry.getKey();
             final ClassConfiguration config = jsConfig.getClassConfiguration(name);
-            final Scriptable prototype = (Scriptable) entry.getValue();
+            final Scriptable prototype = entry.getValue();
             if (!StringUtils.isEmpty(config.getExtendedClass())) {
                 final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
                 prototype.setPrototype(parentPrototype);
@@ -256,12 +253,11 @@ public class JavaScriptEngine implements Serializable {
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
         window.associateValue("custom_eval", jsCustomEval);
         
-        for (final Iterator<String> classnames = jsConfig.keySet().iterator(); classnames.hasNext();) {
-            final String jsClassName = (String) classnames.next();
+        for (final String jsClassName : jsConfig.keySet()) {
             final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
             final Method jsConstructor = config.getJsConstructor();
             if (jsConstructor != null) {
-                final Scriptable prototype = (Scriptable) prototypesPerJSName.get(jsClassName);
+                final Scriptable prototype = prototypesPerJSName.get(jsClassName);
                 if (prototype != null) {
                     final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
                     jsCtor.addAsConstructor(window, prototype);

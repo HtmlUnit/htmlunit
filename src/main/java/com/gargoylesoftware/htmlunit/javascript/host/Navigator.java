@@ -37,8 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Iterator;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -193,17 +191,14 @@ public final class Navigator extends SimpleScriptable {
         mimeTypes_.setParentScope(this);
         mimeTypes_.setPrototype(getPrototype(MimeTypeArray.class));
 
-        for (final Iterator iter = getBrowserVersion().getPlugins().iterator(); iter.hasNext();) {
-            final PluginConfiguration pluginConfig = (PluginConfiguration) iter.next();
+        for (final PluginConfiguration pluginConfig : getBrowserVersion().getPlugins()) {
             final Plugin plugin = new Plugin(pluginConfig.getName(), pluginConfig.getDescription(),
                 pluginConfig.getFilename());
             plugin.setParentScope(this);
             plugin.setPrototype(getPrototype(Plugin.class));
             plugins_.add(plugin);
 
-            for (final Iterator iterMimeTypes = pluginConfig.getMimeTypes().iterator(); iterMimeTypes.hasNext();) {
-                final PluginConfiguration.MimeType mimeTypeConfig
-                    = (PluginConfiguration.MimeType) iterMimeTypes.next();
+            for (final PluginConfiguration.MimeType mimeTypeConfig : pluginConfig.getMimeTypes()) {
                 final MimeType mimeType = new MimeType(mimeTypeConfig.getType(), mimeTypeConfig.getDescription(),
                     mimeTypeConfig.getSuffixes(), plugin);
                 mimeType.setParentScope(this);
