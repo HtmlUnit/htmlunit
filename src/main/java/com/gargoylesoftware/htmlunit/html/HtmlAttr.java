@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Map;
 
 /**
  * An attribute of an element. Attributes are stored in {@link
@@ -49,24 +48,11 @@ import java.util.Map;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
+public class HtmlAttr extends DomNamespaceNode {
 
     private static final long serialVersionUID = 4832218455328064213L;
 
     private String value_;
-
-    /**
-     * Instantiate a new attribute.
-     *
-     * @param htmlElement The parent element.
-     * @param mapEntry The wrapped Map.Entry.
-     * @deprecated Use constructor with explicit names.
-     */
-    public HtmlAttr(final HtmlElement htmlElement, final Map.Entry mapEntry) {
-        super(null, (String) mapEntry.getKey(), htmlElement.getPage());
-        value_ = (String) mapEntry.getValue();
-        setParentNode(htmlElement);
-    }
 
     /**
      * Instantiate a new attribute.
@@ -99,15 +85,7 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
      * {@inheritDoc}
      */
     public String getNodeValue() {
-        return (String) getHtmlValue();
-    }
-
-    /**
-     * {@inheritDoc}
-     * @deprecated The implements Map.Entry is deprecated. Use {@link #getName()} instead.
-     */
-    public Object getKey() {
-        return getName();
+        return getHtmlValue();
     }
 
     /**
@@ -119,29 +97,24 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
 
     /**
      * @return The value of the attribute.
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use {@link #getHtmlValue()} instead.
      */
-    public Object getValue() {
-        return getHtmlValue();
+    public String getValue() {
+        return value_;
     }
 
     /**
      * @return The value of wrapped map entry.
      */
-    public Object getHtmlValue() {
-        return value_;
+    public String getHtmlValue() {
+        return getValue();
     }
 
     /**
      * Set the value of the attribute.
      * @param value new value to be stored in this entry.
-     * @return old value corresponding to the entry.
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use {@link #setHtmlValue(Object)} instead.
      */
-    public Object setValue(final Object value) {
-        return setHtmlValue(value);
+    public void setValue(final String value) {
+        value_ = value;
     }
 
     /**
@@ -149,9 +122,9 @@ public class HtmlAttr extends DomNamespaceNode implements Map.Entry {
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      */
-    public Object setHtmlValue(final Object value) {
+    public String setHtmlValue(final String value) {
         final String oldValue = value_;
-        value_ = (String) value;
+        value_ = value;
         return oldValue;
     }
 }
