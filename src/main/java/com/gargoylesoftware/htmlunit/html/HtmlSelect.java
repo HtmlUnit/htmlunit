@@ -109,7 +109,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
         // Set a default selected option if necessary.
         if (getSelectedOptions().isEmpty() && size <= 1 && !isMultipleSelectEnabled()) {
-            final List options = getOptions();
+            final List<HtmlOption> options = getOptions();
             if (!options.isEmpty()) {
                 final HtmlOption first = (HtmlOption) options.get(0);
                 first.setSelectedInternal(true);
@@ -127,22 +127,22 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *
      * @return See above
      */
-    public List getSelectedOptions() {
-        List result;
+    public List<HtmlOption> getSelectedOptions() {
+        List<HtmlOption> result;
         if (isMultipleSelectEnabled()) {
             // Multiple selections possible.
-            result = new ArrayList();
+            result = new ArrayList<HtmlOption>();
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while (iterator.hasNext()) {
                 final HtmlElement element = iterator.nextElement();
                 if (element instanceof HtmlOption && ((HtmlOption) element).isSelected()) {
-                    result.add(element);
+                    result.add((HtmlOption) element);
                 }
             }
         }
         else {
             // Only a single selection is possible.
-            result = new ArrayList(1);
+            result = new ArrayList<HtmlOption>(1);
             HtmlOption lastSelected = null;
             final DescendantElementsIterator iterator = new DescendantElementsIterator();
             while (iterator.hasNext()) {
@@ -162,10 +162,11 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return a List containing all the options
+     * Return a List containing all the options.
      *
      * @return See above
      */
+    @SuppressWarnings("unchecked")
     public List<HtmlOption> getOptions() {
         final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
         return Collections.unmodifiableList(elementList);
@@ -174,17 +175,18 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     /**
      * Return the indexed option.
      *
-     * @param index The index
-     * @return The option specified by the index
+     * @param index The index.
+     * @return The option specified by the index.
      */
+    @SuppressWarnings("unchecked")
     public HtmlOption getOption(final int index) {
         final List<HtmlOption> elementList = (List<HtmlOption>) getHtmlElementsByTagName("option");
         return elementList.get(index);
     }
 
     /**
-     * Return the number of options
-     * @return The number of options
+     * Return the number of options.
+     * @return The number of options.
      */
     public int getOptionSize() {
         final List< ? extends HtmlElement> elementList = getHtmlElementsByTagName("option");
@@ -310,9 +312,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             selectedOption.setSelectedInternal(isSelected);
         }
         else {
-            final Iterator iterator = getOptions().iterator();
-            while (iterator.hasNext()) {
-                final HtmlOption option = (HtmlOption) iterator.next();
+            for (final HtmlOption option : getOptions()) {
                 option.setSelectedInternal(option == selectedOption && isSelected);
             }
         }
@@ -362,7 +362,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         final KeyValuePair[] pairs;
 
         if (ArrayUtils.isEmpty(fakeSelectedValues_)) {
-            final List selectedOptions = getSelectedOptions();
+            final List<HtmlOption> selectedOptions = getSelectedOptions();
             final int optionCount = selectedOptions.size();
 
             pairs = new KeyValuePair[optionCount];
@@ -373,7 +373,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
             }
         }
         else {
-            final List pairsList = new ArrayList();
+            final List<KeyValuePair> pairsList = new ArrayList<KeyValuePair>();
             for (int i = 0; i < fakeSelectedValues_.length; i++) {
                 if (fakeSelectedValues_[i].length() > 0) {
                     pairsList.add(new KeyValuePair(name, fakeSelectedValues_[i]));
@@ -396,9 +396,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * Return the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
-        final Iterator iterator = getOptions().iterator();
-        while (iterator.hasNext()) {
-            final HtmlOption option = (HtmlOption) iterator.next();
+        for (final HtmlOption option : getOptions()) {
             option.reset();
         }
     }
@@ -416,9 +414,9 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @see SubmittableElement#setDefaultValue(String)
      */
     public String getDefaultValue() {
-        final List options = getSelectedOptions();
+        final List<HtmlOption> options = getSelectedOptions();
         if (options.size() > 0) {
-            return ((HtmlOption) options.get(0)).getValueAttribute();
+            return options.get(0).getValueAttribute();
         }
         else {
             return "";
@@ -479,7 +477,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return The element as text.
      */
     public String asText() {
-        final List options;
+        final List<HtmlOption> options;
         if (isMultipleSelectEnabled()) {
             options = getOptions();
         }
@@ -488,7 +486,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
         }
 
         final StringBuffer buffer = new StringBuffer();
-        for (final Iterator i = options.iterator(); i.hasNext();) {
+        for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
             final HtmlOption currentOption = (HtmlOption) i.next();
             if (currentOption != null) {
                 buffer.append(currentOption.asText());

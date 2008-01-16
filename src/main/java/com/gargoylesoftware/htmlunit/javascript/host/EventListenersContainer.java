@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -55,11 +54,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 class EventListenersContainer {
     static class Handlers {
-        private final List capturingHandlers_ = new ArrayList();
-        private final List bubblingHandlers_ = new ArrayList();
+        private final List<Function> capturingHandlers_ = new ArrayList<Function>();
+        private final List<Function> bubblingHandlers_ = new ArrayList<Function>();
         private Object handler_;
 
-        List getHandlers(final boolean useCapture) {
+        List<Function> getHandlers(final boolean useCapture) {
             if (useCapture) {
                 return capturingHandlers_;
             }
@@ -69,7 +68,7 @@ class EventListenersContainer {
         }
     }
     
-    private final Map eventHandlers_ = new HashMap();
+    private final Map<String, Handlers> eventHandlers_ = new HashMap<String, Handlers>();
     private final SimpleScriptable jsNode_;
 
     EventListenersContainer(final SimpleScriptable jsNode) {
@@ -85,7 +84,7 @@ class EventListenersContainer {
      */
     public boolean addEventListener(final String type, final Function listener, final boolean useCapture)
     {
-        final List listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
+        final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
         if (listeners.contains(listener)) {
             getLog().debug(type + " listener already registered, skipping it (" + listener + ")");
             return false;
@@ -105,8 +104,8 @@ class EventListenersContainer {
         return handlers;
     }
 
-    private List getHandlers(final String eventType, final boolean useCapture) {
-        final Handlers handlers = (Handlers) eventHandlers_.get(eventType.toLowerCase());
+    private List<Function> getHandlers(final String eventType, final boolean useCapture) {
+        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase());
         if (handlers != null) {
             return handlers.getHandlers(useCapture);
         }
@@ -114,7 +113,7 @@ class EventListenersContainer {
     }
 
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
-        final List handlers = getHandlers(type, useCapture);
+        final List<Function> handlers = getHandlers(type, useCapture);
         if (handlers != null) {
             handlers.remove(listener);
         }
@@ -144,7 +143,7 @@ class EventListenersContainer {
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event,
             final Object[] args) {
 
-        final List handlers = getHandlers(event.jsxGet_type(), useCapture);
+        final List<Function> handlers = getHandlers(event.jsxGet_type(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
             event.setCurrentTarget(jsNode_);
 
@@ -152,9 +151,8 @@ class EventListenersContainer {
             final DomNode node = jsNode_.getDomNodeOrDie();
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
-            final List handlersToExecute = new ArrayList(handlers);
-            for (final Iterator iter = handlersToExecute.iterator(); iter.hasNext();) {
-                final Function listener = (Function) iter.next();
+            final List<Function> handlersToExecute = new ArrayList<Function>(handlers);
+            for (final Function listener : handlersToExecute) {
                 result = page.executeJavaScriptFunctionIfPossible(
                         listener, jsNode_, args, node);
                 if (event.isPropagationStopped()) {
