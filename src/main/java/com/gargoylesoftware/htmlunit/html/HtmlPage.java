@@ -1339,7 +1339,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param name the name value to search by
      * @return the HTML elements with the specified name attribute
      */
-    @SuppressWarnings("unchecked")
     public List<HtmlElement> getHtmlElementsByName(final String name) {
         final List<HtmlElement> list = (List<HtmlElement>) nameMap_.get(name);
         if (list != null) {
