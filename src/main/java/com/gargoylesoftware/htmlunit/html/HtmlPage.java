@@ -282,8 +282,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return the list of {@link HtmlAnchor} in this page.
      */
     public List<HtmlAnchor> getAnchors() {
-        return (List<HtmlAnchor>)
-            getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("a"));
+        return (List<HtmlAnchor>) getDocumentHtmlElement().getHtmlElementsByTagName("a");
     }
 
     /**
@@ -323,8 +322,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Return a list of all the forms in the page.
      * @return All the forms.
      */
-    public List getForms() {
-        return getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"form"}));
+    public List<HtmlForm> getForms() {
+        return (List<HtmlForm>) getDocumentHtmlElement().getHtmlElementsByTagName("form");
     }
 
     /**
@@ -398,8 +397,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return The resolved target to use for the element.
      */
     public String getResolvedTarget(final String elementTarget) {
-        final List baseElements =
-            getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("base"));
+        final List baseElements = getDocumentHtmlElement().getHtmlElementsByTagName("base");
         final String resolvedTarget;
         if (baseElements.isEmpty()) {
             resolvedTarget = elementTarget;
@@ -1153,14 +1151,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Return a list containing all the frames (from frame and iframe tags) in this page.
      * @return a list of {@link FrameWindow}
      */
-    public List<WebWindow> getFrames() {
-        final List<WebWindow> list = new ArrayList<WebWindow>();
+    public List<FrameWindow> getFrames() {
+        final List<FrameWindow> list = new ArrayList<FrameWindow>();
         final WebWindow enclosingWindow = getEnclosingWindow();
         for (final WebWindow window : getWebClient().getWebWindows()) {
             // quite strange but for a TopLevelWindow parent == self
             if (enclosingWindow == window.getParentWindow()
                     && enclosingWindow != window) {
-                list.add(window);
+                list.add((FrameWindow) window);
             }
         }
         return list;
@@ -1173,8 +1171,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @exception ElementNotFoundException If no frame exist in this page with the specified name.
      */
     public FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
-        for (final Iterator<WebWindow> iter = getFrames().iterator(); iter.hasNext();) {
-            final FrameWindow frame = (FrameWindow) iter.next();
+    	for (final FrameWindow frame : getFrames()) {
             if (frame.getName().equals(name)) {
                 return frame;
             }
@@ -1339,7 +1336,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             return Collections.unmodifiableList(list);
         }
         else {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
     }
 
@@ -1582,7 +1579,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
         final List<HtmlMeta> tags = (List<HtmlMeta>)
-            getDocumentHtmlElement().getHtmlElementsByTagNames(Collections.singletonList("meta"));
+            getDocumentHtmlElement().getHtmlElementsByTagName("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {
