@@ -1171,7 +1171,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @exception ElementNotFoundException If no frame exist in this page with the specified name.
      */
     public FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
-    	for (final FrameWindow frame : getFrames()) {
+        for (final FrameWindow frame : getFrames()) {
             if (frame.getName().equals(name)) {
                 return frame;
             }
