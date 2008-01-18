@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
@@ -154,13 +153,12 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @param headers a list of {@link NameValuePair}
      * @return the JS String
      */
-    static String nameValueListToJsMap(final List headers) {
+    static String nameValueListToJsMap(final List<NameValuePair> headers) {
         if (headers == null || headers.isEmpty()) {
             return "{}";
         }
         final StringBuffer buffer = new StringBuffer("{");
-        for (final Iterator iter = headers.iterator(); iter.hasNext();) {
-            final NameValuePair header = (NameValuePair) iter.next();
+        for (final NameValuePair header : headers) {
             buffer.append("'" + header.getName() + "': '" + header.getValue().replaceAll("'", "\\'") + "', ");
         }
         buffer.delete(buffer.length() - 2, buffer.length());

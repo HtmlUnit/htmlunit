@@ -42,6 +42,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
+
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
@@ -129,7 +131,7 @@ public class WebResponseWrapper implements WebResponse {
      * {@inheritDoc}
      * The default behavior of this method is to return getResponseHeaders() on the wrapped connection object.
      */
-    public List getResponseHeaders() {
+    public List<NameValuePair> getResponseHeaders() {
         return wrappedWebResponse_.getResponseHeaders();
     }
 

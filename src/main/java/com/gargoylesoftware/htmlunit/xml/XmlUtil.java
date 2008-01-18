@@ -160,7 +160,7 @@ public final class XmlUtil {
         if (source.getNodeType() == Node.TEXT_NODE) {
             return new DomText(page, source.getNodeValue());
         }
-        final Map attributes/* String, XmlAttr*/ = new HashMap();
+        final Map<String, XmlAttr> attributes = new HashMap<String, XmlAttr>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
             final Node attribute = nodeAttributes.item(i);

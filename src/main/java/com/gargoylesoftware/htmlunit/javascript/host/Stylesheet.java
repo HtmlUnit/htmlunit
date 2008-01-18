@@ -148,7 +148,7 @@ public class Stylesheet extends SimpleScriptable {
                         continue;
                     }
                     try {
-                        final List<Object> results = (List<Object>) page.getByXPath(xpath);
+                        final List< ? extends Object> results = page.getByXPath(xpath);
                         if (!results.contains(e)) {
                             continue;
                         }
