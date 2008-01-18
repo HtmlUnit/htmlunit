@@ -86,6 +86,7 @@ public class Location extends SimpleScriptable {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         if (hint == null || String.class.equals(hint)) {
             return jsxGet_href();

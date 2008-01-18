@@ -486,7 +486,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         
         for (final String classname : configuration.keySet()) {
             getLog().debug("Now testing for class " + classname);
-            final Class clazz = configuration.getClassObject(classname);
+            final Class< ? > clazz = configuration.getClassObject(classname);
             final Method[] methods = clazz.getMethods();
             String elementName;
             Method theMethod;
@@ -613,7 +613,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         // get a reference to the leaky map
         final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
         field.setAccessible(true);
-        final HashMap leakyMap = (HashMap) field.get(null);
+        final HashMap< ? , ? > leakyMap = (HashMap< ? , ? >) field.get(null);
 
         for (int i = 0; i < 3; i++) {
             final BrowserVersion browserVersion = new BrowserVersion("App", "Version", "User agent", "1.2", 1);

@@ -435,7 +435,7 @@ public class InputTest extends WebTestCase {
         final String[] expectedAlerts = {"changed"};
         assertEquals(expectedAlerts, collectedAlerts);
 
-        final List expectedParameters = Arrays.asList(new Object[] {
+        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[] {
             new KeyValuePair("changed", "foo"),
             new KeyValuePair("button1", "pushme")
         });

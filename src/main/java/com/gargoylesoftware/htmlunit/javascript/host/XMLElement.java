@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +45,7 @@ import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -109,10 +109,9 @@ public class XMLElement extends Node {
      * @return the attributes of this XML element.
      */
     public Object jsxGet_attributes() {
-        final Map attributes = ((XmlElement) getDomNodeOrDie()).getAttributes();
-        final List list = new ArrayList();
-        for (final Iterator values = attributes.values().iterator(); values.hasNext();) {
-            final XmlAttr attr = (XmlAttr) values.next();
+        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributes();
+        final List<ScriptableObject> list = new ArrayList<ScriptableObject>();
+        for (final XmlAttr attr : attributes.values()) {
             list.add(attr.getScriptObject());
         }
         return new NativeArray(list.toArray()) {

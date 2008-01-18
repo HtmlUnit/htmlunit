@@ -77,7 +77,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * @param staticType the static type of the object
      */
     public ScriptableWrapper(final Scriptable scope, final Object javaObject,
-            final Class staticType) {
+            final Class< ? > staticType) {
         javaObject_ = javaObject;
         setParentScope(scope);
 
@@ -212,6 +212,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      */
+    @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         if (hint == null || String.class == null) {
             return jsToString();

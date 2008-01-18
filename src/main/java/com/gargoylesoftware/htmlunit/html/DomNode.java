@@ -1062,7 +1062,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @throws JaxenException if the xpath expression can't be parsed/evaluated
      */
     @SuppressWarnings("unchecked")
-    public List< ? > getByXPath(final String xpathExpr) throws JaxenException {
+    public List< ? extends Object> getByXPath(final String xpathExpr) throws JaxenException {
         if (xpathExpr == null) {
             throw new NullPointerException("Null is not a valid xpath expression");
         }

@@ -1054,7 +1054,8 @@ public class FormTest extends WebTestCase {
             + "     <input type='submit'>\n"
             + "</body>\n"
             + "</html>";
-        createTestPageForRealBrowserIfNeeded(content, Collections.EMPTY_LIST);
+        final List<String> emptyList = Collections.emptyList();
+        createTestPageForRealBrowserIfNeeded(content, emptyList);
         loadPage(content);
     }
     

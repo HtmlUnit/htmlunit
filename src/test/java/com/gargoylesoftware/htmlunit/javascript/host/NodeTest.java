@@ -43,6 +43,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -134,7 +135,9 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body></html>";
-        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", emptyList);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -169,7 +172,9 @@ public class NodeTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
-        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
+
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", emptyList);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

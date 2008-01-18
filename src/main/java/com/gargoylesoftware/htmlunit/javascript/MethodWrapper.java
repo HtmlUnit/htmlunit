@@ -56,7 +56,7 @@ import org.mozilla.javascript.ScriptableObject;
 public class MethodWrapper extends ScriptableObject implements Function {
 
     private static final long serialVersionUID = 6106771000496895783L;
-    private final Class clazz_;
+    private final Class< ? > clazz_;
     private final Method method_;
     private final int[] jsTypeTags_;
 
@@ -66,7 +66,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
      * @param clazz the class declaring the method
      * @throws NoSuchMethodException if the method is no found
      */
-    MethodWrapper(final String methodName, final Class clazz) throws NoSuchMethodException {
+    MethodWrapper(final String methodName, final Class< ? > clazz) throws NoSuchMethodException {
         this(methodName, clazz, ArrayUtils.EMPTY_CLASS_ARRAY);
     }
 
@@ -77,7 +77,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
      * @param parameterTypes the types of the method's parameter
      * @throws NoSuchMethodException if the method is no found
      */
-    MethodWrapper(final String methodName, final Class clazz, final Class[] parameterTypes)
+    MethodWrapper(final String methodName, final Class< ? > clazz, final Class< ? >[] parameterTypes)
         throws NoSuchMethodException {
 
         clazz_ = clazz;

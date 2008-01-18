@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -76,7 +75,7 @@ public class XSLTProcessor extends SimpleScriptable {
     private Node style_;
     private Node input_;
     private Object output_;
-    private Map/*String,Object*/ parameters_ = new HashMap();
+    private Map<String, Object> parameters_ = new HashMap<String, Object>();
     
     /**
      * Javascript constructor.
@@ -132,8 +131,7 @@ public class XSLTProcessor extends SimpleScriptable {
             final DOMResult result = new DOMResult(containerElement);
  
             final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
-            for (final Iterator keys = parameters_.keySet().iterator(); keys.hasNext();) {
-                final String qualifiedName = (String) keys.next();
+            for (final String qualifiedName : parameters_.keySet()) {
                 transformer.setParameter(qualifiedName, parameters_.get(qualifiedName));
             }
             transformer.transform(xmlSource, result);

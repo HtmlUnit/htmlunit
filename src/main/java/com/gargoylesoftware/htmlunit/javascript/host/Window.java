@@ -105,7 +105,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Object event_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
-    private Map prototypes_ = new HashMap();
+    private Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes_ =
+        new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
     private final JavaScriptEngine scriptEngine_;
     private EventListenersContainer eventListenersContainer_;
 
@@ -131,7 +132,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param jsClass the class whose prototype is to be returned
      * @return the prototype object corresponding to the specified class inside the specified scope
      */
-    public Scriptable getPrototype(final Class jsClass) {
+    public Scriptable getPrototype(final Class< ? extends SimpleScriptable> jsClass) {
         return (Scriptable) prototypes_.get(jsClass);
     }
 
@@ -139,7 +140,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets the prototypes for HtmlUnit host classes
      * @param map a Map of ({@link Class}, {@link Scriptable})
      */
-    public void setPrototypes(final Map map) {
+    public void setPrototypes(final Map<Class< ? extends SimpleScriptable>, Scriptable> map) {
         prototypes_ = map;
     }
 

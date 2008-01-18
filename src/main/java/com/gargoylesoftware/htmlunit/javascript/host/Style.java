@@ -42,7 +42,6 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
@@ -101,7 +100,7 @@ public class Style extends SimpleScriptable implements Cloneable {
      * Local modifications maintained here rather than in the element when we are in
      * {@link WRITE_MODE_DO_NOT_UPDATE_ELEMENT} write mode.
      */
-    private Map localModifications_ = new HashMap();
+    private Map<String, String> localModifications_ = new HashMap<String, String>();
 
     /**
      * These are IE properties, this should be configured per browser.
@@ -127,10 +126,10 @@ public class Style extends SimpleScriptable implements Cloneable {
         "textUnderlinePosition", "top", "unicodeBidi", "visibility",
         "width", "wordSpacing", "wordWrap", "zoom" };
 
-    private static final Set STYLE_ALLOWED_PROPERTIES;
+    private static final Set<String> STYLE_ALLOWED_PROPERTIES;
 
     static {
-        final Set set = new HashSet();
+        final Set<String> set = new HashSet<String>();
         CollectionUtils.addAll(set, STYLE_PROPERTIES);
         STYLE_ALLOWED_PROPERTIES = Collections.unmodifiableSet(set);
     }
@@ -166,11 +165,10 @@ public class Style extends SimpleScriptable implements Cloneable {
         if (htmlElement.getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient()
                 .getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
-            for (final Iterator i = getStyleMap(true).entrySet().iterator(); i.hasNext();) {
-                final Map.Entry entry = (Map.Entry) i.next();
-                final String key = (String) entry.getKey();
+            for (final Map.Entry<String, String> entry : getStyleMap(true).entrySet()) {
+                final String key = entry.getKey();
                 if ("behavior".equals(key)) {
-                    final String value = (String) entry.getValue();
+                    final String value = entry.getValue();
                     try {
                         final Object[] url = URL_FORMAT.parse(value);
                         if (url.length > 0) {
@@ -263,13 +261,11 @@ public class Style extends SimpleScriptable implements Cloneable {
     protected void setStyleAttribute(final String name, final String newValue) {
         if (writeMode_ == WRITE_MODE_UPDATE_ELEMENT) {
 
-            final Map styleMap = getStyleMap(true);
+            final Map<String, String> styleMap = getStyleMap(true);
             styleMap.put(name, newValue);
 
             final StringBuffer buffer = new StringBuffer();
-            final Iterator iterator = styleMap.entrySet().iterator();
-            while (iterator.hasNext()) {
-                final Map.Entry entry = (Map.Entry) iterator.next();
+            for (final Map.Entry<String, String> entry : styleMap.entrySet()) {
                 buffer.append(" ");
                 buffer.append(entry.getKey());
                 buffer.append(": ");
@@ -295,8 +291,8 @@ public class Style extends SimpleScriptable implements Cloneable {
      *        if <tt>false</tt>, the keys are delimiter-separated (i.e. <tt>font-size</tt>).
      * @return a sorted map containing style elements, keyed on style element name
      */
-    private SortedMap getStyleMap(final boolean camelCase) {
-        final SortedMap styleMap = new TreeMap();
+    private SortedMap<String, String> getStyleMap(final boolean camelCase) {
+        final SortedMap<String, String> styleMap = new TreeMap<String, String>();
         final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
         final StringTokenizer tokenizer = new StringTokenizer(styleAttribute, ";");
         while (tokenizer.hasMoreTokens()) {
@@ -311,13 +307,12 @@ public class Style extends SimpleScriptable implements Cloneable {
                 styleMap.put(key, value);
             }
         }
-        for (final Iterator i = localModifications_.entrySet().iterator(); i.hasNext();) {
-            final Map.Entry entry = (Map.Entry) i.next();
-            String key = (String) entry.getKey();
+        for (final Map.Entry<String, String> entry : localModifications_.entrySet()) {
+            String key = entry.getKey();
             if (!camelCase) {
                 key = key.replaceAll("([A-Z])", "-$1").toLowerCase();
             }
-            final String value = (String) entry.getValue();
+            final String value = entry.getValue();
             styleMap.put(key, value);
         }
         return styleMap;

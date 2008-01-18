@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -84,7 +85,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -119,7 +121,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -154,7 +157,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -188,7 +192,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -220,7 +225,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -252,7 +258,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -284,7 +291,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Old Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -316,7 +324,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some New Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -350,7 +359,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<String>();

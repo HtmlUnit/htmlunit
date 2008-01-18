@@ -7,7 +7,7 @@
 
     <body>
         <release version="2.0-prerelease">
-            <action type="add" dev="asashour">
+            <action type="add" dev="asashour" id="1873562">
                 JavaScript: Add support for XPathResult.iterateNext() (FF only).
             </action>
             <action type="remove" dev="asashour">

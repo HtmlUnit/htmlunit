@@ -355,7 +355,7 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEventScope() throws Exception {
-        final List expectedAlerts = Collections.singletonList("frame1");
+        final List<String> expectedAlerts = Collections.singletonList("frame1");
         final String content
             = "<html><head></head>\n"
             + "<body>\n"

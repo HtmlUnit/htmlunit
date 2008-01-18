@@ -337,6 +337,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param hint A hint as to the format of the default value.  Ignored in this case.
      * @return The default value.
      */
+    @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         if (String.class.equals(hint) || hint == null) {
             if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {

@@ -77,7 +77,7 @@ public class StyleSheetList extends SimpleScriptable {
      * Cache the stylesheets parsed for each style/link node, but don't keep the garbage collector
      * from releasing the associated nodes if they are removed from the document.
      */
-    private WeakHashMap sheets_ = new WeakHashMap();
+    private WeakHashMap<DomNode, Stylesheet> sheets_ = new WeakHashMap<DomNode, Stylesheet>();
 
     /**
      * Rhino requires default constructors.

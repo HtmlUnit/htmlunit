@@ -67,7 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProcessor {
 
     private static final String CC_VARIABLE_PREFIX = "htmlunit_cc_variable_";
-    private final Set setVariables_ = new HashSet();
+    private final Set<String> setVariables_ = new HashSet<String>();
 
     /**
      * {@inheritDoc}

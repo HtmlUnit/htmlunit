@@ -175,7 +175,8 @@ public class JavaScriptEngine implements Serializable {
      */
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
-        final Map<Class< ? >, Scriptable> prototypes = new HashMap<Class< ? >, Scriptable>();
+        final Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes =
+            new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
         final Window window = new Window(this);
         final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
