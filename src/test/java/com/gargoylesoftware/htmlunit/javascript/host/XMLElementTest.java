@@ -277,7 +277,6 @@ public class XMLElementTest extends WebTestCase {
             + "  </control>\n"
             + "</responsexml>";
 
-        System.out.println(xml);
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient(browserVersion);
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
