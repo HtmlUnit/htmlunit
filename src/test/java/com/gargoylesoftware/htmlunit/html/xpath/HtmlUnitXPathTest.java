@@ -41,8 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Transformer;
 import org.jaxen.BaseXPath;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
@@ -115,6 +113,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * http://jira.codehaus.org/browse/JAXEN-55)
      * @throws Exception if test fails
      */
+    @SuppressWarnings("unchecked")
     public void testElementOrder() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -126,13 +125,11 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final List< ? > list = xpath.selectNodes(page);
 
         final String[] expected = {"html", "head", "title", "script", "body"};
-        final Transformer tagReader = new Transformer() {
-            public Object transform(final Object obj) {
-                return ((DomNode) obj).getNodeName();
-            }
-        };
-        CollectionUtils.transform(list, tagReader);
-        assertEquals(expected, list);
+        final List<String> actualNames = new ArrayList<String>();
+        for (final DomNode node : (List<DomNode>) list) {
+            actualNames.add(node.getNodeName());
+        }
+        assertEquals(expected, actualNames);
     }
 
     /**
@@ -176,6 +173,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * Tests xpath where results are attributes.
      * @throws Exception if test fails
      */
+    @SuppressWarnings("unchecked")
     public void testListAttributesResult() throws Exception {
         final String content
             = "<html><body>\n"
@@ -190,23 +188,20 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final List< ? > nameList = xpath.selectNodes(page);
         final List< ? > valueList = new ArrayList<Object>(nameList);
 
-        final String[] expectedName = {"src", "src", "src"};
-        final Transformer nameReader = new Transformer() {
-            public Object transform(final Object obj) {
-                return ((DomNode) obj).getNodeName();
-            }
-        };
-        CollectionUtils.transform(nameList, nameReader);
-        assertEquals(expectedName, nameList);
+        final String[] expectedNames = {"src", "src", "src"};
 
-        final String[] expectedValue = {"1.png", "2.png", "3.png"};
-        final Transformer valueReader = new Transformer() {
-            public Object transform(final Object obj) {
-                return ((DomNode) obj).getNodeValue();
-            }
-        };
-        CollectionUtils.transform(valueList, valueReader);
-        assertEquals(expectedValue, valueList);
+        final List<String> collectedNames = new ArrayList<String>();
+        for (final DomNode node : (List<DomNode>) nameList) {
+            collectedNames.add(node.getNodeName());
+        }
+        assertEquals(expectedNames, collectedNames);
+
+        final String[] expectedValues = {"1.png", "2.png", "3.png"};
+        final List<String> collectedValues = new ArrayList<String>();
+        for (final DomNode node : (List<DomNode>) valueList) {
+            collectedValues.add(node.getNodeValue());
+        }
+        assertEquals(expectedValues, collectedValues);
     }
 
     /**
