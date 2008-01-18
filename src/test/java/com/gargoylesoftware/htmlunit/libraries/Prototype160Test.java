@@ -212,9 +212,6 @@ public class Prototype160Test extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testString() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "string.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 40, 220, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 40, 220, 0, 0);

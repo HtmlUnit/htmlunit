@@ -279,10 +279,31 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testFlag_global() throws Exception {
+    public void testRegExp_exec() throws Exception {
         if (notYetImplemented()) {
             return;
         }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var re = new RegExp('(?:<s' + 'cript.*?>)(.*)<\\/script>');\n"
+            + "    var t = 'foo <scr' + 'ipt>boo();</' + 'script>bar';\n"
+            + "    var r = re.exec(t);\n"
+            + "    alert(r[1]);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"boo();"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testFlag_global() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var str = 'foo <script>boo();<'+'/script>bar';\n"

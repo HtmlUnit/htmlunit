@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -89,13 +91,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             else if (arg0 instanceof NativeRegExp) {
                 try {
                     final NativeRegExp regexp = (NativeRegExp) arg0;
-                    final String str = arg0.toString();
-                    final String regex = readNativeRegExpPattern(regexp);
-                    final String flagsStr = StringUtils.substringAfterLast(str, "/");
-                    final int flags = jsFlagsToPatternFlags(flagsStr);
-                    final Pattern pattern = Pattern.compile(regex, flags);
+                    final RegExpData reData = new RegExpData(regexp);
+                    final Pattern pattern = Pattern.compile(reData.getJavaPattern(), reData.getJavaFlags());
                     final Matcher matcher = pattern.matcher(thisString);
-                    if (flagsStr.indexOf('g') != -1) {
+                    if (reData.hasFlag('g')) {
                         return matcher.replaceAll(replacement);
                     }
                     else {
@@ -113,46 +112,43 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             }
             final Object arg0 = args[0];
             final String thisString = Context.toString(thisObj);
-            final String regex;
-            final int flags;
+            final RegExpData reData;
             if (arg0 instanceof NativeRegExp) {
-                regex = readNativeRegExpPattern((NativeRegExp) arg0);
-                flags = readNativeRegExpFlags((NativeRegExp) arg0);
+                reData = new RegExpData((NativeRegExp) arg0);
             }
             else {
-                regex = Context.toString(arg0);
-                flags = 0;
+                reData = new RegExpData(Context.toString(arg0));
             }
-            final Pattern pattern = Pattern.compile(regex, flags);
+            final Pattern pattern = Pattern.compile(reData.getJavaPattern(), reData.getJavaFlags());
             final Matcher matcher = pattern.matcher(thisString);
             if (!matcher.find()) {
                 return null;
             }
-            final Object[] groups = new Object[matcher.groupCount() + 1];
-            for (int i = 0; i <= matcher.groupCount(); ++i) {
-                groups[i] = matcher.group(i);
-                if (groups[i] == null) {
-                    groups[i] = Context.getUndefinedValue();
+            final int index = matcher.start(0);
+            final List<Object> groups = new ArrayList<Object>();
+            if (reData.hasFlag('g')) { // has flag g
+                groups.add(matcher.group(0));
+                while (matcher.find()) {
+                    groups.add(matcher.group(0));
                 }
             }
-            final Scriptable response = cx.newArray(scope, groups);
+            else {
+                for (int i = 0; i <= matcher.groupCount(); ++i) {
+                    Object group = matcher.group(i);
+                    if (group == null) {
+                        group = Context.getUndefinedValue();
+                    }
+                    groups.add(group);
+                }
+            }
+            final Scriptable response = cx.newArray(scope, groups.toArray());
             // the additional properties (cf ECMA script reference 15.10.6.2 13)
-            response.put("index", response, new Integer(matcher.start(0)));
+            response.put("index", response, new Integer(index));
             response.put("input", response, thisString);
             return response;
         }
         
         return wrappedAction(cx, scope, thisObj, args, actionType);
-    }
-    
-    private int readNativeRegExpFlags(final NativeRegExp nativeRegExp) {
-        final String str = nativeRegExp.toString(); // the form is /regex/flags
-        return jsFlagsToPatternFlags(str);
-    }
-
-    private String readNativeRegExpPattern(final NativeRegExp nativeRegExp) {
-        final String str = nativeRegExp.toString(); // the form is /regex/flags
-        return StringUtils.substringBeforeLast(str.substring(1), "/").replaceAll("\\[\\^\\\\\\d\\]", ".");
     }
     
     /**
@@ -170,22 +166,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         finally {
             ScriptRuntime.setRegExpProxy(cx, this);
         }
-    }
-
-    /**
-     * Convert JavaScript RegExp flags "img" to Java Pattern flags
-     * @param flagsStr the flags (a combination of i, m and g)
-     * @return the Java Pattern flags
-     */
-    private int jsFlagsToPatternFlags(final String flagsStr) {
-        int flags = 0;
-        if (flagsStr.indexOf('i') != -1) {
-            flags |= Pattern.CASE_INSENSITIVE;
-        }
-        if (flagsStr.indexOf('m') != -1) {
-            flags |= Pattern.MULTILINE;
-        }
-        return flags;
     }
 
     /**
@@ -226,4 +206,39 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         return LogFactory.getLog(getClass());
     }
 
+    private static class RegExpData {
+        private final String jsSource_;
+        private final String jsFlags_;
+        
+        RegExpData(final NativeRegExp re) {
+            final String str = re.toString(); // the form is /regex/flags
+            jsSource_ = StringUtils.substringBeforeLast(str.substring(1), "/");
+            jsFlags_ = StringUtils.substringAfterLast(str, "/");
+        }
+        public RegExpData(final String string) {
+            jsSource_ = string;
+            jsFlags_ = "";
+        }
+        /**
+         * Convert JavaScript RegExp flags "img" to Java Pattern flags
+         * @param flagsStr the flags (a combination of i, m and g)
+         * @return the Java Pattern flags
+         */
+        public int getJavaFlags() {
+            int flags = 0;
+            if (jsFlags_.contains("i")) {
+                flags |= Pattern.CASE_INSENSITIVE;
+            }
+            if (jsFlags_.contains("m")) {
+                flags |= Pattern.MULTILINE;
+            }
+            return flags;
+        }
+        public String getJavaPattern() {
+            return jsSource_.replaceAll("\\[\\^\\\\\\d\\]", ".");
+        }
+        boolean hasFlag(final char c) {
+            return jsFlags_.indexOf(c) != -1;
+        }
+    }
 }
