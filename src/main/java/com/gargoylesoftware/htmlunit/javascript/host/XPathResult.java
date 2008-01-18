@@ -192,6 +192,9 @@ public class XPathResult extends SimpleScriptable {
      * @return The next node.
      */
     public Node jsxFunction_iterateNext() {
+        if (resultType_ != UNORDERED_NODE_ITERATOR_TYPE && resultType_ != ORDERED_NODE_ITERATOR_TYPE) {
+            throw Context.reportRuntimeError("Can not get iterateNext for type: " + resultType_);
+        }
         if (iteratorIndex_ < result_.size()) {
             return (Node) ((DomNode) result_.get(iteratorIndex_++)).getScriptObject();
         }
