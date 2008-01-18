@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="remove" dev="asashour">
+                Remove deprecated HtmlSelect.fakeSelectedAttribute().
+            </action>
             <action type="add" dev="asashour" id="1873562">
                 JavaScript: Add support for XPathResult.iterateNext() (FF only).
             </action>

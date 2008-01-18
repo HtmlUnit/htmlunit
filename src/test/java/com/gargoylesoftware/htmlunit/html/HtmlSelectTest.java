@@ -42,7 +42,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -326,7 +325,6 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectByName("select1");
-        final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Change the value
         try {
@@ -336,22 +334,6 @@ public class HtmlSelectTest extends WebTestCase {
         catch (final IllegalArgumentException e) {
             // Expected path
         }
-
-        select.fakeSelectedAttribute("newOption");
-
-        final HtmlSelect select2 = form.getSelectByName("select2");
-        select2.fakeSelectedAttribute("fakedValue");
-
-        // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
-
-        final List<KeyValuePair> expectedParameters = new ArrayList<KeyValuePair>();
-        expectedParameters.add(new KeyValuePair("select1", "newOption"));
-        expectedParameters.add(new KeyValuePair("button", "foo"));
-
-        assertEquals("url", "http://www.gargoylesoftware.com/?select1=newOption&select2=fakedValue&button=foo",
-                secondPage.getWebResponse().getUrl());
-        assertNotNull(secondPage);
     }
 
     /**

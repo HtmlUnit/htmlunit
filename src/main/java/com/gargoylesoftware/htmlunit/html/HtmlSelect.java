@@ -43,8 +43,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.ArrayUtils;
-
 import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
@@ -69,9 +67,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "select";
-
-    /** @deprecated */
-    private String[] fakeSelectedValues_;
 
     /**
      * Create an instance
@@ -300,8 +295,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         final boolean triggerHandler  = (selectedOption.isSelected() != isSelected);
 
-        fakeSelectedValues_ = null;
-
         // caution the HtmlOption may have been created from js and therefore the select now need
         // to "know" that it is selected
         if (isMultipleSelectEnabled()) {
@@ -323,28 +316,6 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
     }
 
     /**
-     * Set the selected value to be something that was not originally contained in the document.
-     *
-     * @param optionValue The value of the new "selected" option
-     * @deprecated
-     */
-    public void fakeSelectedAttribute(final String optionValue) {
-        Assert.notNull("optionValue", optionValue);
-        fakeSelectedAttribute(new String[]{optionValue});
-    }
-
-    /**
-     * Set the selected values to be something that were not originally contained in the document.
-     *
-     * @param optionValues The values of the new "selected" options
-     * @deprecated
-     */
-    public void fakeSelectedAttribute(final String optionValues[]) {
-        Assert.notNull("optionValues", optionValues);
-        fakeSelectedValues_ = optionValues;
-    }
-
-    /**
      * Return an array of KeyValuePairs that are the values that will be sent
      * back to the server whenever the current form is submitted.<p>
      *
@@ -355,27 +326,15 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public KeyValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
-        final KeyValuePair[] pairs;
 
-        if (ArrayUtils.isEmpty(fakeSelectedValues_)) {
-            final List<HtmlOption> selectedOptions = getSelectedOptions();
-            final int optionCount = selectedOptions.size();
+        final List<HtmlOption> selectedOptions = getSelectedOptions();
+        final int optionCount = selectedOptions.size();
 
-            pairs = new KeyValuePair[optionCount];
+        final KeyValuePair[] pairs = new KeyValuePair[optionCount];
 
-            for (int i = 0; i < optionCount; i++) {
-                final HtmlOption option = (HtmlOption) selectedOptions.get(i);
-                pairs[i] = new KeyValuePair(name, option.getValueAttribute());
-            }
-        }
-        else {
-            final List<KeyValuePair> pairsList = new ArrayList<KeyValuePair>();
-            for (int i = 0; i < fakeSelectedValues_.length; i++) {
-                if (fakeSelectedValues_[i].length() > 0) {
-                    pairsList.add(new KeyValuePair(name, fakeSelectedValues_[i]));
-                }
-            }
-            pairs = (KeyValuePair[]) pairsList.toArray(new KeyValuePair[pairsList.size()]);
+        for (int i = 0; i < optionCount; i++) {
+            final HtmlOption option = (HtmlOption) selectedOptions.get(i);
+            pairs[i] = new KeyValuePair(name, option.getValueAttribute());
         }
         return pairs;
     }
@@ -385,7 +344,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * @return <code>false</code> if not
      */
     boolean isValidForSubmission() {
-        return getOptionSize() > 0 || (fakeSelectedValues_ != null && fakeSelectedValues_.length > 0);
+        return getOptionSize() > 0;
     }
 
     /**

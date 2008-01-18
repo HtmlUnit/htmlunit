@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -772,7 +773,8 @@ public class HtmlElementTest extends WebTestCase {
             + "<body id='myBody' onmousedown='mouseDownMe(event)'>\n"
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(browserVersion, content, new ArrayList());
+        final List<String> emptyList = Collections.emptyList();
+        final HtmlPage page = loadPage(browserVersion, content, emptyList);
         final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
         body.mouseDown();
         final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
