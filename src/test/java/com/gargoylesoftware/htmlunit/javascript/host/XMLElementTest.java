@@ -215,4 +215,78 @@ public class XMLElementTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetAttributeNode() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testGetAttributeNode(BrowserVersion.INTERNET_EXPLORER_7_0,
+                new String[] {"lbl_SettingName", "outerHTML", "Item"});
+        testGetAttributeNode(BrowserVersion.FIREFOX_2,
+                new String[] {"lbl_SettingName", "outerHTML", "undefined"});
+    }
+    
+    private void testGetAttributeNode(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    parseXML(doc);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "  function parseXML(xml) {\n"
+            + "    if (xml.documentElement.hasChildNodes()) {\n"
+            + "      for (var i = 0; i < xml.documentElement.childNodes.length; i++) {\n"
+            + "        var elem = xml.documentElement.childNodes.item( i );\n"
+            + "        if (elem.nodeName == 'control') {\n"
+            + "          var target = elem.getAttributeNode('id').value;\n"
+            + "          if(document.all(target) != null) {\n"
+            + "            for (var j = 0; j < elem.childNodes.length; j++) {\n"
+            + "              var node = elem.childNodes.item(j);\n"
+            + "              if (node.nodeName == 'tag') {\n"
+            + "                var type = node.getAttributeNode('type').value;\n"
+            + "                alert(target);\n"
+            + "                alert(type);\n"
+            + "                alert(node.text);\n"
+            + "                eval('document.all(\"' + target + '\").' + type + '=\"' + node.text + '\"');\n"
+            + "              }\n"
+            + "            }\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='lbl_SettingName'/>\n"
+            + "</body></html>";
+        
+        final String xml
+            = "<responsexml>\n"
+            + "  <control id='lbl_SettingName'>\n"
+            + "    <tag type='outerHTML'><span id='lbl_SettingName' class='lbl-white-001'>Item</span></tag>\n"
+            + "  </control>\n"
+            + "</responsexml>";
+
+        System.out.println(xml);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = new WebClient(browserVersion);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
