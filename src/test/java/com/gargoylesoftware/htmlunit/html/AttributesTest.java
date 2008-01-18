@@ -63,7 +63,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  */
 public class AttributesTest extends WebTestCase {
 
-    private final Class classUnderTest_;
+    private final Class< ? > classUnderTest_;
     private final Method method_;
     private final HtmlPage page_;
     private final String attributeName_;
@@ -114,7 +114,7 @@ public class AttributesTest extends WebTestCase {
             "HtmlTitle", "HtmlUnorderedList"
         };
         for (int i = 0; i < classesToTest.length; i++) {
-            final Class clazz = Class.forName(
+            final Class< ? > clazz = Class.forName(
                 "com.gargoylesoftware.htmlunit.html." + classesToTest[i]);
             addTestsForClass(clazz, page, suite);
         }
@@ -131,7 +131,7 @@ public class AttributesTest extends WebTestCase {
      * @throws Exception If the tests cannot be created.
      */
     private static void addTestsForClass(
-            final Class clazz,
+            final Class< ? > clazz,
             final HtmlPage page,
             final TestSuite suite)
         throws
@@ -182,7 +182,7 @@ public class AttributesTest extends WebTestCase {
      */
     public AttributesTest(
             final String attributeName,
-            final Class classUnderTest,
+            final Class< ? > classUnderTest,
             final Method method,
             final HtmlPage page) {
 
@@ -199,7 +199,7 @@ public class AttributesTest extends WebTestCase {
      * @param method The getter method for the attribute.
      * @return The new name.
      */
-    private static String createTestName(final Class clazz, final Method method) {
+    private static String createTestName(final Class< ? > clazz, final Method method) {
         String className = clazz.getName();
         final int index = className.lastIndexOf('.');
         className = className.substring(index + 1);

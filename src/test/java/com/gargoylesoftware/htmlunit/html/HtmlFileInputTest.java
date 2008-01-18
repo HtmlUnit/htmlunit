@@ -44,9 +44,10 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -224,7 +225,7 @@ public class HtmlFileInputTest extends WebTestCase {
         assertTrue(file.exists());
         
         
-        final Map servlets = new HashMap();
+        final Map<Class< ? extends Servlet>, String> servlets = new HashMap<Class< ? extends Servlet>, String>();
         servlets.put(Upload2Servlet.class, "/upload2");
 
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
@@ -250,7 +251,7 @@ public class HtmlFileInputTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     public void testUploadFileWithNonASCIIName() throws Exception {
-        final Map servlets = new HashMap();
+        final Map<Class< ? extends Servlet>, String> servlets = new HashMap<Class< ? extends Servlet>, String>();
         servlets.put(Upload1Servlet.class, "/upload1");
         servlets.put(Upload2Servlet.class, "/upload2");
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
@@ -321,6 +322,7 @@ public class HtmlFileInputTest extends WebTestCase {
         /**
          * {@inheritDoc}
          */
+        @SuppressWarnings("unchecked")
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding("UTF-8");
@@ -329,8 +331,7 @@ public class HtmlFileInputTest extends WebTestCase {
             if (ServletFileUpload.isMultipartContent(request)) {
                 try {
                     final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                    for (final Iterator iterator = upload.parseRequest(request).iterator(); iterator.hasNext();) {
-                        final FileItem item = (FileItem) iterator.next();
+                    for (final FileItem item : (List<FileItem>) upload.parseRequest(request)) {
                         if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
                             for (int i = 0; i < path.length(); i++) {

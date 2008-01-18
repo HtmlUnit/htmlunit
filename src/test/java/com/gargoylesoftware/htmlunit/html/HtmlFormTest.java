@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -724,15 +723,13 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final List<HtmlInput> allInputsByValue = form.getInputsByValue("foo");
-        final ListIterator iterator = allInputsByValue.listIterator();
-        while (iterator.hasNext()) {
-            final HtmlInput input = (HtmlInput) iterator.next();
-            iterator.set(input.getNameAttribute());
+        final List<String> actualInputs = new ArrayList<String>();
+        for (final HtmlInput input : form.getInputsByValue("foo")) {
+            actualInputs.add(input.getNameAttribute());
         }
 
         final String[] expectedInputs = {"textfield", "button1", "button2"};
-        assertEquals("Get all", expectedInputs, allInputsByValue);
+        assertEquals("Get all", expectedInputs, actualInputs);
         assertEquals(Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
 
         assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());

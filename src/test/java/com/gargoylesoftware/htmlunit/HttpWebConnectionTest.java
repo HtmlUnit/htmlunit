@@ -346,7 +346,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * @throws Exception If the test fails.
      */
     public static Server startWebServer(final String resouceBase, final String[] classpath,
-            final Map<Class<Servlet>, String> servlets)
+            final Map<Class< ? extends Servlet>, String> servlets)
         throws Exception {
         final Server server = new Server(PORT);
 
@@ -354,7 +354,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
         
-        for (final Class<Servlet> servlet : servlets.keySet()) {
+        for (final Class< ? extends Servlet> servlet : servlets.keySet()) {
             final String pathSpec = servlets.get(servlet);
             context.addServlet(servlet, pathSpec);
             

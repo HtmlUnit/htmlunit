@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -71,7 +72,8 @@ public class HtmlAttrTest extends WebTestCase {
     static final HtmlElement HTML_ELEMENT;
 
     static {
-        HTML_ELEMENT = new HtmlElement(null, "dummy", null, Collections.EMPTY_MAP) {
+        final Map<String, HtmlAttr> emptyMap = Collections.emptyMap();
+        HTML_ELEMENT = new HtmlElement(null, "dummy", null, emptyMap) {
             private static final long serialVersionUID = -3099722791571459332L;
 
             public HtmlPage getPage() {

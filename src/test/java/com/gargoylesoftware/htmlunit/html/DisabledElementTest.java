@@ -120,7 +120,7 @@ public class DisabledElementTest extends WebTestCase {
     public DisabledElementTest(final String testName, final String elementHtml) {
         super(testName);
         final String htmlContent = "<html><body><form id='form1'>{0}</form></body></html>";
-        htmlContent_ = MessageFormat.format(htmlContent, new String[]{elementHtml});
+        htmlContent_ = MessageFormat.format(htmlContent, new Object[]{elementHtml});
     }
 
     /**
@@ -163,7 +163,7 @@ public class DisabledElementTest extends WebTestCase {
     private void executeDisabledTest(final String disabledAttribute, final boolean expectedIsDisabled)
         throws Exception {
 
-        final String htmlContent = MessageFormat.format(htmlContent_, new String[]{disabledAttribute});
+        final String htmlContent = MessageFormat.format(htmlContent_, new Object[]{disabledAttribute});
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         
