@@ -279,7 +279,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testModifiers() throws Exception {
+    public void testFlag_global() throws Exception {
         if (notYetImplemented()) {
             return;
         }

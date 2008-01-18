@@ -207,7 +207,7 @@ public class Prototype160Test extends WebTestCase {
 
     /**
      * Depends on {@link SimpleScriptableTest#testStringWithExclamationMark()}
-     *         and {@link HtmlUnitRegExpProxyTest#testModifiers()}.
+     *         and {@link HtmlUnitRegExpProxyTest#testFlag_global()}.
      *
      * @throws Exception If test fails.
      */
