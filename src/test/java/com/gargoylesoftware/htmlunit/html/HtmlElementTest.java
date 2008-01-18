@@ -38,10 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -529,80 +526,6 @@ public class HtmlElementTest extends WebTestCase {
             HtmlElement.ATTRIBUTE_NOT_DEFINED != HtmlElement.ATTRIBUTE_VALUE_EMPTY);
     }
 
-    /**
-     * @deprecated
-     */
-    public void testEmtpyMapEntryWrappingIterator() {
-        final Map attributsMap = HtmlElement.createAttributeMap(0);
-        final HtmlElement.MapEntryWrappingIterator it =
-            new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
-        assertFalse(it.hasNext());
-        try {
-            it.next();
-            fail("Travel empty iterator");
-        }
-        catch (final NoSuchElementException nsee) {
-            // nothing, it's normal
-        }
-    }
-
-    /**
-     * @deprecated
-     */
-    public void testMapEntryWrappingIterator() {
-        final Map attributsMap = HtmlElement.createAttributeMap(1);
-        HtmlElement.addAttributeToMap(null, attributsMap, null, "key", "value");
-        final HtmlElement.MapEntryWrappingIterator it =
-            new HtmlElement.MapEntryWrappingIterator(attributsMap.entrySet().iterator(), HtmlAttrTest.HTML_ELEMENT);
-
-        assertTrue(it.hasNext());
-        final HtmlAttr me = (HtmlAttr) it.next();
-        assertEquals("key", me.getName());
-        assertEquals("value", me.getHtmlValue());
-        assertInstanceOf(me, HtmlAttr.class);
-
-        assertFalse(it.hasNext());
-        try {
-            it.next();
-            fail("Travel empty iterator");
-        }
-        catch (final NoSuchElementException nsee) {
-            // nothing, it's normal
-        }
-    }
-
-    /**
-     * @deprecated
-     */
-    public void testMapEntryWrappingIteratorDelegatesRemove() {
-        final boolean removed[] = {false};
-
-        final Iterator mockIterator = new Iterator() {
-            public boolean hasNext() {
-                return false;
-            }
-
-            public Object next() {
-                return null;
-            }
-
-            public void remove() {
-                removed[0] = true;
-            }
-        };
-
-        final HtmlElement.MapEntryWrappingIterator it =
-            new HtmlElement.MapEntryWrappingIterator(mockIterator, HtmlAttrTest.HTML_ELEMENT);
-
-        assertFalse(removed[0]);
-        it.remove();
-        assertTrue(removed[0]);
-
-        // just for clover coverage
-        assertFalse(mockIterator.hasNext());
-        assertNull(mockIterator.next());
-    }
-    
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
         private final List<String> collectedValues_ = new ArrayList<String>();
         public void attributeAdded(final HtmlAttributeChangeEvent event) {

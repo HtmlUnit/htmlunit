@@ -1020,53 +1020,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Converts an iteration of plain {@link java.util.Map.Entry} into an iteration of {@link HtmlAttr}.
-     * @deprecated This class is no longer used since attributes are now represented by HtmlAttr.
-     * @author Denis N. Antonioli
-     */
-    public static class MapEntryWrappingIterator implements Iterator {
-        /**
-         * The original Iterator on the attribute map.
-         */
-        private final Iterator baseIter_;
-
-        /**
-         * Wraps a new iterator around an iterator of attributes.
-         *
-         * @param iterator An iterator of Map.Entry.
-         * @param htmlElement the Parent of all the attributes.
-         */
-        public MapEntryWrappingIterator(final Iterator iterator, final HtmlElement htmlElement) {
-            baseIter_ = iterator;
-        }
-
-        /**
-         * Delegates to wrapped Iterator.
-         *
-         * @return true if the iterator has more elements.
-         */
-        public boolean hasNext() {
-            return baseIter_.hasNext();
-        }
-
-        /**
-         * Wraps the next entry into a new HtmlAttr.
-         *
-         * @return Next entry.
-         */
-        public Object next() {
-            return ((Map.Entry) baseIter_.next()).getValue();
-        }
-
-        /**
-         * Delegates to wrapped Iterator.
-         */
-        public void remove() {
-            baseIter_.remove();
-        }
-    }
-
-    /**
      * Create an attribute map as needed by HtmlElement.  This is just used by the element factories.
      * @param attributeCount the initial number of attributes to be added to the map.
      * @return the attribute map.
