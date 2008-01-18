@@ -213,9 +213,9 @@ public class SimpleScriptable extends ScriptableObject {
 
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
-        Class javaScriptClass = null;
-        for (Class c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
-            javaScriptClass = (Class) JavaScriptConfiguration.getHtmlJavaScriptMapping().get(c);
+        Class< ? extends SimpleScriptable> javaScriptClass = null;
+        for (Class< ? > c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
+            javaScriptClass = JavaScriptConfiguration.getHtmlJavaScriptMapping().get(c);
         }
 
         final SimpleScriptable scriptable;
@@ -255,7 +255,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param javaScriptClass the host class
      * @return the prototype
      */
-    protected Scriptable getPrototype(final Class javaScriptClass) {
+    protected Scriptable getPrototype(final Class< ? extends SimpleScriptable> javaScriptClass) {
         return getWindow().getPrototype(javaScriptClass);
     }
 

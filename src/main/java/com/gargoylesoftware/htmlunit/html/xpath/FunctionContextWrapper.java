@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.Assert;
  */
 public class FunctionContextWrapper implements FunctionContext {
     private final FunctionContext wrappedContext_;
-    private final Map localFunctions_ = new HashMap();
+    private final Map<String, Function> localFunctions_ = new HashMap<String, Function>();
 
     /**
      * Wraps an existing context

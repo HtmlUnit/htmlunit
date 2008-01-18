@@ -38,8 +38,10 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -62,9 +64,10 @@ public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testConstructorWitWebResponse() throws Exception {
+        final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData webResponseData = new WebResponseData(
                 ArrayUtils.EMPTY_BYTE_ARRAY, HttpStatus.SC_NOT_FOUND, "not found",
-                Collections.EMPTY_LIST);
+                emptyList);
         final WebResponse webResponse = new WebResponseImpl(webResponseData, URL_FIRST, SubmitMethod.GET, 10);
         final FailingHttpStatusCodeException e = new FailingHttpStatusCodeException(webResponse);
 

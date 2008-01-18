@@ -83,9 +83,9 @@ public final class InputElementFactory implements IElementFactory {
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
 
-        Map attributeMap = DefaultElementFactory.setAttributes(page, attributes);
+        Map<String, HtmlAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
         if (attributeMap == null) {
-            attributeMap = new HashMap();
+            attributeMap = new HashMap<String, HtmlAttr>();
         }
     
         String type = null;

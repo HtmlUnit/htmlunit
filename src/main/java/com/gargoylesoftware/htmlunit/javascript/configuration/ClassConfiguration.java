@@ -44,6 +44,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+
 /**
  * A container for all the javascript configuration information.
  *
@@ -65,7 +67,7 @@ public final class ClassConfiguration {
      * The fully qualified name of the class that implements this class.
      */
     private final String className_;
-    private final Class< ? > linkedClass_;
+    private final Class< ? extends SimpleScriptable> linkedClass_;
     /**
      * The constructor method in the {@link #linkedClass_}
      */
@@ -84,12 +86,13 @@ public final class ClassConfiguration {
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - If the implementing class is not found
      */
+    @SuppressWarnings("unchecked")
     public ClassConfiguration(final String classname, final String implementingClass, final String jsConstructor,
         final String extendedClass, final String htmlClass, final boolean jsObject)
         throws ClassNotFoundException {
         className_ = classname;
         extendedClass_ = extendedClass;
-        linkedClass_ = Class.forName(implementingClass);
+        linkedClass_ = (Class< ? extends SimpleScriptable>) Class.forName(implementingClass);
         if (jsConstructor != null && jsConstructor.length() != 0) {
             Method foundCtor = null;
             final Method[] methods = linkedClass_.getMethods();
@@ -344,7 +347,7 @@ public final class ClassConfiguration {
      * Gets the class of the Javascript host object
      * @return Returns the linkedClass.
      */
-    public Class< ? > getLinkedClass() {
+    public Class< ? extends SimpleScriptable> getLinkedClass() {
         return linkedClass_;
     }
 

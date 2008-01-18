@@ -59,6 +59,7 @@ public class LowerCaseFunction implements Function {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     public Object call(final Context context, final List arguments)
         throws FunctionCallException {
 

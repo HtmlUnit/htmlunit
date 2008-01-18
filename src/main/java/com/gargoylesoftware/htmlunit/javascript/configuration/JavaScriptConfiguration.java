@@ -61,6 +61,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 
 /**
@@ -87,7 +89,7 @@ public final class JavaScriptConfiguration {
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
         new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
-    private static Map<Class < ? >, Class < ? >> HtmlJavaScriptMap_;
+    private static Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> HtmlJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
     private final BrowserVersion browser_;
@@ -696,20 +698,24 @@ public final class JavaScriptConfiguration {
      * are the javascript class names (ie "Anchor").
      * @return the mappings
      */
-    public static synchronized Map<Class < ? >, Class < ? >> getHtmlJavaScriptMapping() {
+    @SuppressWarnings("unchecked")
+    public static synchronized Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>>
+    getHtmlJavaScriptMapping() {
         if (HtmlJavaScriptMap_ != null) {
             return HtmlJavaScriptMap_;
         }
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
-        final Map<Class < ? >, Class < ? >> map = new HashMap<Class < ? >, Class < ? >>();
+        final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
+            new HashMap<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>>();
 
         for (String jsClassname : configuration.keySet()) {
             ClassConfiguration classConfig = configuration.getClassConfiguration(jsClassname);
             final String htmlClassname = classConfig.getHtmlClassname();
             if (htmlClassname != null) {
                 try {
-                    final Class htmlClass = Class.forName(htmlClassname);
+                    final Class< ? extends HtmlElement> htmlClass =
+                        (Class< ? extends HtmlElement>) Class.forName(htmlClassname);
                     // preload and validate that the class exists
                     getLog().debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
                     while (!classConfig.isJsObject()) {

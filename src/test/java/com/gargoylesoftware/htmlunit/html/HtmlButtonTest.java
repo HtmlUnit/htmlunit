@@ -269,7 +269,7 @@ public class HtmlButtonTest extends WebTestCase {
             expectedSecondPageTitle = "Second";
         }
         else {
-            expectedParameters = Collections.EMPTY_LIST;
+            expectedParameters = Collections.emptyList();
             expectedSecondPageTitle = "First";
         }
         assertEquals(expectedParameters, webConnection.getLastParameters());

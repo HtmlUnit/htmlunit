@@ -86,7 +86,7 @@ public class HtmlForm extends ClickableElement {
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "form";
 
-    private static final Collection SUBMITTABLE_ELEMENT_NAMES =
+    private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES =
         Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
 
     /**
@@ -348,8 +348,9 @@ public class HtmlForm extends ClickableElement {
      * @param name The name of the input
      * @return A list of HtmlInputs
      */
-    public List getInputsByName(final String name) {
-        return getHtmlElementsByAttribute("input", "name", name);
+    @SuppressWarnings("unchecked")
+    public List<HtmlInput> getInputsByName(final String name) {
+        return (List<HtmlInput>) getHtmlElementsByAttribute("input", "name", name);
     }
 
     /**
@@ -360,7 +361,7 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException If no inputs could be found with the specified name.
      */
     public final HtmlInput getInputByName(final String name) throws ElementNotFoundException {
-        final List inputs = getHtmlElementsByAttribute("input", "name", name);
+        final List< ? extends HtmlElement> inputs = getHtmlElementsByAttribute("input", "name", name);
         if (inputs.size() == 0) {
             throw new ElementNotFoundException("input", "name", name);
         }
@@ -404,8 +405,9 @@ public class HtmlForm extends ClickableElement {
      * @param name The name
      * @return See above
      */
-    public List getSelectsByName(final String name) {
-        return getHtmlElementsByAttribute("select", "name", name);
+    @SuppressWarnings("unchecked")
+    public List<HtmlSelect> getSelectsByName(final String name) {
+        return (List<HtmlSelect>) getHtmlElementsByAttribute("select", "name", name);
     }
 
     /**
@@ -415,12 +417,12 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException If the select cannot be found.
      */
     public HtmlSelect getSelectByName(final String name) throws ElementNotFoundException {
-        final List list = getSelectsByName(name);
+        final List<HtmlSelect> list = getSelectsByName(name);
         if (list.isEmpty()) {
             throw new ElementNotFoundException("select", "name", name);
         }
         else {
-            return (HtmlSelect) list.get(0);
+            return list.get(0);
         }
     }
 
@@ -431,9 +433,9 @@ public class HtmlForm extends ClickableElement {
      * @return See above
      * @exception ElementNotFoundException If no matching buttons were found
      */
-    public List getButtonsByName(final String name)
-        throws ElementNotFoundException {
-        return getHtmlElementsByAttribute("button", "name", name);
+    @SuppressWarnings("unchecked")
+    public List<HtmlButton> getButtonsByName(final String name) throws ElementNotFoundException {
+        return (List<HtmlButton>) getHtmlElementsByAttribute("button", "name", name);
     }
 
     /**
@@ -443,12 +445,12 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException If the button cannot be found.
      */
     public HtmlButton getButtonByName(final String name) throws ElementNotFoundException {
-        final List list = getButtonsByName(name);
+        final List<HtmlButton> list = getButtonsByName(name);
         if (list.isEmpty()) {
             throw new ElementNotFoundException("button", "name", name);
         }
         else {
-            return (HtmlButton) list.get(0);
+            return list.get(0);
         }
     }
     
@@ -458,8 +460,9 @@ public class HtmlForm extends ClickableElement {
      * @param name The name
      * @return See above
      */
-    public List getTextAreasByName(final String name) {
-        return getHtmlElementsByAttribute("textarea", "name", name);
+    @SuppressWarnings("unchecked")
+    public List<HtmlTextArea> getTextAreasByName(final String name) {
+        return (List<HtmlTextArea>) getHtmlElementsByAttribute("textarea", "name", name);
     }
 
     /**
@@ -469,7 +472,7 @@ public class HtmlForm extends ClickableElement {
      * @throws ElementNotFoundException If the textarea cannot be found.
      */
     public HtmlTextArea getTextAreaByName(final String name) throws ElementNotFoundException {
-        final List list = getTextAreasByName(name);
+        final List<HtmlTextArea> list = getTextAreasByName(name);
         if (list.isEmpty()) {
             throw new ElementNotFoundException("textarea", "name", name);
         }
@@ -547,6 +550,7 @@ public class HtmlForm extends ClickableElement {
      *
      * @param radioButtonInput The radio Button
      */
+    @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             if (!isAncestorOf(radioButtonInput)) {
@@ -798,7 +802,8 @@ public class HtmlForm extends ClickableElement {
      * @param value The value
      * @return all the inputs with the specified value.
      */
-    public List getInputsByValue(final String value) {
-        return getHtmlElementsByAttribute("input", "value", value);
+    @SuppressWarnings("unchecked")
+    public List<HtmlInput> getInputsByValue(final String value) {
+        return (List<HtmlInput>) getHtmlElementsByAttribute("input", "value", value);
     }
 }

@@ -790,7 +790,8 @@ public abstract class HtmlElement extends DomElement {
         Assert.notNull("attributeName", attributeName);
         Assert.notNull("attributeValue", attributeValue);
 
-        final List<HtmlElement> list = getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
+        final List< ? extends HtmlElement> list =
+            getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
         final int listSize = list.size();
         if (listSize == 0) {
             throw new ElementNotFoundException(elementName, attributeName, attributeValue);
@@ -848,7 +849,7 @@ public abstract class HtmlElement extends DomElement {
      * @param attributeValue The value of the attribute
      * @return A list of HtmlElements
      */
-    public final List<HtmlElement> getHtmlElementsByAttribute(
+    public final List< ? extends HtmlElement> getHtmlElementsByAttribute(
             final String elementName,
             final String attributeName,
             final String attributeValue) {

@@ -724,7 +724,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final List allInputsByValue = form.getInputsByValue("foo");
+        final List<HtmlInput> allInputsByValue = form.getInputsByValue("foo");
         final ListIterator iterator = allInputsByValue.listIterator();
         while (iterator.hasNext()) {
             final HtmlInput input = (HtmlInput) iterator.next();

@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.html.xpath;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.jaxen.DefaultNavigator;
 import org.jaxen.JaxenException;
@@ -160,13 +161,13 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the attribute axis.
      * @return A possibly-empty iterator (not null).
      */
-    @SuppressWarnings("unchecked")
     public Iterator<HtmlAttr> getAttributeAxisIterator(final Object contextNode) {
         if (contextNode instanceof HtmlElement) {
             return ((HtmlElement) contextNode).getAttributes().iterator();
         }
         else {
-            return Collections.EMPTY_LIST.iterator();
+            final List<HtmlAttr> emptyList = Collections.emptyList();
+            return emptyList.iterator();
         }
     }
 

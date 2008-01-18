@@ -248,6 +248,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * needs to be performed each time again
      * @return the list of {@link HtmlElement} contained in this collection
      */
+    @SuppressWarnings("unchecked")
     private List<Object> getElements() {
         if (cachedElements_ == null) {
             try {

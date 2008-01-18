@@ -44,6 +44,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
@@ -107,7 +108,7 @@ public class HtmlAnchorTest extends WebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) anchor.click();
 
-        final List expectedParameters = Collections.EMPTY_LIST;
+        final List<KeyValuePair> expectedParameters = Collections.emptyList();
         final MockWebConnection webConnection = getMockConnection(secondPage);
 
         assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());

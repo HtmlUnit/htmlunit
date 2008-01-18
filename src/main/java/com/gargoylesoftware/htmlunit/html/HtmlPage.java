@@ -190,9 +190,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             return originalCharset_;
         }
 
-        final List list = getMetaTags("content-type");
-        for (int i = 0; i < list.size(); i++) {
-            final HtmlMeta meta = (HtmlMeta) list.get(i);
+        for (final HtmlMeta meta : getMetaTags("content-type")) {
             final String contents = meta.getContentAttribute();
             final int pos = contents.toLowerCase().indexOf("charset=");
             if (pos >= 0) {
@@ -281,6 +279,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Return a list of all anchors contained in this page.
      * @return the list of {@link HtmlAnchor} in this page.
      */
+    @SuppressWarnings("unchecked")
     public List<HtmlAnchor> getAnchors() {
         return (List<HtmlAnchor>) getDocumentHtmlElement().getHtmlElementsByTagName("a");
     }
@@ -309,7 +308,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @exception ElementNotFoundException If no forms match the specified result.
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
-        final List forms = getDocumentHtmlElement().getHtmlElementsByAttribute("form", "name", name);
+        final List< ? extends HtmlElement> forms =
+            getDocumentHtmlElement().getHtmlElementsByAttribute("form", "name", name);
         if (forms.size() == 0) {
             throw new ElementNotFoundException("form", "name", name);
         }
@@ -322,6 +322,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * Return a list of all the forms in the page.
      * @return All the forms.
      */
+    @SuppressWarnings("unchecked")
     public List<HtmlForm> getForms() {
         return (List<HtmlForm>) getDocumentHtmlElement().getHtmlElementsByTagName("form");
     }
@@ -334,6 +335,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return See above
      * @exception MalformedURLException If an error occurred when creating a URL object
      */
+    @SuppressWarnings("unchecked")
     public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
 
@@ -397,7 +399,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return The resolved target to use for the element.
      */
     public String getResolvedTarget(final String elementTarget) {
-        final List baseElements = getDocumentHtmlElement().getHtmlElementsByTagName("base");
+        final List< ? extends HtmlElement> baseElements = getDocumentHtmlElement().getHtmlElementsByTagName("base");
         final String resolvedTarget;
         if (baseElements.isEmpty()) {
             resolvedTarget = elementTarget;
@@ -904,7 +906,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 // perhaps should we create head too?
                 throw new IllegalStateException("Headelement was not defined for this page");
             }
-            titleElement = new HtmlTitle(null, HtmlTitle.TAG_NAME, this, Collections.EMPTY_MAP);
+            final Map<String, HtmlAttr> emptyMap = Collections.emptyMap();
+            titleElement = new HtmlTitle(null, HtmlTitle.TAG_NAME, this, emptyMap);
             if (head.getFirstDomChild() != null) {
                 head.getFirstDomChild().insertBefore(titleElement);
             }
@@ -1097,6 +1100,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     /**
      * Executes any deferred scripts, if necessary.
      */
+    @SuppressWarnings("unchecked")
     private void executeDeferredScriptsIfNeeded() {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
@@ -1576,10 +1580,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @param httpEquiv the http-equiv value
      * @return a list of {@link HtmlMeta}
      */
+    @SuppressWarnings("unchecked")
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
-        final List<HtmlMeta> tags = (List<HtmlMeta>)
-            getDocumentHtmlElement().getHtmlElementsByTagName("meta");
+        final List<HtmlMeta> tags = (List<HtmlMeta>) getDocumentHtmlElement().getHtmlElementsByTagName("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {
@@ -1594,6 +1598,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      *
      * @param radioButtonInput The radio Button
      */
+    @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
         try {
             //May be done in single xpath search?
