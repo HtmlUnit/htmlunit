@@ -8,7 +8,10 @@
     <body>
         <release version="2.0-prerelease">
             <action type="remove" dev="asashour">
-                Remove deprecated HtmlSelect.fakeSelectedAttribute().
+                HtmlForm: Remove deprecated .getRadioButtonInput() and .setCheckedRadioButton().
+            </action>
+            <action type="remove" dev="asashour">
+                Remove deprecated HtmlForm.fakeCheckedRadioButton() and HtmlSelect.fakeSelectedAttribute().
             </action>
             <action type="add" dev="asashour" id="1873562">
                 JavaScript: Add support for XPathResult.iterateNext() (FF only).

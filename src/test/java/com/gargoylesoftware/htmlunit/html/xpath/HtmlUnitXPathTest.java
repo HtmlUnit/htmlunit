@@ -123,7 +123,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
         final XPath xpath = new HtmlUnitXPath("//*");
-        final List list = xpath.selectNodes(page);
+        final List< ? > list = xpath.selectNodes(page);
 
         final String[] expected = {"html", "head", "title", "script", "body"};
         final Transformer tagReader = new Transformer() {
@@ -187,8 +187,8 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
 
         final XPath xpath = new HtmlUnitXPath("//img/@src");
-        final List nameList = xpath.selectNodes(page);
-        final List valueList = new ArrayList(nameList);
+        final List< ? > nameList = xpath.selectNodes(page);
+        final List< ? > valueList = new ArrayList<Object>(nameList);
 
         final String[] expectedName = {"src", "src", "src"};
         final Transformer nameReader = new Transformer() {

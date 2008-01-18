@@ -139,38 +139,6 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     *  Test setCheckedRadioButton() with a value that doesn't exist
-     *
-     * @exception Exception If the test fails
-     * @deprecated after 1.11
-     */
-    public void testSetSelectedRadioButton_ValueDoesNotExist_ForceSelection() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "<input type='radio' name='foo' value='1' selected='selected'/>\n"
-            + "<input type='radio' name='foo' value='2'/>\n"
-            + "<input type='radio' name='foo' value='3'/>\n"
-            + "<input type='submit' name='button' value='foo'/>\n"
-            + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-        final MockWebConnection webConnection = getMockConnection(page);
-
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-
-        final HtmlSubmitInput pushButton = (HtmlSubmitInput) form.getInputByName("button");
-
-        form.fakeCheckedRadioButton("foo", "4");
-
-        // Test that only one value for the radio button is being passed back to the server
-        final HtmlPage secondPage = (HtmlPage) pushButton.click();
-
-        assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo&foo=4",
-            secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     public void testSubmit_String() throws Exception {

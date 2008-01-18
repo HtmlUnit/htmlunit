@@ -129,7 +129,7 @@ public abstract class HtmlElement extends DomElement {
             }
         }
         else {
-            attributes_ = Collections.EMPTY_MAP;
+            attributes_ = Collections.emptyMap();
         }
     }
 

@@ -70,10 +70,10 @@ public class DocumentNavigatorTest extends WebTestCase {
     private final HtmlPage page_;
     
     /**
-     * Create an instance
+     * Create an instance.
      *
-     * @param name The name of the test
-     * @throws Exception if initialization fails
+     * @param name The name of the test.
+     * @throws Exception if initialization fails.
      */
     public DocumentNavigatorTest(final String name) throws Exception {
         super(name);
@@ -81,9 +81,10 @@ public class DocumentNavigatorTest extends WebTestCase {
     }
 
     /**
-     * Test evaluation of some simple paths
-     * @throws Exception if test fails
+     * Test evaluation of some simple paths.
+     * @throws Exception if test fails.
      */
+    @SuppressWarnings("unchecked")
     public void testFollowingSiblingAxisIterator() throws Exception {
         final List<String> expected = Arrays.asList(new String[] {"body"});
         final Collection received = CollectionUtils

@@ -43,7 +43,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -88,11 +87,6 @@ public class HtmlForm extends ClickableElement {
 
     private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES =
         Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
-
-    /**
-     * @deprecated
-     */
-    private KeyValuePair fakeSelectedRadioButton_;
 
     /**
      * Create an instance
@@ -225,16 +219,12 @@ public class HtmlForm extends ClickableElement {
 
         final List<KeyValuePair> parameterList = new ArrayList<KeyValuePair>(submittableElements.size());
         for (final SubmittableElement element : submittableElements) {
-            final KeyValuePair[] pairs = element.getSubmitKeyValuePairs();
 
-            for (int i = 0; i < pairs.length; i++) {
-                parameterList.add(pairs[i]);
+            for (final KeyValuePair pair : element.getSubmitKeyValuePairs()) {
+                parameterList.add(pair);
             }
         }
 
-        if (fakeSelectedRadioButton_ != null) {
-            adjustParameterListToAccountForFakeSelectedRadioButton(parameterList);
-        }
         return parameterList;
     }
 
@@ -371,35 +361,6 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the "radio" type input field that matches the specified name and value
-     *
-     * @param name The name of the HtmlInput
-     * @param value The value of the HtmlInput
-     * @return See above
-     * @exception ElementNotFoundException If the field could not be found
-     *
-     * @deprecated Deprecated because 'name' and 'value' are sometimes not unique to select a single
-     * HtmlRadioButtonInput, it should not be called,
-     * you can use {@link #getByXPath(String)} instead.
-     */
-    //TODO: to be removed, deprecated after 1.11
-    public HtmlRadioButtonInput getRadioButtonInput(final String name, final String value)
-        throws ElementNotFoundException {
-
-        for (final HtmlElement element : getAllHtmlChildElements()) {
-            if (element instanceof HtmlRadioButtonInput
-                    && element.getAttributeValue("name").equals(name)) {
-
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) element;
-                if (input.getValueAttribute().equals(value)) {
-                    return input;
-                }
-            }
-        }
-        throw new ElementNotFoundException("input", "value", value);
-    }
-
-    /**
      * Return all the HtmlSelect that match the specified name
      *
      * @param name The name
@@ -503,47 +464,6 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Select the specified radio button in the form. <p/>
-     *
-     * Only a radio button that is actually contained in the form can be
-     * selected. If you need to be able to select a button that really isn't
-     * there (ie during testing of error cases) then use {@link #fakeCheckedRadioButton(String,String)} instead
-     *
-     * @param name The name of the radio buttons
-     * @param value The value to match
-     * @exception ElementNotFoundException If the specified element could not be found
-     *
-     * @deprecated Deprecated because 'name' and 'value' are sometimes not unique to select a single
-     * HtmlRadioButtonInput, it should not be called,
-     * you can use {@link #getByXPath(String)} instead.
-     */
-    //TODO: to be removed, deprecated after 1.11
-    public void setCheckedRadioButton(
-            final String name,
-            final String value)
-        throws
-            ElementNotFoundException {
-
-        //we could do this with one iterator, but that would set the state of the other
-        //radios also in the case where the specified one is not found
-        final HtmlInput inputToSelect = getRadioButtonInput(name, value);
-
-        for (final HtmlElement element : getAllHtmlChildElements()) {
-            if (element instanceof HtmlRadioButtonInput
-                     && element.getAttributeValue("name").equals(name)) {
-
-                final HtmlRadioButtonInput input = (HtmlRadioButtonInput) element;
-                if (input == inputToSelect) {
-                    input.setAttributeValue("checked", "checked");
-                }
-                else {
-                    input.removeAttribute("checked");
-                }
-            }
-        }
-    }
-
-    /**
      * Select the specified radio button in the form.
      *
      * Only a radio button that is actually contained in the form can be selected.
@@ -572,43 +492,6 @@ public class HtmlForm extends ClickableElement {
         catch (final JaxenException e) {
             getLog().error(e);
         }
-    }
-
-    /**
-     * Set the "selected radio button" to a value that doesn't actually exist
-     * in the page. This is useful primarily for testing error cases.
-     *
-     * @param name The name of the radio buttons
-     * @param value The value to match
-     * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
-     * @deprecated after 1.11
-     */
-    // it can be made package private if needed for testing.
-    public final void fakeCheckedRadioButton(
-            final String name,
-            final String value)
-        throws ElementNotFoundException {
-
-        fakeSelectedRadioButton_ = new KeyValuePair(name, value);
-    }
-
-    /**
-     * @deprecated
-     */
-    private void adjustParameterListToAccountForFakeSelectedRadioButton(final List list) {
-        final String fakeRadioButtonName = fakeSelectedRadioButton_.getKey();
-
-        // Remove any pairs that match the name of the radio button
-        final Iterator iterator = list.iterator();
-        while (iterator.hasNext()) {
-            final KeyValuePair pair = (KeyValuePair) iterator.next();
-            if (pair.getKey().equals(fakeRadioButtonName)) {
-                iterator.remove();
-            }
-        }
-
-        // Now add this one back in
-        list.add(fakeSelectedRadioButton_);
     }
 
     /**
