@@ -206,6 +206,9 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
+     * Depends on {@link SimpleScriptableTest#testStringWithExclamationMark()}
+     *         and {@link HtmlUnitRegExpProxyTest#testModifiers()}.
+     *
      * @throws Exception If test fails.
      */
     public void testString() throws Exception {
@@ -221,12 +224,10 @@ public class Prototype160Test extends WebTestCase {
      * @throws Exception If test fails.
      */
     public void testUnitTests() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "unit_tests.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 10, 38, 0, 0);
-        test(BrowserVersion.FIREFOX_2, filename, 10, 38, 0, 0);
+        //The expected failure is because the server port is other than 4711
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 10, 82, 1, 0);
+        test(BrowserVersion.FIREFOX_2, filename, 10, 82, 1, 0);
     }
 
     private void test(final BrowserVersion browserVersion, final String filename, final int tests,
