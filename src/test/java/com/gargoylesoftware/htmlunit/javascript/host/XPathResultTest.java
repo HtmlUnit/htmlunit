@@ -168,9 +168,6 @@ public class XPathResultTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testIterateNext() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"

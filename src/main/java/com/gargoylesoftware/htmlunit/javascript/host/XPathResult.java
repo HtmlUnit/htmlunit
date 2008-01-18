@@ -117,6 +117,11 @@ public class XPathResult extends SimpleScriptable {
     private int resultType_;
 
     /**
+     * The index of the next result.
+     */
+    private int iteratorIndex_;
+
+    /**
      * @param result the evaluation result.
      * @param type If a specific type is specified, then the result will be returned as the corresponding type.
      */
@@ -144,6 +149,7 @@ public class XPathResult extends SimpleScriptable {
                 resultType_ = UNORDERED_NODE_ITERATOR_TYPE;
             }
         }
+        iteratorIndex_ = 0;
     }
     
     /**
@@ -175,6 +181,19 @@ public class XPathResult extends SimpleScriptable {
         }
         if (!result_.isEmpty()) {
             return (Node) ((DomNode) result_.get(0)).getScriptObject();
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Iterates and returns the next node from the node set or <code>null</code> if there are no more nodes.
+     * @return The next node.
+     */
+    public Node jsxFunction_iterateNext() {
+        if (iteratorIndex_ < result_.size()) {
+            return (Node) ((DomNode) result_.get(iteratorIndex_++)).getScriptObject();
         }
         else {
             return null;
