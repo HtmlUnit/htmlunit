@@ -544,7 +544,8 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "    <frame id='frame2' src='javascript:parent.f2'/>\n"
             + "</frameset></html>";
 
-        createTestPageForRealBrowserIfNeeded(htmlContent, Collections.EMPTY_LIST);
+        final List<String> emptyList = Collections.emptyList();
+        createTestPageForRealBrowserIfNeeded(htmlContent, emptyList);
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlPage page1 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame1")).getEnclosedPage();
@@ -878,14 +879,14 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testActiveXObjectWithMap() throws Exception {
-        final Map activexToJavaMapping = new HashMap();
+        final Map<String, String> activexToJavaMapping = new HashMap<String, String>();
         activexToJavaMapping.put(
                 "MockActiveXObject",
                 "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
         activexToJavaMapping.put(
                 "FakeObject",
                 "com.gargoylesoftware.htmlunit.javascript.NoSuchObject");
-        activexToJavaMapping.put("BadObject", new Object());
+        activexToJavaMapping.put("BadObject", null);
 
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1329,7 +1330,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         connection.setResponse(URL_FIRST, content1);
         connection.setResponse(new URL(URL_FIRST, "page2.html"), content2);
 
-        final List headersAllowingCache = new ArrayList();
+        final List<NameValuePair> headersAllowingCache = new ArrayList<NameValuePair>();
         headersAllowingCache.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "script.js"), script,
                 200, "ok", "text/javascript", headersAllowingCache);
@@ -1369,7 +1370,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "<body>\n"
             + "<p>hello world</p>\n"
             + "</body></html>";
-        final List collectedScripts = new ArrayList();
+        final List<String> collectedScripts = new ArrayList<String>();
         loadPageAndCollectScripts(content, collectedScripts);
 
         // NO MORE: The last expected is the dummy stub that is needed to initialize the javascript engine
@@ -1378,7 +1379,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         assertEquals(expectedScripts, collectedScripts);
     }
 
-    private HtmlPage loadPageAndCollectScripts(final String html, final List collectedScripts)
+    private HtmlPage loadPageAndCollectScripts(final String html, final List<String> collectedScripts)
         throws Exception {
 
         final WebClient client = new WebClient();

@@ -63,6 +63,7 @@ public class YuiTest extends WebTestCase {
 
     private static final long DEFAULT_TIME_TO_WAIT = 2 * 60 * 1000L;
     private static final String BASE_FILE_PATH = "yui/2.3.0/tests/";
+    private final List<String> emptyList_ = Collections.emptyList();
 
     /**
      * Creates an instance.
@@ -77,7 +78,7 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public void testLogger() throws Exception {
-        doTest(BrowserVersion.FIREFOX_2, "logger.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "logger.html", emptyList_);
     }
 
     /**
@@ -99,14 +100,14 @@ public class YuiTest extends WebTestCase {
         // The tabview YUI test has a background thread that runs.  We want to set the
         // maximum wait time to 5 seconds as that gives enough time for execution without
         // causing the test to run forever.
-        doTest(BrowserVersion.FIREFOX_2, "tabview.html", Collections.EMPTY_LIST, null, 5 * 1000);
+        doTest(BrowserVersion.FIREFOX_2, "tabview.html", emptyList_, null, 5 * 1000);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     public void testDateMath() throws Exception {
-        doTest(BrowserVersion.FIREFOX_2, "datemath.html", Collections.EMPTY_LIST, "btnRun");
+        doTest(BrowserVersion.FIREFOX_2, "datemath.html", emptyList_, "btnRun");
     }
 
     /**
@@ -116,7 +117,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "calendar.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "calendar.html", emptyList_);
     }
 
     /**
@@ -126,7 +127,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "colorpicker.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "colorpicker.html", emptyList_);
     }
 
     /**
@@ -151,7 +152,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "datasource.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "datasource.html", emptyList_);
     }
 
     /**
@@ -161,7 +162,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "datatable.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "datatable.html", emptyList_);
     }
 
     /**
@@ -171,7 +172,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "dom.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "dom.html", emptyList_);
     }
 
     /**
@@ -181,7 +182,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "dragdrop.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "dragdrop.html", emptyList_);
     }
 
     /**
@@ -191,7 +192,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "editor.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "editor.html", emptyList_);
     }
 
     /**
@@ -201,7 +202,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "yuiloader_rollup.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "yuiloader_rollup.html", emptyList_);
     }
 
     /**
@@ -211,7 +212,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "yuiloader_config.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "yuiloader_config.html", emptyList_);
     }
 
     /**
@@ -235,14 +236,14 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "imageloader.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "imageloader.html", emptyList_);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     public void testElement() throws Exception {
-        doTest(BrowserVersion.FIREFOX_2, "element.html", Collections.EMPTY_LIST);
+        doTest(BrowserVersion.FIREFOX_2, "element.html", emptyList_);
     }
 
     /**

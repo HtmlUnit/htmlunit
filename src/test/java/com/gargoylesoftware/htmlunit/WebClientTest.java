@@ -51,6 +51,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -1065,13 +1066,8 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        webConnection.setResponse(
-                URL_FIRST,
-                firstContent,
-                500,
-                "BOOM",
-                "text/html",
-                Collections.EMPTY_LIST);
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
         webClient.setThrowExceptionOnFailingStatusCode(true);
         webClient.setPrintContentOnFailingStatusCode(false);

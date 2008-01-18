@@ -38,9 +38,11 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
 
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -72,7 +74,8 @@ public class WebConnectionWrapperTest extends WebTestCase {
      */
     public void testWrapper() throws Exception {
         final HttpState state = new HttpState();
-        final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", Collections.EMPTY_LIST);
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", emptyList);
         final WebResponse response = new WebResponseImpl(data, URL_FIRST, SubmitMethod.GET, 0);
         final WebClient webClient = new WebClient();
         final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);

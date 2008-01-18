@@ -67,7 +67,7 @@ public class WebRequestSettings {
     private String cookiePolicy_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
-    private List<KeyValuePair> requestParameters_ = Collections.EMPTY_LIST;
+    private List<KeyValuePair> requestParameters_ = Collections.emptyList();
     private String requestBody_;
 
     /**
@@ -165,7 +165,7 @@ public class WebRequestSettings {
      * @param requestParameters The requestParameters to set.
      * @throws RuntimeException If the request body has already been set.
      */
-    public void setRequestParameters(final List requestParameters) throws RuntimeException {
+    public void setRequestParameters(final List<KeyValuePair> requestParameters) throws RuntimeException {
         if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
                              + "the two are mutually exclusive!";

@@ -141,7 +141,8 @@ public class MockWebConnection extends WebConnectionImpl {
      * response headers.
      */
     public void setResponse(final URL url, final String content, final int statusCode,
-            final String statusMessage, final String contentType, final List< ? extends KeyValuePair> responseHeaders) {
+            final String statusMessage, final String contentType,
+            final List< ? extends NameValuePair> responseHeaders) {
 
         setResponse(
                 url,
@@ -163,7 +164,8 @@ public class MockWebConnection extends WebConnectionImpl {
      * response headers.
      */
     public void setResponse(final URL url, final byte[] content, final int statusCode,
-            final String statusMessage, final String contentType, final List< ? extends KeyValuePair> responseHeaders) {
+            final String statusMessage, final String contentType,
+            final List< ? extends NameValuePair> responseHeaders) {
 
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));
@@ -180,7 +182,8 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param content The content to return
      */
     public void setResponse(final URL url, final String content) {
-        setResponse(url, content, 200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        setResponse(url, content, 200, "OK", "text/html", emptyList);
     }
 
     /**
@@ -193,7 +196,8 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param contentType The content type to return
      */
     public void setResponse(final URL url, final String content, final String contentType) {
-        setResponse(url, content, 200, "OK", contentType, Collections.EMPTY_LIST);
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        setResponse(url, content, 200, "OK", contentType, emptyList);
     }
 
     /**

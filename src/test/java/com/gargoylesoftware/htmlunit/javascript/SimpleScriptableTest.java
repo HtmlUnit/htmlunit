@@ -47,8 +47,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.ClassUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -57,6 +55,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
@@ -121,7 +120,8 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      */
     public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
-        final Map map = JavaScriptConfiguration.getHtmlJavaScriptMapping();
+        final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
+            JavaScriptConfiguration.getHtmlJavaScriptMapping();
         final String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
 
@@ -168,13 +168,10 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("XSLTProcessor");
         names.remove("XSLTemplate");
 
-        final Transformer class2ShortName = new Transformer() {
-            public Object transform(final Object obj) {
-                return ClassUtils.getShortClassName((Class) obj);
-            }
-        };
-        final Collection<String> hostClassNames = new ArrayList<String>(map.values());
-        CollectionUtils.transform(hostClassNames, class2ShortName);
+        final Collection<String> hostClassNames = new ArrayList<String>();
+        for (final Class< ? extends SimpleScriptable> clazz : map.values()) {
+            hostClassNames.add(ClassUtils.getShortClassName(clazz));
+        }
         assertEquals(new TreeSet<String>(names), new TreeSet<String>(hostClassNames));
     }
 

@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -112,8 +113,8 @@ public class WebResponseImplTest extends WebTestCase {
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"),
-                200, "OK", "text/html", Collections.EMPTY_LIST);
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", emptyList);
         client.setWebConnection(webConnection);
         final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
         settings.setCharset("UTF-8");
@@ -137,8 +138,8 @@ public class WebResponseImplTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
-        conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK",
-                "text/xml; charset=\"ISO-8859-1\"", Collections.EMPTY_LIST);
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK", "text/xml; charset=\"ISO-8859-1\"", emptyList);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }
