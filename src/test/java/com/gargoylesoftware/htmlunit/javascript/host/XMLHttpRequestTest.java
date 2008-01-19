@@ -952,4 +952,72 @@ public class XMLHttpRequestTest extends WebTestCase {
         final String[] alerts = {"null"};
         assertEquals(alerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    public void testResponseXML_getElementById() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String[] expectedAlertsIE = {"[object]", "[object]", "[object]"};
+        testResponseXML_getElementById(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF =
+        {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
+            "[object HTMLSpanElement]", "[object XMLDocument]"};
+        testResponseXML_getElementById(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+    }
+
+    private void testResponseXML_getElementById(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "        var doc = request.responseXML;\n"
+            + "        alert(doc.documentElement);\n"
+            + "        alert(doc.documentElement.childNodes[0]);\n"
+            + "        alert(doc.documentElement.childNodes[1]);\n"
+            + "        if (doc.getElementById) {\n"
+            + "          alert(doc.getElementById('out'));\n"
+            + "          alert(doc.getElementById('out').ownerDocument);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<html>"
+            + "<head>"
+            + "</head>"
+            + "<body xmlns='http://www.w3.org/1999/xhtml'>"
+            + "<span id='out'>Hello Bob Dole!</span>"
+            + "</body>"
+            + "</html>";
+
+        System.out.println(html);
+        System.out.println(xml);
+        final WebClient client = new WebClient(browserVersion);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
