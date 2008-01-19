@@ -312,4 +312,39 @@ public class SimpleScriptableTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testIsParentOf() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testIsParentOf("Node", "Element", true);
+        testIsParentOf("Document", "XMLDocument", true);
+        testIsParentOf("Node", "XPathResult", false);
+        testIsParentOf("Element", "HTMLElement", true);
+        testIsParentOf("HTMLElement", "HTMLHtmlElement", true);
+    }
+
+    private void testIsParentOf(final String object1, final String object2, final boolean status) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(isParentOf(" + object1 + ", " + object2 + "));\n"
+            + "  }\n"
+            + "  /**\n"
+            + "   * Returns true if o1 prototype is parent/grandparent of o2 prototype\n"
+            + "   */\n"
+            + "  function isParentOf(o1, o2) {\n"
+            + "    o1.prototype.myCustomFunction = function() {};\n"
+            + "    return o1 != o2 && o2.prototype.myCustomFunction != undefined;\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {Boolean.toString(status)};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
