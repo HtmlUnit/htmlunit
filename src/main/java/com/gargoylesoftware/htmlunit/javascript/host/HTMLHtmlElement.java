@@ -35,63 +35,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for {@link HtmlHtml}.
+ * The javascript object "HTMLHtmlElement".
  *
  * @version $Revision$
- * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlHtmlTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlHtmlTest(final String name) {
-        super(name);
-    }
+public class HTMLHtmlElement extends HTMLElement {
+
+    private static final long serialVersionUID = 4942983761903195465L;
 
     /**
-     * @throws Exception if the test fails
+     * Create an instance.
      */
-    public void testAttributes() throws Exception {
-        final String htmlContent = "<?xml version=\"1.0\"?>\n"
-            + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
-            + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
-            + "<html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>\n"
-            + "<head><title>test</title></head>\n"
-            + "<body></body></html>";
-
-        final HtmlPage page = loadPage(htmlContent);
-        final HtmlHtml root = (HtmlHtml) page.getDocumentHtmlElement();
-        assertEquals("en", root.getLangAttribute());
-        assertEquals("en", root.getXmlLangAttribute());
+    public HTMLHtmlElement() {
+        // Empty.
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    public void testSimpleScriptable() throws Exception {
-        final String content = "<html id='myId'><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLHtmlElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertInstanceOf(page.getHtmlElementById("myId"), HtmlHtml.class);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }

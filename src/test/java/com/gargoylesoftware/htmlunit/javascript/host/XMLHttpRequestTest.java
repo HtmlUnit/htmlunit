@@ -1007,8 +1007,6 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</body>"
             + "</html>";
 
-        System.out.println(html);
-        System.out.println(xml);
         final WebClient client = new WebClient(browserVersion);
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

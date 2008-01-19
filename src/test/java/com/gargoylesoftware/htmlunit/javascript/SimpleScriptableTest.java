@@ -325,6 +325,10 @@ public class SimpleScriptableTest extends WebTestCase {
         testIsParentOf("Node", "XPathResult", false);
         testIsParentOf("Element", "HTMLElement", true);
         testIsParentOf("HTMLElement", "HTMLHtmlElement", true);
+
+        //although Image != HTMLImageElement, they seem to be synonyms!!!
+        testIsParentOf("Image", "HTMLImageElement", true);
+        testIsParentOf("HTMLImageElement", "Image", true);
     }
 
     private void testIsParentOf(final String object1, final String object2, final boolean status) throws Exception {
