@@ -478,6 +478,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unused")
     public boolean has(final String name, final Scriptable start) {
         try {
             int index = Integer.parseInt(name);
@@ -518,6 +519,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * elements in the array, then all those elements are returned. Otherwise,
      * {@inheritDoc}.
      */
+    @SuppressWarnings("unused")
     public Object[] getIds() {
         final List<String> idList = new ArrayList<String>();
 

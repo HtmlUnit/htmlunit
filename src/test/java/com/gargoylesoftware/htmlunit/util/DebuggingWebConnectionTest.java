@@ -66,7 +66,8 @@ public class DebuggingWebConnectionTest extends WebTestCase {
      */
     public void testNameValueListToJsMap() throws Exception {
         assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(null));
-        assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(Collections.EMPTY_LIST));
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(emptyList));
 
         List<NameValuePair> list = Collections.singletonList(new NameValuePair("name", "value"));
         assertEquals("{'name': 'value'}", DebuggingWebConnection.nameValueListToJsMap(list));
