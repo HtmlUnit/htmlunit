@@ -67,18 +67,18 @@ public class MimeTypeTest extends WebTestCase {
      */
     public void testFlashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test()"
-            + "{"
-            + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];"
-            + "  alert(mimeTypeFlash);"
-            + "  alert(mimeTypeFlash.suffixes);"
-            + "  var pluginFlash = mimeTypeFlash.enabledPlugin;"
-            + "  alert(pluginFlash.name);"
-            + "  alert(pluginFlash == navigator.plugins[pluginFlash.name]);"
-            + "  alert(pluginFlash == navigator.plugins.namedItem(pluginFlash.name));"
-            + "}"
+            + "function test() {\n"
+            + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];\n"
+            + "  alert(mimeTypeFlash);\n"
+            + "  alert(mimeTypeFlash.suffixes);\n"
+            + "  var pluginFlash = mimeTypeFlash.enabledPlugin;\n"
+            + "  alert(pluginFlash.name);\n"
+            + "  alert(pluginFlash == navigator.plugins[pluginFlash.name]);\n"
+            + "  alert(pluginFlash == navigator.plugins.namedItem(pluginFlash.name));\n"
+            + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
+
         final String[] expectedAlerts = {"[object MimeType]", "swf", "Shockwave Flash", "true", "true"};
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
         
@@ -93,13 +93,12 @@ public class MimeTypeTest extends WebTestCase {
      */
     public void testRemoveFlashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function test()"
-            + "{"
-            + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];"
-            + "  alert(mimeTypeFlash);"
-            + "  alert(navigator.plugins['Shockwave Flash']);"
-            + "  alert(navigator.plugins.namedItem('Shockwave Flash'));"
-            + "}"
+            + "function test() {\n"
+            + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];\n"
+            + "  alert(mimeTypeFlash);\n"
+            + "  alert(navigator.plugins['Shockwave Flash']);\n"
+            + "  alert(navigator.plugins.namedItem('Shockwave Flash'));\n"
+            + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
         final String[] expectedAlerts = {"undefined", "undefined", "null"};
