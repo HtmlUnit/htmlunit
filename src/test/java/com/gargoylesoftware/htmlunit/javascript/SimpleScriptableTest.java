@@ -351,4 +351,25 @@ public class SimpleScriptableTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testPrototypeToString() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html id='myId'><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "    alert(HTMLHtmlElement);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLHtmlElement]", "[HTMLHtmlElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
