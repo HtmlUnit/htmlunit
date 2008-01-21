@@ -203,7 +203,7 @@ JUnit results available here: ${test.reports.dir}/index.html
 		<get-dependency project="rhino" jarName="js-1.6R7.jar"/>
 
 		<!-- test -->
-		<get-dependency type="test" project="junit" jarName="junit-3.8.2.jar"/>
+		<get-dependency type="test" project="junit" jarName="junit-4.4.jar"/>
 		<get-dependency type="test" project="gsbase" jarName="gsbase-2.0.1.jar"/>
 		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-6.1.5.jar"/>
 		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-util-6.1.5.jar"/>

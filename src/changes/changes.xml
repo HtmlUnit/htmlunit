@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="asashour">
+                Upgrade JUnit to 4.4.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: Add support for HTMLHtmlElement.
             </action>
