@@ -194,7 +194,7 @@ public class Prototype150rc1Test extends WebTestCase {
         assertNotNull(url);
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(15000);
+        page.getEnclosingWindow().getThreadManager().joinAll(25000);
 
         final String summary = page.getHtmlElementById("logsummary").asText();
         final String expected = tests + " tests, " + assertions + " assertions, " + failures + " failures, "
