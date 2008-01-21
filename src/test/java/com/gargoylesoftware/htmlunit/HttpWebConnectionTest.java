@@ -56,6 +56,9 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 import org.mortbay.jetty.Handler;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.HandlerList;
@@ -64,7 +67,6 @@ import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.webapp.WebAppClassLoader;
 import org.mortbay.jetty.webapp.WebAppContext;
 
-import com.gargoylesoftware.base.testing.BaseTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -75,7 +77,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HttpWebConnectionTest extends BaseTestCase {
+public class HttpWebConnectionTest {
     
     /**
      * The listener port for the web server.
@@ -118,13 +120,13 @@ public class HttpWebConnectionTest extends BaseTestCase {
             return;
         }
         if (expected == null || actual == null) {
-            fail(message);
+            Assert.fail(message);
         }
         if (expected.length < length || actual.length < length) {
-            fail(message);
+            Assert.fail(message);
         }
         for (int i = 0; i < length; i++) {
-            assertEquals(message, expected[i], actual[i]);
+            Assert.assertEquals(message, expected[i], actual[i]);
         }
     }
 
@@ -156,7 +158,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
 
         if (expected == null || actual == null) {
             try {
-                fail(message);
+                Assert.fail(message);
             }
             finally {
                 try {
@@ -185,7 +187,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
             while (true) {
 
                 final int actualLength = actualBuf.read(actualArray);
-                assertEquals(message, expectedLength, actualLength);
+                Assert.assertEquals(message, expectedLength, actualLength);
 
                 if (expectedLength == -1) {
                     break;
@@ -210,18 +212,10 @@ public class HttpWebConnectionTest extends BaseTestCase {
     }
 
     /**
-     * Create an instance.
-     *
-     * @param name The name of the test.
-     */
-    public HttpWebConnectionTest(final String name) {
-        super(name);
-    }
-
-    /**
      * Test creation of a web response
      * @throws Exception If the test fails
      */
+    @Test
     public void testMakeWebResponse() throws Exception {
         final URL url = new URL("http://htmlunit.sourceforge.net/");
         final String content = "<html><head></head><body></body></html>";
@@ -248,10 +242,10 @@ public class HttpWebConnectionTest extends BaseTestCase {
                 (WebResponse) method.invoke(connection, new Object[]{
                     new Integer(httpStatus), httpMethod, url, new Long(loadTime), TextUtil.DEFAULT_CHARSET});
 
-        assertEquals(httpStatus, response.getStatusCode());
-        assertEquals(url, response.getUrl());
-        assertEquals(loadTime, response.getLoadTimeInMilliSeconds());
-        assertEquals(content, response.getContentAsString());
+        Assert.assertEquals(httpStatus, response.getStatusCode());
+        Assert.assertEquals(url, response.getUrl());
+        Assert.assertEquals(loadTime, response.getLoadTimeInMilliSeconds());
+        Assert.assertEquals(content, response.getContentAsString());
         assertEquals(content.getBytes(), response.getResponseBody());
         assertEquals(new ByteArrayInputStream(content.getBytes()), response.getContentAsStream());
     }
@@ -260,22 +254,22 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * Testing Jetty
      * @throws Exception on failure
      */
+    @Test
     public void testJettyProofOfConcept() throws Exception {
         server_ = startWebServer("./");
 
         final WebClient client = new WebClient();
         Page page = client.getPage("http://localhost:" + PORT + "/src/test/resources/event_coordinates.html");
         final WebConnection defaultConnection = client.getWebConnection();
-        assertInstanceOf(
+        Assert.assertTrue(
                 "HttpWebConnection should be the default",
-                defaultConnection,
-                HttpWebConnection.class);
-        assertInstanceOf("Response should be valid HTML", page, HtmlPage.class);
+                HttpWebConnection.class.isInstance(defaultConnection));
+        Assert.assertTrue("Response should be valid HTML", HtmlPage.class.isInstance(page));
 
         // test that // is escaped
         final URL url = new URL("http://localhost:" + PORT + "//src/test/resources/event_coordinates.html");
         page = client.getPage(url);
-        assertEquals(url.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
+        Assert.assertEquals(url.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
 
     /**
@@ -387,8 +381,8 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * {@inheritDoc}
      * Stops the web server if it has been started.
      */
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
         stopWebServer(server_);
         server_ = null;
     }
@@ -397,6 +391,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * Test for feature request 1438216: HttpWebConnection should allow extension to create the HttpClient
      * @throws Exception if the test fails
      */
+    @Test
     public void testDesignedForExtension() throws Exception {
         server_ = startWebServer("./");
 
@@ -411,13 +406,14 @@ public class HttpWebConnectionTest extends BaseTestCase {
 
         webClient.setWebConnection(myWebConnection);
         webClient.getPage("http://localhost:" + PORT + "/README");
-        assertTrue("createHttpClient has not been called", tabCalled[0]);
+        Assert.assertTrue("createHttpClient has not been called", tabCalled[0]);
     }
 
     /**
      * Was throwing a NPE on 14.04.06
      * @throws Exception if the test fails
      */
+    @Test
     public void testStateAccess() throws Exception {
         final WebClient webClient = new WebClient();
         webClient.getWebConnection().getState();
@@ -427,6 +423,7 @@ public class HttpWebConnectionTest extends BaseTestCase {
      * Test that the right file part is built for a file that doesn't exist
      * @throws Exception if the test fails
      */
+    @Test
     public void testBuildFilePart() throws Exception {
         final String encoding = "ISO8859-1";
         final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "text/plain", encoding);
@@ -440,6 +437,6 @@ public class HttpWebConnectionTest extends BaseTestCase {
             + "Content-Transfer-Encoding: binary\r\n"
             + "\r\n"
             + "\r\n";
-        assertEquals(expected, baos.toString(encoding));
+        Assert.assertEquals(expected, baos.toString(encoding));
     }
 }

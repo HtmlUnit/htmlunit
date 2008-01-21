@@ -39,25 +39,21 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 
+import org.junit.Test;
+
 /**
  * Tests for {@link ImmediateRefreshHandler}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class ImmediateRefreshHandlerTest extends WebTestCase {
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public ImmediateRefreshHandlerTest(final String name) {
-        super(name);
-    }
+public final class ImmediateRefreshHandlerTest extends WebTestCase2 {
 
     /**
      * Regression test for bug 1211980: redirect on the same page after a post
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefreshSamePageAfterPost() throws Exception {
         final WebClient client = new WebClient();
         client.setRefreshHandler(new ImmediateRefreshHandler());

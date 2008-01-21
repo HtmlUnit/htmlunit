@@ -40,24 +40,19 @@ package com.gargoylesoftware.htmlunit;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 /**
  * Tests for {@link IncorrectnessListener}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class IncorrectnessListenerTest extends WebTestCase {
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public IncorrectnessListenerTest(final String name) {
-        super(name);
-    }
-
+public final class IncorrectnessListenerTest extends WebTestCase2 {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testNotification() throws Exception {
         final String html = "<html><head>\n"
                 + "<meta http-equiv='set-cookie' content='webm=none; path=/; expires=abcdef;'>\n"

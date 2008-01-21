@@ -51,6 +51,7 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.time.DateUtils;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -61,19 +62,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class CacheTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public CacheTest(final String name) {
-        super(name);
-    }
+public class CacheTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testIsDynamicContent() throws Exception {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<String, String>();
@@ -104,6 +98,7 @@ public class CacheTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testIsJavascript() throws Exception {
         final Cache cache = new Cache();
 
@@ -139,6 +134,7 @@ public class CacheTest extends WebTestCase {
     /**
      *@throws Exception if the test fails
      */
+    @Test
     public void testUsage() throws Exception {
         final String content = "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
@@ -188,6 +184,7 @@ public class CacheTest extends WebTestCase {
     /**
      *@throws Exception if the test fails
      */
+    @Test
     public void testMaxSizeMaintained() throws Exception {
         final String html = "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"

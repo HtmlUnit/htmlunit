@@ -37,25 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import org.junit.Test;
+
 /**
  * Tests for {@link DefaultPageCreator}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DefaultPageCreatorTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public DefaultPageCreatorTest(final String name) {
-        super(name);
-    }
+public class DefaultPageCreatorTest extends WebTestCase2 {
 
     /**
      * Test for {@link DefaultPageCreator#determinePageType(String)}
      */
+    @Test
     public void testDeterminePageType() {
         final DefaultPageCreator creator = new DefaultPageCreator();
 

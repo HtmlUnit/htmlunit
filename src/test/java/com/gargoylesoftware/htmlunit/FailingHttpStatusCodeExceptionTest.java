@@ -43,6 +43,7 @@ import java.util.List;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
+import org.junit.Test;
 
 /**
  * Tests for {@link FailingHttpStatusCodeException}..
@@ -50,19 +51,12 @@ import org.apache.commons.lang.ArrayUtils;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
-    /**
-     * Create an instance.
-     *
-     * @param name The name of the test.
-     */
-    public FailingHttpStatusCodeExceptionTest(final String name) {
-        super(name);
-    }
+public final class FailingHttpStatusCodeExceptionTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testConstructorWitWebResponse() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData webResponseData = new WebResponseData(

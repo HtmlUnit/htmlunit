@@ -40,6 +40,8 @@ package com.gargoylesoftware.htmlunit;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.auth.NTLMScheme;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Tests for {@link DefaultCredentialsProvider}.
@@ -47,20 +49,13 @@ import org.apache.commons.httpclient.auth.NTLMScheme;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DefaultCredentialsProviderTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public DefaultCredentialsProviderTest(final String name) {
-        super(name);
-    }
+public class DefaultCredentialsProviderTest extends WebTestCase2 {
 
     /**
      * Test for NTLM credentials
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddNTLMCredentials() throws Exception {
         final String userName = "foo";
         final String domain = "myDomain";
@@ -74,8 +69,8 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
 
         final NTLMScheme scheme = new NTLMScheme("NTLM");
         final Credentials credentials = provider.getCredentials(scheme, host, port, false);
-        assertNotNull(credentials);
-        assertInstanceOf(credentials, NTCredentials.class);
+        Assert.assertNotNull(credentials);
+        Assert.assertTrue(NTCredentials.class.isInstance(credentials));
         final NTCredentials ntCredentials = (NTCredentials) credentials;
         assertEquals(userName, ntCredentials.getUserName());
         assertEquals(password, ntCredentials.getPassword());
