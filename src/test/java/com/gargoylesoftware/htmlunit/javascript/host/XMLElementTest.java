@@ -82,6 +82,7 @@ public class XMLElementTest extends WebTestCase {
             + "    alert(attributes[0].name + ' ' + attributes[0].value);\n"
             + "    var root = doc.documentElement;\n"
             + "    alert(root.getAttribute('attrName'));\n"
+            + "    alert(root.getAttribute('notExisting'));\n"
             + "    root.setAttribute('attrName', 'anotherValue');\n"
             + "    alert(root.getAttribute('attrName'));\n"
             + "    alert(root.getElementsByTagName('book').length);\n"
@@ -107,7 +108,7 @@ public class XMLElementTest extends WebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "anotherValue",
+        final String[] expectedAlerts = {"true", "1", "attrName attrValue", "attrValue", "null", "anotherValue",
             "1", "4", "<span id='label'>changed</span>"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();

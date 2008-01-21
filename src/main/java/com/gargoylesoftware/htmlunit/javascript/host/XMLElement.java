@@ -48,17 +48,17 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
- * A JavaScript object for XMLElement.
+ * A JavaScript object for {@link XmlElement}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class XMLElement extends Node {
 
@@ -139,7 +139,7 @@ public class XMLElement extends Node {
      */
     public String jsxFunction_getAttribute(final String attributeName) {
         final String value = ((XmlElement) getDomNodeOrDie()).getAttributeValue(attributeName);
-        if (value == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+        if (value == XmlElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
         else {
