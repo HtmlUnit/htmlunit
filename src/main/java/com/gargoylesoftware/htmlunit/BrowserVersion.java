@@ -44,6 +44,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
+
 /**
  * Objects of this class represent one specific version of a given browser.  Predefined
  * constants are provided for common browser versions.
@@ -159,7 +161,7 @@ public class BrowserVersion implements Serializable {
      * @param newBrowserVersion The new default browser version.
      */
     public static void setDefault(final BrowserVersion newBrowserVersion) {
-        Assert.notNull("newBrowserVersion", newBrowserVersion);
+        AssertionUtils.notNull("newBrowserVersion", newBrowserVersion);
         DefaultBrowserVersion_ = newBrowserVersion;
     }
 

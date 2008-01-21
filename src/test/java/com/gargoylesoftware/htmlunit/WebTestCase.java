@@ -550,11 +550,9 @@ public abstract class WebTestCase extends BaseTestCase {
         testedBrowser.put("FIREFOX_2", BrowserVersion.FIREFOX_2);
         testedBrowser.put("INTERNET_EXPLORER_6_0", BrowserVersion.INTERNET_EXPLORER_6_0);
 
-        for (final Iterator<Map.Entry<String, BrowserVersion>> iter =
-                testedBrowser.entrySet().iterator(); iter.hasNext();) {
-            final Map.Entry<String, BrowserVersion> entry = iter.next();
-            final String browserKey = (String) entry.getKey();
-            final BrowserVersion browserVersion = (BrowserVersion) entry.getValue();
+        for (final Map.Entry<String, BrowserVersion> entry : testedBrowser.entrySet()) {
+            final String browserKey = entry.getKey();
+            final BrowserVersion browserVersion = entry.getValue();
 
             final WebClient client = new WebClient(browserVersion);
         

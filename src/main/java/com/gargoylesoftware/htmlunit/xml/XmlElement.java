@@ -78,8 +78,7 @@ public class XmlElement extends DomNamespaceNode {
             final Map<String, XmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
         attributes_ = attributes;
-        for (final Iterator<XmlAttr> values = attributes.values().iterator(); values.hasNext();) {
-            final XmlAttr attr = values.next();
+        for (final XmlAttr attr : attributes.values()) {
             attr.setParentNode(this);
         }
     }

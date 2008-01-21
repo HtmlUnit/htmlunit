@@ -44,7 +44,7 @@ import org.jaxen.Function;
 import org.jaxen.FunctionContext;
 import org.jaxen.UnresolvableException;
 
-import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A wrapper allowing to add new functions without affecting the original context.
@@ -61,7 +61,7 @@ public class FunctionContextWrapper implements FunctionContext {
      * @param functionContext the context to wrap
      */
     public FunctionContextWrapper(final FunctionContext functionContext) {
-        Assert.notNull("function context", functionContext);
+        AssertionUtils.notNull("function context", functionContext);
         wrappedContext_ = functionContext;
     }
 
@@ -86,8 +86,8 @@ public class FunctionContextWrapper implements FunctionContext {
      * @param function the object to be used when evaluating the function.
      */
     public void registerFunction(final String localName, final Function function) {
-        Assert.notNull("function", function);
-        Assert.notNull("localName", localName);
+        AssertionUtils.notNull("function", function);
+        AssertionUtils.notNull("localName", localName);
         
         localFunctions_.put(localName, function);
     }

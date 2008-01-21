@@ -354,7 +354,7 @@
         <function name="item"/>
     </class>
 
-    <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLCollection" JSObject="true">
+    <class name="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
         <function name="namedItem"/>
@@ -363,7 +363,7 @@
         </function>
     </class>
 
-    <class name="HTMLCollectionTags" extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLCollectionTags"
+    <class name="HTMLCollectionTags" extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLCollectionTags"
     	JSObject="true">
         <function name="tags"/>
     </class>

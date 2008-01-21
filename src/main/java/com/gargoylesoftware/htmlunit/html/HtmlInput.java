@@ -40,13 +40,13 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  *  Wrapper for the html element "input"
@@ -98,7 +98,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
      * It may be the same window or it may be a freshly loaded one.
      */
     public Page setValueAttribute(final String newValue) {
-        Assert.notNull("newValue", newValue);
+        AssertionUtils.notNull("newValue", newValue);
         setAttributeValue("value", newValue);
 
         return executeOnChangeHandlerIfAppropriate(this);

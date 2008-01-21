@@ -60,7 +60,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
@@ -78,6 +77,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A representation of an HTML page returned from a server. This class is the
@@ -291,7 +291,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @throws ElementNotFoundException If no anchors are found with the specified text
      */
     public HtmlAnchor getFirstAnchorByText(final String text) throws ElementNotFoundException {
-        Assert.notNull("text", text);
+        AssertionUtils.notNull("text", text);
 
         for (final HtmlAnchor anchor : getAnchors()) {
             if (text.equals(anchor.asText())) {
@@ -1670,7 +1670,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void addHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
-        Assert.notNull("listener", listener);
+        AssertionUtils.notNull("listener", listener);
         synchronized (lock_) {
             if (attributeListeners_ == null) {
                 attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
@@ -1690,7 +1690,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void removeHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
-        Assert.notNull("listener", listener);
+        AssertionUtils.notNull("listener", listener);
         synchronized (lock_) {
             if (attributeListeners_ != null) {
                 attributeListeners_.remove(listener);

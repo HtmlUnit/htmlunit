@@ -37,8 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 import java.util.Map;
 
@@ -81,7 +81,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @param newValue The value.
      */
     public void setValue(final String newValue) {
-        Assert.notNull("newValue", newValue);
+        AssertionUtils.notNull("newValue", newValue);
         value_ = newValue;
     }
 

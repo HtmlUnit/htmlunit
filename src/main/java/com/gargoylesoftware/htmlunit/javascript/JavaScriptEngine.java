@@ -58,7 +58,6 @@ import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
@@ -72,6 +71,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino javascript engine</a>
@@ -147,7 +147,7 @@ public class JavaScriptEngine implements Serializable {
      * @param webWindow the web window to initialize for
      */
     public void initialize(final WebWindow webWindow) {
-        Assert.notNull("webWindow", webWindow);
+        AssertionUtils.notNull("webWindow", webWindow);
 
         final ContextAction action = new ContextAction()
         {
@@ -348,7 +348,7 @@ public class JavaScriptEngine implements Serializable {
                            final String sourceName,
                            final int startLine) {
 
-        Assert.notNull("sourceCode", sourceCode);
+        AssertionUtils.notNull("sourceCode", sourceCode);
 
         // Pre process the source code
         sourceCode = preProcess(htmlPage, sourceCode, sourceName, null);

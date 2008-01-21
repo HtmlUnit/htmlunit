@@ -54,7 +54,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -73,6 +72,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A JavaScript object for a Window.
@@ -484,7 +484,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // won't work properly
             setDomNode(htmlPage);
 
-            Assert.notNull("document_", document_);
+            AssertionUtils.notNull("document_", document_);
             document_.setDomNode(htmlPage);
         }
     }

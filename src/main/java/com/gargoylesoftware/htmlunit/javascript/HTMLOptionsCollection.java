@@ -41,12 +41,12 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Option;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -85,7 +85,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param select The HtmlSelect that this object will retrieve elements from.
      */
     public void initialize(final HtmlSelect select) {
-        Assert.notNull("select", select);
+        AssertionUtils.notNull("select", select);
         htmlSelect_ = select;
     }
 

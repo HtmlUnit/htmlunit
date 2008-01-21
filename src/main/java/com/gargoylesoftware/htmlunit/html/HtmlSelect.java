@@ -43,10 +43,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * Wrapper for the HTML element "select".
@@ -418,7 +418,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public HtmlOption getOptionByValue(final String value)
         throws ElementNotFoundException {
-        Assert.notNull("value", value);
+        AssertionUtils.notNull("value", value);
 
         return (HtmlOption) getOneHtmlElementByAttribute("option", "value", value);
     }

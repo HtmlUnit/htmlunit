@@ -37,8 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * Intermediate base class for DOM Nodes that have namespaces.  That includes HtmlElement
@@ -64,7 +64,7 @@ public abstract class DomNamespaceNode extends DomNode {
      */
     protected DomNamespaceNode(final String namespaceURI, final String qualifiedName, final Page page) {
         super(page);
-        Assert.notNull("qualifiedName", qualifiedName);
+        AssertionUtils.notNull("qualifiedName", qualifiedName);
         qualifiedName_ = qualifiedName;
         if (namespaceURI != null && namespaceURI.length() > 0 && qualifiedName.indexOf(':') != -1) {
             namespaceURI_ = namespaceURI;

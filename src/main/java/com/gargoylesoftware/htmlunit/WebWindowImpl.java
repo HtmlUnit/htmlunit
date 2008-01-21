@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -76,7 +77,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * @param webClient The web client that "owns" this window.
      */
     public WebWindowImpl(final WebClient webClient) {
-        Assert.notNull("webClient", webClient);
+        AssertionUtils.notNull("webClient", webClient);
         webClient_ = webClient;
         performRegistration();
     }

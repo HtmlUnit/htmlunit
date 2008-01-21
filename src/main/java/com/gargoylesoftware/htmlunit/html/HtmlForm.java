@@ -51,7 +51,6 @@ import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jaxen.JaxenException;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
@@ -63,6 +62,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * Wrapper for the html element "form"
@@ -449,7 +449,7 @@ public class HtmlForm extends ClickableElement {
      * @return See above
      */
     public List<HtmlRadioButtonInput> getRadioButtonsByName(final String name) {
-        Assert.notNull("name", name);
+        AssertionUtils.notNull("name", name);
 
         final List<HtmlRadioButtonInput> results = new ArrayList<HtmlRadioButtonInput>();
 
@@ -502,7 +502,7 @@ public class HtmlForm extends ClickableElement {
      * @return The first checked radio button.
      */
     public HtmlRadioButtonInput getCheckedRadioButton(final String name) {
-        Assert.notNull("name", name);
+        AssertionUtils.notNull("name", name);
 
         for (final HtmlElement element : getAllHtmlChildElements()) {
             if (element instanceof HtmlRadioButtonInput

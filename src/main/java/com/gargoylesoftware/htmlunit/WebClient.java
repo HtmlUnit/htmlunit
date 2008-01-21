@@ -84,6 +84,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -200,7 +201,7 @@ public class WebClient implements Serializable {
      * @param browserVersion The browser version to simulate.
      */
     public WebClient(final BrowserVersion browserVersion) {
-        Assert.notNull("browserVersion", browserVersion);
+        AssertionUtils.notNull("browserVersion", browserVersion);
 
         homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
@@ -224,8 +225,8 @@ public class WebClient implements Serializable {
      * @param proxyPort The port to use on the proxy server
      */
     public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
-        Assert.notNull("browserVersion", browserVersion);
-        Assert.notNull("proxyHost", proxyHost);
+        AssertionUtils.notNull("browserVersion", browserVersion);
+        AssertionUtils.notNull("proxyHost", proxyHost);
 
         homePage_ = "http://www.gargoylesoftware.com/";
         browserVersion_ = browserVersion;
@@ -283,7 +284,7 @@ public class WebClient implements Serializable {
      * @param webConnection The new web connection
      */
     public void setWebConnection(final WebConnection webConnection) {
-        Assert.notNull("webConnection", webConnection);
+        AssertionUtils.notNull("webConnection", webConnection);
         webConnection_ = webConnection;
     }
 
@@ -438,8 +439,8 @@ public class WebClient implements Serializable {
         throws
             IOException, FailingHttpStatusCodeException {
 
-        Assert.notNull("webResponse", webResponse);
-        Assert.notNull("webWindow", webWindow);
+        AssertionUtils.notNull("webResponse", webResponse);
+        AssertionUtils.notNull("webWindow", webWindow);
 
         final Page oldPage = webWindow.getEnclosedPage();
         if (oldPage != null) {
@@ -569,7 +570,7 @@ public class WebClient implements Serializable {
      * @param credentialsProvider The new credentials provider to use to authenticate.
      */
     public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
-        Assert.notNull("credentialsProvider", credentialsProvider);
+        AssertionUtils.notNull("credentialsProvider", credentialsProvider);
         credentialsProvider_ = credentialsProvider;
     }
 
@@ -823,7 +824,7 @@ public class WebClient implements Serializable {
      * @param window The new window.
      */
     public void setCurrentWindow(final WebWindow window) {
-        Assert.notNull("window", window);
+        AssertionUtils.notNull("window", window);
         currentWindow_ = window;
     }
 
@@ -853,7 +854,7 @@ public class WebClient implements Serializable {
      * @param listener A listener.
      */
     public void addWebWindowListener(final WebWindowListener listener) {
-        Assert.notNull("listener", listener);
+        AssertionUtils.notNull("listener", listener);
         webWindowListeners_.add(listener);
     }
 
@@ -862,7 +863,7 @@ public class WebClient implements Serializable {
      * @param listener A listener.
      */
     public void removeWebWindowListener(final WebWindowListener listener) {
-        Assert.notNull("listener", listener);
+        AssertionUtils.notNull("listener", listener);
         webWindowListeners_.remove(listener);
     }
 
@@ -893,7 +894,7 @@ public class WebClient implements Serializable {
      * @return The new window.
      */
     public WebWindow openWindow(final URL url, final String windowName) {
-        Assert.notNull("windowName", windowName);
+        AssertionUtils.notNull("windowName", windowName);
         return openWindow(url, windowName, getCurrentWindow());
     }
 
@@ -941,8 +942,8 @@ public class WebClient implements Serializable {
     private WebWindow openTargetWindow(
             final WebWindow opener, final String windowName, final String defaultName) {
 
-        Assert.notNull("opener", opener);
-        Assert.notNull("defaultName", defaultName);
+        AssertionUtils.notNull("opener", opener);
+        AssertionUtils.notNull("defaultName", defaultName);
 
         String windowToOpen = windowName;
         if (windowToOpen == null || windowToOpen.length() == 0) {
@@ -1031,7 +1032,7 @@ public class WebClient implements Serializable {
      * @param pageCreator The new page creator
      */
     public void setPageCreator(final PageCreator pageCreator) {
-        Assert.notNull("pageCreator", pageCreator);
+        AssertionUtils.notNull("pageCreator", pageCreator);
         pageCreator_ = pageCreator;
     }
 
@@ -1052,7 +1053,7 @@ public class WebClient implements Serializable {
      * @throws WebWindowNotFoundException If the {@link WebWindow} can't be found.
      */
     public WebWindow getWebWindowByName(final String name) throws WebWindowNotFoundException {
-        Assert.notNull("name", name);
+        AssertionUtils.notNull("name", name);
 
         for (final WebWindow webWindow : webWindows_) {
             if (webWindow.getName().equals(name)) {
@@ -1070,7 +1071,7 @@ public class WebClient implements Serializable {
      * @param webWindow The new WebWindow
      */
     public void initialize(final WebWindow webWindow) {
-        Assert.notNull("webWindow", webWindow);
+        AssertionUtils.notNull("webWindow", webWindow);
         if (scriptEngine_ != null) {
             scriptEngine_.initialize(webWindow);
         }
@@ -1083,7 +1084,7 @@ public class WebClient implements Serializable {
      * @param newPage The new page.
      */
     public void initialize(final Page newPage) {
-        Assert.notNull("newPage", newPage);
+        AssertionUtils.notNull("newPage", newPage);
         if (scriptEngine_ != null) {
             ((Window) newPage.getEnclosingWindow().getScriptObject()).initialize(newPage);
         }
@@ -1096,7 +1097,7 @@ public class WebClient implements Serializable {
      * @param webWindow The new WebWindow
      */
     public void initializeEmptyWindow(final WebWindow webWindow) {
-        Assert.notNull("webWindow", webWindow);
+        AssertionUtils.notNull("webWindow", webWindow);
         if (scriptEngine_ != null) {
             initialize(webWindow);
             ((Window) webWindow.getScriptObject()).initialize();
@@ -1110,7 +1111,7 @@ public class WebClient implements Serializable {
      * @param webWindow The new WebWindow
      */
     public void registerWebWindow(final WebWindow webWindow) {
-        Assert.notNull("webWindow", webWindow);
+        AssertionUtils.notNull("webWindow", webWindow);
         webWindows_.add(webWindow);
     }
 
@@ -1121,7 +1122,7 @@ public class WebClient implements Serializable {
      * @param webWindow The WebWindow to remove
      */
     public void deregisterWebWindow(final WebWindow webWindow) {
-        Assert.notNull("webWindow", webWindow);
+        AssertionUtils.notNull("webWindow", webWindow);
         webWindows_.remove(webWindow);
 
         if (getCurrentWindow() == webWindow) {
@@ -1145,7 +1146,7 @@ public class WebClient implements Serializable {
     }
 
     private static URL makeUrl(final String urlString) throws MalformedURLException {
-        Assert.notNull("urlString", urlString);
+        AssertionUtils.notNull("urlString", urlString);
 
         if (TextUtil.startsWithIgnoreCase(urlString, "javascript:")) {
             return new URL(null, urlString, JavaScriptUrlStreamHandler_);
@@ -1464,9 +1465,9 @@ public class WebClient implements Serializable {
         final SubmitMethod method = webRequestSettings.getSubmitMethod();
         final List<KeyValuePair> parameters = webRequestSettings.getRequestParameters();
 
-        Assert.notNull("url", url);
-        Assert.notNull("method", method);
-        Assert.notNull("parameters", parameters);
+        AssertionUtils.notNull("url", url);
+        AssertionUtils.notNull("method", method);
+        AssertionUtils.notNull("parameters", parameters);
 
         getLog().debug("Load response for " + url.toExternalForm());
 

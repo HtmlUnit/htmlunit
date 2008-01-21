@@ -37,7 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import com.gargoylesoftware.htmlunit.Assert;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
+
 import org.apache.commons.logging.Log;
 import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
@@ -57,7 +58,7 @@ public class StrictErrorReporter implements ErrorReporter {
      * @param log The log to use when reporting errors
      */
     public StrictErrorReporter(final Log log) {
-        Assert.notNull("log", log);
+        AssertionUtils.notNull("log", log);
         log_ = log;
     }
 

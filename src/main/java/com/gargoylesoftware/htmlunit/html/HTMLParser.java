@@ -58,11 +58,11 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * SAX parser implementation that uses the neko {@link org.cyberneko.html.HTMLConfiguration}
@@ -527,8 +527,8 @@ class HTMLErrorHandler extends DefaultErrorHandler {
     private final URL url_;
 
     HTMLErrorHandler(final HTMLParserListener listener, final URL url) {
-        Assert.notNull("listener", listener);
-        Assert.notNull("url", url);
+        AssertionUtils.notNull("listener", listener);
+        AssertionUtils.notNull("url", url);
         listener_ = listener;
         url_ = url;
     }

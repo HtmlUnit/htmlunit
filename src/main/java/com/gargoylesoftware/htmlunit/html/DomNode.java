@@ -51,11 +51,11 @@ import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.mozilla.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
@@ -1109,7 +1109,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @see #removeDomChangeListener(DomChangeListener)
      */
     public void addDomChangeListener(final DomChangeListener listener) {
-        Assert.notNull("listener", listener);
+        AssertionUtils.notNull("listener", listener);
         synchronized (domListeners_lock_) {
             if (domListeners_ == null) {
                 domListeners_ = new ArrayList<DomChangeListener>();
@@ -1129,7 +1129,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @see #addDomChangeListener(DomChangeListener)
      */
     public void removeDomChangeListener(final DomChangeListener listener) {
-        Assert.notNull("listener", listener);
+        AssertionUtils.notNull("listener", listener);
         synchronized (domListeners_lock_) {
             if (domListeners_ != null) {
                 domListeners_.remove(listener);

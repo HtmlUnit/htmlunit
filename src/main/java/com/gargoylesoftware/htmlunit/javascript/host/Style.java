@@ -52,8 +52,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.Assert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A JavaScript object for a Style.
@@ -158,7 +158,7 @@ public class Style extends SimpleScriptable implements Cloneable {
      */
     void initialize(final HTMLElement htmlElement) {
         // Initialize.
-        Assert.notNull("htmlElement", htmlElement);
+        AssertionUtils.notNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
         setDomNode(htmlElement.getDomNodeOrNull(), false);
 

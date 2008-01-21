@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.mozilla.javascript.Context;
@@ -227,9 +226,7 @@ public class HTMLSelectElement extends FormField {
     public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
-        final Iterator<HtmlOption> iter = htmlSelect.getSelectedOptions().iterator();
-        while (iter.hasNext()) {
-            final HtmlOption itemToUnSelect = iter.next();
+        for (final HtmlOption itemToUnSelect : htmlSelect.getSelectedOptions()) {
             htmlSelect.setSelectedAttribute(itemToUnSelect, false);
         }
         if (index < 0) {
