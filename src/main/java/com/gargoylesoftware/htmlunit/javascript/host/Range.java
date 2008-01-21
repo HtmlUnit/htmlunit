@@ -43,7 +43,6 @@ import java.util.List;
 import org.apache.commons.collections.ListUtils;
 import org.mozilla.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**

@@ -83,8 +83,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.xpath.FunctionContextWrapper;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.html.xpath.LowerCaseFunction;
-import com.gargoylesoftware.htmlunit.javascript.HTMLCollection;
-import com.gargoylesoftware.htmlunit.javascript.HTMLCollectionTags;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
