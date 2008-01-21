@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
