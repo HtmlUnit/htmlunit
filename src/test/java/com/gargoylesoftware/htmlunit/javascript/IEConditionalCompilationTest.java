@@ -38,7 +38,11 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -53,21 +57,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class IEConditionalCompilationTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public IEConditionalCompilationTest(final String name) {
-        super(name);
-    }
+public class IEConditionalCompilationTest {
 
     /**
      * @throws Exception If the test fails.
      */
-    public void testSimple() throws Exception {
+    @Test
+    public void simple() throws Exception {
         final String script = "/*@cc_on alert('testing @cc_on'); @*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
@@ -79,7 +75,8 @@ public class IEConditionalCompilationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
-    public void testIf() throws Exception {
+    @Test
+    public void ifTest() throws Exception {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"5.6"});
@@ -89,7 +86,8 @@ public class IEConditionalCompilationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
-    public void testVariables_jscript_version() throws Exception {
+    @Test
+    public void variables_jscript_version() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_version) @*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"5.6"});
@@ -100,7 +98,8 @@ public class IEConditionalCompilationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
-    public void testVariables_jscript_build() throws Exception {
+    @Test
+    public void variables_jscript_build() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_build) @*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"6626"});
@@ -111,7 +110,8 @@ public class IEConditionalCompilationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
-    public void testReservedString() throws Exception {
+    @Test
+    public void reservedString() throws Exception {
         final String script = "/*@cc_on alert('testing /*@cc_on'); @*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
@@ -123,7 +123,8 @@ public class IEConditionalCompilationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
-    public void testSet() throws Exception {
+    @Test
+    public void set() throws Exception {
         final String script = "/*@cc_on @set @mine = 12 alert(@mine); @*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
@@ -148,8 +149,8 @@ public class IEConditionalCompilationTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        client.getPage(WebTestCase.URL_FIRST);
+        Assert.assertEquals(Arrays.asList(expectedAlerts), collectedAlerts);
     }
     
 }
