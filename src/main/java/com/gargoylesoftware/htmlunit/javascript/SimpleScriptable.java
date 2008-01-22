@@ -44,6 +44,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -51,7 +52,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A javascript object for a Location
@@ -157,7 +157,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
      */
     protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
-        AssertionUtils.notNull("domNode", domNode);
+        WebAssert.notNull("domNode", domNode);
         domNode_ = domNode;
         if (assignScriptObject) {
             domNode_.setScriptObject(this);

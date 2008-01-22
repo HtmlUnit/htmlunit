@@ -40,8 +40,6 @@ package com.gargoylesoftware.htmlunit;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
-
 /**
  * A simple alert handler that keeps track of alerts in a list.
  *
@@ -64,7 +62,7 @@ public class CollectingAlertHandler implements AlertHandler {
      * @param list The list to store alerts in.
      */
     public CollectingAlertHandler(final List<String> list) {
-        AssertionUtils.notNull("list", list);
+        WebAssert.notNull("list", list);
         collectedAlerts_ = list;
     }
 

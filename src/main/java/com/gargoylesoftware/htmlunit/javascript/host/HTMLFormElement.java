@@ -45,6 +45,7 @@ import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -55,7 +56,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A JavaScript object for a Form.
@@ -109,7 +109,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param name The new value.
      */
     public void jsxSet_name(final String name) {
-        AssertionUtils.notNull("name", name);
+        WebAssert.notNull("name", name);
         getHtmlForm().setNameAttribute(name);
     }
 
@@ -159,7 +159,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param action The new value.
      */
     public void jsxSet_action(final String action) {
-        AssertionUtils.notNull("action", action);
+        WebAssert.notNull("action", action);
         getHtmlForm().setActionAttribute(action);
     }
 
@@ -176,7 +176,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param method The new value.
      */
     public void jsxSet_method(final String method) {
-        AssertionUtils.notNull("method", method);
+        WebAssert.notNull("method", method);
         getHtmlForm().setMethodAttribute(method);
     }
 
@@ -209,7 +209,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param target The new value.
      */
     public void jsxSet_target(final String target) {
-        AssertionUtils.notNull("target", target);
+        WebAssert.notNull("target", target);
         getHtmlForm().setTargetAttribute(target);
     }
 
@@ -226,7 +226,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param encoding The new value.
      */
     public void jsxSet_encoding(final String encoding) {
-        AssertionUtils.notNull("encoding", encoding);
+        WebAssert.notNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
     }
 

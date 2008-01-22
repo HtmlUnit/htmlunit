@@ -37,10 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
-
 import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.KeyValuePair;
+import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
  * Wrapper for the html element "isindex".  Note that this element has been
@@ -81,7 +81,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * @param newValue The value.
      */
     public void setValue(final String newValue) {
-        AssertionUtils.notNull("newValue", newValue);
+        WebAssert.notNull("newValue", newValue);
         value_ = newValue;
     }
 

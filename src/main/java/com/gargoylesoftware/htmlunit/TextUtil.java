@@ -44,8 +44,6 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
-
 /**
  * Utility methods relating to text.
  *
@@ -71,8 +69,8 @@ public final class TextUtil {
      * @return true if the string starts with the prefix.
      */
     public static boolean startsWithIgnoreCase(final String stringToCheck, final String prefix) {
-        AssertionUtils.notNull("stringToCheck", stringToCheck);
-        AssertionUtils.notNull("prefix", prefix);
+        WebAssert.notNull("stringToCheck", stringToCheck);
+        WebAssert.notNull("prefix", prefix);
 
         if (prefix.length() == 0) {
             throw new IllegalArgumentException("Prefix may not be empty");

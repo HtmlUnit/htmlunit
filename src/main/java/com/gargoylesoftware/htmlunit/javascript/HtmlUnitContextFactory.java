@@ -44,8 +44,8 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
@@ -67,7 +67,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * @param log the log that the error reporter should use
      */
     public HtmlUnitContextFactory(final Log log) {
-        AssertionUtils.notNull("log", log);
+        WebAssert.notNull("log", log);
         log_ = log;
     }
 

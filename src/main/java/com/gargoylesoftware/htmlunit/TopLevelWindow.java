@@ -39,8 +39,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
-
 /**
  * A window representing a top level browser window.
  *
@@ -63,7 +61,7 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
      */
     public TopLevelWindow(final String name, final WebClient webClient) {
         super(webClient);
-        AssertionUtils.notNull("name", name);
+        WebAssert.notNull("name", name);
         setName(name);
     }
 

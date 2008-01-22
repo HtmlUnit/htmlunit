@@ -37,11 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
-
 import org.apache.commons.logging.Log;
 import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
+
+import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
  * A javascript error reporter that will log all warnings and errors, no matter how trivial.
@@ -58,7 +58,7 @@ public class StrictErrorReporter implements ErrorReporter {
      * @param log The log to use when reporting errors
      */
     public StrictErrorReporter(final Log log) {
-        AssertionUtils.notNull("log", log);
+        WebAssert.notNull("log", log);
         log_ = log;
     }
 

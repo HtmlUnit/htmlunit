@@ -60,11 +60,11 @@ import org.mozilla.javascript.Function;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * An abstract wrapper for html elements
@@ -786,9 +786,9 @@ public abstract class HtmlElement extends DomElement {
         throws
             ElementNotFoundException {
 
-        AssertionUtils.notNull("elementName", elementName);
-        AssertionUtils.notNull("attributeName", attributeName);
-        AssertionUtils.notNull("attributeValue", attributeValue);
+        WebAssert.notNull("elementName", elementName);
+        WebAssert.notNull("attributeName", attributeName);
+        WebAssert.notNull("attributeValue", attributeValue);
 
         final List< ? extends HtmlElement> list =
             getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
@@ -1099,7 +1099,7 @@ public abstract class HtmlElement extends DomElement {
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void addHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
-        AssertionUtils.notNull("listener", listener);
+        WebAssert.notNull("listener", listener);
         synchronized (this) {
             if (attributeListeners_ == null) {
                 attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
@@ -1117,7 +1117,7 @@ public abstract class HtmlElement extends DomElement {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void removeHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
-        AssertionUtils.notNull("listener", listener);
+        WebAssert.notNull("listener", listener);
         synchronized (this) {
             if (attributeListeners_ != null) {
                 attributeListeners_.remove(listener);

@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
+import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
@@ -72,7 +73,6 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * A JavaScript object for a Window.
@@ -484,7 +484,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // won't work properly
             setDomNode(htmlPage);
 
-            AssertionUtils.notNull("document_", document_);
+            WebAssert.notNull("document_", document_);
             document_.setDomNode(htmlPage);
         }
     }

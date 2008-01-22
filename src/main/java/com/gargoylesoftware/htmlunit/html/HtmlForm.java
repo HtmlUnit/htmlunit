@@ -59,10 +59,10 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
 
 /**
  * Wrapper for the html element "form"
@@ -449,7 +449,7 @@ public class HtmlForm extends ClickableElement {
      * @return See above
      */
     public List<HtmlRadioButtonInput> getRadioButtonsByName(final String name) {
-        AssertionUtils.notNull("name", name);
+        WebAssert.notNull("name", name);
 
         final List<HtmlRadioButtonInput> results = new ArrayList<HtmlRadioButtonInput>();
 
@@ -502,7 +502,7 @@ public class HtmlForm extends ClickableElement {
      * @return The first checked radio button.
      */
     public HtmlRadioButtonInput getCheckedRadioButton(final String name) {
-        AssertionUtils.notNull("name", name);
+        WebAssert.notNull("name", name);
 
         for (final HtmlElement element : getAllHtmlChildElements()) {
             if (element instanceof HtmlRadioButtonInput

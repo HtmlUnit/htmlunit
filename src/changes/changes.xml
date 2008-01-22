@@ -7,8 +7,8 @@
 
     <body>
         <release version="2.0-prerelease">
-            <action type="update" dev="asashour">
-                Rename Assert to AssertionUtils.
+            <action type="remove" dev="asashour">
+                Remove Assert, use WebAssert instead.
             </action>
             <action type="update" dev="asashour">
                 Upgrade JUnit to 4.4.

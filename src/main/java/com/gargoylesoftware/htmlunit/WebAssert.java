@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
 public final class WebAssert {
@@ -520,4 +521,15 @@ public final class WebAssert {
         }
     }
 
+    /**
+     * Assert that the specified parameter is not null.  Throw a NullPointerException
+     * if a null is found.
+     * @param description The description to pass into the NullPointerException
+     * @param object The object to check for null.
+     */
+    public static void notNull(final String description, final Object object) {
+        if (object == null) {
+            throw new NullPointerException(description);
+        }
+    }
 }

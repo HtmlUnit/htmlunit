@@ -46,7 +46,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.util.AssertionUtils;
+import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
  * Wrapper for the HTML element "select".
@@ -418,7 +418,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      */
     public HtmlOption getOptionByValue(final String value)
         throws ElementNotFoundException {
-        AssertionUtils.notNull("value", value);
+        WebAssert.notNull("value", value);
 
         return (HtmlOption) getOneHtmlElementByAttribute("option", "value", value);
     }
