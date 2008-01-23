@@ -476,16 +476,17 @@ public class Document extends Node {
             return "";
         }
 
-        final StringBuffer buffer = new StringBuffer();
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (i != 0) {
-                buffer.append(";");
+        final StringBuilder buffer = new StringBuilder();
+        for (final Cookie cookie : cookies)
+        {
+            if (buffer.length() != 0) {
+                buffer.append("; ");
             }
-            buffer.append(cookies[i].getName());
+            buffer.append(cookie.getName());
             buffer.append("=");
-            buffer.append(cookies[i].getValue());
+            buffer.append(cookie.getValue());
         }
+
         return buffer.toString();
     }
 

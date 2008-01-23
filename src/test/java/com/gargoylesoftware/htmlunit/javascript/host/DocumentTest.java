@@ -1740,7 +1740,7 @@ public class DocumentTest extends WebTestCase {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var cookieSet = document.cookie.split(';');\n"
+            + "    var cookieSet = document.cookie.split('; ');\n"
             + "    var setSize = cookieSet.length;\n"
             + "    var crumbs;\n"
             + "    var x=0;\n"
