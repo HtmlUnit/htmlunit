@@ -1002,7 +1002,7 @@ public class WebClientTest extends WebTestCase {
     private HtmlPage getPageForKeyboardTest(
         final WebClient webClient, final String[] tabIndexValues) throws Exception {
 
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append(
             "<html><head><title>First</title></head><body><form name='form1' method='post' onsubmit='return false;'>");
 
@@ -1488,7 +1488,7 @@ public class WebClientTest extends WebTestCase {
      * @return the hex representation
      */
     private static String hexRepresentation(final byte[] digest) {
-        final StringBuffer hexString = new StringBuffer();
+        final StringBuilder hexString = new StringBuilder();
         for (int i = 0; i < digest.length; i++) {
             final byte b = digest[i];
             hexString.append(Integer.toHexString(0xFF & b));

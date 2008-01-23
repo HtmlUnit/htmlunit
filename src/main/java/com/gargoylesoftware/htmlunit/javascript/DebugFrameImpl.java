@@ -85,7 +85,7 @@ public class DebugFrameImpl implements DebugFrame {
      */
     public void onEnter(final Context cx, final Scriptable activation, final Scriptable thisObj, final Object[] args) {
         if (LOG.isTraceEnabled()) {
-            final StringBuffer sb = new StringBuffer();
+            final StringBuilder sb = new StringBuilder();
             Scriptable parent = activation.getParentScope();
             while (parent != null) {
                 sb.append("   ");

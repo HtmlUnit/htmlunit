@@ -297,7 +297,7 @@ public final class HTMLParser {
         private final Stack<DomNode> stack_ = new Stack<DomNode>();
 
         private DomNode currentNode_;
-        private StringBuffer characters_;
+        private StringBuilder characters_;
         private boolean headParsed_ = false;
 
         /**
@@ -418,7 +418,7 @@ public final class HTMLParser {
         public void characters(final char ch[], final int start, final int length) throws SAXException {
 
             if (characters_ == null) {
-                characters_ = new StringBuffer();
+                characters_ = new StringBuilder();
             }
             characters_.append(ch, start, length);
         }
@@ -427,7 +427,7 @@ public final class HTMLParser {
         public void ignorableWhitespace(final char ch[], final int start, final int length) throws SAXException {
 
             if (characters_ == null) {
-                characters_ = new StringBuffer();
+                characters_ = new StringBuilder();
             }
             characters_.append(ch, start, length);
         }

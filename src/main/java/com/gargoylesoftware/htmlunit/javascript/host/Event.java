@@ -472,7 +472,7 @@ public class Event extends SimpleScriptable {
      * {@inheritDoc}
      */
     public String toString() {
-        final StringBuffer buffer = new StringBuffer("Event ");
+        final StringBuilder buffer = new StringBuilder("Event ");
         buffer.append(jsxGet_type());
         buffer.append(" (");
         buffer.append("Current Target: ");

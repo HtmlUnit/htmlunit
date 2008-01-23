@@ -732,7 +732,7 @@ public abstract class HtmlElement extends DomElement {
      * @return See above
      */
     public String toString() {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
 
         buffer.append(ClassUtils.getShortClassName(getClass()));
         buffer.append("[<");

@@ -134,7 +134,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         LOG.info("Created file " + f.getAbsolutePath()
                 + " for response " + counter_ + ": " + response.getUrl());
 
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
         buffer.append("fileName: '" + f.getName() + "', ");
         buffer.append("contentType: '" + response.getContentType() + "', ");
@@ -157,7 +157,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         if (headers == null || headers.isEmpty()) {
             return "{}";
         }
-        final StringBuffer buffer = new StringBuffer("{");
+        final StringBuilder buffer = new StringBuilder("{");
         for (final NameValuePair header : headers) {
             buffer.append("'" + header.getName() + "': '" + header.getValue().replaceAll("'", "\\'") + "', ");
         }

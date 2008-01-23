@@ -260,7 +260,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public String jsxFunction_getAllResponseHeaders() {
         if (webResponse_ != null) {
-            final StringBuffer buffer = new StringBuffer();
+            final StringBuilder buffer = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
                 buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
             }

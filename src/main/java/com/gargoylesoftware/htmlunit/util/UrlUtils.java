@@ -135,7 +135,7 @@ public final class UrlUtils {
      */
     private static URL createNewUrl(final String protocol, final String host, final int port,
             final String path, final String ref, final String query) throws MalformedURLException {
-        final StringBuffer s = new StringBuffer();
+        final StringBuilder s = new StringBuilder();
         s.append(protocol);
         s.append("://");
         s.append(host);

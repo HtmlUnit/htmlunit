@@ -73,7 +73,7 @@ public interface HTMLParserListener {
             getLog().warn(format(message, url, line, column, key));
         }
         private String format(final String message, final URL url, final int line, final int column, final String key) {
-            final StringBuffer buffer = new StringBuffer(message);
+            final StringBuilder buffer = new StringBuilder(message);
             buffer.append(" (");
             buffer.append(url.toExternalForm());
             buffer.append(" ");

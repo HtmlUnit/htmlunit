@@ -161,7 +161,7 @@ public final class WebWindowEvent extends EventObject {
      * @return A string representation of this event.
      */
     public String toString() {
-        final StringBuffer buffer = new StringBuffer(80);
+        final StringBuilder buffer = new StringBuilder(80);
         buffer.append("WebWindowEvent(source=[");
         buffer.append(getSource());
         buffer.append("] type=[");

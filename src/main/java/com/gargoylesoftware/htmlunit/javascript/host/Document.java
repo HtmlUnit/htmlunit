@@ -128,7 +128,7 @@ public class Document extends Node {
     private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
 
     /** The buffer that will be used for calls to document.write() */
-    private final StringBuffer writeBuffer_ = new StringBuffer();
+    private final StringBuilder writeBuffer_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
     private Window window_;
@@ -279,7 +279,7 @@ public class Document extends Node {
      * @return the string concatenation
      */
     private static String concatArgsAsString(final Object[] args) {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < args.length; i++) {
             buffer.append(Context.toString(args[i]));
         }

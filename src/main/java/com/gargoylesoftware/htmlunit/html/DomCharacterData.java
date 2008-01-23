@@ -129,7 +129,7 @@ public abstract class DomCharacterData extends DomNode {
      * @param arg The string to insert.
      */
     public void insertData(final int offset, final String arg) {
-        data_ = new StringBuffer(data_).insert(offset, arg).toString();
+        data_ = new StringBuilder(data_).insert(offset, arg).toString();
     }
 
     /**

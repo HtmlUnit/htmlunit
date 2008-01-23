@@ -264,7 +264,7 @@ public class Style extends SimpleScriptable implements Cloneable {
             final Map<String, String> styleMap = getStyleMap(true);
             styleMap.put(name, newValue);
 
-            final StringBuffer buffer = new StringBuffer();
+            final StringBuilder buffer = new StringBuilder();
             for (final Map.Entry<String, String> entry : styleMap.entrySet()) {
                 buffer.append(" ");
                 buffer.append(entry.getKey());

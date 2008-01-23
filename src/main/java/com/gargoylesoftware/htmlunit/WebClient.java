@@ -1258,7 +1258,7 @@ public class WebClient implements Serializable {
             }
         }
 
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append(baseUrl.getProtocol());
         buffer.append("://");
         buffer.append(baseUrl.getHost());
@@ -1554,7 +1554,7 @@ public class WebClient implements Serializable {
         final String fixedQuery = encode(query, URI.allowed_query);
 
         if (!StringUtils.equals(path, fixedPath) || !StringUtils.equals(query, fixedQuery)) {
-            final StringBuffer newUrl = new StringBuffer();
+            final StringBuilder newUrl = new StringBuilder();
             newUrl.append(url.getProtocol());
             newUrl.append("://");
             newUrl.append(url.getHost());

@@ -520,7 +520,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the contents of this node as html
      */
     public String jsxGet_innerHTML() {
-        final StringBuffer buf = new StringBuffer();
+        final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie(), !"SCRIPT".equals(jsxGet_tagName()));
         return buf.toString();
@@ -531,7 +531,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the contents of this node as text
      */
     public String jsxGet_innerText() {
-        final StringBuffer buf = new StringBuffer();
+        final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie(), false);
         return buf.toString();
@@ -544,19 +544,19 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the contents of this node as HTML
      */
     public String jsxGet_outerHTML() {
-        final StringBuffer buf = new StringBuffer();
+        final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printNode(buf, getDomNodeOrDie(), true);
         return buf.toString();
     }
 
-    private void printChildren(final StringBuffer buffer, final DomNode node, final boolean html) {
+    private void printChildren(final StringBuilder buffer, final DomNode node, final boolean html) {
         for (final DomNode child : node.getChildren()) {
             printNode(buffer, child, html);
         }
     }
 
-    private void printNode(final StringBuffer buffer, final DomNode node, final boolean html) {
+    private void printNode(final StringBuilder buffer, final DomNode node, final boolean html) {
         if (node instanceof DomComment) {
             // Remove whitespace sequences.
             final String s = node.getNodeValue().replaceAll("  ", " ");

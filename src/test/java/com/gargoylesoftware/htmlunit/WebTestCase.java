@@ -421,7 +421,7 @@ public abstract class WebTestCase extends BaseTestCase {
         final String baseJS = IOUtils.toString(is);
         IOUtils.closeQuietly(is);
 
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         sb.append("\n<script type='text/javascript'>\n");
         sb.append("var htmlunitReserved_tab = [");
         for (final ListIterator<String> iter = expectedAlerts.listIterator(); iter.hasNext();) {

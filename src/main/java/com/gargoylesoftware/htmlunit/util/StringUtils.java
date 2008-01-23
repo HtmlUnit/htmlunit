@@ -63,7 +63,7 @@ public final class StringUtils {
      * @return the escaped form of the specified string
      */
     public static String escapeXmlChars(final String s) {
-        final StringBuffer sb = new StringBuffer(s.length() * 2);
+        final StringBuilder sb = new StringBuilder(s.length() * 2);
         for (int i = 0; i < s.length(); i++) {
             final char c = s.charAt(i);
             switch (c) {

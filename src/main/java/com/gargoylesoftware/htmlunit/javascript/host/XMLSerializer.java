@@ -67,7 +67,7 @@ public class XMLSerializer extends SimpleScriptable {
      * @return The serialized string.
      */
     public String jsxFunction_serializeToString(final Node root) {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
         toXml(1, root.getDomNodeOrDie(), buffer, isIE);
         if (isIE) {
@@ -76,7 +76,7 @@ public class XMLSerializer extends SimpleScriptable {
         return buffer.toString();
     }
 
-    private void toXml(final int indent, final DomNode node, final StringBuffer buffer, final boolean isIE) {
+    private void toXml(final int indent, final DomNode node, final StringBuilder buffer, final boolean isIE) {
         buffer.append('<').append(node.getNodeName());
         if (node instanceof XmlElement) {
             final Map<String, XmlAttr> attributes = ((XmlElement) node).getAttributes();

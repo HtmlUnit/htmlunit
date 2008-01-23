@@ -498,8 +498,8 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @see #asText()
      */
     protected final String getChildrenAsText() {
-        final StringBuffer buffer = new StringBuffer();
-        final StringBuffer textBuffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
+        final StringBuilder textBuffer = new StringBuilder();
 
         boolean previousNodeWasText = false;
         for (final DomNode node : getChildren()) {
@@ -548,7 +548,7 @@ public abstract class DomNode implements Cloneable, Serializable {
      * @return The cleaned up text.
      */
     protected static String reduceWhitespace(final String text) {
-        final StringBuffer buffer = new StringBuffer(text.length());
+        final StringBuilder buffer = new StringBuilder(text.length());
         final int length = text.length();
         boolean whitespace = false;
         for (int i = 0; i < length; i++) {

@@ -1055,7 +1055,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 getLog().error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
                 return;
             }
-            final StringBuffer buffer = new StringBuffer(refreshString.substring(index + 4));
+            final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
             if (buffer.toString().trim().length() == 0) {
                 //content='10; URL=' is treated as content='10'
                 url = getWebResponse().getUrl();
@@ -1522,7 +1522,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
      * @return a basic representation
      */
     public String toString() {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append("HtmlPage(");
         buffer.append(getWebResponse().getUrl());
         buffer.append(")@");
