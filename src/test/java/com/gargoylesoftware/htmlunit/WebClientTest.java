@@ -1466,8 +1466,8 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testBinaryFileFromFileSystem() throws Exception {
-    	testBinaryFileFromFileSystem(BrowserVersion.FIREFOX_2);
-    	testBinaryFileFromFileSystem(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testBinaryFileFromFileSystem(BrowserVersion.FIREFOX_2);
+        testBinaryFileFromFileSystem(BrowserVersion.INTERNET_EXPLORER_6_0);
     }
 
     private void testBinaryFileFromFileSystem(final BrowserVersion browser) throws Exception {
