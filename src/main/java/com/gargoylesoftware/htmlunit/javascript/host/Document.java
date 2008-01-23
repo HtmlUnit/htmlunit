@@ -477,8 +477,7 @@ public class Document extends Node {
         }
 
         final StringBuilder buffer = new StringBuilder();
-        for (final Cookie cookie : cookies)
-        {
+        for (final Cookie cookie : cookies) {
             if (buffer.length() != 0) {
                 buffer.append("; ");
             }
