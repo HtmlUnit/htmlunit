@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="add" dev="asashour" id="1874624" due-to="Sudhan Moghe">
+                JavaScript: add support for XMLElement.getAttributeNode() (#1874624).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: document.cookie separates cookies with '; ' and not ';'.
             </action>

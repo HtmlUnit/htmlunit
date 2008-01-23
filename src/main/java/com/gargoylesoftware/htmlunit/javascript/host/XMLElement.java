@@ -173,4 +173,57 @@ public class XMLElement extends Node {
         }
         return collection;
     }
+    
+    /**
+     * Retrieves an attribute node by name.
+     * @param name The name of the attribute to retrieve.
+     * @return The Attr node with the specified name or <code>null</code> if there is no such attribute.
+     */
+    public Object jsxFunction_getAttributeNode(final String name) {
+        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributes();
+        for (final XmlAttr attr : attributes.values()) {
+            if (attr.getName().equals(name)) {
+                return attr.getScriptObject();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Represents the text content of the node or the concatenated text representing the node and its descendants.
+     * @return the text content of the node or the concatenated text representing the node and its descendants.
+     */
+    public String jsxGet_text() {
+        final StringBuilder buffer = new StringBuilder();
+        toText(getDomNodeOrDie(), buffer);
+        return buffer.toString();
+    }
+
+    private void toText(final DomNode node, final StringBuilder buffer) {
+        switch (node.getNodeType()) {
+            case org.w3c.dom.Node.DOCUMENT_TYPE_NODE:
+            case org.w3c.dom.Node.NOTATION_NODE:
+                return;
+            case org.w3c.dom.Node.TEXT_NODE:
+            case org.w3c.dom.Node.CDATA_SECTION_NODE:
+            case org.w3c.dom.Node.COMMENT_NODE:
+            case org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE:
+                buffer.append(node.getNodeValue());
+                break;
+            default:
+        }
+        for (final DomNode child : node.getChildren()) {
+            switch (child.getNodeType()) {
+                case org.w3c.dom.Node.ELEMENT_NODE:
+                    toText(child, buffer);
+                    break;
+
+                case org.w3c.dom.Node.TEXT_NODE:
+                case org.w3c.dom.Node.CDATA_SECTION_NODE:
+                    buffer.append(child.getNodeValue());
+                    break;
+                default:
+            }
+        }
+    }
 }

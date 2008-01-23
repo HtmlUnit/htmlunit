@@ -367,6 +367,9 @@ The reference stays the maven 1 build.
 		<contributor>
 			<name>David Bylsma</name>
 		</contributor>
+		<contributor>
+			<name>Sudhan Moghe</name>
+		</contributor>
 	</contributors>
 	<dependencies>
 		<dependency>

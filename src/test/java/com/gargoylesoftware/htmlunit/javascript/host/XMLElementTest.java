@@ -221,9 +221,6 @@ public class XMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetAttributeNode() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testGetAttributeNode(BrowserVersion.INTERNET_EXPLORER_7_0,
                 new String[] {"lbl_SettingName", "outerHTML", "Item"});
         testGetAttributeNode(BrowserVersion.FIREFOX_2,
