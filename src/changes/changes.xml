@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="fix" dev="mguillem">
+                Fixed ClassCastException occurring when a non HTML page is loaded with Firefox simulation (regression in 1.14).
+            </action>
             <action type="remove" dev="asashour">
                 Remove Assert, use WebAssert instead.
             </action>

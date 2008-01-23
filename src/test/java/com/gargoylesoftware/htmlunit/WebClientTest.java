@@ -1466,11 +1466,16 @@ public class WebClientTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     public void testBinaryFileFromFileSystem() throws Exception {
+    	testBinaryFileFromFileSystem(BrowserVersion.FIREFOX_2);
+    	testBinaryFileFromFileSystem(BrowserVersion.INTERNET_EXPLORER_6_0);
+    }
+
+    private void testBinaryFileFromFileSystem(final BrowserVersion browser) throws Exception {
         final String testfileName = "tiny-jpg.img";
         final File testfile = getTestFile(testfileName);
         final byte[] directBytes = IOUtils.toByteArray(new FileInputStream(testfile));
         final String directStr = hexRepresentation(directBytes);
-        final WebClient client = new WebClient();
+        final WebClient client = new WebClient(browser);
         final Page testpage = client.getPage(testfile.toURI().toURL());
         final byte[] webclientBytes = IOUtils.toByteArray(testpage.getWebResponse().getContentAsStream());
         final String webclientStr = hexRepresentation(webclientBytes);
