@@ -275,7 +275,7 @@ public class ScriptException extends RuntimeException {
         final StringTokenizer st = new StringTokenizer(stringWriter.toString(), "\r\n");
         while (st.hasMoreTokens()) {
             final String line = st.nextToken();
-            if (line.indexOf("at script") != -1) {
+            if (line.contains("at script")) {
                 writer.println();
                 writer.print(line.replaceFirst("at script\\.?", "at "));
             }

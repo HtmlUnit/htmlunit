@@ -392,7 +392,7 @@ public abstract class WebTestCase extends BaseTestCase {
                         "<html>\n<head>\n" + instrumentationJS + "\n</head>\n");
             }
             final String endScript = "\n<script>htmlunitReserved_addSummaryAfterOnload();</script>\n";
-            if (newContent.indexOf("</body>") != -1) {
+            if (newContent.contains("</body>")) {
                 newContent = StringUtils.replaceOnce(newContent, "</body>",  endScript + "</body>");
             }
             else {

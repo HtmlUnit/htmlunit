@@ -406,7 +406,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         }
         catch (final Exception e) {
             // nothing
-            assertTrue(e.getMessage().indexOf("not enough arguments") != -1);
+            assertTrue(e.getMessage().contains("not enough arguments"));
         }
 
     }

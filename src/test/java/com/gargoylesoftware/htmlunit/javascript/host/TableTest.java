@@ -594,7 +594,7 @@ public class TableTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
         final String xml = page.asXml();
-        assertTrue(xml.indexOf("width=\"200\"") != -1);
+        assertTrue(xml.contains("width=\"200\""));
     }
 
     /**

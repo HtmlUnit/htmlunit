@@ -226,7 +226,7 @@ public final class WebAssert {
      * @param text the text to check for
      */
     public static void assertTextNotPresent(final HtmlPage page, final String text) {
-        if (page.asText().indexOf(text) != -1) {
+        if (page.asText().contains(text)) {
             final String msg = "The page contains the text '" + text + "'.";
             throw new AssertionError(msg);
         }
@@ -243,7 +243,7 @@ public final class WebAssert {
     public static void assertTextNotPresentInElement(final HtmlPage page, final String text, final String id) {
         try {
             final HtmlElement element = page.getHtmlElementById(id);
-            if (element.asText().indexOf(text) != -1) {
+            if (element.asText().contains(text)) {
                 final String msg = "The element with ID '" + id + "' contains the text '" + text + "'.";
                 throw new AssertionError(msg);
             }
@@ -299,7 +299,7 @@ public final class WebAssert {
     public static void assertLinkPresentWithText(final HtmlPage page, final String text) {
         boolean found = false;
         for (final HtmlAnchor a : page.getAnchors()) {
-            if (a.asText().indexOf(text) != -1) {
+            if (a.asText().contains(text)) {
                 found = true;
                 break;
             }
@@ -320,7 +320,7 @@ public final class WebAssert {
     public static void assertLinkNotPresentWithText(final HtmlPage page, final String text) {
         boolean found = false;
         for (final HtmlAnchor a : page.getAnchors()) {
-            if (a.asText().indexOf(text) != -1) {
+            if (a.asText().contains(text)) {
                 found = true;
                 break;
             }

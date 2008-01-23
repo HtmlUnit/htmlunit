@@ -106,7 +106,7 @@ public class HtmlFileInputTest extends WebTestCase {
         while (path.startsWith("/")) {
             path = path.substring(1);
         }
-        if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
+        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
             testFileInput(URLDecoder.decode(path.replace('/', '\\'), "UTF-8"));
         }
         testFileInput("file:/" + path);
@@ -282,7 +282,7 @@ public class HtmlFileInputTest extends WebTestCase {
         //this is the value with UTF-8 encoding
         final String expectedResponse = "6A94 6848 D30C C77C 30D5 30A1 30A4 30EB 645 644 641 2E 74 78 74 <br>myInput";
         
-        assertTrue("Invalid Response: " + response, response.indexOf(expectedResponse) != -1);
+        assertTrue("Invalid Response: " + response, response.contains(expectedResponse));
         
         if (browserVersion.isIE()) {
             assertTrue(expectedResponse.length() < response.length());

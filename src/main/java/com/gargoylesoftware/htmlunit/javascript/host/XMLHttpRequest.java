@@ -191,7 +191,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return A DOM-compatible document object version of the data retrieved from the server.
      */
     public Object jsxGet_responseXML() {
-        if (webResponse_.getContentType().indexOf("xml") != -1) {
+        if (webResponse_.getContentType().contains("xml")) {
             try {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;
