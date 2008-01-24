@@ -397,6 +397,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHtml">
     </class>
 
+    <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLinkElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
+    </class>
+
     <class name="FormField" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
         JSObject="false">
         <property name="disabled" readable="true" writable="true"/>
