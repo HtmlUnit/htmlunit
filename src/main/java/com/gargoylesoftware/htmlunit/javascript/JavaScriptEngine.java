@@ -218,8 +218,8 @@ public class JavaScriptEngine implements Serializable {
                         obj.put("prototype", obj, prototype);
                         obj.setPrototype(prototype);
                         obj.setParentScope(window);
-                        ScriptableObject.defineProperty(window,
-                                config.getClassName(), obj, ScriptableObject.DONTENUM);
+                        ScriptableObject.defineProperty(window, config.getClassName(), obj, ScriptableObject.DONTENUM);
+
                         if (obj.getClass() == Element.class && webWindow.getEnclosedPage() instanceof HtmlPage) {
                             final DomNode domNode =
                                 new HtmlElement(null, "", (HtmlPage) webWindow.getEnclosedPage(), null) {

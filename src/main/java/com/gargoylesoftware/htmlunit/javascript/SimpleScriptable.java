@@ -344,7 +344,13 @@ public class SimpleScriptable extends ScriptableObject {
                 return "[object]"; // the super helpful IE solution
             }
             else {
-                return "[object " + getClassName() + "]"; // not fully correct as htmlunit names are not FF ones
+                final Window window = (Window) getTopLevelScope(this);
+                if (ScriptableObject.getProperty(window, getClassName()) == this) {
+                    return "[" + getClassName() + "]";
+                }
+                else {
+                    return "[object " + getClassName() + "]"; // not fully correct as htmlunit names are not FF ones
+                }
             }
         }
         else {

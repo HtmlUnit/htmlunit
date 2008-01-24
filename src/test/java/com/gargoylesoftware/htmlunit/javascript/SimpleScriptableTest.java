@@ -357,10 +357,7 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    public void testPrototypeToString() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void testWindowPropertyToString() throws Exception {
         final String content = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"

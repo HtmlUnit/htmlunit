@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="asashour">
+                JavaScript: correct toString() for properties in 'window' scope (FF only).
+            </action>
             <action type="update" dev="asashour" id="1876545">
                 JavaScript: detect encoding from XML declaration (#1876545).
             </action>

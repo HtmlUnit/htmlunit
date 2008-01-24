@@ -2488,9 +2488,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testWindowProperties() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testWindowProperties(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"undefined", "undefined"});
         testWindowProperties(BrowserVersion.FIREFOX_2, new String[] {"[Node]", "[Element]"});
     }
