@@ -35,66 +35,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for {@link HtmlHead}.
+ * The javascript object "HTMLHeadElement".
  *
  * @version $Revision$
- * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlHeadTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlHeadTest(final String name) {
-        super(name);
-    }
+public class HTMLHeadElement extends HTMLElement {
+
+    private static final long serialVersionUID = -6381573516360300401L;
 
     /**
-     * IE and FF both add an head element when it's not present in the html code
-     * @throws Exception if the test fails
+     * Create an instance.
      */
-    public void testAddedWhenMissing() throws Exception {
-        final String htmlContent = "<html><body>\n"
-            + "<script>\n"
-            + "alert(document.firstChild.firstChild.tagName);\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"HEAD"};
-        createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
-
-        loadPage(htmlContent, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+    public HTMLHeadElement() {
+        // Empty.
     }
 
-    /**
-     * @throws Exception if the test fails.
-     */
-    public void testSimpleScriptable() throws Exception {
-        final String html = "<html><head id='myId'><script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLHeadElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertInstanceOf(page.getHtmlElementById("myId"), HtmlHead.class);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }

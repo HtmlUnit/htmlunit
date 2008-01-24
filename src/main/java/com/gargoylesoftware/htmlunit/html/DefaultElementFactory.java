@@ -161,9 +161,9 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlFrame.TAG_NAME)) {
             if (attributeMap != null) {
-                final HtmlAttr srcAttribute = (HtmlAttr) attributeMap.get("src");
+                final HtmlAttr srcAttribute = attributeMap.get("src");
                 if (srcAttribute != null) {
-                    srcAttribute.setHtmlValue(((String) srcAttribute.getHtmlValue()).trim());
+                    srcAttribute.setHtmlValue(srcAttribute.getHtmlValue().trim());
                 }
             }
             element = new HtmlFrame(namespaceURI, qualifiedName, page, attributeMap);
@@ -209,9 +209,9 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlInlineFrame.TAG_NAME)) {
             if (attributeMap != null) {
-                final HtmlAttr srcAttribute = (HtmlAttr) attributeMap.get("src");
+                final HtmlAttr srcAttribute = attributeMap.get("src");
                 if (srcAttribute != null) {
-                    srcAttribute.setHtmlValue(((String) srcAttribute.getHtmlValue()).trim());
+                    srcAttribute.setHtmlValue(srcAttribute.getHtmlValue().trim());
                 }
             }
             element = new HtmlInlineFrame(namespaceURI, qualifiedName, page, attributeMap);

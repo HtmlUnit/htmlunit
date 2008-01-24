@@ -558,7 +558,7 @@ public class ClickableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
-    public void XXtestLink_onClick() throws Exception {
+    public void testLink_onClick() throws Exception {
         onClickPageTest("<html><head><title>foo</title><link id='clickId' onClick='alert(\"foo\")'/>\n"
             + "</head><body></body></html>");
     }
@@ -595,7 +595,7 @@ public class ClickableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
-    public void XXtestNoFrames_onClick() throws Exception {
+    public void testNoFrames_onClick() throws Exception {
         onClickPageTest("<html><head><title>foo</title></head><frameset><frame/>\n"
             + "<noframes id='clickId' onClick='alert(\"foo\")'/></frameset></html>");
     }

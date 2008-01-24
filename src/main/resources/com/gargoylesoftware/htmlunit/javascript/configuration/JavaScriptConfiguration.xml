@@ -389,6 +389,10 @@
         <function name="submit"/>
     </class>
 
+    <class name="HTMLHeadElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHead">
+    </class>
+
     <class name="HTMLHtmlElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHtmlElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHtml">
     </class>
