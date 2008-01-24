@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="asashour" id="1876545">
+                JavaScript: detect encoding from XML declaration (#1876545).
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: HTMLAnchor href attribute should be reachable even if the url is malformed. 
             </action>

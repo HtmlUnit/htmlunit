@@ -39,7 +39,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.httpclient.NameValuePair;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -509,6 +512,53 @@ public class XMLDocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testLoad_Encoding() throws Exception {
+        final String[] expectedAlerts =
+        {"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"};
+        testLoad_Encoding(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlerts);
+        testLoad_Encoding(BrowserVersion.FIREFOX_2, expectedAlerts);
+    }
+    
+    private void testLoad_Encoding(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var value = doc.documentElement.firstChild.nodeValue;\n"
+            + "    for (var i=0; i < value.length; i++ ) {\n"
+            + "      alert(value.charCodeAt(i));\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = new WebClient(browserVersion);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        conn.setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", "text/xml", emptyList);
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

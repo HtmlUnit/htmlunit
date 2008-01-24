@@ -204,7 +204,6 @@ public class WebResponseImpl implements WebResponse, Serializable {
     /**
      * {@inheritDoc}
      * If no charset is specified in headers, then try to guess it from the content.
-     * Currently only UTF-8 with BOM marker is detected this way.
      * @see <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia - Byte Order Mark</a>
      * @return the charset, {@link TextUtil#DEFAULT_CHARSET} if it can't be determined
      */
@@ -230,8 +229,15 @@ public class WebResponseImpl implements WebResponse, Serializable {
                 charset = "UTF-16LE";
             }
             else {
-                log_.debug("No charset guessed, using " + charset_);
-                charset = charset_;
+                final String xmlEncoding = getXMLEncoding(body);
+                if (xmlEncoding != null) {
+                    log_.debug("XML encoding found: " + xmlEncoding);
+                    charset = xmlEncoding;
+                }
+                else {
+                    log_.debug("No charset guessed, using " + charset_);
+                    charset = charset_;
+                }
             }
         }
         else if (charset.charAt(0) == '"' && charset.charAt(charset.length() - 1) == '"'
@@ -239,6 +245,42 @@ public class WebResponseImpl implements WebResponse, Serializable {
             charset = charset.substring(1, charset.length() - 1);
         }
         return charset;
+    }
+
+    /**
+     * Searches for XML declaration and returns the <tt>encoding</tt> if found, otherwise returns <code>null</code>.
+     */
+    private String getXMLEncoding(final byte[] body) {
+        String encoding = null;
+        final byte[] declarationPrefix = "<?xml ".getBytes();
+        if (ArrayUtils.isEquals(declarationPrefix, ArrayUtils.subarray(body, 0, declarationPrefix.length))) {
+            final int index = ArrayUtils.indexOf(body, (byte) '?', 2);
+            if (index + 1 < body.length && body[index + 1] == '>') {
+                final String declaration = new String(body, 0, index + 2);
+                int start = declaration.indexOf("encoding");
+                if (start != -1) {
+                    start += 8;
+                    char delimiter;
+
+                outer:
+                    while (true) {
+                        switch (declaration.charAt(start)) {
+                            case '"':
+                            case '\'':
+                                delimiter = declaration.charAt(start);
+                                start = start + 1;
+                                break outer;
+
+                            default:
+                                start++;
+                        }
+                    }
+                    final int end = declaration.indexOf(delimiter, start);
+                    encoding = declaration.substring(start, end);
+                }
+            }
+        }
+        return encoding;
     }
 
     /**
