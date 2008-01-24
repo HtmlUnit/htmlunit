@@ -37,9 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
@@ -52,15 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Brad Clarke
  *
  */
-public class ThreadManagerTest extends WebTestCase {
-    /**
-     * Make a test
-     * @param name test name
-     */
-    public ThreadManagerTest(final String name) {
-        super(name);
-    }
-
+public class ThreadManagerTest extends WebTestCase2 {
     private long startTime_;
     private void startTimedTest() {
         startTime_ = System.currentTimeMillis();
@@ -79,6 +76,7 @@ public class ThreadManagerTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetClearTimeoutUsesManager() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -115,6 +113,7 @@ public class ThreadManagerTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetClearIntervalUsesManager() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -152,6 +151,7 @@ public class ThreadManagerTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testNavigationStopThreadsInChildWindows() throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
@@ -179,15 +179,15 @@ public class ThreadManagerTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
         final ThreadManager innerThreadManager = iframe.getEnclosedWindow().getThreadManager();
-        assertEquals("inner frame should show child thread", 1, innerThreadManager.activeCount());
+        Assert.assertEquals("inner frame should show child thread", 1, innerThreadManager.activeCount());
 
         final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("clickme");
         final HtmlPage newPage = (HtmlPage) anchor.click();
 
-        assertEquals("new page should load", "Third", newPage.getTitleText());
-        assertEquals("frame should be gone", 0, newPage.getFrames().size());
+        Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
+        Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
         // this thread manager really is not accessible anymore, but this is a unit test
         innerThreadManager.joinAll(1000);
-        assertEquals("thread should stop", 0, innerThreadManager.activeCount());
+        Assert.assertEquals("thread should stop", 0, innerThreadManager.activeCount());
     }
 }

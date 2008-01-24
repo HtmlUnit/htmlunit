@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -45,19 +47,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Brad Clarke
  */
-public final class WaitingRefreshHandlerTest extends WebTestCase {
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public WaitingRefreshHandlerTest(final String name) {
-        super(name);
-    }
+public final class WaitingRefreshHandlerTest extends WebTestCase2 {
 
     /**
      * Trying to cause an interrupt on a javascript thread due to meta redirect navigation.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefreshOnJavscriptThread() throws Exception {
         final String firstContent = " <html>\n"
             + "<head><title>First Page</title>\n"

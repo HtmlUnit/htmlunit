@@ -36,6 +36,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package com.gargoylesoftware.htmlunit;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +47,7 @@ import java.net.URL;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -56,20 +59,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public final class ScriptExceptionTest extends WebTestCase {
-
-    /**
-     * Create an instance.
-     *
-     * @param name The name of the test.
-     */
-    public ScriptExceptionTest(final String name) {
-        super(name);
-    }
+public final class ScriptExceptionTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testConstructor() throws Exception {
         final String message = "bla bla";
         final Throwable t = new RuntimeException(message);
@@ -84,6 +79,7 @@ public final class ScriptExceptionTest extends WebTestCase {
      * Test access to the page where the exception occurred from the exception
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetPage() throws Exception {
         final String html = "<html><script>notExisting()</script></html>";
 
@@ -103,6 +99,7 @@ public final class ScriptExceptionTest extends WebTestCase {
      * cause of a problem.
      * @throws Exception if the test fails
      */
+    @Test
     public void testScriptStackTrace() throws Exception {
         testScriptStackTrace("ScriptExceptionTest1");
         testScriptStackTrace("ScriptExceptionTest2");
@@ -140,6 +137,7 @@ public final class ScriptExceptionTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testErrorLineNumber() throws Exception {
         testErrorLineNumber("testJsError1.html", 6);
         testErrorLineNumber("testJsError2.html", 7);

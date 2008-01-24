@@ -36,6 +36,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package com.gargoylesoftware.htmlunit;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -55,6 +57,9 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -78,22 +83,14 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Paul King
  * @author Ahmed Ashour
  */
-public class WebClientTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public WebClientTest(final String name) {
-        super(name);
-    }
+public class WebClientTest extends WebTestCase2 {
 
     /**
      * Test the situation where credentials are required but they haven't been specified.
      *
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testCredentialProvider_NoCredentials() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -119,6 +116,7 @@ public class WebClientTest extends WebTestCase {
      * Test that {@link WebClient#assertionFailed(String)} actually throws an exception.
      * @deprecated
      */
+    @Test
     public void testAssertionFailed() {
         final WebClient client = new WebClient();
 
@@ -136,6 +134,7 @@ public class WebClientTest extends WebTestCase {
      * appropriate time.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testHtmlWindowEvents_changed() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -173,6 +172,7 @@ public class WebClientTest extends WebTestCase {
      * the appropriate time.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testHtmlWindowEvents_opened() throws Exception {
         final String page1Content
             = "<html><head><title>foo</title>\n"
@@ -213,6 +213,7 @@ public class WebClientTest extends WebTestCase {
      * the appropriate time.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testHtmlWindowEvents_closedFromFrame() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -261,6 +262,7 @@ public class WebClientTest extends WebTestCase {
      * Test a 301 redirection code where the original request was a GET.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection301_MovedPermanently_GetMethod() throws Exception {
         final int statusCode = 301;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -324,6 +326,7 @@ public class WebClientTest extends WebTestCase {
      * BUT Firefox follows the redirection
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection301_MovedPermanently_PostMethod() throws Exception {
         final int statusCode = 301;
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
@@ -343,6 +346,7 @@ public class WebClientTest extends WebTestCase {
      * kind of reaction is expected of the client.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection302_MovedTemporarily_PostMethod() throws Exception {
         final int statusCode = 302;
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
@@ -356,6 +360,7 @@ public class WebClientTest extends WebTestCase {
      * Test a 302 redirection code.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection302_MovedTemporarily_GetMethod() throws Exception {
         final int statusCode = 302;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -368,6 +373,7 @@ public class WebClientTest extends WebTestCase {
      * Test a 302 redirection code with "," in url parameters.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection302_MovedTemporarily_CommaInParameters() throws Exception {
         doTestRedirection(302, SubmitMethod.GET, SubmitMethod.GET, URL_SECOND + "/foo.html?foo1=abc&foo2=1,2,3,4");
     }
@@ -376,6 +382,7 @@ public class WebClientTest extends WebTestCase {
      * Tests a 303 redirection code.  This should be the same as a 302.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection303_SeeOther_GetMethod() throws Exception {
         final int statusCode = 303;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -388,6 +395,7 @@ public class WebClientTest extends WebTestCase {
      * Tests a 303 redirection code - this should be the same as a 302.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection303_SeeOther_PostMethod() throws Exception {
         final int statusCode = 303;
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
@@ -401,6 +409,7 @@ public class WebClientTest extends WebTestCase {
      * Tests a 307 redirection code.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection307_TemporaryRedirect_GetMethod() throws Exception {
         final int statusCode = 307;
         final SubmitMethod initialRequestMethod = SubmitMethod.GET;
@@ -413,6 +422,7 @@ public class WebClientTest extends WebTestCase {
      * Tests a 307 redirection code.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirection307_TemporaryRedirect_PostMethod() throws Exception {
         final int statusCode = 307;
         final SubmitMethod initialRequestMethod = SubmitMethod.POST;
@@ -467,6 +477,7 @@ public class WebClientTest extends WebTestCase {
      * See Bug 1619765 and feature request 1472343.
      * @throws Exception if the test fails.
      */
+    @Test
     public void testRedirectionSameURL() throws Exception {
         final HtmlPage page1 = getPageWithRedirectionsSameURL(1);
         assertEquals("Second", page1.getTitleText());
@@ -598,6 +609,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test passing in a null page creator.
      */
+    @Test
     public void testSetPageCreator_null() {
         final WebClient webClient = new WebClient();
         try {
@@ -613,6 +625,7 @@ public class WebClientTest extends WebTestCase {
      * Test {@link WebClient#setPageCreator(PageCreator)}.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testSetPageCreator() throws Exception {
         final String page1Content
             = "<html><head><title>foo</title>\n"
@@ -669,6 +682,7 @@ public class WebClientTest extends WebTestCase {
      * Test loading a page with POST parameters.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testLoadPage_PostWithParameters() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -690,6 +704,7 @@ public class WebClientTest extends WebTestCase {
      * Test that double / in query string are not changed.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testLoadPage_SlashesInQueryString() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
@@ -712,6 +727,7 @@ public class WebClientTest extends WebTestCase {
      * Test that the path and query string are encoded to be valid.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testLoadPage_EncodeRequest() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -757,6 +773,7 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testLoadFilePage() throws Exception {
 
         // Create a real file to read.
@@ -807,6 +824,7 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testLoadFilePageXml() throws Exception {
         final String xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\n"
             + "<dataset>\n"
@@ -838,6 +856,7 @@ public class WebClientTest extends WebTestCase {
      * Test redirecting with javascript during page load.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRedirectViaJavaScriptDuringInitialPageLoad() throws Exception {
         final String firstContent = "<html><head><title>First</title><script>\n"
             + "location.href='" + URL_SECOND + "'\n"
@@ -862,16 +881,17 @@ public class WebClientTest extends WebTestCase {
      * Test tabbing where there are no tabbable elements.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testKeyboard_NoTabbableElements() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[0]);
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        assertNull("original", page.getElementWithFocus());
-        assertNull("next", page.tabToNextElement());
-        assertNull("previous", page.tabToPreviousElement());
-        assertNull("accesskey", page.pressAccessKey('a'));
+        Assert.assertNull("original", page.getElementWithFocus());
+        Assert.assertNull("next", page.tabToNextElement());
+        Assert.assertNull("previous", page.tabToPreviousElement());
+        Assert.assertNull("accesskey", page.pressAccessKey('a'));
 
         final List< ? > expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
@@ -881,6 +901,7 @@ public class WebClientTest extends WebTestCase {
      * Test tabbing where there is only one tabbable element.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testKeyboard_OneTabbableElement() throws Exception {
         final WebClient webClient = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -889,19 +910,19 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
         final HtmlElement element = page.getHtmlElementById("submit0");
 
-        assertNull("original", page.getElementWithFocus());
-        assertNull("accesskey", page.pressAccessKey('x'));
+        Assert.assertNull("original", page.getElementWithFocus());
+        Assert.assertNull("accesskey", page.pressAccessKey('x'));
 
-        assertEquals("next", element, page.tabToNextElement());
-        assertEquals("nextAgain", element, page.tabToNextElement());
+        Assert.assertEquals("next", element, page.tabToNextElement());
+        Assert.assertEquals("nextAgain", element, page.tabToNextElement());
 
         page.getElementWithFocus().blur();
-        assertNull("original", page.getElementWithFocus());
+        Assert.assertNull("original", page.getElementWithFocus());
 
-        assertEquals("previous", element, page.tabToPreviousElement());
-        assertEquals("previousAgain", element, page.tabToPreviousElement());
+        Assert.assertEquals("previous", element, page.tabToPreviousElement());
+        Assert.assertEquals("previousAgain", element, page.tabToPreviousElement());
 
-        assertEquals("accesskey", element, page.pressAccessKey('z'));
+        Assert.assertEquals("accesskey", element, page.pressAccessKey('z'));
 
         final String[] expectedAlerts = {"focus-0", "blur-0", "focus-0"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -911,6 +932,7 @@ public class WebClientTest extends WebTestCase {
      * Test pressing an accesskey.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testAccessKeys() throws Exception {
         final WebClient webClient = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -932,6 +954,7 @@ public class WebClientTest extends WebTestCase {
      * Test tabbing to the next element.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testTabNext() throws Exception {
         final WebClient webClient = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -953,6 +976,7 @@ public class WebClientTest extends WebTestCase {
      * Test tabbing to the previous element.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testTabPrevious() throws Exception {
         final WebClient webClient = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -974,6 +998,7 @@ public class WebClientTest extends WebTestCase {
      * Test that a button can be selected via accesskey.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testPressAccessKey_Button() throws Exception {
         final WebClient webClient = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -1041,6 +1066,7 @@ public class WebClientTest extends WebTestCase {
      * Test {@link WebClient#loadWebResponseInto(WebResponse,WebWindow)}
      * @throws Exception If the test fails.
      */
+    @Test
     public void testLoadWebResponseInto() throws Exception {
         final WebClient webClient = new WebClient();
         final WebResponse webResponse = new StringWebResponse(
@@ -1048,7 +1074,7 @@ public class WebClientTest extends WebTestCase {
 
         final Page page = webClient.loadWebResponseInto(
             webResponse, webClient.getCurrentWindow());
-        assertInstanceOf(page, HtmlPage.class);
+        assertTrue(HtmlPage.class.isInstance(page));
 
         final HtmlPage htmlPage = (HtmlPage) page;
         assertEquals("first", htmlPage.getTitleText());
@@ -1060,6 +1086,7 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception if test fails
      */
+    @Test
     public void testGetPageFailingStatusCode() throws Exception {
         final String firstContent = "<html><head><title>Hello World</title></head><body></body></html>";
 
@@ -1087,6 +1114,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testProxyConfig() throws Exception {
 
         final String defaultProxyHost = "defaultProxyHost";
@@ -1136,6 +1164,7 @@ public class WebClientTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1669097&group_id=47038&atid=448266
      * @throws Exception If the test fails.
      */
+    @Test
     public void testProxyConfigWithRedirect() throws Exception {
 
         final String defaultProxyHost = "defaultProxyHost";
@@ -1171,6 +1200,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testProxyConfigForJS() throws Exception {
 
         final String defaultProxyHost = "defaultProxyHost";
@@ -1208,6 +1238,7 @@ public class WebClientTest extends WebTestCase {
      * was specified.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testExpandUrl() throws Exception {
         assertEquals("http://first#second", WebClient.expandUrl(URL_FIRST, "#second"));
         assertEquals("http://first?a=1&b=2", WebClient.expandUrl(new URL("http://first?a=1&b=2"), ""));
@@ -1219,6 +1250,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testExpandUrlWithFile() throws Exception {
         final String urlString = "http://host/page.html";
         final URL url = new URL(urlString);
@@ -1226,9 +1258,10 @@ public class WebClientTest extends WebTestCase {
     }
 
     /** Test the accessors for refreshHandler */
+    @Test
     public void testRefreshHandlerAccessors() {
         final WebClient webClient = new WebClient();
-        assertInstanceOf(webClient.getRefreshHandler(), ImmediateRefreshHandler.class);
+        assertTrue(ImmediateRefreshHandler.class.isInstance(webClient.getRefreshHandler()));
 
         final RefreshHandler handler = new ImmediateRefreshHandler() {
             private static final long serialVersionUID = 5357553245330318812L;
@@ -1241,6 +1274,7 @@ public class WebClientTest extends WebTestCase {
      * Test the script preprocessor
      * @throws IOException if the test fails
      */
+    @Test
     public void testScriptPreProcessor() throws IOException {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1302,6 +1336,7 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
 
         final WebClient client = new WebClient();
@@ -1337,6 +1372,7 @@ public class WebClientTest extends WebTestCase {
      * it and assume ISO-8895-1.  Ensure we do the same.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testBadCharset() throws Exception {
         final String page1Content
             = "<html><head><title>foo</title>\n"
@@ -1349,7 +1385,7 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final Page page = client.getPage(URL_FIRST);
-        assertInstanceOf(page, HtmlPage.class);
+        assertTrue(HtmlPage.class.isInstance(page));
     }
 
     /**
@@ -1357,6 +1393,7 @@ public class WebClientTest extends WebTestCase {
      * blowing up on this case.  Ensure it's fixed.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testExpandUrlHandlesColonsInRelativeUrl() throws Exception {
         final URL newUrl = WebClient.expandUrl(new URL("http://host/foo"), "/bar/blah:de:blah");
         assertEquals("http://host/bar/blah:de:blah", newUrl);
@@ -1367,8 +1404,8 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception if test fails
      */
+    @Test
     public void testReusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
-
         final String firstContent = "<html><head><title>First</title></head>\n"
             + "<body onload='document.myform.mysubmit.focus()'>\n"
             + "<form action='" + URL_SECOND + "' name='myform'>\n"
@@ -1394,8 +1431,8 @@ public class WebClientTest extends WebTestCase {
      * Test the value of window.opener when a link has target="_top"
      * @throws Exception if test fails
      */
+    @Test
     public void testOpenerInFrameset() throws Exception {
-
         final String firstContent = "<html><head><script>alert(window.opener)</script><frameset cols='*'>\n"
                                     + "<frame src='" + URL_SECOND + "'>\n"
                                     + "</frameset>\n"
@@ -1425,8 +1462,9 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception if test fails
      */
+    @Test
     public void testNekoFlagSetters() throws Exception {
-        assertEquals("Default ignore content is wrong", false, WebClient.getIgnoreOutsideContent());
+        Assert.assertEquals("Default ignore content is wrong", false, WebClient.getIgnoreOutsideContent());
         WebClient.setIgnoreOutsideContent(true);
         assertTrue("Ignore content did not get set", WebClient.getIgnoreOutsideContent());
     }
@@ -1435,8 +1473,8 @@ public class WebClientTest extends WebTestCase {
      * Unset the static items set in tests here
      * @throws Exception if superclass throws
      */
+    @After
     protected void tearDown() throws Exception {
-        super.tearDown();
         WebClient.setIgnoreOutsideContent(false);
     }
 
@@ -1444,19 +1482,20 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception if an error occurs
      */
+    @Test
     public void testGuessContentType() throws Exception {
         final WebClient webClient = new WebClient();
 
         // test real files with bad file suffix
-        assertEquals("tiny-png.img", "image/png", webClient.guessContentType(getTestFile("tiny-png.img")));
-        assertEquals("tiny-jpg.img", "image/jpeg", webClient.guessContentType(getTestFile("tiny-jpg.img")));
-        assertEquals("tiny-gif.img", "image/gif", webClient.guessContentType(getTestFile("tiny-gif.img")));
+        Assert.assertEquals("tiny-png.img", "image/png", webClient.guessContentType(getTestFile("tiny-png.img")));
+        Assert.assertEquals("tiny-jpg.img", "image/jpeg", webClient.guessContentType(getTestFile("tiny-jpg.img")));
+        Assert.assertEquals("tiny-gif.img", "image/gif", webClient.guessContentType(getTestFile("tiny-gif.img")));
 
         // tests empty files, type should be determined from file suffix
-        assertEquals("empty.png", "image/png", webClient.guessContentType(getTestFile("empty.png")));
-        assertEquals("empty.jpg", "image/jpeg", webClient.guessContentType(getTestFile("empty.jpg")));
-        assertEquals("empty.gif", "image/gif", webClient.guessContentType(getTestFile("empty.gif")));
-        assertEquals("empty.js", "text/javascript", webClient.guessContentType(getTestFile("empty.js")));
+        Assert.assertEquals("empty.png", "image/png", webClient.guessContentType(getTestFile("empty.png")));
+        Assert.assertEquals("empty.jpg", "image/jpeg", webClient.guessContentType(getTestFile("empty.jpg")));
+        Assert.assertEquals("empty.gif", "image/gif", webClient.guessContentType(getTestFile("empty.gif")));
+        Assert.assertEquals("empty.js", "text/javascript", webClient.guessContentType(getTestFile("empty.js")));
     }
 
     /**
@@ -1465,6 +1504,7 @@ public class WebClientTest extends WebTestCase {
      * but worked for LANG=de_DE.ISO-8859-1
      * @throws Exception if the test fails.
      */
+    @Test
     public void testBinaryFileFromFileSystem() throws Exception {
         testBinaryFileFromFileSystem(BrowserVersion.FIREFOX_2);
         testBinaryFileFromFileSystem(BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -1517,6 +1557,7 @@ public class WebClientTest extends WebTestCase {
      * Test that additional header are correctly transmitted to the web connection.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testRequestHeader() throws Exception {
         final String content = "<html></html>";
         final WebClient client = new WebClient();
@@ -1544,6 +1585,7 @@ public class WebClientTest extends WebTestCase {
      * are case-insensitive".
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testContentTypeCaseInsensitive() throws Exception {
         final String content = "<html><head>\n"
             + "<script type='Text/Javascript' src='foo.js'></script>\n"
@@ -1559,24 +1601,24 @@ public class WebClientTest extends WebTestCase {
         final String[] expectedAlerts = {"foo"};
 
         webConnection.setResponse(URL_FIRST, content, "Text/Html");
-        assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
+        assertTrue(HtmlPage.class.isInstance(client.getPage(URL_FIRST)));
         assertEquals(expectedAlerts, collectedAlerts);
 
         webConnection.setResponse(URL_FIRST, content, "Text/XHtml");
         collectedAlerts.clear();
-        assertInstanceOf(client.getPage(URL_FIRST), HtmlPage.class);
+        assertTrue(HtmlPage.class.isInstance(client.getPage(URL_FIRST)));
         assertEquals(expectedAlerts, collectedAlerts);
 
         webConnection.setResponse(URL_FIRST, content, "Text/Xml");
-        assertInstanceOf(client.getPage(URL_FIRST), XmlPage.class);
+        assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
         webConnection.setResponse(URL_FIRST, content, "ApplicaTion/Xml");
-        assertInstanceOf(client.getPage(URL_FIRST), XmlPage.class);
+        assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
 
         webConnection.setResponse(URL_FIRST, content, "Text/Plain");
-        assertInstanceOf(client.getPage(URL_FIRST), TextPage.class);
+        assertTrue(TextPage.class.isInstance(client.getPage(URL_FIRST)));
 
         webConnection.setResponse(URL_FIRST, "", "Text/JavaScript");
-        assertInstanceOf(client.getPage(URL_FIRST), JavaScriptPage.class);
+        assertTrue(JavaScriptPage.class.isInstance(client.getPage(URL_FIRST)));
     }
 
     /**
@@ -1585,6 +1627,7 @@ public class WebClientTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoadFilePageWithExternalJS() throws Exception {
         final File currentDirectory = new File((new File("")).getAbsolutePath());
 
@@ -1617,6 +1660,7 @@ public class WebClientTest extends WebTestCase {
      * Test that WebClient.getPage(String) calls WebClient.getPage(URL) with the right URL
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
         final WebClient wc = new WebClient() {
@@ -1637,6 +1681,7 @@ public class WebClientTest extends WebTestCase {
      * on the specified window's page, not on the client's "current" page.
      * @throws Exception if an error occurs
      */
+    @Test
     public void testOnBeforeUnloadCalledOnCorrectPage() throws Exception {
         final String html = "<html><body onbeforeunload='alert(7)'><iframe></iframe></body></html>";
         final List<String> alerts = new ArrayList<String>();
@@ -1648,6 +1693,7 @@ public class WebClientTest extends WebTestCase {
      * Test that '+' is not encoded in urls
      * @throws Exception if the test fails
      */
+    @Test
     public void testPlusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
 

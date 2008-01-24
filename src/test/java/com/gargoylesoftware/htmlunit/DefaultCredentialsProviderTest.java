@@ -37,10 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.auth.NTLMScheme;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -69,8 +70,8 @@ public class DefaultCredentialsProviderTest extends WebTestCase2 {
 
         final NTLMScheme scheme = new NTLMScheme("NTLM");
         final Credentials credentials = provider.getCredentials(scheme, host, port, false);
-        Assert.assertNotNull(credentials);
-        Assert.assertTrue(NTCredentials.class.isInstance(credentials));
+        assertNotNull(credentials);
+        assertTrue(NTCredentials.class.isInstance(credentials));
         final NTCredentials ntCredentials = (NTCredentials) credentials;
         assertEquals(userName, ntCredentials.getUserName());
         assertEquals(password, ntCredentials.getPassword());

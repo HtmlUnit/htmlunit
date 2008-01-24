@@ -37,8 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 
@@ -49,21 +54,13 @@ import com.gargoylesoftware.base.testing.EventCatcher;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class TopLevelWindowTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public TopLevelWindowTest(final String name) {
-        super(name);
-    }
+public class TopLevelWindowTest extends WebTestCase2 {
 
     /**
      * Test closing the only open window
      * @throws Exception if the test fails.
      */
+    @Test
     public void testCloseOnlyWindow() throws Exception {
         final WebClient webClient = new WebClient();
         final EventCatcher eventCatcher = new EventCatcher();

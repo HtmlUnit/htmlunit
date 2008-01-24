@@ -37,9 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.fail;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import org.junit.Assert;
 
 /**
  * Tests for {@link TextUtil}.
@@ -47,15 +51,7 @@ import java.io.InputStreamReader;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public final class TextUtilTest extends WebTestCase {
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public TextUtilTest(final String name) {
-        super(name);
-    }
-
+public final class TextUtilTest extends WebTestCase2 {
     /**
      * Test startsWithIgnoreCase() with null values.
      */
@@ -125,7 +121,7 @@ public final class TextUtilTest extends WebTestCase {
             final String stringToCheck = data[i][0];
             final String prefix = data[i][1];
 
-            assertFalse(
+            Assert.assertFalse(
                 "stringToCheck=[" + stringToCheck + "] prefix=[" + prefix + "]",
                 TextUtil.startsWithIgnoreCase(stringToCheck, prefix));
         }
