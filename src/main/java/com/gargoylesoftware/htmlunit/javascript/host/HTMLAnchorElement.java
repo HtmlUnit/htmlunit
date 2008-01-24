@@ -88,12 +88,12 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception If an error occurs.
      */
     public String jsxGet_href() throws Exception {
-    	try {
-    		return getUrl().toString();
-    	}
-    	catch (final MalformedURLException e) {
-    		return ((HtmlAnchor) getHtmlElementOrDie()).getHrefAttribute();
-    	}
+        try {
+            return getUrl().toString();
+        }
+        catch (final MalformedURLException e) {
+            return ((HtmlAnchor) getHtmlElementOrDie()).getHrefAttribute();
+        }
     }
 
     /**
