@@ -38,14 +38,13 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.apache.commons.lang.StringUtils;
-import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
-import java.net.URL;
 
 /**
  * The javascript object that represents an anchor
@@ -89,7 +88,12 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception If an error occurs.
      */
     public String jsxGet_href() throws Exception {
-        return getUrl().toString();
+    	try {
+    		return getUrl().toString();
+    	}
+    	catch (final MalformedURLException e) {
+    		return ((HtmlAnchor) getHtmlElementOrDie()).getHrefAttribute();
+    	}
     }
 
     /**
@@ -382,7 +386,7 @@ public class HTMLAnchorElement extends HTMLElement {
                 response = link.getPage().getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
             }
             catch (final MalformedURLException e) {
-                throw Context.reportRuntimeError("Problem reading url: " + e);
+                return href;
             }
         }
         

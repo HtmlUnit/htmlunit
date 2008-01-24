@@ -82,9 +82,12 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "    alert(anchorElement.getAttribute('href'));\n"
             + "    alert(anchorElement.getAttribute('id'));\n"
             + "    alert(anchorElement.getAttribute('name'));\n"
+            + "    var link2 = document.getElementById('link2');\n"
+            + "    alert(link2.href);\n"
             + "}\n</script></head>\n"
             + "<body>\n"
-            + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>\n"
+            + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>bla</a>\n"
+            + "<a href='mailto:' id='link2'>mail</a>\n"
             + "</body></html>";
         
         webConnection.setDefaultResponse(content);
@@ -100,7 +103,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
         anchor.click();
         
         final String[] expectedAlerts = {"http://x/testsite1.html", "testsite1.html",
-            "http://x/testsite2.html", "testsite2.html", "13", "testanchor"};
+            "http://x/testsite2.html", "testsite2.html", "13", "testanchor", "mailto:"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -148,13 +151,15 @@ public class HTMLAnchorElementTest extends WebTestCase {
             + "<a href='foo.html'>foo</a>\n"
             + "<a href='javascript:void(0)'>void</a>\n"
             + "<a href='#'>#</a>\n"
+            + "<a href='mailto:'>mail</a>\n"
             + "</body></html>";
         
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"",
             "http://www.gargoylesoftware.com/foo.html",
             "javascript:void(0)",
-            "http://www.gargoylesoftware.com/#"};
+            "http://www.gargoylesoftware.com/#",
+            "mailto:"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
 
