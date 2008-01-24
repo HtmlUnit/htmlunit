@@ -44,6 +44,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Tests for {@link TextUtil}.
@@ -55,6 +56,7 @@ public final class TextUtilTest extends WebTestCase2 {
     /**
      * Test startsWithIgnoreCase() with null values.
      */
+    @Test
     public void testStartsWithIgnoreCase_nulls() {
         try {
             TextUtil.startsWithIgnoreCase(null, "foo");
@@ -76,6 +78,7 @@ public final class TextUtilTest extends WebTestCase2 {
     /**
      * Test startsWithIgnoreCase() with an empty prefix
      */
+    @Test
     public void testStartsWithIgnoreCase_emptyPrefix() {
         try {
             TextUtil.startsWithIgnoreCase("foo", "");
@@ -89,6 +92,7 @@ public final class TextUtilTest extends WebTestCase2 {
     /**
      * Test a variety of cases that should return true.
      */
+    @Test
     public void testStartsWithIgnoreCase_ShouldReturnTrue() {
         final String[][] data = {
             {"foo", "foo"},
@@ -101,7 +105,7 @@ public final class TextUtilTest extends WebTestCase2 {
             final String stringToCheck = data[i][0];
             final String prefix = data[i][1];
 
-            assertTrue(
+            Assert.assertTrue(
                 "stringToCheck=[" + stringToCheck + "] prefix=[" + prefix + "]",
                 TextUtil.startsWithIgnoreCase(stringToCheck, prefix));
         }
@@ -110,6 +114,7 @@ public final class TextUtilTest extends WebTestCase2 {
     /**
      * Test a variety of cases that should return false.
      */
+    @Test
     public void testStartsWithIgnoreCase_ShouldReturnFalse() {
         final String[][] data = {
             {"", "foo"},
@@ -130,6 +135,7 @@ public final class TextUtilTest extends WebTestCase2 {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testToInputStream_null() throws Exception {
         try {
             TextUtil.toInputStream(null);
@@ -143,6 +149,7 @@ public final class TextUtilTest extends WebTestCase2 {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testToInputStream() throws Exception {
         final String[][] data = {
             {"", null},
@@ -158,7 +165,7 @@ public final class TextUtilTest extends WebTestCase2 {
             final InputStream inputStream = TextUtil.toInputStream(input, encoding);
             final String actualResult
                 = new BufferedReader(new InputStreamReader(inputStream, encoding)).readLine();
-            assertEquals(expectedResult, actualResult);
+            Assert.assertEquals(expectedResult, actualResult);
         }
     }
 }

@@ -1474,7 +1474,7 @@ public class WebClientTest extends WebTestCase2 {
      * @throws Exception if superclass throws
      */
     @After
-    protected void tearDown() throws Exception {
+    public void tearDown() throws Exception {
         WebClient.setIgnoreOutsideContent(false);
     }
 
