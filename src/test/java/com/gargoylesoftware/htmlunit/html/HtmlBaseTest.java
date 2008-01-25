@@ -35,24 +35,43 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * The javascript object "HTMLMetaElement".
+ * Tests for {@link HtmlBase}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLMetaElement extends HTMLElement {
-
-    private static final long serialVersionUID = 2709850253223688489L;
+public class HtmlBaseTest extends WebTestCase2 {
 
     /**
-     * Create an instance.
+     * @throws Exception if the test fails.
      */
-    public HTMLMetaElement() {
-        // Empty.
-    }
+    @Test
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<base id='myId' target='MyNewWindow'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
 
+        final String[] expectedAlerts = {"[object HTMLBaseElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlBase.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

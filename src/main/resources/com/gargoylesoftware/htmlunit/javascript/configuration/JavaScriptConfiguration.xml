@@ -348,6 +348,10 @@
         </function>
     </class>
 
+    <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
+    </class>
+
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
@@ -404,6 +408,7 @@
     <class name="HTMLMetaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMetaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
     </class>
+
     <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
     </class>

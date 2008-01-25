@@ -44,14 +44,14 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLMetaElement extends HTMLElement {
+public class HTMLBaseElement extends HTMLElement {
 
     private static final long serialVersionUID = 2709850253223688489L;
 
     /**
      * Create an instance.
      */
-    public HTMLMetaElement() {
+    public HTMLBaseElement() {
         // Empty.
     }
 
