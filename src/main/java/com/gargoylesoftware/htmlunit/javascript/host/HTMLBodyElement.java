@@ -35,66 +35,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlStyle}.
+ * The javascript object "HTMLStyleElement".
  *
  * @version $Revision$
- * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlStyleTest extends WebTestCase2 {
+public class HTMLBodyElement extends HTMLElement {
+
+    private static final long serialVersionUID = 944381786297995169L;
 
     /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
-     * @throws Exception if the test fails
+     * Create an instance.
      */
-    public void testAsText() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>\n"
-            + "<style type='text/css' id='testStyle'>\n"
-            + "img { border: 0px }\n"
-            + "</style>\n"
-            + "</head><body>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-
-        final DomNode node = page.getHtmlElementById("testStyle");
-        assertEquals("style", node.getNodeName());
-        assertEquals("", node.asText());
+    public HTMLBodyElement() {
+        // Empty.
     }
 
-    /**
-     * @throws Exception if the test fails.
-     */
-    @Test
-    public void testSimpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<style type='text/css' id='myId'>\n"
-            + "img { border: 0px }\n"
-            + "</style>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLStyleElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlStyle.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }

@@ -46,33 +46,12 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlStyle}.
+ * Tests for {@link HtmlBody}.
  *
  * @version $Revision$
- * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlStyleTest extends WebTestCase2 {
-
-    /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
-     * @throws Exception if the test fails
-     */
-    public void testAsText() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>\n"
-            + "<style type='text/css' id='testStyle'>\n"
-            + "img { border: 0px }\n"
-            + "</style>\n"
-            + "</head><body>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-
-        final DomNode node = page.getHtmlElementById("testStyle");
-        assertEquals("style", node.getNodeName());
-        assertEquals("", node.asText());
-    }
+public class HtmlBodyTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails.
@@ -80,21 +59,18 @@ public class HtmlStyleTest extends WebTestCase2 {
     @Test
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
-            + "<style type='text/css' id='myId'>\n"
-            + "img { border: 0px }\n"
-            + "</style>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body onload='test()' id='myId'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLStyleElement]"};
+        final String[] expectedAlerts = {"[object HTMLBodyElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlStyle.class.isInstance(page.getHtmlElementById("myId")));
+        assertTrue(HtmlBody.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

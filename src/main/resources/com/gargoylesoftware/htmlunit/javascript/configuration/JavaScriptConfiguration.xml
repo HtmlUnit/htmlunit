@@ -278,19 +278,43 @@
         </function>
     </class>
 
-    <class name="UIEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.UIEvent" JSObject="true">
-        <doclink
-            url="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-UIEvent"
-            descr="W3C Document Object Model (DOM) Level 3 - UI event types"/>
-        <property name="detail" readable="true" writable="false">
+    <class name="FormField" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
+        JSObject="false">
+        <property name="disabled" readable="true" writable="true"/>
+        <property name="form" notImplemented="true" readable="true" writable="true"/>
+        <property name="form" readable="true" writable="false"/>
+        <property name="name" readable="true" writable="true"/>
+        <property name="onchange" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
         </property>
-        <property name="view" readable="true" writable="false">
-            <browser name="Firefox"/>
+        <property name="tabIndex" readable="true" writable="false"/>
+        <property name="type" readable="true" writable="false">
+            <javascript min-version="1.1"/>
         </property>
-        <function name="initUIEvent">
-            <browser name="Firefox"/>
-        </function>
+        <property name="value" readable="true" writable="true"/>
+        <!-- This property is only in DOM1 so it  -->
+
+        <function name="click"/>
+    </class>
+
+    <class name="FrameInline" extends="HTMLFrameElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
+        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
+    </class>
+
+    <class name="FrameSet" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FrameSet"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
+        <property name="rows" readable="true" writable="true"/>
+        <property name="cols" readable="true" writable="true"/>
+    </class>
+
+    <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History"
+        JSObject="true">
+        <property name="length" readable="true" writable="false"/>
+
+        <function name="back"/>
+        <function name="forward"/>
+        <function name="go"/>
     </class>
 
     <class name="MouseEvent" extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.MouseEvent" JSObject="true">
@@ -352,6 +376,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
     </class>
 
+    <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
+    </class>
+
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
@@ -393,6 +421,20 @@
         <function name="submit"/>
     </class>
 
+    <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
+        JSObject="true"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
+        <property name="onload" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Firefox"/>
+        </property>
+        <property name="src" readable="true" writable="true"/>
+        <property name="name" readable="true" writable="true"/>
+        <property name="contentDocument" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="contentWindow" readable="true" writable="false"/>
+    </class>
+
     <class name="HTMLHeadElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHead">
     </class>
@@ -417,61 +459,28 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
     </class>
 
+    <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
+        <!-- NOT FINISHED -->
+        <property name="defaultValue" readable="true" writable="true">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
+                descr="MSDN documentation"/>
+        </property>
+        <property name="textLength" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="selectionStart" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="selectionEnd" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <function name="select"/>
+    </class>
+
     <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
-    </class>
-
-    <class name="FormField" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
-        JSObject="false">
-        <property name="disabled" readable="true" writable="true"/>
-        <property name="form" notImplemented="true" readable="true" writable="true"/>
-        <property name="form" readable="true" writable="false"/>
-        <property name="name" readable="true" writable="true"/>
-        <property name="onchange" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="tabIndex" readable="true" writable="false"/>
-        <property name="type" readable="true" writable="false">
-            <javascript min-version="1.1"/>
-        </property>
-        <property name="value" readable="true" writable="true"/>
-        <!-- This property is only in DOM1 so it  -->
-
-        <function name="click"/>
-    </class>
-
-    <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
-        JSObject="true"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
-        <property name="onload" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="src" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="true"/>
-        <property name="contentDocument" readable="true" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="contentWindow" readable="true" writable="false"/>
-    </class>
-
-    <class name="FrameInline" extends="HTMLFrameElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
-        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
-    </class>
-
-    <class name="FrameSet" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FrameSet"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
-        <property name="rows" readable="true" writable="true"/>
-        <property name="cols" readable="true" writable="true"/>
-    </class>
-
-    <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History"
-        JSObject="true">
-        <property name="length" readable="true" writable="false"/>
-
-        <function name="back"/>
-        <function name="forward"/>
-        <function name="go"/>
     </class>
 
     <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
@@ -1191,29 +1200,24 @@
         </property>
     </class>
 
-    <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
-        <!-- NOT FINISHED -->
-        <property name="defaultValue" readable="true" writable="true">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="textLength" readable="true" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="selectionStart" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="selectionEnd" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <function name="select"/>
-    </class>
-
     <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">
         <function name="splitText"/>
+    </class>
+
+    <class name="UIEvent" extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.UIEvent" JSObject="true">
+        <doclink
+            url="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-UIEvent"
+            descr="W3C Document Object Model (DOM) Level 3 - UI event types"/>
+        <property name="detail" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="view" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <function name="initUIEvent">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window"
