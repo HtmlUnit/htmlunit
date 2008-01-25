@@ -35,7 +35,7 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.javascript;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
@@ -45,8 +45,8 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionElement;
+import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * This is the array returned by the "options" property of Select.

@@ -687,7 +687,7 @@
         <property name="value" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
+    <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="item"/>

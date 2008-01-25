@@ -45,7 +45,6 @@ import org.mozilla.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection;
 
 /**
  * The javascript object for {@link HtmlSelect}.
