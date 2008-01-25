@@ -35,24 +35,42 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * The javascript object "HTMLLinkElement".
+ * Tests for {@link HtmlTitle}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLLinkElement extends HTMLElement {
-
-    private static final long serialVersionUID = -6381573516360300401L;
+public class HtmlTitleTest extends WebTestCase2 {
 
     /**
-     * Create an instance.
+     * @throws Exception if the test fails.
      */
-    public HTMLLinkElement() {
-        // Empty.
-    }
+    @Test
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head><title id='myId'>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
 
+        final String[] expectedAlerts = {"[object HTMLTitleElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlTitle.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

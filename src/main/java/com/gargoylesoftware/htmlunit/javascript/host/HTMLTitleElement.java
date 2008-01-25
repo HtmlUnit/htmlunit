@@ -39,19 +39,19 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLLinkElement".
+ * The javascript object "HTMLTitleElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLLinkElement extends HTMLElement {
+public class HTMLTitleElement extends HTMLElement {
 
-    private static final long serialVersionUID = -6381573516360300401L;
+    private static final long serialVersionUID = -6345342494766370848L;
 
     /**
      * Create an instance.
      */
-    public HTMLLinkElement() {
+    public HTMLTitleElement() {
         // Empty.
     }
 
