@@ -39,19 +39,19 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLBaseElement".
+ * The javascript object "HTMLIsIndexElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLBaseElement extends HTMLElement {
+public class HTMLIsIndexElement extends HTMLElement {
 
-    private static final long serialVersionUID = 1869359649341296910L;
+    private static final long serialVersionUID = -3715563112706635231L;
 
     /**
      * Create an instance.
      */
-    public HTMLBaseElement() {
+    public HTMLIsIndexElement() {
         // Empty.
     }
 

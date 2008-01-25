@@ -40,11 +40,15 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlIsIndex}.
@@ -54,27 +58,19 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlIsIndexTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlIsIndexTest(final String name) {
-        super(name);
-    }
+public class HtmlIsIndexTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
-    public void testFormSubmission()
-        throws Exception {
-        final String htmlContent
+    @Test
+    public void testFormSubmission() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<isindex prompt='enterSomeText'></isindex>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+        final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
         
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
@@ -88,8 +84,30 @@ public class HtmlIsIndexTest extends WebTestCase {
         expectedParameters.add(new KeyValuePair("enterSomeText", "Flintstone"));
 
         assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
-        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        Assert.assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
+        Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='form1' method='post'>\n"
+            + "<isindex id='myId' prompt='enterSomeText'></isindex>\n"
+            + "</form></body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLIsIndexElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlIsIndex.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
-
