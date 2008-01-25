@@ -37,10 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.lang.reflect.Method;
+
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -390,5 +393,65 @@ public class SimpleScriptable extends ScriptableObject {
      */
     protected Scriptable getStartingScope() {
         return (Scriptable) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+    }
+
+    /**
+     * {@inheritDoc}.
+     * Same as base implementation, but includes all methods inherited from super classes as well.
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public void defineProperty(final String propertyName, final Class clazz, int attributes) {
+        final int length = propertyName.length();
+        if (length == 0) {
+            throw new IllegalArgumentException();
+        }
+        final char[] buf = new char[3 + length];
+        propertyName.getChars(0, length, buf, 3);
+        buf[3] = Character.toUpperCase(buf[3]);
+        buf[0] = 'g';
+        buf[1] = 'e';
+        buf[2] = 't';
+        final String getterName = new String(buf);
+        buf[0] = 's';
+        final String setterName = new String(buf);
+
+        final Method[] methods = clazz.getMethods();
+        final Method getter = findMethod(methods, getterName);
+        final Method setter = findMethod(methods, setterName);
+        if (setter == null) {
+            attributes |= ScriptableObject.READONLY;
+        }
+        defineProperty(propertyName, null, getter, setter, attributes);
+    }
+
+    /**
+     * {@inheritDoc}.
+     * Same as base implementation, but includes all methods inherited from super classes as well.
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public void defineFunctionProperties(final String[] names, final Class clazz, final int attributes) {
+        final Method[] methods = clazz.getMethods();
+        for (final String name : names) {
+            final Method method = findMethod(methods, name);
+            if (method == null) {
+                throw Context.reportRuntimeError("Method \"" + name + "\" not found in \"" + clazz.getName() + '"');
+            }
+            final FunctionObject f = new FunctionObject(name, method, this);
+            defineProperty(name, f, attributes);
+        }
+    }
+
+    /**
+     * Returns the method with the specified name.
+     */
+    private static Method findMethod(final Method[] methods, final String name) {
+        for (Method m : methods) {
+            if (m.getName().equals(name)) {
+                return m;
+            }
+        }
+        return null;
     }
 }

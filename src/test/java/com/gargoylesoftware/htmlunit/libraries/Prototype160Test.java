@@ -46,15 +46,13 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest;
-import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxyTest;
 
 /**
  * Tests for compatibility with version 1.6.0 of
  * <a href="http://prototype.conio.net/">Prototype JavaScript library</a>.
  *
  * @version $Revision$
- * @author ahmed Ashour
+ * @author Ahmed Ashour
  */
 public class Prototype160Test extends WebTestCase {
 
@@ -249,7 +247,6 @@ public class Prototype160Test extends WebTestCase {
             getLog().info("Test result for " + filename + " written to: " + f.getAbsolutePath());
         }
             
-        
         assertEquals(expected, summary);
     }
 
