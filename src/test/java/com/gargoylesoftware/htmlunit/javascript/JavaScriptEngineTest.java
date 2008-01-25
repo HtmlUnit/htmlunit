@@ -747,6 +747,33 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    public void testFunctionCaller() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content = "<html><head><script>\n"
+            + "function myFunc() {\n"
+            + "  alert(myFunc.caller == null)\n"
+            + " alert(myFunc.caller == foo)\n"
+            + "}\n"
+            + "myFunc()\n"
+            + "function foo() { myFunc() }\n"
+            + "foo()\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        final String[] expectedAlerts = {"true", "false", "false", "true"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Test case for bug 707134.  Currently I am unable to reproduce the problem.
      * @throws Exception if the test fails
      */
