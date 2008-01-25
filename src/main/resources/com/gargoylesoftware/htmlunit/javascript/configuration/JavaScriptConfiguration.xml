@@ -687,6 +687,10 @@
         <property name="value" readable="true" writable="true"/>
     </class>
 
+    <class name="HTMLOptGroupElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptGroupElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
+    </class>
+
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
