@@ -885,7 +885,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * {@inheritDoc}
      */
-    public Object get(final String name, final Scriptable start) {
+    public Object get(String name, final Scriptable start) {
         // Hack to make eval work in other window scope when needed.
         // See unit test testEvalScopeOtherWindow().
         // TODO: Find a cleaner way to handle this.
@@ -894,6 +894,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             if (w != this) {
                 return getAssociatedValue("custom_eval");
             }
+        }
+        else if ("Option".equals(name)) {
+            name = "HTMLOptionElement";
         }
         return super.get(name, start);
     }

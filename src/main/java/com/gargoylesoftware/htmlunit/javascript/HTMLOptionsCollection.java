@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement;
-import com.gargoylesoftware.htmlunit.javascript.host.Option;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionElement;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -183,7 +183,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             htmlSelect_.removeOption(index);
         }
         else {
-            final Option option = (Option) newValue;
+            final HTMLOptionElement option = (HTMLOptionElement) newValue;
             final HtmlOption htmlOption = (HtmlOption) option.getHtmlElementOrNull();
             if (index >= jsxGet_length()) {
                 // Add a new option at the end.

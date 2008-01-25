@@ -43,17 +43,17 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.Option}.
+ * Tests for {@link HTMLOptionElement}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class OptionTest extends WebTestCase {
+public class HTMLOptionElementTest extends WebTestCase {
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public OptionTest(final String name) {
+    public HTMLOptionElementTest(final String name) {
         super(name);
     }
 

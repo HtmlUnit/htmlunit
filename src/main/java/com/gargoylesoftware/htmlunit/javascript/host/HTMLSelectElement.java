@@ -102,7 +102,7 @@ public class HTMLSelectElement extends FormField {
      * @param arg2 for Firefox: the DomNode to insert the previous element before (null if at end),
      * for Internet Explorer: the index where the element should be placed (optional)
      */
-    public void jsxFunction_add(final Option newOptionObject, final Object arg2) {
+    public void jsxFunction_add(final HTMLOptionElement newOptionObject, final Object arg2) {
         if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
             add_IE(newOptionObject, arg2);
         }
@@ -116,7 +116,7 @@ public class HTMLSelectElement extends FormField {
      * @param newOptionObject The DomNode to insert
      * @param index (optional) the index where the node should be inserted
      */
-    protected void add_IE(final Option newOptionObject, final Object index) {
+    protected void add_IE(final HTMLOptionElement newOptionObject, final Object index) {
         final HtmlSelect select = getHtmlSelect();
         final HtmlOption beforeOption;
         if (Context.getUndefinedValue().equals(index)) {
@@ -140,7 +140,7 @@ public class HTMLSelectElement extends FormField {
      * @param newOptionObject The DomNode to insert
      * @param beforeOptionObject The DomNode to insert the previous element before (null if at end)
      */
-    protected void add(final Option newOptionObject, final Object beforeOptionObject) {
+    protected void add(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {
         final HtmlOption beforeOption;
         if (beforeOptionObject == null) {
             beforeOption = null;
@@ -149,7 +149,7 @@ public class HTMLSelectElement extends FormField {
             throw Context.reportRuntimeError("Not enough arguments [SelectElement.add]");
         }
         else {
-            beforeOption = (HtmlOption) ((Option) beforeOptionObject).getDomNodeOrDie();
+            beforeOption = (HtmlOption) ((HTMLOptionElement) beforeOptionObject).getDomNodeOrDie();
         }
         addBefore(newOptionObject, beforeOption);
     }
@@ -160,7 +160,7 @@ public class HTMLSelectElement extends FormField {
      * @param newOptionObject the new option to add
      * @param beforeOption the option that should be after the option to add
      */
-    protected void addBefore(final Option newOptionObject, final HtmlOption beforeOption) {
+    protected void addBefore(final HTMLOptionElement newOptionObject, final HtmlOption beforeOption) {
         final HtmlSelect select = getHtmlSelect();
 
         HtmlOption htmlOption = (HtmlOption) newOptionObject.getHtmlElementOrNull();

@@ -673,6 +673,15 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
     </class>
 
+    <class name="HTMLOptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionElement"
+        jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
+        <property name="defaultSelected" readable="true" writable="false"/>
+        <property name="label" readable="true" writable="true"/>
+        <property name="selected" readable="true" writable="true"/>
+        <property name="text" readable="true" writable="true"/>
+        <property name="value" readable="true" writable="true"/>
+    </class>
+
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
@@ -912,15 +921,6 @@
         </function>
         <function name="removeChild"/>
         <function name="replaceChild"/>
-    </class>
-
-    <class name="Option" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Option"
-        jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
-        <property name="defaultSelected" readable="true" writable="false"/>
-        <property name="label" readable="true" writable="true"/>
-        <property name="selected" readable="true" writable="true"/>
-        <property name="text" readable="true" writable="true"/>
-        <property name="value" readable="true" writable="true"/>
     </class>
 
     <class name="Plugin" extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.Plugin"

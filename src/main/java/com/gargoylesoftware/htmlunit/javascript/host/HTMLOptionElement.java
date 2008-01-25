@@ -54,13 +54,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class Option extends HTMLElement {
+public class HTMLOptionElement extends HTMLElement {
     private static final long serialVersionUID = 947015932373556314L;
 
     /**
      * Create an instance.
      */
-    public Option() {
+    public HTMLOptionElement() {
     }
 
     /**

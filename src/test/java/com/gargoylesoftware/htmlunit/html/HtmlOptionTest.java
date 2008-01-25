@@ -37,7 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlOption}.
@@ -45,19 +51,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class HtmlOptionTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HtmlOptionTest(final String name) {
-        super(name);
-    }
+public class HtmlOptionTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelect() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -94,6 +95,7 @@ public class HtmlOptionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -117,6 +119,7 @@ public class HtmlOptionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetValue_ContentsIsValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -144,6 +147,7 @@ public class HtmlOptionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick() throws Exception {
 
         final String htmlContent
@@ -168,6 +172,7 @@ public class HtmlOptionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form><select>\n"
@@ -189,5 +194,30 @@ public class HtmlOptionTest extends WebTestCase {
         assertEquals("Number Two", option2.asText());
         assertEquals("overridden", option3.asText());
         assertEquals("Number 4", option4.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<select>\n"
+            + "  <option id='myId'>test1</option>\n"
+            + "  <option id='myId2'>test2</option>\n"
+            + "</select>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLOptionElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlOption.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
