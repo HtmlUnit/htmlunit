@@ -413,6 +413,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
     </class>
 
+    <class name="HTMLStyleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
+    </class>
+
     <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
     </class>
