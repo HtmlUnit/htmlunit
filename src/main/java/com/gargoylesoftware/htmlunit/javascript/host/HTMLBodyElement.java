@@ -39,14 +39,14 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLStyleElement".
+ * The javascript object "HTMLBodyElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HTMLBodyElement extends HTMLElement {
 
-    private static final long serialVersionUID = 944381786297995169L;
+    private static final long serialVersionUID = -915040139319661419L;
 
     /**
      * Create an instance.
