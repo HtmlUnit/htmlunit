@@ -46,7 +46,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest;
+import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxyTest;
 
 /**
  * Tests for compatibility with version 1.6.0 of
@@ -233,7 +234,6 @@ public class Prototype160Test extends WebTestCase {
         final URL url = getClass().getClassLoader().getResource("prototype/1.6.0/test/unit/" + filename);
         assertNotNull(url);
 
-        HtmlUnitContextFactory.setDebuggerEnabled(true);
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(25000);
 
