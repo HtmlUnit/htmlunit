@@ -44,14 +44,14 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  */
-public class Button extends FormField {
+public class HTMLButtonElement extends FormField {
 
-    private static final long serialVersionUID = -3163222167146343119L;
+    private static final long serialVersionUID = 7075194404850135839L;
 
     /**
      * Create an instance.
      */
-    public Button() {
+    public HTMLButtonElement() {
     }
 
     /**

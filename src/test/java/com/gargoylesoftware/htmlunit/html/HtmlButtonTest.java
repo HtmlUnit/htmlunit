@@ -275,4 +275,25 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals(expectedParameters, webConnection.getLastParameters());
         assertEquals(expectedSecondPageTitle, page2.getTitleText());
     }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<button id='myId'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLButtonElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlButton.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
