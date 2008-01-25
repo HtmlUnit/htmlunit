@@ -364,12 +364,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
-        final WebClient wc = getWindow().getWebWindow().getWebClient();
-        if (Context.getUndefinedValue().equals(content) && wc.getBrowserVersion().isNetscape()) {
-            throw Context.reportRuntimeError("XMLHttpRequest.send: not enough arguments");
-        }
-
-        if (content != null && !Context.getUndefinedValue().equals(content)) {
+        if (SubmitMethod.POST.equals(requestSettings_.getSubmitMethod()) 
+                && content != null && !Context.getUndefinedValue().equals(content)) {
             final String body = Context.toString(content);
             if (body.length() > 0) {
                 getLog().debug("Setting request body to: " + body);

@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="mguillem">
+                JavaScript: XMLHttpRequest should not throw an exception when send() is called without args (for FF)
+                and when send content is specified but method is GET.
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: correct toString() for properties in 'window' scope (FF only).
             </action>

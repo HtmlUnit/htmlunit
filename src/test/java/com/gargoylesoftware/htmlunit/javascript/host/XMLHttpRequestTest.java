@@ -394,27 +394,34 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
+     * Test calls to send('foo') for a GET. HtmlUnit 1.14 was incorrectly throwing an exception.
+     * @throws Exception if the test fails.
+     */
+    public void testSendGETWithContent() throws Exception {
+        testSend(BrowserVersion.FIREFOX_2, "'foo'");
+        testSend(BrowserVersion.INTERNET_EXPLORER_6_0, "'foo'");
+    }
+    
+    /**
      * Test calls to send() without any argument
      * @throws Exception if the test fails.
      */
     public void testSendNoArg() throws Exception {
         testSendNoArg(BrowserVersion.INTERNET_EXPLORER_6_0);
-        // Mozilla fails if no arg is provided.
-        try {
-            testSendNoArg(BrowserVersion.FIREFOX_2);
-            fail("Should have thrown");
-        }
-        catch (final Exception e) {
-            // nothing
-            assertTrue(e.getMessage().contains("not enough arguments"));
-        }
-
+        testSendNoArg(BrowserVersion.FIREFOX_2);
     }
 
     /**
      * @throws Exception if the test fails.
      */
     private void testSendNoArg(final BrowserVersion browserVersion) throws Exception {
+        testSend(browserVersion, "");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    private void testSend(final BrowserVersion browserVersion, final String sendArg) throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test()\n"
@@ -425,7 +432,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "  else if (window.ActiveXObject)\n"
             + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "  request.open('GET', 'foo.txt', false);\n"
-            + "  request.send();\n"
+            + "  request.send(" + sendArg + ");\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
