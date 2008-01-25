@@ -367,6 +367,7 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"[object HTMLHtmlElement]", "[HTMLHtmlElement]"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
