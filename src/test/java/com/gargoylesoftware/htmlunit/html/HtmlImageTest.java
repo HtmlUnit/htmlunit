@@ -38,7 +38,10 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -152,5 +155,26 @@ public class HtmlImageTest extends WebTestCase {
         final HtmlImage img = (HtmlImage) page.getHtmlElementById("myImg");
         
         img.click(0, 0);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myId'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLImageElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlImage.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

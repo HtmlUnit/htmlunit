@@ -661,6 +661,11 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHtml">
     </class>
 
+    <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"
+        jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
+        <property name="src" readable="true" writable="true"/>
+    </class>
+
     <class name="HTMLIsIndexElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIsIndexElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlIsIndex">
     </class>
@@ -755,11 +760,6 @@
             <browser name="Firefox"/>
         </property>
         <function name="select"/>
-    </class>
-
-    <class name="Image" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Image"
-        jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
-        <property name="src" readable="true" writable="true"/>
     </class>
 
     <class name="Label" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Label"

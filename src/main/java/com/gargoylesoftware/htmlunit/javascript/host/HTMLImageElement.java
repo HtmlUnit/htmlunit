@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Chris Erskine
  * @author Marc Guillemot
  */
-public class Image extends HTMLElement {
+public class HTMLImageElement extends HTMLElement {
 
     private static final long serialVersionUID = 5630843390548382869L;
     private String src_;
@@ -62,7 +62,7 @@ public class Image extends HTMLElement {
     /**
      * Create an instance.
      */
-    public Image() {
+    public HTMLImageElement() {
     }
 
     /**

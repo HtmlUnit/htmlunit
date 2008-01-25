@@ -898,6 +898,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         else if ("Option".equals(name)) {
             name = "HTMLOptionElement";
         }
+        else if ("Image".equals(name)) {
+            name = "HTMLImageElement";
+        }
         return super.get(name, start);
     }
 

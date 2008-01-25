@@ -45,17 +45,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link Images}.
+ * Tests for {@link HTMLImageElement}.
  *
  * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  */
-public class ImageTest extends WebTestCase {
+public class HTMLImageElementTest extends WebTestCase {
     /**
      * Create an instance
      * @param name The name of the test.
      */
-    public ImageTest(final String name) {
+    public HTMLImageElementTest(final String name) {
         super(name);
     }
     
