@@ -764,6 +764,10 @@
         <function name="item"/>
     </class>
 
+    <class name="HTMLParagraphElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParagraphElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
+    </class>
+
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
         <!-- NOT FINISHED -->
