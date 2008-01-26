@@ -8,6 +8,9 @@
     <body>
         <release version="2.0-prerelease">
             <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: Rename HtmlHeader1 (to HtmlHeader6) to corresponding HtmlHeading1 (to HtmlHeading6).
+            </action>
+            <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: Rename HtmlTextDirection to the correct name (HtmlDirectory).
             </action>
             <action type="update" dev="mguillem">

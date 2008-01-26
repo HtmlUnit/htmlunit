@@ -174,23 +174,23 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlHead.TAG_NAME)) {
             element = new HtmlHead(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlHeader1.TAG_NAME)) {
-            element = new HtmlHeader1(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlHeading1.TAG_NAME)) {
+            element = new HtmlHeading1(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlHeader2.TAG_NAME)) {
-            element = new HtmlHeader2(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlHeading2.TAG_NAME)) {
+            element = new HtmlHeading2(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlHeader3.TAG_NAME)) {
-            element = new HtmlHeader3(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlHeading3.TAG_NAME)) {
+            element = new HtmlHeading3(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlHeader4.TAG_NAME)) {
-            element = new HtmlHeader4(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlHeading4.TAG_NAME)) {
+            element = new HtmlHeading4(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlHeader5.TAG_NAME)) {
-            element = new HtmlHeader5(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlHeading5.TAG_NAME)) {
+            element = new HtmlHeading5(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlHeader6.TAG_NAME)) {
-            element = new HtmlHeader6(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlHeading6.TAG_NAME)) {
+            element = new HtmlHeading6(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHiddenInput.TAG_NAME)) {
             element = new HtmlHiddenInput(namespaceURI, qualifiedName, page, attributeMap);

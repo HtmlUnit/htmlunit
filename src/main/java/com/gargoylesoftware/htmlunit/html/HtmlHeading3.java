@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * Wrapper for the html element "h6".
+ * Wrapper for the html element "h3".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -48,22 +48,22 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlHeader6 extends ClickableElement {
+public class HtmlHeading3 extends ClickableElement {
 
-    private static final long serialVersionUID = -1216345014921616866L;
+    private static final long serialVersionUID = 5308359647395376487L;
 
     /** the HTML tag represented by this element */
-    public static final String TAG_NAME = "h6";
+    public static final String TAG_NAME = "h3";
 
     /**
-     * Create an instance of HtmlHeader6
+     * Create an instance of HtmlHeading3
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    HtmlHeader6(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlHeading3(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

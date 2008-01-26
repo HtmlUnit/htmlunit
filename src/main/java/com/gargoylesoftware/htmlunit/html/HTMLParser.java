@@ -112,12 +112,12 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlForm.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlFrame.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlFrameSet.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlHeader1.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlHeader2.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlHeader3.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlHeader4.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlHeader5.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlHeader6.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlHeading1.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlHeading2.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlHeading3.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlHeading4.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlHeading5.TAG_NAME, defaultElementFactory);
+        ELEMENT_FACTORIES.put(HtmlHeading6.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlHead.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlHorizontalRule.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlHtml.TAG_NAME, defaultElementFactory);

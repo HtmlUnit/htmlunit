@@ -48,7 +48,7 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlHeader1 extends ClickableElement {
+public class HtmlHeading1 extends ClickableElement {
 
     private static final long serialVersionUID = 5846396728739967656L;
 
@@ -56,14 +56,14 @@ public class HtmlHeader1 extends ClickableElement {
     public static final String TAG_NAME = "h1";
 
     /**
-     * Create an instance of HtmlHeader1
+     * Create an instance of HtmlHeading1
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    HtmlHeader1(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlHeading1(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
