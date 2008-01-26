@@ -373,4 +373,31 @@ public class SimpleScriptableTest extends WebTestCase {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * This is related to HtmlUnitContextFactory.hasFeature(Context.FEATURE_PARENT_PROTO_PROPERTIES).
+     * @throws Exception if the test fails
+     */
+    public void testParentProtoFeature() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testParentProtoFeature(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"false"});
+        testParentProtoFeature(BrowserVersion.FIREFOX_2, new String[] {"true"});
+    }
+
+    private void testParentProtoFeature(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    alert(document.createElement('div').__proto__ != undefined);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
