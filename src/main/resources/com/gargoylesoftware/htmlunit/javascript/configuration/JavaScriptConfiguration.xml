@@ -619,6 +619,10 @@
         </function>
     </class>
 
+    <class name="HTMLFiedlSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFieldSetElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
+    </class>
+
     <class name="HTMLFormElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
         <!-- NOT FINISHED -->
