@@ -35,43 +35,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlUnorderedList}.
+ * The javascript object "HTMLOListElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlUnorderedListTest extends WebTestCase2 {
+public class HTMLOListElement extends HTMLElement {
+
+    private static final long serialVersionUID = 5919593872580325038L;
 
     /**
-     * @throws Exception if the test fails.
+     * Create an instance.
      */
-    @Test
-    public void testSimpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <ul id='myId'/>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLUListElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlUnorderedList.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
+    public HTMLOListElement() {
+        // Empty.
     }
+
 }

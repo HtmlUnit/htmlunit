@@ -46,12 +46,12 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlUnorderedList}.
+ * Tests for {@link HtmlDefinitionList}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlUnorderedListTest extends WebTestCase2 {
+public class HtmlDefinitionListTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails.
@@ -65,13 +65,16 @@ public class HtmlUnorderedListTest extends WebTestCase2 {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <ul id='myId'/>\n"
+            + "  <dl id='myId'>\n"
+            + "    <dt>Some Term</dt>\n"
+            + "    <dd>A description</dd>\n"
+            + "  </dl>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLUListElement]"};
+        final String[] expectedAlerts = {"[object HTMLDListElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlUnorderedList.class.isInstance(page.getHtmlElementById("myId")));
+        assertTrue(HtmlDefinitionList.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

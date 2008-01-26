@@ -360,6 +360,10 @@
         <function name="tags"/>
     </class>
 
+    <class name="HTMLDListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDListElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionList">
+    </class>
+
     <class name="HTMLElement" extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
         <property name="all" readable="true" writable="false">
@@ -738,6 +742,10 @@
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="item"/>
+    </class>
+
+    <class name="HTMLOListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOListElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOrderedList">
     </class>
 
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
