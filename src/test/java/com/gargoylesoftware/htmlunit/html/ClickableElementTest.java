@@ -381,15 +381,6 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * Test onClick handler and click method of Text Direction element.
-     *
-     * @throws Exception if the test fails
-     */
-    public void testTextDirection_onClick() throws Exception {
-        onClickSimpleTest("dir");
-    }
-
-    /**
      * Test onClick handler and click method of division element.
      *
      * @throws Exception if the test fails
