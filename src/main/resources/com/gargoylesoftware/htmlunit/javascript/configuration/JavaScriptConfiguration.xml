@@ -725,16 +725,28 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
     </class>
 
-    <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLinkElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
-    </class>
-
     <class name="HTMLLIElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLIElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlListItem">
     </class>
 
+    <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLinkElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
+    </class>
+
+    <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMenuElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMenu">
+    </class>
+
     <class name="HTMLMetaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMetaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
+    </class>
+
+    <class name="HTMLOListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOListElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOrderedList">
+    </class>
+
+    <class name="HTMLOptGroupElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptGroupElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
     </class>
 
     <class name="HTMLOptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionElement"
@@ -746,22 +758,10 @@
         <property name="value" readable="true" writable="true"/>
     </class>
 
-    <class name="HTMLOptGroupElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptGroupElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
-    </class>
-
     <class name="HTMLOptionsCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOptionsCollection" JSObject="true">
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="item"/>
-    </class>
-
-    <class name="HTMLOListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOListElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOrderedList">
-    </class>
-
-    <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMenuElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMenu">
     </class>
 
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
@@ -1030,13 +1030,6 @@
         <function name="moveRow"/>
     </class>
 
-    <class name="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.SimpleArray"
-        JSObject="false">
-        <property name="length" readable="true" writable="false"/>
-        <function name="item"/>
-        <function name="namedItem"/>
-	</class>
-
     <class name="Screen" classname="com.gargoylesoftware.htmlunit.javascript.host.Screen" JSObject="true">
         <doclink
             url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_screen.asp"
@@ -1079,6 +1072,13 @@
     <class name="Selection" classname="com.gargoylesoftware.htmlunit.javascript.host.Selection" JSObject="true">
         <function name="createRange"/>
     </class>
+
+    <class name="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.SimpleArray"
+        JSObject="false">
+        <property name="length" readable="true" writable="false"/>
+        <function name="item"/>
+        <function name="namedItem"/>
+	</class>
 
     <class name="Style" classname="com.gargoylesoftware.htmlunit.javascript.host.Style" JSObject="true">
         <property name="behavior" readable="true" writable="true">

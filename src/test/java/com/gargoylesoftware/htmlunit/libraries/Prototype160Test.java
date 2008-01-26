@@ -109,6 +109,8 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
+     * Depends on {@link SimpleScriptableTest#testParentProtoFeature()}.
+     *
      * @throws Exception If test fails.
      */
     public void testElementMixins() throws Exception {
@@ -208,9 +210,6 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Depends on {@link SimpleScriptableTest#testStringWithExclamationMark()}
-     *         and {@link HtmlUnitRegExpProxyTest#testFlag_global()}.
-     *
      * @throws Exception If test fails.
      */
     public void testString() throws Exception {

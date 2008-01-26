@@ -45,6 +45,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -55,6 +60,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 
 /**
@@ -620,5 +626,41 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             JavaScriptConfiguration.getInstance(browserVersion);
         }
         assertEquals(1, leakyMap.size());
+    }
+
+    /**
+     * Test if the <tt>class name</tt> entries are lexicographically sorted.
+     *
+     * @throws Exception If the test fails
+     */
+    public void testLexicographicOrder() throws Exception {
+        final String directory = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/";
+
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        factory.setValidating(false);
+
+        final DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+        documentBuilder.setErrorHandler(new StrictErrorHandler());
+
+        final org.w3c.dom.Document doc =
+            documentBuilder.parse(createInputSourceForFile(directory + "JavaScriptConfiguration.xml"));
+        
+        String lastClassName = null;
+        Node node = doc.getDocumentElement().getFirstChild();
+        while (node != null) {
+            if (node instanceof Element) {
+                final Element element = (Element) node;
+                if (element.getTagName().equals("class")) {
+                    final String className = element.getAttribute("name");
+                    if (lastClassName != null && className.compareToIgnoreCase(lastClassName) < 1) {
+                        fail("JavaScriptConfiguration.xml: \""
+                                + className + "\" should be before \"" + lastClassName + '"');
+                    }
+                    lastClassName = className;
+                }
+            }
+            node = node.getNextSibling();
+        }
     }
 }
