@@ -360,6 +360,10 @@
         <function name="tags"/>
     </class>
 
+    <class name="HTMLDirectoryElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDirectoryElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDirectory">
+    </class>
+
     <class name="HTMLDListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDListElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionList">
     </class>

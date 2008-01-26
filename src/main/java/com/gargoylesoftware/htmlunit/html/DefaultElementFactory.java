@@ -144,6 +144,9 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlDeletedText.TAG_NAME)) {
             element = new HtmlDeletedText(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlDirectory.TAG_NAME)) {
+            element = new HtmlDirectory(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equals(HtmlDivision.TAG_NAME)) {
             element = new HtmlDivision(namespaceURI, qualifiedName, page, attributeMap);
         }
