@@ -781,6 +781,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
     </class>
 
+    <class name="HTMLUListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLUListElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnorderedList">
+    </class>
+
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
         JSObject="true">
         <property name="hash" readable="true" writable="true"/>
