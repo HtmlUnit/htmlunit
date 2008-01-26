@@ -46,12 +46,12 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlFieldSet}.
+ * Tests for {@link HtmlLegend}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlFieldSetTest extends WebTestCase2 {
+public class HtmlLegendTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails.
@@ -65,15 +65,15 @@ public class HtmlFieldSetTest extends WebTestCase2 {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <fieldset id='myId'>\n"
-            + "    <legend>Legend</legend>\n"
+            + "  <fieldset>\n"
+            + "    <legend id='myId'>Legend</legend>\n"
             + "  </fieldset>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLFieldSetElement]"};
+        final String[] expectedAlerts = {"[object HTMLLegendElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlFieldSet.class.isInstance(page.getHtmlElementById("myId")));
+        assertTrue(HtmlLegend.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

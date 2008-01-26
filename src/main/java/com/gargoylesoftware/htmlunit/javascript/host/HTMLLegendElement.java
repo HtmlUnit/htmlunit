@@ -35,45 +35,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlFieldSet}.
+ * The javascript object "HTMLLegendElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlFieldSetTest extends WebTestCase2 {
+public class HTMLLegendElement extends HTMLElement {
+
+    private static final long serialVersionUID = -6536306776315347201L;
 
     /**
-     * @throws Exception if the test fails.
+     * Create an instance.
      */
-    @Test
-    public void testSimpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <fieldset id='myId'>\n"
-            + "    <legend>Legend</legend>\n"
-            + "  </fieldset>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLFieldSetElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlFieldSet.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
+    public HTMLLegendElement() {
+        // Empty.
     }
+
 }

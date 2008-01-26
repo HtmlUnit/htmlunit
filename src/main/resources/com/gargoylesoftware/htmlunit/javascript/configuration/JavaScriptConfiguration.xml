@@ -709,6 +709,10 @@
         <function name="click"/>
     </class>
 
+    <class name="HTMLLegendElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLegendElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
+    </class>
+
     <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLinkElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
     </class>
