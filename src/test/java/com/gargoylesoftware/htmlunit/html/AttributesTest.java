@@ -110,7 +110,7 @@ public class AttributesTest extends WebTestCase {
             "HtmlTable", "HtmlTableBody", /*"HtmlTableCell",*/ "HtmlTableColumn",
             "HtmlTableColumnGroup", "HtmlTableDataCell",
             "HtmlTableFooter", "HtmlTableHeader", "HtmlTableHeaderCell",
-            "HtmlTableRow", "HtmlTextArea", "HtmlTextDirection", "HtmlTextInput",
+            "HtmlTableRow", "HtmlTextArea", "HtmlDirectory", "HtmlTextInput",
             "HtmlTitle", "HtmlUnorderedList"
         };
         for (int i = 0; i < classesToTest.length; i++) {
