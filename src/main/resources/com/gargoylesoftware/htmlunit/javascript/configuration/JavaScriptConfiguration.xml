@@ -667,8 +667,42 @@
         <property name="src" readable="true" writable="true"/>
     </class>
 
+    <class name="HTMLInputElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
+        <property name="checked" readable="true" writable="true"/>
+        <property name="defaultChecked" readable="true" writable="true">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp"
+                descr="MSDN documentation"/>
+        </property>
+        <property name="defaultValue" readable="true" writable="true">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
+                descr="MSDN documentation"/>
+        </property>
+        <property name="textLength" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="type" readable="true" writable="true">
+            <javascript min-version="1.1"/>
+        </property>
+        <property name="selectionStart" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="selectionEnd" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <function name="select"/>
+    </class>
+
     <class name="HTMLIsIndexElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIsIndexElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlIsIndex">
+    </class>
+
+    <class name="HTMLLabelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLabelElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
+        <property name="htmlFor" readable="true" writable="true"/>
+        <function name="click"/>
     </class>
 
     <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLinkElement"
@@ -737,40 +771,6 @@
 
     <class name="HTMLTitleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
-    </class>
-
-    <class name="HTMLInputElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInputElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
-        <property name="checked" readable="true" writable="true"/>
-        <property name="defaultChecked" readable="true" writable="true">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="defaultValue" readable="true" writable="true">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="textLength" readable="true" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="type" readable="true" writable="true">
-            <javascript min-version="1.1"/>
-        </property>
-        <property name="selectionStart" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="selectionEnd" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <function name="select"/>
-    </class>
-
-    <class name="Label" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.Label"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
-        <property name="htmlFor" readable="true" writable="true"/>
-        <function name="click"/>
     </class>
 
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"

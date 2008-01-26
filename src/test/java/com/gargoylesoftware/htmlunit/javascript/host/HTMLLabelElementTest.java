@@ -45,18 +45,18 @@ import com.gargoylesoftware.htmlunit.html.HtmlLabel;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link Label}.
+ * Tests for {@link HTMLLabelElement}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class LabelTest extends WebTestCase {
+public class HTMLLabelElementTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public LabelTest(final String name) {
+    public HTMLLabelElementTest(final String name) {
         super(name);
     }
 

@@ -48,14 +48,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlLabel;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class Label extends HTMLElement {
+public class HTMLLabelElement extends HTMLElement {
 
     private static final long serialVersionUID = -7412506443200373632L;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
-    public Label() {
+    public HTMLLabelElement() {
         // Empty.
     }
 

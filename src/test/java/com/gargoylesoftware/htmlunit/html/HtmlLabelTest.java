@@ -40,28 +40,25 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlLabel}.
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class HtmlLabelTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlLabelTest(final String name) {
-        super(name);
-    }
+public class HtmlLabelTest extends WebTestCase2 {
 
     /**
      * Verifies that a checkbox is toggled when the related label is clicked.
      * @throws Exception if the test fails
      */
+    @Test
     public void test_click() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -87,6 +84,7 @@ public class HtmlLabelTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void test_getReferencedElement() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -100,8 +98,30 @@ public class HtmlLabelTest extends WebTestCase {
         final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("testCheckbox");
 
         final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("testLabel1");
-        assertSame(checkBox, label.getReferencedElement());
+        assertTrue(checkBox == label.getReferencedElement());
         final HtmlLabel label2 = (HtmlLabel) page.getHtmlElementById("testLabel2");
         assertNull(label2.getReferencedElement());
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<label id='myId'>Item</label>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLLabelElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlLabel.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
