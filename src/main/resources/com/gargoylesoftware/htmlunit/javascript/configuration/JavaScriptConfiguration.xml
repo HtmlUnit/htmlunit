@@ -752,6 +752,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOrderedList">
     </class>
 
+    <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMenuElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMenu">
+    </class>
+
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
         <!-- NOT FINISHED -->
