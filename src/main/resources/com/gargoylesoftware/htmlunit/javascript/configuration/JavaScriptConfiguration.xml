@@ -361,7 +361,12 @@
     </class>
 
     <class name="HTMLDirectoryElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDirectoryElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDirectory">    </class>
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDirectory">
+    </class>
+
+    <class name="HTMLDivElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDivElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDivision">
+    </class>
 
     <class name="HTMLDListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDListElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionList">
