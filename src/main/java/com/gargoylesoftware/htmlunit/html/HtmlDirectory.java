@@ -48,7 +48,7 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlTextDirection extends ClickableElement {
+public class HtmlDirectory extends ClickableElement {
 
     private static final long serialVersionUID = 7234953475940770872L;
 
@@ -56,14 +56,14 @@ public class HtmlTextDirection extends ClickableElement {
     public static final String TAG_NAME = "dir";
 
     /**
-     * Create an instance of HtmlTextDirection
+     * Create an instance of HtmlDirectory
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
      */
-    HtmlTextDirection(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+    HtmlDirectory(final String namespaceURI, final String qualifiedName, final HtmlPage page,
             final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

@@ -7,8 +7,8 @@
 
     <body>
         <release version="2.0-prerelease">
-            <action type="add" dev="asashour">
-                Add HtmlDirectory.
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: Rename HtmlTextDirection to the correct name (HtmlDirectory).
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: XMLHttpRequest should not throw an exception when send() is called without args (for FF)

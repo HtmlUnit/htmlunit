@@ -327,8 +327,8 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlTextArea.TAG_NAME)) {
             element = new HtmlTextArea(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlTextDirection.TAG_NAME)) {
-            element = new HtmlTextDirection(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equals(HtmlDirectory.TAG_NAME)) {
+            element = new HtmlDirectory(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTextInput.TAG_NAME)) {
             element = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
