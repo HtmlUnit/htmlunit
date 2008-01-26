@@ -74,7 +74,7 @@ public class HtmlDirectoryTest extends WebTestCase2 {
         final String[] expectedAlerts = {"[object HTMLDirectoryElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlDirectory.class.isInstance(page.getHtmlElementById("myId")));
+        assertTrue(HtmlTextDirection.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

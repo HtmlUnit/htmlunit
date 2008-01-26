@@ -103,7 +103,6 @@ public final class HTMLParser {
         ELEMENT_FACTORIES.put(HtmlTableColumnGroup.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDefinitionDescription.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDeletedText.TAG_NAME, defaultElementFactory);
-        ELEMENT_FACTORIES.put(HtmlDirectory.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlTextDirection.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDivision.TAG_NAME, defaultElementFactory);
         ELEMENT_FACTORIES.put(HtmlDefinitionList.TAG_NAME, defaultElementFactory);
