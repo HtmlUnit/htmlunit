@@ -334,6 +334,10 @@
         </property>
     </class>
 
+    <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
+    </class>
+
     <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
     </class>
