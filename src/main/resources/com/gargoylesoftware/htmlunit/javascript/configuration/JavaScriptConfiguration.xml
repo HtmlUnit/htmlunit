@@ -857,6 +857,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
     </class>
 
+    <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableColumn">
+    </class>
+
     <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
         <property name="caption" readable="true" writable="false"/>
