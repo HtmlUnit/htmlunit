@@ -338,8 +338,16 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
     </class>
 
+    <class name="HTMLBaseFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseFontElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBaseFont">
+    </class>
+
     <class name="HTMLBodyElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
+    </class>
+
+    <class name="HTMLBRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBRElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBreak">
     </class>
 
     <class name="HTMLButtonElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLButtonElement"
@@ -635,6 +643,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
     </class>
 
+    <class name="HTMLFontElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFontElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFont">
+    </class>
+
     <class name="HTMLFormElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFormElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
         <!-- NOT FINISHED -->
@@ -672,6 +684,14 @@
 
     <class name="HTMLHeadElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHead">
+    </class>
+
+    <class name="HTMLHeadingElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement"
+        JSObject="true">
+    </class>
+
+    <class name="HTMLHRElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHRElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule">
     </class>
 
     <class name="HTMLHtmlElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHtmlElement"
@@ -766,6 +786,14 @@
 
     <class name="HTMLParagraphElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParagraphElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
+    </class>
+
+    <class name="HTMLPreElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLPreElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
+    </class>
+
+    <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation">
     </class>
 
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"

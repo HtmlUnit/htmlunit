@@ -62,8 +62,15 @@ import org.xml.sax.SAXParseException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading2;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading3;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading4;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading5;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading6;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement;
 
 /**
  * A container for all the javascript configuration information.
@@ -695,7 +702,7 @@ public final class JavaScriptConfiguration {
     /**
      * Return an immutable map containing the html to javascript mappings.  Keys are
      * java classes for the various html classes (ie HtmlInput.class) and the values
-     * are the javascript class names (ie "Anchor").
+     * are the javascript class names (ie "HTMLAnchorElement").
      * @return the mappings
      */
     @SuppressWarnings("unchecked")
@@ -729,6 +736,13 @@ public final class JavaScriptConfiguration {
                 }
             }
         }
+        map.put(HtmlHeading1.class, HTMLHeadingElement.class);
+        map.put(HtmlHeading2.class, HTMLHeadingElement.class);
+        map.put(HtmlHeading3.class, HTMLHeadingElement.class);
+        map.put(HtmlHeading4.class, HTMLHeadingElement.class);
+        map.put(HtmlHeading5.class, HTMLHeadingElement.class);
+        map.put(HtmlHeading6.class, HTMLHeadingElement.class);
+
         HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
         return HtmlJavaScriptMap_;
     }
