@@ -51,19 +51,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link HTMLFrameElement} when used for {@link HtmlInlineFrame}.
+ * Tests for {@link HTMLIFrameElement}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class IFrameTest extends WebTestCase {
+public class HTMLIFrameElementTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public IFrameTest(final String name) {
+    public HTMLIFrameElementTest(final String name) {
         super(name);
     }
 

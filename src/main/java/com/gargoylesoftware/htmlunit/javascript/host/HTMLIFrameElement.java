@@ -40,21 +40,21 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 
 /**
- * A JavaScript object for a {@link HtmlFrame}.
+ * A JavaScript object for {@link HtmlInlineFrame}.
  *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLFrameElement extends HTMLElement {
-    private static final long serialVersionUID = 3761121622400448304L;
+public class HTMLIFrameElement extends HTMLElement {
+
+    private static final long serialVersionUID = -7005081332114203694L;
 
     /**
      * Create an instance.  A default constructor is required for all javascript objects.
      */
-    public HTMLFrameElement() {
-    }
+    public HTMLIFrameElement() { }
 
     /**
      * Return the value of url loaded in the frame

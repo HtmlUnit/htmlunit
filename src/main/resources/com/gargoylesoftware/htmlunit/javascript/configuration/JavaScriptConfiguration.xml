@@ -291,10 +291,6 @@
         <function name="click"/>
     </class>
 
-    <class name="FrameInline" extends="HTMLFrameElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
-        JSObject="false"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
-    </class>
-
     <class name="FrameSet" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FrameSet"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
         <property name="rows" readable="true" writable="true"/>
@@ -677,7 +673,7 @@
     </class>
 
     <class name="HTMLFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameElement"
-        JSObject="true"  htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
         <property name="onload" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
@@ -706,6 +702,20 @@
 
     <class name="HTMLHtmlElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHtmlElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHtml">
+    </class>
+
+    <class name="HTMLIFrameElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIFrameElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
+        <property name="onload" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Firefox"/>
+        </property>
+        <property name="src" readable="true" writable="true"/>
+        <property name="name" readable="true" writable="true"/>
+        <property name="contentDocument" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="contentWindow" readable="true" writable="false"/>
     </class>
 
     <class name="HTMLImageElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLImageElement"
