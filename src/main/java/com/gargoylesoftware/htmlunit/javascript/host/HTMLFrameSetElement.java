@@ -45,14 +45,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
  * @version $Revision$
  * @author Bruce Chapman
  */
-public class FrameSet extends HTMLElement {
+public class HTMLFrameSetElement extends HTMLElement {
 
     private static final long serialVersionUID = 5630843390548382869L;
 
     /**
      * Creates a new frameset instance.
      */
-    public FrameSet() {
+    public HTMLFrameSetElement() {
         // Empty.
     }
 

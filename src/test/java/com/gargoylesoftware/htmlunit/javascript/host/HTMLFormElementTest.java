@@ -64,12 +64,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class FormTest extends WebTestCase {
+public class HTMLFormElementTest extends WebTestCase {
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public FormTest(final String name) {
+    public HTMLFormElementTest(final String name) {
         super(name);
     }
 

@@ -46,19 +46,20 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Unit tests for {@link FrameSet}.
+ * Unit tests for {@link HTMLFrameSetElement}.
  *
  * @version $Revision$
  * @author Bruce Chapman
+ * @author Ahmed Ashour
  */
-public class FrameSetTest extends WebTestCase {
+public class HTMLFrameSetElementTest extends WebTestCase {
 
     /**
      * Creates an instance.
      *
      * @param name The name of the test.
      */
-    public FrameSetTest(final String name) {
+    public HTMLFrameSetElementTest(final String name) {
         super(name);
     }
 

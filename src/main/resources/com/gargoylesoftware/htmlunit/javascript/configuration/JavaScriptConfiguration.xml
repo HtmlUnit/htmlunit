@@ -291,12 +291,6 @@
         <function name="click"/>
     </class>
 
-    <class name="FrameSet" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FrameSet"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
-        <property name="rows" readable="true" writable="true"/>
-        <property name="cols" readable="true" writable="true"/>
-    </class>
-
     <class name="History" classname="com.gargoylesoftware.htmlunit.javascript.host.History"
         JSObject="true">
         <property name="length" readable="true" writable="false"/>
@@ -684,6 +678,12 @@
             <browser name="Firefox"/>
         </property>
         <property name="contentWindow" readable="true" writable="false"/>
+    </class>
+
+    <class name="HTMLFrameSetElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLFrameSetElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
+        <property name="rows" readable="true" writable="true"/>
+        <property name="cols" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLHeadElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadElement"
