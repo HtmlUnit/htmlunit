@@ -956,6 +956,12 @@
         </function>
     </class>
 
+    <!-- Because it is associated with three HtmlClasses,
+         the one-to-many configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
+    <class name="HTMLTableSectionElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement"
+        JSObject="true">
+    </class>
+
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
         <!-- NOT FINISHED -->
@@ -1278,15 +1284,6 @@
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
     </class>
-
-    <class name="TableBody" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableBody"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableBody"/>
-
-    <class name="TableFooter" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableFooter"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableFooter"/>
-
-    <class name="TableHeader" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableHeader"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableHeader"/>
 
     <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">

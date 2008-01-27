@@ -38,25 +38,21 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
- * A JavaScript object representing a table body.
+ * A JavaScript object representing "HTMLTableSectionElement", it is used by {@link HtmlTableBody},
+ * {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
-public class TableBody extends RowContainer {
+public class HTMLTableSectionElement extends RowContainer {
 
-    private static final long serialVersionUID = 3258411724876231988L;
+    private static final long serialVersionUID = -3564660687852337070L;
 
     /**
      * Create an instance.
      */
-    public TableBody() {
+    public HTMLTableSectionElement() {
     }
 
-    /**
-     * Javascript constructor. This must be declared in every JavaScript file because
-     * the Rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
-    }
 }

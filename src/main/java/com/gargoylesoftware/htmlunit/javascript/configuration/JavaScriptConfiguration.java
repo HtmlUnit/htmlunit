@@ -70,10 +70,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlHeading4;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading5;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading6;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
+import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
+import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
+import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement;
 
 /**
  * A container for all the javascript configuration information.
@@ -748,6 +752,10 @@ public final class JavaScriptConfiguration {
 
         map.put(HtmlInlineQuotation.class, HTMLQuoteElement.class);
         map.put(HtmlBlockQuote.class, HTMLQuoteElement.class);
+
+        map.put(HtmlTableBody.class, HTMLTableSectionElement.class);
+        map.put(HtmlTableHeader.class, HTMLTableSectionElement.class);
+        map.put(HtmlTableFooter.class, HTMLTableSectionElement.class);
 
         HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
         return HtmlJavaScriptMap_;
