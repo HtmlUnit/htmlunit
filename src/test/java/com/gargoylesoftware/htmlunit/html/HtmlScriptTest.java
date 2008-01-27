@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class HtmlScriptTest extends WebTestCase {
 
@@ -201,5 +202,26 @@ public class HtmlScriptTest extends WebTestCase {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, actualIE);
         final String[] expectedIE = new String[] {"normal", "deferred", "onload"};
         assertEquals(expectedIE, actualIE);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <script id='myId'></script>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLScriptElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlScript.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

@@ -47,15 +47,16 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class Script extends HTMLElement {
+public class HTMLScriptElement extends HTMLElement {
 
     private static final long serialVersionUID = -4626517931702326308L;
 
     /**
      * Creates an instance.
      */
-    public Script() {
+    public HTMLScriptElement() {
         // Empty.
     }
 

@@ -47,19 +47,19 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Unit tests for {@link Script}.
+ * Unit tests for {@link HTMLScriptElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class ScriptTest extends WebTestCase {
+public class HTMLScriptElementTest extends WebTestCase {
 
     /**
      * Creates an instance.
      * @param name The name of the test.
      */
-    public ScriptTest(final String name) {
+    public HTMLScriptElementTest(final String name) {
         super(name);
     }
 

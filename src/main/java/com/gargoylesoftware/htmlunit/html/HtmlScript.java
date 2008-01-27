@@ -41,7 +41,7 @@ import java.util.Map;
 
 import org.mozilla.javascript.Function;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Script;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
 
 /**
  * Wrapper for the html element "script".<br>
@@ -323,7 +323,7 @@ public class HtmlScript extends HtmlElement {
     private void executeOnReadyStateChangeHandlerIfNecessary() {
         if (getPage().getWebClient().getBrowserVersion().isIE()) {
             setReadyState(READY_STATE_COMPLETE);
-            final Script script = (Script) getScriptObject();
+            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Function handler = script.getOnReadyStateChangeHandler();
             if (handler != null) {
                 getPage().executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
