@@ -67,13 +67,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class SelectTest extends WebTestCase {
+public class HTMLSelectElementTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public SelectTest(final String name) {
+    public HTMLSelectElementTest(final String name) {
         super(name);
     }
 

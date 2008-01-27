@@ -48,20 +48,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
- * Tests for Inputs
+ * Tests for {@link HTMLTextAreaElement}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class TextareaTest extends WebTestCase {
+public class HTMLTextAreaElementTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public TextareaTest(final String name) {
+    public HTMLTextAreaElementTest(final String name) {
         super(name);
     }
 
