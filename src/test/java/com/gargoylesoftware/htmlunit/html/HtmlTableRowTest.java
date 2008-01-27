@@ -37,8 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mozilla.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
@@ -303,5 +307,28 @@ public class HtmlTableRowTest extends WebTestCase {
 
         final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstDomChild();
         assertFalse("Input!".equals(inputClone.getAttributeValue("value")));
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <table>\n"
+            + "    <tr id='myId'/>\n"
+            + "  </table>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLTableRowElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlTableRow.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

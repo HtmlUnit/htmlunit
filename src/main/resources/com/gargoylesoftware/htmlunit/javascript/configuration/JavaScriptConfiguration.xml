@@ -908,6 +908,33 @@
         </function>
     </class>
 
+    <class name="HTMLTableRowElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableRowElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableRow">
+        <doclink
+            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
+            descr="W3c DOM Level 2"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/tr.asp"
+            descr="MSDN documentation"/>
+        <property name="cells" readable="true" writable="false"/>
+        <property name="rowIndex" readable="true" writable="false">
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
+                descr="W3c DOM Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/rowindex.asp"
+                descr="MSDN documentation"/>
+        </property>
+        <function name="insertCell">
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
+                descr="W3c DOM Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
+                descr="MSDN documentation"/>
+        </function>
+    </class>
+
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
         <!-- NOT FINISHED -->
@@ -1260,33 +1287,6 @@
 
     <class name="TableHeader" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableHeader"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableHeader"/>
-
-    <class name="TableRow" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.TableRow"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableRow">
-        <doclink
-            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
-            descr="W3c DOM Level 2"/>
-        <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/tr.asp"
-            descr="MSDN documentation"/>
-        <property name="cells" readable="true" writable="false"/>
-        <property name="rowIndex" readable="true" writable="false">
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
-                descr="W3c DOM Level 2"/>
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/rowindex.asp"
-                descr="MSDN documentation"/>
-        </property>
-        <function name="insertCell">
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
-                descr="W3c DOM Level 2"/>
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp"
-                descr="MSDN documentation"/>
-        </function>
-    </class>
 
     <class name="TextImpl" extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.TextImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">

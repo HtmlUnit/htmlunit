@@ -55,14 +55,14 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class TableRow extends HTMLElement {
+public class HTMLTableRowElement extends HTMLElement {
     private static final long serialVersionUID = 3256441404401397812L;
     private HTMLCollection cells_; // has to be a member to have equality (==) working
 
     /**
      * Create an instance.
      */
-    public TableRow() {
+    public HTMLTableRowElement() {
     }
 
     /**
@@ -115,7 +115,7 @@ public class TableRow extends HTMLElement {
      */
     public static Object jsxFunction_insertCell(final Context cx, final Scriptable s,
             final Object[] args, final Function f) {
-        final TableRow row = (TableRow) s;
+        final HTMLTableRowElement row = (HTMLTableRowElement) s;
         final HtmlTableRow htmlRow = (HtmlTableRow) row.getDomNodeOrDie();
         
         final int position = getIntArg(0, args, -1);
