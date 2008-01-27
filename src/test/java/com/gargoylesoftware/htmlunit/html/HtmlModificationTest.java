@@ -46,12 +46,12 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlInlineQuotation}, and {@link HtmlBlockQuote}.
+ * Tests for {@link HtmlInsertedText}, and {@link HtmlDeletedText}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlQuoteTest extends WebTestCase2 {
+public class HtmlModificationTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails.
@@ -66,15 +66,16 @@ public class HtmlQuoteTest extends WebTestCase2 {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <q id='myId1'>First Quote</q>\n"
-            + "  <blockquote id='myId2'>Second Quote</blockquote>\n"
+            + "  Some text is <ins id='myId1'>inserted</ins> or <del id='myId2'>deleted</del>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLQuoteElement]", "[object HTMLQuoteElement]"};
+        //both values should be HTMLModElement
+        //see http://support.mozilla.com/tiki-view_forum_thread.php?comments_parentId=6932&topics_sort_mode=lastPost_desc&forumId=1
+        final String[] expectedAlerts = {"[object HTMLInsElement]", "[object HTMLDelElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlInlineQuotation.class.isInstance(page.getHtmlElementById("myId1")));
-        assertTrue(HtmlBlockQuote.class.isInstance(page.getHtmlElementById("myId2")));
+        assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
+        assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

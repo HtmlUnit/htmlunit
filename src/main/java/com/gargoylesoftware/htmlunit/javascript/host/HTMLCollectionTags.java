@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * An array of elements. It is very similar to {@link HTMLCollection}, but with 'tags' property for Firefox.
  *
- * @version $Revision: 2211 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HTMLCollectionTags extends HTMLCollection {

@@ -368,6 +368,10 @@
         <function name="tags"/>
     </class>
 
+    <class name="HTMLDelElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDelElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDeletedText">
+    </class>
+
     <class name="HTMLDirectoryElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLDirectoryElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDirectory">
     </class>
@@ -731,6 +735,10 @@
             <browser name="Firefox"/>
         </property>
         <function name="select"/>
+    </class>
+
+    <class name="HTMLInsElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLInsElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInsertedText">
     </class>
 
     <class name="HTMLIsIndexElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLIsIndexElement"

@@ -35,46 +35,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlInlineQuotation}, and {@link HtmlBlockQuote}.
+ * The javascript object "HTMLDelElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlQuoteTest extends WebTestCase2 {
+public class HTMLDelElement extends HTMLElement {
+
+    private static final long serialVersionUID = -6385497788596150488L;
 
     /**
-     * @throws Exception if the test fails.
+     * Create an instance.
      */
-    @Test
-    public void testSimpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <q id='myId1'>First Quote</q>\n"
-            + "  <blockquote id='myId2'>Second Quote</blockquote>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLQuoteElement]", "[object HTMLQuoteElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlInlineQuotation.class.isInstance(page.getHtmlElementById("myId1")));
-        assertTrue(HtmlBlockQuote.class.isInstance(page.getHtmlElementById("myId2")));
-        assertEquals(expectedAlerts, collectedAlerts);
+    public HTMLDelElement() {
+        // Empty.
     }
+
 }
