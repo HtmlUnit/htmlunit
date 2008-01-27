@@ -828,6 +828,18 @@
         JSObject="true">
     </class>
 
+    <class name="HTMLScriptElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement" JSObject="true"
+        htmlClass="com.gargoylesoftware.htmlunit.html.HtmlScript" extends="HTMLElement">
+        <property name="onreadystatechange" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="readyState" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="src" readable="true" writable="true"/>
+        <property name="type" readable="true" writable="true"/>
+    </class>
+
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
         <!-- NOT FINISHED -->
@@ -1119,18 +1131,6 @@
         <property name="top" readable="true" writable="true"/>
         <property name="updateInterval" readable="true" writable="true"/>
         <property name="width" readable="true" writable="false"/>
-    </class>
-
-    <class name="Script" classname="com.gargoylesoftware.htmlunit.javascript.host.Script" JSObject="true"
-        htmlClass="com.gargoylesoftware.htmlunit.html.HtmlScript" extends="HTMLElement">
-        <property name="onreadystatechange" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
-        <property name="readyState" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer"/>
-        </property>
-        <property name="src" readable="true" writable="true"/>
-        <property name="type" readable="true" writable="true"/>
     </class>
 
     <class name="Selection" classname="com.gargoylesoftware.htmlunit.javascript.host.Selection" JSObject="true">
