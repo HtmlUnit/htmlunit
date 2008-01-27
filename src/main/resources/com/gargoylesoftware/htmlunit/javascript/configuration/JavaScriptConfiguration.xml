@@ -21,10 +21,6 @@
         <browser name="Microsoft Internet Explorer" min-version="4"/>
     </class>
 
-    <class name="Area" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLElement"
-        JSObject="false" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
-    </class>
-
     <class name="Attribute" classname="com.gargoylesoftware.htmlunit.javascript.host.Attribute"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAttr">
         <property name="expando" readable="true" writable="false"/>
@@ -314,10 +310,6 @@
         <function name="go"/>
     </class>
 
-    <class name="HTMLAreaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAreaElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
-    </class>
-
     <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <javascript min-version="1.2"/>
@@ -340,6 +332,10 @@
 
     <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
+    </class>
+
+    <class name="HTMLAreaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAreaElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
     </class>
 
     <class name="HTMLBaseElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLBaseElement"
@@ -857,6 +853,53 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
     </class>
 
+    <class name="HTMLTableElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
+        <property name="caption" readable="true" writable="false"/>
+        <property name="tBodies" readable="true" writable="false"/>
+        <property name="tFoot" readable="true" writable="false"/>
+        <property name="tHead" readable="true" writable="false"/>
+        <property name="width" readable="true" writable="true"/>
+        <property name="cellSpacing" readable="true" writable="true"/>
+        <property name="cellPadding" readable="true" writable="true"/>
+        
+        <function name="createCaption">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="createTFoot">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="createTHead">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="deleteCaption">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="deleteTFoot">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="deleteTHead">
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp"
+                descr="MSDN documentation"/>
+        </function>
+        <function name="refresh">
+            <doclink
+                url="http://msdn2.microsoft.com/en-us/library/ms536687.aspx"
+                descr="MSDN documentation"/>
+        </function>
+    </class>
+
     <class name="HTMLTextAreaElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
         <!-- NOT FINISHED -->
@@ -1178,53 +1221,6 @@
     <class name="StyleSheetList" classname="com.gargoylesoftware.htmlunit.javascript.host.StyleSheetList" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
-    </class>
-
-    <class name="Table" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.Table"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
-        <property name="caption" readable="true" writable="false"/>
-        <property name="tBodies" readable="true" writable="false"/>
-        <property name="tFoot" readable="true" writable="false"/>
-        <property name="tHead" readable="true" writable="false"/>
-        <property name="width" readable="true" writable="true"/>
-        <property name="cellSpacing" readable="true" writable="true"/>
-        <property name="cellPadding" readable="true" writable="true"/>
-        
-        <function name="createCaption">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="createTFoot">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="createTHead">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="deleteCaption">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="deleteTFoot">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletecaption.asp"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="deleteTHead">
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deletethead.asp"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="refresh">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536687.aspx"
-                descr="MSDN documentation"/>
-        </function>
     </class>
 
     <class name="TableBody" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableBody"

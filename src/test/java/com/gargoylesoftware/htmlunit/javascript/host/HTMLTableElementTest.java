@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link Table}.
+ * Tests for {@link HTMLTableElement}.
  *
  * @version $Revision$
  * @author David D. Kilzer
@@ -54,13 +54,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class TableTest extends WebTestCase {
+public class HTMLTableElementTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public TableTest(final String name) {
+    public HTMLTableElementTest(final String name) {
         super(name);
     }
 

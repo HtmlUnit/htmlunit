@@ -42,7 +42,7 @@ import org.mozilla.javascript.Function;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
- * The JavaScript object that represents a "script".
+ * The JavaScript object that represents an "HTMLScriptElement".
  *
  * @version $Revision$
  * @author Daniel Gredler

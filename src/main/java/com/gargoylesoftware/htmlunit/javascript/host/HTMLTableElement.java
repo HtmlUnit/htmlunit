@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class Table extends RowContainer {
+public class HTMLTableElement extends RowContainer {
 
     private static final long serialVersionUID = 2779888994049521608L;
     private HTMLCollection tBodies_; // has to be a member to have equality (==) working
@@ -65,7 +65,7 @@ public class Table extends RowContainer {
     /**
      * Create an instance.
      */
-    public Table() {
+    public HTMLTableElement() {
     }
 
     /**
