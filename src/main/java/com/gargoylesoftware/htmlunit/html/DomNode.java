@@ -50,6 +50,12 @@ import org.apache.commons.logging.LogFactory;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.mozilla.javascript.ScriptableObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.UserDataHandler;
 
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
@@ -74,7 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  */
-public abstract class DomNode implements Cloneable, Serializable {
+public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /** A ready state constant for IE (state 1). */
     public static final String READY_STATE_UNINITIALIZED = "uninitialized";
@@ -235,6 +241,14 @@ public abstract class DomNode implements Cloneable, Serializable {
     public Page getPage() {
         return page_;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Document getOwnerDocument() {
+        return (Document) getPage();
+    }
+
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
@@ -248,13 +262,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Get the last child node.
-     * @return The last child node or null if the current node has
-     * no children.
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use getLastDomChild instead.
+     * {@inheritDoc}
      */
-    public DomNode getLastChild() {
+    public Node getLastChild() {
         return getLastDomChild();
     }
 
@@ -274,12 +284,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * @return the parent of this node, which may be <code>null</code> if this
-     * is the root node
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use getParentDomNode instead.
+     * {@inheritDoc}
      */
-    public DomNode getParentNode() {
+    public Node getParentNode() {
         return getParentDomNode();
     }
 
@@ -300,12 +307,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * @return the previous sibling of this node, or <code>null</code> if this is
-     * the first node
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use getPreviousDomSibling instead.
+     * {@inheritDoc}
      */
-    public DomNode getPreviousSibling() {
+    public Node getPreviousSibling() {
         return getPreviousDomSibling();
     }
 
@@ -324,11 +328,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * @return the next sibling
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use getNextDomSibling instead.
+     * {@inheritDoc}
      */
-    public DomNode getNextSibling() {
+    public Node getNextSibling() {
         return getNextDomSibling();
     }
 
@@ -340,11 +342,9 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * @return the previous sibling
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use getFirstDomChild instead.
+     * {@inheritDoc}
      */
-    public DomNode getFirstChild() {
+    public Node getFirstChild() {
         return getFirstDomChild();
     }
 
@@ -394,55 +394,169 @@ public abstract class DomNode implements Cloneable, Serializable {
     public abstract String getNodeName();
 
     /**
-     * The namespace URI of this node, or null if it is unspecified (see ).  This is not a
-     * computed value that is the result of a namespace lookup based on an examination of the
-     * namespace declarations in scope.  It is merely the namespace URI given at creation time.
-     * For nodes of any type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with
-     * a DOM Level 1 method, such as Document.createElement(), this is always null.
-     * @return The URI that identifies an XML namespace.
+     * {@inheritDoc}
      */
     public String getNamespaceURI() {
         return null;
     }
 
     /**
-     * Returns the local part of the qualified name of this node.  For nodes of any
-     * type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with a DOM Level 1
-     * method, such as Document.createElement(), this is always null.
-     * @return The local name (without prefix).
+     * {@inheritDoc}
      */
     public String getLocalName() {
         return null;
     }
 
     /**
-     * The namespace prefix of this node, or null if it is unspecified.
-     * @return The Namespace prefix.
+     * {@inheritDoc}
      */
     public String getPrefix() {
         return null;
     }
 
     /**
-     * Set the namespace prefix of this node, or null if it is unspecified.  When it is defined
-     * to be null, setting it has no effect, including if the node is read-only.  Note that setting
-     * this attribute, when permitted, changes the nodeName attribute, which holds the qualified
-     * name, as well as the tagName and name attributes of the Element and Attr interfaces, when
-     * applicable.  Setting the prefix to null makes it unspecified, setting it to an empty string
-     * is implementation dependent.  Note also that changing the prefix of an attribute that is
-     * known to have a default value, does not make a new attribute with the default value and the
-     * original prefix appear, since the namespaceURI and localName do not change.  For nodes of
-     * any type other than ELEMENT_NODE and ATTRIBUTE_NODE and nodes created with a DOM Level 1
-     * method, such as createElement from the Document interface, this is always null.
-     * @param prefix The namespace prefix of this node, or null if it is unspecified.
+     * {@inheritDoc}
      */
     public void setPrefix(final String prefix) {
     }
 
     /**
-     * Return whether this node has any attributes.
-     *
-     * @return true if the node has attributes, false otherwise.
+     * {@inheritDoc}
+     */
+    public boolean hasChildNodes() {
+        return firstChild_ != null;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getChildNodes() {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean isSupported(final String namespace, final String featureName) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void normalize() {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getBaseURI() {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public short compareDocumentPosition(final Node other) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getTextContent() throws DOMException {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setTextContent(final String textContent) throws DOMException {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean isSameNode(final Node other) {
+        return other == this;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String lookupPrefix(final String namespaceURI) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean isDefaultNamespace(final String namespaceURI) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String lookupNamespaceURI(final String prefix) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean isEqualNode(final Node arg) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Object getFeature(final String feature, final String version) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Object getUserData(final String key) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public boolean hasAttributes() {
         return false;
@@ -628,31 +742,23 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * Get the value for the current node.
-     * @return The node value
+     * {@inheritDoc}
      */
     public String getNodeValue() {
         return null;
     }
 
     /**
-     * @param x The new value
+     * {@inheritDoc}
      */
     public void setNodeValue(final String x) {
         // Default behavior is to do nothing, overridden in some subclasses
     }
 
     /**
-     * Make a clone of this node
-     *
-     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
-     * below this one. Otherwise, the new node will not have any children. The page reference
-     * will always be the same as this node's.
-     * @return a new node
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use cloneDomNode instead.
+     * {@inheritDoc}
      */
-    public DomNode cloneNode(final boolean deep) {
+    public Node cloneNode(final boolean deep) {
         return cloneDomNode(deep);
     }
 
@@ -707,14 +813,10 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
-     * append a child node to the end of the current list
-     * @param node the node to append
-     * @return the node added
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use appendDomChild instead.
+     * {@inheritDoc}
      */
-    public DomNode appendChild(final DomNode node) {
-        return appendDomChild(node);
+    public Node appendChild(final Node node) {
+        return appendDomChild((DomNode) node);
     }
 
     /**
@@ -758,6 +860,50 @@ public abstract class DomNode implements Cloneable, Serializable {
     }
 
     /**
+     * Check for insertion errors for a new child node.  This is overridden by derived
+     * classes to enforce which types of children are allowed.
+     *
+     * @param newChild The new child node that is being inserted below this node.
+     * @throws DOMException HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does
+     * not allow children of the type of the newChild node, or if the node to insert is one of
+     * this node's ancestors or this node itself, or if this node is of type Document and the
+     * DOM application attempts to insert a second DocumentType or Element node.
+     * WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the
+     * one that created this node.
+     */
+    protected void checkChildHierarchy(final Node newChild) throws DOMException {
+        Node parentNode = this;
+        while (parentNode != null) {
+            if (parentNode == newChild) {
+                throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Child node is already a parent.");
+            }
+            parentNode = parentNode.getParentNode();
+        }
+        final Document thisDocument = getOwnerDocument();
+        final Document childDocument = newChild.getOwnerDocument();
+        if (childDocument != thisDocument && childDocument != null) {
+            throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Child node " + newChild.getNodeName()
+                + " is not in the same Document as this " + getNodeName() + ".");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node insertBefore(final Node newChild, final Node refChild) throws DOMException {
+        if (refChild == null) {
+            appendChild(newChild);
+        }
+        else {
+            if (refChild.getParentNode() != this) {
+                throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
+            }
+            ((DomNode) refChild).insertBefore((DomNode) newChild);
+        }
+        return null;
+    }
+
+    /**
      * Inserts a new child node before this node into the child relationship this node is a
      * part of. If the specified node is this node, this method is a no-op.
      *
@@ -790,6 +936,25 @@ public abstract class DomNode implements Cloneable, Serializable {
 
         ((HtmlPage) getPage()).notifyNodeAdded(newNode);
         fireNodeAdded(this, newNode);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NamedNodeMap getAttributes() {
+        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node removeChild(final Node child) {
+        if (child.getParentNode() != this) {
+            throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
+        }
+        ((DomNode) child).remove();
+        return child;
     }
 
     /**
@@ -832,6 +997,17 @@ public abstract class DomNode implements Cloneable, Serializable {
         nextSibling_ = null;
         previousSibling_ = null;
         parent_ = null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node replaceChild(final Node newChild, final Node oldChild) {
+        if (oldChild.getParentNode() != this) {
+            throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
+        }
+        ((DomNode) oldChild).replace((DomNode) newChild);
+        return oldChild;
     }
 
     /**

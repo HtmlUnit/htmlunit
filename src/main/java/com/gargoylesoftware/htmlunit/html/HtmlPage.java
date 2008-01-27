@@ -59,6 +59,20 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Comment;
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.DOMConfiguration;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.EntityReference;
+import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -93,7 +107,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public final class HtmlPage extends SgmlPage implements Cloneable {
+public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     private static final long serialVersionUID = 1779746292119944291L;
 
@@ -153,12 +167,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Get the root element of this document.
-     * @return The root element
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use getDocumentHtmlElement instead.
+     * {@inheritDoc}
      */
-    public HtmlElement getDocumentElement() {
+    public Element getDocumentElement() {
         return getDocumentHtmlElement();
     }
 
@@ -175,6 +186,158 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
             documentElement_ = (HtmlElement) childNode;
         }
         return documentElement_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Document getOwnerDocument() {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public org.w3c.dom.Node importNode(final org.w3c.dom.Node importedNode, final boolean deep) {
+        throw new UnsupportedOperationException("HtmlPage.importNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getElementsByTagName(final String tagname) {
+        throw new UnsupportedOperationException("HtmlPage.getElementsByTagName is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getElementsByTagNameNS(final String namespaceURI, final String localName) {
+        throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Element getElementById(final String elementId) {
+        throw new UnsupportedOperationException("HtmlPage.getElementById is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getInputEncoding() {
+        throw new UnsupportedOperationException("HtmlPage.getInputEncoding is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getXmlEncoding() {
+        throw new UnsupportedOperationException("HtmlPage.getXmlEncoding is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean getXmlStandalone() {
+        throw new UnsupportedOperationException("HtmlPage.getXmlStandalone is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setXmlStandalone(final boolean xmlStandalone) throws DOMException {
+        throw new UnsupportedOperationException("HtmlPage.setXmlStandalone is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getXmlVersion() {
+        throw new UnsupportedOperationException("HtmlPage.getXmlVersion is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setXmlVersion(final String xmlVersion) throws DOMException {
+        throw new UnsupportedOperationException("HtmlPage.setXmlVersion is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean getStrictErrorChecking() {
+        throw new UnsupportedOperationException("HtmlPage.getStrictErrorChecking is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setStrictErrorChecking(final boolean strictErrorChecking) {
+        throw new UnsupportedOperationException("HtmlPage.setStrictErrorChecking is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getDocumentURI() {
+        throw new UnsupportedOperationException("HtmlPage.getDocumentURI is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setDocumentURI(final String documentURI) {
+        throw new UnsupportedOperationException("HtmlPage.setDocumentURI is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public org.w3c.dom.Node adoptNode(final org.w3c.dom.Node source) throws DOMException {
+        throw new UnsupportedOperationException("HtmlPage.adoptNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DOMConfiguration getDomConfig() {
+        throw new UnsupportedOperationException("HtmlPage.getDomConfig is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void normalizeDocument() {
+        throw new UnsupportedOperationException("HtmlPage.normalizeDocument is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public org.w3c.dom.Node renameNode(final org.w3c.dom.Node newNode, final String namespaceURI,
+        final String qualifiedName) throws DOMException {
+        throw new UnsupportedOperationException("HtmlPage.renameNode is not yet implemented.");
     }
 
     /**
@@ -205,14 +368,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Create a new HTML element with the given tag name.
-     *
-     * @param tagName The tag name, preferably in lowercase
-     * @return the new HTML element.
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use createHtmlElement instead.
+     * {@inheritDoc}
      */
-    public HtmlElement createElement(final String tagName) {
+    public Element createElement(final String tagName) {
         return createHtmlElement(tagName);
     }
     
@@ -228,15 +386,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Create a new HTML element with the given namespace and qualified name.
-     *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @return the new HTML element.
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use createHtmlElementNS instead.
+     * {@inheritDoc}
      */
-    public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
+    public Element createElementNS(final String namespaceURI, final String qualifiedName) {
         return createHtmlElementNS(namespaceURI, qualifiedName);
     }
 
@@ -250,6 +402,82 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     public HtmlElement createHtmlElementNS(final String namespaceURI, final String qualifiedName) {
         final String tagLower = qualifiedName.toLowerCase().substring(qualifiedName.indexOf(':') + 1);
         return HTMLParser.getFactory(tagLower).createElementNS(this, namespaceURI, qualifiedName, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) {
+        throw new UnsupportedOperationException("HtmlPage.createAttributeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr createAttribute(final String qualifiedName) {
+        throw new UnsupportedOperationException("HtmlPage.createAttribute is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Comment createComment(final String data) {
+        return new DomComment(this, data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Text createTextNode(final String data) {
+        return new DomText(this, data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public CDATASection createCDATASection(final String data) {
+        return new DomCData(this, data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public DocumentFragment createDocumentFragment() {
+        return new DomDocumentFragment(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DOMImplementation getImplementation() {
+        throw new UnsupportedOperationException("HtmlPage.getImplementation is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DocumentType getDoctype() {
+        throw new UnsupportedOperationException("HtmlPage.getDoctype is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public EntityReference createEntityReference(final String id) {
+        throw new UnsupportedOperationException("HtmlPage.createEntityReference is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public ProcessingInstruction createProcessingInstruction(final String namespaceURI, final String qualifiedName) {
+        throw new UnsupportedOperationException("HtmlPage.createProcessingInstruction is not yet implemented.");
     }
 
     /**
@@ -1645,11 +1873,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
     }
 
     /**
-     * Override cloneNode to add cloned elements to the clone, not to the original.
      * {@inheritDoc}
-     * @deprecated
+     * Override cloneNode to add cloned elements to the clone, not to the original.
      */
-    public DomNode cloneNode(final boolean deep) {
+    public org.w3c.dom.Node cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneDomNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s
@@ -1745,6 +1972,29 @@ public final class HtmlPage extends SgmlPage implements Cloneable {
                 return null;
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected void checkChildHierarchy(final DomNode childNode) throws DOMException {
+        if (childNode instanceof Element) {
+            if (getDocumentElement() != null) {
+                throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+                    "The Document may only have a single child Element.");
+            }
+        }
+        else if (childNode instanceof DocumentType) {
+            if (getDoctype() != null) {
+                throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+                    "The Document may only have a single child DocumentType.");
+            }
+        }
+        else if (!((childNode instanceof Comment) || (childNode instanceof ProcessingInstruction))) {
+            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+                "The Document may not have a child of this type: " + childNode.getNodeType());
+        }
+        super.checkChildHierarchy(childNode);
     }
 
     /**

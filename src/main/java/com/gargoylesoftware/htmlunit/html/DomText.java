@@ -40,6 +40,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.PrintWriter;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.Page;
 
@@ -52,7 +54,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author Rodney Gitzel
  * @author Ahmed Ashour
  */
-public class DomText extends DomCharacterData {
+public class DomText extends DomCharacterData implements Text {
 
     private static final long serialVersionUID = 6589779086230288951L;
 
@@ -70,14 +72,21 @@ public class DomText extends DomCharacterData {
     }
 
     /**
-     * Split a Text node in two.
-     * @param offset The character position at which to split the Text node.
-     * @return The Text node that was split from this node.
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use splitDomText instead.
+     * {@inheritDoc}
      */
-    public DomText splitText(final int offset) {
+    public Text splitText(final int offset) {
         return splitDomText(offset);
+    }
+
+    /**
+     * Create a new text node split from another text node.  This method allows
+     * the derived type of the new text node to match the original node type.
+     *
+     * @param offset The character position at which to split the DomText node.
+     * @return The newly created Text node.
+     */
+    protected DomText createSplitTextNode(final int offset) {
+        return new DomText(getPage(), getData().substring(offset));
     }
 
     /**
@@ -91,7 +100,7 @@ public class DomText extends DomCharacterData {
         }
 
         // split text into two separate nodes
-        final DomText newText = new DomText(getPage(), getData().substring(offset));
+        final DomText newText = createSplitTextNode(offset);
         setData(getData().substring(0, offset));
 
         // insert new text node
@@ -103,6 +112,30 @@ public class DomText extends DomCharacterData {
         }
 
         return newText;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean isElementContentWhitespace() {
+        throw new UnsupportedOperationException("DomText.isElementContentWhitespace is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getWholeText() {
+        throw new UnsupportedOperationException("DomText.getWholeText is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Text replaceWholeText(final String content) throws DOMException {
+        throw new UnsupportedOperationException("DomText.replaceWholeText is not yet implemented.");
     }
 
     /**

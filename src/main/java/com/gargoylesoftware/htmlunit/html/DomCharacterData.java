@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import org.w3c.dom.CharacterData;
+
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -47,7 +49,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public abstract class DomCharacterData extends DomNode {
+public abstract class DomCharacterData extends DomNode implements CharacterData {
 
     /** the data string */
     private String data_;

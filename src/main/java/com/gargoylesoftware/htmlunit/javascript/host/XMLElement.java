@@ -108,7 +108,7 @@ public class XMLElement extends Node {
      * @return the attributes of this XML element.
      */
     public Object jsxGet_attributes() {
-        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributes();
+        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
         final List<ScriptableObject> list = new ArrayList<ScriptableObject>();
         for (final XmlAttr attr : attributes.values()) {
             list.add(attr.getScriptObject());
@@ -180,7 +180,7 @@ public class XMLElement extends Node {
      * @return The Attr node with the specified name or <code>null</code> if there is no such attribute.
      */
     public Object jsxFunction_getAttributeNode(final String name) {
-        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributes();
+        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
         for (final XmlAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
                 return attr.getScriptObject();

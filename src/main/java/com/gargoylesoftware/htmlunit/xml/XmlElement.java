@@ -131,7 +131,7 @@ public class XmlElement extends DomNamespaceNode {
      * Returns the map holding the attributes, keyed by name.
      * @return the attributes map.
      */
-    public Map<String, XmlAttr> getAttributes() {
+    public Map<String, XmlAttr> getAttributesMap() {
         return attributes_;
     }
     /**

@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import com.gargoylesoftware.htmlunit.Page;
+import org.w3c.dom.DocumentFragment;
 
 /**
  * A JavaScript object for DocumentFragment.
@@ -45,7 +46,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class DomDocumentFragment extends DomNode {
+public class DomDocumentFragment extends DomNode implements DocumentFragment {
 
     private static final long serialVersionUID = 7073670645099705230L;
 

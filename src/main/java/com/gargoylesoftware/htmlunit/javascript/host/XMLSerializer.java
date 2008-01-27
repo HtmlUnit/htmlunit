@@ -79,7 +79,7 @@ public class XMLSerializer extends SimpleScriptable {
     private void toXml(final int indent, final DomNode node, final StringBuilder buffer, final boolean isIE) {
         buffer.append('<').append(node.getNodeName());
         if (node instanceof XmlElement) {
-            final Map<String, XmlAttr> attributes = ((XmlElement) node).getAttributes();
+            final Map<String, XmlAttr> attributes = ((XmlElement) node).getAttributesMap();
             for (final String name : attributes.keySet()) {
                 final XmlAttr attrib = attributes.get(name);
                 buffer.append(' ').append(attrib.getQualifiedName()).append('=')

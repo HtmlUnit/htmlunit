@@ -7,6 +7,12 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="dktaylor" id="1747878">
+                INCOMPATIBLE CHANGE: Change html package to implement W3C DOM API interfaces, though
+                most methods are not yet implemented.  Remove deprecated methods.  Fix DomCData
+                derivation to be from DomText.  Rename getAttributes methods that conflict with
+                W3C DOM API return type.  (#1747878).
+            </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: Rename HtmlHeader1 (to HtmlHeader6) to corresponding HtmlHeading1 (to HtmlHeading6).
             </action>

@@ -163,7 +163,7 @@ public class DocumentNavigator extends DefaultNavigator {
      */
     public Iterator<HtmlAttr> getAttributeAxisIterator(final Object contextNode) {
         if (contextNode instanceof HtmlElement) {
-            return ((HtmlElement) contextNode).getAttributes().iterator();
+            return ((HtmlElement) contextNode).getAttributesCollection().iterator();
         }
         else {
             final List<HtmlAttr> emptyList = Collections.emptyList();

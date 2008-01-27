@@ -168,7 +168,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      *         used by the XPath has been explicitly installed
      */
     private void addNamespace(final XmlElement element) throws JaxenException {
-        final Map<String, XmlAttr> attributes = element.getAttributes();
+        final Map<String, XmlAttr> attributes = element.getAttributesMap();
         for (final String name : attributes.keySet()) {
             final String value = (String) attributes.get(name).getValue();
             if (name.startsWith("xmlns:")) {

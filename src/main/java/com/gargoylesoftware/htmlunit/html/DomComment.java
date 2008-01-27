@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
 
+import org.w3c.dom.Comment;
+
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -48,7 +50,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author Karel Kolman
  * @author Ahmed Ashour
  */
-public class DomComment extends DomCharacterData {
+public class DomComment extends DomCharacterData implements Comment {
 
     private static final long serialVersionUID = -7728247579175928593L;
 

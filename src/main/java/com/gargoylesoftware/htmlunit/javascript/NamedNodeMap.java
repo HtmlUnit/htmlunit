@@ -71,7 +71,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      */
     public NamedNodeMap(final HtmlElement element) {
         nodes_ = new ListOrderedMap();
-        for (final HtmlAttr attr : element.getAttributes()) {
+        for (final HtmlAttr attr : element.getAttributesCollection()) {
             nodes_.put(attr.getName(), attr);
         }
         setParentScope(element.getScriptObject());

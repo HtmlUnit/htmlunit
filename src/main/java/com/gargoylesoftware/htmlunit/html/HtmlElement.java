@@ -56,6 +56,18 @@ import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Function;
+import org.w3c.dom.Attr;
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Comment;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
+import org.w3c.dom.EntityReference;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.Text;
+import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -80,7 +92,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public abstract class HtmlElement extends DomElement {
+public abstract class HtmlElement extends DomElement implements Element {
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
@@ -136,10 +148,8 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Overrides {@link DomNode#cloneNode(boolean)} so clone gets its own Map of attributes.
      * {@inheritDoc}
-     * @deprecated This method conflicts with the W3C DOM API since the return values are
-     * different.  Use {@link #cloneDomNode(boolean)} instead.
      */
-    public DomNode cloneNode(final boolean deep) {
+    public Node cloneNode(final boolean deep) {
         return cloneDomNode(deep);
     }
 
@@ -338,6 +348,54 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getElementsByTagName(final String name) {
+        throw new UnsupportedOperationException("HtmlElement.getElementsByTagName is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr setAttributeNodeNS(final Attr attribute) {
+        throw new UnsupportedOperationException("HtmlElement.setAttributeNodeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr setAttributeNode(final Attr attribute) {
+        throw new UnsupportedOperationException("HtmlElement.setAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr removeAttributeNode(final Attr attribute) {
+        throw new UnsupportedOperationException("HtmlElement.removeAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr getAttributeNodeNS(final String namespaceURI, final String localName) {
+        throw new UnsupportedOperationException("HtmlElement.getAttributeNodeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr getAttributeNode(final String name) {
+        throw new UnsupportedOperationException("HtmlElement.getAttributeNode is not yet implemented.");
+    }
+
+    /**
      * Removes an attribute specified by name from this element.
      * @param attributeName the attribute attributeName
      */
@@ -450,14 +508,22 @@ public abstract class HtmlElement extends DomElement {
      * @deprecated As of version 2.0
      */
     public Iterator<HtmlAttr> getAttributeEntriesIterator() {
-        return getAttributes().iterator();
+        return getAttributesCollection().iterator();
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NamedNodeMap getAttributes() {
+        throw new UnsupportedOperationException("HtmlElement.getAttributes is not yet implemented.");
     }
 
     /**
      * @return a collection of {@link HtmlAttr} objects representing the
      * attributes of this element. The elements are ordered as found in the html source code.
      */
-    public Collection<HtmlAttr> getAttributes() {
+    public Collection<HtmlAttr> getAttributesCollection() {
         return attributes_.values();
     }
 
@@ -504,6 +570,39 @@ public abstract class HtmlElement extends DomElement {
      */
     public final void setId(final String newId) {
         setAttributeValue("id", newId);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public TypeInfo getSchemaTypeInfo() {
+        throw new UnsupportedOperationException("HtmlElement.getSchemaTypeInfo is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public final void setIdAttribute(final String name, final boolean isId) throws DOMException {
+        throw new UnsupportedOperationException("HtmlElement.setIdAttribute is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public final void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId)
+        throws DOMException {
+        throw new UnsupportedOperationException("HtmlElement.setIdAttributeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public final void setIdAttributeNode(final Attr idAttr, final boolean isId) throws DOMException {
+        throw new UnsupportedOperationException("HtmlElement.setIdAttributeNode is not yet implemented.");
     }
 
     /**
@@ -1387,5 +1486,18 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public HtmlPage getPage() {
         return (HtmlPage) super.getPage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected void checkChildHierarchy(final Node childNode) throws DOMException {
+        if (!((childNode instanceof Element) || (childNode instanceof Text)
+            || (childNode instanceof Comment) || (childNode instanceof ProcessingInstruction)
+            || (childNode instanceof CDATASection) || (childNode instanceof EntityReference))) {
+            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+                "The Element may not have a child of this type: " + childNode.getNodeType());
+        }
+        super.checkChildHierarchy(childNode);
     }
 }
