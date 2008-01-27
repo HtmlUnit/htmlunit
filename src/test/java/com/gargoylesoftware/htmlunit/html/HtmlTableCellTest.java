@@ -37,6 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -44,6 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class HtmlTableCellTest extends WebTestCase {
     /**
@@ -56,9 +61,30 @@ public class HtmlTableCellTest extends WebTestCase {
     }
 
     /**
-     * Place holder for some real tests
+     * @throws Exception if the test fails.
      */
-    public void testFoo() {
+    public void testSimpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId1'));\n"
+            + "    alert(document.getElementById('myId2'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <table>\n"
+            + "    <tr>\n"
+            + "      <td id='myId1'/>\n"
+            + "      <th id='myId2'/>\n"
+            + "    </tr>\n"
+            + "  </table>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLTableCellElement]", "[object HTMLTableCellElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId1")));
+        assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId2")));
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
-

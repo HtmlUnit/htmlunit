@@ -857,6 +857,27 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
     </class>
 
+    <class name="HTMLTableCellElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCellElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableCell">
+        <doclink
+            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-82915075"
+            descr="W3C DOM Level 2"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/th.asp"
+            descr="MSDN documentation (TH)"/>
+        <doclink
+            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/td.asp"
+            descr="MSDN documentation (TD)"/>
+        <property name="cellIndex" readable="true" writable="false">
+            <doclink
+                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
+                descr="W3C DOM Level 2"/>
+            <doclink
+                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cellindex.asp"
+                descr="MSDN documentation"/>
+        </property>
+    </class>
+
     <class name="HTMLTableColElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableColElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableColumn">
     </class>
@@ -1260,27 +1281,6 @@
 
     <class name="TableBody" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableBody"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableBody"/>
-
-    <class name="TableCell" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.TableCell"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableCell">
-        <doclink
-            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-82915075"
-            descr="W3C DOM Level 2"/>
-        <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/th.asp"
-            descr="MSDN documentation (TH)"/>
-        <doclink
-            url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/td.asp"
-            descr="MSDN documentation (TD)"/>
-        <property name="cellIndex" readable="true" writable="false">
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
-                descr="W3C DOM Level 2"/>
-            <doclink
-                url="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cellindex.asp"
-                descr="MSDN documentation"/>
-        </property>
-    </class>
 
     <class name="TableFooter" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.TableFooter"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableFooter"/>

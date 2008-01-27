@@ -45,8 +45,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  *
  * @version $Revision$
  * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
+ * @author Ahmed Ashour
  */
-public class TableCell extends HTMLElement {
+public class HTMLTableCellElement extends HTMLElement {
 
     private static final long serialVersionUID = -4321684413510290017L;
 
