@@ -61,6 +61,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading2;
@@ -68,9 +69,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlHeading3;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading4;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading5;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading6;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement;
 
 /**
  * A container for all the javascript configuration information.
@@ -742,6 +745,9 @@ public final class JavaScriptConfiguration {
         map.put(HtmlHeading4.class, HTMLHeadingElement.class);
         map.put(HtmlHeading5.class, HTMLHeadingElement.class);
         map.put(HtmlHeading6.class, HTMLHeadingElement.class);
+
+        map.put(HtmlInlineQuotation.class, HTMLQuoteElement.class);
+        map.put(HtmlBlockQuote.class, HTMLQuoteElement.class);
 
         HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
         return HtmlJavaScriptMap_;

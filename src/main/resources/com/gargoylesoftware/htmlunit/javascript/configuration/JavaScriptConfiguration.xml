@@ -686,6 +686,8 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHead">
     </class>
 
+    <!-- Because it is associated with two HtmlClasses,
+         the one-to-many configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLHeadingElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement"
         JSObject="true">
     </class>
@@ -792,8 +794,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
     </class>
 
+    <!-- Because it is associated with two HtmlClasses,
+         the one-to-many configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation">
+        JSObject="true">
     </class>
 
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
