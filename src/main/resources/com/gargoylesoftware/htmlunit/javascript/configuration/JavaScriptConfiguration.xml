@@ -314,6 +314,10 @@
         <function name="go"/>
     </class>
 
+    <class name="HTMLAreaElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAreaElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
+    </class>
+
     <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <javascript min-version="1.2"/>
