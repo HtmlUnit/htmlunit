@@ -802,6 +802,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
     </class>
 
+    <class name="HTMLParamElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLParamElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParameter">
+    </class>
+
     <class name="HTMLPreElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLPreElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
     </class>
