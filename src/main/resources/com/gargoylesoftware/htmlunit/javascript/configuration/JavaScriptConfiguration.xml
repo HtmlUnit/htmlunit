@@ -767,6 +767,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
     </class>
 
+    <class name="HTMLMapElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMapElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMap">
+    </class>
+
     <class name="HTMLMenuElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMenuElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMenu">
     </class>
