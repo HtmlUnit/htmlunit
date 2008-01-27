@@ -9,7 +9,6 @@
     <suppress checks="FileLength" files="WindowTest.java"/>
     <suppress checks="FileLength" files="HTMLElementTest.java"/>
     <suppress checks="LineLength" files="JavaScriptEngine.java" lines="92"/>
-    <suppress checks="LineLength" files="HtmlModificationTest.java" lines="73"/>
     <suppress checks="Indentation" files="ThreadManager.java" lines="143"/>    
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>

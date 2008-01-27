@@ -35,47 +35,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlInsertedText}, and {@link HtmlDeletedText}.
+ * The javascript object "HTMLObjectElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlModificationTest extends WebTestCase2 {
+public class HTMLObjectElement extends HTMLElement {
+
+    private static final long serialVersionUID = -916091257587937486L;
 
     /**
-     * @throws Exception if the test fails.
+     * Create an instance.
      */
-    @Test
-    public void testSimpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  Some text is <ins id='myId1'>inserted</ins> or <del id='myId2'>deleted</del>\n"
-            + "</body></html>";
-
-        //both values should be HTMLModElement
-        //see http://forums.mozillazine.org/viewtopic.php?t=623715
-        final String[] expectedAlerts = {"[object HTMLInsElement]", "[object HTMLDelElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
-        assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
-        assertEquals(expectedAlerts, collectedAlerts);
+    public HTMLObjectElement() {
+        // Empty.
     }
+
 }

@@ -771,6 +771,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
     </class>
 
+    <class name="HTMLObjectElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLObjectElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
+    </class>
+
     <class name="HTMLOListElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLOListElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOrderedList">
     </class>

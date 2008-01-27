@@ -46,12 +46,12 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlInsertedText}, and {@link HtmlDeletedText}.
+ * Tests for {@link HtmlObject}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlModificationTest extends WebTestCase2 {
+public class HtmlObjectTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails.
@@ -61,21 +61,17 @@ public class HtmlModificationTest extends WebTestCase2 {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
+            + "    alert(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  Some text is <ins id='myId1'>inserted</ins> or <del id='myId2'>deleted</del>\n"
+            + "  <object id='myId'>\n"
             + "</body></html>";
 
-        //both values should be HTMLModElement
-        //see http://forums.mozillazine.org/viewtopic.php?t=623715
-        final String[] expectedAlerts = {"[object HTMLInsElement]", "[object HTMLDelElement]"};
+        final String[] expectedAlerts = {"[object HTMLObjectElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
-        assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
+        assertTrue(HtmlObject.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
