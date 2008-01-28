@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
- * Tests for {@link HtmlBase}.
+ * Tests for {@link HtmlSpan}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -72,6 +72,32 @@ public class HtmlSpanTest extends WebTestCase2 {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertTrue(HtmlSpan.class.isInstance(page.getHtmlElementById("myId")));
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Test that HTMLSpanElement is the default for other elements like 'address', 'code', 'strike', etc.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    public void testSimpleScriptable_others() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <address id='myId'>My Address</address>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLSpanElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertTrue(HtmlAddress.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
