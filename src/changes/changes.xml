@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="asashour">
+                JavaScript: <code>__proto__</code> is only defined for Firefox.
+            </action>
             <action type="fix" dev="mguillem" id="1464948">
                 Handle line comments in multiline onXxxx events handlers declarations.
             </action>

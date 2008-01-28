@@ -44,6 +44,7 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
@@ -53,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
  *
  * @version $Revision$
  * @author Andre Soereng
+ * @author Ahmed Ashour
  */
 public class HtmlUnitContextFactory extends ContextFactory {
 
@@ -60,6 +62,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
     private static long Timeout_ = 0;
     private static boolean DebuggerEnabled_;
+    
+    private static final ThreadLocal<BrowserVersion> browserVersion_ = new ThreadLocal<BrowserVersion>();
 
     /**
      * Create a new instance of HtmlUnitContextFactory
@@ -192,8 +196,18 @@ public class HtmlUnitContextFactory extends ContextFactory {
         if (Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER == featureIndex) {
             return true;
         }
+        else if (Context.FEATURE_PARENT_PROTO_PROPERTIES == featureIndex) {
+            return !browserVersion_.get().isIE();
+        }
         else {
             return super.hasFeature(cx, featureIndex);
         }
+    }
+    /**
+     * Puts the specified {@link BrowserVersion} as a thread local variable.
+     * @param browserVersion the BrowserVersion that is currently used.
+     */
+    public static void putThreadLocal(final BrowserVersion browserVersion) {
+        browserVersion_.set(browserVersion);
     }
 }

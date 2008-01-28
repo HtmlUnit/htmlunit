@@ -81,6 +81,7 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
@@ -215,6 +216,7 @@ public class WebClient implements Serializable {
         }
         // The window must be constructed after the script engine.
         currentWindow_ = new TopLevelWindow("", this);
+        HtmlUnitContextFactory.putThreadLocal(browserVersion);
     }
 
     /**
@@ -240,6 +242,7 @@ public class WebClient implements Serializable {
         }
         // The window must be constructed after the script engine.
         currentWindow_ = new TopLevelWindow("", this);
+        HtmlUnitContextFactory.putThreadLocal(browserVersion);
     }
 
     /**

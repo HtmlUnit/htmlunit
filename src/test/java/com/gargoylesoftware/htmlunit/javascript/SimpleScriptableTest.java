@@ -376,9 +376,6 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testParentProtoFeature() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testParentProtoFeature(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"false"});
         testParentProtoFeature(BrowserVersion.FIREFOX_2, new String[] {"true"});
     }
