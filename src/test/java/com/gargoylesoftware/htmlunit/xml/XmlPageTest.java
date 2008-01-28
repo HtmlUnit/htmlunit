@@ -42,6 +42,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpStatus;
+import org.junit.Assert;
+import org.junit.Test;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -49,7 +51,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link XmlPage}.
@@ -58,19 +60,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class XmlPageTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public XmlPageTest(final String name) {
-        super(name);
-    }
+public class XmlPageTest extends WebTestCase2 {
 
     /**
      * Tests namespace
      * @throws Exception if the test fails
      */
+    @Test
     public void testNamespace() throws Exception {
         final String content
             = "<?xml version='1.0'?>\n"
@@ -92,6 +88,7 @@ public class XmlPageTest extends WebTestCase {
      * Tests a simple valid xml document
      * @throws Exception if the test fails
      */
+    @Test
     public void testValidDocument() throws Exception {
         final String content
             = "<?xml version=\"1.0\"?>\n"
@@ -122,10 +119,10 @@ public class XmlPageTest extends WebTestCase {
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals(mimeType, page.getWebResponse().getContentType());
-        assertInstanceOf(page, XmlPage.class);
+        assertTrue(XmlPage.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getContent());
-        assertNotNull(xmlPage.getXmlDocument());
+        Assert.assertNotNull(xmlPage.getXmlDocument());
         return xmlPage;
     }
 
@@ -133,6 +130,7 @@ public class XmlPageTest extends WebTestCase {
      * Tests a simple invalid (badly formed) xml document
      * @throws Exception if the test fails
      */
+    @Test
     public void testInvalidDocument() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -154,7 +152,7 @@ public class XmlPageTest extends WebTestCase {
         assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
         assertEquals("text/xml", page.getWebResponse().getContentType());
 
-        assertInstanceOf(page, XmlPage.class);
+        assertTrue(Page.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getContent());
         assertNull(xmlPage.getXmlDocument());
@@ -163,6 +161,7 @@ public class XmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testVoiceXML() throws Exception {
         final String content =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -183,6 +182,7 @@ public class XmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoad_XMLComment() throws Exception {
         testLoad_XMLComment(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "8"});
         testLoad_XMLComment(BrowserVersion.FIREFOX_2, new String[] {"true", "8"});
@@ -226,6 +226,7 @@ public class XmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateElement() throws Exception {
         testCreateElement(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "16"});
         testCreateElement(BrowserVersion.FIREFOX_2, new String[] {"true", "14"});

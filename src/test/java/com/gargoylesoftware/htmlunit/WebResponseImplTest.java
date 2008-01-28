@@ -44,6 +44,7 @@ import java.util.List;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -54,20 +55,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class WebResponseImplTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public WebResponseImplTest(final String name) {
-        super(name);
-    }
+public class WebResponseImplTest extends WebTestCase2 {
 
     /**
      * When no encoding header is provided, encoding may be recognized with its Byte Order Mark
      * @throws Exception if the test fails
      */
+    @Test
     public void testRecognizeBOM() throws Exception {
         testRecognizeBOM("UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf});
         testRecognizeBOM("UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff});
@@ -101,6 +95,7 @@ public class WebResponseImplTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testEncoding() throws Exception {
         final String title = "\u6211\u662F\u6211\u7684FOCUS";
         final String content =
@@ -125,6 +120,7 @@ public class WebResponseImplTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testQuotedCharset() throws Exception {
         final String xml
             = "<books id='myId'>\n"
@@ -143,5 +139,4 @@ public class WebResponseImplTest extends WebTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }
- 
 }

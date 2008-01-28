@@ -45,6 +45,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.junit.Test;
 
 /**
  * Tests for {@link WebResponseData}.
@@ -53,22 +54,15 @@ import org.apache.commons.lang.StringUtils;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class WebResponseDataTest extends WebTestCase {
+public class WebResponseDataTest extends WebTestCase2 {
 
     private static final String GZIPPED_FILE = "testfiles/test.html.gz";
-
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public WebResponseDataTest(final String name) {
-        super(name);
-    }
 
     /**
      * Tests that gzipped content is handled correctly.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGZippedContent() throws Exception {
         final InputStream stream = getClass().getClassLoader().getResourceAsStream(GZIPPED_FILE);
         final byte[] zippedContent = IOUtils.toByteArray(stream);
@@ -86,6 +80,7 @@ public class WebResponseDataTest extends WebTestCase {
      * example, when a 304 (Not Modified) response is sent to the client. See bug 1706505.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testNullBody() throws Exception {
         final InputStream body = null;
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
