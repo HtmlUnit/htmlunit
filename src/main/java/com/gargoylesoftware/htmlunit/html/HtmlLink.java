@@ -49,7 +49,7 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlLink extends ClickableElement {
+public class HtmlLink extends ClickableElement implements org.w3c.dom.html.HTMLLinkElement {
 
     private static final long serialVersionUID = 323745155296983364L;
 
@@ -76,6 +76,7 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "charset"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getCharset()} instead.
      */
     public final String getCharsetAttribute() {
         return getAttributeValue("charset");
@@ -88,6 +89,7 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "href"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getHref()} instead.
      */
     public final String getHrefAttribute() {
         return getAttributeValue("href");
@@ -100,6 +102,7 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "hreflang"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getHreflang()} instead.
      */
     public final String getHrefLangAttribute() {
         return getAttributeValue("hreflang");
@@ -112,6 +115,7 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "type"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getType()} instead.
      */
     public final String getTypeAttribute() {
         return getAttributeValue("type");
@@ -124,6 +128,7 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "rel"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getRel()} instead.
      */
     public final String getRelAttribute() {
         return getAttributeValue("rel");
@@ -136,6 +141,7 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "rev"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getRev()} instead.
      */
     public final String getRevAttribute() {
         return getAttributeValue("rev");
@@ -148,6 +154,7 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "media"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getMedia()} instead.
      */
     public final String getMediaAttribute() {
         return getAttributeValue("media");
@@ -160,8 +167,135 @@ public class HtmlLink extends ClickableElement {
      *
      * @return The value of the attribute "target"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getTarget()} instead.
      */
     public final String getTargetAttribute() {
         return getAttributeValue("target");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCharset() {
+        return getAttribute("charset");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean getDisabled() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getHref() {
+        return getAttribute("href");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getHreflang() {
+        return getAttribute("hreflang");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getMedia() {
+        return getAttribute("media");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getRel() {
+        return getAttribute("rel");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getRev() {
+        return getAttribute("rev");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getTarget() {
+        return getAttribute("target");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getType() {
+        return getAttribute("type");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCharset(final String charset) {
+        setAttribute("charset", charset);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setDisabled(final boolean arg0) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setHref(final String href) {
+        setAttribute("href", href);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setHreflang(final String hreflang) {
+        setAttribute("hreflang", hreflang);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setMedia(final String media) {
+        setAttribute("media", media);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setRel(final String rel) {
+        setAttribute("rel", rel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setRev(final String rev) {
+        setAttribute("rev", rev);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setTarget(final String target) {
+        setAttribute("target", target);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setType(final String type) {
+        setAttribute("type", type);
     }
 }

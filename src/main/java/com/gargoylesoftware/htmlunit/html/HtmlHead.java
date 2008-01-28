@@ -128,7 +128,7 @@ public class HtmlHead extends HtmlElement implements org.w3c.dom.html.HTMLHeadEl
     /**
      * {@inheritDoc}
      */
-    public void setProfile(String profile) {
+    public void setProfile(final String profile) {
         setAttribute("profile", profile);
     }
 }
