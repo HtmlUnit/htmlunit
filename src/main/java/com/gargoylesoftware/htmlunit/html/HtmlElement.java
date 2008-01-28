@@ -92,7 +92,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public abstract class HtmlElement extends DomElement implements Element {
+public abstract class HtmlElement extends DomElement implements org.w3c.dom.html.HTMLElement {
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
@@ -1499,5 +1499,61 @@ public abstract class HtmlElement extends DomElement implements Element {
                 "The Element may not have a child of this type: " + childNode.getNodeType());
         }
         super.checkChildHierarchy(childNode);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public String getClassName() {
+        return getAttribute("class");
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void setClassName(final String className) {
+        setAttribute("class", className);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public String getLang() {
+        return getAttribute("lang");
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void setLang(final String lang) {
+        setAttribute("lang", lang);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public String getDir() {
+        return getAttribute("dir");
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void setDir(final String dir) {
+        setAttribute("dir", dir);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public String getTitle() {
+        return getAttribute("title");
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void setTitle(final String title) {
+        setAttribute("title", title);
     }
 }
