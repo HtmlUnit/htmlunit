@@ -7,6 +7,12 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="fix" dev="mguillem" id="1464948">
+                Handle line comments in multiline onXxxx events handlers declarations.
+            </action>
+            <action type="update" dev="mguillem">
+                Upgraded nekohtml to version 1.9.6.1
+            </action>
             <action type="update" dev="dktaylor" id="1747878">
                 INCOMPATIBLE CHANGE: Change html package to implement W3C DOM API interfaces, though
                 most methods are not yet implemented.  Remove deprecated methods.  Fix DomCData

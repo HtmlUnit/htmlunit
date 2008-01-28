@@ -433,7 +433,7 @@ The reference stays the maven 1 build.
 		<dependency>
 			<groupId>nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
-			<version>0.9.5</version>
+			<version>1.9.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.cssparser</groupId>

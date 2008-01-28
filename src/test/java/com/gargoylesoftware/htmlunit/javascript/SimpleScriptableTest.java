@@ -245,9 +245,6 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testStringWithExclamationMark() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var x = '<!>';\n"

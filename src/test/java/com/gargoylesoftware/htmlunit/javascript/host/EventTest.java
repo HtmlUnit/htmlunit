@@ -437,9 +437,6 @@ public class EventTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testCommentInEventHandlerDeclaration() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content
             = "<html><head></head>\n"
             + "<body onload='alert(1);\n"
