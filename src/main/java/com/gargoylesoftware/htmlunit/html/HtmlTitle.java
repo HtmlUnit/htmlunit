@@ -49,7 +49,7 @@ import java.util.Map;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlTitle extends HtmlElement {
+public class HtmlTitle extends HtmlElement implements org.w3c.dom.html.HTMLTitleElement {
 
     private static final long serialVersionUID = 5463879100333678376L;
 
@@ -94,5 +94,19 @@ public class HtmlTitle extends HtmlElement {
      */
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getText() {
+        return getAttribute("text");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setText(String text) {
+        setAttribute("text", text);
     }
 }
