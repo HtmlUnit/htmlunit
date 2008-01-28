@@ -859,11 +859,15 @@
         <function name="remove"/>
     </class>
 
+    <class name="HTMLSpanElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSpanElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSpan">
+    </class>
+
     <class name="HTMLStyleElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLStyleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
     </class>
 
-    <class name="HTMLTableCaption" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCaptionElement"
+    <class name="HTMLTableCaptionElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableCaptionElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
     </class>
 
