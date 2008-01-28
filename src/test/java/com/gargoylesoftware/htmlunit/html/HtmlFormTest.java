@@ -1183,4 +1183,37 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) submit.click();
         assertEquals(expectedURL, secondPage.getWebResponse().getUrl());
     }
+
+
+    /**
+     *
+     * @throws Exception If the test page can't be loaded.
+     */
+    public void testMalformedHtml_nestedForms() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.forms.length);\n"
+            + "    alert(document.forms[0].field2.value);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form id='form1' method='get' action='foo'>\n"
+            + "    <input name='field1' value='val1'/>\n"
+            + "    <form>\n"
+            + "    <input name='field2' value='val2'/>\n"
+            + "    <input type='submit' id='submitButton'/>\n"
+            + "    </form>\n"
+            + "</form></body></html>";
+
+        final String[] expectedAlerts = {"1", "val2"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
