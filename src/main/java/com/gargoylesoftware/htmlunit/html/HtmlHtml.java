@@ -46,7 +46,7 @@ import java.util.Map;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public final class HtmlHtml extends HtmlElement {
+public final class HtmlHtml extends HtmlElement implements org.w3c.dom.html.HTMLHtmlElement {
 
     private static final long serialVersionUID = 8928934628059990747L;
 
@@ -71,6 +71,7 @@ public final class HtmlHtml extends HtmlElement {
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "lang" or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getLang()} instead.
      */
     public String getLangAttribute() {
         return getAttributeValue("lang");
@@ -91,9 +92,24 @@ public final class HtmlHtml extends HtmlElement {
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "dir" or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getDir()} instead.
      */
     public String getTextDirectionAttribute() {
         return getAttributeValue("dir");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getVersion() {
+        return getAttribute("version");
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void setVersion(final String version) {
+        setAttribute("version", version);
     }
 }
 
