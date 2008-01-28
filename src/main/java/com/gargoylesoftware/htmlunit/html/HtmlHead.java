@@ -47,7 +47,7 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlHead extends HtmlElement {
+public class HtmlHead extends HtmlElement implements org.w3c.dom.html.HTMLHeadElement {
 
     private static final long serialVersionUID = -2444843516326322458L;
 
@@ -74,6 +74,7 @@ public class HtmlHead extends HtmlElement {
      *
      * @return The value of the attribute "lang"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getLang()} instead.
      */
     public final String getLangAttribute() {
         return getAttributeValue("lang");
@@ -98,6 +99,7 @@ public class HtmlHead extends HtmlElement {
      *
      * @return The value of the attribute "dir"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getDir()} instead.
      */
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
@@ -110,8 +112,23 @@ public class HtmlHead extends HtmlElement {
      *
      * @return The value of the attribute "profile"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getProfile()} instead.
      */
     public final String getProfileAttribute() {
         return getAttributeValue("profile");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getProfile() {
+        return getAttribute("profile");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setProfile(String profile) {
+        setAttribute("profile", profile);
     }
 }

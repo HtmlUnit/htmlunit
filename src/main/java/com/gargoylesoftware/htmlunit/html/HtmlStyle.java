@@ -75,6 +75,7 @@ public class HtmlStyle extends HtmlElement {
      *
      * @return The value of the attribute "lang"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getLang()} instead.
      */
     public final String getLangAttribute() {
         return getAttributeValue("lang");
@@ -99,6 +100,7 @@ public class HtmlStyle extends HtmlElement {
      *
      * @return The value of the attribute "dir"
      * or an empty string if that attribute isn't defined.
+     * @deprecated After 1.14, please use {@link #getDir()} instead.
      */
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");

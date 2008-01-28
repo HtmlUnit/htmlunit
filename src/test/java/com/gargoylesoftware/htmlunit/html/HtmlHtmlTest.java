@@ -73,7 +73,7 @@ public class HtmlHtmlTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
         final HtmlHtml root = (HtmlHtml) page.getDocumentHtmlElement();
-        assertEquals("en", root.getLangAttribute());
+        assertEquals("en", root.getLang());
         assertEquals("en", root.getXmlLangAttribute());
     }
 
