@@ -106,7 +106,7 @@ public class HtmlTitle extends HtmlElement implements org.w3c.dom.html.HTMLTitle
     /**
      * {@inheritDoc}
      */
-    public void setText(String text) {
+    public void setText(final String text) {
         setAttribute("text", text);
     }
 }

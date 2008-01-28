@@ -228,28 +228,28 @@ public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaEl
     /**
      * {@inheritDoc}
      */
-    public void setContent(String content) {
+    public void setContent(final String content) {
         setAttribute("content", content);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setHttpEquiv(String httpEquiv) {
+    public void setHttpEquiv(final String httpEquiv) {
         setAttribute("http-equiv", httpEquiv);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         setAttribute("name", name);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void setScheme(String scheme) {
+    public void setScheme(final String scheme) {
         setAttribute("scheme", scheme);
     }
 
