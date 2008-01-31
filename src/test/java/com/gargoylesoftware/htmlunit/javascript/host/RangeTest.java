@@ -42,12 +42,14 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link Range}.
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class RangeTest extends WebTestCase {
     private static final String contentStart = "<html><head><title>Range Test</title>\n"
@@ -124,5 +126,28 @@ public class RangeTest extends WebTestCase {
         final String[] expectedAlerts = {"false", "DIV", "DIV", "0", "DIV", "2"};
         
         test(script, expectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCreateContextualFragment() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myDiv2');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('<div>harhar</div>');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    alert(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

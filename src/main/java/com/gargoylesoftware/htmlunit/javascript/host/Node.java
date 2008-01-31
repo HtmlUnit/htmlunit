@@ -227,39 +227,47 @@ public class Node extends SimpleScriptable {
         if (newChildObject instanceof Node) {
 
             final DomNode newChildNode = ((Node) newChildObject).getDomNodeOrDie();
-
-            final DomNode refChildNode;
-            // IE accepts non standard calls with only one arg
-            if (Context.getUndefinedValue().equals(refChildObject)) {
-                if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                    refChildNode = null;
+            if (newChildNode instanceof DomDocumentFragment) {
+                final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
+                for (final DomNode child : fragment.getChildren()) {
+                    jsxFunction_insertBefore(child.getScriptObject(), refChildObject);
+                }
+                return newChildObject;
+            }
+            else {
+                final DomNode refChildNode;
+                // IE accepts non standard calls with only one arg
+                if (Context.getUndefinedValue().equals(refChildObject)) {
+                    if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                        refChildNode = null;
+                    }
+                    else {
+                        throw Context.reportRuntimeError("insertBefore: not enough arguments");
+                    }
+                }
+                else if (refChildObject != null) {
+                    refChildNode = ((Node) refChildObject).getDomNodeOrDie();
                 }
                 else {
-                    throw Context.reportRuntimeError("insertBefore: not enough arguments");
+                    refChildNode = null;
                 }
-            }
-            else if (refChildObject != null) {
-                refChildNode = ((Node) refChildObject).getDomNodeOrDie();
-            }
-            else {
-                refChildNode = null;
-            }
 
-            // Append the child to the parent node
-            if (refChildNode != null) {
-                refChildNode.insertBefore(newChildNode);
-                appendedChild = newChildObject;
-            }
-            else {
-                getDomNodeOrDie().appendDomChild(newChildNode);
-            }
+                // Append the child to the parent node
+                if (refChildNode != null) {
+                    refChildNode.insertBefore(newChildNode);
+                    appendedChild = newChildObject;
+                }
+                else {
+                    getDomNodeOrDie().appendDomChild(newChildNode);
+                }
 
-            //if parentNode is null in IE, create a DocumentFragment to be the parentNode
-            if (getDomNodeOrDie().getParentDomNode() == null
-                    && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
-                final DomDocumentFragment fragment =
-                    ((HtmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
-                fragment.appendDomChild(getDomNodeOrDie());
+                //if parentNode is null in IE, create a DocumentFragment to be the parentNode
+                if (getDomNodeOrDie().getParentDomNode() == null
+                        && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                    final DomDocumentFragment fragment =
+                        ((HtmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
+                    fragment.appendDomChild(getDomNodeOrDie());
+                }
             }
         }
         return appendedChild;

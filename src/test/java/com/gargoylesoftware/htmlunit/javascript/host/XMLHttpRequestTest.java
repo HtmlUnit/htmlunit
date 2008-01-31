@@ -523,15 +523,18 @@ public class XMLHttpRequestTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testReplaceOnTextData() throws Exception {
-        testReplaceOnTextData(BrowserVersion.FIREFOX_2);
-        testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6_0);
+        final String[] expectedAlertsFF = {};
+        testReplaceOnTextData(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+        final String[] expectedAlertsIE = {"ibcdefg", "xxxxxfg"};
+        testReplaceOnTextData(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
     }
 
     /**
      * @param browserVersion the browser version to simulate
      * @throws Exception if the test fails
      */
-    void testReplaceOnTextData(final BrowserVersion browserVersion) throws Exception {
+    private void testReplaceOnTextData(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -581,9 +584,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
-        final String[] alerts = {"ibcdefg", "xxxxxfg" };
-
-        assertEquals(alerts, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -956,8 +957,63 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.setWebConnection(webConnection);
         client.getPage(URL_FIRST);
 
-        final String[] alerts = {"null"};
-        assertEquals(alerts, collectedAlerts);
+        final String[] expectedAlerts = {"null"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Firefox does not call onreadystatechange handler if sync.
+     * @throws Exception If the test fails.
+     */
+    public void testOnreadystatechange_sync() throws Exception {
+        final String[] expectedAlertsFF = {};
+        testOnreadystatechange_sync(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+        final String[] expectedAlertsIE = {"1", "2", "3", "4"};
+        testOnreadystatechange_sync(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+    }
+
+    private void testOnreadystatechange_sync(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function test() {\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.onreadystatechange = onStateChange;\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "      function onStateChange() {\n"
+            + "        alert(request.readyState);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "</xml>";
+
+        final WebClient client = new WebClient(browserVersion);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

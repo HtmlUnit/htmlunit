@@ -43,6 +43,9 @@ import java.util.List;
 import org.apache.commons.collections.ListUtils;
 import org.mozilla.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -53,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * DOM-Level-2-Traversal-Range</a>
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class Range extends SimpleScriptable {
     private static final long serialVersionUID = 4326375945958952177L;
@@ -250,12 +254,14 @@ public class Range extends SimpleScriptable {
 
     /**
      * Parses an html snippet.
-     * @param fragment text that contains text and tags to be converted to a document fragment.
+     * @param valueAsString text that contains text and tags to be converted to a document fragment.
      * @return a document fragment
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:range.createContextualFragment">Mozilla documentation</a>
      */
-    public Object jsxFunction_createContextualFragment(final String fragment) {
-        getLog().warn("Range.createContextualFragment currently not implemented. Returning null");
-        return null;
+    public Object jsxFunction_createContextualFragment(final String valueAsString) {
+        final Page page = ((DomNode) startContainer_.getDomNodeOrDie()).getPage();
+        final DomDocumentFragment fragment = new DomDocumentFragment(page);
+        HTMLElement.parseHtmlSnippet(fragment, true, valueAsString);
+        return fragment.getScriptObject();
     }
 }

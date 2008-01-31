@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.LogFactory;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.mozilla.javascript.BaseFunction;
@@ -681,7 +682,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Parses the html code
      * @param htmlSnippet the html code extract to parse
      */
-    private void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
+    static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
 
         final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) target.getPage(), null) {
             private static final long serialVersionUID = 2108037256628269797L;
@@ -700,12 +701,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             HTMLParser.parseFragment(proxyNode, source);
         }
         catch (final IOException e) {
-            getLog().error("Unexpected exception occurred while parsing html snippet", e);
+            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing html snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
                     + e.getMessage());
         }
         catch (final SAXException e) {
-            getLog().error("Unexpected exception occurred while parsing html snippet", e);
+            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing html snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
                     + e.getMessage());
         }

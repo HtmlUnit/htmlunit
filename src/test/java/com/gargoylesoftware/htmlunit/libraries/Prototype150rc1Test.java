@@ -37,9 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import java.net.URL;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -53,6 +54,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public class Prototype150rc1Test extends WebTestCase {
+
+    private Server server_;
 
     /**
      * @param name The name of the test.
@@ -69,7 +72,7 @@ public class Prototype150rc1Test extends WebTestCase {
             return;
         }
         final String filename = "ajax.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 3, 5, 2, 2);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 3, 11, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 3, 11, 0, 0);
     }
 
@@ -190,10 +193,9 @@ public class Prototype150rc1Test extends WebTestCase {
     private void test(final BrowserVersion browserVersion, final String filename, final int tests,
             final int assertions, final int failures, final int errors) throws Exception {
         final WebClient client = new WebClient(browserVersion);
-        final URL url = getClass().getClassLoader().getResource("prototype/1.5.0-rc1/test/unit/" + filename);
-        assertNotNull(url);
+        final HtmlPage page = (HtmlPage)
+            client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/test/unit/" + filename);
 
-        final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(25000);
 
         final String summary = page.getHtmlElementById("logsummary").asText();
@@ -202,4 +204,20 @@ public class Prototype150rc1Test extends WebTestCase {
         assertEquals(expected, summary);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void setUp() throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/prototype/1.5.0-rc1");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
 }

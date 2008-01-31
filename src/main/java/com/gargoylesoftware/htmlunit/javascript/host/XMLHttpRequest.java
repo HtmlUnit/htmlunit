@@ -120,6 +120,9 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public void jsxSet_onreadystatechange(final Function stateChangeHandler) {
         stateChangeHandler_ = stateChangeHandler;
+        if (state_ == STATE_LOADING) {
+            setState(state_, null);
+        }
     }
 
     /**
@@ -130,7 +133,10 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     private void setState(final int state, Context context) {
         state_ = state;
-        if (stateChangeHandler_ != null) {
+        
+        //Firefox doesn't trigger onreadystatechange handler for sync requests
+        final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        if (stateChangeHandler_ != null && (isIE || async_)) {
             if (context == null) {
                 context = Context.getCurrentContext();
             }

@@ -8,6 +8,12 @@
     <body>
         <release version="2.0-prerelease">
             <action type="update" dev="asashour">
+                JavaScript: XMLHttpRequest does not call onreadystatechange handler if sync (FF only).
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: add support for Range.createContextualFragment (FF only).
+            </action>
+            <action type="update" dev="asashour">
                 JavaScript: <code>__proto__</code> is only defined for Firefox.
             </action>
             <action type="fix" dev="mguillem" id="1464948">
