@@ -90,6 +90,7 @@ public class HTMLFormElement extends HTMLElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setHtmlElement(final HtmlElement htmlElement) {
         super.setHtmlElement(htmlElement);
         final HtmlForm htmlForm = getHtmlForm();
@@ -256,6 +257,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param name {@inheritDoc}
      * @return {@inheritDoc}
      */
+    @Override
     protected Object getWithPreemption(final String name) {
         final HtmlForm form = getHtmlForm();
         final HtmlPage page = form.getPage();
@@ -334,6 +336,7 @@ public class HTMLFormElement extends HTMLElement {
      * @param start The scriptable object that was originally queried for this property
      * @return The property.
      */
+    @Override
     public Object get(final int index, final Scriptable start) {
         return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
     }

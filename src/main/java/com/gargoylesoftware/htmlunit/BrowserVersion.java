@@ -414,6 +414,7 @@ public class BrowserVersion implements Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean equals(final Object o) {
         return EqualsBuilder.reflectionEquals(this, o);
     }
@@ -421,6 +422,7 @@ public class BrowserVersion implements Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }

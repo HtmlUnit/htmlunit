@@ -85,6 +85,7 @@ public class EventHandler extends BaseFunction {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context cx, final Scriptable scope,
         final Scriptable thisObj, final Object[] args)
         throws JavaScriptException {
@@ -106,6 +107,7 @@ public class EventHandler extends BaseFunction {
      * @param typeHint the type hint
      * @return the js code of the function declaration
      */
+    @Override
     @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class typeHint) {
         return jsSnippet_;
@@ -114,12 +116,14 @@ public class EventHandler extends BaseFunction {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object get(final String name, final Scriptable start) {
         // quick and dirty
         if ("toString".equals(name)) {
             return new BaseFunction() {
                 private static final long serialVersionUID = 3761409724511435061L;
 
+                @Override
                 public Object call(final Context cx, final Scriptable scope,
                         final Scriptable thisObj, final Object[] args) {
                     return jsSnippet_;

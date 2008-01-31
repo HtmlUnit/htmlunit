@@ -666,8 +666,8 @@ public class XMLHttpRequestTest extends WebTestCase {
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection webConnection = new MockWebConnection(client)
-        {
+        final MockWebConnection webConnection = new MockWebConnection(client) {
+            @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 collectedAlerts.add(webRequestSettings.getURL().toExternalForm());
                 return super.getResponse(webRequestSettings);
@@ -876,10 +876,10 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient webClient = new WebClient();
-        final MockWebConnection connection = new MockWebConnection(webClient)
-        {
+        final MockWebConnection connection = new MockWebConnection(webClient) {
             private boolean gotFoo1_ = false;
 
+            @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 final String url = webRequestSettings.getURL().toExternalForm();
                 

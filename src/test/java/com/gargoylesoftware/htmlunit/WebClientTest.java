@@ -292,6 +292,7 @@ public class WebClientTest extends WebTestCase2 {
         // the same requested url
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
+            @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 ++count_;
                 if (count_ == 1) {
@@ -497,6 +498,7 @@ public class WebClientTest extends WebTestCase2 {
             Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
+            @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
                 ++count_;
                 if (count_ < nbRedirections) {
@@ -1666,6 +1668,7 @@ public class WebClientTest extends WebTestCase2 {
         final WebClient wc = new WebClient() {
             private static final long serialVersionUID = -8065766721260679248L;
 
+            @Override
             public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
                 calledUrls[0] = url;
                 return null;

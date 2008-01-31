@@ -132,6 +132,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
      */
+    @Override
     public Object get(final String name, final Scriptable start) {
         final Method propertyGetter = (Method) properties_.get(name);
         final Object response;
@@ -163,6 +164,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#has(java.lang.String, org.mozilla.javascript.Scriptable)
      */
+    @Override
     public boolean has(final String name, final Scriptable start) {
         return properties_.containsKey(name) || super.has(name, start);
     }
@@ -196,6 +198,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
      */
+    @Override
     public Object get(final int index, final Scriptable start) {
         if (getByIndexMethod_ != null) {
             final Object byIndex = invoke(getByIndexMethod_,
@@ -212,6 +215,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      */
+    @Override
     @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         if (hint == null || String.class == null) {
@@ -234,6 +238,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * {@inheritDoc}
      * @see org.mozilla.javascript.ScriptableObject#getClassName()
      */
+    @Override
     public String getClassName() {
         return jsClassName_;
     }

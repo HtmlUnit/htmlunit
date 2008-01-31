@@ -232,6 +232,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * index is invalid.
      * {@inheritDoc}
      */
+    @Override
     public final Object get(final int index, final Scriptable start) {
         final HTMLCollection array = (HTMLCollection) start;
         final List<Object> elements = array.getElements();
@@ -322,6 +323,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * {@link #NOT_FOUND} is returned.
      * {@inheritDoc}
      */
+    @Override
     protected Object getWithPreemption(final String name) {
         // Test to see if we are trying to get the length of this collection?
         // If so return NOT_FOUND here to let the property be retrieved using the prototype
@@ -446,6 +448,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * Just for debug purpose.
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         if (xpath_ != null) {
             return super.toString() + '<' + xpath_ + '>';
@@ -457,6 +460,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * Called for the js "==".
      * {@inheritDoc}
      */
+    @Override
     protected Object equivalentValues(final Object other) {
         if (other == this) {
             return Boolean.TRUE;
@@ -479,6 +483,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     /**
      * {@inheritDoc}
      */
+    @Override
     @SuppressWarnings("unused")
     public boolean has(final String name, final Scriptable start) {
         try {
@@ -520,6 +525,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * elements in the array, then all those elements are returned. Otherwise,
      * {@inheritDoc}.
      */
+    @Override
     @SuppressWarnings("unused")
     public Object[] getIds() {
         final List<String> idList = new ArrayList<String>();

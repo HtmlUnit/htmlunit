@@ -77,6 +77,7 @@ public class UIEvent extends Event {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void copyPropertiesFrom(final Event event) {
         super.copyPropertiesFrom(event);
         if (event instanceof UIEvent) {

@@ -63,6 +63,7 @@ public class FrameWindow extends WebWindowImpl {
      * {@inheritDoc}
      * A FrameWindow shares it's name with it's containing frame.
      */
+    @Override
     public String getName() {
         return frame_.getNameAttribute();
     }
@@ -71,6 +72,7 @@ public class FrameWindow extends WebWindowImpl {
      * {@inheritDoc}
      * A FrameWindow shares it's name with it's containing frame.
      */
+    @Override
     public void setName(final String name) {
         frame_.setNameAttribute(name);
     }
@@ -92,6 +94,7 @@ public class FrameWindow extends WebWindowImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isJavaScriptInitializationNeeded() {
         return this.getScriptObject() == null
             || !(getEnclosedPage().getWebResponse() instanceof StringWebResponse);
@@ -120,6 +123,7 @@ public class FrameWindow extends WebWindowImpl {
      * Gives a basic representation for debugging purposes
      * @return a basic representation
      */
+    @Override
     public String toString() {
         return "FrameWindow[name=\"" + getName() + "\"]";
     }

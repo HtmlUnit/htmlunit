@@ -103,6 +103,7 @@ public class ScriptException extends RuntimeException {
      * Print the stack trace to System.out. If this exception contains another
      * exception then the stack traces for both will be printed.
      */
+    @Override
     public void printStackTrace() {
         printStackTrace(System.out);
     }
@@ -113,6 +114,7 @@ public class ScriptException extends RuntimeException {
      *
      * @param writer Where the stack trace will be written
      */
+    @Override
     public void printStackTrace(final PrintWriter writer) {
         writer.write(createPrintableStackTrace());
     }
@@ -123,6 +125,7 @@ public class ScriptException extends RuntimeException {
      *
      * @param stream Where the stack trace will be written
      */
+    @Override
     public void printStackTrace(final PrintStream stream) {
         stream.print(createPrintableStackTrace());
     }

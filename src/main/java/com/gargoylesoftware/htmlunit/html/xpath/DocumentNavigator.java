@@ -87,6 +87,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the child axis.
      * @return A possibly-empty iterator (not null).
      */
+    @Override
     public Iterator<DomNode> getChildAxisIterator(final Object contextNode) {
         return ((DomNode) contextNode).getChildren().iterator();
     }
@@ -97,6 +98,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode the context node for the parent axis.
      * @return A possibly-empty iterator (not null).
      */
+    @Override
     public Iterator<DomNode> getParentAxisIterator(final Object contextNode) {
         return new Iterator<DomNode>() {
             private DomNode parent_ = ((DomNode) contextNode).getParentDomNode();
@@ -121,6 +123,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode the context node for the sibling iterator.
      * @return A possibly-empty iterator (not null).
      */
+    @Override
     public Iterator<DomNode> getFollowingSiblingAxisIterator(final Object contextNode) {
         return Util.getFollowingSiblingAxisIterator((DomNode) contextNode);
     }
@@ -131,6 +134,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the preceding sibling axis.
      * @return A possibly-empty iterator (not null).
      */
+    @Override
     public Iterator<DomNode> getPrecedingSiblingAxisIterator(final Object contextNode) {
         return Util.getPrecedingSiblingAxisIterator((DomNode) contextNode);
     }
@@ -141,6 +145,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
      */
+    @Override
     public Iterator<DomNode> getFollowingAxisIterator(final Object contextNode) {
         return Util.getFollowingAxisIterator((DomNode) contextNode);
     }
@@ -151,6 +156,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the preceding axis.
      * @return A possibly-empty iterator (not null).
      */
+    @Override
     public Iterator<DomNode> getPrecedingAxisIterator(final Object contextNode) {
         return Util.getPrecedingAxisIterator((DomNode) contextNode);
     }
@@ -161,6 +167,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode The context node for the attribute axis.
      * @return A possibly-empty iterator (not null).
      */
+    @Override
     public Iterator<HtmlAttr> getAttributeAxisIterator(final Object contextNode) {
         if (contextNode instanceof HtmlElement) {
             return ((HtmlElement) contextNode).getAttributesCollection().iterator();
@@ -187,6 +194,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @param contextNode Any node in the document.
      * @return The root node.
      */
+    @Override
     public Object getDocumentNode(final Object contextNode) {
         if (contextNode instanceof Page) {
             return (Page) contextNode;
@@ -426,6 +434,7 @@ public class DocumentNavigator extends DefaultNavigator {
      *            does not know about attribute types
      *  @see javax.xml.parsers.DocumentBuilderFactory
      */
+    @Override
     public Object getElementById(final Object contextNode, final String elementId) {
         final HtmlPage page = (HtmlPage) ((DomNode) contextNode).getPage();
         try {

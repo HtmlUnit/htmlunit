@@ -92,6 +92,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
      * @see org.mozilla.javascript.ScriptableObject#getClassName()
      * @return a name based on the method name
      */
+    @Override
     public String getClassName() {
         return "function " + method_.getName();
     }

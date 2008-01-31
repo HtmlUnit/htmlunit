@@ -97,6 +97,7 @@ public class Attribute extends SimpleScriptable {
      *
      * {@inheritDoc}
      */
+    @Override
     protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
 
         super.setDomNode(domNode, assignScriptObject);

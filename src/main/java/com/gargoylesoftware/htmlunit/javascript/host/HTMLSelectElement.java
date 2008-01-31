@@ -180,6 +180,7 @@ public class HTMLSelectElement extends FormField {
      * Return the type of this input.
      * @return The type
      */
+    @Override
     public String jsxGet_type() {
         final String type;
         if (getHtmlSelect().isMultipleSelectEnabled()) {
@@ -244,6 +245,7 @@ public class HTMLSelectElement extends FormField {
      * Return the actual value of the selected Option
      * @return The value
      */
+    @Override
     public String jsxGet_value() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
@@ -283,6 +285,7 @@ public class HTMLSelectElement extends FormField {
      * @param start The scriptable object that was originally queried for this property
      * @return The property.
      */
+    @Override
     public Object get(final int index, final Scriptable start) {
         if (optionsArray_ == null) {
             initialize();
@@ -296,6 +299,7 @@ public class HTMLSelectElement extends FormField {
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value
      */
+    @Override
     public void put(final int index, final Scriptable start, final Object newValue) {
         if (optionsArray_ == null) {
             initialize();
@@ -315,6 +319,7 @@ public class HTMLSelectElement extends FormField {
      * Selects the option with the specified value
      * @param newValue The value of the option to select
      */
+    @Override
     public void jsxSet_value(final String newValue) {
         getHtmlSelect().setSelectedAttribute(newValue, true);
     }

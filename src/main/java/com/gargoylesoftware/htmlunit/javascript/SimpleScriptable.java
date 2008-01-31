@@ -80,6 +80,7 @@ public class SimpleScriptable extends ScriptableObject {
      * For fallback case just implement {@link ScriptableWithFallbackGetter}.
      * {@inheritDoc}
      */
+    @Override
     public Object get(final String name, final Scriptable start) {
         // try to get property configured on object itself
         final Object response = super.get(name, start);
@@ -111,6 +112,7 @@ public class SimpleScriptable extends ScriptableObject {
      * Return the javascript class name
      * @return The javascript class name
      */
+    @Override
     public String getClassName() {
         final String javaClassName = getClass().getName();
         final int index = javaClassName.lastIndexOf(".");
@@ -340,6 +342,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @param hint A hint as to the format of the default value.  Ignored in this case.
      * @return The default value.
      */
+    @Override
     @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         if (String.class.equals(hint) || hint == null) {

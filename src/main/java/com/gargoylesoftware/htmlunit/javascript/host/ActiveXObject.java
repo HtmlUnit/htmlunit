@@ -297,6 +297,7 @@ public class ActiveXObject extends SimpleScriptable {
      * Get the name of the host object class.
      * @return the javascript class name
      */
+    @Override
     public String getClassName() {
         return "ActiveXObject";
     }

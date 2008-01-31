@@ -91,6 +91,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * @return See above
      * @throws IOException (only for extending classes)
      */
+    @Override
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
         final URL url = webRequestSettings.getURL();
 
@@ -260,6 +261,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * Return the {@link HttpState}
      * @return The state.
      */
+    @Override
     public HttpState getState() {
         return httpState_;
     }

@@ -85,6 +85,7 @@ public class XmlElement extends DomNamespaceNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.ELEMENT_NODE;
     }
@@ -92,6 +93,7 @@ public class XmlElement extends DomNamespaceNode {
     /**
      * @return The same value as returned by {@link #getTagName()},
      */
+    @Override
     public String getNodeName() {
         return getTagName();
     }

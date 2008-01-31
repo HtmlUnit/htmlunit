@@ -149,6 +149,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
      * Overrides {@link DomNode#cloneNode(boolean)} so clone gets its own Map of attributes.
      * {@inheritDoc}
      */
+    @Override
     public Node cloneNode(final boolean deep) {
         return cloneDomNode(deep);
     }
@@ -157,6 +158,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
      * Overrides {@link DomNode#cloneDomNode(boolean)} so clone gets its own Map of attributes.
      * {@inheritDoc}
      */
+    @Override
     public DomNode cloneDomNode(final boolean deep) {
         final HtmlElement newNode = (HtmlElement) super.cloneDomNode(deep);
         newNode.attributes_ = createAttributeMap(attributes_.size());
@@ -222,6 +224,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean hasAttributes() {
         return attributes_.size() > 0;
     }
@@ -515,6 +518,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public NamedNodeMap getAttributes() {
         throw new UnsupportedOperationException("HtmlElement.getAttributes is not yet implemented.");
     }
@@ -545,6 +549,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
     }
 
     /** @return the node type */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.ELEMENT_NODE;
     }
@@ -552,6 +557,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
     /**
      * @return The same value as returned by {@link #getTagName()},
      */
+    @Override
     public String getNodeName() {
         return getTagName();
     }
@@ -784,6 +790,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
+    @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
         final boolean hasChildren = (getFirstDomChild() != null);
         printWriter.print(indent + "<");
@@ -830,6 +837,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
      *
      * @return See above
      */
+    @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
 
@@ -1491,6 +1499,7 @@ public abstract class HtmlElement extends DomElement implements org.w3c.dom.html
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void checkChildHierarchy(final Node childNode) throws DOMException {
         if (!((childNode instanceof Element) || (childNode instanceof Text)
             || (childNode instanceof Comment) || (childNode instanceof ProcessingInstruction)

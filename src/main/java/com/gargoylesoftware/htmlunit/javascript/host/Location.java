@@ -86,6 +86,7 @@ public class Location extends SimpleScriptable {
     /**
      * {@inheritDoc}
      */
+    @Override
     @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         if (hint == null || String.class.equals(hint)) {
@@ -100,6 +101,7 @@ public class Location extends SimpleScriptable {
      * Returns the string value of the location, which is the full URL string.
      * @return The full URL string.
      */
+    @Override
     public String toString() {
         if (window_ != null) {
             return jsxGet_href();

@@ -85,6 +85,7 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, Strin
     /**
      * {@inheritDoc}
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.ATTRIBUTE_NODE;
     }
@@ -92,6 +93,7 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, Strin
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNodeName() {
         return getName();
     }
@@ -99,6 +101,7 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, Strin
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNodeValue() {
         return (String) getValue();
     }
@@ -139,6 +142,7 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, Strin
      * Set the parent node
      * @param parent the parent node
      */
+    @Override
     protected void setParentNode(final DomNode parent) {
         super.setParentNode(parent);
     }

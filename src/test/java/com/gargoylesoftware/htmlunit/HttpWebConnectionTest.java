@@ -398,6 +398,7 @@ public class HttpWebConnectionTest {
         final WebClient webClient = new WebClient();
         final boolean[] tabCalled = {false};
         final WebConnection myWebConnection = new HttpWebConnection(webClient) {
+            @Override
             protected HttpClient createHttpClient() {
                 tabCalled[0] = true;
                 return new HttpClient();

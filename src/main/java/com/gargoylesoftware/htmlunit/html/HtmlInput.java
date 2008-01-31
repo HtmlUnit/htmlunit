@@ -120,6 +120,7 @@ public abstract class HtmlInput extends FocusableElement implements DisabledElem
     /**
      * {@inheritDoc}
      */
+    @Override
     public String asText() {
         return getValueAttribute();
     }

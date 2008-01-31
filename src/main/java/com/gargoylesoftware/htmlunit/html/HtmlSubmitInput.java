@@ -93,6 +93,7 @@ public class HtmlSubmitInput extends HtmlInput {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occurred
      */
+    @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
@@ -107,6 +108,7 @@ public class HtmlSubmitInput extends HtmlInput {
      * {@inheritDoc} This method <b>does nothing</b> for submit input elements.
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         // Empty.
     }
@@ -114,6 +116,7 @@ public class HtmlSubmitInput extends HtmlInput {
     /**
      * {@inheritDoc} Returns "Submit Query" if <tt>value</tt> attribute is not defined.
      */
+    @Override
     public String asText() {
         String text = super.asText();
         if (text == ATTRIBUTE_NOT_DEFINED) {
@@ -125,6 +128,7 @@ public class HtmlSubmitInput extends HtmlInput {
     /**
      * {@inheritDoc} Doesn't print the attribute if it is <tt>value="Submit Query"</tt>.
      */
+    @Override
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
@@ -145,6 +149,7 @@ public class HtmlSubmitInput extends HtmlInput {
      *
      * Returns "Submit Query" if <tt>name</tt> attribute is defined and <tt>value</tt> attribute is not defined.
      */
+    @Override
     public KeyValuePair[] getSubmitKeyValuePairs() {
         if (getNameAttribute().length() != 0 && !isAttributeDefined("value")) {
             return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), DEFAULT_VALUE)};

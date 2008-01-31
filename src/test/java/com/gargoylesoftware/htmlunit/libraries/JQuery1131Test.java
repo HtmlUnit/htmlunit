@@ -61,6 +61,7 @@ public class JQuery1131Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected String getVersion() {
         return "1.1.3.1";
     }
@@ -68,6 +69,7 @@ public class JQuery1131Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void testJQueryWithFirefox2() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -78,6 +80,7 @@ public class JQuery1131Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void verify(final Iterator<HtmlElement> i, final boolean ie) throws Exception {
 
         final int failedDollar, passedDollar;

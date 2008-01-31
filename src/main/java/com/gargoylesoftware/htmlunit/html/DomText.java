@@ -141,6 +141,7 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String asText() {
         String text = getData();
         if (!(getParentDomNode() instanceof HtmlTextArea)) {
@@ -153,6 +154,7 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * @return the node type constant, in this case {@link org.w3c.dom.Node#TEXT_NODE}
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.TEXT_NODE;
     }
@@ -160,6 +162,7 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * @return the node name, in this case {@link #NODE_NAME}
      */
+    @Override
     public String getNodeName() {
         return NODE_NAME;
     }
@@ -170,6 +173,7 @@ public class DomText extends DomCharacterData implements Text {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
+    @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.println(StringEscapeUtils.escapeXml(getData()));
@@ -180,6 +184,7 @@ public class DomText extends DomCharacterData implements Text {
      * Gives a simple representation to facilitate debugging
      * @return a simple representation
      */
+    @Override
     public String toString() {
         return asText();
     }
@@ -187,6 +192,7 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isTrimmedText() {
         return false;
     }

@@ -65,6 +65,7 @@ public class FormField extends HTMLElement {
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setDomNode(DomNode)
      * @param domNode The DOM node
      */
+    @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
@@ -156,6 +157,7 @@ public class FormField extends HTMLElement {
      * Return true if this element is disabled.
      * @return True if this element is disabled.
      */
+    @Override
     public boolean jsxGet_disabled() {
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
@@ -164,6 +166,7 @@ public class FormField extends HTMLElement {
      * Set whether or not to disable this element
      * @param disabled True if this is to be disabled.
      */
+    @Override
     public void jsxSet_disabled(final boolean disabled) {
         final HtmlElement element = getHtmlElementOrDie();
         if (disabled) {

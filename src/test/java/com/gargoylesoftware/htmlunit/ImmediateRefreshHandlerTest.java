@@ -62,6 +62,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase2 {
         // and the same page without it for the other calls
         final MockWebConnection webConnection = new MockWebConnection(client) {
             private int nbCalls_ = 0;
+            @Override
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
                 String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
@@ -74,6 +75,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase2 {
                 return new StringWebResponse(content, settings.getURL()) {
                     private static final long serialVersionUID = -4739710581533574855L;
 
+                    @Override
                     public SubmitMethod getRequestMethod() {
                         return settings.getSubmitMethod();
                     }

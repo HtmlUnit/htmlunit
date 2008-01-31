@@ -80,6 +80,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * for queries on DOM documents.
      * @throws JaxenException if the expression could not be parsed
      */
+    @Override
     public XPath parseXPath(final String xpath) throws JaxenException {
         return new BaseXPath(xpath, this);
     }
@@ -90,6 +91,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param contextNode Any node in the document.
      * @return The root node.
      */
+    @Override
     public Object getDocumentNode(final Object contextNode) {
         return rootNode_;
     }
@@ -100,6 +102,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param object The target node.
      * @return true if the node is the document root, false otherwise.
      */
+    @Override
     public boolean isDocument(final Object object) {
         return object == rootNode_;
     }
@@ -110,6 +113,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      * @param object The target node.
      * @return true if the node is an element, false otherwise.
      */
+    @Override
     public boolean isElement(final Object object) {
         return super.isElement(object) && object != rootNode_;
     }
@@ -131,6 +135,7 @@ class NodeRelativeNavigator extends DocumentNavigator {
      *           does not know about attribute types
      * @see javax.xml.parsers.DocumentBuilderFactory
      */
+    @Override
     public Object getElementById(final Object contextNode, final String elementId) {
         final DomNode node = (DomNode) super.getElementById(contextNode, elementId);
         if (rootNode_.isAncestorOf(node)) {

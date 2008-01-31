@@ -62,9 +62,11 @@ public final class Util {
      */
     public static Iterator<DomNode> getFollowingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
+            @Override
             protected DomNode getFirstNode(final DomNode node) {
                 return getNextNode(node);
             }
+            @Override
             protected DomNode getNextNode(final DomNode node) {
                 return node.getNextDomSibling();
             }
@@ -79,9 +81,11 @@ public final class Util {
      */
     public static Iterator<DomNode> getPrecedingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
+            @Override
             protected DomNode getFirstNode(final DomNode node) {
                 return getNextNode(node);
             }
+            @Override
             protected DomNode getNextNode(final DomNode node) {
                 return node.getPreviousDomSibling();
             }
@@ -96,6 +100,7 @@ public final class Util {
      */
     public static Iterator<DomNode> getFollowingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
+            @Override
             protected DomNode getFirstNode(final DomNode node) {
                 if (node == null) {
                     return null;
@@ -111,6 +116,7 @@ public final class Util {
                 }
             }
 
+            @Override
             protected DomNode getNextNode(final DomNode node) {
                 if (node == null) {
                     return null;
@@ -139,6 +145,7 @@ public final class Util {
      */
     public static Iterator<DomNode> getPrecedingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
+            @Override
             protected DomNode getFirstNode(final DomNode node) {
                 if (node == null) {
                     return null;
@@ -153,6 +160,7 @@ public final class Util {
                     }
                 }
             }
+            @Override
             protected DomNode getNextNode(final DomNode node) {
                 if (node == null) {
                     return null;

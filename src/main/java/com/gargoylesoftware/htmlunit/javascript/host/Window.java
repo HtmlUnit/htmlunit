@@ -131,6 +131,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param jsClass the class whose prototype is to be returned
      * @return the prototype object corresponding to the specified class inside the specified scope
      */
+    @Override
     public Scriptable getPrototype(final Class< ? extends SimpleScriptable> jsClass) {
         return (Scriptable) prototypes_.get(jsClass);
     }
@@ -885,6 +886,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object get(String name, final Scriptable start) {
         // Hack to make eval work in other window scope when needed.
         // See unit test testEvalScopeOtherWindow().

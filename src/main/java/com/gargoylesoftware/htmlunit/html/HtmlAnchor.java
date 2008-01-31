@@ -130,6 +130,7 @@ public class HtmlAnchor extends FocusableElement {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occurred
      */
+    @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         return doClickAction(defaultPage, "");
     }

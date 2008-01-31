@@ -149,6 +149,7 @@ public class HTMLInputElement extends FormField {
      * replace DOM node as well as long as we have subclasses of {@link HtmlInput}.
      * {@inheritDoc}
      */
+    @Override
     public void jsxFunction_setAttribute(final String name, final String value) {
         if ("type".equals(name)) {
             jsxSet_type(value);

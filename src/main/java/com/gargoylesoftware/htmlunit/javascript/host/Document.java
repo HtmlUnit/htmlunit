@@ -961,6 +961,7 @@ public class Document extends Node {
      *
      * {@inheritDoc}
      */
+    @Override
     protected Object getWithPreemption(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
         if (page == null) {

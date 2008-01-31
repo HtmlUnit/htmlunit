@@ -141,6 +141,7 @@ public final class SubmitMethod implements Serializable {
      *
      * @return See above
      */
+    @Override
     public String toString() {
         return "SubmitMethod[name=" + getName() + "]";
     }

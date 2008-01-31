@@ -72,6 +72,7 @@ public class HTMLTableElement extends RowContainer {
      * Javascript constructor. This must be declared in every JavaScript file because
      * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
+    @Override
     public void jsConstructor() {
     }
 
@@ -218,6 +219,7 @@ public class HTMLTableElement extends RowContainer {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected String getXPathRows() {
         return "./node()/tr";
     }
@@ -226,6 +228,7 @@ public class HTMLTableElement extends RowContainer {
      * Handle special case where table is empty.
      * {@inheritDoc}
      */
+    @Override
     protected Object insertRow(final int index) {
         // check if a tbody should be created
         final List<String> tagNames = Arrays.asList(new String[] {"tbody", "thead", "tfoot"});

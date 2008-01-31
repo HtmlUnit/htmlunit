@@ -396,6 +396,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             else {
                 webResponse_ = new WebResponseWrapper(webResponse) {
+                    @Override
                     public String getContentType() {
                         return overriddenMimeType_;
                     }

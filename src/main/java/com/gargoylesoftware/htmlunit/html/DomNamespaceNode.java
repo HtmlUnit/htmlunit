@@ -82,6 +82,7 @@ public abstract class DomNamespaceNode extends DomNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNamespaceURI() {
         return namespaceURI_;
     }
@@ -89,6 +90,7 @@ public abstract class DomNamespaceNode extends DomNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getLocalName() {
         return localName_;
     }
@@ -96,6 +98,7 @@ public abstract class DomNamespaceNode extends DomNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getPrefix() {
         return prefix_;
     }
@@ -103,6 +106,7 @@ public abstract class DomNamespaceNode extends DomNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setPrefix(final String prefix) {
         prefix_ = prefix;
         if (prefix_ != null && localName_ != null) {

@@ -65,10 +65,10 @@ public class HtmlUnitWrapFactory extends WrapFactory {
      * @see org.mozilla.javascript.WrapFactory#wrapAsJavaObject(org.mozilla.javascript.Context,
      * org.mozilla.javascript.Scriptable, java.lang.Object, java.lang.Class)
      */
+    @Override
     @SuppressWarnings("unchecked")
     public Scriptable wrapAsJavaObject(final Context context,
-            final Scriptable scope, final Object javaObject,
-            final Class staticType) {
+            final Scriptable scope, final Object javaObject, final Class staticType) {
 
         // TODO: should depend from the js configuration file
         final Scriptable resp;

@@ -69,6 +69,7 @@ public class DomCData extends DomText implements CDATASection {
     /**
      * @return the node type constant, in this case {@link org.w3c.dom.Node#CDATA_SECTION_NODE}
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.CDATA_SECTION_NODE;
     }
@@ -76,6 +77,7 @@ public class DomCData extends DomText implements CDATASection {
     /**
      * @return the node name, in this case {@link #NODE_NAME}
      */
+    @Override
     public String getNodeName() {
         return NODE_NAME;
     }
@@ -86,6 +88,7 @@ public class DomCData extends DomText implements CDATASection {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
+    @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print("<![CDATA[");
         printWriter.print(getData());
@@ -95,6 +98,7 @@ public class DomCData extends DomText implements CDATASection {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected DomText createSplitTextNode(final int offset) {
         return new DomCData(getPage(), getData().substring(offset));
     }

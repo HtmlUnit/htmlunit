@@ -71,6 +71,7 @@ public class HtmlHiddenInput extends HtmlInput {
      * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
      * @return an empty string as an hidden field is not visible
      */
+    @Override
     public String asText() {
         return "";
     }

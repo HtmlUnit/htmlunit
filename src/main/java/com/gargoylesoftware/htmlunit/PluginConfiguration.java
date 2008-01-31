@@ -102,6 +102,7 @@ public class PluginConfiguration {
         /**
          * @return the hashCode of the type
          */
+        @Override
         public int hashCode() {
             return type_.hashCode();
         }
@@ -154,6 +155,7 @@ public class PluginConfiguration {
     /**
      * @return the hashCode of the plugin name
      */
+    @Override
     public int hashCode() {
         return name_.hashCode();
     }

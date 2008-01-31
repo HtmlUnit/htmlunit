@@ -168,6 +168,7 @@ public class HtmlScript extends HtmlElement {
      * Executes the content as a script if said content is a text node.
      * {@inheritDoc}
      */
+    @Override
     public DomNode appendDomChild(final DomNode node) {
         final DomNode response = super.appendDomChild(node);
         executeInlineScriptIfNeeded(false);
@@ -179,6 +180,7 @@ public class HtmlScript extends HtmlElement {
      * as well as executing the script itself, if necessary.
      * {@inheritDoc}
      */
+    @Override
     protected void onAddedToPage() {
         getLog().debug("Script node added: " + asXml());
         executeOnReadyStateChangeHandlerIfNecessary();
@@ -335,6 +337,7 @@ public class HtmlScript extends HtmlElement {
      * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
      * @return an empty string as the content of script is not visible by itself
      */
+    @Override
     public String asText() {
         return "";
     }
@@ -344,6 +347,7 @@ public class HtmlScript extends HtmlElement {
      * (i.e. with closing tag rather than with "/&gt;")
      * @return <code>true</code> to make generated xml readable as html
      */
+    @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }

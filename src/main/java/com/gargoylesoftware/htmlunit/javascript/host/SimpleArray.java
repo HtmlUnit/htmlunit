@@ -92,6 +92,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      * index is invalid.
      * {@inheritDoc}
      */
+    @Override
     public final Object get(final int index, final Scriptable start) {
         final SimpleArray array = (SimpleArray) start;
         final List<Object> elements = array.elements_;

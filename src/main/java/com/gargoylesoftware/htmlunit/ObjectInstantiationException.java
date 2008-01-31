@@ -74,6 +74,7 @@ public class ObjectInstantiationException extends RuntimeException {
      *
      * @param writer  Where the stack trace will be written
      */
+    @Override
     public void printStackTrace(final PrintWriter writer) {
         super.printStackTrace(writer);
         if (causeException_ != null) {
@@ -88,6 +89,7 @@ public class ObjectInstantiationException extends RuntimeException {
      *
      * @param stream Where the stack trace will be written
      */
+    @Override
     public void printStackTrace(final PrintStream stream) {
         super.printStackTrace(stream);
         if (causeException_ != null) {

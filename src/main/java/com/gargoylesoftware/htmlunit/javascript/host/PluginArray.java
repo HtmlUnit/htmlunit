@@ -68,6 +68,7 @@ public class PluginArray extends SimpleArray {
      * @param element a {@link Plugin}
      * @return the name
      */
+    @Override
     protected String getItemName(final Object element) {
         return ((Plugin) element).jsxGet_name();
     }

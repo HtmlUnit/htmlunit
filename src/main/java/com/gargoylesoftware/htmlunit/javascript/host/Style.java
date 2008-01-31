@@ -210,6 +210,7 @@ public class Style extends SimpleScriptable implements Cloneable {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected Object getWithPreemption(final String name) {
         if (STYLE_ALLOWED_PROPERTIES.contains(name)) {
             return getStyleAttribute(name, true);
@@ -240,6 +241,7 @@ public class Style extends SimpleScriptable implements Cloneable {
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value
      */
+    @Override
     public void put(final String name, final Scriptable start, final Object newValue) {
         // Some calls to put will happen during the initialization of the
         // superclass. At this point, we don't have enough information to

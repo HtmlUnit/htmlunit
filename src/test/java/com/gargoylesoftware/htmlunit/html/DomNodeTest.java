@@ -550,11 +550,13 @@ public class DomNodeTest extends WebTestCase {
 
         final List<String> l = new ArrayList<String>();
         final DomChangeListener listener2 = new DomChangeListenerTestImpl() {
+            @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 2");
             }
         };
         final DomChangeListener listener1 = new DomChangeListenerTestImpl() {
+            @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 1");
                 page.addDomChangeListener(listener2);

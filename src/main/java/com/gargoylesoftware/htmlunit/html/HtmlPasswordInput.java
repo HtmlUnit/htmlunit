@@ -68,6 +68,7 @@ public class HtmlPasswordInput extends HtmlInput {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isSubmittableByEnter() {
         return true;
     }

@@ -75,6 +75,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      * Use wrapped proxy except for replacement with string arg where it uses Java regular expression
      * {@inheritDoc}
      */
+    @Override
     public Object action(final Context cx, final Scriptable scope, final Scriptable thisObj,
             final Object[] args, final int actionType) {
         
@@ -171,6 +172,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object compileRegExp(final Context cx, final String source, final String flags) {
         return wrapped_.compileRegExp(cx, source, flags);
     }
@@ -178,6 +180,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int find_split(final Context cx, final Scriptable scope, final String target,
             final String separator, final Scriptable re, final int[] ip, final int[] matchlen,
             final boolean[] matched, final String[][] parensp) {
@@ -187,6 +190,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isRegExp(final Scriptable obj) {
         return wrapped_.isRegExp(obj);
     }
@@ -194,6 +198,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Scriptable wrapRegExp(final Context cx, final Scriptable scope, final Object compiled) {
         return wrapped_.wrapRegExp(cx, scope, compiled);
     }

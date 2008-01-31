@@ -76,6 +76,7 @@ public class HtmlAttrTest extends WebTestCase {
         HTML_ELEMENT = new HtmlElement(null, "dummy", null, emptyMap) {
             private static final long serialVersionUID = -3099722791571459332L;
 
+            @Override
             public HtmlPage getPage() {
                 return null;
             }
@@ -94,6 +95,7 @@ public class HtmlAttrTest extends WebTestCase {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         htmlAttr_ = new HtmlAttr(null, null, ENTRY_KEY, ENTRY_VALUE);

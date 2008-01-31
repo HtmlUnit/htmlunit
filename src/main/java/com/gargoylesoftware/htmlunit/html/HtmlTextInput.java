@@ -77,6 +77,7 @@ public class HtmlTextInput extends HtmlInput {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
@@ -95,6 +96,7 @@ public class HtmlTextInput extends HtmlInput {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void preventDefault() {
         preventDefault_ = true;
     }
@@ -102,6 +104,7 @@ public class HtmlTextInput extends HtmlInput {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isSubmittableByEnter() {
         return true;
     }

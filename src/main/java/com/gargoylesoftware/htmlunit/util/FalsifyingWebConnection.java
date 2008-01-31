@@ -86,8 +86,8 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
         final URL originalUrl = webRequestSettings.getURL();
         webRequestSettings.setURL(url);
         final WebResponse resp = super.getResponse(webRequestSettings);
-        return new WebResponseWrapper(resp)
-        {
+        return new WebResponseWrapper(resp) {
+            @Override
             public URL getUrl() {
                 return originalUrl;
             }

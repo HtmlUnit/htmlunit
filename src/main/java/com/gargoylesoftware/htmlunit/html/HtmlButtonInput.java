@@ -69,6 +69,7 @@ public class HtmlButtonInput extends HtmlInput {
      * {@inheritDoc} This method <b>does nothing</b> for button input elements.
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         // Empty.
     }

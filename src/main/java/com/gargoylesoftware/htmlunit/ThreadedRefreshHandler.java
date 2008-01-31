@@ -63,6 +63,7 @@ public class ThreadedRefreshHandler implements RefreshHandler {
      */
     public void handleRefresh(final Page page, final URL url, final int seconds) {
         final Thread thread = new Thread("ThreadedRefreshHandler Thread") {
+            @Override
             public void run() {
                 try {
                     new WaitingRefreshHandler().handleRefresh(page, url, seconds);

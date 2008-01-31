@@ -242,6 +242,7 @@ public class HtmlImage extends ClickableElement {
      * clicked. It may be the same window or it may be a freshly loaded one.
      * @exception IOException If an IO error occurs
      */
+    @Override
     public Page click() throws IOException {
         return click(0, 0);
     }
@@ -252,6 +253,7 @@ public class HtmlImage extends ClickableElement {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occurred
      */
+    @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'

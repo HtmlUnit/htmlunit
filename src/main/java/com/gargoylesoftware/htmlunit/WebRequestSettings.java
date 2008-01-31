@@ -255,6 +255,7 @@ public class WebRequestSettings {
      * Return a string representation of this object
      * @return See above
      */
+    @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
 

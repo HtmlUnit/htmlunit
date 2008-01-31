@@ -89,6 +89,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         if (defaultCheckedState_) {
             setAttributeValue("checked", "checked");
@@ -105,6 +106,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @return The page that occupies this window after setting checked status.
      * It may be the same window or it may be a freshly loaded one.
      */
+    @Override
     public Page setChecked(final boolean isChecked) {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = isChecked() != isChecked;
@@ -137,6 +139,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * but we invent one for it because it is useful for testing.
      * @return "checked" or "unchecked" according to the radio state
      */
+    @Override
     public String asText() {
         if (isChecked()) {
             return "checked";
@@ -155,6 +158,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occurred
      */
+    @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         setChecked(true);
         return defaultPage;
@@ -164,6 +168,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc} Also sets the value to the new default value.
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         super.setDefaultValue(defaultValue);
         setValueAttribute(defaultValue);
@@ -173,6 +178,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      * @see SubmittableElement#setDefaultChecked(boolean)
      */
+    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
         if (getPage().getWebClient().getBrowserVersion().isNetscape()) {
@@ -184,6 +190,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      * @see SubmittableElement#isDefaultChecked()
      */
+    @Override
     public boolean isDefaultChecked() {
         return defaultCheckedState_;
     }
@@ -192,6 +199,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * {@inheritDoc}
      * @see com.gargoylesoftware.htmlunit.html.ClickableElement#isStateUpdateFirst()
      */
+    @Override
     protected boolean isStateUpdateFirst() {
         return true;
     }

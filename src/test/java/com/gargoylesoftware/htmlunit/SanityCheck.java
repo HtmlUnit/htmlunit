@@ -218,6 +218,7 @@ public class SanityCheck extends WebTestCase {
     /**
      * Print out the name of the test that is running.
      */
+    @Override
     public void setUp() {
         System.out.println();
         System.out.println("=====================================");

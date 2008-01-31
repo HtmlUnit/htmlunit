@@ -146,6 +146,7 @@ public class HtmlStyle extends HtmlElement {
      * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
      * @return an empty string as the content of style is not visible by itself
      */
+    @Override
     public String asText() {
         return "";
     }

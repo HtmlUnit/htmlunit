@@ -415,6 +415,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
+    @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
@@ -427,6 +428,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     /**
      * {@inheritDoc}
      */
+    @Override
     public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
@@ -445,6 +447,7 @@ public class HtmlTextArea extends FocusableElement implements DisabledElement, S
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void preventDefault() {
         preventDefault_ = true;
     }

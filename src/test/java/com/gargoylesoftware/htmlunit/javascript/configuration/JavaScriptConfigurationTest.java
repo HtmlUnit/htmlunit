@@ -84,6 +84,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         JavaScriptConfiguration.resetClassForTesting();
@@ -94,6 +95,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
         JavaScriptConfiguration.resetClassForTesting();

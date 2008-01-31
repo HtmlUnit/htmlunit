@@ -97,6 +97,7 @@ public final class WebWindowEvent extends EventObject {
      * @param object The object to compare against.
      * @return true if the two objects are equal.
      */
+    @Override
     public boolean equals(final Object object) {
         if (getClass() == object.getClass()) {
             final WebWindowEvent event = (WebWindowEvent) object;
@@ -112,6 +113,7 @@ public final class WebWindowEvent extends EventObject {
      * Return the hash code for this object.
      * @return the hash code for this object.
      */
+    @Override
     public int hashCode() {
         return source.hashCode();
     }
@@ -160,6 +162,7 @@ public final class WebWindowEvent extends EventObject {
      * Return a string representation of this event
      * @return A string representation of this event.
      */
+    @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder(80);
         buffer.append("WebWindowEvent(source=[");

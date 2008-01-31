@@ -53,6 +53,7 @@ public class Handler extends URLStreamHandler {
      * @param url The javascript url.
      * @return The connection.
      */
+    @Override
     protected URLConnection openConnection(final URL url) {
         return new JavaScriptURLConnection(url);
     }

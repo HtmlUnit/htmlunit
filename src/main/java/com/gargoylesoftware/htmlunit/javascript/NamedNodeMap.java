@@ -83,6 +83,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      *
      * {@inheritDoc}
      */
+    @Override
     public final Object get(final int index, final Scriptable start) {
         final NamedNodeMap map = (NamedNodeMap) start;
         if (index >= 0 && index < map.nodes_.size()) {

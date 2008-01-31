@@ -91,6 +91,7 @@ public abstract class SgmlPage extends DomNode implements Page {
      * Get the name for the current node.
      * @return The node name
      */
+    @Override
     public String getNodeName() {
         return "#document";
     }
@@ -99,6 +100,7 @@ public abstract class SgmlPage extends DomNode implements Page {
      * Get the type of the current node.
      * @return The node type
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.DOCUMENT_NODE;
     }
@@ -141,6 +143,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Page getPage() {
         return this;
     }

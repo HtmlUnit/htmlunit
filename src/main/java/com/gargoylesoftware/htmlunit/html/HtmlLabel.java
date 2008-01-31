@@ -124,6 +124,7 @@ public class HtmlLabel extends ClickableElement {
     /**
      * Remove focus from this element.
      */
+    @Override
     public void blur() {
         final HtmlElement element = getReferencedElement();
         if (element != null) {
@@ -134,6 +135,7 @@ public class HtmlLabel extends ClickableElement {
     /**
      * Set the focus to this element.
      */
+    @Override
     public void focus() {
         final HtmlElement element = getReferencedElement();
         if (element != null) {
@@ -173,6 +175,7 @@ public class HtmlLabel extends ClickableElement {
      * Clicks the label and propagates to the referenced element.
      * {@inheritDoc}
      */
+    @Override
     public Page click() throws IOException {
         // first the click on the label
         final Page page = super.click();

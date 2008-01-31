@@ -70,6 +70,7 @@ public class HtmlAttr extends DomNamespaceNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.ATTRIBUTE_NODE;
     }
@@ -77,6 +78,7 @@ public class HtmlAttr extends DomNamespaceNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNodeName() {
         return getName();
     }
@@ -84,6 +86,7 @@ public class HtmlAttr extends DomNamespaceNode {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getNodeValue() {
         return getHtmlValue();
     }

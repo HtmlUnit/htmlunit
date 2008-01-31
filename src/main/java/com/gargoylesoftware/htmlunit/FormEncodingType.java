@@ -104,6 +104,7 @@ public final class FormEncodingType {
      *
      * @return See above
      */
+    @Override
     public String toString() {
         return "EncodingType[name=" + getName() + "]";
     }

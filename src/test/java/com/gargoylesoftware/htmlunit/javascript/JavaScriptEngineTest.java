@@ -1087,6 +1087,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
             final Exception[] exceptions = {null};
             final Thread runner = new Thread() {
+                @Override
                 public void run() {
                     try {
                         client.getPage(URL_FIRST);
@@ -1127,6 +1128,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
 
         /** @inheritDoc ScriptEngine#execute(HtmlPage,String,String,int) */
+        @Override
         public Object execute(
                 final HtmlPage htmlPage, final String sourceCode,
                 final String sourceName, final int startLine) {
@@ -1134,11 +1136,13 @@ public class JavaScriptEngineTest extends WebTestCase {
             return super.execute(htmlPage, sourceCode, sourceName, startLine);
         }
         /** @inheritDoc ScriptEngine#execute(HtmlPage,Script) */
+        @Override
         public Object execute(final HtmlPage htmlPage, final Script script) {
             scriptExecuteScriptCount_++;
             return super.execute(htmlPage, script);
         }
         /** @inheritDoc ScriptEngine#compile(HtmlPage,String,String,int) */
+        @Override
         public Script compile(final HtmlPage htmlPage, final String sourceCode,
                 final String sourceName, final int startLine) {
             scriptCompileCount_++;
@@ -1146,6 +1150,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         }
         
         /** @inheritDoc ScriptEngine#callFunction(HtmlPage,Object,Object,Object[],HtmlElement) */
+        @Override
         public Object callFunction(
                 final HtmlPage htmlPage, final Object javaScriptFunction,
                 final Object thisObject, final Object[] args,
@@ -1412,17 +1417,20 @@ public class JavaScriptEngineTest extends WebTestCase {
         final WebClient client = new WebClient();
         client.setJavaScriptEngine(new JavaScriptEngine(client) {
             private static final long serialVersionUID = -3069321085262318962L;
+            @Override
             public Object execute(final HtmlPage htmlPage, final String sourceCode,
                     final String sourceName, final int startLine) {
                 collectedScripts.add(sourceCode);
                 return null;
             }
+            @Override
             public Object callFunction(
                     final HtmlPage htmlPage, final Object javaScriptFunction,
                     final Object thisObject, final Object [] args,
                     final DomNode htmlElement) {
                 return null;
             }
+            @Override
             public boolean isScriptRunning() {
                 return false;
             }

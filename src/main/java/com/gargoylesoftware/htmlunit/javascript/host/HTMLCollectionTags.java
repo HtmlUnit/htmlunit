@@ -71,6 +71,7 @@ public class HTMLCollectionTags extends HTMLCollection {
      * Called for the js "==".
      * {@inheritDoc}
      */
+    @Override
     protected Object equivalentValues(final Object other) {
         if (other == this) {
             return Boolean.TRUE;

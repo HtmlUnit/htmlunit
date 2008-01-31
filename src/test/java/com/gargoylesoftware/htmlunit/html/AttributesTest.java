@@ -211,6 +211,7 @@ public class AttributesTest extends WebTestCase {
      * Run the actual test.
      * @throws Exception If the test fails.
      */
+    @Override
     protected void runTest() throws Exception {
         final String value = new String("value");
 

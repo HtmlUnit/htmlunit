@@ -471,6 +471,7 @@ public class Event extends SimpleScriptable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder("Event ");
         buffer.append(jsxGet_type());

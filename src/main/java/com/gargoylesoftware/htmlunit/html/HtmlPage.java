@@ -136,6 +136,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * @return this page
      */
+    @Override
     public HtmlPage getPage() {
         return this;
     }
@@ -146,6 +147,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
      * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
+    @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
         getDocumentHtmlElement().setReadyState(READY_STATE_COMPLETE);
@@ -161,6 +163,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Clean up this page.
      * @throws IOException If an IO problem occurs.
      */
+    @Override
     public void cleanUp() throws IOException {
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
@@ -191,6 +194,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Document getOwnerDocument() {
         return null;
     }
@@ -215,6 +219,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    @Override
     public NodeList getElementsByTagNameNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
     }
@@ -1741,6 +1746,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String asXml() {
         return getDocumentHtmlElement().asXml();
     }
@@ -1749,6 +1755,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Gives a basic representation for debugging purposes
      * @return a basic representation
      */
+    @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
         buffer.append("HtmlPage(");
@@ -1858,6 +1865,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      *
      * @return a clone of this instance.
      */
+    @Override
     protected Object clone() {
         try {
             final HtmlPage result = (HtmlPage) super.clone();
@@ -1876,6 +1884,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * {@inheritDoc}
      * Override cloneNode to add cloned elements to the clone, not to the original.
      */
+    @Override
     public org.w3c.dom.Node cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneDomNode(deep);
         if (deep) {

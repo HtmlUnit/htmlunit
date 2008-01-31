@@ -65,6 +65,7 @@ public class JavaScriptURLConnection extends URLConnection {
     /**
      * This method does nothing in this implementation but is required to be implemented.
      */
+    @Override
     public void connect() {
     }
 
@@ -72,6 +73,7 @@ public class JavaScriptURLConnection extends URLConnection {
      * Return the input stream - in this case the content of the url
      * @return The input stream
      */
+    @Override
     public InputStream getInputStream() {
         return TextUtil.toInputStream(content_);
     }

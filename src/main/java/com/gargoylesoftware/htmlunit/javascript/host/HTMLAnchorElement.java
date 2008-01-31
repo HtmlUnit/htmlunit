@@ -361,6 +361,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the default value
      */
     @SuppressWarnings("unchecked")
+    @Override
     public Object getDefaultValue(final Class hint) {
         final HtmlAnchor link = (HtmlAnchor) getHtmlElementOrDie();
         final String href = link.getHrefAttribute();

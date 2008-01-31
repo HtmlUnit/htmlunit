@@ -96,6 +96,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param start The object that get is being called on.
      * @return The object or NOT_FOUND
      */
+    @Override
     public Object get(final int index, final Scriptable start) {
         final Object response;
         if (index < 0) {
@@ -122,6 +123,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param start {@inheritDoc}
      * @param value {@inheritDoc}
      */
+    @Override
     public void put(final String name, final Scriptable start, final Object value) {
 
         if (htmlSelect_ == null) {
@@ -177,6 +179,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param start The scriptable object that was originally invoked for this property
      * @param newValue The new value
      */
+    @Override
     public void put(final int index, final Scriptable start, final Object newValue) {
         if (newValue == null) {
             // Remove the indexed option.

@@ -118,6 +118,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * {@inheritDoc}
      * @see DomNode#insertBefore(DomNode)
      */
+    @Override
     public void insertBefore(final DomNode newNode) throws IllegalStateException {
         super.insertBefore(newNode);
         if (newNode instanceof HtmlOption) {
@@ -237,6 +238,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * Selects the option if it's not already selected.
      * {@inheritDoc}
      */
+    @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         if (!isSelected()) {
             return setSelected(true);
@@ -247,6 +249,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     public DomNode appendDomChild(final DomNode node) {
         final DomNode addedNode = super.appendDomChild(node);
 
@@ -278,6 +281,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * This implementation will show the label attribute before the
      * content of the tag if the attribute exists.
      */
+    @Override
     public String asText() {
         if (getLabelAttribute() != ATTRIBUTE_NOT_DEFINED) {
             return getLabelAttribute();

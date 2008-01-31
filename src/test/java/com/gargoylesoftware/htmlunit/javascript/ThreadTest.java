@@ -116,6 +116,7 @@ public class ThreadTest extends WebTestCase {
         }
 
         /** @see Thread#run() */
+        @Override
         public void run() {
             try {
                 testCallInheritedFunction();

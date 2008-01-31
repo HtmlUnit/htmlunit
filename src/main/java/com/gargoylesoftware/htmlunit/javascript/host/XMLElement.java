@@ -119,6 +119,7 @@ public class XMLElement extends Node {
             /**
              * {@inheritDoc}
              */
+            @Override
             public Object get(final String name, final Scriptable start) {
                 for (int i = 0; i < getLength(); i++) {
                     final XMLAttribute attribute = (XMLAttribute) get(i, start);

@@ -142,6 +142,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected Context makeContext() {
         final TimeoutContext cx = new TimeoutContext();
 
@@ -172,6 +173,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * @param cx the context calling us
      * @param instructionCount amount of script instruction executed since last call to observeInstructionCount
      */
+    @Override
     protected void observeInstructionCount(final Context cx, final int instructionCount) {
         final TimeoutContext tcx = (TimeoutContext) cx;
         tcx.terminateScriptIfNecessary();
@@ -180,6 +182,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected Object doTopCall(final Callable callable,
             final Context cx, final Scriptable scope,
             final Scriptable thisObj, final Object[] args) {
@@ -192,6 +195,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean hasFeature(final Context cx, final int featureIndex) {
         if (Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER == featureIndex) {
             return true;

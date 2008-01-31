@@ -60,6 +60,7 @@ public class ClassConfigurationTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         JavaScriptConfiguration.resetClassForTesting();

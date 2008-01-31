@@ -191,6 +191,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Set the DOM node that corresponds to this javascript object
      * @param domNode The DOM node
      */
+    @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
@@ -686,6 +687,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) target.getPage(), null) {
             private static final long serialVersionUID = 2108037256628269797L;
+            @Override
             public DomNode appendDomChild(final DomNode node) {
                 if (append) {
                     return target.appendDomChild(node);
@@ -1182,6 +1184,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         /**
          * Does the download and calls the callback method
          */
+        @Override
         public void run() {
             final WebClient wc = getWindow().getWebWindow().getWebClient();
             final Scriptable scope = callback_.getParentScope();
@@ -1634,6 +1637,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Just for debug purposes.
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         return "HTMLElement for " + getHtmlElementOrNull();
     }

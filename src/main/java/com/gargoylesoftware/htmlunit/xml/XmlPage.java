@@ -130,6 +130,7 @@ public class XmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setScriptObject(final ScriptableObject scriptObject) {
         super.setScriptObject(scriptObject);
         if (node_ != null) {
@@ -140,6 +141,7 @@ public class XmlPage extends SgmlPage {
     /**
      * Clean up this page.
      */
+    @Override
     public void cleanUp() {
     }
 

@@ -72,6 +72,7 @@ public class CacheTest extends WebTestCase2 {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<String, String>();
         final WebResponse response = new DummyWebResponse() {
+            @Override
             public String getResponseHeaderValue(final String headerName) {
                 return (String) headers.get(headerName);
             }
@@ -105,9 +106,11 @@ public class CacheTest extends WebTestCase2 {
         final String[] contentType = {""};
         final URL[] url = {URL_FIRST};
         final WebResponse response = new DummyWebResponse() {
+            @Override
             public String getContentType() {
                 return contentType[0];
             }
+            @Override
             public URL getUrl() {
                 return url[0];
             }

@@ -146,6 +146,7 @@ public class HtmlFont extends StyledElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isRenderedVisible() {
         return false;
     }
@@ -153,6 +154,7 @@ public class HtmlFont extends StyledElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isTrimmedText() {
         return false;
     }

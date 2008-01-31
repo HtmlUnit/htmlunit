@@ -267,6 +267,7 @@ public final class ClassConfiguration {
      * @return <code>true</code> if the value of this object is the same as the obj
      * argument; <code>false</code> otherwise.
      */
+    @Override
     public boolean equals(final Object obj) {
         if (!(obj instanceof ClassConfiguration)) {
             return false;
@@ -297,6 +298,7 @@ public final class ClassConfiguration {
      * Currently, this is the hashcode for the name.
      * {@inheritDoc}
      */
+    @Override
     public int hashCode() {
         return className_.hashCode();
     }

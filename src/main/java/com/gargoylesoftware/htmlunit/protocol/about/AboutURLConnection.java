@@ -59,6 +59,7 @@ public class AboutURLConnection extends URLConnection {
     /**
      * @see java.net.URLConnection#connect()
      */
+    @Override
     public void connect() {
     }
 

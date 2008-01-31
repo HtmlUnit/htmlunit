@@ -81,6 +81,7 @@ public class UnknownHtmlElement extends ClickableElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isRenderedVisible() {
         return false;
     }
@@ -88,6 +89,7 @@ public class UnknownHtmlElement extends ClickableElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isTrimmedText() {
         return false;
     }

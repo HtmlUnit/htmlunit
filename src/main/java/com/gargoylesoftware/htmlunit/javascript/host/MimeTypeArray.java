@@ -61,6 +61,7 @@ public class MimeTypeArray extends SimpleArray {
      * @param element a {@link MimeType}.
      * @return the name
      */
+    @Override
     protected String getItemName(final Object element) {
         return ((MimeType) element).jsxGet_type();
     }

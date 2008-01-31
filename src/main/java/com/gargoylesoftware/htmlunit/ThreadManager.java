@@ -114,6 +114,7 @@ public class ThreadManager {
     public int startThread(final Runnable job, final String label) {
         final int myThreadID = getNextThreadId();
         final Thread newThread = new Thread(job, "HtmlUnit Managed Thread #" + myThreadID + ": " + label) {
+            @Override
             public void run() {
                 try {
                     super.run();
@@ -206,6 +207,7 @@ public class ThreadManager {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         return "ThreadManager: " + threadMap_;
     }

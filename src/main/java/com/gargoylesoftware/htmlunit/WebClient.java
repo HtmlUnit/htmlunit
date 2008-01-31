@@ -1330,6 +1330,7 @@ public class WebClient implements Serializable {
             final String str = IOUtils.toString(new FileInputStream(file), charset);
             return new StringWebResponse(str, charset, url) {
                 private static final long serialVersionUID = 5713127877370126236L;
+                @Override
                 public String getContentType() {
                     return contentType;
                 }
@@ -1364,6 +1365,7 @@ public class WebClient implements Serializable {
             data_ = data;
         }
 
+        @Override
         public InputStream getContentAsStream() {
             return new ByteArrayInputStream(data_);
         }

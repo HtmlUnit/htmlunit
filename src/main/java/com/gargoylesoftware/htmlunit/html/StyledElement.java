@@ -118,6 +118,7 @@ public abstract class StyledElement extends HtmlElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isRenderedVisible() {
         return true;
     }

@@ -310,6 +310,7 @@ public abstract class BaseFrame extends StyledElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
             String attributeValue) {
         if (qualifiedName.equals("src")) {

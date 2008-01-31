@@ -322,6 +322,7 @@ public class HtmlFileInputTest extends WebTestCase {
         /**
          * {@inheritDoc}
          */
+        @Override
         @SuppressWarnings("unchecked")
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
@@ -358,6 +359,7 @@ public class HtmlFileInputTest extends WebTestCase {
      * {@inheritDoc}
      * Stops the web server if it has been started.
      */
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
         HttpWebConnectionTest.stopWebServer(server_);

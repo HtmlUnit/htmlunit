@@ -70,6 +70,7 @@ public class DomComment extends DomCharacterData implements Comment {
     /**
      * @return the node type constant, in this case {@link org.w3c.dom.Node#COMMENT_NODE}
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.COMMENT_NODE;
     }
@@ -77,6 +78,7 @@ public class DomComment extends DomCharacterData implements Comment {
     /**
      * @return the node name, in this case {@link #NODE_NAME}
      */
+    @Override
     public String getNodeName() {
         return NODE_NAME;
     }
@@ -84,6 +86,7 @@ public class DomComment extends DomCharacterData implements Comment {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String asText() {
         return "";
     }
@@ -94,6 +97,7 @@ public class DomComment extends DomCharacterData implements Comment {
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
      */
+    @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.print("<!--");
@@ -106,6 +110,7 @@ public class DomComment extends DomCharacterData implements Comment {
      * Gives a simple representation to facilitate debugging
      * @return a simple representation
      */
+    @Override
     public String toString() {
         return asXml();
     }

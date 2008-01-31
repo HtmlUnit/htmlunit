@@ -73,6 +73,7 @@ public class HtmlTitle extends HtmlElement implements org.w3c.dom.html.HTMLTitle
      * Allow the text value for the title element be replaced.
      * {@inheritDoc}
      */
+    @Override
     public void setNodeValue(final String message) {
         final DomNode child = getFirstDomChild();
         if (child == null) {
@@ -92,6 +93,7 @@ public class HtmlTitle extends HtmlElement implements org.w3c.dom.html.HTMLTitle
      * (i.e. with closing tag rather than with "/&gt;")
      * @return <code>true</code> as required by Microsoft Internet Explorer
      */
+    @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }

@@ -80,6 +80,7 @@ public class HtmlResetInput extends HtmlInput {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occurred
      */
+    @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
@@ -94,6 +95,7 @@ public class HtmlResetInput extends HtmlInput {
      * {@inheritDoc} This method <b>does nothing</b> for reset input elements.
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         // Empty.
     }

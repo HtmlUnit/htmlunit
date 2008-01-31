@@ -87,6 +87,7 @@ public class HtmlDivision extends ClickableElement {
      * (ie with closing tag rather than with "/&gt;)
      * @return <code>true</code> to make generated xml readable as html
      */
+    @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }

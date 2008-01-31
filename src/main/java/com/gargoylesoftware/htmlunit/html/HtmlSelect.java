@@ -86,6 +86,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * Then set a default selected option if none was specified and the size is 1 or less
      * and this isn't a multiple selection input.
      */
+    @Override
     protected void onAllChildrenAddedToPage() {
 
         // Fix the size if necessary.
@@ -244,6 +245,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      * {@inheritDoc}
      * @see DomNode#appendDomChild(DomNode)
      */
+    @Override
     public DomNode appendDomChild(final DomNode node) {
         final DomNode response = super.appendDomChild(node);
         if (node instanceof HtmlOption) {
@@ -431,6 +433,7 @@ public class HtmlSelect extends FocusableElement implements DisabledElement, Sub
      *
      * @return The element as text.
      */
+    @Override
     public String asText() {
         final List<HtmlOption> options;
         if (isMultipleSelectEnabled()) {

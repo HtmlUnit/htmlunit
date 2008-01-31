@@ -69,6 +69,7 @@ public class HTMLTextAreaElement extends FormField {
      * Return the type of this input.
      * @return The type
      */
+    @Override
     public String jsxGet_type() {
         return "textarea";
     }
@@ -77,6 +78,7 @@ public class HTMLTextAreaElement extends FormField {
      * Return the value of the "value" attribute
      * @return The value of the "value" attribute
      */
+    @Override
     public String jsxGet_value() {
         return ((HtmlTextArea) getHtmlElementOrDie()).getText();
     }
@@ -85,6 +87,7 @@ public class HTMLTextAreaElement extends FormField {
      * Set the value of the "value" attribute
      * @param value The new value
      */
+    @Override
     public void jsxSet_value(final String value) {
         ((HtmlTextArea) getHtmlElementOrDie()).setText(value);
     }

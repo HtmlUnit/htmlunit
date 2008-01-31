@@ -1426,6 +1426,7 @@ public class HtmlPageTest extends WebTestCase {
         // and the same page without it for the other calls
         final MockWebConnection webConnection = new MockWebConnection(client) {
             private int nbCalls_ = 0;
+            @Override
             public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
                 String content = "<html><head>\n";
                 if (nbCalls_ == 0) {
@@ -1436,6 +1437,7 @@ public class HtmlPageTest extends WebTestCase {
                 return new StringWebResponse(content, settings.getURL()) {
                     private static final long serialVersionUID = 4945986137562358686L;
 
+                    @Override
                     public SubmitMethod getRequestMethod() {
                         return settings.getSubmitMethod();
                     }
@@ -1660,11 +1662,13 @@ public class HtmlPageTest extends WebTestCase {
 
         final List<String> collector = new ArrayList<String>();
         final HtmlAttributeChangeListener listener2 = new HtmlAttributeChangeListenerTestImpl() {
+            @Override
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 2");
             }
         };
         final HtmlAttributeChangeListener listener1 = new HtmlAttributeChangeListenerTestImpl() {
+            @Override
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 1");
                 page.addHtmlAttributeChangeListener(listener2);

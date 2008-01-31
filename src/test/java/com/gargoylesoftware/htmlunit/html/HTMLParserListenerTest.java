@@ -84,6 +84,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         }
 
         /** @see Object#toString() */
+        @Override
         public String toString() {
             return message_ + " (" + url_ + " " + line_ + ":" + column_ + ")";
         }
@@ -92,6 +93,7 @@ public class HTMLParserListenerTest extends WebTestCase {
          * Compares according to error, message, url and line.
          * @see Object#equals(Object)
          */
+        @Override
         public boolean equals(final Object obj) {
             if (!(obj instanceof MessageInfo)) {
                 return false;
@@ -109,6 +111,7 @@ public class HTMLParserListenerTest extends WebTestCase {
          * Stub to fix Eclipse warning
          * @see Object#hashCode()
          */
+        @Override
         public int hashCode() {
             return super.hashCode();
         }

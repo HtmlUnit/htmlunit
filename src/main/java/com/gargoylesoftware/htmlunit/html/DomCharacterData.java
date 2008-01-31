@@ -85,6 +85,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      * Set the data character string to the new string.
      * @param newValue The new String of data.
      */
+    @Override
     public void setNodeValue(final String newValue) {
         data_ = newValue;
     }
@@ -167,6 +168,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     /**
      * @return the string data held by this node
      */
+    @Override
     public String getNodeValue() {
         return data_;
     }

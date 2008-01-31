@@ -88,6 +88,7 @@ public class HtmlImageInput extends HtmlInput {
      *
      * @return See above
      */
+    @Override
     public KeyValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
         final String prefix;
@@ -116,6 +117,7 @@ public class HtmlImageInput extends HtmlInput {
      * @return The Page that is the result of submitting this page to the server
      * @exception IOException If an io error occurs
      */
+    @Override
     public Page click() throws IOException {
         return click(0, 0);
     }
@@ -132,6 +134,7 @@ public class HtmlImageInput extends HtmlInput {
      * @return The page that is currently loaded after execution of this method
      * @throws IOException If an IO error occurred
      */
+    @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
@@ -152,10 +155,8 @@ public class HtmlImageInput extends HtmlInput {
      * @exception IOException If an io error occurs
      * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
      */
-    public Page click(final int x, final int y)
-        throws
-            IOException,
-            ElementNotFoundException {
+    @Override
+    public Page click(final int x, final int y) throws IOException, ElementNotFoundException {
 
         wasPositionSpecified_ = true;
         xPosition_ = x;
@@ -167,6 +168,7 @@ public class HtmlImageInput extends HtmlInput {
      * {@inheritDoc} Also sets the value to the new default value, just like IE.
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         super.setDefaultValue(defaultValue);
         setValueAttribute(defaultValue);

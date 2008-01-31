@@ -84,6 +84,7 @@ public class HtmlParagraph extends ClickableElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected boolean isRenderedVisible() {
         return false;
     }

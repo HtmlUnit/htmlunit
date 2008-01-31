@@ -108,6 +108,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @return See above
      * @exception IOException If an IO error occurs
      */
+    @Override
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
         final URL url = webRequestSettings.getURL();
 
@@ -307,6 +308,7 @@ public class HttpWebConnection extends WebConnectionImpl {
              * @see http://issues.apache.org/jira/browse/HTTPCLIENT-293
              * {@inheritDoc}
              */
+            @Override
             protected void sendDispositionHeader(final OutputStream out) throws IOException {
                 out.write(CONTENT_DISPOSITION_BYTES);
                 out.write(QUOTE_BYTES);
@@ -434,6 +436,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * Return the {@link HttpState} that is being used.
      * @return The state.
      */
+    @Override
     public HttpState getState() {
         return getHttpClient().getState();
     }

@@ -105,6 +105,7 @@ public class HtmlUnitXPath extends BaseXPath {
      * @see org.jaxen.BaseXPath#toString()
      * @return the xpath expression provided to c'tor.
      */
+    @Override
     public String toString() {
         return xpath_;
     }

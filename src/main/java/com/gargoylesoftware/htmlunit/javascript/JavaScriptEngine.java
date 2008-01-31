@@ -188,6 +188,7 @@ public class JavaScriptEngine implements Serializable {
         {
             private static final long serialVersionUID = -7124423159070941606L;
 
+            @Override
             public Object get(final String name, final Scriptable start) {
                 if (start instanceof ScriptableWithFallbackGetter) {
                     return ((ScriptableWithFallbackGetter) start).getWithFallback(name);
@@ -195,6 +196,7 @@ public class JavaScriptEngine implements Serializable {
                 return NOT_FOUND;
             }
 
+            @Override
             public String getClassName() {
                 return "htmlUnitHelper-fallbackCaller";
             }
@@ -378,10 +380,12 @@ public class JavaScriptEngine implements Serializable {
         final String source = sourceCode;
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
         {
+            @Override
             public Object doRun(final Context cx) {
                 return cx.compileString(source, sourceName, startLine, null);
             }
 
+            @Override
             protected String getSourceCode(final Context cx) {
                 return source;
             }
@@ -419,12 +423,13 @@ public class JavaScriptEngine implements Serializable {
 
         final Scriptable scope = getScope(htmlPage, null);
 
-        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
-        {
+        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
+            @Override
             public Object doRun(final Context cx) {
                 return script.exec(cx, scope);
             }
 
+            @Override
             protected String getSourceCode(final Context cx) {
                 return null;
             }
@@ -452,11 +457,12 @@ public class JavaScriptEngine implements Serializable {
         final Scriptable scope = getScope(htmlPage, htmlElement);
         
         final Function function = (Function) javaScriptFunction;
-        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
-        {
+        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
+            @Override
             public Object doRun(final Context cx) {
                 return callFunction(htmlPage, function, cx, scope, (Scriptable) thisObject, args);
             }
+            @Override
             protected String getSourceCode(final Context cx) {
                 return cx.decompileFunction(function, 2);
             }

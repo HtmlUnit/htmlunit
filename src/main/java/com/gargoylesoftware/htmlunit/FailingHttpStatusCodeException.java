@@ -77,6 +77,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getMessage() {
         final int code = getStatusCode();
         final String msg = getStatusMessage();

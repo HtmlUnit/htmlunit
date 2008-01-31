@@ -81,6 +81,7 @@ public class HtmlTableRowTest extends WebTestCase {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setUp() throws Exception {
         page_ = loadPage(htmlContent);
         

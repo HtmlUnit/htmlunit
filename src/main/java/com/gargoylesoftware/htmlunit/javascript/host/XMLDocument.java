@@ -171,6 +171,7 @@ public class XMLDocument extends Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected Object getWithPreemption(final String name) {
         return NOT_FOUND;
     }
@@ -178,6 +179,7 @@ public class XMLDocument extends Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         final SimpleScriptable scriptable;
         
@@ -207,6 +209,7 @@ public class XMLDocument extends Document {
      * @return The root node for the document.
      */
     //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
+    @Override
     public SimpleScriptable jsxGet_documentElement() {
         final XmlElement documentElement = ((XmlPage) getDomNodeOrDie()).getDocumentXmlElement();
         if (documentElement == null) {
@@ -304,6 +307,7 @@ public class XMLDocument extends Document {
      * @param tagName the name to search for.
      * @return all the descendant elements with the specified tag name.
      */
+    @Override
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
         try {
@@ -321,6 +325,7 @@ public class XMLDocument extends Document {
      * Returns {@link Scriptable#NOT_FOUND}
      * {@inheritDoc}
      */
+    @Override
     public Object jsxGet_body() {
         return NOT_FOUND;
     }
@@ -328,6 +333,7 @@ public class XMLDocument extends Document {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object jsxFunction_getElementById(final String id) {
         return null;
     }

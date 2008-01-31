@@ -65,6 +65,7 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
      * {@inheritDoc}
      * @return the node name, in this case {@link #NODE_NAME}
      */
+    @Override
     public String getNodeName() {
         return NODE_NAME;
     }
@@ -73,6 +74,7 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
      * {@inheritDoc}
      * @return the node type constant, in this case {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE}
      */
+    @Override
     public short getNodeType() {
         return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
     }

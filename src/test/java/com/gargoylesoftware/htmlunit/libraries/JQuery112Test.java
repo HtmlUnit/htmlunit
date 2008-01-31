@@ -62,6 +62,7 @@ public class JQuery112Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected String getVersion() {
         return "1.1.2";
     }
@@ -69,6 +70,7 @@ public class JQuery112Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void verify(final Iterator<HtmlElement> i, final boolean ie) throws Exception {
         ok(i, "core module: Basic requirements", 0, 7);
         ok(i, "core module: $()", 0, 1);

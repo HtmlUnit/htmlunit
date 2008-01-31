@@ -66,6 +66,7 @@ public abstract class ServletContentWrapper extends HttpServlet {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
         throws ServletException, IOException {
         response.setContentType("text/html");
@@ -75,6 +76,7 @@ public abstract class ServletContentWrapper extends HttpServlet {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
         throws ServletException, IOException {
         doGet(request, response);

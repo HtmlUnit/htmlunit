@@ -89,6 +89,7 @@ public class HtmlFileInput extends HtmlInput {
      *
      * @return See above
      */
+    @Override
     public KeyValuePair[] getSubmitKeyValuePairs() {
         String value = getValueAttribute();
 
@@ -133,6 +134,7 @@ public class HtmlFileInput extends HtmlInput {
      * {@inheritDoc} This method <b>does nothing</b> for file input elements.
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         // Empty.
     }
@@ -142,6 +144,7 @@ public class HtmlFileInput extends HtmlInput {
      * Netscape browsers.
      * @see HtmlInput#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         setDefaultValue(defaultValue, false);
     }
