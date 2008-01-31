@@ -216,6 +216,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
+     * Depends on {@link HtmlUnitRegExpProxyTest#test()}.
      * @throws Exception If test fails.
      */
     public void testUnitTests() throws Exception {
