@@ -355,6 +355,9 @@ public class Node extends SimpleScriptable {
                     jsxFunction_insertBefore(node.getScriptObject(), refChildObject);
                 }
             }
+            if (firstNode == null) {
+                jsxFunction_removeChild(oldChildObject);
+            }
             removedChild = oldChildObject;
         }
         else if (newChildObject instanceof Node && oldChildObject instanceof Node) {
