@@ -583,4 +583,30 @@ public class NodeTest extends WebTestCase {
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testReplaceChild() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myDiv2');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('<div>one</div><div>two</div>');\n"
+            + "    var parent = element.parentNode;\n"
+            + "    alert(parent.innerHTML);\n"
+            + "    alert(parent.replaceChild(fragment, parent.firstChild).id);\n"
+            + "    alert(parent.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

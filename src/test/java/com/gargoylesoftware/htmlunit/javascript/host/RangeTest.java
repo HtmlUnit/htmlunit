@@ -42,7 +42,6 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link Range}.
@@ -147,7 +146,7 @@ public class RangeTest extends WebTestCase {
 
         final String[] expectedAlerts = {"<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

@@ -92,7 +92,7 @@ public class Prototype160Test extends WebTestCase {
             return;
         }
         final String filename = "base.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 35, 255, 0, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 35, 225, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 35, 225, 0, 0);
     }
 
@@ -104,7 +104,7 @@ public class Prototype160Test extends WebTestCase {
             return;
         }
         final String filename = "dom.html";
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 87, 819, 3, 0);
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 87, 822, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 87, 811, 0, 0);
     }
 

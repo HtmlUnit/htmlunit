@@ -340,10 +340,24 @@ public class Node extends SimpleScriptable {
      * @return the removed child node
      */
     public Object jsxFunction_replaceChild(final Object newChildObject, final Object oldChildObject) {
-
         Object removedChild = null;
 
-        if (newChildObject instanceof Node && oldChildObject instanceof Node) {
+        if (newChildObject instanceof DocumentFragment) {
+            final DocumentFragment fragment = (DocumentFragment) newChildObject;
+            Node firstNode = null;
+            final Node refChildObject = (Node) ((Node) oldChildObject).jsxGet_nextSibling();
+            for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
+                if (firstNode == null) {
+                    jsxFunction_replaceChild(node.getScriptObject(), oldChildObject);
+                    firstNode = (Node) node.getScriptObject();
+                }
+                else {
+                    jsxFunction_insertBefore(node.getScriptObject(), refChildObject);
+                }
+            }
+            removedChild = oldChildObject;
+        }
+        else if (newChildObject instanceof Node && oldChildObject instanceof Node) {
             // Get XML nodes for the DOM nodes passed in
             final DomNode newChildNode = ((Node) newChildObject).getDomNodeOrDie();
             final DomNode oldChildNode;
