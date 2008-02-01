@@ -2507,4 +2507,30 @@ public class WindowTest extends WebTestCase {
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testEval_localVariable() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var f = document.getElementById('testForm1');\n"
+            + "    alert(f.text1.value);\n"
+            + "    eval('f.text_' + 1).value = 'changed';\n"
+            + "    alert(f.text1.value);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form id='testForm1'>\n"
+            + "    <input id='text1' type='text' name='text_1' value='original'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"original", "changed"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
