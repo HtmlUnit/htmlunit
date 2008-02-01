@@ -2512,9 +2512,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testEval_localVariable() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var f = document.getElementById('testForm1');\n"
