@@ -46,20 +46,20 @@ import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link Style}.
+ * Tests for {@link CSSStyleDeclaration}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class StyleTest extends WebTestCase {
+public class CSSStyleDeclarationTest extends WebTestCase {
 
     /**
      * Create an instance
      * @param name The name of the test
      */
-    public StyleTest(final String name) {
+    public CSSStyleDeclarationTest(final String name) {
         super(name);
     }
 

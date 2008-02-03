@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class Style extends SimpleScriptable implements Cloneable {
+public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Write mode which indicates that all changes to this object write through to the element to
@@ -137,7 +137,7 @@ public class Style extends SimpleScriptable implements Cloneable {
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
-    public Style() {
+    public CSSStyleDeclaration() {
         // Empty.
     }
 
@@ -145,9 +145,9 @@ public class Style extends SimpleScriptable implements Cloneable {
      * Create an instance and set its parent scope to the one of the provided element.
      * @param htmlElement the element to which this style is bound.
      */
-    Style(final HTMLElement htmlElement) {
+    CSSStyleDeclaration(final HTMLElement htmlElement) {
         setParentScope(htmlElement.getParentScope());
-        setPrototype(getPrototype(Style.class));
+        setPrototype(getPrototype(CSSStyleDeclaration.class));
         initialize(htmlElement);
     }
 
@@ -188,9 +188,9 @@ public class Style extends SimpleScriptable implements Cloneable {
      * Creates a clone of this style.
      * @return a clone of this style.
      */
-    Style createClone() {
+    CSSStyleDeclaration createClone() {
         try {
-            return (Style) this.clone();
+            return (CSSStyleDeclaration) this.clone();
         }
         catch (final CloneNotSupportedException e) {
             // Should never happen.

@@ -45,7 +45,7 @@ import java.util.List;
 import org.apache.commons.httpclient.NameValuePair;
 
 /**
- *  A response from a web server
+ * A response from a web server
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

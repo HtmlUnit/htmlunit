@@ -38,8 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- *  An interface that represents one window in a browser.  It could be a top level window
- *  or a frame.
+ * An interface that represents one window in a browser.  It could be a top level window or a frame.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

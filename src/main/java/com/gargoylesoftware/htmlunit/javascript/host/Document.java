@@ -1179,7 +1179,7 @@ public class Document extends Node {
 
     /**
      * Retrieves a collection of styleSheet objects representing the style sheets that correspond
-     * to each instance of a Link or {@link Style} object in the document.
+     * to each instance of a Link or {@link CSSStyleDeclaration} object in the document.
      *
      * @return styleSheet collection.
      */

@@ -41,8 +41,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- *  A generic page that is returned whenever an unexpected content type is
- *  returned by the server.
+ * A generic page that is returned whenever an unexpected content type is
+ * returned by the server.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

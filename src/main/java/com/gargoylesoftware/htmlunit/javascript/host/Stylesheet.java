@@ -52,7 +52,6 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
-import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSStyleRule;
 import org.w3c.dom.css.CSSStyleSheet;
 
@@ -128,7 +127,7 @@ public class Stylesheet extends SimpleScriptable {
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
      */
-    void modifyIfNecessary(final Style style, final HTMLElement element) {
+    void modifyIfNecessary(final CSSStyleDeclaration style, final HTMLElement element) {
         final HtmlElement e = element.getHtmlElementOrDie();
         final HtmlPage page = e.getPage();
         final CSSRuleList rules = getWrappedSheet().getCssRules();
@@ -152,7 +151,7 @@ public class Stylesheet extends SimpleScriptable {
                         if (!results.contains(e)) {
                             continue;
                         }
-                        final CSSStyleDeclaration dec = styleRule.getStyle();
+                        final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
                         for (int k = 0; k < dec.getLength(); k++) {
                             final String name = dec.item(k);
                             final String value = dec.getPropertyValue(name);

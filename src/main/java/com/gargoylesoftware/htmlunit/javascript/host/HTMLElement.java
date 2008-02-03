@@ -136,7 +136,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             "caption", "col", "colgroup", "frameset", "html",
             "tbody", "td", "tfoot", "th", "thead", "tr"});
 
-    private Style style_;
+    private CSSStyleDeclaration style_;
 
     /**
      * Create an instance.
@@ -195,7 +195,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        style_ = new Style(this);
+        style_ = new CSSStyleDeclaration(this);
 
         /**
          * Convert javascript snippets defined in the attribute map to executable event handlers.
