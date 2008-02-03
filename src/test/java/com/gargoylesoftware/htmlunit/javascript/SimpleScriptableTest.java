@@ -128,6 +128,7 @@ public class SimpleScriptableTest extends WebTestCase {
         // Now pull out those names that we know don't have html equivalents
         names.remove("ActiveXObject");
         names.remove("BoxObject");
+        names.remove("CSSStyleDeclaration");
         names.remove("Document");
         names.remove("DOMImplementation");
         names.remove("DOMParser");
@@ -155,7 +156,6 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("ScoperFunctionObject");
         names.remove("Selection");
         names.remove("SimpleArray");
-        names.remove("Style");
         names.remove("Stylesheet");
         names.remove("StyleSheetList");
         names.remove("TextRange");
