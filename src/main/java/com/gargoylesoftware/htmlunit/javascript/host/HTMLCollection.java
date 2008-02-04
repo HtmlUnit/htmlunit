@@ -544,10 +544,6 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }
-
-            //'document.all.tags' is different from 'document.forms.tags'
-            //See HTMLCollectionTest.testTags()
-            idList.remove("tags");
         }
         else {
             idList.add("length");
