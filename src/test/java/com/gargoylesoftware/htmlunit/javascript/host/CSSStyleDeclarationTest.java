@@ -443,9 +443,6 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testProperties() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testProperties(BrowserVersion.INTERNET_EXPLORER_7_0, "clear posRight backgroundRepeat borderTopStyle "
             + "marginTop fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor "
             + "overflowX paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display "

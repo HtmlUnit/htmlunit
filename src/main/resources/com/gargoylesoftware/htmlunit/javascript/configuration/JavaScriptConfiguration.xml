@@ -57,10 +57,501 @@
     </class>
 
     <class name="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSStyleDeclaration" JSObject="true">
+        <property name="azimuth" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="background" readable="true" writable="true"/>
+        <property name="backgroundAttachment" readable="true" writable="true"/>
+        <property name="backgroundColor" readable="true" writable="true"/>
+        <property name="backgroundImage" readable="true" writable="true"/>
+        <property name="backgroundPosition" readable="true" writable="true"/>
+        <property name="backgroundPositionX" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="backgroundPositionY" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="backgroundRepeat" readable="true" writable="true"/>
         <property name="behavior" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
+        <property name="border" readable="true" writable="true"/>
+        <property name="borderBottom" readable="true" writable="true"/>
+        <property name="borderBottomColor" readable="true" writable="true"/>
+        <property name="borderBottomStyle" readable="true" writable="true"/>
+        <property name="borderBottomWidth" readable="true" writable="true"/>
+        <property name="borderCollapse" readable="true" writable="true"/>
+        <property name="borderColor" readable="true" writable="true"/>
+        <property name="borderLeft" readable="true" writable="true"/>
+        <property name="borderLeftColor" readable="true" writable="true"/>
+        <property name="borderLeftStyle" readable="true" writable="true"/>
+        <property name="borderLeftWidth" readable="true" writable="true"/>
+        <property name="borderRight" readable="true" writable="true"/>
+        <property name="borderRightColor" readable="true" writable="true"/>
+        <property name="borderRightStyle" readable="true" writable="true"/>
+        <property name="borderRightWidth" readable="true" writable="true"/>
+        <property name="borderSpacing" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="borderStyle" readable="true" writable="true"/>
+        <property name="borderTop" readable="true" writable="true"/>
+        <property name="borderTopColor" readable="true" writable="true"/>
+        <property name="borderTopStyle" readable="true" writable="true"/>
+        <property name="borderTopWidth" readable="true" writable="true"/>
+        <property name="borderWidth" readable="true" writable="true"/>
+        <property name="bottom" readable="true" writable="true"/>
+        <property name="captionSide" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="clear" readable="true" writable="true"/>
+        <property name="clip" readable="true" writable="true"/>
+        <property name="color" readable="true" writable="true"/>
+        <property name="content" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="counterIncrement" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="counterReset" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cssFloat" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cssText" readable="true" writable="true"/>
+        <property name="cue" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cueAfter" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cueBefore" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cursor" readable="true" writable="true"/>
+        <property name="direction" readable="true" writable="true"/>
+        <property name="display" readable="true" writable="true"/>
+        <property name="elevation" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="emptyCells" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="filter" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="font" readable="true" writable="true"/>
+        <property name="fontFamily" readable="true" writable="true"/>
+        <property name="fontSize" readable="true" writable="true"/>
+        <property name="fontSizeAdjust" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="fontStretch" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="fontStyle" readable="true" writable="true"/>
+        <property name="fontVariant" readable="true" writable="true"/>
+        <property name="fontWeight" readable="true" writable="true"/>
+        <property name="height" readable="true" writable="true"/>
+        <property name="imeMode" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="layoutFlow" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="layoutGrid" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="layoutGridChar" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="layoutGridLine" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="layoutGridMode" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="layoutGridType" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="left" readable="true" writable="true"/>
+        <property name="length" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="letterSpacing" readable="true" writable="true"/>
+        <property name="lineBreak" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="lineHeight" readable="true" writable="true"/>
+        <property name="listStyle" readable="true" writable="true"/>
+        <property name="listStyleImage" readable="true" writable="true"/>
+        <property name="listStylePosition" readable="true" writable="true"/>
+        <property name="listStyleType" readable="true" writable="true"/>
+        <property name="margin" readable="true" writable="true"/>
+        <property name="marginBottom" readable="true" writable="true"/>
+        <property name="marginLeft" readable="true" writable="true"/>
+        <property name="marginRight" readable="true" writable="true"/>
+        <property name="marginTop" readable="true" writable="true"/>
+        <property name="markerOffset" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="marks" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="maxHeight" readable="true" writable="true"/>
+        <property name="maxWidth" readable="true" writable="true"/>
+        <property name="minHeight" readable="true" writable="true"/>
+        <property name="minWidth" readable="true" writable="true"/>
+        <property name="MozAppearance" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBackgroundClip" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBackgroundInlinePolicy" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBackgroundOrigin" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBinding" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderBottomColors" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderLeftColors" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderRadius" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderRadiusBottomleft" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderRadiusBottomright" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderRadiusTopleft" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderRadiusTopright" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderRightColors" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderTopColors" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBoxAlign" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBoxDirection" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBoxFlex" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBoxOrdinalGroup" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBoxOrient" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBoxPack" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBoxSizing" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozColumnCount" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozColumnGap" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozColumnWidth" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozFloatEdge" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozForceBrokenImageIcon" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozImageRegion" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozMarginEnd" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozMarginStart" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOpacity" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutline" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineColor" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineOffset" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineRadius" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineRadiusBottomleft" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineRadiusBottomright" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineRadiusTopleft" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineRadiusTopright" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineStyle" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozOutlineWidth" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozPaddingEnd" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozPaddingStart" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozUserFocus" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozUserInput" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozUserModify" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozUserSelect" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="msInterpolationMode" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="opacity" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="orphans" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="outline" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="outlineColor" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="outlineOffset" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="outlineStyle" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="outlineWidth" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="overflow" readable="true" writable="true"/>
+        <property name="overflowX" readable="true" writable="true"/>
+        <property name="overflowY" readable="true" writable="true"/>
+        <property name="padding" readable="true" writable="true"/>
+        <property name="paddingBottom" readable="true" writable="true"/>
+        <property name="paddingLeft" readable="true" writable="true"/>
+        <property name="paddingRight" readable="true" writable="true"/>
+        <property name="paddingTop" readable="true" writable="true"/>
+        <property name="page" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="pageBreakAfter" readable="true" writable="true"/>
+        <property name="pageBreakBefore" readable="true" writable="true"/>
+        <property name="pageBreakInside" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="pause" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="pauseAfter" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="pauseBefore" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="pitch" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="pitchRange" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="posBottom" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="posHeight" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="position" readable="true" writable="true"/>
+        <property name="posLeft" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="posRight" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="posTop" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="posWidth" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="quotes" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="richness" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="right" readable="true" writable="true"/>
+        <property name="rubyAlign" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="rubyOverhang" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="rubyPosition" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbar3dLightColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbarArrowColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbarBaseColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbarDarkShadowColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbarFaceColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbarHighlightColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbarShadowColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="scrollbarTrackColor" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="size" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="speak" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="speakHeader" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="speakNumeral" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="speakPunctuation" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="speechRate" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="stress" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="styleFloat" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="tableLayout" readable="true" writable="true"/>
+        <property name="textAlign" readable="true" writable="true"/>
+        <property name="textAlignLast" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textAutospace" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textDecoration" readable="true" writable="true"/>
+        <property name="textDecorationBlink" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textDecorationLineThrough" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textDecorationNone" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textDecorationOverline" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textDecorationUnderline" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textIndent" readable="true" writable="true"/>
+        <property name="textJustify" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textJustifyTrim" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textKashida" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textKashidaSpace" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textOverflow" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="textShadow" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="textTransform" readable="true" writable="true"/>
+        <property name="textUnderlinePosition" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="top" readable="true" writable="true"/>
+        <property name="unicodeBidi" readable="true" writable="true"/>
+        <property name="verticalAlign" readable="true" writable="true"/>
+        <property name="visibility" readable="true" writable="true"/>
+        <property name="voiceFamily" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="volume" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="whiteSpace" readable="true" writable="true"/>
+        <property name="widows" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="width" readable="true" writable="true"/>
+        <property name="wordBreak" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="wordSpacing" readable="true" writable="true"/>
+        <property name="wordWrap" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="writingMode" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="zIndex" readable="true" writable="true"/>
+        <property name="zoom" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer"/>
         </property>
         <function name="getPropertyValue">
