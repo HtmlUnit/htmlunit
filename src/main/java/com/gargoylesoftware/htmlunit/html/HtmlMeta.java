@@ -52,7 +52,7 @@ import org.apache.commons.lang.StringUtils;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaElement {
+public class HtmlMeta extends HtmlElement {
 
     private static final long serialVersionUID = 7408601325303605790L;
 
@@ -114,7 +114,6 @@ public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaEl
      *
      * @return The value of the attribute "lang"
      * or an empty string if that attribute isn't defined.
-     * @deprecated After 1.14, please use {@link #getLang()} instead.
      */
     public final String getLangAttribute() {
         return getAttributeValue("lang");
@@ -139,7 +138,6 @@ public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaEl
      *
      * @return The value of the attribute "dir"
      * or an empty string if that attribute isn't defined.
-     * @deprecated After 1.14, please use {@link #getDir()} instead.
      */
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
@@ -152,7 +150,6 @@ public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaEl
      *
      * @return The value of the attribute "http-equiv"
      * or an empty string if that attribute isn't defined.
-     * @deprecated After 1.14, please use {@link #getHttpEquiv()} instead.
      */
     public final String getHttpEquivAttribute() {
         return getAttributeValue("http-equiv");
@@ -165,7 +162,6 @@ public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaEl
      *
      * @return The value of the attribute "name"
      * or an empty string if that attribute isn't defined.
-     * @deprecated After 1.14, please use {@link #getName()} instead.
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
@@ -178,7 +174,6 @@ public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaEl
      *
      * @return The value of the attribute "content"
      * or an empty string if that attribute isn't defined.
-     * @deprecated After 1.14, please use {@link #getContent()} instead.
      */
     public final String getContentAttribute() {
         return getAttributeValue("content");
@@ -191,66 +186,8 @@ public class HtmlMeta extends HtmlElement implements org.w3c.dom.html.HTMLMetaEl
      *
      * @return The value of the attribute "scheme"
      * or an empty string if that attribute isn't defined.
-     * @deprecated After 1.14, please use {@link #getScheme()} instead.
      */
     public final String getSchemeAttribute() {
         return getAttributeValue("scheme");
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getContent() {
-        return getAttribute("content");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getHttpEquiv() {
-        return getAttribute("http-equiv");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getName() {
-        return getAttribute("name");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getScheme() {
-        return getAttribute("scheme");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setContent(final String content) {
-        setAttribute("content", content);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setHttpEquiv(final String httpEquiv) {
-        setAttribute("http-equiv", httpEquiv);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setName(final String name) {
-        setAttribute("name", name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setScheme(final String scheme) {
-        setAttribute("scheme", scheme);
-    }
-
 }
