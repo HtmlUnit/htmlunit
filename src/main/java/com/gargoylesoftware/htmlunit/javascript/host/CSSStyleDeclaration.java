@@ -39,18 +39,11 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -101,38 +94,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * {@link WRITE_MODE_DO_NOT_UPDATE_ELEMENT} write mode.
      */
     private Map<String, String> localModifications_ = new HashMap<String, String>();
-
-    /**
-     * These are IE properties, this should be configured per browser.
-     */
-    private static final String[] STYLE_PROPERTIES = {"backgroundColor",
-        "backgroundImage", "borderBottom", "borderBottomColor", "borderBottomStyle", "borderBottomWidth",
-        "borderLeft", "borderLeftColor", "borderLeftStyle", "borderLeftWidth",
-        "borderRight", "borderRightColor", "borderRightStyle", "borderRightWidth",
-        "borderTop", "borderTopColor", "borderTopStyle", "borderTopWidth",
-        "bottom", "clear", "clip", "color", "direction",
-        "display", "font", "fontFamily", "fontSize", "fontStyle",
-        "fontWeight", "fontWeight", "hasLayout", "height", "layoutFlow",
-        "layoutGrid", "layoutGridMode", "left", "letterSpacing",
-        "lineHeight", "maxHeight", "maxWidth", "minHeight", "minWidth",
-        "padding", "paddingBottom", "paddingLeft", "paddingRight",
-        "paddingTop", "pixelBottom", "pixelHeight", "pixelLeft",
-        "pixelRight", "pixelTop", "pixelWidth", "posBottom", "posHeight",
-        "position", "posLeft", "posRight", "posTop", "posWidth", "right",
-        "styleFloat", "textAutospace", "textDecoration",
-        "textDecorationBlink", "textDecorationLineThrough",
-        "textDecorationNone", "textDecorationOverline",
-        "textDecorationUnderline", "textTransform",
-        "textUnderlinePosition", "top", "unicodeBidi", "visibility",
-        "width", "wordSpacing", "wordWrap", "zoom" };
-
-    private static final Set<String> STYLE_ALLOWED_PROPERTIES;
-
-    static {
-        final Set<String> set = new HashSet<String>();
-        CollectionUtils.addAll(set, STYLE_PROPERTIES);
-        STYLE_ALLOWED_PROPERTIES = Collections.unmodifiableSet(set);
-    }
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -212,10 +173,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     @Override
     protected Object getWithPreemption(final String name) {
-        if (STYLE_ALLOWED_PROPERTIES.contains(name) || name.equals("length")) {
-            return getStyleAttribute(name, true);
+        if (name.equals("length")) {
+          return "";
         }
-        return super.getWithPreemption(name);
+        return super.getWithPreemption(name) ;
     }
     
     /**
@@ -232,27 +193,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         else {
             return value;
         }
-    }
-
-    /**
-     * Set the specified property.
-     *
-     * @param name The name of the property
-     * @param start The scriptable object that was originally invoked for this property
-     * @param newValue The new value
-     */
-    @Override
-    public void put(final String name, final Scriptable start, final Object newValue) {
-        // Some calls to put will happen during the initialization of the
-        // superclass. At this point, we don't have enough information to
-        // do our own initialization so we have to just pass this call
-        // through to the superclass.
-        if (jsElement_ == null || !STYLE_ALLOWED_PROPERTIES.contains(name)) {
-            super.put(name, start, newValue);
-            return;
-        }
-        final String styleValue = (String) Context.jsToJava(newValue, String.class);
-        setStyleAttribute(name, styleValue);
     }
 
     /**
