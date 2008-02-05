@@ -2530,4 +2530,30 @@ public class WindowTest extends WebTestCase {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testGetComputedStyle2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myDiv');\n"
+            + "    alert(window.getComputedStyle(e,null).cssFloat);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"none"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
