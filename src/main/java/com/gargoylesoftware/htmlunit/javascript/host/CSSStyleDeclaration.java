@@ -174,9 +174,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     @Override
     protected Object getWithPreemption(final String name) {
         if (name.equals("length")) {
-          return "";
+            return "";
         }
-        return super.getWithPreemption(name) ;
+        return super.getWithPreemption(name);
     }
     
     /**
