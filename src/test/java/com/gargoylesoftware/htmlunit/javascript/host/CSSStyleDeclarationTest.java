@@ -517,12 +517,10 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
+     * Test types of properties.
      * @throws Exception if the test fails
      */
     public void testProperties2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testProperties2(BrowserVersion.INTERNET_EXPLORER_7_0, "clear backgroundRepeat borderTopStyle marginTop "
             + "fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor overflowX "
             + "paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display marginBottom "

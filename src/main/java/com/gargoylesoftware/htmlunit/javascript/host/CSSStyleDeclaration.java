@@ -169,17 +169,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Object getWithPreemption(final String name) {
-        if (name.equals("length")) {
-            return "";
-        }
-        return super.getWithPreemption(name);
-    }
-    
-    /**
      * Returns the named style attribute value.
      * @param name the style attribute name
      * @param camelCase whether or not the name is expected to be in camel case
@@ -1357,7 +1346,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the length.
      */
     public int jsxGet_length() {
-        return -1;
+        return 0;
     }
 
     /**
@@ -2788,32 +2777,32 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Gets the "posBottom" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_posBottom() {
-        return getStyleAttribute("posBottom", true);
+    public int jsxGet_posBottom() {
+        return 0;
     }
 
     /**
      * Sets the "posBottom" style attribute.
      * @param posBottom the new attribute.
      */
-    public void jsxSet_posBottom(final String posBottom) {
-        setStyleAttribute("posBottom", posBottom);
+    public void jsxSet_posBottom(final int posBottom) {
+        //empty
     }
 
     /**
      * Gets the "posHeight" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_posHeight() {
-        return getStyleAttribute("posHeight", true);
+    public int jsxGet_posHeight() {
+        return 0;
     }
 
     /**
      * Sets the "posHeight" style attribute.
      * @param posHeight the new attribute.
      */
-    public void jsxSet_posHeight(final String posHeight) {
-        setStyleAttribute("posHeight", posHeight);
+    public void jsxSet_posHeight(final int posHeight) {
+        //empty
     }
 
     /**
@@ -2836,64 +2825,64 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Gets the "posLeft" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_posLeft() {
-        return getStyleAttribute("posLeft", true);
+    public int jsxGet_posLeft() {
+        return 0;
     }
 
     /**
      * Sets the "posLeft" style attribute.
      * @param posLeft the new attribute.
      */
-    public void jsxSet_posLeft(final String posLeft) {
-        setStyleAttribute("posLeft", posLeft);
+    public void jsxSet_posLeft(final int posLeft) {
+        //empty
     }
 
     /**
      * Gets the "posRight" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_posRight() {
-        return getStyleAttribute("posRight", true);
+    public int jsxGet_posRight() {
+        return 0;
     }
 
     /**
      * Sets the "posRight" style attribute.
      * @param posRight the new attribute.
      */
-    public void jsxSet_posRight(final String posRight) {
-        setStyleAttribute("posRight", posRight);
+    public void jsxSet_posRight(final int posRight) {
+        //empty
     }
 
     /**
      * Gets the "posTop" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_posTop() {
-        return getStyleAttribute("posTop", true);
+    public int jsxGet_posTop() {
+        return 0;
     }
 
     /**
      * Sets the "posTop" style attribute.
      * @param posTop the new attribute.
      */
-    public void jsxSet_posTop(final String posTop) {
-        setStyleAttribute("posTop", posTop);
+    public void jsxSet_posTop(final int posTop) {
+        //empty
     }
 
     /**
      * Gets the "posWidth" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_posWidth() {
-        return getStyleAttribute("posWidth", true);
+    public int jsxGet_posWidth() {
+        return 0;
     }
 
     /**
      * Sets the "posWidth" style attribute.
      * @param posWidth the new attribute.
      */
-    public void jsxSet_posWidth(final String posWidth) {
-        setStyleAttribute("posWidth", posWidth);
+    public void jsxSet_posWidth(final int posWidth) {
+        //empty
     }
 
     /**
@@ -3332,80 +3321,80 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Gets the "textDecorationBlink" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_textDecorationBlink() {
-        return getStyleAttribute("textDecorationBlink", true);
+    public boolean jsxGet_textDecorationBlink() {
+        return false;
     }
 
     /**
      * Sets the "textDecorationBlink" style attribute.
      * @param textDecorationBlink the new attribute.
      */
-    public void jsxSet_textDecorationBlink(final String textDecorationBlink) {
-        setStyleAttribute("textDecorationBlink", textDecorationBlink);
+    public void jsxSet_textDecorationBlink(final boolean textDecorationBlink) {
+        //empty
     }
 
     /**
      * Gets the "textDecorationLineThrough" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_textDecorationLineThrough() {
-        return getStyleAttribute("textDecorationLineThrough", true);
+    public boolean jsxGet_textDecorationLineThrough() {
+        return false;
     }
 
     /**
      * Sets the "textDecorationLineThrough" style attribute.
      * @param textDecorationLineThrough the new attribute.
      */
-    public void jsxSet_textDecorationLineThrough(final String textDecorationLineThrough) {
-        setStyleAttribute("textDecorationLineThrough", textDecorationLineThrough);
+    public void jsxSet_textDecorationLineThrough(final boolean textDecorationLineThrough) {
+        //empty
     }
 
     /**
      * Gets the "textDecorationNone" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_textDecorationNone() {
-        return getStyleAttribute("textDecorationNone", true);
+    public boolean jsxGet_textDecorationNone() {
+        return false;
     }
 
     /**
      * Sets the "textDecorationNone" style attribute.
      * @param textDecorationNone the new attribute.
      */
-    public void jsxSet_textDecorationNone(final String textDecorationNone) {
-        setStyleAttribute("textDecorationNone", textDecorationNone);
+    public void jsxSet_textDecorationNone(final boolean textDecorationNone) {
+        //empty
     }
 
     /**
      * Gets the "textDecorationOverline" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_textDecorationOverline() {
-        return getStyleAttribute("textDecorationOverline", true);
+    public boolean jsxGet_textDecorationOverline() {
+        return false;
     }
 
     /**
      * Sets the "textDecorationOverline" style attribute.
      * @param textDecorationOverline the new attribute.
      */
-    public void jsxSet_textDecorationOverline(final String textDecorationOverline) {
-        setStyleAttribute("textDecorationOverline", textDecorationOverline);
+    public void jsxSet_textDecorationOverline(final boolean textDecorationOverline) {
+        //empty
     }
 
     /**
      * Gets the "textDecorationUnderline" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_textDecorationUnderline() {
-        return getStyleAttribute("textDecorationUnderline", true);
+    public boolean jsxGet_textDecorationUnderline() {
+        return false;
     }
 
     /**
      * Sets the "textDecorationUnderline" style attribute.
      * @param textDecorationUnderline the new attribute.
      */
-    public void jsxSet_textDecorationUnderline(final String textDecorationUnderline) {
-        setStyleAttribute("textDecorationUnderline", textDecorationUnderline);
+    public void jsxSet_textDecorationUnderline(final boolean textDecorationUnderline) {
+        //empty
     }
 
     /**
@@ -3764,16 +3753,21 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Gets the "zIndex" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_zIndex() {
-        return getStyleAttribute("zIndex", true);
+    public Object jsxGet_zIndex() {
+        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            return 0;
+        }
+        else {
+            return "";
+        }
     }
 
     /**
      * Sets the "zIndex" style attribute.
-     * @param zIndex the new attribute.
+     * @param zIndex the new attribute
      */
-    public void jsxSet_zIndex(final String zIndex) {
-        setStyleAttribute("zIndex", zIndex);
+    public void jsxSet_zIndex(final Object zIndex) {
+        //empty
     }
 
     /**
