@@ -515,4 +515,82 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         Collections.sort(collectedStyles);
         assertEquals(expectedStyles, collectedStyles);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testProperties2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testProperties2(BrowserVersion.INTERNET_EXPLORER_7_0, "clear backgroundRepeat borderTopStyle marginTop "
+            + "fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor overflowX "
+            + "paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display marginBottom "
+            + "textKashidaSpace borderCollapse scrollbarFaceColor backgroundAttachment borderRightStyle fontStyle "
+            + "textUnderlinePosition textIndent msInterpolationMode layoutGridMode right pageBreakAfter background "
+            + "filter borderColor left minHeight rubyOverhang layoutGrid visibility verticalAlign borderBottomWidth "
+            + "scrollbarShadowColor textTransform lineBreak scrollbarArrowColor margin borderBottomColor "
+            + "borderTopWidth behavior letterSpacing layoutFlow font borderTopColor paddingBottom whiteSpace overflow "
+            + "borderBottomStyle cssText width clip cursor fontSize imeMode backgroundPosition color paddingRight "
+            + "textAutospace pageBreakBefore direction bottom fontFamily unicodeBidi borderRightColor styleFloat "
+            + "textJustify backgroundColor borderLeftStyle zoom listStyleImage wordSpacing textDecoration "
+            + "borderBottom layoutGridChar tableLayout border textAlign backgroundPositionY backgroundImage "
+            + "borderWidth borderTop textJustifyTrim minWidth scrollbar3dLightColor fontWeight "
+            + "scrollbarDarkShadowColor textAlignLast maxHeight borderRightWidth paddingTop wordBreak textOverflow "
+            + "rubyPosition borderStyle wordWrap position overflowY layoutGridLine top writingMode height "
+            + "scrollbarTrackColor listStyle borderRight scrollbarBaseColor marginRight marginLeft layoutGridType "
+            + "textKashida rubyAlign borderLeft ");
+        testProperties2(BrowserVersion.FIREFOX_2, "cssText azimuth background backgroundAttachment backgroundColor "
+            + "backgroundImage backgroundPosition backgroundRepeat border borderCollapse borderColor borderSpacing "
+            + "borderStyle borderTop borderRight borderBottom borderLeft borderTopColor borderRightColor "
+            + "borderBottomColor borderLeftColor borderTopStyle borderRightStyle borderBottomStyle borderLeftStyle "
+            + "borderTopWidth borderRightWidth borderBottomWidth borderLeftWidth borderWidth bottom captionSide clear "
+            + "clip color content counterIncrement counterReset cue cueAfter cueBefore cursor direction display "
+            + "elevation emptyCells cssFloat font fontFamily fontSize fontSizeAdjust fontStretch fontStyle "
+            + "fontVariant fontWeight height left letterSpacing lineHeight listStyle listStyleImage listStylePosition "
+            + "listStyleType margin marginTop marginRight marginBottom marginLeft markerOffset marks maxHeight "
+            + "maxWidth minHeight minWidth orphans outline outlineColor outlineStyle outlineWidth overflow padding "
+            + "paddingTop paddingRight paddingBottom paddingLeft page pageBreakAfter pageBreakBefore pageBreakInside "
+            + "pause pauseAfter pauseBefore pitch pitchRange position quotes richness right size speak speakHeader "
+            + "speakNumeral speakPunctuation speechRate stress tableLayout textAlign textDecoration textIndent "
+            + "textShadow textTransform top unicodeBidi verticalAlign visibility voiceFamily volume whiteSpace widows "
+            + "width wordSpacing zIndex MozAppearance MozBackgroundClip MozBackgroundInlinePolicy MozBackgroundOrigin "
+            + "MozBinding MozBorderBottomColors MozBorderLeftColors MozBorderRightColors MozBorderTopColors "
+            + "MozBorderRadius MozBorderRadiusTopleft MozBorderRadiusTopright MozBorderRadiusBottomleft "
+            + "MozBorderRadiusBottomright MozBoxAlign MozBoxDirection MozBoxFlex MozBoxOrient MozBoxOrdinalGroup "
+            + "MozBoxPack MozBoxSizing MozColumnCount MozColumnWidth MozColumnGap MozFloatEdge "
+            + "MozForceBrokenImageIcon MozImageRegion MozMarginEnd MozMarginStart MozOpacity MozOutline "
+            + "MozOutlineColor MozOutlineRadius MozOutlineRadiusTopleft MozOutlineRadiusTopright "
+            + "MozOutlineRadiusBottomleft MozOutlineRadiusBottomright MozOutlineStyle MozOutlineWidth "
+            + "MozOutlineOffset MozPaddingEnd MozPaddingStart MozUserFocus MozUserInput MozUserModify MozUserSelect "
+            + "opacity outlineOffset overflowX overflowY ");
+    }
+
+    private void testProperties2(final BrowserVersion browserVersion, final String expectedText) throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var style = document.getElementById('myDiv').style;\n"
+            + "  var s = '';\n"
+            + "  for (var i in style) {\n"
+            + "    if (eval('style.' + i) === '')\n"
+            + "      s += i + ' ';\n"
+            + "  }\n"
+            + "  document.getElementById('myTextarea').value = s;\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'><br>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
+        final List<String> expectedStyles = Arrays.asList(expectedText.split(" "));
+        Collections.sort(expectedStyles);
+        final List<String> collectedStyles =
+            Arrays.asList(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText().split(" "));
+        Collections.sort(collectedStyles);
+        assertEquals(expectedStyles, collectedStyles);
+    }
 }
