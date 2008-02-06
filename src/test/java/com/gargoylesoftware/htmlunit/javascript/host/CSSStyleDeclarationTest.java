@@ -506,8 +506,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final List<String> expectedStyles = Arrays.asList(expectedText.split(" "));
         Collections.sort(expectedStyles);
         final List<String> collectedStyles =
@@ -582,8 +581,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(browserVersion, html, collectedAlerts);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final List<String> expectedStyles = Arrays.asList(expectedText.split(" "));
         Collections.sort(expectedStyles);
         final List<String> collectedStyles =

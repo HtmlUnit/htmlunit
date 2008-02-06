@@ -1087,8 +1087,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         final HTMLElement e = (HTMLElement) element;
         final CSSStyleDeclaration original = (CSSStyleDeclaration) e.jsxGet_style();
-        final CSSStyleDeclaration style = original.createClone();
-        style.setWriteMode(CSSStyleDeclaration.WRITE_MODE_DO_NOT_UPDATE_ELEMENT);
+        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(original);
 
         final StyleSheetList sheets = (StyleSheetList) document_.jsxGet_styleSheets();
         for (int i = 0; i < sheets.jsxGet_length(); i++) {
@@ -1096,7 +1095,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             sheet.modifyIfNecessary(style, e);
         }
 
-        style.setWriteMode(CSSStyleDeclaration.WRITE_MODE_NOT_WRITEABLE);
         return style;
     }
 

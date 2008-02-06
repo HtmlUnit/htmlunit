@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.StringTokenizer;
@@ -49,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A JavaScript object for a Style.
+ * A JavaScript object for a CSSStyleDeclaration.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -60,21 +59,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
-    /**
-     * Write mode which indicates that all changes to this object write through to the element to
-     * which it belongs.
-     */
-    public static final short WRITE_MODE_UPDATE_ELEMENT = 0;
-
-    /**
-     * Write mode which indicates that changes to this object are allowed, but should not write
-     * through to the element to which it belongs.
-     */
-    public static final short WRITE_MODE_DO_NOT_UPDATE_ELEMENT = 1;
-
-    /** Write mode which indicates that changes to this object are not allowed. */
-    public static final short WRITE_MODE_NOT_WRITEABLE = 2;
-
     private static final long serialVersionUID = -1976370264911039311L;
 
     /** Used to parse URLs. */
@@ -82,18 +66,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /** The element to which this style belongs. */
     private HTMLElement jsElement_;
-
-    /**
-     * The write mode for this style object. The default write mode is
-     * {@link WRITE_MODE_UPDATE_ELEMENT}.
-     */
-    private short writeMode_ = WRITE_MODE_UPDATE_ELEMENT;
-
-    /**
-     * Local modifications maintained here rather than in the element when we are in
-     * {@link WRITE_MODE_DO_NOT_UPDATE_ELEMENT} write mode.
-     */
-    private Map<String, String> localModifications_ = new HashMap<String, String>();
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -108,8 +80,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     CSSStyleDeclaration(final HTMLElement htmlElement) {
         setParentScope(htmlElement.getParentScope());
-        setPrototype(getPrototype(CSSStyleDeclaration.class));
+        setPrototype(getPrototype(getClass()));
         initialize(htmlElement);
+    }
+
+    HTMLElement getHTMLElement() {
+        return jsElement_;
     }
 
     /**
@@ -151,21 +127,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     CSSStyleDeclaration createClone() {
         try {
-            return (CSSStyleDeclaration) this.clone();
+            return (CSSStyleDeclaration) clone();
         }
         catch (final CloneNotSupportedException e) {
             // Should never happen.
             getLog().error(e.getMessage(), e);
             return null;
         }
-    }
-
-    /**
-     * Sets the style's write mode.
-     * @param writeMode the style's write mode.
-     */
-    void setWriteMode(final short writeMode) {
-        writeMode_ = writeMode;
     }
 
     /**
@@ -190,28 +158,20 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param newValue the attribute value
      */
     protected void setStyleAttribute(final String name, final String newValue) {
-        if (writeMode_ == WRITE_MODE_UPDATE_ELEMENT) {
+        final Map<String, String> styleMap = getStyleMap(true);
+        styleMap.put(name, newValue);
 
-            final Map<String, String> styleMap = getStyleMap(true);
-            styleMap.put(name, newValue);
-
-            final StringBuilder buffer = new StringBuilder();
-            for (final Map.Entry<String, String> entry : styleMap.entrySet()) {
-                buffer.append(" ");
-                buffer.append(entry.getKey());
-                buffer.append(": ");
-                buffer.append(entry.getValue());
-                buffer.append(";");
-            }
-            buffer.deleteCharAt(0);
-
-            jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+        final StringBuilder buffer = new StringBuilder();
+        for (final Map.Entry<String, String> entry : styleMap.entrySet()) {
+            buffer.append(" ");
+            buffer.append(entry.getKey());
+            buffer.append(": ");
+            buffer.append(entry.getValue());
+            buffer.append(";");
         }
-        else if (writeMode_ == WRITE_MODE_DO_NOT_UPDATE_ELEMENT) {
+        buffer.deleteCharAt(0);
 
-            localModifications_.put(name, newValue);
-
-        }
+        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
     }
 
     /**
@@ -222,7 +182,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      *        if <tt>false</tt>, the keys are delimiter-separated (i.e. <tt>font-size</tt>).
      * @return a sorted map containing style elements, keyed on style element name
      */
-    private SortedMap<String, String> getStyleMap(final boolean camelCase) {
+    protected SortedMap<String, String> getStyleMap(final boolean camelCase) {
         final SortedMap<String, String> styleMap = new TreeMap<String, String>();
         final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
         final StringTokenizer tokenizer = new StringTokenizer(styleAttribute, ";");
@@ -237,14 +197,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
                 final String value = token.substring(index + 1).trim();
                 styleMap.put(key, value);
             }
-        }
-        for (final Map.Entry<String, String> entry : localModifications_.entrySet()) {
-            String key = entry.getKey();
-            if (!camelCase) {
-                key = key.replaceAll("([A-Z])", "-$1").toLowerCase();
-            }
-            final String value = entry.getValue();
-            styleMap.put(key, value);
         }
         return styleMap;
     }

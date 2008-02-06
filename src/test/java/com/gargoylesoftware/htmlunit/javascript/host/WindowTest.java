@@ -41,6 +41,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests for {@link Window}.
@@ -2555,5 +2557,99 @@ public class WindowTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Compares all style and getComputedStle.
+     * @throws Exception If the test fails
+     */
+    public void testGetComputedStyle3() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var e = document.getElementById('myDiv');\n"
+            + "  var str = '';\n"
+            + "  for (var i in e.style) {\n"
+            + "    var s1 = eval('e.style.' + i);\n"
+            + "    var s2 = eval('window.getComputedStyle(e,null).' + i);\n"
+            + "    if(typeof s1 != 'function')\n"
+            + "      str += i + '=' + s1 + ':' + s2 + ',';\n"
+            + "  }\n"
+            + "  document.getElementById('myTextarea').value = str;\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'><br>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "</body></html>";
+
+        final String expectedText = "length=0:112,cssText=:,parentRule=null:null,azimuth=:,background=:,"
+            + "backgroundAttachment=:scroll,backgroundColor=:transparent,backgroundImage=:none,"
+            + "backgroundPosition=:,backgroundRepeat=:repeat,border=:,borderCollapse=:separate,borderColor=:,"
+            + "borderSpacing=:0px 0px,borderStyle=:,borderTop=:,borderRight=:,borderBottom=:,borderLeft=:,"
+            + "borderTopColor=:rgb(0, 0, 0),borderRightColor=:rgb(0, 0, 0),borderBottomColor=:rgb(0, 0, 0),"
+            + "borderLeftColor=:rgb(0, 0, 0),borderTopStyle=:none,borderRightStyle=:none,borderBottomStyle=:none,"
+            + "borderLeftStyle=:none,borderTopWidth=:0px,borderRightWidth=:0px,borderBottomWidth=:0px,"
+            + "borderLeftWidth=:0px,borderWidth=:,bottom=:auto,captionSide=:top,clear=:none,clip=:auto,"
+            + "color=:rgb(0, 0, 0),content=:,counterIncrement=:none,counterReset=:none,cue=:,cueAfter=:,cueBefore=:,"
+            + "cursor=:auto,direction=:ltr,display=:block,elevation=:,emptyCells=:-moz-show-background,cssFloat=:none,"
+            + "font=:,fontFamily=:serif,fontSize=:16px,fontSizeAdjust=:none,fontStretch=:,fontStyle=:normal,"
+            + "fontVariant=:normal,fontWeight=:400,height=:363px,left=:auto,letterSpacing=:normal,lineHeight=:normal,"
+            + "listStyle=:,listStyleImage=:none,listStylePosition=:outside,listStyleType=:disc,margin=:,"
+            + "marginTop=:0px,marginRight=:0px,marginBottom=:0px,marginLeft=:0px,markerOffset=:none,marks=:,"
+            + "maxHeight=:none,maxWidth=:none,minHeight=:0px,minWidth=:0px,orphans=:,outline=:,"
+            + "outlineColor=:rgb(0, 0, 0),outlineStyle=:none,outlineWidth=:0px,overflow=:visible,padding=:,"
+            + "paddingTop=:0px,paddingRight=:0px,paddingBottom=:0px,paddingLeft=:0px,page=:,pageBreakAfter=:,"
+            + "pageBreakBefore=:,pageBreakInside=:,pause=:,pauseAfter=:,pauseBefore=:,pitch=:,pitchRange=:,"
+            + "position=:static,quotes=:,richness=:,right=:auto,size=:,speak=:,speakHeader=:,speakNumeral=:,"
+            + "speakPunctuation=:,speechRate=:,stress=:,tableLayout=:auto,textAlign=:start,textDecoration=:none,"
+            + "textIndent=:0px,textShadow=:,textTransform=:none,top=:auto,unicodeBidi=:normal,verticalAlign=:baseline,"
+            + "visibility=:visible,voiceFamily=:,volume=:,whiteSpace=:normal,widows=:,width=:1256px,"
+            + "wordSpacing=:normal,zIndex=:auto,MozAppearance=:none,MozBackgroundClip=:border,"
+            + "MozBackgroundInlinePolicy=:continuous,MozBackgroundOrigin=:padding,MozBinding=:none,"
+            + "MozBorderBottomColors=:none,MozBorderLeftColors=:none,MozBorderRightColors=:none,"
+            + "MozBorderTopColors=:none,MozBorderRadius=:,MozBorderRadiusTopleft=:0px,MozBorderRadiusTopright=:0px,"
+            + "MozBorderRadiusBottomleft=:0px,MozBorderRadiusBottomright=:0px,MozBoxAlign=:stretch,"
+            + "MozBoxDirection=:normal,MozBoxFlex=:0,MozBoxOrient=:horizontal,MozBoxOrdinalGroup=:1,MozBoxPack=:start,"
+            + "MozBoxSizing=:content-box,MozColumnCount=:auto,MozColumnWidth=:auto,MozColumnGap=:0px,"
+            + "MozFloatEdge=:content-box,MozForceBrokenImageIcon=:,MozImageRegion=:auto,MozMarginEnd=:,"
+            + "MozMarginStart=:,MozOpacity=:1,MozOutline=:,MozOutlineColor=:rgb(0, 0, 0),MozOutlineRadius=:,"
+            + "MozOutlineRadiusTopleft=:0px,MozOutlineRadiusTopright=:0px,MozOutlineRadiusBottomleft=:0px,"
+            + "MozOutlineRadiusBottomright=:0px,MozOutlineStyle=:none,MozOutlineWidth=:0px,MozOutlineOffset=:0px,"
+            + "MozPaddingEnd=:,MozPaddingStart=:,MozUserFocus=:none,MozUserInput=:auto,MozUserModify=:read-only,"
+            + "MozUserSelect=:auto,opacity=:1,outlineOffset=:0px,overflowX=:visible,overflowY=:visible,";
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, null);
+        final List<String> expectedValues = testGetComputedStyle3(expectedText);
+        final List<String> collectedValues =
+            testGetComputedStyle3(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText());
+        assertEquals(expectedValues, collectedValues);
+    }
+
+    private List<String> testGetComputedStyle3(final String string) throws Exception {
+        final List<String> values = new ArrayList<String>();
+
+        //string.split(",") will not work because we have values of 'rgb(0, 0, 0)'
+        int i = string.indexOf('=');
+        i = string.indexOf('=', i + 1);
+        for (int p0 = 0; i != -1;) {
+            final int p1 = string.lastIndexOf(',', i);
+            values.add(string.substring(p0, p1));
+            i = string.indexOf('=', i + 1);
+            p0 = p1 + 1;
+        }
+        
+        Collections.sort(values, new Comparator<String>() {
+        
+            public int compare(String o1, String o2) {
+                o1 = o1.substring(0, o1.indexOf('='));
+                o2 = o2.substring(0, o2.indexOf('='));
+                return o1.compareToIgnoreCase(o2);
+            }
+        
+        });
+        return values;
     }
 }

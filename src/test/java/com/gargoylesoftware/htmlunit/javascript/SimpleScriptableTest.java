@@ -128,6 +128,7 @@ public class SimpleScriptableTest extends WebTestCase {
         // Now pull out those names that we know don't have html equivalents
         names.remove("ActiveXObject");
         names.remove("BoxObject");
+        names.remove("ComputedCSSStyleDeclaration");
         names.remove("CSSStyleDeclaration");
         names.remove("Document");
         names.remove("DOMImplementation");
@@ -325,6 +326,7 @@ public class SimpleScriptableTest extends WebTestCase {
         testIsParentOf("Node", "XPathResult", false);
         testIsParentOf("Element", "HTMLElement", true);
         testIsParentOf("HTMLElement", "HTMLHtmlElement", true);
+        testIsParentOf("CSSStyleDeclaration", "ComputedCSSStyleDeclaration", true);
 
         //although Image != HTMLImageElement, they seem to be synonyms!!!
         testIsParentOf("Image", "HTMLImageElement", true);

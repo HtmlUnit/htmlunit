@@ -127,7 +127,7 @@ public class Stylesheet extends SimpleScriptable {
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
      */
-    void modifyIfNecessary(final CSSStyleDeclaration style, final HTMLElement element) {
+    void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
         final HtmlElement e = element.getHtmlElementOrDie();
         final HtmlPage page = e.getPage();
         final CSSRuleList rules = getWrappedSheet().getCssRules();
@@ -155,7 +155,7 @@ public class Stylesheet extends SimpleScriptable {
                         for (int k = 0; k < dec.getLength(); k++) {
                             final String name = dec.item(k);
                             final String value = dec.getPropertyValue(name);
-                            style.setStyleAttribute(name, value);
+                            style.setLocalStyleAttribute(name, value);
                         }
                     }
                     catch (final JaxenException je) {

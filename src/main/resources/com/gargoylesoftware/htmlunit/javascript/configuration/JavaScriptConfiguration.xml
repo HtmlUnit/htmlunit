@@ -56,6 +56,10 @@
         <function name="substringData"/>
     </class>
 
+    <class name="ComputedCSSStyleDeclaration" extends="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.ComputedCSSStyleDeclaration"
+        JSObject="true">
+    </class>
+
     <class name="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSStyleDeclaration" JSObject="true">
         <property name="azimuth" readable="true" writable="true">
             <browser name="Firefox"/>
