@@ -2306,7 +2306,7 @@ public class WindowTest extends WebTestCase {
             + "<div id='myDiv'></div>\n"
             + "</body></html>";
         
-        final String[] expectedAlerts = {""};
+        final String[] expectedAlerts = {"rgb(0, 0, 0)"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -2537,9 +2537,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testGetComputedStyle2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -2564,9 +2561,6 @@ public class WindowTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     public void testGetComputedStyle3() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -2641,7 +2635,7 @@ public class WindowTest extends WebTestCase {
             i = string.indexOf('=', i + 1);
             p0 = p1 + 1;
         }
-        values.add(string.substring(p0, string.length() -1));
+        values.add(string.substring(p0, string.length() - 1));
         
         Collections.sort(values, new Comparator<String>() {
         
