@@ -630,4 +630,29 @@ public class CSSStyleDeclarationTest extends WebTestCase2 {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testBorder() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "     var style = document.getElementById('myDiv').style;\n"
+            + "     alert(style.getPropertyValue('border-top-width'));\n"
+            + "     alert(style.getPropertyValue('border-top-style'));\n"
+            + "     alert(style.getPropertyValue('border-top-color'));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv' style='border: red 1px solid'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"1px", "solid", "red"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
