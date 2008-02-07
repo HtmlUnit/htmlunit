@@ -318,9 +318,6 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testIsParentOf() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testIsParentOf("Node", "Element", true);
         testIsParentOf("Document", "XMLDocument", true);
         testIsParentOf("Node", "XPathResult", false);
@@ -334,7 +331,7 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     private void testIsParentOf(final String object1, final String object2, final boolean status) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(isParentOf(" + object1 + ", " + object2 + "));\n"
             + "  }\n"
@@ -343,14 +340,14 @@ public class SimpleScriptableTest extends WebTestCase {
             + "   */\n"
             + "  function isParentOf(o1, o2) {\n"
             + "    o1.prototype.myCustomFunction = function() {};\n"
-            + "    return o1 != o2 && o2.prototype.myCustomFunction != undefined;\n"
+            + "    return o2.prototype.myCustomFunction != undefined;\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = {Boolean.toString(status)};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
