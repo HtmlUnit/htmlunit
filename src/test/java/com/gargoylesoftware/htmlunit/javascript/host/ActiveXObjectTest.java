@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link ActiveXObject}.
@@ -50,19 +52,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class ActiveXObjectTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public ActiveXObjectTest(final String name) {
-        super(name);
-    }
+public class ActiveXObjectTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testXMLHttpRequestFlavours() throws Exception {
         assertFalse(ActiveXObject.isXMLHttpRequest(null));
         assertFalse(ActiveXObject.isXMLHttpRequest("foo"));
@@ -80,6 +75,7 @@ public class ActiveXObjectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testXMLDocument() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

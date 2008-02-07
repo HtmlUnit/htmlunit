@@ -37,13 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -56,19 +60,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class CSSStyleDeclarationTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public CSSStyleDeclarationTest(final String name) {
-        super(name);
-    }
+public class CSSStyleDeclarationTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStyle_OneCssAttribute() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -96,6 +93,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStyle_MultipleCssAttributes() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -122,6 +120,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStyle_OneUndefinedCssAttribute() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -149,6 +148,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * it may have some side effects if configuration is incorrect.
      * @throws Exception if the test fails
      */
+    @Test
     public void testMozillaStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -174,6 +174,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testIEStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -198,6 +199,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * Checks that the scopes are correctly set on the style element (wasn't working in CVS snapshot 2005.01.23)
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnclickAccessStyle() throws Exception {
         final String content = "<html><head><title>Color Change Page</title>\n"
              + "<script>\n"
@@ -218,6 +220,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAccessProperties() throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
                 + "function doTest() {\n"
@@ -242,6 +245,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * Regression test for bug 1592299
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetStylePropertyNonString() throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
                 + "function doTest() {\n"
@@ -263,6 +267,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetPropertyValue() throws Exception {
         testGetPropertyValue(BrowserVersion.FIREFOX_2);
         try {
@@ -294,6 +299,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetPropertyValue_WithDash() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
@@ -320,6 +326,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStyleFilter_IE() throws Exception {
         testStyleFilter(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"", "alpha(opacity=50)"});
     }
@@ -327,6 +334,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStyleFilter_FF() throws Exception {
         testStyleFilter(BrowserVersion.FIREFOX_2, new String[] {"undefined", "undefined"});
     }
@@ -351,6 +359,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testSetExpression() throws Exception {
         testSetExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -378,6 +387,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testRemoveExpression() throws Exception {
         testRemoveExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -406,6 +416,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testBorderStyles() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -442,6 +453,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testProperties() throws Exception {
         testProperties(BrowserVersion.INTERNET_EXPLORER_7_0, "clear posRight backgroundRepeat borderTopStyle "
             + "marginTop fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor "
@@ -519,6 +531,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * Test types of properties.
      * @throws Exception if the test fails
      */
+    @Test
     public void testProperties2() throws Exception {
         testProperties2(BrowserVersion.INTERNET_EXPLORER_7_0, "clear backgroundRepeat borderTopStyle marginTop "
             + "fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor overflowX "
@@ -593,6 +606,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCSSText() throws Exception {
         if (notYetImplemented()) {
             return;

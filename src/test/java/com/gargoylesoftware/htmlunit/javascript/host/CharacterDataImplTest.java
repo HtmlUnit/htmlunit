@@ -41,11 +41,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -54,19 +56,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author David K. Taylor
  */
-public class CharacterDataImplTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public CharacterDataImplTest(final String name) {
-        super(name);
-    }
+public class CharacterDataImplTest extends WebTestCase2 {
 
     /**
      * Regression test for inline text nodes
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_textNode() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -105,6 +101,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for setting the data property of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_setData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -141,6 +138,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for setting the nodeValue property of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_setNodeValue() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -177,6 +175,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for appendData of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_appendData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -210,6 +209,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for deleteData of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_deleteData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -243,6 +243,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for insertData of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_insertData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -276,6 +277,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for replaceData of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_replaceData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -309,6 +311,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for substringData of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testCharacterDataImpl_substringData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -342,6 +345,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * Regression test for substringData of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testTextImpl_splitText() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
