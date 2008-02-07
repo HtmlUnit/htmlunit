@@ -41,7 +41,6 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.Map;
 import java.util.SortedMap;
-import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -143,7 +142,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return empty string if noting found
      */
     protected String getStyleAttribute(final String name, final boolean camelCase) {
-        final String value = (String) getStyleMap(camelCase).get(name);
+        final String value = getStyleMap(camelCase).get(name);
         if (value == null) {
             return "";
         }
@@ -157,21 +156,27 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param name the attribute name
      * @param newValue the attribute value
      */
-    protected void setStyleAttribute(final String name, final String newValue) {
+    protected void setStyleAttribute(String name, final String newValue) {
         final Map<String, String> styleMap = getStyleMap(true);
-        styleMap.put(name, newValue);
-
-        final StringBuilder buffer = new StringBuilder();
-        for (final Map.Entry<String, String> entry : styleMap.entrySet()) {
-            buffer.append(" ");
-            buffer.append(entry.getKey());
-            buffer.append(": ");
-            buffer.append(entry.getValue());
-            buffer.append(";");
+        if (newValue.trim().length() == 0) {
+            styleMap.remove(name);
         }
-        buffer.deleteCharAt(0);
+        else {
+            name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
+            styleMap.put(name, newValue);
 
-        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+            final StringBuilder buffer = new StringBuilder();
+            for (final Map.Entry<String, String> entry : styleMap.entrySet()) {
+                buffer.append(" ");
+                buffer.append(entry.getKey());
+                buffer.append(": ");
+                buffer.append(entry.getValue());
+                buffer.append(";");
+            }
+            buffer.deleteCharAt(0);
+
+            jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
+        }
     }
 
     /**
@@ -185,14 +190,19 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     protected SortedMap<String, String> getStyleMap(final boolean camelCase) {
         final SortedMap<String, String> styleMap = new TreeMap<String, String>();
         final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
-        final StringTokenizer tokenizer = new StringTokenizer(styleAttribute, ";");
-        while (tokenizer.hasMoreTokens()) {
-            final String token = tokenizer.nextToken();
+        for (final String token : styleAttribute.split(";")) {
             final int index = token.indexOf(":");
             if (index != -1) {
                 String key = token.substring(0, index).trim();
-                if (!camelCase) {
-                    key = key.replaceAll("([A-Z])", "-$1").toLowerCase();
+                if (camelCase) {
+                    final StringBuilder buffer = new StringBuilder(key);
+                    for (int i = 0; i < buffer.length() - 1; i++) {
+                        if (buffer.charAt(i) == '-') {
+                            buffer.deleteCharAt(i);
+                            buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
+                        }
+                    }
+                    key = buffer.toString();
                 }
                 final String value = token.substring(index + 1).trim();
                 styleMap.put(key, value);
@@ -846,31 +856,31 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_cssFloat() {
-        return getStyleAttribute("cssFloat", true);
+        return getStyleAttribute("float", true);
     }
 
     /**
      * Sets the "cssFloat" style attribute.
-     * @param cssFloat the new attribute.
+     * @param value the new attribute.
      */
-    public void jsxSet_cssFloat(final String cssFloat) {
-        setStyleAttribute("cssFloat", cssFloat);
+    public void jsxSet_cssFloat(final String value) {
+        setStyleAttribute("float", value);
     }
 
     /**
-     * Gets the "cssText" style attribute.
-     * @return the style attribute
+     * Returns the actual text of the style.
+     * @return the actual text of the style.
      */
     public String jsxGet_cssText() {
-        return getStyleAttribute("cssText", true);
+        return jsElement_.getHtmlElementOrDie().getAttribute("style");
     }
 
     /**
-     * Sets the "cssText" style attribute.
-     * @param cssText the new attribute.
+     * Sets the actual text of the style.
+     * @param value the new text.
      */
-    public void jsxSet_cssText(final String cssText) {
-        setStyleAttribute("cssText", cssText);
+    public void jsxSet_cssText(final String value) {
+        jsElement_.getHtmlElementOrDie().setAttribute("style", value);
     }
 
     /**
@@ -3178,15 +3188,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_styleFloat() {
-        return getStyleAttribute("styleFloat", true);
+        return getStyleAttribute("float", true);
     }
 
     /**
      * Sets the "styleFloat" style attribute.
-     * @param styleFloat the new attribute.
+     * @param value the new attribute.
      */
-    public void jsxSet_styleFloat(final String styleFloat) {
-        setStyleAttribute("styleFloat", styleFloat);
+    public void jsxSet_styleFloat(final String value) {
+        setStyleAttribute("float", value);
     }
 
     /**
@@ -3744,6 +3754,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return empty string if nothing found
      */
     public String jsxFunction_getPropertyValue(final String name) {
+//        final Object property = getProperty(this, name);
+//        if (property instanceof String) {
+//            return (String) property;
+//        }
         return getStyleAttribute(name, false);
     }
 

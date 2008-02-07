@@ -608,21 +608,23 @@ public class CSSStyleDeclarationTest extends WebTestCase2 {
      */
     @Test
     public void testCSSText() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var style = document.getElementById('myDiv').style;\n"
             + "     alert(style.fontSize);\n"
-            + "     style.cssText += 'font-size: 15px';\n"
+            + "     alert(style.fontStyle);\n"
+            + "     style.cssText = 'font-size: 15px; font-style: italic';\n"
             + "     alert(style.fontSize);\n"
+            + "     alert(style.fontStyle);\n"
+            + "     style.cssText = 'font-style: italic';\n"
+            + "     alert(style.fontSize);\n"
+            + "     alert(style.fontStyle);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"", "15px"};
+        final String[] expectedAlerts = {"", "", "15px", "italic", "", "italic"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
