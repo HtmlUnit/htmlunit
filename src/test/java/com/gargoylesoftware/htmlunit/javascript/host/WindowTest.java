@@ -2575,7 +2575,7 @@ public class WindowTest extends WebTestCase {
             + "  for (var i in e.style) {\n"
             + "    var s1 = eval('e.style.' + i);\n"
             + "    var s2 = eval('window.getComputedStyle(e,null).' + i);\n"
-            + "    if(typeof s1 != 'function')\n"
+            + "    if(typeof s1 == 'string')\n"
             + "      str += i + '=' + s1 + ':' + s2 + ',';\n"
             + "  }\n"
             + "  document.getElementById('myTextarea').value = str;\n"
@@ -2586,7 +2586,7 @@ public class WindowTest extends WebTestCase {
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
-        final String expectedText = "length=0:112,cssText=:,parentRule=null:null,azimuth=:,background=:,"
+        final String expectedText = "cssText=:,azimuth=:,background=:,"
             + "backgroundAttachment=:scroll,backgroundColor=:transparent,backgroundImage=:none,"
             + "backgroundPosition=:,backgroundRepeat=:repeat,border=:,borderCollapse=:separate,borderColor=:,"
             + "borderSpacing=:0px 0px,borderStyle=:,borderTop=:,borderRight=:,borderBottom=:,borderLeft=:,"
@@ -2634,12 +2634,14 @@ public class WindowTest extends WebTestCase {
         //string.split(",") will not work because we have values of 'rgb(0, 0, 0)'
         int i = string.indexOf('=');
         i = string.indexOf('=', i + 1);
-        for (int p0 = 0; i != -1;) {
+        int p0;
+        for (p0 = 0; i != -1;) {
             final int p1 = string.lastIndexOf(',', i);
             values.add(string.substring(p0, p1));
             i = string.indexOf('=', i + 1);
             p0 = p1 + 1;
         }
+        values.add(string.substring(p0, string.length() -1));
         
         Collections.sort(values, new Comparator<String>() {
         
