@@ -143,23 +143,21 @@ public class Stylesheet extends SimpleScriptable {
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
                     final String xpath = translateToXPath(selector);
-                    if (xpath == null) {
-                        continue;
-                    }
-                    try {
-                        final List< ? extends Object> results = page.getByXPath(xpath);
-                        if (!results.contains(e)) {
-                            continue;
+                    if (xpath != null) {
+                        try {
+                            final List< ? extends Object> results = page.getByXPath(xpath);
+                            if (results.contains(e)) {
+                                final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
+                                for (int k = 0; k < dec.getLength(); k++) {
+                                    final String name = dec.item(k);
+                                    final String value = dec.getPropertyValue(name);
+                                    style.setLocalStyleAttribute(name, value);
+                                }
+                            }
                         }
-                        final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
-                        for (int k = 0; k < dec.getLength(); k++) {
-                            final String name = dec.item(k);
-                            final String value = dec.getPropertyValue(name);
-                            style.setLocalStyleAttribute(name, value);
+                        catch (final JaxenException je) {
+                            getLog().error(je.getMessage(), je);
                         }
-                    }
-                    catch (final JaxenException je) {
-                        getLog().error(je.getMessage(), je);
                     }
                 }
             }
