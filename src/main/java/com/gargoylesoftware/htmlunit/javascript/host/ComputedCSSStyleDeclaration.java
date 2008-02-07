@@ -1028,7 +1028,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_width() {
-        return getValue(super.jsxGet_width(), "1256px");
+        final String defaultWidth;
+        if (jsxGet_display().equals("none")) {
+            defaultWidth = "auto";
+        }
+        else {
+            defaultWidth = "1256px";
+        }
+        return getValue(super.jsxGet_width(), defaultWidth);
     }
 
     /**
