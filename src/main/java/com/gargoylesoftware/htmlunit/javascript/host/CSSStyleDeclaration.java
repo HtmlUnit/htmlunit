@@ -42,6 +42,8 @@ import java.text.ParseException;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -195,20 +197,33 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             if (index != -1) {
                 String key = token.substring(0, index).trim();
                 if (camelCase) {
-                    final StringBuilder buffer = new StringBuilder(key);
-                    for (int i = 0; i < buffer.length() - 1; i++) {
-                        if (buffer.charAt(i) == '-') {
-                            buffer.deleteCharAt(i);
-                            buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
-                        }
-                    }
-                    key = buffer.toString();
+                    key = camelize(key);
                 }
                 final String value = token.substring(index + 1).trim();
                 styleMap.put(key, value);
             }
         }
         return styleMap;
+    }
+
+    /**
+     * Transform the given string from delimiter-separated (e.g. <tt>font-size</tt>)
+     * to camel cased (e.g. <tt>fontSize</tt>).
+     * @param string the string to camelize.
+     * @return the transformed string.
+     */
+    private static String camelize(final String string) {
+        if (string == null) {
+            return null;
+        }
+        final StringBuilder buffer = new StringBuilder(string);
+        for (int i = 0; i < buffer.length() - 1; i++) {
+            if (buffer.charAt(i) == '-') {
+                buffer.deleteCharAt(i);
+                buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
+            }
+        }
+        return buffer.toString();
     }
 
     /**
@@ -408,7 +423,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderBottomColor() {
-        return getStyleAttribute("borderBottomColor", true);
+        String value = getStyleAttribute("borderBottomColor", true);
+        if (value.length() == 0) {
+            value = findColor(getStyleAttribute("borderBottom", true));
+            if (value == null) {
+                value = findColor(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -424,7 +449,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderBottomStyle() {
-        return getStyleAttribute("borderBottomStyle", true);
+        String value = getStyleAttribute("borderBottomStyle", true);
+        if (value.length() == 0) {
+            value = findBorderStyle(getStyleAttribute("borderBottom", true));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -440,7 +475,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderBottomWidth() {
-        return getStyleAttribute("borderBottomWidth", true);
+        String value = getStyleAttribute("borderBottomWidth", true);
+        if (value.length() == 0) {
+            value = findBorderWidth(getStyleAttribute("borderBottom", true));
+            if (value == null) {
+                value = findBorderWidth(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -504,7 +549,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderLeftColor() {
-        return getStyleAttribute("borderLeftColor", true);
+        String value = getStyleAttribute("borderLeftColor", true);
+        if (value.length() == 0) {
+            value = findColor(getStyleAttribute("borderLeft", true));
+            if (value == null) {
+                value = findColor(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -520,7 +575,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderLeftStyle() {
-        return getStyleAttribute("borderLeftStyle", true);
+        String value = getStyleAttribute("borderLeftStyle", true);
+        if (value.length() == 0) {
+            value = findBorderStyle(getStyleAttribute("borderLeft", true));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -536,7 +601,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderLeftWidth() {
-        return getStyleAttribute("borderLeftWidth", true);
+        String value = getStyleAttribute("borderLeftWidth", true);
+        if (value.length() == 0) {
+            value = findBorderWidth(getStyleAttribute("borderLeft", true));
+            if (value == null) {
+                value = findBorderWidth(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -568,7 +643,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderRightColor() {
-        return getStyleAttribute("borderRightColor", true);
+        String value = getStyleAttribute("borderRightColor", true);
+        if (value.length() == 0) {
+            value = findColor(getStyleAttribute("borderRight", true));
+            if (value == null) {
+                value = findColor(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -584,7 +669,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderRightStyle() {
-        return getStyleAttribute("borderRightStyle", true);
+        String value = getStyleAttribute("borderRightStyle", true);
+        if (value.length() == 0) {
+            value = findBorderStyle(getStyleAttribute("borderRight", true));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -600,7 +695,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderRightWidth() {
-        return getStyleAttribute("borderRightWidth", true);
+        String value = getStyleAttribute("borderRightWidth", true);
+        if (value.length() == 0) {
+            value = findBorderWidth(getStyleAttribute("borderRight", true));
+            if (value == null) {
+                value = findBorderWidth(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -664,7 +769,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderTopColor() {
-        return getStyleAttribute("borderTopColor", true);
+        String value = getStyleAttribute("borderTopColor", true);
+        if (value.length() == 0) {
+            value = findColor(getStyleAttribute("borderTop", true));
+            if (value == null) {
+                value = findColor(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -680,7 +795,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderTopStyle() {
-        return getStyleAttribute("borderTopStyle", true);
+        String value = getStyleAttribute("borderTopStyle", true);
+        if (value.length() == 0) {
+            value = findBorderStyle(getStyleAttribute("borderTop", true));
+            if (value == null) {
+                value = findBorderStyle(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -696,7 +821,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_borderTopWidth() {
-        return getStyleAttribute("borderTopWidth", true);
+        String value = getStyleAttribute("borderTopWidth", true);
+        if (value.length() == 0) {
+            value = findBorderWidth(getStyleAttribute("borderTop", true));
+            if (value == null) {
+                value = findBorderWidth(getStyleAttribute("border", true));
+            }
+            if (value == null) {
+                value = "";
+            }
+        }
+        return value;
     }
 
     /**
@@ -3754,6 +3889,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return empty string if nothing found
      */
     public String jsxFunction_getPropertyValue(final String name) {
+        if (name != null && name.contains("-")) {
+            final Object value = getProperty(this, camelize(name));
+            if (value instanceof String) {
+                return (String) value;
+            }
+        }
         return getStyleAttribute(name, false);
     }
 
@@ -3780,4 +3921,129 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         return true;
     }
 
+    /**
+     * Searches for any color notation in the specified text.
+     * @param text the string to search in.
+     * @return the string of the color if found, null otherwise.
+     */
+    private static String findColor(final String text) {
+        final Pattern p = Pattern.compile("(rgb.*?\\(.*?\\d{1,3}.*?,.*?\\d{1,3}.*?,.*?\\d{1,3}.*?\\))");
+        final Matcher m = p.matcher(text);
+        if (m.find()) {
+            return m.group(1);
+        }
+        final String[] tokens = text.split(" ");
+        for (final String token : tokens) {
+            if (isColorKeyword(token)) {
+                return token;
+            }
+            else if (isColorHexadecimal(token)) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a border style in the specified text.
+     * @param text the string to search in.
+     * @return the border style if found, null otherwise.
+     */
+    private static String findBorderStyle(final String text) {
+        for (final String token : text.split(" ")) {
+            if (isBorderStyle(token)) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a border width in the specified text.
+     * @param text the string to search in.
+     * @return the border width if found, null otherwise.
+     */
+    private static String findBorderWidth(final String text) {
+        for (final String token : text.split(" ")) {
+            if (isBorderWidth(token)) {
+                return token;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns if the specified token is an RGB in hexadecimal notation.
+     * @param token the token to check.
+     * @return whether the token is a color in hexadecimal notation or not.
+     */
+    private static boolean isColorHexadecimal(final String token) {
+        return token.toLowerCase().matches("#([0-9a-f]{3}|[0-9a-f]{6})");
+    }
+
+    /**
+     * Returns if the specified token is a reserved color keyword.
+     * @param token the token to check.
+     * @return whether the token is a reserved color keyword or not.
+     */
+    private static boolean isColorKeyword(final String token) {
+        return token.equalsIgnoreCase("aqua") || token.equalsIgnoreCase("black")
+            || token.equalsIgnoreCase("blue") || token.equalsIgnoreCase("fuchsia")
+            || token.equalsIgnoreCase("gray") || token.equalsIgnoreCase("green")
+            || token.equalsIgnoreCase("lime") || token.equalsIgnoreCase("maroon")
+            || token.equalsIgnoreCase("navy") || token.equalsIgnoreCase("olive")
+            || token.equalsIgnoreCase("purple") || token.equalsIgnoreCase("red")
+            || token.equalsIgnoreCase("silver") || token.equalsIgnoreCase("teal")
+            || token.equalsIgnoreCase("white") || token.equalsIgnoreCase("yellow");
+    }
+    
+    /**
+     * Returns if the specified token is a border style.
+     * @param token the token to check.
+     * @return whether the token is a border style or not.
+     */
+    private static boolean isBorderStyle(final String token) {
+        return token.equalsIgnoreCase("none") || token.equalsIgnoreCase("hidden")
+            || token.equalsIgnoreCase("dotted") || token.equalsIgnoreCase("dashed")
+            || token.equalsIgnoreCase("solid") || token.equalsIgnoreCase("double")
+            || token.equalsIgnoreCase("groove") || token.equalsIgnoreCase("ridge")
+            || token.equalsIgnoreCase("inset") || token.equalsIgnoreCase("outset");
+    }
+
+    /**
+     * Returns if the specified token is a border width.
+     * @param token the token to check.
+     * @return whether the token is a border width or not.
+     */
+    private static boolean isBorderWidth(final String token) {
+        return token.equalsIgnoreCase("thin") || token.equalsIgnoreCase("medium")
+            || token.equalsIgnoreCase("thick ") || isLength(token);
+    }
+
+    /**
+     * Returns if the specified token is a length.
+     * @param token the token to check.
+     * @return whether the token is a length or not.
+     */
+    private static boolean isLength(String token) {
+        if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")
+            || token.endsWith("cm") || token.endsWith("mm") || token.endsWith("pt") || token.endsWith("pc")
+            || token.endsWith("%")) {
+            
+            if (token.endsWith("%")) {
+                token = token.substring(0, token.length() - 1);
+            }
+            else {
+                token = token.substring(0, token.length() - 2);
+            }
+            try {
+                Float.parseFloat(token);
+                return true;
+            }
+            catch (final Exception e) {
+                //ignore
+            }
+        }
+        return false;
+    }
 }
