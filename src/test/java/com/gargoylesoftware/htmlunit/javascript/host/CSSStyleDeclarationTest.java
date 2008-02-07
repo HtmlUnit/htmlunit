@@ -589,4 +589,29 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         Collections.sort(collectedStyles);
         assertEquals(expectedStyles, collectedStyles);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testCSSText() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "     var style = document.getElementById('myDiv').style;\n"
+            + "     alert(style.fontSize);\n"
+            + "     style.cssText += 'font-size: 15px';\n"
+            + "     alert(style.fontSize);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"", "15px"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
 }
