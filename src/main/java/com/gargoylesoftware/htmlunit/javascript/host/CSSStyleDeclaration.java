@@ -3754,10 +3754,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return empty string if nothing found
      */
     public String jsxFunction_getPropertyValue(final String name) {
-//        final Object property = getProperty(this, name);
-//        if (property instanceof String) {
-//            return (String) property;
-//        }
         return getStyleAttribute(name, false);
     }
 
