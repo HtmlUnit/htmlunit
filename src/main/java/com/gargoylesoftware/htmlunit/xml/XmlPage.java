@@ -43,7 +43,6 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -91,6 +90,9 @@ public class XmlPage extends SgmlPage {
     public XmlPage(final Node node, final WebWindow enclosingWindow) {
         super(null, enclosingWindow);
         node_ = node;
+        if (node_ != null) {
+            XmlUtil.appendChild(this, this, node_);
+        }
     }
 
     /**
@@ -115,6 +117,9 @@ public class XmlPage extends SgmlPage {
             else {
                 node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();
             }
+            if (node_ != null) {
+                XmlUtil.appendChild(this, this, node_);
+            }
         }
         catch (final SAXException e) {
             getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
@@ -125,24 +130,6 @@ public class XmlPage extends SgmlPage {
         catch (final ParserConfigurationException e) {
             getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setScriptObject(final ScriptableObject scriptObject) {
-        super.setScriptObject(scriptObject);
-        if (node_ != null) {
-            XmlUtil.appendChild(this, this, node_);
-        }
-    }
-
-    /**
-     * Clean up this page.
-     */
-    @Override
-    public void cleanUp() {
     }
 
     /**

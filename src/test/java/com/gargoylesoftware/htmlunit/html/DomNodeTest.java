@@ -584,9 +584,6 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     public void testGetByXPath_XML() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String xml
             = "<books>\n"
             + "  <book>\n"

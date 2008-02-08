@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="fix" dev="asashour" id="1883395">
+                XmlPage: correct XPath handling (#1883395).
+            </action>
             <action type="update" dev="mguillem">
                 Fixed User-Agent header for IE6.
             </action>

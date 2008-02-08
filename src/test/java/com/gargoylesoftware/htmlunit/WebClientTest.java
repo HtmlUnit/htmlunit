@@ -109,8 +109,7 @@ public class WebClientTest extends WebTestCase2 {
                 if (file.getName().endsWith(".java")) {
                     final int index = new File("src/test/java").getAbsolutePath().length();
                     String name = file.getAbsolutePath();
-                    name = name.substring(0, name.length() - 5);
-                    name = name.substring(index + 1);
+                    name = name.substring(index + 1, name.length() - 5);
                     name = name.replace(File.separatorChar, '.');
                     final Class< ? > clazz = Class.forName(name);
                     for (Constructor< ? > ctor : clazz.getConstructors()) {
