@@ -1084,7 +1084,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the computed style.
      */
     public Object jsxFunction_getComputedStyle(final Node element, final String pseudoElt) {
-
         final HTMLElement e = (HTMLElement) element;
         final CSSStyleDeclaration original = (CSSStyleDeclaration) e.jsxGet_style();
         final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(original);

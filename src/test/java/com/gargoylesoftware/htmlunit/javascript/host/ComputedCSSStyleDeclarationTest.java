@@ -179,10 +179,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyleElements() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void testStyleElement() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"

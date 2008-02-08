@@ -69,6 +69,7 @@ import com.steadystate.css.parser.SelectorListImpl;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class Stylesheet extends SimpleScriptable {
 
@@ -227,9 +228,12 @@ public class Stylesheet extends SimpleScriptable {
                 return null;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                final String e = translateToXPath(conditional.getSimpleSelector());
+                String e = translateToXPath(conditional.getSimpleSelector());
                 final String cond = translateToXPath(conditional.getCondition());
                 if (cond != null) {
+                    if (e.equals("*")) {
+                        e = "//*";
+                    }
                     response = e + "[" + cond + "]";
                 }
                 else {
