@@ -209,10 +209,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase2 {
     /**
      * There are two points in this case:
      * <ol>
-     *  <li>
-     *    If the id of "style_test_1" is changed to something like "myDiv1", HtmlUnit will differ!
-     *    It needs investigations more (mostly in CSS parser library).
-     *  </li>
+     *  <li>https://sourceforge.net/tracker/index.php?func=detail&aid=1566274&group_id=82996&atid=567969</li>
      *  <li>
      *    No idea why Firefox alert "pointer" for the "myDiv2", the rule should only apply to "myDiv1"
      *  </li>
