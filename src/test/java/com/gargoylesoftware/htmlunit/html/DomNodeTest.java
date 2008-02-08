@@ -43,8 +43,11 @@ import java.util.List;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  *  Tests for {@link DomNode}.
@@ -575,5 +578,30 @@ public class DomNodeTest extends WebTestCase {
         myButton.click();
         final String[] expectedValues2 = {"in listener 1", "in listener 2"};
         assertEquals(expectedValues2, l);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetByXPath_XML() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String xml
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final WebClient client = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, xml, "text/xml");
+        client.setWebConnection(webConnection);
+        final XmlPage page = (XmlPage) client.getPage(URL_FIRST);
+
+        final List< ? > results = page.getByXPath("//title");
+        assertEquals(1, results.size());
     }
 }
