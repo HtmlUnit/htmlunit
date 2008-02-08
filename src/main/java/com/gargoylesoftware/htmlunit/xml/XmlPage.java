@@ -189,11 +189,11 @@ public class XmlPage extends SgmlPage {
     }
 
     /**
-     * Throws an <tt>UnsupportedOperationException</tt>.
-     * @return {@inheritDoc}
+     * {@inheritDoc}.
+     * Exactly behaves as {@link #asXml()}.
      */
     @Override
     public String asText() {
-        throw new UnsupportedOperationException("XmlPage does not support asText(), please use asXml() instead");
+        return asXml();
     }
 }
