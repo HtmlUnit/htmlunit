@@ -37,11 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
@@ -253,6 +255,44 @@ public class XmlElement extends DomNamespaceNode {
         final XmlAttr newAttr = new XmlAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
         return newAttr;
+    }
+
+    /**
+     * recursively write the XML data for the node tree starting at <code>node</code>
+     *
+     * @param indent white space to indent child nodes
+     * @param printWriter writer where child nodes are written
+     */
+    @Override
+    protected void printXml(final String indent, final PrintWriter printWriter) {
+        final boolean hasChildren = (getFirstDomChild() != null);
+        printWriter.print(indent + "<");
+        printOpeningTagContentAsXml(printWriter);
+
+        if (!hasChildren) {
+            printWriter.println("/>");
+        }
+        else {
+            printWriter.println(">");
+            printChildrenAsXml(indent, printWriter);
+            printWriter.println(indent + "</" + getTagName() + ">");
+        }
+    }
+
+    /**
+     * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
+     * and its attributes in xml format.
+     * @param printWriter the writer to print in
+     */
+    protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
+        printWriter.print(getTagName());
+        for (final String name : attributes_.keySet()) {
+            printWriter.print(" ");
+            printWriter.print(name);
+            printWriter.print("=\"");
+            printWriter.print(StringEscapeUtils.escapeXml(((XmlAttr) attributes_.get(name)).getNodeValue()));
+            printWriter.print("\"");
+        }
     }
 
 }

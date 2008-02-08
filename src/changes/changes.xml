@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="fix" dev="asashour">
+                XmlPage: fix asText() and asXml().
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: add basic support for document.queryCommandSupported.
             </action>

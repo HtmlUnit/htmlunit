@@ -196,4 +196,12 @@ public class XmlPage extends SgmlPage {
     public String asText() {
         return asXml();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String asXml() {
+        return getDocumentXmlElement().asXml();
+    }
 }
