@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class StyleSheetTest extends WebTestCase {
 
@@ -70,7 +71,7 @@ public class StyleSheetTest extends WebTestCase {
 
         final SelectorList selectors = stylesheet.parseSelectors(new InputSource(new StringReader(s)));
         final Selector selector = selectors.item(0);
-        assertEquals("*[contains( concat(' ', @class, ' '), concat(' ', 'yui-log', ' ') )]//input",
+        assertEquals("//*[contains( concat(' ', @class, ' '), concat(' ', 'yui-log', ' ') )]//input",
             stylesheet.translateToXPath(selector));
     }
 }
