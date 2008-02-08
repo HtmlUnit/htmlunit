@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="add" dev="mguillem">
+                JavaScript: add basic support for document.queryCommandSupported.
+            </action>
             <action type="fix" dev="asashour" id="1883395">
                 XmlPage: correct XPath handling (#1883395).
             </action>

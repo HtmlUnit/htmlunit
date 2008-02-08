@@ -118,6 +118,26 @@ public class Document extends Node {
      * have a no-arg constructor.
      */
     private static final Map<String, Class< ? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
+    
+    private static final String[] EXECUTE_CMDS_IE_ARR = {
+        "2D-Position", "AbsolutePosition", "BackColor", "BlockDirLTR", "BlockDirRTL",
+        "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
+        "CreateLink", "Cut", "Delete", "DirLTR", "DirRTL",
+        "EditMode", "FontName", "FontSize", "ForeColor", "FormatBlock",
+        "Indent", "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
+        "InsertHorizontalRule", "InsertIFrame", "InsertImage", "InsertInputButton", "InsertInputCheckbox",
+        "InsertInputFileUpload", "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
+        "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee", "InsertOrderedList",
+        "InsertParagraph", "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea", "InsertUnorderedList",
+        "Italic", "JustifyCenter", "JustifyFull", "JustifyLeft", "JustifyNone",
+        "JustifyRight", "LiveResize", "MultipleSelection", "Open", "Outdent",
+        "OverWrite", "Paste", "PlayImage", "Print", "Redo",
+        "Refresh", "RemoveFormat", "RemoveParaFormat", "SaveAs", "SelectAll",
+        "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
+        "StrikeThrough", "Subscript", "Superscript", "UnBookmark", "Underline",
+        "Undo", "Unlink", "Unselect"
+    };
+    private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(EXECUTE_CMDS_IE_ARR);
 
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private HTMLCollection forms_; // has to be a member to have equality (==) working
@@ -1302,8 +1322,22 @@ public class Document extends Node {
             xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
         }
         catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Error using exression: " + expression);
+            throw Context.reportRuntimeError("Error using expression: " + expression);
         }
         return xPathResult;
+    }
+
+    /**
+     * Indicates if the command is supported.
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536681(VS.85).aspx">MSDN documentation</a>
+     * @param cmd the command identifier
+     * @return <code>true></code> if the command is supported
+     */
+    public boolean jsxFunction_queryCommandSupported(final String cmd) {
+        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            // strangely the function exists in my FF 2.0.0.11 but always throws an exception
+            throw Context.reportRuntimeError("queryCommandSupported not really supported by FF");
+        }
+        return EXECUTE_CMDS_IE.contains(cmd);
     }
 }

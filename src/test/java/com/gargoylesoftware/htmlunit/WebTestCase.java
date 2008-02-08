@@ -563,7 +563,7 @@ public abstract class WebTestCase extends BaseTestCase {
             final List<String> expected = readChildElementsText(want);
             final List<String> actual = readChildElementsText(got);
             
-            assertEquals(expected, actual);
+            assertEquals("Bad results for " + browserKey, expected, actual);
         }
     }
 

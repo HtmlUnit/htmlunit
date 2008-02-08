@@ -2849,4 +2849,10 @@ public class DocumentTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testQueryCommandSupported() throws Exception {
+        testHTMLFile("DocumentTest_queryCommandSupported.html");
+    }
 }
