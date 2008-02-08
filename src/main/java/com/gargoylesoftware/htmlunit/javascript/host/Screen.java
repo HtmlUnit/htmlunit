@@ -72,8 +72,8 @@ public class Screen extends SimpleScriptable {
     public Screen() {
         left_ = 0;
         top_ = 0;
-        width_ = 800;
-        height_ = 600;
+        width_ = 1024;
+        height_ = 768;
         colorDepth_ = 24;
         bufferDepth_ = 24;
         dpi_ = 96;
