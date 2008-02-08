@@ -2035,4 +2035,26 @@ public class HTMLElementTest extends WebTestCase {
     public void testDispatchEvent2() throws Exception {
         testHTMLFile("HTMLElementTest_dispatchEvent2.html");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    public void testGetComponentVersion() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  document.body.style.behavior='url(#default#clientCaps)';\n"
+            + "  var ver=document.body.getComponentVersion('{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}','ComponentID');\n"
+            + "  alert(ver.length);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"0"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
