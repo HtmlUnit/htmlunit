@@ -58,6 +58,7 @@ public class HtmlStyleTest extends WebTestCase2 {
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"

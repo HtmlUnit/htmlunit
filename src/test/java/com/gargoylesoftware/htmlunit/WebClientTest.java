@@ -45,6 +45,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,6 +62,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
@@ -84,6 +88,50 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  */
 public class WebClientTest extends WebTestCase2 {
+
+    /**
+     * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testTests() throws Exception {
+        testTests(new File("src/test/java"));
+    }
+
+    private void testTests(final File dir) throws Exception {
+        for (final File file : dir.listFiles()) {
+            if (file.isDirectory()) {
+                if (!file.getName().equals(".svn")) {
+                    testTests(file);
+                }
+            }
+            else {
+                if (file.getName().endsWith(".java")) {
+                    final int index = new File("src/test/java").getAbsolutePath().length();
+                    String name = file.getAbsolutePath();
+                    name = name.substring(0, name.length() - 5);
+                    name = name.substring(index + 1);
+                    name = name.replace(File.separatorChar, '.');
+                    final Class< ? > clazz = Class.forName(name);
+                    for (Constructor< ? > ctor : clazz.getConstructors()) {
+                        if (ctor.getParameterTypes().length == 0) {
+                            for (final Method method : clazz.getDeclaredMethods()) {
+                                if (Modifier.isPublic(method.getModifiers())
+                                    && method.getAnnotation(Before.class) == null
+                                    && method.getAnnotation(After.class) == null
+                                    && method.getAnnotation(Test.class) == null
+                                    && method.getReturnType() == void.class
+                                    && method.getParameterTypes().length == 0) {
+                                    fail("Method \"" + method.getName()
+                                            + "\" in " + name + " does not declare @Test annoatation");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Test the situation where credentials are required but they haven't been specified.
