@@ -105,9 +105,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     private static final long serialVersionUID = -6864034414262085851L;
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
-    private static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
-    private static final int BEHAVIOR_ID_HOMEPAGE = 1;
-    private static final int BEHAVIOR_ID_DOWNLOAD = 2;
+    static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
+    static final int BEHAVIOR_ID_HOMEPAGE = 1;
+    static final int BEHAVIOR_ID_DOWNLOAD = 2;
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
@@ -1122,9 +1122,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param id the identifier for the component whose version is to be returned
      * @param idType the type of identifier specified
      * @return the version of the specified component.
-     * Current implementation always return "1.0"
      */
     public String getComponentVersion(final String id, final String idType) {
+        if ("{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}".equals(id)) { //Yahoo Messenger
+            return "";
+        }
         return "1.0";
     }
 

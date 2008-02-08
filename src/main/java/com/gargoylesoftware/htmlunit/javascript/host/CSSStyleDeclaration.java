@@ -384,6 +384,20 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public void jsxSet_behavior(final String behavior) {
         setStyleAttribute("behavior", behavior);
+        jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
+        jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
+        jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
+        if (behavior.length() != 0) {
+            try {
+                final Object[] url = URL_FORMAT.parse(behavior);
+                if (url.length > 0) {
+                    jsElement_.jsxFunction_addBehavior((String) url[0]);
+                }
+            }
+            catch (final ParseException e) {
+                getLog().warn("Invalid behavior: '" + behavior + "'.");
+            }
+        }
     }
 
     /**
