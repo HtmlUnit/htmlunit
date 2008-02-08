@@ -188,4 +188,12 @@ public class XmlPage extends SgmlPage {
         return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, XmlAttr>());
     }
 
+    /**
+     * Throws an <tt>UnsupportedOperationException</tt>.
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String asText() {
+        throw new UnsupportedOperationException("XmlPage does not support asText(), please use asXml() instead");
+    }
 }
