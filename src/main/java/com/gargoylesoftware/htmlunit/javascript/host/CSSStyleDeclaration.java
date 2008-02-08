@@ -212,7 +212,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param string the string to camelize.
      * @return the transformed string.
      */
-    private static String camelize(final String string) {
+    protected static String camelize(final String string) {
         if (string == null) {
             return null;
         }

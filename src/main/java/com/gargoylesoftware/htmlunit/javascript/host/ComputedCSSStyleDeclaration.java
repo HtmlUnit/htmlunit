@@ -93,8 +93,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final SortedMap<String, String> styleMap = super.getStyleMap(camelCase);
         for (final Map.Entry<String, String> entry : localModifications_.entrySet()) {
             String key = entry.getKey();
-            if (!camelCase) {
-                key = key.replaceAll("([A-Z])", "-$1").toLowerCase();
+            if (camelCase) {
+                key = camelize(key);
             }
             final String value = entry.getValue();
             styleMap.put(key, value);
