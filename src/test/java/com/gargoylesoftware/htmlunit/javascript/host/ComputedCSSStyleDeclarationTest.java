@@ -205,4 +205,48 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase2 {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * There are two points in this case:
+     * <ol>
+     *  <li>
+     *    If the id of "style_test_1" is changed to something like "myDiv1", HtmlUnit will differ!
+     *    It needs investigations more (mostly in CSS parser library).
+     *  </li>
+     *  <li>
+     *    No idea why Firefox alert "pointer" for the "myDiv2", the rule should only apply to "myDiv1"
+     *  </li>
+     * </ol>
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testStyleElement2() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title>\n"
+            + "<style type='text/css'>\n"
+            + "  /* <![CDATA[ */\n"
+            + "  #style_test_1 {cursor: pointer}\n"
+            + "  /* ]]> */\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "     var div1 = document.getElementById('style_test_1');\n"
+            + "     var div2 = document.getElementById('myDiv2');\n"
+            + "     alert(div1.style.cursor);\n"
+            + "     alert(div2.style.cursor);\n"
+            + "     alert(window.getComputedStyle(div1, null).cursor);\n"
+            + "     alert(window.getComputedStyle(div2, null).cursor);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='style_test_1'/>\n"
+            + "  <div id='myDiv2'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"", "", "pointer", "pointer"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
