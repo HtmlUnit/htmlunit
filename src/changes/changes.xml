@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="update" dev="asashour">
+                Beautify asXml() by removing unnecessary blanks.
+            </action>
             <action type="fix" dev="asashour">
                 XmlPage: fix asText() and asXml().
             </action>
