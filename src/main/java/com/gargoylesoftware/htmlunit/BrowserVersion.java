@@ -116,7 +116,7 @@ public class BrowserVersion implements Serializable {
     /** Internet Explorer 6  */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
-        "4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6);
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6);
 
     /** Internet Explorer 7 */
     public static final BrowserVersion INTERNET_EXPLORER_7_0 = new BrowserVersion(
