@@ -37,11 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link DOMImplementation}.
@@ -49,19 +53,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class DOMImplementationTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public DOMImplementationTest(final String name) {
-        super(name);
-    }
+public class DOMImplementationTest extends WebTestCase2 {
 
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testGetFeature() throws Exception {
         testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "1.0", true);
         testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "2.0", false);
@@ -99,6 +96,7 @@ public class DOMImplementationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateDocument() throws Exception {
         testCreateDocument(BrowserVersion.FIREFOX_2);
         try {
@@ -128,6 +126,7 @@ public class DOMImplementationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateDocument_qualifiedName() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

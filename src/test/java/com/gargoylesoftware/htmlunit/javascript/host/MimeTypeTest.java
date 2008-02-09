@@ -42,9 +42,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Unit tests for {@link MimeType}.
@@ -52,19 +54,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class MimeTypeTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name Name of the test
-     */
-    public MimeTypeTest(final String name) {
-        super(name);
-    }
-    
+public class MimeTypeTest extends WebTestCase2 {
+
     /**
      * Test default configuration of Flash plugin for Firefox
      * @throws Exception if the test fails
      */
+    @Test
     public void testFlashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -91,6 +87,7 @@ public class MimeTypeTest extends WebTestCase {
      * Test default configuration of Flash plugin for Firefox
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveFlashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"

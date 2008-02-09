@@ -41,11 +41,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -58,18 +60,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class HTMLFrameElementTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLFrameElementTest(final String name) {
-        super(name);
-    }
+public class HTMLFrameElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFrameName() throws Exception {
         final String html
             = "<html><head><title>first</title></head>\n"
@@ -90,6 +86,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testLocation() throws Exception {
         testLocation("Frame1.location = \"frame.html\"");
         testLocation("Frame1.location.replace(\"frame.html\")");
@@ -127,6 +124,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testContentDocument() throws Exception {
         final String content
             = "<html><head><title>first</title>\n"
@@ -151,6 +149,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testContentWindow() throws Exception {
         final String content
             = "<html><head><title>first</title>\n"
@@ -177,6 +176,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1236048&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testWriteFrameset() throws Exception {
         final String content1 = "<html><head>\n"
             + "<script>\n"
@@ -210,6 +210,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testFrameLoadedAfterParent() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -243,6 +244,7 @@ public class HTMLFrameElementTest extends WebTestCase {
      * Regression test for bug 1192854.
      * @throws Exception if the test fails
      */
+    @Test
     public void testFrameTag1192854() throws Exception {
         final String htmlContent
             = "<html>\n"
@@ -284,6 +286,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOnloadNull() throws Exception {
         final String html =
             "<html><head>\n"

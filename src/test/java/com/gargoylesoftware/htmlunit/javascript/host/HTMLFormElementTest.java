@@ -37,16 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -64,18 +69,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLFormElementTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLFormElementTest(final String name) {
-        super(name);
-    }
+public class HTMLFormElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementsAccessor() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -132,6 +131,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRadioButtonArray() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -169,6 +169,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * this.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRadioButton_OnlyOne() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -193,6 +194,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testActionProperty() throws Exception {
         final String jsProperty = "action";
         final String htmlProperty = "action";
@@ -206,6 +208,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testNameProperty() throws Exception {
         final String jsProperty = "name";
         final String htmlProperty = "name";
@@ -219,6 +222,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEncodingProperty() throws Exception {
         final String jsProperty = "encoding";
         final String htmlProperty = "enctype";
@@ -232,6 +236,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testMethodProperty() throws Exception {
         final String jsProperty = "method";
         final String htmlProperty = "method";
@@ -245,6 +250,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTargetProperty() throws Exception {
         final String jsProperty = "target";
         final String htmlProperty = "target";
@@ -291,6 +297,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * Tests form reset and input default values while emulating IE.
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormReset_IE() throws Exception {
         // As tested with IE 6.0 on Win2k; note that refreshing the page will get you different results;
         // you need to open a new browser instance each time you test this.
@@ -338,6 +345,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * Tests form reset and input default values while emulating Mozilla.
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormReset_Firefox() throws Exception {
         // As tested with Firefox 1.0.3 on Win2k.
         final String[] expected = {
@@ -487,13 +495,14 @@ public class HTMLFormElementTest extends WebTestCase {
             else {
                 s2 = null;
             }
-            assertEquals("At index " + i + ", expected '" + s1 + "' but got '" + s2 + "'.", s1, s2);
+            Assert.assertEquals("At index " + i + ", expected '" + s1 + "' but got '" + s2 + "'.", s1, s2);
         }
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormSubmit() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -526,6 +535,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnSubmitChangesAction() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -552,6 +562,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormSubmit_target() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -584,6 +595,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormSubmitDoesntCallOnSubmit() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -617,6 +629,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInputNamedId() throws Exception {
         doTestInputWithName("id");
     }
@@ -624,6 +637,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInputNamedAction() throws Exception {
         doTestInputWithName("action");
     }
@@ -655,6 +669,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * Regression test that used to blow up on page load
      * @throws Exception if the test fails
      */
+    @Test
     public void testAccessingRadioButtonArrayByName_Regression() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -696,6 +711,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * cached before the document is finished loading.
      * @throws Exception if the test fails
      */
+    @Test
     public void testFindInputWithoutTypeDefined() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
@@ -719,6 +735,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormSubmit_MultipleButtons() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -754,6 +771,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * input tags.
      * @throws Exception if the test fails
      */
+    @Test
     public void testLength() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -779,6 +797,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGet() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -802,6 +821,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
     * @throws Exception if the test fails
     */
+    @Test
     public void testLostFunction() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -823,6 +843,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAssignedOnsubmit() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -847,6 +868,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * Test that the elements collection is live
     * @throws Exception if the test fails
     */
+    @Test
     public void testElementsLive() throws Exception {
         final String content = "<html>\n"
             + "<body>\n"
@@ -875,6 +897,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetFormFromFormsById() throws Exception {
         final String content =
             "<html>\n"
@@ -896,6 +919,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetFieldNamedLikeForm() throws Exception {
         final String content =
             "<html>\n"
@@ -920,6 +944,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * depending on the sort of the field named submit
      * @throws Exception if the test fails
      */
+    @Test
     public void testFieldNamedSubmit() throws Exception {
         testFieldNamedSubmit("<input type='text' name='submit'>\n", "INPUT");
         testFieldNamedSubmit("<input type='password' name='submit'>\n", "INPUT");
@@ -971,6 +996,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFieldFoundWithID() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"
@@ -1002,6 +1028,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testNonFieldChildFound() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"
@@ -1039,6 +1066,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * later.
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormIsNotAConstructor() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"
@@ -1065,6 +1093,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1627983&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormAccessAfterBrowsing() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1112,6 +1141,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1648014&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnSubmitEvent() throws Exception {
         final String[] expectedAlertsIE = {"srcElement null: false", "srcElement==form: true",
             "target null: true", "target==form: false"};
@@ -1165,6 +1195,7 @@ public class HTMLFormElementTest extends WebTestCase {
      * In action "this" should be the window and not the form
      * @throws Exception if the test fails
      */
+    @Test
     public void testThisInJavascriptAction() throws Exception {
         final String content
             = "<html>\n"
@@ -1186,6 +1217,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOnsubmitNull() throws Exception {
         final String html =
             "<html><head>\n"

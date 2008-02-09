@@ -40,11 +40,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Unit tests for {@link HTMLScriptElement}.
@@ -53,20 +55,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HTMLScriptElementTest extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     * @param name The name of the test.
-     */
-    public HTMLScriptElementTest(final String name) {
-        super(name);
-    }
+public class HTMLScriptElementTest extends WebTestCase2 {
 
     /**
      * Verifies that the <tt>onreadystatechange</tt> handler is invoked correctly.
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testOnReadyStateChangeHandler() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -109,6 +104,7 @@ public class HTMLScriptElementTest extends WebTestCase {
      * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038
      * @throws Exception if the test fails
      */
+    @Test
     public void testSrcWithJavaScriptProtocol() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -137,6 +133,7 @@ public class HTMLScriptElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testScriptForEvent() throws Exception {
         // IE accepts it with () or without
         testScriptForEvent("onload");

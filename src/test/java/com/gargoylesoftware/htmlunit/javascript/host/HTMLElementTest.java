@@ -37,16 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -69,18 +74,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-public class HTMLElementTest extends WebTestCase {
-
-    /**
-     * @param name The name of the test case
-     */
-    public HTMLElementTest(final String name) {
-        super(name);
-    }
+public class HTMLElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAll_IndexByInt() throws Exception {
         final String firstContent = "<html><head>\n"
             + "<script>\n"
@@ -121,6 +120,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void testGetAttribute() throws Exception {
         final String content = "<html>\n"
                 + "<head>\n"
@@ -151,6 +151,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void testGetSetAttributeNS() throws Exception {
         final String content = "<html>\n"
                 + "<head>\n"
@@ -181,6 +182,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void testOwnerDocument() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -208,6 +210,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void testSetAttribute() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -239,6 +242,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void testGetAttributeNode() throws Exception {
         final String content =
               "<html>\n"
@@ -298,6 +302,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void testSetAttributeNode() throws Exception {
         final String content =
               "<html>\n"
@@ -334,6 +339,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test for getElementsByTagName
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByTagName() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -364,6 +370,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test for bug 1369514.^
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByTagNameCollection() throws Exception {
         final String content
             = "<html><head>\n"
@@ -398,6 +405,7 @@ public class HTMLElementTest extends WebTestCase {
      * at the document level and at the element level.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByTagNameAsterisk() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -417,6 +425,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test getting the class for the element
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetClassName() throws Exception {
         final String content
             = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
@@ -440,6 +449,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test getting the class for the element
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetClassName() throws Exception {
         final String content
             = "<html><head><style>.x {  font: 8pt Arial bold;  }</style>\n"
@@ -463,6 +473,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetInnerHTML() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -491,6 +502,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHTMLSimple_FF() throws Exception {
         final String[] expected = {"Old = <b>Old innerHTML</b>", "New = New cell value"};
         testGetSetInnerHTMLSimple(BrowserVersion.FIREFOX_2, expected);
@@ -499,6 +511,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHTMLSimple_IE() throws Exception {
         final String[] expected = {"Old = <B>Old innerHTML</B>", "New = New cell value"};
         testGetSetInnerHTMLSimple(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
@@ -530,6 +543,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test the use of innerHTML to set new HTML code in Firefox.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHTMLComplex_FF() throws Exception {
         final String[] expected = {
             "Old = <b>Old innerHTML</b><!-- old comment -->",
@@ -542,6 +556,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test the use of innerHTML to set new HTML code in IE.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHTMLComplex_IE() throws Exception {
         final String[] expected = {
             "Old = <B>Old innerHTML</B><!-- old comment -->",
@@ -585,6 +600,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test the use of innerHTML to set a new input
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHTMLNewInput() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -611,6 +627,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHTMLChar_FF() throws Exception {
         final String[] expected = {
             "Old = <b>Old innerHTML</b>",
@@ -621,6 +638,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHTMLChar_IE() throws Exception {
         final String[] expected = {
             "Old = <B>Old innerHTML</B>",
@@ -656,6 +674,7 @@ public class HTMLElementTest extends WebTestCase {
      * Verifies that empty tags are not abbreviated into their &lt;tag/&gt; form.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHtmlEmptyTag_FF() throws Exception {
         final String[] expected = {"undefined", "<ul></ul>", "undefined"};
         testGetSetInnerHtmlEmptyTag(BrowserVersion.FIREFOX_2, expected);
@@ -665,6 +684,7 @@ public class HTMLElementTest extends WebTestCase {
      * Verifies that empty tags are not abbreviated into their &lt;tag/&gt; form.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHtmlEmptyTag_IE() throws Exception {
         final String[] expected = {"<DIV id=div><UL></UL></DIV>", "<UL></UL>", ""};
         testGetSetInnerHtmlEmptyTag(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
@@ -691,6 +711,7 @@ public class HTMLElementTest extends WebTestCase {
      * Verifies that attributes containing whitespace are always quoted.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String[] expected = {"undefined", "<span class=\"a b\"></span>", "undefined"};
         testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.FIREFOX_2, expected);
@@ -700,6 +721,7 @@ public class HTMLElementTest extends WebTestCase {
      * Verifies that attributes containing whitespace are always quoted.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerHtmlAttributeWithWhitespace_IE() throws Exception {
         final String[] expected = {"<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", ""};
         testGetSetInnerHtmlAttributeWithWhitespace(BrowserVersion.INTERNET_EXPLORER_6_0, expected);
@@ -726,6 +748,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test setting innerHTML to empty string
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetInnerHTMLEmpty() throws Exception {
         final String content = "<html><head></head><body>\n"
                 + "<div id='testDiv'>foo</div>\n"
@@ -746,6 +769,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test setting innerHTML to null
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetInnerHTMLNull() throws Exception {
         final String[] alertsIE = {"Null ChildrenLength: 1"};
         testSetInnerHTMLNull(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
@@ -776,6 +800,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetOuterHTMLSimple() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -808,6 +833,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test the use of outerHTML to set new HTML code.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetOuterHTMLComplex() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -845,6 +871,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertAdjacentHTML() throws Exception {
         testInsertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
         testInsertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
@@ -896,6 +923,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertAdjacentElement() throws Exception {
         testInsertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
         testInsertAdjacentElement("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
@@ -948,6 +976,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddBehaviorDefaultClientCaps() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -982,6 +1011,7 @@ public class HTMLElementTest extends WebTestCase {
      * Test the <tt>#default#homePage</tt> default IE behavior.
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddBehaviorDefaultHomePage() throws Exception {
         final URL content1Url = new URL("http://www.domain1.com/");
         final URL content2Url = new URL("http://www.domain2.com/");
@@ -1042,6 +1072,7 @@ public class HTMLElementTest extends WebTestCase {
     *
     * @throws Exception if the test fails
     */
+    @Test
     public void testAddBehaviorDefaultDownload() throws Exception {
 
         final URL content1Url = new URL("http://www.domain1.com/");
@@ -1102,6 +1133,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveBehavior() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -1132,6 +1164,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testChildren() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -1162,6 +1195,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnclick() throws Exception {
         eventHandlerSetterGetterTest("onclick");
     }
@@ -1169,6 +1203,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOndblclick() throws Exception {
         eventHandlerSetterGetterTest("ondblclick");
     }
@@ -1176,6 +1211,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnblur() throws Exception {
         eventHandlerSetterGetterTest("onblur");
     }
@@ -1183,6 +1219,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnfocus() throws Exception {
         eventHandlerSetterGetterTest("onfocus");
     }
@@ -1190,6 +1227,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnkeydown() throws Exception {
         eventHandlerSetterGetterTest("onkeydown");
     }
@@ -1197,6 +1235,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnkeypress() throws Exception {
         eventHandlerSetterGetterTest("onkeypress");
     }
@@ -1204,6 +1243,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnkeyup() throws Exception {
         eventHandlerSetterGetterTest("onkeyup");
     }
@@ -1211,6 +1251,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnmousedown() throws Exception {
         eventHandlerSetterGetterTest("onmousedown");
     }
@@ -1218,6 +1259,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnmouseup() throws Exception {
         eventHandlerSetterGetterTest("onmouseup");
     }
@@ -1225,6 +1267,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnmouseover() throws Exception {
         eventHandlerSetterGetterTest("onmouseover");
     }
@@ -1232,6 +1275,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnmouseout() throws Exception {
         eventHandlerSetterGetterTest("onmouseout");
     }
@@ -1239,6 +1283,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnmousemove() throws Exception {
         eventHandlerSetterGetterTest("onmousemove");
     }
@@ -1246,6 +1291,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetOnresize() throws Exception {
         eventHandlerSetterGetterTest("onresize");
     }
@@ -1289,6 +1335,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSetInnerTextSimple() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -1317,6 +1364,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testClickHashAnchor() throws Exception {
         final String content
             = "<html><head><title>HashAnchor</title></head>\n"
@@ -1355,6 +1403,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveAttribute() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -1383,6 +1432,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testOffsets() throws Exception {
         final String content = "<html>\n"
               + "<head>\n"
@@ -1414,6 +1464,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testScrolls() throws Exception {
         final String content = "<html>\n"
               + "<head>\n"
@@ -1445,6 +1496,7 @@ public class HTMLElementTest extends WebTestCase {
     /** Test that javascript scrollIntoView() function doesn't fail
      * @throws Exception if the test fails
      */
+    @Test
     public void testScrollIntoView() throws Exception {
         final String content = "<html>\n"
               + "<body>\n"
@@ -1461,6 +1513,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testOffsetParent() throws Exception {
         final String content = "<html><head>\n"
             + "<script type='text/javascript'>\n"
@@ -1532,6 +1585,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testPrototype() throws Exception {
         final String content = "<html><head><title>Prototype test</title>\n"
             + "<script>\n"
@@ -1568,6 +1622,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testPrototype_Element() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1590,6 +1645,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testParentElement() throws Exception {
         final String[] alertsIE = {"null", "[object]"};
         testParentElement(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
@@ -1622,6 +1678,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testCurrentStyle() throws Exception {
         testCurrentStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
         try {
@@ -1659,6 +1716,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testRuntimeStyle() throws Exception {
         testRuntimeStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
         try {
@@ -1677,6 +1735,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testGetBoundingClientRect() throws Exception {
         testGetBoundingClientRect(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -1703,6 +1762,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testGetClientRects() throws Exception {
         testGetClientRects(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -1729,6 +1789,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testInnerHTML_parentNode() throws Exception {
         final String[] expectedAlertsIE = {"null", "#document-fragment"};
         testInnerHTML_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
@@ -1758,6 +1819,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testInnerText_parentNode() throws Exception {
         final String[] expectedAlertsIE = {"null", "#document-fragment"};
         testInnerText_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
@@ -1787,6 +1849,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testUniqueID() throws Exception {
         testUniqueID(BrowserVersion.INTERNET_EXPLORER_6_0, false, new String[] {"true", "false"});
         testUniqueID(BrowserVersion.FIREFOX_2, true, new String[] {"true", "true"});
@@ -1823,6 +1886,7 @@ public class HTMLElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testUniqueIDFormatIE() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1851,6 +1915,7 @@ public class HTMLElementTest extends WebTestCase {
      * Tests setAttribute() with name of event handler
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetAttribute_eventHandler() throws Exception {
         testSetAttribute_eventHandler(BrowserVersion.INTERNET_EXPLORER_7_0, 0);
         testSetAttribute_eventHandler(BrowserVersion.FIREFOX_2, 3);
@@ -1889,6 +1954,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testFireEvent_WithoutTemplate() throws Exception {
         final String html =
               "<html><body>\n"
@@ -1906,6 +1972,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testFireEvent_WithTemplate() throws Exception {
         final String html =
               "<html><body>\n"
@@ -1927,6 +1994,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testSetExpression() throws Exception {
         testSetExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -1954,6 +2022,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testRemoveExpression() throws Exception {
         testRemoveExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -1982,6 +2051,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDispatchEvent() throws Exception {
         final String html =
             "<html>\n"
@@ -2004,6 +2074,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testHasAttribute() throws Exception {
         final String html =
               "<html>\n"
@@ -2032,6 +2103,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDispatchEvent2() throws Exception {
         testHTMLFile("HTMLElementTest_dispatchEvent2.html");
     }
@@ -2039,6 +2111,7 @@ public class HTMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetComponentVersion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

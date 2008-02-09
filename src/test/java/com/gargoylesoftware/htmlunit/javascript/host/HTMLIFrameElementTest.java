@@ -41,11 +41,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -57,19 +59,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HTMLIFrameElementTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLIFrameElementTest(final String name) {
-        super(name);
-    }
+public class HTMLIFrameElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -89,6 +84,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReferenceFromJavaScript() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -110,6 +106,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * Regression test for bug 1562872
      * @throws Exception if the test fails
      */
+    @Test
     public void testDirectAccessPerName() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -133,6 +130,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * Tests that the <iframe> node is visible from the contained page when it is loaded
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadGetsIFrameElementByIdInParent() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
@@ -166,6 +164,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testContentDocument() throws Exception {
         final String content
             = "<html><head><title>first</title>\n"
@@ -190,6 +189,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFrameElement() throws Exception {
         final String content
             = "<html><head><title>first</title>\n"
@@ -217,6 +217,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
      *
      * @throws Exception if an error occurs
      */
+    @Test
     public void testWriteToIFrame() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
@@ -256,6 +257,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
      *
      * @throws Exception if an error occurs
      */
+    @Test
     public void testIFrameReinitialized() throws Exception {
         final String html =
               "<html><body><a href='2.html' target='theFrame'>page 2 in frame</a>\n"
@@ -285,6 +287,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSrcAttribute() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><script>\n"

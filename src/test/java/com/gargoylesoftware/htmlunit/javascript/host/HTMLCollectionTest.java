@@ -40,11 +40,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HTMLCollection}.
@@ -53,19 +55,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HTMLCollectionTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLCollectionTest(final String name) {
-        super(name);
-    }
+public class HTMLCollectionTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testImplicitToStringConversion() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -88,6 +83,7 @@ public class HTMLCollectionTest extends WebTestCase {
      * Test that toString is accessible
      * @throws Exception if the test fails
      */
+    @Test
     public void testToStringFunction() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -113,6 +109,7 @@ public class HTMLCollectionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElements() throws Exception {
         final String firstContent
             = "<html><head><title>foo</title><script>\n"
@@ -134,6 +131,7 @@ public class HTMLCollectionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testChildNodes() throws Exception {
         testChildNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1"});
         testChildNodes(BrowserVersion.FIREFOX_2, new String[] {"true", "1"});
@@ -173,6 +171,7 @@ public class HTMLCollectionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFor_in() throws Exception {
         final String[] expectedAlertsIE = {"string length", "string myForm"};
         testFor_in(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
@@ -199,6 +198,7 @@ public class HTMLCollectionTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFor_in2() throws Exception {
         final String[] expectedAlertsIE = {"string length", "string val1", "string 1", "string val2",
             "string first_submit", "string second_submit", "string action"};
@@ -237,6 +237,7 @@ public class HTMLCollectionTest extends WebTestCase {
      * <code>document.all.tags</code> is different from <code>document.forms.tags</code>!
      * @throws Exception if the test fails
      */
+    @Test
     public void testTags() throws Exception {
         testTags(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "true"});
         testTags(BrowserVersion.FIREFOX_2, new String[] {"true", "false"});

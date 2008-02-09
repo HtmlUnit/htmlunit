@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -52,20 +54,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class UIEventTest extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     *
-     * @param name name of the test
-     */
-    public UIEventTest(final String name) {
-        super(name);
-    }
+public class UIEventTest extends WebTestCase2 {
 
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDetail() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -88,6 +82,7 @@ public class UIEventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testView() throws Exception {
         final String html =
               "<html><body onload='alertView(event)'><script>\n"
@@ -108,6 +103,7 @@ public class UIEventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testInitUIEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "  var e = document.createEvent('UIEvents');\n"

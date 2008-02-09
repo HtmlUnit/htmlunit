@@ -40,7 +40,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link NamedNodeMap}.
@@ -48,18 +50,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class NamedNodeMapTest extends WebTestCase {
-
-    /**
-     * @param name The name of the test case
-     */
-    public NamedNodeMapTest(final String name) {
-        super(name);
-    }
+public class NamedNodeMapTest extends WebTestCase2 {
 
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -86,6 +82,7 @@ public class NamedNodeMapTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testGetNamedItem() throws Exception {
         final String html =
               "<html>\n"

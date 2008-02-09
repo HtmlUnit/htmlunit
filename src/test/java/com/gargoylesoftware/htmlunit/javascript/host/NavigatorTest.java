@@ -40,11 +40,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link Navigator}.
@@ -55,20 +57,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class NavigatorTest extends WebTestCase {
-
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public NavigatorTest(final String name) {
-        super(name);
-    }
+public class NavigatorTest extends WebTestCase2 {
 
     /**
      * Tests the "appCodeName" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testAppCodeName() throws Exception {
         testAttribute("appCodeName", BrowserVersion.getDefault().getApplicationCodeName());
     }
@@ -77,6 +72,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "appMinorVersion" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testAppMinorVersion() throws Exception {
         testAttribute("appMinorVersion", BrowserVersion.getDefault().getApplicationMinorVersion());
     }
@@ -85,6 +81,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "appName" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testAppName() throws Exception {
         testAttribute("appName", BrowserVersion.getDefault().getApplicationName());
     }
@@ -93,6 +90,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "appVersion" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testAppVersion() throws Exception {
         testAttribute("appVersion", BrowserVersion.getDefault().getApplicationVersion());
     }
@@ -101,6 +99,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "browserLanguage" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testBrowserLanguage() throws Exception {
         testAttribute("browserLanguage", BrowserVersion.getDefault().getBrowserLanguage());
     }
@@ -109,6 +108,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "cookieEnabled" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testCookieEnabled() throws Exception {
         testCookieEnabled(true);
         testCookieEnabled(false);
@@ -147,6 +147,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "cpuClass" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testCpuClass() throws Exception {
         testAttribute("cpuClass", BrowserVersion.getDefault().getCpuClass());
     }
@@ -155,6 +156,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "onLine" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testOnLine() throws Exception {
         testAttribute("onLine", String.valueOf(BrowserVersion.getDefault().isOnLine()));
     }
@@ -163,6 +165,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "platform" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testPlatform() throws Exception {
         testAttribute("platform", BrowserVersion.getDefault().getPlatform());
     }
@@ -171,6 +174,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "systemLanguage" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testSystemLanguage() throws Exception {
         testAttribute("systemLanguage", BrowserVersion.getDefault().getSystemLanguage());
     }
@@ -179,6 +183,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "userAgent" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testUserAgent() throws Exception {
         testAttribute("userAgent", BrowserVersion.getDefault().getUserAgent());
     }
@@ -187,6 +192,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "userLanguage" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testUserLanguage() throws Exception {
         testAttribute("userLanguage", BrowserVersion.getDefault().getUserLanguage());
     }
@@ -195,6 +201,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "plugins" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testPlugins() throws Exception {
         testAttribute("plugins.length", "0");
     }
@@ -203,6 +210,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "javaEnabled" method.
      * @throws Exception on test failure.
      */
+    @Test
     public void testJavaEnabled() throws Exception {
         testAttribute("javaEnabled()", "false");
     }
@@ -211,6 +219,7 @@ public class NavigatorTest extends WebTestCase {
      * Tests the "taintEnabled" property.
      * @throws Exception on test failure.
      */
+    @Test
     public void testTaintEnabled() throws Exception {
         testAttribute("taintEnabled()", "false");
     }
@@ -244,6 +253,7 @@ public class NavigatorTest extends WebTestCase {
      * Test closing using javascript
      * @throws Exception if the test fails.
      */
+    @Test
     public void testUseConfiguredBrowser() throws Exception {
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -269,6 +279,7 @@ public class NavigatorTest extends WebTestCase {
      * Test language property (only for Mozilla)
      * @throws Exception if the test fails.
      */
+    @Test
     public void testLanguage() throws Exception {
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -294,6 +305,7 @@ public class NavigatorTest extends WebTestCase {
      * Test some Mozilla properties (minimal tests are support is not completed)
      * @throws Exception if the test fails.
      */
+    @Test
     public void testMozilla() throws Exception {
         final String content
             = "<html><head><title>First</title></head>\n"

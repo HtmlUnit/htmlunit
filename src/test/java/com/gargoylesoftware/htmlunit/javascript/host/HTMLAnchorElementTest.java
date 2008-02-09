@@ -37,14 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -55,19 +59,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  * @author Marc Guillemot
  */
-public class HTMLAnchorElementTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLAnchorElementTest(final String name) {
-        super(name);
-    }
+public class HTMLAnchorElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAnchor_getAttribute_and_href() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -110,6 +107,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnclickToString() throws Exception {
         final String content
             = "<html><head><title>AnchorTest</title><script>\n"
@@ -136,6 +134,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultConversionToString() throws Exception {
         final String content
             = "<html><head><title>AnchorTest</title><script>\n"
@@ -169,6 +168,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnClickAnchorHRef() throws Exception {
         final String content
             = "<html>\n"
@@ -191,6 +191,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
      * in href, "this" should be the window and not the link
      * @throws Exception if the test fails
      */
+    @Test
     public void testThisInJavascriptHRef() throws Exception {
         final String content
             = "<html>\n"
@@ -210,6 +211,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWriteAnchorTarget() throws Exception {
         final String content
             = "<html>\n"
@@ -224,6 +226,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWriteAnchorSearch() throws Exception {
         final String content
             = "<html>\n"
@@ -238,6 +241,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWriteAnchorHash() throws Exception {
         final String content
             = "<html>\n"
@@ -252,6 +256,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWriteAnchorPort() throws Exception {
         final String content
             = "<html>\n"
@@ -270,6 +275,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWritePathname() throws Exception {
         final String content
             = "<html>\n"
@@ -284,6 +290,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWriteProtocol() throws Exception {
         final String content
             = "<html>\n"
@@ -298,6 +305,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWriteAnchorHost() throws Exception {
         final String content
             = "<html>\n"
@@ -324,6 +332,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testReadWriteAnchorHostname() throws Exception {
         final String content
             = "<html>\n"

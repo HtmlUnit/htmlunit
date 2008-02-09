@@ -40,7 +40,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HTMLOptionElement}.
@@ -48,18 +50,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class HTMLOptionElementTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLOptionElementTest(final String name) {
-        super(name);
-    }
+public class HTMLOptionElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReadPropsBeforeAdding() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -96,6 +92,7 @@ public class HTMLOptionElementTest extends WebTestCase {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1323425&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectingOrphanedOptionCreatedByDocument() throws Exception {
         final String content = "<html>\n"
             + "<body>\n"
@@ -116,6 +113,7 @@ public class HTMLOptionElementTest extends WebTestCase {
      * Regression test for 1592728
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSelected() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -148,6 +146,7 @@ public class HTMLOptionElementTest extends WebTestCase {
      * Regression test for 1672048
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetAttribute() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -176,6 +175,7 @@ public class HTMLOptionElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOptionIndexOutOfBound() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -213,6 +213,7 @@ public class HTMLOptionElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testConstructor() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"

@@ -37,8 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
@@ -50,19 +52,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLLabelElementTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLLabelElementTest(final String name) {
-        super(name);
-    }
+public class HTMLLabelElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlFor() throws Exception {
         testHtmlFor(BrowserVersion.INTERNET_EXPLORER_7_0);
         testHtmlFor(BrowserVersion.FIREFOX_2);
@@ -92,6 +87,7 @@ public class HTMLLabelElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlFor_click() throws Exception {
         if (notYetImplemented()) {
             return;

@@ -37,15 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertNotSame;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -60,20 +64,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class LocationTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public LocationTest(final String name) {
-        super(name);
-    }
+public class LocationTest extends WebTestCase2 {
 
     /**
      * Regression test for bug 742902
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentLocationGet() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -95,6 +92,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentLocationSet() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -141,6 +139,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentLocationHref() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -161,6 +160,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetVariousAttributes() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -220,6 +220,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSetHash() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -240,6 +241,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSetHostname() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -262,6 +264,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSetHostWithoutPort() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -284,6 +287,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSetHostWithPort() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -306,6 +310,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSetPathname() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -328,6 +333,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSetPort() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -350,6 +356,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSetProtocol() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -373,6 +380,7 @@ public class LocationTest extends WebTestCase {
      * Test for replace
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplace() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -399,6 +407,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testAssign() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -426,6 +435,7 @@ public class LocationTest extends WebTestCase {
      * Tests that location.reload() works correctly.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testReload() throws Exception {
         final String content =
               "<html>\n"
@@ -449,6 +459,7 @@ public class LocationTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplaceWithFrame() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -488,6 +499,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testChangeLocationToNonHtml() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -511,6 +523,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testJSLocation() throws Exception {
         final String html =
               "<html><head>\n"
@@ -530,6 +543,7 @@ public class LocationTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testToString() throws Exception {
         final String content =
             "<html><head>\n"

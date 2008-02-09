@@ -40,10 +40,12 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Unit tests for {@link HTMLFrameSetElement}.
@@ -52,20 +54,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Bruce Chapman
  * @author Ahmed Ashour
  */
-public class HTMLFrameSetElementTest extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     *
-     * @param name The name of the test.
-     */
-    public HTMLFrameSetElementTest(final String name) {
-        super(name);
-    }
+public class HTMLFrameSetElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testCols() throws Exception {
         final String framesetContent =
             "<html><head><title>First</title></head>\n"
@@ -90,6 +84,7 @@ public class HTMLFrameSetElementTest extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testRows() throws Exception {
         final String framesetContent =
             "<html><head><title>First</title></head>\n"

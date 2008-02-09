@@ -37,9 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -47,7 +52,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -61,18 +66,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class NodeTest extends WebTestCase {
-
-    /**
-     * @param name The name of the test case
-     */
-    public NodeTest(final String name) {
-        super(name);
-    }
+public class NodeTest extends WebTestCase2 {
 
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void test_hasChildNodes_true() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -95,6 +94,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void test_hasChildNodes_false() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -118,6 +118,7 @@ public class NodeTest extends WebTestCase {
      * Regression test for removeChild
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveChild() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -154,6 +155,7 @@ public class NodeTest extends WebTestCase {
      * Regression test for replaceChild
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplaceChild_Normal() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -190,6 +192,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testReplaceChild_WithSameNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -207,6 +210,7 @@ public class NodeTest extends WebTestCase {
      * The common browsers always return node names in uppercase.  Test this.
      * @throws Exception on test failure
      */
+    @Test
     public void testNodeNameIsUppercase() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -229,6 +233,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void test_getChildNodes() throws Exception {
         final String content = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -261,6 +266,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void testChildNodes_Comments() throws Exception {
         final String content = "<html><head><title>test</title>\n"
             + "<html><head></head>\n"
@@ -285,6 +291,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception on test failure
      */
+    @Test
     public void test_getChildNodesProperties() throws Exception {
         final String content = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -324,6 +331,7 @@ public class NodeTest extends WebTestCase {
      * the new child object when the reference child object is null.
      * @throws Exception if the test fails
      */
+    @Test
     public void test_insertBefore_nullRef() throws Exception {
         test_insertBefore(BrowserVersion.FIREFOX_2, "aNode.insertBefore(nodeToInsert, null);");
         test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert, null);");
@@ -334,6 +342,7 @@ public class NodeTest extends WebTestCase {
      * the new child object when the reference child object is null.
      * @throws Exception if the test fails
      */
+    @Test
     public void test_insertBefore_noSecondArg() throws Exception {
         test_insertBefore(BrowserVersion.INTERNET_EXPLORER_6_0, "aNode.insertBefore(nodeToInsert);");
         try {
@@ -379,6 +388,7 @@ public class NodeTest extends WebTestCase {
      * The common browsers always return node names in uppercase.  Test this.
      * @throws Exception on test failure
      */
+    @Test
     public void testNodeType() throws Exception {
         final String content = "<html><head><title>test</title>\n"
                 + "<script>\n"
@@ -407,6 +417,7 @@ public class NodeTest extends WebTestCase {
      * Test for 1716129
      * @throws Exception on test failure
      */
+    @Test
     public void testAttachEvent() throws Exception {
         final String content = "<html><head>\n"
             + "<title>First</title>\n"
@@ -435,6 +446,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testIsSameNode() throws Exception {
         testIsSameNode(BrowserVersion.FIREFOX_2);
         try {
@@ -470,6 +482,7 @@ public class NodeTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testAppendChild_parentNode() throws Exception {
         final String[] expectedAlertsIE = {"null", "#document-fragment"};
         testAppendChild_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
@@ -503,6 +516,7 @@ public class NodeTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testInsertBefore_parentNode() throws Exception {
         final String[] expectedAlertsIE = {"null", "#document-fragment"};
         testInsertBefore_parentNode(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
@@ -533,6 +547,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAppendChild_of_DocumentFragment() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -560,6 +575,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testNodePrototype() throws Exception {
         testNodePrototype(BrowserVersion.FIREFOX_2, new String[] {"3"});
         try {
@@ -587,6 +603,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -613,6 +630,7 @@ public class NodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

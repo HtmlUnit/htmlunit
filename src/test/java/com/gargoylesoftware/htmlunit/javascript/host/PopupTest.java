@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link Popup}.
@@ -49,20 +51,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class PopupTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public PopupTest(final String name) {
-        super(name);
-    }
+public class PopupTest extends WebTestCase2 {
 
     /**
      * Just test that a standard use of popup works without exception
      * @throws Exception if the test fails
      */
+    @Test
     public void testPopup() throws Exception {
         final String content = "<html><head><title>First</title><body>\n"
             + "<script>\n"
@@ -76,5 +71,4 @@ public class PopupTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
     }
-
 }

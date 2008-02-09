@@ -37,10 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -48,7 +53,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -67,19 +72,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class HTMLSelectElementTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLSelectElementTest(final String name) {
-        super(name);
-    }
+public class HTMLSelectElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetSelectedIndex() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -109,6 +107,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSelectedIndex() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -144,12 +143,13 @@ public class HTMLSelectElementTest extends WebTestCase {
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
 
         assertEquals("http://test?submit=button", newPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSelectedIndexInvalidValue() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -178,6 +178,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetOptions() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -210,6 +211,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetOptionLabel() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -242,6 +244,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetOptionSelected() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -276,6 +279,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetOptionByIndex() throws Exception {
         final String content
             = "<html><head><title>first</title><script language='JavaScript'>\n"
@@ -301,6 +305,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetOptionByOptionIndex() throws Exception {
         final String content
             = "<html><head><title>first</title><script language='JavaScript'>\n"
@@ -328,6 +333,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddOption() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -361,6 +367,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddOptionSelected() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -403,6 +410,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddOptionWithAddMethod_FF() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -437,6 +445,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * Test for bug 1570478.
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddOptionWithAddMethod_IE() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -474,6 +483,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1304741&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddWith1Arg() throws Exception {
         final String content
             = "<html><head>\n"
@@ -507,6 +517,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveOption() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -538,6 +549,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveOptionWithRemoveMethod() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -569,6 +581,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClearOptions() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -600,6 +613,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * Test case for bug 1370484
      * @throws Exception if the test fails
      */
+    @Test
     public void testIncreaseOptionsSettingLength() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -636,6 +650,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOptionArrayHasItemMethod() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -665,6 +680,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetValue() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -709,6 +725,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * changed made through JS should not trigger an onchange
      * @throws Exception if the test fails
      */
+    @Test
     public void testNoOnchangeFromJS() throws Exception {
         final String content = "<html><head><title>Test infinite loop on js onchange</title></head>\n"
             + "<body><form name='myForm'>\n"
@@ -746,6 +763,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetValue() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -776,6 +794,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * Test for bug 1159709.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRightPageAfterOnchange() throws Exception {
         final String content
             = "<html><body>\n"
@@ -806,6 +825,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * Test that options delegates to select (bug 1111597).
      * @throws Exception if the test fails.
      */
+    @Test
     public void testOptionsDelegateToSelect() throws Exception {
 
         final String content
@@ -855,6 +875,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * Test that options delegates to select (bug 1111597).
      * @throws Exception if the test fails.
      */
+    @Test
     public void testOptionsArrayAdd() throws Exception {
         final String content
             = "<html><head>\n"
@@ -894,6 +915,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * Test that select delegates submit to form
      * @throws Exception if the test fails.
      */
+    @Test
     public void testOnChangeCallsFormSubmit() throws Exception {
         final String content
             = "<html><head>\n"
@@ -922,6 +944,7 @@ public class HTMLSelectElementTest extends WebTestCase {
      * Test for 1684652
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectedIndexReset() throws Exception {
         final String content
             = "<html><head><title>first</title></head>\n"
@@ -944,6 +967,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSelectedIndex() throws Exception {
         final String html =
             "<html><head>\n"
@@ -967,6 +991,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultSelectedValue_SizeNegativeOne() throws Exception {
         testDefaultSelectedValue("-1", false, new String[] {"0", "true", "false", "false", "0"});
         testDefaultSelectedValue("-1", true, new String[] {"0", "false", "false", "false", "-1"});
@@ -975,6 +1000,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultSelectedValue_SizeZero() throws Exception {
         testDefaultSelectedValue("0", false, new String[] {"0", "true", "false", "false", "0"});
         testDefaultSelectedValue("0", true, new String[] {"0", "false", "false", "false", "-1"});
@@ -983,6 +1009,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultSelectedValue_SizeOne() throws Exception {
         testDefaultSelectedValue("1", false, new String[] {"1", "true", "false", "false", "0"});
         testDefaultSelectedValue("1", true, new String[] {"1", "false", "false", "false", "-1"});
@@ -991,6 +1018,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultSelectedValue_SizeTwo() throws Exception {
         testDefaultSelectedValue("2", false, new String[] {"2", "false", "false", "false", "-1"});
         testDefaultSelectedValue("2", true, new String[] {"2", "false", "false", "false", "-1"});
@@ -999,6 +1027,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultSelectedValue_SizeInvalid() throws Exception {
         testDefaultSelectedValue("x", false, new String[] {"0", "true", "false", "false", "0"});
         testDefaultSelectedValue("x", true, new String[] {"0", "false", "false", "false", "-1"});
@@ -1046,6 +1075,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSize() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link Range}.
@@ -50,7 +52,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class RangeTest extends WebTestCase {
+public class RangeTest extends WebTestCase2 {
+
     private static final String contentStart = "<html><head><title>Range Test</title>\n"
         + "<script>\n"
         + "function safeTagName(o)\n"
@@ -76,14 +79,6 @@ public class RangeTest extends WebTestCase {
         + "<p id='theP'>for Range</p>\n"
         + "</body></html>";
 
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public RangeTest(final String name) {
-        super(name);
-    }
-
     private void test(final String script, final String[] expectedAlerts) throws Exception {
         final String content = contentStart + script + contentEnd;
         
@@ -98,6 +93,7 @@ public class RangeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEmptyRange() throws Exception {
         final String[] expectedAlerts = {"true", "undefined", "undefined", "0", "undefined", "0"};
         final String script = "alertRange(r);";
@@ -108,6 +104,7 @@ public class RangeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -119,6 +116,7 @@ public class RangeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -130,6 +128,7 @@ public class RangeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

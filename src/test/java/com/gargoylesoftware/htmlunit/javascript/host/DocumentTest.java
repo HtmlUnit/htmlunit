@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +49,7 @@ import java.util.List;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.util.DateUtil;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -54,7 +58,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -77,19 +81,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Ahmed Ashour
  * @author Rob Di Marco
  */
-public class DocumentTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public DocumentTest(final String name) {
-        super(name);
-    }
+public class DocumentTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormsAccessor_TwoForms() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -121,6 +118,7 @@ public class DocumentTest extends WebTestCase {
      * Previously, forms with no names were not being returned by document.forms.
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormsAccessor_FormWithNoName() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -145,6 +143,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormsAccessor_NoForms() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -169,6 +168,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWrite_AssignedToVar() throws Exception {
         // IE accept use of detached function
         final String[] expectedAlertsIE = {};
@@ -210,6 +210,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormArray() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -248,6 +249,7 @@ public class DocumentTest extends WebTestCase {
      * Test that forms is a live collection
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormsLive() throws Exception {
         final String content =
             "<html>\n"
@@ -281,6 +283,7 @@ public class DocumentTest extends WebTestCase {
      * Tests for document.anchors
      * @throws Exception if the test fails
      */
+    @Test
     public void testAnchors() throws Exception {
         testAnchors(BrowserVersion.FIREFOX_2,
                 new String[] {"0", "1", "1", "true", "name: end"});
@@ -331,6 +334,7 @@ public class DocumentTest extends WebTestCase {
      * Tests for document.links
      * @throws Exception if the test fails
      */
+    @Test
     public void testLinks() throws Exception {
         final String content =
             "<html>\n"
@@ -367,6 +371,7 @@ public class DocumentTest extends WebTestCase {
      * Ensures that <tt>document.createElement()</tt> works correctly.
      * @throws Exception if the test fails.
      */
+    @Test
     public void testDocumentCreateElement() throws Exception {
         final String htmlContent
             = "<html>\n"
@@ -423,6 +428,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testDocumentCreateElement2() throws Exception {
         testDocumentCreateElement2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {
             "DIV,DIV,undefined,undefined,undefined", "HI:DIV,HI:DIV,undefined,undefined,undefined"});
@@ -459,6 +465,7 @@ public class DocumentTest extends WebTestCase {
      * Ensures that <tt>document.createElementNS()</tt> works correctly.
      * @throws Exception if the test fails.
      */
+    @Test
     public void testDocumentCreateElementNS() throws Exception {
         try {
             testDocumentCreateElementNS(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {});
@@ -498,6 +505,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for createTextNode
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateTextNode() throws Exception {
         final String htmlContent
             = "<html><head><title>First</title><script>\n"
@@ -531,6 +539,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateTextNodeWithHtml_FF() throws Exception {
         final String undefined = "undefined";
         final String original = "<p>a & b</p> &amp; \u0162 \" '";
@@ -542,6 +551,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateTextNodeWithHtml_IE() throws Exception {
         final String original = "<p>a & b</p> &amp; \u0162 \" '";
         final String escaped = "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '";
@@ -583,6 +593,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for RFE 741930
      * @throws Exception if the test fails
      */
+    @Test
     public void testAppendChild() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -611,6 +622,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for appendChild of a text node
      * @throws Exception if the test fails
      */
+    @Test
     public void testAppendChild_textNode() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -638,6 +650,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for cloneNode
      * @throws Exception if the test fails
      */
+    @Test
     public void testCloneNode() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -668,6 +681,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for insertBefore
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertBefore() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -692,6 +706,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetBoxObjectFor() throws Exception {
         testHTMLFile("DocumentTest_getBoxObjectFor.html");
     }
@@ -699,6 +714,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -725,6 +741,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_resetId() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -751,6 +768,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_setNewId() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -776,6 +794,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 740665
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_divId() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -798,6 +817,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 740665
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_scriptId() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script id='script1'>\n"
@@ -819,6 +839,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 740665
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_scriptType() throws Exception {
         final String firstContent
             = "<html><head><title>First</title>\n"
@@ -841,6 +862,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 740665
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_scriptSrc() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -873,6 +895,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for parentNode with nested elements
      * @throws Exception if the test fails
      */
+    @Test
     public void testParentNode_Nested() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -899,6 +922,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for parentNode of document
      * @throws Exception if the test fails
      */
+    @Test
     public void testParentNode_Document() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -920,6 +944,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for parentNode and createElement
      * @throws Exception if the test fails
      */
+    @Test
     public void testParentNode_CreateElement() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -942,6 +967,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for parentNode and appendChild
      * @throws Exception if the test fails
      */
+    @Test
     public void testParentNode_AppendChild() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -970,6 +996,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for documentElement of document
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentElement() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -993,6 +1020,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for firstChild with nested elements
      * @throws Exception if the test fails
      */
+    @Test
     public void testFirstChild_Nested() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1019,6 +1047,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for firstChild and appendChild
      * @throws Exception if the test fails
      */
+    @Test
     public void testFirstChild_AppendChild() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1049,6 +1078,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for lastChild with nested elements
      * @throws Exception if the test fails
      */
+    @Test
     public void testLastChild_Nested() throws Exception {
         final String lastContent
             = "<html><head><title>Last</title><script>\n"
@@ -1075,6 +1105,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for lastChild and appendChild
      * @throws Exception if the test fails
      */
+    @Test
     public void testLastChild_AppendChild() throws Exception {
         final String lastContent
             = "<html><head><title>Last</title><script>\n"
@@ -1105,6 +1136,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for nextSibling with nested elements
      * @throws Exception if the test fails
      */
+    @Test
     public void testNextSibling_Nested() throws Exception {
         final String lastContent
             = "<html><head><title>Last</title><script>\n"
@@ -1131,6 +1163,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for nextSibling and appendChild
      * @throws Exception if the test fails
      */
+    @Test
     public void testNextSibling_AppendChild() throws Exception {
         final String lastContent
             = "<html><head><title>Last</title><script>\n"
@@ -1161,6 +1194,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for previousSibling with nested elements
      * @throws Exception if the test fails
      */
+    @Test
     public void testPreviousSibling_Nested() throws Exception {
         final String lastContent
             = "<html><head><title>Last</title><script>\n"
@@ -1187,6 +1221,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for previousSibling and appendChild
      * @throws Exception if the test fails
      */
+    @Test
     public void testPreviousSibling_AppendChild() throws Exception {
         final String lastContent
             = "<html><head><title>Last</title><script>\n"
@@ -1216,6 +1251,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAllProperty_KeyByName() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1241,6 +1277,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 707750
      * @throws Exception if the test fails
      */
+    @Test
     public void testAllProperty_CalledDuringPageLoad() throws Exception {
         final String firstContent
             = "<html><body>\n"
@@ -1261,6 +1298,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWrite() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -1289,6 +1327,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 743241
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWrite_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1322,6 +1361,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 715379
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWrite_script() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1364,6 +1404,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWrite_InDOM() throws Exception {
         final String mainContent
             = "<html><head><title>First</title></head><body>\n"
@@ -1383,6 +1424,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetReferrer() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1408,6 +1450,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetReferrer_NoneSpecified() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>\n"
@@ -1423,6 +1466,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetURL() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body onload='alert(document.URL);'>\n"
@@ -1438,6 +1482,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByTagName() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1465,6 +1510,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 740636
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByTagName_CaseInsensitive() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1490,6 +1536,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 740605
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByTagName_Inline() throws Exception {
         final String firstContent
             = "<html><body><script type=\"text/javascript\">\n"
@@ -1506,6 +1553,7 @@ public class DocumentTest extends WebTestCase {
      * Regression test for bug 740605
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByTagName_LoadScript() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1531,6 +1579,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentAll_WithParentheses() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1554,6 +1603,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentAll_IndexByInt() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1577,6 +1627,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentAll_Item() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1597,6 +1648,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentAll_NamedItem() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1623,6 +1675,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentAll_tags() throws Exception {
         testDocumentAll_tags(BrowserVersion.INTERNET_EXPLORER_6_0);
         testDocumentAll_tags(BrowserVersion.FIREFOX_2);
@@ -1662,6 +1715,7 @@ public class DocumentTest extends WebTestCase {
      * Firefox supports document.all ... but
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDocumentAll_AsBoolean() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -1693,6 +1747,7 @@ public class DocumentTest extends WebTestCase {
      * collection is accessed before the page has finished loading.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDocumentAll_Caching() throws Exception {
         final String firstContent
             = "<html><head><title>Test</title></head>\n"
@@ -1713,6 +1768,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDocumentAll_NotExisting() throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -1733,6 +1789,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCookie_read() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1774,6 +1831,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementsByName() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1803,6 +1861,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentBody_read() throws Exception {
         final String html = "<html><head><title>First</title></head>\n"
             + "<body id='IAmTheBody' onload='alert(document.body.id)'>\n"
@@ -1834,6 +1893,7 @@ public class DocumentTest extends WebTestCase {
      * Test the access to the images value.  This should return the 2 images in the document
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetImages() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
@@ -1867,6 +1927,7 @@ public class DocumentTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testSettingTitle() throws Exception {
         final String content
             = "<html><head><title>Bad Title</title></head>\n"
@@ -1912,6 +1973,7 @@ public class DocumentTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testSettingBlankTitle() throws Exception {
         final String content = "<html><head><title></title></head>\n"
             + "<body>\n"
@@ -1932,6 +1994,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTitle() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -1956,6 +2019,7 @@ public class DocumentTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testReadyStateNonIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1986,6 +2050,7 @@ public class DocumentTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testReadyStateIE() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -2014,6 +2079,7 @@ public class DocumentTest extends WebTestCase {
      * Calling document.body before the page is fully loaded used to cause an exception.
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWithNoBody() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -2031,6 +2097,7 @@ public class DocumentTest extends WebTestCase {
      * IE has a bug which returns the element by name if it can not find it by ID.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementByIdForIE() throws Exception {
         final String content
             = "<html><head><title>foo</title></head>\n"
@@ -2053,6 +2120,7 @@ public class DocumentTest extends WebTestCase {
      * IE has a bug which returns the element by name if it can not find it by ID.
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementByIdForNetscape() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -2080,6 +2148,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testBuildCookie() throws Exception {
         checkCookie(Document.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", "first", false, null);
         checkCookie(Document.buildCookie("toto=", URL_FIRST), "toto", "", "", "first", false, null);
@@ -2119,6 +2188,7 @@ public class DocumentTest extends WebTestCase {
      * a, input or button
      * @throws Exception if the test fails
      */
+    @Test
     public void testDirectAccessByName() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2156,6 +2226,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testWriteInManyTimes() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2181,6 +2252,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testWriteWithSpace() throws Exception {
         final String content = "<html><body><script>\n"
             + "document.write('Hello ');\n"
@@ -2202,6 +2274,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testWriteWithSplitAnchorTag() throws Exception {
         final String content = "<html><body><script>\n"
             + "document.write(\"<a href=\'start.html\");\n"
@@ -2228,6 +2301,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testWriteScriptInManyTimes() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -2260,6 +2334,7 @@ public class DocumentTest extends WebTestCase {
      * Test for 1613119
      * @throws Exception if the test fails
      */
+    @Test
     public void testWriteAddNodesInCorrectPositions() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body id=\"theBody\">\n"
@@ -2301,6 +2376,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomain() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2324,6 +2400,7 @@ public class DocumentTest extends WebTestCase {
   /**
     * @throws Exception if the test fails
     */
+    @Test
     public void testDomainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM");
 
@@ -2354,6 +2431,7 @@ public class DocumentTest extends WebTestCase {
   /**
     * @throws Exception if the test fails
     */
+    @Test
     public void testDomainMixedCase() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2374,6 +2452,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomainLong() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2398,6 +2477,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomainSetSelf() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2419,6 +2499,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomainTooShort() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -2443,6 +2524,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWriteFrameRelativeURLMultipleFrameset() throws Exception {
         final String framesetContent = "<html><head><title>frameset</title></head>\n"
             + "<script>\n"
@@ -2475,6 +2557,7 @@ public class DocumentTest extends WebTestCase {
     * Test for 1185389
     * @throws Exception if the test fails
     */
+    @Test
     public void testWriteAddNodesToCorrectParent() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -2503,6 +2586,7 @@ public class DocumentTest extends WebTestCase {
    /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testScriptsArray() throws Exception {
         final String htmlContent = "<html><head><script lang='JavaScript'>\n"
             + "    function doTest(){\n"
@@ -2521,6 +2605,7 @@ public class DocumentTest extends WebTestCase {
      * document.XXX should first look at elements named XXX before using standard functions.
      * @throws Exception if the test fails
      */
+    @Test
     public void testPrecedence() throws Exception {
         final String htmlContent = "<html><head></head>\n"
             + "<body>\n"
@@ -2538,6 +2623,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFrames() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test(){\n"
@@ -2572,6 +2658,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultViewAndParentWindow() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test(){\n"
@@ -2600,6 +2687,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testPut() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -2623,6 +2711,7 @@ public class DocumentTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentCloneNode() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -2659,6 +2748,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateStyleSheet() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -2677,6 +2767,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateDocumentFragment() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2701,6 +2792,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testCreateEvents_FF() throws Exception {
         testCreateEvents_FF("Event", true, BrowserVersion.FIREFOX_2);
         testCreateEvents_FF("Events", true, BrowserVersion.FIREFOX_2);
@@ -2736,6 +2828,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testCreateEventObject_IE() throws Exception {
         final String content =
               "<html><head><title>foo</title><script>\n"
@@ -2754,6 +2847,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementFromPoint() throws Exception {
         testElementFromPoint(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -2781,6 +2875,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateElementWithAngleBrackets() throws Exception {
         testCreateElementWithAngleBrackets(BrowserVersion.INTERNET_EXPLORER_7_0);
         testCreateElementWithAngleBrackets(BrowserVersion.FIREFOX_2);
@@ -2802,6 +2897,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateElementWithHtml() throws Exception {
         testCreateElementWithHtml(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
@@ -2834,6 +2930,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStyleSheets() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2852,6 +2949,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testQueryCommandSupported() throws Exception {
         testHTMLFile("DocumentTest_queryCommandSupported.html");
     }

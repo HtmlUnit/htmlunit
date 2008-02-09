@@ -37,13 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertSame;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -61,22 +65,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class EventTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name Name of the test
-     */
-    public EventTest(final String name) {
-        super(name);
-    }
+public class EventTest extends WebTestCase2 {
 
     /**
      * Verify the "this" object refers to the Element being clicked when an
      * event handler is invoked.
      * @throws Exception if the test fails
      */
+    @Test
     public void testThisDefined() throws Exception {
         final String[] expectedAlerts = {"clickId"};
 
@@ -95,6 +91,7 @@ public class EventTest extends WebTestCase {
      * is accessible from inside an event handler
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetPropOnThisDefined() throws Exception {
         final String[] expectedAlerts = {"foo"};
 
@@ -114,6 +111,7 @@ public class EventTest extends WebTestCase {
      * Verify that javascript snippets have a variable named 'event' available to them.
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventArgDefinedByWrapper() throws Exception {
         final String[] expectedAlerts = {"defined"};
 
@@ -129,6 +127,7 @@ public class EventTest extends WebTestCase {
      * Verify that when event handler is invoked an argument is passed in.
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventArgDefined() throws Exception {
         final String[] expectedAlerts = {"defined"};
         final String content
@@ -144,6 +143,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventTargetSameAsThis() throws Exception {
         final String[] expectedAlerts = {"pass"};
         final String content
@@ -160,6 +160,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventSrcElementSameAsThis() throws Exception {
         final String[] expectedAlerts = {"pass"};
         final String content
@@ -178,6 +179,7 @@ public class EventTest extends WebTestCase {
      * event.currentTarget == this inside javascript event handler
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final String[] expectedAlerts = {"pass"};
         final String content
@@ -195,6 +197,7 @@ public class EventTest extends WebTestCase {
      * Tests that event fires on key press.
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventOnKeyDown() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -224,6 +227,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventOnKeyDown_Shift_Ctrl_Alt() throws Exception {
         testEventOnKeyDown_Shift_Ctrl_Alt(false, false, false, new String[] {"false,false,false"});
         testEventOnKeyDown_Shift_Ctrl_Alt(true,  false, false, new String[] {"true,false,false"});
@@ -256,6 +260,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testTyping() throws Exception {
 
         final String html =
@@ -280,6 +285,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventOnClick_Shift_Ctrl_Alt() throws Exception {
         testEventOnClick_Shift_Ctrl_Alt(false, false, false, new String[] {"false,false,false"});
         testEventOnClick_Shift_Ctrl_Alt(true,  false, false, new String[] {"true,false,false"});
@@ -317,6 +323,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventOnBlur() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -354,6 +361,7 @@ public class EventTest extends WebTestCase {
      * Test that this refers to the element on which the event applies
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventScope() throws Exception {
         final List<String> expectedAlerts = Collections.singletonList("frame1");
         final String content
@@ -376,6 +384,7 @@ public class EventTest extends WebTestCase {
      * Test event transmission to event handler
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventTransmission() throws Exception {
         final String content =
             "<html><body><span id='clickMe'>foo</span>\n"
@@ -410,6 +419,7 @@ public class EventTest extends WebTestCase {
      * Test that the event property of the window is available
      * @throws Exception if the test fails
      */
+    @Test
     public void testIEWindowEvent() throws Exception {
         final String content =
             "<html><head>\n"
@@ -436,6 +446,7 @@ public class EventTest extends WebTestCase {
      * we just see an org.apache.xerces.parsers.AbstractSAXParser.AttributesProxy
      * @throws Exception if the test fails
      */
+    @Test
     public void testCommentInEventHandlerDeclaration() throws Exception {
         final String content
             = "<html><head></head>\n"
@@ -455,6 +466,7 @@ public class EventTest extends WebTestCase {
      * Test for event capturing and bubbling in FF
      * @throws Exception if the test fails
      */
+    @Test
     public void testFF_EventCapturingAndBubbling() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -493,6 +505,7 @@ public class EventTest extends WebTestCase {
      * Test for event bubbling in IE
      * @throws Exception if the test fails
      */
+    @Test
     public void testIE_EventBubbling() throws Exception {
         // TODO: in IE no click event can be registered for the window
         if (notYetImplemented()) {
@@ -531,6 +544,7 @@ public class EventTest extends WebTestCase {
      * Test for event capturing and bubbling in FF
      * @throws Exception if the test fails
      */
+    @Test
     public void testFF_StopPropagation() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -570,6 +584,7 @@ public class EventTest extends WebTestCase {
      * Test value for null event handler: null for IE, while 'undefined' for Firefox.
      * @throws Exception if the test fails
      */
+    @Test
     public void testNullEventHandler() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -597,6 +612,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testBubbles_IE() throws Exception {
         testBubbles(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
     }
@@ -604,6 +620,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testBubbles_FF() throws Exception {
         testBubbles(BrowserVersion.FIREFOX_2, new String[] {"object", "true"});
     }
@@ -624,6 +641,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testCancelable_IE() throws Exception {
         testCancelable(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
     }
@@ -631,6 +649,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testCancelable_FF() throws Exception {
         testCancelable(BrowserVersion.FIREFOX_2, new String[] {"object", "true"});
     }
@@ -654,6 +673,7 @@ public class EventTest extends WebTestCase {
      * for any events.
      * @throws Exception if an error occurs
      */
+    @Test
     public void testKeys_IE() throws Exception {
         testKeys(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {
             "object", "false", "false", "false", "undefined",
@@ -665,6 +685,7 @@ public class EventTest extends WebTestCase {
      * <tt>metaKey</tt> attributes are defined for mouse events only.
      * @throws Exception if an error occurs
      */
+    @Test
     public void testKeys_FF() throws Exception {
         testKeys(BrowserVersion.FIREFOX_2, new String[] {
             "object", "undefined", "undefined", "undefined", "undefined",
@@ -694,6 +715,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testTimeStamp_IE() throws Exception {
         testTimeStamp(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"object", "undefined"});
     }
@@ -701,6 +723,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testTimeStamp_FF() throws Exception {
         testTimeStamp(BrowserVersion.FIREFOX_2, new String[] {"object", "number"});
     }
@@ -721,6 +744,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testEventPhase() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -752,6 +776,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testSetEventPhaseToInvalidValue() throws Exception {
         boolean thrown = false;
         try {
@@ -766,6 +791,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testInitEvent() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
@@ -792,6 +818,7 @@ public class EventTest extends WebTestCase {
      * Test Mozilla DOMContentLoaded event
      * @throws Exception if the test fails
      */
+    @Test
     public void testDOMContentLoaded() throws Exception {
         testHTMLFile("EventTest_DOMContentLoaded.html");
     }
@@ -799,6 +826,7 @@ public class EventTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testPreventDefault() throws Exception {
         testHTMLFile("EventTest_preventDefault.html");
     }

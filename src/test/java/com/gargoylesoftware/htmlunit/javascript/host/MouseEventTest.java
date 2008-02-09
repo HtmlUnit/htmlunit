@@ -37,13 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -54,20 +58,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class MouseEventTest extends WebTestCase {
+public class MouseEventTest extends WebTestCase2 {
 
-    /**
-     * Create an instance
-     *
-     * @param name Name of the test
-     */
-    public MouseEventTest(final String name) {
-        super(name);
-    }
-    
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventCoordinates() throws Exception {
         testEventCoordinates(BrowserVersion.FIREFOX_2);
         testEventCoordinates(BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -103,6 +99,7 @@ public class MouseEventTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testInitMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "  var e = document.createEvent('MouseEvents');\n"

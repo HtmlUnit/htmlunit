@@ -40,7 +40,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link Screen}.
@@ -52,19 +54,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
-public class ScreenTest extends WebTestCase {
-
-    /**
-     * @param name The name of the test case
-     */
-    public ScreenTest(final String name) {
-        super(name);
-    }
+public class ScreenTest extends WebTestCase2 {
 
     /**
      * Test all desired properties on screen (easy to copy and test in a real browser).
      * @throws Exception on test failure.
      */
+    @Test
     public void testProperties() throws Exception {
         final String content = "<html><head><title>test</title>\n"
             + "    <script>\n"

@@ -37,17 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertSame;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -69,18 +73,12 @@ import com.gargoylesoftware.htmlunit.html.SubmittableElement;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class InputTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test.
-     */
-    public InputTest(final String name) {
-        super(name);
-    }
+public class InputTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStandardProperties_Text() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -113,6 +111,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTextProperties() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -174,6 +173,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCheckedAttribute_Checkbox() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -204,6 +204,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCheckedAttribute_Radio() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -249,6 +250,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDisabledAttribute() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -298,6 +300,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInputValue() throws Exception {
         final String htmlContent =
             "<html><head><title>foo</title><script>\n"
@@ -327,6 +330,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInputSelect_NotDefinedAsPropertyAndFunction() throws Exception {
         final String htmlContent =
             "<html><head><title>foo</title><script>\n"
@@ -356,6 +360,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testThisDotFormInOnClick() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>First</title></head>\n"
@@ -378,6 +383,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFieldDotForm() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title><script>\n"
@@ -410,6 +416,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInputNameChange() throws Exception {
         final String htmlContent = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -445,6 +452,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnChange() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
@@ -472,6 +480,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnChangeSetByJavaScript() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
@@ -504,6 +513,7 @@ public class InputTest extends WebTestCase {
      * Test the default value of a radio and checkbox buttons.
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefautValue() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -529,6 +539,7 @@ public class InputTest extends WebTestCase {
      * Test must be extended when setting type really does something.
      * @throws Exception if the test fails
      */
+    @Test
     public void testChangeType() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -552,7 +563,7 @@ public class InputTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
-        assertInstanceOf(page.getFormByName("myForm").getInputByName("myRadio"), HtmlImageInput.class);
+        assertTrue(HtmlImageInput.class.isInstance(page.getFormByName("myForm").getInputByName("myRadio")));
     }
 
     /**
@@ -560,6 +571,7 @@ public class InputTest extends WebTestCase {
      * Works with Mozilla, Firefox and IE... but not with htmlunit now.
      * @throws Exception if the test fails
      */
+    @Test
     public void testDefaultValues() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -617,6 +629,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateInputAndChangeType() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -642,6 +655,7 @@ public class InputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testButtonOutsideForm() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
@@ -663,6 +677,7 @@ public class InputTest extends WebTestCase {
      * Test that field delegates submit to form
      * @throws Exception if the test fails.
      */
+    @Test
     public void testOnChangeCallsFormSubmit() throws Exception {
         final String content
             = "<html><head>\n"

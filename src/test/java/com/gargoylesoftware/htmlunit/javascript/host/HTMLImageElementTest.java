@@ -40,7 +40,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -50,20 +52,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  */
-public class HTMLImageElementTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test.
-     */
-    public HTMLImageElementTest(final String name) {
-        super(name);
-    }
-    
+public class HTMLImageElementTest extends WebTestCase2 {
+
     /**
      * This test verifies that JavaScript can be used to get the src
      * attribute of an <img> tag.
      * @throws Exception if the test fails
      */
+    @Test
     public void test_getSrc() throws Exception {
         final String content
             = "<html><head><title></title><script>\n"
@@ -91,6 +87,7 @@ public class HTMLImageElementTest extends WebTestCase {
      * in the DOM tree.
      * @throws Exception if the test fails
      */
+    @Test
     public void test_setSrc() throws Exception {
         final String content
             = "<html><head><title></title><script>\n"
@@ -117,6 +114,7 @@ public class HTMLImageElementTest extends WebTestCase {
      * SimpleScriptable."
      * @throws Exception if the test fails
      */
+    @Test
     public void test_setSrc_newImage() throws Exception {
         final String content
             = "<html><head><title></title><script>\n"
@@ -142,6 +140,7 @@ public class HTMLImageElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void test_AttributeName() throws Exception {
         final String content
             = "<html><head><title></title><script>\n"

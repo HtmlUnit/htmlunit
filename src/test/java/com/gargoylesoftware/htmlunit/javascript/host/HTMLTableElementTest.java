@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -54,19 +56,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HTMLTableElementTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLTableElementTest(final String name) {
-        super(name);
-    }
+public class HTMLTableElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTableCaptions() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -99,6 +94,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTableHeaders() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -133,6 +129,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTableBodies() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -172,6 +169,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTableRows() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -209,6 +207,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * @see <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1528024&group_id=47038">bug</a>
      * @throws Exception if the test fails
      */
+    @Test
     public void testTableHeadRows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -240,6 +239,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTableRowsWithManySections() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -299,6 +299,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTableFooters() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -333,6 +334,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCellIndex() throws Exception {
         final String htmlContent
             = "<html><head><title>Test</title>\n"
@@ -361,6 +363,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertRow() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -395,6 +398,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * Regression test for bug 1244839
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertRowNested() throws Exception {
         final String content =
             "<html><head>\n"
@@ -431,6 +435,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * Test that a tbody is created
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertRowInEmtpyTable() throws Exception {
         final String content =
             "<html><head>\n"
@@ -463,6 +468,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * Test that a tbody is created
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertRowInTableWithEmtpyTbody() throws Exception {
         final String content =
             "<html><head>\n"
@@ -495,6 +501,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * Tests length, tBodies on nested rows
      * @throws Exception if the test fails
      */
+    @Test
     public void testNestedTables() throws Exception {
         final String content =
             "<html><head>\n"
@@ -531,6 +538,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038
      * @throws Exception if the test fails
      */
+    @Test
     public void testStringValuesIE() throws Exception {
         final String[] expectedAlerts = {"table: [object]", "row: [object]", "cell: [object]"};
         testStringValues(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlerts);
@@ -540,6 +548,7 @@ public class HTMLTableElementTest extends WebTestCase {
      * Test string values for FF. Currently not working as htmlunit's object names don't map FF ones
      * @throws Exception if the test fails
      */
+    @Test
     public void testStringValuesFF() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -583,6 +592,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testWidth() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -600,6 +610,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testCellSpacing() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -619,6 +630,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testCellPadding() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -638,6 +650,7 @@ public class HTMLTableElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh() throws Exception {
         final String htmlContent
             = "<html><head><script>\n"

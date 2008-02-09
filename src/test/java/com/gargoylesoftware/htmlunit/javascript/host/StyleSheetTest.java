@@ -39,11 +39,12 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.StringReader;
 
+import org.junit.Test;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Unit tests for {@link StyleSheet}.
@@ -52,19 +53,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class StyleSheetTest extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     * @param name the name of the test
-     */
-    public StyleSheetTest(final String name) {
-        super(name);
-    }
+public class StyleSheetTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTranslateToXPath() throws Exception {
         final Stylesheet stylesheet = new Stylesheet();
         final String s = "*.yui-log input { }";

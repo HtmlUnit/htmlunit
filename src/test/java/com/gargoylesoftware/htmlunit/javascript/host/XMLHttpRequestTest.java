@@ -101,7 +101,6 @@ public class XMLHttpRequestTest extends WebTestCase2 {
      * Tests Mozilla style object creation.
      * @throws Exception If the test fails.
      */
-    @Test
     void testCreation(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
             "<html>\n"
@@ -132,7 +131,6 @@ public class XMLHttpRequestTest extends WebTestCase2 {
      * Tests synchronous use of XMLHttpRequest.
      * @throws Exception If the test fails.
      */
-    @Test
     void testSyncUse(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html>\n"

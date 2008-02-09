@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -55,19 +57,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HTMLTextAreaElementTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLTextAreaElementTest(final String name) {
-        super(name);
-    }
+public class HTMLTextAreaElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title><script>\n"
@@ -93,6 +88,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnChange() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
@@ -120,6 +116,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
      * Tests that setValue doesn't has side effect. Test for bug 1155063.
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetValue() throws Exception {
         final String content = "<html><head></head>\n"
             + "<body>\n"
@@ -146,6 +143,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     /**
      * @throws Exception If test fails
      */
+    @Test
     public void testTextLength() throws Exception {
         final String[] alertsIE = {"undefined", "undefined"};
         testTextLength(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
@@ -175,6 +173,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     /**
      * @throws Exception If test fails
      */
+    @Test
     public void testSelection() throws Exception {
         testSelection(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0,
                 new String[] {"undefined,undefined", "3,undefined", "3,10"});
