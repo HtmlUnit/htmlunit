@@ -420,7 +420,7 @@ public class DocumentTest extends WebTestCase2 {
 
         final HtmlElement div1 = page.getHtmlElementById("div1");
         assertEquals("div", div1.getTagName());
-        assertEquals(1, div1.getNodeType());
+        assertEquals((short) 1, div1.getNodeType());
         assertEquals(null, div1.getNodeValue());
         assertEquals("div", div1.getNodeName());
     }
@@ -528,7 +528,7 @@ public class DocumentTest extends WebTestCase2 {
 
         final DomNode div1 =
             page.getHtmlElementById("body").getLastDomChild();
-        assertEquals(3, div1.getNodeType());
+        assertEquals((short) 3, div1.getNodeType());
         assertEquals("Some Text", div1.getNodeValue());
         assertEquals("#text", div1.getNodeName());
 
@@ -1952,6 +1952,7 @@ public class DocumentTest extends WebTestCase2 {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testSettingMissingTitle() throws Exception {
         final String content = "<html><head></head>\n"
             + "<body>\n"

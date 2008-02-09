@@ -1528,6 +1528,10 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnorderedList">
     </class>
 
+    <class name="HTMLUnknownElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLUnknownElement"
+        JSObject="true">
+    </class>
+
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
         JSObject="true">
         <property name="hash" readable="true" writable="true"/>
