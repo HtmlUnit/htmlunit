@@ -561,4 +561,32 @@ public class XMLDocumentTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    public void testXmlInsideHtml() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(messageTableHeaders.documentElement.nodeName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <xml id='messageTableHeaders'>\n"
+            + "    <columns>\n"
+            + "      <column name='_checkbox'/>\n"
+            + "      <column name='itemStatus'/>\n"
+            + "    </columns>\n"
+            + "  </xml>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"columns"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
