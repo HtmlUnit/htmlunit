@@ -37,12 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -55,7 +63,7 @@ import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.ThreadManager;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
@@ -82,19 +90,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class WindowTest extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     * @param name The name of the test.
-     */
-    public WindowTest(final String name) {
-        super(name);
-    }
+public class WindowTest extends WebTestCase2 {
 
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetLocation() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -125,6 +126,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testOpenWindow() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -179,6 +181,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testOpenWindow_base() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -224,6 +227,7 @@ public class WindowTest extends WebTestCase {
      * window must be loaded.
      * @throws Exception If the test fails
      */
+    @Test
     public void testOpenWindow_blank() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -283,9 +287,7 @@ public class WindowTest extends WebTestCase {
             fail("Expected secondFrame would be found after click.");
         }
 
-        assertEquals(
-            Collections.EMPTY_LIST,
-            collectedAlerts);
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
     /**
@@ -293,6 +295,7 @@ public class WindowTest extends WebTestCase {
      * reloaded.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_self() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -337,6 +340,7 @@ public class WindowTest extends WebTestCase {
      * window must be reloaded.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_top() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -404,6 +408,7 @@ public class WindowTest extends WebTestCase {
      * parent window must be reloaded.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_parent() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -472,6 +477,7 @@ public class WindowTest extends WebTestCase {
      * if such a window exists.
      * @throws Exception if the test fails
      */
+    @Test
     public void testOpenWindow_existingWindow() throws Exception {
         final String content
             = "<html><head><script>\n"
@@ -499,6 +505,7 @@ public class WindowTest extends WebTestCase {
      * Regression test to reproduce a known bug
      * @throws Exception if the test fails
      */
+    @Test
     public void testOpenWindow_emptyUrl() throws Exception {
         final String content
             = "<html><head><script>\n"
@@ -524,8 +531,8 @@ public class WindowTest extends WebTestCase {
      * Verifies that <tt>window.open</tt> behaves correctly when popups are blocked.
      * @throws Exception if an error occurs
      */
+    @Test
     public void testOpenWindow_blocked() throws Exception {
-
         final String html =
             "<html>\n"
             + "<head>\n"
@@ -559,6 +566,7 @@ public class WindowTest extends WebTestCase {
      * Regression test to reproduce a known bug
      * @throws Exception if the test fails
      */
+    @Test
     public void testAlert_NoAlertHandler() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>\n"
@@ -572,6 +580,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testParentAndTop() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -627,6 +636,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testConfirm() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -658,6 +668,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testConfirm_noConfirmHandler() throws Exception {
         final String html
             = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
@@ -673,6 +684,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testPrompt() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -704,6 +716,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testPrompt_noPromptHandler() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -730,6 +743,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testOpener() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -781,6 +795,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetTimeout() throws Exception {
         final String content
             = "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',1);\n"
@@ -795,6 +810,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetTimeoutByReference() throws Exception {
         final String content = "<html><body><script language='JavaScript'>\n"
             + "function doTimeout() {alert('Yo!');}\n"
@@ -811,6 +827,7 @@ public class WindowTest extends WebTestCase {
      * Just tests that setting and clearing an interval doesn't throw
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetAndClearInterval() throws Exception {
         final String content
             = "<html><body>\n"
@@ -828,6 +845,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetIntervalFunctionReference() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -861,6 +879,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testClearInterval() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  var count;\n"
@@ -891,6 +910,7 @@ public class WindowTest extends WebTestCase {
      * is not loaded anymore.
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetTimeoutStopped() throws Exception {
         //TODO: This test fails with eclipse (sometimes), but never with ant!!!!
         final String firstContent
@@ -912,13 +932,15 @@ public class WindowTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         page.getEnclosingWindow().getThreadManager().joinAll(2000);
         assertEquals("Second", page.getTitleText());
-        assertEquals("no thread should be running", 0, page.getEnclosingWindow().getThreadManager().activeCount());
+        Assert.assertEquals("no thread should be running",
+                0, page.getEnclosingWindow().getThreadManager().activeCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
 
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testClearTimeout() throws Exception {
         final String content =
               "<html>\n"
@@ -948,6 +970,7 @@ public class WindowTest extends WebTestCase {
      * does not affect said callback.
      * @throws Exception If the test fails
      */
+    @Test
     public void testClearTimeout_DoesNotStopExecutingCallback() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  var id;\n"
@@ -971,6 +994,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testAboutURL() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
@@ -997,6 +1021,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails
      */
+    @Test
     public void testWindowFrames() throws Exception {
         final String firstContent =
             "<html><body><script language='JavaScript'>\n"
@@ -1013,6 +1038,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails
      */
+    @Test
     public void testWindowFramesLive() throws Exception {
         final String content =
             "<html>\n"
@@ -1045,6 +1071,7 @@ public class WindowTest extends WebTestCase {
      * window object (ie window.myVariable).  Test that this works.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testJavascriptVariableFromWindow() throws Exception {
         final String firstContent =
             "<html><head><title>first</title></head><body><script>\n"
@@ -1063,6 +1090,7 @@ public class WindowTest extends WebTestCase {
      * window object (ie window.myVariable).  Test that this works.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testJavascriptVariableFromTopAndParentFrame() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1113,6 +1141,7 @@ public class WindowTest extends WebTestCase {
      * window object (ie window.myVariable).  Test that this works.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testJavascriptVariableFromNamedFrame() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1169,6 +1198,7 @@ public class WindowTest extends WebTestCase {
      * Variables that have not been defined should return null when accessed.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testJavascriptVariableFromWindow_NotFound() throws Exception {
         final String firstContent =
             "<html><head><title>first</title></head><body><script>\n"
@@ -1186,6 +1216,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGetFrameByName() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
@@ -1234,6 +1265,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetOpenerLocationHrefRelative() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1276,6 +1308,7 @@ public class WindowTest extends WebTestCase {
      * Test the window.closed property
      * @throws Exception if the test fails.
      */
+    @Test
     public void testClosed() throws Exception {
         final String content = "<html><head>\n"
             + "<script>\n"
@@ -1305,6 +1338,7 @@ public class WindowTest extends WebTestCase {
      * Test closing using javascript
      * @throws Exception if the test fails.
      */
+    @Test
     public void testClose() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1358,6 +1392,7 @@ public class WindowTest extends WebTestCase {
      * Test that length of frames collection is retrieved
      * @throws Exception if the test fails
      */
+    @Test
     public void testFramesLengthZero() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1376,6 +1411,7 @@ public class WindowTest extends WebTestCase {
      * are frames.
      * @throws Exception If the test fails
      */
+    @Test
     public void testFramesLengthAndFrameAccess() throws Exception {
         final String content =
             "<html>\n"
@@ -1405,6 +1441,7 @@ public class WindowTest extends WebTestCase {
      * by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testMoveTo() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1419,6 +1456,7 @@ public class WindowTest extends WebTestCase {
      * by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testMoveBy() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1433,6 +1471,7 @@ public class WindowTest extends WebTestCase {
      * handled by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testResizeTo() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "window.resizeTo(10, 20);\n"
@@ -1446,6 +1485,7 @@ public class WindowTest extends WebTestCase {
      * handled by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testResizeBy() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "window.resizeBy(10, 20);\n"
@@ -1459,6 +1499,7 @@ public class WindowTest extends WebTestCase {
      * by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testScroll() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1473,6 +1514,7 @@ public class WindowTest extends WebTestCase {
      * by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testScrollBy() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1487,6 +1529,7 @@ public class WindowTest extends WebTestCase {
      * by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testScrollByLines() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1501,6 +1544,7 @@ public class WindowTest extends WebTestCase {
      * by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testScrollByPages() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1515,6 +1559,7 @@ public class WindowTest extends WebTestCase {
      * by the scripting engine.
      * @throws Exception if the test fails
      */
+    @Test
     public void testScrollTo() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1532,6 +1577,7 @@ public class WindowTest extends WebTestCase {
      * elements if there is more than one with the specified name.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testElementByNameFromWindow() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
@@ -1565,6 +1611,7 @@ public class WindowTest extends WebTestCase {
      * are emulating Microsoft Internet Explorer.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testElementByIdFromWindow() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
@@ -1596,6 +1643,7 @@ public class WindowTest extends WebTestCase {
      * Test that Window.execScript method gets called correctly.
      * @throws Exception if the test fails
      */
+    @Test
     public void testExecScript() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
@@ -1628,6 +1676,7 @@ public class WindowTest extends WebTestCase {
    /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOnLoadFunction() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
@@ -1662,6 +1711,7 @@ public class WindowTest extends WebTestCase {
      * See bug 1708532 & 1201561.
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testOnloadNotAFunction() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.onload = new function() {alert('a')};\n"
@@ -1681,6 +1731,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testAddOnLoadEventListener() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
@@ -1709,6 +1760,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testAttachOnLoadEvent() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
@@ -1739,6 +1791,7 @@ public class WindowTest extends WebTestCase {
      * Regression test for 1596926
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDetachEventInAttachEvent() throws Exception {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
@@ -1761,6 +1814,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStatus() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1803,6 +1857,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testWindowName() throws Exception {
         final String windowName = "main";
         final String content = "<html>\n"
@@ -1827,6 +1882,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testMozillaViewport() throws Exception {
         final String content = "<html>\n"
             + "<head></head>\n"
@@ -1849,6 +1905,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testPrint() throws Exception {
         final String content = "<html>\n"
             + "<head></head>\n"
@@ -1867,6 +1924,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_image() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1917,6 +1975,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_text() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -1961,6 +2020,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_xml() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -2005,6 +2065,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_javascript() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -2049,6 +2110,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOpenWindow_html() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
@@ -2093,6 +2155,7 @@ public class WindowTest extends WebTestCase {
      * Test the 'Referer' HTTP header by window.open
      * @throws Exception if the test fails.
      */
+    @Test
     public void testOpenWindow_refererHeader() throws Exception {
         final String headerIE = null;
         testOpenWindow_refererHeader(BrowserVersion.INTERNET_EXPLORER_6_0, headerIE);
@@ -2134,6 +2197,7 @@ public class WindowTest extends WebTestCase {
      * do not cause an exception.
      * @throws Exception If the test fails
      */
+    @Test
     public void testNestedSetTimeoutAboveMaxPriority() throws Exception {
         final int max = Thread.MAX_PRIORITY + 1;
         final String content = "<html><body><script language='JavaScript'>\n"
@@ -2159,6 +2223,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testEvalScopeOtherWindow() throws Exception {
         final String content = "<html><body>\n"
             + "<iframe src='iframe.html'></iframe>\n"
@@ -2189,6 +2254,7 @@ public class WindowTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1608555&group_id=47038&atid=448266
      * @throws Exception If the test fails
      */
+    @Test
     public void testEvalScopeLocal() throws Exception {
         final String content = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>\n"
             + "<script> \n"
@@ -2216,6 +2282,7 @@ public class WindowTest extends WebTestCase {
      * should go to this child scope, and not to the window scope.
      * @throws Exception if the test fails
      */
+    @Test
     public void testEvalScopeEvent() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -2237,6 +2304,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testFunctionEquality() throws Exception {
         final String content = "<html><body>\n"
             + "<script>\n"
@@ -2255,6 +2323,7 @@ public class WindowTest extends WebTestCase {
      * Test for 1225021.
      * @throws Exception If the test fails
      */
+    @Test
     public void testCaptureEvents() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -2279,6 +2348,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testGetComputedStyle() throws Exception {
         testGetComputedStyle(BrowserVersion.FIREFOX_2);
         try {
@@ -2313,6 +2383,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testGetComputedStyle_WithComputedColor() throws Exception {
         final String html =
               "<html>\n"
@@ -2334,6 +2405,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testOnLoadContext() throws Exception {
         final String html = "<html><body><script>\n"
             + "var x = function() { alert(this==window) };\n"
@@ -2351,6 +2423,7 @@ public class WindowTest extends WebTestCase {
      * Added test for [ 1727599 ] Bad context in evaluation of the javascript.
      * @throws Exception If the test fails
      */
+    @Test
     public void testEval() throws Exception {
         final String content = "<html><body>\n"
             + "<input type='button' id='myButton' value='Click Me' onclick='test(this)'>\n"
@@ -2372,6 +2445,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testUndefinedProperty() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2392,6 +2466,7 @@ public class WindowTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
      * @throws Exception If the test fails
      */
+    @Test
     public void testOverwriteFunctions() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -2416,6 +2491,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testFrames() throws Exception {
         final String framesetContent =
             "<html><head><title>First</title></head>\n"
@@ -2454,6 +2530,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception if an error occurs
      */
+    @Test
     public void testFunctionPrototypeArguments() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -2487,6 +2564,7 @@ public class WindowTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testWindowProperties() throws Exception {
         testWindowProperties(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"undefined", "undefined"});
         testWindowProperties(BrowserVersion.FIREFOX_2, new String[] {"[Node]", "[Element]"});
@@ -2511,6 +2589,7 @@ public class WindowTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEval_localVariable() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2530,5 +2609,4 @@ public class WindowTest extends WebTestCase {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 }

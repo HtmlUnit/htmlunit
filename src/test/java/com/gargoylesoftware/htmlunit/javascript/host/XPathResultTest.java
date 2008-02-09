@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link XPathResult}.
@@ -49,19 +51,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XPathResultTest extends WebTestCase {
-
-    /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
-     */
-    public XPathResultTest(final String name) {
-        super(name);
-    }
+public class XPathResultTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testResultType() throws Exception {
         testResultType("//div", "4");
         testResultType("count(//div)", "1");
@@ -99,6 +94,7 @@ public class XPathResultTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSnapshotType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -134,6 +130,7 @@ public class XPathResultTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSingleNodeValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -167,6 +164,7 @@ public class XPathResultTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testIterateNext() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

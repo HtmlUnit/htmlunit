@@ -40,11 +40,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link XSLTProcessor}.
@@ -52,19 +54,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XSLTProcessorTest extends WebTestCase {
-
-    /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
-     */
-    public XSLTProcessorTest(final String name) {
-        super(name);
-    }
+public class XSLTProcessorTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void test() throws Exception {
         if (notYetImplemented()) {
             return;

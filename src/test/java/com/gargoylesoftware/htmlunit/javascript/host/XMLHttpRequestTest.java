@@ -43,6 +43,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -51,7 +53,7 @@ import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
@@ -66,7 +68,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class XMLHttpRequestTest extends WebTestCase {
+public class XMLHttpRequestTest extends WebTestCase2 {
 
     private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNINITIALIZED);
     private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_LOADING);
@@ -75,17 +77,11 @@ public class XMLHttpRequestTest extends WebTestCase {
     private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_COMPLETED);
 
     /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
-     */
-    public XMLHttpRequestTest(final String name) {
-        super(name);
-    }
-
     /**
      * Tests synchronous use of XMLHttpRequest.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSyncUse() throws Exception {
         testSyncUse(BrowserVersion.FIREFOX_2);
         testSyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -95,6 +91,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Tests Mozilla and IE style object creation.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testCreation() throws Exception {
         testCreation(BrowserVersion.FIREFOX_2, new String[] {"[object XMLHttpRequest]"});
         testCreation(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"activeX created"});
@@ -104,6 +101,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Tests Mozilla style object creation.
      * @throws Exception If the test fails.
      */
+    @Test
     void testCreation(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
             "<html>\n"
@@ -134,6 +132,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Tests synchronous use of XMLHttpRequest.
      * @throws Exception If the test fails.
      */
+    @Test
     void testSyncUse(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html>\n"
@@ -182,6 +181,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testAsyncUse() throws Exception {
         testAsyncUse(BrowserVersion.FIREFOX_2);
         testAsyncUse(BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -241,6 +241,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266
      * @throws Exception If the test fails.
      */
+    @Test
     public void testRelativeUrl() throws Exception {
         final String html =
               "<html>\n"
@@ -287,6 +288,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testResponseText_NotXml() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -323,6 +325,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Test access to the XML DOM
      * @throws Exception if the test fails.
      */
+    @Test
     public void testResponseXML() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -368,6 +371,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSendNull() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -397,6 +401,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Test calls to send('foo') for a GET. HtmlUnit 1.14 was incorrectly throwing an exception.
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSendGETWithContent() throws Exception {
         testSend(BrowserVersion.FIREFOX_2, "'foo'");
         testSend(BrowserVersion.INTERNET_EXPLORER_6_0, "'foo'");
@@ -406,6 +411,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Test calls to send() without any argument
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSendNoArg() throws Exception {
         testSendNoArg(BrowserVersion.INTERNET_EXPLORER_6_0);
         testSendNoArg(BrowserVersion.FIREFOX_2);
@@ -451,6 +457,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Response received by the XMLHttpRequest should not come in any window
      * @throws Exception if the test fails.
      */
+    @Test
     public void testResponseNotInWindow() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -482,6 +489,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Test Mozilla's overrideMimeType method
      * @throws Exception if the test fails.
      */
+    @Test
     public void testOverrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -522,6 +530,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * replace(CharSequence, CharSequence) method in this version
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplaceOnTextData() throws Exception {
         final String[] expectedAlertsFF = {};
         testReplaceOnTextData(BrowserVersion.FIREFOX_2, expectedAlertsFF);
@@ -590,6 +599,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetLocation() throws Exception {
         testSetLocation(BrowserVersion.FIREFOX_2);
         testSetLocation(BrowserVersion.INTERNET_EXPLORER_6_0);
@@ -632,6 +642,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1508377&group_id=47038&atid=448266
      * @throws Exception if the test fails.
      */
+    @Test
     public void testNoParallelJSExecutionInPage() throws Exception {
         final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {\n"
@@ -690,6 +701,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Test that the Referer header is set correctly
      * @throws Exception if the test fails.
      */
+    @Test
     public void testRefererHeader() throws Exception {
         final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {\n"
@@ -726,6 +738,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      *
      * @throws Exception if the test fails.
      */
+    @Test
     public void testCaseSensitivity() throws Exception {
         final String content = "<html><head><script>\n"
             + "function test() {\n"
@@ -745,6 +758,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Test that the different http methods are supported
      * @throws Exception if the test fails.
      */
+    @Test
     public void testMethods() throws Exception {
         testMethod(SubmitMethod.GET);
         testMethod(SubmitMethod.HEAD);
@@ -791,6 +805,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testResponseXML_selectNodesIE() throws Exception {
         final String html =
               "<html>\n"
@@ -836,6 +851,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Was causing a deadlock on 03.11.2007 (and probably with release 1.13 too)
      * @throws Exception if the test fails
      */
+    @Test
     public void testXMLHttpRequestWithDomChangeListenerDeadlock() throws Exception {
         final String content
             = "<html><head><title>foo</title>\n"
@@ -920,6 +936,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testResponseXML_getElementById_FF() throws Exception {
         final String html =
               "<html>\n"
@@ -965,6 +982,7 @@ public class XMLHttpRequestTest extends WebTestCase {
      * Firefox does not call onreadystatechange handler if sync.
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOnreadystatechange_sync() throws Exception {
         final String[] expectedAlertsFF = {};
         testOnreadystatechange_sync(BrowserVersion.FIREFOX_2, expectedAlertsFF);
@@ -1019,6 +1037,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testResponseXML_getElementById() throws Exception {
         if (notYetImplemented()) {
             return;

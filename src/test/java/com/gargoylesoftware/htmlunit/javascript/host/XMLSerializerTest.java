@@ -37,8 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -48,19 +50,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XMLSerializerTest extends WebTestCase {
-
-    /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
-     */
-    public XMLSerializerTest(final String name) {
-        super(name);
-    }
+public class XMLSerializerTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void test() throws Exception {
         final String expectedStringIE =
             "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
@@ -115,6 +110,7 @@ public class XMLSerializerTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testNameSpaces() throws Exception {
         if (notYetImplemented()) {
             return;

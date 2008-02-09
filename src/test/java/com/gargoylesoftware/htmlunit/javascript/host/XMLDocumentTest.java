@@ -37,18 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link XMLDocument}.
@@ -56,19 +59,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XMLDocumentTest extends WebTestCase {
-
-    /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
-     */
-    public XMLDocumentTest(final String name) {
-        super(name);
-    }
+public class XMLDocumentTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsync() throws Exception {
         testAsync(BrowserVersion.INTERNET_EXPLORER_7_0);
         testAsync(BrowserVersion.FIREFOX_2);
@@ -99,6 +95,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoad() throws Exception {
         testLoad(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "books", "books", "1", "book", "0"});
         testLoad(BrowserVersion.FIREFOX_2, new String[] {"true", "books", "books", "3", "#text", "0"});
@@ -148,6 +145,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoad_relativeURL() throws Exception {
         testLoad_relativeURL(BrowserVersion.INTERNET_EXPLORER_7_0,
                 new String[] {"true", "books", "books", "1", "book"});
@@ -202,6 +200,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testPreserveWhiteSpace() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -219,6 +218,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetProperty() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -234,6 +234,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectNodes() throws Exception {
         testSelectNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1", "books"});
         try {
@@ -287,6 +288,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectNodes_Namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -336,6 +338,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectSingleNode() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -360,6 +363,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoadXML_Namespace() throws Exception {
         testLoadXML_Namespace(BrowserVersion.INTERNET_EXPLORER_7_0);
         testLoadXML_Namespace(BrowserVersion.FIREFOX_2);
@@ -392,6 +396,7 @@ public class XMLDocumentTest extends WebTestCase {
      * Tests "xml:space" attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoadXML_XMLSpaceAttribute() throws Exception {
         testLoadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7_0);
         testLoadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
@@ -424,6 +429,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testParseError() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -474,6 +480,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCreateNSResolver() throws Exception {
         testCreateNSResolver(BrowserVersion.FIREFOX_2, new String[] {"http://myNS"});
         try {
@@ -518,6 +525,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoad_Encoding() throws Exception {
         final String[] expectedAlerts =
         {"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"};
@@ -565,6 +573,7 @@ public class XMLDocumentTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testXmlInsideHtml() throws Exception {
         if (notYetImplemented()) {
             return;

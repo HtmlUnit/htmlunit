@@ -37,15 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link XMLElement}.
@@ -53,19 +57,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XMLElementTest extends WebTestCase {
-
-    /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
-     */
-    public XMLElementTest(final String name) {
-        super(name);
-    }
+public class XMLElementTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAttributes() throws Exception {
         testAttributes(BrowserVersion.INTERNET_EXPLORER_7_0);
         testAttributes(BrowserVersion.FIREFOX_2);
@@ -125,6 +122,7 @@ public class XMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectNodes() throws Exception {
         testSelectNodes(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "1", "title"});
         try {
@@ -178,6 +176,7 @@ public class XMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveChild() throws Exception {
         testRemoveChild(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "2", "1"});
         testRemoveChild(BrowserVersion.FIREFOX_2, new String[] {"true", "2", "1"});
@@ -220,6 +219,7 @@ public class XMLElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetAttributeNode() throws Exception {
         testGetAttributeNode(BrowserVersion.INTERNET_EXPLORER_7_0,
                 new String[] {"lbl_SettingName", "outerHTML", "Item"});
