@@ -63,6 +63,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -540,12 +541,9 @@ public abstract class WebTestCase2 {
      * @return <code>true</code> if this is a junit test.
      */
     private boolean isPublicTestMethod(final Method method) {
-        final String name = method.getName();
-        final Class< ? >[] parameters = method.getParameterTypes();
-        final Class< ? > returnType = method.getReturnType();
-
-        return parameters.length == 0 && name.startsWith("test")
-            && returnType.equals(Void.TYPE)
+        return method.getParameterTypes().length == 0
+            && (method.getName().startsWith("test") || method.getAnnotation(Test.class) != null)
+            && method.getReturnType() == void.class
             && Modifier.isPublic(method.getModifiers());
     }
 

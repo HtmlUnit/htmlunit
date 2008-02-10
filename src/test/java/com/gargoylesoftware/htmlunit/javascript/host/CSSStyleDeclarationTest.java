@@ -203,8 +203,7 @@ public class CSSStyleDeclarationTest extends WebTestCase2 {
     public void testOnclickAccessStyle() throws Exception {
         final String content = "<html><head><title>Color Change Page</title>\n"
              + "<script>\n"
-             + "function test(obj)\n"
-             + "{\n"
+             + "function test(obj) {\n"
              + "   obj.style.backgroundColor = 'yellow';\n"
              + "}\n"
              + "</script>\n"
