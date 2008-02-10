@@ -674,4 +674,30 @@ public class CSSStyleDeclarationTest extends WebTestCase2 {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void display() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    myDiv.style.display='none';\n"
+            + "    alert(myDiv.style.display=='none');\n"
+            + "    myDiv.style.display='';\n"
+            + "    alert(myDiv.style.display=='none');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"true", "false"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
