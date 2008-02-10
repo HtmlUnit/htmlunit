@@ -1529,7 +1529,7 @@
     </class>
 
     <class name="HTMLUnknownElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLUnknownElement"
-        JSObject="true">
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnknownElement">
     </class>
 
     <class name="Location" classname="com.gargoylesoftware.htmlunit.javascript.host.Location"

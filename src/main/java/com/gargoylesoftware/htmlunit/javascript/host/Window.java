@@ -42,6 +42,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -903,7 +904,26 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         else if ("Image".equals(name)) {
             name = "HTMLImageElement";
         }
-        return super.get(name, start);
+        final Object superValue = super.get(name, start);
+        if (superValue == NOT_FOUND && getWebWindow() != null
+                && getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            final Object element = jsxGet_document().jsxFunction_getElementById(name);
+            if (element instanceof HTMLUnknownElement) {
+                final HtmlElement unknownElement = ((HTMLUnknownElement) element).getHtmlElementOrDie();
+                if (unknownElement.getNodeName().equals("xml")) {
+                    final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
+                    document.setParentScope(this);
+                    final Iterator<HtmlElement> children = unknownElement.getAllHtmlChildElements().iterator();
+                    if (children.hasNext()) {
+                        final HtmlElement root = children.next();
+                        document.jsxFunction_loadXML(root.asXml().trim());
+                    }
+                    return document;
+                }
+            }
+            
+        }
+        return superValue;
     }
 
     private Scriptable getTopScope(final Scriptable s) {

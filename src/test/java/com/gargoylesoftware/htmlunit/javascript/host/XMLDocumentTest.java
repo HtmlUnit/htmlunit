@@ -575,9 +575,6 @@ public class XMLDocumentTest extends WebTestCase2 {
      */
     @Test
     public void testXmlInsideHtml() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(messageTableHeaders.documentElement.nodeName);\n"

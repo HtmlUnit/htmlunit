@@ -66,7 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
-import com.gargoylesoftware.htmlunit.html.UnknownHtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for 1.4 version of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>.
@@ -210,7 +210,7 @@ public class GWT14Test extends WebTestCase {
         if (child instanceof HtmlDivision) {
             final HtmlDivision div = (HtmlDivision) child;
             DomNode firstChild = div.getFirstDomChild();
-            if (firstChild instanceof UnknownHtmlElement
+            if (firstChild instanceof HtmlUnknownElement
                     && (firstChild.getNodeName().equals("b") || firstChild.getNodeName().equals("i"))) {
                 firstChild = firstChild.getFirstDomChild();
             }

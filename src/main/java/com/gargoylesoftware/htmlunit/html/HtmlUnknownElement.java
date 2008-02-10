@@ -50,7 +50,7 @@ import java.util.Map;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  */
-public class UnknownHtmlElement extends ClickableElement {
+public class HtmlUnknownElement extends ClickableElement {
 
     private static final long serialVersionUID = 5504784230513084888L;
 
@@ -61,7 +61,7 @@ public class UnknownHtmlElement extends ClickableElement {
      * @param tagName the HTML tag represented by this object
      * @param attributes the initial attributes
      */
-    UnknownHtmlElement(final HtmlPage page, final String tagName, final Map<String, HtmlAttr> attributes) {
+    HtmlUnknownElement(final HtmlPage page, final String tagName, final Map<String, HtmlAttr> attributes) {
         this(page, null, tagName, attributes);
     }
 
@@ -73,7 +73,7 @@ public class UnknownHtmlElement extends ClickableElement {
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param attributes the initial attributes
      */
-    UnknownHtmlElement(final HtmlPage page, final String namespaceURI, final String qualifiedName,
+    HtmlUnknownElement(final HtmlPage page, final String namespaceURI, final String qualifiedName,
             final Map<String, HtmlAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
