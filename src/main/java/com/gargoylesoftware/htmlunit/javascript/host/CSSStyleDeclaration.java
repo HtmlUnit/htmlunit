@@ -161,7 +161,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     protected void setStyleAttribute(String name, final String newValue) {
         final Map<String, String> styleMap = getStyleMap(true);
         if (newValue.trim().length() == 0) {
-            styleMap.remove(name);
+            removeStyleAttribute(name);
         }
         else {
             name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
@@ -204,6 +204,23 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             }
         }
         return styleMap;
+    }
+
+    /**
+     * Removes the specified style attribute.
+     * @param name The attribute name (delimiter-separated, not camel-cased).
+     */
+    protected void removeStyleAttribute(final String name) {
+        final SortedMap<String, String> styleMap = getStyleMap(false);
+        styleMap.remove(name);
+        final StringBuilder buffer = new StringBuilder();
+        for (final String style : styleMap.keySet()) {
+            buffer.append(style).append(':').append(styleMap.get(style)).append(';');
+        }
+        if (buffer.length() != 0) {
+            buffer.setLength(buffer.length() - 1);
+        }
+        jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
     }
 
     /**

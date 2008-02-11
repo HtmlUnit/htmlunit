@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="fix" dev="asashour">
+                JavaScript: remove style attribute if it is empty.
+            </action>
             <action type="add" dev="asashour">
                 Add support of having XML inside Html (IE only).
             </action>

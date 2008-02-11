@@ -543,7 +543,7 @@ public abstract class WebTestCase2 {
     private boolean isPublicTestMethod(final Method method) {
         return method.getParameterTypes().length == 0
             && (method.getName().startsWith("test") || method.getAnnotation(Test.class) != null)
-            && method.getReturnType() == void.class
+            && method.getReturnType() == Void.TYPE
             && Modifier.isPublic(method.getModifiers());
     }
 

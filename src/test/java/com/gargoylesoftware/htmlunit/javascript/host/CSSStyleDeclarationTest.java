@@ -679,9 +679,6 @@ public class CSSStyleDeclarationTest extends WebTestCase2 {
      */
     @Test
     public void display() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
