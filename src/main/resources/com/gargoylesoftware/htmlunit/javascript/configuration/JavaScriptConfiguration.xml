@@ -685,6 +685,7 @@
         <function name="evaluate">
             <browser name="Firefox"/>
         </function>
+        <function name="execCommand"/>
         <function name="getBoxObjectFor">
             <doclink
                 url="http://www.xulplanet.com/references/xpcomref/ifaces/nsIDOMNSDocument.html#method_getBoxObjectFor"

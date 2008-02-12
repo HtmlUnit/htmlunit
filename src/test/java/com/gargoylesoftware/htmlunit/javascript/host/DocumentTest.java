@@ -2954,4 +2954,33 @@ public class DocumentTest extends WebTestCase2 {
     public void testQueryCommandSupported() throws Exception {
         testHTMLFile("DocumentTest_queryCommandSupported.html");
     }
+
+
+    /**
+     * Minimal test for execCommand
+     * @throws Exception if the test fails
+     */
+    public void testExecCommand() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    document.designMode = 'On';\n"
+            + "    document.execCommand('Bold', false, null);\n"
+            + "    try {\n"
+            + "      document.execCommand('foo', false, null);\n"
+            + "    }\n"
+            + "    catch (e) {\n"
+            + "      alert('command foo not supported');\n"
+            + "    }\n"
+            + "    document.designMode = 'Off';\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expected = {"command foo not supported"};
+        createTestPageForRealBrowserIfNeeded(content, expected);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expected, collectedAlerts);
+    }
 }

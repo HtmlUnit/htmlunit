@@ -1340,4 +1340,21 @@ public class Document extends Node {
         }
         return EXECUTE_CMDS_IE.contains(cmd);
     }
+
+    /**
+     * Indicates if the command is supported.
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536419(VS.85).aspx">MSDN documentation</a>
+     * @param cmd the command identifier
+     * @param userInterface display a user interface if the command supports one
+     * @param value the string, number, or other value to assign. Possible values depend on the command
+     * @return <code>true></code> if the command is successful
+     */
+    public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {
+        if (!EXECUTE_CMDS_IE.contains(cmd)) {
+            throw Context.reportRuntimeError("execCommand: invalid command >" + cmd + "<");
+        }
+        
+        getLog().warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        return true;
+    }
 }

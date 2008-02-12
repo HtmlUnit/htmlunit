@@ -26,7 +26,7 @@
                 XmlPage: fix asText() and asXml().
             </action>
             <action type="add" dev="mguillem">
-                JavaScript: add basic support for document.queryCommandSupported.
+                JavaScript: add basic support for document.queryCommandSupported and document.execCommand.
             </action>
             <action type="fix" dev="asashour" id="1883395">
                 XmlPage: correct XPath handling (#1883395).
