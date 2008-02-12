@@ -97,8 +97,11 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Note: <tt>testElementGetStyle</tt>, <tt>testElementGetHeight</tt>, and <tt>testElementGetWidth</tt>
-     *       are expected to fail with HtmlUnit, as they need visual rendering.
+     * Note: <tt>testElementGetDimensions:</tt>, <tt>testElementGetStyle</tt>, <tt>testElementGetHeight</tt>,
+     *       <tt>testElementScrollTo:</tt>, <tt>testPositionedOffset</tt>, <tt>testViewportOffset</tt>,
+     *       <tt>testViewportDimensions</tt>, <tt>testViewportScrollOffsets</tt>
+     *       and <tt>testElementGetWidth</tt> are expected to fail with HtmlUnit,
+     *       as they need calculating width and height of all elements.
      * @throws Exception If test fails.
      */
     public void testDom() throws Exception {
