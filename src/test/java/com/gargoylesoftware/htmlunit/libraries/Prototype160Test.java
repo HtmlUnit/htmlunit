@@ -97,7 +97,8 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Note: testElementGetStyle is expected to fail with HtmlUnit, as it needs visual rendering.
+     * Note: <tt>testElementGetStyle</tt>, <tt>testElementGetHeight</tt>, and <tt>testElementGetWidth</tt>
+     *       are expected to fail with HtmlUnit, as they need visual rendering.
      * @throws Exception If test fails.
      */
     public void testDom() throws Exception {
