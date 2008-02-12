@@ -62,8 +62,7 @@ public final class IncorrectnessListenerTest extends WebTestCase2 {
 
         final WebClient webClient = new WebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
-        final IncorrectnessListener listener = new IncorrectnessListener()
-        {
+        final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
