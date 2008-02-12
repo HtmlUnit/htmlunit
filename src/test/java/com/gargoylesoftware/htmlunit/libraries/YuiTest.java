@@ -43,6 +43,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -77,6 +79,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testLogger() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "logger.html", emptyList_);
     }
@@ -84,6 +87,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testAnimation() throws Exception {
         final List<String> l = new ArrayList<String>();
         l.add("test_onStart");
@@ -93,6 +97,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testTabView() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -106,6 +111,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDateMath() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "datemath.html", emptyList_, "btnRun");
     }
@@ -113,6 +119,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testCalendar() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -123,6 +130,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testColorPicker() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -133,6 +141,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testConfig() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -148,6 +157,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDataSource() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -158,6 +168,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDataTable() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -168,6 +179,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDom() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -178,6 +190,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDragDrop() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -188,6 +201,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testEditor() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -198,6 +212,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testYuiLoaderRollup() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -208,6 +223,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testYuiLoaderConfig() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -218,6 +234,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testYuiLoader() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "yuiloader.html", Collections.singletonList("test_calculate"));
     }
@@ -225,6 +242,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testModule() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "module.html", Collections.singletonList("testConstructor"));
     }
@@ -232,6 +250,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testImageLoader() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -242,6 +261,7 @@ public class YuiTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testElement() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "element.html", emptyList_);
     }

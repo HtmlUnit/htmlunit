@@ -37,15 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
@@ -58,20 +63,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public abstract class JQueryTestBase extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     *
-     * @param name The name of the test.
-     */
-    public JQueryTestBase(final String name) {
-        super(name);
-    }
+public abstract class JQueryTestBase extends WebTestCase2 {
 
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testJQueryWithIE6() throws Exception {
         final Iterator<HtmlElement> i = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0);
         verify(i, true);
@@ -80,6 +77,7 @@ public abstract class JQueryTestBase extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testJQueryWithIE7() throws Exception {
         final Iterator<HtmlElement> i = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0);
         verify(i, true);
@@ -88,6 +86,7 @@ public abstract class JQueryTestBase extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testJQueryWithFirefox2() throws Exception {
         final Iterator<HtmlElement> i = loadPage(BrowserVersion.FIREFOX_2);
         verify(i, false);

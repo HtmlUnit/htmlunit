@@ -47,6 +47,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.junit.After;
+import org.junit.Test;
 import org.mortbay.jetty.Server;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -54,7 +56,7 @@ import org.w3c.dom.Element;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -65,18 +67,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class Sarissa099Test extends WebTestCase {
+public class Sarissa099Test extends WebTestCase2 {
 
     private Server server_;
-
-    /**
-     * Creates an instance.
-     *
-     * @param name The name of the test.
-     */
-    public Sarissa099Test(final String name) {
-        super(name);
-    }
 
     /**
      * Returns the Sarissa version being tested.
@@ -90,6 +83,7 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testSarissa() throws Exception {
         test("SarissaTestCase");
     }
@@ -97,6 +91,7 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testXmlHttpRequest() throws Exception {
         test("XmlHttpRequestTestCase");
     }
@@ -104,6 +99,7 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testXMLSerializer() throws Exception {
         test("XMLSerializerTestCase");
     }
@@ -111,6 +107,7 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testDOMParser() throws Exception {
         test("DOMParserTestCase");
     }
@@ -118,6 +115,7 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testXMLDocument() throws Exception {
         test("XMLDocumentTestCase");
     }
@@ -125,6 +123,7 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testXMLElement() throws Exception {
         test("XMLElementTestCase");
     }
@@ -133,6 +132,7 @@ public class Sarissa099Test extends WebTestCase {
      * Fails because of XSL, Jaxen and Maven 2, see {@link #testXSLTWithJaxen()}.
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testXSLTProcessor() throws Exception {
         test("XSLTProcessorTestCase");
     }
@@ -161,9 +161,8 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * {@inheritDoc}
      */
-    @Override
+    @After
     protected void tearDown() throws Exception {
-        super.tearDown();
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
     }
@@ -171,6 +170,7 @@ public class Sarissa099Test extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testXSLTWithJaxen() throws Exception {
         final String input = "<root><element attribute=\"value\"/></root>";
         final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n"

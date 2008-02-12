@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.util.Iterator;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
@@ -48,15 +50,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @author Daniel Gredler
  */
 public class JQuery1131Test extends JQueryTestBase {
-
-    /**
-     * Creates an instance.
-     *
-     * @param name The name of the test.
-     */
-    public JQuery1131Test(final String name) {
-        super(name);
-    }
 
     /**
      * {@inheritDoc}
@@ -69,6 +62,7 @@ public class JQuery1131Test extends JQueryTestBase {
     /**
      * {@inheritDoc}
      */
+    @Test
     @Override
     public void testJQueryWithFirefox2() throws Exception {
         if (notYetImplemented()) {

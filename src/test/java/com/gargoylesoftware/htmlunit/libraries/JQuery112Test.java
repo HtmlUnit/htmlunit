@@ -51,15 +51,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 public class JQuery112Test extends JQueryTestBase {
 
     /**
-     * Creates an instance.
-     *
-     * @param name The name of the test.
-     */
-    public JQuery112Test(final String name) {
-        super(name);
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Test;
 import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -69,6 +70,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testAjax() throws Exception {
         final String filename = "ajax.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 15, 34, 0, 0);
@@ -78,6 +80,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testArray() throws Exception {
         final String filename = "array.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 97, 0, 0);
@@ -87,6 +90,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testBase() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -104,6 +108,7 @@ public class Prototype160Test extends WebTestCase {
      *       as they need calculating width and height of all elements.
      * @throws Exception If test fails.
      */
+    @Test
     public void testDom() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -118,6 +123,7 @@ public class Prototype160Test extends WebTestCase {
      *
      * @throws Exception If test fails.
      */
+    @Test
     public void testElementMixins() throws Exception {
         final String filename = "element_mixins.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 12, 0, 0);
@@ -127,6 +133,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testEnumerable() throws Exception {
         final String filename = "enumerable.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  25, 82, 0, 0);
@@ -136,6 +143,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testEvent() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -148,6 +156,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testForm() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -160,6 +169,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testHash() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -172,6 +182,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testNumber() throws Exception {
         final String filename = "number.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 20, 0, 0);
@@ -181,6 +192,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testPosition() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -193,6 +205,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testRange() throws Exception {
         final String filename = "range.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 6, 21, 0, 0);
@@ -202,6 +215,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testSelector() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -214,6 +228,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testString() throws Exception {
         final String filename = "string.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 40, 220, 0, 0);
@@ -224,6 +239,7 @@ public class Prototype160Test extends WebTestCase {
      * Depends on {@link HtmlUnitRegExpProxyTest#test()}.
      * @throws Exception If test fails.
      */
+    @Test
     public void testUnitTests() throws Exception {
         if (notYetImplemented()) {
             return;

@@ -37,11 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.net.URL;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -50,18 +54,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class Dojo090Test extends WebTestCase {
-
-    /**
-     * @param name The name of the test.
-     */
-    public Dojo090Test(final String name) {
-        super(name);
-    }
+public class Dojo090Test extends WebTestCase2 {
 
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDojo() throws Exception {
 
         // TODO: seems to not trigger the test runs...

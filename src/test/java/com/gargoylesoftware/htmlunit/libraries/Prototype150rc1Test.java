@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import org.junit.Test;
 import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -67,6 +68,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testAjax() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -79,6 +81,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testArray() throws Exception {
         final String filename = "array.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 12, 49, 0, 0);
@@ -88,6 +91,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testBase() throws Exception {
         final String filename = "base.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 48, 0, 0);
@@ -97,6 +101,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testDom() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -109,6 +114,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testElementMixins() throws Exception {
         final String filename = "element_mixins.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 7, 0, 0);
@@ -118,6 +124,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testEnumerable() throws Exception {
         final String filename = "enumerable.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  23, 67, 0, 0);
@@ -127,6 +134,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testForm() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -141,6 +149,7 @@ public class Prototype150rc1Test extends WebTestCase {
      * https://bugzilla.mozilla.org/show_bug.cgi?id=370279
      * @throws Exception If test fails.
      */
+    @Test
     public void testHash() throws Exception {
         final String filename = "hash.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 5, 19, 0, 0);
@@ -150,6 +159,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testPosition() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -162,6 +172,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testRange() throws Exception {
         final String filename = "range.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 6, 21, 0, 0);
@@ -171,6 +182,7 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testSelector() throws Exception {
         final String filename = "selector.html";
         //HtmlUnit with IE succeeds for all :)
@@ -184,6 +196,7 @@ public class Prototype150rc1Test extends WebTestCase {
      * https://bugzilla.mozilla.org/show_bug.cgi?id=369860
      * @throws Exception If test fails.
      */
+    @Test
     public void testString() throws Exception {
         final String filename = "string.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 76, 0, 0);

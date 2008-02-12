@@ -37,11 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.net.URL;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for compatibility with <a href="http://www.curvycorners.net">curvyCorners</a>.
@@ -49,20 +53,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Gareth Davis
  */
-public class CurvyCornersTest extends WebTestCase {
+public class CurvyCornersTest extends WebTestCase2 {
 
     private static final String BASE_FILE_PATH = "curvyCorners/1.2.9-beta/";
     
     /**
-     * @param name The name of the test.
-     */
-    public CurvyCornersTest(final String name) {
-        super(name);
-    }
-
-    /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDemoIE7() throws Exception {
         doTest("demo.html", BrowserVersion.INTERNET_EXPLORER_7_0);
     }
@@ -70,6 +68,7 @@ public class CurvyCornersTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDemo2IE7() throws Exception {
         doTest("demo2.html", BrowserVersion.INTERNET_EXPLORER_7_0);
     }
@@ -77,6 +76,7 @@ public class CurvyCornersTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDemoDefault() throws Exception {
         doTest("demo.html", BrowserVersion.getDefault());
     }
@@ -84,6 +84,7 @@ public class CurvyCornersTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDemo2Default() throws Exception {
         doTest("demo2.html", BrowserVersion.getDefault());
     }
@@ -91,6 +92,7 @@ public class CurvyCornersTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDemoFF2() throws Exception {
         doTest("demo.html", BrowserVersion.FIREFOX_2);
     }
@@ -98,6 +100,7 @@ public class CurvyCornersTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testDemo2FF2() throws Exception {
         doTest("demo2.html", BrowserVersion.FIREFOX_2);
     }

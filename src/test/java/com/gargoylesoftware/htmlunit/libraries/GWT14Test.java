@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,13 +51,15 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Test;
 import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -74,25 +79,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class GWT14Test extends WebTestCase {
+public class GWT14Test extends WebTestCase2 {
 
     private Server server_;
 
     /**
-     * Creates an instance.
-     *
-     * @param name The name of the test.
-     */
-    public GWT14Test(final String name) {
-        super(name);
-    }
-
-    /**
      * @throws Exception If an error occurs.
      */
-    public void testHello() throws Exception {
+    @Test
+    public void hello() throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), collectedAlerts);
+        final HtmlPage page = loadPage("Hello", BrowserVersion.getDefault(), collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
         assertEquals("Click me", buttonLabel.getData());
@@ -106,11 +103,12 @@ public class GWT14Test extends WebTestCase {
      *
      * @throws Exception If an error occurs.
      */
-    public void testI18N() throws Exception {
+    @Test
+    public void I18N() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadPage("I18N", BrowserVersion.getDefault(), null);
         testI18N(page, "numberFormatOutputText", "31,415,926,535.898");
 
         String timeZone = new SimpleDateFormat("Z").format(
@@ -140,6 +138,7 @@ public class GWT14Test extends WebTestCase {
      *
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testI18N_fr() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -282,8 +281,9 @@ public class GWT14Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testSimpleXML() throws Exception {
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadPage("SimpleXML", BrowserVersion.getDefault(), null);
 
         final String[] pendingOrders =
         {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
@@ -310,8 +310,9 @@ public class GWT14Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testMail() throws Exception {
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadPage("Mail", BrowserVersion.getDefault(), null);
         final HtmlTableDataCell cell = (HtmlTableDataCell)
             page.getFirstByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..");
         testTableDataCell(cell, "Welcome back, foo@example.com");
@@ -337,8 +338,9 @@ public class GWT14Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testJSON() throws Exception {
-        final HtmlPage page = loadPage(BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadPage("JSON", BrowserVersion.getDefault(), null);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         button.click();
 
@@ -360,6 +362,7 @@ public class GWT14Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testDynaTable() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
@@ -397,6 +400,7 @@ public class GWT14Test extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testKitchenSink() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/KitchenSink");
         final WebClient client = new WebClient();
@@ -426,13 +430,14 @@ public class GWT14Test extends WebTestCase {
     /**
      * Loads the GWT unit test index page using the specified browser version, and test name.
      *
+     * @param testName The test name.
      * @param version The browser version to use.
      * @param collectedAlerts The List to collect alerts into.
      * @throws Exception if an error occurs.
      * @return The loaded page.
      */
-    protected HtmlPage loadPage(final BrowserVersion version, final List<String> collectedAlerts) throws Exception {
-        final String testName = getName().substring(4);
+    protected HtmlPage loadPage(final String testName, final BrowserVersion version,
+            final List<String> collectedAlerts) throws Exception {
         final String resource = "gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
@@ -450,9 +455,8 @@ public class GWT14Test extends WebTestCase {
     /**
      * {@inheritDoc}
      */
-    @Override
+    @After
     protected void tearDown() throws Exception {
-        super.tearDown();
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
     }
@@ -462,6 +466,7 @@ public class GWT14Test extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testDateGetTimezoneOffset() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
