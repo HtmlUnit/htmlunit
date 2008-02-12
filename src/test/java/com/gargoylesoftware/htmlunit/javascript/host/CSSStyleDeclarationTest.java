@@ -719,4 +719,28 @@ public class CSSStyleDeclarationTest extends WebTestCase2 {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void resettingValue2() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    myDiv.style.marginTop='2px';\n"
+            + "    alert(myDiv.style.marginTop);\n"
+            + "    myDiv.style.left='-1px';\n"
+            + "    myDiv.style.marginTop='30px';\n"
+            + "    alert(myDiv.style.marginTop);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"2px", "30px"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

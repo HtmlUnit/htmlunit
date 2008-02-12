@@ -161,7 +161,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     protected void setStyleAttribute(String name, final String newValue) {
         name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
         removeStyleAttribute(name);
-        final Map<String, String> styleMap = getStyleMap(true);
+        final Map<String, String> styleMap = getStyleMap(false);
         if (newValue.trim().length() != 0) {
             styleMap.put(name, newValue);
 
