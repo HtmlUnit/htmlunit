@@ -2960,6 +2960,7 @@ public class DocumentTest extends WebTestCase2 {
      * Minimal test for execCommand
      * @throws Exception if the test fails
      */
+    @Test
     public void testExecCommand() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
