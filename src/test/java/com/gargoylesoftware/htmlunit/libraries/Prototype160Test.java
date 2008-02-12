@@ -88,6 +88,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
+     * Fixed if {@link SimpleScriptableTest#testArrayedMap()} is fixed.
      * @throws Exception If test fails.
      */
     @Test
@@ -106,6 +107,9 @@ public class Prototype160Test extends WebTestCase {
      *       <tt>testViewportDimensions</tt>, <tt>testViewportScrollOffsets</tt>
      *       and <tt>testElementGetWidth</tt> are expected to fail with HtmlUnit,
      *       as they need calculating width and height of all elements.
+     *
+     * Other tests succeed.
+     *
      * @throws Exception If test fails.
      */
     @Test

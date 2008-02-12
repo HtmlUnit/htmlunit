@@ -162,7 +162,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * {@inheritDoc}
      */
     @After
-    protected void tearDown() throws Exception {
+    public void tearDown() throws Exception {
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
     }

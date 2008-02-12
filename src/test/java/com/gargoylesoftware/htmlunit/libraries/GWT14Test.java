@@ -158,7 +158,7 @@ public class GWT14Test extends WebTestCase2 {
             for( var i=0; i < value.length; i++ ) {
               output += value.charCodeAt(i) + ' ';
             }
-           alert(output);
+            alert(output);
          */
         testI18N(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
 
@@ -456,7 +456,7 @@ public class GWT14Test extends WebTestCase2 {
      * {@inheritDoc}
      */
     @After
-    protected void tearDown() throws Exception {
+    public void tearDown() throws Exception {
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
     }
