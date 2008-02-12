@@ -155,16 +155,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the specified style attribute.
-     * @param name the attribute name
+     * @param name the attribute name (camel-cased)
      * @param newValue the attribute value
      */
     protected void setStyleAttribute(String name, final String newValue) {
+        name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
+        removeStyleAttribute(name);
         final Map<String, String> styleMap = getStyleMap(true);
-        if (newValue.trim().length() == 0) {
-            removeStyleAttribute(name);
-        }
-        else {
-            name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
+        if (newValue.trim().length() != 0) {
             styleMap.put(name, newValue);
 
             final StringBuilder buffer = new StringBuilder();
