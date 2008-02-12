@@ -918,6 +918,8 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
         </property>
+        <property name="clientHeight" readable="true" writable="false"/>
+        <property name="clientWidth" readable="true" writable="false"/>
         <property name="currentStyle" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </property>

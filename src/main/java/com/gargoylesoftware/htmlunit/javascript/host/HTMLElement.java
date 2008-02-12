@@ -510,6 +510,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Return "clientHeight" attribute.
+     * @return the clientHeight attribute.
+     */
+    public int jsxGet_clientHeight() {
+        return 0;
+    }
+
+    /**
+     * Return "clientWidth" attribute.
+     * @return the clientWidth attribute.
+     */
+    public int jsxGet_clientWidth() {
+        return 0;
+    }
+
+    /**
      * Set the class attribute for this element.
      * @param className - the new class name
      */

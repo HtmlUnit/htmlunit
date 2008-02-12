@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease">
+            <action type="add" dev="asashour">
+                JavaScript: add empty implementation of HTMLElement.clientWidth and .clientHeight.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: remove style attribute if it is empty.
             </action>

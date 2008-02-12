@@ -2131,4 +2131,25 @@ public class HTMLElementTest extends WebTestCase2 {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clientWidth() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    alert(myDiv.clientWidth);\n"
+            + "    alert(myDiv.clientHeight);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"0", "0"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
