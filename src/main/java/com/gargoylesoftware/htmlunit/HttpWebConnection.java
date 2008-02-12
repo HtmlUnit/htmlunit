@@ -455,9 +455,8 @@ public class HttpWebConnection extends WebConnectionImpl {
             statusMessage = "Unknown status code";
         }
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
-        final Header[] array = method.getResponseHeaders();
-        for (int i = 0; i < array.length; i++) {
-            headers.add(new NameValuePair(array[i].getName(), array[i].getValue()));
+        for (final Header header : method.getResponseHeaders()) {
+            headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
         final WebResponseData responseData = newWebResponseDataInstance(statusMessage, headers, statusCode, method);
 

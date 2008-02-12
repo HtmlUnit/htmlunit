@@ -187,11 +187,9 @@ public class SimpleScriptableTest extends WebTestCase {
         assertTrue("directory exists", directory.exists());
         assertTrue("is a directory", directory.isDirectory());
 
-        final String fileNames[] = directory.list();
         final Set<String> collection = new HashSet<String>();
 
-        for (int i = 0; i < fileNames.length; i++) {
-            final String name = fileNames[i];
+        for (final String name : directory.list()) {
             if (name.endsWith(".java")) {
                 collection.add(name.substring(0, name.length() - 5));
             }

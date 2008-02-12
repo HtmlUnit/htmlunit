@@ -300,8 +300,8 @@ public class Document extends Node {
      */
     private static String concatArgsAsString(final Object[] args) {
         final StringBuilder buffer = new StringBuilder();
-        for (int i = 0; i < args.length; i++) {
-            buffer.append(Context.toString(args[i]));
+        for (final Object arg : args) {
+            buffer.append(Context.toString(arg));
         }
         return buffer.toString();
     }

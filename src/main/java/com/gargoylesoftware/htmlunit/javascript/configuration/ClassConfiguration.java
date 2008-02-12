@@ -95,10 +95,9 @@ public final class ClassConfiguration {
         linkedClass_ = (Class< ? extends SimpleScriptable>) Class.forName(implementingClass);
         if (jsConstructor != null && jsConstructor.length() != 0) {
             Method foundCtor = null;
-            final Method[] methods = linkedClass_.getMethods();
-            for (int i = 0; i < methods.length; i++) {
-                if (methods[i].getName().equals(jsConstructor)) {
-                    foundCtor = methods[i];
+            for (final Method method : linkedClass_.getMethods()) {
+                if (method.getName().equals(jsConstructor)) {
+                    foundCtor = method;
                     break;
                 }
             }
@@ -149,11 +148,10 @@ public final class ClassConfiguration {
         // For the setters, we have to loop through the methods since we do not know what type of argument
         // the method takes.
         if (writeable) {
-            final Method[] methods = linkedClass_.getMethods();
             final String setMethodName = SETTER_PREFIX + name;
-            for (int i = 0; i < methods.length; i++) {
-                if (methods[i].getName().equals(setMethodName) && methods[i].getParameterTypes().length == 1) {
-                    info.setWriteMethod(methods[i]);
+            for (final Method method : linkedClass_.getMethods()) {
+                if (method.getName().equals(setMethodName) && method.getParameterTypes().length == 1) {
+                    info.setWriteMethod(method);
                     break;
                 }
             }
@@ -203,11 +201,10 @@ public final class ClassConfiguration {
      */
     public void addFunction(final String name) {
         final FunctionInfo info = new FunctionInfo();
-        final Method[] methods = linkedClass_.getMethods();
         final String setMethodName = FUNCTION_PREFIX + name;
-        for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getName().equals(setMethodName)) {
-                info.setFunctionMethod(methods[i]);
+        for (final Method method : linkedClass_.getMethods()) {
+            if (method.getName().equals(setMethodName)) {
+                info.setFunctionMethod(method);
                 break;
             }
         }

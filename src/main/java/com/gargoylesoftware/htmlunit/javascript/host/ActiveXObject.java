@@ -284,10 +284,9 @@ public class ActiveXObject extends SimpleScriptable {
         if (name == null) {
             return null;
         }
-        final Method[] methods = clazz.getMethods();
-        for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getName().equals(name)) {
-                return methods[i];
+        for (final Method method : clazz.getMethods()) {
+            if (method.getName().equals(name)) {
+                return method;
             }
         }
         return null;
