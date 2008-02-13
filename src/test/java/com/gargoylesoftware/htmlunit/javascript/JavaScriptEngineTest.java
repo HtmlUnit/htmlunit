@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +48,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.junit.Assert;
+import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
@@ -56,7 +61,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -81,19 +86,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class JavaScriptEngineTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public JavaScriptEngineTest(final String name) {
-        super(name);
-    }
+public class JavaScriptEngineTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetJavascriptEnabled_false() throws Exception {
         final WebClient client = new WebClient();
         client.setJavaScriptEnabled(false);
@@ -124,6 +122,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1609944&group_id=47038
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnloadJavascriptFunction() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -144,6 +143,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Try to set the value of a text input field.
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetInputValue() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -167,6 +167,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAlert() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -190,6 +191,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Checks that a dynamically compiled function works in the scope of its birth
      * @throws Exception if the test fails
      */
+    @Test
     public void testScopeOfNewFunction() throws Exception {
         final String content
             = "<html><head><script>\n"
@@ -209,6 +211,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testScopeOfNestedNewFunction() throws Exception {
         final String[] expectedAlerts = {"foo"};
         final String content
@@ -233,6 +236,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * and not the other window
      * @throws Exception if the test fails
      */
+    @Test
     public void testScopeOfNewFunctionCalledFormOtherWindow() throws Exception {
         final String firstContent
             = "<html><head>\n"
@@ -274,6 +278,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * work... a bit
      * @throws Exception if the test fails
      */
+    @Test
     public void testScopeInInactivePage() throws Exception {
         final String firstContent
             = "<html><head>\n"
@@ -310,6 +315,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testExternalScript() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -345,6 +351,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Test that the url of the page containing the script is contained in the exception's message
      * @throws Exception if the test fails
      */
+    @Test
     public void testScriptErrorContainsPageUrl() throws Exception {
         // embedded script
         final String content1
@@ -386,6 +393,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testExternalScriptEncoding() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -478,6 +486,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * this used to blow up.
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetValuesThatAreNotStrings() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -503,6 +512,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReferencingVariablesFromOneScriptToAnother_Regression() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -533,6 +543,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testJavaScriptUrl() throws Exception {
         final String htmlContent
             = "<html><head><script language='javascript'>\n"
@@ -561,6 +572,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testJavaScriptWrappedInHtmlComments() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title><script language='javascript'><!--\n"
@@ -575,6 +587,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testJavaScriptWrappedInHtmlComments2() throws Exception {
         final String content =
             "<html><head>\n"
@@ -594,6 +607,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testJavaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
@@ -610,6 +624,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Regression test for bug 1714762
      * @throws Exception if the test fails
      */
+    @Test
     public void testJavaScriptWrappedInHtmlComments_commentNotClosed() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
@@ -630,6 +645,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testJavaScriptWrappedInHtmlComments_allOnOneLine() throws Exception {
         final String content
             = "<html>\n"
@@ -652,6 +668,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEventHandlerWithComment() throws Exception {
         final String content = "<html><body onLoad='alert(\"test\"); // xxx'></body></html>";
         final String[] expectedAlerts = {"test"};
@@ -665,6 +682,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * the object being clicked, not the window.  Regression test.
      * @throws Exception if the test fails
      */
+    @Test
     public void testThisDotInOnClick() throws Exception {
         final String htmlContent
             = "<html><head><title>First</title><script>function foo(message){alert(message);}</script><body>\n"
@@ -684,6 +702,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFunctionDefinedInExternalFile_CalledFromInlineScript() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -719,6 +738,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1552746&group_id=47038
      * @throws Exception if the test fails
      */
+    @Test
     public void testExternalScriptWithNewLineBeforeClosingScriptTag() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -749,6 +769,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFunctionCaller() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -777,6 +798,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Test case for bug 707134.  Currently I am unable to reproduce the problem.
      * @throws Exception if the test fails
      */
+    @Test
     public void testFunctionDefinedInSameFile() throws Exception {
         final String htmlContent
             = "<html><head><title>First</title><script>\n"
@@ -810,6 +832,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Test that the javascript engine gets called correctly for variable access.
      * @throws Exception If the test fails
      */
+    @Test
     public void testJavaScriptEngineCallsForVariableAccess() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -858,6 +881,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * ActiveX related exceptions that do not require a map
      * @throws Exception If the test fails
      */
+    @Test
     public void testActiveXObjectNoMap() throws Exception {
         try {
             loadPage(getJavaScriptContent("new ActiveXObject()"));
@@ -905,6 +929,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * javascript using the IE specific ActiveXObject constructor.
      * @throws Exception If the test fails
      */
+    @Test
     public void testActiveXObjectWithMap() throws Exception {
         final Map<String, String> activexToJavaMapping = new HashMap<String, String>();
         activexToJavaMapping.put(
@@ -950,7 +975,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             // Success
         }
 
-        assertEquals("should no alerts yet", Collections.EMPTY_LIST, collectedAlerts);
+        Assert.assertEquals("should no alerts yet", Collections.EMPTY_LIST, collectedAlerts);
 
         // Try a valid object in the map
         webConnection.setDefaultResponse(getJavaScriptContent(
@@ -984,6 +1009,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Check that wrong javascript just causes its context to fail but not the whole page.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testScriptErrorIsolated() throws Exception {
         final String content
             = "<html>\n"
@@ -1032,6 +1058,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * https://bugzilla.mozilla.org/show_bug.cgi?id=374918
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testPrototypeScope() throws Exception {
         final String content1
             = "<html><head>\n"
@@ -1071,6 +1098,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testTimeout() throws Exception {
         final long timeout = 2000;
         final long oldTimeout = JavaScriptEngine.getTimeout();
@@ -1183,6 +1211,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testCommentNoDoubleSlashIE() throws Exception {
         final String content =
             "<html><head>\n"
@@ -1202,6 +1231,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testCommentNoDoubleSlashFF() throws Exception {
         final String content =
             "<html><head>\n"
@@ -1225,6 +1255,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testComment() throws Exception {
         testComment(BrowserVersion.INTERNET_EXPLORER_6_0);
         testComment(BrowserVersion.FIREFOX_2);
@@ -1252,6 +1283,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testRegExpSupport() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -1295,6 +1327,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Correct string primitive prototype resolution within HtmlUnit is tested
      * by {@link #testPrototypeScope()}
      */
+    @Test
     public void testStringPrimitivePrototypeScopeRhino() {
         if (notYetImplemented()) {
             return;
@@ -1322,6 +1355,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Test ECMA reserved keywords... that are accepted by "normal" browsers
      * @throws Exception if the test fails
      */
+    @Test
     public void testECMAReservedKeywords() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -1342,6 +1376,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Test that compiled script are cached.
      * @throws Exception if the test fails
      */
+    @Test
     public void testCompiledScriptCached() throws Exception {
         final String content1
             = "<html><head><title>foo</title>\n"
@@ -1390,6 +1425,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * one will be tested separately.
      * @throws Exception If something goes wrong.
      */
+    @Test
     public void testScriptTags_AllLocalContent() throws Exception {
         final String content
             = "<html>\n"

@@ -48,6 +48,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.lang.ClassUtils;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -83,6 +84,7 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCallInheritedFunction() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -119,6 +121,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
     /**
      */
+    @Test
     public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
             JavaScriptConfiguration.getHtmlJavaScriptMapping();
@@ -203,6 +206,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * Furthermore document.body = document.body will work on FF but not on IE
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetNonWritableProperty() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -223,6 +227,7 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testArguments_toString() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -243,6 +248,7 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testStringWithExclamationMark() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -263,6 +269,7 @@ public class SimpleScriptableTest extends WebTestCase {
      *   href="http://java.sun.com/j2se/1.5.0/docs/guide/plugin/dom/org/w3c/dom/html/package-summary.html">DOM API</a>
      * @throws Exception if the test fails.
      */
+    @Test
     public void testHostClassNames() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -287,6 +294,7 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testArrayedMap() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -315,6 +323,7 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testIsParentOf() throws Exception {
         testIsParentOf("Node", "Element", true);
         testIsParentOf("Document", "XMLDocument", true);
@@ -352,6 +361,7 @@ public class SimpleScriptableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testWindowPropertyToString() throws Exception {
         final String content = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -372,6 +382,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * This is related to HtmlUnitContextFactory.hasFeature(Context.FEATURE_PARENT_PROTO_PROPERTIES).
      * @throws Exception if the test fails
      */
+    @Test
     public void testParentProtoFeature() throws Exception {
         testParentProtoFeature(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"false"});
         testParentProtoFeature(BrowserVersion.FIREFOX_2, new String[] {"true"});

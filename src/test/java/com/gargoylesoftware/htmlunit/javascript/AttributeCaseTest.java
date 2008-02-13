@@ -39,9 +39,12 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.IOException;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -52,7 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class AttributeCaseTest extends WebTestCase {
+public class AttributeCaseTest extends WebTestCase2 {
 
     private static final String ATTRIBUTE_NAME = "randomAttribute";
     private static final String ATTRIBUTE_VALUE = "someValue";
@@ -62,102 +65,106 @@ public class AttributeCaseTest extends WebTestCase {
     private HtmlPage page_;
 
     /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public AttributeCaseTest(final String name) {
-        super(name);
-    }
-
-    /**
      * Test {@link HtmlElement#getAttributeValue(String)} with a lower case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testGetAttributeLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
      * Test {@link HtmlElement#getAttributeValue(String)} with a mixed case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testGetAttributeMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME));
+        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME));
     }
 
     /**
      * Test {@link HtmlElement#getAttributeValue(String)} with an upper case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testGetAttributeUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
-        assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toUpperCase()));
+        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toUpperCase()));
     }
 
     /**
      * Test {@link HtmlElement#setAttributeValue(String,String)} with a lower case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testSetAttributeLowerCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME.toLowerCase(), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
-        assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
+            element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
      * Test {@link HtmlElement#setAttributeValue(String,String)} with a mixed case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testSetAttributeMixedCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
-        assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
+            element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
      * Test {@link HtmlElement#setAttributeValue(String,String)} with an upper case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testSetAttributeUpperCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME.toUpperCase(), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
-        assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
+            element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
      * Test {@link HtmlElement#removeAttribute(String)} with a lower case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testRemoveAttributeLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME.toLowerCase());
-        assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
      * Test {@link HtmlElement#removeAttribute(String)} with a mixed case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testRemoveAttributeMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME);
-        assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
      * Test {@link HtmlElement#removeAttribute(String)} with an upper case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testRemoveAttributeUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME.toUpperCase());
-        assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
+        Assert.assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
 
     /**
      * Test {@link HtmlElement#isAttributeDefined(String)} with a lower case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testIsAttributeDefinedLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toLowerCase()));
@@ -167,6 +174,7 @@ public class AttributeCaseTest extends WebTestCase {
      * Test {@link HtmlElement#isAttributeDefined(String)} with a mixed case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testIsAttributeDefinedMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME));
@@ -176,6 +184,7 @@ public class AttributeCaseTest extends WebTestCase {
      * Test {@link HtmlElement#isAttributeDefined(String)} with an upper case name
      * @throws IOException If the test fails
      */
+    @Test
     public void testIsAttributeDefinedUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toUpperCase()));

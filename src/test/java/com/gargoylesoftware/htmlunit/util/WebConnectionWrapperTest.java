@@ -37,12 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -51,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link WebConnectionWrapper}.
@@ -59,19 +62,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class WebConnectionWrapperTest extends WebTestCase {
-
-    /**
-     * Creates a new instance.
-     * @param name The name of the new instance.
-     */
-    public WebConnectionWrapperTest(final String name) {
-        super(name);
-    }
+public class WebConnectionWrapperTest extends WebTestCase2 {
 
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testWrapper() throws Exception {
         final HttpState state = new HttpState();
         final List<NameValuePair> emptyList = Collections.emptyList();

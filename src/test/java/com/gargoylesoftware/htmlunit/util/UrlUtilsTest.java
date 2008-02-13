@@ -39,7 +39,9 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.net.URL;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link UrlUtils}.
@@ -47,19 +49,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class UrlUtilsTest extends WebTestCase {
-
-    /**
-     * Creates a new instance.
-     * @param name The name of the new instance.
-     */
-    public UrlUtilsTest(final String name) {
-        super(name);
-    }
+public class UrlUtilsTest extends WebTestCase2 {
 
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGetUrlWithNewProtocol() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewProtocol(a, "ftp");
@@ -69,6 +64,7 @@ public class UrlUtilsTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGetUrlWithNewHost() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
@@ -78,6 +74,7 @@ public class UrlUtilsTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGetUrlWithNewPort() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewPort(a, 8080);
@@ -87,6 +84,7 @@ public class UrlUtilsTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGetUrlWithNewPath() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewPath(a, "/es/indice.html");
@@ -96,6 +94,7 @@ public class UrlUtilsTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGetUrlWithNewRef() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewRef(a, "abc");
@@ -113,6 +112,7 @@ public class UrlUtilsTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testGetUrlWithNewQuery() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewQuery(a, "xyz");

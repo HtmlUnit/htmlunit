@@ -40,11 +40,12 @@ package com.gargoylesoftware.htmlunit.javascript.regexp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
@@ -55,7 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlUnitRegExpProxyTest extends WebTestCase {
+public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
 
     private final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
     private final String begin_ = "<div>bla</div>";
@@ -105,17 +106,10 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         + "assertArrEquals(s.match(re), [s, 'var a = 1;', ';']);\n";
 
     /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HtmlUnitRegExpProxyTest(final String name) {
-        super(name);
-    }
-
-    /**
      * Test that string.replace works correctly (?) in htmlunit
      * @throws Exception if the test fails
      */
+    @Test
     public void testFixedInHtmlUnit() throws Exception {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
@@ -129,6 +123,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * Test if custom patch is still needed
      */
+    @Test
     public void testNeedCustomFix() {
         final Context ctx = Context.enter();
         final ScriptableObject topScope = ctx.initStandardObjects();
@@ -151,6 +146,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplaceNormalStringWithRegexpChars() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -169,6 +165,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplaceWithUndefinedPattern() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -188,6 +185,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplace() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -207,6 +205,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testMatch() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + scriptTestMatch_
@@ -226,6 +225,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      * this test can be removed, or turned positive).
      * @throws Exception if the test fails
      */
+    @Test
     public void testMatchFixNeeded() throws Exception {
         final Context ctx = Context.enter();
         final ScriptableObject topScope = ctx.initStandardObjects();
@@ -242,6 +242,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testIndex() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -261,6 +262,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testMatch_NotFirstCharacter() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -279,6 +281,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRegExp_exec() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -303,6 +306,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFlag_global() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -323,6 +327,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void test() throws Exception {
         if (notYetImplemented()) {
             return;

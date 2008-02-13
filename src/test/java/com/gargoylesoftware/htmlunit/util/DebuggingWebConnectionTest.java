@@ -42,8 +42,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link DebuggingWebConnection}.
@@ -51,19 +52,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DebuggingWebConnectionTest extends WebTestCase {
-
-    /**
-     * Creates a new instance.
-     * @param name The name of the new instance.
-     */
-    public DebuggingWebConnectionTest(final String name) {
-        super(name);
-    }
+public class DebuggingWebConnectionTest extends WebTestCase2 {
 
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testNameValueListToJsMap() throws Exception {
         assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(null));
         final List<NameValuePair> emptyList = Collections.emptyList();
