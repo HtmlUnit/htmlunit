@@ -12,11 +12,11 @@
             <p>
 				HtmlUnit has a good support for JavaScipt which gets continuously improved,
 				and test cases for complex libraries (Dojo, jQuery, Prototype,
-				Google Web Toolkit and Yahoo User Interface and Sarissa) are already included.<br/>
+				Google Web Toolkit, Yahoo User Interface and Sarissa) are already included.<br/>
 				However, not all test cases succeed, and you may probably face an issue in real-life example.
             </p>
             <p>
-				Before reporting an issue with a JavaScript library, it is very preferred if you 
+				Before reporting an issue with JavaScript, it is very preferred if you 
 				isolate the root cause, but just saying 'Dojo' is not working doesn't help much.<br/>
 				To find the offending line, you can put <code>alert()</code> at various places,
 				compare the result of HtmlUnit to a real browser (Internet Explorer or Firefox),
