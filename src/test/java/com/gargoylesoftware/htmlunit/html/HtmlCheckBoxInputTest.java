@@ -37,13 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlCheckBoxInput}.
@@ -53,21 +58,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlCheckBoxInputTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlCheckBoxInputTest(final String name) {
-        super(name);
-    }
+public class HtmlCheckBoxInputTest extends WebTestCase2 {
 
     /**
      * Verifies that a HtmlCheckBox is unchecked by default.
      * The onClick tests make this assumption.
      * @throws Exception if the test fails
      */
+    @Test
     public void test_defaultState() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -89,6 +87,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * </ul>
      * @throws Exception if the test fails
      */
+    @Test
     public void test_onClick() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -117,6 +116,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * </ul>
      * @throws Exception if the test fails
      */
+    @Test
     public void test_onClickThatSubmitsForm() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -137,6 +137,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -155,6 +156,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnchangeFires() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
@@ -176,6 +178,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetChecked() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -204,6 +207,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testPreventDefault() throws Exception {
         testPreventDefault(BrowserVersion.FIREFOX_2);
         testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7_0);

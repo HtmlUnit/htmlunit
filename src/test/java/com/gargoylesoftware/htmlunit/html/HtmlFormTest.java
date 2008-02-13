@@ -37,6 +37,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +49,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -55,7 +61,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -69,21 +75,14 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Ahmed Ashour
  * @author Philip Graf
  */
-public class HtmlFormTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlFormTest(final String name) {
-        super(name);
-    }
+public class HtmlFormTest extends WebTestCase2 {
 
     /**
      * Test the good case for setCheckedRatdioButton()
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSetSelectedRadioButton_ValueExists() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -111,7 +110,7 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -119,6 +118,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSetSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -141,6 +141,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_String() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -158,6 +159,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_ExtraParameters() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -184,6 +186,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_BadSubmitMethod() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -202,6 +205,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_onSubmitHandler() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -233,6 +237,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_onSubmitHandler_returnFalse() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -267,6 +272,7 @@ public class HtmlFormTest extends WebTestCase {
      * NullPointerException when submitting forms
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_onSubmitHandler_fails() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -291,6 +297,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_onSubmitHandler_javascriptDisabled() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -325,6 +332,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_javascriptAction() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -356,6 +364,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_javascriptAction_javascriptDisabled() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -386,6 +395,7 @@ public class HtmlFormTest extends WebTestCase {
      * Regression test for a bug that caused a NullPointer exception to be thrown during submit.
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmitRadioButton() throws Exception {
         final String htmlContent
             = "<html><body><form method='POST' action='http://first'>\n"
@@ -407,6 +417,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReset_onResetHandler() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
@@ -437,6 +448,7 @@ public class HtmlFormTest extends WebTestCase {
      * supposed to be called so it doesn't matter what value it returns.</p>
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
@@ -471,6 +483,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_NoDefaultValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -497,6 +510,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_NoNameOnControl() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -522,6 +536,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_NoNameOnButton() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -545,6 +560,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_NestedInput() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -576,6 +592,7 @@ public class HtmlFormTest extends WebTestCase {
    /**
     * @throws Exception if the test fails
     */
+    @Test
     public void testSubmit_IgnoresDisabledControls() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -603,6 +620,7 @@ public class HtmlFormTest extends WebTestCase {
      * @see <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.2">Spec</a>
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_IgnoresResetControls() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -628,6 +646,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_CheckboxClicked() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -677,6 +696,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetInputByValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -700,7 +720,7 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals("Get all", expectedInputs, actualInputs);
         assertEquals(Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
 
-        assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
+        Assert.assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
         try {
             form.getInputByValue("none-matching");
             fail("Expected ElementNotFoundException");
@@ -716,6 +736,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @throws Exception If the test page can't be loaded.
      */
+    @Test
     public void testGetTextAreaByName() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -728,8 +749,10 @@ public class HtmlFormTest extends WebTestCase {
     
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         
-        assertEquals("First textarea with name 'ta1'", form.getHtmlElementById("ta1_1"), form.getTextAreaByName("ta1"));
-        assertEquals("First textarea with name 'ta2'", form.getHtmlElementById("ta2_1"), form.getTextAreaByName("ta2"));
+        Assert.assertEquals("First textarea with name 'ta1'", form.getHtmlElementById("ta1_1"),
+            form.getTextAreaByName("ta1"));
+        Assert.assertEquals("First textarea with name 'ta2'", form.getHtmlElementById("ta2_1"),
+            form.getTextAreaByName("ta2"));
         
         try {
             form.getTextAreaByName("ta3");
@@ -746,6 +769,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @throws Exception If the test page can't be loaded.
      */
+    @Test
     public void testGetButtonByName() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -758,8 +782,10 @@ public class HtmlFormTest extends WebTestCase {
         
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         
-        assertEquals("First button with name 'b1'", form.getHtmlElementById("b1_1"), form.getButtonByName("b1"));
-        assertEquals("First button with name 'b2'", form.getHtmlElementById("b2_1"), form.getButtonByName("b2"));
+        Assert.assertEquals("First button with name 'b1'", form.getHtmlElementById("b1_1"),
+            form.getButtonByName("b1"));
+        Assert.assertEquals("First button with name 'b2'", form.getHtmlElementById("b2_1"),
+            form.getButtonByName("b2"));
         
         try {
             form.getTextAreaByName("b3");
@@ -775,6 +801,7 @@ public class HtmlFormTest extends WebTestCase {
      * specified by "target"
      * @throws Exception If the test fails.
      */
+    @Test
     public void testSubmitToTargetWindow() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
@@ -796,13 +823,14 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals("window2", secondPage.getEnclosingWindow().getName());
 
         final WebWindow firstWindow  = client.getCurrentWindow();
-        assertEquals("first window name", "", firstWindow.getName());
+        Assert.assertEquals("first window name", "", firstWindow.getName());
         assertSame(page, firstWindow.getEnclosedPage());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_SelectHasNoOptions() throws Exception {
         final String htmlContent
             = "<html><body><form name='form' method='GET' action='action.html'>\n"
@@ -815,12 +843,13 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
 
         assertNotNull(secondPage);
-        assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
+        Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_SelectOptionWithoutValueAttribute() throws Exception {
         final String htmlContent
             = "<html><body><form name='form' action='action.html'>\n"
@@ -841,6 +870,7 @@ public class HtmlFormTest extends WebTestCase {
      * At one point this test was failing because deeply nested inputs weren't getting picked up.
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_DeepInputs() throws Exception {
         final String htmlContent
             = "<html><form method='post' action=''>\n"
@@ -867,6 +897,7 @@ public class HtmlFormTest extends WebTestCase {
      * Test order of submitted parameters matches order of elements in form.
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit_FormElementOrder() throws Exception {
         final String htmlContent
             = "<html><head></head><body><form method='post' action=''>\n"
@@ -890,13 +921,14 @@ public class HtmlFormTest extends WebTestCase {
             new KeyValuePair("dispatch", "Save"),
             new KeyValuePair("dispatch", "TAB"),
         });
-        assertCollectionsEqual(expectedParameters, collectedParameters);
+        assertEquals(expectedParameters, collectedParameters);
     }
 
     /**
      * Test the 'Referer' HTTP header
      * @throws Exception on test failure
      */
+    @Test
     public void testSubmit_refererHeader() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -929,6 +961,7 @@ public class HtmlFormTest extends WebTestCase {
       *
       * @throws Exception if the test fails
       */
+    @Test
     public void testJSSubmit_JavaScriptAction() throws Exception {
         final String htmlContent
             = "<html><head><title>First</title></head>\n"
@@ -949,6 +982,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testUrlAfterSubmit()
         throws Exception {
         testUrlAfterSubmit("get", "foo", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
@@ -965,6 +999,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testUrlAfterSubmitWithAnchor() throws Exception {
         testUrlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
         testUrlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
@@ -1015,6 +1050,7 @@ public class HtmlFormTest extends WebTestCase {
      * Utility for {@link #testUrlAfterSubmit()}
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmitRequestCharset() throws Exception {
         testSubmitRequestCharset("UTF-8", null, null, "UTF-8");
         testSubmitRequestCharset(null, "UTF-8", null, "UTF-8");
@@ -1086,6 +1122,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSumbit_submitInputValue() throws Exception {
         testSumbit_submitInputValue(BrowserVersion.INTERNET_EXPLORER_6_0);
         //test FF separately as value is not to DEFAULT_VALUE if not specified.
@@ -1114,6 +1151,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @throws Exception If the test fails
      */
+    @Test
     public void testSubmitWithOnClickThatReturnsFalse() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -1154,6 +1192,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @throws Exception If the test fails
      */
+    @Test
     public void testSubmitURLWithoutParameters() throws Exception {
         testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_7_0, URL_SECOND.toExternalForm());
         testSubmitURLWithoutParameters(BrowserVersion.INTERNET_EXPLORER_6_0, URL_SECOND.toExternalForm() + '?');
@@ -1189,6 +1228,7 @@ public class HtmlFormTest extends WebTestCase {
      *
      * @throws Exception If the test page can't be loaded.
      */
+    @Test
     public void testMalformedHtml_nestedForms() throws Exception {
         if (notYetImplemented()) {
             return;

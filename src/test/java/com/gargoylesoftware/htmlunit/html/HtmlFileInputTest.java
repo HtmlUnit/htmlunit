@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -62,6 +64,9 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -69,7 +74,7 @@ import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
@@ -79,21 +84,14 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlFileInputTest extends WebTestCase {
+public class HtmlFileInputTest extends WebTestCase2 {
 
     private Server server_;
 
     /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HtmlFileInputTest(final String name) {
-        super(name);
-    }
-
-    /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testFileInput() throws Exception {
         String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
         testFileInput(path);
@@ -144,6 +142,7 @@ public class HtmlFileInputTest extends WebTestCase {
      * Test content provided for a not filled file input
      * @throws Exception if the test fails
      */
+    @Test
     public void testEmptyField() throws Exception {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
@@ -171,6 +170,7 @@ public class HtmlFileInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testContentType() throws Exception {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
@@ -197,7 +197,7 @@ public class HtmlFileInputTest extends WebTestCase {
         f.submit((SubmittableElement) null);
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
-        assertFalse("Content type: " + pair.getContentType(), "text/webtest".equals(pair.getContentType()));
+        Assert.assertFalse("Content type: " + pair.getContentType(), "text/webtest".equals(pair.getContentType()));
 
         fileInput.setContentType("text/webtest");
         f.submit((SubmittableElement) null);
@@ -214,6 +214,7 @@ public class HtmlFileInputTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -250,6 +251,7 @@ public class HtmlFileInputTest extends WebTestCase {
      *
      * @throws Exception If the test fails.
      */
+    @Test
     public void testUploadFileWithNonASCIIName() throws Exception {
         final Map<Class< ? extends Servlet>, String> servlets = new HashMap<Class< ? extends Servlet>, String>();
         servlets.put(Upload1Servlet.class, "/upload1");
@@ -359,9 +361,8 @@ public class HtmlFileInputTest extends WebTestCase {
      * {@inheritDoc}
      * Stops the web server if it has been started.
      */
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
     }

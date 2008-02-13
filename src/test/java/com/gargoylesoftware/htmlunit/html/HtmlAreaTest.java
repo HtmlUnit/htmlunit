@@ -37,15 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlArea}.
@@ -55,16 +59,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class HtmlAreaTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name Name of the test
-     */
-    public HtmlAreaTest(final String name) {
-        super(name);
-    }
+public class HtmlAreaTest extends WebTestCase2 {
 
     private WebClient createWebClient(final String onClick) {
         final String firstContent
@@ -91,6 +86,7 @@ public class HtmlAreaTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick() throws Exception {
         final WebClient client = createWebClient("");
 
@@ -105,6 +101,7 @@ public class HtmlAreaTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_onclickReturnsFalse() throws Exception {
         final WebClient client = createWebClient("alert('foo');return false;");
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -121,6 +118,7 @@ public class HtmlAreaTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_onclickReturnsTrue() throws Exception {
         final WebClient client = createWebClient("alert('foo');return true;");
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -137,6 +135,7 @@ public class HtmlAreaTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_javascriptUrl() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
@@ -158,6 +157,7 @@ public class HtmlAreaTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"
@@ -188,6 +188,7 @@ public class HtmlAreaTest extends WebTestCase {
      * In action "this" should be the window and not the area
      * @throws Exception if the test fails
      */
+    @Test
     public void testThisInJavascriptHRef() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"

@@ -37,7 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link DomComment}.
@@ -46,20 +48,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Karel Kolman
  * @author Ahmed Ashour
  */
-public class DomCommentTest extends WebTestCase {
+public class DomCommentTest extends WebTestCase2 {
     
-    /**
-     * Create an instance
-     * @param name Name of the test
-     */
-    public DomCommentTest(final String name) {
-        super(name);
-    }
-
     /**
      * Test the comment not visible when viewed by user
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText() throws Exception {
         final String content = "<html><body><!-- a comment --></body></html>";
         final HtmlPage page = loadPage(content);
@@ -71,6 +66,7 @@ public class DomCommentTest extends WebTestCase {
      * Test the comment correctness
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsXml() throws Exception {
         final String comment = "<!-- a comment -->";
         final String content = "<html><body><span id='foo'>" + comment + "</span></body></html>";
@@ -85,6 +81,7 @@ public class DomCommentTest extends WebTestCase {
      * Test comment and character data sibling correctness
      * @throws Exception if the test fails
      */
+    @Test
     public void testTextSibling() throws Exception {
         final String content = "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";
         final HtmlPage page = loadPage(content);

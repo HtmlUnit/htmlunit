@@ -37,7 +37,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import static org.junit.Assert.fail;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -46,23 +52,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class ClassConfigurationTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public ClassConfigurationTest(final String name) {
-        super(name);
-    }
-    
+public class ClassConfigurationTest extends WebTestCase2 {
     /**
      * Reset the JavaScriptConfiguration file for each test to it's inital clean state.
      *
      * @throws Exception if the test fails
      */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         JavaScriptConfiguration.resetClassForTesting();
     }
 
@@ -70,6 +67,7 @@ public class ClassConfigurationTest extends WebTestCase {
      * Test equality on a class configuration
      * @throws Exception - Exception on error
      */
+    @Test
     public void testConfigurationSimplePropertyEquality() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);
@@ -77,7 +75,7 @@ public class ClassConfigurationTest extends WebTestCase {
             ConfigTestClass.class.getName(), null, null, null, true);
         
         config1.addProperty("test", true, true);
-        assertFalse("Configs should not be equal", config1.equals(config2));
+        Assert.assertFalse("Configs should not be equal", config1.equals(config2));
         config2.addProperty("test", true, true);
         assertTrue("Configs should now be equal", config1.equals(config2));
     }
@@ -86,6 +84,7 @@ public class ClassConfigurationTest extends WebTestCase {
      * Test equality on a class configuration for function
      * @throws Exception - Exception on error
      */
+    @Test
     public void testConfigurationSimpleFunctionEquality() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);
@@ -93,7 +92,7 @@ public class ClassConfigurationTest extends WebTestCase {
             ConfigTestClass.class.getName(), null, null, null, true);
         
         config1.addFunction("testFunction");
-        assertFalse("Configs should not be equal", config1.equals(config2));
+        Assert.assertFalse("Configs should not be equal", config1.equals(config2));
         config2.addFunction("testFunction");
         assertTrue("Configs should now be equal", config1.equals(config2));
     }
@@ -103,6 +102,7 @@ public class ClassConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testConfigurationSimpleUnequalProperties() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);
@@ -110,14 +110,15 @@ public class ClassConfigurationTest extends WebTestCase {
             ConfigTestClass.class.getName(), null, null, null, true);
         
         config1.addProperty("test", true, true);
-        assertFalse("Configs should not be equal", config1.equals(config2));
+        Assert.assertFalse("Configs should not be equal", config1.equals(config2));
         config2.addProperty("test", true, false);
-        assertFalse("Configs should not be equal due to different property values", config1.equals(config2));
+        Assert.assertFalse("Configs should not be equal due to different property values", config1.equals(config2));
     }
 
     /**
      * @throws Exception on error
      */
+    @Test
     public void testForJSFlagTrue() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);
@@ -127,10 +128,11 @@ public class ClassConfigurationTest extends WebTestCase {
     /**
      * @throws Exception on error
      */
+    @Test
     public void testForJSFlagFalse() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, false);
-        assertFalse("JSObject Flag should not have been set", config1.isJsObject());
+        Assert.assertFalse("JSObject Flag should not have been set", config1.isJsObject());
     }
 
     /**
@@ -138,6 +140,7 @@ public class ClassConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testConfigurationPropertyEqualityWithBrowser() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);
@@ -147,7 +150,7 @@ public class ClassConfigurationTest extends WebTestCase {
         config1.addProperty("test", true, true);
         config2.addProperty("test", true, true);
         config1.setBrowser("test", "Netscape");
-        assertFalse("Should not be equal with browser added", config1.equals(config2));
+        Assert.assertFalse("Should not be equal with browser added", config1.equals(config2));
         config2.setBrowser("test", "Netscape");
         assertTrue("Should be equal with browser added", config1.equals(config2));
     }
@@ -157,6 +160,7 @@ public class ClassConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testConfigurationPropertyEqualityWithDifferentBrowsers() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);
@@ -166,9 +170,9 @@ public class ClassConfigurationTest extends WebTestCase {
         config1.addProperty("test", true, true);
         config2.addProperty("test", true, true);
         config1.setBrowser("test", "Netscape");
-        assertFalse("Should not be equal with browser added", config1.equals(config2));
+        Assert.assertFalse("Should not be equal with browser added", config1.equals(config2));
         config2.setBrowser("test", "Microsoft Internet Explorer");
-        assertFalse("Should be equal with different browser added", config1.equals(config2));
+        Assert.assertFalse("Should be equal with different browser added", config1.equals(config2));
     }
     
     /**
@@ -176,6 +180,7 @@ public class ClassConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testNoSetterMethod() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);
@@ -193,6 +198,7 @@ public class ClassConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testNoFunctionMethod() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration("c1",
             ConfigTestClass.class.getName(), null, null, null, true);

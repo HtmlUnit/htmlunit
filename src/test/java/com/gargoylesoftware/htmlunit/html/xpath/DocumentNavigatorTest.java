@@ -44,8 +44,9 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.jaxen.Navigator;
+import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -56,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class DocumentNavigatorTest extends WebTestCase {
+public class DocumentNavigatorTest extends WebTestCase2 {
     private static final Transformer NODE_TO_NODENAME = new Transformer() {
         public Object transform(final Object obj) {
             return ((DomNode) obj).getNodeName();
@@ -72,11 +73,9 @@ public class DocumentNavigatorTest extends WebTestCase {
     /**
      * Create an instance.
      *
-     * @param name The name of the test.
      * @throws Exception if initialization fails.
      */
-    public DocumentNavigatorTest(final String name) throws Exception {
-        super(name);
+    public DocumentNavigatorTest() throws Exception {
         page_ = loadPage(CONTENT);
     }
 
@@ -84,6 +83,7 @@ public class DocumentNavigatorTest extends WebTestCase {
      * Test evaluation of some simple paths.
      * @throws Exception if test fails.
      */
+    @Test
     @SuppressWarnings("unchecked")
     public void testFollowingSiblingAxisIterator() throws Exception {
         final List<String> expected = Arrays.asList(new String[] {"body"});

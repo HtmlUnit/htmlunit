@@ -40,7 +40,9 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for elements with onblur and onfocus attributes.
@@ -49,19 +51,11 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David D. Kilzer
  * @author Marc Guillemot
  */
-public class FocusableElementTest extends WebTestCase {
+public class FocusableElementTest extends WebTestCase2 {
 
     private static final String COMMON_ID = " id='focusId'";
     private static final String COMMON_EVENTS = " onblur=\"alert('foo onblur')\" onfocus=\"alert('foo onfocus')\"";
     private static final String COMMON_ATTRIBUTES = COMMON_ID + COMMON_EVENTS;
-
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public FocusableElementTest(final String name) {
-        super(name);
-    }
 
     /**
      * Full page driver for onblur and onfocus tests.
@@ -115,6 +109,7 @@ public class FocusableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testAnchor_onblur_onfocus() throws Exception {
         onClickSimpleTest("a", "href=\".\"");
     }
@@ -124,6 +119,7 @@ public class FocusableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testArea_onblur_onfocus() throws Exception {
         onClickBodyTest("<map><area " + COMMON_ATTRIBUTES
                 + " shape=\"rect\" coords=\"0,0,1,1\" href=\".\">\n"
@@ -135,6 +131,7 @@ public class FocusableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testButton_onblur_onfocus() throws Exception {
         onClickSimpleTest("button", "name=\"foo\" value=\"bar\" type=\"button\"");
     }
@@ -144,6 +141,7 @@ public class FocusableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testLabelContainsInput_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><label " + COMMON_ID + ">"
                 + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>\n");
@@ -154,6 +152,7 @@ public class FocusableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testLabelReferencesInput_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>\n"
                 + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>\n");
@@ -164,6 +163,7 @@ public class FocusableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelect_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><select " + COMMON_ATTRIBUTES + "><option>1</option></select></form>\n");
     }
@@ -173,6 +173,7 @@ public class FocusableElementTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testTextarea_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><textarea " + COMMON_ATTRIBUTES + ">Text</textarea></form>\n");
     }
@@ -182,6 +183,7 @@ public class FocusableElementTest extends WebTestCase {
      * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1161705&group_id=47038
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnBlurWith2Pages() throws Exception {
         final String html =
             "<html>\n"
@@ -211,6 +213,7 @@ public class FocusableElementTest extends WebTestCase {
      * Test focus on all types of elements
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnAllElements() throws Exception {
         testHTMLFile("FocusableElementTest_onAllElements.html");
     }

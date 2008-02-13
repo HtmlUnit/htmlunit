@@ -37,12 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Unit tests for {@link HtmlElement}.
@@ -53,33 +58,27 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlElementTest extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     * @param name The name of the test.
-     */
-    public HtmlElementTest(final String name) {
-        super(name);
-    }
+public class HtmlElementTest extends WebTestCase2 {
 
     /**
      * Test hasAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementHasAttributeWith() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should have attribute", true, node.hasAttribute("id"));
+        Assert.assertEquals("Element should have attribute", true, node.hasAttribute("id"));
     }
 
     /**
      * Test hasAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementHasAttributeNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -87,13 +86,14 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should not have attribute", false, node.hasAttribute("foo"));
+        Assert.assertEquals("Element should not have attribute", false, node.hasAttribute("foo"));
     }
 
     /**
      * Test hasAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementHasAttributeNSWith() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -101,13 +101,14 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should have attribute", true, node.hasAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should have attribute", true, node.hasAttributeNS("http://foobar", "foo"));
     }
 
     /**
      * Test hasAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementHasAttributeNSNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -115,13 +116,14 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should not have attribute", false, node.hasAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should not have attribute", false, node.hasAttributeNS("http://foobar", "foo"));
     }
 
     /**
      * Test getAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetAttributeWith() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -129,13 +131,14 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
+        Assert.assertEquals("Element should have attribute", "tag", node.getAttribute("id"));
     }
 
     /**
      * Test getAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetAttributeNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -143,13 +146,14 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+        Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
     
     /**
      * Test getAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetAttributeNSWith() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -157,13 +161,14 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should have attribute", "bar", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
      * Test getAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetAttributeNSNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -171,13 +176,14 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
      * Test getNamespaceURI on an attribute that has a namespace.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetNamespaceURIWith() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -187,17 +193,18 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         for (final HtmlAttr attr : node.getAttributesCollection()) {
             if (attr.getName().equals("ns:foo")) {
-                assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
+                Assert.assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
                 return;
             }
         }
-        assertFalse("Attribute ns:foo not found.", true);
+        Assert.assertFalse("Attribute ns:foo not found.", true);
     }
 
     /**
      * Test getNamespaceURI on an attribute that has a namespace.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetNamespaceURINone() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -207,17 +214,18 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         for (final HtmlAttr attr : node.getAttributesCollection()) {
             if (attr.getName().equals("id")) {
-                assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
+                Assert.assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
                 return;
             }
         }
-        assertFalse("Attribute ns:foo not found.", true);
+        Assert.assertFalse("Attribute ns:foo not found.", true);
     }
 
     /**
      * Test getLocalName on an attribute that has a local name.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetLocalNameWith() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -227,17 +235,18 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         for (final HtmlAttr attr : node.getAttributesCollection()) {
             if (attr.getName().equals("ns:foo")) {
-                assertEquals("Element should have a local name", "foo", attr.getLocalName());
+                Assert.assertEquals("Element should have a local name", "foo", attr.getLocalName());
                 return;
             }
         }
-        assertFalse("Attribute ns:foo not found.", true);
+        Assert.assertFalse("Attribute ns:foo not found.", true);
     }
 
     /**
      * Test getLocalName on an attribute that has a local name.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetLocalNameNone() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -248,17 +257,18 @@ public class HtmlElementTest extends WebTestCase {
         for (final HtmlAttr attr : node.getAttributesCollection()) {
             if (attr.getName().equals("id")) {
                 // This is not standard, but to change it now would break backwards compatibility.
-                assertEquals("Element should not have a local name", "id", attr.getLocalName());
+                Assert.assertEquals("Element should not have a local name", "id", attr.getLocalName());
                 return;
             }
         }
-        assertFalse("Attribute ns:foo not found.", true);
+        Assert.assertFalse("Attribute ns:foo not found.", true);
     }
 
     /**
      * Test getPrefix on an attribute that has a prefix.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetPrefixWith() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -268,17 +278,18 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         for (final HtmlAttr attr : node.getAttributesCollection()) {
             if (attr.getName().equals("ns:foo")) {
-                assertEquals("Element should have a prefix", "ns", attr.getPrefix());
+                Assert.assertEquals("Element should have a prefix", "ns", attr.getPrefix());
                 return;
             }
         }
-        assertFalse("Attribute ns:foo not found.", true);
+        Assert.assertFalse("Attribute ns:foo not found.", true);
     }
 
     /**
      * Test getPrefix on an attribute that has a prefix.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementGetPrefixNone() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -288,17 +299,18 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         for (final HtmlAttr attr : node.getAttributesCollection()) {
             if (attr.getName().equals("id")) {
-                assertEquals("Element should not have a prefix", null, attr.getPrefix());
+                Assert.assertEquals("Element should not have a prefix", null, attr.getPrefix());
                 return;
             }
         }
-        assertFalse("Attribute ns:foo not found.", true);
+        Assert.assertFalse("Attribute ns:foo not found.", true);
     }
 
     /**
      * Test setPrefix on an attribute that has a prefix.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementSetPrefix() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -309,18 +321,19 @@ public class HtmlElementTest extends WebTestCase {
         for (final HtmlAttr attr : node.getAttributesCollection()) {
             if (attr.getName().equals("ns:foo")) {
                 attr.setPrefix("other");
-                assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
-                assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());
+                Assert.assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
+                Assert.assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());
                 return;
             }
         }
-        assertFalse("Attribute ns:foo not found.", true);
+        Assert.assertFalse("Attribute ns:foo not found.", true);
     }
 
     /**
      * Test setAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementSetAttributeWith() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -329,13 +342,14 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.setAttribute("id", "other");
-        assertEquals("Element should have attribute", "other", node.getAttribute("id"));
+        Assert.assertEquals("Element should have attribute", "other", node.getAttribute("id"));
     }
 
     /**
      * Test setAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementSetAttributeNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -344,13 +358,14 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.setAttribute("foo", "other");
-        assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
+        Assert.assertEquals("Element should have attribute", "other", node.getAttribute("foo"));
     }
     
     /**
      * Test setAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementSetAttributeNSWith() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -359,13 +374,14 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
-        assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
      * Test setAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementSetAttributeNSNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -374,13 +390,14 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.setAttributeNS("http://foobar", "ns:foo", "other");
-        assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should not have attribute", "other", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
      * Test removeAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementRemoveAttributeWith() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -389,13 +406,14 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.removeAttribute("id");
-        assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
+        Assert.assertEquals("Element should not have removed attribute", "", node.getAttribute("id"));
     }
 
     /**
      * Test removeAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementRemoveAttributeNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -404,13 +422,14 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.removeAttribute("foo");
-        assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
+        Assert.assertEquals("Element should not have attribute", "", node.getAttribute("foo"));
     }
     
     /**
      * Test removeAttribute() on an element with the attribute.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementRemoveAttributeNSWith() throws Exception {
         final String content
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
@@ -419,13 +438,15 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
-        assertEquals("Element should not have removed attribute", "", node.getAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should not have removed attribute", "",
+            node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
      * Test removeAttribute() on an element without the attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementRemoveAttributeNSNone() throws Exception {
         final String content
             = "<html><head></head><body id='tag'>text</body></html>";
@@ -434,7 +455,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.removeAttributeNS("http://foobar", "foo");
-        assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
+        Assert.assertEquals("Element should not have attribute", "", node.getAttributeNS("http://foobar", "foo"));
     }
 
     /**
@@ -443,6 +464,7 @@ public class HtmlElementTest extends WebTestCase {
      * same as all the other attributes. See bug 1707726.
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testClonedNodeAttributes() throws Exception {
         final String html = "<html><body id='a' title='b'><script>\n"
             + "var x = document.body.cloneNode(true);\n"
@@ -465,6 +487,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetEnclosingForm() throws Exception {
         final String htmlContent = ""
             + "<html><head><title>foo</title></head><body>\n"
@@ -481,6 +504,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetEnclosing() throws Exception {
         final String htmlContent = ""
             + "<html><head><title>foo</title></head><body>\n"
@@ -508,6 +532,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText_WithComments() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -520,6 +545,7 @@ public class HtmlElementTest extends WebTestCase {
 
     /**
      */
+    @Test
     public void testConstants() {
         assertEquals("", HtmlElement.ATTRIBUTE_NOT_DEFINED);
         assertEquals("", HtmlElement.ATTRIBUTE_VALUE_EMPTY);
@@ -529,15 +555,18 @@ public class HtmlElementTest extends WebTestCase {
 
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
         private final List<String> collectedValues_ = new ArrayList<String>();
+        @Test
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeAdded: " + event.getHtmlElement().getTagName() + ','
                     + event.getName() + ',' + event.getValue());
         }
+        @Test
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeRemoved: " + event.getHtmlElement().getTagName() + ','
                     + event.getName() + ',' + event.getValue());
         }
     
+        @Test
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeReplaced: " + event.getHtmlElement().getTagName() + ','
                     + event.getName() + ',' + event.getValue());
@@ -550,6 +579,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_AddAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -586,6 +616,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_ReplaceAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -622,6 +653,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_RemoveAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -658,6 +690,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_RemoveListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -690,6 +723,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testMouseOver() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -712,6 +746,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testMouseMove() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -734,6 +769,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testMouseOut() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -756,6 +792,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testMouseDown() throws Exception {
         testMouseDown(BrowserVersion.FIREFOX_2, "mousedown-0");
         testMouseDown(BrowserVersion.INTERNET_EXPLORER_6_0, "mousedown-1");
@@ -784,6 +821,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testMouseUp() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -806,6 +844,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testRightClick() throws Exception {
         testRightClick(BrowserVersion.INTERNET_EXPLORER_7_0, "mousedown-2-mouseup-2-contextmenu-0-");
         testRightClick(BrowserVersion.FIREFOX_2, "mousedown-3-mouseup-3-contextmenu-3-");
@@ -846,6 +885,7 @@ public class HtmlElementTest extends WebTestCase {
      *
      * @throws Exception If the test fails
      */
+    @Test
     public void testMouse_Down_Up() throws Exception {
         testMouse_Down_Up(BrowserVersion.INTERNET_EXPLORER_7_0, "mousedown-1-mouseup-1-");
         testMouse_Down_Up(BrowserVersion.FIREFOX_2, "mousedown-1-mouseup-1-");
@@ -884,6 +924,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsXml_separateLineforEmptyElements() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body><table><tr><td></tr></table>\n"

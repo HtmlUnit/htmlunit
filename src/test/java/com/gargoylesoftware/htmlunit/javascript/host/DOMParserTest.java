@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link DOMParser}.
@@ -49,19 +51,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class DOMParserTest extends WebTestCase {
-
-    /**
-     * Creates a new test instance.
-     * @param name The name of the new test instance.
-     */
-    public DOMParserTest(final String name) {
-        super(name);
-    }
+public class DOMParserTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testParseFromString() throws Exception {
         testParseFromString(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"4"});
         testParseFromString(BrowserVersion.FIREFOX_2, new String[] {"9"});
@@ -99,6 +94,7 @@ public class DOMParserTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testParseFromString_EmptyString() throws Exception {
         testParseFromString_EmptyString(BrowserVersion.INTERNET_EXPLORER_7_0);
         testParseFromString_EmptyString(BrowserVersion.FIREFOX_2);

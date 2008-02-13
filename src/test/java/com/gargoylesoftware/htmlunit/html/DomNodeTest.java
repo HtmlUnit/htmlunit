@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -71,6 +72,7 @@ public class DomNodeTest extends WebTestCase {
      * Test hasAttributes() on an element with attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementHasAttributesWith() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -84,6 +86,7 @@ public class DomNodeTest extends WebTestCase {
      * Test hasAttributes() on an element with no attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testElementHasAttributesNone() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -98,6 +101,7 @@ public class DomNodeTest extends WebTestCase {
      * Test hasAttributes on a node that is not defined to have attributes.
      * @throws Exception if the test fails
      */
+    @Test
     public void testNonElementHasAttributes() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -112,6 +116,7 @@ public class DomNodeTest extends WebTestCase {
      * Test getPrefix on a node that is not defined to have a prefix.
      * @throws Exception if the test fails
      */
+    @Test
     public void testNonElementGetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -126,6 +131,7 @@ public class DomNodeTest extends WebTestCase {
      * Test getNamespaceURI on a node that is not defined to have a namespace.
      * @throws Exception if the test fails
      */
+    @Test
     public void testNonElementGetNamespaceURI() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -140,6 +146,7 @@ public class DomNodeTest extends WebTestCase {
      * Test getLocalName on a node that is not defined to have a local name.
      * @throws Exception if the test fails
      */
+    @Test
     public void testNonElementGetLocalName() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -154,6 +161,7 @@ public class DomNodeTest extends WebTestCase {
      * Test setPrefix on a node that is not defined to have a prefix.
      * @throws Exception if the test fails
      */
+    @Test
     public void testNonElementSetPrefix() throws Exception {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -168,6 +176,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRemoveAllChildren() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -186,6 +195,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReplace() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -224,6 +234,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetNewNodeById() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -262,6 +273,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAppendChild() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -291,6 +303,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertBefore() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -338,6 +351,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
@@ -368,6 +382,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetFirstByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
@@ -396,6 +411,7 @@ public class DomNodeTest extends WebTestCase {
      * Verifies that {@link DomNode#getAllHtmlChildElements()} returns descendant elements in the correct order.
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testGetAllHtmlChildElementsOrder() throws Exception {
         final String html = "<html><body id='0'>\n"
             + "<span id='I'><span id='I.1'><span id='I.1.a'/><span id='I.1.b'/><span id='I.1.c'/></span>\n"
@@ -424,10 +440,12 @@ public class DomNodeTest extends WebTestCase {
 
     static class DomChangeListenerTestImpl implements DomChangeListener {
         private final List<String> collectedValues_ = new ArrayList<String>();
+        @Test
         public void nodeAdded(final DomChangeEvent event) {
             collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
         }
+        @Test
         public void nodeDeleted(final DomChangeEvent event) {
             collectedValues_.add("nodeDeleted: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
@@ -440,6 +458,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomChangeListenerTestImpl_insertBefore() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -471,6 +490,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomChangeListenerTestImpl_appendChild() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -502,6 +522,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomChangeListenerTestImpl_removeChild() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -533,6 +554,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDomChangeListenerRegisterNewListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -553,12 +575,14 @@ public class DomNodeTest extends WebTestCase {
 
         final List<String> l = new ArrayList<String>();
         final DomChangeListener listener2 = new DomChangeListenerTestImpl() {
+            @Test
             @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 2");
             }
         };
         final DomChangeListener listener1 = new DomChangeListenerTestImpl() {
+            @Test
             @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 1");
@@ -583,6 +607,7 @@ public class DomNodeTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetByXPath_XML() throws Exception {
         final String xml
             = "<books>\n"

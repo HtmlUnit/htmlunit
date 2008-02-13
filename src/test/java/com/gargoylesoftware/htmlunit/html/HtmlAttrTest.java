@@ -37,12 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlAttr}.
@@ -52,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author David K. Taylor
  */
-public class HtmlAttrTest extends WebTestCase {
+public class HtmlAttrTest extends WebTestCase2 {
     /**
      * Test object.
      */
@@ -84,62 +89,59 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlAttrTest(final String name) {
-        super(name);
-    }
-
-    /**
      * {@inheritDoc}
      */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         htmlAttr_ = new HtmlAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
         htmlAttr_.setParentNode(HTML_ELEMENT);
     }
 
     /**
      */
+    @Test
     public void testGetName() {
         assertEquals(ENTRY_KEY, htmlAttr_.getName());
     }
 
     /**
      */
+    @Test
     public void testGetNodeName() {
         assertEquals(ENTRY_KEY, htmlAttr_.getNodeName());
     }
 
     /**
      */
+    @Test
     public void testGetNodeType() {
         assertEquals(org.w3c.dom.Node.ATTRIBUTE_NODE, htmlAttr_.getNodeType());
     }
 
     /**
      */
+    @Test
     public void testGetNodeValue() {
         assertEquals(ENTRY_VALUE, htmlAttr_.getNodeValue());
     }
 
     /**
      */
+    @Test
     public void testGetKey() {
         assertEquals(ENTRY_KEY, htmlAttr_.getName());
     }
 
     /**
      */
+    @Test
     public void testGetValue() {
         assertEquals(ENTRY_VALUE, htmlAttr_.getHtmlValue());
     }
 
     /**
      */
+    @Test
     public void testSetValue() {
         htmlAttr_.setHtmlValue("foo");
         assertEquals("foo", htmlAttr_.getHtmlValue());
@@ -147,6 +149,7 @@ public class HtmlAttrTest extends WebTestCase {
 
     /**
      */
+    @Test
     public void testGetParent() {
         assertSame(HTML_ELEMENT, htmlAttr_.getParentDomNode());
     }
@@ -156,6 +159,7 @@ public class HtmlAttrTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testNodeType() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

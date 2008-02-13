@@ -37,7 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link DomText}.
@@ -47,20 +49,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  */
-public class DomTextTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name Name of the test
-     */
-    public DomTextTest(final String name) {
-        super(name);
-    }
+public class DomTextTest extends WebTestCase2 {
 
     /**
      * Test the clean up of &amp;nbsp; in strings
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText_nbsp() throws Exception {
         testPlainText("a b&nbsp;c  d &nbsp;e",  "a b c d  e");
         testPlainText("a b&nbsp;c  d &nbsp; e", "a b c d   e");
@@ -76,6 +71,7 @@ public class DomTextTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText_fontFormat() throws Exception {
         // specific case reported by rgitzel
         testAsText("a <b>b</b> c",  "a b c");
@@ -116,6 +112,7 @@ public class DomTextTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText_regression() throws Exception {
         testAsText("a<ul><li>b</ul>c",                     "a b c");
         testAsText("a<p>b<br>c",                           "a b c");
@@ -130,6 +127,7 @@ public class DomTextTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText_table_elements() throws Exception {
         final String html = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>\n";
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";

@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
@@ -48,6 +51,10 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.EntityResolver;
@@ -59,7 +66,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 
@@ -70,23 +77,15 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class JavaScriptConfigurationTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public JavaScriptConfigurationTest(final String name) {
-        super(name);
-    }
-    
+public class JavaScriptConfigurationTest extends WebTestCase2 {
+
     /**
      * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
      *
      * @throws Exception if the test fails
      */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         JavaScriptConfiguration.resetClassForTesting();
     }
 
@@ -95,9 +94,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
         JavaScriptConfiguration.resetClassForTesting();
     }
 
@@ -105,6 +103,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * Test loading a configuration from the supplied stream
      *
      */
+    @Test
     public void testLoadLocalConfiguration() {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -118,7 +117,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "    </class>\n"
             + "</configuration>";
         final Reader reader = new StringReader(configurationString);
-        assertFalse("Document should not be loaded", JavaScriptConfiguration.isDocumentLoaded());
+        Assert.assertFalse("Document should not be loaded", JavaScriptConfiguration.isDocumentLoaded());
         JavaScriptConfiguration.loadConfiguration(reader);
         assertTrue("Documnet should now be loaded", JavaScriptConfiguration.isDocumentLoaded());
     }
@@ -127,8 +126,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * Test loading a configuration from the supplied stream
      *
      */
+    @Test
     public void testLoadSystemConfigurationFile() {
-        assertFalse("Document should not be loaded", JavaScriptConfiguration.isDocumentLoaded());
+        Assert.assertFalse("Document should not be loaded", JavaScriptConfiguration.isDocumentLoaded());
         JavaScriptConfiguration.loadConfiguration();
         assertTrue("Documnet should now be loaded", JavaScriptConfiguration.isDocumentLoaded());
     }
@@ -138,6 +138,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testGetInstance() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -172,6 +173,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testGetConditionalPropertyBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -203,6 +205,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * Test that the JSObject is being set correctly
      * @throws Exception on error
      */
+    @Test
     public void testForSettingJSObject() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -227,6 +230,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testInstanceForTestVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -260,6 +264,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testPropertyForNullBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -295,6 +300,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testGetConditionalPropertyMinBrowserVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -329,6 +335,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testGetConditionalPropertyMaxBrowserVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -363,6 +370,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testGetConditionalPropertyMaxJSVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -396,6 +404,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testParseFunction() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -422,6 +431,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception - Exception on error
      */
+    @Test
     public void testParseFunctionForLimitedBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -448,6 +458,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * Test that the file JavaScriptConfiguration.xml is valid.
      * @throws Exception If the test fails
      */
+    @Test
     public void testConfigurationFileAgainstSchema() throws Exception {
         final XMLReader parser = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
         final String directory = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/";
@@ -459,12 +470,15 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             }
         });
         parser.setErrorHandler(new ErrorHandler() {
+            @Test
             public void warning(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
+            @Test
             public void error(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
+            @Test
             public void fatalError(final SAXParseException exception) throws SAXException {
                 throw exception;
             }
@@ -489,6 +503,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception Exception on error
      */
+    @Test
     public void testConfigurationFile() throws Exception {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
         
@@ -555,6 +570,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception Exception on error
      */
+    @Test
     public void testForPropertyExist() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -586,6 +602,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception Exception on error
      */
+    @Test
     public void testForPropertyNotExist() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -608,7 +625,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         JavaScriptConfiguration.loadConfiguration(reader);
         final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER_6_0;
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getInstance(browser);
-        assertFalse("Requested property should not exist",
+        Assert.assertFalse("Requested property should not exist",
             configuration.propertyExists(Document.class, "noreadyState"));
     }
 
@@ -617,6 +634,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception If the test fails
      */
+    @Test
     public void testConfigurationMapExpands() throws Exception {
         // get a reference to the leaky map
         final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
@@ -635,6 +653,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      *
      * @throws Exception If the test fails
      */
+    @Test
     public void testLexicographicOrder() throws Exception {
         final String directory = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/";
 

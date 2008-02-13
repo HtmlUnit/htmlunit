@@ -40,9 +40,10 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Iterator;
 
+import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link DefaultElementFactory}.
@@ -53,19 +54,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @since 1.2
  */
-public class DefaultElementFactoryTest extends WebTestCase {
-    /**
-     * Create an instance.
-     * @param name The name of the test.
-     */
-    public DefaultElementFactoryTest(final String name) {
-        super(name);
-    }
-
+public class DefaultElementFactoryTest extends WebTestCase2 {
     /**
      * Test that the attribute order is the same as the provided one.
      * @throws Exception if the test fails
      */
+    @Test
     public void testAttributeOrder() throws Exception {
         // Construct the test page.
         final String html = "<html><head><title>test page</title></head>\n"
@@ -114,6 +108,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
      * Test the order of attributes
      * @throws Exception if the test fails
      */
+    @Test
     public void testAttributeOrderLive() throws Exception {
         final String html = "<html><body>\n"
             + "<a href='http://www.google.com' tabindex='2' accesskey='F'>foo</a>\n"

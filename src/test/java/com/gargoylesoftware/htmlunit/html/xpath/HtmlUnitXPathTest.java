@@ -44,8 +44,9 @@ import java.util.List;
 import org.jaxen.BaseXPath;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
+import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
@@ -59,21 +60,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlUnitXPathTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlUnitXPathTest(final String name) {
-        super(name);
-    }
+public class HtmlUnitXPathTest extends WebTestCase2 {
 
     /**
      * Test evaluation of some simple paths
      * @throws Exception if test fails
      */
+    @Test
     public void testSimplePath() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body><a href='foo.html' id='myLink'>foo</a></body>\n"
@@ -94,6 +87,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * Test evaluation relative from elements other than the whole page
      * @throws Exception if test fails
      */
+    @Test
     public void testXPathFromElement() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body><a href='foo.html' id='myLink'>foo</a></body>\n"
@@ -113,6 +107,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * http://jira.codehaus.org/browse/JAXEN-55)
      * @throws Exception if test fails
      */
+    @Test
     @SuppressWarnings("unchecked")
     public void testElementOrder() throws Exception {
         final String content
@@ -136,6 +131,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * Test evaluation of paths after changed through javascript
      * @throws Exception if test fails
      */
+    @Test
     public void testWhenJSChangesPage() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -173,6 +169,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * Tests xpath where results are attributes.
      * @throws Exception if test fails
      */
+    @Test
     @SuppressWarnings("unchecked")
     public void testListAttributesResult() throws Exception {
         final String content
@@ -208,6 +205,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * Test if option/text() is cleaned like other text()
      * @throws Exception if test fails
      */
+    @Test
     public void testOptionText() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body><form name='foo'>\n"
@@ -224,6 +222,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1527799&group_id=47038&atid=448266
      * @throws Exception if test fails
      */
+    @Test
     public void testFollowingAxis() throws Exception {
         final String content = "<html><title>XPath tests</title><body>\n"
             + "<table id='table1'>\n"
@@ -259,6 +258,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     /**
      * @throws Exception If test fails.
      */
+    @Test
     public void testID() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
@@ -271,5 +271,4 @@ public class HtmlUnitXPathTest extends WebTestCase {
 
         assertNull(page.getFirstByXPath("id('doesNotExist')"));
     }
-
 }
