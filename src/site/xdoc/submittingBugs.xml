@@ -10,6 +10,9 @@
     <body>
         <section>
             <p>
+                For JavaScript Bugs, please <a href="submittingJSBugs.html">read this</a>.
+            </p>
+            <p>
                 Bugs are a constant problem with software development.  In HtmlUnit, there are several factors
                 for the cause of bugs.  These include: bugs in third-party code, functionality that still is not
                 supported by HtmlUnit, bugs in your code, or true bugs in HtmlUnit.  To track these bugs, we are

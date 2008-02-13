@@ -33,6 +33,7 @@
             <item name="Getting Latest Code" href="/gettingLatestCode.html"/>
             <item name="Coding conventions" href="/codingConventions.html"/>
             <item name="Submitting bugs" href="/submittingBugs.html"/>
+            <item name="Submitting JavaScript bugs" href="/submittingJSBugs.html"/>
             <item name="Submitting patches" href="/submittingPatches.html"/>
             <item name="JavaScript engine" href="/javascript.html"/>
             <item name="Packaging a release" href="/packagingARelease.html"/>
