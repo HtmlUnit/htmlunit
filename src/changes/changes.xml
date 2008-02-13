@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="2.0-prerelease">
+        <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="add" dev="asashour">
                 JavaScript: add empty implementation of HTMLElement.clientWidth and .clientHeight.
             </action>
