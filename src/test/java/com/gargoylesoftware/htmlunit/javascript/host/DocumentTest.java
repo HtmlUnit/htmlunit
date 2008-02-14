@@ -2984,4 +2984,28 @@ public class DocumentTest extends WebTestCase2 {
         loadPage(content, collectedAlerts);
         assertEquals(expected, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void evalute_caseInsensitiveAttribute() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var expr = './/*[@CLASS]';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    alert(result.iterateNext());\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <h1 class='title'>Some text</h1>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"[object HTMLHeadingElement]"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

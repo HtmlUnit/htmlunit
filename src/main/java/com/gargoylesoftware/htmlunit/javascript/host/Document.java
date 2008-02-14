@@ -1313,10 +1313,10 @@ public class Document extends Node {
     public XPathResult jsxFunction_evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
-        
         try {
             if (xPathResult == null) {
                 xPathResult = new XPathResult();
+                xPathResult.setParentScope(getParentScope());
                 xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
             }
             xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
