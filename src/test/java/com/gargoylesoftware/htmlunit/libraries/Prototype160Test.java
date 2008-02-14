@@ -50,8 +50,6 @@ import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest;
-import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxyTest;
 
 /**
  * Tests for compatibility with version 1.6.0 of
