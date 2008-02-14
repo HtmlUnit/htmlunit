@@ -40,10 +40,12 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlTextInput}.
@@ -51,20 +53,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlTextInputTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlTextInputTest(final String name) {
-        super(name);
-    }
+public class HtmlTextInputTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testType() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -80,6 +74,7 @@ public class HtmlTextInputTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testPreventDefault() throws Exception {
         testPreventDefault(BrowserVersion.FIREFOX_2);
         testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7_0);
@@ -111,6 +106,7 @@ public class HtmlTextInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTypeNewLine() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -140,6 +136,7 @@ public class HtmlTextInputTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testSelection() throws Exception {
         testSelection(BrowserVersion.INTERNET_EXPLORER_7_0);
         testSelection(BrowserVersion.FIREFOX_2);
@@ -172,6 +169,7 @@ public class HtmlTextInputTest extends WebTestCase {
     /**
      * @throws Exception If test fails
      */
+    @Test
     public void testSelection2() throws Exception {
         testSelection2(3, 10, BrowserVersion.INTERNET_EXPLORER_6_0,
                 new String[] {"undefined,undefined", "3,undefined", "3,10"});

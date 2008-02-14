@@ -37,7 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlHiddenInput}.
@@ -45,20 +47,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class HtmlHiddenInputTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlHiddenInputTest(final String name) {
-        super(name);
-    }
+public class HtmlHiddenInputTest extends WebTestCase2 {
 
     /**
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"

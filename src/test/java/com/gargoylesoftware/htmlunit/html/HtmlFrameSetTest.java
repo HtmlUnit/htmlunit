@@ -37,15 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -57,20 +61,12 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Hans Donner
  * @author Ahmed Ashour
  */
-public class HtmlFrameSetTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name Name of the test
-     */
-    public HtmlFrameSetTest(final String name) {
-        super(name);
-    }
+public class HtmlFrameSetTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoadingFrameSet() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
@@ -102,7 +98,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
 
         final WebWindow thirdWebWindow = webClient.getWebWindowByName("right");
-        assertInstanceOf(thirdWebWindow, FrameWindow.class);
+        assertTrue(FrameWindow.class.isInstance(thirdWebWindow));
         assertSame(firstPage, ((FrameWindow) thirdWebWindow).getEnclosingPage());
         assertEquals("Third", ((HtmlPage) thirdWebWindow.getEnclosedPage()).getTitleText());
     }
@@ -110,6 +106,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoadingIFrames() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
@@ -131,7 +128,7 @@ public class HtmlFrameSetTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
-        assertInstanceOf(secondWebWindow, FrameWindow.class);
+        assertTrue(FrameWindow.class.isInstance(secondWebWindow));
         assertSame(firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage());
         assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
     }
@@ -142,6 +139,7 @@ public class HtmlFrameSetTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testLoadingFrameSetWithRelativePaths() throws Exception {
         final String framesContent
             = "<html><head><title>Frames</title></head>\n"
@@ -208,6 +206,7 @@ public class HtmlFrameSetTest extends WebTestCase {
      * https://sourceforge.net/tracker/index.php?func=detail&aid=1239285&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testFrameOnloadAccessOtherFrame()
         throws Exception {
 
@@ -253,6 +252,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefererHeader()
         throws Exception {
 
@@ -285,6 +285,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testScriptUnderNoFrames() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head>\n"

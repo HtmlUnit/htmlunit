@@ -37,13 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlInput}.
@@ -53,21 +58,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public final class HtmlInputTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlInputTest(final String name) {
-        super(name);
-    }
+public final class HtmlInputTest extends WebTestCase2 {
 
     /**
      * Test that selecting one radio button will deselect all the others
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testRadioButtonsAreMutuallyExclusive() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -94,13 +92,14 @@ public final class HtmlInputTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetChecked_CheckBox() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -114,16 +113,17 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) form.getInputByName("foo");
-        assertFalse("Initial state", checkbox.isChecked());
+        Assert.assertFalse("Initial state", checkbox.isChecked());
         checkbox.setChecked(true);
         assertTrue("After setSelected(true)", checkbox.isChecked());
         checkbox.setChecked(false);
-        assertFalse("After setSelected(false)", checkbox.isChecked());
+        Assert.assertFalse("After setSelected(false)", checkbox.isChecked());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetChecked_RadioButton() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -146,6 +146,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnChangeHandler() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -166,6 +167,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCheckboxDefaultValue() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -184,6 +186,7 @@ public final class HtmlInputTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testClickRadioButton() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -200,7 +203,7 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getFirstByXPath(
                 "//input[@type='radio' and @name='foo' and @value='2']");
 
-        assertFalse("Should not be checked before click", radioButton.isChecked());
+        Assert.assertFalse("Should not be checked before click", radioButton.isChecked());
         radioButton.click();
         assertTrue("Should be checked after click", radioButton.isChecked());
     }
@@ -210,6 +213,7 @@ public final class HtmlInputTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testInputNoType() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -226,6 +230,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnChangeHandlerNotFiredOnLoad() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -240,6 +245,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testBadInputType() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
@@ -257,6 +263,7 @@ public final class HtmlInputTest extends WebTestCase {
     /**
      * @throws Exception If the test fails.
      */
+    @Test
     public void testOnchangeNull() throws Exception {
         final String html =
             "<html><head>\n"

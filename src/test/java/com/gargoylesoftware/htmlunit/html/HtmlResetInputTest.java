@@ -37,10 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlResetInput}.
@@ -49,19 +53,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class HtmlResetInputTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlResetInputTest(final String name) {
-        super(name);
-    }
+public class HtmlResetInputTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testReset() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -125,6 +122,7 @@ public class HtmlResetInputTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testOutsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"

@@ -37,13 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlImageInput}.
@@ -53,19 +57,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlImageInputTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlImageInputTest(final String name) {
-        super(name);
-    }
+public class HtmlImageInputTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_NoPosition() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -96,6 +93,7 @@ public class HtmlImageInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_WithPosition() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -128,6 +126,7 @@ public class HtmlImageInputTest extends WebTestCase {
      * Regression test for bug 1118877
      * @throws Exception if the test fails
      */
+    @Test
     public void testNoNameClick_WithPosition() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -156,6 +155,7 @@ public class HtmlImageInputTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testOutsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"

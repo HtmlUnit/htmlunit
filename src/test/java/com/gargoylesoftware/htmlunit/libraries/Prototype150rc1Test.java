@@ -37,13 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -54,16 +56,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class Prototype150rc1Test extends WebTestCase {
+public class Prototype150rc1Test extends WebTestCase2 {
 
     private Server server_;
-
-    /**
-     * @param name The name of the test.
-     */
-    public Prototype150rc1Test(final String name) {
-        super(name);
-    }
 
     /**
      * @throws Exception If test fails.
@@ -220,16 +215,16 @@ public class Prototype150rc1Test extends WebTestCase {
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/prototype/1.5.0-rc1");
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
     }

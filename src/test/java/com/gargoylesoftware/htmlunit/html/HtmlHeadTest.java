@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlHead}.
@@ -50,20 +52,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlHeadTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlHeadTest(final String name) {
-        super(name);
-    }
+public class HtmlHeadTest extends WebTestCase2 {
 
     /**
      * IE and FF both add an head element when it's not present in the html code
      * @throws Exception if the test fails
      */
+    @Test
     public void testAddedWhenMissing() throws Exception {
         final String htmlContent = "<html><body>\n"
             + "<script>\n"
@@ -82,6 +77,7 @@ public class HtmlHeadTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head id='myId'><script>\n"
             + "  function test() {\n"
@@ -94,7 +90,7 @@ public class HtmlHeadTest extends WebTestCase {
         final String[] expectedAlerts = {"[object HTMLHeadElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertInstanceOf(page.getHtmlElementById("myId"), HtmlHead.class);
+        assertTrue(HtmlHead.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

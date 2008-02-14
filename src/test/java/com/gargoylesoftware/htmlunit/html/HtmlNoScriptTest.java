@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for elements inside {@link HtmlNoScript}.
@@ -49,20 +51,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlNoScriptTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlNoScriptTest(final String name) {
-        super(name);
-    }
+public class HtmlNoScriptTest extends WebTestCase2 {
 
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testGetElementById() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -87,6 +81,7 @@ public class HtmlNoScriptTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testChildNodes() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -111,6 +106,7 @@ public class HtmlNoScriptTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testJavaScript() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -134,6 +130,7 @@ public class HtmlNoScriptTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testFormValues() throws Exception {
         final String htmlContent
             = "<html><body>\n"

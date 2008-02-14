@@ -43,10 +43,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Test class for {@link HTMLParserListener}.<br/>
@@ -56,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class HTMLParserListenerTest extends WebTestCase {
+public class HTMLParserListenerTest extends WebTestCase2 {
     static class MessageInfo {
         private boolean error_; // versus warning
         private String message_;
@@ -118,16 +119,9 @@ public class HTMLParserListenerTest extends WebTestCase {
     }
 
     /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLParserListenerTest(final String name) {
-        super(name);
-    }
-
-    /**
      * @exception Exception If the test fails
      */
+    @Test
     public void testSimple() throws Exception {
         final String htmlContent = "<html>\n" + "<head>\n<title>foo\n</head>\n"
                 + "<body>\nfoo\n</body>\n</html>";
@@ -138,11 +132,13 @@ public class HTMLParserListenerTest extends WebTestCase {
 
         final List<MessageInfo> messages = new ArrayList<MessageInfo>();
         final HTMLParserListener collecter = new HTMLParserListener() {
+            @Test
             public void error(final String message, final URL url,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(true, message, url, line, column, key));
             }
 
+            @Test
             public void warning(final String message, final URL url,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(false, message, url, line, column, key));

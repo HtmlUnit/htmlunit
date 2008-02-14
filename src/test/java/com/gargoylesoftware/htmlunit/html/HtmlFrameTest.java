@@ -37,15 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlFrame}.
@@ -54,20 +59,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class HtmlFrameTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name Name of the test
-     */
-    public HtmlFrameTest(final String name) {
-        super(name);
-    }
+public class HtmlFrameTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSrcOfBlankAndEmpty() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head>\n"
@@ -78,15 +75,16 @@ public class HtmlFrameTest extends WebTestCase {
         final HtmlPage page = loadPage(firstContent);
 
         final HtmlFrame frame1 = (HtmlFrame) page.getHtmlElementById("frame1");
-        assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
+        Assert.assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = (HtmlFrame) page.getHtmlElementById("frame2");
-        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
+        Assert.assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
@@ -110,10 +108,10 @@ public class HtmlFrameTest extends WebTestCase {
         assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = (HtmlFrame) page.getHtmlElementById("frame1");
-        assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
+        Assert.assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = (HtmlFrame) page.getHtmlElementById("frame2");
-        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
+        Assert.assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -121,6 +119,7 @@ public class HtmlFrameTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentWrite() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head>\n"
@@ -135,16 +134,17 @@ public class HtmlFrameTest extends WebTestCase {
         assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = (HtmlFrame) page.getHtmlElementById("frame1");
-        assertEquals("frame1", "generated", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
+        Assert.assertEquals("frame1", "generated", ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
         final HtmlFrame frame2 = (HtmlFrame) page.getHtmlElementById("frame2");
-        assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
+        Assert.assertEquals("frame2", "", ((HtmlPage) frame2.getEnclosedPage()).getTitleText());
     }
 
     /**
      * Test that frames are correctly deregistered even if not html
      * @throws Exception if the test fails
      */
+    @Test
     public void testDeregisterNonHtmlFrame() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection =
@@ -169,6 +169,7 @@ public class HtmlFrameTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFailingHttpStatusCodeException() throws Exception {
         final String failingContent
             = "<html><head><body>Not found</body></html>";
@@ -212,6 +213,7 @@ public class HtmlFrameTest extends WebTestCase {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1518195&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
+    @Test
     public void testFrameScriptReplaceOtherFrame() throws Exception {
         final String mainContent =
             "<html><head><title>frames</title></head>\n"

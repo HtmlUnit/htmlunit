@@ -37,11 +37,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlTextArea}.
@@ -51,19 +56,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlTextAreaTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlTextAreaTest(final String name) {
-        super(name);
-    }
+public class HtmlTextAreaTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormSubmission_OriginalData()
         throws Exception {
         final String htmlContent
@@ -82,12 +80,13 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormSubmission_NewValue()
         throws Exception {
         final String htmlContent
@@ -105,12 +104,13 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=Flintstone",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
     }
     
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -122,12 +122,13 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
-        assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
+        Assert.assertEquals("White space must be preserved!", " foo \n bar ", textArea.getText());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsXml() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -148,6 +149,7 @@ public class HtmlTextAreaTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testPreventDefault() throws Exception {
         testPreventDefault(BrowserVersion.FIREFOX_2);
         testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7_0);

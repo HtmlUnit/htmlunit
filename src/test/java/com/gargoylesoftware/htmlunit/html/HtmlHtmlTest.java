@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlHtml}.
@@ -50,19 +52,11 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlHtmlTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlHtmlTest(final String name) {
-        super(name);
-    }
-
+public class HtmlHtmlTest extends WebTestCase2 {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAttributes() throws Exception {
         final String htmlContent = "<?xml version=\"1.0\"?>\n"
             + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" "
@@ -80,6 +74,7 @@ public class HtmlHtmlTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSimpleScriptable() throws Exception {
         final String content = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -91,7 +86,7 @@ public class HtmlHtmlTest extends WebTestCase {
         final String[] expectedAlerts = {"[object HTMLHtmlElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertInstanceOf(page.getHtmlElementById("myId"), HtmlHtml.class);
+        assertTrue(HtmlHtml.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

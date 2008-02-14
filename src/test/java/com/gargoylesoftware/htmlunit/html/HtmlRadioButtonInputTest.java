@@ -40,9 +40,11 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlRadioButtonInput}.
@@ -53,20 +55,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-public class HtmlRadioButtonInputTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlRadioButtonInputTest(final String name) {
-        super(name);
-    }
+public class HtmlRadioButtonInputTest extends WebTestCase2 {
 
     /**
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the radio.
      * @throws Exception if the test fails
      */
+    @Test
     public void test_asTextWhenNotChecked() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -85,6 +80,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnchangeHandlerInvoked() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -109,6 +105,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnchangeHandlerNotInvokedIfNotChanged() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -133,6 +130,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testUpdateStateFirstForOnclickHandler() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -180,6 +178,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetChecked() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -209,6 +208,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * Test <code>input.checked</code> if the radio <code>&lt;input&gt;</code> do not have distinct 'value'
      * @throws Exception If the test fails
      */
+    @Test
     public void testRadioInputChecked() throws Exception {
         final String content
             = "<html><head>\n"
@@ -238,6 +238,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSetCheckedOutsideForm() throws Exception {
         final String content
             = "<html><head>\n"

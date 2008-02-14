@@ -37,11 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlTable}.
@@ -50,21 +56,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class HtmlTableTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlTableTest(final String name) {
-        super(name);
-    }
+public class HtmlTableTest extends WebTestCase2 {
 
     /**
      * Test getTableCell(int,int)
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testGetTableCell() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -78,17 +77,17 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
-        assertEquals("cell1 contents", "cell1", cell1.asText());
+        Assert.assertEquals("cell1 contents", "cell1", cell1.asText());
 
         final HtmlTableCell cell2 = table.getCellAt(0, 1);
-        assertEquals("cell2 contents", "cell2", cell2.asText());
+        Assert.assertEquals("cell2 contents", "cell2", cell2.asText());
 
         final HtmlTableCell cell3 = table.getCellAt(1, 0);
-        assertEquals("cell3 contents", "cell3", cell3.asText());
+        Assert.assertEquals("cell3 contents", "cell3", cell3.asText());
         assertSame("cells (1,0) and (1,1)", cell3, table.getCellAt(1, 1));
 
         final HtmlTableCell cell4 = table.getCellAt(0, 2);
-        assertEquals("cell4 contents", "cell4", cell4.asText());
+        Assert.assertEquals("cell4 contents", "cell4", cell4.asText());
         assertSame("cells (0,2) and (1,2)", cell4, table.getCellAt(1, 2));
     }
 
@@ -97,6 +96,7 @@ public class HtmlTableTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testGetCellAt() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -111,21 +111,21 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
-        assertEquals("cell (0,0) contents", "row 1 col 1", cell1.asText());
+        Assert.assertEquals("cell (0,0) contents", "row 1 col 1", cell1.asText());
 
         final HtmlTableCell cell2 = table.getCellAt(0, 1);
-        assertEquals("cell (0,1) contents", null, cell2);
+        Assert.assertEquals("cell (0,1) contents", null, cell2);
 
         final HtmlTableCell cell3 = table.getCellAt(1, 0);
-        assertEquals("cell (1,0) contents", "row 2 col 1", cell3.asText());
+        Assert.assertEquals("cell (1,0) contents", "row 2 col 1", cell3.asText());
 
         final HtmlTableCell cell4 = table.getCellAt(1, 1);
-        assertEquals("cell (1,1) contents", "row 2 col 2", cell4.asText());
+        Assert.assertEquals("cell (1,1) contents", "row 2 col 2", cell4.asText());
 
         final HtmlTableCell cell5 = table.getCellAt(2, 0);
-        assertEquals("cell (2, 0) contents", "row 3 col 1&2", cell5.asText());
+        Assert.assertEquals("cell (2, 0) contents", "row 3 col 1&2", cell5.asText());
         final HtmlTableCell cell6 = table.getCellAt(2, 1);
-        assertEquals("cell (2, 1) contents", null, cell6);
+        Assert.assertEquals("cell (2, 1) contents", null, cell6);
     }
 
     /**
@@ -133,6 +133,7 @@ public class HtmlTableTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testGetTableCell_NotFound() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -146,12 +147,13 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final HtmlTableCell cell = table.getCellAt(99, 0);
-        assertNull("cell", cell);
+        Assert.assertNull("cell", cell);
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetTableRows() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -182,6 +184,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetTableRows_WithHeadBodyFoot() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -218,6 +221,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRowGroupings_AllDefined() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -252,6 +256,7 @@ public class HtmlTableTest extends WebTestCase {
      * will be inserted to be in compliance with the common browsers.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRowGroupings_NoneDefined()
         throws Exception {
 
@@ -278,6 +283,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetCaptionText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -300,6 +306,7 @@ public class HtmlTableTest extends WebTestCase {
      * aren't inserted if a tbody was already there.
      * @throws Exception if the test fails
      */
+    @Test
     public void testInsertionOfTbodyTags() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -314,21 +321,22 @@ public class HtmlTableTest extends WebTestCase {
 
         // Check that a <tbody> was inserted properly
         final HtmlTableDataCell cell1 = (HtmlTableDataCell) page.getHtmlElementById("cell1");
-        assertInstanceOf(cell1.getParentDomNode(), HtmlTableRow.class);
-        assertInstanceOf(cell1.getParentDomNode().getParentDomNode(), HtmlTableBody.class);
-        assertInstanceOf(cell1.getParentDomNode().getParentDomNode().getParentDomNode(), HtmlTable.class);
+        assertTrue(HtmlTableRow.class.isInstance(cell1.getParentDomNode()));
+        assertTrue(HtmlTableBody.class.isInstance(cell1.getParentDomNode().getParentDomNode()));
+        assertTrue(HtmlTable.class.isInstance(cell1.getParentDomNode().getParentDomNode().getParentDomNode()));
 
         // Check that the existing <tbody> wasn't messed up.
         final HtmlTableDataCell cell2 = (HtmlTableDataCell) page.getHtmlElementById("cell2");
-        assertInstanceOf(cell2.getParentDomNode(), HtmlTableRow.class);
-        assertInstanceOf(cell2.getParentDomNode().getParentDomNode(), HtmlTableBody.class);
-        assertInstanceOf(cell2.getParentDomNode().getParentDomNode().getParentDomNode(), HtmlTable.class);
+        assertTrue(HtmlTableRow.class.isInstance(cell2.getParentDomNode()));
+        assertTrue(HtmlTableBody.class.isInstance(cell2.getParentDomNode().getParentDomNode()));
+        assertTrue(HtmlTable.class.isInstance(cell2.getParentDomNode().getParentDomNode().getParentDomNode()));
     }
 
     /**
      * Regression test for bug 1210751: JavaScript inside <table> run twice.
      * @throws Exception if the test fails
      */
+    @Test
     public void testJSInTable() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
@@ -353,6 +361,7 @@ public class HtmlTableTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

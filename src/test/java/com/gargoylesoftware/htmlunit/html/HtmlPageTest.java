@@ -37,6 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -53,6 +58,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.httpclient.Cookie;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -69,7 +76,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 
 /**
@@ -84,20 +91,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlPageTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlPageTest(final String name) {
-        super(name);
-    }
+public class HtmlPageTest extends WebTestCase2 {
 
     /**
      * @exception Exception If the test fails
      */
+    @Test
     public void testConstructor() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -118,6 +117,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetInputByName() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -134,15 +134,16 @@ public class HtmlPageTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final HtmlInput input = form.getInputByName("textInput1");
-        assertEquals("name", "textInput1", input.getNameAttribute());
+        Assert.assertEquals("name", "textInput1", input.getNameAttribute());
 
-        assertEquals("value", "textInput1", input.getValueAttribute());
-        assertEquals("type", "text", input.getTypeAttribute());
+        Assert.assertEquals("value", "textInput1", input.getValueAttribute());
+        Assert.assertEquals("type", "text", input.getTypeAttribute());
     }
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testFormSubmit() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -174,8 +175,8 @@ public class HtmlPageTest extends WebTestCase {
         final URL expectedUrl = new URL("http://www.gargoylesoftware.com/formSubmit");
         final URL actualUrl = secondPage.getWebResponse().getUrl();
         assertEquals("url", expectedUrl, actualUrl);
-        assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
-        assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
+        Assert.assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
+        Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
 
@@ -184,6 +185,7 @@ public class HtmlPageTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetHtmlElement() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -248,6 +250,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetTabbableElements_None() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -264,6 +267,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetTabbableElements_OneEnabled_OneDisabled() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -283,6 +287,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetTabbableElements() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -318,6 +323,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetHtmlElementByAccessKey() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -341,6 +347,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetHtmlElementsByAccessKey() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head><body>\n"
@@ -361,6 +368,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      * @deprecated
      */
+    @Test
     public void testAssertAllIdAttributesUnique() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -383,6 +391,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      * @deprecated
      */
+    @Test
     public void testAssertAllIdAttributesUnique_Duplicates() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -411,6 +420,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      * @deprecated
      */
+    @Test
     public void testAssertAllAccessKeyAttributesUnique() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -433,6 +443,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      * @deprecated
      */
+    @Test
     public void testAssertAllAccessKeyAttributesUnique_Duplicates() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -461,6 +472,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      * @deprecated
      */
+    @Test
     public void testAssertAllTabIndexAttributesSet() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -486,6 +498,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      * @deprecated
      */
+    @Test
     public void testAssertAllTabIndexAttributesSet_SomeMissing() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -517,6 +530,7 @@ public class HtmlPageTest extends WebTestCase {
      * @throws Exception if the test fails
      * @deprecated
      */
+    @Test
     public void testAssertAllTabIndexAttributesSet_BadValue() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -547,6 +561,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetFullQualifiedUrl_NoBaseSpecified() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -584,6 +599,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetFullQualifiedUrl_WithBase() throws Exception {
         testGetFullQualifiedUrl_WithBase("http", "");
         testGetFullQualifiedUrl_WithBase("http", ":8080");
@@ -619,6 +635,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetFullQualifiedUrl_WithInvalidBase() throws Exception {
         final String htmlContent = "<html><head><base href='---****://=='/></head></html>";
         final HtmlPage page = loadPage(htmlContent);
@@ -632,6 +649,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testBase_Multiple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -645,6 +663,7 @@ public class HtmlPageTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
+            @Test
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -667,6 +686,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testBase_InsideBody() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -679,6 +699,7 @@ public class HtmlPageTest extends WebTestCase {
         final WebClient webClient = new WebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
+            @Test
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
             }
@@ -702,6 +723,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler_BodyStatement() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\")'>\n"
@@ -718,6 +740,7 @@ public class HtmlPageTest extends WebTestCase {
      * If the onload handler contains two statements then only the first would execute
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler_TwoBodyStatements() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>\n"
@@ -734,6 +757,7 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for bug 713646
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler_BodyName() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
@@ -751,6 +775,7 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for bug 713646
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler_BodyName_NotAFunction() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>\n"
             + "<body onLoad='foo=4711'>\n"
@@ -770,6 +795,7 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for window.onload property
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler_ScriptName() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
@@ -788,6 +814,7 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for window.onload property
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler_ScriptNameRead() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
@@ -806,6 +833,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testEmbeddedMetaTag_Regression() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body>\n"
@@ -830,6 +858,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "<title>foo</title>\n"
@@ -851,6 +880,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetForms() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -876,6 +906,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a meta tag.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=" + URL_SECOND + "\">\n"
@@ -898,6 +929,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a meta tag with no URL.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_MetaTag_NoUrl() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
@@ -925,13 +957,14 @@ public class HtmlPageTest extends WebTestCase {
      * not performing the refresh.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_ImmediateRefresh_AvoidOOME() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
 
         final WebClient client = new WebClient();
-        assertInstanceOf(client.getRefreshHandler(), ImmediateRefreshHandler.class);
+        assertTrue(ImmediateRefreshHandler.class.isInstance(client.getRefreshHandler()));
         try {
             loadPage(firstContent);
             fail("should have thrown");
@@ -946,6 +979,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a meta tag with url quoted.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_MetaTagQuoted() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"" + URL_SECOND + "\"'>\n"
@@ -968,6 +1002,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a meta tag with url partly quoted.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_MetaTagPartlyQuoted() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='" + URL_SECOND + "\">\n"
@@ -990,6 +1025,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a meta tag inside noscript.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_MetaTagNoScript() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<noscript>\n"
@@ -1017,6 +1053,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a meta tag with a refresh handler that doesn't refresh.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_MetaTag_CustomRefreshHandler() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=" + URL_SECOND + "\">\n"
@@ -1047,6 +1084,7 @@ public class HtmlPageTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_MetaTag_Whitespace() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=" + URL_SECOND + "'>\n"
@@ -1069,6 +1107,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test auto-refresh from a response header.
      * @throws Exception if the test fails
      */
+    @Test
     public void testRefresh_HttpResponseHeader() throws Exception {
         final String firstContent = "<html><head><title>first</title>\n"
             + "</head><body></body></html>";
@@ -1091,6 +1130,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test that the parent of the DOM Document (HtmlPage) is null.
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentParentIsNull() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -1105,6 +1145,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentElement() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -1122,6 +1163,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testDocumentNodeType() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -1140,6 +1182,7 @@ public class HtmlPageTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testDeregisterFrameWithoutSrc() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -1157,6 +1200,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test that a return statement in onload doesn't throw any exception
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadReturn() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>\n"
             + "<body onload='return true'>\n"
@@ -1169,6 +1213,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test that wrong formed html code is parsed like browsers do
      * @throws Exception if the test fails
      */
+    @Test
     public void testWrongHtml_TagBeforeHtml() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -1198,6 +1243,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @exception Exception If the test fails
      */
+    @Test
     public void testAsXml() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>"
             + "<body><p>helloworld</p></body>"
@@ -1211,6 +1257,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test that the generated xml is valid as html code too
      * @exception Exception If the test fails
      */
+    @Test
     public void testAsXmlValidHtmlOutput() throws Exception {
         final String html =
             "<html><head><title>foo</title>"
@@ -1235,6 +1282,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @exception Exception If the test fails
      */
+    @Test
     public void testAsXml2() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script>var test = 15 < 16;</script></head>\n"
@@ -1253,6 +1301,7 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for bug 1204637
      * @exception Exception If the test fails
      */
+    @Test
     public void testIsJavascript() throws Exception {
         assertTrue(HtmlPage.isJavaScript("text/javascript", null));
         assertTrue(HtmlPage.isJavaScript("text/JavaScript", null));
@@ -1261,6 +1310,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @exception Exception if the test fails
      */
+    @Test
     public void testGetHtmlElementsByName() throws Exception {
         final String html = "<html><body><div name='a'>foo</div><div name='b'/><div name='b'/></body></html>";
         final HtmlPage page = loadPage(html);
@@ -1281,6 +1331,7 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for bug 1233519
      * @exception Exception If the test fails
      */
+    @Test
     public void testGetHtmlElementByIdAfterRemove() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
@@ -1318,6 +1369,7 @@ public class HtmlPageTest extends WebTestCase {
      * is removed.
      * @exception Exception If the test fails
      */
+    @Test
     public void testGetHtmlElementById_idTwice() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
@@ -1338,6 +1390,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test the set-cookie meta tag
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetCookieMetaTag() throws Exception {
         final String content = "<html><head><title>first</title>\n"
             + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>\n"
@@ -1365,6 +1418,7 @@ public class HtmlPageTest extends WebTestCase {
      * Regression test for bug 1658273
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnLoadHandler_idChange() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>'"
@@ -1388,6 +1442,7 @@ public class HtmlPageTest extends WebTestCase {
      * Test for bug 1714767
      * @throws Exception if the test fails
      */
+    @Test
     public void testNoSlashURL() throws Exception {
         testNoSlashURL("http:/second");
         testNoSlashURL("http:second");
@@ -1418,6 +1473,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception failure
      */
+    @Test
     public void testMetaTagWithEmptyURL() throws Exception {
         final WebClient client = new WebClient();
         client.setRefreshHandler(new ImmediateRefreshHandler());
@@ -1454,6 +1510,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testSerialization() throws Exception {
         final String content = "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
@@ -1485,6 +1542,7 @@ public class HtmlPageTest extends WebTestCase {
      * Verifies that a cloned HtmlPage has its own idMap_
      * @throws Exception if the test fails
      */
+    @Test
     public void testClonedPageHasOwnIdMap() throws Exception {
         final String content = "<html><head><title>foo</title>"
             + "<body>"
@@ -1519,6 +1577,7 @@ public class HtmlPageTest extends WebTestCase {
      * Verifies that a cloned HtmlPage has its own documentElement
      * @throws Exception if the test fails
      */
+    @Test
     public void testClonedPageHasOwnDocumentElement() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<body>\n"
@@ -1536,6 +1595,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_AddAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -1564,6 +1624,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_ReplaceAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -1592,6 +1653,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_RemoveAttribute() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -1620,6 +1682,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_RemoveListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -1650,6 +1713,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testHtmlAttributeChangeListener_ListenerRegistersNewListener() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title>\n"
@@ -1663,12 +1727,14 @@ public class HtmlPageTest extends WebTestCase {
         final List<String> collector = new ArrayList<String>();
         final HtmlAttributeChangeListener listener2 = new HtmlAttributeChangeListenerTestImpl() {
             @Override
+            @Test
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 2");
             }
         };
         final HtmlAttributeChangeListener listener1 = new HtmlAttributeChangeListenerTestImpl() {
             @Override
+            @Test
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 1");
                 page.addHtmlAttributeChangeListener(listener2);
@@ -1692,6 +1758,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testCaseInsensitiveRegexReplacement() throws Exception {
         final String html = "<html><body><script>\n"
             + "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;\n"
@@ -1708,6 +1775,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testRegexReplacementWithFunction() throws Exception {
         final String html = "<html><body><script>\n"
             + "var r = /-([a-z])/ig;\n"
@@ -1724,6 +1792,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testTitle_EmptyXmlTagExpanded() throws Exception {
         final String content = "<html><head><title/></head>\n"
             + "<body>Hello World!</body></html>";
@@ -1737,6 +1806,7 @@ public class HtmlPageTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_AfterAppendRemoveAppendChild() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1759,6 +1829,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetElementById_AfterAppendingToNewlyCreatedElement() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1778,6 +1849,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnunLoadHandler() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body onunload='alert(\"foo\");alert(\"bar\")'>\n"
@@ -1800,6 +1872,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testOnbeforeunloadHandler() throws Exception {
         testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7_0, false, "first");
         testOnbeforeunloadHandler(BrowserVersion.INTERNET_EXPLORER_7_0, true, "second");
@@ -1855,6 +1928,7 @@ public class HtmlPageTest extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testSrcJavaScript() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -1869,6 +1943,7 @@ public class HtmlPageTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testAsText() throws Exception {
         final String htmlContent
             = "<html><head><title>test</title></head>\n"

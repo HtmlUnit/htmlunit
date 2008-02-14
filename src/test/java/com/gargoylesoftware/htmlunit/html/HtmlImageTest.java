@@ -41,9 +41,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlImage}.
@@ -52,19 +55,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlImageTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlImageTest(final String name) {
-        super(name);
-    }
+public class HtmlImageTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testIsMapClick() throws Exception {
         testIsMapClick("img1", false, "?0,0", "?25,30");
         testIsMapClick("img2", false, "", "");
@@ -89,13 +85,13 @@ public class HtmlImageTest extends WebTestCase {
         final HtmlImage img = (HtmlImage) page.getHtmlElementById(imgId);
         
         final Page page2 = img.click();
-        assertEquals("same page after click", samePage, (page == page2));
+        Assert.assertEquals("same page after click", samePage, (page == page2));
         if (!samePage) {
             assertEquals("http://server/foo" + urlSuffixClick, page2.getWebResponse().getUrl());
         }
 
         final Page page3 = img.click(25, 30);
-        assertEquals("same page after click(25, 30)", samePage, (page == page3));
+        Assert.assertEquals("same page after click(25, 30)", samePage, (page == page3));
         if (!samePage) {
             assertEquals("http://server/foo" + urlSuffixClickXY, page3.getWebResponse().getUrl());
         }
@@ -104,6 +100,7 @@ public class HtmlImageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testUseMapClick() throws Exception {
         testUseMapClick(0, 0, "/");
         testUseMapClick(10, 10, "a.html");
@@ -137,6 +134,7 @@ public class HtmlImageTest extends WebTestCase {
      * Tests circle radius of percentage value, Not Yet Implemented
      * @throws Exception if the test fails
      */
+    @Test
     public void testUseMapClick_CircleRadiusPercentage() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -160,6 +158,7 @@ public class HtmlImageTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

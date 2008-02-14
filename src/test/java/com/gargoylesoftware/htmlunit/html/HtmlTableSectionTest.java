@@ -40,8 +40,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlTableBody}, {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
@@ -50,19 +52,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class HtmlTableSectionTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlTableSectionTest(final String name) {
-        super(name);
-    }
+public class HtmlTableSectionTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

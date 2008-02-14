@@ -37,16 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -57,16 +61,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class DomNodeTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name Name of the test
-     */
-    public DomNodeTest(final String name) {
-        super(name);
-    }
+public class DomNodeTest extends WebTestCase2 {
 
     /**
      * Test hasAttributes() on an element with attributes.
@@ -79,7 +74,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        assertEquals("Element should have attribute", true, node.hasAttributes());
+        Assert.assertEquals("Element should have attribute", true, node.hasAttributes());
     }
 
     /**
@@ -94,7 +89,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         final DomNode parent = node.getParentDomNode();
-        assertEquals("Element should not have attribute", false, parent.hasAttributes());
+        Assert.assertEquals("Element should not have attribute", false, parent.hasAttributes());
     }
 
     /**
@@ -109,7 +104,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstDomChild();
-        assertEquals("Text should not have attribute", false, child.hasAttributes());
+        Assert.assertEquals("Text should not have attribute", false, child.hasAttributes());
     }
 
     /**
@@ -124,7 +119,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstDomChild();
-        assertEquals("Text should not have a prefix", null, child.getPrefix());
+        Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
 
     /**
@@ -139,7 +134,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstDomChild();
-        assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
+        Assert.assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
     }
 
     /**
@@ -154,7 +149,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstDomChild();
-        assertEquals("Text should not have a prefix", null, child.getLocalName());
+        Assert.assertEquals("Text should not have a prefix", null, child.getLocalName());
     }
 
     /**
@@ -170,7 +165,7 @@ public class DomNodeTest extends WebTestCase {
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstDomChild();
         child.setPrefix("bar"); // This does nothing.
-        assertEquals("Text should not have a prefix", null, child.getPrefix());
+        Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
 
     /**
@@ -189,7 +184,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.removeAllChildren();
-        assertEquals("Did not remove all nodes", null, node.getFirstDomChild());
+        Assert.assertEquals("Did not remove all nodes", null, node.getFirstDomChild());
     }
 
     /**

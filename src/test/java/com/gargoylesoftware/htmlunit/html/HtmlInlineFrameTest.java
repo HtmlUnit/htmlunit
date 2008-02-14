@@ -37,14 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Unit tests for {@link HtmlInlineFrame}.
@@ -54,20 +58,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class HtmlInlineFrameTest extends WebTestCase {
-
-    /**
-     * Creates an instance.
-     *
-     * @param name The name of the test
-     */
-    public HtmlInlineFrameTest(final String name) {
-        super(name);
-    }
+public class HtmlInlineFrameTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSrcAttribute() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -99,6 +95,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSrcAttributeWithWhiteSpaces() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -133,6 +130,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
      *
      * @throws Exception if an error occurs
      */
+    @Test
     public void testRecursiveSrcAttribute() throws Exception {
         final String html = "<html><body><iframe id='a' src='#abc'></body></html>";
         final HtmlPage page = loadPage(html);
@@ -144,6 +142,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
      * Tests that a recursive src is prevented.
      * @throws Exception if an error occurs
      */
+    @Test
     public void testRecursiveNestedFrames() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -179,6 +178,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
      *
      * @throws Exception if an error occurs
      */
+    @Test
     public void testInvalidSrcAttribute() throws Exception {
         final String html = "<html><body><iframe id='a' src='foo://bar'></body></html>";
         final HtmlPage page = loadPage(html);
@@ -189,6 +189,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSrcAttribute_ViaJavaScript() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -218,6 +219,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
+    @Test
     public void testScriptUnderIFrame() throws Exception {
         final String firstContent
             = "<html><body>\n"
@@ -250,6 +252,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

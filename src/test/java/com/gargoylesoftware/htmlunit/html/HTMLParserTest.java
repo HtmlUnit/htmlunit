@@ -40,10 +40,12 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 
 /**
@@ -53,21 +55,14 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  */
-public class HTMLParserTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public HTMLParserTest(final String name) {
-        super(name);
-    }
+public class HTMLParserTest extends WebTestCase2 {
 
     /**
      * test the new HTMLParser on a simple HTML string and use the Jaxen XPath navigator
      * to validate results
      * @throws Exception failure
      */
+    @Test
     public void testSimpleHTMLString() throws Exception {
         final WebClient webClient = new WebClient();
         final WebResponse webResponse = new StringWebResponse(
@@ -90,6 +85,7 @@ public class HTMLParserTest extends WebTestCase {
      * Test when <form> inside <table> and before <tr>
      * @throws Exception failure
      */
+    @Test
     public void testBadlyFormedHTML() throws Exception {
         final String content
             = "<html><head><title>first</title>\n"
@@ -123,6 +119,7 @@ public class HTMLParserTest extends WebTestCase {
      * Test when an illegal tag is found in head as some websites do
      * @throws Exception failure
      */
+    @Test
     public void testUnknownTagInHead() throws Exception {
         if (notYetImplemented()) {
             return;
@@ -160,6 +157,7 @@ public class HTMLParserTest extends WebTestCase {
      *
      * @throws Exception failure
      */
+    @Test
     public void testHtmlUnitHomePage() throws Exception {
         final HtmlPage page = loadUrl("http://htmlunit.sourceforge.net");
         if (page != null) {
@@ -174,6 +172,7 @@ public class HTMLParserTest extends WebTestCase {
      * Works since NekoHtml 0.9.5
      * @exception Exception If the test fails
      */
+    @Test
     public void testBadTagInHead() throws Exception {
         final String htmlContent = "<html>\n" + "<head><foo/>\n<title>foo\n</head>\n"
                 + "<body>\nfoo\n</body>\n</html>";

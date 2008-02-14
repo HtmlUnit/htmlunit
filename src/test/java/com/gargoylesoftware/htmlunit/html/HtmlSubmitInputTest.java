@@ -41,12 +41,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlSubmitInput}.
@@ -56,19 +58,12 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlSubmitInputTest extends WebTestCase {
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public HtmlSubmitInputTest(final String name) {
-        super(name);
-    }
+public class HtmlSubmitInputTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSubmit() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -94,6 +89,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_onClick() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -115,6 +111,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
@@ -143,6 +140,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testDefaultValue() throws Exception {
         final String[] expectedAlertsIE = {"Submit Query"};
         testDefaultValue(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
@@ -177,6 +175,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testEmptyValue() throws Exception {
         final String html =
             "<html><head>\n"
@@ -204,6 +203,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
+    @Test
     public void testOutsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"

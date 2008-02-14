@@ -37,15 +37,21 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlSelect}.
@@ -56,22 +62,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlSelectTest extends WebTestCase {
-
-    /**
-     * Create an instance
-     *
-     * @param name Name of the test
-     */
-    public HtmlSelectTest(final String name) {
-        super(name);
-    }
+public class HtmlSelectTest extends WebTestCase2 {
 
     /**
      * Test the good path of submitting a select
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
@@ -90,14 +88,14 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Test that the select is being correctly identified as a submittable element
-        assertCollectionsEqual(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
+        assertEquals(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
@@ -106,6 +104,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect_MultipleSelectNoneSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
@@ -130,7 +129,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
@@ -139,6 +138,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect_ChangeSelectedOption_SingleSelect() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
@@ -164,7 +164,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
@@ -173,6 +173,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect_ChangeSelectedOption_MultipleSelect() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple='multiple'>\n"
@@ -200,7 +201,7 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals("url",
                 URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
-        assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
@@ -209,6 +210,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect_MultipleSelectMultipleSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
@@ -236,6 +238,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect_SingleSelectMultipleSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
@@ -262,6 +265,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect_SingleSelectNoneSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
@@ -287,6 +291,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSelect_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
@@ -309,6 +314,7 @@ public class HtmlSelectTest extends WebTestCase {
      * @deprecated Mark test as deprecated to avoid compiler warnings as this tests deprecated methods
      * @exception Exception If the test fails
      */
+    @Test
     public void testSetSelected_IllegalValue() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
@@ -339,6 +345,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetOptions() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
@@ -367,6 +374,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelect_OptionMultiple_NoValueOnAttribute() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' id='select1' multiple>\n"
@@ -385,6 +393,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testGetOptionByValue() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
@@ -411,6 +420,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelect_SetSelected_OnChangeHandler() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' onChange='alert(\"changing\")'>\n"
@@ -437,6 +447,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSetSelectionOnOptionWithNoName() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' multiple size='5'>"
@@ -464,6 +475,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /** @throws Exception if the test fails */
+    @Test
     public void testRemoveOptionsFromSelect() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' id='theSelect'>"
@@ -512,6 +524,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /** @throws Exception If the test fails */
+    @Test
     public void testEditOptions() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' id='theSelect'>\n"
@@ -554,6 +567,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testAsTextWhenNothingSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
@@ -573,6 +587,7 @@ public class HtmlSelectTest extends WebTestCase {
      * the selected ones.
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testAsTextWithMultipleSelect() throws Exception {
         final String html = "<html><body><form>\n"
             + "<select name='a' multiple>\n"
@@ -591,6 +606,7 @@ public class HtmlSelectTest extends WebTestCase {
      *
      * @exception Exception If the test fails
      */
+    @Test
     public void testSetSelectedAttributeReturnedPage() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -620,6 +636,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testOnChangeResultPage() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -639,6 +656,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testSelectedIndex() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -662,6 +680,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Test
     public void testAsXml_size() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body>\n"

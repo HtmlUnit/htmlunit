@@ -37,6 +37,9 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +50,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -61,20 +64,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  * @version $Revision$
  * @author Rob Di Marco
  */
-public class YuiTest extends WebTestCase {
+public class YuiTest extends WebTestCase2 {
 
     private static final long DEFAULT_TIME_TO_WAIT = 2 * 60 * 1000L;
     private static final String BASE_FILE_PATH = "yui/2.3.0/tests/";
     private final List<String> emptyList_ = Collections.emptyList();
-
-    /**
-     * Creates an instance.
-     *
-     * @param name The name of the test.
-     */
-    public YuiTest(final String name) {
-        super(name);
-    }
 
     /**
      * @throws Exception if an error occurs

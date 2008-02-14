@@ -37,15 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link HtmlScript}.
@@ -55,15 +59,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlScriptTest extends WebTestCase {
+public class HtmlScriptTest extends WebTestCase2 {
 
-    /**
-     * Creates an instance.
-     * @param name The name of the test.
-     */
-    public HtmlScriptTest(final String name) {
-        super(name);
-    }
 
     /**
      * Verifies that a failing HTTP status code for a JavaScript file request (like a 404 response)
@@ -74,6 +71,7 @@ public class HtmlScriptTest extends WebTestCase {
      * @see WebClient#isThrowExceptionOnFailingStatusCode()
      * @throws Exception if an error occurs
      */
+    @Test
     public void testBadExternalScriptReference() throws Exception {
 
         final String html = "<html><head><title>foo</title>\n"
@@ -111,6 +109,7 @@ public class HtmlScriptTest extends WebTestCase {
     /**
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testAsText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
@@ -129,6 +128,7 @@ public class HtmlScriptTest extends WebTestCase {
      * ignored silently (bug 1695279).
      * @throws Exception If the test fails.
      */
+    @Test
     public void testInvalidJQuerySrcAttribute() throws Exception {
         loadPage("<html><body><script src='//:'></script></body></html>");
     }
@@ -138,6 +138,7 @@ public class HtmlScriptTest extends WebTestCase {
      * script tags, and any onload handler for the original page do not run.
      * @throws Exception If the test fails
      */
+    @Test
     public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
         final String firstPage
             = "<html><head></head>\n"
@@ -172,6 +173,7 @@ public class HtmlScriptTest extends WebTestCase {
      * See bug 1707788.
      * @throws Exception If an error occurs.
      */
+    @Test
     public void testScriptIsNotRunWhenCloned() throws Exception {
         final String html = "<html><body onload='document.body.cloneNode(true)'>\n"
             + "<script>alert('a')</script></body></html>";
@@ -185,6 +187,7 @@ public class HtmlScriptTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
+    @Test
     public void testDefer() throws Exception {
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"
@@ -207,6 +210,7 @@ public class HtmlScriptTest extends WebTestCase {
     /**
      * @throws Exception if the test fails.
      */
+    @Test
     public void testSimpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

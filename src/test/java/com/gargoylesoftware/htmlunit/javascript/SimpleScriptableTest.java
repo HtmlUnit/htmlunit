@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,6 +50,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.lang.ClassUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -55,7 +58,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -72,14 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class SimpleScriptableTest extends WebTestCase {
-    /**
-     * Create an instance
-     * @param name The name of the test
-     */
-    public SimpleScriptableTest(final String name) {
-        super(name);
-    }
+public class SimpleScriptableTest extends WebTestCase2 {
 
     /**
      * @throws Exception if the test fails
@@ -113,7 +109,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
         assertEquals("foo", page.getTitleText());
-        assertEquals("focus not changed to textfield1",
+        Assert.assertEquals("focus not changed to textfield1",
                      page.getFormByName("form1").getInputByName("textfield1"),
                      page.getElementWithFocus());
         assertEquals(expectedAlerts, collectedAlerts);
