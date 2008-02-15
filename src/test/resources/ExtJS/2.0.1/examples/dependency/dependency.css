@@ -1,0 +1,52 @@
+/*
+ * Ext JS Library 2.0.1
+ * Copyright(c) 2006-2008, Ext JS, LLC.
+ * licensing@extjs.com
+ * 
+ * http://extjs.com/license
+ */
+
+.x-tree-node img.folder, .x-tree-node-collapsed img.folder{
+    background-image:url(../../resources/images/default/tree/folder.gif);
+}
+
+.x-tree-node-expanded img.folder {
+    background-image:url(../../resources/images/default/tree/folder-open.gif);
+}
+
+.x-tree-node .croot{
+    background:#c3daf9;
+}
+.x-tree-node div.cmp{
+    background:#eee url( ../tree/images/cmp-bg.gif ) repeat-x;
+    margin-top:1px;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ccc;
+    padding-top:2px;
+    padding-bottom:1px;
+}
+.add-cmp .x-btn-text {
+    background-image:url( ../shared/icons/fam/plugin_add.gif );
+}
+
+.add-opt .x-btn-text {
+    background-image:url( ../shared/icons/fam/add.gif );
+}
+
+.remove .x-btn-text, .remove-mi .x-menu-item-icon {
+    background-image:url( ../shared/icons/fam/delete.gif );
+}
+
+.save .x-btn-text {
+    background-image:url( ../shared/icons/save.gif );
+}
+.expand-all .x-menu-item-icon {
+    background-image:url( ../shared/icons/arrow-down.gif );
+}
+.collapse-all .x-menu-item-icon {
+    background-image:url( ../shared/icons/arrow-up.gif );
+}
+
+.x-tree-node img.cmp, .menu-cmp .x-menu-item-icon{
+    background-image:url( ../shared/icons/fam/plugin.gif );
+}

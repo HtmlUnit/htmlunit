@@ -1,0 +1,136 @@
+<html>
+<head>
+	<title>Ext 2.0 Samples</title>
+	<link rel="shortcut icon" href="http://extjs.com/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="extjs.css" />
+    <link rel="stylesheet" type="text/css" href="extjs2.css" />
+
+    <!-- GC -->
+
+    <style type="text/css">
+    #all-demos {
+        width:660px;
+        margin-left:10px;
+        float:left;
+    }
+    .demos {
+        clear:both;
+        margin:10px 0 25px;
+        font:normal 12px tahoma,arial,verdana,sans-serif;
+    }
+    .demos dt {
+        float:left;
+        width:150px;
+        margin:5px 5px 15px;
+        text-align:center;
+    }
+    .demos dt img {
+        width:120px;
+        height:90px;
+        margin-bottom:5px;
+    }
+    #loading{
+        position:absolute;
+        left:45%;
+        top:40%;
+        padding:2px;
+        z-index:20001;
+        height:auto;
+        border:1px solid #ccc;
+    }
+    #loading a {
+        color:#225588;
+    }
+    #loading .loading-indicator{
+        background:white;
+        color:#444;
+        font:bold 13px tahoma,arial,helvetica;
+        padding:10px;
+        margin:0;
+        height:auto;
+    }
+    #loading-msg {
+        font: normal 10px arial,tahoma,sans-serif;
+    }
+    #demo-menu {
+        width:150px;
+        float:left;
+        margin:10px 10px 10px 0;
+        font:normal 12px/22px tahoma,arial,helvetica;
+        border-top:1px solid #eee;
+    }
+    #demo-menu a {
+        text-decoration:none;
+        display:block;
+        border-bottom:1px solid #eee;
+        color:#777;
+        padding: 0 7px;
+        zoom:1;
+    }
+    #demo-menu a:hover {
+        color:#225588;
+        background:#f0f5fa;
+        border-left:3px solid #a3bae9;
+        padding-left:4px;
+    }
+    </style>
+</head>
+<body>
+<div id="loading">
+    <div class="loading-indicator"><img src="../resources/images/default/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/>Ext 2.0 - <a href="http://extjs.com">extjs.com</a><br /><span id="loading-msg">Loading styles and images...</span></div>
+</div>
+
+<div id="extdoc" class="yui-t4">
+<div id="extdoc-inner">
+    <div id="hd" class="content">
+        <h1 class="content"><a href="http://extjs.com/" title="Home"><span>Ext</span></a></h1>
+       	<a href="#yui-main" class="skip" title="Skip directly to the main page contents">Skip site navigation</a>
+            <ul class="navlinks"><li><a href="http://extjs.com/" title="extjs.com Home"><span>Home</span></a></li>
+            <li><a href="http://extjs.com/download" title="Download the current version"><span>Download</span></a></li>
+            <li><a href="http://extjs.com/license" title="Ext JS License" class="active"><span>License</span></a></li>
+            <li><a href="http://extjs.com/learn" title="Learn about Ext JS"><span>Learn</span></a></li>
+            <li><a href="http://extjs.com/forum"><span>Forum</span></a></li>
+            <li><a href="http://extjs.com/blog"><span>Blog</span></a></li>
+            <li><a href="http://extjs.com/ext-store/commercial"><span>Store</span></a></li>
+            <li><a href="http://extjs.com/ext-store"><span><img src="http://extjs.com/themes/ext/resources/images/get-premium-support.gif" align="top" alt="Get Premium Support" /></span></a></li>
+            </ul>
+    </div>
+
+	<div id="bd">
+    <div id="yui-main">
+        <div id="body" class="yui-b">
+        <h2 class="page-title">Ext 2.0 Samples</h2>
+		<div id="sample-spacer" style="height:800px;"></div>
+		<link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="../resources/css/xtheme-gray.css" />
+		<script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Loading Core API...';</script>
+		<script type="text/javascript" src="../adapter/ext/ext-base.js"></script>
+		<script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Loading UI Components...';</script>
+		<script type="text/javascript" src="../ext-all.js"></script>
+		<script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Initializing...';</script>
+		<script type="text/javascript" src="samples.js"></script>
+		<div id="demo-menu"></div>
+		<div id="all-demos"></div>
+
+		<div style="clear:left;"></div>
+
+    	</div>
+    </div>
+	</div>
+
+    <div id="ft">
+        <br />
+        <ul class="navlinks"><li><a href="http://extjs.com/">Home</a> | </li>
+        <li><a href="http://extjs.com/download">Download</a> | </li>
+        <li><a href="http://extjs.com/license" class="active">License</a> | </li>
+        <li><a href="http://extjs.com/learn">Learn</a> | </li>
+        <li><a href="http://extjs.com/forum/" title="Ext Forums">Forum</a> | </li>
+        <li><a href="http://extjs.com/blog/" title="Ext Blog">Blog</a> | </li>
+        <li><a href="http://extjs.com/ext-store/commercial">Store</a></li>
+        </ul>
+        <p>&copy; 2006-2008 Ext JS, LLC</p>
+    </div>
+</div>
+</div>
+</body>
+</html>
