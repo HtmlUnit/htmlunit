@@ -769,7 +769,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return null;
         }
         else {
-            return (HtmlElement) elements.get(0);
+            return elements.get(0);
         }
     }
 

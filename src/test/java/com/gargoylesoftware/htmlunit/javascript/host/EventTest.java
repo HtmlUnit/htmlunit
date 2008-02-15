@@ -52,7 +52,6 @@ import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
@@ -335,10 +334,8 @@ public class EventTest extends WebTestCase2 {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlElement element = (HtmlElement) page.getHtmlElementById("textField");
-        element.focus();
-        final HtmlElement otherElement = (HtmlElement) page.getHtmlElementById("otherField");
-        otherElement.focus();
+        page.getHtmlElementById("textField").focus();
+        page.getHtmlElementById("otherField").focus();
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }

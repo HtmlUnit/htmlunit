@@ -250,8 +250,7 @@ public class LocationTest extends WebTestCase2 {
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.hostname=\"xyz.com\"'>...</body></html>";
-        final String html2
-            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -273,8 +272,7 @@ public class LocationTest extends WebTestCase2 {
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.host=\"xyz.com\"'>...</body></html>";
-        final String html2
-            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -296,8 +294,7 @@ public class LocationTest extends WebTestCase2 {
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.host=\"xyz.com:8080\"'>...</body></html>";
-        final String html2
-            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -319,8 +316,7 @@ public class LocationTest extends WebTestCase2 {
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.pathname=\"/en/index.html\"'>...</body></html>";
-        final String html2
-            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -342,8 +338,7 @@ public class LocationTest extends WebTestCase2 {
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.port=\"88\"'>...</body></html>";
-        final String html2
-            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -365,8 +360,7 @@ public class LocationTest extends WebTestCase2 {
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.protocol=\"ftp\"'>...</body></html>";
-        final String html2
-            = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -393,8 +387,7 @@ public class LocationTest extends WebTestCase2 {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -420,8 +413,7 @@ public class LocationTest extends WebTestCase2 {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);

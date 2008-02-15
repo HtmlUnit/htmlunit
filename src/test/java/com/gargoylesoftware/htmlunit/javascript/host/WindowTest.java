@@ -262,8 +262,7 @@ public class WindowTest extends WebTestCase2 {
         final HtmlPage secondPage = (HtmlPage) secondFrame.getEnclosedPage();
         assertEquals("Second", secondPage.getTitleText());
         try {
-            assertEquals(secondFrame.getEnclosedWindow(),
-                webClient.getWebWindowByName("secondFrame"));
+            assertEquals(secondFrame.getEnclosedWindow(), webClient.getWebWindowByName("secondFrame"));
             // Expected path
         }
         catch (final WebWindowNotFoundException exception) {
@@ -279,8 +278,7 @@ public class WindowTest extends WebTestCase2 {
 
         assertEquals(thirdWindow, thirdWindow.getTopWindow());
         try {
-            assertEquals(secondFrame.getEnclosedWindow(),
-                webClient.getWebWindowByName("secondFrame"));
+            assertEquals(secondFrame.getEnclosedWindow(), webClient.getWebWindowByName("secondFrame"));
             // Expected path
         }
         catch (final WebWindowNotFoundException exception) {
@@ -307,8 +305,7 @@ public class WindowTest extends WebTestCase2 {
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
-        final String secondContent
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final EventCatcher eventCatcher = new EventCatcher();
 
@@ -358,8 +355,7 @@ public class WindowTest extends WebTestCase2 {
             + "    <a id='link' onClick='open(\"http://fourth\", \"_top\"); "
             + "return false;'>Click me</a>\n"
             + "</body></html>";
-        final String fourthContent
-            = "<html><head><title>Fourth</title></head><body></body></html>";
+        final String fourthContent = "<html><head><title>Fourth</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -426,8 +422,7 @@ public class WindowTest extends WebTestCase2 {
             + "    <a id='link' onClick='open(\"http://fourth\", \"_parent\"); "
             + "return false;'>Click me</a>\n"
             + "</body></html>";
-        final String fourthContent
-            = "<html><head><title>Fourth</title></head><body></body></html>";
+        final String fourthContent = "<html><head><title>Fourth</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -623,14 +618,10 @@ public class WindowTest extends WebTestCase2 {
 
         assertNotSame(innermostWebWindow.getParentWindow(), innermostWebWindow);
         assertNotSame(innermostWebWindow.getTopWindow(), innermostWebWindow);
-        assertNotSame(innermostWebWindow.getParentWindow(),
-            innermostWebWindow.getTopWindow());
-        assertSame(innermostWebWindow.getParentWindow().getParentWindow(),
-            innermostWebWindow.getTopWindow());
+        assertNotSame(innermostWebWindow.getParentWindow(), innermostWebWindow.getTopWindow());
+        assertSame(innermostWebWindow.getParentWindow().getParentWindow(), innermostWebWindow.getTopWindow());
 
-        assertEquals(
-            new String[] {"true", "true", "true", "true", "true", "true"},
-            collectedAlerts);
+        assertEquals(new String[] {"true", "true", "true", "true", "true", "true"}, collectedAlerts);
     }
 
     /**
@@ -1219,8 +1210,7 @@ public class WindowTest extends WebTestCase2 {
     @Test
     public void testGetFrameByName() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
         final List<String> collectedAlerts = new ArrayList<String>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -1236,12 +1226,10 @@ public class WindowTest extends WebTestCase2 {
             + "</frameset></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body><p>second</p></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body><p>second</p></body></html>";
         webConnection.setResponse(URL_SECOND, secondContent);
 
-        final String thirdContent
-            = "<html><head><title>third</title></head><body><p>third</p></body></html>";
+        final String thirdContent = "<html><head><title>third</title></head><body><p>third</p></body></html>";
         webConnection.setResponse(URL_THIRD, thirdContent);
 
         final String fourthContent
@@ -1736,9 +1724,9 @@ public class WindowTest extends WebTestCase2 {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
             + "<script>\n"
-            + "  function test1() { alert('test1'); }\n"
-            + "  function test2() { alert('test2'); }\n"
-            + "  function test3() { alert('test3'); }\n"
+            + "  function test1() {alert('test1');}\n"
+            + "  function test2() {alert('test2');}\n"
+            + "  function test3() {alert('test3');}\n"
             + "alert(window.addEventListener == null);\n"
             + "alert(window.attachEvent == null);\n"
             + "alert(window.removeEventListener == null);\n"
@@ -1765,9 +1753,9 @@ public class WindowTest extends WebTestCase2 {
         final String content = "<html>\n"
             + "<head><title>test</title>\n"
             + "<script>\n"
-            + "  function test1(_e) { alert('test1, param null: ' + (_e == null)); }\n"
-            + "  function test2() { alert('test2'); }\n"
-            + "  function test3() { alert('test3'); }\n"
+            + "  function test1(_e) {alert('test1, param null: ' + (_e == null));}\n"
+            + "  function test2() {alert('test2');}\n"
+            + "  function test3() {alert('test3');}\n"
             + "alert(window.addEventListener == null);\n"
             + "alert(window.attachEvent == null);\n"
             + "alert(window.removeEventListener == null);\n"
@@ -2484,7 +2472,6 @@ public class WindowTest extends WebTestCase2 {
             + "}\n"
             + "navigator();\n"
             + "</script></head><body></body></html>";
-
         loadPage(content);
     }
 

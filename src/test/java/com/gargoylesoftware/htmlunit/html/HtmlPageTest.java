@@ -1315,11 +1315,11 @@ public class HtmlPageTest extends WebTestCase2 {
         assertEquals(2, page.getHtmlElementsByName("b").size());
         assertEquals(0, page.getHtmlElementsByName("c").size());
 
-        final HtmlElement a = (HtmlElement) page.getHtmlElementsByName("a").get(0);
+        final HtmlElement a = page.getHtmlElementsByName("a").get(0);
         a.remove();
         assertEquals(0, page.getHtmlElementsByName("a").size());
 
-        final HtmlElement b1 = (HtmlElement) page.getHtmlElementsByName("b").get(0);
+        final HtmlElement b1 = page.getHtmlElementsByName("b").get(0);
         b1.appendDomChild(a);
         assertEquals(1, page.getHtmlElementsByName("a").size());
     }
@@ -1527,8 +1527,8 @@ public class HtmlPageTest extends WebTestCase2 {
         final Iterator<HtmlElement> iterator2 = page2.getAllHtmlChildElements().iterator();
         while (iterator1.hasNext()) {
             assertTrue(iterator2.hasNext());
-            final HtmlElement element1 = (HtmlElement) iterator1.next();
-            final HtmlElement element2 = (HtmlElement) iterator2.next();
+            final HtmlElement element1 = iterator1.next();
+            final HtmlElement element2 = iterator2.next();
             assertEquals(element1.getNodeName(), element2.getNodeName());
         }
         assertFalse(iterator2.hasNext());

@@ -748,7 +748,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final List< ? extends HtmlElement> listElements =
                 page.getDocumentHtmlElement().getHtmlElementsByTagNames(listTagNames);
             if (!listElements.isEmpty()) {
-                return ((HtmlElement) listElements.get(0)).getEventHandler("onload");
+                return listElements.get(0).getEventHandler("onload");
             }
             else {
                 return null;

@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static org.junit.Assert.assertSame;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -240,9 +239,7 @@ public class InputTest extends WebTestCase2 {
         assertTrue(radioB.isChecked());
         assertFalse(radioC.isChecked());
 
-        final String[] expectedAlerts = {
-            "true", "false", "false", "false", "true", "false"
-        };
+        final String[] expectedAlerts = {"true", "false", "false", "false", "true", "false"};
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -290,9 +287,7 @@ public class InputTest extends WebTestCase2 {
         assertFalse(button2.isDisabled());
         assertTrue(button3.isDisabled());
 
-        final String[] expectedAlerts = {
-            "false", "true", "false", "true", "false", "true"
-        };
+        final String[] expectedAlerts = {"false", "true", "false", "true", "false", "true"};
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -320,8 +315,7 @@ public class InputTest extends WebTestCase2 {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final URL url = URL_GARGOYLE;
-        final HtmlPage page = (HtmlPage) client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
         form.submit((SubmittableElement) null);
@@ -350,8 +344,7 @@ public class InputTest extends WebTestCase2 {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final URL url = URL_GARGOYLE;
-        final HtmlPage page = (HtmlPage) client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
         form.submit((SubmittableElement) null);
@@ -433,8 +426,7 @@ public class InputTest extends WebTestCase2 {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final MockWebConnection connection = (MockWebConnection) page.getWebClient()
-                .getWebConnection();
+        final MockWebConnection connection = (MockWebConnection) page.getWebClient().getWebConnection();
 
         final HtmlForm form = page.getFormByName("form1");
         form.getInputByName("button1").click();
