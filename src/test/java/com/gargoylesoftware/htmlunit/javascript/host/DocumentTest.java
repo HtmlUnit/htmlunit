@@ -2989,7 +2989,7 @@ public class DocumentTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void evalute_caseInsensitiveAttribute() throws Exception {
+    public void evaluate_caseInsensitiveAttribute() throws Exception {
         if (notYetImplemented()) {
             return;
         }
