@@ -206,7 +206,7 @@ public class FocusableElementTest extends WebTestCase2 {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        ((HtmlAnchor) page.getAnchors().get(0)).click();
+        page.getAnchors().get(0).click();
     }
     
     /**

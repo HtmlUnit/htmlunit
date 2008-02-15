@@ -767,8 +767,7 @@ public class WebClientTest extends WebTestCase2 {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
-        final Page page2 = link.click();
+        final Page page2 = page.getAnchors().get(0).click();
         assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getUrl());
     }
 

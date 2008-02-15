@@ -674,12 +674,9 @@ public class HtmlPageTest extends WebTestCase2 {
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) page.getAnchors().get(0);
-        anchor.click();
+        page.getAnchors().get(0).click();
         
-        final String[] expectedIncorrectness = {
-            "Multiple 'base' detected, only the first is used."
-        };
+        final String[] expectedIncorrectness = {"Multiple 'base' detected, only the first is used."};
         assertEquals(expectedIncorrectness, collectedIncorrectness);
     }
 

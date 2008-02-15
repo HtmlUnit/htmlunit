@@ -305,7 +305,7 @@ public class JavaScriptEngineTest extends WebTestCase2 {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final ClickableElement div = ((ClickableElement) page.getHtmlElementById("testdiv"));
 
-        ((HtmlAnchor) page.getAnchors().get(0)).click();
+        page.getAnchors().get(0).click();
         // ignore response, and click in the page again
         div.click();
 
@@ -1413,7 +1413,7 @@ public class JavaScriptEngineTest extends WebTestCase2 {
         assertEquals(1, countingJavaScriptEngine.getCompileCount());
         
         collectedAlerts.clear();
-        ((ClickableElement) page1.getAnchors().get(0)).click();
+        page1.getAnchors().get(0).click();
         assertEquals(new String[] {"page 2"}, collectedAlerts);
         assertEquals(2, countingJavaScriptEngine.getExecuteScriptCount());
         assertEquals(1, countingJavaScriptEngine.getCompileCount());

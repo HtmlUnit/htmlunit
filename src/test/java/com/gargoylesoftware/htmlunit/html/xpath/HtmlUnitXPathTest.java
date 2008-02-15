@@ -48,7 +48,6 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -159,10 +158,8 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
         final HtmlUnitXPath xpath = new HtmlUnitXPath("count(//select[@name='select1']/option)");
         assertEquals(3, ((Double) xpath.evaluate(page)).intValue());
 
-        final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
-        link.click();
+        page.getAnchors().get(0).click();
         assertEquals(4, ((Double) xpath.evaluate(page)).intValue());
-
     }
 
     /**

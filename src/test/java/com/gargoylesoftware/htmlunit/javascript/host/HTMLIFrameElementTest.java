@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -280,7 +279,7 @@ public class HTMLIFrameElementTest extends WebTestCase2 {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        ((HtmlAnchor) page.getAnchors().get(0)).click();
+        page.getAnchors().get(0).click();
         assertEquals(expected, collectedAlerts);
     }
 

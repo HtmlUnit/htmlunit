@@ -53,7 +53,6 @@ import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -177,7 +176,7 @@ public class CacheTest extends WebTestCase2 {
         assertEquals(expectedAlerts, collectedAlerts);
         
         collectedAlerts.clear();
-        ((HtmlAnchor) page1.getAnchors().get(0)).click();
+        page1.getAnchors().get(0).click();
         
         assertEquals(new String[] {"in foo2"}, collectedAlerts);
         assertEquals("no request for scripts should have been performed",
