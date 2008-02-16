@@ -182,16 +182,10 @@ JUnit results available here: ${test.reports.dir}/index.html
 	<target name="get-jars" depends="setProxy"
 		description="Get all the required dependencies from a remote repository">
 	
-		<!--
-			IMPORTANT: after changing any dependency, make sure 'cruise' task depends on 'initialize'
-					in order to refresh all jars.
-					Note that having 'cruise' always depends on 'initialize' leads
-					to high rate of failure.
-		-->
 		<!-- required -->
 		<get-dependency project="commons-httpclient" jarName="commons-httpclient-3.1.jar"/>
 		<get-dependency project="commons-codec" jarName="commons-codec-1.3.jar"/>
-		<get-dependency project="xerces" jarName="xercesImpl-2.6.2.jar"/>
+		<get-dependency project="xerces" jarName="xercesImpl-2.8.1.jar"/>
 		<get-dependency project="xerces" jarName="xmlParserAPIs-2.6.2.jar"/>
 		<get-dependency project="nekohtml" jarName="nekohtml-1.9.6.1.jar"/>
 		<get-dependency project="net.sourceforge.cssparser" jarName="cssparser-0.9.4.jar"/>
@@ -240,7 +234,4 @@ JUnit results available here: ${test.reports.dir}/index.html
 		<unzip src="${jars.dir}/checkstyle/checkstyle-4.3.zip" dest="${jars.dir}/checkstyle"/>
 	</target>
 
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="cruise" depends="cruise-set-jar-suffix,jar" description="Called by Cruise Control during a build">
-	</target>
 </project>
