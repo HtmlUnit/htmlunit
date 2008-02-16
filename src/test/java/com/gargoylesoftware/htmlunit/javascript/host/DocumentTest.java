@@ -3008,4 +3008,35 @@ public class DocumentTest extends WebTestCase2 {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+     @Test
+     public void writeStyle() throws Exception {
+         if (notYetImplemented()) {
+             return;
+         }
+         writeStyle(BrowserVersion.FIREFOX_2, new String[] {"SCRIPT", "TITLE"});
+         writeStyle(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"STYLE", "SCRIPT"});
+     }
+
+     private void writeStyle(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
+         final String content = "<html><head><title>foo</title></head>\n"
+             + "<body>\n"
+             + "<script>\n"
+             + "  document.write('<style type=\"text/css\" id=\"myStyle\">');\n"
+             + "  document.write('  .nwr {white-space: nowrap;}');\n"
+             + "  document.write('</style>');\n"
+             + "  document.write('<div id=\"myDiv\">');\n"
+             + "  document.write('</div>');\n"
+             + "  alert(document.getElementById('myDiv').previousSibling.nodeName);\n"
+             + "  alert(document.getElementById('myStyle').previousSibling.nodeName);\n"
+             + "</script>\n"
+             + "</body></html>";
+
+         final List<String> collectedAlerts = new ArrayList<String>();
+         loadPage(browserVersion, content, collectedAlerts);
+         assertEquals(expectedAlerts, collectedAlerts);
+     }
 }
