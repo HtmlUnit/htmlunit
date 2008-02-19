@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.fail;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -228,4 +229,60 @@ public class HtmlScriptTest extends WebTestCase2 {
         assertTrue(HtmlScript.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that setting a script's <tt>src</tt> attribute behaves correctly.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testSettingSrcAttribute() throws Exception {
+        testSettingSrcAttribute(BrowserVersion.FIREFOX_2, new String[] {"1", "2", "3"});
+        testSettingSrcAttribute(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1", "2", "3", "4", "5"});
+        testSettingSrcAttribute(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1", "2", "3", "4", "5"});
+    }
+
+    /**
+     * Verifies that setting a script's <tt>src</tt> attribute behaves correctly.
+     * @param version the browser version being tested
+     * @param expected the expected alerts
+     * @throws Exception if an error occurs
+     */
+    private void testSettingSrcAttribute(final BrowserVersion version, final String[] expected) throws Exception {
+        final String html =
+            "<html>\n"
+            + "    <head>\n"
+            + "        <title>Test</title>\n"
+            + "        <script id='a'></script>\n"
+            + "        <script id='b'>alert('1');</script>\n"
+            + "        <script id='c' src='script2.js'></script>\n"
+            + "        <script>\n"
+            + "            function test() {\n"
+            + "                document.getElementById('a').src = 'script3.js';\n"
+            + "                document.getElementById('b').src = 'script4.js';\n"
+            + "                document.getElementById('c').src = 'script5.js';\n"
+            + "            }\n"
+            + "        </script>\n"
+            + "    </head>\n"
+            + "    <body onload='test()'>\n"
+            + "        test\n"
+            + "    </body>\n"
+            + "</html>\n";
+
+        final List<String> actual = new ArrayList<String>();
+
+        final WebClient client = new WebClient(version);
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(html);
+        webConnection.setResponse(new URL("http://abc/script2.js"), "alert(2);");
+        webConnection.setResponse(new URL("http://abc/script3.js"), "alert(3);");
+        webConnection.setResponse(new URL("http://abc/script4.js"), "alert(4);");
+        webConnection.setResponse(new URL("http://abc/script5.js"), "alert(5);");
+        client.setWebConnection(webConnection);
+
+        client.getPage("http://abc/");
+        assertEquals(expected, actual);
+    }
+
 }

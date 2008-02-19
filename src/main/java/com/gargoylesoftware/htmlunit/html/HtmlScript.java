@@ -176,9 +176,32 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Executes the <tt>onreadystatechange</tt> handler when simulating IE,
-     * as well as executing the script itself, if necessary.
-     * {@inheritDoc}
+     * If setting the <tt>src</tt> attribute, this method executes the new JavaScript if necessary
+     * (behavior varies by browser version). {@inheritDoc}
+     */
+    @Override
+    public void setAttributeValue(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+
+        boolean execute = false;
+        if (namespaceURI == null && "src".equals(qualifiedName)) {
+            final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+            if (ie || (getAttribute("src").length() == 0 && getFirstDomChild() == null)) {
+                // Always execute if IE; if FF, only execute if the "src" attribute
+                // was undefined and there was no inline code.
+                execute = true;
+            }
+        }
+
+        super.setAttributeValue(namespaceURI, qualifiedName, attributeValue);
+
+        if (execute) {
+            executeScriptIfNeeded(true);
+        }
+    }
+
+    /**
+     * Executes the <tt>onreadystatechange</tt> handler when simulating IE, as well as executing
+     * the script itself, if necessary. {@inheritDoc}
      */
     @Override
     protected void onAddedToPage() {
