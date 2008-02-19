@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="sdanig">
+                Add test-scoped dependency on slf4j, in order to trigger correct logging in Jetty during the unit tests.
+            </action>
             <action type="add" dev="asashour" id="1896964">
                 JavaScript: add support for document.importNode() (FF only).
             </action>
