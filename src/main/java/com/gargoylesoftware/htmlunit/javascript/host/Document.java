@@ -976,6 +976,19 @@ public class Document extends Node {
     }
 
     /**
+     * Imports a node from another document to this document.
+     * The source node is not altered or removed from the original document;
+     * this method creates a new copy of the source node.
+     *
+     * @param importedNode The node to import.
+     * @param deep Whether to recursively import the subtree under the specified node; or not.
+     * @return The imported node that belongs to this Document.
+     */
+    public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
+        return ((DomNode) importedNode.getDomNodeOrDie().cloneNode(deep)).getScriptObject();
+    }
+
+    /**
      * Calls to <tt>document.XYZ</tt> should first look at elements named <tt>XYZ</tt> before
      * using standard functions.
      *

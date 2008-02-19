@@ -695,6 +695,9 @@
         <function name="getElementById"/>
         <function name="getElementsByName"/>        
         <function name="getElementsByTagName"/>
+        <function name="importNode">
+            <browser name="Firefox"/>
+        </function>
         <function name="open">
             <doclink
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp"

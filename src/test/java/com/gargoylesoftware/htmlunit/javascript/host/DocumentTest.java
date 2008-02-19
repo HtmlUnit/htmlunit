@@ -3039,4 +3039,32 @@ public class DocumentTest extends WebTestCase2 {
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void importNode() throws Exception {
+        importNode(false, new String[] {"div1", "null", "0"});
+        importNode(true, new String[] {"div1", "null", "2", "1"});
+    }
+
+    private void importNode(final boolean deep, final String[] expectedAlerts) throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var node = document.importNode(document.getElementById('div1'), " + deep + ");\n"
+            + "    alert(node.id);\n"
+            + "    alert(node.parentNode);\n"
+            + "    alert(node.childNodes.length);\n"
+            + "    if (node.childNodes.length != 0)\n"
+            + "      alert(node.childNodes[0].childNodes.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'><div id='div1_1'><div id='div1_1_1'></div></div><div id='div1_2'></div></div>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
