@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="update" dev="sdanig">
+                Upgrade Jetty to 6.1.7 and JCL to 1.1.1.
+            </action>
             <action type="fix" dev="mguillem">
                 Fixed incorrect processing of multiple conditional compilation flags (IE only).
             </action>
