@@ -70,6 +70,15 @@ public class IEConditionalCompilationTest {
                 new String[] {"testing @cc_on"});
         testScript(BrowserVersion.FIREFOX_2, script,
                 new String[] {});
+        
+        final String script2 = "var a={b:/*@cc_on!@*/false,c:/*@cc_on!@*/false};\n"
+            + "var foo = (1 + 2/*V*/);\n"
+            + "alert(foo)";
+        
+        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script2,
+                new String[] {"3"});
+        testScript(BrowserVersion.FIREFOX_2, script2,
+                new String[] {"3"});
     }
 
     /**

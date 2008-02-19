@@ -75,14 +75,27 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     public String preProcess(final HtmlPage htmlPage, final String sourceCode,
             final String sourceName, final HtmlElement htmlElement) {
         
-        final Pattern p = Pattern.compile("/\\*@cc_on(.*)@\\*/", Pattern.DOTALL);
-        final Matcher m = p.matcher(sourceCode);
-        final StringBuffer sb = new StringBuffer();
-        final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
-        while (m.find()) {
-            m.appendReplacement(sb, processConditionalCompilation(m.group(1), browserVersion));
+        final int startPos = sourceCode.indexOf("/*@cc_on");
+        if (startPos == -1) {
+            return sourceCode;
         }
-        m.appendTail(sb);
+        final int endPos = sourceCode.indexOf("@*/", startPos);
+        if (endPos == -1) {
+            return sourceCode;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        if (startPos > 0) {
+            sb.append(sourceCode.substring(0, startPos));
+        }
+        final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
+        final String body = sourceCode.substring(startPos + 8, endPos);
+        sb.append(processConditionalCompilation(body, browserVersion));
+        if (endPos < sourceCode.length() - 3) {
+            final String remaining = sourceCode.substring(endPos + 3);
+            sb.append(preProcess(htmlPage, remaining, sourceName, htmlElement));
+        }
+
         return sb.toString();
     }
     
