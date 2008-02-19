@@ -189,7 +189,7 @@ JUnit results available here: ${test.reports.dir}/index.html
 		<get-dependency project="xerces" jarName="xmlParserAPIs-2.6.2.jar"/>
 		<get-dependency project="nekohtml" jarName="nekohtml-1.9.6.1.jar"/>
 		<get-dependency project="net.sourceforge.cssparser" jarName="cssparser-0.9.4.jar"/>
-		<get-dependency project="commons-logging" jarName="commons-logging-1.1.jar"/>
+		<get-dependency project="commons-logging" jarName="commons-logging-1.1.1.jar"/>
 		<get-dependency project="jaxen" jarName="jaxen-1.1.1.jar"/>
 		<get-dependency project="commons-io" jarName="commons-io-1.3.1.jar"/>
 		<get-dependency project="commons-lang" jarName="commons-lang-2.3.jar"/>
@@ -199,8 +199,8 @@ JUnit results available here: ${test.reports.dir}/index.html
 		<!-- test -->
 		<get-dependency type="test" project="junit" jarName="junit-4.4.jar"/>
 		<get-dependency type="test" project="gsbase" jarName="gsbase-2.0.1.jar"/>
-		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-6.1.5.jar"/>
-		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-util-6.1.5.jar"/>
+		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-6.1.7.jar"/>
+		<get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-util-6.1.7.jar"/>
 		<get-dependency type="test" project="javax.servlet" jarName="servlet-api-2.4.jar"/>
 		<get-dependency type="test" project="commons-fileupload" jarName="commons-fileupload-1.2.jar"/>
 		
