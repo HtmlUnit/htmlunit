@@ -173,7 +173,7 @@ The reference stays the maven 1 build.
 			<subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
 			<unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
 			<archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</archive>
-			<post>htmlunit-users@lists.sourceforge.net</post>
+			<post>htmlunit-user@lists.sourceforge.net</post>
 		</mailingList>
 		<mailingList>
 			<name>HtmlUnit Developers</name>
