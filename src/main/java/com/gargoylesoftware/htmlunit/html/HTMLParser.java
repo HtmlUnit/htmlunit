@@ -52,6 +52,8 @@ import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
 import org.cyberneko.html.HTMLConfiguration;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
@@ -466,6 +468,29 @@ public final class HTMLParser {
             handleCharacters();
             final DomNode currentPage = page_;
             currentPage.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
+            addBodyToPageIfNecessary();
+        }
+
+        /**
+         * Adds a body element to the current page, if necessary. Strictly speaking, this should
+         * probably be done by NekoHTML. See the bug linked below. If and when that bug is fixed,
+         * we can get rid of this code.
+         *
+         * http://sourceforge.net/tracker/index.php?func=detail&aid=1898038&group_id=195122&atid=952178
+         */
+        private void addBodyToPageIfNecessary() {
+            final Element doc = page_.getDocumentElement();
+            boolean hasBody = false;
+            for (Node child = doc.getFirstChild(); child != null; child = child.getNextSibling()) {
+                if (child instanceof HtmlBody || child instanceof HtmlFrameSet) {
+                    hasBody = true;
+                    break;
+                }
+            }
+            if (!hasBody) {
+                final HtmlBody body = new HtmlBody(null, "body", page_, null);
+                doc.appendChild(body);
+            }
         }
 
         /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */

@@ -8,6 +8,12 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="fix" dev="sdanig">
+                Add implicit body element when one is missing and there is no content to trigger addition by NekoHTML.
+            </action>
+            <action type="fix" dev="sdanig">
+                When document is missing a body element, document.body returns null instead of undefined.
+            </action>
+            <action type="fix" dev="sdanig">
                 Execute JavaScript when a script element's src attribute is set (always when emulating IE,
                 only sometimes when emulating FF).
             </action>

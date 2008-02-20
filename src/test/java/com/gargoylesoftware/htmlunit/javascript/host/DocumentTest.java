@@ -2090,7 +2090,7 @@ public class DocumentTest extends WebTestCase2 {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
 
-        final String[] expectedAlerts = {"undefined"};
+        final String[] expectedAlerts = {"null"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -3067,4 +3067,33 @@ public class DocumentTest extends WebTestCase2 {
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that HtmlUnit behaves correctly when a document is missing the <tt>body</tt> tag (it
+     * needs to be added once the document has finished loading).
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testNoBodyTag() throws Exception {
+        testNoBodyTag(BrowserVersion.FIREFOX_2, new String[] {"1: null", "2: null", "3: [object HTMLBodyElement]"});
+        testNoBodyTag(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1: null", "2: [object]", "3: [object]"});
+        testNoBodyTag(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1: null", "2: [object]", "3: [object]"});
+    }
+
+    private void testNoBodyTag(final BrowserVersion version, final String[] expected) throws Exception {
+        final String html =
+              "    <html>\n"
+            + "        <head>\n"
+            + "            <title>Test</title>\n"
+            + "            <script>alert('1: ' + document.body);</script>\n"
+            + "            <script defer=''>alert('2: ' + document.body);</script>\n"
+            + "            <script>window.onload = function() { alert('3: ' + document.body); }</script>\n"
+            + "        </head>\n"
+            + "    </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

@@ -1044,11 +1044,11 @@ public class Document extends Node {
      * @return this document's <tt>body</tt> element
      */
     public Object jsxGet_body() {
-        final List<String> tagNames = Arrays.asList(new String[] {"body", "frameset"});
+        final List<String> tagNames = Arrays.asList("body", "frameset");
         final List< ? extends HtmlElement> list =
             getHtmlPage().getDocumentHtmlElement().getHtmlElementsByTagNames(tagNames);
         if (list.isEmpty()) {
-            return NOT_FOUND;
+            return null;
         }
         else {
             final DomNode bodyElement = list.get(0);
