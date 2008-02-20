@@ -468,7 +468,7 @@ public final class HTMLParser {
             handleCharacters();
             final DomNode currentPage = page_;
             currentPage.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
-            addBodyToPageIfNecessary();
+            // TODO: addBodyToPageIfNecessary();
         }
 
         /**

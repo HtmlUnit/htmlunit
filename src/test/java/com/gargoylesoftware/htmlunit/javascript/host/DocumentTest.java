@@ -3076,6 +3076,9 @@ public class DocumentTest extends WebTestCase2 {
      */
     @Test
     public void testNoBodyTag() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         testNoBodyTag(BrowserVersion.FIREFOX_2, new String[] {"1: null", "2: null", "3: [object HTMLBodyElement]"});
         testNoBodyTag(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1: null", "2: [object]", "3: [object]"});
         testNoBodyTag(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1: null", "2: [object]", "3: [object]"});
