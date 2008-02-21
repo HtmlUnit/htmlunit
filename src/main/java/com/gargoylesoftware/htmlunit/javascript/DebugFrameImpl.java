@@ -65,6 +65,7 @@ import org.mozilla.javascript.debug.DebuggableScript;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  * @see DebuggerImpl
  */
 public class DebugFrameImpl implements DebugFrame {
@@ -133,7 +134,7 @@ public class DebugFrameImpl implements DebugFrame {
      * {@inheritDoc}
      */
     public void onDebuggerStatement(final Context cx) {
-    	// Ignore.
+        // Ignore.
     }
 
     /**
