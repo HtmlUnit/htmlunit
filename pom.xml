@@ -522,7 +522,7 @@ The reference stays the maven 1 build.
 			</snapshots>
 			<id>htmlUnitSnapshots</id>
 			<name>HtmlUnit Snapshots</name>
-			<url>http://htmlunit.sf.net/m2-repo-snapshots</url>
+			<url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
