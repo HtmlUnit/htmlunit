@@ -161,11 +161,11 @@ public class DebugFrameImpl implements DebugFrame {
                             if (o == null) {
                                 o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, true);
                                 if (o != null && o instanceof Callable) {
-                                	return "__defineSetter__ " + s;
+                                    return "__defineSetter__ " + s;
                                 }
                             }
                             else if (o != null && o instanceof Callable) {
-                            	return "__defineGetter__ " + s;
+                                return "__defineGetter__ " + s;
                             }
                         }
                         final Object o = thisObj.get(s, thisObj);
