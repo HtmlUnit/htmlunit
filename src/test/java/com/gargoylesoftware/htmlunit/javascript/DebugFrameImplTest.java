@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link DebugFrameImpl}.
  *
- * @version $Revision: 2132 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class DebugFrameImplTest extends WebTestCase {
