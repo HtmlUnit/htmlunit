@@ -39,9 +39,11 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeFunction;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.debug.DebugFrame;
 import org.mozilla.javascript.debug.DebuggableScript;
 
@@ -154,6 +156,18 @@ public class DebugFrameImpl implements DebugFrame {
                     final Object id = ids[i];
                     if (id instanceof String) {
                         final String s = (String) id;
+                        if (thisObj instanceof ScriptableObject) {
+                            Object o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, false);
+                            if (o == null) {
+                                o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, true);
+                                if (o != null && o instanceof Callable) {
+                                	return "__defineSetter__ " + s;
+                                }
+                            }
+                            else if (o != null && o instanceof Callable) {
+                            	return "__defineGetter__ " + s;
+                            }
+                        }
                         final Object o = thisObj.get(s, thisObj);
                         if (o instanceof NativeFunction) {
                             final NativeFunction f = (NativeFunction) o;
