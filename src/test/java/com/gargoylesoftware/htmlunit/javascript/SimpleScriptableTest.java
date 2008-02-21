@@ -221,13 +221,11 @@ public class SimpleScriptableTest extends WebTestCase2 {
     }
 
     /**
+     * Works since Rhino 1.7
      * @throws Exception if the test fails
      */
     @Test
     public void testArguments_toString() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(arguments);\n"

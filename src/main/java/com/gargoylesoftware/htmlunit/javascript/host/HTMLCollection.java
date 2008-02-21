@@ -327,7 +327,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     protected Object getWithPreemption(final String name) {
         // Test to see if we are trying to get the length of this collection?
         // If so return NOT_FOUND here to let the property be retrieved using the prototype
-        if ("length".equals(name)) {
+        if (xpath_ == null || "length".equals(name)) {
             return NOT_FOUND;
         }
 

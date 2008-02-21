@@ -418,7 +418,7 @@ The reference stays the maven 1 build.
 		<dependency>
 			<groupId>rhino</groupId>
 			<artifactId>js</artifactId>
-			<version>1.6R7</version>
+			<version>1.7R1-RC3</version>
 		</dependency>
 		<dependency>
 			<groupId>nekohtml</groupId>
@@ -513,7 +513,21 @@ The reference stays the maven 1 build.
 			<name>HtmlUnit Maven 2 Snapshots Repository</name>
 		</snapshotRepository>
 	</distributionManagement>
-	<!-- Maven plugin snapshot repo required for Checkstyle plugin 2.2-SNAPSHOT. -->
+	
+	<!-- Custom repositories  -->
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>htmlUnitSnapshots</id>
+			<name>HtmlUnit Snapshots</name>
+			<url>http://htmlunit.sf.net/m2-repo-snapshots</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+  	<!-- Maven plugin snapshot repo required for Checkstyle plugin 2.2-SNAPSHOT. -->
 	<!-- See http://maven.apache.org/guides/development/guide-plugin-snapshot-repositories.html -->
 	<pluginRepositories>
 		<pluginRepository>

@@ -130,6 +130,13 @@ public class DebugFrameImpl implements DebugFrame {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public void onDebuggerStatement(final Context cx) {
+    	// Ignore.
+    }
+
+    /**
      * Returns the name of the function corresponding to this frame, if it is a function and it has
      * a name. If the function does not have a name, this method will try to return the name under
      * which it was referenced. See <a
