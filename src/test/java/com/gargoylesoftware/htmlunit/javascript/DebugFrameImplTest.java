@@ -41,9 +41,12 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Tests for {@link DebugFrameImpl}.
@@ -51,26 +54,16 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DebugFrameImplTest extends WebTestCase {
+public class DebugFrameImplTest extends WebTestCase2 {
     private final Logger loggerDebugFrameImpl_ = Logger.getLogger(DebugFrameImpl.class);
     private Level originalLogLevel_;
-
-    /**
-     * Create an instance
-     *
-     * @param name The name of the test
-     */
-    public DebugFrameImplTest(final String name) {
-        super(name);
-    }
 
     /**
      * prepare log to trigger problematic code
      * @throws Exception when a problem occurs
      */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         HtmlUnitContextFactory.setDebuggerEnabled(true);
         
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
@@ -81,9 +74,8 @@ public class DebugFrameImplTest extends WebTestCase {
      * reset log to original state
      * @throws Exception when a problem occurs
      */
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
         HtmlUnitContextFactory.setDebuggerEnabled(false);
         loggerDebugFrameImpl_.setLevel(originalLogLevel_);
     }
@@ -91,7 +83,8 @@ public class DebugFrameImplTest extends WebTestCase {
     /**
      * @throws Exception If the test fails
      */
-    public void testWithCallable() throws Exception {
+    @Test
+    public void withCallable() throws Exception {
         final String content = "<html><head><title>debug test</title>"
             + "<script>"
             + "var counter = 0;"
