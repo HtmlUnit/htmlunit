@@ -37,27 +37,36 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
-import org.jaxen.JaxenException;
-import org.jaxen.expr.DefaultXPathFactory;
-import org.jaxen.expr.Step;
-import org.jaxen.expr.iter.IterableAxis;
+import org.apache.commons.logging.LogFactory;
+import org.jaxen.JaxenHandler;
+import org.jaxen.expr.XPathFactory;
 
 /**
- * HtmlUnit implementation of {@link XPathFactory}.
+ * Html implementation of {@link XPathHandler}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlUnitFactory extends DefaultXPathFactory {
+class HtmlXPathHandler extends JaxenHandler {
+
+    private XPathFactory factory_ = new HtmlXPathFactory();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Step createNameStep(final int axis, final String prefix, final String localName)
-        throws JaxenException {
-        final IterableAxis iter = getIterableAxis(axis);
-        return new HtmlUnitNameStep(iter, prefix, localName, createPredicateSet());
+    public XPathFactory getXPathFactory() {
+        return factory_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setXPathFactory(final XPathFactory xpathFactory) {
+        LogFactory.getLog(getClass()).warn("HtmlUnitHandler.setXPathFactory() does not use "
+            + "the specified XPathFactory at the moment.");
+        super.setXPathFactory(xpathFactory);
     }
 
 }

@@ -99,7 +99,7 @@ public class HtmlUnitXPath extends BaseXPath {
         super(xpathExpr, navigator);
         try {
             final XPathReader reader = XPathReaderFactory.createReader();
-            final JaxenHandler handler = new HtmlUnitHandler();
+            final JaxenHandler handler = new HtmlXPathHandler();
             reader.setXPathHandler(handler);
             reader.parse(xpathExpr);
             this.xpath_ = handler.getXPathExpr();

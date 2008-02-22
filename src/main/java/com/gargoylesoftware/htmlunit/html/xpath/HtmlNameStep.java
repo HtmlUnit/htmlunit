@@ -47,12 +47,12 @@ import org.jaxen.expr.iter.IterableAxis;
 import org.jaxen.saxpath.Axis;
 
 /**
- * An implementation of {@link NameStep}, which ignores case-sensitivity of attribute names.
+ * Html implementation of {@link NameStep}, which ignores case-sensitivity of attribute names.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlUnitNameStep extends DefaultNameStep {
+class HtmlNameStep extends DefaultNameStep {
     
     /** Quick flag denoting if the local name was '*' */
     private final boolean matchesAnyName_;
@@ -68,7 +68,7 @@ public class HtmlUnitNameStep extends DefaultNameStep {
      * @param localName the local name
      * @param predicateSet the set of predicates
      */
-    public HtmlUnitNameStep(final IterableAxis axis, final String prefix, final String localName,
+    public HtmlNameStep(final IterableAxis axis, final String prefix, final String localName,
             final PredicateSet predicateSet) {
         super(axis, prefix, localName, predicateSet);
         this.matchesAnyName_ = "*".equals(localName);
