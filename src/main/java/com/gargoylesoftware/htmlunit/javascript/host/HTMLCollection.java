@@ -123,13 +123,14 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     @Override
     public boolean avoidObjectDetection() {
-    	return avoidObjectDetection_;
+        return avoidObjectDetection_;
     }
     
     /**
+     * @param newValue the new value
      */
     public void setAvoidObjectDetection(final boolean newValue) {
-    	avoidObjectDetection_ = newValue;
+        avoidObjectDetection_ = newValue;
     }
 
     /**
