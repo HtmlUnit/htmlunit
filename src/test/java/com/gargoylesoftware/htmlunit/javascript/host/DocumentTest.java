@@ -2990,9 +2990,6 @@ public class DocumentTest extends WebTestCase2 {
      */
     @Test
     public void evaluate_caseInsensitiveAttribute() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var expr = './/*[@CLASS]';\n"

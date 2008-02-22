@@ -37,9 +37,18 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
+import java.util.List;
+
 import org.jaxen.BaseXPath;
+import org.jaxen.Context;
 import org.jaxen.JaxenException;
+import org.jaxen.JaxenHandler;
 import org.jaxen.Navigator;
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.XPathExpr;
+import org.jaxen.saxpath.SAXPathException;
+import org.jaxen.saxpath.XPathReader;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
@@ -66,7 +75,10 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 public class HtmlUnitXPath extends BaseXPath {
 
     private static final long serialVersionUID = -3902959929710269843L;
-    private final String xpath_;
+
+    /** the parsed form of the XPath expression */
+    private final XPathExpr xpath_;
+    private final String exprText_;
 
     /**
      * Construct given an XPath expression string.
@@ -85,7 +97,20 @@ public class HtmlUnitXPath extends BaseXPath {
      */
     public HtmlUnitXPath(final String xpathExpr, final Navigator navigator) throws JaxenException {
         super(xpathExpr, navigator);
-        xpath_ = xpathExpr;
+        try {
+            final XPathReader reader = XPathReaderFactory.createReader();
+            final JaxenHandler handler = new HtmlUnitHandler();
+            reader.setXPathHandler(handler);
+            reader.parse(xpathExpr);
+            this.xpath_ = handler.getXPathExpr();
+        }
+        catch (final org.jaxen.saxpath.XPathSyntaxException e) {
+            throw new org.jaxen.XPathSyntaxException(e);
+        }
+        catch (final SAXPathException e) {
+            throw new JaxenException(e);
+        }
+        exprText_ = xpathExpr;
     }
     
     /**
@@ -101,12 +126,34 @@ public class HtmlUnitXPath extends BaseXPath {
     }
     
     /**
-     * Gives the xpath expression provided to c'tor.
-     * @see org.jaxen.BaseXPath#toString()
-     * @return the xpath expression provided to c'tor.
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return xpath_;
+        return exprText_;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Expr getRootExpr() {
+        return xpath_.getRootExpr();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String debug() {
+        return xpath_.toString();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List< ? > selectNodesForContext(final Context context) throws JaxenException {
+        return xpath_.asList(context);
     }
 }
