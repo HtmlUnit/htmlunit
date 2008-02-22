@@ -260,7 +260,7 @@ public class Document extends Node {
             anchors_ = new HTMLCollection(this);
             try {
                 final String xpath;
-                if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+                if (getBrowserVersion().isIE()) {
                     xpath = "//a[@name or @id]";
                 }
                 else {
@@ -642,6 +642,7 @@ public class Document extends Node {
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
             all_ = new HTMLCollectionTags(this);
+            all_.setAvoidObjectDetection(!getBrowserVersion().isIE());
             try {
                 all_.init(getDomNodeOrDie(), new HtmlUnitXPath("//*"));
             }
@@ -919,7 +920,7 @@ public class Document extends Node {
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
 
-            final BrowserVersion browser = getHtmlPage().getWebClient().getBrowserVersion();
+            final BrowserVersion browser = getBrowserVersion();
             if (browser.isIE()) {
                 final HTMLCollection elements = (HTMLCollection) jsxFunction_getElementsByName(id);
                 result = elements.get(0, elements);
@@ -1101,7 +1102,7 @@ public class Document extends Node {
     public String jsxGet_domain() {
         if (domain_ == null) {
             domain_ = getHtmlPage().getWebResponse().getUrl().getHost();
-            final BrowserVersion browser = getHtmlPage().getWebClient().getBrowserVersion();
+            final BrowserVersion browser = getBrowserVersion();
             if (browser.isNetscape()) {
                 domain_ = domain_.toLowerCase();
             }
@@ -1151,7 +1152,7 @@ public class Document extends Node {
         }
 
         // Netscape down shifts the case of the domain
-        if (getHtmlPage().getWebClient().getBrowserVersion().isNetscape()) {
+        if (getBrowserVersion().isNetscape()) {
             domain_ = newDomain.toLowerCase();
         }
         else {
@@ -1347,7 +1348,7 @@ public class Document extends Node {
      * @return <code>true></code> if the command is supported
      */
     public boolean jsxFunction_queryCommandSupported(final String cmd) {
-        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().isIE()) {
             // strangely the function exists in my FF 2.0.0.11 but always throws an exception
             throw Context.reportRuntimeError("queryCommandSupported not really supported by FF");
         }

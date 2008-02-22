@@ -1712,14 +1712,11 @@ public class DocumentTest extends WebTestCase2 {
     }
 
     /**
-     * Firefox supports document.all ... but
+     * Firefox supports document.all ... but it is "hidden"
      * @throws Exception If the test fails.
      */
     @Test
     public void testDocumentAll_AsBoolean() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String[] alertsIE = {"true", "true"};
         testDocumentAll_AsBoolean(BrowserVersion.INTERNET_EXPLORER_6_0, alertsIE);
         final String[] alertsFF = {"false", "true"};

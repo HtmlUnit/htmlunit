@@ -88,6 +88,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
 
     private XPath xpath_;
     private DomNode node_;
+    private boolean avoidObjectDetection_ = false;
 
     /**
      * The transformer used to get the element to return from the html element.
@@ -113,6 +114,22 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     public HTMLCollection(final SimpleScriptable parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
+    }
+
+    /**
+     * Only needed to make collections like document.all available but "invisible" when
+     * simulating Firefox.
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean avoidObjectDetection() {
+    	return avoidObjectDetection_;
+    }
+    
+    /**
+     */
+    public void setAvoidObjectDetection(final boolean newValue) {
+    	avoidObjectDetection_ = newValue;
     }
 
     /**

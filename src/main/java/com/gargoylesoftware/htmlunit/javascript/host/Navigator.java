@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -233,13 +232,4 @@ public final class Navigator extends SimpleScriptable {
     public boolean jsxFunction_taintEnabled() {
         return false;
     }
-
-    /**
-     * Returns the default browser version.
-     * @return the default browser version.
-     */
-    private BrowserVersion getBrowserVersion() {
-        return getWindow().getWebWindow().getWebClient().getBrowserVersion();
-    }
-
 }

@@ -47,6 +47,7 @@ import org.mozilla.javascript.FunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -346,7 +347,7 @@ public class SimpleScriptable extends ScriptableObject {
     @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         if (String.class.equals(hint) || hint == null) {
-            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            if (getBrowserVersion().isIE()) {
                 return "[object]"; // the super helpful IE solution
             }
             else {
@@ -456,5 +457,13 @@ public class SimpleScriptable extends ScriptableObject {
             }
         }
         return null;
+    }
+    
+    /**
+     * Gets the browser version currently used
+     * @return the browser version
+     */
+    protected BrowserVersion getBrowserVersion() {
+        return getWindow().getWebWindow().getWebClient().getBrowserVersion();
     }
 }
