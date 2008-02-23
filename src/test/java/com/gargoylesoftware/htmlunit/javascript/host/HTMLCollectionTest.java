@@ -257,4 +257,36 @@ public class HTMLCollectionTest extends WebTestCase2 {
         loadPage(browserVersion, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Depending on the method used, out of bound access give different responses
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testOutOfBoundAccess() throws Exception {
+        final String[] expectedAlerts = {"null", "null", "undefined", "null"};
+        // in fact this is not fully correct as FF support the col(index) syntax only for special
+        // collections where it simulates IE like document.all
+        testOutOfBoundAccess(BrowserVersion.FIREFOX_2, expectedAlerts);
+        testOutOfBoundAccess(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlerts);
+    }
+
+    private void testOutOfBoundAccess(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var col = document.getElementsByTagName('a');\n"
+            + "    alert(col.item(1));\n"
+            + "    alert(col.namedItem('foo'));\n"
+            + "    alert(col[1]);\n"
+            + "    alert(col(1));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals("Using " + browserVersion.getApplicationName(), expectedAlerts, collectedAlerts);
+    }
 }

@@ -206,16 +206,12 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     public final Object call(
             final Context context, final Scriptable scope,
-            final Scriptable thisObj, final Object[] args)
-        throws JavaScriptException {
+            final Scriptable thisObj, final Object[] args) throws JavaScriptException {
+        
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }
-        final Object response = get(args[0]);
-        if (response == NOT_FOUND) {
-            return null;
-        }
-        return response;
+        return nullIfNotFound(get(args[0]));
     }
 
     /**
@@ -426,7 +422,16 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/item.asp">MSDN doc</a>
      */
     public final Object jsxFunction_item(final Object index) {
-        return get(index);
+        return nullIfNotFound(get(index));
+    }
+
+    private Object nullIfNotFound(final Object object) {
+        if (object == NOT_FOUND) {
+            return null;
+        }
+        else {
+            return object;
+        }
     }
 
     /**
@@ -437,7 +442,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/nameditem.asp">MSDN doc</a>
      */
     public final Object jsxFunction_namedItem(final String name) {
-        return get(name);
+        return nullIfNotFound(get(name));
     }
 
     /**
