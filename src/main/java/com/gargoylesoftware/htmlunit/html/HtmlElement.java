@@ -493,7 +493,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return true if the specified attribute has been defined.  This is neccessary
+     * Return true if the specified attribute has been defined.  This is necessary
      * in order to distinguish between an attribute that is set to an empty string
      * and one that was not defined at all.
      *
