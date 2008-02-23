@@ -515,7 +515,7 @@ public final class ClassConfiguration {
         }
     }
 
-    private class BrowserInfo {
+    private final class BrowserInfo {
         private String browserName_;
         private String minVersion_;
         private String maxVersion_;
@@ -548,7 +548,7 @@ public final class ClassConfiguration {
         /**
          * @param browserName - Name of the browser
          */
-        public BrowserInfo(final String browserName) {
+        private BrowserInfo(final String browserName) {
             browserName_ = browserName;
         }
 

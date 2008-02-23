@@ -47,7 +47,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class Version {
+public final class Version {
+    
+    private Version() {
+    }
+
     /**
      * The main entry point into this class.
      * @param args The arguments passed on the command line
