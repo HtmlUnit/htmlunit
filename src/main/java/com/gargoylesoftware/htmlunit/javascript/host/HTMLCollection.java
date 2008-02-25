@@ -507,17 +507,14 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unused")
     public boolean has(final String name, final Scriptable start) {
         try {
-            int index = Integer.parseInt(name);
+            final int index = Integer.parseInt(name);
             final List<Object> elements = getElements();
             CollectionUtils.transform(elements, transformer_);
 
-            for (final Object child : elements) {
-                if (index-- == 0) {
-                    return true;
-                }
+            if (index >= 0 && index < elements.size()) {
+                return true;
             }
         }
         catch (final Exception e) {

@@ -1213,8 +1213,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final String content = webResponse.getContentAsString();
                 getLog().debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
                 final Object[] args = new Object[] {content};
-                final ContextAction action = new ContextAction()
-                {
+                final ContextAction action = new ContextAction() {
                     public Object run(final Context cx) {
                         callback_.call(cx, scope, scope, args);
                         return null;
