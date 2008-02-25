@@ -2158,6 +2158,9 @@ public class HTMLElementTest extends WebTestCase2 {
      */
     @Test
     public void getElementsByTagName() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    for (var f = 0; (formnode = document.getElementsByTagName('form').item(f)); f++)\n"
