@@ -61,6 +61,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -236,9 +237,10 @@ public final class HTMLParser {
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow)
         throws IOException {
+
         final HtmlPage page = new HtmlPage(webResponse.getUrl(), webResponse, webWindow);
         webWindow.setEnclosedPage(page);
-                
+
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
         String charSet = webResponse.getContentCharSet();
         if (!Charset.isSupported(charSet)) {
@@ -259,13 +261,58 @@ public final class HTMLParser {
             final Throwable origin = extractNestedException(e);
             throw new RuntimeException("Failed parsing content from " + webResponse.getUrl(), origin);
         }
-        return domBuilder.page_;
+
+        // TODO: addBodyToPageIfNecessary(page, true);
+        return page;
     }
 
     /**
-     * Extract nested exception within an XNIException
-     * (Nekohtml uses reflection and generated exceptions are wrapped many times
-     * within XNIException and InvocationTargetException)
+     * Adds a body element to the current page, if necessary. Strictly speaking, this should
+     * probably be done by NekoHTML. See the bug linked below. If and when that bug is fixed,
+     * we may be able to get rid of this code.
+     *
+     * http://sourceforge.net/tracker/index.php?func=detail&aid=1898038&group_id=195122&atid=952178
+     */
+    private static void addBodyToPageIfNecessary(final HtmlPage page, final boolean originalCall) {
+
+        // IE waits for the whole page to load before initializing bodies for frames.
+        final boolean ie = page.getWebClient().getBrowserVersion().isIE();
+        if (page.getEnclosingWindow() instanceof FrameWindow && ie && originalCall) {
+            return;
+        }
+
+        // Find out if the document already has a body element (or frameset).
+        final Element doc = page.getDocumentElement();
+        boolean hasBody = false;
+        for (Node child = doc.getFirstChild(); child != null; child = child.getNextSibling()) {
+            if (child instanceof HtmlBody || child instanceof HtmlFrameSet) {
+                hasBody = true;
+                break;
+            }
+        }
+
+        // If the document does not have a body, add it.
+        if (!hasBody) {
+            final HtmlBody body = new HtmlBody(null, "body", page, null);
+            doc.appendChild(body);
+        }
+
+        // If this is IE, we need to initialize the bodies of any frames, as well.
+        // This will already have been done when emulating FF (see above).
+        if (ie) {
+            for (final FrameWindow frame : page.getFrames()) {
+                final Page containedPage = frame.getEnclosedPage();
+                if (containedPage instanceof HtmlPage) {
+                    addBodyToPageIfNecessary((HtmlPage) containedPage, false);
+                }
+            }
+        }
+    }
+
+    /**
+     * Extract nested exception within an XNIException (Nekohtml uses reflection and generated
+     * exceptions are wrapped many times within XNIException and InvocationTargetException)
+     *
      * @param e the original XNIException
      * @return the cause exception
      */
@@ -468,29 +515,6 @@ public final class HTMLParser {
             handleCharacters();
             final DomNode currentPage = page_;
             currentPage.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
-            // TODO: addBodyToPageIfNecessary();
-        }
-
-        /**
-         * Adds a body element to the current page, if necessary. Strictly speaking, this should
-         * probably be done by NekoHTML. See the bug linked below. If and when that bug is fixed,
-         * we can get rid of this code.
-         *
-         * http://sourceforge.net/tracker/index.php?func=detail&aid=1898038&group_id=195122&atid=952178
-         */
-        private void addBodyToPageIfNecessary() {
-            final Element doc = page_.getDocumentElement();
-            boolean hasBody = false;
-            for (Node child = doc.getFirstChild(); child != null; child = child.getNextSibling()) {
-                if (child instanceof HtmlBody || child instanceof HtmlFrameSet) {
-                    hasBody = true;
-                    break;
-                }
-            }
-            if (!hasBody) {
-                final HtmlBody body = new HtmlBody(null, "body", page_, null);
-                doc.appendChild(body);
-            }
         }
 
         /** @inheritDoc ContentHandler#startPrefixMapping(String,String) */

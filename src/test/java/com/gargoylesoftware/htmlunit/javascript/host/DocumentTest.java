@@ -619,6 +619,46 @@ public class DocumentTest extends WebTestCase2 {
     }
 
     /**
+     * Verifies that <tt>document.appendChild()</tt> works in IE and doesn't work in FF.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testAppendChildAtDocumentLevel() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testAppendChildAtDocumentLevel(BrowserVersion.FIREFOX_2);
+        testAppendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_6_0, "0", "2", "HTML", "DIV", "1");
+        testAppendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_7_0, "0", "2", "HTML", "DIV", "1");
+    }
+
+    private void testAppendChildAtDocumentLevel(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String html =
+              "        <html>\n"
+            + "        <head>\n"
+            + "            <title>test</title>\n"
+            + "            <script>\n"
+            + "                function test() {\n"
+            + "                    var div = document.createElement('div');\n"
+            + "                    div.innerHTML = 'test';\n"
+            + "                    document.appendChild(div); // Error in FF\n"
+            + "                    alert(document.body.childNodes.length); // 0\n"
+            + "                    alert(document.childNodes.length); // 2\n"
+            + "                    alert(document.childNodes[0].tagName); // HTML\n"
+            + "                    alert(document.childNodes[1].tagName); // DIV\n"
+            + "                    alert(document.getElementsByTagName('div').length); // 1\n"
+            + "                }\n"
+            + "            </script>\n"
+            + "        </head>\n"
+            + "        <body onload='test()'></body>\n"
+            + "        </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Regression test for appendChild of a text node
      * @throws Exception if the test fails
      */
@@ -3074,8 +3114,8 @@ public class DocumentTest extends WebTestCase2 {
             return;
         }
         testNoBodyTag(BrowserVersion.FIREFOX_2, new String[] {"1: null", "2: null", "3: [object HTMLBodyElement]"});
-        testNoBodyTag(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1: null", "2: [object]", "3: [object]"});
         testNoBodyTag(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1: null", "2: [object]", "3: [object]"});
+        testNoBodyTag(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1: null", "2: [object]", "3: [object]"});
     }
 
     private void testNoBodyTag(final BrowserVersion version, final String[] expected) throws Exception {
@@ -3087,6 +3127,43 @@ public class DocumentTest extends WebTestCase2 {
             + "            <script defer=''>alert('2: ' + document.body);</script>\n"
             + "            <script>window.onload = function() { alert('3: ' + document.body); }</script>\n"
             + "        </head>\n"
+            + "    </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that HtmlUnit behaves correctly when an iframe's document is missing the <tt>body</tt> tag (it
+     * needs to be added once the document has finished loading).
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testNoBodyTag_IFrame() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        testNoBodyTag_IFrame(BrowserVersion.FIREFOX_2, "1: [object HTMLBodyElement]", "2: [object HTMLBodyElement]");
+        testNoBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_6_0, "1: null", "2: [object]");
+        testNoBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_7_0, "1: null", "2: [object]");
+    }
+
+    private void testNoBodyTag_IFrame(final BrowserVersion version, final String... expected) throws Exception {
+        final String html =
+              "    <html>\n"
+            + "        <head>\n"
+            + "            <title>Test</title>\n"
+            + "        </head>\n"
+            + "        <body>\n"
+            + "            <iframe id='i'></iframe>\n"
+            + "            <script>\n"
+            + "                alert('1: ' + document.getElementById('i').contentWindow.document.body);\n"
+            + "                window.onload = function() {\n"
+            + "                    alert('2: ' + document.getElementById('i').contentWindow.document.body);\n"
+            + "                };\n"
+            + "            </script>\n"
+            + "        </body>\n"
             + "    </html>\n";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
