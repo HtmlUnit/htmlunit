@@ -2152,4 +2152,28 @@ public class HTMLElementTest extends WebTestCase2 {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByTagName() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    for (var f = 0; (formnode = document.getElementsByTagName('form').item(f)); f++)\n"
+            + "      for (var i = 0; (node = formnode.getElementsByTagName('div').item(i)); i++)\n"
+            + "        alert(node.id);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <div id='div1'/>\n"
+            + "    <div id='div2'/>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"div1", "div2"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
