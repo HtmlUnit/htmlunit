@@ -198,4 +198,28 @@ public class XPathResultTest extends WebTestCase2 {
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void notOr() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var expression = \".//*[@id='level1']/*[not(preceding-sibling::* or following-sibling::*)]\";\n"
+            + "    var result = document.evaluate(expression, document, null, "
+            + "XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n"
+            + "    alert(result.resultType);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"7"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
