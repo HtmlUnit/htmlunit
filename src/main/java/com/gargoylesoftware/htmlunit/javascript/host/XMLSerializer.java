@@ -68,7 +68,7 @@ public class XMLSerializer extends SimpleScriptable {
      */
     public String jsxFunction_serializeToString(final Node root) {
         final StringBuilder buffer = new StringBuilder();
-        final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        final boolean isIE = getBrowserVersion().isIE();
         toXml(1, root.getDomNodeOrDie(), buffer, isIE);
         if (isIE) {
             buffer.append('\r').append('\n');

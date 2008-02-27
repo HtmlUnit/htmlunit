@@ -64,6 +64,7 @@ import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -731,8 +732,7 @@ public class Document extends Node {
     public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
-            final SgmlPage page = (SgmlPage) getDomNodeOrDie().getPage();
-            final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+            final BrowserVersion browserVersion = getBrowserVersion();
 
             //IE can handle HTML
             if (tagName.startsWith("<") && browserVersion.isIE()) {
@@ -761,6 +761,7 @@ public class Document extends Node {
                     }
                 }
 
+                final Page page = getDomNodeOrDie().getPage();
                 final DomNode element;
                 if (page instanceof HtmlPage) {
                     element = ((HtmlPage) page).createHtmlElement(tagName);

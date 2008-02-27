@@ -296,7 +296,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private URL makeUrlForOpenWindow(final String urlString) {
         if (urlString.length() == 0) {
             // IE handles "" as "about:blank" in window.open
-            if (getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+            if (getBrowserVersion().isIE()) {
                 return WebClient.URL_ABOUT_BLANK;
             }
             else {
@@ -863,7 +863,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (result == NOT_FOUND) {
             // this tests are quite silly and should be removed when custom JS objects have a clean
             // way to get the WebClient they are running in.
-            if (domNode != null && domNode.getPage().getEnclosingWindow().getWebClient().getBrowserVersion().isIE()) {
+            if (domNode != null && getBrowserVersion().isIE()) {
                 final HTMLCollection array = (HTMLCollection) document_.jsxFunction_getElementsByName(name);
                 final int length = array.jsxGet_length();
                 if (length == 1) {
@@ -905,8 +905,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             name = "HTMLImageElement";
         }
         final Object superValue = super.get(name, start);
-        if (superValue == NOT_FOUND && getWebWindow() != null
-                && getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (superValue == NOT_FOUND && getWebWindow() != null && getBrowserVersion().isIE()) {
             final Object element = jsxGet_document().jsxFunction_getElementById(name);
             if (element instanceof HTMLUnknownElement) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) element).getHtmlElementOrDie();

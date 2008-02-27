@@ -135,7 +135,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         state_ = state;
         
         //Firefox doesn't trigger onreadystatechange handler for sync requests
-        final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        final boolean isIE = getBrowserVersion().isIE();
         if (stateChangeHandler_ != null && (isIE || async_)) {
             if (context == null) {
                 context = Context.getCurrentContext();
@@ -201,7 +201,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             try {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;
-                if (page.getWebClient().getBrowserVersion().isIE()) {
+                if (getBrowserVersion().isIE()) {
                     doc = ActiveXObject.buildXMLDocument(null);
                 }
                 else {

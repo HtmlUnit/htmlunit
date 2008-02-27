@@ -212,7 +212,7 @@ public class MouseEvent extends UIEvent {
      * @return the button code
      */
     public int jsxGet_button() {
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE()) {
             //In IE7: oncontextmenu event.button is 0
             if (jsxGet_type().equals(TYPE_CONTEXT_MENU)) {
                 return 0;

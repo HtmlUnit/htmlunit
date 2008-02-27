@@ -67,7 +67,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @return true if the feature is implemented in the specified version, false otherwise.
      */
     public boolean jsxFunction_hasFeature(final String feature, final String version) {
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE()) {
             if ("HTML".equals(feature) && "1.0".equals(version)) {
                 return true;
             }

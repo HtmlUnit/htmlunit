@@ -287,7 +287,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 }
                 final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
 
-                final boolean isIE = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+                final boolean isIE = getBrowserVersion().isIE();
 
                 for (int i = 0; i < cachedElements_.size(); i++) {
                     final DomNode element = (DomNode) cachedElements_.get(i);
@@ -535,7 +535,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (name.equals("length")) {
             return true;
         }
-        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().isIE()) {
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
             for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 if (name.equals(functionName)) {
@@ -564,7 +564,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         final List<Object> elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
-        if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().isIE()) {
             int index = 0;
             for (final Object child : elements) {
                 idList.add(Integer.toString(index++));

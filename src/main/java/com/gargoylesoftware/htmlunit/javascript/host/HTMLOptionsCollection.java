@@ -153,7 +153,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @return {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().isIE();
         if (ie) {
             // If the name was NOT_FOUND on the prototype, then just drop through
             // to search on the select element for IE only.

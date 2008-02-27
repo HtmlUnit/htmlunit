@@ -100,8 +100,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         jsElement_ = htmlElement;
         setDomNode(htmlElement.getDomNodeOrNull(), false);
 
-        if (htmlElement.getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient()
-                .getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
             for (final Map.Entry<String, String> entry : getStyleMap(true).entrySet()) {
                 final String key = entry.getKey();
@@ -3880,7 +3879,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public Object jsxGet_zIndex() {
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE()) {
             return 0;
         }
         else {

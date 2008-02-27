@@ -102,7 +102,7 @@ public class HTMLSelectElement extends FormField {
      * for Internet Explorer: the index where the element should be placed (optional)
      */
     public void jsxFunction_add(final HTMLOptionElement newOptionObject, final Object arg2) {
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE()) {
             add_IE(newOptionObject, arg2);
         }
         else {

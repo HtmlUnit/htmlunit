@@ -411,7 +411,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getHtmlElementOrDie().setAttributeValue(name, value);
 
         //FF: call corresponding event handler jsxSet_onxxx if found
-        if (getWindow().getWebWindow().getWebClient().getBrowserVersion().isNetscape()) {
+        if (getBrowserVersion().isNetscape()) {
             try {
                 final Method method = getClass().getMethod("jsxSet_" + name, new Class[] {Object.class});
                 final String source = "function(){" + value + "}";
@@ -591,7 +591,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if (html) {
             // Start the tag name. IE does it in uppercase, FF in lowercase.
             final HtmlElement element = (HtmlElement) node;
-            final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+            final boolean ie = getBrowserVersion().isIE();
             String tag = element.getTagName();
             if (ie) {
                 tag = tag.toUpperCase();
@@ -636,7 +636,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
 
-        final BrowserVersion browserVersion = getWindow().getWebWindow().getWebClient().getBrowserVersion();
+        final BrowserVersion browserVersion = getBrowserVersion();
 
         // null && IE     -> add child
         // null && non-IE -> Don't add
@@ -670,8 +670,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         //if the parentNode has null parentNode in IE,
         //create a DocumentFragment to be the parentNode's parentNode.
-        if (domNode.getParentDomNode() == null
-                && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (domNode.getParentDomNode() == null && getBrowserVersion().isIE()) {
             final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
             fragment.appendDomChild(domNode);
         }
