@@ -129,7 +129,6 @@ public class Sarissa099Test extends WebTestCase2 {
     }
 
     /**
-     * Fails because of XSL, Jaxen and Maven 2, see {@link #testXSLTWithJaxen()}.
      * @throws Exception If an error occurs.
      */
     @Test
