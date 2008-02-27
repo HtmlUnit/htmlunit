@@ -941,16 +941,7 @@ public class Document extends Node {
      * @return all the descendant elements with the specified tag name
      */
     public Object jsxFunction_getElementsByTagName(final String tagName) {
-        final HTMLCollection collection = new HTMLCollection(this);
-        try {
-            final String xpath = "//" + tagName.toLowerCase();
-            collection.init(getDomNodeOrDie(), new HtmlUnitXPath(xpath));
-        }
-        catch (final JaxenException e) {
-            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
-            throw Context.reportRuntimeError(msg + e.getMessage());
-        }
-        return collection;
+        return getHtmlPage().getElementsByTagName(tagName);
     }
 
     /**

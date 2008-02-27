@@ -51,6 +51,9 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -83,7 +86,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLCollection extends SimpleScriptable implements Function {
+public class HTMLCollection extends SimpleScriptable implements Function, NodeList {
     private static final long serialVersionUID = 4049916048017011764L;
 
     private XPath xpath_;
@@ -96,7 +99,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      */
     private Transformer transformer_;
     
-    private List<Object> cachedElements_;
+    private List<DomNode> cachedElements_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -111,7 +114,15 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * Create an instance
      * @param parentScope parent scope
      */
-    public HTMLCollection(final SimpleScriptable parentScope) {
+    public HTMLCollection(final DomNode parentScope) {
+        this(parentScope.getScriptObject());
+    }
+
+    /**
+     * Create an instance
+     * @param parentScope parent scope
+     */
+    public HTMLCollection(final ScriptableObject parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
     }
@@ -249,7 +260,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     @Override
     public final Object get(final int index, final Scriptable start) {
         final HTMLCollection array = (HTMLCollection) start;
-        final List<Object> elements = array.getElements();
+        final List<DomNode> elements = array.getElements();
 
         if (index >= 0 && index < elements.size()) {
             return getScriptableFor(transformer_.transform(elements.get(index)));
@@ -265,14 +276,14 @@ public class HTMLCollection extends SimpleScriptable implements Function {
      * @return the list of {@link HtmlElement} contained in this collection
      */
     @SuppressWarnings("unchecked")
-    private List<Object> getElements() {
+    private List<DomNode> getElements() {
         if (cachedElements_ == null) {
             try {
                 if (node_ != null) {
                     cachedElements_ = xpath_.selectNodes(node_);
                 }
                 else {
-                    cachedElements_ = new ArrayList<Object>();
+                    cachedElements_ = new ArrayList<DomNode>();
                 }
                 final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
 
@@ -345,7 +356,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             return NOT_FOUND;
         }
 
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
         // See if there is an element in the element array with the specified id.
@@ -390,7 +401,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
             throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
         }
 
-        final List<Object> subElements = array.getElements();
+        final List<DomNode> subElements = array.getElements();
         if (subElements.size() > 1) {
             getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
                     + subElements.size() + " elements");
@@ -510,7 +521,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     public boolean has(final String name, final Scriptable start) {
         try {
             final int index = Integer.parseInt(name);
-            final List<Object> elements = getElements();
+            final List<DomNode> elements = getElements();
             CollectionUtils.transform(elements, transformer_);
 
             if (index >= 0 && index < elements.size()) {
@@ -550,7 +561,7 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     public Object[] getIds() {
         final List<String> idList = new ArrayList<String>();
 
-        final List<Object> elements = getElements();
+        final List<DomNode> elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
         if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
@@ -694,4 +705,19 @@ public class HTMLCollection extends SimpleScriptable implements Function {
     protected Transformer getTransformer() {
         return transformer_;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getLength() {
+        return jsxGet_length();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node item(final int index) {
+        return (DomNode) transformer_.transform(getElements().get(index));
+    }
+
 }

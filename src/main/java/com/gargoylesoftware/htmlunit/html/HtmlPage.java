@@ -87,8 +87,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
@@ -209,10 +211,18 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
-    public NodeList getElementsByTagName(final String tagname) {
-        throw new UnsupportedOperationException("HtmlPage.getElementsByTagName is not yet implemented.");
+    public NodeList getElementsByTagName(final String tagName) {
+        final HTMLCollection collection = new HTMLCollection(this);
+        try {
+            final String xpath = "//" + tagName.toLowerCase();
+            collection.init(this, new HtmlUnitXPath(xpath));
+        }
+        catch (final JaxenException e) {
+            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
+            throw Context.reportRuntimeError(msg + e.getMessage());
+        }
+        return collection;
     }
 
     /**
