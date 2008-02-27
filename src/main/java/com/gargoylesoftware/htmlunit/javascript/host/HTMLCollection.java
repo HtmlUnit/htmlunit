@@ -99,7 +99,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     private Transformer transformer_;
     
-    private List<DomNode> cachedElements_;
+    private List<Object> cachedElements_;
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -260,7 +260,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     @Override
     public final Object get(final int index, final Scriptable start) {
         final HTMLCollection array = (HTMLCollection) start;
-        final List<DomNode> elements = array.getElements();
+        final List<Object> elements = array.getElements();
 
         if (index >= 0 && index < elements.size()) {
             return getScriptableFor(transformer_.transform(elements.get(index)));
@@ -276,14 +276,14 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @return the list of {@link HtmlElement} contained in this collection
      */
     @SuppressWarnings("unchecked")
-    private List<DomNode> getElements() {
+    private List<Object> getElements() {
         if (cachedElements_ == null) {
             try {
                 if (node_ != null) {
                     cachedElements_ = xpath_.selectNodes(node_);
                 }
                 else {
-                    cachedElements_ = new ArrayList<DomNode>();
+                    cachedElements_ = new ArrayList<Object>();
                 }
                 final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
 
@@ -356,7 +356,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             return NOT_FOUND;
         }
 
-        final List<DomNode> elements = getElements();
+        final List<Object> elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
         // See if there is an element in the element array with the specified id.
@@ -401,7 +401,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
         }
 
-        final List<DomNode> subElements = array.getElements();
+        final List<Object> subElements = array.getElements();
         if (subElements.size() > 1) {
             getLog().debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
                     + subElements.size() + " elements");
@@ -521,7 +521,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     public boolean has(final String name, final Scriptable start) {
         try {
             final int index = Integer.parseInt(name);
-            final List<DomNode> elements = getElements();
+            final List<Object> elements = getElements();
             CollectionUtils.transform(elements, transformer_);
 
             if (index >= 0 && index < elements.size()) {
@@ -561,7 +561,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     public Object[] getIds() {
         final List<String> idList = new ArrayList<String>();
 
-        final List<DomNode> elements = getElements();
+        final List<Object> elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
         if (!getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
