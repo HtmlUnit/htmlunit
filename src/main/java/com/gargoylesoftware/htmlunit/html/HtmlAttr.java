@@ -37,18 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
+
 
 /**
- * An attribute of an element. Attributes are stored in {@link
- * com.gargoylesoftware.htmlunit.html.HtmlElement}, but the xpath engine expects attributes to be in a {@link
- * com.gargoylesoftware.htmlunit.html.DomNode}.
+ * An attribute of an element. Attributes are stored in {@link HtmlElement},
+ * but the xpath engine expects attributes to be in a {@link DomNode}.
  *
  * @version $Revision$
  * @author Denis N. Antonioli
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class HtmlAttr extends DomNamespaceNode {
+public class HtmlAttr extends DomNamespaceNode implements Attr {
 
     private static final long serialVersionUID = 4832218455328064213L;
 
@@ -129,5 +131,21 @@ public class HtmlAttr extends DomNamespaceNode {
         final String oldValue = value_;
         value_ = value;
         return oldValue;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Element getOwnerElement() {
+        throw new UnsupportedOperationException("HtmlAttr.getOwnerElement is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean getSpecified() {
+        throw new UnsupportedOperationException("HtmlAttr.getOwnerElement is not yet implemented.");
     }
 }

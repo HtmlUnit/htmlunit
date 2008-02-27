@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.mozilla.javascript.Scriptable;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -51,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
-public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
+public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter, org.w3c.dom.NamedNodeMap {
 
     private static final long serialVersionUID = -1910087049570242560L;
 
@@ -133,4 +135,66 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         return nodes_.size();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public int getLength() {
+        return jsxGet_length();
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node getNamedItem(final String name) {
+        throw new UnsupportedOperationException("NamedNodeMap.getNamedItem is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node getNamedItemNS(final String namespaceURI, final String localName) {
+        throw new UnsupportedOperationException("NamedNodeMap.getOwnerElement is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node item(final int index) {
+        throw new UnsupportedOperationException("NamedNodeMap.getOwnerElement is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node removeNamedItem(final String name) throws DOMException {
+        throw new UnsupportedOperationException("NamedNodeMap.removeNamedItem is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node removeNamedItemNS(final String namespaceURI, final String localName) throws DOMException {
+        throw new UnsupportedOperationException("NamedNodeMap.removeNamedItemNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node setNamedItem(final Node arg) throws DOMException {
+        throw new UnsupportedOperationException("NamedNodeMap.setNamedItem is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node setNamedItemNS(final Node arg) throws DOMException {
+        throw new UnsupportedOperationException("NamedNodeMap.setNamedItemNS is not yet implemented.");
+    }
 }
