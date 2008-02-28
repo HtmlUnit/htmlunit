@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * Test for {@link IEConditionalCompilationScriptPreProcessor}.
@@ -57,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class IEConditionalCompilationTest {
+public class IEConditionalCompilationTest extends WebTestCase2 {
 
     /**
      * @throws Exception If the test fails.
@@ -140,6 +141,20 @@ public class IEConditionalCompilationTest {
                 new String[] {"12"});
         testScript(BrowserVersion.FIREFOX_2, script,
                 new String[] {});
+    }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    @Test
+    public void elif() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String script = "/*@cc_on @if(@_win32)type='win';@elif(@_mac)type='mac';@end alert(type); @*/";
+        
+        testScript(BrowserVersion.INTERNET_EXPLORER_7_0, script, new String[] {"win"});
+        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
     }
 
     private void testScript(final BrowserVersion browserVersion, final String script, final String[] expectedAlerts)
