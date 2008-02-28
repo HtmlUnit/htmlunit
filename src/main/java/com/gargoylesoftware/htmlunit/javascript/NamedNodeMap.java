@@ -145,7 +145,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public HtmlAttr getNamedItem(final String name) {
         return (HtmlAttr) nodes_.get(name);
@@ -161,7 +160,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public HtmlAttr item(final int index) {
         return (HtmlAttr) nodes_.get(index);
