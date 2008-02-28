@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
@@ -146,15 +147,15 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Node getNamedItem(final String name) {
-        throw new UnsupportedOperationException("NamedNodeMap.getNamedItem is not yet implemented.");
+    public HtmlAttr getNamedItem(final String name) {
+        return (HtmlAttr) nodes_.get(name);
     }
 
     /**
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Node getNamedItemNS(final String namespaceURI, final String localName) {
+    public HtmlAttr getNamedItemNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("NamedNodeMap.getOwnerElement is not yet implemented.");
     }
 
@@ -162,8 +163,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public Node item(final int index) {
-        throw new UnsupportedOperationException("NamedNodeMap.getOwnerElement is not yet implemented.");
+    public HtmlAttr item(final int index) {
+        return (HtmlAttr) nodes_.get(index);
     }
 
     /**

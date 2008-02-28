@@ -1967,8 +1967,7 @@ public class HtmlPageTest extends WebTestCase2 {
         final HtmlPage page = loadPage(firstContent);
         final NodeList list = page.getElementsByTagName("input");
         assertEquals(1, list.getLength());
-        //TODO should work after implementation of getAttributes()
-        //assertEquals("button", list.item(0).getAttributes().getNamedItem("type").getNodeValue());
+        assertEquals("button", list.item(0).getAttributes().getNamedItem("type").getNodeValue());
     }
 
 }

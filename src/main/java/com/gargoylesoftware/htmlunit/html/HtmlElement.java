@@ -62,7 +62,6 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
@@ -73,6 +72,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
@@ -516,11 +516,10 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
-    public NamedNodeMap getAttributes() {
-        throw new UnsupportedOperationException("HtmlElement.getAttributes is not yet implemented.");
+    public org.w3c.dom.NamedNodeMap getAttributes() {
+        return new NamedNodeMap(this);
     }
 
     /**
