@@ -820,7 +820,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * append a child node to the end of the current list
+     * Appends a child node to this node.
      * @param node the node to append
      * @return the node added
      */
@@ -832,31 +832,58 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
         }
         else {
-            //clean up the new node, in case it is being moved
+            // clean up the new node, in case it is being moved
             if (node != this) {
                 node.basicRemove();
             }
-            if (firstChild_ == null) {
-                firstChild_ = node;
-                firstChild_.previousSibling_ = node;
-            }
-            else {
-                final DomNode last = getLastDomChild();
-
-                last.nextSibling_ = node;
-                node.previousSibling_ = last;
-                node.nextSibling_ = null; //safety first
-                firstChild_.previousSibling_ = node; //new last node
-            }
-            node.parent_ = this;
-
-            if (!(this instanceof DomDocumentFragment)
-                    && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
+            // move the node
+            basicAppend(node);
+            // trigger events
+            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
                 ((HtmlPage) getPage()).notifyNodeAdded(node);
             }
             fireNodeAdded(this, node);
         }
         return node;
+    }
+
+    /**
+     * Quietly removes this node and moves its children to the specified destination. "Quietly" means
+     * that no node events are fired. This method is not appropriate for most use cases. It should
+     * only be used in specific cases for HTML parsing hackery.
+     *
+     * @param destination the node to which this node's children should be moved before this node is removed
+     */
+    void quietlyRemoveAndMoveChildrenTo(final DomNode destination) {
+        if (destination.getPage() != getPage()) {
+            throw new RuntimeException("Cannot perform quiet move on nodes from different pages.");
+        }
+        for (DomNode child : getChildren()) {
+            child.basicRemove();
+            destination.basicAppend(child);
+        }
+        basicRemove();
+    }
+
+    /**
+     * Appends the specified node to the end of this node's children, assuming the specified
+     * node is clean (doesn't have preexisting relationships to other nodes.
+     *
+     * @param node the node to append to this node's children
+     */
+    private void basicAppend(final DomNode node) {
+        if (firstChild_ == null) {
+            firstChild_ = node;
+            firstChild_.previousSibling_ = node;
+        }
+        else {
+            final DomNode last = getLastDomChild();
+            last.nextSibling_ = node;
+            node.previousSibling_ = last;
+            node.nextSibling_ = null; // safety first
+            firstChild_.previousSibling_ = node; // new last node
+        }
+        node.parent_ = this;
     }
 
     /**
@@ -1367,5 +1394,5 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
         }
     }
-        
+
 }

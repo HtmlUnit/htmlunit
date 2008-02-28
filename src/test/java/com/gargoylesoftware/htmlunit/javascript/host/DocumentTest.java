@@ -624,12 +624,9 @@ public class DocumentTest extends WebTestCase2 {
      */
     @Test
     public void appendChildAtDocumentLevel() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        appendChildAtDocumentLevel(BrowserVersion.FIREFOX_2);
-        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_6_0, "0", "2", "HTML", "DIV", "1");
-        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_7_0, "0", "2", "HTML", "DIV", "1");
+        appendChildAtDocumentLevel(BrowserVersion.FIREFOX_2, "1", "exception");
+        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "HTML", "DIV", "1");
+        appendChildAtDocumentLevel(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "HTML", "DIV", "1");
     }
 
     private void appendChildAtDocumentLevel(final BrowserVersion version, final String... expected)
@@ -642,12 +639,16 @@ public class DocumentTest extends WebTestCase2 {
             + "                function test() {\n"
             + "                    var div = document.createElement('div');\n"
             + "                    div.innerHTML = 'test';\n"
-            + "                    document.appendChild(div); // Error in FF\n"
-            + "                    alert(document.body.childNodes.length); // 0\n"
-            + "                    alert(document.childNodes.length); // 2\n"
-            + "                    alert(document.childNodes[0].tagName); // HTML\n"
-            + "                    alert(document.childNodes[1].tagName); // DIV\n"
-            + "                    alert(document.getElementsByTagName('div').length); // 1\n"
+            + "                    try {\n"
+            + "                        alert(document.childNodes.length); // 1\n"
+            + "                        document.appendChild(div); // Error in FF\n"
+            + "                        alert(document.childNodes.length); // 2\n"
+            + "                        alert(document.childNodes[0].tagName); // HTML\n"
+            + "                        alert(document.childNodes[1].tagName); // DIV\n"
+            + "                        alert(document.getElementsByTagName('div').length); // 1\n"
+            + "                    } catch(ex) {\n"
+            + "                        alert('exception');\n"
+            + "                    }\n"
             + "                }\n"
             + "            </script>\n"
             + "        </head>\n"
@@ -1462,6 +1463,112 @@ public class DocumentTest extends WebTestCase2 {
     }
 
     /**
+     * Verifies that document.write() sends content to the correct destination (always somewhere in the body).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testDocumentWrite_Destination() throws Exception {
+        testDocumentWrite_Destination(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5");
+        testDocumentWrite_Destination(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "s1 s2 s3 s4 s5");
+        testDocumentWrite_Destination(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "s1 s2 s3 s4 s5");
+    }
+
+    private void testDocumentWrite_Destination(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String html =
+              "    <html>\n"
+            + "        <head>\n"
+            + "            <script>alert(document.body);</script>\n"
+            + "            <script>document.write('<span id=\"s1\">1</span>');</script>\n"
+            + "            <script>alert(document.body);</script>\n"
+            + "            <title>test</title>\n"
+            + "            <script>document.write('<span id=\"s2\">2</span>');</script>\n"
+            + "        </head>\n"
+            + "        <body id='foo'>\n"
+            + "            <script>document.write('<span id=\"s3\">3</span>');</script>\n"
+            + "            <span id='s4'>4</span>\n"
+            + "            <script>document.write('<span id=\"s5\">5</span>');</script>\n"
+            + "            <script>\n"
+            + "            var s = '';\n"
+            + "            for(var n = document.body.firstChild; n; n = n.nextSibling) {\n"
+            + "                if(n.id) {\n"
+            + "                    if(s.length > 0) s+= ' ';\n"
+            + "                    s += n.id;\n"
+            + "                }\n"
+            + "            }\n"
+            + "            alert(s);\n"
+            + "            </script>\n"
+            + "        </body>\n"
+            + "    </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that document.write() sends content to the correct destination (always somewhere in the body),
+     * and that if a synthetic temporary body needs to be created, the attributes of the real body are eventually
+     * used once the body is parsed.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testDocumentWrite_BodyAttributesKept() throws Exception {
+        testDocumentWrite_BodyAttributesKept(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "", "foo");
+        testDocumentWrite_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "", "foo");
+        testDocumentWrite_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "", "foo");
+    }
+
+    private void testDocumentWrite_BodyAttributesKept(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String html =
+              "    <html>\n"
+            + "        <head>\n"
+            + "            <script>alert(document.body);</script>\n"
+            + "            <script>document.write('<span id=\"s1\">1</span>');</script>\n"
+            + "            <script>alert(document.body);</script>\n"
+            + "            <script>alert(document.body.id);</script>\n"
+            + "            <title>test</title>\n"
+            + "        </head>\n"
+            + "        <body id='foo'>\n"
+            + "            <script>alert(document.body.id);</script>\n"
+            + "        </body>\n"
+            + "    </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that document.write() sends content to the correct destination (always somewhere in the body),
+     * and that script elements written to the document are executed in the correct order.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testDocumentWrite_ScriptExecutionOrder() throws Exception {
+        testDocumentWrite_ScriptExecutionOrder(BrowserVersion.FIREFOX_2, "1", "2", "3");
+        testDocumentWrite_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3");
+        testDocumentWrite_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3");
+    }
+
+    private void testDocumentWrite_ScriptExecutionOrder(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String html =
+              "    <html>\n"
+            + "        <head>\n"
+            + "            <title>test</title>\n"
+            + "            <script>alert('1');</script>\n"
+            + "            <script>document.write('<scrip'+'t>alert(\"2\")</s'+'cript>');</script>\n"
+            + "        </head>\n"
+            + "        <body>\n"
+            + "            <script>document.write('<scrip'+'t>alert(\"3\")</s'+'cript>');</script>\n"
+            + "        </body>\n"
+            + "    </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1752,7 +1859,7 @@ public class DocumentTest extends WebTestCase2 {
     }
 
     /**
-     * Firefox supports document.all ... but it is "hidden"
+     * Firefox supports document.all, but it is "hidden".
      * @throws Exception If the test fails.
      */
     @Test
@@ -3110,9 +3217,6 @@ public class DocumentTest extends WebTestCase2 {
      */
     @Test
     public void noBodyTag() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         noBodyTag(BrowserVersion.FIREFOX_2, new String[] {"1: null", "2: null", "3: [object HTMLBodyElement]"});
         noBodyTag(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1: null", "2: [object]", "3: [object]"});
         noBodyTag(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1: null", "2: [object]", "3: [object]"});
@@ -3141,9 +3245,6 @@ public class DocumentTest extends WebTestCase2 {
      */
     @Test
     public void noBodyTag_IFrame() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         noBodyTag_IFrame(BrowserVersion.FIREFOX_2, "1: [object HTMLBodyElement]", "2: [object HTMLBodyElement]");
         noBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_6_0, "1: null", "2: [object]");
         noBodyTag_IFrame(BrowserVersion.INTERNET_EXPLORER_7_0, "1: null", "2: [object]");

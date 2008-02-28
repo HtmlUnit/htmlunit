@@ -50,24 +50,33 @@ import java.util.Map;
  */
 public class HtmlBody extends ClickableElement {
 
+    /** Serial version UID. */
     private static final long serialVersionUID = -4133102076637734903L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "body";
 
+    /** Whether or not this body is temporary (created because the <tt>body</tt> tag has not yet been parsed). */
+    private final boolean temporary_;
+
     /**
-     * Create an instance of HtmlBody
+     * Creates an instance of HtmlBody.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
      * @param page The HtmlPage that contains this element.
      * @param attributes the initial attributes
+     * @param temporary whether or not this body is temporary (created because the <tt>body</tt>
+     *        tag does not exist or has not yet been parsed)
      */
-    HtmlBody(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+    public HtmlBody(final String namespaceURI, final String qualifiedName, final HtmlPage page,
+            final Map<String, HtmlAttr> attributes, final boolean temporary) {
+
         super(namespaceURI, qualifiedName, page, attributes);
-        
-        // force script object creation now to forward onXXX handlers to window
+
+        temporary_ = temporary;
+
+        // Force script object creation now to forward onXXX handlers to window.
         getScriptObject();
     }
 
@@ -166,4 +175,16 @@ public class HtmlBody extends ClickableElement {
     public final String getAlinkAttribute() {
         return getAttributeValue("alink");
     }
+
+    /**
+     * Returns <tt>true</tt> if this body is temporary (created because the <tt>body</tt> tag
+     * has not yet been parsed).
+     *
+     * @return <tt>true</tt> if this body is temporary (created because the <tt>body</tt> tag
+     *         has not yet been parsed)
+     */
+    public final boolean isTemporary() {
+        return temporary_;
+    }
+
 }

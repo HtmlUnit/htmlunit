@@ -194,6 +194,26 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
+     * Returns the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist.
+     * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist
+     */
+    public HtmlElement getBody() {
+
+        final HtmlElement doc = getDocumentHtmlElement();
+        if (doc == null) {
+            return null;
+        }
+
+        final List<String> tagNames = Arrays.asList(new String[] {"body", "frameset"});
+        final List< ? extends HtmlElement> elements = doc.getHtmlElementsByTagNames(tagNames);
+        if (elements.isEmpty()) {
+            return null;
+        }
+
+        return elements.get(0);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

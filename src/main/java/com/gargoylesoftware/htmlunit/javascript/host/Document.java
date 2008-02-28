@@ -74,6 +74,7 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -348,45 +349,70 @@ public class Document extends Node {
     }
 
     /**
-     * javascript function "write".
+     * JavaScript function "write".
      * @param content the content to write
      */
     protected void write(final String content) {
+
         getLog().debug("write: " + content);
 
         writeBuffer_.append(content);
 
+        // If open() was called; don't write to doc yet -- wait for call to close().
         if (!writeInCurrentDocument_) {
-            getLog().debug("written content added to buffer");
+            getLog().debug("wrote content to buffer");
+            return;
+        }
+
+        // If the buffered content isn't complete and wellformed; don't write to doc yet.
+        final String bufferedContent = writeBuffer_.toString();
+        if (!canAlreadyBeParsed(bufferedContent)) {
+            getLog().debug("write: not enough content to parsed it now");
+            return;
+        }
+
+        // Let the user know that we can (and will) go ahead and write to the document.
+        getLog().debug("parsing buffered content: " + bufferedContent);
+
+        // Clear the buffer.
+        writeBuffer_.setLength(0);
+
+        // Get the node at which the parsed content should be added.
+        HtmlElement current;
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        final HtmlElement doc = page.getDocumentHtmlElement();
+        HtmlElement body = page.getBody();
+        if (body == null) {
+            // The body doesn't exist yet! Add it.
+            body = new HtmlBody(null, "body", page, null, true);
+            doc.appendChild(body);
+            current = body;
         }
         else {
-            // open() hasn't been called
-            final String bufferedContent = writeBuffer_.toString();
-            if (canAlreadyBeParsed(bufferedContent)) {
-                writeBuffer_.setLength(0);
-                getLog().debug("parsing buffered content: " + bufferedContent);
-
-                final HtmlPage page = (HtmlPage) getDomNodeOrDie();
-                // get the node at which end the parsed content should be added
-                HtmlElement current = getLastHtmlElement(page.getDocumentHtmlElement());
-                getLog().debug("current: " + current);
-
-                // quick and dirty workaround as long as IFRAME JS object aren't an HTMLElement
-                if (current instanceof HtmlInlineFrame) {
-                    current = (HtmlElement) current.getParentDomNode();
-                }
-                ((HTMLElement) getJavaScriptNode(current))
-                .jsxFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END, bufferedContent);
+            if (body instanceof HtmlBody && ((HtmlBody) body).isTemporary()) {
+                // Add inside the (temporary) body.
+                current = body;
             }
             else {
-                getLog().debug("write: not enough content to parsed it now");
+                // Add inside the current / last element.
+                current = getLastHtmlElement(doc);
             }
         }
+
+        // Quick and dirty workaround for target (IFRAME JS object aren't an HTMLElement).
+        if (current instanceof HtmlInlineFrame) {
+            current = (HtmlElement) current.getParentDomNode();
+        }
+
+        // Append the new content.
+        ((HTMLElement) getJavaScriptNode(current)).jsxFunction_insertAdjacentHTML(HTMLElement.POSITION_BEFORE_END,
+                        bufferedContent);
     }
 
     /**
-     * Indicates if the content is a well formed html snippet that can already be parsed to be added
-     * to the dom
+     * Indicates if the content is a well formed HTML snippet that can already be parsed to be added
+     * to the DOM.
+     *
      * @param content the html snippet
      * @return <code>false</code> if it not well formed
      */
@@ -724,6 +750,35 @@ public class Document extends Node {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object jsxFunction_appendChild(final Object childObject) {
+        if (limitAppendChildToIE() && !getBrowserVersion().isIE()) {
+            // Firefox does not allow insertion at the document level.
+            throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy.");
+        }
+        else {
+            // We're emulating IE; we can allow insertion.
+            return super.jsxFunction_appendChild(childObject);
+        }
+    }
+
+    /**
+     * Returns <tt>true</tt> if this document only allows <tt>appendChild</tt> to be called on
+     * it when emulating IE.
+     *
+     * @return <tt>true</tt> if this document only allows <tt>appendChild</tt> to be called on
+     *         it when emulating IE
+     *
+     * @see Document#limitAppendChildToIE()
+     * @see XMLDocument#limitAppendChildToIE()
+     */
+    protected boolean limitAppendChildToIE() {
+        return true;
+    }
+
+    /**
      * Create a new HTML element with the given tag name.
      *
      * @param tagName The tag name
@@ -1037,15 +1092,12 @@ public class Document extends Node {
      * @return this document's <tt>body</tt> element
      */
     public Object jsxGet_body() {
-        final List<String> tagNames = Arrays.asList("body", "frameset");
-        final List< ? extends HtmlElement> list =
-            getHtmlPage().getDocumentHtmlElement().getHtmlElementsByTagNames(tagNames);
-        if (list.isEmpty()) {
-            return null;
+        final HtmlElement body = getHtmlPage().getBody();
+        if (body != null) {
+            return body.getScriptObject();
         }
         else {
-            final DomNode bodyElement = list.get(0);
-            return getScriptableFor(bodyElement);
+            return null;
         }
     }
 

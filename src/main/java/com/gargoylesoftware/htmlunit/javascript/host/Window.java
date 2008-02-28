@@ -40,10 +40,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.Transformer;
@@ -744,11 +742,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
             final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
-            final List<String> listTagNames = Arrays.asList(new String[] {"body", "frameset"});
-            final List< ? extends HtmlElement> listElements =
-                page.getDocumentHtmlElement().getHtmlElementsByTagNames(listTagNames);
-            if (!listElements.isEmpty()) {
-                return listElements.get(0).getEventHandler("onload");
+            final HtmlElement body = page.getBody();
+            if (body != null) {
+                return body.getEventHandler("onload");
             }
             else {
                 return null;

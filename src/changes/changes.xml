@@ -20,6 +20,9 @@
                 Upgrade Log4j to 1.2.15.
             </action>
             <action type="fix" dev="sdanig">
+                Add temporary body element when one is missing and document.write() is called.
+            </action>
+            <action type="fix" dev="sdanig">
                 Add implicit body element when one is missing and there is no content to trigger addition by NekoHTML.
             </action>
             <action type="fix" dev="sdanig">

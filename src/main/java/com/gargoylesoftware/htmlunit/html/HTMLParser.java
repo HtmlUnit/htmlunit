@@ -262,7 +262,7 @@ public final class HTMLParser {
             throw new RuntimeException("Failed parsing content from " + webResponse.getUrl(), origin);
         }
 
-        // TODO: addBodyToPageIfNecessary(page, true);
+        addBodyToPageIfNecessary(page, true);
         return page;
     }
 
@@ -293,7 +293,7 @@ public final class HTMLParser {
 
         // If the document does not have a body, add it.
         if (!hasBody) {
-            final HtmlBody body = new HtmlBody(null, "body", page, null);
+            final HtmlBody body = new HtmlBody(null, "body", page, null, false);
             doc.appendChild(body);
         }
 
@@ -435,12 +435,28 @@ public final class HTMLParser {
                 stack_.push(currentNode_);
             }
 
+            // If we're adding a body element, keep track of any temporary synthetic ones
+            // that we may have had to create earlier (for document.write(), for example).
+            HtmlBody oldBody = null;
+            if (tagLower.equals("body") && page_.getBody() instanceof HtmlBody) {
+                oldBody = (HtmlBody) page_.getBody();
+            }
+
+            // Add the new node.
             final IElementFactory factory = getElementFactory(tagLower);
             final HtmlElement newElement = factory.createElement(page_, tagLower, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
             currentNode_.appendDomChild(newElement);
+
+            // If we had an old synthetic body and we just added a real body element, quietly
+            // remove the old body and move its children to the real body element we just added.
+            if (oldBody != null) {
+                oldBody.quietlyRemoveAndMoveChildrenTo(newElement);
+            }
+
             currentNode_ = newElement;
             stack_.push(currentNode_);
+
         }
 
         /** @inheritDoc ContentHandler@endElement(String,String,String) */

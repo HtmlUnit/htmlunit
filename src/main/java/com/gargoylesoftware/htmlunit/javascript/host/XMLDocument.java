@@ -338,4 +338,12 @@ public class XMLDocument extends Document {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean limitAppendChildToIE() {
+        return false;
+    }
+
 }

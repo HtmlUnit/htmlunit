@@ -112,7 +112,7 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlBlockQuote(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBody.TAG_NAME)) {
-            element = new HtmlBody(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBody(namespaceURI, qualifiedName, page, attributeMap, false);
         }
         else if (tagName.equals(HtmlBreak.TAG_NAME)) {
             element = new HtmlBreak(namespaceURI, qualifiedName, page, attributeMap);
