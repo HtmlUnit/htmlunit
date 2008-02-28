@@ -16,9 +16,6 @@
             <action type="update" dev="asashour">
                 XPath: case-insensitive match for attribute names.
             </action>
-            <action type="update" dev="asashour">
-                Upgrade Log4j to 1.2.15.
-            </action>
             <action type="fix" dev="sdanig">
                 Add temporary body element when one is missing and document.write() is called.
             </action>
