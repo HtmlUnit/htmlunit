@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
+import org.w3c.dom.TypeInfo;
 
 
 /**
@@ -147,5 +148,21 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
      */
     public boolean getSpecified() {
         throw new UnsupportedOperationException("HtmlAttr.getOwnerElement is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public TypeInfo getSchemaTypeInfo() {
+        throw new UnsupportedOperationException("HtmlAttr.getSchemaTypeInfo is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean isId() {
+        throw new UnsupportedOperationException("HtmlAttr.isId is not yet implemented.");
     }
 }
