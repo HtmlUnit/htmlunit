@@ -432,7 +432,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public NodeList getChildNodes() {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.getChildNodes is not yet implemented.");
     }
 
     /**
@@ -440,7 +440,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public NodeList getElementsByTagNameNS(final String namespace, final String name) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.getElementsByTagNameNS is not yet implemented.");
     }
 
     /**
@@ -448,7 +448,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public boolean isSupported(final String namespace, final String featureName) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.isSupported is not yet implemented.");
     }
 
     /**
@@ -456,7 +456,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public void normalize() {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.normalize is not yet implemented.");
     }
 
     /**
@@ -464,7 +464,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public String getBaseURI() {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.getBaseURI is not yet implemented.");
     }
 
     /**
@@ -472,7 +472,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public short compareDocumentPosition(final Node other) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.compareDocumentPosition is not yet implemented.");
     }
 
     /**
@@ -480,7 +480,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public String getTextContent() throws DOMException {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.getTextContent is not yet implemented.");
     }
 
     /**
@@ -488,7 +488,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public void setTextContent(final String textContent) throws DOMException {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.setTextContent is not yet implemented.");
     }
 
     /**
@@ -504,7 +504,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public String lookupPrefix(final String namespaceURI) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.lookupPrefix is not yet implemented.");
     }
 
     /**
@@ -512,7 +512,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public boolean isDefaultNamespace(final String namespaceURI) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.isDefaultNamespace is not yet implemented.");
     }
 
     /**
@@ -520,7 +520,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public String lookupNamespaceURI(final String prefix) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.lookupNamespaceURI is not yet implemented.");
     }
 
     /**
@@ -528,7 +528,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public boolean isEqualNode(final Node arg) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.isEqualNode is not yet implemented.");
     }
 
     /**
@@ -536,7 +536,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public Object getFeature(final String feature, final String version) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.getFeature is not yet implemented.");
     }
 
     /**
@@ -544,7 +544,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public Object getUserData(final String key) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.getUserData is not yet implemented.");
     }
 
     /**
@@ -552,7 +552,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Not yet implemented.
      */
     public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
-        throw new UnsupportedOperationException("DomNode. is not yet implemented.");
+        throw new UnsupportedOperationException("DomNode.setUserData is not yet implemented.");
     }
 
     /**
