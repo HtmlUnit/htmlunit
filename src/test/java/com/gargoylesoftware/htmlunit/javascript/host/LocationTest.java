@@ -218,24 +218,40 @@ public class LocationTest extends WebTestCase2 {
     }
 
     /**
+     * Verifies that modifying <tt>window.location.hash</tt> works, but that it doesn't
+     * force the page to reload from the server. This is very important for the Dojo
+     * unit tests, which will keep reloading themselves if the page gets reloaded.
+     *
      * @throws Exception If the test fails.
      */
     @Test
     public void testSetHash() throws Exception {
+
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        final MockWebConnection conn = new MockWebConnection(webClient);
+
         final String html
-            = "<html><head><title>Test</title></head>\n"
-            + "<body><a id='a' onclick='location.hash=\"b\"'>go</a><h2 id='b'>...</h2></body></html>";
-        final URL url2 = new URL(URL_FIRST + "#b");
-        webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(url2, html);
-        webClient.setWebConnection(webConnection);
+            = "<html><head><title>Test</title></head><body>\n"
+            + "<a id='a' onclick='alert(location.hash);location.hash=\"b\";alert(location.hash);'>go</a>\n"
+            + "<h2 id='b'>...</h2></body></html>";
+
+        conn.setResponse(URL_FIRST, html);
+        webClient.setWebConnection(conn);
+
+        final List<String> actual = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(actual));
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a");
         final HtmlPage page2 = (HtmlPage) anchor.click();
-        assertEquals(url2.toExternalForm(), page2.getWebResponse().getUrl().toExternalForm());
+
+        // Verify that it worked.
+        final String[] expected = new String[] {"", "b"};
+        assertEquals(expected, actual);
+
+        // Verify that we didn't reload the page.
+        assertTrue(page == page2);
+        assertEquals(URL_FIRST, conn.getLastWebRequestSettings().getURL());
     }
 
     /**
@@ -550,4 +566,5 @@ public class LocationTest extends WebTestCase2 {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
 }

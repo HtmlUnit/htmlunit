@@ -66,7 +66,17 @@ public class Location extends SimpleScriptable {
 
     private static final long serialVersionUID = -2907220432378132233L;
     private static final String UNKNOWN = "null";
+
+    /**
+     * The window which owns this location object.
+     */
     private Window window_;
+
+    /**
+     * The current hash; we cache it locally because we don't want to modify the page's URL and
+     * force a page reload each time this changes.
+     */
+    private String hash_;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
@@ -77,10 +87,14 @@ public class Location extends SimpleScriptable {
 
     /**
      * Initializes the object.
+     *
      * @param window The window that this location belongs to.
      */
     public void initialize(final Window window) {
         window_ = window;
+        if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
+            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl().getRef();
+        }
     }
 
     /**
@@ -243,12 +257,11 @@ public class Location extends SimpleScriptable {
      * MSDN Documentation</a>
      */
     public String jsxGet_hash() {
-        final String hash = getUrl().getRef();
-        if (hash == null) {
+        if (hash_ == null) {
             return "";
         }
         else {
-            return hash;
+            return hash_;
         }
     }
 
@@ -260,7 +273,9 @@ public class Location extends SimpleScriptable {
      * MSDN Documentation</a>
      */
     public void jsxSet_hash(final String hash) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewRef(getUrl(), hash));
+        // IMPORTANT: This method must not call setUrl(), because
+        // we must not hit the server just to change the hash!
+        hash_ = hash;
     }
 
     /**
