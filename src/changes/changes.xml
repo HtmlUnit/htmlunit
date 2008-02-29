@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="add" dev="sdanig">
+                JavaScript: add support for document.fireEvent (IE only) and document.onXXX event handlers (elements
+                already had these).
+            </action>
             <action type="fix" dev="sdanig">
                 Don't reload page from server if window.location.hash is modified.
             </action>

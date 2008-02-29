@@ -526,7 +526,7 @@ public class Node extends SimpleScriptable {
         
         return null;
     }
-    
+
     /**
      * Fires the event on the node with capturing and bubbling phase
      * @param event the event

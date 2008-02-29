@@ -108,7 +108,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C Dom Level 1</a>
  */
-public class Document extends Node {
+public class Document extends EventNode {
 
     private static final long serialVersionUID = -7646789903352066465L;
 

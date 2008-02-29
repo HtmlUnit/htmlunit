@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
@@ -1467,13 +1468,13 @@ public class DocumentTest extends WebTestCase2 {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testDocumentWrite_Destination() throws Exception {
-        testDocumentWrite_Destination(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5");
-        testDocumentWrite_Destination(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "s1 s2 s3 s4 s5");
-        testDocumentWrite_Destination(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "s1 s2 s3 s4 s5");
+    public void write_Destination() throws Exception {
+        write_Destination(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5");
+        write_Destination(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "s1 s2 s3 s4 s5");
+        write_Destination(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "s1 s2 s3 s4 s5");
     }
 
-    private void testDocumentWrite_Destination(final BrowserVersion version, final String... expected)
+    private void write_Destination(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
               "    <html>\n"
@@ -1512,13 +1513,13 @@ public class DocumentTest extends WebTestCase2 {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testDocumentWrite_BodyAttributesKept() throws Exception {
-        testDocumentWrite_BodyAttributesKept(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "", "foo");
-        testDocumentWrite_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "", "foo");
-        testDocumentWrite_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "", "foo");
+    public void write_BodyAttributesKept() throws Exception {
+        write_BodyAttributesKept(BrowserVersion.FIREFOX_2, "null", "[object HTMLBodyElement]", "", "foo");
+        write_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_6_0, "null", "[object]", "", "foo");
+        write_BodyAttributesKept(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "[object]", "", "foo");
     }
 
-    private void testDocumentWrite_BodyAttributesKept(final BrowserVersion version, final String... expected)
+    private void write_BodyAttributesKept(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
               "    <html>\n"
@@ -1544,13 +1545,13 @@ public class DocumentTest extends WebTestCase2 {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testDocumentWrite_ScriptExecutionOrder() throws Exception {
-        testDocumentWrite_ScriptExecutionOrder(BrowserVersion.FIREFOX_2, "1", "2", "3");
-        testDocumentWrite_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3");
-        testDocumentWrite_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3");
+    public void write_ScriptExecutionOrder() throws Exception {
+        write_ScriptExecutionOrder(BrowserVersion.FIREFOX_2, "1", "2", "3");
+        write_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3");
+        write_ScriptExecutionOrder(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3");
     }
 
-    private void testDocumentWrite_ScriptExecutionOrder(final BrowserVersion version, final String... expected)
+    private void write_ScriptExecutionOrder(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
               "    <html>\n"
@@ -1823,7 +1824,7 @@ public class DocumentTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void DocumentAll_tags() throws Exception {
+    public void all_tags() throws Exception {
         all_tags(BrowserVersion.INTERNET_EXPLORER_6_0);
         all_tags(BrowserVersion.FIREFOX_2);
     }
@@ -3268,6 +3269,35 @@ public class DocumentTest extends WebTestCase2 {
             + "    </html>\n";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies that the document object has a <tt>fireEvent</tt> method and that it works correctly (IE only).
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void fireEvent() throws Exception {
+        fireEvent(BrowserVersion.FIREFOX_2);
+        fireEvent(BrowserVersion.INTERNET_EXPLORER_6_0, "x");
+        fireEvent(BrowserVersion.INTERNET_EXPLORER_7_0, "x");
+    }
+
+    private void fireEvent(final BrowserVersion version, final String... expected) throws Exception {
+        final String html =
+              "<html><body>\n"
+            + " <span id='s' onclick='\n"
+            + "  if(document.fireEvent) {\n"
+            + "    document.onkeydown=function(){alert(\"x\")};\n"
+            + "    document.fireEvent(\"onkeydown\")\n"
+            + "  }\n"
+            + " '>abc</span>\n"
+            + "</body></html>\n";
+        final List<String> actual = new ArrayList<String>();
+        final HtmlPage page = loadPage(version, html, actual);
+        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
+        span.click();
         assertEquals(expected, actual);
     }
 

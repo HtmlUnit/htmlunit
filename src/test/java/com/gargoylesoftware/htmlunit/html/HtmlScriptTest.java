@@ -62,7 +62,6 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  */
 public class HtmlScriptTest extends WebTestCase2 {
 
-
     /**
      * Verifies that a failing HTTP status code for a JavaScript file request (like a 404 response)
      * results in a {@link FailingHttpStatusCodeException}, depending on how the client has been
