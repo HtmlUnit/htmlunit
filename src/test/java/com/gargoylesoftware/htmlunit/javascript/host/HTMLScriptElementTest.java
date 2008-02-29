@@ -62,7 +62,7 @@ public class HTMLScriptElementTest extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testOnReadyStateChangeHandler() throws Exception {
+    public void onReadyStateChangeHandler() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <title>test</title>\n"
@@ -105,18 +105,19 @@ public class HTMLScriptElementTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSrcWithJavaScriptProtocol() throws Exception {
+    public void srcWithJavaScriptProtocol() throws Exception {
         if (notYetImplemented()) {
             return;
         }
-        testSrcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"1"});
-        testSrcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_7_0, new String[0]);
-        testSrcWithJavaScriptProtocol(BrowserVersion.FIREFOX_2, new String[] {"1"});
+        srcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_6_0, "1");
+        srcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_7_0);
+        srcWithJavaScriptProtocol(BrowserVersion.FIREFOX_2, "1");
     }
 
-    private void testSrcWithJavaScriptProtocol(final BrowserVersion browserVersion,
-            final String[] expectedAlerts) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    private void srcWithJavaScriptProtocol(final BrowserVersion version, final String... expected) throws Exception {
+
+        final String content =
+              "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var script=document.createElement('script');\n"
             + "    script.src=\"javascript:'alert(1)'\";\n"
@@ -124,23 +125,23 @@ public class HTMLScriptElementTest extends WebTestCase2 {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testScriptForEvent() throws Exception {
+    public void scriptForEvent() throws Exception {
         // IE accepts it with () or without
-        testScriptForEvent("onload");
-        testScriptForEvent("onload()");
+        scriptForEvent("onload");
+        scriptForEvent("onload()");
     }
 
-    private void testScriptForEvent(final String eventName) throws Exception {
+    private void scriptForEvent(final String eventName) throws Exception {
         final String content
             = "<html><head><title>foo</title>\n"
             + "<script FOR='window' EVENT='" + eventName + "' LANGUAGE='javascript'>\n"
@@ -156,4 +157,70 @@ public class HTMLScriptElementTest extends WebTestCase2 {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies the correct the ordering of script element execution, deferred script element
+     * execution, script ready state changes, deferred script ready state changes, and onload
+     * handlers.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onReadyStateChange_Order() throws Exception {
+        onReadyStateChange_Order(BrowserVersion.FIREFOX_2, "3", "4", "2", "5");
+        //onReadyStateChange_Order(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3", "4", "5", "6", "7");
+        //onReadyStateChange_Order(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3", "4", "5", "6", "7");
+    }
+
+    private void onReadyStateChange_Order(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String html =
+              "    <html>\n"
+            + "        <head>\n"
+            + "            <title>test</title>\n"
+            + "            <script defer=''>alert('3');</script>\n"
+            + "            <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
+            + "            <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
+            + "            <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"7\");'></script>\n"
+            + "            <script>alert('2')</script>\n"
+            + "        </head>\n"
+            + "        <body onload='alert(5)'></body>\n"
+            + "    </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Verifies the correct the ordering of script element execution, deferred script element
+     * execution, script ready state changes, deferred script ready state changes, and onload
+     * handlers when the document doesn't have an explicit <tt>body</tt> element.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onReadyStateChange_Order_NoBody() throws Exception {
+        onReadyStateChange_Order_NoBody(BrowserVersion.FIREFOX_2, "3", "4", "2");
+        onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_6_0, "1", "2", "3", "4", "5", "6");
+        onReadyStateChange_Order_NoBody(BrowserVersion.INTERNET_EXPLORER_7_0, "1", "2", "3", "4", "5", "6");
+    }
+
+    private void onReadyStateChange_Order_NoBody(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String html =
+              "    <html>\n"
+            + "        <head>\n"
+            + "            <title>test</title>\n"
+            + "            <script defer=''>alert('3');</script>\n"
+            + "            <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"5\");'>alert('4');</script>\n"
+            + "            <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
+            + "            <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'></script>\n"
+            + "            <script>alert('2')</script>\n"
+            + "        </head>\n"
+            + "    </html>\n";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

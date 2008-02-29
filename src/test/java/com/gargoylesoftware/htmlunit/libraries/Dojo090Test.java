@@ -40,16 +40,20 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
+import java.util.Iterator;
 
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for compatibility with version 0.9.0 of the <a href="http://dojotoolkit.org/">Dojo JavaScript library</a>.
+ * Tests for compatibility with version 0.9.0 of the <a href="http://dojotoolkit.org/">Dojo
+ * JavaScript library</a>.
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -62,14 +66,31 @@ public class Dojo090Test extends WebTestCase2 {
     @Test
     public void testDojo() throws Exception {
 
-        // TODO: seems to not trigger the test runs...
-
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
         final URL url = getClass().getClassLoader().getResource("dojo/0.9.0/util/doh/runner.html");
         assertNotNull(url);
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
+
+        final HtmlElement logBody = page.getHtmlElementById("logBody");
+        DomNode lastChild = logBody.getLastDomChild();
+        while (true) {
+            Thread.sleep(10000);
+            final DomNode newLastChild = logBody.getLastDomChild();
+            if (lastChild != newLastChild) {
+                lastChild = newLastChild;
+            }
+            else {
+                break;
+            }
+        }
+
+        final Iterator<HtmlElement> logs = logBody.getChildElements().iterator();
+        assertEquals(logs.next().asText(), "322 tests to run in 40 groups");
+
+        // TODO: other assertions... not everything is working yet!
+
     }
 
 }

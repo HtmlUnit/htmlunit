@@ -165,6 +165,14 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
+     * Returns <tt>true</tt> if this script is deferred.
+     * @return <tt>true</tt> if this script is deferred
+     */
+    protected boolean isDeferred() {
+        return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
+    }
+
+    /**
      * Executes the content as a script if said content is a text node.
      * {@inheritDoc}
      */
@@ -206,8 +214,12 @@ public class HtmlScript extends HtmlElement {
     @Override
     protected void onAddedToPage() {
         getLog().debug("Script node added: " + asXml());
-        executeOnReadyStateChangeHandlerIfNecessary();
-        executeScriptIfNeeded(true);
+        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        final boolean pageFinishedLoading = (getPage().getReadyState() == READY_STATE_COMPLETE);
+        if (!ie || pageFinishedLoading || !isDeferred()) {
+            setReadyStateComplete();
+            executeScriptIfNeeded(true);
+        }
         super.onAddedToPage();
     }
 
@@ -218,13 +230,13 @@ public class HtmlScript extends HtmlElement {
      * attribute is defined, the script is not executed
      */
     private void executeInlineScriptIfNeeded(final boolean executeIfDeferred) {
+
         if (!isExecutionNeeded()) {
             return;
         }
 
-        final String defer = getDeferAttribute();
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        if (!executeIfDeferred && defer != ATTRIBUTE_NOT_DEFINED && ie) {
+        if (!executeIfDeferred && isDeferred() && ie) {
             return;
         }
 
@@ -269,13 +281,13 @@ public class HtmlScript extends HtmlElement {
      * attribute is defined, the script is not executed
      */
     void executeScriptIfNeeded(final boolean executeIfDeferred) {
+
         if (!isExecutionNeeded()) {
             return;
         }
 
-        final String defer = getDeferAttribute();
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        if (!executeIfDeferred && defer != ATTRIBUTE_NOT_DEFINED && ie) {
+        if (!executeIfDeferred && isDeferred() && ie) {
             return;
         }
 
@@ -345,14 +357,18 @@ public class HtmlScript extends HtmlElement {
      * <tt>onreadystatechange</tt> handler when simulating IE. Note that script nodes go
      * straight to the {@link DomNode#READY_STATE_COMPLETE} state, skipping all previous states.
      */
-    private void executeOnReadyStateChangeHandlerIfNecessary() {
-        if (getPage().getWebClient().getBrowserVersion().isIE()) {
-            setReadyState(READY_STATE_COMPLETE);
-            final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
-            final Function handler = script.getOnReadyStateChangeHandler();
-            if (handler != null) {
-                getPage().executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
-            }
+    protected void setReadyStateComplete() {
+
+        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        if (!ie) {
+            return;
+        }
+
+        setReadyState(READY_STATE_COMPLETE);
+        final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
+        final Function handler = script.getOnReadyStateChangeHandler();
+        if (handler != null) {
+            getPage().executeJavaScriptFunctionIfPossible(handler, script, new Object[0], this);
         }
     }
 

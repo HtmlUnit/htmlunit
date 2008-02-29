@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="sdanig">
+                Correct the order of script element execution, deferred script element execution, script ready state changes,
+                deferred script ready state changes, and onload handlers.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for document.fireEvent (IE only) and document.onXXX event handlers (elements
                 already had these).

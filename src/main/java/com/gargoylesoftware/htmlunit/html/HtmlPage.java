@@ -158,6 +158,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
         executeDeferredScriptsIfNeeded();
         executeEventHandlersIfNeeded(Event.TYPE_LOAD);
+        setReadyStateOnDeferredScriptsIfNeeded();
         executeRefreshIfNeeded();
     }
 
@@ -1370,20 +1371,40 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (!getWebClient().getBrowserVersion().isIE()) {
             return;
         }
-        for (final HtmlScript script : (List<HtmlScript>)
-                getDocumentHtmlElement().getHtmlElementsByTagName("script")) {
-            final String defer = script.getDeferAttribute();
-            if (defer != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+        final HtmlElement doc = getDocumentHtmlElement();
+        for (final HtmlScript script : (List<HtmlScript>) doc.getHtmlElementsByTagName("script")) {
+            if (script.isDeferred()) {
                 script.executeScriptIfNeeded(true);
             }
         }
     }
 
     /**
-     * Gets the first parent with the given node name
+     * Sets the ready state on any deferred scripts, if necessary.
+     */
+    @SuppressWarnings("unchecked")
+    private void setReadyStateOnDeferredScriptsIfNeeded() {
+        if (!getWebClient().isJavaScriptEnabled()) {
+            return;
+        }
+        if (!getWebClient().getBrowserVersion().isIE()) {
+            return;
+        }
+        final HtmlElement doc = getDocumentHtmlElement();
+        for (final HtmlScript script : (List<HtmlScript>) doc.getHtmlElementsByTagName("script")) {
+            if (script.isDeferred()) {
+                script.setReadyStateComplete();
+            }
+        }
+    }
+
+    /**
+     * Returns the first parent with the specified node name, or <tt>null</tt> if no parent
+     * with the specified node name can be found.
+     *
      * @param node the node to start with
      * @param nodeName the name of the search node
-     * @return <code>null</code> if no parent found with this name
+     * @return the first parent with the specified node name
      */
     private DomNode getFirstParent(final DomNode node, final String nodeName) {
         DomNode parent = node.getParentDomNode();
