@@ -16,11 +16,11 @@
                 just like you do in your "normal" browser.
             </p>
             <p>
-				It has fairly good JavaScript support (which gets continuously improved) and is able to work even with quite complex AJAX libraries
-				simulating either Firefox or Internet Explorer depending on the configuration you want to use.
-			</p> 
+                It has fairly good JavaScript support (which gets continuously improved) and is able to work even with quite complex AJAX libraries
+                simulating either Firefox or Internet Explorer depending on the configuration you want to use.
+            </p> 
             <p>
-            	It is typically used for testing purposes or to retrieve information from web sites.
+                It is typically used for testing purposes or to retrieve information from web sites.
             </p>
             <p>
                 HtmlUnit is not a generic unit testing framework. It is specifically a way to simulate
@@ -29,8 +29,8 @@
                 <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a> for an introduction.
             </p>
             <p>
-            	HtmlUnit is used as the underlying "browser" by the Open Source testing tools <a href="http://webtest.canoo.com">Canoo WebTest</a>
-            	and <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>. 
+                HtmlUnit is used as the underlying "browser" by the Open Source testing tools <a href="http://webtest.canoo.com">Canoo WebTest</a>
+                and <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>. 
             </p>
             <p>
                 HtmlUnit was originally written by
@@ -46,14 +46,6 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                <!-- The nightly builds are broken at the moment
-                    <dt>Nightly Build (highly unstable) <date>Yesterday</date></dt>
-                    <dd>
-                        <a href="nightly/">
-                            Download Nightly Build
-                        </a>.
-                    </dd>
-                -->
                     <dt>Latest build</dt>
                     <dd>
                         <a href="http://build.canoo.com/htmlunit">Cruise Control server</a> 
@@ -89,7 +81,7 @@
                         <a href="http://htmlunit.sourceforge.net/phpwiki/index.php">HtmlUnit wiki</a>
                         with an RSS feed for recent changes
                         <a href="http://htmlunit.sourceforge.net/phpwiki/index.php/RecentChanges?format=rss">
-                        	   <img src="http://htmlunit.sourceforge.net/phpwiki/themes/default/buttons/RSS.png" border="0" alt="RSS logo" />
+                               <img src="http://htmlunit.sourceforge.net/phpwiki/themes/default/buttons/RSS.png" border="0" alt="RSS logo" />
                         </a>
                     </li>
                     <li>
@@ -184,7 +176,7 @@
             <p>
                 JavaScript code is executed just like in normal browsers when the page loads or when an handler is triggered.
                 Additionally HtmlUnit provides the ability to inject code in an existing page through
-				HtmlPage.executeJavascript(String yourJsCode).
+                HtmlPage.executeJavascript(String yourJsCode).
             </p>
             <p>
                 Refer to the changes document for details on what is being added.
