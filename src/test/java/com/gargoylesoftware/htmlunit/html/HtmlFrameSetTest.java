@@ -357,13 +357,13 @@ public class HtmlFrameSetTest extends WebTestCase2 {
 
         final String rightHtml
             = "<html>"
-            + "<body onLoad=\"parent.writeLeftFrame()\">\n"
+            + "<body>\n"
             + "  This is the right frame, version 1.\n"
             + "</body></html>";
 
         final String right2Html
             = "<html>"
-            + "<body onLoad=\"parent.writeLeftFrame()\">\n"
+            + "<body>\n"
             + "  This is the right frame, version 2.\n"
             + "</body></html>";
 
