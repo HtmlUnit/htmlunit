@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -956,11 +958,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             return new ScriptResult(null, this);
         }
 
-        final String prefix = "javascript:";
-        final int prefixLength = prefix.length();
+        final int prefixLength = JAVASCRIPT_PREFIX.length();
 
         if (sourceCode.length() > prefixLength
-                && sourceCode.substring(0, prefixLength).equalsIgnoreCase(prefix)) {
+                && sourceCode.substring(0, prefixLength).equalsIgnoreCase(JAVASCRIPT_PREFIX)) {
             sourceCode = sourceCode.substring(prefixLength);
         }
 

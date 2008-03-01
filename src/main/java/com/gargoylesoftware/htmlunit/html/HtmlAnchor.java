@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
- *  Wrapper for the html element "a"
+ * Wrapper for the HTML element "a".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -94,7 +96,7 @@ public class HtmlAnchor extends FocusableElement {
 
         if (href != null && href.length() > 0 && !href.startsWith("#")) {
             final HtmlPage page = getPage();
-            if (TextUtil.startsWithIgnoreCase(href, "javascript:")) {
+            if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
                 return page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();
             }

@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -123,14 +125,14 @@ public class HtmlForm extends ClickableElement {
             }
 
             final String action = getActionAttribute();
-            if (TextUtil.startsWithIgnoreCase(action, "javascript:")) {
+            if (TextUtil.startsWithIgnoreCase(action, JAVASCRIPT_PREFIX)) {
                 return htmlPage.executeJavaScriptIfPossible(action, "Form action", getStartLineNumber()).getNewPage();
             }
         }
         else {
-            if (TextUtil.startsWithIgnoreCase(getActionAttribute(), "javascript:")) {
-                // The action is javascript but javascript isn't enabled.  Return
-                // the current page.
+            if (TextUtil.startsWithIgnoreCase(getActionAttribute(), JAVASCRIPT_PREFIX)) {
+                // The action is JavaScript but JavaScript isn't enabled.
+                // Return the current page.
                 return htmlPage;
             }
         }

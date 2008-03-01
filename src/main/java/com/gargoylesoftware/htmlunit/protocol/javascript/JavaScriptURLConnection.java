@@ -44,21 +44,25 @@ import java.net.URLConnection;
 import com.gargoylesoftware.htmlunit.TextUtil;
 
 /**
- * A URLConnection for supporting javascript urls
+ * A URLConnection for supporting JavaScript URLs.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class JavaScriptURLConnection extends URLConnection {
+
+    /** The JavaScript "URL" prefix. */
+    public static final String JAVASCRIPT_PREFIX = "javascript:";
+
+    /** The JavaScript code. */
     private final String content_;
 
     /**
-     * Create an instance
-     * @param newUrl The javascript url.
+     * Creates an instance.
+     * @param newUrl the javascript URL
      */
     public JavaScriptURLConnection(final URL newUrl) {
         super(newUrl);
-
         content_ = newUrl.toExternalForm().substring("javascript:".length());
     }
 
@@ -67,14 +71,16 @@ public class JavaScriptURLConnection extends URLConnection {
      */
     @Override
     public void connect() {
+        // Empty.
     }
 
     /**
-     * Return the input stream - in this case the content of the url
-     * @return The input stream
+     * Returns the input stream - in this case the content of the URL.
+     * @return the input stream
      */
     @Override
     public InputStream getInputStream() {
         return TextUtil.toInputStream(content_);
     }
+
 }

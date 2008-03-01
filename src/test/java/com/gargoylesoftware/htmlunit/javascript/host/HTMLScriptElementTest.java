@@ -100,27 +100,41 @@ public class HTMLScriptElementTest extends WebTestCase2 {
     }
 
     /**
-     * Test for bug
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038
+     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038
      * @throws Exception if the test fails
      */
     @Test
-    public void srcWithJavaScriptProtocol() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        srcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_6_0, "1");
-        srcWithJavaScriptProtocol(BrowserVersion.INTERNET_EXPLORER_7_0);
-        srcWithJavaScriptProtocol(BrowserVersion.FIREFOX_2, "1");
+    public void srcWithJavaScriptProtocol_Static() throws Exception {
+        srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_6_0, "1");
+        srcWithJavaScriptProtocol_Static(BrowserVersion.INTERNET_EXPLORER_7_0);
+        srcWithJavaScriptProtocol_Static(BrowserVersion.FIREFOX_2, "1");
     }
 
-    private void srcWithJavaScriptProtocol(final BrowserVersion version, final String... expected) throws Exception {
+    private void srcWithJavaScriptProtocol_Static(final BrowserVersion version, final String... expected) throws Exception {
+        final String html = "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
+        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_6_0, "1");
+        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.INTERNET_EXPLORER_7_0);
+        srcWithJavaScriptProtocol_Dynamic(BrowserVersion.FIREFOX_2, "1");
+    }
+
+    private void srcWithJavaScriptProtocol_Dynamic(final BrowserVersion version, final String... expected) throws Exception {
 
         final String content =
               "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var script=document.createElement('script');\n"
-            + "    script.src=\"javascript:'alert(1)'\";\n"
+            + "    script.src=\"javascript: 'alert(1)'\";\n"
             + "    document.getElementsByTagName('head')[0].appendChild(script);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

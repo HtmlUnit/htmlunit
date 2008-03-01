@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -201,7 +203,7 @@ public class Location extends SimpleScriptable {
         // cf test FrameTest#testLocation
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
 
-        if (newLocation.startsWith("javascript:")) {
+        if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
             page.executeJavaScriptIfPossible(script, "new location value", 1);
         }

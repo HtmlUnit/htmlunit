@@ -37,10 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
+
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.mozilla.javascript.Function;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
 
 /**
@@ -286,7 +290,8 @@ public class HtmlScript extends HtmlElement {
             return;
         }
 
-        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
+        final boolean ie = browser.isIE();
         if (!executeIfDeferred && isDeferred() && ie) {
             return;
         }
@@ -297,10 +302,29 @@ public class HtmlScript extends HtmlElement {
         }
 
         if (src != ATTRIBUTE_NOT_DEFINED) {
-            getLog().debug("Loading external javascript: " + src);
-            getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
+            if (src.startsWith(JAVASCRIPT_PREFIX)) {
+                // <script src="javascript:'[code]'"></script>
+                if (!ie || browser.getBrowserVersionNumeric() != 7) {
+                    String code = StringUtils.removeStart(src, JAVASCRIPT_PREFIX).trim();
+                    final int len = code.length();
+                    if (len > 2) {
+                        if ((code.charAt(0) == '\'' && code.charAt(len - 1) == '\'')
+                            || (code.charAt(0) == '"' && code.charAt(len - 1) == '"')) {
+                            code = code.substring(1, len - 1);
+                            getLog().debug("Executing JavaScript: " + code);
+                            getPage().executeJavaScriptIfPossible(code, code, getStartLineNumber());
+                        }
+                    }
+                }
+            }
+            else {
+                // <script src="[url]"></script>
+                getLog().debug("Loading external JavaScript: " + src);
+                getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
+            }
         }
         else if (getFirstDomChild() != null) {
+            // <script>[code]</script>
             executeInlineScriptIfNeeded(executeIfDeferred);
         }
     }

@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="sdanig" id="1782719">
+                Handle script elements with src attributes containing "javascript:..." URLs.
+            </action>
             <action type="fix" dev="sdanig">
                 Correct the order of script element execution, deferred script element execution, script ready state changes,
                 deferred script ready state changes, and onload handlers.
