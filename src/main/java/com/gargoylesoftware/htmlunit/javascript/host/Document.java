@@ -1387,7 +1387,7 @@ public class Document extends EventNode {
 
     /**
      * Indicates if the command is supported.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536681(VS.85).aspx">MSDN documentation</a>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536681.aspx">MSDN documentation</a>
      * @param cmd the command identifier
      * @return <code>true></code> if the command is supported
      */
@@ -1400,8 +1400,8 @@ public class Document extends EventNode {
     }
 
     /**
-     * Indicates if the command is supported.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536419(VS.85).aspx">MSDN documentation</a>
+     * Executes a command.
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536419.aspx">MSDN documentation</a>
      * @param cmd the command identifier
      * @param userInterface display a user interface if the command supports one
      * @param value the string, number, or other value to assign. Possible values depend on the command
