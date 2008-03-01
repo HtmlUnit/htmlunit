@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -58,6 +59,7 @@ import org.mortbay.jetty.Server;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -401,7 +403,7 @@ public class GWT14Test extends WebTestCase2 {
      */
     @Test
     public void kitchenSink() throws Exception {
-        //TODO: sometimes fails with Eclipse.
+        //TODO: sometimes fails.
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/KitchenSink");
         final WebClient client = new WebClient();
 
@@ -412,10 +414,12 @@ public class GWT14Test extends WebTestCase2 {
         final HtmlDivision infoDiv = (HtmlDivision) page.getFirstByXPath("//div[@class='ks-Info']");
         assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
-        page.getAnchorByHref("#Widgets").click();
+        final Page page2 = page.getAnchorByHref("#Widgets").click();
+        assertSame(page, page2);
         assertEquals("Basic Widgets", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
-        page.getAnchorByHref("#Panels").click();
+        final Page page3 = page.getAnchorByHref("#Panels").click();
+        assertSame(page, page3);
         assertEquals("Panels", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
     }
 
