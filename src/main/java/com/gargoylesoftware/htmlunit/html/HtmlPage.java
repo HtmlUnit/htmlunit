@@ -259,10 +259,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public Element getElementById(final String elementId) {
-        throw new UnsupportedOperationException("HtmlPage.getElementById is not yet implemented.");
+        try {
+            return getDocumentHtmlElement().getHtmlElementById(elementId);
+        }
+        catch (final ElementNotFoundException e) {
+            return null;
+        }
     }
 
     /**
