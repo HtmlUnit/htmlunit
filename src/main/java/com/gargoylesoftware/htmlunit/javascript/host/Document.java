@@ -122,8 +122,8 @@ public class Document extends EventNode {
     private static final Map<String, Class< ? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
     
     private static final String[] EXECUTE_CMDS_IE_ARR = {
-        "2D-Position", "AbsolutePosition", "BackColor", "BlockDirLTR", "BlockDirRTL",
-        "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
+        "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
+        "BlockDirLTR", "BlockDirRTL", "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
         "CreateLink", "Cut", "Delete", "DirLTR", "DirRTL",
         "EditMode", "FontName", "FontSize", "ForeColor", "FormatBlock",
         "Indent", "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
