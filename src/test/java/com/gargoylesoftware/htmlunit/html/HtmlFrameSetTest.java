@@ -207,9 +207,7 @@ public class HtmlFrameSetTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFrameOnloadAccessOtherFrame()
-        throws Exception {
-
+    public void frameOnloadAccessOtherFrame() throws Exception {
         final String framesContent
             = "<html><head><title>Main</title>\n"
             + "</head>\n"
@@ -253,9 +251,7 @@ public class HtmlFrameSetTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRefererHeader()
-        throws Exception {
-
+    public void refererHeader() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
@@ -286,7 +282,7 @@ public class HtmlFrameSetTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testScriptUnderNoFrames() throws Exception {
+    public void scriptUnderNoFrames() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='100%'>\n"
@@ -315,5 +311,78 @@ public class HtmlFrameSetTest extends WebTestCase2 {
         
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Regression test for
+     *            https://sourceforge.net/tracker/index.php?func=detail&aid=1794764&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void frameReloadsAnother() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final URL framesetURL = new URL("http://domain/frameset.html");
+        final URL leftURL = new URL("http://domain/left.html");
+        final URL rightURL = new URL("http://domain/right.html");
+        final URL right2URL = new URL("http://domain/right2.html");
+
+        final String framesetHtml
+            = "<html><head><title>Test Frameset</title><script>\n"
+            + "function writeLeftFrame() {\n"
+            + "  var leftDoc = leftFrame.document;\n"
+            + "  leftDoc.open();\n"
+            + "  leftDoc.writeln('<HTML><BODY>This is the left frame.<br><br>'\n"
+            + "    + '<A HREF=\"javaScript:parent.showNextPage()\" id=\"node_0\">Show version 2 '\n"
+            + "    + 'of right frame</A></BODY></HTML>');\n"
+            + "  leftDoc.close();\n"
+            + "}\n"
+            + "\n"
+            + "function showNextPage() {\n"
+            + "  rightFrame.location = 'right2.html';\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<frameset cols='300,*' border=1>\n"
+            + "  <frame name='leftFrame' src='left.html'>\n"
+            + "  <frame name='rightFrame' src='right.html'>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String leftHtml
+            = "<html>"
+            + "<body onLoad=\"parent.writeLeftFrame()\">\n"
+            + "  This is the initial left frame, to be overwritten immediately (onLoad).\n"
+            + "</body></html>";
+
+        final String rightHtml
+            = "<html>"
+            + "<body onLoad=\"parent.writeLeftFrame()\">\n"
+            + "  This is the right frame, version 1.\n"
+            + "</body></html>";
+
+        final String right2Html
+            = "<html>"
+            + "<body onLoad=\"parent.writeLeftFrame()\">\n"
+            + "  This is the right frame, version 2.\n"
+            + "</body></html>";
+
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(framesetURL, framesetHtml);
+        webConnection.setResponse(leftURL, leftHtml);
+        webConnection.setResponse(rightURL, rightHtml);
+        webConnection.setResponse(right2URL, right2Html);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(framesetURL);
+        final HtmlPage leftPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
+        final HtmlPage rightPage = (HtmlPage) page.getFrames().get(1).getEnclosedPage();
+        assertTrue(rightPage.asXml().contains("version 1"));
+        leftPage.getAnchors().get(0).click();
+        assertTrue(rightPage.asXml().contains("version 2"));
     }
 }
