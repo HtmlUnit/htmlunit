@@ -48,7 +48,7 @@
             <p>
                 One of the problems with JavaScript is finding the objects that you expect to be defined but have not
                 been defined within the code.  To help find some of these errors, HtmlUnit will produce WARN level messages
-                reporting these errors. A WARN level log message has also been added to report when getElementById does not find an element.
+                reporting these errors. Before submitting JavaScript bugs, please read <a href="submittingJSBugs.html">this</a>.
             </p>
         </section>
     </body>

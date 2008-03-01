@@ -10,7 +10,7 @@
     <body>
         <section>
             <p>
-                For JavaScript Bugs, please <a href="submittingJSBugs.html">read this</a>.
+                For JavaScript Bugs, please read <a href="submittingJSBugs.html">this</a>.
             </p>
             <p>
                 Bugs are a constant problem with software development.  In HtmlUnit, there are several factors

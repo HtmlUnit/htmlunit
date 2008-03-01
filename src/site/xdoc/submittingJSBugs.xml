@@ -22,7 +22,7 @@
 				compare the result of HtmlUnit to a real browser (Internet Explorer or Firefox),
 				and you will mostly be able to provide a tiny failing test case which contains
 				few lines of JavaScript with or without Html (independent of the whole JavaScript library),
-				please have a look in <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/html">these cases</a>.</br>
+				please have a look in <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/html">these cases</a>.<br/>
 				Once the cause is identified, it is very likely to be fixed in a timely manner.<br/>
             </p>
             <p>

@@ -125,9 +125,7 @@
         <section name="Features">
             <p>
                 <ul>
-                    <li>Support for the HTTP and HTTPS protocols (
-                    <a href="http://java.sun.com/products/jsse">JSSE</a>
-                    must be in your classpath in order to use HTTPS support)</li>
+                    <li>Support for the HTTP and HTTPS protocols.</li>
                     <li>Support for cookies</li>
                     <li>Ability to specify whether failing responses from the server should throw
                     exceptions or should be returned as pages of the appropriate type (based on content
