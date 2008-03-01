@@ -103,31 +103,31 @@ public class GWT14Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void I18N() throws Exception {
+    public void i18n() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
         final HtmlPage page = loadPage("I18N", BrowserVersion.getDefault(), null);
-        testI18N(page, "numberFormatOutputText", "31,415,926,535.898");
+        i18n(page, "numberFormatOutputText", "31,415,926,535.898");
 
         String timeZone = new SimpleDateFormat("Z").format(
                 new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
 
-        testI18N(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM GMT" + timeZone);
-        testI18N(page, "messagesFormattedOutputText",
+        i18n(page, "dateTimeFormatOutputText", "Monday, September 13, 1999 12:00:00 AM GMT" + timeZone);
+        i18n(page, "messagesFormattedOutputText",
             "User 'amelie' has security clearance 'guest' and cannot access '/secure/blueprints.xml'");
-        testI18N(page, "constantsFirstNameText", "Amelie");
-        testI18N(page, "constantsLastNameText", "Crutcher");
-        testI18N(page, "constantsFavoriteColorList",
+        i18n(page, "constantsFirstNameText", "Amelie");
+        i18n(page, "constantsLastNameText", "Crutcher");
+        i18n(page, "constantsFavoriteColorList",
                 new String[] {"Red", "White", "Yellow", "Black", "Blue", "Green", "Grey", "Light Grey"});
-        testI18N(page, "constantsWithLookupResultsText", "Red");
+        i18n(page, "constantsWithLookupResultsText", "Red");
         final Map<String, String> map = new HashMap<String, String>();
         map.put("name", "Amelie Crutcher");
         map.put("timeZone", "EST");
         map.put("userID", "123");
         map.put("lastLogOn", "2/2/2006");
-        testI18NDictionary(page, map);
+        i18nDictionary(page, map);
         
         Locale.setDefault(locale);
     }
@@ -138,7 +138,7 @@ public class GWT14Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testI18N_fr() throws Exception {
+    public void i18n_fr() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
         
@@ -159,27 +159,27 @@ public class GWT14Test extends WebTestCase2 {
             }
             alert(output);
          */
-        testI18N(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
+        i18n(page, "numberFormatOutputText", "31\u00A0415\u00A0926\u00A0535,898");
 
         String timeZone = new SimpleDateFormat("Z").format(
                 new SimpleDateFormat("d MMMMMMMM yyyy").parse("13 September 1999"));
         timeZone = timeZone.substring(0, 3) + ':' + timeZone.substring(3);
 
-        testI18N(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00 h 00 GMT" + timeZone);
-        testI18N(page, "messagesFormattedOutputText",
+        i18n(page, "dateTimeFormatOutputText", "lundi 13 septembre 1999 00 h 00 GMT" + timeZone);
+        i18n(page, "messagesFormattedOutputText",
             "L'utilisateur 'amelie' a un niveau de securit\u00E9 'guest', "
             + "et ne peut acc\u00E9der \u00E0 '/secure/blueprints.xml'");
-        testI18N(page, "constantsFirstNameText", "Amelie");
-        testI18N(page, "constantsLastNameText", "Crutcher");
-        testI18N(page, "constantsFavoriteColorList",
+        i18n(page, "constantsFirstNameText", "Amelie");
+        i18n(page, "constantsLastNameText", "Crutcher");
+        i18n(page, "constantsFavoriteColorList",
                 new String[] {"Rouge", "Blanc", "Jaune", "Noir", "Bleu", "Vert", "Gris", "Gris clair"});
-        testI18N(page, "constantsWithLookupResultsText", "Rouge");
+        i18n(page, "constantsWithLookupResultsText", "Rouge");
         final Map<String, String> map = new HashMap<String, String>();
         map.put("name", "Amelie Crutcher");
         map.put("timeZone", "EST");
         map.put("userID", "123");
         map.put("lastLogOn", "2/2/2006");
-        testI18NDictionary(page, map);
+        i18nDictionary(page, map);
         
         Locale.setDefault(locale);
     }
@@ -191,9 +191,9 @@ public class GWT14Test extends WebTestCase2 {
      * @param expectedValue Expected value of the value inside the element
      * @throws Exception If the test fails.
      */
-    private void testI18N(final HtmlPage page, final String id, final String expectedValue) {
+    private void i18n(final HtmlPage page, final String id, final String expectedValue) {
         final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
-        testTableDataCell(cell, expectedValue);
+        tableDataCell(cell, expectedValue);
     }
 
     /**
@@ -203,7 +203,7 @@ public class GWT14Test extends WebTestCase2 {
      * @param expectedValue Expected value of the value inside the cell
      * @throws Exception If the test fails.
      */
-    private void testTableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
+    private void tableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
         final Object child = cell.getFirstDomChild();
         if (child instanceof HtmlDivision) {
             final HtmlDivision div = (HtmlDivision) child;
@@ -241,7 +241,7 @@ public class GWT14Test extends WebTestCase2 {
      * @param expectedValues Expected value of the value inside the select.
      * @throws Exception If the test fails.
      */
-    private void testI18N(final HtmlPage page, final String id, final String[] expectedValues) {
+    private void i18n(final HtmlPage page, final String id, final String[] expectedValues) {
         final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
         final Object child = cell.getFirstDomChild();
         if (child instanceof HtmlSelect) {
@@ -256,7 +256,7 @@ public class GWT14Test extends WebTestCase2 {
         }
     }
 
-    private void testI18NDictionary(final HtmlPage page, final Map<String, String> expectedMap) throws Exception {
+    private void i18nDictionary(final HtmlPage page, final Map<String, String> expectedMap) throws Exception {
         final HtmlTableRow headerRow =
             (HtmlTableRow) page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
         final HtmlTableRow valueRow = (HtmlTableRow) headerRow.getNextDomSibling();
@@ -281,7 +281,7 @@ public class GWT14Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testSimpleXML() throws Exception {
+    public void simpleXML() throws Exception {
         final HtmlPage page = loadPage("SimpleXML", BrowserVersion.getDefault(), null);
 
         final String[] pendingOrders =
@@ -302,7 +302,7 @@ public class GWT14Test extends WebTestCase2 {
         assertEquals(pendingOrders.length, cells.size());
         for (int i = 0; i < pendingOrders.length; i++) {
             final HtmlTableDataCell cell = (HtmlTableDataCell) cells.get(i);
-            testTableDataCell(cell, pendingOrders[i]);
+            tableDataCell(cell, pendingOrders[i]);
         }
     }
 
@@ -310,11 +310,11 @@ public class GWT14Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testMail() throws Exception {
+    public void mail() throws Exception {
         final HtmlPage page = loadPage("Mail", BrowserVersion.getDefault(), null);
         final HtmlTableDataCell cell = (HtmlTableDataCell)
             page.getFirstByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..");
-        testTableDataCell(cell, "Welcome back, foo@example.com");
+        tableDataCell(cell, "Welcome back, foo@example.com");
 
         final String[] selectedRow = {"markboland05", "mark@example.com", "URGENT -[Mon, 24 Apr 2006 02:17:27 +0000]"};
 
@@ -322,7 +322,7 @@ public class GWT14Test extends WebTestCase2 {
         assertEquals(selectedRow.length, selectedRowCells.size());
         for (int i = 0; i < selectedRow.length; i++) {
             final HtmlTableDataCell selectedRowCell = (HtmlTableDataCell) selectedRowCells.get(i);
-            testTableDataCell(selectedRowCell, selectedRow[i]);
+            tableDataCell(selectedRowCell, selectedRow[i]);
         }
 
         final List< ? > detailsCells = page.getByXPath("//div[@class='mail-DetailBody']/text()");
@@ -338,7 +338,7 @@ public class GWT14Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testJSON() throws Exception {
+    public void json() throws Exception {
         final HtmlPage page = loadPage("JSON", BrowserVersion.getDefault(), null);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         button.click();
@@ -362,7 +362,7 @@ public class GWT14Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testDynaTable() throws Exception {
+    public void dynaTable() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
         
@@ -392,7 +392,7 @@ public class GWT14Test extends WebTestCase2 {
         assertEquals(firstRow.length, detailsCells.size());
         for (int i = 0; i < firstRow.length; i++) {
             final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);
-            testTableDataCell(cell, firstRow[i]);
+            tableDataCell(cell, firstRow[i]);
         }
     }
 
@@ -456,7 +456,7 @@ public class GWT14Test extends WebTestCase2 {
      * {@inheritDoc}
      */
     @After
-    public void tearDown() throws Exception {
+    public void after() throws Exception {
         HttpWebConnectionTest.stopWebServer(server_);
         server_ = null;
     }
@@ -467,7 +467,7 @@ public class GWT14Test extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDateGetTimezoneOffset() throws Exception {
+    public void dateGetTimezoneOffset() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var offset = Math.abs(new Date().getTimezoneOffset());\n"
