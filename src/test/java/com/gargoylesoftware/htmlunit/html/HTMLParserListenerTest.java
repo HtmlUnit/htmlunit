@@ -43,6 +43,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -109,12 +110,16 @@ public class HTMLParserListenerTest extends WebTestCase2 {
         }
         
         /**
-         * Stub to fix Eclipse warning
          * @see Object#hashCode()
          */
         @Override
         public int hashCode() {
-            return super.hashCode();
+            final HashCodeBuilder builder = new HashCodeBuilder();
+            builder.append(error_);
+            builder.append(message_);
+            builder.append(url_);
+            builder.append(line_);
+            return builder.hashCode();
         }
     }
 
