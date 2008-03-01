@@ -137,13 +137,12 @@ public class HTMLParserListenerTest extends WebTestCase2 {
 
         final List<MessageInfo> messages = new ArrayList<MessageInfo>();
         final HTMLParserListener collecter = new HTMLParserListener() {
-            @Test
+
             public void error(final String message, final URL url,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(true, message, url, line, column, key));
             }
 
-            @Test
             public void warning(final String message, final URL url,
                     final int line, final int column, final String key) {
                 messages.add(new MessageInfo(false, message, url, line, column, key));
