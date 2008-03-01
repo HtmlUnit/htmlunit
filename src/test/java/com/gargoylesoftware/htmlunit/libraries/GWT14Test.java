@@ -401,9 +401,7 @@ public class GWT14Test extends WebTestCase2 {
      */
     @Test
     public void kitchenSink() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+        //TODO: sometimes fails with Eclipse.
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/KitchenSink");
         final WebClient client = new WebClient();
 
