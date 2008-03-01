@@ -11,12 +11,12 @@
     <body>
         <section>
             <p>
-                HtmlUnit is a "browser for Java programs". 
-                It models the HTML documents and provides an API that allows you to invoke pages, fill forms, click links, etc. 
+                HtmlUnit is a "browser for Java programs".
+                It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc...
                 just like you do in your "normal" browser.
             </p>
             <p>
-                It has fairly good JavaScript support (which gets continuously improved) and is able to work even with quite complex AJAX libraries
+                It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries,
                 simulating either Firefox or Internet Explorer depending on the configuration you want to use.
             </p> 
             <p>
@@ -25,20 +25,21 @@
             <p>
                 HtmlUnit is not a generic unit testing framework. It is specifically a way to simulate
                 a browser for testing purposes and is intended to be used within another testing
-                framework such as <a href="http://www.junit.org">JUnit</a>.  Refer to the document
-                <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a> for an introduction.
+                framework such as <a href="http://www.junit.org/">JUnit</a> or <a href="http://www.testng.org/">TestNG</a>.
+                Refer to the document <a href="gettingStarted.html">"Getting Started with HtmlUnit"</a>
+                for an introduction.
             </p>
             <p>
-                HtmlUnit is used as the underlying "browser" by the Open Source testing tools <a href="http://webtest.canoo.com">Canoo WebTest</a>
-                and <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>. 
+                HtmlUnit is used as the underlying "browser" by the Open Source testing tools <a href="http://webtest.canoo.com/">Canoo WebTest</a>
+                and <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>.
             </p>
             <p>
                 HtmlUnit was originally written by
                 <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
                 <a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
-                and released under an <a href="license.html">apache style license</a>.  
+                and is released under an <a href="license.html">Apache-style license</a>.  
                 Since then, it has received many contributions from <a href="team-list.html">
-                other developers</a> and would not be where it is today without their
+                other developers</a>, and would not be where it is today without their
                 assistance.
             </p>
         </section>
@@ -124,7 +125,7 @@
         <section name="Features">
             <p>
                 <ul>
-                    <li>Support for the HTTP and HTTPS protocols. (
+                    <li>Support for the HTTP and HTTPS protocols (
                     <a href="http://java.sun.com/products/jsse">JSSE</a>
                     must be in your classpath in order to use HTTPS support)</li>
                     <li>Support for cookies</li>
@@ -133,18 +134,18 @@
                     type)</li>
                     <li>Support for submit methods POST and GET (as well as HEAD, DELETE, ...)</li>
                     <li>Ability to customize the request headers being sent to the server</li>
-                    <li>Support for html responses
+                    <li>Support for HTML responses
                         <ul>
-                            <li>Wrapper for html pages that provides easy access to all information
+                            <li>Wrapper for HTML pages that provides easy access to all information
                             contained inside them</li>
                             <li>Support for submitting forms</li>
                             <li>Support for clicking links</li>
-                            <li>Support for walking the DOM model of the html document</li>
+                            <li>Support for walking the DOM model of the HTML document</li>
                         </ul>
                     </li>
                     <li>Proxy server support</li>
                     <li>Support for basic and NTLM authentication</li>
-                    <li>Good support for javascript (see javascript section below)</li>
+                    <li>Good support for JavaScript (see the JavaScript section below)</li>
                 </ul>
             </p>
         </section>
@@ -158,15 +159,15 @@
 
         <section name="JavaScript support">
             <p>
-                HtmlUnit provides a good JavaScript support, simulating the behavior of the configured browser (Firefox or Internet Explorer).
+                HtmlUnit provides good JavaScript support, simulating the behavior of the configured browser (Firefox or Internet Explorer).
                 It uses the Rhino JavaScript engine for the core language (plus workarounds for some Rhino bugs) and provides the implementation
                 for the objects specific to the execution in a browser.
             </p>
             <p>
                 The support is already really good and many complex JavaScript libraries are well supported 
-                (the unit tests of some well known AJAX libraries are included in HtmlUnit tests). JavaScript support is the area where currently 
-                most of HtmlUnit's development activity occurs. If you encounter a problem it may be already have been fixed since last
-                release. Otherwise, don't hesitate to open an issue with an example of the problem. 
+                (the unit tests of some well known AJAX libraries are included in HtmlUnit's own unit tests). JavaScript support is the area where
+                currently most of HtmlUnit's development activity occurs. If you encounter a problem it may be already have been fixed since the last
+                release. Otherwise, don't hesitate to open an issue with an example of the problem.
             </p>
             <note title="Disabling JavaScript support">
                 <p>
@@ -175,7 +176,7 @@
             </note>
             <p>
                 JavaScript code is executed just like in normal browsers when the page loads or when an handler is triggered.
-                Additionally HtmlUnit provides the ability to inject code in an existing page through
+                Additionally HtmlUnit provides the ability to inject code into an existing page through
                 HtmlPage.executeJavascript(String yourJsCode).
             </p>
             <p>
@@ -184,4 +185,3 @@
         </section>
     </body>
 </document>
-
