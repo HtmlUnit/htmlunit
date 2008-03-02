@@ -206,7 +206,7 @@ public final class HTMLParser {
 
     /**
      * Parses the HTML content from the given string into an object tree representation.
-     * 
+     *
      * @param parent the parent for the new nodes
      * @param source the (X)HTML to be parsed
      * @throws SAXException if a SAX error occurs
