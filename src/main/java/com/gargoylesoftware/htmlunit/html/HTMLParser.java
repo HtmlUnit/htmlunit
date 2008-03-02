@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -200,45 +201,49 @@ public final class HTMLParser {
      * You should never need to create one of these!
      */
     private HTMLParser() {
+        // Empty.
     }
 
     /**
-      * Parses the HTML content from the given string into an object tree representation.
-      *
-      * @param parent the parent for the new nodes
-      * @param source the (X)HTML to be parsed
-      * @throws SAXException if a SAX error occurs
-      * @throws IOException if an IO error occurs
-      */
-    public static void parseFragment(final DomNode parent, final String source)
-        throws SAXException, IOException {
+     * Parses the HTML content from the given string into an object tree representation.
+     * 
+     * @param parent the parent for the new nodes
+     * @param source the (X)HTML to be parsed
+     * @throws SAXException if a SAX error occurs
+     * @throws IOException if an IO error occurs
+     */
+    public static void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
 
-        final URL url = parent.getPage().getWebResponse().getUrl();
+        final HtmlPage page = (HtmlPage) parent.getPage();
+        final URL url = page.getWebResponse().getUrl();
+
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
-        final XMLInputSource in = new XMLInputSource(
-                null,
-                parent.getPage().getWebResponse().getUrl().toString(),
-                null,
-                new StringReader(source),
-                null);
 
-        domBuilder.parse(in);
+        final XMLInputSource in = new XMLInputSource(null, url.toString(), null, new StringReader(source), null);
+
+        try {
+            page.registerParsingStart();
+            domBuilder.parse(in);
+        }
+        finally {
+            page.registerParsingEnd();
+        }
     }
 
     /**
-     * parse the HTML content from the given WebResponse into an object tree representation
+     * Parses the HTML content from the given WebResponse into an object tree representation.
      *
      * @param webResponse the response data
      * @param webWindow the web window into which the page is to be loaded
      * @return the page object which forms the root of the DOM tree, or <code>null</code> if the &lt;HTML&gt;
      * tag is missing
-     * @throws java.io.IOException io error
+     * @throws java.io.IOException IO error
      */
-    public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow)
-        throws IOException {
+    public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
 
-        final HtmlPage page = new HtmlPage(webResponse.getUrl(), webResponse, webWindow);
+        final URL url = webResponse.getUrl();
+        final HtmlPage page = new HtmlPage(url, webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, webResponse.getUrl());
@@ -246,20 +251,21 @@ public final class HTMLParser {
         if (!Charset.isSupported(charSet)) {
             charSet = TextUtil.DEFAULT_CHARSET;
         }
-        final XMLInputSource in = new XMLInputSource(
-                null,
-                webResponse.getUrl().toString(),
-                null,
-                webResponse.getContentAsStream(),
-                charSet);
+
+        final InputStream content = webResponse.getContentAsStream();
+        final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, charSet);
 
         try {
+            page.registerParsingStart();
             domBuilder.parse(in);
         }
         catch (final XNIException e) {
             // extract enclosed exception
             final Throwable origin = extractNestedException(e);
             throw new RuntimeException("Failed parsing content from " + webResponse.getUrl(), origin);
+        }
+        finally {
+            page.registerParsingEnd();
         }
 
         addBodyToPageIfNecessary(page, true);

@@ -170,48 +170,6 @@ public class DocumentTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void documentWrite_AssignedToVar() throws Exception {
-        // IE accept use of detached function
-        final String[] expectedAlertsIE = {};
-        write_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
-
-        // but FF doesn't
-        final String[] expectedAlertsFF = {"exception occurred"};
-        write_AssignedToVar(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    private void write_AssignedToVar(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
-
-        final String content
-            = "<html><head><title>foo</title><script>\n"
-            + "function doTheFoo() {\n"
-            + "var d = document.writeln\n"
-            + "try {\n"
-            + "  d('foo')\n"
-            + "} catch (e) { alert('exception occurred') }\n"
-            + "  document.writeln('foo')\n"
-            + "}\n"
-            + "</script></head><body onload='doTheFoo()'>\n"
-            + "<p>hello world</p>\n"
-            + "</body></html>";
-
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
-
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void formArray() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -1448,18 +1406,22 @@ public class DocumentTest extends WebTestCase2 {
      */
     @Test
     public void write_InDOM() throws Exception {
-        final String mainContent
+
+        final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<script type='text/javascript'>\n"
             + "document.write('<a id=\"blah\">Hello World</a>');\n"
+            + "document.write('<a id=\"blah2\">Hello World 2</a>');\n"
             + "alert(document.getElementById('blah').tagName);\n"
             + "</script>\n"
+            + "<a id='blah3'>Hello World 3</a>\n"
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage firstPage = loadPage(mainContent, collectedAlerts);
-        assertEquals("First", firstPage.getTitleText());
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
+        assertEquals("First", page.getTitleText());
+        assertEquals(3, page.getElementsByTagName("a").getLength());
         assertEquals(new String[] {"A"}, collectedAlerts);
     }
 
@@ -1567,6 +1529,89 @@ public class DocumentTest extends WebTestCase2 {
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void write_AssignedToVar() throws Exception {
+
+        // IE accepts the use of detached functions
+        final String[] expectedAlertsIE = {};
+        write_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
+
+        // but FF doesn't
+        final String[] expectedAlertsFF = {"exception occurred"};
+        write_AssignedToVar(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void write_AssignedToVar(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTheFoo() {\n"
+            + "var d = document.writeln\n"
+            + "try {\n"
+            + "  d('foo')\n"
+            + "} catch (e) { alert('exception occurred') }\n"
+            + "  document.writeln('foo')\n"
+            + "}\n"
+            + "</script></head><body onload='doTheFoo()'>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(browserVersion, content, collectedAlerts);
+        assertEquals("foo", page.getTitleText());
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Verifies that calling document.write() after document parsing has finished results in an whole
+     * new page being loaded.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void write_WhenParsingFinished() throws Exception {
+        write_WhenParsingFinished(BrowserVersion.FIREFOX_2);
+        write_WhenParsingFinished(BrowserVersion.INTERNET_EXPLORER_6_0);
+        write_WhenParsingFinished(BrowserVersion.INTERNET_EXPLORER_7_0);
+    }
+
+    private void write_WhenParsingFinished(final BrowserVersion browserVersion) throws Exception {
+
+        final String html =
+              "<html><head><script>\n"
+            + "  function test() { document.write(1); document.write(2); document.close(); }\n"
+            + "</script></head>\n"
+            + "<body><span id='s' onclick='test()'>click</span></body></html>";
+
+        final List<String> actual = new ArrayList<String>();
+        HtmlPage page = loadPage(browserVersion, html, actual);
+        assertEquals("click", page.getBody().asText());
+
+        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
+        page = (HtmlPage) span.click();
+        assertEquals("12", page.getBody().asText());
+    }
+
+    /**
+     * Verifies that calls to document.open() are ignored while the page's HTML is being parsed.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void open_IgnoredDuringParsing() throws Exception {
+        final String html = "<html><body>1<script>document.open();document.write('2');</script>3</body></html>";
+        final HtmlPage page = loadPage(html);
+        assertEquals("123", page.getBody().asText());
     }
 
     /**

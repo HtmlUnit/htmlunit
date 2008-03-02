@@ -115,11 +115,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     private static final long serialVersionUID = 1779746292119944291L;
 
-    private       String originalCharset_;
-    private       Map<String, List<HtmlElement>> idMap_ = new HashMap<String, List<HtmlElement>>();
-    private       Map<String, List<HtmlElement>> nameMap_ = new HashMap<String, List<HtmlElement>>();
-    private       HtmlElement documentElement_;
-    private       HtmlElement elementWithFocus_;
+    private String originalCharset_;
+    private Map<String, List<HtmlElement>> idMap_ = new HashMap<String, List<HtmlElement>>();
+    private Map<String, List<HtmlElement>> nameMap_ = new HashMap<String, List<HtmlElement>>();
+    private HtmlElement documentElement_;
+    private HtmlElement elementWithFocus_;
+    private int parserCount_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
 
@@ -2070,4 +2071,27 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public boolean isOnbeforeunloadAccepted() {
         return executeEventHandlersIfNeeded(Event.TYPE_BEFORE_UNLOAD);
     }
+
+    /**
+     * Returns <tt>true</tt> if an HTML parser is operating on this page, adding content to it.
+     * @return <tt>true</tt> if an HTML parser is operating on this page, adding content to it
+     */
+    public boolean isBeingParsed() {
+        return parserCount_ > 0;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has started parsing some content for this page.
+     */
+    void registerParsingStart() {
+        parserCount_++;
+    }
+
+    /**
+     * Called by the HTML parser to let the page know that it has finished parsing some content for this page.
+     */
+    void registerParsingEnd() {
+        parserCount_--;
+    }
+
 }

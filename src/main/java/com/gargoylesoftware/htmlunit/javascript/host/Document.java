@@ -350,12 +350,25 @@ public class Document extends EventNode {
 
     /**
      * JavaScript function "write".
+     *
+     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
+     * a good description of the semantics of open(), write(), writeln() and close().
+     *
      * @param content the content to write
      */
     protected void write(final String content) {
 
         getLog().debug("write: " + content);
 
+        // If the page isn't currently being parsed (i.e. this call to write() or writeln()
+        // was triggered by an event, setTimeout(), etc), then the new content will replace
+        // the entire page. Basically, we make an implicit open() call.
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        if (!page.isBeingParsed()) {
+            writeInCurrentDocument_ = false;
+        }
+
+        // Add content to the content buffer.
         writeBuffer_.append(content);
 
         // If open() was called; don't write to doc yet -- wait for call to close().
@@ -379,7 +392,6 @@ public class Document extends EventNode {
 
         // Get the node at which the parsed content should be added.
         HtmlElement current;
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         final HtmlElement doc = page.getDocumentHtmlElement();
         HtmlElement body = page.getBody();
         if (body == null) {
@@ -681,39 +693,55 @@ public class Document extends EventNode {
     }
 
     /**
-     * javascript function "open".
-     * @param context The javascript context
-     * @param scriptable The scriptable
-     * @param args The arguments passed into the method.
-     * @param function The function.
-     * @return Nothing
+     * JavaScript function "open".
+     *
+     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
+     * a good description of the semantics of open(), write(), writeln() and close().
+     *
+     * @param context the JavaScript context
+     * @param scriptable the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return nothing
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_1.asp">
      * MSDN documentation</a>
      */
     public static Object jsxFunction_open(
-        final Context context, final Scriptable scriptable, final Object[] args,  final Function function) {
+        final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
 
+        // Any open() invocations are ignored during the parsing stage, because write() and
+        // writeln() invocations will directly append content to the current insertion point.
         final Document document = (Document) scriptable;
+        final HtmlPage page = (HtmlPage) document.getDomNodeOrDie();
+        if (page.isBeingParsed()) {
+            document.getLog().warn("Ignoring call to open() during the parsing stage.");
+            return null;
+        }
+
+        // We're not in the parsing stage; OK to continue.
         if (!document.writeInCurrentDocument_) {
-            document.getLog().warn("open() called when document is already open.");
+            document.getLog().warn("Function open() called when document is already open.");
         }
         document.writeInCurrentDocument_ = false;
+
         return null;
     }
 
     /**
-     * javascript function "close".
-     * @throws IOException If an IO problem occurs.
+     * JavaScript function "close".
+     *
+     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
+     * a good description of the semantics of open(), write(), writeln() and close().
+     *
+     * @throws IOException if an IO problem occurs
      */
-    public void jsxFunction_close()
-        throws IOException {
+    public void jsxFunction_close() throws IOException {
 
         if (writeInCurrentDocument_) {
             getLog().warn("close() called when document is not open.");
         }
         else {
-            final WebResponse webResponse
-                = new StringWebResponse(writeBuffer_.toString());
+            final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString());
             final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();

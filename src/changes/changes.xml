@@ -7,6 +7,12 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="sdanig">
+                JavaScript: ignore calls to document.open() during page parsing.
+            </action>
+            <action type="fix" dev="sdanig">
+                JavaScript: calling document.write() after a page has finished parsing results in overwriting the entire page.
+            </action>
             <action type="fix" dev="sdanig" id="1782719">
                 Handle script elements with src attributes containing "javascript:..." URLs.
             </action>
