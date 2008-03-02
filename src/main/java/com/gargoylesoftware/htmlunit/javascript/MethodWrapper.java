@@ -83,8 +83,9 @@ public class MethodWrapper extends ScriptableObject implements Function {
         clazz_ = clazz;
         method_ = clazz.getMethod(methodName, parameterTypes);
         jsTypeTags_ = new int[parameterTypes.length];
-        for (int i = 0; i < parameterTypes.length; i++) {
-            jsTypeTags_[i] = FunctionObject.getTypeTag(parameterTypes[i]);
+        int i = 0;
+        for (final Class< ? > klass : parameterTypes) {
+            jsTypeTags_[i++] = FunctionObject.getTypeTag(klass);
         }
     }
 
@@ -148,8 +149,9 @@ public class MethodWrapper extends ScriptableObject implements Function {
                     + ": expected " + jsTypeTags_.length + " got " + jsArgs.length);
         }
         final Object[] javaArgs = new Object[jsArgs.length];
-        for (int i = 0; i < jsArgs.length; i++) {
-            javaArgs[i] = FunctionObject.convertArg(context, scope, jsArgs[i], jsTypeTags_[i]);
+        int i = 0;
+        for (final Object object : jsArgs) {
+            javaArgs[i] = FunctionObject.convertArg(context, scope, object, jsTypeTags_[i++]);
         }
         return javaArgs;
     }

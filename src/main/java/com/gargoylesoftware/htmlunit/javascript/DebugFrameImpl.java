@@ -159,9 +159,7 @@ public class DebugFrameImpl implements DebugFrame {
                 // An anonymous function -- try to figure out how it was referenced.
                 // For example, someone may have set foo.prototype.bar = function() { ... };
                 // And then called fooInstance.bar() -- in which case it's "named" bar.
-                final Object[] ids = thisObj.getIds();
-                for (int i = 0; i < ids.length; i++) {
-                    final Object id = ids[i];
+                for (final Object id : thisObj.getIds()) {
                     if (id instanceof String) {
                         final String s = (String) id;
                         if (thisObj instanceof ScriptableObject) {
@@ -229,9 +227,7 @@ public class DebugFrameImpl implements DebugFrame {
      */
     private String getFirstLine() {
         int first = Integer.MAX_VALUE;
-        final int[] lines = this.functionOrScript_.getLineNumbers();
-        for (int i = 0; i < lines.length; i++) {
-            final int current = lines[i];
+        for (final int current : functionOrScript_.getLineNumbers()) {
             if (current < first) {
                 first = current;
             }

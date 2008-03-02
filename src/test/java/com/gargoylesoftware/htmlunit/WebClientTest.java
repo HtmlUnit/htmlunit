@@ -693,9 +693,7 @@ public class WebClientTest extends WebTestCase2 {
         final Page page = client.getPage(URL_FIRST);
         assertTrue("instanceof TextPage", page instanceof TextPage);
 
-        final List<Page> expectedPageCreationItems = Arrays.asList(new Page[] {
-            page
-        });
+        final List<Page> expectedPageCreationItems = Arrays.asList(new Page[] {page});
 
         assertEquals(expectedPageCreationItems, collectedPageCreationItems);
     }
@@ -992,9 +990,7 @@ public class WebClientTest extends WebTestCase2 {
         assertEquals("submit2", page.pressAccessKey('c').getAttributeValue("name"));
         assertEquals("submit1", page.pressAccessKey('b').getAttributeValue("name"));
 
-        final String[] expectedAlerts = {
-            "focus-0", "blur-0", "focus-2", "blur-2", "focus-1"
-        };
+        final String[] expectedAlerts = {"focus-0", "blur-0", "focus-2", "blur-2", "focus-1"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1014,9 +1010,7 @@ public class WebClientTest extends WebTestCase2 {
         assertEquals("submit1", page.tabToNextElement().getAttributeValue("name"));
         assertEquals("submit2", page.tabToNextElement().getAttributeValue("name"));
 
-        final String[] expectedAlerts = {
-            "focus-0", "blur-0", "focus-1", "blur-1", "focus-2"
-        };
+        final String[] expectedAlerts = {"focus-0", "blur-0", "focus-1", "blur-1", "focus-2"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1036,9 +1030,7 @@ public class WebClientTest extends WebTestCase2 {
         assertEquals("submit1", page.tabToPreviousElement().getAttributeValue("name"));
         assertEquals("submit0", page.tabToPreviousElement().getAttributeValue("name"));
 
-        final String[] expectedAlerts = {
-            "focus-2", "blur-2", "focus-1", "blur-1", "focus-0"
-        };
+        final String[] expectedAlerts = {"focus-2", "blur-2", "focus-1", "blur-1", "focus-0"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1120,8 +1112,7 @@ public class WebClientTest extends WebTestCase2 {
         final WebResponse webResponse = new StringWebResponse(
             "<html><head><title>first</title></head><body></body></html>");
 
-        final Page page = webClient.loadWebResponseInto(
-            webResponse, webClient.getCurrentWindow());
+        final Page page = webClient.loadWebResponseInto(webResponse, webClient.getCurrentWindow());
         assertTrue(HtmlPage.class.isInstance(page));
 
         final HtmlPage htmlPage = (HtmlPage) page;
