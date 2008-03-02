@@ -299,7 +299,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Set the parent node
+     * Sets the parent node.
      * @param parent the parent node
      */
     protected void setParentNode(final DomNode parent) {

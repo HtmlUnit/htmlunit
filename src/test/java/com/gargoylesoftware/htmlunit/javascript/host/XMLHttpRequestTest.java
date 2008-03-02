@@ -77,7 +77,6 @@ public class XMLHttpRequestTest extends WebTestCase2 {
     private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_COMPLETED);
 
     /**
-    /**
      * Tests synchronous use of XMLHttpRequest.
      * @throws Exception If the test fails.
      */
