@@ -44,9 +44,15 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.w3c.dom.Attr;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
+import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 
 /**
  * An XML element.
@@ -54,7 +60,7 @@ import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XmlElement extends DomNamespaceNode {
+public class XmlElement extends DomNamespaceNode implements Element {
 
     private static final long serialVersionUID = -8119109851558707854L;
 
@@ -293,6 +299,127 @@ public class XmlElement extends DomNamespaceNode {
             printWriter.print(StringEscapeUtils.escapeXml(((XmlAttr) attributes_.get(name)).getNodeValue()));
             printWriter.print("\"");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public org.w3c.dom.NamedNodeMap getAttributes() {
+        return new NamedNodeMap(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getAttribute(final String name) {
+        throw new UnsupportedOperationException("XmlElement.getAttribute is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getAttributeNS(final String namespaceURI, final String localName) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.getAttributeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr getAttributeNode(final String name) {
+        throw new UnsupportedOperationException("XmlElement.getAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr getAttributeNodeNS(final String namespaceURI, final String localName) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.getAttributeNodeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getElementsByTagName(final String name) {
+        throw new UnsupportedOperationException("XmlElement.getElementsByTagName is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public TypeInfo getSchemaTypeInfo() {
+        throw new UnsupportedOperationException("XmlElement.getSchemaTypeInfo is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean hasAttribute(final String name) {
+        throw new UnsupportedOperationException("XmlElement.hasAttribute is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean hasAttributeNS(final String namespaceURI, final String localName) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.hasAttributeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr removeAttributeNode(final Attr oldAttr) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.removeAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr setAttributeNode(final Attr newAttr) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.setAttributeNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr setAttributeNodeNS(final Attr newAttr) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.setAttributeNodeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setIdAttribute(final String name, final boolean isId) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.setIdAttribute is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setIdAttributeNS(final String namespaceURI, final String localName, final boolean isId)
+        throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.setIdAttributeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setIdAttributeNode(final Attr idAttr, final boolean isId) throws DOMException {
+        throw new UnsupportedOperationException("XmlElement.setIdAttributeNode is not yet implemented.");
     }
 
 }
