@@ -39,6 +39,11 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import java.util.Map;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
+import org.w3c.dom.TypeInfo;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -50,7 +55,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, String> {
+public class XmlAttr extends DomNamespaceNode implements Attr {
 
     private static final long serialVersionUID = 4832218455328064213L;
 
@@ -128,14 +133,10 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, Strin
     }
 
     /**
-     * Set the value of the attribute.
-     * @param value new value to be stored in this entry.
-     * @return old value corresponding to the entry.
+     * {@inheritDoc}
      */
-    public String setValue(final String value) {
-        final String oldValue = value_;
+    public void setValue(final String value) throws DOMException {
         value_ = value;
-        return oldValue;
     }
 
     /**
@@ -147,4 +148,35 @@ public class XmlAttr extends DomNamespaceNode implements Map.Entry<String, Strin
         super.setParentNode(parent);
     }
 
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Element getOwnerElement() {
+        throw new UnsupportedOperationException("XmlAttr.getOwnerElement is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public TypeInfo getSchemaTypeInfo() {
+        throw new UnsupportedOperationException("XmlAttr.getSchemaTypeInfo is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean getSpecified() {
+        throw new UnsupportedOperationException("XmlAttr.getSpecified is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean isId() {
+        throw new UnsupportedOperationException("XmlAttr.isId is not yet implemented.");
+    }
 }
