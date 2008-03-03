@@ -78,6 +78,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 public class XmlPage extends SgmlPage implements Document {
     private static final long serialVersionUID = -1430136241030261308L;
     private Node node_;
+    private Element documentElement_;
 
     /**
      * Create an instance.
@@ -317,10 +318,16 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public Element getDocumentElement() {
-        throw new UnsupportedOperationException("XmlPage.getDocumentElement is not yet implemented.");
+        if (documentElement_ == null) {
+            DomNode childNode = getFirstDomChild();
+            while (childNode != null && !(childNode instanceof Element)) {
+                childNode = childNode.getNextDomSibling();
+            }
+            documentElement_ = (Element) childNode;
+        }
+        return documentElement_;
     }
 
     /**
