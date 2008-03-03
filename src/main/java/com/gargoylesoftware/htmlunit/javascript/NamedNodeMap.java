@@ -39,9 +39,11 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.mozilla.javascript.Scriptable;
+import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
@@ -104,7 +106,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     public final Object get(final int index, final Scriptable start) {
         final NamedNodeMap map = (NamedNodeMap) start;
         if (index >= 0 && index < map.nodes_.size()) {
-            final HtmlAttr attr = (HtmlAttr) map.nodes_.getValue(index);
+            final DomNode attr = (DomNode) map.nodes_.getValue(index);
             return attr.getScriptObject();
         }
         else {
@@ -118,7 +120,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        final HtmlAttr attr = (HtmlAttr) nodes_.get(name);
+        final DomNode attr = (DomNode) nodes_.get(name);
         if (attr != null) {
             return attr.getScriptObject();
         }
@@ -133,7 +135,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return The attribute node, <code>null</code> if the attribute is not defined
      */
     public Object jsxFunction_getNamedItem(final String name) {
-        final HtmlAttr attr = (HtmlAttr) nodes_.get(name);
+        final DomNode attr = (DomNode) nodes_.get(name);
         if (attr != null) {
             return attr.getScriptObject();
         }
@@ -160,23 +162,23 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     /**
      * {@inheritDoc}
      */
-    public HtmlAttr getNamedItem(final String name) {
-        return (HtmlAttr) nodes_.get(name);
+    public Attr getNamedItem(final String name) {
+        return (Attr) nodes_.get(name);
     }
 
     /**
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public HtmlAttr getNamedItemNS(final String namespaceURI, final String localName) {
+    public Attr getNamedItemNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("NamedNodeMap.getOwnerElement is not yet implemented.");
     }
 
     /**
      * {@inheritDoc}
      */
-    public HtmlAttr item(final int index) {
-        return (HtmlAttr) nodes_.getValue(index);
+    public Attr item(final int index) {
+        return (Attr) nodes_.getValue(index);
     }
 
     /**
