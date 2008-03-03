@@ -44,6 +44,8 @@ import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.xml.XmlAttr;
+import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
  * A collection of nodes that can be accessed by name.
@@ -79,6 +81,18 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         }
         setParentScope(element.getScriptObject());
         setPrototype(getPrototype(getClass()));
+    }
+
+    /**
+     * Creates a new named node map for the specified element.
+     *
+     * @param element the owning element
+     */
+    public NamedNodeMap(final XmlElement element) {
+        nodes_ = new ListOrderedMap();
+        for (final XmlAttr attr : element.getAttributesMap().values()) {
+            nodes_.put(attr.getName(), attr);
+        }
     }
 
     /**
