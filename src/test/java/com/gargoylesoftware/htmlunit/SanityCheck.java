@@ -91,7 +91,7 @@ public class SanityCheck {
      * Test against a live server: Yahoo mail
      * @throws Exception If something goes wrong.
      */
-    public void yahooMail() throws Exception {
+    private void yahooMail() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://mail.yahoo.com/")));
     }
@@ -100,7 +100,7 @@ public class SanityCheck {
      * Test against a live server: Yahoo
      * @throws Exception If something goes wrong.
      */
-    public void yahoo() throws Exception {
+    private void yahoo() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://yahoo.com/")));
     }
@@ -109,7 +109,7 @@ public class SanityCheck {
      * Test against a live server: Yahoo
      * @throws Exception If something goes wrong.
      */
-    public void yahoo_Spanish() throws Exception {
+    private void yahoo_Spanish() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://edit.europe.yahoo.com/config/mail?.intl=es")));
     }
@@ -118,7 +118,7 @@ public class SanityCheck {
      * Test against a live server: IBM
      * @throws Exception If something goes wrong.
      */
-    public void ibm() throws Exception {
+    private void ibm() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         webClient.setRedirectEnabled(true);
         final HtmlPage page = (HtmlPage) webClient.getPage("http://www.ibm.com/");
@@ -129,7 +129,7 @@ public class SanityCheck {
      * Test against a live server: IBM Alphaworks
      * @throws Exception If something goes wrong.
      */
-    public void alphaWorks() throws Exception {
+    private void alphaWorks() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://www.alphaworks.ibm.com")));
     }
@@ -138,7 +138,7 @@ public class SanityCheck {
      * Test against a live server: CNN
      * @throws Exception If something goes wrong.
      */
-    public void cnn() throws Exception {
+    private void cnn() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://www.cnn.com")));
     }
@@ -147,7 +147,7 @@ public class SanityCheck {
      * Test against a live server: Toyota Canada
      * @throws Exception If something goes wrong.
      */
-    public void toyotaCanada() throws Exception {
+    private void toyotaCanada() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://www.toyota.ca")));
     }
@@ -156,7 +156,7 @@ public class SanityCheck {
      * Test against a live server: HtmlUnit page on sourceforge using https
      * @throws Exception If something goes wrong.
      */
-    public void sourceForge_secure() throws Exception {
+    private void sourceForge_secure() throws Exception {
         try {
             final WebClient webClient = new WebClient(BROWSER_VERSION);
             webClient.setPrintContentOnFailingStatusCode(true);
@@ -171,7 +171,7 @@ public class SanityCheck {
      * Test against a live server: Yahoo secure login
      * @throws Exception If something goes wrong.
      */
-    public void yahooLogin_secure() throws Exception {
+    private void yahooLogin_secure() throws Exception {
         try {
             final WebClient webClient = new WebClient(BROWSER_VERSION);
             final HtmlPage page = (HtmlPage) webClient.getPage("https://login.yahoo.com/");
@@ -187,7 +187,7 @@ public class SanityCheck {
      * Test against a live server: Amazon Canada
      * @throws Exception If something goes wrong.
      */
-    public void amazonCanada() throws Exception {
+    private void amazonCanada() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://www.amazon.ca/")));
     }
@@ -196,7 +196,7 @@ public class SanityCheck {
      * Test against a live server: CNN After hours
      * @throws Exception If something goes wrong.
      */
-    public void cnnAfterHours() throws Exception {
+    private void cnnAfterHours() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://money.cnn.com/markets/afterhours/")));
     }
@@ -205,7 +205,7 @@ public class SanityCheck {
      * Test against a live server: htmlunit.sourceforge.net
      * @throws Exception If something goes wrong.
      */
-    public void htmlUnitHomepage() throws Exception {
+    private void htmlUnitHomepage() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         assertTrue(HtmlPage.class.isInstance(webClient.getPage("http://htmlunit.sourceforge.net")));
     }
@@ -214,7 +214,7 @@ public class SanityCheck {
      * Test against a live server: Adobe Acrobat Reader download step 2
      * @throws Exception If something goes wrong.
      */
-    public void adobeAcrobatReaderDownloadStep2() throws Exception {
+    private void adobeAcrobatReaderDownloadStep2() throws Exception {
         final WebClient webClient = new WebClient();
         assertTrue(HtmlPage.class.isInstance(
             webClient.getPage("http://www.adobe.com/products/acrobat/readstep2.html")));
@@ -229,7 +229,7 @@ public class SanityCheck {
      * correctly for GET methods
      * @throws Exception If something goes wrong.
      */
-    public void getMethodWithParameters() throws Exception {
+    private void getMethodWithParameters() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
 
@@ -251,7 +251,7 @@ public class SanityCheck {
      * correctly for POST methods.
      * @throws Exception If something goes wrong.
      */
-    public void postMethodWithDuplicateParameters() throws Exception {
+    private void postMethodWithDuplicateParameters() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
 
@@ -275,7 +275,7 @@ public class SanityCheck {
      * correctly for POST methods.
      * @throws Exception If something goes wrong.
      */
-    public void postMethodWithParameters() throws Exception {
+    private void postMethodWithParameters() throws Exception {
         final WebClient webClient = new WebClient();
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
 
