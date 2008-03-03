@@ -7,6 +7,12 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="mguillem">
+                JavaScript: instanceof now works correctly with html elements (FF only).
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: property ownerDocument now defined on node.
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: ignore calls to document.open() during page parsing.
             </action>

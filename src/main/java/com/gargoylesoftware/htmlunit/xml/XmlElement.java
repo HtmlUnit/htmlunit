@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.collections.map.ListOrderedMap;
+import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -59,6 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class XmlElement extends DomNamespaceNode implements Element {
 
@@ -422,4 +424,13 @@ public class XmlElement extends DomNamespaceNode implements Element {
         throw new UnsupportedOperationException("XmlElement.setIdAttributeNode is not yet implemented.");
     }
 
+    /**
+     * Just for debug purposes.
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return ClassUtils.getShortClassName(getClass())
+            + "[<" + getTagName() + " ...>]";
+    }
 }

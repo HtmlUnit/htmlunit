@@ -967,10 +967,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public NamedNodeMap getAttributes() {
-        throw new UnsupportedOperationException("DomNode.getAttributes() is not yet implemented.");
+        return com.gargoylesoftware.htmlunit.javascript.NamedNodeMap.EMPTY_NODE_MAP;
     }
 
     /**

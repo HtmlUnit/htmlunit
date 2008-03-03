@@ -62,7 +62,11 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     private static final long serialVersionUID = -1910087049570242560L;
 
-    private ListOrderedMap nodes_;
+    private final ListOrderedMap nodes_ = new ListOrderedMap();
+    /**
+     * Empty instance
+     */
+    public static final org.w3c.dom.NamedNodeMap EMPTY_NODE_MAP = new NamedNodeMap();
 
     /**
      * Rhino requires default constructors.
@@ -77,7 +81,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      */
     public NamedNodeMap(final HtmlElement element) {
-        nodes_ = new ListOrderedMap();
         for (final HtmlAttr attr : element.getAttributesCollection()) {
             nodes_.put(attr.getName(), attr);
         }
@@ -91,7 +94,6 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      */
     public NamedNodeMap(final XmlElement element) {
-        nodes_ = new ListOrderedMap();
         for (final XmlAttr attr : element.getAttributesMap().values()) {
             nodes_.put(attr.getName(), attr);
         }
@@ -171,7 +173,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * Not yet implemented.
      */
     public Attr getNamedItemNS(final String namespaceURI, final String localName) {
-        throw new UnsupportedOperationException("NamedNodeMap.getOwnerElement is not yet implemented.");
+        throw new UnsupportedOperationException("NamedNodeMap.getNamedItemNS is not yet implemented.");
     }
 
     /**

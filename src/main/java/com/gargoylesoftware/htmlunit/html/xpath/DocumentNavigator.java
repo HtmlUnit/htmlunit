@@ -37,13 +37,14 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
 import org.jaxen.DefaultNavigator;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -51,7 +52,6 @@ import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.Util;
@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Mike Bowler
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  * @see HtmlUnitXPath
  */
 public class DocumentNavigator extends DefaultNavigator {
@@ -168,14 +169,8 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return A possibly-empty iterator (not null).
      */
     @Override
-    public Iterator<HtmlAttr> getAttributeAxisIterator(final Object contextNode) {
-        if (contextNode instanceof HtmlElement) {
-            return ((HtmlElement) contextNode).getAttributesCollection().iterator();
-        }
-        else {
-            final List<HtmlAttr> emptyList = Collections.emptyList();
-            return emptyList.iterator();
-        }
+    public Iterator<Attr> getAttributeAxisIterator(final Object contextNode) {
+        return new NamedNodeMapIterator(((Node) contextNode).getAttributes());
     }
 
     /**
@@ -266,7 +261,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * if the node is an attribute, or null otherwise.
      */
     public String getAttributeName(final Object object) {
-        return ((HtmlAttr) object).getName();
+        return ((Attr) object).getName();
     }
 
     /**
@@ -277,7 +272,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * prefixed) name if the node is an attribute, or null otherwise.
      */
     public String getAttributeQName(final Object object) {
-        return ((HtmlAttr) object).getName();
+        return ((Attr) object).getName();
     }
 
     /**
@@ -317,7 +312,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * @return true if the node is an attribute, false otherwise.
      */
     public boolean isAttribute(final Object object) {
-        return object instanceof HtmlAttr;
+        return object instanceof Attr;
     }
 
     /**
@@ -369,7 +364,7 @@ public class DocumentNavigator extends DefaultNavigator {
      * attribute, null otherwise.
      */
     public String getAttributeStringValue(final Object object) {
-        return (String) ((HtmlAttr) object).getHtmlValue();
+        return ((Attr) object).getValue();
     }
 
     /**
@@ -445,4 +440,37 @@ public class DocumentNavigator extends DefaultNavigator {
         }
     }
 
+}
+
+class NamedNodeMapIterator implements Iterator<Attr> {
+    private int index_ = 0;
+    private final NamedNodeMap nodeMap_;
+    
+    NamedNodeMapIterator(final NamedNodeMap nodeMap) {
+        nodeMap_ = nodeMap;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean hasNext() {
+        return index_ < nodeMap_.getLength();
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public Attr next() {
+        if (index_ >= nodeMap_.getLength()) {
+            return null;
+        }
+        else {
+            return (Attr) nodeMap_.item(index_++);
+        }
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public void remove() {
+        throw new UnsupportedOperationException("remove is not supported");
+    }
 }

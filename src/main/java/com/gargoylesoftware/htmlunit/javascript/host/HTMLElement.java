@@ -311,14 +311,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the owner document
-     * @return the document
-     */
-    public Object jsxGet_ownerDocument() {
-        return getWindow().jsxGet_document();
-    }
-
-    /**
      * Looks at attributes with the given name
      * {@inheritDoc}
      */

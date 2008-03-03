@@ -210,10 +210,8 @@ public class JavaScriptEngine implements Serializable {
                 configureConstantsPropertiesAndFunctions(config, window);
             }
             else {
-                final Scriptable prototype = configureClass(config, window);
+                Scriptable prototype = configureClass(config, window);
                 if (config.isJsObject()) {
-                    prototypes.put(config.getLinkedClass(), prototype);
-                    
                     // for FF, place object with prototype property in Window scope
                     if (!getWebClient().getBrowserVersion().isIE()) {
                         final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
@@ -221,6 +219,8 @@ public class JavaScriptEngine implements Serializable {
                         obj.setPrototype(prototype);
                         obj.setParentScope(window);
                         ScriptableObject.defineProperty(window, config.getClassName(), obj, ScriptableObject.DONTENUM);
+                        // use this instance in prototype map to allow instanceof to work
+                        prototype = obj;
 
                         if (obj.getClass() == Element.class && webWindow.getEnclosedPage() instanceof HtmlPage) {
                             final DomNode domNode =
@@ -230,6 +230,7 @@ public class JavaScriptEngine implements Serializable {
                             ((SimpleScriptable) obj).setDomNode(domNode);
                         }
                     }
+                    prototypes.put(config.getLinkedClass(), prototype);
                 }
                 prototypesPerJSName.put(config.getClassName(), prototype);
             }
@@ -240,7 +241,10 @@ public class JavaScriptEngine implements Serializable {
         for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
             final ClassConfiguration config = jsConfig.getClassConfiguration(name);
-            final Scriptable prototype = entry.getValue();
+            Scriptable prototype = entry.getValue();
+            if (prototype.getPrototype() != null) {
+                prototype = prototype.getPrototype(); // "double prototype" hack for FF
+            }
             if (!StringUtils.isEmpty(config.getExtendedClass())) {
                 final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
                 prototype.setPrototype(parentPrototype);

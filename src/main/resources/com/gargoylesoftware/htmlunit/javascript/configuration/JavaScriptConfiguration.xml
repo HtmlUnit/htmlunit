@@ -1036,7 +1036,6 @@
         <property name="outerText" notImplemented="true" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="ownerDocument" readable="true" writable="false"/>
         <property name="parentElement" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
@@ -1663,6 +1662,7 @@
         <property name="nodeName" readable="true" writable="false"/>
         <property name="nodeType" readable="true" writable="false"/>
         <property name="nodeValue" readable="true" writable="true"/>
+        <property name="ownerDocument" readable="true" writable="false"/>
         <property name="parentNode" readable="true" writable="false"/>
         <property name="previousSibling" readable="true" writable="false"/>
 

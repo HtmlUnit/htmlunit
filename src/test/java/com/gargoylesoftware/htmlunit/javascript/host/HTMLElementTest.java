@@ -183,34 +183,6 @@ public class HTMLElementTest extends WebTestCase2 {
      * @throws Exception on test failure
      */
     @Test
-    public void testOwnerDocument() throws Exception {
-        final String content = "<html>\n"
-            + "<head>\n"
-            + "    <title>test</title>\n"
-            + "<script>\n"
-            + "function test()\n"
-            + "{\n"
-            + "    alert(document == document.body.ownerDocument);\n"
-            + "    alert(document == document.getElementById('foo').ownerDocument);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<div id='foo'>bla</div>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final String[] expectedAlerts = {"true", "true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception on test failure
-     */
-    @Test
     public void testSetAttribute() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -1641,6 +1613,31 @@ public class HTMLElementTest extends WebTestCase2 {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testInstanceOf() throws Exception {
+        final String content = "<html><head><title>instanceof test</title>\n"
+            + "<script>\n"
+            + "function test()\n"
+            + "{\n"
+            + "    var d = document.getElementById('foo');\n"
+            + "    alert(d instanceof HTMLDivElement);\n"
+            + "    var link = document.getElementById('testLink');\n"
+            + "    alert(link instanceof HTMLAnchorElement);\n"
+            + "}\n"
+            + "</script></head><body onload='test()''>\n"
+            + "<div id='foo'>bla</div>\n"
+            + "<a id='testLink' href='foo'>bla</a>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"true", "true"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
     /**
      * @throws Exception If the test fails

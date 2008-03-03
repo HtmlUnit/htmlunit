@@ -659,4 +659,12 @@ public class Node extends SimpleScriptable {
             return eventListenersContainer_.getEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2));
         }
     }
+
+    /**
+     * Return the owner document
+     * @return the document
+     */
+    public Object jsxGet_ownerDocument() {
+        return getWindow().jsxGet_document();
+    }
 }

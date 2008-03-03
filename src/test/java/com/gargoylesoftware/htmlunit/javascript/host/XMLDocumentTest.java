@@ -595,4 +595,51 @@ public class XMLDocumentTest extends WebTestCase2 {
         loadPage(BrowserVersion.INTERNET_EXPLORER_7_0, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception If the test fails
+     */
+    @Test
+    public void testInstanceOf() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var x = (new DOMParser()).parseFromString('<x/>','text/xml');\n"
+            + "    alert(x instanceof XMLDocument);;\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <xml id='messageTableHeaders'>\n"
+            + "    <columns>\n"
+            + "      <column name='_checkbox'/>\n"
+            + "      <column name='itemStatus'/>\n"
+            + "    </columns>\n"
+            + "  </xml>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"true"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testEvaluate() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var s = '<toolbar><button id=\"compose_button\"/></toolbar>';\n"
+            + "    var xDoc = (new DOMParser()).parseFromString(s,'text/xml');\n"
+            + "    var r = xDoc.evaluate(\"button[@id='compose_button']\", xDoc.firstChild, null, 9, null);\n"
+            + "    alert(r.singleNodeValue.tagName);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        final String[] expectedAlerts = {"button"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
