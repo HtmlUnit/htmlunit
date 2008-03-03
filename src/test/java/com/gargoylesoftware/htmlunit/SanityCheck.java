@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class SanityCheck {
+public final class SanityCheck {
 
     private static final BrowserVersion BROWSER_VERSION = BrowserVersion.FIREFOX_2;
 
@@ -85,6 +85,9 @@ public class SanityCheck {
         test.yahooLogin_secure();
         test.amazonCanada();
         test.cnnAfterHours();
+    }
+
+    private SanityCheck() {
     }
 
     /**
