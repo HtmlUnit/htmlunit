@@ -43,8 +43,21 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Comment;
+import org.w3c.dom.DOMConfiguration;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
+import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -62,7 +75,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class XmlPage extends SgmlPage {
+public class XmlPage extends SgmlPage implements Document {
     private static final long serialVersionUID = -1430136241030261308L;
     private Node node_;
 
@@ -203,5 +216,246 @@ public class XmlPage extends SgmlPage {
     @Override
     public String asXml() {
         return getDocumentXmlElement().asXml();
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node adoptNode(final Node source) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.adoptNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr createAttribute(final String name) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.createAttribute is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Attr createAttributeNS(final String namespaceURI, final String qualifiedName) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.createAttributeNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public CDATASection createCDATASection(final String data) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.createCDATASection is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Comment createComment(final String data) {
+        throw new UnsupportedOperationException("XmlPage.createComment is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DocumentFragment createDocumentFragment() {
+        throw new UnsupportedOperationException("XmlPage.createDocumentFragment is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Element createElement(final String tagName) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.createElement is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Element createElementNS(final String namespaceURI, final String qualifiedName) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.createElementNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public EntityReference createEntityReference(final String name) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.createEntityReference is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public ProcessingInstruction createProcessingInstruction(final String target, final String data)
+        throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.createProcessingInstruction is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Text createTextNode(final String data) {
+        throw new UnsupportedOperationException("XmlPage.createTextNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DocumentType getDoctype() {
+        throw new UnsupportedOperationException("XmlPage.getDoctype is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Element getDocumentElement() {
+        throw new UnsupportedOperationException("XmlPage.getDocumentElement is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getDocumentURI() {
+        throw new UnsupportedOperationException("XmlPage.getDocumentURI is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DOMConfiguration getDomConfig() {
+        throw new UnsupportedOperationException("XmlPage.getDomConfig is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Element getElementById(final String elementId) {
+        throw new UnsupportedOperationException("XmlPage.getElementById is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public NodeList getElementsByTagName(final String tagname) {
+        throw new UnsupportedOperationException("XmlPage.getElementsByTagName is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DOMImplementation getImplementation() {
+        throw new UnsupportedOperationException("XmlPage.getImplementation is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getInputEncoding() {
+        throw new UnsupportedOperationException("XmlPage.getInputEncoding is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean getStrictErrorChecking() {
+        throw new UnsupportedOperationException("XmlPage.getStrictErrorChecking is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getXmlEncoding() {
+        throw new UnsupportedOperationException("XmlPage.getXmlEncoding is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public boolean getXmlStandalone() {
+        throw new UnsupportedOperationException("XmlPage.getXmlStandalone is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public String getXmlVersion() {
+        throw new UnsupportedOperationException("XmlPage.getXmlVersion is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node importNode(final Node importedNode, final boolean deep) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.importNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void normalizeDocument() {
+        throw new UnsupportedOperationException("XmlPage.normalizeDocument is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public Node renameNode(final Node n, final String namespaceURI, final String qualifiedName) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.renameNode is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setDocumentURI(final String documentURI) {
+        throw new UnsupportedOperationException("XmlPage.setDocumentURI is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setStrictErrorChecking(final boolean strictErrorChecking) {
+        throw new UnsupportedOperationException("XmlPage.setStrictErrorChecking is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setXmlStandalone(final boolean xmlStandalone) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.setXmlStandalone is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public void setXmlVersion(final String xmlVersion) throws DOMException {
+        throw new UnsupportedOperationException("XmlPage.setXmlVersion is not yet implemented.");
     }
 }
