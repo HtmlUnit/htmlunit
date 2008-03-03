@@ -47,6 +47,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -372,6 +374,46 @@ public class DomNodeTest extends WebTestCase2 {
         assertEquals(lis, page.getByXPath("//ul/li"));
 
         assertEquals(2, ((Number) p.getFirstByXPath("count(//li)")).intValue());
+    }
+
+    /**
+     * Test that element.selectNodes("/tagName") searches from root of the tree, not from that specific element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void selectNodes() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var child = doc.documentElement.firstChild;\n"
+            + "    alert(child.tagName);\n"
+            + "    alert(child.selectNodes('/title').length);\n"
+            + "    alert(child.selectNodes('title').length);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
+
+        final String[] expectedAlerts = {"book", "0", "1"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
