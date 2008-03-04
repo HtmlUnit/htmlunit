@@ -7,6 +7,13 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="update" dev="asashour">
+                DomNode.getByXPath(): when called with a string starting with slash, evaluation is relative
+                to the root element, not to the DomNode. You can add initial dot.
+            </action>
+            <action type="add" dev="asashour">
+                Add Xalan 2.7.0 as dependency, replacing Jaxen. 
+            </action>
             <action type="fix" dev="mguillem" id="1904189">
                 JavaScript: fixed IndexOutOfBoundsException in processing of IE @elif pre processor instruction.
             </action>

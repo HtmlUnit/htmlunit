@@ -204,9 +204,6 @@ public class XPathResultTest extends WebTestCase2 {
      */
     @Test
     public void notOr() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var expression = \".//*[@id='level1']/*[not(preceding-sibling::* or following-sibling::*)]\";\n"

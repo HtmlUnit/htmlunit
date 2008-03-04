@@ -45,13 +45,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.xml.transform.TransformerException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xml.utils.PrefixResolverDefault;
+import org.apache.xpath.XPath;
+import org.apache.xpath.XPathContext;
+import org.apache.xpath.objects.XBoolean;
+import org.apache.xpath.objects.XNodeSet;
+import org.apache.xpath.objects.XNumber;
+import org.apache.xpath.objects.XObject;
+import org.apache.xpath.objects.XString;
 import org.jaxen.JaxenException;
-import org.jaxen.Navigator;
 import org.mozilla.javascript.ScriptableObject;
-import org.w3c.dom.Document;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -60,7 +69,7 @@ import org.w3c.dom.UserDataHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
+import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath2;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -1263,15 +1272,62 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return See {@link XPath#selectNodes(Object)}
      * @throws JaxenException if the xpath expression can't be parsed/evaluated
      */
-    @SuppressWarnings("unchecked")
     public List< ? extends Object> getByXPath(final String xpathExpr) throws JaxenException {
         if (xpathExpr == null) {
             throw new NullPointerException("Null is not a valid xpath expression");
         }
 
-        final Navigator navigator = HtmlUnitXPath.buildSubtreeNavigator(this);
-        final HtmlUnitXPath xpath = new HtmlUnitXPath(xpathExpr, navigator);
-        return (List<Object>) xpath.selectNodes(this);
+        final List<Object> list = new ArrayList<Object>();
+        try {
+            final XObject result = evaluateXPath(this, xpathExpr);
+            
+            if (result instanceof XNodeSet) {
+                final NodeList nodelist = ((XNodeSet) result).nodelist();
+                for (int i = 0; i < nodelist.getLength(); i++) {
+                    list.add(nodelist.item(i));
+                }
+            }
+            else if (result instanceof XNumber) {
+                list.add(result.num());
+            }
+            else if (result instanceof XBoolean) {
+                list.add(result.bool());
+            }
+            else if (result instanceof XString) {
+                list.add(result.str());
+            }
+            else {
+                throw new RuntimeException("Unproccessed " + result.getClass().getName());
+            }
+        }
+        catch (final Exception e) {
+            throw new RuntimeException("Could not retrieve XPath", e);
+        }
+        return list;
+    }
+
+    /**
+     * Evaluate XPath string to an XObject.
+     * @param contextNode The node to start searching from.
+     * @param str A valid XPath string.
+     * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never be null.
+     */
+    private XObject evaluateXPath(final Node contextNode, final String str) throws TransformerException {
+        final XPathContext xpathSupport = new XPathContext(false);
+
+        final Node xpathExpressionContext;
+        if (contextNode.getNodeType() == Node.DOCUMENT_NODE) {
+            xpathExpressionContext = ((Document) contextNode).getDocumentElement();
+        }
+        else {
+            xpathExpressionContext = contextNode;
+        }
+        final PrefixResolverDefault prefixResolver = new PrefixResolverDefault(xpathExpressionContext);
+        final HtmlUnitXPath2 xpath = new HtmlUnitXPath2(str, null, prefixResolver, XPath.SELECT, null);
+        final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
+
+        return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
+
     }
 
     /**
@@ -1393,5 +1449,4 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
         }
     }
-
 }

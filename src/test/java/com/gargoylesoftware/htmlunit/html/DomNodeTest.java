@@ -364,7 +364,8 @@ public class DomNodeTest extends WebTestCase2 {
 
         final HtmlHead head = (HtmlHead) title.getParentDomNode();
         assertEquals(results, head.getByXPath("//title"));
-        assertEquals(results, head.getByXPath("/title"));
+        assertEquals(results, head.getByXPath("./title"));
+        assertEquals(0, head.getByXPath("/title").size());
         assertEquals(results, head.getByXPath("title"));
 
         final HtmlParagraph p = (HtmlParagraph) page.getFirstByXPath("//p");
@@ -433,7 +434,8 @@ public class DomNodeTest extends WebTestCase2 {
 
         final HtmlHead head = (HtmlHead) title.getParentDomNode();
         assertSame(title, head.getFirstByXPath("//title"));
-        assertSame(title, head.getFirstByXPath("/title"));
+        assertSame(title, head.getFirstByXPath("./title"));
+        assertNull(head.getFirstByXPath("/title"));
         assertSame(title, head.getFirstByXPath("title"));
 
         final HtmlParagraph p = (HtmlParagraph) page.getFirstByXPath("//p");

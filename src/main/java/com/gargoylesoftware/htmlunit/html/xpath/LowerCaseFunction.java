@@ -39,6 +39,12 @@ package com.gargoylesoftware.htmlunit.html.xpath;
 
 import java.util.List;
 
+import javax.xml.transform.TransformerException;
+
+import org.apache.xpath.XPathContext;
+import org.apache.xpath.functions.FunctionDef1Arg;
+import org.apache.xpath.objects.XObject;
+import org.apache.xpath.objects.XString;
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
@@ -54,8 +60,12 @@ import org.jaxen.function.StringFunction;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class LowerCaseFunction implements Function {
+public class LowerCaseFunction extends FunctionDef1Arg implements Function {
+
+    private static final long serialVersionUID = 5486916278740399118L;
+
     /**
      * {@inheritDoc}
      */
@@ -78,4 +88,13 @@ public class LowerCaseFunction implements Function {
         final String str = StringFunction.evaluate(obj, navigator);
         return str.toLowerCase();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public XObject execute(final XPathContext xctxt) throws TransformerException {
+        return new XString(((XString) getArg0AsString(xctxt)).str().toLowerCase());
+    }
+    
 }

@@ -479,7 +479,7 @@ public class HtmlForm extends ClickableElement {
                 throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
             }
             final List<HtmlRadioButtonInput> radios = (List<HtmlRadioButtonInput>) getByXPath(
-                    "//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
+                    ".//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
             );
             
             for (final HtmlRadioButtonInput input : radios) {
