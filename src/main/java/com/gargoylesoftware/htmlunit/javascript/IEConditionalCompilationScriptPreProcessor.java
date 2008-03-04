@@ -95,7 +95,6 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             final String remaining = sourceCode.substring(endPos + 3);
             sb.append(preProcess(htmlPage, remaining, sourceName, htmlElement));
         }
-
         return sb.toString();
     }
     
@@ -146,7 +145,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
 
     private String processIfs(String code) {
         code = code.replaceAll("@if\\s*\\(([^\\)]+)\\)", "if ($1) {");
-        code = code.replaceAll("@elif\\s*\\([^\\)]+\\)", "} else if ($1) {");
+        code = code.replaceAll("@elif\\s*\\(([^\\)]+)\\)", "} else if ($1) {");
         code = code.replaceAll("@else", "} else {");
         code = code.replaceAll("@end", "}");
         return code;
