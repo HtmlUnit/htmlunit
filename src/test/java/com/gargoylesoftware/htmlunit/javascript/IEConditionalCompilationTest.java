@@ -87,14 +87,10 @@ public class IEConditionalCompilationTest extends WebTestCase2 {
      */
     @Test
     public void ifTest() throws Exception {
-        String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
+        final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"5.6"});
         testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
-        
-        script = "/*@cc_onie=true;@if(@_win32)win=true;@elif(@_mac)mac=true;@end@*/\n"
-            + "alert(win)";
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"true"});
     }
     
     /**
@@ -152,9 +148,6 @@ public class IEConditionalCompilationTest extends WebTestCase2 {
      */
     @Test
     public void elif() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String script = "/*@cc_on @if(@_win32)type='win';@elif(@_mac)type='mac';@end alert(type); @*/";
         
         testScript(BrowserVersion.INTERNET_EXPLORER_7_0, script, new String[] {"win"});
