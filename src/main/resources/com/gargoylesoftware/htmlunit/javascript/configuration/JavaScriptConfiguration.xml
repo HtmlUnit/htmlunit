@@ -2116,9 +2116,12 @@
         <constant name="ORDERED_NODE_SNAPSHOT_TYPE"/>
         <constant name="ANY_UNORDERED_NODE_TYPE"/>
         <constant name="FIRST_ORDERED_NODE_TYPE"/>
+        <property name="booleanValue" readable="true" writable="false"/>
+        <property name="numberValue" readable="true" writable="false"/>
         <property name="resultType" readable="true" writable="false"/>
         <property name="singleNodeValue" readable="true" writable="false"/>
         <property name="snapshotLength" readable="true" writable="false"/>
+        <property name="stringValue" readable="true" writable="false"/>
         <function name="iterateNext"/>
         <function name="snapshotItem"/>
     </class>

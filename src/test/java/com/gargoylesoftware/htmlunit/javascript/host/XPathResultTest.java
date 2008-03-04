@@ -57,13 +57,13 @@ public class XPathResultTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testResultType() throws Exception {
-        testResultType("//div", "4");
-        testResultType("count(//div)", "1");
-        testResultType("count(//div)=2", "3");
+    public void resultType() throws Exception {
+        resultType("//div", "4");
+        resultType("count(//div)", "1");
+        resultType("count(//div)=2", "3");
     }
 
-    private void testResultType(final String expression, final String expectedAlert) throws Exception {
+    private void resultType(final String expression, final String expectedAlert) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -79,7 +79,7 @@ public class XPathResultTest extends WebTestCase2 {
             + "    text += '</xsl:stylesheet>';\n"
             + "    var parser=new DOMParser();\n"
             + "    var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    var result = doc.evaluate('" + expression + "',doc.documentElement, "
+            + "    var result = doc.evaluate('" + expression + "', doc.documentElement, "
             + "null, XPathResult.ANY_TYPE, null);\n"
             + "    alert(result.resultType);\n"
             + "  }\n"
@@ -95,7 +95,7 @@ public class XPathResultTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSnapshotType() throws Exception {
+    public void snapshotType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -111,7 +111,7 @@ public class XPathResultTest extends WebTestCase2 {
             + "    text += '</xsl:stylesheet>';\n"
             + "    var parser=new DOMParser();\n"
             + "    var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    var result = doc.evaluate('//div',doc.documentElement, null,"
+            + "    var result = doc.evaluate('//div', doc.documentElement, null,"
             + " XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n"
             + "    alert(result.resultType);\n"
             + "    for (var i=0; i < result.snapshotLength; i++) {\n"
@@ -131,7 +131,7 @@ public class XPathResultTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSingleNodeValue() throws Exception {
+    public void singleNodeValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -147,7 +147,7 @@ public class XPathResultTest extends WebTestCase2 {
             + "    text += '</xsl:stylesheet>';\n"
             + "    var parser=new DOMParser();\n"
             + "    var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    var result = doc.evaluate('//div',doc.documentElement, null,"
+            + "    var result = doc.evaluate('//div', doc.documentElement, null,"
             + " XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
             + "    alert(result.resultType);\n"
             + "    alert(result.singleNodeValue.getAttribute('id'));\n"
@@ -165,7 +165,7 @@ public class XPathResultTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testIterateNext() throws Exception {
+    public void iterateNext() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -181,7 +181,7 @@ public class XPathResultTest extends WebTestCase2 {
             + "    text += '</xsl:stylesheet>';\n"
             + "    var parser=new DOMParser();\n"
             + "    var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    var result = doc.evaluate('" + "//div" + "',doc.documentElement, "
+            + "    var result = doc.evaluate('" + "//div" + "', doc.documentElement, "
             + "null, XPathResult.ANY_TYPE, null);\n"
             + "    \n"
             + "    var thisNode = result.iterateNext();\n"
@@ -218,6 +218,47 @@ public class XPathResultTest extends WebTestCase2 {
             + "</body></html>";
 
         final String[] expectedAlerts = {"7"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Tests that evaluating an expression that starts with slash in a sub-element, evalutes relative
+     * to the root element, not to the specific sub-element.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void evaluate_slash() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += '  <html>\\n';\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '      <div id=\"id1\"><a/></div>\\n';\n"
+            + "    text += '      <div id=\"id2\"><a/></div>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    var parser=new DOMParser();\n"
+            + "    var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    var result = doc.evaluate(\"" + "//div[@id='id1']" + "\", doc.documentElement, "
+            + "null, XPathResult.ANY_TYPE, null);\n"
+            + "    \n"
+            + "    var divNode = result.iterateNext();\n"
+            + "    alert(divNode.getAttribute('id'));\n"
+            + "    var total = doc.evaluate(\"" + "count(//a)" + "\", doc.documentElement, "
+            + "null, XPathResult.NUMBER_TYPE, null);\n"
+            + "    alert(total.numberValue);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"id1", "2"};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);

@@ -220,4 +220,37 @@ public class XPathResult extends SimpleScriptable {
             return null;
         }
     }
+    
+    /**
+     * Returns the value of this number result.
+     * @return The value of this number result.
+     */
+    public double jsxGet_numberValue() {
+        if (resultType_ != NUMBER_TYPE) {
+            throw Context.reportRuntimeError("Can not get numberValue for type: " + resultType_);
+        }
+        return ((Number) result_.get(0)).doubleValue();
+    }
+
+    /**
+     * Returns the value of this boolean result.
+     * @return The value of this boolean result.
+     */
+    public boolean jsxGet_booleanValue() {
+        if (resultType_ != BOOLEAN_TYPE) {
+            throw Context.reportRuntimeError("Can not get booleanValue for type: " + resultType_);
+        }
+        return ((Boolean) result_.get(0)).booleanValue();
+    }
+
+    /**
+     * Returns the value of this string result.
+     * @return The value of this string result.
+     */
+    public String jsxGet_stringValue() {
+        if (resultType_ != STRING_TYPE) {
+            throw Context.reportRuntimeError("Can not get stringValue for type: " + resultType_);
+        }
+        return (String) result_.get(0);
+    }
 }
