@@ -222,45 +222,4 @@ public class XPathResultTest extends WebTestCase2 {
         loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
-    /**
-     * Tests that evaluating an expression that starts with slash in a sub-element, evalutes relative
-     * to the root element, not to the specific sub-element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void evaluate_slash() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
-            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
-            + "    text += '  <xsl:template match=\"/\">\\n';\n"
-            + "    text += '  <html>\\n';\n"
-            + "    text += '    <body>\\n';\n"
-            + "    text += '      <div id=\"id1\"><a/></div>\\n';\n"
-            + "    text += '      <div id=\"id2\"><a/></div>\\n';\n"
-            + "    text += '    </body>\\n';\n"
-            + "    text += '  </html>\\n';\n"
-            + "    text += '  </xsl:template>\\n';\n"
-            + "    text += '</xsl:stylesheet>';\n"
-            + "    var parser=new DOMParser();\n"
-            + "    var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    var result = doc.evaluate(\"" + "//div[@id='id1']" + "\", doc.documentElement, "
-            + "null, XPathResult.ANY_TYPE, null);\n"
-            + "    \n"
-            + "    var divNode = result.iterateNext();\n"
-            + "    alert(divNode.getAttribute('id'));\n"
-            + "    var total = doc.evaluate(\"" + "count(//a)" + "\", doc.documentElement, "
-            + "null, XPathResult.NUMBER_TYPE, null);\n"
-            + "    alert(total.numberValue);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"id1", "2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }
