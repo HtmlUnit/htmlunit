@@ -188,6 +188,7 @@ public class CacheTest extends WebTestCase2 {
      */
     @Test
     public void testMaxSizeMaintained() throws Exception {
+
         final String html = "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
             + "<script src='foo2.js' type='text/javascript'/>\n"
@@ -209,6 +210,9 @@ public class CacheTest extends WebTestCase2 {
 
         client.getPage(pageUrl);
         assertEquals(1, client.getCache().getSize());
+
+        client.getCache().clear();
+        assertEquals(0, client.getCache().getSize());
     }
 
 }

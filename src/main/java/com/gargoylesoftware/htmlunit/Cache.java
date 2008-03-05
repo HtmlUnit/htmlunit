@@ -137,7 +137,7 @@ public class Cache implements Serializable {
      * <tt>Last-Modified</tt> header with a date older than 10 minutes or with an <tt>Expires</tt> header
      * specifying expiration in more than 10 minutes.</p>
      *
-     * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">
+     * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">RFC 2616</a>
      * @param response the response to examine
      * @return <code>true</code> if the response should be considered as dynamic and therefore uncacheable
      */
@@ -246,6 +246,15 @@ public class Cache implements Serializable {
      */
     public int getSize() {
         return entries_.size();
+    }
+
+    /**
+     * Clears the cache.
+     */
+    public void clear() {
+        synchronized (entries_) {
+            entries_.clear();
+        }
     }
 
 }

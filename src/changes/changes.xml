@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="add" dev="sdanig">
+                Add method Cache.clear().
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added support for (undocumented) method CollectGarbage (IE only).
             </action>
