@@ -2596,4 +2596,29 @@ public class WindowTest extends WebTestCase2 {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testCollectGarbage() throws Exception {
+        testCollectGarbage(BrowserVersion.INTERNET_EXPLORER_6_0, "function");
+        testCollectGarbage(BrowserVersion.FIREFOX_2, "undefined");
+    }
+
+    private void testCollectGarbage(final BrowserVersion browser, final String expectedType) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(typeof CollectGarbage);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {expectedType};
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browser, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

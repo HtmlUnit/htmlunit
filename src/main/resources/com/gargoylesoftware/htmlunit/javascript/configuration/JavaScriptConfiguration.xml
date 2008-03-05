@@ -1923,6 +1923,9 @@
         </function>
         <function name="clearTimeout"/>
         <function name="close"/>
+        <function name="CollectGarbage">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
         <function name="confirm"/>
         <function name="createPopup">
             <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp"

@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="update" dev="mguillem">
+                JavaScript: added support for (undocumented) method CollectGarbage (IE only).
+            </action>
             <action type="update" dev="asashour">
                 DomNode.getByXPath(): when called with a string starting with slash, evaluation is relative
                 to the root element, not to the DomNode. You can add initial dot.

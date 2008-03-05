@@ -1112,4 +1112,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return style;
     }
 
+    /**
+     * An undocumented function of IE
+     */
+    public void jsxFunction_CollectGarbage() {
+        // nothing
+    }
 }
