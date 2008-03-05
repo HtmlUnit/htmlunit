@@ -61,11 +61,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class Dojo102Test extends WebTestCase2 {
 
+    private static final String GROUP_DELIMITER = "------------------------------------------------------------";
+
     /**
      * @throws Exception if an error occurs
      */
     @Test
     public void dojo() throws Exception {
+
+        // TODO: blocked by property enumeration order bug in Rhino, then some CSS stuff
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=419090
+        if (notYetImplemented()) {
+            return;
+        }
 
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
         final URL url = getClass().getClassLoader().getResource("dojo/1.0.2/util/doh/runner.html");
@@ -88,10 +96,126 @@ public class Dojo102Test extends WebTestCase2 {
         }
 
         final Iterator<HtmlElement> logs = logBody.getChildElements().iterator();
-        assertEquals(logs.next().asText(), "345 tests to run in 41 groups");
+        eq("345 tests to run in 41 groups", logs);
+        eq(GROUP_DELIMITER, logs);
 
-        // TODO: other assertions... not everything is working yet!
+        eq("GROUP \"tests._base._loader.bootstrap\" has 5 tests to run", logs);
+        eq("PASSED test: hasConsole", logs);
+        eq("PASSED test: hasDjConfig", logs);
+        eq("PASSED test: getObject", logs);
+        eq("PASSED test: exists", logs);
+        eq("PASSED test: evalWorks", logs);
+        eq(GROUP_DELIMITER, logs);
 
+        eq("GROUP \"tests._base._loader.loader\" has 3 tests to run", logs);
+        eq("PASSED test: baseUrl", logs);
+        eq("PASSED test: modulePaths", logs);
+        eq("PASSED test: moduleUrls", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base._loader.hostenv_browser\" has 1 test to run", logs);
+        eq("PASSED test: getText", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.array\" has 13 tests to run", logs);
+        eq("PASSED test: testIndexOf", logs);
+        eq("PASSED test: testIndexOfFromIndex", logs);
+        eq("PASSED test: testLastIndexOf", logs);
+        eq("PASSED test: testLastIndexOfFromIndex", logs);
+        eq("PASSED test: testForEach", logs);
+        eq("PASSED test: testForEach_str", logs);
+        eq("PASSED test: testEvery", logs);
+        eq("PASSED test: testEvery_str", logs);
+        eq("PASSED test: testSome", logs);
+        eq("PASSED test: testSome_str", logs);
+        eq("PASSED test: testFilter", logs);
+        eq("PASSED test: testFilter_str", logs);
+        eq("PASSED test: testMap", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.Color\" has 12 tests to run", logs);
+        eq("PASSED test: testColor1", logs);
+        eq("PASSED test: testColor2", logs);
+        eq("PASSED test: testColor3", logs);
+        eq("PASSED test: testColor4", logs);
+        eq("PASSED test: testColor5", logs);
+        eq("PASSED test: testColor6", logs);
+        eq("PASSED test: testColor7", logs);
+        eq("PASSED test: testColor8", logs);
+        eq("PASSED test: testColor9", logs);
+        eq("PASSED test: testColor10", logs);
+        eq("PASSED test: testColor11", logs);
+        eq("PASSED test: testColor12", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.lang\" has 13 tests to run", logs);
+        eq("PASSED test: mixin", logs);
+        eq("PASSED test: extend", logs);
+        eq("PASSED test: isObject", logs);
+        eq("PASSED test: isArray", logs);
+        eq("PASSED test: isArrayLike", logs);
+        eq("PASSED test: isString", logs);
+        eq("PASSED test: partial", logs);
+        eq("PASSED test: nestedPartial", logs);
+        eq("PASSED test: hitch", logs);
+        eq("PASSED test: hitchWithArgs", logs);
+        eq("PASSED test: hitchAsPartial", logs);
+        eq("PASSED test: _toArray", logs);
+        eq("PASSED test: clone", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.declare\" has 12 tests to run", logs);
+        eq("PASSED test: smokeTest", logs);
+        eq("PASSED test: smokeTest2", logs);
+        eq("PASSED test: smokeTestWithCtor", logs);
+        eq("PASSED test: smokeTestCompactArgs", logs);
+        eq("PASSED test: subclass", logs);
+        eq("PASSED test: subclassWithCtor", logs);
+        eq("PASSED test: mixinSubclass", logs);
+        eq("PASSED test: superclassRef", logs);
+        eq("PASSED test: inheritedCall", logs);
+        eq("PASSED test: inheritedExplicitCall", logs);
+        eq("PASSED test: inheritedMixinCalls", logs);
+        eq("PASSED test: mixinPreamble", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.connect\" has 10 tests to run", logs);
+        eq("PASSED test: smokeTest", logs);
+        eq("PASSED test: basicTest", logs);
+        eq("PASSED test: hubConnectDisconnect1000", logs);
+        eq("PASSED test: args4Test", logs);
+        eq("PASSED test: args3Test", logs);
+        eq("PASSED test: args2Test", logs);
+        eq("PASSED test: scopeTest1", logs);
+        eq("PASSED test: scopeTest2", logs);
+        eq("PASSED test: connectPublisher", logs);
+        eq("PASSED test: publishSubscribe1000", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.Deferred\" has 4 tests to run", logs);
+        eq("debug from dojo.Deferred callback", logs);
+        eq("PASSED test: callback", logs);
+        eq("PASSED test: errback", logs);
+        eq("PASSED test: callbackTwice", logs);
+        eq("PASSED test: addBoth", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.json\" has 1 test to run", logs);
+        eq("PASSED test: toAndFromJson", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"tests._base.html\" has 1 test to run", logs);
+        eq("57 tests to run in 1 groups", logs);
+        eq(GROUP_DELIMITER, logs);
+
+        eq("GROUP \"t\" has 57 tests to run", logs);
+        eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100').w);", logs);
+
+        // TODO: a gazillion more assertions...
+    }
+
+    private void eq(final String expected, final Iterator<HtmlElement> i) {
+        assertEquals(expected, i.next().asText());
     }
 
 }
