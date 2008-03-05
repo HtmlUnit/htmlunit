@@ -189,17 +189,17 @@ public class HTMLScriptElementTest extends WebTestCase2 {
     private void onReadyStateChange_Order(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <head>\n"
-            + "            <title>test</title>\n"
-            + "            <script defer=''>alert('3');</script>\n"
-            + "            <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
-            + "            <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
-            + "            <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"7\");'></script>\n"
-            + "            <script>alert('2')</script>\n"
-            + "        </head>\n"
-            + "        <body onload='alert(5)'></body>\n"
-            + "    </html>\n";
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>test</title>\n"
+            + "    <script defer=''>alert('3');</script>\n"
+            + "    <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
+            + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
+            + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"7\");'></script>\n"
+            + "    <script>alert('2')</script>\n"
+            + "  </head>\n"
+            + "  <body onload='alert(5)'></body>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
@@ -222,16 +222,16 @@ public class HTMLScriptElementTest extends WebTestCase2 {
     private void onReadyStateChange_Order_NoBody(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <head>\n"
-            + "            <title>test</title>\n"
-            + "            <script defer=''>alert('3');</script>\n"
-            + "            <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"5\");'>alert('4');</script>\n"
-            + "            <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
-            + "            <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'></script>\n"
-            + "            <script>alert('2')</script>\n"
-            + "        </head>\n"
-            + "    </html>\n";
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>test</title>\n"
+            + "    <script defer=''>alert('3');</script>\n"
+            + "    <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"5\");'>alert('4');</script>\n"
+            + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
+            + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'></script>\n"
+            + "    <script>alert('2')</script>\n"
+            + "  </head>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);

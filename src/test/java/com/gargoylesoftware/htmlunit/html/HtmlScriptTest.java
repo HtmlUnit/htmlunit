@@ -265,7 +265,7 @@ public class HtmlScriptTest extends WebTestCase2 {
             + "    <body onload='test()'>\n"
             + "        test\n"
             + "    </body>\n"
-            + "</html>\n";
+            + "</html>";
 
         final List<String> actual = new ArrayList<String>();
 

@@ -591,28 +591,28 @@ public class DocumentTest extends WebTestCase2 {
     private void appendChildAtDocumentLevel(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
-              "        <html>\n"
-            + "        <head>\n"
-            + "            <title>test</title>\n"
-            + "            <script>\n"
-            + "                function test() {\n"
-            + "                    var div = document.createElement('div');\n"
-            + "                    div.innerHTML = 'test';\n"
-            + "                    try {\n"
-            + "                        alert(document.childNodes.length); // 1\n"
-            + "                        document.appendChild(div); // Error in FF\n"
-            + "                        alert(document.childNodes.length); // 2\n"
-            + "                        alert(document.childNodes[0].tagName); // HTML\n"
-            + "                        alert(document.childNodes[1].tagName); // DIV\n"
-            + "                        alert(document.getElementsByTagName('div').length); // 1\n"
-            + "                    } catch(ex) {\n"
-            + "                        alert('exception');\n"
-            + "                    }\n"
-            + "                }\n"
-            + "            </script>\n"
-            + "        </head>\n"
-            + "        <body onload='test()'></body>\n"
-            + "        </html>\n";
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var div = document.createElement('div');\n"
+            + "      div.innerHTML = 'test';\n"
+            + "      try {\n"
+            + "        alert(document.childNodes.length); // 1\n"
+            + "        document.appendChild(div); // Error in FF\n"
+            + "        alert(document.childNodes.length); // 2\n"
+            + "        alert(document.childNodes[0].tagName); // HTML\n"
+            + "        alert(document.childNodes[1].tagName); // DIV\n"
+            + "        alert(document.getElementsByTagName('div').length); // 1\n"
+            + "      } catch(ex) {\n"
+            + "        alert('exception');\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
@@ -1439,30 +1439,30 @@ public class DocumentTest extends WebTestCase2 {
     private void write_Destination(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <head>\n"
-            + "            <script>alert(document.body);</script>\n"
-            + "            <script>document.write('<span id=\"s1\">1</span>');</script>\n"
-            + "            <script>alert(document.body);</script>\n"
-            + "            <title>test</title>\n"
-            + "            <script>document.write('<span id=\"s2\">2</span>');</script>\n"
-            + "        </head>\n"
-            + "        <body id='foo'>\n"
-            + "            <script>document.write('<span id=\"s3\">3</span>');</script>\n"
-            + "            <span id='s4'>4</span>\n"
-            + "            <script>document.write('<span id=\"s5\">5</span>');</script>\n"
-            + "            <script>\n"
-            + "            var s = '';\n"
-            + "            for(var n = document.body.firstChild; n; n = n.nextSibling) {\n"
-            + "                if(n.id) {\n"
-            + "                    if(s.length > 0) s+= ' ';\n"
-            + "                    s += n.id;\n"
-            + "                }\n"
-            + "            }\n"
-            + "            alert(s);\n"
-            + "            </script>\n"
-            + "        </body>\n"
-            + "    </html>\n";
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <script>document.write('<span id=\"s1\">1</span>');</script>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <title>test</title>\n"
+            + "    <script>document.write('<span id=\"s2\">2</span>');</script>\n"
+            + "  </head>\n"
+            + "  <body id='foo'>\n"
+            + "    <script>document.write('<span id=\"s3\">3</span>');</script>\n"
+            + "    <span id='s4'>4</span>\n"
+            + "    <script>document.write('<span id=\"s5\">5</span>');</script>\n"
+            + "    <script>\n"
+            + "      var s = '';\n"
+            + "      for(var n = document.body.firstChild; n; n = n.nextSibling) {\n"
+            + "        if(n.id) {\n"
+            + "          if(s.length > 0) s+= ' ';\n"
+            + "            s += n.id;\n"
+            + "        }\n"
+            + "      }\n"
+            + "      alert(s);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
@@ -1484,18 +1484,18 @@ public class DocumentTest extends WebTestCase2 {
     private void write_BodyAttributesKept(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <head>\n"
-            + "            <script>alert(document.body);</script>\n"
-            + "            <script>document.write('<span id=\"s1\">1</span>');</script>\n"
-            + "            <script>alert(document.body);</script>\n"
-            + "            <script>alert(document.body.id);</script>\n"
-            + "            <title>test</title>\n"
-            + "        </head>\n"
-            + "        <body id='foo'>\n"
-            + "            <script>alert(document.body.id);</script>\n"
-            + "        </body>\n"
-            + "    </html>\n";
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <script>document.write('<span id=\"s1\">1</span>');</script>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <script>alert(document.body.id);</script>\n"
+            + "    <title>test</title>\n"
+            + "  </head>\n"
+            + "  <body id='foo'>\n"
+            + "    <script>alert(document.body.id);</script>\n"
+            + "  </body>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
@@ -1516,16 +1516,16 @@ public class DocumentTest extends WebTestCase2 {
     private void write_ScriptExecutionOrder(final BrowserVersion version, final String... expected)
         throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <head>\n"
-            + "            <title>test</title>\n"
-            + "            <script>alert('1');</script>\n"
-            + "            <script>document.write('<scrip'+'t>alert(\"2\")</s'+'cript>');</script>\n"
-            + "        </head>\n"
-            + "        <body>\n"
-            + "            <script>document.write('<scrip'+'t>alert(\"3\")</s'+'cript>');</script>\n"
-            + "        </body>\n"
-            + "    </html>\n";
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>alert('1');</script>\n"
+            + "    <script>document.write('<scrip'+'t>alert(\"2\")</s'+'cript>');</script>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <script>document.write('<scrip'+'t>alert(\"3\")</s'+'cript>');</script>\n"
+            + "  </body>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
@@ -3270,14 +3270,14 @@ public class DocumentTest extends WebTestCase2 {
 
     private void noBodyTag(final BrowserVersion version, final String[] expected) throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <head>\n"
-            + "            <title>Test</title>\n"
-            + "            <script>alert('1: ' + document.body);</script>\n"
-            + "            <script defer=''>alert('2: ' + document.body);</script>\n"
-            + "            <script>window.onload = function() { alert('3: ' + document.body); }</script>\n"
-            + "        </head>\n"
-            + "    </html>\n";
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>alert('1: ' + document.body);</script>\n"
+            + "    <script defer=''>alert('2: ' + document.body);</script>\n"
+            + "    <script>window.onload = function() { alert('3: ' + document.body); }</script>\n"
+            + "  </head>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
@@ -3298,20 +3298,20 @@ public class DocumentTest extends WebTestCase2 {
 
     private void noBodyTag_IFrame(final BrowserVersion version, final String... expected) throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <head>\n"
-            + "            <title>Test</title>\n"
-            + "        </head>\n"
-            + "        <body>\n"
-            + "            <iframe id='i'></iframe>\n"
-            + "            <script>\n"
-            + "                alert('1: ' + document.getElementById('i').contentWindow.document.body);\n"
-            + "                window.onload = function() {\n"
-            + "                    alert('2: ' + document.getElementById('i').contentWindow.document.body);\n"
-            + "                };\n"
-            + "            </script>\n"
-            + "        </body>\n"
-            + "    </html>\n";
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <iframe id='i'></iframe>\n"
+            + "    <script>\n"
+            + "      alert('1: ' + document.getElementById('i').contentWindow.document.body);\n"
+            + "      window.onload = function() {\n"
+            + "        alert('2: ' + document.getElementById('i').contentWindow.document.body);\n"
+            + "      };\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);
@@ -3338,12 +3338,11 @@ public class DocumentTest extends WebTestCase2 {
             + "    document.fireEvent(\"onkeydown\")\n"
             + "  }\n"
             + " '>abc</span>\n"
-            + "</body></html>\n";
+            + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(version, html, actual);
         final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
         span.click();
         assertEquals(expected, actual);
     }
-
 }
