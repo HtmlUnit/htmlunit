@@ -1998,24 +1998,25 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * {@inheritDoc}
      */
-    protected void checkChildHierarchy(final DomNode childNode) throws DOMException {
-        if (childNode instanceof Element) {
+    @Override
+    protected void checkChildHierarchy(final org.w3c.dom.Node newChild) throws DOMException {
+        if (newChild instanceof Element) {
             if (getDocumentElement() != null) {
                 throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
                     "The Document may only have a single child Element.");
             }
         }
-        else if (childNode instanceof DocumentType) {
+        else if (newChild instanceof DocumentType) {
             if (getDoctype() != null) {
                 throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
                     "The Document may only have a single child DocumentType.");
             }
         }
-        else if (!((childNode instanceof Comment) || (childNode instanceof ProcessingInstruction))) {
+        else if (!((newChild instanceof Comment) || (newChild instanceof ProcessingInstruction))) {
             throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
-                "The Document may not have a child of this type: " + childNode.getNodeType());
+                "The Document may not have a child of this type: " + newChild.getNodeType());
         }
-        super.checkChildHierarchy(childNode);
+        super.checkChildHierarchy(newChild);
     }
 
     /**
