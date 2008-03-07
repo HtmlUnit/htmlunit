@@ -57,7 +57,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     private Map<String, String> localModifications_ = new HashMap<String, String>();
 
-
     /**
      * Create an instance. Javascript objects must have a default constructor.
      */
@@ -74,11 +73,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * {@inheritDoc}
+     *
      * This method does nothing as the object is read-only.
      */
     @Override
     protected void setStyleAttribute(final String name, final String newValue) {
-        //deliberately empty
+        // Empty.
     }
 
     void setLocalStyleAttribute(final String name, final String newValue) {
@@ -91,13 +91,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     protected SortedMap<String, String> getStyleMap(final boolean camelCase) {
         final SortedMap<String, String> styleMap = super.getStyleMap(camelCase);
-        for (final Map.Entry<String, String> entry : localModifications_.entrySet()) {
-            String key = entry.getKey();
-            if (camelCase) {
-                key = camelize(key);
+        if (localModifications_ != null) {
+            for (final Map.Entry<String, String> entry : localModifications_.entrySet()) {
+                String key = entry.getKey();
+                if (camelCase) {
+                    key = camelize(key);
+                }
+                final String value = entry.getValue();
+                styleMap.put(key, value);
             }
-            final String value = entry.getValue();
-            styleMap.put(key, value);
         }
         return styleMap;
     }
