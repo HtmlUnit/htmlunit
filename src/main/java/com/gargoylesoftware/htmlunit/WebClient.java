@@ -278,10 +278,9 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the object that will resolve all url requests <p />
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * This method is intended for unit testing HtmlUnit itself.  It is not expected
-     * to change but you shouldn't need to call it during normal use of HtmlUnit.
+     * Sets the object that will resolve all URL requests.
      *
      * @param webConnection The new web connection
      */
