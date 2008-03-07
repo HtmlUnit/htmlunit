@@ -1702,7 +1702,8 @@ public class HTMLElementTest extends WebTestCase2 {
         }
     }
 
-    private void testStyle(final BrowserVersion browserVersion, final String styleProperty, final String expectedAlert) throws Exception {
+    private void testStyle(final BrowserVersion browserVersion, final String styleProperty, final String expectedAlert)
+        throws Exception {
 
         final String content = "<html>\n"
             + "<head>\n"
