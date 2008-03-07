@@ -297,10 +297,12 @@ public class HttpWebConnection extends WebConnectionImpl {
                 pairWithFile.getContentType(), null) {
 
             /**
+             * {@inheritDoc}
+             *
              * This implementation overrides the super one by encoding filename
              * according to the page charset.
-             * @see http://issues.apache.org/jira/browse/HTTPCLIENT-293
-             * {@inheritDoc}
+             *
+             * @see <a href="http://issues.apache.org/jira/browse/HTTPCLIENT-293">HTTPCLIENT-293</a>
              */
             @Override
             protected void sendDispositionHeader(final OutputStream out) throws IOException {
