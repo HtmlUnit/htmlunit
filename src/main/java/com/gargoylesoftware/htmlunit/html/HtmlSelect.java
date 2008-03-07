@@ -258,13 +258,10 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Set the "selected" state of the specified option. If this "select" is
-     * single select then calling this will deselect all other options <p>
+     * Sets the "selected" state of the specified option. If this "select" element
+     * is single-select, then calling this method will deselect all other options.
      *
-     * Only options that are actually in the document may be selected. If you
-     * need to select an option that really isn't there (ie testing error
-     * cases) then use {@link #fakeSelectedAttribute(String)} or {@link
-     * #fakeSelectedAttribute(String[])} instead.
+     * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
      * @param optionValue The value of the option that is to change
@@ -281,13 +278,10 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Set the "selected" state of the specified option. If this "select" is
-     * single select then calling this will deselect all other options <p>
+     * Sets the "selected" state of the specified option. If this "select" element
+     * is single-select, then calling this method will deselect all other options.
      *
-     * Only options that are actually in the document may be selected. If you
-     * need to select an option that really isn't there (ie testing error
-     * cases) then use {@link #fakeSelectedAttribute(String)} or {@link
-     * #fakeSelectedAttribute(String[])} instead.
+     * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption The value of the option that is to change
