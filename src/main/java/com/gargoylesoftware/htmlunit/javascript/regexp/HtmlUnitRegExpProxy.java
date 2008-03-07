@@ -225,8 +225,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             jsFlags_ = "";
         }
         /**
-         * Convert JavaScript RegExp flags "img" to Java Pattern flags
-         * @param flagsStr the flags (a combination of i, m and g)
+         * Converts the current JavaScript RegExp flags to Java Pattern flags.
          * @return the Java Pattern flags
          */
         public int getJavaFlags() {
