@@ -64,7 +64,6 @@ public class WebRequestSettings {
     private Map<String, String> additionalHeaders_ = new HashMap<String, String>();
     private CredentialsProvider credentialsProvider_;
     private String charset_ = TextUtil.DEFAULT_CHARSET;
-    private String cookiePolicy_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List<KeyValuePair> requestParameters_ = Collections.emptyList();
@@ -289,21 +288,4 @@ public class WebRequestSettings {
         charset_ = charset;
     }
 
-    /**
-     * Gets the cookie policy to use to perform the request.
-     * @return the cookie policy.
-     */
-    public String getCookiePolicy() {
-        return cookiePolicy_;
-    }
-
-    /**
-     * Sets the cookie policy.
-     * @param cookiePolicy the new cookie policy.
-     * @deprecated
-     * @see WebClient#setCookiesEnabled(boolean)
-     */
-    public void setCookiePolicy(final String cookiePolicy) {
-        cookiePolicy_ = cookiePolicy;
-    }
 }

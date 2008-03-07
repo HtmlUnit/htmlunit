@@ -282,13 +282,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
             httpMethod.getParams().setBooleanParameter(HttpMethodParams.SINGLE_COOKIE_HEADER, true);
-            if (webRequestSettings.getCookiePolicy() != null) {
-                // TODO: remove this down the line; the setter is deprecated for now.
-                httpMethod.getParams().setCookiePolicy(webRequestSettings.getCookiePolicy());
-            }
-            else {
-                httpMethod.getParams().setCookiePolicy(WebClient.HTMLUNIT_COOKIE_POLICY);
-            }
+            httpMethod.getParams().setCookiePolicy(WebClient.HTMLUNIT_COOKIE_POLICY);
         }
         else {
             // Cookies are disabled.
