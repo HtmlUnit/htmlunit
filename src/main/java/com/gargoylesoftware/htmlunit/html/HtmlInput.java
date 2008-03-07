@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public abstract class HtmlInput extends FocusableElement implements DisabledElement, SubmittableElement {
+public abstract class HtmlInput extends ClickableElement implements DisabledElement, SubmittableElement {
 
     /** the HTML tag represented by this element */
     public static final String TAG_NAME = "input";

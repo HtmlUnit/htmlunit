@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlSelect extends FocusableElement implements DisabledElement, SubmittableElement {
+public class HtmlSelect extends ClickableElement implements DisabledElement, SubmittableElement {
 
     private static final long serialVersionUID = 7893240015923163203L;
 

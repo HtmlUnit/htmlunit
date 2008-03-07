@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public class HtmlAnchor extends FocusableElement {
+public class HtmlAnchor extends ClickableElement {
 
     private static final long serialVersionUID = 7968778206454737178L;
 

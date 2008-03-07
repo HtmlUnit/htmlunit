@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- *  Wrapper for the html element "textarea"
+ * Wrapper for the HTML element "textarea".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlTextArea extends FocusableElement implements DisabledElement, SubmittableElement {
+public class HtmlTextArea extends ClickableElement implements DisabledElement, SubmittableElement {
 
     private static final long serialVersionUID = 4572856255042499634L;
 

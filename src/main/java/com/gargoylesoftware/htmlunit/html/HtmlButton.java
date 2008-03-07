@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlButton extends FocusableElement implements DisabledElement, SubmittableElement {
+public class HtmlButton extends ClickableElement implements DisabledElement, SubmittableElement {
 
     private static final long serialVersionUID = 4828725767615187345L;
 
