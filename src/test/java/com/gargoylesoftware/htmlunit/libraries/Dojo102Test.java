@@ -37,14 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.net.URL;
 import java.util.Iterator;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -61,6 +62,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class Dojo102Test extends WebTestCase2 {
 
+    private Server server_;
+
     private static final String GROUP_DELIMITER = "------------------------------------------------------------";
 
     /**
@@ -76,8 +79,7 @@ public class Dojo102Test extends WebTestCase2 {
         }
 
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
-        final URL url = getClass().getClassLoader().getResource("dojo/1.0.2/util/doh/runner.html");
-        assertNotNull(url);
+        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/util/doh/runner.html";
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
@@ -218,4 +220,22 @@ public class Dojo102Test extends WebTestCase2 {
         assertEquals(expected, i.next().asText());
     }
 
+    /**
+     * Before
+     * @throws Exception if an error occurs
+     */
+    @Before
+    public void setUp() throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/dojo/1.0.2");
+    }
+
+    /**
+     * After
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
 }

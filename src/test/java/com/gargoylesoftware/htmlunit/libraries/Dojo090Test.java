@@ -37,14 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.net.URL;
 import java.util.Iterator;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -57,18 +58,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class Dojo090Test extends WebTestCase2 {
+
+    private Server server_;
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
     public void testDojo() throws Exception {
-
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
-        final URL url = getClass().getClassLoader().getResource("dojo/0.9.0/util/doh/runner.html");
-        assertNotNull(url);
+        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/util/doh/runner.html";
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
@@ -90,7 +92,24 @@ public class Dojo090Test extends WebTestCase2 {
         assertEquals(logs.next().asText(), "322 tests to run in 40 groups");
 
         // TODO: other assertions... not everything is working yet!
-
     }
 
+    /**
+     * Before
+     * @throws Exception if an error occurs
+     */
+    @Before
+    public void setUp() throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/dojo/0.9.0");
+    }
+
+    /**
+     * After
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void tearDown() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
+    }
 }
