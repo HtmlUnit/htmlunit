@@ -43,7 +43,8 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
- * A basic class to be implemented by {@link HtmlPage} and {@link XmlPage}.
+ * A basic class to be implemented by {@link com.gargoylesoftware.htmlunit.html.HtmlPage} and
+ * {@link com.gargoylesoftware.htmlunit.xml.XmlPage}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -54,9 +55,8 @@ public abstract class SgmlPage extends DomNode implements Page {
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
 
-
     /**
-     * Create an instance of SgmlPage
+     * Creates an instance of SgmlPage.
      *
      * @param webResponse The web response that was used to create this page
      * @param webWindow The window that this page is being loaded into.
@@ -147,5 +147,5 @@ public abstract class SgmlPage extends DomNode implements Page {
     public Page getPage() {
         return this;
     }
-    
+
 }
