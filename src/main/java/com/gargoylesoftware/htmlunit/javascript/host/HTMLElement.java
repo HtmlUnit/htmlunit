@@ -162,25 +162,24 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the style object for this element.
-     *
-     * @return The style object
+     * Returns the style object for this element.
+     * @return the style object for this element
      */
     public Object jsxGet_style() {
         return style_;
     }
 
     /**
-     * Returns the current style object for this element.
-     * @return The current style object
+     * Returns the current (calculated) style object for this element.
+     * @return the current (calculated) style object for this element
      */
     public Object jsxGet_currentStyle() {
-        return style_;
+        return getWindow().jsxFunction_getComputedStyle(this, null);
     }
 
     /**
      * Returns the runtime style object for this element.
-     * @return The runtime style object
+     * @return the runtime style object for this element
      */
     public Object jsxGet_runtimeStyle() {
         return style_;

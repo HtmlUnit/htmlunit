@@ -1671,15 +1671,15 @@ public class HTMLElementTest extends WebTestCase2 {
         loadPage(browser, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
      * @throws Exception If the test fails
      */
     @Test
     public void testCurrentStyle() throws Exception {
-        testCurrentStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
+        testStyle(BrowserVersion.INTERNET_EXPLORER_6_0, "currentStyle", "rgb(0, 0, 0)");
         try {
-            testCurrentStyle(BrowserVersion.FIREFOX_2);
+            testStyle(BrowserVersion.FIREFOX_2, "currentStyle", "");
             fail("'currentStyle' is defined for only IE");
         }
         catch (final Exception e) {
@@ -1687,11 +1687,23 @@ public class HTMLElementTest extends WebTestCase2 {
         }
     }
 
-    private void testCurrentStyle(final BrowserVersion browserVersion) throws Exception {
-        testIEStyle("currentStyle", browserVersion);
+    /**
+     * @throws Exception If the test fails
+     */
+    @Test
+    public void testRuntimeStyle() throws Exception {
+        testStyle(BrowserVersion.INTERNET_EXPLORER_6_0, "runtimeStyle", "");
+        try {
+            testStyle(BrowserVersion.FIREFOX_2, "runtimeStyle", "");
+            fail("'runtimeStyle' is defined for only IE");
+        }
+        catch (final Exception e) {
+            //expected
+        }
     }
-    
-    private void testIEStyle(final String styleProperty, final BrowserVersion browserVersion) throws Exception {
+
+    private void testStyle(final BrowserVersion browserVersion, final String styleProperty, final String expectedAlert) throws Exception {
+
         final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1704,29 +1716,10 @@ public class HTMLElementTest extends WebTestCase2 {
             + "<div id='myDiv'></div>\n"
             + "</body></html>";
         
-        final String[] expectedAlerts = {""};
+        final String[] expectedAlerts = {expectedAlert};
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browserVersion, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception If the test fails
-     */
-    @Test
-    public void testRuntimeStyle() throws Exception {
-        testRuntimeStyle(BrowserVersion.INTERNET_EXPLORER_6_0);
-        try {
-            testRuntimeStyle(BrowserVersion.FIREFOX_2);
-            fail("'runtimeStyle' is defined for only IE");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-
-    private void testRuntimeStyle(final BrowserVersion browserVersion) throws Exception {
-        testIEStyle("runtimeStyle", browserVersion);
     }
 
     /**
