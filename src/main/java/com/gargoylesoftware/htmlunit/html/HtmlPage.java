@@ -848,50 +848,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Many html elements are "tabbable" and can have a "tabindex" attribute
-     * that determines the order in which the components are navigated when
-     * pressing the tab key. To ensure good usability for keyboard navigation,
-     * all tabbable elements should have the tabindex attribute set.<p>
-     *
-     * Assert that all tabbable elements have a valid value set for "tabindex".
-     * If they don't then throw an exception as per {@link
-     * WebClient#assertionFailed(String)}
-     *
-     * @deprecated
-     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
-     */
-    public void assertAllTabIndexAttributesSet() {
-        WebAssert.assertAllTabIndexAttributesSet(this);
-    }
-
-    /**
-     * Many html components can have an "accesskey" attribute which defines a
-     * hot key for keyboard navigation. Assert that all access keys (mnemonics)
-     * in this page are unique. If they aren't then throw an exception as per
-     * {@link WebClient#assertionFailed(String)}
-     *
-     * @deprecated
-     * @see WebAssert#assertAllAccessKeyAttributesUnique(HtmlPage)
-     */
-    public void assertAllAccessKeyAttributesUnique() {
-        WebAssert.assertAllAccessKeyAttributesUnique(this);
-    }
-
-    /**
-     * Each html element can have an id attribute and by definition, all ids
-     * must be unique within the document. <p>
-     *
-     * Assert that all ids in this page are unique. If they aren't then throw
-     * an exception as per {@link WebClient#assertionFailed(String)}
-     *
-     * @deprecated
-     * @see WebAssert#assertAllIdAttributesUnique(HtmlPage)
-     */
-    public void assertAllIdAttributesUnique() {
-        WebAssert.assertAllIdAttributesUnique(this);
-    }
-
-    /**
      * Execute the specified javascript within the page.
      * The usage would be similar to what can be achieved to execute javascript in the current page
      * by entering a "javascript:...some js code..." in the url field of a "normal" browser.
@@ -903,7 +859,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * the previous page) and a javascript result object.
      */
     public ScriptResult executeJavaScript(final String sourceCode) {
-
         return executeJavaScriptIfPossible(sourceCode, "injected script", 1);
     }
 
@@ -1823,7 +1778,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Move the focus to the specified component.  This will trigger any relevant javascript
+     * Move the focus to the specified component. This will trigger any relevant JavaScript
      * event handlers.
      *
      * @param newElement The element that will receive the focus, use <code>null</code> to remove focus from any element
@@ -1832,7 +1787,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @see #tabToNextElement()
      * @see #tabToPreviousElement()
      * @see #pressAccessKey(char)
-     * @see #assertAllTabIndexAttributesSet()
+     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
      */
     public boolean moveFocusToElement(final HtmlElement newElement) {
         if (elementWithFocus_ == newElement) {

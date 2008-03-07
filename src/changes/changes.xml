@@ -8,6 +8,10 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="update" dev="sdanig">
+                Remove deprecated methods in HtmlPage: assertAllIdAttributesUnique(), assertAllAccessKeyAttributesUnique(),
+                assertAllTabIndexAttributesSet() (use corresponding methods in WebAssert instead).
+            </action>
+            <action type="update" dev="sdanig">
                 Remove deprecated WebRequestSettings.setCookiePolicy() and getCookiePolicy().
             </action>
             <action type="fix" dev="sdanig">
