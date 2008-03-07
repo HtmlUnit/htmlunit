@@ -191,7 +191,8 @@ public class Node extends SimpleScriptable {
             
             //if the parentNode has null parentNode in IE,
             //create a DocumentFragment to be the parentNode's parentNode.
-            if (!(this instanceof DocumentFragment) && parentNode.getParentDomNode() == null
+            if (!(parentNode instanceof SgmlPage)
+                    && !(this instanceof DocumentFragment) && parentNode.getParentDomNode() == null
                     && getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment =
                     ((SgmlPage) parentNode.getPage()).createDomDocumentFragment();
@@ -203,8 +204,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Duplicate an XML node
-     * @param deep If true, recursively clone all descendants.  Otherwise,
-     * just clone this node.
+     * @param deep If true, recursively clone all descendants.  Otherwise, just clone this node.
      * @return The newly cloned node.
      */
     public Object jsxFunction_cloneNode(final boolean deep) {
