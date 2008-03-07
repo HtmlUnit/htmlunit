@@ -4074,4 +4074,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         }
         return false;
     }
+
+    /**
+     * Just for debug purposes.
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final String style = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
+        return "CSSStyleDeclaration for '" + style + "'";
+    }
+
 }
