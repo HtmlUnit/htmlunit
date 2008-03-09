@@ -68,7 +68,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      * @throws Exception if test fails
      */
     @Test
-    public void testSimplePath() throws Exception {
+    public void simplePath() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body><a href='foo.html' id='myLink'>foo</a></body>\n"
             + "</html>";
@@ -85,7 +85,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      * @throws Exception if test fails
      */
     @Test
-    public void testXPathFromElement() throws Exception {
+    public void xpathFromElement() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body><a href='foo.html' id='myLink'>foo</a></body>\n"
             + "</html>";
@@ -103,7 +103,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testElementOrder() throws Exception {
+    public void elementOrder() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
             + "</script></head><body>\n"
@@ -125,7 +125,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      * @throws Exception if test fails
      */
     @Test
-    public void testWhenJSChangesPage() throws Exception {
+    public void whenJSChangesPage() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function addOption() {\n"
@@ -161,7 +161,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testListAttributesResult() throws Exception {
+    public void listAttributesResult() throws Exception {
         final String content
             = "<html><body>\n"
             + "<img src='1.png'>\n"
@@ -194,7 +194,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOptionText() throws Exception {
+    public void optionText() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var expr = 'string(//option)';\n"
@@ -219,7 +219,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      * @throws Exception if test fails
      */
     @Test
-    public void testOptionText_getFirstByXPath() throws Exception {
+    public void optionText_getFirstByXPath() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body><form name='foo'>\n"
             + "<select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
@@ -242,7 +242,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      * @throws Exception if test fails
      */
     @Test
-    public void testFollowingAxis() throws Exception {
+    public void followingAxis() throws Exception {
         final String content = "<html><title>XPath tests</title><body>\n"
             + "<table id='table1'>\n"
             + "<tr id='tr1'>\n"
@@ -261,15 +261,15 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
         final HtmlElement tr2 = page.getHtmlElementById("tr2");
         final HtmlElement td21 = page.getHtmlElementById("td21");
         final HtmlElement td22 = page.getHtmlElementById("td22");
-        testXPath(page, "//*[contains(.,'a4')]/following::td[.='c']", new Object[] {td22});
+        xpath(page, "//*[contains(.,'a4')]/following::td[.='c']", new Object[] {td22});
 
-        testXPath(page, "//body/following::*", new Object[] {});
-        testXPath(page, "//html/following::*", new Object[] {});
-        testXPath(page, "//table/following::*", new Object[] {});
-        testXPath(page, "//td[@id='td11']/following::*", new Object[] {td12, tr2, td21, td22});
+        xpath(page, "//body/following::*", new Object[] {});
+        xpath(page, "//html/following::*", new Object[] {});
+        xpath(page, "//table/following::*", new Object[] {});
+        xpath(page, "//td[@id='td11']/following::*", new Object[] {td12, tr2, td21, td22});
     }
     
-    private void testXPath(final HtmlPage page, final String xpathExpr, final Object[] expectedNodes) throws Exception {
+    private void xpath(final HtmlPage page, final String xpathExpr, final Object[] expectedNodes) throws Exception {
         assertEquals(Arrays.asList(expectedNodes), page.getByXPath(xpathExpr));
     }
     
@@ -277,7 +277,7 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testID() throws Exception {
+    public void id() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<div><a href='link.html' id='test'></div>\n"
