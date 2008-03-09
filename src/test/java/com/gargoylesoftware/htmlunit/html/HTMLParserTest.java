@@ -63,7 +63,7 @@ public class HTMLParserTest extends WebTestCase2 {
      * @throws Exception failure
      */
     @Test
-    public void testSimpleHTMLString() throws Exception {
+    public void simpleHTMLString() throws Exception {
         final WebClient webClient = new WebClient();
         final WebResponse webResponse = new StringWebResponse(
             "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>");
@@ -82,7 +82,7 @@ public class HTMLParserTest extends WebTestCase2 {
      * @throws Exception failure
      */
     @Test
-    public void testBadlyFormedHTML() throws Exception {
+    public void badlyFormedHTML() throws Exception {
         final String content
             = "<html><head><title>first</title>\n"
             + "<script>\n"
@@ -116,7 +116,7 @@ public class HTMLParserTest extends WebTestCase2 {
      * @throws Exception failure
      */
     @Test
-    public void testUnknownTagInHead() throws Exception {
+    public void unknownTagInHead() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -154,11 +154,12 @@ public class HTMLParserTest extends WebTestCase2 {
      * @throws Exception failure
      */
     @Test
-    public void testHtmlUnitHomePage() throws Exception {
+    public void htmlUnitHomePage() throws Exception {
         final HtmlPage page = loadUrl("http://htmlunit.sourceforge.net");
         if (page != null) {
             // No connectivity issues.
-            final String stringVal = page.getFirstByXPath("//div[@id='footer']/div[@class='xright']").toString().trim();
+            final String stringVal =
+                ((HtmlDivision) page.getFirstByXPath("//div[@id='footer']/div[@class='xright']")).asText().trim();
             assertTrue(stringVal.matches("\u00A9 2002-\\d\\d\\d\\d Gargoyle Software Inc."));
         }
     }
@@ -168,7 +169,7 @@ public class HTMLParserTest extends WebTestCase2 {
      * @exception Exception If the test fails
      */
     @Test
-    public void testBadTagInHead() throws Exception {
+    public void badTagInHead() throws Exception {
         final String htmlContent = "<html>\n" + "<head><foo/>\n<title>foo\n</head>\n"
                 + "<body>\nfoo\n</body>\n</html>";
 
