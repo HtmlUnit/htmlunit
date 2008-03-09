@@ -63,7 +63,7 @@ import org.apache.xpath.res.XPATHErrorResources;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlUnitXPath2 {
+public class HtmlUnitXPath {
 
     private Expression mainExp_;
 
@@ -93,7 +93,7 @@ public class HtmlUnitXPath2 {
      *
      * @throws TransformerException if syntax or other error.
      */
-    public HtmlUnitXPath2(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
+    public HtmlUnitXPath(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
             final int type, ErrorListener errorListener) throws TransformerException {
         initFunctionTable();
         if (errorListener == null) {
