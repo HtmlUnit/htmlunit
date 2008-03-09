@@ -37,12 +37,15 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -188,21 +191,49 @@ public class HtmlUnitXPathTest extends WebTestCase2 {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testOptionText() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var expr = 'string(//option)';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    var value = result.stringValue;\n"
+            + "    for (i=0; i < value.length; i++) {\n"
+            + "      alert(value.charCodeAt(i));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Test if option/text() is cleaned like other text()
      * @throws Exception if test fails
      */
     @Test
-    public void testOptionText() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
+    public void testOptionText_getFirstByXPath() throws Exception {
         final String content = "<html><head><title>Test page</title></head>\n"
             + "<body><form name='foo'>\n"
             + "<select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(content);
-        assertEquals("foo and foo", page.getFirstByXPath("string(//option)"));
+        final String value = (String) page.getFirstByXPath("string(//option)");
+        final int[] expectedValues = {102, 111, 111, 160, 97, 110, 100, 160, 102, 111, 111};
+        int index = 0;
+        for (final int v : expectedValues) {
+            if (value.codePointAt(index++) != v) {
+                fail();
+            }
+        }
     }
     
     /**

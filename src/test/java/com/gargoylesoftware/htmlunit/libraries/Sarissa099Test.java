@@ -90,7 +90,7 @@ public class Sarissa099Test extends WebTestCase2 {
     public void testSarissa() throws Exception {
         //expected failure of SarissaTestCase.testGetTextWithCdata
         //see XMLDocumentTest.testLoadXML_XMLSpaceAttribute
-        //It should be '+++++++++++++++F++' (depends on property order in Rhino) 
+        //It should be '+++++++++++++++F++' (should be fixed after Rhino "properties order" issue)
         test("SarissaTestCase", "++++++F+++++++++++");
     }
 
