@@ -52,11 +52,14 @@ import org.junit.Test;
 import org.mortbay.jetty.Server;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -85,7 +88,9 @@ public class Sarissa099Test extends WebTestCase2 {
      */
     @Test
     public void testSarissa() throws Exception {
-        test("SarissaTestCase");
+        //expected failure of SarissaTestCase.testGetTextWithCdata
+        //see XMLDocumentTest.testLoadXML_XMLSpaceAttribute
+        test("SarissaTestCase", "+++++++++++++++F++");
     }
 
     /**
@@ -142,19 +147,48 @@ public class Sarissa099Test extends WebTestCase2 {
         test(BrowserVersion.FIREFOX_2, testName);
     }
 
-    private void test(final BrowserVersion browserVersion, final String testName) throws Exception {
-        final WebClient client = new WebClient(browserVersion);
+    /**
+     * @param expectedResult in the form of "+++F+++" (see the results in a real browser).
+     */
+    private void test(final String testName, final String expectedResult) throws Exception {
+        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, testName, expectedResult);
+        test(BrowserVersion.FIREFOX_2, testName, expectedResult);
+    }
 
-        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
-        final HtmlPage page = (HtmlPage) client.getPage(url);
-        final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
-        button.click();
+    private void test(final BrowserVersion browserVersion, final String testName) throws Exception {
+        final HtmlPage page = getSarissaPage(browserVersion);
         
         final List< ? > divList =
             page.getByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]");
         assertEquals(1, divList.size());
         final HtmlDivision div = (HtmlDivision) divList.get(0);
         assertEquals("OK!", div.asText());
+    }
+
+    /**
+     * @param expectedResult in the form of "+++F+++" (see the results in a real browser).
+     */
+    private void test(final BrowserVersion browserVersion, final String testName, final String expectedResult)
+        throws Exception {
+        final HtmlPage page = getSarissaPage(browserVersion);
+        
+        final HtmlAnchor anchor =
+            (HtmlAnchor) page.getFirstByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']");
+        final StringBuilder builder = new StringBuilder();
+        for (Node node = anchor.getNextSibling().getNextSibling(); node instanceof DomText;
+            node = node.getNextSibling()) {
+            builder.append(((DomText) node).asText());
+        }
+        assertEquals(expectedResult, builder.toString());
+    }
+
+    private HtmlPage getSarissaPage(final BrowserVersion browserVersion) throws Exception {
+        final WebClient client = new WebClient(browserVersion);
+        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
+        final HtmlPage page = (HtmlPage) client.getPage(url);
+        ((HtmlButton) page.getFirstByXPath("//button")).click();
+        return page;
     }
 
     /**

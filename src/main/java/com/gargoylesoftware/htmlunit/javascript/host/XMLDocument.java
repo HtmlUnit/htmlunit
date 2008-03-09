@@ -43,7 +43,6 @@ import java.util.List;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
-import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -56,7 +55,6 @@ import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
@@ -277,12 +275,7 @@ public class XMLDocument extends Document {
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
         final HTMLCollection collection = new HTMLCollection(this);
-        try {
-            collection.init(getDomNodeOrDie(), new HtmlUnitXPath(expression));
-        }
-        catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Failed to initialize collection 'selectNodes': " + e.getMessage());
-        }
+        collection.init(getDomNodeOrDie(), expression);
         return collection;
     }
 
@@ -310,14 +303,7 @@ public class XMLDocument extends Document {
     @Override
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
-        try {
-            final String xpath = "//" + tagName;
-            collection.init(getDomNodeOrDie().getFirstDomChild(), new HtmlUnitXPath(xpath));
-        }
-        catch (final JaxenException e) {
-            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
-            throw Context.reportRuntimeError(msg + e.getMessage());
-        }
+        collection.init(getDomNodeOrDie().getFirstDomChild(), "//" + tagName);
         return collection;
     }
 

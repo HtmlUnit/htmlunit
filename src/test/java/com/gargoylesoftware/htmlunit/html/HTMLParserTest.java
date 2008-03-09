@@ -46,7 +46,6 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -54,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class HTMLParserTest extends WebTestCase2 {
 
@@ -70,14 +70,10 @@ public class HTMLParserTest extends WebTestCase2 {
 
         final HtmlPage page = HTMLParser.parse(webResponse, webClient.getCurrentWindow());
 
-        HtmlUnitXPath xpath = new HtmlUnitXPath("//noscript");
-        final String stringVal = xpath.stringValueOf(page);
-
+        final String stringVal = ((HtmlNoScript) page.getFirstByXPath("//noscript")).getFirstChild().getNodeValue();
         assertEquals("TEST", stringVal);
 
-        xpath = new HtmlUnitXPath("//*[./text() = 'TEST']");
-        final HtmlElement node = (HtmlElement) xpath.selectSingleNode(page);
-
+        final HtmlElement node = (HtmlElement) page.getFirstByXPath("//*[./text() = 'TEST']");
         assertEquals(node.getTagName(), HtmlNoScript.TAG_NAME);
     }
 
@@ -162,8 +158,7 @@ public class HTMLParserTest extends WebTestCase2 {
         final HtmlPage page = loadUrl("http://htmlunit.sourceforge.net");
         if (page != null) {
             // No connectivity issues.
-            final HtmlUnitXPath xpath = new HtmlUnitXPath("//div[@id='footer']/div[@class='xright']");
-            final String stringVal = xpath.stringValueOf(page).trim();
+            final String stringVal = page.getFirstByXPath("//div[@id='footer']/div[@class='xright']").toString().trim();
             assertTrue(stringVal.matches("\u00A9 2002-\\d\\d\\d\\d Gargoyle Software Inc."));
         }
     }

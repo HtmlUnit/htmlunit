@@ -56,23 +56,22 @@ import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Attr;
-import org.w3c.dom.Comment;
 import org.w3c.dom.CDATASection;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.DocumentType;
+import org.w3c.dom.Comment;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.EntityReference;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
@@ -89,7 +88,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection;
@@ -238,14 +236,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public NodeList getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
-        try {
-            final String xpath = "//" + tagName.toLowerCase();
-            collection.init(this, new HtmlUnitXPath(xpath));
-        }
-        catch (final JaxenException e) {
-            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
-            throw Context.reportRuntimeError(msg + e.getMessage());
-        }
+        collection.init(this, "//" + tagName.toLowerCase());
         return collection;
     }
 
@@ -1846,28 +1837,23 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
-        try {
-            //May be done in single xpath search?
-            final List<HtmlRadioButtonInput> pageInputs =
-                (List<HtmlRadioButtonInput>) getByXPath("//input[lower-case(@type)='radio' "
-                    + "and @name='" + radioButtonInput.getNameAttribute() + "']");
-            final List<HtmlRadioButtonInput> formInputs =
-                (List<HtmlRadioButtonInput>) getByXPath("//form//input[lower-case(@type)='radio' "
-                    + "and @name='" + radioButtonInput.getNameAttribute() + "']");
+        //May be done in single xpath search?
+        final List<HtmlRadioButtonInput> pageInputs =
+            (List<HtmlRadioButtonInput>) getByXPath("//input[lower-case(@type)='radio' "
+                + "and @name='" + radioButtonInput.getNameAttribute() + "']");
+        final List<HtmlRadioButtonInput> formInputs =
+            (List<HtmlRadioButtonInput>) getByXPath("//form//input[lower-case(@type)='radio' "
+                + "and @name='" + radioButtonInput.getNameAttribute() + "']");
             
-            pageInputs.removeAll(formInputs);
+        pageInputs.removeAll(formInputs);
 
-            for (final HtmlRadioButtonInput input : pageInputs) {
-                if (input == radioButtonInput) {
-                    input.setAttributeValue("checked", "checked");
-                }
-                else {
-                    input.removeAttribute("checked");
-                }
+        for (final HtmlRadioButtonInput input : pageInputs) {
+            if (input == radioButtonInput) {
+                input.setAttributeValue("checked", "checked");
             }
-        }
-        catch (final JaxenException e) {
-            getLog().error(e);
+            else {
+                input.removeAttribute("checked");
+            }
         }
     }
 

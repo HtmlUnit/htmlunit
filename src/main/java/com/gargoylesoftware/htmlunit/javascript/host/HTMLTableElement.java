@@ -40,11 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jaxen.JaxenException;
-import org.mozilla.javascript.Context;
-
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 
 /**
  * A JavaScript object representing a Table.
@@ -128,12 +124,7 @@ public class HTMLTableElement extends RowContainer {
     public Object jsxGet_tBodies() {
         if (tBodies_ == null) {
             tBodies_ = new HTMLCollection(this);
-            try {
-                tBodies_.init(getDomNodeOrDie(), new HtmlUnitXPath("./tbody"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection table.tBodies: " + e.getMessage());
-            }
+            tBodies_.init(getDomNodeOrDie(), "./tbody");
         }
         return tBodies_;
     }

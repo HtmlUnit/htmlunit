@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -45,7 +44,6 @@ import org.mozilla.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 
 /**
  * A JavaScript object representing a TR.
@@ -91,12 +89,7 @@ public class HTMLTableRowElement extends HTMLElement {
     public Object jsxGet_cells() {
         if (cells_ == null) {
             cells_ = new HTMLCollection(this);
-            try {
-                cells_.init(getDomNodeOrDie(), new HtmlUnitXPath("./td|th"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize row.cells: " + e.getMessage());
-            }
+            cells_.init(getDomNodeOrDie(), "./td|th");
         }
         return cells_;
     }

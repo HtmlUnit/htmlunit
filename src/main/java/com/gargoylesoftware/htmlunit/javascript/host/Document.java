@@ -54,8 +54,6 @@ import org.apache.commons.httpclient.cookie.CookieSpec;
 import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.StringUtils;
-import org.jaxen.JaxenException;
-import org.jaxen.XPathFunctionContext;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -82,9 +80,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
-import com.gargoylesoftware.htmlunit.html.xpath.FunctionContextWrapper;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
-import com.gargoylesoftware.htmlunit.html.xpath.LowerCaseFunction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -155,7 +150,6 @@ public class Document extends EventNode {
     private String domain_;
     private Window window_;
 
-    private final FunctionContextWrapper functionContext_;
     private DOMImplementation implementation_;
 
     /** Initializes the supported event type map. */
@@ -175,9 +169,6 @@ public class Document extends EventNode {
      * Create an instance.  Javascript objects must have a default constructor.
      */
     public Document() {
-        // add custom functions to custom context
-        functionContext_ = new FunctionContextWrapper(XPathFunctionContext.getInstance());
-        functionContext_.registerFunction("lower-case", new LowerCaseFunction());
     }
 
     /**
@@ -220,12 +211,7 @@ public class Document extends EventNode {
     public Object jsxGet_forms() {
         if (forms_ == null) {
             forms_ = new HTMLCollection(this);
-            try {
-                forms_.init(getDomNodeOrDie(), new HtmlUnitXPath("//form"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection document.forms: " + e.getMessage());
-            }
+            forms_.init(getDomNodeOrDie(), ".//form");
         }
         return forms_;
     }
@@ -239,12 +225,7 @@ public class Document extends EventNode {
     public Object jsxGet_links() {
         if (links_ == null) {
             links_ = new HTMLCollection(this);
-            try {
-                links_.init(getDomNodeOrDie(), new HtmlUnitXPath("//a[@href] | //area[@href]"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection document.links: " + e.getMessage());
-            }
+            links_.init(getDomNodeOrDie(), ".//a[@href] | .//area[@href]");
         }
         return links_;
     }
@@ -260,20 +241,15 @@ public class Document extends EventNode {
     public Object jsxGet_anchors() {
         if (anchors_ == null) {
             anchors_ = new HTMLCollection(this);
-            try {
-                final String xpath;
-                if (getBrowserVersion().isIE()) {
-                    xpath = "//a[@name or @id]";
-                }
-                else {
-                    xpath = "//a[@name]";
-                }
+            final String xpath;
+            if (getBrowserVersion().isIE()) {
+                xpath = ".//a[@name or @id]";
+            }
+            else {
+                xpath = ".//a[@name]";
+            }
 
-                anchors_.init(getDomNodeOrDie(), new HtmlUnitXPath(xpath));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection document.anchors: " + e.getMessage());
-            }
+            anchors_.init(getDomNodeOrDie(), xpath);
         }
         return anchors_;
     }
@@ -642,12 +618,7 @@ public class Document extends EventNode {
     public Object jsxGet_images() {
         if (images_ == null) {
             images_ = new HTMLCollection(this);
-            try {
-                images_.init(getDomNodeOrDie(), new HtmlUnitXPath("//img"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection document.images: " + e.getMessage());
-            }
+            images_.init(getDomNodeOrDie(), ".//img");
         }
         return images_;
     }
@@ -682,12 +653,7 @@ public class Document extends EventNode {
         if (all_ == null) {
             all_ = new HTMLCollectionTags(this);
             all_.setAvoidObjectDetection(!getBrowserVersion().isIE());
-            try {
-                all_.init(getDomNodeOrDie(), new HtmlUnitXPath("//*"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection document.all: " + e.getMessage());
-            }
+            all_.init(getDomNodeOrDie(), ".//*");
         }
         return all_;
     }
@@ -1039,15 +1005,8 @@ public class Document extends EventNode {
      */
     public Object jsxFunction_getElementsByName(final String elementName) {
         final HTMLCollection collection = new HTMLCollection(this);
-        final String exp = "//*[@name='" + elementName + "']";
-        try {
-            final HtmlUnitXPath xpath = new HtmlUnitXPath(exp);
-            collection.init(getDomNodeOrDie(), xpath);
-        }
-        catch (final JaxenException e) {
-            throw Context.reportRuntimeError(
-                    "Failed to initialize collection document.getElementsByName: " + e.getMessage());
-        }
+        final String exp = ".//*[@name='" + elementName + "']";
+        collection.init(getDomNodeOrDie(), exp);
         return collection;
     }
 
@@ -1097,14 +1056,8 @@ public class Document extends EventNode {
         // Note that the XPath expression below HAS TO MATCH the tag name checks performed in the shortcut above.
         // TODO: Behavior for iframe seems to differ between IE and Moz.
         final HTMLCollection collection = new HTMLCollection(this);
-        final String xpath = "//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
-        try {
-            collection.init(page, new HtmlUnitXPath(xpath));
-        }
-        catch (final JaxenException e) {
-            final String msg = "Failed to initialize collection (using xpath " + xpath + "): " + e.getMessage();
-            throw Context.reportRuntimeError(msg);
-        }
+        final String xpath = ".//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
+        collection.init(page, xpath);
         final int size = collection.jsxGet_length();
         if (size == 1) {
             return collection.get(0, collection);
@@ -1239,12 +1192,7 @@ public class Document extends EventNode {
     public Object jsxGet_scripts() {
         if (scripts_ == null) {
             scripts_ = new HTMLCollection(this);
-            try {
-                scripts_.init(getDomNodeOrDie(), new HtmlUnitXPath("//script"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection document.scripts: " + e.getMessage());
-            }
+            scripts_.init(getDomNodeOrDie(), ".//script");
         }
         return scripts_;
     }
@@ -1399,17 +1347,12 @@ public class Document extends EventNode {
     public XPathResult jsxFunction_evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
-        try {
-            if (xPathResult == null) {
-                xPathResult = new XPathResult();
-                xPathResult.setParentScope(getParentScope());
-                xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
-            }
-            xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
+        if (xPathResult == null) {
+            xPathResult = new XPathResult();
+            xPathResult.setParentScope(getParentScope());
+            xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
         }
-        catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Error using expression: " + expression);
-        }
+        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
         return xPathResult;
     }
 

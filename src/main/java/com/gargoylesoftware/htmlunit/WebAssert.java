@@ -41,8 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jaxen.JaxenException;
-
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -130,16 +128,10 @@ public final class WebAssert {
      * @param xpath the XPath expression which is expected to match an element in the page
      */
     public static void assertElementPresentByXPath(final HtmlPage page, final String xpath) {
-        try {
-            final List< ? > elements = page.getByXPath(xpath);
-            if (elements.isEmpty()) {
-                final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
-                                + "'.";
-                throw new AssertionError(msg);
-            }
-        }
-        catch (final JaxenException e) {
-            final String msg = "Unable to process XPath expression '" + xpath + "'.";
+        final List< ? > elements = page.getByXPath(xpath);
+        if (elements.isEmpty()) {
+            final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
+                            + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -169,16 +161,10 @@ public final class WebAssert {
      * @param xpath the XPath expression which is expected to not match an element in the page
      */
     public static void assertElementNotPresentByXPath(final HtmlPage page, final String xpath) {
-        try {
-            final List< ? > elements = page.getByXPath(xpath);
-            if (!elements.isEmpty()) {
-                final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
-                                + "'.";
-                throw new AssertionError(msg);
-            }
-        }
-        catch (final JaxenException e) {
-            final String msg = "Unable to process XPath expression '" + xpath + "'.";
+        final List< ? > elements = page.getByXPath(xpath);
+        if (!elements.isEmpty()) {
+            final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
+                            + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -372,14 +358,9 @@ public final class WebAssert {
      */
     public static void assertInputPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
-        try {
-            final List< ? > list = page.getByXPath(xpath);
-            if (list.isEmpty()) {
-                throw new AssertionError("Unable to find an input element named '" + name + "'.");
-            }
-        }
-        catch (final JaxenException e) {
-            throw new AssertionError("Unable to process XPath expression '" + xpath + "'.");
+        final List< ? > list = page.getByXPath(xpath);
+        if (list.isEmpty()) {
+            throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
     }
 
@@ -391,14 +372,9 @@ public final class WebAssert {
      */
     public static void assertInputNotPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
-        try {
-            final List< ? > list = page.getByXPath(xpath);
-            if (!list.isEmpty()) {
-                throw new AssertionError("Unable to find an input element named '" + name + "'.");
-            }
-        }
-        catch (final JaxenException e) {
-            throw new AssertionError("Unable to process XPath expression '" + xpath + "'.");
+        final List< ? > list = page.getByXPath(xpath);
+        if (!list.isEmpty()) {
+            throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
     }
 
@@ -412,20 +388,15 @@ public final class WebAssert {
      */
     public static void assertInputContainsValue(final HtmlPage page, final String name, final String value) {
         final String xpath = "//input[@name='" + name + "']";
-        try {
-            final List< ? > list = page.getByXPath(xpath);
-            if (list.isEmpty()) {
-                throw new AssertionError("Unable to find an input element named '" + name + "'.");
-            }
-            final HtmlInput input = (HtmlInput) list.get(0);
-            final String s = input.getValueAttribute();
-            if (!s.equals(value)) {
-                throw new AssertionError("The input element named '" + name + "' contains the value '" + s
-                                + "', not the expected value '" + value + "'.");
-            }
+        final List< ? > list = page.getByXPath(xpath);
+        if (list.isEmpty()) {
+            throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
-        catch (final JaxenException e) {
-            throw new AssertionError("Unable to process XPath expression '" + xpath + "'.");
+        final HtmlInput input = (HtmlInput) list.get(0);
+        final String s = input.getValueAttribute();
+        if (!s.equals(value)) {
+            throw new AssertionError("The input element named '" + name + "' contains the value '" + s
+                            + "', not the expected value '" + value + "'.");
         }
     }
 
@@ -439,20 +410,15 @@ public final class WebAssert {
      */
     public static void assertInputDoesNotContainValue(final HtmlPage page, final String name, final String value) {
         final String xpath = "//input[@name='" + name + "']";
-        try {
-            final List< ? > list = page.getByXPath(xpath);
-            if (list.isEmpty()) {
-                throw new AssertionError("Unable to find an input element named '" + name + "'.");
-            }
-            final HtmlInput input = (HtmlInput) list.get(0);
-            final String s = input.getValueAttribute();
-            if (s.equals(value)) {
-                throw new AssertionError("The input element named '" + name + "' contains the value '" + s
-                                + "', not the expected value '" + value + "'.");
-            }
+        final List< ? > list = page.getByXPath(xpath);
+        if (list.isEmpty()) {
+            throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
-        catch (final JaxenException e) {
-            throw new AssertionError("Unable to process XPath expression '" + xpath + "'.");
+        final HtmlInput input = (HtmlInput) list.get(0);
+        final String s = input.getValueAttribute();
+        if (s.equals(value)) {
+            throw new AssertionError("The input element named '" + name + "' contains the value '" + s
+                            + "', not the expected value '" + value + "'.");
         }
     }
 

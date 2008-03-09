@@ -42,7 +42,6 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 
@@ -52,7 +51,6 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -322,13 +320,7 @@ public class Node extends SimpleScriptable {
     public Object jsxGet_childNodes() {
         if (childNodes_ == null) {
             childNodes_ = new HTMLCollection(this);
-            try {
-                childNodes_.init(getDomNodeOrDie(), new HtmlUnitXPath("(./* | text() | comment())"));
-            }
-            catch (final JaxenException je) {
-                throw Context.reportRuntimeError("Failed to initialize collection element.childNodes: "
-                        + je.getMessage());
-            }
+            childNodes_.init(getDomNodeOrDie(), "(./* | text() | comment())");
         }
         return childNodes_;
     }

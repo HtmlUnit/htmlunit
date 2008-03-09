@@ -7,11 +7,14 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
-            <action type="update" dev="sdanig">
+            <action type="remove" dev="asashour">
+                Remove Jaxen dependency.
+            </action>
+            <action type="remove" dev="sdanig">
                 Remove deprecated methods in HtmlPage: assertAllIdAttributesUnique(), assertAllAccessKeyAttributesUnique(),
                 assertAllTabIndexAttributesSet() (use corresponding methods in WebAssert instead).
             </action>
-            <action type="update" dev="sdanig">
+            <action type="remove" dev="sdanig">
                 Remove deprecated WebRequestSettings.setCookiePolicy() and getCookiePolicy().
             </action>
             <action type="fix" dev="sdanig">
@@ -28,7 +31,7 @@
                 to the root element, not to the DomNode. You can add initial dot.
             </action>
             <action type="add" dev="asashour">
-                Add Xalan 2.7.0 as dependency, replacing Jaxen. 
+                Add Xalan 2.7.0 as dependency. 
             </action>
             <action type="fix" dev="mguillem" id="1904189">
                 JavaScript: fixed IndexOutOfBoundsException in processing of IE @elif pre processor instruction.

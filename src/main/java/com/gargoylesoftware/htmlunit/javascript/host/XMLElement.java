@@ -41,14 +41,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.jaxen.JaxenException;
-import org.mozilla.javascript.Context;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
@@ -70,12 +67,7 @@ public class XMLElement extends Node {
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
         final HTMLCollection collection = new HTMLCollection(this);
-        try {
-            collection.init(getDomNodeOrDie(), new HtmlUnitXPath(expression));
-        }
-        catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Failed to initialize collection 'selectNodes': " + e.getMessage());
-        }
+        collection.init(getDomNodeOrDie(), expression);
         return collection;
     }
 
@@ -164,14 +156,8 @@ public class XMLElement extends Node {
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final DomNode domNode = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
-        try {
-            final String xpath = "//" + tagName;
-            collection.init(domNode, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(domNode)));
-        }
-        catch (final JaxenException e) {
-            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
-            throw Context.reportRuntimeError(msg + e.getMessage());
-        }
+        final String xpath = ".//" + tagName;
+        collection.init(domNode, xpath);
         return collection;
     }
     

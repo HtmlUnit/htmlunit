@@ -46,8 +46,6 @@ import java.util.Map;
 
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
-import org.jaxen.JaxenException;
-import org.jaxen.XPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -68,7 +66,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -548,14 +545,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public HTMLCollection jsxGet_frames() {
         if (frames_ == null) {
-            final XPath xpath;
-            try {
-                xpath = new HtmlUnitXPath("//*[(name() = 'frame' or name() = 'iframe')]");
-            }
-            catch (final JaxenException e) {
-                // should never occur
-                throw Context.reportRuntimeError("Failed initializing frame collections: " + e.getMessage());
-            }
+            final String xpath = ".//*[(name() = 'frame' or name() = 'iframe')]";
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             frames_ = new HTMLCollection(this);
             final Transformer toEnclosedWindow = new Transformer() {

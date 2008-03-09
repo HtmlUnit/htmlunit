@@ -37,19 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
-import java.util.List;
-
 import javax.xml.transform.TransformerException;
 
 import org.apache.xpath.XPathContext;
 import org.apache.xpath.functions.FunctionDef1Arg;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.objects.XString;
-import org.jaxen.Context;
-import org.jaxen.Function;
-import org.jaxen.FunctionCallException;
-import org.jaxen.Navigator;
-import org.jaxen.function.StringFunction;
 
 /**
  * Custom XPath function to convert the argument to lower case (using the default locale
@@ -62,32 +55,9 @@ import org.jaxen.function.StringFunction;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class LowerCaseFunction extends FunctionDef1Arg implements Function {
+public class LowerCaseFunction extends FunctionDef1Arg {
 
     private static final long serialVersionUID = 5486916278740399118L;
-
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
-    public Object call(final Context context, final List arguments)
-        throws FunctionCallException {
-
-        // inspired for reference implementation of StringLengthFunction
-        if (arguments.size() == 0) {
-            return evaluate(context.getNodeSet(), context.getNavigator());
-        }
-        else if (arguments.size() == 1) {
-            return evaluate(arguments.get(0), context.getNavigator());
-        }
-
-        throw new FunctionCallException("lower-case() requires one argument.");
-    }
-
-    String evaluate(final Object obj, final Navigator navigator) {
-        final String str = StringFunction.evaluate(obj, navigator);
-        return str.toLowerCase();
-    }
 
     /**
      * {@inheritDoc}

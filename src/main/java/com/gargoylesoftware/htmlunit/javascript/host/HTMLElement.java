@@ -49,8 +49,6 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
-import org.jaxen.JaxenException;
-import org.jaxen.XPath;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -79,7 +77,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 
@@ -151,12 +148,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
             all_ = new HTMLCollection(this);
-            try {
-                all_.init(getDomNodeOrDie(), new HtmlUnitXPath(".//*"));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection all: " + e.getMessage());
-            }
+            all_.init(getDomNodeOrDie(), ".//*");
         }
         return all_;
     }
@@ -474,20 +466,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public Object jsxFunction_getElementsByTagName(final String tagName) {
         final DomNode node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(this);
-        try {
-            final String xpath;
-            if ("*".equals(tagName)) {
-                xpath = "//*";
-            }
-            else {
-                xpath = "//node()[name() = '" + tagName.toLowerCase() + "']";
-            }
-            collection.init(node, new HtmlUnitXPath(xpath, HtmlUnitXPath.buildSubtreeNavigator(node)));
+        final String xpath;
+        if ("*".equals(tagName)) {
+            xpath = ".//*";
         }
-        catch (final JaxenException e) {
-            final String msg = "Error initializing collection getElementsByTagName(" + tagName + "): ";
-            throw Context.reportRuntimeError(msg + e.getMessage());
+        else {
+            xpath = ".//node()[name() = '" + tagName.toLowerCase() + "']";
         }
+        collection.init(node, xpath);
         return collection;
     }
 
@@ -1269,17 +1255,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the child at the given position
      */
     public Object jsxGet_children() {
-        final DomNode element = getDomNodeOrDie();
         final HTMLCollection children = new HTMLCollection(this);
-
-        try {
-            final XPath xpath = new HtmlUnitXPath("./*", HtmlUnitXPath.buildSubtreeNavigator(element));
-            children.init(element, xpath);
-        }
-        catch (final JaxenException e) {
-            // should never occur
-            throw Context.reportRuntimeError("Failed initializing children: " + e.getMessage());
-        }
+        children.init(getDomNodeOrDie(), "./*");
         return children;
     }
 

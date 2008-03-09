@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.StringReader;
 import java.util.List;
 
-import org.jaxen.JaxenException;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
@@ -145,19 +144,14 @@ public class Stylesheet extends SimpleScriptable {
                     final Selector selector = selectors.item(j);
                     final String xpath = translateToXPath(selector);
                     if (xpath != null) {
-                        try {
-                            final List< ? extends Object> results = page.getByXPath(xpath);
-                            if (results.contains(e)) {
-                                final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
-                                for (int k = 0; k < dec.getLength(); k++) {
-                                    final String name = dec.item(k);
-                                    final String value = dec.getPropertyValue(name);
-                                    style.setLocalStyleAttribute(name, value);
-                                }
+                        final List< ? extends Object> results = page.getByXPath(xpath);
+                        if (results.contains(e)) {
+                            final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
+                            for (int k = 0; k < dec.getLength(); k++) {
+                                final String name = dec.item(k);
+                                final String value = dec.getPropertyValue(name);
+                                style.setLocalStyleAttribute(name, value);
                             }
-                        }
-                        catch (final JaxenException je) {
-                            getLog().error(je.getMessage(), je);
                         }
                     }
                 }

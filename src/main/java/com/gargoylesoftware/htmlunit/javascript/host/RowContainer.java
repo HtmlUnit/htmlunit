@@ -37,14 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -82,12 +80,7 @@ public class RowContainer extends HTMLElement {
     public Object jsxGet_rows() {
         if (rows_ == null) {
             rows_ = new HTMLCollection(this);
-            try {
-                rows_.init(getDomNodeOrDie(), new HtmlUnitXPath(getXPathRows()));
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize rowContainer.rows: " + e.getMessage());
-            }
+            rows_.init(getDomNodeOrDie(), getXPathRows());
         }
         return rows_;
     }

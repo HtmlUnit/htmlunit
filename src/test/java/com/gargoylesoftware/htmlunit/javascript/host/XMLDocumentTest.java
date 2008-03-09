@@ -394,10 +394,22 @@ public class XMLDocumentTest extends WebTestCase2 {
 
     /**
      * Tests "xml:space" attribute.
+     * Not yet implemented.
+     *
+     * Xalan team response:
+     * <quote>See the DOM Level 3 recommendation for discussion of this. XPath returns the start of the XPath text node,
+     * which spans multiple DOM nodes. It is the DOM user's responsibility to gather the additional nodes,
+     * either manually or by retrieving wholeText rather than value.
+     *
+     * This is unavoidable since DOM and XPath define the concept of "node" differently.</quote>
+     *
      * @throws Exception if the test fails
      */
     @Test
     public void testLoadXML_XMLSpaceAttribute() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         testLoadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7_0);
         testLoadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
     }

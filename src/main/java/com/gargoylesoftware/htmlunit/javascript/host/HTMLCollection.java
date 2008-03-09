@@ -39,14 +39,10 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.NOPTransformer;
-import org.jaxen.JaxenException;
-import org.jaxen.XPath;
-import org.jaxen.saxpath.SAXPathException;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
@@ -65,9 +61,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -89,7 +85,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class HTMLCollection extends SimpleScriptable implements Function, NodeList {
     private static final long serialVersionUID = 4049916048017011764L;
 
-    private XPath xpath_;
+    private String xpath_;
     private DomNode node_;
     private boolean avoidObjectDetection_ = false;
 
@@ -150,7 +146,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @param node the node to serve as root for the xpath expression
      * @param xpath the xpath giving the elements of the collection
      */
-    public void init(final DomNode node, final XPath xpath) {
+    public void init(final DomNode node, final String xpath) {
         init(node, xpath, NOPTransformer.INSTANCE);
     }
 
@@ -162,52 +158,16 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @param transformer the transformer allowing to get the expected objects from the xpath
      * evaluation
      */
-    public void init(final DomNode node, final XPath xpath, final Transformer transformer) {
+    public void init(final DomNode node, final String xpath, final Transformer transformer) {
         if (node != null) {
             node_ = node;
             xpath_ = xpath;
-            try {
-                if (node instanceof XmlPage) {
-                    final XmlElement documentElement = ((XmlPage) node).getDocumentXmlElement();
-                    if (documentElement != null) {
-                        addNamespace(documentElement);
-                    }
-                }
-                else if (node instanceof XmlElement) {
-                    addNamespace((XmlElement) node);
-                }
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Exception adding namespaces: " + e);
-            }
             transformer_ = transformer;
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
             node_.addDomChangeListener(listener);
             if (node_ instanceof HtmlElement) {
                 ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
                 cachedElements_ = null;
-            }
-        }
-    }
-
-    /**
-     * Adds all namespaces defined in the given element and its all descendants to the XPath.
-     * @param element root element
-     * @throws JaxenException if a <code>NamespaceContext</code>
-     *         used by the XPath has been explicitly installed
-     */
-    private void addNamespace(final XmlElement element) throws JaxenException {
-        final Map<String, XmlAttr> attributes = element.getAttributesMap();
-        for (final String name : attributes.keySet()) {
-            final String value = (String) attributes.get(name).getValue();
-            if (name.startsWith("xmlns:")) {
-                final String prefix = name.substring("xmlns:".length());
-                xpath_.addNamespace(prefix, value);
-            }
-        }
-        for (final DomNode child : element.getChildren()) {
-            if (child instanceof XmlElement) {
-                addNamespace((XmlElement) child);
             }
         }
     }
@@ -278,42 +238,37 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     @SuppressWarnings("unchecked")
     private List<Object> getElements() {
         if (cachedElements_ == null) {
-            try {
-                if (node_ != null) {
-                    cachedElements_ = xpath_.selectNodes(node_);
-                }
-                else {
-                    cachedElements_ = new ArrayList<Object>();
-                }
-                final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
-
-                final boolean isIE = getBrowserVersion().isIE();
-
-                for (int i = 0; i < cachedElements_.size(); i++) {
-                    final DomNode element = (DomNode) cachedElements_.get(i);
-                    
-                    //IE: XmlPage ignores all empty text nodes
-                    if (isIE && isXmlPage && element instanceof DomText
-                            && ((DomText) element).getNodeValue().trim().length() == 0) {
-
-                        //and 'xml:space' is 'default'
-                        final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentDomNode());
-                        if (xmlSpaceDefault != Boolean.FALSE) {
-                            cachedElements_.remove(i--);
-                            continue;
-                        }
-                    }
-                    for (DomNode parent = element.getParentDomNode(); parent != null;
-                        parent = parent.getParentDomNode()) {
-                        if (parent instanceof HtmlNoScript) {
-                            cachedElements_.remove(i--);
-                            break;
-                        }
-                    }
-                }
+            if (node_ != null) {
+                cachedElements_ = XPathUtils.getByXPath(node_, xpath_);
             }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Exeption getting elements: " + e.getMessage());
+            else {
+                cachedElements_ = new ArrayList<Object>();
+            }
+            final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
+
+            final boolean isIE = getBrowserVersion().isIE();
+
+            for (int i = 0; i < cachedElements_.size(); i++) {
+                final DomNode element = (DomNode) cachedElements_.get(i);
+                
+                //IE: XmlPage ignores all empty text nodes
+                if (isIE && isXmlPage && element instanceof DomText
+                        && ((DomText) element).getNodeValue().trim().length() == 0) {
+
+                    //and 'xml:space' is 'default'
+                    final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentDomNode());
+                    if (xmlSpaceDefault != Boolean.FALSE) {
+                        cachedElements_.remove(i--);
+                        continue;
+                    }
+                }
+                for (DomNode parent = element.getParentDomNode(); parent != null;
+                    parent = parent.getParentDomNode()) {
+                    if (parent instanceof HtmlNoScript) {
+                        cachedElements_.remove(i--);
+                        break;
+                    }
+                }
             }
         }
         return cachedElements_;
@@ -384,22 +339,16 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         // See if there are any elements in the element array with the specified name.
         final HTMLCollection array = new HTMLCollection(this);
-        try {
-            final String newCondition = "@name = '" + name + "'";
-            final String currentXPathExpr = xpath_.toString();
-            final String xpathExpr;
-            if (currentXPathExpr.endsWith("]")) {
-                xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length() - 1) + " and " + newCondition + "]";
-            }
-            else {
-                xpathExpr = currentXPathExpr + "[" + newCondition + "]";
-            }
-            final XPath xpathName = xpath_.getNavigator().parseXPath(xpathExpr);
-            array.init(node_, xpathName);
+        final String newCondition = "@name = '" + name + "'";
+        final String currentXPathExpr = xpath_.toString();
+        final String xpathExpr;
+        if (currentXPathExpr.endsWith("]")) {
+            xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length() - 1) + " and " + newCondition + "]";
         }
-        catch (final SAXPathException e) {
-            throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
+        else {
+            xpathExpr = currentXPathExpr + "[" + newCondition + "]";
         }
+        array.init(node_, xpathExpr);
 
         final List<Object> subElements = array.getElements();
         if (subElements.size() > 1) {
@@ -466,15 +415,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     public Object jsxFunction_tags(final String tagName) {
         final HTMLCollection array = new HTMLCollection(this);
-        try {
-            final String newXPathExpr = xpath_ + "[name() = '" + tagName.toLowerCase() + "']";
-            array.init(node_, xpath_.getNavigator().parseXPath(newXPathExpr));
-        }
-        catch (final SAXPathException e) {
-            // should never occur
-            throw Context.reportRuntimeError("Failed call tags: " + e.getMessage());
-        }
-
+        array.init(node_, xpath_ + "[name() = '" + tagName.toLowerCase() + "']");
         return array;
     }
 
@@ -614,24 +555,17 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             if (xpath_ != null) {
                 // See if there are any elements in the element array with the specified name.
                 final HTMLCollection array = new HTMLCollection(this);
-                try {
-                    final String newCondition = "@name";
-                    final String currentXPathExpr = xpath_.toString();
-                    final String xpathExpr;
-                    if (currentXPathExpr.endsWith("]")) {
-                        xpathExpr =
-                            currentXPathExpr.substring(0, currentXPathExpr.length() - 1)
-                            + " and " + newCondition + "]";
-                    }
-                    else {
-                        xpathExpr = currentXPathExpr + "[" + newCondition + "]";
-                    }
-                    final XPath xpathName = xpath_.getNavigator().parseXPath(xpathExpr);
-                    array.init(node_, xpathName);
+                final String newCondition = "@name";
+                final String currentXPathExpr = xpath_.toString();
+                final String xpathExpr;
+                if (currentXPathExpr.endsWith("]")) {
+                    xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length() - 1)
+                        + " and " + newCondition + "]";
                 }
-                catch (final SAXPathException e) {
-                    throw Context.reportRuntimeError("Failed getting sub elements by name" + e.getMessage());
+                else {
+                    xpathExpr = currentXPathExpr + "[" + newCondition + "]";
                 }
+                array.init(node_, xpathExpr);
 
                 for (final Object next : array.getElements()) {
                     if (next instanceof HtmlElement) {
@@ -688,7 +622,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     /**
      * @return the XPath.
      */
-    protected XPath getXpath() {
+    protected String getXpath() {
         return xpath_;
     }
 

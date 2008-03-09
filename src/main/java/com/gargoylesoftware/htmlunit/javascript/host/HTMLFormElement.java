@@ -40,9 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.util.List;
 
-import org.jaxen.JaxenException;
-import org.jaxen.XPath;
-import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -55,7 +52,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 
 /**
  * A JavaScript object for a Form.
@@ -122,15 +118,9 @@ public class HTMLFormElement extends HTMLElement {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
             elements_ = new HTMLCollection(this);
-            try {
-                final XPath xpath = new HtmlUnitXPath("//*[(name() = 'input' or name() = 'button'"
-                        + " or name() = 'select' or name() = 'textarea')]",
-                        HtmlUnitXPath.buildSubtreeNavigator(htmlForm));
-                elements_.init(htmlForm, xpath);
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection form.elements: " + e.getMessage());
-            }
+            final String xpath = ".//*[(name() = 'input' or name() = 'button'"
+                    + " or name() = 'select' or name() = 'textarea')]";
+            elements_.init(htmlForm, xpath);
         }
         return elements_;
     }
@@ -296,27 +286,17 @@ public class HTMLFormElement extends HTMLElement {
         // buttons, selects and textareas that are in this form. We *don't* include img elements, which will
         // only be searched if the first search fails.
         HTMLCollection collection = new HTMLCollection(this);
-        try {
-            final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"
-                + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
-                + " or name() = 'select' or name() = 'textarea')]", HtmlUnitXPath.buildSubtreeNavigator(form));
-            collection.init(form, xpath);
-        }
-        catch (final JaxenException e) {
-            throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
-        }
+        final String xpath = ".//*[(@name = '" + name + "' or @id = '" + name + "')"
+            + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
+            + " or name() = 'select' or name() = 'textarea')]";
+        collection.init(form, xpath);
         int length = collection.jsxGet_length();
         // If no form fields are found, IE and Firefox are able to find img elements by ID or name.
         if (length == 0) {
             collection = new HTMLCollection(this);
-            try {
-                final XPath xpath = new HtmlUnitXPath("//*[(@name = '" + name + "' or @id = '" + name + "')"
-                    + " and name() = 'img']", HtmlUnitXPath.buildSubtreeNavigator(form));
-                collection.init(form, xpath);
-            }
-            catch (final JaxenException e) {
-                throw Context.reportRuntimeError("Failed to initialize collection: " + e.getMessage());
-            }
+            final String xpath2 = ".//*[(@name = '" + name + "' or @id = '" + name + "')"
+                + " and name() = 'img']";
+            collection.init(form, xpath2);
         }
         // Return whatever we have at this point.
         Object result = collection;

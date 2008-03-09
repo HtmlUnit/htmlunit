@@ -37,58 +37,67 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import org.jaxen.Function;
-import org.jaxen.FunctionContext;
-import org.jaxen.UnresolvableException;
+import org.apache.xml.utils.PrefixResolverDefault;
+import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.xml.XmlAttr;
+import com.gargoylesoftware.htmlunit.xml.XmlElement;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * A wrapper allowing to add new functions without affecting the original context.
- *
  * @version $Revision$
- * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
-public class FunctionContextWrapper implements FunctionContext {
-    private final FunctionContext wrappedContext_;
-    private final Map<String, Function> localFunctions_ = new HashMap<String, Function>();
+public final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
     /**
-     * Wraps an existing context
-     * @param functionContext the context to wrap
+     * Constructor
+     * @param xpathExpressionContext The context from which XPath expression prefixes will be resolved.
      */
-    public FunctionContextWrapper(final FunctionContext functionContext) {
-        WebAssert.notNull("function context", functionContext);
-        wrappedContext_ = functionContext;
+    public HtmlUnitPrefixResolver(final Node xpathExpressionContext) {
+        super(xpathExpressionContext);
     }
 
     /**
-     * First look at the locally defined function and if none found calls the wrapped
-     * context.
      * {@inheritDoc}
      */
-    public Function getFunction(final String namespaceURI, final String prefix, final String localName)
-        throws UnresolvableException {
-
-        final Function localFunction = (Function) localFunctions_.get(localName);
-        if (localFunction != null) {
-            return localFunction;
+    @Override
+    public String getNamespaceForPrefix(final String prefix, final Node namespaceContext) {
+        String namespace = super.getNamespaceForPrefix(prefix, namespaceContext);
+        if (namespace == null) {
+            if (namespaceContext instanceof XmlPage) {
+                final XmlElement documentElement = ((XmlPage) namespaceContext).getDocumentXmlElement();
+                if (documentElement != null) {
+                    namespace = getNamespace(documentElement, prefix);
+                }
+            }
+            else if (namespaceContext instanceof XmlElement) {
+                namespace = getNamespace((XmlElement) namespaceContext, prefix);
+            }
         }
-        return wrappedContext_.getFunction(namespaceURI, prefix, localName);
+        return namespace;
     }
 
-    /**
-     * Registers a function for this context.
-     * @param localName The non-prefixed local portion of the function to be registered with this context.
-     * @param function the object to be used when evaluating the function.
-     */
-    public void registerFunction(final String localName, final Function function) {
-        WebAssert.notNull("function", function);
-        WebAssert.notNull("localName", localName);
-        
-        localFunctions_.put(localName, function);
+    private String getNamespace(final XmlElement element, final String prefix) {
+        final Map<String, XmlAttr> attributes = element.getAttributesMap();
+        for (final String name : attributes.keySet()) {
+            if (name.startsWith("xmlns:")) {
+                if (name.substring("xmlns:".length()).equals(prefix)) {
+                    return attributes.get(name).getValue();
+                }
+            }
+        }
+        for (final DomNode child : element.getChildren()) {
+            if (child instanceof XmlElement) {
+                final String namespace = getNamespace((XmlElement) child, prefix);
+                if (namespace != null) {
+                    return namespace;
+                }
+            }
+        }
+        return null;
     }
 }

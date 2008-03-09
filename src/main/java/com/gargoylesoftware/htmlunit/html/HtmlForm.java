@@ -51,7 +51,6 @@ import java.util.Map;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.lang.StringUtils;
-import org.jaxen.JaxenException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -474,25 +473,20 @@ public class HtmlForm extends ClickableElement {
      */
     @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
-        try {
-            if (!isAncestorOf(radioButtonInput)) {
-                throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
-            }
-            final List<HtmlRadioButtonInput> radios = (List<HtmlRadioButtonInput>) getByXPath(
-                    ".//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
-            );
-            
-            for (final HtmlRadioButtonInput input : radios) {
-                if (input == radioButtonInput) {
-                    input.setAttributeValue("checked", "checked");
-                }
-                else {
-                    input.removeAttribute("checked");
-                }
-            }
+        if (!isAncestorOf(radioButtonInput)) {
+            throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
         }
-        catch (final JaxenException e) {
-            getLog().error(e);
+        final List<HtmlRadioButtonInput> radios = (List<HtmlRadioButtonInput>) getByXPath(
+                ".//input[lower-case(@type)='radio' and @name='" + radioButtonInput.getNameAttribute() + "']"
+        );
+            
+        for (final HtmlRadioButtonInput input : radios) {
+            if (input == radioButtonInput) {
+                input.setAttributeValue("checked", "checked");
+            }
+            else {
+                input.removeAttribute("checked");
+            }
         }
     }
 

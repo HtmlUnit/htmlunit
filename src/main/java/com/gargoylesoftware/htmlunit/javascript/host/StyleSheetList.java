@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.StringReader;
 import java.util.WeakHashMap;
 
-import org.jaxen.JaxenException;
 import org.mozilla.javascript.Context;
 import org.w3c.css.sac.InputSource;
 
@@ -49,7 +48,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.html.xpath.HtmlUnitXPath;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -93,13 +91,8 @@ public class StyleSheetList extends SimpleScriptable {
     public StyleSheetList(final Document document) {
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
-        try {
-            nodes_ = new HTMLCollection(document);
-            nodes_.init(document.getHtmlPage(), new HtmlUnitXPath("//style | //link[lower-case(@rel)='stylesheet']"));
-        }
-        catch (final JaxenException e) {
-            getLog().error(e.getMessage(), e);
-        }
+        nodes_ = new HTMLCollection(document);
+        nodes_.init(document.getHtmlPage(), ".//style | .//link[lower-case(@rel)='stylesheet']");
     }
 
     /**
