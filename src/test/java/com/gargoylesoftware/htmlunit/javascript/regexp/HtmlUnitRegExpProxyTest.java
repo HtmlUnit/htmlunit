@@ -110,7 +110,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFixedInHtmlUnit() throws Exception {
+    public void fixedInHtmlUnit() throws Exception {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
         final Window topScope = ((Window) page.getEnclosingWindow().getScriptObject());
@@ -124,7 +124,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * Test if custom patch is still needed
      */
     @Test
-    public void testNeedCustomFix() {
+    public void needCustomFix() {
         final Context ctx = Context.enter();
         final ScriptableObject topScope = ctx.initStandardObjects();
         
@@ -147,7 +147,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplaceNormalStringWithRegexpChars() throws Exception {
+    public void replaceNormalStringWithRegexpChars() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert('123456'.replace('/{\\d+}', ''));\n"
@@ -166,7 +166,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplaceWithUndefinedPattern() throws Exception {
+    public void replaceWithUndefinedPattern() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var pattern;\n"
@@ -186,7 +186,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplace() throws Exception {
+    public void replace() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var pattern = /{\\d+}/g;\n"
@@ -206,7 +206,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMatch() throws Exception {
+    public void match() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + scriptTestMatch_
             + "</script></head><body>\n"
@@ -226,7 +226,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMatchFixNeeded() throws Exception {
+    public void matchFixNeeded() throws Exception {
         final Context ctx = Context.enter();
         final ScriptableObject topScope = ctx.initStandardObjects();
         
@@ -243,7 +243,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testIndex() throws Exception {
+    public void index() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var match = '#{tests} tests'.match(/(^|.|\\r|\\n)(#\\{(.*?)\\})/);\n"
@@ -263,7 +263,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMatch_NotFirstCharacter() throws Exception {
+    public void match_NotFirstCharacter() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(\"ab\".match(/^(.)[^\\1]$/))\n"
@@ -282,7 +282,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRegExp_exec() throws Exception {
+    public void regExp_exec() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -307,7 +307,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFlag_global() throws Exception {
+    public void flag_global() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var str = 'foo <script>boo();<'+'/script>bar';\n"

@@ -87,7 +87,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testSarissa() throws Exception {
+    public void sarissa() throws Exception {
         //expected failure of SarissaTestCase.testGetTextWithCdata
         //see XMLDocumentTest.testLoadXML_XMLSpaceAttribute
         //It should be '+++++++++++++++F++' (should be fixed after Rhino "properties order" issue)
@@ -98,7 +98,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testXmlHttpRequest() throws Exception {
+    public void xmlHttpRequest() throws Exception {
         test("XmlHttpRequestTestCase");
     }
 
@@ -106,7 +106,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testXMLSerializer() throws Exception {
+    public void xmlSerializer() throws Exception {
         test("XMLSerializerTestCase");
     }
 
@@ -114,7 +114,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testDOMParser() throws Exception {
+    public void domParser() throws Exception {
         test("DOMParserTestCase");
     }
 
@@ -122,7 +122,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testXMLDocument() throws Exception {
+    public void xmlDocument() throws Exception {
         test("XMLDocumentTestCase");
     }
 
@@ -130,7 +130,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testXMLElement() throws Exception {
+    public void xmlElement() throws Exception {
         test("XMLElementTestCase");
     }
 
@@ -138,7 +138,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testXSLTProcessor() throws Exception {
+    public void xsltProcessor() throws Exception {
         test("XSLTProcessorTestCase");
     }
 
@@ -205,7 +205,7 @@ public class Sarissa099Test extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testXSLTWithJaxen() throws Exception {
+    public void xslt() throws Exception {
         final String input = "<root><element attribute=\"value\"/></root>";
         final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n"
             + "<xsl:output method=\"xml\" omit-xml-declaration=\"yes\"/>\n"

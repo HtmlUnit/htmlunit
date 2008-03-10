@@ -64,11 +64,11 @@ public class JQuery1131Test extends JQueryTestBase {
      */
     @Test
     @Override
-    public void testJQueryWithFirefox2() throws Exception {
+    public void firefox2() throws Exception {
         if (notYetImplemented()) {
             return;
         }
-        super.testJQueryWithFirefox2();
+        super.firefox2();
     }
 
     /**

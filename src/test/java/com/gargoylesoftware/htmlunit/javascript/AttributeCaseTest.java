@@ -69,7 +69,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testGetAttributeLowerCase() throws IOException {
+    public void getAttributeLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
     }
@@ -79,7 +79,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testGetAttributeMixedCase() throws IOException {
+    public void getAttributeMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME));
     }
@@ -89,7 +89,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testGetAttributeUpperCase() throws IOException {
+    public void getAttributeUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE, element_.getAttributeValue(ATTRIBUTE_NAME.toUpperCase()));
     }
@@ -99,7 +99,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testSetAttributeLowerCase() throws IOException {
+    public void setAttributeLowerCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME.toLowerCase(), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
             element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
@@ -110,7 +110,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testSetAttributeMixedCase() throws IOException {
+    public void setAttributeMixedCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
             element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
@@ -121,7 +121,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testSetAttributeUpperCase() throws IOException {
+    public void setAttributeUpperCase() throws IOException {
         setupSetAttributeTest(ATTRIBUTE_NAME.toUpperCase(), ATTRIBUTE_VALUE, ATTRIBUTE_VALUE_NEW);
         Assert.assertEquals(page_.asXml(), ATTRIBUTE_VALUE_NEW,
             element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
@@ -132,7 +132,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testRemoveAttributeLowerCase() throws IOException {
+    public void removeAttributeLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME.toLowerCase());
         Assert.assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
@@ -143,7 +143,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testRemoveAttributeMixedCase() throws IOException {
+    public void removeAttributeMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME);
         Assert.assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
@@ -154,7 +154,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testRemoveAttributeUpperCase() throws IOException {
+    public void removeAttributeUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         element_.removeAttribute(ATTRIBUTE_NAME.toUpperCase());
         Assert.assertEquals(page_.asXml(), "", element_.getAttributeValue(ATTRIBUTE_NAME.toLowerCase()));
@@ -165,7 +165,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testIsAttributeDefinedLowerCase() throws IOException {
+    public void isAttributeDefinedLowerCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toLowerCase()));
     }
@@ -175,7 +175,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testIsAttributeDefinedMixedCase() throws IOException {
+    public void isAttributeDefinedMixedCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME));
     }
@@ -185,7 +185,7 @@ public class AttributeCaseTest extends WebTestCase2 {
      * @throws IOException If the test fails
      */
     @Test
-    public void testIsAttributeDefinedUpperCase() throws IOException {
+    public void isAttributeDefinedUpperCase() throws IOException {
         setupGetAttributeTest(ATTRIBUTE_NAME, ATTRIBUTE_VALUE);
         assertTrue(page_.asXml(), element_.isAttributeDefined(ATTRIBUTE_NAME.toUpperCase()));
     }

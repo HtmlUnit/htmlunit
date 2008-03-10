@@ -64,7 +64,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testAjax() throws Exception {
+    public void ajax() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -77,7 +77,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testArray() throws Exception {
+    public void array() throws Exception {
         final String filename = "array.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 12, 49, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 12, 49, 0, 0);
@@ -87,7 +87,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testBase() throws Exception {
+    public void base() throws Exception {
         final String filename = "base.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 48, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 48, 0, 0);
@@ -110,7 +110,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testElementMixins() throws Exception {
+    public void elementMixins() throws Exception {
         final String filename = "element_mixins.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 7, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 7, 0, 0);
@@ -120,7 +120,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testEnumerable() throws Exception {
+    public void enumerable() throws Exception {
         final String filename = "enumerable.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  23, 67, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename,  23, 67, 0, 0);
@@ -130,7 +130,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testForm() throws Exception {
+    public void form() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -145,7 +145,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testHash() throws Exception {
+    public void hash() throws Exception {
         final String filename = "hash.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 5, 19, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 5, 19, 0, 0);
@@ -155,7 +155,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testPosition() throws Exception {
+    public void position() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -168,7 +168,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testRange() throws Exception {
+    public void range() throws Exception {
         final String filename = "range.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 6, 21, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 6, 21, 0, 0);
@@ -178,7 +178,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testSelector() throws Exception {
+    public void selector() throws Exception {
         final String filename = "selector.html";
         //HtmlUnit with IE succeeds for all :)
         // It should be test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 18, 35, 9, 1);
@@ -192,7 +192,7 @@ public class Prototype150rc1Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testString() throws Exception {
+    public void string() throws Exception {
         final String filename = "string.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 76, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 19, 76, 0, 0);

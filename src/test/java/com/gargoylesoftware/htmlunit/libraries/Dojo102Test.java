@@ -71,7 +71,6 @@ public class Dojo102Test extends WebTestCase2 {
      */
     @Test
     public void dojo() throws Exception {
-
         // TODO: blocked by property enumeration order bug in Rhino, then some CSS stuff
         // https://bugzilla.mozilla.org/show_bug.cgi?id=419090
         if (notYetImplemented()) {

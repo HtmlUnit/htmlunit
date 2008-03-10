@@ -61,7 +61,7 @@ public class CurvyCornersTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testDemoIE7() throws Exception {
+    public void demoIE7() throws Exception {
         doTest("demo.html", BrowserVersion.INTERNET_EXPLORER_7_0);
     }
 
@@ -69,7 +69,7 @@ public class CurvyCornersTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testDemo2IE7() throws Exception {
+    public void demo2IE7() throws Exception {
         doTest("demo2.html", BrowserVersion.INTERNET_EXPLORER_7_0);
     }
 
@@ -77,7 +77,7 @@ public class CurvyCornersTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testDemoDefault() throws Exception {
+    public void demoDefault() throws Exception {
         doTest("demo.html", BrowserVersion.getDefault());
     }
 
@@ -85,7 +85,7 @@ public class CurvyCornersTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testDemo2Default() throws Exception {
+    public void demo2Default() throws Exception {
         doTest("demo2.html", BrowserVersion.getDefault());
     }
 
@@ -93,7 +93,7 @@ public class CurvyCornersTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testDemoFF2() throws Exception {
+    public void demoFF2() throws Exception {
         doTest("demo.html", BrowserVersion.FIREFOX_2);
     }
 
@@ -101,7 +101,7 @@ public class CurvyCornersTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testDemo2FF2() throws Exception {
+    public void demo2FF2() throws Exception {
         doTest("demo2.html", BrowserVersion.FIREFOX_2);
     }
     

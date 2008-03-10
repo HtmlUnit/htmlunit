@@ -69,7 +69,7 @@ public abstract class JQueryTestBase extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testJQueryWithIE6() throws Exception {
+    public void ie6() throws Exception {
         final Iterator<HtmlElement> i = loadPage(BrowserVersion.INTERNET_EXPLORER_6_0);
         verify(i, true);
     }
@@ -78,7 +78,7 @@ public abstract class JQueryTestBase extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testJQueryWithIE7() throws Exception {
+    public void ie7() throws Exception {
         final Iterator<HtmlElement> i = loadPage(BrowserVersion.INTERNET_EXPLORER_7_0);
         verify(i, true);
     }
@@ -87,7 +87,7 @@ public abstract class JQueryTestBase extends WebTestCase2 {
      * @throws Exception If an error occurs.
      */
     @Test
-    public void testJQueryWithFirefox2() throws Exception {
+    public void firefox2() throws Exception {
         final Iterator<HtmlElement> i = loadPage(BrowserVersion.FIREFOX_2);
         verify(i, false);
     }

@@ -81,7 +81,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCallInheritedFunction() throws Exception {
+    public void callInheritedFunction() throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
@@ -118,7 +118,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
     /**
      */
     @Test
-    public void testHtmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
+    public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
             JavaScriptConfiguration.getHtmlJavaScriptMapping();
         final String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
@@ -204,7 +204,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetNonWritableProperty() throws Exception {
+    public void setNonWritableProperty() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -226,7 +226,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testArguments_toString() throws Exception {
+    public void arguments_toString() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(arguments);\n"
@@ -244,7 +244,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStringWithExclamationMark() throws Exception {
+    public void stringWithExclamationMark() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var x = '<!>';\n"
@@ -265,7 +265,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails.
      */
     @Test
-    public void testHostClassNames() throws Exception {
+    public void hostClassNames() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -292,7 +292,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testArrayedMap() throws Exception {
+    public void arrayedMap() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -321,20 +321,20 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testIsParentOf() throws Exception {
-        testIsParentOf("Node", "Element", true);
-        testIsParentOf("Document", "XMLDocument", true);
-        testIsParentOf("Node", "XPathResult", false);
-        testIsParentOf("Element", "HTMLElement", true);
-        testIsParentOf("HTMLElement", "HTMLHtmlElement", true);
-        testIsParentOf("CSSStyleDeclaration", "ComputedCSSStyleDeclaration", true);
+    public void isParentOf() throws Exception {
+        isParentOf("Node", "Element", true);
+        isParentOf("Document", "XMLDocument", true);
+        isParentOf("Node", "XPathResult", false);
+        isParentOf("Element", "HTMLElement", true);
+        isParentOf("HTMLElement", "HTMLHtmlElement", true);
+        isParentOf("CSSStyleDeclaration", "ComputedCSSStyleDeclaration", true);
 
         //although Image != HTMLImageElement, they seem to be synonyms!!!
-        testIsParentOf("Image", "HTMLImageElement", true);
-        testIsParentOf("HTMLImageElement", "Image", true);
+        isParentOf("Image", "HTMLImageElement", true);
+        isParentOf("HTMLImageElement", "Image", true);
     }
 
-    private void testIsParentOf(final String object1, final String object2, final boolean status) throws Exception {
+    private void isParentOf(final String object1, final String object2, final boolean status) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(isParentOf(" + object1 + ", " + object2 + "));\n"
@@ -359,7 +359,7 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testWindowPropertyToString() throws Exception {
+    public void windowPropertyToString() throws Exception {
         final String content = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
@@ -380,12 +380,12 @@ public class SimpleScriptableTest extends WebTestCase2 {
      * @throws Exception if the test fails
      */
     @Test
-    public void testParentProtoFeature() throws Exception {
-        testParentProtoFeature(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"false"});
-        testParentProtoFeature(BrowserVersion.FIREFOX_2, new String[] {"true"});
+    public void parentProtoFeature() throws Exception {
+        parentProtoFeature(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"false"});
+        parentProtoFeature(BrowserVersion.FIREFOX_2, new String[] {"true"});
     }
 
-    private void testParentProtoFeature(final BrowserVersion browserVersion, final String[] expectedAlerts)
+    private void parentProtoFeature(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

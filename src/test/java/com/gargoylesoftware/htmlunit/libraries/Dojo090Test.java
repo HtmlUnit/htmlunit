@@ -68,7 +68,7 @@ public class Dojo090Test extends WebTestCase2 {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testDojo() throws Exception {
+    public void dojo() throws Exception {
         final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_6_0);
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/util/doh/runner.html";
 

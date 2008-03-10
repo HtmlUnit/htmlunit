@@ -55,7 +55,7 @@ public class UrlUtilsTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testGetUrlWithNewProtocol() throws Exception {
+    public void getUrlWithNewProtocol() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewProtocol(a, "ftp");
         assertEquals("ftp://my.home.com/index.html?query#ref", b.toExternalForm());
@@ -65,7 +65,7 @@ public class UrlUtilsTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testGetUrlWithNewHost() throws Exception {
+    public void getUrlWithNewHost() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewHost(a, "your.home.com");
         assertEquals("http://your.home.com/index.html?query#ref", b.toExternalForm());
@@ -75,7 +75,7 @@ public class UrlUtilsTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testGetUrlWithNewPort() throws Exception {
+    public void getUrlWithNewPort() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewPort(a, 8080);
         assertEquals("http://my.home.com:8080/index.html?query#ref", b.toExternalForm());
@@ -85,7 +85,7 @@ public class UrlUtilsTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testGetUrlWithNewPath() throws Exception {
+    public void getUrlWithNewPath() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewPath(a, "/es/indice.html");
         assertEquals("http://my.home.com/es/indice.html?query#ref", b.toExternalForm());
@@ -95,7 +95,7 @@ public class UrlUtilsTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testGetUrlWithNewRef() throws Exception {
+    public void getUrlWithNewRef() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewRef(a, "abc");
         assertEquals("http://my.home.com/index.html?query#abc", b.toExternalForm());
@@ -113,7 +113,7 @@ public class UrlUtilsTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testGetUrlWithNewQuery() throws Exception {
+    public void getUrlWithNewQuery() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewQuery(a, "xyz");
         assertEquals("http://my.home.com/index.html?xyz#ref", b.toExternalForm());

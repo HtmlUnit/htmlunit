@@ -68,7 +68,7 @@ public class WebConnectionWrapperTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testWrapper() throws Exception {
+    public void wrapper() throws Exception {
         final HttpState state = new HttpState();
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", emptyList);

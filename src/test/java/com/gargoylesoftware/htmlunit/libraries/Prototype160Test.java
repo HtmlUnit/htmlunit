@@ -66,7 +66,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testAjax() throws Exception {
+    public void ajax() throws Exception {
         final String filename = "ajax.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 15, 34, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 15, 32, 0, 0);
@@ -76,7 +76,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testArray() throws Exception {
+    public void array() throws Exception {
         final String filename = "array.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 19, 97, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 19, 97, 0, 0);
@@ -87,7 +87,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testBase() throws Exception {
+    public void base() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -108,7 +108,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testDom() throws Exception {
+    public void dom() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -123,7 +123,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testElementMixins() throws Exception {
+    public void elementMixins() throws Exception {
         final String filename = "element_mixins.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 12, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 12, 0, 0);
@@ -133,7 +133,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testEnumerable() throws Exception {
+    public void enumerable() throws Exception {
         final String filename = "enumerable.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename,  25, 82, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename,  25, 82, 0, 0);
@@ -143,7 +143,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testEvent() throws Exception {
+    public void event() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -156,7 +156,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testForm() throws Exception {
+    public void form() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -169,7 +169,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testHash() throws Exception {
+    public void hash() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -182,7 +182,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testNumber() throws Exception {
+    public void number() throws Exception {
         final String filename = "number.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 4, 20, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 4, 20, 0, 0);
@@ -192,7 +192,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testPosition() throws Exception {
+    public void position() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -205,7 +205,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testRange() throws Exception {
+    public void range() throws Exception {
         final String filename = "range.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 6, 21, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 6, 21, 0, 0);
@@ -215,7 +215,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testSelector() throws Exception {
+    public void selector() throws Exception {
         if (notYetImplemented()) {
             return;
         }
@@ -228,7 +228,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testString() throws Exception {
+    public void string() throws Exception {
         final String filename = "string.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 40, 220, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 40, 220, 0, 0);
@@ -239,7 +239,7 @@ public class Prototype160Test extends WebTestCase2 {
      * @throws Exception If test fails.
      */
     @Test
-    public void testUnitTests() throws Exception {
+    public void unitTests() throws Exception {
         if (notYetImplemented()) {
             return;
         }

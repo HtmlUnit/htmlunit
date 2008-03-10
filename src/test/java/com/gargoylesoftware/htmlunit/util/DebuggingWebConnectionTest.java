@@ -58,7 +58,7 @@ public class DebuggingWebConnectionTest extends WebTestCase2 {
      * @throws Exception If the test fails.
      */
     @Test
-    public void testNameValueListToJsMap() throws Exception {
+    public void nameValueListToJsMap() throws Exception {
         assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(null));
         final List<NameValuePair> emptyList = Collections.emptyList();
         assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(emptyList));
