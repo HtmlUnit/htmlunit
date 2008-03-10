@@ -41,12 +41,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 
+import org.mozilla.javascript.Context;
+
 
 /**
  * A JavaScript object for a ComputedCSSStyleDeclaration.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
@@ -1056,4 +1059,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         return getValue((String) super.jsxGet_zIndex(), "auto");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxFunction_getPropertyValue(final String name) {
+        // need to invoke the getter to take care of the default value
+        final String response = Context.toString(getProperty(this, camelize(name)));
+        if (response == NOT_FOUND) {
+            return super.jsxFunction_getPropertyValue(name);
+        }
+        return response;
+    }
 }

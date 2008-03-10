@@ -1057,6 +1057,9 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
         </property>
+        <property name="textContent" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
         <property name="namespaceURI" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>

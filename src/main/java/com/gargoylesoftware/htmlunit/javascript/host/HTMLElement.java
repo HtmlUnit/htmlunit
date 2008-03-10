@@ -532,6 +532,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Get the textContent attribute
+     * @return the contents of this node as text
+     */
+    public String jsxGet_textContent() {
+        return jsxGet_innerText();
+    }
+
+    /**
      * Gets the outerHTML of the node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp">
      * MSDN documentation</a>
@@ -650,6 +658,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
             fragment.appendDomChild(domNode);
         }
+    }
+
+    /**
+     * Replace all children elements of this element with the supplied value.
+     * @param value - the new value for the contents of this node
+     */
+    public void jsxSet_textContent(final String value) {
+        jsxSet_innerText(value);
     }
 
     /**

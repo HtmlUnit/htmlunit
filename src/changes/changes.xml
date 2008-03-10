@@ -7,6 +7,12 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="mguillem">
+                JavaScript: ComputedCSSStyleDeclaration.getPropertyValue returns the same value as direct property access.
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: add support for HtmlElement.textContent (FF only).
+            </action>
             <action type="remove" dev="asashour">
                 Remove Jaxen dependency.
             </action>

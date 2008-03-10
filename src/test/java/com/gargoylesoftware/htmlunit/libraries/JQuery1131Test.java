@@ -39,8 +39,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.util.Iterator;
 
-import org.junit.Test;
-
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
@@ -57,18 +55,6 @@ public class JQuery1131Test extends JQueryTestBase {
     @Override
     protected String getVersion() {
         return "1.1.3.1";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Test
-    @Override
-    public void firefox2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        super.firefox2();
     }
 
     /**
