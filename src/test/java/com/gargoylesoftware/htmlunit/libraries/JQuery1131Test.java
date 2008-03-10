@@ -84,7 +84,7 @@ public class JQuery1131Test extends JQueryTestBase {
 
         if (ie) {
             failedDollar = 1; passedDollar = 2;
-            failedAppend = 0; passedAppend = 17; // TODO: all 17 pass, but one shoud fail!
+            failedAppend = 0; passedAppend = 17; // TODO: all 17 pass, but one should fail!
             failedElement = 1; passedElement = 8;
             failedMultiple = 4; passedMultiple = 0;
         }
