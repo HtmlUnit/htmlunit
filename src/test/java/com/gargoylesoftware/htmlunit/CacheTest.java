@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class CacheTest extends WebTestCase2 {
+public class CacheTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

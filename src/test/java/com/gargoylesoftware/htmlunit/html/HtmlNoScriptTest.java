@@ -43,7 +43,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for elements inside {@link HtmlNoScript}.
@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlNoScriptTest extends WebTestCase2 {
+public class HtmlNoScriptTest extends WebTestCase {
 
     /**
      * @throws Exception If the test fails

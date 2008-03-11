@@ -51,7 +51,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class FailingHttpStatusCodeExceptionTest extends WebTestCase2 {
+public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

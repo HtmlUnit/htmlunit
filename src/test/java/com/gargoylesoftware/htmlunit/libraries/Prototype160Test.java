@@ -48,7 +48,7 @@ import org.mortbay.jetty.Server;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class Prototype160Test extends WebTestCase2 {
+public class Prototype160Test extends WebTestCase {
 
     private Server server_;
 

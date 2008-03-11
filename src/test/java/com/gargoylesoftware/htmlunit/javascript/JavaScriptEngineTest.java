@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -86,7 +86,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class JavaScriptEngineTest extends WebTestCase2 {
+public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

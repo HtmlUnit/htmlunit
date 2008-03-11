@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XMLSerializerTest extends WebTestCase2 {
+public class XMLSerializerTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

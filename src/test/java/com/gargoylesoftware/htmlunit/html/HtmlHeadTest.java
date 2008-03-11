@@ -43,7 +43,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlHead}.
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlHeadTest extends WebTestCase2 {
+public class HtmlHeadTest extends WebTestCase {
 
     /**
      * IE and FF both add an head element when it's not present in the html code

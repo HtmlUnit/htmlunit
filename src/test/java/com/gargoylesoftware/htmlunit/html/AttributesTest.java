@@ -45,7 +45,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * <p>Tests for all the generated attribute accessors.  This test case will
@@ -84,7 +84,7 @@ public class AttributesTest extends TestCase {
      * @throws Exception If the tests cannot be created.
      */
     public static Test suite() throws Exception {
-        final HtmlPage page = WebTestCase2.loadPage("<html><head><title>foo</title></head><body></body></html>");
+        final HtmlPage page = WebTestCase.loadPage("<html><head><title>foo</title></head><body></body></html>");
 
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = {

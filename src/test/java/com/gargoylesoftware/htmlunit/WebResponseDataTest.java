@@ -54,7 +54,7 @@ import org.junit.Test;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class WebResponseDataTest extends WebTestCase2 {
+public class WebResponseDataTest extends WebTestCase {
 
     private static final String GZIPPED_FILE = "testfiles/test.html.gz";
 

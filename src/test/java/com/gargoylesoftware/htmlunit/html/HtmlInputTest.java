@@ -48,7 +48,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlInput}.
@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public final class HtmlInputTest extends WebTestCase2 {
+public final class HtmlInputTest extends WebTestCase {
 
     /**
      * Test that selecting one radio button will deselect all the others

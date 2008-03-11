@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link DomText}.
@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  */
-public class DomTextTest extends WebTestCase2 {
+public class DomTextTest extends WebTestCase {
 
     /**
      * Test the clean up of &amp;nbsp; in strings

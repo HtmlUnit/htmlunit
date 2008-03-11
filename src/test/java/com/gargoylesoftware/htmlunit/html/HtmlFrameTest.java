@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlFrame}.
@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class HtmlFrameTest extends WebTestCase2 {
+public class HtmlFrameTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

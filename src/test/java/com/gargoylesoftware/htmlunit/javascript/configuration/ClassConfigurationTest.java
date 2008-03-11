@@ -43,7 +43,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class ClassConfigurationTest extends WebTestCase2 {
+public class ClassConfigurationTest extends WebTestCase {
     /**
      * Reset the JavaScriptConfiguration file for each test to it's inital clean state.
      *

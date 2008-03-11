@@ -77,7 +77,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 
 /**
@@ -92,7 +92,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlPageTest extends WebTestCase2 {
+public class HtmlPageTest extends WebTestCase {
 
     /**
      * @exception Exception If the test fails

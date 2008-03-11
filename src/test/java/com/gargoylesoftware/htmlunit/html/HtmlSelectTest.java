@@ -51,7 +51,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlSelect}.
@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlSelectTest extends WebTestCase2 {
+public class HtmlSelectTest extends WebTestCase {
 
     /**
      * Test the good path of submitting a select

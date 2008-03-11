@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link XSLTProcessor}.
@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class XSLTProcessorTest extends WebTestCase2 {
+public class XSLTProcessorTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

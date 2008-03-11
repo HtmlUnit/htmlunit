@@ -48,7 +48,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class IncorrectnessListenerTest extends WebTestCase2 {
+public final class IncorrectnessListenerTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */

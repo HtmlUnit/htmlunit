@@ -43,7 +43,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlHtml}.
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlHtmlTest extends WebTestCase2 {
+public class HtmlHtmlTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
      */

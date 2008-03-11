@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public abstract class WebTestCase2 {
+public abstract class WebTestCase {
     /** Constant for the url http://first which is used in the tests. */
     public static final URL URL_FIRST;
 
@@ -395,7 +395,7 @@ public abstract class WebTestCase2 {
      */
     protected void createTestPageForRealBrowserIfNeeded(final String content, final List<String> expectedAlerts)
         throws IOException {
-        final Log log = LogFactory.getLog(WebTestCase2.class);
+        final Log log = LogFactory.getLog(WebTestCase.class);
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             // should be optimized....
 

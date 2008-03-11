@@ -44,7 +44,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class AttributeCaseTest extends WebTestCase2 {
+public class AttributeCaseTest extends WebTestCase {
 
     private static final String ATTRIBUTE_NAME = "randomAttribute";
     private static final String ATTRIBUTE_VALUE = "someValue";

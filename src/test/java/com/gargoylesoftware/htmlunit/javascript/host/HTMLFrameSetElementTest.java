@@ -45,7 +45,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link HTMLFrameSetElement}.
@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Bruce Chapman
  * @author Ahmed Ashour
  */
-public class HTMLFrameSetElementTest extends WebTestCase2 {
+public class HTMLFrameSetElementTest extends WebTestCase {
 
     /**
      * @throws Exception If an error occurs.

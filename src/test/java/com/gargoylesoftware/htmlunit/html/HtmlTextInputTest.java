@@ -45,7 +45,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlTextInput}.
@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlTextInputTest extends WebTestCase2 {
+public class HtmlTextInputTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -47,7 +47,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class ImmediateRefreshHandlerTest extends WebTestCase2 {
+public final class ImmediateRefreshHandlerTest extends WebTestCase {
 
     /**
      * Regression test for bug 1211980: redirect on the same page after a post

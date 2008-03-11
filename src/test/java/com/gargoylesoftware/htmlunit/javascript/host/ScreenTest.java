@@ -42,7 +42,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link Screen}.
@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
-public class ScreenTest extends WebTestCase2 {
+public class ScreenTest extends WebTestCase {
 
     /**
      * Test all desired properties on screen (easy to copy and test in a real browser).

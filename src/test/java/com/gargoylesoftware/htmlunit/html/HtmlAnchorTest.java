@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link HtmlAnchor}.
@@ -67,7 +67,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Stefan Anzinger
  * @author Ahmed Ashour
  */
-public class HtmlAnchorTest extends WebTestCase2 {
+public class HtmlAnchorTest extends WebTestCase {
 
     /**
      * Verifies that anchor href attributes are trimmed of whitespace (bug 1658064),

@@ -45,7 +45,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
+public class HtmlUnitRegExpProxyTest extends WebTestCase {
 
     private final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
     private final String begin_ = "<div>bla</div>";

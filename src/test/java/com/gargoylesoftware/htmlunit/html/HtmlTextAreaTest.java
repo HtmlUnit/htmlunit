@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlTextArea}.
@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlTextAreaTest extends WebTestCase2 {
+public class HtmlTextAreaTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

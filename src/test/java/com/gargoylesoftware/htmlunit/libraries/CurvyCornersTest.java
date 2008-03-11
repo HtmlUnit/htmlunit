@@ -45,7 +45,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for compatibility with <a href="http://www.curvycorners.net">curvyCorners</a>.
@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Gareth Davis
  */
-public class CurvyCornersTest extends WebTestCase2 {
+public class CurvyCornersTest extends WebTestCase {
 
     private static final String BASE_FILE_PATH = "curvyCorners/1.2.9-beta/";
     

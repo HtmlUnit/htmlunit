@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -72,7 +72,7 @@ import com.gargoylesoftware.htmlunit.html.SubmittableElement;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class InputTest extends WebTestCase2 {
+public class InputTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -63,7 +63,7 @@ import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.ThreadManager;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
@@ -90,7 +90,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class WindowTest extends WebTestCase2 {
+public class WindowTest extends WebTestCase {
 
     /**
      * @throws Exception If the test fails

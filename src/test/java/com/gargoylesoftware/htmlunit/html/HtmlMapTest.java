@@ -43,7 +43,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlMap}.
@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlMapTest extends WebTestCase2 {
+public class HtmlMapTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails.

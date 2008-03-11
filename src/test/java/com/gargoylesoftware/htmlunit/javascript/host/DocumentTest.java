@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -82,7 +82,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Ahmed Ashour
  * @author Rob Di Marco
  */
-public class DocumentTest extends WebTestCase2 {
+public class DocumentTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

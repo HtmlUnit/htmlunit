@@ -45,7 +45,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DefaultPageCreatorTest extends WebTestCase2 {
+public class DefaultPageCreatorTest extends WebTestCase {
 
     /**
      * Test for {@link DefaultPageCreator#determinePageType(String)}

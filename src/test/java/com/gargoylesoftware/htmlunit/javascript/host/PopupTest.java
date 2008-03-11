@@ -43,7 +43,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link Popup}.
@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class PopupTest extends WebTestCase2 {
+public class PopupTest extends WebTestCase {
 
     /**
      * Just test that a standard use of popup works without exception

@@ -87,7 +87,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Paul King
  * @author Ahmed Ashour
  */
-public class WebClientTest extends WebTestCase2 {
+public class WebClientTest extends WebTestCase {
 
     /**
      * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.

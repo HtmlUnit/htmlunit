@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public final class ScriptExceptionTest extends WebTestCase2 {
+public final class ScriptExceptionTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

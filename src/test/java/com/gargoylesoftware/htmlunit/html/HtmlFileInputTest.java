@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.KeyDataPair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
@@ -84,7 +84,7 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlFileInputTest extends WebTestCase2 {
+public class HtmlFileInputTest extends WebTestCase {
 
     private Server server_;
 

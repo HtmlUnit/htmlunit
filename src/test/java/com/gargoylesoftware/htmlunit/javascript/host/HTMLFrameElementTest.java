@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class HTMLFrameElementTest extends WebTestCase2 {
+public class HTMLFrameElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

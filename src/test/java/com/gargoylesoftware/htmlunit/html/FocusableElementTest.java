@@ -42,7 +42,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for elements with onblur and onfocus attributes.
@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author David D. Kilzer
  * @author Marc Guillemot
  */
-public class FocusableElementTest extends WebTestCase2 {
+public class FocusableElementTest extends WebTestCase {
 
     private static final String COMMON_ID = " id='focusId'";
     private static final String COMMON_EVENTS = " onblur=\"alert('foo onblur')\" onfocus=\"alert('foo onfocus')\"";

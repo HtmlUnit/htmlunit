@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link DomComment}.
@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Karel Kolman
  * @author Ahmed Ashour
  */
-public class DomCommentTest extends WebTestCase2 {
+public class DomCommentTest extends WebTestCase {
     
     /**
      * Test the comment not visible when viewed by user

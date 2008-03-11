@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -72,7 +72,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class HTMLSelectElementTest extends WebTestCase2 {
+public class HTMLSelectElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

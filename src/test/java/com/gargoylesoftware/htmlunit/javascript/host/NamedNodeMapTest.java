@@ -42,7 +42,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link NamedNodeMap}.
@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class NamedNodeMapTest extends WebTestCase2 {
+public class NamedNodeMapTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs

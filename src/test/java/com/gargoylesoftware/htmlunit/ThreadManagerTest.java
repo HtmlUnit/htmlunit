@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Brad Clarke
  *
  */
-public class ThreadManagerTest extends WebTestCase2 {
+public class ThreadManagerTest extends WebTestCase {
     private long startTime_;
     private void startTimedTest() {
         startTime_ = System.currentTimeMillis();

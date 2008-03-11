@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Test for {@link IEConditionalCompilationScriptPreProcessor}.
@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class IEConditionalCompilationTest extends WebTestCase2 {
+public class IEConditionalCompilationTest extends WebTestCase {
 
     /**
      * @throws Exception If the test fails.

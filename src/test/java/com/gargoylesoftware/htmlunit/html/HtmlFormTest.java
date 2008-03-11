@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Ahmed Ashour
  * @author Philip Graf
  */
-public class HtmlFormTest extends WebTestCase2 {
+public class HtmlFormTest extends WebTestCase {
 
     /**
      * Test the good case for setCheckedRatdioButton()

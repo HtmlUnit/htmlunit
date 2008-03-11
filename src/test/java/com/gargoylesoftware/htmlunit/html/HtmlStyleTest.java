@@ -43,7 +43,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlStyle}.
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlStyleTest extends WebTestCase2 {
+public class HtmlStyleTest extends WebTestCase {
 
     /**
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.

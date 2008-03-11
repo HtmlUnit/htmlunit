@@ -47,7 +47,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlAttr}.
@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Ahmed Ashour
  * @author David K. Taylor
  */
-public class HtmlAttrTest extends WebTestCase2 {
+public class HtmlAttrTest extends WebTestCase {
     /**
      * Test object.
      */

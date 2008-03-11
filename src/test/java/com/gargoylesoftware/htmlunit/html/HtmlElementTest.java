@@ -47,7 +47,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link HtmlElement}.
@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlElementTest extends WebTestCase2 {
+public class HtmlElementTest extends WebTestCase {
 
     /**
      * Test hasAttribute() on an element with the attribute.

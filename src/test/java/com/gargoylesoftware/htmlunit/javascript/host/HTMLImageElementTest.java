@@ -42,7 +42,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  */
-public class HTMLImageElementTest extends WebTestCase2 {
+public class HTMLImageElementTest extends WebTestCase {
 
     /**
      * This test verifies that JavaScript can be used to get the src

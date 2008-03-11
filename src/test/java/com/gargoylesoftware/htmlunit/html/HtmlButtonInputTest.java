@@ -44,7 +44,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlButtonInput}.
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class HtmlButtonInputTest extends WebTestCase2 {
+public class HtmlButtonInputTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

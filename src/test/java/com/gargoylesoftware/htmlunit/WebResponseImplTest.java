@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class WebResponseImplTest extends WebTestCase2 {
+public class WebResponseImplTest extends WebTestCase {
 
     /**
      * When no encoding header is provided, encoding may be recognized with its Byte Order Mark

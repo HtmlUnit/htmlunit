@@ -48,7 +48,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Test class for {@link HTMLParserListener}.<br/>
@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class HTMLParserListenerTest extends WebTestCase2 {
+public class HTMLParserListenerTest extends WebTestCase {
     static class MessageInfo {
         private boolean error_; // versus warning
         private String message_;

@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HTMLLabelElementTest extends WebTestCase2 {
+public class HTMLLabelElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

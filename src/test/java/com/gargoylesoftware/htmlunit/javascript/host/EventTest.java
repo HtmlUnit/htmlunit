@@ -47,7 +47,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-public class EventTest extends WebTestCase2 {
+public class EventTest extends WebTestCase {
 
     /**
      * Verify the "this" object refers to the Element being clicked when an

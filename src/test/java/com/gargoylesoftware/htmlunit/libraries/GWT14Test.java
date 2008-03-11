@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class GWT14Test extends WebTestCase2 {
+public class GWT14Test extends WebTestCase {
 
     private Server server_;
 

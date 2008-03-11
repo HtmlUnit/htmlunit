@@ -44,7 +44,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlResetInput}.
@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class HtmlResetInputTest extends WebTestCase2 {
+public class HtmlResetInputTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

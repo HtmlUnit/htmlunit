@@ -52,7 +52,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public final class TextUtilTest extends WebTestCase2 {
+public final class TextUtilTest extends WebTestCase {
     /**
      * Test startsWithIgnoreCase() with null values.
      */

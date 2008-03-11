@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Brad Clarke
  */
-public final class WaitingRefreshHandlerTest extends WebTestCase2 {
+public final class WaitingRefreshHandlerTest extends WebTestCase {
 
     /**
      * Trying to cause an interrupt on a javascript thread due to meta redirect navigation.

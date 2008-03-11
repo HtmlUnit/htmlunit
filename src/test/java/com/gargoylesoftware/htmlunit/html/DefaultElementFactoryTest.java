@@ -43,7 +43,7 @@ import java.util.Iterator;
 import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link DefaultElementFactory}.
@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Ahmed Ashour
  * @since 1.2
  */
-public class DefaultElementFactoryTest extends WebTestCase2 {
+public class DefaultElementFactoryTest extends WebTestCase {
     /**
      * Test that the attribute order is the same as the provided one.
      * @throws Exception if the test fails

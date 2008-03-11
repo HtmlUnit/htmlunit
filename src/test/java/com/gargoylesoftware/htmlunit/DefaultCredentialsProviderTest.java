@@ -50,7 +50,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DefaultCredentialsProviderTest extends WebTestCase2 {
+public class DefaultCredentialsProviderTest extends WebTestCase {
 
     /**
      * Test for NTLM credentials

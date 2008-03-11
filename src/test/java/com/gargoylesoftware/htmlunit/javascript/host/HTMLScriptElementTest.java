@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link HTMLScriptElement}.
@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HTMLScriptElementTest extends WebTestCase2 {
+public class HTMLScriptElementTest extends WebTestCase {
 
     /**
      * Verifies that the <tt>onreadystatechange</tt> handler is invoked correctly.

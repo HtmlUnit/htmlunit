@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link WebConnectionWrapper}.
@@ -62,7 +62,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class WebConnectionWrapperTest extends WebTestCase2 {
+public class WebConnectionWrapperTest extends WebTestCase {
 
     /**
      * @throws Exception If the test fails.

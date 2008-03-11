@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class WebAssertTest extends WebTestCase2 {
+public class WebAssertTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs

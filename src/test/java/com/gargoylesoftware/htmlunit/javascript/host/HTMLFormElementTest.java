@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -69,7 +69,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLFormElementTest extends WebTestCase2 {
+public class HTMLFormElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

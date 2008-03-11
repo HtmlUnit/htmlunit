@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link StyleSheetList}.
@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class StyleSheetListTest extends WebTestCase2 {
+public class StyleSheetListTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs

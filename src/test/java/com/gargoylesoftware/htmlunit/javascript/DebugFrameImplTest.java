@@ -46,7 +46,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link DebugFrameImpl}.
@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DebugFrameImplTest extends WebTestCase2 {
+public class DebugFrameImplTest extends WebTestCase {
     private final Logger loggerDebugFrameImpl_ = Logger.getLogger(DebugFrameImpl.class);
     private Level originalLogLevel_;
 

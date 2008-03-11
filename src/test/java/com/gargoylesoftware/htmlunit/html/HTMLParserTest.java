@@ -45,7 +45,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HTMLParserTest extends WebTestCase2 {
+public class HTMLParserTest extends WebTestCase {
 
     /**
      * test the new HTMLParser on a simple HTML string and use the Jaxen XPath navigator

@@ -47,7 +47,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class MouseEventTest extends WebTestCase2 {
+public class MouseEventTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

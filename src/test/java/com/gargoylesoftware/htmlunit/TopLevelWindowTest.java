@@ -54,7 +54,7 @@ import com.gargoylesoftware.base.testing.EventCatcher;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class TopLevelWindowTest extends WebTestCase2 {
+public class TopLevelWindowTest extends WebTestCase {
 
     /**
      * Test closing the only open window

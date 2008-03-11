@@ -44,7 +44,7 @@ import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link StyleSheet}.
@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class StyleSheetTest extends WebTestCase2 {
+public class StyleSheetTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

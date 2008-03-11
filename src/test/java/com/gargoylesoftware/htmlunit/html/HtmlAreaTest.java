@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlArea}.
@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author David K. Taylor
  * @author Ahmed Ashour
  */
-public class HtmlAreaTest extends WebTestCase2 {
+public class HtmlAreaTest extends WebTestCase {
 
     private WebClient createWebClient(final String onClick) {
         final String firstContent

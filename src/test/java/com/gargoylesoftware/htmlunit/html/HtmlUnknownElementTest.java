@@ -43,7 +43,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlUnknownElement}.
@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision: 2409 $
  * @author Ahmed Ashour
  */
-public class HtmlUnknownElementTest extends WebTestCase2 {
+public class HtmlUnknownElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails.

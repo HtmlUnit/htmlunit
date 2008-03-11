@@ -48,7 +48,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlCheckBoxInput}.
@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlCheckBoxInputTest extends WebTestCase2 {
+public class HtmlCheckBoxInputTest extends WebTestCase {
 
     /**
      * Verifies that a HtmlCheckBox is unchecked by default.

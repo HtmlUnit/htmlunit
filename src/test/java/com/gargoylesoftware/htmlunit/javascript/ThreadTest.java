@@ -45,7 +45,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -155,7 +155,7 @@ public class ThreadTest extends TestCase {
                 + "</body></html>";
 
             final List<String> collectedAlerts = new ArrayList<String>();
-            final HtmlPage page = WebTestCase2.loadPage(content, collectedAlerts);
+            final HtmlPage page = WebTestCase.loadPage(content, collectedAlerts);
             
             assertEquals("foo", page.getTitleText());
             assertEquals("focus not changed to textfield1",

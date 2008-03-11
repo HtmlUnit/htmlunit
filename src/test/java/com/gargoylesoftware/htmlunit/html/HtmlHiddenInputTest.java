@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlHiddenInput}.
@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class HtmlHiddenInputTest extends WebTestCase2 {
+public class HtmlHiddenInputTest extends WebTestCase {
 
     /**
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.

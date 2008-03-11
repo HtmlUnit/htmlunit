@@ -50,7 +50,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  * @version $Revision$
  * @author Rob Di Marco
  */
-public class YuiTest extends WebTestCase2 {
+public class YuiTest extends WebTestCase {
 
     private static final long DEFAULT_TIME_TO_WAIT = 2 * 60 * 1000L;
     private static final String BASE_FILE_PATH = "yui/2.3.0/tests/";

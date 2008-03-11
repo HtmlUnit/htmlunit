@@ -49,7 +49,7 @@ import org.junit.Test;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase2;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 
 /**
@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public class HtmlTableRowTest extends WebTestCase2 {
+public class HtmlTableRowTest extends WebTestCase {
 
     private static final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table'><tr id='row'>\n"
