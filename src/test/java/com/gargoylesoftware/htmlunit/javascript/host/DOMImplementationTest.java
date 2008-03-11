@@ -59,25 +59,25 @@ public class DOMImplementationTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     @Test
-    public void testGetFeature() throws Exception {
-        testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "1.0", true);
-        testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "2.0", false);
-        testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XML", "1.0", false);
-        testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "CSS2", "1.0", false);
-        testGetFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XPath", "3.0", false);
-        testGetFeature(BrowserVersion.FIREFOX_2, "HTML", "1.0", true);
-        testGetFeature(BrowserVersion.FIREFOX_2, "HTML", "2.0", true);
-        testGetFeature(BrowserVersion.FIREFOX_2, "HTML", "3.0", false);
-        testGetFeature(BrowserVersion.FIREFOX_2, "XML", "1.0", true);
-        testGetFeature(BrowserVersion.FIREFOX_2, "XML", "2.0", true);
-        testGetFeature(BrowserVersion.FIREFOX_2, "XML", "3.0", false);
-        testGetFeature(BrowserVersion.FIREFOX_2, "CSS2", "1.0", false);
-        testGetFeature(BrowserVersion.FIREFOX_2, "CSS2", "2.0", true);
-        testGetFeature(BrowserVersion.FIREFOX_2, "CSS2", "3.0", false);
-        testGetFeature(BrowserVersion.FIREFOX_2, "XPath", "3.0", true);
+    public void getFeature() throws Exception {
+        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "1.0", true);
+        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "HTML", "2.0", false);
+        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XML", "1.0", false);
+        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "CSS2", "1.0", false);
+        getFeature(BrowserVersion.INTERNET_EXPLORER_7_0, "XPath", "3.0", false);
+        getFeature(BrowserVersion.FIREFOX_2, "HTML", "1.0", true);
+        getFeature(BrowserVersion.FIREFOX_2, "HTML", "2.0", true);
+        getFeature(BrowserVersion.FIREFOX_2, "HTML", "3.0", false);
+        getFeature(BrowserVersion.FIREFOX_2, "XML", "1.0", true);
+        getFeature(BrowserVersion.FIREFOX_2, "XML", "2.0", true);
+        getFeature(BrowserVersion.FIREFOX_2, "XML", "3.0", false);
+        getFeature(BrowserVersion.FIREFOX_2, "CSS2", "1.0", false);
+        getFeature(BrowserVersion.FIREFOX_2, "CSS2", "2.0", true);
+        getFeature(BrowserVersion.FIREFOX_2, "CSS2", "3.0", false);
+        getFeature(BrowserVersion.FIREFOX_2, "XPath", "3.0", true);
     }
 
-    private void testGetFeature(final BrowserVersion browserVersion, final String feature, final String version,
+    private void getFeature(final BrowserVersion browserVersion, final String feature, final String version,
             final boolean expected) throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -97,10 +97,10 @@ public class DOMImplementationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCreateDocument() throws Exception {
-        testCreateDocument(BrowserVersion.FIREFOX_2);
+    public void createDocument() throws Exception {
+        createDocument(BrowserVersion.FIREFOX_2);
         try {
-            testCreateDocument(BrowserVersion.INTERNET_EXPLORER_7_0);
+            createDocument(BrowserVersion.INTERNET_EXPLORER_7_0);
             fail("document.implementation.createDocument is not supported in IE.");
         }
         catch (final Exception e) {
@@ -108,7 +108,7 @@ public class DOMImplementationTest extends WebTestCase {
         }
     }
 
-    private void testCreateDocument(final BrowserVersion browserVersion) throws Exception {
+    private void createDocument(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
@@ -127,7 +127,7 @@ public class DOMImplementationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCreateDocument_qualifiedName() throws Exception {
+    public void createDocument_qualifiedName() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', 'mydoc', null);\n"

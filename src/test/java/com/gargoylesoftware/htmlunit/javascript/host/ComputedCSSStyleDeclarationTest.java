@@ -61,7 +61,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     @Test
-    public void testCSSFloat() throws Exception {
+    public void cssFloat() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -86,7 +86,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception If the test fails
      */
     @Test
-    public void testStringProperties() throws Exception {
+    public void stringProperties() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -142,13 +142,13 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "MozPaddingEnd=:,MozPaddingStart=:,MozUserFocus=:none,MozUserInput=:auto,MozUserModify=:read-only,"
             + "MozUserSelect=:auto,opacity=:1,outlineOffset=:0px,overflowX=:visible,overflowY=:visible,";
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, null);
-        final List<String> expectedValues = testStringProperties(expectedText);
+        final List<String> expectedValues = stringProperties(expectedText);
         final List<String> collectedValues =
-            testStringProperties(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText());
+            stringProperties(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText());
         assertEquals(expectedValues, collectedValues);
     }
 
-    private List<String> testStringProperties(final String string) throws Exception {
+    private List<String> stringProperties(final String string) throws Exception {
         final List<String> values = new ArrayList<String>();
 
         //string.split(",") will not work because we have values of 'rgb(0, 0, 0)'
@@ -179,7 +179,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyleElement() throws Exception {
+    public void styleElement() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
@@ -217,7 +217,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyleElement2() throws Exception {
+    public void styleElement2() throws Exception {
         if (notYetImplemented()) {
             return;
         }

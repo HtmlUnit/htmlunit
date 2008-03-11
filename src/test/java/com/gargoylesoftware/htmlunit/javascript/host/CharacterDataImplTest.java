@@ -63,7 +63,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_textNode() throws Exception {
+    public void characterDataImpl_textNode() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -102,7 +102,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_setData() throws Exception {
+    public void characterDataImpl_setData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -139,7 +139,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_setNodeValue() throws Exception {
+    public void characterDataImpl_setNodeValue() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -176,7 +176,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_appendData() throws Exception {
+    public void characterDataImpl_appendData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -210,7 +210,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_deleteData() throws Exception {
+    public void characterDataImpl_deleteData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -244,7 +244,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_insertData() throws Exception {
+    public void characterDataImpl_insertData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -278,7 +278,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_replaceData() throws Exception {
+    public void characterDataImpl_replaceData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -312,7 +312,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCharacterDataImpl_substringData() throws Exception {
+    public void characterDataImpl_substringData() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
@@ -346,7 +346,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testTextImpl_splitText() throws Exception {
+    public void textImpl_splitText() throws Exception {
         final WebClient webClient = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 

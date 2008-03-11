@@ -66,7 +66,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyle_OneCssAttribute() throws Exception {
+    public void style_OneCssAttribute() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -94,7 +94,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyle_MultipleCssAttributes() throws Exception {
+    public void style_MultipleCssAttributes() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -121,7 +121,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyle_OneUndefinedCssAttribute() throws Exception {
+    public void style_OneUndefinedCssAttribute() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -149,7 +149,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMozillaStyle() throws Exception {
+    public void mozillaStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -175,7 +175,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testIEStyle() throws Exception {
+    public void ieStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -200,7 +200,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnclickAccessStyle() throws Exception {
+    public void onclickAccessStyle() throws Exception {
         final String content = "<html><head><title>Color Change Page</title>\n"
              + "<script>\n"
              + "function test(obj) {\n"
@@ -220,7 +220,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAccessProperties() throws Exception {
+    public void accessProperties() throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
                 + "function doTest() {\n"
                 + "    var oDiv = document.getElementById('div1');\n"
@@ -245,7 +245,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetStylePropertyNonString() throws Exception {
+    public void setStylePropertyNonString() throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
                 + "function doTest() {\n"
                 + "    var oDiv1 = document.getElementById('div1');\n"
@@ -267,10 +267,10 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetPropertyValue() throws Exception {
-        testGetPropertyValue(BrowserVersion.FIREFOX_2);
+    public void getPropertyValue() throws Exception {
+        getPropertyValue(BrowserVersion.FIREFOX_2);
         try {
-            testGetPropertyValue(BrowserVersion.INTERNET_EXPLORER_7_0);
+            getPropertyValue(BrowserVersion.INTERNET_EXPLORER_7_0);
             fail("getPropertyValue is not supported in IE");
         }
         catch (final Exception e) {
@@ -278,7 +278,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         }
     }
 
-    private void testGetPropertyValue(final BrowserVersion browserVersion) throws Exception {
+    private void getPropertyValue(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var oDiv1 = document.getElementById('div1');\n"
@@ -299,7 +299,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetPropertyValue_WithDash() throws Exception {
+    public void getPropertyValue_WithDash() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
             + "    function test() {\n"
@@ -326,19 +326,12 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testStyleFilter_IE() throws Exception {
-        testStyleFilter(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"", "alpha(opacity=50)"});
+    public void styleFilter() throws Exception {
+        styleFilter(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"", "alpha(opacity=50)"});
+        styleFilter(BrowserVersion.FIREFOX_2, new String[] {"undefined", "undefined"});
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testStyleFilter_FF() throws Exception {
-        testStyleFilter(BrowserVersion.FIREFOX_2, new String[] {"undefined", "undefined"});
-    }
-
-    private void testStyleFilter(final BrowserVersion browserVersion, final String[] expected) throws Exception {
+    private void styleFilter(final BrowserVersion browserVersion, final String[] expected) throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
             + "      var div1 = document.getElementById('div1');\n"
@@ -359,10 +352,10 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSetExpression() throws Exception {
-        testSetExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
+    public void setExpression() throws Exception {
+        setExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
-            testSetExpression(BrowserVersion.FIREFOX_2);
+            setExpression(BrowserVersion.FIREFOX_2);
             fail("setExpression is not defined for Firefox");
         }
         catch (final Exception e) {
@@ -370,7 +363,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         }
     }
     
-    private void testSetExpression(final BrowserVersion browserVersion) throws Exception {
+    private void setExpression(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
@@ -387,10 +380,10 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testRemoveExpression() throws Exception {
-        testRemoveExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
+    public void removeExpression() throws Exception {
+        removeExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
         try {
-            testRemoveExpression(BrowserVersion.FIREFOX_2);
+            removeExpression(BrowserVersion.FIREFOX_2);
             fail("removeExpression is not defined for Firefox");
         }
         catch (final Exception e) {
@@ -398,7 +391,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         }
     }
     
-    private void testRemoveExpression(final BrowserVersion browserVersion) throws Exception {
+    private void removeExpression(final BrowserVersion browserVersion) throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
@@ -416,7 +409,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBorderStyles() throws Exception {
+    public void borderStyles() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -453,8 +446,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testProperties() throws Exception {
-        testProperties(BrowserVersion.INTERNET_EXPLORER_7_0, "clear posRight backgroundRepeat borderTopStyle "
+    public void properties() throws Exception {
+        properties(BrowserVersion.INTERNET_EXPLORER_7_0, "clear posRight backgroundRepeat borderTopStyle "
             + "marginTop fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor "
             + "overflowX paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display "
             + "textDecorationLineThrough marginBottom textKashidaSpace borderCollapse textDecorationBlink "
@@ -473,7 +466,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "overflowY textDecorationUnderline layoutGridLine top textDecorationNone writingMode height "
             + "scrollbarTrackColor listStyle borderRight scrollbarBaseColor marginRight marginLeft layoutGridType "
             + "textKashida rubyAlign borderLeft ");
-        testProperties(BrowserVersion.FIREFOX_2, "length cssText azimuth background backgroundAttachment "
+        properties(BrowserVersion.FIREFOX_2, "length cssText azimuth background backgroundAttachment "
             + "backgroundColor backgroundImage backgroundPosition backgroundRepeat border borderCollapse borderColor "
             + "borderSpacing borderStyle borderTop borderRight borderBottom borderLeft borderTopColor "
             + "borderRightColor borderBottomColor borderLeftColor borderTopStyle borderRightStyle borderBottomStyle "
@@ -499,7 +492,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "opacity outlineOffset overflowX overflowY ");
     }
 
-    private void testProperties(final BrowserVersion browserVersion, final String expectedText) throws Exception {
+    private void properties(final BrowserVersion browserVersion, final String expectedText) throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -531,8 +524,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testProperties2() throws Exception {
-        testProperties2(BrowserVersion.INTERNET_EXPLORER_7_0, "clear backgroundRepeat borderTopStyle marginTop "
+    public void properties2() throws Exception {
+        properties2(BrowserVersion.INTERNET_EXPLORER_7_0, "clear backgroundRepeat borderTopStyle marginTop "
             + "fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor overflowX "
             + "paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display marginBottom "
             + "textKashidaSpace borderCollapse scrollbarFaceColor backgroundAttachment borderRightStyle fontStyle "
@@ -549,7 +542,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "rubyPosition borderStyle wordWrap position overflowY layoutGridLine top writingMode height "
             + "scrollbarTrackColor listStyle borderRight scrollbarBaseColor marginRight marginLeft layoutGridType "
             + "textKashida rubyAlign borderLeft ");
-        testProperties2(BrowserVersion.FIREFOX_2, "cssText azimuth background backgroundAttachment backgroundColor "
+        properties2(BrowserVersion.FIREFOX_2, "cssText azimuth background backgroundAttachment backgroundColor "
             + "backgroundImage backgroundPosition backgroundRepeat border borderCollapse borderColor borderSpacing "
             + "borderStyle borderTop borderRight borderBottom borderLeft borderTopColor borderRightColor "
             + "borderBottomColor borderLeftColor borderTopStyle borderRightStyle borderBottomStyle borderLeftStyle "
@@ -575,7 +568,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "opacity outlineOffset overflowX overflowY ");
     }
 
-    private void testProperties2(final BrowserVersion browserVersion, final String expectedText) throws Exception {
+    private void properties2(final BrowserVersion browserVersion, final String expectedText) throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -606,7 +599,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testCSSText() throws Exception {
+    public void cssText() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var style = document.getElementById('myDiv').style;\n"
@@ -633,7 +626,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testBorder() throws Exception {
+    public void border() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var style = document.getElementById('myDiv').style;\n"
@@ -655,7 +648,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testComputedWidthOfHiddenElements() throws Exception {
+    public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('myDiv1');\n"

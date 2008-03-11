@@ -58,7 +58,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testXMLHttpRequestFlavours() throws Exception {
+    public void xmlHttpRequestFlavours() throws Exception {
         assertFalse(ActiveXObject.isXMLHttpRequest(null));
         assertFalse(ActiveXObject.isXMLHttpRequest("foo"));
         assertTrue(ActiveXObject.isXMLHttpRequest("Microsoft.XMLHTTP"));
@@ -76,7 +76,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testXMLDocument() throws Exception {
+    public void xmlDocument() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"

@@ -57,12 +57,12 @@ public class DOMParserTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testParseFromString() throws Exception {
-        testParseFromString(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"4"});
-        testParseFromString(BrowserVersion.FIREFOX_2, new String[] {"9"});
+    public void parseFromString() throws Exception {
+        parseFromString(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"4"});
+        parseFromString(BrowserVersion.FIREFOX_2, new String[] {"9"});
     }
     
-    private void testParseFromString(final BrowserVersion browserVersion, final String[] expectedAlerts)
+    private void parseFromString(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -95,12 +95,12 @@ public class DOMParserTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testParseFromString_EmptyString() throws Exception {
-        testParseFromString_EmptyString(BrowserVersion.INTERNET_EXPLORER_7_0);
-        testParseFromString_EmptyString(BrowserVersion.FIREFOX_2);
+    public void parseFromString_EmptyString() throws Exception {
+        parseFromString_EmptyString(BrowserVersion.INTERNET_EXPLORER_7_0);
+        parseFromString_EmptyString(BrowserVersion.FIREFOX_2);
     }
     
-    private void testParseFromString_EmptyString(final BrowserVersion browserVersion)
+    private void parseFromString_EmptyString(final BrowserVersion browserVersion)
         throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
