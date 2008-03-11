@@ -239,10 +239,29 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return flags;
         }
         public String getJavaPattern() {
-            return jsSource_.replaceAll("\\[\\^\\\\\\d\\]", ".");
+            return jsRegExpToJavaRegExp(jsSource_);
         }
+        
+        private String jsRegExpToJavaRegExp(String re) {
+            re = re.replaceAll("\\[\\^\\\\\\d\\]", ".");
+            re = escapeJSCurly(re);
+            return re;
+        }
+        
         boolean hasFlag(final char c) {
             return jsFlags_.indexOf(c) != -1;
         }
+    }
+
+    /**
+     * Escape curly braces that are not used in an expression like "{n}", "{n,}" or "{n,m}"
+     * (where n and m are positive integers).
+     * @param re the regular expression to escape
+     * @return the escaped expression
+     */
+    static String escapeJSCurly(String re) {
+        re = re.replaceAll("(?<!\\\\)\\{(?!\\d)", "\\\\{");
+        re = re.replaceAll("(?<!(\\d,?|\\\\))\\}", "\\\\}");
+        return re;
     }
 }

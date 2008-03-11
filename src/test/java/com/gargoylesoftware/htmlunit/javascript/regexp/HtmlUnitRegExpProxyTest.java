@@ -350,4 +350,42 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase2 {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+    
+    /**
+     * Curly braces can be used non escaped in JS regexp
+     */
+    @Test
+    public void testEscapeCurlyBraces() {
+        assertEquals("\\{", HtmlUnitRegExpProxy.escapeJSCurly("{"));
+        assertEquals("\\{", HtmlUnitRegExpProxy.escapeJSCurly("\\{"));
+        assertEquals("\\}", HtmlUnitRegExpProxy.escapeJSCurly("}"));
+        assertEquals("\\}", HtmlUnitRegExpProxy.escapeJSCurly("\\}"));
+        assertEquals("(^|\\{)#([^\\}]+)(\\}|$)", HtmlUnitRegExpProxy.escapeJSCurly("(^|{)#([^}]+)(}|$)"));
+
+        assertEquals("a{5}", HtmlUnitRegExpProxy.escapeJSCurly("a{5}"));
+        assertEquals("a{5,}", HtmlUnitRegExpProxy.escapeJSCurly("a{5,}"));
+        assertEquals("a{5,10}", HtmlUnitRegExpProxy.escapeJSCurly("a{5,10}"));
+    }
+
+    /**
+     * Test usage of RegExp with non escaped curly braces like found in dhtmlGrid
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testRegexWithNonEscapedCurlyBraces() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var regexp = /(^|{)#([^}]+)(}|$)/;\n"
+            + "    var str = '|{#abcd}|';\n"
+            + "    alert(str.match(regexp))\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"{#abcd},{,abcd,}"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
