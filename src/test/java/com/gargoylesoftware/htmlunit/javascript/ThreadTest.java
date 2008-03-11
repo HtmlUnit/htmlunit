@@ -42,9 +42,13 @@ import java.util.Collections;
 import java.util.List;
 
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -52,8 +56,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author David D. Kilzer
+ * @author Ahmed Ashour
  */
-public class ThreadTest extends WebTestCase {
+public class ThreadTest extends TestCase {
 
     /**
      * Create an instance
@@ -148,12 +153,19 @@ public class ThreadTest extends WebTestCase {
                 + "</script></head><body onload='doTest()'>\n"
                 + "<p>hello world</p>\n"
                 + "<form name='form1'>\n"
-                + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+                + "    <input type='text' name='textfield1' id='textfield1' value='foo'>\n"
                 + "</form>\n"
                 + "</body></html>";
 
             final List<String> collectedAlerts = new ArrayList<String>();
-            final HtmlPage page = loadPage(content, collectedAlerts);
+            final WebClient client = new WebClient();
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+            final MockWebConnection webConnection = new MockWebConnection(client);
+            webConnection.setDefaultResponse(content);
+            client.setWebConnection(webConnection);
+
+            final HtmlPage page = (HtmlPage) client.getPage(WebTestCase2.URL_FIRST);
             
             assertEquals("foo", page.getTitleText());
             assertEquals("focus not changed to textfield1",
