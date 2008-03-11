@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
@@ -170,7 +169,7 @@ public class IEConditionalCompilationTest extends WebTestCase2 {
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
-        client.getPage(WebTestCase.URL_FIRST);
+        client.getPage(URL_FIRST);
         Assert.assertEquals(Arrays.asList(expectedAlerts), collectedAlerts);
     }
     

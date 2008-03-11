@@ -42,9 +42,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase2;
 
 /**
  * <p>Tests for all the generated attribute accessors.  This test case will
@@ -61,7 +62,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class AttributesTest extends WebTestCase {
+public class AttributesTest extends TestCase {
 
     private final Class< ? > classUnderTest_;
     private final Method method_;
@@ -83,7 +84,7 @@ public class AttributesTest extends WebTestCase {
      * @throws Exception If the tests cannot be created.
      */
     public static Test suite() throws Exception {
-        final HtmlPage page = loadPage("<html><head><title>foo</title></head><body></body></html>");
+        final HtmlPage page = WebTestCase2.loadPage("<html><head><title>foo</title></head><body></body></html>");
 
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = {

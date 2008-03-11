@@ -45,9 +45,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase2;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -158,14 +155,7 @@ public class ThreadTest extends TestCase {
                 + "</body></html>";
 
             final List<String> collectedAlerts = new ArrayList<String>();
-            final WebClient client = new WebClient();
-            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-            final MockWebConnection webConnection = new MockWebConnection(client);
-            webConnection.setDefaultResponse(content);
-            client.setWebConnection(webConnection);
-
-            final HtmlPage page = (HtmlPage) client.getPage(WebTestCase2.URL_FIRST);
+            final HtmlPage page = WebTestCase2.loadPage(content, collectedAlerts);
             
             assertEquals("foo", page.getTitleText());
             assertEquals("focus not changed to textfield1",

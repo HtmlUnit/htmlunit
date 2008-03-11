@@ -119,7 +119,7 @@ public abstract class WebTestCase2 {
      * @return The new page.
      * @throws Exception if something goes wrong.
      */
-    protected static final HtmlPage loadPage(final String html) throws Exception {
+    public static final HtmlPage loadPage(final String html) throws Exception {
         return loadPage(html, null);
     }
 
@@ -131,7 +131,7 @@ public abstract class WebTestCase2 {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
+    public static final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List<String> collectedAlerts) throws Exception {
         return loadPage(browserVersion, html, collectedAlerts, URL_GARGOYLE);
     }
@@ -144,7 +144,7 @@ public abstract class WebTestCase2 {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    protected static final HtmlPage loadPage(final String html, final List<String> collectedAlerts)
+    public static final HtmlPage loadPage(final String html, final List<String> collectedAlerts)
         throws Exception {
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
     }
