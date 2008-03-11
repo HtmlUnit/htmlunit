@@ -63,8 +63,8 @@ import com.gargoylesoftware.htmlunit.WebTestCase2;
 public class DisabledElementTest extends WebTestCase2 {
 
     /**
-     * Data
-     * @return data
+     * Tests data
+     * @return tests data
      */
     @Parameters
     public static Collection<String[]> data() {
@@ -84,7 +84,6 @@ public class DisabledElementTest extends WebTestCase2 {
             {"<select><option id='element1' value='1' {0}></option></select>"},
             {"<select id='element1' {0}><option value='1'></option></select>"},
             {"<textarea id='element1' {0}></textarea>"}
-            
         });
     }
 
