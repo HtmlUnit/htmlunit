@@ -1327,7 +1327,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_height() {
-        return getStyleAttribute("height", true);
+        String height = getStyleAttribute("height", true);
+        if (height.length() > 0) {
+            if (height.matches("\\d+")) {
+                height += "px";
+            }
+        }
+        return height;
     }
 
     /**
@@ -3799,7 +3805,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_width() {
-        return getStyleAttribute("width", true);
+        String width = getStyleAttribute("width", true);
+        if (width.length() > 0) {
+            if (width.matches("\\d+")) {
+                width += "px";
+            }
+        }
+
+        return width;
     }
 
     /**

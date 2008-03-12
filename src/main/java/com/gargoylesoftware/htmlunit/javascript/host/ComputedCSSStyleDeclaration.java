@@ -37,10 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.mozilla.javascript.Context;
 
 
@@ -59,6 +61,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Local modifications maintained here rather than in the element.
      */
     private Map<String, String> localModifications_ = new HashMap<String, String>();
+    
+    private static final Map<String, String> DEFAULT_DISPLAY;
+    
+    static {
+        final Map<String, String> map = new HashMap<String, String>();
+        map.put("A", "inline");
+        map.put("CODE", "inline");
+        map.put("LI", "list-item");
+        map.put("SPAN", "inline");
+        map.put("TABLE", "table");
+        map.put("TBODY", "table-row-group");
+        map.put("TD", "table-cell");
+        map.put("TH", "table-cell");
+        map.put("THEAD", "table-header-group");
+        map.put("TR", "table-row");
+        
+        DEFAULT_DISPLAY = Collections.unmodifiableMap(map);
+    }
 
     /**
      * Create an instance. Javascript objects must have a default constructor.
@@ -345,7 +365,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_display() {
-        return getValue(super.jsxGet_display(), "block");
+        return getValue(super.jsxGet_display(), getDefaultStyleDisplay());
+    }
+
+    private String getDefaultStyleDisplay() {
+        final String defaultValue = DEFAULT_DISPLAY.get(getHTMLElement().jsxGet_tagName());
+        if (defaultValue == null) {
+            return "block";
+        }
+        else {
+            return defaultValue;
+        }
     }
 
     /**
@@ -1041,6 +1071,32 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             defaultWidth = "1256px";
         }
         return getValue(super.jsxGet_width(), defaultWidth);
+    }
+
+    /**
+     * Computes the element's width
+     * @return the width
+     */
+    int getOffsetWidth() {
+        final int width = intValue(super.jsxGet_width());
+        final int borderLeft = intValue(jsxGet_borderLeftWidth());
+        final int borderRight = intValue(jsxGet_borderRightWidth());
+        return width + borderLeft + borderRight;
+    }
+
+    /**
+     * Computes the element's height
+     * @return the height
+     */
+    int getOffsetHeight() {
+        final int height = intValue(super.jsxGet_height());
+        final int borderTop = intValue(jsxGet_borderTopWidth());
+        final int borderBottom = intValue(jsxGet_borderBottomWidth());
+        return height + borderTop + borderBottom;
+    }
+
+    private int intValue(final String value) {
+        return NumberUtils.toInt(value.replaceAll("(\\d+).*", "$1"), 0);
     }
 
     /**

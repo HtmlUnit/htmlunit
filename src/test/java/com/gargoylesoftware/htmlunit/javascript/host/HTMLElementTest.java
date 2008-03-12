@@ -1432,6 +1432,37 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception If the test fails
+     */
+    @Test
+    public void testOffsetWidthAndHeight() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myDiv');\n"
+            + "    e.style.width = 30;\n"
+            + "    alert(e.style.width);\n"
+            + "    alert(e.offsetWidth);\n"
+            + "    e.style.height = 55;\n"
+            + "    alert(e.style.height);\n"
+            + "    alert(e.offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv' style='border: 2px solid #fff'></div>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"30px", "34", "55px", "59"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Test scrolls (real values don't matter currently).
      *
      * @throws Exception if the test fails

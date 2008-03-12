@@ -166,7 +166,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the current (calculated) style object for this element.
      * @return the current (calculated) style object for this element
      */
-    public Object jsxGet_currentStyle() {
+    public ComputedCSSStyleDeclaration jsxGet_currentStyle() {
         return getWindow().jsxFunction_getComputedStyle(this, null);
     }
 
@@ -1302,7 +1302,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return event.jsxGet_clientY() - getPosY() + 50;
         }
         else {
-            return 1;
+            return jsxGet_currentStyle().getOffsetHeight();
         }
     }
 
@@ -1321,7 +1321,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return event.jsxGet_clientX() - getPosX() + 50;
         }
         else {
-            return 1;
+            return jsxGet_currentStyle().getOffsetWidth();
         }
     }
 
