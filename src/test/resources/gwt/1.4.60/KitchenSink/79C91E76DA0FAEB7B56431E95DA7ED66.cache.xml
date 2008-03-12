@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache-entry>
+	<generated-type-hash class="com.google.gwt.user.client.ui.DisclosurePanelImages_generatedBundle" hash="C3200EFB6E7300D017A8CC0EF2DAE656"/>
+	<generated-type-hash class="com.google.gwt.sample.kitchensink.client.RichTextToolbar_Images_generatedBundle" hash="0746DEAD67C0D7D4D3869AEBF43EDE83"/>
+	<generated-type-hash class="com.google.gwt.user.client.ui.TreeImages_generatedBundle" hash="C4DB9D53C840859028C6F483DB58A75C"/>
+	<generated-type-hash class="com.google.gwt.user.client.ui.HorizontalSplitPanelImages_generatedBundle" hash="A4F3ACC572B03FED0F079F1357B03D6B"/>
+	<generated-type-hash class="com.google.gwt.sample.kitchensink.client.Sink_Images_generatedBundle" hash="704E0A5A38EC85F065CD2304E4553BD0"/>
+	<generated-type-hash class="com.google.gwt.user.client.ui.VerticalSplitPanelImages_generatedBundle" hash="5511972AC798E2D4929A3B2A52FBFCA1"/>
+	<generated-type-hash class="com.google.gwt.sample.kitchensink.client.RichTextToolbar_Strings_" hash="F91D2203E0374F8F22CC702E1C9081A0"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.TreeImages" out="com.google.gwt.user.client.ui.TreeImages_generatedBundle"/>
+	<rebind-decision in="com.google.gwt.sample.kitchensink.client.RichTextToolbar.Strings" out="com.google.gwt.sample.kitchensink.client.RichTextToolbar_Strings_"/>
+	<rebind-decision in="com.google.gwt.sample.kitchensink.client.RichTextToolbar.Images" out="com.google.gwt.sample.kitchensink.client.RichTextToolbar_Images_generatedBundle"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.VerticalSplitPanelImages" out="com.google.gwt.user.client.ui.VerticalSplitPanelImages_generatedBundle"/>
+	<rebind-decision in="com.google.gwt.sample.kitchensink.client.KitchenSink" out="com.google.gwt.sample.kitchensink.client.KitchenSink"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.FormPanelImpl" out="com.google.gwt.user.client.ui.impl.FormPanelImpl"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.RichTextAreaImpl" out="com.google.gwt.user.client.ui.impl.RichTextAreaImplOpera"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.HorizontalSplitPanel.Impl" out="com.google.gwt.user.client.ui.HorizontalSplitPanel.Impl"/>
+	<rebind-decision in="com.google.gwt.sample.kitchensink.client.Sink.Images" out="com.google.gwt.sample.kitchensink.client.Sink_Images_generatedBundle"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.DisclosurePanelImages" out="com.google.gwt.user.client.ui.DisclosurePanelImages_generatedBundle"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.TextBoxImpl" out="com.google.gwt.user.client.ui.impl.TextBoxImpl"/>
+	<rebind-decision in="com.google.gwt.user.client.impl.DOMImpl" out="com.google.gwt.user.client.impl.DOMImplOpera"/>
+	<rebind-decision in="com.google.gwt.user.client.impl.HistoryImpl" out="com.google.gwt.user.client.impl.HistoryImplStandard"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.VerticalSplitPanel.Impl" out="com.google.gwt.user.client.ui.VerticalSplitPanel.Impl"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.ListBox.Impl" out="com.google.gwt.user.client.ui.ListBox.Impl"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.ClippedImageImpl" out="com.google.gwt.user.client.ui.impl.ClippedImageImpl"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.FocusImpl" out="com.google.gwt.user.client.ui.impl.FocusImplOld"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.HorizontalSplitPanelImages" out="com.google.gwt.user.client.ui.HorizontalSplitPanelImages_generatedBundle"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.PopupImpl" out="com.google.gwt.user.client.ui.impl.PopupImpl"/>
+</cache-entry>
