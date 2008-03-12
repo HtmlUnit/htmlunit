@@ -72,7 +72,7 @@ import com.gargoylesoftware.htmlunit.html.SubmittableElement;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class InputTest extends WebTestCase {
+public class HTMLInputElementTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
