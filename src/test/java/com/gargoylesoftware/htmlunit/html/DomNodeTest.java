@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- *  Tests for {@link DomNode}.
+ * Tests for {@link DomNode}.
  *
  * @version $Revision$
  * @author Chris Erskine

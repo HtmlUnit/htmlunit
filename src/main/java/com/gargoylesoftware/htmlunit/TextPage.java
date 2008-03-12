@@ -76,7 +76,7 @@ public class TextPage implements Page {
     }
 
     /**
-     *  Return the content of the page
+     * Return the content of the page
      *
      * @return See above
      */
@@ -85,7 +85,7 @@ public class TextPage implements Page {
     }
 
     /**
-     *  Return the web response that was originally used to create this page.
+     * Return the web response that was originally used to create this page.
      *
      * @return The web response
      */

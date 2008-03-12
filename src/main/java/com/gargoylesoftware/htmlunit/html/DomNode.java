@@ -606,10 +606,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
     
     /**
-     *  Returns a text representation of this element that represents what would
-     *  be visible to the user if this page was shown in a web browser. For
-     *  example, a single-selection select element would return the currently selected
-     *  value as text.
+     * Returns a text representation of this element that represents what would
+     * be visible to the user if this page was shown in a web browser. For
+     * example, a single-selection select element would return the currently selected
+     * value as text.
      *
      * @return The element as text.
      */
@@ -625,8 +625,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     *  Return a text string that represents all the child elements as they
-     *  would be visible in a web browser
+     * Return a text string that represents all the child elements as they would be visible in a web browser
      *
      * @return See above
      * @see #asText()

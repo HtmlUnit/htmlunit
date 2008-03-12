@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- *  Wrapper for the html element "button"
+ * Wrapper for the html element "button"
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -76,7 +76,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     *  Set the content of the "value" attribute
+     * Set the content of the "value" attribute
      *
      * @param newValue The new content
      */

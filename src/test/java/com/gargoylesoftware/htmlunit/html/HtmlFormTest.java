@@ -114,7 +114,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     *  Test setCheckedRadioButton() with a value that doesn't exist
+     * Test setCheckedRadioButton() with a value that doesn't exist
      *
      * @exception Exception If the test fails
      */

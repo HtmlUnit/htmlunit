@@ -42,7 +42,7 @@ import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
 /**
- *  Stream handler for javascript urls
+ * Stream handler for javascript urls
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

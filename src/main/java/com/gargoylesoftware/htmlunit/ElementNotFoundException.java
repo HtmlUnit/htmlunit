@@ -38,8 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- *  An exception that is thrown when a specified xml element cannot be found in
- *  the dom model
+ * An exception that is thrown when a specified xml element cannot be found in the dom model
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

@@ -40,8 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 /**
- *  A collection of constants that represent the various ways a form can be
- *  encoded when submitted
+ * A collection of constants that represent the various ways a form can be encoded when submitted
  *
  * @version $Revision$
  * @author Brad Clarke

@@ -45,7 +45,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  Wrapper for the html element "tr"
+ * Wrapper for the html element "tr"
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
