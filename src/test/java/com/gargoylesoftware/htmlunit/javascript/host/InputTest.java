@@ -691,4 +691,33 @@ public class InputTest extends WebTestCase {
         final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
         assertEquals("page 2", page2.getTitleText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testMaxLength() throws Exception {
+        final String content
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    alert(input.maxlength);\n"
+            + "    alert(input.maxLength);\n"
+            + "    alert(input.MaxLength);\n"
+            + "    alert(input.getAttribute('maxlength'));\n"
+            + "    alert(input.getAttribute('maxLength'));\n"
+            + "    alert(input.getAttribute('MaxLength'));\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='myForm' action='foo'>\n"
+            + "<input type='text' id='text1' maxlength='30'/>\n"
+            + "</form></body></html>";
+    
+        final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+    
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

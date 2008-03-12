@@ -239,4 +239,15 @@ public class HTMLInputElement extends FormField {
         ((HtmlTextInput) getHtmlElementOrDie()).setSelectionEnd(end);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isAttributeName(final String name) {
+        if ("maxlength".equals(name.toLowerCase())) {
+            return "maxLength".equals(name);
+        }
+
+        return super.isAttributeName(name);
+    }
 }

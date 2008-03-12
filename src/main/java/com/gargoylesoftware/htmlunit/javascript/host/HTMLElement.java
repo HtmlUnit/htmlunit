@@ -307,10 +307,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public Object getWithFallback(final String name) {
         final HtmlElement htmlElement = getHtmlElementOrNull();
-        // can name be an attribute of current element?
-        // first approximation: attribute are all lowercase
-        // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
-        if (htmlElement != null && name.toLowerCase().equals(name)) {
+        if (htmlElement != null && isAttributeName(name)) {
             final String value = htmlElement.getAttributeValue(name);
             if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
                 getLog().debug("Found attribute for evaluation of property \"" + name
@@ -320,6 +317,19 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         return NOT_FOUND;
+    }
+
+    /**
+     * Indicates if this is the name of a well defined attribute that can be access as property.
+     * Ex: for HtmlInputElement maxlength => false but maxLength => true
+     * @param name the name (case sensitive!)
+     * @return <code>false</code> if no standard attribute exists with this name
+     */
+    protected boolean isAttributeName(final String name) {
+        // can name be an attribute of current element?
+        // first approximation: attribute are all lowercase
+        // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
+        return name.toLowerCase().equals(name);
     }
 
     /**
