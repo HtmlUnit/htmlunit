@@ -8,6 +8,9 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="fix" dev="mguillem">
+                JavaScript: return undefined for out of bound element access on HtmlFormElement. 
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: custom RegExp proxy now accepts unescaped curly braces. 
             </action>
             <action type="fix" dev="mguillem">

@@ -318,6 +318,11 @@ public class HTMLFormElement extends HTMLElement {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
+        if (getDomNodeOrNull() == null) {
+            return NOT_FOUND; // typically for the prototype
+        }
+        else {
+            return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
+        }
     }
 }

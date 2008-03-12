@@ -132,6 +132,33 @@ public class HTMLFormElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void testElementsAccessorOutOfBound() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.form1[-1])\n"
+            + "    alert(document.form1[2])\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <input type='button' name='button1'/>\n"
+            + "    <input type='submit' name='submit1'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"undefined", "undefined"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void testRadioButtonArray() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
