@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -249,5 +250,22 @@ public class HTMLInputElement extends FormField {
         }
 
         return super.isAttributeName(name);
+    }
+
+    /**
+     * Gets the max length.
+     * @return the max length.
+     */
+    public int jsxGet_maxLength() {
+        final String attrValue = getHtmlElementOrDie().getAttribute("maxLength");
+        return NumberUtils.toInt(attrValue, -1);
+    }
+
+    /**
+     * Sets the value of "maxLength" attribute.
+     * @param length the new value.
+     */
+    public void jsxSet_maxLength(final int length) {
+        getHtmlElementOrDie().setAttribute("maxLength", String.valueOf(length));
     }
 }

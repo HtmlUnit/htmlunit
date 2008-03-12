@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 
 /**
- * Tests for Inputs and buttons.
+ * Tests for {@link HTMLInputElement} and buttons.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -707,13 +707,20 @@ public class HTMLInputElementTest extends WebTestCase {
             + "    alert(input.getAttribute('maxlength'));\n"
             + "    alert(input.getAttribute('maxLength'));\n"
             + "    alert(input.getAttribute('MaxLength'));\n"
+            + "    input.setAttribute('MaXlenGth', 40);\n"
+            + "    alert(input.maxLength);\n"
+            + "    input.maxLength = 50;\n"
+            + "    alert(input.getAttribute('maxlength'));\n"
+            + "    alert(typeof input.getAttribute('maxLength'));\n"
+            + "    alert(typeof input.maxLength);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "<input type='text' id='text1' maxlength='30'/>\n"
             + "</form></body></html>";
     
-        final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30"};
+        final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30",
+            "40", "50", "string", "number"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
     
         final List<String> collectedAlerts = new ArrayList<String>();
