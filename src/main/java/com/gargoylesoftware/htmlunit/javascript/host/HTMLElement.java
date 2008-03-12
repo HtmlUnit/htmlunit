@@ -52,6 +52,7 @@ import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
+import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
@@ -1220,7 +1221,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                         return null;
                     }
                 };
-                Context.call(action);
+                ContextFactory.getGlobal().call(action);
             }
             catch (final Exception e) {
                 getLog().error("Behavior #default#download: Cannot download " + url_, e);

@@ -164,7 +164,7 @@ public class JavaScriptEngine implements Serializable {
             }
         };
 
-        Context.call(action);
+        ContextFactory.getGlobal().call(action);
     }
 
     /**
@@ -395,7 +395,7 @@ public class JavaScriptEngine implements Serializable {
             }
         };
 
-        return (Script) Context.call(action);
+        return (Script) ContextFactory.getGlobal().call(action);
     }
 
     /**
@@ -439,7 +439,7 @@ public class JavaScriptEngine implements Serializable {
             }
         };
         
-        return Context.call(action);
+        return ContextFactory.getGlobal().call(action);
     }
 
     /**
@@ -471,7 +471,7 @@ public class JavaScriptEngine implements Serializable {
                 return cx.decompileFunction(function, 2);
             }
         };
-        return Context.call(action);
+        return ContextFactory.getGlobal().call(action);
     }
 
     private Scriptable getScope(final HtmlPage htmlPage, final DomNode htmlElement) {

@@ -55,6 +55,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
+import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -1258,7 +1259,7 @@ public abstract class HtmlElement extends DomElement implements Element {
             }
         };
 
-        final ScriptResult result = (ScriptResult) Context.call(action);
+        final ScriptResult result = (ScriptResult) ContextFactory.getGlobal().call(action);
         final boolean isIE = getPage().getWebClient().getBrowserVersion().isIE();
         if ((!isIE && event.isPreventDefault()) || (isIE && ScriptResult.isFalse(result))) {
             preventDefault();

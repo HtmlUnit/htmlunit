@@ -45,6 +45,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
+import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
@@ -346,8 +347,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             // Create and start a thread in which to execute the request.
             final Object startingScope = getWindow();
 
-            final ContextAction action = new ContextAction()
-            {
+            final ContextAction action = new ContextAction() {
                 public Object run(final Context cx) {
                     cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
                     doSend(cx);
@@ -356,7 +356,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             };
             final Runnable t = new Runnable() {
                 public void run() {
-                    Context.call(action);
+                    ContextFactory.getGlobal().call(action);
                 }
             };
 
