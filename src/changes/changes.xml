@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="update" dev="asashour">
+                Upgrade Jetty to 6.1.8.
+            </action>
             <action type="remove" dev="asashour">
                 INCOMPATIBLE CHANGE: Remove KeyValuePair, and hide HtmlForm.getParameterListForSubmit() and .getSubmittableElements(),
                 they shouldn't be directly called by users.
