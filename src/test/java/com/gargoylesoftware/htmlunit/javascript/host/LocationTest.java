@@ -226,7 +226,6 @@ public class LocationTest extends WebTestCase {
      */
     @Test
     public void testSetHash() throws Exception {
-
         final WebClient webClient = new WebClient();
         final MockWebConnection conn = new MockWebConnection(webClient);
 
@@ -246,7 +245,7 @@ public class LocationTest extends WebTestCase {
         final HtmlPage page2 = (HtmlPage) anchor.click();
 
         // Verify that it worked.
-        final String[] expected = new String[] {"", "b"};
+        final String[] expected = new String[] {"", "#b"};
         assertEquals(expected, actual);
 
         // Verify that we didn't reload the page.
@@ -423,10 +422,10 @@ public class LocationTest extends WebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function test() {\n"
             + "    location.assign('" + URL_SECOND + "');\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -567,4 +566,25 @@ public class LocationTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * @throws Exception If the test fails.
+     */
+    @Test
+    public void hash() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    window.location.hash = 'hello';\n"
+            + "    alert(window.location.hash);\n"
+            + "    window.location.hash = '#hi';\n"
+            + "    alert(window.location.hash);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"#hello", "#hi"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

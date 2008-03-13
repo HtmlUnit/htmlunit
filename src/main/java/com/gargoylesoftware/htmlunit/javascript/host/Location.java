@@ -274,9 +274,12 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
-    public void jsxSet_hash(final String hash) throws Exception {
+    public void jsxSet_hash(String hash) throws Exception {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
+        if (!hash.startsWith("#")) {
+            hash = "#" + hash;
+        }
         hash_ = hash;
     }
 

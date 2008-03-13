@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="asashour">
+                JavaScript: fix window.location.hash so it always starts with '#'.
+            </action>
             <action type="update" dev="asashour">
                 Upgrade Jetty to 6.1.8, Commons IO to 1.4 and FileUpload to 1.2.1.
             </action>

@@ -403,10 +403,6 @@ public class GWT14Test extends WebTestCase {
      */
     @Test
     public void kitchenSink() throws Exception {
-        //TODO: sometimes succeeds.
-        //if (notYetImplemented()) {
-        //    return;
-        //}
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/KitchenSink");
         final WebClient client = new WebClient();
 
@@ -421,9 +417,9 @@ public class GWT14Test extends WebTestCase {
         assertSame(page, page2);
         assertEquals("Basic Widgets", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
-        //final Page page3 = page.getAnchorByHref("#Panels").click();
-        //assertSame(page, page3);
-        //assertEquals("Panels", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
+        final Page page3 = page.getAnchorByHref("#Panels").click();
+        assertSame(page, page3);
+        assertEquals("Panels", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
     }
 
     /**
