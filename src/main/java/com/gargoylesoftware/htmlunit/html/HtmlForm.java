@@ -258,7 +258,7 @@ public class HtmlForm extends ClickableElement {
      * form or null if the form was submitted by javascript.
      * @return See above
      */
-    public Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
+    Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
         final List<SubmittableElement> submittableElements = new ArrayList<SubmittableElement>();
 
         for (final HtmlElement element : getAllHtmlChildElements()) {
