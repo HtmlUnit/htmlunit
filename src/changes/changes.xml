@@ -8,7 +8,7 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="update" dev="asashour">
-                Upgrade Jetty to 6.1.8 and Commons IO to 1.4.
+                Upgrade Jetty to 6.1.8, Commons IO to 1.4 and FileUpload to 1.2.1.
             </action>
             <action type="remove" dev="asashour">
                 INCOMPATIBLE CHANGE: Remove KeyValuePair, and hide HtmlForm.getParameterListForSubmit() and .getSubmittableElements(),

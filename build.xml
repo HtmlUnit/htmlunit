@@ -206,7 +206,7 @@ JUnit results available here: ${test.reports.dir}/index.html
 		<get-dependency type="test" project="org.slf4j" jarName="slf4j-api-1.4.3.jar"/>
 		<get-dependency type="test" project="org.slf4j" jarName="slf4j-log4j12-1.4.3.jar"/>
 		<get-dependency type="test" project="javax.servlet" jarName="servlet-api-2.4.jar"/>
-		<get-dependency type="test" project="commons-fileupload" jarName="commons-fileupload-1.2.jar"/>
+		<get-dependency type="test" project="commons-fileupload" jarName="commons-fileupload-1.2.1.jar"/>
 		
 	</target>
 
