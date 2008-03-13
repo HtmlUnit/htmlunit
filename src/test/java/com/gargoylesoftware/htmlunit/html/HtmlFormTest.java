@@ -48,6 +48,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -55,7 +56,6 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -175,10 +175,10 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
-            new KeyValuePair("textfield", "*"), new KeyValuePair("button", "foo")
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[]{
+            new NameValuePair("textfield", "*"), new NameValuePair("button", "foo")
         });
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -499,10 +499,10 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
-            new KeyValuePair("textfield", ""), new KeyValuePair("button", "foo")
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[]{
+            new NameValuePair("textfield", ""), new NameValuePair("button", "foo")
         });
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -526,9 +526,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List<KeyValuePair> expectedParameters =
-            Arrays.asList(new KeyValuePair[]{new KeyValuePair("button", "foo")});
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> expectedParameters =
+            Arrays.asList(new NameValuePair[]{new NameValuePair("button", "foo")});
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -550,9 +550,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
         button.click();
 
-        final List<KeyValuePair> expectedParameters =
-            Arrays.asList(new KeyValuePair[]{new KeyValuePair("textfield", "blah")});
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> expectedParameters =
+            Arrays.asList(new NameValuePair[]{new NameValuePair("textfield", "blah")});
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -580,11 +580,11 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
-            new KeyValuePair("textfield", "blah"),
-            new KeyValuePair("button", "foo")
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[]{
+            new NameValuePair("textfield", "blah"),
+            new NameValuePair("button", "foo")
         });
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -608,9 +608,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         button.click();
 
-        final List<KeyValuePair> expectedParameters =
-            Arrays.asList(new KeyValuePair[]{new KeyValuePair("button", "foo")});
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> expectedParameters =
+            Arrays.asList(new NameValuePair[]{new NameValuePair("button", "foo")});
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -636,9 +636,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submit");
         button.click();
 
-        final List<KeyValuePair> expectedParameters =
-            Arrays.asList(new KeyValuePair[] {new KeyValuePair("submit", "submit")});
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> expectedParameters =
+            Arrays.asList(new NameValuePair[] {new NameValuePair("submit", "submit")});
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -672,9 +672,9 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlSubmitInput button1 = (HtmlSubmitInput) form1.getInputByName("button");
 
         final HtmlPage page2 = (HtmlPage) button1.click();
-        final List<KeyValuePair> collectedParameters1 = webConnection1.getLastParameters();
-        final List<KeyValuePair> expectedParameters1 =
-            Arrays.asList(new KeyValuePair[] {new KeyValuePair("button", "foo")});
+        final List<NameValuePair> collectedParameters1 = webConnection1.getLastParameters();
+        final List<NameValuePair> expectedParameters1 =
+            Arrays.asList(new NameValuePair[] {new NameValuePair("button", "foo")});
 
         final MockWebConnection webConnection2 = getMockConnection(page2);
         final HtmlForm form2 = (HtmlForm) page2.getHtmlElementById("form1");
@@ -683,10 +683,10 @@ public class HtmlFormTest extends WebTestCase {
 
         checkBox2.click();
         button2.click();
-        final List<KeyValuePair> collectedParameters2 = webConnection2.getLastParameters();
-        final List<KeyValuePair> expectedParameters2 = Arrays.asList(new KeyValuePair[] {
-            new KeyValuePair("Format", "html"),
-            new KeyValuePair("button", "foo")
+        final List<NameValuePair> collectedParameters2 = webConnection2.getLastParameters();
+        final List<NameValuePair> expectedParameters2 = Arrays.asList(new NameValuePair[] {
+            new NameValuePair("Format", "html"),
+            new NameValuePair("button", "foo")
         });
 
         assertEquals(expectedParameters1, collectedParameters1);
@@ -885,10 +885,10 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlInput submitButton = (HtmlInput) page.getHtmlElementById("submitButton");
         submitButton.click();
 
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
-        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[] {
-            new KeyValuePair("data", "NOT_SUBMITTED"),
-            new KeyValuePair("submit", "Submit Query")
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[] {
+            new NameValuePair("data", "NOT_SUBMITTED"),
+            new NameValuePair("submit", "Submit Query")
         });
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -916,10 +916,10 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlInput submitButton = (HtmlInput) page.getHtmlElementById("submitButton");
         submitButton.click();
 
-        final List<KeyValuePair> collectedParameters = webConnection.getLastParameters();
-        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[] {
-            new KeyValuePair("dispatch", "Save"),
-            new KeyValuePair("dispatch", "TAB"),
+        final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[] {
+            new NameValuePair("dispatch", "Save"),
+            new NameValuePair("dispatch", "TAB"),
         });
         assertEquals(expectedParameters, collectedParameters);
     }

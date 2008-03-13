@@ -332,8 +332,8 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient webClient = new WebClient();
 
-        final List<KeyValuePair> headers =
-            Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
+        final List<NameValuePair> headers =
+            Collections.singletonList(new NameValuePair("Location", URL_FIRST.toExternalForm()));
         
         // builds a webconnection that first sends a redirect and then a "normal" response for
         // the same requested url
@@ -541,8 +541,8 @@ public class WebClientTest extends WebTestCase {
         final WebClient webClient = new WebClient();
 
         final URL url = URL_FIRST;
-        final List<KeyValuePair> headers =
-            Collections.singletonList(new KeyValuePair("Location", URL_FIRST.toExternalForm()));
+        final List<NameValuePair> headers =
+            Collections.singletonList(new NameValuePair("Location", URL_FIRST.toExternalForm()));
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
             @Override
@@ -609,7 +609,7 @@ public class WebClientTest extends WebTestCase {
         webClient.setThrowExceptionOnFailingStatusCode(false);
         webClient.setPrintContentOnFailingStatusCode(false);
 
-        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", newLocation));
+        final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", newLocation));
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(
             URL_FIRST, firstContent, statusCode,
@@ -1215,7 +1215,7 @@ public class WebClientTest extends WebTestCase {
         webClient.addHostsToProxyBypass("hostToByPass");
         
         final String location2 = "http://hostToByPass/foo.html";
-        final List<KeyValuePair> headers = Collections.singletonList(new KeyValuePair("Location", location2));
+        final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", location2));
         final MockWebConnection webConnection = new MockWebConnection(webClient);
         webConnection.setResponse(URL_FIRST, html, 302, "Some error", "text/html", headers);
         webConnection.setResponse(new URL(location2), "<html><head><title>2nd page</title></head></html>");

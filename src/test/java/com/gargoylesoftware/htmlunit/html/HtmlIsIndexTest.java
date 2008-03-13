@@ -40,11 +40,11 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -80,8 +80,8 @@ public class HtmlIsIndexTest extends WebTestCase {
         isInput.setValue("Flintstone");
         final Page secondPage = form.submit((SubmittableElement) null);
 
-        final List<KeyValuePair> expectedParameters = new ArrayList<KeyValuePair>();
-        expectedParameters.add(new KeyValuePair("enterSomeText", "Flintstone"));
+        final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
+        expectedParameters.add(new NameValuePair("enterSomeText", "Flintstone"));
 
         assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
         Assert.assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());

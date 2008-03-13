@@ -41,9 +41,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringEscapeUtils;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -150,9 +150,9 @@ public class HtmlSubmitInput extends HtmlInput {
      * Returns "Submit Query" if <tt>name</tt> attribute is defined and <tt>value</tt> attribute is not defined.
      */
     @Override
-    public KeyValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitKeyValuePairs() {
         if (getNameAttribute().length() != 0 && !isAttributeDefined("value")) {
-            return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), DEFAULT_VALUE)};
+            return new NameValuePair[]{new NameValuePair(getNameAttribute(), DEFAULT_VALUE)};
         }
         else {
             return super.getSubmitKeyValuePairs();

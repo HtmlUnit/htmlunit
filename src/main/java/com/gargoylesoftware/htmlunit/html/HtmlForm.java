@@ -55,7 +55,6 @@ import org.apache.commons.lang.StringUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SubmitMethod;
@@ -136,7 +135,7 @@ public class HtmlForm extends ClickableElement {
             }
         }
 
-        final List<KeyValuePair> parameters = getParameterListForSubmit(submitElement);
+        final List<NameValuePair> parameters = getParameterListForSubmit(submitElement);
         final SubmitMethod method;
         final String methodAttribute = getMethodAttribute();
         if ("post".equalsIgnoreCase(methodAttribute)) {
@@ -215,13 +214,13 @@ public class HtmlForm extends ClickableElement {
      * form or null if the form was submitted by javascript.
      * @return The list of {@link KeyValuePair}s.
      */
-    private final List<KeyValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
+    private List<NameValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
         final Collection<SubmittableElement> submittableElements = getSubmittableElements(submitElement);
 
-        final List<KeyValuePair> parameterList = new ArrayList<KeyValuePair>(submittableElements.size());
+        final List<NameValuePair> parameterList = new ArrayList<NameValuePair>(submittableElements.size());
         for (final SubmittableElement element : submittableElements) {
 
-            for (final KeyValuePair pair : element.getSubmitKeyValuePairs()) {
+            for (final NameValuePair pair : element.getSubmitKeyValuePairs()) {
                 parameterList.add(pair);
             }
         }

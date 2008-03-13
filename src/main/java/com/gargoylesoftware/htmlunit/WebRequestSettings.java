@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.lang.ClassUtils;
 
@@ -66,7 +67,7 @@ public class WebRequestSettings {
     private String charset_ = TextUtil.DEFAULT_CHARSET;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
-    private List<KeyValuePair> requestParameters_ = Collections.emptyList();
+    private List<NameValuePair> requestParameters_ = Collections.emptyList();
     private String requestBody_;
 
     /**
@@ -156,7 +157,7 @@ public class WebRequestSettings {
     /**
      * @return Returns the requestParameters.
      */
-    public List<KeyValuePair> getRequestParameters() {
+    public List<NameValuePair> getRequestParameters() {
         return requestParameters_;
     }
 
@@ -164,7 +165,7 @@ public class WebRequestSettings {
      * @param requestParameters The requestParameters to set.
      * @throws RuntimeException If the request body has already been set.
      */
-    public void setRequestParameters(final List<KeyValuePair> requestParameters) throws RuntimeException {
+    public void setRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
         if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
                              + "the two are mutually exclusive!";

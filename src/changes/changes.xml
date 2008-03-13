@@ -8,7 +8,7 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="remove" dev="asashour">
-                INCOMPATIBLE CHANGE: hide HtmlForm.getParameterListForSubmit() and .getSubmittableElements(),
+                INCOMPATIBLE CHANGE: Remove KeyValuePair, and hide HtmlForm.getParameterListForSubmit() and .getSubmittableElements(),
                 they shouldn't be directly called by users.
             </action>
             <action type="fix" dev="mguillem">

@@ -41,11 +41,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -82,7 +82,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
         assertEquals("foo", secondPage.getTitleText());
 
         assertEquals(
-            Collections.singletonList(new KeyValuePair("button", "foo")),
+            Collections.singletonList(new NameValuePair("button", "foo")),
             webConnection.getLastParameters());
     }
 

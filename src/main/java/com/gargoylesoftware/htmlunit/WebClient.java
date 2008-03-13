@@ -1466,7 +1466,7 @@ public class WebClient implements Serializable {
             IOException {
         final URL url = webRequestSettings.getURL();
         final SubmitMethod method = webRequestSettings.getSubmitMethod();
-        final List<KeyValuePair> parameters = webRequestSettings.getRequestParameters();
+        final List<NameValuePair> parameters = webRequestSettings.getRequestParameters();
 
         WebAssert.notNull("url", url);
         WebAssert.notNull("method", method);

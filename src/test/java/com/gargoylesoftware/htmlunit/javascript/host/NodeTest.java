@@ -44,11 +44,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -137,7 +137,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body></html>";
 
-        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", emptyList);
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -175,7 +175,7 @@ public class NodeTest extends WebTestCase {
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
 
-        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", emptyList);
 
         final List<String> collectedAlerts = new ArrayList<String>();

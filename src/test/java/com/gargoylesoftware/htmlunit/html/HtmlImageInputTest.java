@@ -43,9 +43,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -80,9 +80,9 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click();
         assertNotNull(secondPage);
 
-        final List<KeyValuePair> expectedPairs = Arrays.asList(new KeyValuePair[]{
-            new KeyValuePair("button.x", "0"),
-            new KeyValuePair("button.y", "0")
+        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
+            new NameValuePair("button.x", "0"),
+            new NameValuePair("button.y", "0")
         });
 
         assertEquals(
@@ -111,9 +111,9 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List<KeyValuePair> expectedPairs = Arrays.asList(new KeyValuePair[]{
-            new KeyValuePair("button.x", "100"),
-            new KeyValuePair("button.y", "200")
+        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
+            new NameValuePair("button.x", "100"),
+            new NameValuePair("button.y", "200")
         });
 
         assertEquals(
@@ -142,9 +142,9 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List<KeyValuePair> expectedPairs = Arrays.asList(new KeyValuePair[]{
-            new KeyValuePair("x", "100"),
-            new KeyValuePair("y", "200")
+        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
+            new NameValuePair("x", "100"),
+            new NameValuePair("y", "200")
         });
 
         assertEquals(

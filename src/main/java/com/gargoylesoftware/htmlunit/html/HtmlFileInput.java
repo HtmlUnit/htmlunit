@@ -42,10 +42,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.KeyDataPair;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 
 /**
  * Wrapper for the HTML element "input".
@@ -90,11 +90,11 @@ public class HtmlFileInput extends HtmlInput {
      * @return See above
      */
     @Override
-    public KeyValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitKeyValuePairs() {
         String value = getValueAttribute();
 
         if (StringUtils.isEmpty(value)) {
-            return new KeyValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
+            return new NameValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
         }
         
         File file = null;
@@ -126,8 +126,7 @@ public class HtmlFileInput extends HtmlInput {
             contentType = contentType_;
         }
         final String charset = getPage().getPageEncoding();
-        return new KeyValuePair[] {new KeyDataPair(getNameAttribute(), file, contentType,
-                charset) };
+        return new NameValuePair[] {new KeyDataPair(getNameAttribute(), file, contentType, charset)};
     }
 
     /**

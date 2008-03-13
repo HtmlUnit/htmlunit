@@ -68,7 +68,7 @@ public class WebResponseDataTest extends WebTestCase {
         final byte[] zippedContent = IOUtils.toByteArray(stream);
 
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
-        headers.add(new KeyValuePair("Content-Encoding", "gzip"));
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
         final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
         final String body = new String(data.getBody(), "UTF-8");

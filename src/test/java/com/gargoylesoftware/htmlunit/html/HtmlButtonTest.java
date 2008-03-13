@@ -45,10 +45,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -219,10 +219,10 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertNotSame(page, secondPage);
-        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[]{
-            new KeyValuePair("button", "foo")
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[]{
+            new NameValuePair("button", "foo")
         });
-        final List<KeyValuePair> collectedParameters = getMockConnection(secondPage).getLastParameters();
+        final List<NameValuePair> collectedParameters = getMockConnection(secondPage).getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
     }
@@ -266,10 +266,10 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals(expectedType, button.getTypeAttribute());
         
         final HtmlPage page2 = (HtmlPage) button.click();
-        final List<KeyValuePair> expectedParameters;
+        final List<NameValuePair> expectedParameters;
         final String expectedSecondPageTitle;
         if (expectedType.equals("submit")) {
-            expectedParameters = Collections.singletonList(new KeyValuePair("button", "pushme"));
+            expectedParameters = Collections.singletonList(new NameValuePair("button", "pushme"));
             expectedSecondPageTitle = "Second";
         }
         else {

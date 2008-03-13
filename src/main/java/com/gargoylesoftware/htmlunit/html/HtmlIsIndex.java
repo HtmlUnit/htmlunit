@@ -39,7 +39,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
+import org.apache.commons.httpclient.NameValuePair;
+
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
@@ -103,8 +104,8 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      *
      * @return See above
      */
-    public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair(getPromptAttribute(), getValue())};
+    public NameValuePair[] getSubmitKeyValuePairs() {
+        return new NameValuePair[]{new NameValuePair(getPromptAttribute(), getValue())};
     }
 
     /**

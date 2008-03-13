@@ -37,7 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
+import org.apache.commons.httpclient.NameValuePair;
 
 /**
  * An element that can have it's values sent to the server during a form submit
@@ -57,7 +57,7 @@ public interface SubmittableElement {
      *
      * @return See above
      */
-    KeyValuePair[] getSubmitKeyValuePairs();
+    NameValuePair[] getSubmitKeyValuePairs();
 
     /**
      * Return the value of this element to the default value or checked state (usually what it was at

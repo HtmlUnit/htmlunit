@@ -41,7 +41,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.KeyValuePair;
+import org.apache.commons.httpclient.NameValuePair;
+
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -145,8 +146,8 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      *
      * @return See above
      */
-    public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getText())};
+    public NameValuePair[] getSubmitKeyValuePairs() {
+        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getText())};
     }
 
     /**

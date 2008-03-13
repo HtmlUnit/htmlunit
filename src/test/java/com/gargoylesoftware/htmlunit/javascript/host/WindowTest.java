@@ -49,6 +49,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -56,7 +57,6 @@ import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
@@ -1933,7 +1933,7 @@ public class WindowTest extends WebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "image/gif", emptyList);
         webClient.setWebConnection(webConnection);
@@ -1978,7 +1978,7 @@ public class WindowTest extends WebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/plain", emptyList);
         webClient.setWebConnection(webConnection);
@@ -2023,7 +2023,7 @@ public class WindowTest extends WebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/xml", emptyList);
         webClient.setWebConnection(webConnection);
@@ -2068,7 +2068,7 @@ public class WindowTest extends WebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List< ? extends KeyValuePair> emptyList = Collections.emptyList();
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/javascript", emptyList);
         webClient.setWebConnection(webConnection);

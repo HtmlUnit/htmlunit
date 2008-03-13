@@ -39,6 +39,8 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
 
+import org.apache.commons.httpclient.NameValuePair;
+
 /**
  * A holder for a key/value pair that represents a file to upload.
  *
@@ -47,7 +49,7 @@ import java.io.File;
  * @author David D. Kilzer
  * @author Mike Bowler
  */
-public class KeyDataPair extends KeyValuePair {
+public class KeyDataPair extends NameValuePair {
 
     private static final long serialVersionUID = -1129314696176851675L;
     

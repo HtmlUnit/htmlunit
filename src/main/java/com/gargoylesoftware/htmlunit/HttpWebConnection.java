@@ -248,7 +248,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             }
             else {
                 final List<PartBase> partList = new ArrayList<PartBase>();
-                for (final KeyValuePair pair : webRequestSettings.getRequestParameters()) {
+                for (final NameValuePair pair : webRequestSettings.getRequestParameters()) {
                     final PartBase newPart;
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;

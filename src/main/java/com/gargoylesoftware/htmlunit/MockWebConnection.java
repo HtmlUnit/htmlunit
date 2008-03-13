@@ -127,7 +127,7 @@ public class MockWebConnection extends WebConnectionImpl {
      *
      * @return See above
      */
-    public List<KeyValuePair> getLastParameters() {
+    public List<NameValuePair> getLastParameters() {
         return lastRequest_.getRequestParameters();
     }
 

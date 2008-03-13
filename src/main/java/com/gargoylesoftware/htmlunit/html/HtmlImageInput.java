@@ -40,10 +40,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -89,7 +89,7 @@ public class HtmlImageInput extends HtmlInput {
      * @return See above
      */
     @Override
-    public KeyValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
         final String prefix;
         // a clicked image without name sends parameter x and y
@@ -101,12 +101,12 @@ public class HtmlImageInput extends HtmlInput {
         }
             
         if (wasPositionSpecified_) {
-            return new KeyValuePair[]{
-                new KeyValuePair(prefix + 'x', String.valueOf(xPosition_)),
-                new KeyValuePair(prefix + 'y', String.valueOf(yPosition_))
+            return new NameValuePair[]{
+                new NameValuePair(prefix + 'x', String.valueOf(xPosition_)),
+                new NameValuePair(prefix + 'y', String.valueOf(yPosition_))
             };
         }
-        return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getValueAttribute())};
+        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
 
     /**

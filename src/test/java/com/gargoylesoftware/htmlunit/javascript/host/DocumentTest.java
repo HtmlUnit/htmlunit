@@ -48,13 +48,13 @@ import java.util.List;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -1626,8 +1626,8 @@ public class DocumentTest extends WebTestCase {
             = "<html><head><title>First</title></head><body onload='alert(document.referrer);'>\n"
             + "</form></body></html>";
 
-        final List<KeyValuePair> responseHeaders =
-            Collections.singletonList(new KeyValuePair("referrer", "http://ref"));
+        final List<NameValuePair> responseHeaders =
+            Collections.singletonList(new NameValuePair("referrer", "http://ref"));
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", responseHeaders);
         webClient.setWebConnection(webConnection);
 

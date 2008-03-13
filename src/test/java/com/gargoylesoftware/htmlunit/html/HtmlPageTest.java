@@ -58,6 +58,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.httpclient.Cookie;
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.NodeList;
@@ -67,7 +68,6 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
@@ -167,11 +167,11 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("submitInput1");
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List<KeyValuePair> expectedParameters = new ArrayList<KeyValuePair>();
-        expectedParameters.add(new KeyValuePair("textInput1", "foo"));
-        expectedParameters.add(new KeyValuePair("textInput2", "textInput2"));
-        expectedParameters.add(new KeyValuePair("hidden1", "hidden1"));
-        expectedParameters.add(new KeyValuePair("submitInput1", "push me"));
+        final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
+        expectedParameters.add(new NameValuePair("textInput1", "foo"));
+        expectedParameters.add(new NameValuePair("textInput2", "textInput2"));
+        expectedParameters.add(new NameValuePair("hidden1", "hidden1"));
+        expectedParameters.add(new NameValuePair("submitInput1", "push me"));
 
         final URL expectedUrl = new URL("http://www.gargoylesoftware.com/formSubmit");
         final URL actualUrl = secondPage.getWebResponse().getUrl();
@@ -921,7 +921,7 @@ public class HtmlPageTest extends WebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
-                .singletonList(new KeyValuePair("Refresh", "3;URL=" + URL_SECOND + "")));
+                .singletonList(new NameValuePair("Refresh", "3;URL=" + URL_SECOND + "")));
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 

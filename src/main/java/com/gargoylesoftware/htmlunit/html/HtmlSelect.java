@@ -43,8 +43,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
+
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
@@ -320,16 +321,16 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @return See above
      */
-    public KeyValuePair[] getSubmitKeyValuePairs() {
+    public NameValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
 
         final List<HtmlOption> selectedOptions = getSelectedOptions();
 
-        final KeyValuePair[] pairs = new KeyValuePair[selectedOptions.size()];
+        final NameValuePair[] pairs = new NameValuePair[selectedOptions.size()];
 
         int i = 0;
         for (final HtmlOption option : selectedOptions) {
-            pairs[i++] = new KeyValuePair(name, option.getValueAttribute());
+            pairs[i++] = new NameValuePair(name, option.getValueAttribute());
         }
         return pairs;
     }

@@ -43,10 +43,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -434,9 +434,9 @@ public class HTMLInputElementTest extends WebTestCase {
         final String[] expectedAlerts = {"changed"};
         assertEquals(expectedAlerts, collectedAlerts);
 
-        final List<KeyValuePair> expectedParameters = Arrays.asList(new KeyValuePair[] {
-            new KeyValuePair("changed", "foo"),
-            new KeyValuePair("button1", "pushme")
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[] {
+            new NameValuePair("changed", "foo"),
+            new NameValuePair("button1", "pushme")
         });
         assertEquals(expectedParameters, connection.getLastParameters());
     }

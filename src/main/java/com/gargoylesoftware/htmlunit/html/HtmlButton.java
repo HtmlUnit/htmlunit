@@ -40,8 +40,9 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
+import org.apache.commons.httpclient.NameValuePair;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.KeyValuePair;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -130,8 +131,8 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      *
      * @return See above
      */
-    public KeyValuePair[] getSubmitKeyValuePairs() {
-        return new KeyValuePair[]{new KeyValuePair(getNameAttribute(), getValueAttribute())};
+    public NameValuePair[] getSubmitKeyValuePairs() {
+        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
 
     /**
