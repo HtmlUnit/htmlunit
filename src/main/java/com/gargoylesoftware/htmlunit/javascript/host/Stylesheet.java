@@ -172,7 +172,13 @@ public class Stylesheet extends SimpleScriptable {
             ss = PARSER.parseStyleSheet(source);
         }
         catch (final Exception e) {
-            getLog().error(e.getMessage(), e);
+            getLog().error("Exception parsing CSS: " + e.getMessage(), e);
+            ss = new CSSStyleSheetImpl();
+        }
+        catch (final Error e) {
+            // Yes, Error! because SACParser may sometimes throws: new Error("Missing return statement in function")
+            // but I haven't been able to reproduce it with a simple test case
+            getLog().error("Error parsing CSS: " + e.getMessage(), e);
             ss = new CSSStyleSheetImpl();
         }
         return ss;
