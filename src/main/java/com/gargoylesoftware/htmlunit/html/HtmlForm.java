@@ -215,7 +215,7 @@ public class HtmlForm extends ClickableElement {
      * form or null if the form was submitted by javascript.
      * @return The list of {@link KeyValuePair}s.
      */
-    public final List<KeyValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
+    private final List<KeyValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
         final Collection<SubmittableElement> submittableElements = getSubmittableElements(submitElement);
 
         final List<KeyValuePair> parameterList = new ArrayList<KeyValuePair>(submittableElements.size());
