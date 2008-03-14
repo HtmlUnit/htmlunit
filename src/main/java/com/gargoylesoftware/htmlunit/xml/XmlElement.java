@@ -317,7 +317,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
      * Not yet implemented.
      */
     public String getAttribute(final String name) {
-    	return StringUtils.defaultString(attributes_.get(name).getValue());
+        return StringUtils.defaultString(attributes_.get(name).getValue());
     }
 
     /**

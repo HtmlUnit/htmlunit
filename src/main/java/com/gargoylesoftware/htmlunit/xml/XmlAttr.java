@@ -175,6 +175,6 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
      * {@inheritDoc}
      */
     public boolean isId() {
-    	return "id".equals(getNodeName());
+        return "id".equals(getNodeName());
     }
 }

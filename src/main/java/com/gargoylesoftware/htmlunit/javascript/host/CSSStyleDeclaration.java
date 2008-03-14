@@ -46,7 +46,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -4095,13 +4094,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     @Override
     public String toString() {
-    	if (jsElement_ == null) {
-    		return "CSSStyleDeclaration for 'null'"; // for instance on prototype
-    	}
-    	else {
+        if (jsElement_ == null) {
+            return "CSSStyleDeclaration for 'null'"; // for instance on prototype
+        }
+        else {
             final String style = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
             return "CSSStyleDeclaration for '" + style + "'";
-    	}
+        }
     }
 
 }

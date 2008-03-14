@@ -412,13 +412,16 @@ public class HtmlScript extends HtmlElement {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
         final DomCharacterData textNode = (DomCharacterData) getFirstDomChild();
         if (textNode != null) {
-        	printWriter.println("//<![CDATA[");
+            printWriter.println("//<![CDATA[");
             printWriter.println(textNode.getData());
-        	printWriter.println("//]]>");
+            printWriter.println("//]]>");
         }
     }
 }

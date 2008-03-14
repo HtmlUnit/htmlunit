@@ -890,7 +890,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to append to this node's children
      */
     private void basicAppend(final DomNode node) {
-    	node.page_ = getPage();
+        node.page_ = getPage();
         if (firstChild_ == null) {
             firstChild_ = node;
             firstChild_.previousSibling_ = node;

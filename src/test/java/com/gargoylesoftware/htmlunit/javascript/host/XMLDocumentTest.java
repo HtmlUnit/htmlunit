@@ -662,50 +662,50 @@ public class XMLDocumentTest extends WebTestCase {
     @Test
     public void testMoveChildBetweenDocuments() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
-		    + "function test() {\n"
-		    + " var doc1 = loadXmlDocument();\n"
-		    + " var doc2 = loadXmlDocument();\n"
-		    + "	alert('same doc: ' + (doc1 == doc2));\n"
-		    + "	var doc1Root = doc1.firstChild;\n"
-		    + "	alert('in first: ' + doc1Root.childNodes.length)\n"
-		    + "	var doc1RootFirstChild = doc1Root.firstChild\n"
-		    + "	alert(doc1RootFirstChild.tagName)\n"
-		    + "	alert('ownerDocument: ' + (doc1RootFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
-		    + "\n"
-		    + "	var doc2Root = doc2.firstChild;\n"
-		    + "	alert('in 2nd: ' + doc2Root.childNodes.length)\n"
-		    + "	doc2Root.appendChild(doc1RootFirstChild)\n"
-		    + "	alert('ownerDocument: ' + (doc1RootFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
-		    + "	alert('in first: ' + doc1Root.childNodes.length)\n"
-		    + "	alert('in 2nd: ' + doc2Root.childNodes.length)\n"
-		    + "\n"
-		    + "}\n"
-		    + "function loadXmlDocument() {\n"
-		    + " var doc;\n"
-		    + " if (document.implementation && document.implementation.createDocument)\n"
-		    + "   doc = document.implementation.createDocument('', '', null);\n"
-		    + " else if (window.ActiveXObject)\n"
-		    + "   doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-		    + " doc.async = false;\n"
-		    + " doc.load('foo.xml');\n"
-		    + "	return doc\n"
-		    + "}\n"
-		    + "</script></head><body onload='test()'>\n"
-		    + "</body></html>";
+            + "function test() {\n"
+            + "  var doc1 = loadXmlDocument();\n"
+            + "  var doc2 = loadXmlDocument();\n"
+            + "  alert('same doc: ' + (doc1 == doc2));\n"
+            + "  var doc1Root = doc1.firstChild;\n"
+            + "  alert('in first: ' + doc1Root.childNodes.length)\n"
+            + "  var doc1RootFirstChild = doc1Root.firstChild\n"
+            + "  alert(doc1RootFirstChild.tagName)\n"
+            + "  alert('ownerDocument: ' + (doc1RootFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
+            + "\n"
+            + "  var doc2Root = doc2.firstChild;\n"
+            + "  alert('in 2nd: ' + doc2Root.childNodes.length)\n"
+            + "  doc2Root.appendChild(doc1RootFirstChild)\n"
+            + "  alert('ownerDocument: ' + (doc1RootFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
+            + "  alert('in first: ' + doc1Root.childNodes.length)\n"
+            + "  alert('in 2nd: ' + doc2Root.childNodes.length)\n"
+            + "\n"
+            + "}\n"
+            + "function loadXmlDocument() {\n"
+            + " var doc;\n"
+            + " if (document.implementation && document.implementation.createDocument)\n"
+            + "   doc = document.implementation.createDocument('', '', null);\n"
+            + " else if (window.ActiveXObject)\n"
+            + "   doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + " doc.async = false;\n"
+            + " doc.load('foo.xml');\n"
+            + " return doc\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
 
         final String xml = "<books><book1/><book2/><book3/></books>";
 
-	    final List<String> collectedAlerts = new ArrayList<String>();
-	    final WebClient client = new WebClient();
-	    client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-	    final MockWebConnection conn = new MockWebConnection(client);
-	    conn.setResponse(URL_FIRST, content);
-	    conn.setResponse(new URL(URL_FIRST.toExternalForm() + "/foo.xml"), xml, "text/xml");
-	    client.setWebConnection(conn);
-	
-	    client.getPage(URL_FIRST);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = new WebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, content);
+        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "/foo.xml"), xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
         final String[] expectedAlerts = {"same doc: false", "in first: 3", "book1", "ownerDocument: doc1",
-        		"in 2nd: 3", "ownerDocument: doc2", "in first: 2", "in 2nd: 4"};
-	    assertEquals(expectedAlerts, collectedAlerts);    
-	}
+            "in 2nd: 3", "ownerDocument: doc2", "in first: 2", "in 2nd: 4"};
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

@@ -162,6 +162,6 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
      * {@inheritDoc}
      */
     public boolean isId() {
-    	return "id".equals(getNodeName());
+        return "id".equals(getNodeName());
     }
 }
