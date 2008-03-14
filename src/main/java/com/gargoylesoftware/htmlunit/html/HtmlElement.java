@@ -321,7 +321,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (attributes_ == Collections.EMPTY_MAP) {
             attributes_ = createAttributeMap(1);
         }
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = ATTRIBUTE_VALUE_EMPTY;
         }
 
@@ -621,7 +621,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public Short getTabIndex() {
         final String index = getAttributeValue("tabindex");
-        if (index == null || index.isEmpty()) {
+        if (index == null || index.length() == 0) {
             return null;
         }
         try {
@@ -872,7 +872,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     protected final void assertNotEmpty(final String description, final String string)
         throws IllegalArgumentException {
 
-        if (string.isEmpty()) {
+        if (string.length() == 0) {
             throw new IllegalArgumentException("String may not be empty: " + description);
         }
     }

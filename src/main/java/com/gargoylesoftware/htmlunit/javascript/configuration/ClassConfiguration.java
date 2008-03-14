@@ -93,7 +93,7 @@ public final class ClassConfiguration {
         className_ = classname;
         extendedClass_ = extendedClass;
         linkedClass_ = (Class< ? extends SimpleScriptable>) Class.forName(implementingClass);
-        if (jsConstructor != null && !jsConstructor.isEmpty()) {
+        if (jsConstructor != null && jsConstructor.length() != 0) {
             Method foundCtor = null;
             for (final Method method : linkedClass_.getMethods()) {
                 if (method.getName().equals(jsConstructor)) {
@@ -111,7 +111,7 @@ public final class ClassConfiguration {
             jsConstructor_ = null;
         }
         jsObject_ = jsObject;
-        if (htmlClass != null && !htmlClass.isEmpty()) {
+        if (htmlClass != null && htmlClass.length() != 0) {
             htmlClassname_ = htmlClass;
         }
         else {

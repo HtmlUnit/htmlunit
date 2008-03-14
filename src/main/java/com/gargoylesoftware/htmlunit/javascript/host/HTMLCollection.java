@@ -253,7 +253,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 
                 //IE: XmlPage ignores all empty text nodes
                 if (isIE && isXmlPage && element instanceof DomText
-                        && ((DomText) element).getNodeValue().trim().isEmpty()) {
+                        && ((DomText) element).getNodeValue().trim().length() == 0) {
 
                     //and 'xml:space' is 'default'
                     final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentDomNode());
@@ -283,7 +283,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     private static Boolean isXMLSpaceDefault(DomNode node) {
         for ( ; node instanceof XmlElement; node = node.getParentDomNode()) {
             final String value = ((XmlElement) node).getAttributeValue("xml:space");
-            if (!value.isEmpty()) {
+            if (value.length() != 0) {
                 if (value.equals("default")) {
                     return Boolean.TRUE;
                 }

@@ -490,7 +490,7 @@ public final class JavaScriptConfiguration {
         }
         final String max = element.getAttribute("max-version");
         float maxVersion;
-        if (max.isEmpty()) {
+        if (max.length() == 0) {
             maxVersion = 0;
         }
         else {
@@ -502,7 +502,7 @@ public final class JavaScriptConfiguration {
 
         float minVersion;
         final String min = element.getAttribute("min-version");
-        if (min.isEmpty()) {
+        if (min.length() == 0) {
             minVersion = 0;
         }
         else {
@@ -517,7 +517,7 @@ public final class JavaScriptConfiguration {
     private boolean testToIncludeForJSConstraint(final Element element, final BrowserVersion browser) {
         final String max = element.getAttribute("max-version");
         float maxVersion;
-        if (max.isEmpty()) {
+        if (max.length() == 0) {
             maxVersion = 0;
         }
         else {
@@ -529,7 +529,7 @@ public final class JavaScriptConfiguration {
 
         float minVersion;
         final String min = element.getAttribute("min-version");
-        if (min.isEmpty()) {
+        if (min.length() == 0) {
             minVersion = 0;
         }
         else {

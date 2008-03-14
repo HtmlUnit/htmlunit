@@ -213,7 +213,7 @@ public class XSLTProcessor extends SimpleScriptable {
 
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
-        if (namespaceURI != null && !namespaceURI.isEmpty() && !namespaceURI.equals("null")) {
+        if (namespaceURI != null && namespaceURI.length() != 0 && !namespaceURI.equals("null")) {
             qualifiedName = '{' + namespaceURI + '}' + localName;
         }
         else {
@@ -295,7 +295,7 @@ public class XSLTProcessor extends SimpleScriptable {
                 //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
                 //Maybe this should be changed for 'xml:space' = preserve
                 //See XMLDocumentTest.testLoadXML_XMLSpaceAttribute()
-                if (!((DomText) child).getData().trim().isEmpty()) {
+                if (((DomText) child).getData().trim().length() != 0) {
                     output += ((DomText) child).getData();
                 }
             }

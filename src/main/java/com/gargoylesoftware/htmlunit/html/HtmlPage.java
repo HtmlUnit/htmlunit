@@ -1012,10 +1012,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public static boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
         // Unless otherwise specified, we have to assume that any script is javascript
         final boolean isJavaScript;
-        if (languageAttribute != null && !languageAttribute.isEmpty()) {
+        if (languageAttribute != null && languageAttribute.length() != 0) {
             isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
         }
-        else if (typeAttribute != null && !typeAttribute.isEmpty()) {
+        else if (typeAttribute != null && typeAttribute.length() != 0) {
             isJavaScript = typeAttribute.equalsIgnoreCase("text/javascript");
         }
         else {
@@ -1230,7 +1230,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
 
         final String refreshString = getRefreshStringOrNull();
-        if (refreshString == null || refreshString.isEmpty()) {
+        if (refreshString == null || refreshString.length() == 0) {
             return;
         }
 
@@ -1269,7 +1269,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 return;
             }
             final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
-            if (buffer.toString().trim().isEmpty()) {
+            if (buffer.toString().trim().length() == 0) {
                 //content='10; URL=' is treated as content='10'
                 url = getWebResponse().getUrl();
             }

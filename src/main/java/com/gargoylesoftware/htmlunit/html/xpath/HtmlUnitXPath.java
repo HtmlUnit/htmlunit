@@ -180,7 +180,7 @@ public class HtmlUnitXPath {
             }
             String msg = e.getMessage();
 
-            if (msg == null || msg.isEmpty()) {
+            if (msg == null || msg.length() == 0) {
                 msg = XSLMessages.createXPATHMessage(
                         XPATHErrorResources.ER_XPATH_ERROR, null);
 

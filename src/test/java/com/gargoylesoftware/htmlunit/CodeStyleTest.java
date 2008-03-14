@@ -126,7 +126,7 @@ public class CodeStyleTest extends WebTestCase {
     private void methodFirstLine(final List<String> lines, final String path) throws IOException {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
-            if (lines.get(index + 1).trim().isEmpty()
+            if (lines.get(index + 1).trim().length() == 0
                 && line.length() > 4
                 && Character.isWhitespace(line.charAt(0)) && line.endsWith("{")
                 && !line.contains(" class ")
@@ -145,7 +145,7 @@ public class CodeStyleTest extends WebTestCase {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
-            if (line.trim().isEmpty() && nextLine.equals("    }")) {
+            if (line.trim().length() == 0 && nextLine.equals("    }")) {
                 fail("Empty line in " + path + ", line: " + (index + 1));
             }
         }

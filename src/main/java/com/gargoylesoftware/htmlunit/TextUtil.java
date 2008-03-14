@@ -72,7 +72,7 @@ public final class TextUtil {
         WebAssert.notNull("stringToCheck", stringToCheck);
         WebAssert.notNull("prefix", prefix);
 
-        if (prefix.isEmpty()) {
+        if (prefix.length() == 0) {
             throw new IllegalArgumentException("Prefix may not be empty");
         }
 

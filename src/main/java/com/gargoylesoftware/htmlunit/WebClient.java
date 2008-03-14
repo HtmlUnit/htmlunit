@@ -947,7 +947,7 @@ public class WebClient implements Serializable {
         WebAssert.notNull("defaultName", defaultName);
 
         String windowToOpen = windowName;
-        if (windowToOpen == null || windowToOpen.isEmpty()) {
+        if (windowToOpen == null || windowToOpen.length() == 0) {
             windowToOpen = defaultName;
         }
 
@@ -968,7 +968,7 @@ public class WebClient implements Serializable {
             // Leave window null to create a new window.
             windowToOpen = "";
         }
-        else if (!windowToOpen.isEmpty()) {
+        else if (windowToOpen.length() != 0) {
             try {
                 webWindow = getWebWindowByName(windowToOpen);
             }
@@ -1227,7 +1227,7 @@ public class WebClient implements Serializable {
         // section 2.4.6 - parse path
         final List<String> tokens = new ArrayList<String>();
         final String stringToTokenize;
-        if (parseUrl.trim().isEmpty()) {
+        if (parseUrl.trim().length() == 0) {
             stringToTokenize = baseUrl.getPath();
         }
         else if (parseUrl.startsWith("/")) {
@@ -1235,7 +1235,7 @@ public class WebClient implements Serializable {
         }
         else {
             String path = baseUrl.getPath();
-            if (!path.endsWith("/") && !parseUrl.isEmpty()) {
+            if (!path.endsWith("/") && parseUrl.length() != 0) {
                 path += "/..";
             }
             stringToTokenize = path + "/" + parseUrl;
@@ -1249,7 +1249,7 @@ public class WebClient implements Serializable {
 
         for (int i = 0; i < tokens.size(); i++) {
             final String oneToken = (String) tokens.get(i);
-            if (oneToken.isEmpty() || oneToken.equals(".")) {
+            if (oneToken.length() == 0 || oneToken.equals(".")) {
                 tokens.remove(i--);
             }
             else if (oneToken.equals("..")) {

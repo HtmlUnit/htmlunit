@@ -456,7 +456,7 @@ public final class WebAssert {
         final List<String> list = new ArrayList<String>();
         for (final HtmlElement element : page.getAllHtmlChildElements()) {
             final String key = element.getAttributeValue("accesskey");
-            if (key != null && !key.isEmpty()) {
+            if (key != null && key.length() != 0) {
                 if (list.contains(key)) {
                     throw new AssertionError("The access key '" + key + "' is not unique.");
                 }
@@ -476,7 +476,7 @@ public final class WebAssert {
         final List<String> list = new ArrayList<String>();
         for (final HtmlElement element : page.getAllHtmlChildElements()) {
             final String id = element.getAttributeValue("id");
-            if (id != null && !id.isEmpty()) {
+            if (id != null && id.length() != 0) {
                 if (list.contains(id)) {
                     throw new AssertionError("The element ID '" + id + "' is not unique.");
                 }

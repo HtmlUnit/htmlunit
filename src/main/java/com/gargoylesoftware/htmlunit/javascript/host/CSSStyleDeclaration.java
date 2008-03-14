@@ -162,7 +162,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
         removeStyleAttribute(name);
         final Map<String, String> styleMap = getStyleMap(false);
-        if (!newValue.trim().isEmpty()) {
+        if (newValue.trim().length() != 0) {
             styleMap.put(name, newValue);
 
             final StringBuilder buffer = new StringBuilder();
@@ -402,7 +402,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
         jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
         jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
-        if (!behavior.isEmpty()) {
+        if (behavior.length() != 0) {
             try {
                 final Object[] url = URL_FORMAT.parse(behavior);
                 if (url.length > 0) {
@@ -453,7 +453,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderBottomColor() {
         String value = getStyleAttribute("borderBottomColor", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findColor(getStyleAttribute("borderBottom", true));
             if (value == null) {
                 value = findColor(getStyleAttribute("border", true));
@@ -479,7 +479,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderBottomStyle() {
         String value = getStyleAttribute("borderBottomStyle", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderStyle(getStyleAttribute("borderBottom", true));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute("border", true));
@@ -505,7 +505,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderBottomWidth() {
         String value = getStyleAttribute("borderBottomWidth", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderWidth(getStyleAttribute("borderBottom", true));
             if (value == null) {
                 value = findBorderWidth(getStyleAttribute("border", true));
@@ -579,7 +579,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderLeftColor() {
         String value = getStyleAttribute("borderLeftColor", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findColor(getStyleAttribute("borderLeft", true));
             if (value == null) {
                 value = findColor(getStyleAttribute("border", true));
@@ -605,7 +605,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderLeftStyle() {
         String value = getStyleAttribute("borderLeftStyle", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderStyle(getStyleAttribute("borderLeft", true));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute("border", true));
@@ -631,7 +631,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderLeftWidth() {
         String value = getStyleAttribute("borderLeftWidth", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderWidth(getStyleAttribute("borderLeft", true));
             if (value == null) {
                 value = findBorderWidth(getStyleAttribute("border", true));
@@ -673,7 +673,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderRightColor() {
         String value = getStyleAttribute("borderRightColor", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findColor(getStyleAttribute("borderRight", true));
             if (value == null) {
                 value = findColor(getStyleAttribute("border", true));
@@ -699,7 +699,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderRightStyle() {
         String value = getStyleAttribute("borderRightStyle", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderStyle(getStyleAttribute("borderRight", true));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute("border", true));
@@ -725,7 +725,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderRightWidth() {
         String value = getStyleAttribute("borderRightWidth", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderWidth(getStyleAttribute("borderRight", true));
             if (value == null) {
                 value = findBorderWidth(getStyleAttribute("border", true));
@@ -799,7 +799,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderTopColor() {
         String value = getStyleAttribute("borderTopColor", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findColor(getStyleAttribute("borderTop", true));
             if (value == null) {
                 value = findColor(getStyleAttribute("border", true));
@@ -825,7 +825,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderTopStyle() {
         String value = getStyleAttribute("borderTopStyle", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderStyle(getStyleAttribute("borderTop", true));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute("border", true));
@@ -851,7 +851,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     public String jsxGet_borderTopWidth() {
         String value = getStyleAttribute("borderTopWidth", true);
-        if (value.isEmpty()) {
+        if (value.length() == 0) {
             value = findBorderWidth(getStyleAttribute("borderTop", true));
             if (value == null) {
                 value = findBorderWidth(getStyleAttribute("border", true));
