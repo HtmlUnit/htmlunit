@@ -159,7 +159,6 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     *
      * @return response headers
      */
     public List<NameValuePair> getResponseHeaders() {

@@ -1518,7 +1518,6 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if an error occurs
      */
     @Test

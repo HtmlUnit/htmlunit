@@ -67,17 +67,18 @@ public class CodeStyleTest extends WebTestCase {
     }
 
     private void process(final File dir) throws IOException {
-        for (final File f : dir.listFiles()) {
-            if (f.isDirectory() && !f.getName().equals(".svn")) {
-                process(f);
+        for (final File file : dir.listFiles()) {
+            if (file.isDirectory() && !file.getName().equals(".svn")) {
+                process(file);
             }
             else {
-                if (f.getName().endsWith(".java")) {
-                    final List<String> lines = getLines(f);
-                    final String relativePath = f.getAbsolutePath().substring(
+                if (file.getName().endsWith(".java")) {
+                    final List<String> lines = getLines(file);
+                    final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1);
                     openingCurlyBracket(lines, relativePath);
                     year(lines, relativePath);
+                    javaDocFirstLine(lines, relativePath);
                 }
             }
         }
@@ -102,6 +103,19 @@ public class CodeStyleTest extends WebTestCase {
     private void year(final List<String> lines, final String path) throws IOException {
         assertTrue("Incorrect year in " + path, lines.get(1).contains("Copyright (c) 2002-"
             + Calendar.getInstance().get(Calendar.YEAR)));
+    }
+
+    /**
+     * Checks the JavaDoc first line, it should not be empty.
+     */
+    private void javaDocFirstLine(final List<String> lines, final String path) throws IOException {
+        for (int index=1; index < lines.size(); index++) {
+            final String previousLine = lines.get(index - 1);
+            final String currentLine = lines.get(index);
+            if (previousLine.trim().equals("/**") && currentLine.trim().equals("*")) {
+                fail("Empty line in " + path + ", line: " + (index + 1));
+            }
+        }
     }
 
     /**

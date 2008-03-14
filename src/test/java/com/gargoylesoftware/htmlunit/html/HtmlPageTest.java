@@ -983,7 +983,6 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test

@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
+ * Background job.
  *
  * @version $Revision$
  * @author Brad Clarke

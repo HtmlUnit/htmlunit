@@ -1225,7 +1225,6 @@ public class HtmlFormTest extends WebTestCase {
 
 
     /**
-     *
      * @throws Exception If the test page can't be loaded.
      */
     @Test

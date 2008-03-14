@@ -276,7 +276,6 @@ public class HTMLSelectElementTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -302,7 +301,6 @@ public class HTMLSelectElementTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test

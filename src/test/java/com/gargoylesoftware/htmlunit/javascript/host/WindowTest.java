@@ -1009,7 +1009,6 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception If the test fails
      */
     @Test
@@ -1026,7 +1025,6 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception If the test fails
      */
     @Test
@@ -1204,7 +1202,6 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception If the test fails.
      */
     @Test

@@ -914,7 +914,6 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test

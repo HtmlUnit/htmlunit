@@ -1180,7 +1180,6 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     *
      * @param browserVersion browser version
      * @param expectedAlerts expected alerts
      * @throws Exception If the test fails
