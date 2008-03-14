@@ -82,8 +82,7 @@ class EventListenersContainer {
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @return <code>true</code> if the listener has been added
      */
-    public boolean addEventListener(final String type, final Function listener, final boolean useCapture)
-    {
+    public boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
         final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
         if (listeners.contains(listener)) {
             getLog().debug(type + " listener already registered, skipping it (" + listener + ")");

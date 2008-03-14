@@ -80,8 +80,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             final Object[] args, final int actionType) {
         
         // in a first time just improve replacement with a String (not a function)
-        if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String))
-        {
+        if (RA_REPLACE == actionType && args.length == 2 && (args[1] instanceof String)) {
             final String thisString = Context.toString(thisObj);
             final String replacement = ((String) args[1]).replaceAll("\\\\", "\\\\\\\\");
             final Object arg0 = args[0];

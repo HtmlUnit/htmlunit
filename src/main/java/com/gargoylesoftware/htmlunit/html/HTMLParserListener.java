@@ -59,17 +59,14 @@ public interface HTMLParserListener {
      * and errors in the "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log.<br/>
      * Errors are logged at the error level and warnings at the warning level.
      */
-    HTMLParserListener LOG_REPORTER = new HTMLParserListener()
-    {
+    HTMLParserListener LOG_REPORTER = new HTMLParserListener() {
         protected final Log getLog() {
             return LogFactory.getLog(HTMLParserListener.class);
         }
-        public void error(final String message, final URL url, final int line, final int column, final String key)
-        {
+        public void error(final String message, final URL url, final int line, final int column, final String key) {
             getLog().error(format(message, url, line, column, key));
         }
-        public void warning(final String message, final URL url, final int line, final int column, final String key)
-        {
+        public void warning(final String message, final URL url, final int line, final int column, final String key) {
             getLog().warn(format(message, url, line, column, key));
         }
         private String format(final String message, final URL url, final int line, final int column, final String key) {

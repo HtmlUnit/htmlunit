@@ -149,8 +149,7 @@ public class JavaScriptEngine implements Serializable {
     public void initialize(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
 
-        final ContextAction action = new ContextAction()
-        {
+        final ContextAction action = new ContextAction() {
             public Object run(final Context cx) {
                 try {
                     init(webWindow, cx);
@@ -184,8 +183,7 @@ public class JavaScriptEngine implements Serializable {
         StringPrimitivePrototypeBugFixer.installWorkaround(window);
         
         // put custom object to be called as very last prototype to call the fallback getter (if any)
-        final Scriptable fallbackCaller = new ScriptableObject()
-        {
+        final Scriptable fallbackCaller = new ScriptableObject() {
             private static final long serialVersionUID = -7124423159070941606L;
 
             @Override
@@ -382,8 +380,7 @@ public class JavaScriptEngine implements Serializable {
 
         final Scriptable scope = getScope(htmlPage, null);
         final String source = sourceCode;
-        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage)
-        {
+        final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
             @Override
             public Object doRun(final Context cx) {
                 return cx.compileString(source, sourceName, startLine, null);
@@ -498,8 +495,7 @@ public class JavaScriptEngine implements Serializable {
     public Object callFunction(final HtmlPage htmlPage, final Function function, final Context context,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
 
-        synchronized (htmlPage) // 2 scripts can't be executed in parallel for one page
-        {
+        synchronized (htmlPage) { // 2 scripts can't be executed in parallel for one page
             return function.call(context, scope, thisObject, args);
         }
     }
@@ -552,8 +548,7 @@ public class JavaScriptEngine implements Serializable {
 
             try {
                 cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
-                synchronized (htmlPage_) // 2 scripts can't be executed in parallel for one page
-                {
+                synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
                     return doRun(cx);
                 }
             }

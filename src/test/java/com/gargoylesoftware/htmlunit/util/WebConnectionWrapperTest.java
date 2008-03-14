@@ -77,8 +77,7 @@ public class WebConnectionWrapperTest extends WebTestCase {
         final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
         final String[] lastMethodCalled = {""};
 
-        final WebConnection realConnection = new WebConnection()
-        {
+        final WebConnection realConnection = new WebConnection() {
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) {
                 assertSame(settings, webRequestSettings);
                 lastMethodCalled[0] = "getResponse";

@@ -108,8 +108,7 @@ public class XmlPageTest extends WebTestCase {
      * @return the page returned by the WebClient
      * @throws Exception if a problem occurs
      */
-    private XmlPage testXmlDocument(final String content, final String mimeType) throws Exception
-    {
+    private XmlPage testXmlDocument(final String content, final String mimeType) throws Exception {
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(content, 200, "OK", mimeType);
