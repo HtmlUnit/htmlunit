@@ -408,7 +408,6 @@ public class EventTest extends WebTestCase {
 
         expectedAlerts = new String[] {"true", "false", "SPAN"};
         assertEquals(expectedAlerts, collectedAlerts);
-
     }
 
     /**

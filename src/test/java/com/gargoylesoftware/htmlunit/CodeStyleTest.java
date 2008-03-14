@@ -80,6 +80,7 @@ public class CodeStyleTest extends WebTestCase {
                     year(lines, relativePath);
                     javaDocFirstLine(lines, relativePath);
                     methodFirstLine(lines, relativePath);
+                    methodLastLine(lines, relativePath);
                 }
             }
         }
@@ -125,7 +126,7 @@ public class CodeStyleTest extends WebTestCase {
     private void methodFirstLine(final List<String> lines, final String path) throws IOException {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
-            if (lines.get(index + 1).trim().length() == 0
+            if (lines.get(index + 1).trim().isEmpty()
                 && line.length() > 4
                 && Character.isWhitespace(line.charAt(0)) && line.endsWith("{")
                 && !line.contains(" class ")
@@ -133,6 +134,19 @@ public class CodeStyleTest extends WebTestCase {
                     || line.trim().startsWith("public") || line.trim().startsWith("protected")
                     || line.trim().startsWith("private"))) {
                 fail("Empty line in " + path + ", line: " + (index + 2));
+            }
+        }
+    }
+
+    /**
+     * Checks the method last line, it should not be empty.
+     */
+    private void methodLastLine(final List<String> lines, final String path) throws IOException {
+        for (int index = 0; index < lines.size() - 1; index++) {
+            final String line = lines.get(index);
+            final String nextLine = lines.get(index + 1);
+            if (line.trim().isEmpty() && nextLine.equals("    }")) {
+                fail("Empty line in " + path + ", line: " + (index + 1));
             }
         }
     }

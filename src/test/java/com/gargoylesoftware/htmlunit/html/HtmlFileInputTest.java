@@ -354,7 +354,6 @@ public class HtmlFileInputTest extends WebTestCase {
             }
             writer.close();
         }
-
     }
 
     /**

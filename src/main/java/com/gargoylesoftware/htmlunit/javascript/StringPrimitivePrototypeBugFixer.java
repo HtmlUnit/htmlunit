@@ -127,7 +127,6 @@ public class StringPrimitivePrototypeBugFixer implements Scriptable {
             FieldInterpreterCallFrameScope_.setAccessible(true);
         }
         return (Scriptable) FieldInterpreterCallFrameScope_.get(o);
-
     }
 
     /**

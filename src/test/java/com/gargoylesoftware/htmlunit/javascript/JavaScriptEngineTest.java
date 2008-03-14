@@ -537,7 +537,6 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
-
     }
 
     /**

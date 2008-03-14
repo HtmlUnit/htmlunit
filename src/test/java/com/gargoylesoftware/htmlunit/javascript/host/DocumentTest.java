@@ -2357,7 +2357,6 @@ public class DocumentTest extends WebTestCase {
         final Date date = DateUtil.parseDate(dateString);
         checkCookie(Document.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
                 "toto", "foo", "", "first", false, date);
-
     }
 
     private void checkCookie(final Cookie cookie, final String name, final String value,

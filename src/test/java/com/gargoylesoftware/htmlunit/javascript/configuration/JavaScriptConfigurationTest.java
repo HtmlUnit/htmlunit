@@ -485,7 +485,6 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         });
 
         parser.parse(createInputSourceForFile(directory + "JavaScriptConfiguration.xml"));
-
     }
     
     private InputSource createInputSourceForFile(final String fileName) throws FileNotFoundException {

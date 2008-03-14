@@ -551,7 +551,6 @@ public class HtmlSelectTest extends WebTestCase {
         appendOption(theSelect, "x");
         assertEquals(2, theSelect.getOptions().size());
         assertEquals("x", theSelect.getOption(1).getValueAttribute());
-
     }
 
     void appendOption(final HtmlSelect select, final String value) {

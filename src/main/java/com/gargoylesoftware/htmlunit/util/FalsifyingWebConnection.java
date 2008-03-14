@@ -107,6 +107,5 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
                 webResponse.getStatusMessage(), webResponse.getResponseHeaders());
         return new WebResponseImpl(wrd, webResponse.getUrl(), webResponse.getRequestMethod(),
                 webResponse.getLoadTimeInMilliSeconds());
-        
     }
 }

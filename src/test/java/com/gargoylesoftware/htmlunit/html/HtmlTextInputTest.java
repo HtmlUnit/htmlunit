@@ -130,7 +130,6 @@ public class HtmlTextInputTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage) textInput.type('\n');
         assertEquals("Second", secondPage.getTitleText());
-
     }
 
     /**

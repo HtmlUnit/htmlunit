@@ -993,7 +993,6 @@ public class HtmlFormTest extends WebTestCase {
         testUrlAfterSubmit("post", "", "");
         testUrlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
         testUrlAfterSubmit(new URL("http://first?a=1&b=2"), "post", "", "");
-
     }
 
     /**
