@@ -139,7 +139,7 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
      * Not yet implemented.
      */
     public Element getOwnerElement() {
-        throw new UnsupportedOperationException("HtmlAttr.getOwnerElement is not yet implemented.");
+        return (Element) getParentNode();
     }
 
     /**
@@ -147,7 +147,7 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
      * Not yet implemented.
      */
     public boolean getSpecified() {
-        throw new UnsupportedOperationException("HtmlAttr.getOwnerElement is not yet implemented.");
+        return true;
     }
 
     /**
@@ -160,9 +160,8 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public boolean isId() {
-        throw new UnsupportedOperationException("HtmlAttr.isId is not yet implemented.");
+    	return "id".equals(getNodeName());
     }
 }

@@ -153,7 +153,7 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
      * Not yet implemented.
      */
     public Element getOwnerElement() {
-        throw new UnsupportedOperationException("XmlAttr.getOwnerElement is not yet implemented.");
+        return (Element) getParentNode();
     }
 
     /**
@@ -166,17 +166,15 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public boolean getSpecified() {
-        throw new UnsupportedOperationException("XmlAttr.getSpecified is not yet implemented.");
+        return true;
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public boolean isId() {
-        throw new UnsupportedOperationException("XmlAttr.isId is not yet implemented.");
+    	return "id".equals(getNodeName());
     }
 }

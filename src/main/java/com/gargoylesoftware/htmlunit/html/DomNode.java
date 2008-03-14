@@ -96,7 +96,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public static final String READY_STATE_COMPLETE = "complete";
 
     /** The owning page of this node. */
-    private final Page page_;
+    private Page page_;
 
     /** The parent node. */
     private DomNode parent_;
@@ -851,8 +851,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         else {
             // clean up the new node, in case it is being moved
-            if (node != this) {
-                node.basicRemove();
+            if (node != this && node.getParentNode() != null) {
+                node.remove();
             }
             // move the node
             basicAppend(node);
@@ -890,6 +890,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to append to this node's children
      */
     private void basicAppend(final DomNode node) {
+    	node.page_ = getPage();
         if (firstChild_ == null) {
             firstChild_ = node;
             firstChild_.previousSibling_ = node;
@@ -1005,7 +1006,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void remove() throws IllegalStateException {
-        if (previousSibling_ == null) {
+        if (parent_ == null) {
             throw new IllegalStateException();
         }
         final DomNode exParent = parent_;

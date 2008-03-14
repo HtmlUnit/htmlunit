@@ -283,4 +283,26 @@ public class HtmlScriptTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * @throws Exception If an error occurs.
+     */
+    @Test
+    public void testAsXml() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<script id='script1'>\n"
+            + "    alert('hello');\n"
+            + "</script></body></html>";
+
+        final String[] expectedAlerts = {"hello"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        // asXml() should be reusable
+        final String xml = page.asXml();
+        collectedAlerts.clear();
+        loadPage(xml, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

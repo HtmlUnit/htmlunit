@@ -39,6 +39,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -409,5 +410,15 @@ public class HtmlScript extends HtmlElement {
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    @Override
+    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
+        final DomCharacterData textNode = (DomCharacterData) getFirstDomChild();
+        if (textNode != null) {
+        	printWriter.println("//<![CDATA[");
+            printWriter.println(textNode.getData());
+        	printWriter.println("//]]>");
+        }
     }
 }

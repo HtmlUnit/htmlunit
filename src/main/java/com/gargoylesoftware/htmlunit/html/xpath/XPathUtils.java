@@ -99,7 +99,7 @@ public final class XPathUtils {
             }
         }
         catch (final Exception e) {
-            throw new RuntimeException("Could not retrieve XPath", e);
+            throw new RuntimeException("Could not retrieve XPath >" + xpathExpr + "< on " + node, e);
         }
         return list;
     }

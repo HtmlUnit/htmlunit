@@ -657,6 +657,6 @@ public class Node extends SimpleScriptable {
      * @return the document
      */
     public Object jsxGet_ownerDocument() {
-        return getWindow().jsxGet_document();
+        return ((SgmlPage) getDomNodeOrDie().getPage()).getScriptObject();
     }
 }
