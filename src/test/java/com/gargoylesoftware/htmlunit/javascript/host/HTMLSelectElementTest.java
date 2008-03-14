@@ -825,7 +825,6 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testOptionsDelegateToSelect() throws Exception {
-
         final String content
             = "<html><head>\n"
             + "<script>\n"

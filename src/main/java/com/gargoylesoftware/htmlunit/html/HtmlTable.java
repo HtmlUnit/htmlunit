@@ -396,7 +396,6 @@ public class HtmlTable extends ClickableElement {
          * next reachable row will be marked
          */
         private void setNextRow(final DomNode node) {
-
             nextRow_ = null;
             for (DomNode next = node; next != null; next = next.getNextDomSibling()) {
                 if (next instanceof HtmlTableRow) {

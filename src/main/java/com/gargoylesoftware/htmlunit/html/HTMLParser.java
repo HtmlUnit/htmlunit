@@ -213,7 +213,6 @@ public final class HTMLParser {
      * @throws IOException if an IO error occurs
      */
     public static void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
-
         final HtmlPage page = (HtmlPage) parent.getPage();
         final URL url = page.getWebResponse().getUrl();
 
@@ -241,7 +240,6 @@ public final class HTMLParser {
      * @throws java.io.IOException IO error
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-
         final URL url = webResponse.getUrl();
         final HtmlPage page = new HtmlPage(url, webResponse, webWindow);
         webWindow.setEnclosedPage(page);
@@ -280,7 +278,6 @@ public final class HTMLParser {
      * http://sourceforge.net/tracker/index.php?func=detail&aid=1898038&group_id=195122&atid=952178
      */
     private static void addBodyToPageIfNecessary(final HtmlPage page, final boolean originalCall) {
-
         // IE waits for the whole page to load before initializing bodies for frames.
         final boolean ie = page.getWebClient().getBrowserVersion().isIE();
         if (page.getEnclosingWindow() instanceof FrameWindow && ie && originalCall) {
@@ -487,7 +484,6 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#characters(char,int,int) */
         public void characters(final char ch[], final int start, final int length) throws SAXException {
-
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }
@@ -496,7 +492,6 @@ public final class HTMLParser {
 
         /** @inheritDoc ContentHandler#ignorableWhitespace(char,int,int) */
         public void ignorableWhitespace(final char ch[], final int start, final int length) throws SAXException {
-
             if (characters_ == null) {
                 characters_ = new StringBuilder();
             }
@@ -508,7 +503,6 @@ public final class HTMLParser {
          * current element as a text node
          */
         private void handleCharacters() {
-
             if (characters_ != null && characters_.length() > 0) {
                 final DomText text = new DomText(page_, characters_.toString());
                 currentNode_.appendDomChild(text);
@@ -521,7 +515,6 @@ public final class HTMLParser {
          * @return the pre-registered element factory for the tag, or an UnknownElementFactory
          */
         private IElementFactory getElementFactory(final String tagName) {
-
             final IElementFactory factory = (IElementFactory) ELEMENT_FACTORIES.get(tagName);
 
             if (factory != null) {

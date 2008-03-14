@@ -125,7 +125,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      */
     @Override
     public void put(final String name, final Scriptable start, final Object value) {
-
         if (htmlSelect_ == null) {
             // This object hasn't been initialized; it's probably being used as a prototype.
             // Just pretend we didn't even see this invocation and let Rhino handle it.

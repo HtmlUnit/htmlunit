@@ -61,7 +61,7 @@ public class CodeStyleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testIsDynamicContent() throws Exception {
+    public void codeStyle() throws Exception {
         process(new File("src/main/java"));
         process(new File("src/test/java"));
     }
@@ -79,6 +79,7 @@ public class CodeStyleTest extends WebTestCase {
                     openingCurlyBracket(lines, relativePath);
                     year(lines, relativePath);
                     javaDocFirstLine(lines, relativePath);
+                    methodFirstLine(lines, relativePath);
                 }
             }
         }
@@ -109,11 +110,29 @@ public class CodeStyleTest extends WebTestCase {
      * Checks the JavaDoc first line, it should not be empty.
      */
     private void javaDocFirstLine(final List<String> lines, final String path) throws IOException {
-        for (int index=1; index < lines.size(); index++) {
+        for (int index = 1; index < lines.size(); index++) {
             final String previousLine = lines.get(index - 1);
             final String currentLine = lines.get(index);
             if (previousLine.trim().equals("/**") && currentLine.trim().equals("*")) {
                 fail("Empty line in " + path + ", line: " + (index + 1));
+            }
+        }
+    }
+
+    /**
+     * Checks the method first line, it should not be empty.
+     */
+    private void methodFirstLine(final List<String> lines, final String path) throws IOException {
+        for (int index = 0; index < lines.size() - 1; index++) {
+            final String line = lines.get(index);
+            if (lines.get(index + 1).trim().length() == 0
+                && line.length() > 4
+                && Character.isWhitespace(line.charAt(0)) && line.endsWith("{")
+                && !line.contains(" class ")
+                && (!Character.isWhitespace(line.charAt(4))
+                    || line.trim().startsWith("public") || line.trim().startsWith("protected")
+                    || line.trim().startsWith("private"))) {
+                fail("Empty line in " + path + ", line: " + (index + 2));
             }
         }
     }

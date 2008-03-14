@@ -261,7 +261,6 @@ public class EventTest extends WebTestCase {
      */
     @Test
     public void testTyping() throws Exception {
-
         final String html =
               "<html><body>\n"
             + "<script>var x = '';</script>\n"

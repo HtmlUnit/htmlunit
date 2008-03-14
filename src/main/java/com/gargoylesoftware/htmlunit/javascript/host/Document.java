@@ -333,7 +333,6 @@ public class Document extends EventNode {
      * @param content the content to write
      */
     protected void write(final String content) {
-
         getLog().debug("write: " + content);
 
         // If the page isn't currently being parsed (i.e. this call to write() or writeln()
@@ -492,7 +491,6 @@ public class Document extends EventNode {
      * @return The cookie attribute
      */
     public String jsxGet_cookie() {
-
         final HtmlPage page = getHtmlPage();
         final HttpState state = page.getWebClient().getWebConnection().getState();
         final URL url = page.getWebResponse().getUrl();
@@ -702,7 +700,6 @@ public class Document extends EventNode {
      * @throws IOException if an IO problem occurs
      */
     public void jsxFunction_close() throws IOException {
-
         if (writeInCurrentDocument_) {
             getLog().warn("close() called when document is not open.");
         }

@@ -129,7 +129,6 @@ public class HTMLScriptElementTest extends WebTestCase {
     }
 
     private void srcWithJavaScriptProtocol_Dynamic(final BrowserVersion version, final String... expected) throws Exception {
-
         final String content =
               "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

@@ -421,7 +421,6 @@ public class JavaScriptEngine implements Serializable {
      * @return The result of executing the specified code.
      */
     public Object execute(final HtmlPage htmlPage, final Script script) {
-
         final Scriptable scope = getScope(htmlPage, null);
 
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {

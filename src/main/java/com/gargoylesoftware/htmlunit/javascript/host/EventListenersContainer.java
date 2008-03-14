@@ -222,7 +222,6 @@ class EventListenersContainer {
     }
 
     public ScriptResult executeListeners(final Event event, final Object[] args, final Object[] propHandlerArgs) {
-
         // the registered capturing listeners (if any)
         event.setEventPhase(Event.CAPTURING_PHASE);
         ScriptResult result = executeEventListeners(true, event, args);

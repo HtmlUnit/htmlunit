@@ -200,7 +200,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist
      */
     public HtmlElement getBody() {
-
         final HtmlElement doc = getDocumentHtmlElement();
         if (doc == null) {
             return null;
@@ -738,7 +737,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     private Comparator<HtmlElement> createTabOrderComparator() {
         return new Comparator<HtmlElement>() {
             public int compare(final HtmlElement element1, final HtmlElement element2) {
-
                 final Short i1 = element1.getTabIndex();
                 final Short i2 = element2.getTabIndex();
 
@@ -904,7 +902,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * the previous page and a javascript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(String sourceCode, final String sourceName, final int startLine) {
-
         if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }

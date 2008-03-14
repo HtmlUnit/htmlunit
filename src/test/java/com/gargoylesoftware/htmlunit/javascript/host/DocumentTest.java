@@ -1406,7 +1406,6 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void write_InDOM() throws Exception {
-
         final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<script type='text/javascript'>\n"
@@ -1536,7 +1535,6 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     public void write_AssignedToVar() throws Exception {
-
         // IE accepts the use of detached functions
         final String[] expectedAlertsIE = {};
         write_AssignedToVar(BrowserVersion.INTERNET_EXPLORER_6_0, expectedAlertsIE);
@@ -1587,7 +1585,6 @@ public class DocumentTest extends WebTestCase {
     }
 
     private void write_WhenParsingFinished(final BrowserVersion browserVersion) throws Exception {
-
         final String html =
               "<html><head><script>\n"
             + "  function test() { document.write(1); document.write(2); document.close(); }\n"

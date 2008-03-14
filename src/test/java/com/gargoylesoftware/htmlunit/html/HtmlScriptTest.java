@@ -73,7 +73,6 @@ public class HtmlScriptTest extends WebTestCase {
      */
     @Test
     public void testBadExternalScriptReference() throws Exception {
-
         final String html = "<html><head><title>foo</title>\n"
                 + "<script src='inexistent.js'></script>\n"
                 + "</head><body></body></html>";

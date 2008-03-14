@@ -957,7 +957,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void insertBefore(final DomNode newNode) throws IllegalStateException {
-
         if (previousSibling_ == null) {
             throw new IllegalStateException();
         }

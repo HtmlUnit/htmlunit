@@ -1046,7 +1046,6 @@ public class HTMLElementTest extends WebTestCase {
     */
     @Test
     public void testAddBehaviorDefaultDownload() throws Exception {
-
         final URL content1Url = new URL("http://www.domain1.com/");
         final URL content2Url = new URL("http://www.domain1.com/test.txt");
         // The download behavior doesn't accept downloads from a different domain ...

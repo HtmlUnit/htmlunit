@@ -188,7 +188,6 @@ public class CacheTest extends WebTestCase {
      */
     @Test
     public void testMaxSizeMaintained() throws Exception {
-
         final String html = "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
             + "<script src='foo2.js' type='text/javascript'/>\n"

@@ -216,7 +216,6 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The javascript object
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
-
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
         Class< ? extends SimpleScriptable> javaScriptClass = null;

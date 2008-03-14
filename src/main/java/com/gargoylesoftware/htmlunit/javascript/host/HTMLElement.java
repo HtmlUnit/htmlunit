@@ -702,7 +702,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param htmlSnippet the html code extract to parse
      */
     static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
-
         final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) target.getPage(), null) {
             private static final long serialVersionUID = 2108037256628269797L;
             @Override

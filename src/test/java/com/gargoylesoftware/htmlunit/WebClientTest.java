@@ -821,7 +821,6 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testLoadFilePage() throws Exception {
-
         // Create a real file to read.
         // It could be useful to have existing files to test in a special location in filesystem.
         // It will be really needed when we have to test binary files using the file protocol.
@@ -1155,7 +1154,6 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testProxyConfig() throws Exception {
-
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
@@ -1205,7 +1203,6 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testProxyConfigWithRedirect() throws Exception {
-
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
@@ -1241,7 +1238,6 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testProxyConfigForJS() throws Exception {
-
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
         final String html = "<html><head><title>Hello World</title>\n"
@@ -1377,7 +1373,6 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testScriptPreProcessor_UnimplementedJavascript() throws Exception {
-
         final WebClient client = new WebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
         final String content = "<html><head><title>foo</title></head><body>\n"

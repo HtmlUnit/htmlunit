@@ -221,7 +221,6 @@ public class HtmlTableRow extends ClickableElement {
          * @throws NoSuchElementException if no cell is available
          */
         public HtmlTableCell nextCell() throws NoSuchElementException {
-
             if (nextCell_ != null) {
                 final HtmlTableCell result = nextCell_;
                 setNextCell(nextCell_.getNextDomSibling());
@@ -238,7 +237,6 @@ public class HtmlTableRow extends ClickableElement {
          * next reachable cell will be marked
          */
         private void setNextCell(final DomNode node) {
-
             nextCell_ = null;
             for (DomNode next = node; next != null; next = next.getNextDomSibling()) {
                 if (next instanceof HtmlTableCell) {

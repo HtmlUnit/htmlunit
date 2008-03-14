@@ -157,7 +157,6 @@ public class HtmlImageInput extends HtmlInput {
      */
     @Override
     public Page click(final int x, final int y) throws IOException, ElementNotFoundException {
-
         wasPositionSpecified_ = true;
         xPosition_ = x;
         yPosition_ = y;

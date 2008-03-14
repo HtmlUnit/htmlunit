@@ -99,7 +99,6 @@ public class Attribute extends SimpleScriptable {
      */
     @Override
     protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
-
         super.setDomNode(domNode, assignScriptObject);
 
         final String name = domNode.getNodeName();

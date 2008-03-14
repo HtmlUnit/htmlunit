@@ -89,7 +89,6 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      */
     @Override
     protected void onAllChildrenAddedToPage() {
-
         // Fix the size if necessary.
         int size;
         try {

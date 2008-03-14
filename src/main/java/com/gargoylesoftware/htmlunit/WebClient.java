@@ -1311,7 +1311,6 @@ public class WebClient implements Serializable {
      * @throws IOException If an IO problem occurs
      */
     private WebResponse makeWebResponseForFileUrl(final URL url, final String charset) throws IOException {
-
         URL cleanUrl = url;
         if (cleanUrl.getQuery() != null) {
             // Get rid of the query portion before trying to load the file.

@@ -54,7 +54,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertTitleEquals() throws Exception {
-
         final String html = "<html><head><title>foo</title></head><body>bar</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -75,7 +74,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertTitleContains() throws Exception {
-
         final String html = "<html><head><title>foo</title></head><body>bar</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -96,7 +94,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertTitleMatches() throws Exception {
-
         final String html = "<html><head><title>foo</title></head><body>bar</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -117,7 +114,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertElementPresent() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -138,7 +134,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertElementPresentByXPath() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -159,7 +154,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertElementNotPresent() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -180,7 +174,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertElementNotPresentByXPath() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -201,7 +194,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertTextPresent() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -222,7 +214,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertTextPresentInElement() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -252,7 +243,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertTextNotPresent() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -273,7 +263,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertTextNotPresentInElement() throws Exception {
-
         final String html = "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -303,7 +292,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertLinkPresent() throws Exception {
-
         final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -324,7 +312,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertLinkNotPresent() throws Exception {
-
         final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -345,7 +332,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertLinkPresentWithText() throws Exception {
-
         final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -366,7 +352,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertLinkNotPresentWithText() throws Exception {
-
         final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -387,7 +372,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertFormPresent() throws Exception {
-
         final String html = "<html><body><form name='f'>bar</form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -408,7 +392,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertFormNotPresent() throws Exception {
-
         final String html = "<html><body><form name='f'>bar</form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -429,7 +412,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertInputPresent() throws Exception {
-
         final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -450,7 +432,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertInputNotPresent() throws Exception {
-
         final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -471,7 +452,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertInputContainsValue() throws Exception {
-
         final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -501,7 +481,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertInputDoesNotContainValue() throws Exception {
-
         final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -531,7 +510,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertAllTabIndexAttributesSet() throws Exception {
-
         final String html1 = "<html><body><a href='#' tabindex='1'>foo</a></body></html>";
         final HtmlPage page1 = loadPage(html1);
 
@@ -567,7 +545,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertAllAccessKeyAttributesUnique() throws Exception {
-
         final String html1 = "<html><body><a accesskey='k'>foo</a></body></html>";
         final HtmlPage page1 = loadPage(html1);
 
@@ -591,7 +568,6 @@ public class WebAssertTest extends WebTestCase {
      */
     @Test
     public void testAssertAllIdAttributesUnique() throws Exception {
-
         final String html1 = "<html><body><a id='k'>foo</a></body></html>";
         final HtmlPage page1 = loadPage(html1);
 

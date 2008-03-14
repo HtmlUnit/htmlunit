@@ -193,7 +193,6 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     public void setAttributeValue(final String namespaceURI, final String qualifiedName, final String attributeValue) {
-
         boolean execute = false;
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
@@ -234,7 +233,6 @@ public class HtmlScript extends HtmlElement {
      * attribute is defined, the script is not executed
      */
     private void executeInlineScriptIfNeeded(final boolean executeIfDeferred) {
-
         if (!isExecutionNeeded()) {
             return;
         }
@@ -285,7 +283,6 @@ public class HtmlScript extends HtmlElement {
      * attribute is defined, the script is not executed
      */
     void executeScriptIfNeeded(final boolean executeIfDeferred) {
-
         if (!isExecutionNeeded()) {
             return;
         }
@@ -382,7 +379,6 @@ public class HtmlScript extends HtmlElement {
      * straight to the {@link DomNode#READY_STATE_COMPLETE} state, skipping all previous states.
      */
     protected void setReadyStateComplete() {
-
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
         if (!ie) {
             return;

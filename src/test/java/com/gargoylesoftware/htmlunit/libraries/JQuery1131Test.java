@@ -62,7 +62,6 @@ public class JQuery1131Test extends JQueryTestBase {
      */
     @Override
     protected void verify(final Iterator<HtmlElement> i, final boolean ie) throws Exception {
-
         final int failedDollar, passedDollar;
         final int failedAppend, passedAppend;
         final int failedElement, passedElement;

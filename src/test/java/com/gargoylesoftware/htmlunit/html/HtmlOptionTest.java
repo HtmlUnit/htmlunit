@@ -149,7 +149,6 @@ public class HtmlOptionTest extends WebTestCase {
      */
     @Test
     public void testClick() throws Exception {
-
         final String htmlContent
             = "<html><body>\n"
             + "<form id='form1'>\n"
