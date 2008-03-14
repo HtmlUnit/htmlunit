@@ -196,7 +196,7 @@ public class HtmlScript extends HtmlElement {
         boolean execute = false;
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-            if (ie || (getAttribute("src").length() == 0 && getFirstDomChild() == null)) {
+            if (ie || (getAttribute("src").isEmpty() && getFirstDomChild() == null)) {
                 // Always execute if IE; if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.
                 execute = true;

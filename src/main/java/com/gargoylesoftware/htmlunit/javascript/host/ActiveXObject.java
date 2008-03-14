@@ -226,7 +226,7 @@ public class ActiveXObject extends SimpleScriptable {
         final JavaScriptConfiguration jsConfig =
             JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER_7_0);
 
-        for (String className = "Document"; className.trim().length() != 0;) {
+        for (String className = "Document"; !className.trim().isEmpty();) {
             final ClassConfiguration classConfig = jsConfig.getClassConfiguration(className);
             for (final String function : classConfig.functionKeys()) {
                 addFunction(document, function);

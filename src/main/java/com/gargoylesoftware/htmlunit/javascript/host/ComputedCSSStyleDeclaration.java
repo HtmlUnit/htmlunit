@@ -128,7 +128,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private String getValue(final String currentValue, final String defaultValue) {
-        if (currentValue.length() == 0) {
+        if (currentValue.isEmpty()) {
             return defaultValue;
         }
         else {

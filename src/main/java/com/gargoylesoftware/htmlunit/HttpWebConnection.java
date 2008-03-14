@@ -128,7 +128,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             // caught here then check to see if this is the situation.  If so, then retry
             // it with a trailing slash.  The bug manifests itself with httpClient
             // complaining about not being able to find a line with HTTP/ on it.
-            if (url.getPath().length() == 0) {
+            if (url.getPath().isEmpty()) {
                 final StringBuilder buffer = new StringBuilder();
                 buffer.append(url.getProtocol());
                 buffer.append("://");
@@ -199,7 +199,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         throws IOException {
 
         String path = webRequestSettings.getURL().getPath();
-        if (path.length() == 0) {
+        if (path.isEmpty()) {
             path = "/";
         }
         else if (path.startsWith("//")) {
@@ -444,7 +444,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             final URL originatingURL, final long loadTime, final String charset) throws IOException {
 
         String statusMessage = method.getStatusText();
-        if (statusMessage == null || statusMessage.length() == 0) {
+        if (statusMessage == null || statusMessage.isEmpty()) {
             statusMessage = HttpStatus.getStatusText(statusCode);
         }
         if (statusMessage == null) {

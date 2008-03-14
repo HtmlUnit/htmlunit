@@ -99,7 +99,7 @@ public class XMLSerializer extends SimpleScriptable {
 
                 case org.w3c.dom.Node.TEXT_NODE:
                     final String value = child.getNodeValue();
-                    if (isIE && value.trim().length() == 0) {
+                    if (isIE && value.trim().isEmpty()) {
                         buffer.append('\r').append('\n');
                         final DomNode sibling = child.getNextDomSibling();
                         if (sibling != null && sibling.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {

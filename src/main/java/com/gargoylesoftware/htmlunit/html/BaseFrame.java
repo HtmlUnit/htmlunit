@@ -101,7 +101,7 @@ public abstract class BaseFrame extends StyledElement {
      */
     void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
-        if (source.length() == 0) {
+        if (source.isEmpty()) {
             // Nothing to load
             source = "about:blank";
         }
@@ -118,7 +118,7 @@ public abstract class BaseFrame extends StyledElement {
      *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
-        if (src.length() != 0) {
+        if (!src.isEmpty()) {
             final URL url;
             try {
                 url = ((HtmlPage) getPage()).getFullyQualifiedUrl(src);

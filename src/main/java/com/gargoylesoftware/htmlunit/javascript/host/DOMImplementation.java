@@ -104,7 +104,7 @@ public class DOMImplementation extends SimpleScriptable {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(document.getClass()));
-        if (qualifiedName != null && qualifiedName.length() != 0) {
+        if (qualifiedName != null && !qualifiedName.isEmpty()) {
             final XmlPage page = (XmlPage) document.getDomNodeOrDie();
             page.appendDomChild(page.createXmlElementNS(namespaceURI, qualifiedName));
         }

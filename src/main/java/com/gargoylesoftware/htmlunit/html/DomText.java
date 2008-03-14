@@ -175,7 +175,7 @@ public class DomText extends DomCharacterData implements Text {
      */
     @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
-        if (getData().trim().length() != 0) {
+        if (!getData().trim().isEmpty()) {
             printWriter.print(indent);
             printWriter.println(StringEscapeUtils.escapeXml(getData()));
         }
