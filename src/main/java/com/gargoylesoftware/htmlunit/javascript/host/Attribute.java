@@ -82,7 +82,7 @@ public class Attribute extends SimpleScriptable {
     /**
      * Initializes this attribute.
      * @param name the name of the attribute.
-     * @param parent the parent html element.
+     * @param parent the parent HTML element.
      */
     public void init(final String name, final HtmlElement parent) {
         name_ = name;

@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * Wrapper for the html element "br".
+ * Wrapper for the HTML element "br".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

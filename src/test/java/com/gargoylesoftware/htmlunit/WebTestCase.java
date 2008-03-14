@@ -114,8 +114,8 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Load a page with the specified html using the default browser version.
-     * @param html The html to use.
+     * Load a page with the specified HTML using the default browser version.
+     * @param html The HTML to use.
      * @return The new page.
      * @throws Exception if something goes wrong.
      */
@@ -124,7 +124,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Load a page with the specified html and collect alerts into the list.
+     * Load a page with the specified HTML and collect alerts into the list.
      * @param browserVersion the browser version to use
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
@@ -137,7 +137,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * User the default browser version to load a page with the specified html
+     * User the default browser version to load a page with the specified HTML
      * and collect alerts into the list.
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
@@ -188,7 +188,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Load a page with the specified html and collect alerts into the list.
+     * Load a page with the specified HTML and collect alerts into the list.
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
      * @param url The URL that will use as the document host for this page
@@ -202,7 +202,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Load a page with the specified html and collect alerts into the list.
+     * Load a page with the specified HTML and collect alerts into the list.
      * @param browserVersion the browser version to use
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
@@ -377,7 +377,7 @@ public abstract class WebTestCase {
     /**
      * Facility method transforming expectedAlerts to a list and calling
      * {@link #createTestPageForRealBrowserIfNeeded(String, List)}
-     * @param content the content of the html page
+     * @param content the content of the HTML page
      * @param expectedAlerts the expected alerts
      * @throws IOException if writing file fails
      */
@@ -387,9 +387,9 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Generates an instrumented html file in the temporary dir to easily make a manual test in a real browser.
+     * Generates an instrumented HTML file in the temporary dir to easily make a manual test in a real browser.
      * The file is generated only if the system property {@link #PROPERTY_GENERATE_TESTPAGES} is set.
-     * @param content the content of the html page
+     * @param content the content of the HTML page
      * @param expectedAlerts the expected alerts
      * @throws IOException if writing file fails
      */
@@ -426,13 +426,13 @@ public abstract class WebTestCase {
         }
         else {
             log.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES
-                    + "\" not set, don't generate test html page for real browser");
+                    + "\" not set, don't generate test HTML page for real browser");
         }
     }
 
     /**
      * @param expectedAlerts the list of the expected alerts
-     * @return the script to be included at the beginning of the generated html file
+     * @return the script to be included at the beginning of the generated HTML file
      * @throws IOException in case of problem
      */
     private String createInstrumentationScript(final List<String> expectedAlerts) throws IOException {

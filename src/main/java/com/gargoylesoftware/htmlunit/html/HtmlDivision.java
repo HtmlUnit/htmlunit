@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * Wrapper for the html element "div".
+ * Wrapper for the HTML element "div".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -85,7 +85,7 @@ public class HtmlDivision extends ClickableElement {
     /**
      * Indicates if a node without children should be written in expanded form as xml
      * (ie with closing tag rather than with "/&gt;)
-     * @return <code>true</code> to make generated xml readable as html
+     * @return <code>true</code> to make generated xml readable as HTML
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {

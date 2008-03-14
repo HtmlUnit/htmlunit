@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Wrapper for the html element "tfoot".
+ * Wrapper for the HTML element "tfoot".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

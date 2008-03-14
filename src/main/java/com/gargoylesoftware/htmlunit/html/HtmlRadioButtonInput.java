@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * Wrapper for the html element "input"
+ * Wrapper for the HTML element "input"
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

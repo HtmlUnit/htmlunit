@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * A representation of an html element "html".
+ * A representation of an HTML element "html".
  *
  * @version $Revision$
  * @author David K. Taylor

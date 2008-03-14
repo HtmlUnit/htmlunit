@@ -1013,7 +1013,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test that wrong formed html code is parsed like browsers do
+     * Test that wrong formed HTML code is parsed like browsers do
      * @throws Exception if the test fails
      */
     @Test
@@ -1057,7 +1057,7 @@ public class HtmlPageTest extends WebTestCase {
     }
         
     /**
-     * Test that the generated xml is valid as html code too
+     * Test that the generated xml is valid as HTML code too
      * @exception Exception If the test fails
      */
     @Test

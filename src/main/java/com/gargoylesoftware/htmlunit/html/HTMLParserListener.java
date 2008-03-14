@@ -43,8 +43,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Listener for messages from the html parser. <br/>
- * The classification of problems as warnings or errors is the one of the html parser
+ * Listener for messages from the HTML parser. <br/>
+ * The classification of problems as warnings or errors is the one of the HTML parser
  * used by htmlunit. The line and column may indicates the position of the problem detected
  * by the parser. This is only an indication and in some cases the position where
  * the problem has to be solved is located lines before.
@@ -83,7 +83,7 @@ public interface HTMLParserListener {
     };
 
     /**
-     * Called when the html parser reports an error.
+     * Called when the HTML parser reports an error.
      * @param message the description of the problem
      * @param url the url of the document in which the problem occurs
      * @param line the line of the problem
@@ -93,7 +93,7 @@ public interface HTMLParserListener {
     void error(final String message, final URL url, final int line, final int column, final String key);
     
     /**
-     * Called when the html parser reports a warning.
+     * Called when the HTML parser reports a warning.
      * @param message the description of the problem
      * @param url the url of the document in which the problem occurs
      * @param line the line of the problem

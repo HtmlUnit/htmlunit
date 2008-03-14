@@ -808,7 +808,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * The HTML specification seems to indicate that one accesskey cannot be used
     * for multiple elements however Internet Explorer does seem to support this.
     * It's worth noting that Mozilla does not support multiple elements with one
-    * access key so you are making your html browser specific if you rely on this
+    * access key so you are making your HTML browser specific if you rely on this
     * feature.<p>
     *
     * Only the following html elements may have <tt>accesskey</tt>s defined: A, AREA,
@@ -867,7 +867,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param sourceCode The javascript code to execute.
      * @param sourceName The name for this chunk of code.  This name will be displayed
      * in any error messages.
-     * @param htmlElement The html element for which this script is being executed.
+     * @param htmlElement The HTML element for which this script is being executed.
      * This element will be the context during the javascript execution.  If null,
      * the context will default to the window.
      * @return A ScriptResult which will contain both the current page (which may be different than
@@ -933,7 +933,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param function The javascript Function to call.
      * @param thisObject The "this" object to be used during invocation.
      * @param args The arguments to pass into the call.
-     * @param htmlElementScope The html element for which this script is being executed.
+     * @param htmlElementScope The HTML element for which this script is being executed.
      * This element will be the context during the javascript execution.  If null,
      * the context will default to the page.
      * @return A ScriptResult which will contain both the current page (which may be different than

@@ -54,7 +54,7 @@ public interface ScriptPreProcessor {
      * @param sourceCode The code to execute.
      * @param sourceName A name for the chunk of code that is going to be executed.  This will be
      * used in error messages.
-     * @param htmlElement The html element that will act as the context.
+     * @param htmlElement The HTML element that will act as the context.
      * @return The source code after pre processing
      */
     String preProcess(

@@ -707,8 +707,8 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return an immutable map containing the html to javascript mappings.  Keys are
-     * java classes for the various html classes (ie HtmlInput.class) and the values
+     * Return an immutable map containing the HTML to javascript mappings.  Keys are
+     * java classes for the various HTML classes (ie HtmlInput.class) and the values
      * are the javascript class names (ie "HTMLAnchorElement").
      * @return the mappings
      */

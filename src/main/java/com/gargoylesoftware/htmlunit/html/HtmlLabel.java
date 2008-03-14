@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * Wrapper for the html element "label".
+ * Wrapper for the HTML element "label".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

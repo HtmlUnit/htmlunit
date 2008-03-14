@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
 /**
- * An abstract wrapper for html elements
+ * An abstract wrapper for HTML elements
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -448,7 +448,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Support for reporting html attribute changes.
+     * Support for reporting HTML attribute changes.
      * This method can be called when an attribute has been replaced and it will send the
      * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
      *
@@ -471,7 +471,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Support for reporting html attribute changes.
+     * Support for reporting HTML attribute changes.
      * This method can be called when an attribute has been removed and it will send the
      * appropriate HtmlAttributeChangeEvent to any registered HtmlAttributeChangeListener.
      *
@@ -508,7 +508,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * @return an iterator over the {@link HtmlAttr} objects representing the
      * attributes of this element.
-     * The elements are ordered as found in the html source code.
+     * The elements are ordered as found in the HTML source code.
      * @deprecated As of version 2.0
      */
     public Iterator<HtmlAttr> getAttributeEntriesIterator() {
@@ -525,14 +525,14 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * @return a collection of {@link HtmlAttr} objects representing the
-     * attributes of this element. The elements are ordered as found in the html source code.
+     * attributes of this element. The elements are ordered as found in the HTML source code.
      */
     public Collection<HtmlAttr> getAttributesCollection() {
         return attributes_.values();
     }
 
     /**
-     * Return the tag name of this element.  The tag name is the actual html name.  For example
+     * Return the tag name of this element.  The tag name is the actual HTML name.  For example
      * the tag name for HtmlAnchor is "a" and the tag name for HtmlTable is "table".
      * This tag name will always be in lowercase, no matter what case was used in the original
      * document, when no namespace is defined.
@@ -908,11 +908,11 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the html element with the specified id. If more than one element
-     * has this id (not allowed by the html spec) then return the first one.
+     * Return the HTML element with the specified id. If more than one element
+     * has this id (not allowed by the HTML spec) then return the first one.
      *
      * @param id The id value to search by
-     * @return The html element found
+     * @return The HTML element found
      * @exception ElementNotFoundException If no element was found that matches the id
      */
     public HtmlElement getHtmlElementById(final String id)
@@ -976,7 +976,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Given a list of tag names, return the html elements that correspond to any matching element
+     * Given a list of tag names, return the HTML elements that correspond to any matching element
      *
      * @param acceptableTagNames The list of tag names to search by.
      * @return The list of tag names
@@ -991,7 +991,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Given a list of tag names, return the html elements that correspond to any matching element
+     * Given a list of tag names, return the HTML elements that correspond to any matching element
      *
      * @param tagName the tag name to match
      * @return The list of tag names

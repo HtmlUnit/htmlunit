@@ -44,7 +44,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
- * Wrapper for the html element "isindex".  Note that this element has been
+ * Wrapper for the HTML element "isindex".  Note that this element has been
  * deprecated in the HTML spec.
  *
  * @version $Revision$

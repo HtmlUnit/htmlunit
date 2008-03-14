@@ -42,7 +42,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Wrapper for the html element "input"
+ * Wrapper for the HTML element "input"
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

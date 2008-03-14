@@ -147,7 +147,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             final int nbExecutions;
             if (async_ && STATE_LOADING == state) {
                 // quite strange but IE and Mozilla seem both to fire state loading twice
-                // in async mode (at least with html of the unit tests)
+                // in async mode (at least with HTML of the unit tests)
                 nbExecutions = 2;
             }
             else {

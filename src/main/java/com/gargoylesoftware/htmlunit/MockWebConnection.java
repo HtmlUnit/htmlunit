@@ -202,8 +202,8 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Specify a generic html page that will be returned when the given url is specified.
-     * The page will contain only minimal html to satisfy the html parser but will contain
+     * Specify a generic HTML page that will be returned when the given url is specified.
+     * The page will contain only minimal HTML to satisfy the HTML parser but will contain
      * the specified title so that tests can check for titleText.
      *
      * @param url The url that will return the given response

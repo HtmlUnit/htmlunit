@@ -100,7 +100,7 @@ public class JavaScriptEngine implements Serializable {
 
     private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
     /**
-     * Cache parsed scripts (only for js files, not for js code embedded in html code)
+     * Cache parsed scripts (only for js files, not for js code embedded in HTML code)
      * The WeakHashMap allows cached scripts to be GCed when the WebResponses are not retained
      * in the {@link com.gargoylesoftware.htmlunit.Cache} anymore.
      */
@@ -339,7 +339,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Compiles the specified javascript code in the context of a given html page.
+     * Compiles the specified javascript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
      * @param sourceCode The javascript code to execute.
@@ -396,7 +396,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Execute the specified javascript code in the context of a given html page.
+     * Execute the specified javascript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
      * @param sourceCode The javascript code to execute.
@@ -414,7 +414,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Execute the specified javascript code in the context of a given html page.
+     * Execute the specified javascript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
      * @param script the script to execute
@@ -444,7 +444,7 @@ public class JavaScriptEngine implements Serializable {
      * @param javaScriptFunction The function to call.
      * @param thisObject The this object for class method calls.
      * @param args The list of arguments to pass to the function.
-     * @param htmlElement The html element that will act as the context.
+     * @param htmlElement The HTML element that will act as the context.
      * @return The result of the function call.
      */
     public Object callFunction(
@@ -483,7 +483,7 @@ public class JavaScriptEngine implements Serializable {
 
     /**
      * Calls the given function taking care of synchronization issues.
-     * @param htmlPage the html page that caused this script to executed
+     * @param htmlPage the HTML page that caused this script to executed
      * @param function the js function to execute
      * @param context the context in which execution should occur
      * @param scope the execution scope
@@ -598,7 +598,7 @@ public class JavaScriptEngine implements Serializable {
      * @param htmlPage The page
      * @param sourceCode The code to process.
      * @param sourceName A name for the chunk of code.  This will be used in error messages.
-     * @param htmlElement The html element that will act as the context.
+     * @param htmlElement The HTML element that will act as the context.
      * @return The source code after being pre processed
      * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
      */

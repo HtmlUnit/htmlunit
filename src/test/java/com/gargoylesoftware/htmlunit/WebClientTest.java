@@ -1671,7 +1671,7 @@ public class WebClientTest extends WebTestCase {
         tmpFileJS.deleteOnExit();
         FileUtils.writeStringToFile(tmpFileJS, "alert('foo')", encoding);
 
-        // html file
+        // HTML file
         final String html = "<html><head></head><body>\n"
             + "<script language='javascript' type='text/javascript' src='" + tmpFileJS.getName() + "'></script>\n"
             + "</body></html>";

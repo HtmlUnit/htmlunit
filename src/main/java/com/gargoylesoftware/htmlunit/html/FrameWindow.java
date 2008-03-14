@@ -102,7 +102,7 @@ public class FrameWindow extends WebWindowImpl {
     }
 
     /**
-     * Return the html page in which the &lt;frame&gt; or &lt;iframe&gt; tag is contained
+     * Return the HTML page in which the &lt;frame&gt; or &lt;iframe&gt; tag is contained
      * for this frame window.
      * This is a facility method for <code>(HtmlPage) (getParentWindow().getEnclosedPage())</code>.
      * @return the page in the parent window.

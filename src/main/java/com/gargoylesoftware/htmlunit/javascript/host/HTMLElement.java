@@ -522,7 +522,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Get the innerHTML attribute
-     * @return the contents of this node as html
+     * @return the contents of this node as HTML
      */
     public String jsxGet_innerHTML() {
         final StringBuilder buf = new StringBuilder();
@@ -698,8 +698,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Parses the html code
-     * @param htmlSnippet the html code extract to parse
+     * Parses the HTML code
+     * @param htmlSnippet the HTML code extract to parse
      */
     static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
         final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) target.getPage(), null) {
@@ -720,13 +720,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             HTMLParser.parseFragment(proxyNode, source);
         }
         catch (final IOException e) {
-            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing html snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
+            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
+            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
         }
         catch (final SAXException e) {
-            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing html snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
+            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
+            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
         }
     }
@@ -1601,19 +1601,19 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the html element that corresponds to this javascript object or throw an exception
+     * Return the HTML element that corresponds to this javascript object or throw an exception
      * if one cannot be found.
-     * @return The html element
-     * @exception IllegalStateException If the html element could not be found.
+     * @return The HTML element
+     * @exception IllegalStateException If the HTML element could not be found.
      */
     public final HtmlElement getHtmlElementOrDie() throws IllegalStateException {
         return (HtmlElement) getDomNodeOrDie();
     }
 
     /**
-     * Return the html element that corresponds to this javascript object
+     * Return the HTML element that corresponds to this javascript object
      * or null if an element hasn't been set.
-     * @return The html element or null
+     * @return The HTML element or null
      */
     public final HtmlElement getHtmlElementOrNull() {
         return (HtmlElement) getDomNodeOrNull();

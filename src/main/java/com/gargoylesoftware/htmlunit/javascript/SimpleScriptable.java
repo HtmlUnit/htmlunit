@@ -171,8 +171,8 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Set the html element that corresponds to this javascript object
-     * @param htmlElement The html element
+     * Set the HTML element that corresponds to this javascript object
+     * @param htmlElement The HTML element
      */
     public void setHtmlElement(final HtmlElement htmlElement) {
         setDomNode(htmlElement);

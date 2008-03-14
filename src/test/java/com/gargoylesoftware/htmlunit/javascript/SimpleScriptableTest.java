@@ -124,7 +124,7 @@ public class SimpleScriptableTest extends WebTestCase {
         final String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
 
-        // Now pull out those names that we know don't have html equivalents
+        // Now pull out those names that we know don't have HTML equivalents
         names.remove("ActiveXObject");
         names.remove("BoxObject");
         names.remove("ComputedCSSStyleDeclaration");

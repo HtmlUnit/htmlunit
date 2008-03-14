@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
 
 /**
- * Wrapper for the html element "script".<br>
+ * Wrapper for the HTML element "script".<br>
  * When a script tag references an external script (with attribute src) it gets executed when the node
  * is added to the DOM tree. When the script code is nested, it gets executed when the text node
  * containing the script is added to the HtmlScript.<br>
@@ -405,7 +405,7 @@ public class HtmlScript extends HtmlElement {
     /**
      * Indicates if a node without children should be written in expanded form as xml
      * (i.e. with closing tag rather than with "/&gt;")
-     * @return <code>true</code> to make generated xml readable as html
+     * @return <code>true</code> to make generated xml readable as HTML
      */
     @Override
     protected boolean isEmptyXmlTagExpanded() {

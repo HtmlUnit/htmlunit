@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * Wrapper for the html element "form"
+ * Wrapper for the HTML element "form"
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

@@ -82,7 +82,7 @@ public final class ClassConfiguration {
      * @param implementingClass - the fully qualified name of the class implementing this functionality
      * @param jsConstructor the constructor of method <code>implementingClass</code>
      * @param extendedClass - The name of the class that this class extends
-     * @param htmlClass The name of the html class that this object supports
+     * @param htmlClass The name of the HTML class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - If the implementing class is not found
      */

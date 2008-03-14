@@ -987,7 +987,7 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * @param htmlSnippet The html to embed in the test
+     * @param htmlSnippet The HTML to embed in the test
      * @param expected The expected alert
      * @throws Exception if the test fails
      */

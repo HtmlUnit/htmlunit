@@ -253,7 +253,7 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Parses an html snippet.
+     * Parses an HTML snippet.
      * @param valueAsString text that contains text and tags to be converted to a document fragment.
      * @return a document fragment
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:range.createContextualFragment">Mozilla documentation</a>

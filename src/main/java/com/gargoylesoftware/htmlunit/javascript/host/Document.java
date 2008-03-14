@@ -188,7 +188,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the html page that this document is modeling..
+     * Return the HTML page that this document is modeling..
      * @return The page.
      */
     public HtmlPage getHtmlPage() {
@@ -196,7 +196,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the html page that this document is modeling or null if the
+     * Return the HTML page that this document is modeling or null if the
      * page is empty.
      * @return The page.
      */
@@ -400,7 +400,7 @@ public class Document extends EventNode {
      * Indicates if the content is a well formed HTML snippet that can already be parsed to be added
      * to the DOM.
      *
-     * @param content the html snippet
+     * @param content the HTML snippet
      * @return <code>false</code> if it not well formed
      */
     private boolean canAlreadyBeParsed(final String content) {
@@ -849,7 +849,7 @@ public class Document extends EventNode {
 
             if (jsElement == NOT_FOUND) {
                 getLog().debug("createElementNS(" + namespaceURI + ',' + qualifiedName
-                    + ") cannot return a result as there isn't a javascript object for the html element "
+                    + ") cannot return a result as there isn't a javascript object for the HTML element "
                     + htmlElement.getClass().getName());
             }
             else {
@@ -957,7 +957,7 @@ public class Document extends EventNode {
 
             if (jsElement == NOT_FOUND) {
                 getLog().debug("getElementById(" + id
-                    + ") cannot return a result as there isn't a javascript object for the html element "
+                    + ") cannot return a result as there isn't a javascript object for the HTML element "
                     + htmlElement.getClass().getName());
             }
             else {

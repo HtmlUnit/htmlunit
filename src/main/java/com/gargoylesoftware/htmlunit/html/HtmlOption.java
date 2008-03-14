@@ -43,7 +43,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * Wrapper for the html element "option"
+ * Wrapper for the HTML element "option"
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

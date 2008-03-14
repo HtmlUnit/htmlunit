@@ -141,7 +141,7 @@ public class HtmlFrameTest extends WebTestCase {
     }
 
     /**
-     * Test that frames are correctly deregistered even if not html
+     * Test that frames are correctly deregistered even if not HTML
      * @throws Exception if the test fails
      */
     @Test

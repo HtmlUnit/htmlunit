@@ -120,7 +120,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Commodity for <code>(HtmlInput) getHtmlElementOrDie()</code>
-     * @return the bound html input
+     * @return the bound HTML input
      */
     protected HtmlInput getHtmlInputOrDie() {
         return (HtmlInput) getHtmlElementOrDie();

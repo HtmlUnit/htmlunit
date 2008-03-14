@@ -45,7 +45,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Wrapper for the html element "tr"
+ * Wrapper for the HTML element "tr"
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -244,7 +244,7 @@ public class HtmlTableRow extends ClickableElement {
                     return;
                 }
                 else if (currentForm_ == null && next instanceof HtmlForm) {
-                    // Completely illegal html but some of the big sites (ie amazon) do this
+                    // Completely illegal HTML but some of the big sites (ie amazon) do this
                     currentForm_ = (HtmlForm) next;
                     setNextCell(next.getFirstDomChild());
                     return;

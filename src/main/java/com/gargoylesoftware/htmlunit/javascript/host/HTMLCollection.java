@@ -90,8 +90,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     private boolean avoidObjectDetection_ = false;
 
     /**
-     * The transformer used to get the element to return from the html element.
-     * It returns the html element itself except for frames where it returns the nested window.
+     * The transformer used to get the element to return from the HTML element.
+     * It returns the HTML element itself except for frames where it returns the nested window.
      */
     private Transformer transformer_;
     
@@ -231,7 +231,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Gets the html elements. Avoid calling it multiple times within a method because the evaluation
+     * Gets the HTML elements. Avoid calling it multiple times within a method because the evaluation
      * needs to be performed each time again
      * @return the list of {@link HtmlElement} contained in this collection
      */

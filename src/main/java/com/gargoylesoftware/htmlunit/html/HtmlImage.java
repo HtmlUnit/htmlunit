@@ -43,7 +43,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * Wrapper for the html element "img".
+ * Wrapper for the HTML element "img".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
