@@ -170,11 +170,11 @@
         </module>
 
         <module name="UpperEll"/>
-        
+
         <module name="FinalLocalVariable">
             <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
         </module>
-        
+
         <!-- Uncomment to find the TODOs without a helpful IDE -->
         <!--<module name="TodoComment"/>-->
     </module>

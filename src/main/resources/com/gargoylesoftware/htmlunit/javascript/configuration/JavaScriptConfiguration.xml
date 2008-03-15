@@ -48,7 +48,7 @@
         <property name="data" readable="true" writable="true"/>
         <property name="length" readable="true" writable="false"/>
         <property name="tabIndex" notImplemented="true" readable="true" writable="true"/>
-        
+
         <function name="appendData"/>
         <function name="deleteData"/>
         <function name="insertData"/>
@@ -693,7 +693,7 @@
             <browser name="Firefox"/>
         </function>
         <function name="getElementById"/>
-        <function name="getElementsByName"/>        
+        <function name="getElementsByName"/>
         <function name="getElementsByTagName"/>
         <function name="importNode">
             <browser name="Firefox"/>
@@ -894,7 +894,7 @@
     <class name="HTMLAnchorElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
         <javascript min-version="1.2"/>
-        
+
         <property name="href" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
         <property name="search" readable="true" writable="true"/>
@@ -1076,7 +1076,7 @@
         <property name="uniqueID" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
-        
+
         <function name="addBehavior">
             <browser name="Microsoft Internet Explorer" min-version="5"/>
         </function>
@@ -1386,12 +1386,12 @@
     <class name="HTMLSelectElement" extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
         <!-- NOT FINISHED -->
-        
+
         <property name="length" readable="true" writable="true"/>
         <property name="options" readable="true" writable="false"/>
         <property name="selectedIndex" readable="true" writable="true"/>
         <property name="size" readable="true" writable="true"/>
-        
+
         <function name="add"/>
         <function name="remove"/>
     </class>
@@ -1442,7 +1442,7 @@
         <property name="width" readable="true" writable="true"/>
         <property name="cellSpacing" readable="true" writable="true"/>
         <property name="cellPadding" readable="true" writable="true"/>
-        
+
         <function name="createCaption">
             <doclink
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp"
@@ -1614,13 +1614,13 @@
         <property name="length" readable="true" writable="false"/>
         <function name="getNamedItem"/>
     </class>
- 
+
     <class name="Navigator" classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
         JSObject="true">
         <doclink
             url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_navigator.asp"
             descr="MSDN documentation"/>
-        
+
         <property name="appCodeName" readable="true" writable="false"/>
         <property name="appMinorVersion" readable="true" writable="false"/>
         <property name="appName" readable="true" writable="false"/>
@@ -1640,7 +1640,7 @@
         <property name="systemLanguage" readable="true" writable="false"/>
         <property name="userAgent" readable="true" writable="false"/>
         <property name="userLanguage" readable="true" writable="false"/>
-    
+
         <function name="javaEnabled"/>
         <function name="taintEnabled"/>
     </class>
@@ -1708,7 +1708,7 @@
         <property name="filename" readable="true" writable="false"/>
         <property name="name" readable="true" writable="false"/>
     </class>
- 
+
     <class name="PluginArray" extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.PluginArray"
         JSObject="true">
         <function name="refresh"/>
@@ -1731,7 +1731,7 @@
         <property name="endOffset" readable="true" writable="false"/>
         <property name="startContainer" readable="true" writable="false"/>
         <property name="startOffset" readable="true" writable="false"/>
-        
+
         <function name="collapse"/>
         <function name="createContextualFragment"/>
         <function name="selectNode"/>
@@ -1747,7 +1747,7 @@
     <class name="RowContainer" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
         JSObject="true">
         <property name="rows" readable="true" writable="false"/>
-        
+
         <function name="deleteRow">
             <doclink
                 url="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deleterow.asp"
@@ -1774,7 +1774,7 @@
         <doclink
             url="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html"
             descr="Mozilla documentation"/>
-        
+
         <property name="availHeight" readable="true" writable="false"/>
         <property name="availLeft" readable="true" writable="false"/>
         <property name="availTop" readable="true" writable="false"/>
@@ -1861,7 +1861,7 @@
     <class name="Window" classname="com.gargoylesoftware.htmlunit.javascript.host.Window"
         JSObject="true">
         <!-- NOT FINISHED -->
-        
+
         <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp"
                 descr="MSDN documentation"/>
 
@@ -1905,7 +1905,7 @@
         <property name="status" readable="true" writable="true"/>
         <property name="top" readable="true" writable="false"/>
         <property name="window" readable="true" writable="false"/>
-        
+
         <function name="addEventListener">
             <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"
                     descr="Mozilla documentation"/>
@@ -2139,7 +2139,7 @@
         <property name="stylesheet" readable="true" writable="true"/>
         <function name="createProcessor"/>
     </class>
-    
+
     <class name="XSLTProcessor" classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor"
         jsConstructor="jsConstructor" JSObject="true">
         <property name="input" readable="true" writable="true">

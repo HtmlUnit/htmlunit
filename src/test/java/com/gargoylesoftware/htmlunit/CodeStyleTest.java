@@ -192,6 +192,7 @@ public class CodeStyleTest extends WebTestCase {
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1);
                     mixedIndentation(lines, relativePath);
+                    trailingWhitespace(lines, relativePath);
                 }
             }
         }
@@ -201,9 +202,25 @@ public class CodeStyleTest extends WebTestCase {
      * Verifies that no XML files have mixed indentation (tabs and spaces, mixed).
      */
     private void mixedIndentation(final List<String> lines, final String path) {
-        for (final String line : lines) {
+        for (int i = 0; i < lines.size(); i++) {
+            final String line = lines.get(i);
             if (line.indexOf('\t') != -1) {
-                fail("Mixed indentation in " + path + ", line: " + lines.indexOf(line));
+                fail("Mixed indentation in " + path + ", line: " + (i + 1));
+            }
+        }
+    }
+
+    /**
+     * Verifies that no XML files have trailing whitespace.
+     */
+    private void trailingWhitespace(final List<String> lines, final String path) {
+        for (int i = 0; i < lines.size(); i++) {
+            final String line = lines.get(i);
+            if (line.length() > 0) {
+                final char last = line.charAt(line.length() - 1);
+                if (Character.isWhitespace(last)) {
+                    fail("Trailing whitespace in " + path + ", line: " + (i + 1));
+                }
             }
         }
     }
