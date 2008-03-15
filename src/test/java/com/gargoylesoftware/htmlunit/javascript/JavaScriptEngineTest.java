@@ -51,6 +51,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 
@@ -1331,7 +1332,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        final Context cx = Context.enter();
+        final Context cx = ContextFactory.getGlobal().enterContext();
         final Scriptable scope1 = cx.initStandardObjects();
         final Scriptable scope2 = cx.initStandardObjects();
         final String str2 = "function f() { String.prototype.foo = 'from 2'; \n"
