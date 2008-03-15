@@ -791,8 +791,8 @@ public class Document extends EventNode {
                     result = resultNode.getScriptObject();
                 }
                 catch (final Exception e) {
-                    getLog().error("Unexpected exception occurred while parsing html snippet", e);
-                    throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
+                    getLog().error("Unexpected exception occurred while parsing HTML snippet", e);
+                    throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                             + e.getMessage());
                 }
             }
@@ -801,8 +801,8 @@ public class Document extends EventNode {
                 if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isNetscape()) {
                     tagName = tagName.substring(1, tagName.length() - 1);
                     if (!tagName.matches("\\w+")) {
-                        getLog().error("Unexpected exception occurred while parsing html snippet");
-                        throw Context.reportRuntimeError("Unexpected exception occurred while parsing html snippet: "
+                        getLog().error("Unexpected exception occurred while parsing HTML snippet");
+                        throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                                 + tagName);
                     }
                 }

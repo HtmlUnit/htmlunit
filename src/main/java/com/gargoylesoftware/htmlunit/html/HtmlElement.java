@@ -892,7 +892,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param attributeName The name of the attribute
      * @param attributeValue The value of the attribute
      * @return The HtmlElement
-     * @exception ElementNotFoundException If a particular xml element could not be found in the dom model
+     * @exception ElementNotFoundException If a particular xml element could not be found in the DOM model
      */
     public final HtmlElement getOneHtmlElementByAttribute(
             final String elementName,

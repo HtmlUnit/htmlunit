@@ -154,7 +154,7 @@ public class HTMLSelectElement extends FormField {
     }
     
     /**
-     * Adds the option (and create the associated dom node if needed) before the specified one
+     * Adds the option (and create the associated DOM node if needed) before the specified one
      * or at the end if the specified one in null
      * @param newOptionObject the new option to add
      * @param beforeOption the option that should be after the option to add

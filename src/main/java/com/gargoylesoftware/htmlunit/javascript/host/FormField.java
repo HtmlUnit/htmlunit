@@ -61,7 +61,7 @@ public class FormField extends HTMLElement {
     private static final long serialVersionUID = 3712016051364495710L;
 
     /**
-     * Sets the associated dom node and sets the enclosing form as parent scope of the current element
+     * Sets the associated DOM node and sets the enclosing form as parent scope of the current element
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setDomNode(DomNode)
      * @param domNode The DOM node
      */

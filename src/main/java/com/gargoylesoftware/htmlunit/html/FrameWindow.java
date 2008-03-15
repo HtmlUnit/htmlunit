@@ -113,7 +113,7 @@ public class FrameWindow extends WebWindowImpl {
     
     /**
      * Gets the DOM node of the (i)frame containing this window.
-     * @return the dom node
+     * @return the DOM node
      */
     public BaseFrame getFrameElement() {
         return frame_;

@@ -212,7 +212,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Builds a new the JavaScript object that corresponds to the specified object.<br>
-     * @param domNode the dom node for which a JS object should be created
+     * @param domNode the DOM node for which a JS object should be created
      * @return The JavaScript object
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {

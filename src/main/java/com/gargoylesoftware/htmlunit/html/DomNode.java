@@ -808,7 +808,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * The logic of when and where the js object is created needs a clean up: functions using
-     * a js object of a dom node should not have to look if they should create it first
+     * a js object of a DOM node should not have to look if they should create it first
      * Return the JavaScript object that corresponds to this node.
      * @return The JavaScript object that corresponds to this node building it if necessary.
      */
@@ -1307,7 +1307,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * The listener is registered for all children nodes of this DomNode,
      * as well as the descendant nodes.
      *
-     * @param listener the dom structure change listener to be added.
+     * @param listener the DOM structure change listener to be added.
      * @see #removeDomChangeListener(DomChangeListener)
      */
     public void addDomChangeListener(final DomChangeListener listener) {
@@ -1327,7 +1327,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * This method should be used to remove DomChangeListener that were registered
      * for all children nodes and descendant nodes of this DomNode.
      *
-     * @param listener the dom structure change listener to be removed.
+     * @param listener the DOM structure change listener to be removed.
      * @see #addDomChangeListener(DomChangeListener)
      */
     public void removeDomChangeListener(final DomChangeListener listener) {

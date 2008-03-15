@@ -810,7 +810,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * access key so you are making your HTML browser specific if you rely on this
     * feature.<p>
     *
-    * Only the following html elements may have <tt>accesskey</tt>s defined: A, AREA,
+    * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
     *
     * @param accessKey The key to look for
