@@ -366,6 +366,14 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
+        throw new UnsupportedOperationException("XmlPage.getElementsByTagNameNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
     public DOMImplementation getImplementation() {
         throw new UnsupportedOperationException("XmlPage.getImplementation is not yet implemented.");
     }

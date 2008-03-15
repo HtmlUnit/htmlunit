@@ -83,7 +83,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Fixed if {@link SimpleScriptableTest#testArrayedMap()} is fixed.
+     * Fixed if {@link com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest#arrayedMap()} is fixed.
      * @throws Exception If test fails.
      */
     @Test
@@ -118,7 +118,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Depends on {@link SimpleScriptableTest#testParentProtoFeature()}.
+     * Depends on {@link com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest#parentProtoFeature()}.
      *
      * @throws Exception If test fails.
      */
@@ -235,7 +235,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Depends on {@link HtmlUnitRegExpProxyTest#test()}.
+     * Depends on {@link com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxyTest#test()}.
      * @throws Exception If test fails.
      */
     @Test
@@ -272,7 +272,8 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Performs pre-test initialization.
+     * @throws Exception if an error occurs
      */
     @Before
     public void setUp() throws Exception {
@@ -280,7 +281,8 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
      */
     @After
     public void tearDown() throws Exception {

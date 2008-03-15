@@ -58,22 +58,17 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author David K. Taylor
  */
 public class HtmlAttrTest extends WebTestCase {
-    /**
-     * Test object.
-     */
+
+    /** Test object. */
     private HtmlAttr htmlAttr_;
-    /**
-     * Single test key value.
-     */
+
+    /** Single test key value. */
     private static final String ENTRY_KEY = "key";
-    /**
-     * Single test attribute value.
-     */
+
+    /** Single test attribute value. */
     private static final String ENTRY_VALUE = "value";
 
-    /**
-     * A single dummy HtmlElement. Necessary, because HtmlAttr's constructor calls the method getPage().
-     */
+    /** A single dummy HtmlElement. Necessary, because HtmlAttr's constructor calls the method getPage(). */
     static final HtmlElement HTML_ELEMENT;
 
     static {
@@ -89,15 +84,16 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Performs pre-test initialization.
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         htmlAttr_ = new HtmlAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
         htmlAttr_.setParentNode(HTML_ELEMENT);
     }
 
     /**
+     * Tests {@link HtmlAttr#getName()}.
      */
     @Test
     public void testGetName() {
@@ -105,6 +101,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
+     * Tests {@link HtmlAttr#getNodeName()}.
      */
     @Test
     public void testGetNodeName() {
@@ -112,6 +109,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
+     * Tests {@link HtmlAttr#getNodeType()}.
      */
     @Test
     public void testGetNodeType() {
@@ -119,6 +117,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
+     * Tests {@link HtmlAttr#getNodeValue()}.
      */
     @Test
     public void testGetNodeValue() {
@@ -126,13 +125,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     */
-    @Test
-    public void testGetKey() {
-        assertEquals(ENTRY_KEY, htmlAttr_.getName());
-    }
-
-    /**
+     * Tests {@link HtmlAttr#getHtmlValue()}.
      */
     @Test
     public void testGetValue() {
@@ -140,6 +133,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
+     * Tests {@link HtmlAttr#setHtmlValue(String)}.
      */
     @Test
     public void testSetValue() {
@@ -148,6 +142,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
+     * Tests {@link HtmlAttr#getParentDomNode()}.
      */
     @Test
     public void testGetParent() {
@@ -155,7 +150,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Test nodeType of {@link Attribute}.
+     * Test nodeType of {@link HtmlAttr}.
      *
      * @throws Exception if the test fails
      */

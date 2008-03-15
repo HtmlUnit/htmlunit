@@ -458,14 +458,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
-        throw new UnsupportedOperationException("DomNode.getElementsByTagNameNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
     public boolean isSupported(final String namespace, final String featureName) {
         throw new UnsupportedOperationException("DomNode.isSupported is not yet implemented.");
     }

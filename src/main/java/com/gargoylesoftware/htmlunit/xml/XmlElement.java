@@ -356,6 +356,14 @@ public class XmlElement extends DomNamespaceNode implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
+        throw new UnsupportedOperationException("XmlElement.getElementsByTagNameNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
     public TypeInfo getSchemaTypeInfo() {
         throw new UnsupportedOperationException("XmlElement.getSchemaTypeInfo is not yet implemented.");
     }

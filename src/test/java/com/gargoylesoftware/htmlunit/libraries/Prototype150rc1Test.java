@@ -213,7 +213,8 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Performs pre-test initialization.
+     * @throws Exception if an error occurs
      */
     @Before
     public void setUp() throws Exception {
@@ -221,7 +222,8 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
      */
     @After
     public void tearDown() throws Exception {

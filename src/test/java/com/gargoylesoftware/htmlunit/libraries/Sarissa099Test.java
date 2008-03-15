@@ -193,7 +193,8 @@ public class Sarissa099Test extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
      */
     @After
     public void tearDown() throws Exception {

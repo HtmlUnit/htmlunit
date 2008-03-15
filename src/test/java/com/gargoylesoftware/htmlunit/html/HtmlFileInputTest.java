@@ -357,8 +357,8 @@ public class HtmlFileInputTest extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
-     * Stops the web server if it has been started.
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
      */
     @After
     public void tearDown() throws Exception {

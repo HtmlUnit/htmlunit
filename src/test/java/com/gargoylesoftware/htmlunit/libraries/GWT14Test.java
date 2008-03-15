@@ -456,7 +456,8 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
      */
     @After
     public void after() throws Exception {

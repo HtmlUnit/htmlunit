@@ -363,6 +363,14 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      * Not yet implemented.
      */
+    public NodeList getElementsByTagNameNS(final String namespace, final String name) {
+        throw new UnsupportedOperationException("HtmlElement.getElementsByTagNameNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
     public Attr setAttributeNodeNS(final Attr attribute) {
         throw new UnsupportedOperationException("HtmlElement.setAttributeNodeNS is not yet implemented.");
     }
@@ -1509,5 +1517,4 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
         super.checkChildHierarchy(childNode);
     }
-    
 }

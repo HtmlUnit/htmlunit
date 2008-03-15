@@ -77,7 +77,8 @@ public class HtmlTableRowTest extends WebTestCase {
     private HtmlTableCell cellClone_;
 
     /**
-     * {@inheritDoc}
+     * Performs pre-test initialization.
+     * @throws Exception if an error occurs
      */
     @Before
     public void setUp() throws Exception {

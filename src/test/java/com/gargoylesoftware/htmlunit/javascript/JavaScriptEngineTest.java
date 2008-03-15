@@ -1324,7 +1324,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Once this bug is fixed, {@link StringPrimitivePrototypeBugFixer} can be completely removed
      * as well as this unit test.
      * Correct string primitive prototype resolution within HtmlUnit is tested
-     * by {@link #testPrototypeScope()}
+     * by {@link #prototypeScope()}
      */
     @Test
     public void stringPrimitivePrototypeScopeRhino() {

@@ -45,7 +45,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for {@link NamedNodeMap}.
+ * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
  *
  * @version $Revision$
  * @author Marc Guillemot

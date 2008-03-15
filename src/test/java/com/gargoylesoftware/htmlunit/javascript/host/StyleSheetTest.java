@@ -47,7 +47,7 @@ import org.w3c.css.sac.SelectorList;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Unit tests for {@link StyleSheet}.
+ * Unit tests for {@link Stylesheet}.
  *
  * @version $Revision$
  * @author Marc Guillemot

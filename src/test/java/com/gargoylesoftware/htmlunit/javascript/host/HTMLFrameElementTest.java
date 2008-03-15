@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Tests for {@link HTMLFrameElement} when used for {@link HtmlFrame}.
+ * Tests for {@link HTMLFrameElement} when used for {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}.
  *
  * @version $Revision$
  * @author Chris Erskine
