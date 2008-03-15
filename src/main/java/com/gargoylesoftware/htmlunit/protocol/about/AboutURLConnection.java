@@ -50,7 +50,7 @@ public class AboutURLConnection extends URLConnection {
 
     /**
      * Create an instance
-     * @param newUrl The "about:" url.
+     * @param newUrl The "about:" URL.
      */
     public AboutURLConnection(final URL newUrl) {
         super(newUrl);

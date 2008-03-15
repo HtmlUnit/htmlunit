@@ -539,7 +539,7 @@ public class Document extends EventNode {
     /**
      * Builds a cookie object from the string representation allowed in JS
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
-     * @param currentURL the url of the current page
+     * @param currentURL the URL of the current page
      * @return the cookie
      */
     static Cookie buildCookie(final String newCookie, final URL currentURL) {
@@ -892,7 +892,7 @@ public class Document extends EventNode {
     /**
      * Creates a new Stylesheet.
      * Current implementation just creates an empty {@link Stylesheet} object.
-     * @param url the stylesheet url
+     * @param url the stylesheet URL
      * @param index where to insert the sheet in the collection
      * @return the newly created stylesheet
      */

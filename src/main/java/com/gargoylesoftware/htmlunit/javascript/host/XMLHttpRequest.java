@@ -297,7 +297,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     /**
      * Assigns the destination URL, method and other optional attributes of a pending request.
      * @param method The method to use to send the request to the server (GET, POST, etc).
-     * @param url The url to send the request to.
+     * @param url The URL to send the request to.
      * @param async Whether or not to send the request to the server asynchronously.
      * @param user If authentication is needed for the specified URL, the username to use to authenticate.
      * @param password If authentication is needed for the specified URL, the password to use to authenticate.

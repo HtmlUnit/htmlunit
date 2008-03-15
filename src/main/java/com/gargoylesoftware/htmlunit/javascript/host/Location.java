@@ -199,7 +199,7 @@ public class Location extends SimpleScriptable {
      * MSDN Documentation</a>
      */
     public void jsxSet_href(final String newLocation) throws IOException {
-        // url should be resolved from the page in which the js is executed
+        // URL should be resolved from the page in which the js is executed
         // cf test FrameTest#testLocation
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
 

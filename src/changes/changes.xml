@@ -195,7 +195,7 @@
                 JavaScript: detect encoding from XML declaration (#1876545).
             </action>
             <action type="fix" dev="mguillem">
-                JavaScript: HTMLAnchor href attribute should be reachable even if the url is malformed. 
+                JavaScript: HTMLAnchor href attribute should be reachable even if the URL is malformed. 
             </action>
             <action type="add" dev="asashour" id="1874624" due-to="Sudhan Moghe">
                 JavaScript: add support for XMLElement.getAttributeNode() (#1874624).
@@ -1126,7 +1126,7 @@
                 Added support for server side map (HtmlImage.click(int, int)).
             </action>
             <action type="update" dev="mguillem" id="1619765">
-                Allow redirections to the same url with a maximal number of 20.
+                Allow redirections to the same URL with a maximal number of 20.
             </action>
             <action type="update" dev="mguillem">
                 Fixed HtmlHtml.getXmlLangAttribute().
@@ -1314,7 +1314,7 @@
                 (as done by Internet Explorer and Firefox).
             </action>
             <action type="update" dev="mguillem" id="1491743">
-                JavaScript: Location.replace wrongly loaded new url in top window.
+                JavaScript: Location.replace wrongly loaded new URL in top window.
             </action>
             <action type="update" dev="mguillem" id="1527799">
                 XPath: fixed wrong behavior with following axis.
@@ -1464,7 +1464,7 @@
                 Deprecated ScriptException.getEnclosedException. Use getCause instead.
             </action>
             <action type="update" dev="mguillem">
-                Added url of the failed request in message of FailingHttpStatusCodeException.
+                Added URL of the failed request in message of FailingHttpStatusCodeException.
             </action>
             <action type="update" dev="yourgod">
                 Fixed a bug that could cause a ConcurrentModificationException when navigating away
@@ -1528,7 +1528,7 @@
                 JavaScript: Implement add() method for OptionsArray to avoid TypeError.
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: added the full url of the file containing the script being executed
+                JavaScript: added the full URL of the file containing the script being executed
                 in the exception message when a script error occurs.
             </action>
             <action type="update" dev="mguillem" id="1238429" due-to="Daniel Gredler">
@@ -1583,7 +1583,7 @@
 				HtmlOption.click() now returns correctly the page loaded by an onchange event.
             </action>
             <action type="update" dev="mguillem" id="1334541" due-to="ianzlovejoy">
-				Fixed requested url for post form with empty action and original page containing
+				Fixed requested URL for post form with empty action and original page containing
                 a query string or action containing only a query string.
             </action>
             <action type="update" dev="mguillem">
@@ -1699,7 +1699,7 @@
             </action>
             <action type="update" dev="mguillem" id="1211980">
                 Added WebResponse.getRequestMethod().
-                ImmediateRefreshHandler now accepts a refresh to the same url if the first request was a POST.
+                ImmediateRefreshHandler now accepts a refresh to the same URL if the first request was a POST.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added support for window.closed. 
@@ -1854,7 +1854,7 @@
                 Javascript: fixed infinite loop caused by onblur.
             </action>
             <action type="update" dev="mguillem">
-                The url of a page resulting of a form submission with the GET method now contains the query parameters 
+                The URL of a page resulting of a form submission with the GET method now contains the query parameters 
                 (which are encoded when needed according to the page's encoding).
             </action>
             <action type="update" dev="mguillem">
@@ -1987,7 +1987,7 @@
                 JavaScript: fixed insertRow when asked to insert at the end of the rows collection (was inserted one position before).
             </action>
             <action type="update" dev="mguillem" id="1113487">
-                Guess content type for file content and file name when loading a file url.
+                Guess content type for file content and file name when loading a file URL.
             </action>
             <action type="update" dev="mguillem">
                 Parse responses of type "application/xml" as XmlPage.
@@ -2037,7 +2037,7 @@
                 JavaScript: use js object Input for &lt;input type="image" .../&gt; and &lt;input type="button" .../&gt;
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: default conversion to string of an anchor returns the fully qualified url specified by the href.
+                JavaScript: default conversion to string of an anchor returns the fully qualified URL specified by the href.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: the dom node of a &lt;frame&gt; or &lt;frame&gt; is now visible to the contained page while loading.
@@ -2957,7 +2957,7 @@
                 Fixed bug where the JavaScript textarea object was not properly getting and setting the 'value'.
             </action>
             <action type="update" dev="mbowler" id="717021" due-to="XuefengHe">
-                Fixed bug where url expansion wasn't obeying the base element as defined in the html.
+                Fixed bug where URL expansion wasn't obeying the base element as defined in the html.
             </action>
             <action type="update" dev="mbowler" id="727718" due-to="jin kim">
                 Fixed bug where JavaScript form elements were not always being initialized correctly..
@@ -3350,7 +3350,7 @@
                 New class <javadoc>com.gargoylesoftware.htmlunit.ObjectInstantiationException</javadoc>
             </action>
             <action type="add" dev="mbowler">
-                Added protocol package for url protocols and added protocol/javascript package for
+                Added protocol package for URL protocols and added protocol/javascript package for
                 code that supports JavaScript urls
             </action>
             <action type="update" dev="mbowler">
@@ -3427,7 +3427,7 @@
                 Fixed bug where relative urls were not being expanded in certain situations
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug in relative url expansion that was blowing up on urls like //foo.com
+                Fixed bug in relative URL expansion that was blowing up on urls like //foo.com
             </action>
             <action type="update" dev="mbowler">
                 Upgraded commons-httpclient.jar and commons-logging.jar to the Aug 30 gump build

@@ -110,7 +110,7 @@ public class StringWebResponse extends WebResponseImpl {
     /**
      * Create an instance associated with an originating URL
      * @param content The content to return.
-     * @param originatingURL The url that this should be associated with
+     * @param originatingURL The URL that this should be associated with
      */
     public StringWebResponse(final String content, final URL originatingURL) {
         super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), originatingURL, SubmitMethod.GET, 0);
@@ -120,7 +120,7 @@ public class StringWebResponse extends WebResponseImpl {
      * Create an instance associated with an originating URL
      * @param content The content to return.
      * @param charset The charset used to convert the content.
-     * @param originatingURL The url that this should be associated with
+     * @param originatingURL The URL that this should be associated with
      */
     public StringWebResponse(final String content, final String charset, final URL originatingURL) {
         super(getWebResponseData(content, charset), charset, originatingURL, SubmitMethod.GET, 0);

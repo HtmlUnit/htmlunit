@@ -81,16 +81,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public abstract class WebTestCase {
-    /** Constant for the url http://first which is used in the tests. */
+    /** Constant for the URL http://first which is used in the tests. */
     public static final URL URL_FIRST;
 
-    /** Constant for the url http://second which is used in the tests. */
+    /** Constant for the URL http://second which is used in the tests. */
     public static final URL URL_SECOND;
 
-    /** Constant for the url http://third which is used in the tests. */
+    /** Constant for the URL http://third which is used in the tests. */
     public static final URL URL_THIRD;
 
-    /** Constant for the url http://www.gargoylesoftware.com which is used in the tests. */
+    /** Constant for the URL http://www.gargoylesoftware.com which is used in the tests. */
     public static final URL URL_GARGOYLE;
 
     /**
@@ -109,7 +109,7 @@ public abstract class WebTestCase {
         }
         catch (final MalformedURLException e) {
             // This is theoretically impossible.
-            throw new IllegalStateException("Unable to create url constants");
+            throw new IllegalStateException("Unable to create URL constants");
         }
     }
 
@@ -238,8 +238,8 @@ public abstract class WebTestCase {
     /**
      * Facility to test external form of urls. Comparing external form of urls is
      * really faster than URL.equals() as the host doesn't need to be resolved.
-     * @param expectedUrl the expected url
-     * @param actualUrl the url to test
+     * @param expectedUrl the expected URL
+     * @param actualUrl the URL to test
      */
     protected void assertEquals(final URL expectedUrl, final URL actualUrl) {
         Assert.assertEquals(expectedUrl.toExternalForm(), actualUrl.toExternalForm());
@@ -258,17 +258,17 @@ public abstract class WebTestCase {
      * Facility to test external form of urls. Comparing external form of urls is
      * really faster than URL.equals() as the host doesn't need to be resolved.
      * @param message the message to display if assertion fails
-     * @param expectedUrl the string representation of the expected url
-     * @param actualUrl the url to test
+     * @param expectedUrl the string representation of the expected URL
+     * @param actualUrl the URL to test
      */
     protected void assertEquals(final String message, final URL expectedUrl, final URL actualUrl) {
         Assert.assertEquals(message, expectedUrl.toExternalForm(), actualUrl.toExternalForm());
     }
 
     /**
-     * Facility to test external form of an url.
-     * @param expectedUrl the string representation of the expected url
-     * @param actualUrl the url to test
+     * Facility to test external form of an URL.
+     * @param expectedUrl the string representation of the expected URL
+     * @param actualUrl the URL to test
      */
     protected void assertEquals(final String expectedUrl, final URL actualUrl) {
         Assert.assertEquals(expectedUrl, actualUrl.toExternalForm());
@@ -300,10 +300,10 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Facility to test external form of an url.
+     * Facility to test external form of an URL.
      * @param message the message to display if assertion fails
-     * @param expectedUrl the string representation of the expected url
-     * @param actualUrl the url to test
+     * @param expectedUrl the string representation of the expected URL
+     * @param actualUrl the URL to test
      */
     protected void assertEquals(final String message, final String expectedUrl, final URL actualUrl) {
         Assert.assertEquals(message, expectedUrl, actualUrl.toExternalForm());

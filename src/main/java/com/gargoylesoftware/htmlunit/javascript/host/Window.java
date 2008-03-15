@@ -309,7 +309,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
         }
         catch (final MalformedURLException e) {
-            getLog().error("Unable to create url for openWindow: relativeUrl=[" + urlString + "]", e);
+            getLog().error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
             return null;
         }
     }
@@ -410,7 +410,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Set the location property.  This will cause a reload of the window.
-     * @param newLocation The url of the new content.
+     * @param newLocation The URL of the new content.
      * @throws IOException when location loading fails
      */
     public void jsxSet_location(final String newLocation) throws IOException {

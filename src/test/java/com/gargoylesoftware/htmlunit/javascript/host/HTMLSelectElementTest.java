@@ -958,7 +958,7 @@ public class HTMLSelectElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         final Page page2 = ((ClickableElement) page.getHtmlElementById("testButton")).click();
         final URL url2 = page2.getWebResponse().getUrl();
-        assertTrue("Select in url " + url2, url2.toExternalForm().contains("testSelect=testValue"));
+        assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));
     }
 
     /**

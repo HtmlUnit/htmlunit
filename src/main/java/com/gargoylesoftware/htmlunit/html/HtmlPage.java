@@ -128,7 +128,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Create an instance of HtmlPage
      *
-     * @param originatingUrl The url that was used to load this page.
+     * @param originatingUrl The URL that was used to load this page.
      * @param webResponse The web response that was used to create this page
      * @param webWindow The window that this page is being loaded into.
      */
@@ -588,10 +588,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Given a relative url (ie /foo), return a fully qualified url based on
-     * the url that was used to load this page
+     * Given a relative URL (ie /foo), return a fully qualified URL based on
+     * the URL that was used to load this page
      *
-     * @param relativeUrl The relative url
+     * @param relativeUrl The relative URL
      * @return See above
      * @exception MalformedURLException If an error occurred when creating a URL object
      */
@@ -839,7 +839,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Execute the specified JavaScript within the page.
      * The usage would be similar to what can be achieved to execute JavaScript in the current page
-     * by entering a "javascript:...some js code..." in the url field of a "normal" browser.
+     * by entering a "javascript:...some js code..." in the URL field of a "normal" browser.
      * <p>
      * <b>Note: </b> the provided code won't be executed if JavaScript has been disabled on the WebClient
      * (see {@link WebClient#isJavaScriptEnabled()}.
@@ -984,7 +984,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 }
             }
             catch (final MalformedURLException e) {
-                getLog().error("Unable to build url for script src tag [" + srcAttribute + "]");
+                getLog().error("Unable to build URL for script src tag [" + srcAttribute + "]");
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw new ScriptException(this, e);
                 }
@@ -1029,7 +1029,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Loads JavaScript from the specified URL. This method may return <tt>null</tt> if
      * there is a problem loading the code from the specified URL.
      *
-     * @param url the url of the script
+     * @param url the URL of the script
      * @param charset the charset to use to read the text
      * @return the content of the file
      */
@@ -1285,7 +1285,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                     url = getFullyQualifiedUrl(urlString);
                 }
                 catch (final MalformedURLException e) {
-                    getLog().error("Malformed url in refresh string: " + refreshString, e);
+                    getLog().error("Malformed URL in refresh string: " + refreshString, e);
                     throw e;
                 }
             }
@@ -1736,7 +1736,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             final BaseFrame frame = (BaseFrame) element;
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
-            // use == and not equals(...) to identify initial content (versus url set to "about:blank")
+            // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
             if (frame.getEnclosedPage().getWebResponse().getUrl() == WebClient.URL_ABOUT_BLANK) {
                 frame.loadInnerPage();
             }

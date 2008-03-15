@@ -88,7 +88,7 @@ public final class FormEncodingType {
             }
         }
 
-        // Special case: empty string defaults to url encoded
+        // Special case: empty string defaults to URL encoded
         if (name.equals("")) {
             return URL_ENCODED;
         }

@@ -70,7 +70,7 @@ public class HTMLParserListenerTest extends WebTestCase {
          * Utility class to hold data.
          * @param error The error
          * @param message The message
-         * @param url The url
+         * @param url The URL
          * @param line The line number
          * @param column The column number
          * @param key Ignored value
@@ -92,7 +92,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         }
 
         /**
-         * Compares according to error, message, url and line.
+         * Compares according to error, message, URL and line.
          * @see Object#equals(Object)
          */
         @Override

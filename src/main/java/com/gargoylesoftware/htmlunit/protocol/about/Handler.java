@@ -50,8 +50,8 @@ import java.net.URLStreamHandler;
 public class Handler extends URLStreamHandler {
 
     /**
-     * Return a new URLConnection for this url.
-     * @param url The "about:" url.
+     * Return a new URLConnection for this URL.
+     * @param url The "about:" URL.
      * @return The connection.
      */
     @Override

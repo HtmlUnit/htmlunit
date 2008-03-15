@@ -336,7 +336,7 @@ public class WebClientTest extends WebTestCase {
             Collections.singletonList(new NameValuePair("Location", URL_FIRST.toExternalForm()));
         
         // builds a webconnection that first sends a redirect and then a "normal" response for
-        // the same requested url
+        // the same requested URL
         final MockWebConnection webConnection = new MockWebConnection(webClient) {
             private int count_ = 0;
             @Override
@@ -418,7 +418,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test a 302 redirection code with "," in url parameters.
+     * Test a 302 redirection code with "," in URL parameters.
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -521,7 +521,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Browsers allow many redirections to the same url before to stop redirections.
+     * Browsers allow many redirections to the same URL before to stop redirections.
      * See Bug 1619765 and feature request 1472343.
      * @throws Exception if the test fails.
      */
@@ -1423,7 +1423,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Colons are legal in the path of a url but {@link WebClient#expandUrl(URL,String)} was
+     * Colons are legal in the path of a URL but {@link WebClient#expandUrl(URL,String)} was
      * blowing up on this case.  Ensure it's fixed.
      * @throws Exception If the test fails.
      */

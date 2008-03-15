@@ -57,7 +57,7 @@ public class HTMLIFrameElement extends HTMLElement {
     public HTMLIFrameElement() { }
 
     /**
-     * Return the value of url loaded in the frame
+     * Return the value of URL loaded in the frame
      * @return The value of this attribute.
      */
     public String jsxGet_src() {

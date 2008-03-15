@@ -144,9 +144,9 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Test if the provided url is the one of one of the parents which would cause an infinite loop.
-     * @param url the url to test
-     * @return <code>false</code> if no parent has already this url
+     * Test if the provided URL is the one of one of the parents which would cause an infinite loop.
+     * @param url the URL to test
+     * @return <code>false</code> if no parent has already this URL
      */
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();
@@ -300,7 +300,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Set the value of the "src" attribute.  Also load the frame with the specified url if possible.
+     * Set the value of the "src" attribute.  Also load the frame with the specified URL if possible.
      * @param attribute The new value
      */
     public final void setSrcAttribute(final String attribute) {

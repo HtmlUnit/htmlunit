@@ -1165,7 +1165,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param callback the method which should be called when the download is finished
      * @see <a href="http://msdn.microsoft.com/workshop/author/behaviors/reference/methods/startdownload.asp">
      * MSDN documentation</a>
-     * @throws MalformedURLException If the url cannot be created
+     * @throws MalformedURLException If the URL cannot be created
      */
     public void startDownload(final String uri, final Function callback) throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();

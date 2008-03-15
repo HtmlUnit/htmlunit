@@ -38,7 +38,7 @@
                 fired and passed into the
                 WebWindowListener.webWindowOpened(WebWindowEvent)
                 method.  Note that both the new and old pages in the event will be null as the window does not
-                have any content loaded at this point.  If a url was specified during creation of the window then the page
+                have any content loaded at this point.  If a URL was specified during creation of the window then the page
                 will be loaded and another event will be fired as described below.
             </p>
             <p>

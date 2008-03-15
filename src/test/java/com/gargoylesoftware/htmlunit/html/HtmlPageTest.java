@@ -447,7 +447,7 @@ public class HtmlPageTest extends WebTestCase {
         final String htmlContent = "<html><head><base href='---****://=='/></head></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        // invalid base url should be ignored
+        // invalid base URL should be ignored
         assertEquals("http://somewhere.com/", page.getFullyQualifiedUrl("http://somewhere.com/"));
         assertEquals(page.getWebResponse().getUrl().toExternalForm() + "foo.html",
                 page.getFullyQualifiedUrl("foo.html"));
@@ -780,7 +780,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test auto-refresh from a meta tag with url quoted.
+     * Test auto-refresh from a meta tag with URL quoted.
      * @throws Exception if the test fails
      */
     @Test
@@ -803,7 +803,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test auto-refresh from a meta tag with url partly quoted.
+     * Test auto-refresh from a meta tag with URL partly quoted.
      * @throws Exception if the test fails
      */
     @Test

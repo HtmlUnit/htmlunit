@@ -90,7 +90,7 @@ public class HtmlScriptTest extends WebTestCase {
         }
         catch (final FailingHttpStatusCodeException e) {
             final String url = URL_FIRST.toExternalForm();
-            assertTrue("exception contains url of failing script", e.getMessage().indexOf(url) > -1);
+            assertTrue("exception contains URL of failing script", e.getMessage().indexOf(url) > -1);
             assertEquals(404, e.getStatusCode());
             assertEquals("Not Found", e.getStatusMessage());
         }

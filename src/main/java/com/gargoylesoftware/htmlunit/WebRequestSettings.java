@@ -78,7 +78,7 @@ public class WebRequestSettings {
     }
 
     /**
-     * Instantiate a {@link WebRequestSettings} for the given url using the proxy configuration from the original
+     * Instantiate a {@link WebRequestSettings} for the given URL using the proxy configuration from the original
      * request
      * @param originalRequest the original request
      * @param target The URL for this request

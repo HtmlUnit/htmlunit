@@ -103,7 +103,7 @@ public class MockWebConnection extends WebConnectionImpl {
         if (response == null) {
             response = defaultResponse_;
             if (response == null) {
-                throw new IllegalStateException("No response specified that can handle url ["
+                throw new IllegalStateException("No response specified that can handle URL ["
                     + url.toExternalForm()
                     + "]");
             }
@@ -132,8 +132,8 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when the specified url is requested.
-     * @param url The url that will return the given response
+     * Set the response that will be returned when the specified URL is requested.
+     * @param url The URL that will return the given response
      * @param content The content to return
      * @param statusCode The status code to return
      * @param statusMessage The status message to return
@@ -155,8 +155,8 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when the specified url is requested.
-     * @param url The url that will return the given response
+     * Set the response that will be returned when the specified URL is requested.
+     * @param url The URL that will return the given response
      * @param content The content to return
      * @param statusCode The status code to return
      * @param statusMessage The status message to return
@@ -179,7 +179,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
      * of "200 OK", a content type of "text/html" and no additional headers.
      *
-     * @param url The url that will return the given response
+     * @param url The URL that will return the given response
      * @param content The content to return
      */
     public void setResponse(final URL url, final String content) {
@@ -192,7 +192,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
      * of "200 OK" and no additional headers.
      *
-     * @param url The url that will return the given response
+     * @param url The URL that will return the given response
      * @param content The content to return
      * @param contentType The content type to return
      */
@@ -202,11 +202,11 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Specify a generic HTML page that will be returned when the given url is specified.
+     * Specify a generic HTML page that will be returned when the given URL is specified.
      * The page will contain only minimal HTML to satisfy the HTML parser but will contain
      * the specified title so that tests can check for titleText.
      *
-     * @param url The url that will return the given response
+     * @param url The URL that will return the given response
      * @param title The title of the page
      */
     public void setResponseAsGenericHtml(final URL url, final String title) {
@@ -215,7 +215,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when a url is requested that does
+     * Set the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
      * @param content The content to return
@@ -230,7 +230,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when a url is requested that does
+     * Set the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
      * @param content The content to return
@@ -248,7 +248,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when a url is requested that does
+     * Set the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
      * @param content The content to return

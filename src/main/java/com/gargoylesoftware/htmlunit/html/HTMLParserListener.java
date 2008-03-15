@@ -85,7 +85,7 @@ public interface HTMLParserListener {
     /**
      * Called when the HTML parser reports an error.
      * @param message the description of the problem
-     * @param url the url of the document in which the problem occurs
+     * @param url the URL of the document in which the problem occurs
      * @param line the line of the problem
      * @param column the column of the problem
      * @param key the key identifying the "type" of problem. May be interesting to filter messages.
@@ -95,7 +95,7 @@ public interface HTMLParserListener {
     /**
      * Called when the HTML parser reports a warning.
      * @param message the description of the problem
-     * @param url the url of the document in which the problem occurs
+     * @param url the URL of the document in which the problem occurs
      * @param line the line of the problem
      * @param column the column of the problem
      * @param key the key identifying the "type" of problem. May be interesting to filter messages.

@@ -267,7 +267,7 @@ public class WebClient implements Serializable {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * <p>Return the object that will resolve all url requests<p>
+     * <p>Return the object that will resolve all URL requests<p>
      * @return The connection that will be used.
      */
     public synchronized WebConnection getWebConnection() {
@@ -386,12 +386,12 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to build an URL and load it into the current WebWindow
-     * @param url The url of the new content.
+     * @param url The URL of the new content.
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException If an IO problem occurs.
-     * @throws MalformedURLException if no url can be created from the provided string
+     * @throws MalformedURLException if no URL can be created from the provided string
      */
     public Page getPage(final String url) throws IOException, FailingHttpStatusCodeException, MalformedURLException {
         return getPage(new URL(url));
@@ -399,7 +399,7 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to load a URL into the current WebWindow
-     * @param url The url of the new content.
+     * @param url The URL of the new content.
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
@@ -887,10 +887,10 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Open a new window with the specified name.  If the url is non-null then attempt to load
+     * Open a new window with the specified name.  If the URL is non-null then attempt to load
      * a page from that location and put it in the new window.
      *
-     * @param url The url to load content from or null if no content is to be loaded.
+     * @param url The URL to load content from or null if no content is to be loaded.
      * @param windowName The name of the new window
      * @return The new window.
      */
@@ -900,10 +900,10 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Open a new window with the specified name.  If the url is non-null then attempt to load
+     * Open a new window with the specified name.  If the URL is non-null then attempt to load
      * a page from that location and put it in the new window.
      *
-     * @param url The url to load content from or null if no content is to be loaded.
+     * @param url The URL to load content from or null if no content is to be loaded.
      * @param windowName The name of the new window
      * @param opener The web window that is calling openWindow
      * @return The new window.
@@ -1161,14 +1161,14 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Expands a relative url relative to the specified base. In most situations
+     * Expands a relative URL relative to the specified base. In most situations
      * this is the same as <code>new URL(baseUrl, relativeUrl)</code> but
      * there are some cases that URL doesn't handle correctly. See
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>
      * regarding Relative Uniform Resource Locators for more information.
      *
-     * @param baseUrl The base url
-     * @param relativeUrl The relative url
+     * @param baseUrl The base URL
+     * @param relativeUrl The relative URL
      * @return See above
      * @throws MalformedURLException If an error occurred when creating a URL object
      */
@@ -1305,7 +1305,7 @@ public class WebClient implements Serializable {
      * Builds a WebResponse for a file URL.
      * This first implementation is basic.
      * It assumes that the file contains an HTML page encoded with the specified encoding.
-     * @param url The file url
+     * @param url The file URL
      * @param charset encoding to use
      * @return The web response
      * @throws IOException If an IO problem occurs
@@ -1483,7 +1483,7 @@ public class WebClient implements Serializable {
         }
 
         //TODO: this should probably be handled inside of WebRequestSettings and
-        // could cause a bug if anything above here reads the url again
+        // could cause a bug if anything above here reads the URL again
         final URL fixedUrl = encodeUrl(url);
         webRequestSettings.setURL(fixedUrl);
 
@@ -1505,7 +1505,7 @@ public class WebClient implements Serializable {
                 getIncorrectnessListener().notify("Got a redirect status code [" + statusCode + " "
                     + webResponse.getStatusMessage()
 
-                    + "] but the location is not a valid url [" + locationString
+                    + "] but the location is not a valid URL [" + locationString
                     + "]. Skipping redirection processing.", this);
                 return webResponse;
             }
@@ -1545,8 +1545,8 @@ public class WebClient implements Serializable {
     /**
      * Encodes illegal parameter in path or query string (if any) as done by browsers.
      * Example: changes "http://first?a=b c" to "http://first?a=b%20c"
-     * @param url the url to encode
-     * @return the provided url if no change needed, the fixed url else
+     * @param url the URL to encode
+     * @return the provided URL if no change needed, the fixed URL else
      * @throws MalformedURLException if the new URL could note be instantiated
      * @throws URIException if the default protocol charset is not supported
      */

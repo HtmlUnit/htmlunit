@@ -348,7 +348,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Test that the url of the page containing the script is contained in the exception's message
+     * Test that the URL of the page containing the script is contained in the exception's message
      * @throws Exception if the test fails
      */
     @Test

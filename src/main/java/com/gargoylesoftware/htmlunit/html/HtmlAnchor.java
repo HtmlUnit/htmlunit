@@ -107,7 +107,7 @@ public class HtmlAnchor extends ClickableElement {
                 getLog().debug(
                     "Getting page for " + url.toExternalForm()
                             + ", derived from href '" + href
-                            + "', using the originating url "
+                            + "', using the originating URL "
                             + page.getWebResponse().getUrl());
                 return page.getWebClient().getPage(
                         page.getEnclosingWindow(),
