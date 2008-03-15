@@ -157,7 +157,7 @@ public class CodeStyleTest extends WebTestCase {
      * @return the list of lines.
      * @throws IOException if an error occurs.
      */
-    public static List<String> getLines(final File file) throws IOException {
+    private static List<String> getLines(final File file) throws IOException {
         final List<String> rv = new ArrayList<String>();
         final BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
@@ -168,4 +168,43 @@ public class CodeStyleTest extends WebTestCase {
         return rv;
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void xmlStyle() throws Exception {
+        processXML(new File("."), false);
+        processXML(new File("src/main/resources"), true);
+        processXML(new File("src/assembly"), true);
+        processXML(new File("src/changes"), true);
+    }
+
+    private void processXML(final File dir, final boolean recursive) throws Exception {
+        for (final File file : dir.listFiles()) {
+            if (file.isDirectory() && !file.getName().equals(".svn")) {
+                if (recursive) {
+                    processXML(file, true);
+                }
+            }
+            else {
+                if (file.getName().endsWith(".xml")) {
+                    final List<String> lines = getLines(file);
+                    final String relativePath = file.getAbsolutePath().substring(
+                        new File(".").getAbsolutePath().length() - 1);
+                    mixedIndentation(lines, relativePath);
+                }
+            }
+        }
+    }
+
+    /**
+     * Verifies that no XML files have mixed indentation (tabs and spaces, mixed).
+     */
+    private void mixedIndentation(final List<String> lines, final String path) {
+        for (final String line : lines) {
+            if (line.indexOf('\t') != -1) {
+                fail("Mixed indentation in " + path + ", line: " + lines.indexOf(line));
+            }
+        }
+    }
 }
