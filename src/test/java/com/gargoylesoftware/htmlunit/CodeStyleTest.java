@@ -157,8 +157,8 @@ public class CodeStyleTest {
      * Checks properties svn:eol-style and svn:keywords.
      */
     private void svnProperties(final File file, final String relativePath) throws IOException {
-        final File svnBase = new File(file, "../.svn/prop-base/" + file.getName() + ".svn-base");
-        final File svnWork = new File(file, "../.svn/props/" + file.getName() + ".svn-work");
+        final File svnBase = new File(file.getParentFile(), ".svn/prop-base/" + file.getName() + ".svn-base");
+        final File svnWork = new File(file.getParentFile(), ".svn/props/" + file.getName() + ".svn-work");
         if (!isSvnPropertiesDefined(svnBase) && !isSvnPropertiesDefined(svnWork)) {
             fail("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
         }
