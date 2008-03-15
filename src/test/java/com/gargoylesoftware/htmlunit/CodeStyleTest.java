@@ -167,7 +167,6 @@ public class CodeStyleTest {
     private boolean isSvnPropertiesDefined(final File file) throws IOException {
         boolean eolStyleDefined = false;
         boolean keywordsDefined = false;
-        System.err.println(file.exists() + " for " + file.getAbsolutePath());
         if (file.exists()) {
             final List<String> lines = getLines(file);
             for (int i = 0; i + 2 < lines.size(); i++) {

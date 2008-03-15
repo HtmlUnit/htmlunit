@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link HtmlUnknownElement}.
  *
- * @version $Revision: 2409 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 public class HtmlUnknownElementTest extends WebTestCase {
