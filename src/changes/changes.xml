@@ -542,7 +542,7 @@
                 JavaScript: add UIEvent.initUIEvent() (FF only).
             </action>
             <action type="add" dev="mguillem">
-                Allow http methods DELETE, HEAD, OPTIONS, PUT and TRACE (in WebClient.getPage(WebRequestSettings) and in XMLHttpRequest).
+                Allow HTTP methods DELETE, HEAD, OPTIONS, PUT and TRACE (in WebClient.getPage(WebRequestSettings) and in XMLHttpRequest).
             </action>
             <action type="add" dev="asashour">
                 JavaScript: add XMLSerializer (FF), and .xml property for ActiveXObjects: 'Microsoft.XmlDom' and
@@ -1451,7 +1451,7 @@
         </release>
         <release version="1.8" date="Feb 17, 2006">
             <action type="update" dev="mguillem" id="1280422">
-                Cookies can now be shared between http and https.
+                Cookies can now be shared between HTTP and HTTPS.
             </action>
             <action type="update" dev="mguillem">
                 HttpWebConnection now uses a single instance of HttpClient (as it can now handle multiple connections).
@@ -2040,16 +2040,16 @@
                 JavaScript: default conversion to string of an anchor returns the fully qualified URL specified by the href.
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: the dom node of a &lt;frame&gt; or &lt;frame&gt; is now visible to the contained page while loading.
+                JavaScript: the DOM node of a &lt;frame&gt; or &lt;frame&gt; is now visible to the contained page while loading.
             </action>
             <action type="update" dev="mguillem" id="1084226">
-                JavaScript: when simulating IE, a variable named after the id of a dom node represents this dom node.
+                JavaScript: when simulating IE, a variable named after the id of a DOM node represents this DOM node.
             </action>
             <action type="add" dev="mguillem" due-to="David D. Kilzer" id="1099235">
                 Made window.name writable.
             </action>
             <action type="update" dev="mguillem" id="1100975">
-                JavaScript: document.xxx now retrieves dom node with name xxx only if it's an img or a form (input should not be retrieved).
+                JavaScript: document.xxx now retrieves DOM node with name xxx only if it's an img or a form (input should not be retrieved).
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: Fixed bug in window.frames[i] (was introduced in 1.4).
@@ -2113,7 +2113,7 @@
                 to stop only execution of current script as browsers do.
             </action>
             <action type="update" dev="mguillem">
-                JavaScript: document.write(ln) writes directly in DOM what allows access to dom nodes in the same script code.
+                JavaScript: document.write(ln) writes directly in DOM which allows access to DOM nodes in the same script code.
             </action>
             <action type="add" dev="yourgod">
                 Added WebClient.setTimeout(int) and WebClient.getTimeout()
@@ -2762,7 +2762,7 @@
             </action>
             <action type="add" dev="mbowler" id="772233">
                 Added support for auto-refresh both from a Meta tag and from an
-                http response header.
+                HTTP response header.
             </action>
             <action type="update" dev="mbowler" id="824842" due-to="Jun Chen">
                 Added support for the format of &lt;script&gt; defined by DOM Level 2.
@@ -2849,7 +2849,7 @@
             </action>
             <action type="add" dev="mbowler">
                 New method WebClient.loadWebResponseInto() which can be used to create
-                pages that were not loaded via http.
+                pages that were not loaded via HTTP.
             </action>
             <action type="add" dev="mbowler">
                 New method StringWebResponse which can be used to easily create a
@@ -3459,7 +3459,7 @@
             <action type="update" dev="mbowler">
                 Changed redirect logic so that on a 302 or 303 status, if the method changes
                 from post to get, the parameters will be thrown away for the second request.
-                The http spec is unclear on this exact behaviour but the common browsers seem
+                The HTTP spec is unclear on this exact behaviour but the common browsers seem
                 to do it this way.
             </action>
             <action type="add" dev="mbowler">

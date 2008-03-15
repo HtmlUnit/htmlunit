@@ -156,7 +156,7 @@ public final class SanityCheck {
     }
 
     /**
-     * Test against a live server: HtmlUnit page on sourceforge using https
+     * Test against a live server: HtmlUnit page on sourceforge using HTTPS
      * @throws Exception If something goes wrong.
      */
     private void sourceForge_secure() throws Exception {
@@ -166,7 +166,7 @@ public final class SanityCheck {
             assertTrue(HtmlPage.class.isInstance(webClient.getPage("https://sourceforge.net/projects/htmlunit/")));
         }
         catch (final MalformedURLException e) {
-            System.out.println("Skipping https test: testSourceForge_secure");
+            System.out.println("Skipping HTTPS test: testSourceForge_secure");
         }
     }
 
@@ -182,7 +182,7 @@ public final class SanityCheck {
             assertNotNull(form);
         }
         catch (final MalformedURLException e) {
-            System.out.println("Skipping https test: testSourceForge_secure");
+            System.out.println("Skipping HTTPS test: testSourceForge_secure");
         }
     }
 

@@ -752,7 +752,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Test that the different http methods are supported
+     * Test that the different HTTP methods are supported
      * @throws Exception if the test fails.
      */
     @Test

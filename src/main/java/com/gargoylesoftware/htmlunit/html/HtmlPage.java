@@ -1215,7 +1215,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
     
     /**
-     * If a refresh has been specified either through a meta tag or an http
+     * If a refresh has been specified either through a meta tag or an HTTP
      * response header, then perform that refresh.
      * @throws IOException if an IO problem occurs
      */
@@ -1295,7 +1295,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Return an auto-refresh string if specified.  This will look in both the meta
-     * tags (taking care of &lt;noscript&gt; if any) and inside the http response headers.
+     * tags (taking care of &lt;noscript&gt; if any) and inside the HTTP response headers.
      * @return the auto-refresh string.
      */
     private String getRefreshStringOrNull() {

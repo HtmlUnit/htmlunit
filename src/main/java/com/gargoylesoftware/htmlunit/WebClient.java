@@ -293,7 +293,7 @@ public class WebClient implements Serializable {
      * Send a request to a server and return a Page that represents the
      * response from the server. This page will be used to populate this frame.<p>
      *
-     * The type of Page will depend on the content type of the http response. <p />
+     * The type of Page will depend on the content type of the HTTP response. <p />
      *
      *  <table>
      *    <tr>

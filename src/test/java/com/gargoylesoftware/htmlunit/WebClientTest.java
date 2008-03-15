@@ -367,7 +367,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * From the http spec:  If the 301 status code is received in response
+     * From the HTTP spec:  If the 301 status code is received in response
      * to a request other than GET or HEAD, the user agent MUST NOT automatically
      * redirect the request unless it can be confirmed by the user, since this
      * might change the conditions under which the request was issued.
@@ -385,7 +385,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * From the http spec:  Note: RFC 1945 and RFC 2068 specify that the client
+     * From the HTTP spec:  Note: RFC 1945 and RFC 2068 specify that the client
      * is not allowed to change the method on the redirected request.  However,
      * most existing user agent implementations treat 302 as if it were a 303
      * response, performing a GET on the Location field-value regardless

@@ -51,7 +51,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * A fake WebConnection designed to mock out the actual http connections.
+ * A fake WebConnection designed to mock out the actual HTTP connections.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
