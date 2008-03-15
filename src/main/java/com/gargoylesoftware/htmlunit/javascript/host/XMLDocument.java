@@ -308,8 +308,8 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Returns {@link Scriptable#NOT_FOUND}
      * {@inheritDoc}
+     * Returns {@link #NOT_FOUND}.
      */
     @Override
     public Object jsxGet_body() {

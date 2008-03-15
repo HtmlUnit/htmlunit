@@ -195,7 +195,6 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param namespaceURI The namespaceURI of the XSLT parameter.
      * @param localName The local name of the XSLT parameter.
      * @param value The new value of the XSLT parameter.
-     * @return
      */
     public void jsxFunction_setParameter(final String namespaceURI, final String localName, final Object value) {
         parameters_.put(getQualifiedName(namespaceURI, localName), value);

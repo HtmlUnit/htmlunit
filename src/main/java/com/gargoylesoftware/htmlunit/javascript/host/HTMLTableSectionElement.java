@@ -38,8 +38,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
- * A JavaScript object representing "HTMLTableSectionElement", it is used by {@link HtmlTableBody},
- * {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
+ * A JavaScript object representing "HTMLTableSectionElement", it is used by
+ * {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody},
+ * {@link com.gargoylesoftware.htmlunit.html.HtmlTableHeader}, and
+ * {@link com.gargoylesoftware.htmlunit.html.HtmlTableFooter}.
  *
  * @version $Revision$
  * @author Daniel Gredler

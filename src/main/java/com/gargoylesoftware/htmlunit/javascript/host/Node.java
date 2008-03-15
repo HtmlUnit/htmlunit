@@ -73,59 +73,47 @@ public class Node extends SimpleScriptable {
     private static final long serialVersionUID = -5695262053081637445L;
     private EventListenersContainer eventListenersContainer_;
 
-    /**
-     * @see {@link org.w3c.dom.Node#ELEMENT_NODE}.
-     */
+    /** @see org.w3c.dom.Node#ELEMENT_NODE */
     public static final short ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#ATTRIBUTE_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#ATTRIBUTE_NODE */
     public static final short ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#TEXT_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#TEXT_NODE */
     public static final short TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#CDATA_SECTION_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#CDATA_SECTION_NODE */
     public static final short CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#ENTITY_REFERENCE_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#ENTITY_REFERENCE_NODE */
     public static final short ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#ENTITY_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#ENTITY_NODE */
     public static final short ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE */
     public static final short PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#COMMENT_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#COMMENT_NODE */
     public static final short COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#DOCUMENT_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#DOCUMENT_NODE */
     public static final short DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#DOCUMENT_TYPE_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#DOCUMENT_TYPE_NODE */
     public static final short DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE */
     public static final short DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
-    /**
-     * @see {@link org.w3c.dom.Node#NOTATION_NODE}.
-     */
+
+    /** @see org.w3c.dom.Node#NOTATION_NODE */
     public static final short NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
-    
+
     /**
      * Create an instance.
      */
     public Node() {
+        // Empty.
     }
 
     /**

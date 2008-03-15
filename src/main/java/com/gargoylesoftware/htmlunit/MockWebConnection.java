@@ -138,8 +138,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param statusCode The status code to return
      * @param statusMessage The status message to return
      * @param contentType The content type to return
-     * @param responseHeaders A list of {@link KeyValuePair}s that will be returned as
-     * response headers.
+     * @param responseHeaders the response headers to return
      */
     public void setResponse(final URL url, final String content, final int statusCode,
             final String statusMessage, final String contentType,
@@ -161,8 +160,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * @param statusCode The status code to return
      * @param statusMessage The status message to return
      * @param contentType The content type to return
-     * @param responseHeaders A list of {@link KeyValuePair}s that will be returned as
-     * response headers.
+     * @param responseHeaders the response headers to return
      */
     public void setResponse(final URL url, final byte[] content, final int statusCode,
             final String statusMessage, final String contentType,

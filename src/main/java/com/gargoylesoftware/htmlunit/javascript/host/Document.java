@@ -1242,11 +1242,11 @@ public class Document extends EventNode {
     }
 
     /**
-     * Implementation of the {@link DocumentEvent} interface's
+     * Implementation of the {@link org.w3c.dom.events.DocumentEvent} interface's
      * {@link org.w3c.dom.events.DocumentEvent#createEvent(String)} method. The method creates an
      * event of the specified type.
      *
-     * @link http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-DocumentEvent
+     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-DocumentEvent">DocumentEvent</a>
      * @param eventType The event type to create.
      * @return The associated event object for that type. The event object will NOT have had its
      *         initialization method called. It is up to the caller of the method to initialize the
@@ -1279,7 +1279,7 @@ public class Document extends EventNode {
     /**
      * Implementation of the <tt>createEventObject</tt> method supported by Internet Explorer.
      *
-     * @link http://msdn2.microsoft.com/en-us/library/ms536390.aspx
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536390.aspx">MSDN Documentation</a>
      * @return An instance of the event object.  The event object will NOT have its
      *         member variables initialized.  It is up to the caller of the method to initialize
      *         the properties of the event.

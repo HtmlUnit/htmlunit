@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 
 /**
- * A JavaScript object for a {@link HtmlFrame}.
+ * A JavaScript object for a {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}.
  *
  * @version $Revision$
  * @author Marc Guillemot

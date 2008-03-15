@@ -231,10 +231,9 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * Add a new item to the option collection
+     * Adds a new item to the option collection.
      *
-     * <p>
-     * <b><i>Implementation Note:</i></b> The specification for the JavaScript add() method
+     * <p><b><i>Implementation Note:</i></b> The specification for the JavaScript add() method
      * actually calls for the optional newIndex parameter to be an integer. However, the
      * newIndex parameter is specified as an Object here rather than an int because of the
      * way Rhino and HtmlUnit process optional parameters for the JavaScript method calls.
@@ -247,15 +246,12 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * specified as an Object. If the newIndex parameter is not specified by the actual
      * JavaScript code being run, then newIndex is of type org.mozilla.javascript.Undefined.
      * If the newIndex parameter is specified, then it should be of type java.lang.Number and
-     * can be converted into an integer value.
-     * </p>
-     * <p>
-     * This method will call the {@link #put} method for actually adding the element to the
-     * collection.
-     * </p>
-     * <p>
-     * According to
-     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/add.asp">the
+     * can be converted into an integer value.</p>
+     *
+     * <p>This method will call the {@link #put(int, Scriptable, Object)} method for actually
+     * adding the element to the collection.</p>
+     *
+     * <p>According to <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/add.asp">the
      * Microsoft DHTML reference page for the JavaScript add() method of the options collection</a>,
      * the index parameter is specified as follows:
      * <dl>
@@ -271,7 +267,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * collection where the element is placed. If no value is given, the method places
      * the element at the end of the collection.
      *
-     * @see #put
+     * @see #put(int, Scriptable, Object)
      */
     public void jsxFunction_add(final Object newOptionObject, final Object newIndex) {
         // If newIndex is undefined, then the item will be appended to the end of

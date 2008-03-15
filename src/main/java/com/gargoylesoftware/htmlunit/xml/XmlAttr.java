@@ -112,13 +112,6 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public String getKey() {
-        return getName();
-    }
-
-    /**
      * @return The qualified name of the attribute.
      */
     public String getName() {
