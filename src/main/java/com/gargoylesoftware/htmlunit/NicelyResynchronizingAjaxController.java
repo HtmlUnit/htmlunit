@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
  *
- * @version $Revision: 1165 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 public class NicelyResynchronizingAjaxController extends AjaxController {

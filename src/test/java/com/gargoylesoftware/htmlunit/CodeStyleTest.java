@@ -81,6 +81,7 @@ public class CodeStyleTest extends WebTestCase {
                     javaDocFirstLine(lines, relativePath);
                     methodFirstLine(lines, relativePath);
                     methodLastLine(lines, relativePath);
+                    svnProperties(file, relativePath);
                 }
             }
         }
@@ -110,12 +111,12 @@ public class CodeStyleTest extends WebTestCase {
     /**
      * Checks the JavaDoc first line, it should not be empty.
      */
-    private void javaDocFirstLine(final List<String> lines, final String path) throws IOException {
+    private void javaDocFirstLine(final List<String> lines, final String relativePath) throws IOException {
         for (int index = 1; index < lines.size(); index++) {
             final String previousLine = lines.get(index - 1);
             final String currentLine = lines.get(index);
             if (previousLine.trim().equals("/**") && currentLine.trim().equals("*")) {
-                fail("Empty line in " + path + ", line: " + (index + 1));
+                fail("Empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
     }
@@ -123,7 +124,7 @@ public class CodeStyleTest extends WebTestCase {
     /**
      * Checks the method first line, it should not be empty.
      */
-    private void methodFirstLine(final List<String> lines, final String path) throws IOException {
+    private void methodFirstLine(final List<String> lines, final String relativePath) throws IOException {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             if (lines.get(index + 1).trim().length() == 0
@@ -133,7 +134,7 @@ public class CodeStyleTest extends WebTestCase {
                 && (!Character.isWhitespace(line.charAt(4))
                     || line.trim().startsWith("public") || line.trim().startsWith("protected")
                     || line.trim().startsWith("private"))) {
-                fail("Empty line in " + path + ", line: " + (index + 2));
+                fail("Empty line in " + relativePath + ", line: " + (index + 2));
             }
         }
     }
@@ -141,14 +142,44 @@ public class CodeStyleTest extends WebTestCase {
     /**
      * Checks the method last line, it should not be empty.
      */
-    private void methodLastLine(final List<String> lines, final String path) throws IOException {
+    private void methodLastLine(final List<String> lines, final String relativePath) throws IOException {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
             if (line.trim().length() == 0 && nextLine.equals("    }")) {
-                fail("Empty line in " + path + ", line: " + (index + 1));
+                fail("Empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
+    }
+
+    /**
+     * Checks properties svn:eol-style and svn:keywords.
+     */
+    private void svnProperties(final File file, final String relativePath) throws IOException {
+        final File svnBase = new File(file, "../.svn/prop-base/" + file.getName() + ".svn-base");
+        final File svnWork = new File(file, "../.svn/props/" + file.getName() + ".svn-work");
+        if (!isSvnPropertiesDefined(svnBase) && !isSvnPropertiesDefined(svnWork)) {
+            fail("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
+        }
+    }
+
+    private boolean isSvnPropertiesDefined(final File file) throws IOException {
+        boolean eolStyleDefined = false;
+        boolean keywordsDefined = false;
+        if (file.exists()) {
+            final List<String> lines = getLines(file);
+            for (int i = 0; i + 2 < lines.size(); i++) {
+                final String line = lines.get(i);
+                final String nextLine = lines.get(i + 2);
+                if (line.equals("svn:eol-style") && nextLine.equals("native")) {
+                    eolStyleDefined = true;
+                }
+                else if (line.equals("svn:keywords") && nextLine.equals("Author Date Id Revision")) {
+                    keywordsDefined = true;
+                }
+            }
+        }
+        return eolStyleDefined && keywordsDefined;
     }
 
     /**
@@ -201,11 +232,11 @@ public class CodeStyleTest extends WebTestCase {
     /**
      * Verifies that no XML files have mixed indentation (tabs and spaces, mixed).
      */
-    private void mixedIndentation(final List<String> lines, final String path) {
+    private void mixedIndentation(final List<String> lines, final String relativePath) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.indexOf('\t') != -1) {
-                fail("Mixed indentation in " + path + ", line: " + (i + 1));
+                fail("Mixed indentation in " + relativePath + ", line: " + (i + 1));
             }
         }
     }
@@ -213,13 +244,13 @@ public class CodeStyleTest extends WebTestCase {
     /**
      * Verifies that no XML files have trailing whitespace.
      */
-    private void trailingWhitespace(final List<String> lines, final String path) {
+    private void trailingWhitespace(final List<String> lines, final String relativePath) {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.length() > 0) {
                 final char last = line.charAt(line.length() - 1);
                 if (Character.isWhitespace(last)) {
-                    fail("Trailing whitespace in " + path + ", line: " + (i + 1));
+                    fail("Trailing whitespace in " + relativePath + ", line: " + (i + 1));
                 }
             }
         }
