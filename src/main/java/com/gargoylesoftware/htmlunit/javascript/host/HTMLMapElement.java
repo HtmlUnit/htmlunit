@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLMapElement".
+ * The JavaScript object "HTMLMapElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

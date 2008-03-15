@@ -18,7 +18,7 @@
 
         <section name="Example: using Document.write()">
             <p>
-                Lets say that we have a page containing javascript that will dynamically
+                Lets say that we have a page containing JavaScript that will dynamically
                 write content to the page.  The following html will dynamically generate
                 five textfields and place them inside a table.  Each textfield will have
                 a unique name created by appending the index to the string "textfield".
@@ -93,7 +93,7 @@ public void testDocumentWrite() throws Exception {
             ]]></source>
             <p>
                Alerts are tracked by an AlertHandler which will be called whenever
-               the javascript alert() function is called.  In the following test, 
+               the JavaScript alert() function is called.  In the following test, 
                we register an alert handler which just saves all messages into a 
                list.  When the page load is complete, we compare that list of
                collected alerts with another list of expected alerts to ensure

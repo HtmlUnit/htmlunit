@@ -357,7 +357,7 @@ public class HtmlScript extends HtmlElement {
         if (!HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
             final String t = getTypeAttribute();
             final String l = getLanguageAttribute();
-            getLog().warn("Script is not javascript (type: " + t + ", language: " + l + "). Skipping execution.");
+            getLog().warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
             return false;
         }
 

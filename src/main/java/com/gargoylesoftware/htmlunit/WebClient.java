@@ -246,10 +246,10 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Create a javascript engine if possible.
+     * Create a JavaScript engine if possible.
      *
      * @param webClient The webclient that we are creating the script engine for.
-     * @return A javascript engine or null if one could not be created.
+     * @return A JavaScript engine or null if one could not be created.
      */
     private static JavaScriptEngine createJavaScriptEngineIfPossible(final WebClient webClient) {
         try {
@@ -372,7 +372,7 @@ public class WebClient implements Serializable {
      *
      * @param opener The web window that initiated the request.
      * @param target The name of the window to be opened.  This is the name that would
-     * be passed into the javascript open() method.
+     * be passed into the JavaScript open() method.
      * @param params Any parameters
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
@@ -755,7 +755,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the handler that will be executed when the javascript method Window.confirm() is called.
+     * Set the handler that will be executed when the JavaScript method Window.confirm() is called.
      * @param handler The new handler or null if no handler is to be used.
      */
     public void setConfirmHandler(final ConfirmHandler handler) {
@@ -771,7 +771,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the handler that will be executed when the javascript method Window.prompt() is called.
+     * Set the handler that will be executed when the JavaScript method Window.prompt() is called.
      * @param handler The new handler or null if no handler is to be used.
      */
     public void setPromptHandler(final PromptHandler handler) {
@@ -1652,7 +1652,7 @@ public class WebClient implements Serializable {
     /**
      * Set the active X object map for this webclient. The <code>Map</code> is used to map the
      * string passed into the <code>ActiveXObject</code> constructor to a java class name. Therefore
-     * you can emulate <code>ActiveXObject</code>s in a web page's javascript by mapping the object
+     * you can emulate <code>ActiveXObject</code>s in a web page's JavaScript by mapping the object
      * name to a java class to emulate the active X object.
      * @param activeXObjectMap The new preprocessor or null if none is specified
      */

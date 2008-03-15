@@ -311,7 +311,7 @@ public class HtmlAnchor extends ClickableElement {
      *
      * It should be noted that even web browsers will sometimes not give the
      * expected result when using this method of following links. Links that
-     * have no real href and rely on javascript to do their work will fail.
+     * have no real href and rely on JavaScript to do their work will fail.
      *
      * @return The Page opened by this link, nested in a new TopLevelWindow
      * @throws MalformedURLException if the href could not be converted to a valid URL

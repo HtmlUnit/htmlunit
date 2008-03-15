@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 
 /**
- * Base class for all javascript object corresponding to form fields.
+ * Base class for all JavaScript object corresponding to form fields.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -76,7 +76,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "value".
+     * Return the value of the JavaScript attribute "value".
      *
      * @return The value of this attribute.
      */
@@ -85,7 +85,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Set the value of the javascript attribute "value".
+     * Set the value of the JavaScript attribute "value".
      *
      * @param newValue  The new value.
      */
@@ -94,7 +94,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "name".
+     * Return the value of the JavaScript attribute "name".
      *
      * @return The value of this attribute.
      */
@@ -103,7 +103,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Set the value of the javascript attribute "name".
+     * Set the value of the JavaScript attribute "name".
      *
      * @param newName  The new name.
      */
@@ -112,7 +112,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "form".
+     * Return the value of the JavaScript attribute "form".
      *
      * @return The value of this attribute.
      */
@@ -121,7 +121,7 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "type".
+     * Return the value of the JavaScript attribute "type".
      *
      * @return The value of this attribute.
      */

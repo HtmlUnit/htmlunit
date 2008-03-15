@@ -121,7 +121,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
 
     /**
-     * Test evaluation of paths after changed through javascript
+     * Test evaluation of paths after changed through JavaScript
      * @throws Exception if test fails
      */
     @Test

@@ -168,7 +168,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Creates the summary file and the javascript file that will be updated for each received response
+     * Creates the summary file and the JavaScript file that will be updated for each received response
      * @throws IOException if a problem occurs writing the file
      */
     private void createOverview() throws IOException {

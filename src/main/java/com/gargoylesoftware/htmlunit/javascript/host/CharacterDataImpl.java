@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 
 /**
- * A javascript object for CharacterData.
+ * A JavaScript object for CharacterData.
  *
  * @version $Revision$
  * @author David K. Taylor
@@ -51,7 +51,7 @@ public class CharacterDataImpl extends Node {
     private static final long serialVersionUID = 5413850371617638797L;
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Create an instance.  JavaScript objects must have a default constructor.
      */
     public CharacterDataImpl() {
     }

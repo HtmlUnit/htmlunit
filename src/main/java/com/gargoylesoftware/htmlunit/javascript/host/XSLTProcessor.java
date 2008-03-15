@@ -78,7 +78,7 @@ public class XSLTProcessor extends SimpleScriptable {
     private Map<String, Object> parameters_ = new HashMap<String, Object>();
     
     /**
-     * Javascript constructor.
+     * JavaScript constructor.
      */
     public void jsConstructor() {
         // Empty.

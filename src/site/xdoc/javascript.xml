@@ -20,7 +20,7 @@
             <p>
                 All of HtmlUnit's JavaScript objects subclass SimpleScripable either directly or indirectly.
                 This class contains all the common methods needed by the HtmlUnit host objects.  Additionally,
-                it changes the way that javascript method lookup happens.  The rhino engine doesn't walk
+                it changes the way that JavaScript method lookup happens.  The rhino engine doesn't walk
                 up the class hierarchy when looking for methods starting with jsGet_, jsSet_ or jsFunction.
                 SimpleScriptable changes this so that the superclass hierarchy is walked.
             </p>
@@ -28,7 +28,7 @@
 
         <section name="JavaScriptConfiguration.xml">
             <p>
-                Different browsers and versions of browsers support different javascript properties and functions.
+                Different browsers and versions of browsers support different JavaScript properties and functions.
                 The file JavaScriptConfiguration.xml contains all of this browser specific information.  The plan
                 is to have properties and functions present or not based on the information in this file.  Today
                 not all of that support is present.

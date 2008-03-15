@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A javascript object for simple array allowing access per key and index (like {@link MimeTypeArray}).
+ * A JavaScript object for simple array allowing access per key and index (like {@link MimeTypeArray}).
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -59,7 +59,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     private final List<Object> elements_ = new ArrayList<Object>();
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public SimpleArray() {
         // nothing

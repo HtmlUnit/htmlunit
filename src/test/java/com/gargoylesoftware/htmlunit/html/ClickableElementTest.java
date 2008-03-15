@@ -897,7 +897,7 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * Test when HtmlTableRow.onclick is set by a javascript
+     * Test when HtmlTableRow.onclick is set by a JavaScript
      *
      * @throws Exception if the test fails
      */
@@ -929,7 +929,7 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * Test when HtmlTableRow.onclick is set by a javascript
+     * Test when HtmlTableRow.onclick is set by a JavaScript
      *
      * @throws Exception if the test fails
      */

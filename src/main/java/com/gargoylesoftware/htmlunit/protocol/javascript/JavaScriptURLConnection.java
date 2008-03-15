@@ -59,7 +59,7 @@ public class JavaScriptURLConnection extends URLConnection {
 
     /**
      * Creates an instance.
-     * @param newUrl the javascript URL
+     * @param newUrl the JavaScript URL
      */
     public JavaScriptURLConnection(final URL newUrl) {
         super(newUrl);

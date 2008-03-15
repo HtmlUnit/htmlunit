@@ -250,10 +250,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Set the javascript object that corresponds to this node.  This is not
-     * guaranteed to be set even if there is a javascript object for this
+     * Set the JavaScript object that corresponds to this node.  This is not
+     * guaranteed to be set even if there is a JavaScript object for this
      * DOM node.
-     * @param scriptObject The javascript object.
+     * @param scriptObject The JavaScript object.
      */
     public void setScriptObject(final ScriptableObject scriptObject) {
         scriptObject_ = scriptObject;
@@ -817,8 +817,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * The logic of when and where the js object is created needs a clean up: functions using
      * a js object of a dom node should not have to look if they should create it first
-     * Return the javascript object that corresponds to this node.
-     * @return The javascript object that corresponds to this node building it if necessary.
+     * Return the JavaScript object that corresponds to this node.
+     * @return The JavaScript object that corresponds to this node building it if necessary.
      */
     public ScriptableObject getScriptObject() {
         if (scriptObject_ == null) {

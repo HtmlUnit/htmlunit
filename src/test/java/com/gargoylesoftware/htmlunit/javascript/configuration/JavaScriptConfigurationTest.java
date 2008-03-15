@@ -494,7 +494,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     /**
      * Test that the data in the JavaScriptConfiguration file matches the classes in listed
      * properties and functions.  The first step is to get the configuration using a special method which
-     * ignores the browser and javascript constraints.  This checks that there is a method for each item in
+     * ignores the browser and JavaScript constraints.  This checks that there is a method for each item in
      * the configuration file and fails by throwing an exception.
      *
      * The second step is to go through each class and determine if for each jsGet, jsSet, and jsFunction class,

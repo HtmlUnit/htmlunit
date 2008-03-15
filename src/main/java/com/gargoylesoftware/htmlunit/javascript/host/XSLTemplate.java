@@ -53,7 +53,7 @@ public class XSLTemplate extends SimpleScriptable {
     private Node stylesheet_;
     
     /**
-     * Javascript constructor.
+     * JavaScript constructor.
      */
     public void jsConstructor() {
         // Empty.

@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLFieldSetElement".
+ * The JavaScript object "HTMLFieldSetElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

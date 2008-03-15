@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLUnknownElement".
+ * The JavaScript object "HTMLUnknownElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

@@ -250,7 +250,7 @@ public class NavigatorTest extends WebTestCase {
     }
 
     /**
-     * Test closing using javascript
+     * Test closing using JavaScript
      * @throws Exception if the test fails.
      */
     @Test

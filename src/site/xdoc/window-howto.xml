@@ -22,7 +22,7 @@
                 will load the new page into this window.
             </p>
             <p>
-                The javascript open() function can be used to load pages into other windows.  New WebWindow
+                The JavaScript open() function can be used to load pages into other windows.  New WebWindow
                 objects will be created automatically by this function.
             </p>
         </section>
@@ -34,7 +34,7 @@
                 method WebClient.addWebWindowListener(WebWindowListener)
             </p>
             <p>
-                When a window is opened either by javascript or through the WebClient, a WebWindowEvent will be
+                When a window is opened either by JavaScript or through the WebClient, a WebWindowEvent will be
                 fired and passed into the
                 WebWindowListener.webWindowOpened(WebWindowEvent)
                 method.  Note that both the new and old pages in the event will be null as the window does not

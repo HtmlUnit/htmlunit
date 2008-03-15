@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLLinkElement".
+ * The JavaScript object "HTMLLinkElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

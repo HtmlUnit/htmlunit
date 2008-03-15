@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A javascript object for a document.navigator.mimeTypes elements
+ * A JavaScript object for a document.navigator.mimeTypes elements
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -55,7 +55,7 @@ public final class MimeType extends SimpleScriptable {
     private Plugin enabledPlugin_;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public MimeType() {
         // nothing

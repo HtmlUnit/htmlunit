@@ -64,7 +64,7 @@ public class HTMLTableRowElement extends HTMLElement {
     }
 
     /**
-     * Javascript constructor. This must be declared in every JavaScript file because
+     * JavaScript constructor. This must be declared in every JavaScript file because
      * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {

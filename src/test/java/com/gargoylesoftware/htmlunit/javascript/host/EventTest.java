@@ -107,7 +107,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Verify that javascript snippets have a variable named 'event' available to them.
+     * Verify that JavaScript snippets have a variable named 'event' available to them.
      * @throws Exception if the test fails
      */
     @Test
@@ -175,7 +175,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * event.currentTarget == this inside javascript event handler
+     * event.currentTarget == this inside JavaScript event handler
      * @throws Exception if the test fails
      */
     @Test

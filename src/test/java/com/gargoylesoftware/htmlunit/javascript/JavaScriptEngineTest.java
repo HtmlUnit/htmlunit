@@ -274,7 +274,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * If a reference has been hold on a page and the page is not
-     * anymore the one contained in "its" window, javascript execution should
+     * anymore the one contained in "its" window, JavaScript execution should
      * work... a bit
      * @throws Exception if the test fails
      */
@@ -828,7 +828,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Test that the javascript engine gets called correctly for variable access.
+     * Test that the JavaScript engine gets called correctly for variable access.
      * @throws Exception If the test fails
      */
     @Test
@@ -925,7 +925,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Test that Java objects placed in the active x map can be instantiated and used within
-     * javascript using the IE specific ActiveXObject constructor.
+     * JavaScript using the IE specific ActiveXObject constructor.
      * @throws Exception If the test fails
      */
     @Test
@@ -1005,7 +1005,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Check that wrong javascript just causes its context to fail but not the whole page.
+     * Check that wrong JavaScript just causes its context to fail but not the whole page.
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -1420,7 +1420,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Test that code in script tags is executed on page load.  Try different combinations
-     * of the script tag except for the case where a remote javascript page is loaded.  That
+     * of the script tag except for the case where a remote JavaScript page is loaded.  That
      * one will be tested separately.
      * @throws Exception If something goes wrong.
      */
@@ -1429,7 +1429,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final String content
             = "<html>\n"
             + "<head><title>foo</title>\n"
-            + "<script>One</script>\n" // no language specified - assume javascript
+            + "<script>One</script>\n" // no language specified - assume JavaScript
             + "<script language='javascript'>Two</script>\n"
             + "<script type='text/javascript'>Three</script>\n"
             + "<script type='text/perl'>Four</script>\n" // type is unsupported language
@@ -1440,7 +1440,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<String> collectedScripts = new ArrayList<String>();
         loadPageAndCollectScripts(content, collectedScripts);
 
-        // NO MORE: The last expected is the dummy stub that is needed to initialize the javascript engine
+        // NO MORE: The last expected is the dummy stub that is needed to initialize the JavaScript engine
         final String[] expectedScripts = {"One", "Two", "Three"};
 
         assertEquals(expectedScripts, collectedScripts);

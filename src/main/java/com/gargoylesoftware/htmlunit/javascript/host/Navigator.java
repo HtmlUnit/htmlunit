@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A javascript object for a Navigator.
+ * A JavaScript object for a Navigator.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -61,7 +61,7 @@ public final class Navigator extends SimpleScriptable {
     private MimeTypeArray mimeTypes_;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public Navigator() { }
 

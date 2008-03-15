@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLHRElement".
+ * The JavaScript object "HTMLHRElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

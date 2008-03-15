@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLIsIndexElement".
+ * The JavaScript object "HTMLIsIndexElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

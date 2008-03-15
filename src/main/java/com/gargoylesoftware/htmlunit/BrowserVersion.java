@@ -298,8 +298,8 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the version of javascript used by the browser, for example "1.2".
-     * @return the version of javascript used by the browser.
+     * Return the version of JavaScript used by the browser, for example "1.2".
+     * @return the version of JavaScript used by the browser.
      */
     public String getJavaScriptVersion() {
         return javaScriptVersion_;
@@ -429,7 +429,7 @@ public class BrowserVersion implements Serializable {
     
     /**
      * Gets the configured plugins. This makes only sense for Firefox as only this browser makes this kind
-     * of information available through javascript
+     * of information available through JavaScript
      * @return the available plugins
      */
     public Set<PluginConfiguration> getPlugins() {

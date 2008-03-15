@@ -1494,7 +1494,7 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-    /** Test that javascript scrollIntoView() function doesn't fail
+    /** Test that JavaScript scrollIntoView() function doesn't fail
      * @throws Exception if the test fails
      */
     @Test

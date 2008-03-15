@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLOListElement".
+ * The JavaScript object "HTMLOListElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

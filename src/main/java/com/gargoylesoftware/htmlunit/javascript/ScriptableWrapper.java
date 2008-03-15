@@ -227,7 +227,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * To use as "toString" function in javascript
+     * To use as "toString" function in JavaScript
      * @return the string representation
      */
     public String jsToString() {
@@ -244,7 +244,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
     
     /**
-     * Gets the java object made availabe to javascript through this wrapper
+     * Gets the java object made availabe to JavaScript through this wrapper
      * @return the wrapped object
      */
     public Object getWrappedObject() {

@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLOptGroupElement".
+ * The JavaScript object "HTMLOptGroupElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

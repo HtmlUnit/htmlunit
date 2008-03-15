@@ -231,7 +231,7 @@ public class HtmlForm extends ClickableElement {
     /**
      * Reset this form to its initial values.
      * @return The page that is loaded at the end of calling this method.  Typically this
-     * will be the same page that had been loaded previously but since javascript might
+     * will be the same page that had been loaded previously but since JavaScript might
      * have run, this isn't guaranteed.
      */
     public Page reset() {

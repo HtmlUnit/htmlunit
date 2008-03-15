@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 
 /**
- * The javascript object for {@link HtmlSelect}.
+ * The JavaScript object for {@link HtmlSelect}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -68,7 +68,7 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
+     * JavaScript constructor.  This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {

@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A javascript object for a Location
+ * A JavaScript object for a Location
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -110,8 +110,8 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the javascript class name
-     * @return The javascript class name
+     * Return the JavaScript class name
+     * @return The JavaScript class name
      */
     @Override
     public String getClassName() {
@@ -125,7 +125,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the DOM node that corresponds to this javascript object or throw
+     * Return the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
      * @return The DOM node
      * @exception IllegalStateException If the DOM node could not be found.
@@ -141,7 +141,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the DOM node that corresponds to this javascript object
+     * Return the DOM node that corresponds to this JavaScript object
      * or null if a node hasn't been set.
      * @return The DOM node or null
      */
@@ -150,7 +150,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Set the DOM node that corresponds to this javascript object
+     * Set the DOM node that corresponds to this JavaScript object
      * @param domNode The DOM node
      */
     public void setDomNode(final DomNode domNode) {
@@ -158,7 +158,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Set the DOM node that corresponds to this javascript object
+     * Set the DOM node that corresponds to this JavaScript object
      * @param domNode The DOM node
      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
      */
@@ -171,7 +171,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Set the HTML element that corresponds to this javascript object
+     * Set the HTML element that corresponds to this JavaScript object
      * @param htmlElement The HTML element
      */
     public void setHtmlElement(final HtmlElement htmlElement) {
@@ -187,12 +187,12 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the javascript object that corresponds to the specified object.
-     * New javascript objects will be created as needed.  If a javascript object
+     * Return the JavaScript object that corresponds to the specified object.
+     * New JavaScript objects will be created as needed.  If a JavaScript object
      * cannot be created for a domNode then NOT_FOUND will be returned.
      *
      * @param object a {@link DomNode} or a {@link WebWindow}
-     * @return The javascript object or NOT_FOUND
+     * @return The JavaScript object or NOT_FOUND
      */
     protected SimpleScriptable getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
@@ -211,9 +211,9 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Builds a new the javascript object that corresponds to the specified object.<br>
+     * Builds a new the JavaScript object that corresponds to the specified object.<br>
      * @param domNode the dom node for which a JS object should be created
-     * @return The javascript object
+     * @return The JavaScript object
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         // Get the JS class name for the specified DOM node.
@@ -227,7 +227,7 @@ public class SimpleScriptable extends ScriptableObject {
         if (javaScriptClass == null) {
             // We don't have a specific subclass for this element so create something generic.
             scriptable = new HTMLElement();
-            getLog().debug("No javascript class found for element <" + domNode.getNodeName() + ">. Using HTMLElement");
+            getLog().debug("No JavaScript class found for element <" + domNode.getNodeName() + ">. Using HTMLElement");
         }
         else {
             try {
@@ -336,7 +336,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the javascript default value of this object.  This is the javascript equivalent
+     * Return the JavaScript default value of this object.  This is the JavaScript equivalent
      * of a toString() in java.
      *
      * @param hint A hint as to the format of the default value.  Ignored in this case.

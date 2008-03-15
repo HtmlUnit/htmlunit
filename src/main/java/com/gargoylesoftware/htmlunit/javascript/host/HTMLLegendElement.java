@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLLegendElement".
+ * The JavaScript object "HTMLLegendElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

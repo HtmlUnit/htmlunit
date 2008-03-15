@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * The javascript object that represents an option.
+ * The JavaScript object that represents an option.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -64,7 +64,7 @@ public class HTMLOptionElement extends HTMLElement {
     }
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
+     * JavaScript constructor.  This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      * @param newText The text
      * @param newValue The value

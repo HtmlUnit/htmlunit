@@ -1154,7 +1154,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Return a Function to be executed when a given event occurs.
      * @param eventName Name of event such as "onclick" or "onblur", etc.
-     * @return A rhino javascript executable Function, or null if no event
+     * @return A rhino JavaScript executable Function, or null if no event
      * handler has been defined
      */
     public final Function getEventHandler(final String eventName) {
@@ -1166,7 +1166,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Register a Function as an event handler.
      * @param eventName Name of event such as "onclick" or "onblur", etc.
-     * @param eventHandler A rhino javascript executable Function
+     * @param eventHandler A rhino JavaScript executable Function
      */
     public final void setEventHandler(final String eventName, final Function eventHandler) {
         final HTMLElement jsObj = (HTMLElement) getScriptObject();
@@ -1175,11 +1175,11 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * Register a snippet of javascript code as an event handler.  The javascript code will
+     * Register a snippet of JavaScript code as an event handler.  The JavaScript code will
      * be wrapped inside a unique function declaration which provides one argument named
      * "event"
      * @param eventName Name of event such as "onclick" or "onblur", etc.
-     * @param jsSnippet executable javascript code
+     * @param jsSnippet executable JavaScript code
      */
     public final void setEventHandler(final String eventName, final String jsSnippet) {
         final BaseFunction function = new EventHandler(this, eventName, jsSnippet);

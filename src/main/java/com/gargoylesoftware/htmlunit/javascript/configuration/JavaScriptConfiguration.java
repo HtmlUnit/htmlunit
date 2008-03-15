@@ -80,8 +80,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement;
 
 /**
- * A container for all the javascript configuration information.
- * TODO - Need to add the logic to support the browser and javascript conditionals in the Class elements.
+ * A container for all the JavaScript configuration information.
+ * TODO - Need to add the logic to support the browser and JavaScript conditionals in the Class elements.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -200,7 +200,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Return the instance that represents the configuration for the specified {@link BrowserVersion}.
-     * This method is synchronized to allow multithreaded access to the Javascript configuration.
+     * This method is synchronized to allow multithreaded access to the JavaScript configuration.
      * @param browserVersion The {@link BrowserVersion}
      * @return The instance for the specified {@link BrowserVersion}
      */
@@ -413,7 +413,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Test for the browser and javascript constraints.  Returns true if any constraints are present
+     * Test for the browser and JavaScript constraints.  Returns true if any constraints are present
      * and the browser does not meet the constraints.
      * @param element The element to scan the children of
      * @return true to exclude this element
@@ -475,7 +475,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Get the class configuration for the supplied javascript class name
+     * Get the class configuration for the supplied JavaScript class name
      * @param classname The js class name
      * @return ClassConfiguration
      */
@@ -707,9 +707,9 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return an immutable map containing the HTML to javascript mappings.  Keys are
+     * Return an immutable map containing the HTML to JavaScript mappings.  Keys are
      * java classes for the various HTML classes (ie HtmlInput.class) and the values
-     * are the javascript class names (ie "HTMLAnchorElement").
+     * are the JavaScript class names (ie "HTMLAnchorElement").
      * @return the mappings
      */
     @SuppressWarnings("unchecked")

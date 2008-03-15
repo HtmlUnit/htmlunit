@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.DomText;
 
 /**
- * A javascript object for Text.
+ * A JavaScript object for Text.
  *
  * @version $Revision$
  * @author David K. Taylor
@@ -52,13 +52,13 @@ public final class TextImpl extends CharacterDataImpl {
     private static final long serialVersionUID = 3548915177419561974L;
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Create an instance.  JavaScript objects must have a default constructor.
      */
     public TextImpl() {
     }
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
+     * JavaScript constructor.  This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {

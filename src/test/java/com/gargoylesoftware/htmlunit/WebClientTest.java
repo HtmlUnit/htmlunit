@@ -898,7 +898,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test redirecting with javascript during page load.
+     * Test redirecting with JavaScript during page load.
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -1366,7 +1366,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test the ScriptPreProcessor's ability to filter out a javascript method
+     * Test the ScriptPreProcessor's ability to filter out a JavaScript method
      * that is not implemented without affecting the rest of the page.
      *
      * @throws Exception if the test fails
@@ -1655,7 +1655,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Load a javascript function from an external file using src references
+     * Load a JavaScript function from an external file using src references
      * inside a script element.
      *
      * @throws Exception if the test fails
@@ -1666,7 +1666,7 @@ public class WebClientTest extends WebTestCase {
 
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
 
-        // javascript file
+        // JavaScript file
         final File tmpFileJS = File.createTempFile("test", ".js", currentDirectory);
         tmpFileJS.deleteOnExit();
         FileUtils.writeStringToFile(tmpFileJS, "alert('foo')", encoding);

@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A handler for javascript window.prompt().  Confirms are triggered when the javascript
+ * A handler for JavaScript window.prompt().  Confirms are triggered when the JavaScript
  * method Window.prompt() is called.
  *
  * @version $Revision$

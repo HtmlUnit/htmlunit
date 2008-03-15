@@ -60,7 +60,7 @@ public class XMLDOMParseError extends SimpleScriptable {
     private String url_ = "";
     
     /**
-     * Javascript constructor.
+     * JavaScript constructor.
      */
     public void jsConstructor() {
         // Empty.

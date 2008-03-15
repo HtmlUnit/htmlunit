@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino javascript engine</a>
+ * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino JavaScript engine</a>
  * that provides browser specific features.<br/>
  * Like all classes in this package, this class is not intended for direct use
  * and may change without notice.
@@ -108,7 +108,7 @@ public class JavaScriptEngine implements Serializable {
         Collections.synchronizedMap(new WeakHashMap<WebResponse, Script>());
 
     /**
-     * Key used to place the scope in which the execution of some javascript code
+     * Key used to place the scope in which the execution of some JavaScript code
      * started as thread local attribute in current context.<br/>
      * This is needed to resolve some relative locations relatively to the page
      * in which the script is executed and not to the page which location is changed.
@@ -339,10 +339,10 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Compiles the specified javascript code in the context of a given HTML page.
+     * Compiles the specified JavaScript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
-     * @param sourceCode The javascript code to execute.
+     * @param sourceCode The JavaScript code to execute.
      * @param sourceName The name that will be displayed on error conditions.
      * @param startLine the line at which the script source starts
      * @return The result of executing the specified code.
@@ -396,10 +396,10 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Execute the specified javascript code in the context of a given HTML page.
+     * Execute the specified JavaScript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
-     * @param sourceCode The javascript code to execute.
+     * @param sourceCode The JavaScript code to execute.
      * @param sourceName The name that will be displayed on error conditions.
      * @param startLine the line at which the script source starts
      * @return The result of executing the specified code.
@@ -414,7 +414,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Execute the specified javascript code in the context of a given HTML page.
+     * Execute the specified JavaScript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
      * @param script the script to execute

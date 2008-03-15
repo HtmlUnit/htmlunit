@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLSpanElement".
+ * The JavaScript object "HTMLSpanElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

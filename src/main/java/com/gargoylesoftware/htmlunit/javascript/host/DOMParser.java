@@ -52,7 +52,7 @@ public class DOMParser extends SimpleScriptable {
     private static final long serialVersionUID = 3143102490697686971L;
 
     /**
-     * Javascript constructor.
+     * JavaScript constructor.
      */
     public void jsConstructor() {
         // Empty.

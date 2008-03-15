@@ -51,7 +51,7 @@ public class HTMLCollectionTags extends HTMLCollection {
     private static final long serialVersionUID = -1772897974886997756L;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      * Don't call.
      */
     @Deprecated

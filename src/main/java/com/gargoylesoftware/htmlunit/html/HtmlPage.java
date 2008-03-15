@@ -837,15 +837,15 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Execute the specified javascript within the page.
-     * The usage would be similar to what can be achieved to execute javascript in the current page
+     * Execute the specified JavaScript within the page.
+     * The usage would be similar to what can be achieved to execute JavaScript in the current page
      * by entering a "javascript:...some js code..." in the url field of a "normal" browser.
      * <p>
      * <b>Note: </b> the provided code won't be executed if JavaScript has been disabled on the WebClient
      * (see {@link WebClient#isJavaScriptEnabled()}.
-     * @param sourceCode The javascript code to execute.
+     * @param sourceCode The JavaScript code to execute.
      * @return A ScriptResult which will contain both the current page (which may be different than
-     * the previous page) and a javascript result object.
+     * the previous page) and a JavaScript result object.
      */
     public ScriptResult executeJavaScript(final String sourceCode) {
         return executeJavaScriptIfPossible(sourceCode, "injected script", 1);
@@ -853,25 +853,25 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * <p>
-     * Execute the specified javascript if a javascript engine was successfully
-     * instantiated.  If this javascript causes the current page to be reloaded
+     * Execute the specified JavaScript if a JavaScript engine was successfully
+     * instantiated.  If this JavaScript causes the current page to be reloaded
      * (through location="" or form.submit()) then return the new page.  Otherwise
      * return the current page.
      * </p>
      * <p><b>Please note:</b> Although this method is public, it is not intended for
      * general execution of javascript.  Users of HtmlUnit should interact with the pages
-     * as a user would by clicking on buttons or links and having the javascript event
+     * as a user would by clicking on buttons or links and having the JavaScript event
      * handlers execute as needed..
      * </p>
      *
-     * @param sourceCode The javascript code to execute.
+     * @param sourceCode The JavaScript code to execute.
      * @param sourceName The name for this chunk of code.  This name will be displayed
      * in any error messages.
      * @param htmlElement The HTML element for which this script is being executed.
-     * This element will be the context during the javascript execution.  If null,
+     * This element will be the context during the JavaScript execution.  If null,
      * the context will default to the window.
      * @return A ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a javascript result object.
+     * the previous page and a JavaScript result object.
      * @deprecated use {@link #executeJavaScript(String)} instead
      */
     public ScriptResult executeJavaScriptIfPossible(final String sourceCode, final String sourceName,
@@ -883,23 +883,23 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * <p>
-     * Execute the specified javascript if a javascript engine was successfully
-     * instantiated.  If this javascript causes the current page to be reloaded
+     * Execute the specified JavaScript if a JavaScript engine was successfully
+     * instantiated.  If this JavaScript causes the current page to be reloaded
      * (through location="" or form.submit()) then return the new page.  Otherwise
      * return the current page.
      * </p>
      * <p><b>Please note:</b> Although this method is public, it is not intended for
      * general execution of javascript.  Users of HtmlUnit should interact with the pages
-     * as a user would by clicking on buttons or links and having the javascript event
+     * as a user would by clicking on buttons or links and having the JavaScript event
      * handlers execute as needed..
      * </p>
      *
-     * @param sourceCode The javascript code to execute.
+     * @param sourceCode The JavaScript code to execute.
      * @param sourceName The name for this chunk of code.  This name will be displayed
      * in any error messages.
      * @param startLine the line at which the script source starts
      * @return A ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a javascript result object.
+     * the previous page and a JavaScript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().isJavaScriptEnabled()) {
@@ -930,14 +930,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      *
      * Execute a Function in the given context.
      *
-     * @param function The javascript Function to call.
+     * @param function The JavaScript Function to call.
      * @param thisObject The "this" object to be used during invocation.
      * @param args The arguments to pass into the call.
      * @param htmlElementScope The HTML element for which this script is being executed.
-     * This element will be the context during the javascript execution.  If null,
+     * This element will be the context during the JavaScript execution.  If null,
      * the context will default to the page.
      * @return A ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a javascript result object.
+     * the previous page and a JavaScript result object.
      */
     public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
             final Object[] args, final DomNode htmlElementScope) {
@@ -1007,10 +1007,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * are content types case insensitive.
      * @param typeAttribute The type attribute specified in the script tag.
      * @param languageAttribute The language attribute specified in the script tag.
-     * @return true if the script is javascript
+     * @return true if the script is JavaScript
      */
     public static boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
-        // Unless otherwise specified, we have to assume that any script is javascript
+        // Unless otherwise specified, we have to assume that any script is JavaScript
         final boolean isJavaScript;
         if (languageAttribute != null && languageAttribute.length() != 0) {
             isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
@@ -1222,7 +1222,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     private void executeRefreshIfNeeded() throws IOException {
         // If this page is not in a frame then a refresh has already happened,
-        // most likely through the javascript onload handler, so we don't do a
+        // most likely through the JavaScript onload handler, so we don't do a
         // second refresh.
         final WebWindow window = getEnclosingWindow();
         if (window == null) {

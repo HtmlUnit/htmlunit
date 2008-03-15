@@ -115,8 +115,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Gets the Javascript Engine responsible for this object.
-     * @return the javascript engine
+     * Gets the JavaScript Engine responsible for this object.
+     * @return the JavaScript engine
      */
     public JavaScriptEngine getJavaScriptEngine() {
         return scriptEngine_;
@@ -141,7 +141,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * The javascript function "alert()"
+     * The JavaScript function "alert()"
      * @param message The message
      */
     public void jsxFunction_alert(final Object message) {
@@ -158,7 +158,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * The javascript function "confirm()"
+     * The JavaScript function "confirm()"
      * @param message The message
      * @return true if ok was pressed, false if cancel was pressed
      */
@@ -175,7 +175,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * The javascript function "prompt()"
+     * The JavaScript function "prompt()"
      * @param message The message
      * @return true if ok was pressed, false if cancel was pressed
      */
@@ -191,7 +191,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Return the javascript property "document"
+     * Return the JavaScript property "document"
      * @return The document
      */
     public Document jsxGet_document() {
@@ -217,7 +217,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Opens a new window.
      *
-     * @param context The javascript Context
+     * @param context The JavaScript Context
      * @param scriptable The object that the function was called on.
      * @param args The arguments passed to the function.
      * @param function The function object that was invoked.
@@ -269,7 +269,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Creates a popup window Open a new window
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp">
      * MSDN documentation</a>
-     * @param context The javascript Context
+     * @param context The JavaScript Context
      * @param scriptable The object that the function was called on.
      * @param args The arguments passed to the function.
      * @param function The function object that was invoked.
@@ -317,7 +317,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Makes the job object for setTimeout and setInterval
      *
-     * @param codeToExec either a Function or a String of the javascript code
+     * @param codeToExec either a Function or a String of the JavaScript code
      * @param timeout time to wait
      * @param thisWindow the window to associate the thread with
      * @param loopForever if the thread should keep looping (setTimeout vs setInterval)
@@ -342,14 +342,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Set a chunk of javascript to be invoked at some specified time later.
+     * Set a chunk of JavaScript to be invoked at some specified time later.
      * The invocation occurs only if the window is opened after the delay
      * and does not contain an other page than the one that originated the setTimeout.
      *
      * JavaScript param 1: The code to execute, either a String or a Function.
      * JavaScript param 2: the delay in milliseconds to wait before executing the code.
      *
-     * @param context The javascript Context
+     * @param context The JavaScript Context
      * @param scriptable The object that the function was called on.
      * @param args The arguments passed to the function.
      * @param function The function object that was invoked.
@@ -377,7 +377,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Return the javascript property "navigator"
+     * Return the JavaScript property "navigator"
      * @return The document
      */
     public Navigator jsxGet_navigator() {
@@ -955,7 +955,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Executes the specified script code in the scope of this window.
      * This is used only when eval() is called on a Window other than the starting scope
-     * @param scriptCode some javascript code
+     * @param scriptCode some JavaScript code
      * @return the evaluation result
      */
     public Object custom_eval(final String scriptCode) {
@@ -986,7 +986,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Set a chunk of javascript to be invoked each time a specified number of milliseconds has elapsed
+     * Set a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed
      * Current implementation does nothing.
      *
      * JavaScript param 1: The code to execute, either a String or a Function.
@@ -995,7 +995,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
      *
-     * @param context The javascript Context
+     * @param context The JavaScript Context
      * @param scriptable The object that the function was called on.
      * @param args The arguments passed to the function.
      * @param function The function object that was invoked.

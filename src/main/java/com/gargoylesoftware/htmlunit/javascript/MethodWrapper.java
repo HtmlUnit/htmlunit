@@ -47,7 +47,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 /**
- * Wraps a java method to make it available as a javascript function
+ * Wraps a java method to make it available as a JavaScript function
  * (more flexible than Rhino's {@link FunctionObject}.
  *
  * @version $Revision$
@@ -71,7 +71,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * Wraps a method as a javascript function.
+     * Wraps a method as a JavaScript function.
      * @param methodName the name of the method to wrap
      * @param clazz the class declaring the method
      * @param parameterTypes the types of the method's parameter
@@ -140,7 +140,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
      * Converts js arguments to java arguments
      * @param context the current context
      * @param scope the current scope
-     * @param jsArgs the javascript arguments
+     * @param jsArgs the JavaScript arguments
      * @return the java arguments
      */
     Object[] convertJSArgsToJavaArgs(final Context context, final Scriptable scope, final Object[] jsArgs) {

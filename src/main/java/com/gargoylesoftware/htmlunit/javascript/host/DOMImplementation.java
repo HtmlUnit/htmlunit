@@ -54,7 +54,7 @@ public class DOMImplementation extends SimpleScriptable {
     private static final long serialVersionUID = -6824157544527299635L;
 
     /**
-     * Javascript constructor.
+     * JavaScript constructor.
      */
     public void jsConstructor() {
         // Empty.

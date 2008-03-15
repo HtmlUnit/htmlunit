@@ -73,7 +73,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * Note that this class must not be used for collections that can be modified, for example
  * <tt>map.areas</tt> and <tt>select.options</tt>.
  * <br>
- * This class (like all classes in this package) is specific for the javascript engine.
+ * This class (like all classes in this package) is specific for the JavaScript engine.
  * Users of HtmlUnit shouldn't use it directly.
  *
  * @version $Revision$
@@ -98,7 +98,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     private List<Object> cachedElements_;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      * Don't call.
      */
     @Deprecated

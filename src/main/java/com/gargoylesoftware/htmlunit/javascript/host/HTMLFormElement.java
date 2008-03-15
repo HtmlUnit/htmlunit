@@ -77,7 +77,7 @@ public class HTMLFormElement extends HTMLElement {
     public HTMLFormElement() { }
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
+     * JavaScript constructor.  This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public final void jsConstructor() {
@@ -94,7 +94,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "name".
+     * Return the value of the JavaScript attribute "name".
      * @return The value of this attribute.
      */
     public String jsxGet_name() {
@@ -102,7 +102,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the javascript attribute "name".
+     * Set the value of the JavaScript attribute "name".
      * @param name The new value.
      */
     public void jsxSet_name(final String name) {
@@ -111,7 +111,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "elements".
+     * Return the value of the JavaScript attribute "elements".
      * @return The value of this attribute.
      */
     public HTMLCollection jsxGet_elements() {
@@ -126,7 +126,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "length".
+     * Return the value of the JavaScript attribute "length".
      * Does not count input type=image elements as browsers (IE6, Mozilla 1.7) do
      * (cf <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>)
      * @return The value of this attribute.
@@ -138,7 +138,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "action".
+     * Return the value of the JavaScript attribute "action".
      * @return The value of this attribute.
      */
     public String jsxGet_action() {
@@ -146,7 +146,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the javascript attribute "action".
+     * Set the value of the JavaScript attribute "action".
      * @param action The new value.
      */
     public void jsxSet_action(final String action) {
@@ -155,7 +155,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "method".
+     * Return the value of the JavaScript attribute "method".
      * @return The value of this attribute.
      */
     public String jsxGet_method() {
@@ -163,7 +163,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the javascript attribute "method".
+     * Set the value of the JavaScript attribute "method".
      * @param method The new value.
      */
     public void jsxSet_method(final String method) {
@@ -172,7 +172,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "target".
+     * Return the value of the JavaScript attribute "target".
      * @return The value of this attribute.
      */
     public String jsxGet_target() {
@@ -196,7 +196,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the javascript attribute "target".
+     * Set the value of the JavaScript attribute "target".
      * @param target The new value.
      */
     public void jsxSet_target(final String target) {
@@ -205,7 +205,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the javascript attribute "encoding".
+     * Return the value of the JavaScript attribute "encoding".
      * @return The value of this attribute.
      */
     public String jsxGet_encoding() {
@@ -213,7 +213,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the javascript attribute "encoding".
+     * Set the value of the JavaScript attribute "encoding".
      * @param encoding The new value.
      */
     public void jsxSet_encoding(final String encoding) {

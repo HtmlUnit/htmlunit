@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * A javascript object for a document.navigator.plugins.
+ * A JavaScript object for a document.navigator.plugins.
  * @version $Revision$
  * @author Marc Guillemot
  *
@@ -52,7 +52,7 @@ public class Plugin extends SimpleArray {
     private String name_;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public Plugin() {
         // nothing

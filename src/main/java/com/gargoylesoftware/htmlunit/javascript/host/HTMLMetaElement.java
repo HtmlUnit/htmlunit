@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLMetaElement".
+ * The JavaScript object "HTMLMetaElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

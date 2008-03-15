@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLTableColElement".
+ * The JavaScript object "HTMLTableColElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

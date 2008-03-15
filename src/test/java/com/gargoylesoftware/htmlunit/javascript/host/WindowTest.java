@@ -1056,7 +1056,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Variables that are defined inside javascript should be accessible through the
+     * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable).  Test that this works.
      * @throws Exception If the test fails.
      */
@@ -1075,7 +1075,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Variables that are defined inside javascript should be accessible through the
+     * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable).  Test that this works.
      * @throws Exception If the test fails.
      */
@@ -1126,7 +1126,7 @@ public class WindowTest extends WebTestCase {
     }
     
     /**
-     * Variables that are defined inside javascript should be accessible through the
+     * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable).  Test that this works.
      * @throws Exception If the test fails.
      */
@@ -1320,7 +1320,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test closing using javascript
+     * Test closing using JavaScript
      * @throws Exception if the test fails.
      */
     @Test
@@ -2046,7 +2046,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Open a window with only javascript for content, then try to set focus to it.
+     * Open a window with only JavaScript for content, then try to set focus to it.
      *
      * @throws Exception If the test fails.
      */

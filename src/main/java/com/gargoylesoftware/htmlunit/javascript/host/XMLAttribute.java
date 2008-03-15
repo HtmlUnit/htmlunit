@@ -70,7 +70,7 @@ public class XMLAttribute extends SimpleScriptable {
     private XmlElement parent_;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public XMLAttribute() { }
 

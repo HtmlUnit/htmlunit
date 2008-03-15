@@ -50,7 +50,7 @@ public class BoxObject extends SimpleScriptable {
     private static final long serialVersionUID = -6650009325965623469L;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public BoxObject() {
     }

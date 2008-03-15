@@ -166,13 +166,13 @@ public class Document extends EventNode {
     }
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Create an instance.  JavaScript objects must have a default constructor.
      */
     public Document() {
     }
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
+     * JavaScript constructor.  This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
@@ -205,7 +205,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the javascript attribute "forms".
+     * Return the value of the JavaScript attribute "forms".
      * @return The value of this attribute.
      */
     public Object jsxGet_forms() {
@@ -217,7 +217,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the javascript attribute "links".  Refer also to the
+     * Return the value of the JavaScript attribute "links".  Refer also to the
      * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/links.asp"
      * MSDN documentation</a>
      * @return The value of this attribute.
@@ -231,7 +231,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the javascript attribute "anchors".
+     * Return the value of the JavaScript attribute "anchors".
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp">
      * MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
@@ -255,9 +255,9 @@ public class Document extends EventNode {
     }
 
     /**
-     * javascript function "write" may accept a variable number of args.
+     * JavaScript function "write" may accept a variable number of args.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
-     * @param context The javascript context
+     * @param context The JavaScript context
      * @param thisObj The scriptable
      * @param args The arguments passed into the method.
      * @param function The function.
@@ -273,7 +273,7 @@ public class Document extends EventNode {
 
     /**
      * Converts the arguments to strings and concatenate them.
-     * @param args the javascript arguments
+     * @param args the JavaScript arguments
      * @return the string concatenation
      */
     private static String concatArgsAsString(final Object[] args) {
@@ -285,9 +285,9 @@ public class Document extends EventNode {
     }
 
     /**
-     * javascript function "writeln" may accept a variable number of args.
+     * JavaScript function "writeln" may accept a variable number of args.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
-     * @param context The javascript context
+     * @param context The JavaScript context
      * @param thisObj The scriptable
      * @param args The arguments passed into the method.
      * @param function The function.
@@ -819,7 +819,7 @@ public class Document extends EventNode {
 
                 if (jsElement == NOT_FOUND) {
                     getLog().debug("createElement(" + tagName
-                            + ") cannot return a result as there isn't a javascript object for the element "
+                            + ") cannot return a result as there isn't a JavaScript object for the element "
                             + element.getClass().getName());
                 }
                 else {
@@ -849,7 +849,7 @@ public class Document extends EventNode {
 
             if (jsElement == NOT_FOUND) {
                 getLog().debug("createElementNS(" + namespaceURI + ',' + qualifiedName
-                    + ") cannot return a result as there isn't a javascript object for the HTML element "
+                    + ") cannot return a result as there isn't a JavaScript object for the HTML element "
                     + htmlElement.getClass().getName());
             }
             else {
@@ -919,7 +919,7 @@ public class Document extends EventNode {
 
             if (jsElement == NOT_FOUND) {
                 getLog().debug("createTextNode(" + newData
-                    + ") cannot return a result as there isn't a javascript object for the DOM node "
+                    + ") cannot return a result as there isn't a JavaScript object for the DOM node "
                     + domNode.getClass().getName());
             }
             else {
@@ -957,7 +957,7 @@ public class Document extends EventNode {
 
             if (jsElement == NOT_FOUND) {
                 getLog().debug("getElementById(" + id
-                    + ") cannot return a result as there isn't a javascript object for the HTML element "
+                    + ") cannot return a result as there isn't a JavaScript object for the HTML element "
                     + htmlElement.getClass().getName());
             }
             else {
@@ -1183,7 +1183,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the javascript attribute "scripts".
+     * Return the value of the JavaScript attribute "scripts".
      * @return The value of this attribute.
      */
     public Object jsxGet_scripts() {
@@ -1195,7 +1195,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the javascript attribute "selection".
+     * Return the value of the JavaScript attribute "selection".
      * @return The value of this attribute.
      */
     public Selection jsxGet_selection() {

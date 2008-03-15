@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
 
 /**
- * The javascript object for form input elements (html tag &lt;input ...&gt;).
+ * The JavaScript object for form input elements (html tag &lt;input ...&gt;).
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -65,7 +65,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Javascript constructor. This must be declared in every javascript file
+     * JavaScript constructor. This must be declared in every JavaScript file
      * because the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {

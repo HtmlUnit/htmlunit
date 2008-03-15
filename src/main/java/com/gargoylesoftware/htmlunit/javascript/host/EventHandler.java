@@ -63,10 +63,10 @@ public class EventHandler extends BaseFunction {
     private Function realFunction_;
 
     /**
-     * Builds a function that will execute the javascript code provided
+     * Builds a function that will execute the JavaScript code provided
      * @param node the element for which the event is build
      * @param eventName the event for which this handler is created
-     * @param jsSnippet the javascript code
+     * @param jsSnippet the JavaScript code
      */
     public EventHandler(final DomNode node, final String eventName, final String jsSnippet) {
         node_ = node;

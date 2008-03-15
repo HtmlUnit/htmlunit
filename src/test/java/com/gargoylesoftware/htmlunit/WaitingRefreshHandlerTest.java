@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public final class WaitingRefreshHandlerTest extends WebTestCase {
 
     /**
-     * Trying to cause an interrupt on a javascript thread due to meta redirect navigation.
+     * Trying to cause an interrupt on a JavaScript thread due to meta redirect navigation.
      * @throws Exception if the test fails
      */
     @Test

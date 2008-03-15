@@ -42,7 +42,7 @@ import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
 /**
- * Stream handler for javascript urls
+ * Stream handler for JavaScript urls
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -50,7 +50,7 @@ import java.net.URLStreamHandler;
 public class Handler extends URLStreamHandler {
     /**
      * Return a new URLConnection for this url.
-     * @param url The javascript url.
+     * @param url The JavaScript url.
      * @return The connection.
      */
     @Override

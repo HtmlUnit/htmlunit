@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
- * The javascript object that represents a button (&lt;button type=...&gt;)
+ * The JavaScript object that represents a button (&lt;button type=...&gt;)
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -55,7 +55,7 @@ public class HTMLButtonElement extends FormField {
     }
 
     /**
-     * Javascript constructor.  This must be declared in every javascript file because
+     * JavaScript constructor.  This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {

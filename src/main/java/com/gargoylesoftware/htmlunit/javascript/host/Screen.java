@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A javascript object for a Screen. Combines properties from both Mozilla's DOM
+ * A JavaScript object for a Screen. Combines properties from both Mozilla's DOM
  * and IE's DOM.
  *
  * @version $Revision$
@@ -67,7 +67,7 @@ public class Screen extends SimpleScriptable {
     private int updateInterval_;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public Screen() {
         left_ = 0;

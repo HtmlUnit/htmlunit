@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLHeadingElement".
+ * The JavaScript object "HTMLHeadingElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

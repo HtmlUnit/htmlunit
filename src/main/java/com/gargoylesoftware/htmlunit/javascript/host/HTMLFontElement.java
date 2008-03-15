@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLFontElement".
+ * The JavaScript object "HTMLFontElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

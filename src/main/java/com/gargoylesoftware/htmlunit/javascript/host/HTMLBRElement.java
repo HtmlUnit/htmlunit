@@ -39,7 +39,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 
 /**
- * The javascript object "HTMLBRElement".
+ * The JavaScript object "HTMLBRElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour

@@ -102,17 +102,17 @@ public interface WebWindow {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Set the javascript object that corresponds to this element.  This is not guaranteed
-     * to be set even if there is a javascript object for this HTML element.
-     * @param scriptObject The javascript object.
+     * Set the JavaScript object that corresponds to this element.  This is not guaranteed
+     * to be set even if there is a JavaScript object for this HTML element.
+     * @param scriptObject The JavaScript object.
      */
     void setScriptObject(final Object scriptObject);
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Return the javascript object that corresponds to this element.
-     * @return The javascript object that corresponds to this element.
+     * Return the JavaScript object that corresponds to this element.
+     * @return The JavaScript object that corresponds to this element.
      */
     Object getScriptObject();
 

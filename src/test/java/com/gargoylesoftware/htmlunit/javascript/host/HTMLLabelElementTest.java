@@ -83,7 +83,7 @@ public class HTMLLabelElementTest extends WebTestCase {
     }
 
     /**
-     * Tests that clicking the label by javascript does not change 'htmlFor' attribute in FF!!
+     * Tests that clicking the label by JavaScript does not change 'htmlFor' attribute in FF!!
      *
      * @throws Exception if the test fails
      */
@@ -97,7 +97,7 @@ public class HTMLLabelElementTest extends WebTestCase {
     }
 
     /**
-     * @param changedByClick if 'label.click()' javascript causes the associated 'htmlFor' element to be changed.
+     * @param changedByClick if 'label.click()' JavaScript causes the associated 'htmlFor' element to be changed.
      */
     private void testHtmlFor_click(final BrowserVersion browserVersion, final boolean changedByClick) throws Exception {
         final String html

@@ -307,7 +307,7 @@
                 JavaScript: activate document.all for Firefox too.
             </action>
             <action type="add" dev="asashour">
-                Add DomElement with its javascript 'Element' prototype.
+                Add DomElement with its JavaScript 'Element' prototype.
             </action>
             <action type="fix" dev="asashour">
                 XPath: DomCharacterData is treated as text node.
@@ -343,7 +343,7 @@
                 HtmlTextInput: type() appends text to the value.
             </action>
             <action type="add" dev="mguillem" id="1716540">
-                JavaScript: cache parsed javascript responses.
+                JavaScript: cache parsed JavaScript responses.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript [internal]: removed ScriptEngine, use JavaScriptEngine directly.
@@ -1082,7 +1082,7 @@
             	JavaScript: fixed non executed scripts added wit document.write.
             </action>
             <action type="update" dev="mguillem" id="1689798">
-            	JavaScript: "this" should be the window and not the current node in javascript href of link and area as well as in javascript action of forms.
+            	JavaScript: "this" should be the window and not the current node in JavaScript href of link and area as well as in JavaScript action of forms.
             </action>
             <action type="update" dev="mguillem" id="1686412" due-to="Karel Kolman">
             	Fixed wrong parsing order of comment and text nodes.
@@ -1182,7 +1182,7 @@
                 Moved focus related methods from WebClient to HtmlPage and deprecated them on WebClient.
             </action>
             <action type="update" dev="dktaylor" id="1605997">
-                Fixed AREA elements can't handle javascript hrefs by
+                Fixed AREA elements can't handle JavaScript hrefs by
                 copying code from anchor element.
             </action>
             <action type="update" dev="dktaylor" id="1192854">
@@ -1320,14 +1320,14 @@
                 XPath: fixed wrong behavior with following axis.
             </action>
             <action type="update" dev="mguillem" id="1552746">
-                JavaScript: fixed double execution of external javascript files occurring when text contained
+                JavaScript: fixed double execution of external JavaScript files occurring when text contained
                 between &lt;script src=...&gt; and &lt;/script&gt;.
             </action>
             <action type="update" dev="mguillem" id="1525269" due-to="Andre Soereng">
                 JavaScript: allow to specify a maximal script execution time.
             </action>
             <action type="update" dev="mguillem">
-            	INCOMPATIBLE CHANGE: OK button is now simulated for javascript confirm calls when no ConfirmHandler is
+            	INCOMPATIBLE CHANGE: OK button is now simulated for JavaScript confirm calls when no ConfirmHandler is
             	installed (it was was the Cancel button previously).
             </action>
             <action type="update" dev="mguillem">
@@ -1468,7 +1468,7 @@
             </action>
             <action type="update" dev="yourgod">
                 Fixed a bug that could cause a ConcurrentModificationException when navigating away
-                from a page with javascript running in the background.
+                from a page with JavaScript running in the background.
             </action>
             <action type="update" dev="mguillem">
                 DefaultPageCreator now builds an XmlPage and not a TextPage for responses with content type "text/vnd.wap.wml".
@@ -1667,7 +1667,7 @@
                  JavaScript: img nodes can be accessed by id or name within a form.
             </action>
             <action type="update" dev="mguillem" id="1265410" due-to="Stefan Anzinger">
-                 Click on a javascript link loading a page containing frames now return
+                 Click on a JavaScript link loading a page containing frames now return
                  the main loaded page and not a frame anymore.
             </action>
             <action type="update" dev="mguillem">
@@ -1929,7 +1929,7 @@
                 Javascript: the type property of input elements can now be changed.
             </action>
             <action type="update" dev="mguillem" id="1145773" due-to="George Murnock">
-                Fixed bug occurring when submitting from javascript a form with a javascript action.
+                Fixed bug occurring when submitting from JavaScript a form with a JavaScript action.
             </action>
             <action type="update" dev="yourgod" id="1151184">
                 HtmlElement's getHtmlElementsByAttribute, getHtmlElementsByTagName, and 
@@ -2019,16 +2019,16 @@
                 <a href="http://jakarta.apache.org/commons/httpclient/3.0/exception-handling.html#Automatic%20exception%20recovery">Reference Link</a>
             </action>          
             <action type="update" dev="yourgod">
-                A failure when setting a location from javascript now throws an exception
+                A failure when setting a location from JavaScript now throws an exception
             </action>
             <action type="update" dev="yourgod" id="1104522" due-to="Daniel Gredler">
-                Added support for misc table methods in javascript
+                Added support for misc table methods in JavaScript
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: added dummy implementation of window.setInterval and window.clearInterval doing nothing.
             </action>
             <action type="update" dev="yourgod" id="976471" due-to="David D. Kilzer">
-                synchronized javascript execution for multi-threaded testing
+                synchronized JavaScript execution for multi-threaded testing
             </action>
             <action type="update" dev="yourgod" id="1088709">
                 parse application/xhtml+xml content type into HtmlPage
@@ -2094,7 +2094,7 @@
             </action>
             <action type="update" dev="mguillem">
                 INCOMPATIBLE CHANGE: HtmlFrame and HtmlInlineFrame don't implement WebWindow anymore but now contain a WebWindow accessible
-                by getEnclosedWindow(). Javascript handling of frames works better due to the distinction between frame element and contained window.
+                by getEnclosedWindow(). JavaScript handling of frames works better due to the distinction between frame element and contained window.
             </action>
             <action type="add" dev="mguillem">
                 Added HtmlPage.getFrameByName
@@ -2132,7 +2132,7 @@
                 Sometimes useful at conception time to understand what is "browsed".
             </action>
             <action type="update" dev="mguillem" due-to="Chris Eldredge" id="1090438">
-                Extended javascript event handler to most common events:  ondblclick, onmousedown, onmouseup,
+                Extended JavaScript event handler to most common events:  ondblclick, onmousedown, onmouseup,
                 onmousemove, onmouseover, onmouseout, onkeypress, onkeydown, onkeyup, onfocus, onblur.
             </action>
             <action type="update" dev="mguillem">
@@ -2367,7 +2367,7 @@
                 Updated server names for cvs access.
             </action>                 
             <action type="update" dev="mbowler" due-to="Chris Erskine" id="1032913">
-                Added support for the javascript document.images and also for getting and setting
+                Added support for the JavaScript document.images and also for getting and setting
                 the page title.
             </action>  
             <action type="update" dev="mbowler" due-to="Marc Guillemot" id="1006472">
@@ -2384,14 +2384,14 @@
                 tables if there isn't one already there.  Now HtmlUnit does that as well.
             </action>  
             <action type="update" dev="mbowler">
-                Fixed bug where calling document.body from javascript before the body tag had been 
+                Fixed bug where calling document.body from JavaScript before the body tag had been 
                 parsed was causing an exception.
             </action>  
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="930069">
-                Added support for javascript table.rows.
+                Added support for JavaScript table.rows.
             </action>  
             <action type="update" dev="mbowler" id="930531">
-                The common browsers always return uppercase values for the javascript nodeName property.
+                The common browsers always return uppercase values for the JavaScript nodeName property.
                 Now HtmlUnit does as well.
             </action>
             <action type="update" dev="mbowler" due-to="cerskine">
@@ -2462,7 +2462,7 @@
                 name.y attributes in the submitted request.
             </action>
             <action type="update" dev="mbowler" id="1008707">
-                If form.submit() is called from javascript then the forms onsubmit handler should
+                If form.submit() is called from JavaScript then the forms onsubmit handler should
                 not get executed.
             </action>
             <action type="update" dev="mbowler" due-to="David D. Kilzer" id="1061234">
@@ -2511,7 +2511,7 @@
                 Implemented JavaScript document.getElementsByName()
             </action>          
             <action type="update" dev="yourgod">
-                Added support for setting select.selectedIndex from javascript
+                Added support for setting select.selectedIndex from JavaScript
             </action>             
             <action type="update" dev="yourgod">
                 Changed HtmlSelect.fakeSelectedAttribute() to use an empty string
@@ -2546,11 +2546,11 @@
                 Updated HtmlRadioButtonInput.click() to select the clicked radio button
             </action>          
             <action type="update" dev="yourgod">
-                Fixed bug where the javascript value of a select list was always empty. 
+                Fixed bug where the JavaScript value of a select list was always empty. 
                 It should now correctly be the value of the selected option.
             </action>                 
             <action type="update" dev="yourgod">
-                Fixed bug where the javascript value of an option element was empty
+                Fixed bug where the JavaScript value of an option element was empty
                 if the value attribute was not defined. The value should now correctly be
                 the contents of the element.
             </action>         
@@ -2629,7 +2629,7 @@
             </action>            
             <action type="update" dev="mbowler">
                 Added initial support for refresh handlers.  They will be invoked from meta 
-                tag refreshes and response header refreshes but not currently from javascript 
+                tag refreshes and response header refreshes but not currently from JavaScript 
                 refreshes
             </action>
             <action type="update" dev="mbowler">
@@ -2653,7 +2653,7 @@
             <action type="update" dev="mbowler" due-to="Christian Sell">
                 INCOMPATIBLE CHANGE: There previously were three separate tree models
                 for any given page: 1) the HtmlElement hierarchy 2) The xml DOM model and
-                3) the javascript element model.  Now the first two tree models have 
+                3) the JavaScript element model.  Now the first two tree models have 
                 been merged into one.
             </action>
             <action type="update" dev="mbowler">
@@ -2922,12 +2922,12 @@
                 Initial support for Maven
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug where checkboxes weren't getting properly mapped to the javascript
+                Fixed bug where checkboxes weren't getting properly mapped to the JavaScript
                 Checkbox object which resulted in incorrect behaviour.  Add some additional
                 tests to prevent this kind of problem happening again.
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug in the setup of javascript form variables which resulted in situations where
+                Fixed bug in the setup of JavaScript form variables which resulted in situations where
                 input elements may not show up in the form depending on what had happened during page
                 load.
             </action>
@@ -2954,13 +2954,13 @@
                 usage.
             </action>
             <action type="update" dev="mbowler" id="729266">
-                Fixed bug where the javascript textarea object was not properly getting and setting the 'value'.
+                Fixed bug where the JavaScript textarea object was not properly getting and setting the 'value'.
             </action>
             <action type="update" dev="mbowler" id="717021" due-to="XuefengHe">
                 Fixed bug where url expansion wasn't obeying the base element as defined in the html.
             </action>
             <action type="update" dev="mbowler" id="727718" due-to="jin kim">
-                Fixed bug where javascript form elements were not always being initialized correctly..
+                Fixed bug where JavaScript form elements were not always being initialized correctly..
             </action>
             <action type="update" dev="mbowler" id="732952" due-to="Matt Ho">
                 Fixed typo in two of the samples in the getting started document.
@@ -3042,7 +3042,7 @@
                 Added read-only support for Document.cookie.
             </action>
             <action type="add" dev="mbowler" id="675597">
-                Added support for the javascript method Window.setTimeout()
+                Added support for the JavaScript method Window.setTimeout()
             </action>
             <action type="update" dev="mbowler">
                 Upgraded the rhino engine to 1.5R4.1
@@ -3081,11 +3081,11 @@
                 been set by the server.
             </action>
             <action type="add" id="705951" dev="mbowler">
-                Added support for javascript Document.getElementsByTagName()
+                Added support for JavaScript Document.getElementsByTagName()
             </action>
             <action type="update" id="707750" due-to="Mabel Chow" dev="mbowler">
                 Fixed bug where document.all wasn't being initialized correctly until after the entire page had
-                loaded.  This meant that javascript that executed during page load would blow up when trying
+                loaded.  This meant that JavaScript that executed during page load would blow up when trying
                 to access document.all.
             </action>
             <action type="add" due-to="Teo Kian Lee" dev="mbowler">
@@ -3095,7 +3095,7 @@
                 Added support for document.all[index]
             </action>
             <action type="update" dev="mbowler">
-                Changed the javascript tagName attribute to return uppercase values according to spec
+                Changed the JavaScript tagName attribute to return uppercase values according to spec
             </action>
             <action type="update" dev="mbowler">
                 Updated configuration file with more functions/properties
@@ -3121,10 +3121,10 @@
                 Added method <javadoc>com.gargoylesoftware.htmlunit.html.HtmlButtonInput#click()</javadoc>
             </action>
             <action type="update" dev="mbowler">
-                Fixed a bug in javascript loading where external scripts were being loaded after the page was fully
+                Fixed a bug in JavaScript loading where external scripts were being loaded after the page was fully
                 parsed rather than as each &lt;script&gt; tag was being handled.  This resulted in situations where
-                javascript that was executed during the parsing of the page would not be able to access functions
-                declared in the external javascript files.
+                JavaScript that was executed during the parsing of the page would not be able to access functions
+                declared in the external JavaScript files.
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug in HtmlForm.getRadioButtonsByName() where it would not match elements with an
@@ -3155,13 +3155,13 @@
                 Upgraded xerces to 2.2.1
             </action>
             <action type="update" dev="mbowler">
-                Upgraded the rhino javascript engine to version 1.5b3
+                Upgraded the rhino JavaScript engine to version 1.5b3
             </action>
             <action type="add" dev="mbowler">
                 Added support for the Window.opener property
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug where javascript that was enclosed in html comment tags would blow up
+                Fixed bug where JavaScript that was enclosed in html comment tags would blow up
             </action>
             <action type="add" dev="mbowler">
                 Initial support for keyboard navigation
@@ -3177,18 +3177,18 @@
                 The click() method on buttons now do nothing if that element is disabled
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug where javascript Form.elements was not returning radio buttons
+                Fixed bug where JavaScript Form.elements was not returning radio buttons
             </action>
             <action type="update" dev="mbowler">
                 Refactored the interface between WebClient and WebConnection to make it easier to
                 add custom implementations of WebConnection.
             </action>
             <action type="add" dev="mbowler">
-                Added support for the Javascript Style object
+                Added support for the JavaScript Style object
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where comments on the same line of an opening html comment inside a script tag
-                were being treated as javascript rather than as comment
+                were being treated as JavaScript rather than as comment
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where clicking on a checkbox would submit the form.
@@ -3198,7 +3198,7 @@
                 current one.
             </action>
             <action type="add" dev="mbowler">
-                Added support for indexed properties in javascript forms
+                Added support for indexed properties in JavaScript forms
             </action>
             <action type="update" dev="mbowler">
                 Changes in the latest versions of commons-httpclient are reusing buffers that they
@@ -3223,20 +3223,20 @@
                 Added support for onchange handlers in input tags
             </action>
             <action type="add" dev="mbowler">
-                Added support for javascript document.referrer
+                Added support for JavaScript document.referrer
             </action>
             <action type="add" dev="mbowler">
-                Added support for javascript document.URL
+                Added support for JavaScript document.URL
             </action>
             <action type="add" dev="mbowler">
-                Added initial support for javascript document.write().  Calling document.write() to add content
+                Added initial support for JavaScript document.write().  Calling document.write() to add content
                 while the page is loading is working.  Using it to write to a different frame is not.
             </action>
         </release>
 
         <release version="1.1" date="November 25, 2002">
             <action type="update" dev="mbowler">
-                Fixed bug where loading of external javascript files would not follow redirects.
+                Fixed bug where loading of external JavaScript files would not follow redirects.
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where accessing radio buttons by name wasn't working correctly
@@ -3245,11 +3245,11 @@
                 Stubbed out Window.close()
             </action>
             <action type="update" dev="mbowler">
-                If there is only one radio button with a given name then javascript should be returning
+                If there is only one radio button with a given name then JavaScript should be returning
                 the radio button, not an array of buttons.  The code was always returning an array.
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug where the javascript Option.text was returning the wrong value
+                Fixed bug where the JavaScript Option.text was returning the wrong value
             </action>
         </release>
 
@@ -3271,10 +3271,10 @@
                 <javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>
             </action>
             <action type="update" dev="mbowler">
-                Removed the need for HiddenWebWindow - javascript files are now loaded via
+                Removed the need for HiddenWebWindow - JavaScript files are now loaded via
                 <javadoc>com.gargoylesoftware.htmlunit.WebClient#loadWebResponse(java.net.URL, com.gargoylesoftware.htmlunit.SubmitMethod, java.util.List)</javadoc>.
                 This should fix an intermittent bug where an UnsupportedOperationException was being called from
-                the HiddenWebWindow if a javascript file was returned with a content type of "text/html"
+                the HiddenWebWindow if a JavaScript file was returned with a content type of "text/html"
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where javascript:option.getValue() was returning the text, not the value
@@ -3312,7 +3312,7 @@
                 same name as a predefined property, the input wins.
             </action>
             <action type="add" dev="mbowler">
-                Added support for the javascript method Window.confirm()
+                Added support for the JavaScript method Window.confirm()
             </action>
             <action type="add" dev="mbowler">
                 New interface <javadoc>com.gargoylesoftware.htmlunit.ConfirmHandler</javadoc>
@@ -3322,7 +3322,7 @@
                 and <javadoc>com.gargoylesoftware.htmlunit.WebClient#getConfirmHandler()</javadoc>
             </action>
             <action type="add" dev="mbowler">
-                Added support for the javascript method Window.prompt()
+                Added support for the JavaScript method Window.prompt()
             </action>
             <action type="add" dev="mbowler">
                 New interface <javadoc>com.gargoylesoftware.htmlunit.PromptHandler</javadoc>
@@ -3341,7 +3341,7 @@
                 have body tags
             </action>
             <action type="add" dev="mbowler">
-                Added support for javascript urls in Frame and IFrame src tags
+                Added support for JavaScript urls in Frame and IFrame src tags
             </action>
             <action type="update" dev="mbowler">
                 Improved some error messages during initialization
@@ -3351,7 +3351,7 @@
             </action>
             <action type="add" dev="mbowler">
                 Added protocol package for url protocols and added protocol/javascript package for
-                code that supports javascript urls
+                code that supports JavaScript urls
             </action>
             <action type="update" dev="mbowler">
                 Removed deprecated method WebClient.setBrowserVersion(BrowserVersion).  No replacement
@@ -3374,7 +3374,7 @@
                 to overwrite the existing page in the window
             </action>
             <action type="update" dev="mbowler">
-                Fixed bug where a redirect called from javascript in the page load would not replace
+                Fixed bug where a redirect called from JavaScript in the page load would not replace
                 the page.
             </action>
         </release>
@@ -3400,11 +3400,11 @@
             </action>
             <action type="update" dev="mbowler">
                 Changed initialization order in HtmlPage so that the enclosing window
-                is initialized before the javascript is run
+                is initialized before the JavaScript is run
             </action>
             <action type="update" dev="mbowler">
                 BEHAVIOUR CHANGE: WebClients may no longer change browser versions after creation.
-                This is required because some of the javascript bits initialize differently
+                This is required because some of the JavaScript bits initialize differently
                 depending on which browser is in use.  If we allowed the browser version to
                 change then behaviour would be very unpredictable.
             </action>
@@ -3521,7 +3521,7 @@
                 functions to learn about their objects will have to be determined.
             </action>
             <action type="add" dev="mbowler">
-                Added a javascript style object
+                Added a JavaScript style object
             </action>
             <action type="add" dev="mbowler">
                 Added new method HtmlElement.isAttributeDefined()
@@ -3539,16 +3539,16 @@
                 Started writing the table tutorial - still needs a lot of work
             </action>
             <action type="add" dev="mbowler">
-                Added support for the javascript function Form.submit()
+                Added support for the JavaScript function Form.submit()
             </action>
             <action type="update" dev="mbowler">
                 Fixed bug where javascript:document.forms[formName] was blowing up
             </action>
             <action type="update" dev="mbowler">
-                Changed logic behind anchor onClick() handler to abort the click if javascript returns false
+                Changed logic behind anchor onClick() handler to abort the click if JavaScript returns false
             </action>
             <action type="update" dev="mbowler">
-                Changed logic behind form onSubmit() handler to abort the submit if javascript returns false
+                Changed logic behind form onSubmit() handler to abort the submit if JavaScript returns false
             </action>
             <action type="update" dev="mbowler">
                 Fixed WebConnection so that it now passes the query string through on post requests
@@ -3580,10 +3580,10 @@
                 New class WebWindowNotFoundException
             </action>
             <action type="update" dev="mbowler">
-                When checking to see if a script is javascript we previously assumed that the
+                When checking to see if a script is JavaScript we previously assumed that the
                 script was not and then looked for proof that it was.  This gives us behaviour
                 that is different from browsers in some situations.  The logic has been
-                changed so that now it assumed that any script IS javascript unless there
+                changed so that now it assumed that any script IS JavaScript unless there
                 is proof otherwise.
             </action>
             <action type="add" dev="mbowler">
@@ -3601,7 +3601,7 @@
                 will be removed before the final release of 1.1
             </action>
             <action type="add" dev="mbowler">
-                Added support for the javascript properties: Select.options, Select.selectedIndex,
+                Added support for the JavaScript properties: Select.options, Select.selectedIndex,
                 Select.length and Option.value
             </action>
         </release>
@@ -3627,10 +3627,10 @@
                 Added method on WebResponse to access the response headers
             </action>
             <action type="add" dev="mbowler">
-                Many new javascript objects - this will be transparent to users of HtmlUnit
+                Many new JavaScript objects - this will be transparent to users of HtmlUnit
             </action>
             <action type="update" dev="mbowler">
-                Lots of refactoring in the javascript portion
+                Lots of refactoring in the JavaScript portion
             </action>
             <action type="update" dev="mbowler">
                 Fixed a NullPointerException if the server doesn't return a content-type header
@@ -3667,13 +3667,13 @@
                 Mike J Bresnahan for tracking this one right into the JTidy source.
             </action>
             <action type="add" dev="mbowler">
-                HtmlAnchor now supports javascript urls and onClick handlers
+                HtmlAnchor now supports JavaScript urls and onClick handlers
             </action>
             <action type="add" dev="mbowler">
                 Ability to set the emulated browser via WebClient.setBrowserVersion(BrowserVersion)
             </action>
             <action type="add" dev="mbowler">
-                Stubbed out a bunch of javascript methods that are used by the popular websites.
+                Stubbed out a bunch of JavaScript methods that are used by the popular websites.
                 Each stubbed out method will print a diagnostic message when it is called
                 to alert the user to the fact that it was called.  This is just a temporary
                 measure to ensure that HtmlUnit doesn't blow up when hitting common sites.
@@ -3708,13 +3708,13 @@
                 Added HtmlPage.getTitle()
             </action>
             <action type="add" dev="mbowler">
-                Added javascript window.location="some url"
+                Added JavaScript window.location="some url"
             </action>
             <action type="add" dev="mbowler">
-                Stubbed out the javascript history object
+                Stubbed out the JavaScript history object
             </action>
             <action type="add" dev="mbowler">
-                Added support javascript urls in HtmlForm submission
+                Added support JavaScript urls in HtmlForm submission
             </action>
             <action type="add" dev="mbowler">
                 Added support for HtmlForm.onSubmit()
@@ -3730,7 +3730,7 @@
 
         <release version="1.1-pre1" date="July 2, 2002">
             <action type="add" dev="mbowler">
-                Added initial javascript support
+                Added initial JavaScript support
             </action>
             <action type="update" dev="mbowler">
                 Lots of bug fixes

@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
- * A javascript object for a document.navigator.plugins.
+ * A JavaScript object for a document.navigator.plugins.
  * @version $Revision$
  * @author Marc Guillemot
  *
@@ -48,7 +48,7 @@ public class PluginArray extends SimpleArray {
     private static final long serialVersionUID = -7794563255599220149L;
 
     /**
-     * Create an instance. Javascript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public PluginArray() {
         // nothing

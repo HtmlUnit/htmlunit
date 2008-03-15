@@ -47,7 +47,7 @@ import java.util.Set;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A container for all the javascript configuration information.
+ * A container for all the JavaScript configuration information.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -343,7 +343,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Gets the class of the Javascript host object
+     * Gets the class of the JavaScript host object
      * @return Returns the linkedClass.
      */
     public Class< ? extends SimpleScriptable> getLinkedClass() {

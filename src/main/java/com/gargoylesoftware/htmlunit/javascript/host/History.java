@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A javascript object for a Screen
+ * A JavaScript object for a Screen
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -51,7 +51,7 @@ public class History extends SimpleScriptable {
     private static final long serialVersionUID = -285158453206844475L;
 
     /**
-     * Create an instance.  Javascript objects must have a default constructor.
+     * Create an instance.  JavaScript objects must have a default constructor.
      */
     public History() { }
 
@@ -65,21 +65,21 @@ public class History extends SimpleScriptable {
     }
 
     /**
-     * javascript function "back".  Currently not implemented
+     * JavaScript function "back".  Currently not implemented
      */
     public void jsxFunction_back() {
         getLog().debug("javascript: history.back() not implemented yet");
     }
 
     /**
-     * javascript function "forward".  Currently not implemented
+     * JavaScript function "forward".  Currently not implemented
      */
     public void jsxFunction_forward() {
         getLog().debug("javascript: history.forward() not implemented yet");
     }
 
     /**
-     * javascript function "go".  Currently not implemented
+     * JavaScript function "go".  Currently not implemented
      * @param relativeUrl The relative url
      */
     public void jsxFunction_go(final String relativeUrl) {

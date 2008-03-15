@@ -82,7 +82,7 @@ import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 
 /**
- * The javascript object "HTMLElement" which is the base class for all HTML
+ * The JavaScript object "HTMLElement" which is the base class for all HTML
  * objects. This will typically wrap an instance of {@link HtmlElement}.
  *
  * @version $Revision$
@@ -179,7 +179,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set the DOM node that corresponds to this javascript object
+     * Set the DOM node that corresponds to this JavaScript object
      * @param domNode The DOM node
      */
     @Override
@@ -189,7 +189,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         style_ = new CSSStyleDeclaration(this);
 
         /**
-         * Convert javascript snippets defined in the attribute map to executable event handlers.
+         * Convert JavaScript snippets defined in the attribute map to executable event handlers.
          * Should be called only on construction.
          */
         final HtmlElement htmlElt = (HtmlElement) domNode;
@@ -1500,7 +1500,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Implement the scrollIntoView() javascript function but don't actually do
+     * Implement the scrollIntoView() JavaScript function but don't actually do
      * anything. The requirement
      * is just to prevent scripts that call that method from failing
      */
@@ -1601,7 +1601,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the HTML element that corresponds to this javascript object or throw an exception
+     * Return the HTML element that corresponds to this JavaScript object or throw an exception
      * if one cannot be found.
      * @return The HTML element
      * @exception IllegalStateException If the HTML element could not be found.
@@ -1611,7 +1611,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the HTML element that corresponds to this javascript object
+     * Return the HTML element that corresponds to this JavaScript object
      * or null if an element hasn't been set.
      * @return The HTML element or null
      */

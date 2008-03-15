@@ -52,8 +52,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
- * This is the host object that allows javascript to instantiate java objects via the ActiveXObject
- * constructor. This host object enables a person to emulate ActiveXObjects in javascript with java
+ * This is the host object that allows JavaScript to instantiate java objects via the ActiveXObject
+ * constructor. This host object enables a person to emulate ActiveXObjects in JavaScript with java
  * objects. See the <code>WebClient</code> class to see how ActiveXObject string parameter specifies
  * which java class is instantiated.
  *
@@ -78,7 +78,7 @@ public class ActiveXObject extends SimpleScriptable {
      * @param args The arguments to the ActiveXObject constructor
      * @param ctorObj The function object
      * @param inNewExpr Is new or not
-     * @return the java object to allow javascript to access
+     * @return the java object to allow JavaScript to access
      */
     public static Scriptable jsConstructor(
             final Context cx, final Object[] args, final Function ctorObj,
@@ -294,7 +294,7 @@ public class ActiveXObject extends SimpleScriptable {
 
     /**
      * Get the name of the host object class.
-     * @return the javascript class name
+     * @return the JavaScript class name
      */
     @Override
     public String getClassName() {
