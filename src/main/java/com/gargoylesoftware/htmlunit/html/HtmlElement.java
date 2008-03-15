@@ -708,7 +708,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
-     * @deprecated use {@link type(char, boolean, boolean, boolean)} instead
+     * @deprecated use {@link #type(char, boolean, boolean, boolean)} instead
      */
     public void keyDown(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
