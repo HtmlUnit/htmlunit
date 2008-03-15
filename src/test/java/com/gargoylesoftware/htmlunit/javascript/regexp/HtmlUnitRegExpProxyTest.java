@@ -42,6 +42,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -125,7 +126,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void needCustomFix() {
-        final Context ctx = Context.enter();
+        final Context ctx = ContextFactory.getGlobal().enterContext();
         final ScriptableObject topScope = ctx.initStandardObjects();
         
         topScope.put("str", topScope, str_);
@@ -227,7 +228,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
      */
     @Test
     public void matchFixNeeded() throws Exception {
-        final Context ctx = Context.enter();
+        final Context ctx = ContextFactory.getGlobal().enterContext();
         final ScriptableObject topScope = ctx.initStandardObjects();
         
         ctx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
