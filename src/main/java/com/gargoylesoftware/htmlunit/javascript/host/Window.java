@@ -435,7 +435,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Initialize the object.
-     * @param webWindow The web window containing the javascript.
+     * @param webWindow The web window containing the JavaScript.
      * @exception Exception If an error occurs.
      */
     public void initialize(final WebWindow webWindow) throws Exception {
@@ -470,7 +470,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Initialize the object.
-     * @param enclosedPage The page containing the javascript.
+     * @param enclosedPage The page containing the JavaScript.
      */
     public void initialize(final Page enclosedPage) {
         if (enclosedPage instanceof HtmlPage) {

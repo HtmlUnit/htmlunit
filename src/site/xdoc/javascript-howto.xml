@@ -10,7 +10,7 @@
     <body>
         <section name="Introduction">
             <p>
-                A frequent question we get is "how do I test my javascript?".  It
+                A frequent question we get is "how do I test my JavaScript?".  It
                 really isn't very different from testing the page itself so lets walk
                 through some examples.
             </p>
@@ -84,7 +84,7 @@ public void testDocumentWrite() throws Exception {
         
         <section name="Example: Watching for 'alerts'">
             <p>
-                Often you want to watch alerts triggered by javascript.
+                Often you want to watch alerts triggered by JavaScript.
             </p>
             <source><![CDATA[
 <html><head><title>Alert sample</title></head>

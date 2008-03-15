@@ -105,7 +105,7 @@ public class HtmlForm extends ClickableElement {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Submit this form to the appropriate server.  If submitElement is null then
-     * treat this as if it was called by javascript.  In this case, the onsubmit
+     * treat this as if it was called by JavaScript.  In this case, the onsubmit
      * handler will not get executed.
      *
      * @param submitElement The element that caused the submit to occur
@@ -211,7 +211,7 @@ public class HtmlForm extends ClickableElement {
      * debugging.
      *
      * @param submitElement The element that would have been pressed to submit the
-     * form or null if the form was submitted by javascript.
+     * form or null if the form was submitted by JavaScript.
      * @return The list of {@link KeyValuePair}s.
      */
     private List<NameValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
@@ -254,7 +254,7 @@ public class HtmlForm extends ClickableElement {
      * Return a collection of elements that represent all the "submittable" elements in this form
      *
      * @param submitElement The element that would have been pressed to submit the
-     * form or null if the form was submitted by javascript.
+     * form or null if the form was submitted by JavaScript.
      * @return See above
      */
     Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
@@ -305,7 +305,7 @@ public class HtmlForm extends ClickableElement {
     /**
      * @param element The element that we are checking for isSubmittable
      * @param submitElement The element that would have been pressed to submit the
-     * form or null if the form was submitted by javascript.
+     * form or null if the form was submitted by JavaScript.
      * @return true if element is submittable
      */
     private boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {

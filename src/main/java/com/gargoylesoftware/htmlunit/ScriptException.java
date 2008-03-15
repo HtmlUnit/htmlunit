@@ -72,7 +72,7 @@ public class ScriptException extends RuntimeException {
      * @param throwable The exception that was thrown from the script engine.
      * @param scriptSourceCode The code that was being executed when this exception
      * was thrown. This may be null if the exception was not caused by execution
-     * of javascript.
+     * of JavaScript.
      */
     public ScriptException(final HtmlPage page, final Throwable throwable,
             final String scriptSourceCode) {

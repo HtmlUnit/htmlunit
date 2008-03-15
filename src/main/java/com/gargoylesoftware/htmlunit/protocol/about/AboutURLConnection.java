@@ -41,7 +41,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * A URLConnection for supporting "about:" urls
+ * A URLConnection for supporting "about:" URLs
  *
  * @version $Revision$
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>

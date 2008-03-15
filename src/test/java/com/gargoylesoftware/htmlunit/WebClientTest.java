@@ -319,7 +319,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Common utility for GET after POST redirection on same urls
+     * Common utility for GET after POST redirection on same URLs
      * @param statusCode The code to return from the initial request
      * @throws Exception if the test fails.
      */
@@ -1338,7 +1338,7 @@ public class WebClientTest extends WebTestCase {
         });
         client.setAlertHandler(new AlertHandler() {
             public void handleAlert(final Page page, final String message) {
-                fail("The pre processor did not remove the javascript");
+                fail("The pre processor did not remove the JavaScript");
             }
 
         });
@@ -1357,7 +1357,7 @@ public class WebClientTest extends WebTestCase {
         client.setAlertHandler(new AlertHandler() {
             public void handleAlert(final Page page, final String message) {
                 if (!message.equals(newAlertText)) {
-                    fail("The pre processor did not modify the javascript");
+                    fail("The pre processor did not modify the JavaScript");
                 }
             }
 
@@ -1724,7 +1724,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test that '+' is not encoded in urls
+     * Test that '+' is not encoded in URLs
      * @throws Exception if the test fails
      */
     @Test

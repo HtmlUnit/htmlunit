@@ -236,7 +236,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Facility to test external form of urls. Comparing external form of urls is
+     * Facility to test external form of urls. Comparing external form of URLs is
      * really faster than URL.equals() as the host doesn't need to be resolved.
      * @param expectedUrl the expected URL
      * @param actualUrl the URL to test
@@ -255,7 +255,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Facility to test external form of urls. Comparing external form of urls is
+     * Facility to test external form of urls. Comparing external form of URLs is
      * really faster than URL.equals() as the host doesn't need to be resolved.
      * @param message the message to display if assertion fails
      * @param expectedUrl the string representation of the expected URL

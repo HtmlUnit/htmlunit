@@ -42,7 +42,7 @@ import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
 /**
- * Stream handler for "about:" urls
+ * Stream handler for "about:" URLs
  *
  * @version $Revision$
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>

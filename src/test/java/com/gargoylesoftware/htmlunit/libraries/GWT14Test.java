@@ -465,7 +465,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * Test javascript: 'new Date().getTimezoneOffset()' compared to java.text.SimpleDateFormat.format().
+     * Test JavaScript: 'new Date().getTimezoneOffset()' compared to java.text.SimpleDateFormat.format().
      *
      * @throws Exception if the test fails
      */

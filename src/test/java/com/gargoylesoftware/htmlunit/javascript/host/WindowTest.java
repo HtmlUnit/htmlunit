@@ -2405,7 +2405,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Added test for [ 1727599 ] Bad context in evaluation of the javascript.
+     * Added test for [ 1727599 ] Bad context in evaluation of the JavaScript.
      * @throws Exception If the test fails
      */
     @Test

@@ -1410,13 +1410,13 @@ public class WebClient implements Serializable {
             final String charset) {
         if (!(webWindow instanceof FrameWindow)) {
             throw new IllegalArgumentException(
-                "javascript urls can only be used to load content into frames and iframes");
+                "JavaScript URLs can only be used to load content into frames and iframes");
         }
 
         final FrameWindow frameWindow = (FrameWindow) webWindow;
         final HtmlPage enclosingPage = frameWindow.getEnclosingPage();
         final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
-            url.toExternalForm(), "javascript url", 1);
+            url.toExternalForm(), "JavaScript URL", 1);
 
         final String contentString = scriptResult.getJavaScriptResult().toString();
         return new StringWebResponse(contentString, charset);

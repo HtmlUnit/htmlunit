@@ -859,7 +859,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * return the current page.
      * </p>
      * <p><b>Please note:</b> Although this method is public, it is not intended for
-     * general execution of javascript.  Users of HtmlUnit should interact with the pages
+     * general execution of JavaScript.  Users of HtmlUnit should interact with the pages
      * as a user would by clicking on buttons or links and having the JavaScript event
      * handlers execute as needed..
      * </p>
@@ -889,7 +889,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * return the current page.
      * </p>
      * <p><b>Please note:</b> Although this method is public, it is not intended for
-     * general execution of javascript.  Users of HtmlUnit should interact with the pages
+     * general execution of JavaScript.  Users of HtmlUnit should interact with the pages
      * as a user would by clicking on buttons or links and having the JavaScript event
      * handlers execute as needed..
      * </p>
@@ -1418,7 +1418,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Simulate pressing an access key.  This may change the focus, may click buttons and may invoke
-     * javascript.
+     * JavaScript.
      *
      * @param accessKey The key that will be pressed.
      * @return The element that has the focus after pressing this access key or null if no element
