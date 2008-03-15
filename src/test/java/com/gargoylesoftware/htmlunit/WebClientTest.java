@@ -865,7 +865,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test loading a file page with xml content. Regression test for bug 1113487.
+     * Test loading a file page with XML content. Regression test for bug 1113487.
      *
      * @throws Exception If something goes wrong.
      */

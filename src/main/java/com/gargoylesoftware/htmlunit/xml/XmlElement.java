@@ -290,7 +290,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
-     * and its attributes in xml format.
+     * and its attributes in XML format.
      * @param printWriter the writer to print in
      */
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {

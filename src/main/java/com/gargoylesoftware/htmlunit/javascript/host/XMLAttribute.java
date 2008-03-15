@@ -77,7 +77,7 @@ public class XMLAttribute extends SimpleScriptable {
     /**
      * Initializes this attribute.
      * @param name the name of the attribute.
-     * @param parent the parent xml element.
+     * @param parent the parent XML element.
      */
     public void init(final String name, final XmlElement parent) {
         name_ = name;

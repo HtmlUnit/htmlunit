@@ -214,7 +214,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 return doc;
             }
             catch (final Exception e) {
-                getLog().warn("Failed parsing xml document " + webResponse_.getUrl() + ": " + e.getMessage());
+                getLog().warn("Failed parsing XML document " + webResponse_.getUrl() + ": " + e.getMessage());
                 return null;
             }
         }

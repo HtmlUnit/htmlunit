@@ -1335,7 +1335,7 @@ public class Document extends EventNode {
      * Evaluates an XPath expression string and returns a result of the specified type if possible.
      * @param expression The XPath expression string to be parsed and evaluated.
      * @param contextNode The context node for the evaluation of this XPath expression.
-     * @param resolver The resolver permits translation of all prefixes, including the xml namespace prefix,
+     * @param resolver The resolver permits translation of all prefixes, including the XML namespace prefix,
      *        within the XPath expression into appropriate namespace URIs.
      * @param type If a specific type is specified, then the result will be returned as the corresponding type.
      * @param result The result object which may be reused and returned by this method.

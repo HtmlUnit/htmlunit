@@ -409,7 +409,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @param value The value to search by
      * @return See above
-     * @exception ElementNotFoundException If a particular xml element could not be found in the DOM model
+     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     public HtmlOption getOptionByValue(final String value)
         throws ElementNotFoundException {

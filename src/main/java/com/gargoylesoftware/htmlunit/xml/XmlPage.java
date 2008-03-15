@@ -68,7 +68,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 /**
  * A page that will be returned for response with content type "text/xml".
  * It doesn't implement itself {@link org.w3c.dom.Document} to allow to see the source of badly formed
- * xml responses.
+ * XML responses.
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -82,8 +82,8 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * Create an instance.
-     * A warning is logged if an exception is thrown while parsing the xml content
-     * (for instance when the content is not a valid xml and can't be parsed).
+     * A warning is logged if an exception is thrown while parsing the XML content
+     * (for instance when the content is not a valid XML and can't be parsed).
      *
      * @param webResponse The response from the server
      * @param enclosingWindow The window that holds the page.
@@ -95,8 +95,8 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * Create an instance.
-     * A warning is logged if an exception is thrown while parsing the xml content
-     * (for instance when the content is not a valid xml and can't be parsed).
+     * A warning is logged if an exception is thrown while parsing the XML content
+     * (for instance when the content is not a valid XML and can't be parsed).
      *
      * @param node The node to initialize this page with.
      * @param enclosingWindow The window that holds the page.
@@ -111,8 +111,8 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * Create an instance.
-     * A warning is logged if an exception is thrown while parsing the xml content
-     * (for instance when the content is not a valid xml and can't be parsed).
+     * A warning is logged if an exception is thrown while parsing the XML content
+     * (for instance when the content is not a valid XML and can't be parsed).
      *
      * @param webResponse The response from the server
      * @param enclosingWindow The window that holds the page.
@@ -136,13 +136,13 @@ public class XmlPage extends SgmlPage implements Document {
             }
         }
         catch (final SAXException e) {
-            getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
+            getLog().warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
             if (!ignoreSAXException) {
                 throw new IOException(e.getMessage());
             }
         }
         catch (final ParserConfigurationException e) {
-            getLog().warn("Failed parsing xml document " + webResponse.getUrl() + ": " + e.getMessage());
+            getLog().warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
         }
     }
 
@@ -156,7 +156,7 @@ public class XmlPage extends SgmlPage implements Document {
     }
 
     /**
-     * Gets the DOM representation of the xml content
+     * Gets the DOM representation of the XML content
      * @return <code>null</code> if the content couldn't be parsed.
      */
     public Document getXmlDocument() {

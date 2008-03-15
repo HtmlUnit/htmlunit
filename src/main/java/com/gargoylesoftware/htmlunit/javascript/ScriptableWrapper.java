@@ -54,7 +54,7 @@ import org.w3c.dom.NodeList;
  * Simple wrapper to make "normal" object scriptable according to specific configuration
  * and allowing use of index properties.
  * TODO: Configuration of the
- * properties and functions should occur from the xml configuration according to
+ * properties and functions should occur from the XML configuration according to
  * the browser to simulate.
  *
  * @version $Revision$
@@ -81,7 +81,7 @@ public class ScriptableWrapper extends ScriptableObject {
         javaObject_ = javaObject;
         setParentScope(scope);
 
-        // all these information should come from the xml js configuration file
+        // all these information should come from the XML js configuration file
         // just for a first time...
         if (NodeList.class.equals(staticType)
                 || NamedNodeMap.class.equals(staticType)) {

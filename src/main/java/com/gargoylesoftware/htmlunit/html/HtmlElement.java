@@ -825,7 +825,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
-     * and its attributes in xml format.
+     * and its attributes in XML format.
      * @param printWriter the writer to print in
      */
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
@@ -892,7 +892,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param attributeName The name of the attribute
      * @param attributeValue The value of the attribute
      * @return The HtmlElement
-     * @exception ElementNotFoundException If a particular xml element could not be found in the DOM model
+     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     public final HtmlElement getOneHtmlElementByAttribute(
             final String elementName,

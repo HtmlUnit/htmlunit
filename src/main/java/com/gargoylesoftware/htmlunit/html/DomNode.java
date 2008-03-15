@@ -713,10 +713,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Return a string representation of the xml document from this element and all
+     * Return a string representation of the XML document from this element and all
      * it's children (recursively).
      *
-     * @return The xml string.
+     * @return The XML string.
      */
     public String asXml() {
         final StringWriter stringWriter = new StringWriter();

@@ -69,7 +69,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
  *
- * Provides facility method to work with xml responses.
+ * Provides facility method to work with XML responses.
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -115,8 +115,8 @@ public final class XmlUtil {
 
     /**
      * Builds a document from the content of the webresponse.
-     * A warning is logged if an exception is thrown while parsing the xml content
-     * (for instance when the content is not a valid xml and can't be parsed).
+     * A warning is logged if an exception is thrown while parsing the XML content
+     * (for instance when the content is not a valid XML and can't be parsed).
      *
      * @param webResponse The response from the server
      * @throws IOException If the page could not be created

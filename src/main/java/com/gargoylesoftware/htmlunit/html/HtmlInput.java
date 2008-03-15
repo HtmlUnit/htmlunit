@@ -451,7 +451,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @param y The y coordinate of the pointing device at the time of clicking
      * @return The page that is loaded after the click has taken place.
      * @exception IOException If an io error occurs
-     * @exception ElementNotFoundException If a particular xml element could not be found in the DOM model
+     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     public Page click(final int x, final int y)
         throws
