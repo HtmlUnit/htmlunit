@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
@@ -55,7 +56,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class CodeStyleTest extends WebTestCase {
+public class CodeStyleTest {
 
     /**
      * @throws Exception if the test fails
@@ -166,6 +167,7 @@ public class CodeStyleTest extends WebTestCase {
     private boolean isSvnPropertiesDefined(final File file) throws IOException {
         boolean eolStyleDefined = false;
         boolean keywordsDefined = false;
+        System.err.println(file.exists() + " for " + file.getAbsolutePath());
         if (file.exists()) {
             final List<String> lines = getLines(file);
             for (int i = 0; i + 2 < lines.size(); i++) {
