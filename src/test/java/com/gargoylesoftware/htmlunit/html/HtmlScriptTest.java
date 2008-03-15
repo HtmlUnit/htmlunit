@@ -67,7 +67,6 @@ public class HtmlScriptTest extends WebTestCase {
      * results in a {@link FailingHttpStatusCodeException}, depending on how the client has been
      * configured.
      *
-     * @see HtmlPage#loadJavaScriptFromUrl(java.net.URL, String)
      * @see WebClient#isThrowExceptionOnFailingStatusCode()
      * @throws Exception if an error occurs
      */
