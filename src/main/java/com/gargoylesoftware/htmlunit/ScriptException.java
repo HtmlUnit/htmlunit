@@ -91,7 +91,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Create an instance
+     * Creates an instance.
      * @param page the page in which the script causing this exception was executed
      * @param throwable The exception that was thrown from the script engine.
      */
@@ -100,7 +100,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Print the stack trace to System.out. If this exception contains another
+     * Prints the stack trace to System.out. If this exception contains another
      * exception then the stack traces for both will be printed.
      */
     @Override
@@ -109,7 +109,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Print the stack trace. If this exception contains another exception then
+     * Prints the stack trace. If this exception contains another exception then
      * the stack traces for both will be printed.
      *
      * @param writer Where the stack trace will be written
@@ -120,7 +120,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Print the stack trace. If this exception contains another exception then
+     * Prints the stack trace. If this exception contains another exception then
      * the stack traces for both will be printed.
      *
      * @param stream Where the stack trace will be written
@@ -201,8 +201,8 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Return the source code line that failed
-     * @return the source code line that failed
+     * Returns the source code line that failed.
+     * @return the source code line that failed.
      */
     public String getScriptSourceCode() {
         return scriptSourceCode_;
@@ -238,8 +238,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Return the line number of the source that was executing at the time of the
-     * exception.
+     * Return the line number of the source that was executing at the time of the exception.
      *
      * @return The line number or -1 if the exception was not thrown due to the
      * execution of a script.
@@ -264,7 +263,7 @@ public class ScriptException extends RuntimeException {
     }
     
     /**
-     * Print the script stack trace.
+     * Prints the script stack trace.
      * This represents only the script calls.
      * @param writer where the stack trace will be written
      */

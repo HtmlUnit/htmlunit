@@ -64,7 +64,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
 
     private final ListOrderedMap nodes_ = new ListOrderedMap();
     /**
-     * Empty instance
+     * Empty instance.
      */
     public static final org.w3c.dom.NamedNodeMap EMPTY_NODE_MAP = new NamedNodeMap();
 

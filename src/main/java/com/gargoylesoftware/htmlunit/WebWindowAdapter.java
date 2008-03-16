@@ -46,13 +46,13 @@ package com.gargoylesoftware.htmlunit;
 public class WebWindowAdapter implements WebWindowListener {
 
     /**
-     * Create an instance
+     * Creates an instance.
      */
     public WebWindowAdapter() {
     }
 
     /**
-     * A web window has been opened
+     * A web window has been opened.
      *
      * @param event The event
      */
@@ -60,7 +60,7 @@ public class WebWindowAdapter implements WebWindowListener {
     }
 
     /**
-     * The contents of a web window has been changed
+     * The contents of a web window has been changed.
      *
      * @param event The event
      */
@@ -68,7 +68,7 @@ public class WebWindowAdapter implements WebWindowListener {
     }
 
     /**
-     * A web window has been closed
+     * A web window has been closed.
      *
      * @param event The event
      */

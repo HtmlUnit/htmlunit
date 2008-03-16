@@ -56,7 +56,7 @@ public class PluginConfiguration {
     private Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<PluginConfiguration.MimeType>();
     
     /**
-     * Holds information about a single mime type associated with a plugin
+     * Holds information about a single mime type associated with a plugin.
      */
     public static class MimeType {
         private String description_;
@@ -64,7 +64,7 @@ public class PluginConfiguration {
         private String type_;
 
         /**
-         * C'tor initializing fields
+         * Constructor initializing fields.
          * @param type the mime type
          * @param description the type description
          * @param suffixes the file suffixes
@@ -76,7 +76,7 @@ public class PluginConfiguration {
         }
 
         /**
-         * Return the mime type's description
+         * Returns the mime type's description.
          * @return the description.
          */
         public String getDescription() {
@@ -84,7 +84,7 @@ public class PluginConfiguration {
         }
 
         /**
-         * Return the mime type's suffixes
+         * Returns the mime type's suffixes.
          * @return the suffixes.
          */
         public String getSuffixes() {
@@ -92,7 +92,7 @@ public class PluginConfiguration {
         }
 
         /**
-         * Return the mime type
+         * Returns the mime type.
          * @return the type.
          */
         public String getType() {
@@ -109,7 +109,7 @@ public class PluginConfiguration {
     }
 
     /**
-     * C'tor initializing fields
+     * Constructor initializing fields.
      * @param name the plugin name
      * @param description the plugin description
      * @param filename the plugin filename
@@ -121,7 +121,7 @@ public class PluginConfiguration {
     }
 
     /**
-     * Gets the plugin's description
+     * Gets the plugin's description.
      * @return the description.
      */
     public String getDescription() {
@@ -129,7 +129,7 @@ public class PluginConfiguration {
     }
 
     /**
-     * Gets the plugin's file name
+     * Gets the plugin's file name.
      * @return the file name.
      */
     public String getFilename() {
@@ -137,7 +137,7 @@ public class PluginConfiguration {
     }
 
     /**
-     * Gets the plugin's name
+     * Gets the plugin's name.
      * @return the name.
      */
     public String getName() {
@@ -145,7 +145,7 @@ public class PluginConfiguration {
     }
     
     /**
-     * Gets the associated mime types
+     * Gets the associated mime types.
      * @return a set of {@link MimeType}
      */
     public Set<PluginConfiguration.MimeType> getMimeTypes() {

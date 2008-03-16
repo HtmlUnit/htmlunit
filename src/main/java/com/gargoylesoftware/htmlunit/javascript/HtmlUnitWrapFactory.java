@@ -52,7 +52,7 @@ import org.w3c.dom.NodeList;
 public class HtmlUnitWrapFactory extends WrapFactory {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public HtmlUnitWrapFactory() {
         setJavaPrimitiveWrap(false); // we don't want to wrap String and Co

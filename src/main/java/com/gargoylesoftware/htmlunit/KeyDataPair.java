@@ -89,7 +89,7 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * Gets the charset encoding for this file upload
+     * Gets the charset encoding for this file upload.
      * @return the charset
      */
     public String getCharset() {
@@ -97,7 +97,7 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * Gets the content type for this file upload
+     * Gets the content type for this file upload.
      * @return the content type
      */
     public String getContentType() {

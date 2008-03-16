@@ -67,7 +67,7 @@ public class WebResponseData implements Serializable {
     private List<NameValuePair> responseHeaders_;
 
     /**
-     * Construct with a raw byte[] (mostly for testing)
+     * Constructs with a raw byte[] (mostly for testing).
      *
      * @param body              Body of this response
      * @param statusCode        Status code from the server
@@ -89,7 +89,7 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * Construct with a data stream to minimize copying of the entire body.
+     * Constructs with a data stream to minimize copying of the entire body.
      *
      * @param bodyStream        Stream of this response's body
      * @param statusCode        Status code from the server
@@ -107,7 +107,7 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * Construct without data stream for subclasses that override getBody()
+     * Constructs without data stream for subclasses that override getBody().
      *
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
@@ -151,7 +151,7 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * Return the response body.
+     * Returns the response body.
      * @return response body.
      */
     public byte[] getBody() {

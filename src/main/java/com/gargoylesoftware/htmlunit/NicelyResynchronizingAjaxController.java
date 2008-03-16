@@ -63,14 +63,14 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
     private final WeakReference<Thread> originatedThread_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      */
     public NicelyResynchronizingAjaxController() {
         originatedThread_ = new WeakReference<Thread>(Thread.currentThread());
     }
 
     /**
-     * Return the log
+     * Returns the log.
      * @return The log.
      */
     protected final Log getLog() {

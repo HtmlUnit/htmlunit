@@ -38,14 +38,14 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A listener for WebWindowEvent's
+ * A listener for WebWindowEvent's.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface WebWindowListener {
     /**
-     * A web window has been opened
+     * A web window has been opened.
      *
      * @param event The event (the oldPage and newPage properties will be <code>null</code>
      * because the event is generated when the window is opened before the content is loaded)
@@ -53,7 +53,7 @@ public interface WebWindowListener {
     void webWindowOpened(final WebWindowEvent event);
 
     /**
-     * The contents of a web window has been changed
+     * The contents of a web window has been changed.
      *
      * @param event The event
      */

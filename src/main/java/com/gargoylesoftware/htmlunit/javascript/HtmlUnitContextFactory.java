@@ -66,7 +66,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private static final ThreadLocal<BrowserVersion> browserVersion_ = new ThreadLocal<BrowserVersion>();
 
     /**
-     * Create a new instance of HtmlUnitContextFactory
+     * Creates a new instance of HtmlUnitContextFactory.
      *
      * @param log the log that the error reporter should use
      */

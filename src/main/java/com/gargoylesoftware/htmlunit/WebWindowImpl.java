@@ -71,7 +71,7 @@ public abstract class WebWindowImpl implements WebWindow {
     }
 
     /**
-     * Creates a window and associates it with the client
+     * Creates a window and associates it with the client.
      *
      * @param webClient The web client that "owns" this window.
      */

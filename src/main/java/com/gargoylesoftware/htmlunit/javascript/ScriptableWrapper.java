@@ -170,7 +170,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * Invokes the method on the wrapped object
+     * Invokes the method on the wrapped object.
      * @param method the method to invoke
      * @return the invocation result
      */
@@ -179,7 +179,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * Invokes the method on the wrapped object
+     * Invokes the method on the wrapped object.
      * @param method the method to invoke
      * @param args the argument to pass to the method
      * @return the invocation result
@@ -227,7 +227,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
 
     /**
-     * To use as "toString" function in JavaScript
+     * To use as "toString" function in JavaScript.
      * @return the string representation
      */
     public String jsToString() {
@@ -244,7 +244,7 @@ public class ScriptableWrapper extends ScriptableObject {
     }
     
     /**
-     * Gets the java object made availabe to JavaScript through this wrapper
+     * Gets the java object made availabe to JavaScript through this wrapper.
      * @return the wrapped object
      */
     public Object getWrappedObject() {

@@ -52,17 +52,17 @@ public final class WebWindowEvent extends EventObject {
     private final Page newPage_;
     private final int type_;
 
-    /** A window has opened */
+    /** A window has opened. */
     public static final int OPEN = 1;
 
-    /** A window has closed */
+    /** A window has closed. */
     public static final int CLOSE = 2;
 
-    /** The content of the window has changed */
+    /** The content of the window has changed. */
     public static final int CHANGE = 3;
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param webWindow The WebWindow that caused the event
      * @param type The type - one of {@link #OPEN}, {@link #CLOSE} or {@link #CHANGE}
@@ -92,7 +92,7 @@ public final class WebWindowEvent extends EventObject {
     }
 
     /**
-     * Return true if the two objects are equal
+     * Returns true if the two objects are equal.
      *
      * @param object The object to compare against.
      * @return true if the two objects are equal.
@@ -110,7 +110,7 @@ public final class WebWindowEvent extends EventObject {
     }
 
     /**
-     * Return the hash code for this object.
+     * Returns the hash code for this object.
      * @return the hash code for this object.
      */
     @Override
@@ -119,7 +119,7 @@ public final class WebWindowEvent extends EventObject {
     }
 
     /**
-     * Return the oldPage
+     * Returns the oldPage.
      * @return the page or null if the window has no page
      */
     public Page getOldPage() {
@@ -127,7 +127,7 @@ public final class WebWindowEvent extends EventObject {
     }
 
     /**
-     * Return the oldPage
+     * Returns the oldPage.
      * @return the page or null if the window has no page
      */
     public Page getNewPage() {
@@ -135,7 +135,7 @@ public final class WebWindowEvent extends EventObject {
     }
 
     /**
-     * Return the web window that fired the event.
+     * Returns the web window that fired the event.
      * @return The web window that fired the event.
      */
     public WebWindow getWebWindow() {
@@ -159,7 +159,7 @@ public final class WebWindowEvent extends EventObject {
     }
 
     /**
-     * Return a string representation of this event
+     * Returns a string representation of this event.
      * @return A string representation of this event.
      */
     @Override

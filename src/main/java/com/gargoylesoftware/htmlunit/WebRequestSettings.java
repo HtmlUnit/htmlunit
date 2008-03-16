@@ -79,7 +79,7 @@ public class WebRequestSettings {
 
     /**
      * Instantiate a {@link WebRequestSettings} for the given URL using the proxy configuration from the original
-     * request
+     * request.
      * @param originalRequest the original request
      * @param target The URL for this request
      */
@@ -252,7 +252,7 @@ public class WebRequestSettings {
     }
 
     /**
-     * Return a string representation of this object
+     * Returns a string representation of this object.
      * @return See above
      */
     @Override
@@ -274,7 +274,7 @@ public class WebRequestSettings {
     }
 
     /**
-     * Gets the charset to use to perform the request
+     * Gets the charset to use to perform the request.
      * @return the charset.
      */
     public String getCharset() {
@@ -282,7 +282,7 @@ public class WebRequestSettings {
     }
 
     /**
-     * Sets the charset. Default value is {@link TextUtil#DEFAULT_CHARSET}
+     * Sets the charset. Default value is {@link TextUtil#DEFAULT_CHARSET}.
      * @param charset the new charset
      */
     public void setCharset(final String charset) {

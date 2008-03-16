@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 
 /**
- * An abstract page that represents some content returned from a server
+ * An abstract page that represents some content returned from a server.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

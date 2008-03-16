@@ -164,7 +164,7 @@ public class WebClient implements Serializable {
         = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
 
     /**
-     * URL for "about:blank"
+     * URL for "about:blank".
      */
     public static final URL URL_ABOUT_BLANK;
     static {
@@ -220,7 +220,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Create an instance that will use the specified {@link BrowserVersion} and proxy server
+     * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
      * @param browserVersion The browser version to simulate
      * @param proxyHost The server that will act as proxy
      * @param proxyPort The port to use on the proxy server
@@ -385,7 +385,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenient method to build an URL and load it into the current WebWindow
+     * Convenient method to build an URL and load it into the current WebWindow.
      * @param url The URL of the new content.
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
@@ -398,7 +398,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenient method to load a URL into the current WebWindow
+     * Convenient method to load a URL into the current WebWindow.
      * @param url The URL of the new content.
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
@@ -410,7 +410,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenient method to load a web request into the current WebWindow
+     * Convenient method to load a web request into the current WebWindow.
      * @param request The request parameters
      * @return The new page.
      * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
@@ -544,7 +544,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set a header which will be sent up on EVERY request from this client.
+     * Sets a header which will be sent up on EVERY request from this client.
      *
      * @param name The name of the header
      * @param value The value of the header
@@ -554,7 +554,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Remove a header
+     * Removes a header.
      *
      * @param name Name of the header
      * @see #addRequestHeader
@@ -795,7 +795,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the status handler for this webclient.
+     * Returns the status handler for this webclient.
      * @return the status handler or null if one hasn't been set.
      */
     public StatusHandler getStatusHandler() {
@@ -803,7 +803,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the current browser version
+     * Returns the current browser version.
      * @return the current browser version.
      */
     public BrowserVersion getBrowserVersion() {
@@ -811,7 +811,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the "current" window for this client.  This is the window that will be used
+     * Returns the "current" window for this client.  This is the window that will be used
      * when getPage() is called without specifying a window.
      * @return The current window.
      */
@@ -820,7 +820,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the current window for this client.  This is the window that will be used when
+     * Sets the current window for this client.  This is the window that will be used when
      * getPage() is called without specifying a window.
      * @param window The new window.
      */
@@ -830,7 +830,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the "first" window for this client.  This is the first window
+     * Returns the "first" window for this client.  This is the first window
      * opened since pushClearFirstWindow() was last called.
      * @return The first window.
      */
@@ -841,7 +841,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Clear the first window for this client.
+     * Clears the first window for this client.
      */
     public void pushClearFirstWindow() {
         synchronized (firstWindowStack_) {
@@ -850,7 +850,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Add a listener for WebWindowEvent's.  All events from all windows associated with this
+     * Adds a listener for WebWindowEvent's.  All events from all windows associated with this
      * client will be sent to the specified listener.
      * @param listener A listener.
      */
@@ -860,7 +860,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Remove a listener for WebWindowEvent's.
+     * Removes a listener for WebWindowEvent's.
      * @param listener A listener.
      */
     public void removeWebWindowListener(final WebWindowListener listener) {
@@ -1139,7 +1139,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the log object for this web client
+     * Returns the log object for this web client.
      * @return The log object
      */
     protected final Log getLog() {
@@ -1423,7 +1423,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Loads a {@link WebResponse} from the server
+     * Loads a {@link WebResponse} from the server.
      * @param webRequestSettings settings to use when making the request
      * @throws IOException if an IO problem occurs
      * @return The WebResponse
@@ -1690,7 +1690,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the flag on the HtmlParse to ignore the content that is outside of the BODY
+     * Sets the flag on the HtmlParse to ignore the content that is outside of the BODY
      * and HTML tags.
      * @param ignoreOutsideContent The boolean flag to enable or disable the support of
      * content outside of the HTML and BODY tags
@@ -1700,7 +1700,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Get the state of the flag to ignore content outside the BODY and HTML tags
+     * Gets the state of the flag to ignore content outside the BODY and HTML tags.
      * @return - The current state
      */
     public static boolean getIgnoreOutsideContent() {
@@ -1708,7 +1708,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Gets the timeout value for the WebConnection
+     * Gets the timeout value for the WebConnection.
      *
      * @return The timeout value in milliseconds
      * @see WebClient#setTimeout(int)
@@ -1770,7 +1770,7 @@ public class WebClient implements Serializable {
     }
     
     /**
-     * Gets the current Ajax controller
+     * Gets the current Ajax controller.
      * @return the controller
      */
     public AjaxController getAjaxController() {
@@ -1778,7 +1778,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the current Ajax controller
+     * Sets the current Ajax controller.
      * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * @param newValue the controller
      */
@@ -1807,7 +1807,7 @@ public class WebClient implements Serializable {
 
 
     /**
-     * Gets the cache currently used
+     * Gets the cache currently used.
      * @return the cache (may not be null)
      */
     public Cache getCache() {
@@ -1815,7 +1815,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the cache to use
+     * Sets the cache to use.
      * @param cache the new cache (must not be <code>null</code>)
      */
     public void setCache(final Cache cache) {

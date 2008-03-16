@@ -45,7 +45,7 @@ import java.util.List;
 import org.apache.commons.httpclient.NameValuePair;
 
 /**
- * A response from a web server
+ * A response from a web server.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -54,35 +54,35 @@ import org.apache.commons.httpclient.NameValuePair;
  */
 public interface WebResponse {
     /**
-     * Return the status code that was returned by the server
+     * Returns the status code that was returned by the server.
      *
      * @return See above.
      */
     int getStatusCode();
 
     /**
-     * Return the status message that was returned from the server
+     * Returns the status message that was returned from the server.
      *
      * @return See above
      */
     String getStatusMessage();
 
     /**
-     * Return the content type returned from the server. Ie "text/html"
+     * Returns the content type returned from the server, i.e. "text/html".
      *
      * @return See above
      */
     String getContentType();
 
     /**
-     * Return the content from the server as a string
+     * Returns the content from the server as a string.
      *
      * @return See above
      */
     String getContentAsString();
 
     /**
-     * Return the content from the server as an input stream
+     * Returns the content from the server as an input stream.
      *
      * @return See above
      * @exception IOException If an IO problem occurs
@@ -91,27 +91,27 @@ public interface WebResponse {
         throws IOException;
 
     /**
-     * Return the URL that was used to load this page.
+     * Returns the URL that was used to load this page.
      *
      * @return The originating URL
      */
     URL getUrl();
 
     /**
-     * Return the method used for the request resulting into this response.
+     * Returns the method used for the request resulting into this response.
      * @return the method
      */
     SubmitMethod getRequestMethod();
 
     /**
-     * Return the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
+     * Returns the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
      *
      * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s.
      */
     List<NameValuePair> getResponseHeaders();
 
     /**
-     * Return the value of the specified header from this response.
+     * Returns the value of the specified header from this response.
      *
      * @param headerName The name of the header
      * @return The value of the specified header
@@ -119,19 +119,19 @@ public interface WebResponse {
     String getResponseHeaderValue(final String headerName);
 
     /**
-     * Return the time it took to load this web response in milliseconds.
+     * Returns the time it took to load this web response in milliseconds.
      * @return The load time.
      */
     long getLoadTimeInMilliSeconds();
 
     /**
-     * Return the content charset value.
+     * Returns the content charset value.
      * @return The charset value.
      */
     String getContentCharSet();
 
     /**
-     * Return the response body as byte array.
+     * Returns the response body as byte array.
      * @return response body.
      */
     byte[] getResponseBody();

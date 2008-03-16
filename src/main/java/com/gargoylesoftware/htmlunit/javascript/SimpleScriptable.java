@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A JavaScript object for a Location
+ * A JavaScript object for a Location.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -74,7 +74,7 @@ public class SimpleScriptable extends ScriptableObject {
     private DomNode domNode_;
 
     /**
-     * Get a named property from the object.
+     * Gets a named property from the object.
      * Normally HtmlUnit objects don't need to overwrite this method as properties are defined
      * on the prototypes from the XML configuration. In some cases where "content" of object
      * has priority compared to the properties consider using utility {@link #getWithPreemption(String)}.
@@ -110,8 +110,8 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the JavaScript class name
-     * @return The JavaScript class name
+     * Returns the JavaScript class name.
+     * @return The JavaScript class name.
      */
     @Override
     public String getClassName() {
@@ -125,7 +125,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the DOM node that corresponds to this JavaScript object or throw
+     * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
      * @return The DOM node
      * @exception IllegalStateException If the DOM node could not be found.
@@ -141,7 +141,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the DOM node that corresponds to this JavaScript object
+     * Returns the DOM node that corresponds to this JavaScript object
      * or null if a node hasn't been set.
      * @return The DOM node or null
      */
@@ -150,7 +150,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Set the DOM node that corresponds to this JavaScript object
+     * Sets the DOM node that corresponds to this JavaScript object.
      * @param domNode The DOM node
      */
     public void setDomNode(final DomNode domNode) {
@@ -158,7 +158,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Set the DOM node that corresponds to this JavaScript object
+     * Sets the DOM node that corresponds to this JavaScript object.
      * @param domNode The DOM node
      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
      */
@@ -171,7 +171,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Set the HTML element that corresponds to this JavaScript object
+     * Sets the HTML element that corresponds to this JavaScript object.
      * @param htmlElement The HTML element
      */
     public void setHtmlElement(final HtmlElement htmlElement) {
@@ -179,7 +179,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the log that is being used for all scripting objects
+     * Returns the log that is being used for all scripting objects.
      * @return The log.
      */
     protected final Log getLog() {
@@ -187,7 +187,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the JavaScript object that corresponds to the specified object.
+     * Returns the JavaScript object that corresponds to the specified object.
      * New JavaScript objects will be created as needed.  If a JavaScript object
      * cannot be created for a domNode then NOT_FOUND will be returned.
      *
@@ -211,7 +211,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Builds a new the JavaScript object that corresponds to the specified object.<br>
+     * Builds a new the JavaScript object that corresponds to the specified object.
      * @param domNode the DOM node for which a JS object should be created
      * @return The JavaScript object
      */
@@ -256,7 +256,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Get the prototype object for the given host class
+     * Gets the prototype object for the given host class.
      * @param javaScriptClass the host class
      * @return the prototype
      */
@@ -265,7 +265,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Gets a transformer getting the scriptable element for an HtmlElement
+     * Gets a transformer getting the scriptable element for an {@link HtmlElement}.
      * @return the transformer.
      */
     protected Transformer getTransformerScriptableFor() {
@@ -277,7 +277,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the value at the specified location in the argument list.  If the index is larger
+     * Returns the value at the specified location in the argument list.  If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -295,7 +295,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the string value at the specified location in the argument list.  If the index is larger
+     * Returns the string value at the specified location in the argument list.  If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -308,7 +308,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the boolean value at the specified location in the argument list.  If the index is larger
+     * Returns the boolean value at the specified location in the argument list.  If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -323,7 +323,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the int value at the specified location in the argument list.  If the index is larger
+     * Returns the int value at the specified location in the argument list.  If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -336,7 +336,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Return the JavaScript default value of this object.  This is the JavaScript equivalent
+     * Returns the JavaScript default value of this object.  This is the JavaScript equivalent
      * of a toString() in java.
      *
      * @param hint A hint as to the format of the default value.  Ignored in this case.
@@ -399,7 +399,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      * Same as base implementation, but includes all methods inherited from super classes as well.
      */
     @Override
@@ -429,7 +429,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * {@inheritDoc}.
+     * {@inheritDoc}
      * Same as base implementation, but includes all methods inherited from super classes as well.
      */
     @Override
@@ -459,7 +459,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
     
     /**
-     * Gets the browser version currently used
+     * Gets the browser version currently used.
      * @return the browser version
      */
     protected BrowserVersion getBrowserVersion() {

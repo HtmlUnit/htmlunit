@@ -88,7 +88,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     * Get the name for the current node.
+     * Gets the name for the current node.
      * @return The node name
      */
     @Override
@@ -97,7 +97,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     * Get the type of the current node.
+     * Gets the type of the current node.
      * @return The node type
      */
     @Override
@@ -106,7 +106,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     * Return the window that this page is sitting inside.
+     * Returns the window that this page is sitting inside.
      *
      * @return The enclosing frame or null if this page isn't inside a frame.
      */
@@ -124,7 +124,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     * Return the WebClient that originally loaded this page
+     * Returns the WebClient that originally loaded this page.
      *
      * @return See above
      */

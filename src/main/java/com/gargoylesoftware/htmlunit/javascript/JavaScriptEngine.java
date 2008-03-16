@@ -100,7 +100,7 @@ public class JavaScriptEngine implements Serializable {
 
     private static final ThreadLocal<Boolean> javaScriptRunning_ = new ThreadLocal<Boolean>();
     /**
-     * Cache parsed scripts (only for js files, not for js code embedded in HTML code)
+     * Cache parsed scripts (only for js files, not for js code embedded in HTML code).
      * The WeakHashMap allows cached scripts to be GCed when the WebResponses are not retained
      * in the {@link com.gargoylesoftware.htmlunit.Cache} anymore.
      */
@@ -125,7 +125,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Create an instance for the specified webclient
+     * Creates an instance for the specified webclient.
      *
      * @param webClient The webClient that will own this engine.
      */
@@ -135,7 +135,7 @@ public class JavaScriptEngine implements Serializable {
 
 
     /**
-     * Return the web client that this engine is associated with.
+     * Returns the web client that this engine is associated with.
      * @return The web client.
      */
     public final WebClient getWebClient() {
@@ -143,7 +143,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Perform initialization for the given webWindow
+     * Performs initialization for the given webWindow.
      * @param webWindow the web window to initialize for
      */
     public void initialize(final WebWindow webWindow) {
@@ -167,7 +167,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Initializes all the JS stuff for the window
+     * Initializes all the JS stuff for the window.
      * @param webWindow the web window
      * @param context the current context
      * @throws Exception if something goes wrong
@@ -296,7 +296,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Configure constants, properties and functions on the object
+     * Configures constants, properties and functions on the object.
      * @param config the configuration for the object
      * @param scriptable the object to configure
      */
@@ -331,7 +331,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Return the log object for this class
+     * Returns the log object for this class.
      * @return The log object
      */
     protected Log getLog() {
@@ -396,7 +396,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Execute the specified JavaScript code in the context of a given HTML page.
+     * Executes the specified JavaScript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
      * @param sourceCode The JavaScript code to execute.
@@ -414,7 +414,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Execute the specified JavaScript code in the context of a given HTML page.
+     * Executes the specified JavaScript code in the context of a given HTML page.
      *
      * @param htmlPage The page that the code will execute within
      * @param script the script to execute
@@ -439,7 +439,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Call a JavaScript function and return the result.
+     * Calls a JavaScript function and return the result.
      * @param htmlPage The page
      * @param javaScriptFunction The function to call.
      * @param thisObject The this object for class method calls.
@@ -509,7 +509,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Set the number of milliseconds a script is allowed to execute before
+     * Sets the number of milliseconds a script is allowed to execute before
      * being terminated. A value of 0 or less means no timeout.
      *
      * @param timeout the timeout value
@@ -583,7 +583,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Return the log object that is being used to log information about the script engine.
+     * Returns the log object that is being used to log information about the script engine.
      * @return The log
      */
     public static Log getScriptEngineLog() {
@@ -618,7 +618,7 @@ public class JavaScriptEngine implements Serializable {
 
 
     /**
-     * Get the cached script for the given response.
+     * Gets the cached script for the given response.
      * @param webResponse the response corresponding to the script code
      * @return the parsed script
      */
@@ -627,7 +627,7 @@ public class JavaScriptEngine implements Serializable {
     }
 
     /**
-     * Cache a parsed script
+     * Caches a parsed script.
      * @param webResponse the response corresponding to the script code. A weak reference to this object
      * will be used as key for the cache.
      * @param script the parsed script to cache

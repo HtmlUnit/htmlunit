@@ -53,7 +53,7 @@ public class StrictErrorReporter implements ErrorReporter {
     private final Log log_;
 
     /**
-     * Create an instance.
+     * Creates an instance.
      *
      * @param log The log to use when reporting errors
      */
@@ -63,7 +63,7 @@ public class StrictErrorReporter implements ErrorReporter {
     }
 
     /**
-     * Log a warning
+     * Logs a warning.
      *
      * @param message The message to be displayed.
      * @param sourceName The name of the source file
@@ -78,7 +78,7 @@ public class StrictErrorReporter implements ErrorReporter {
     }
 
     /**
-     * Log an error
+     * Logs an error.
      *
      * @param message The message to be displayed.
      * @param sourceName The name of the source file
@@ -95,7 +95,7 @@ public class StrictErrorReporter implements ErrorReporter {
     }
 
     /**
-     * Log a runtime error
+     * Logs a runtime error.
      *
      * @param message The message to be displayed.
      * @param sourceName The name of the source file

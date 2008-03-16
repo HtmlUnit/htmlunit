@@ -70,7 +70,7 @@ public class XMLAttribute extends SimpleScriptable {
     private XmlElement parent_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public XMLAttribute() { }
 
@@ -106,16 +106,16 @@ public class XMLAttribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
-     * @return <code>null</code>
+     * Returns <code>null</code>.
+     * @return <code>null</code>.
      */
     public Object jsxGet_firstChild() {
         return null;
     }
 
     /**
-     * Returns <code>null</code>
-     * @return <code>null</code>
+     * Returns <code>null</code>.
+     * @return <code>null</code>.
      */
     public Object jsxGet_lastChild() {
         return null;
@@ -130,8 +130,8 @@ public class XMLAttribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
-     * @return <code>null</code>
+     * Returns <code>null</code>.
+     * @return <code>null</code>.
      */
     public Object jsxGet_nextSibling() {
         return null;
@@ -176,16 +176,16 @@ public class XMLAttribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
-     * @return <code>null</code>
+     * Returns <code>null</code>.
+     * @return <code>null</code>.
      */
     public Object jsxGet_parentNode() {
         return null;
     }
 
     /**
-     * Returns <code>null</code>
-     * @return <code>null</code>
+     * Returns <code>null</code>.
+     * @return <code>null</code>.
      */
     public Object jsxGet_previousSibling() {
         return null;

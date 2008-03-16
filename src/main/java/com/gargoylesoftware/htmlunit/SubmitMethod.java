@@ -42,8 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A collection of constants that represent the various ways a page can be
- * submitted
+ * A collection of constants that represent the various ways a page can be submitted.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -61,7 +60,7 @@ public final class SubmitMethod implements Serializable {
     public static final SubmitMethod OPTIONS = new SubmitMethod("options");
 
     /**
-     * GET
+     * GET.
      * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
      */
     public static final SubmitMethod GET = new SubmitMethod("get");
@@ -73,13 +72,13 @@ public final class SubmitMethod implements Serializable {
     public static final SubmitMethod HEAD = new SubmitMethod("head");
 
     /**
-     * POST
+     * POST.
      * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
      */
     public static final SubmitMethod POST = new SubmitMethod("post");
 
     /**
-     * PUT
+     * PUT.
      * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
      */
     public static final SubmitMethod PUT = new SubmitMethod("put");
@@ -114,7 +113,7 @@ public final class SubmitMethod implements Serializable {
     }
 
     /**
-     * Return the name of this SubmitMethod
+     * Returns the name of this SubmitMethod.
      *
      * @return See above
      */
@@ -123,7 +122,7 @@ public final class SubmitMethod implements Serializable {
     }
 
     /**
-     * Return the constant that matches the given name (case insensitive).
+     * Returns the constant that matches the given name (case insensitive).
      * @param name The name to search by
      * @return see above
      */
@@ -137,7 +136,7 @@ public final class SubmitMethod implements Serializable {
     }
 
     /**
-     * Return a string representation of this object
+     * Returns a string representation of this object.
      *
      * @return See above
      */

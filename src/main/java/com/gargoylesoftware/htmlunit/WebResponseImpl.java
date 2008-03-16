@@ -70,7 +70,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
     private String charset_;
 
     /**
-     * Construct with all data
+     * Constructs with all data.
      *
      * @param responseData      Data that was send back
      * @param url               Where this response came from
@@ -83,7 +83,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
     }
 
     /**
-     * Construct with all data
+     * Constructs with all data.
      *
      * @param responseData      Data that was send back
      * @param charset           Charset used if not returned in the response.

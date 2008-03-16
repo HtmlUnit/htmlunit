@@ -68,7 +68,7 @@ public class MockWebConnection extends WebConnectionImpl {
     private HttpState httpState_ = new HttpState();
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param webClient The web client
      */
@@ -77,7 +77,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the log that is being used for all scripting objects
+     * Returns the log that is being used for all scripting objects.
      * @return The log.
      */
     protected final Log getLog() {
@@ -85,7 +85,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Submit a request and retrieve a response
+     * Submits a request and retrieve a response.
      *
      * @param webRequestSettings Settings to make the request with
      * @return See above
@@ -114,7 +114,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the method that was used in the last call to submitRequest()
+     * Returns the method that was used in the last call to submitRequest().
      *
      * @return See above
      */
@@ -123,7 +123,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the parameters that were used in the last call to submitRequest()
+     * Returns the parameters that were used in the last call to submitRequest().
      *
      * @return See above
      */
@@ -132,7 +132,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when the specified URL is requested.
+     * Sets the response that will be returned when the specified URL is requested.
      * @param url The URL that will return the given response
      * @param content The content to return
      * @param statusCode The status code to return
@@ -154,7 +154,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when the specified URL is requested.
+     * Sets the response that will be returned when the specified URL is requested.
      * @param url The URL that will return the given response
      * @param content The content to return
      * @param statusCode The status code to return
@@ -173,7 +173,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Convenience method that is the same as calling
+     * Convenient method that is the same as calling
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
      * of "200 OK", a content type of "text/html" and no additional headers.
      *
@@ -186,7 +186,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Convenience method that is the same as calling
+     * Convenient method that is the same as calling
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
      * of "200 OK" and no additional headers.
      *
@@ -213,7 +213,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when a URL is requested that does
+     * Sets the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
      * @param content The content to return
@@ -228,7 +228,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when a URL is requested that does
+     * Sets the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
      * @param content The content to return
@@ -246,7 +246,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Set the response that will be returned when a URL is requested that does
+     * Sets the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
      * @param content The content to return
@@ -256,7 +256,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the {@link HttpState}
+     * Returns the {@link HttpState}.
      * @return The state.
      */
     @Override
@@ -265,7 +265,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the additional headers that were used in the in the last call
+     * Returns the additional headers that were used in the in the last call
      * to {@link #getResponse(WebRequestSettings)}.
      * @return See above
      */
@@ -274,7 +274,7 @@ public class MockWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the {@link WebRequestSettings} that was used in the in the last call
+     * Returns the {@link WebRequestSettings} that was used in the in the last call
      * to {@link #getResponse(WebRequestSettings)}.
      * @return See above
      */

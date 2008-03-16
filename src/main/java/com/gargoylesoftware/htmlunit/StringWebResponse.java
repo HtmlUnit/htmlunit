@@ -91,7 +91,7 @@ public class StringWebResponse extends WebResponseImpl {
     }
 
     /**
-     * Create an instance.
+     * Creates an instance.
      * @param content The content to return.
      */
     public StringWebResponse(final String content) {
@@ -99,7 +99,7 @@ public class StringWebResponse extends WebResponseImpl {
     }
 
     /**
-     * Create an instance.
+     * Creates an instance.
      * @param content The content to return.
      * @param charset The charset used to convert the content.
      */
@@ -108,7 +108,7 @@ public class StringWebResponse extends WebResponseImpl {
     }
 
     /**
-     * Create an instance associated with an originating URL
+     * Creates an instance associated with an originating URL.
      * @param content The content to return.
      * @param originatingURL The URL that this should be associated with
      */
@@ -117,7 +117,7 @@ public class StringWebResponse extends WebResponseImpl {
     }
 
     /**
-     * Create an instance associated with an originating URL
+     * Creates an instance associated with an originating URL.
      * @param content The content to return.
      * @param charset The charset used to convert the content.
      * @param originatingURL The URL that this should be associated with
