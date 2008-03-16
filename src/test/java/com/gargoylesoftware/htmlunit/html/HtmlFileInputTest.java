@@ -139,7 +139,7 @@ public class HtmlFileInputTest extends WebTestCase {
     }
 
     /**
-     * Test content provided for a not filled file input
+     * Verifies that content is provided for a not filled file input.
      * @throws Exception if the test fails
      */
     @Test
@@ -295,7 +295,7 @@ public class HtmlFileInputTest extends WebTestCase {
     }
 
     /**
-     * Servlet for '/upload1'
+     * Servlet for '/upload1'.
      */
     public static class Upload1Servlet extends ServletContentWrapper {
 
@@ -315,7 +315,7 @@ public class HtmlFileInputTest extends WebTestCase {
     }
 
     /**
-     * Servlet for '/upload2'
+     * Servlet for '/upload2'.
      */
     public static class Upload2Servlet extends HttpServlet {
 

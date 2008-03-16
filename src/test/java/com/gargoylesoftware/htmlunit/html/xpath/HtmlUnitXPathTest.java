@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class HtmlUnitXPathTest extends WebTestCase {
 
     /**
-     * Test evaluation of some simple paths
+     * Test evaluation of some simple paths.
      * @throws Exception if test fails
      */
     @Test
@@ -81,7 +81,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
 
     /**
-     * Test evaluation relative from elements other than the whole page
+     * Test evaluation relative from elements other than the whole page.
      * @throws Exception if test fails
      */
     @Test
@@ -97,8 +97,8 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
 
     /**
-     * Test that the elements are in the right order (was a bug in Jaxen 1.0-FCS:
-     * http://jira.codehaus.org/browse/JAXEN-55)
+     * Test that the elements are in the right order.
+     * This was a bug in Jaxen 1.0-FCS (http://jira.codehaus.org/browse/JAXEN-55).
      * @throws Exception if test fails
      */
     @Test
@@ -121,7 +121,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
 
     /**
-     * Test evaluation of paths after changed through JavaScript
+     * Test evaluation of paths after they're changed through JavaScript.
      * @throws Exception if test fails
      */
     @Test
@@ -215,7 +215,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
 
     /**
-     * Test if option/text() is cleaned like other text()
+     * Test if option/text() is cleaned like other text().
      * @throws Exception if test fails
      */
     @Test
@@ -235,10 +235,9 @@ public class HtmlUnitXPathTest extends WebTestCase {
             }
         }
     }
-    
+
     /**
-     * Regression test for
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1527799&group_id=47038&atid=448266
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1527799&group_id=47038&atid=448266.
      * @throws Exception if test fails
      */
     @Test

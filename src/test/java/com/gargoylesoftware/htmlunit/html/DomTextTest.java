@@ -52,22 +52,21 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class DomTextTest extends WebTestCase {
 
     /**
-     * Test the clean up of &amp;nbsp; in strings
+     * Test the clean up of &amp;nbsp; in strings.
      * @throws Exception if the test fails
      */
     @Test
     public void testAsText_nbsp() throws Exception {
         testPlainText("a b&nbsp;c  d &nbsp;e",  "a b c d  e");
         testPlainText("a b&nbsp;c  d &nbsp; e", "a b c d   e");
-        
         testPlainText("&nbsp;a&nbsp;", " a ");
         testPlainText("&nbsp; a&nbsp;", "  a ");
         testPlainText("&nbsp;a &nbsp;", " a  ");
     }
     
     /**
-     * Test font formats, as per bug #1731042
-     * (http://sourceforge.net/tracker/index.php?func=detail&aid=1731042&group_id=47038&atid=448266)
+     * Test font formats, as per bug #1731042.
+     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1731042&group_id=47038&atid=448266.
      *
      * @throws Exception if the test fails
      */
@@ -108,8 +107,7 @@ public class DomTextTest extends WebTestCase {
     }
     
     /**
-     * These worked before the changes for bug #1731042, and should afterwards, too
-     *
+     * These worked before the changes for bug #1731042, and should afterwards, too.
      * @throws Exception if the test fails
      */
     @Test
@@ -121,10 +119,9 @@ public class DomTextTest extends WebTestCase {
 
         testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", "a b b c");
     }
-    
+
     /**
-     * check the HtmlTable* objects themselves
-     *
+     * Checks the HtmlTable* objects themselves.
      * @throws Exception if the test fails
      */
     @Test

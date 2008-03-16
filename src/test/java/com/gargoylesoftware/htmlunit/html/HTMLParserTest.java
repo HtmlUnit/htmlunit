@@ -58,8 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HTMLParserTest extends WebTestCase {
 
     /**
-     * test the new HTMLParser on a simple HTML string and use the Jaxen XPath navigator
-     * to validate results
+     * Tests the new HTMLParser on a simple HTML string, using the Jaxen XPath navigator to validate results.
      * @throws Exception failure
      */
     @Test
@@ -113,7 +112,7 @@ public class HTMLParserTest extends WebTestCase {
     }
 
     /**
-     * Test when an illegal tag is found in head as some websites do
+     * Test when an illegal tag is found in head as some websites do.
      * @throws Exception failure
      */
     @Test
@@ -166,7 +165,7 @@ public class HTMLParserTest extends WebTestCase {
     }
 
     /**
-     * Works since NekoHtml 0.9.5
+     * Works since NekoHtml 0.9.5.
      * @exception Exception If the test fails
      */
     @Test

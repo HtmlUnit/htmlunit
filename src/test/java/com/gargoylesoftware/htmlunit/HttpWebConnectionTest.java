@@ -87,7 +87,7 @@ public class HttpWebConnectionTest {
     private Server server_;
 
     /**
-     * Assert that the two byte arrays are equal
+     * Assert that the two byte arrays are equal.
      * @param expected The expected value
      * @param actual The actual value
      */
@@ -96,7 +96,7 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Assert that the two byte arrays are equal
+     * Assert that the two byte arrays are equal.
      * @param message The message to display on failure
      * @param expected The expected value
      * @param actual The actual value
@@ -107,7 +107,7 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Assert that the two byte arrays are equal
+     * Assert that the two byte arrays are equal.
      * @param message The message to display on failure
      * @param expected The expected value
      * @param actual The actual value
@@ -212,7 +212,7 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Test creation of a web response
+     * Tests creation of a web response.
      * @throws Exception If the test fails
      */
     @Test
@@ -251,7 +251,7 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Testing Jetty
+     * Tests Jetty.
      * @throws Exception on failure
      */
     @Test
@@ -388,7 +388,7 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Test for feature request 1438216: HttpWebConnection should allow extension to create the HttpClient
+     * Test for feature request 1438216: HttpWebConnection should allow extension to create the HttpClient.
      * @throws Exception if the test fails
      */
     @Test
@@ -411,7 +411,7 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Was throwing a NPE on 14.04.06
+     * Was throwing a NPE on 14/04/06.
      * @throws Exception if the test fails
      */
     @Test
@@ -421,7 +421,7 @@ public class HttpWebConnectionTest {
     }
 
     /**
-     * Test that the right file part is built for a file that doesn't exist
+     * Test that the right file part is built for a file that doesn't exist.
      * @throws Exception if the test fails
      */
     @Test

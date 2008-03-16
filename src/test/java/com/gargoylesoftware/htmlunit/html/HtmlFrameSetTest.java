@@ -134,9 +134,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     }
 
     /**
-     * <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266">
-     * Bug report 1101525 </a>
-     *
+     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test
@@ -314,8 +312,7 @@ public class HtmlFrameSetTest extends WebTestCase {
     }
 
     /**
-     * Regression test for
-     *            https://sourceforge.net/tracker/index.php?func=detail&aid=1794764&group_id=47038&atid=448266
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1794764&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test

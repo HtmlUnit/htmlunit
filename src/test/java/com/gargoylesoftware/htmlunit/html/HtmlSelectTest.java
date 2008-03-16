@@ -65,8 +65,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlSelectTest extends WebTestCase {
 
     /**
-     * Test the good path of submitting a select
-     *
+     * Test the good path of submitting a select.
      * @exception Exception If the test fails
      */
     @Test
@@ -100,8 +99,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     * Test submitting the select with no options selected
-     *
+     * Tests submitting the select with no options selected.
      * @exception Exception If the test fails
      */
     @Test
@@ -134,8 +132,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     * Test changing the selected option
-     *
+     * Tests changing the selected option.
      * @exception Exception If the test fails
      */
     @Test
@@ -169,8 +166,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     * Test changing the selected option
-     *
+     * Tests changing the selected option.
      * @exception Exception If the test fails
      */
     @Test
@@ -206,8 +202,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     * Test multiple selected options on multiple select lists
-     *
+     * Tests multiple selected options on multiple select lists.
      * @exception Exception If the test fails
      */
     @Test
@@ -287,8 +282,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     * Test no selected options on single select lists with a size > 1
-     *
+     * Tests no selected options on single select lists with a size > 1.
      * @exception Exception If the test fails
      */
     @Test
@@ -310,7 +304,7 @@ public class HtmlSelectTest extends WebTestCase {
     }
 
     /**
-     * Test changing the selected option
+     * Tests changing the selected option.
      * @deprecated Mark test as deprecated to avoid compiler warnings as this tests deprecated methods
      * @exception Exception If the test fails
      */

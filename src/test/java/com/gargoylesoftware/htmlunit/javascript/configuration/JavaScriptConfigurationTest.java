@@ -80,8 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
 public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
-     * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
-     *
+     * Resets the JavaScriptConfiguration file for each test to it's initial clean state.
      * @throws Exception if the test fails
      */
     @Before
@@ -90,8 +89,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Reset the JavaScriptConfiguration file for each test to it's initial clean state.
-     *
+     * Resets the JavaScriptConfiguration file for each test to it's initial clean state.
      * @throws Exception if the test fails
      */
     @After
@@ -100,8 +98,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test loading a configuration from the supplied stream
-     *
+     * Tests loading a configuration from the supplied stream.
      */
     @Test
     public void testLoadLocalConfiguration() {
@@ -123,8 +120,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test loading a configuration from the supplied stream
-     *
+     * Tests loading a configuration from the supplied stream.
      */
     @Test
     public void testLoadSystemConfigurationFile() {
@@ -134,8 +130,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
         
     /**
-     * Test getting the configuration for the full browser
-     *
+     * Tests getting the configuration for the full browser.
      * @throws Exception - Exception on error
      */
     @Test
@@ -168,10 +163,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test getting the configuration for the Netscape browser.  The readyState property should not be
-     * available in this case.
-     *
-     * @throws Exception - Exception on error
+     * Test getting the configuration for the Netscape browser. The readyState property should not be available
+     * in this case.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testGetConditionalPropertyBrowser() throws Exception {
@@ -202,7 +196,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test that the JSObject is being set correctly
+     * Test that the JSObject is being set correctly.
      * @throws Exception on error
      */
     @Test
@@ -225,10 +219,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test getting the configuration for the Netscape browser.  The readyState property should not be
+     * Test getting the configuration for the Netscape browser. The readyState property should not be
      * available in this case.
-     *
-     * @throws Exception - Exception on error
+     * @throws Exception if an error occurs
      */
     @Test
     public void testInstanceForTestVersion() throws Exception {
@@ -259,10 +252,9 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test getting the configuration for the Netscape browser.  The readyState property should not be
+     * Tests getting the configuration for the Netscape browser. The readyState property should not be
      * available in this case.
-     *
-     * @throws Exception - Exception on error
+     * @throws Exception if an error occurs
      */
     @Test
     public void testPropertyForNullBrowser() throws Exception {
@@ -565,8 +557,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test for if the property exists for the configuration
-     *
+     * Tests for if the property exists for the configuration.
      * @throws Exception Exception on error
      */
     @Test
@@ -597,8 +588,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test for if the property exists for the configuration
-     *
+     * Tests for if the property exists for the configuration.
      * @throws Exception Exception on error
      */
     @Test

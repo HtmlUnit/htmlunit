@@ -50,7 +50,7 @@ import org.junit.Test;
 public final class ImmediateRefreshHandlerTest extends WebTestCase {
 
     /**
-     * Regression test for bug 1211980: redirect on the same page after a post
+     * Regression test for bug 1211980: redirect on the same page after a post.
      * @throws Exception if the test fails
      */
     @Test

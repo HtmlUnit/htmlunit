@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class CharacterDataImplTest extends WebTestCase {
 
     /**
-     * Regression test for inline text nodes
+     * Regression test for inline text nodes.
      * @throws Exception if the test fails
      */
     @Test
@@ -98,7 +98,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for setting the data property of a text node
+     * Regression test for setting the data property of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -135,7 +135,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for setting the nodeValue property of a text node
+     * Regression test for setting the nodeValue property of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -172,7 +172,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for appendData of a text node
+     * Regression test for appendData of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -206,7 +206,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for deleteData of a text node
+     * Regression test for deleteData of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -240,7 +240,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for insertData of a text node
+     * Regression test for insertData of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -274,7 +274,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for replaceData of a text node
+     * Regression test for replaceData of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -308,7 +308,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for substringData of a text node
+     * Regression test for substringData of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -342,7 +342,7 @@ public class CharacterDataImplTest extends WebTestCase {
     }
 
     /**
-     * Regression test for substringData of a text node
+     * Regression test for substringData of a text node.
      * @throws Exception if the test fails
      */
     @Test

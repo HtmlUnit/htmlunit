@@ -241,7 +241,7 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * Test onClick handler can be called multiple times
+     * Test onClick handler can be called multiple times.
      *
      * @throws Exception if the test fails
      */
@@ -897,7 +897,7 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * Test when HtmlTableRow.onclick is set by a JavaScript
+     * Test when HtmlTableRow.onclick is set by JavaScript.
      *
      * @throws Exception if the test fails
      */
@@ -929,7 +929,7 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * Test when HtmlTableRow.onclick is set by a JavaScript
+     * Test when HtmlTableRow.onclick is set by a JavaScript.
      *
      * @throws Exception if the test fails
      */
@@ -982,7 +982,7 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * Test setting onClick handler from inside the onClick handler
+     * Test setting onClick handler from inside the onClick handler.
      *
      * @throws Exception if the test fails
      */

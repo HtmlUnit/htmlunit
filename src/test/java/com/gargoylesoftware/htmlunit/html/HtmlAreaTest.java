@@ -185,7 +185,7 @@ public class HtmlAreaTest extends WebTestCase {
     }
 
     /**
-     * In action "this" should be the window and not the area
+     * In action "this" should be the window and not the area.
      * @throws Exception if the test fails
      */
     @Test

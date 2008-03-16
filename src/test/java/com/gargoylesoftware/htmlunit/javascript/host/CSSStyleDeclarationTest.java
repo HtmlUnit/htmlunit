@@ -196,7 +196,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
-     * Checks that the scopes are correctly set on the style element (wasn't working in CVS snapshot 2005.01.23)
+     * Checks that the scopes are correctly set on the style element (wasn't working in CVS snapshot 2005.01.23).
      * @throws Exception if the test fails
      */
     @Test
@@ -241,7 +241,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1592299
+     * Regression test for bug 1592299.
      * @throws Exception if the test fails
      */
     @Test

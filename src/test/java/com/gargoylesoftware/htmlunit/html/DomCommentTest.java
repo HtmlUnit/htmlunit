@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class DomCommentTest extends WebTestCase {
     
     /**
-     * Test the comment not visible when viewed by user
+     * Test the comment not visible when viewed by user.
      * @throws Exception if the test fails
      */
     @Test
@@ -63,7 +63,7 @@ public class DomCommentTest extends WebTestCase {
     }
 
      /**
-     * Test the comment correctness
+     * Test the comment correctness.
      * @throws Exception if the test fails
      */
     @Test
@@ -78,7 +78,7 @@ public class DomCommentTest extends WebTestCase {
     }
 
      /**
-     * Test comment and character data sibling correctness
+     * Test comment and character data sibling correctness.
      * @throws Exception if the test fails
      */
     @Test

@@ -182,8 +182,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test getHtmlElement() for all elements that can be loaded
-     *
+     * Tests getHtmlElement() for all elements that can be loaded.
      * @throws Exception if the test fails
      */
     @Test
@@ -541,7 +540,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * If the onload handler contains two statements then only the first would execute
+     * If the onload handler contains two statements then only the first would execute.
      * @throws Exception if the test fails
      */
     @Test
@@ -558,7 +557,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 713646
+     * Regression test for bug 713646.
      * @throws Exception if the test fails
      */
     @Test
@@ -576,7 +575,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 713646
+     * Regression test for bug 713646.
      * @throws Exception if the test fails
      */
     @Test
@@ -596,7 +595,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Regression test for window.onload property
+     * Regression test for window.onload property.
      * @throws Exception if the test fails
      */
     @Test
@@ -615,7 +614,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Regression test for window.onload property
+     * Regression test for window.onload property.
      * @throws Exception if the test fails
      */
     @Test
@@ -1000,7 +999,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test that a return statement in onload doesn't throw any exception
+     * Tests that a return statement in onload doesn't throw any exception.
      * @throws Exception if the test fails
      */
     @Test
@@ -1013,7 +1012,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test that wrong formed HTML code is parsed like browsers do
+     * Tests that wrong formed HTML code is parsed like browsers do.
      * @throws Exception if the test fails
      */
     @Test
@@ -1057,7 +1056,7 @@ public class HtmlPageTest extends WebTestCase {
     }
         
     /**
-     * Test that the generated xml is valid as HTML code too
+     * Tests that the generated XML is valid as HTML code too.
      * @exception Exception If the test fails
      */
     @Test
@@ -1101,7 +1100,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1204637
+     * Regression test for bug 1204637.
      * @exception Exception If the test fails
      */
     @Test
@@ -1131,7 +1130,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1233519
+     * Regression test for bug 1233519.
      * @exception Exception If the test fails
      */
     @Test
@@ -1190,7 +1189,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Test the set-cookie meta tag
+     * Test the "set-cookie" meta tag.
      * @throws Exception if the test fails
      */
     @Test
@@ -1218,7 +1217,7 @@ public class HtmlPageTest extends WebTestCase {
     }
     
     /**
-     * Regression test for bug 1658273
+     * Regression test for bug 1658273.
      * @throws Exception if the test fails
      */
     @Test
@@ -1242,7 +1241,7 @@ public class HtmlPageTest extends WebTestCase {
     }
     
     /**
-     * Test for bug 1714767
+     * Test for bug 1714767.
      * @throws Exception if the test fails
      */
     @Test
@@ -1342,7 +1341,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Verifies that a cloned HtmlPage has its own idMap_
+     * Verifies that a cloned HtmlPage has its own "idMap_".
      * @throws Exception if the test fails
      */
     @Test
@@ -1377,7 +1376,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * Verifies that a cloned HtmlPage has its own documentElement
+     * Verifies that a cloned HtmlPage has its own "documentElement".
      * @throws Exception if the test fails
      */
     @Test

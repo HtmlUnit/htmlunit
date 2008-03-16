@@ -207,12 +207,10 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
-     * There are two points in this case:
+     * Some style tests. There are two points in this case:
      * <ol>
      *  <li>https://sourceforge.net/tracker/index.php?func=detail&aid=1566274&group_id=82996&atid=567969</li>
-     *  <li>
-     *    No idea why Firefox alert "pointer" for the "myDiv2", the rule should only apply to "myDiv1"
-     *  </li>
+     *  <li>No idea why Firefox alert "pointer" for the "myDiv2", the rule should only apply to "myDiv1"</li>
      * </ol>
      * @throws Exception if the test fails
      */

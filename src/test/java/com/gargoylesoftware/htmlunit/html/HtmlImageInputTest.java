@@ -122,8 +122,8 @@ public class HtmlImageInputTest extends WebTestCase {
     }
 
     /**
-     * If an image button without name is clicked, it should send only "x" and "y" parameters
-     * Regression test for bug 1118877
+     * If an image button without name is clicked, it should send only "x" and "y" parameters.
+     * Regression test for bug 1118877.
      * @throws Exception if the test fails
      */
     @Test

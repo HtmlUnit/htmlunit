@@ -53,7 +53,7 @@ import org.junit.Test;
 public class DefaultCredentialsProviderTest extends WebTestCase {
 
     /**
-     * Test for NTLM credentials
+     * Test for NTLM credentials.
      * @throws Exception if the test fails
      */
     @Test

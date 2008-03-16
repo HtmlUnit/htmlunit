@@ -78,8 +78,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public class HtmlFormTest extends WebTestCase {
 
     /**
-     * Test the good case for setCheckedRatdioButton()
-     *
+     * Tests the good case for setCheckedRatdioButton().
      * @exception Exception If the test fails
      */
     @Test
@@ -114,8 +113,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Test setCheckedRadioButton() with a value that doesn't exist
-     *
+     * Tests setCheckedRadioButton() with a value that doesn't exist.
      * @exception Exception If the test fails
      */
     @Test
@@ -268,8 +266,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1628521
-     * NullPointerException when submitting forms
+     * Regression test for bug 1628521 (NullPointerException when submitting forms).
      * @throws Exception if the test fails
      */
     @Test
@@ -795,10 +792,9 @@ public class HtmlFormTest extends WebTestCase {
             // pass: exception is expected
         }
     }
-    
+
     /**
-     * Test that the result of the form will get loaded into the window
-     * specified by "target"
+     * Tests that the result of the form will get loaded into the window specified by "target".
      * @throws Exception If the test fails.
      */
     @Test
@@ -925,7 +921,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Test the 'Referer' HTTP header
+     * Tests the 'Referer' HTTP header.
      * @throws Exception on test failure
      */
     @Test
@@ -955,9 +951,9 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-      * Simulate a bug report where using JavaScript to submit a form that contains a
+      * Simulates a bug report where using JavaScript to submit a form that contains a
       * JavaScript action causes a an "IllegalArgumentException: JavaScript URLs can only
-      * be used to load content into frames and iframes."
+      * be used to load content into frames and iframes".
       *
       * @throws Exception if the test fails
       */
@@ -1046,7 +1042,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Utility for {@link #testUrlAfterSubmit()}
+     * Utility for {@link #testUrlAfterSubmit()}.
      * @throws Exception if the test fails
      */
     @Test
@@ -1145,9 +1141,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Regression test for
-     *   https://sourceforge.net/tracker/index.php?func=detail&aid=1822108&group_id=47038&atid=448266
-     *
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1822108&group_id=47038&atid=448266.
      * @throws Exception If the test fails
      */
     @Test

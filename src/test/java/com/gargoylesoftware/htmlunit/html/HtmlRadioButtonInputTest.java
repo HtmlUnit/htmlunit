@@ -205,7 +205,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
     }
 
     /**
-     * Test <code>input.checked</code> if the radio <code>&lt;input&gt;</code> do not have distinct 'value'
+     * Test <code>input.checked</code> if the radio <code>&lt;input&gt;</code> do not have distinct 'value'.
      * @throws Exception If the test fails
      */
     @Test

@@ -48,7 +48,7 @@ import org.junit.Test;
 public class DefaultPageCreatorTest extends WebTestCase {
 
     /**
-     * Test for {@link DefaultPageCreator#determinePageType(String)}
+     * Test for {@link DefaultPageCreator#determinePageType(String)}.
      */
     @Test
     public void testDeterminePageType() {

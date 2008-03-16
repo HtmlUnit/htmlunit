@@ -63,7 +63,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class DisabledElementTest extends WebTestCase {
 
     /**
-     * Tests data
+     * Tests data.
      * @return tests data
      */
     @Parameters

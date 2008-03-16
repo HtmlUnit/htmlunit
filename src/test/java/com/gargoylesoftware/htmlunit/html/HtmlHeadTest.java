@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlHeadTest extends WebTestCase {
 
     /**
-     * IE and FF both add an head element when it's not present in the HTML code
+     * IE and FF both add a head element when it's not present in the HTML code.
      * @throws Exception if the test fails
      */
     @Test

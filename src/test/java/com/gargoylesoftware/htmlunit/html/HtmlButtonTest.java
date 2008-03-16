@@ -228,7 +228,7 @@ public class HtmlButtonTest extends WebTestCase {
     }
 
     /**
-     * According to the HTML spec, the default type for a button is "submit"
+     * According to the HTML spec, the default type for a button is "submit".
      * @throws Exception if the test fails
      */
     @Test
@@ -237,7 +237,7 @@ public class HtmlButtonTest extends WebTestCase {
     }
 
     /**
-     * IE is different than the HTML spec and has a default type of "button"
+     * IE is different than the HTML spec and has a default type of "button".
      * @throws Exception if the test fails
      */
     @Test

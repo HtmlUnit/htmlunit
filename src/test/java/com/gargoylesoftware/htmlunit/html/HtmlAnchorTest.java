@@ -359,7 +359,7 @@ public class HtmlAnchorTest extends WebTestCase {
     }
     
     /**
-     * Test for new openLinkInNewWindow() method
+     * Test for new openLinkInNewWindow() method.
      * @throws Exception on test failure
      */
     @Test
@@ -384,7 +384,7 @@ public class HtmlAnchorTest extends WebTestCase {
     }
 
     /**
-     * Test the 'Referer' HTTP header
+     * Tests the 'Referer' HTTP header.
      * @throws Exception on test failure
      */
     @Test

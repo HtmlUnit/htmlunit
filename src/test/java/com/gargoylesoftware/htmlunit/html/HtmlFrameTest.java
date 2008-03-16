@@ -141,7 +141,7 @@ public class HtmlFrameTest extends WebTestCase {
     }
 
     /**
-     * Test that frames are correctly deregistered even if not HTML
+     * Tests that frames are correctly deregistered even if not HTML.
      * @throws Exception if the test fails
      */
     @Test
@@ -209,8 +209,8 @@ public class HtmlFrameTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1518195
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1518195&group_id=47038&atid=448266
+     * Regression test for bug 1518195.
+     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1518195&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test

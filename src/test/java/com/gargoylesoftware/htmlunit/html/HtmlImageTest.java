@@ -131,7 +131,7 @@ public class HtmlImageTest extends WebTestCase {
     }
 
     /**
-     * Tests circle radius of percentage value, Not Yet Implemented
+     * Tests circle radius of percentage value.
      * @throws Exception if the test fails
      */
     @Test

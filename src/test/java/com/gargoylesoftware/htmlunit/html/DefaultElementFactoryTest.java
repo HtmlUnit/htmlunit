@@ -105,7 +105,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
     }
 
     /**
-     * Test the order of attributes
+     * Test the order of attributes.
      * @throws Exception if the test fails
      */
     @Test

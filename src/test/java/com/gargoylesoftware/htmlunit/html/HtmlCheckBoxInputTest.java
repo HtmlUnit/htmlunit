@@ -79,8 +79,8 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
     }
 
     /**
-     * Given a onclick handler that does not cause the form to submit, this test
-     * verifies that HtmlCheckBix.click()
+     * Tests onclick event handlers. Given an onclick handler that does not cause the form to submit, this test
+     * verifies that HtmlCheckBix.click():
      * <ul>
      *   <li>sets the checkbox to the "checked" state</li>
      *   <li>returns the same page</li>
@@ -109,7 +109,8 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
     }
 
     /**
-     * Given a onclick handler that causes the form to submit, this test verifies that HtmlCheckBix.click()
+     * Tests onclick event handlers. Given an onclick handler that causes the form to submit, this test
+     * verifies that HtmlCheckBix.click():
      * <ul>
      *   <li>sets the checkbox to the "checked" state</li>
      *   <li>returns the new page</li>

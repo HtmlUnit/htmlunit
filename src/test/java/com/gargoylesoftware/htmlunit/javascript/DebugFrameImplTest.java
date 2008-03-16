@@ -55,11 +55,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 public class DebugFrameImplTest extends WebTestCase {
+
     private final Logger loggerDebugFrameImpl_ = Logger.getLogger(DebugFrameImpl.class);
+
     private Level originalLogLevel_;
 
     /**
-     * prepare log to trigger problematic code
+     * Prepares the log to trigger problematic code.
      * @throws Exception when a problem occurs
      */
     @Before
@@ -71,7 +73,7 @@ public class DebugFrameImplTest extends WebTestCase {
     }
     
     /**
-     * reset log to original state
+     * Resets the log to its original state.
      * @throws Exception when a problem occurs
      */
     @After

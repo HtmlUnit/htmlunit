@@ -59,8 +59,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlTableTest extends WebTestCase {
 
     /**
-     * Test getTableCell(int,int)
-     *
+     * Tests getTableCell(int,int).
      * @exception Exception If the test fails
      */
     @Test
@@ -92,8 +91,7 @@ public class HtmlTableTest extends WebTestCase {
     }
 
     /**
-     * Test getCellAt(int,int) with colspan
-     *
+     * Tests getCellAt(int,int) with colspan.
      * @exception Exception If the test fails
      */
     @Test
@@ -129,8 +127,7 @@ public class HtmlTableTest extends WebTestCase {
     }
 
     /**
-     * Test getTableCell(int,int) for a cell that doesn't exist
-     *
+     * Tests getTableCell(int,int) for a cell that doesn't exist.
      * @exception Exception If the test fails
      */
     @Test

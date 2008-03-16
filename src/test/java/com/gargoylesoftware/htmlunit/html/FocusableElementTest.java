@@ -177,10 +177,9 @@ public class FocusableElementTest extends WebTestCase {
     public void testTextarea_onblur_onfocus() throws Exception {
         onClickBodyTest("<form><textarea " + COMMON_ATTRIBUTES + ">Text</textarea></form>\n");
     }
-    
+
     /**
-     * Regression test for bug
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1161705&group_id=47038
+     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1161705&group_id=47038.
      * @throws Exception if the test fails
      */
     @Test
@@ -208,9 +207,9 @@ public class FocusableElementTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         page.getAnchors().get(0).click();
     }
-    
+
     /**
-     * Test focus on all types of elements
+     * Test focus on all types of elements.
      * @throws Exception if the test fails
      */
     @Test

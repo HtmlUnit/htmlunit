@@ -53,9 +53,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 public class ClassConfigurationTest extends WebTestCase {
+
     /**
-     * Reset the JavaScriptConfiguration file for each test to it's inital clean state.
-     *
+     * Resets the JavaScriptConfiguration file for each test to it's inital clean state.
      * @throws Exception if the test fails
      */
     @Before
@@ -64,7 +64,7 @@ public class ClassConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test equality on a class configuration
+     * Tests equality on a class configuration.
      * @throws Exception - Exception on error
      */
     @Test
@@ -81,7 +81,7 @@ public class ClassConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test equality on a class configuration for function
+     * Tests equality on a class configuration for function.
      * @throws Exception - Exception on error
      */
     @Test
@@ -98,8 +98,7 @@ public class ClassConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test equality on a class configuration
-     *
+     * Tests equality on a class configuration.
      * @throws Exception - Exception on error
      */
     @Test
@@ -136,8 +135,7 @@ public class ClassConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test equality on a class configuration
-     *
+     * Tests equality on a class configuration.
      * @throws Exception - Exception on error
      */
     @Test
@@ -156,8 +154,7 @@ public class ClassConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test equality on a class configuration mis-matched browsers
-     *
+     * Tests equality on a class configuration mis-matched browsers.
      * @throws Exception - Exception on error
      */
     @Test
@@ -176,8 +173,7 @@ public class ClassConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test for throwing exception when setter method is not defined
-     *
+     * Test for throwing exception when setter method is not defined.
      * @throws Exception - Exception on error
      */
     @Test
@@ -194,8 +190,7 @@ public class ClassConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test for throwing exception when setter method is not defined
-     *
+     * Test for throwing exception when setter method is not defined.
      * @throws Exception - Exception on error
      */
     @Test
@@ -212,13 +207,13 @@ public class ClassConfigurationTest extends WebTestCase {
     }
 
     /**
-     * test class
+     * Test class.
      */
     protected class ConfigTestClass {
         private boolean test_ = false;
         
         /**
-         * Dummy function
+         * Dummy function.
          */
         public void jsxFunction_testFunction() {
         }

@@ -61,8 +61,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public final class HtmlInputTest extends WebTestCase {
 
     /**
-     * Test that selecting one radio button will deselect all the others
-     *
+     * Tests that selecting one radio button will deselect all the others.
      * @exception Exception If the test fails
      */
     @Test
@@ -182,8 +181,7 @@ public final class HtmlInputTest extends WebTestCase {
     }
 
     /**
-     * Test that clicking a radio button will select it
-     *
+     * Tests that clicking a radio button will select it.
      * @exception Exception If the test fails
      */
     @Test
@@ -209,8 +207,7 @@ public final class HtmlInputTest extends WebTestCase {
     }
 
     /**
-     * Test that default type of input is text
-     *
+     * Tests that default type of input is text.
      * @exception Exception If the test fails
      */
     @Test
