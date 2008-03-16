@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Listener for messages from the HTML parser. <br/>
  * The classification of problems as warnings or errors is the one of the HTML parser
- * used by htmlunit. The line and column may indicates the position of the problem detected
+ * used by HtmlUnit. The line and column may indicates the position of the problem detected
  * by the parser. This is only an indication and in some cases the position where
  * the problem has to be solved is located lines before.
  *
