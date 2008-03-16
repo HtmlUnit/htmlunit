@@ -333,9 +333,9 @@ public class HttpWebConnectionTest {
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
-     * @param resouceBase the base of resources for the default context.
-     * @param classpath additional classpath entries to add (may be null).
-     * @param servlets Map of <Class,String>, Class is the class, while String is the path spec.
+     * @param resouceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @param servlets Map of {Class, String} pairs -- Class is the class, while String is the path spec
      * @return the started web server.
      * @throws Exception If the test fails.
      */

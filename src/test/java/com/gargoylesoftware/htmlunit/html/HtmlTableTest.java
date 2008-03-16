@@ -333,7 +333,7 @@ public class HtmlTableTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1210751: JavaScript inside <table> run twice.
+     * Regression test for bug 1210751: JavaScript inside <tt>&lt;table&gt;</tt> run twice.
      * @throws Exception if the test fails
      */
     @Test

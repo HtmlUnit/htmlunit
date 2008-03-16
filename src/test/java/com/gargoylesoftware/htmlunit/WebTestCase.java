@@ -481,7 +481,7 @@ public abstract class WebTestCase {
      *   ... the real (now failing) unit test
      * }
      * </pre>
-     * @return <false> when not itself already in the call stack
+     * @return <tt>false</tt> when not itself already in the call stack
      */
     protected boolean notYetImplemented() {
         if (notYetImplementedFlag.get() != null) {

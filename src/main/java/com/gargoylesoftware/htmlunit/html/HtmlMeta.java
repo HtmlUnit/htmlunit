@@ -77,8 +77,8 @@ public class HtmlMeta extends HtmlElement {
     }
 
     /**
-     * Handles the cookies specified in meta tags
-     * like <meta http-equiv='set-cookie' content='webm=none; path=/;'>
+     * Handles the cookies specified in meta tags,
+     * like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
      */
     protected void performSetCookie() {
         final String[] parts = getContentAttribute().split("\\s*;\\s*");

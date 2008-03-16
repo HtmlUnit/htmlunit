@@ -58,6 +58,12 @@
         <module name="JavadocVariable">
             <property name="scope" value="protected"/>
         </module>
+        <module name="JavadocStyle">
+            <property name="scope" value="protected"/>
+            <property name="checkFirstSentence" value="false"/>
+            <property name="checkEmptyJavadoc" value="false"/>
+            <property name="checkHtml" value="true"/>
+        </module>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->

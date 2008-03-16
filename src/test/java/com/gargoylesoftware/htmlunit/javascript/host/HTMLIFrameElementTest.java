@@ -126,7 +126,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
     }
 
     /**
-     * Tests that the <iframe> node is visible from the contained page when it is loaded
+     * Tests that the <tt>&lt;iframe&gt;</tt> node is visible from the contained page when it is loaded.
      * @throws Exception if the test fails
      */
     @Test

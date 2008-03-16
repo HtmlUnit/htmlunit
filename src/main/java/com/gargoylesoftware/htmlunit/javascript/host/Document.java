@@ -217,9 +217,8 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the JavaScript attribute "links".  Refer also to the
-     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/links.asp"
-     * MSDN documentation</a>
+     * Returns the value of the JavaScript attribute "links". Refer also to the
+     * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/links.asp">MSDN documentation</a>.
      * @return The value of this attribute.
      */
     public Object jsxGet_links() {

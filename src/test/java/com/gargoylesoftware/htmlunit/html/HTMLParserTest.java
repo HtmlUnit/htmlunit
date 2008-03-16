@@ -78,7 +78,8 @@ public class HTMLParserTest extends WebTestCase {
     }
 
     /**
-     * Test when <form> inside <table> and before <tr>
+     * Test for the condition when there is a <tt>&lt;form&gt;</tt> inside of a <tt>&lt;table&gt;</tt> and before
+     * a <tt>&lt;tr&gt;</tt>.
      * @throws Exception failure
      */
     @Test

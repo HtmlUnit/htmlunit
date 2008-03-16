@@ -575,7 +575,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns a flag indicating whether or not this node itself results
-     * in any space taken up in the browser windows; for instance, "<b>"
+     * in any space taken up in the browser windows; for instance, "&lt;b&gt;"
      * affects the specified text, but does not use up any space itself
      *
      * @return The flag
