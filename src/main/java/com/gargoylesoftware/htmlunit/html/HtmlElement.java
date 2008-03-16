@@ -863,29 +863,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Throws an exception. This is a convenience during development only - it
-     * will likely be removed in the future.
-     */
-    protected final void notImplemented() {
-        throw new RuntimeException("Not implemented yet");
-    }
-
-    /**
-     * Assert that the specified string is not empty. Throw an exception if it is.
-     *
-     * @param description The description to pass into the exception if this string is empty
-     * @param string The string to check
-     * @throws IllegalArgumentException If the string is empty
-     */
-    protected final void assertNotEmpty(final String description, final String string)
-        throws IllegalArgumentException {
-
-        if (string.length() == 0) {
-            throw new IllegalArgumentException("String may not be empty: " + description);
-        }
-    }
-
-    /**
      * Searches by the specified criteria and return the first HtmlElement that is found.
      *
      * @param elementName The name of the element.
