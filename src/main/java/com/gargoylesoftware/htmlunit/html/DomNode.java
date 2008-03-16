@@ -112,7 +112,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private DomNode nextSibling_;
 
-    /** Start of the child list */
+    /** Start of the child list. */
     private DomNode firstChild_;
 
     /**
@@ -576,7 +576,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns a flag indicating whether or not this node itself results
      * in any space taken up in the browser windows; for instance, "&lt;b&gt;"
-     * affects the specified text, but does not use up any space itself
+     * affects the specified text, but does not use up any space itself.
      *
      * @return The flag
      */
@@ -588,7 +588,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns a flag indicating whether or not this node should
      * have any leading and trailing whitespace removed when asText()
      * is called; mostly this should be true, but must be false for
-     * such things as text formatting tags
+     * such things as text formatting tags.
      *
      * @return The flag
      */
@@ -727,7 +727,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
@@ -738,7 +738,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively write the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
@@ -773,7 +773,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Make a clone of this node
+     * Makes a clone of this node.
      *
      * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
      * below this one. Otherwise, the new node will not have any children. The page reference
@@ -1105,7 +1105,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
     
     /**
-     * an iterator over all children of this node
+     * An iterator over all children of this node.
      */
     protected class ChildIterator implements Iterator<DomNode> {
 
@@ -1129,7 +1129,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
         }
 
-        /** remove the current object */
+        /** Removes the current object. */
         public void remove() {
             if (currentNode_ == null) {
                 throw new IllegalStateException();

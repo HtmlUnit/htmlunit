@@ -49,7 +49,7 @@ import java.util.NoSuchElementException;
  */
 public final class Util {
 
-    /** Private constructor to prevent instantiation */
+    /** Private constructor to prevent instantiation. */
     private Util() {
         // does nothing
     }

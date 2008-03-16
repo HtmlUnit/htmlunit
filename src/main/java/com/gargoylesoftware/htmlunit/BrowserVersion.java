@@ -81,13 +81,13 @@ public class BrowserVersion implements Serializable {
     private float browserVersionNumeric_;
     private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
 
-    /** Application code name for both Microsoft Internet Explorer and Netscape series */
+    /** Application code name for both Microsoft Internet Explorer and Netscape series. */
     public static final String APP_CODE_NAME = "Mozilla";
 
-    /** Application name for the Microsoft Internet Explorer series of browsers */
+    /** Application name for the Microsoft Internet Explorer series of browsers. */
     public static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
 
-    /** Application name the Netscape navigator series of browsers */
+    /** Application name the Netscape navigator series of browsers. */
     public static final String NETSCAPE = "Netscape";
 
     /** United States English language identifier. */
@@ -99,7 +99,7 @@ public class BrowserVersion implements Serializable {
     /** The WIN32 platform. */
     public static final String PLATFORM_WIN32 = "Win32";
 
-    /** Firefox 2 */
+    /** Firefox 2. */
     public static final BrowserVersion FIREFOX_2 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4",
@@ -113,12 +113,12 @@ public class BrowserVersion implements Serializable {
         FIREFOX_2.getPlugins().add(pluginFlash);
     }
 
-    /** Internet Explorer 6  */
+    /** Internet Explorer 6. */
     public static final BrowserVersion INTERNET_EXPLORER_6_0 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", "1.2", 6);
 
-    /** Internet Explorer 7 */
+    /** Internet Explorer 7. */
     public static final BrowserVersion INTERNET_EXPLORER_7_0 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)",
         "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322)", "1.2", 7);

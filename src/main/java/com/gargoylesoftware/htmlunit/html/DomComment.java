@@ -54,11 +54,11 @@ public class DomComment extends DomCharacterData implements Comment {
 
     private static final long serialVersionUID = -7728247579175928593L;
 
-    /** the symbolic node name */
+    /** The symbolic node name. */
     public static final String NODE_NAME = "#comment";
 
     /**
-     * Create an instance of DomComment
+     * Creates an instance of DomComment.
      *
      * @param page The Page that contains this element.
      * @param data the string data held by this node
@@ -92,7 +92,7 @@ public class DomComment extends DomCharacterData implements Comment {
     }
 
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively write the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written

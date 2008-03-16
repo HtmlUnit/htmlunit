@@ -72,7 +72,7 @@ public class HtmlUnitXPath {
     /** Represents a select type expression. */
     public static final int SELECT = 0;
 
-    /** Represents a match type expression.  */
+    /** Represents a match type expression. */
     public static final int MATCH = 1;
 
     /**

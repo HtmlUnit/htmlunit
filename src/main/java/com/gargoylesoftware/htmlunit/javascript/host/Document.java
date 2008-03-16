@@ -144,7 +144,7 @@ public class Document extends EventNode {
     private HTMLCollection anchors_; // has to be a member to have equality (==) working
     private StyleSheetList styleSheets_; // has to be a member to have equality (==) working
 
-    /** The buffer that will be used for calls to document.write() */
+    /** The buffer that will be used for calls to document.write(). */
     private final StringBuilder writeBuffer_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
     private String domain_;

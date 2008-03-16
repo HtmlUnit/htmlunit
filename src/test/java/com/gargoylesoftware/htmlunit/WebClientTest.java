@@ -698,7 +698,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals(expectedPageCreationItems, collectedPageCreationItems);
     }
 
-    /** A PageCreator that collects data */
+    /** A PageCreator that collects data. */
     private class CollectingPageCreator implements PageCreator {
         private final List<Page> collectedPages_;
         /**

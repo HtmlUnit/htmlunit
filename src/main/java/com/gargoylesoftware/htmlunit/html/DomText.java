@@ -46,7 +46,7 @@ import org.w3c.dom.Text;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * representation of a text node in the Html DOM
+ * Representation of a text node in the HTML DOM.
  *
  * @version $Revision$
  * @author David K. Taylor
@@ -58,11 +58,11 @@ public class DomText extends DomCharacterData implements Text {
 
     private static final long serialVersionUID = 6589779086230288951L;
 
-    /** the symbolic node name */
+    /** The symbolic node name. */
     public static final String NODE_NAME = "#text";
 
     /**
-     * Create an instance of DomText
+     * Creates an instance of DomText.
      *
      * @param page The Page that contains this element.
      * @param data the string data held by this node
@@ -79,7 +79,7 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * Create a new text node split from another text node.  This method allows
+     * Creates a new text node split from another text node.  This method allows
      * the derived type of the new text node to match the original node type.
      *
      * @param offset The character position at which to split the DomText node.
@@ -90,7 +90,7 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * Split a DomText node in two.
+     * Splits a DomText node in two.
      * @param offset The character position at which to split the DomText node.
      * @return The DomText node that was split from this node.
      */
@@ -168,7 +168,7 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
@@ -183,8 +183,8 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * Gives a simple representation to facilitate debugging
-     * @return a simple representation
+     * Gives a simple representation to facilitate debugging.
+     * @return a simple representation.
      */
     @Override
     public String toString() {

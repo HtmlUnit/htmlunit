@@ -51,11 +51,11 @@ import com.gargoylesoftware.htmlunit.Page;
  */
 public abstract class DomCharacterData extends DomNode implements CharacterData {
 
-    /** the data string */
+    /** The data string. */
     private String data_;
 
     /**
-     * Create an instance of DomCharacterData
+     * Creates an instance of DomCharacterData.
      *
      * @param page The Page that contains this element.
      * @param data the data string wrapped by this node

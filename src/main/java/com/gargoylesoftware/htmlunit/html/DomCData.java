@@ -53,11 +53,11 @@ public class DomCData extends DomText implements CDATASection {
 
     private static final long serialVersionUID = 4941214369614888520L;
 
-    /** the symbolic node name */
+    /** The symbolic node name. */
     public static final String NODE_NAME = "#cdata-section";
 
     /**
-     * Create an instance of DomText
+     * Creates an instance of DomText.
      *
      * @param page The Page that contains this element.
      * @param data the string data held by this node
@@ -83,7 +83,7 @@ public class DomCData extends DomText implements CDATASection {
     }
 
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written

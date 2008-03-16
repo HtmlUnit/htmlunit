@@ -50,7 +50,7 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
 
     private static final long serialVersionUID = 7073670645099705230L;
 
-    /** The symbolic node name */
+    /** The symbolic node name. */
     public static final String NODE_NAME = "#document-fragment";
 
     /**
