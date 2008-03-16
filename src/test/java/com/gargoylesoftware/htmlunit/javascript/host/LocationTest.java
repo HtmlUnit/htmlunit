@@ -67,7 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class LocationTest extends WebTestCase {
 
     /**
-     * Regression test for bug 742902
+     * Regression test for bug 742902.
      * @throws Exception if the test fails
      */
     @Test
@@ -386,7 +386,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * Test for replace
+     * Test for <tt>replace</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -461,9 +461,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * Regression test fo Bug #1289060
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266
-     *
+     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test

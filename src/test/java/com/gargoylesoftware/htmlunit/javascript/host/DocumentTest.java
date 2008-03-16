@@ -205,7 +205,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test that forms is a live collection
+     * Test that forms is a live collection.
      * @throws Exception if the test fails
      */
     @Test
@@ -239,7 +239,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Tests for document.anchors
+     * Tests for <tt>document.anchors</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -251,7 +251,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Tests for document.anchors
+     * Tests for <tt>document.anchors</tt>.
      * @throws Exception if the test fails
      */
     void anchors(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
@@ -290,7 +290,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Tests for document.links
+     * Tests for <tt>document.links</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -461,7 +461,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for createTextNode
+     * Regression test for <tt>createTextNode</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -549,7 +549,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for RFE 741930
+     * Regression test for RFE 741930.
      * @throws Exception if the test fails
      */
     @Test
@@ -619,7 +619,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for appendChild of a text node
+     * Regression test for appendChild of a text node.
      * @throws Exception if the test fails
      */
     @Test
@@ -647,7 +647,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for cloneNode
+     * Regression test for <tt>cloneNode</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -678,7 +678,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for insertBefore
+     * Regression test for <tt>insertBefore</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -791,7 +791,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 740665
+     * Regression test for bug 740665.
      * @throws Exception if the test fails
      */
     @Test
@@ -814,7 +814,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 740665
+     * Regression test for bug 740665.
      * @throws Exception if the test fails
      */
     @Test
@@ -836,7 +836,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 740665
+     * Regression test for bug 740665.
      * @throws Exception if the test fails
      */
     @Test
@@ -859,7 +859,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 740665
+     * Regression test for bug 740665.
      * @throws Exception if the test fails
      */
     @Test
@@ -892,7 +892,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for parentNode with nested elements
+     * Regression test for <tt>parentNode</tt> with nested elements.
      * @throws Exception if the test fails
      */
     @Test
@@ -919,7 +919,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for parentNode of document
+     * Regression test for <tt>parentNode</tt> of document.
      * @throws Exception if the test fails
      */
     @Test
@@ -941,7 +941,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for parentNode and createElement
+     * Regression test for <tt>parentNode</tt> and <tt>createElement</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -964,7 +964,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for parentNode and appendChild
+     * Regression test for <tt>parentNode</tt> and <tt>appendChild</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -993,7 +993,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for documentElement of document
+     * Regression test for <tt>documentElement</tt> of document.
      * @throws Exception if the test fails
      */
     @Test
@@ -1017,7 +1017,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for firstChild with nested elements
+     * Regression test for <tt>firstChild</tt> with nested elements.
      * @throws Exception if the test fails
      */
     @Test
@@ -1044,7 +1044,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for firstChild and appendChild
+     * Regression test for <tt>firstChild</tt> and <tt>appendChild</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -1075,7 +1075,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for lastChild with nested elements
+     * Regression test for lastChild with nested elements.
      * @throws Exception if the test fails
      */
     @Test
@@ -1102,7 +1102,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for lastChild and appendChild
+     * Regression test for lastChild and appendChild.
      * @throws Exception if the test fails
      */
     @Test
@@ -1133,7 +1133,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for nextSibling with nested elements
+     * Regression test for nextSibling with nested elements.
      * @throws Exception if the test fails
      */
     @Test
@@ -1160,7 +1160,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for nextSibling and appendChild
+     * Regression test for nextSibling and appendChild.
      * @throws Exception if the test fails
      */
     @Test
@@ -1191,7 +1191,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for previousSibling with nested elements
+     * Regression test for previousSibling with nested elements.
      * @throws Exception if the test fails
      */
     @Test
@@ -1218,7 +1218,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for previousSibling and appendChild
+     * Regression test for previousSibling and appendChild.
      * @throws Exception if the test fails
      */
     @Test
@@ -1274,7 +1274,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 707750
+     * Regression test for bug 707750.
      * @throws Exception if the test fails
      */
     @Test
@@ -1324,7 +1324,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 743241
+     * Regression test for bug 743241.
      * @throws Exception if the test fails
      */
     @Test
@@ -1358,7 +1358,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 715379
+     * Regression test for bug 715379.
      * @throws Exception if the test fails
      */
     @Test
@@ -1697,7 +1697,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 740636
+     * Regression test for bug 740636.
      * @throws Exception if the test fails
      */
     @Test
@@ -1723,7 +1723,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 740605
+     * Regression test for bug 740605.
      * @throws Exception if the test fails
      */
     @Test
@@ -1740,7 +1740,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 740605
+     * Regression test for bug 740605.
      * @throws Exception if the test fails
      */
     @Test
@@ -2110,8 +2110,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test setting and reading the title for an existing title
-     *
+     * Test setting and reading the title for an existing title.
      * @throws Exception if the test fails
      */
     @Test
@@ -2134,9 +2133,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test setting and reading the title for when the is not in
-     * the page to begin
-     *
+     * Test setting and reading the title for when the is not in the page to begin.
      * @throws Exception if the test fails
      */
     @Test
@@ -2156,9 +2153,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test setting and reading the title for when the is not in
-     * the page to begin
-     *
+     * Test setting and reading the title for when the is not in the page to begin.
      * @throws Exception if the test fails
      */
     @Test
@@ -2202,7 +2197,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test the ReadyState.  This should only work in IE.
+     * Test the ReadyState. This should only work in IE.
      * Currently locked out since the browser type of code is not working.
      *
      * @throws Exception if the test fails
@@ -2371,8 +2366,9 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test that img and form can be retrieved directly by name but not
-     * a, input or button
+     * Test that <tt>img</tt> and <tt>form</tt> can be retrieved directly by name, but not <tt>a</tt>, <tt>input</tt>
+     * or <tt>button</tt>.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -2518,7 +2514,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test for 1613119
+     * Test for bug 1613119.
      * @throws Exception if the test fails
      */
     @Test
@@ -2741,7 +2737,7 @@ public class DocumentTest extends WebTestCase {
     }
 
    /**
-    * Test for 1185389
+    * Test for bug 1185389.
     * @throws Exception if the test fails
     */
     @Test
@@ -2894,8 +2890,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Tests document.cloneNode()
-     *
+     * Tests <tt>document.cloneNode()</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -3141,9 +3136,8 @@ public class DocumentTest extends WebTestCase {
         testHTMLFile("DocumentTest_queryCommandSupported.html");
     }
 
-
     /**
-     * Minimal test for execCommand
+     * Minimal test for <tt>execCommand</tt>.
      * @throws Exception if the test fails
      */
     @Test

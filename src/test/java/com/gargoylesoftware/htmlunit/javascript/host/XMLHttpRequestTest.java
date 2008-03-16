@@ -234,8 +234,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1209692
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266
+     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266.
      * @throws Exception If the test fails.
      */
     @Test
@@ -319,7 +318,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Test access to the XML DOM
+     * Test access to the XML DOM.
      * @throws Exception if the test fails.
      */
     @Test
@@ -405,7 +404,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
     
     /**
-     * Test calls to send() without any argument
+     * Test calls to send() without any arguments.
      * @throws Exception if the test fails.
      */
     @Test
@@ -483,7 +482,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Test Mozilla's overrideMimeType method
+     * Test Mozilla's overrideMimeType method.
      * @throws Exception if the test fails.
      */
     @Test
@@ -635,8 +634,8 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Asynchron callback should be called in "main" js thread and not parallel to other js execution
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1508377&group_id=47038&atid=448266
+     * Asynchron callback should be called in "main" js thread and not parallel to other js execution.
+     * See https://sourceforge.net/tracker/index.php?func=detail&aid=1508377&group_id=47038&atid=448266.
      * @throws Exception if the test fails.
      */
     @Test
@@ -695,7 +694,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Test that the Referer header is set correctly
+     * Tests that the <tt>Referer</tt> header is set correctly.
      * @throws Exception if the test fails.
      */
     @Test
@@ -730,10 +729,8 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Test for bug
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1784330&group_id=47038
-     *
-     * @throws Exception if the test fails.
+     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1784330&group_id=47038.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testCaseSensitivity() throws Exception {
@@ -752,8 +749,8 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Test that the different HTTP methods are supported
-     * @throws Exception if the test fails.
+     * Tests that the different HTTP methods are supported.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testMethods() throws Exception {
@@ -845,7 +842,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * Was causing a deadlock on 03.11.2007 (and probably with release 1.13 too)
+     * Was causing a deadlock on 03.11.2007 (and probably with release 1.13 too).
      * @throws Exception if the test fails
      */
     @Test

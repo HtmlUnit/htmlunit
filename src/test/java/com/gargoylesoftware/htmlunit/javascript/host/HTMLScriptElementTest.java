@@ -100,7 +100,7 @@ public class HTMLScriptElementTest extends WebTestCase {
     }
 
     /**
-     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038
+     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038.
      * @throws Exception if the test fails
      */
     @Test
@@ -118,7 +118,7 @@ public class HTMLScriptElementTest extends WebTestCase {
     }
 
     /**
-     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038
+     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038.
      * @throws Exception if the test fails
      */
     @Test

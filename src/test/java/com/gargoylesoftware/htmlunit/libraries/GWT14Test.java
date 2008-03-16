@@ -100,8 +100,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * Test I18N default language
-     *
+     * Tests I18N default language.
      * @throws Exception If an error occurs.
      */
     @Test
@@ -135,8 +134,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * Test I18N French language
-     *
+     * Test I18N French language.
      * @throws Exception If an error occurs.
      */
     @Test

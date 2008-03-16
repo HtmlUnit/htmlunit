@@ -497,7 +497,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test to reproduce a known bug
+     * Regression test to reproduce a known bug.
      * @throws Exception if the test fails
      */
     @Test
@@ -558,7 +558,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test to reproduce a known bug
+     * Regression test to reproduce a known bug.
      * @throws Exception if the test fails
      */
     @Test
@@ -815,7 +815,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Just tests that setting and clearing an interval doesn't throw
+     * Just tests that setting and clearing an interval doesn't throw an exception.
      * @throws Exception If the test fails
      */
     @Test
@@ -1290,7 +1290,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test the window.closed property
+     * Test the <tt>window.closed</tt> property.
      * @throws Exception if the test fails.
      */
     @Test
@@ -1320,7 +1320,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test closing using JavaScript
+     * Test closing using JavaScript.
      * @throws Exception if the test fails.
      */
     @Test
@@ -1374,7 +1374,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that length of frames collection is retrieved
+     * Test that length of frames collection is retrieved.
      * @throws Exception if the test fails
      */
     @Test
@@ -1392,8 +1392,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that length of frames collection is retrieved when there
-     * are frames.
+     * Test that length of frames collection is retrieved when there are frames.
      * @throws Exception If the test fails
      */
     @Test
@@ -1422,8 +1421,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.moveTo method gets correctly called and handled
-     * by the scripting engine.
+     * Test that Window.moveTo method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1437,8 +1435,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.moveBy method gets correctly called and handled
-     * by the scripting engine.
+     * Test that Window.moveBy method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1452,8 +1449,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Tests that the Window.resizeTo method gets correctly called and
-     * handled by the scripting engine.
+     * Tests that the Window.resizeTo method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1466,8 +1462,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Tests that the Window.resizeBy method gets correctly called and
-     * handled by the scripting engine.
+     * Tests that the Window.resizeBy method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1480,8 +1475,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.scroll method gets correctly called and handled
-     * by the scripting engine.
+     * Test that Window.scroll method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1495,8 +1489,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.scrollBy method gets correctly called and handled
-     * by the scripting engine.
+     * Test that Window.scrollBy method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1510,8 +1503,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.scrollByLines method gets correctly called and handled
-     * by the scripting engine.
+     * Test that Window.scrollByLines method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1525,8 +1517,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.scrollByPages method gets correctly called and handled
-     * by the scripting engine.
+     * Test that Window.scrollByPages method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1540,8 +1531,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test that Window.scrollTo method gets correctly called and handled
-     * by the scripting engine.
+     * Test that Window.scrollTo method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
     @Test
@@ -1773,7 +1763,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test for 1596926
+     * Regression test for bug 1596926.
      * @throws Exception If the test fails.
      */
     @Test
@@ -1863,8 +1853,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test Mozilla viewport properties
-     *
+     * Tests Mozilla viewport properties.
      * @throws Exception If the test fails.
      */
     @Test
@@ -2137,7 +2126,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Test the 'Referer' HTTP header by window.open
+     * Test the <tt>Referer</tt> HTTP header by <tt>window.open</tt>.
      * @throws Exception if the test fails.
      */
     @Test
@@ -2235,8 +2224,8 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test for [ 1608555 ] JavaScript: window.eval does evaluate local scope
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1608555&group_id=47038&atid=448266
+     * Regression test for [ 1608555 ] JavaScript: window.eval does evaluate local scope.
+     * See https://sourceforge.net/tracker/index.php?func=detail&aid=1608555&group_id=47038&atid=448266.
      * @throws Exception If the test fails
      */
     @Test
@@ -2447,8 +2436,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * Regression test for
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266.
      * @throws Exception If the test fails
      */
     @Test

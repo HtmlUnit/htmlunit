@@ -140,8 +140,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * Blocked by Rhino bug 370279
-     * https://bugzilla.mozilla.org/show_bug.cgi?id=370279
+     * Blocked by Rhino bug 370279 (https://bugzilla.mozilla.org/show_bug.cgi?id=370279).
      * @throws Exception If test fails.
      */
     @Test
@@ -187,8 +186,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * Blocked by Rhino bug 369860
-     * https://bugzilla.mozilla.org/show_bug.cgi?id=369860
+     * Blocked by Rhino bug 369860 (https://bugzilla.mozilla.org/show_bug.cgi?id=369860).
      * @throws Exception If test fails.
      */
     @Test

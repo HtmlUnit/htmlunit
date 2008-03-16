@@ -57,7 +57,7 @@ import com.gargoylesoftware.base.testing.EventCatcher;
 public class TopLevelWindowTest extends WebTestCase {
 
     /**
-     * Test closing the only open window
+     * Tests closing the only open window.
      * @throws Exception if the test fails.
      */
     @Test

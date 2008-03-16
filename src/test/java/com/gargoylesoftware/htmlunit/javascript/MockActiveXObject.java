@@ -38,19 +38,19 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 /**
- * This is a java object that is used to test the active x binding to java objects.
+ * This is a Java object that is used to test the ActiveX binding to Java objects.
  *
  * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public class MockActiveXObject {
     /**
-     * Test a property
+     * Test property.
      */
     public static final String MESSAGE = "ActiveX is working!";
 
     /**
-     * Test a function call
+     * Test function.
      * @return the test message
      */
     public String GetMessage() {

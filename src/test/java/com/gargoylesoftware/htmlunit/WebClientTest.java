@@ -1102,7 +1102,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test {@link WebClient#loadWebResponseInto(WebResponse,WebWindow)}
+     * Test {@link WebClient#loadWebResponseInto(WebResponse,WebWindow)}.
      * @throws Exception If the test fails.
      */
     @Test
@@ -1197,9 +1197,8 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Regression test for
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1669097&group_id=47038&atid=448266
-     * @throws Exception If the test fails.
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1669097&group_id=47038&atid=448266.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testProxyConfigWithRedirect() throws Exception {
@@ -1292,7 +1291,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals(urlString + "#second", WebClient.expandUrl(url, "#second"));
     }
 
-    /** Test the accessors for refreshHandler */
+    /** Test the accessors for refreshHandler. */
     @Test
     public void testRefreshHandlerAccessors() {
         final WebClient webClient = new WebClient();
@@ -1306,7 +1305,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test the script preprocessor
+     * Test the script preprocessor.
      * @throws IOException if the test fails
      */
     @Test
@@ -1462,7 +1461,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test the value of window.opener when a link has target="_top"
+     * Test the value of window.opener when a link has target="_top".
      * @throws Exception if test fails
      */
     @Test
@@ -1492,9 +1491,8 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test setting the NekoHTML logging and parsing flags
-     *
-     * @throws Exception if test fails
+     * Test setting the NekoHTML logging and parsing flags.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testNekoFlagSetters() throws Exception {
@@ -1504,8 +1502,8 @@ public class WebClientTest extends WebTestCase {
     }
     
     /**
-     * Unset the static items set in tests here
-     * @throws Exception if superclass throws
+     * Unset the static items set in tests here.
+     * @throws Exception if an error occurs
      */
     @After
     public void tearDown() throws Exception {
@@ -1690,7 +1688,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test that WebClient.getPage(String) calls WebClient.getPage(URL) with the right URL
+     * Test that WebClient.getPage(String) calls WebClient.getPage(URL) with the right URL.
      * @throws Exception if the test fails
      */
     @Test
@@ -1724,7 +1722,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test that '+' is not encoded in URLs
+     * Test that '+' is not encoded in URLs.
      * @throws Exception if the test fails
      */
     @Test

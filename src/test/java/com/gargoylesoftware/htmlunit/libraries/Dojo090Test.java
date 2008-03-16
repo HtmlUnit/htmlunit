@@ -95,7 +95,7 @@ public class Dojo090Test extends WebTestCase {
     }
 
     /**
-     * Before
+     * Performs pre-test initialization.
      * @throws Exception if an error occurs
      */
     @Before
@@ -104,7 +104,7 @@ public class Dojo090Test extends WebTestCase {
     }
 
     /**
-     * After
+     * Performs post-test deconstruction.
      * @throws Exception if an error occurs
      */
     @After

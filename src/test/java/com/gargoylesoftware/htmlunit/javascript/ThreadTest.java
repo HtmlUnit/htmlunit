@@ -58,9 +58,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class ThreadTest extends TestCase {
 
     /**
-     * Create an instance
-     *
-     * @param name The name of the test
+     * Creates a new instance.
+     * @param name the name of the test
      */
     public ThreadTest(final String name) {
         super(name);
@@ -92,7 +91,7 @@ public class ThreadTest extends TestCase {
     }
 
     /**
-     * run this test many times
+     * Runs this test many times.
      * @return a suite
      */
     public static Test suite() {

@@ -87,7 +87,7 @@ public class EventTest extends WebTestCase {
 
     /**
      * Verify setting a previously undefined/non-existent property on an Element
-     * is accessible from inside an event handler
+     * is accessible from inside an event handler.
      * @throws Exception if the test fails
      */
     @Test
@@ -175,7 +175,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * event.currentTarget == this inside JavaScript event handler
+     * Verify that <tt>event.currentTarget == this</tt> inside JavaScript event handler.
      * @throws Exception if the test fails
      */
     @Test
@@ -354,7 +354,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Test that this refers to the element on which the event applies
+     * Test that "this" refers to the element on which the event applies.
      * @throws Exception if the test fails
      */
     @Test
@@ -377,7 +377,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Test event transmission to event handler
+     * Test event transmission to event handler.
      * @throws Exception if the test fails
      */
     @Test
@@ -411,7 +411,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Test that the event property of the window is available
+     * Test that the event property of the window is available.
      * @throws Exception if the test fails
      */
     @Test
@@ -458,7 +458,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Test for event capturing and bubbling in FF
+     * Test for event capturing and bubbling in FF.
      * @throws Exception if the test fails
      */
     @Test
@@ -497,7 +497,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Test for event bubbling in IE
+     * Test for event bubbling in IE.
      * @throws Exception if the test fails
      */
     @Test
@@ -536,7 +536,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Test for event capturing and bubbling in FF
+     * Test for event capturing and bubbling in FF.
      * @throws Exception if the test fails
      */
     @Test
@@ -810,7 +810,7 @@ public class EventTest extends WebTestCase {
     }
 
     /**
-     * Test Mozilla DOMContentLoaded event
+     * Test Mozilla DOMContentLoaded event.
      * @throws Exception if the test fails
      */
     @Test

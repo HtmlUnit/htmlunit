@@ -102,7 +102,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1562872
+     * Regression test for bug 1562872.
      * @throws Exception if the test fails
      */
     @Test

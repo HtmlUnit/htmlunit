@@ -308,7 +308,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Test for getElementsByTagName
+     * Test for <tt>getElementsByTagName</tt>.
      * @throws Exception if the test fails
      */
     @Test
@@ -339,7 +339,7 @@ public class HTMLElementTest extends WebTestCase {
 
     /**
      * Test that {@link HTMLElement#jsxFunction_getElementsByTagName} returns an associative array.
-     * Test for bug 1369514.^
+     * Test for bug 1369514.
      * @throws Exception if the test fails
      */
     @Test
@@ -394,7 +394,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Test getting the class for the element
+     * Test getting the class for the element.
      * @throws Exception if the test fails
      */
     @Test
@@ -418,7 +418,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Test getting the class for the element
+     * Test setting the class for the element.
      * @throws Exception if the test fails
      */
     @Test
@@ -569,7 +569,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Test the use of innerHTML to set a new input
+     * Test the use of innerHTML to set a new input.
      * @throws Exception if the test fails
      */
     @Test
@@ -717,7 +717,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Test setting innerHTML to empty string
+     * Test setting innerHTML to empty string.
      * @throws Exception if the test fails
      */
     @Test
@@ -738,7 +738,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Test setting innerHTML to null
+     * Test setting innerHTML to null.
      * @throws Exception if the test fails
      */
     @Test
@@ -750,7 +750,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Test setting innerHTML to null
+     * Test setting innerHTML to null.
      * @see #testSetInnerHTMLNull()
      */
     private void testSetInnerHTMLNull(final BrowserVersion browserVersion, final String[] expectedAlerts)
@@ -1494,7 +1494,8 @@ public class HTMLElementTest extends WebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
-    /** Test that JavaScript scrollIntoView() function doesn't fail
+    /**
+     * Tests that JavaScript scrollIntoView() function doesn't fail.
      * @throws Exception if the test fails
      */
     @Test
@@ -1508,10 +1509,9 @@ public class HTMLElementTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
-     * Test offsetParent property.
-     *
+     * Tests the offsetParent property.
      * @throws Exception if the test fails
      */
     @Test
@@ -1932,7 +1932,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * Tests setAttribute() with name of event handler
+     * Tests setAttribute() with name of event handler.
      * @throws Exception if the test fails
      */
     @Test

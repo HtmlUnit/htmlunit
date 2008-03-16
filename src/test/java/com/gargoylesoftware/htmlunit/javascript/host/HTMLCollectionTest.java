@@ -80,7 +80,7 @@ public class HTMLCollectionTest extends WebTestCase {
     }
     
     /**
-     * Test that toString is accessible
+     * Test that <tt>toString</tt> is accessible.
      * @throws Exception if the test fails
      */
     @Test
@@ -259,7 +259,7 @@ public class HTMLCollectionTest extends WebTestCase {
     }
 
     /**
-     * Depending on the method used, out of bound access give different responses
+     * Depending on the method used, out of bound access give different responses.
      * @throws Exception if the test fails
      */
     @Test

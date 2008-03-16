@@ -88,8 +88,8 @@ public class HTMLOptionElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1323425
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1323425&group_id=47038&atid=448266
+     * Regression test for bug 1323425.
+     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1323425&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test
@@ -110,7 +110,7 @@ public class HTMLOptionElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for 1592728
+     * Regression test for 1592728.
      * @throws Exception if the test fails
      */
     @Test
@@ -143,7 +143,7 @@ public class HTMLOptionElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for 1672048
+     * Regression test for 1672048.
      * @throws Exception if the test fails
      */
     @Test

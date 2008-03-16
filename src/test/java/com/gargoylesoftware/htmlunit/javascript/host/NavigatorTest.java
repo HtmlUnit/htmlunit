@@ -250,7 +250,7 @@ public class NavigatorTest extends WebTestCase {
     }
 
     /**
-     * Test closing using JavaScript
+     * Test closing using JavaScript.
      * @throws Exception if the test fails.
      */
     @Test
@@ -276,7 +276,7 @@ public class NavigatorTest extends WebTestCase {
     }
     
     /**
-     * Test language property (only for Mozilla)
+     * Test language property (only for Mozilla).
      * @throws Exception if the test fails.
      */
     @Test
@@ -302,7 +302,7 @@ public class NavigatorTest extends WebTestCase {
     }
 
     /**
-     * Test some Mozilla properties (minimal tests are support is not completed)
+     * Test some Mozilla properties (minimal tests are support is not completed).
      * @throws Exception if the test fails.
      */
     @Test

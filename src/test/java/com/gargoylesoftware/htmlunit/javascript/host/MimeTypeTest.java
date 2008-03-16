@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class MimeTypeTest extends WebTestCase {
 
     /**
-     * Test default configuration of Flash plugin for Firefox
+     * Tests default configuration of Flash plugin for Firefox.
      * @throws Exception if the test fails
      */
     @Test
@@ -84,7 +84,7 @@ public class MimeTypeTest extends WebTestCase {
     }
 
     /**
-     * Test default configuration of Flash plugin for Firefox
+     * Tests default configuration of Flash plugin for Firefox.
      * @throws Exception if the test fails
      */
     @Test

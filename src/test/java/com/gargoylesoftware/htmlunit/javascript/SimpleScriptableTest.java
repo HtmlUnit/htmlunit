@@ -222,7 +222,7 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
-     * Works since Rhino 1.7
+     * Works since Rhino 1.7.
      * @throws Exception if the test fails
      */
     @Test
@@ -287,8 +287,7 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
-     * https://bugzilla.mozilla.org/show_bug.cgi?id=419090
-     *
+     * Blocked by Rhino bug 419090 (https://bugzilla.mozilla.org/show_bug.cgi?id=419090).
      * @throws Exception if the test fails
      */
     @Test

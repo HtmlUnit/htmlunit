@@ -107,7 +107,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         + "assertArrEquals(s.match(re), [s, 'var a = 1;', ';']);\n";
 
     /**
-     * Test that string.replace works correctly (?) in htmlunit
+     * Test that string.replace works correctly (?) in HtmlUnit.
      * @throws Exception if the test fails
      */
     @Test
@@ -122,7 +122,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
-     * Test if custom patch is still needed
+     * Tests if custom patch is still needed.
      */
     @Test
     public void needCustomFix() {
@@ -143,8 +143,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
-     * Test for bug
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
+     * Test for bug http://sf.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test
@@ -353,7 +352,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
     
     /**
-     * Curly braces can be used non escaped in JS regexp
+     * Verifies that curly braces can be used non escaped in JS regexp.
      */
     @Test
     public void testEscapeCurlyBraces() {
@@ -369,7 +368,7 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
     }
 
     /**
-     * Test usage of RegExp with non escaped curly braces like found in dhtmlGrid
+     * Tests usage of regex with non escaped curly braces, such as is used by dhtmlGrid.
      * @throws Exception if the test fails
      */
     @Test

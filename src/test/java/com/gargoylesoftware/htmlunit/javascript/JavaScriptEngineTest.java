@@ -119,8 +119,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1609944&group_id=47038
+     * Regression test for bug https://sf.net/tracker/?func=detail&atid=448266&aid=1609944&group_id=47038.
      * @throws Exception if the test fails
      */
     @Test
@@ -139,9 +138,9 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
-    
+
     /**
-     * Try to set the value of a text input field.
+     * Tries to set the value of a text input field.
      * @throws Exception if the test fails
      */
     @Test
@@ -189,7 +188,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Checks that a dynamically compiled function works in the scope of its birth
+     * Checks that a dynamically compiled function works in the scope of its birth.
      * @throws Exception if the test fails
      */
     @Test
@@ -233,8 +232,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Checks that a dynamically compiled function works in the scope of its birth
-     * and not the other window
+     * Checks that a dynamically compiled function works in the scope of its birth and not the other window.
      * @throws Exception if the test fails
      */
     @Test
@@ -349,7 +347,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Test that the URL of the page containing the script is contained in the exception's message
+     * Test that the URL of the page containing the script is contained in the exception's message.
      * @throws Exception if the test fails
      */
     @Test
@@ -621,7 +619,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1714762
+     * Regression test for bug 1714762.
      * @throws Exception if the test fails
      */
     @Test
@@ -735,7 +733,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1552746&group_id=47038
+     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1552746&group_id=47038.
      * @throws Exception if the test fails
      */
     @Test
@@ -878,7 +876,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * ActiveX related exceptions that do not require a map
+     * Tests ActiveX related exceptions that do not require a map.
      * @throws Exception If the test fails
      */
     @Test

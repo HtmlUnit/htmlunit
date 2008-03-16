@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class PopupTest extends WebTestCase {
 
     /**
-     * Just test that a standard use of popup works without exception
+     * Just test that a standard use of popup works without exception.
      * @throws Exception if the test fails
      */
     @Test

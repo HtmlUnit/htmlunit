@@ -115,7 +115,7 @@ public class NodeTest extends WebTestCase {
     }
 
     /**
-     * Regression test for removeChild
+     * Regression test for removeChild.
      * @throws Exception if the test fails
      */
     @Test
@@ -152,7 +152,7 @@ public class NodeTest extends WebTestCase {
     }
 
     /**
-     * Regression test for replaceChild
+     * Regression test for replaceChild.
      * @throws Exception if the test fails
      */
     @Test
@@ -207,7 +207,7 @@ public class NodeTest extends WebTestCase {
     }
 
     /**
-     * The common browsers always return node names in uppercase.  Test this.
+     * The common browsers always return node names in uppercase. Test this.
      * @throws Exception on test failure
      */
     @Test
@@ -414,7 +414,7 @@ public class NodeTest extends WebTestCase {
     }
 
     /**
-     * Test for 1716129
+     * Test for bug 1716129.
      * @throws Exception on test failure
      */
     @Test

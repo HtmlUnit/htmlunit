@@ -186,9 +186,8 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038
-     * in href, "this" should be the window and not the link
+     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038.
+     * In href, "this" should be the window and not the link.
      * @throws Exception if the test fails
      */
     @Test

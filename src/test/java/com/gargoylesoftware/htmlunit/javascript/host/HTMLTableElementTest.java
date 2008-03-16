@@ -203,7 +203,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1528024
+     * Regression test for bug 1528024.
      * @see <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1528024&group_id=47038">bug</a>
      * @throws Exception if the test fails
      */
@@ -395,7 +395,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1244839
+     * Regression test for bug 1244839.
      * @throws Exception if the test fails
      */
     @Test
@@ -432,11 +432,11 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * Test that a tbody is created
+     * Tests that a <tt>tbody</tt> is automatically created.
      * @throws Exception if the test fails
      */
     @Test
-    public void testInsertRowInEmtpyTable() throws Exception {
+    public void testInsertRowInEmptyTable() throws Exception {
         final String content =
             "<html><head>\n"
             + "<script>\n"
@@ -465,11 +465,11 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * Test that a tbody is created
+     * Tests that a <tt>tbody</tt> is automatically created.
      * @throws Exception if the test fails
      */
     @Test
-    public void testInsertRowInTableWithEmtpyTbody() throws Exception {
+    public void testInsertRowInTableWithEmptyTbody() throws Exception {
         final String content =
             "<html><head>\n"
             + "<script>\n"
@@ -498,7 +498,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * Tests length, tBodies on nested rows
+     * Tests length, tBodies on nested rows.
      * @throws Exception if the test fails
      */
     @Test
@@ -534,8 +534,8 @@ public class HTMLTableElementTest extends WebTestCase {
     }
     
     /**
-     * Tests string default values
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038
+     * Tests string default values.
+     * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038.
      * @throws Exception if the test fails
      */
     @Test
@@ -545,7 +545,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * Test string values for FF. Currently not working as htmlunit's object names don't map FF ones
+     * Test string values for FF. Currently not working as HtmlUnit's object names don't map to FF ones.
      * @throws Exception if the test fails
      */
     @Test
@@ -559,7 +559,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * Utility method
+     * Utility method.
      */
     private void testStringValues(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String content =

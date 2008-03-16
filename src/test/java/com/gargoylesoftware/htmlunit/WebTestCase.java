@@ -95,7 +95,7 @@ public abstract class WebTestCase {
 
     /**
      * The name of the system property used to determine if files should be generated
-     * or not in {@link #createTestPageForRealBrowserIfNeeded(String,List)}
+     * or not in {@link #createTestPageForRealBrowserIfNeeded(String,List)}.
      */
     public static final String PROPERTY_GENERATE_TESTPAGES
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
@@ -180,7 +180,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Return the log that is being used for all testing objects
+     * Returns the log that is being used for all testing objects.
      * @return The log.
      */
     protected final Log getLog() {
@@ -188,7 +188,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Load a page with the specified HTML and collect alerts into the list.
+     * Loads a page with the specified HTML and collect alerts into the list.
      * @param html The HTML to use.
      * @param collectedAlerts The list to hold the alerts.
      * @param url The URL that will use as the document host for this page
@@ -376,7 +376,7 @@ public abstract class WebTestCase {
 
     /**
      * Facility method transforming expectedAlerts to a list and calling
-     * {@link #createTestPageForRealBrowserIfNeeded(String, List)}
+     * {@link #createTestPageForRealBrowserIfNeeded(String, List)}.
      * @param content the content of the HTML page
      * @param expectedAlerts the expected alerts
      * @throws IOException if writing file fails

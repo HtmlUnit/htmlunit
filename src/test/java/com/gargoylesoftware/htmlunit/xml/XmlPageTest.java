@@ -63,7 +63,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class XmlPageTest extends WebTestCase {
 
     /**
-     * Tests namespace
+     * Tests namespace.
      * @throws Exception if the test fails
      */
     @Test
@@ -85,7 +85,7 @@ public class XmlPageTest extends WebTestCase {
     }
 
     /**
-     * Tests a simple valid xml document
+     * Tests a simple valid XML document.
      * @throws Exception if the test fails
      */
     @Test
@@ -102,7 +102,7 @@ public class XmlPageTest extends WebTestCase {
     }
 
     /**
-     * Utility method to test XML page of different mime types
+     * Utility method to test XML page of different mime types.
      * @param content the XML content
      * @param mimeType The mime type
      * @return the page returned by the WebClient
@@ -126,7 +126,7 @@ public class XmlPageTest extends WebTestCase {
     }
 
     /**
-     * Tests a simple invalid (badly formed) XML document
+     * Tests a simple invalid (badly formed) XML document.
      * @throws Exception if the test fails
      */
     @Test

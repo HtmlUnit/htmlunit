@@ -693,7 +693,7 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test that used to blow up on page load
+     * Regression test that used to blow up on page load.
      * @throws Exception if the test fails
      */
     @Test
@@ -892,7 +892,7 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * Test that the elements collection is live
+     * Test that the elements collection is live.
     * @throws Exception if the test fails
     */
     @Test
@@ -967,8 +967,8 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * document.myForm.submit returns a field name submit or the submit function
-     * depending on the sort of the field named submit
+     * Verifies that document.myForm.submit returns a field name submit or the submit function
+     * depending on the sort of the field named submit.
      * @throws Exception if the test fails
      */
     @Test
@@ -1163,9 +1163,8 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * Test that the event object is correctly made available
-     * Regression test for
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1648014&group_id=47038&atid=448266
+     * Verifies that the event object is correctly made available.
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1648014&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test
@@ -1218,7 +1217,7 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * In action "this" should be the window and not the form
+     * In action "this" should be the window and not the form.
      * @throws Exception if the test fails
      */
     @Test

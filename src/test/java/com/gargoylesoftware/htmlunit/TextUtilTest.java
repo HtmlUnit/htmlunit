@@ -76,7 +76,7 @@ public final class TextUtilTest extends WebTestCase {
     }
 
     /**
-     * Test startsWithIgnoreCase() with an empty prefix
+     * Test startsWithIgnoreCase() with an empty prefix.
      */
     @Test
     public void testStartsWithIgnoreCase_emptyPrefix() {

@@ -477,8 +477,8 @@ public class HTMLSelectElementTest extends WebTestCase {
     }
 
     /**
-     * Regression test for bug 1304741
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1304741&group_id=47038&atid=448266
+     * Regression test for bug 1304741.
+     * See https://sourceforge.net/tracker/index.php?func=detail&aid=1304741&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
     @Test
@@ -720,7 +720,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     }
 
     /**
-     * changed made through JS should not trigger an onchange
+     * Changes made through JS should not trigger an onchange event.
      * @throws Exception if the test fails
      */
     @Test
@@ -909,7 +909,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     }
 
     /**
-     * Test that select delegates submit to form
+     * Tests that select delegates submit to the containing form.
      * @throws Exception if the test fails.
      */
     @Test
@@ -938,7 +938,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     }
 
     /**
-     * Test for 1684652
+     * Test for bug 1684652.
      * @throws Exception if the test fails
      */
     @Test

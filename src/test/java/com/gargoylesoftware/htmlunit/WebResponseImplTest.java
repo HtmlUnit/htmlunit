@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class WebResponseImplTest extends WebTestCase {
 
     /**
-     * When no encoding header is provided, encoding may be recognized with its Byte Order Mark
+     * Verifies that when no encoding header is provided, encoding may be recognized with its Byte Order Mark.
      * @throws Exception if the test fails
      */
     @Test
