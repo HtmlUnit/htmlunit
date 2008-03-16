@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 public abstract class ClickableElement extends StyledElement {
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -216,7 +216,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "lang".  Refer to the
+     * Returns the value of the attribute "lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -228,7 +228,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "xml:lang".  Refer to the
+     * Returns the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -240,7 +240,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "dir".  Refer to the
+     * Returns the value of the attribute "dir".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -252,7 +252,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onclick".  Refer to the
+     * Returns the value of the attribute "onclick".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -264,7 +264,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "ondblclick".  Refer to the
+     * Returns the value of the attribute "ondblclick".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -276,7 +276,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onmousedown".  Refer to the
+     * Returns the value of the attribute "onmousedown".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -288,7 +288,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onmouseup".  Refer to the
+     * Returns the value of the attribute "onmouseup".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -300,7 +300,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onmouseover".  Refer to the
+     * Returns the value of the attribute "onmouseover".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -312,7 +312,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onmousemove".  Refer to the
+     * Returns the value of the attribute "onmousemove".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -324,7 +324,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onmouseout".  Refer to the
+     * Returns the value of the attribute "onmouseout".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -336,7 +336,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onkeypress".  Refer to the
+     * Returns the value of the attribute "onkeypress".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -348,7 +348,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onkeydown".  Refer to the
+     * Returns the value of the attribute "onkeydown".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -360,7 +360,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onkeyup".  Refer to the
+     * Returns the value of the attribute "onkeyup".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -372,7 +372,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Return true if the state update should be done before onclick event
+     * Returns true if the state update should be done before onclick event
      * handling.
      * This is expected to be overridden to return "true" by derived classes
      * like HtmlCheckBoxInput.

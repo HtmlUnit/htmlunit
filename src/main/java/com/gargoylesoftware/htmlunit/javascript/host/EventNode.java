@@ -58,7 +58,7 @@ public class EventNode extends Node {
     private static final long serialVersionUID = 4894810197917509182L;
 
     /**
-     * Set the onclick event handler for this element.
+     * Sets the onclick event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onclick(final Object handler) {
@@ -66,7 +66,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onclick event handler for this element.
+     * Gets the onclick event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onclick() {
@@ -74,7 +74,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the ondblclick event handler for this element.
+     * Sets the ondblclick event handler for this element.
      * @param handler the new handler
      **/
     public void jsxSet_ondblclick(final Object handler) {
@@ -82,7 +82,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the ondblclick event handler for this element.
+     * Gets the ondblclick event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_ondblclick() {
@@ -90,7 +90,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onblur event handler for this element.
+     * Sets the onblur event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onblur(final Object handler) {
@@ -98,7 +98,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onblur event handler for this element.
+     * Gets the onblur event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onblur() {
@@ -106,7 +106,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onfocus event handler for this element.
+     * Sets the onfocus event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onfocus(final Object handler) {
@@ -114,7 +114,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onfocus event handler for this element.
+     * Gets the onfocus event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onfocus() {
@@ -122,7 +122,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onkeydown event handler for this element.
+     * Sets the onkeydown event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onkeydown(final Object handler) {
@@ -130,7 +130,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onkeydown event handler for this element.
+     * Gets the onkeydown event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onkeydown() {
@@ -138,7 +138,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onkeypress event handler for this element.
+     * Sets the onkeypress event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onkeypress(final Object handler) {
@@ -146,7 +146,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onkeypress event handler for this element.
+     * Gets the onkeypress event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onkeypress() {
@@ -154,7 +154,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onkeyup event handler for this element.
+     * Sets the onkeyup event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onkeyup(final Object handler) {
@@ -162,7 +162,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onkeyup event handler for this element.
+     * Gets the onkeyup event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onkeyup() {
@@ -170,7 +170,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onmousedown event handler for this element.
+     * Sets the onmousedown event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onmousedown(final Object handler) {
@@ -178,7 +178,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onmousedown event handler for this element.
+     * Gets the onmousedown event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onmousedown() {
@@ -186,7 +186,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onmousemove event handler for this element.
+     * Sets the onmousemove event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onmousemove(final Object handler) {
@@ -194,7 +194,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onmousemove event handler for this element.
+     * Gets the onmousemove event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onmousemove() {
@@ -202,7 +202,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onmouseout event handler for this element.
+     * Sets the onmouseout event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onmouseout(final Object handler) {
@@ -210,7 +210,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onmouseout event handler for this element.
+     * Gets the onmouseout event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onmouseout() {
@@ -218,7 +218,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onmouseover event handler for this element.
+     * Sets the onmouseover event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onmouseover(final Object handler) {
@@ -226,7 +226,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onmouseover event handler for this element.
+     * Gets the onmouseover event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onmouseover() {
@@ -234,7 +234,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onmouseup event handler for this element.
+     * Sets the onmouseup event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onmouseup(final Object handler) {
@@ -242,7 +242,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onmouseup event handler for this element.
+     * Gets the onmouseup event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onmouseup() {
@@ -250,7 +250,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the oncontextmenu event handler for this element.
+     * Sets the oncontextmenu event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_oncontextmenu(final Object handler) {
@@ -258,7 +258,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the oncontextmenu event handler for this element.
+     * Gets the oncontextmenu event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_oncontextmenu() {
@@ -266,7 +266,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Set the onresize event handler for this element.
+     * Sets the onresize event handler for this element.
      * @param handler the new handler
      */
     public void jsxSet_onresize(final Object handler) {
@@ -274,7 +274,7 @@ public class EventNode extends Node {
     }
 
     /**
-     * Get the onresize event handler for this element.
+     * Gets the onresize event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onresize() {

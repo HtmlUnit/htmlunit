@@ -63,13 +63,13 @@ public interface Page {
     void cleanUp() throws IOException;
 
     /**
-     * Return the web response that was originally used to create this page.
+     * Returns the web response that was originally used to create this page.
      * @return The web response
      */
     WebResponse getWebResponse();
 
     /**
-     * Return the window that this page is sitting inside.
+     * Returns the window that this page is sitting inside.
      * @return the enclosing window
      */
     WebWindow getEnclosingWindow();

@@ -168,7 +168,7 @@ public class XmlPage extends SgmlPage implements Document {
     }
 
     /**
-     * Get the root XmlElement of this document.
+     * Gets the root XmlElement of this document.
      * @return The root element
      */
     //TODO: should be removed later to SgmlPage

@@ -48,35 +48,35 @@ package com.gargoylesoftware.htmlunit;
 public interface WebWindow {
 
     /**
-     * Return the name of this window.
+     * Returns the name of this window.
      *
      * @return The name of this window.
      */
     String getName();
 
     /**
-     * Set the name of this window.
+     * Sets the name of this window.
      *
      * @param name The new window name.
      */
     void setName(final String name);
 
     /**
-     * Return the currently loaded page or null if no page has been loaded.
+     * Returns the currently loaded page or null if no page has been loaded.
      *
      * @return The currently loaded page or null if no page has been loaded.
      */
     Page getEnclosedPage();
 
     /**
-     * Set the currently loaded page.
+     * Sets the currently loaded page.
      *
      * @param page The new page or null if there is no page (ie empty window)
      */
     void setEnclosedPage(final Page page);
 
     /**
-     * Return the window that contains this window.  If this is a top
+     * Returns the window that contains this window.  If this is a top
      * level window, then return this window.
      *
      * @return The parent window or this window if there is no parent.
@@ -84,7 +84,7 @@ public interface WebWindow {
     WebWindow getParentWindow();
 
     /**
-     * Return the top level window that contains this window.  If this
+     * Returns the top level window that contains this window.  If this
      * is a top level window, then return this window.
      *
      * @return The top level window that contains this window or this
@@ -93,7 +93,7 @@ public interface WebWindow {
     WebWindow getTopWindow();
 
     /**
-     * Return the web client that "owns" this window.
+     * Returns the web client that "owns" this window.
      *
      * @return The web client or null if this window has been closed.
      */

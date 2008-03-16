@@ -172,7 +172,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Return the set of keys for the defined properties.
+     * Returns the set of keys for the defined properties.
      * @return a set.
      */
     public Set<String> propertyKeys() {
@@ -188,7 +188,7 @@ public final class ClassConfiguration {
     }
     
     /**
-     * Return the constant list.
+     * Returns the constant list.
      * @return a list.
      */
     public List<String> constants() {
@@ -245,7 +245,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Return the PropertyInfo for the given property name.
+     * Returns the PropertyInfo for the given property name.
      * @param propertyName Name of property
      * @return ClassConfiguration.PropertyInfo
      */

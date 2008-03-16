@@ -192,7 +192,7 @@ public class Location extends SimpleScriptable {
     }
 
     /**
-     * Set the location URL to an entirely new value.
+     * Sets the location URL to an entirely new value.
      * @param newLocation The new location URL.
      * @throws IOException If loading the specified location fails.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/href_3.asp">

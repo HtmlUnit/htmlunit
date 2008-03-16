@@ -64,7 +64,7 @@ public class PluginArray extends SimpleArray {
     }
 
     /**
-     * Get the name of the plugin.
+     * Gets the name of the plugin.
      * @param element a {@link Plugin}.
      * @return the name.
      */

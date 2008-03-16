@@ -335,7 +335,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Return an input stream for the specified file name.  Refer to {@link #getFileObject(String)}
+     * Returns an input stream for the specified file name.  Refer to {@link #getFileObject(String)}
      * for details on how the file is located.
      * @param fileName The base file name.
      * @return The input stream.
@@ -346,7 +346,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Return a File object for the specified file name.  This is different from just
+     * Returns a File object for the specified file name.  This is different from just
      * <code>new File(fileName)</code> because it will adjust the location of the file
      * depending on how the code is being executed.
      *

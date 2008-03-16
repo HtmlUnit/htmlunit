@@ -94,7 +94,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the JavaScript attribute "name".
+     * Returns the value of the JavaScript attribute "name".
      * @return The value of this attribute.
      */
     public String jsxGet_name() {
@@ -102,7 +102,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the JavaScript attribute "name".
+     * Sets the value of the JavaScript attribute "name".
      * @param name The new value.
      */
     public void jsxSet_name(final String name) {
@@ -111,7 +111,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the JavaScript attribute "elements".
+     * Returns the value of the JavaScript attribute "elements".
      * @return The value of this attribute.
      */
     public HTMLCollection jsxGet_elements() {
@@ -126,7 +126,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the JavaScript attribute "length".
+     * Returns the value of the JavaScript attribute "length".
      * Does not count input type=image elements as browsers (IE6, Mozilla 1.7) do
      * (cf <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>)
      * @return The value of this attribute.
@@ -138,7 +138,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the JavaScript attribute "action".
+     * Returns the value of the JavaScript attribute "action".
      * @return The value of this attribute.
      */
     public String jsxGet_action() {
@@ -146,7 +146,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the JavaScript attribute "action".
+     * Sets the value of the JavaScript attribute "action".
      * @param action The new value.
      */
     public void jsxSet_action(final String action) {
@@ -155,7 +155,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the JavaScript attribute "method".
+     * Returns the value of the JavaScript attribute "method".
      * @return The value of this attribute.
      */
     public String jsxGet_method() {
@@ -163,7 +163,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the JavaScript attribute "method".
+     * Sets the value of the JavaScript attribute "method".
      * @param method The new value.
      */
     public void jsxSet_method(final String method) {
@@ -172,7 +172,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the JavaScript attribute "target".
+     * Returns the value of the JavaScript attribute "target".
      * @return The value of this attribute.
      */
     public String jsxGet_target() {
@@ -180,7 +180,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Get the onsubmit event handler for this element.
+     * Gets the onsubmit event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onsubmit() {
@@ -188,7 +188,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the onsubmit event handler for this element.
+     * Sets the onsubmit event handler for this element.
      * @param onsubmit the new handler
      */
     public void jsxSet_onsubmit(final Object onsubmit) {
@@ -196,7 +196,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the JavaScript attribute "target".
+     * Sets the value of the JavaScript attribute "target".
      * @param target The new value.
      */
     public void jsxSet_target(final String target) {
@@ -205,7 +205,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the JavaScript attribute "encoding".
+     * Returns the value of the JavaScript attribute "encoding".
      * @return The value of this attribute.
      */
     public String jsxGet_encoding() {
@@ -213,7 +213,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the JavaScript attribute "encoding".
+     * Sets the value of the JavaScript attribute "encoding".
      * @param encoding The new value.
      */
     public void jsxSet_encoding(final String encoding) {

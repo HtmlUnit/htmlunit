@@ -74,7 +74,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "src".  Refer to the
+     * Returns the value of the attribute "src".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -86,7 +86,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "alt".  Refer to the
+     * Returns the value of the attribute "alt".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -98,7 +98,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -110,7 +110,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "longdesc".  Refer to the
+     * Returns the value of the attribute "longdesc".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -122,7 +122,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "height".  Refer to the
+     * Returns the value of the attribute "height".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -134,7 +134,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "width".  Refer to the
+     * Returns the value of the attribute "width".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -146,7 +146,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "usemap".  Refer to the
+     * Returns the value of the attribute "usemap".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -158,7 +158,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "ismap".  Refer to the
+     * Returns the value of the attribute "ismap".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -170,7 +170,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -182,7 +182,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "border".  Refer to the
+     * Returns the value of the attribute "border".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -194,7 +194,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "hspace".  Refer to the
+     * Returns the value of the attribute "hspace".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -206,7 +206,7 @@ public class HtmlImage extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "vspace".  Refer to the
+     * Returns the value of the attribute "vspace".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

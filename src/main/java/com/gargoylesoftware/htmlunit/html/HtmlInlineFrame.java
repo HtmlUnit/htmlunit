@@ -57,7 +57,7 @@ public class HtmlInlineFrame extends BaseFrame {
     public static final String TAG_NAME = "iframe";
 
     /**
-     * Create an instance of HtmlInlineFrame
+     * Creates an instance of HtmlInlineFrame.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -71,7 +71,7 @@ public class HtmlInlineFrame extends BaseFrame {
 
     /**
      * Indicates if a node without children should be written in expanded form as XML
-     * (ie with closing tag rather than with "/&gt;)
+     * (ie with closing tag rather than with "/&gt;).
      * @return <code>true</code> to make generated XML readable as HTML
      */
     @Override

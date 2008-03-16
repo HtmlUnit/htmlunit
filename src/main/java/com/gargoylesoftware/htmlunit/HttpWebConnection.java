@@ -405,7 +405,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the log object for this class.
+     * Returns the log object for this class.
      * @return The log object.
      */
     protected final Log getLog() {
@@ -421,7 +421,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Get the virtual host.
+     * Gets the virtual host.
      * @return virtualHost The current virtualHost.
      */
     public String getVirtualHost() {

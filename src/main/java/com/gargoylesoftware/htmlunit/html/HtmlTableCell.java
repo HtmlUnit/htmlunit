@@ -53,7 +53,7 @@ import java.util.Map;
 public abstract class HtmlTableCell extends ClickableElement {
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -66,7 +66,7 @@ public abstract class HtmlTableCell extends ClickableElement {
     }
 
     /**
-     * Return the value of the colspan attribute or 1 if the attribute wasn't specified
+     * Returns the value of the colspan attribute or 1 if the attribute wasn't specified.
      *
      * @return See above
      */
@@ -81,7 +81,7 @@ public abstract class HtmlTableCell extends ClickableElement {
     }
 
     /**
-     * Return the value of the rowspan attribute or 1 if the attribute wasn't specified
+     * Returns the value of the rowspan attribute or 1 if the attribute wasn't specified.
      *
      * @return See above
      */

@@ -61,7 +61,7 @@ public class ObjectInstantiationException extends RuntimeException {
     }
 
     /**
-     * Return the exception that had been thrown during instantiation of the object.
+     * Returns the exception that had been thrown during instantiation of the object.
      * @return The cause exception
      */
     public Throwable getCauseException() {

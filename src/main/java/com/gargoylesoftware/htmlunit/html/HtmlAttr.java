@@ -116,7 +116,7 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * Set the value of the attribute.
+     * Sets the value of the attribute.
      * @param value new value to be stored in this entry.
      */
     public void setValue(final String value) {
@@ -124,7 +124,7 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * Set the value of the attribute.
+     * Sets the value of the attribute.
      * @param value new value to be stored in this entry.
      * @return old value corresponding to the entry.
      */

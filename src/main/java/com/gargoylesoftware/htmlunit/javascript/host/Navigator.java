@@ -66,7 +66,7 @@ public final class Navigator extends SimpleScriptable {
     public Navigator() { }
 
     /**
-     * Return the property "appCodeName".
+     * Returns the property "appCodeName".
      * @return the property "appCodeName".
      */
     public String jsxGet_appCodeName() {
@@ -74,7 +74,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "appMinorVersion".
+     * Returns the property "appMinorVersion".
      * @return the property "appMinorVersion".
      */
     public String jsxGet_appMinorVersion() {
@@ -82,7 +82,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "appName".
+     * Returns the property "appName".
      * @return the property "appName".
      */
     public String jsxGet_appName() {
@@ -90,7 +90,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "appVersion".
+     * Returns the property "appVersion".
      * @return the property "appVersion".
      */
     public String jsxGet_appVersion() {
@@ -98,7 +98,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the language of the browser (for IE).
+     * Returns the language of the browser (for IE).
      * @return the language.
      */
     public String jsxGet_browserLanguage() {
@@ -106,7 +106,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the language of the browser (for Mozilla).
+     * Returns the language of the browser (for Mozilla).
      * @return the language.
      */
     public String jsxGet_language() {
@@ -114,7 +114,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "cookieEnabled".
+     * Returns the property "cookieEnabled".
      * @return the property "cookieEnabled".
      */
     public boolean jsxGet_cookieEnabled() {
@@ -122,7 +122,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "cpuClass".
+     * Returns the property "cpuClass".
      * @return the property "cpuClass".
      */
     public String jsxGet_cpuClass() {
@@ -130,7 +130,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "onLine".
+     * Returns the property "onLine".
      * @return the property "onLine".
      */
     public boolean jsxGet_onLine() {
@@ -138,7 +138,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "platform".
+     * Returns the property "platform".
      * @return the property "platform".
      */
     public String jsxGet_platform() {
@@ -146,7 +146,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "systemLanguage".
+     * Returns the property "systemLanguage".
      * @return the property "systemLanguage".
      */
     public String jsxGet_systemLanguage() {
@@ -154,7 +154,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "userAgent".
+     * Returns the property "userAgent".
      * @return The property "userAgent".
      */
     public String jsxGet_userAgent() {
@@ -162,7 +162,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return the property "userLanguage".
+     * Returns the property "userLanguage".
      * @return the property "userLanguage".
      */
     public String jsxGet_userLanguage() {
@@ -170,7 +170,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return an empty array because HtmlUnit does not support embedded objects.
+     * Returns an empty array because HtmlUnit does not support embedded objects.
      * @return an empty array.
      */
     public Object jsxGet_plugins() {
@@ -209,7 +209,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return an empty array because HtmlUnit does not support embedded objects.
+     * Returns an empty array because HtmlUnit does not support embedded objects.
      * @return an empty array.
      */
     public Object jsxGet_mimeTypes() {
@@ -218,7 +218,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return <tt>false</tt> always as Java support is not enabled in HtmlUnit.
+     * Returns <tt>false</tt> always as Java support is not enabled in HtmlUnit.
      * @return false.
      */
     public boolean jsxFunction_javaEnabled() {
@@ -226,7 +226,7 @@ public final class Navigator extends SimpleScriptable {
     }
 
     /**
-     * Return <tt>false</tt> always as data tainting support is not enabled in HtmlUnit.
+     * Returns <tt>false</tt> always as data tainting support is not enabled in HtmlUnit.
      * @return false.
      */
     public boolean jsxFunction_taintEnabled() {

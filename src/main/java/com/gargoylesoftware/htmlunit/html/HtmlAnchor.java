@@ -66,7 +66,7 @@ public class HtmlAnchor extends ClickableElement {
     public static final String TAG_NAME = "a";
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -138,7 +138,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "charset".  Refer to the
+     * Returns the value of the attribute "charset".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -150,7 +150,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -162,7 +162,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -174,7 +174,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "href".  Refer to the
+     * Returns the value of the attribute "href".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -186,7 +186,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "hreflang".  Refer to the
+     * Returns the value of the attribute "hreflang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -198,7 +198,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "rel".  Refer to the
+     * Returns the value of the attribute "rel".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -210,7 +210,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "rev".  Refer to the
+     * Returns the value of the attribute "rev".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -222,7 +222,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -234,7 +234,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "shape".  Refer to the
+     * Returns the value of the attribute "shape".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -246,7 +246,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "coords".  Refer to the
+     * Returns the value of the attribute "coords".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -258,7 +258,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -270,7 +270,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -282,7 +282,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -294,7 +294,7 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "target".  Refer to the
+     * Returns the value of the attribute "target".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

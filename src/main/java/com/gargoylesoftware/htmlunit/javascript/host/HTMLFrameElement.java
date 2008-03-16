@@ -123,7 +123,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Get the onload event handler for this element.
+     * Gets the onload event handler for this element.
      * @return <code>org.mozilla.javascript.Function</code>
      */
     public Object jsxGet_onload() {

@@ -107,7 +107,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Set the checked property. Although this property is defined in Input it
+     * Sets the checked property. Although this property is defined in Input it
      * doesn't make any sense for input's other than checkbox and radio. This
      * implementation does nothing. The implementations in Checkbox and Radio
      * actually do the work.
@@ -127,7 +127,7 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Return the value of the checked property. Although this property is
+     * Returns the value of the checked property. Although this property is
      * defined in Input it doesn't make any sense for input's other than
      * checkbox and radio. This implementation does nothing. The
      * implementations in Checkbox and Radio actually do the work.

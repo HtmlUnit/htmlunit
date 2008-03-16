@@ -115,7 +115,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     }
 
     /**
-     * Set the window that contains this page.
+     * Sets the window that contains this page.
      *
      * @param window The new frame or null if this page is being removed from a frame.
      */

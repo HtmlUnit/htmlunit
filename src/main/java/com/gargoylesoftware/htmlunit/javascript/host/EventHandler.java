@@ -135,7 +135,7 @@ public class EventHandler extends BaseFunction {
     }
 
     /**
-     * Return the log.
+     * Returns the log.
      * @return the log
      */
     protected final Log getLog() {

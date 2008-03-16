@@ -77,7 +77,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     * Set the value that will be returned during submission of a form.
+     * Sets the value that will be returned during submission of a form.
      *
      * @param newValue The value.
      */
@@ -87,7 +87,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     * Return the value that would be send during submission of a form.
+     * Returns the value that would be send during submission of a form.
      *
      * @return The value
      */
@@ -96,7 +96,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     * Return an array of KeyValuePairs that are the values that will be sent
+     * Returns an array of KeyValuePairs that are the values that will be sent
      * back to the server whenever the current form is submitted.<p>
      *
      * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
@@ -156,7 +156,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     * Return the value of the attribute "lang".  Refer to the
+     * Returns the value of the attribute "lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -167,7 +167,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     * Return the value of the attribute "xml:lang".  Refer to the
+     * Returns the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -178,7 +178,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     * Return the value of the attribute "dir".  Refer to the
+     * Returns the value of the attribute "dir".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -189,7 +189,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     }
 
     /**
-     * Return the value of the attribute "prompt".  Refer to the
+     * Returns the value of the attribute "prompt".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

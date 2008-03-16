@@ -62,7 +62,7 @@ public class HtmlTextInput extends HtmlInput {
     private int selectionEnd_;
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

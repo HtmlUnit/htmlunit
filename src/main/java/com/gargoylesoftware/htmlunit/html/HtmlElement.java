@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
 /**
- * An abstract wrapper for HTML elements
+ * An abstract wrapper for HTML elements.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -170,7 +170,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the value of the attribute specified by name or an empty string.  If the
+     * Returns the value of the attribute specified by name or an empty string.  If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
@@ -184,7 +184,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the qualified name (prefix:local) for the namespace and local name.
+     * Returns the qualified name (prefix:local) for the namespace and local name.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param localName The name within the namespace.
@@ -208,7 +208,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the value of the attribute specified by namespace and local name or an empty
+     * Returns the value of the attribute specified by namespace and local name or an empty
      * string.  If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
@@ -231,7 +231,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return whether the attribute specified by name has a value.
+     * Returns whether the attribute specified by name has a value.
      *
      * @param attributeName the name of the attribute
      * @return true if an attribute with the given name is specified on this element or has a
@@ -242,7 +242,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return whether the attribute specified by namespace and local name has a value.
+     * Returns whether the attribute specified by namespace and local name has a value.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param localName The name within the namespace.
@@ -254,7 +254,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the value of the specified attribute or an empty string.  If the
+     * Returns the value of the specified attribute or an empty string.  If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
@@ -275,7 +275,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Set the value of the attribute specified by name.
+     * Sets the value of the attribute specified by name.
      *
      * @param attributeName the name of the attribute
      * @param attributeValue The value of the attribute
@@ -285,7 +285,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Set the value of the attribute specified by namespace and qualified name.
+     * Sets the value of the attribute specified by namespace and qualified name.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name (prefix:local) of the attribute.
@@ -297,7 +297,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Set the value of the specified attribute.
+     * Sets the value of the specified attribute.
      *
      * @param attributeName the name of the attribute
      * @param attributeValue The value of the attribute
@@ -307,7 +307,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Set the value of the specified attribute.
+     * Sets the value of the specified attribute.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the attribute
@@ -502,7 +502,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return true if the specified attribute has been defined.  This is necessary
+     * Returns true if the specified attribute has been defined.  This is necessary
      * in order to distinguish between an attribute that is set to an empty string
      * and one that was not defined at all.
      *
@@ -540,7 +540,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the tag name of this element.  The tag name is the actual HTML name.  For example
+     * Returns the tag name of this element.  The tag name is the actual HTML name.  For example
      * the tag name for HtmlAnchor is "a" and the tag name for HtmlTable is "table".
      * This tag name will always be in lowercase, no matter what case was used in the original
      * document, when no namespace is defined.
@@ -578,7 +578,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Set the identifier this element.
+     * Sets the identifier this element.
      *
      * @param newId The new identifier of this element.
      */
@@ -647,7 +647,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the element with the given name that enclosed this element or null if this element is
+     * Returns the element with the given name that enclosed this element or null if this element is
      * no such element is found.
      * @param tagName the name of the tag searched (case insensitive)
      * @return See above
@@ -668,7 +668,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the form that enclosed this element or null if this element is not within a form.
+     * Returns the form that enclosed this element or null if this element is not within a form.
      *
      * @return See above
      */
@@ -677,7 +677,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the form that enclosed this element or throw an exception if this element is not within a form.
+     * Returns the form that enclosed this element or throw an exception if this element is not within a form.
      *
      * @return See above
      * @throws IllegalStateException If the element is not within a form.
@@ -692,7 +692,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Simulate pressing a key on this element
+     * Simulates pressing a key on this element.
      *
      * @param keyCode the key you wish to press
      * @deprecated use {@link #type(char)} instead
@@ -702,7 +702,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Simulate pressing a key on this element
+     * Simulates pressing a key on this element.
      *
      * @param keyCode the key you wish to press
      * @param shiftKey true if SHIFT is pressed
@@ -793,7 +793,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively write the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
@@ -841,7 +841,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return a string representation of this object
+     * Returns a string representation of this object.
      *
      * @return See above
      */
@@ -863,7 +863,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Throw an exception. This is a convenience during development only - it
+     * Throws an exception. This is a convenience during development only - it
      * will likely be removed in the future.
      */
     protected final void notImplemented() {
@@ -886,13 +886,13 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Search by the specified criteria and return the first HtmlElement that is found
+     * Searches by the specified criteria and return the first HtmlElement that is found.
      *
-     * @param elementName The name of the element
-     * @param attributeName The name of the attribute
-     * @param attributeValue The value of the attribute
-     * @return The HtmlElement
-     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
+     * @param elementName The name of the element.
+     * @param attributeName The name of the attribute.
+     * @param attributeValue The value of the attribute.
+     * @return The HtmlElement.
+     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model.
      */
     public final HtmlElement getOneHtmlElementByAttribute(
             final String elementName,
@@ -916,7 +916,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return the HTML element with the specified id. If more than one element
+     * Returns the HTML element with the specified id. If more than one element
      * has this id (not allowed by the HTML spec) then return the first one.
      *
      * @param id The id value to search by
@@ -930,7 +930,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Return true if there is a element with the specified id. This method
+     * Returns true if there is a element with the specified id. This method
      * is intended for situations where it is enough to know whether a specific
      * element is present in the document.<p>
      *
@@ -957,7 +957,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Search by the specified criteria and return all the HtmlElement that are found
+     * Searches by the specified criteria and return all the HtmlElement that are found.
      *
      * @param elementName The name of the element
      * @param attributeName The name of the attribute
@@ -984,7 +984,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Given a list of tag names, return the HTML elements that correspond to any matching element
+     * Given a list of tag names, return the HTML elements that correspond to any matching element.
      *
      * @param acceptableTagNames The list of tag names to search by.
      * @return The list of tag names
@@ -999,7 +999,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Given a list of tag names, return the HTML elements that correspond to any matching element
+     * Given a list of tag names, return the HTML elements that correspond to any matching element.
      *
      * @param tagName the tag name to match
      * @return The list of tag names
@@ -1074,13 +1074,13 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * an iterator over the HtmlElement children
+     * An iterator over the HtmlElement children.
      */
     protected class ChildElementsIterator implements Iterator<HtmlElement> {
 
         private HtmlElement nextElement_;
 
-        /** constructor */
+        /** Constructor. */
         public ChildElementsIterator() {
             if (getFirstDomChild() != null) {
                 if (getFirstDomChild() instanceof HtmlElement) {
@@ -1102,7 +1102,7 @@ public abstract class HtmlElement extends DomElement implements Element {
             return nextElement();
         }
 
-        /** remove the current one */
+        /** Removes the current one. */
         public void remove() {
             if (nextElement_ == null) {
                 throw new IllegalStateException();
@@ -1135,7 +1135,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Create an attribute map as needed by HtmlElement.  This is just used by the element factories.
+     * Creates an attribute map as needed by HtmlElement.  This is just used by the element factories.
      * @param attributeCount the initial number of attributes to be added to the map.
      * @return the attribute map.
      */
@@ -1490,7 +1490,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Set the focus to this element.
+     * Sets the focus to this element.
      */
     public void focus() {
         getPage().moveFocusToElement(this);

@@ -541,7 +541,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the class for the given class name.
+     * Returns the class for the given class name.
      * @param classname The classname that you want the implementing class for.  For testing only.
      * @return Class
      */
@@ -551,7 +551,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Get the method that implements the getter for the given property based upon the class object.
+     * Gets the method that implements the getter for the given property based upon the class object.
      * @param clazz The actual class to use as reference.
      * @param propertyName The property to find the getter for.
      * @return Method.
@@ -562,7 +562,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the method that implements the get function for in the class for the given class.
+     * Returns the method that implements the get function for in the class for the given class.
      *
      * @param classname The name of the class to work with.
      * @param propertyName The property to find the getter for.
@@ -632,7 +632,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Get the method that implements the setter for the given property based upon the class object.
+     * Gets the method that implements the setter for the given property based upon the class object.
      * @param clazz The actual class to use as reference.
      * @param functionName The function to find the method for.
      * @return Method.
@@ -643,7 +643,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the method that implements the given function in the class for the given class.
+     * Returns the method that implements the given function in the class for the given class.
      *
      * @param classname The name of the class to work with.
      * @param functionName The function to find the method for.
@@ -706,7 +706,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return an immutable map containing the HTML to JavaScript mappings.  Keys are
+     * Returns an immutable map containing the HTML to JavaScript mappings.  Keys are
      * java classes for the various HTML classes (ie HtmlInput.class) and the values
      * are the JavaScript class names (ie "HTMLAnchorElement").
      * @return the mappings

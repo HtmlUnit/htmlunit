@@ -132,7 +132,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "shape".  Refer to the
+     * Returns the value of the attribute "shape".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -144,7 +144,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "coords".  Refer to the
+     * Returns the value of the attribute "coords".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -156,7 +156,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "href".  Refer to the
+     * Returns the value of the attribute "href".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -168,7 +168,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "nohref".  Refer to the
+     * Returns the value of the attribute "nohref".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -180,7 +180,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "alt".  Refer to the
+     * Returns the value of the attribute "alt".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -192,7 +192,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -204,7 +204,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -216,7 +216,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -228,7 +228,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -240,7 +240,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "target".  Refer to the
+     * Returns the value of the attribute "target".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

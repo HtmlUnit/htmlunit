@@ -88,7 +88,7 @@ public class XMLElement extends Node {
     }
 
     /**
-     * Return the tag name of this element.
+     * Returns the tag name of this element.
      * @return The tag name.
      */
     public String jsxGet_tagName() {
@@ -139,7 +139,7 @@ public class XMLElement extends Node {
         }
     }
     /**
-     * Set an attribute.
+     * Sets an attribute.
      *
      * @param name Name of the attribute to set.
      * @param value Value to set the attribute to.

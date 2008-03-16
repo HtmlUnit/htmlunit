@@ -69,7 +69,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
     }
     
     /**
-     * Return the HtmlElement that changed.
+     * Returns the HtmlElement that changed.
      * @return the HtmlElement that sent the event.
      */
     public HtmlElement getHtmlElement() {
@@ -77,7 +77,7 @@ public class HtmlAttributeChangeEvent extends EventObject {
     }
     
     /**
-     * Return the name of the attribute that changed on the element.
+     * Returns the name of the attribute that changed on the element.
      * @return the name of the attribute that changed on the element.
      */
     public String getName() {

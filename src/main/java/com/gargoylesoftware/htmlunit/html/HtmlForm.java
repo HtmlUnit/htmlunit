@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * Wrapper for the HTML element "form"
+ * Wrapper for the HTML element "form".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -89,7 +89,7 @@ public class HtmlForm extends ClickableElement {
         Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -206,7 +206,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return a list of {@link KeyValuePair}s that represent the data that will be
+     * Returns a list of {@link KeyValuePair}s that represent the data that will be
      * sent to the server on a form submit.  This is primarily intended to aid
      * debugging.
      *
@@ -251,7 +251,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return a collection of elements that represent all the "submittable" elements in this form
+     * Returns a collection of elements that represent all the "submittable" elements in this form
      *
      * @param submitElement The element that would have been pressed to submit the
      * form or null if the form was submitted by JavaScript.
@@ -333,7 +333,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the input tags that have the specified name
+     * Returns the input tags that have the specified name.
      *
      * @param name The name of the input
      * @return A list of HtmlInputs
@@ -344,7 +344,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the first input with the specified name
+     * Returns the first input with the specified name.
      *
      * @param name The name of the input
      * @return The input
@@ -361,7 +361,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return all the HtmlSelect that match the specified name
+     * Returns all the HtmlSelect that match the specified name.
      *
      * @param name The name
      * @return See above
@@ -372,8 +372,8 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Find the first select element with the specified name
-     * @param name The name of the select element
+     * Finds the first select element with the specified name.
+     * @param name The name of the select element.
      * @return The first select.
      * @throws ElementNotFoundException If the select cannot be found.
      */
@@ -388,7 +388,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return all the HtmlButtons that match the specified name
+     * Returns all the HtmlButtons that match the specified name.
      *
      * @param name The name
      * @return See above
@@ -400,7 +400,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Find the first button element with the specified name.
+     * Finds the first button element with the specified name.
      * @param name The name of the button element.
      * @return The first button.
      * @throws ElementNotFoundException If the button cannot be found.
@@ -416,7 +416,7 @@ public class HtmlForm extends ClickableElement {
     }
     
     /**
-     * Return all the HtmlTextAreas that match the specified name
+     * Returns all the HtmlTextAreas that match the specified name.
      *
      * @param name The name
      * @return See above
@@ -427,7 +427,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Find the first textarea element with the specified name.
+     * Finds the first textarea element with the specified name.
      * @param name The name of the textarea element.
      * @return The first textarea.
      * @throws ElementNotFoundException If the textarea cannot be found.
@@ -443,7 +443,7 @@ public class HtmlForm extends ClickableElement {
     }
         
     /**
-     * Return a list of HtmlInputs that are of type radio and match the specified name
+     * Returns a list of HtmlInputs that are of type radio and match the specified name.
      *
      * @param name The name
      * @return See above
@@ -464,7 +464,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Select the specified radio button in the form.
+     * Selects the specified radio button in the form.
      *
      * Only a radio button that is actually contained in the form can be selected.
      *
@@ -490,7 +490,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the first checked radio button with the specified name.  If none of
+     * Returns the first checked radio button with the specified name.  If none of
      * the radio buttons by that name are checked then return null.
      *
      * @param name The name of the radio button
@@ -513,7 +513,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "action". Refer to the <a
+     * Returns the value of the attribute "action". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
@@ -524,7 +524,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Set the value of the attribute "action". Refer to the <a
+     * Sets the value of the attribute "action". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
@@ -535,7 +535,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "method". Refer to the <a
+     * Returns the value of the attribute "method". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
@@ -547,7 +547,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Set the value of the attribute "method". Refer to the <a
+     * Sets the value of the attribute "method". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
@@ -558,7 +558,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "name". Refer to the <a
+     * Returns the value of the attribute "name". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
@@ -569,7 +569,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Set the value of the attribute "name". Refer to the <a
+     * Sets the value of the attribute "name". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.<p>
      *
      * @param name the new value
@@ -579,7 +579,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "enctype". Refer to the <a
+     * Returns the value of the attribute "enctype". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.<p>
      *
      *  Enctype is the encoding type used when submitting a form back to the server
@@ -591,7 +591,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Set the value of the attribute "enctype". Refer to the <a
+     * Sets the value of the attribute "enctype". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.<p>
      *
@@ -604,7 +604,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onsubmit". Refer to the <a
+     * Returns the value of the attribute "onsubmit". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
@@ -615,7 +615,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onreset". Refer to the <a
+     * Returns the value of the attribute "onreset". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "onreset" or an empty string if that attribute isn't defined.
@@ -625,7 +625,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "accept". Refer to the <a
+     * Returns the value of the attribute "accept". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "accept" or an empty string if that attribute isn't defined.
@@ -635,7 +635,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "accept-charset". Refer to the <a
+     * Returns the value of the attribute "accept-charset". Refer to the <a
      * href='http://www.w3.org/TR/html401/interact/forms.html#adef-accept-charset'>
      * HTML 4.01</a> documentation for details on the use of this attribute.
      *
@@ -646,7 +646,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "target". Refer to the <a
+     * Returns the value of the attribute "target". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "target" or an empty string if that attribute isn't defined.
@@ -656,7 +656,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Set the value of the attribute "target". Refer to the <a
+     * Sets the value of the attribute "target". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @param target  The value of the attribute "target" or an empty string if that attribute isn't defined.
@@ -666,7 +666,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return the first input with the specified value.
+     * Returns the first input with the specified value.
      * @param value The value
      * @return The first input with the specified value.
      * @throws ElementNotFoundException If no elements can be found with the specified value.
@@ -676,7 +676,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Return all the inputs with the specified value.
+     * Returns all the inputs with the specified value.
      * @param value The value
      * @return all the inputs with the specified value.
      */

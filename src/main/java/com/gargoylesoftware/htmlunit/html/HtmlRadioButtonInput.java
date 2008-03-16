@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * Wrapper for the HTML element "input"
+ * Wrapper for the HTML element "input".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -64,7 +64,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     private boolean defaultCheckedState_;
 
     /**
-     * Create an instance
+     * Creates an instance.
      * If no value is specified, it is set to "on" as browsers do (eg IE6 and Mozilla 1.7)
      * even if spec says that it is not allowed
      * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
@@ -100,7 +100,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     }
 
     /**
-     * Set the "checked" attribute
+     * Sets the "checked" attribute.
      *
      * @param isChecked true if this element is to be selected
      * @return The page that occupies this window after setting checked status.
@@ -151,7 +151,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
 
     /**
      * Override of default clickAction that makes this radio button the selected
-     * one when it is clicked
+     * one when it is clicked.
      *
      * @param defaultPage The default page to return if the action does not
      * load a new page.
@@ -165,7 +165,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
     }
 
     /**
-     * {@inheritDoc} Also sets the value to the new default value.
+     * {@inheritDoc}
+     * Also sets the value to the new default value.
      * @see SubmittableElement#setDefaultValue(String)
      */
     @Override

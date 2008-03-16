@@ -68,7 +68,7 @@ public class HtmlBaseFont extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "id".  Refer to the
+     * Returns the value of the attribute "id".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -80,7 +80,7 @@ public class HtmlBaseFont extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "size".  Refer to the
+     * Returns the value of the attribute "size".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -92,7 +92,7 @@ public class HtmlBaseFont extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "color".  Refer to the
+     * Returns the value of the attribute "color".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -104,7 +104,7 @@ public class HtmlBaseFont extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "face".  Refer to the
+     * Returns the value of the attribute "face".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

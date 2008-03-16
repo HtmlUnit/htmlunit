@@ -203,7 +203,7 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Get the JavaScript property "documentElement" for the document.
+     * Gets the JavaScript property "documentElement" for the document.
      * @return The root node for the document.
      */
     //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
@@ -217,7 +217,7 @@ public class XMLDocument extends Document {
     }
     
     /**
-     * Get the JavaScript property "parseError" for the document.
+     * Gets the JavaScript property "parseError" for the document.
      * @return The ParserError object for the document.
      */
     public XMLDOMParseError jsxGet_parseError() {

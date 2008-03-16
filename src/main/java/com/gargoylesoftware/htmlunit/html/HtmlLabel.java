@@ -74,7 +74,7 @@ public class HtmlLabel extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "for".  Refer to the
+     * Returns the value of the attribute "for".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -86,7 +86,7 @@ public class HtmlLabel extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -98,7 +98,7 @@ public class HtmlLabel extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -110,7 +110,7 @@ public class HtmlLabel extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -133,7 +133,7 @@ public class HtmlLabel extends ClickableElement {
     }
 
     /**
-     * Set the focus to this element.
+     * Sets the focus to this element.
      */
     @Override
     public void focus() {

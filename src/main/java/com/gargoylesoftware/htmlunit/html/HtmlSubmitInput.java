@@ -66,7 +66,7 @@ public class HtmlSubmitInput extends HtmlInput {
     private static final String DEFAULT_VALUE = "Submit Query";
     
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

@@ -214,7 +214,7 @@ class EventListenersContainer {
     }
 
     /**
-     * Return the log that is being used for all scripting objects
+     * Returns the log that is being used for all scripting objects
      * @return The log.
      */
     protected final Log getLog() {

@@ -42,7 +42,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Wrapper for the HTML element "input"
+ * Wrapper for the HTML element "input".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -56,7 +56,7 @@ public class HtmlResetInput extends HtmlInput {
     private static final long serialVersionUID = 1055766612574450754L;
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

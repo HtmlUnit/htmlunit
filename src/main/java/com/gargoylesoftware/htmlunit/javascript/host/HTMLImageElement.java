@@ -73,7 +73,7 @@ public class HTMLImageElement extends HTMLElement {
     }
     
     /**
-     * Set the src property, either on the DOM node which corresponds to this
+     * Sets the src property, either on the DOM node which corresponds to this
      * JavaScript object, or if none exists (as when using JavaScript to preload
      * images), on the JavaScript object itself.
      * @param src the src attribute value
@@ -87,7 +87,7 @@ public class HTMLImageElement extends HTMLElement {
     }
     
     /**
-     * Return the value of the src property, either from the DOM node which
+     * Returns the value of the src property, either from the DOM node which
      * corresponds to this JavaScript object, or if that doesn't exist (as
      * when using JavaScript to preload images), from the JavaScript object
      * itself.

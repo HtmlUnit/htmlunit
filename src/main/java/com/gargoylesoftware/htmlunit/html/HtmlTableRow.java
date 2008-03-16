@@ -45,7 +45,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Wrapper for the HTML element "tr"
+ * Wrapper for the HTML element "tr".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -184,7 +184,7 @@ public class HtmlTableRow extends ClickableElement {
         private HtmlTableCell nextCell_;
         private HtmlForm currentForm_;
 
-        /** create an instance */
+        /** Creates an instance. */
         public CellIterator() {
             setNextCell(getFirstDomChild());
         }
@@ -203,8 +203,8 @@ public class HtmlTableRow extends ClickableElement {
         }
 
         /**
-         * remove the cell under the cursor from the current row
-         * @throws IllegalStateException if there is no currenr row
+         * Removes the cell under the cursor from the current row.
+         * @throws IllegalStateException if there is no current row.
          */
         public void remove() throws IllegalStateException {
             if (nextCell_ == null) {
@@ -232,9 +232,9 @@ public class HtmlTableRow extends ClickableElement {
         }
 
         /**
-         * Set. the internal position to the next cell, starting at the given node
+         * Sets the internal position to the next cell, starting at the given node
          * @param node the node to mark as the next cell. If this is not a cell, the
-         * next reachable cell will be marked
+         * next reachable cell will be marked.
          */
         private void setNextCell(final DomNode node) {
             nextCell_ = null;

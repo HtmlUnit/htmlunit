@@ -342,7 +342,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Set a chunk of JavaScript to be invoked at some specified time later.
+     * Sets a chunk of JavaScript to be invoked at some specified time later.
      * The invocation occurs only if the window is opened after the delay
      * and does not contain an other page than the one that originated the setTimeout.
      *
@@ -573,7 +573,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Set the focus to this element.
+     * Sets the focus to this element.
      */
     public void jsxFunction_focus() {
         webWindow_.getWebClient().setCurrentWindow(webWindow_);
@@ -965,7 +965,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Return the text from the status line.
+     * Returns the text from the status line.
      * @return the status line text
      */
     public String jsxGet_status() {
@@ -973,7 +973,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Set the text from the status line.
+     * Sets the text from the status line.
      * @param message the status line text
      */
     public void jsxSet_status(final String message) {
@@ -986,7 +986,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Set a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed
+     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed
      * Current implementation does nothing.
      *
      * JavaScript param 1: The code to execute, either a String or a Function.
@@ -1025,7 +1025,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Return the innerWidth.
+     * Returns the innerWidth.
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
@@ -1034,7 +1034,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Return the outerWidth.
+     * Returns the outerWidth.
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
@@ -1043,7 +1043,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Return the innerHeight.
+     * Returns the innerHeight.
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
@@ -1052,7 +1052,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Return the outer height.
+     * Returns the outer height.
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */

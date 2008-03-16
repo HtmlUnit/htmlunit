@@ -78,7 +78,7 @@ public class CollectingAlertHandler implements AlertHandler {
     }
 
     /**
-     * Return a list containing the message portion of any collected alerts.
+     * Returns a list containing the message portion of any collected alerts.
      * @return a list of alert messages
      */
     public List<String> getCollectedAlerts() {

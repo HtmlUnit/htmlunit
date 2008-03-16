@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * Wrapper for the HTML element "button"
+ * Wrapper for the HTML element "button".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -64,7 +64,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     public static final String TAG_NAME = "button";
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -77,7 +77,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Set the content of the "value" attribute
+     * Sets the content of the "value" attribute.
      *
      * @param newValue The new content
      */
@@ -115,7 +115,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return true if the disabled attribute is set for this element.
+     * Returns true if the disabled attribute is set for this element.
      * @return Return true if this is disabled.
      */
     public final boolean isDisabled() {
@@ -123,7 +123,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return an array of KeyValuePairs that are the values that will be sent
+     * Returns an array of KeyValuePairs that are the values that will be sent
      * back to the server whenever the current form is submitted.<p>
      *
      * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
@@ -183,7 +183,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -195,7 +195,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "value".  Refer to the
+     * Returns the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -207,7 +207,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.  Note that Internet
      * Explorer doesn't follow the spec when the type isn't specified.  It will return
@@ -231,7 +231,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "disabled".  Refer to the
+     * Returns the value of the attribute "disabled".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -243,7 +243,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -255,7 +255,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -267,7 +267,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -279,7 +279,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

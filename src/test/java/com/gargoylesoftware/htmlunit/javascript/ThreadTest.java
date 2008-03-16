@@ -109,7 +109,7 @@ public class ThreadTest extends TestCase {
         private boolean successful_ = false;
 
         /**
-         * Create an instance
+         * Creates an instance.
          * @param name the name of the thread.
          */
         public TestThread(final String name) {

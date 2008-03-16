@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * Wrapper for the HTML element "input"
+ * Wrapper for the HTML element "input".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -67,7 +67,7 @@ public class HtmlImageInput extends HtmlInput {
     private int yPosition_;
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -80,7 +80,7 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     * Return an array of KeyValuePairs that are the values that will be sent
+     * Returns an array of KeyValuePairs that are the values that will be sent
      * back to the server whenever the current form is submitted.<p>
      *
      * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT

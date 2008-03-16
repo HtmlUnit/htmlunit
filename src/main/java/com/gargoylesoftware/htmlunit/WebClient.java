@@ -479,7 +479,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return true if the content of the resulting document will be printed to
+     * Returns true if the content of the resulting document will be printed to
      * the console in the event of a failing response code.
      *
      * @return See above
@@ -519,7 +519,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return true if an exception will be thrown in the event of a failing response code.
+     * Returns true if an exception will be thrown in the event of a failing response code.
      * @return See above
      * @see #setThrowExceptionOnFailingStatusCode
      */
@@ -739,7 +739,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the alert handler for this webclient.
+     * Sets the alert handler for this webclient.
      * @param alertHandler The new alerthandler or null if none is specified.
      */
     public void setAlertHandler(final AlertHandler alertHandler) {
@@ -747,7 +747,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the alert handler for this webclient.
+     * Returns the alert handler for this webclient.
      * @return the alert handler or null if one hasn't been set.
      */
     public AlertHandler getAlertHandler() {
@@ -755,7 +755,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the handler that will be executed when the JavaScript method Window.confirm() is called.
+     * Sets the handler that will be executed when the JavaScript method Window.confirm() is called.
      * @param handler The new handler or null if no handler is to be used.
      */
     public void setConfirmHandler(final ConfirmHandler handler) {
@@ -763,7 +763,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the confirm handler.
+     * Returns the confirm handler.
      * @return the confirm handler or null if one hasn't been set.
      */
     public ConfirmHandler getConfirmHandler() {
@@ -771,7 +771,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the handler that will be executed when the JavaScript method Window.prompt() is called.
+     * Sets the handler that will be executed when the JavaScript method Window.prompt() is called.
      * @param handler The new handler or null if no handler is to be used.
      */
     public void setPromptHandler(final PromptHandler handler) {
@@ -779,7 +779,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the prompt handler.
+     * Returns the prompt handler.
      * @return the prompt handler or null if one hasn't been set.
      */
     public PromptHandler getPromptHandler() {
@@ -787,7 +787,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the status handler for this webclient.
+     * Sets the status handler for this webclient.
      * @param statusHandler The new alerthandler or null if none is specified.
      */
     public void setStatusHandler(final StatusHandler statusHandler) {
@@ -990,7 +990,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set whether or not redirections will be followed automatically on receipt of
+     * Sets whether or not redirections will be followed automatically on receipt of
      * a redirect status code from the server.
      * @param enabled true to enable automatic redirection.
      */
@@ -999,7 +999,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return whether or not redirections will be followed automatically on receipt of
+     * Returns whether or not redirections will be followed automatically on receipt of
      * a redirect status code from the server.
      * @return true if automatic redirection is enabled.
      */
@@ -1027,7 +1027,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the object that will be used to create pages.  Set this if you want
+     * Sets the object that will be used to create pages.  Set this if you want
      * to customize the type of page that is returned for a given content type.
      *
      * @param pageCreator The new page creator
@@ -1038,7 +1038,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the current page creator.
+     * Returns the current page creator.
      *
      * @return the page creator
      */
@@ -1047,7 +1047,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the first {@link WebWindow} that matches the specified name.
+     * Returns the first {@link WebWindow} that matches the specified name.
      *
      * @param name The name to search for.
      * @return The {@link WebWindow} with the specified name
@@ -1604,7 +1604,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return an immutable list of open web windows (top windows or not).
+     * Returns an immutable list of open web windows (top windows or not).
      * @return The web windows
      */
     public List<WebWindow> getWebWindows() {
@@ -1612,7 +1612,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the handler to be used whenever a refresh is triggered.  Refer
+     * Sets the handler to be used whenever a refresh is triggered.  Refer
      * to the documentation for {@link RefreshHandler} for more details.
      * @param handler The new handler
      */
@@ -1626,7 +1626,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the current refresh handler or null if one has not been set.
+     * Returns the current refresh handler or null if one has not been set.
      * @return The current RefreshHandler or null
      */
     public RefreshHandler getRefreshHandler() {
@@ -1634,7 +1634,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the script pre processor for this webclient.
+     * Sets the script pre processor for this webclient.
      * @param scriptPreProcessor The new preprocessor or null if none is specified
      */
     public void setScriptPreProcessor(final ScriptPreProcessor scriptPreProcessor) {
@@ -1642,7 +1642,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the script pre processor for this webclient.
+     * Returns the script pre processor for this webclient.
      * @return the pre processor or null of one hasn't been set.
      */
     public ScriptPreProcessor getScriptPreProcessor() {
@@ -1650,7 +1650,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the active X object map for this webclient. The <code>Map</code> is used to map the
+     * Sets the active X object map for this webclient. The <code>Map</code> is used to map the
      * string passed into the <code>ActiveXObject</code> constructor to a java class name. Therefore
      * you can emulate <code>ActiveXObject</code>s in a web page's JavaScript by mapping the object
      * name to a java class to emulate the active X object.
@@ -1661,7 +1661,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the active X object map for this webclient.
+     * Returns the active X object map for this webclient.
      * @return the active X object map.
      */
     public Map<String, String> getActiveXObjectMap() {
@@ -1790,7 +1790,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Set the onbeforeunload handler for this webclient.
+     * Sets the onbeforeunload handler for this webclient.
      * @param onbeforeunloadHandler The new onbeforeunloadHandler or null if none is specified.
      */
     public void setOnbeforeunloadHandler(final OnbeforeunloadHandler onbeforeunloadHandler) {
@@ -1798,7 +1798,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Return the onbeforeunload handler for this webclient.
+     * Returns the onbeforeunload handler for this webclient.
      * @return the onbeforeunload handler or null if one hasn't been set.
      */
     public OnbeforeunloadHandler getOnbeforeunloadHandler() {

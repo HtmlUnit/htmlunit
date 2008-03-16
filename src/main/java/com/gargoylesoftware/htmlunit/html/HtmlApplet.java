@@ -69,7 +69,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "codebase".  Refer to the
+     * Returns the value of the attribute "codebase".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -81,7 +81,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "archive".  Refer to the
+     * Returns the value of the attribute "archive".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -93,7 +93,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "code".  Refer to the
+     * Returns the value of the attribute "code".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -105,7 +105,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "object".  Refer to the
+     * Returns the value of the attribute "object".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -117,7 +117,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "alt".  Refer to the
+     * Returns the value of the attribute "alt".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -129,7 +129,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -141,7 +141,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "width".  Refer to the
+     * Returns the value of the attribute "width".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -153,7 +153,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "height".  Refer to the
+     * Returns the value of the attribute "height".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -165,7 +165,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -177,7 +177,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "hspace".  Refer to the
+     * Returns the value of the attribute "hspace".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -189,7 +189,7 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "vspace".  Refer to the
+     * Returns the value of the attribute "vspace".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

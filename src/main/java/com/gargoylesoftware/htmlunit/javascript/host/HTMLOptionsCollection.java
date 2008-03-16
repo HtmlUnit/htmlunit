@@ -163,7 +163,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * Return the object at the specified index.
+     * Returns the object at the specified index.
      *
      * @param index The index
      * @return The object or NOT_FOUND

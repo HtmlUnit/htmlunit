@@ -76,7 +76,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
 
     /**
-     * Set the number of milliseconds a script is allowed to execute before
+     * Sets the number of milliseconds a script is allowed to execute before
      * being terminated. A value of 0 or less means no timeout.
      *
      * @param timeout the timeout value

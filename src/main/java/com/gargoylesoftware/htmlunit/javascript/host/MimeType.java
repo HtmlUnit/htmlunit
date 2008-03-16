@@ -92,7 +92,7 @@ public final class MimeType extends SimpleScriptable {
     }
 
     /**
-     * Return the mime type's suffixes.
+     * Returns the mime type's suffixes.
      * @return the suffixes.
      */
     public String jsxGet_type() {

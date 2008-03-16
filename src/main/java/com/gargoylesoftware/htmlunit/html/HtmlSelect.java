@@ -70,7 +70,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     public static final String TAG_NAME = "select";
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -114,7 +114,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return a List containing all of the currently selected options. The following special
+     * Returns a List containing all of the currently selected options. The following special
      * conditions can occur if the element is in single select mode:
      * <ul>
      * <li>if multiple options are erroneously selected, the last one is returned</li>
@@ -154,7 +154,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return a List containing all the options.
+     * Returns a List containing all the options.
      *
      * @return See above
      */
@@ -165,7 +165,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the indexed option.
+     * Returns the indexed option.
      *
      * @param index The index.
      * @return The option specified by the index.
@@ -177,7 +177,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the number of options.
+     * Returns the number of options.
      * @return The number of options.
      */
     public int getOptionSize() {
@@ -312,7 +312,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return an array of KeyValuePairs that are the values that will be sent
+     * Returns an array of KeyValuePairs that are the values that will be sent
      * back to the server whenever the current form is submitted.<p>
      *
      * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
@@ -343,7 +343,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of this element to what it was at the time the page was loaded.
+     * Returns the value of this element to what it was at the time the page was loaded.
      */
     public void reset() {
         for (final HtmlOption option : getOptions()) {
@@ -374,7 +374,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
+     * {@inheritDoc}
+     * This implementation is empty; only checkboxes and radio buttons
      * really care what the default checked value is.
      * @see SubmittableElement#setDefaultChecked(boolean)
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
@@ -385,7 +386,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
+     * {@inheritDoc}
+     * This implementation returns <tt>false</tt>; only checkboxes and
      * radio buttons really care what the default checked value is.
      * @see SubmittableElement#isDefaultChecked()
      * @see HtmlRadioButtonInput#isDefaultChecked()
@@ -396,7 +398,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return true if this select is using "multiple select"
+     * Returns true if this select is using "multiple select".
      *
      * @return See above
      */
@@ -405,7 +407,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the HtmlOption object that corresponds to the specified value
+     * Returns the HtmlOption object that corresponds to the specified value.
      *
      * @param value The value to search by
      * @return See above
@@ -451,7 +453,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "name". Refer to the <a
+     * Returns the value of the attribute "name". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "name" or an empty string if that attribute isn't defined.
@@ -461,7 +463,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "size". Refer to the <a
+     * Returns the value of the attribute "size". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
@@ -472,7 +474,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "multiple". Refer to the <a
+     * Returns the value of the attribute "multiple". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "multiple" or an empty string if that attribute isn't defined.
@@ -482,7 +484,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "disabled". Refer to the <a
+     * Returns the value of the attribute "disabled". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "disabled" or an empty string if that attribute isn't defined.
@@ -492,7 +494,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return true if the disabled attribute is set for this element.
+     * Returns true if the disabled attribute is set for this element.
      *
      * @return Return true if this element is disabled.
      */
@@ -501,7 +503,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "tabindex". Refer to the <a
+     * Returns the value of the attribute "tabindex". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "tabindex" or an empty string if that attribute isn't defined.
@@ -511,7 +513,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "onfocus". Refer to the <a
+     * Returns the value of the attribute "onfocus". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "onfocus" or an empty string if that attribute isn't defined.
@@ -521,7 +523,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "onblur". Refer to the <a
+     * Returns the value of the attribute "onblur". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "onblur" or an empty string if that attribute isn't defined.
@@ -531,7 +533,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Return the value of the attribute "onchange". Refer to the <a
+     * Returns the value of the attribute "onchange". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "onchange" or an empty string if that attribute isn't defined.

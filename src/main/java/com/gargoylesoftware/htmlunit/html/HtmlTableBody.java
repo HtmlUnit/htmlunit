@@ -55,7 +55,7 @@ public class HtmlTableBody extends TableRowGroup {
     public static final String TAG_NAME = "tbody";
 
     /**
-     * Create an instance of HtmlTableBody
+     * Creates an instance of HtmlTableBody.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate

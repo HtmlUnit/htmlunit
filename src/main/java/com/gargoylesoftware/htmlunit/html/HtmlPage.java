@@ -126,7 +126,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     private final transient Object lock_ = new Object(); // used for synchronization
 
     /**
-     * Create an instance of HtmlPage
+     * Creates an instance of HtmlPage.
      *
      * @param originatingUrl The URL that was used to load this page.
      * @param webResponse The web response that was used to create this page
@@ -181,7 +181,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Get the root HtmlElement of this document.
+     * Gets the root HtmlElement of this document.
      * @return The root element
      */
     public HtmlElement getDocumentHtmlElement() {
@@ -373,7 +373,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return the charset used in the page.
+     * Returns the charset used in the page.
      * The sources of this information are from 1).meta element which
      * http-equiv attribute value is 'content-type', or if not from
      * the response header.
@@ -513,7 +513,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return the HtmlAnchor with the specified name
+     * Returns the HtmlAnchor with the specified name.
      *
      * @param name The name to search by
      * @return See above
@@ -524,7 +524,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-    *  Return the {@link HtmlAnchor} with the specified href
+     * Returns the {@link HtmlAnchor} with the specified href.
      *
      * @param href The string to search by
      * @return The HtmlAnchor
@@ -535,7 +535,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return a list of all anchors contained in this page.
+     * Returns a list of all anchors contained in this page.
      * @return the list of {@link HtmlAnchor} in this page.
      */
     @SuppressWarnings("unchecked")
@@ -544,7 +544,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return the first anchor that contains the specified text.
+     * Returns the first anchor that contains the specified text.
      * @param text The text to search for
      * @return The first anchor that was found.
      * @throws ElementNotFoundException If no anchors are found with the specified text
@@ -561,7 +561,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return the first form that matches the specified name
+     * Returns the first form that matches the specified name.
      * @param name The name to search for
      * @return The first form.
      * @exception ElementNotFoundException If no forms match the specified result.
@@ -578,7 +578,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return a list of all the forms in the page.
+     * Returns a list of all the forms in the page.
      * @return All the forms.
      */
     @SuppressWarnings("unchecked")
@@ -587,8 +587,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Given a relative URL (ie /foo), return a fully qualified URL based on
-     * the URL that was used to load this page
+     * Given a relative URL (ie /foo), returns a fully qualified URL based on
+     * the URL that was used to load this page.
      *
      * @param relativeUrl The relative URL
      * @return See above
@@ -674,7 +674,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return a list of ids (strings) that correspond to the tabbable elements
+     * Returns a list of ids (strings) that correspond to the tabbable elements
      * in this page. Return them in the same order specified in {@link #getTabbableElements}
      *
      * @return The list of id's
@@ -959,7 +959,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return the log object for this element.
+     * Returns the log object for this element.
      * @return The log object for this element.
      */
     protected Log getJsLog() {
@@ -1091,7 +1091,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return the title of this page or an empty string if the title wasn't specified.
+     * Returns the title of this page or an empty string if the title wasn't specified.
      *
      * @return the title of this page or an empty string if the title wasn't specified.
      */
@@ -1104,7 +1104,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Set the text for the title of this page.  If there is not a title element
+     * Sets the text for the title of this page.  If there is not a title element
      * on this page, then one has to be generated.
      * @param message The new text
      */
@@ -1131,7 +1131,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Get the first child of startElement that is an instance of the given class.
+     * Gets the first child of startElement that is an instance of the given class.
      * @param startElement The parent element
      * @param clazz The class to search for.
      * @return <code>null</code> if no child found
@@ -1147,7 +1147,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Get the title element for this page.  Returns null if one is not found.
+     * Gets the title element for this page.  Returns null if one is not found.
      *
      * @return the title element for this page or null if this is not one.
      */
@@ -1294,7 +1294,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return an auto-refresh string if specified.  This will look in both the meta
+     * Returns an auto-refresh string if specified.  This will look in both the meta
      * tags (taking care of &lt;noscript&gt; if any) and inside the HTTP response headers.
      * @return the auto-refresh string.
      */
@@ -1383,7 +1383,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return a list containing all the frames (from frame and iframe tags) in this page.
+     * Returns a list containing all the frames (from frame and iframe tags) in this page.
      * @return a list of {@link FrameWindow}
      */
     public List<FrameWindow> getFrames() {
@@ -1751,8 +1751,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Gives a basic representation for debugging purposes
-     * @return a basic representation
+     * Gives a basic representation for debugging purposes.
+     * @return a basic representation.
      */
     @Override
     public String toString() {
@@ -1765,7 +1765,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Move the focus to the specified component. This will trigger any relevant JavaScript
+     * Moves the focus to the specified component. This will trigger any relevant JavaScript
      * event handlers.
      *
      * @param newElement The element that will receive the focus, use <code>null</code> to remove focus from any element
@@ -1800,7 +1800,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Return the element with the focus or null if no element has the focus.
+     * Returns the element with the focus or null if no element has the focus.
      * @return The element with focus or null.
      * @see #moveFocusToElement(HtmlElement)
      */

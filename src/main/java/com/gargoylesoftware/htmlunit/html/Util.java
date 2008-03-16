@@ -55,7 +55,7 @@ public final class Util {
     }
     
     /**
-     * Get an iterator over all following nodes, depth-first.
+     * Gets an iterator over all following nodes, depth-first.
      *
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
@@ -74,7 +74,7 @@ public final class Util {
     }
 
     /**
-     * Get an iterator over all preceding siblings.
+     * Gets an iterator over all preceding siblings.
      *
      * @param contextNode The context node for the preceding sibling axis.
      * @return A possibly-empty iterator (not null).
@@ -93,7 +93,7 @@ public final class Util {
     }
     
     /**
-     * Get an iterator over all following nodes, depth-first.
+     * Gets an iterator over all following nodes, depth-first.
      *
      * @param contextNode The context node for the following axis.
      * @return A possibly-empty iterator (not null).
@@ -138,7 +138,7 @@ public final class Util {
     }
 
     /**
-     * Get an iterator over all preceding nodes, depth-first.
+     * Gets an iterator over all preceding nodes, depth-first.
      *
      * @param contextNode The context node for the preceding axis.
      * @return A possibly-empty iterator (not null).
@@ -221,7 +221,7 @@ abstract class NodeIterator implements Iterator<DomNode> {
     }
     
     /**
-     * Get the first node for iteration.
+     * Gets the first node for iteration.
      *
      * <p>This method must derive an initial node for iteration
      * from a context node.</p>
@@ -233,7 +233,7 @@ abstract class NodeIterator implements Iterator<DomNode> {
     protected abstract DomNode getFirstNode(final DomNode contextNode);
     
     /**
-     * Get the next node for iteration.
+     * Gets the next node for iteration.
      *
      * <p>This method must locate a following node from the
      * current context node.</p>

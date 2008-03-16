@@ -143,7 +143,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the value of the "all" property.
+     * Returns the value of the "all" property.
      * @return The value of the "all" property
      */
     public HTMLCollection jsxGet_all() {
@@ -209,7 +209,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the element ID.
+     * Returns the element ID.
      * @return The ID of this element.
      */
     public String jsxGet_id() {
@@ -217,7 +217,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set the identifier this element.
+     * Sets the identifier this element.
      * @param newId The new identifier of this element.
      */
     public void jsxSet_id(final String newId) {
@@ -225,7 +225,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the element title.
+     * Returns the element title.
      * @return The ID of this element.
      */
     public String jsxGet_title() {
@@ -233,7 +233,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set the title of this element.
+     * Sets the title of this element.
      * @param newTitle The new identifier of this element.
      */
     public void jsxSet_title(final String newTitle) {
@@ -393,7 +393,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set an attribute.
+     * Sets an attribute.
      * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-F68F082">
      * the DOM reference</a>
      *
@@ -1275,7 +1275,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     //----------------------- END #default#homePage BEHAVIOR -----------------------
 
     /**
-     * Get the children of the current node.
+     * Gets the children of the current node.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/children.asp">
      * MSDN documentation</a>
      * @return the child at the given position
@@ -1428,7 +1428,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Get the scrollTop for this element.
+     * Gets the scrollTop for this element.
      * @return a dummy value (default is 0)
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollTop.asp">
      * MSDN documentation</a>
@@ -1438,7 +1438,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set the scrollTop for this element.
+     * Sets the scrollTop for this element.
      * @param scroll the new value
      */
     public void jsxSet_scrollTop(final int scroll) {
@@ -1446,7 +1446,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Get the scrollLeft for this element.
+     * Gets the scrollLeft for this element.
      * @return a dummy value (default is 0)
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollLeft.asp">
      * MSDN documentation</a>
@@ -1456,7 +1456,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set the scrollLeft for this element.
+     * Sets the scrollLeft for this element.
      * @param scroll the new value
      */
     public void jsxSet_scrollLeft(final int scroll) {
@@ -1464,7 +1464,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Get the scrollHeight for this element.
+     * Gets the scrollHeight for this element.
      * @return a dummy value of 10
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollHeight.asp">
      * MSDN documentation</a>
@@ -1474,7 +1474,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Get the scrollWidth for this element.
+     * Gets the scrollWidth for this element.
      * @return a dummy value of 10
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/scrollWidth.asp">
      * MSDN documentation</a>
@@ -1484,7 +1484,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Get the JavaScript property "parentElement".
+     * Gets the JavaScript property "parentElement".
      * <p>It is identical to {@link #jsxGet_parentNode()}
      * with the exception of <tt>HTML</tt>, which has a <tt>null</tt> parent element.
      * @return The parent element
@@ -1601,7 +1601,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the HTML element that corresponds to this JavaScript object or throw an exception
+     * Returns the HTML element that corresponds to this JavaScript object or throw an exception
      * if one cannot be found.
      * @return The HTML element
      * @exception IllegalStateException If the HTML element could not be found.
@@ -1611,7 +1611,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the HTML element that corresponds to this JavaScript object
+     * Returns the HTML element that corresponds to this JavaScript object
      * or null if an element hasn't been set.
      * @return The HTML element or null
      */
@@ -1628,7 +1628,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set the focus to this element.
+     * Sets the focus to this element.
      */
     public void jsxFunction_focus() {
         final HtmlElement element = (HtmlElement) getDomNodeOrDie();

@@ -75,7 +75,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Set the href property.
+     * Sets the href property.
      * @param href href attribute value.
      */
     public void jsxSet_href(final String href) {
@@ -83,7 +83,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the href property of this link.
+     * Returns the value of the href property of this link.
      * @return The href property.
      * @throws Exception If an error occurs.
      */
@@ -97,7 +97,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Set the name property.
+     * Sets the name property.
      * @param name name attribute value.
      */
     public void jsxSet_name(final String name) {
@@ -105,7 +105,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the name property of this link.
+     * Returns the value of the name property of this link.
      * @return The name property.
      * @throws Exception If an error occurs.
      */
@@ -122,7 +122,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the target property of this link.
+     * Returns the value of the target property of this link.
      * @return The href property.
      */
     public String jsxGet_target() {

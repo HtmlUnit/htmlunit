@@ -68,7 +68,7 @@ public class HtmlHead extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "lang".  Refer to the
+     * Returns the value of the attribute "lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -80,7 +80,7 @@ public class HtmlHead extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "xml:lang".  Refer to the
+     * Returns the value of the attribute "xml:lang".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -92,7 +92,7 @@ public class HtmlHead extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "dir".  Refer to the
+     * Returns the value of the attribute "dir".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -104,7 +104,7 @@ public class HtmlHead extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "profile".  Refer to the
+     * Returns the value of the attribute "profile".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

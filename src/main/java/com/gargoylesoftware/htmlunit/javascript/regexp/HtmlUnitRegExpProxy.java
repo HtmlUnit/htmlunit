@@ -203,7 +203,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     }
 
     /**
-     * Return the log object for this object.
+     * Returns the log object for this object.
      * @return The log object for this object.
      */
     protected final Log getLog() {

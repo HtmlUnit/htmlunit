@@ -67,7 +67,7 @@ public final class HtmlHtml extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "lang". Refer to the <a
+     * Returns the value of the attribute "lang". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "lang" or an empty string if that attribute isn't defined.
@@ -77,7 +77,7 @@ public final class HtmlHtml extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "xml:lang". Refer to the <a
+     * Returns the value of the attribute "xml:lang". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "xml:lang" or an empty string if that attribute isn't defined.
@@ -87,7 +87,7 @@ public final class HtmlHtml extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "dir". Refer to the <a
+     * Returns the value of the attribute "dir". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return The value of the attribute "dir" or an empty string if that attribute isn't defined.

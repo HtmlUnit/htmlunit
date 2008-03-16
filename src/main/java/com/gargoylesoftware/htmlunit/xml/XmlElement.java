@@ -110,7 +110,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Return the tag name of this element.
+     * Returns the tag name of this element.
      * @return the tag name of this element.
      */
     public String getTagName() {
@@ -123,7 +123,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Return the value of the specified attribute or an empty string.  If the
+     * Returns the value of the specified attribute or an empty string.  If the
      * result is an empty string then it will be {@link #ATTRIBUTE_NOT_DEFINED}
      *
      * @param attributeName the name of the attribute
@@ -148,7 +148,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
         return attributes_;
     }
     /**
-     * Set the value of the attribute specified by name.
+     * Sets the value of the attribute specified by name.
      *
      * @param attributeName the name of the attribute
      * @param attributeValue The value of the attribute
@@ -158,7 +158,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Set the value of the attribute specified by namespace and qualified name.
+     * Sets the value of the attribute specified by namespace and qualified name.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name (prefix:local) of the attribute.
@@ -170,7 +170,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Set the value of the specified attribute.
+     * Sets the value of the specified attribute.
      *
      * @param attributeName the name of the attribute
      * @param attributeValue The value of the attribute
@@ -180,7 +180,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Set the value of the specified attribute.
+     * Sets the value of the specified attribute.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the attribute
@@ -219,7 +219,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Return the qualified name (prefix:local) for the namespace and local name.
+     * Returns the qualified name (prefix:local) for the namespace and local name.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param localName The name within the namespace.

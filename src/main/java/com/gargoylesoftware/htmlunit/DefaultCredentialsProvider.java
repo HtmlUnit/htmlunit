@@ -298,7 +298,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
-     * Return the log object for this class
+     * Returns the log object for this class
      * @return The log object
      */
     protected final Log getLog() {

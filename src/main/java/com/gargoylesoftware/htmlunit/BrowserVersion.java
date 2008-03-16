@@ -182,7 +182,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the application code name, for example "Mozilla".
+     * Returns the application code name, for example "Mozilla".
      * Default value is {@link #APP_CODE_NAME} if not explicitly configured.
      * @return The application code name.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appcodename.asp">
@@ -193,7 +193,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the application minor version, for example "0".
+     * Returns the application minor version, for example "0".
      * Default value is "0" if not explicitly configured.
      * @return The application minor version.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appminorversion.asp">
@@ -204,7 +204,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the application name, for example "Microsoft Internet Explorer".
+     * Returns the application name, for example "Microsoft Internet Explorer".
      * @return The application name.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appname.asp">
      * MSDN documentation</a>
@@ -214,7 +214,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the application version, for example "4.0 (compatible; MSIE 6.0b; Windows 98)".
+     * Returns the application version, for example "4.0 (compatible; MSIE 6.0b; Windows 98)".
      * @return The application version.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appversion.asp">
      * MSDN documentation</a>
@@ -224,7 +224,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the browser application language, for example "en-us".
+     * Returns the browser application language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return The browser application language.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/browserlanguage.asp">
@@ -235,7 +235,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the type of CPU in the machine, for example "x86".
+     * Returns the type of CPU in the machine, for example "x86".
      * Default value is {@link #CPU_CLASS_X86} if not explicitly configured.
      * @return The type of CPU in the machine.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cpuclass.asp">
@@ -246,7 +246,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return <tt>true</tt> if the browser is currently online.
+     * Returns <tt>true</tt> if the browser is currently online.
      * Default value is <code>true</code> if not explicitly configured.
      * @return <tt>true</tt> if the browser is currently online.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/online.asp">
@@ -257,7 +257,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the platform on which the application is running, for example "Win32".
+     * Returns the platform on which the application is running, for example "Win32".
      * Default value is {@link #PLATFORM_WIN32} if not explicitly configured.
      * @return the platform on which the application is running.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/platform.asp">
@@ -268,7 +268,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the system language, for example "en-us".
+     * Returns the system language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return The system language.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/systemlanguage.asp">
@@ -279,7 +279,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the user agent string, for example "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)".
+     * Returns the user agent string, for example "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)".
      * @return The user agent string.
      */
     public String getUserAgent() {
@@ -287,7 +287,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the user language, for example "en-us".
+     * Returns the user language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return The user language.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/userlanguage.asp">
@@ -298,7 +298,7 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * Return the version of JavaScript used by the browser, for example "1.2".
+     * Returns the version of JavaScript used by the browser, for example "1.2".
      * @return the version of JavaScript used by the browser.
      */
     public String getJavaScriptVersion() {

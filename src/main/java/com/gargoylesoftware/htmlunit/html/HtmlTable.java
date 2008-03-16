@@ -63,7 +63,7 @@ public class HtmlTable extends ClickableElement {
     public static final String TAG_NAME = "table";
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -76,7 +76,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the first cell that matches the specified row and column, searching left to right, top to bottom.
+     * Returns the first cell that matches the specified row and column, searching left to right, top to bottom.
      *
      * @param rowIndex The row index
      * @param columnIndex The column index
@@ -136,8 +136,8 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * compute the number of rows in this table. Note that the count is computed dynamically
-     * by iterating over all rows
+     * Computes the number of rows in this table. Note that the count is computed dynamically
+     * by iterating over all rows.
      *
      * @return The number of rows in this table
      */
@@ -150,7 +150,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Find and return the row with the specified id.
+     * Finds and return the row with the specified id.
      *
      * @param id The id of the row
      * @return The row with the specified id.
@@ -168,7 +168,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the table caption text or an empty string if a caption wasn't specified
+     * Returns the table caption text or an empty string if a caption wasn't specified.
      *
      * @return The caption text
      */
@@ -182,7 +182,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the table header or null if a header wasn't specified
+     * Returns the table header or null if a header wasn't specified.
      *
      * @return The table header
      */
@@ -196,7 +196,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the table footer or null if a footer wasn't specified
+     * Returns the table footer or null if a footer wasn't specified.
      *
      * @return The table footer
      */
@@ -210,7 +210,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return a list of tables bodies defined in this table.  If no bodies were defined
+     * Returns a list of tables bodies defined in this table.  If no bodies were defined
      * then an empty list will be returned.
      *
      * @return A list of {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody} objects.
@@ -226,7 +226,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "summary".  Refer to the
+     * Returns the value of the attribute "summary".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -238,7 +238,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "width".  Refer to the
+     * Returns the value of the attribute "width".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -250,7 +250,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "border".  Refer to the
+     * Returns the value of the attribute "border".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -262,7 +262,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "frame".  Refer to the
+     * Returns the value of the attribute "frame".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -274,7 +274,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "rules".  Refer to the
+     * Returns the value of the attribute "rules".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -286,7 +286,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "cellspacing".  Refer to the
+     * Returns the value of the attribute "cellspacing".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -298,7 +298,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "cellpadding".  Refer to the
+     * Returns the value of the attribute "cellpadding".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -310,7 +310,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -322,7 +322,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "bgcolor".  Refer to the
+     * Returns the value of the attribute "bgcolor".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -334,14 +334,14 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * an iterator that moves over all rows in this table. The iterator will also
-     * enter into nested row group elements (header, footer and body)
+     * An iterator that moves over all rows in this table. The iterator will also
+     * enter into nested row group elements (header, footer and body).
      */
     private class RowIterator implements Iterator<HtmlTableRow> {
         private HtmlTableRow nextRow_;
         private TableRowGroup currentGroup_;
 
-        /** create a new instance */
+        /** Creates a new instance. */
         public RowIterator() {
             setNextRow(getFirstDomChild());
         }
@@ -362,7 +362,7 @@ public class HtmlTable extends ClickableElement {
         }
 
         /**
-         * remove the current row from the underlying table
+         * Removes the current row from the underlying table.
          * @throws IllegalStateException if there is no current element
          */
         public void remove() throws IllegalStateException {
@@ -391,9 +391,9 @@ public class HtmlTable extends ClickableElement {
         }
 
         /**
-         * set the internal position to the next row, starting at the given node
+         * Sets the internal position to the next row, starting at the given node.
          * @param node the node to mark as the next row. If this is not a row, the
-         * next reachable row will be marked
+         * next reachable row will be marked.
          */
         private void setNextRow(final DomNode node) {
             nextRow_ = null;

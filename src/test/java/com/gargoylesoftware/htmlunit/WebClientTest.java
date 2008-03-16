@@ -702,7 +702,7 @@ public class WebClientTest extends WebTestCase {
     private class CollectingPageCreator implements PageCreator {
         private final List<Page> collectedPages_;
         /**
-         * Create an instance
+         * Creates an instance.
          * @param list The list that will contain the data
          */
         public CollectingPageCreator(final List<Page> list) {
@@ -710,7 +710,7 @@ public class WebClientTest extends WebTestCase {
         }
         
         /**
-         * Create a page
+         * Creates a page.
          * @param webResponse The web response
          * @param webWindow The web window
          * @return The new page
@@ -726,7 +726,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test loading a page with POST parameters.
+     * Tests loading a page with POST parameters.
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -1056,7 +1056,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Return a loaded page for one of the keyboard tests.
+     * Returns a loaded page for one of the keyboard tests.
      * @param webClient the WebClient to load the page from.
      * @param tabIndexValues The tab index values.  One input will be created for each item
      * in this list.

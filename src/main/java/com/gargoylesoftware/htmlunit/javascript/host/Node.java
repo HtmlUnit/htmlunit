@@ -395,7 +395,7 @@ public class Node extends SimpleScriptable {
     }
 
     /**
-     * Get the JavaScript property "lastChild" for the node that
+     * Gets the JavaScript property "lastChild" for the node that
      * contains the current node.
      * @return The last child node or null if the current node has
      * no children.
@@ -405,7 +405,7 @@ public class Node extends SimpleScriptable {
     }
 
     /**
-     * Get the JavaScript node for a given DomNode.
+     * Gets the JavaScript node for a given DomNode.
      * @param domNode The DomNode.
      * @return The JavaScript node or null if the DomNode was null.
      */

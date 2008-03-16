@@ -46,13 +46,13 @@ package com.gargoylesoftware.htmlunit.html;
 public interface DisabledElement {
 
     /**
-     * Return true if the disabled attribute is set for this element.
+     * Returns true if the disabled attribute is set for this element.
      * @return Return true if this element is disabled.
      */
     boolean isDisabled();
 
     /**
-     * Return the value of the attribute "disabled".  Refer to the
+     * Returns the value of the attribute "disabled".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

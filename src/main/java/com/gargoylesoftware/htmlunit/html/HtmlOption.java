@@ -43,7 +43,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
- * Wrapper for the HTML element "option"
+ * Wrapper for the HTML element "option".
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -63,7 +63,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     private final boolean initialSelectedState_;
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -77,7 +77,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Return true if this option is currently selected
+     * Returns true if this option is currently selected.
      *
      * @return See above
      */
@@ -86,8 +86,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Set the selected state of this option. This will possibly also change the
-     * selected properties of sibling option elements
+     * Sets the selected state of this option. This will possibly also change the
+     * selected properties of sibling option elements.
      *
      * @param selected true if this option should be selected.
      * @return The page that occupies this window after this change is made.  It
@@ -130,7 +130,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Gets the enclosing select of this option
+     * Gets the enclosing select of this option.
      * @return <code>null</code> if no select is found (for instance malformed html)
      */
     public HtmlSelect getEnclosingSelect() {
@@ -138,14 +138,14 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Reset the option to its original selected state.
+     * Resets the option to its original selected state.
      */
     public void reset() {
         setSelectedInternal(initialSelectedState_);
     }
 
     /**
-     * Return the value of the attribute "selected".  Refer to the
+     * Returns the value of the attribute "selected".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -157,7 +157,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
     
     /**
-     * Return whether this Option is selected by default.
+     * Returns whether this Option is selected by default.
      * That is whether the "selected"
      * attribute exists when the Option is constructed. This also determines
      * the value of getSelectedAttribute() after a reset() on the form.
@@ -168,7 +168,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Return true if the disabled attribute is set for this element.
+     * Returns true if the disabled attribute is set for this element.
      *
      * @return Return true if this element is disabled.
      */
@@ -177,7 +177,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Return the value of the attribute "disabled".  Refer to the
+     * Returns the value of the attribute "disabled".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -189,7 +189,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Return the value of the attribute "label".  Refer to the
+     * Returns the value of the attribute "label".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -201,7 +201,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Set the value of the attribute "label".  Refer to the
+     * Sets the value of the attribute "label".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -212,7 +212,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Return the value of the attribute "value".  Refer to the
+     * Returns the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
@@ -224,7 +224,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Set the value of the attribute "value".  Refer to the
+     * Sets the value of the attribute "value".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

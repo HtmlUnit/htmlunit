@@ -481,7 +481,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Set value on input expects a string.  If you pass in a value that isn't a string
+     * Sets value on input expects a string.  If you pass in a value that isn't a string
      * this used to blow up.
      * @throws Exception if the test fails
      */
@@ -1146,7 +1146,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         private int scriptExecuteScriptCount_ = 0;
 
         /**
-         * Create an instance
+         * Creates an instance.
          * @param client the WebClient
          */
         protected CountingJavaScriptEngine(final WebClient client) {

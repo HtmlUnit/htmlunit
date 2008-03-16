@@ -66,7 +66,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Get the data character string for this character data.
+     * Gets the data character string for this character data.
      * @return The data String.
      */
     public String getData() {
@@ -74,7 +74,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Set the data character string to the new string.
+     * Sets the data character string to the new string.
      * @param newValue The new String of data.
      */
     public void setData(final String newValue) {
@@ -82,7 +82,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Set the data character string to the new string.
+     * Sets the data character string to the new string.
      * @param newValue The new String of data.
      */
     @Override
@@ -91,7 +91,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Get the number of characters in the character data.
+     * Gets the number of characters in the character data.
      * @return The number of characters.
      */
     public int getLength() {

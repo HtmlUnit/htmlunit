@@ -172,7 +172,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Set the line and column numbers in the source page where the
+     * Sets the line and column numbers in the source page where the
      * DOM node starts.
      *
      * @param startLineNumber The line number where the DOM node starts.
@@ -184,7 +184,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
     
     /**
-     * Set the line and column numbers in the source page where the
+     * Sets the line and column numbers in the source page where the
      * DOM node ends.
      *
      * @param endLineNumber The line number where the DOM node ends.
@@ -196,7 +196,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Get the line number in the source page where the DOM node starts.
+     * Gets the line number in the source page where the DOM node starts.
      *
      * @return See above.
      */
@@ -205,7 +205,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Get the column number in the source page where the DOM node starts.
+     * Gets the column number in the source page where the DOM node starts.
      *
      * @return See above.
      */
@@ -214,7 +214,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Get the line number in the source page where the DOM node ends.
+     * Gets the line number in the source page where the DOM node ends.
      *
      * @return See above.
      */
@@ -223,7 +223,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Get the column number in the source page where the DOM node ends.
+     * Gets the column number in the source page where the DOM node ends.
      *
      * @return See above.
      */
@@ -232,7 +232,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Return the Page that contains this node
+     * Returns the Page that contains this node
      *
      * @return See above
      */
@@ -267,7 +267,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Get the last child DomNode.
+     * Gets the last child DomNode.
      * @return The last child node or null if the current node has
      * no children.
      */
@@ -380,13 +380,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Get the type of the current node.
+     * Gets the type of the current node.
      * @return The node type
      */
     public abstract short getNodeType();
 
     /**
-     * Get the name for the current node.
+     * Gets the name for the current node.
      * @return The node name
      */
     public abstract String getNodeName();
@@ -616,7 +616,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Return a text string that represents all the child elements as they would be visible in a web browser
+     * Returns a text string that represents all the child elements as they would be visible in a web browser
      *
      * @return See above
      * @see #asText()
@@ -705,7 +705,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Return the log object for this element.
+     * Returns the log object for this element.
      * @return The log object for this element.
      */
     protected final Log getLog() {
@@ -713,7 +713,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Return a string representation of the XML document from this element and all
+     * Returns a string representation of the XML document from this element and all
      * it's children (recursively).
      *
      * @return The XML string.
@@ -1139,7 +1139,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Return an Iterable that will recursively iterate over every child element below this one.
+     * Returns an Iterable that will recursively iterate over every child element below this one.
      * @return The iterator.
      */
     public final Iterable<HtmlElement> getAllHtmlChildElements() {
@@ -1235,7 +1235,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Return this node's ready state (IE only).
+     * Returns this node's ready state (IE only).
      * @return This node's ready state.
      */
     public String getReadyState() {

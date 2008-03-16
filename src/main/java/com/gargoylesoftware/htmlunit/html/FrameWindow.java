@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
 public class FrameWindow extends WebWindowImpl {
     private final BaseFrame frame_;
     /**
-     * Create an instance for a given frame
+     * Creates an instance for a given frame.
      */
     FrameWindow(final BaseFrame frame) {
         super(frame.getPage().getWebClient());
@@ -102,7 +102,7 @@ public class FrameWindow extends WebWindowImpl {
     }
 
     /**
-     * Return the HTML page in which the &lt;frame&gt; or &lt;iframe&gt; tag is contained
+     * Returns the HTML page in which the &lt;frame&gt; or &lt;iframe&gt; tag is contained
      * for this frame window.
      * This is a facility method for <code>(HtmlPage) (getParentWindow().getEnclosedPage())</code>.
      * @return the page in the parent window.
@@ -120,7 +120,7 @@ public class FrameWindow extends WebWindowImpl {
     }
 
     /**
-     * Gives a basic representation for debugging purposes
+     * Gives a basic representation for debugging purposes.
      * @return a basic representation
      */
     @Override

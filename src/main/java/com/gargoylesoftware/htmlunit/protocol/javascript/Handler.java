@@ -49,7 +49,7 @@ import java.net.URLStreamHandler;
  */
 public class Handler extends URLStreamHandler {
     /**
-     * Return a new URLConnection for this URL.
+     * Returns a new URLConnection for this URL.
      * @param url The JavaScript URL.
      * @return The connection.
      */

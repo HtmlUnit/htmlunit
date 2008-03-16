@@ -81,7 +81,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onload".  Refer to the
+     * Returns the value of the attribute "onload".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -93,7 +93,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "onunload".  Refer to the
+     * Returns the value of the attribute "onunload".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -105,7 +105,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "background".  Refer to the
+     * Returns the value of the attribute "background".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -117,7 +117,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "bgcolor".  Refer to the
+     * Returns the value of the attribute "bgcolor".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -129,7 +129,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "text".  Refer to the
+     * Returns the value of the attribute "text".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -141,7 +141,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "link".  Refer to the
+     * Returns the value of the attribute "link".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -153,7 +153,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "vlink".  Refer to the
+     * Returns the value of the attribute "vlink".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -165,7 +165,7 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "alink".  Refer to the
+     * Returns the value of the attribute "alink".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

@@ -66,7 +66,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Return the type of this input.
+     * Returns the type of this input.
      * @return The type.
      */
     @Override

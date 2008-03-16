@@ -188,7 +188,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the HTML page that this document is modeling..
+     * Returns the HTML page that this document is modeling..
      * @return The page.
      */
     public HtmlPage getHtmlPage() {
@@ -196,7 +196,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the HTML page that this document is modeling or null if the
+     * Returns the HTML page that this document is modeling or null if the
      * page is empty.
      * @return The page.
      */
@@ -205,7 +205,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the JavaScript attribute "forms".
+     * Returns the value of the JavaScript attribute "forms".
      * @return The value of this attribute.
      */
     public Object jsxGet_forms() {
@@ -230,7 +230,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the JavaScript attribute "anchors".
+     * Returns the value of the JavaScript attribute "anchors".
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/anchors.asp">
      * MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
@@ -588,7 +588,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the "location" property.
+     * Returns the value of the "location" property.
      * @return The value of the "location" property
      */
     public Location jsxGet_location() {
@@ -609,7 +609,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the "images" property.
+     * Returns the value of the "images" property.
      * @return The value of the "images" property
      */
     public Object jsxGet_images() {
@@ -621,7 +621,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the "referrer" property.
+     * Returns the value of the "referrer" property.
      * @return The value of the "referrer" property
      */
     public String jsxGet_referrer() {
@@ -635,7 +635,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the "URL" property.
+     * Returns the value of the "URL" property.
      * @return The value of the "URL" property
      */
     public String jsxGet_URL() {
@@ -643,7 +643,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the "all" property.
+     * Returns the value of the "all" property.
      * @return The value of the "all" property
      */
     public HTMLCollection jsxGet_all() {
@@ -716,7 +716,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Get the JavaScript property "documentElement" for the document.
+     * Gets the JavaScript property "documentElement" for the document.
      * @return The root node for the document.
      */
     public SimpleScriptable jsxGet_documentElement() {
@@ -724,7 +724,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Get the window in which this document is contained.
+     * Gets the window in which this document is contained.
      * @return the window
      */
     public Object jsxGet_defaultView() {
@@ -732,7 +732,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Get the window in which this document is contained.
+     * Gets the window in which this document is contained.
      * @return the window
      */
     public Object jsxGet_parentWindow() {
@@ -1132,7 +1132,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Set the the domain of this document.
+     * Sets the the domain of this document.
      *
      * Domains can only be set to suffixes of the existing domain
      * with the exception of setting the domain to itself.
@@ -1181,7 +1181,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the JavaScript attribute "scripts".
+     * Returns the value of the JavaScript attribute "scripts".
      * @return The value of this attribute.
      */
     public Object jsxGet_scripts() {
@@ -1193,7 +1193,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the JavaScript attribute "selection".
+     * Returns the value of the JavaScript attribute "selection".
      * @return The value of this attribute.
      */
     public Selection jsxGet_selection() {
@@ -1204,7 +1204,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Return the value of the frames property.
+     * Returns the value of the frames property.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp">
      * MSDN documentation</a>
      * @return The live collection of frames

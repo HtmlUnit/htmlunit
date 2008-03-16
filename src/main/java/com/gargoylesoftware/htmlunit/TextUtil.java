@@ -63,7 +63,7 @@ public final class TextUtil {
     private TextUtil() { }
 
     /**
-     * Return true if the string starts with the specified prefix, irrespective of case.
+     * Returns true if the string starts with the specified prefix, irrespective of case.
      * @param stringToCheck The string to check
      * @param prefix The prefix
      * @return true if the string starts with the prefix.

@@ -74,7 +74,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     private boolean preventDefault_;
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -205,7 +205,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -217,7 +217,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "rows".  Refer to the
+     * Returns the value of the attribute "rows".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -229,7 +229,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "cols".  Refer to the
+     * Returns the value of the attribute "cols".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -241,7 +241,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return true if the disabled attribute is set for this element.
+     * Returns true if the disabled attribute is set for this element.
      *
      * @return Return true if this element is disabled.
      */
@@ -250,7 +250,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "disabled".  Refer to the
+     * Returns the value of the attribute "disabled".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -262,7 +262,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "readonly".  Refer to the
+     * Returns the value of the attribute "readonly".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -274,7 +274,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -286,7 +286,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -298,7 +298,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -310,7 +310,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -322,7 +322,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "onselect".  Refer to the
+     * Returns the value of the attribute "onselect".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -334,7 +334,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value of the attribute "onchange".  Refer to the
+     * Returns the value of the attribute "onchange".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

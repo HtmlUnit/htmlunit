@@ -209,7 +209,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Return the line of source that was being executed when this exception was
+     * Returns the line of source that was being executed when this exception was
      * thrown.
      *
      * @return The line of source or an empty string if the exception was not thrown
@@ -238,7 +238,7 @@ public class ScriptException extends RuntimeException {
     }
 
     /**
-     * Return the line number of the source that was executing at the time of the exception.
+     * Returns the line number of the source that was executing at the time of the exception.
      *
      * @return The line number or -1 if the exception was not thrown due to the
      * execution of a script.

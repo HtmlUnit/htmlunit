@@ -165,7 +165,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "longdesc".  Refer to the
+     * Returns the value of the attribute "longdesc".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -177,7 +177,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -189,7 +189,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Set the value of the "name" attribute.
+     * Sets the value of the "name" attribute.
      *
      * @param name The new window name.
      */
@@ -198,7 +198,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "src".  Refer to the
+     * Returns the value of the attribute "src".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -210,7 +210,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "frameborder".  Refer to the
+     * Returns the value of the attribute "frameborder".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -222,7 +222,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "marginwidth".  Refer to the
+     * Returns the value of the attribute "marginwidth".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -234,7 +234,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "marginheight".  Refer to the
+     * Returns the value of the attribute "marginheight".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -246,7 +246,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "noresize".  Refer to the
+     * Returns the value of the attribute "noresize".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -258,7 +258,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "scrolling".  Refer to the
+     * Returns the value of the attribute "scrolling".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -270,7 +270,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the value of the attribute "onload".  This attribute is not
+     * Returns the value of the attribute "onload".  This attribute is not
      * actually supported by the HTML specification however it is supported
      * by the popular browsers.
      *
@@ -282,7 +282,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Return the currently loaded page in the enclosed window.
+     * Returns the currently loaded page in the enclosed window.
      * This is a facility method for <code>getEnclosedWindow().getEnclosedPage()</code>.
      * @see WebWindow#getEnclosedPage()
      * @return The currently loaded page in the enclosed window or null if no page has been loaded.
@@ -300,7 +300,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Set the value of the "src" attribute.  Also load the frame with the specified URL if possible.
+     * Sets the value of the "src" attribute.  Also load the frame with the specified URL if possible.
      * @param attribute The new value
      */
     public final void setSrcAttribute(final String attribute) {

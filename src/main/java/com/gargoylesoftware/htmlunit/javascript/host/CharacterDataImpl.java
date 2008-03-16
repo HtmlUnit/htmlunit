@@ -57,7 +57,7 @@ public class CharacterDataImpl extends Node {
     }
 
     /**
-     * Get the JavaScript property "data" for this character data.
+     * Gets the JavaScript property "data" for this character data.
      * @return The String of data.
      */
     public Object jsxGet_data() {
@@ -67,7 +67,7 @@ public class CharacterDataImpl extends Node {
     }
 
     /**
-     * Set the JavaScript property "data" for this character data.
+     * Sets the JavaScript property "data" for this character data.
      * @param newValue The new String of data.
      */
     public void jsxSet_data(final String newValue) {
@@ -77,7 +77,7 @@ public class CharacterDataImpl extends Node {
     }
 
     /**
-     * Get the number of character in the character data.
+     * Gets the number of character in the character data.
      * @return The number of characters.
      */
     public int jsxGet_length() {
