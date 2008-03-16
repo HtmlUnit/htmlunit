@@ -200,6 +200,12 @@ public class Stylesheet extends SimpleScriptable {
             getLog().error(e.getMessage(), e);
             selectors = new SelectorListImpl();
         }
+        catch (final Error e) {
+            // Yes, Error! because SACParser may sometimes throws: new Error("Missing return statement in function")
+            // but I haven't been able to reproduce it with a simple test case
+            getLog().error("Error parsing CSS: " + e.getMessage(), e);
+            selectors = new SelectorListImpl();
+        }
         return selectors;
     }
 
