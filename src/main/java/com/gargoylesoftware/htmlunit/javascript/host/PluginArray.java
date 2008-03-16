@@ -55,7 +55,7 @@ public class PluginArray extends SimpleArray {
     }
 
     /**
-     * Current implementation does nothing
+     * Current implementation does nothing.
      * @param reloadDocuments reload yes / no
      * @see <a href="http://www.xulplanet.com/references/objref/PluginArray.html#method_refresh">XUL Planet</a>
      */
@@ -64,9 +64,9 @@ public class PluginArray extends SimpleArray {
     }
 
     /**
-     * Get the name of the plugin
-     * @param element a {@link Plugin}
-     * @return the name
+     * Get the name of the plugin.
+     * @param element a {@link Plugin}.
+     * @return the name.
      */
     @Override
     protected String getItemName(final Object element) {

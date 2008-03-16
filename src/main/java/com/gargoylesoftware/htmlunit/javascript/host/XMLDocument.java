@@ -145,7 +145,7 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Loads an XML document using the supplied string
+     * Loads an XML document using the supplied string.
      *
      * @param strXML A string containing the XML string to load into this XML document object.
      *        This string can contain an entire XML document or a well-formed fragment.

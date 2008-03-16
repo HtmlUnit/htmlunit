@@ -65,7 +65,7 @@ public final class TextImpl extends CharacterDataImpl {
     }
 
     /**
-     * Initialize this object
+     * Initialize this object.
      */
     public void initialize() {
     }

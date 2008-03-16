@@ -50,16 +50,16 @@ public class MimeTypeArray extends SimpleArray {
     private static final long serialVersionUID = 6216803993814539605L;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public MimeTypeArray() {
         // nothing
     }
 
     /**
-     * Get the name of the mime type
+     * Gets the name of the mime type.
      * @param element a {@link MimeType}.
-     * @return the name
+     * @return the name.
      */
     @Override
     protected String getItemName(final Object element) {

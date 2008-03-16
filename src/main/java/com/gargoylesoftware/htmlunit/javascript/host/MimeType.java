@@ -62,7 +62,7 @@ public final class MimeType extends SimpleScriptable {
     }
 
     /**
-     * C'tor initializing fields
+     * Constructor initializing fields.
      * @param type the mime type
      * @param description the type description
      * @param suffixes the file suffixes
@@ -76,7 +76,7 @@ public final class MimeType extends SimpleScriptable {
     }
 
     /**
-     * Return the mime type's description
+     * Returns the mime type's description.
      * @return the description.
      */
     public String jsxGet_description() {
@@ -84,7 +84,7 @@ public final class MimeType extends SimpleScriptable {
     }
 
     /**
-     * Return the mime type's suffixes
+     * Returns the mime type's suffixes.
      * @return the suffixes.
      */
     public String jsxGet_suffixes() {
@@ -92,7 +92,7 @@ public final class MimeType extends SimpleScriptable {
     }
 
     /**
-     * Return the mime type's suffixes
+     * Return the mime type's suffixes.
      * @return the suffixes.
      */
     public String jsxGet_type() {
@@ -100,7 +100,7 @@ public final class MimeType extends SimpleScriptable {
     }
 
     /**
-     * Return the mime type's associated plugin
+     * Returns the mime type's associated plugin.
      * @return the plugin.
      */
     public Object jsxGet_enabledPlugin() {

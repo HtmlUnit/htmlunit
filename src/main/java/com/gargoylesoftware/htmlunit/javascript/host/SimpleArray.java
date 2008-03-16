@@ -59,14 +59,14 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     private final List<Object> elements_ = new ArrayList<Object>();
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public SimpleArray() {
         // nothing
     }
 
     /**
-     * Return the item at the given index
+     * Returns the item at the given index.
      * @param index the index
      * @return the item at the given position.
      */
@@ -106,8 +106,8 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     }
 
     /**
-     * Return the item at the given index
-     * @param name the item name
+     * Returns the item at the given index.
+     * @param name the item name.
      * @return the item with the given name.
      */
     public Object jsxFunction_namedItem(final String name) {
@@ -130,7 +130,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     }
 
     /**
-     * Get the array size.
+     * Gets the array size.
      * @return the number elements.
      */
     public int jsxGet_length() {
@@ -138,7 +138,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     }
 
     /**
-     * Adds an element
+     * Adds an element.
      * @param element the element to add
      */
     void add(final Object element) {

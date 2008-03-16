@@ -86,7 +86,7 @@ public class RowContainer extends HTMLElement {
     }
 
     /**
-     * Gets the xpath expression allowing to get the rows of the container relatively to the container
+     * Gets the xpath expression allowing to get the rows of the container relatively to the container.
      * @return the expression
      */
     protected String getXPathRows() {
@@ -155,7 +155,7 @@ public class RowContainer extends HTMLElement {
     }
 
     /**
-     * Insert a new row at the given position
+     * Inserts a new row at the given position.
      * @param index the index where the row should be inserted (0 <= index < nbRows)
      * @return the inserted row
      */

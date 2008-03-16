@@ -75,8 +75,8 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Return the value of the "value" attribute
-     * @return The value of the "value" attribute
+     * Returns the value of the "value" attribute.
+     * @return The value of the "value" attribute.
      */
     @Override
     public String jsxGet_value() {
@@ -84,8 +84,8 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Set the value of the "value" attribute
-     * @param value The new value
+     * Sets the value of the "value" attribute.
+     * @param value The new value.
      */
     @Override
     public void jsxSet_value(final String value) {
@@ -113,40 +113,40 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Gets the value of "textLength" attribute
-     * @return the text length
+     * Gets the value of "textLength" attribute.
+     * @return the text length.
      */
     public int jsxGet_textLength() {
         return jsxGet_value().length();
     }
 
     /**
-     * Gets the value of "selectionStart" attribute
-     * @return the selection start
+     * Gets the value of "selectionStart" attribute.
+     * @return the selection start.
      */
     public int jsxGet_selectionStart() {
         return ((HtmlTextArea) getHtmlElementOrDie()).getSelectionStart();
     }
 
     /**
-     * Sets the value of "selectionStart" attribute
-     * @param start selection start
+     * Sets the value of "selectionStart" attribute.
+     * @param start selection start.
      */
     public void jsxSet_selectionStart(final int start) {
         ((HtmlTextArea) getHtmlElementOrDie()).setSelectionStart(start);
     }
 
     /**
-     * Gets the value of "selectionEnd" attribute
-     * @return the selection end
+     * Gets the value of "selectionEnd" attribute.
+     * @return the selection end.
      */
     public int jsxGet_selectionEnd() {
         return ((HtmlTextArea) getHtmlElementOrDie()).getSelectionEnd();
     }
 
     /**
-     * Sets the value of "selectionEnd" attribute
-     * @param end selection end
+     * Sets the value of "selectionEnd" attribute.
+     * @param end selection end.
      */
     public void jsxSet_selectionEnd(final int end) {
         ((HtmlTextArea) getHtmlElementOrDie()).setSelectionEnd(end);

@@ -122,8 +122,8 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Sets the start of the range to be after the node
-     * @param refNode the reference node
+     * Sets the start of the range to be after the node.
+     * @param refNode the reference node.
      */
     public void jsxFunction_setStartAfter(final Node refNode) {
         startContainer_ = (Node) refNode.jsxGet_parentNode();
@@ -131,8 +131,8 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Sets the start of the range to be before the node
-     * @param refNode the reference node
+     * Sets the start of the range to be before the node.
+     * @param refNode the reference node.
      */
     public void jsxFunction_setStartBefore(final Node refNode) {
         startContainer_ = (Node) refNode.jsxGet_parentNode();
@@ -150,8 +150,8 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Indicates if the range is collapsed
-     * @return <code>true</code> if the range is collapsed
+     * Indicates if the range is collapsed.
+     * @return <code>true</code> if the range is collapsed.
      */
     public boolean jsxGet_collapsed() {
         return (startContainer_ == endContainer_ && startOffset_ == endOffset_);
@@ -159,8 +159,8 @@ public class Range extends SimpleScriptable {
 
     /**
      * Sets the attributes describing the end of a Range.
-     * @param refNode the reference node
-     * @param offset the offset value within the node
+     * @param refNode the reference node.
+     * @param offset the offset value within the node.
      */
     public void jsxFunction_setEnd(final Node refNode, final int offset) {
         endContainer_ = refNode;
@@ -168,8 +168,8 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Sets the end of the range to be after the node
-     * @param refNode the reference node
+     * Sets the end of the range to be after the node.
+     * @param refNode the reference node.
      */
     public void jsxFunction_setEndAfter(final Node refNode) {
         endContainer_ = (Node) refNode.jsxGet_parentNode();
@@ -177,8 +177,8 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Sets the end of the range to be before the node
-     * @param refNode the reference node
+     * Sets the end of the range to be before the node.
+     * @param refNode the reference node.
      */
     public void jsxFunction_setEndBefore(final Node refNode) {
         startContainer_ = (Node) refNode.jsxGet_parentNode();
@@ -186,8 +186,8 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Select the contents within a node
-     * @param refNode Node to select from
+     * Select the contents within a node.
+     * @param refNode Node to select from.
      */
     public void jsxFunction_selectNodeContents(final Node refNode) {
         startContainer_ = refNode;
@@ -197,8 +197,8 @@ public class Range extends SimpleScriptable {
     }
     
     /**
-     * Select a node and its contents
-     * @param refNode the node to select
+     * Selects a node and its contents.
+     * @param refNode the node to select.
      */
     public void jsxFunction_selectNode(final Node refNode) {
         jsxFunction_setStartBefore(refNode);
@@ -206,7 +206,7 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Collapse a Range onto one of its boundary-points
+     * Collapse a Range onto one of its boundary-points.
      * @param toStart If <code>true</code>, collapses the Range onto its start; else collapses it onto its end.
      */
     public void jsxFunction_collapse(final boolean toStart) {
@@ -222,7 +222,7 @@ public class Range extends SimpleScriptable {
     
     /**
      * Gets the deepest common ancestor container of the Range's two boundary-points.
-     * @return the ancestor
+     * @return the ancestor.
      */
     @SuppressWarnings("unchecked")
     public Object jsxGet_commonAncestorContainer() {
@@ -238,9 +238,9 @@ public class Range extends SimpleScriptable {
     }
 
     /**
-     * Gets the ancestors of the node
-     * @param node the node to start with
-     * @return a list of node
+     * Gets the ancestors of the node.
+     * @param node the node to start with.
+     * @return a list of node.
      */
     protected List<Node> getAncestorsAndSelf(final Node node) {
         final List<Node> ancestors = new ArrayList<Node>();
