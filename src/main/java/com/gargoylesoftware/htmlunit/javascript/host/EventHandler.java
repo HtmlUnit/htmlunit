@@ -63,7 +63,7 @@ public class EventHandler extends BaseFunction {
     private Function realFunction_;
 
     /**
-     * Builds a function that will execute the JavaScript code provided
+     * Builds a function that will execute the JavaScript code provided.
      * @param node the element for which the event is build
      * @param eventName the event for which this handler is created
      * @param jsSnippet the JavaScript code
@@ -135,8 +135,8 @@ public class EventHandler extends BaseFunction {
     }
 
     /**
-     * Return the log
-     * @return The log.
+     * Return the log.
+     * @return the log
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());

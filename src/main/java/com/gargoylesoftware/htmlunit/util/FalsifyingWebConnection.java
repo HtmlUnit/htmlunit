@@ -75,7 +75,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Delivers the content for an alternate URL as if it would come from the requested one
+     * Delivers the content for an alternate URL as if it comes from the requested URL.
      * @param webRequestSettings the original web request settings
      * @param url the URL from which the content should be retrieved
      * @return the response
@@ -95,7 +95,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Builds a WebResponse with a new content preserving the other informations
+     * Builds a WebResponse with new content, preserving all other information.
      * @param webResponse the web response to adapt
      * @param newContent the new content to place in the response
      * @return a web response with the new content

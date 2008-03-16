@@ -64,7 +64,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     private final RegExpProxy wrapped_;
     
     /**
-     * Wraps a proxy to enhance it
+     * Wraps a proxy to enhance it.
      * @param wrapped the original proxy
      */
     public HtmlUnitRegExpProxy(final RegExpProxy wrapped) {
@@ -72,7 +72,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     }
     
     /**
-     * Use wrapped proxy except for replacement with string arg where it uses Java regular expression
+     * Use the wrapped proxy except for replacement with string arg where it uses Java regular expression.
      * {@inheritDoc}
      */
     @Override

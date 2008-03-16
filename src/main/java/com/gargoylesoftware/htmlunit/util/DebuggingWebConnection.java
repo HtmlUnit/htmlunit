@@ -111,7 +111,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     /**
-     * Save the response content in the temp dir and add it to the summary page
+     * Saves the response content in the temp dir and adds it to the summary page.
      * @param response the response to save
      * @param settings the settings used to get the response
      * @throws IOException if a problem occurs writing the file

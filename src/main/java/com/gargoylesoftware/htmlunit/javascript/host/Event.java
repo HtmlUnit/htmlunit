@@ -258,7 +258,7 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * Sets the current target
+     * Sets the current target.
      * @param target the new value
      */
     public void setCurrentTarget(final Scriptable target) {

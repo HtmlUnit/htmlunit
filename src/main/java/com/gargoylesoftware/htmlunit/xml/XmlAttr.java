@@ -133,7 +133,7 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * Set the parent node
+     * Sets the parent node.
      * @param parent the parent node
      */
     @Override

@@ -61,7 +61,7 @@ public class FormField extends HTMLElement {
     private static final long serialVersionUID = 3712016051364495710L;
 
     /**
-     * Sets the associated DOM node and sets the enclosing form as parent scope of the current element
+     * Sets the associated DOM node and sets the enclosing form as parent scope of the current element.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setDomNode(DomNode)
      * @param domNode The DOM node
      */
@@ -163,8 +163,8 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Set whether or not to disable this element
-     * @param disabled True if this is to be disabled.
+     * Set whether or not to disable this element.
+     * @param disabled <tt>true</tt> if this is to be disabled
      */
     @Override
     public void jsxSet_disabled(final boolean disabled) {

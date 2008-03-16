@@ -136,8 +136,8 @@ public final class XmlUtil {
     }
 
     /**
-     * Return the log object for this web client
-     * @return The log object
+     * Returns the log object for this utility class.
+     * @return the log object for this utility class
      */
     protected static Log getLog() {
         return LogFactory.getLog(XmlUtil.class);

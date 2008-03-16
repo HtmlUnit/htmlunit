@@ -125,7 +125,7 @@ public class Attribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
+     * Returns <code>null</code>.
      * @return <code>null</code>
      */
     public Object jsxGet_firstChild() {
@@ -133,7 +133,7 @@ public class Attribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
+     * Returns <code>null</code>.
      * @return <code>null</code>
      */
     public Object jsxGet_lastChild() {
@@ -149,7 +149,7 @@ public class Attribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
+     * Returns <code>null</code>.
      * @return <code>null</code>
      */
     public Object jsxGet_nextSibling() {
@@ -195,7 +195,7 @@ public class Attribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
+     * Returns <code>null</code>.
      * @return <code>null</code>
      */
     public Object jsxGet_parentNode() {
@@ -203,7 +203,7 @@ public class Attribute extends SimpleScriptable {
     }
 
     /**
-     * Returns <code>null</code>
+     * Returns <code>null</code>.
      * @return <code>null</code>
      */
     public Object jsxGet_previousSibling() {

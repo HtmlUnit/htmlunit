@@ -267,7 +267,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written

@@ -833,7 +833,7 @@ public class Document extends EventNode {
     }
 
     /**
-     * Create a new HTML element with the given tag name, and name
+     * Creates a new HTML element with the given tag name, and name.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -862,8 +862,8 @@ public class Document extends EventNode {
     }
 
     /**
-     * Create a new DocumentFragment
-     * @return a newly created DocumentFragment.
+     * Creates a new document fragment.
+     * @return a newly created document fragment
      */
     public Object jsxFunction_createDocumentFragment() {
         final DomDocumentFragment fragment = ((SgmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
@@ -942,8 +942,7 @@ public class Document extends EventNode {
     }
     
     /**
-     * Return the element with the specified id or null if that element could
-     * not be found
+     * Returns the element with the specified ID, or <tt>null</tt> if that element could not be found.
      * @param id The ID to search for
      * @return the element or null
      */

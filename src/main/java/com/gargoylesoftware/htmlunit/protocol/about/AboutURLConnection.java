@@ -41,7 +41,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * A URLConnection for supporting "about:" URLs
+ * A {@link URLConnection} for "about:" URLs.
  *
  * @version $Revision$
  * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
@@ -49,7 +49,7 @@ import java.net.URLConnection;
 public class AboutURLConnection extends URLConnection {
 
     /**
-     * Create an instance
+     * Creates a new instance.
      * @param newUrl The "about:" URL.
      */
     public AboutURLConnection(final URL newUrl) {
