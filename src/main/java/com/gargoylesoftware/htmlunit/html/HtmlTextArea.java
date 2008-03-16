@@ -62,7 +62,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
 
     private static final long serialVersionUID = 4572856255042499634L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "textarea";
 
     private String defaultValue_;
@@ -107,16 +107,16 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return the value that would be displayed in the text area
+     * Returns the value that would be displayed in the text area.
      *
-     * @return The text
+     * @return The text.
      */
     public final String getText() {
         return getChildrenAsText();
     }
 
     /**
-     * Set the new value of this text area.
+     * Sets the new value of this text area.
      *
      * @param newValue The new value.
      */
@@ -138,7 +138,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Return an array of KeyValuePairs that are the values that will be sent
+     * Returns an array of KeyValuePairs that are the values that will be sent
      * back to the server whenever the current form is submitted.<p>
      *
      * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
@@ -411,7 +411,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
     
     /**
-     * recursively write the XML data for the node tree starting at <code>node</code>
+     * Recursively write the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written

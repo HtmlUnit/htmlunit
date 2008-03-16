@@ -52,7 +52,7 @@ public class HtmlCaption extends ClickableElement {
 
     private static final long serialVersionUID = -1292861851761402027L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "caption";
 
     /**

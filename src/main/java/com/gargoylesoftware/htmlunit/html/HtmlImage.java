@@ -55,7 +55,7 @@ public class HtmlImage extends ClickableElement {
 
     private static final long serialVersionUID = -2304247017681577696L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "img";
     private int lastClickX_;
     private int lastClickY_;

@@ -57,11 +57,11 @@ public class HtmlTableRow extends ClickableElement {
 
     private static final long serialVersionUID = 1296770669696592851L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "tr";
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -109,7 +109,7 @@ public class HtmlTableRow extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -121,7 +121,7 @@ public class HtmlTableRow extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "char".  Refer to the
+     * Returns the value of the attribute "char".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -133,7 +133,7 @@ public class HtmlTableRow extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "charoff".  Refer to the
+     * Returns the value of the attribute "charoff".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -145,7 +145,7 @@ public class HtmlTableRow extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "valign".  Refer to the
+     * Returns the value of the attribute "valign".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -157,15 +157,15 @@ public class HtmlTableRow extends ClickableElement {
     }
 
     /**
-     * Gets the table containing this row
-     * @return the table
+     * Gets the table containing this row.
+     * @return the table.
      */
     public HtmlTable getEnclosingTable() {
         return (HtmlTable) getEnclosingElement("table");
     }
 
     /**
-     * Return the value of the attribute "bgcolor".  Refer to the
+     * Returns the value of the attribute "bgcolor".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -177,8 +177,8 @@ public class HtmlTableRow extends ClickableElement {
     }
 
     /**
-     * an Iterator over the HtmlTableCells contained in this row. It will also dive
-     * into nested forms, even though that is illegal HTML
+     * An Iterator over the HtmlTableCells contained in this row. It will also dive
+     * into nested forms, even though that is illegal HTML.
      */
     public class CellIterator implements Iterator<HtmlTableCell> {
         private HtmlTableCell nextCell_;
@@ -232,7 +232,7 @@ public class HtmlTableRow extends ClickableElement {
         }
 
         /**
-         * set the internal position to the next cell, starting at the given node
+         * Set. the internal position to the next cell, starting at the given node
          * @param node the node to mark as the next cell. If this is not a cell, the
          * next reachable cell will be marked
          */

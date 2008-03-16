@@ -52,7 +52,7 @@ public class HtmlFrameSet extends StyledElement {
 
     private static final long serialVersionUID = 4559070965860885794L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "frameset";
 
     /**

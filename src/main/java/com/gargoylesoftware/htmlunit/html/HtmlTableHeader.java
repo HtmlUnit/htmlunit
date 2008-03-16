@@ -51,7 +51,7 @@ public class HtmlTableHeader extends TableRowGroup {
 
     private static final long serialVersionUID = -5251209522769249017L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "thead";
 
     /**

@@ -163,7 +163,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * <p>Return the object at the specified index.</p>
+     * Return the object at the specified index.
      *
      * @param index The index
      * @return The object or NOT_FOUND
@@ -173,10 +173,10 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
-     * Set the index property
-     * @param index The index
-     * @param start The scriptable object that was originally invoked for this property
-     * @param newValue The new value
+     * Sets the index property.
+     * @param index The index.
+     * @param start The scriptable object that was originally invoked for this property.
+     * @param newValue The new value.
      */
     @Override
     public void put(final int index, final Scriptable start, final Object newValue) {
@@ -202,19 +202,19 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
    /**
-    * <p>Return the number of elements in this array</p>
+    * Returns the number of elements in this array.
     *
-    * @return The number of elements in the array
+    * @return The number of elements in the array.
     */
     public int jsxGet_length() {
         return htmlSelect_.getOptionSize();
     }
 
     /**
-     * Change the number of options: removes options if the new length
+     * Changes the number of options: removes options if the new length
      * is less than the current one else add new empty options to reach the
      * new length.
-     * @param newLength The new length property value
+     * @param newLength The new length property value.
      */
     public void jsxSet_length(final int newLength) {
         final int currentLength = htmlSelect_.getOptionSize();

@@ -172,15 +172,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the runtime style object for this element.
-     * @return the runtime style object for this element
+     * @return the runtime style object for this element.
      */
     public Object jsxGet_runtimeStyle() {
         return style_;
     }
 
     /**
-     * Set the DOM node that corresponds to this JavaScript object
-     * @param domNode The DOM node
+     * Sets the DOM node that corresponds to this JavaScript object.
+     * @param domNode The DOM node.
      */
     @Override
     public void setDomNode(final DomNode domNode) {
@@ -241,7 +241,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return true if this element is disabled.
+     * Returns true if this element is disabled.
      * @return True if this element is disabled.
      */
     public boolean jsxGet_disabled() {
@@ -249,7 +249,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set whether or not to disable this element
+     * Sets whether or not to disable this element.
      * @param disabled True if this is to be disabled.
      */
     public void jsxSet_disabled(final boolean disabled) {
@@ -263,7 +263,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the tag name of this element.
+     * Returns the tag name of this element.
      * @return The tag name in uppercase.
      */
     public String jsxGet_tagName() {
@@ -295,7 +295,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns The Namespace prefix
+     * Returns The Namespace prefix.
      * @return The Namespace prefix.
      */
     public String jsxGet_prefix() {
@@ -303,7 +303,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Looks at attributes with the given name
+     * Looks at attributes with the given name.
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
@@ -489,15 +489,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return the class defined for this element
-     * @return the class name
+     * Returns the class defined for this element.
+     * @return the class name.
      */
     public Object jsxGet_className() {
         return getHtmlElementOrDie().getAttributeValue("class");
     }
 
     /**
-     * Return "clientHeight" attribute.
+     * Returns "clientHeight" attribute.
      * @return the clientHeight attribute.
      */
     public int jsxGet_clientHeight() {
@@ -505,7 +505,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Return "clientWidth" attribute.
+     * Returns "clientWidth" attribute.
      * @return the clientWidth attribute.
      */
     public int jsxGet_clientWidth() {
@@ -513,16 +513,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Set the class attribute for this element.
-     * @param className - the new class name
+     * Sets the class attribute for this element.
+     * @param className - the new class name.
      */
     public void jsxSet_className(final String className) {
         getHtmlElementOrDie().setAttributeValue("class", className);
     }
 
     /**
-     * Get the innerHTML attribute
-     * @return the contents of this node as HTML
+     * Gets the innerHTML attribute.
+     * @return the contents of this node as HTML.
      */
     public String jsxGet_innerHTML() {
         final StringBuilder buf = new StringBuilder();
@@ -532,8 +532,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Get the innerText attribute
-     * @return the contents of this node as text
+     * Gets the innerText attribute.
+     * @return the contents of this node as text.
      */
     public String jsxGet_innerText() {
         final StringBuilder buf = new StringBuilder();
@@ -543,8 +543,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Get the textContent attribute
-     * @return the contents of this node as text
+     * Gets the textContent attribute.
+     * @return the contents of this node as text.
      */
     public String jsxGet_textContent() {
         return jsxGet_innerText();
@@ -732,7 +732,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes}
+     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes}.
      * @param element the element to read the attributes from
      * @return the attributes
      */
@@ -1160,7 +1160,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     //----------------------- START #default#download BEHAVIOR -----------------------
     /**
-     * Implementation of the IE behavior #default#download
+     * Implementation of the IE behavior #default#download.
      * @param uri The URI of the download source
      * @param callback the method which should be called when the download is finished
      * @see <a href="http://msdn.microsoft.com/workshop/author/behaviors/reference/methods/startdownload.asp">

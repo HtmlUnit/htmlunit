@@ -71,7 +71,7 @@ public class HTMLTableRowElement extends HTMLElement {
     }
 
     /**
-     * Returns the index of the row within parent's table
+     * Returns the index of the row within parent's table.
      * @return the index.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/rowindex.asp">
      * MSDN Documentation</a>

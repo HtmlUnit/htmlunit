@@ -94,24 +94,24 @@ public class HTMLOptionElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the "value" property
-     * @return The value property
+     * Returns the value of the "value" property.
+     * @return The value property.
      */
     public String jsxGet_value() {
         return getHtmlOption().getValueAttribute();
     }
 
     /**
-     * Set the value of the "value" property
-     * @param newValue The value property
+     * Sets the value of the "value" property.
+     * @param newValue The value property.
      */
     public void jsxSet_value(final String newValue) {
         getHtmlOption().setValueAttribute(newValue);
     }
 
     /**
-     * Return the value of the "text" property
-     * @return The text property
+     * Returns the value of the "text" property.
+     * @return The text property.
      */
     public String jsxGet_text() {
         final HtmlOption htmlOption = getHtmlOption();
@@ -126,48 +126,48 @@ public class HTMLOptionElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the "text" property
-     * @param newText The text property
+     * Sets the value of the "text" property.
+     * @param newText The text property.
      */
     public void jsxSet_text(final String newText) {
         getHtmlOption().setLabelAttribute(newText);
     }
 
     /**
-     * Return the value of the "selected" property
-     * @return The text property
+     * Returns the value of the "selected" property.
+     * @return The text property.
      */
     public boolean jsxGet_selected() {
         return getHtmlOption().isSelected();
     }
 
     /**
-     * Set the value of the "selected" property
-     * @param selected The new selected property
+     * Sets the value of the "selected" property.
+     * @param selected The new selected property.
      */
     public void jsxSet_selected(final boolean selected) {
         getHtmlOption().setSelected(selected);
     }
     
     /**
-     * Return the value of the "defaultSelected" property
-     * @return The text property
+     * Returns the value of the "defaultSelected" property.
+     * @return The text property.
      */
     public boolean jsxGet_defaultSelected() {
         return getHtmlOption().isDefaultSelected();
     }
 
     /**
-     * Return the value of the "label" property
-     * @return The label property
+     * Returns the value of the "label" property.
+     * @return The label property.
      */
     public String jsxGet_label() {
         return getHtmlOption().getLabelAttribute();
     }
 
     /**
-     * Set the value of the "label" property
-     * @param label The new label property
+     * Sets the value of the "label" property.
+     * @param label The new label property.
      */
     public void jsxSet_label(final String label) {
         getHtmlOption().setLabelAttribute(label);

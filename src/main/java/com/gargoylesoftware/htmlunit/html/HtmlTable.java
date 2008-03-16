@@ -59,7 +59,7 @@ public class HtmlTable extends ClickableElement {
 
     private static final long serialVersionUID = 2484055580262042798L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "table";
 
     /**

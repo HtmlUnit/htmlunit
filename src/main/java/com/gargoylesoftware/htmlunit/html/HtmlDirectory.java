@@ -52,7 +52,7 @@ public class HtmlDirectory extends ClickableElement {
 
     private static final long serialVersionUID = 7234953475940770872L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "dir";
 
     /**

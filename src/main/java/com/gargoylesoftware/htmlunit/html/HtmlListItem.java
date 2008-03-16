@@ -52,7 +52,7 @@ public class HtmlListItem extends ClickableElement {
 
     private static final long serialVersionUID = -1649077723867505624L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "li";
 
     /**

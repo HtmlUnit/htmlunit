@@ -57,7 +57,7 @@ public class HtmlLabel extends ClickableElement {
 
     private static final long serialVersionUID = -3007176633287091652L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "label";
 
     /**

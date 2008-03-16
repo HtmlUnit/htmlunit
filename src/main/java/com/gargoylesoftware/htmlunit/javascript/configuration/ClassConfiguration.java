@@ -76,7 +76,7 @@ public final class ClassConfiguration {
     private final boolean jsObject_;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param classname the name of the configuration class this entry is for
      * @param implementingClass - the fully qualified name of the class implementing this functionality
@@ -127,10 +127,10 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Add the property to the configuration
-     * @param name - Name of the property
-     * @param readable - Flag for if the property is readable
-     * @param writeable - Flag for if the property is writeable
+     * Add the property to the configuration.
+     * @param name - Name of the property.
+     * @param readable - Flag for if the property is readable.
+     * @param writeable - Flag for if the property is writeable.
      */
     public void addProperty(final String name, final boolean readable, final boolean writeable) {
         final PropertyInfo info = new PropertyInfo();
@@ -180,7 +180,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Return the set of keys for the defined functions
+     * Returns the set of keys for the defined functions.
      * @return a set.
      */
     public Set<String> functionKeys() {
@@ -196,8 +196,8 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Add the function to the configuration
-     * @param name - Name of the function
+     * Add the function to the configuration.
+     * @param name - Name of the function.
      */
     public void addFunction(final String name) {
         final FunctionInfo info = new FunctionInfo();
@@ -216,10 +216,10 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Set the browser information for this named property
-     * @param propertyName - Name of the property to set
-     * @param browserName - Browser name to set
-     * @throws IllegalStateException - Property does not exist
+     * Sets the browser information for this named property.
+     * @param propertyName - Name of the property to set.
+     * @param browserName - Browser name to set.
+     * @throws IllegalStateException - Property does not exist.
      */
     public void setBrowser(final String propertyName, final String browserName)
         throws IllegalStateException {
@@ -245,7 +245,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Return the PropertyInfo for the given property name
+     * Return the PropertyInfo for the given property name.
      * @param propertyName Name of property
      * @return ClassConfiguration.PropertyInfo
      */
@@ -258,7 +258,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Test for value equality of the 2 objects
+     * Test for value equality of the 2 objects.
      *
      * @param obj   the reference object with which to compare.
      * @return <code>true</code> if the value of this object is the same as the obj
@@ -301,10 +301,10 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Gets the method that implements the getter for the named property
+     * Gets the method that implements the getter for the named property.
      *
-     * @param propertyName The name of the property
-     * @return Method
+     * @param propertyName The name of the property.
+     * @return Method.
      */
     public Method getPropertyReadMethod(final String propertyName) {
         final PropertyInfo info = getPropertyInfo(propertyName);
@@ -315,10 +315,10 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Gets the method that implements the setter for the named property
+     * Gets the method that implements the setter for the named property.
      *
-     * @param propertyName The name of the property
-     * @return Method
+     * @param propertyName The name of the property.
+     * @return Method.
      */
     public Method getPropertyWriteMethod(final String propertyName) {
         final PropertyInfo info = getPropertyInfo(propertyName);
@@ -329,10 +329,10 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Gets the method that implements the given function
+     * Gets the method that implements the given function.
      *
-     * @param functionName The name of the property
-     * @return Method
+     * @param functionName The name of the property.
+     * @return Method.
      */
     public Method getFunctionMethod(final String functionName) {
         final FunctionInfo info = getFunctionInfo(functionName);
@@ -343,15 +343,15 @@ public final class ClassConfiguration {
     }
 
     /**
-     * Gets the class of the JavaScript host object
-     * @return Returns the linkedClass.
+     * Gets the class of the JavaScript host object.
+     * @return Returns the linkedClass..
      */
     public Class< ? extends SimpleScriptable> getLinkedClass() {
         return linkedClass_;
     }
 
     /**
-     * Gets the JavaScript constructor method in {@link #getLinkedClass()}
+     * Gets the JavaScript constructor method in {@link #getLinkedClass()}.
      * @return Returns the constructor Method.
      */
     public Method getJsConstructor() {
@@ -522,7 +522,7 @@ public final class ClassConfiguration {
         private String lessThanVersion_;
 
         /**
-         * Test for value equality of the 2 objects
+         * Test for value equality of the 2 objects.
          *
          * @param obj the reference object with which to compare.
          * @return <code>true</code> if the value of this object is the same as the obj

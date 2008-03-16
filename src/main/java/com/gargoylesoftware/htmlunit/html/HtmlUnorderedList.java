@@ -52,11 +52,11 @@ public class HtmlUnorderedList extends ClickableElement {
 
     private static final long serialVersionUID = -6921066357090632169L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "ul";
 
     /**
-     * Create an instance of HtmlUnorderedList
+     * Creates an instance of HtmlUnorderedList.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -69,7 +69,7 @@ public class HtmlUnorderedList extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -81,7 +81,7 @@ public class HtmlUnorderedList extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "compact".  Refer to the
+     * Returns the value of the attribute "compact".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

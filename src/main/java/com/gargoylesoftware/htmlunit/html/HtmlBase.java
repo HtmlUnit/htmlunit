@@ -51,7 +51,7 @@ public class HtmlBase extends HtmlElement {
 
     private static final long serialVersionUID = 1763844738357920208L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "base";
 
     /**

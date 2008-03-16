@@ -58,7 +58,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
 
     private static final long serialVersionUID = -7566440323983487259L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "isindex";
 
     private String value_ = "";

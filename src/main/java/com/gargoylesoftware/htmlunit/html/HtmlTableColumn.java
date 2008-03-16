@@ -52,7 +52,7 @@ public class HtmlTableColumn extends ClickableElement {
 
     private static final long serialVersionUID = 1171825103356965818L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "col";
 
     /**

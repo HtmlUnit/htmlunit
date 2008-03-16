@@ -98,7 +98,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     private List<Object> cachedElements_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      * Don't call.
      */
     @Deprecated
@@ -107,16 +107,16 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Create an instance
-     * @param parentScope parent scope
+     * Creates an instance.
+     * @param parentScope parent scope.
      */
     public HTMLCollection(final DomNode parentScope) {
         this(parentScope.getScriptObject());
     }
 
     /**
-     * Create an instance
-     * @param parentScope parent scope
+     * Creates an instance.
+     * @param parentScope parent scope.
      */
     public HTMLCollection(final ScriptableObject parentScope) {
         setParentScope(parentScope);

@@ -42,8 +42,8 @@ import org.xml.sax.Attributes;
 import java.util.Map;
 
 /**
- * a factory for elements encountered in parsing the input which are not represented
- * by dedicated element classes
+ * A factory for elements encountered in parsing the input which are not represented
+ * by dedicated element classes.
  *
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -52,10 +52,10 @@ import java.util.Map;
  */
 public final class UnknownElementFactory implements IElementFactory {
 
-    /** the singleton instance */
+    /** The singleton instance. */
     public static final UnknownElementFactory instance = new UnknownElementFactory();
 
-    /** private singleton constructor */
+    /** Private singleton constructor. */
     private UnknownElementFactory() {
     }
 

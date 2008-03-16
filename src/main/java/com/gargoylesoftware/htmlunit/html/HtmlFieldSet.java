@@ -52,7 +52,7 @@ public class HtmlFieldSet extends ClickableElement {
 
     private static final long serialVersionUID = 4444607415016780539L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "fieldset";
 
     /**

@@ -60,8 +60,8 @@ public class HTMLCollectionTags extends HTMLCollection {
     }
 
     /**
-     * Create an instance
-     * @param parentScope parent scope
+     * Create an instance.
+     * @param parentScope parent scope.
      */
     public HTMLCollectionTags(final SimpleScriptable parentScope) {
         super(parentScope);

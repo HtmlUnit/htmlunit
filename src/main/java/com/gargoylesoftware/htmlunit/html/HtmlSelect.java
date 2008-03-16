@@ -66,7 +66,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
 
     private static final long serialVersionUID = 7893240015923163203L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
 
     /**

@@ -63,7 +63,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  */
 public abstract class HtmlInput extends ClickableElement implements DisabledElement, SubmittableElement {
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "input";
 
     private String defaultValue_;

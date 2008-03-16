@@ -50,7 +50,7 @@ public final class HtmlHtml extends HtmlElement {
 
     private static final long serialVersionUID = 8928934628059990747L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "html";
 
     /**

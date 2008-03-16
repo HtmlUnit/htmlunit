@@ -53,7 +53,7 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
 
     private static final long serialVersionUID = 7854731553754432321L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "optgroup";
 
     /**

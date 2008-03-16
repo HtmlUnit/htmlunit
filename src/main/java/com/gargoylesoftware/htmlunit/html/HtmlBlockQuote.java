@@ -52,7 +52,7 @@ public class HtmlBlockQuote extends ClickableElement {
 
     private static final long serialVersionUID = -4797226665422415103L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "blockquote";
 
     /**

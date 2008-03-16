@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import org.apache.commons.httpclient.NameValuePair;
 
 /**
- * An element that can have it's values sent to the server during a form submit
+ * An element that can have it's values sent to the server during a form submit.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -49,8 +49,8 @@ import org.apache.commons.httpclient.NameValuePair;
 public interface SubmittableElement {
 
     /**
-     * Return an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted .<p>
+     * Returns an array of KeyValuePairs that are the values that will be sent
+     * back to the server whenever the current form is submitted.<p>
      *
      * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
      * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
@@ -60,7 +60,7 @@ public interface SubmittableElement {
     NameValuePair[] getSubmitKeyValuePairs();
 
     /**
-     * Return the value of this element to the default value or checked state (usually what it was at
+     * Returns the value of this element to the default value or checked state (usually what it was at
      * the time the page was loaded, unless it has been modified via JavaScript).
      */
     void reset();

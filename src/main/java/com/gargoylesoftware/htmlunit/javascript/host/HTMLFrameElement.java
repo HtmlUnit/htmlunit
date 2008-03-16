@@ -57,7 +57,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Return the value of URL loaded in the frame
+     * Returns the value of URL loaded in the frame.
      * @return The value of this attribute.
      */
     public String jsxGet_src() {
@@ -65,7 +65,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the document the frame contains, if any
+     * Returns the document the frame contains, if any.
      * @return <code>null</code> if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">
      * Gecko DOM Reference</a>
@@ -75,7 +75,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the window the frame contains, if any
+     * Returns the window the frame contains, if any.
      * @return the window
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">
      * Gecko DOM Reference</a>
@@ -87,7 +87,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the source of the contained frame.
+     * Sets the value of the source of the contained frame.
      * @param src The new value.
      */
     public void jsxSet_src(final String src) {
@@ -95,7 +95,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Return the value of the name attribute
+     * Returns the value of the name attribute.
      * @return The value of this attribute.
      */
     public String jsxGet_name() {
@@ -103,7 +103,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Set the value of the name attribute.
+     * Sets the value of the name attribute.
      * @param name The new value.
      */
     public void jsxSet_name(final String name) {
@@ -115,7 +115,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Set the onload event handler for this element.
+     * Sets the onload event handler for this element.
      * @param eventHandler the new handler
      */
     public void jsxSet_onload(final Object eventHandler) {

@@ -52,7 +52,7 @@ public class HtmlBreak extends StyledElement {
 
     private static final long serialVersionUID = 5691487253016411482L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "br";
 
     /**

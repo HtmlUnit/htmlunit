@@ -52,7 +52,7 @@ public class Plugin extends SimpleArray {
     private String name_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Plugin() {
         // nothing
@@ -71,7 +71,7 @@ public class Plugin extends SimpleArray {
     }
 
     /**
-     * Get the name of the mime type
+     * Gets the name of the mime type.
      * @param element a {@link MimeType}.
      * @return the name
      */
@@ -81,7 +81,7 @@ public class Plugin extends SimpleArray {
     }
 
     /**
-     * Gets the plugin's description
+     * Gets the plugin's description.
      * @return the description.
      */
     public String jsxGet_description() {
@@ -89,7 +89,7 @@ public class Plugin extends SimpleArray {
     }
 
     /**
-     * Gets the plugin's file name
+     * Gets the plugin's file name.
      * @return the file name.
      */
     public String jsxGet_filename() {
@@ -97,7 +97,7 @@ public class Plugin extends SimpleArray {
     }
 
     /**
-     * Gets the plugin's name
+     * Gets the plugin's name.
      * @return the name.
      */
     public String jsxGet_name() {

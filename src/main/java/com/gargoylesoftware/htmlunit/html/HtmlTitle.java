@@ -53,11 +53,11 @@ public class HtmlTitle extends HtmlElement {
 
     private static final long serialVersionUID = 5463879100333678376L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "title";
 
     /**
-     * Create an instance of HtmlTitle
+     * Creates an instance of HtmlTitle.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -70,7 +70,7 @@ public class HtmlTitle extends HtmlElement {
     }
     
     /**
-     * Allow the text value for the title element be replaced.
+     * Allows the text value for the title element be replaced.
      * {@inheritDoc}
      */
     @Override
@@ -89,8 +89,8 @@ public class HtmlTitle extends HtmlElement {
     }
 
     /**
-     * Indicates if a node without children should be written in expanded form as xml
-     * (i.e. with closing tag rather than with "/&gt;")
+     * Indicates if a node without children should be written in expanded form as XML
+     * (i.e. with closing tag rather than with "/&gt;").
      * @return <code>true</code> as required by Microsoft Internet Explorer
      */
     @Override

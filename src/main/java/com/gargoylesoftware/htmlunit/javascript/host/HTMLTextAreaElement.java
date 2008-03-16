@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
- * The JavaScript object that represents a textarea
+ * The JavaScript object that represents a textarea.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -67,7 +67,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Return the type of this input.
-     * @return The type
+     * @return The type.
      */
     @Override
     public String jsxGet_type() {
@@ -153,7 +153,7 @@ public class HTMLTextAreaElement extends FormField {
     }
 
     /**
-     * Select this element.
+     * Selects this element.
      */
     public void jsxFunction_select() {
         ((HtmlTextArea) getDomNodeOrDie()).select();

@@ -226,7 +226,7 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Submit the form.
+     * Submits the form.
      *
      * @throws IOException if an io error occurs
      */
@@ -235,7 +235,7 @@ public class HTMLFormElement extends HTMLElement {
     }
     
     /**
-     * Reset this form
+     * Resets this form.
      */
     public void jsxFunction_reset() {
         getHtmlForm().reset();
@@ -311,9 +311,9 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Return the specified indexed property
-     * @param index The index of the property
-     * @param start The scriptable object that was originally queried for this property
+     * Returns the specified indexed property.
+     * @param index The index of the property.
+     * @param start The scriptable object that was originally queried for this property.
      * @return The property.
      */
     @Override

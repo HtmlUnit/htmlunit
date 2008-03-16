@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
- * The JavaScript object that represents an anchor
+ * The JavaScript object that represents an anchor.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -355,13 +355,13 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Calls for instance for implicit conversion to string
+     * Calls for instance for implicit conversion to string.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
-     * @param hint the type hint
-     * @return the default value
+     * @param hint the type hint.
+     * @return the default value.
      */
-    @SuppressWarnings("unchecked")
     @Override
+    @SuppressWarnings("unchecked")
     public Object getDefaultValue(final Class hint) {
         final HtmlAnchor link = (HtmlAnchor) getHtmlElementOrDie();
         final String href = link.getHrefAttribute();

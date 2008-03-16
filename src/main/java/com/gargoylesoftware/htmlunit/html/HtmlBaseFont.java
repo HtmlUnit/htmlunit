@@ -51,7 +51,7 @@ public class HtmlBaseFont extends HtmlElement {
 
     private static final long serialVersionUID = 695717819506918636L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "basefont";
 
     /**

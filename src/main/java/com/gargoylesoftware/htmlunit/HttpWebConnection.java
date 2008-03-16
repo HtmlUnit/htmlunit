@@ -102,11 +102,11 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Submit a request and retrieve a response
+     * Submit a request and retrieve a response.
      *
-     * @param webRequestSettings Settings to make the request with
-     * @return See above
-     * @exception IOException If an IO error occurs
+     * @param webRequestSettings Settings to make the request with.
+     * @return See above.
+     * @exception IOException If an IO error occurs.
      */
     @Override
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -353,8 +353,8 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Lazily initialize the httpClient
-     * @return the initialized client
+     * Lazily initializes the httpClient.
+     * @return the initialized client.
      */
     protected synchronized HttpClient getHttpClient() {
         if (httpClient_ == null) {
@@ -382,7 +382,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
     
     /**
-     * Return the timeout to use for socket and connection timeouts for HttpConnectionManager.
+     * Returns the timeout to use for socket and connection timeouts for HttpConnectionManager.
      * is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
      * must have long running connections explicitly terminated.
      * @return the WebClient's timeout.
@@ -405,15 +405,15 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Return the log object for this class
-     * @return The log object
+     * Return the log object for this class.
+     * @return The log object.
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
 
     /**
-     * set the virtual host
+     * Sets the virtual host.
      * @param virtualHost The virtualHost to set.
      */
     public void setVirtualHost(final String virtualHost) {
@@ -421,15 +421,15 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Get the virtual host
-     * @return virtualHost The current virtualHost
+     * Get the virtual host.
+     * @return virtualHost The current virtualHost.
      */
     public String getVirtualHost() {
         return virtualHost_;
     }
 
     /**
-     * Return the {@link HttpState} that is being used.
+     * Returns the {@link HttpState} that is being used.
      * @return The state.
      */
     @Override
@@ -438,7 +438,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Converts the HttpMethod into a WebResponse
+     * Converts the HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
             final URL originatingURL, final long loadTime, final String charset) throws IOException {
@@ -461,7 +461,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Construct an appropriate WebResponseData.
+     * Constructs an appropriate WebResponseData.
      * May be overridden by subclasses to return a specialized WebResponseData.
      * @param statusMessage StatusMessage from the response
      * @param headers response headers
@@ -480,7 +480,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     }
 
     /**
-     * Construct an appropriate WebResponse.
+     * Constructs an appropriate WebResponse.
      * May be overridden by subclasses to return a specialized WebResponse.
      * @param responseData Data that was send back
      * @param charset Charset used if not returned in the response.

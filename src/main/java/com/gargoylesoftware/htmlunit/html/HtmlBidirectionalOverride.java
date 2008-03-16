@@ -52,7 +52,7 @@ public class HtmlBidirectionalOverride extends StyledElement {
 
     private static final long serialVersionUID = 5258353980344461550L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "bdo";
 
     /**

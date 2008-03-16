@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
     /**
-     * Constructor
+     * Constructor.
      * @param xpathExpressionContext The context from which XPath expression prefixes will be resolved.
      */
     public HtmlUnitPrefixResolver(final Node xpathExpressionContext) {

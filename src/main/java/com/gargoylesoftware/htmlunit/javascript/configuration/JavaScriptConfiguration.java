@@ -91,13 +91,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement;
 public final class JavaScriptConfiguration {
     private static Document XmlDocument_;
 
-    /** Constant indicating that this function/property is used by the specified browser version */
+    /** Constant indicating that this function/property is used by the specified browser version. */
     public static final int ENABLED   = 1;
 
-    /** Constant indicating that this function/property is not used by the specified browser version */
+    /** Constant indicating that this function/property is not used by the specified browser version. */
     public static final int DISABLED  = 2;
 
-    /** Constant indicating that this function/property is not defined in the configuration file */
+    /** Constant indicating that this function/property is not defined in the configuration file. */
     public static final int NOT_FOUND = 3;
 
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
@@ -109,7 +109,7 @@ public final class JavaScriptConfiguration {
     private final BrowserVersion browser_;
 
     /**
-     * C'tor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
+     * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
      * @param browser the browser version to use
      */
     private JavaScriptConfiguration(final BrowserVersion browser) {
@@ -125,7 +125,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Test for a configuration having been loaded for testing
+     * Test for a configuration having been loaded for testing.
      *
      * @return boolean - true if the XmlDocument has been loaded;
      */
@@ -144,15 +144,15 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Set the document configuration for testing
-     * @param document - The configuration document
+     * Sets the document configuration for testing.
+     * @param document - The configuration document.
      */
     protected static void setXmlDocument(final Document document) {
         XmlDocument_ = document;
     }
 
     /**
-     * Get the configuration file and make it an input reader and then pass to the method to read the file.
+     * Gets the configuration file and make it an input reader and then pass to the method to read the file.
      */
     protected static void loadConfiguration() {
         try {
@@ -170,9 +170,9 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Load the configuration from a supplied Reader
+     * Loads the configuration from a supplied Reader.
      *
-     * @param configurationReader - A reader pointing to the configuration
+     * @param configurationReader - A reader pointing to the configuration.
      */
     protected static void loadConfiguration(final Reader configurationReader) {
         final InputSource inputSource = new InputSource(configurationReader);
@@ -199,7 +199,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the instance that represents the configuration for the specified {@link BrowserVersion}.
+     * Returns the instance that represents the configuration for the specified {@link BrowserVersion}.
      * This method is synchronized to allow multithreaded access to the JavaScript configuration.
      * @param browserVersion The {@link BrowserVersion}
      * @return The instance for the specified {@link BrowserVersion}
@@ -218,8 +218,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the configuration that has all entries.  No constraints are put on the returned
-     * entries.
+     * Returns the configuration that has all entries.  No constraints are put on the returned entries.
      *
      * @return The instance containing all entries from the configuration file.
      */
@@ -260,8 +259,8 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Get the set of keys for the class configurations.
-     * @return Set
+     * Gets the set of keys for the class configurations.
+     * @return Set.
      */
     public Set<String> keySet() {
         return configuration_.keySet();
@@ -294,7 +293,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Parse the class element to build the class configuration
+     * Parses the class element to build the class configuration.
      * @param className The name of the class element
      * @param element The element to parse
      * @return ClassConfiguration
@@ -381,7 +380,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Parse out the values from the function element.
+     * Parses out the values from the function element.
      *
      * @param classConfiguration The configuration that is being built
      * @param element The function element
@@ -399,7 +398,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Parse out the values for the property.
+     * Parses out the values for the property.
      *
      * @param classConfiguration The configuration that is being built
      * @param element The property element
@@ -475,9 +474,9 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Get the class configuration for the supplied JavaScript class name
-     * @param classname The js class name
-     * @return ClassConfiguration
+     * Gets the class configuration for the supplied JavaScript class name.
+     * @param classname The js class name.
+     * @return ClassConfiguration.
      */
     public ClassConfiguration getClassConfiguration(final String classname) {
         return (ClassConfiguration) configuration_.get(classname);
@@ -542,7 +541,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the class for the given class name
+     * Return the class for the given class name.
      * @param classname The classname that you want the implementing class for.  For testing only.
      * @return Class
      */
@@ -553,9 +552,9 @@ public final class JavaScriptConfiguration {
 
     /**
      * Get the method that implements the getter for the given property based upon the class object.
-     * @param clazz The actual class to use as reference
-     * @param propertyName The property to find the getter for
-     * @return Method
+     * @param clazz The actual class to use as reference.
+     * @param propertyName The property to find the getter for.
+     * @return Method.
      */
     public Method getPropertyReadMethod(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
@@ -563,11 +562,11 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the method that implements the get function for in the class for the given class
+     * Return the method that implements the get function for in the class for the given class.
      *
-     * @param classname The name of the class to work with
-     * @param propertyName The property to find the getter for
-     * @return Method
+     * @param classname The name of the class to work with.
+     * @param propertyName The property to find the getter for.
+     * @return Method.
      */
     public Method getPropertyReadMethod(String classname, final String propertyName) {
         ClassConfiguration config;
@@ -601,7 +600,7 @@ public final class JavaScriptConfiguration {
     }
     
     /**
-     * Get the method that implements the setter for the given property based upon the class object.
+     * Gets the method that implements the setter for the given property based upon the class object.
      * @param clazz The actual class to use as reference
      * @param propertyName The property to find the getter for
      * @return Method
@@ -612,11 +611,11 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the method that implements the set function in the class for the given class
+     * Returns the method that implements the set function in the class for the given class.
      *
-     * @param classname The name of the class to work with
-     * @param propertyName The property to find the setter for
-     * @return Method
+     * @param classname The name of the class to work with.
+     * @param propertyName The property to find the setter for.
+     * @return Method.
      */
     public Method getPropertyWriteMethod(String classname, final String propertyName) {
         ClassConfiguration config;
@@ -634,9 +633,9 @@ public final class JavaScriptConfiguration {
 
     /**
      * Get the method that implements the setter for the given property based upon the class object.
-     * @param clazz The actual class to use as reference
-     * @param functionName The function to find the method for
-     * @return Method
+     * @param clazz The actual class to use as reference.
+     * @param functionName The function to find the method for.
+     * @return Method.
      */
     public Method getFunctionMethod(final Class< ? > clazz, final String functionName) {
         final String classname = getClassnameForClass(clazz);
@@ -644,11 +643,11 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the method that implements the given function in the class for the given class
+     * Return the method that implements the given function in the class for the given class.
      *
-     * @param classname The name of the class to work with
-     * @param functionName The function to find the method for
-     * @return Method
+     * @param classname The name of the class to work with.
+     * @param functionName The function to find the method for.
+     * @return Method.
      */
     public Method getFunctionMethod(String classname, final String functionName) {
         ClassConfiguration config;
@@ -665,10 +664,10 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Check to see if there is an entry for the given property.
-     * @param clazz The class the property is for
-     * @param propertyName The name of the property
-     * @return boolean True if the property exists
+     * Checks to see if there is an entry for the given property.
+     * @param clazz The class the property is for.
+     * @param propertyName The name of the property.
+     * @return boolean True if the property exists.
      */
     public boolean propertyExists(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
@@ -676,10 +675,10 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Check to see if there is an entry for the given property.
-     * @param classname The class the property is for
-     * @param propertyName The name of the property
-     * @return boolean True if the property exists
+     * Checks to see if there is an entry for the given property.
+     * @param classname The class the property is for.
+     * @param propertyName The name of the property.
+     * @return boolean True if the property exists.
      */
     public boolean propertyExists(final String classname, final String propertyName) {
         final ClassConfiguration.PropertyInfo info = findPropertyInChain(classname, propertyName);
@@ -690,7 +689,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Return the classname that the given class implements.  If the class is
+     * Returns the classname that the given class implements.  If the class is
      * the input class, then the name is extracted from the type that the Input class
      * is masquerading as.
      * FIXME - Implement the Input class processing

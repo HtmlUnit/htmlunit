@@ -51,7 +51,7 @@ public class HtmlHead extends HtmlElement {
 
     private static final long serialVersionUID = -2444843516326322458L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "head";
 
     /**

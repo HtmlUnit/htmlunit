@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * A specialized creator that knows how to create input objects
+ * A specialized creator that knows how to create input objects.
  *
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -55,15 +55,15 @@ import java.util.HashMap;
  */
 public final class InputElementFactory implements IElementFactory {
 
-    /** The singleton instance */
+    /** The singleton instance. */
     public static final InputElementFactory instance = new InputElementFactory();
 
-    /* private singleton constructor */
+    /** Private singleton constructor. */
     private InputElementFactory() {
     }
 
     /**
-     * Create an HtmlElement for the specified xmlElement, contained in the specified page.
+     * Creates an HtmlElement for the specified xmlElement, contained in the specified page.
      *
      * @param page The page that this element will belong to.
      * @param tagName the HTML tag name
@@ -145,7 +145,7 @@ public final class InputElementFactory implements IElementFactory {
     }
 
     /**
-     * Return the log that is being used for all scripting objects
+     * Returns the log that is being used for all scripting objects.
      * @return The log.
      */
     protected Log getLog() {

@@ -55,7 +55,7 @@ import java.util.Map;
 public abstract class StyledElement extends HtmlElement {
 
     /**
-     * Create an instance
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -68,7 +68,7 @@ public abstract class StyledElement extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "id".  Refer to the
+     * Returns the value of the attribute "id".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -80,7 +80,7 @@ public abstract class StyledElement extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "class".  Refer to the
+     * Returns the value of the attribute "class".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -92,7 +92,7 @@ public abstract class StyledElement extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "style".  Refer to the
+     * Returns the value of the attribute "style".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -104,7 +104,7 @@ public abstract class StyledElement extends HtmlElement {
     }
 
     /**
-     * Return the value of the attribute "title".  Refer to the
+     * Returns the value of the attribute "title".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

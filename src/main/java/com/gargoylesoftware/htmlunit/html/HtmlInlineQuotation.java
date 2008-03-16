@@ -52,7 +52,7 @@ public class HtmlInlineQuotation extends ClickableElement {
 
     private static final long serialVersionUID = -2903178909392285151L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "q";
 
     /**

@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 /**
- * The JavaScript object that represents a button (&lt;button type=...&gt;)
+ * The JavaScript object that represents a button (&lt;button type=...&gt;).
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

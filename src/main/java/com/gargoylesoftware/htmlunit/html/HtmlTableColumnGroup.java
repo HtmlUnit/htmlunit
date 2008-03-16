@@ -52,7 +52,7 @@ public class HtmlTableColumnGroup extends ClickableElement {
 
     private static final long serialVersionUID = 4418469397230369347L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "colgroup";
 
     /**

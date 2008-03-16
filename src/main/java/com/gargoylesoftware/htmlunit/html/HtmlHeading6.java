@@ -52,7 +52,7 @@ public class HtmlHeading6 extends ClickableElement {
 
     private static final long serialVersionUID = -1216345014921616866L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "h6";
 
     /**

@@ -52,7 +52,7 @@ public class HtmlMenu extends ClickableElement {
 
     private static final long serialVersionUID = 6489339440830260880L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "menu";
 
     /**

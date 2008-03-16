@@ -52,7 +52,7 @@ public class HtmlAddress extends ClickableElement {
 
     private static final long serialVersionUID = -4032894099500840750L;
 
-    /** the HTML tag represented by this element */
+    /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "address";
 
     /**

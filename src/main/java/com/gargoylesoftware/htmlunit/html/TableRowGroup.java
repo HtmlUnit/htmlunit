@@ -53,7 +53,7 @@ import java.util.Map;
 public abstract class TableRowGroup extends ClickableElement {
 
     /**
-     * Create an instance of TableRowGroup
+     * Creates an instance of TableRowGroup.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -66,9 +66,9 @@ public abstract class TableRowGroup extends ClickableElement {
     }
 
     /**
-     * Return a list of table rows contained in this element
+     * Returns a list of table rows contained in this element.
      *
-     * @return a list of table rows
+     * @return a list of table rows.
      */
     public final List<HtmlTableRow> getRows() {
         final List<HtmlTableRow> resultList = new ArrayList<HtmlTableRow>();
@@ -83,7 +83,7 @@ public abstract class TableRowGroup extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -95,7 +95,7 @@ public abstract class TableRowGroup extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "char".  Refer to the
+     * Returns the value of the attribute "char".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -107,7 +107,7 @@ public abstract class TableRowGroup extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "charoff".  Refer to the
+     * Returns the value of the attribute "charoff".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -119,7 +119,7 @@ public abstract class TableRowGroup extends ClickableElement {
     }
 
     /**
-     * Return the value of the attribute "valign".  Refer to the
+     * Returns the value of the attribute "valign".  Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
