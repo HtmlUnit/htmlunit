@@ -251,7 +251,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Returns a collection of elements that represent all the "submittable" elements in this form
+     * Returns a collection of elements that represent all the "submittable" elements in this form.
      *
      * @param submitElement The element that would have been pressed to submit the
      * form or null if the form was submitted by JavaScript.

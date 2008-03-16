@@ -232,7 +232,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns the Page that contains this node
+     * Returns the Page that contains this node.
      *
      * @return See above
      */
@@ -616,7 +616,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns a text string that represents all the child elements as they would be visible in a web browser
+     * Returns a text string that represents all the child elements as they would be visible in a web browser.
      *
      * @return See above
      * @see #asText()

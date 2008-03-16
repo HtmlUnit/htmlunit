@@ -65,7 +65,7 @@ public final class FormEncodingType {
     }
 
     /**
-     * Returns the name of this EncodingType
+     * Returns the name of this EncodingType.
      *
      * @return See above
      */
@@ -74,7 +74,7 @@ public final class FormEncodingType {
     }
 
     /**
-     * Returns the constant that matches the given name
+     * Returns the constant that matches the given name.
      *
      * @param name The name to search by
      * @return See above
@@ -97,7 +97,7 @@ public final class FormEncodingType {
     }
 
     /**
-     * Returns a string representation of this object
+     * Returns a string representation of this object.
      *
      * @return See above
      */

@@ -56,7 +56,7 @@ public class History extends SimpleScriptable {
     public History() { }
 
     /**
-     * Returns the "length" property.  Currently hardcoded to return 0;
+     * Returns the "length" property.  Currently hardcoded to return 0.
      * @return the "length" property
      */
     public int jsxGet_length() {

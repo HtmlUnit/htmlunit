@@ -69,7 +69,7 @@ public class ElementNotFoundException extends RuntimeException {
     }
 
     /**
-     * Returns the name of the element
+     * Returns the name of the element.
      *
      * @return See above
      */
@@ -78,7 +78,7 @@ public class ElementNotFoundException extends RuntimeException {
     }
 
     /**
-     * Returns the name of the attribute
+     * Returns the name of the attribute.
      *
      * @return See above
      */
@@ -87,7 +87,7 @@ public class ElementNotFoundException extends RuntimeException {
     }
 
     /**
-     * Returns the value of the attribute
+     * Returns the value of the attribute.
      *
      * @return See above
      */
