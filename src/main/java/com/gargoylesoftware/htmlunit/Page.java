@@ -50,8 +50,8 @@ import java.io.IOException;
 public interface Page {
 
     /**
-     * Initialize this page. 
-     * This method gets called when a new page is loaded and you should probably never 
+     * Initialize this page.
+     * This method gets called when a new page is loaded and you should probably never
      * need to call it directly.
      * @throws IOException If an IO problem occurs.
      */
