@@ -50,7 +50,7 @@ import org.w3c.dom.NodeList;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class DomNodeList implements NodeList, Serializable {
+class DomNodeList implements NodeList, Serializable {
 
     private static final long serialVersionUID = 1541399090797298342L;
 
