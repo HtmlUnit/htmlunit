@@ -45,6 +45,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -932,5 +933,27 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertTrue(page.asXml().indexOf("/> ") == -1);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testGetElementsByTagName() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form><input type='button' name='button1' value='pushme'></form>\n"
+            + "<div>a</div> <div>b</div> <div>c</div>\n"
+            + "</body></html>";
+
+        final HtmlElement body = loadPage(html).getBody();
+
+        final NodeList inputs = body.getElementsByTagName("input");
+        assertEquals(1, inputs.getLength());
+        assertEquals("button", inputs.item(0).getAttributes().getNamedItem("type").getNodeValue());
+
+        final NodeList divs = body.getElementsByTagName("div");
+        assertEquals(3, divs.getLength());
     }
 }

@@ -92,6 +92,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Denis N. Antonioli
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public abstract class HtmlElement extends DomElement implements Element {
 
@@ -353,10 +354,9 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public NodeList getElementsByTagName(final String name) {
-        throw new UnsupportedOperationException("HtmlElement.getElementsByTagName is not yet implemented.");
+        return new DomNodeList(getHtmlElementsByTagName(name));
     }
 
     /**
@@ -365,6 +365,35 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public NodeList getElementsByTagNameNS(final String namespace, final String name) {
         throw new UnsupportedOperationException("HtmlElement.getElementsByTagNameNS is not yet implemented.");
+    }
+
+    /**
+     * Returns the HTML elements that are descendants of this element and that have one of the specified tag names.
+     * @param tagNames the tag names to match (case-insensitive)
+     * @return the HTML elements that are descendants of this element and that have one of the specified tag name
+     */
+    public final List< ? extends HtmlElement> getHtmlElementsByTagNames(final List<String> tagNames) {
+        final List<HtmlElement> list = new ArrayList<HtmlElement>();
+        for (final String tagName : tagNames) {
+            list.addAll(getHtmlElementsByTagName(tagName));
+        }
+        return list;
+    }
+
+    /**
+     * Returns the HTML elements that are descendants of this element and that have the specified tag name.
+     * @param tagName the tag name to match (case-insensitive)
+     * @return the HTML elements that are descendants of this element and that have the specified tag name
+     */
+    public final List< ? extends HtmlElement> getHtmlElementsByTagName(final String tagName) {
+        final List<HtmlElement> list = new ArrayList<HtmlElement>();
+        final String lowerCaseTagName = tagName.toLowerCase();
+        for (final HtmlElement element : getAllHtmlChildElements()) {
+            if (lowerCaseTagName.equals(element.getTagName())) {
+                list.add(element);
+            }
+        }
+        return list;
     }
 
     /**
@@ -955,39 +984,6 @@ public abstract class HtmlElement extends DomElement implements Element {
                 if (attValue != null && attValue.equals(attributeValue)) {
                     list.add(next);
                 }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * Given a list of tag names, return the HTML elements that correspond to any matching element.
-     *
-     * @param acceptableTagNames The list of tag names to search by.
-     * @return The list of tag names
-     */
-    public final List< ? extends HtmlElement> getHtmlElementsByTagNames(final List<String> acceptableTagNames) {
-        final List<HtmlElement> list = new ArrayList<HtmlElement>();
-
-        for (final String tagName : acceptableTagNames) {
-            list.addAll(getHtmlElementsByTagName(tagName.toLowerCase()));
-        }
-        return list;
-    }
-
-    /**
-     * Given a list of tag names, return the HTML elements that correspond to any matching element.
-     *
-     * @param tagName the tag name to match
-     * @return The list of tag names
-     */
-    public final List< ? extends HtmlElement> getHtmlElementsByTagName(final String tagName) {
-        final List<HtmlElement> list = new ArrayList<HtmlElement>();
-        final String lowerCaseTagName = tagName.toLowerCase();
-
-        for (final HtmlElement next : getAllHtmlChildElements()) {
-            if (lowerCaseTagName.equals(next.getTagName())) {
-                list.add(next);
             }
         }
         return list;

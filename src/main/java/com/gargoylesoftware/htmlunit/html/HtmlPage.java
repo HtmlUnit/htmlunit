@@ -90,13 +90,11 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A representation of an HTML page returned from a server. This class is the
- * DOM Document implementation.
+ * A representation of an HTML page returned from a server. This class is the DOM Document implementation.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -108,6 +106,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
@@ -234,9 +233,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * {@inheritDoc}
      */
     public NodeList getElementsByTagName(final String tagName) {
-        final HTMLCollection collection = new HTMLCollection(this);
-        collection.init(this, "//" + tagName.toLowerCase());
-        return collection;
+        final List< ? extends HtmlElement> elements = getDocumentHtmlElement().getHtmlElementsByTagName(tagName);
+        return new DomNodeList(elements);
     }
 
     /**

@@ -1766,12 +1766,17 @@ public class HtmlPageTest extends WebTestCase {
             = "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
+            + "<div>a</div> <div>b</div> <div>c</div>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(firstContent);
-        final NodeList list = page.getElementsByTagName("input");
-        assertEquals(1, list.getLength());
-        assertEquals("button", list.item(0).getAttributes().getNamedItem("type").getNodeValue());
+
+        final NodeList inputs = page.getElementsByTagName("input");
+        assertEquals(1, inputs.getLength());
+        assertEquals("button", inputs.item(0).getAttributes().getNamedItem("type").getNodeValue());
+
+        final NodeList divs = page.getElementsByTagName("div");
+        assertEquals(3, divs.getLength());
     }
 
 }
