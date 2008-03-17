@@ -985,8 +985,11 @@ public class Document extends EventNode {
      * @param tagName the name to search for
      * @return all the descendant elements with the specified tag name
      */
-    public Object jsxFunction_getElementsByTagName(final String tagName) {
-        return getHtmlPage().getElementsByTagName(tagName);
+    public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
+        final HTMLCollection collection = new HTMLCollection(this);
+        final String exp = "//" + tagName.toLowerCase();
+        collection.init(getDomNodeOrDie(), exp);
+        return collection;
     }
 
     /**
@@ -998,7 +1001,7 @@ public class Document extends EventNode {
      * @param elementName - value of the "name" attribute to look for
      * @return NodeList of elements
      */
-    public Object jsxFunction_getElementsByName(final String elementName) {
+    public HTMLCollection jsxFunction_getElementsByName(final String elementName) {
         final HTMLCollection collection = new HTMLCollection(this);
         final String exp = ".//*[@name='" + elementName + "']";
         collection.init(getDomNodeOrDie(), exp);
