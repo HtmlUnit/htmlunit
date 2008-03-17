@@ -65,6 +65,8 @@ public class CodeStyleTest {
     public void codeStyle() throws Exception {
         process(new File("src/main/java"));
         process(new File("src/test/java"));
+        licenseYear();
+        versionYear();
     }
 
     private void process(final File dir) throws IOException {
@@ -102,7 +104,7 @@ public class CodeStyleTest {
     }
 
     /**
-     * Checks the year in the license.
+     * Checks the year in the source.
      */
     private void year(final List<String> lines, final String path) throws IOException {
         assertTrue("Incorrect year in " + path, lines.get(1).contains("Copyright (c) 2002-"
@@ -255,5 +257,27 @@ public class CodeStyleTest {
                 }
             }
         }
+    }
+
+    /**
+     * Checks the year in LICENSE.txt.
+     */
+    private void licenseYear() throws IOException {
+        final List<String> lines = getLines(new File("LICENSE.txt"));
+        assertTrue("Incorrect year in LICENSE.txt", lines.get(1).contains("Copyright (c) 2002-"
+                + Calendar.getInstance().get(Calendar.YEAR)));
+    }
+
+    /**
+     * Checks the year in the {@link Version}.
+     */
+    private void versionYear() throws IOException {
+        final List<String> lines = getLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"));
+        for (final String line : lines) {
+            if (line.contains("return \"Copyright (C) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
+                return;
+            }
+        }
+        fail("Incorrect year in Version.getCopyright()");
     }
 }
