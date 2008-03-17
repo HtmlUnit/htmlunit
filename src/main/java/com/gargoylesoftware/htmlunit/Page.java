@@ -50,14 +50,17 @@ import java.io.IOException;
 public interface Page {
 
     /**
-     * Initialize this page.
+     * Initialize this page. 
+     * This method gets called when a new page is loaded and you should probably never 
+     * need to call it directly.
      * @throws IOException If an IO problem occurs.
      */
     void initialize() throws IOException;
 
     /**
      * Clean up this page.
-     * Gets called by the web client when an other page is loaded in the window.
+     * This method gets called by the web client when an other page is loaded in the window
+     * and you should probably never need to call it directly
      * @throws IOException If an IO problem occurs.
      */
     void cleanUp() throws IOException;
