@@ -60,7 +60,7 @@
         </module>
         <module name="JavadocStyle">
             <property name="scope" value="protected"/>
-            <property name="checkFirstSentence" value="false"/>
+            <property name="checkFirstSentence" value="true"/>
             <property name="checkEmptyJavadoc" value="false"/>
             <property name="checkHtml" value="true"/>
         </module>

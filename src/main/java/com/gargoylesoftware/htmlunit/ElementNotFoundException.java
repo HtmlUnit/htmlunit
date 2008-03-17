@@ -38,12 +38,13 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * An exception that is thrown when a specified XML element cannot be found in the DOM model
+ * An exception that is thrown when a specified XML element cannot be found in the DOM model.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class ElementNotFoundException extends RuntimeException {
+
     private static final long serialVersionUID = 22133747152805455L;
     
     private final String elementName_;
@@ -51,7 +52,7 @@ public class ElementNotFoundException extends RuntimeException {
     private final String attributeValue_;
 
     /**
-     * Create an instance from the variables that were used to search for the xml element
+     * Create an instance from the variables that were used to search for the XML element.
      *
      * @param elementName The name of the element
      * @param attributeName The name of the attribute

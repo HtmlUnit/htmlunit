@@ -173,7 +173,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
-     * Returns the credentials associated with the specified scheme, host and port
+     * Returns the credentials associated with the specified scheme, host and port.
      * @param scheme The authentication scheme being used (basic, digest, NTLM, etc).
      * @param host The host we are authenticating for.
      * @param port The port we are authenticating for.
@@ -286,7 +286,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
-     * Build a key with the specified data
+     * Builds a key with the specified data.
      * @param scheme The scheme
      * @param host the server name.
      * @param port the server port.

@@ -107,8 +107,8 @@ public class DomComment extends DomCharacterData implements Comment {
     }
 
     /**
-     * Gives a simple representation to facilitate debugging
-     * @return a simple representation
+     * Returns a simple string representation to facilitate debugging.
+     * @return a simple string representation
      */
     @Override
     public String toString() {

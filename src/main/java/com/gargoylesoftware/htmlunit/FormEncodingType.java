@@ -40,22 +40,17 @@ package com.gargoylesoftware.htmlunit;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 /**
- * A collection of constants that represent the various ways a form can be encoded when submitted
+ * A collection of constants that represent the various ways a form can be encoded when submitted.
  *
  * @version $Revision$
  * @author Brad Clarke
  */
 public final class FormEncodingType {
 
-    /**
-     * URL_ENCODED
-     */
-    public static final FormEncodingType URL_ENCODED =
-        new FormEncodingType(PostMethod.FORM_URL_ENCODED_CONTENT_TYPE);
-    /**
-     * MULTIPART
-     * This used to be a constant in HttpClient but it was deprecated with no alternative.
-     */
+    /** URL-encoded form encoding. */
+    public static final FormEncodingType URL_ENCODED = new FormEncodingType(PostMethod.FORM_URL_ENCODED_CONTENT_TYPE);
+
+    /** Multipart form encoding (used to be a constant in HttpClient but it was deprecated with no alternative). */
     public static final FormEncodingType MULTIPART = new FormEncodingType("multipart/form-data");
 
     private final String name_;

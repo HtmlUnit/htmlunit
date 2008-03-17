@@ -47,10 +47,11 @@ import java.util.List;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class CollectingAlertHandler implements AlertHandler {
+
     private final List<String> collectedAlerts_;
 
     /**
-     * Create an instance with an ArrayList
+     * Creates a new instance, initializing it with an empty list.
      */
     public CollectingAlertHandler() {
         this(new ArrayList<String>());

@@ -42,9 +42,9 @@ import java.io.Serializable;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * This class gets notified of AJAX calls and has the possibility to influence them.
- * For instance it can turn asynchron calls synchron to allow a deterministic test
- * and avoid the necessity of waiting.
+ * This class is notified when AJAX calls are made, and has the ability to influence these calls.
+ * For instance, it can turn asynchronous AJAX calls into synchronous AJAX calls, making test code
+ * deterministic and avoiding calls to <tt>Thread.sleep()</tt>.
  *
  * <span style="color:red">EXPERIMENTAL - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
  *
@@ -56,14 +56,13 @@ public class AjaxController implements Serializable {
     private static final long serialVersionUID = 2170842485774504546L;
 
     /**
-     * Gets notified of an AJAX call to determine how it should be processed
+     * Gets notified of an AJAX call to determine how it should be processed.
      * @param page the page the request comes from
-     * @param requestSettings the request that should be performed
+     * @param settings the request that should be performed
      * @param async indicates if the request should originally be asynchron
-     * @return if the call should be synchron or not. Here just like the original call.
+     * @return if the call should be synchron or not; here just like the original call
      */
-    public boolean processSynchron(final HtmlPage page, final WebRequestSettings requestSettings,
-            final boolean async) {
+    public boolean processSynchron(final HtmlPage page, final WebRequestSettings settings, final boolean async) {
         return !async;
     }
 

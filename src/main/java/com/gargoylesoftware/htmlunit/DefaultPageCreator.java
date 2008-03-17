@@ -104,7 +104,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
 
     /**
-     * Create a HtmlPage for this WebResponse
+     * Creates an HtmlPage for this WebResponse.
      *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the HtmlPage in
@@ -118,7 +118,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
     
     /**
-     * Create a JavaScriptPage for this WebResponse
+     * Creates a JavaScriptPage for this WebResponse.
      *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the JavaScriptPage in
@@ -132,7 +132,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
 
     /**
-     * Create a TextPage for this WebResponse
+     * Creates a TextPage for this WebResponse.
      *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the TextPage in
@@ -146,7 +146,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
 
     /**
-     * Create an UnexpectedPage for this WebResponse
+     * Creates an UnexpectedPage for this WebResponse.
      *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the UnexpectedPage in
@@ -160,7 +160,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
 
     /**
-     * Create an XmlPage for this WebResponse
+     * Creates an XmlPage for this WebResponse.
      *
      * @param webResponse The page's source
      * @param webWindow The WebWindow to place the TextPage in
@@ -174,7 +174,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
 
     /**
-     * Determines the kind of page to create from the content type
+     * Determines the kind of page to create from the content type.
      * @param contentType The content type to evaluate
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
