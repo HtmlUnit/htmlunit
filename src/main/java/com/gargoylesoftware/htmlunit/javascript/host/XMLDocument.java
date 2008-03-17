@@ -301,7 +301,7 @@ public class XMLDocument extends Document {
      * @return all the descendant elements with the specified tag name.
      */
     @Override
-    public Object jsxFunction_getElementsByTagName(final String tagName) {
+    public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
         collection.init(getDomNodeOrDie().getFirstDomChild(), "//" + tagName);
         return collection;
