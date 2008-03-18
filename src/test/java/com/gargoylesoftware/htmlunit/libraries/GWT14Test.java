@@ -373,7 +373,7 @@ public class GWT14Test extends WebTestCase {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
         
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/DynaTable.html";
         final HtmlPage page = (HtmlPage) client.getPage(url);
