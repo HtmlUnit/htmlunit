@@ -44,8 +44,10 @@ import java.util.List;
 import org.apache.commons.httpclient.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -60,6 +62,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class XmlPageTest extends WebTestCase {
 
     /**
@@ -102,14 +105,14 @@ public class XmlPageTest extends WebTestCase {
     }
 
     /**
-     * Utility method to test XML page of different mime types.
+     * Utility method to test XML page of different MIME types.
      * @param content the XML content
-     * @param mimeType The mime type
+     * @param mimeType The MIME type
      * @return the page returned by the WebClient
      * @throws Exception if a problem occurs
      */
     private XmlPage testXmlDocument(final String content, final String mimeType) throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(content, 200, "OK", mimeType);
         client.setWebConnection(webConnection);
@@ -131,7 +134,7 @@ public class XmlPageTest extends WebTestCase {
      */
     @Test
     public void testInvalidDocument() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String content
@@ -183,12 +186,6 @@ public class XmlPageTest extends WebTestCase {
      */
     @Test
     public void testLoad_XMLComment() throws Exception {
-        testLoad_XMLComment(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "8"});
-        testLoad_XMLComment(BrowserVersion.FIREFOX_2, new String[] {"true", "8"});
-    }
-    
-    private void testLoad_XMLComment(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final URL firstURL = new URL("http://htmlunit/first.html");
         final URL secondURL = new URL("http://htmlunit/second.xml");
         
@@ -210,8 +207,9 @@ public class XmlPageTest extends WebTestCase {
         
         final String xml = "<test><!-- --></test>";
 
+        final String[] expectedAlerts = new String[] {"true", "8"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
         conn.setResponse(firstURL, html);
@@ -227,12 +225,14 @@ public class XmlPageTest extends WebTestCase {
      */
     @Test
     public void testCreateElement() throws Exception {
-        testCreateElement(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"true", "16"});
-        testCreateElement(BrowserVersion.FIREFOX_2, new String[] {"true", "14"});
-    }
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[] {"true", "14"};
+        }
+        else {
+            expectedAlerts = new String[] {"true", "16"};
+        }
 
-    private void testCreateElement(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -255,7 +255,7 @@ public class XmlPageTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
+        loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }

@@ -43,7 +43,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -57,6 +59,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class IEConditionalCompilationTest extends WebTestCase {
 
     /**
@@ -66,19 +69,20 @@ public class IEConditionalCompilationTest extends WebTestCase {
     public void simple() throws Exception {
         final String script = "/*@cc_on alert('testing @cc_on'); @*/";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
-                new String[] {"testing @cc_on"});
-        testScript(BrowserVersion.FIREFOX_2, script,
-                new String[] {});
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[0];
+        }
+        else {
+            expectedAlerts = new String[] {"testing @cc_on"};
+        }
+        testScript(script, expectedAlerts);
         
         final String script2 = "var a={b:/*@cc_on!@*/false,c:/*@cc_on!@*/false};\n"
             + "var foo = (1 + 2/*V*/);\n"
             + "alert(foo)";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script2,
-                new String[] {"3"});
-        testScript(BrowserVersion.FIREFOX_2, script2,
-                new String[] {"3"});
+        testScript(script2, new String[] {"3"});
     }
 
     /**
@@ -88,8 +92,17 @@ public class IEConditionalCompilationTest extends WebTestCase {
     public void ifTest() throws Exception {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"5.6"});
-        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[0];
+        }
+        else if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6_0) {
+            expectedAlerts = new String[] {"5.6"};
+        }
+        else {
+            expectedAlerts = new String[] {"5.7"};
+        }
+        testScript(script, expectedAlerts);
     }
     
     /**
@@ -99,9 +112,17 @@ public class IEConditionalCompilationTest extends WebTestCase {
     public void variables_jscript_version() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_version) @*/";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"5.6"});
-        testScript(BrowserVersion.INTERNET_EXPLORER_7_0, script, new String[] {"5.7"});
-        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[0];
+        }
+        else if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6_0) {
+            expectedAlerts = new String[] {"5.6"};
+        }
+        else {
+            expectedAlerts = new String[] {"5.7"};
+        }
+        testScript(script, expectedAlerts);
     }
 
     /**
@@ -111,9 +132,17 @@ public class IEConditionalCompilationTest extends WebTestCase {
     public void variables_jscript_build() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_build) @*/";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script, new String[] {"6626"});
-        testScript(BrowserVersion.INTERNET_EXPLORER_7_0, script, new String[] {"5730"});
-        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[0];
+        }
+        else if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6_0) {
+            expectedAlerts = new String[] {"6626"};
+        }
+        else {
+            expectedAlerts = new String[] {"5730"};
+        }
+        testScript(script, expectedAlerts);
     }
 
     /**
@@ -123,10 +152,14 @@ public class IEConditionalCompilationTest extends WebTestCase {
     public void reservedString() throws Exception {
         final String script = "/*@cc_on alert('testing /*@cc_on'); @*/";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
-                new String[] {"testing /*@cc_on"});
-        testScript(BrowserVersion.FIREFOX_2, script,
-                new String[] {});
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[0];
+        }
+        else {
+            expectedAlerts = new String[] {"testing /*@cc_on"};
+        }
+        testScript(script, expectedAlerts);
     }
 
     /**
@@ -136,10 +169,14 @@ public class IEConditionalCompilationTest extends WebTestCase {
     public void set() throws Exception {
         final String script = "/*@cc_on @set @mine = 12 alert(@mine); @*/";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_6_0, script,
-                new String[] {"12"});
-        testScript(BrowserVersion.FIREFOX_2, script,
-                new String[] {});
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[0];
+        }
+        else {
+            expectedAlerts = new String[] {"12"};
+        }
+        testScript(script, expectedAlerts);
     }
 
     /**
@@ -149,11 +186,17 @@ public class IEConditionalCompilationTest extends WebTestCase {
     public void elif() throws Exception {
         final String script = "/*@cc_on @if(@_win32)type='win';@elif(@_mac)type='mac';@end alert(type); @*/";
         
-        testScript(BrowserVersion.INTERNET_EXPLORER_7_0, script, new String[] {"win"});
-        testScript(BrowserVersion.FIREFOX_2, script, new String[] {});
+        final String[] expectedAlerts;
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2) {
+            expectedAlerts = new String[0];
+        }
+        else {
+            expectedAlerts = new String[] {"win"};
+        }
+        testScript(script, expectedAlerts);
     }
 
-    private void testScript(final BrowserVersion browserVersion, final String script, final String[] expectedAlerts)
+    private void testScript(final String script, final String[] expectedAlerts)
         throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head>\n"
@@ -164,7 +207,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
+        final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection webConnection = new MockWebConnection(client);
         webConnection.setDefaultResponse(htmlContent);
