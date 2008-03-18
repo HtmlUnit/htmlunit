@@ -57,15 +57,17 @@ class BrowserRoadie extends MethodRoadie {
     private final Method method_;
     private final boolean shouldFail_;
     private final String browserVersionString_;
+    private final boolean notYetImplemented_;
 
     public BrowserRoadie(final Object test, final TestMethod testMethod, final RunNotifier notifier,
             final Description description, final Method method, final boolean shouldFail,
-            final String browserVersionString) {
+            final boolean notYetImplemented, final String browserVersionString) {
         super(test, testMethod, notifier, description);
         test_ = test;
         testMethod_ = testMethod;
         method_ = method;
         shouldFail_ = shouldFail;
+        notYetImplemented_ = notYetImplemented;
         browserVersionString_ = browserVersionString;
     }
 
@@ -77,9 +79,14 @@ class BrowserRoadie extends MethodRoadie {
                 addFailure(new AssertionError(
                     method_.getName() + " is marked to fail with " + browserVersionString_ + ", but succeeds"));
             }
+            else if (notYetImplemented_) {
+                addFailure(new AssertionError(
+                        method_.getName() + " is marked as not implemented with "
+                        + browserVersionString_ + "but already works"));
+            }
         }
         catch (final Throwable e) {
-            if (!shouldFail_) {
+            if (!shouldFail_ && !notYetImplemented_) {
                 addFailure(new AssertionError(
                     method_.getName() + " is marked to succeed with " + browserVersionString_ + ", but fails"));
             }

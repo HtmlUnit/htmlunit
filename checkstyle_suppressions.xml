@@ -16,4 +16,5 @@
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
     <suppress checks="ParameterNumber" files="MouseEvent.java"/>
+    <suppress checks="ParameterNumber" files="BrowserRoadie.java"/>
 </suppressions>

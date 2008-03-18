@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertTrue;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -97,13 +99,27 @@ public class BrowserRunner extends CompositeRunner {
     public static @interface Browsers {
 
         /**
-         * Returns the browsers to test with.
+         * The browsers which the case succeeds (but fails with remaining ones).
          */
         Browser[] value() default {
             Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2
         };
     }
     
+    /**
+     * Browsers with which the case is not yet implemented, default value is all.
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public static @interface NotYetImplemented {
+
+        /**
+         * The browsers with which the case is not yet implemented.
+         */
+        Browser[] value() default {
+            Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7, Browser.FIREFOX_2
+        };
+    }
 
     static class TestClassRunnerForBrowserVersion extends JUnit4ClassRunner {
 
@@ -129,41 +145,14 @@ public class BrowserRunner extends CompositeRunner {
                 notifier.testAborted(description, e);
                 return;
             }
-            boolean shouldFail = true;
             final Browsers browsers = method.getAnnotation(Browsers.class);
-            if (browsers != null) {
-                for (Browser b : browsers.value()) {
-                    switch (b) {
-                        case INTERNET_EXPLORER_6:
-                            if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6_0) {
-                                shouldFail = false;
-                            }
-                            break;
-
-                        case INTERNET_EXPLORER_7:
-                            if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7_0) {
-                                shouldFail = false;
-                            }
-                            break;
-                        
-                        case FIREFOX_2:
-                            if (browserVersion_ == BrowserVersion.FIREFOX_2) {
-                                shouldFail = false;
-                            }
-                            break;
-                        
-                        default:
-                    }
-                    if (!shouldFail) {
-                        break;
-                    }
-                }
-            }
-            else {
-                shouldFail = false;
-            }
+            final boolean shouldFail = browsers != null && !isDefinedIn(browsers.value());
+            
+            final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
+            final boolean notYetImplemented = notYetImplementedBrowsers != null
+                && isDefinedIn(notYetImplementedBrowsers.value());
             final TestMethod testMethod = wrapMethod(method);
-            new BrowserRoadie(test, testMethod, notifier, description, method, shouldFail,
+            new BrowserRoadie(test, testMethod, notifier, description, method, shouldFail, notYetImplemented,
                 getShortname(browserVersion_)).run();
         }
 
@@ -183,6 +172,37 @@ public class BrowserRunner extends CompositeRunner {
         protected String testName(final Method method) {
             return String.format("%s[%s]", method.getName(), getShortname(browserVersion_));
         }
+
+        /**
+         * Returns true if current {@link #browserVersion_} is contained in the specifidc <tt>browsers</tt>.
+         */
+        private boolean isDefinedIn(final Browser[] browsers) {
+            for (final Browser browser : browsers) {
+                switch(browser) {
+                    case INTERNET_EXPLORER_6:
+                        if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6_0) {
+                            return true;
+                        }
+                        break;
+
+                    case INTERNET_EXPLORER_7:
+                        if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7_0) {
+                            return true;
+                        }
+                        break;
+
+                    case FIREFOX_2:
+                        if (browserVersion_ == BrowserVersion.FIREFOX_2) {
+                            return true;
+                        }
+                        break;
+
+                    default:
+                }
+            }
+            return false;
+        }
+    
     }
 
     private static String getShortname(final BrowserVersion browserVersion) {
@@ -208,6 +228,7 @@ public class BrowserRunner extends CompositeRunner {
      */
     public BrowserRunner(final Class< ? extends WebTestCase> klass) throws Exception {
         super(klass.getName());
+        assertTrue("Test case must extend WebTestCase", WebTestCase.class.isAssignableFrom(klass));
         add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_6_0));
         add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0));
         add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2));

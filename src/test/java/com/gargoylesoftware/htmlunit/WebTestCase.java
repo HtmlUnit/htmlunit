@@ -602,7 +602,7 @@ public abstract class WebTestCase {
      * @return a newly created WebClient with the current {@link BrowserVersion}.
      */
     protected final WebClient getWebClient() {
-        return new WebClient(browserVersion_);
+        return new WebClient(getBrowserVersion());
     }
     
     /**
