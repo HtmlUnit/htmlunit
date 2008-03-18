@@ -100,6 +100,7 @@ public abstract class WebTestCase {
     public static final String PROPERTY_GENERATE_TESTPAGES
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
 
+    private BrowserVersion browserVersion_;
     static {
         try {
             URL_FIRST = new URL("http://first");
@@ -527,7 +528,7 @@ public abstract class WebTestCase {
                     }
                 }
                 catch (final Exception e) {
-                    // can't acces, ignore it
+                    // can't access, ignore it
                 }
             }
         }
@@ -590,5 +591,17 @@ public abstract class WebTestCase {
             list.add(child.asText());
         }
         return list;
+    }
+    
+    void setBrowserVersion(final BrowserVersion browserVersion) {
+        browserVersion_ = browserVersion;
+    }
+    
+    /**
+     * Returns a newly created Webclient with the current {@link BrowserVersion}.
+     * @return a newly created Webclient with the current {@link BrowserVersion}.
+     */
+    protected WebClient createWebClient() {
+        return new WebClient(browserVersion_);
     }
 }
