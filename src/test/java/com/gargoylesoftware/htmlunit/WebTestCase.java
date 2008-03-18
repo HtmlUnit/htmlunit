@@ -101,6 +101,9 @@ public abstract class WebTestCase {
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
 
     private BrowserVersion browserVersion_;
+    
+    private String[] expectedAlerts_;
+    
     static {
         try {
             URL_FIRST = new URL("http://first");
@@ -614,5 +617,32 @@ public abstract class WebTestCase {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
         return browserVersion_;
+    }
+    void setExpectedAlerts(final String[] expectedAlerts) {
+        expectedAlerts_ = expectedAlerts;
+    }
+
+    /**
+     * Load a page with the specified HTML using the current browser version, and asserts the alerts
+     * equal the expected alerts.
+     * @param html The HTML to use.
+     * @return The new page.
+     * @throws Exception if something goes wrong.
+     */
+    protected final HtmlPage loadWithAlerts(final String html) throws Exception {
+        if (expectedAlerts_ == null) {
+            throw new IllegalStateException("You must annotate the test method with '@Alerts(...)'");
+        }
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        assertEquals(expectedAlerts_, collectedAlerts);
+        return page;
     }
 }

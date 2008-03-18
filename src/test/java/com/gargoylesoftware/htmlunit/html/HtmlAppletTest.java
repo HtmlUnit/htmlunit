@@ -37,14 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
@@ -62,6 +60,7 @@ public class HtmlAppletTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FIREFOX_2)
+    @Alerts("[object HTMLAppletElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -73,10 +72,7 @@ public class HtmlAppletTest extends WebTestCase {
             + "  <applet id='myId'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLAppletElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadWithAlerts(html);
         assertTrue(HtmlApplet.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

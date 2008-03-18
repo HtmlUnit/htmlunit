@@ -107,6 +107,26 @@ public class BrowserRunner extends CompositeRunner {
     }
     
     /**
+     * Expected alerts.
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public static @interface Alerts {
+
+        /** Alerts that is used for all browsers (if defined, the other values are ignored). */
+        String[] value() default { };
+        
+        /** Alerts for Internet Explorer 6. */
+        String[] IE6() default { };
+
+        /** Alerts for Internet Explorer 7. */
+        String[] IE7() default { };
+
+        /** Alerts for Firefox 2. */
+        String[] FF2() default { };
+    }
+    
+    /**
      * Browsers with which the case is not yet implemented, default value is all.
      */
     @Retention(RetentionPolicy.RUNTIME)
@@ -152,8 +172,29 @@ public class BrowserRunner extends CompositeRunner {
             final boolean notYetImplemented = notYetImplementedBrowsers != null
                 && isDefinedIn(notYetImplementedBrowsers.value());
             final TestMethod testMethod = wrapMethod(method);
+            setAlerts((WebTestCase) test, method);
             new BrowserRoadie(test, testMethod, notifier, description, method, shouldFail, notYetImplemented,
                 getShortname(browserVersion_)).run();
+        }
+
+        private void setAlerts(final WebTestCase testCase, final Method method) {
+            final Alerts alerts = method.getAnnotation(Alerts.class);
+            if (alerts != null) {
+                String[] expectedAlerts;
+                if (alerts.value() != null) {
+                    expectedAlerts = alerts.value();
+                }
+                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6_0) {
+                    expectedAlerts = alerts.IE6();
+                }
+                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7_0) {
+                    expectedAlerts = alerts.IE7();
+                }
+                else {
+                    expectedAlerts = alerts.FF2();
+                }
+                testCase.setExpectedAlerts(expectedAlerts);
+            }
         }
 
         @Override
