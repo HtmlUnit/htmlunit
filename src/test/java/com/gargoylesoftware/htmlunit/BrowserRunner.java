@@ -181,7 +181,7 @@ public class BrowserRunner extends CompositeRunner {
             final Alerts alerts = method.getAnnotation(Alerts.class);
             if (alerts != null) {
                 String[] expectedAlerts;
-                if (alerts.value() != null) {
+                if (alerts.value().length != 0) {
                     expectedAlerts = alerts.value();
                 }
                 else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6_0) {
