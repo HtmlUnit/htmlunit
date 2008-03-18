@@ -882,7 +882,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to append to this node's children
      */
     private void basicAppend(final DomNode node) {
-        node.page_ = getPage();
+        node.setPage(getPage());
         if (firstChild_ == null) {
             firstChild_ = node;
             firstChild_.previousSibling_ = node;
@@ -958,6 +958,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         //clean up the new node, in case it is being moved
+        final DomNode exParent = newNode.getParentDomNode();
         newNode.basicRemove();
 
         if (parent_.firstChild_ == this) {
@@ -970,9 +971,31 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newNode.nextSibling_ = this;
         previousSibling_ = newNode;
         newNode.parent_ = parent_;
+        newNode.setPage(page_);
 
-        ((HtmlPage) getPage()).notifyNodeAdded(newNode);
+        if (getPage() instanceof HtmlPage) {
+            ((HtmlPage) getPage()).notifyNodeAdded(newNode);
+        }
         fireNodeAdded(this, newNode);
+        if (exParent != null) {
+            fireNodeDeleted(exParent, newNode);
+            exParent.fireNodeDeleted(exParent, this);
+        }
+    }
+
+    /**
+     * Recursively sets the new page on the node and its children
+     * @param newPage the new owning page
+     */
+    private void setPage(final Page newPage) {
+        if (page_ == newPage) {
+            return; // nothing to do
+        }
+        
+        page_ = newPage;
+        for (final DomNode node : getChildren()) {
+            node.setPage(newPage);
+        }
     }
 
     /**
@@ -995,22 +1018,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Removes this node from all relationships with other nodes.
-     * @throws IllegalStateException if this node is not a child of any other node
      */
     public void remove() throws IllegalStateException {
-        if (parent_ == null) {
-            throw new IllegalStateException();
-        }
         final DomNode exParent = parent_;
         basicRemove();
         
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).notifyNodeRemoved(this);
         }
-        
-        fireNodeDeleted(exParent, this);
-        //ask ex-parent to fire event (because we don't have parent now)
-        exParent.fireNodeDeleted(exParent, this);
+
+        if (exParent != null) {
+            fireNodeDeleted(exParent, this);
+            //ask ex-parent to fire event (because we don't have parent now)
+            exParent.fireNodeDeleted(exParent, this);
+        }
     }
 
     /**
@@ -1049,12 +1070,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Replaces this node with another node. If the specified node is this node, this
      * method is a no-op.
-     *
      * @param newNode the node to replace this one
      * @throws IllegalStateException if this node is not a child of any other node
      */
     public void replace(final DomNode newNode) throws IllegalStateException {
         if (newNode != this) {
+            newNode.remove();
             insertBefore(newNode);
             remove();
         }

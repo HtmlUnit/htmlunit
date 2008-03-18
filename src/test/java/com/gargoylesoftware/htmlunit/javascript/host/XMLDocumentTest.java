@@ -41,6 +41,7 @@ import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -668,14 +669,25 @@ public class XMLDocumentTest extends WebTestCase {
             + "  alert('same doc: ' + (doc1 == doc2));\n"
             + "  var doc1Root = doc1.firstChild;\n"
             + "  alert('in first: ' + doc1Root.childNodes.length)\n"
-            + "  var doc1RootFirstChild = doc1Root.firstChild\n"
-            + "  alert(doc1RootFirstChild.tagName)\n"
-            + "  alert('ownerDocument: ' + (doc1RootFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
+            + "  var doc1RootOriginalFirstChild = doc1Root.firstChild\n"
+            + "  alert(doc1RootOriginalFirstChild.tagName)\n"
+            + "  alert('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
             + "\n"
             + "  var doc2Root = doc2.firstChild;\n"
             + "  alert('in 2nd: ' + doc2Root.childNodes.length)\n"
-            + "  doc2Root.appendChild(doc1RootFirstChild)\n"
-            + "  alert('ownerDocument: ' + (doc1RootFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
+            + "  doc2Root.appendChild(doc1RootOriginalFirstChild)\n"
+            + "  alert('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
+            + "  alert('first child ownerDocument: ' + (doc1RootOriginalFirstChild.firstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
+            + "  alert('in first: ' + doc1Root.childNodes.length)\n"
+            + "  alert('in 2nd: ' + doc2Root.childNodes.length)\n"
+            + "\n"
+            + "  doc1Root.replaceChild(doc1RootOriginalFirstChild, doc1Root.firstChild);\n"
+            + "  alert('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
+            + "  alert('in first: ' + doc1Root.childNodes.length)\n"
+            + "  alert('in 2nd: ' + doc2Root.childNodes.length)\n"
+            + "\n"
+            + "  doc2Root.insertBefore(doc1RootOriginalFirstChild, doc2Root.firstChild);\n"
+            + "  alert('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'))\n"
             + "  alert('in first: ' + doc1Root.childNodes.length)\n"
             + "  alert('in 2nd: ' + doc2Root.childNodes.length)\n"
             + "\n"
@@ -693,7 +705,7 @@ public class XMLDocumentTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String xml = "<books><book1/><book2/><book3/></books>";
+        final String xml = "<order><book><title/></book><cd/><dvd/></order>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final WebClient client = new WebClient();
@@ -704,8 +716,10 @@ public class XMLDocumentTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        final String[] expectedAlerts = {"same doc: false", "in first: 3", "book1", "ownerDocument: doc1",
-            "in 2nd: 3", "ownerDocument: doc2", "in first: 2", "in 2nd: 4"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        final String[] expectedAlerts = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1",
+            "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
+            "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
+            "ownerDocument: doc2", "in first: 1", "in 2nd: 4"};
+        assertEquals(Arrays.asList(expectedAlerts).toString(), collectedAlerts.toString());
     }
 }

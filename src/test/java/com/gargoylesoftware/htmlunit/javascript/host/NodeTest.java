@@ -157,10 +157,6 @@ public class NodeTest extends WebTestCase {
      */
     @Test
     public void testReplaceChild_Normal() throws Exception {
-        final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-        webClient.setWebConnection(webConnection);
-
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -170,21 +166,19 @@ public class NodeTest extends WebTestCase {
             + "    var removedDiv = form.replaceChild(div2,div1);\n"
             + "    alert(div1==removedDiv);\n"
             + "    alert(form.firstChild==div2);\n"
+            + "    var newDiv = document.createElement('div');\n"
+            + "    form.replaceChild(newDiv, div2);\n"
+            + "    alert(form.firstChild==newDiv);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='formChild'/></form>\n"
             + "</body><div id='newChild'/></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, content, 200, "OK", "text/html", emptyList);
+        final String[] expectedAlerts = {"true", "true", "true"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        assertEquals("foo", page.getTitleText());
-
-        final String[] expectedAlerts = {"true", "true"};
+        loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
     }

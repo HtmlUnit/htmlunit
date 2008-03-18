@@ -1673,7 +1673,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         final String value = element.getAttributeValue(att);
         if (!StringUtils.isEmpty(value)) {
             final List<HtmlElement> elements = map.remove(value);
-            if (elements != null && elements.size() != 1) {
+            if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
                 elements.remove(element);
                 map.put(value, elements);
             }

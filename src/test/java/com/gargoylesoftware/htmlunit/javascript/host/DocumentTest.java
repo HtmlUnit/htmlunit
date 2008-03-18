@@ -340,6 +340,7 @@ public class DocumentTest extends WebTestCase {
             + "      function doTest() {\n"
             + "        // Create a DIV element.\n"
             + "        var div1 = document.createElement('div');\n"
+            + "        alert('parentNode: ' + div1.parentNode);\n"
             + "        div1.id = 'div1';\n"
             + "        document.body.appendChild(div1);\n"
             + "        alert(div1.tagName);\n"
@@ -368,7 +369,8 @@ public class DocumentTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final String[] expectedAlerts = {"DIV", "1", "null", "DIV", "button1value", "text1value", "text"};
+        final String[] expectedAlerts = {"parentNode: null", "DIV", "1", "null",
+            "DIV", "button1value", "text1value", "text"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
