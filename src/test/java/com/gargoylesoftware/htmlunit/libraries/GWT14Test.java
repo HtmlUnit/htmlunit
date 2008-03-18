@@ -54,10 +54,8 @@ import java.util.Set;
 
 import org.junit.After;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
@@ -82,7 +80,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class GWT14Test extends WebTestCase {
 
     private Server server_;
@@ -93,7 +90,7 @@ public class GWT14Test extends WebTestCase {
     @Test
     public void hello() throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage("Hello", BrowserVersion.getDefault(), collectedAlerts);
+        final HtmlPage page = loadGWTPage("Hello", BrowserVersion.getDefault(), collectedAlerts);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
         assertEquals("Click me", buttonLabel.getData());
@@ -111,7 +108,7 @@ public class GWT14Test extends WebTestCase {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final HtmlPage page = loadPage("I18N", BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadGWTPage("I18N", BrowserVersion.getDefault(), null);
         i18n(page, "numberFormatOutputText", "31,415,926,535.898");
 
         String timeZone = new SimpleDateFormat("Z").format(
@@ -285,7 +282,7 @@ public class GWT14Test extends WebTestCase {
      */
     @Test
     public void simpleXML() throws Exception {
-        final HtmlPage page = loadPage("SimpleXML", BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadGWTPage("SimpleXML", BrowserVersion.getDefault(), null);
 
         final String[] pendingOrders =
         {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
@@ -314,7 +311,7 @@ public class GWT14Test extends WebTestCase {
      */
     @Test
     public void mail() throws Exception {
-        final HtmlPage page = loadPage("Mail", BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadGWTPage("Mail", BrowserVersion.getDefault(), null);
         final HtmlTableDataCell cell = (HtmlTableDataCell)
             page.getFirstByXPath("//table[@class='mail-TopPanel']//div[@class='gwt-HTML']//..");
         tableDataCell(cell, "Welcome back, foo@example.com");
@@ -342,7 +339,7 @@ public class GWT14Test extends WebTestCase {
      */
     @Test
     public void json() throws Exception {
-        final HtmlPage page = loadPage("JSON", BrowserVersion.getDefault(), null);
+        final HtmlPage page = loadGWTPage("JSON", BrowserVersion.getDefault(), null);
         final HtmlButton button = (HtmlButton) page.getFirstByXPath("//button");
         button.click();
 
@@ -440,7 +437,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception if an error occurs.
      * @return The loaded page.
      */
-    protected HtmlPage loadPage(final String testName, final BrowserVersion version,
+    protected HtmlPage loadGWTPage(final String testName, final BrowserVersion version,
             final List<String> collectedAlerts) throws Exception {
         final String resource = "gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
