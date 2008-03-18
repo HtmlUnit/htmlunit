@@ -202,7 +202,6 @@ public class BrowserRunner extends CompositeRunner {
             }
             return false;
         }
-    
     }
 
     private static String getShortname(final BrowserVersion browserVersion) {
