@@ -143,12 +143,13 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     @Test
+    @NotYetImplemented(Browser.FIREFOX_2)
     public void i18n_fr() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
         
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/I18N");
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/I18N.html?locale=fr";
         final HtmlPage page = (HtmlPage) client.getPage(url);
@@ -406,9 +407,10 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     @Test
+    @NotYetImplemented(Browser.FIREFOX_2)
     public void kitchenSink() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/KitchenSink");
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/KitchenSink.html";
         final HtmlPage page = (HtmlPage) client.getPage(url);

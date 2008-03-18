@@ -85,6 +85,7 @@ public class CodeStyleTest {
                     methodFirstLine(lines, relativePath);
                     methodLastLine(lines, relativePath);
                     svnProperties(file, relativePath);
+                    runWith(lines, relativePath);
                 }
             }
         }
@@ -280,4 +281,23 @@ public class CodeStyleTest {
         }
         fail("Incorrect year in Version.getCopyright()");
     }
+    
+    /**
+     * Verifies that no direct instantiation of WebClient from a test that runs with BrowserRunner.
+     */
+    private void runWith(final List<String> lines, final String relativePath) {
+        if (relativePath.replace('\\', '/').contains("src/test/java") && !relativePath.contains("CodeStyleTest")) {
+            boolean runWith = false;
+            for (final String line : lines) {
+                if (line.contains("@RunWith(BrowserRunner.class)")) {
+                    runWith = true;
+                }
+                if (runWith && line.contains("new WebClient(")) {
+                    fail("Test " + relativePath
+                        + " should never directly instantiate WebClient, please use getWebClient() instead.");
+                }
+            }
+        }
+    }
+
 }
