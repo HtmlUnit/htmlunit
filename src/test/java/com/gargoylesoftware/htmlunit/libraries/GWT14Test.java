@@ -54,8 +54,10 @@ import java.util.Set;
 
 import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
@@ -80,6 +82,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class GWT14Test extends WebTestCase {
 
     private Server server_;

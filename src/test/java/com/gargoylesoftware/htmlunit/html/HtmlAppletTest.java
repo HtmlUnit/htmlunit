@@ -62,7 +62,7 @@ public class HtmlAppletTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FIREFOX_2)
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
