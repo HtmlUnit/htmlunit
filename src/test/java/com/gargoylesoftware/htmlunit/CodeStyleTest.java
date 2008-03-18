@@ -133,7 +133,7 @@ public class CodeStyleTest {
             if (lines.get(index + 1).trim().length() == 0
                 && line.length() > 4
                 && Character.isWhitespace(line.charAt(0)) && line.endsWith("{")
-                && !line.contains(" class ")
+                && !line.contains(" class ") && !line.contains(" interface ") && !line.contains(" @interface ")
                 && (!Character.isWhitespace(line.charAt(4))
                     || line.trim().startsWith("public") || line.trim().startsWith("protected")
                     || line.trim().startsWith("private"))) {

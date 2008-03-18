@@ -183,7 +183,6 @@ public class BrowserRunner extends CompositeRunner {
         protected String testName(final Method method) {
             return String.format("%s[%s]", method.getName(), getShortname(browserVersion_));
         }
-
     }
 
     private static String getShortname(final BrowserVersion browserVersion) {

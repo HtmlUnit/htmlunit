@@ -598,10 +598,21 @@ public abstract class WebTestCase {
     }
     
     /**
-     * Returns a newly created Webclient with the current {@link BrowserVersion}.
-     * @return a newly created Webclient with the current {@link BrowserVersion}.
+     * Returns a newly created WebClient with the current {@link BrowserVersion}.
+     * @return a newly created WebClient with the current {@link BrowserVersion}.
      */
-    protected WebClient createWebClient() {
+    protected final WebClient getWebClient() {
         return new WebClient(browserVersion_);
+    }
+    
+    /**
+     * Returns the current {@link BrowserVersion}.
+     * @return current {@link BrowserVersion}.
+     */
+    protected final BrowserVersion getBrowserVersion() {
+        if (browserVersion_ == null) {
+            throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
+        }
+        return browserVersion_;
     }
 }
