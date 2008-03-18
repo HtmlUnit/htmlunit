@@ -43,7 +43,9 @@ import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -56,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author David K. Taylor
  */
+@RunWith(BrowserRunner.class)
 public class CharacterDataImplTest extends WebTestCase {
 
     /**
@@ -64,7 +67,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_textNode() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -103,7 +106,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_setData() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -140,7 +143,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_setNodeValue() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -177,7 +180,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_appendData() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -211,7 +214,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_deleteData() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -245,7 +248,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_insertData() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -279,7 +282,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_replaceData() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -313,7 +316,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void characterDataImpl_substringData() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent
@@ -347,7 +350,7 @@ public class CharacterDataImplTest extends WebTestCase {
      */
     @Test
     public void textImpl_splitText() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         final String firstContent

@@ -43,9 +43,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -55,12 +59,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class ComputedCSSStyleDeclarationTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception If the test fails.
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
     public void cssFloat() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -77,15 +83,16 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
         
         final String[] expectedAlerts = {"none"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
      * Compares all style and getComputedStle.
-     * @throws Exception If the test fails
+     * @throws Exception If the test fails.
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
     public void stringProperties() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -141,7 +148,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "MozOutlineRadiusBottomright=:0px,MozOutlineStyle=:none,MozOutlineWidth=:0px,MozOutlineOffset=:0px,"
             + "MozPaddingEnd=:,MozPaddingStart=:,MozUserFocus=:none,MozUserInput=:auto,MozUserModify=:read-only,"
             + "MozUserSelect=:auto,opacity=:1,outlineOffset=:0px,overflowX=:visible,overflowY=:visible,";
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, null);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final List<String> expectedValues = stringProperties(expectedText);
         final List<String> collectedValues =
             stringProperties(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText());
@@ -176,9 +183,10 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if the test fails.
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
     public void styleElement() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
@@ -202,7 +210,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
 
         final String[] expectedAlerts = {"", "", "auto", "pointer"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -215,10 +223,9 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
+    @NotYetImplemented(Browser.FIREFOX_2)
     public void styleElement2() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
@@ -241,7 +248,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
 
         final String[] expectedAlerts = {"", "", "pointer", "pointer"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 }
