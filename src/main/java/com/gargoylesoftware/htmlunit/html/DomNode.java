@@ -1019,7 +1019,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Removes this node from all relationships with other nodes.
      */
-    public void remove() throws IllegalStateException {
+    public void remove() {
         final DomNode exParent = parent_;
         basicRemove();
         
