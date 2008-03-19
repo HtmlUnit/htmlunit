@@ -37,19 +37,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -66,11 +59,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"Some Text", "9", "3", "Some Text", "#text" })
     public void characterDataImpl_textNode() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -84,20 +75,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
-        assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {
-            "Some Text", "9", "3", "Some Text", "#text"
-        };
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("First", page.getTitleText());
     }
 
     /**
@@ -105,11 +84,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"Some New Text", "Some New Text" })
     public void characterDataImpl_setData() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -121,20 +98,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {
-            "Some New Text", "Some New Text"
-        };
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -142,11 +107,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"Some New Text", "Some New Text" })
     public void characterDataImpl_setNodeValue() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -158,20 +121,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {
-            "Some New Text", "Some New Text"
-        };
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -179,11 +130,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"Some Text Appended" })
     public void characterDataImpl_appendData() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -194,18 +143,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {"Some Text Appended"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -213,11 +152,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Some Text")
     public void characterDataImpl_deleteData() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -228,18 +165,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {"Some Text"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -247,11 +174,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Some New Text")
     public void characterDataImpl_insertData() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -262,18 +187,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {"Some New Text"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -281,11 +196,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Some New Text")
     public void characterDataImpl_replaceData() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -296,18 +209,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Old Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {"Some New Text"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -315,11 +218,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"New", "Some New Text" })
     public void characterDataImpl_substringData() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -330,18 +231,8 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some New Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {"New", "Some New Text"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -349,11 +240,9 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"Some ", "Text", "true" })
     public void textImpl_splitText() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection(webClient);
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
@@ -366,17 +255,7 @@ public class CharacterDataImplTest extends WebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = loadPageWithAlerts(html);
         assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {"Some ", "Text", "true"};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

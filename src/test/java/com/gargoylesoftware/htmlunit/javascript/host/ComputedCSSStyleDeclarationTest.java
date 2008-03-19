@@ -47,6 +47,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -67,8 +68,9 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FIREFOX_2)
+    @Alerts("none")
     public void cssFloat() throws Exception {
-        final String content = "<html>\n"
+        final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -80,11 +82,8 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
-        
-        final String[] expectedAlerts = {"none"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -187,8 +186,9 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FIREFOX_2)
+    @Alerts({"", "", "auto", "pointer" })
     public void styleElement() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
             + "  #myDiv2 {cursor: pointer}\n"
@@ -208,10 +208,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv2'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"", "", "auto", "pointer"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -225,8 +222,9 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
     @Test
     @Browsers(Browser.FIREFOX_2)
     @NotYetImplemented(Browser.FIREFOX_2)
+    @Alerts({"", "", "pointer", "pointer" })
     public void styleElement2() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
             + "  #style_test_1 {cursor: pointer}\n"
@@ -246,9 +244,6 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv2'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"", "", "pointer", "pointer"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }
