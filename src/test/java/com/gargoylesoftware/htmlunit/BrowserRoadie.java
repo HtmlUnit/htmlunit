@@ -100,7 +100,7 @@ class BrowserRoadie extends MethodRoadie {
         }
         catch (final Throwable e) {
             if (!shouldFail_ && !notYetImplemented_) {
-                addFailure(new AssertionError(e.getCause()));
+                addFailure(e.getCause());
             }
         }
     }
