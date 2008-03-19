@@ -76,6 +76,8 @@ import org.junit.runner.notification.RunNotifier;
  */
 public class BrowserRunner extends CompositeRunner {
 
+    private static final String EMPTY_DEFAULT = "~InTerNal_To_BrowSeRRunNer#@$";
+
     /**
      * Browser.
      */
@@ -114,16 +116,22 @@ public class BrowserRunner extends CompositeRunner {
     public static @interface Alerts {
 
         /** Alerts that is used for all browsers (if defined, the other values are ignored). */
-        String[] value() default { };
+        String[] value() default {EMPTY_DEFAULT };
         
-        /** Alerts for Internet Explorer 6. */
-        String[] IE6() default { };
+        /** Alerts for any Internet Explorer, it can be overridden by specific IE version. */
+        String[] IE() default {EMPTY_DEFAULT };
 
-        /** Alerts for Internet Explorer 7. */
-        String[] IE7() default { };
+        /** Alerts for Internet Explorer 6.  If not defined, {@link #IE()} is used. */
+        String[] IE6() default {EMPTY_DEFAULT };
+
+        /** Alerts for Internet Explorer 7.  If not defined, {@link #IE()} is used. */
+        String[] IE7() default {EMPTY_DEFAULT };
+
+        /** Alerts for any Firefox, it can be overridden by specific FF version. */
+        String[] FF() default {EMPTY_DEFAULT };
 
         /** Alerts for Firefox 2. */
-        String[] FF2() default { };
+        String[] FF2() default {EMPTY_DEFAULT };
     }
     
     /**
@@ -180,18 +188,33 @@ public class BrowserRunner extends CompositeRunner {
         private void setAlerts(final WebTestCase testCase, final Method method) {
             final Alerts alerts = method.getAnnotation(Alerts.class);
             if (alerts != null) {
-                String[] expectedAlerts;
-                if (alerts.value().length != 0) {
+                String[] expectedAlerts = {};
+                if (isDefined(alerts.value())) {
                     expectedAlerts = alerts.value();
                 }
                 else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6_0) {
-                    expectedAlerts = alerts.IE6();
+                    if (isDefined(alerts.IE6())) {
+                        expectedAlerts = alerts.IE6();
+                    }
+                    else if (isDefined(alerts.IE())) {
+                        expectedAlerts = alerts.IE();
+                    }
                 }
                 else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7_0) {
-                    expectedAlerts = alerts.IE7();
+                    if (isDefined(alerts.IE7())) {
+                        expectedAlerts = alerts.IE7();
+                    }
+                    else if (isDefined(alerts.IE())) {
+                        expectedAlerts = alerts.IE();
+                    }
                 }
-                else {
-                    expectedAlerts = alerts.FF2();
+                else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
+                    if (isDefined(alerts.FF2())) {
+                        expectedAlerts = alerts.FF2();
+                    }
+                    else if (isDefined(alerts.FF())) {
+                        expectedAlerts = alerts.FF();
+                    }
                 }
                 testCase.setExpectedAlerts(expectedAlerts);
             }
@@ -214,8 +237,12 @@ public class BrowserRunner extends CompositeRunner {
             return String.format("%s[%s]", method.getName(), getShortname(browserVersion_));
         }
 
+        private boolean isDefined(final String[] alerts) {
+            return alerts.length != 1 || !alerts[0].equals(EMPTY_DEFAULT);
+        }
+        
         /**
-         * Returns true if current {@link #browserVersion_} is contained in the specifidc <tt>browsers</tt>.
+         * Returns true if current {@link #browserVersion_} is contained in the specific <tt>browsers</tt>.
          */
         private boolean isDefinedIn(final Browser[] browsers) {
             for (final Browser browser : browsers) {

@@ -87,8 +87,7 @@ class BrowserRoadie extends MethodRoadie {
         }
         catch (final Throwable e) {
             if (!shouldFail_ && !notYetImplemented_) {
-                addFailure(new AssertionError(
-                    method_.getName() + " is marked to succeed with " + browserVersionString_ + ", but fails"));
+                addFailure(new AssertionError(e.getCause()));
             }
         }
     }

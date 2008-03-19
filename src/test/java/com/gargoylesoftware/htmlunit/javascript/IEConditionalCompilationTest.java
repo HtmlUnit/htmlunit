@@ -58,7 +58,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Alerts(IE6 = "testing @cc_on", IE7 = "testing @cc_on", FF2 = { })
+    @Alerts(IE = "testing @cc_on", IE7 = "testing @cc_on")
     public void simple() throws Exception {
         final String script = "/*@cc_on alert('testing @cc_on'); @*/";
         testScript(script);
@@ -80,7 +80,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Alerts(IE6 = "5.6", IE7 = "5.7", FF2 = { })
+    @Alerts(IE6 = "5.6", IE7 = "5.7")
     public void ifTest() throws Exception {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
         testScript(script);
@@ -90,7 +90,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Alerts(IE6 = "5.6", IE7 = "5.7", FF2 = { })
+    @Alerts(IE6 = "5.6", IE7 = "5.7")
     public void variables_jscript_version() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_version) @*/";
         testScript(script);
@@ -100,7 +100,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Alerts(IE6 = "6626", IE7 = "5730", FF2 = { })
+    @Alerts(IE6 = "6626", IE7 = "5730")
     public void variables_jscript_build() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_build) @*/";
         testScript(script);
@@ -110,7 +110,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Alerts(IE6 = "testing /*@cc_on", IE7 = "testing /*@cc_on", FF2 = { })
+    @Alerts(IE = "testing /*@cc_on")
     public void reservedString() throws Exception {
         final String script = "/*@cc_on alert('testing /*@cc_on'); @*/";
         testScript(script);
@@ -120,7 +120,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Alerts(IE6 = "12", IE7 = "12", FF2 = { })
+    @Alerts(IE = "12")
     public void set() throws Exception {
         final String script = "/*@cc_on @set @mine = 12 alert(@mine); @*/";
         testScript(script);
@@ -130,7 +130,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Alerts(IE6 = "win", IE7 = "win", FF2 = { })
+    @Alerts(IE = "win")
     public void elif() throws Exception {
         final String script = "/*@cc_on @if(@_win32)type='win';@elif(@_mac)type='mac';@end alert(type); @*/";
         testScript(script);
