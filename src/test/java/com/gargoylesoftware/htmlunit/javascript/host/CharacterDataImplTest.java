@@ -130,7 +130,7 @@ public class CharacterDataImplTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Some Text Appended" })
+    @Alerts("Some Text Appended")
     public void characterDataImpl_appendData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

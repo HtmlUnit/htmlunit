@@ -376,8 +376,8 @@ public class BrowserRunner extends CompositeRunner {
             }
             return methods;
         }
-
     }
+
     /**
      * Constructs a new instance.
      *

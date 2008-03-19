@@ -91,7 +91,6 @@ public class Stylesheet extends SimpleScriptable {
      * Creates a new empty stylesheet.
      */
     public Stylesheet() {
-        source_ = null;
         ownerNode_ = null;
     }
 
