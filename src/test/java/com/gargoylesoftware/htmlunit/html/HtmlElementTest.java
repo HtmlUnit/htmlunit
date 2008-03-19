@@ -947,7 +947,8 @@ public class HtmlElementTest extends WebTestCase {
             + "<div>a</div> <div>b</div> <div>c</div>\n"
             + "</body></html>";
 
-        final HtmlElement body = loadPage(html).getBody();
+        final HtmlPage page = loadPage(html);
+        final HtmlElement body = page.getBody();
 
         final NodeList inputs = body.getElementsByTagName("input");
         assertEquals(1, inputs.getLength());
@@ -955,5 +956,9 @@ public class HtmlElementTest extends WebTestCase {
 
         final NodeList divs = body.getElementsByTagName("div");
         assertEquals(3, divs.getLength());
+
+        final HtmlDivision newDiv = new HtmlDivision(null, HtmlDivision.TAG_NAME, page, null);
+        body.appendChild(newDiv);
+        assertEquals(4, divs.getLength());
     }
 }

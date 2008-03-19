@@ -355,8 +355,8 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * {@inheritDoc}
      */
-    public NodeList getElementsByTagName(final String name) {
-        return new DomNodeList(getHtmlElementsByTagName(name));
+    public NodeList getElementsByTagName(final String tagName) {
+        return new DomNodeList(this, "//" + tagName);
     }
 
     /**

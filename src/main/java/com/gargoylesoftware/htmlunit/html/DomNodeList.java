@@ -38,11 +38,15 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.NOPTransformer;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 
 /**
  * A {@link NodeList} for {@link DomNode}s.
@@ -54,36 +58,127 @@ class DomNodeList implements NodeList, Serializable {
 
     private static final long serialVersionUID = 1541399090797298342L;
 
-    /** The list of DOM nodes wrapped by this node list. */
-    private List< ? extends DomNode> nodes_;
+    /** The XPath expression which dictates the contents of this node list. */
+    private String xpath_;
+
+    /** This node list's root node. */
+    private DomNode node_;
+
+    /** The transformer used to transform elements of this node list, if any. */
+    private Transformer transformer_;
+
+    /** Element cache, used to avoid XPath expression evaluation as much as possible. */
+    private List<Object> cachedElements_;
 
     /**
-     * Creates a new, empty DOM node list.
+     * Creates a new node list. The elements will be "calculated" using the specified XPath
+     * expression applied on the specified node.
+     * @param node the node to serve as root for the XPath expression
+     * @param xpath the XPath expression which determines the elements of the node list
      */
-    public DomNodeList() {
-        nodes_ = Collections.emptyList();
+    public DomNodeList(final DomNode node, final String xpath) {
+        this(node, xpath, NOPTransformer.INSTANCE);
     }
 
     /**
-     * Creates a new DOM node list which wraps the specified list of nodes.
-     * @param nodes the list of nodes to wrap
+     * Creates a new node list. The elements will be "calculated" using the specified XPath
+     * expression applied on the specified node, and using the specified transformer.
+     * @param node the node to serve as root for the XPath expression
+     * @param xpath the XPath expression which determines the elements of the node list
+     * @param transformer the transformer used to transform elements of this node list
      */
-    public DomNodeList(final List< ? extends DomNode> nodes) {
-        nodes_ = nodes;
+    public DomNodeList(final DomNode node, final String xpath, final Transformer transformer) {
+        if (node != null) {
+            node_ = node;
+            xpath_ = xpath;
+            transformer_ = transformer;
+            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+            node_.addDomChangeListener(listener);
+            if (node_ instanceof HtmlElement) {
+                ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
+                cachedElements_ = null;
+            }
+        }
+    }
+
+    /**
+     * Returns the nodes in this node list, caching as necessary.
+     * @return the nodes in this node list
+     */
+    @SuppressWarnings("unchecked")
+    private List<Object> getNodes() {
+        if (cachedElements_ == null) {
+            if (node_ != null) {
+                cachedElements_ = XPathUtils.getByXPath(node_, xpath_);
+            }
+            else {
+                cachedElements_ = new ArrayList<Object>();
+            }
+        }
+        return cachedElements_;
     }
 
     /**
      * {@inheritDoc}
      */
     public int getLength() {
-        return nodes_.size();
+        return getNodes().size();
     }
 
     /**
      * {@inheritDoc}
      */
     public Node item(final int index) {
-        return nodes_.get(index);
+        return (DomNode) transformer_.transform(getNodes().get(index));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "DomNodeList[" + xpath_ + "]";
+    }
+
+    /**
+     * DOM change listener which clears the node cache when necessary.
+     */
+    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeAdded(final DomChangeEvent event) {
+            cachedElements_ = null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeDeleted(final DomChangeEvent event) {
+            cachedElements_ = null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeAdded(final HtmlAttributeChangeEvent event) {
+            cachedElements_ = null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+            cachedElements_ = null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+            cachedElements_ = null;
+        }
     }
 
 }

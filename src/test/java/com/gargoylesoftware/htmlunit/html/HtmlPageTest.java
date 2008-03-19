@@ -1777,6 +1777,10 @@ public class HtmlPageTest extends WebTestCase {
 
         final NodeList divs = page.getElementsByTagName("div");
         assertEquals(3, divs.getLength());
+
+        final HtmlDivision newDiv = new HtmlDivision(null, HtmlDivision.TAG_NAME, page, null);
+        page.getBody().appendChild(newDiv);
+        assertEquals(4, divs.getLength());
     }
 
 }

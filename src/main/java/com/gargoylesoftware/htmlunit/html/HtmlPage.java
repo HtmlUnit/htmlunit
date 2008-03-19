@@ -233,8 +233,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * {@inheritDoc}
      */
     public NodeList getElementsByTagName(final String tagName) {
-        final List< ? extends HtmlElement> elements = getDocumentHtmlElement().getHtmlElementsByTagName(tagName);
-        return new DomNodeList(elements);
+        return new DomNodeList(this, "//" + tagName);
     }
 
     /**
