@@ -629,7 +629,7 @@ public abstract class WebTestCase {
      * @return The new page.
      * @throws Exception if something goes wrong.
      */
-    protected final HtmlPage loadWithAlerts(final String html) throws Exception {
+    protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test method with '@Alerts(...)'");
         }

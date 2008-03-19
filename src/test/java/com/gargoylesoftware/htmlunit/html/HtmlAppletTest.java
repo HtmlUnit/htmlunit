@@ -72,7 +72,7 @@ public class HtmlAppletTest extends WebTestCase {
             + "  <applet id='myId'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadWithAlerts(html);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlApplet.class.isInstance(page.getHtmlElementById("myId")));
     }
 }

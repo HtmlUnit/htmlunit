@@ -146,6 +146,6 @@ public class IEConditionalCompilationTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadWithAlerts(html);
+        loadPageWithAlerts(html);
     }
 }
