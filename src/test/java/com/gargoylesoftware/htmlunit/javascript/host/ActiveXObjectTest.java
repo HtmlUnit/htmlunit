@@ -62,6 +62,7 @@ public class ActiveXObjectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE)
     public void xmlHttpRequestFlavours() throws Exception {
         assertFalse(ActiveXObject.isXMLHttpRequest(null));
         assertFalse(ActiveXObject.isXMLHttpRequest("foo"));

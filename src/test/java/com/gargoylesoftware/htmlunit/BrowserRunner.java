@@ -45,6 +45,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.internal.runners.CompositeRunner;
 import org.junit.internal.runners.InitializationError;
@@ -88,8 +90,11 @@ public class BrowserRunner extends CompositeRunner {
         /** Internet Explorer 7.*/
         INTERNET_EXPLORER_7,
 
-        /** Firefox 7.*/
-        FIREFOX_2;
+        /** Firefox 2.*/
+        FIREFOX_2,
+
+        /** Not Browser-specific, it will run only once. Don't use this with other Browsers. */
+        NONE;
     }
     
     
@@ -152,6 +157,7 @@ public class BrowserRunner extends CompositeRunner {
     static class TestClassRunnerForBrowserVersion extends JUnit4ClassRunner {
 
         private final BrowserVersion browserVersion_;
+        
         public TestClassRunnerForBrowserVersion(final Class< ? extends WebTestCase> klass,
             final BrowserVersion browserVersion) throws InitializationError {
             super(klass);
@@ -237,6 +243,38 @@ public class BrowserRunner extends CompositeRunner {
             return String.format("%s[%s]", method.getName(), getShortname(browserVersion_));
         }
 
+        @Override
+        protected void validate() throws InitializationError {
+            super.validate();
+            final List<Throwable> errors = new ArrayList<Throwable>();
+            for (final Method method : getTestMethods()) {
+                final Browsers browsers = method.getAnnotation(Browsers.class);
+                if (browsers != null) {
+                    for (final Browser browser : browsers.value()) {
+                        if (browser == Browser.NONE && browsers.value().length > 1) {
+                            errors.add(new Exception("Method " + method.getName()
+                                    + " can not have Browser.NONE along with other Browsers."));
+                        }
+                    }
+                }
+            }
+            if (!errors.isEmpty()) {
+                throw new InitializationError(errors);
+            }
+        }
+
+        @Override
+        protected List<Method> getTestMethods() {
+            final List<Method> methods = super.getTestMethods();
+            for (final Method method : methods) {
+                final Browsers browsers = method.getAnnotation(Browsers.class);
+                if (browsers != null && browsers.value()[0] == Browser.NONE) {
+                    methods.remove(method);
+                }
+            }
+            return methods;
+        }
+
         private boolean isDefined(final String[] alerts) {
             return alerts.length != 1 || !alerts[0].equals(EMPTY_DEFAULT);
         }
@@ -287,6 +325,59 @@ public class BrowserRunner extends CompositeRunner {
         }
     }
 
+    static class TestClassRunnerForNoBrowser extends JUnit4ClassRunner {
+
+        public TestClassRunnerForNoBrowser(final Class< ? extends WebTestCase> klass) throws InitializationError {
+            super(klass);
+        }
+
+        @Override
+        protected void invokeTestMethod(final Method method, final RunNotifier notifier) {
+            final Description description = methodDescription(method);
+            Object test;
+            try {
+                test = createTest();
+            }
+            catch (final InvocationTargetException e) {
+                notifier.testAborted(description, e.getCause());
+                return;
+            }
+            catch (final Exception e) {
+                notifier.testAborted(description, e);
+                return;
+            }
+            final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
+            final boolean notYetImplemented = notYetImplementedBrowsers != null;
+            final TestMethod testMethod = wrapMethod(method);
+            new BrowserRoadie(test, testMethod, notifier, description, method, false, notYetImplemented,
+                "").run();
+        }
+
+        @Override
+        protected String getName() {
+            return "[No Browser]";
+        }
+
+        @Override
+        protected String testName(final Method method) {
+            return String.format("%s[No Browser]", method.getName());
+        }
+
+        @Override
+        protected List<Method> getTestMethods() {
+            final List<Method> methods = super.getTestMethods();
+            for (int i = 0; i < methods.size(); i++) {
+                final Method method = methods.get(i);
+                final Browsers browsers = method.getAnnotation(Browsers.class);
+                if (browsers == null || browsers.value()[0] != Browser.NONE) {
+                    methods.remove(method);
+                    i--;
+                }
+            }
+            return methods;
+        }
+
+    }
     /**
      * Constructs a new instance.
      *
@@ -299,6 +390,7 @@ public class BrowserRunner extends CompositeRunner {
         add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_6_0));
         add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0));
         add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2));
+        add(new TestClassRunnerForNoBrowser(klass));
     }
 
 }

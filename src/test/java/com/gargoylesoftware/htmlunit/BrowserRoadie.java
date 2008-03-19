@@ -76,13 +76,26 @@ class BrowserRoadie extends MethodRoadie {
         try {
             testMethod_.invoke(test_);
             if (shouldFail_) {
-                addFailure(new AssertionError(
-                    method_.getName() + " is marked to fail with " + browserVersionString_ + ", but succeeds"));
+                final String errorMessage;
+                if (browserVersionString_ == null) {
+                    errorMessage = method_.getName() + " is marked to fail with "
+                        + browserVersionString_ + ", but succeeds";
+                }
+                else {
+                    errorMessage = method_.getName() + " is marked to fail, but succeeds";
+                }
+                addFailure(new AssertionError(errorMessage));
             }
             else if (notYetImplemented_) {
-                addFailure(new AssertionError(
-                        method_.getName() + " is marked as not implemented with "
-                        + browserVersionString_ + "but already works"));
+                final String errorMessage;
+                if (browserVersionString_ == null) {
+                    errorMessage = method_.getName() + " is marked as not implemented but already works";
+                }
+                else {
+                    errorMessage = method_.getName() + " is marked as not implemented with "
+                        + browserVersionString_ + " but already works";
+                }
+                addFailure(new AssertionError(errorMessage));
             }
         }
         catch (final Throwable e) {
