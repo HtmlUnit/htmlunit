@@ -40,11 +40,16 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.StringReader;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Unit tests for {@link Stylesheet}.
@@ -53,12 +58,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class StyleSheetTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE)
     public void testTranslateToXPath() throws Exception {
         final Stylesheet stylesheet = new Stylesheet();
         final String s = "*.yui-log input { }";
@@ -67,5 +74,31 @@ public class StyleSheetTest extends WebTestCase {
         final Selector selector = selectors.item(0);
         assertEquals("//*[contains( concat(' ', @class, ' '), concat(' ', 'yui-log', ' ') )]//input",
             stylesheet.translateToXPath(selector));
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = {"[object]", "undefined", "false", "[object]", "true" },
+            FF = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" })
+    public void testOwningNodeOwningElement() throws Exception {
+        final String html = "<html><head><title>test_hasChildNodes</title>\n"
+                + "<script>\n"
+                + "function test(){"
+                + "  var myStyle = document.getElementById('myStyle');\n"
+                + "  var stylesheet = document.styleSheets[0];\n"
+                + "  alert(stylesheet);\n"
+                + "  alert(stylesheet.ownerNode);\n"
+                + "  alert(stylesheet.ownerNode == myStyle);\n"
+                + "  alert(stylesheet.owningElement);\n"
+                + "  alert(stylesheet.owningElement == myStyle);\n"
+                + "}\n"
+                + "</script>\n"
+                + "<style id='myStyle' type='text/css'></style>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts(html);
     }
 }

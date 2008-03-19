@@ -8,6 +8,12 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="update" dev="mguillem">
+                JavaScript: CSSStyleSheet added support for ownerNode (FF) and owningElement (IE).
+            </action>
+            <action type="update" dev="mguillem">
+                JavaScript: allow direct access to nodes per id/name when simulating Firefox too.
+            </action>
+            <action type="update" dev="mguillem">
                 JavaScript: fixed various issues with Node methods appendChild, insertBefore and replaceChild
                 when involved nodes don't belong to the same document.
             </action>

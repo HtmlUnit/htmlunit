@@ -633,6 +633,9 @@ public abstract class WebTestCase {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test method with '@Alerts(...)'");
         }
+        
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts_);
+        
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

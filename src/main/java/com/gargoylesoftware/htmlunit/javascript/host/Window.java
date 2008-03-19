@@ -845,11 +845,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             result = getFrameByName((HtmlPage) domNode.getPage(), name);
         }
 
-        // See if it is an attempt to access an element directly by name or id if we are emulating IE.
+        // See if it is an attempt to access an element directly by name or id
+        // IE does since a long time and FF does it too
         if (result == NOT_FOUND) {
             // this tests are quite silly and should be removed when custom JS objects have a clean
             // way to get the WebClient they are running in.
-            if (domNode != null && getBrowserVersion().isIE()) {
+            if (domNode != null) {
                 final HTMLCollection array = (HTMLCollection) document_.jsxFunction_getElementsByName(name);
                 final int length = array.jsxGet_length();
                 if (length == 1) {

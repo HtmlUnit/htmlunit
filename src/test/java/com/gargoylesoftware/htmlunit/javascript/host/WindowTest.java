@@ -1582,8 +1582,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * All elements should be accessible via the window object by their id, if we
-     * are emulating Microsoft Internet Explorer.
+     * All elements should be accessible via the window object by their id.
      * @throws Exception If the test fails.
      */
     @Test
@@ -1608,12 +1607,49 @@ public class WindowTest extends WebTestCase {
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+
         final String[] expectedAlerts = {"form1", "form2", "1", "DIV"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
+    /**
+     * In FF 2 "foo" evaluates to the node with id or name "foo" when no local variable
+     * has this name.
+     * BUT strangely window.foo evaluates to undefined (not yet implemented in HTMLUnit.)
+     * @throws Exception If the test fails.
+     */
+    @Test
+    public void testFF_ElementByIdOrNameFromWindow() throws Exception {
+        final String content = "<html>\n"
+            + "<head><title>test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(form1Id.name);\n"
+            + "    alert(form2Id.name);\n"
+            + "    alert(myDiv.tagName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'>\n"
+            + "<form name='form1' id='form1Id'></form>\n"
+            + "</div>\n"
+            + "<form name='form2' id='form2Id'></form>\n"
+            + "<input type='text' name='input1' id='input1Id' value='1'/>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = {"form1", "form2", "DIV"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+    
     /**
      * Test that Window.execScript method gets called correctly.
      * @throws Exception if the test fails

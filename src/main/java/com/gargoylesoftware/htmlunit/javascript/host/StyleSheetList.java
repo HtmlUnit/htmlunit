@@ -41,6 +41,7 @@ import java.io.StringReader;
 import java.util.WeakHashMap;
 
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
 import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -117,8 +118,11 @@ public class StyleSheetList extends SimpleScriptable {
         if (sheet == null) {
             if (node instanceof HtmlStyle) {
                 final HtmlStyle style = (HtmlStyle) node;
-                final String s = style.getFirstDomChild().asText();
-                sheet = new Stylesheet(new InputSource(new StringReader(s)));
+                String styleText = "";
+                if (style.getFirstChild() != null) {
+                    styleText = style.getFirstDomChild().asText();
+                }
+                sheet = new Stylesheet(element, new InputSource(new StringReader(styleText)));
             }
             else {
                 final HtmlLink link = (HtmlLink) node;
@@ -129,7 +133,7 @@ public class StyleSheetList extends SimpleScriptable {
                     final String content =
                         htmlPage.getWebClient().loadWebResponse(webRequestSettings).getContentAsString();
                     final InputSource source = new InputSource(new StringReader(content));
-                    sheet = new Stylesheet(source);
+                    sheet = new Stylesheet(element, source);
                 }
                 catch (final Exception e) {
                     throw Context.reportRuntimeError("Exception: " + e);
@@ -140,4 +144,14 @@ public class StyleSheetList extends SimpleScriptable {
         return sheet;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        if (this == start) {
+            return jsxFunction_item(index);
+        }
+        return super.get(index, start);
+    }
 }

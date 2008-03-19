@@ -316,12 +316,17 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         // See if there is an element in the element array with the specified id.
         for (final Object next : elements) {
-            if (next instanceof HtmlElement) {
-                final HtmlElement element = (HtmlElement) next;
-                final String id = element.getId();
+            if (next instanceof HtmlElement || next instanceof XmlElement) {
+                final String id;
+                if (next instanceof HtmlElement) {
+                    id = ((HtmlElement) next).getId();
+                }
+                else {
+                    id = ((XmlElement) next).getAttributeValue("id");
+                }
                 if (id != null && id.equals(name)) {
-                    getLog().debug("Property \"" + name + "\" evaluated (by id) to " + element);
-                    return getScriptableFor(element);
+                    getLog().debug("Property \"" + name + "\" evaluated (by id) to " + next);
+                    return getScriptableFor(next);
                 }
             }
             else if (next instanceof WebWindow) {
@@ -333,7 +338,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 }
             }
             else {
-                getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
+                getLog().warn("Unrecognized type in collection: " + next + " (" + next.getClass().getName() + ")");
             }
         }
 

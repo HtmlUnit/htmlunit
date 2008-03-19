@@ -85,21 +85,27 @@ public class Stylesheet extends SimpleScriptable {
 
     /** The parsed stylesheet which this host object wraps (initialized lazily). */
     private CSSStyleSheet wrapped_;
+    private final HTMLElement ownerNode_;
 
     /**
      * Creates a new empty stylesheet.
      */
     public Stylesheet() {
-        this(null);
+        source_ = null;
+        ownerNode_ = null;
     }
 
     /**
      * Creates a new stylesheet representing the CSS stylesheet at the specified input source.
+     * @param element the owning node
      *
      * @param source the input source which contains the CSS stylesheet which this stylesheet host object represents
      */
-    public Stylesheet(final InputSource source) {
+    public Stylesheet(final HTMLElement element, final InputSource source) {
         source_ = source;
+        ownerNode_ = element;
+        setParentScope(element.getWindow());
+        setPrototype(getPrototype(Stylesheet.class));
     }
 
     /**
@@ -341,4 +347,38 @@ public class Stylesheet extends SimpleScriptable {
         }
     }
 
+    /**
+     * For Firefox.
+     * @return the owner
+     */
+    public Object jsxGet_ownerNode() {
+        return ownerNode_;
+    }
+
+    /**
+     * For Internet Explorer.
+     * @return the owner
+     */
+    public Object jsxGet_owningElement() {
+        return ownerNode_;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public Object getDefaultValue(final Class hint) {
+        if (String.class.equals(hint) || hint == null) {
+            if (getBrowserVersion().isIE()) {
+                return "[object]"; // the super helpful IE solution
+            }
+            else {
+                return "[object CSSStyleSheet]";
+            }
+        }
+        else {
+            return super.getDefaultValue(hint);
+        }
+    }
 }

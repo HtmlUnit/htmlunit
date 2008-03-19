@@ -369,7 +369,7 @@ public class SimpleScriptable extends ScriptableObject {
      * @return The window associated with this object.
      * @throws RuntimeException If the window cannot be found, which should never occur.
      */
-    protected Window getWindow() throws RuntimeException {
+    public Window getWindow() throws RuntimeException {
         return getWindow(this);
     }
 

@@ -45,7 +45,6 @@ import java.util.Map;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
@@ -314,10 +313,15 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public String getAttribute(final String name) {
-        return StringUtils.defaultString(attributes_.get(name).getValue());
+        final XmlAttr attr = attributes_.get(name);
+        if (attr != null) {
+            return attr.getValue();
+        }
+        else {
+            return "";
+        }
     }
 
     /**
