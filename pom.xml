@@ -400,8 +400,8 @@
         </dependency>
         <dependency>
             <groupId>nekohtml</groupId>
-            <artifactId>nekohtml-hu</artifactId>
-            <version>1.9.6.2</version>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.6.1</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
