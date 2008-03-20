@@ -78,7 +78,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Ahmed Ashour
  * @author Philip Graf
  */
-public class HtmlForm extends ClickableElement {
+public class HtmlForm extends StyledElement {
 
     private static final long serialVersionUID = 5338964478788825866L;
 
