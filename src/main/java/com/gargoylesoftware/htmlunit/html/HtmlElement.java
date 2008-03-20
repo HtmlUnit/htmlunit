@@ -748,6 +748,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Simulates typing the specified text while this element has focus.
+     * Note that for some elements, typing '\n' submits the enclosed form.
      * @param text the text you with to simulate typing
      * @exception IOException If an IO error occurs
      */
@@ -759,6 +760,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Simulates typing the specified text while this element has focus.
+     * Note that for some elements, typing '\n' submits the enclosed form.
      * @param text the text you with to simulate typing
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
@@ -774,6 +776,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Simulates typing the specified character while this element has focus.
+     * Note that for some elements, typing '\n' submits the enclosed form.
      * @param c the character you with to simulate typing
      * @return The page that occupies this window after typing.
      * It may be the same window or it may be a freshly loaded one.
