@@ -7,9 +7,6 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
-            <action type="update" dev="asashour">
-                INCOMPATIBLE CHANGE: HtmlForm should not be ClickableElement.
-            </action>
             <action type="update" dev="mguillem">
                 JavaScript: CSSStyleSheet added support for ownerNode (FF) and owningElement (IE).
             </action>

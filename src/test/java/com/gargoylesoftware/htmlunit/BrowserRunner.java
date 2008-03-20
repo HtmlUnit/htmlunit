@@ -395,22 +395,22 @@ public class BrowserRunner extends CompositeRunner {
     public BrowserRunner(final Class< ? extends WebTestCase> klass) throws Exception {
         super(klass.getName());
         assertTrue("Test case must extend WebTestCase", WebTestCase.class.isAssignableFrom(klass));
-        final TestClassRunnerForBrowserVersion ie6Runnder =
+        final TestClassRunnerForBrowserVersion ie6Runner =
             new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_6_0);
-        final TestClassRunnerForBrowserVersion ie7Runnder =
+        final TestClassRunnerForBrowserVersion ie7Runner =
             new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0);
-        final TestClassRunnerForBrowserVersion ff2Runnder =
+        final TestClassRunnerForBrowserVersion ff2Runner =
             new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2);
-        final TestClassRunnerForNoBrowser noBrowserRunnder = new TestClassRunnerForNoBrowser(klass);
+        final TestClassRunnerForNoBrowser noBrowserRunner = new TestClassRunnerForNoBrowser(klass);
 
         //If a browser runner is not empty, add all browser runners
-        if (!ie6Runnder.isEmpty()) {
-            add(ie6Runnder);
-            add(ie7Runnder);
-            add(ff2Runnder);
+        if (!ie6Runner.isEmpty()) {
+            add(ie6Runner);
+            add(ie7Runner);
+            add(ff2Runner);
         }
-        if (!noBrowserRunnder.isEmpty()) {
-            add(noBrowserRunnder);
+        if (!noBrowserRunner.isEmpty()) {
+            add(noBrowserRunner);
         }
     }
 
