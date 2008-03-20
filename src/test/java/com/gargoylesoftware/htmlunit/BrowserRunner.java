@@ -84,13 +84,13 @@ public class BrowserRunner extends CompositeRunner {
      * Browser.
      */
     public enum Browser {
-        /** Internet Explorer 6.*/
+        /** Internet Explorer 6. */
         INTERNET_EXPLORER_6,
         
-        /** Internet Explorer 7.*/
+        /** Internet Explorer 7. */
         INTERNET_EXPLORER_7,
 
-        /** Firefox 2.*/
+        /** Firefox 2. */
         FIREFOX_2,
 
         /** Not Browser-specific, it will run only once. Don't use this with other Browsers. */
@@ -162,6 +162,10 @@ public class BrowserRunner extends CompositeRunner {
             final BrowserVersion browserVersion) throws InitializationError {
             super(klass);
             this.browserVersion_ = browserVersion;
+        }
+
+        public boolean isEmpty() {
+            return getTestMethods().isEmpty();
         }
 
         @Override
@@ -331,6 +335,10 @@ public class BrowserRunner extends CompositeRunner {
             super(klass);
         }
 
+        public boolean isEmpty() {
+            return getTestMethods().isEmpty();
+        }
+
         @Override
         protected void invokeTestMethod(final Method method, final RunNotifier notifier) {
             final Description description = methodDescription(method);
@@ -387,10 +395,22 @@ public class BrowserRunner extends CompositeRunner {
     public BrowserRunner(final Class< ? extends WebTestCase> klass) throws Exception {
         super(klass.getName());
         assertTrue("Test case must extend WebTestCase", WebTestCase.class.isAssignableFrom(klass));
-        add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_6_0));
-        add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0));
-        add(new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2));
-        add(new TestClassRunnerForNoBrowser(klass));
+        final TestClassRunnerForBrowserVersion ie6Runnder =
+            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_6_0);
+        final TestClassRunnerForBrowserVersion ie7Runnder =
+            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.INTERNET_EXPLORER_7_0);
+        final TestClassRunnerForBrowserVersion ff2Runnder =
+            new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2);
+        final TestClassRunnerForNoBrowser noBrowserRunnder = new TestClassRunnerForNoBrowser(klass);
+
+        if (!ie6Runnder.isEmpty() || !ie7Runnder.isEmpty() || !ff2Runnder.isEmpty()) {
+            add(ie6Runnder);
+            add(ie7Runnder);
+            add(ff2Runnder);
+        }
+        if (!noBrowserRunnder.isEmpty()) {
+            add(noBrowserRunnder);
+        }
     }
 
 }
