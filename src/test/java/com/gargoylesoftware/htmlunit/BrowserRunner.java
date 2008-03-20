@@ -403,7 +403,8 @@ public class BrowserRunner extends CompositeRunner {
             new TestClassRunnerForBrowserVersion(klass, BrowserVersion.FIREFOX_2);
         final TestClassRunnerForNoBrowser noBrowserRunnder = new TestClassRunnerForNoBrowser(klass);
 
-        if (!ie6Runnder.isEmpty() || !ie7Runnder.isEmpty() || !ff2Runnder.isEmpty()) {
+        //If a browser runner is not empty, add all browser runners
+        if (!ie6Runnder.isEmpty()) {
             add(ie6Runnder);
             add(ie7Runnder);
             add(ff2Runnder);
