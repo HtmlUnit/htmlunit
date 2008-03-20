@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public class EventNode extends Node {
 
@@ -119,6 +120,38 @@ public class EventNode extends Node {
      */
     public Object jsxGet_onfocus() {
         return getEventHandlerProp("onfocus");
+    }
+
+    /**
+     * Sets the onfocusin event handler for this element.
+     * @param handler the new handler
+     */
+    public void jsxSet_onfocusin(final Object handler) {
+        setEventHandlerProp("onfocusin", handler);
+    }
+
+    /**
+     * Gets the onfocusin event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Object jsxGet_onfocusin() {
+        return getEventHandlerProp("onfocusin");
+    }
+
+    /**
+     * Sets the onfocusout event handler for this element.
+     * @param handler the new handler
+     */
+    public void jsxSet_onfocusout(final Object handler) {
+        setEventHandlerProp("onfocusout", handler);
+    }
+
+    /**
+     * Gets the onfocusout event handler for this element.
+     * @return <code>org.mozilla.javascript.Function</code>
+     */
+    public Object jsxGet_onfocusout() {
+        return getEventHandlerProp("onfocusout");
     }
 
     /**

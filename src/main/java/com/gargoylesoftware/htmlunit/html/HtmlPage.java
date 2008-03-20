@@ -1783,10 +1783,19 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
 
         if (elementWithFocus_ != null) {
-            elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+            elementWithFocus_.fireEvent(Event.TYPE_FOCUS_OUT);
         }
 
+        if (newElement != null) {
+            newElement.fireEvent(Event.TYPE_FOCUS_IN);
+        }
+
+        if (elementWithFocus_ != null) {
+            elementWithFocus_.fireEvent(Event.TYPE_BLUR);
+        }
+        
         elementWithFocus_ = newElement;
+
         if (newElement != null) {
             newElement.fireEvent(Event.TYPE_FOCUS);
         }

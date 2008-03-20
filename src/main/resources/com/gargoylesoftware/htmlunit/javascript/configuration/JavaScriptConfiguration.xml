@@ -817,6 +817,12 @@
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>
         </property>
+        <property name="onfocusin" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+        <property name="onfocusout" readable="true" writable="true">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
         <property name="onkeydown" readable="true" writable="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
             <browser name="Firefox"/>

@@ -84,6 +84,12 @@ public class Event extends SimpleScriptable {
     /** The focus event type, triggered by "onfocus" event handlers. */
     public static final String TYPE_FOCUS = "focus";
 
+    /** The focus in event type, triggered by "onfocusin" event handlers. */
+    public static final String TYPE_FOCUS_IN = "focusin";
+
+    /** The focus in event type, triggered by "onfocusout" event handlers. */
+    public static final String TYPE_FOCUS_OUT = "focusout";
+
     /** The blur event type, triggered by "onblur" event handlers. */
     public static final String TYPE_BLUR = "blur";
 

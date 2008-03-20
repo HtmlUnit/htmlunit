@@ -41,8 +41,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for elements with onblur and onfocus attributes.
@@ -50,7 +54,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author David D. Kilzer
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class FocusableElementTest extends WebTestCase {
 
     private static final String COMMON_ID = " id='focusId'";
@@ -67,7 +73,7 @@ public class FocusableElementTest extends WebTestCase {
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         final HtmlElement element = page.getHtmlElementById("focusId");
 
         element.focus();
@@ -204,7 +210,7 @@ public class FocusableElementTest extends WebTestCase {
             + "<a href='foo'>this page again</a>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         page.getAnchors().get(0).click();
     }
 
@@ -213,7 +219,62 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE)
     public void testOnAllElements() throws Exception {
         testHTMLFile("FocusableElementTest_onAllElements.html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void focusin() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function handler(_e) {\n"
+            + "    var e = _e ? _e : window.event;\n"
+            + "    var textarea = document.getElementById('myTextarea');\n"
+            + "    textarea.value += e.type + ' ' + (e.target ? e.target : e.srcElement).id + ',';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.getElementById('select1').onfocus = handler;\n"
+            + "    document.getElementById('select1').onfocusin = handler;\n"
+            + "    document.getElementById('select1').onfocusout = handler;\n"
+            + "    document.getElementById('select1').onblur = handler;\n"
+            + "    document.getElementById('select2').onfocus = handler;\n"
+            + "    document.getElementById('select2').onfocusin = handler;\n"
+            + "    document.getElementById('select2').onfocusout = handler;\n"
+            + "    document.getElementById('select2').onblur = handler;\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='select1'>\n"
+            + "    <option>Austria</option><option>Belgium</option><option>Bulgaria</option>\n"
+            + "  </select>\n"
+            + "  <select id='select2'>\n"
+            + "    <option>Austria</option><option>Belgium</option><option>Bulgaria</option>\n"
+            + "  </select>\n"
+            + "  <textarea id='myTextarea' cols='80' rows='20'></textarea>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlSelect select1 = (HtmlSelect) page.getElementById("select1");
+        final HtmlSelect select2 = (HtmlSelect) page.getElementById("select2");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getElementById("myTextarea");
+        page.moveFocusToElement(select1);
+        page.moveFocusToElement(select2);
+        page.moveFocusToElement(select1);
+        final String expectedString;
+        if (getBrowserVersion().isIE()) {
+            expectedString = "focusin select1,focus select1,focusout select1,focusin select2,blur select1,"
+                + "focus select2,focusout select2,focusin select1,blur select2,focus select1,";
+        }
+        else {
+            expectedString = "focus select1,blur select1,focus select2,blur select2,focus select1,";
+        }
+        assertEquals(expectedString, textArea.getText());
     }
 }

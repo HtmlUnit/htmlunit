@@ -270,10 +270,11 @@ public class BrowserRunner extends CompositeRunner {
         @Override
         protected List<Method> getTestMethods() {
             final List<Method> methods = super.getTestMethods();
-            for (final Method method : methods) {
+            for (int i = 0; i < methods.size(); i++) {
+                final Method method = methods.get(i);
                 final Browsers browsers = method.getAnnotation(Browsers.class);
                 if (browsers != null && browsers.value()[0] == Browser.NONE) {
-                    methods.remove(method);
+                    methods.remove(i--);
                 }
             }
             return methods;
@@ -378,8 +379,7 @@ public class BrowserRunner extends CompositeRunner {
                 final Method method = methods.get(i);
                 final Browsers browsers = method.getAnnotation(Browsers.class);
                 if (browsers == null || browsers.value()[0] != Browser.NONE) {
-                    methods.remove(method);
-                    i--;
+                    methods.remove(i--);
                 }
             }
             return methods;
