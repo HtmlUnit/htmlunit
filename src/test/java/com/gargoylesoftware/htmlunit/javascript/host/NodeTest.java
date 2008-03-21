@@ -231,7 +231,7 @@ public class NodeTest extends WebTestCase {
     public void test_getChildNodes() throws Exception {
         final String content = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
-            + "function doTest() {"
+            + "function doTest() {\n"
             + "var aNode = document.getElementById('myNode');\n"
             + "alert(aNode.childNodes.length);\n"
             + "alert(aNode.childNodes[0].nodeName);\n"
@@ -289,15 +289,15 @@ public class NodeTest extends WebTestCase {
     public void test_getChildNodesProperties() throws Exception {
         final String content = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
-            + "function doTest() {"
+            + "function doTest() {\n"
             + "    var testForm = document.getElementById('testForm');\n"
             + "    var childNodes = testForm.childNodes;\n"
             + "    var length = childNodes.length;\n"
             + "    alert('length: ' + length);\n"
-            + "    for (var i=0; i < length; i++) {"
+            + "    for (var i=0; i < length; i++) {\n"
             + "        var tempNode = childNodes.item(i);\n"
             + "        alert('tempNode.name: ' + tempNode.name);\n"
-            + "    }"
+            + "    }\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
@@ -355,7 +355,7 @@ public class NodeTest extends WebTestCase {
     void test_insertBefore(final BrowserVersion browserVersion, final String insertJSLine) throws Exception {
         final String content = "<html><head><title>test_insertBefore</title>\n"
             + "<script>\n"
-            + "function doTest() {"
+            + "function doTest() {\n"
             + "var nodeToInsert = document.getElementById('nodeToInsert');\n"
             + "var aNode = document.getElementById('myNode');\n"
             + insertJSLine

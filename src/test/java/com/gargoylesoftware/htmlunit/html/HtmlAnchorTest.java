@@ -309,9 +309,9 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testClick_javascriptUrl_InvalidReturn_RegressionTest() throws Exception {
         final String htmlContent
             = "<html><head><SCRIPT lang=\"JavaScript\">\n"
-            + "function doSubmit(formName){"
+            + "function doSubmit(formName) {\n"
             + "    return false;\n"
-            + "}"
+            + "}\n"
             + "</SCRIPT></head><body>\n"
             + "<form name='formName' method='POST' action='../foo'>\n"
             + "<a href='.' id='testJavascript' name='testJavascript'"

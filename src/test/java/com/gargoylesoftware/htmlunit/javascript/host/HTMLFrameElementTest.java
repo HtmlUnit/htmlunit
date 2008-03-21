@@ -289,7 +289,7 @@ public class HTMLFrameElementTest extends WebTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + "  function handler() {}"
+            + "  function handler() {}\n"
             + "  function test() {\n"
             + "    var iframe = document.getElementById('myFrame');\n"
             + "    iframe.onload = handler;\n"

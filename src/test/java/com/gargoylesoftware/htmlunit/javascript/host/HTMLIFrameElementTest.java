@@ -292,7 +292,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             = "<html><head><title>First</title></head><script>\n"
             + "  function test() {\n"
             + "   document.getElementById('iframe1').setAttribute('src', '" + URL_SECOND + "');\n"
-            + "  }"
+            + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
             + "<iframe id='iframe1'>\n"

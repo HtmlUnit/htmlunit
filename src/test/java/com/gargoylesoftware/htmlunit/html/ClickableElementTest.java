@@ -905,8 +905,8 @@ public class ClickableElementTest extends WebTestCase {
     public void testTableRow_onClickSetOnLoad() throws Exception {
         onClickPageTest("<html><head>\n"
                         + "<script language='JavaScript'>\n"
-                        + "function doFoo() { alert('foo');        }"
-                        + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}"
+                        + "function doFoo() { alert('foo');        }\n"
+                        + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}\n"
                         + "</script>\n"
                         + "</head><body onload=\"doOnload();\">\n"
                         + "<table><tbody><tr id='clickId'><td>cell value</td></tr></tbody></table>\n"
@@ -920,8 +920,8 @@ public class ClickableElementTest extends WebTestCase {
     public void testCheckbox_onClickUpdatesStateFirst() throws Exception {
         onClickPageTest("<html><head>\n"
                         + "<script language='JavaScript'>\n"
-                        + "function doFoo(event) { if (this.checked) alert('foo'); else alert('bar'); }"
-                        + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}"
+                        + "function doFoo(event) { if (this.checked) alert('foo'); else alert('bar'); }\n"
+                        + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}\n"
                         + "</script>\n"
                         + "</head><body onload=\"doOnload();\">\n"
                         + "<input type='checkbox' id='clickId'>\n"
@@ -937,7 +937,7 @@ public class ClickableElementTest extends WebTestCase {
     public void testTableRow_onClickSetByNestedScript() throws Exception {
         onClickBodyTest("<body><table><tbody><tr id='clickId'><td>cell value</td></tr></tbody></table>\n"
                         + "<script language='JavaScript'>\n"
-                                + "function doFoo(event) { alert('foo');        }"
+                                + "function doFoo(event) { alert('foo'); }\n"
                                 + "document.getElementById('clickId').onclick = doFoo;</script></body>\n");
     }
 

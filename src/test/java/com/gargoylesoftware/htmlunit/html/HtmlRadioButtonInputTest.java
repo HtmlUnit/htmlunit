@@ -135,11 +135,11 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<script type='text/javascript'>\n"
-            + "    function itemOnClickHandler() {"
+            + "    function itemOnClickHandler() {\n"
             + "        var oneItem = document.getElementById('oneItem');\n"
             + "        var twoItems = document.getElementById('twoItems');\n"
             + "        alert('oneItem.checked: ' + oneItem.checked + ' twoItems.checked: ' + twoItems.checked);\n"
-            + "    }"
+            + "    }\n"
             + "</script>\n"
             + "<form name='testForm'>\n"
             + "Number of items:"

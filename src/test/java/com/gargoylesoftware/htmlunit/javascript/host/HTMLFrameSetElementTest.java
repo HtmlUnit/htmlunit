@@ -97,7 +97,7 @@ public class HTMLFrameSetElementTest extends WebTestCase {
         final String frameContent =
             "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
-            + "function doTest() {"
+            + "function doTest() {\n"
             + "    alert(parent.document.getElementById('fs').rows);\n"
             + "    parent.document.getElementById('fs').rows = '*,*';\n"
             + "    alert(parent.document.getElementById('fs').rows);\n"
