@@ -325,4 +325,49 @@ public class XMLElementTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByTagNameNS() throws Exception {
+        getElementsByTagNameNS(BrowserVersion.FIREFOX_2, new String[] {"1"});
+        try {
+            getElementsByTagNameNS(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"1"});
+            fail("'getElementsByTagNameNS' is not supported in IE.");
+        }
+        catch (final Exception e) {
+            //expected
+        }
+    }
+    private void getElementsByTagNameNS(final BrowserVersion browserVersion, final String[] expectedAlerts)
+        throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += '  <html>\\n';\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async=false;\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "    alert(doc.documentElement.getElementsByTagNameNS('http://myNS', 'template').length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(browserVersion, html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

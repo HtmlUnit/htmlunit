@@ -2080,6 +2080,9 @@
         <function name="getAttribute"/>
         <function name="getAttributeNode"/>
         <function name="getElementsByTagName"/>
+        <function name="getElementsByTagNameNS">
+            <browser name="Firefox"/>
+        </function>
         <function name="selectNodes">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
                     descr="MSDN documentation"/>

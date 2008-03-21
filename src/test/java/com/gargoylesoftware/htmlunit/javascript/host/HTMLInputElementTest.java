@@ -717,7 +717,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "<input type='text' id='text1' maxlength='30'/>\n"
             + "</form></body></html>";
     
-        final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30", 
+        final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30",
             "40", "50", "string", "number"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
     

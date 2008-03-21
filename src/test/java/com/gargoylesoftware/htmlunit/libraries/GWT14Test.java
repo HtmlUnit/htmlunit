@@ -285,7 +285,6 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     @Test
-    @NotYetImplemented(Browser.FIREFOX_2)
     public void simpleXML() throws Exception {
         final HtmlPage page = loadGWTPage("SimpleXML", null);
 

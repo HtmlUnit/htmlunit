@@ -262,4 +262,28 @@ public final class XmlUtil {
         }
         return uri;
     }
+
+    /**
+     * Search for the prefix associated with specified namespace URI.
+     * @param element The element to start searching from.
+     * @param namespace The namespace prefix.
+     * @return the prefix bound to the namespace URI; or null if there is no such namespace.
+     */
+    public static String lookupPrefix(final XmlElement element, final String namespace) {
+        final Map<String, XmlAttr> attributes = element.getAttributesMap();
+        for (final String name : attributes.keySet()) {
+            if (name.startsWith("xmlns:") && attributes.get(name).getValue().equals(namespace)) {
+                return name.substring(6);
+            }
+        }
+        for (final DomNode child : element.getChildren()) {
+            if (child instanceof XmlElement) {
+                final String prefix = lookupPrefix((XmlElement) child, namespace);
+                if (prefix != null) {
+                    return prefix;
+                }
+            }
+        }
+        return null;
+    }
 }

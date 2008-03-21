@@ -48,6 +48,7 @@ import org.mozilla.javascript.ScriptableObject;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
+import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A JavaScript object for {@link XmlElement}.
@@ -212,5 +213,27 @@ public class XMLElement extends Node {
                 default:
             }
         }
+    }
+    
+    /**
+     * Returns a list of elements with the given tag name belonging to the given namespace.
+     * @param namespaceURI the namespace URI of elements to look for.
+     * @param localName is either the local name of elements to look for or the special value "*",
+     *                  which matches all elements.
+     * @return a live NodeList of found elements in the order they appear in the tree.
+     */
+    public Object jsxFunction_getElementsByTagNameNS(final String namespaceURI, final String localName) {
+        final DomNode domNode = getDomNodeOrDie();
+        final HTMLCollection collection = new HTMLCollection(this);
+        final String xpath;
+        if (namespaceURI.equals("*")) {
+            xpath = ".//" + localName;
+        }
+        else {
+            final String prefix = XmlUtil.lookupPrefix((XmlElement) domNode, namespaceURI);
+            xpath = ".//" + prefix + ':' + localName;
+        }
+        collection.init(domNode, xpath);
+        return collection;
     }
 }
