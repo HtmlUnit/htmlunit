@@ -63,8 +63,6 @@ import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -404,7 +402,6 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     @Test
-    @NotYetImplemented(Browser.FIREFOX_2)
     public void kitchenSink() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/KitchenSink");
         final WebClient client = getWebClient();
@@ -417,10 +414,12 @@ public class GWT14Test extends WebTestCase {
         assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
         final Page page2 = page.getAnchorByHref("#Widgets").click();
+        page.getEnclosingWindow().getThreadManager().joinAll(3000);
         assertSame(page, page2);
         assertEquals("Basic Widgets", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
         final Page page3 = page.getAnchorByHref("#Panels").click();
+        page.getEnclosingWindow().getThreadManager().joinAll(3000);
         assertSame(page, page3);
         assertEquals("Panels", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
     }
