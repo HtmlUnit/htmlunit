@@ -100,9 +100,7 @@ public class HTMLInputElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = {
-            "foo", "text", "textfield1", "form1", "cat"
-        };
+        final String[] expectedAlerts = {"foo", "text", "textfield1", "form1", "cat"};
 
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -176,7 +174,7 @@ public class HTMLInputElementTest extends WebTestCase {
     public void testCheckedAttribute_Checkbox() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "function test() {"
+            + "function test() {\n"
             + "    alert(document.form1.checkbox1.checked)\n"
             + "    document.form1.checkbox1.checked=true\n"
             + "    alert(document.form1.checkbox1.checked)\n"
@@ -207,7 +205,7 @@ public class HTMLInputElementTest extends WebTestCase {
     public void testCheckedAttribute_Radio() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "function test() {"
+            + "function test() {\n"
             + "    alert(document.form1.radio1[0].checked)\n"
             + "    alert(document.form1.radio1[1].checked)\n"
             + "    alert(document.form1.radio1[2].checked)\n"
@@ -251,7 +249,7 @@ public class HTMLInputElementTest extends WebTestCase {
     public void testDisabledAttribute() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
-            + "function test() {"
+            + "function test() {\n"
             + "    alert(document.form1.button1.disabled)\n"
             + "    alert(document.form1.button2.disabled)\n"
             + "    alert(document.form1.button3.disabled)\n"
@@ -719,12 +717,33 @@ public class HTMLInputElementTest extends WebTestCase {
             + "<input type='text' id='text1' maxlength='30'/>\n"
             + "</form></body></html>";
     
-        final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30",
+        final String[] expectedAlerts = {"undefined", "30", "undefined", "30", "30", "30", 
             "40", "50", "string", "number"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
     
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setSelectionRange() throws Exception {
+        final String content
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    input.setSelectionRange(2, 7);\n"
+            + "    alert('hello');"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<input id='myInput' value='some test'>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, null);
+        final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
+        assertEquals("me te", input.getSelectedText());
     }
 }

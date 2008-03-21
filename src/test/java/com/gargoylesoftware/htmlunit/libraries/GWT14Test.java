@@ -108,7 +108,6 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     @Test
-    @NotYetImplemented(Browser.FIREFOX_2)
     public void i18n() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -143,7 +142,6 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If an error occurs.
      */
     @Test
-    @NotYetImplemented(Browser.FIREFOX_2)
     public void i18n_fr() throws Exception {
         final Locale locale = Locale.getDefault();
         Locale.setDefault(Locale.US);

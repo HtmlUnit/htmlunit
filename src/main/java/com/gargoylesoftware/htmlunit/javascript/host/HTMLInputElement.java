@@ -268,4 +268,14 @@ public class HTMLInputElement extends FormField {
     public void jsxSet_maxLength(final int length) {
         getHtmlElementOrDie().setAttribute("maxLength", String.valueOf(length));
     }
+    
+    /**
+     * Sets the selected portion of this input element.
+     * @param start the index of the first character to select.
+     * @param end the index of the character after the selection.
+     */
+    public void jsxFunction_setSelectionRange(final int start, final int end) {
+        jsxSet_selectionStart(start);
+        jsxSet_selectionEnd(end);
+    }
 }
