@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -305,7 +306,6 @@ public class HtmlSelectTest extends WebTestCase {
 
     /**
      * Tests changing the selected option.
-     * @deprecated Mark test as deprecated to avoid compiler warnings as this tests deprecated methods
      * @exception Exception If the test fails
      */
     @Test
@@ -683,4 +683,25 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         assertEquals(-1, page.asXml().indexOf("size"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void select_focus() throws Exception {
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'><select name='select1' id='select1' multiple>\n"
+            + "<option value='option1'>Option1</option>\n"
+            + "<option value='option2'>Option2</option>\n"
+            + "<option value='option3'>Option3</option>\n"
+            + "</select>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("select1");
+        assertNull(page.getElementWithFocus());
+        select.getOption(0).setSelected(true);
+        assertSame(select, page.getElementWithFocus());
+    }
+
 }

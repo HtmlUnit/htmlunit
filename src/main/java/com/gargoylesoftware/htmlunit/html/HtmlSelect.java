@@ -289,6 +289,10 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
+        if (isSelected) {
+            getPage().moveFocusToElement(this);
+        }
+        
         final boolean triggerHandler  = (selectedOption.isSelected() != isSelected);
 
         // caution the HtmlOption may have been created from js and therefore the select now need
