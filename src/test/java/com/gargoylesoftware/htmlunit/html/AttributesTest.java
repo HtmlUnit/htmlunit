@@ -114,9 +114,8 @@ public class AttributesTest extends TestCase {
             "HtmlTableRow", "HtmlTextArea", "HtmlDirectory", "HtmlTextInput",
             "HtmlTitle", "HtmlUnorderedList"
         };
-        for (int i = 0; i < classesToTest.length; i++) {
-            final Class< ? > clazz = Class.forName(
-                "com.gargoylesoftware.htmlunit.html." + classesToTest[i]);
+        for (final String testClass : classesToTest) {
+            final Class< ? > clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
             addTestsForClass(clazz, page, suite);
         }
         return suite;
@@ -139,8 +138,8 @@ public class AttributesTest extends TestCase {
             Exception {
 
         final Method[] methods = clazz.getMethods();
-        for (int i = 0; i < methods.length; i++) {
-            final String methodName = methods[i].getName();
+        for (final Method method : methods) {
+            final String methodName = method.getName();
             if (methodName.startsWith("get")
                 && methodName.endsWith("Attribute")
                 && !EXCLUDED_METHODS.contains(methodName)) {
@@ -167,7 +166,7 @@ public class AttributesTest extends TestCase {
                 else if (attributeName.equals("htmlfor")) {
                     attributeName = "for";
                 }
-                suite.addTest(new AttributesTest(attributeName, clazz, methods[i], page));
+                suite.addTest(new AttributesTest(attributeName, clazz, method, page));
             }
         }
     }

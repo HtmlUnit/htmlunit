@@ -504,8 +504,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             final Method[] methods = clazz.getMethods();
             String elementName;
             Method theMethod;
-            for (int i = 0; i < methods.length; i++) {
-                final String name = methods[i].getName();
+            for (final Method method : methods) {
+                final String name = method.getName();
                 if (checkForIgnore(name, classname)) {
                     continue;
                 }
@@ -548,8 +548,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             "Password|jsxGet_form",
             "CharacterDataImpl|jsxGet_tabindex"};
         final String key = classname + "|" + methodName;
-        for (int i = 0; i < ignoreList.length; i++) {
-            if (ignoreList[i].equals(key)) {
+        for (final String value : ignoreList) {
+            if (value.equals(key)) {
                 return true;
             }
         }

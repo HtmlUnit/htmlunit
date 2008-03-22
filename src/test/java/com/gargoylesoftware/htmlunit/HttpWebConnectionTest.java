@@ -318,8 +318,8 @@ public class HttpWebConnectionTest {
         context.setResourceBase(resouceBase);
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
-            for (int i = 0; i < classpath.length; i++) {
-                loader.addClassPath(classpath[i]);
+            for (final String path : classpath) {
+                loader.addClassPath(path);
             }
         }
         context.setClassLoader(loader);
@@ -355,8 +355,8 @@ public class HttpWebConnectionTest {
         }
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
-            for (int i = 0; i < classpath.length; i++) {
-                loader.addClassPath(classpath[i]);
+            for (final String path : classpath) {
+                loader.addClassPath(path);
             }
         }
         context.setClassLoader(loader);

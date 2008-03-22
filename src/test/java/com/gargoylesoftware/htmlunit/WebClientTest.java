@@ -1560,8 +1560,7 @@ public class WebClientTest extends WebTestCase {
      */
     private static String hexRepresentation(final byte[] digest) {
         final StringBuilder hexString = new StringBuilder();
-        for (int i = 0; i < digest.length; i++) {
-            final byte b = digest[i];
+        for (final byte b : digest) {
             hexString.append(Integer.toHexString(0xFF & b));
             hexString.append(" ");
         }

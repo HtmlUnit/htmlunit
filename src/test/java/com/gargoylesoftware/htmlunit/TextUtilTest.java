@@ -101,9 +101,9 @@ public final class TextUtilTest extends WebTestCase {
             {"foo:bar", "FOO"},
         };
 
-        for (int i = 0; i < data.length; i++) {
-            final String stringToCheck = data[i][0];
-            final String prefix = data[i][1];
+        for (final String[] entry : data) {
+            final String stringToCheck = entry[0];
+            final String prefix = entry[1];
 
             Assert.assertTrue(
                 "stringToCheck=[" + stringToCheck + "] prefix=[" + prefix + "]",
@@ -122,9 +122,9 @@ public final class TextUtilTest extends WebTestCase {
             {"fo", "foo"},
         };
 
-        for (int i = 0; i < data.length; i++) {
-            final String stringToCheck = data[i][0];
-            final String prefix = data[i][1];
+        for (final String[] entry : data) {
+            final String stringToCheck = entry[0];
+            final String prefix = entry[1];
 
             Assert.assertFalse(
                 "stringToCheck=[" + stringToCheck + "] prefix=[" + prefix + "]",
@@ -158,9 +158,9 @@ public final class TextUtilTest extends WebTestCase {
         };
         final String encoding = "ISO-8859-1";
 
-        for (int i = 0; i < data.length; i++) {
-            final String input = data[i][0];
-            final String expectedResult = data[i][1];
+        for (final String[] entry : data) {
+            final String input = entry[0];
+            final String expectedResult = entry[1];
 
             final InputStream inputStream = TextUtil.toInputStream(input, encoding);
             final String actualResult
