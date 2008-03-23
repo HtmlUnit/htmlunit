@@ -52,7 +52,10 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -61,13 +64,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class CacheTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testIsDynamicContent() throws Exception {
+    @Browsers(Browser.NONE)
+    public void isDynamicContent() throws Exception {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<String, String>();
         final WebResponse response = new DummyWebResponse() {
@@ -99,7 +104,8 @@ public class CacheTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testIsJavascript() throws Exception {
+    @Browsers(Browser.NONE)
+    public void isJavascript() throws Exception {
         final Cache cache = new Cache();
 
         final String[] contentType = {""};
@@ -137,7 +143,7 @@ public class CacheTest extends WebTestCase {
      *@throws Exception if the test fails
      */
     @Test
-    public void testUsage() throws Exception {
+    public void usage() throws Exception {
         final String content = "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
             + "<script src='foo2.js' type='text/javascript'/>\n"
@@ -154,7 +160,7 @@ public class CacheTest extends WebTestCase {
         final String script1 = "alert('in foo1');";
         final String script2 = "alert('in foo2');";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final MockWebConnection connection = new MockWebConnection(webClient);
         webClient.setWebConnection(connection);
 
@@ -187,13 +193,13 @@ public class CacheTest extends WebTestCase {
      *@throws Exception if the test fails
      */
     @Test
-    public void testMaxSizeMaintained() throws Exception {
+    public void maxSizeMaintained() throws Exception {
         final String html = "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
             + "<script src='foo2.js' type='text/javascript'/>\n"
             + "</head><body>abc</body></html>";
 
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.getCache().setMaxSize(1);
 
         final MockWebConnection connection = new MockWebConnection(client);
