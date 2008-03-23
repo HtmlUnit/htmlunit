@@ -40,6 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link ImmediateRefreshHandler}.
@@ -47,6 +48,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public final class ImmediateRefreshHandlerTest extends WebTestCase {
 
     /**
@@ -55,7 +57,7 @@ public final class ImmediateRefreshHandlerTest extends WebTestCase {
      */
     @Test
     public void testRefreshSamePageAfterPost() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         client.setRefreshHandler(new ImmediateRefreshHandler());
         
         // connection will return a page with <meta ... refresh> for the first call

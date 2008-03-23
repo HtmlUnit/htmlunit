@@ -46,7 +46,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
 
 /**
- * Tests for {@link FailingHttpStatusCodeException}..
+ * Tests for {@link FailingHttpStatusCodeException}.
  *
  * @version $Revision$
  * @author Marc Guillemot

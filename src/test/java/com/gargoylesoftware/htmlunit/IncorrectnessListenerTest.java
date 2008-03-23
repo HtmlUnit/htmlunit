@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link IncorrectnessListener}.
@@ -48,6 +49,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public final class IncorrectnessListenerTest extends WebTestCase {
     /**
      * @throws Exception if the test fails
@@ -60,7 +62,7 @@ public final class IncorrectnessListenerTest extends WebTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final List<String> collectedIncorrectness = new ArrayList<String>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {

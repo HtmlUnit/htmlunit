@@ -48,6 +48,7 @@ import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -59,16 +60,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public final class ScriptExceptionTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testConstructor() throws Exception {
+    public void constructor() throws Exception {
         final String message = "bla bla";
         final Throwable t = new RuntimeException(message);
-        final HtmlPage page = loadPage("<html></html>");
+        final HtmlPage page = loadPage(getBrowserVersion(), "<html></html>", null);
         final ScriptException exception = new ScriptException(page, t);
 
         assertEquals(t, exception.getCause());
@@ -80,11 +82,11 @@ public final class ScriptExceptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetPage() throws Exception {
+    public void getPage() throws Exception {
         final String html = "<html><script>notExisting()</script></html>";
 
         try {
-            loadPage(html);
+            loadPage(getBrowserVersion(), html, null);
         }
         catch (final ScriptException e) {
             assertEquals(URL_GARGOYLE, e.getPage().getWebResponse().getUrl());
@@ -100,7 +102,7 @@ public final class ScriptExceptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testScriptStackTrace() throws Exception {
+    public void scriptStackTrace() throws Exception {
         testScriptStackTrace("ScriptExceptionTest1");
         testScriptStackTrace("ScriptExceptionTest2");
     }
@@ -111,7 +113,7 @@ public final class ScriptExceptionTest extends WebTestCase {
             // Set the default locale to US because Rhino messages are localized
             Locale.setDefault(Locale.US);
             
-            loadPage(getFileContent(baseFileName + ".html"));
+            loadPage(getBrowserVersion(), getFileContent(baseFileName + ".html"), null);
             
             Locale.setDefault(locale);
         }
@@ -137,7 +139,7 @@ public final class ScriptExceptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testErrorLineNumber() throws Exception {
+    public void errorLineNumber() throws Exception {
         testErrorLineNumber("testJsError1.html", 6);
         testErrorLineNumber("testJsError2.html", 7);
         testErrorLineNumber("testJsError3.html", 6);
@@ -145,7 +147,7 @@ public final class ScriptExceptionTest extends WebTestCase {
     }
 
     private void testErrorLineNumber(final String fileName, final int errorLine) throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final URL url = getClass().getClassLoader().getResource(fileName);
         assertNotNull(url);
         try {
