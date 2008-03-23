@@ -37,40 +37,31 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link XSLTProcessor}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class XSLTProcessorTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("97")
     public void test() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String[] expectedAlertsIE = {"241"};
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
-        final String[] expectedAlertsFF = {"226"};
-        test(BrowserVersion.FIREFOX_2, expectedAlertsFF);
-    }
-    
-    private void test(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var xmlDoc = createXmlDocument();\n"
@@ -91,7 +82,8 @@ public class XSLTProcessorTest extends WebTestCase {
             + "      var xslProc = xslt.createProcessor();\n"
             + "      xslProc.input = xmlDoc;\n"
             + "      xslProc.transform();\n"
-            + "      alert(xslProc.output.length);\n"
+            + "      var s = xslProc.output.replace(/\\r?\\n/g, '');\n"
+            + "      alert(s.length);\n"
             + "    } else {\n"
             + "      var processor = new XSLTProcessor();\n"
             + "      processor.importStylesheet(xslDoc);\n"
@@ -128,26 +120,17 @@ public class XSLTProcessorTest extends WebTestCase {
             + "  <html>\n"
             + "    <body>\n"
             + "      <h2>My CD Collection</h2>\n"
-            + "      <table border='1'>\n"
-            + "        <tr bgcolor='#9acd32'>\n"
-            + "          <th align='left'>Title</th>\n"
-            + "          <th align='left'>Artist</th>\n"
-            + "        </tr>\n"
+            + "      <ul>\n"
             + "      <xsl:for-each select=\"catalog/cd\">\n"
-            + "        <tr>\n"
-            + "          <td><xsl:value-of select='title'/></td>\n"
-            + "          <td><xsl:value-of select='artist'/></td>\n"
-            + "          </tr>\n"
+            + "        <li><xsl:value-of select='title'/> (<xsl:value-of select='artist'/>)</li>\n"
             + "      </xsl:for-each>\n"
-            + "      </table>\n"
+            + "      </ul>\n"
             + "    </body>\n"
             + "  </html>\n"
             + "  </xsl:template>\n"
             + "</xsl:stylesheet>";
         
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = new WebClient(browserVersion);
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection(client);
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
@@ -155,6 +138,5 @@ public class XSLTProcessorTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
