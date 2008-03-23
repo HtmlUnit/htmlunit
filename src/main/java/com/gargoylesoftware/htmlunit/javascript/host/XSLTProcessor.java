@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,8 +47,8 @@ import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 import org.mozilla.javascript.Context;
 import org.w3c.dom.NodeList;
@@ -109,8 +108,16 @@ public class XSLTProcessor extends SimpleScriptable {
         doc.setPrototype(getPrototype(doc.getClass()));
         doc.setParentScope(getParentScope());
 
-        final org.w3c.dom.Node transformedDoc = (org.w3c.dom.Node) transform(source);
-        final XmlPage page = new XmlPage(transformedDoc.getFirstChild(), getWindow().getWebWindow());
+        final Object transformResult = transform(source);
+        final org.w3c.dom.Node node;
+        if (transformResult instanceof org.w3c.dom.Node) {
+            final org.w3c.dom.Node transformedDoc = (org.w3c.dom.Node) transformResult;
+            node = transformedDoc.getFirstChild();
+        }
+        else {
+            node = null;
+        }
+        final XmlPage page = new XmlPage(node, getWindow().getWebWindow());
         doc.setDomNode(page);
         return doc;
     }
@@ -120,8 +127,8 @@ public class XSLTProcessor extends SimpleScriptable {
      */
     private Object transform(final Node source) {
         try {
-            Source xmlSource = new StreamSource(new StringReader(((XMLDocument) source).jsxGet_xml()));
-            final Source xsltSource = new StreamSource(new StringReader(((XMLDocument) style_).jsxGet_xml()));
+            Source xmlSource = new DOMSource(source.getDomNodeOrDie());
+            final Source xsltSource = new DOMSource(((Node) style_).getDomNodeOrDie());
 
             final org.w3c.dom.Document containerDocument =
                 DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -142,7 +149,7 @@ public class XSLTProcessor extends SimpleScriptable {
             }
             else {
                 //output is not DOM (text)
-                xmlSource = new StreamSource(new StringReader(((XMLDocument) source).jsxGet_xml()));
+                xmlSource = new DOMSource(source.getDomNodeOrDie());
                 final StringWriter writer = new StringWriter();
                 final Result streamResult = new StreamResult(writer);
                 transformer.transform(xmlSource, streamResult);
@@ -170,21 +177,20 @@ public class XSLTProcessor extends SimpleScriptable {
         rv.setParentScope(getParentScope());
         rv.setDomNode(fragment);
 
-        transform(page, source, fragment);
+        transform(source, fragment);
         return rv;
     }
 
-    private void transform(final SgmlPage page,
-            final Node source, final DomNode parent) {
+    private void transform(final Node source, final DomNode parent) {
         final Object result = transform(source);
         if (result instanceof org.w3c.dom.Node) {
             final NodeList children = (NodeList) ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                XmlUtil.appendChild(page, parent, children.item(i));
+                XmlUtil.appendChild(parent.getPage(), parent, children.item(i));
             }
         }
         else {
-            final DomText text = new DomText(page, (String) result);
+            final DomText text = new DomText(parent.getPage(), (String) result);
             parent.appendDomChild(text);
         }
     }
@@ -276,16 +282,17 @@ public class XSLTProcessor extends SimpleScriptable {
      * Starts the transformation process or resumes a previously failed transformation.
      */
     public void jsxFunction_transform() {
-        final SgmlPage page = (SgmlPage) ((Document) input_).getDomNodeOrDie();
-        if (output_ == null) {
-            final DomDocumentFragment fragment = page.createDomDocumentFragment();
-            final DocumentFragment node = new DocumentFragment();
-            node.setParentScope(getParentScope());
-            node.setPrototype(getPrototype(node.getClass()));
-            node.setDomNode(fragment);
-            output_ = (Node) fragment.getScriptObject();
-        }
-        transform(page, input_, ((Node) output_).getDomNodeOrDie());
+        final Node input = (Node) input_;
+        final SgmlPage page = (SgmlPage) input.getDomNodeOrDie().getPage();
+
+        final DomDocumentFragment fragment = page.createDomDocumentFragment();
+        final DocumentFragment node = new DocumentFragment();
+        node.setParentScope(getParentScope());
+        node.setPrototype(getPrototype(node.getClass()));
+        node.setDomNode(fragment);
+        output_ = (Node) fragment.getScriptObject();
+
+        transform(input_, ((Node) output_).getDomNodeOrDie());
         final XMLSerializer serializer = new XMLSerializer();
         serializer.setParentScope(getParentScope());
         String output = "";

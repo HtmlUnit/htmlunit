@@ -37,31 +37,37 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link XSLTProcessor}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
- * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
 public class XSLTProcessorTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("97")
     public void test() throws Exception {
+        final String[] expectedAlertsIE = {"97"};
+        test(BrowserVersion.INTERNET_EXPLORER_7_0, expectedAlertsIE);
+        final String[] expectedAlertsFF = {"97", "null"};
+        test(BrowserVersion.FIREFOX_2, expectedAlertsFF);
+    }
+    
+    private void test(final BrowserVersion browserVersion, final String[] expectedAlerts) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var xmlDoc = createXmlDocument();\n"
@@ -84,11 +90,15 @@ public class XSLTProcessorTest extends WebTestCase {
             + "      xslProc.transform();\n"
             + "      var s = xslProc.output.replace(/\\r?\\n/g, '');\n"
             + "      alert(s.length);\n"
+            + "      xslProc.input = xmlDoc.documentElement;\n"
+            + "      xslProc.transform();\n"
             + "    } else {\n"
             + "      var processor = new XSLTProcessor();\n"
             + "      processor.importStylesheet(xslDoc);\n"
             + "      var newDocument = processor.transformToDocument(xmlDoc);\n"
             + "      alert(new XMLSerializer().serializeToString(newDocument.documentElement).length);\n"
+            + "      newDocument = processor.transformToDocument(xmlDoc.documentElement);\n"
+            + "      alert(newDocument.documentElement);\n"
             + "    }\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
@@ -130,7 +140,9 @@ public class XSLTProcessorTest extends WebTestCase {
             + "  </xsl:template>\n"
             + "</xsl:stylesheet>";
         
-        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = new WebClient(browserVersion);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection(client);
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, xml, "text/xml");
@@ -138,5 +150,6 @@ public class XSLTProcessorTest extends WebTestCase {
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
