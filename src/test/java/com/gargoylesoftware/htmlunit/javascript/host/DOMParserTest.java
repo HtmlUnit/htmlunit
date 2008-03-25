@@ -37,33 +37,30 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link DOMParser}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class DOMParserTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = "4", FF = "9")
     public void parseFromString() throws Exception {
-        parseFromString(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"4"});
-        parseFromString(BrowserVersion.FIREFOX_2, new String[] {"9"});
-    }
-    
-    private void parseFromString(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<note> ';\n"
@@ -85,23 +82,16 @@ public class DOMParserTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-  
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts()
     public void parseFromString_EmptyString() throws Exception {
-        parseFromString_EmptyString(BrowserVersion.INTERNET_EXPLORER_7_0);
-        parseFromString_EmptyString(BrowserVersion.FIREFOX_2);
-    }
-    
-    private void parseFromString_EmptyString(final BrowserVersion browserVersion)
-        throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='';\n"
@@ -117,7 +107,32 @@ public class DOMParserTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPage(browserVersion, content, null);
+        loadPageWithAlerts(content);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @Alerts("7")
+    public void parseFromString_CDATA() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text= \"<root>This t<elem>ext has</elem> <![CDATA[ CDATA ]]>in<elem /> it</root>\";"
+            + "    if (window.ActiveXObject) {\n"
+            + "      doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async=false;\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "    alert(doc.documentElement.childNodes.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(content);
+    }
 }
