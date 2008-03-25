@@ -43,7 +43,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link DOMParser}.
@@ -107,32 +106,6 @@ public class DOMParserTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts(content);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented
-    @Alerts("7")
-    public void parseFromString_CDATA() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var text= \"<root>This t<elem>ext has</elem> <![CDATA[ CDATA ]]>in<elem /> it</root>\";"
-            + "    if (window.ActiveXObject) {\n"
-            + "      doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
-            + "    alert(doc.documentElement.childNodes.length);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
         loadPageWithAlerts(content);
     }
 }
