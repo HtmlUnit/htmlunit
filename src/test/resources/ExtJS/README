@@ -1,4 +1,0 @@
-This directory contains the resources necessary to run the Ext JS samples.
-
-Each subdirectory corresponds to a specific version of Ext JS. Each of these subdirectories
-was created by downloading the distribution and copying the 'adapter', 'examples', 'resources' and roto .js.
