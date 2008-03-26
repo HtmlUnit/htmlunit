@@ -309,8 +309,7 @@ public class CodeStyleTest {
             final String previousLine = lines.get(i - 1);
             final String line = lines.get(i);
             if (previousLine.trim().length() == 0 && line.trim().length() == 0) {
-                System.out.println(relativePath + ' ' + (i+1));
-//                fail("Two empty contiguous lines at " + relativePath + ", line: " + (i + 1));
+                fail("Two empty contiguous lines at " + relativePath + ", line: " + (i + 1));
             }
         }
     }
