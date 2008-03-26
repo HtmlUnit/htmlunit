@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -54,13 +55,14 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
  * @author Brad Clarke
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Dmitri Zoubkov
  */
 public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private Object scriptObject_;
     private ThreadManager threadManager_ = new ThreadManager();
-    private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
+    private List<WebWindowImpl> childWindows_ = Collections.synchronizedList(new ArrayList<WebWindowImpl>());
     private String name_ = "";
 
     /**
@@ -105,7 +107,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
-    public void setEnclosedPage(final Page page) {
+    public synchronized void setEnclosedPage(final Page page) {
         if (page == enclosedPage_) {
             return;
         }
@@ -151,16 +153,14 @@ public abstract class WebWindowImpl implements WebWindow {
      *
      * @param child The child window to associate with this window.
      */
-    public void addChildWindow(final FrameWindow child) {
+    public synchronized void addChildWindow(final FrameWindow child) {
         childWindows_.add(child);
     }
 
-    void destroyChildren() {
+    synchronized void destroyChildren() {
         getThreadManager().interruptAll();
-        final ListIterator<WebWindowImpl> iter = childWindows_.listIterator();
-        while (iter.hasNext()) {
-            final WebWindowImpl child = iter.next();
-            child.destroyChildren();
+        for(final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
+            iter.next().destroyChildren();
             iter.remove();
         }
     }
