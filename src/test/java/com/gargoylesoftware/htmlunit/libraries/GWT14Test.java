@@ -289,7 +289,6 @@ public class GWT14Test extends WebTestCase {
         final String[] pendingOrders =
         {"123-2", "3 45122 34566", "2/2/2004", "43 Butcher lane", "Atlanta", "Georgia", "30366"};
 
-
         //try 20 times to wait .5 second each for filling the page.
         for (int i = 0; i < 20; i++) {
             if (page.getByXPath("//table[@class='userTable'][1]//tr[2]/td").size() == pendingOrders.length) {

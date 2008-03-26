@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
-
 /**
  * A JavaScript object for XMLDOMParseError.
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms757019.aspx">MSDN documentation</a>

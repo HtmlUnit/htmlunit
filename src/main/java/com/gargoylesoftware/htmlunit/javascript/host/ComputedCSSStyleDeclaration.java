@@ -45,7 +45,6 @@ import java.util.SortedMap;
 import org.apache.commons.lang.math.NumberUtils;
 import org.mozilla.javascript.Context;
 
-
 /**
  * A JavaScript object for a ComputedCSSStyleDeclaration.
  *

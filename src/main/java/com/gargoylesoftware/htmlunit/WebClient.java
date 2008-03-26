@@ -1805,7 +1805,6 @@ public class WebClient implements Serializable {
         return onbeforeunloadHandler_;
     }
 
-
     /**
      * Gets the cache currently used.
      * @return the cache (may not be null)

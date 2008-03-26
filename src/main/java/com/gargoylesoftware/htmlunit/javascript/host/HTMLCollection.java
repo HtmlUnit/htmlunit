@@ -583,7 +583,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 }
             }
 
-
             if (xpath_ != null) {
                 // See if there are any elements in the element array with the specified name.
                 final HTMLCollection array = new HTMLCollection(this);
@@ -612,7 +611,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
         return idList.toArray();
     }
-
 
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
         /**

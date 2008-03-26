@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-
 /**
  * A JavaScript object for a document.navigator.plugins.
  * @version $Revision$

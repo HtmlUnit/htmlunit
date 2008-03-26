@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-
 /**
  * The JavaScript object "HTMLFontElement".
  *

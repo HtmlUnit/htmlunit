@@ -97,7 +97,6 @@ public class BrowserRunner extends CompositeRunner {
         NONE;
     }
     
-    
     /**
      * Browsers to test with, default value is all.
      */

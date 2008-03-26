@@ -40,7 +40,6 @@ package com.gargoylesoftware.htmlunit;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * Contains information about a plugin as available in JavaScript through document.navigator.plugins
  * as well as the associated mime types (for Firefox browser simulation).

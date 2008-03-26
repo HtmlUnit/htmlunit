@@ -1216,7 +1216,6 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals(expectedURL, secondPage.getWebResponse().getUrl());
     }
 
-
     /**
      * @throws Exception If the test page can't be loaded.
      */

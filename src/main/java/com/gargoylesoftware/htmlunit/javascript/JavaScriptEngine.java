@@ -133,7 +133,6 @@ public class JavaScriptEngine implements Serializable {
         webClient_ = webClient;
     }
 
-
     /**
      * Returns the web client that this engine is associated with.
      * @return The web client.
@@ -615,7 +614,6 @@ public class JavaScriptEngine implements Serializable {
         }
         return newSourceCode;
     }
-
 
     /**
      * Gets the cached script for the given response.

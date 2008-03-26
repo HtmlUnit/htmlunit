@@ -139,7 +139,6 @@ public class HtmlUnitXPath {
         return string;
     }
 
-
     /**
      * Given an expression and a context, evaluate the XPath
      * and return the result.

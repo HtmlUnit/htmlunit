@@ -225,7 +225,6 @@ public class HtmlFileInputTest extends WebTestCase {
         final File file = new File(new URI(path));
         assertTrue(file.exists());
         
-        
         final Map<Class< ? extends Servlet>, String> servlets = new HashMap<Class< ? extends Servlet>, String>();
         servlets.put(Upload2Servlet.class, "/upload2");
 

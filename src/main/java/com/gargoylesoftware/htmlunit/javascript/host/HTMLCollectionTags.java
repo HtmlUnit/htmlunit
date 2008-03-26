@@ -39,7 +39,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
-
 /**
  * An array of elements. It is very similar to {@link HTMLCollection}, but with 'tags' property for Firefox.
  *

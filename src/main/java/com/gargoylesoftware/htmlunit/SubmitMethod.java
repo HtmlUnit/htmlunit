@@ -95,7 +95,6 @@ public final class SubmitMethod implements Serializable {
      */
     public static final SubmitMethod TRACE = new SubmitMethod("trace");
 
-
     private final String name_;
     private static final Map<String, SubmitMethod> methods_ =
         toMap(new SubmitMethod[] {OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE});
