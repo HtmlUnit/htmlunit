@@ -61,8 +61,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
@@ -117,7 +119,9 @@ public class WebClientTest extends WebTestCase {
                             for (final Method method : clazz.getDeclaredMethods()) {
                                 if (Modifier.isPublic(method.getModifiers())
                                     && method.getAnnotation(Before.class) == null
+                                    && method.getAnnotation(BeforeClass.class) == null
                                     && method.getAnnotation(After.class) == null
+                                    && method.getAnnotation(AfterClass.class) == null
                                     && method.getAnnotation(Test.class) == null
                                     && method.getReturnType() == Void.TYPE
                                     && method.getParameterTypes().length == 0) {

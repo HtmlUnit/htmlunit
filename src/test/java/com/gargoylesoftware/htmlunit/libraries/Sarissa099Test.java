@@ -84,7 +84,6 @@ public class Sarissa099Test extends WebTestCase {
     private static Server Server_;
     private static HtmlPage Page_;
     
-
     /**
      * Returns the Sarissa version being tested.
      *
