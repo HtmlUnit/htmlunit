@@ -409,9 +409,6 @@ public class XMLDocumentTest extends WebTestCase {
      */
     @Test
     public void testLoadXML_XMLSpaceAttribute() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testLoadXML_XMLSpaceAttribute(BrowserVersion.INTERNET_EXPLORER_7_0);
         testLoadXML_XMLSpaceAttribute(BrowserVersion.FIREFOX_2);
     }

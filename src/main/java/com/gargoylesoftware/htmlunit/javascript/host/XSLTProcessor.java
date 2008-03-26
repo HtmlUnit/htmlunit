@@ -285,12 +285,14 @@ public class XSLTProcessor extends SimpleScriptable {
         final Node input = (Node) input_;
         final SgmlPage page = (SgmlPage) input.getDomNodeOrDie().getPage();
 
-        final DomDocumentFragment fragment = page.createDomDocumentFragment();
-        final DocumentFragment node = new DocumentFragment();
-        node.setParentScope(getParentScope());
-        node.setPrototype(getPrototype(node.getClass()));
-        node.setDomNode(fragment);
-        output_ = (Node) fragment.getScriptObject();
+        if (output_ == null || !(output_ instanceof Node)) {
+            final DomDocumentFragment fragment = page.createDomDocumentFragment();
+            final DocumentFragment node = new DocumentFragment();
+            node.setParentScope(getParentScope());
+            node.setPrototype(getPrototype(node.getClass()));
+            node.setDomNode(fragment);
+            output_ = (Node) fragment.getScriptObject();
+        }
 
         transform(input_, ((Node) output_).getDomNodeOrDie());
         final XMLSerializer serializer = new XMLSerializer();

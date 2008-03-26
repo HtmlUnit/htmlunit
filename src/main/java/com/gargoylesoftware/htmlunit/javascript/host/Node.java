@@ -308,7 +308,7 @@ public class Node extends SimpleScriptable {
     public Object jsxGet_childNodes() {
         if (childNodes_ == null) {
             childNodes_ = new HTMLCollection(this);
-            childNodes_.init(getDomNodeOrDie(), "(./* | text() | comment())");
+            childNodes_.initFromChildren(getDomNodeOrDie());
         }
         return childNodes_;
     }

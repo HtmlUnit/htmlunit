@@ -173,6 +173,23 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
+     * Init the collection. The elements will be "calculated" as the children of the node.
+     * @param node the node to grab children from
+     */
+    public void initFromChildren(final DomNode node) {
+        if (node != null) {
+            node_ = node;
+            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+            node_.addDomChangeListener(listener);
+            if (node_ instanceof HtmlElement) {
+                ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
+                cachedElements_ = null;
+            }
+        }
+        transformer_ = NOPTransformer.INSTANCE;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public final Object call(
@@ -239,7 +256,17 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     private List<Object> getElements() {
         if (cachedElements_ == null) {
             if (node_ != null) {
-                cachedElements_ = XPathUtils.getByXPath(node_, xpath_);
+                if (xpath_ != null) {
+                    cachedElements_ = XPathUtils.getByXPath(node_, xpath_);
+                }
+                else {
+                    cachedElements_ = new ArrayList<Object>();
+                    Node node = node_.getFirstChild();
+                    while (node != null) {
+                        cachedElements_.add(node);
+                        node = node.getNextSibling();
+                    }
+                }
             }
             else {
                 cachedElements_ = new ArrayList<Object>();
