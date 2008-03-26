@@ -396,7 +396,7 @@
         <dependency>
             <groupId>rhino</groupId>
             <artifactId>js</artifactId>
-            <version>1.7R1-RC4</version>
+            <version>1.7R1</version>
         </dependency>
         <dependency>
             <groupId>nekohtml</groupId>
