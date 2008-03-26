@@ -729,6 +729,28 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testRefresh_MetaTag_caseSensitivity() throws Exception {
+        final String firstContent = "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;Url=" + URL_SECOND + "\">\n"
+            + "</head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+
+        final WebClient client = new WebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+
+        assertEquals("second", page.getTitleText());
+    }
+
+    /**
      * Test auto-refresh from a meta tag with no URL.
      * @throws Exception if the test fails
      */

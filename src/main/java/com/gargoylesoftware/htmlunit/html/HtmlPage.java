@@ -1278,10 +1278,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 }
                 return;
             }
-            index = refreshString.indexOf("URL=", index);
-            if (index == -1) {
-                index = refreshString.indexOf("url=", index);
-            }
+            index = refreshString.toLowerCase().indexOf("url=", index);
             if (index == -1) {
                 if (mainLog_.isErrorEnabled()) {
                     mainLog_.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
