@@ -139,6 +139,9 @@ public class Sarissa099Test extends WebTestCase {
      */
     @Test
     public void xsltProcessor() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         test("XSLTProcessorTestCase");
     }
 
