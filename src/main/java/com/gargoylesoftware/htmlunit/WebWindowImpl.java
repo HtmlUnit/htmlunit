@@ -159,7 +159,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
     synchronized void destroyChildren() {
         getThreadManager().interruptAll();
-        for(final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
+        for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
             iter.next().destroyChildren();
             iter.remove();
         }
