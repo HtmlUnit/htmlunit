@@ -47,17 +47,21 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -70,9 +74,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class Sarissa099Test extends WebTestCase {
 
-    private Server server_;
+    /** Number of browsers this case will use. */
+    private static final int BROWSERS_COUNTER = 3;
+    private static int Counter_;
+
+    private static Server Server_;
+    private static HtmlPage Page_;
+    
 
     /**
      * Returns the Sarissa version being tested.
@@ -88,7 +99,7 @@ public class Sarissa099Test extends WebTestCase {
      */
     @Test
     public void sarissa() throws Exception {
-        test("SarissaTestCase", "++++++++++++++++++");
+        test("SarissaTestCase");
     }
 
     /**
@@ -140,39 +151,22 @@ public class Sarissa099Test extends WebTestCase {
     }
 
     private void test(final String testName) throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, testName);
-        test(BrowserVersion.FIREFOX_2, testName);
-    }
-
-    /**
-     * @param expectedResult in the form of "+++F+++" (see the results in a real browser).
-     */
-    private void test(final String testName, final String expectedResult) throws Exception {
-        server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
-        test(BrowserVersion.INTERNET_EXPLORER_7_0, testName, expectedResult);
-        test(BrowserVersion.FIREFOX_2, testName, expectedResult);
-    }
-
-    private void test(final BrowserVersion browserVersion, final String testName) throws Exception {
-        final HtmlPage page = getSarissaPage(browserVersion);
-        
         final List< ? > divList =
-            page.getByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]");
+            Page_.getByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]");
         assertEquals(1, divList.size());
         final HtmlDivision div = (HtmlDivision) divList.get(0);
         assertEquals("OK!", div.asText());
     }
 
     /**
+     * This is used in case a failing test is expected to happen.
+     *
      * @param expectedResult in the form of "+++F+++" (see the results in a real browser).
      */
-    private void test(final BrowserVersion browserVersion, final String testName, final String expectedResult)
-        throws Exception {
-        final HtmlPage page = getSarissaPage(browserVersion);
-        
+    @SuppressWarnings("unused")
+    private void test(final String testName, final String expectedResult) throws Exception {
         final HtmlAnchor anchor =
-            (HtmlAnchor) page.getFirstByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']");
+            (HtmlAnchor) Page_.getFirstByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']");
         final StringBuilder builder = new StringBuilder();
         for (Node node = anchor.getNextSibling().getNextSibling(); node instanceof DomText;
             node = node.getNextSibling()) {
@@ -181,28 +175,42 @@ public class Sarissa099Test extends WebTestCase {
         assertEquals(expectedResult, builder.toString());
     }
 
-    private HtmlPage getSarissaPage(final BrowserVersion browserVersion) throws Exception {
-        final WebClient client = new WebClient(browserVersion);
-        final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
-        final HtmlPage page = (HtmlPage) client.getPage(url);
-        ((HtmlButton) page.getFirstByXPath("//button")).click();
-        return page;
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Before
+    public void init() throws Exception {
+        if (Counter_ < BROWSERS_COUNTER) {
+            if (Server_ == null) {
+                Server_ = HttpWebConnectionTest.startWebServer("src/test/resources/sarissa/" + getVersion());
+            }
+            if (Page_ == null) {
+                final WebClient client = getWebClient();
+                final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
+                Page_ = (HtmlPage) client.getPage(url);
+                ((HtmlButton) Page_.getFirstByXPath("//button")).click();
+            }
+        }
     }
 
     /**
-     * Performs post-test deconstruction.
+     * Performs deconstruction.
      * @throws Exception if an error occurs
      */
-    @After
-    public void tearDown() throws Exception {
-        HttpWebConnectionTest.stopWebServer(server_);
-        server_ = null;
+    @AfterClass
+    public static void clean() throws Exception {
+        if (++Counter_ == BROWSERS_COUNTER) {
+            HttpWebConnectionTest.stopWebServer(Server_);
+            Server_ = null;
+        }
+        Page_ = null;
     }
 
     /**
      * @throws Exception If the test fails.
      */
     @Test
+    @Browsers(Browser.NONE)
     public void xslt() throws Exception {
         final String input = "<root><element attribute=\"value\"/></root>";
         final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n"
