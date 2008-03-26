@@ -7,9 +7,6 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
-            <action type="update" dev="asashour" due-to="Dmitri Zoubkov" id="1924640">
-                WebWindowImpl [internal]: synchronize setEnclosedPage() and addChildWindow() (#1924640).
-            </action>
             <action type="update" dev="asashour" due-to="Dmitri Zoubkov" id="1924784">
                 Meta Refresh: case-insensitive URL (#1924784).
             </action>
