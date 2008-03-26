@@ -41,6 +41,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
@@ -55,6 +57,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author David D. Kilzer
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Dmitri Zoubkov
  */
 public class HtmlButton extends ClickableElement implements DisabledElement, SubmittableElement {
 
@@ -63,6 +66,8 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "button";
 
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
+    
     /**
      * Creates an instance.
      *
@@ -140,7 +145,9 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @see SubmittableElement#reset()
      */
     public void reset() {
-        getLog().debug("reset() not implemented for this element");
+        if (mainLog_.isDebugEnabled()) {
+            mainLog_.debug("reset() not implemented for this element");
+        }
     }
 
     /**
@@ -148,7 +155,9 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @see SubmittableElement#setDefaultValue(String)
      */
     public void setDefaultValue(final String defaultValue) {
-        getLog().debug("setDefaultValue() not implemented for this element");
+        if (mainLog_.isDebugEnabled()) {
+            mainLog_.debug("setDefaultValue() not implemented for this element");
+        }
     }
 
     /**
@@ -156,7 +165,9 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @see SubmittableElement#getDefaultValue()
      */
     public String getDefaultValue() {
-        getLog().debug("getDefaultValue() not implemented for this element");
+        if (mainLog_.isDebugEnabled()) {
+            mainLog_.debug("getDefaultValue() not implemented for this element");
+        }
         return "";
     }
 

@@ -42,6 +42,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -59,9 +62,11 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author David D. Kilzer
  * @author Stefan Anzinger
  * @author Ahmed Ashour
+ * @author Dmitri Zoubkov
  */
 public abstract class BaseFrame extends StyledElement {
 
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
     private final WebWindow enclosedWindow_ = new FrameWindow(this);
 
     /**
@@ -137,8 +142,10 @@ public abstract class BaseFrame extends StyledElement {
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, settings);
             }
             catch (final IOException e) {
-                getLog().error("IOException when getting content for " + getTagName()
-                        + ": url=[" + url.toExternalForm() + "]", e);
+                if (mainLog_.isErrorEnabled()) {
+                    mainLog_.error("IOException when getting content for " + getTagName()
+                            + ": url=[" + url.toExternalForm() + "]", e);
+                }
             }
         }
     }

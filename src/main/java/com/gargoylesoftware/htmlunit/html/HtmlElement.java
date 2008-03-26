@@ -52,6 +52,8 @@ import java.util.NoSuchElementException;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -93,6 +95,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Dmitri Zoubkov
  */
 public abstract class HtmlElement extends DomElement implements Element {
 
@@ -109,6 +112,8 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @see #getTabIndex()
      */
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
+    
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /** The map holding the attributes, keyed by name. */
     private Map<String, HtmlAttr> attributes_;
@@ -1168,8 +1173,10 @@ public abstract class HtmlElement extends DomElement implements Element {
     public final void setEventHandler(final String eventName, final String jsSnippet) {
         final BaseFunction function = new EventHandler(this, eventName, jsSnippet);
         setEventHandler(eventName, function);
-        getLog().debug("Created event handler " + function.getFunctionName()
-                + " for " + eventName + " on " + this);
+        if (mainLog_.isDebugEnabled()) {
+            mainLog_.debug("Created event handler " + function.getFunctionName()
+                    + " for " + eventName + " on " + this);
+        }
     }
 
     /**
@@ -1235,7 +1242,9 @@ public abstract class HtmlElement extends DomElement implements Element {
             return null;
         }
 
-        getLog().debug("Firing " + event);
+        if (mainLog_.isDebugEnabled()) {
+            mainLog_.debug("Firing " + event);
+        }
         final HTMLElement jsElt = (HTMLElement) getScriptObject();
         final ContextAction action = new ContextAction() {
             public Object run(final Context cx) {
@@ -1447,12 +1456,16 @@ public abstract class HtmlElement extends DomElement implements Element {
     public Page rightClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final Page mouseDownPage = mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseDownPage != getPage()) {
-            getLog().debug("rightClick() is incomplete, as mouseDown() loaded a different page.");
+            if (mainLog_.isDebugEnabled()) {
+                mainLog_.debug("rightClick() is incomplete, as mouseDown() loaded a different page.");
+            }
             return mouseDownPage;
         }
         final Page mouseUpPage = mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
         if (mouseUpPage != getPage()) {
-            getLog().debug("rightClick() is incomplete, as mouseUp() loaded a different page.");
+            if (mainLog_.isDebugEnabled()) {
+                mainLog_.debug("rightClick() is incomplete, as mouseUp() loaded a different page.");
+            }
             return mouseUpPage;
         }
         return doMouseEvent(MouseEvent.TYPE_CONTEXT_MENU, shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);

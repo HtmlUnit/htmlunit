@@ -707,6 +707,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns the log object for this element.
      * @return The log object for this element.
+     * @deprecated As of 2.0, use local log variables enclosed in a conditional block.
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());

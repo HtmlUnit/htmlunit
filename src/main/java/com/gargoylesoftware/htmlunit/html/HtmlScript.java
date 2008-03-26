@@ -43,6 +43,8 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -64,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Dmitri Zoubkov
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
@@ -79,6 +82,8 @@ public class HtmlScript extends HtmlElement {
 
     /** Not really used? */
     private static int EventHandlerId_;
+    
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /**
      * Create an instance of HtmlScript
@@ -217,7 +222,9 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     protected void onAddedToPage() {
-        getLog().debug("Script node added: " + asXml());
+        if (mainLog_.isDebugEnabled()) {
+            mainLog_.debug("Script node added: " + asXml());
+        }
         final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
         final boolean pageFinishedLoading = (getPage().getReadyState() == READY_STATE_COMPLETE);
         if (!ie || pageFinishedLoading || !isDeferred()) {
@@ -309,7 +316,9 @@ public class HtmlScript extends HtmlElement {
                         if ((code.charAt(0) == '\'' && code.charAt(len - 1) == '\'')
                             || (code.charAt(0) == '"' && code.charAt(len - 1) == '"')) {
                             code = code.substring(1, len - 1);
-                            getLog().debug("Executing JavaScript: " + code);
+                            if (mainLog_.isDebugEnabled()) {
+                                mainLog_.debug("Executing JavaScript: " + code);
+                            }
                             getPage().executeJavaScriptIfPossible(code, code, getStartLineNumber());
                         }
                     }
@@ -317,7 +326,9 @@ public class HtmlScript extends HtmlElement {
             }
             else {
                 // <script src="[url]"></script>
-                getLog().debug("Loading external JavaScript: " + src);
+                if (mainLog_.isDebugEnabled()) {
+                    mainLog_.debug("Loading external JavaScript: " + src);
+                }
                 getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
             }
         }
@@ -357,7 +368,9 @@ public class HtmlScript extends HtmlElement {
         if (!HtmlPage.isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
             final String t = getTypeAttribute();
             final String l = getLanguageAttribute();
-            getLog().warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
+            if (mainLog_.isWarnEnabled()) {
+                mainLog_.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
+            }
             return false;
         }
 

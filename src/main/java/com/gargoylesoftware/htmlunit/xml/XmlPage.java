@@ -43,6 +43,8 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -80,6 +82,8 @@ public class XmlPage extends SgmlPage implements Document {
     private Node node_;
     private Element documentElement_;
 
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
+    
     /**
      * Create an instance.
      * A warning is logged if an exception is thrown while parsing the XML content
@@ -136,13 +140,17 @@ public class XmlPage extends SgmlPage implements Document {
             }
         }
         catch (final SAXException e) {
-            getLog().warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
+            if (mainLog_.isWarnEnabled()) {
+                mainLog_.warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
+            }
             if (!ignoreSAXException) {
                 throw new IOException(e.getMessage());
             }
         }
         catch (final ParserConfigurationException e) {
-            getLog().warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
+            if (mainLog_.isWarnEnabled()) {
+                mainLog_.warn("Failed parsing XML document " + webResponse.getUrl() + ": " + e.getMessage());
+            }
         }
     }
 

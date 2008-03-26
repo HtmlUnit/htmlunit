@@ -107,6 +107,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Dmitri Zoubkov
  */
 public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
@@ -120,6 +121,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     private int parserCount_;
 
     private final transient Log javascriptLog_ = LogFactory.getLog("com.gargoylesoftware.htmlunit.javascript");
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final transient Object lock_ = new Object(); // used for synchronization
@@ -386,7 +388,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             final int pos = contents.toLowerCase().indexOf("charset=");
             if (pos >= 0) {
                 originalCharset_ = contents.substring(pos + 8);
-                getLog().debug("Page Encoding detected: " + originalCharset_);
+                if (mainLog_.isDebugEnabled()) {
+                    mainLog_.debug("Page Encoding detected: " + originalCharset_);
+                }
                 return originalCharset_;
             }
         }
@@ -975,12 +979,16 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             try {
                 scriptURL = getFullyQualifiedUrl(srcAttribute);
                 if (scriptURL.getProtocol().equals("javascript")) {
-                    getLog().info("Ignoring script src [" + srcAttribute + "]");
+                    if (mainLog_.isInfoEnabled()) {
+                        mainLog_.info("Ignoring script src [" + srcAttribute + "]");
+                    }
                     return;
                 }
             }
             catch (final MalformedURLException e) {
-                getLog().error("Unable to build URL for script src tag [" + srcAttribute + "]");
+                if (mainLog_.isErrorEnabled()) {
+                    mainLog_.error("Unable to build URL for script src tag [" + srcAttribute + "]");
+                }
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw new ScriptException(this, e);
                 }
@@ -1039,7 +1047,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             webResponse = getWebClient().loadWebResponse(requestSettings);
         }
         catch (final IOException e) {
-            getLog().error("Error loading JavaScript from [" + url.toExternalForm() + "].", e);
+            if (mainLog_.isErrorEnabled()) {
+                mainLog_.error("Error loading JavaScript from [" + url.toExternalForm() + "].", e);
+            }
             return null;
         }
 
@@ -1061,9 +1071,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         final String contentType = webResponse.getContentType();
         if (!contentType.equalsIgnoreCase("text/javascript")
             && !contentType.equalsIgnoreCase("application/x-javascript")) {
-            getLog().warn("Expected content type of 'text/javascript' or 'application/x-javascript' for "
-                            + "remotely loaded JavaScript element at '" + url + "', "
-                            + "but got '" + contentType + "'.");
+            if (mainLog_.isWarnEnabled()) {
+                mainLog_.warn("Expected content type of 'text/javascript' or 'application/x-javascript' for "
+                                + "remotely loaded JavaScript element at '" + url + "', "
+                                + "but got '" + contentType + "'.");
+            }
         }
 
         if (StringUtils.isEmpty(scriptEncoding)) {
@@ -1108,7 +1120,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public void setTitleText(final String message) {
         HtmlTitle titleElement = getTitleElement();
         if (titleElement == null) {
-            getLog().debug("No title element, creating one");
+            if (mainLog_.isDebugEnabled()) {
+                mainLog_.debug("No title element, creating one");
+            }
             final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentHtmlElement(), HtmlHead.class);
             if (head == null) {
                 // perhaps should we create head too?
@@ -1185,7 +1199,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         for (final BaseFrame frame : frames) {
             final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
             if (frameTagEventHandler != null) {
-                getLog().debug("Executing on" + eventType + " handler for " + frame);
+                if (mainLog_.isDebugEnabled()) {
+                    mainLog_.debug("Executing on" + eventType + " handler for " + frame);
+                }
                 final Event event = new Event(frame, eventType);
                 ((Node) frame.getScriptObject()).executeEvent(event);
                 if (!isOnbeforeunloadAccepted(frame.getPage(), event)) {
@@ -1200,8 +1216,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (event.jsxGet_type().equals(Event.TYPE_BEFORE_UNLOAD) && event.jsxGet_returnValue() != null) {
             final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
             if (handler == null) {
-                getLog().warn("document.onbeforeunload() returned a string in event.returnValue,"
-                        + " but no onbeforeunload handler installed.");
+                if (mainLog_.isWarnEnabled()) {
+                    mainLog_.warn("document.onbeforeunload() returned a string in event.returnValue,"
+                            + " but no onbeforeunload handler installed.");
+                }
             }
             else {
                 final String message = Context.toString(event.jsxGet_returnValue());
@@ -1242,7 +1260,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 time = Integer.parseInt(refreshString);
             }
             catch (final NumberFormatException e) {
-                getLog().error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
+                if (mainLog_.isErrorEnabled()) {
+                    mainLog_.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
+                }
                 return;
             }
             url = getWebResponse().getUrl();
@@ -1253,7 +1273,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 time = Integer.parseInt(refreshString.substring(0, index).trim());
             }
             catch (final NumberFormatException e) {
-                getLog().error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                if (mainLog_.isErrorEnabled()) {
+                    mainLog_.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                }
                 return;
             }
             index = refreshString.indexOf("URL=", index);
@@ -1261,7 +1283,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 index = refreshString.indexOf("url=", index);
             }
             if (index == -1) {
-                getLog().error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+                if (mainLog_.isErrorEnabled()) {
+                    mainLog_.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+                }
                 return;
             }
             final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
@@ -1281,7 +1305,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                     url = getFullyQualifiedUrl(urlString);
                 }
                 catch (final MalformedURLException e) {
-                    getLog().error("Malformed URL in refresh string: " + refreshString, e);
+                    if (mainLog_.isErrorEnabled()) {
+                        mainLog_.error("Malformed URL in refresh string: " + refreshString, e);
+                    }
                     throw e;
                 }
             }

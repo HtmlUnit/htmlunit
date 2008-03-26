@@ -52,11 +52,14 @@ import java.util.HashMap;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author David K. Taylor
+ * @author Dmitri Zoubkov
  */
 public final class InputElementFactory implements IElementFactory {
 
     /** The singleton instance. */
     public static final InputElementFactory instance = new InputElementFactory();
+    
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /** Private singleton constructor. */
     private InputElementFactory() {
@@ -138,7 +141,9 @@ public final class InputElementFactory implements IElementFactory {
             result = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {
-            getLog().info("Bad input type: \"" + type + "\", creating a text input");
+            if (mainLog_.isInfoEnabled()) {
+                mainLog_.info("Bad input type: \"" + type + "\", creating a text input");
+            }
             result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         return result;
@@ -147,9 +152,10 @@ public final class InputElementFactory implements IElementFactory {
     /**
      * Returns the log that is being used for all scripting objects.
      * @return The log.
+     * @deprecated As of 2.0, use local log variable enclosed in a conditional block.
      */
     protected Log getLog() {
-        return LogFactory.getLog(getClass());
+        return mainLog_;
     }
 
 }

@@ -40,6 +40,9 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -60,9 +63,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Dmitri Zoubkov
  */
 public abstract class ClickableElement extends StyledElement {
 
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
+    
     /**
      * Creates an instance.
      *
@@ -183,7 +189,9 @@ public abstract class ClickableElement extends StyledElement {
         //call click event first
         final Page clickPage = click(shiftKey, ctrlKey, altKey);
         if (clickPage != getPage()) {
-            getLog().debug("dblClick() is ignored, as click() loaded a different page.");
+            if (mainLog_.isDebugEnabled()) {
+                mainLog_.debug("dblClick() is ignored, as click() loaded a different page.");
+            }
             return clickPage;
         }
 

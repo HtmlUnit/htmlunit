@@ -60,14 +60,23 @@ public interface HTMLParserListener {
      * Errors are logged at the error level and warnings at the warning level.
      */
     HTMLParserListener LOG_REPORTER = new HTMLParserListener() {
+        private final transient Log listenerLog_ = LogFactory.getLog(HTMLParserListener.class);
+        
+        /**
+         * @deprecated As of 2.0, use local log variable enclosed in a conditional block.
+         */
         protected final Log getLog() {
-            return LogFactory.getLog(HTMLParserListener.class);
+            return listenerLog_;
         }
         public void error(final String message, final URL url, final int line, final int column, final String key) {
-            getLog().error(format(message, url, line, column, key));
+            if (listenerLog_.isErrorEnabled()) {
+                listenerLog_.error(format(message, url, line, column, key));
+            }
         }
         public void warning(final String message, final URL url, final int line, final int column, final String key) {
-            getLog().warn(format(message, url, line, column, key));
+            if (listenerLog_.isWarnEnabled()) {
+                listenerLog_.warn(format(message, url, line, column, key));
+            }
         }
         private String format(final String message, final URL url, final int line, final int column, final String key) {
             final StringBuilder buffer = new StringBuilder(message);

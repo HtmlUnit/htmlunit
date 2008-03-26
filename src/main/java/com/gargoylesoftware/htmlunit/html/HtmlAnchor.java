@@ -44,6 +44,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -57,6 +60,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Dmitri Zoubkov
  */
 public class HtmlAnchor extends ClickableElement {
 
@@ -65,6 +69,8 @@ public class HtmlAnchor extends ClickableElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "a";
 
+    private final transient Log mainLog_ = LogFactory.getLog(getClass());
+    
     /**
      * Creates an instance.
      *
@@ -89,10 +95,12 @@ public class HtmlAnchor extends ClickableElement {
     protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
 
-        getLog().debug(
-            "do click action in window '"
-                    + defaultPage.getEnclosingWindow().getName()
-                    + "', using href '" + href + "'");
+        if (mainLog_.isDebugEnabled()) {
+            mainLog_.debug(
+                "do click action in window '"
+                        + defaultPage.getEnclosingWindow().getName()
+                        + "', using href '" + href + "'");
+        }
 
         if (href != null && href.length() > 0 && !href.startsWith("#")) {
             final HtmlPage page = getPage();
@@ -104,11 +112,13 @@ public class HtmlAnchor extends ClickableElement {
                 final URL url = page.getFullyQualifiedUrl(href);
                 final WebRequestSettings settings = new WebRequestSettings(url);
                 settings.addAdditionalHeader("Referer", page.getWebResponse().getUrl().toExternalForm());
-                getLog().debug(
-                    "Getting page for " + url.toExternalForm()
-                            + ", derived from href '" + href
-                            + "', using the originating URL "
-                            + page.getWebResponse().getUrl());
+                if (mainLog_.isDebugEnabled()) {
+                    mainLog_.debug(
+                        "Getting page for " + url.toExternalForm()
+                                + ", derived from href '" + href
+                                + "', using the originating URL "
+                                + page.getWebResponse().getUrl());
+                }
                 return page.getWebClient().getPage(
                         page.getEnclosingWindow(),
                         page.getResolvedTarget(getTargetAttribute()),
