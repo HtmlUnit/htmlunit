@@ -1220,11 +1220,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception If the test page can't be loaded.
      */
     @Test
-    public void testMalformedHtml_nestedForms() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
+    public void malformedHtml_nestedForms() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
