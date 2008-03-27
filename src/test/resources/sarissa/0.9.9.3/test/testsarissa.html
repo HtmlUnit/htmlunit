@@ -34,13 +34,13 @@
 	};
 	
     function runTestCase(testCase) {
-	    	// append TOC entry
-	    	var name = testCase.name;
-	    	var toc = document.getElementById("toc");
-	    	toc.appendChild(document.createElement("br"));
-	    	toc.appendChild(getLink("#"+name, name+" Results", false));
+    	// append TOC entry
+    	var name = testCase.name;
+    	var toc = document.getElementById("toc");
+    	toc.appendChild(document.createElement("br"));
+    	toc.appendChild(getLink("#"+name, name+" Results", false));
 	    
-	    	// append testcase section
+	    // append testcase section
 	    var placeHolder = document.createElement("div");
 	    placeHolder.className = "placeholder";
 		placeHolder.appendChild(getLink("#"+name, null, true));
@@ -54,14 +54,16 @@
     };
     
     function runTestCases(){
-    	    runTestCase(new SarissaTestCase());
+    	runTestCase(new SarissaTestCase());
         runTestCase(new XMLHttpRequestTestCase());
         runTestCase(new XMLSerializerTestCase());
         runTestCase(new DOMParserTestCase());
         runTestCase(new XMLDocumentTestCase());
         runTestCase(new XMLElementTestCase());
         runTestCase(new XSLTProcessorTestCase());
-        document.getElementById("reportLink").setAttribute("href", "mailto:mbatsis@users.sf.net?subject=sarissa%20tests%20for%20"+(escape(navigator.userAgent))+"&body="+(escape(document.body.innerHTML)));
+        document.getElementById("reportForm").style.display = "block";
+        document.getElementById("report").value = "Sarissa " + Sarissa.VERSION + " tests for " + navigator.userAgent + "\n" + document.body.innerHTML;
+        alert("You can now send us the results using the 'Send Report!' button.");
     };
     
 //]]>
@@ -69,19 +71,24 @@
 </head>
 	<body>
 		<h1>Sarissa Unit Tests</h1>
-        <button onclick="runTestCases()">Run Testcases</button>
-        <br />
-        <a id="reportLink" href="javascript:alert('Run the tests first!')">Send Report via Email</a>
-        <br />
-        <fieldset>
-            <legend>Parse error text:</legend>
-            <textarea id="parseError" cols="80" rows="10"></textarea>
-        </fieldset>
-        <br />
-        <fieldset>
-            <legend>XMLized ECMAScript object:</legend>
-            <textarea id="xmlization" cols="80" rows="10"></textarea>
-        </fieldset>
+	    <p><button onclick="runTestCases()">Run Testcases</button> </p>
+	    <form id="reportForm" style="display:none" action="mailto:mbatsis@users.sf.net?subject=Sarissa_Test_Results" enctype="text/plain" method="post">
+	        <fieldset>
+	            <legend>Unit Test Report:</legend>
+	            <br />
+	            <textarea id="parseError" name="parseError" cols="80" rows="10"></textarea>
+	            <br />
+	            <legend>XMLized ECMAScript object:</legend>
+	            <br />
+	            <textarea id="xmlization" name="xmlization" cols="80" rows="10"></textarea>
+	            <br />
+	            <legend>Report:</legend>
+	            <br />
+	            <textarea id="report" name="report" cols="80" rows="10"></textarea>
+	            <br />
+	            <button type="submit">Send Report!</button>
+	        </fieldset>
+	    </form>
 		<div id="toc"> </div>
         <hr />
 	</body>
