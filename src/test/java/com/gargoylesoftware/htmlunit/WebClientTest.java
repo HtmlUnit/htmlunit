@@ -937,7 +937,7 @@ public class WebClientTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        Assert.assertNull("original", page.getElementWithFocus());
+        Assert.assertNull("original", page.getFocusedElement());
         Assert.assertNull("next", page.tabToNextElement());
         Assert.assertNull("previous", page.tabToPreviousElement());
         Assert.assertNull("accesskey", page.pressAccessKey('a'));
@@ -959,14 +959,14 @@ public class WebClientTest extends WebTestCase {
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
         final HtmlElement element = page.getHtmlElementById("submit0");
 
-        Assert.assertNull("original", page.getElementWithFocus());
+        Assert.assertNull("original", page.getFocusedElement());
         Assert.assertNull("accesskey", page.pressAccessKey('x'));
 
         Assert.assertEquals("next", element, page.tabToNextElement());
         Assert.assertEquals("nextAgain", element, page.tabToNextElement());
 
-        page.getElementWithFocus().blur();
-        Assert.assertNull("original", page.getElementWithFocus());
+        page.getFocusedElement().blur();
+        Assert.assertNull("original", page.getFocusedElement());
 
         Assert.assertEquals("previous", element, page.tabToPreviousElement());
         Assert.assertEquals("previousAgain", element, page.tabToPreviousElement());

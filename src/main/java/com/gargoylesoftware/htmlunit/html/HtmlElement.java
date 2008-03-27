@@ -1475,14 +1475,14 @@ public abstract class HtmlElement extends DomElement implements Element {
      * Remove focus from this element.
      */
     public void blur() {
-        getPage().moveFocusToElement(null);
+        getPage().setFocusedElement(null);
     }
 
     /**
      * Sets the focus to this element.
      */
     public void focus() {
-        getPage().moveFocusToElement(this);
+        getPage().setFocusedElement(this);
     }
 
     /**

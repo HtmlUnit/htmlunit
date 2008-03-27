@@ -159,7 +159,7 @@ public class ThreadTest extends TestCase {
             assertEquals("foo", page.getTitleText());
             assertEquals("focus not changed to textfield1",
                          page.getFormByName("form1").getInputByName("textfield1"),
-                         page.getElementWithFocus());
+                         page.getFocusedElement());
             final List<String> expectedAlerts = Collections.singletonList("past focus");
             assertEquals(expectedAlerts, collectedAlerts);
         }

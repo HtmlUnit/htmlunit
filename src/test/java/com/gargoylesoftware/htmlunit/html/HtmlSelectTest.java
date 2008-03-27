@@ -699,9 +699,9 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("select1");
-        assertNull(page.getElementWithFocus());
+        assertNull(page.getFocusedElement());
         select.getOption(0).setSelected(true);
-        assertSame(select, page.getElementWithFocus());
+        assertSame(select, page.getFocusedElement());
     }
 
 }

@@ -1475,13 +1475,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 newPage = this;
             }
 
-            if (newPage != this && getElementWithFocus() == element) {
+            if (newPage != this && getFocusedElement() == element) {
                 // The page was reloaded therefore no element on this page will have the focus.
-                getElementWithFocus().blur();
+                getFocusedElement().blur();
             }
         }
 
-        return getElementWithFocus();
+        return getFocusedElement();
     }
 
     /**
@@ -1493,12 +1493,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public HtmlElement tabToNextElement() {
         final List<HtmlElement> elements = getTabbableElements();
         if (elements.isEmpty()) {
-            moveFocusToElement(null);
+            setFocusedElement(null);
             return null;
         }
 
         final HtmlElement elementToGiveFocus;
-        final HtmlElement elementWithFocus = getElementWithFocus();
+        final HtmlElement elementWithFocus = getFocusedElement();
         if (elementWithFocus == null) {
             elementToGiveFocus = elements.get(0);
         }
@@ -1518,7 +1518,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
 
-        moveFocusToElement(elementToGiveFocus);
+        setFocusedElement(elementToGiveFocus);
         return elementToGiveFocus;
     }
 
@@ -1531,12 +1531,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public HtmlElement tabToPreviousElement() {
         final List<HtmlElement> elements = getTabbableElements();
         if (elements.isEmpty()) {
-            moveFocusToElement(null);
+            setFocusedElement(null);
             return null;
         }
 
         final HtmlElement elementToGiveFocus;
-        final HtmlElement elementWithFocus = getElementWithFocus();
+        final HtmlElement elementWithFocus = getFocusedElement();
         if (elementWithFocus == null) {
             elementToGiveFocus = elements.get(elements.size() - 1);
         }
@@ -1556,7 +1556,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
 
-        moveFocusToElement(elementToGiveFocus);
+        setFocusedElement(elementToGiveFocus);
         return elementToGiveFocus;
     }
 
@@ -1795,8 +1795,25 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @see #tabToPreviousElement()
      * @see #pressAccessKey(char)
      * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
+     * @deprecated As of 2.0, please use {@link #setFocusedElement(HtmlElement)} instead.
      */
     public boolean moveFocusToElement(final HtmlElement newElement) {
+        return setFocusedElement(newElement);
+    }
+
+    /**
+     * Moves the focus to the specified element. This will trigger any relevant JavaScript
+     * event handlers.
+     *
+     * @param newElement The element that will receive the focus, use <code>null</code> to remove focus from any element
+     * @return true if the specified element now has the focus.
+     * @see #getFocusedElement()
+     * @see #tabToNextElement()
+     * @see #tabToPreviousElement()
+     * @see #pressAccessKey(char)
+     * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
+     */
+    public boolean setFocusedElement(final HtmlElement newElement) {
         if (elementWithFocus_ == newElement) {
             // nothing to do
             return true;
@@ -1832,8 +1849,18 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Returns the element with the focus or null if no element has the focus.
      * @return The element with focus or null.
      * @see #moveFocusToElement(HtmlElement)
+     * @deprecated As of 2.0, please use {@link #getFocusedElement(HtmlElement)} instead.
      */
     public HtmlElement getElementWithFocus() {
+        return getFocusedElement();
+    }
+    
+    /**
+     * Returns the element with the focus or null if no element has the focus.
+     * @return The element with focus or null.
+     * @see #setFocusedElement(HtmlElement)
+     */
+    public HtmlElement getFocusedElement() {
         return elementWithFocus_;
     }
 

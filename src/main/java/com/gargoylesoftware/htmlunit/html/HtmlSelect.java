@@ -290,7 +290,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      */
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         if (isSelected) {
-            getPage().moveFocusToElement(this);
+            getPage().setFocusedElement(this);
         }
         
         final boolean triggerHandler  = (selectedOption.isSelected() != isSelected);

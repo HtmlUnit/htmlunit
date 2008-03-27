@@ -264,9 +264,9 @@ public class FocusableElementTest extends WebTestCase {
         final HtmlSelect select1 = (HtmlSelect) page.getElementById("select1");
         final HtmlSelect select2 = (HtmlSelect) page.getElementById("select2");
         final HtmlTextArea textArea = (HtmlTextArea) page.getElementById("myTextarea");
-        page.moveFocusToElement(select1);
-        page.moveFocusToElement(select2);
-        page.moveFocusToElement(select1);
+        page.setFocusedElement(select1);
+        page.setFocusedElement(select2);
+        page.setFocusedElement(select1);
         final String expectedString;
         if (getBrowserVersion().isIE()) {
             expectedString = "focusin select1,focus select1,focusout select1,focusin select2,blur select1,"

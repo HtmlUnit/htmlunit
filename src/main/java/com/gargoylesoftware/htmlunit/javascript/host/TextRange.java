@@ -60,7 +60,7 @@ public class TextRange extends SimpleScriptable {
      */
     public String jsxGet_text() {
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
-        final HtmlElement focused = page.getElementWithFocus();
+        final HtmlElement focused = page.getFocusedElement();
         if (focused instanceof HtmlTextInput) {
             final HtmlTextInput input = (HtmlTextInput) focused;
             return input.getValueAttribute().substring(input.getSelectionStart(), input.getSelectionEnd());
