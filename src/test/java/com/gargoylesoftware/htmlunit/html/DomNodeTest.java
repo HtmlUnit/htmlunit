@@ -694,4 +694,18 @@ public class DomNodeTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getCanonicalXPath() throws Exception {
+        final String content = "<html><head></head><body><div id='div1'/><div id='div2'/></body></html>";
+        final HtmlPage page = loadPage(content);
+        for (final HtmlElement element : page.getAllHtmlChildElements()) {
+            final List< ? extends Object> foundElements = page.getByXPath(element.getCanonicalXPath());
+            assertEquals(1, foundElements.size());
+            assertSame(element, foundElements.get(0));
+        }
+    }
 }

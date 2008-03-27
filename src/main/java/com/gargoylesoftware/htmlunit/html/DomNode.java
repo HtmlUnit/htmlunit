@@ -1289,20 +1289,23 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Facility to evaluate an xpath from the current node.
+     * Facility to evaluate an XPath from the current node.
      *
-     * @param xpathExpr the xpath expression.
+     * @param xpathExpr the XPath expression.
      * @return List of objects found.
+     * @see #getFirstByXPath(String)
+     * @see #getCanonicalXPath()
      */
     public List< ? extends Object> getByXPath(final String xpathExpr) {
         return XPathUtils.getByXPath(this, xpathExpr);
     }
 
     /**
-     * Facility to evaluate an xpath from the current node and get the first result.
+     * Facility to evaluate an XPath from the current node and get the first result.
      *
-     * @param xpathExpr the xpath expression.
+     * @param xpathExpr the XPath expression.
      * @return <code>null</code> if no result is found, the first one otherwise.
+     * @see #getByXPath(String)
      */
     public Object getFirstByXPath(final String xpathExpr) {
         final List< ? > results = getByXPath(xpathExpr);
@@ -1311,6 +1314,44 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         else {
             return results.get(0);
+        }
+    }
+
+    /**
+     * Returns the current canonical XPath of this node, note it is sensitive to any change in the DOM tree.
+     *
+     * @return the current canonical XPath of this node, note it is sensitive to any change in the DOM tree.
+     * @see #getByXPath(String)
+     */
+    public String getCanonicalXPath() {
+        final DomNode parent = getParentDomNode();
+        if (parent == null) {
+            return "";
+        }
+        return parent.getCanonicalXPath() + '/' + getXPathToken();
+    }
+
+    /**
+     * Returns the XPath token of this node only.
+     */
+    private String getXPathToken() {
+        final DomNode parent = getParentDomNode();
+        int total = 0;
+        int nodeIndex = 0;
+        for (final DomNode child : parent.getChildren()) {
+            if (child.getNodeName().equals(getNodeName())) {
+                total++;
+            }
+            if (child == this) {
+                nodeIndex = total;
+            }
+        }
+
+        if (nodeIndex == 1 && total == 1) {
+            return getNodeName();
+        }
+        else {
+            return getNodeName() + '[' + nodeIndex + ']';
         }
     }
 
