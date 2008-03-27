@@ -8,7 +8,7 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="add" dev="asashour">
-                DomNode: add .getFirstByXPath().
+                DomNode: add .getCanonicalXPath().
             </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlPage.moveFocusToElement() and getElementWithFocus(),
