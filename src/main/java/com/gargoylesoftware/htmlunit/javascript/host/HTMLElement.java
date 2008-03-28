@@ -196,15 +196,25 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         for (final HtmlAttr attr : htmlElt.getAttributesCollection()) {
             final String eventName = attr.getName();
             if (eventName.startsWith("on")) {
-                // TODO: check that it is an "allowed" event for the browser, and take care to the case
-                final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attr.getHtmlValue());
-                setEventHandler(eventName, eventHandler);
-                // forward onload, onclick, ondblclick, ... to window
-                if ((domNode instanceof HtmlBody || domNode instanceof HtmlFrameSet)) {
-                    getWindow().getEventListenersContainer()
-                        .setEventHandlerProp(eventName.substring(2), eventHandler);
-                }
+                createEventHandler(eventName, attr.getHtmlValue());
             }
+        }
+    }
+
+    /**
+     * Create the event handler function from the attribute value.
+     * @param eventName the event name (ex: "onclick")
+     * @param attrValue the attribute value
+     */
+    protected void createEventHandler(final String eventName, final String attrValue) {
+        final HtmlElement htmlElt = (HtmlElement) getDomNodeOrDie();
+        // TODO: check that it is an "allowed" event for the browser, and take care to the case
+        final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
+        setEventHandler(eventName, eventHandler);
+        // forward onload, onclick, ondblclick, ... to window
+        if ((htmlElt instanceof HtmlBody || htmlElt instanceof HtmlFrameSet)) {
+            getWindow().getEventListenersContainer()
+                .setEventHandlerProp(eventName.substring(2), eventHandler);
         }
     }
 

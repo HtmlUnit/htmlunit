@@ -49,10 +49,14 @@ import java.util.Stack;
 
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.util.DefaultErrorHandler;
+import org.apache.xerces.xni.Augmentations;
+import org.apache.xerces.xni.QName;
+import org.apache.xerces.xni.XMLAttributes;
 import org.apache.xerces.xni.XNIException;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
 import org.cyberneko.html.HTMLConfiguration;
+import org.cyberneko.html.HTMLTagBalancingListener;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
@@ -342,7 +346,8 @@ public final class HTMLParser {
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
      */
-    private static final class HtmlUnitDOMBuilder extends AbstractSAXParser implements ContentHandler, LexicalHandler {
+    private static final class HtmlUnitDOMBuilder extends AbstractSAXParser
+            implements ContentHandler, LexicalHandler, HTMLTagBalancingListener {
         private final HtmlPage page_;
 
         private Locator locator_;
@@ -351,6 +356,7 @@ public final class HTMLParser {
         private DomNode currentNode_;
         private StringBuilder characters_;
         private boolean headParsed_ = false;
+        private HtmlElement body_;
 
         /**
          * create a new builder for parsing the given response contents
@@ -455,6 +461,10 @@ public final class HTMLParser {
             // remove the old body and move its children to the real body element we just added.
             if (oldBody != null) {
                 oldBody.quietlyRemoveAndMoveChildrenTo(newElement);
+            }
+            
+            if (tagLower.equals("body")) {
+                body_ = newElement;
             }
 
             currentNode_ = newElement;
@@ -579,6 +589,31 @@ public final class HTMLParser {
 
         /** @inheritDoc LexicalHandler#startEntity(String) */
         public void startEntity(final String name) {
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void ignoredEndElement(final QName element, final Augmentations augs) {
+            // nothing
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void ignoredStartElement(final QName elem, final XMLAttributes attrs, final Augmentations augs) {
+            // when multiple body elements are encountered, the attributes of the discarded
+            // elements are used when not previously defined
+            if (body_ != null && "body".equalsIgnoreCase(elem.localpart)) {
+                // add the attributes that don't already exist
+                final int length = attrs.getLength();
+                for (int i = 0; i < length; ++i) {
+                    final String attrName = attrs.getLocalName(i).toLowerCase();
+                    if (body_.getAttributes().getNamedItem(attrName) == null) {
+                        body_.setAttribute(attrName, attrs.getValue(i));
+                    }
+                }
+            }
         }
     }
 }

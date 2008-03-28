@@ -57,7 +57,6 @@ public class MalformedHtmlTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts({ "in test", "BODY" })
     public void testBodyAttributeWhenOpeningBodyGenerated() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"

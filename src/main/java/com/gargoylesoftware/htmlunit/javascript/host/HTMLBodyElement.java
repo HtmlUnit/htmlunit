@@ -37,11 +37,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+
 /**
  * The JavaScript object "HTMLBodyElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class HTMLBodyElement extends HTMLElement {
 
@@ -52,6 +58,33 @@ public class HTMLBodyElement extends HTMLElement {
      */
     public HTMLBodyElement() {
         // Empty.
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
+        
+        // when many body tag are found while parsing, attributes of
+        // different tags are added and should create an event handler when needed
+        // a listener is needed as the node gets created at creation of the first body tag
+        final HtmlAttributeChangeListener listener = new HtmlAttributeChangeListener()
+        {
+            public void attributeAdded(final HtmlAttributeChangeEvent event) {
+                if (event.getName().startsWith("on")) {
+                    createEventHandler(event.getName(), event.getValue());
+                }
+            }
+            public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+                // ignore
+            }
+            public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+                // ignore
+            }
+        };
+        ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
     }
 
 }
