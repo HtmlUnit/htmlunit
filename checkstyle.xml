@@ -3,9 +3,7 @@
     "-//Puppy Crawl//DTD Check Configuration 1.1//EN"
     "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
 
-<!--
-  Checkstyle checks configured for Maven.
--->
+<!-- Checkstyle checks configured for Maven. -->
 
 <module name="Checker">
     <!-- Checks that a package.html file exists for each package.     -->
@@ -28,19 +26,19 @@
         </module>
         <property name="tabWidth" value="4"/>
         <module name="LeftCurly">
-          <property name="option" value="eol"/>
+            <property name="option" value="eol"/>
         </module>
         <module name="RightCurly">
-          <property name="option" value="alone"/>
+            <property name="option" value="alone"/>
         </module>
         <module name="LineLength">
-          <property name="max" value="120"/>
+            <property name="max" value="120"/>
         </module>
         <module name="MethodLength">
-          <property name="max" value="175"/>
+            <property name="max" value="175"/>
         </module>
         <module name="ConstantName">
-          <property name="format" value="log|^[a-zA-Z][a-zA-Z0-9_]*$"/>
+            <property name="format" value="log|^[a-zA-Z][a-zA-Z0-9_]*$"/>
         </module>
 
         <!-- Checks for Javadoc comments.                     -->

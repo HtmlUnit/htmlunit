@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <!--
- This is a configuration file for the ant build tool
- http://ant.apache.org
- $Revision$
+    This is a configuration file for the ant build tool
+    http://ant.apache.org
+    $Revision$
 
 
- Authors:
-    Mike Bowler
-    David K. Taylor
-    Brad Clarke
-    Tony Graham
-    Marc Guillemot
-    Ahmed Ashour
+    Authors:
+        Mike Bowler
+        David K. Taylor
+        Brad Clarke
+        Tony Graham
+        Marc Guillemot
+        Ahmed Ashour
 -->
 
 <project name="HtmlUnit" default="jar" basedir=".">
@@ -174,9 +174,8 @@ JUnit results available here: ${test.reports.dir}/index.html
             description="Get a clean set of all needed jars"
             depends="clean-jars,get-jars"/>
 
-    <target name="clean-jars"
-            description="Delete existing jars">
-         <delete dir="${jars.dir}"/>
+    <target name="clean-jars" description="Delete existing jars">
+        <delete dir="${jars.dir}"/>
     </target>
 
     <target name="get-jars" depends="setProxy"

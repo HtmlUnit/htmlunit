@@ -1232,8 +1232,9 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHead">
     </class>
 
-    <!-- Because it is associated with two HtmlClasses,
-         the one-to-many configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
+    <!--
+        Because it is associated with two HtmlClasses, the one-to-many
+        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLHeadingElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLHeadingElement"
         JSObject="true">
     </class>
@@ -1374,8 +1375,9 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
     </class>
 
-    <!-- Because it is associated with two HtmlClasses,
-         the one-to-many configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
+    <!--
+        Because it is associated with two HtmlClasses, the one-to-many
+        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLQuoteElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLQuoteElement"
         JSObject="true">
     </class>
@@ -1516,8 +1518,9 @@
         </function>
     </class>
 
-    <!-- Because it is associated with three HtmlClasses,
-         the one-to-many configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
+    <!--
+        Because it is associated with two HtmlClasses, the one-to-many
+        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class name="HTMLTableSectionElement" extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLTableSectionElement"
         JSObject="true">
     </class>
@@ -1724,12 +1727,12 @@
     </class>
 
     <class name="Popup" classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
-      <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp" descr="MSDN documentation"/>
-      <browser name="Microsoft Internet Explorer"/>
-      <property name="document" readable="true" writable="false"/>
-      <property name="isOpen" readable="true" writable="false"/>
-      <function name="hide"/>
-      <function name="show"/>
+        <doclink url="http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp" descr="MSDN documentation"/>
+        <browser name="Microsoft Internet Explorer"/>
+        <property name="document" readable="true" writable="false"/>
+        <property name="isOpen" readable="true" writable="false"/>
+        <function name="hide"/>
+        <function name="show"/>
     </class>
 
     <class name="Range" classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">

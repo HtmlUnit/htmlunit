@@ -1665,45 +1665,45 @@
                 for scripts contained in the frames.
             </action>
             <action type="update" dev="mguillem">
-                 JavaScript: added support for document.frames (specific to IE).
+                JavaScript: added support for document.frames (specific to IE).
             </action>
             <action type="update" dev="mguillem" id="1304741">
-                 JavaScript: when simulating IE, second parameter in Select.add can be omitted.
+                JavaScript: when simulating IE, second parameter in Select.add can be omitted.
             </action>
             <action type="update" dev="mguillem">
-                 JavaScript: in a frameset, document.body returns the frameset node.
+                JavaScript: in a frameset, document.body returns the frameset node.
             </action>
             <action type="update" dev="mguillem">
-                 JavaScript: added dummy implementation of the properties scrollHeight, scrollLeft,
-                 scrollTop and scrollWidth for html elements.
+                JavaScript: added dummy implementation of the properties scrollHeight, scrollLeft,
+                scrollTop and scrollWidth for html elements.
             </action>
             <action type="update" dev="mguillem" id="1280127">
-                 JavaScript: added document.anchors.
+                JavaScript: added document.anchors.
             </action>
             <action type="update" dev="mguillem" id="1209692">
-                 JavaScript: XMLHttpRequest now accepts relative urls.
+                JavaScript: XMLHttpRequest now accepts relative urls.
             </action>
             <action type="update" dev="mguillem">
-                 JavaScript: allow creation of XMLHttpRequest as new ActiveXObject('Microsoft.XMLHTTP')
-                 when simulating Internet Explorer.
+                JavaScript: allow creation of XMLHttpRequest as new ActiveXObject('Microsoft.XMLHTTP')
+                when simulating Internet Explorer.
             </action>
             <action type="update" dev="mguillem">
-                 JavaScript: default conversion of host objects to string is now "[object Xxxx]" like what Mozilla does
+                JavaScript: default conversion of host objects to string is now "[object Xxxx]" like what Mozilla does
             </action>
             <action type="update" dev="mguillem" id="1289462" due-to="loddel">
-                 DomNode.asXml() now produces correct xml encoding special characters.
+                DomNode.asXml() now produces correct xml encoding special characters.
             </action>
             <action type="update" dev="mguillem" id="1267106" due-to="Bruce Faulkner">
-                 JavaScript: implemented property offsetParent.
+                JavaScript: implemented property offsetParent.
             </action>
         </release>
         <release version="1.7" date="Aug 23, 2005">
             <action type="update" dev="mguillem" id="1153775">
-                 JavaScript: img nodes can be accessed by id or name within a form.
+                JavaScript: img nodes can be accessed by id or name within a form.
             </action>
             <action type="update" dev="mguillem" id="1265410" due-to="Stefan Anzinger">
-                 Click on a JavaScript link loading a page containing frames now return
-                 the main loaded page and not a frame anymore.
+                Click on a JavaScript link loading a page containing frames now return
+                the main loaded page and not a frame anymore.
             </action>
             <action type="update" dev="mguillem">
                 Trim the text of HtmlOption when it is used as initial value attribute
@@ -2232,8 +2232,8 @@
                 Allow onclick event handler to be set by JavaScript.
             </action>
             <action type="update" dev="cerskine">
-                    Added logic to WebClient to allow messages from parsing the HTML to be displayed on the
-                    on the console.
+                Added logic to WebClient to allow messages from parsing the HTML to be displayed on the
+                on the console.
             </action>
             <action type="update" dev="mguillem" due-to="Sergey Gorelkin" id="1085612">
                 Fixed bug changing "//" to "/" in query parameters of URLs called from a page.
@@ -2338,11 +2338,11 @@
                 Added support for InnerHTML().
             </action>
             <action type="update" dev="mbowler" due-to="Chris Erskine" id="1065797">
-                    Added support for enabling the errors from
+                Added support for enabling the errors from
                 NekoHtml by setting a value on the WebClient.
             </action>
             <action type="update" dev="mbowler" due-to="Mike Gallaher" id="1065797">
-                 Previously, if you clone an element, and set an attribute in either
+                Previously, if you clone an element, and set an attribute in either
                 the old or the new, the new setting appears in the other one as well.
                 This was because cloneNode just left the attributemap
                 alone, so the clones wound up using the same ones as
@@ -2668,15 +2668,15 @@
                 refreshes
             </action>
             <action type="update" dev="mbowler">
-                    Added serialVersionUID to all classes that are Serializable but didn't already
-                    have one of these.
+                Added serialVersionUID to all classes that are Serializable but didn't already
+                have one of these.
             </action>
             <action type="update" dev="mbowler" due-to="Darrell DeBoer" id="1034897">
-                    Fix for performance problem in JavaScript handling.
+                Fix for performance problem in JavaScript handling.
             </action>
             <action type="update" dev="mbowler" id="856797">
-                    If the server returns an unsupported encoding type then the browsers assume
-                    ISO-8859-1.  Now HtmlUnit does the same.
+                If the server returns an unsupported encoding type then the browsers assume
+                ISO-8859-1.  Now HtmlUnit does the same.
             </action>
         </release>
 
@@ -2804,9 +2804,9 @@
                 Patch submitted by Jun Chen
             </action>
             <action type="update" dev="mbowler" id="825003" due-to="Brad Clarke">
-                 An HtmlTextArea should not contain anything but preformatted text,
-                 so doing things such as converting &lt;br&gt; to line breaks and removing
-                 extra white space should not happen. Patch supplied by Brad Clarke.
+                An HtmlTextArea should not contain anything but preformatted text,
+                so doing things such as converting &lt;br&gt; to line breaks and removing
+                extra white space should not happen. Patch supplied by Brad Clarke.
             </action>
             <action type="update" dev="mbowler" id="824069">
                 Fixed exception when trying to reference one frame by name from

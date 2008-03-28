@@ -229,6 +229,7 @@ public class CodeStyleTest {
                         new File(".").getAbsolutePath().length() - 1);
                     mixedIndentation(lines, relativePath);
                     trailingWhitespace(lines, relativePath);
+                    badIndentationLevels(lines, relativePath);
                 }
             }
         }
@@ -257,6 +258,21 @@ public class CodeStyleTest {
                 if (Character.isWhitespace(last)) {
                     fail("Trailing whitespace in " + relativePath + ", line: " + (i + 1));
                 }
+            }
+        }
+    }
+
+    /**
+     * Verifies that no XML files have bad indentation levels (each indentation level is 4 spaces).
+     */
+    private void badIndentationLevels(final List<String> lines, final String relativePath) {
+        for (int i = 0; i < lines.size(); i++) {
+            final String line = lines.get(i);
+            final int length1 = line.length();
+            final int length2 = line.trim().length();
+            final int indentation = length1 - length2;
+            if (indentation % 4 != 0) {
+                fail("Bad indentation level (" + indentation + ") in " + relativePath + ", line: " + (i + 1));
             }
         }
     }
