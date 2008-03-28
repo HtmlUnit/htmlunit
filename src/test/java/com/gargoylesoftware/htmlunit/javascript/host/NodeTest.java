@@ -471,7 +471,7 @@ public class NodeTest extends WebTestCase {
     }
 
     /**
-     * element.appendChild: If the parent has a null parentNode,
+     * Test element.appendChild: If the parent has a null parentNode,
      * IE creates a DocumentFragment be the parent's parentNode.
      *
      * @throws Exception If the test fails.
@@ -505,7 +505,7 @@ public class NodeTest extends WebTestCase {
     }
 
     /**
-     * element.appendChild: If the parent has a null parentNode,
+     * Test element.appendChild: If the parent has a null parentNode,
      * IE creates a DocumentFragment be the parent's parentNode.
      *
      * @throws Exception If the test fails.

@@ -134,7 +134,7 @@ public class WebClient implements Serializable {
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
 
     /**
-     * like Firefox default value for network.http.redirection-limit
+     * Like Firefox default value for network.http.redirection-limit
      */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 

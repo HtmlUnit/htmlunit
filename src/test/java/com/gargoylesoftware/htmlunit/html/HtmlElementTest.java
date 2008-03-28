@@ -545,6 +545,7 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     /**
+     * Tests constants.
      */
     @Test
     public void testConstants() {

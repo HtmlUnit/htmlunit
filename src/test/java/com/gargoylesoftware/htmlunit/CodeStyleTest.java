@@ -114,14 +114,22 @@ public class CodeStyleTest {
     }
 
     /**
-     * Checks the JavaDoc first line, it should not be empty.
+     * Checks the JavaDoc first line, it should not be empty, and should not start with lower-case.
      */
     private void javaDocFirstLine(final List<String> lines, final String relativePath) throws IOException {
         for (int index = 1; index < lines.size(); index++) {
             final String previousLine = lines.get(index - 1);
             final String currentLine = lines.get(index);
-            if (previousLine.trim().equals("/**") && currentLine.trim().equals("*")) {
-                fail("Empty line in " + relativePath + ", line: " + (index + 1));
+            if (previousLine.trim().equals("/**")) {
+                if (currentLine.trim().equals("*") || currentLine.contains("*/")) {
+                    fail("Empty line in " + relativePath + ", line: " + (index + 1));
+                }
+                if (currentLine.trim().startsWith("*")) {
+                    final String text = currentLine.trim().substring(1).trim();
+                    if (text.length() != 0 && Character.isLowerCase(text.charAt(0))) {
+                        fail("Lower case start in " + relativePath + ", line: " + (index + 1));
+                    }
+                }
             }
         }
     }

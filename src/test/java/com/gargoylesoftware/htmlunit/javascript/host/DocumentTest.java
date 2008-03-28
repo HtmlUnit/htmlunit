@@ -2787,7 +2787,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * document.XXX should first look at elements named XXX before using standard functions.
+     * Any document.XXX should first look at elements named XXX before using standard functions.
      * @throws Exception if the test fails
      */
     @Test

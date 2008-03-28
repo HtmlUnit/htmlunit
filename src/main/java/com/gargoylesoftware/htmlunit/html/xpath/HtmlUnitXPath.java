@@ -76,7 +76,7 @@ public class HtmlUnitXPath {
     public static final int MATCH = 1;
 
     /**
-     * initial the function table
+     * Initiates the function table.
      */
     private void initFunctionTable() {
         funcTable_ = new FunctionTable();

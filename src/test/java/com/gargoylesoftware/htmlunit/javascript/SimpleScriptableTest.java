@@ -116,6 +116,7 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
+     * Test.
      */
     @Test
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {

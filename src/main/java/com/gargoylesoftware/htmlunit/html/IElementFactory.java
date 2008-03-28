@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import org.xml.sax.Attributes;
 
 /**
- * specification of a factory capable of creating HtmlElement objects.
+ * Specification of a factory capable of creating HtmlElement objects.
  *
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -48,7 +48,7 @@ import org.xml.sax.Attributes;
  */
 public interface IElementFactory {
     /**
-     * create an element according to this factory's specification.
+     * Creates an element according to this factory's specification.
      * @param page the enclosing page for the new element. Note that the element is <em>not</em> yet added
      * into the DOM tree.
      * @param tagName the tag name. Most factories will be responsible for a specific tag, but this
@@ -62,7 +62,7 @@ public interface IElementFactory {
             final Attributes attributes);
 
     /**
-     * create an element according to this factory's specification.
+     * Creates an element according to this factory's specification.
      * @param page the enclosing page for the new element. Note that the element is <em>not</em> yet added
      * into the DOM tree.
      * @param namespaceURI the URI that identifies an XML namespace.

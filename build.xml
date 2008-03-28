@@ -170,7 +170,7 @@ JUnit results available here: ${test.reports.dir}/index.html
         </sequential>
     </macrodef>
 
-	<!-- Get dependency in HtmlUnit snapshot repository -->
+    <!-- Get dependency in HtmlUnit snapshot repository -->
     <macrodef name="get-snapshot-dependency">
         <attribute name="project"/>
         <attribute name="jarName"/>

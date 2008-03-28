@@ -114,7 +114,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * set the target property of this link.
+     * Sets the target property of this link.
      * @param target target attribute value.
      */
     public void jsxSet_target(final String target) {
@@ -140,7 +140,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * sets the href attribute of this link to the specified URL.
+     * Sets the href attribute of this link to the specified URL.
      */
     private void setUrl(final URL url) {
         getHtmlElementOrDie().setAttributeValue("href", url.toString());

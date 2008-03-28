@@ -360,7 +360,7 @@ public final class HTMLParser {
         private HtmlElement body_;
 
         /**
-         * create a new builder for parsing the given response contents
+         * Creates a new builder for parsing the given response contents
          * @param webResponse the response data
          * @param webWindow the web window into which the page is to be loaded
          */
@@ -405,7 +405,7 @@ public final class HTMLParser {
         }
 
         /**
-         * set the document locator
+         * Sets the document locator.
          * @param locator
          */
         public void setDocumentLocator(final Locator locator) {
@@ -510,8 +510,7 @@ public final class HTMLParser {
         }
 
         /**
-         * pick up the character data accumulated so far and add it to the
-         * current element as a text node
+         * Picks up the character data accumulated so far and add it to the current element as a text node.
          */
         private void handleCharacters() {
             if (characters_ != null && characters_.length() > 0) {
