@@ -407,18 +407,18 @@ public class GWT14Test extends WebTestCase {
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/KitchenSink.html";
         final HtmlPage page = (HtmlPage) client.getPage(url);
-        page.getEnclosingWindow().getThreadManager().joinAll(3000);
+        page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         final HtmlDivision infoDiv = (HtmlDivision) page.getFirstByXPath("//div[@class='ks-Info']");
         assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
         final Page page2 = page.getAnchorByHref("#Widgets").click();
-        page.getEnclosingWindow().getThreadManager().joinAll(3000);
+        page.getEnclosingWindow().getThreadManager().joinAll(10000);
         assertSame(page, page2);
         assertEquals("Basic Widgets", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
 
         final Page page3 = page.getAnchorByHref("#Panels").click();
-        page.getEnclosingWindow().getThreadManager().joinAll(3000);
+        page.getEnclosingWindow().getThreadManager().joinAll(10000);
         assertSame(page, page3);
         assertEquals("Panels", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
     }
