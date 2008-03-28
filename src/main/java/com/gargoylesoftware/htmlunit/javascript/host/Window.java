@@ -38,11 +38,13 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
@@ -62,8 +64,12 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
+import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -104,6 +110,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
     private final JavaScriptEngine scriptEngine_;
     private EventListenersContainer eventListenersContainer_;
+
+    /**
+     * Cache computed styles when possible, because their calculation is very expensive, involving lots
+     * of CSS parsing and lots of XPath expression evaluation (CSS selectors are translated to XPath and
+     * then evaluated). We use a weak hash map because we don't want this cache to be the only reason
+     * nodes are kept around in the JVM, if all other references to them are gone.
+     */
+    private Map<Node, ComputedCSSStyleDeclaration> computedStyles_ =
+        new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
 
     /**
      * Creates an instance.
@@ -448,6 +463,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         document_.setWindow(this);
         if (webWindow.getEnclosedPage() instanceof HtmlPage) {
             document_.setDomNode((DomNode) webWindow.getEnclosedPage());
+        }
+
+        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(computedStyles_);
+        final DomNode docNode = document_.getDomNodeOrNull();
+        if (docNode != null) {
+            docNode.addDomChangeListener(listener);
+            if (docNode instanceof HtmlElement) {
+                ((HtmlElement) docNode).addHtmlAttributeChangeListener(listener);
+            }
         }
 
         navigator_ = new Navigator();
@@ -1081,6 +1105,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * An undocumented IE function.
+     */
+    public void jsxFunction_CollectGarbage() {
+        // Empty.
+    }
+
+    /**
      * Returns computed style of the element. Computed style represents the final computed values
      * of all CSS properties for the element. This method's return value is of the same type as
      * that of <tt>element.style</tt>, but the value returned by this method is read-only.
@@ -1090,23 +1121,118 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the computed style
      */
     public ComputedCSSStyleDeclaration jsxFunction_getComputedStyle(final Node element, final String pseudoElt) {
+        ComputedCSSStyleDeclaration style = computedStyles_.get(element);
+        if (style != null) {
+            return style;
+        }
+
         final HTMLElement e = (HTMLElement) element;
         final CSSStyleDeclaration original = (CSSStyleDeclaration) e.jsxGet_style();
-        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(original);
+        style = new ComputedCSSStyleDeclaration(original);
 
-        final StyleSheetList sheets = (StyleSheetList) document_.jsxGet_styleSheets();
+        final StyleSheetList sheets = document_.jsxGet_styleSheets();
         for (int i = 0; i < sheets.jsxGet_length(); i++) {
             final Stylesheet sheet = sheets.jsxFunction_item(i);
             sheet.modifyIfNecessary(style, e);
         }
 
+        computedStyles_.put(element, style);
+
         return style;
     }
 
     /**
-     * An undocumented function of IE.
+     * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
+     * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
+     * results in very meager performance gains. In order to get good (but still correct) performance, we need to be
+     * a little smarter.</p>
+     *
+     * <p>CSS 2.1 has the following <a href="http://www.w3.org/TR/CSS21/selector.html">selector types</a> (where "SN" is
+     * shorthand for "the selected node"):</p>
+     *
+     * <ol>
+     *   <li><em>Universal</em> (i.e. "*"): Affected by the removal of SN from the document.</li>
+     *   <li><em>Type</em> (i.e. "div"): Affected by the removal of SN from the document.</li>
+     *   <li><em>Descendant</em> (i.e. "div span"): Affected by changes to SN or to any of its ancestors.</li>
+     *   <li><em>Child</em> (i.e. "div > span"): Affected by changes to SN or to its parent.</li>
+     *   <li><em>Adjacent Sibling</em> (i.e. "table + p"): Affected by changes to SN or its previous sibling.</li>
+     *   <li><em>Attribute</em> (i.e. "div.up, div[class~=up]"): Affected by changes to an attribute of SN.</li>
+     *   <li><em>ID</em> (i.e. "#header): Affected by changes to the <tt>id</tt> attribute of SN.</li>
+     *   <li><em>Pseudo-Elements and Pseudo-Classes</em> (i.e. "p:first-child"): Affected by changes to parent.</li>
+     * </ol>
+     *
+     * <p>Together, these rules dictate that the smart (but still lazy) way of removing elements from the computed style
+     * cache is as follows -- whenever a node changes in any way, the cache needs to be cleared of styles for nodes
+     * which:</p>
+     *
+     * <ul>
+     *   <li>are actually the same node as the node that changed</li>
+     *   <li>are siblings of the node that changed</li>
+     *   <li>are descendants of the node that changed</li>
+     * </ul>
+     *
+     * <p>This listener is serialized whenever an {@link HtmlPage} is serialized, because every HTML document has one
+     * of these listeners. The map instance variable is transient so that we can continue to serialize pages, but cache
+     * eviction won't work correctly on deserialized pages...</p>
      */
-    public void jsxFunction_CollectGarbage() {
-        // nothing
+    private static class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
+        Serializable {
+
+        private static final long serialVersionUID = -4651000523078926322L;
+
+        // TODO: shouldn't be transient
+        private transient Map<Node, ComputedCSSStyleDeclaration> cache_;
+
+        public DomHtmlAttributeChangeListenerImpl(final Map<Node, ComputedCSSStyleDeclaration> cache) {
+            cache_ = cache;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeAdded(final DomChangeEvent event) {
+            nodeChanged(event.getChangedNode());
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeDeleted(final DomChangeEvent event) {
+            nodeChanged(event.getChangedNode());
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeAdded(final HtmlAttributeChangeEvent event) {
+            nodeChanged(event.getHtmlElement());
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+            nodeChanged(event.getHtmlElement());
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+            nodeChanged(event.getHtmlElement());
+        }
+
+        private void nodeChanged(final DomNode changed) {
+            final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = cache_.entrySet().iterator();
+            while (i.hasNext()) {
+                final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
+                final DomNode node = entry.getKey().getDomNodeOrDie();
+                if (changed == node
+                    || changed.getParentDomNode() == node.getParentDomNode()
+                    || changed.isAncestorOf(node)) {
+                    i.remove();
+                }
+            }
+        }
     }
 }
