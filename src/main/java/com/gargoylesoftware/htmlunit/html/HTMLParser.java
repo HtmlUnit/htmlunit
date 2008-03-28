@@ -605,7 +605,7 @@ public final class HTMLParser {
         public void ignoredStartElement(final QName elem, final XMLAttributes attrs, final Augmentations augs) {
             // when multiple body elements are encountered, the attributes of the discarded
             // elements are used when not previously defined
-            if (body_ != null && "body".equalsIgnoreCase(elem.localpart)) {
+            if (body_ != null && "body".equalsIgnoreCase(elem.localpart) && attrs != null) {
                 // add the attributes that don't already exist
                 final int length = attrs.getLength();
                 for (int i = 0; i < length; ++i) {
