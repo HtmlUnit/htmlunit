@@ -158,7 +158,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the style object for this element.
      * @return the style object for this element
      */
-    public Object jsxGet_style() {
+    public CSSStyleDeclaration jsxGet_style() {
         return style_;
     }
 
@@ -174,7 +174,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the runtime style object for this element.
      * @return the runtime style object for this element.
      */
-    public Object jsxGet_runtimeStyle() {
+    public CSSStyleDeclaration jsxGet_runtimeStyle() {
         return style_;
     }
 
