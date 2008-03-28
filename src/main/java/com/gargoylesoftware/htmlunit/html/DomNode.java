@@ -1320,7 +1320,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns the current canonical XPath expression allowing to identify this node.
      * For example "/html/body/table[3]/tbody/tr[5]/td[2]/span/a[3]".<br/>
-     * <span style="color:red">WARNING:</span> such an XPath expression is often quite bad 
+     * <span style="color:red">WARNING:</span> such an XPath expression is often quite bad
      * to identify a node as it is highly sensitive to changes in the DOM tree even when
      * they are not directly related to this node.
      * @return the current canonical XPath of this node.
