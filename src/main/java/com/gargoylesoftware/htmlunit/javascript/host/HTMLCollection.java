@@ -94,7 +94,10 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * It returns the HTML element itself except for frames where it returns the nested window.
      */
     private Transformer transformer_;
-    
+
+    /**
+     * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
+     */
     private List<Object> cachedElements_;
 
     /**
@@ -103,7 +106,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     @Deprecated
     public HTMLCollection() {
-        // nothing
+        // Empty.
     }
 
     /**
