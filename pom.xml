@@ -71,7 +71,7 @@
                 <artifactId>maven-clover-plugin</artifactId>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <configuration>
-                    <licenseLocation>${basedir}/clover2.license</licenseLocation>
+                    <licenseLocation>${basedir}/clover.license</licenseLocation>
                     <jdk>1.5</jdk>
                 </configuration>
                 <executions>
@@ -136,7 +136,7 @@
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>maven-clover-plugin</artifactId>
                 <configuration>
-                    <licenseLocation>${basedir}/clover2.license</licenseLocation>
+                    <licenseLocation>${basedir}/clover.license</licenseLocation>
                     <jdk>1.5</jdk>
                 </configuration>
             </plugin>
