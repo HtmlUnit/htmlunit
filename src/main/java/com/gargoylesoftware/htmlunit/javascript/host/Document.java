@@ -1230,12 +1230,12 @@ public class Document extends EventNode {
     }
 
     /**
-     * Retrieves a collection of styleSheet objects representing the style sheets that correspond
+     * Retrieves a collection of stylesheet objects representing the style sheets that correspond
      * to each instance of a Link or {@link CSSStyleDeclaration} object in the document.
      *
      * @return styleSheet collection.
      */
-    public Object jsxGet_styleSheets() {
+    public StyleSheetList jsxGet_styleSheets() {
         if (styleSheets_ == null) {
             styleSheets_ = new StyleSheetList(this);
         }
