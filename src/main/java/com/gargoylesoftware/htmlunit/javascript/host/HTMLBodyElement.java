@@ -37,10 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * The JavaScript object "HTMLBodyElement".
@@ -61,30 +57,17 @@ public class HTMLBodyElement extends HTMLElement {
     }
     
     /**
-     * {@inheritDoc}
+     * Creates the event handler from the attribute value. This has to be done no matter
+     * which browser is simulated to handle ill formed html code with may body (may be generated) elements.
+     * @param attributeName the attribute name
+     * @param value the value
      */
-    @Override
-    public void setDomNode(final DomNode domNode) {
-        super.setDomNode(domNode);
-        
+    public void createEventHandlerFromAttribute(final String attributeName, final String value) {
         // when many body tag are found while parsing, attributes of
         // different tags are added and should create an event handler when needed
-        // a listener is needed as the node gets created at creation of the first body tag
-        final HtmlAttributeChangeListener listener = new HtmlAttributeChangeListener()
-        {
-            public void attributeAdded(final HtmlAttributeChangeEvent event) {
-                if (event.getName().startsWith("on")) {
-                    createEventHandler(event.getName(), event.getValue());
-                }
-            }
-            public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-                // ignore
-            }
-            public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-                // ignore
-            }
-        };
-        ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
-    }
 
+        if (attributeName.toLowerCase().startsWith("on")) {
+            createEventHandler(attributeName, value);
+        }
+    }
 }

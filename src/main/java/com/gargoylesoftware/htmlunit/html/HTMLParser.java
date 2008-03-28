@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLBodyElement;
 
 /**
  * SAX parser implementation that uses the neko {@link org.cyberneko.html.HTMLConfiguration}
@@ -611,6 +612,10 @@ public final class HTMLParser {
                     final String attrName = attrs.getLocalName(i).toLowerCase();
                     if (body_.getAttributes().getNamedItem(attrName) == null) {
                         body_.setAttribute(attrName, attrs.getValue(i));
+                        if (attrName.startsWith("on") && body_.getScriptObject() != null) {
+                            final HTMLBodyElement jsBody = (HTMLBodyElement) body_.getScriptObject();
+                            jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
+                        }
                     }
                 }
             }
