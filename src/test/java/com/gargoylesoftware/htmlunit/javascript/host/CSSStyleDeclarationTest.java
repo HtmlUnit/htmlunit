@@ -736,4 +736,61 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Verifies that setting margins all at once and setting margins individually all work, both in static
+     * styles and in calculated styles.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void marginAllvsMarginSingle() throws Exception {
+        final String html =
+              "<html>\n"
+            + "    <head>\n"
+            + "        <title>Test</title>\n"
+            + "        <style>\n"
+            + "            #m1 { margin: 3px; }\n"
+            + "            #m2 { margin-left: 3px; margin: 5px; }\n"
+            + "            #m3 { margin: 2px; margin-left: 7px; }\n"
+            + "        </style>\n"
+            + "        <script>\n"
+            + "            function test() {\n"
+            + "                alertComputedMargins('m1');\n"
+            + "                alertComputedMargins('m2');\n"
+            + "                alertComputedMargins('m3');\n"
+            + "                alertNonComputedMargins('m4');\n"
+            + "                alertNonComputedMargins('m5');\n"
+            + "                alertNonComputedMargins('m6');\n"
+            + "            }\n"
+            + "            function alertComputedMargins(id) {\n"
+            + "                var e = document.getElementById(id);\n"
+            + "                var s = e.currentStyle ? e.currentStyle : getComputedStyle(e, null);\n"
+            + "                alert('L:' + s.marginLeft + ',R:' + s.marginRight +\n"
+            + "                      ',T:' + s.marginTop + ',B:' + s.marginBottom);\n"
+            + "            }\n"
+            + "            function alertNonComputedMargins(id) {\n"
+            + "                var e = document.getElementById(id);\n"
+            + "                var s = e.style;\n"
+            + "                alert('L:' + s.marginLeft + ',R:' + s.marginRight +\n"
+            + "                      ',T:' + s.marginTop + ',B:' + s.marginBottom);\n"
+            + "            }\n"
+            + "        </script>\n"
+            + "    </head>\n"
+            + "    <body onload='test()'>\n"
+            + "        <div id='m1'>m1</div>\n"
+            + "        <div id='m2'>m2</div>\n"
+            + "        <div id='m3'>m3</div>\n"
+            + "        <div id='m4' style='margin: 3px;'>m4</div>\n"
+            + "        <div id='m5' style='margin-left: 3px; margin: 5px;'>m5</div>\n"
+            + "        <div id='m6' style='margin: 2px; margin-left: 7px;'>m6</div>\n"
+            + "    </body>\n"
+            + "</html>";
+        final String[] expected = {
+            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
+            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }

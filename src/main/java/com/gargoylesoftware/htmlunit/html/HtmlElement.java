@@ -270,7 +270,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public final String getAttributeValue(final String attributeName) {
         final HtmlAttr attr = (HtmlAttr) attributes_.get(attributeName.toLowerCase());
-
         if (attr != null) {
             return attr.getNodeValue();
         }

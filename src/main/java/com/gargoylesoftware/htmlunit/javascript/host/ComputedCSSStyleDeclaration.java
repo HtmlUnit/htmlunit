@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.mozilla.javascript.Context;
@@ -57,12 +58,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private static final long serialVersionUID = -1883166331827717255L;
 
     /**
-     * Local modifications maintained here rather than in the element.
+     * Local modifications maintained here rather than in the element. We use a sorted
+     * map so that results are deterministic and thus easily testable.
      */
-    private Map<String, String> localModifications_ = new HashMap<String, String>();
-    
+    private SortedMap<String, StyleElement> localModifications_ = new TreeMap<String, StyleElement>();
+
     private static final Map<String, String> DEFAULT_DISPLAY;
-    
+
     static {
         final Map<String, String> map = new HashMap<String, String>();
         map.put("A", "inline");
@@ -104,23 +106,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     void setLocalStyleAttribute(final String name, final String newValue) {
-        localModifications_.put(name, newValue);
+        final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
+        localModifications_.put(name, element);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected SortedMap<String, String> getStyleMap(final boolean camelCase) {
-        final SortedMap<String, String> styleMap = super.getStyleMap(camelCase);
+    protected SortedMap<String, StyleElement> getStyleMap(final boolean camelCase) {
+        final SortedMap<String, StyleElement> styleMap = super.getStyleMap(camelCase);
         if (localModifications_ != null) {
-            for (final Map.Entry<String, String> entry : localModifications_.entrySet()) {
-                String key = entry.getKey();
+            for (final StyleElement e : localModifications_.values()) {
+                String key = e.getName();
                 if (camelCase) {
                     key = camelize(key);
                 }
-                final String value = entry.getValue();
-                styleMap.put(key, value);
+                final StyleElement element = new StyleElement(key, e.getValue(), e.getIndex());
+                styleMap.put(key, element);
             }
         }
         return styleMap;

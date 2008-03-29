@@ -68,6 +68,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     /** The element to which this style belongs. */
     private HTMLElement jsElement_;
 
+    /** The current style element index. */
+    private long currentElementIndex_;
+
     /**
      * Create an instance. JavaScript objects must have a default constructor.
      */
@@ -102,19 +105,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
         if (getBrowserVersion().isIE()) {
             // If a behavior was specified in the style, apply the behavior.
-            for (final Map.Entry<String, String> entry : getStyleMap(true).entrySet()) {
-                final String key = entry.getKey();
-                if ("behavior".equals(key)) {
-                    final String value = entry.getValue();
+            for (final StyleElement element : getStyleMap(true).values()) {
+                if ("behavior".equals(element.getName())) {
                     try {
-                        final Object[] url = URL_FORMAT.parse(value);
+                        final Object[] url = URL_FORMAT.parse(element.getValue());
                         if (url.length > 0) {
                             jsElement_.jsxFunction_addBehavior((String) url[0]);
                             break;
                         }
                     }
                     catch (final ParseException e) {
-                        getLog().warn("Invalid behavior: '" + value + "'.");
+                        getLog().warn("Invalid behavior: '" + element.getValue() + "'.");
                     }
                 }
             }
@@ -137,18 +138,51 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * Returns the named style attribute value.
-     * @param name the style attribute name
+     * Returns the value of the named style attribute, or an empty string if it is not found.
+     *
+     * @param name the name of the style attribute whose value is to be retrieved
      * @param camelCase whether or not the name is expected to be in camel case
-     * @return empty string if noting found
+     * @return the named style attribute value, or an empty string if it is not found
      */
     protected String getStyleAttribute(final String name, final boolean camelCase) {
-        final String value = getStyleMap(camelCase).get(name);
-        if (value == null) {
-            return "";
+        final StyleElement element = getStyleMap(camelCase).get(name);
+        if (element != null && element.getValue() != null) {
+            return element.getValue();
         }
         else {
-            return value;
+            return "";
+        }
+    }
+
+    /**
+     * Returns the value of one of the two named style attributes. If both attributes exist,
+     * the value of the attribute that was declared last is returned. If only one of the
+     * attributes exists, its value is returned. If neither attribute exists, an empty string
+     * is returned.
+     *
+     * @param name1 the name of the first style attribute
+     * @param name2 the name of the second style attribute
+     * @param camelCase whether or not the names are expected to be in camel case
+     * @return the value of one of the two named style attributes
+     */
+    protected String getStyleAttribute(final String name1, final String name2, final boolean camelCase) {
+        final SortedMap<String, StyleElement> styleMap = getStyleMap(camelCase);
+        final StyleElement element1 = styleMap.get(name1);
+        final StyleElement element2 = styleMap.get(name2);
+        if (element1 == null && element2 == null) {
+            return "";
+        }
+        else if (element1 != null && element2 == null) {
+            return element1.getValue();
+        }
+        else if (element1 == null && element2 != null) {
+            return element2.getValue();
+        }
+        else if (element1.getIndex() > element2.getIndex()) {
+            return element1.getValue();
+        }
+        else {
+            return element2.getValue();
         }
     }
 
@@ -160,16 +194,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     protected void setStyleAttribute(String name, final String newValue) {
         name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
         removeStyleAttribute(name);
-        final Map<String, String> styleMap = getStyleMap(false);
+        final Map<String, StyleElement> styleMap = getStyleMap(false);
         if (newValue.trim().length() != 0) {
-            styleMap.put(name, newValue);
+            final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
+            styleMap.put(name, element);
 
             final StringBuilder buffer = new StringBuilder();
-            for (final Map.Entry<String, String> entry : styleMap.entrySet()) {
+            for (final StyleElement e : styleMap.values()) {
                 buffer.append(" ");
-                buffer.append(entry.getKey());
+                buffer.append(e.getName());
                 buffer.append(": ");
-                buffer.append(entry.getValue());
+                buffer.append(e.getValue());
                 buffer.append(";");
             }
             buffer.deleteCharAt(0);
@@ -186,8 +221,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      *        if <tt>false</tt>, the keys are delimiter-separated (i.e. <tt>font-size</tt>).
      * @return a sorted map containing style elements, keyed on style element name
      */
-    protected SortedMap<String, String> getStyleMap(final boolean camelCase) {
-        final SortedMap<String, String> styleMap = new TreeMap<String, String>();
+    protected SortedMap<String, StyleElement> getStyleMap(final boolean camelCase) {
+        final SortedMap<String, StyleElement> styleMap = new TreeMap<String, StyleElement>();
         final String styleAttribute = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
         for (final String token : styleAttribute.split(";")) {
             final int index = token.indexOf(":");
@@ -197,7 +232,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
                     key = camelize(key);
                 }
                 final String value = token.substring(index + 1).trim();
-                styleMap.put(key, value);
+                final StyleElement element = new StyleElement(key, value, getCurrentElementIndex());
+                styleMap.put(key, element);
             }
         }
         return styleMap;
@@ -205,14 +241,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Removes the specified style attribute.
-     * @param name The attribute name (delimiter-separated, not camel-cased).
+     * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     protected void removeStyleAttribute(final String name) {
-        final SortedMap<String, String> styleMap = getStyleMap(false);
+        final SortedMap<String, StyleElement> styleMap = getStyleMap(false);
         styleMap.remove(name);
         final StringBuilder buffer = new StringBuilder();
         for (final String style : styleMap.keySet()) {
-            buffer.append(style).append(':').append(styleMap.get(style)).append(';');
+            buffer.append(style).append(':').append(styleMap.get(style).getValue()).append(';');
         }
         if (buffer.length() != 0) {
             buffer.setLength(buffer.length() - 1);
@@ -221,10 +257,22 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * Transform the given string from delimiter-separated (e.g. <tt>font-size</tt>)
-     * to camel cased (e.g. <tt>fontSize</tt>).
-     * @param string the string to camelize.
-     * @return the transformed string.
+     * Returns the current style element index. An index is assigned to each style element so that
+     * we can determine which style elements have precendence over others.
+     *
+     * This method also takes care of incrementing the index for the next use.
+     *
+     * @return the current style element index
+     */
+    protected long getCurrentElementIndex() {
+        return currentElementIndex_++;
+    }
+
+    /**
+     * Transforms the specified string from delimiter-separated (e.g. <tt>font-size</tt>)
+     * to camel-cased (e.g. <tt>fontSize</tt>).
+     * @param string the string to camelize
+     * @return the transformed string
      */
     protected static String camelize(final String string) {
         if (string == null) {
@@ -1613,7 +1661,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginBottom() {
-        return getStyleAttribute("marginBottom", true);
+        return getStyleAttribute("marginBottom", "margin", true);
     }
 
     /**
@@ -1629,7 +1677,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginLeft() {
-        return getStyleAttribute("marginLeft", true);
+        return getStyleAttribute("marginLeft", "margin", true);
     }
 
     /**
@@ -1645,7 +1693,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginRight() {
-        return getStyleAttribute("marginRight", true);
+        return getStyleAttribute("marginRight", "margin", true);
     }
 
     /**
@@ -1661,7 +1709,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginTop() {
-        return getStyleAttribute("marginTop", true);
+        return getStyleAttribute("marginTop", "margin", true);
     }
 
     /**
@@ -4100,6 +4148,48 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         else {
             final String style = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
             return "CSSStyleDeclaration for '" + style + "'";
+        }
+    }
+
+    /**
+     * Contains information about a single style element, including its name, its value, and an index which
+     * can be compared against other indices in order to determine precedence.
+     */
+    protected static class StyleElement {
+        private final String name_;
+        private final String value_;
+        private final long index_;
+        /**
+         * Creates a new instance.
+         * @param name the style element's name
+         * @param value the style element's value
+         * @param index the style element's index
+         */
+        public StyleElement(final String name, final String value, final long index) {
+            this.name_ = name;
+            this.value_ = value;
+            this.index_ = index;
+        }
+        /**
+         * Returns the style element's name.
+         * @return the style element's name
+         */
+        public String getName() {
+            return name_;
+        }
+        /**
+         * Returns the style element's value.
+         * @return the style element's value
+         */
+        public String getValue() {
+            return value_;
+        }
+        /**
+         * Returns the style element's index.
+         * @return the style element's index
+         */
+        public long getIndex() {
+            return index_;
         }
     }
 
