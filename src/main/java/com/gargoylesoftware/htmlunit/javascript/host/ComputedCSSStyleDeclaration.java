@@ -1076,25 +1076,29 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Computes the element's width
-     * @return the width
+     * Returns the element's offset width (width including padding and border).
+     * @return the element's offset width (width including padding and border)
      */
     int getOffsetWidth() {
         final int width = intValue(super.jsxGet_width());
         final int borderLeft = intValue(jsxGet_borderLeftWidth());
         final int borderRight = intValue(jsxGet_borderRightWidth());
-        return width + borderLeft + borderRight;
+        final int paddingLeft = intValue(jsxGet_paddingLeft());
+        final int paddingRight = intValue(jsxGet_paddingRight());
+        return width + borderLeft + borderRight + paddingLeft + paddingRight;
     }
 
     /**
-     * Computes the element's height
-     * @return the height
+     * Returns the element's offset height (height including padding and border).
+     * @return the element's offset height (height including padding and border)
      */
     int getOffsetHeight() {
         final int height = intValue(super.jsxGet_height());
         final int borderTop = intValue(jsxGet_borderTopWidth());
         final int borderBottom = intValue(jsxGet_borderBottomWidth());
-        return height + borderTop + borderBottom;
+        final int paddingTop = intValue(jsxGet_paddingTop());
+        final int paddingBottom = intValue(jsxGet_paddingBottom());
+        return height + borderTop + borderBottom + paddingTop + paddingBottom;
     }
 
     private int intValue(final String value) {

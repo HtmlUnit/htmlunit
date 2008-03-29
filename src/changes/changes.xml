@@ -7,8 +7,11 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="sdanig">
+                Fix element.offsetWidth and element.offsetHeight to include padding.
+            </action>
             <action type="add" dev="asashour">
-                DomNode: add .getCanonicalXPath().
+                DomNode: add DomNode.getCanonicalXPath().
             </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlPage.moveFocusToElement() and getElementWithFocus(),

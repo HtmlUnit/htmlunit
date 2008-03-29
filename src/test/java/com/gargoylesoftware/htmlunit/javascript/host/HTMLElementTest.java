@@ -1449,10 +1449,10 @@ public class HTMLElementTest extends WebTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myDiv' style='border: 2px solid #fff'></div>\n"
+            + "  <div id='myDiv' style='border: 3px solid #fff; padding: 5px;'></div>\n"
             + "</body></html>";
         
-        final String[] expectedAlerts = {"30px", "34", "55px", "59"};
+        final String[] expectedAlerts = {"30px", "46", "55px", "71"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
