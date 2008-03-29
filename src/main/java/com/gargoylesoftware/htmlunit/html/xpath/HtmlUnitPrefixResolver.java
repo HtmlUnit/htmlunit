@@ -48,14 +48,16 @@ import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
+ * Custom {@link PrefixResolverDefault} extension.
+ *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
     /**
-     * Constructor.
-     * @param xpathExpressionContext The context from which XPath expression prefixes will be resolved.
+     * Creates a new instance.
+     * @param xpathExpressionContext the context from which XPath expression prefixes will be resolved
      */
     public HtmlUnitPrefixResolver(final Node xpathExpressionContext) {
         super(xpathExpressionContext);

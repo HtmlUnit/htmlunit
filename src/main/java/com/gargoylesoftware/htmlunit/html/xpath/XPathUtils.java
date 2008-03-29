@@ -55,20 +55,26 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
+ * Collection of XPath utility methods.
+ *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 public final class XPathUtils {
 
+    /**
+     * Private to avoid instantiation.
+     */
     private XPathUtils() {
+        // Empty.
     }
 
     /**
-     * Evaluates an xpath from the specified node.
+     * Evaluates an XPath expression from the specified node, returning the resultant nodes.
      *
-     * @param node The node to start searching from.
-     * @param xpathExpr the XPath expression.
-     * @return List of objects found.
+     * @param node the node to start searching from
+     * @param xpathExpr the XPath expression
+     * @return the list of objects found
      */
     public static List<Object> getByXPath(final Node node, final String xpathExpr) {
         if (xpathExpr == null) {
@@ -105,10 +111,10 @@ public final class XPathUtils {
     }
 
     /**
-     * Evaluate XPath string to an XObject.
-     * @param contextNode The node to start searching from.
-     * @param str A valid XPath string.
-     * @return An XObject, which can be used to obtain a string, number, nodelist, etc, should never be null.
+     * Evaluates an XPath expression to an XObject.
+     * @param contextNode the node to start searching from
+     * @param str a valid XPath string
+     * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never be <tt>null</tt>)
      */
     private static XObject evaluateXPath(final Node contextNode, final String str) throws TransformerException {
         final XPathContext xpathSupport = new XPathContext(false);

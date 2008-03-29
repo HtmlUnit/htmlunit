@@ -58,9 +58,9 @@ public abstract class DomNamespaceNode extends DomNode {
     /**
      * Create an instance of a DOM node that can have a namespace.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate.
-     * @param page The page that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      */
     protected DomNamespaceNode(final String namespaceURI, final String qualifiedName, final Page page) {
         super(page);

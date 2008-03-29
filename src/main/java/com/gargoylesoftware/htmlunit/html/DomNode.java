@@ -58,6 +58,7 @@ import org.w3c.dom.UserDataHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -159,8 +160,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Creates an instance.
-     * @param page The page which contains this node.
+     * Creates a new instance.
+     * @param page the page which contains this node
      */
     protected DomNode(final Page page) {
         readyState_ = READY_STATE_LOADING;
@@ -172,11 +173,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Sets the line and column numbers in the source page where the
-     * DOM node starts.
+     * Sets the line and column numbers in the source page where the DOM node starts.
      *
-     * @param startLineNumber The line number where the DOM node starts.
-     * @param startColumnNumber The column number where the DOM node starts.
+     * @param startLineNumber the line number where the DOM node starts
+     * @param startColumnNumber the column number where the DOM node starts
      */
     void setStartLocation(final int startLineNumber, final int startColumnNumber) {
         startLineNumber_ = startLineNumber;
@@ -184,11 +184,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
     
     /**
-     * Sets the line and column numbers in the source page where the
-     * DOM node ends.
+     * Sets the line and column numbers in the source page where the DOM node ends.
      *
-     * @param endLineNumber The line number where the DOM node ends.
-     * @param endColumnNumber The column number where the DOM node ends.
+     * @param endLineNumber the line number where the DOM node ends
+     * @param endColumnNumber the column number where the DOM node ends
      */
     void setEndLocation(final int endLineNumber, final int endColumnNumber) {
         endLineNumber_ = endLineNumber;
@@ -196,45 +195,40 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Gets the line number in the source page where the DOM node starts.
-     *
-     * @return See above.
+     * Returns the line number in the source page where the DOM node starts.
+     * @return the line number in the source page where the DOM node starts
      */
     public int getStartLineNumber() {
         return startLineNumber_;
     }
 
     /**
-     * Gets the column number in the source page where the DOM node starts.
-     *
-     * @return See above.
+     * Returns the column number in the source page where the DOM node starts.
+     * @return the column number in the source page where the DOM node starts
      */
     public int getStartColumnNumber() {
         return startColumnNumber_;
     }
 
     /**
-     * Gets the line number in the source page where the DOM node ends.
-     *
-     * @return See above.
+     * Returns the line number in the source page where the DOM node ends.
+     * @return the line number in the source page where the DOM node ends
      */
     public int getEndLineNumber() {
         return endLineNumber_;
     }
 
     /**
-     * Gets the column number in the source page where the DOM node ends.
-     *
-     * @return See above.
+     * Returns the column number in the source page where the DOM node ends.
+     * @return the column number in the source page where the DOM node ends
      */
     public int getEndColumnNumber() {
         return endColumnNumber_;
     }
 
     /**
-     * Returns the Page that contains this node.
-     *
-     * @return See above
+     * Returns the page that contains this node.
+     * @return the page that contains this node
      */
     public Page getPage() {
         return page_;
@@ -250,10 +244,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Set the JavaScript object that corresponds to this node.  This is not
-     * guaranteed to be set even if there is a JavaScript object for this
-     * DOM node.
-     * @param scriptObject The JavaScript object.
+     * Sets the JavaScript object that corresponds to this node. This is not guaranteed to be set even if
+     * there is a JavaScript object for this DOM node.
+     *
+     * @param scriptObject the JavaScript object
      */
     public void setScriptObject(final ScriptableObject scriptObject) {
         scriptObject_ = scriptObject;
@@ -267,9 +261,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Gets the last child DomNode.
-     * @return The last child node or null if the current node has
-     * no children.
+     * Returns this node's last child node, or <tt>null</tt> if this node doesn't have any children.
+     * @return this node's last child node, or <tt>null</tt> if this node doesn't have any children
      */
     public DomNode getLastDomChild() {
         if (firstChild_ != null) {
@@ -289,8 +282,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * @return the parent DomNode of this node, which may be <code>null</code> if this
-     * is the root node
+     * Returns this node's parent node, or <tt>null</tt> if this is the root node.
+     * @return this node's parent node, or <tt>null</tt> if this is the root node
      */
     public DomNode getParentDomNode() {
         return parent_;
@@ -312,8 +305,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * @return the previous sibling of this node, or <code>null</code> if this is
-     * the first node
+     * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
+     * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
      */
     public DomNode getPreviousDomSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
@@ -333,7 +326,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * @return the next sibling
+     * Returns this node's next sibling node, or <tt>null</tt> if this node is its parent's last child.
+     * @return this node's next sibling node, or <tt>null</tt> if this node is its parent's last child
      */
     public DomNode getNextDomSibling() {
         return nextSibling_;
@@ -347,7 +341,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * @return the previous sibling
+     * Returns this node's first child node, or <tt>null</tt> if this node does not have any children.
+     * @return this node's first child node, or <tt>null</tt> if this node does not have any children
      */
     public DomNode getFirstDomChild() {
         return firstChild_;
@@ -380,14 +375,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Gets the type of the current node.
-     * @return The node type
+     * Returns this node's node type.
+     * @return this node's node type
      */
     public abstract short getNodeType();
 
     /**
-     * Gets the name for the current node.
-     * @return The node name
+     * Returns this node's node name.
+     * @return this node's node name
      */
     public abstract String getNodeName();
 
@@ -416,6 +411,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     public void setPrefix(final String prefix) {
+        // Empty.
     }
 
     /**
@@ -666,10 +662,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Removes extra whitespace from a string similar to what a browser does
-     * when it displays text.
-     * @param text The text to clean up.
-     * @return The cleaned up text.
+     * Removes extra whitespace from a string, similar to what a browser does when it displays text.
+     * @param text the text to clean up
+     * @return the clean text
      */
     protected static String reduceWhitespace(final String text) {
         final StringBuilder buffer = new StringBuilder(text.length());
@@ -706,7 +701,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns the log object for this element.
-     * @return The log object for this element.
+     * @return the log object for this element
      * @deprecated As of 2.0, use local log variables enclosed in a conditional block.
      */
     protected final Log getLog() {
@@ -717,7 +712,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns a string representation of the XML document from this element and all
      * it's children (recursively).
      *
-     * @return The XML string.
+     * @return the XML string
      */
     public String asXml() {
         final StringWriter stringWriter = new StringWriter();
@@ -739,7 +734,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Recursively write the XML data for the node tree starting at <code>node</code>.
+     * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
@@ -902,7 +897,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Check for insertion errors for a new child node.  This is overridden by derived
      * classes to enforce which types of children are allowed.
      *
-     * @param newChild The new child node that is being inserted below this node.
+     * @param newChild the new child node that is being inserted below this node
      * @throws DOMException HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does
      * not allow children of the type of the newChild node, or if the node to insert is one of
      * this node's ancestors or this node itself, or if this node is of type Document and the
@@ -1258,7 +1253,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns this node's ready state (IE only).
-     * @return This node's ready state.
+     * @return this node's ready state
      */
     public String getReadyState() {
         return readyState_;
@@ -1266,15 +1261,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Sets this node's ready state (IE only).
-     * @param state This node's ready state.
+     * @param state this node's ready state
      */
     public void setReadyState(final String state) {
         readyState_ = state;
     }
 
     /**
-     * Remove all the children of this node.
-     *
+     * Removes all of this node's children.
      */
     public void removeAllChildren() {
         if (getFirstDomChild() == null) {
@@ -1289,10 +1283,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Facility to evaluate an XPath from the current node.
+     * Evaluates the specified XPath expression from this node, returning the matching elements.
      *
-     * @param xpathExpr the XPath expression.
-     * @return List of objects found.
+     * @param xpathExpr the XPath expression to evaluate
+     * @return the elements which match the specified XPath expression
      * @see #getFirstByXPath(String)
      * @see #getCanonicalXPath()
      */
@@ -1301,11 +1295,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Facility to evaluate an XPath from the current node and get the first result.
+     * Evaluates the specified XPath expression from this node, returning the first matching element,
+     * or <tt>null</tt> if no node matches the specified XPath expression.
      *
-     * @param xpathExpr the XPath expression.
-     * @return <code>null</code> if no result is found, the first one otherwise.
+     * @param xpathExpr the XPath expression
+     * @return the first element matching the specified XPath expression
      * @see #getByXPath(String)
+     * @see #getCanonicalXPath()
      */
     public Object getFirstByXPath(final String xpathExpr) {
         final List< ? > results = getByXPath(xpathExpr);
@@ -1318,12 +1314,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns the current canonical XPath expression allowing to identify this node.
-     * For example "/html/body/table[3]/tbody/tr[5]/td[2]/span/a[3]".<br/>
-     * <span style="color:red">WARNING:</span> such an XPath expression is often quite bad
-     * to identify a node as it is highly sensitive to changes in the DOM tree even when
-     * they are not directly related to this node.
-     * @return the current canonical XPath of this node.
+     * <p>Returns the canonical XPath expression which identifies this node, for instance
+     * <tt>"/html/body/table[3]/tbody/tr[5]/td[2]/span/a[3]"</tt>.</p>
+     *
+     * <p><span style="color:red">WARNING:</span> This sort of automated XPath expression
+     * is often quite bad at identifying a node, as it is highly sensitive to changes in
+     * the DOM tree.</p>
+     *
+     * @return the canonical XPath expression which identifies this node
      * @see #getByXPath(String)
      */
     public String getCanonicalXPath() {
@@ -1335,7 +1333,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns the XPath token of this node only.
+     * Returns the XPath token for this node only.
      */
     private String getXPathToken() {
         final DomNode parent = getParentDomNode();
@@ -1359,21 +1357,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Facility to notify the registered {@link IncorrectnessListener} of something that is not fully correct.
-     * @param message the notification
+     * Notifies the registered {@link IncorrectnessListener} of something that is not fully correct.
+     * @param message the notification to send to the registered {@link IncorrectnessListener}
      */
     protected void notifyIncorrectness(final String message) {
-        final IncorrectnessListener incorrectnessListener =
-            getPage().getEnclosingWindow().getWebClient().getIncorrectnessListener();
+        final WebClient client = getPage().getEnclosingWindow().getWebClient();
+        final IncorrectnessListener incorrectnessListener = client.getIncorrectnessListener();
         incorrectnessListener.notify(message, this);
     }
 
     /**
-     * Adds a DomChangeListener to the listener list.
-     * The listener is registered for all children nodes of this DomNode,
-     * as well as the descendant nodes.
+     * Adds a {@link DomChangeListener} to the listener list. The listener is registered for
+     * all descendants of this node.
      *
-     * @param listener the DOM structure change listener to be added.
+     * @param listener the DOM structure change listener to be added
      * @see #removeDomChangeListener(DomChangeListener)
      */
     public void addDomChangeListener(final DomChangeListener listener) {
@@ -1389,11 +1386,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Removes an DomChangeListener from the listener list.
-     * This method should be used to remove DomChangeListener that were registered
-     * for all children nodes and descendant nodes of this DomNode.
+     * Removes a {@link DomChangeListener} from the listener list. The listener is deregistered for
+     * all descendants of this node.
      *
-     * @param listener the DOM structure change listener to be removed.
+     * @param listener the DOM structure change listener to be removed
      * @see #addDomChangeListener(DomChangeListener)
      */
     public void removeDomChangeListener(final DomChangeListener listener) {
@@ -1411,8 +1407,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Note that this method recursively calls this node's parent's {@link #fireNodeAdded(DomNode, DomNode)}.
      *
-     * @param parentNode the parent of the node that was added.
-     * @param addedNode the node that was added.
+     * @param parentNode the parent of the node that was added
+     * @param addedNode the node that was added
      */
     protected void fireNodeAdded(final DomNode parentNode, final DomNode addedNode) {
         final List<DomChangeListener> listeners = safeGetDomListeners();
@@ -1433,8 +1429,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Note that this method recursively calls this node's parent's {@link #fireNodeDeleted(DomNode, DomNode)}.
      *
-     * @param parentNode the parent of the node that was deleted.
-     * @param deletedNode the node that was deleted.
+     * @param parentNode the parent of the node that was deleted
+     * @param deletedNode the node that was deleted
      */
     protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
         final List<DomChangeListener> listeners = safeGetDomListeners();

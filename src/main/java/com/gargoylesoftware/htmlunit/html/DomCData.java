@@ -59,7 +59,7 @@ public class DomCData extends DomText implements CDATASection {
     /**
      * Creates an instance of DomText.
      *
-     * @param page The Page that contains this element.
+     * @param page the Page that contains this element
      * @param data the string data held by this node
      */
     public DomCData(final Page page, final String data) {

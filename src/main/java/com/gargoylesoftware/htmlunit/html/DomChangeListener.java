@@ -49,14 +49,14 @@ public interface DomChangeListener {
     /**
      * Notification that a new node was added. Called after the node is added.
      *
-     * @param event The event.
+     * @param event the node addition event
      */
     void nodeAdded(final DomChangeEvent event);
     
     /**
      * Notification that a new node was deleted. Called after the node is deleted.
      *
-     * @param event The event.
+     * @param event the node deletion event
      */
     void nodeDeleted(final DomChangeEvent event);
 

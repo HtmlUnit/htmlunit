@@ -85,13 +85,12 @@ public class HtmlUnitXPath {
 
     /**
      * Constructor.
-     * @param exprString The XPath expression.
-     * @param locator The location of the expression, may be null.
-     * @param prefixResolver A prefix resolver to use to resolve prefixes to namespace URIs.
-     * @param type one of {@link #SELECT} or {@link #MATCH}.
-     * @param errorListener The error listener, or null if default should be used.
-     *
-     * @throws TransformerException if syntax or other error.
+     * @param exprString the XPath expression
+     * @param locator the location of the expression, may be <tt>null</tt>
+     * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
+     * @param type one of {@link #SELECT} or {@link #MATCH}
+     * @param errorListener the error listener, or <tt>null</tt> if default should be used
+     * @throws TransformerException if a syntax or other error occurs
      */
     public HtmlUnitXPath(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
             final int type, ErrorListener errorListener) throws TransformerException {
@@ -140,32 +139,28 @@ public class HtmlUnitXPath {
     }
 
     /**
-     * Given an expression and a context, evaluate the XPath
-     * and return the result.
+     * Given an expression and a context, evaluate the XPath and return the result.
      *
-     * @param xctxt The execution context.
-     * @param contextNode The node that "." expresses.
-     * @param namespaceContext The context in which namespaces in the
-     * XPath are supposed to be expanded.
-     *
-     * @return The result of the XPath or null if callbacks are used.
-     * @throws TransformerException thrown if
-     * the error condition is severe enough to halt processing.
+     * @param xpathContext the execution context
+     * @param contextNode the node that "." expresses
+     * @param namespaceContext the context in which namespaces in the XPath are supposed to be expanded
+     * @return the result of the XPath or null if callbacks are used
+     * @throws TransformerException if the error condition is severe enough to halt processing
      */
-    public XObject execute(final XPathContext xctxt, final int contextNode, final PrefixResolver namespaceContext)
-        throws TransformerException {
-        xctxt.pushNamespaceContext(namespaceContext);
+    public XObject execute(final XPathContext xpathContext, final int contextNode,
+        final PrefixResolver namespaceContext) throws TransformerException {
+        xpathContext.pushNamespaceContext(namespaceContext);
 
-        xctxt.pushCurrentNodeAndExpression(contextNode, contextNode);
+        xpathContext.pushCurrentNodeAndExpression(contextNode, contextNode);
 
         XObject xobj = null;
 
         try {
-            xobj = mainExp_.execute(xctxt);
+            xobj = mainExp_.execute(xpathContext);
         }
         catch (final TransformerException te) {
             te.setLocator(mainExp_);
-            final ErrorListener el = xctxt.getErrorListener();
+            final ErrorListener el = xpathContext.getErrorListener();
             if (null != el) {
                 el.error(te);
             }
@@ -185,7 +180,7 @@ public class HtmlUnitXPath {
 
             }
             final TransformerException te = new TransformerException(msg, mainExp_, e);
-            final ErrorListener el = xctxt.getErrorListener();
+            final ErrorListener el = xpathContext.getErrorListener();
             if (null != el) {
                 el.fatalError(te);
             }
@@ -194,8 +189,8 @@ public class HtmlUnitXPath {
             }
         }
         finally {
-            xctxt.popNamespaceContext();
-            xctxt.popCurrentNodeAndExpression();
+            xpathContext.popNamespaceContext();
+            xpathContext.popCurrentNodeAndExpression();
         }
 
         return xobj;

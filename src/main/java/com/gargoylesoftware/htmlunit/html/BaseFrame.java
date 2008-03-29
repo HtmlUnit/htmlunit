@@ -72,9 +72,9 @@ public abstract class BaseFrame extends StyledElement {
     /**
      * Creates an instance of BaseFrame.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     protected BaseFrame(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -198,7 +198,7 @@ public abstract class BaseFrame extends StyledElement {
     /**
      * Sets the value of the "name" attribute.
      *
-     * @param name The new window name.
+     * @param name the new window name
      */
     public final void setNameAttribute(final String name) {
         setAttributeValue("name", name);
@@ -209,8 +209,7 @@ public abstract class BaseFrame extends StyledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "src"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "src" or an empty string if that attribute isn't defined
      */
     public final String getSrcAttribute() {
         return getAttributeValue("src");
@@ -221,8 +220,7 @@ public abstract class BaseFrame extends StyledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "frameborder"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "frameborder" or an empty string if that attribute isn't defined
      */
     public final String getFrameBorderAttribute() {
         return getAttributeValue("frameborder");
@@ -233,8 +231,7 @@ public abstract class BaseFrame extends StyledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "marginwidth"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "marginwidth" or an empty string if that attribute isn't defined
      */
     public final String getMarginWidthAttribute() {
         return getAttributeValue("marginwidth");
@@ -245,8 +242,7 @@ public abstract class BaseFrame extends StyledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "marginheight"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "marginheight" or an empty string if that attribute isn't defined
      */
     public final String getMarginHeightAttribute() {
         return getAttributeValue("marginheight");
@@ -257,8 +253,7 @@ public abstract class BaseFrame extends StyledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "noresize"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "noresize" or an empty string if that attribute isn't defined
      */
     public final String getNoResizeAttribute() {
         return getAttributeValue("noresize");
@@ -269,8 +264,7 @@ public abstract class BaseFrame extends StyledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "scrolling"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "scrolling" or an empty string if that attribute isn't defined
      */
     public final String getScrollingAttribute() {
         return getAttributeValue("scrolling");
@@ -281,8 +275,7 @@ public abstract class BaseFrame extends StyledElement {
      * actually supported by the HTML specification however it is supported
      * by the popular browsers.
      *
-     * @return The value of the attribute "onload"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
         return getAttributeValue("onload");
@@ -292,7 +285,7 @@ public abstract class BaseFrame extends StyledElement {
      * Returns the currently loaded page in the enclosed window.
      * This is a facility method for <code>getEnclosedWindow().getEnclosedPage()</code>.
      * @see WebWindow#getEnclosedPage()
-     * @return The currently loaded page in the enclosed window or null if no page has been loaded.
+     * @return the currently loaded page in the enclosed window, or <tt>null</tt> if no page has been loaded
      */
     public Page getEnclosedPage() {
         return getEnclosedWindow().getEnclosedPage();
@@ -300,15 +293,15 @@ public abstract class BaseFrame extends StyledElement {
 
     /**
      * Gets the window enclosed in this frame.
-     * @return the window
+     * @return the window enclosed in this frame
      */
     public WebWindow getEnclosedWindow() {
         return enclosedWindow_;
     }
 
     /**
-     * Sets the value of the "src" attribute.  Also load the frame with the specified URL if possible.
-     * @param attribute The new value
+     * Sets the value of the "src" attribute. Also loads the frame with the specified URL, if possible.
+     * @param attribute the new value of the "src" attribute
      */
     public final void setSrcAttribute(final String attribute) {
         setAttributeValue("src", attribute);

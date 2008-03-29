@@ -55,8 +55,8 @@ public class DomChangeEvent extends EventObject {
     /**
      * Constructs a new DomChangeEvent from the given parent node and a changed node.
      *
-     * @param parentNode the parent of the node that was changed.
-     * @param changedNode the node that has been added or deleted.
+     * @param parentNode the parent of the node that was changed
+     * @param changedNode the node that has been added or deleted
      */
     public DomChangeEvent(final DomNode parentNode, final DomNode changedNode) {
         super(parentNode);

@@ -54,8 +54,8 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
     public static final String NODE_NAME = "#document-fragment";
 
     /**
-     * Creates an instance.
-     * @param page The page which contains this node.
+     * Creates a new instance.
+     * @param page the page which contains this node
      */
     public DomDocumentFragment(final Page page) {
         super(page);

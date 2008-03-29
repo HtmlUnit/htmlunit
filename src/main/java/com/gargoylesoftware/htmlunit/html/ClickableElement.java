@@ -72,9 +72,9 @@ public abstract class ClickableElement extends StyledElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     protected ClickableElement(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -119,7 +119,7 @@ public abstract class ClickableElement extends StyledElement {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Simulate clicking this element.
      *
-     * @param event the click event used.
+     * @param event the click event used
      *
      * @return The page that occupies this window after this element is
      * clicked. It may be the same window or it may be a freshly loaded one.

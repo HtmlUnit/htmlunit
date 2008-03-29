@@ -60,14 +60,15 @@ public class DomComment extends DomCharacterData implements Comment {
     /**
      * Creates an instance of DomComment.
      *
-     * @param page The Page that contains this element.
+     * @param page the Page that contains this element
      * @param data the string data held by this node
      */
     public DomComment(final Page page, final String data) {
         super(page, data);
     }
-    
+
     /**
+     * {@inheritDoc}
      * @return the node type constant, in this case {@link org.w3c.dom.Node#COMMENT_NODE}
      */
     @Override

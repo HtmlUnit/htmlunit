@@ -57,7 +57,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     /**
      * Creates an instance of DomCharacterData.
      *
-     * @param page The Page that contains this element.
+     * @param page the Page that contains this element
      * @param data the data string wrapped by this node
      */
     public DomCharacterData(final Page page, final String data) {
@@ -66,24 +66,24 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Gets the data character string for this character data.
-     * @return The data String.
+     * Gets the data character string for this character data node.
+     * @return the data character string
      */
     public String getData() {
         return data_;
     }
 
     /**
-     * Sets the data character string to the new string.
-     * @param newValue The new String of data.
+     * Sets the data character string for this character data node.
+     * @param data the new data character string
      */
-    public void setData(final String newValue) {
-        data_ = newValue;
+    public void setData(final String data) {
+        data_ = data;
     }
 
     /**
      * Sets the data character string to the new string.
-     * @param newValue The new String of data.
+     * @param newValue the new string of data
      */
     @Override
     public void setNodeValue(final String newValue) {
@@ -91,25 +91,25 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Gets the number of characters in the character data.
-     * @return The number of characters.
+     * Returns the number of characters in the character data.
+     * @return the number of characters
      */
     public int getLength() {
         return data_.length();
     }
 
     /**
-     * Append a string to character data.
-     * @param newData The string to be appended to the character data.
+     * Appends a string to character data.
+     * @param newData the string to be appended to the character data
      */
     public void appendData(final String newData) {
         data_ += newData;
     }
 
     /**
-     * Delete characters from character data.
-     * @param offset The position of the first character to be deleted.
-     * @param count The number of characters to be deleted.
+     * Deletes characters from character data.
+     * @param offset the position of the first character to be deleted
+     * @param count the number of characters to be deleted
      */
     public void deleteData(final int offset, final int count) {
         if (offset < 0 || count < 0) {
@@ -126,22 +126,19 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Insert a string into character data.
-     * @param offset The position within the first character at which
-     * the string is to be inserted.
-     * @param arg The string to insert.
+     * Inserts a string into character data.
+     * @param offset The position within the first character at which the string is to be inserted
+     * @param arg the string to insert
      */
     public void insertData(final int offset, final String arg) {
         data_ = new StringBuilder(data_).insert(offset, arg).toString();
     }
 
     /**
-     * Replace characters of character data with a string.
-     * @param offset The position within the first character at which
-     * the string is to be replaced.
-     * @param count The number of characters to be replaced.
-     * @param arg The string that replaces the count characters beginning at
-     * the character at offset.
+     * Replaces characters of character data with a string.
+     * @param offset the position within the first character at which the string is to be replaced
+     * @param count the number of characters to be replaced
+     * @param arg the string that replaces the count characters beginning at the character at offset
      */
     public void replaceData(final int offset, final int count, final String arg) {
         deleteData(offset, count);
@@ -149,11 +146,11 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
-     * Extract a substring from character data.
-     * @param offset The position of the first character to be extracted.
-     * @param count The number of characters to be extracted.
-     * @return A string that consists of the count characters of the
-     * character data starting from the character at position offset.
+     * Extracts a substring from character data.
+     * @param offset the position of the first character to be extracted
+     * @param count the number of characters to be extracted
+     * @return a string that consists of the count characters of the character data starting
+     *         from the character at position offset
      */
     public String substringData(final int offset, final int count) {
         final int length = data_.length();
@@ -166,6 +163,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     }
 
     /**
+     * {@inheritDoc}
      * @return the string data held by this node
      */
     @Override

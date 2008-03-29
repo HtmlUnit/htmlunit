@@ -69,8 +69,8 @@ class DefaultElementFactory implements IElementFactory {
 
     /**
      * @param page the owning page
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
      * @param attributes initial attributes, possibly <code>null</code>
      * @return the newly created element
      */
@@ -346,10 +346,10 @@ class DefaultElementFactory implements IElementFactory {
     }
 
     /**
-     * Convert Attributes into the Map needed by HtmlElement.
+     * Converts {@link Attributes} into the map needed by {@link HtmlElement}s.
      *
-     * @param attributes the SAX attributes.
-     * @return the Map of attribute values for HtmlElement.
+     * @param attributes the SAX attributes
+     * @return the map of attribute values for {@link HtmlElement}s
      */
     static Map<String, HtmlAttr> setAttributes(final HtmlPage page, final Attributes attributes) {
         Map<String, HtmlAttr> attributeMap = null;
