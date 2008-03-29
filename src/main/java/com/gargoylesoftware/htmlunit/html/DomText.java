@@ -64,7 +64,7 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * Creates an instance of DomText.
      *
-     * @param page The Page that contains this element.
+     * @param page the Page that contains this element
      * @param data the string data held by this node
      */
     public DomText(final Page page, final String data) {
@@ -79,11 +79,11 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * Creates a new text node split from another text node.  This method allows
+     * Creates a new text node split from another text node. This method allows
      * the derived type of the new text node to match the original node type.
      *
-     * @param offset The character position at which to split the DomText node.
-     * @return The newly created Text node.
+     * @param offset the character position at which to split the DomText node
+     * @return the newly created Text node
      */
     protected DomText createSplitTextNode(final int offset) {
         return new DomText(getPage(), getData().substring(offset));
@@ -91,8 +91,8 @@ public class DomText extends DomCharacterData implements Text {
 
     /**
      * Splits a DomText node in two.
-     * @param offset The character position at which to split the DomText node.
-     * @return The DomText node that was split from this node.
+     * @param offset the character position at which to split the DomText node
+     * @return the DomText node that was split from this node
      */
     public DomText splitDomText(final int offset) {
         if (offset < 0 || offset > getLength()) {

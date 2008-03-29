@@ -339,7 +339,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Returns an input stream for the specified file name.  Refer to {@link #getFileObject(String)}
+     * Returns an input stream for the specified file name. Refer to {@link #getFileObject(String)}
      * for details on how the file is located.
      * @param fileName The base file name.
      * @return The input stream.

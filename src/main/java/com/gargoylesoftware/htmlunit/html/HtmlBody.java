@@ -60,11 +60,11 @@ public class HtmlBody extends ClickableElement {
     private final boolean temporary_;
 
     /**
-     * Creates an instance of HtmlBody.
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      * @param temporary whether or not this body is temporary (created because the <tt>body</tt>
      *        tag does not exist or has not yet been parsed)
@@ -81,96 +81,88 @@ public class HtmlBody extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "onload".  Refer to the
+     * Returns the value of the attribute "onload". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onload"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onload" or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
         return getAttributeValue("onload");
     }
 
     /**
-     * Returns the value of the attribute "onunload".  Refer to the
+     * Returns the value of the attribute "onunload". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onunload"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onunload" or an empty string if that attribute isn't defined
      */
     public final String getOnUnloadAttribute() {
         return getAttributeValue("onunload");
     }
 
     /**
-     * Returns the value of the attribute "background".  Refer to the
+     * Returns the value of the attribute "background". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "background"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "background" or an empty string if that attribute isn't defined
      */
     public final String getBackgroundAttribute() {
         return getAttributeValue("background");
     }
 
     /**
-     * Returns the value of the attribute "bgcolor".  Refer to the
+     * Returns the value of the attribute "bgcolor". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "bgcolor"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "bgcolor" or an empty string if that attribute isn't defined
      */
     public final String getBgcolorAttribute() {
         return getAttributeValue("bgcolor");
     }
 
     /**
-     * Returns the value of the attribute "text".  Refer to the
+     * Returns the value of the attribute "text". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "text"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "text" or an empty string if that attribute isn't defined
      */
     public final String getTextAttribute() {
         return getAttributeValue("text");
     }
 
     /**
-     * Returns the value of the attribute "link".  Refer to the
+     * Returns the value of the attribute "link". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "link"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "link" or an empty string if that attribute isn't defined
      */
     public final String getLinkAttribute() {
         return getAttributeValue("link");
     }
 
     /**
-     * Returns the value of the attribute "vlink".  Refer to the
+     * Returns the value of the attribute "vlink". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "vlink"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "vlink" or an empty string if that attribute isn't defined
      */
     public final String getVlinkAttribute() {
         return getAttributeValue("vlink");
     }
 
     /**
-     * Returns the value of the attribute "alink".  Refer to the
+     * Returns the value of the attribute "alink". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "alink"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "alink" or an empty string if that attribute isn't defined
      */
     public final String getAlinkAttribute() {
         return getAttributeValue("alink");

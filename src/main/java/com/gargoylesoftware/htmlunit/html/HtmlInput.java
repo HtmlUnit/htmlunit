@@ -127,7 +127,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -139,7 +139,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -151,7 +151,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * <p>Return the value of the attribute "value".  Refer to the
+     * <p>Return the value of the attribute "value". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.</p>
      *
@@ -163,7 +163,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "checked".  Refer to the
+     * Returns the value of the attribute "checked". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -175,7 +175,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "disabled".  Refer to the
+     * Returns the value of the attribute "disabled". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -195,7 +195,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "readonly".  Refer to the
+     * Returns the value of the attribute "readonly". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -207,7 +207,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "size".  Refer to the
+     * Returns the value of the attribute "size". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -219,7 +219,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "maxlength".  Refer to the
+     * Returns the value of the attribute "maxlength". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -231,7 +231,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "src".  Refer to the
+     * Returns the value of the attribute "src". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -243,7 +243,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "alt".  Refer to the
+     * Returns the value of the attribute "alt". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -255,7 +255,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "usemap".  Refer to the
+     * Returns the value of the attribute "usemap". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -267,7 +267,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -279,7 +279,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -291,7 +291,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -303,7 +303,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -315,7 +315,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "onselect".  Refer to the
+     * Returns the value of the attribute "onselect". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -327,7 +327,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "onchange".  Refer to the
+     * Returns the value of the attribute "onchange". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -339,7 +339,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "accept".  Refer to the
+     * Returns the value of the attribute "accept". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -351,7 +351,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -423,21 +423,21 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Sets the "checked" attribute.
+     * Sets the "checked" attribute, returning the page that occupies this input's window after setting
+     * the attribute. Note that the returned page may or may not be the original page, depending on
+     * the presence of JavaScript event handlers, etc.
      *
-     * @param isChecked true if this element is to be selected
-     * @return The page that occupies this window after setting checked status.
-     * It may be the same window or it may be a freshly loaded one.
+     * @param isChecked <tt>true</tt> if this element is to be selected
+     * @return the page that occupies this input's window after setting the attribute
      */
     public Page setChecked(final boolean isChecked) {
-        // By default this returns the current page.  Derived classes will override.
+        // By default this returns the current page. Derived classes will override.
         return getPage();
     }
 
     /**
-     * Returns true if this element is currently selected.
-     *
-     * @return See above
+     * Returns <tt>true</tt> if this element is currently selected.
+     * @return <tt>true</tt> if this element is currently selected
      */
     public boolean isChecked() {
         return isAttributeDefined("checked");

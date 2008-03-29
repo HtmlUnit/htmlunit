@@ -1849,12 +1849,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Returns the element with the focus or null if no element has the focus.
      * @return The element with focus or null.
      * @see #moveFocusToElement(HtmlElement)
-     * @deprecated As of 2.0, please use {@link #getFocusedElement(HtmlElement)} instead.
+     * @deprecated As of 2.0, please use {@link #getFocusedElement()} instead.
      */
     public HtmlElement getElementWithFocus() {
         return getFocusedElement();
     }
-    
+
     /**
      * Returns the element with the focus or null if no element has the focus.
      * @return The element with focus or null.

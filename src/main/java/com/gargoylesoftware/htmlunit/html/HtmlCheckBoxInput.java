@@ -87,6 +87,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
 
     /**
      * {@inheritDoc}
+     *
      * @see SubmittableElement#reset()
      */
     @Override
@@ -95,11 +96,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     }
 
     /**
-     * Sets the "checked" attribute.
-     *
-     * @param isChecked true if this element is to be selected
-     * @return The page that occupies this window after setting checked status.
-     * It may be the same window or it may be a freshly loaded one.
+     * {@inheritDoc}
      */
     @Override
     public Page setChecked(final boolean isChecked) {

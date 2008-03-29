@@ -55,11 +55,11 @@ public class HtmlBaseFont extends HtmlElement {
     public static final String TAG_NAME = "basefont";
 
     /**
-     * Create an instance of HtmlBaseFont
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlBaseFont(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -68,48 +68,44 @@ public class HtmlBaseFont extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "id".  Refer to the
+     * Returns the value of the attribute "id". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "id"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "id" or an empty string if that attribute isn't defined
      */
     public final String getIdAttribute() {
         return getAttributeValue("id");
     }
 
     /**
-     * Returns the value of the attribute "size".  Refer to the
+     * Returns the value of the attribute "size". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "size"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "size" or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
         return getAttributeValue("size");
     }
 
     /**
-     * Returns the value of the attribute "color".  Refer to the
+     * Returns the value of the attribute "color". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "color"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "color" or an empty string if that attribute isn't defined
      */
     public final String getColorAttribute() {
         return getAttributeValue("color");
     }
 
     /**
-     * Returns the value of the attribute "face".  Refer to the
+     * Returns the value of the attribute "face". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "face"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "face" or an empty string if that attribute isn't defined
      */
     public final String getFaceAttribute() {
         return getAttributeValue("face");

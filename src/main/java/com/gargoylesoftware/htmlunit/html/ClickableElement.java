@@ -83,33 +83,34 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Simulate clicking this element.
+     * Simulates clicking on this element, returning the page that occupies this element's window
+     * after the element has been clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc.
      *
-     * @return The page that occupies this window after this element is
-     * clicked. It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @return the page that occupies this element's window after the element has been clicked
+     * @exception IOException if an IO error occurs
      */
     public Page click() throws IOException {
         return click(false, false, false);
     }
 
     /**
-     * Simulate clicking this element.
+     * Simulates clicking on this element, returning the page that occupies this element's window
+     * after the element has been clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     *
-     * @return The page that occupies this window after this element is
-     * clicked. It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the click
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the click
+     * @param altKey <tt>true</tt> if ALT is pressed during the click
+     * @return the page that occupies this element's window after the element has been clicked
+     * @exception IOException if an IO error occurs
      */
-    public Page click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
+    public Page click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
-
         final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT);
         return click(event);
@@ -117,16 +118,17 @@ public abstract class ClickableElement extends StyledElement {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * Simulate clicking this element.
+     *
+     * Simulates clicking on this element, returning the page that occupies this element's window
+     * after the element has been clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc.
      *
      * @param event the click event used
-     *
-     * @return The page that occupies this window after this element is
-     * clicked. It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @return the page that occupies this element's window after the element has been clicked
+     * @exception IOException if an IO error occurs
      */
-    public Page click(final Event event)
-        throws IOException {
+    public Page click(final Event event) throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
@@ -156,32 +158,32 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Simulate double clicking this element, note that
-     * {@link #click()} is called first.
+     * Simulates double-clicking on this element, returning the page that occupies this element's window
+     * after the element has been double-clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc. Note also that {@link #click()} is automatically called first.
      *
-     * @return The page that occupies this window after this element is double
-     * clicked. It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @return the page that occupies this element's window after the element has been double-clicked
+     * @exception IOException if an IO error occurs
      */
-    public Page dblClick()
-        throws IOException {
+    public Page dblClick() throws IOException {
         return dblClick(false, false, false);
     }
 
     /**
-     * Simulate double clicking this element, note that
-     * {@link #click(boolean, boolean, boolean)} is called first.
+     * Simulates double-clicking on this element, returning the page that occupies this element's window
+     * after the element has been double-clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc. Note also that {@link #click(boolean, boolean, boolean)} is automatically
+     * called first.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     *
-     * @return The page that occupies this window after this element is double
-     * clicked. It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the double-click
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the double-click
+     * @param altKey <tt>true</tt> if ALT is pressed during the double-click
+     * @return the page that occupies this element's window after the element has been double-clicked
+     * @exception IOException if an IO error occurs
      */
-    public Page dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
-        throws IOException {
+    public Page dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
@@ -207,187 +209,172 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * This method will be called if there either wasn't an onclick handler or
-     * there was but the result of that handler wasn't <code>false</code>.
-     * This is the default behavior of clicking the element.
-     * The default implementation returns
-     * the current page - subclasses requiring different behavior (like
-     * {@link HtmlSubmitInput}) will override this method.
+     * <p>This method will be called if there either wasn't an <tt>onclick</tt> handler, or if
+     * there was one, but the result of that handler wasn't <tt>false</tt>. This is the default
+     * behavior of clicking the element.<p>
      *
-     * @param defaultPage The default page to return if the action does not
-     * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * <p>The default implementation returns the current page. Subclasses requiring different
+     * behavior (like {@link HtmlSubmitInput}) will override this method.</p>
+     *
+     * @param defaultPage the default page to return if the action does not load a new page
+     * @return the page that is currently loaded after execution of this method
+     * @throws IOException if an IO error occurs
      */
     protected Page doClickAction(final Page defaultPage) throws IOException {
         return defaultPage;
     }
 
     /**
-     * Returns the value of the attribute "lang".  Refer to the
+     * Returns the value of the attribute "lang". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "lang"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
         return getAttributeValue("lang");
     }
 
     /**
-     * Returns the value of the attribute "xml:lang".  Refer to the
+     * Returns the value of the attribute "xml:lang". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "xml:lang"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
     }
 
     /**
-     * Returns the value of the attribute "dir".  Refer to the
+     * Returns the value of the attribute "dir". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "dir"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
     }
 
     /**
-     * Returns the value of the attribute "onclick".  Refer to the
+     * Returns the value of the attribute "onclick". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onclick"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onclick" or an empty string if that attribute isn't defined
      */
     public final String getOnClickAttribute() {
         return getAttributeValue("onclick");
     }
 
     /**
-     * Returns the value of the attribute "ondblclick".  Refer to the
+     * Returns the value of the attribute "ondblclick". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "ondblclick"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "ondblclick" or an empty string if that attribute isn't defined
      */
     public final String getOnDblClickAttribute() {
         return getAttributeValue("ondblclick");
     }
 
     /**
-     * Returns the value of the attribute "onmousedown".  Refer to the
+     * Returns the value of the attribute "onmousedown". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onmousedown"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onmousedown" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseDownAttribute() {
         return getAttributeValue("onmousedown");
     }
 
     /**
-     * Returns the value of the attribute "onmouseup".  Refer to the
+     * Returns the value of the attribute "onmouseup". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onmouseup"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onmouseup" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseUpAttribute() {
         return getAttributeValue("onmouseup");
     }
 
     /**
-     * Returns the value of the attribute "onmouseover".  Refer to the
+     * Returns the value of the attribute "onmouseover". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onmouseover"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onmouseover" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOverAttribute() {
         return getAttributeValue("onmouseover");
     }
 
     /**
-     * Returns the value of the attribute "onmousemove".  Refer to the
+     * Returns the value of the attribute "onmousemove". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onmousemove"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onmousemove" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseMoveAttribute() {
         return getAttributeValue("onmousemove");
     }
 
     /**
-     * Returns the value of the attribute "onmouseout".  Refer to the
+     * Returns the value of the attribute "onmouseout". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onmouseout"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onmouseout" or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOutAttribute() {
         return getAttributeValue("onmouseout");
     }
 
     /**
-     * Returns the value of the attribute "onkeypress".  Refer to the
+     * Returns the value of the attribute "onkeypress". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onkeypress"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onkeypress" or an empty string if that attribute isn't defined
      */
     public final String getOnKeyPressAttribute() {
         return getAttributeValue("onkeypress");
     }
 
     /**
-     * Returns the value of the attribute "onkeydown".  Refer to the
+     * Returns the value of the attribute "onkeydown". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onkeydown"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onkeydown" or an empty string if that attribute isn't defined
      */
     public final String getOnKeyDownAttribute() {
         return getAttributeValue("onkeydown");
     }
 
     /**
-     * Returns the value of the attribute "onkeyup".  Refer to the
+     * Returns the value of the attribute "onkeyup". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onkeyup"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onkeyup" or an empty string if that attribute isn't defined
      */
     public final String getOnKeyUpAttribute() {
         return getAttributeValue("onkeyup");
     }
 
     /**
-     * Returns true if the state update should be done before onclick event
-     * handling.
-     * This is expected to be overridden to return "true" by derived classes
-     * like HtmlCheckBoxInput.
-     * @return Return true if state update should be done first.
+     * Returns <tt>true</tt> if state updates should be done before onclick event handling. This method
+     * returns <tt>false</tt> by default, and is expected to be overridden to return <tt>true</tt> by
+     * derived classes like {@link HtmlCheckBoxInput}.
+     * @return <tt>true</tt> if state updates should be done before onclick event handling
      */
     protected boolean isStateUpdateFirst() {
         return false;
     }
-    
+
 }

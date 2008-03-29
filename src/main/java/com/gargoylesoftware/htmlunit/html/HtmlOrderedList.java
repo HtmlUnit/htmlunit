@@ -69,7 +69,7 @@ public class HtmlOrderedList extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -81,7 +81,7 @@ public class HtmlOrderedList extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "compact".  Refer to the
+     * Returns the value of the attribute "compact". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -93,7 +93,7 @@ public class HtmlOrderedList extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "start".  Refer to the
+     * Returns the value of the attribute "start". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

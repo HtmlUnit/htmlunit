@@ -1612,7 +1612,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the handler to be used whenever a refresh is triggered.  Refer
+     * Sets the handler to be used whenever a refresh is triggered. Refer
      * to the documentation for {@link RefreshHandler} for more details.
      * @param handler The new handler
      */

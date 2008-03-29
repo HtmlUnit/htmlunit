@@ -570,35 +570,37 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns a flag indicating whether or not this node itself results
-     * in any space taken up in the browser windows; for instance, "&lt;b&gt;"
-     * affects the specified text, but does not use up any space itself.
+     * Returns a flag indicating whether or not this node itself results in any space taken up
+     * in browser windows; for instance, "&lt;b&gt;" affects the specified text, but does not
+     * use up any space itself.
      *
-     * @return The flag
+     * @return a flag indicating whether or not this node itself results in any space taken up
+     *         in browser windows
      */
     protected boolean isRenderedVisible() {
         return false;
     }
 
     /**
-     * Returns a flag indicating whether or not this node should
-     * have any leading and trailing whitespace removed when asText()
-     * is called; mostly this should be true, but must be false for
-     * such things as text formatting tags.
+     * Returns a flag indicating whether or not this node should have any leading and trailing
+     * whitespace removed when {@link #asText()} is called. This method should usually return
+     * <tt>true</tt>, but must return <tt>false</tt> for such things as text formatting tags.
      *
-     * @return The flag
+     * @return a flag indicating whether or not this node should have any leading and trailing
+     *         whitespace removed when {@link #asText()} is called
      */
     protected boolean isTrimmedText() {
         return true;
     }
     
     /**
-     * Returns a text representation of this element that represents what would
-     * be visible to the user if this page was shown in a web browser. For
-     * example, a single-selection select element would return the currently selected
-     * value as text.
+     * Returns a textual representation of this element that represents what would
+     * be visible to the user if this page was shown in a web browser. For example,
+     * a single-selection select element would return the currently selected value
+     * as text.
      *
-     * @return The element as text.
+     * @return a textual representation of this element that represents what would
+     *         be visible to the user if this page was shown in a web browser
      */
     public String asText() {
         String text = getChildrenAsText();
@@ -803,10 +805,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * The logic of when and where the js object is created needs a clean up: functions using
-     * a js object of a DOM node should not have to look if they should create it first
-     * Return the JavaScript object that corresponds to this node.
-     * @return The JavaScript object that corresponds to this node building it if necessary.
+     * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
+     *
+     * The logic of when and where the JavaScript object is created needs a clean up: functions using
+     * a DOM node's JavaScript object should not have to check if they should create it first.
+     *
+     * @return the JavaScript object that corresponds to this node
      */
     public ScriptableObject getScriptObject() {
         if (scriptObject_ == null) {
@@ -1156,8 +1160,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns an Iterable that will recursively iterate over every child element below this one.
-     * @return The iterator.
+     * Returns an {@link Iterable} that will recursively iterate over all of this node's descendants.
+     * @return an {@link Iterable} that will recursively iterate over all of this node's descendants
      */
     public final Iterable<HtmlElement> getAllHtmlChildElements() {
         return new Iterable<HtmlElement>() {

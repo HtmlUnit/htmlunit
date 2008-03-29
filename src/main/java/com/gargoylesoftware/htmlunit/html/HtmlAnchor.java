@@ -72,11 +72,11 @@ public class HtmlAnchor extends ClickableElement {
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
     
     /**
-     * Creates an instance.
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlAnchor(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -85,12 +85,13 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Same as {@link #doClickAction(Page)} except that it accepts an href suffix needed when a click is
+     * Same as {@link #doClickAction(Page)}, except that it accepts an href suffix, needed when a click is
      * performed on an image map to pass information on the click position.
-     * @param defaultPage The default page to return if the action does not load a new page.
+     *
+     * @param defaultPage the default page to return if the action does not load a new page
      * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * @return the page that is currently loaded after execution of this method
+     * @throws IOException if an IO error occurs
      */
     protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
@@ -132,15 +133,14 @@ public class HtmlAnchor extends ClickableElement {
 
     /**
      * This method will be called if there either wasn't an onclick handler or
-     * there was but the result of that handler was true.  This is the default
-     * behavior of clicking the element.  For this anchor element, the default
+     * there was but the result of that handler was true. This is the default
+     * behavior of clicking the element. For this anchor element, the default
      * behavior is to open the HREF page, or execute the HREF if it is a
      * javascript: URL.
      *
-     * @param defaultPage The default page to return if the action does not
-     * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * @param defaultPage the default page to return if the action does not load a new page
+     * @return the page that is currently loaded after execution of this method
+     * @throws IOException if an IO error occurs
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
@@ -148,189 +148,174 @@ public class HtmlAnchor extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "charset".  Refer to the
+     * Returns the value of the attribute "charset". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "charset"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "charset" or an empty string if that attribute isn't defined
      */
     public final String getCharsetAttribute() {
         return getAttributeValue("charset");
     }
 
     /**
-     * Returns the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "type"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "type" or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         return getAttributeValue("type");
     }
 
     /**
-     * Returns the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
 
     /**
-     * Returns the value of the attribute "href".  Refer to the
+     * Returns the value of the attribute "href". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "href"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "href" or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
         return getAttributeValue("href").trim();
     }
 
     /**
-     * Returns the value of the attribute "hreflang".  Refer to the
+     * Returns the value of the attribute "hreflang". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "hreflang"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "hreflang" or an empty string if that attribute isn't defined
      */
     public final String getHrefLangAttribute() {
         return getAttributeValue("hreflang");
     }
 
     /**
-     * Returns the value of the attribute "rel".  Refer to the
+     * Returns the value of the attribute "rel". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "rel"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "rel" or an empty string if that attribute isn't defined
      */
     public final String getRelAttribute() {
         return getAttributeValue("rel");
     }
 
     /**
-     * Returns the value of the attribute "rev".  Refer to the
+     * Returns the value of the attribute "rev". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "rev"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "rev" or an empty string if that attribute isn't defined
      */
     public final String getRevAttribute() {
         return getAttributeValue("rev");
     }
 
     /**
-     * Returns the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accesskey"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttributeValue("accesskey");
     }
 
     /**
-     * Returns the value of the attribute "shape".  Refer to the
+     * Returns the value of the attribute "shape". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "shape"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "shape" or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
         return getAttributeValue("shape");
     }
 
     /**
-     * Returns the value of the attribute "coords".  Refer to the
+     * Returns the value of the attribute "coords". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "coords"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "coords" or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
         return getAttributeValue("coords");
     }
 
     /**
-     * Returns the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttributeValue("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
     }
 
     /**
-     * Returns the value of the attribute "target".  Refer to the
+     * Returns the value of the attribute "target". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "target"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "target" or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
         return getAttributeValue("target");
     }
     
     /**
-     * Open this link in a new window, much as web browsers do when you
-     * shift-click a link or use the context menu to open in a new window.
+     * Open this link in a new window, much as web browsers do when you shift-click a link or use the context
+     * menu to open in a new window.
      *
-     * It should be noted that even web browsers will sometimes not give the
-     * expected result when using this method of following links. Links that
-     * have no real href and rely on JavaScript to do their work will fail.
+     * It should be noted that even web browsers will sometimes not give the expected result when using this
+     * method of following links. Links that have no real href and rely on JavaScript to do their work will
+     * fail.
      *
-     * @return The Page opened by this link, nested in a new TopLevelWindow
+     * @return the page opened by this link, nested in a new {@link com.gargoylesoftware.htmlunit.TopLevelWindow}
      * @throws MalformedURLException if the href could not be converted to a valid URL
      */
     public final Page openLinkInNewWindow() throws MalformedURLException {
         final URL target = getPage().getFullyQualifiedUrl(getHrefAttribute());
-        final WebWindow newWindow = getPage().getWebClient().openWindow(
-                target,
-                "HtmlAnchor.openLinkInNewWindow() target");
+        final String windowName = "HtmlAnchor.openLinkInNewWindow() target";
+        final WebWindow newWindow = getPage().getWebClient().openWindow(target, windowName);
         return newWindow.getEnclosedPage();
     }
 }

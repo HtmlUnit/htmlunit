@@ -71,20 +71,18 @@ public class HtmlDivision extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "align" or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
         return getAttributeValue("align");
     }
 
     /**
-     * Indicates if a node without children should be written in expanded form as XML
-     * (ie with closing tag rather than with "/&gt;).
+     * {@inheritDoc}
      * @return <code>true</code> to make generated XML readable as HTML
      */
     @Override

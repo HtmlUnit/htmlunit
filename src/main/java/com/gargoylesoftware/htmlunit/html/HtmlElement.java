@@ -182,8 +182,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * attribute was specified but it was empty.
      *
      * @param attributeName the name of the attribute
-     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
-     * or {@link #ATTRIBUTE_VALUE_EMPTY}
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttribute(final String attributeName) {
         return getAttributeValue(attributeName);
@@ -192,9 +191,9 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Returns the qualified name (prefix:local) for the namespace and local name.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param localName The name within the namespace.
-     * @return The qualified name or just local name if the namespace is not fully defined.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
+     * @return the qualified name or just local name if the namespace is not fully defined
      */
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
@@ -852,9 +851,9 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
     
     /**
-     * Indicates if a node without children should be written in expanded form as xml
+     * Indicates if a node without children should be written in expanded form as XML
      * (i.e. with closing tag rather than with "/&gt;")
-     * @return <code>false</code>
+     * @return <code>false</code> by default
      */
     protected boolean isEmptyXmlTagExpanded() {
         return false;

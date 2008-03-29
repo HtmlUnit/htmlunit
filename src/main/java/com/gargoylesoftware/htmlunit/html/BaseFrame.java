@@ -172,24 +172,22 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "longdesc".  Refer to the
+     * Returns the value of the attribute "longdesc". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "longdesc"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "longdesc" or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
         return getAttributeValue("longdesc");
     }
 
     /**
-     * Returns the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
@@ -205,7 +203,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "src".  Refer to the
+     * Returns the value of the attribute "src". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -216,7 +214,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "frameborder".  Refer to the
+     * Returns the value of the attribute "frameborder". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -227,7 +225,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "marginwidth".  Refer to the
+     * Returns the value of the attribute "marginwidth". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -238,7 +236,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "marginheight".  Refer to the
+     * Returns the value of the attribute "marginheight". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -249,7 +247,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "noresize".  Refer to the
+     * Returns the value of the attribute "noresize". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -260,7 +258,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "scrolling".  Refer to the
+     * Returns the value of the attribute "scrolling". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

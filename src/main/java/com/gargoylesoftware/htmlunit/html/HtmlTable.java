@@ -226,7 +226,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "summary".  Refer to the
+     * Returns the value of the attribute "summary". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -238,7 +238,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "width".  Refer to the
+     * Returns the value of the attribute "width". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -250,7 +250,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "border".  Refer to the
+     * Returns the value of the attribute "border". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -262,7 +262,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "frame".  Refer to the
+     * Returns the value of the attribute "frame". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -274,7 +274,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "rules".  Refer to the
+     * Returns the value of the attribute "rules". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -286,7 +286,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "cellspacing".  Refer to the
+     * Returns the value of the attribute "cellspacing". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -298,7 +298,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "cellpadding".  Refer to the
+     * Returns the value of the attribute "cellpadding". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -310,7 +310,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -322,7 +322,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "bgcolor".  Refer to the
+     * Returns the value of the attribute "bgcolor". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

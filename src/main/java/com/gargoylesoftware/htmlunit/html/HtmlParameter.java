@@ -68,7 +68,7 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "id".  Refer to the
+     * Returns the value of the attribute "id". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -80,7 +80,7 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -92,7 +92,7 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "value".  Refer to the
+     * Returns the value of the attribute "value". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -104,7 +104,7 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "valuetype".  Refer to the
+     * Returns the value of the attribute "valuetype". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -116,7 +116,7 @@ public class HtmlParameter extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

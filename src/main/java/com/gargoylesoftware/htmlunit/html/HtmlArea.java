@@ -73,11 +73,11 @@ public class HtmlArea extends ClickableElement {
     public static final String TAG_NAME = "area";
 
     /**
-     * Create an instance of HtmlArea
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlArea(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -86,16 +86,7 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true.  This is the default behavior of clicking
-     * the element.  The default implementation returns the current page - subclasses
-     * requiring different behavior (like {@link HtmlSubmitInput}) will override this
-     * method.
-     *
-     * @param defaultPage The default page to return if the action does not
-     * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * {@inheritDoc}
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
@@ -132,127 +123,117 @@ public class HtmlArea extends ClickableElement {
     }
 
     /**
-     * Returns the value of the attribute "shape".  Refer to the
+     * Returns the value of the attribute "shape". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "shape"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "shape" or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
         return getAttributeValue("shape");
     }
 
     /**
-     * Returns the value of the attribute "coords".  Refer to the
+     * Returns the value of the attribute "coords". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "coords"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "coords" or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
         return getAttributeValue("coords");
     }
 
     /**
-     * Returns the value of the attribute "href".  Refer to the
+     * Returns the value of the attribute "href". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "href"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "href" or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
         return getAttributeValue("href");
     }
 
     /**
-     * Returns the value of the attribute "nohref".  Refer to the
+     * Returns the value of the attribute "nohref". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "nohref"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "nohref" or an empty string if that attribute isn't defined
      */
     public final String getNoHrefAttribute() {
         return getAttributeValue("nohref");
     }
 
     /**
-     * Returns the value of the attribute "alt".  Refer to the
+     * Returns the value of the attribute "alt". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "alt"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "alt" or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
         return getAttributeValue("alt");
     }
 
     /**
-     * Returns the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accesskey"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttributeValue("accesskey");
     }
 
     /**
-     * Returns the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttributeValue("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
     }
 
     /**
-     * Returns the value of the attribute "target".  Refer to the
+     * Returns the value of the attribute "target". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "target"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "target" or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
         return getAttributeValue("target");
     }
 
     /**
-     * Indicates if this area contains the give point
+     * Indicates if this area contains the specified point.
      * @param x the x coordinate of the point
      * @param y the y coordinate of the point
      * @return <code>true</code> if the point is contained in this area

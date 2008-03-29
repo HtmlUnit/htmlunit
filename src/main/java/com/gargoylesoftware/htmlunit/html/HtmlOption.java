@@ -145,7 +145,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "selected".  Refer to the
+     * Returns the value of the attribute "selected". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -177,7 +177,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "disabled".  Refer to the
+     * Returns the value of the attribute "disabled". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -189,7 +189,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "label".  Refer to the
+     * Returns the value of the attribute "label". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -201,7 +201,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Sets the value of the attribute "label".  Refer to the
+     * Sets the value of the attribute "label". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -212,7 +212,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Returns the value of the attribute "value".  Refer to the
+     * Returns the value of the attribute "value". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
@@ -224,7 +224,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Sets the value of the attribute "value".  Refer to the
+     * Sets the value of the attribute "value". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

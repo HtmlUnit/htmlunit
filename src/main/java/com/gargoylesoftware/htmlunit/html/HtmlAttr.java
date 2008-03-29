@@ -59,10 +59,10 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
     /**
      * Instantiate a new attribute.
      *
-     * @param page The page that the attribute belongs to.
-     * @param namespaceURI The namespace that defines the attribute name.  May be null.
-     * @param qualifiedName The name of the attribute.
-     * @param value The value of the attribute.
+     * @param page the page that the attribute belongs to
+     * @param namespaceURI the namespace that defines the attribute name (may be <tt>null</tt>)
+     * @param qualifiedName the name of the attribute
+     * @param value the value of the attribute
      */
     public HtmlAttr(final HtmlPage page, final String namespaceURI, final String qualifiedName, final String value) {
         super(namespaceURI, qualifiedName, page);
@@ -94,38 +94,47 @@ public class HtmlAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * @return The qualified name of the attribute.
+     * {@inheritDoc}
+     * @return the qualified name of this attribute
      */
     public String getName() {
         return getQualifiedName();
     }
 
     /**
-     * @return The value of the attribute.
+     * {@inheritDoc}
+     * @return the value of this attribute
      */
     public String getValue() {
         return value_;
     }
 
     /**
-     * @return The value of wrapped map entry.
+     * Returns the value of the wrapped map entry.
+     *
+     * TODO: not required?
+     *
+     * @return the value of wrapped map entry
      */
     public String getHtmlValue() {
         return getValue();
     }
 
     /**
-     * Sets the value of the attribute.
-     * @param value new value to be stored in this entry.
+     * Sets this attribute's value.
+     * @param value the attribute's new value
      */
     public void setValue(final String value) {
         value_ = value;
     }
 
     /**
-     * Sets the value of the attribute.
-     * @param value new value to be stored in this entry.
-     * @return old value corresponding to the entry.
+     * Sets this attribute's value.
+     *
+     * TODO: not required?
+     *
+     * @param value the attribute's new value
+     * @return the attribute's old value
      */
     public String setHtmlValue(final String value) {
         final String oldValue = value_;

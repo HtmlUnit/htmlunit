@@ -61,13 +61,6 @@ public interface HTMLParserListener {
      */
     HTMLParserListener LOG_REPORTER = new HTMLParserListener() {
         private final transient Log listenerLog_ = LogFactory.getLog(HTMLParserListener.class);
-        
-        /**
-         * @deprecated As of 2.0, use local log variable enclosed in a conditional block.
-         */
-        protected final Log getLog() {
-            return listenerLog_;
-        }
         public void error(final String message, final URL url, final int line, final int column, final String key) {
             if (listenerLog_.isErrorEnabled()) {
                 listenerLog_.error(format(message, url, line, column, key));

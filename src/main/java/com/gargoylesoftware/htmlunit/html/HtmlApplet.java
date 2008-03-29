@@ -56,11 +56,11 @@ public class HtmlApplet extends StyledElement {
     public static final String TAG_NAME = "applet";
 
     /**
-     * Create an instance of HtmlApplet
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlApplet(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -69,132 +69,121 @@ public class HtmlApplet extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "codebase".  Refer to the
+     * Returns the value of the attribute "codebase". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "codebase"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "codebase" or an empty string if that attribute isn't defined
      */
     public final String getCodebaseAttribute() {
         return getAttributeValue("codebase");
     }
 
     /**
-     * Returns the value of the attribute "archive".  Refer to the
+     * Returns the value of the attribute "archive". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "archive"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "archive" or an empty string if that attribute isn't defined
      */
     public final String getArchiveAttribute() {
         return getAttributeValue("archive");
     }
 
     /**
-     * Returns the value of the attribute "code".  Refer to the
+     * Returns the value of the attribute "code". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "code"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "code" or an empty string if that attribute isn't defined
      */
     public final String getCodeAttribute() {
         return getAttributeValue("code");
     }
 
     /**
-     * Returns the value of the attribute "object".  Refer to the
+     * Returns the value of the attribute "object". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "object"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "object" or an empty string if that attribute isn't defined
      */
     public final String getObjectAttribute() {
         return getAttributeValue("object");
     }
 
     /**
-     * Returns the value of the attribute "alt".  Refer to the
+     * Returns the value of the attribute "alt". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "alt"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "alt" or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
         return getAttributeValue("alt");
     }
 
     /**
-     * Returns the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
 
     /**
-     * Returns the value of the attribute "width".  Refer to the
+     * Returns the value of the attribute "width". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "width"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "width" or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
         return getAttributeValue("width");
     }
 
     /**
-     * Returns the value of the attribute "height".  Refer to the
+     * Returns the value of the attribute "height". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "height"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "height" or an empty string if that attribute isn't defined
      */
     public final String getHeightAttribute() {
         return getAttributeValue("height");
     }
 
     /**
-     * Returns the value of the attribute "align".  Refer to the
+     * Returns the value of the attribute "align". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "align" or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
         return getAttributeValue("align");
     }
 
     /**
-     * Returns the value of the attribute "hspace".  Refer to the
+     * Returns the value of the attribute "hspace". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "hspace"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "hspace" or an empty string if that attribute isn't defined
      */
     public final String getHspaceAttribute() {
         return getAttributeValue("hspace");
     }
 
     /**
-     * Returns the value of the attribute "vspace".  Refer to the
+     * Returns the value of the attribute "vspace". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "vspace"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "vspace" or an empty string if that attribute isn't defined
      */
     public final String getVspaceAttribute() {
         return getAttributeValue("vspace");

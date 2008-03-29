@@ -67,9 +67,9 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     public static final String TAG_NAME = "button";
 
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
-    
+
     /**
-     * Creates an instance.
+     * Creates a new instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the element type to instantiate
@@ -91,16 +91,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true.  This is the default behavior of clicking
-     * the element.  The default implementation returns the current page - subclasses
-     * requiring different behavior (like {@link HtmlSubmitInput}) will override this
-     * method.
-     *
-     * @param defaultPage The default page to return if the action does not
-     * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * {@inheritDoc}
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
@@ -120,8 +111,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns true if the disabled attribute is set for this element.
-     * @return Return true if this is disabled.
+     * {@inheritDoc}
      */
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
@@ -142,6 +132,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
 
     /**
      * {@inheritDoc}
+     *
      * @see SubmittableElement#reset()
      */
     public void reset() {
@@ -152,6 +143,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
 
     /**
      * {@inheritDoc}
+     *
      * @see SubmittableElement#setDefaultValue(String)
      */
     public void setDefaultValue(final String defaultValue) {
@@ -162,6 +154,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
 
     /**
      * {@inheritDoc}
+     *
      * @see SubmittableElement#getDefaultValue()
      */
     public String getDefaultValue() {
@@ -172,8 +165,11 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * {@inheritDoc} This implementation is empty; only checkboxes and radio buttons
-     * really care what the default checked value is.
+     * {@inheritDoc}
+     *
+     * This implementation is empty; only checkboxes and radio buttons really care what the
+     * default checked value is.
+     *
      * @see SubmittableElement#setDefaultChecked(boolean)
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
@@ -183,8 +179,11 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * {@inheritDoc} This implementation returns <tt>false</tt>; only checkboxes and
-     * radio buttons really care what the default checked value is.
+     * {@inheritDoc}
+     *
+     * This implementation returns <tt>false</tt>; only checkboxes and radio buttons really care what
+     * the default checked value is.
+     *
      * @see SubmittableElement#isDefaultChecked()
      * @see HtmlRadioButtonInput#isDefaultChecked()
      * @see HtmlCheckBoxInput#isDefaultChecked()
@@ -194,38 +193,35 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns the value of the attribute "name".  Refer to the
+     * Returns the value of the attribute "name". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
     }
 
     /**
-     * Returns the value of the attribute "value".  Refer to the
+     * Returns the value of the attribute "value". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "value"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "value" or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
         return getAttributeValue("value");
     }
 
     /**
-     * Returns the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.  Note that Internet
      * Explorer doesn't follow the spec when the type isn't specified.  It will return
      * "button" rather than the "submit" specified in the spec.
      *
-     * @return The value of the attribute "type"
-     * or the default value if that attribute isn't defined.
+     * @return the value of the attribute "type" or the default value if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         String type = getAttributeValue("type");
@@ -242,60 +238,55 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns the value of the attribute "disabled".  Refer to the
+     * Returns the value of the attribute "disabled". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "disabled"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "disabled" or an empty string if that attribute isn't defined
      */
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
     }
 
     /**
-     * Returns the value of the attribute "tabindex".  Refer to the
+     * Returns the value of the attribute "tabindex". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
     }
 
     /**
-     * Returns the value of the attribute "accesskey".  Refer to the
+     * Returns the value of the attribute "accesskey". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accesskey"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttributeValue("accesskey");
     }
 
     /**
-     * Returns the value of the attribute "onfocus".  Refer to the
+     * Returns the value of the attribute "onfocus". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttributeValue("onfocus");
     }
 
     /**
-     * Returns the value of the attribute "onblur".  Refer to the
+     * Returns the value of the attribute "onblur". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");

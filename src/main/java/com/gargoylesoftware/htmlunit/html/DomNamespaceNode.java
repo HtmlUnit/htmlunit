@@ -115,9 +115,8 @@ public abstract class DomNamespaceNode extends DomNode {
     }
 
     /**
-     * Returns the qualified name of this node.
-     *
-     * @return The prefix and local name.
+     * Returns this node's qualified name.
+     * @return this node's qualified name
      */
     public String getQualifiedName() {
         return qualifiedName_;

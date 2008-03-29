@@ -55,12 +55,11 @@ public class HtmlAttributeChangeEvent extends EventObject {
     private final String value_;
 
     /**
-     * Constructs a new AttributeEvent from the given element
-     * for the given attribute name and attribute value.
+     * Constructs a new AttributeEvent from the given element, for the given attribute name and attribute value.
      *
-     * @param element the HtmlElement that is sending the event.
-     * @param name the name of the attribute that changed on the element.
-     * @param value the value of the attribute that has been added, removed, or replaced.
+     * @param element the element that is sending the event
+     * @param name the name of the attribute that changed on the element
+     * @param value the value of the attribute that has been added, removed, or replaced
      */
     public HtmlAttributeChangeEvent(final HtmlElement element, final String name, final String value) {
         super(element);

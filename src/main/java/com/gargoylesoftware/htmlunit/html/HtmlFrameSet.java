@@ -72,7 +72,7 @@ public class HtmlFrameSet extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "rows".  Refer to the
+     * Returns the value of the attribute "rows". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -84,7 +84,7 @@ public class HtmlFrameSet extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "cols".  Refer to the
+     * Returns the value of the attribute "cols". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -96,7 +96,7 @@ public class HtmlFrameSet extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "onload".  Refer to the
+     * Returns the value of the attribute "onload". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -108,7 +108,7 @@ public class HtmlFrameSet extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "onunload".  Refer to the
+     * Returns the value of the attribute "onunload". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *

@@ -99,7 +99,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "charset".  Refer to the
+     * Returns the value of the attribute "charset". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -111,7 +111,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "type".  Refer to the
+     * Returns the value of the attribute "type". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -123,7 +123,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "language".  Refer to the
+     * Returns the value of the attribute "language". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -135,7 +135,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "src".  Refer to the
+     * Returns the value of the attribute "src". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
@@ -163,7 +163,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Returns the value of the attribute "defer".  Refer to the
+     * Returns the value of the attribute "defer". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
