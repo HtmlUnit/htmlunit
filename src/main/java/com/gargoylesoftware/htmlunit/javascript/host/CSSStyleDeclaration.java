@@ -2749,7 +2749,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingBottom() {
-        return getStyleAttribute("paddingBottom", true);
+        return getStyleAttribute("paddingBottom", "padding", true);
     }
 
     /**
@@ -2765,7 +2765,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingLeft() {
-        return getStyleAttribute("paddingLeft", true);
+        return getStyleAttribute("paddingLeft", "padding", true);
     }
 
     /**
@@ -2781,7 +2781,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingRight() {
-        return getStyleAttribute("paddingRight", true);
+        return getStyleAttribute("paddingRight", "padding", true);
     }
 
     /**
@@ -2797,7 +2797,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingTop() {
-        return getStyleAttribute("paddingTop", true);
+        return getStyleAttribute("paddingTop", "padding", true);
     }
 
     /**

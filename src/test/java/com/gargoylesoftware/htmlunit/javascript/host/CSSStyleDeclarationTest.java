@@ -793,4 +793,60 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Verifies that setting paddings all at once and setting paddings individually all work, both in static
+     * styles and in calculated styles.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void paddingAllvsPaddingSingle() throws Exception {
+        final String html =
+              "<html>\n"
+            + "    <head>\n"
+            + "        <title>Test</title>\n"
+            + "        <style>\n"
+            + "            #m1 { padding: 3px; }\n"
+            + "            #m2 { padding-left: 3px; padding: 5px; }\n"
+            + "            #m3 { padding: 2px; padding-left: 7px; }\n"
+            + "        </style>\n"
+            + "        <script>\n"
+            + "            function test() {\n"
+            + "                alertComputedPaddings('m1');\n"
+            + "                alertComputedPaddings('m2');\n"
+            + "                alertComputedPaddings('m3');\n"
+            + "                alertNonComputedPaddings('m4');\n"
+            + "                alertNonComputedPaddings('m5');\n"
+            + "                alertNonComputedPaddings('m6');\n"
+            + "            }\n"
+            + "            function alertComputedPaddings(id) {\n"
+            + "                var e = document.getElementById(id);\n"
+            + "                var s = e.currentStyle ? e.currentStyle : getComputedStyle(e, null);\n"
+            + "                alert('L:' + s.paddingLeft + ',R:' + s.paddingRight +\n"
+            + "                      ',T:' + s.paddingTop + ',B:' + s.paddingBottom);\n"
+            + "            }\n"
+            + "            function alertNonComputedPaddings(id) {\n"
+            + "                var e = document.getElementById(id);\n"
+            + "                var s = e.style;\n"
+            + "                alert('L:' + s.paddingLeft + ',R:' + s.paddingRight +\n"
+            + "                      ',T:' + s.paddingTop + ',B:' + s.paddingBottom);\n"
+            + "            }\n"
+            + "        </script>\n"
+            + "    </head>\n"
+            + "    <body onload='test()'>\n"
+            + "        <div id='m1'>m1</div>\n"
+            + "        <div id='m2'>m2</div>\n"
+            + "        <div id='m3'>m3</div>\n"
+            + "        <div id='m4' style='padding: 3px;'>m4</div>\n"
+            + "        <div id='m5' style='padding-left: 3px; padding: 5px;'>m5</div>\n"
+            + "        <div id='m6' style='padding: 2px; padding-left: 7px;'>m6</div>\n"
+            + "    </body>\n"
+            + "</html>";
+        final String[] expected = {
+            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
+            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
