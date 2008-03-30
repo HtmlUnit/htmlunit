@@ -163,8 +163,7 @@ public final class TextUtilTest extends WebTestCase {
             final String expectedResult = entry[1];
 
             final InputStream inputStream = TextUtil.toInputStream(input, encoding);
-            final String actualResult
-                = new BufferedReader(new InputStreamReader(inputStream, encoding)).readLine();
+            final String actualResult = new BufferedReader(new InputStreamReader(inputStream, encoding)).readLine();
             Assert.assertEquals(expectedResult, actualResult);
         }
     }

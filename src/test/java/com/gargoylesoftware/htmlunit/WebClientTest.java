@@ -150,8 +150,7 @@ public class WebClientTest extends WebTestCase {
         client.setPrintContentOnFailingStatusCode(false);
 
         final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setDefaultResponse(
-            htmlContent, 401, "Credentials missing or just plain wrong", "text/plain");
+        webConnection.setDefaultResponse(htmlContent, 401, "Credentials missing or just plain wrong", "text/plain");
         client.setWebConnection(webConnection);
 
         try {
@@ -231,8 +230,7 @@ public class WebClientTest extends WebTestCase {
             + "</head><body>\n"
             + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String page2Content
-            = "<html><head><title>foo</title></head><body></body></html>";
+        final String page2Content = "<html><head><title>foo</title></head><body></body></html>";
         final WebClient client = new WebClient();
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
@@ -271,10 +269,8 @@ public class WebClientTest extends WebTestCase {
             + "<iframe src='" + URL_THIRD + "' id='frame1'>\n"
             + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body></body></html>";
-        final String thirdContent
-            = "<html><head><title>third</title></head><body></body></html>";
+        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+        final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
         final WebClient client = new WebClient();
 
         final MockWebConnection webConnection = new MockWebConnection(client);
@@ -327,10 +323,7 @@ public class WebClientTest extends WebTestCase {
      * @param statusCode The code to return from the initial request
      * @throws Exception if the test fails.
      */
-    private void doTestRedirectionSameUrlAfterPost(final int statusCode)
-        throws
-             Exception {
-
+    private void doTestRedirectionSameUrlAfterPost(final int statusCode) throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
@@ -356,9 +349,7 @@ public class WebClientTest extends WebTestCase {
                 }
             }
         };
-        webConnection.setResponse(
-                URL_FIRST, firstContent, statusCode,
-                "Some error", "text/html", headers);
+        webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
@@ -517,8 +508,7 @@ public class WebClientTest extends WebTestCase {
             final SubmitMethod initialRequestMethod,
             final SubmitMethod expectedRedirectedRequestMethod,
             final String newLocation)
-        throws
-        Exception {
+        throws Exception {
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, false);
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, true);
@@ -590,8 +580,7 @@ public class WebClientTest extends WebTestCase {
             final SubmitMethod expectedRedirectedRequestMethod,
             final String newLocation,
             final boolean useProxy)
-        throws
-             Exception {
+        throws Exception {
 
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -615,9 +604,7 @@ public class WebClientTest extends WebTestCase {
 
         final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", newLocation));
         final MockWebConnection webConnection = new MockWebConnection(webClient);
-        webConnection.setResponse(
-            URL_FIRST, firstContent, statusCode,
-            "Some error", "text/html", headers);
+        webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
         webConnection.setResponse(new URL(newLocation), secondContent);
 
         webClient.setWebConnection(webConnection);
@@ -720,8 +707,7 @@ public class WebClientTest extends WebTestCase {
          * @return The new page
          * @throws IOException If an IO problem occurs
          */
-        public Page createPage(final WebResponse webResponse, final WebWindow webWindow)
-            throws IOException {
+        public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
             collectedPages_.add(page);

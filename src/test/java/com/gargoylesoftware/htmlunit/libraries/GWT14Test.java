@@ -258,8 +258,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     private void i18nDictionary(final HtmlPage page, final Map<String, String> expectedMap) throws Exception {
-        final HtmlTableRow headerRow =
-            (HtmlTableRow) page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
+        final HtmlTableRow headerRow = (HtmlTableRow) page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
         final HtmlTableRow valueRow = (HtmlTableRow) headerRow.getNextDomSibling();
         DomNode headerNode = headerRow.getFirstDomChild();
         DomNode valueNode = valueRow.getFirstDomChild();

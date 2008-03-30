@@ -148,8 +148,7 @@ public abstract class WebTestCase {
      * @return The new page.
      * @throws Exception If something goes wrong.
      */
-    public static final HtmlPage loadPage(final String html, final List<String> collectedAlerts)
-        throws Exception {
+    public static final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
     }
 
@@ -215,8 +214,7 @@ public abstract class WebTestCase {
      * @throws Exception If something goes wrong.
      */
     protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
-            final String html, final List<String> collectedAlerts, final URL url)
-        throws Exception {
+            final String html, final List<String> collectedAlerts, final URL url) throws Exception {
 
         final WebClient client = new WebClient(browserVersion);
         if (collectedAlerts != null) {

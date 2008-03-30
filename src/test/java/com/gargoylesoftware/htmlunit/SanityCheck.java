@@ -244,14 +244,12 @@ public final class SanityCheck {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("GET", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
-        assertEquals("textfield1=*&button1=PushMe",
-            secondPage.getHtmlElementById("QUERY_STRING").asText());
+        assertEquals("textfield1=*&button1=PushMe", secondPage.getHtmlElementById("QUERY_STRING").asText());
         assertEquals("", secondPage.getHtmlElementById("CONTENT").asText());
     }
 
     /**
-     * Test against htmlunit.sourceforge.net to make sure parameters are being passed
-     * correctly for POST methods.
+     * Test against htmlunit.sourceforge.net to make sure parameters are being passed correctly for POST methods.
      * @throws Exception If something goes wrong.
      */
     private void postMethodWithDuplicateParameters() throws Exception {
@@ -269,8 +267,7 @@ public final class SanityCheck {
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
-        assertEquals("textfield1=*&textfield1=PushMe",
-            secondPage.getHtmlElementById("CONTENT").asText());
+        assertEquals("textfield1=*&textfield1=PushMe", secondPage.getHtmlElementById("CONTENT").asText());
     }
 
     /**
@@ -291,7 +288,6 @@ public final class SanityCheck {
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
-        assertEquals("textfield1=*&button1=PushMe",
-            secondPage.getHtmlElementById("CONTENT").asText());
+        assertEquals("textfield1=*&button1=PushMe", secondPage.getHtmlElementById("CONTENT").asText());
     }
 }
