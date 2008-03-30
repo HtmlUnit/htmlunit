@@ -39,8 +39,17 @@
     </class>
 
     <class name="BoxObject" classname="com.gargoylesoftware.htmlunit.javascript.host.BoxObject" JSObject="true">
+        <property name="element" readable="true" writable="false"/>
+        <property name="firstChild" readable="true" writable="false"/>
+        <property name="lastChild" readable="true" writable="false"/>
+        <property name="nextSibling" readable="true" writable="false"/>
+        <property name="previousSibling" readable="true" writable="false"/>
         <property name="screenX" readable="true" writable="false"/>
         <property name="screenY" readable="true" writable="false"/>
+        <property name="x" readable="true" writable="false"/>
+        <property name="y" readable="true" writable="false"/>
+        <property name="width" readable="true" writable="false"/>
+        <property name="height" readable="true" writable="false"/>
     </class>
 
     <class name="CharacterDataImpl" extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"

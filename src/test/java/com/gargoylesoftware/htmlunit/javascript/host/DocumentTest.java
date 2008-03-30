@@ -712,7 +712,7 @@ public class DocumentTest extends WebTestCase {
     public void getBoxObjectFor() throws Exception {
         testHTMLFile("DocumentTest_getBoxObjectFor.html");
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

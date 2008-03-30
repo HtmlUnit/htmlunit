@@ -2153,24 +2153,32 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void clientWidth() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+    public void clientWidthAndHeight() throws Exception {
+        clientWidthAndHeight(BrowserVersion.FIREFOX_2, "36", "46");
+        clientWidthAndHeight(BrowserVersion.INTERNET_EXPLORER_7_0, "30", "40");
+        clientWidthAndHeight(BrowserVersion.INTERNET_EXPLORER_6_0, "30", "40");
+    }
+
+    private void clientWidthAndHeight(final BrowserVersion version, final String... expected) throws Exception {
+        final String content =
+              "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
             + "    alert(myDiv.clientWidth);\n"
             + "    alert(myDiv.clientHeight);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "<style>#myDiv { width:30px; height:40px; padding:3px; border:5px; margin:7px; }</style>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"0", "0"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
     }
 
     /**

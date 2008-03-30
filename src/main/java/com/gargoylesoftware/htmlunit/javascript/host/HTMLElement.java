@@ -511,7 +511,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the clientHeight attribute.
      */
     public int jsxGet_clientHeight() {
-        return 0;
+        final boolean includePadding = !getBrowserVersion().isIE();
+        final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
+        return style.getCalculatedHeight(false, includePadding);
     }
 
     /**
@@ -519,7 +521,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the clientWidth attribute.
      */
     public int jsxGet_clientWidth() {
-        return 0;
+        final boolean includePadding = !getBrowserVersion().isIE();
+        final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
+        return style.getCalculatedWidth(false, includePadding);
     }
 
     /**
@@ -997,18 +1001,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns BoxObject for this element.
-     * @return BoxObject for this element.
+     * Returns the BoxObject for this element.
+     * @return the BoxObject for this element
      */
     public BoxObject getBoxObject() {
         if (boxObject_ == null) {
-            boxObject_ = new BoxObject();
+            boxObject_ = new BoxObject(this);
             boxObject_.setParentScope(getWindow());
             boxObject_.setPrototype(getPrototype(boxObject_.getClass()));
         }
         return boxObject_;
     }
-    
+
     /**
      * Returns the screen's color depth. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
@@ -1311,7 +1315,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return event.jsxGet_clientY() - getPosY() + 50;
         }
         else {
-            return jsxGet_currentStyle().getOffsetHeight();
+            return jsxGet_currentStyle().getCalculatedHeight(true, true);
         }
     }
 
@@ -1330,7 +1334,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return event.jsxGet_clientX() - getPosX() + 50;
         }
         else {
-            return jsxGet_currentStyle().getOffsetWidth();
+            return jsxGet_currentStyle().getCalculatedWidth(true, true);
         }
     }
 

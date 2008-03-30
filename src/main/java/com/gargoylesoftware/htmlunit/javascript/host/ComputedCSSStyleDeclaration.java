@@ -1076,29 +1076,41 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the element's offset width (width including padding and border).
-     * @return the element's offset width (width including padding and border)
+     * Returns the element's width, possibly including its padding and border
+     * @return the element's width, possibly including its padding and border
      */
-    int getOffsetWidth() {
-        final int width = intValue(super.jsxGet_width());
-        final int borderLeft = intValue(jsxGet_borderLeftWidth());
-        final int borderRight = intValue(jsxGet_borderRightWidth());
-        final int paddingLeft = intValue(jsxGet_paddingLeft());
-        final int paddingRight = intValue(jsxGet_paddingRight());
-        return width + borderLeft + borderRight + paddingLeft + paddingRight;
+    int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
+        int width = intValue(super.jsxGet_width());
+        if (includeBorder) {
+            final int borderLeft = intValue(jsxGet_borderLeftWidth());
+            final int borderRight = intValue(jsxGet_borderRightWidth());
+            width += borderLeft + borderRight;
+        }
+        if (includePadding) {
+            final int paddingLeft = intValue(jsxGet_paddingLeft());
+            final int paddingRight = intValue(jsxGet_paddingRight());
+            width += paddingLeft + paddingRight;
+        }
+        return width;
     }
 
     /**
-     * Returns the element's offset height (height including padding and border).
-     * @return the element's offset height (height including padding and border)
+     * Returns the element's height, possibly including its padding and border
+     * @return the element's height, possibly including its padding and border
      */
-    int getOffsetHeight() {
-        final int height = intValue(super.jsxGet_height());
-        final int borderTop = intValue(jsxGet_borderTopWidth());
-        final int borderBottom = intValue(jsxGet_borderBottomWidth());
-        final int paddingTop = intValue(jsxGet_paddingTop());
-        final int paddingBottom = intValue(jsxGet_paddingBottom());
-        return height + borderTop + borderBottom + paddingTop + paddingBottom;
+    int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
+        int height = intValue(super.jsxGet_height());
+        if (includeBorder) {
+            final int borderTop = intValue(jsxGet_borderTopWidth());
+            final int borderBottom = intValue(jsxGet_borderBottomWidth());
+            height += borderTop + borderBottom;
+        }
+        if (includePadding) {
+            final int paddingTop = intValue(jsxGet_paddingTop());
+            final int paddingBottom = intValue(jsxGet_paddingBottom());
+            height += paddingTop + paddingBottom;
+        }
+        return height;
     }
 
     private int intValue(final String value) {

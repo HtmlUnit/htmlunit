@@ -8,10 +8,16 @@
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="fix" dev="sdanig">
+                Fix element.clientWidth and clientHeight to accurately reflect CSS configuration.
+            </action>
+            <action type="add" dev="sdanig">
+                In BoxObject, add attributes element, firstChild, lastChild, nextSibling, previousSibling, x, y, width and height.
+            </action>
+            <action type="fix" dev="sdanig">
                 Fix element.offsetWidth and element.offsetHeight to include padding.
             </action>
             <action type="add" dev="asashour">
-                DomNode: add DomNode.getCanonicalXPath().
+                Add DomNode.getCanonicalXPath().
             </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlPage.moveFocusToElement() and getElementWithFocus(),
