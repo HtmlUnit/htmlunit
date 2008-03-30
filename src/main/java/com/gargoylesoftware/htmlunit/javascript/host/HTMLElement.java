@@ -1352,10 +1352,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the x position of the element. The value returned doesn't need to be "correct" as it
-     * just needs to be compatible with mouse event coordinates.
-     *
-     * @return the x position
+     * Returns this element's X position.
+     * @return this element's X position
      */
     int getPosX() {
         int cumulativeOffset = 0;
@@ -1368,9 +1366,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the y position of the element. The value returned doesn't need to be "correct" as it
-     * just needs to be compatible with mouse event coordinates.
-     * @return the y position
+     * Returns this element's Y position.
+     * @return this element's Y position
      */
     int getPosY() {
         int cumulativeOffset = 0;
@@ -1421,9 +1418,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // According to the Microsoft and Mozilla documentation, and from experimentation
             // in the IE and Firefox browsers, the offsetParent is the container
             // (<td>, <table>, <body>) nearest to the node
-            if ((parentNode instanceof HtmlTableDataCell)
-                || (parentNode instanceof HtmlTable)
-                || (parentNode instanceof HtmlBody)) {
+            if (parentNode instanceof HtmlTableDataCell
+                || parentNode instanceof HtmlTable
+                || parentNode instanceof HtmlBody) {
                 offsetParent = parentNode.getScriptObject();
                 break;
             }

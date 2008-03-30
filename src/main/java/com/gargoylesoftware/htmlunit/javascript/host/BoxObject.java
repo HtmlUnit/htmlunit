@@ -64,7 +64,7 @@ public class BoxObject extends SimpleScriptable {
      * @param element the element to which this box object corresponds
      */
     public BoxObject(final HTMLElement element) {
-        this.element_ = element;
+        element_ = element;
     }
 
     /**
@@ -72,7 +72,7 @@ public class BoxObject extends SimpleScriptable {
      * @return the element to which this box object corresponds
      */
     public HTMLElement jsxGet_element() {
-        return this.element_;
+        return element_;
     }
 
     /**
@@ -80,7 +80,7 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's first child
      */
     public Object jsxGet_firstChild() {
-        return this.element_.jsxGet_firstChild();
+        return element_.jsxGet_firstChild();
     }
 
     /**
@@ -88,7 +88,7 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's last child
      */
     public Object jsxGet_lastChild() {
-        return this.element_.jsxGet_lastChild();
+        return element_.jsxGet_lastChild();
     }
 
     /**
@@ -96,7 +96,7 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's next sibling
      */
     public Object jsxGet_nextSibling() {
-        return this.element_.jsxGet_nextSibling();
+        return element_.jsxGet_nextSibling();
     }
 
     /**
@@ -104,7 +104,7 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's previous sibling
      */
     public Object jsxGet_previousSibling() {
-        return this.element_.jsxGet_previousSibling();
+        return element_.jsxGet_previousSibling();
     }
 
     /**
@@ -112,15 +112,15 @@ public class BoxObject extends SimpleScriptable {
      * @return the X position of this box object's element
      */
     public int jsxGet_x() {
-        return 10;
+        return element_.getPosX();
     }
 
     /**
-     * Returns the X position of this box object's element.
-     * @return the X position of this box object's element
+     * Returns the Y position of this box object's element.
+     * @return the Y position of this box object's element
      */
     public int jsxGet_y() {
-        return 10;
+        return element_.getPosY();
     }
 
     /**
