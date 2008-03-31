@@ -62,6 +62,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     private static final long serialVersionUID = -1976370264911039311L;
 
+    /** The different types of shorthand values. */
+    private enum Shorthand {
+        TOP,
+        RIGHT,
+        BOTTOM,
+        LEFT
+    }
+
     /** Used to parse URLs. */
     private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
 
@@ -80,12 +88,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Create an instance and set its parent scope to the one of the provided element.
-     * @param htmlElement the element to which this style is bound.
+     * @param element the element to which this style is bound
      */
-    CSSStyleDeclaration(final HTMLElement htmlElement) {
-        setParentScope(htmlElement.getParentScope());
+    CSSStyleDeclaration(final HTMLElement element) {
+        setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
-        initialize(htmlElement);
+        initialize(element);
     }
 
     HTMLElement getHTMLElement() {
@@ -94,17 +102,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Initializes the object.
-     *
-     * @param htmlElement The element that this style describes.
+     * @param htmlElement the element that this style describes
      */
     void initialize(final HTMLElement htmlElement) {
         // Initialize.
         WebAssert.notNull("htmlElement", htmlElement);
         jsElement_ = htmlElement;
         setDomNode(htmlElement.getDomNodeOrNull(), false);
-
+        // If an IE behavior was specified in the style, apply the behavior.
         if (getBrowserVersion().isIE()) {
-            // If a behavior was specified in the style, apply the behavior.
             for (final StyleElement element : getStyleMap(true).values()) {
                 if ("behavior".equals(element.getName())) {
                     try {
@@ -124,7 +130,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Creates a clone of this style.
-     * @return a clone of this style.
+     * @return a clone of this style
      */
     CSSStyleDeclaration createClone() {
         try {
@@ -144,7 +150,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param camelCase whether or not the name is expected to be in camel case
      * @return the named style attribute value, or an empty string if it is not found
      */
-    protected String getStyleAttribute(final String name, final boolean camelCase) {
+    private String getStyleAttribute(final String name, final boolean camelCase) {
         final StyleElement element = getStyleMap(camelCase).get(name);
         if (element != null && element.getValue() != null) {
             return element.getValue();
@@ -155,34 +161,88 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     }
 
     /**
-     * Returns the value of one of the two named style attributes. If both attributes exist,
+     * <p>Returns the value of one of the two named style attributes. If both attributes exist,
      * the value of the attribute that was declared last is returned. If only one of the
      * attributes exists, its value is returned. If neither attribute exists, an empty string
-     * is returned.
+     * is returned.</p>
+     *
+     * <p>The second named attribute may be shorthand for a the actual desired property.
+     * The following formats are possible:</p>
+     * <ol>
+     *   <li><tt>top right bottom left</tt>: All values are explicit.</li>
+     *   <li><tt>top right bottom</tt>: Left is implicitly the same as right.</li>
+     *   <li><tt>top right</tt>: Left is implicitly the same as right, bottom is implicitly the same as top.</li>
+     *   <li><tt>top</tt>: Left, bottom and right are implicitly the same as top.</li>
+     * </ol>
      *
      * @param name1 the name of the first style attribute
      * @param name2 the name of the second style attribute
      * @param camelCase whether or not the names are expected to be in camel case
      * @return the value of one of the two named style attributes
      */
-    protected String getStyleAttribute(final String name1, final String name2, final boolean camelCase) {
+    private String getStyleAttribute(final String name1, final String name2, final Shorthand shorthand,
+        final boolean camelCase) {
+
         final SortedMap<String, StyleElement> styleMap = getStyleMap(camelCase);
         final StyleElement element1 = styleMap.get(name1);
         final StyleElement element2 = styleMap.get(name2);
         if (element1 == null && element2 == null) {
             return "";
         }
-        else if (element1 != null && element2 == null) {
-            return element1.getValue();
+
+        final String value;
+        final boolean mayBeShorthand;
+        if (element1 != null && element2 == null) {
+            value = element1.getValue();
+            mayBeShorthand = false;
         }
         else if (element1 == null && element2 != null) {
-            return element2.getValue();
+            value = element2.getValue();
+            mayBeShorthand = true;
         }
         else if (element1.getIndex() > element2.getIndex()) {
-            return element1.getValue();
+            value = element1.getValue();
+            mayBeShorthand = false;
         }
         else {
-            return element2.getValue();
+            value = element2.getValue();
+            mayBeShorthand = true;
+        }
+
+        if (!mayBeShorthand) {
+            return value;
+        }
+
+        final String[] values = value.split("\\s+");
+        switch (shorthand) {
+            case TOP:
+                return values[0];
+            case RIGHT:
+                if (values.length > 1) {
+                    return values[1];
+                }
+                else {
+                    return values[0];
+                }
+            case BOTTOM:
+                if (values.length > 2) {
+                    return values[2];
+                }
+                else {
+                    return values[0];
+                }
+            case LEFT:
+                if (values.length > 3) {
+                    return values[3];
+                }
+                else if (values.length > 1) {
+                    return values[1];
+                }
+                else {
+                    return values[0];
+                }
+            default:
+                throw new IllegalStateException("Unknown shorthand value: " + shorthand);
         }
     }
 
@@ -1661,7 +1721,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginBottom() {
-        return getStyleAttribute("marginBottom", "margin", true);
+        return getStyleAttribute("marginBottom", "margin", Shorthand.BOTTOM, true);
     }
 
     /**
@@ -1677,7 +1737,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginLeft() {
-        return getStyleAttribute("marginLeft", "margin", true);
+        return getStyleAttribute("marginLeft", "margin", Shorthand.LEFT, true);
     }
 
     /**
@@ -1693,7 +1753,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginRight() {
-        return getStyleAttribute("marginRight", "margin", true);
+        return getStyleAttribute("marginRight", "margin", Shorthand.RIGHT, true);
     }
 
     /**
@@ -1709,7 +1769,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_marginTop() {
-        return getStyleAttribute("marginTop", "margin", true);
+        return getStyleAttribute("marginTop", "margin", Shorthand.TOP, true);
     }
 
     /**
@@ -2749,7 +2809,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingBottom() {
-        return getStyleAttribute("paddingBottom", "padding", true);
+        return getStyleAttribute("paddingBottom", "padding", Shorthand.BOTTOM, true);
     }
 
     /**
@@ -2765,7 +2825,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingLeft() {
-        return getStyleAttribute("paddingLeft", "padding", true);
+        return getStyleAttribute("paddingLeft", "padding", Shorthand.LEFT, true);
     }
 
     /**
@@ -2781,7 +2841,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingRight() {
-        return getStyleAttribute("paddingRight", "padding", true);
+        return getStyleAttribute("paddingRight", "padding", Shorthand.RIGHT, true);
     }
 
     /**
@@ -2797,7 +2857,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @return the style attribute
      */
     public String jsxGet_paddingTop() {
-        return getStyleAttribute("paddingTop", "padding", true);
+        return getStyleAttribute("paddingTop", "padding", Shorthand.TOP, true);
     }
 
     /**

@@ -849,4 +849,65 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Tests setting attributes (like padding and margin) using shorthand notation.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void styleShorthand() throws Exception {
+        styleShorthand("margin: 10px", "marginTop", "10px");
+        styleShorthand("margin: 10px", "marginLeft", "10px");
+        styleShorthand("margin: 10px", "marginRight", "10px");
+        styleShorthand("margin: 10px", "marginBottom", "10px");
+
+        styleShorthand("margin: 10px 20px", "marginTop", "10px");
+        styleShorthand("margin: 10px 20px", "marginLeft", "20px");
+        styleShorthand("margin: 10px 20px", "marginRight", "20px");
+        styleShorthand("margin: 10px 20px", "marginBottom", "10px");
+
+        styleShorthand("margin: 10px 20px 30px", "marginTop", "10px");
+        styleShorthand("margin: 10px 20px 30px", "marginLeft", "20px");
+        styleShorthand("margin: 10px 20px 30px", "marginRight", "20px");
+        styleShorthand("margin: 10px 20px 30px", "marginBottom", "30px");
+
+        styleShorthand("margin: 10px 20px 30px 40px", "marginTop", "10px");
+        styleShorthand("margin: 10px 20px 30px 40px", "marginLeft", "40px");
+        styleShorthand("margin: 10px 20px 30px 40px", "marginRight", "20px");
+        styleShorthand("margin: 10px 20px 30px 40px", "marginBottom", "30px");
+
+        styleShorthand("padding: 10px", "paddingTop", "10px");
+        styleShorthand("padding: 10px", "paddingLeft", "10px");
+        styleShorthand("padding: 10px", "paddingRight", "10px");
+        styleShorthand("padding: 10px", "paddingBottom", "10px");
+
+        styleShorthand("padding: 10px 20px", "paddingTop", "10px");
+        styleShorthand("padding: 10px 20px", "paddingLeft", "20px");
+        styleShorthand("padding: 10px 20px", "paddingRight", "20px");
+        styleShorthand("padding: 10px 20px", "paddingBottom", "10px");
+
+        styleShorthand("padding: 10px 20px 30px", "paddingTop", "10px");
+        styleShorthand("padding: 10px 20px 30px", "paddingLeft", "20px");
+        styleShorthand("padding: 10px 20px 30px", "paddingRight", "20px");
+        styleShorthand("padding: 10px 20px 30px", "paddingBottom", "30px");
+
+        styleShorthand("padding: 10px 20px 30px 40px", "paddingTop", "10px");
+        styleShorthand("padding: 10px 20px 30px 40px", "paddingLeft", "40px");
+        styleShorthand("padding: 10px 20px 30px 40px", "paddingRight", "20px");
+        styleShorthand("padding: 10px 20px 30px 40px", "paddingBottom", "30px");
+    }
+
+    private void styleShorthand(final String style, final String attribute, final String expectedValue)
+        throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "    var style = document.getElementById('d').style;\n"
+            + "    alert(style." + attribute + ");\n"
+            + "}\n</script></head>\n"
+            + "<body onload='test()'><div id='d' style='" + style + "'>foo</div></body></html>";
+        final String[] expected = {expectedValue};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
 }
