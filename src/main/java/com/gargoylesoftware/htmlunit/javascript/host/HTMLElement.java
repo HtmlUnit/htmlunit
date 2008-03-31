@@ -171,6 +171,17 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Callback method which allows different HTML element types to perform custom
+     * initialization of computed styles. For example, body elements in most browsers
+     * have default values for their margins.
+     *
+     * @param style the style to initialize
+     */
+    protected void setDefaults(final ComputedCSSStyleDeclaration style) {
+        // Empty by default; override as necessary.
+    }
+
+    /**
      * Returns the runtime style object for this element.
      * @return the runtime style object for this element.
      */
@@ -1385,6 +1396,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return this element's <tt>offsetLeft</tt>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
     public int jsxGet_offsetLeft() {
         return 1;
@@ -1396,6 +1408,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return this element's <tt>offsetTop</tt>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534303.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
     public int jsxGet_offsetTop() {
         return 1;

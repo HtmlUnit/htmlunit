@@ -49,7 +49,7 @@ public class HTMLBodyElement extends HTMLElement {
     private static final long serialVersionUID = -915040139319661419L;
 
     /**
-     * Create an instance.
+     * Creates a new instance.
      */
     public HTMLBodyElement() {
         // Empty.
@@ -62,11 +62,28 @@ public class HTMLBodyElement extends HTMLElement {
      * @param value the value
      */
     public void createEventHandlerFromAttribute(final String attributeName, final String value) {
-        // when many body tag are found while parsing, attributes of
+        // when many body tags are found while parsing, attributes of
         // different tags are added and should create an event handler when needed
-
         if (attributeName.toLowerCase().startsWith("on")) {
             createEventHandler(attributeName, value);
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void setDefaults(final ComputedCSSStyleDeclaration style) {
+        if (getBrowserVersion().isIE()) {
+            style.setLocalStyleAttribute("margin", "15px 10px");
+            style.setLocalStyleAttribute("padding", "0px");
+        }
+        else {
+            style.setLocalStyleAttribute("margin-left", "8px");
+            style.setLocalStyleAttribute("margin-right", "8px");
+            style.setLocalStyleAttribute("margin-top", "8px");
+            style.setLocalStyleAttribute("margin-bottom", "8px");
+        }
+    }
+
 }

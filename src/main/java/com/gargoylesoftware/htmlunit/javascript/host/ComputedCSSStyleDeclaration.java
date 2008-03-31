@@ -93,6 +93,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
         super(style.getHTMLElement());
+        getHTMLElement().setDefaults(this);
     }
 
     /**
