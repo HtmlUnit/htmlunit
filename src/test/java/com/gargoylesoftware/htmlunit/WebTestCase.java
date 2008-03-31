@@ -639,7 +639,7 @@ public abstract class WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection(client);
-        webConnection.setDefaultResponse(html);
+        webConnection.setResponse(URL_GARGOYLE, html);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);

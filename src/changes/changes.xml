@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="add" dev="mguillem">
+                Add initial support for data protocol (Firefox only).
+            </action>
             <action type="fix" dev="sdanig">
                 Fix element.clientWidth and clientHeight to accurately reflect CSS configuration.
             </action>

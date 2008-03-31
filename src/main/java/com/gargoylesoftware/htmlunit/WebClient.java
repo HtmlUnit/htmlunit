@@ -62,6 +62,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.DecoderException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
@@ -84,6 +85,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -162,6 +164,8 @@ public class WebClient implements Serializable {
         = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
     private static URLStreamHandler AboutUrlStreamHandler_
         = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
+    private static URLStreamHandler DataUrlStreamHandler_
+        = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
 
     /**
      * URL for "about:blank".
@@ -1155,6 +1159,9 @@ public class WebClient implements Serializable {
         else if (TextUtil.startsWithIgnoreCase(urlString, "about:")) {
             return new URL(null, urlString, AboutUrlStreamHandler_);
         }
+        else if (TextUtil.startsWithIgnoreCase(urlString, "data:")) {
+            return new URL(null, urlString, DataUrlStreamHandler_);
+        }
         else {
             return new URL(urlString);
         }
@@ -1290,6 +1297,23 @@ public class WebClient implements Serializable {
         }
         final String newUrlString = buffer.toString();
         return makeUrl(newUrlString);
+    }
+
+
+    private WebResponse makeWebResponseForDataUrl(final WebRequestSettings webRequestSettings) throws IOException {
+        final URL url = webRequestSettings.getURL();
+        final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
+        DataUrlDecoder decoder;
+        try {
+            decoder = DataUrlDecoder.decode(url);
+        }
+        catch (final DecoderException e) {
+            throw new IOException(e.getMessage());
+        }
+        responseHeaders.add(new NameValuePair("content-type",
+            decoder.getMediaType() + ";charset=" + decoder.getCharset()));
+        final WebResponseData data = new WebResponseData(url.openStream(), 200, "OK", responseHeaders);
+        return new WebResponseImpl(data, url, webRequestSettings.getSubmitMethod(), 0);
     }
 
     private WebResponse makeWebResponseForAboutUrl(final URL url) {
@@ -1444,6 +1468,14 @@ public class WebClient implements Serializable {
         }
         else if (protocol.equals("file")) {
             response = makeWebResponseForFileUrl(webRequestSettings.getURL(), webRequestSettings.getCharset());
+        }
+        else if (protocol.equals("data")) {
+            if (browserVersion_.isNetscape()) {
+                response = makeWebResponseForDataUrl(webRequestSettings);
+            }
+            else {
+                throw new MalformedURLException("Unknown protocol: data");
+            }
         }
         else {
             response = loadWebResponseFromWebConnection(webRequestSettings, ALLOWED_REDIRECTIONS_SAME_URL);
