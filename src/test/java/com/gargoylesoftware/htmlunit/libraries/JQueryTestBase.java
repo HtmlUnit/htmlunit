@@ -133,7 +133,6 @@ public abstract class JQueryTestBase extends WebTestCase {
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
             getLog().info("Test result for " + getVersion() + " written to: " + f.getAbsolutePath());
         }
-        
 
         final HtmlElement doc = page.getDocumentHtmlElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");

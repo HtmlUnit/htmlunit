@@ -63,7 +63,6 @@ public class DataURLDecoderTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void testDecodeDataURL() throws Exception {
-
         DataUrlDecoder decoder = decodeDataURL("data:text/javascript,d1%20%3D%20'one'%3B");
         assertEquals("d1 = 'one';", decoder.getDataAsString());
         assertEquals("text/javascript", decoder.getMediaType());

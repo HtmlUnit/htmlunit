@@ -1299,7 +1299,6 @@ public class WebClient implements Serializable {
         return makeUrl(newUrlString);
     }
 
-
     private WebResponse makeWebResponseForDataUrl(final WebRequestSettings webRequestSettings) throws IOException {
         final URL url = webRequestSettings.getURL();
         final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
