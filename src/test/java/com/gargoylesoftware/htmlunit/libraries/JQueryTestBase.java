@@ -40,15 +40,14 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -123,11 +122,18 @@ public abstract class JQueryTestBase extends WebTestCase {
         assertNotNull(url);
 
         final WebClient client = new WebClient(version);
-        final List<String> alerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(2 * 60 * 1000);
+        
+        // dump the result page if not OK
+        if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
+            final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
+            final File f = new File(tmpDir, "jquery" + getVersion() + "_result.html");
+            FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
+            getLog().info("Test result for " + getVersion() + " written to: " + f.getAbsolutePath());
+        }
+        
 
         final HtmlElement doc = page.getDocumentHtmlElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
