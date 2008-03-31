@@ -48,6 +48,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -57,6 +59,37 @@ import org.junit.Test;
  * @author Ahmed Ashour
  */
 public class CodeStyleTest {
+
+    private List<String> errors_;
+    
+    /**
+     * Before.
+     */
+    @Before
+    public void before() {
+        errors_ = new ArrayList<String>();
+    }
+
+    /**
+     * After.
+     */
+    @After
+    public void after() {
+        for (final String error : errors_) {
+            System.err.println(error);
+        }
+        final int size = errors_.size();
+        if (errors_.size() == 1) {
+            fail("CodeStyle error");
+        }
+        else if (size > 1) {
+            fail("CodeStyle " + size + "errors");
+        }
+    }
+
+    private void addFailure(final String error) {
+        errors_.add(error);
+    }
 
     /**
      * @throws Exception if the test fails
@@ -99,7 +132,7 @@ public class CodeStyleTest {
         int index = 1;
         for (final String line : lines) {
             if (line.trim().equals("{")) {
-                fail("Opening curly bracket is alone at " + path + ", line: " + index);
+                addFailure("Opening curly bracket is alone at " + path + ", line: " + index);
             }
             index++;
         }
@@ -122,12 +155,12 @@ public class CodeStyleTest {
             final String currentLine = lines.get(index);
             if (previousLine.trim().equals("/**")) {
                 if (currentLine.trim().equals("*") || currentLine.contains("*/")) {
-                    fail("Empty line in " + relativePath + ", line: " + (index + 1));
+                    addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
                 }
                 if (currentLine.trim().startsWith("*")) {
                     final String text = currentLine.trim().substring(1).trim();
                     if (text.length() != 0 && Character.isLowerCase(text.charAt(0))) {
-                        fail("Lower case start in " + relativePath + ", line: " + (index + 1));
+                        addFailure("Lower case start in " + relativePath + ", line: " + (index + 1));
                     }
                 }
             }
@@ -147,7 +180,7 @@ public class CodeStyleTest {
                 && (!Character.isWhitespace(line.charAt(4))
                     || line.trim().startsWith("public") || line.trim().startsWith("protected")
                     || line.trim().startsWith("private"))) {
-                fail("Empty line in " + relativePath + ", line: " + (index + 2));
+                addFailure("Empty line in " + relativePath + ", line: " + (index + 2));
             }
         }
     }
@@ -160,7 +193,7 @@ public class CodeStyleTest {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
             if (line.trim().length() == 0 && nextLine.equals("    }")) {
-                fail("Empty line in " + relativePath + ", line: " + (index + 1));
+                addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
     }
@@ -172,7 +205,7 @@ public class CodeStyleTest {
         final File svnBase = new File(file.getParentFile(), ".svn/prop-base/" + file.getName() + ".svn-base");
         final File svnWork = new File(file.getParentFile(), ".svn/props/" + file.getName() + ".svn-work");
         if (!isSvnPropertiesDefined(svnBase) && !isSvnPropertiesDefined(svnWork)) {
-            fail("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
+            addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
         }
     }
 
@@ -250,7 +283,7 @@ public class CodeStyleTest {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.indexOf('\t') != -1) {
-                fail("Mixed indentation in " + relativePath + ", line: " + (i + 1));
+                addFailure("Mixed indentation in " + relativePath + ", line: " + (i + 1));
             }
         }
     }
@@ -264,7 +297,7 @@ public class CodeStyleTest {
             if (line.length() > 0) {
                 final char last = line.charAt(line.length() - 1);
                 if (Character.isWhitespace(last)) {
-                    fail("Trailing whitespace in " + relativePath + ", line: " + (i + 1));
+                    addFailure("Trailing whitespace in " + relativePath + ", line: " + (i + 1));
                 }
             }
         }
@@ -280,7 +313,7 @@ public class CodeStyleTest {
             final int length2 = line.trim().length();
             final int indentation = length1 - length2;
             if (indentation % 4 != 0) {
-                fail("Bad indentation level (" + indentation + ") in " + relativePath + ", line: " + (i + 1));
+                addFailure("Bad indentation level (" + indentation + ") in " + relativePath + ", line: " + (i + 1));
             }
         }
     }
@@ -304,7 +337,7 @@ public class CodeStyleTest {
                 return;
             }
         }
-        fail("Incorrect year in Version.getCopyright()");
+        addFailure("Incorrect year in Version.getCopyright()");
     }
     
     /**
@@ -318,7 +351,7 @@ public class CodeStyleTest {
                     runWith = true;
                 }
                 if (runWith && line.contains("new WebClient(")) {
-                    fail("Test " + relativePath
+                    addFailure("Test " + relativePath
                         + " should never directly instantiate WebClient, please use getWebClient() instead.");
                 }
             }
@@ -333,7 +366,7 @@ public class CodeStyleTest {
             final String previousLine = lines.get(i - 1);
             final String line = lines.get(i);
             if (previousLine.trim().length() == 0 && line.trim().length() == 0) {
-                fail("Two empty contiguous lines at " + relativePath + ", line: " + (i + 1));
+                addFailure("Two empty contiguous lines at " + relativePath + ", line: " + (i + 1));
             }
         }
     }
