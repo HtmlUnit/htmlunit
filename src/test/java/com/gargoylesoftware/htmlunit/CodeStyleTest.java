@@ -78,12 +78,12 @@ public class CodeStyleTest {
         for (final String error : errors_) {
             System.err.println(error);
         }
-        final int size = errors_.size();
-        if (errors_.size() == 1) {
+        final int errorsNumber = errors_.size();
+        if (errorsNumber == 1) {
             fail("CodeStyle error");
         }
-        else if (size > 1) {
-            fail("CodeStyle " + size + "errors");
+        else if (errorsNumber > 1) {
+            fail("CodeStyle " + errorsNumber + "errors");
         }
     }
 
