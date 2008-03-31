@@ -110,7 +110,6 @@ public class DataUrlDecoder {
         }
         
         return new DataUrlDecoder(data, mediaType, charset);
-        
     }
 
     private static String extractCharset(final String beforeData) {
