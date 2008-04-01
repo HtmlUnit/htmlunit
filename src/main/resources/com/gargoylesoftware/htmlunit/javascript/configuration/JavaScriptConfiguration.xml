@@ -1038,8 +1038,6 @@
             <doclink
                 url="http://www.webreference.com/dhtml/diner/realpos1/5.html"
                 descr="DHTML Lab"/>
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
         </property>
         <property name="offsetTop" readable="true" writable="false"/>
         <property name="offsetWidth" readable="true" writable="false"/>
@@ -1065,14 +1063,8 @@
         <property name="sourceIndex" notImplemented="true" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </property>
-        <property name="style" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="tagName" readable="true" writable="false">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="style" readable="true" writable="false"/>
+        <property name="tagName" readable="true" writable="false"/>
         <property name="textContent" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -1085,10 +1077,7 @@
         <property name="localName" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="title" readable="true" writable="true">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </property>
+        <property name="title" readable="true" writable="true"/>
         <property name="uniqueID" readable="true" writable="false">
             <browser name="Microsoft Internet Explorer"/>
         </property>
@@ -1107,10 +1096,7 @@
             <browser name="Firefox"/>
         </function>
         <function name="focus"/>
-        <function name="getAttribute">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </function>
+        <function name="getAttribute"/>
         <function name="getAttributeNS">
             <browser name="Firefox"/>
         </function>
@@ -1156,24 +1142,15 @@
         <function name="onhelp" notImplemented="true">
             <browser name="Microsoft Internet Explorer" min-version="4"/>
         </function>
-        <function name="removeAttribute">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </function>
+        <function name="removeAttribute"/>
         <function name="removeExpression">
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/aa358798.aspx"
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
-        <function name="scrollIntoView" >
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </function>
-        <function name="setAttribute">
-            <browser name="Microsoft Internet Explorer" min-version="4"/>
-            <browser name="Firefox"/>
-        </function>
+        <function name="scrollIntoView"/>
+        <function name="setAttribute"/>
         <function name="setAttributeNS">
             <browser name="Firefox"/>
         </function>
