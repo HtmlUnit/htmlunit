@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -2641,5 +2642,30 @@ public class WindowTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(browser, html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void open_FF() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function performAction() {\n"
+            + "    actionwindow = window.open('', '1205399746518', "
+            + "'location=no,scrollbars=no,resizable=no,width=200,height=275');\n"
+            + "    actionwindow.document.writeln('Please wait while connecting to server...');\n"
+            + "    actionwindow.focus();\n"
+            + "    actionwindow.close();\n"
+            + "  }\n"
+            + "</script></head><body>\n"
+            + "    <input value='Click Me' type=button onclick='performAction()'>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, null);
+        final HtmlButtonInput input = (HtmlButtonInput) page.getFirstByXPath("//input");
+        input.click();
     }
 }
