@@ -75,14 +75,14 @@ public class HTMLBodyElement extends HTMLElement {
     @Override
     protected void setDefaults(final ComputedCSSStyleDeclaration style) {
         if (getBrowserVersion().isIE()) {
-            style.setLocalStyleAttribute("margin", "15px 10px");
-            style.setLocalStyleAttribute("padding", "0px");
+            style.setDefaultLocalStyleAttribute("margin", "15px 10px");
+            style.setDefaultLocalStyleAttribute("padding", "0px");
         }
         else {
-            style.setLocalStyleAttribute("margin-left", "8px");
-            style.setLocalStyleAttribute("margin-right", "8px");
-            style.setLocalStyleAttribute("margin-top", "8px");
-            style.setLocalStyleAttribute("margin-bottom", "8px");
+            style.setDefaultLocalStyleAttribute("margin-left", "8px");
+            style.setDefaultLocalStyleAttribute("margin-right", "8px");
+            style.setDefaultLocalStyleAttribute("margin-top", "8px");
+            style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
         }
     }
 

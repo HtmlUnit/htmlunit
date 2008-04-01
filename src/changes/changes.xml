@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="fix" dev="sdanig">
+                Add element.offsetParent to FF emulation mode.
+            </action>
             <action type="update" dev="sdanig">
                 Upgrade CSS Parser to 0.9.5.
             </action>
@@ -14,7 +17,7 @@
                 Add initial support for data protocol (Firefox only).
             </action>
             <action type="fix" dev="sdanig">
-                Fix element.clientWidth and clientHeight to accurately reflect CSS configuration.
+                Fix element.clientWidth, clientHeight, offsetTop, offsetLeft and offsetParent to reflect CSS configuration.
             </action>
             <action type="add" dev="sdanig">
                 In BoxObject, add attributes element, firstChild, lastChild, nextSibling, previousSibling, x, y, width and height.

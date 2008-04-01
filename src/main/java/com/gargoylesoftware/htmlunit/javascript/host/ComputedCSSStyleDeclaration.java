@@ -106,8 +106,27 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         // Empty.
     }
 
+    /**
+     * Makes a local, "computed", modification to this CSS style.
+     *
+     * @param name the name of the style attribute to set
+     * @param newValue the value of the style attribute to set
+     */
     void setLocalStyleAttribute(final String name, final String newValue) {
         final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
+        localModifications_.put(name, element);
+    }
+
+    /**
+     * Makes a local, "computed", modification to this CSS style that won't override other
+     * style attributes of the same name. This method should be used to set default values
+     * for style attributes.
+     *
+     * @param name the name of the style attribute to set
+     * @param newValue the value of the style attribute to set
+     */
+    void setDefaultLocalStyleAttribute(final String name, final String newValue) {
+        final StyleElement element = new StyleElement(name, newValue);
         localModifications_.put(name, element);
     }
 
@@ -123,8 +142,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (camelCase) {
                     key = camelize(key);
                 }
+                final StyleElement existent = styleMap.get(key);
                 final StyleElement element = new StyleElement(key, e.getValue(), e.getIndex());
-                styleMap.put(key, element);
+                if (existent == null || !element.isDefault()) {
+                    styleMap.put(key, element);
+                }
             }
         }
         return styleMap;
@@ -1112,6 +1134,48 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             height += paddingTop + paddingBottom;
         }
         return height;
+    }
+
+    /**
+     * Returns the computed top (Y coordinate).
+     * @return the computed top (Y coordinate)
+     */
+    int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
+        int top = intValue(jsxGet_top());
+        if (includeMargin) {
+            final int margin = intValue(jsxGet_marginTop());
+            top += margin;
+        }
+        if (includeBorder) {
+            final int border = intValue(jsxGet_borderTopWidth());
+            top += border;
+        }
+        if (includePadding) {
+            final int padding = intValue(jsxGet_paddingTop());
+            top += padding;
+        }
+        return top;
+    }
+
+    /**
+     * Returns the computed left (X coordinate).
+     * @return the computed left (X coordinate)
+     */
+    int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
+        int left = intValue(jsxGet_left());
+        if (includeMargin) {
+            final int margin = intValue(jsxGet_marginLeft());
+            left += margin;
+        }
+        if (includeBorder) {
+            final int border = intValue(jsxGet_borderLeftWidth());
+            left += border;
+        }
+        if (includePadding) {
+            final int padding = intValue(jsxGet_paddingLeft());
+            left += padding;
+        }
+        return left;
     }
 
     private int intValue(final String value) {

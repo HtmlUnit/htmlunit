@@ -94,9 +94,6 @@ public class BoxObjectTest extends WebTestCase {
      */
     @Test
     public void testPositionAndSizeAttributes() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html =
               "    <html>\n"
             + "        <body onload='test()'>\n"

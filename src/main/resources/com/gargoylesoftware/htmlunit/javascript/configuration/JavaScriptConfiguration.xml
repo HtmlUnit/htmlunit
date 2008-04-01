@@ -1039,6 +1039,7 @@
                 url="http://www.webreference.com/dhtml/diner/realpos1/5.html"
                 descr="DHTML Lab"/>
             <browser name="Microsoft Internet Explorer" min-version="4"/>
+            <browser name="Firefox"/>
         </property>
         <property name="offsetTop" readable="true" writable="false"/>
         <property name="offsetWidth" readable="true" writable="false"/>

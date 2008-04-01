@@ -4231,6 +4231,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
             this.index_ = index;
         }
         /**
+         * Creates a new default instance.
+         * @param name the style element's name
+         * @param value the style element's value
+         */
+        public StyleElement(final String name, final String value) {
+            this.name_ = name;
+            this.value_ = value;
+            this.index_ = Long.MIN_VALUE;
+        }
+        /**
          * Returns the style element's name.
          * @return the style element's name
          */
@@ -4250,6 +4260,20 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
          */
         public long getIndex() {
             return index_;
+        }
+        /**
+         * Returns <tt>true</tt> if this style element contains a default value.
+         * @return <tt>true</tt> if this style element contains a default value
+         */
+        public boolean isDefault() {
+            return index_ == Long.MIN_VALUE;
+        }
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String toString() {
+            return name_ + "," + index_ + "=" + value_;
         }
     }
 

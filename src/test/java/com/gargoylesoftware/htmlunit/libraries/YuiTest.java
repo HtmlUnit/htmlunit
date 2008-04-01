@@ -186,9 +186,6 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void dragDrop() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest(BrowserVersion.FIREFOX_2, "dragdrop.html", emptyList_);
     }
 
@@ -246,9 +243,6 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void imageLoader() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest(BrowserVersion.FIREFOX_2, "imageloader.html", emptyList_);
     }
 

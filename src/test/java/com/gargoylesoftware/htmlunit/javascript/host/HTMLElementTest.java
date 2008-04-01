@@ -1430,11 +1430,12 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if an error occurs
      */
     @Test
     public void testOffsetWidthAndHeight() throws Exception {
-        final String content = "<html>\n"
+        final String content =
+              "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1451,13 +1452,193 @@ public class HTMLElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' style='border: 3px solid #fff; padding: 5px;'></div>\n"
             + "</body></html>";
-        
+
         final String[] expectedAlerts = {"30px", "46", "55px", "71"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOffsetTopAndLeft_Padding() throws Exception {
+        testOffsetTopAndLeft_Padding(BrowserVersion.FIREFOX_2, "15", "15");
+        testOffsetTopAndLeft_Padding(BrowserVersion.INTERNET_EXPLORER_7_0, "15", "15");
+        testOffsetTopAndLeft_Padding(BrowserVersion.INTERNET_EXPLORER_6_0, "15", "15");
+    }
+
+    private void testOffsetTopAndLeft_Padding(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var e = document.getElementById('d');\n"
+            + "        alert(e.offsetTop);\n"
+            + "        alert(e.offsetLeft);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()' style='padding: 3px; margin: 0px; border: 0px solid green;'>\n"
+            + "    <div style='padding: 5px; margin: 0px; border: 0px solid blue;'>\n"
+            + "      <div style='padding: 7px; margin: 0px; border: 0px solid red;'>\n"
+            + "        <div id='d' style='padding: 13px; margin: 0px; border: 0px solid black;'>d</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOffsetTopAndLeft_Margins() throws Exception {
+        testOffsetTopAndLeft_Margins(BrowserVersion.FIREFOX_2, "13", "28");
+        testOffsetTopAndLeft_Margins(BrowserVersion.INTERNET_EXPLORER_7_0, "13", "28");
+        testOffsetTopAndLeft_Margins(BrowserVersion.INTERNET_EXPLORER_6_0, "13", "28");
+    }
+
+    private void testOffsetTopAndLeft_Margins(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var e = document.getElementById('d');\n"
+            + "        alert(e.offsetTop);\n"
+            + "        alert(e.offsetLeft);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()' style='padding: 0px; margin: 3px; border: 0px solid green;'>\n"
+            + "    <div style='padding: 0px; margin: 5px; border: 0px solid blue;'>\n"
+            + "      <div style='padding: 0px; margin: 7px; border: 0px solid red;'>\n"
+            + "        <div id='d' style='padding: 0px; margin: 13px; border: 0px solid black;'>d</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOffsetTopAndLeft_Borders() throws Exception {
+        testOffsetTopAndLeft_Borders(BrowserVersion.FIREFOX_2, "12", "12");
+        testOffsetTopAndLeft_Borders(BrowserVersion.INTERNET_EXPLORER_7_0, "12", "12");
+        testOffsetTopAndLeft_Borders(BrowserVersion.INTERNET_EXPLORER_6_0, "12", "12");
+    }
+
+    private void testOffsetTopAndLeft_Borders(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var e = document.getElementById('d');\n"
+            + "        alert(e.offsetTop);\n"
+            + "        alert(e.offsetLeft);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()' style='padding: 0px; margin: 0px; border: 3px solid green;'>\n"
+            + "    <div style='padding: 0px; margin: 0px; border: 5px solid blue;'>\n"
+            + "      <div style='padding: 0px; margin: 0px; border: 7px solid red;'>\n"
+            + "        <div id='d' style='padding: 0px; margin: 0px; border: 13px solid black;'>d</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOffsetTopAndLeft_Nothing() throws Exception {
+        testOffsetTopAndLeft_Nothing(BrowserVersion.FIREFOX_2, "0", "0");
+        testOffsetTopAndLeft_Nothing(BrowserVersion.INTERNET_EXPLORER_7_0, "0", "0");
+        testOffsetTopAndLeft_Nothing(BrowserVersion.INTERNET_EXPLORER_6_0, "0", "0");
+    }
+
+    private void testOffsetTopAndLeft_Nothing(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var e = document.getElementById('d');\n"
+            + "        alert(e.offsetTop);\n"
+            + "        alert(e.offsetLeft);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()' style='padding: 0px; margin: 0px; border: 0px solid green;'>\n"
+            + "    <div style='padding: 0px; margin: 0px; border: 0px solid blue;'>\n"
+            + "      <div style='padding: 0px; margin: 0px; border: 0px solid red;'>\n"
+            + "        <div id='d' style='padding: 0px; margin: 0px; border: 0px solid black;'>d</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOffsetTopAndLeft_AbsolutelyPositioned() throws Exception {
+        testOffsetTopAndLeft_AbsolutelyPositioned(BrowserVersion.FIREFOX_2, "50", "50");
+        testOffsetTopAndLeft_AbsolutelyPositioned(BrowserVersion.INTERNET_EXPLORER_7_0, "50", "50");
+        testOffsetTopAndLeft_AbsolutelyPositioned(BrowserVersion.INTERNET_EXPLORER_6_0, "50", "50");
+    }
+
+    private void testOffsetTopAndLeft_AbsolutelyPositioned(final BrowserVersion version, final String... expected)
+        throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var e = document.getElementById('d');\n"
+            + "        alert(e.offsetTop);\n"
+            + "        alert(e.offsetLeft);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div>\n"
+            + "      <div>\n"
+            + "        <div id='d' style='position:absolute; top:50; left:50;'>d</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, content, actual);
+        assertEquals(expected, actual);
     }
 
     /**
@@ -1515,7 +1696,7 @@ public class HTMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOffsetParent() throws Exception {
+    public void testOffsetParent_Basic() throws Exception {
         final String content = "<html><head>\n"
             + "<script type='text/javascript'>\n"
             + "function alertOffsetParent(id)\n"
@@ -1581,6 +1762,69 @@ public class HTMLElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Tests the offsetParent property, including the effects of CSS "position" attributes.
+     * Based on <a href="http://dump.testsuite.org/2006/dom/style/offset/spec#offsetparent">this work</a>.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOffsetParent_WithCSS() throws Exception {
+        testOffsetParent_WithCSS(BrowserVersion.FIREFOX_2, "null", "body", "body", "body", "body", "body",
+            "f1", "body", "h1", "i1", "td", "body", "td", "body", "body");
+        testOffsetParent_WithCSS(BrowserVersion.INTERNET_EXPLORER_7_0, "null", "body", "body", "body", "body", "body",
+            "body", "body", "h1", "i1", "td", "td", "td", "body", "body");
+    }
+
+    private void testOffsetParent_WithCSS(final BrowserVersion version, final String... expected) throws Exception {
+        final String html = "<html>\n"
+            + "  <body id='body' onload='test()'>\n"
+            + "    <div id='a1'><div id='a2'>x</div></div>\n"
+            + "    <div id='b1'><div id='b2' style='position:fixed'>x</div></div>\n"
+            + "    <div id='c1'><div id='c2' style='position:static'>x</div></div>\n"
+            + "    <div id='d1'><div id='d2' style='position:absolute'>x</div></div>\n"
+            + "    <div id='e1'><div id='e2' style='position:relative'>x</div></div>\n"
+            + "    <div id='f1' style='position:fixed'><div id='f2'>x</div></div>\n"
+            + "    <div id='g1' style='position:static'><div id='g2'>x</div></div>\n"
+            + "    <div id='h1' style='position:absolute'><div id='h2'>x</div></div>\n"
+            + "    <div id='i1' style='position:relative'><div id='i2'>x</div></div>\n"
+            + "    <table id='table'>\n"
+            + "      <tr id='tr'>\n"
+            + "        <td id='td'>\n"
+            + "          <div id='j1'><div id='j2'>x</div></div>\n"
+            + "          <div id='k1'><div id='k2' style='position:fixed'>x</div></div>\n"
+            + "          <div id='l1'><div id='l2' style='position:static'>x</div></div>\n"
+            + "          <div id='m1'><div id='m2' style='position:absolute'>x</div></div>\n"
+            + "          <div id='n1'><div id='n2' style='position:relative'>x</div></div>\n"
+            + "        </td>\n"
+            + "      </tr>\n"
+            + "    </table>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "                                                              // FF   IE   \n"
+            + "        alert(document.getElementById('body').offsetParent);  // null null \n"
+            + "        alert(document.getElementById('a2').offsetParent.id); // body body \n"
+            + "        alert(document.getElementById('b2').offsetParent.id); // body body \n"
+            + "        alert(document.getElementById('c2').offsetParent.id); // body body \n"
+            + "        alert(document.getElementById('d2').offsetParent.id); // body body \n"
+            + "        alert(document.getElementById('e2').offsetParent.id); // body body \n"
+            + "        alert(document.getElementById('f2').offsetParent.id); // f1   body \n"
+            + "        alert(document.getElementById('g2').offsetParent.id); // body body \n"
+            + "        alert(document.getElementById('h2').offsetParent.id); // h1   h1   \n"
+            + "        alert(document.getElementById('i2').offsetParent.id); // i1   i1   \n"
+            + "        alert(document.getElementById('j2').offsetParent.id); // td   td   \n"
+            + "        alert(document.getElementById('k2').offsetParent.id); // body td   \n"
+            + "        alert(document.getElementById('l2').offsetParent.id); // td   td   \n"
+            + "        alert(document.getElementById('m2').offsetParent.id); // body body \n"
+            + "        alert(document.getElementById('n2').offsetParent.id); // body body \n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(version, html, actual);
+        assertEquals(expected, actual);
     }
 
     /**

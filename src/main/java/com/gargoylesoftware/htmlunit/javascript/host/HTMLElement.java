@@ -1393,52 +1393,134 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns this element's <tt>offsetLeft</tt>, which is the calculated left position of this
      * element relative to the <tt>offsetParent</tt>.
+     *
      * @return this element's <tt>offsetLeft</tt>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
     public int jsxGet_offsetLeft() {
-        return 1;
+        if (this instanceof HTMLBodyElement) {
+            return 0;
+        }
+
+        int left = 0;
+        final HTMLElement offsetParent = (HTMLElement) jsxGet_offsetParent();
+
+        // Add the offset for this node.
+        DomNode node = getDomNodeOrDie();
+        HTMLElement element = (HTMLElement) node.getScriptObject();
+        left += element.jsxGet_currentStyle().getLeft(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = element.jsxGet_currentStyle().jsxGet_position();
+        if ("absolute".equals(position)) {
+            return left;
+        }
+
+        // Add the offset for the ancestor nodes.
+        for (node = node.getParentDomNode(); node.getScriptObject() != offsetParent; node = node.getParentDomNode()) {
+            element = (HTMLElement) node.getScriptObject();
+            left += element.jsxGet_currentStyle().getLeft(true, true, true);
+        }
+
+        // Add the offset for the final ancestor node (the offset parent).
+        element = (HTMLElement) node.getScriptObject();
+        left += offsetParent.jsxGet_currentStyle().getLeft(true, false, true);
+
+        return left;
     }
 
     /**
      * Returns this element's <tt>offsetTop</tt>, which is the calculated top position of this
      * element relative to the <tt>offsetParent</tt>.
+     *
      * @return this element's <tt>offsetTop</tt>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534303.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
     public int jsxGet_offsetTop() {
-        return 1;
+        if (this instanceof HTMLBodyElement) {
+            return 0;
+        }
+
+        int top = 0;
+        final HTMLElement offsetParent = (HTMLElement) jsxGet_offsetParent();
+
+        // Add the offset for this node.
+        DomNode node = getDomNodeOrDie();
+        HTMLElement element = (HTMLElement) node.getScriptObject();
+        top += element.jsxGet_currentStyle().getTop(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = element.jsxGet_currentStyle().jsxGet_position();
+        if ("absolute".equals(position)) {
+            return top;
+        }
+
+        // Add the offset for the ancestor nodes.
+        node = node.getParentDomNode();
+        for ( ; node != null && node.getScriptObject() != offsetParent; node = node.getParentDomNode()) {
+            element = (HTMLElement) node.getScriptObject();
+            top += element.jsxGet_currentStyle().getTop(false, true, true);
+        }
+
+        // Add the offset for the final ancestor node (the offset parent).
+        element = (HTMLElement) node.getScriptObject();
+        top += offsetParent.jsxGet_currentStyle().getTop(false, false, true);
+
+        return top;
     }
 
     /**
-     * Returns this element's <tt>offsetParent</tt>. The <tt>offsetLeft</tt> and <tt>offsetTop</tt>
-     * attributes are relative to the <tt>offsetParent</tt>.
+     * Returns this element's <tt>offsetParent</tt>. The <tt>offsetLeft</tt> and
+     * <tt>offsetTop</tt> attributes are relative to the <tt>offsetParent</tt>.
+     *
      * @return this element's <tt>offsetParent</tt>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://www.w3.org/TR/REC-CSS2/box.html">Box Model</a>
+     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
-    public Object jsxGet_offsetParent() {
+    public HTMLElement jsxGet_offsetParent() {
+        HTMLElement offsetParent = null;
         DomNode currentElement = getHtmlElementOrDie();
-        Object offsetParent = null;
+
+        final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
+        final ComputedCSSStyleDeclaration style = htmlElement.jsxGet_currentStyle();
+        final String position = style.jsxGet_position();
+        final boolean ie = getBrowserVersion().isIE();
+        final boolean staticPos = "static".equals(position);
+        final boolean fixedPos = "fixed".equals(position);
+        final boolean useTables = ((ie && (staticPos || fixedPos)) || (!ie && staticPos));
+
         while (currentElement != null) {
+
             final DomNode parentNode = currentElement.getParentDomNode();
-            // According to the Microsoft and Mozilla documentation, and from experimentation
-            // in the IE and Firefox browsers, the offsetParent is the container
-            // (<td>, <table>, <body>) nearest to the node
-            if (parentNode instanceof HtmlTableDataCell
-                || parentNode instanceof HtmlTable
-                || parentNode instanceof HtmlBody) {
-                offsetParent = parentNode.getScriptObject();
+            if (parentNode instanceof HtmlBody
+                || (useTables && parentNode instanceof HtmlTableDataCell)
+                || (useTables && parentNode instanceof HtmlTable)) {
+                offsetParent = (HTMLElement) parentNode.getScriptObject();
                 break;
             }
+
+            if (parentNode != null && parentNode.getScriptObject() instanceof HTMLElement) {
+                final HTMLElement parentElement = (HTMLElement) parentNode.getScriptObject();
+                final ComputedCSSStyleDeclaration parentStyle = parentElement.jsxGet_currentStyle();
+                final String parentPosition = parentStyle.jsxGet_position();
+                final boolean parentIsStatic = "static".equals(parentPosition);
+                final boolean parentIsFixed = "fixed".equals(parentPosition);
+                if ((ie && !parentIsStatic && !parentIsFixed) || (!ie && !parentIsStatic)) {
+                    offsetParent = (HTMLElement) parentNode.getScriptObject();
+                    break;
+                }
+            }
+
             currentElement = currentElement.getParentDomNode();
         }
+
         return offsetParent;
     }
 
