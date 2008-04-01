@@ -37,9 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
@@ -59,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACParserCSS21;
 import com.steadystate.css.parser.SelectorListImpl;
 
 /**
@@ -74,9 +77,6 @@ public class Stylesheet extends SimpleScriptable {
 
     private static final long serialVersionUID = -8341675386925348206L;
 
-    /** The parser used to parse CSS; its parent stylesheet and parent rule should not be set. */
-    private static final CSSOMParser PARSER = new CSSOMParser();
-
     /**
      * The input source which contains the CSS stylesheet which this stylesheet host object
      * represents.
@@ -85,6 +85,8 @@ public class Stylesheet extends SimpleScriptable {
 
     /** The parsed stylesheet which this host object wraps (initialized lazily). */
     private CSSStyleSheet wrapped_;
+
+    /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
 
     /**
@@ -174,16 +176,16 @@ public class Stylesheet extends SimpleScriptable {
     private CSSStyleSheet parseCSS(final InputSource source) {
         CSSStyleSheet ss;
         try {
-            ss = PARSER.parseStyleSheet(source);
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            ss = parser.parseStyleSheet(source, null, null);
         }
         catch (final Exception e) {
-            getLog().error("Exception parsing CSS: " + e.getMessage(), e);
+            getLog().error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
             ss = new CSSStyleSheetImpl();
         }
         catch (final Error e) {
-            // Yes, Error! because SACParser may sometimes throws: new Error("Missing return statement in function")
-            // but I haven't been able to reproduce it with a simple test case
-            getLog().error("Error parsing CSS: " + e.getMessage(), e);
+            // SACParser sometimes throws Error: "Missing return statement in function"
+            getLog().error("Error parsing CSS from '" + toString(source) + "': " + e.getMessage(), e);
             ss = new CSSStyleSheetImpl();
         }
         return ss;
@@ -191,7 +193,7 @@ public class Stylesheet extends SimpleScriptable {
 
     /**
      * Parses the selectors at the specified input source. If anything at all goes wrong, this
-     * method returns an empty stylesheet.
+     * method returns an empty selector list.
      *
      * @param source the source from which to retrieve the selectors to be parsed
      * @return the selectors parsed from the specified input source
@@ -199,19 +201,31 @@ public class Stylesheet extends SimpleScriptable {
     SelectorList parseSelectors(final InputSource source) {
         SelectorList selectors;
         try {
-            selectors = PARSER.parseSelectors(source);
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            selectors = parser.parseSelectors(source);
         }
         catch (final Exception e) {
-            getLog().error(e.getMessage(), e);
+            getLog().error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
             selectors = new SelectorListImpl();
         }
         catch (final Error e) {
-            // Yes, Error! because SACParser may sometimes throws: new Error("Missing return statement in function")
-            // but I haven't been able to reproduce it with a simple test case
-            getLog().error("Error parsing CSS: " + e.getMessage(), e);
+            // SACParser sometimes throws Error: "Missing return statement in function"
+            getLog().error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
             selectors = new SelectorListImpl();
         }
         return selectors;
+    }
+
+    /**
+     * Returns the contents of the specified input source.
+     */
+    private String toString(final InputSource source) {
+        try {
+            return IOUtils.toString(source.getCharacterStream());
+        }
+        catch (final IOException e) {
+            return "";
+        }
     }
 
     /**
