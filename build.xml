@@ -202,6 +202,7 @@ JUnit results available here: ${test.reports.dir}/index.html
         <get-dependency project="xerces" jarName="xmlParserAPIs-2.6.2.jar"/>
         <get-snapshot-dependency project="nekohtml" jarName="nekohtml-hu-1.9.6.3.jar" version="1.9.6.3"/>
         <get-dependency project="net.sourceforge.cssparser" jarName="cssparser-0.9.5.jar"/>
+        <get-dependency project="org.w3c.css" jarName="sac-1.3.jar"/>
         <get-dependency project="commons-logging" jarName="commons-logging-1.1.1.jar"/>
         <get-dependency project="xalan" jarName="xalan-2.7.0.jar"/>
         <get-dependency project="commons-io" jarName="commons-io-1.4.jar"/>
