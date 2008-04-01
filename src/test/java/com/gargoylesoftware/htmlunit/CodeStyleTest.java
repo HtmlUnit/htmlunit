@@ -83,7 +83,7 @@ public class CodeStyleTest {
             fail("CodeStyle error");
         }
         else if (errorsNumber > 1) {
-            fail("CodeStyle " + errorsNumber + "errors");
+            fail("CodeStyle " + errorsNumber + " errors");
         }
     }
 
