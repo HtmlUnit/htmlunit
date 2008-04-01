@@ -1419,14 +1419,20 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         // Add the offset for the ancestor nodes.
-        for (node = node.getParentDomNode(); node.getScriptObject() != offsetParent; node = node.getParentDomNode()) {
-            element = (HTMLElement) node.getScriptObject();
-            left += element.jsxGet_currentStyle().getLeft(true, true, true);
+        node = node.getParentDomNode();
+        while (node != null && node.getScriptObject() != offsetParent) {
+            if (node.getScriptObject() instanceof HTMLElement) {
+                element = (HTMLElement) node.getScriptObject();
+                left += element.jsxGet_currentStyle().getLeft(true, true, true);
+            }
+            node = node.getParentDomNode();
         }
 
         // Add the offset for the final ancestor node (the offset parent).
-        element = (HTMLElement) node.getScriptObject();
-        left += offsetParent.jsxGet_currentStyle().getLeft(true, false, true);
+        if (node != null && node.getScriptObject() instanceof HTMLElement) {
+            element = (HTMLElement) node.getScriptObject();
+            left += offsetParent.jsxGet_currentStyle().getLeft(true, false, true);
+        }
 
         return left;
     }
@@ -1461,14 +1467,19 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // Add the offset for the ancestor nodes.
         node = node.getParentDomNode();
-        for ( ; node != null && node.getScriptObject() != offsetParent; node = node.getParentDomNode()) {
-            element = (HTMLElement) node.getScriptObject();
-            top += element.jsxGet_currentStyle().getTop(false, true, true);
+        while (node != null && node.getScriptObject() != offsetParent) {
+            if (node.getScriptObject() instanceof HTMLElement) {
+                element = (HTMLElement) node.getScriptObject();
+                top += element.jsxGet_currentStyle().getTop(false, true, true);
+            }
+            node = node.getParentDomNode();
         }
 
         // Add the offset for the final ancestor node (the offset parent).
-        element = (HTMLElement) node.getScriptObject();
-        top += offsetParent.jsxGet_currentStyle().getTop(false, false, true);
+        if (node != null && node.getScriptObject() instanceof HTMLElement) {
+            element = (HTMLElement) node.getScriptObject();
+            top += offsetParent.jsxGet_currentStyle().getTop(false, false, true);
+        }
 
         return top;
     }
