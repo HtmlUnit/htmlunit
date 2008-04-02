@@ -206,7 +206,7 @@ JUnit results available here: ${test.reports.dir}/index.html
         <get-dependency project="commons-logging" jarName="commons-logging-1.1.1.jar"/>
         <get-dependency project="xalan" jarName="xalan-2.7.0.jar"/>
         <get-dependency project="commons-io" jarName="commons-io-1.4.jar"/>
-        <get-dependency project="commons-lang" jarName="commons-lang-2.3.jar"/>
+        <get-dependency project="commons-lang" jarName="commons-lang-2.4.jar"/>
         <get-dependency project="commons-collections" jarName="commons-collections-3.2.jar"/>
         <get-dependency project="rhino" jarName="js-1.7R1.jar"/>
 

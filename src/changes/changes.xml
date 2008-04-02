@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+            <action type="update" dev="asashour">
+                Upgrade Commons Lang to 2.4.
+            </action>
             <action type="update" dev="mguillem">
                 Deprecate popFirstWindow and pushClearFirstWindow on WebClient.
             </action>
