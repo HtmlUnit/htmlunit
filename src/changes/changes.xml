@@ -7,8 +7,8 @@
 
     <body>
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
-            <action type="add" dev="asashour" id="1931084">
-                DomNode: asXml() use charset from HtmlPage.getPageEncoding().
+            <action type="update" dev="asashour" id="1931084">
+                DomNode: asXml() uses charset from HtmlPage.getPageEncoding().
             </action>
             <action type="update" dev="asashour">
                 Upgrade Jetty to 6.1.9.

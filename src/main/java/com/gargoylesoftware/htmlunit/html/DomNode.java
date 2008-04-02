@@ -724,25 +724,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 charsetName = encoding;
             }
         }
-        return asXml(charsetName);
-    }
-
-    /**
-     * Returns a string representation of the XML document from this element and all it's children (recursively),
-     * in the specified charset.
-     *
-     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
-     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
-     * @return the XML string
-     * @see #asXml()
-     */
-    protected String asXml(final String charsetName) {
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
         if (charsetName != null && this instanceof HtmlHtml) {
             printWriter.println("<?xml version=\"1.0\" encoding=\"" + charsetName + "\"?>");
         }
-        printXml("", printWriter, charsetName);
+        printXml("", printWriter);
         printWriter.close();
         return stringWriter.toString();
     }
@@ -752,12 +739,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
-     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
-     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
-    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
+    protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.println(indent + this);
-        printChildrenAsXml(indent, printWriter, charsetName);
+        printChildrenAsXml(indent, printWriter);
     }
 
     /**
@@ -765,13 +750,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
-     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
-     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
-    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter, final String charsetName) {
+    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
         DomNode child = getFirstDomChild();
         while (child != null) {
-            child.printXml(indent + "  ", printWriter, charsetName);
+            child.printXml(indent + "  ", printWriter);
             child = child.getNextDomSibling();
         }
     }

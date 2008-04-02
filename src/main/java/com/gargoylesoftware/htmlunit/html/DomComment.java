@@ -97,16 +97,14 @@ public class DomComment extends DomCharacterData implements Comment {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
-     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
-     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
+    protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.print("<!--");
         printWriter.print(getData());
         printWriter.print("-->");
-        printChildrenAsXml(indent, printWriter, charsetName);
+        printChildrenAsXml(indent, printWriter);
     }
 
     /**

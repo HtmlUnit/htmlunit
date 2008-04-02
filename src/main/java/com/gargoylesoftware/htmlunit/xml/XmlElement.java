@@ -269,7 +269,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
      * {@inheritDoc}
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
+    protected void printXml(final String indent, final PrintWriter printWriter) {
         final boolean hasChildren = (getFirstDomChild() != null);
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
@@ -279,7 +279,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
         }
         else {
             printWriter.println(">");
-            printChildrenAsXml(indent, printWriter, charsetName);
+            printChildrenAsXml(indent, printWriter);
             printWriter.println(indent + "</" + getTagName() + ">");
         }
     }
@@ -443,13 +443,4 @@ public class XmlElement extends DomNamespaceNode implements Element {
         return ClassUtils.getShortClassName(getClass())
             + "[<" + getTagName() + " ...>]";
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String asXml(final String charsetName) {
-        return super.asXml(charsetName);
-    }
-
 }

@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.Page;
  * @version $Revision$
  * @author Marc Guillemot
  * @author David K. Taylor
- * @author Ahmed Ashour
  */
 public class DomCData extends DomText implements CDATASection {
 
@@ -88,11 +87,9 @@ public class DomCData extends DomText implements CDATASection {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
-     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
-     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
+    protected void printXml(final String indent, final PrintWriter printWriter) {
         printWriter.print("<![CDATA[");
         printWriter.print(getData());
         printWriter.print("]]>");
