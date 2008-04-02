@@ -916,10 +916,10 @@ public class WebClient implements Serializable {
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, "_blank");
+        final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         if (url != null) {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);
-                final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
                 if (!getBrowserVersion().isIE()) {
                     settings.addAdditionalHeader("Referer", openerPage.getWebResponse().getUrl().toExternalForm());
                 }
@@ -931,6 +931,9 @@ public class WebClient implements Serializable {
         }
         else {
             initializeEmptyWindow(window);
+            final Window jsWindow = (Window) window.getScriptObject();
+            jsWindow.setDomNode(openerPage);
+            jsWindow.jsxGet_document().setDomNode(openerPage);
         }
         return window;
     }

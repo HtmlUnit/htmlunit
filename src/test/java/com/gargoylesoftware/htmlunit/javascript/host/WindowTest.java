@@ -2649,9 +2649,6 @@ public class WindowTest extends WebTestCase {
      */
     @Test
     public void open_FF() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function performAction() {\n"
             + "    actionwindow = window.open('', '1205399746518', "
