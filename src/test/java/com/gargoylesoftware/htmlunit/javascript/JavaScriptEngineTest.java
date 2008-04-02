@@ -1185,29 +1185,29 @@ public class JavaScriptEngineTest extends WebTestCase {
             return super.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
-        /** @return The number of times that this engine has called functions */
+        /** @return the number of times that this engine has called functions */
         public int getCallCount() {
             return scriptCallCount_;
         }
 
-        /** @return The number of times that this engine has executed code */
+        /** @return the number of times that this engine has executed code */
         public int getExecutionCount() {
             return scriptExecutionCount_;
         }
 
-        /** @return The number of times that this engine has compiled code */
+        /** @return the number of times that this engine has compiled code */
         public int getCompileCount() {
             return scriptCompileCount_;
         }
 
-        /** @return The number of times that this engine has executed a compiled script */
+        /** @return the number of times that this engine has executed a compiled script */
         public int getExecuteScriptCount() {
             return scriptExecuteScriptCount_;
         }
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void commentNoDoubleSlashIE() throws Exception {

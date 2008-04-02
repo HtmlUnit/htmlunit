@@ -55,11 +55,11 @@ public class HtmlHead extends HtmlElement {
     public static final String TAG_NAME = "head";
 
     /**
-     * Create an instance of HtmlHead
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlHead(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -72,8 +72,7 @@ public class HtmlHead extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "lang"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
         return getAttributeValue("lang");
@@ -84,8 +83,7 @@ public class HtmlHead extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "xml:lang"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
@@ -96,8 +94,7 @@ public class HtmlHead extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "dir"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
@@ -108,8 +105,7 @@ public class HtmlHead extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "profile"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "profile" or an empty string if that attribute isn't defined
      */
     public final String getProfileAttribute() {
         return getAttributeValue("profile");

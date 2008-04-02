@@ -943,12 +943,12 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Searches by the specified criteria and return all the HtmlElement that are found.
+     * Returns all elements which are descendants of this element and match the specified search criteria.
      *
-     * @param elementName The name of the element
-     * @param attributeName The name of the attribute
-     * @param attributeValue The value of the attribute
-     * @return A list of HtmlElements
+     * @param elementName the name of the element to search for
+     * @param attributeName the name of the attribute to search for
+     * @param attributeValue the value of the attribute to search for
+     * @return all elements which are descendants of this element and match the specified search criteria
      */
     public final List< ? extends HtmlElement> getHtmlElementsByAttribute(
             final String elementName,

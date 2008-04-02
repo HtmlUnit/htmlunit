@@ -54,11 +54,11 @@ public final class HtmlHtml extends HtmlElement {
     public static final String TAG_NAME = "html";
 
     /**
-     * Create an instance of HtmlHtml
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlHtml(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -68,9 +68,10 @@ public final class HtmlHtml extends HtmlElement {
 
     /**
      * Returns the value of the attribute "lang". Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @return The value of the attribute "lang" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public String getLangAttribute() {
         return getAttributeValue("lang");
@@ -78,9 +79,10 @@ public final class HtmlHtml extends HtmlElement {
 
     /**
      * Returns the value of the attribute "xml:lang". Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @return The value of the attribute "xml:lang" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
@@ -88,9 +90,10 @@ public final class HtmlHtml extends HtmlElement {
 
     /**
      * Returns the value of the attribute "dir". Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * details on the use of this attribute.
      *
-     * @return The value of the attribute "dir" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public String getTextDirectionAttribute() {
         return getAttributeValue("dir");

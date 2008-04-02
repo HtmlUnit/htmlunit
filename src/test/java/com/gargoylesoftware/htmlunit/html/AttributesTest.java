@@ -51,10 +51,10 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * <p>Tests for all the generated attribute accessors. This test case will
  * dynamically generate tests for all the various attributes. The code
  * is fairly complicated but doing it this way is much easier than writing
- * individual tests for all the attributes.
- * </p>
- * With the new custom DOM, this test has somewhat lost its significance.
- * We simply set and get the attributes and compare the results.
+ * individual tests for all the attributes.</p>
+ *
+ * <p>With the new custom DOM, this test has somewhat lost its significance.
+ * We simply set and get the attributes and compare the results.</p>
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -77,11 +77,10 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Returns a test suite containing a separate test for each attribute
-     * on each element.
+     * Returns a test suite containing a separate test for each attribute on each element.
      *
-     * @return The test suite
-     * @throws Exception If the tests cannot be created.
+     * @return the test suite
+     * @throws Exception if the tests cannot be created
      */
     public static Test suite() throws Exception {
         final HtmlPage page = WebTestCase.loadPage("<html><head><title>foo</title></head><body></body></html>");
@@ -122,13 +121,12 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Add all the tests for a given class.
+     * Adds all the tests for a given class.
      *
-     * @param clazz The class to create tests for.
-     * @param page The HtmlPage that will be passed into the constructor of the
-     * objects to be tested.
-     * @param suite The suite that all the tests will be placed inside.
-     * @throws Exception If the tests cannot be created.
+     * @param clazz the class to create tests for
+     * @param page the page that will be passed into the constructor of the objects to be tested
+     * @param suite The suite that all the tests will be placed inside
+     * @throws Exception if the tests cannot be created
      */
     private static void addTestsForClass(
             final Class< ? > clazz,
@@ -172,13 +170,12 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Create an instance of the test. This will test one specific attribute
+     * Creates an instance of the test. This will test one specific attribute
      * on one specific class.
-     * @param attributeName The name of the attribute to test.
-     * @param classUnderTest The class containing the attribute.
-     * @param method The "getter" method for the specified attribute.
-     * @param page The page that will be passed into the constructor of the object
-     * to be tested.
+     * @param attributeName the name of the attribute to test
+     * @param classUnderTest the class containing the attribute
+     * @param method the "getter" method for the specified attribute
+     * @param page the page that will be passed into the constructor of the object to be tested
      */
     public AttributesTest(
             final String attributeName,
@@ -194,10 +191,10 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Create a name for this particular test that reflect the attribute being tested.
+     * Creates a name for this particular test that reflects the attribute being tested.
      * @param clazz The class containing the attribute.
      * @param method The getter method for the attribute.
-     * @return The new name.
+     * @return the test name
      */
     private static String createTestName(final Class< ? > clazz, final Method method) {
         String className = clazz.getName();
@@ -208,8 +205,8 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Run the actual test.
-     * @throws Exception If the test fails.
+     * Runs the actual test.
+     * @throws Exception if the test fails
      */
     @Override
     protected void runTest() throws Exception {
@@ -224,9 +221,9 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Create a new instance of the class being tested.
-     * @return The new instance.
-     * @throws Exception If the new object cannot be created.
+     * Creates a new instance of the class being tested.
+     * @return the new instance
+     * @throws Exception if the new object cannot be created
      */
     private HtmlElement getNewInstanceForClassUnderTest() throws Exception {
         final HtmlElement newInstance;

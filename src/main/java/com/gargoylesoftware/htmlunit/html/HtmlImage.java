@@ -61,11 +61,11 @@ public class HtmlImage extends ClickableElement {
     private int lastClickY_;
 
     /**
-     * Create an instance of HtmlImage
+     * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlImage(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -78,8 +78,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "src"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "src" or an empty string if that attribute isn't defined
      */
     public final String getSrcAttribute() {
         return getAttributeValue("src");
@@ -90,8 +89,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "alt"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "alt" or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
         return getAttributeValue("alt");
@@ -102,8 +100,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
@@ -114,8 +111,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "longdesc"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "longdesc" or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
         return getAttributeValue("longdesc");
@@ -126,8 +122,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "height"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "height" or an empty string if that attribute isn't defined
      */
     public final String getHeightAttribute() {
         return getAttributeValue("height");
@@ -138,8 +133,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "width"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "width" or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
         return getAttributeValue("width");
@@ -150,8 +144,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "usemap"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "usemap" or an empty string if that attribute isn't defined
      */
     public final String getUseMapAttribute() {
         return getAttributeValue("usemap");
@@ -162,8 +155,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "ismap"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "ismap" or an empty string if that attribute isn't defined
      */
     public final String getIsmapAttribute() {
         return getAttributeValue("ismap");
@@ -174,8 +166,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "align" or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
         return getAttributeValue("align");
@@ -186,8 +177,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "border"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "border" or an empty string if that attribute isn't defined
      */
     public final String getBorderAttribute() {
         return getAttributeValue("border");
@@ -198,8 +188,7 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "hspace"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "hspace" or an empty string if that attribute isn't defined
      */
     public final String getHspaceAttribute() {
         return getAttributeValue("hspace");
@@ -210,37 +199,36 @@ public class HtmlImage extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "vspace"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "vspace" or an empty string if that attribute isn't defined
      */
     public final String getVspaceAttribute() {
         return getAttributeValue("vspace");
     }
-    
+
     /**
-     * Simulate clicking this element at the given position.
-     * This makes only sense for an image map (currently only server side) where the position matters.
+     * Simulates clicking this element at the specified position. This only makes sense for
+     * an image map (currently only server side), where the position matters. This method
+     * returns the page contained by this image's window after the click, which may or may not
+     * be the same as the original page, depending on JavaScript event handlers, etc.
      *
      * @param x the x position of the click
      * @param y the y position of the click
-     * @return The page that occupies this window after this element is
-     * clicked. It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @return the page contained by this image's window after the click
+     * @exception IOException if an IO error occurs
      */
-    public Page click(final int x, final int y)
-        throws IOException {
-        
+    public Page click(final int x, final int y) throws IOException {
         lastClickX_ = x;
         lastClickY_ = y;
         return super.click();
     }
-    
+
     /**
-     * Simulate clicking this element.
+     * Simulates clicking this element at the position <tt>(0, 0)</tt>. This method returns
+     * the page contained by this image's window after the click, which may or may not be the
+     * same as the original page, depending on JavaScript event handlers, etc.
      *
-     * @return The page that occupies this window after this element is
-     * clicked. It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @return the page contained by this image's window after the click
+     * @exception IOException if an IO error occurs
      */
     @Override
     public Page click() throws IOException {
@@ -249,9 +237,9 @@ public class HtmlImage extends ClickableElement {
 
     /**
      * Performs the click action on the enclosing A tag (if any).
-     * @param defaultPage The default page to return if the action does not load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * @param defaultPage the default page to return if the action does not load a new page
+     * @return the page that is currently loaded after execution of this method
+     * @throws IOException if an IO error occurred
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
