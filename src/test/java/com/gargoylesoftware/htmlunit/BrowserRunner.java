@@ -82,6 +82,7 @@ public class BrowserRunner extends CompositeRunner {
 
     /**
      * Browser.
+     * @see Browsers
      */
     public enum Browser {
         /** Internet Explorer 6. */
@@ -98,7 +99,9 @@ public class BrowserRunner extends CompositeRunner {
     }
     
     /**
-     * Browsers to test with, default value is all.
+     * The only {@link Browser}s that are expected to succeed, default value is all.
+     * For example, if you use <tt>@Browsers(Browser.INTERNET_EXPLORER_6)</tt> that means only IE6 is expected
+     * to succeed, but IE7 and FF2 should fail.
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
@@ -140,6 +143,7 @@ public class BrowserRunner extends CompositeRunner {
     
     /**
      * Browsers with which the case is not yet implemented, default value is all.
+     * @see Browser
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
