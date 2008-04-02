@@ -3999,9 +3999,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * Gets the "zIndex" style attribute.
      * @return the style attribute
      */
-    public String jsxGet_zIndex() {
+    public Object jsxGet_zIndex() {
         if (getBrowserVersion().isIE()) {
-            return "0";
+            return 0;
         }
         else {
             return "";

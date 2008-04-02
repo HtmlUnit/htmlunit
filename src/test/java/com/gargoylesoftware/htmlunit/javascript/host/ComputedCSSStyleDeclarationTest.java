@@ -251,8 +251,8 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception If the test fails.
      */
     @Test
-    @Browsers(Browser.INTERNET_EXPLORER_6)
-    @Alerts("0")
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts({ "0", "number" })
     public void zIndex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -260,6 +260,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
             + "    alert(e.currentStyle['zIndex']);\n"
+            + "    alert(typeof e.currentStyle['zIndex']);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

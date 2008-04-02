@@ -447,7 +447,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      */
     @Test
     public void properties() throws Exception {
-        properties(BrowserVersion.INTERNET_EXPLORER_7_0, "clear posRight backgroundRepeat borderTopStyle "
+        properties(BrowserVersion.INTERNET_EXPLORER_6_0, "clear posRight backgroundRepeat borderTopStyle "
             + "marginTop fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor "
             + "overflowX paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display "
             + "textDecorationLineThrough marginBottom textKashidaSpace borderCollapse textDecorationBlink "
@@ -516,7 +516,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
         final List<String> collectedStyles =
             Arrays.asList(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText().split(" "));
         Collections.sort(collectedStyles);
-        assertEquals(expectedStyles, collectedStyles);
+        assertEquals(expectedStyles.toString(), collectedStyles.toString());
     }
 
     /**

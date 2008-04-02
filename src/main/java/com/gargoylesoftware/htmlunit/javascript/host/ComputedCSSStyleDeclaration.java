@@ -1194,8 +1194,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_zIndex() {
-        return getValue(super.jsxGet_zIndex(), "auto");
+    public Object jsxGet_zIndex() {
+        final Object response = super.jsxGet_zIndex();
+        if (response.toString().length() == 0) {
+            return "auto";
+        }
+        return response;
     }
 
     /**
