@@ -837,6 +837,7 @@ public class WebClient implements Serializable {
      * Returns the "first" window for this client. This is the first window
      * opened since pushClearFirstWindow() was last called.
      * @return The first window.
+     * @deprecated since 2.0
      */
     public WebWindow popFirstWindow() {
         synchronized (firstWindowStack_) {
@@ -846,6 +847,7 @@ public class WebClient implements Serializable {
 
     /**
      * Clears the first window for this client.
+     * @deprecated since 2.0
      */
     public void pushClearFirstWindow() {
         synchronized (firstWindowStack_) {
