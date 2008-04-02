@@ -42,6 +42,7 @@ package com.gargoylesoftware.htmlunit.util;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public final class StringUtils {
 
@@ -53,7 +54,7 @@ public final class StringUtils {
     }
 
     /**
-     * Escapes the characters '<', '>' and '&' into their XML entity equivalents. Note that
+     * Escapes the characters '<', '>', '"', '\'' and '&' into their XML entity equivalents. Note that
      * sometimes we have to use this method instead of
      * {@link org.apache.commons.lang.StringEscapeUtils#escapeXml(String)} or
      * {@link org.apache.commons.lang.StringEscapeUtils#escapeHtml(String)} because those methods
@@ -75,6 +76,12 @@ public final class StringUtils {
                     break;
                 case '&':
                     sb.append("&amp;");
+                    break;
+                case '"':
+                    sb.append("&quot;");
+                    break;
+                case '\'':
+                    sb.append("&apos;");
                     break;
                 default:
                     sb.append(c);
