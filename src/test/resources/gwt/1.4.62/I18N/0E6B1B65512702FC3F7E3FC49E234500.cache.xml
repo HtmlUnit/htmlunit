@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache-entry>
+	<generated-type-hash class="com.google.gwt.i18n.client.constants.DateTimeConstants_" hash="60199A12D629C0197611025E36AA63EC"/>
+	<generated-type-hash class="com.google.gwt.sample.i18n.client.NumberFormatExampleConstants_" hash="E647386F6CE14CBDC4C8621E5BFB45F2"/>
+	<generated-type-hash class="com.google.gwt.sample.i18n.client.ConstantsWithLookupExampleConstants_" hash="AFA3FEA205025CF4163BCB5855A01C69"/>
+	<generated-type-hash class="com.google.gwt.i18n.client.constants.CurrencyCodeMapConstants_" hash="8277A1C7B5AA006BA38095BEB609E722"/>
+	<generated-type-hash class="com.google.gwt.sample.i18n.client.MessagesExampleConstants_" hash="F84297A812DD7032F8DC49CBF0D11DFF"/>
+	<generated-type-hash class="com.google.gwt.sample.i18n.client.ConstantsExampleConstants_" hash="9A43CCA86D81BE04CF31BA7BA3FE5E0C"/>
+	<generated-type-hash class="com.google.gwt.sample.i18n.client.DateTimeFormatExampleConstants_" hash="BDDEA95098CFF0AC06CF9A9870DA4854"/>
+	<generated-type-hash class="com.google.gwt.sample.i18n.client.ErrorMessages_" hash="B4F2AB11DEB38D7A5D245B9ABCBE4F44"/>
+	<generated-type-hash class="com.google.gwt.sample.i18n.client.ColorConstants_" hash="0A66ACC98C807CF5A0CB9F6148F6C2FF"/>
+	<generated-type-hash class="com.google.gwt.i18n.client.constants.NumberConstants_" hash="5873569F35109F546DABA53ACD8F9CD6"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.TextBoxImpl" out="com.google.gwt.user.client.ui.impl.TextBoxImpl"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.ListBox.Impl" out="com.google.gwt.user.client.ui.ListBox.Impl"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.FocusImpl" out="com.google.gwt.user.client.ui.impl.FocusImplOld"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.ColorConstants" out="com.google.gwt.sample.i18n.client.ColorConstants_"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.DateTimeFormatExampleConstants" out="com.google.gwt.sample.i18n.client.DateTimeFormatExampleConstants_"/>
+	<rebind-decision in="com.google.gwt.i18n.client.constants.NumberConstants" out="com.google.gwt.i18n.client.constants.NumberConstants_"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.I18N" out="com.google.gwt.sample.i18n.client.I18N"/>
+	<rebind-decision in="com.google.gwt.user.client.impl.HistoryImpl" out="com.google.gwt.user.client.impl.HistoryImplMozilla"/>
+	<rebind-decision in="com.google.gwt.i18n.client.constants.CurrencyCodeMapConstants" out="com.google.gwt.i18n.client.constants.CurrencyCodeMapConstants_"/>
+	<rebind-decision in="com.google.gwt.user.client.impl.DOMImpl" out="com.google.gwt.user.client.impl.DOMImplMozillaOld"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.PopupImpl" out="com.google.gwt.user.client.ui.impl.PopupImplMozilla"/>
+	<rebind-decision in="com.google.gwt.i18n.client.constants.DateTimeConstants" out="com.google.gwt.i18n.client.constants.DateTimeConstants_"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.ErrorMessages" out="com.google.gwt.sample.i18n.client.ErrorMessages_"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.MessagesExampleConstants" out="com.google.gwt.sample.i18n.client.MessagesExampleConstants_"/>
+	<rebind-decision in="com.google.gwt.user.client.ui.impl.FormPanelImpl" out="com.google.gwt.user.client.ui.impl.FormPanelImpl"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.NumberFormatExampleConstants" out="com.google.gwt.sample.i18n.client.NumberFormatExampleConstants_"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.ConstantsWithLookupExampleConstants" out="com.google.gwt.sample.i18n.client.ConstantsWithLookupExampleConstants_"/>
+	<rebind-decision in="com.google.gwt.sample.i18n.client.ConstantsExampleConstants" out="com.google.gwt.sample.i18n.client.ConstantsExampleConstants_"/>
+</cache-entry>
