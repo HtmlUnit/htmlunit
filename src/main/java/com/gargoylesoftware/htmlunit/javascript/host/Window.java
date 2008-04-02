@@ -71,7 +71,9 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -1171,6 +1173,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      *   <li>are descendants of the node that changed</li>
      * </ul>
      *
+     * <p>Additionally, whenever a <tt>style</tt> node or a <tt>link</tt> node with <tt>rel=stylesheet</tt> is added or
+     * removed, all elements should be removed from the computed style cache.</p>
+     *
      * <p>This listener is serialized whenever an {@link HtmlPage} is serialized, because every HTML document has one
      * of these listeners. The map instance variable is transient so that we can continue to serialize pages, but cache
      * eviction won't work correctly on deserialized pages...</p>
@@ -1223,6 +1228,19 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
 
         private void nodeChanged(final DomNode changed) {
+            // If a stylesheet was changed, all of our calculations could be off; clear the cache.
+            if (changed instanceof HtmlStyle) {
+                cache_.clear();
+                return;
+            }
+            if (changed instanceof HtmlLink) {
+                final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase();
+                if ("stylesheet".equals(rel)) {
+                    cache_.clear();
+                    return;
+                }
+            }
+            // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = cache_.entrySet().iterator();
             while (i.hasNext()) {
                 final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
