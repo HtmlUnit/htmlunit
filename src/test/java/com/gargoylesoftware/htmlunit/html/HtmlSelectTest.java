@@ -690,18 +690,26 @@ public class HtmlSelectTest extends WebTestCase {
     @Test
     public void select_focus() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'><select name='select1' id='select1' multiple>\n"
+            + "<form id='form1'>\n"
+            + "<select name='select1' id='select1' multiple onfocus='alert(\"focus\")'>\n"
             + "<option value='option1'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
-            + "<option value='option3'>Option3</option>\n"
+            + "<option value='option3' selected>Option3</option>\n"
             + "</select>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(htmlContent);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        assertEquals(Collections.emptyList(), collectedAlerts);
+
         final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("select1");
         assertNull(page.getFocusedElement());
         select.getOption(0).setSelected(true);
         assertSame(select, page.getFocusedElement());
+
+        final String[] expectedAlerts = {"focus"};
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
 }

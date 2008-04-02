@@ -251,7 +251,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
         if (node instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {
-                setSelectedAttribute(option, true);
+                doSelectOption(option, true);
             }
         }
         return response;
@@ -292,9 +292,21 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
         if (isSelected) {
             getPage().setFocusedElement(this);
         }
-        
-        final boolean triggerHandler  = (selectedOption.isSelected() != isSelected);
 
+        final boolean changeSelectedState  = (selectedOption.isSelected() != isSelected);
+
+        if (changeSelectedState) {
+            doSelectOption(selectedOption, isSelected);
+            return HtmlInput.executeOnChangeHandlerIfAppropriate(this);
+        }
+        else {
+            // nothing to do
+            return getPage();
+        }
+    }
+
+    private void doSelectOption(final HtmlOption selectedOption,
+            final boolean isSelected) {
         // caution the HtmlOption may have been created from js and therefore the select now need
         // to "know" that it is selected
         if (isMultipleSelectEnabled()) {
@@ -304,14 +316,6 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
             for (final HtmlOption option : getOptions()) {
                 option.setSelectedInternal(option == selectedOption && isSelected);
             }
-        }
-
-        if (triggerHandler) {
-            return HtmlInput.executeOnChangeHandlerIfAppropriate(this);
-        }
-        else {
-            // nothing to do
-            return getPage();
         }
     }
 
