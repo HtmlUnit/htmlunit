@@ -246,4 +246,27 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception If the test fails.
+     */
+    @Test
+    @Browsers(Browser.INTERNET_EXPLORER_6)
+    @Alerts("0")
+    public void zIndex() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myDiv');\n"
+            + "    alert(e.currentStyle['zIndex']);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
