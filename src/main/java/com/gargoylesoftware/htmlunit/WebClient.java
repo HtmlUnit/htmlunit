@@ -792,7 +792,7 @@ public class WebClient implements Serializable {
 
     /**
      * Sets the status handler for this webclient.
-     * @param statusHandler The new alerthandler or null if none is specified.
+     * @param statusHandler The new status handler or null if none is specified.
      */
     public void setStatusHandler(final StatusHandler statusHandler) {
         statusHandler_ = statusHandler;
