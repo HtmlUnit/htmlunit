@@ -213,8 +213,8 @@ JUnit results available here: ${test.reports.dir}/index.html
         <!-- test -->
         <get-dependency type="test" project="junit" jarName="junit-4.4.jar"/>
         <get-dependency type="test" project="gsbase" jarName="gsbase-2.0.1.jar"/>
-        <get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-6.1.8.jar"/>
-        <get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-util-6.1.8.jar"/>
+        <get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-6.1.9.jar"/>
+        <get-dependency type="test" project="org.mortbay.jetty" jarName="jetty-util-6.1.9.jar"/>
         <get-dependency type="test" project="log4j" jarName="log4j-1.2.14.jar"/>
         <get-dependency type="test" project="org.slf4j" jarName="slf4j-api-1.4.3.jar"/>
         <get-dependency type="test" project="org.slf4j" jarName="slf4j-log4j12-1.4.3.jar"/>

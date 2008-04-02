@@ -449,13 +449,7 @@
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jetty</artifactId>
-            <version>6.1.8</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
-            <version>6.1.8</version>
+            <version>6.1.9</version>
             <scope>test</scope>
         </dependency>
         <!-- The presence of slf4j on the classpath during the unit tests triggers correct logging in Jetty. -->
