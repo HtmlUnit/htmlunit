@@ -545,6 +545,7 @@ public class DocumentTest extends WebTestCase {
             + "</script>\n"
             + "<div id='div'></div>\n"
             + "</body></html>";
+        
         final List<String> actual = new ArrayList<String>();
         loadPage(browserVersion, html, actual);
         assertEquals(expected, actual);

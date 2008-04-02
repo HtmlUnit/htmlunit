@@ -44,6 +44,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Representation of a text node in the HTML DOM.
@@ -172,14 +173,21 @@ public class DomText extends DomCharacterData implements Text {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
+     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
+     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
         if (getData().trim().length() != 0) {
             printWriter.print(indent);
-            printWriter.println(StringEscapeUtils.escapeXml(getData()));
+            if (charsetName == null) {
+                printWriter.println(StringEscapeUtils.escapeXml(getData()));
+            }
+            else {
+                printWriter.println(StringUtils.escapeXmlChars(getData()));
+            }
         }
-        printChildrenAsXml(indent, printWriter);
+        printChildrenAsXml(indent, printWriter, charsetName);
     }
 
     /**

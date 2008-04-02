@@ -222,8 +222,8 @@ public class XmlPage extends SgmlPage implements Document {
      * {@inheritDoc}
      */
     @Override
-    public String asXml() {
-        return getDocumentXmlElement().asXml();
+    protected String asXml(final String charsetName) {
+        return getDocumentXmlElement().asXml(charsetName);
     }
 
     /**

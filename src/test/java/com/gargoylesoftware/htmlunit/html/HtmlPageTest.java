@@ -1122,6 +1122,28 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testAsXml_unicode() throws Exception {
+        final String unicodeString = "\u064A\u0627 \u0644\u064A\u064A\u0644";
+        final String html = "<html>\n"
+            + "<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head>\n"
+            + "<body><span id='foo'>" + unicodeString + "</span></body></html>";
+
+        final WebClient client = new WebClient(BrowserVersion.getDefault());
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        
+        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final String xml = page.asXml();
+        assertTrue(xml.contains("<?xml "));
+        assertTrue(xml.contains(unicodeString));
+    }
+
+    /**
      * Regression test for bug 1204637.
      * @exception Exception If the test fails
      */

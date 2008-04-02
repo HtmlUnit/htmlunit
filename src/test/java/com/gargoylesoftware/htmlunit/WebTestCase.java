@@ -225,8 +225,7 @@ public abstract class WebTestCase {
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(url);
-        return page;
+        return (HtmlPage) client.getPage(url);
     }
 
     /**

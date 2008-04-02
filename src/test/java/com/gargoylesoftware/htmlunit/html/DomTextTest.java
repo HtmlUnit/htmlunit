@@ -39,6 +39,10 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -72,7 +76,6 @@ public class DomTextTest extends WebTestCase {
      */
     @Test
     public void testAsText_fontFormat() throws Exception {
-        // specific case reported by rgitzel
         testAsText("a <b>b</b> c",  "a b c");
         testAsText("a <b>b</b>c",   "a bc");
         testAsText("a<b>b</b> c",   "ab c");
@@ -89,21 +92,18 @@ public class DomTextTest extends WebTestCase {
         testAsText("a<tt>b</tt> c",   "ab c");
         testAsText("a<tt>b</tt>c",    "abc");
 
-        // suggested by asashour ;-)
         testAsText("a <font>b</font> c",  "a b c");
         testAsText("a<font>b</font> c",   "ab c");
         testAsText("a <font>b</font>c",   "a bc");
         testAsText("a<font>b</font>c",    "abc");
 
-        // I guess 'span' should be just like 'font'
         testAsText("a <span>b</span> c",  "a b c");
         testAsText("a<span>b</span> c",   "ab c");
         testAsText("a <span>b</span>c",   "a bc");
         testAsText("a<span>b</span>c",    "abc");
         
-        // try some combinations
-        testAsText("a<b><font><i>b</i></font></b>c",    "abc");
-        testAsText("a<b><font> <i>b</i></font></b>c",    "a bc");
+        testAsText("a<b><font><i>b</i></font></b>c",  "abc");
+        testAsText("a<b><font> <i>b</i></font></b>c", "a bc");
     }
     
     /**
@@ -155,5 +155,32 @@ public class DomTextTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
         assertEquals(expectedText, elt.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testAsXml() throws Exception {
+        final String unicodeString = "\u064A\u0627 \u0644\u064A\u064A\u0644";
+        final String html = "<html>\n"
+            + "<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head>\n"
+            + "<body><span id='foo'>" + unicodeString + "</span></body></html>";
+
+        final int[] expectedValues = {1610, 1575, 32, 1604, 1610, 1610, 1604};
+
+        final WebClient client = new WebClient(BrowserVersion.getDefault());
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        
+        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
+        client.setWebConnection(webConnection);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final String xml = page.getHtmlElementById("foo").getFirstDomChild().asXml().trim();
+        assertEquals(expectedValues.length, xml.length());
+        int index = 0;
+        for (final int expectedValue : expectedValues) {
+            assertEquals(expectedValue, xml.codePointAt(index++));
+        }
     }
 }

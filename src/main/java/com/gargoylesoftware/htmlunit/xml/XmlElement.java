@@ -266,13 +266,10 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Recursively writes the XML data for the node tree starting at <code>node</code>.
-     *
-     * @param indent white space to indent child nodes
-     * @param printWriter writer where child nodes are written
+     * {@inheritDoc}
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
         final boolean hasChildren = (getFirstDomChild() != null);
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
@@ -282,7 +279,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
         }
         else {
             printWriter.println(">");
-            printChildrenAsXml(indent, printWriter);
+            printChildrenAsXml(indent, printWriter, charsetName);
             printWriter.println(indent + "</" + getTagName() + ">");
         }
     }
@@ -446,4 +443,13 @@ public class XmlElement extends DomNamespaceNode implements Element {
         return ClassUtils.getShortClassName(getClass())
             + "[<" + getTagName() + " ...>]";
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String asXml(final String charsetName) {
+        return super.asXml(charsetName);
+    }
+
 }

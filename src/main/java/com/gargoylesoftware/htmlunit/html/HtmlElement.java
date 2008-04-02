@@ -809,9 +809,11 @@ public abstract class HtmlElement extends DomElement implements Element {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
+     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
+     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
         final boolean hasChildren = (getFirstDomChild() != null);
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
@@ -821,7 +823,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
         else {
             printWriter.println(">");
-            printChildrenAsXml(indent, printWriter);
+            printChildrenAsXml(indent, printWriter, charsetName);
             printWriter.println(indent + "</" + getTagName() + ">");
         }
     }

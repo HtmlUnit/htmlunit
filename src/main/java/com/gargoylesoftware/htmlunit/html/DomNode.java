@@ -711,15 +711,38 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns a string representation of the XML document from this element and all
-     * it's children (recursively).
+     * Returns a string representation of the XML document from this element and all it's children (recursively).
+     * The charset used is the current page encoding.
      *
      * @return the XML string
      */
     public String asXml() {
+        String charsetName = null;
+        if (getPage() instanceof HtmlPage) {
+            final String encoding = ((HtmlPage) getPage()).getPageEncoding();
+            if (!encoding.equals("ISO-8859-1")) {
+                charsetName = encoding;
+            }
+        }
+        return asXml(charsetName);
+    }
+
+    /**
+     * Returns a string representation of the XML document from this element and all it's children (recursively),
+     * in the specified charset.
+     *
+     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
+     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
+     * @return the XML string
+     * @see #asXml()
+     */
+    protected String asXml(final String charsetName) {
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
-        printXml("", printWriter);
+        if (charsetName != null && this instanceof HtmlHtml) {
+            printWriter.println("<?xml version=\"1.0\" encoding=\"" + charsetName + "\"?>");
+        }
+        printXml("", printWriter, charsetName);
         printWriter.close();
         return stringWriter.toString();
     }
@@ -729,10 +752,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
+     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
+     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected void printXml(final String indent, final PrintWriter printWriter, final String charsetName) {
         printWriter.println(indent + this);
-        printChildrenAsXml(indent, printWriter);
+        printChildrenAsXml(indent, printWriter, charsetName);
     }
 
     /**
@@ -740,11 +765,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param indent white space to indent child nodes
      * @param printWriter writer where child nodes are written
+     * @param charsetName The name of a supported {@linkplain java.nio.charset.Charset charset},
+     *        if null, non-ASCII characters will be escaped by "&amp;#xxx".
      */
-    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
+    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter, final String charsetName) {
         DomNode child = getFirstDomChild();
         while (child != null) {
-            child.printXml(indent + "  ", printWriter);
+            child.printXml(indent + "  ", printWriter, charsetName);
             child = child.getNextDomSibling();
         }
     }
