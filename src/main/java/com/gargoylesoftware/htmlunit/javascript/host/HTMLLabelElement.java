@@ -77,7 +77,7 @@ public class HTMLLabelElement extends HTMLElement {
     }
 
     /**
-     * Click this element.  This simulates the action of the user clicking with the mouse.
+     * Click this element. This simulates the action of the user clicking with the mouse.
      * @throws IOException if this click triggers a page load that encounters problems
      */
     public void jsxFunction_click() throws IOException {

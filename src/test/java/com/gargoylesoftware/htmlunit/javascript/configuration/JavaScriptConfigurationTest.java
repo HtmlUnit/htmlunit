@@ -287,7 +287,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test getting the configuration for the Netscape browser.  The readyState property should not be
+     * Test getting the configuration for the Netscape browser. The readyState property should not be
      * available in this case.
      *
      * @throws Exception - Exception on error
@@ -322,7 +322,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
     
     /**
-     * Test getting the configuration for the browser max version.  The readyState property should not be
+     * Test getting the configuration for the browser max version. The readyState property should not be
      * available in this case.
      *
      * @throws Exception - Exception on error
@@ -357,7 +357,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     /**
-     * Test getting the configuration for the JavaScript max version.  The readyState property should not be
+     * Test getting the configuration for the JavaScript max version. The readyState property should not be
      * available in this case.
      *
      * @throws Exception - Exception on error
@@ -485,8 +485,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
      * Test that the data in the JavaScriptConfiguration file matches the classes in listed
-     * properties and functions.  The first step is to get the configuration using a special method which
-     * ignores the browser and JavaScript constraints.  This checks that there is a method for each item in
+     * properties and functions. The first step is to get the configuration using a special method which
+     * ignores the browser and JavaScript constraints. This checks that there is a method for each item in
      * the configuration file and fails by throwing an exception.
      *
      * The second step is to go through each class and determine if for each jsGet, jsSet, and jsFunction class,

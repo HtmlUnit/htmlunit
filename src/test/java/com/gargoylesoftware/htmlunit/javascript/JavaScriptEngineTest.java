@@ -481,7 +481,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Sets value on input expects a string.  If you pass in a value that isn't a string
+     * Sets value on input expects a string. If you pass in a value that isn't a string
      * this used to blow up.
      * @throws Exception if the test fails
      */
@@ -677,7 +677,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * When using the syntax this.something in an onclick handler, "this" must represent
-     * the object being clicked, not the window.  Regression test.
+     * the object being clicked, not the window. Regression test.
      * @throws Exception if the test fails
      */
     @Test
@@ -793,7 +793,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Test case for bug 707134.  Currently I am unable to reproduce the problem.
+     * Test case for bug 707134. Currently I am unable to reproduce the problem.
      * @throws Exception if the test fails
      */
     @Test
@@ -1418,8 +1418,8 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * Test that code in script tags is executed on page load.  Try different combinations
-     * of the script tag except for the case where a remote JavaScript page is loaded.  That
+     * Test that code in script tags is executed on page load. Try different combinations
+     * of the script tag except for the case where a remote JavaScript page is loaded. That
      * one will be tested separately.
      * @throws Exception If something goes wrong.
      */

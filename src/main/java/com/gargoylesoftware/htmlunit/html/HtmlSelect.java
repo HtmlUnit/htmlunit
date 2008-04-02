@@ -186,7 +186,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Remove options by reducing the "length" property.  This has no
+     * Remove options by reducing the "length" property. This has no
      * effect if the length is set to the same or greater.
      * @param newLength The new length property value
      */
@@ -265,7 +265,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @param isSelected true if the option is to become selected
      * @param optionValue The value of the option that is to change
-     * @return The page that occupies this window after this change is made.  It
+     * @return The page that occupies this window after this change is made. It
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute(final String optionValue, final boolean isSelected) {
@@ -285,7 +285,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption The value of the option that is to change
-     * @return The page that occupies this window after this change is made.  It
+     * @return The page that occupies this window after this change is made. It
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {

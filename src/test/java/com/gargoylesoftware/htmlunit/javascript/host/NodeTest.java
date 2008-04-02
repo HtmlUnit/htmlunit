@@ -379,7 +379,7 @@ public class NodeTest extends WebTestCase {
     }
 
     /**
-     * The common browsers always return node names in uppercase.  Test this.
+     * The common browsers always return node names in uppercase. Test this.
      * @throws Exception on test failure
      */
     @Test

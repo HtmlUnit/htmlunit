@@ -138,7 +138,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (attributes != null) {
             attributes_ = attributes;
             // The HtmlAttr objects are created before the HtmlElement, so we need to go set the
-            // parent HtmlElement, now.  Also index the namespaces while we are at it.
+            // parent HtmlElement, now. Also index the namespaces while we are at it.
             for (final HtmlAttr entry : attributes_.values()) {
                 entry.setParentNode(this);
                 final String attrNamespaceURI = entry.getNamespaceURI();
@@ -176,7 +176,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the value of the attribute specified by name or an empty string.  If the
+     * Returns the value of the attribute specified by name or an empty string. If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
@@ -214,14 +214,13 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Returns the value of the attribute specified by namespace and local name or an empty
-     * string.  If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
+     * string. If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param localName The name within the namespace.
-     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
-     * or {@link #ATTRIBUTE_VALUE_EMPTY}
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeNS(final String namespaceURI, final String localName) {
         return getAttributeValue(getQualifiedName(namespaceURI, localName));
@@ -259,14 +258,13 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the value of the specified attribute or an empty string.  If the
+     * Returns the value of the specified attribute or an empty string. If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
      * attribute was specified but it was empty.
      *
      * @param attributeName the name of the attribute
-     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
-     * or {@link #ATTRIBUTE_VALUE_EMPTY}
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue(final String attributeName) {
         final HtmlAttr attr = (HtmlAttr) attributes_.get(attributeName.toLowerCase());
@@ -534,7 +532,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns true if the specified attribute has been defined.  This is necessary
+     * Returns true if the specified attribute has been defined. This is necessary
      * in order to distinguish between an attribute that is set to an empty string
      * and one that was not defined at all.
      *
@@ -572,7 +570,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the tag name of this element.  The tag name is the actual HTML name.  For example
+     * Returns the tag name of this element. The tag name is the actual HTML name. For example
      * the tag name for HtmlAnchor is "a" and the tag name for HtmlTable is "table".
      * This tag name will always be in lowercase, no matter what case was used in the original
      * document, when no namespace is defined.
@@ -595,7 +593,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * @return The same value as returned by {@link #getTagName()},
+     * @return the same value as returned by {@link #getTagName()}
      */
     @Override
     public String getNodeName() {
@@ -724,32 +722,6 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Simulates pressing a key on this element.
-     *
-     * @param keyCode the key you wish to press
-     * @deprecated use {@link #type(char)} instead
-     */
-    public void keyDown(final int keyCode) {
-        keyDown(keyCode, false, false, false);
-    }
-
-    /**
-     * Simulates pressing a key on this element.
-     *
-     * @param keyCode the key you wish to press
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     * @deprecated use {@link #type(char, boolean, boolean, boolean)} instead
-     */
-    public void keyDown(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return;
-        }
-        fireEvent(new Event(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey));
-    }
-
-    /**
      * Simulates typing the specified text while this element has focus.
      * Note that for some elements, typing '\n' submits the enclosed form.
      * @param text the text you with to simulate typing
@@ -778,37 +750,42 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Simulates typing the specified character while this element has focus.
-     * Note that for some elements, typing '\n' submits the enclosed form.
+     * Simulates typing the specified character while this element has focus, returning the page contained
+     * by this element's window after typing. Note that it may or may not be the same as the original page,
+     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
+     * submits the enclosed form.
+     *
      * @param c the character you with to simulate typing
-     * @return The page that occupies this window after typing.
-     * It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @return the page that occupies this window after typing
+     * @exception IOException if an IO error occurs
      */
     public Page type(final char c) throws IOException {
         return type(c, false, false, false);
     }
 
     /**
-     * Simulates typing the specified character while this element has focus.
-     * Note that for some elements, typing '\n' submits the enclosed form.
+     * Simulates typing the specified character while this element has focus, returning the page contained
+     * by this element's window after typing. Note that it may or may not be the same as the original page,
+     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
+     * submits the enclosed form.
+     *
      * @param c the character you with to simulate typing
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     * @return The page that occupies this window after typing.
-     * It may be the same window or it may be a freshly loaded one.
-     * @exception IOException If an IO error occurs
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
+     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @return the page that occupies this window after typing
+     * @exception IOException if an IO error occurs
      */
     public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
         }
+
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
         fireEvent(new Event(this, Event.TYPE_KEY_PRESS, c, shiftKey, ctrlKey, altKey));
         fireEvent(new Event(this, Event.TYPE_KEY_UP, c, shiftKey, ctrlKey, altKey));
-        
+
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
             return form.submit((SubmittableElement) this);
@@ -819,9 +796,9 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns true if clicking Enter (ASCII 10, or '\n') should submit the enclosed form (if any).
-     * Default implementation is false.
-     * @return true if clicking Enter should submit the enclosed form (if any).
+     * Returns <tt>true</tt> if clicking Enter (ASCII 10, or '\n') should submit the enclosed form (if any).
+     * The default implementation returns <tt>false</tt>.
+     * @return <tt>true</tt> if clicking Enter should submit the enclosed form (if any)
      */
     protected boolean isSubmittableByEnter() {
         return false;
@@ -898,20 +875,17 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Searches by the specified criteria and return the first HtmlElement that is found.
+     * Searches for an element based on the specified criteria, returning the first element which matches
+     * said criteria. Only elements which are descendants of this element are included in the search.
      *
-     * @param elementName The name of the element.
-     * @param attributeName The name of the attribute.
-     * @param attributeValue The value of the attribute.
-     * @return The HtmlElement.
-     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model.
+     * @param elementName the name of the element to search for
+     * @param attributeName the name of the attribute to search for
+     * @param attributeValue the value of the attribute to search for
+     * @return the first element which matches the specified search criteria
+     * @exception ElementNotFoundException if no element matches the specified search criteria
      */
-    public final HtmlElement getOneHtmlElementByAttribute(
-            final String elementName,
-            final String attributeName,
-            final String attributeValue)
-        throws
-            ElementNotFoundException {
+    public final HtmlElement getOneHtmlElementByAttribute(final String elementName, final String attributeName,
+        final String attributeValue) throws ElementNotFoundException {
 
         WebAssert.notNull("elementName", elementName);
         WebAssert.notNull("attributeName", attributeName);
@@ -919,6 +893,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
         final List< ? extends HtmlElement> list =
             getHtmlElementsByAttribute(elementName, attributeName, attributeValue);
+
         final int listSize = list.size();
         if (listSize == 0) {
             throw new ElementNotFoundException(elementName, attributeName, attributeValue);
@@ -928,26 +903,25 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the HTML element with the specified id. If more than one element
-     * has this id (not allowed by the HTML spec) then return the first one.
+     * Returns the element in this element's page with the specified ID. If more than one element
+     * has the specified ID (not allowed by the HTML spec), this method returns the first one.
      *
-     * @param id The id value to search by
-     * @return The HTML element found
-     * @exception ElementNotFoundException If no element was found that matches the id
+     * @param id the ID value to search for
+     * @return the element in this element's page with the specified ID
+     * @exception ElementNotFoundException if no element has the specified ID
      */
-    public HtmlElement getHtmlElementById(final String id)
-        throws ElementNotFoundException {
-
+    public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
         return getPage().getHtmlElementById(id);
     }
 
     /**
-     * Returns true if there is a element with the specified id. This method
-     * is intended for situations where it is enough to know whether a specific
-     * element is present in the document.<p>
+     * <p>Returns <tt>true</tt> if there is an element in this element's page with the specified ID.
+     * This method is intended for situations where it is enough to know whether a specific
+     * element is present in the document.</p>
      *
-     * Implementation note: This method calls getHtmlElementById() internally
-     * so writing code like the following would be extremely inefficient.
+     * <p>Implementation Note: This method calls {@link #getHtmlElementById(String)} internally,
+     * so writing code such as the following would be extremely inefficient:</p>
+     *
      * <pre>
      * if (hasHtmlElementWithId(id)) {
      *     HtmlElement element = getHtmlElementWithId(id)
@@ -955,8 +929,8 @@ public abstract class HtmlElement extends DomElement implements Element {
      * }
      * </pre>
      *
-     * @param id The id to search by
-     * @return true if an element was found with the specified id.
+     * @param id the id to search for
+     * @return <tt>true</tt> if there is an element in this element's page with the specified ID
      */
     public boolean hasHtmlElementWithId(final String id) {
         try {
@@ -1114,7 +1088,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Creates an attribute map as needed by HtmlElement.  This is just used by the element factories.
+     * Creates an attribute map as needed by HtmlElement. This is just used by the element factories.
      * @param attributeCount the initial number of attributes to be added to the map.
      * @return the attribute map.
      */
@@ -1124,7 +1098,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-      * Add an attribute to the attribute map.  This is just used by the element factories.
+      * Add an attribute to the attribute map. This is just used by the element factories.
      * @param attributeMap the attribute map where the attribute will be added.
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the attribute
@@ -1162,7 +1136,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * Register a snippet of JavaScript code as an event handler.  The JavaScript code will
+     * Register a snippet of JavaScript code as an event handler. The JavaScript code will
      * be wrapped inside a unique function declaration which provides one argument named
      * "event"
      * @param eventName Name of event such as "onclick" or "onblur", etc.
@@ -1224,16 +1198,16 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Shortcut for {@link #fireEvent(Event)}.
      * @param eventType the event type (like "load", "click")
-     * @return the execution result. <code>null</code> if nothing is executed.
+     * @return the execution result, or <code>null</code> if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
         return fireEvent(new Event(this, eventType));
     }
 
     /**
-     * Fire the event on the element. Nothing is done if JavaScript is disabled
-     * @param event the event to fire.
-     * @return the execution result. <code>null</code> if nothing is executed.
+     * Fires the event on the element. Nothing is done if JavaScript is disabled.
+     * @param event the event to fire
+     * @return the execution result, or <tt>null</tt> if nothing is executed
      */
     public ScriptResult fireEvent(final Event event) {
         if (!getPage().getWebClient().isJavaScriptEnabled()) {
@@ -1265,191 +1239,164 @@ public abstract class HtmlElement extends DomElement implements Element {
      * The default implementation does nothing.
      */
     protected void preventDefault() {
+        // Empty by default; override as needed.
     }
 
     /**
-     * Simulate moving the mouse over this element.
+     * Simulates moving the mouse over this element, returning the page which this element's window contains
+     * after the mouse move. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @return The page that occupies this window after the mouse moves over this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse move
      */
     public Page mouseOver() {
         return mouseOver(false, false, false, MouseEvent.BUTTON_LEFT);
     }
-    
+
     /**
-     * Simulate moving the mouse over this element.
+     * Simulates moving the mouse over this element, returning the page which this element's window contains
+     * after the mouse move. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse move
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse move
+     * @param altKey <tt>true</tt> if ALT is pressed during the mouse move
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
-     *
-     * @return The page that occupies this window after the mouse moves over this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse move
      */
     public Page mouseOver(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
         return doMouseEvent(MouseEvent.TYPE_MOUSE_OVER, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
-     * Simulate moving the mouse inside this element.
+     * Simulates moving the mouse over this element, returning the page which this element's window contains
+     * after the mouse move. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @return The page that occupies this window after the mouse moves inside this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse move
      */
     public Page mouseMove() {
         return mouseMove(false, false, false, MouseEvent.BUTTON_LEFT);
     }
-    
+
     /**
-     * Simulate moving the mouse inside this element.
+     * Simulates moving the mouse over this element, returning the page which this element's window contains
+     * after the mouse move. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse move
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse move
+     * @param altKey <tt>true</tt> if ALT is pressed during the mouse move
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
-     *
-     * @return The page that occupies this window after the mouse moves inside this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse move
      */
     public Page mouseMove(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
         return doMouseEvent(MouseEvent.TYPE_MOUSE_MOVE, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
-     * Simulate moving the mouse out of this element.
+     * Simulates moving the mouse out of this element, returning the page which this element's window contains
+     * after the mouse move. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @return The page that occupies this window after the mouse moves out of this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse move
      */
     public Page mouseOut() {
         return mouseOut(false, false, false, MouseEvent.BUTTON_LEFT);
     }
-    
+
     /**
-     * Simulate moving the mouse out of this element.
+     * Simulates moving the mouse out of this element, returning the page which this element's window contains
+     * after the mouse move. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse move
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse move
+     * @param altKey <tt>true</tt> if ALT is pressed during the mouse move
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
-     *
-     * @return The page that occupies this window after the mouse moves out of this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse move
      */
     public Page mouseOut(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
         return doMouseEvent(MouseEvent.TYPE_MOUSE_OUT, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
-     * Simulate clicking the mouse in this element.
+     * Simulates clicking the mouse on this element, returning the page which this element's window contains
+     * after the mouse click. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @return The page that occupies this window after the mouse is clicked in this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse click
      */
     public Page mouseDown() {
         return mouseDown(false, false, false, MouseEvent.BUTTON_LEFT);
     }
-    
+
     /**
-     * Simulate clicking the mouse in this element.
+     * Simulates clicking the mouse on this element, returning the page which this element's window contains
+     * after the mouse click. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse click
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse click
+     * @param altKey <tt>true</tt> if ALT is pressed during the mouse click
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
-     *
-     * @return The page that occupies this window after the mouse is clicked in this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse click
      */
     public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
         return doMouseEvent(MouseEvent.TYPE_MOUSE_DOWN, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
-     * Simulate releasing the mouse click in this element.
+     * Simulates releasing the mouse click on this element, returning the page which this element's window contains
+     * after the mouse click release. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @return The page that occupies this window after the mouse click is released in this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse click release
      */
     public Page mouseUp() {
         return mouseUp(false, false, false, MouseEvent.BUTTON_LEFT);
     }
-    
+
     /**
-     * Simulate releasing the mouse click in this element.
+     * Simulates releasing the mouse click on this element, returning the page which this element's window contains
+     * after the mouse click release. The returned page may or may not be the same as the original page, depending
+     * on JavaScript event handlers, etc.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse click release
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse click release
+     * @param altKey <tt>true</tt> if ALT is pressed during the mouse click release
      * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
      *        or {@link MouseEvent#BUTTON_RIGHT}
-     *
-     * @return The page that occupies this window after the mouse click is released in this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse click release
      */
     public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
         return doMouseEvent(MouseEvent.TYPE_MOUSE_UP, shiftKey, ctrlKey, altKey, button);
     }
 
     /**
-     * Simulate the given mouse event.
+     * Simulates right clicking the mouse on this element, returning the page which this element's window
+     * contains after the mouse click. The returned page may or may not be the same as the original page,
+     * depending on JavaScript event handlers, etc.
      *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
-     *        or {@link MouseEvent#BUTTON_RIGHT}
-     *
-     * @return The page that occupies this window after the mouse event occur on this element.
-     * It may be the same window or it may be a freshly loaded one.
-     */
-    private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
-        final boolean altKey, final int button) {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return getPage();
-        }
-
-        final HtmlPage page = getPage();
-        final Event event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
-        final ScriptResult scriptResult = fireEvent(event);
-        final Page currentPage;
-        if (scriptResult == null) {
-            currentPage = page;
-        }
-        else {
-            currentPage = scriptResult.getNewPage();
-        }
-        return currentPage;
-    }
-
-    /**
-     * Simulate right clicking the mouse in this element.
-     *
-     * @return The page that occupies this window after the mouse is right clicked in this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @return the page which this element's window contains after the mouse click
      */
     public Page rightClick() {
         return rightClick(false, false, false);
     }
 
     /**
-     * Simulate right clicking the mouse in this element.
+     * Simulates right clicking the mouse on this element, returning the page which this element's window
+     * contains after the mouse click. The returned page may or may not be the same as the original page,
+     * depending on JavaScript event handlers, etc.
      *
-     * <p>This is equivalent to calling {@link #mouseDown(boolean, boolean, boolean, int)},
-     * then {@link #mouseUp(boolean, boolean, boolean, int)}
-     *
-     * @param shiftKey true if SHIFT is pressed
-     * @param ctrlKey true if CTRL is pressed
-     * @param altKey true if ALT is pressed
-     *
-     * @return The page that occupies this window after the mouse is right clicked in this element.
-     * It may be the same window or it may be a freshly loaded one.
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse click
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse click
+     * @param altKey <tt>true</tt> if ALT is pressed during the mouse click
+     * @return the page which this element's window contains after the mouse click
      */
     public Page rightClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         final Page mouseDownPage = mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
@@ -1468,16 +1415,45 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
         return doMouseEvent(MouseEvent.TYPE_CONTEXT_MENU, shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_RIGHT);
     }
-    
+
     /**
-     * Remove focus from this element.
+     * Simulates the specified mouse event, returning the page which this element's window contains after the event.
+     * The returned page may or may not be the same as the original page, depending on JavaScript event handlers, etc.
+     *
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the mouse event
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the mouse event
+     * @param altKey <tt>true</tt> if ALT is pressed during the mouse event
+     * @param button the button code, must be {@link MouseEvent#BUTTON_LEFT}, {@link MouseEvent#BUTTON_MIDDLE}
+     *        or {@link MouseEvent#BUTTON_RIGHT}
+     * @return the page which this element's window contains after the event
+     */
+    private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
+        final boolean altKey, final int button) {
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return getPage();
+        }
+        final HtmlPage page = getPage();
+        final Event event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+        final ScriptResult scriptResult = fireEvent(event);
+        final Page currentPage;
+        if (scriptResult == null) {
+            currentPage = page;
+        }
+        else {
+            currentPage = scriptResult.getNewPage();
+        }
+        return currentPage;
+    }
+
+    /**
+     * Removes focus from this element.
      */
     public void blur() {
         getPage().setFocusedElement(null);
     }
 
     /**
-     * Sets the focus to this element.
+     * Sets the focus on this element.
      */
     public void focus() {
         getPage().setFocusedElement(this);

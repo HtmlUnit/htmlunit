@@ -444,7 +444,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Simulate clicking this input with a pointing device.  The x and y coordinates
+     * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
      * @param x The x coordinate of the pointing device at the time of clicking

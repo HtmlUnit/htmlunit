@@ -75,7 +75,7 @@ public class TopLevelWindowTest extends WebTestCase {
         assertEquals(expectedEvents, eventCatcher.getEvents());
 
         // Since this was the only open window, a new window should have
-        // been created when this one was closed.  Verify this.
+        // been created when this one was closed. Verify this.
         assertNotNull(webClient.getCurrentWindow());
         assertNotSame(webClient.getCurrentWindow(), windowToClose);
 

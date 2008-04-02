@@ -52,7 +52,7 @@ public class HTMLIFrameElement extends HTMLElement {
     private static final long serialVersionUID = -7005081332114203694L;
 
     /**
-     * Creates an instance.  A default constructor is required for all JavaScript objects.
+     * Creates an instance. A default constructor is required for all JavaScript objects.
      */
     public HTMLIFrameElement() { }
 

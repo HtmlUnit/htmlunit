@@ -78,7 +78,7 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
      * Instantiate a new attribute.
      *
      * @param page The page that the attribute belongs to.
-     * @param namespaceURI The namespace that defines the attribute name.  May be null.
+     * @param namespaceURI The namespace that defines the attribute name. May be null.
      * @param qualifiedName The name of the attribute.
      * @param value The value of the attribute.
      */

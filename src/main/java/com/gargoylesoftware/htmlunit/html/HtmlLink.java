@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * Wrapper for the HTML element "link".  <b>Note:</b> This is not a clickable link,
+ * Wrapper for the HTML element "link". <b>Note:</b> This is not a clickable link,
  * that one is an HtmlAnchor
  *
  * @version $Revision$

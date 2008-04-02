@@ -49,7 +49,7 @@ public interface OnbeforeunloadHandler {
      * Handle an onbeforeunload event for the given page.
      * @param page The page on which the event occurred.
      * @param message The message in the event.
-     * @return true if we are simulating the ok button.  False for the cancel button.
+     * @return true if we are simulating the ok button. False for the cancel button.
      */
     boolean handleEvent(final Page page, final String message);
 }

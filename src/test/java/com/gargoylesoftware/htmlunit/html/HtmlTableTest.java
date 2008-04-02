@@ -249,7 +249,7 @@ public class HtmlTableTest extends WebTestCase {
     }
 
     /**
-     * Check to ensure that the proper numbers of tags show up.  Note that an extra tbody
+     * Check to ensure that the proper numbers of tags show up. Note that an extra tbody
      * will be inserted to be in compliance with the common browsers.
      * @throws Exception if the test fails
      */
@@ -299,7 +299,7 @@ public class HtmlTableTest extends WebTestCase {
 
     /**
      * The common browsers will automatically insert tbody tags around the table rows if
-     * one wasn't specified.  Ensure that we do this too.  Also ensure that extra ones
+     * one wasn't specified. Ensure that we do this too. Also ensure that extra ones
      * aren't inserted if a tbody was already there.
      * @throws Exception if the test fails
      */

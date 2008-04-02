@@ -125,7 +125,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /** The ready state is is an IE-only value that is available to a large number of elements. */
     private String readyState_;
 
-    /** The name of the "element" property.  Used when watching property change events. */
+    /** The name of the "element" property. Used when watching property change events. */
     public static final String PROPERTY_ELEMENT = "element";
 
     /**
@@ -632,7 +632,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             else {
                 if (previousNodeWasText) {
                     // Whitespace between adjacent text nodes should reamin as a single
-                    // space.  So, append raw adjacent text and reduce it as a whole.
+                    // space. So, append raw adjacent text and reduce it as a whole.
                     buffer.append(reduceWhitespace(textBuffer.toString()));
                     textBuffer.setLength(0);
                     previousNodeWasText = false;
@@ -898,7 +898,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Check for insertion errors for a new child node.  This is overridden by derived
+     * Check for insertion errors for a new child node. This is overridden by derived
      * classes to enforce which types of children are allowed.
      *
      * @param newChild the new child node that is being inserted below this node

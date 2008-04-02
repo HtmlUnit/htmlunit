@@ -439,7 +439,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * <p>Simulate a bug report where an anchor contained JavaScript that caused a form submit.
      * According to the bug report, the form would be submitted even though the onsubmit
-     * handler would return false.  This wasn't reproducible but I added a test for it anyway.</p>
+     * handler would return false. This wasn't reproducible but I added a test for it anyway.</p>
      *
      * <p>UPDATE: If the form submit is triggered by JavaScript then the onsubmit handler is not
      * supposed to be called so it doesn't matter what value it returns.</p>

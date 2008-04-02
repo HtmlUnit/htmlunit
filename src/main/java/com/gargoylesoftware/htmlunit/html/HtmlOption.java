@@ -90,7 +90,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * selected properties of sibling option elements.
      *
      * @param selected true if this option should be selected.
-     * @return The page that occupies this window after this change is made.  It
+     * @return The page that occupies this window after this change is made. It
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelected(boolean selected) {

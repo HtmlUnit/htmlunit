@@ -217,8 +217,8 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     /**
      * Returns the value of the attribute "type". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.  Note that Internet
-     * Explorer doesn't follow the spec when the type isn't specified.  It will return
+     * documentation for details on the use of this attribute. Note that Internet
+     * Explorer doesn't follow the spec when the type isn't specified. It will return
      * "button" rather than the "submit" specified in the spec.
      *
      * @return the value of the attribute "type" or the default value if that attribute isn't defined

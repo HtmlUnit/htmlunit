@@ -400,7 +400,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Returns the window property.  This is a synonym for "self".
+     * Returns the window property. This is a synonym for "self".
      * @return A reference to this
      */
     public Window jsxGet_window() {
@@ -424,7 +424,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Sets the location property.  This will cause a reload of the window.
+     * Sets the location property. This will cause a reload of the window.
      * @param newLocation The URL of the new content.
      * @throws IOException when location loading fails
      */
@@ -501,7 +501,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
             // Windows don't have corresponding DomNodes so set the domNode
-            // variable to be the page.  If this isn't set then SimpleScriptable.get()
+            // variable to be the page. If this isn't set then SimpleScriptable.get()
             // won't work properly
             setDomNode(htmlPage);
 
@@ -511,7 +511,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Initialize the object.  Only call for Windows with no contents.
+     * Initialize the object. Only call for Windows with no contents.
      */
     public void initialize() {
     }

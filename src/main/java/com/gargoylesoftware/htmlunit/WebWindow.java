@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * An interface that represents one window in a browser.  It could be a top level window or a frame.
+ * An interface that represents one window in a browser. It could be a top level window or a frame.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -76,7 +76,7 @@ public interface WebWindow {
     void setEnclosedPage(final Page page);
 
     /**
-     * Returns the window that contains this window.  If this is a top
+     * Returns the window that contains this window. If this is a top
      * level window, then return this window.
      *
      * @return The parent window or this window if there is no parent.
@@ -84,7 +84,7 @@ public interface WebWindow {
     WebWindow getParentWindow();
 
     /**
-     * Returns the top level window that contains this window.  If this
+     * Returns the top level window that contains this window. If this
      * is a top level window, then return this window.
      *
      * @return The top level window that contains this window or this
@@ -102,7 +102,7 @@ public interface WebWindow {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Set the JavaScript object that corresponds to this element.  This is not guaranteed
+     * Set the JavaScript object that corresponds to this element. This is not guaranteed
      * to be set even if there is a JavaScript object for this HTML element.
      * @param scriptObject The JavaScript object.
      */

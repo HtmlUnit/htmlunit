@@ -192,7 +192,7 @@ public class HTMLFormElementTest extends WebTestCase {
 
     /**
      * If there is only one radio button with a specified name then that radio
-     * button will be returned for the name, not an array of radio buttons.  Test
+     * button will be returned for the name, not an array of radio buttons. Test
      * this.
      * @throws Exception if the test fails
      */

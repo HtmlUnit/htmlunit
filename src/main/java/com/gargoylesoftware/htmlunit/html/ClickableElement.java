@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
 /**
- * Intermediate base class for "clickable" HTML elements.  As defined
+ * Intermediate base class for "clickable" HTML elements. As defined
  * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation,
  * this class is a base class for all HTML elements except these:
  * applet, base, basefront, bdo, br, font, frame, frameset, head, html,

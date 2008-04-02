@@ -188,7 +188,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Returns the JavaScript object that corresponds to the specified object.
-     * New JavaScript objects will be created as needed.  If a JavaScript object
+     * New JavaScript objects will be created as needed. If a JavaScript object
      * cannot be created for a domNode then NOT_FOUND will be returned.
      *
      * @param object a {@link DomNode} or a {@link WebWindow}
@@ -277,7 +277,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Returns the value at the specified location in the argument list.  If the index is larger
+     * Returns the value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -295,7 +295,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Returns the string value at the specified location in the argument list.  If the index is larger
+     * Returns the string value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -308,7 +308,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Returns the boolean value at the specified location in the argument list.  If the index is larger
+     * Returns the boolean value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -323,7 +323,7 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Returns the int value at the specified location in the argument list.  If the index is larger
+     * Returns the int value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
      * @param index The index into the argument list.
@@ -336,10 +336,10 @@ public class SimpleScriptable extends ScriptableObject {
     }
 
     /**
-     * Returns the JavaScript default value of this object.  This is the JavaScript equivalent
+     * Returns the JavaScript default value of this object. This is the JavaScript equivalent
      * of a toString() in java.
      *
-     * @param hint A hint as to the format of the default value.  Ignored in this case.
+     * @param hint A hint as to the format of the default value. Ignored in this case.
      * @return The default value.
      */
     @Override

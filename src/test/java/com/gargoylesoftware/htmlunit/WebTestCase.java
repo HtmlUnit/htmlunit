@@ -348,7 +348,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Returns a File object for the specified file name.  This is different from just
+     * Returns a File object for the specified file name. This is different from just
      * <code>new File(fileName)</code> because it will adjust the location of the file
      * depending on how the code is being executed.
      *

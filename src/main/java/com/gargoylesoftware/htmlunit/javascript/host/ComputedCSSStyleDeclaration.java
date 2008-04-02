@@ -1137,8 +1137,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the computed top (Y coordinate).
-     * @return the computed top (Y coordinate)
+     * Returns the computed top (Y coordinate), relative to the node's parent.
+     * @return the computed top (Y coordinate), relative to the node's parent
      */
     int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
         int top = intValue(jsxGet_top());
@@ -1158,8 +1158,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the computed left (X coordinate).
-     * @return the computed left (X coordinate)
+     * Returns the computed left (X coordinate), relative to the node's parent.
+     * @return the computed left (X coordinate), relative to the node's parent
      */
     int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
         int left = intValue(jsxGet_left());

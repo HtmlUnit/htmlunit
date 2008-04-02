@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * The JavaScript object "Node" which is the base class for all DOM
- * objects.  This will typically wrap an instance of {@link DomNode}.
+ * objects. This will typically wrap an instance of {@link DomNode}.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -132,7 +132,7 @@ public class Node extends SimpleScriptable {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
 
-        // If this is an HtmlElement then flip the result to uppercase.  This should really be
+        // If this is an HtmlElement then flip the result to uppercase. This should really be
         // changed in HtmlElement itself but that would break backwards compatibility fairly
         // significantly as that one is documented as always returning a lowercase value.
         if (domNode instanceof HtmlElement && ((HtmlElement) domNode).getNamespaceURI() == null) {
@@ -190,7 +190,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Duplicate an XML node.
-     * @param deep If true, recursively clone all descendants.  Otherwise, just clone this node.
+     * @param deep If true, recursively clone all descendants. Otherwise, just clone this node.
      * @return The newly cloned node.
      */
     public Object jsxFunction_cloneNode(final boolean deep) {
@@ -201,7 +201,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Add a DOM node as a child to this node before the referenced
-     * node.  If the referenced node is null, append to the end.
+     * node. If the referenced node is null, append to the end.
      * @param newChildObject The node to add to this node
      * @param refChildObject The node before which to add the new child
      * @return The newly added child node.

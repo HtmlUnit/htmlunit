@@ -96,7 +96,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        // The tabview YUI test has a background thread that runs.  We want to set the
+        // The tabview YUI test has a background thread that runs. We want to set the
         // maximum wait time to 5 seconds as that gives enough time for execution without
         // causing the test to run forever.
         doTest(BrowserVersion.FIREFOX_2, "tabview.html", emptyList_, null, 5 * 1000);

@@ -83,8 +83,8 @@ public class HtmlSubmitInput extends HtmlInput {
 
     /**
      * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true.  This is the default behavior of clicking
-     * the element.  The default implementation returns the current page - subclasses
+     * but the result of that handler was true. This is the default behavior of clicking
+     * the element. The default implementation returns the current page - subclasses
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *

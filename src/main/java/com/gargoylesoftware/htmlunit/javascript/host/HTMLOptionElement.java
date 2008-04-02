@@ -64,7 +64,7 @@ public class HTMLOptionElement extends HTMLElement {
     }
 
     /**
-     * JavaScript constructor.  This must be declared in every JavaScript file because
+     * JavaScript constructor. This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      * @param newText The text
      * @param newValue The value

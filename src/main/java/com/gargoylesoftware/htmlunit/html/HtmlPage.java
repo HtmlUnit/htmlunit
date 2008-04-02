@@ -854,21 +854,21 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * <p>
      * Execute the specified JavaScript if a JavaScript engine was successfully
-     * instantiated.  If this JavaScript causes the current page to be reloaded
-     * (through location="" or form.submit()) then return the new page.  Otherwise
+     * instantiated. If this JavaScript causes the current page to be reloaded
+     * (through location="" or form.submit()) then return the new page. Otherwise
      * return the current page.
      * </p>
      * <p><b>Please note:</b> Although this method is public, it is not intended for
-     * general execution of JavaScript.  Users of HtmlUnit should interact with the pages
+     * general execution of JavaScript. Users of HtmlUnit should interact with the pages
      * as a user would by clicking on buttons or links and having the JavaScript event
      * handlers execute as needed..
      * </p>
      *
      * @param sourceCode The JavaScript code to execute.
-     * @param sourceName The name for this chunk of code.  This name will be displayed
+     * @param sourceName The name for this chunk of code. This name will be displayed
      * in any error messages.
      * @param htmlElement The HTML element for which this script is being executed.
-     * This element will be the context during the JavaScript execution.  If null,
+     * This element will be the context during the JavaScript execution. If null,
      * the context will default to the window.
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
@@ -884,18 +884,18 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * <p>
      * Execute the specified JavaScript if a JavaScript engine was successfully
-     * instantiated.  If this JavaScript causes the current page to be reloaded
-     * (through location="" or form.submit()) then return the new page.  Otherwise
+     * instantiated. If this JavaScript causes the current page to be reloaded
+     * (through location="" or form.submit()) then return the new page. Otherwise
      * return the current page.
      * </p>
      * <p><b>Please note:</b> Although this method is public, it is not intended for
-     * general execution of JavaScript.  Users of HtmlUnit should interact with the pages
+     * general execution of JavaScript. Users of HtmlUnit should interact with the pages
      * as a user would by clicking on buttons or links and having the JavaScript event
      * handlers execute as needed..
      * </p>
      *
      * @param sourceCode The JavaScript code to execute.
-     * @param sourceName The name for this chunk of code.  This name will be displayed
+     * @param sourceName The name for this chunk of code. This name will be displayed
      * in any error messages.
      * @param startLine the line at which the script source starts
      * @return A ScriptResult which will contain both the current page (which may be different than
@@ -934,7 +934,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param thisObject The "this" object to be used during invocation.
      * @param args The arguments to pass into the call.
      * @param htmlElementScope The HTML element for which this script is being executed.
-     * This element will be the context during the JavaScript execution.  If null,
+     * This element will be the context during the JavaScript execution. If null,
      * the context will default to the page.
      * @return A ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
@@ -1113,7 +1113,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Sets the text for the title of this page.  If there is not a title element
+     * Sets the text for the title of this page. If there is not a title element
      * on this page, then one has to be generated.
      * @param message The new text
      */
@@ -1158,7 +1158,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Gets the title element for this page.  Returns null if one is not found.
+     * Gets the title element for this page. Returns null if one is not found.
      *
      * @return the title element for this page or null if this is not one.
      */
@@ -1172,7 +1172,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Look for and execute any appropriate event handlers.  Look for body
+     * Look for and execute any appropriate event handlers. Look for body
      * and frame tags.
      * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}.
      * @return true if user accepted onbeforeunload (not relevant to other events).
@@ -1314,7 +1314,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Returns an auto-refresh string if specified.  This will look in both the meta
+     * Returns an auto-refresh string if specified. This will look in both the meta
      * tags (taking care of &lt;noscript&gt; if any) and inside the HTTP response headers.
      * @return the auto-refresh string.
      */
@@ -1436,13 +1436,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Simulate pressing an access key.  This may change the focus, may click buttons and may invoke
+     * Simulate pressing an access key. This may change the focus, may click buttons and may invoke
      * JavaScript.
      *
      * @param accessKey The key that will be pressed.
      * @return The element that has the focus after pressing this access key or null if no element
      * has the focus.
-     * @throws IOException If an io error occurs during the processing of this access key.  This
+     * @throws IOException If an io error occurs during the processing of this access key. This
      * would only happen if the access key triggered a button which in turn caused a page load.
      */
     public HtmlElement pressAccessKey(final char accessKey) throws IOException {
@@ -1485,7 +1485,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Move the focus to the next element in the tab order.  To determine the specified tab
+     * Move the focus to the next element in the tab order. To determine the specified tab
      * order, refer to {@link HtmlPage#getTabbableElements()}
      *
      * @return The element that has focus after calling this method.
@@ -1523,7 +1523,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Move the focus to the previous element in the tab order.  To determine the specified tab
+     * Move the focus to the previous element in the tab order. To determine the specified tab
      * order, refer to {@link HtmlPage#getTabbableElements()}
      *
      * @return The element that has focus after calling this method.

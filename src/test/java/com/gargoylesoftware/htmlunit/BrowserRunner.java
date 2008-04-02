@@ -125,10 +125,10 @@ public class BrowserRunner extends CompositeRunner {
         /** Alerts for any Internet Explorer, it can be overridden by specific IE version. */
         String[] IE() default {EMPTY_DEFAULT };
 
-        /** Alerts for Internet Explorer 6.  If not defined, {@link #IE()} is used. */
+        /** Alerts for Internet Explorer 6. If not defined, {@link #IE()} is used. */
         String[] IE6() default {EMPTY_DEFAULT };
 
-        /** Alerts for Internet Explorer 7.  If not defined, {@link #IE()} is used. */
+        /** Alerts for Internet Explorer 7. If not defined, {@link #IE()} is used. */
         String[] IE7() default {EMPTY_DEFAULT };
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */

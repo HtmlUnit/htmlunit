@@ -46,7 +46,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 
 /**
- * A simple WebResponse created from a string.  Content is assumed to be
+ * A simple WebResponse created from a string. Content is assumed to be
  * of type text/html.
  *
  * @version $Revision$

@@ -68,7 +68,7 @@ public class CollectingAlertHandler implements AlertHandler {
     }
 
     /**
-     * Handle the alert.  This implementation will store the message in a list
+     * Handle the alert. This implementation will store the message in a list
      * for retrieval later.
      *
      * @param page The page that triggered the alert

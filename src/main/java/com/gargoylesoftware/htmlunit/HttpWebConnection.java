@@ -124,9 +124,9 @@ public class HttpWebConnection extends WebConnectionImpl {
         }
         catch (final HttpException e) {
             // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
-            // www.yahoo.com/ (note the trailing slash) will not.  If an exception is
-            // caught here then check to see if this is the situation.  If so, then retry
-            // it with a trailing slash.  The bug manifests itself with httpClient
+            // www.yahoo.com/ (note the trailing slash) will not. If an exception is
+            // caught here then check to see if this is the situation. If so, then retry
+            // it with a trailing slash. The bug manifests itself with httpClient
             // complaining about not being able to find a line with HTTP/ on it.
             if (url.getPath().length() == 0) {
                 final StringBuilder buffer = new StringBuilder();

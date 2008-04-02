@@ -269,7 +269,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * Returns the value of the attribute "onload".  This attribute is not
+     * Returns the value of the attribute "onload". This attribute is not
      * actually supported by the HTML specification however it is supported
      * by the popular browsers.
      *

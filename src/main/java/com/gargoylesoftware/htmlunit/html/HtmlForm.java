@@ -104,8 +104,8 @@ public class HtmlForm extends ClickableElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Submit this form to the appropriate server.  If submitElement is null then
-     * treat this as if it was called by JavaScript.  In this case, the onsubmit
+     * Submit this form to the appropriate server. If submitElement is null then
+     * treat this as if it was called by JavaScript. In this case, the onsubmit
      * handler will not get executed.
      *
      * @param submitElement The element that caused the submit to occur
@@ -191,10 +191,10 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Gets the charset to use for the form submission. This is the first one
+     * Returns the charset to use for the form submission. This is the first one
      * from the list provided in {@link #getAcceptCharsetAttribute()} if any
      * or the page's charset else
-     * @return see above
+     * @return the charset to use for the form submission
      */
     private String getSubmitCharset() {
         if (getAcceptCharsetAttribute().length() > 0) {
@@ -207,7 +207,7 @@ public class HtmlForm extends ClickableElement {
 
     /**
      * Returns a list of {@link KeyValuePair}s that represent the data that will be
-     * sent to the server on a form submit.  This is primarily intended to aid
+     * sent to the server on a form submit. This is primarily intended to aid
      * debugging.
      *
      * @param submitElement The element that would have been pressed to submit the
@@ -230,7 +230,7 @@ public class HtmlForm extends ClickableElement {
 
     /**
      * Reset this form to its initial values.
-     * @return The page that is loaded at the end of calling this method.  Typically this
+     * @return The page that is loaded at the end of calling this method. Typically this
      * will be the same page that had been loaded previously but since JavaScript might
      * have run, this isn't guaranteed.
      */
@@ -490,7 +490,7 @@ public class HtmlForm extends ClickableElement {
     }
 
     /**
-     * Returns the first checked radio button with the specified name.  If none of
+     * Returns the first checked radio button with the specified name. If none of
      * the radio buttons by that name are checked then return null.
      *
      * @param name The name of the radio button

@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 /**
- * Intermediate base class for "styled" HTML elements.  As defined
+ * Intermediate base class for "styled" HTML elements. As defined
  * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation,
  * this class is a base class for all HTML elements except these:
  * base, basefont, head, html, meta, param, script, style and title.

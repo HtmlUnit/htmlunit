@@ -488,7 +488,7 @@ public final class WebAssert {
     }
 
     /**
-     * Assert that the specified parameter is not null.  Throw a NullPointerException
+     * Assert that the specified parameter is not null. Throw a NullPointerException
      * if a null is found.
      * @param description The description to pass into the NullPointerException
      * @param object The object to check for null.

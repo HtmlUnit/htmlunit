@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A handler for JavaScript alerts.  Alerts are triggered when the JavaScript method Window.alert()
+ * A handler for JavaScript alerts. Alerts are triggered when the JavaScript method Window.alert()
  * is called.
  *
  * @version $Revision$

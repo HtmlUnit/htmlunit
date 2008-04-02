@@ -122,7 +122,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Returns the value of the specified attribute or an empty string.  If the
+     * Returns the value of the specified attribute or an empty string. If the
      * result is an empty string then it will be {@link #ATTRIBUTE_NOT_DEFINED}
      *
      * @param attributeName the name of the attribute
@@ -242,7 +242,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Create an attribute map as needed by HtmlElement.  This is just used by the element factories.
+     * Create an attribute map as needed by HtmlElement. This is just used by the element factories.
      * @param attributeCount the initial number of attributes to be added to the map.
      * @return the attribute map.
      */
@@ -252,7 +252,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Add an attribute to the attribute map.  This is just used by the element factories.
+     * Add an attribute to the attribute map. This is just used by the element factories.
      * @param attributeMap the attribute map where the attribute will be added.
      * @param namespaceURI the URI that identifies an XML namespace.
      * @param qualifiedName The qualified name of the attribute

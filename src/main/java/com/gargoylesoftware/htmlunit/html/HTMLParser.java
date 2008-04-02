@@ -171,7 +171,7 @@ public final class HTMLParser {
 
     /**
      * Sets the flag to control validation of the HTML content that is outside of the
-     * BODY and HTML tags.  This flag is false by default to maintain compatibility with
+     * BODY and HTML tags. This flag is false by default to maintain compatibility with
      * current NekoHTML defaults.
      * @param ignoreOutsideContent - boolean flag to set
      */

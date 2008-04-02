@@ -51,7 +51,7 @@ public class HTMLFrameElement extends HTMLElement {
     private static final long serialVersionUID = 3761121622400448304L;
 
     /**
-     * Create an instance.  A default constructor is required for all JavaScript objects.
+     * Create an instance. A default constructor is required for all JavaScript objects.
      */
     public HTMLFrameElement() {
     }

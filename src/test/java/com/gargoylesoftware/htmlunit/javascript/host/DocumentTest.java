@@ -2079,7 +2079,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test the access to the images value.  This should return the 2 images in the document
+     * Test the access to the images value. This should return the 2 images in the document
      * @throws Exception if the test fails
      */
     @Test
@@ -2231,7 +2231,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * Test the ReadyState.  This should only work in IE
+     * Test the ReadyState. This should only work in IE
      *
      * @throws Exception if the test fails
      */

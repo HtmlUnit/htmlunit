@@ -99,7 +99,7 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
     }
 
     /**
-     * Sets the opener property.  This is the WebWindow that caused this new window to be opened.
+     * Sets the opener property. This is the WebWindow that caused this new window to be opened.
      * @param opener The new opener
      */
     public void setOpener(final WebWindow opener) {
@@ -107,7 +107,7 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
     }
 
     /**
-     * Returns the opener property.  This is the WebWindow that caused this new window to be opened.
+     * Returns the opener property. This is the WebWindow that caused this new window to be opened.
      * @return The opener
      */
     public WebWindow getOpener() {

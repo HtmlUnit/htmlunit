@@ -51,12 +51,12 @@ public class History extends SimpleScriptable {
     private static final long serialVersionUID = -285158453206844475L;
 
     /**
-     * Create an instance.  JavaScript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public History() { }
 
     /**
-     * Returns the "length" property.  Currently hardcoded to return 0.
+     * Returns the "length" property. Currently hardcoded to return 0.
      * @return the "length" property
      */
     public int jsxGet_length() {
@@ -65,21 +65,21 @@ public class History extends SimpleScriptable {
     }
 
     /**
-     * JavaScript function "back".  Currently not implemented
+     * JavaScript function "back". Currently not implemented
      */
     public void jsxFunction_back() {
         getLog().debug("javascript: history.back() not implemented yet");
     }
 
     /**
-     * JavaScript function "forward".  Currently not implemented
+     * JavaScript function "forward". Currently not implemented
      */
     public void jsxFunction_forward() {
         getLog().debug("javascript: history.forward() not implemented yet");
     }
 
     /**
-     * JavaScript function "go".  Currently not implemented
+     * JavaScript function "go". Currently not implemented
      * @param relativeUrl The relative URL
      */
     public void jsxFunction_go(final String relativeUrl) {

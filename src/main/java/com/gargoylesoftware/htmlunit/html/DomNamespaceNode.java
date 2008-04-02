@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
- * Intermediate base class for DOM Nodes that have namespaces.  That includes HtmlElement
+ * Intermediate base class for DOM Nodes that have namespaces. That includes HtmlElement
  * and HtmlAttr.
  *
  * @version $Revision$

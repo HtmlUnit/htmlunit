@@ -45,7 +45,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * Objects of this class represent one specific version of a given browser.  Predefined
+ * Objects of this class represent one specific version of a given browser. Predefined
  * constants are provided for common browser versions.
  *
  * If you wish to create a BrowserVersion for a browser that doesn't have a constant defined

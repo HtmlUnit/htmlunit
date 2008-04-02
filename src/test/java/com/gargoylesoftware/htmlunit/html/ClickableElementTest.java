@@ -62,7 +62,7 @@ public class ClickableElementTest extends WebTestCase {
      * Full page driver for onClick tests.
      *
      * @param htmlContent HTML fragment for body of page with clickable element
-     * identified by clickId ID attribute.  Must have onClick that raises
+     * identified by clickId ID attribute. Must have onClick that raises
      * an alert of "foo".
      * @throws Exception if the test fails
      */

@@ -166,13 +166,13 @@ public class Document extends EventNode {
     }
 
     /**
-     * Create an instance.  JavaScript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public Document() {
     }
 
     /**
-     * JavaScript constructor.  This must be declared in every JavaScript file because
+     * JavaScript constructor. This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
      */
     public void jsConstructor() {
@@ -440,7 +440,7 @@ public class Document extends EventNode {
                                 scriptTagCount++;
                             }
                             else if (scriptTagCount > 0) {
-                                // Ignore extra close tags for now.  Let the
+                                // Ignore extra close tags for now. Let the
                                 // parser deal with them.
                                 scriptTagCount--;
                             }
@@ -1281,8 +1281,8 @@ public class Document extends EventNode {
      * Implementation of the <tt>createEventObject</tt> method supported by Internet Explorer.
      *
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536390.aspx">MSDN Documentation</a>
-     * @return An instance of the event object.  The event object will NOT have its
-     *         member variables initialized.  It is up to the caller of the method to initialize
+     * @return An instance of the event object. The event object will NOT have its
+     *         member variables initialized. It is up to the caller of the method to initialize
      *         the properties of the event.
      */
     public Event jsxFunction_createEventObject() {

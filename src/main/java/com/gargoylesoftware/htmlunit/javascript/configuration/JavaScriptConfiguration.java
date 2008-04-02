@@ -134,7 +134,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Reset the this class to it's initial state.  This method is
+     * Reset the this class to it's initial state. This method is
      * used for testing only.
      *
      */
@@ -218,7 +218,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Returns the configuration that has all entries.  No constraints are put on the returned entries.
+     * Returns the configuration that has all entries. No constraints are put on the returned entries.
      *
      * @return The instance containing all entries from the configuration file.
      */
@@ -412,7 +412,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Test for the browser and JavaScript constraints.  Returns true if any constraints are present
+     * Test for the browser and JavaScript constraints. Returns true if any constraints are present
      * and the browser does not meet the constraints.
      * @param element The element to scan the children of
      * @return true to exclude this element
@@ -542,7 +542,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Returns the class for the given class name.
-     * @param classname The classname that you want the implementing class for.  For testing only.
+     * @param classname The classname that you want the implementing class for. For testing only.
      * @return Class
      */
     protected Class< ? > getClassObject(final String classname) {
@@ -689,7 +689,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Returns the classname that the given class implements.  If the class is
+     * Returns the classname that the given class implements. If the class is
      * the input class, then the name is extracted from the type that the Input class
      * is masquerading as.
      * FIXME - Implement the Input class processing
@@ -706,7 +706,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Returns an immutable map containing the HTML to JavaScript mappings.  Keys are
+     * Returns an immutable map containing the HTML to JavaScript mappings. Keys are
      * java classes for the various HTML classes (ie HtmlInput.class) and the values
      * are the JavaScript class names (ie "HTMLAnchorElement").
      * @return the mappings

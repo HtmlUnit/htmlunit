@@ -224,7 +224,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * _blank is a magic name.  If we call open(url, '_blank') then a new
+     * _blank is a magic name. If we call open(url, '_blank') then a new
      * window must be loaded.
      * @throws Exception If the test fails
      */
@@ -290,7 +290,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * _self is a magic name.  If we call open(url, '_self') then the current window must be
+     * _self is a magic name. If we call open(url, '_self') then the current window must be
      * reloaded.
      * @throws Exception If the test fails.
      */
@@ -334,7 +334,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * _top is a magic name.  If we call open(url, '_top') then the top level
+     * _top is a magic name. If we call open(url, '_top') then the top level
      * window must be reloaded.
      * @throws Exception If the test fails.
      */
@@ -401,7 +401,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * _parent is a magic name.  If we call open(url, '_parent') then the
+     * _parent is a magic name. If we call open(url, '_parent') then the
      * parent window must be reloaded.
      * @throws Exception If the test fails.
      */
@@ -1058,7 +1058,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Variables that are defined inside JavaScript should be accessible through the
-     * window object (ie window.myVariable).  Test that this works.
+     * window object (ie window.myVariable). Test that this works.
      * @throws Exception If the test fails.
      */
     @Test
@@ -1077,7 +1077,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Variables that are defined inside JavaScript should be accessible through the
-     * window object (ie window.myVariable).  Test that this works.
+     * window object (ie window.myVariable). Test that this works.
      * @throws Exception If the test fails.
      */
     @Test
@@ -1128,7 +1128,7 @@ public class WindowTest extends WebTestCase {
     
     /**
      * Variables that are defined inside JavaScript should be accessible through the
-     * window object (ie window.myVariable).  Test that this works.
+     * window object (ie window.myVariable). Test that this works.
      * @throws Exception If the test fails.
      */
     @Test

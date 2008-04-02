@@ -48,8 +48,8 @@ import junit.framework.TestSuite;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * <p>Tests for all the generated attribute accessors.  This test case will
- * dynamically generate tests for all the various attributes.  The code
+ * <p>Tests for all the generated attribute accessors. This test case will
+ * dynamically generate tests for all the various attributes. The code
  * is fairly complicated but doing it this way is much easier than writing
  * individual tests for all the attributes.
  * </p>
@@ -172,7 +172,7 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Create an instance of the test.  This will test one specific attribute
+     * Create an instance of the test. This will test one specific attribute
      * on one specific class.
      * @param attributeName The name of the attribute to test.
      * @param classUnderTest The class containing the attribute.

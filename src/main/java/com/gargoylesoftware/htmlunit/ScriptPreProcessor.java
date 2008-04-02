@@ -52,7 +52,7 @@ public interface ScriptPreProcessor {
      * Pre process the specified source code in the context of the given page.
      * @param htmlPage The page
      * @param sourceCode The code to execute.
-     * @param sourceName A name for the chunk of code that is going to be executed.  This will be
+     * @param sourceName A name for the chunk of code that is going to be executed. This will be
      * used in error messages.
      * @param htmlElement The HTML element that will act as the context.
      * @return The source code after pre processing

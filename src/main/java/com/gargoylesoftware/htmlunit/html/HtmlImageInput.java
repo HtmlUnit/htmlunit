@@ -110,8 +110,8 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     * Submit the form that contains this input.  Only a couple of the inputs
-     * support this method so it is made protected here.  Those subclasses
+     * Submit the form that contains this input. Only a couple of the inputs
+     * support this method so it is made protected here. Those subclasses
      * that wish to expose it will override and make it public.
      *
      * @return The Page that is the result of submitting this page to the server
@@ -124,8 +124,8 @@ public class HtmlImageInput extends HtmlInput {
 
     /**
      * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true.  This is the default behavior of clicking
-     * the element.  The default implementation returns the current page - subclasses
+     * but the result of that handler was true. This is the default behavior of clicking
+     * the element. The default implementation returns the current page - subclasses
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
@@ -146,7 +146,7 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     * Simulate clicking this input with a pointing device.  The x and y coordinates
+     * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
      * @param x The x coordinate of the pointing device at the time of clicking

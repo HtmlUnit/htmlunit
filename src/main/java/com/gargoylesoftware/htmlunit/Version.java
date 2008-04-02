@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Class to display version information about HtmlUnit.  This is the class
+ * Class to display version information about HtmlUnit. This is the class
  * that will be executed if the jar file is run.
  *
  * @version $Revision$

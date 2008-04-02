@@ -381,7 +381,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * From the HTTP spec:  Note: RFC 1945 and RFC 2068 specify that the client
-     * is not allowed to change the method on the redirected request.  However,
+     * is not allowed to change the method on the redirected request. However,
      * most existing user agent implementations treat 302 as if it were a 303
      * response, performing a GET on the Location field-value regardless
      * of the original request method. The status codes 303 and 307 have
@@ -422,7 +422,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Tests a 303 redirection code.  This should be the same as a 302.
+     * Tests a 303 redirection code. This should be the same as a 302.
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -1048,7 +1048,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Returns a loaded page for one of the keyboard tests.
      * @param webClient the WebClient to load the page from.
-     * @param tabIndexValues The tab index values.  One input will be created for each item
+     * @param tabIndexValues The tab index values. One input will be created for each item
      * in this list.
      * @return The loaded page.
      * @throws Exception If something goes wrong.
@@ -1392,7 +1392,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Apparently if the browsers receive a charset that they don't understand, they ignore
-     * it and assume ISO-8895-1.  Ensure we do the same.
+     * it and assume ISO-8895-1. Ensure we do the same.
      * @throws Exception If the test fails.
      */
     @Test
@@ -1413,7 +1413,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Colons are legal in the path of a URL but {@link WebClient#expandUrl(URL,String)} was
-     * blowing up on this case.  Ensure it's fixed.
+     * blowing up on this case. Ensure it's fixed.
      * @throws Exception If the test fails.
      */
     @Test

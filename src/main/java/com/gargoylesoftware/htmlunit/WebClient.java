@@ -375,7 +375,7 @@ public class WebClient implements Serializable {
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
      *
      * @param opener The web window that initiated the request.
-     * @param target The name of the window to be opened.  This is the name that would
+     * @param target The name of the window to be opened. This is the name that would
      * be passed into the JavaScript open() method.
      * @param params Any parameters
      * @return The new page.
@@ -429,7 +429,7 @@ public class WebClient implements Serializable {
 
     /**
      * Use the specified WebResponse to create a Page object which will then
-     * get inserted into the WebWindow.  All initialization and event notification
+     * get inserted into the WebWindow. All initialization and event notification
      * will be handled here.
      *
      * @param webResponse The response that will be used to create the new page.
@@ -815,7 +815,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns the "current" window for this client.  This is the window that will be used
+     * Returns the "current" window for this client. This is the window that will be used
      * when getPage() is called without specifying a window.
      * @return The current window.
      */
@@ -824,7 +824,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the current window for this client.  This is the window that will be used when
+     * Sets the current window for this client. This is the window that will be used when
      * getPage() is called without specifying a window.
      * @param window The new window.
      */
@@ -834,7 +834,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns the "first" window for this client.  This is the first window
+     * Returns the "first" window for this client. This is the first window
      * opened since pushClearFirstWindow() was last called.
      * @return The first window.
      */
@@ -854,7 +854,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Adds a listener for WebWindowEvent's.  All events from all windows associated with this
+     * Adds a listener for WebWindowEvent's. All events from all windows associated with this
      * client will be sent to the specified listener.
      * @param listener A listener.
      */
@@ -891,7 +891,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Open a new window with the specified name.  If the URL is non-null then attempt to load
+     * Open a new window with the specified name. If the URL is non-null then attempt to load
      * a page from that location and put it in the new window.
      *
      * @param url The URL to load content from or null if no content is to be loaded.
@@ -904,7 +904,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Open a new window with the specified name.  If the URL is non-null then attempt to load
+     * Open a new window with the specified name. If the URL is non-null then attempt to load
      * a page from that location and put it in the new window.
      *
      * @param url The URL to load content from or null if no content is to be loaded.
@@ -934,9 +934,9 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Open the window with the specified name.  The name may be a special
-     * target name of _self, _parent, _top, or _blank.  An empty or null
-     * name is set to the default.  The special target names are relative to
+     * Open the window with the specified name. The name may be a special
+     * target name of _self, _parent, _top, or _blank. An empty or null
+     * name is set to the default. The special target names are relative to
      * the opener window.
      *
      * @param opener The web window that is calling openWindow
@@ -1031,7 +1031,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets the object that will be used to create pages.  Set this if you want
+     * Sets the object that will be used to create pages. Set this if you want
      * to customize the type of page that is returned for a given content type.
      *
      * @param pageCreator The new page creator

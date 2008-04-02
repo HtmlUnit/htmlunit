@@ -210,7 +210,7 @@ public class HtmlTable extends ClickableElement {
     }
 
     /**
-     * Returns a list of tables bodies defined in this table.  If no bodies were defined
+     * Returns a list of tables bodies defined in this table. If no bodies were defined
      * then an empty list will be returned.
      *
      * @return A list of {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody} objects.

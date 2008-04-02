@@ -51,7 +51,7 @@ public class CharacterDataImpl extends Node {
     private static final long serialVersionUID = 5413850371617638797L;
 
     /**
-     * Create an instance.  JavaScript objects must have a default constructor.
+     * Create an instance. JavaScript objects must have a default constructor.
      */
     public CharacterDataImpl() {
     }
