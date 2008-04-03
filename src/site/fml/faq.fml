@@ -11,7 +11,7 @@
 					The best way is to open a bug report in the
 					<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
 					tracking database</a>.  Sending a bug report to the mailing list runs the risk that the
-					bug may get lost.  Putting it in the bug database guarentees that it won't.  Please
+					bug may get lost. Putting it in the bug database guarantees that it won't. Please
 					search the bug database to see if your bug hasn't already been reported before opening
 					a new one.
 				</p>
@@ -23,13 +23,13 @@
 
 		<faq id="HowToRequestAFeature">
 			<question>
-				HtmlUnit doesn't support feature X.  How do I request this feature?
+				HtmlUnit doesn't support feature X. How do I request this feature?
 			</question>
 			<answer>
 				<p>
 					The best way is to open a bug report in the
 					<a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
-					tracking database</a>.  See the answer on bug reporting for why the database is preferred.
+					tracking database</a>. See the answer on bug reporting for why the database is preferred.
 				</p>
 				<p>
 					If you're willing to write the feature yourself, you can always send us a patch.
@@ -83,8 +83,8 @@
 			</question>
 			<answer>
 				<p>
-					HtmlUnit relies on <a href="http://jakarta.apache.org/commons/httpclient/3.0/index.html">commons-httpclient 3.0</a> for Cookie handling. 
-					The odds are pretty good that whatever cookie problems you're encountering already have a solution as explained in the <a href="http://jakarta.apache.org/commons/httpclient/3.0/cookies.html">Cookie Guide</a>.
+					HtmlUnit relies on <a href="http://hc.apache.org/httpclient-3.x/index.html">commons-httpclient 3.1</a> for Cookie handling. 
+					The odds are pretty good that whatever cookie problems you're encountering already have a solution as explained in the <a href="http://hc.apache.org/httpclient-3.x/cookies.html">Cookie Guide</a>.
 					If that doesn't help then post something to the HtmlUnit mailing list.
 				</p>
 			</answer>
@@ -104,7 +104,7 @@ INFO: Redirect requested but followRedirects is disabled
 				</p>
 				<p>
 					For a variety of reasons, I handle the redirection logic inside HtmlUnit rather than letting
-					commons-httpclient handle it for me.  It's commons-httpclient that is displaying that message
+					commons-httpclient handle it for me. It's commons-httpclient that is displaying that message
 					because I have explicitly disabled its redirection support.
 				</p>
 				<p>
