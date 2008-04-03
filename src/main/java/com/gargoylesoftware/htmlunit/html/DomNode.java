@@ -719,10 +719,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public String asXml() {
         String charsetName = null;
         if (getPage() instanceof HtmlPage) {
-            final String encoding = ((HtmlPage) getPage()).getPageEncoding();
-            if (!encoding.equals("ISO-8859-1")) {
-                charsetName = encoding;
-            }
+            charsetName = ((HtmlPage) getPage()).getPageEncoding();
         }
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);

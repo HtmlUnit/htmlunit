@@ -1074,7 +1074,11 @@ public class HtmlPageTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        assertEquals(htmlContent, page.asXml().replaceAll("\\s", ""));
+        String xml = page.asXml();
+        final String prefix = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
+        assertTrue(xml.startsWith(prefix));
+        xml = xml.substring(prefix.length());
+        assertEquals(htmlContent, xml.replaceAll("\\s", ""));
     }
         
     /**
@@ -1097,7 +1101,11 @@ public class HtmlPageTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
 
-        assertEquals(html, page.asXml()
+        String xml = page.asXml();
+        final String prefix = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
+        assertTrue(xml.startsWith(prefix));
+        xml = xml.substring(prefix.length());
+        assertEquals(html, xml
                 .replaceAll("[\\n\\r]", "")
                 .replaceAll("\\s\\s+", "")
                 .replaceAll("\"", "'"));
