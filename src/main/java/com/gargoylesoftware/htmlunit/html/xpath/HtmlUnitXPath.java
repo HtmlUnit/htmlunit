@@ -65,7 +65,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @deprecated As of 2.0, please use {@link DomNode#getByXPath(String)} instead.
  */
+//should be package-private
 public class HtmlUnitXPath {
 
     /**
