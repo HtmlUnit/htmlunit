@@ -63,7 +63,7 @@ import org.apache.xpath.res.XPATHErrorResources;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-class XPath {
+class XPathAdapter {
     private Expression mainExp_;
 
     private transient FunctionTable funcTable_;
@@ -91,7 +91,7 @@ class XPath {
      * @param errorListener the error listener, or <tt>null</tt> if default should be used
      * @throws TransformerException if a syntax or other error occurs
      */
-    XPath(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
+    XPathAdapter(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
             final int type, ErrorListener errorListener) throws TransformerException {
         initFunctionTable();
         if (errorListener == null) {
