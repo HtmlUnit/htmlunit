@@ -52,13 +52,18 @@ import java.util.TreeSet;
 import org.apache.commons.lang.ClassUtils;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -75,6 +80,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class SimpleScriptableTest extends WebTestCase {
 
     /**
@@ -82,7 +88,7 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     @Test
     public void callInheritedFunction() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection(client);
 
         final String content
@@ -119,6 +125,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * Test.
      */
     @Test
+    @Browsers(Browser.NONE)
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
             JavaScriptConfiguration.getHtmlJavaScriptMapping();
@@ -205,16 +212,14 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     public void setNonWritableProperty() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String content
             = "<html><head><title>foo</title></head><body onload='document.body=123456'>"
             + "</body></html>";
 
         try {
-            loadPage(content);
+            loadPage(getBrowserVersion(), content, null);
             fail("Exception should have been thrown");
         }
         catch (final ScriptException e) {
@@ -227,26 +232,25 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("[object Object]")
     public void arguments_toString() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(arguments);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object Object]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("3")
     public void stringWithExclamationMark() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var x = '<!>';\n"
             + "    alert(x.length);\n"
@@ -254,11 +258,9 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"3"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
+
     /**
      * Test the host class names match the Firefox (w3c names).
      * @see <a
@@ -266,10 +268,9 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails.
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
+    @NotYetImplemented
     public void hostClassNames() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         testHostClassNames("HTMLAnchorElement");
     }
 
@@ -283,7 +284,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
         final String[] expectedAlerts = {'[' + className + ']'};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -292,11 +293,10 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "x1", "x2", "x3", "x4", "x5" })
+    @NotYetImplemented
     public void arrayedMap() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var map = {};\n"
             + "    map['x1'] = 'y1';\n"
@@ -311,16 +311,14 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"x1", "x2", "x3", "x4", "x5"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
     public void isParentOf() throws Exception {
         isParentOf("Node", "Element", true);
         isParentOf("Document", "XMLDocument", true);
@@ -351,7 +349,7 @@ public class SimpleScriptableTest extends WebTestCase {
 
         final String[] expectedAlerts = {Boolean.toString(status)};
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
+        loadPage(getBrowserVersion(), html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -359,6 +357,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
     public void windowPropertyToString() throws Exception {
         final String content = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -371,7 +370,7 @@ public class SimpleScriptableTest extends WebTestCase {
         final String[] expectedAlerts = {"[object HTMLHtmlElement]", "[HTMLHtmlElement]"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
+        loadPage(getBrowserVersion(), content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -380,13 +379,8 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = "false", FF = "true")
     public void parentProtoFeature() throws Exception {
-        parentProtoFeature(BrowserVersion.INTERNET_EXPLORER_7_0, new String[] {"false"});
-        parentProtoFeature(BrowserVersion.FIREFOX_2, new String[] {"true"});
-    }
-
-    private void parentProtoFeature(final BrowserVersion browserVersion, final String[] expectedAlerts)
-        throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -395,8 +389,6 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 }
