@@ -9,7 +9,7 @@
         <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
             <action type="update" dev="asashour">
                 Deprecate DomNode non-DOM methods, i.e. getLastDomChild(), getParentDomNode(), getPreviousSibling(),
-                getNextDomSibling(), getFirstDomChild(), cloneDomNode().
+                getNextDomSibling(), getFirstDomChild() and cloneDomNode().
             </action>
             <action type="update" dev="asashour">
                 Deprecate HtmlUnitXPath.
