@@ -256,15 +256,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node getLastChild() {
-        return getLastDomChild();
-    }
-
-    /**
-     * Returns this node's last child node, or <tt>null</tt> if this node doesn't have any children.
-     * @return this node's last child node, or <tt>null</tt> if this node doesn't have any children
-     */
-    public DomNode getLastDomChild() {
+    public DomNode getLastChild() {
         if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
             return firstChild_.previousSibling_;
@@ -275,18 +267,28 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns this node's last child node, or <tt>null</tt> if this node doesn't have any children.
+     * @return this node's last child node, or <tt>null</tt> if this node doesn't have any children
+     * @deprecated As of 2.0, please use {@link #getLastChild()} instead.
+     */
+    public DomNode getLastDomChild() {
+        return getLastChild();
+    }
+
+    /**
      * {@inheritDoc}
      */
     public DomNode getParentNode() {
-        return getParentDomNode();
+        return parent_;
     }
 
     /**
      * Returns this node's parent node, or <tt>null</tt> if this is the root node.
      * @return this node's parent node, or <tt>null</tt> if this is the root node
+     * @deprecated As of 2.0, please use {@link #getParentNode()} instead.
      */
     public DomNode getParentDomNode() {
-        return parent_;
+        return getParentNode();
     }
 
     /**
@@ -300,15 +302,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node getPreviousSibling() {
-        return getPreviousDomSibling();
-    }
-
-    /**
-     * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
-     * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
-     */
-    public DomNode getPreviousDomSibling() {
+    public DomNode getPreviousSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
             return null;
@@ -319,33 +313,44 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
+     * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
+     * @deprecated As of 2.0, please use {@link #getPreviousSibling()} instead.
+     */
+    public DomNode getPreviousDomSibling() {
+        return getPreviousSibling();
+    }
+
+    /**
      * {@inheritDoc}
      */
-    public Node getNextSibling() {
-        return getNextDomSibling();
+    public DomNode getNextSibling() {
+        return nextSibling_;
     }
 
     /**
      * Returns this node's next sibling node, or <tt>null</tt> if this node is its parent's last child.
      * @return this node's next sibling node, or <tt>null</tt> if this node is its parent's last child
+     * @deprecated As of 2.0, please use {@link #getNextSibling()} instead.
      */
     public DomNode getNextDomSibling() {
-        return nextSibling_;
+        return getNextSibling();
     }
 
     /**
      * {@inheritDoc}
      */
-    public Node getFirstChild() {
-        return getFirstDomChild();
+    public DomNode getFirstChild() {
+        return firstChild_;
     }
 
     /**
      * Returns this node's first child node, or <tt>null</tt> if this node does not have any children.
      * @return this node's first child node, or <tt>null</tt> if this node does not have any children
+     * @deprecated As of 2.0, please use {@link #getFirstChild()} instead.
      */
     public DomNode getFirstDomChild() {
-        return firstChild_;
+        return getFirstChild();
     }
 
     /**
@@ -773,19 +778,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node cloneNode(final boolean deep) {
-        return cloneDomNode(deep);
-    }
-
-    /**
-     * Makes a clone of this node.
-     *
-     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
-     * below this one. Otherwise, the new node will not have any children. The page reference
-     * will always be the same as this node's.
-     * @return a new node
-     */
-    public DomNode cloneDomNode(final boolean deep) {
+    public DomNode cloneNode(final boolean deep) {
         final DomNode newnode;
         try {
             newnode = (DomNode) clone();
@@ -807,6 +800,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
         }
         return newnode;
+    }
+
+    /**
+     * Makes a clone of this node.
+     *
+     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
+     * below this one. Otherwise, the new node will not have any children. The page reference
+     * will always be the same as this node's.
+     * @return a new node
+     * @deprecated As of 2.0, please use {@link #cloneNode()} instead.
+     */
+    public DomNode cloneDomNode(final boolean deep) {
+        return cloneNode(deep);
     }
 
     /**
@@ -832,36 +838,38 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node appendChild(final Node node) {
-        return appendDomChild((DomNode) node);
-    }
-
-    /**
-     * Appends a child node to this node.
-     * @param node the node to append
-     * @return the node added
-     */
-    public DomNode appendDomChild(final DomNode node) {
-        if (node instanceof DomDocumentFragment) {
-            final DomDocumentFragment fragment = (DomDocumentFragment) node;
+    public DomNode appendChild(final Node node) {
+        final DomNode domNode = (DomNode) node;
+        if (domNode instanceof DomDocumentFragment) {
+            final DomDocumentFragment fragment = (DomDocumentFragment) domNode;
             for (final DomNode child : fragment.getChildren()) {
                 appendDomChild(child);
             }
         }
         else {
             // clean up the new node, in case it is being moved
-            if (node != this && node.getParentNode() != null) {
-                node.remove();
+            if (domNode != this && domNode.getParentNode() != null) {
+                domNode.remove();
             }
             // move the node
-            basicAppend(node);
+            basicAppend(domNode);
             // trigger events
             if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
-                ((HtmlPage) getPage()).notifyNodeAdded(node);
+                ((HtmlPage) getPage()).notifyNodeAdded(domNode);
             }
-            fireNodeAdded(this, node);
+            fireNodeAdded(this, domNode);
         }
-        return node;
+        return domNode;
+    }
+
+    /**
+     * Appends a child node to this node.
+     * @param node the node to append
+     * @return the node added
+     * @deprecated As of 2.0, please use {@link #appendChild()} instead.
+     */
+    public DomNode appendDomChild(final DomNode node) {
+        return appendChild(node);
     }
 
     /**
