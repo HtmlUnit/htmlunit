@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
+final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
     /**
      * Creates a new instance.
