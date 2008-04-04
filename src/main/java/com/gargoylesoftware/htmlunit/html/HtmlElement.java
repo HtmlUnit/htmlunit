@@ -157,17 +157,8 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     @Override
-    public Node cloneNode(final boolean deep) {
-        return cloneDomNode(deep);
-    }
-
-    /**
-     * Overrides {@link DomNode#cloneDomNode(boolean)} so clone gets its own Map of attributes.
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneDomNode(final boolean deep) {
-        final HtmlElement newNode = (HtmlElement) super.cloneDomNode(deep);
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
         newNode.attributes_ = createAttributeMap(attributes_.size());
         for (final HtmlAttr attr : attributes_.values()) {
             newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue());

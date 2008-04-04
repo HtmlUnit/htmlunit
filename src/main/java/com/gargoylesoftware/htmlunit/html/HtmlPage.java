@@ -1935,8 +1935,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Override cloneNode to add cloned elements to the clone, not to the original.
      */
     @Override
-    public org.w3c.dom.Node cloneNode(final boolean deep) {
-        final HtmlPage result = (HtmlPage) super.cloneDomNode(deep);
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlPage result = (HtmlPage) super.cloneNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s
             for (final HtmlElement child : result.getAllHtmlChildElements()) {

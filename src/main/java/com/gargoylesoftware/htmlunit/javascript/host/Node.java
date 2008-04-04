@@ -195,7 +195,7 @@ public class Node extends SimpleScriptable {
      */
     public Object jsxFunction_cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
-        final DomNode clonedNode = domNode.cloneDomNode(deep);
+        final DomNode clonedNode = domNode.cloneNode(deep);
         return getJavaScriptNode(clonedNode);
     }
 

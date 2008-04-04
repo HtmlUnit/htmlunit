@@ -1407,7 +1407,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlElement id1 = (HtmlElement) page.getDocumentHtmlElement().getLastChild().getLastChild();
         assertEquals("id1", id1.getId());
         assertSame(id1, page.getHtmlElementById("id1"));
-        final HtmlPage clone = (HtmlPage) page.cloneDomNode(true);
+        final HtmlPage clone = (HtmlPage) page.cloneNode(true);
         assertSame(id1, page.getHtmlElementById("id1"));
         final HtmlElement id1clone = (HtmlElement) clone.getDocumentHtmlElement().getLastChild().getLastChild();
         assertNotSame(id1, id1clone);
@@ -1439,7 +1439,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
-        final HtmlPage clone = (HtmlPage) page.cloneDomNode(true);
+        final HtmlPage clone = (HtmlPage) page.cloneNode(true);
         assertTrue(page != clone);
         final HtmlElement doc = page.getDocumentHtmlElement();
         final HtmlElement docclone = clone.getDocumentHtmlElement();

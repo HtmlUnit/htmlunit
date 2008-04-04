@@ -315,6 +315,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
      * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
+     * @deprecated As of 2.0, please use {@link #getPreviousSibling()} instead.
      */
     public DomNode getPreviousDomSibling() {
         return getPreviousSibling();
@@ -613,7 +614,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (isTrimmedText()) {
             text = text.trim();
         }
-        
         return text;
     }
 
@@ -777,19 +777,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node cloneNode(final boolean deep) {
-        return cloneDomNode(deep);
-    }
-
-    /**
-     * Makes a clone of this node.
-     *
-     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
-     * below this one. Otherwise, the new node will not have any children. The page reference
-     * will always be the same as this node's.
-     * @return a new node
-     */
-    public DomNode cloneDomNode(final boolean deep) {
+    public DomNode cloneNode(final boolean deep) {
         final DomNode newnode;
         try {
             newnode = (DomNode) clone();
@@ -807,10 +795,23 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         // if deep, clone the kids too.
         if (deep) {
             for (DomNode child = firstChild_; child != null; child = child.nextSibling_) {
-                newnode.appendDomChild(child.cloneDomNode(true));
+                newnode.appendDomChild(child.cloneNode(true));
             }
         }
         return newnode;
+    }
+
+    /**
+     * Makes a clone of this node.
+     *
+     * @param deep if <code>true</code>, the clone will be propagated to the whole subtree
+     * below this one. Otherwise, the new node will not have any children. The page reference
+     * will always be the same as this node's.
+     * @return a new node
+     * @deprecated As of 2.0, please use {@link #cloneNode()} instead.
+     */
+    public DomNode cloneDomNode(final boolean deep) {
+        return cloneNode(deep);
     }
 
     /**

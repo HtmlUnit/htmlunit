@@ -89,7 +89,7 @@ public class HtmlTableRowTest extends WebTestCase {
         row_ = table_.getRow(0);
         cell_ = row_.getCell(0);
 
-        rowClone_ = (HtmlTableRow) row_.cloneDomNode(true);
+        rowClone_ = (HtmlTableRow) row_.cloneNode(true);
         cellClone_ = rowClone_.getCell(0);
     }
 
