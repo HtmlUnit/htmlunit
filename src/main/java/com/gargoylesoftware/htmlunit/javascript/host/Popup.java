@@ -87,10 +87,10 @@ public class Popup extends SimpleScriptable {
         popupPseudoWindow.setEnclosedPage(popupPage);
         final HtmlHtml html = (HtmlHtml) HTMLParser.getFactory(HtmlHtml.TAG_NAME).createElement(
                 popupPage, HtmlHtml.TAG_NAME, null);
-        popupPage.appendDomChild(html);
+        popupPage.appendChild(html);
         final HtmlBody body = (HtmlBody) HTMLParser.getFactory(HtmlBody.TAG_NAME).createElement(
                 popupPage, HtmlBody.TAG_NAME, null);
-        html.appendDomChild(body);
+        html.appendChild(body);
 
         document_.setDomNode(popupPage);
     }

@@ -191,7 +191,7 @@ public class XSLTProcessor extends SimpleScriptable {
         }
         else {
             final DomText text = new DomText(parent.getPage(), (String) result);
-            parent.appendDomChild(text);
+            parent.appendChild(text);
         }
     }
 

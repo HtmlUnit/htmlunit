@@ -125,7 +125,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         final DomText child = (DomText) getFirstChild();
         if (child == null) {
             final DomText newChild = new DomText(getPage(), newValue);
-            appendDomChild(newChild);
+            appendChild(newChild);
         }
         else {
             child.setData(newValue);

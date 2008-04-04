@@ -117,7 +117,7 @@ public class HTMLTableRowElement extends HTMLElement {
         if (indexValid) {
             final HtmlElement newCell = htmlRow.getPage().createHtmlElement("td");
             if (position == -1 || position == htmlRow.getCells().size()) {
-                htmlRow.appendDomChild(newCell);
+                htmlRow.appendChild(newCell);
             }
             else {
                 htmlRow.getCell(position).insertBefore(newCell);

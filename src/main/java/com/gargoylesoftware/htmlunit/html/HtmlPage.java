@@ -1134,7 +1134,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 head.getFirstChild().insertBefore(titleElement);
             }
             else {
-                head.appendDomChild(titleElement);
+                head.appendChild(titleElement);
             }
         }
 

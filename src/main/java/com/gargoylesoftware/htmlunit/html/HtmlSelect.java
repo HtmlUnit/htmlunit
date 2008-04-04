@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -238,16 +239,15 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @param newOption The new option to add
      */
     public void appendOption(final HtmlOption newOption) {
-        appendDomChild(newOption);
+        appendChild(newOption);
     }
 
     /**
      * {@inheritDoc}
-     * @see DomNode#appendDomChild(DomNode)
      */
     @Override
-    public DomNode appendDomChild(final DomNode node) {
-        final DomNode response = super.appendDomChild(node);
+    public DomNode appendChild(final Node node) {
+        final DomNode response = super.appendChild(node);
         if (node instanceof HtmlOption) {
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {

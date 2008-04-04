@@ -40,6 +40,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
+import org.w3c.dom.Node;
+
 import com.gargoylesoftware.htmlunit.Page;
 
 /**
@@ -250,8 +252,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    public DomNode appendDomChild(final DomNode node) {
-        final DomNode addedNode = super.appendDomChild(node);
+    public DomNode appendChild(final Node node) {
+        final DomNode addedNode = super.appendChild(node);
 
         // default value is the text of the option
         // see http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION

@@ -152,7 +152,7 @@ public final class XmlUtil {
      */
     public static void appendChild(final Page page, final DomNode parent, final Node child) {
         final DomNode childXml = createFrom(page, child);
-        parent.appendDomChild(childXml);
+        parent.appendChild(childXml);
         copy(page, child, childXml);
     }
 
@@ -201,23 +201,23 @@ public final class XmlUtil {
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
                     final DomNode childXml = createFrom(page, child);
-                    dest.appendDomChild(childXml);
+                    dest.appendChild(childXml);
                     copy(page, child, childXml);
                     break;
 
                 case Node.TEXT_NODE:
                     final DomText text = new DomText(page, child.getNodeValue());
-                    dest.appendDomChild(text);
+                    dest.appendChild(text);
                     break;
 
                 case Node.CDATA_SECTION_NODE:
                     final DomCData cdata = new DomCData(page, child.getNodeValue());
-                    dest.appendDomChild(cdata);
+                    dest.appendChild(cdata);
                     break;
 
                 case Node.COMMENT_NODE:
                     final DomComment comment = new DomComment(page, child.getNodeValue());
-                    dest.appendDomChild(comment);
+                    dest.appendChild(comment);
                     break;
 
                 default:

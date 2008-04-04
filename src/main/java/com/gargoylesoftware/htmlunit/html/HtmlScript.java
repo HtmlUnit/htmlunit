@@ -46,6 +46,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Function;
+import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.host.HTMLScriptElement;
@@ -187,8 +188,8 @@ public class HtmlScript extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    public DomNode appendDomChild(final DomNode node) {
-        final DomNode response = super.appendDomChild(node);
+    public DomNode appendChild(final Node node) {
+        final DomNode response = super.appendChild(node);
         executeInlineScriptIfNeeded(false);
         return response;
     }

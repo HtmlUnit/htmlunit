@@ -795,7 +795,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         // if deep, clone the kids too.
         if (deep) {
             for (DomNode child = firstChild_; child != null; child = child.nextSibling_) {
-                newnode.appendDomChild(child.cloneNode(true));
+                newnode.appendChild(child.cloneNode(true));
             }
         }
         return newnode;
@@ -837,36 +837,38 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node appendChild(final Node node) {
-        return appendDomChild((DomNode) node);
+    public DomNode appendChild(final Node node) {
+        final DomNode domNode = (DomNode) node;
+        if (domNode instanceof DomDocumentFragment) {
+            final DomDocumentFragment fragment = (DomDocumentFragment) domNode;
+            for (final DomNode child : fragment.getChildren()) {
+                appendChild(child);
+            }
+        }
+        else {
+            // clean up the new node, in case it is being moved
+            if (domNode != this && domNode.getParentNode() != null) {
+                domNode.remove();
+            }
+            // move the node
+            basicAppend(domNode);
+            // trigger events
+            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
+                ((HtmlPage) getPage()).notifyNodeAdded(domNode);
+            }
+            fireNodeAdded(this, domNode);
+        }
+        return domNode;
     }
 
     /**
      * Appends a child node to this node.
      * @param node the node to append
      * @return the node added
+     * @deprecated As of 2.0, please use {@link #appendChild()} instead.
      */
     public DomNode appendDomChild(final DomNode node) {
-        if (node instanceof DomDocumentFragment) {
-            final DomDocumentFragment fragment = (DomDocumentFragment) node;
-            for (final DomNode child : fragment.getChildren()) {
-                appendDomChild(child);
-            }
-        }
-        else {
-            // clean up the new node, in case it is being moved
-            if (node != this && node.getParentNode() != null) {
-                node.remove();
-            }
-            // move the node
-            basicAppend(node);
-            // trigger events
-            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
-                ((HtmlPage) getPage()).notifyNodeAdded(node);
-            }
-            fireNodeAdded(this, node);
-        }
-        return node;
+        return appendChild((DomNode) node);
     }
 
     /**

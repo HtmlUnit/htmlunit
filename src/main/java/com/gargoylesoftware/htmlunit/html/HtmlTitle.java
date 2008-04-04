@@ -78,7 +78,7 @@ public class HtmlTitle extends HtmlElement {
         final DomNode child = getFirstChild();
         if (child == null) {
             final DomNode textNode = new DomText(getPage() , message);
-            appendDomChild(textNode);
+            appendChild(textNode);
         }
         else if (child instanceof DomText) {
             ((DomText) child).setData(message);

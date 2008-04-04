@@ -672,7 +672,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (domNode.getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
-                fragment.appendDomChild(domNode);
+                fragment.appendChild(domNode);
             }
         }
     }
@@ -686,13 +686,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         domNode.removeAllChildren();
 
         final DomNode node = new DomText(getDomNodeOrDie().getPage(), value);
-        domNode.appendDomChild(node);
+        domNode.appendChild(node);
 
         //if the parentNode has null parentNode in IE,
         //create a DocumentFragment to be the parentNode's parentNode.
         if (domNode.getParentNode() == null && getBrowserVersion().isIE()) {
             final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
-            fragment.appendDomChild(domNode);
+            fragment.appendChild(domNode);
         }
     }
 
@@ -730,13 +730,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomNode proxyNode = new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) target.getPage(), null) {
             private static final long serialVersionUID = 2108037256628269797L;
             @Override
-            public DomNode appendDomChild(final DomNode node) {
+            public DomNode appendChild(final org.w3c.dom.Node node) {
+                final DomNode domNode = (DomNode) node;
                 if (append) {
-                    return target.appendDomChild(node);
+                    return target.appendChild(domNode);
                 }
                 else {
-                    target.insertBefore(node);
-                    return node;
+                    target.insertBefore(domNode);
+                    return domNode;
                 }
             }
         };
@@ -806,7 +807,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final boolean append = ((Boolean) values[1]).booleanValue();
 
             if (append) {
-                node.appendDomChild(childNode);
+                node.appendChild(childNode);
             }
             else {
                 node.insertBefore(childNode);

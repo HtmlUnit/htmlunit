@@ -164,13 +164,13 @@ public class RowContainer extends HTMLElement {
         final int rowCount = rows.jsxGet_length();
         final HtmlElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createHtmlElement("tr");
         if (rowCount == 0) {
-            getDomNodeOrDie().appendDomChild(newRow);
+            getDomNodeOrDie().appendChild(newRow);
         }
         else {
             final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index >= rowCount - 1) {
-                row.getDomNodeOrDie().getParentNode().appendDomChild(newRow);
+                row.getDomNodeOrDie().getParentNode().appendChild(newRow);
             }
             else {
                 row.getDomNodeOrDie().insertBefore(newRow);

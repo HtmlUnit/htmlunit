@@ -433,14 +433,14 @@ public final class HTMLParser {
             else if (!headParsed_ && (tagLower.equals("body") || tagLower.equals("frameset"))) {
                 final IElementFactory factory = getElementFactory("head");
                 final HtmlElement newElement = factory.createElement(page_, "head", null);
-                currentNode_.appendDomChild(newElement);
+                currentNode_.appendChild(newElement);
                 headParsed_ = true;
             }
             // add a <tbody> if a <tr> is directly in <table>
             else if (tagLower.equals("tr") && currentNode_.getNodeName().equals("table")) {
                 final IElementFactory factory = getElementFactory("tbody");
                 final HtmlElement newElement = factory.createElement(page_, "tbody", null);
-                currentNode_.appendDomChild(newElement);
+                currentNode_.appendChild(newElement);
                 currentNode_ = newElement;
                 stack_.push(currentNode_);
             }
@@ -456,7 +456,7 @@ public final class HTMLParser {
             final IElementFactory factory = getElementFactory(tagLower);
             final HtmlElement newElement = factory.createElement(page_, tagLower, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
-            currentNode_.appendDomChild(newElement);
+            currentNode_.appendChild(newElement);
 
             // If we had an old synthetic body and we just added a real body element, quietly
             // remove the old body and move its children to the real body element we just added.
@@ -515,7 +515,7 @@ public final class HTMLParser {
         private void handleCharacters() {
             if (characters_ != null && characters_.length() > 0) {
                 final DomText text = new DomText(page_, characters_.toString());
-                currentNode_.appendDomChild(text);
+                currentNode_.appendChild(text);
                 characters_.setLength(0);
             }
         }
@@ -564,7 +564,7 @@ public final class HTMLParser {
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final DomComment comment = new DomComment(page_, String.valueOf(ch, start, length));
-            currentNode_.appendDomChild(comment);
+            currentNode_.appendChild(comment);
         }
         
         /** @inheritDoc LexicalHandler#endCDATA() */

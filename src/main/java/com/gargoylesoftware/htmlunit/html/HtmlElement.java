@@ -974,7 +974,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (children.isEmpty()) {
             // Add a new child and return it.
             child = getPage().createHtmlElement(tagName);
-            appendDomChild(child);
+            appendChild(child);
         }
         else {
             // Return the first existing child.

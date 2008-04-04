@@ -172,7 +172,7 @@ public class Node extends SimpleScriptable {
             final DomNode parentNode = getDomNodeOrDie();
 
             // Append the child to the parent node
-            parentNode.appendDomChild(childDomNode);
+            parentNode.appendChild(childDomNode);
             appendedChild = childObject;
             
             //if the parentNode has null parentNode in IE,
@@ -182,7 +182,7 @@ public class Node extends SimpleScriptable {
                     && getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment =
                     ((SgmlPage) parentNode.getPage()).createDomDocumentFragment();
-                fragment.appendDomChild(parentNode);
+                fragment.appendChild(parentNode);
             }
         }
         return appendedChild;
@@ -244,7 +244,7 @@ public class Node extends SimpleScriptable {
                     appendedChild = newChildObject;
                 }
                 else {
-                    getDomNodeOrDie().appendDomChild(newChildNode);
+                    getDomNodeOrDie().appendChild(newChildNode);
                 }
 
                 //if parentNode is null in IE, create a DocumentFragment to be the parentNode
@@ -252,7 +252,7 @@ public class Node extends SimpleScriptable {
                         && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
                     final DomDocumentFragment fragment =
                         ((HtmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
-                    fragment.appendDomChild(getDomNodeOrDie());
+                    fragment.appendChild(getDomNodeOrDie());
                 }
             }
         }

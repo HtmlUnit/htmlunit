@@ -285,7 +285,7 @@ public class DomNodeTest extends WebTestCase {
         final int position = readPositionAmongParentChildren(node);
 
         final DomNode newNode = new DomText(page, "test");
-        parent.appendDomChild(newNode);
+        parent.appendChild(newNode);
         assertSame("new node previous sibling", node, newNode.getPreviousSibling());
         assertSame("new node next sibling", null, newNode.getNextSibling());
         assertSame("next sibling", newNode, node.getNextSibling());
@@ -293,7 +293,7 @@ public class DomNodeTest extends WebTestCase {
         assertEquals(position + 1, readPositionAmongParentChildren(newNode));
 
         final DomNode newNode2 = new DomText(page, "test2");
-        parent.appendDomChild(newNode2);
+        parent.appendChild(newNode2);
         page.getHtmlElementById("tag");
     }
 

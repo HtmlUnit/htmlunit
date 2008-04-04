@@ -1177,7 +1177,7 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals(0, page.getHtmlElementsByName("a").size());
 
         final HtmlElement b1 = page.getHtmlElementsByName("b").get(0);
-        b1.appendDomChild(a);
+        b1.appendChild(a);
         assertEquals(1, page.getHtmlElementsByName("a").size());
     }
 
