@@ -346,14 +346,22 @@ public class CodeStyleTest {
     private void runWith(final List<String> lines, final String relativePath) {
         if (relativePath.replace('\\', '/').contains("src/test/java") && !relativePath.contains("CodeStyleTest")) {
             boolean runWith = false;
+            int index = 1;
             for (final String line : lines) {
                 if (line.contains("@RunWith(BrowserRunner.class)")) {
                     runWith = true;
                 }
-                if (runWith && line.contains("new WebClient(")) {
-                    addFailure("Test " + relativePath
-                        + " should never directly instantiate WebClient, please use getWebClient() instead.");
+                if (runWith) {
+                    if (line.contains("new WebClient(")) {
+                        addFailure("Test " + relativePath
+                            + " should never directly instantiate WebClient, please use getWebClient() instead.");
+                    }
+                    if (line.contains("notYetImplemented()")) {
+                        addFailure("Use @NotYetImplemented instead of  notYetImplemented() in "
+                            + relativePath + ", line: " + index);
+                    }
                 }
+                index++;
             }
         }
     }
