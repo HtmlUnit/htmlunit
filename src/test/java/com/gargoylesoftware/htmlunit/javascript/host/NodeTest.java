@@ -197,7 +197,7 @@ public class NodeTest extends WebTestCase {
             + "}\n"
             + "</script></head><body onload='doTest()'><div id='a'><div id='b'/></div></html>";
         final HtmlPage page = loadPage(html);
-        assertNotNull(page.getHtmlElementById("b").getParentDomNode());
+        assertNotNull(page.getHtmlElementById("b").getParentNode());
     }
 
     /**

@@ -98,8 +98,8 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     @Test
     public void testClonePreservesOriginal() {
-        assertSame(tbody_, row_.getParentDomNode());
-        assertSame(row_, cell_.getParentDomNode());
+        assertSame(tbody_, row_.getParentNode());
+        assertSame(row_, cell_.getParentNode());
         assertSame(cell_, row_.getCell(0));
         assertEquals("row", row_.getId());
         assertEquals("cell", cell_.getId());
@@ -130,7 +130,7 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     @Test
     public void testClonedRowHasNullParent() throws Exception {
-        assertNull(rowClone_.getParentDomNode());
+        assertNull(rowClone_.getParentNode());
     }
 
     /**
@@ -148,7 +148,7 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     @Test
     public void testClonedCellHasDifferentChildren() {
-        assertNotSame(cell_.getParentDomNode(), cellClone_.getParentDomNode());
+        assertNotSame(cell_.getParentNode(), cellClone_.getParentNode());
         assertNotNull(cell_.getFirstDomChild());
         assertNotSame(cell_.getFirstDomChild(), cellClone_.getFirstDomChild());
     }
@@ -159,7 +159,7 @@ public class HtmlTableRowTest extends WebTestCase {
      */
     @Test
     public void testClonedCellHasClonedRowAsParent() throws Exception {
-        assertSame(rowClone_, cellClone_.getParentDomNode());
+        assertSame(rowClone_, cellClone_.getParentNode());
     }
 
     /**

@@ -102,7 +102,7 @@ public class Attribute extends SimpleScriptable {
         super.setDomNode(domNode, assignScriptObject);
 
         final String name = domNode.getNodeName();
-        final HtmlElement parent = (HtmlElement) domNode.getParentDomNode();
+        final HtmlElement parent = (HtmlElement) domNode.getParentNode();
         this.init(name, parent);
     }
 

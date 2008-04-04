@@ -142,11 +142,11 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlAttr#getParentDomNode()}.
+     * Tests {@link HtmlAttr#getParentNode()}.
      */
     @Test
     public void testGetParent() {
-        assertSame(HTML_ELEMENT, htmlAttr_.getParentDomNode());
+        assertSame(HTML_ELEMENT, htmlAttr_.getParentNode());
     }
 
     /**

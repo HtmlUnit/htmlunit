@@ -104,8 +104,8 @@ public class DomText extends DomCharacterData implements Text {
         setData(getData().substring(0, offset));
 
         // insert new text node
-        if (getParentDomNode() != null) {
-            newText.setParentNode(getParentDomNode());
+        if (getParentNode() != null) {
+            newText.setParentNode(getParentNode());
             newText.setPreviousSibling(this);
             newText.setNextSibling(getNextDomSibling());
             setNextSibling(newText);
@@ -144,7 +144,7 @@ public class DomText extends DomCharacterData implements Text {
     @Override
     public String asText() {
         String text = getData();
-        if (!(getParentDomNode() instanceof HtmlTextArea)) {
+        if (!(getParentNode() instanceof HtmlTextArea)) {
             // Remove extra whitespace
             text = reduceWhitespace(text);
         }

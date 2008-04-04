@@ -964,7 +964,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         assertNotNull(page);
-        assertNull(page.getParentDomNode());
+        assertNull(page.getParentNode());
     }
 
     /**
@@ -982,7 +982,7 @@ public class HtmlPageTest extends WebTestCase {
 
         assertNotNull(root);
         assertEquals("html", root.getTagName());
-        assertSame(page, root.getParentDomNode());
+        assertSame(page, root.getParentNode());
     }
 
     /**

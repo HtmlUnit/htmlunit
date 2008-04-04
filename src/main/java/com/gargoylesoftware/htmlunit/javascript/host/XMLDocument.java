@@ -186,7 +186,7 @@ public class XMLDocument extends Document {
         }
         else if (domNode instanceof XmlAttr) {
             final XMLAttribute attribute = new XMLAttribute();
-            attribute.init(domNode.getNodeName(), (XmlElement) domNode.getParentDomNode());
+            attribute.init(domNode.getNodeName(), (XmlElement) domNode.getParentNode());
             scriptable = attribute;
         }
         else if (domNode instanceof DomText || domNode instanceof DomCData || domNode instanceof DomComment) {

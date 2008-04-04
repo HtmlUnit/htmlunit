@@ -669,7 +669,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
             //if the parentNode has null parentNode in IE,
             //create a DocumentFragment to be the parentNode's parentNode.
-            if (domNode.getParentDomNode() == null
+            if (domNode.getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
                 fragment.appendDomChild(domNode);
@@ -690,7 +690,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         //if the parentNode has null parentNode in IE,
         //create a DocumentFragment to be the parentNode's parentNode.
-        if (domNode.getParentDomNode() == null && getBrowserVersion().isIE()) {
+        if (domNode.getParentNode() == null && getBrowserVersion().isIE()) {
             final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
             fragment.appendDomChild(domNode);
         }
@@ -859,7 +859,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if (POSITION_AFTER_END.equalsIgnoreCase(where)) {
             if (currentNode.getNextDomSibling() == null) {
                 // new nodes should appended to the children of parent node
-                node = currentNode.getParentDomNode();
+                node = currentNode.getParentNode();
                 append = true;
             }
             else {
@@ -1419,13 +1419,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         // Add the offset for the ancestor nodes.
-        node = node.getParentDomNode();
+        node = node.getParentNode();
         while (node != null && node.getScriptObject() != offsetParent) {
             if (node.getScriptObject() instanceof HTMLElement) {
                 element = (HTMLElement) node.getScriptObject();
                 left += element.jsxGet_currentStyle().getLeft(true, true, true);
             }
-            node = node.getParentDomNode();
+            node = node.getParentNode();
         }
 
         // Add the offset for the final ancestor node (the offset parent).
@@ -1466,13 +1466,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         // Add the offset for the ancestor nodes.
-        node = node.getParentDomNode();
+        node = node.getParentNode();
         while (node != null && node.getScriptObject() != offsetParent) {
             if (node.getScriptObject() instanceof HTMLElement) {
                 element = (HTMLElement) node.getScriptObject();
                 top += element.jsxGet_currentStyle().getTop(false, true, true);
             }
-            node = node.getParentDomNode();
+            node = node.getParentNode();
         }
 
         // Add the offset for the final ancestor node (the offset parent).
@@ -1509,7 +1509,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         while (currentElement != null) {
 
-            final DomNode parentNode = currentElement.getParentDomNode();
+            final DomNode parentNode = currentElement.getParentNode();
             if (parentNode instanceof HtmlBody
                 || (useTables && parentNode instanceof HtmlTableDataCell)
                 || (useTables && parentNode instanceof HtmlTable)) {
@@ -1529,7 +1529,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
 
-            currentElement = currentElement.getParentDomNode();
+            currentElement = currentElement.getParentNode();
         }
 
         return offsetParent;

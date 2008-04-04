@@ -108,7 +108,7 @@ public final class Util {
                 else {
                     final DomNode sibling = node.getNextDomSibling();
                     if (sibling == null) {
-                        return getFirstNode(node.getParentDomNode());
+                        return getFirstNode(node.getParentNode());
                     }
                     else {
                         return sibling;
@@ -127,7 +127,7 @@ public final class Util {
                         n = node.getNextDomSibling();
                     }
                     if (n == null) {
-                        return getFirstNode(node.getParentDomNode());
+                        return getFirstNode(node.getParentNode());
                     }
                     else {
                         return n;
@@ -153,7 +153,7 @@ public final class Util {
                 else {
                     final DomNode sibling = node.getPreviousDomSibling();
                     if (sibling == null) {
-                        return getFirstNode(node.getParentDomNode());
+                        return getFirstNode(node.getParentNode());
                     }
                     else {
                         return sibling;
@@ -171,7 +171,7 @@ public final class Util {
                         n = node.getPreviousDomSibling();
                     }
                     if (n == null) {
-                        return getFirstNode(node.getParentDomNode());
+                        return getFirstNode(node.getParentNode());
                     }
                     else {
                         return n;

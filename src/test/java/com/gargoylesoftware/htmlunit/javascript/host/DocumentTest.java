@@ -915,7 +915,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv", ((HtmlElement) div1.getParentDomNode()).getAttributeValue("id"));
+        assertEquals("parentDiv", ((HtmlElement) div1.getParentNode()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"parentDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -989,7 +989,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement childDiv = firstPage.getHtmlElementById("childDiv");
-        assertEquals("parentDiv", ((HtmlElement) childDiv.getParentDomNode()).getAttributeValue("id"));
+        assertEquals("parentDiv", ((HtmlElement) childDiv.getParentNode()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"parentDiv"};
         assertEquals(expectedAlerts, collectedAlerts);

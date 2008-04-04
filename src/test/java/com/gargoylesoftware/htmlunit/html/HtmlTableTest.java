@@ -318,15 +318,15 @@ public class HtmlTableTest extends WebTestCase {
 
         // Check that a <tbody> was inserted properly
         final HtmlTableDataCell cell1 = (HtmlTableDataCell) page.getHtmlElementById("cell1");
-        assertTrue(HtmlTableRow.class.isInstance(cell1.getParentDomNode()));
-        assertTrue(HtmlTableBody.class.isInstance(cell1.getParentDomNode().getParentDomNode()));
-        assertTrue(HtmlTable.class.isInstance(cell1.getParentDomNode().getParentDomNode().getParentDomNode()));
+        assertTrue(HtmlTableRow.class.isInstance(cell1.getParentNode()));
+        assertTrue(HtmlTableBody.class.isInstance(cell1.getParentNode().getParentNode()));
+        assertTrue(HtmlTable.class.isInstance(cell1.getParentNode().getParentNode().getParentNode()));
 
         // Check that the existing <tbody> wasn't messed up.
         final HtmlTableDataCell cell2 = (HtmlTableDataCell) page.getHtmlElementById("cell2");
-        assertTrue(HtmlTableRow.class.isInstance(cell2.getParentDomNode()));
-        assertTrue(HtmlTableBody.class.isInstance(cell2.getParentDomNode().getParentDomNode()));
-        assertTrue(HtmlTable.class.isInstance(cell2.getParentDomNode().getParentDomNode().getParentDomNode()));
+        assertTrue(HtmlTableRow.class.isInstance(cell2.getParentNode()));
+        assertTrue(HtmlTableBody.class.isInstance(cell2.getParentNode().getParentNode()));
+        assertTrue(HtmlTable.class.isInstance(cell2.getParentNode().getParentNode().getParentNode()));
     }
 
     /**

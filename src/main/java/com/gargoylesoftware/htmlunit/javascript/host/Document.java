@@ -387,7 +387,7 @@ public class Document extends EventNode {
 
         // Quick and dirty workaround for target (IFRAME JS object aren't an HTMLElement).
         if (current instanceof HtmlInlineFrame) {
-            current = (HtmlElement) current.getParentDomNode();
+            current = (HtmlElement) current.getParentNode();
         }
 
         // Append the new content.

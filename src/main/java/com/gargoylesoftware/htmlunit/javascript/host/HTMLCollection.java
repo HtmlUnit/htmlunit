@@ -286,14 +286,14 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                         && ((DomText) element).getNodeValue().trim().length() == 0) {
 
                     //and 'xml:space' is 'default'
-                    final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentDomNode());
+                    final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentNode());
                     if (xmlSpaceDefault != Boolean.FALSE) {
                         cachedElements_.remove(i--);
                         continue;
                     }
                 }
-                for (DomNode parent = element.getParentDomNode(); parent != null;
-                    parent = parent.getParentDomNode()) {
+                for (DomNode parent = element.getParentNode(); parent != null;
+                    parent = parent.getParentNode()) {
                     if (parent instanceof HtmlNoScript) {
                         cachedElements_.remove(i--);
                         break;
@@ -311,7 +311,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      *         or null if nothing is set.
      */
     private static Boolean isXMLSpaceDefault(DomNode node) {
-        for ( ; node instanceof XmlElement; node = node.getParentDomNode()) {
+        for ( ; node instanceof XmlElement; node = node.getParentNode()) {
             final String value = ((XmlElement) node).getAttributeValue("xml:space");
             if (value.length() != 0) {
                 if (value.equals("default")) {

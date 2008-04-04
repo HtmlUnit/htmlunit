@@ -479,7 +479,7 @@ public abstract class HtmlElement extends DomElement implements Element {
                 }
             }
         }
-        final DomNode parentNode = getParentDomNode();
+        final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeAdded(event);
         }
@@ -502,7 +502,7 @@ public abstract class HtmlElement extends DomElement implements Element {
                 }
             }
         }
-        final DomNode parentNode = getParentDomNode();
+        final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeReplaced(event);
         }
@@ -525,7 +525,7 @@ public abstract class HtmlElement extends DomElement implements Element {
                 }
             }
         }
-        final DomNode parentNode = getParentDomNode();
+        final DomNode parentNode = getParentNode();
         if (parentNode instanceof HtmlElement) {
             ((HtmlElement) parentNode).fireHtmlAttributeRemoved(event);
         }
@@ -685,14 +685,14 @@ public abstract class HtmlElement extends DomElement implements Element {
     public HtmlElement getEnclosingElement(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
 
-        DomNode currentNode = getParentDomNode();
+        DomNode currentNode = getParentNode();
         while (currentNode != null) {
             if (currentNode instanceof HtmlElement
                     && currentNode.getNodeName().equals(tagNameLC)) {
 
                 return (HtmlElement) currentNode;
             }
-            currentNode = currentNode.getParentDomNode();
+            currentNode = currentNode.getParentNode();
         }
         return null;
     }

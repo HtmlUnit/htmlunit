@@ -352,7 +352,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         // If the script node is nested in an iframe, a noframes, or a noscript node, we don't need to execute.
-        for (DomNode o = this; o != null; o = o.getParentDomNode()) {
+        for (DomNode o = this; o != null; o = o.getParentNode()) {
             if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames || o instanceof HtmlNoScript) {
                 return false;
             }
@@ -377,8 +377,8 @@ public class HtmlScript extends HtmlElement {
         // If the script's root ancestor node is not the page, the the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
         DomNode root = this;
-        while (root.getParentDomNode() != null) {
-            root = root.getParentDomNode();
+        while (root.getParentNode() != null) {
+            root = root.getParentNode();
         }
         if (root != getPage()) {
             return false;

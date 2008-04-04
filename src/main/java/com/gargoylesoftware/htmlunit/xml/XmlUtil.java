@@ -237,7 +237,7 @@ public final class XmlUtil {
     public static String lookupNamespaceURI(final XmlElement element, final String prefix) {
         String uri = element.getAttributeValue("xmlns:" + prefix);
         if (uri == XmlElement.ATTRIBUTE_NOT_DEFINED) {
-            final DomNode parentNode = element.getParentDomNode();
+            final DomNode parentNode = element.getParentNode();
             if (parentNode instanceof XmlElement) {
                 uri = lookupNamespaceURI((XmlElement) parentNode, prefix);
             }
@@ -255,7 +255,7 @@ public final class XmlUtil {
     public static String lookupNamespaceURI(final HtmlElement element, final String prefix) {
         String uri = element.getAttributeValue("xmlns:" + prefix);
         if (uri == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-            final DomNode parentNode = element.getParentDomNode();
+            final DomNode parentNode = element.getParentNode();
             if (parentNode instanceof HtmlElement) {
                 uri = lookupNamespaceURI((HtmlElement) parentNode, prefix);
             }

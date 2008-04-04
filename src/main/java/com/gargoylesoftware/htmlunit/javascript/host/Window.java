@@ -1246,7 +1246,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
                 final DomNode node = entry.getKey().getDomNodeOrDie();
                 if (changed == node
-                    || changed.getParentDomNode() == node.getParentDomNode()
+                    || changed.getParentNode() == node.getParentNode()
                     || changed.isAncestorOf(node)) {
                     i.remove();
                 }

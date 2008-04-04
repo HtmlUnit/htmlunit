@@ -178,7 +178,7 @@ public class Node extends SimpleScriptable {
             //if the parentNode has null parentNode in IE,
             //create a DocumentFragment to be the parentNode's parentNode.
             if (!(parentNode instanceof SgmlPage)
-                    && !(this instanceof DocumentFragment) && parentNode.getParentDomNode() == null
+                    && !(this instanceof DocumentFragment) && parentNode.getParentNode() == null
                     && getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment =
                     ((SgmlPage) parentNode.getPage()).createDomDocumentFragment();
@@ -248,7 +248,7 @@ public class Node extends SimpleScriptable {
                 }
 
                 //if parentNode is null in IE, create a DocumentFragment to be the parentNode
-                if (getDomNodeOrDie().getParentDomNode() == null
+                if (getDomNodeOrDie().getParentNode() == null
                         && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
                     final DomDocumentFragment fragment =
                         ((HtmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
@@ -361,7 +361,7 @@ public class Node extends SimpleScriptable {
      * @return The parent node
      */
     public Object jsxGet_parentNode() {
-        return getJavaScriptNode(getDomNodeOrDie().getParentDomNode());
+        return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
 
     /**
@@ -537,7 +537,7 @@ public class Node extends SimpleScriptable {
             DomNode node = getDomNodeOrDie();
             while (node != null) {
                 parents.add(node);
-                node = node.getParentDomNode();
+                node = node.getParentNode();
             }
             for (int i = parents.size() - 1; i >= 0; i--) {
                 final DomNode curNode = parents.get(i);
@@ -575,7 +575,7 @@ public class Node extends SimpleScriptable {
                     }
                 }
 
-                node = node.getParentDomNode();
+                node = node.getParentNode();
                 event.setEventPhase(Event.BUBBLING_PHASE);
             }
 

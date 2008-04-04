@@ -279,15 +279,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     public DomNode getParentNode() {
-        return getParentDomNode();
+        return parent_;
     }
 
     /**
      * Returns this node's parent node, or <tt>null</tt> if this is the root node.
      * @return this node's parent node, or <tt>null</tt> if this is the root node
+     * @deprecated As of 2.0, please use {@link #getParentNode()} instead.
      */
     public DomNode getParentDomNode() {
-        return parent_;
+        return getParentNode();
     }
 
     /**
@@ -360,7 +361,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (node == this) {
                 return true;
             }
-            node = node.getParentDomNode();
+            node = node.getParentNode();
         }
         return false;
     }
@@ -966,7 +967,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         //clean up the new node, in case it is being moved
-        final DomNode exParent = newNode.getParentDomNode();
+        final DomNode exParent = newNode.getParentNode();
         newNode.basicRemove();
 
         if (parent_.firstChild_ == this) {
@@ -1224,7 +1225,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 return null;
             }
 
-            final DomNode parent = startingNode.getParentDomNode();
+            final DomNode parent = startingNode.getParentNode();
             if (parent == DomNode.this) {
                 return null;
             }
@@ -1337,7 +1338,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getByXPath(String)
      */
     public String getCanonicalXPath() {
-        final DomNode parent = getParentDomNode();
+        final DomNode parent = getParentNode();
         if (parent == null) {
             return "";
         }
@@ -1348,7 +1349,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the XPath token for this node only.
      */
     private String getXPathToken() {
-        final DomNode parent = getParentDomNode();
+        final DomNode parent = getParentNode();
         int total = 0;
         int nodeIndex = 0;
         for (final DomNode child : parent.getChildren()) {

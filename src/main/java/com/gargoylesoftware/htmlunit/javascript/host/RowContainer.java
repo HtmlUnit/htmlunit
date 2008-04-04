@@ -170,7 +170,7 @@ public class RowContainer extends HTMLElement {
             final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index >= rowCount - 1) {
-                row.getDomNodeOrDie().getParentDomNode().appendDomChild(newRow);
+                row.getDomNodeOrDie().getParentNode().appendDomChild(newRow);
             }
             else {
                 row.getDomNodeOrDie().insertBefore(newRow);
