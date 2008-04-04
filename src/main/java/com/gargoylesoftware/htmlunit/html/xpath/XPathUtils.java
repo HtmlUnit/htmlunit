@@ -127,7 +127,7 @@ public final class XPathUtils {
             xpathExpressionContext = contextNode;
         }
         final PrefixResolver prefixResolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
-        final HtmlUnitXPath xpath = new HtmlUnitXPath(str, null, prefixResolver, XPath.SELECT, null);
+        final XPath xpath = new XPath(str, null, prefixResolver, XPath.SELECT, null);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }
