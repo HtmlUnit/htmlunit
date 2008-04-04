@@ -1060,7 +1060,7 @@ public abstract class HtmlElement extends DomElement implements Element {
             if (nextElement_ == null) {
                 throw new IllegalStateException();
             }
-            final DomNode sibling = nextElement_.getPreviousDomSibling();
+            final DomNode sibling = nextElement_.getPreviousSibling();
             if (sibling != null) {
                 sibling.remove();
             }

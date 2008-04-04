@@ -381,7 +381,7 @@ public class Node extends SimpleScriptable {
      * no previous sibling.
      */
     public Object jsxGet_previousSibling() {
-        return getJavaScriptNode(getDomNodeOrDie().getPreviousDomSibling());
+        return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
     }
 
     /**

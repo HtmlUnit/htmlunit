@@ -302,15 +302,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node getPreviousSibling() {
-        return getPreviousDomSibling();
-    }
-
-    /**
-     * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
-     * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
-     */
-    public DomNode getPreviousDomSibling() {
+    public DomNode getPreviousSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
             return null;
@@ -318,6 +310,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         else {
             return previousSibling_;
         }
+    }
+
+    /**
+     * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
+     * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
+     * @deprecated As of 2.0, please use {@link #getPreviousSibling()} instead.
+     */
+    public DomNode getPreviousDomSibling() {
+        return getPreviousSibling();
     }
 
     /**

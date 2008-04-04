@@ -201,7 +201,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
 
-        final DomNode previousSibling = node.getPreviousDomSibling();
+        final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextDomSibling();
         final DomNode parent = node.getParentNode();
 
@@ -210,11 +210,11 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode newNode = new DomText(page, "test");
         node.replace(newNode);
-        assertSame("previous sibling", previousSibling, newNode.getPreviousDomSibling());
+        assertSame("previous sibling", previousSibling, newNode.getPreviousSibling());
         assertSame("next sibling", nextSibling, newNode.getNextDomSibling());
         assertSame("parent", parent, newNode.getParentNode());
         assertSame(newNode, previousSibling.getNextDomSibling());
-        assertSame(newNode, nextSibling.getPreviousDomSibling());
+        assertSame(newNode, nextSibling.getPreviousSibling());
         assertEquals(position, readPositionAmongParentChildren(newNode));
 
         final AttributesImpl attributes = new AttributesImpl();
@@ -286,7 +286,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode newNode = new DomText(page, "test");
         parent.appendDomChild(newNode);
-        assertSame("new node previous sibling", node, newNode.getPreviousDomSibling());
+        assertSame("new node previous sibling", node, newNode.getPreviousSibling());
         assertSame("new node next sibling", null, newNode.getNextDomSibling());
         assertSame("next sibling", newNode, node.getNextDomSibling());
         assertSame("parent", parent, newNode.getParentNode());
@@ -309,7 +309,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
 
-        final DomNode previousSibling = node.getPreviousDomSibling();
+        final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextDomSibling();
         final DomNode parent = node.getParentNode();
 
@@ -318,13 +318,13 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode newNode = new DomText(page, "test");
         node.insertBefore(newNode);
-        assertSame("new node previous sibling", previousSibling, newNode.getPreviousDomSibling());
-        assertSame("previous sibling", newNode, node.getPreviousDomSibling());
+        assertSame("new node previous sibling", previousSibling, newNode.getPreviousSibling());
+        assertSame("previous sibling", newNode, node.getPreviousSibling());
         assertSame("new node next sibling", node, newNode.getNextDomSibling());
         assertSame("next sibling", nextSibling, node.getNextDomSibling());
         assertSame("parent", parent, newNode.getParentNode());
         assertSame(newNode, previousSibling.getNextDomSibling());
-        assertSame(node, nextSibling.getPreviousDomSibling());
+        assertSame(node, nextSibling.getPreviousSibling());
         assertEquals(position, readPositionAmongParentChildren(newNode));
     }
 

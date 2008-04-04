@@ -369,7 +369,7 @@ public class HtmlTable extends ClickableElement {
             if (nextRow_ == null) {
                 throw new IllegalStateException();
             }
-            final DomNode sibling = nextRow_.getPreviousDomSibling();
+            final DomNode sibling = nextRow_.getPreviousSibling();
             if (sibling != null) {
                 sibling.remove();
             }
