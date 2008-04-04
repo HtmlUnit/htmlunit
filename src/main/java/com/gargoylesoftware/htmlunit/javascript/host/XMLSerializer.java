@@ -101,7 +101,7 @@ public class XMLSerializer extends SimpleScriptable {
                     final String value = child.getNodeValue();
                     if (isIE && value.trim().length() == 0) {
                         buffer.append('\r').append('\n');
-                        final DomNode sibling = child.getNextDomSibling();
+                        final DomNode sibling = child.getNextSibling();
                         if (sibling != null && sibling.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                             for (int i = 0; i < indent; i++) {
                                 buffer.append('\t');

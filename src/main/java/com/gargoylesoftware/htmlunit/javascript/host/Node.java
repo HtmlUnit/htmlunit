@@ -371,7 +371,7 @@ public class Node extends SimpleScriptable {
      * no next sibling.
      */
     public Object jsxGet_nextSibling() {
-        return getJavaScriptNode(getDomNodeOrDie().getNextDomSibling());
+        return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
     }
 
     /**
@@ -391,7 +391,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_firstChild() {
-        return getJavaScriptNode(getDomNodeOrDie().getFirstDomChild());
+        return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
     }
 
     /**

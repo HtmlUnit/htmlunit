@@ -186,7 +186,7 @@ public class HtmlTableRow extends ClickableElement {
 
         /** Creates an instance. */
         public CellIterator() {
-            setNextCell(getFirstDomChild());
+            setNextCell(getFirstChild());
         }
 
         /** @return whether there is another cell available */
@@ -223,7 +223,7 @@ public class HtmlTableRow extends ClickableElement {
         public HtmlTableCell nextCell() throws NoSuchElementException {
             if (nextCell_ != null) {
                 final HtmlTableCell result = nextCell_;
-                setNextCell(nextCell_.getNextDomSibling());
+                setNextCell(nextCell_.getNextSibling());
                 return result;
             }
             else {
@@ -238,7 +238,7 @@ public class HtmlTableRow extends ClickableElement {
          */
         private void setNextCell(final DomNode node) {
             nextCell_ = null;
-            for (DomNode next = node; next != null; next = next.getNextDomSibling()) {
+            for (DomNode next = node; next != null; next = next.getNextSibling()) {
                 if (next instanceof HtmlTableCell) {
                     nextCell_ = (HtmlTableCell) next;
                     return;
@@ -246,14 +246,14 @@ public class HtmlTableRow extends ClickableElement {
                 else if (currentForm_ == null && next instanceof HtmlForm) {
                     // Completely illegal HTML but some of the big sites (ie amazon) do this
                     currentForm_ = (HtmlForm) next;
-                    setNextCell(next.getFirstDomChild());
+                    setNextCell(next.getFirstChild());
                     return;
                 }
             }
             if (currentForm_ != null) {
                 final DomNode form = currentForm_;
                 currentForm_ = null;
-                setNextCell(form.getNextDomSibling());
+                setNextCell(form.getNextSibling());
             }
         }
     }

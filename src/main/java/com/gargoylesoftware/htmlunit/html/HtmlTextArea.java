@@ -93,7 +93,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      */
     private void initDefaultValue() {
         if (defaultValue_ == null) {
-            final DomText child = (DomText) getFirstDomChild();
+            final DomText child = (DomText) getFirstChild();
             if (child != null) {
                 defaultValue_ = child.getData();
                 if (defaultValue_ == null) {
@@ -122,7 +122,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      */
     public final void setText(final String newValue) {
         initDefaultValue();
-        final DomText child = (DomText) getFirstDomChild();
+        final DomText child = (DomText) getFirstChild();
         if (child == null) {
             final DomText newChild = new DomText(getPage(), newValue);
             appendDomChild(newChild);

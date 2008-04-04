@@ -315,7 +315,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns this node's previous sibling, or <tt>null</tt> if this node is its parent's first child.
      * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
-     * @deprecated As of 2.0, please use {@link #getPreviousSibling()} instead.
      */
     public DomNode getPreviousDomSibling() {
         return getPreviousSibling();
@@ -324,31 +323,33 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node getNextSibling() {
-        return getNextDomSibling();
+    public DomNode getNextSibling() {
+        return nextSibling_;
     }
 
     /**
      * Returns this node's next sibling node, or <tt>null</tt> if this node is its parent's last child.
      * @return this node's next sibling node, or <tt>null</tt> if this node is its parent's last child
+     * @deprecated As of 2.0, please use {@link #getNextSibling()} instead.
      */
     public DomNode getNextDomSibling() {
-        return nextSibling_;
+        return getNextSibling();
     }
 
     /**
      * {@inheritDoc}
      */
-    public Node getFirstChild() {
-        return getFirstDomChild();
+    public DomNode getFirstChild() {
+        return firstChild_;
     }
 
     /**
      * Returns this node's first child node, or <tt>null</tt> if this node does not have any children.
      * @return this node's first child node, or <tt>null</tt> if this node does not have any children
+     * @deprecated As of 2.0, please use {@link #getFirstChild()} instead.
      */
     public DomNode getFirstDomChild() {
-        return firstChild_;
+        return getFirstChild();
     }
 
     /**
@@ -752,10 +753,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param printWriter writer where child nodes are written
      */
     protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
-        DomNode child = getFirstDomChild();
+        DomNode child = getFirstChild();
         while (child != null) {
             child.printXml(indent + "  ", printWriter);
-            child = child.getNextDomSibling();
+            child = child.getNextSibling();
         }
     }
 
@@ -1231,9 +1232,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 return null;
             }
 
-            DomNode next = parent.getNextDomSibling();
+            DomNode next = parent.getNextSibling();
             while (next != null && next instanceof HtmlElement == false) {
-                next = next.getNextDomSibling();
+                next = next.getNextSibling();
             }
 
             if (next == null) {
@@ -1249,17 +1250,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     && getPage().getEnclosingWindow().getWebClient().isJavaScriptEnabled()) {
                 return null;
             }
-            DomNode node = parent.getFirstDomChild();
+            DomNode node = parent.getFirstChild();
             while (node != null && node instanceof HtmlElement == false) {
-                node = node.getNextDomSibling();
+                node = node.getNextSibling();
             }
             return (HtmlElement) node;
         }
 
         private HtmlElement getNextDomSibling(final HtmlElement element) {
-            DomNode node = element.getNextDomSibling();
+            DomNode node = element.getNextSibling();
             while (node != null && node instanceof HtmlElement == false) {
-                node = node.getNextDomSibling();
+                node = node.getNextSibling();
             }
             return (HtmlElement) node;
         }
@@ -1285,7 +1286,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Removes all of this node's children.
      */
     public void removeAllChildren() {
-        if (getFirstDomChild() == null) {
+        if (getFirstChild() == null) {
             return;
         }
         

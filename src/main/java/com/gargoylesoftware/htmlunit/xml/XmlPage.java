@@ -181,9 +181,9 @@ public class XmlPage extends SgmlPage implements Document {
      */
     //TODO: should be removed later to SgmlPage
     public XmlElement getDocumentXmlElement() {
-        DomNode childNode = getFirstDomChild();
+        DomNode childNode = getFirstChild();
         while (childNode != null && !(childNode instanceof XmlElement)) {
-            childNode = childNode.getNextDomSibling();
+            childNode = childNode.getNextSibling();
         }
         return (XmlElement) childNode;
     }
@@ -328,9 +328,9 @@ public class XmlPage extends SgmlPage implements Document {
      */
     public Element getDocumentElement() {
         if (documentElement_ == null) {
-            DomNode childNode = getFirstDomChild();
+            DomNode childNode = getFirstChild();
             while (childNode != null && !(childNode instanceof Element)) {
-                childNode = childNode.getNextDomSibling();
+                childNode = childNode.getNextSibling();
             }
             documentElement_ = (Element) childNode;
         }

@@ -343,7 +343,7 @@ public class HtmlTable extends ClickableElement {
 
         /** Creates a new instance. */
         public RowIterator() {
-            setNextRow(getFirstDomChild());
+            setNextRow(getFirstChild());
         }
 
         /**
@@ -382,7 +382,7 @@ public class HtmlTable extends ClickableElement {
         public HtmlTableRow nextRow() throws NoSuchElementException {
             if (nextRow_ != null) {
                 final HtmlTableRow result = nextRow_;
-                setNextRow(nextRow_.getNextDomSibling());
+                setNextRow(nextRow_.getNextSibling());
                 return result;
             }
             else {
@@ -397,21 +397,21 @@ public class HtmlTable extends ClickableElement {
          */
         private void setNextRow(final DomNode node) {
             nextRow_ = null;
-            for (DomNode next = node; next != null; next = next.getNextDomSibling()) {
+            for (DomNode next = node; next != null; next = next.getNextSibling()) {
                 if (next instanceof HtmlTableRow) {
                     nextRow_ = (HtmlTableRow) next;
                     return;
                 }
                 else if (currentGroup_ == null && next instanceof TableRowGroup) {
                     currentGroup_ = (TableRowGroup) next;
-                    setNextRow(next.getFirstDomChild());
+                    setNextRow(next.getFirstChild());
                     return;
                 }
             }
             if (currentGroup_ != null) {
                 final DomNode group = currentGroup_;
                 currentGroup_ = null;
-                setNextRow(group.getNextDomSibling());
+                setNextRow(group.getNextSibling());
             }
         }
     }

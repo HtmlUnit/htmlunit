@@ -105,7 +105,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        final DomNode child = node.getFirstDomChild();
+        final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have attribute", false, child.hasAttributes());
     }
 
@@ -120,7 +120,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        final DomNode child = node.getFirstDomChild();
+        final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
 
@@ -135,7 +135,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        final DomNode child = node.getFirstDomChild();
+        final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
     }
 
@@ -150,7 +150,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        final DomNode child = node.getFirstDomChild();
+        final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getLocalName());
     }
 
@@ -165,7 +165,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
-        final DomNode child = node.getFirstDomChild();
+        final DomNode child = node.getFirstChild();
         child.setPrefix("bar"); // This does nothing.
         Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
@@ -186,7 +186,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
         node.removeAllChildren();
-        Assert.assertEquals("Did not remove all nodes", null, node.getFirstDomChild());
+        Assert.assertEquals("Did not remove all nodes", null, node.getFirstChild());
     }
 
     /**
@@ -202,7 +202,7 @@ public class DomNodeTest extends WebTestCase {
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
 
         final DomNode previousSibling = node.getPreviousSibling();
-        final DomNode nextSibling = node.getNextDomSibling();
+        final DomNode nextSibling = node.getNextSibling();
         final DomNode parent = node.getParentNode();
 
         // position among parent's children
@@ -211,9 +211,9 @@ public class DomNodeTest extends WebTestCase {
         final DomNode newNode = new DomText(page, "test");
         node.replace(newNode);
         assertSame("previous sibling", previousSibling, newNode.getPreviousSibling());
-        assertSame("next sibling", nextSibling, newNode.getNextDomSibling());
+        assertSame("next sibling", nextSibling, newNode.getNextSibling());
         assertSame("parent", parent, newNode.getParentNode());
-        assertSame(newNode, previousSibling.getNextDomSibling());
+        assertSame(newNode, previousSibling.getNextSibling());
         assertSame(newNode, nextSibling.getPreviousSibling());
         assertEquals(position, readPositionAmongParentChildren(newNode));
 
@@ -287,8 +287,8 @@ public class DomNodeTest extends WebTestCase {
         final DomNode newNode = new DomText(page, "test");
         parent.appendDomChild(newNode);
         assertSame("new node previous sibling", node, newNode.getPreviousSibling());
-        assertSame("new node next sibling", null, newNode.getNextDomSibling());
-        assertSame("next sibling", newNode, node.getNextDomSibling());
+        assertSame("new node next sibling", null, newNode.getNextSibling());
+        assertSame("next sibling", newNode, node.getNextSibling());
         assertSame("parent", parent, newNode.getParentNode());
         assertEquals(position + 1, readPositionAmongParentChildren(newNode));
 
@@ -310,7 +310,7 @@ public class DomNodeTest extends WebTestCase {
         final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
 
         final DomNode previousSibling = node.getPreviousSibling();
-        final DomNode nextSibling = node.getNextDomSibling();
+        final DomNode nextSibling = node.getNextSibling();
         final DomNode parent = node.getParentNode();
 
         // position among parent's children
@@ -320,10 +320,10 @@ public class DomNodeTest extends WebTestCase {
         node.insertBefore(newNode);
         assertSame("new node previous sibling", previousSibling, newNode.getPreviousSibling());
         assertSame("previous sibling", newNode, node.getPreviousSibling());
-        assertSame("new node next sibling", node, newNode.getNextDomSibling());
-        assertSame("next sibling", nextSibling, node.getNextDomSibling());
+        assertSame("new node next sibling", node, newNode.getNextSibling());
+        assertSame("next sibling", nextSibling, node.getNextSibling());
         assertSame("parent", parent, newNode.getParentNode());
-        assertSame(newNode, previousSibling.getNextDomSibling());
+        assertSame(newNode, previousSibling.getNextSibling());
         assertSame(node, nextSibling.getPreviousSibling());
         assertEquals(position, readPositionAmongParentChildren(newNode));
     }

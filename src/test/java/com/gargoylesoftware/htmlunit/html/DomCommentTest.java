@@ -72,7 +72,7 @@ public class DomCommentTest extends WebTestCase {
         final String content = "<html><body><span id='foo'>" + comment + "</span></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
-        final DomNode node = elt.getFirstDomChild();
+        final DomNode node = elt.getFirstChild();
         
         assertEquals(comment, node.asXml());
     }
@@ -85,8 +85,8 @@ public class DomCommentTest extends WebTestCase {
     public void testTextSibling() throws Exception {
         final String content = "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";
         final HtmlPage page = loadPage(content);
-        final DomNode node = page.getHtmlElementById("body").getFirstDomChild();
+        final DomNode node = page.getHtmlElementById("body").getFirstChild();
 
-        assertEquals(DomText.NODE_NAME, node.getNextDomSibling().getNodeName());
+        assertEquals(DomText.NODE_NAME, node.getNextSibling().getNodeName());
     }
 }

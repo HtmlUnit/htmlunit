@@ -75,7 +75,7 @@ public class HtmlTitle extends HtmlElement {
      */
     @Override
     public void setNodeValue(final String message) {
-        final DomNode child = getFirstDomChild();
+        final DomNode child = getFirstChild();
         if (child == null) {
             final DomNode textNode = new DomText(getPage() , message);
             appendDomChild(textNode);

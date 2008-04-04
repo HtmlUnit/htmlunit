@@ -1389,7 +1389,7 @@ public class HtmlPageTest extends WebTestCase {
             assertEquals(element1.getNodeName(), element2.getNodeName());
         }
         assertFalse(iterator2.hasNext());
-        assertEquals("Hello there!", page2.getHtmlElementById("myId").getFirstDomChild().getNodeValue());
+        assertEquals("Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue());
     }
 
     /**

@@ -187,9 +187,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public HtmlElement getDocumentHtmlElement() {
         if (documentElement_ == null) {
-            DomNode childNode = getFirstDomChild();
+            DomNode childNode = getFirstChild();
             while (childNode != null && !(childNode instanceof HtmlElement)) {
-                childNode = childNode.getNextDomSibling();
+                childNode = childNode.getNextSibling();
             }
             documentElement_ = (HtmlElement) childNode;
         }
@@ -1130,8 +1130,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
             final Map<String, HtmlAttr> emptyMap = Collections.emptyMap();
             titleElement = new HtmlTitle(null, HtmlTitle.TAG_NAME, this, emptyMap);
-            if (head.getFirstDomChild() != null) {
-                head.getFirstDomChild().insertBefore(titleElement);
+            if (head.getFirstChild() != null) {
+                head.getFirstChild().insertBefore(titleElement);
             }
             else {
                 head.appendDomChild(titleElement);

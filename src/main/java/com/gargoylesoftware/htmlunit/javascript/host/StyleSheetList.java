@@ -120,7 +120,7 @@ public class StyleSheetList extends SimpleScriptable {
                 final HtmlStyle style = (HtmlStyle) node;
                 String styleText = "";
                 if (style.getFirstChild() != null) {
-                    styleText = style.getFirstDomChild().asText();
+                    styleText = style.getFirstChild().asText();
                 }
                 sheet = new Stylesheet(element, new InputSource(new StringReader(styleText)));
             }

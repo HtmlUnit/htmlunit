@@ -107,7 +107,7 @@ public class DomText extends DomCharacterData implements Text {
         if (getParentNode() != null) {
             newText.setParentNode(getParentNode());
             newText.setPreviousSibling(this);
-            newText.setNextSibling(getNextDomSibling());
+            newText.setNextSibling(getNextSibling());
             setNextSibling(newText);
         }
 

@@ -68,7 +68,7 @@ public final class Util {
             }
             @Override
             protected DomNode getNextNode(final DomNode node) {
-                return node.getNextDomSibling();
+                return node.getNextSibling();
             }
         };
     }
@@ -106,7 +106,7 @@ public final class Util {
                     return null;
                 }
                 else {
-                    final DomNode sibling = node.getNextDomSibling();
+                    final DomNode sibling = node.getNextSibling();
                     if (sibling == null) {
                         return getFirstNode(node.getParentNode());
                     }
@@ -122,9 +122,9 @@ public final class Util {
                     return null;
                 }
                 else {
-                    DomNode n = node.getFirstDomChild();
+                    DomNode n = node.getFirstChild();
                     if (n == null) {
-                        n = node.getNextDomSibling();
+                        n = node.getNextSibling();
                     }
                     if (n == null) {
                         return getFirstNode(node.getParentNode());

@@ -785,7 +785,7 @@ public class Document extends EventNode {
                     final HtmlElement proxyNode =
                         new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) getDomNodeOrDie().getPage(), null);
                     HTMLParser.parseFragment(proxyNode, tagName);
-                    final DomNode resultNode = proxyNode.getFirstDomChild();
+                    final DomNode resultNode = proxyNode.getFirstChild();
                     resultNode.removeAllChildren();
                     result = resultNode.getScriptObject();
                 }

@@ -85,7 +85,7 @@ public class HtmlTableRowTest extends WebTestCase {
         page_ = loadPage(htmlContent);
         
         table_ = (HtmlTable) page_.getHtmlElementById("table");
-        tbody_ = (HtmlTableBody) table_.getFirstDomChild();
+        tbody_ = (HtmlTableBody) table_.getFirstChild();
         row_ = table_.getRow(0);
         cell_ = row_.getCell(0);
 
@@ -140,7 +140,7 @@ public class HtmlTableRowTest extends WebTestCase {
     @Test
     public void testClonedRowHasDifferentChildren() throws Exception {
         assertEquals(row_.getCells().size(), rowClone_.getCells().size());
-        assertNotSame(row_.getFirstDomChild(), rowClone_.getFirstDomChild());
+        assertNotSame(row_.getFirstChild(), rowClone_.getFirstChild());
     }
 
     /**
@@ -149,8 +149,8 @@ public class HtmlTableRowTest extends WebTestCase {
     @Test
     public void testClonedCellHasDifferentChildren() {
         assertNotSame(cell_.getParentNode(), cellClone_.getParentNode());
-        assertNotNull(cell_.getFirstDomChild());
-        assertNotSame(cell_.getFirstDomChild(), cellClone_.getFirstDomChild());
+        assertNotNull(cell_.getFirstChild());
+        assertNotSame(cell_.getFirstChild(), cellClone_.getFirstChild());
     }
 
     /**
@@ -323,10 +323,10 @@ public class HtmlTableRowTest extends WebTestCase {
         final String cmd = "document.getElementById('foo').value = 'Input!';document.getElementById('foo')";
         page_.executeJavaScript(cmd);
 
-        final HtmlElement input = (HtmlElement) cell_.getFirstDomChild();
+        final HtmlElement input = (HtmlElement) cell_.getFirstChild();
         assertEquals("Input!", input.getAttributeValue("value"));
 
-        final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstDomChild();
+        final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstChild();
         assertFalse("Input!".equals(inputClone.getAttributeValue("value")));
     }
 

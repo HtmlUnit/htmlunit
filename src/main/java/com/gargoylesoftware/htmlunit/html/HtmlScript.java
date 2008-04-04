@@ -202,7 +202,7 @@ public class HtmlScript extends HtmlElement {
         boolean execute = false;
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-            if (ie || (getAttribute("src").length() == 0 && getFirstDomChild() == null)) {
+            if (ie || (getAttribute("src").length() == 0 && getFirstChild() == null)) {
                 // Always execute if IE; if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.
                 execute = true;
@@ -255,7 +255,7 @@ public class HtmlScript extends HtmlElement {
             return;
         }
 
-        final DomCharacterData textNode = (DomCharacterData) getFirstDomChild();
+        final DomCharacterData textNode = (DomCharacterData) getFirstChild();
         final String forr = getHtmlForAttribute();
         String event = getEventAttribute();
 
@@ -332,7 +332,7 @@ public class HtmlScript extends HtmlElement {
                 getPage().loadExternalJavaScriptFile(src, getCharsetAttribute());
             }
         }
-        else if (getFirstDomChild() != null) {
+        else if (getFirstChild() != null) {
             // <script>[code]</script>
             executeInlineScriptIfNeeded(executeIfDeferred);
         }
@@ -430,7 +430,7 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
-        final DomCharacterData textNode = (DomCharacterData) getFirstDomChild();
+        final DomCharacterData textNode = (DomCharacterData) getFirstChild();
         if (textNode != null) {
             printWriter.println("//<![CDATA[");
             printWriter.println(textNode.getData());

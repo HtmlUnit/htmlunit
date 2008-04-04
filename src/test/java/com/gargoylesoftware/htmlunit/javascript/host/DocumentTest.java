@@ -1040,7 +1040,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement div1 = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) div1.getFirstDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) div1.getFirstChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1071,7 +1071,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final HtmlElement parentDiv = firstPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) parentDiv.getFirstDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getFirstChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1156,7 +1156,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement div1 = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv", ((HtmlElement) div1.getNextDomSibling()).getAttributeValue("id"));
+        assertEquals("nextDiv", ((HtmlElement) div1.getNextSibling()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"nextDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1187,7 +1187,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement previousDiv = lastPage.getHtmlElementById("previousDiv");
-        assertEquals("nextDiv", ((HtmlElement) previousDiv.getNextDomSibling()).getAttributeValue("id"));
+        assertEquals("nextDiv", ((HtmlElement) previousDiv.getNextSibling()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"nextDiv"};
         assertEquals(expectedAlerts, collectedAlerts);

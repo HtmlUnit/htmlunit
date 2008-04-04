@@ -297,7 +297,7 @@ public class YuiTest extends WebTestCase {
 
         for (final Iterator< ? > i = tests.iterator(); i.hasNext();) {
             final HtmlSpan span = (HtmlSpan) i.next();
-            final String testResult = span.getNextDomSibling().asText();
+            final String testResult = span.getNextSibling().asText();
             final int colonIdx = testResult.indexOf(":");
             assertTrue(colonIdx > 0 && colonIdx < testResult.length() - 1);
             final String result = span.asText();

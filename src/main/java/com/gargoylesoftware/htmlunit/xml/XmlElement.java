@@ -270,7 +270,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
      */
     @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
-        final boolean hasChildren = (getFirstDomChild() != null);
+        final boolean hasChildren = (getFirstChild() != null);
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
 

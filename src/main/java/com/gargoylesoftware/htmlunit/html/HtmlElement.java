@@ -812,7 +812,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
-        final boolean hasChildren = (getFirstDomChild() != null);
+        final boolean hasChildren = (getFirstChild() != null);
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
 
@@ -1035,12 +1035,12 @@ public abstract class HtmlElement extends DomElement implements Element {
 
         /** Constructor. */
         public ChildElementsIterator() {
-            if (getFirstDomChild() != null) {
-                if (getFirstDomChild() instanceof HtmlElement) {
-                    nextElement_ = (HtmlElement) getFirstDomChild();
+            if (getFirstChild() != null) {
+                if (getFirstChild() instanceof HtmlElement) {
+                    nextElement_ = (HtmlElement) getFirstChild();
                 }
                 else {
-                    setNextElement(getFirstDomChild());
+                    setNextElement(getFirstChild());
                 }
             }
         }
@@ -1079,9 +1079,9 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
 
         private void setNextElement(final DomNode node) {
-            DomNode next = node.getNextDomSibling();
+            DomNode next = node.getNextSibling();
             while (next != null && !(next instanceof HtmlElement)) {
-                next = next.getNextDomSibling();
+                next = next.getNextSibling();
             }
             nextElement_ = (HtmlElement) next;
         }

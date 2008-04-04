@@ -205,13 +205,13 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception If the test fails.
      */
     private void tableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
-        final Object child = cell.getFirstDomChild();
+        final Object child = cell.getFirstChild();
         if (child instanceof HtmlDivision) {
             final HtmlDivision div = (HtmlDivision) child;
-            DomNode firstChild = div.getFirstDomChild();
+            DomNode firstChild = div.getFirstChild();
             if (firstChild instanceof HtmlUnknownElement
                     && (firstChild.getNodeName().equals("b") || firstChild.getNodeName().equals("i"))) {
-                firstChild = firstChild.getFirstDomChild();
+                firstChild = firstChild.getFirstChild();
             }
             if (firstChild instanceof DomText) {
                 final DomText text = (DomText) firstChild;
@@ -244,12 +244,12 @@ public class GWT14Test extends WebTestCase {
      */
     private void i18n(final HtmlPage page, final String id, final String[] expectedValues) {
         final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
-        final Object child = cell.getFirstDomChild();
+        final Object child = cell.getFirstChild();
         if (child instanceof HtmlSelect) {
             final HtmlSelect select = (HtmlSelect) child;
             assertEquals(expectedValues.length, select.getOptionSize());
             for (int i = 0; i < expectedValues.length; i++) {
-                assertEquals(expectedValues[i], select.getOption(i).getFirstDomChild().getNodeValue());
+                assertEquals(expectedValues[i], select.getOption(i).getFirstChild().getNodeValue());
             }
         }
         else {
@@ -259,20 +259,20 @@ public class GWT14Test extends WebTestCase {
 
     private void i18nDictionary(final HtmlPage page, final Map<String, String> expectedMap) throws Exception {
         final HtmlTableRow headerRow = (HtmlTableRow) page.getFirstByXPath("//*[@class='i18n-dictionary-header-row']");
-        final HtmlTableRow valueRow = (HtmlTableRow) headerRow.getNextDomSibling();
-        DomNode headerNode = headerRow.getFirstDomChild();
-        DomNode valueNode = valueRow.getFirstDomChild();
+        final HtmlTableRow valueRow = (HtmlTableRow) headerRow.getNextSibling();
+        DomNode headerNode = headerRow.getFirstChild();
+        DomNode valueNode = valueRow.getFirstChild();
         final Set<String> foundHeaders = new HashSet<String>();
         for (int i = 0; i < expectedMap.size(); i++) {
-            final String header = headerNode.getFirstDomChild().getNodeValue();
-            final String value = valueNode.getFirstDomChild().getNodeValue();
+            final String header = headerNode.getFirstChild().getNodeValue();
+            final String value = valueNode.getFirstChild().getNodeValue();
 
             assertNotNull(expectedMap.get(header));
             assertEquals(expectedMap.get(header), value);
             foundHeaders.add(header);
 
-            valueNode = valueNode.getNextDomSibling();
-            headerNode = headerNode.getNextDomSibling();
+            valueNode = valueNode.getNextSibling();
+            headerNode = headerNode.getNextSibling();
         }
         assertEquals(expectedMap.size(), foundHeaders.size());
     }
@@ -354,7 +354,7 @@ public class GWT14Test extends WebTestCase {
 
         final HtmlSpan span = (HtmlSpan)
             page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/span/div/table//td[2]/span/span");
-        assertEquals("ResultSet", span.getFirstDomChild().getNodeValue());
+        assertEquals("ResultSet", span.getFirstChild().getNodeValue());
     }
 
     /**
@@ -378,7 +378,7 @@ public class GWT14Test extends WebTestCase {
             final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
             if (detailsCells.size() == firstRow.length) {
                 final HtmlTableDataCell firstCell = (HtmlTableDataCell) detailsCells.get(0);
-                if (firstCell.getFirstDomChild().getNodeValue().equals(firstRow[0])) {
+                if (firstCell.getFirstChild().getNodeValue().equals(firstRow[0])) {
                     break;
                 }
             }
@@ -408,17 +408,17 @@ public class GWT14Test extends WebTestCase {
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         final HtmlDivision infoDiv = (HtmlDivision) page.getFirstByXPath("//div[@class='ks-Info']");
-        assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
+        assertEquals("Introduction to the Kitchen Sink", infoDiv.getFirstChild().getFirstChild().getNodeValue());
 
         final Page page2 = page.getAnchorByHref("#Widgets").click();
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         //assertSame(page, page2);
-        assertEquals("Basic Widgets", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
+        assertEquals("Basic Widgets", infoDiv.getFirstChild().getFirstChild().getNodeValue());
 
         final Page page3 = page.getAnchorByHref("#Panels").click();
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         //assertSame(page, page3);
-        assertEquals("Panels", infoDiv.getFirstDomChild().getFirstDomChild().getNodeValue());
+        assertEquals("Panels", infoDiv.getFirstChild().getFirstChild().getNodeValue());
     }
 
     /**

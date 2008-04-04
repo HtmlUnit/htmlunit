@@ -145,7 +145,7 @@ public class DomTextTest extends WebTestCase {
         final HtmlElement elt = page.getHtmlElementById("foo");
         assertEquals(expectedText, elt.asText());
 
-        final DomNode node = elt.getFirstDomChild();
+        final DomNode node = elt.getFirstChild();
         assertEquals(expectedText, node.asText());
     }
 
@@ -176,7 +176,7 @@ public class DomTextTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final String xml = page.getHtmlElementById("foo").getFirstDomChild().asXml().trim();
+        final String xml = page.getHtmlElementById("foo").getFirstChild().asXml().trim();
         assertEquals(expectedValues.length, xml.length());
         int index = 0;
         for (final int expectedValue : expectedValues) {

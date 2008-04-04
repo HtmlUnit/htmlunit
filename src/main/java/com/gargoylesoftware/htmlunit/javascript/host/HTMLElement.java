@@ -835,14 +835,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         
         // compute the where and how the new nodes should be added
         if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
-            if (currentNode.getFirstDomChild() == null) {
+            if (currentNode.getFirstChild() == null) {
                 // new nodes should appended to the children of current node
                 node = currentNode;
                 append = true;
             }
             else {
                 // new nodes should be inserted before first child
-                node = currentNode.getFirstDomChild();
+                node = currentNode.getFirstChild();
                 append = false;
             }
         }
@@ -857,14 +857,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             append = true;
         }
         else if (POSITION_AFTER_END.equalsIgnoreCase(where)) {
-            if (currentNode.getNextDomSibling() == null) {
+            if (currentNode.getNextSibling() == null) {
                 // new nodes should appended to the children of parent node
                 node = currentNode.getParentNode();
                 append = true;
             }
             else {
                 // new nodes should be inserted before current node's next sibling
-                node = currentNode.getNextDomSibling();
+                node = currentNode.getNextSibling();
                 append = false;
             }
         }

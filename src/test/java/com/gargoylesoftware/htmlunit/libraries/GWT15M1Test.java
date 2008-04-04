@@ -74,13 +74,13 @@ public class GWT15M1Test extends WebTestCase {
      * @throws Exception If the test fails.
      */
     private void tableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
-        final Object child = cell.getFirstDomChild();
+        final Object child = cell.getFirstChild();
         if (child instanceof HtmlDivision) {
             final HtmlDivision div = (HtmlDivision) child;
-            DomNode firstChild = div.getFirstDomChild();
+            DomNode firstChild = div.getFirstChild();
             if (firstChild instanceof HtmlUnknownElement
                     && (firstChild.getNodeName().equals("b") || firstChild.getNodeName().equals("i"))) {
-                firstChild = firstChild.getFirstDomChild();
+                firstChild = firstChild.getFirstChild();
             }
             if (firstChild instanceof DomText) {
                 final DomText text = (DomText) firstChild;
@@ -124,7 +124,7 @@ public class GWT15M1Test extends WebTestCase {
             final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
             if (detailsCells.size() == firstRow.length) {
                 final HtmlTableDataCell firstCell = (HtmlTableDataCell) detailsCells.get(0);
-                if (firstCell.getFirstDomChild().getNodeValue().equals(firstRow[0])) {
+                if (firstCell.getFirstChild().getNodeValue().equals(firstRow[0])) {
                     break;
                 }
             }
