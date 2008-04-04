@@ -166,7 +166,7 @@ public final class Util {
                     return null;
                 }
                 else {
-                    DomNode n = node.getLastDomChild();
+                    DomNode n = node.getLastChild();
                     if (n == null) {
                         n = node.getPreviousDomSibling();
                     }

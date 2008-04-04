@@ -401,7 +401,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_lastChild() {
-        return getJavaScriptNode(getDomNodeOrDie().getLastDomChild());
+        return getJavaScriptNode(getDomNodeOrDie().getLastChild());
     }
 
     /**

@@ -84,10 +84,10 @@ public class Dojo102Test extends WebTestCase {
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         final HtmlElement logBody = page.getHtmlElementById("logBody");
-        DomNode lastChild = logBody.getLastDomChild();
+        DomNode lastChild = logBody.getLastChild();
         while (true) {
             Thread.sleep(10000);
-            final DomNode newLastChild = logBody.getLastDomChild();
+            final DomNode newLastChild = logBody.getLastChild();
             if (lastChild != newLastChild) {
                 lastChild = newLastChild;
             }

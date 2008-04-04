@@ -256,15 +256,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * {@inheritDoc}
      */
-    public Node getLastChild() {
-        return getLastDomChild();
-    }
-
-    /**
-     * Returns this node's last child node, or <tt>null</tt> if this node doesn't have any children.
-     * @return this node's last child node, or <tt>null</tt> if this node doesn't have any children
-     */
-    public DomNode getLastDomChild() {
+    public DomNode getLastChild() {
         if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
             return firstChild_.previousSibling_;
@@ -272,6 +264,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         else {
             return null;
         }
+    }
+
+    /**
+     * Returns this node's last child node, or <tt>null</tt> if this node doesn't have any children.
+     * @return this node's last child node, or <tt>null</tt> if this node doesn't have any children
+     * @deprecated As of 2.0, please use {@link #getLastChild()} instead.
+     */
+    public DomNode getLastDomChild() {
+        return getLastChild();
     }
 
     /**
@@ -895,7 +896,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             firstChild_.previousSibling_ = node;
         }
         else {
-            final DomNode last = getLastDomChild();
+            final DomNode last = getLastChild();
             last.nextSibling_ = node;
             node.previousSibling_ = last;
             node.nextSibling_ = null; // safety first
@@ -1054,7 +1055,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (nextSibling_ != null && nextSibling_.previousSibling_ == this) {
             nextSibling_.previousSibling_ = previousSibling_;
         }
-        if (parent_ != null && this == parent_.getLastDomChild()) {
+        if (parent_ != null && this == parent_.getLastChild()) {
             parent_.firstChild_.previousSibling_ = previousSibling_;
         }
 

@@ -1404,12 +1404,12 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
-        final HtmlElement id1 = (HtmlElement) page.getDocumentHtmlElement().getLastDomChild().getLastDomChild();
+        final HtmlElement id1 = (HtmlElement) page.getDocumentHtmlElement().getLastChild().getLastChild();
         assertEquals("id1", id1.getId());
         assertSame(id1, page.getHtmlElementById("id1"));
         final HtmlPage clone = (HtmlPage) page.cloneDomNode(true);
         assertSame(id1, page.getHtmlElementById("id1"));
-        final HtmlElement id1clone = (HtmlElement) clone.getDocumentHtmlElement().getLastDomChild().getLastDomChild();
+        final HtmlElement id1clone = (HtmlElement) clone.getDocumentHtmlElement().getLastChild().getLastChild();
         assertNotSame(id1, id1clone);
         assertEquals("id1", id1clone.getId());
         assertSame(id1clone, clone.getHtmlElementById("id1"));

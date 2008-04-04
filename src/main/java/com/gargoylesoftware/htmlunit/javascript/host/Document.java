@@ -475,7 +475,7 @@ public class Document extends EventNode {
      * @return the searched node
      */
     HtmlElement getLastHtmlElement(final HtmlElement node) {
-        final DomNode lastChild = node.getLastDomChild();
+        final DomNode lastChild = node.getLastChild();
         if (lastChild == null
                 || !(lastChild instanceof HtmlElement)
                 || lastChild instanceof HtmlScript) {

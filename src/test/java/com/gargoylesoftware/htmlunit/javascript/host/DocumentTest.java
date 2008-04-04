@@ -488,7 +488,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("First", page.getTitleText());
 
         final DomNode div1 =
-            page.getHtmlElementById("body").getLastDomChild();
+            page.getHtmlElementById("body").getLastChild();
         assertEquals((short) 3, div1.getNodeType());
         assertEquals("Some Text", div1.getNodeValue());
         assertEquals("#text", div1.getNodeName());
@@ -1098,7 +1098,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1129,7 +1129,7 @@ public class DocumentTest extends WebTestCase {
         assertEquals("Last", lastPage.getTitleText());
 
         final HtmlElement parentDiv = lastPage.getHtmlElementById("parentDiv");
-        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastDomChild()).getAttributeValue("id"));
+        assertEquals("childDiv", ((HtmlElement) parentDiv.getLastChild()).getAttributeValue("id"));
 
         final String[] expectedAlerts = {"childDiv"};
         assertEquals(expectedAlerts, collectedAlerts);

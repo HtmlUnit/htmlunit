@@ -460,11 +460,11 @@ public class HtmlSelectTest extends WebTestCase {
         final List<HtmlOption> options = select.getOptions();
         if (options.isEmpty()) {
             assertNull(select.getFirstDomChild());
-            assertNull(select.getLastDomChild());
+            assertNull(select.getLastChild());
         }
         else {
             assertEquals(options.get(0), select.getFirstDomChild());
-            assertEquals(options.get(options.size() - 1), select.getLastDomChild());
+            assertEquals(options.get(options.size() - 1), select.getLastChild());
         }
     }
 
