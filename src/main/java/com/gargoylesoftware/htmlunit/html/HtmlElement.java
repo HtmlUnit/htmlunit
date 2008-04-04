@@ -157,7 +157,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     @Override
-    public DomNode cloneNode(final boolean deep) {
+    public Node cloneNode(final boolean deep) {
         return cloneDomNode(deep);
     }
 

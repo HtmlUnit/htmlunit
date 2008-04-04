@@ -187,9 +187,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public HtmlElement getDocumentHtmlElement() {
         if (documentElement_ == null) {
-            DomNode childNode = getFirstChild();
+            DomNode childNode = getFirstDomChild();
             while (childNode != null && !(childNode instanceof HtmlElement)) {
-                childNode = childNode.getNextSibling();
+                childNode = childNode.getNextDomSibling();
             }
             documentElement_ = (HtmlElement) childNode;
         }
@@ -610,7 +610,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
             final HtmlBase htmlBase = (HtmlBase) baseElements.get(0);
             boolean insideHead = false;
-            for (DomNode parent = htmlBase.getParentNode(); parent != null; parent = parent.getParentNode()) {
+            for (DomNode parent = htmlBase.getParentDomNode(); parent != null; parent = parent.getParentDomNode()) {
                 if (parent instanceof HtmlHead) {
                     insideHead = true;
                     break;
@@ -1130,11 +1130,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
             final Map<String, HtmlAttr> emptyMap = Collections.emptyMap();
             titleElement = new HtmlTitle(null, HtmlTitle.TAG_NAME, this, emptyMap);
-            if (head.getFirstChild() != null) {
-                head.getFirstChild().insertBefore(titleElement);
+            if (head.getFirstDomChild() != null) {
+                head.getFirstDomChild().insertBefore(titleElement);
             }
             else {
-                head.appendChild(titleElement);
+                head.appendDomChild(titleElement);
             }
         }
 
@@ -1375,12 +1375,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the first parent with the specified node name
      */
     private DomNode getFirstParent(final DomNode node, final String nodeName) {
-        DomNode parent = node.getParentNode();
+        DomNode parent = node.getParentDomNode();
         while (parent != null) {
             if (parent.getNodeName().equals(nodeName)) {
                 return parent;
             }
-            parent = parent.getParentNode();
+            parent = parent.getParentDomNode();
         }
         return null;
     }
@@ -1640,7 +1640,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Checks whether the specified element is descendant of this HtmlPage or not.
      */
     private boolean isDescendant(final HtmlElement element) {
-        for (DomNode parent = element; parent != null; parent = parent.getParentNode()) {
+        for (DomNode parent = element; parent != null; parent = parent.getParentDomNode()) {
             if (parent == this) {
                 return true;
             }
@@ -1716,7 +1716,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (node instanceof HtmlElement) {
             boolean insideNoScript = false;
             if (getWebClient().isJavaScriptEnabled()) {
-                for (DomNode parent = node.getParentNode(); parent != null; parent = parent.getParentNode()) {
+                for (DomNode parent = node.getParentDomNode(); parent != null; parent = parent.getParentDomNode()) {
                     if (parent instanceof HtmlNoScript) {
                         insideNoScript = true;
                         break;
@@ -1935,8 +1935,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Override cloneNode to add cloned elements to the clone, not to the original.
      */
     @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlPage result = (HtmlPage) super.cloneNode(deep);
+    public org.w3c.dom.Node cloneNode(final boolean deep) {
+        final HtmlPage result = (HtmlPage) super.cloneDomNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s
             for (final HtmlElement child : result.getAllHtmlChildElements()) {
