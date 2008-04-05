@@ -52,7 +52,7 @@ import org.apache.xpath.objects.XString;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-class LowerCaseFunction extends FunctionDef1Arg {
+public class LowerCaseFunction extends FunctionDef1Arg {
 
     private static final long serialVersionUID = 5486916278740399118L;
 
