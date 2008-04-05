@@ -391,4 +391,43 @@ public class SimpleScriptableTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Test for
+     * <a href="https://sourceforge.net/tracker/index.php?func=detail&aid=1933943&group_id=47038&atid=448266">bug</a>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts()
+    @NotYetImplemented
+    public void iterator() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "  Object.extend = function(destination, source) {\n"
+            + "    for (var property in source) {\n"
+            + "      destination[property] = source[property];\n"
+            + "    }\n"
+            + "    return destination;\n"
+            + "  };\n"
+            + "\n"
+            + "  Object.extend(Array.prototype, {\n"
+            + "    _each: function(iterator) {\n"
+            + "      for (var i=0;i<this.length;i++)\n"
+            + "        iterator(this[i]);\n"
+            + "    },\n"
+            + "    each: function(iterator) {\n"
+            + "      this._each(function(value) {\n"
+            + "        iterator(value)\n"
+            + "      })\n"
+            + "    }\n"
+            + "  });\n"
+            + "\n"
+            + "  var x = [ 'a', 'b', 'c' ];\n"
+            + "  x.each(new function(a, b) { });\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
