@@ -15,14 +15,14 @@
             </p>
             <p>
                 There are several ways to move the focus from one element to another.  The simplest is to call
-                WebClient.moveFocusToElement(HtmlElement).
+                HtmlPage.setFocusedElement(HtmlElement).
                 This method will remove focus from whatever element currently has it, if any, and will set
                 it to the new component.  Along the way, it will fire off any "onfocus" and "onblur" handlers
                 that have been defined.
             </p>
             <p>
                 The element currently owning the focus can be determined with a call to
-                WebClient.getElementWithFocus().
+                HtmlPage.getFocusedElement().
             </p>
             <p>
                 To simulate keyboard navigation via the tab key, you can call
@@ -42,7 +42,7 @@
             <p>
                 Finally, there is an assertion for testing that will verify that every tabbable element
                 has a defined tabindex attribute.  This is done with
-                HtmlPage.assertAllTabIndexAttributesSet().
+                WebAssert.assertAllTabIndexAttributesSet().
             </p>
         </section>
     </body>
