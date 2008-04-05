@@ -23,7 +23,7 @@
             <p>
                 We use <a href="http://checkstyle.sourceforge.net">checkstyle</a> to check as many coding
                 conventions as possible.  Things covered by checkstyle are only documented below if we feel
-                that they require explanation.  You can run checkstyle with the following target.
+                that they require explanation.  You can run checkstyle with the following target:
                 <source>mvn checkstyle:checkstyle</source>
             </p>
         </section>
@@ -31,13 +31,9 @@
         <section name="Unit tests">
             <p>
                 All code must have 100% automated test coverage using the <a href="http://www.junit.org">JUnit</a>
-                testing framework.  I strongly suggest that you write the code test-first but I'll be happy
-                as long as there are full tests for everything.  Run the tests with the following target.
+                testing framework.  It is strongly suggested that you write the code test-first but it is fine
+                as long as there are full tests for everything.  Run the tests with the following target:
                 <source>mvn test</source>
-            </p>
-            <p>
-                There are a couple of tests that hit live web servers as a final sanity check but the vast
-                majority of tests do not.
             </p>
         </section>
 
@@ -67,12 +63,12 @@
                     <tr>
                         <td>Util</td>
                         <td>Utility</td>
-                        <td>Used only in class names.  ie StringUtil</td>
+                        <td>Used only in class names.  i.e. StringUtil</td>
                     </tr>
                     <tr>
                         <td>e</td>
                         <td>Exception</td>
-                        <td>Used only in catch blocks.  ie catch( MyException e )</td>
+                        <td>Used only in catch blocks.  i.e. catch( MyException e )</td>
                     </tr>
                     <tr>
                         <td>i</td>
