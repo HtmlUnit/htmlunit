@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HTMLParserTest extends WebTestCase {
 
     /**
-     * Tests the new HTMLParser on a simple HTML string, using the Jaxen XPath navigator to validate results.
+     * Tests the new HTMLParser on a simple HTML string.
      * @throws Exception failure
      */
     @Test
