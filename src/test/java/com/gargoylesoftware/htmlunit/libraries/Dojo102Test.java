@@ -212,7 +212,7 @@ public class Dojo102Test extends WebTestCase {
         eq("GROUP \"t\" has 57 tests to run", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100').w);", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.marginBox('sq100').h);", logs);
-        eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100margin10').w);", logs); // TODO: starts failing here (get 100, not 120)
+        eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100margin10').w);", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(120, dojo.marginBox('sq100margin10').h);", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100margin10').w);", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(100, dojo.contentBox('sq100margin10').h);", logs);
@@ -257,7 +257,7 @@ public class Dojo102Test extends WebTestCase {
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(40, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).h);", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::coordsBasic", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::coordsMargin", logs);
-        eq("PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos", logs);
+        eq("PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos", logs); // TODO: CSS stuff starts failing here
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::coordsScrolled", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(1, dojo.style('sq100nopos', 'opacity'));", logs);
         eq("PASSED test: ../../dojo/tests/_base/html.html::t::t.is(0.1, dojo.style('sq100nopos', 'opacity', 0.1));", logs);
