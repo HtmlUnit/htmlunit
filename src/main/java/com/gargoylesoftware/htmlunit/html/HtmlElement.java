@@ -1115,7 +1115,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Register a Function as an event handler.
      * @param eventName Name of event such as "onclick" or "onblur", etc
-     * @param eventHandler A rhino JavaScript executable Function
+     * @param eventHandler a Rhino JavaScript executable Function
      */
     public final void setEventHandler(final String eventName, final Function eventHandler) {
         final HTMLElement jsObj = (HTMLElement) getScriptObject();

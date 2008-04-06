@@ -492,7 +492,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * The second step is to go through each class and determine if for each jsGet, jsSet, and jsFunction class,
      * there is an entry in the configuration.
      *
-     * @throws Exception Exception on error
+     * @throws Exception if an error occurs
      */
     @Test
     public void testConfigurationFile() throws Exception {
@@ -558,7 +558,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
      * Tests for if the property exists for the configuration.
-     * @throws Exception Exception on error
+     * @throws Exception if an error occurs
      */
     @Test
     public void testForPropertyExist() throws Exception {
@@ -589,7 +589,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     
     /**
      * Tests for if the property exists for the configuration.
-     * @throws Exception Exception on error
+     * @throws Exception if an error occurs
      */
     @Test
     public void testForPropertyNotExist() throws Exception {

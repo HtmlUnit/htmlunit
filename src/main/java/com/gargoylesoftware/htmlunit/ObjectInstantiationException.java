@@ -51,8 +51,8 @@ public class ObjectInstantiationException extends RuntimeException {
     private final Throwable causeException_;
 
     /**
-     * Create an instance.
-     * @param message A message explaining the failure
+     * Creates a new instance.
+     * @param message a message explaining the failure
      * @param cause the exception that was thrown
      */
     public ObjectInstantiationException(final String message, final Throwable cause) {

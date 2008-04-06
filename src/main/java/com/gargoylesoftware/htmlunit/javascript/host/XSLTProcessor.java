@@ -265,7 +265,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param baseName the name that will be used inside the style sheet to identify the parameter context
      * @param parameter the parameter value
      *        To remove a parameter previously added to the processor, provide a value of Empty or Null instead.
-     * @param namespaceURI An optional namespace
+     * @param namespaceURI an optional namespace
      */
     public void jsxFunction_addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
         final String nsString;

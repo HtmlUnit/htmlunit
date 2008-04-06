@@ -70,7 +70,7 @@ public class GWT15M1Test extends WebTestCase {
      * Test value inside {@link HtmlDivision}, {@link HtmlInput} or {@link DomText}
      *
      * @param cell the cells to search in
-     * @param expectedValue Expected value of the value inside the cell
+     * @param expectedValue expected value of the value inside the cell
      * @throws Exception if the test fails
      */
     private void tableDataCell(final HtmlTableDataCell cell, final String expectedValue) {

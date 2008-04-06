@@ -102,7 +102,7 @@ public class FocusableElementTest extends WebTestCase {
      * Simple tag name driver for onblur and onfocus tests.
      *
      * @param tagName HTML tag name for simple tag with text body
-     * @param tagAttributes Additional attribute(s) to add to the generated tag
+     * @param tagAttributes additional attribute(s) to add to the generated tag
      * @throws Exception if the test fails
      */
     private void onClickSimpleTest(final String tagName, final String tagAttributes) throws Exception {

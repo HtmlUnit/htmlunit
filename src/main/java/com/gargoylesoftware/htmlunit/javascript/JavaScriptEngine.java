@@ -596,7 +596,7 @@ public class JavaScriptEngine implements Serializable {
      * unchanged.
      * @param htmlPage the page
      * @param sourceCode the code to process
-     * @param sourceName A name for the chunk of code. This will be used in error messages
+     * @param sourceName a name for the chunk of code (used in error messages)
      * @param htmlElement the HTML element that will act as the context
      * @return the source code after being pre processed
      * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor

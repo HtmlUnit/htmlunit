@@ -1252,8 +1252,8 @@ public class Document extends EventNode {
      * @return the associated event object for that type. The event object will NOT have had its
      *         initialization method called. It is up to the caller of the method to initialize the
      *         event.
-     * @throws DOMException Thrown if the event type is not supported. The DOMException will have a
-     *         type of DOMException.NOT_SUPPORTED_ERR
+     * @throws DOMException if the event type is not supported (will have a type of
+     *         DOMException.NOT_SUPPORTED_ERR)
      */
     public Event jsxFunction_createEvent(final String eventType) throws DOMException {
         final Class< ? extends Event> clazz = (Class< ? extends Event>) SUPPORTED_EVENT_TYPE_MAP.get(eventType);

@@ -377,7 +377,7 @@ public class WebClient implements Serializable {
      * @param opener the web window that initiated the request
      * @param target the name of the window to be opened. This is the name that would
      * be passed into the JavaScript open() method.
-     * @param params Any parameters
+     * @param params any parameters
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
@@ -708,8 +708,8 @@ public class WebClient implements Serializable {
 
     /**
      * Any hosts matched by the specified regular expression pattern will bypass the configured proxy.
-     * @param pattern A regular expression pattern that matches the hostnames of the hosts which should
-     * bypass the configured proxy.
+     * @param pattern a regular expression pattern that matches the hostnames of the hosts which should
+     *                bypass the configured proxy.
      * @see Pattern
      */
     public void addHostsToProxyBypass(final String pattern) {
@@ -857,9 +857,9 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Adds a listener for WebWindowEvent's. All events from all windows associated with this
+     * Adds a listener for {@link WebWindowEvent}s. All events from all windows associated with this
      * client will be sent to the specified listener.
-     * @param listener A listener
+     * @param listener a listener
      */
     public void addWebWindowListener(final WebWindowListener listener) {
         WebAssert.notNull("listener", listener);
@@ -867,8 +867,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Removes a listener for WebWindowEvent's.
-     * @param listener A listener
+     * Removes a listener for {@link WebWindowEvent}s.
+     * @param listener a listener
      */
     public void removeWebWindowListener(final WebWindowListener listener) {
         WebAssert.notNull("listener", listener);

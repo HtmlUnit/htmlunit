@@ -115,7 +115,7 @@ public class XMLDocument extends Document {
     /**
      * Loads an XML document from the specified location.
      *
-     * @param xmlSrouce A string containing a URL that specifies the location of the XML file
+     * @param xmlSrouce a string containing a URL that specifies the location of the XML file
      * @return true if the load succeeded; false if the load failed
      */
     public boolean jsxFunction_load(final String xmlSrouce) {
@@ -270,7 +270,7 @@ public class XMLDocument extends Document {
 
     /**
      * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
-     * @param expression A string specifying an XPath expression
+     * @param expression a string specifying an XPath expression
      * @return list of the found elements
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
@@ -281,7 +281,7 @@ public class XMLDocument extends Document {
 
     /**
      * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
-     * @param expression A string specifying an XPath expression
+     * @param expression a string specifying an XPath expression
      * @return the first node that matches the given pattern-matching operation
      *         If no nodes match the expression, returns a null value.
      */

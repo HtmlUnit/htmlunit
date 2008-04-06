@@ -337,9 +337,9 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Returns the JavaScript default value of this object. This is the JavaScript equivalent
-     * of a toString() in java.
+     * of a toString() in Java.
      *
-     * @param hint A hint as to the format of the default value. Ignored in this case
+     * @param hint a hint as to the format of the default value (ignored in this case)
      * @return the default value
      */
     @Override

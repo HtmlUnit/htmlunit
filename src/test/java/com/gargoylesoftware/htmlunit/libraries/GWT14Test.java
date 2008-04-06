@@ -189,7 +189,7 @@ public class GWT14Test extends WebTestCase {
      * Test value inside {@link HtmlDivision} or {@link HtmlInput}
      * @param page the page to load
      * @param id id of the element to search for
-     * @param expectedValue Expected value of the value inside the element
+     * @param expectedValue expected value of the value inside the element
      * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String expectedValue) {
@@ -201,7 +201,7 @@ public class GWT14Test extends WebTestCase {
      * Test value inside {@link HtmlDivision}, {@link HtmlInput} or {@link DomText}
      *
      * @param cell the cells to search in
-     * @param expectedValue Expected value of the value inside the cell
+     * @param expectedValue expected value of the value inside the cell
      * @throws Exception if the test fails
      */
     private void tableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
@@ -239,7 +239,7 @@ public class GWT14Test extends WebTestCase {
      *
      * @param page the page to load
      * @param id id of the element to search for
-     * @param expectedValues Expected value of the value inside the select
+     * @param expectedValues expected value of the value inside the select
      * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String[] expectedValues) {

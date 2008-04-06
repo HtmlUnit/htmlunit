@@ -63,7 +63,7 @@ public class XMLElement extends Node {
 
     /**
      * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
-     * @param expression A string specifying an XPath expression
+     * @param expression a string specifying an XPath expression
      * @return list of the found elements
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
@@ -74,7 +74,7 @@ public class XMLElement extends Node {
 
     /**
      * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
-     * @param expression A string specifying an XPath expression
+     * @param expression a string specifying an XPath expression
      * @return the first node that matches the given pattern-matching operation
      *         If no nodes match the expression, returns a null value.
      */

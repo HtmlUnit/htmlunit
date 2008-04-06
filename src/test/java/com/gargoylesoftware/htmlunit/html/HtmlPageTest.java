@@ -1735,7 +1735,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @param browserVersion BrowserVersion to use
+     * @param browserVersion the browser version to use
      * @param handlerOk whether OnbeforeunloadHandler.handleEvent will return true of false
      * @param expectedPageTitle the expected title of the page after clicking
      */
