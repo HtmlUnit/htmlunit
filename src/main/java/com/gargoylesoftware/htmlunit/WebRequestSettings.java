@@ -71,7 +71,7 @@ public class WebRequestSettings {
     private String requestBody_;
 
     /**
-     * @param target The URL for this request
+     * @param target the URL for this request
      */
     public WebRequestSettings(final URL target) {
         setURL(target);
@@ -81,7 +81,7 @@ public class WebRequestSettings {
      * Instantiate a {@link WebRequestSettings} for the given URL using the proxy configuration from the original
      * request.
      * @param originalRequest the original request
-     * @param target The URL for this request
+     * @param target the URL for this request
      */
     public WebRequestSettings(final WebRequestSettings originalRequest, final URL target) {
         this(target);
@@ -90,8 +90,8 @@ public class WebRequestSettings {
     }
 
     /**
-     * @param target The URL for this request
-     * @param submitMethod The submitMethod to set.
+     * @param target the URL for this request
+     * @param submitMethod the submitMethod to set
      */
     public WebRequestSettings(final URL target, final SubmitMethod submitMethod) {
         this(target);
@@ -106,64 +106,64 @@ public class WebRequestSettings {
     }
 
     /**
-     * @param url The new URL
+     * @param url the new URL
      */
     public void setURL(final URL url) {
         url_ = url;
     }
 
     /**
-     * @return The proxy host.
+     * @return the proxy host
      */
     public String getProxyHost() {
         return proxyHost_;
     }
 
     /**
-     * @param proxyHost The new proxy host.
+     * @param proxyHost the new proxy host
      */
     public void setProxyHost(final String proxyHost) {
         proxyHost_ = proxyHost;
     }
 
     /**
-     * @return The proxy port.
+     * @return the proxy port
      */
     public int getProxyPort() {
         return proxyPort_;
     }
 
     /**
-     * @param proxyPort The new proxy port.
+     * @param proxyPort the new proxy port
      */
     public void setProxyPort(final int proxyPort) {
         proxyPort_ = proxyPort;
     }
 
     /**
-     * @return Returns the encodingType.
+     * @return the encodingType
      */
     public FormEncodingType getEncodingType() {
         return encodingType_;
     }
 
     /**
-     * @param encodingType The encodingType to set.
+     * @param encodingType the encodingType to set
      */
     public void setEncodingType(final FormEncodingType encodingType) {
         encodingType_ = encodingType;
     }
 
     /**
-     * @return Returns the requestParameters.
+     * @return the requestParameters
      */
     public List<NameValuePair> getRequestParameters() {
         return requestParameters_;
     }
 
     /**
-     * @param requestParameters The requestParameters to set.
-     * @throws RuntimeException If the request body has already been set.
+     * @param requestParameters the requestParameters to set
+     * @throws RuntimeException if the request body has already been set
      */
     public void setRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
         if (requestBody_ != null) {
@@ -177,15 +177,15 @@ public class WebRequestSettings {
     /**
      * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for
      * all other request types. Should not be used in combination with parameters.
-     * @return The body content to be submitted if this is a <tt>POST</tt> request.
+     * @return the body content to be submitted if this is a <tt>POST</tt> request
      */
     public String getRequestBody() {
         return requestBody_;
     }
 
     /**
-     * @param requestBody The body content to be submitted if this is a <tt>POST</tt> request.
-     * @throws RuntimeException If the request parameters have already been set or this is not a <tt>POST</tt> request.
+     * @param requestBody the body content to be submitted if this is a <tt>POST</tt> request
+     * @throws RuntimeException if the request parameters have already been set or this is not a <tt>POST</tt> request
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
         if (requestParameters_ != null && requestParameters_.size() > 0) {
@@ -201,28 +201,28 @@ public class WebRequestSettings {
     }
 
     /**
-     * @return Returns the submitMethod.
+     * @return the submitMethod
      */
     public SubmitMethod getSubmitMethod() {
         return submitMethod_;
     }
 
     /**
-     * @param submitMethod The submitMethod to set.
+     * @param submitMethod the submitMethod to set
      */
     public void setSubmitMethod(final SubmitMethod submitMethod) {
         submitMethod_ = submitMethod;
     }
     
     /**
-     * @return Returns the additionalHeaders.
+     * @return the additionalHeaders
      */
     public Map<String, String> getAdditionalHeaders() {
         return additionalHeaders_;
     }
 
     /**
-     * @param additionalHeaders The additionalHeaders to set.
+     * @param additionalHeaders the additionalHeaders to set
      */
     public void setAdditionalHeaders(final Map<String, String> additionalHeaders) {
         additionalHeaders_ = additionalHeaders;
@@ -230,22 +230,22 @@ public class WebRequestSettings {
 
     /**
      * Adds the specified name/value pair to the additional headers.
-     * @param name The name of the additional header.
-     * @param value The value of the additional header.
+     * @param name the name of the additional header
+     * @param value the value of the additional header
      */
     public void addAdditionalHeader(final String name, final String value) {
         additionalHeaders_.put(name, value);
     }
 
     /**
-     * @return Returns the credentialsProvider.
+     * @return the credentialsProvider
      */
     public CredentialsProvider getCredentialsProvider() {
         return credentialsProvider_;
     }
     
     /**
-     * @param credentialsProvider The credentialProvider to set.
+     * @param credentialsProvider the credentialProvider to set
      */
     public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
         credentialsProvider_ = credentialsProvider;
@@ -253,7 +253,7 @@ public class WebRequestSettings {
 
     /**
      * Returns a string representation of this object.
-     * @return See above
+     * @return a string representation of this object
      */
     @Override
     public String toString() {
@@ -275,7 +275,7 @@ public class WebRequestSettings {
 
     /**
      * Gets the charset to use to perform the request.
-     * @return the charset.
+     * @return the charset
      */
     public String getCharset() {
         return charset_;

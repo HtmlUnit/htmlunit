@@ -249,7 +249,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSimpleScriptable() throws Exception {

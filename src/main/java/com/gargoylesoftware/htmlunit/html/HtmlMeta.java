@@ -62,9 +62,9 @@ public class HtmlMeta extends HtmlElement {
     /**
      * Create an instance of HtmlMeta
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlMeta(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -112,7 +112,7 @@ public class HtmlMeta extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "lang"
+     * @return the value of the attribute "lang"
      * or an empty string if that attribute isn't defined.
      */
     public final String getLangAttribute() {
@@ -124,7 +124,7 @@ public class HtmlMeta extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "xml:lang"
+     * @return the value of the attribute "xml:lang"
      * or an empty string if that attribute isn't defined.
      */
     public final String getXmlLangAttribute() {
@@ -136,7 +136,7 @@ public class HtmlMeta extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "dir"
+     * @return the value of the attribute "dir"
      * or an empty string if that attribute isn't defined.
      */
     public final String getTextDirectionAttribute() {
@@ -148,7 +148,7 @@ public class HtmlMeta extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "http-equiv"
+     * @return the value of the attribute "http-equiv"
      * or an empty string if that attribute isn't defined.
      */
     public final String getHttpEquivAttribute() {
@@ -160,7 +160,7 @@ public class HtmlMeta extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
+     * @return the value of the attribute "name"
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
@@ -172,7 +172,7 @@ public class HtmlMeta extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "content"
+     * @return the value of the attribute "content"
      * or an empty string if that attribute isn't defined.
      */
     public final String getContentAttribute() {
@@ -184,7 +184,7 @@ public class HtmlMeta extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "scheme"
+     * @return the value of the attribute "scheme"
      * or an empty string if that attribute isn't defined.
      */
     public final String getSchemeAttribute() {

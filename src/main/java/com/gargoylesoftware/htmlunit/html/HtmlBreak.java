@@ -58,7 +58,7 @@ public class HtmlBreak extends StyledElement {
     /**
      * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
+     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes

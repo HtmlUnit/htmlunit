@@ -97,7 +97,7 @@ public class Popup extends SimpleScriptable {
 
     /**
      * Returns the HTML document element in the popup.
-     * @return HTML document.
+     * @return the HTML document element in the popup
      */
     public Object jsxGet_document() {
         return document_;

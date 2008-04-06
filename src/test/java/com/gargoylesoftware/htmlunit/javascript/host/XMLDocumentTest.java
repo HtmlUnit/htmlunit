@@ -582,7 +582,7 @@ public class XMLDocumentTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testXmlInsideHtml() throws Exception {
@@ -608,7 +608,7 @@ public class XMLDocumentTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testInstanceOf() throws Exception {

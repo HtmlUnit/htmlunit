@@ -55,9 +55,9 @@ public abstract class HtmlTableCell extends ClickableElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that this element is contained within
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that this element is contained within
      * @param attributes the initial attributes
      */
     protected HtmlTableCell(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -66,9 +66,8 @@ public abstract class HtmlTableCell extends ClickableElement {
     }
 
     /**
-     * Returns the value of the colspan attribute or 1 if the attribute wasn't specified.
-     *
-     * @return See above
+     * Returns the value of the colspan attribute, or <tt>1</tt> if the attribute wasn't specified.
+     * @return the value of the colspan attribute, or <tt>1</tt> if the attribute wasn't specified
      */
     public int getColumnSpan() {
         final String spanString = getAttributeValue("colspan");
@@ -81,9 +80,8 @@ public abstract class HtmlTableCell extends ClickableElement {
     }
 
     /**
-     * Returns the value of the rowspan attribute or 1 if the attribute wasn't specified.
-     *
-     * @return See above
+     * Returns the value of the rowspan attribute, or <tt>1</tt> if the attribute wasn't specified.
+     * @return the value of the rowspan attribute, or <tt>1</tt> if the attribute wasn't specified
      */
     public int getRowSpan() {
         final String spanString = getAttributeValue("rowspan");
@@ -97,7 +95,7 @@ public abstract class HtmlTableCell extends ClickableElement {
 
     /**
      * Returns the table row containing this cell.
-     * @return The table row containing this cell.
+     * @return the table row containing this cell
      */
     public HtmlTableRow getEnclosingRow() {
         return (HtmlTableRow) getEnclosingElement("tr");

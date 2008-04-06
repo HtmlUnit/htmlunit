@@ -60,7 +60,7 @@ public class WebResponseDataTest extends WebTestCase {
 
     /**
      * Tests that gzipped content is handled correctly.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testGZippedContent() throws Exception {
@@ -78,7 +78,7 @@ public class WebResponseDataTest extends WebTestCase {
     /**
      * Verifies that a null body input stream is handled correctly. A null body may be sent, for
      * example, when a 304 (Not Modified) response is sent to the client. See bug 1706505.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testNullBody() throws Exception {

@@ -438,7 +438,7 @@ public class NodeTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testIsSameNode() throws Exception {
@@ -474,7 +474,7 @@ public class NodeTest extends WebTestCase {
      * Test element.appendChild: If the parent has a null parentNode,
      * IE creates a DocumentFragment be the parent's parentNode.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testAppendChild_parentNode() throws Exception {
@@ -508,7 +508,7 @@ public class NodeTest extends WebTestCase {
      * Test element.appendChild: If the parent has a null parentNode,
      * IE creates a DocumentFragment be the parent's parentNode.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testInsertBefore_parentNode() throws Exception {

@@ -47,9 +47,9 @@ package com.gargoylesoftware.htmlunit;
 public interface PromptHandler {
     /**
      * Handle a call to Window.prompt() for the given page.
-     * @param page The page on which the prompt occurred.
-     * @param message The message in the prompt.
-     * @return The value typed in or null if the user pressed cancel.
+     * @param page the page on which the prompt occurred
+     * @param message the message in the prompt
+     * @return the value typed in or null if the user pressed cancel
      */
     String handlePrompt(final Page page, final String message);
 }

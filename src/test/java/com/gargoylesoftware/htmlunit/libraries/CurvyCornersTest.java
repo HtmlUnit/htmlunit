@@ -58,7 +58,7 @@ public class CurvyCornersTest extends WebTestCase {
     private static final String BASE_FILE_PATH = "curvyCorners/1.2.9-beta/";
     
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void demoIE7() throws Exception {
@@ -66,7 +66,7 @@ public class CurvyCornersTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void demo2IE7() throws Exception {
@@ -74,7 +74,7 @@ public class CurvyCornersTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void demoDefault() throws Exception {
@@ -82,7 +82,7 @@ public class CurvyCornersTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void demo2Default() throws Exception {
@@ -90,7 +90,7 @@ public class CurvyCornersTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void demoFF2() throws Exception {
@@ -98,7 +98,7 @@ public class CurvyCornersTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void demo2FF2() throws Exception {

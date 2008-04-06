@@ -56,7 +56,7 @@ public class TextRange extends SimpleScriptable {
 
     /**
      * Retrieves the text contained within the range.
-     * @return the text contained within the range.
+     * @return the text contained within the range
      */
     public String jsxGet_text() {
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
@@ -74,7 +74,7 @@ public class TextRange extends SimpleScriptable {
 
     /**
      * Sets the text contained within the range.
-     * @param text the text contained within the range.
+     * @param text the text contained within the range
      */
     public void jsxSet_text(final String text) {
         //Empty

@@ -328,7 +328,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Ensures that <tt>document.createElement()</tt> works correctly.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void createElement() throws Exception {
@@ -387,7 +387,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void documentCreateElement2() throws Exception {
@@ -424,7 +424,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Ensures that <tt>document.createElementNS()</tt> works correctly.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void createElementNS() throws Exception {
@@ -1906,7 +1906,7 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Firefox supports document.all, but it is "hidden".
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void all_AsBoolean() throws Exception {
@@ -1935,7 +1935,7 @@ public class DocumentTest extends WebTestCase {
     /**
      * Makes sure that the document.all collection contents are not cached if the
      * collection is accessed before the page has finished loading.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void all_Caching() throws Exception {
@@ -1956,7 +1956,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void all_NotExisting() throws Exception {

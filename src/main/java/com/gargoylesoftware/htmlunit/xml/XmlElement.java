@@ -78,10 +78,10 @@ public class XmlElement extends DomNamespaceNode implements Element {
     /**
      * Create an instance of a DOM node that can have a namespace.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate.
-     * @param page The page that contains this element.
-     * @param attributes The attributes of this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
+     * @param attributes the attributes of this element
      */
     protected XmlElement(final String namespaceURI, final String qualifiedName, final Page page,
             final Map<String, XmlAttr> attributes) {
@@ -101,7 +101,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * @return The same value as returned by {@link #getTagName()},
+     * @return the same value as returned by {@link #getTagName()},
      */
     @Override
     public String getNodeName() {
@@ -110,7 +110,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * Returns the tag name of this element.
-     * @return the tag name of this element.
+     * @return the tag name of this element
      */
     public String getTagName() {
         if (getNamespaceURI() == null) {
@@ -126,7 +126,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
      * result is an empty string then it will be {@link #ATTRIBUTE_NOT_DEFINED}
      *
      * @param attributeName the name of the attribute
-     * @return The value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      */
     public final String getAttributeValue(final String attributeName) {
         final XmlAttr attr = (XmlAttr) attributes_.get(attributeName);
@@ -141,7 +141,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * Returns the map holding the attributes, keyed by name.
-     * @return the attributes map.
+     * @return the attributes map
      */
     public Map<String, XmlAttr> getAttributesMap() {
         return attributes_;
@@ -150,7 +150,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
      * Sets the value of the attribute specified by name.
      *
      * @param attributeName the name of the attribute
-     * @param attributeValue The value of the attribute
+     * @param attributeValue the value of the attribute
      */
     public final void setAttribute(final String attributeName, final String attributeValue) {
         setAttributeValue(null, attributeName, attributeValue);
@@ -159,9 +159,9 @@ public class XmlElement extends DomNamespaceNode implements Element {
     /**
      * Sets the value of the attribute specified by namespace and qualified name.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name (prefix:local) of the attribute.
-     * @param attributeValue The value of the attribute
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name (prefix:local) of the attribute
+     * @param attributeValue the value of the attribute
      */
     public final void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
@@ -172,7 +172,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
      * Sets the value of the specified attribute.
      *
      * @param attributeName the name of the attribute
-     * @param attributeValue The value of the attribute
+     * @param attributeValue the value of the attribute
      */
     public final void setAttributeValue(final String attributeName, final String attributeValue) {
         setAttributeValue(null, attributeName, attributeValue);
@@ -181,9 +181,9 @@ public class XmlElement extends DomNamespaceNode implements Element {
     /**
      * Sets the value of the specified attribute.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the attribute
-     * @param attributeValue The value of the attribute
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the attribute
+     * @param attributeValue the value of the attribute
      */
     public final void setAttributeValue(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
@@ -210,8 +210,8 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * Removes an attribute specified by namespace and local name from this element.
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param localName The name within the namespace.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
      */
     public final void removeAttributeNS(final String namespaceURI, final String localName) {
         removeAttribute(getQualifiedName(namespaceURI, localName));
@@ -220,9 +220,9 @@ public class XmlElement extends DomNamespaceNode implements Element {
     /**
      * Returns the qualified name (prefix:local) for the namespace and local name.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param localName The name within the namespace.
-     * @return The qualified name or just local name if the namespace is not fully defined.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
+     * @return the qualified name or just local name if the namespace is not fully defined
      */
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
@@ -243,8 +243,8 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * Create an attribute map as needed by HtmlElement. This is just used by the element factories.
-     * @param attributeCount the initial number of attributes to be added to the map.
-     * @return the attribute map.
+     * @param attributeCount the initial number of attributes to be added to the map
+     * @return the attribute map
      */
     @SuppressWarnings("unchecked")
     static Map<String, XmlAttr> createAttributeMap(final int attributeCount) {
@@ -253,10 +253,10 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * Add an attribute to the attribute map. This is just used by the element factories.
-     * @param attributeMap the attribute map where the attribute will be added.
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the attribute
-     * @param value The value of the attribute
+     * @param attributeMap the attribute map where the attribute will be added
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the attribute
+     * @param value the value of the attribute
      */
     static XmlAttr addAttributeToMap(final XmlPage page, final Map<String, XmlAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {

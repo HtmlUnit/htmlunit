@@ -90,7 +90,7 @@ public interface HTMLParserListener {
      * @param url the URL of the document in which the problem occurs
      * @param line the line of the problem
      * @param column the column of the problem
-     * @param key the key identifying the "type" of problem. May be interesting to filter messages.
+     * @param key the key identifying the "type" of problem. May be interesting to filter messages
      */
     void error(final String message, final URL url, final int line, final int column, final String key);
     
@@ -100,7 +100,7 @@ public interface HTMLParserListener {
      * @param url the URL of the document in which the problem occurs
      * @param line the line of the problem
      * @param column the column of the problem
-     * @param key the key identifying the "type" of problem. May be interesting to filter messages.
+     * @param key the key identifying the "type" of problem. May be interesting to filter messages
      */
     void warning(final String message, final URL url, final int line, final int column, final String key);
 }

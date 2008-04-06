@@ -76,9 +76,9 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlTextArea(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -109,7 +109,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     /**
      * Returns the value that would be displayed in the text area.
      *
-     * @return The text.
+     * @return the text
      */
     public final String getText() {
         return getChildrenAsText();
@@ -118,7 +118,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     /**
      * Sets the new value of this text area.
      *
-     * @param newValue The new value.
+     * @param newValue the new value
      */
     public final void setText(final String newValue) {
         initDefaultValue();
@@ -138,13 +138,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
     }
 
     /**
-     * Returns an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted.<p>
-     *
-     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
-     *
-     * @return See above
+     * {@inheritDoc}
      */
     public NameValuePair[] getSubmitKeyValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getText())};
@@ -209,8 +203,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
@@ -221,8 +214,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "rows"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "rows" or an empty string if that attribute isn't defined
      */
     public final String getRowsAttribute() {
         return getAttributeValue("rows");
@@ -233,29 +225,21 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "cols"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "cols" or an empty string if that attribute isn't defined
      */
     public final String getColumnsAttribute() {
         return getAttributeValue("cols");
     }
 
     /**
-     * Returns true if the disabled attribute is set for this element.
-     *
-     * @return Return true if this element is disabled.
+     * {@inheritDoc}
      */
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
 
     /**
-     * Returns the value of the attribute "disabled". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "disabled"
-     * or an empty string if that attribute isn't defined.
+     * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
@@ -266,8 +250,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "readonly"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "readonly" or an empty string if that attribute isn't defined
      */
     public final String getReadOnlyAttribute() {
         return getAttributeValue("readonly");
@@ -278,8 +261,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
@@ -290,8 +272,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accesskey"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "accesskey" or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
         return getAttributeValue("accesskey");
@@ -302,8 +283,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttributeValue("onfocus");
@@ -314,8 +294,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
@@ -326,8 +305,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onselect"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onselect" or an empty string if that attribute isn't defined
      */
     public final String getOnSelectAttribute() {
         return getAttributeValue("onselect");
@@ -338,16 +316,15 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onchange"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onchange" or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
         return getAttributeValue("onchange");
     }
 
     /**
-     * Returns the selected text contained in this HtmlTextArea, <code>null</code> if no selection (Firefox only).
-     * @return the text
+     * Returns the selected text contained in this text area, or <tt>null</tt> if no selection (Firefox only).
+     * @return the selected text contained in this text area
      */
     public String getSelectedText() {
         String text = null;

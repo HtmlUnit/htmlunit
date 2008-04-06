@@ -89,7 +89,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * @param style the original Style.
+     * @param style the original Style
      */
     ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
         super(style.getHTMLElement());

@@ -73,9 +73,9 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlSelect(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -115,14 +115,14 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns a List containing all of the currently selected options. The following special
-     * conditions can occur if the element is in single select mode:
+     * <p>Returns all of the currently selected options. The following special
+     * conditions can occur if the element is in single select mode:</p>
      * <ul>
-     * <li>if multiple options are erroneously selected, the last one is returned</li>
-     * <li>if no options are selected, the first one is returned</li>
+     *   <li>if multiple options are erroneously selected, the last one is returned</li>
+     *   <li>if no options are selected, the first one is returned</li>
      * </ul>
      *
-     * @return See above
+     * @return the currently selected options
      */
     public List<HtmlOption> getSelectedOptions() {
         List<HtmlOption> result;
@@ -155,9 +155,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns a List containing all the options.
-     *
-     * @return See above
+     * Returns all of the options in this select element.
+     * @return all of the options in this select element
      */
     @SuppressWarnings("unchecked")
     public List<HtmlOption> getOptions() {
@@ -168,8 +167,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     /**
      * Returns the indexed option.
      *
-     * @param index The index.
-     * @return The option specified by the index.
+     * @param index the index
+     * @return the option specified by the index
      */
     @SuppressWarnings("unchecked")
     public HtmlOption getOption(final int index) {
@@ -179,7 +178,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
 
     /**
      * Returns the number of options.
-     * @return The number of options.
+     * @return the number of options
      */
     public int getOptionSize() {
         final List< ? extends HtmlElement> elementList = getHtmlElementsByTagName("option");
@@ -189,7 +188,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     /**
      * Remove options by reducing the "length" property. This has no
      * effect if the length is set to the same or greater.
-     * @param newLength The new length property value
+     * @param newLength the new length property value
      */
     public void setOptionSize(final int newLength) {
         final List< ? extends HtmlElement> elementList = getHtmlElementsByTagName("option");
@@ -201,7 +200,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
 
     /**
      * Remove an option at the given index.
-     * @param index The index of the option to remove
+     * @param index the index of the option to remove
      */
     public void removeOption(final int index) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
@@ -216,8 +215,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
 
     /**
      * Replace an option at the given index with a new option.
-     * @param index The index of the option to remove
-     * @param newOption The new option to replace to indexed option
+     * @param index the index of the option to remove
+     * @param newOption the new option to replace to indexed option
      */
     public void replaceOption(final int index, final HtmlOption newOption) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
@@ -236,7 +235,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
 
     /**
      * Add a new option at the end.
-     * @param newOption The new option to add
+     * @param newOption the new option to add
      */
     public void appendOption(final HtmlOption newOption) {
         appendChild(newOption);
@@ -264,8 +263,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
-     * @param optionValue The value of the option that is to change
-     * @return The page that occupies this window after this change is made. It
+     * @param optionValue the value of the option that is to change
+     * @return the page that occupies this window after this change is made. It
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute(final String optionValue, final boolean isSelected) {
@@ -284,8 +283,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
-     * @param selectedOption The value of the option that is to change
-     * @return The page that occupies this window after this change is made. It
+     * @param selectedOption the value of the option that is to change
+     * @return the page that occupies this window after this change is made. It
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
@@ -320,13 +319,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted.<p>
-     *
-     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
-     *
-     * @return See above
+     * {@inheritDoc}
      */
     public NameValuePair[] getSubmitKeyValuePairs() {
         final String name = getNameAttribute();
@@ -406,19 +399,18 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns true if this select is using "multiple select".
-     *
-     * @return See above
+     * Returns <tt>true</tt> if this select is using "multiple select".
+     * @return <tt>true</tt> if this select is using "multiple select"
      */
     public boolean isMultipleSelectEnabled() {
         return getAttributeValue("multiple") != ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
-     * Returns the HtmlOption object that corresponds to the specified value.
+     * Returns the {@link HtmlOption} object that corresponds to the specified value.
      *
-     * @param value The value to search by
-     * @return See above
+     * @param value the value to search by
+     * @return the {@link HtmlOption} object that corresponds to the specified value
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     public HtmlOption getOptionByValue(final String value)
@@ -434,7 +426,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * can only select one option at a time, this method returns the selected option.
      * If the user can select multiple options, this method returns all options.
      *
-     * @return The element as text.
+     * @return the element as text
      */
     @Override
     public String asText() {
@@ -464,7 +456,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Returns the value of the attribute "name". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
@@ -475,7 +467,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
-     * @return The value of the attribute "size" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "size" or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
         return getAttributeValue("size");
@@ -485,26 +477,21 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Returns the value of the attribute "multiple". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "multiple" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "multiple" or an empty string if that attribute isn't defined
      */
     public final String getMultipleAttribute() {
         return getAttributeValue("multiple");
     }
 
     /**
-     * Returns the value of the attribute "disabled". Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "disabled" or an empty string if that attribute isn't defined.
+     * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
     }
 
     /**
-     * Returns true if the disabled attribute is set for this element.
-     *
-     * @return Return true if this element is disabled.
+     * {@inheritDoc}
      */
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
@@ -514,7 +501,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Returns the value of the attribute "tabindex". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "tabindex" or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
         return getAttributeValue("tabindex");
@@ -524,7 +511,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Returns the value of the attribute "onfocus". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onfocus" or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
         return getAttributeValue("onfocus");
@@ -534,7 +521,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Returns the value of the attribute "onblur". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onblur" or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
         return getAttributeValue("onblur");
@@ -544,7 +531,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * Returns the value of the attribute "onchange". Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onchange" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "onchange" or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
         return getAttributeValue("onchange");

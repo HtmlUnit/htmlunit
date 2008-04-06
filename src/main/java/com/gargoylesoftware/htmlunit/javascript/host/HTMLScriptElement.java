@@ -62,7 +62,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Returns the <tt>src</tt> attribute.
-     * @return The <tt>src</tt> attribute.
+     * @return the <tt>src</tt> attribute
      */
     public String jsxGet_src() {
         return getHtmlElementOrDie().getAttributeValue("src");
@@ -70,7 +70,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Sets the <tt>src</tt> attribute.
-     * @param src The <tt>src</tt> attribute.
+     * @param src the <tt>src</tt> attribute
      */
     public void jsxSet_src(final String src) {
         getHtmlElementOrDie().setAttributeValue("src", src);
@@ -78,7 +78,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Returns the <tt>type</tt> attribute.
-     * @return The <tt>type</tt> attribute.
+     * @return the <tt>type</tt> attribute
      */
     public String jsxGet_type() {
         return getHtmlElementOrDie().getAttributeValue("type");
@@ -86,7 +86,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Sets the <tt>type</tt> attribute.
-     * @param type The <tt>type</tt> attribute.
+     * @param type the <tt>type</tt> attribute
      */
     public void jsxSet_type(final String type) {
         getHtmlElementOrDie().setAttributeValue("type", type);
@@ -94,7 +94,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Returns the event handler that fires on every state change.
-     * @return The event handler that fires on every state change.
+     * @return the event handler that fires on every state change
      */
     public Object jsxGet_onreadystatechange() {
         return getEventHandlerProp("onreadystatechange");
@@ -102,7 +102,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Returns the event handler that fires on every state change.
-     * @return The event handler that fires on every state change.
+     * @return the event handler that fires on every state change
      */
     public Function getOnReadyStateChangeHandler() {
         return getEventHandler("onreadystatechange");
@@ -110,7 +110,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Sets the event handler that fires on every state change.
-     * @param handler The event handler that fires on every state change.
+     * @param handler the event handler that fires on every state change
      */
     public void jsxSet_onreadystatechange(final Object handler) {
         setEventHandlerProp("onreadystatechange", handler);
@@ -118,7 +118,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Returns the ready state of the script. This is an IE-only property.
-     * @return The ready state of the script.
+     * @return the ready state of the script
      * @see DomNode#READY_STATE_UNINITIALIZED
      * @see DomNode#READY_STATE_LOADING
      * @see DomNode#READY_STATE_LOADED

@@ -71,10 +71,10 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     /**
      * Create a Page object for the specified web response.
      *
-     * @param webResponse The response from the server
-     * @param webWindow The window that this page will be loaded into.
+     * @param webResponse the response from the server
+     * @param webWindow the window that this page will be loaded into
      * @exception IOException If an io problem occurs
-     * @return The new page object
+     * @return the new page object
      */
     public Page createPage(
             final WebResponse webResponse,
@@ -106,10 +106,10 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     /**
      * Creates an HtmlPage for this WebResponse.
      *
-     * @param webResponse The page's source
-     * @param webWindow The WebWindow to place the HtmlPage in
-     * @return The newly created HtmlPage
-     * @throws IOException If the page could not be created
+     * @param webResponse the page's source
+     * @param webWindow the WebWindow to place the HtmlPage in
+     * @return the newly created HtmlPage
+     * @throws IOException if the page could not be created
      */
     protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final HtmlPage newPage;
@@ -120,9 +120,9 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     /**
      * Creates a JavaScriptPage for this WebResponse.
      *
-     * @param webResponse The page's source
-     * @param webWindow The WebWindow to place the JavaScriptPage in
-     * @return The newly created JavaScriptPage
+     * @param webResponse the page's source
+     * @param webWindow the WebWindow to place the JavaScriptPage in
+     * @return the newly created JavaScriptPage
      */
     protected JavaScriptPage createJavaScriptPage(final WebResponse webResponse, final WebWindow webWindow) {
         final JavaScriptPage newPage;
@@ -134,9 +134,9 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     /**
      * Creates a TextPage for this WebResponse.
      *
-     * @param webResponse The page's source
-     * @param webWindow The WebWindow to place the TextPage in
-     * @return The newly created TextPage
+     * @param webResponse the page's source
+     * @param webWindow the WebWindow to place the TextPage in
+     * @return the newly created TextPage
      */
     protected TextPage createTextPage(final WebResponse webResponse, final WebWindow webWindow) {
         final TextPage newPage;
@@ -148,9 +148,9 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     /**
      * Creates an UnexpectedPage for this WebResponse.
      *
-     * @param webResponse The page's source
-     * @param webWindow The WebWindow to place the UnexpectedPage in
-     * @return The newly created UnexpectedPage
+     * @param webResponse the page's source
+     * @param webWindow the WebWindow to place the UnexpectedPage in
+     * @return the newly created UnexpectedPage
      */
     protected UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
         final UnexpectedPage newPage;
@@ -162,10 +162,10 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     /**
      * Creates an XmlPage for this WebResponse.
      *
-     * @param webResponse The page's source
-     * @param webWindow The WebWindow to place the TextPage in
-     * @return The newly created TextPage
-     * @throws IOException If the page could not be created
+     * @param webResponse the page's source
+     * @param webWindow the WebWindow to place the TextPage in
+     * @return the newly created TextPage
+     * @throws IOException if the page could not be created
      */
     protected XmlPage createXmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final XmlPage newPage = new XmlPage(webResponse, webWindow);
@@ -175,7 +175,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
 
     /**
      * Determines the kind of page to create from the content type.
-     * @param contentType The content type to evaluate
+     * @param contentType the content type to evaluate
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
     protected String determinePageType(final String contentType) {

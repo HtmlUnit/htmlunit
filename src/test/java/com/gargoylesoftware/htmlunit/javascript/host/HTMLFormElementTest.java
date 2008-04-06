@@ -417,8 +417,8 @@ public class HTMLFormElementTest extends WebTestCase {
 
     /**
      * Tests form reset and input default values while emulating the specified browser.
-     * @param browserVersion The version of the browser to emulate.
-     * @param expected The expected results.
+     * @param browserVersion the version of the browser to emulate
+     * @param expected the expected results
      * @throws Exception if the test fails
      */
     private void formResetTest(final BrowserVersion browserVersion, final String[] expected) throws Exception {
@@ -987,8 +987,8 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * @param htmlSnippet The HTML to embed in the test
-     * @param expected The expected alert
+     * @param htmlSnippet the HTML to embed in the test
+     * @param expected the expected alert
      * @throws Exception if the test fails
      */
     private void testFieldNamedSubmit(final String htmlSnippet, final String expected) throws Exception {
@@ -1181,7 +1181,7 @@ public class HTMLFormElementTest extends WebTestCase {
     /**
      * @param browserVersion browser version
      * @param expectedAlerts expected alerts
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     protected void testOnSubmitEvent(final BrowserVersion browserVersion, final String[] expectedAlerts)
         throws Exception {
@@ -1240,7 +1240,7 @@ public class HTMLFormElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnsubmitNull() throws Exception {

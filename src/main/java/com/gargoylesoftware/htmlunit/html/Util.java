@@ -57,8 +57,8 @@ public final class Util {
     /**
      * Gets an iterator over all following nodes, depth-first.
      *
-     * @param contextNode The context node for the following axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the following axis
+     * @return a possibly-empty iterator (not null)
      */
     public static Iterator<DomNode> getFollowingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
@@ -76,8 +76,8 @@ public final class Util {
     /**
      * Gets an iterator over all preceding siblings.
      *
-     * @param contextNode The context node for the preceding sibling axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the preceding sibling axis
+     * @return a possibly-empty iterator (not null)
      */
     public static Iterator<DomNode> getPrecedingSiblingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
@@ -95,8 +95,8 @@ public final class Util {
     /**
      * Gets an iterator over all following nodes, depth-first.
      *
-     * @param contextNode The context node for the following axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the following axis
+     * @return a possibly-empty iterator (not null)
      */
     public static Iterator<DomNode> getFollowingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
@@ -140,8 +140,8 @@ public final class Util {
     /**
      * Gets an iterator over all preceding nodes, depth-first.
      *
-     * @param contextNode The context node for the preceding axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the preceding axis
+     * @return a possibly-empty iterator (not null)
      */
     public static Iterator<DomNode> getPrecedingAxisIterator(final DomNode contextNode) {
         return new NodeIterator(contextNode) {
@@ -194,7 +194,7 @@ abstract class NodeIterator implements Iterator<DomNode> {
     private DomNode node_;
 
     /**
-     * @param contextNode The starting node.
+     * @param contextNode the starting node
      */
     public NodeIterator(final DomNode contextNode) {
         node_ = getFirstNode(contextNode);
@@ -226,8 +226,8 @@ abstract class NodeIterator implements Iterator<DomNode> {
      * <p>This method must derive an initial node for iteration
      * from a context node.</p>
      *
-     * @param contextNode The starting node.
-     * @return The first node in the iteration.
+     * @param contextNode the starting node
+     * @return the first node in the iteration
      * @see #getNextNode
      */
     protected abstract DomNode getFirstNode(final DomNode contextNode);
@@ -238,8 +238,8 @@ abstract class NodeIterator implements Iterator<DomNode> {
      * <p>This method must locate a following node from the
      * current context node.</p>
      *
-     * @param contextNode The current node in the iteration.
-     * @return The following node in the iteration, or null
+     * @param contextNode the current node in the iteration
+     * @return the following node in the iteration, or null
      * if there is none.
      * @see #getFirstNode
      */

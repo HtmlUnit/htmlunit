@@ -86,7 +86,7 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * Import the stylesheet into this XSLTProcessor for transformations.
      *
-     * @param style The root-node of a XSLT stylesheet. This can be either a document node or an element node.
+     * @param style the root-node of a XSLT stylesheet. This can be either a document node or an element node
      *              If a document node then the document can contain either a XSLT stylesheet or a LRE stylesheet.
      *              If the argument is an element node it must be the xsl:stylesheet (or xsl:transform) element
      *              of an XSLT stylesheet.
@@ -99,8 +99,8 @@ public class XSLTProcessor extends SimpleScriptable {
      * Transforms the node source applying the stylesheet given by the importStylesheet() function.
      * The owner document of the output node owns the returned document fragment.
      *
-     * @param source The node to be transformed.
-     * @return The result of the transformation.
+     * @param source the node to be transformed
+     * @return the result of the transformation
      */
     public XMLDocument jsxFunction_transformToDocument(
             final Node source) {
@@ -123,7 +123,7 @@ public class XSLTProcessor extends SimpleScriptable {
     }
 
     /**
-     * @return {@link Node} or {@link String}.
+     * @return {@link Node} or {@link String}
      */
     private Object transform(final Node source) {
         try {
@@ -163,9 +163,9 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * Transforms the node source applying the stylesheet given by the importStylesheet() function.
      * The owner document of the output node owns the returned document fragment.
-     * @param source The node to be transformed.
-     * @param output This document is used to generate the output.
-     * @return The result of the transformation.
+     * @param source the node to be transformed
+     * @param output This document is used to generate the output
+     * @return the result of the transformation
      */
     public DocumentFragment jsxFunction_transformToFragment(
             final Node source, final Object output) {
@@ -198,9 +198,9 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * Sets a parameter to be used in subsequent transformations with this nsIXSLTProcessor.
      * If the parameter doesn't exist in the stylesheet the parameter will be ignored.
-     * @param namespaceURI The namespaceURI of the XSLT parameter.
-     * @param localName The local name of the XSLT parameter.
-     * @param value The new value of the XSLT parameter.
+     * @param namespaceURI the namespaceURI of the XSLT parameter
+     * @param localName the local name of the XSLT parameter
+     * @param value the new value of the XSLT parameter
      */
     public void jsxFunction_setParameter(final String namespaceURI, final String localName, final Object value) {
         parameters_.put(getQualifiedName(namespaceURI, localName), value);
@@ -208,9 +208,9 @@ public class XSLTProcessor extends SimpleScriptable {
 
     /**
      * Gets a parameter if previously set by setParameter. Returns null otherwise.
-     * @param namespaceURI The namespaceURI of the XSLT parameter.
-     * @param localName The local name of the XSLT parameter.
-     * @return The value of the XSLT parameter.
+     * @param namespaceURI the namespaceURI of the XSLT parameter
+     * @param localName the local name of the XSLT parameter
+     * @return the value of the XSLT parameter
      */
     public Object jsxFunction_getParameter(final String namespaceURI, final String localName) {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
@@ -229,7 +229,7 @@ public class XSLTProcessor extends SimpleScriptable {
 
     /**
      * Specifies which XML input tree to transform.
-     * @param input the input tree.
+     * @param input the input tree
      */
     public void jsxSet_input(final Node input) {
         input_ = input;
@@ -237,7 +237,7 @@ public class XSLTProcessor extends SimpleScriptable {
 
     /**
      * Returns which XML input tree to transform.
-     * @return which XML input tree to transform.
+     * @return which XML input tree to transform
      */
     public Node jsxGet_input() {
         return input_;
@@ -245,7 +245,7 @@ public class XSLTProcessor extends SimpleScriptable {
 
     /**
      * Sets the object to which to write the output of the transformation.
-     * @param output The object to which to write the output of the transformation.
+     * @param output the object to which to write the output of the transformation
      */
     public void jsxSet_output(final Object output) {
         output_ = output;
@@ -253,7 +253,7 @@ public class XSLTProcessor extends SimpleScriptable {
 
     /**
      * Gets a custom output to write the result of the transformation.
-     * @return the output of the transformation.
+     * @return the output of the transformation
      */
     public Object jsxGet_output() {
         return output_;
@@ -262,10 +262,10 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * Adds parameters into an XSL Transformations (XSLT) style sheet.
      *
-     * @param baseName The name that will be used inside the style sheet to identify the parameter context.
-     * @param parameter The parameter value.
+     * @param baseName the name that will be used inside the style sheet to identify the parameter context
+     * @param parameter the parameter value
      *        To remove a parameter previously added to the processor, provide a value of Empty or Null instead.
-     * @param namespaceURI An optional namespace.
+     * @param namespaceURI An optional namespace
      */
     public void jsxFunction_addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
         final String nsString;

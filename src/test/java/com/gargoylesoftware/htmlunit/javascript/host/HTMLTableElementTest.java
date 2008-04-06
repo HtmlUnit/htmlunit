@@ -590,7 +590,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testWidth() throws Exception {
@@ -608,7 +608,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testCellSpacing() throws Exception {
@@ -628,7 +628,7 @@ public class HTMLTableElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testCellPadding() throws Exception {

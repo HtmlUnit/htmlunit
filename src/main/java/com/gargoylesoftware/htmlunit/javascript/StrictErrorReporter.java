@@ -55,7 +55,7 @@ public class StrictErrorReporter implements ErrorReporter {
     /**
      * Creates an instance.
      *
-     * @param log The log to use when reporting errors
+     * @param log the log to use when reporting errors
      */
     public StrictErrorReporter(final Log log) {
         WebAssert.notNull("log", log);
@@ -65,11 +65,11 @@ public class StrictErrorReporter implements ErrorReporter {
     /**
      * Logs a warning.
      *
-     * @param message The message to be displayed.
-     * @param sourceName The name of the source file
-     * @param line The line number
-     * @param lineSource The source code that failed
-     * @param lineOffset The line offset
+     * @param message the message to be displayed
+     * @param sourceName the name of the source file
+     * @param line the line number
+     * @param lineSource the source code that failed
+     * @param lineOffset the line offset
      */
     public void warning(
             final String message, final String sourceName, final int line,
@@ -80,11 +80,11 @@ public class StrictErrorReporter implements ErrorReporter {
     /**
      * Logs an error.
      *
-     * @param message The message to be displayed.
-     * @param sourceName The name of the source file
-     * @param line The line number
-     * @param lineSource The source code that failed
-     * @param lineOffset The line offset
+     * @param message the message to be displayed
+     * @param sourceName the name of the source file
+     * @param line the line number
+     * @param lineSource the source code that failed
+     * @param lineOffset the line offset
      */
     public void error(
             final String message, final String sourceName, final int line,
@@ -97,12 +97,12 @@ public class StrictErrorReporter implements ErrorReporter {
     /**
      * Logs a runtime error.
      *
-     * @param message The message to be displayed.
-     * @param sourceName The name of the source file
-     * @param line The line number
-     * @param lineSource The source code that failed
-     * @param lineOffset The line offset
-     * @return An evaluator exception
+     * @param message the message to be displayed
+     * @param sourceName the name of the source file
+     * @param line the line number
+     * @param lineSource the source code that failed
+     * @param lineOffset the line offset
+     * @return an evaluator exception
      */
     public EvaluatorException runtimeError(
             final String message, final String sourceName, final int line,

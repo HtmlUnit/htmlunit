@@ -139,7 +139,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test the situation where credentials are required but they haven't been specified.
      *
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testCredentialProvider_NoCredentials() throws Exception {
@@ -182,7 +182,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test that the {@link WebWindowEvent#CHANGE} window event gets fired at the
      * appropriate time.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testHtmlWindowEvents_changed() throws Exception {
@@ -220,7 +220,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test that the {@link WebWindowEvent#OPEN} window event gets fired at
      * the appropriate time.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testHtmlWindowEvents_opened() throws Exception {
@@ -260,7 +260,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test that the {@link WebWindowEvent#CLOSE} window event gets fired at
      * the appropriate time.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testHtmlWindowEvents_closedFromFrame() throws Exception {
@@ -307,7 +307,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test a 301 redirection code where the original request was a GET.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection301_MovedPermanently_GetMethod() throws Exception {
@@ -320,8 +320,8 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Common utility for GET after POST redirection on same URLs
-     * @param statusCode The code to return from the initial request
-     * @throws Exception if the test fails.
+     * @param statusCode the code to return from the initial request
+     * @throws Exception if the test fails
      */
     private void doTestRedirectionSameUrlAfterPost(final int statusCode) throws Exception {
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
@@ -367,7 +367,7 @@ public class WebClientTest extends WebTestCase {
      * redirect the request unless it can be confirmed by the user, since this
      * might change the conditions under which the request was issued.
      * BUT Firefox follows the redirection
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection301_MovedPermanently_PostMethod() throws Exception {
@@ -387,7 +387,7 @@ public class WebClientTest extends WebTestCase {
      * of the original request method. The status codes 303 and 307 have
      * been added for servers that wish to make unambiguously clear which
      * kind of reaction is expected of the client.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection302_MovedTemporarily_PostMethod() throws Exception {
@@ -401,7 +401,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test a 302 redirection code.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection302_MovedTemporarily_GetMethod() throws Exception {
@@ -414,7 +414,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test a 302 redirection code with "," in URL parameters.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection302_MovedTemporarily_CommaInParameters() throws Exception {
@@ -423,7 +423,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Tests a 303 redirection code. This should be the same as a 302.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection303_SeeOther_GetMethod() throws Exception {
@@ -436,7 +436,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Tests a 303 redirection code - this should be the same as a 302.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection303_SeeOther_PostMethod() throws Exception {
@@ -450,7 +450,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Tests a 307 redirection code.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection307_TemporaryRedirect_GetMethod() throws Exception {
@@ -463,7 +463,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Tests a 307 redirection code.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirection307_TemporaryRedirect_PostMethod() throws Exception {
@@ -477,11 +477,11 @@ public class WebClientTest extends WebTestCase {
     /**
      * Basic logic for all the redirection tests.
      *
-     * @param statusCode The code to return from the initial request
-     * @param initialRequestMethod The initial request.
-     * @param expectedRedirectedRequestMethod The submit method of the second (redirected) request.
+     * @param statusCode the code to return from the initial request
+     * @param initialRequestMethod the initial request
+     * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
      * If a redirect is not expected to happen then this must be null
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     private void doTestRedirection(
             final int statusCode,
@@ -496,12 +496,12 @@ public class WebClientTest extends WebTestCase {
     /**
      * Basic logic for all the redirection tests.
      *
-     * @param statusCode The code to return from the initial request
-     * @param initialRequestMethod The initial request.
-     * @param expectedRedirectedRequestMethod The submit method of the second (redirected) request.
+     * @param statusCode the code to return from the initial request
+     * @param initialRequestMethod the initial request
+     * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
      * If a redirect is not expected to happen then this must be null
      * @param newLocation the Location set in the redirection header
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     private void doTestRedirection(
             final int statusCode,
@@ -517,7 +517,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Browsers allow many redirections to the same URL before to stop redirections.
      * See Bug 1619765 and feature request 1472343.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testRedirectionSameURL() throws Exception {
@@ -566,13 +566,13 @@ public class WebClientTest extends WebTestCase {
     /**
      * Basic logic for all the redirection tests.
      *
-     * @param statusCode The code to return from the initial request
-     * @param initialRequestMethod The initial request.
-     * @param expectedRedirectedRequestMethod The submit method of the second (redirected) request.
+     * @param statusCode the code to return from the initial request
+     * @param initialRequestMethod the initial request
+     * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
      * If a redirect is not expected to happen then this must be null
      * @param newLocation the Location set in the redirection header
      * @param useProxy indicates if the test should be performed with a proxy
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     private void doTestRedirection(
             final int statusCode,
@@ -663,7 +663,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test {@link WebClient#setPageCreator(PageCreator)}.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testSetPageCreator() throws Exception {
@@ -694,7 +694,7 @@ public class WebClientTest extends WebTestCase {
         private final List<Page> collectedPages_;
         /**
          * Creates an instance.
-         * @param list The list that will contain the data
+         * @param list the list that will contain the data
          */
         public CollectingPageCreator(final List<Page> list) {
             collectedPages_ = list;
@@ -702,10 +702,10 @@ public class WebClientTest extends WebTestCase {
         
         /**
          * Creates a page.
-         * @param webResponse The web response
-         * @param webWindow The web window
-         * @return The new page
-         * @throws IOException If an IO problem occurs
+         * @param webResponse the web response
+         * @param webWindow the web window
+         * @return the new page
+         * @throws IOException if an IO problem occurs
          */
         public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
@@ -717,7 +717,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Tests loading a page with POST parameters.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testLoadPage_PostWithParameters() throws Exception {
@@ -739,7 +739,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test that double / in query string are not changed.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testLoadPage_SlashesInQueryString() throws Exception {
@@ -761,7 +761,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test that the path and query string are encoded to be valid.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testLoadPage_EncodeRequest() throws Exception {
@@ -807,7 +807,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test loading a file page.
      *
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testLoadFilePage() throws Exception {
@@ -857,7 +857,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test loading a file page with XML content. Regression test for bug 1113487.
      *
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testLoadFilePageXml() throws Exception {
@@ -889,7 +889,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test redirecting with JavaScript during page load.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRedirectViaJavaScriptDuringInitialPageLoad() throws Exception {
@@ -914,7 +914,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test tabbing where there are no tabbable elements.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testKeyboard_NoTabbableElements() throws Exception {
@@ -934,7 +934,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test tabbing where there is only one tabbable element.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testKeyboard_OneTabbableElement() throws Exception {
@@ -965,7 +965,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test pressing an accesskey.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testAccessKeys() throws Exception {
@@ -985,7 +985,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test tabbing to the next element.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testTabNext() throws Exception {
@@ -1005,7 +1005,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test tabbing to the previous element.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testTabPrevious() throws Exception {
@@ -1025,7 +1025,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test that a button can be selected via accesskey.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testPressAccessKey_Button() throws Exception {
@@ -1047,11 +1047,11 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Returns a loaded page for one of the keyboard tests.
-     * @param webClient the WebClient to load the page from.
-     * @param tabIndexValues The tab index values. One input will be created for each item
+     * @param webClient the WebClient to load the page from
+     * @param tabIndexValues the tab index values. One input will be created for each item
      * in this list.
-     * @return The loaded page.
-     * @throws Exception If something goes wrong.
+     * @return the loaded page
+     * @throws Exception if something goes wrong
      */
     private HtmlPage getPageForKeyboardTest(
         final WebClient webClient, final String[] tabIndexValues) throws Exception {
@@ -1093,7 +1093,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test {@link WebClient#loadWebResponseInto(WebResponse,WebWindow)}.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testLoadWebResponseInto() throws Exception {
@@ -1140,7 +1140,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testProxyConfig() throws Exception {
@@ -1223,7 +1223,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testProxyConfigForJS() throws Exception {
@@ -1260,7 +1260,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Test {@link WebClient#expandUrl(URL,String)} for the case where an anchor name
      * was specified.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testExpandUrl() throws Exception {
@@ -1272,7 +1272,7 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testExpandUrlWithFile() throws Exception {
@@ -1393,7 +1393,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Apparently if the browsers receive a charset that they don't understand, they ignore
      * it and assume ISO-8895-1. Ensure we do the same.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testBadCharset() throws Exception {
@@ -1414,7 +1414,7 @@ public class WebClientTest extends WebTestCase {
     /**
      * Colons are legal in the path of a URL but {@link WebClient#expandUrl(URL,String)} was
      * blowing up on this case. Ensure it's fixed.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testExpandUrlHandlesColonsInRelativeUrl() throws Exception {
@@ -1523,7 +1523,7 @@ public class WebClientTest extends WebTestCase {
      * Test that no encoding disturb file reads from filesystem.
      * For instance this test failed under Linux with LANG=de_DE.UTF-8 or LANG=C
      * but worked for LANG=de_DE.ISO-8859-1
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testBinaryFileFromFileSystem() throws Exception {
@@ -1575,7 +1575,7 @@ public class WebClientTest extends WebTestCase {
 
     /**
      * Test that additional header are correctly transmitted to the web connection.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testRequestHeader() throws Exception {
@@ -1603,7 +1603,7 @@ public class WebClientTest extends WebTestCase {
      * Cf <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045</a>:
      * "All media type values, subtype values, and parameter names as defined
      * are case-insensitive".
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void testContentTypeCaseInsensitive() throws Exception {

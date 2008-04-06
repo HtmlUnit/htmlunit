@@ -57,7 +57,7 @@ public abstract class ServletContentWrapper extends HttpServlet {
     /**
      * Creates an instance.
      *
-     * @param content the HTML content of this servlet.
+     * @param content the HTML content of this servlet
      */
     public ServletContentWrapper(final String content) {
         this.content_ = content;

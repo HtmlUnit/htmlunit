@@ -61,9 +61,9 @@ public class ImmediateRefreshHandler implements RefreshHandler, Serializable  {
 
     /**
      * Immediately refreshes the specified page using the specified URL.
-     * @param page The page that is going to be refreshed.
-     * @param url The URL where the new page will be loaded.
-     * @param seconds The number of seconds to wait before reloading the page (ignored!).
+     * @param page the page that is going to be refreshed
+     * @param url the URL where the new page will be loaded
+     * @param seconds the number of seconds to wait before reloading the page (ignored!)
      * @throws IOException if the refresh fails
      */
     public void handleRefresh(final Page page, final URL url, final int seconds) throws IOException {

@@ -64,8 +64,8 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     /**
      * Instantiate a new attribute.
      *
-     * @param xmlElement The parent element.
-     * @param mapEntry The wrapped Map.Entry.
+     * @param xmlElement the parent element
+     * @param mapEntry the wrapped Map.Entry
      * @deprecated Use constructor with explicit names.
      */
     public XmlAttr(final XmlElement xmlElement, final Map.Entry<String, String> mapEntry) {
@@ -77,10 +77,10 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     /**
      * Instantiate a new attribute.
      *
-     * @param page The page that the attribute belongs to.
-     * @param namespaceURI The namespace that defines the attribute name. May be null.
-     * @param qualifiedName The name of the attribute.
-     * @param value The value of the attribute.
+     * @param page the page that the attribute belongs to
+     * @param namespaceURI the namespace that defines the attribute name. May be null
+     * @param qualifiedName the name of the attribute
+     * @param value the value of the attribute
      */
     public XmlAttr(final Page page, final String namespaceURI, final String qualifiedName, final String value) {
         super(namespaceURI, qualifiedName, page);
@@ -112,14 +112,14 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * @return The qualified name of the attribute.
+     * @return the qualified name of the attribute
      */
     public String getName() {
         return getQualifiedName();
     }
 
     /**
-     * @return The value of the attribute.
+     * @return the value of the attribute
      */
     public String getValue() {
         return value_;

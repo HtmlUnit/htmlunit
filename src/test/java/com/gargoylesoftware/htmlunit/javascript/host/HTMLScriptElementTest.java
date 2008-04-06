@@ -59,7 +59,7 @@ public class HTMLScriptElementTest extends WebTestCase {
 
     /**
      * Verifies that the <tt>onreadystatechange</tt> handler is invoked correctly.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void onReadyStateChangeHandler() throws Exception {

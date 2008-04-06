@@ -63,7 +63,7 @@ public class Prototype160Test extends WebTestCase {
     private Server server_;
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void ajax() throws Exception {
@@ -73,7 +73,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void array() throws Exception {
@@ -84,7 +84,7 @@ public class Prototype160Test extends WebTestCase {
 
     /**
      * Fixed if {@link com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest#arrayedMap()} is fixed.
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void base() throws Exception {
@@ -105,7 +105,7 @@ public class Prototype160Test extends WebTestCase {
      *
      * Other tests succeed.
      *
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void dom() throws Exception {
@@ -120,7 +120,7 @@ public class Prototype160Test extends WebTestCase {
     /**
      * Depends on {@link com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest#parentProtoFeature()}.
      *
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void elementMixins() throws Exception {
@@ -130,7 +130,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void enumerable() throws Exception {
@@ -140,7 +140,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void event() throws Exception {
@@ -153,7 +153,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void form() throws Exception {
@@ -166,7 +166,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void hash() throws Exception {
@@ -179,7 +179,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void number() throws Exception {
@@ -189,7 +189,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void position() throws Exception {
@@ -202,7 +202,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void range() throws Exception {
@@ -212,7 +212,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void selector() throws Exception {
@@ -225,7 +225,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void string() throws Exception {
@@ -236,7 +236,7 @@ public class Prototype160Test extends WebTestCase {
 
     /**
      * Depends on {@link com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxyTest#test()}.
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void unitTests() throws Exception {

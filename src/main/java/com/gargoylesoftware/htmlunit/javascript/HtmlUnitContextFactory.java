@@ -89,7 +89,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * Returns the number of milliseconds a script is allowed to execute before
      * being terminated. A value of 0 or less means no timeout.
      *
-     * @return the timeout value. Default value is 0.
+     * @return the timeout value. Default value is 0
      */
     public static long getTimeout() {
         return Timeout_;
@@ -209,7 +209,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
     /**
      * Puts the specified {@link BrowserVersion} as a thread local variable.
-     * @param browserVersion the BrowserVersion that is currently used.
+     * @param browserVersion the BrowserVersion that is currently used
      */
     public static void putThreadLocal(final BrowserVersion browserVersion) {
         browserVersion_.set(browserVersion);

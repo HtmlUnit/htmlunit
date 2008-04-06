@@ -72,7 +72,7 @@ public class HtmlAnchorTest extends WebTestCase {
     /**
      * Verifies that anchor href attributes are trimmed of whitespace (bug 1658064),
      * just like they are in IE and Firefox.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testHrefTrimmed() throws Exception {

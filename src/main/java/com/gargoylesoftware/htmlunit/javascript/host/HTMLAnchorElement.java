@@ -76,7 +76,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the href property.
-     * @param href href attribute value.
+     * @param href href attribute value
      */
     public void jsxSet_href(final String href) {
         getHtmlElementOrDie().setAttributeValue("href", href);
@@ -84,8 +84,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the value of the href property of this link.
-     * @return The href property.
-     * @throws Exception If an error occurs.
+     * @return the href property
+     * @throws Exception if an error occurs
      */
     public String jsxGet_href() throws Exception {
         try {
@@ -98,7 +98,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the name property.
-     * @param name name attribute value.
+     * @param name name attribute value
      */
     public void jsxSet_name(final String name) {
         getHtmlElementOrDie().setAttributeValue("name", name);
@@ -106,8 +106,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the value of the name property of this link.
-     * @return The name property.
-     * @throws Exception If an error occurs.
+     * @return the name property
+     * @throws Exception if an error occurs
      */
     public String jsxGet_name() throws Exception {
         return getHtmlElementOrDie().getAttributeValue("name");
@@ -115,7 +115,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the target property of this link.
-     * @param target target attribute value.
+     * @param target target attribute value
      */
     public void jsxSet_target(final String target) {
         getHtmlElementOrDie().setAttributeValue("target", target);
@@ -123,7 +123,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the value of the target property of this link.
-     * @return The href property.
+     * @return the href property
      */
     public String jsxGet_target() {
         return getHtmlElementOrDie().getAttributeValue("target");
@@ -131,8 +131,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns this link's current URL.
-     * @return This link's current URL.
-     * @throws Exception If an error occurs.
+     * @return this link's current URL
+     * @throws Exception if an error occurs
      */
     private URL getUrl() throws Exception {
         final HtmlAnchor anchor = (HtmlAnchor) getHtmlElementOrDie();
@@ -149,8 +149,8 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the search portion of the link's URL (the portion starting with
      * '?' and up to but not including any '#').
-     * @return The search portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @return the search portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
      * MSDN Documentation</a>
      */
@@ -167,8 +167,8 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Sets the search portion of the link's URL (the portion starting with '?'
      * and up to but not including any '#')..
-     * @param search The new search portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @param search the new search portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
      * MSDN Documentation</a>
      */
@@ -189,8 +189,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the hash portion of the link's URL (the portion following the '#').
-     * @return The hash portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @return the hash portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
@@ -206,8 +206,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the hash portion of the link's URL (the portion following the '#').
-     * @param hash The new hash portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @param hash the new hash portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
@@ -217,8 +217,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the host portion of the link's URL (the '[hostname]:[port]' portion).
-     * @return The host portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @return the host portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -237,8 +237,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the host portion of the link's URL (the '[hostname]:[port]' portion).
-     * @param host The new host portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @param host the new host portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -261,8 +261,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the hostname portion of the link's URL.
-     * @return The hostname portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @return the hostname portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -272,8 +272,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the hostname portion of the link's URL.
-     * @param hostname The new hostname portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @param hostname the new hostname portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -283,8 +283,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the pathname portion of the link's URL.
-     * @return The pathname portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @return the pathname portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
      * MSDN Documentation</a>
      */
@@ -294,8 +294,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the pathname portion of the link's URL.
-     * @param pathname The new pathname portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @param pathname the new pathname portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
      * MSDN Documentation</a>
      */
@@ -305,8 +305,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the port portion of the link's URL.
-     * @return The port portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @return the port portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
      * MSDN Documentation</a>
      */
@@ -322,8 +322,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the port portion of the link's URL.
-     * @param port The new port portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @param port the new port portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
      * MSDN Documentation</a>
      */
@@ -333,8 +333,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Returns the protocol portion of the link's URL, including the trailing ':'.
-     * @return The protocol portion of the link's URL, including the trailing ':'.
-     * @throws Exception If an error occurs.
+     * @return the protocol portion of the link's URL, including the trailing ':'
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
      * MSDN Documentation</a>
      */
@@ -344,8 +344,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the protocol portion of the link's URL.
-     * @param protocol The new protocol portion of the link's URL.
-     * @throws Exception If an error occurs.
+     * @param protocol the new protocol portion of the link's URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
      * MSDN Documentation</a>
      */
@@ -357,8 +357,8 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Calls for instance for implicit conversion to string.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
-     * @param hint the type hint.
-     * @return the default value.
+     * @param hint the type hint
+     * @return the default value
      */
     @Override
     @SuppressWarnings("unchecked")

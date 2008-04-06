@@ -64,10 +64,10 @@ public final class WebWindowEvent extends EventObject {
     /**
      * Creates an instance.
      *
-     * @param webWindow The WebWindow that caused the event
-     * @param type The type - one of {@link #OPEN}, {@link #CLOSE} or {@link #CHANGE}
-     * @param oldPage The old contents of the web window
-     * @param newPage The new contents of the web window
+     * @param webWindow the WebWindow that caused the event
+     * @param type the type - one of {@link #OPEN}, {@link #CLOSE} or {@link #CHANGE}
+     * @param oldPage the old contents of the web window
+     * @param newPage the new contents of the web window
      */
     public WebWindowEvent(
             final WebWindow webWindow,
@@ -94,8 +94,8 @@ public final class WebWindowEvent extends EventObject {
     /**
      * Returns true if the two objects are equal.
      *
-     * @param object The object to compare against.
-     * @return true if the two objects are equal.
+     * @param object the object to compare against
+     * @return true if the two objects are equal
      */
     @Override
     public boolean equals(final Object object) {
@@ -111,7 +111,7 @@ public final class WebWindowEvent extends EventObject {
 
     /**
      * Returns the hash code for this object.
-     * @return the hash code for this object.
+     * @return the hash code for this object
      */
     @Override
     public int hashCode() {
@@ -136,7 +136,7 @@ public final class WebWindowEvent extends EventObject {
 
     /**
      * Returns the web window that fired the event.
-     * @return The web window that fired the event.
+     * @return the web window that fired the event
      */
     public WebWindow getWebWindow() {
         return (WebWindow) getSource();
@@ -160,7 +160,7 @@ public final class WebWindowEvent extends EventObject {
 
     /**
      * Returns a string representation of this event.
-     * @return A string representation of this event.
+     * @return a string representation of this event
      */
     @Override
     public String toString() {

@@ -88,8 +88,8 @@ public class HttpWebConnectionTest {
 
     /**
      * Assert that the two byte arrays are equal.
-     * @param expected The expected value
-     * @param actual The actual value
+     * @param expected the expected value
+     * @param actual the actual value
      */
     public static void assertEquals(final byte[] expected, final byte[] actual) {
         assertEquals(null, expected, actual);
@@ -97,9 +97,9 @@ public class HttpWebConnectionTest {
 
     /**
      * Assert that the two byte arrays are equal.
-     * @param message The message to display on failure
-     * @param expected The expected value
-     * @param actual The actual value
+     * @param message the message to display on failure
+     * @param expected the expected value
+     * @param actual the actual value
      */
     public static void assertEquals(
             final String message, final byte[] expected, final byte[] actual) {
@@ -108,10 +108,10 @@ public class HttpWebConnectionTest {
 
     /**
      * Assert that the two byte arrays are equal.
-     * @param message The message to display on failure
-     * @param expected The expected value
-     * @param actual The actual value
-     * @param length How many characters at the beginning of each byte array will be compared.
+     * @param message the message to display on failure
+     * @param expected the expected value
+     * @param actual the actual value
+     * @param length How many characters at the beginning of each byte array will be compared
      */
     public static void assertEquals(
             final String message, final byte[] expected, final byte[] actual,
@@ -132,9 +132,9 @@ public class HttpWebConnectionTest {
 
     /**
      * Assert that the two input streams are the same.
-     * @param expected The expected value
-     * @param actual The actual value
-     * @throws IOException If an IO problem occurs during comparison
+     * @param expected the expected value
+     * @param actual the actual value
+     * @throws IOException if an IO problem occurs during comparison
      */
     public static void assertEquals(final InputStream expected, final InputStream actual) throws IOException {
         assertEquals(null, expected, actual);
@@ -142,10 +142,10 @@ public class HttpWebConnectionTest {
 
     /**
      * Assert that the two input streams are the same.
-     * @param message The message to display on failure
-     * @param expected The expected value
-     * @param actual The actual value
-     * @throws IOException If an IO problem occurs during comparison
+     * @param message the message to display on failure
+     * @param expected the expected value
+     * @param actual the actual value
+     * @throws IOException if an IO problem occurs during comparison
      */
     public static void assertEquals(
             final String message, final InputStream expected,
@@ -213,7 +213,7 @@ public class HttpWebConnectionTest {
 
     /**
      * Tests creation of a web response.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testMakeWebResponse() throws Exception {
@@ -277,9 +277,9 @@ public class HttpWebConnectionTest {
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
-     * @param resouceBase the base of resources for the default context.
-     * @return the started web server.
-     * @throws Exception If the test fails.
+     * @param resouceBase the base of resources for the default context
+     * @return the started web server
+     * @throws Exception if the test fails
      */
     public static Server startWebServer(final String resouceBase) throws Exception {
         final Server server = new Server(PORT);
@@ -305,10 +305,10 @@ public class HttpWebConnectionTest {
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
-     * @param resouceBase the base of resources for the default context.
-     * @param classpath additional classpath entries to add (may be null).
-     * @return the started web server.
-     * @throws Exception If the test fails.
+     * @param resouceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @return the started web server
+     * @throws Exception if the test fails
      */
     public static Server startWebServer(final String resouceBase, final String[] classpath) throws Exception {
         final Server server = new Server(PORT);
@@ -336,8 +336,8 @@ public class HttpWebConnectionTest {
      * @param resouceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
      * @param servlets Map of {Class, String} pairs -- Class is the class, while String is the path spec
-     * @return the started web server.
-     * @throws Exception If the test fails.
+     * @return the started web server
+     * @throws Exception if the test fails
      */
     public static Server startWebServer(final String resouceBase, final String[] classpath,
             final Map<Class< ? extends Servlet>, String> servlets)
@@ -368,8 +368,8 @@ public class HttpWebConnectionTest {
     /**
      * Stops the web server.
      *
-     * @param httpServer the web server.
-     * @throws Exception If the test fails.
+     * @param httpServer the web server
+     * @throws Exception if the test fails
      */
     public static void stopWebServer(final Server httpServer) throws Exception {
         if (httpServer != null) {

@@ -56,8 +56,8 @@ public class UnexpectedPage implements Page {
     /**
      * Creates an instance.
      *
-     * @param webResponse The response from the server that contains the data required to create this page
-     * @param enclosingWindow The window that this page is being loaded into.
+     * @param webResponse the response from the server that contains the data required to create this page
+     * @param enclosingWindow the window that this page is being loaded into
      */
     public UnexpectedPage(final WebResponse webResponse, final WebWindow enclosingWindow) {
         webResponse_ = webResponse;
@@ -79,8 +79,8 @@ public class UnexpectedPage implements Page {
     /**
      * Returns an input stream representing all the content that was returned from the server.
      *
-     * @return See above.
-     * @exception IOException If an IO error occurs
+     * @return an input stream representing all the content that was returned from the server
+     * @exception IOException if an IO error occurs
      */
     public InputStream getInputStream()
         throws IOException {
@@ -90,7 +90,7 @@ public class UnexpectedPage implements Page {
     /**
      * Returns the web response that was originally used to create this page.
      *
-     * @return The web response
+     * @return the web response that was originally used to create this page
      */
     public WebResponse getWebResponse() {
         return webResponse_;
@@ -99,7 +99,7 @@ public class UnexpectedPage implements Page {
     /**
      * Returns the window that this page is sitting inside.
      *
-     * @return The enclosing frame or null if this page isn't inside a frame.
+     * @return the enclosing frame or null if this page isn't inside a frame
      */
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;

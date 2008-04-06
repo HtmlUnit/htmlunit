@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlSpanTest extends WebTestCase {
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSimpleScriptable() throws Exception {
@@ -77,7 +77,7 @@ public class HtmlSpanTest extends WebTestCase {
 
     /**
      * Test that HTMLSpanElement is the default for other elements like 'address', 'code', 'strike', etc.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSimpleScriptable_others() throws Exception {

@@ -122,8 +122,8 @@ public class XPathResult extends SimpleScriptable {
     private int iteratorIndex_;
 
     /**
-     * @param result the evaluation result.
-     * @param type If a specific type is specified, then the result will be returned as the corresponding type.
+     * @param result the evaluation result
+     * @param type If a specific type is specified, then the result will be returned as the corresponding type
      */
     void init(final List< ? extends Object> result, final int type) {
         result_ = result;
@@ -154,7 +154,7 @@ public class XPathResult extends SimpleScriptable {
     
     /**
      * The code representing the type of this result, as defined by the type constants.
-     * @return The code representing the type of this result.
+     * @return the code representing the type of this result
      */
     public int jsxGet_resultType() {
         return resultType_;
@@ -162,7 +162,7 @@ public class XPathResult extends SimpleScriptable {
     
     /**
      * The number of nodes in the result snapshot.
-     * @return The number of nodes in the result snapshot.
+     * @return the number of nodes in the result snapshot
      */
     public int jsxGet_snapshotLength() {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
@@ -173,7 +173,7 @@ public class XPathResult extends SimpleScriptable {
     
     /**
      * The value of this single node result, which may be null.
-     * @return The value of this single node result, which may be null.
+     * @return the value of this single node result, which may be null
      */
     public Node jsxGet_singleNodeValue() {
         if (resultType_ != ANY_UNORDERED_NODE_TYPE && resultType_ != FIRST_ORDERED_NODE_TYPE) {
@@ -189,7 +189,7 @@ public class XPathResult extends SimpleScriptable {
 
     /**
      * Iterates and returns the next node from the node set or <code>null</code> if there are no more nodes.
-     * @return The next node.
+     * @return the next node
      */
     public Node jsxFunction_iterateNext() {
         if (resultType_ != UNORDERED_NODE_ITERATOR_TYPE && resultType_ != ORDERED_NODE_ITERATOR_TYPE) {
@@ -206,8 +206,8 @@ public class XPathResult extends SimpleScriptable {
     /**
      * Returns the index<sup>th</sup> item in the snapshot collection.
      * If index is greater than or equal to the number of nodes in the list, this method returns null.
-     * @param index Index into the snapshot collection.
-     * @return The node at the index<sup>th</sup> position in the NodeList, or null if that is not a valid index.
+     * @param index Index into the snapshot collection
+     * @return the node at the index<sup>th</sup> position in the NodeList, or null if that is not a valid index
      */
     public Node jsxFunction_snapshotItem(final int index) {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
@@ -223,7 +223,7 @@ public class XPathResult extends SimpleScriptable {
     
     /**
      * Returns the value of this number result.
-     * @return The value of this number result.
+     * @return the value of this number result
      */
     public double jsxGet_numberValue() {
         if (resultType_ != NUMBER_TYPE) {
@@ -234,7 +234,7 @@ public class XPathResult extends SimpleScriptable {
 
     /**
      * Returns the value of this boolean result.
-     * @return The value of this boolean result.
+     * @return the value of this boolean result
      */
     public boolean jsxGet_booleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
@@ -245,7 +245,7 @@ public class XPathResult extends SimpleScriptable {
 
     /**
      * Returns the value of this string result.
-     * @return The value of this string result.
+     * @return the value of this string result
      */
     public String jsxGet_stringValue() {
         if (resultType_ != STRING_TYPE) {

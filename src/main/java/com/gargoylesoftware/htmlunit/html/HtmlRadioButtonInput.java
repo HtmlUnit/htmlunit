@@ -68,9 +68,9 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * If no value is specified, it is set to "on" as browsers do (eg IE6 and Mozilla 1.7)
      * even if spec says that it is not allowed
      * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlRadioButtonInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -103,7 +103,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * Sets the "checked" attribute.
      *
      * @param isChecked true if this element is to be selected
-     * @return The page that occupies this window after setting checked status.
+     * @return the page that occupies this window after setting checked status
      * It may be the same window or it may be a freshly loaded one.
      */
     @Override
@@ -153,10 +153,10 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * Override of default clickAction that makes this radio button the selected
      * one when it is clicked.
      *
-     * @param defaultPage The default page to return if the action does not
+     * @param defaultPage the default page to return if the action does not
      * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * @return the page that is currently loaded after execution of this method
+     * @throws IOException if an IO error occurred
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {

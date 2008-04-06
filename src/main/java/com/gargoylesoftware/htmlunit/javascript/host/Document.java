@@ -181,7 +181,7 @@ public class Document extends EventNode {
     /**
      * Define the Window JavaScript object that encloses this Document object.
      *
-     * @param window The Window JavaScript object that encloses this document.
+     * @param window the Window JavaScript object that encloses this document
      */
     void setWindow(final Window window) {
         window_ = window;
@@ -189,7 +189,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the HTML page that this document is modeling..
-     * @return The page.
+     * @return the page
      */
     public HtmlPage getHtmlPage() {
         return (HtmlPage) getDomNodeOrDie();
@@ -198,7 +198,7 @@ public class Document extends EventNode {
     /**
      * Returns the HTML page that this document is modeling or null if the
      * page is empty.
-     * @return The page.
+     * @return the page
      */
     public HtmlPage getHtmlPageOrNull() {
         return (HtmlPage) getDomNodeOrNull();
@@ -206,7 +206,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the JavaScript attribute "forms".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public Object jsxGet_forms() {
         if (forms_ == null) {
@@ -219,7 +219,7 @@ public class Document extends EventNode {
     /**
      * Returns the value of the JavaScript attribute "links". Refer also to the
      * <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/links.asp">MSDN documentation</a>.
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public Object jsxGet_links() {
         if (links_ == null) {
@@ -235,7 +235,7 @@ public class Document extends EventNode {
      * MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
      * Gecko DOM reference</a>
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public Object jsxGet_anchors() {
         if (anchors_ == null) {
@@ -256,10 +256,10 @@ public class Document extends EventNode {
     /**
      * JavaScript function "write" may accept a variable number of args.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
-     * @param context The JavaScript context
-     * @param thisObj The scriptable
-     * @param args The arguments passed into the method.
-     * @param function The function.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/write.asp">
      * MSDN documentation</a>
      */
@@ -286,10 +286,10 @@ public class Document extends EventNode {
     /**
      * JavaScript function "writeln" may accept a variable number of args.
      * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
-     * @param context The JavaScript context
-     * @param thisObj The scriptable
-     * @param args The arguments passed into the method.
-     * @param function The function.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/writeln.asp">
      * MSDN documentation</a>
      */
@@ -487,7 +487,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the cookie attribute.
-     * @return The cookie attribute
+     * @return the cookie attribute
      */
     public String jsxGet_cookie() {
         final HtmlPage page = getHtmlPage();
@@ -589,7 +589,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the "location" property.
-     * @return The value of the "location" property
+     * @return the value of the "location" property
      */
     public Location jsxGet_location() {
         return window_.jsxGet_location();
@@ -610,7 +610,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the "images" property.
-     * @return The value of the "images" property
+     * @return the value of the "images" property
      */
     public Object jsxGet_images() {
         if (images_ == null) {
@@ -622,7 +622,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the "referrer" property.
-     * @return The value of the "referrer" property
+     * @return the value of the "referrer" property
      */
     public String jsxGet_referrer() {
         final String referrer = getHtmlPage().getWebResponse().getResponseHeaderValue("referrer");
@@ -636,7 +636,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the "URL" property.
-     * @return The value of the "URL" property
+     * @return the value of the "URL" property
      */
     public String jsxGet_URL() {
         return getHtmlPage().getWebResponse().getUrl().toExternalForm();
@@ -644,7 +644,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the "all" property.
-     * @return The value of the "all" property
+     * @return the value of the "all" property
      */
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
@@ -717,7 +717,7 @@ public class Document extends EventNode {
 
     /**
      * Gets the JavaScript property "documentElement" for the document.
-     * @return The root node for the document.
+     * @return the root node for the document
      */
     public SimpleScriptable jsxGet_documentElement() {
         return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentHtmlElement());
@@ -771,8 +771,8 @@ public class Document extends EventNode {
     /**
      * Create a new HTML element with the given tag name.
      *
-     * @param tagName The tag name
-     * @return the new HTML element, or NOT_FOUND if the tag is not supported.
+     * @param tagName the tag name
+     * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
@@ -835,9 +835,9 @@ public class Document extends EventNode {
     /**
      * Creates a new HTML element with the given tag name, and name.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @return the new HTML element, or NOT_FOUND if the tag is not supported.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
         Object result = NOT_FOUND;
@@ -878,7 +878,7 @@ public class Document extends EventNode {
      * Creates a new HTML attribute with the specified name.
      *
      * @param attributeName the name of the attribute to create
-     * @return an attribute with the specified name.
+     * @return an attribute with the specified name
      */
     public Attribute jsxFunction_createAttribute(final String attributeName) {
         final Attribute att = new Attribute();
@@ -907,8 +907,8 @@ public class Document extends EventNode {
     /**
      * Create a new DOM text node with the given data.
      *
-     * @param newData The string value for the text node.
-     * @return the new text node or NOT_FOUND if there is an error.
+     * @param newData the string value for the text node
+     * @return the new text node or NOT_FOUND if there is an error
      */
     public Object jsxFunction_createTextNode(final String newData) {
         Object result = NOT_FOUND;
@@ -934,7 +934,7 @@ public class Document extends EventNode {
     /**
      * Returns the {@link BoxObject} for the specific element.
      *
-     * @param element target for BoxObject.
+     * @param element target for BoxObject
      * @return the BoxObject
      */
     public BoxObject jsxFunction_getBoxObjectFor(final HTMLElement element) {
@@ -943,7 +943,7 @@ public class Document extends EventNode {
     
     /**
      * Returns the element with the specified ID, or <tt>null</tt> if that element could not be found.
-     * @param id The ID to search for
+     * @param id the ID to search for
      * @return the element or null
      */
     public Object jsxFunction_getElementById(final String id) {
@@ -993,13 +993,13 @@ public class Document extends EventNode {
     }
 
     /**
-     * Returns all HTML elements that have a "name" attribute with the given value.
+     * Returns all HTML elements that have a "name" attribute with the specified value.
      *
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
      *
      * @param elementName - value of the "name" attribute to look for
-     * @return NodeList of elements
+     * @return all HTML elements that have a "name" attribute with the specified value
      */
     public HTMLCollection jsxFunction_getElementsByName(final String elementName) {
         final HTMLCollection collection = new HTMLCollection(this);
@@ -1013,9 +1013,9 @@ public class Document extends EventNode {
      * The source node is not altered or removed from the original document;
      * this method creates a new copy of the source node.
      *
-     * @param importedNode The node to import.
-     * @param deep Whether to recursively import the subtree under the specified node; or not.
-     * @return The imported node that belongs to this Document.
+     * @param importedNode the node to import
+     * @param deep Whether to recursively import the subtree under the specified node; or not
+     * @return the imported node that belongs to this Document
      */
     public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
         return ((DomNode) importedNode.getDomNodeOrDie().cloneNode(deep)).getScriptObject();
@@ -1098,7 +1098,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the ready state of the document. This is an IE-only property.
-     * @return The ready state of the document.
+     * @return the ready state of the document
      * @see DomNode#READY_STATE_UNINITIALIZED
      * @see DomNode#READY_STATE_LOADING
      * @see DomNode#READY_STATE_LOADED
@@ -1185,7 +1185,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the JavaScript attribute "scripts".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public Object jsxGet_scripts() {
         if (scripts_ == null) {
@@ -1197,7 +1197,7 @@ public class Document extends EventNode {
 
     /**
      * Returns the value of the JavaScript attribute "selection".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public Selection jsxGet_selection() {
         final Selection selection = new Selection();
@@ -1210,7 +1210,7 @@ public class Document extends EventNode {
      * Returns the value of the frames property.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/collections/frames.asp">
      * MSDN documentation</a>
-     * @return The live collection of frames
+     * @return the live collection of frames
      */
     public Object jsxGet_frames() {
         return getWindow().jsxGet_frames();
@@ -1218,7 +1218,7 @@ public class Document extends EventNode {
     
     /**
      * Returns the implementation object of the current document.
-     * @return implementation-specific object.
+     * @return implementation-specific object
      */
     public DOMImplementation jsxGet_implementation() {
         if (implementation_ == null) {
@@ -1233,7 +1233,7 @@ public class Document extends EventNode {
      * Retrieves a collection of stylesheet objects representing the style sheets that correspond
      * to each instance of a Link or {@link CSSStyleDeclaration} object in the document.
      *
-     * @return styleSheet collection.
+     * @return styleSheet collection
      */
     public StyleSheetList jsxGet_styleSheets() {
         if (styleSheets_ == null) {
@@ -1248,8 +1248,8 @@ public class Document extends EventNode {
      * event of the specified type.
      *
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-DocumentEvent">DocumentEvent</a>
-     * @param eventType The event type to create.
-     * @return The associated event object for that type. The event object will NOT have had its
+     * @param eventType the event type to create
+     * @return the associated event object for that type. The event object will NOT have had its
      *         initialization method called. It is up to the caller of the method to initialize the
      *         event.
      * @throws DOMException Thrown if the event type is not supported. The DOMException will have a
@@ -1278,12 +1278,12 @@ public class Document extends EventNode {
     }
 
     /**
-     * Implementation of the <tt>createEventObject</tt> method supported by Internet Explorer.
+     * Implementation of the <tt>createEventObject</tt> method supported by Internet Explorer. This
+     * method returns an uninitialized event object. It is up to the caller of the method to initialize
+     * the properties of the event.
      *
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536390.aspx">MSDN Documentation</a>
-     * @return An instance of the event object. The event object will NOT have its
-     *         member variables initialized. It is up to the caller of the method to initialize
-     *         the properties of the event.
+     * @return an uninitialized event object
      */
     public Event jsxFunction_createEventObject() {
         final Event event = new Event();
@@ -1296,10 +1296,10 @@ public class Document extends EventNode {
      * Returns the element for the specified x coordinate and the specified y coordinate.
      * The current implementation returns the &lt;body&gt; element.
      *
-     * @param x Specifies the X-offset, in pixels.
-     * @param y Specifies the Y-offset, in pixels.
+     * @param x Specifies the X-offset, in pixels
+     * @param y Specifies the Y-offset, in pixels
      *
-     * @return the element for the specified x coordinate and the specified y coordinate.
+     * @return the element for the specified x coordinate and the specified y coordinate
      */
     public Object jsxFunction_elementFromPoint(final int x, final int y) {
         return jsxGet_body();
@@ -1307,7 +1307,7 @@ public class Document extends EventNode {
 
     /**
      * Create a new range.
-     * @return the range.
+     * @return the range
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">
      * XUL Planet</a>
      */
@@ -1319,10 +1319,11 @@ public class Document extends EventNode {
     }
 
     /**
-     * Adapts any DOM node to resolve namespaces so that an XPath expression
-     * can be easily evaluated relative to the context of the node where it appeared within the document.
-     * @param nodeResolver The node to be used as a context for namespace resolution.
-     * @return XPathNSResolver which resolves namespaces with respect to the definitions in scope for a specified node.
+     * Adapts any DOM node to resolve namespaces so that an XPath expression can be easily
+     * evaluated relative to the context of the node where it appeared within the document.
+     * @param nodeResolver the node to be used as a context for namespace resolution
+     * @return an XPathNSResolver which resolves namespaces with respect to the definitions
+     *         in scope for a specified node
      */
     public XPathNSResolver jsxFunction_createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
@@ -1334,13 +1335,13 @@ public class Document extends EventNode {
     
     /**
      * Evaluates an XPath expression string and returns a result of the specified type if possible.
-     * @param expression The XPath expression string to be parsed and evaluated.
-     * @param contextNode The context node for the evaluation of this XPath expression.
-     * @param resolver The resolver permits translation of all prefixes, including the XML namespace prefix,
+     * @param expression the XPath expression string to be parsed and evaluated
+     * @param contextNode the context node for the evaluation of this XPath expression
+     * @param resolver the resolver permits translation of all prefixes, including the XML namespace prefix,
      *        within the XPath expression into appropriate namespace URIs.
-     * @param type If a specific type is specified, then the result will be returned as the corresponding type.
-     * @param result The result object which may be reused and returned by this method.
-     * @return The result of the evaluation of the XPath expression.
+     * @param type If a specific type is specified, then the result will be returned as the corresponding type
+     * @param result the result object which may be reused and returned by this method
+     * @return the result of the evaluation of the XPath expression
      */
     public XPathResult jsxFunction_evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {

@@ -125,7 +125,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Creates an instance.
      *
-     * @param scriptEngine The JavaScript engine responsible for the new window instance.
+     * @param scriptEngine the JavaScript engine responsible for the new window instance
      */
     public Window(final JavaScriptEngine scriptEngine) {
         scriptEngine_ = scriptEngine;
@@ -159,7 +159,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * The JavaScript function "alert()".
-     * @param message The message
+     * @param message the message
      */
     public void jsxFunction_alert(final Object message) {
         // use Object as parameter and perform String conversion by ourself
@@ -176,7 +176,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * The JavaScript function "confirm()".
-     * @param message The message
+     * @param message the message
      * @return true if ok was pressed, false if cancel was pressed
      */
     public boolean jsxFunction_confirm(final String message) {
@@ -193,7 +193,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * The JavaScript function "prompt()".
-     * @param message The message
+     * @param message the message
      * @return true if ok was pressed, false if cancel was pressed
      */
     public String jsxFunction_prompt(final String message) {
@@ -209,7 +209,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the JavaScript property "document".
-     * @return The document
+     * @return the document
      */
     public Document jsxGet_document() {
         return document_;
@@ -225,7 +225,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Sets the current event.
-     * @param event the event.
+     * @param event the event
      */
     public void setEvent(final Object event) {
         event_ = event;
@@ -234,10 +234,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Opens a new window.
      *
-     * @param context The JavaScript Context
-     * @param scriptable The object that the function was called on.
-     * @param args The arguments passed to the function.
-     * @param function The function object that was invoked.
+     * @param context the JavaScript Context
+     * @param scriptable the object that the function was called on
+     * @param args the arguments passed to the function
+     * @param function the function object that was invoked
      * @return the newly opened window, or <tt>null</tt> if popup windows have been disabled
      * @see WebClient#isPopupBlockerEnabled()
      */
@@ -286,11 +286,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Creates a popup window Open a new window.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createpopup.asp">
      * MSDN documentation</a>
-     * @param context The JavaScript Context
-     * @param scriptable The object that the function was called on.
-     * @param args The arguments passed to the function.
-     * @param function The function object that was invoked.
-     * @return The created popup
+     * @param context the JavaScript Context
+     * @param scriptable the object that the function was called on
+     * @param args the arguments passed to the function
+     * @param function the function object that was invoked
+     * @return the created popup
      */
     public static Popup jsxFunction_createPopup(
         final Context context, final Scriptable scriptable, final Object[] args, final Function function) {
@@ -366,10 +366,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * JavaScript param 1: The code to execute, either a String or a Function.
      * JavaScript param 2: the delay in milliseconds to wait before executing the code.
      *
-     * @param context The JavaScript Context
-     * @param scriptable The object that the function was called on.
-     * @param args The arguments passed to the function.
-     * @param function The function object that was invoked.
+     * @param context the JavaScript Context
+     * @param scriptable the object that the function was called on
+     * @param args the arguments passed to the function
+     * @param function the function object that was invoked
      * @return the id of the created timer
      */
     public static int jsxFunction_setTimeout(final Context context, final Scriptable scriptable,
@@ -395,7 +395,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the JavaScript property "navigator".
-     * @return The document
+     * @return the document
      */
     public Navigator jsxGet_navigator() {
         return navigator_;
@@ -403,7 +403,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the window property. This is a synonym for "self".
-     * @return A reference to this
+     * @return the window property (a reference to <tt>this</tt>)
      */
     public Window jsxGet_window() {
         return this;
@@ -419,7 +419,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the location property.
-     * @return The location property.
+     * @return the location property
      */
     public Location jsxGet_location() {
         return location_;
@@ -427,7 +427,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Sets the location property. This will cause a reload of the window.
-     * @param newLocation The URL of the new content.
+     * @param newLocation the URL of the new content
      * @throws IOException when location loading fails
      */
     public void jsxSet_location(final String newLocation) throws IOException {
@@ -436,7 +436,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the "screen" property.
-     * @return the screen property.
+     * @return the screen property
      */
     public Screen jsxGet_screen() {
         return screen_;
@@ -444,7 +444,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the "history" property.
-     * @return the "history" property.
+     * @return the "history" property
      */
     public History jsxGet_history() {
         return history_;
@@ -452,7 +452,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Initialize the object.
-     * @param webWindow The web window containing the JavaScript.
+     * @param webWindow the web window containing the JavaScript
      * @exception Exception If an error occurs.
      */
     public void initialize(final WebWindow webWindow) throws Exception {
@@ -496,7 +496,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Initialize the object.
-     * @param enclosedPage The page containing the JavaScript.
+     * @param enclosedPage the page containing the JavaScript
      */
     public void initialize(final Page enclosedPage) {
         if (enclosedPage instanceof HtmlPage) {
@@ -520,7 +520,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the value of the top property.
-     * @return The value of "top".
+     * @return the value of "top"
      */
     public SimpleScriptable jsxGet_top() {
         final WebWindow topWebWindow = webWindow_.getTopWindow();
@@ -529,7 +529,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the value of the parent property.
-     * @return the value of window.parent.
+     * @return the value of window.parent
      */
     public SimpleScriptable jsxGet_parent() {
         final WebWindow parentWebWindow = webWindow_.getParentWindow();
@@ -567,7 +567,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the value of the frames property.
-     * @return The live collection of frames.
+     * @return the live collection of frames
      */
     public HTMLCollection jsxGet_frames() {
         if (frames_ == null) {
@@ -592,7 +592,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the WebWindow associated with this Window.
-     * @return The WebWindow.
+     * @return the WebWindow
      */
     public WebWindow getWebWindow() {
         return webWindow_;
@@ -629,8 +629,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param x The horizontal position.
-     * @param y The vertical position.
+     * @param x the horizontal position
+     * @param y the vertical position
      */
     public void jsxFunction_moveTo(final int x, final int y) {
         getLog().debug("Window.moveTo() not implemented");
@@ -638,8 +638,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param x The horizontal position.
-     * @param y The vertical position.
+     * @param x the horizontal position
+     * @param y the vertical position
      */
     public void jsxFunction_moveBy(final int x, final int y) {
         getLog().debug("Window.moveBy() not implemented");
@@ -647,8 +647,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param width The width offset.
-     * @param height The height offset.
+     * @param width the width offset
+     * @param height the height offset
      */
     public void jsxFunction_resizeBy(final int width, final int height) {
         getLog().debug("Window.resizeBy() not implemented");
@@ -656,8 +656,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param width The width of the Window in pixel after resize.
-     * @param height The height of the Window in pixel after resize.
+     * @param width the width of the Window in pixel after resize
+     * @param height the height of the Window in pixel after resize
      */
     public void jsxFunction_resizeTo(final int width, final int height) {
         getLog().debug("Window.resizeTo() not implemented");
@@ -665,8 +665,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param x The horizontal position to scroll to.
-     * @param y The vertical position to scroll to.
+     * @param x the horizontal position to scroll to
+     * @param y the vertical position to scroll to
      */
     public void jsxFunction_scroll(final int x, final int y) {
         getLog().debug("Window.scroll() not implemented");
@@ -674,8 +674,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param x The horizontal distance to scroll by.
-     * @param y The vertical distance to scroll by.
+     * @param x the horizontal distance to scroll by
+     * @param y the vertical distance to scroll by
      */
     public void jsxFunction_scrollBy(final int x, final int y) {
         getLog().debug("Window.scrollBy() not implemented");
@@ -683,7 +683,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param lines The number of lines to scroll down.
+     * @param lines the number of lines to scroll down
      */
     public void jsxFunction_scrollByLines(final int lines) {
         getLog().debug("Window.scrollByLines() not implemented");
@@ -691,7 +691,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param pages The number of pages to scroll down.
+     * @param pages the number of pages to scroll down
      */
     public void jsxFunction_scrollByPages(final int pages) {
         getLog().debug("Window.scrollByPages() not implemented");
@@ -699,8 +699,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Does nothing.
-     * @param x The horizontal position to scroll to.
-     * @param y The vertical position to scroll to.
+     * @param x the horizontal position to scroll to
+     * @param y the vertical position to scroll to
      */
     public void jsxFunction_scrollTo(final int x, final int y) {
         getLog().debug("Window.scrollTo() not implemented");
@@ -708,7 +708,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Sets the value of the onload event handler.
-     * @param newOnload The new handler.
+     * @param newOnload the new handler
      */
     public void jsxSet_onload(final Object newOnload) {
         getEventListenersContainer().setEventHandlerProp("load", newOnload);
@@ -716,7 +716,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Sets the value of the onclick event handler.
-     * @param newOnload The new handler.
+     * @param newOnload the new handler
      */
     public void jsxSet_onclick(final Object newOnload) {
         getEventListenersContainer().setEventHandlerProp("click", newOnload);
@@ -725,7 +725,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Returns the onclick property (caution this is not necessary a function if something else has
      * been set).
-     * @return the onclick property.
+     * @return the onclick property
      */
     public Object jsxGet_onclick() {
         return getEventListenersContainer().getEventHandlerProp("click");
@@ -733,7 +733,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Sets the value of the ondblclick event handler.
-     * @param newHandler The new handler
+     * @param newHandler the new handler
      */
     public void jsxSet_ondblclick(final Object newHandler) {
         getEventListenersContainer().setEventHandlerProp("dblclick", newHandler);
@@ -751,7 +751,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Returns the onload property (caution this is not necessary a function if something else has
      * been set).
-     * @return the onload property.
+     * @return the onload property
      */
     public Object jsxGet_onload() {
         final Object onload = getEventListenersContainer().getEventHandlerProp("load");
@@ -773,7 +773,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Gets the container for event listeners.
-     * @return the container (newly created if needed).
+     * @return the container (newly created if needed)
      */
     EventListenersContainer getEventListenersContainer() {
         if (eventListenersContainer_ == null) {
@@ -784,8 +784,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "load").
-     * @param listener the event listener.
+     * @param type the event type to listen for (like "load")
+     * @param listener the event listener
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/attachevent.asp">
      * MSDN documentation</a>
      * @return <code>true</code> if the listener has been added
@@ -796,8 +796,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "onload").
-     * @param listener the event listener.
+     * @param type the event type to listen for (like "onload")
+     * @param listener the event listener
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
      */
@@ -807,8 +807,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "onload").
-     * @param listener the event listener.
+     * @param type the event type to listen for (like "onload")
+     * @param listener the event listener
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/detachevent.asp">
      * MSDN documentation</a>
      */
@@ -818,8 +818,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "load").
-     * @param listener the event listener.
+     * @param type the event type to listen for (like "load")
+     * @param listener the event listener
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
      */
@@ -829,7 +829,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the value of the name property.
-     * @return The window name.
+     * @return the window name
      */
     public String jsxGet_name() {
         return webWindow_.getName();
@@ -837,7 +837,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
      /**
      * Sets the value of the newName property.
-     * @param newName The new window name.
+     * @param newName the new window name
      */
     public void jsxSet_name(final String newName) {
         webWindow_.setName(newName);
@@ -845,7 +845,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Returns the value of the onerror property.
-     * @return The value.
+     * @return the value
      */
     public String jsxGet_onerror() {
         getLog().debug("Window.onerror not implemented");
@@ -854,7 +854,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /**
      * Sets the value of the onerror property.
-     * @param newValue The value.
+     * @param newValue the value
      */
     public void jsxSet_onerror(final String newValue) {
         getLog().debug("Window.onerror not implemented");
@@ -1022,10 +1022,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setinterval.asp">
      * MSDN documentation</a>
      *
-     * @param context The JavaScript Context
-     * @param scriptable The object that the function was called on.
-     * @param args The arguments passed to the function.
-     * @param function The function object that was invoked.
+     * @param context the JavaScript Context
+     * @param scriptable the object that the function was called on
+     * @param args the arguments passed to the function
+     * @param function the function object that was invoked
      * @return the id of the created interval
      */
     public static int jsxFunction_setInterval(final Context context, final Scriptable scriptable,
@@ -1043,7 +1043,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Cancels the interval previously started using the setInterval method.
      * Current implementation does nothing.
-     * @param intervalID specifies the interval to cancel as returned by the setInterval method.
+     * @param intervalID specifies the interval to cancel as returned by the setInterval method
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/clearinterval.asp">
      * MSDN documentation</a>
      */

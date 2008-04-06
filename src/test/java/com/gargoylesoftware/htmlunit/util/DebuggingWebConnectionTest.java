@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class DebuggingWebConnectionTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void nameValueListToJsMap() throws Exception {

@@ -111,8 +111,8 @@ public class MouseEvent extends UIEvent {
 
     /**
      * Creates a new event instance.
-     * @param domNode The DOM node that triggered the event.
-     * @param type The event type.
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
@@ -167,7 +167,7 @@ public class MouseEvent extends UIEvent {
 
     /**
      * The horizontal coordinate at which the event occurred relative to the origin of the screen coordinate system.
-     * @return the horizontal coordinate.
+     * @return the horizontal coordinate
      */
     public int jsxGet_screenX() {
         return screenX_;
@@ -192,7 +192,7 @@ public class MouseEvent extends UIEvent {
 
     /**
      * The vertical coordinate at which the event occurred relative to the origin of the screen coordinate system.
-     * @return the vertical coordinate.
+     * @return the vertical coordinate
      */
     public int jsxGet_screenY() {
         return screenY_;

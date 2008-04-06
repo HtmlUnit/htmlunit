@@ -145,7 +145,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Sets the document configuration for testing.
-     * @param document - The configuration document.
+     * @param document - The configuration document
      */
     protected static void setXmlDocument(final Document document) {
         XmlDocument_ = document;
@@ -172,7 +172,7 @@ public final class JavaScriptConfiguration {
     /**
      * Loads the configuration from a supplied Reader.
      *
-     * @param configurationReader - A reader pointing to the configuration.
+     * @param configurationReader - A reader pointing to the configuration
      */
     protected static void loadConfiguration(final Reader configurationReader) {
         final InputSource inputSource = new InputSource(configurationReader);
@@ -201,8 +201,8 @@ public final class JavaScriptConfiguration {
     /**
      * Returns the instance that represents the configuration for the specified {@link BrowserVersion}.
      * This method is synchronized to allow multithreaded access to the JavaScript configuration.
-     * @param browserVersion The {@link BrowserVersion}
-     * @return The instance for the specified {@link BrowserVersion}
+     * @param browserVersion the {@link BrowserVersion}
+     * @return the instance for the specified {@link BrowserVersion}
      */
     public static synchronized JavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
         if (browserVersion == null) {
@@ -220,7 +220,7 @@ public final class JavaScriptConfiguration {
     /**
      * Returns the configuration that has all entries. No constraints are put on the returned entries.
      *
-     * @return The instance containing all entries from the configuration file.
+     * @return the instance containing all entries from the configuration file
      */
     static JavaScriptConfiguration getAllEntries() {
         final JavaScriptConfiguration configuration = new JavaScriptConfiguration(null);
@@ -260,7 +260,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Gets the set of keys for the class configurations.
-     * @return Set.
+     * @return the set of keys for the class configurations
      */
     public Set<String> keySet() {
         return configuration_.keySet();
@@ -294,10 +294,10 @@ public final class JavaScriptConfiguration {
 
     /**
      * Parses the class element to build the class configuration.
-     * @param className The name of the class element
-     * @param element The element to parse
-     * @return ClassConfiguration
-     * @throws ClassNotFoundException If the specified class could not be found
+     * @param className the name of the class element
+     * @param element the element to parse
+     * @return the class element to build the class configuration
+     * @throws ClassNotFoundException if the specified class could not be found
      */
     private ClassConfiguration parseClassElement(final String className, final Element element)
         throws ClassNotFoundException {
@@ -354,8 +354,8 @@ public final class JavaScriptConfiguration {
     /**
      * Parse out the values for the property.
      *
-     * @param classConfiguration The configuration that is being built
-     * @param element The property element
+     * @param classConfiguration the configuration that is being built
+     * @param element the property element
      */
     private void parsePropertyElement(final ClassConfiguration classConfiguration, final Element element) {
         final String notImplemented = element.getAttribute("notImplemented");
@@ -382,8 +382,8 @@ public final class JavaScriptConfiguration {
     /**
      * Parses out the values from the function element.
      *
-     * @param classConfiguration The configuration that is being built
-     * @param element The function element
+     * @param classConfiguration the configuration that is being built
+     * @param element the function element
      */
     private void parseFunctionElement(final ClassConfiguration classConfiguration, final Element element) {
         final String notImplemented = element.getAttribute("notImplemented");
@@ -400,8 +400,8 @@ public final class JavaScriptConfiguration {
     /**
      * Parses out the values for the property.
      *
-     * @param classConfiguration The configuration that is being built
-     * @param element The property element
+     * @param classConfiguration the configuration that is being built
+     * @param element the property element
      */
     private void parseConstantElement(final ClassConfiguration classConfiguration, final Element element) {
         if (testToExcludeElement(element)) {
@@ -414,7 +414,7 @@ public final class JavaScriptConfiguration {
     /**
      * Test for the browser and JavaScript constraints. Returns true if any constraints are present
      * and the browser does not meet the constraints.
-     * @param element The element to scan the children of
+     * @param element the element to scan the children of
      * @return true to exclude this element
      */
     private boolean testToExcludeElement(final Element element) {
@@ -467,7 +467,7 @@ public final class JavaScriptConfiguration {
     }
     
     /**
-     * @return Returns the browser.
+     * @return the browser
      */
     public BrowserVersion getBrowser() {
         return browser_;
@@ -475,8 +475,8 @@ public final class JavaScriptConfiguration {
 
     /**
      * Gets the class configuration for the supplied JavaScript class name.
-     * @param classname The js class name.
-     * @return ClassConfiguration.
+     * @param classname the js class name
+     * @return the class configuration for the supplied JavaScript class name
      */
     public ClassConfiguration getClassConfiguration(final String classname) {
         return (ClassConfiguration) configuration_.get(classname);
@@ -542,8 +542,8 @@ public final class JavaScriptConfiguration {
 
     /**
      * Returns the class for the given class name.
-     * @param classname The classname that you want the implementing class for. For testing only.
-     * @return Class
+     * @param classname the classname that you want the implementing class for. For testing only
+     * @return the class for the given class name
      */
     protected Class< ? > getClassObject(final String classname) {
         final ClassConfiguration config = (ClassConfiguration) configuration_.get(classname);
@@ -552,9 +552,9 @@ public final class JavaScriptConfiguration {
 
     /**
      * Gets the method that implements the getter for the given property based upon the class object.
-     * @param clazz The actual class to use as reference.
-     * @param propertyName The property to find the getter for.
-     * @return Method.
+     * @param clazz the actual class to use as reference
+     * @param propertyName the property to find the getter for
+     * @return the method that implements the getter for the given property based upon the class object
      */
     public Method getPropertyReadMethod(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
@@ -564,9 +564,9 @@ public final class JavaScriptConfiguration {
     /**
      * Returns the method that implements the get function for in the class for the given class.
      *
-     * @param classname The name of the class to work with.
-     * @param propertyName The property to find the getter for.
-     * @return Method.
+     * @param classname the name of the class to work with
+     * @param propertyName the property to find the getter for
+     * @return the method that implements the get function for in the class for the given class
      */
     public Method getPropertyReadMethod(String classname, final String propertyName) {
         ClassConfiguration config;
@@ -601,9 +601,9 @@ public final class JavaScriptConfiguration {
     
     /**
      * Gets the method that implements the setter for the given property based upon the class object.
-     * @param clazz The actual class to use as reference
-     * @param propertyName The property to find the getter for
-     * @return Method
+     * @param clazz the actual class to use as reference
+     * @param propertyName the property to find the getter for
+     * @return the method that implements the setter for the given property based upon the class object
      */
     public Method getPropertyWriteMethod(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
@@ -613,9 +613,9 @@ public final class JavaScriptConfiguration {
     /**
      * Returns the method that implements the set function in the class for the given class.
      *
-     * @param classname The name of the class to work with.
-     * @param propertyName The property to find the setter for.
-     * @return Method.
+     * @param classname the name of the class to work with
+     * @param propertyName the property to find the setter for
+     * @return the method that implements the set function in the class for the given class
      */
     public Method getPropertyWriteMethod(String classname, final String propertyName) {
         ClassConfiguration config;
@@ -633,9 +633,10 @@ public final class JavaScriptConfiguration {
 
     /**
      * Gets the method that implements the setter for the given property based upon the class object.
-     * @param clazz The actual class to use as reference.
-     * @param functionName The function to find the method for.
-     * @return Method.
+     *
+     * @param clazz the actual class to use as reference
+     * @param functionName the function to find the method for
+     * @return the method that implements the setter for the given property based upon the class object
      */
     public Method getFunctionMethod(final Class< ? > clazz, final String functionName) {
         final String classname = getClassnameForClass(clazz);
@@ -645,9 +646,9 @@ public final class JavaScriptConfiguration {
     /**
      * Returns the method that implements the given function in the class for the given class.
      *
-     * @param classname The name of the class to work with.
-     * @param functionName The function to find the method for.
-     * @return Method.
+     * @param classname the name of the class to work with
+     * @param functionName the function to find the method for
+     * @return the method that implements the given function in the class for the given class
      */
     public Method getFunctionMethod(String classname, final String functionName) {
         ClassConfiguration config;
@@ -665,9 +666,10 @@ public final class JavaScriptConfiguration {
 
     /**
      * Checks to see if there is an entry for the given property.
-     * @param clazz The class the property is for.
-     * @param propertyName The name of the property.
-     * @return boolean True if the property exists.
+     *
+     * @param clazz the class the property is for
+     * @param propertyName the name of the property
+     * @return boolean <tt>true</tt> if the property exists
      */
     public boolean propertyExists(final Class< ? > clazz, final String propertyName) {
         final String classname = getClassnameForClass(clazz);
@@ -676,9 +678,10 @@ public final class JavaScriptConfiguration {
 
     /**
      * Checks to see if there is an entry for the given property.
-     * @param classname The class the property is for.
-     * @param propertyName The name of the property.
-     * @return boolean True if the property exists.
+     *
+     * @param classname the class the property is for
+     * @param propertyName the name of the property
+     * @return boolean <tt>true</tt> if the property exists
      */
     public boolean propertyExists(final String classname, final String propertyName) {
         final ClassConfiguration.PropertyInfo info = findPropertyInChain(classname, propertyName);

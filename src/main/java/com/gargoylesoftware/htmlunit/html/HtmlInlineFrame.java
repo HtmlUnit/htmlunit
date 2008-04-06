@@ -59,9 +59,9 @@ public class HtmlInlineFrame extends BaseFrame {
     /**
      * Creates an instance of HtmlInlineFrame.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlInlineFrame(final String namespaceURI, final String qualifiedName, final HtmlPage page,

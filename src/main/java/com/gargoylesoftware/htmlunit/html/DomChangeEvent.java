@@ -65,7 +65,7 @@ public class DomChangeEvent extends EventObject {
     
     /**
      * Returns the parent of the node that was changed.
-     * @return the parent of the node that was changed.
+     * @return the parent of the node that was changed
      */
     public DomNode getParentNode() {
         return (DomNode) getSource();
@@ -73,7 +73,7 @@ public class DomChangeEvent extends EventObject {
     
     /**
      * Returns the node that has been added or deleted.
-     * @return the node that has been added or deleted.
+     * @return the node that has been added or deleted
      */
     public DomNode getChangedNode() {
         return changedNode_;

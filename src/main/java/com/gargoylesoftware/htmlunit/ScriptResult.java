@@ -51,8 +51,8 @@ public final class ScriptResult {
     /**
      * Creates an instance.
      *
-     * @param javaScriptResult The object that was returned from the script engine
-     * @param newPage The page that is currently loaded at the end of the script
+     * @param javaScriptResult the object that was returned from the script engine
+     * @param newPage the page that is currently loaded at the end of the script
      * execution.
      */
     public ScriptResult(final Object javaScriptResult, final Page newPage) {
@@ -62,7 +62,7 @@ public final class ScriptResult {
 
     /**
      * Returns the object that was the output of the script engine.
-     * @return The result from the script engine.
+     * @return the result from the script engine
      */
     public Object getJavaScriptResult() {
         return javaScriptResult_;
@@ -70,7 +70,7 @@ public final class ScriptResult {
 
     /**
      * Returns the page that is loaded at the end of the script execution.
-     * @return The new page.
+     * @return the new page
      */
     public Page getNewPage() {
         return newPage_;

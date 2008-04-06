@@ -76,8 +76,8 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Initializes this attribute.
-     * @param name the name of the attribute.
-     * @param parent the parent XML element.
+     * @param name the name of the attribute
+     * @param parent the parent XML element
      */
     public void init(final String name, final XmlElement parent) {
         name_ = name;
@@ -99,7 +99,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns <tt>true</tt> if arbitrary properties can be added to this attribute.
-     * @return <tt>true</tt> if arbitrary properties can be added to this attribute.
+     * @return <tt>true</tt> if arbitrary properties can be added to this attribute
      */
     public boolean jsxGet_expando() {
         return true;
@@ -107,7 +107,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns <code>null</code>.
-     * @return <code>null</code>.
+     * @return <code>null</code>
      */
     public Object jsxGet_firstChild() {
         return null;
@@ -115,7 +115,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns <code>null</code>.
-     * @return <code>null</code>.
+     * @return <code>null</code>
      */
     public Object jsxGet_lastChild() {
         return null;
@@ -123,7 +123,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns the name of the attribute.
-     * @return the name of the attribute.
+     * @return the name of the attribute
      */
     public String jsxGet_name() {
         return name_;
@@ -131,7 +131,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns <code>null</code>.
-     * @return <code>null</code>.
+     * @return <code>null</code>
      */
     public Object jsxGet_nextSibling() {
         return null;
@@ -139,7 +139,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns the name of this attribute.
-     * @return the name of this attribute.
+     * @return the name of this attribute
      */
     public String jsxGet_nodeName() {
         return jsxGet_name();
@@ -147,7 +147,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns the type of DOM node this attribute represents.
-     * @return the type of DOM node this attribute represents.
+     * @return the type of DOM node this attribute represents
      */
     public int jsxGet_nodeType() {
         return org.w3c.dom.Node.ATTRIBUTE_NODE;
@@ -155,7 +155,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns the value of this attribute.
-     * @return the value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_nodeValue() {
         return jsxGet_value();
@@ -163,7 +163,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns the containing document.
-     * @return the containing document.
+     * @return the containing document
      */
     public Object jsxGet_ownerDocument() {
         if (parent_ != null) {
@@ -177,7 +177,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns <code>null</code>.
-     * @return <code>null</code>.
+     * @return <code>null</code>
      */
     public Object jsxGet_parentNode() {
         return null;
@@ -185,7 +185,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns <code>null</code>.
-     * @return <code>null</code>.
+     * @return <code>null</code>
      */
     public Object jsxGet_previousSibling() {
         return null;
@@ -193,7 +193,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns <tt>true</tt> if this attribute has been specified.
-     * @return <tt>true</tt> if this attribute has been specified.
+     * @return <tt>true</tt> if this attribute has been specified
      */
     public boolean jsxGet_specified() {
         return true;
@@ -201,7 +201,7 @@ public class XMLAttribute extends SimpleScriptable {
 
     /**
      * Returns the value of this attribute.
-     * @return the value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_value() {
         if (parent_ != null) {

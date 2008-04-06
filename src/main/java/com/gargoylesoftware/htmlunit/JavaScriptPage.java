@@ -54,8 +54,8 @@ public class JavaScriptPage implements Page {
     /**
      * Creates an instance.
      *
-     * @param webResponse The response from the server
-     * @param enclosingWindow The window that holds the page.
+     * @param webResponse the response from the server
+     * @param enclosingWindow the window that holds the page
      */
     public JavaScriptPage(final WebResponse webResponse, final WebWindow enclosingWindow) {
         webResponse_ = webResponse;
@@ -78,7 +78,7 @@ public class JavaScriptPage implements Page {
     /**
      * Returns the content of the page.
      *
-     * @return See above
+     * @return the content of the page
      */
     public String getContent() {
         return content_;
@@ -87,7 +87,7 @@ public class JavaScriptPage implements Page {
     /**
      * Returns the web response that was originally used to create this page.
      *
-     * @return The web response
+     * @return the web response that was originally used to create this page
      */
     public WebResponse getWebResponse() {
         return webResponse_;
@@ -96,7 +96,7 @@ public class JavaScriptPage implements Page {
     /**
      * Returns the window that this page is sitting inside.
      *
-     * @return The enclosing frame or null if this page isn't inside a frame.
+     * @return the enclosing frame or null if this page isn't inside a frame
      */
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;

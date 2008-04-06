@@ -76,7 +76,7 @@ public class PluginConfiguration {
 
         /**
          * Returns the mime type's description.
-         * @return the description.
+         * @return the description
          */
         public String getDescription() {
             return description_;
@@ -84,7 +84,7 @@ public class PluginConfiguration {
 
         /**
          * Returns the mime type's suffixes.
-         * @return the suffixes.
+         * @return the suffixes
          */
         public String getSuffixes() {
             return suffixes_;
@@ -92,7 +92,7 @@ public class PluginConfiguration {
 
         /**
          * Returns the mime type.
-         * @return the type.
+         * @return the type
          */
         public String getType() {
             return type_;
@@ -121,7 +121,7 @@ public class PluginConfiguration {
 
     /**
      * Gets the plugin's description.
-     * @return the description.
+     * @return the description
      */
     public String getDescription() {
         return description_;
@@ -129,7 +129,7 @@ public class PluginConfiguration {
 
     /**
      * Gets the plugin's file name.
-     * @return the file name.
+     * @return the file name
      */
     public String getFilename() {
         return filename_;
@@ -137,7 +137,7 @@ public class PluginConfiguration {
 
     /**
      * Gets the plugin's name.
-     * @return the name.
+     * @return the name
      */
     public String getName() {
         return name_;

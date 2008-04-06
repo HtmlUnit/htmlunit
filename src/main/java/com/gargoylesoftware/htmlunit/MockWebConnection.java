@@ -70,7 +70,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Creates an instance.
      *
-     * @param webClient The web client
+     * @param webClient the web client
      */
     public MockWebConnection(final WebClient webClient) {
         super(webClient);
@@ -78,18 +78,14 @@ public class MockWebConnection extends WebConnectionImpl {
 
     /**
      * Returns the log that is being used for all scripting objects.
-     * @return The log.
+     * @return the log
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
 
     /**
-     * Submits a request and retrieve a response.
-     *
-     * @param webRequestSettings Settings to make the request with
-     * @return See above
-     * @throws IOException (only for extending classes)
+     * {@inheritDoc}
      */
     @Override
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -116,7 +112,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Returns the method that was used in the last call to submitRequest().
      *
-     * @return See above
+     * @return the method that was used in the last call to submitRequest()
      */
     public SubmitMethod getLastMethod() {
         return lastRequest_.getSubmitMethod();
@@ -125,7 +121,7 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Returns the parameters that were used in the last call to submitRequest().
      *
-     * @return See above
+     * @return the parameters that were used in the last call to submitRequest()
      */
     public List<NameValuePair> getLastParameters() {
         return lastRequest_.getRequestParameters();
@@ -133,11 +129,11 @@ public class MockWebConnection extends WebConnectionImpl {
 
     /**
      * Sets the response that will be returned when the specified URL is requested.
-     * @param url The URL that will return the given response
-     * @param content The content to return
-     * @param statusCode The status code to return
-     * @param statusMessage The status message to return
-     * @param contentType The content type to return
+     * @param url the URL that will return the given response
+     * @param content the content to return
+     * @param statusCode the status code to return
+     * @param statusMessage the status message to return
+     * @param contentType the content type to return
      * @param responseHeaders the response headers to return
      */
     public void setResponse(final URL url, final String content, final int statusCode,
@@ -155,11 +151,11 @@ public class MockWebConnection extends WebConnectionImpl {
 
     /**
      * Sets the response that will be returned when the specified URL is requested.
-     * @param url The URL that will return the given response
-     * @param content The content to return
-     * @param statusCode The status code to return
-     * @param statusMessage The status message to return
-     * @param contentType The content type to return
+     * @param url the URL that will return the given response
+     * @param content the content to return
+     * @param statusCode the status code to return
+     * @param statusMessage the status message to return
+     * @param contentType the content type to return
      * @param responseHeaders the response headers to return
      */
     public void setResponse(final URL url, final byte[] content, final int statusCode,
@@ -177,8 +173,8 @@ public class MockWebConnection extends WebConnectionImpl {
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
      * of "200 OK", a content type of "text/html" and no additional headers.
      *
-     * @param url The URL that will return the given response
-     * @param content The content to return
+     * @param url the URL that will return the given response
+     * @param content the content to return
      */
     public void setResponse(final URL url, final String content) {
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
@@ -190,9 +186,9 @@ public class MockWebConnection extends WebConnectionImpl {
      * {@link #setResponse(URL,String,int,String,String,List)} with a status
      * of "200 OK" and no additional headers.
      *
-     * @param url The URL that will return the given response
-     * @param content The content to return
-     * @param contentType The content type to return
+     * @param url the URL that will return the given response
+     * @param content the content to return
+     * @param contentType the content type to return
      */
     public void setResponse(final URL url, final String content, final String contentType) {
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
@@ -204,8 +200,8 @@ public class MockWebConnection extends WebConnectionImpl {
      * The page will contain only minimal HTML to satisfy the HTML parser but will contain
      * the specified title so that tests can check for titleText.
      *
-     * @param url The URL that will return the given response
-     * @param title The title of the page
+     * @param url the URL that will return the given response
+     * @param title the title of the page
      */
     public void setResponseAsGenericHtml(final URL url, final String title) {
         final String content = "<html><head><title>" + title + "</title></head><body></body></html>";
@@ -216,10 +212,10 @@ public class MockWebConnection extends WebConnectionImpl {
      * Sets the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
-     * @param content The content to return
-     * @param statusCode The status code to return
-     * @param statusMessage The status message to return
-     * @param contentType The content type to return
+     * @param content the content to return
+     * @param statusCode the status code to return
+     * @param statusMessage the status message to return
+     * @param contentType the content type to return
      */
     public void setDefaultResponse(final String content, final int statusCode,
             final String statusMessage, final String contentType) {
@@ -231,10 +227,10 @@ public class MockWebConnection extends WebConnectionImpl {
      * Sets the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
-     * @param content The content to return
-     * @param statusCode The status code to return
-     * @param statusMessage The status message to return
-     * @param contentType The content type to return
+     * @param content the content to return
+     * @param statusCode the status code to return
+     * @param statusMessage the status message to return
+     * @param contentType the content type to return
      */
     public void setDefaultResponse(final byte[] content, final int statusCode,
             final String statusMessage, final String contentType) {
@@ -249,7 +245,7 @@ public class MockWebConnection extends WebConnectionImpl {
      * Sets the response that will be returned when a URL is requested that does
      * not have a specific content set for it.
      *
-     * @param content The content to return
+     * @param content the content to return
      */
     public void setDefaultResponse(final String content) {
         setDefaultResponse(content, 200, "OK", "text/html");
@@ -257,7 +253,7 @@ public class MockWebConnection extends WebConnectionImpl {
 
     /**
      * Returns the {@link HttpState}.
-     * @return The state.
+     * @return the state
      */
     @Override
     public HttpState getState() {
@@ -267,7 +263,8 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Returns the additional headers that were used in the in the last call
      * to {@link #getResponse(WebRequestSettings)}.
-     * @return See above
+     * @return the additional headers that were used in the in the last call
+     *         to {@link #getResponse(WebRequestSettings)}
      */
     public Map<String, String> getLastAdditionalHeaders() {
         return lastRequest_.getAdditionalHeaders();
@@ -276,7 +273,8 @@ public class MockWebConnection extends WebConnectionImpl {
     /**
      * Returns the {@link WebRequestSettings} that was used in the in the last call
      * to {@link #getResponse(WebRequestSettings)}.
-     * @return See above
+     * @return the {@link WebRequestSettings} that was used in the in the last call
+     *         to {@link #getResponse(WebRequestSettings)}
      */
     public WebRequestSettings getLastWebRequestSettings() {
         return lastRequest_;

@@ -63,8 +63,8 @@ public class XMLSerializer extends SimpleScriptable {
 
     /**
      * The subtree rooted by the specified element is serialized to a string.
-     * @param root The root of the subtree to be serialized. This could be any node, including a Document.
-     * @return The serialized string.
+     * @param root the root of the subtree to be serialized. This could be any node, including a Document
+     * @return the serialized string
      */
     public String jsxFunction_serializeToString(final Node root) {
         final StringBuilder buffer = new StringBuilder();

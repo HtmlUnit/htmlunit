@@ -89,9 +89,9 @@ public class XmlPage extends SgmlPage implements Document {
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *
-     * @param webResponse The response from the server
-     * @param enclosingWindow The window that holds the page.
-     * @throws IOException If the page could not be created
+     * @param webResponse the response from the server
+     * @param enclosingWindow the window that holds the page
+     * @throws IOException if the page could not be created
      */
     public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow) throws IOException {
         this(webResponse, enclosingWindow, true);
@@ -102,8 +102,8 @@ public class XmlPage extends SgmlPage implements Document {
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *
-     * @param node The node to initialize this page with.
-     * @param enclosingWindow The window that holds the page.
+     * @param node the node to initialize this page with
+     * @param enclosingWindow the window that holds the page
      */
     public XmlPage(final Node node, final WebWindow enclosingWindow) {
         super(null, enclosingWindow);
@@ -118,10 +118,10 @@ public class XmlPage extends SgmlPage implements Document {
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *
-     * @param webResponse The response from the server
-     * @param enclosingWindow The window that holds the page.
-     * @param ignoreSAXException Whether to ignore {@link SAXException} or throw it as {@link IOException}.
-     * @throws IOException If the page could not be created
+     * @param webResponse the response from the server
+     * @param enclosingWindow the window that holds the page
+     * @param ignoreSAXException Whether to ignore {@link SAXException} or throw it as {@link IOException}
+     * @throws IOException if the page could not be created
      */
     public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow, final boolean ignoreSAXException)
         throws IOException {
@@ -164,7 +164,7 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * Returns the DOM representation of the XML content.
-     * @return <code>null</code> if the content couldn't be parsed.
+     * @return <code>null</code> if the content couldn't be parsed
      */
     public Document getXmlDocument() {
         if (node_ != null) {
@@ -177,7 +177,7 @@ public class XmlPage extends SgmlPage implements Document {
 
     /**
      * Gets the root XmlElement of this document.
-     * @return The root element
+     * @return the root element
      */
     //TODO: should be removed later to SgmlPage
     public XmlElement getDocumentXmlElement() {
@@ -191,8 +191,8 @@ public class XmlPage extends SgmlPage implements Document {
     /**
      * Create a new XML element with the given tag name.
      *
-     * @param tagName The tag name.
-     * @return the new XML element.
+     * @param tagName the tag name
+     * @return the new XML element
      */
     public XmlElement createXmlElement(final String tagName) {
         return createXmlElementNS(null, tagName);
@@ -201,9 +201,9 @@ public class XmlPage extends SgmlPage implements Document {
     /**
      * Create a new HtmlElement with the given namespace and qualified name.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @return the new HTML element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @return the new HTML element
      */
     public XmlElement createXmlElementNS(final String namespaceURI, final String qualifiedName) {
         return new XmlElement(namespaceURI, qualifiedName, this, new HashMap<String, XmlAttr>());

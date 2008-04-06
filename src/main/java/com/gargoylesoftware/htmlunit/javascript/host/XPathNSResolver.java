@@ -56,7 +56,7 @@ public class XPathNSResolver extends SimpleScriptable {
 
     /**
      * Sets the element to start lookup from.
-     * @param element {@link HTMLElement} or {@link XMLElement} to start lookup from.
+     * @param element {@link HTMLElement} or {@link XMLElement} to start lookup from
      */
     public void setElement(final Node element) {
         element_ = element;
@@ -64,8 +64,8 @@ public class XPathNSResolver extends SimpleScriptable {
 
     /**
      * Look up the namespace URI associated to the given namespace prefix.
-     * @param prefix The prefix to look for.
-     * @return The associated namespace URI or null if none is found.
+     * @param prefix the prefix to look for
+     * @return the associated namespace URI or null if none is found
      */
     public String jsxFunction_lookupNamespaceURI(final String prefix) {
         if (element_ instanceof HTMLElement) {

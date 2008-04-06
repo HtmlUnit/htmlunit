@@ -282,7 +282,7 @@ public class HTMLFrameElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnloadNull() throws Exception {

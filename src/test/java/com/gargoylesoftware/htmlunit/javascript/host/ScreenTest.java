@@ -58,7 +58,7 @@ public class ScreenTest extends WebTestCase {
 
     /**
      * Test all desired properties on screen (easy to copy and test in a real browser).
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testProperties() throws Exception {

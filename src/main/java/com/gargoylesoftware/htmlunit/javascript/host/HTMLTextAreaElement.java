@@ -67,7 +67,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Returns the type of this input.
-     * @return The type.
+     * @return the type
      */
     @Override
     public String jsxGet_type() {
@@ -76,7 +76,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Returns the value of the "value" attribute.
-     * @return The value of the "value" attribute.
+     * @return the value of the "value" attribute
      */
     @Override
     public String jsxGet_value() {
@@ -85,7 +85,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Sets the value of the "value" attribute.
-     * @param value The new value.
+     * @param value the new value
      */
     @Override
     public void jsxSet_value(final String value) {
@@ -94,7 +94,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Returns the textarea's default value, used if the containing form gets reset.
-     * @return The textarea's default value, used if the containing form gets reset.
+     * @return the textarea's default value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
      * MSDN Documentation</a>
      */
@@ -104,7 +104,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Sets the textarea's default value, used if the containing form gets reset.
-     * @param defaultValue The textarea's default value, used if the containing form gets reset.
+     * @param defaultValue the textarea's default value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
      * MSDN Documentation</a>
      */
@@ -114,7 +114,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Gets the value of "textLength" attribute.
-     * @return the text length.
+     * @return the text length
      */
     public int jsxGet_textLength() {
         return jsxGet_value().length();
@@ -122,7 +122,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Gets the value of "selectionStart" attribute.
-     * @return the selection start.
+     * @return the selection start
      */
     public int jsxGet_selectionStart() {
         return ((HtmlTextArea) getHtmlElementOrDie()).getSelectionStart();
@@ -130,7 +130,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Sets the value of "selectionStart" attribute.
-     * @param start selection start.
+     * @param start selection start
      */
     public void jsxSet_selectionStart(final int start) {
         ((HtmlTextArea) getHtmlElementOrDie()).setSelectionStart(start);
@@ -138,7 +138,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Gets the value of "selectionEnd" attribute.
-     * @return the selection end.
+     * @return the selection end
      */
     public int jsxGet_selectionEnd() {
         return ((HtmlTextArea) getHtmlElementOrDie()).getSelectionEnd();
@@ -146,7 +146,7 @@ public class HTMLTextAreaElement extends FormField {
 
     /**
      * Sets the value of "selectionEnd" attribute.
-     * @param end selection end.
+     * @param end selection end
      */
     public void jsxSet_selectionEnd(final int end) {
         ((HtmlTextArea) getHtmlElementOrDie()).setSelectionEnd(end);

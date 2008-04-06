@@ -63,8 +63,8 @@ public class XMLElement extends Node {
 
     /**
      * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
-     * @param expression A string specifying an XPath expression.
-     * @return list of the found elements.
+     * @param expression A string specifying an XPath expression
+     * @return list of the found elements
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
         final HTMLCollection collection = new HTMLCollection(this);
@@ -74,8 +74,8 @@ public class XMLElement extends Node {
 
     /**
      * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
-     * @param expression A string specifying an XPath expression.
-     * @return the first node that matches the given pattern-matching operation.
+     * @param expression A string specifying an XPath expression
+     * @return the first node that matches the given pattern-matching operation
      *         If no nodes match the expression, returns a null value.
      */
     public Object jsxFunction_selectSingleNode(final String expression) {
@@ -90,7 +90,7 @@ public class XMLElement extends Node {
 
     /**
      * Returns the tag name of this element.
-     * @return The tag name.
+     * @return the tag name
      */
     public String jsxGet_tagName() {
         return ((XmlElement) getDomNodeOrDie()).getTagName();
@@ -98,7 +98,7 @@ public class XMLElement extends Node {
     
     /**
      * Returns the attributes of this XML element.
-     * @return the attributes of this XML element.
+     * @return the attributes of this XML element
      */
     public Object jsxGet_attributes() {
         final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
@@ -127,8 +127,8 @@ public class XMLElement extends Node {
 
     /**
      * Gets the specified attribute.
-     * @param attributeName attribute name.
-     * @return The value of the specified attribute, <code>null</code> if the attribute is not defined.
+     * @param attributeName attribute name
+     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
     public String jsxFunction_getAttribute(final String attributeName) {
         final String value = ((XmlElement) getDomNodeOrDie()).getAttributeValue(attributeName);
@@ -142,8 +142,8 @@ public class XMLElement extends Node {
     /**
      * Sets an attribute.
      *
-     * @param name Name of the attribute to set.
-     * @param value Value to set the attribute to.
+     * @param name Name of the attribute to set
+     * @param value Value to set the attribute to
      */
     public void jsxFunction_setAttribute(final String name, final String value) {
         ((XmlElement) getDomNodeOrDie()).setAttributeValue(name, value);
@@ -164,8 +164,8 @@ public class XMLElement extends Node {
     
     /**
      * Retrieves an attribute node by name.
-     * @param name The name of the attribute to retrieve.
-     * @return The Attr node with the specified name or <code>null</code> if there is no such attribute.
+     * @param name the name of the attribute to retrieve
+     * @return the Attr node with the specified name or <code>null</code> if there is no such attribute
      */
     public Object jsxFunction_getAttributeNode(final String name) {
         final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
@@ -179,7 +179,7 @@ public class XMLElement extends Node {
 
     /**
      * Represents the text content of the node or the concatenated text representing the node and its descendants.
-     * @return the text content of the node or the concatenated text representing the node and its descendants.
+     * @return the text content of the node or the concatenated text representing the node and its descendants
      */
     public String jsxGet_text() {
         final StringBuilder buffer = new StringBuilder();
@@ -217,10 +217,10 @@ public class XMLElement extends Node {
     
     /**
      * Returns a list of elements with the given tag name belonging to the given namespace.
-     * @param namespaceURI the namespace URI of elements to look for.
+     * @param namespaceURI the namespace URI of elements to look for
      * @param localName is either the local name of elements to look for or the special value "*",
      *                  which matches all elements.
-     * @return a live NodeList of found elements in the order they appear in the tree.
+     * @return a live NodeList of found elements in the order they appear in the tree
      */
     public Object jsxFunction_getElementsByTagNameNS(final String namespaceURI, final String localName) {
         final DomNode domNode = getDomNodeOrDie();

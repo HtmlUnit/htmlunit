@@ -53,7 +53,7 @@ public interface Page {
      * Initialize this page.
      * This method gets called when a new page is loaded and you should probably never
      * need to call it directly.
-     * @throws IOException If an IO problem occurs.
+     * @throws IOException if an IO problem occurs
      */
     void initialize() throws IOException;
 
@@ -61,13 +61,13 @@ public interface Page {
      * Clean up this page.
      * This method gets called by the web client when an other page is loaded in the window
      * and you should probably never need to call it directly
-     * @throws IOException If an IO problem occurs.
+     * @throws IOException if an IO problem occurs
      */
     void cleanUp() throws IOException;
 
     /**
      * Returns the web response that was originally used to create this page.
-     * @return The web response
+     * @return the web response
      */
     WebResponse getWebResponse();
 

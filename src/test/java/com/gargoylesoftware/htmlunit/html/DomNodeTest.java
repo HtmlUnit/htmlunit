@@ -448,7 +448,7 @@ public class DomNodeTest extends WebTestCase {
 
     /**
      * Verifies that {@link DomNode#getAllHtmlChildElements()} returns descendant elements in the correct order.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testGetAllHtmlChildElementsOrder() throws Exception {

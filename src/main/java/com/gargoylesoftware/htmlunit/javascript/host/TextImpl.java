@@ -72,8 +72,8 @@ public final class TextImpl extends CharacterDataImpl {
 
     /**
      * Split a Text node in two.
-     * @param offset The character position at which to split the Text node.
-     * @return The Text node that was split from this node.
+     * @param offset the character position at which to split the Text node
+     * @return the Text node that was split from this node
      */
     public Object jsxFunction_splitText(final int offset) {
         final DomText domText = (DomText) getDomNodeOrDie();

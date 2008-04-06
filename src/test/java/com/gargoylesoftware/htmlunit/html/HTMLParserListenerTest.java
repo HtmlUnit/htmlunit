@@ -68,11 +68,11 @@ public class HTMLParserListenerTest extends WebTestCase {
 
         /**
          * Utility class to hold data.
-         * @param error The error
-         * @param message The message
-         * @param url The URL
-         * @param line The line number
-         * @param column The column number
+         * @param error the error
+         * @param message the message
+         * @param url the URL
+         * @param line the line number
+         * @param column the column number
          * @param key Ignored value
          */
         MessageInfo(final boolean error, final String message, final URL url,

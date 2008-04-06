@@ -50,28 +50,28 @@ public interface WebWindow {
     /**
      * Returns the name of this window.
      *
-     * @return The name of this window.
+     * @return the name of this window
      */
     String getName();
 
     /**
      * Sets the name of this window.
      *
-     * @param name The new window name.
+     * @param name the new window name
      */
     void setName(final String name);
 
     /**
      * Returns the currently loaded page or null if no page has been loaded.
      *
-     * @return The currently loaded page or null if no page has been loaded.
+     * @return the currently loaded page or null if no page has been loaded
      */
     Page getEnclosedPage();
 
     /**
      * Sets the currently loaded page.
      *
-     * @param page The new page or null if there is no page (ie empty window)
+     * @param page the new page or null if there is no page (ie empty window)
      */
     void setEnclosedPage(final Page page);
 
@@ -79,7 +79,7 @@ public interface WebWindow {
      * Returns the window that contains this window. If this is a top
      * level window, then return this window.
      *
-     * @return The parent window or this window if there is no parent.
+     * @return the parent window or this window if there is no parent
      */
     WebWindow getParentWindow();
 
@@ -87,7 +87,7 @@ public interface WebWindow {
      * Returns the top level window that contains this window. If this
      * is a top level window, then return this window.
      *
-     * @return The top level window that contains this window or this
+     * @return the top level window that contains this window or this
      * window if there is no parent.
      */
     WebWindow getTopWindow();
@@ -95,7 +95,7 @@ public interface WebWindow {
     /**
      * Returns the web client that "owns" this window.
      *
-     * @return The web client or null if this window has been closed.
+     * @return the web client or null if this window has been closed
      */
     WebClient getWebClient();
 
@@ -104,7 +104,7 @@ public interface WebWindow {
      *
      * Set the JavaScript object that corresponds to this element. This is not guaranteed
      * to be set even if there is a JavaScript object for this HTML element.
-     * @param scriptObject The JavaScript object.
+     * @param scriptObject the JavaScript object
      */
     void setScriptObject(final Object scriptObject);
 
@@ -112,7 +112,7 @@ public interface WebWindow {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Return the JavaScript object that corresponds to this element.
-     * @return The JavaScript object that corresponds to this element.
+     * @return the JavaScript object that corresponds to this element
      */
     Object getScriptObject();
 
@@ -122,7 +122,7 @@ public interface WebWindow {
      * Currently exposed here for testing purposes, a better API will be added in the
      * future and this will become a completely internal class.
      *
-     * @return The ThreadManager for this WebWindow
+     * @return the ThreadManager for this WebWindow
      */
     ThreadManager getThreadManager();
 }

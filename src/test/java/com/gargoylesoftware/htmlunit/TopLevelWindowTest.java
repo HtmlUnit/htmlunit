@@ -58,7 +58,7 @@ public class TopLevelWindowTest extends WebTestCase {
 
     /**
      * Tests closing the only open window.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testCloseOnlyWindow() throws Exception {

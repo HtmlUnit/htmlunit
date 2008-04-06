@@ -127,7 +127,7 @@ public class JavaScriptEngine implements Serializable {
     /**
      * Creates an instance for the specified webclient.
      *
-     * @param webClient The webClient that will own this engine.
+     * @param webClient the webClient that will own this engine
      */
     public JavaScriptEngine(final WebClient webClient) {
         webClient_ = webClient;
@@ -135,7 +135,7 @@ public class JavaScriptEngine implements Serializable {
 
     /**
      * Returns the web client that this engine is associated with.
-     * @return The web client.
+     * @return the web client
      */
     public final WebClient getWebClient() {
         return webClient_;
@@ -275,11 +275,11 @@ public class JavaScriptEngine implements Serializable {
 
     /**
      * Configures the specified class for access via JavaScript.
-     * @param config The configuration settings for the class to be configured.
-     * @param window The scope within which to configure the class.
-     * @throws InstantiationException If the new class cannot be instantiated
-     * @throws IllegalAccessException If we don't have access to create the new instance.
-     * @throws InvocationTargetException if an exception is thrown during creation of the new object.
+     * @param config the configuration settings for the class to be configured
+     * @param window the scope within which to configure the class
+     * @throws InstantiationException if the new class cannot be instantiated
+     * @throws IllegalAccessException if we don't have access to create the new instance
+     * @throws InvocationTargetException if an exception is thrown during creation of the new object
      * @return the created prototype
      */
     private Scriptable configureClass(final ClassConfiguration config, final Scriptable window)
@@ -331,7 +331,7 @@ public class JavaScriptEngine implements Serializable {
 
     /**
      * Returns the log object for this class.
-     * @return The log object
+     * @return the log object
      */
     protected Log getLog() {
         return LogFactory.getLog(getClass());
@@ -340,11 +340,11 @@ public class JavaScriptEngine implements Serializable {
     /**
      * Compiles the specified JavaScript code in the context of a given HTML page.
      *
-     * @param htmlPage The page that the code will execute within
-     * @param sourceCode The JavaScript code to execute.
-     * @param sourceName The name that will be displayed on error conditions.
+     * @param htmlPage the page that the code will execute within
+     * @param sourceCode the JavaScript code to execute
+     * @param sourceName the name that will be displayed on error conditions
      * @param startLine the line at which the script source starts
-     * @return The result of executing the specified code.
+     * @return the result of executing the specified code
      */
     public Script compile(final HtmlPage htmlPage,
                            String sourceCode,
@@ -397,11 +397,11 @@ public class JavaScriptEngine implements Serializable {
     /**
      * Executes the specified JavaScript code in the context of a given HTML page.
      *
-     * @param htmlPage The page that the code will execute within
-     * @param sourceCode The JavaScript code to execute.
-     * @param sourceName The name that will be displayed on error conditions.
+     * @param htmlPage the page that the code will execute within
+     * @param sourceCode the JavaScript code to execute
+     * @param sourceName the name that will be displayed on error conditions
      * @param startLine the line at which the script source starts
-     * @return The result of executing the specified code.
+     * @return the result of executing the specified code
      */
     public Object execute(final HtmlPage htmlPage,
                            final String sourceCode,
@@ -415,9 +415,9 @@ public class JavaScriptEngine implements Serializable {
     /**
      * Executes the specified JavaScript code in the context of a given HTML page.
      *
-     * @param htmlPage The page that the code will execute within
+     * @param htmlPage the page that the code will execute within
      * @param script the script to execute
-     * @return The result of executing the specified code.
+     * @return the result of executing the specified code
      */
     public Object execute(final HtmlPage htmlPage, final Script script) {
         final Scriptable scope = getScope(htmlPage, null);
@@ -439,12 +439,12 @@ public class JavaScriptEngine implements Serializable {
 
     /**
      * Calls a JavaScript function and return the result.
-     * @param htmlPage The page
-     * @param javaScriptFunction The function to call.
-     * @param thisObject The this object for class method calls.
-     * @param args The list of arguments to pass to the function.
-     * @param htmlElement The HTML element that will act as the context.
-     * @return The result of the function call.
+     * @param htmlPage the page
+     * @param javaScriptFunction the function to call
+     * @param thisObject the this object for class method calls
+     * @param args the list of arguments to pass to the function
+     * @param htmlElement the HTML element that will act as the context
+     * @return the result of the function call
      */
     public Object callFunction(
             final HtmlPage htmlPage,
@@ -501,7 +501,7 @@ public class JavaScriptEngine implements Serializable {
     /**
      * Indicates if JavaScript is running in current thread. <br/>
      * This allows code to know if there own evaluation is has been  triggered by some JS code.
-     * @return <code>true</code> if JavaScript is running.
+     * @return <code>true</code> if JavaScript is running
      */
     public boolean isScriptRunning() {
         return Boolean.TRUE.equals(javaScriptRunning_.get());
@@ -583,7 +583,7 @@ public class JavaScriptEngine implements Serializable {
 
     /**
      * Returns the log object that is being used to log information about the script engine.
-     * @return The log
+     * @return the log
      */
     public static Log getScriptEngineLog() {
         return ScriptEngineLog_;
@@ -594,11 +594,11 @@ public class JavaScriptEngine implements Serializable {
      * in the webclient. This method delegates to the pre processor handler specified in the
      * <code>WebClient</code>. If no pre processor handler is defined, the original source code is returned
      * unchanged.
-     * @param htmlPage The page
-     * @param sourceCode The code to process.
-     * @param sourceName A name for the chunk of code. This will be used in error messages.
-     * @param htmlElement The HTML element that will act as the context.
-     * @return The source code after being pre processed
+     * @param htmlPage the page
+     * @param sourceCode the code to process
+     * @param sourceName A name for the chunk of code. This will be used in error messages
+     * @param htmlElement the HTML element that will act as the context
+     * @return the source code after being pre processed
      * @see com.gargoylesoftware.htmlunit.ScriptPreProcessor
      */
     public String preProcess(

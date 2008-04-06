@@ -59,9 +59,9 @@ public class Plugin extends SimpleArray {
 
     /**
      * C'tor initializing fields.
-     * @param name the plugin name.
-     * @param description the plugin description.
-     * @param filename the plugin filename.
+     * @param name the plugin name
+     * @param description the plugin description
+     * @param filename the plugin filename
      */
     public Plugin(final String name, final String description, final String filename) {
         name_ = name;
@@ -71,7 +71,7 @@ public class Plugin extends SimpleArray {
 
     /**
      * Gets the name of the mime type.
-     * @param element a {@link MimeType}.
+     * @param element a {@link MimeType}
      * @return the name
      */
     @Override
@@ -81,7 +81,7 @@ public class Plugin extends SimpleArray {
 
     /**
      * Gets the plugin's description.
-     * @return the description.
+     * @return the description
      */
     public String jsxGet_description() {
         return description_;
@@ -89,7 +89,7 @@ public class Plugin extends SimpleArray {
 
     /**
      * Gets the plugin's file name.
-     * @return the file name.
+     * @return the file name
      */
     public String jsxGet_filename() {
         return filename_;
@@ -97,7 +97,7 @@ public class Plugin extends SimpleArray {
 
     /**
      * Gets the plugin's name.
-     * @return the name.
+     * @return the name
      */
     public String jsxGet_name() {
         return name_;

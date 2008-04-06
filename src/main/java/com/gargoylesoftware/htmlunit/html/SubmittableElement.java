@@ -49,13 +49,14 @@ import org.apache.commons.httpclient.NameValuePair;
 public interface SubmittableElement {
 
     /**
-     * Returns an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted.<p>
+     * <p>Returns an array of {@link NameValuePair}s that are the values that will be sent
+     * back to the server whenever this element's containing form is submitted.</p>
      *
-     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
+     * <p>THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
+     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.</p>
      *
-     * @return See above
+     * @return the values that will be sent back to the server whenever this element's
+     *         containing form is submitted
      */
     NameValuePair[] getSubmitKeyValuePairs();
 
@@ -67,25 +68,25 @@ public interface SubmittableElement {
 
     /**
      * Sets the default value to use when this element gets reset, if applicable.
-     * @param defaultValue The default value to use when this element gets reset, if applicable.
+     * @param defaultValue the default value to use when this element gets reset, if applicable
      */
     void setDefaultValue(final String defaultValue);
 
     /**
      * Returns the default value to use when this element gets reset, if applicable.
-     * @return the default value to use when this element gets reset, if applicable.
+     * @return the default value to use when this element gets reset, if applicable
      */
     String getDefaultValue();
 
     /**
      * Sets the default checked state to use when this element gets reset, if applicable.
-     * @param defaultChecked The default checked state to use when this element gets reset, if applicable.
+     * @param defaultChecked the default checked state to use when this element gets reset, if applicable
      */
     void setDefaultChecked(final boolean defaultChecked);
 
     /**
      * Returns the default checked state to use when this element gets reset, if applicable.
-     * @return The default checked state to use when this element gets reset, if applicable.
+     * @return the default checked state to use when this element gets reset, if applicable
      */
     boolean isDefaultChecked();
 

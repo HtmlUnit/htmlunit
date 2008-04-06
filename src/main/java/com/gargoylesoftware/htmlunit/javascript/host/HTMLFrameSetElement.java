@@ -59,7 +59,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     /**
      * Sets the rows property.
      *
-     * @param rows The rows attribute value.
+     * @param rows the rows attribute value
      */
     public void jsxSet_rows(final String rows) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
@@ -71,7 +71,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     /**
      * Gets the rows property.
      *
-     * @return The rows attribute value.
+     * @return the rows attribute value
      */
 
     public String jsxGet_rows() {
@@ -82,7 +82,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     /**
      * Sets the cols property.
      *
-     * @param cols The cols attribute value.
+     * @param cols the cols attribute value
      */
     public void jsxSet_cols(final String cols) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();
@@ -94,7 +94,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     /**
      * Gets the cols property.
      *
-     * @return The cols attribute value.
+     * @return the cols attribute value
      */
     public String jsxGet_cols() {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getHtmlElementOrNull();

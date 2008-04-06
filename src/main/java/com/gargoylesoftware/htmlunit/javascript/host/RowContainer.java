@@ -75,7 +75,7 @@ public class RowContainer extends HTMLElement {
 
     /**
      * Returns the rows in the element.
-     * @return The rows in the element.
+     * @return the rows in the element
      */
     public Object jsxGet_rows() {
         if (rows_ == null) {
@@ -97,7 +97,7 @@ public class RowContainer extends HTMLElement {
      * Deletes the row at the specified index.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/deleterow.asp">
      * MSDN Documentation</a>
-     * @param rowIndex the zero-based index of the row to delete.
+     * @param rowIndex the zero-based index of the row to delete
      */
     public void jsxFunction_deleteRow(int rowIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
@@ -118,11 +118,11 @@ public class RowContainer extends HTMLElement {
      * element's row collection.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertrow.asp">
      * MSDN Documentation</a>
-     * @param cx the current JavaScript context.
-     * @param s this scriptable object.
-     * @param args the arguments for the function call.
-     * @param f the function object that invoked this function.
-     * @return the newly-created row.
+     * @param cx the current JavaScript context
+     * @param s this scriptable object
+     * @param args the arguments for the function call
+     * @param f the function object that invoked this function
+     * @return the newly-created row
      */
     public static Object jsxFunction_insertRow(
             final Context cx, final Scriptable s, final Object[] args,
@@ -182,9 +182,9 @@ public class RowContainer extends HTMLElement {
     /**
      * Moves the row at the specified source index to the specified target index, returning
      * the row that was moved.
-     * @param sourceIndex the index of the row to move.
-     * @param targetIndex the index to move the row to.
-     * @return the row that was moved.
+     * @param sourceIndex the index of the row to move
+     * @param targetIndex the index to move the row to
+     * @return the row that was moved
      */
     public Object jsxFunction_moveRow(final int sourceIndex, final int targetIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();

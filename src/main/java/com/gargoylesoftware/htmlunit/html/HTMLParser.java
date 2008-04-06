@@ -181,7 +181,7 @@ public final class HTMLParser {
 
     /**
      * Gets the state of the flag to ignore content outside the BODY and HTML tags.
-     * @return The current state.
+     * @return the current state
      */
     public static boolean getIgnoreOutsideContent() {
         return IgnoreOutsideContent_;

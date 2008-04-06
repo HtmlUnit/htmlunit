@@ -517,7 +517,7 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals(0, theSelect.getOptions().size());
     }
 
-    /** @throws Exception If the test fails */
+    /** @throws Exception if the test fails */
     @Test
     public void testEditOptions() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
@@ -578,7 +578,7 @@ public class HtmlSelectTest extends WebTestCase {
     /**
      * Verifies that asText() returns all options when multiple options are selectable, instead of just
      * the selected ones.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testAsTextWithMultipleSelect() throws Exception {

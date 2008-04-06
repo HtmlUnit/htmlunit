@@ -61,7 +61,7 @@ public class HTMLLabelElement extends HTMLElement {
 
     /**
      * Retrieves the object to which the given label object is assigned.
-     * @return The identifier of the element to which the label element is assigned.
+     * @return the identifier of the element to which the label element is assigned
      */
     public String jsxGet_htmlFor() {
         return ((HtmlLabel) getDomNodeOrDie()).getForAttribute();
@@ -69,7 +69,7 @@ public class HTMLLabelElement extends HTMLElement {
 
     /**
      * Sets or retrieves the object to which the given label object is assigned.
-     * @param id Specifies the identifier of the element to which the label element is assigned.
+     * @param id Specifies the identifier of the element to which the label element is assigned
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms533872.aspx">MSDN Documentation</a>
      */
     public void jsxSet_htmlFor(final String id) {

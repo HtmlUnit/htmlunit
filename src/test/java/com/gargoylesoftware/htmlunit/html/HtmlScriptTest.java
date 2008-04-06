@@ -105,7 +105,7 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testAsText() throws Exception {
@@ -124,7 +124,7 @@ public class HtmlScriptTest extends WebTestCase {
     /**
      * Verifies that the weird script src attribute used by the jQuery JavaScript library is
      * ignored silently (bug 1695279).
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testInvalidJQuerySrcAttribute() throws Exception {
@@ -134,7 +134,7 @@ public class HtmlScriptTest extends WebTestCase {
     /**
      * Verifies that if a script element executes "window.location.href=someotherpage", then subsequent
      * script tags, and any onload handler for the original page do not run.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
@@ -169,7 +169,7 @@ public class HtmlScriptTest extends WebTestCase {
     /**
      * Verifies that a script element is not run when it is cloned.
      * See bug 1707788.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testScriptIsNotRunWhenCloned() throws Exception {
@@ -206,7 +206,7 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSimpleScriptable() throws Exception {
@@ -283,7 +283,7 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testAsXml() throws Exception {

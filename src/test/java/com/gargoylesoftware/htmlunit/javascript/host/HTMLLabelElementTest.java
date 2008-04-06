@@ -97,7 +97,7 @@ public class HTMLLabelElementTest extends WebTestCase {
     }
 
     /**
-     * @param changedByClick if 'label.click()' JavaScript causes the associated 'htmlFor' element to be changed.
+     * @param changedByClick if 'label.click()' JavaScript causes the associated 'htmlFor' element to be changed
      */
     private void testHtmlFor_click(final BrowserVersion browserVersion, final boolean changedByClick) throws Exception {
         final String html

@@ -86,8 +86,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * HTTP authentication. If you are using sensitive username/password information, please do
      * NOT use this method. If you add credentials using this method, any server that requires
      * authentication will receive the specified username and password.
-     * @param username The username for the new credentials.
-     * @param password The password for the new credentials.
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
      */
     public void addCredentials(final String username, final String password) {
         addCredentials(username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
@@ -97,11 +97,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * Adds credentials for the specified username/password on the specified host/port for the
      * specified realm. The credentials may be for any authentication scheme, including NTLM,
      * digest and basic HTTP authentication.
-     * @param username The username for the new credentials.
-     * @param password The password for the new credentials.
-     * @param host The host to which to the new credentials apply (<tt>null</tt> if applicable to any host).
-     * @param port The port to which to the new credentials apply (negative if applicable to any port).
-     * @param realm The realm to which to the new credentials apply (<tt>null</tt> if applicable to any realm).
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param realm the realm to which to the new credentials apply (<tt>null</tt> if applicable to any realm)
      */
     public void addCredentials(final String username, final String password, final String host,
             final int port, final String realm) {
@@ -113,8 +113,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds proxy credentials for the specified username/password for any host/port/realm combination.
-     * @param username The username for the new credentials.
-     * @param password The password for the new credentials.
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
      */
     public void addProxyCredentials(final String username, final String password) {
         addProxyCredentials(username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT);
@@ -122,10 +122,10 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds proxy credentials for the specified username/password on the specified host/port.
-     * @param username The username for the new credentials.
-     * @param password The password for the new credentials.
-     * @param host The host to which to the new credentials apply (<tt>null</tt> if applicable to any host).
-     * @param port The port to which to the new credentials apply (negative if applicable to any port).
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
      */
     public void addProxyCredentials(final String username, final String password, final String host, final int port) {
         final AuthScope scope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
@@ -136,14 +136,14 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds NTLM credentials for the specified username/password on the specified host/port.
-     * @param username The username for the new credentials. This should not include the domain to authenticate with.
+     * @param username the username for the new credentials. This should not include the domain to authenticate with
      * For example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
-     * @param password The password for the new credentials.
-     * @param host The host to which to the new credentials apply (<tt>null</tt> if applicable to any host).
-     * @param port The port to which to the new credentials apply (negative if applicable to any port).
-     * @param clientHost The host the authentication request is originating from. Essentially, the computer name for
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param clientHost the host the authentication request is originating from. Essentially, the computer name for
      * this machine.
-     * @param clientDomain The domain to authenticate within.
+     * @param clientDomain the domain to authenticate within
      */
     public void addNTLMCredentials(final String username, final String password, final String host,
             final int port, final String clientHost, final String clientDomain) {
@@ -155,14 +155,14 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds NTLM proxy credentials for the specified username/password on the specified host/port.
-     * @param username The username for the new credentials. This should not include the domain to authenticate with.
+     * @param username the username for the new credentials. This should not include the domain to authenticate with
      * For example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
-     * @param password The password for the new credentials.
-     * @param host The host to which to the new credentials apply (<tt>null</tt> if applicable to any host).
-     * @param port The port to which to the new credentials apply (negative if applicable to any port).
-     * @param clientHost The host the authentication request is originating from. Essentially, the computer name for
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param clientHost the host the authentication request is originating from. Essentially, the computer name for
      * this machine.
-     * @param clientDomain The domain to authenticate within.
+     * @param clientDomain the domain to authenticate within
      */
     public void addNTLMProxyCredentials(final String username, final String password, final String host,
             final int port, final String clientHost, final String clientDomain) {
@@ -174,13 +174,13 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Returns the credentials associated with the specified scheme, host and port.
-     * @param scheme The authentication scheme being used (basic, digest, NTLM, etc).
-     * @param host The host we are authenticating for.
-     * @param port The port we are authenticating for.
-     * @param proxy Whether or not we are authenticating using a proxy.
-     * @return The credentials corresponding to the specified scheme, host and port or <code>null</code>
+     * @param scheme the authentication scheme being used (basic, digest, NTLM, etc)
+     * @param host the host we are authenticating for
+     * @param port the port we are authenticating for
+     * @param proxy Whether or not we are authenticating using a proxy
+     * @return the credentials corresponding to the specified scheme, host and port or <code>null</code>
      * if already asked for it to avoid infinite loop
-     * @throws CredentialsNotAvailableException If the specified credentials cannot be provided due to an error.
+     * @throws CredentialsNotAvailableException if the specified credentials cannot be provided due to an error
      * @see CredentialsProvider#getCredentials(AuthScheme, String, int, boolean)
      */
     public Credentials getCredentials(final AuthScheme scheme, final String host, final int port, final boolean proxy)
@@ -257,20 +257,20 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Indicates if this provider has already provided an answer for this (scheme, host, port, proxy).
-     * @param scheme The scheme
-     * @param host the server name.
-     * @param port the server port.
+     * @param scheme the scheme
+     * @param host the server name
+     * @param port the server port
      * @param proxy is proxy
-     * @return true if the provider has already provided an answer for this.
+     * @return true if the provider has already provided an answer for this
      */
     protected boolean alreadyAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return answerMarks_.contains(buildKey(scheme, host, port, proxy));
     }
 
     /**
-     * @param scheme The scheme
-     * @param host the server name.
-     * @param port the server port.
+     * @param scheme the scheme
+     * @param host the server name
+     * @param port the server port
      * @param proxy is proxy
      */
     protected void markAsAnswered(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
@@ -287,11 +287,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Builds a key with the specified data.
-     * @param scheme The scheme
-     * @param host the server name.
-     * @param port the server port.
+     * @param scheme the scheme
+     * @param host the server name
+     * @param port the server port
      * @param proxy is proxy
-     * @return the new key.
+     * @return the new key
      */
     protected Object buildKey(final AuthScheme scheme, final String host, final int port, final boolean proxy) {
         return scheme.getSchemeName() + " " + scheme.getRealm() + " " + host + ":" + port + " " + proxy;
@@ -299,7 +299,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Returns the log object for this class.
-     * @return The log object
+     * @return the log object
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());

@@ -72,7 +72,7 @@ public class HTMLTableRowElement extends HTMLElement {
 
     /**
      * Returns the index of the row within parent's table.
-     * @return the index.
+     * @return the index
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/rowindex.asp">
      * MSDN Documentation</a>
      */
@@ -84,7 +84,7 @@ public class HTMLTableRowElement extends HTMLElement {
 
     /**
      * Returns the cells in the row.
-     * @return The cells in the row.
+     * @return the cells in the row
      */
     public Object jsxGet_cells() {
         if (cells_ == null) {
@@ -100,11 +100,11 @@ public class HTMLTableRowElement extends HTMLElement {
      * element's cells collection.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/insertcell.asp">
      * MSDN Documentation</a>
-     * @param cx the current JavaScript context.
-     * @param s this scriptable object.
-     * @param args the arguments for the function call.
-     * @param f the function object that invoked this function.
-     * @return the newly-created cell.
+     * @param cx the current JavaScript context
+     * @param s this scriptable object
+     * @param args the arguments for the function call
+     * @param f the function object that invoked this function
+     * @return the newly-created cell
      */
     public static Object jsxFunction_insertCell(final Context cx, final Scriptable s,
             final Object[] args, final Function f) {

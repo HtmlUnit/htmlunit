@@ -133,8 +133,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     
     /**
      * Gets the specified attribute.
-     * @param name attribute name.
-     * @return The attribute node, <code>null</code> if the attribute is not defined
+     * @param name attribute name
+     * @return the attribute node, <code>null</code> if the attribute is not defined
      */
     public Object jsxFunction_getNamedItem(final String name) {
         final DomNode attr = (DomNode) nodes_.get(name);

@@ -69,9 +69,9 @@ public class GWT15M1Test extends WebTestCase {
     /**
      * Test value inside {@link HtmlDivision}, {@link HtmlInput} or {@link DomText}
      *
-     * @param cell the cells to search in.
+     * @param cell the cells to search in
      * @param expectedValue Expected value of the value inside the cell
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     private void tableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
         final Object child = cell.getFirstChild();
@@ -104,7 +104,7 @@ public class GWT15M1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void dynaTable() throws Exception {
@@ -143,7 +143,7 @@ public class GWT15M1Test extends WebTestCase {
 
     /**
      * Returns the GWT directory being tested.
-     * @return the GWT directory being tested.
+     * @return the GWT directory being tested
      */
     protected String getDirectory() {
         return "1.5M1";

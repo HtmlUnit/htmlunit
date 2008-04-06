@@ -61,7 +61,7 @@ public class Prototype150rc1Test extends WebTestCase {
     private Server server_;
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void ajax() throws Exception {
@@ -74,7 +74,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void array() throws Exception {
@@ -84,7 +84,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void base() throws Exception {
@@ -94,7 +94,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void testDom() throws Exception {
@@ -107,7 +107,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void elementMixins() throws Exception {
@@ -117,7 +117,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void enumerable() throws Exception {
@@ -127,7 +127,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void form() throws Exception {
@@ -141,7 +141,7 @@ public class Prototype150rc1Test extends WebTestCase {
 
     /**
      * Blocked by Rhino bug 370279 (https://bugzilla.mozilla.org/show_bug.cgi?id=370279).
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void hash() throws Exception {
@@ -151,7 +151,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void position() throws Exception {
@@ -164,7 +164,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void range() throws Exception {
@@ -174,7 +174,7 @@ public class Prototype150rc1Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void selector() throws Exception {
@@ -187,7 +187,7 @@ public class Prototype150rc1Test extends WebTestCase {
 
     /**
      * Blocked by Rhino bug 369860 (https://bugzilla.mozilla.org/show_bug.cgi?id=369860).
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void string() throws Exception {

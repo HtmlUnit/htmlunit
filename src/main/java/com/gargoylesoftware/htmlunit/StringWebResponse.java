@@ -64,7 +64,7 @@ public class StringWebResponse extends WebResponseImpl {
      * WebResponseData with other defaults specified.
      *
      * @param contentString String to be converted to WebResponseData
-     * @return A simple WebResponseData with defaults specified
+     * @return a simple WebResponseData with defaults specified
      */
     private static WebResponseData getWebResponseData(final String contentString, final String charset) {
         final byte[] content = TextUtil.stringToByteArray(contentString, charset);
@@ -78,7 +78,7 @@ public class StringWebResponse extends WebResponseImpl {
      * if none is specified. Mostly exists to deal with the checked exception
      * on the URL constructor.
      *
-     * @return The default URL
+     * @return the default URL
      */
     private static URL getURL() {
         try {
@@ -92,7 +92,7 @@ public class StringWebResponse extends WebResponseImpl {
 
     /**
      * Creates an instance.
-     * @param content The content to return.
+     * @param content the content to return
      */
     public StringWebResponse(final String content) {
         super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), getURL(), SubmitMethod.GET, 0);
@@ -100,8 +100,8 @@ public class StringWebResponse extends WebResponseImpl {
 
     /**
      * Creates an instance.
-     * @param content The content to return.
-     * @param charset The charset used to convert the content.
+     * @param content the content to return
+     * @param charset the charset used to convert the content
      */
     public StringWebResponse(final String content, final String charset) {
         super(getWebResponseData(content, charset), charset, getURL(), SubmitMethod.GET, 0);
@@ -109,8 +109,8 @@ public class StringWebResponse extends WebResponseImpl {
 
     /**
      * Creates an instance associated with an originating URL.
-     * @param content The content to return.
-     * @param originatingURL The URL that this should be associated with
+     * @param content the content to return
+     * @param originatingURL the URL that this should be associated with
      */
     public StringWebResponse(final String content, final URL originatingURL) {
         super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), originatingURL, SubmitMethod.GET, 0);
@@ -118,9 +118,9 @@ public class StringWebResponse extends WebResponseImpl {
 
     /**
      * Creates an instance associated with an originating URL.
-     * @param content The content to return.
-     * @param charset The charset used to convert the content.
-     * @param originatingURL The URL that this should be associated with
+     * @param content the content to return
+     * @param charset the charset used to convert the content
+     * @param originatingURL the URL that this should be associated with
      */
     public StringWebResponse(final String content, final String charset, final URL originatingURL) {
         super(getWebResponseData(content, charset), charset, originatingURL, SubmitMethod.GET, 0);

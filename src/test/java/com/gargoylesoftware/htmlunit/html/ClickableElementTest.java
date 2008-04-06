@@ -995,7 +995,7 @@ public class ClickableElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testDblClick() throws Exception {

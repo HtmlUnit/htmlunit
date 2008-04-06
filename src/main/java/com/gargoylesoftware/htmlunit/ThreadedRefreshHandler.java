@@ -57,9 +57,9 @@ public class ThreadedRefreshHandler implements RefreshHandler {
     /**
      * Refreshes the specified page using the specified URL after the specified number
      * of seconds.
-     * @param page The page that is going to be refreshed.
-     * @param url The URL where the new page will be loaded.
-     * @param seconds The number of seconds to wait before reloading the page.
+     * @param page the page that is going to be refreshed
+     * @param url the URL where the new page will be loaded
+     * @param seconds the number of seconds to wait before reloading the page
      */
     public void handleRefresh(final Page page, final URL url, final int seconds) {
         final Thread thread = new Thread("ThreadedRefreshHandler Thread") {

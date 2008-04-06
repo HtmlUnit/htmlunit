@@ -60,19 +60,19 @@ public final class FormEncodingType {
     }
 
     /**
-     * Returns the name of this EncodingType.
+     * Returns the name of this encoding type.
      *
-     * @return See above
+     * @return the name of this encoding type
      */
     public String getName() {
         return name_;
     }
 
     /**
-     * Returns the constant that matches the given name.
+     * Returns the constant that matches the specified name.
      *
-     * @param name The name to search by
-     * @return See above
+     * @param name the name to search by
+     * @return the constant that matches the specified name
      */
     public static FormEncodingType getInstance(final String name) {
         final String lowerCaseName = name.toLowerCase();
@@ -93,8 +93,7 @@ public final class FormEncodingType {
 
     /**
      * Returns a string representation of this object.
-     *
-     * @return See above
+     * @return a string representation of this object
      */
     @Override
     public String toString() {

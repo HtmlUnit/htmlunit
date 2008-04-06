@@ -64,7 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 public class ComputedCSSStyleDeclarationTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers(Browser.FIREFOX_2)
@@ -88,7 +88,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
 
     /**
      * Compares all style and getComputedStle.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers(Browser.FIREFOX_2)
@@ -182,7 +182,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers(Browser.FIREFOX_2)
@@ -248,7 +248,7 @@ public class ComputedCSSStyleDeclarationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })

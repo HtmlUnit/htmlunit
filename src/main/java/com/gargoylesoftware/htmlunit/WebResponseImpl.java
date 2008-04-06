@@ -74,7 +74,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
      *
      * @param responseData      Data that was send back
      * @param url               Where this response came from
-     * @param requestMethod     The method used to get this response
+     * @param requestMethod     the method used to get this response
      * @param loadTime          How long the response took to be sent
      */
     public WebResponseImpl(final WebResponseData responseData, final URL url,
@@ -86,9 +86,9 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * Constructs with all data.
      *
      * @param responseData      Data that was send back
-     * @param charset           Charset used if not returned in the response.
+     * @param charset           Charset used if not returned in the response
      * @param url               Where this response came from
-     * @param requestMethod     The method used to get this response
+     * @param requestMethod     the method used to get this response
      * @param loadTime          How long the response took to be sent
      */
     public WebResponseImpl(final WebResponseData responseData, final String charset,

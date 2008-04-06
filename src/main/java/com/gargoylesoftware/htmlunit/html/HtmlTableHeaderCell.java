@@ -58,9 +58,9 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that this element is contained within
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that this element is contained within
      * @param attributes the initial attributes
      */
     HtmlTableHeaderCell(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -73,7 +73,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "abbr"
+     * @return the value of the attribute "abbr"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAbbrAttribute() {
@@ -85,7 +85,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "axis"
+     * @return the value of the attribute "axis"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAxisAttribute() {
@@ -97,7 +97,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "headers"
+     * @return the value of the attribute "headers"
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeadersAttribute() {
@@ -109,7 +109,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "scope"
+     * @return the value of the attribute "scope"
      * or an empty string if that attribute isn't defined.
      */
     public final String getScopeAttribute() {
@@ -121,7 +121,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "rowspan"
+     * @return the value of the attribute "rowspan"
      * or an empty string if that attribute isn't defined.
      */
     public final String getRowSpanAttribute() {
@@ -133,7 +133,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "colspan"
+     * @return the value of the attribute "colspan"
      * or an empty string if that attribute isn't defined.
      */
     public final String getColumnSpanAttribute() {
@@ -145,7 +145,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
+     * @return the value of the attribute "align"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -157,7 +157,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "char"
+     * @return the value of the attribute "char"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
@@ -169,7 +169,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "charoff"
+     * @return the value of the attribute "charoff"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
@@ -181,7 +181,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "valign"
+     * @return the value of the attribute "valign"
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
@@ -193,7 +193,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "nowrap"
+     * @return the value of the attribute "nowrap"
      * or an empty string if that attribute isn't defined.
      */
     public final String getNoWrapAttribute() {
@@ -205,7 +205,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "bgcolor"
+     * @return the value of the attribute "bgcolor"
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
@@ -217,7 +217,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "width"
+     * @return the value of the attribute "width"
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
@@ -229,7 +229,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "height"
+     * @return the value of the attribute "height"
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {

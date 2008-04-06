@@ -56,36 +56,36 @@ public interface WebResponse {
     /**
      * Returns the status code that was returned by the server.
      *
-     * @return See above.
+     * @return the status code that was returned by the server
      */
     int getStatusCode();
 
     /**
      * Returns the status message that was returned from the server.
      *
-     * @return See above
+     * @return the status message that was returned from the server
      */
     String getStatusMessage();
 
     /**
      * Returns the content type returned from the server, i.e. "text/html".
      *
-     * @return See above
+     * @return the content type returned from the server, i.e. "text/html"
      */
     String getContentType();
 
     /**
      * Returns the content from the server as a string.
      *
-     * @return See above
+     * @return the content from the server as a string
      */
     String getContentAsString();
 
     /**
      * Returns the content from the server as an input stream.
      *
-     * @return See above
-     * @exception IOException If an IO problem occurs
+     * @return the content from the server as an input stream
+     * @exception IOException if an IO problem occurs
      */
     InputStream getContentAsStream()
         throws IOException;
@@ -93,7 +93,7 @@ public interface WebResponse {
     /**
      * Returns the URL that was used to load this page.
      *
-     * @return The originating URL
+     * @return the originating URL
      */
     URL getUrl();
 
@@ -106,33 +106,33 @@ public interface WebResponse {
     /**
      * Returns the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
      *
-     * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s.
+     * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s
      */
     List<NameValuePair> getResponseHeaders();
 
     /**
      * Returns the value of the specified header from this response.
      *
-     * @param headerName The name of the header
-     * @return The value of the specified header
+     * @param headerName the name of the header
+     * @return the value of the specified header
      */
     String getResponseHeaderValue(final String headerName);
 
     /**
      * Returns the time it took to load this web response in milliseconds.
-     * @return The load time.
+     * @return the load time
      */
     long getLoadTimeInMilliSeconds();
 
     /**
      * Returns the content charset value.
-     * @return The charset value.
+     * @return the charset value
      */
     String getContentCharSet();
 
     /**
      * Returns the response body as byte array.
-     * @return response body.
+     * @return response body
      */
     byte[] getResponseBody();
 }

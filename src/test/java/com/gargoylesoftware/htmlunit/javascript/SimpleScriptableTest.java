@@ -265,7 +265,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * Test the host class names match the Firefox (w3c names).
      * @see <a
      *   href="http://java.sun.com/j2se/1.5.0/docs/guide/plugin/dom/org/w3c/dom/html/package-summary.html">DOM API</a>
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers(Browser.FIREFOX_2)

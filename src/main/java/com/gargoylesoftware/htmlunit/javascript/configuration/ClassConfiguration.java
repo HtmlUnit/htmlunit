@@ -82,9 +82,9 @@ public final class ClassConfiguration {
      * @param implementingClass - the fully qualified name of the class implementing this functionality
      * @param jsConstructor the constructor of method <code>implementingClass</code>
      * @param extendedClass - The name of the class that this class extends
-     * @param htmlClass The name of the HTML class that this object supports
+     * @param htmlClass the name of the HTML class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
-     * @throws ClassNotFoundException - If the implementing class is not found
+     * @throws ClassNotFoundException - if the implementing class is not found
      */
     @SuppressWarnings("unchecked")
     public ClassConfiguration(final String classname, final String implementingClass, final String jsConstructor,
@@ -120,7 +120,7 @@ public final class ClassConfiguration {
     }
 
     /**
-     * @return Returns the className.
+     * @return the className
      */
     public String getClassName() {
         return className_;
@@ -128,9 +128,9 @@ public final class ClassConfiguration {
 
     /**
      * Add the property to the configuration.
-     * @param name - Name of the property.
-     * @param readable - Flag for if the property is readable.
-     * @param writeable - Flag for if the property is writeable.
+     * @param name name of the property
+     * @param readable flag for if the property is readable
+     * @param writeable flag for if the property is writeable
      */
     public void addProperty(final String name, final boolean readable, final boolean writeable) {
         final PropertyInfo info = new PropertyInfo();
@@ -165,7 +165,7 @@ public final class ClassConfiguration {
 
     /**
      * Add the constant to the configuration.
-     * @param name - Name of the configuration.
+     * @param name - Name of the configuration
      */
     public void addConstant(final String name) {
         constants_.add(name);
@@ -173,7 +173,7 @@ public final class ClassConfiguration {
 
     /**
      * Returns the set of keys for the defined properties.
-     * @return a set.
+     * @return a set
      */
     public Set<String> propertyKeys() {
         return propertyMap_.keySet();
@@ -181,7 +181,7 @@ public final class ClassConfiguration {
 
     /**
      * Returns the set of keys for the defined functions.
-     * @return a set.
+     * @return a set
      */
     public Set<String> functionKeys() {
         return functionMap_.keySet();
@@ -189,7 +189,7 @@ public final class ClassConfiguration {
     
     /**
      * Returns the constant list.
-     * @return a list.
+     * @return a list
      */
     public List<String> constants() {
         return constants_;
@@ -197,7 +197,7 @@ public final class ClassConfiguration {
 
     /**
      * Add the function to the configuration.
-     * @param name - Name of the function.
+     * @param name - Name of the function
      */
     public void addFunction(final String name) {
         final FunctionInfo info = new FunctionInfo();
@@ -217,9 +217,9 @@ public final class ClassConfiguration {
 
     /**
      * Sets the browser information for this named property.
-     * @param propertyName - Name of the property to set.
-     * @param browserName - Browser name to set.
-     * @throws IllegalStateException - Property does not exist.
+     * @param propertyName - Name of the property to set
+     * @param browserName - Browser name to set
+     * @throws IllegalStateException - Property does not exist
      */
     public void setBrowser(final String propertyName, final String browserName)
         throws IllegalStateException {
@@ -231,14 +231,14 @@ public final class ClassConfiguration {
     }
 
     /**
-     * @return Returns the extendedClass.
+     * @return the extendedClass
      */
     public String getExtendedClass() {
         return extendedClass_;
     }
 
     /**
-     * @param extendedClass The extendedClass to set.
+     * @param extendedClass the extendedClass to set
      */
     public void setExtendedClass(final String extendedClass) {
         extendedClass_ = extendedClass;
@@ -247,7 +247,7 @@ public final class ClassConfiguration {
     /**
      * Returns the PropertyInfo for the given property name.
      * @param propertyName Name of property
-     * @return ClassConfiguration.PropertyInfo
+     * @return the PropertyInfo for the given property name
      */
     protected PropertyInfo getPropertyInfo(final String propertyName) {
         return (PropertyInfo) propertyMap_.get(propertyName);
@@ -260,7 +260,7 @@ public final class ClassConfiguration {
     /**
      * Test for value equality of the 2 objects.
      *
-     * @param obj   the reference object with which to compare.
+     * @param obj   the reference object with which to compare
      * @return <code>true</code> if the value of this object is the same as the obj
      * argument; <code>false</code> otherwise.
      */
@@ -303,8 +303,8 @@ public final class ClassConfiguration {
     /**
      * Gets the method that implements the getter for the named property.
      *
-     * @param propertyName The name of the property.
-     * @return Method.
+     * @param propertyName the name of the property
+     * @return the method that implements the getter for the named property
      */
     public Method getPropertyReadMethod(final String propertyName) {
         final PropertyInfo info = getPropertyInfo(propertyName);
@@ -317,8 +317,8 @@ public final class ClassConfiguration {
     /**
      * Gets the method that implements the setter for the named property.
      *
-     * @param propertyName The name of the property.
-     * @return Method.
+     * @param propertyName the name of the property
+     * @return the method that implements the setter for the named property
      */
     public Method getPropertyWriteMethod(final String propertyName) {
         final PropertyInfo info = getPropertyInfo(propertyName);
@@ -331,8 +331,8 @@ public final class ClassConfiguration {
     /**
      * Gets the method that implements the given function.
      *
-     * @param functionName The name of the property.
-     * @return Method.
+     * @param functionName the name of the property
+     * @return the method that implements the given function
      */
     public Method getFunctionMethod(final String functionName) {
         final FunctionInfo info = getFunctionInfo(functionName);
@@ -344,7 +344,7 @@ public final class ClassConfiguration {
 
     /**
      * Gets the class of the JavaScript host object.
-     * @return Returns the linkedClass..
+     * @return the class of the JavaScript host object
      */
     public Class< ? extends SimpleScriptable> getLinkedClass() {
         return linkedClass_;
@@ -352,21 +352,21 @@ public final class ClassConfiguration {
 
     /**
      * Gets the JavaScript constructor method in {@link #getLinkedClass()}.
-     * @return Returns the constructor Method.
+     * @return the JavaScript constructor method in {@link #getLinkedClass()}
      */
     public Method getJsConstructor() {
         return jsConstructor_;
     }
     
     /**
-     * @return Returns the htmlClassname.
+     * @return the htmlClassname
      */
     public String getHtmlClassname() {
         return htmlClassname_;
     }
 
     /**
-     * @return Returns the jsObject.
+     * @return the jsObject
      */
     public boolean isJsObject() {
         return jsObject_;
@@ -385,28 +385,28 @@ public final class ClassConfiguration {
         private Method writeMethod_;
 
         /**
-         * @return Returns the readMethod.
+         * @return the readMethod
          */
         public Method getReadMethod() {
             return readMethod_;
         }
 
         /**
-         * @param readMethod The readMethod to set.
+         * @param readMethod the readMethod to set
          */
         public void setReadMethod(final Method readMethod) {
             readMethod_ = readMethod;
         }
 
         /**
-         * @return Returns the writeMethod.
+         * @return the writeMethod
          */
         public Method getWriteMethod() {
             return writeMethod_;
         }
 
         /**
-         * @param writeMethod The writeMethod to set.
+         * @param writeMethod the writeMethod to set
          */
         public void setWriteMethod(final Method writeMethod) {
             writeMethod_ = writeMethod;
@@ -424,7 +424,7 @@ public final class ClassConfiguration {
         /**
          * Test for value equality of the 2 objects
          *
-         * @param obj   the reference object with which to compare.
+         * @param obj   the reference object with which to compare
          * @return <code>true</code> if the value of this object is the same as the obj
          * argument; <code>false</code> otherwise.
          */
@@ -452,14 +452,14 @@ public final class ClassConfiguration {
         }
 
         /**
-         * @param readable The readable to set.
+         * @param readable the readable to set
          */
         private void setReadable(final boolean readable) {
             readable_ = readable;
         }
 
         /**
-         * @param writeable The writeable to set.
+         * @param writeable the writeable to set
          */
         private void setWriteable(final boolean writeable) {
             writeable_ = writeable;
@@ -474,7 +474,7 @@ public final class ClassConfiguration {
         /**
          * Test for value equality of the 2 objects
          *
-         * @param obj   the reference object with which to compare.
+         * @param obj   the reference object with which to compare
          * @return <code>true</code> if the value of this object is the same as the obj
          * argument; <code>false</code> otherwise.
          */
@@ -501,14 +501,14 @@ public final class ClassConfiguration {
         }
 
         /**
-         * @return Returns the functionMethod.
+         * @return the functionMethod
          */
         public Method getFunctionMethod() {
             return functionMethod_;
         }
 
         /**
-         * @param functionMethod The functionMethod to set.
+         * @param functionMethod the functionMethod to set
          */
         public void setFunctionMethod(final Method functionMethod) {
             functionMethod_ = functionMethod;
@@ -524,7 +524,7 @@ public final class ClassConfiguration {
         /**
          * Test for value equality of the 2 objects.
          *
-         * @param obj the reference object with which to compare.
+         * @param obj the reference object with which to compare
          * @return <code>true</code> if the value of this object is the same as the obj
          * argument; <code>false</code> otherwise.
          */
@@ -546,14 +546,14 @@ public final class ClassConfiguration {
         }
 
         /**
-         * @param browserName - Name of the browser
+         * @param browserName name of the browser
          */
         private BrowserInfo(final String browserName) {
             browserName_ = browserName;
         }
 
         /**
-         * @return Returns the browserName.
+         * @return the browserName
          */
         private String getBrowserName() {
             return browserName_;

@@ -184,7 +184,7 @@ public class DomText extends DomCharacterData implements Text {
 
     /**
      * Gives a simple representation to facilitate debugging.
-     * @return a simple representation.
+     * @return a simple representation
      */
     @Override
     public String toString() {

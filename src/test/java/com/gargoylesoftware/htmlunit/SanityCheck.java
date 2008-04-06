@@ -64,8 +64,8 @@ public final class SanityCheck {
 
     /**
      * Main entry point for testing.
-     * @param args the arguments.
-     * @throws Exception If a problem occurs.
+     * @param args the arguments
+     * @throws Exception if a problem occurs
      */
     public static void main(final String args[]) throws Exception {
         final SanityCheck test = new SanityCheck();
@@ -92,7 +92,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: Yahoo mail
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void yahooMail() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -101,7 +101,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: Yahoo
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void yahoo() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -110,7 +110,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: Yahoo
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void yahoo_Spanish() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -119,7 +119,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: IBM
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void ibm() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -130,7 +130,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: IBM Alphaworks
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void alphaWorks() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -139,7 +139,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: CNN
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void cnn() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -148,7 +148,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: Toyota Canada
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void toyotaCanada() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -157,7 +157,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: HtmlUnit page on sourceforge using HTTPS
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void sourceForge_secure() throws Exception {
         try {
@@ -172,7 +172,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: Yahoo secure login
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void yahooLogin_secure() throws Exception {
         try {
@@ -188,7 +188,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: Amazon Canada
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void amazonCanada() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -197,7 +197,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: CNN After hours
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void cnnAfterHours() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -206,7 +206,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: htmlunit.sourceforge.net
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void htmlUnitHomepage() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
@@ -215,7 +215,7 @@ public final class SanityCheck {
 
     /**
      * Test against a live server: Adobe Acrobat Reader download step 2
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void adobeAcrobatReaderDownloadStep2() throws Exception {
         final WebClient webClient = new WebClient();
@@ -230,7 +230,7 @@ public final class SanityCheck {
     /**
      * Test against htmlunit.sourceforge.net to make sure parameters are being passed
      * correctly for GET methods
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void getMethodWithParameters() throws Exception {
         final WebClient webClient = new WebClient();
@@ -250,7 +250,7 @@ public final class SanityCheck {
 
     /**
      * Test against htmlunit.sourceforge.net to make sure parameters are being passed correctly for POST methods.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void postMethodWithDuplicateParameters() throws Exception {
         final WebClient webClient = new WebClient();
@@ -273,7 +273,7 @@ public final class SanityCheck {
     /**
      * Test against htmlunit.sourceforge.net to make sure parameters are being passed
      * correctly for POST methods.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     private void postMethodWithParameters() throws Exception {
         final WebClient webClient = new WebClient();

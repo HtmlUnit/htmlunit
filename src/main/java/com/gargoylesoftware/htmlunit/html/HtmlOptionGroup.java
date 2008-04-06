@@ -59,9 +59,9 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
     /**
      * Create an instance of HtmlOptionGroup
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlOptionGroup(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -70,21 +70,14 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
     }
 
     /**
-     * Returns true if the disabled attribute is set for this element.
-     *
-     * @return Return true if this element is disabled.
+     * {@inheritDoc}
      */
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
 
     /**
-     * Returns the value of the attribute "disabled". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "disabled"
-     * or an empty string if that attribute isn't defined.
+     * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
@@ -95,8 +88,7 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "label"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "label" or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
         return getAttributeValue("label");

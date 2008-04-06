@@ -619,8 +619,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns a text string that represents all the child elements as they would be visible in a web browser.
-     *
-     * @return See above
+     * @return a text string that represents all the child elements as they would be visible in a web browser
      * @see #asText()
      */
     protected final String getChildrenAsText() {

@@ -126,9 +126,9 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param htmlPage The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param htmlPage the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
      */
@@ -239,8 +239,8 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Returns whether the attribute specified by namespace and local name has a value.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param localName The name within the namespace.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
      * @return true if an attribute with the given name is specified on this element or has a
      * default value, false otherwise.
      */
@@ -271,7 +271,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * Sets the value of the attribute specified by name.
      *
      * @param attributeName the name of the attribute
-     * @param attributeValue The value of the attribute
+     * @param attributeValue the value of the attribute
      */
     public final void setAttribute(final String attributeName, final String attributeValue) {
         setAttributeValue(null, attributeName, attributeValue);
@@ -280,9 +280,9 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Sets the value of the attribute specified by namespace and qualified name.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name (prefix:local) of the attribute.
-     * @param attributeValue The value of the attribute
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name (prefix:local) of the attribute
+     * @param attributeValue the value of the attribute
      */
     public final void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
@@ -293,7 +293,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * Sets the value of the specified attribute.
      *
      * @param attributeName the name of the attribute
-     * @param attributeValue The value of the attribute
+     * @param attributeValue the value of the attribute
      */
     public final void setAttributeValue(final String attributeName, final String attributeValue) {
         setAttributeValue(null, attributeName, attributeValue);
@@ -302,9 +302,9 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Sets the value of the specified attribute.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the attribute
-     * @param attributeValue The value of the attribute
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the attribute
+     * @param attributeValue the value of the attribute
      */
     public void setAttributeValue(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
@@ -446,8 +446,8 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Removes an attribute specified by namespace and local name from this element.
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param localName The name within the namespace.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param localName the name within the namespace
      */
     public final void removeAttributeNS(final String namespaceURI, final String localName) {
         removeAttribute(getQualifiedName(namespaceURI, localName));
@@ -460,7 +460,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      *
      * Note that this methods recursively calls this parent fireHtmlAttributeAdded.
      *
-     * @param event The event.
+     * @param event the event
      */
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
@@ -483,7 +483,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      *
      * Note that this methods recursively calls this parent fireHtmlAttributeReplaced.
      *
-     * @param event The event.
+     * @param event the event
      */
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
@@ -506,7 +506,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      *
      * Note that this methods recursively calls this parent fireHtmlAttributeRemoved.
      *
-     * @param event The event.
+     * @param event the event
      */
     protected void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
         if (attributeListeners_ != null) {
@@ -527,7 +527,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * in order to distinguish between an attribute that is set to an empty string
      * and one that was not defined at all.
      *
-     * @param attributeName The attribute to check
+     * @param attributeName the attribute to check
      * @return true if the attribute is defined
      */
     public boolean isAttributeDefined(final String attributeName) {
@@ -566,7 +566,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * This tag name will always be in lowercase, no matter what case was used in the original
      * document, when no namespace is defined.
      *
-     * @return the tag name of this element.
+     * @return the tag name of this element
      */
     public String getTagName() {
         if (getNamespaceURI() == null) {
@@ -592,7 +592,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * @return the identifier of this element.
+     * @return the identifier of this element
      */
     public final String getId() {
         return getAttributeValue("id");
@@ -601,7 +601,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * Sets the identifier this element.
      *
-     * @param newId The new identifier of this element.
+     * @param newId the new identifier of this element
      */
     public final void setId(final String newId) {
         setAttributeValue("id", newId);
@@ -668,10 +668,10 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the element with the given name that enclosed this element or null if this element is
-     * no such element is found.
+     * Returns the first element with the specified tag name that is an ancestor to this element, or
+     * <tt>null</tt> if no such element is found.
      * @param tagName the name of the tag searched (case insensitive)
-     * @return See above
+     * @return the first element with the specified tag name that is an ancestor to this element
      */
     public HtmlElement getEnclosingElement(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
@@ -689,26 +689,25 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * Returns the form that enclosed this element or null if this element is not within a form.
-     *
-     * @return See above
+     * Returns the form which contains this element, or <tt>null</tt> if this element is not inside
+     * of a form.
+     * @return the form which contains this element
      */
     public HtmlForm getEnclosingForm() {
         return (HtmlForm) getEnclosingElement("form");
     }
 
     /**
-     * Returns the form that enclosed this element or throw an exception if this element is not within a form.
-     *
-     * @return See above
-     * @throws IllegalStateException If the element is not within a form.
+     * Returns the form which contains this element. If this element is not inside a form, this method
+     * throws an {@link IllegalStateException}.
+     * @return the form which contains this element
+     * @throws IllegalStateException if the element is not inside a form
      */
     public HtmlForm getEnclosingFormOrDie() throws IllegalStateException {
         final HtmlForm form = getEnclosingForm();
         if (form == null) {
             throw new IllegalStateException("Element is not contained within a form: " + this);
         }
-
         return form;
     }
 
@@ -845,8 +844,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Returns a string representation of this object.
-     *
-     * @return See above
+     * @return a string representation of this object
      */
     @Override
     public String toString() {
@@ -998,7 +996,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * @return an Iterable over the HtmlElement children of this object, i.e. excluding the non-element nodes.
+     * @return an Iterable over the HtmlElement children of this object, i.e. excluding the non-element nodes
      */
     public final Iterable<HtmlElement> getChildElements() {
         return new Iterable<HtmlElement>() {
@@ -1080,8 +1078,8 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * Creates an attribute map as needed by HtmlElement. This is just used by the element factories.
-     * @param attributeCount the initial number of attributes to be added to the map.
-     * @return the attribute map.
+     * @param attributeCount the initial number of attributes to be added to the map
+     * @return the attribute map
      */
     @SuppressWarnings("unchecked")
     static Map<String, HtmlAttr> createAttributeMap(final int attributeCount) {
@@ -1090,10 +1088,10 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
       * Add an attribute to the attribute map. This is just used by the element factories.
-     * @param attributeMap the attribute map where the attribute will be added.
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the attribute
-     * @param value The value of the attribute
+     * @param attributeMap the attribute map where the attribute will be added
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the attribute
+     * @param value the value of the attribute
      */
     static HtmlAttr addAttributeToMap(final HtmlPage page, final Map<String, HtmlAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
@@ -1105,9 +1103,8 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Return a Function to be executed when a given event occurs.
-     * @param eventName Name of event such as "onclick" or "onblur", etc.
-     * @return A rhino JavaScript executable Function, or null if no event
-     * handler has been defined
+     * @param eventName Name of event such as "onclick" or "onblur", etc
+     * @return a Rhino JavaScript executable Function, or <tt>null</tt> if no event handler has been defined
      */
     public final Function getEventHandler(final String eventName) {
         final HTMLElement jsObj = (HTMLElement) getScriptObject();
@@ -1117,7 +1114,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Register a Function as an event handler.
-     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @param eventName Name of event such as "onclick" or "onblur", etc
      * @param eventHandler A rhino JavaScript executable Function
      */
     public final void setEventHandler(final String eventName, final Function eventHandler) {
@@ -1130,7 +1127,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * Register a snippet of JavaScript code as an event handler. The JavaScript code will
      * be wrapped inside a unique function declaration which provides one argument named
      * "event"
-     * @param eventName Name of event such as "onclick" or "onblur", etc.
+     * @param eventName Name of event such as "onclick" or "onblur", etc
      * @param jsSnippet executable JavaScript code
      */
     public final void setEventHandler(final String eventName, final String jsSnippet) {
@@ -1145,7 +1142,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Removes the specified event handler.
-     * @param eventName Name of the event such as "onclick" or "onblur", etc.
+     * @param eventName Name of the event such as "onclick" or "onblur", etc
      */
     public final void removeEventHandler(final String eventName) {
         setEventHandler(eventName, (Function) null);
@@ -1156,7 +1153,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * The listener is registered for all attributes of this HtmlElement,
      * as well as descendant elements.
      *
-     * @param listener the attribute change listener to be added.
+     * @param listener the attribute change listener to be added
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void addHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
@@ -1174,7 +1171,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * This method should be used to remove HtmlAttributeChangeListener that were registered
      * for all attributes of this HtmlElement, as well as descendant elements.
      *
-     * @param listener the attribute change listener to be removed.
+     * @param listener the attribute change listener to be removed
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void removeHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {

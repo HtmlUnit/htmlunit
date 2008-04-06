@@ -63,7 +63,7 @@ public class FormField extends HTMLElement {
     /**
      * Sets the associated DOM node and sets the enclosing form as parent scope of the current element.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setDomNode(DomNode)
-     * @param domNode The DOM node
+     * @param domNode the DOM node
      */
     @Override
     public void setDomNode(final DomNode domNode) {
@@ -78,7 +78,7 @@ public class FormField extends HTMLElement {
     /**
      * Returns the value of the JavaScript attribute "value".
      *
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_value() {
         return getHtmlElementOrDie().getAttributeValue("value");
@@ -87,7 +87,7 @@ public class FormField extends HTMLElement {
     /**
      * Sets the value of the JavaScript attribute "value".
      *
-     * @param newValue  The new value.
+     * @param newValue  the new value
      */
     public void jsxSet_value(final String newValue) {
         getHtmlElementOrDie().setAttributeValue("value", newValue);
@@ -96,7 +96,7 @@ public class FormField extends HTMLElement {
     /**
      * Returns the value of the JavaScript attribute "name".
      *
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_name() {
         return getHtmlElementOrDie().getAttributeValue("name");
@@ -105,7 +105,7 @@ public class FormField extends HTMLElement {
     /**
      * Sets the value of the JavaScript attribute "name".
      *
-     * @param newName  The new name.
+     * @param newName  the new name
      */
     public void jsxSet_name(final String newName) {
         getHtmlElementOrDie().setAttributeValue("name", newName);
@@ -114,7 +114,7 @@ public class FormField extends HTMLElement {
     /**
      * Returns the value of the JavaScript attribute "form".
      *
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public HTMLFormElement jsxGet_form() {
         return (HTMLFormElement) getScriptableFor(getHtmlElementOrDie().getEnclosingForm());
@@ -123,7 +123,7 @@ public class FormField extends HTMLElement {
     /**
      * Returns the value of the JavaScript attribute "type".
      *
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_type() {
         return getHtmlElementOrDie().getAttributeValue("type");
@@ -154,20 +154,20 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Returns true if this element is disabled.
-     * @return True if this element is disabled.
+     * {@inheritDoc}
      */
     @Override
     public boolean jsxGet_disabled() {
+        // TODO: is this method necessary?
         return getHtmlElementOrDie().isAttributeDefined("disabled");
     }
 
     /**
-     * Sets whether or not to disable this element.
-     * @param disabled <tt>true</tt> if this is to be disabled
+     * {@inheritDoc}
      */
     @Override
     public void jsxSet_disabled(final boolean disabled) {
+        // TODO: is this method necessary?
         final HtmlElement element = getHtmlElementOrDie();
         if (disabled) {
             element.setAttributeValue("disabled", "disabled");
@@ -179,7 +179,7 @@ public class FormField extends HTMLElement {
 
     /**
      * Returns the value of the tabIndex attribute.
-     * @return the value of the tabIndex attribute.
+     * @return the value of the tabIndex attribute
      */
     public int jsxGet_tabIndex() {
         int index = 0;

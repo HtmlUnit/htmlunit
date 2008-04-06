@@ -215,7 +215,7 @@ class EventListenersContainer {
 
     /**
      * Returns the log that is being used for all scripting objects.
-     * @return The log.
+     * @return the log
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());

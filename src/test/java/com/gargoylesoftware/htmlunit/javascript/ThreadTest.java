@@ -110,7 +110,7 @@ public class ThreadTest extends TestCase {
 
         /**
          * Creates an instance.
-         * @param name the name of the thread.
+         * @param name the name of the thread
          */
         public TestThread(final String name) {
             super(name);

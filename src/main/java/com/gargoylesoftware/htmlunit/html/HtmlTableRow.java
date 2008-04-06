@@ -63,9 +63,9 @@ public class HtmlTableRow extends ClickableElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that this element is contained within
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that this element is contained within
      * @param attributes the initial attributes
      */
     HtmlTableRow(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -113,7 +113,7 @@ public class HtmlTableRow extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
+     * @return the value of the attribute "align"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -125,7 +125,7 @@ public class HtmlTableRow extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "char"
+     * @return the value of the attribute "char"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
@@ -137,7 +137,7 @@ public class HtmlTableRow extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "charoff"
+     * @return the value of the attribute "charoff"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
@@ -149,7 +149,7 @@ public class HtmlTableRow extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "valign"
+     * @return the value of the attribute "valign"
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
@@ -158,7 +158,7 @@ public class HtmlTableRow extends ClickableElement {
 
     /**
      * Gets the table containing this row.
-     * @return the table.
+     * @return the table
      */
     public HtmlTable getEnclosingTable() {
         return (HtmlTable) getEnclosingElement("table");
@@ -169,7 +169,7 @@ public class HtmlTableRow extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "bgcolor"
+     * @return the value of the attribute "bgcolor"
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
@@ -204,7 +204,7 @@ public class HtmlTableRow extends ClickableElement {
 
         /**
          * Removes the cell under the cursor from the current row.
-         * @throws IllegalStateException if there is no current row.
+         * @throws IllegalStateException if there is no current row
          */
         public void remove() throws IllegalStateException {
             if (nextCell_ == null) {

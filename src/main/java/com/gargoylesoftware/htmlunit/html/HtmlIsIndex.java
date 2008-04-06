@@ -66,9 +66,9 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     /**
      * Create an instance of HtmlIsIndex
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlIsIndex(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -79,7 +79,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     /**
      * Sets the value that will be returned during submission of a form.
      *
-     * @param newValue The value.
+     * @param newValue the value
      */
     public void setValue(final String newValue) {
         WebAssert.notNull("newValue", newValue);
@@ -89,20 +89,14 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
     /**
      * Returns the value that would be send during submission of a form.
      *
-     * @return The value
+     * @return the value
      */
     public String getValue() {
         return value_;
     }
 
     /**
-     * Returns an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted.<p>
-     *
-     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
-     *
-     * @return See above
+     * {@inheritDoc}
      */
     public NameValuePair[] getSubmitKeyValuePairs() {
         return new NameValuePair[]{new NameValuePair(getPromptAttribute(), getValue())};
@@ -160,7 +154,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "lang" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
         return getAttributeValue("lang");
@@ -171,7 +165,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "xml:lang" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
@@ -182,7 +176,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "dir" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
@@ -193,7 +187,7 @@ public class HtmlIsIndex extends StyledElement implements SubmittableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "prompt" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "prompt" or an empty string if that attribute isn't defined
      */
     public final String getPromptAttribute() {
         return getAttributeValue("prompt");

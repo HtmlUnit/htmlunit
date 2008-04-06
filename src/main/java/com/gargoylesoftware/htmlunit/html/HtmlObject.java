@@ -58,9 +58,9 @@ public class HtmlObject extends ClickableElement {
     /**
      * Create an instance of HtmlObject
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlObject(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -73,7 +73,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "declare"
+     * @return the value of the attribute "declare"
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeclareAttribute() {
@@ -85,7 +85,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "classid"
+     * @return the value of the attribute "classid"
      * or an empty string if that attribute isn't defined.
      */
     public final String getClassIdAttribute() {
@@ -97,7 +97,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "codebase"
+     * @return the value of the attribute "codebase"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCodebaseAttribute() {
@@ -109,7 +109,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "data"
+     * @return the value of the attribute "data"
      * or an empty string if that attribute isn't defined.
      */
     public final String getDataAttribute() {
@@ -121,7 +121,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "type"
+     * @return the value of the attribute "type"
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -133,7 +133,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "codetype"
+     * @return the value of the attribute "codetype"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCodeTypeAttribute() {
@@ -145,7 +145,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "archive"
+     * @return the value of the attribute "archive"
      * or an empty string if that attribute isn't defined.
      */
     public final String getArchiveAttribute() {
@@ -157,7 +157,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "standby"
+     * @return the value of the attribute "standby"
      * or an empty string if that attribute isn't defined.
      */
     public final String getStandbyAttribute() {
@@ -169,7 +169,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "height"
+     * @return the value of the attribute "height"
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {
@@ -181,7 +181,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "width"
+     * @return the value of the attribute "width"
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
@@ -193,7 +193,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "usemap"
+     * @return the value of the attribute "usemap"
      * or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
@@ -205,7 +205,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
+     * @return the value of the attribute "name"
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
@@ -217,7 +217,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex"
+     * @return the value of the attribute "tabindex"
      * or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
@@ -229,7 +229,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
+     * @return the value of the attribute "align"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -241,7 +241,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "border"
+     * @return the value of the attribute "border"
      * or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
@@ -253,7 +253,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "hspace"
+     * @return the value of the attribute "hspace"
      * or an empty string if that attribute isn't defined.
      */
     public final String getHspaceAttribute() {
@@ -265,7 +265,7 @@ public class HtmlObject extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "vspace"
+     * @return the value of the attribute "vspace"
      * or an empty string if that attribute isn't defined.
      */
     public final String getVspaceAttribute() {

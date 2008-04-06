@@ -75,7 +75,7 @@ public class HTMLTableElement extends RowContainer {
     /**
      * Returns the table's caption element, or <tt>null</tt> if none exists. If more than one
      * caption is declared in the table, this method returns the first one.
-     * @return the table's caption element.
+     * @return the table's caption element
      */
     public Object jsxGet_caption() {
         final List< ? extends HtmlElement> captions = getHtmlElementOrDie().getHtmlElementsByTagName("caption");
@@ -90,7 +90,7 @@ public class HTMLTableElement extends RowContainer {
     /**
      * Returns the table's tfoot element, or <tt>null</tt> if none exists. If more than one
      * tfoot is declared in the table, this method returns the first one.
-     * @return the table's tfoot element.
+     * @return the table's tfoot element
      */
     public Object jsxGet_tFoot() {
         final List< ? extends HtmlElement> tfoots = getHtmlElementOrDie().getHtmlElementsByTagName("tfoot");
@@ -105,7 +105,7 @@ public class HTMLTableElement extends RowContainer {
     /**
      * Returns the table's thead element, or <tt>null</tt> if none exists. If more than one
      * thead is declared in the table, this method returns the first one.
-     * @return the table's thead element.
+     * @return the table's thead element
      */
     public Object jsxGet_tHead() {
         final List< ? extends HtmlElement> theads = getHtmlElementOrDie().getHtmlElementsByTagName("thead");
@@ -119,7 +119,7 @@ public class HTMLTableElement extends RowContainer {
 
     /**
      * Returns the tbody's in the table.
-     * @return The tbody's in the table.
+     * @return the tbody's in the table
      */
     public Object jsxGet_tBodies() {
         if (tBodies_ == null) {
@@ -135,7 +135,7 @@ public class HTMLTableElement extends RowContainer {
      * this method returns the first existing caption.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createcaption.asp">
      * MSDN Documentation</a>
-     * @return a newly added caption if no caption exists, or the first existing caption.
+     * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createCaption() {
         return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("caption"));
@@ -147,7 +147,7 @@ public class HTMLTableElement extends RowContainer {
      * tfoot element, this method returns the existing tfoot element.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createtfoot.asp">
      * MSDN Documentation</a>
-     * @return a newly added caption if no caption exists, or the first existing caption.
+     * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createTFoot() {
         return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("tfoot"));
@@ -159,7 +159,7 @@ public class HTMLTableElement extends RowContainer {
      * already has a thead element, this method returns the existing thead element.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createthead.asp">
      * MSDN Documentation</a>
-     * @return a newly added caption if no caption exists, or the first existing caption.
+     * @return a newly added caption if no caption exists, or the first existing caption
      */
     public Object jsxFunction_createTHead() {
         return getScriptableFor(getHtmlElementOrDie().appendChildIfNoneExists("thead"));
@@ -235,7 +235,7 @@ public class HTMLTableElement extends RowContainer {
 
     /**
      * Returns the <tt>width</tt> attribute.
-     * @return the <tt>width</tt> attribute.
+     * @return the <tt>width</tt> attribute
      */
     public String jsxGet_width() {
         return getHtmlElementOrDie().getAttributeValue("width");
@@ -243,7 +243,7 @@ public class HTMLTableElement extends RowContainer {
     
     /**
      * Sets the <tt>width</tt> attribute.
-     * @param width The <tt>width</tt> attribute.
+     * @param width the <tt>width</tt> attribute
      */
     public void jsxSet_width(final String width) {
         getHtmlElementOrDie().setAttributeValue("width", width);
@@ -251,7 +251,7 @@ public class HTMLTableElement extends RowContainer {
 
     /**
      * Returns the <tt>cellSpacing</tt> attribute.
-     * @return the <tt>cellSpacing</tt> attribute.
+     * @return the <tt>cellSpacing</tt> attribute
      */
     public String jsxGet_cellSpacing() {
         return getHtmlElementOrDie().getAttributeValue("cellspacing");
@@ -259,7 +259,7 @@ public class HTMLTableElement extends RowContainer {
     
     /**
      * Sets the <tt>cellSpacing</tt> attribute.
-     * @param cellSpacing The <tt>cellSpacing</tt> attribute.
+     * @param cellSpacing the <tt>cellSpacing</tt> attribute
      */
     public void jsxSet_cellSpacing(final String cellSpacing) {
         getHtmlElementOrDie().setAttributeValue("cellspacing", cellSpacing);
@@ -267,7 +267,7 @@ public class HTMLTableElement extends RowContainer {
 
     /**
      * Returns the <tt>cellPadding</tt> attribute.
-     * @return the <tt>cellPadding</tt> attribute.
+     * @return the <tt>cellPadding</tt> attribute
      */
     public String jsxGet_cellPadding() {
         return getHtmlElementOrDie().getAttributeValue("cellpadding");
@@ -275,7 +275,7 @@ public class HTMLTableElement extends RowContainer {
     
     /**
      * Sets the <tt>cellPadding</tt> attribute.
-     * @param cellPadding The <tt>cellPadding</tt> attribute.
+     * @param cellPadding the <tt>cellPadding</tt> attribute
      */
     public void jsxSet_cellPadding(final String cellPadding) {
         getHtmlElementOrDie().setAttributeValue("cellpadding", cellPadding);

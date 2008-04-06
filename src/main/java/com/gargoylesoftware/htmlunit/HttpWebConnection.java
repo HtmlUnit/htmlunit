@@ -95,18 +95,14 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Create a new HTTP web connection instance.
-     * @param webClient The WebClient that is using this connection
+     * @param webClient the WebClient that is using this connection
      */
     public HttpWebConnection(final WebClient webClient) {
         super(webClient);
     }
 
     /**
-     * Submit a request and retrieve a response.
-     *
-     * @param webRequestSettings Settings to make the request with.
-     * @return See above.
-     * @exception IOException If an IO error occurs.
+     * {@inheritDoc}
      */
     @Override
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
@@ -157,15 +153,14 @@ public class HttpWebConnection extends WebConnectionImpl {
     /**
      * Called when the response has been generated. Default action is to release
      * the HttpMethod's connection. Subclasses may override.
-     * @param httpMethod the httpMethod used.
+     * @param httpMethod the httpMethod used
      */
     protected void onResponseGenerated(final HttpMethodBase httpMethod) {
         httpMethod.releaseConnection();
     }
-        
+
     /**
      * Gets the host configuration for the request.
-     * Should we cache it?
      * @param webRequestSettings the current request settings
      * @return the host configuration to use for this request
      */
@@ -191,8 +186,8 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
-     * @param webRequestSettings the parameters.
-     * @return The <tt>HttpMethod</tt> instance constructed according to the specified parameters.
+     * @param webRequestSettings the parameters
+     * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
      * @throws IOException
      */
     private HttpMethodBase makeHttpMethod(final WebRequestSettings webRequestSettings)
@@ -354,7 +349,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Lazily initializes the httpClient.
-     * @return the initialized client.
+     * @return the initialized client
      */
     protected synchronized HttpClient getHttpClient() {
         if (httpClient_ == null) {
@@ -385,7 +380,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * Returns the timeout to use for socket and connection timeouts for HttpConnectionManager.
      * is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
      * must have long running connections explicitly terminated.
-     * @return the WebClient's timeout.
+     * @return the WebClient's timeout
      */
     protected int getTimeout() {
         return getWebClient().getTimeout();
@@ -406,7 +401,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Returns the log object for this class.
-     * @return The log object.
+     * @return the log object
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
@@ -414,7 +409,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Sets the virtual host.
-     * @param virtualHost The virtualHost to set.
+     * @param virtualHost the virtualHost to set
      */
     public void setVirtualHost(final String virtualHost) {
         virtualHost_ = virtualHost;
@@ -422,7 +417,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Gets the virtual host.
-     * @return virtualHost The current virtualHost.
+     * @return virtualHost The current virtualHost
      */
     public String getVirtualHost() {
         return virtualHost_;
@@ -430,7 +425,7 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     /**
      * Returns the {@link HttpState} that is being used.
-     * @return The state.
+     * @return the state
      */
     @Override
     public HttpState getState() {
@@ -467,8 +462,8 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @param headers response headers
      * @param statusCode response status code
      * @param method request method
-     * @return The WebResponseData to use for this response.
-     * @throws IOException if there is a problem reading the response body.
+     * @return the WebResponseData to use for this response
+     * @throws IOException if there is a problem reading the response body
      */
     protected WebResponseData newWebResponseDataInstance(
             final String statusMessage,
@@ -483,11 +478,11 @@ public class HttpWebConnection extends WebConnectionImpl {
      * Constructs an appropriate WebResponse.
      * May be overridden by subclasses to return a specialized WebResponse.
      * @param responseData Data that was send back
-     * @param charset Charset used if not returned in the response.
+     * @param charset Charset used if not returned in the response
      * @param originatingURL Where this response came from
-     * @param requestMethod The method used to get this response
+     * @param requestMethod the method used to get this response
      * @param loadTime How long the response took to be sent
-     * @return the new WebResponse.
+     * @return the new WebResponse
      */
     protected WebResponse newWebResponseInstance(
             final String charset,

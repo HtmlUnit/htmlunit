@@ -63,9 +63,9 @@ public class HtmlLabel extends ClickableElement {
     /**
      * Create an instance of HtmlLabel
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlLabel(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -78,7 +78,7 @@ public class HtmlLabel extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "for"
+     * @return the value of the attribute "for"
      * or an empty string if that attribute isn't defined.
      */
     public final String getForAttribute() {
@@ -90,7 +90,7 @@ public class HtmlLabel extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accesskey"
+     * @return the value of the attribute "accesskey"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
@@ -102,7 +102,7 @@ public class HtmlLabel extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus"
+     * @return the value of the attribute "onfocus"
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
@@ -114,7 +114,7 @@ public class HtmlLabel extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur"
+     * @return the value of the attribute "onblur"
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {

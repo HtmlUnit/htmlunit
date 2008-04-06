@@ -100,7 +100,7 @@ public abstract class BaseFrame extends StyledElement {
     /**
      * Called after the node for <frame...> or <iframe> has been added to the containing page.
      * The node needs to be added first to allow js in the frame to see the frame in the parent
-     * @throws FailingHttpStatusCodeException If the server returns a
+     * @throws FailingHttpStatusCodeException if the server returns a
      *      failing status code AND the property
      *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
@@ -118,7 +118,7 @@ public abstract class BaseFrame extends StyledElement {
     }
 
     /**
-     * @throws FailingHttpStatusCodeException If the server returns a
+     * @throws FailingHttpStatusCodeException if the server returns a
      *      failing status code AND the property
      *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */

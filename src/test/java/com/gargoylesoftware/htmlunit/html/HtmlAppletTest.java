@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 public class HtmlAppletTest extends WebTestCase {
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers(Browser.FIREFOX_2)

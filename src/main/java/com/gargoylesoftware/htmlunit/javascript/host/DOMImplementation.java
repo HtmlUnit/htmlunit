@@ -62,9 +62,9 @@ public class DOMImplementation extends SimpleScriptable {
 
     /**
      * Test if the DOM implementation implements a specific feature.
-     * @param feature The name of the feature to test (case-insensitive).
-     * @param version The version number of the feature to test.
-     * @return true if the feature is implemented in the specified version, false otherwise.
+     * @param feature the name of the feature to test (case-insensitive)
+     * @param version the version number of the feature to test
+     * @return true if the feature is implemented in the specified version, false otherwise
      */
     public boolean jsxFunction_hasFeature(final String feature, final String version) {
         if (getBrowserVersion().isIE()) {
@@ -93,10 +93,10 @@ public class DOMImplementation extends SimpleScriptable {
     /**
      * Creates an {@link XMLDocument}.
      *
-     * @param namespaceURI The URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the document to instantiate.
-     * @param doctype The document types of the document.
-     * @return the newly created {@link XMLDocument}.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the document to instantiate
+     * @param doctype the document types of the document
+     * @return the newly created {@link XMLDocument}
      */
     //TODO: change doctype type to "DocType"
     public XMLDocument jsxFunction_createDocument(final String namespaceURI, final String qualifiedName,

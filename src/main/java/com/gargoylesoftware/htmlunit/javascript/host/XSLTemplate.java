@@ -61,14 +61,14 @@ public class XSLTemplate extends SimpleScriptable {
 
     /**
      * Sets the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
-     * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
+     * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */
     public void jsxSet_stylesheet(final Node node) {
         stylesheet_ = node;
     }
     /**
      * Returns the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
-     * @return the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
+     * @return the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */
     public Node jsxGet_stylesheet() {
         return stylesheet_;
@@ -76,7 +76,7 @@ public class XSLTemplate extends SimpleScriptable {
 
     /**
      * Creates a rental-model XSLProcessor object that will use this template.
-     * @return the XSLTProcessor.
+     * @return the XSLTProcessor
      */
     public XSLTProcessor jsxFunction_createProcessor() {
         final XSLTProcessor processor = new XSLTProcessor();

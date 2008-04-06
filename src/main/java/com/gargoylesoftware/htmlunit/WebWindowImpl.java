@@ -73,7 +73,7 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * Creates a window and associates it with the client.
      *
-     * @param webClient The web client that "owns" this window.
+     * @param webClient the web client that "owns" this window
      */
     public WebWindowImpl(final WebClient webClient) {
         WebAssert.notNull("webClient", webClient);
@@ -149,7 +149,7 @@ public abstract class WebWindowImpl implements WebWindow {
      *
      * Adds a child to this window, for shutdown purposes.
      *
-     * @param child The child window to associate with this window.
+     * @param child the child window to associate with this window
      */
     public void addChildWindow(final FrameWindow child) {
         childWindows_.add(child);

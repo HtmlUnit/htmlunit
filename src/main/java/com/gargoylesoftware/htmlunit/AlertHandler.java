@@ -47,8 +47,8 @@ package com.gargoylesoftware.htmlunit;
 public interface AlertHandler {
     /**
      * Handle an alert for the given page.
-     * @param page The page on which the alert occurred.
-     * @param message The message in the alert.
+     * @param page the page on which the alert occurred
+     * @param message the message in the alert
      */
     void handleAlert(final Page page, final String message);
 }

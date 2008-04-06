@@ -60,8 +60,8 @@ public class KeyDataPair extends NameValuePair {
     /**
      * Create an instance.
      *
-     * @param key The key.
-     * @param file The file.
+     * @param key the key
+     * @param file the file
      * @param contentType the content type
      * @param charset the charset encoding
      */
@@ -82,7 +82,7 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * @return The <code>java.io.File</code> object if the file exists, else <code>null</code>.
+     * @return the <code>java.io.File</code> object if the file exists, else <code>null</code>
      */
     public File getFile() {
         return fileObject_;

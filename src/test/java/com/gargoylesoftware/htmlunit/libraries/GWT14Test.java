@@ -86,7 +86,7 @@ public class GWT14Test extends WebTestCase {
     private Server server_;
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void hello() throws Exception {
@@ -102,7 +102,7 @@ public class GWT14Test extends WebTestCase {
 
     /**
      * Tests I18N default language.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void i18n() throws Exception {
@@ -136,7 +136,7 @@ public class GWT14Test extends WebTestCase {
 
     /**
      * Test I18N French language.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void i18n_fr() throws Exception {
@@ -187,10 +187,10 @@ public class GWT14Test extends WebTestCase {
 
     /**
      * Test value inside {@link HtmlDivision} or {@link HtmlInput}
-     * @param page The page to load.
-     * @param id id of the element to search for.
+     * @param page the page to load
+     * @param id id of the element to search for
      * @param expectedValue Expected value of the value inside the element
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String expectedValue) {
         final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
@@ -200,9 +200,9 @@ public class GWT14Test extends WebTestCase {
     /**
      * Test value inside {@link HtmlDivision}, {@link HtmlInput} or {@link DomText}
      *
-     * @param cell the cells to search in.
+     * @param cell the cells to search in
      * @param expectedValue Expected value of the value inside the cell
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     private void tableDataCell(final HtmlTableDataCell cell, final String expectedValue) {
         final Object child = cell.getFirstChild();
@@ -237,10 +237,10 @@ public class GWT14Test extends WebTestCase {
     /**
      * Test value of {@link HtmlSelect}
      *
-     * @param page The page to load.
-     * @param id id of the element to search for.
-     * @param expectedValues Expected value of the value inside the select.
-     * @throws Exception If the test fails.
+     * @param page the page to load
+     * @param id id of the element to search for
+     * @param expectedValues Expected value of the value inside the select
+     * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String[] expectedValues) {
         final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
@@ -278,7 +278,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void simpleXML() throws Exception {
@@ -306,7 +306,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void mail() throws Exception {
@@ -334,7 +334,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void json() throws Exception {
@@ -358,7 +358,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void dynaTable() throws Exception {
@@ -396,7 +396,7 @@ public class GWT14Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void kitchenSink() throws Exception {
@@ -423,7 +423,7 @@ public class GWT14Test extends WebTestCase {
 
     /**
      * Returns the GWT directory being tested.
-     * @return the GWT directory being tested.
+     * @return the GWT directory being tested
      */
     protected String getDirectory() {
         return "1.4.60";
@@ -432,10 +432,10 @@ public class GWT14Test extends WebTestCase {
     /**
      * Loads the GWT unit test index page using the specified browser version, and test name.
      *
-     * @param testName The test name.
-     * @param collectedAlerts The List to collect alerts into.
-     * @throws Exception if an error occurs.
-     * @return The loaded page.
+     * @param testName the test name
+     * @param collectedAlerts the List to collect alerts into
+     * @throws Exception if an error occurs
+     * @return the loaded page
      */
     protected HtmlPage loadGWTPage(final String testName, final List<String> collectedAlerts) throws Exception {
         final String resource = "gwt/" + getDirectory() + "/" + testName + "/" + testName + ".html";

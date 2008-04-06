@@ -69,8 +69,8 @@ public class ScriptException extends RuntimeException {
     /**
      * Creates an instance.
      * @param page the page in which the script causing this exception was executed
-     * @param throwable The exception that was thrown from the script engine.
-     * @param scriptSourceCode The code that was being executed when this exception
+     * @param throwable the exception that was thrown from the script engine
+     * @param scriptSourceCode the code that was being executed when this exception
      * was thrown. This may be null if the exception was not caused by execution
      * of JavaScript.
      */
@@ -93,7 +93,7 @@ public class ScriptException extends RuntimeException {
     /**
      * Creates an instance.
      * @param page the page in which the script causing this exception was executed
-     * @param throwable The exception that was thrown from the script engine.
+     * @param throwable the exception that was thrown from the script engine
      */
     public ScriptException(final HtmlPage page, final Throwable throwable) {
         this(page, throwable, null);
@@ -202,7 +202,7 @@ public class ScriptException extends RuntimeException {
 
     /**
      * Returns the source code line that failed.
-     * @return the source code line that failed.
+     * @return the source code line that failed
      */
     public String getScriptSourceCode() {
         return scriptSourceCode_;
@@ -212,7 +212,7 @@ public class ScriptException extends RuntimeException {
      * Returns the line of source that was being executed when this exception was
      * thrown.
      *
-     * @return The line of source or an empty string if the exception was not thrown
+     * @return the line of source or an empty string if the exception was not thrown
      * due to the execution of a script.
      */
     public String getFailingLine() {
@@ -240,7 +240,7 @@ public class ScriptException extends RuntimeException {
     /**
      * Returns the line number of the source that was executing at the time of the exception.
      *
-     * @return The line number or -1 if the exception was not thrown due to the
+     * @return the line number or -1 if the exception was not thrown due to the
      * execution of a script.
      */
     public int getFailingLineNumber() {

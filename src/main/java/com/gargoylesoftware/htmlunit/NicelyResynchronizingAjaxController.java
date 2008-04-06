@@ -71,7 +71,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
 
     /**
      * Returns the log.
-     * @return The log.
+     * @return the log
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());

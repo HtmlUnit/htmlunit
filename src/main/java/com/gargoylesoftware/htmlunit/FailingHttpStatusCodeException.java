@@ -52,7 +52,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
 
     /**
      * Creates an instance.
-     * @param failingResponse The failing response.
+     * @param failingResponse the failing response
      */
     public FailingHttpStatusCodeException(final WebResponse failingResponse) {
         response_ = failingResponse;
@@ -60,7 +60,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
 
     /**
      * Returns the failing status code.
-     * @return The code.
+     * @return the code
      */
     public int getStatusCode() {
         return response_.getStatusCode();
@@ -68,7 +68,7 @@ public class FailingHttpStatusCodeException extends RuntimeException {
 
     /**
      * Returns the message associated with the failing status code.
-     * @return The message.
+     * @return the message
      */
     public String getStatusMessage() {
         return response_.getStatusMessage();

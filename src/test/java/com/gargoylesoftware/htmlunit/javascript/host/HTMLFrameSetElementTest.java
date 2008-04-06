@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HTMLFrameSetElementTest extends WebTestCase {
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testCols() throws Exception {
@@ -82,7 +82,7 @@ public class HTMLFrameSetElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testRows() throws Exception {

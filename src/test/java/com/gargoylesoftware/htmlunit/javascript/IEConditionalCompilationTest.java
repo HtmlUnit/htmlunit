@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 public class IEConditionalCompilationTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = "testing @cc_on", IE7 = "testing @cc_on")
@@ -65,7 +65,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts("3")
@@ -77,7 +77,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE6 = "5.6", IE7 = "5.7")
@@ -87,7 +87,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE6 = "5.6", IE7 = "5.7")
@@ -97,7 +97,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE6 = "6626", IE7 = "5730")
@@ -107,7 +107,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = "testing /*@cc_on")
@@ -117,7 +117,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = "12")
@@ -127,7 +127,7 @@ public class IEConditionalCompilationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = "win")

@@ -65,9 +65,9 @@ public class HtmlTable extends ClickableElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlTable(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -78,9 +78,9 @@ public class HtmlTable extends ClickableElement {
     /**
      * Returns the first cell that matches the specified row and column, searching left to right, top to bottom.
      *
-     * @param rowIndex The row index
-     * @param columnIndex The column index
-     * @return The HtmlTableCell at that location or null if there are no cells at that location
+     * @param rowIndex the row index
+     * @param columnIndex the column index
+     * @return the HtmlTableCell at that location or null if there are no cells at that location
      */
     public final HtmlTableCell getCellAt(final int rowIndex, final int columnIndex) {
         final RowIterator rowIterator = getRowIterator();
@@ -139,7 +139,7 @@ public class HtmlTable extends ClickableElement {
      * Computes the number of rows in this table. Note that the count is computed dynamically
      * by iterating over all rows.
      *
-     * @return The number of rows in this table
+     * @return the number of rows in this table
      */
     public final int getRowCount() {
         int count = 0;
@@ -152,8 +152,8 @@ public class HtmlTable extends ClickableElement {
     /**
      * Finds and return the row with the specified id.
      *
-     * @param id The id of the row
-     * @return The row with the specified id.
+     * @param id the id of the row
+     * @return the row with the specified id
      * @exception ElementNotFoundException If the row cannot be found.
      */
     public final HtmlTableRow getRowById(final String id) throws ElementNotFoundException {
@@ -170,7 +170,7 @@ public class HtmlTable extends ClickableElement {
     /**
      * Returns the table caption text or an empty string if a caption wasn't specified.
      *
-     * @return The caption text
+     * @return the caption text
      */
     public String getCaptionText() {
         for (final HtmlElement element : getChildElements()) {
@@ -184,7 +184,7 @@ public class HtmlTable extends ClickableElement {
     /**
      * Returns the table header or null if a header wasn't specified.
      *
-     * @return The table header
+     * @return the table header
      */
     public HtmlTableHeader getHeader() {
         for (final HtmlElement element : getChildElements()) {
@@ -198,7 +198,7 @@ public class HtmlTable extends ClickableElement {
     /**
      * Returns the table footer or null if a footer wasn't specified.
      *
-     * @return The table footer
+     * @return the table footer
      */
     public HtmlTableFooter getFooter() {
         for (final HtmlElement element : getChildElements()) {
@@ -213,7 +213,7 @@ public class HtmlTable extends ClickableElement {
      * Returns a list of tables bodies defined in this table. If no bodies were defined
      * then an empty list will be returned.
      *
-     * @return A list of {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody} objects.
+     * @return a list of {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody} objects
      */
     public List<HtmlTableBody> getBodies() {
         final List<HtmlTableBody> bodies = new ArrayList<HtmlTableBody>();
@@ -230,7 +230,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "summary"
+     * @return the value of the attribute "summary"
      * or an empty string if that attribute isn't defined.
      */
     public final String getSummaryAttribute() {
@@ -242,7 +242,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "width"
+     * @return the value of the attribute "width"
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
@@ -254,7 +254,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "border"
+     * @return the value of the attribute "border"
      * or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
@@ -266,7 +266,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "frame"
+     * @return the value of the attribute "frame"
      * or an empty string if that attribute isn't defined.
      */
     public final String getFrameAttribute() {
@@ -278,7 +278,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "rules"
+     * @return the value of the attribute "rules"
      * or an empty string if that attribute isn't defined.
      */
     public final String getRulesAttribute() {
@@ -290,7 +290,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "cellspacing"
+     * @return the value of the attribute "cellspacing"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCellSpacingAttribute() {
@@ -302,7 +302,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "cellpadding"
+     * @return the value of the attribute "cellpadding"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCellPaddingAttribute() {
@@ -314,7 +314,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
+     * @return the value of the attribute "align"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -326,7 +326,7 @@ public class HtmlTable extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "bgcolor"
+     * @return the value of the attribute "bgcolor"
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {

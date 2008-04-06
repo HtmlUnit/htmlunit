@@ -58,7 +58,7 @@ public class HTMLFrameElement extends HTMLElement {
 
     /**
      * Returns the value of URL loaded in the frame.
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_src() {
         return getFrame().getSrcAttribute();
@@ -88,7 +88,7 @@ public class HTMLFrameElement extends HTMLElement {
 
     /**
      * Sets the value of the source of the contained frame.
-     * @param src The new value.
+     * @param src the new value
      */
     public void jsxSet_src(final String src) {
         getFrame().setSrcAttribute(src);
@@ -96,7 +96,7 @@ public class HTMLFrameElement extends HTMLElement {
 
     /**
      * Returns the value of the name attribute.
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_name() {
         return getFrame().getNameAttribute();
@@ -104,7 +104,7 @@ public class HTMLFrameElement extends HTMLElement {
 
     /**
      * Sets the value of the name attribute.
-     * @param name The new value.
+     * @param name the new value
      */
     public void jsxSet_name(final String name) {
         getFrame().setNameAttribute(name);

@@ -153,7 +153,7 @@ public class HtmlImageInputTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOutsideForm() throws Exception {

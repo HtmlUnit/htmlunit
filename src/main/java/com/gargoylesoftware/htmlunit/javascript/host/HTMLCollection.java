@@ -111,7 +111,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
     /**
      * Creates an instance.
-     * @param parentScope parent scope.
+     * @param parentScope parent scope
      */
     public HTMLCollection(final DomNode parentScope) {
         this(parentScope.getScriptObject());
@@ -119,7 +119,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
     /**
      * Creates an instance.
-     * @param parentScope parent scope.
+     * @param parentScope parent scope
      */
     public HTMLCollection(final ScriptableObject parentScope) {
         setParentScope(parentScope);
@@ -217,8 +217,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     /**
      * Private helper that retrieves the item or items corresponding to the specified
      * index or key.
-     * @param o The index or key corresponding to the element or elements to return.
-     * @return The element or elements corresponding to the specified index or key.
+     * @param o the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
      */
     private Object get(final Object o) {
         if (o instanceof Number) {
@@ -306,7 +306,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
     /**
      * Recursively checks whether "xml:space" attribute is set to "default".
-     * @param node node to start checking from.
+     * @param node node to start checking from
      * @return {@link Boolean#TRUE} if "default" is set, {@link Boolean#FALSE} for other value,
      *         or null if nothing is set.
      */
@@ -403,7 +403,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
     /**
      * Returns the length of this element array.
-     * @return The length of this element array.
+     * @return the length of this element array
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>
      */
     public final int jsxGet_length() {
@@ -412,8 +412,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
     /**
      * Retrieves the item or items corresponding to the specified index or key.
-     * @param index The index or key corresponding to the element or elements to return.
-     * @return The element or elements corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/item.asp">MSDN doc</a>
      */
     public final Object jsxFunction_item(final Object index) {
@@ -432,8 +432,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     /**
      * Retrieves the item or items corresponding to the specified name (checks ids, and if
      * that does not work, then names).
-     * @param name The name or id the element or elements to return.
-     * @return The element or elements corresponding to the specified name or id.
+     * @param name the name or id the element or elements to return
+     * @return the element or elements corresponding to the specified name or id
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/nameditem.asp">MSDN doc</a>
      */
     public final Object jsxFunction_namedItem(final String name) {
@@ -444,8 +444,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * Returns all the elements in this element array that have the specified tag name.
      * This method returns an empty element array if there are no elements with the
      * specified tag name.
-     * @param tagName The name of the tag of the elements to return.
-     * @return All the elements in this element array that have the specified tag name.
+     * @param tagName the name of the tag of the elements to return
+     * @return all the elements in this element array that have the specified tag name
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/tags.asp">MSDN doc</a>
      */
     public Object jsxFunction_tags(final String tagName) {
@@ -653,21 +653,21 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * @return the XPath.
+     * @return the XPath
      */
     protected String getXpath() {
         return xpath_;
     }
 
     /**
-     * @return the node.
+     * @return the node
      */
     protected DomNode getNode() {
         return node_;
     }
 
     /**
-     * @return the transformer.
+     * @return the transformer
      */
     protected Transformer getTransformer() {
         return transformer_;

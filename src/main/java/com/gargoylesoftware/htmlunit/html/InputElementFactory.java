@@ -68,11 +68,11 @@ public final class InputElementFactory implements IElementFactory {
     /**
      * Creates an HtmlElement for the specified xmlElement, contained in the specified page.
      *
-     * @param page The page that this element will belong to.
+     * @param page the page that this element will belong to
      * @param tagName the HTML tag name
      * @param attributes the SAX attributes
      *
-     * @return a new HtmlInput element.
+     * @return a new HtmlInput element
      */
     public HtmlElement createElement(
             final HtmlPage page, final String tagName,
@@ -151,7 +151,7 @@ public final class InputElementFactory implements IElementFactory {
 
     /**
      * Returns the log that is being used for all scripting objects.
-     * @return The log.
+     * @return the log
      * @deprecated As of 2.0, use local log variable enclosed in a conditional block.
      */
     protected Log getLog() {

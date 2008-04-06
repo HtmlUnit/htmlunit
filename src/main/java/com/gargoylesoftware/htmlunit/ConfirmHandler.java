@@ -47,9 +47,9 @@ package com.gargoylesoftware.htmlunit;
 public interface ConfirmHandler {
     /**
      * Handle an alert for the given page.
-     * @param page The page on which the alert occurred.
-     * @param message The message in the alert.
-     * @return true if we are simulating the ok button. False for the cancel button.
+     * @param page the page on which the alert occurred
+     * @param message the message in the alert
+     * @return true if we are simulating the ok button. False for the cancel button
      */
     boolean handleConfirm(final Page page, final String message);
 }

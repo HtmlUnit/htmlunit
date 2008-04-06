@@ -208,7 +208,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWriteAnchorTarget() throws Exception {
@@ -223,7 +223,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWriteAnchorSearch() throws Exception {
@@ -238,7 +238,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWriteAnchorHash() throws Exception {
@@ -253,7 +253,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWriteAnchorPort() throws Exception {
@@ -272,7 +272,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWritePathname() throws Exception {
@@ -287,7 +287,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWriteProtocol() throws Exception {
@@ -302,7 +302,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWriteAnchorHost() throws Exception {
@@ -329,7 +329,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testReadWriteAnchorHostname() throws Exception {

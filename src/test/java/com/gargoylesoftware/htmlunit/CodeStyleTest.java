@@ -230,9 +230,9 @@ public class CodeStyleTest {
 
     /**
      * Reads the given file as lines.
-     * @param file file to read.
-     * @return the list of lines.
-     * @throws IOException if an error occurs.
+     * @param file file to read
+     * @return the list of lines
+     * @throws IOException if an error occurs
      */
     private static List<String> getLines(final File file) throws IOException {
         final List<String> rv = new ArrayList<String>();

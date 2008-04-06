@@ -60,7 +60,7 @@ public abstract class WebConnectionImpl implements WebConnection {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Creates a new web connection instance.
-     * @param webClient The WebClient that is using this connection.
+     * @param webClient the WebClient that is using this connection
      */
     public WebConnectionImpl(final WebClient webClient) {
         webClient_ = webClient;
@@ -69,10 +69,11 @@ public abstract class WebConnectionImpl implements WebConnection {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Submits a request and retrieves a response.
-     * @param webRequestSettings Settings to make the request with.
-     * @return The response to the request defined by the specified request settings.
-     * @exception IOException If an IO error occurs.
+     * Submits a request and returns the corresponding response.
+     *
+     * @param webRequestSettings Settings to make the request with
+     * @return the response corresponding to the submission of the specified request
+     * @exception IOException if an IO error occurs
      */
     public abstract WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException;
 
@@ -80,7 +81,7 @@ public abstract class WebConnectionImpl implements WebConnection {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Return the web client.
-     * @return The web client.
+     * @return the web client
      */
     public final WebClient getWebClient() {
         return webClient_;
@@ -90,7 +91,7 @@ public abstract class WebConnectionImpl implements WebConnection {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Return the {@link HttpState} that is being used.
-     * @return the state.
+     * @return the state
      */
     public abstract HttpState getState();
 

@@ -52,7 +52,7 @@ public class Selection extends SimpleScriptable {
 
     /**
      * Creates a TextRange object from the current text selection.
-     * @return the created TextRange object.
+     * @return the created TextRange object
      */
     public TextRange jsxFunction_createRange() {
         final TextRange range = new TextRange();

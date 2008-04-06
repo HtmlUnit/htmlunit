@@ -50,8 +50,8 @@ import java.net.URLStreamHandler;
 public class Handler extends URLStreamHandler {
     /**
      * Returns a new URLConnection for this URL.
-     * @param url The JavaScript URL.
-     * @return The connection.
+     * @param url the JavaScript URL
+     * @return the connection
      */
     @Override
     protected URLConnection openConnection(final URL url) {

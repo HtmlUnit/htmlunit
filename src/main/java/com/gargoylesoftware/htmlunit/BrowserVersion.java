@@ -129,11 +129,11 @@ public class BrowserVersion implements Serializable {
     /**
      * Instantiate one.
      *
-     * @param applicationName The name of the application
-     * @param applicationVersion The version string of the application
-     * @param userAgent The user agent string that will be sent to the server
-     * @param javaScriptVersion The version of JavaScript
-     * @param browserVersionNumeric The floating number version of the browser
+     * @param applicationName the name of the application
+     * @param applicationVersion the version string of the application
+     * @param userAgent the user agent string that will be sent to the server
+     * @param javaScriptVersion the version of JavaScript
+     * @param browserVersionNumeric the floating number version of the browser
      */
     public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final String javaScriptVersion, final float browserVersionNumeric) {
@@ -148,7 +148,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the default browser version that is used whenever a specific version isn't specified.
      * Defaults to {@link #INTERNET_EXPLORER_6_0}.
-     * @return The default browser version.
+     * @return the default browser version
      */
     public static BrowserVersion getDefault() {
         return DefaultBrowserVersion_;
@@ -156,7 +156,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Sets the default browser version that is used whenever a specific version isn't specified.
-     * @param newBrowserVersion The new default browser version.
+     * @param newBrowserVersion the new default browser version
      */
     public static void setDefault(final BrowserVersion newBrowserVersion) {
         WebAssert.notNull("newBrowserVersion", newBrowserVersion);
@@ -166,7 +166,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
      * version of Microsoft Internet Explorer.
-     * @return Whether or not this version is a version of IE.
+     * @return whether or not this version is a version of IE
      */
     public final boolean isIE() {
         return INTERNET_EXPLORER.equals(getApplicationName());
@@ -175,7 +175,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
      * version of a Netscape browser, including Mozilla and Firefox.
-     * @return Whether or not this version is a version of a Netscape browser.
+     * @return whether or not this version is a version of a Netscape browser
      */
     public final boolean isNetscape() {
         return NETSCAPE.equals(getApplicationName());
@@ -184,7 +184,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the application code name, for example "Mozilla".
      * Default value is {@link #APP_CODE_NAME} if not explicitly configured.
-     * @return The application code name.
+     * @return the application code name
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appcodename.asp">
      * MSDN documentation</a>
      */
@@ -195,7 +195,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the application minor version, for example "0".
      * Default value is "0" if not explicitly configured.
-     * @return The application minor version.
+     * @return the application minor version
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appminorversion.asp">
      * MSDN documentation</a>
      */
@@ -205,7 +205,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns the application name, for example "Microsoft Internet Explorer".
-     * @return The application name.
+     * @return the application name
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appname.asp">
      * MSDN documentation</a>
      */
@@ -215,7 +215,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns the application version, for example "4.0 (compatible; MSIE 6.0b; Windows 98)".
-     * @return The application version.
+     * @return the application version
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/appversion.asp">
      * MSDN documentation</a>
      */
@@ -226,7 +226,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the browser application language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
-     * @return The browser application language.
+     * @return the browser application language
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/browserlanguage.asp">
      * MSDN documentation</a>
      */
@@ -237,7 +237,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the type of CPU in the machine, for example "x86".
      * Default value is {@link #CPU_CLASS_X86} if not explicitly configured.
-     * @return The type of CPU in the machine.
+     * @return the type of CPU in the machine
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cpuclass.asp">
      * MSDN documentation</a>
      */
@@ -248,7 +248,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns <tt>true</tt> if the browser is currently online.
      * Default value is <code>true</code> if not explicitly configured.
-     * @return <tt>true</tt> if the browser is currently online.
+     * @return <tt>true</tt> if the browser is currently online
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/online.asp">
      * MSDN documentation</a>
      */
@@ -259,7 +259,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the platform on which the application is running, for example "Win32".
      * Default value is {@link #PLATFORM_WIN32} if not explicitly configured.
-     * @return the platform on which the application is running.
+     * @return the platform on which the application is running
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/platform.asp">
      * MSDN documentation</a>
      */
@@ -270,7 +270,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the system language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
-     * @return The system language.
+     * @return the system language
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/systemlanguage.asp">
      * MSDN documentation</a>
      */
@@ -280,7 +280,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns the user agent string, for example "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)".
-     * @return The user agent string.
+     * @return the user agent string
      */
     public String getUserAgent() {
         return userAgent_;
@@ -289,7 +289,7 @@ public class BrowserVersion implements Serializable {
     /**
      * Returns the user language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
-     * @return The user language.
+     * @return the user language
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/userlanguage.asp">
      * MSDN documentation</a>
      */
@@ -299,56 +299,56 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns the version of JavaScript used by the browser, for example "1.2".
-     * @return the version of JavaScript used by the browser.
+     * @return the version of JavaScript used by the browser
      */
     public String getJavaScriptVersion() {
         return javaScriptVersion_;
     }
 
     /**
-     * @param applicationCodeName The applicationCodeName to set.
+     * @param applicationCodeName the applicationCodeName to set
      */
     public void setApplicationCodeName(final String applicationCodeName) {
         applicationCodeName_ = applicationCodeName;
     }
 
     /**
-     * @param applicationMinorVersion The applicationMinorVersion to set.
+     * @param applicationMinorVersion the applicationMinorVersion to set
      */
     public void setApplicationMinorVersion(final String applicationMinorVersion) {
         applicationMinorVersion_ = applicationMinorVersion;
     }
 
     /**
-     * @param applicationName The applicationName to set.
+     * @param applicationName the applicationName to set
      */
     public void setApplicationName(final String applicationName) {
         applicationName_ = applicationName;
     }
 
     /**
-     * @param applicationVersion The applicationVersion to set.
+     * @param applicationVersion the applicationVersion to set
      */
     public void setApplicationVersion(final String applicationVersion) {
         applicationVersion_ = applicationVersion;
     }
 
     /**
-     * @param browserLanguage The browserLanguage to set.
+     * @param browserLanguage the browserLanguage to set
      */
     public void setBrowserLanguage(final String browserLanguage) {
         browserLanguage_ = browserLanguage;
     }
 
     /**
-     * @param cpuClass The cpuClass to set.
+     * @param cpuClass the cpuClass to set
      */
     public void setCpuClass(final String cpuClass) {
         cpuClass_ = cpuClass;
     }
 
     /**
-     * @param javaScriptVersion The javaScriptVersion to set.
+     * @param javaScriptVersion the javaScriptVersion to set
      */
     public void setJavaScriptVersion(final String javaScriptVersion) {
         javaScriptVersion_ = javaScriptVersion;
@@ -356,56 +356,56 @@ public class BrowserVersion implements Serializable {
     }
 
     /**
-     * @param onLine The onLine to set.
+     * @param onLine the onLine to set
      */
     public void setOnLine(final boolean onLine) {
         onLine_ = onLine;
     }
 
     /**
-     * @param platform The platform to set.
+     * @param platform the platform to set
      */
     public void setPlatform(final String platform) {
         platform_ = platform;
     }
 
     /**
-     * @param systemLanguage The systemLanguage to set.
+     * @param systemLanguage the systemLanguage to set
      */
     public void setSystemLanguage(final String systemLanguage) {
         systemLanguage_ = systemLanguage;
     }
 
     /**
-     * @param userAgent The userAgent to set.
+     * @param userAgent the userAgent to set
      */
     public void setUserAgent(final String userAgent) {
         userAgent_ = userAgent;
     }
 
     /**
-     * @param userLanguage The userLanguage to set.
+     * @param userLanguage the userLanguage to set
      */
     public void setUserLanguage(final String userLanguage) {
         userLanguage_ = userLanguage;
     }
     
     /**
-     * @param browserVersion The browserVersion to set.
+     * @param browserVersion the browserVersion to set
      */
     public void setBrowserVersion(final float browserVersion) {
         browserVersionNumeric_ = browserVersion;
     }
     
     /**
-     * @return Returns the browserVersionNumeric.
+     * @return the browserVersionNumeric
      */
     public float getBrowserVersionNumeric() {
         return browserVersionNumeric_;
     }
     
     /**
-     * @return Returns the javaScriptVersionNumeric.
+     * @return the javaScriptVersionNumeric
      */
     public float getJavaScriptVersionNumeric() {
         return javaScriptVersionNumeric_;

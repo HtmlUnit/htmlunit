@@ -83,7 +83,7 @@ public class DataURLDecoderTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     @Alerts(FF = { "one", "two", "three", "four", "five's" },

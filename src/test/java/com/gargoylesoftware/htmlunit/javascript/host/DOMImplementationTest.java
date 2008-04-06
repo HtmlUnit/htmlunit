@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class DOMImplementationTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void getFeature() throws Exception {

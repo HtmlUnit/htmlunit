@@ -258,7 +258,7 @@ public final class HtmlInputTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnchangeNull() throws Exception {

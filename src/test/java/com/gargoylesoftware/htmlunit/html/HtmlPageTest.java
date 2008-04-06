@@ -453,7 +453,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testBase_Multiple() throws Exception {
@@ -487,7 +487,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testBase_InsideBody() throws Exception {
@@ -1362,7 +1362,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSerialization() throws Exception {
@@ -1724,7 +1724,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnbeforeunloadHandler() throws Exception {
@@ -1736,8 +1736,8 @@ public class HtmlPageTest extends WebTestCase {
 
     /**
      * @param browserVersion BrowserVersion to use
-     * @param handlerOk whether OnbeforeunloadHandler.handleEvent will return true of false.
-     * @param expectedPageTitle the expected title of the page after clicking.
+     * @param handlerOk whether OnbeforeunloadHandler.handleEvent will return true of false
+     * @param expectedPageTitle the expected title of the page after clicking
      */
     private void testOnbeforeunloadHandler(final BrowserVersion browserVersion, final boolean handlerOk,
         final String expectedPageTitle) throws Exception {
@@ -1780,7 +1780,7 @@ public class HtmlPageTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testSrcJavaScript() throws Exception {

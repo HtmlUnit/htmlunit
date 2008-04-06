@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class WebConnectionWrapperTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void wrapper() throws Exception {

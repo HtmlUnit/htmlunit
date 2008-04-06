@@ -821,7 +821,7 @@ public class HTMLSelectElementTest extends WebTestCase {
 
     /**
      * Test that options delegates to select (bug 1111597).
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOptionsDelegateToSelect() throws Exception {
@@ -870,7 +870,7 @@ public class HTMLSelectElementTest extends WebTestCase {
 
     /**
      * Test that options delegates to select (bug 1111597).
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOptionsArrayAdd() throws Exception {
@@ -910,7 +910,7 @@ public class HTMLSelectElementTest extends WebTestCase {
 
     /**
      * Tests that select delegates submit to the containing form.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnChangeCallsFormSubmit() throws Exception {
@@ -962,7 +962,7 @@ public class HTMLSelectElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSelectedIndex() throws Exception {

@@ -84,9 +84,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     /**
      * Wraps a web connection to have a report generated of the received responses.
      * @param webConnection the webConnection that do the real work
-     * @param reportBaseName the base name to use for the generated files.
+     * @param reportBaseName the base name to use for the generated files
      * The report will be reportBaseName + ".html" in the temp file.
-     * @throws IOException in case of problems writing the files.
+     * @throws IOException in case of problems writing the files
      */
     public DebuggingWebConnection(final WebConnection webConnection,
             final String reportBaseName) throws IOException {

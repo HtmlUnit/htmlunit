@@ -118,8 +118,8 @@ public final class XmlUtil {
      * A warning is logged if an exception is thrown while parsing the XML content
      * (for instance when the content is not a valid XML and can't be parsed).
      *
-     * @param webResponse The response from the server
-     * @throws IOException If the page could not be created
+     * @param webResponse the response from the server
+     * @throws IOException if the page could not be created
      * @return the parse result
      * @throws SAXException if the parsing fails
      * @throws ParserConfigurationException if a DocumentBuilder cannot be created
@@ -146,9 +146,9 @@ public final class XmlUtil {
     /**
      * Recursively appends a {@link Node} child to {@link DomNode} parent.
      *
-     * @param page the owner page of {@link XmlElement}s to be created.
-     * @param parent the parent DomNode.
-     * @param child the child Node.
+     * @param page the owner page of {@link XmlElement}s to be created
+     * @param parent the parent DomNode
+     * @param child the child Node
      */
     public static void appendChild(final Page page, final DomNode parent, final Node child) {
         final DomNode childXml = createFrom(page, child);
@@ -191,8 +191,8 @@ public final class XmlUtil {
 
     /**
      * Copy all children from 'source' to 'dest'
-     * @param source The Node to copy from.
-     * @param dest The DomNode to copy to.
+     * @param source the Node to copy from
+     * @param dest the DomNode to copy to
      */
     private static void copy(final Page page, final org.w3c.dom.Node source, final DomNode dest) {
         final NodeList nodeChildren = source.getChildNodes();
@@ -229,9 +229,9 @@ public final class XmlUtil {
 
     /**
      * Search for the namespace URI of the given prefix, starting from the specified element.
-     * @param element The element to start searching from.
-     * @param prefix The namespace prefix.
-     * @return the namespace URI bound to the prefix; or null if there is no such namespace.
+     * @param element the element to start searching from
+     * @param prefix the namespace prefix
+     * @return the namespace URI bound to the prefix; or null if there is no such namespace
      * @see #lookupNamespaceURI(HtmlElement, String)
      */
     public static String lookupNamespaceURI(final XmlElement element, final String prefix) {
@@ -247,9 +247,9 @@ public final class XmlUtil {
 
     /**
      * Search for the namespace URI of the given prefix, starting from the specified element.
-     * @param element The element to start searching from.
-     * @param prefix The namespace prefix.
-     * @return the namespace URI bound to the prefix; or null if there is no such namespace.
+     * @param element the element to start searching from
+     * @param prefix the namespace prefix
+     * @return the namespace URI bound to the prefix; or null if there is no such namespace
      * @see #lookupNamespaceURI(XmlElement, String)
      */
     public static String lookupNamespaceURI(final HtmlElement element, final String prefix) {
@@ -265,9 +265,9 @@ public final class XmlUtil {
 
     /**
      * Search for the prefix associated with specified namespace URI.
-     * @param element The element to start searching from.
-     * @param namespace The namespace prefix.
-     * @return the prefix bound to the namespace URI; or null if there is no such namespace.
+     * @param element the element to start searching from
+     * @param namespace the namespace prefix
+     * @return the prefix bound to the namespace URI; or null if there is no such namespace
      */
     public static String lookupPrefix(final XmlElement element, final String namespace) {
         final Map<String, XmlAttr> attributes = element.getAttributesMap();

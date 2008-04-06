@@ -141,7 +141,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails
+     * @throws Exception if test fails
      */
     @Test
     public void testTextLength() throws Exception {
@@ -171,7 +171,7 @@ public class HTMLTextAreaElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If test fails
+     * @throws Exception if test fails
      */
     @Test
     public void testSelection() throws Exception {

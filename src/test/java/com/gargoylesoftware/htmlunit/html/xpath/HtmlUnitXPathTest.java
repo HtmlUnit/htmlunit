@@ -272,7 +272,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If test fails.
+     * @throws Exception if test fails
      */
     @Test
     public void id() throws Exception {

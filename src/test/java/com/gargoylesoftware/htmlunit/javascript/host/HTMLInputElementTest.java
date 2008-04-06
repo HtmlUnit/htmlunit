@@ -665,7 +665,7 @@ public class HTMLInputElementTest extends WebTestCase {
 
     /**
      * Test that field delegates submit to the containing form.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnChangeCallsFormSubmit() throws Exception {

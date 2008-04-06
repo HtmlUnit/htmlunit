@@ -92,7 +92,7 @@ public class DisabledElementTest extends WebTestCase {
     /**
      * Creates an instance of the test class for testing <em>one</em> of the test methods.
      *
-     * @param elementHtml The HTML representing the element to test with attribute <code>id='element1'</code>
+     * @param elementHtml the HTML representing the element to test with attribute <code>id='element1'</code>
      */
     public DisabledElementTest(final String elementHtml) {
         final String htmlContent = "<html><body><form id='form1'>{0}</form></body></html>";
@@ -103,7 +103,7 @@ public class DisabledElementTest extends WebTestCase {
      * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
      * attribute does not exist.
      *
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void noDisabledAttribute() throws Exception {
@@ -114,7 +114,7 @@ public class DisabledElementTest extends WebTestCase {
      * Tests that the <code>isDisabled()</code> method returns <code>true</code> when the <code>disabled</code>
      * attribute exists and is blank.
      *
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void blankDisabledAttribute() throws Exception {
@@ -125,7 +125,7 @@ public class DisabledElementTest extends WebTestCase {
      * Tests that the <code>isDisabled()</code> method returns <code>false</code> when the <code>disabled</code>
      * attribute exists and is <em>not</em> blank.
      *
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void populatedDisabledAttribute() throws Exception {
@@ -135,9 +135,9 @@ public class DisabledElementTest extends WebTestCase {
     /**
      * Tests the <code>isDisabled()</code> method with the given parameters.
      *
-     * @param disabledAttribute The definition of the <code>disabled</code> attribute
-     * @param expectedIsDisabled The expected return value of the <code>isDisabled()</code> method
-     * @throws Exception If test fails
+     * @param disabledAttribute the definition of the <code>disabled</code> attribute
+     * @param expectedIsDisabled the expected return value of the <code>isDisabled()</code> method
+     * @throws Exception if test fails
      */
     private void executeDisabledTest(final String disabledAttribute, final boolean expectedIsDisabled)
         throws Exception {

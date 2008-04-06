@@ -61,7 +61,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "appCodeName" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testAppCodeName() throws Exception {
@@ -70,7 +70,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "appMinorVersion" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testAppMinorVersion() throws Exception {
@@ -79,7 +79,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "appName" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testAppName() throws Exception {
@@ -88,7 +88,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "appVersion" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testAppVersion() throws Exception {
@@ -97,7 +97,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "browserLanguage" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testBrowserLanguage() throws Exception {
@@ -106,7 +106,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "cookieEnabled" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testCookieEnabled() throws Exception {
@@ -145,7 +145,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "cpuClass" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testCpuClass() throws Exception {
@@ -154,7 +154,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "onLine" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testOnLine() throws Exception {
@@ -163,7 +163,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "platform" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testPlatform() throws Exception {
@@ -172,7 +172,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "systemLanguage" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testSystemLanguage() throws Exception {
@@ -181,7 +181,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "userAgent" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testUserAgent() throws Exception {
@@ -190,7 +190,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "userLanguage" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testUserLanguage() throws Exception {
@@ -199,7 +199,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "plugins" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testPlugins() throws Exception {
@@ -208,7 +208,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "javaEnabled" method.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testJavaEnabled() throws Exception {
@@ -217,7 +217,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Tests the "taintEnabled" property.
-     * @throws Exception on test failure.
+     * @throws Exception on test failure
      */
     @Test
     public void testTaintEnabled() throws Exception {
@@ -226,9 +226,9 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Generic method for testing the value of a specific navigator attribute.
-     * @param name the name of the attribute to test.
-     * @param value the expected value for the named attribute.
-     * @throws Exception on test failure.
+     * @param name the name of the attribute to test
+     * @param value the expected value for the named attribute
+     * @throws Exception on test failure
      */
     private void testAttribute(final String name, final String value) throws Exception {
         final String content = "<html>\n"
@@ -251,7 +251,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Test closing using JavaScript.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testUseConfiguredBrowser() throws Exception {
@@ -277,7 +277,7 @@ public class NavigatorTest extends WebTestCase {
     
     /**
      * Test language property (only for Mozilla).
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testLanguage() throws Exception {
@@ -303,7 +303,7 @@ public class NavigatorTest extends WebTestCase {
 
     /**
      * Test some Mozilla properties (minimal tests are support is not completed).
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testMozilla() throws Exception {

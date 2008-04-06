@@ -60,7 +60,7 @@ public class HTMLTableCellElement extends HTMLElement {
 
     /**
      * Returns the index of this cell within the parent row.
-     * @return The index of this cell within the parent row.
+     * @return the index of this cell within the parent row
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cellindex.asp">
      * MSDN Documentation</a>
      */

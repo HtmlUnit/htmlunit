@@ -66,10 +66,10 @@ public class HTMLOptionElement extends HTMLElement {
     /**
      * JavaScript constructor. This must be declared in every JavaScript file because
      * the rhino engine won't walk up the hierarchy looking for constructors.
-     * @param newText The text
-     * @param newValue The value
+     * @param newText the text
+     * @param newValue the value
      * @param defaultSelected Whether the option is initially selected
-     * @param selected The current selection state of the option
+     * @param selected the current selection state of the option
      */
     public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
@@ -95,7 +95,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Returns the value of the "value" property.
-     * @return The value property.
+     * @return the value property
      */
     public String jsxGet_value() {
         return getHtmlOption().getValueAttribute();
@@ -103,7 +103,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Sets the value of the "value" property.
-     * @param newValue The value property.
+     * @param newValue the value property
      */
     public void jsxSet_value(final String newValue) {
         getHtmlOption().setValueAttribute(newValue);
@@ -111,7 +111,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Returns the value of the "text" property.
-     * @return The text property.
+     * @return the text property
      */
     public String jsxGet_text() {
         final HtmlOption htmlOption = getHtmlOption();
@@ -127,7 +127,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Sets the value of the "text" property.
-     * @param newText The text property.
+     * @param newText the text property
      */
     public void jsxSet_text(final String newText) {
         getHtmlOption().setLabelAttribute(newText);
@@ -135,7 +135,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Returns the value of the "selected" property.
-     * @return The text property.
+     * @return the text property
      */
     public boolean jsxGet_selected() {
         return getHtmlOption().isSelected();
@@ -143,7 +143,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Sets the value of the "selected" property.
-     * @param selected The new selected property.
+     * @param selected the new selected property
      */
     public void jsxSet_selected(final boolean selected) {
         getHtmlOption().setSelected(selected);
@@ -151,7 +151,7 @@ public class HTMLOptionElement extends HTMLElement {
     
     /**
      * Returns the value of the "defaultSelected" property.
-     * @return The text property.
+     * @return the text property
      */
     public boolean jsxGet_defaultSelected() {
         return getHtmlOption().isDefaultSelected();
@@ -159,7 +159,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Returns the value of the "label" property.
-     * @return The label property.
+     * @return the label property
      */
     public String jsxGet_label() {
         return getHtmlOption().getLabelAttribute();
@@ -167,7 +167,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Sets the value of the "label" property.
-     * @param label The new label property.
+     * @param label the new label property
      */
     public void jsxSet_label(final String label) {
         getHtmlOption().setLabelAttribute(label);

@@ -67,9 +67,9 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlOption(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -79,9 +79,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
     }
 
     /**
-     * Returns true if this option is currently selected.
-     *
-     * @return See above
+     * Returns <tt>true</tt> if this option is currently selected.
+     * @return <tt>true</tt> if this option is currently selected
      */
     public boolean isSelected() {
         return isAttributeDefined("selected");
@@ -91,8 +90,8 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * Sets the selected state of this option. This will possibly also change the
      * selected properties of sibling option elements.
      *
-     * @param selected true if this option should be selected.
-     * @return The page that occupies this window after this change is made. It
+     * @param selected true if this option should be selected
+     * @return the page that occupies this window after this change is made. It
      * may be the same window or it may be a freshly loaded one.
      */
     public Page setSelected(boolean selected) {
@@ -151,7 +150,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "selected"
+     * @return the value of the attribute "selected"
      * or an empty string if that attribute isn't defined.
      */
     public final String getSelectedAttribute() {
@@ -163,28 +162,21 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * That is whether the "selected"
      * attribute exists when the Option is constructed. This also determines
      * the value of getSelectedAttribute() after a reset() on the form.
-     * @return whether the option is selected by default.
+     * @return whether the option is selected by default
      */
     public final boolean isDefaultSelected() {
         return initialSelectedState_;
     }
 
     /**
-     * Returns true if the disabled attribute is set for this element.
-     *
-     * @return Return true if this element is disabled.
+     * {@inheritDoc}
      */
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
     }
 
     /**
-     * Returns the value of the attribute "disabled". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "disabled"
-     * or an empty string if that attribute isn't defined.
+     * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
@@ -195,8 +187,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "label"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "label" or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
         return getAttributeValue("label");
@@ -207,7 +198,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @param newLabel The value of the attribute "label".
+     * @param newLabel the value of the attribute "label"
      */
     public final void setLabelAttribute(final String newLabel) {
         setAttributeValue("label", newLabel);
@@ -219,7 +210,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
      * initial value if value attribute is not set</a>
-     * @return The value of the attribute "value"
+     * @return the value of the attribute "value"
      */
     public final String getValueAttribute() {
         return getAttributeValue("value");
@@ -230,7 +221,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @param newValue The value of the attribute "value".
+     * @param newValue the value of the attribute "value"
      */
     public final void setValueAttribute(final String newValue) {
         setAttributeValue("value", newValue);

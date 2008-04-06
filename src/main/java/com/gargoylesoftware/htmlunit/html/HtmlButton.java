@@ -71,9 +71,9 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     /**
      * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlButton(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -84,7 +84,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     /**
      * Sets the content of the "value" attribute.
      *
-     * @param newValue The new content
+     * @param newValue the new content
      */
     public void setValueAttribute(final String newValue) {
         setAttributeValue("value", newValue);
@@ -118,13 +118,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
     }
 
     /**
-     * Returns an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted.<p>
-     *
-     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
-     *
-     * @return See above
+     * {@inheritDoc}
      */
     public NameValuePair[] getSubmitKeyValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};

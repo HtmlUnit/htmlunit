@@ -53,7 +53,7 @@ public class ObjectInstantiationException extends RuntimeException {
     /**
      * Create an instance.
      * @param message A message explaining the failure
-     * @param cause The exception that was thrown
+     * @param cause the exception that was thrown
      */
     public ObjectInstantiationException(final String message, final Throwable cause) {
         super(message);
@@ -62,7 +62,7 @@ public class ObjectInstantiationException extends RuntimeException {
 
     /**
      * Returns the exception that had been thrown during instantiation of the object.
-     * @return The cause exception
+     * @return the cause exception
      */
     public Throwable getCauseException() {
         return causeException_;

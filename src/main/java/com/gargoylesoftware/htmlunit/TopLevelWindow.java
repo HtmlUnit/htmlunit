@@ -56,8 +56,8 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
 
     /**
      * Creates an instance.
-     * @param name The name of the new window
-     * @param webClient The web client that "owns" this window.
+     * @param name the name of the new window
+     * @param webClient the web client that "owns" this window
      */
     public TopLevelWindow(final String name, final WebClient webClient) {
         super(webClient);
@@ -91,7 +91,7 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
 
     /**
      * Returns a string representation of this object.
-     * @return A string representation of this object.
+     * @return a string representation of this object
      */
     @Override
     public String toString() {
@@ -100,7 +100,7 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
 
     /**
      * Sets the opener property. This is the WebWindow that caused this new window to be opened.
-     * @param opener The new opener
+     * @param opener the new opener
      */
     public void setOpener(final WebWindow opener) {
         opener_ = opener;
@@ -108,7 +108,7 @@ public class TopLevelWindow extends WebWindowImpl implements Serializable  {
 
     /**
      * Returns the opener property. This is the WebWindow that caused this new window to be opened.
-     * @return The opener
+     * @return the opener
      */
     public WebWindow getOpener() {
         return opener_;

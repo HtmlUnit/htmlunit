@@ -57,9 +57,9 @@ public class HtmlParameter extends HtmlElement {
     /**
      * Create an instance of HtmlParameter
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlParameter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -72,7 +72,7 @@ public class HtmlParameter extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "id"
+     * @return the value of the attribute "id"
      * or an empty string if that attribute isn't defined.
      */
     public final String getIdAttribute() {
@@ -84,7 +84,7 @@ public class HtmlParameter extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
+     * @return the value of the attribute "name"
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
@@ -96,7 +96,7 @@ public class HtmlParameter extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "value"
+     * @return the value of the attribute "value"
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueAttribute() {
@@ -108,7 +108,7 @@ public class HtmlParameter extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "valuetype"
+     * @return the value of the attribute "valuetype"
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueTypeAttribute() {
@@ -120,7 +120,7 @@ public class HtmlParameter extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "type"
+     * @return the value of the attribute "type"
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {

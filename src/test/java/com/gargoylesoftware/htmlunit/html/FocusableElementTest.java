@@ -66,7 +66,7 @@ public class FocusableElementTest extends WebTestCase {
     /**
      * Full page driver for onblur and onfocus tests.
      *
-     * @param htmlContent HTML fragment for body of page with a focusable element identified by a focusId ID attribute.
+     * @param htmlContent HTML fragment for body of page with a focusable element identified by a focusId ID attribute
      * Must have onfocus event that raises an alert of "foo1 onfocus" and an onblur event that raises an alert of "foo
      * onblur" on the second element.
      * @throws Exception if the test fails
@@ -86,7 +86,7 @@ public class FocusableElementTest extends WebTestCase {
     /**
      * Body driver for onblur and onfocus tests.
      *
-     * @param htmlBodyContent HTML tag name for simple tag with text body.
+     * @param htmlBodyContent HTML tag name for simple tag with text body
      * @throws Exception if the test fails
      */
     private void onClickBodyTest(final String htmlBodyContent) throws Exception {
@@ -101,8 +101,8 @@ public class FocusableElementTest extends WebTestCase {
     /**
      * Simple tag name driver for onblur and onfocus tests.
      *
-     * @param tagName HTML tag name for simple tag with text body.
-     * @param tagAttributes Additional attribute(s) to add to the generated tag.
+     * @param tagName HTML tag name for simple tag with text body
+     * @param tagAttributes Additional attribute(s) to add to the generated tag
      * @throws Exception if the test fails
      */
     private void onClickSimpleTest(final String tagName, final String tagAttributes) throws Exception {

@@ -74,9 +74,9 @@ public class ActiveXObject extends SimpleScriptable {
     /**
      * This method searches the map specified in the <code>WebClient</code> class for the java
      * object to instantiate based on the ActiveXObject constructor String.
-     * @param cx The current context
-     * @param args The arguments to the ActiveXObject constructor
-     * @param ctorObj The function object
+     * @param cx the current context
+     * @param args the arguments to the ActiveXObject constructor
+     * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
@@ -165,8 +165,8 @@ public class ActiveXObject extends SimpleScriptable {
 
     /**
      * Indicates if the ActiveX name is one flavor of XMLTemplate.
-     * @param name the ActiveX name.
-     * @return <code>true</code> if this is an XMLTemplate.
+     * @param name the ActiveX name
+     * @return <code>true</code> if this is an XMLTemplate
      */
     static boolean isXMLTemplate(String name) {
         if (name == null) {

@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlNoScriptTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testGetElementById() throws Exception {
@@ -79,7 +79,7 @@ public class HtmlNoScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testChildNodes() throws Exception {
@@ -104,7 +104,7 @@ public class HtmlNoScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testJavaScript() throws Exception {
@@ -128,7 +128,7 @@ public class HtmlNoScriptTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testFormValues() throws Exception {

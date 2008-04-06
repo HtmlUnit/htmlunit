@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public abstract class JQueryTestBase extends WebTestCase {
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void ie6() throws Exception {
@@ -74,7 +74,7 @@ public abstract class JQueryTestBase extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void ie7() throws Exception {
@@ -83,7 +83,7 @@ public abstract class JQueryTestBase extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void firefox2() throws Exception {
@@ -103,7 +103,7 @@ public abstract class JQueryTestBase extends WebTestCase {
      *
      * @param i the test result iterator
      * @param ie whether or not the browser used was MSIE
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     protected abstract void verify(final Iterator<HtmlElement> i, final boolean ie) throws Exception;
 

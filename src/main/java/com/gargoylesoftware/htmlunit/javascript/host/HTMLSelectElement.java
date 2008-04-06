@@ -89,7 +89,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Removes option at the specified index.
-     * @param index The index of the item to remove.
+     * @param index the index of the item to remove
      */
     public void jsxFunction_remove(final int index) {
         put(index, null, null);
@@ -97,7 +97,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Adds a new item to the list (optionally) before the specified item.
-     * @param newOptionObject The DomNode to insert.
+     * @param newOptionObject the DomNode to insert
      * @param arg2 for Firefox: the DomNode to insert the previous element before (null if at end),
      * for Internet Explorer: the index where the element should be placed (optional).
      */
@@ -112,8 +112,8 @@ public class HTMLSelectElement extends FormField {
     
     /**
      * Adds a new item to the list (optionally) at the specified index in IE way.
-     * @param newOptionObject The DomNode to insert.
-     * @param index (optional) the index where the node should be inserted.
+     * @param newOptionObject the DomNode to insert
+     * @param index (optional) the index where the node should be inserted
      */
     protected void add_IE(final HTMLOptionElement newOptionObject, final Object index) {
         final HtmlSelect select = getHtmlSelect();
@@ -136,8 +136,8 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Adds a new item to the list (optionally) before the specified item in Mozilla way.
-     * @param newOptionObject The DomNode to insert.
-     * @param beforeOptionObject The DomNode to insert the previous element before (null if at end).
+     * @param newOptionObject the DomNode to insert
+     * @param beforeOptionObject the DomNode to insert the previous element before (null if at end)
      */
     protected void add(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {
         final HtmlOption beforeOption;
@@ -156,8 +156,8 @@ public class HTMLSelectElement extends FormField {
     /**
      * Adds the option (and create the associated DOM node if needed) before the specified one
      * or at the end if the specified one in null.
-     * @param newOptionObject the new option to add.
-     * @param beforeOption the option that should be after the option to add.
+     * @param newOptionObject the new option to add
+     * @param beforeOption the option that should be after the option to add
      */
     protected void addBefore(final HTMLOptionElement newOptionObject, final HtmlOption beforeOption) {
         final HtmlSelect select = getHtmlSelect();
@@ -178,7 +178,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the type of this input.
-     * @return The type.
+     * @return the type
      */
     @Override
     public String jsxGet_type() {
@@ -194,7 +194,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the value of the "options" property.
-     * @return The options property.
+     * @return the options property
      */
     public HTMLOptionsCollection jsxGet_options() {
         if (optionsArray_ == null) {
@@ -205,7 +205,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the value of the "selectedIndex" property.
-     * @return The selectedIndex property.
+     * @return the selectedIndex property
      */
     public int jsxGet_selectedIndex() {
         final HtmlSelect htmlSelect = getHtmlSelect();
@@ -221,7 +221,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Sets the value of the "selectedIndex" property.
-     * @param index The new value.
+     * @param index the new value
      */
     public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
@@ -243,7 +243,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the actual value of the selected Option.
-     * @return The value.
+     * @return the value
      */
     @Override
     public String jsxGet_value() {
@@ -259,7 +259,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the value of the "length" property.
-     * @return The length property.
+     * @return the length property
      */
     public int jsxGet_length() {
         if (optionsArray_ == null) {
@@ -270,7 +270,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Removes options by reducing the "length" property.
-     * @param newLength The new length property value.
+     * @param newLength the new length property value
      */
     public void jsxSet_length(final int newLength) {
         if (optionsArray_ == null) {
@@ -281,9 +281,9 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the specified indexed property.
-     * @param index The index of the property.
-     * @param start The scriptable object that was originally queried for this property.
-     * @return The property.
+     * @param index the index of the property
+     * @param start the scriptable object that was originally queried for this property
+     * @return the property
      */
     @Override
     public Object get(final int index, final Scriptable start) {
@@ -295,9 +295,9 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Sets the index property.
-     * @param index The index.
-     * @param start The scriptable object that was originally invoked for this property.
-     * @param newValue The new value.
+     * @param index the index
+     * @param start the scriptable object that was originally invoked for this property
+     * @param newValue the new value
      */
     @Override
     public void put(final int index, final Scriptable start, final Object newValue) {
@@ -309,7 +309,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the HTML select object.
-     * @return The HTML select object.
+     * @return the HTML select object
      */
     private HtmlSelect getHtmlSelect() {
         return (HtmlSelect) getHtmlElementOrDie();
@@ -317,7 +317,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Selects the option with the specified value.
-     * @param newValue The value of the option to select.
+     * @param newValue the value of the option to select
      */
     @Override
     public void jsxSet_value(final String newValue) {
@@ -326,7 +326,7 @@ public class HTMLSelectElement extends FormField {
 
     /**
      * Returns the <tt>size</tt> attribute.
-     * @return the <tt>size</tt> attribute.
+     * @return the <tt>size</tt> attribute
      */
     public int jsxGet_size() {
         int size = 0;
@@ -344,7 +344,7 @@ public class HTMLSelectElement extends FormField {
     
     /**
      * Sets the <tt>size</tt> attribute.
-     * @param size The <tt>size</tt> attribute.
+     * @param size the <tt>size</tt> attribute
      */
     public void jsxSet_size(final String size) {
         getHtmlElementOrDie().setAttributeValue("size", size);

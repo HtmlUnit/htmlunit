@@ -55,7 +55,7 @@ public class LoggingRefreshHandler implements RefreshHandler {
     private final List<Object> list_;
     
     /**
-     * @param list The list to add data to
+     * @param list the list to add data to
      */
     public LoggingRefreshHandler(final List<Object> list) {
         list_ = list;
@@ -63,9 +63,9 @@ public class LoggingRefreshHandler implements RefreshHandler {
     
     /**
      * Logs the requested refresh, but does not actually refresh anything.
-     * @param page The page that is going to be refreshed.
-     * @param url The URL where the new page will be loaded.
-     * @param seconds The number of seconds to wait before reloading the page.
+     * @param page the page that is going to be refreshed
+     * @param url the URL where the new page will be loaded
+     * @param seconds the number of seconds to wait before reloading the page
      */
     public void handleRefresh(final Page page, final URL url, final int seconds) {
         list_.add(((HtmlPage) page).getTitleText());

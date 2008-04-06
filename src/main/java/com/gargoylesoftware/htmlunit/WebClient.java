@@ -202,7 +202,7 @@ public class WebClient implements Serializable {
 
     /**
      * Creates a web client instance using the specified {@link BrowserVersion}.
-     * @param browserVersion The browser version to simulate.
+     * @param browserVersion the browser version to simulate
      */
     public WebClient(final BrowserVersion browserVersion) {
         WebAssert.notNull("browserVersion", browserVersion);
@@ -225,9 +225,9 @@ public class WebClient implements Serializable {
 
     /**
      * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
-     * @param browserVersion The browser version to simulate
-     * @param proxyHost The server that will act as proxy
-     * @param proxyPort The port to use on the proxy server
+     * @param browserVersion the browser version to simulate
+     * @param proxyHost the server that will act as proxy
+     * @param proxyPort the port to use on the proxy server
      */
     public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
         WebAssert.notNull("browserVersion", browserVersion);
@@ -250,10 +250,10 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Create a JavaScript engine if possible.
+     * Creates a JavaScript engine if possible.
      *
-     * @param webClient The webclient that we are creating the script engine for.
-     * @return A JavaScript engine or null if one could not be created.
+     * @param webClient the webclient that we are creating the script engine for
+     * @return a JavaScript engine or <tt>null</tt> if one could not be created
      */
     private static JavaScriptEngine createJavaScriptEngineIfPossible(final WebClient webClient) {
         try {
@@ -272,7 +272,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * <p>Return the object that will resolve all URL requests<p>
-     * @return The connection that will be used.
+     * @return the connection that will be used
      */
     public synchronized WebConnection getWebConnection() {
         if (webConnection_ == null) {
@@ -286,7 +286,7 @@ public class WebClient implements Serializable {
      *
      * Sets the object that will resolve all URL requests.
      *
-     * @param webConnection The new web connection
+     * @param webConnection the new web connection
      */
     public void setWebConnection(final WebConnection webConnection) {
         WebAssert.notNull("webConnection", webConnection);
@@ -329,11 +329,11 @@ public class WebClient implements Serializable {
      *  </table>
      *
      *
-     * @param webWindow The WebWindow to load this request into
+     * @param webWindow the WebWindow to load this request into
      * @param parameters Parameter object for the web request
-     * @return See above
-     * @throws IOException If an IO error occurs
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @return the page returned by the server when the specified request was made in the specified window
+     * @throws IOException if an IO error occurs
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      *
      * @see WebRequestSettings
@@ -374,14 +374,14 @@ public class WebClient implements Serializable {
      * <p>Open a new web window and populate it with a page loaded by
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
      *
-     * @param opener The web window that initiated the request.
-     * @param target The name of the window to be opened. This is the name that would
+     * @param opener the web window that initiated the request
+     * @param target the name of the window to be opened. This is the name that would
      * be passed into the JavaScript open() method.
      * @param params Any parameters
-     * @return The new page.
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @return the new page
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException If an IO problem occurs.
+     * @throws IOException if an IO problem occurs
      */
     public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
@@ -390,11 +390,11 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to build an URL and load it into the current WebWindow.
-     * @param url The URL of the new content.
-     * @return The new page.
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @param url the URL of the new content
+     * @return the new page
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException If an IO problem occurs.
+     * @throws IOException if an IO problem occurs
      * @throws MalformedURLException if no URL can be created from the provided string
      */
     public Page getPage(final String url) throws IOException, FailingHttpStatusCodeException, MalformedURLException {
@@ -403,11 +403,11 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to load a URL into the current WebWindow.
-     * @param url The URL of the new content.
-     * @return The new page.
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @param url the URL of the new content
+     * @return the new page
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException If an IO problem occurs.
+     * @throws IOException if an IO problem occurs
      */
     public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), new WebRequestSettings(url));
@@ -415,11 +415,11 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to load a web request into the current WebWindow.
-     * @param request The request parameters
-     * @return The new page.
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @param request the request parameters
+     * @return the new page
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException If an IO problem occurs.
+     * @throws IOException if an IO problem occurs
      * @see #getPage(WebWindow,WebRequestSettings)
      */
     public Page getPage(final WebRequestSettings request) throws IOException,
@@ -432,12 +432,12 @@ public class WebClient implements Serializable {
      * get inserted into the WebWindow. All initialization and event notification
      * will be handled here.
      *
-     * @param webResponse The response that will be used to create the new page.
-     * @param webWindow The window that the new page will be placed within.
-     * @throws IOException If an IO error occurs.
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @param webResponse the response that will be used to create the new page
+     * @param webWindow the window that the new page will be placed within
+     * @throws IOException if an IO error occurs
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
-     * @return The newly created page.
+     * @return the newly created page
      */
     public Page loadWebResponseInto(
             final WebResponse webResponse, final WebWindow webWindow)
@@ -483,10 +483,11 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns true if the content of the resulting document will be printed to
+     * Returns <tt>true</tt> if the content of the resulting document will be printed to
      * the console in the event of a failing response code.
      *
-     * @return See above
+     * @return <tt>true</tt> if the content of the resulting document will be printed to
+     *         the console in the event of a failing response code
      * @see #setPrintContentOnFailingStatusCode
      */
     public boolean getPrintContentOnFailingStatusCode() {
@@ -516,15 +517,15 @@ public class WebClient implements Serializable {
      * failing status code. Successful status codes are in the range 200-299.
      * The default is true.
      *
-     * @param enabled True to enable this feature
+     * @param enabled <tt>true</tt> to enable this feature
      */
     public void setThrowExceptionOnFailingStatusCode(final boolean enabled) {
         throwExceptionOnFailingStatusCode_ = enabled;
     }
 
     /**
-     * Returns true if an exception will be thrown in the event of a failing response code.
-     * @return See above
+     * Returns <tt>true</tt> if an exception will be thrown in the event of a failing response code.
+     * @return <tt>true</tt> if an exception will be thrown in the event of a failing response code
      * @see #setThrowExceptionOnFailingStatusCode
      */
     public boolean isThrowExceptionOnFailingStatusCode() {
@@ -550,8 +551,8 @@ public class WebClient implements Serializable {
     /**
      * Sets a header which will be sent up on EVERY request from this client.
      *
-     * @param name The name of the header
-     * @param value The value of the header
+     * @param name the name of the header
+     * @param value the value of the header
      */
     public void addRequestHeader(final String name, final String value) {
         requestHeaders_.put(name, value);
@@ -572,7 +573,7 @@ public class WebClient implements Serializable {
      * trying to access protected information on a web server. This information is
      * required when the server is using Basic HTTP authentication, NTLM authentication,
      * or Digest authentication.
-     * @param credentialsProvider The new credentials provider to use to authenticate.
+     * @param credentialsProvider the new credentials provider to use to authenticate
      */
     public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
         WebAssert.notNull("credentialsProvider", credentialsProvider);
@@ -582,7 +583,7 @@ public class WebClient implements Serializable {
     /**
      * Returns the credentials provider for this client instance. By default, this
      * method returns an instance of {@link DefaultCredentialsProvider}.
-     * @return The credentials provider for this client instance.
+     * @return the credentials provider for this client instance
      */
     public CredentialsProvider getCredentialsProvider() {
         return credentialsProvider_;
@@ -597,7 +598,7 @@ public class WebClient implements Serializable {
      *
      * Override this to provide custom behavior.
      *
-     * @param message The failure message
+     * @param message the failure message
      * @deprecated
      * @see WebAssert
      */
@@ -615,7 +616,7 @@ public class WebClient implements Serializable {
 
     /**
      * This method is intended for testing only - use at your own risk.
-     * @return the current JavaScript engine (never <code>null</code>).
+     * @return the current JavaScript engine (never <code>null</code>)
      */
     public JavaScriptEngine getJavaScriptEngine() {
         return scriptEngine_;
@@ -624,7 +625,7 @@ public class WebClient implements Serializable {
     /**
      * This method is intended for testing only - use at your own risk.
      *
-     * @param engine  The new script engine to use.
+     * @param engine  the new script engine to use
      */
     public void setJavaScriptEngine(final JavaScriptEngine engine) {
         if (engine == null) {
@@ -691,7 +692,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the client's current homepage.
-     * @return the client's current homepage.
+     * @return the client's current homepage
      */
     public String getHomePage() {
         return homePage_;
@@ -717,7 +718,7 @@ public class WebClient implements Serializable {
 
     /**
      * Any hosts matched by the specified regular expression pattern will no longer bypass the configured proxy.
-     * @param pattern The previously added regular expression pattern.
+     * @param pattern the previously added regular expression pattern
      * @see Pattern
      */
     public void removeHostsFromProxyBypass(final String pattern) {
@@ -727,7 +728,7 @@ public class WebClient implements Serializable {
     /**
      * Returns <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
      * configured proxy.
-     * @param hostname The name of the host to check.
+     * @param hostname the name of the host to check
      * @return <tt>true</tt> if the host with the specified hostname should be accessed bypassing the
      * configured proxy, <tt>false</tt> otherwise.
      */
@@ -744,7 +745,7 @@ public class WebClient implements Serializable {
 
     /**
      * Sets the alert handler for this webclient.
-     * @param alertHandler The new alerthandler or null if none is specified.
+     * @param alertHandler the new alerthandler or null if none is specified
      */
     public void setAlertHandler(final AlertHandler alertHandler) {
         alertHandler_ = alertHandler;
@@ -752,7 +753,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the alert handler for this webclient.
-     * @return the alert handler or null if one hasn't been set.
+     * @return the alert handler or null if one hasn't been set
      */
     public AlertHandler getAlertHandler() {
         return alertHandler_;
@@ -760,7 +761,7 @@ public class WebClient implements Serializable {
 
     /**
      * Sets the handler that will be executed when the JavaScript method Window.confirm() is called.
-     * @param handler The new handler or null if no handler is to be used.
+     * @param handler the new handler or null if no handler is to be used
      */
     public void setConfirmHandler(final ConfirmHandler handler) {
         confirmHandler_ = handler;
@@ -768,7 +769,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the confirm handler.
-     * @return the confirm handler or null if one hasn't been set.
+     * @return the confirm handler or null if one hasn't been set
      */
     public ConfirmHandler getConfirmHandler() {
         return confirmHandler_;
@@ -776,7 +777,7 @@ public class WebClient implements Serializable {
 
     /**
      * Sets the handler that will be executed when the JavaScript method Window.prompt() is called.
-     * @param handler The new handler or null if no handler is to be used.
+     * @param handler the new handler or null if no handler is to be used
      */
     public void setPromptHandler(final PromptHandler handler) {
         promptHandler_ = handler;
@@ -784,7 +785,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the prompt handler.
-     * @return the prompt handler or null if one hasn't been set.
+     * @return the prompt handler or null if one hasn't been set
      */
     public PromptHandler getPromptHandler() {
         return promptHandler_;
@@ -792,7 +793,7 @@ public class WebClient implements Serializable {
 
     /**
      * Sets the status handler for this webclient.
-     * @param statusHandler The new status handler or null if none is specified.
+     * @param statusHandler the new status handler or null if none is specified
      */
     public void setStatusHandler(final StatusHandler statusHandler) {
         statusHandler_ = statusHandler;
@@ -800,7 +801,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the status handler for this webclient.
-     * @return the status handler or null if one hasn't been set.
+     * @return the status handler or null if one hasn't been set
      */
     public StatusHandler getStatusHandler() {
         return statusHandler_;
@@ -808,7 +809,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the current browser version.
-     * @return the current browser version.
+     * @return the current browser version
      */
     public BrowserVersion getBrowserVersion() {
         return browserVersion_;
@@ -817,7 +818,7 @@ public class WebClient implements Serializable {
     /**
      * Returns the "current" window for this client. This is the window that will be used
      * when getPage() is called without specifying a window.
-     * @return The current window.
+     * @return the current window
      */
     public WebWindow getCurrentWindow() {
         return currentWindow_;
@@ -826,7 +827,7 @@ public class WebClient implements Serializable {
     /**
      * Sets the current window for this client. This is the window that will be used when
      * getPage() is called without specifying a window.
-     * @param window The new window.
+     * @param window the new window
      */
     public void setCurrentWindow(final WebWindow window) {
         WebAssert.notNull("window", window);
@@ -836,7 +837,7 @@ public class WebClient implements Serializable {
     /**
      * Returns the "first" window for this client. This is the first window
      * opened since pushClearFirstWindow() was last called.
-     * @return The first window.
+     * @return the first window
      * @deprecated since 2.0
      */
     public WebWindow popFirstWindow() {
@@ -858,7 +859,7 @@ public class WebClient implements Serializable {
     /**
      * Adds a listener for WebWindowEvent's. All events from all windows associated with this
      * client will be sent to the specified listener.
-     * @param listener A listener.
+     * @param listener A listener
      */
     public void addWebWindowListener(final WebWindowListener listener) {
         WebAssert.notNull("listener", listener);
@@ -867,7 +868,7 @@ public class WebClient implements Serializable {
 
     /**
      * Removes a listener for WebWindowEvent's.
-     * @param listener A listener.
+     * @param listener A listener
      */
     public void removeWebWindowListener(final WebWindowListener listener) {
         WebAssert.notNull("listener", listener);
@@ -896,9 +897,9 @@ public class WebClient implements Serializable {
      * Open a new window with the specified name. If the URL is non-null then attempt to load
      * a page from that location and put it in the new window.
      *
-     * @param url The URL to load content from or null if no content is to be loaded.
-     * @param windowName The name of the new window
-     * @return The new window.
+     * @param url the URL to load content from or null if no content is to be loaded
+     * @param windowName the name of the new window
+     * @return the new window
      */
     public WebWindow openWindow(final URL url, final String windowName) {
         WebAssert.notNull("windowName", windowName);
@@ -909,10 +910,10 @@ public class WebClient implements Serializable {
      * Open a new window with the specified name. If the URL is non-null then attempt to load
      * a page from that location and put it in the new window.
      *
-     * @param url The URL to load content from or null if no content is to be loaded.
-     * @param windowName The name of the new window
-     * @param opener The web window that is calling openWindow
-     * @return The new window.
+     * @param url the URL to load content from or null if no content is to be loaded
+     * @param windowName the name of the new window
+     * @param opener the web window that is calling openWindow
+     * @return the new window
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, "_blank");
@@ -944,10 +945,10 @@ public class WebClient implements Serializable {
      * name is set to the default. The special target names are relative to
      * the opener window.
      *
-     * @param opener The web window that is calling openWindow
-     * @param windowName The name of the new window
-     * @param defaultName The default target if no name is given
-     * @return The new window.
+     * @param opener the web window that is calling openWindow
+     * @param windowName the name of the new window
+     * @param defaultName the default target if no name is given
+     * @return the new window
      */
     private WebWindow openTargetWindow(
             final WebWindow opener, final String windowName, final String defaultName) {
@@ -1001,7 +1002,7 @@ public class WebClient implements Serializable {
     /**
      * Sets whether or not redirections will be followed automatically on receipt of
      * a redirect status code from the server.
-     * @param enabled true to enable automatic redirection.
+     * @param enabled true to enable automatic redirection
      */
     public void setRedirectEnabled(final boolean enabled) {
         isRedirectEnabled_ = enabled;
@@ -1010,7 +1011,7 @@ public class WebClient implements Serializable {
     /**
      * Returns whether or not redirections will be followed automatically on receipt of
      * a redirect status code from the server.
-     * @return true if automatic redirection is enabled.
+     * @return true if automatic redirection is enabled
      */
     public boolean isRedirectEnabled() {
         return isRedirectEnabled_;
@@ -1039,7 +1040,7 @@ public class WebClient implements Serializable {
      * Sets the object that will be used to create pages. Set this if you want
      * to customize the type of page that is returned for a given content type.
      *
-     * @param pageCreator The new page creator
+     * @param pageCreator the new page creator
      */
     public void setPageCreator(final PageCreator pageCreator) {
         WebAssert.notNull("pageCreator", pageCreator);
@@ -1058,9 +1059,9 @@ public class WebClient implements Serializable {
     /**
      * Returns the first {@link WebWindow} that matches the specified name.
      *
-     * @param name The name to search for.
-     * @return The {@link WebWindow} with the specified name
-     * @throws WebWindowNotFoundException If the {@link WebWindow} can't be found.
+     * @param name the name to search for
+     * @return the {@link WebWindow} with the specified name
+     * @throws WebWindowNotFoundException if the {@link WebWindow} can't be found
      */
     public WebWindow getWebWindowByName(final String name) throws WebWindowNotFoundException {
         WebAssert.notNull("name", name);
@@ -1078,7 +1079,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Initialize a new web window for JavaScript.
-     * @param webWindow The new WebWindow
+     * @param webWindow the new WebWindow
      */
     public void initialize(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
@@ -1091,7 +1092,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Initialize a new page for JavaScript.
-     * @param newPage The new page.
+     * @param newPage the new page
      */
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
@@ -1104,7 +1105,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Initialize a new empty web window for JavaScript.
-     * @param webWindow The new WebWindow
+     * @param webWindow the new WebWindow
      */
     public void initializeEmptyWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
@@ -1118,7 +1119,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Add a new web window to the list of available windows.
-     * @param webWindow The new WebWindow
+     * @param webWindow the new WebWindow
      */
     public void registerWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
@@ -1129,7 +1130,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Remove a web window from the list of available windows.
-     * @param webWindow The WebWindow to remove
+     * @param webWindow the WebWindow to remove
      */
     public void deregisterWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
@@ -1149,7 +1150,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the log object for this web client.
-     * @return The log object
+     * @return the log object
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
@@ -1179,10 +1180,10 @@ public class WebClient implements Serializable {
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>
      * regarding Relative Uniform Resource Locators for more information.
      *
-     * @param baseUrl The base URL
-     * @param relativeUrl The relative URL
-     * @return See above
-     * @throws MalformedURLException If an error occurred when creating a URL object
+     * @param baseUrl the base URL
+     * @param relativeUrl the relative URL
+     * @return the expansion of the specified base and relative URLs
+     * @throws MalformedURLException if an error occurred when creating a URL object
      */
     public static URL expandUrl(final URL baseUrl, final String relativeUrl)
         throws MalformedURLException {
@@ -1333,10 +1334,10 @@ public class WebClient implements Serializable {
      * Builds a WebResponse for a file URL.
      * This first implementation is basic.
      * It assumes that the file contains an HTML page encoded with the specified encoding.
-     * @param url The file URL
+     * @param url the file URL
      * @param charset encoding to use
-     * @return The web response
-     * @throws IOException If an IO problem occurs
+     * @return the web response
+     * @throws IOException if an IO problem occurs
      */
     private WebResponse makeWebResponseForFileUrl(final URL url, final String charset) throws IOException {
         URL cleanUrl = url;
@@ -1403,7 +1404,7 @@ public class WebClient implements Serializable {
      * for instance with the "Helper Applications" settings of Mozilla and therefore see it as a
      * property of the "browser".
      * @param file the file
-     * @return "application/octet-stream" if nothing could be guessed.
+     * @return "application/octet-stream" if nothing could be guessed
      */
     public String guessContentType(final File file) {
         String contentType = null;
@@ -1454,7 +1455,7 @@ public class WebClient implements Serializable {
      * Loads a {@link WebResponse} from the server.
      * @param webRequestSettings settings to use when making the request
      * @throws IOException if an IO problem occurs
-     * @return The WebResponse
+     * @return the WebResponse
      */
     public WebResponse loadWebResponse(final WebRequestSettings webRequestSettings)
         throws
@@ -1493,7 +1494,7 @@ public class WebClient implements Serializable {
      * Loads a {@link WebResponse} from the server through the WebConnection.
      * @param webRequestSettings settings to use when making the request
      * @throws IOException if an IO problem occurs
-     * @return The WebResponse
+     * @return the WebResponse
      */
     private WebResponse loadWebResponseFromWebConnection(final WebRequestSettings webRequestSettings,
                 final int nbAllowedRedirections)
@@ -1641,7 +1642,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns an immutable list of open web windows (top windows or not).
-     * @return The web windows
+     * @return the web windows
      */
     public List<WebWindow> getWebWindows() {
         return Collections.unmodifiableList(webWindows_);
@@ -1650,7 +1651,7 @@ public class WebClient implements Serializable {
     /**
      * Sets the handler to be used whenever a refresh is triggered. Refer
      * to the documentation for {@link RefreshHandler} for more details.
-     * @param handler The new handler
+     * @param handler the new handler
      */
     public void setRefreshHandler(final RefreshHandler handler) {
         if (handler == null) {
@@ -1663,7 +1664,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the current refresh handler or null if one has not been set.
-     * @return The current RefreshHandler or null
+     * @return the current RefreshHandler or null
      */
     public RefreshHandler getRefreshHandler() {
         return refreshHandler_;
@@ -1671,7 +1672,7 @@ public class WebClient implements Serializable {
 
     /**
      * Sets the script pre processor for this webclient.
-     * @param scriptPreProcessor The new preprocessor or null if none is specified
+     * @param scriptPreProcessor the new preprocessor or null if none is specified
      */
     public void setScriptPreProcessor(final ScriptPreProcessor scriptPreProcessor) {
         scriptPreProcessor_ = scriptPreProcessor;
@@ -1679,7 +1680,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the script pre processor for this webclient.
-     * @return the pre processor or null of one hasn't been set.
+     * @return the pre processor or null of one hasn't been set
      */
     public ScriptPreProcessor getScriptPreProcessor() {
         return scriptPreProcessor_;
@@ -1690,7 +1691,7 @@ public class WebClient implements Serializable {
      * string passed into the <code>ActiveXObject</code> constructor to a java class name. Therefore
      * you can emulate <code>ActiveXObject</code>s in a web page's JavaScript by mapping the object
      * name to a java class to emulate the active X object.
-     * @param activeXObjectMap The new preprocessor or null if none is specified
+     * @param activeXObjectMap the new preprocessor or null if none is specified
      */
     public void setActiveXObjectMap(final Map<String, String> activeXObjectMap) {
         activeXObjectMap_ = activeXObjectMap;
@@ -1698,7 +1699,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the active X object map for this webclient.
-     * @return the active X object map.
+     * @return the active X object map
      */
     public Map<String, String> getActiveXObjectMap() {
         return activeXObjectMap_;
@@ -1711,7 +1712,7 @@ public class WebClient implements Serializable {
      * incorrectly located after the end of the HTML file. As a consequence it will finally
      * notify as errors that &lt;body&gt; and &lt;html&gt; are not closed properly even if
      * they were correctly present.
-     * @param listener the new listener, <code>null</code> if messages should be totally ignored.
+     * @param listener the new listener, <code>null</code> if messages should be totally ignored
      */
     public void setHTMLParserListener(final HTMLParserListener listener) {
         htmlParserListener_ = listener;
@@ -1719,7 +1720,7 @@ public class WebClient implements Serializable {
 
     /**
      * Gets the configured listener for messages generated by the HTML parser.
-     * @return <code>null</code> if no listener is defined (default value).
+     * @return <code>null</code> if no listener is defined (default value)
      */
     public HTMLParserListener getHTMLParserListener() {
         return htmlParserListener_;
@@ -1728,7 +1729,7 @@ public class WebClient implements Serializable {
     /**
      * Sets the flag on the HtmlParse to ignore the content that is outside of the BODY
      * and HTML tags.
-     * @param ignoreOutsideContent The boolean flag to enable or disable the support of
+     * @param ignoreOutsideContent the boolean flag to enable or disable the support of
      * content outside of the HTML and BODY tags
      */
     public static void setIgnoreOutsideContent(final boolean ignoreOutsideContent) {
@@ -1746,7 +1747,7 @@ public class WebClient implements Serializable {
     /**
      * Gets the timeout value for the WebConnection.
      *
-     * @return The timeout value in milliseconds
+     * @return the timeout value in milliseconds
      * @see WebClient#setTimeout(int)
      */
     public int getTimeout() {
@@ -1760,7 +1761,7 @@ public class WebClient implements Serializable {
      * second is for data retrieval. If the time is critical you must allow for twice the
      * time specified here.
      *
-     * @param timeout The value of the timeout in milliseconds
+     * @param timeout the value of the timeout in milliseconds
      */
     public void setTimeout(final int timeout) {
         timeout_ = timeout;
@@ -1788,7 +1789,7 @@ public class WebClient implements Serializable {
      * Gets the current listener for encountered incorrectness (except HTML parsing messages that
      * are handled by the HTML parser listener). Default value is an instance of
      * {@link IncorrectnessListenerImpl}.
-     * @return the current listener (not <code>null</code>).
+     * @return the current listener (not <code>null</code>)
      */
     public IncorrectnessListener getIncorrectnessListener() {
         return incorrectnessListener_;
@@ -1827,7 +1828,7 @@ public class WebClient implements Serializable {
 
     /**
      * Sets the onbeforeunload handler for this webclient.
-     * @param onbeforeunloadHandler The new onbeforeunloadHandler or null if none is specified.
+     * @param onbeforeunloadHandler the new onbeforeunloadHandler or null if none is specified
      */
     public void setOnbeforeunloadHandler(final OnbeforeunloadHandler onbeforeunloadHandler) {
         onbeforeunloadHandler_ = onbeforeunloadHandler;
@@ -1835,7 +1836,7 @@ public class WebClient implements Serializable {
 
     /**
      * Returns the onbeforeunload handler for this webclient.
-     * @return the onbeforeunload handler or null if one hasn't been set.
+     * @return the onbeforeunload handler or null if one hasn't been set
      */
     public OnbeforeunloadHandler getOnbeforeunloadHandler() {
         return onbeforeunloadHandler_;

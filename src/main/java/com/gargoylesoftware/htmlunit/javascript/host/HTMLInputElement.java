@@ -120,7 +120,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Commodity for <code>(HtmlInput) getHtmlElementOrDie()</code>.
-     * @return the bound HTML input.
+     * @return the bound HTML input
      */
     protected HtmlInput getHtmlInputOrDie() {
         return (HtmlInput) getHtmlElementOrDie();
@@ -132,7 +132,7 @@ public class HTMLInputElement extends FormField {
      * checkbox and radio. This implementation does nothing. The
      * implementations in Checkbox and Radio actually do the work.
      *
-     *@return The checked property.
+     *@return the checked property
      */
     public boolean jsxGet_checked() {
         return ((HtmlInput) getDomNodeOrDie()).isChecked();
@@ -162,7 +162,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Returns the input's default value, used if the containing form gets reset.
-     * @return The input's default value, used if the containing form gets reset.
+     * @return the input's default value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
      * MSDN Documentation</a>
      */
@@ -172,7 +172,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Sets the input's default value, used if the containing form gets reset.
-     * @param defaultValue The input's default value, used if the containing form gets reset.
+     * @param defaultValue the input's default value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultvalue.asp">
      * MSDN Documentation</a>
      */
@@ -182,7 +182,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Returns the input's default checked value, used if the containing form gets reset.
-     * @return The input's default checked value, used if the containing form gets reset.
+     * @return the input's default checked value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp">
      * MSDN Documentation</a>
      */
@@ -192,7 +192,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Sets the input's default checked value, used if the containing form gets reset.
-     * @param defaultChecked The input's default checked value, used if the containing form gets reset.
+     * @param defaultChecked the input's default checked value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/defaultchecked.asp">
      * MSDN Documentation</a>
      */
@@ -202,7 +202,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Gets the value of "textLength" attribute.
-     * @return the text length.
+     * @return the text length
      */
     public int jsxGet_textLength() {
         return jsxGet_value().length();
@@ -210,7 +210,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Gets the value of "selectionStart" attribute.
-     * @return the selection start.
+     * @return the selection start
      */
     public int jsxGet_selectionStart() {
         return ((HtmlTextInput) getHtmlElementOrDie()).getSelectionStart();
@@ -218,7 +218,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Sets the value of "selectionStart" attribute.
-     * @param start selection start.
+     * @param start selection start
      */
     public void jsxSet_selectionStart(final int start) {
         ((HtmlTextInput) getHtmlElementOrDie()).setSelectionStart(start);
@@ -226,7 +226,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Gets the value of "selectionEnd" attribute.
-     * @return the selection end.
+     * @return the selection end
      */
     public int jsxGet_selectionEnd() {
         return ((HtmlTextInput) getHtmlElementOrDie()).getSelectionEnd();
@@ -234,7 +234,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Sets the value of "selectionEnd" attribute.
-     * @param end selection end.
+     * @param end selection end
      */
     public void jsxSet_selectionEnd(final int end) {
         ((HtmlTextInput) getHtmlElementOrDie()).setSelectionEnd(end);
@@ -254,7 +254,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Gets the max length.
-     * @return the max length.
+     * @return the max length
      */
     public int jsxGet_maxLength() {
         final String attrValue = getHtmlElementOrDie().getAttribute("maxLength");
@@ -263,7 +263,7 @@ public class HTMLInputElement extends FormField {
 
     /**
      * Sets the value of "maxLength" attribute.
-     * @param length the new value.
+     * @param length the new value
      */
     public void jsxSet_maxLength(final int length) {
         getHtmlElementOrDie().setAttribute("maxLength", String.valueOf(length));
@@ -271,8 +271,8 @@ public class HTMLInputElement extends FormField {
     
     /**
      * Sets the selected portion of this input element.
-     * @param start the index of the first character to select.
-     * @param end the index of the character after the selection.
+     * @param start the index of the first character to select
+     * @param end the index of the character after the selection
      */
     public void jsxFunction_setSelectionRange(final int start, final int end) {
         jsxSet_selectionStart(start);

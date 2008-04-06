@@ -125,7 +125,7 @@ public class AttributesTest extends TestCase {
      *
      * @param clazz the class to create tests for
      * @param page the page that will be passed into the constructor of the objects to be tested
-     * @param suite The suite that all the tests will be placed inside
+     * @param suite the suite that all the tests will be placed inside
      * @throws Exception if the tests cannot be created
      */
     private static void addTestsForClass(
@@ -192,8 +192,8 @@ public class AttributesTest extends TestCase {
 
     /**
      * Creates a name for this particular test that reflects the attribute being tested.
-     * @param clazz The class containing the attribute.
-     * @param method The getter method for the attribute.
+     * @param clazz the class containing the attribute
+     * @param method the getter method for the attribute
      * @return the test name
      */
     private static String createTestName(final Class< ? > clazz, final Method method) {

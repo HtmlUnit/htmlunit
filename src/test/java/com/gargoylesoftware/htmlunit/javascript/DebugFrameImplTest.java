@@ -83,7 +83,7 @@ public class DebugFrameImplTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void withCallable() throws Exception {

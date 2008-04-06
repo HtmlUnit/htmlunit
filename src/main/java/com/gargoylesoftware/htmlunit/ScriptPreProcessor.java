@@ -50,12 +50,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 public interface ScriptPreProcessor {
     /**
      * Pre process the specified source code in the context of the given page.
-     * @param htmlPage The page
-     * @param sourceCode The code to execute.
+     * @param htmlPage the page
+     * @param sourceCode the code to execute
      * @param sourceName A name for the chunk of code that is going to be executed. This will be
      * used in error messages.
-     * @param htmlElement The HTML element that will act as the context.
-     * @return The source code after pre processing
+     * @param htmlElement the HTML element that will act as the context
+     * @return the source code after pre processing
      */
     String preProcess(
         final HtmlPage htmlPage, final String sourceCode, final String sourceName, final HtmlElement htmlElement);

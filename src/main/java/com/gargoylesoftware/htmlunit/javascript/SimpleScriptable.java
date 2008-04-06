@@ -111,7 +111,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Returns the JavaScript class name.
-     * @return The JavaScript class name.
+     * @return the JavaScript class name
      */
     @Override
     public String getClassName() {
@@ -127,7 +127,7 @@ public class SimpleScriptable extends ScriptableObject {
     /**
      * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
-     * @return The DOM node
+     * @return the DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
     public final DomNode getDomNodeOrDie() throws IllegalStateException {
@@ -143,7 +143,7 @@ public class SimpleScriptable extends ScriptableObject {
     /**
      * Returns the DOM node that corresponds to this JavaScript object
      * or null if a node hasn't been set.
-     * @return The DOM node or null
+     * @return the DOM node or null
      */
     public final DomNode getDomNodeOrNull() {
         return domNode_;
@@ -151,7 +151,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Sets the DOM node that corresponds to this JavaScript object.
-     * @param domNode The DOM node
+     * @param domNode the DOM node
      */
     public void setDomNode(final DomNode domNode) {
         setDomNode(domNode, true);
@@ -159,7 +159,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Sets the DOM node that corresponds to this JavaScript object.
-     * @param domNode The DOM node
+     * @param domNode the DOM node
      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
      */
     protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
@@ -172,7 +172,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Sets the HTML element that corresponds to this JavaScript object.
-     * @param htmlElement The HTML element
+     * @param htmlElement the HTML element
      */
     public void setHtmlElement(final HtmlElement htmlElement) {
         setDomNode(htmlElement);
@@ -180,7 +180,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Returns the log that is being used for all scripting objects.
-     * @return The log.
+     * @return the log
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
@@ -192,7 +192,7 @@ public class SimpleScriptable extends ScriptableObject {
      * cannot be created for a domNode then NOT_FOUND will be returned.
      *
      * @param object a {@link DomNode} or a {@link WebWindow}
-     * @return The JavaScript object or NOT_FOUND
+     * @return the JavaScript object or NOT_FOUND
      */
     protected SimpleScriptable getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
@@ -213,7 +213,7 @@ public class SimpleScriptable extends ScriptableObject {
     /**
      * Builds a new the JavaScript object that corresponds to the specified object.
      * @param domNode the DOM node for which a JS object should be created
-     * @return The JavaScript object
+     * @return the JavaScript object
      */
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         // Get the JS class name for the specified DOM node.
@@ -266,7 +266,7 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Gets a transformer getting the scriptable element for an {@link HtmlElement}.
-     * @return the transformer.
+     * @return the transformer
      */
     protected Transformer getTransformerScriptableFor() {
         return new Transformer() {
@@ -280,10 +280,10 @@ public class SimpleScriptable extends ScriptableObject {
      * Returns the value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
-     * @param index The index into the argument list.
-     * @param args The argument list.
-     * @param defaultValue The default value to return if the arg wasn't specified.
-     * @return The specified object or null
+     * @param index the index into the argument list
+     * @param args the argument list
+     * @param defaultValue the default value to return if the arg wasn't specified
+     * @return the specified object or null
      */
     public static Object getObjectArg(final int index, final Object[] args, final Object defaultValue) {
         if (index >= args.length) {
@@ -298,10 +298,10 @@ public class SimpleScriptable extends ScriptableObject {
      * Returns the string value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
-     * @param index The index into the argument list.
-     * @param args The argument list.
-     * @param defaultValue The default value to return if the arg wasn't specified.
-     * @return The specified string or null
+     * @param index the index into the argument list
+     * @param args the argument list
+     * @param defaultValue the default value to return if the arg wasn't specified
+     * @return the specified string or null
      */
     public static String getStringArg(final int index, final Object[] args, final String defaultValue) {
         return Context.toString(getObjectArg(index, args, defaultValue));
@@ -311,10 +311,10 @@ public class SimpleScriptable extends ScriptableObject {
      * Returns the boolean value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
-     * @param index The index into the argument list.
-     * @param args The argument list.
-     * @param defaultValue The default value to be used.
-     * @return The specified boolean or the default value.
+     * @param index the index into the argument list
+     * @param args the argument list
+     * @param defaultValue the default value to be used
+     * @return the specified boolean or the default value
      */
     public static boolean getBooleanArg(final int index, final Object[] args, final boolean defaultValue) {
         final Boolean defaultBoolean = Boolean.valueOf(defaultValue);
@@ -326,10 +326,10 @@ public class SimpleScriptable extends ScriptableObject {
      * Returns the int value at the specified location in the argument list. If the index is larger
      * than the argument array then return the default value.
      *
-     * @param index The index into the argument list.
-     * @param args The argument list.
-     * @param defaultValue The default value to be used.
-     * @return The specified int or the default value.
+     * @param index the index into the argument list
+     * @param args the argument list
+     * @param defaultValue the default value to be used
+     * @return the specified int or the default value
      */
     public static int getIntArg(final int index, final Object[] args, final int defaultValue) {
         return (int) Context.toNumber(getObjectArg(index, args, new Integer(defaultValue)));
@@ -339,8 +339,8 @@ public class SimpleScriptable extends ScriptableObject {
      * Returns the JavaScript default value of this object. This is the JavaScript equivalent
      * of a toString() in java.
      *
-     * @param hint A hint as to the format of the default value. Ignored in this case.
-     * @return The default value.
+     * @param hint A hint as to the format of the default value. Ignored in this case
+     * @return the default value
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -366,8 +366,8 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Gets the window that is the top scope for this object.
-     * @return The window associated with this object.
-     * @throws RuntimeException If the window cannot be found, which should never occur.
+     * @return the window associated with this object
+     * @throws RuntimeException if the window cannot be found, which should never occur
      */
     public Window getWindow() throws RuntimeException {
         return getWindow(this);
@@ -375,9 +375,9 @@ public class SimpleScriptable extends ScriptableObject {
 
     /**
      * Gets the window that is the top scope for the specified object.
-     * @param s The JavaScript object whose associated window is to be returned.
-     * @return The window associated with the specified JavaScript object.
-     * @throws RuntimeException If the window cannot be found, which should never occur.
+     * @param s the JavaScript object whose associated window is to be returned
+     * @return the window associated with the specified JavaScript object
+     * @throws RuntimeException if the window cannot be found, which should never occur
      */
     protected static Window getWindow(final Scriptable s) throws RuntimeException {
         final Scriptable top = ScriptableObject.getTopLevelScope(s);

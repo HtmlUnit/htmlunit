@@ -358,7 +358,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "azimuth" style attribute.
-     * @param azimuth the new attribute.
+     * @param azimuth the new attribute
      */
     public void jsxSet_azimuth(final String azimuth) {
         setStyleAttribute("azimuth", azimuth);
@@ -374,7 +374,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "background" style attribute.
-     * @param background the new attribute.
+     * @param background the new attribute
      */
     public void jsxSet_background(final String background) {
         setStyleAttribute("background", background);
@@ -390,7 +390,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "backgroundAttachment" style attribute.
-     * @param backgroundAttachment the new attribute.
+     * @param backgroundAttachment the new attribute
      */
     public void jsxSet_backgroundAttachment(final String backgroundAttachment) {
         setStyleAttribute("backgroundAttachment", backgroundAttachment);
@@ -406,7 +406,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "backgroundColor" style attribute.
-     * @param backgroundColor the new attribute.
+     * @param backgroundColor the new attribute
      */
     public void jsxSet_backgroundColor(final String backgroundColor) {
         setStyleAttribute("backgroundColor", backgroundColor);
@@ -422,7 +422,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "backgroundImage" style attribute.
-     * @param backgroundImage the new attribute.
+     * @param backgroundImage the new attribute
      */
     public void jsxSet_backgroundImage(final String backgroundImage) {
         setStyleAttribute("backgroundImage", backgroundImage);
@@ -438,7 +438,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "backgroundPosition" style attribute.
-     * @param backgroundPosition the new attribute.
+     * @param backgroundPosition the new attribute
      */
     public void jsxSet_backgroundPosition(final String backgroundPosition) {
         setStyleAttribute("backgroundPosition", backgroundPosition);
@@ -454,7 +454,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "backgroundPositionX" style attribute.
-     * @param backgroundPositionX the new attribute.
+     * @param backgroundPositionX the new attribute
      */
     public void jsxSet_backgroundPositionX(final String backgroundPositionX) {
         setStyleAttribute("backgroundPositionX", backgroundPositionX);
@@ -470,7 +470,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "backgroundPositionY" style attribute.
-     * @param backgroundPositionY the new attribute.
+     * @param backgroundPositionY the new attribute
      */
     public void jsxSet_backgroundPositionY(final String backgroundPositionY) {
         setStyleAttribute("backgroundPositionY", backgroundPositionY);
@@ -486,7 +486,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "backgroundRepeat" style attribute.
-     * @param backgroundRepeat the new attribute.
+     * @param backgroundRepeat the new attribute
      */
     public void jsxSet_backgroundRepeat(final String backgroundRepeat) {
         setStyleAttribute("backgroundRepeat", backgroundRepeat);
@@ -532,7 +532,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "border" style attribute.
-     * @param border the new attribute.
+     * @param border the new attribute
      */
     public void jsxSet_border(final String border) {
         setStyleAttribute("border", border);
@@ -548,7 +548,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderBottom" style attribute.
-     * @param borderBottom the new attribute.
+     * @param borderBottom the new attribute
      */
     public void jsxSet_borderBottom(final String borderBottom) {
         setStyleAttribute("borderBottom", borderBottom);
@@ -574,7 +574,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderBottomColor" style attribute.
-     * @param borderBottomColor the new attribute.
+     * @param borderBottomColor the new attribute
      */
     public void jsxSet_borderBottomColor(final String borderBottomColor) {
         setStyleAttribute("borderBottomColor", borderBottomColor);
@@ -600,7 +600,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderBottomStyle" style attribute.
-     * @param borderBottomStyle the new attribute.
+     * @param borderBottomStyle the new attribute
      */
     public void jsxSet_borderBottomStyle(final String borderBottomStyle) {
         setStyleAttribute("borderBottomStyle", borderBottomStyle);
@@ -626,7 +626,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderBottomWidth" style attribute.
-     * @param borderBottomWidth the new attribute.
+     * @param borderBottomWidth the new attribute
      */
     public void jsxSet_borderBottomWidth(final String borderBottomWidth) {
         setStyleAttribute("borderBottomWidth", borderBottomWidth);
@@ -642,7 +642,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderCollapse" style attribute.
-     * @param borderCollapse the new attribute.
+     * @param borderCollapse the new attribute
      */
     public void jsxSet_borderCollapse(final String borderCollapse) {
         setStyleAttribute("borderCollapse", borderCollapse);
@@ -658,7 +658,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderColor" style attribute.
-     * @param borderColor the new attribute.
+     * @param borderColor the new attribute
      */
     public void jsxSet_borderColor(final String borderColor) {
         setStyleAttribute("borderColor", borderColor);
@@ -674,7 +674,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderLeft" style attribute.
-     * @param borderLeft the new attribute.
+     * @param borderLeft the new attribute
      */
     public void jsxSet_borderLeft(final String borderLeft) {
         setStyleAttribute("borderLeft", borderLeft);
@@ -700,7 +700,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderLeftColor" style attribute.
-     * @param borderLeftColor the new attribute.
+     * @param borderLeftColor the new attribute
      */
     public void jsxSet_borderLeftColor(final String borderLeftColor) {
         setStyleAttribute("borderLeftColor", borderLeftColor);
@@ -726,7 +726,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderLeftStyle" style attribute.
-     * @param borderLeftStyle the new attribute.
+     * @param borderLeftStyle the new attribute
      */
     public void jsxSet_borderLeftStyle(final String borderLeftStyle) {
         setStyleAttribute("borderLeftStyle", borderLeftStyle);
@@ -752,7 +752,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderLeftWidth" style attribute.
-     * @param borderLeftWidth the new attribute.
+     * @param borderLeftWidth the new attribute
      */
     public void jsxSet_borderLeftWidth(final String borderLeftWidth) {
         setStyleAttribute("borderLeftWidth", borderLeftWidth);
@@ -768,7 +768,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderRight" style attribute.
-     * @param borderRight the new attribute.
+     * @param borderRight the new attribute
      */
     public void jsxSet_borderRight(final String borderRight) {
         setStyleAttribute("borderRight", borderRight);
@@ -794,7 +794,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderRightColor" style attribute.
-     * @param borderRightColor the new attribute.
+     * @param borderRightColor the new attribute
      */
     public void jsxSet_borderRightColor(final String borderRightColor) {
         setStyleAttribute("borderRightColor", borderRightColor);
@@ -820,7 +820,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderRightStyle" style attribute.
-     * @param borderRightStyle the new attribute.
+     * @param borderRightStyle the new attribute
      */
     public void jsxSet_borderRightStyle(final String borderRightStyle) {
         setStyleAttribute("borderRightStyle", borderRightStyle);
@@ -846,7 +846,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderRightWidth" style attribute.
-     * @param borderRightWidth the new attribute.
+     * @param borderRightWidth the new attribute
      */
     public void jsxSet_borderRightWidth(final String borderRightWidth) {
         setStyleAttribute("borderRightWidth", borderRightWidth);
@@ -862,7 +862,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderSpacing" style attribute.
-     * @param borderSpacing the new attribute.
+     * @param borderSpacing the new attribute
      */
     public void jsxSet_borderSpacing(final String borderSpacing) {
         setStyleAttribute("borderSpacing", borderSpacing);
@@ -878,7 +878,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderStyle" style attribute.
-     * @param borderStyle the new attribute.
+     * @param borderStyle the new attribute
      */
     public void jsxSet_borderStyle(final String borderStyle) {
         setStyleAttribute("borderStyle", borderStyle);
@@ -894,7 +894,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderTop" style attribute.
-     * @param borderTop the new attribute.
+     * @param borderTop the new attribute
      */
     public void jsxSet_borderTop(final String borderTop) {
         setStyleAttribute("borderTop", borderTop);
@@ -920,7 +920,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderTopColor" style attribute.
-     * @param borderTopColor the new attribute.
+     * @param borderTopColor the new attribute
      */
     public void jsxSet_borderTopColor(final String borderTopColor) {
         setStyleAttribute("borderTopColor", borderTopColor);
@@ -946,7 +946,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderTopStyle" style attribute.
-     * @param borderTopStyle the new attribute.
+     * @param borderTopStyle the new attribute
      */
     public void jsxSet_borderTopStyle(final String borderTopStyle) {
         setStyleAttribute("borderTopStyle", borderTopStyle);
@@ -972,7 +972,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderTopWidth" style attribute.
-     * @param borderTopWidth the new attribute.
+     * @param borderTopWidth the new attribute
      */
     public void jsxSet_borderTopWidth(final String borderTopWidth) {
         setStyleAttribute("borderTopWidth", borderTopWidth);
@@ -988,7 +988,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "borderWidth" style attribute.
-     * @param borderWidth the new attribute.
+     * @param borderWidth the new attribute
      */
     public void jsxSet_borderWidth(final String borderWidth) {
         setStyleAttribute("borderWidth", borderWidth);
@@ -1004,7 +1004,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "bottom" style attribute.
-     * @param bottom the new attribute.
+     * @param bottom the new attribute
      */
     public void jsxSet_bottom(final String bottom) {
         setStyleAttribute("bottom", bottom);
@@ -1020,7 +1020,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "captionSide" style attribute.
-     * @param captionSide the new attribute.
+     * @param captionSide the new attribute
      */
     public void jsxSet_captionSide(final String captionSide) {
         setStyleAttribute("captionSide", captionSide);
@@ -1036,7 +1036,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "clear" style attribute.
-     * @param clear the new attribute.
+     * @param clear the new attribute
      */
     public void jsxSet_clear(final String clear) {
         setStyleAttribute("clear", clear);
@@ -1052,7 +1052,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "clip" style attribute.
-     * @param clip the new attribute.
+     * @param clip the new attribute
      */
     public void jsxSet_clip(final String clip) {
         setStyleAttribute("clip", clip);
@@ -1068,7 +1068,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "color" style attribute.
-     * @param color the new attribute.
+     * @param color the new attribute
      */
     public void jsxSet_color(final String color) {
         setStyleAttribute("color", color);
@@ -1084,7 +1084,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "content" style attribute.
-     * @param content the new attribute.
+     * @param content the new attribute
      */
     public void jsxSet_content(final String content) {
         setStyleAttribute("content", content);
@@ -1100,7 +1100,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "counterIncrement" style attribute.
-     * @param counterIncrement the new attribute.
+     * @param counterIncrement the new attribute
      */
     public void jsxSet_counterIncrement(final String counterIncrement) {
         setStyleAttribute("counterIncrement", counterIncrement);
@@ -1116,7 +1116,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "counterReset" style attribute.
-     * @param counterReset the new attribute.
+     * @param counterReset the new attribute
      */
     public void jsxSet_counterReset(final String counterReset) {
         setStyleAttribute("counterReset", counterReset);
@@ -1132,7 +1132,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "cssFloat" style attribute.
-     * @param value the new attribute.
+     * @param value the new attribute
      */
     public void jsxSet_cssFloat(final String value) {
         setStyleAttribute("float", value);
@@ -1140,7 +1140,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Returns the actual text of the style.
-     * @return the actual text of the style.
+     * @return the actual text of the style
      */
     public String jsxGet_cssText() {
         return jsElement_.getHtmlElementOrDie().getAttribute("style");
@@ -1148,7 +1148,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the actual text of the style.
-     * @param value the new text.
+     * @param value the new text
      */
     public void jsxSet_cssText(final String value) {
         jsElement_.getHtmlElementOrDie().setAttribute("style", value);
@@ -1164,7 +1164,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "cue" style attribute.
-     * @param cue the new attribute.
+     * @param cue the new attribute
      */
     public void jsxSet_cue(final String cue) {
         setStyleAttribute("cue", cue);
@@ -1180,7 +1180,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "cueAfter" style attribute.
-     * @param cueAfter the new attribute.
+     * @param cueAfter the new attribute
      */
     public void jsxSet_cueAfter(final String cueAfter) {
         setStyleAttribute("cueAfter", cueAfter);
@@ -1196,7 +1196,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "cueBefore" style attribute.
-     * @param cueBefore the new attribute.
+     * @param cueBefore the new attribute
      */
     public void jsxSet_cueBefore(final String cueBefore) {
         setStyleAttribute("cueBefore", cueBefore);
@@ -1212,7 +1212,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "cursor" style attribute.
-     * @param cursor the new attribute.
+     * @param cursor the new attribute
      */
     public void jsxSet_cursor(final String cursor) {
         setStyleAttribute("cursor", cursor);
@@ -1228,7 +1228,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "direction" style attribute.
-     * @param direction the new attribute.
+     * @param direction the new attribute
      */
     public void jsxSet_direction(final String direction) {
         setStyleAttribute("direction", direction);
@@ -1244,7 +1244,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "display" style attribute.
-     * @param display the new attribute.
+     * @param display the new attribute
      */
     public void jsxSet_display(final String display) {
         setStyleAttribute("display", display);
@@ -1260,7 +1260,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "elevation" style attribute.
-     * @param elevation the new attribute.
+     * @param elevation the new attribute
      */
     public void jsxSet_elevation(final String elevation) {
         setStyleAttribute("elevation", elevation);
@@ -1276,7 +1276,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "emptyCells" style attribute.
-     * @param emptyCells the new attribute.
+     * @param emptyCells the new attribute
      */
     public void jsxSet_emptyCells(final String emptyCells) {
         setStyleAttribute("emptyCells", emptyCells);
@@ -1312,7 +1312,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "font" style attribute.
-     * @param font the new attribute.
+     * @param font the new attribute
      */
     public void jsxSet_font(final String font) {
         setStyleAttribute("font", font);
@@ -1328,7 +1328,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "fontFamily" style attribute.
-     * @param fontFamily the new attribute.
+     * @param fontFamily the new attribute
      */
     public void jsxSet_fontFamily(final String fontFamily) {
         setStyleAttribute("fontFamily", fontFamily);
@@ -1344,7 +1344,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "fontSize" style attribute.
-     * @param fontSize the new attribute.
+     * @param fontSize the new attribute
      */
     public void jsxSet_fontSize(final String fontSize) {
         setStyleAttribute("fontSize", fontSize);
@@ -1360,7 +1360,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "fontSizeAdjust" style attribute.
-     * @param fontSizeAdjust the new attribute.
+     * @param fontSizeAdjust the new attribute
      */
     public void jsxSet_fontSizeAdjust(final String fontSizeAdjust) {
         setStyleAttribute("fontSizeAdjust", fontSizeAdjust);
@@ -1376,7 +1376,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "fontStretch" style attribute.
-     * @param fontStretch the new attribute.
+     * @param fontStretch the new attribute
      */
     public void jsxSet_fontStretch(final String fontStretch) {
         setStyleAttribute("fontStretch", fontStretch);
@@ -1392,7 +1392,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "fontStyle" style attribute.
-     * @param fontStyle the new attribute.
+     * @param fontStyle the new attribute
      */
     public void jsxSet_fontStyle(final String fontStyle) {
         setStyleAttribute("fontStyle", fontStyle);
@@ -1408,7 +1408,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "fontVariant" style attribute.
-     * @param fontVariant the new attribute.
+     * @param fontVariant the new attribute
      */
     public void jsxSet_fontVariant(final String fontVariant) {
         setStyleAttribute("fontVariant", fontVariant);
@@ -1424,7 +1424,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "fontWeight" style attribute.
-     * @param fontWeight the new attribute.
+     * @param fontWeight the new attribute
      */
     public void jsxSet_fontWeight(final String fontWeight) {
         setStyleAttribute("fontWeight", fontWeight);
@@ -1446,7 +1446,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "height" style attribute.
-     * @param height the new attribute.
+     * @param height the new attribute
      */
     public void jsxSet_height(final String height) {
         setStyleAttribute("height", height);
@@ -1462,7 +1462,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "imeMode" style attribute.
-     * @param imeMode the new attribute.
+     * @param imeMode the new attribute
      */
     public void jsxSet_imeMode(final String imeMode) {
         setStyleAttribute("imeMode", imeMode);
@@ -1478,7 +1478,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "layoutFlow" style attribute.
-     * @param layoutFlow the new attribute.
+     * @param layoutFlow the new attribute
      */
     public void jsxSet_layoutFlow(final String layoutFlow) {
         setStyleAttribute("layoutFlow", layoutFlow);
@@ -1494,7 +1494,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "layoutGrid" style attribute.
-     * @param layoutGrid the new attribute.
+     * @param layoutGrid the new attribute
      */
     public void jsxSet_layoutGrid(final String layoutGrid) {
         setStyleAttribute("layoutGrid", layoutGrid);
@@ -1510,7 +1510,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "layoutGridChar" style attribute.
-     * @param layoutGridChar the new attribute.
+     * @param layoutGridChar the new attribute
      */
     public void jsxSet_layoutGridChar(final String layoutGridChar) {
         setStyleAttribute("layoutGridChar", layoutGridChar);
@@ -1526,7 +1526,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "layoutGridLine" style attribute.
-     * @param layoutGridLine the new attribute.
+     * @param layoutGridLine the new attribute
      */
     public void jsxSet_layoutGridLine(final String layoutGridLine) {
         setStyleAttribute("layoutGridLine", layoutGridLine);
@@ -1542,7 +1542,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "layoutGridMode" style attribute.
-     * @param layoutGridMode the new attribute.
+     * @param layoutGridMode the new attribute
      */
     public void jsxSet_layoutGridMode(final String layoutGridMode) {
         setStyleAttribute("layoutGridMode", layoutGridMode);
@@ -1558,7 +1558,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "layoutGridType" style attribute.
-     * @param layoutGridType the new attribute.
+     * @param layoutGridType the new attribute
      */
     public void jsxSet_layoutGridType(final String layoutGridType) {
         setStyleAttribute("layoutGridType", layoutGridType);
@@ -1574,7 +1574,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "left" style attribute.
-     * @param left the new attribute.
+     * @param left the new attribute
      */
     public void jsxSet_left(final String left) {
         setStyleAttribute("left", left);
@@ -1582,7 +1582,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Gets the "length", not yet implemented.
-     * @return the length.
+     * @return the length
      */
     public int jsxGet_length() {
         return 0;
@@ -1598,7 +1598,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "letterSpacing" style attribute.
-     * @param letterSpacing the new attribute.
+     * @param letterSpacing the new attribute
      */
     public void jsxSet_letterSpacing(final String letterSpacing) {
         setStyleAttribute("letterSpacing", letterSpacing);
@@ -1614,7 +1614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "lineBreak" style attribute.
-     * @param lineBreak the new attribute.
+     * @param lineBreak the new attribute
      */
     public void jsxSet_lineBreak(final String lineBreak) {
         setStyleAttribute("lineBreak", lineBreak);
@@ -1630,7 +1630,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "lineHeight" style attribute.
-     * @param lineHeight the new attribute.
+     * @param lineHeight the new attribute
      */
     public void jsxSet_lineHeight(final String lineHeight) {
         setStyleAttribute("lineHeight", lineHeight);
@@ -1646,7 +1646,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "listStyle" style attribute.
-     * @param listStyle the new attribute.
+     * @param listStyle the new attribute
      */
     public void jsxSet_listStyle(final String listStyle) {
         setStyleAttribute("listStyle", listStyle);
@@ -1662,7 +1662,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "listStyleImage" style attribute.
-     * @param listStyleImage the new attribute.
+     * @param listStyleImage the new attribute
      */
     public void jsxSet_listStyleImage(final String listStyleImage) {
         setStyleAttribute("listStyleImage", listStyleImage);
@@ -1678,7 +1678,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "listStylePosition" style attribute.
-     * @param listStylePosition the new attribute.
+     * @param listStylePosition the new attribute
      */
     public void jsxSet_listStylePosition(final String listStylePosition) {
         setStyleAttribute("listStylePosition", listStylePosition);
@@ -1694,7 +1694,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "listStyleType" style attribute.
-     * @param listStyleType the new attribute.
+     * @param listStyleType the new attribute
      */
     public void jsxSet_listStyleType(final String listStyleType) {
         setStyleAttribute("listStyleType", listStyleType);
@@ -1710,7 +1710,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "margin" style attribute.
-     * @param margin the new attribute.
+     * @param margin the new attribute
      */
     public void jsxSet_margin(final String margin) {
         setStyleAttribute("margin", margin);
@@ -1726,7 +1726,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "marginBottom" style attribute.
-     * @param marginBottom the new attribute.
+     * @param marginBottom the new attribute
      */
     public void jsxSet_marginBottom(final String marginBottom) {
         setStyleAttribute("marginBottom", marginBottom);
@@ -1742,7 +1742,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "marginLeft" style attribute.
-     * @param marginLeft the new attribute.
+     * @param marginLeft the new attribute
      */
     public void jsxSet_marginLeft(final String marginLeft) {
         setStyleAttribute("marginLeft", marginLeft);
@@ -1758,7 +1758,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "marginRight" style attribute.
-     * @param marginRight the new attribute.
+     * @param marginRight the new attribute
      */
     public void jsxSet_marginRight(final String marginRight) {
         setStyleAttribute("marginRight", marginRight);
@@ -1774,7 +1774,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "marginTop" style attribute.
-     * @param marginTop the new attribute.
+     * @param marginTop the new attribute
      */
     public void jsxSet_marginTop(final String marginTop) {
         setStyleAttribute("marginTop", marginTop);
@@ -1790,7 +1790,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "markerOffset" style attribute.
-     * @param markerOffset the new attribute.
+     * @param markerOffset the new attribute
      */
     public void jsxSet_markerOffset(final String markerOffset) {
         setStyleAttribute("markerOffset", markerOffset);
@@ -1806,7 +1806,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "marks" style attribute.
-     * @param marks the new attribute.
+     * @param marks the new attribute
      */
     public void jsxSet_marks(final String marks) {
         setStyleAttribute("marks", marks);
@@ -1822,7 +1822,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "maxHeight" style attribute.
-     * @param maxHeight the new attribute.
+     * @param maxHeight the new attribute
      */
     public void jsxSet_maxHeight(final String maxHeight) {
         setStyleAttribute("maxHeight", maxHeight);
@@ -1838,7 +1838,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "maxWidth" style attribute.
-     * @param maxWidth the new attribute.
+     * @param maxWidth the new attribute
      */
     public void jsxSet_maxWidth(final String maxWidth) {
         setStyleAttribute("maxWidth", maxWidth);
@@ -1854,7 +1854,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "minHeight" style attribute.
-     * @param minHeight the new attribute.
+     * @param minHeight the new attribute
      */
     public void jsxSet_minHeight(final String minHeight) {
         setStyleAttribute("minHeight", minHeight);
@@ -1870,7 +1870,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "minWidth" style attribute.
-     * @param minWidth the new attribute.
+     * @param minWidth the new attribute
      */
     public void jsxSet_minWidth(final String minWidth) {
         setStyleAttribute("minWidth", minWidth);
@@ -1886,7 +1886,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozAppearance" style attribute.
-     * @param mozAppearance the new attribute.
+     * @param mozAppearance the new attribute
      */
     public void jsxSet_MozAppearance(final String mozAppearance) {
         setStyleAttribute("MozAppearance", mozAppearance);
@@ -1902,7 +1902,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBackgroundClip" style attribute.
-     * @param mozBackgroundClip the new attribute.
+     * @param mozBackgroundClip the new attribute
      */
     public void jsxSet_MozBackgroundClip(final String mozBackgroundClip) {
         setStyleAttribute("MozBackgroundClip", mozBackgroundClip);
@@ -1918,7 +1918,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBackgroundInlinePolicy" style attribute.
-     * @param mozBackgroundInlinePolicy the new attribute.
+     * @param mozBackgroundInlinePolicy the new attribute
      */
     public void jsxSet_MozBackgroundInlinePolicy(final String mozBackgroundInlinePolicy) {
         setStyleAttribute("MozBackgroundInlinePolicy", mozBackgroundInlinePolicy);
@@ -1934,7 +1934,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBackgroundOrigin" style attribute.
-     * @param mozBackgroundOrigin the new attribute.
+     * @param mozBackgroundOrigin the new attribute
      */
     public void jsxSet_MozBackgroundOrigin(final String mozBackgroundOrigin) {
         setStyleAttribute("MozBackgroundOrigin", mozBackgroundOrigin);
@@ -1950,7 +1950,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBinding" style attribute.
-     * @param mozBinding the new attribute.
+     * @param mozBinding the new attribute
      */
     public void jsxSet_MozBinding(final String mozBinding) {
         setStyleAttribute("MozBinding", mozBinding);
@@ -1966,7 +1966,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderBottomColors" style attribute.
-     * @param mozBorderBottomColors the new attribute.
+     * @param mozBorderBottomColors the new attribute
      */
     public void jsxSet_MozBorderBottomColors(final String mozBorderBottomColors) {
         setStyleAttribute("MozBorderBottomColors", mozBorderBottomColors);
@@ -1982,7 +1982,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderLeftColors" style attribute.
-     * @param mozBorderLeftColors the new attribute.
+     * @param mozBorderLeftColors the new attribute
      */
     public void jsxSet_MozBorderLeftColors(final String mozBorderLeftColors) {
         setStyleAttribute("MozBorderLeftColors", mozBorderLeftColors);
@@ -1998,7 +1998,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderRadius" style attribute.
-     * @param mozBorderRadius the new attribute.
+     * @param mozBorderRadius the new attribute
      */
     public void jsxSet_MozBorderRadius(final String mozBorderRadius) {
         setStyleAttribute("MozBorderRadius", mozBorderRadius);
@@ -2014,7 +2014,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderRadiusBottomleft" style attribute.
-     * @param mozBorderRadiusBottomleft the new attribute.
+     * @param mozBorderRadiusBottomleft the new attribute
      */
     public void jsxSet_MozBorderRadiusBottomleft(final String mozBorderRadiusBottomleft) {
         setStyleAttribute("MozBorderRadiusBottomleft", mozBorderRadiusBottomleft);
@@ -2030,7 +2030,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderRadiusBottomright" style attribute.
-     * @param mozBorderRadiusBottomright the new attribute.
+     * @param mozBorderRadiusBottomright the new attribute
      */
     public void jsxSet_MozBorderRadiusBottomright(final String mozBorderRadiusBottomright) {
         setStyleAttribute("MozBorderRadiusBottomright", mozBorderRadiusBottomright);
@@ -2046,7 +2046,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderRadiusTopleft" style attribute.
-     * @param mozBorderRadiusTopleft the new attribute.
+     * @param mozBorderRadiusTopleft the new attribute
      */
     public void jsxSet_MozBorderRadiusTopleft(final String mozBorderRadiusTopleft) {
         setStyleAttribute("MozBorderRadiusTopleft", mozBorderRadiusTopleft);
@@ -2062,7 +2062,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderRadiusTopright" style attribute.
-     * @param mozBorderRadiusTopright the new attribute.
+     * @param mozBorderRadiusTopright the new attribute
      */
     public void jsxSet_MozBorderRadiusTopright(final String mozBorderRadiusTopright) {
         setStyleAttribute("MozBorderRadiusTopright", mozBorderRadiusTopright);
@@ -2078,7 +2078,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderRightColors" style attribute.
-     * @param mozBorderRightColors the new attribute.
+     * @param mozBorderRightColors the new attribute
      */
     public void jsxSet_MozBorderRightColors(final String mozBorderRightColors) {
         setStyleAttribute("MozBorderRightColors", mozBorderRightColors);
@@ -2094,7 +2094,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBorderTopColors" style attribute.
-     * @param mozBorderTopColors the new attribute.
+     * @param mozBorderTopColors the new attribute
      */
     public void jsxSet_MozBorderTopColors(final String mozBorderTopColors) {
         setStyleAttribute("MozBorderTopColors", mozBorderTopColors);
@@ -2110,7 +2110,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBoxAlign" style attribute.
-     * @param mozBoxAlign the new attribute.
+     * @param mozBoxAlign the new attribute
      */
     public void jsxSet_MozBoxAlign(final String mozBoxAlign) {
         setStyleAttribute("MozBoxAlign", mozBoxAlign);
@@ -2126,7 +2126,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBoxDirection" style attribute.
-     * @param mozBoxDirection the new attribute.
+     * @param mozBoxDirection the new attribute
      */
     public void jsxSet_MozBoxDirection(final String mozBoxDirection) {
         setStyleAttribute("MozBoxDirection", mozBoxDirection);
@@ -2142,7 +2142,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBoxFlex" style attribute.
-     * @param mozBoxFlex the new attribute.
+     * @param mozBoxFlex the new attribute
      */
     public void jsxSet_MozBoxFlex(final String mozBoxFlex) {
         setStyleAttribute("MozBoxFlex", mozBoxFlex);
@@ -2158,7 +2158,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBoxOrdinalGroup" style attribute.
-     * @param mozBoxOrdinalGroup the new attribute.
+     * @param mozBoxOrdinalGroup the new attribute
      */
     public void jsxSet_MozBoxOrdinalGroup(final String mozBoxOrdinalGroup) {
         setStyleAttribute("MozBoxOrdinalGroup", mozBoxOrdinalGroup);
@@ -2174,7 +2174,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBoxOrient" style attribute.
-     * @param mozBoxOrient the new attribute.
+     * @param mozBoxOrient the new attribute
      */
     public void jsxSet_MozBoxOrient(final String mozBoxOrient) {
         setStyleAttribute("MozBoxOrient", mozBoxOrient);
@@ -2190,7 +2190,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBoxPack" style attribute.
-     * @param mozBoxPack the new attribute.
+     * @param mozBoxPack the new attribute
      */
     public void jsxSet_MozBoxPack(final String mozBoxPack) {
         setStyleAttribute("MozBoxPack", mozBoxPack);
@@ -2206,7 +2206,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozBoxSizing" style attribute.
-     * @param mozBoxSizing the new attribute.
+     * @param mozBoxSizing the new attribute
      */
     public void jsxSet_MozBoxSizing(final String mozBoxSizing) {
         setStyleAttribute("MozBoxSizing", mozBoxSizing);
@@ -2222,7 +2222,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozColumnCount" style attribute.
-     * @param mozColumnCount the new attribute.
+     * @param mozColumnCount the new attribute
      */
     public void jsxSet_MozColumnCount(final String mozColumnCount) {
         setStyleAttribute("MozColumnCount", mozColumnCount);
@@ -2238,7 +2238,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozColumnGap" style attribute.
-     * @param mozColumnGap the new attribute.
+     * @param mozColumnGap the new attribute
      */
     public void jsxSet_MozColumnGap(final String mozColumnGap) {
         setStyleAttribute("MozColumnGap", mozColumnGap);
@@ -2254,7 +2254,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozColumnWidth" style attribute.
-     * @param mozColumnWidth the new attribute.
+     * @param mozColumnWidth the new attribute
      */
     public void jsxSet_MozColumnWidth(final String mozColumnWidth) {
         setStyleAttribute("MozColumnWidth", mozColumnWidth);
@@ -2270,7 +2270,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozFloatEdge" style attribute.
-     * @param mozFloatEdge the new attribute.
+     * @param mozFloatEdge the new attribute
      */
     public void jsxSet_MozFloatEdge(final String mozFloatEdge) {
         setStyleAttribute("MozFloatEdge", mozFloatEdge);
@@ -2286,7 +2286,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozForceBrokenImageIcon" style attribute.
-     * @param mozForceBrokenImageIcon the new attribute.
+     * @param mozForceBrokenImageIcon the new attribute
      */
     public void jsxSet_MozForceBrokenImageIcon(final String mozForceBrokenImageIcon) {
         setStyleAttribute("MozForceBrokenImageIcon", mozForceBrokenImageIcon);
@@ -2302,7 +2302,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozImageRegion" style attribute.
-     * @param mozImageRegion the new attribute.
+     * @param mozImageRegion the new attribute
      */
     public void jsxSet_MozImageRegion(final String mozImageRegion) {
         setStyleAttribute("MozImageRegion", mozImageRegion);
@@ -2318,7 +2318,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozMarginEnd" style attribute.
-     * @param mozMarginEnd the new attribute.
+     * @param mozMarginEnd the new attribute
      */
     public void jsxSet_MozMarginEnd(final String mozMarginEnd) {
         setStyleAttribute("MozMarginEnd", mozMarginEnd);
@@ -2334,7 +2334,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozMarginStart" style attribute.
-     * @param mozMarginStart the new attribute.
+     * @param mozMarginStart the new attribute
      */
     public void jsxSet_MozMarginStart(final String mozMarginStart) {
         setStyleAttribute("MozMarginStart", mozMarginStart);
@@ -2350,7 +2350,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOpacity" style attribute.
-     * @param mozOpacity the new attribute.
+     * @param mozOpacity the new attribute
      */
     public void jsxSet_MozOpacity(final String mozOpacity) {
         setStyleAttribute("MozOpacity", mozOpacity);
@@ -2366,7 +2366,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutline" style attribute.
-     * @param mozOutline the new attribute.
+     * @param mozOutline the new attribute
      */
     public void jsxSet_MozOutline(final String mozOutline) {
         setStyleAttribute("MozOutline", mozOutline);
@@ -2382,7 +2382,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineColor" style attribute.
-     * @param mozOutlineColor the new attribute.
+     * @param mozOutlineColor the new attribute
      */
     public void jsxSet_MozOutlineColor(final String mozOutlineColor) {
         setStyleAttribute("MozOutlineColor", mozOutlineColor);
@@ -2398,7 +2398,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineOffset" style attribute.
-     * @param mozOutlineOffset the new attribute.
+     * @param mozOutlineOffset the new attribute
      */
     public void jsxSet_MozOutlineOffset(final String mozOutlineOffset) {
         setStyleAttribute("MozOutlineOffset", mozOutlineOffset);
@@ -2414,7 +2414,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineRadius" style attribute.
-     * @param mozOutlineRadius the new attribute.
+     * @param mozOutlineRadius the new attribute
      */
     public void jsxSet_MozOutlineRadius(final String mozOutlineRadius) {
         setStyleAttribute("MozOutlineRadius", mozOutlineRadius);
@@ -2430,7 +2430,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineRadiusBottomleft" style attribute.
-     * @param mozOutlineRadiusBottomleft the new attribute.
+     * @param mozOutlineRadiusBottomleft the new attribute
      */
     public void jsxSet_MozOutlineRadiusBottomleft(final String mozOutlineRadiusBottomleft) {
         setStyleAttribute("MozOutlineRadiusBottomleft", mozOutlineRadiusBottomleft);
@@ -2446,7 +2446,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineRadiusBottomright" style attribute.
-     * @param mozOutlineRadiusBottomright the new attribute.
+     * @param mozOutlineRadiusBottomright the new attribute
      */
     public void jsxSet_MozOutlineRadiusBottomright(final String mozOutlineRadiusBottomright) {
         setStyleAttribute("MozOutlineRadiusBottomright", mozOutlineRadiusBottomright);
@@ -2462,7 +2462,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineRadiusTopleft" style attribute.
-     * @param mozOutlineRadiusTopleft the new attribute.
+     * @param mozOutlineRadiusTopleft the new attribute
      */
     public void jsxSet_MozOutlineRadiusTopleft(final String mozOutlineRadiusTopleft) {
         setStyleAttribute("MozOutlineRadiusTopleft", mozOutlineRadiusTopleft);
@@ -2478,7 +2478,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineRadiusTopright" style attribute.
-     * @param mozOutlineRadiusTopright the new attribute.
+     * @param mozOutlineRadiusTopright the new attribute
      */
     public void jsxSet_MozOutlineRadiusTopright(final String mozOutlineRadiusTopright) {
         setStyleAttribute("MozOutlineRadiusTopright", mozOutlineRadiusTopright);
@@ -2494,7 +2494,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineStyle" style attribute.
-     * @param mozOutlineStyle the new attribute.
+     * @param mozOutlineStyle the new attribute
      */
     public void jsxSet_MozOutlineStyle(final String mozOutlineStyle) {
         setStyleAttribute("MozOutlineStyle", mozOutlineStyle);
@@ -2510,7 +2510,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozOutlineWidth" style attribute.
-     * @param mozOutlineWidth the new attribute.
+     * @param mozOutlineWidth the new attribute
      */
     public void jsxSet_MozOutlineWidth(final String mozOutlineWidth) {
         setStyleAttribute("MozOutlineWidth", mozOutlineWidth);
@@ -2526,7 +2526,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozPaddingEnd" style attribute.
-     * @param mozPaddingEnd the new attribute.
+     * @param mozPaddingEnd the new attribute
      */
     public void jsxSet_MozPaddingEnd(final String mozPaddingEnd) {
         setStyleAttribute("MozPaddingEnd", mozPaddingEnd);
@@ -2542,7 +2542,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozPaddingStart" style attribute.
-     * @param mozPaddingStart the new attribute.
+     * @param mozPaddingStart the new attribute
      */
     public void jsxSet_MozPaddingStart(final String mozPaddingStart) {
         setStyleAttribute("MozPaddingStart", mozPaddingStart);
@@ -2558,7 +2558,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozUserFocus" style attribute.
-     * @param mozUserFocus the new attribute.
+     * @param mozUserFocus the new attribute
      */
     public void jsxSet_MozUserFocus(final String mozUserFocus) {
         setStyleAttribute("MozUserFocus", mozUserFocus);
@@ -2574,7 +2574,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozUserInput" style attribute.
-     * @param mozUserInput the new attribute.
+     * @param mozUserInput the new attribute
      */
     public void jsxSet_MozUserInput(final String mozUserInput) {
         setStyleAttribute("MozUserInput", mozUserInput);
@@ -2590,7 +2590,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozUserModify" style attribute.
-     * @param mozUserModify the new attribute.
+     * @param mozUserModify the new attribute
      */
     public void jsxSet_MozUserModify(final String mozUserModify) {
         setStyleAttribute("MozUserModify", mozUserModify);
@@ -2606,7 +2606,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "MozUserSelect" style attribute.
-     * @param mozUserSelect the new attribute.
+     * @param mozUserSelect the new attribute
      */
     public void jsxSet_MozUserSelect(final String mozUserSelect) {
         setStyleAttribute("MozUserSelect", mozUserSelect);
@@ -2622,7 +2622,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "msInterpolationMode" style attribute.
-     * @param msInterpolationMode the new attribute.
+     * @param msInterpolationMode the new attribute
      */
     public void jsxSet_msInterpolationMode(final String msInterpolationMode) {
         setStyleAttribute("msInterpolationMode", msInterpolationMode);
@@ -2638,7 +2638,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "opacity" style attribute.
-     * @param opacity the new attribute.
+     * @param opacity the new attribute
      */
     public void jsxSet_opacity(final String opacity) {
         setStyleAttribute("opacity", opacity);
@@ -2654,7 +2654,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "orphans" style attribute.
-     * @param orphans the new attribute.
+     * @param orphans the new attribute
      */
     public void jsxSet_orphans(final String orphans) {
         setStyleAttribute("orphans", orphans);
@@ -2670,7 +2670,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "outline" style attribute.
-     * @param outline the new attribute.
+     * @param outline the new attribute
      */
     public void jsxSet_outline(final String outline) {
         setStyleAttribute("outline", outline);
@@ -2686,7 +2686,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "outlineColor" style attribute.
-     * @param outlineColor the new attribute.
+     * @param outlineColor the new attribute
      */
     public void jsxSet_outlineColor(final String outlineColor) {
         setStyleAttribute("outlineColor", outlineColor);
@@ -2702,7 +2702,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "outlineOffset" style attribute.
-     * @param outlineOffset the new attribute.
+     * @param outlineOffset the new attribute
      */
     public void jsxSet_outlineOffset(final String outlineOffset) {
         setStyleAttribute("outlineOffset", outlineOffset);
@@ -2718,7 +2718,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "outlineStyle" style attribute.
-     * @param outlineStyle the new attribute.
+     * @param outlineStyle the new attribute
      */
     public void jsxSet_outlineStyle(final String outlineStyle) {
         setStyleAttribute("outlineStyle", outlineStyle);
@@ -2734,7 +2734,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "outlineWidth" style attribute.
-     * @param outlineWidth the new attribute.
+     * @param outlineWidth the new attribute
      */
     public void jsxSet_outlineWidth(final String outlineWidth) {
         setStyleAttribute("outlineWidth", outlineWidth);
@@ -2750,7 +2750,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "overflow" style attribute.
-     * @param overflow the new attribute.
+     * @param overflow the new attribute
      */
     public void jsxSet_overflow(final String overflow) {
         setStyleAttribute("overflow", overflow);
@@ -2766,7 +2766,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "overflowX" style attribute.
-     * @param overflowX the new attribute.
+     * @param overflowX the new attribute
      */
     public void jsxSet_overflowX(final String overflowX) {
         setStyleAttribute("overflowX", overflowX);
@@ -2782,7 +2782,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "overflowY" style attribute.
-     * @param overflowY the new attribute.
+     * @param overflowY the new attribute
      */
     public void jsxSet_overflowY(final String overflowY) {
         setStyleAttribute("overflowY", overflowY);
@@ -2798,7 +2798,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "padding" style attribute.
-     * @param padding the new attribute.
+     * @param padding the new attribute
      */
     public void jsxSet_padding(final String padding) {
         setStyleAttribute("padding", padding);
@@ -2814,7 +2814,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "paddingBottom" style attribute.
-     * @param paddingBottom the new attribute.
+     * @param paddingBottom the new attribute
      */
     public void jsxSet_paddingBottom(final String paddingBottom) {
         setStyleAttribute("paddingBottom", paddingBottom);
@@ -2830,7 +2830,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "paddingLeft" style attribute.
-     * @param paddingLeft the new attribute.
+     * @param paddingLeft the new attribute
      */
     public void jsxSet_paddingLeft(final String paddingLeft) {
         setStyleAttribute("paddingLeft", paddingLeft);
@@ -2846,7 +2846,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "paddingRight" style attribute.
-     * @param paddingRight the new attribute.
+     * @param paddingRight the new attribute
      */
     public void jsxSet_paddingRight(final String paddingRight) {
         setStyleAttribute("paddingRight", paddingRight);
@@ -2862,7 +2862,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "paddingTop" style attribute.
-     * @param paddingTop the new attribute.
+     * @param paddingTop the new attribute
      */
     public void jsxSet_paddingTop(final String paddingTop) {
         setStyleAttribute("paddingTop", paddingTop);
@@ -2878,7 +2878,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "page" style attribute.
-     * @param page the new attribute.
+     * @param page the new attribute
      */
     public void jsxSet_page(final String page) {
         setStyleAttribute("page", page);
@@ -2894,7 +2894,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pageBreakAfter" style attribute.
-     * @param pageBreakAfter the new attribute.
+     * @param pageBreakAfter the new attribute
      */
     public void jsxSet_pageBreakAfter(final String pageBreakAfter) {
         setStyleAttribute("pageBreakAfter", pageBreakAfter);
@@ -2910,7 +2910,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pageBreakBefore" style attribute.
-     * @param pageBreakBefore the new attribute.
+     * @param pageBreakBefore the new attribute
      */
     public void jsxSet_pageBreakBefore(final String pageBreakBefore) {
         setStyleAttribute("pageBreakBefore", pageBreakBefore);
@@ -2926,7 +2926,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pageBreakInside" style attribute.
-     * @param pageBreakInside the new attribute.
+     * @param pageBreakInside the new attribute
      */
     public void jsxSet_pageBreakInside(final String pageBreakInside) {
         setStyleAttribute("pageBreakInside", pageBreakInside);
@@ -2942,7 +2942,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pause" style attribute.
-     * @param pause the new attribute.
+     * @param pause the new attribute
      */
     public void jsxSet_pause(final String pause) {
         setStyleAttribute("pause", pause);
@@ -2958,7 +2958,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pauseAfter" style attribute.
-     * @param pauseAfter the new attribute.
+     * @param pauseAfter the new attribute
      */
     public void jsxSet_pauseAfter(final String pauseAfter) {
         setStyleAttribute("pauseAfter", pauseAfter);
@@ -2974,7 +2974,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pauseBefore" style attribute.
-     * @param pauseBefore the new attribute.
+     * @param pauseBefore the new attribute
      */
     public void jsxSet_pauseBefore(final String pauseBefore) {
         setStyleAttribute("pauseBefore", pauseBefore);
@@ -2990,7 +2990,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pitch" style attribute.
-     * @param pitch the new attribute.
+     * @param pitch the new attribute
      */
     public void jsxSet_pitch(final String pitch) {
         setStyleAttribute("pitch", pitch);
@@ -3006,7 +3006,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "pitchRange" style attribute.
-     * @param pitchRange the new attribute.
+     * @param pitchRange the new attribute
      */
     public void jsxSet_pitchRange(final String pitchRange) {
         setStyleAttribute("pitchRange", pitchRange);
@@ -3022,7 +3022,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "posBottom" style attribute.
-     * @param posBottom the new attribute.
+     * @param posBottom the new attribute
      */
     public void jsxSet_posBottom(final int posBottom) {
         //empty
@@ -3038,7 +3038,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "posHeight" style attribute.
-     * @param posHeight the new attribute.
+     * @param posHeight the new attribute
      */
     public void jsxSet_posHeight(final int posHeight) {
         //empty
@@ -3054,7 +3054,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "position" style attribute.
-     * @param position the new attribute.
+     * @param position the new attribute
      */
     public void jsxSet_position(final String position) {
         setStyleAttribute("position", position);
@@ -3070,7 +3070,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "posLeft" style attribute.
-     * @param posLeft the new attribute.
+     * @param posLeft the new attribute
      */
     public void jsxSet_posLeft(final int posLeft) {
         //empty
@@ -3086,7 +3086,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "posRight" style attribute.
-     * @param posRight the new attribute.
+     * @param posRight the new attribute
      */
     public void jsxSet_posRight(final int posRight) {
         //empty
@@ -3102,7 +3102,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "posTop" style attribute.
-     * @param posTop the new attribute.
+     * @param posTop the new attribute
      */
     public void jsxSet_posTop(final int posTop) {
         //empty
@@ -3118,7 +3118,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "posWidth" style attribute.
-     * @param posWidth the new attribute.
+     * @param posWidth the new attribute
      */
     public void jsxSet_posWidth(final int posWidth) {
         //empty
@@ -3134,7 +3134,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "quotes" style attribute.
-     * @param quotes the new attribute.
+     * @param quotes the new attribute
      */
     public void jsxSet_quotes(final String quotes) {
         setStyleAttribute("quotes", quotes);
@@ -3150,7 +3150,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "richness" style attribute.
-     * @param richness the new attribute.
+     * @param richness the new attribute
      */
     public void jsxSet_richness(final String richness) {
         setStyleAttribute("richness", richness);
@@ -3166,7 +3166,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "right" style attribute.
-     * @param right the new attribute.
+     * @param right the new attribute
      */
     public void jsxSet_right(final String right) {
         setStyleAttribute("right", right);
@@ -3182,7 +3182,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "rubyAlign" style attribute.
-     * @param rubyAlign the new attribute.
+     * @param rubyAlign the new attribute
      */
     public void jsxSet_rubyAlign(final String rubyAlign) {
         setStyleAttribute("rubyAlign", rubyAlign);
@@ -3198,7 +3198,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "rubyOverhang" style attribute.
-     * @param rubyOverhang the new attribute.
+     * @param rubyOverhang the new attribute
      */
     public void jsxSet_rubyOverhang(final String rubyOverhang) {
         setStyleAttribute("rubyOverhang", rubyOverhang);
@@ -3214,7 +3214,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "rubyPosition" style attribute.
-     * @param rubyPosition the new attribute.
+     * @param rubyPosition the new attribute
      */
     public void jsxSet_rubyPosition(final String rubyPosition) {
         setStyleAttribute("rubyPosition", rubyPosition);
@@ -3230,7 +3230,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbar3dLightColor" style attribute.
-     * @param scrollbar3dLightColor the new attribute.
+     * @param scrollbar3dLightColor the new attribute
      */
     public void jsxSet_scrollbar3dLightColor(final String scrollbar3dLightColor) {
         setStyleAttribute("scrollbar3dLightColor", scrollbar3dLightColor);
@@ -3246,7 +3246,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbarArrowColor" style attribute.
-     * @param scrollbarArrowColor the new attribute.
+     * @param scrollbarArrowColor the new attribute
      */
     public void jsxSet_scrollbarArrowColor(final String scrollbarArrowColor) {
         setStyleAttribute("scrollbarArrowColor", scrollbarArrowColor);
@@ -3262,7 +3262,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbarBaseColor" style attribute.
-     * @param scrollbarBaseColor the new attribute.
+     * @param scrollbarBaseColor the new attribute
      */
     public void jsxSet_scrollbarBaseColor(final String scrollbarBaseColor) {
         setStyleAttribute("scrollbarBaseColor", scrollbarBaseColor);
@@ -3278,7 +3278,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbarDarkShadowColor" style attribute.
-     * @param scrollbarDarkShadowColor the new attribute.
+     * @param scrollbarDarkShadowColor the new attribute
      */
     public void jsxSet_scrollbarDarkShadowColor(final String scrollbarDarkShadowColor) {
         setStyleAttribute("scrollbarDarkShadowColor", scrollbarDarkShadowColor);
@@ -3294,7 +3294,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbarFaceColor" style attribute.
-     * @param scrollbarFaceColor the new attribute.
+     * @param scrollbarFaceColor the new attribute
      */
     public void jsxSet_scrollbarFaceColor(final String scrollbarFaceColor) {
         setStyleAttribute("scrollbarFaceColor", scrollbarFaceColor);
@@ -3310,7 +3310,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbarHighlightColor" style attribute.
-     * @param scrollbarHighlightColor the new attribute.
+     * @param scrollbarHighlightColor the new attribute
      */
     public void jsxSet_scrollbarHighlightColor(final String scrollbarHighlightColor) {
         setStyleAttribute("scrollbarHighlightColor", scrollbarHighlightColor);
@@ -3326,7 +3326,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbarShadowColor" style attribute.
-     * @param scrollbarShadowColor the new attribute.
+     * @param scrollbarShadowColor the new attribute
      */
     public void jsxSet_scrollbarShadowColor(final String scrollbarShadowColor) {
         setStyleAttribute("scrollbarShadowColor", scrollbarShadowColor);
@@ -3342,7 +3342,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "scrollbarTrackColor" style attribute.
-     * @param scrollbarTrackColor the new attribute.
+     * @param scrollbarTrackColor the new attribute
      */
     public void jsxSet_scrollbarTrackColor(final String scrollbarTrackColor) {
         setStyleAttribute("scrollbarTrackColor", scrollbarTrackColor);
@@ -3358,7 +3358,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "size" style attribute.
-     * @param size the new attribute.
+     * @param size the new attribute
      */
     public void jsxSet_size(final String size) {
         setStyleAttribute("size", size);
@@ -3374,7 +3374,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "speak" style attribute.
-     * @param speak the new attribute.
+     * @param speak the new attribute
      */
     public void jsxSet_speak(final String speak) {
         setStyleAttribute("speak", speak);
@@ -3390,7 +3390,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "speakHeader" style attribute.
-     * @param speakHeader the new attribute.
+     * @param speakHeader the new attribute
      */
     public void jsxSet_speakHeader(final String speakHeader) {
         setStyleAttribute("speakHeader", speakHeader);
@@ -3406,7 +3406,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "speakNumeral" style attribute.
-     * @param speakNumeral the new attribute.
+     * @param speakNumeral the new attribute
      */
     public void jsxSet_speakNumeral(final String speakNumeral) {
         setStyleAttribute("speakNumeral", speakNumeral);
@@ -3422,7 +3422,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "speakPunctuation" style attribute.
-     * @param speakPunctuation the new attribute.
+     * @param speakPunctuation the new attribute
      */
     public void jsxSet_speakPunctuation(final String speakPunctuation) {
         setStyleAttribute("speakPunctuation", speakPunctuation);
@@ -3438,7 +3438,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "speechRate" style attribute.
-     * @param speechRate the new attribute.
+     * @param speechRate the new attribute
      */
     public void jsxSet_speechRate(final String speechRate) {
         setStyleAttribute("speechRate", speechRate);
@@ -3454,7 +3454,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "stress" style attribute.
-     * @param stress the new attribute.
+     * @param stress the new attribute
      */
     public void jsxSet_stress(final String stress) {
         setStyleAttribute("stress", stress);
@@ -3470,7 +3470,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "styleFloat" style attribute.
-     * @param value the new attribute.
+     * @param value the new attribute
      */
     public void jsxSet_styleFloat(final String value) {
         setStyleAttribute("float", value);
@@ -3486,7 +3486,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "tableLayout" style attribute.
-     * @param tableLayout the new attribute.
+     * @param tableLayout the new attribute
      */
     public void jsxSet_tableLayout(final String tableLayout) {
         setStyleAttribute("tableLayout", tableLayout);
@@ -3502,7 +3502,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textAlign" style attribute.
-     * @param textAlign the new attribute.
+     * @param textAlign the new attribute
      */
     public void jsxSet_textAlign(final String textAlign) {
         setStyleAttribute("textAlign", textAlign);
@@ -3518,7 +3518,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textAlignLast" style attribute.
-     * @param textAlignLast the new attribute.
+     * @param textAlignLast the new attribute
      */
     public void jsxSet_textAlignLast(final String textAlignLast) {
         setStyleAttribute("textAlignLast", textAlignLast);
@@ -3534,7 +3534,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textAutospace" style attribute.
-     * @param textAutospace the new attribute.
+     * @param textAutospace the new attribute
      */
     public void jsxSet_textAutospace(final String textAutospace) {
         setStyleAttribute("textAutospace", textAutospace);
@@ -3550,7 +3550,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textDecoration" style attribute.
-     * @param textDecoration the new attribute.
+     * @param textDecoration the new attribute
      */
     public void jsxSet_textDecoration(final String textDecoration) {
         setStyleAttribute("textDecoration", textDecoration);
@@ -3566,7 +3566,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textDecorationBlink" style attribute.
-     * @param textDecorationBlink the new attribute.
+     * @param textDecorationBlink the new attribute
      */
     public void jsxSet_textDecorationBlink(final boolean textDecorationBlink) {
         //empty
@@ -3582,7 +3582,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textDecorationLineThrough" style attribute.
-     * @param textDecorationLineThrough the new attribute.
+     * @param textDecorationLineThrough the new attribute
      */
     public void jsxSet_textDecorationLineThrough(final boolean textDecorationLineThrough) {
         //empty
@@ -3598,7 +3598,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textDecorationNone" style attribute.
-     * @param textDecorationNone the new attribute.
+     * @param textDecorationNone the new attribute
      */
     public void jsxSet_textDecorationNone(final boolean textDecorationNone) {
         //empty
@@ -3614,7 +3614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textDecorationOverline" style attribute.
-     * @param textDecorationOverline the new attribute.
+     * @param textDecorationOverline the new attribute
      */
     public void jsxSet_textDecorationOverline(final boolean textDecorationOverline) {
         //empty
@@ -3630,7 +3630,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textDecorationUnderline" style attribute.
-     * @param textDecorationUnderline the new attribute.
+     * @param textDecorationUnderline the new attribute
      */
     public void jsxSet_textDecorationUnderline(final boolean textDecorationUnderline) {
         //empty
@@ -3646,7 +3646,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textIndent" style attribute.
-     * @param textIndent the new attribute.
+     * @param textIndent the new attribute
      */
     public void jsxSet_textIndent(final String textIndent) {
         setStyleAttribute("textIndent", textIndent);
@@ -3662,7 +3662,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textJustify" style attribute.
-     * @param textJustify the new attribute.
+     * @param textJustify the new attribute
      */
     public void jsxSet_textJustify(final String textJustify) {
         setStyleAttribute("textJustify", textJustify);
@@ -3678,7 +3678,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textJustifyTrim" style attribute.
-     * @param textJustifyTrim the new attribute.
+     * @param textJustifyTrim the new attribute
      */
     public void jsxSet_textJustifyTrim(final String textJustifyTrim) {
         setStyleAttribute("textJustifyTrim", textJustifyTrim);
@@ -3694,7 +3694,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textKashida" style attribute.
-     * @param textKashida the new attribute.
+     * @param textKashida the new attribute
      */
     public void jsxSet_textKashida(final String textKashida) {
         setStyleAttribute("textKashida", textKashida);
@@ -3710,7 +3710,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textKashidaSpace" style attribute.
-     * @param textKashidaSpace the new attribute.
+     * @param textKashidaSpace the new attribute
      */
     public void jsxSet_textKashidaSpace(final String textKashidaSpace) {
         setStyleAttribute("textKashidaSpace", textKashidaSpace);
@@ -3726,7 +3726,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textOverflow" style attribute.
-     * @param textOverflow the new attribute.
+     * @param textOverflow the new attribute
      */
     public void jsxSet_textOverflow(final String textOverflow) {
         setStyleAttribute("textOverflow", textOverflow);
@@ -3742,7 +3742,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textShadow" style attribute.
-     * @param textShadow the new attribute.
+     * @param textShadow the new attribute
      */
     public void jsxSet_textShadow(final String textShadow) {
         setStyleAttribute("textShadow", textShadow);
@@ -3758,7 +3758,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textTransform" style attribute.
-     * @param textTransform the new attribute.
+     * @param textTransform the new attribute
      */
     public void jsxSet_textTransform(final String textTransform) {
         setStyleAttribute("textTransform", textTransform);
@@ -3774,7 +3774,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "textUnderlinePosition" style attribute.
-     * @param textUnderlinePosition the new attribute.
+     * @param textUnderlinePosition the new attribute
      */
     public void jsxSet_textUnderlinePosition(final String textUnderlinePosition) {
         setStyleAttribute("textUnderlinePosition", textUnderlinePosition);
@@ -3790,7 +3790,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "top" style attribute.
-     * @param top the new attribute.
+     * @param top the new attribute
      */
     public void jsxSet_top(final String top) {
         setStyleAttribute("top", top);
@@ -3806,7 +3806,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "unicodeBidi" style attribute.
-     * @param unicodeBidi the new attribute.
+     * @param unicodeBidi the new attribute
      */
     public void jsxSet_unicodeBidi(final String unicodeBidi) {
         setStyleAttribute("unicodeBidi", unicodeBidi);
@@ -3822,7 +3822,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "verticalAlign" style attribute.
-     * @param verticalAlign the new attribute.
+     * @param verticalAlign the new attribute
      */
     public void jsxSet_verticalAlign(final String verticalAlign) {
         setStyleAttribute("verticalAlign", verticalAlign);
@@ -3838,7 +3838,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "visibility" style attribute.
-     * @param visibility the new attribute.
+     * @param visibility the new attribute
      */
     public void jsxSet_visibility(final String visibility) {
         setStyleAttribute("visibility", visibility);
@@ -3854,7 +3854,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "voiceFamily" style attribute.
-     * @param voiceFamily the new attribute.
+     * @param voiceFamily the new attribute
      */
     public void jsxSet_voiceFamily(final String voiceFamily) {
         setStyleAttribute("voiceFamily", voiceFamily);
@@ -3870,7 +3870,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "volume" style attribute.
-     * @param volume the new attribute.
+     * @param volume the new attribute
      */
     public void jsxSet_volume(final String volume) {
         setStyleAttribute("volume", volume);
@@ -3886,7 +3886,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "whiteSpace" style attribute.
-     * @param whiteSpace the new attribute.
+     * @param whiteSpace the new attribute
      */
     public void jsxSet_whiteSpace(final String whiteSpace) {
         setStyleAttribute("whiteSpace", whiteSpace);
@@ -3902,7 +3902,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "widows" style attribute.
-     * @param widows the new attribute.
+     * @param widows the new attribute
      */
     public void jsxSet_widows(final String widows) {
         setStyleAttribute("widows", widows);
@@ -3925,7 +3925,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "width" style attribute.
-     * @param width the new attribute.
+     * @param width the new attribute
      */
     public void jsxSet_width(final String width) {
         setStyleAttribute("width", width);
@@ -3941,7 +3941,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "wordBreak" style attribute.
-     * @param wordBreak the new attribute.
+     * @param wordBreak the new attribute
      */
     public void jsxSet_wordBreak(final String wordBreak) {
         setStyleAttribute("wordBreak", wordBreak);
@@ -3957,7 +3957,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "wordSpacing" style attribute.
-     * @param wordSpacing the new attribute.
+     * @param wordSpacing the new attribute
      */
     public void jsxSet_wordSpacing(final String wordSpacing) {
         setStyleAttribute("wordSpacing", wordSpacing);
@@ -3973,7 +3973,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "wordWrap" style attribute.
-     * @param wordWrap the new attribute.
+     * @param wordWrap the new attribute
      */
     public void jsxSet_wordWrap(final String wordWrap) {
         setStyleAttribute("wordWrap", wordWrap);
@@ -3989,7 +3989,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "writingMode" style attribute.
-     * @param writingMode the new attribute.
+     * @param writingMode the new attribute
      */
     public void jsxSet_writingMode(final String writingMode) {
         setStyleAttribute("writingMode", writingMode);
@@ -4026,7 +4026,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Sets the "zoom" style attribute.
-     * @param zoom the new attribute.
+     * @param zoom the new attribute
      */
     public void jsxSet_zoom(final String zoom) {
         setStyleAttribute("zoom", zoom);
@@ -4050,11 +4050,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     /**
      * Sets an expression for the specified Style.
      *
-     * @param propertyName Specifies the name of the property to which expression is added.
-     * @param expression specifies any valid script statement without quotations or semicolons.
+     * @param propertyName Specifies the name of the property to which expression is added
+     * @param expression specifies any valid script statement without quotations or semicolons
      *        This string can include references to other properties on the current page.
      *        Array references are not allowed on object properties included in this script.
-     * @param language specified the language used.
+     * @param language specified the language used
      */
     public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
         // empty implementation
@@ -4063,8 +4063,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     /**
      * Removes the expression from the specified property.
      *
-     * @param propertyName Specifies the name of the property from which to remove an expression.
-     * @return true if the expression was successfully removed.
+     * @param propertyName Specifies the name of the property from which to remove an expression
+     * @return true if the expression was successfully removed
      */
     public boolean jsxFunction_removeExpression(final String propertyName) {
         return true;
@@ -4072,8 +4072,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Searches for any color notation in the specified text.
-     * @param text the string to search in.
-     * @return the string of the color if found, null otherwise.
+     * @param text the string to search in
+     * @return the string of the color if found, null otherwise
      */
     private static String findColor(final String text) {
         final Pattern p = Pattern.compile("(rgb.*?\\(.*?\\d{1,3}.*?,.*?\\d{1,3}.*?,.*?\\d{1,3}.*?\\))");
@@ -4095,8 +4095,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Searches for a border style in the specified text.
-     * @param text the string to search in.
-     * @return the border style if found, null otherwise.
+     * @param text the string to search in
+     * @return the border style if found, null otherwise
      */
     private static String findBorderStyle(final String text) {
         for (final String token : text.split(" ")) {
@@ -4109,8 +4109,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Searches for a border width in the specified text.
-     * @param text the string to search in.
-     * @return the border width if found, null otherwise.
+     * @param text the string to search in
+     * @return the border width if found, null otherwise
      */
     private static String findBorderWidth(final String text) {
         for (final String token : text.split(" ")) {
@@ -4123,8 +4123,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Returns if the specified token is an RGB in hexadecimal notation.
-     * @param token the token to check.
-     * @return whether the token is a color in hexadecimal notation or not.
+     * @param token the token to check
+     * @return whether the token is a color in hexadecimal notation or not
      */
     private static boolean isColorHexadecimal(final String token) {
         return token.toLowerCase().matches("#([0-9a-f]{3}|[0-9a-f]{6})");
@@ -4132,8 +4132,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Returns if the specified token is a reserved color keyword.
-     * @param token the token to check.
-     * @return whether the token is a reserved color keyword or not.
+     * @param token the token to check
+     * @return whether the token is a reserved color keyword or not
      */
     private static boolean isColorKeyword(final String token) {
         return token.equalsIgnoreCase("aqua") || token.equalsIgnoreCase("black")
@@ -4148,8 +4148,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
     
     /**
      * Returns if the specified token is a border style.
-     * @param token the token to check.
-     * @return whether the token is a border style or not.
+     * @param token the token to check
+     * @return whether the token is a border style or not
      */
     private static boolean isBorderStyle(final String token) {
         return token.equalsIgnoreCase("none") || token.equalsIgnoreCase("hidden")
@@ -4161,8 +4161,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Returns if the specified token is a border width.
-     * @param token the token to check.
-     * @return whether the token is a border width or not.
+     * @param token the token to check
+     * @return whether the token is a border width or not
      */
     private static boolean isBorderWidth(final String token) {
         return token.equalsIgnoreCase("thin") || token.equalsIgnoreCase("medium")
@@ -4171,8 +4171,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Returns if the specified token is a length.
-     * @param token the token to check.
-     * @return whether the token is a length or not.
+     * @param token the token to check
+     * @return whether the token is a length or not
      */
     private static boolean isLength(String token) {
         if (token.endsWith("em") || token.endsWith("ex") || token.endsWith("px") || token.endsWith("in")

@@ -392,8 +392,8 @@ public class BrowserRunner extends CompositeRunner {
     /**
      * Constructs a new instance.
      *
-     * @param klass test case.
-     * @throws Exception If an error occurs.
+     * @param klass test case
+     * @throws Exception if an error occurs
      */
     public BrowserRunner(final Class< ? extends WebTestCase> klass) throws Exception {
         super(klass.getName());

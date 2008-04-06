@@ -66,7 +66,7 @@ public class ThreadManager {
     private Map<Integer, Thread> threadMap_ = Collections.synchronizedMap(new TreeMap<Integer, Thread>());
 
     /**
-     * @return The number of tracked threads.
+     * @return the number of tracked threads
      */
     public int activeCount() {
         return threadMap_.size();
@@ -106,9 +106,9 @@ public class ThreadManager {
      * matters and the background threads are just there to keep the HtmlUnit
      * objects as up to date as possible.
      *
-     * @param job The job to start
+     * @param job the job to start
      * @param label a job description
-     * @return ID of the new thread, suitable for use in JavaScript and required
+     * @return the ID of the new thread, suitable for use in JavaScript and required
      * when calling {@link #stopThread(int)}
      */
     public int startThread(final Runnable job, final String label) {
@@ -153,7 +153,7 @@ public class ThreadManager {
     /**
      * Wait for any executing background threads to complete.
      *
-     * @param maxWaitMillis The maximum time that should be waited, in milliseconds.
+     * @param maxWaitMillis the maximum time that should be waited, in milliseconds
      * This is not an exact time but will be fairly close.
      * @return true if all threads expired in the specified time
      */

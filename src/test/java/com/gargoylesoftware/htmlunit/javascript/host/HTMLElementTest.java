@@ -1268,7 +1268,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @param eventName The name of the event
+     * @param eventName the name of the event
      * @throws Exception if the test fails
      */
     private void eventHandlerSetterGetterTest(final String eventName) throws Exception {
@@ -1913,7 +1913,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testParentElement() throws Exception {
@@ -1946,7 +1946,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testCurrentStyle() throws Exception {
@@ -1961,7 +1961,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testRuntimeStyle() throws Exception {
@@ -1997,7 +1997,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testGetBoundingClientRect() throws Exception {
@@ -2024,7 +2024,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testGetClientRects() throws Exception {
@@ -2051,7 +2051,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testInnerHTML_parentNode() throws Exception {
@@ -2081,7 +2081,7 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testInnerText_parentNode() throws Exception {

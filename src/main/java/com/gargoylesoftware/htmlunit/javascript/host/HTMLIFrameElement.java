@@ -58,7 +58,7 @@ public class HTMLIFrameElement extends HTMLElement {
 
     /**
      * Returns the value of URL loaded in the frame.
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_src() {
         return getFrame().getSrcAttribute();
@@ -66,7 +66,7 @@ public class HTMLIFrameElement extends HTMLElement {
 
     /**
      * Returns the document the frame contains, if any.
-     * @return <code>null</code> if no document is contained.
+     * @return <code>null</code> if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
     public Document jsxGet_contentDocument() {
@@ -75,7 +75,7 @@ public class HTMLIFrameElement extends HTMLElement {
 
     /**
      * Returns the window the frame contains, if any.
-     * @return the window.
+     * @return the window
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">
      * Gecko DOM Reference</a>
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/contentwindow.asp">
@@ -87,7 +87,7 @@ public class HTMLIFrameElement extends HTMLElement {
 
     /**
      * Sets the value of the source of the contained frame.
-     * @param src The new value.
+     * @param src the new value
      */
     public void jsxSet_src(final String src) {
         getFrame().setSrcAttribute(src);
@@ -95,7 +95,7 @@ public class HTMLIFrameElement extends HTMLElement {
 
     /**
      * Returns the value of the name attribute.
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_name() {
         return getFrame().getNameAttribute();
@@ -103,7 +103,7 @@ public class HTMLIFrameElement extends HTMLElement {
 
     /**
      * Sets the value of the name attribute.
-     * @param name The new value.
+     * @param name the new value
      */
     public void jsxSet_name(final String name) {
         getFrame().setNameAttribute(name);

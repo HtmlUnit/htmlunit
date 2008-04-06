@@ -56,7 +56,7 @@ public class HtmlUnknownElement extends ClickableElement {
     /**
      * Creates an instance.
      *
-     * @param page The page that contains this element
+     * @param page the page that contains this element
      * @param tagName the HTML tag represented by this object
      * @param attributes the initial attributes
      */
@@ -67,9 +67,9 @@ public class HtmlUnknownElement extends ClickableElement {
     /**
      * Creates an instance.
      *
-     * @param page The page that contains this element
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
+     * @param page the page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
      * @param attributes the initial attributes
      */
     HtmlUnknownElement(final HtmlPage page, final String namespaceURI, final String qualifiedName,

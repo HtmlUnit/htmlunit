@@ -58,8 +58,8 @@ public abstract class SgmlPage extends DomNode implements Page {
     /**
      * Creates an instance of SgmlPage.
      *
-     * @param webResponse The web response that was used to create this page
-     * @param webWindow The window that this page is being loaded into.
+     * @param webResponse the web response that was used to create this page
+     * @param webWindow the window that this page is being loaded into
      */
     public SgmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(null);
@@ -89,7 +89,7 @@ public abstract class SgmlPage extends DomNode implements Page {
 
     /**
      * Gets the name for the current node.
-     * @return The node name
+     * @return the node name
      */
     @Override
     public String getNodeName() {
@@ -98,7 +98,7 @@ public abstract class SgmlPage extends DomNode implements Page {
 
     /**
      * Gets the type of the current node.
-     * @return The node type
+     * @return the node type
      */
     @Override
     public short getNodeType() {
@@ -108,7 +108,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     /**
      * Returns the window that this page is sitting inside.
      *
-     * @return The enclosing frame or null if this page isn't inside a frame.
+     * @return the enclosing frame or null if this page isn't inside a frame
      */
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
@@ -117,7 +117,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     /**
      * Sets the window that contains this page.
      *
-     * @param window The new frame or null if this page is being removed from a frame.
+     * @param window the new frame or null if this page is being removed from a frame
      */
     public void setEnclosingWindow(final WebWindow window) {
         enclosingWindow_ = window;
@@ -126,7 +126,7 @@ public abstract class SgmlPage extends DomNode implements Page {
     /**
      * Returns the WebClient that originally loaded this page.
      *
-     * @return See above
+     * @return the WebClient that originally loaded this page
      */
     public WebClient getWebClient() {
         return webClient_;
@@ -134,7 +134,7 @@ public abstract class SgmlPage extends DomNode implements Page {
 
     /**
      * Creates an empty {@link DomDocumentFragment} object.
-     * @return a newly created {@link DomDocumentFragment}.
+     * @return a newly created {@link DomDocumentFragment}
      */
     public DomDocumentFragment createDomDocumentFragment() {
         return new DomDocumentFragment(this);

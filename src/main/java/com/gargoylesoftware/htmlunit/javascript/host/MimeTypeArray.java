@@ -57,8 +57,8 @@ public class MimeTypeArray extends SimpleArray {
 
     /**
      * Gets the name of the mime type.
-     * @param element a {@link MimeType}.
-     * @return the name.
+     * @param element a {@link MimeType}
+     * @return the name
      */
     @Override
     protected String getItemName(final Object element) {

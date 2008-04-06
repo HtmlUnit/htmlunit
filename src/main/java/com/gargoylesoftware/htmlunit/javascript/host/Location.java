@@ -90,7 +90,7 @@ public class Location extends SimpleScriptable {
     /**
      * Initializes the object.
      *
-     * @param window The window that this location belongs to.
+     * @param window the window that this location belongs to
      */
     public void initialize(final Window window) {
         window_ = window;
@@ -115,7 +115,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the string value of the location, which is the full URL string.
-     * @return The full URL string.
+     * @return the full URL string
      */
     @Override
     public String toString() {
@@ -129,8 +129,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Loads the new HTML document corresponding to the specified URL.
-     * @param url The location of the new HTML document to load.
-     * @throws IOException If loading the specified location fails.
+     * @param url the location of the new HTML document to load
+     * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/assign.asp">
      * MSDN Documentation</a>
      */
@@ -141,8 +141,8 @@ public class Location extends SimpleScriptable {
     /**
      * Reloads the current page, possibly forcing retrieval from the server even if
      * the browser cache contains the latest version of the document.
-     * @param force If <tt>true</tt>, force reload from server; otherwise, may reload from cache.
-     * @throws IOException When there is a problem reloading the page.
+     * @param force If <tt>true</tt>, force reload from server; otherwise, may reload from cache
+     * @throws IOException When there is a problem reloading the page
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/reload.asp">
      * MSDN Documentation</a>
      */
@@ -158,8 +158,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Reloads the window using the specified URL.
-     * @param url The new URL to use to reload the window.
-     * @throws IOException When there is a problem loading the new page.
+     * @param url the new URL to use to reload the window
+     * @throws IOException When there is a problem loading the new page
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/replace.asp">
      * MSDN Documentation</a>
      */
@@ -169,7 +169,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the location URL.
-     * @return the location URL.
+     * @return the location URL
      */
     public String jsxFunction_toString() {
         return jsxGet_href();
@@ -177,7 +177,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the location URL.
-     * @return The location URL.
+     * @return the location URL
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/href_3.asp">
      * MSDN Documentation</a>
      */
@@ -193,8 +193,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the location URL to an entirely new value.
-     * @param newLocation The new location URL.
-     * @throws IOException If loading the specified location fails.
+     * @param newLocation the new location URL
+     * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/href_3.asp">
      * MSDN Documentation</a>
      */
@@ -227,7 +227,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the search portion of the location URL (the portion following the '?').
-     * @return The search portion of the location URL.
+     * @return the search portion of the location URL
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
      * MSDN Documentation</a>
      */
@@ -243,8 +243,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the search portion of the location URL (the portion following the '?').
-     * @param search The new search portion of the location URL.
-     * @throws Exception If an error occurs.
+     * @param search the new search portion of the location URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/search.asp">
      * MSDN Documentation</a>
      */
@@ -254,7 +254,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the hash portion of the location URL (the portion following the '#').
-     * @return The hash portion of the location URL.
+     * @return the hash portion of the location URL
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
@@ -269,8 +269,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the hash portion of the location URL (the portion following the '#').
-     * @param hash The new hash portion of the location URL.
-     * @throws Exception If an error occurs.
+     * @param hash the new hash portion of the location URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
      * MSDN Documentation</a>
      */
@@ -285,7 +285,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the hostname portion of the location URL.
-     * @return The hostname portion of the location URL.
+     * @return the hostname portion of the location URL
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hostname.asp">
      * MSDN Documentation</a>
      */
@@ -295,8 +295,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the hostname portion of the location URL.
-     * @param hostname The new hostname portion of the location URL.
-     * @throws Exception If an error occurs.
+     * @param hostname the new hostname portion of the location URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hostname.asp">
      * MSDN Documentation</a>
      */
@@ -306,7 +306,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the host portion of the location URL (the '[hostname]:[port]' portion).
-     * @return The host portion of the location URL.
+     * @return the host portion of the location URL
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -325,8 +325,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the host portion of the location URL (the '[hostname]:[port]' portion).
-     * @param host The new host portion of the location URL.
-     * @throws Exception If an error occurs.
+     * @param host the new host portion of the location URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/host.asp">
      * MSDN Documentation</a>
      */
@@ -349,7 +349,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the pathname portion of the location URL.
-     * @return The pathname portion of the location URL.
+     * @return the pathname portion of the location URL
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
      * MSDN Documentation</a>
      */
@@ -359,8 +359,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the pathname portion of the location URL.
-     * @param pathname The new pathname portion of the location URL.
-     * @throws Exception If an error occurs.
+     * @param pathname the new pathname portion of the location URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pathname.asp">
      * MSDN Documentation</a>
      */
@@ -370,7 +370,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the port portion of the location URL.
-     * @return The port portion of the location URL.
+     * @return the port portion of the location URL
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
      * MSDN Documentation</a>
      */
@@ -386,8 +386,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the port portion of the location URL.
-     * @param port The new port portion of the location URL.
-     * @throws Exception If an error occurs.
+     * @param port the new port portion of the location URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/port.asp">
      * MSDN Documentation</a>
      */
@@ -397,7 +397,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns the protocol portion of the location URL, including the trailing ':'.
-     * @return The protocol portion of the location URL, including the trailing ':'.
+     * @return the protocol portion of the location URL, including the trailing ':'
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
      * MSDN Documentation</a>
      */
@@ -407,8 +407,8 @@ public class Location extends SimpleScriptable {
 
     /**
      * Sets the protocol portion of the location URL.
-     * @param protocol The new protocol portion of the location URL.
-     * @throws Exception If an error occurs.
+     * @param protocol the new protocol portion of the location URL
+     * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/protocol.asp">
      * MSDN Documentation</a>
      */
@@ -418,7 +418,7 @@ public class Location extends SimpleScriptable {
 
     /**
      * Returns this location's current URL.
-     * @return This location's current URL.
+     * @return this location's current URL
      */
     private URL getUrl() {
         return window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
@@ -427,8 +427,8 @@ public class Location extends SimpleScriptable {
     /**
      * Sets this location's URL, triggering a server hit and loading the resultant document
      * into this location's window.
-     * @param url This location's new URL.
-     * @throws IOException If there is a problem loading the new location.
+     * @param url This location's new URL
+     * @throws IOException if there is a problem loading the new location
      */
     private void setUrl(final URL url) throws IOException {
         window_.getWebWindow().getWebClient().getPage(window_.getWebWindow(), new WebRequestSettings(url));

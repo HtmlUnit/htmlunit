@@ -448,7 +448,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
 
     /**
      * Test that the file JavaScriptConfiguration.xml is valid.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testConfigurationFileAgainstSchema() throws Exception {
@@ -621,7 +621,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     /**
      * Test if configuration map expands with each new instance of BrowserVersion used.
      *
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testConfigurationMapExpands() throws Exception {
@@ -640,7 +640,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     /**
      * Test if the <tt>class name</tt> entries are lexicographically sorted.
      *
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testLexicographicOrder() throws Exception {

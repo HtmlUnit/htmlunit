@@ -204,7 +204,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     /**
      * Returns the log object for this object.
-     * @return The log object for this object.
+     * @return the log object for this object
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());

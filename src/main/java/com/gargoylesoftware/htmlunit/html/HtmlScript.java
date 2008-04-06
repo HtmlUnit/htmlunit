@@ -89,9 +89,9 @@ public class HtmlScript extends HtmlElement {
     /**
      * Create an instance of HtmlScript
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlScript(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -104,7 +104,7 @@ public class HtmlScript extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "charset"
+     * @return the value of the attribute "charset"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
@@ -116,7 +116,7 @@ public class HtmlScript extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "type"
+     * @return the value of the attribute "type"
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
@@ -128,7 +128,7 @@ public class HtmlScript extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "language"
+     * @return the value of the attribute "language"
      * or an empty string if that attribute isn't defined.
      */
     public final String getLanguageAttribute() {
@@ -140,7 +140,7 @@ public class HtmlScript extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "src"
+     * @return the value of the attribute "src"
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
@@ -149,7 +149,7 @@ public class HtmlScript extends HtmlElement {
 
     /**
      * Returns the value of the attribute "event".
-     * @return The value of the attribute "event"
+     * @return the value of the attribute "event"
      */
     public final String getEventAttribute() {
         return getAttributeValue("event");
@@ -157,7 +157,7 @@ public class HtmlScript extends HtmlElement {
 
     /**
      * Returns the value of the attribute "for".
-     * @return The value of the attribute "for"
+     * @return the value of the attribute "for"
      */
     public final String getHtmlForAttribute() {
         return getAttributeValue("for");
@@ -168,7 +168,7 @@ public class HtmlScript extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "defer"
+     * @return the value of the attribute "defer"
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeferAttribute() {
@@ -342,7 +342,7 @@ public class HtmlScript extends HtmlElement {
     /**
      * Indicates if script execution is necessary and/or possible.
      *
-     * @return <code>true</code> if the script should be executed.
+     * @return <code>true</code> if the script should be executed
      */
     private boolean isExecutionNeeded() {
         final HtmlPage page = getPage();

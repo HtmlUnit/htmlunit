@@ -58,9 +58,9 @@ public class HtmlMenu extends ClickableElement {
     /**
      * Create an instance of HtmlMenu
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlMenu(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -73,7 +73,7 @@ public class HtmlMenu extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "compact"
+     * @return the value of the attribute "compact"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCompactAttribute() {

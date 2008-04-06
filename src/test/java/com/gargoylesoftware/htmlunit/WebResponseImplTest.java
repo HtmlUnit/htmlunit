@@ -93,7 +93,7 @@ public class WebResponseImplTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testEncoding() throws Exception {
@@ -118,7 +118,7 @@ public class WebResponseImplTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testQuotedCharset() throws Exception {

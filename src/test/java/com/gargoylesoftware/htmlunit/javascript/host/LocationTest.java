@@ -222,7 +222,7 @@ public class LocationTest extends WebTestCase {
      * force the page to reload from the server. This is very important for the Dojo
      * unit tests, which will keep reloading themselves if the page gets reloaded.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetHash() throws Exception {
@@ -254,7 +254,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetHostname() throws Exception {
@@ -276,7 +276,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetHostWithoutPort() throws Exception {
@@ -298,7 +298,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetHostWithPort() throws Exception {
@@ -320,7 +320,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetPathname() throws Exception {
@@ -342,7 +342,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetPort() throws Exception {
@@ -364,7 +364,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetProtocol() throws Exception {
@@ -413,7 +413,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testAssign() throws Exception {
@@ -440,7 +440,7 @@ public class LocationTest extends WebTestCase {
 
     /**
      * Tests that location.reload() works correctly.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testReload() throws Exception {
@@ -565,7 +565,7 @@ public class LocationTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void hash() throws Exception {

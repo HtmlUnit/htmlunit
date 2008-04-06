@@ -50,7 +50,7 @@ public class WebWindowNotFoundException extends RuntimeException {
 
     /**
      * Creates an instance.
-     * @param name The name that was searched by.
+     * @param name the name that was searched by
      */
     public WebWindowNotFoundException(final String name) {
         super("Searching for [" + name + "]");
@@ -59,7 +59,7 @@ public class WebWindowNotFoundException extends RuntimeException {
 
     /**
      * Returns the name of the {@link WebWindow} that wasn't found.
-     * @return The name
+     * @return the name
      */
     public String getName() {
         return name_;

@@ -94,7 +94,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 public class WindowTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetLocation() throws Exception {
@@ -125,7 +125,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow() throws Exception {
@@ -180,7 +180,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_base() throws Exception {
@@ -226,7 +226,7 @@ public class WindowTest extends WebTestCase {
     /**
      * _blank is a magic name. If we call open(url, '_blank') then a new
      * window must be loaded.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_blank() throws Exception {
@@ -292,7 +292,7 @@ public class WindowTest extends WebTestCase {
     /**
      * _self is a magic name. If we call open(url, '_self') then the current window must be
      * reloaded.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_self() throws Exception {
@@ -336,7 +336,7 @@ public class WindowTest extends WebTestCase {
     /**
      * _top is a magic name. If we call open(url, '_top') then the top level
      * window must be reloaded.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_top() throws Exception {
@@ -403,7 +403,7 @@ public class WindowTest extends WebTestCase {
     /**
      * _parent is a magic name. If we call open(url, '_parent') then the
      * parent window must be reloaded.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_parent() throws Exception {
@@ -574,7 +574,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testParentAndTop() throws Exception {
@@ -626,7 +626,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testConfirm() throws Exception {
@@ -658,7 +658,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testConfirm_noConfirmHandler() throws Exception {
@@ -674,7 +674,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testPrompt() throws Exception {
@@ -706,7 +706,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testPrompt_noPromptHandler() throws Exception {
@@ -733,7 +733,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpener() throws Exception {
@@ -785,7 +785,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetTimeout() throws Exception {
@@ -800,7 +800,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetTimeoutByReference() throws Exception {
@@ -817,7 +817,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Just tests that setting and clearing an interval doesn't throw an exception.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetAndClearInterval() throws Exception {
@@ -835,7 +835,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetIntervalFunctionReference() throws Exception {
@@ -869,7 +869,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testClearInterval() throws Exception {
@@ -900,7 +900,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Test that a script started by a timer is stopped if the page that started it
      * is not loaded anymore.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetTimeoutStopped() throws Exception {
@@ -930,7 +930,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testClearTimeout() throws Exception {
@@ -960,7 +960,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Verifies that calling clearTimeout() on a callback which has already fired
      * does not affect said callback.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testClearTimeout_DoesNotStopExecutingCallback() throws Exception {
@@ -984,7 +984,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testAboutURL() throws Exception {
@@ -1010,7 +1010,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testWindowFrames() throws Exception {
@@ -1026,7 +1026,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testWindowFramesLive() throws Exception {
@@ -1059,7 +1059,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable). Test that this works.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testJavascriptVariableFromWindow() throws Exception {
@@ -1078,7 +1078,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable). Test that this works.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testJavascriptVariableFromTopAndParentFrame() throws Exception {
@@ -1129,7 +1129,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Variables that are defined inside JavaScript should be accessible through the
      * window object (ie window.myVariable). Test that this works.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testJavascriptVariableFromNamedFrame() throws Exception {
@@ -1186,7 +1186,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Variables that have not been defined should return null when accessed.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testJavascriptVariableFromWindow_NotFound() throws Exception {
@@ -1203,7 +1203,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testGetFrameByName() throws Exception {
@@ -1249,7 +1249,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetOpenerLocationHrefRelative() throws Exception {
@@ -1292,7 +1292,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Test the <tt>window.closed</tt> property.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testClosed() throws Exception {
@@ -1322,7 +1322,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Test closing using JavaScript.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testClose() throws Exception {
@@ -1394,7 +1394,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Test that length of frames collection is retrieved when there are frames.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testFramesLengthAndFrameAccess() throws Exception {
@@ -1551,7 +1551,7 @@ public class WindowTest extends WebTestCase {
      * are emulating Microsoft Internet Explorer. Both of these expressions are therefore equivalent
      * to <tt>document.getElementsByName(elementName)</tt> in IE, and should return a collection of
      * elements if there is more than one with the specified name.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testElementByNameFromWindow() throws Exception {
@@ -1584,7 +1584,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * All elements should be accessible via the window object by their id.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testElementByIdFromWindow() throws Exception {
@@ -1620,7 +1620,7 @@ public class WindowTest extends WebTestCase {
      * In FF 2 "foo" evaluates to the node with id or name "foo" when no local variable
      * has this name.
      * BUT strangely window.foo evaluates to undefined (not yet implemented in HTMLUnit.)
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testFF_ElementByIdOrNameFromWindow() throws Exception {
@@ -1686,7 +1686,7 @@ public class WindowTest extends WebTestCase {
     }
 
    /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnLoadFunction() throws Exception {
@@ -1721,7 +1721,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Verifies that you can set window.onload to something else than a function.
      * See bug 1708532 & 1201561.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testOnloadNotAFunction() throws Exception {
@@ -1741,7 +1741,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testAddOnLoadEventListener() throws Exception {
@@ -1770,7 +1770,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testAttachOnLoadEvent() throws Exception {
@@ -1801,7 +1801,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Regression test for bug 1596926.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testDetachEventInAttachEvent() throws Exception {
@@ -1867,7 +1867,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Test <code>window.name</code>.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testWindowName() throws Exception {
@@ -1891,7 +1891,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Tests Mozilla viewport properties.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testMozillaViewport() throws Exception {
@@ -1914,7 +1914,7 @@ public class WindowTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testPrint() throws Exception {
@@ -1933,7 +1933,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Open a window with only an image for content, then try to set focus to it.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_image() throws Exception {
@@ -1984,7 +1984,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Open a window with only text for content, then try to set focus to it.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_text() throws Exception {
@@ -2029,7 +2029,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Open a window with only XML for content, then try to set focus to it.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_xml() throws Exception {
@@ -2074,7 +2074,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Open a window with only JavaScript for content, then try to set focus to it.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_javascript() throws Exception {
@@ -2119,7 +2119,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Open a window with only text for content, then try to set focus to it.
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_html() throws Exception {
@@ -2164,7 +2164,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Test the <tt>Referer</tt> HTTP header by <tt>window.open</tt>.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOpenWindow_refererHeader() throws Exception {
@@ -2176,7 +2176,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     private void testOpenWindow_refererHeader(final BrowserVersion browser,
             final String expectedRefererHeader) throws Exception {
@@ -2206,7 +2206,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Tests that nested setTimeouts that are deeper than Thread.MAX_PRIORITY
      * do not cause an exception.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testNestedSetTimeoutAboveMaxPriority() throws Exception {
@@ -2232,7 +2232,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testEvalScopeOtherWindow() throws Exception {
@@ -2263,7 +2263,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Regression test for [ 1608555 ] JavaScript: window.eval does evaluate local scope.
      * See https://sourceforge.net/tracker/index.php?func=detail&aid=1608555&group_id=47038&atid=448266.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testEvalScopeLocal() throws Exception {
@@ -2313,7 +2313,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testFunctionEquality() throws Exception {
@@ -2332,7 +2332,7 @@ public class WindowTest extends WebTestCase {
     
     /**
      * Test for 1225021.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testCaptureEvents() throws Exception {
@@ -2357,7 +2357,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testGetComputedStyle() throws Exception {
@@ -2414,7 +2414,7 @@ public class WindowTest extends WebTestCase {
     /**
      * Verifies that the onload handler is executed with "this" referring to the window.
      *
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testOnLoadContext() throws Exception {
@@ -2432,7 +2432,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Added test for [ 1727599 ] Bad context in evaluation of the JavaScript.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testEval() throws Exception {
@@ -2454,7 +2454,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testUndefinedProperty() throws Exception {
@@ -2474,7 +2474,7 @@ public class WindowTest extends WebTestCase {
 
     /**
      * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOverwriteFunctions() throws Exception {
@@ -2498,7 +2498,7 @@ public class WindowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testFrames() throws Exception {

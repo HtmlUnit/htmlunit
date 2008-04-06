@@ -78,7 +78,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Tests synchronous use of XMLHttpRequest.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSyncUse() throws Exception {
@@ -88,7 +88,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Tests Mozilla and IE style object creation.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testCreation() throws Exception {
@@ -98,7 +98,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Tests Mozilla style object creation.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     void testCreation(final BrowserVersion browser, final String[] expected) throws Exception {
         final String html =
@@ -128,7 +128,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Tests synchronous use of XMLHttpRequest.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     void testSyncUse(final BrowserVersion browserVersion) throws Exception {
         final String html =
@@ -176,7 +176,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testAsyncUse() throws Exception {
@@ -235,7 +235,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testRelativeUrl() throws Exception {
@@ -282,7 +282,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testResponseText_NotXml() throws Exception {
@@ -319,7 +319,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Test access to the XML DOM.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testResponseXML() throws Exception {
@@ -365,7 +365,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSendNull() throws Exception {
@@ -395,7 +395,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Test calls to send('foo') for a GET. HtmlUnit 1.14 was incorrectly throwing an exception.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSendGETWithContent() throws Exception {
@@ -405,7 +405,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     
     /**
      * Test calls to send() without any arguments.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSendNoArg() throws Exception {
@@ -414,14 +414,14 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     private void testSendNoArg(final BrowserVersion browserVersion) throws Exception {
         testSend(browserVersion, "");
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     private void testSend(final BrowserVersion browserVersion, final String sendArg) throws Exception {
         final String html = "<html><head>\n"
@@ -451,7 +451,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * Regression test for bug 1357412.
      * Response received by the XMLHttpRequest should not come in any window
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testResponseNotInWindow() throws Exception {
@@ -483,7 +483,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Test Mozilla's overrideMimeType method.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOverrideMimeType() throws Exception {
@@ -593,7 +593,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSetLocation() throws Exception {
@@ -636,7 +636,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     /**
      * Asynchron callback should be called in "main" js thread and not parallel to other js execution.
      * See https://sourceforge.net/tracker/index.php?func=detail&aid=1508377&group_id=47038&atid=448266.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testNoParallelJSExecutionInPage() throws Exception {
@@ -695,7 +695,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Tests that the <tt>Referer</tt> header is set correctly.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testRefererHeader() throws Exception {
@@ -764,7 +764,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     private void testMethod(final SubmitMethod method) throws Exception {
         final String content = "<html><head><script>\n"
@@ -797,7 +797,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testResponseXML_selectNodesIE() throws Exception {
@@ -928,7 +928,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testResponseXML_getElementById_FF() throws Exception {
@@ -974,7 +974,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
     /**
      * Firefox does not call onreadystatechange handler if sync.
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testOnreadystatechange_sync() throws Exception {
@@ -1029,7 +1029,7 @@ public class XMLHttpRequestTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testResponseXML_getElementById() throws Exception {

@@ -53,9 +53,9 @@ public interface RefreshHandler {
     /**
      * Refreshes the specified page using the specified URL after the specified number
      * of seconds.
-     * @param page The page that is going to be refreshed.
-     * @param url The URL where the new page will be loaded.
-     * @param seconds The number of seconds to wait before reloading the page.
+     * @param page the page that is going to be refreshed
+     * @param url the URL where the new page will be loaded
+     * @param seconds the number of seconds to wait before reloading the page
      * @throws IOException if the refresh fails
      */
     void handleRefresh(final Page page, final URL url, final int seconds) throws IOException;

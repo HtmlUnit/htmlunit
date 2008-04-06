@@ -463,7 +463,7 @@ public class HtmlElementTest extends WebTestCase {
      * Verifies that cloned node attributes have the same initial values, but changes can be made
      * to the clone without affecting the original node, and that the id attribute is treated the
      * same as all the other attributes. See bug 1707726.
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void testClonedNodeAttributes() throws Exception {
@@ -723,7 +723,7 @@ public class HtmlElementTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testMouseOver() throws Exception {
@@ -746,7 +746,7 @@ public class HtmlElementTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testMouseMove() throws Exception {
@@ -769,7 +769,7 @@ public class HtmlElementTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testMouseOut() throws Exception {
@@ -792,7 +792,7 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testMouseDown() throws Exception {
@@ -821,7 +821,7 @@ public class HtmlElementTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testMouseUp() throws Exception {
@@ -844,7 +844,7 @@ public class HtmlElementTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testRightClick() throws Exception {
@@ -885,7 +885,7 @@ public class HtmlElementTest extends WebTestCase {
     /**
      * Test the mouse down, then mouse up.
      *
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testMouse_Down_Up() throws Exception {

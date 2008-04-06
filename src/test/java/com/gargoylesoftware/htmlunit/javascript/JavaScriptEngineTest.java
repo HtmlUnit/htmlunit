@@ -641,7 +641,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void javaScriptWrappedInHtmlComments_allOnOneLine() throws Exception {
@@ -828,7 +828,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Test that the JavaScript engine gets called correctly for variable access.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void javaScriptEngineCallsForVariableAccess() throws Exception {
@@ -877,7 +877,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Tests ActiveX related exceptions that do not require a map.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void activeXObjectNoMap() throws Exception {
@@ -925,7 +925,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     /**
      * Test that Java objects placed in the active x map can be instantiated and used within
      * JavaScript using the IE specific ActiveXObject constructor.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void activeXObjectWithMap() throws Exception {
@@ -1005,7 +1005,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
     /**
      * Check that wrong JavaScript just causes its context to fail but not the whole page.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void scriptErrorIsolated() throws Exception {
@@ -1054,7 +1054,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Problem reported by Bruce Faulnker in the dev mailing list.
      * This is due to a Rhino bug:
      * https://bugzilla.mozilla.org/show_bug.cgi?id=374918
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void prototypeScope() throws Exception {
@@ -1094,7 +1094,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void timeout() throws Exception {
@@ -1227,7 +1227,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void commentNoDoubleSlashFF() throws Exception {
@@ -1251,7 +1251,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void comment() throws Exception {
@@ -1260,7 +1260,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
     
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     private void comment(final BrowserVersion browserVersion) throws Exception {
         final String content =
@@ -1279,7 +1279,7 @@ public class JavaScriptEngineTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void regExpSupport() throws Exception {
@@ -1421,7 +1421,7 @@ public class JavaScriptEngineTest extends WebTestCase {
      * Test that code in script tags is executed on page load. Try different combinations
      * of the script tag except for the case where a remote JavaScript page is loaded. That
      * one will be tested separately.
-     * @throws Exception If something goes wrong.
+     * @throws Exception if something goes wrong
      */
     @Test
     public void scriptTags_AllLocalContent() throws Exception {

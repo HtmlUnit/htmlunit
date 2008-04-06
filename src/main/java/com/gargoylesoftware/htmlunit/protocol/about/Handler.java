@@ -51,8 +51,8 @@ public class Handler extends URLStreamHandler {
 
     /**
      * Returns a new URLConnection for this URL.
-     * @param url The "about:" URL.
-     * @return The connection.
+     * @param url the "about:" URL
+     * @return the connection
      */
     @Override
     protected URLConnection openConnection(final URL url) {

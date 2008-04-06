@@ -98,7 +98,7 @@ public class XMLDocument extends Document {
 
     /**
      * Sets the <tt>async</tt> attribute.
-     * @param async Whether or not to send the request to the server asynchronously.
+     * @param async Whether or not to send the request to the server asynchronously
      */
     public void jsxSet_async(final boolean async) {
         this.async_ = async;
@@ -106,7 +106,7 @@ public class XMLDocument extends Document {
 
     /**
      * Returns Whether or not to send the request to the server asynchronously.
-     * @return the <tt>async</tt> attribute.
+     * @return the <tt>async</tt> attribute
      */
     public boolean jsxGet_async() {
         return async_;
@@ -115,8 +115,8 @@ public class XMLDocument extends Document {
     /**
      * Loads an XML document from the specified location.
      *
-     * @param xmlSrouce A string containing a URL that specifies the location of the XML file.
-     * @return true if the load succeeded; false if the load failed.
+     * @param xmlSrouce A string containing a URL that specifies the location of the XML file
+     * @return true if the load succeeded; false if the load failed
      */
     public boolean jsxFunction_load(final String xmlSrouce) {
         if (async_) {
@@ -147,9 +147,9 @@ public class XMLDocument extends Document {
     /**
      * Loads an XML document using the supplied string.
      *
-     * @param strXML A string containing the XML string to load into this XML document object.
+     * @param strXML A string containing the XML string to load into this XML document object
      *        This string can contain an entire XML document or a well-formed fragment.
-     * @return true if the load succeeded; false if the load failed.
+     * @return true if the load succeeded; false if the load failed
      */
     public boolean jsxFunction_loadXML(final String strXML) {
         try {
@@ -204,7 +204,7 @@ public class XMLDocument extends Document {
 
     /**
      * Gets the JavaScript property "documentElement" for the document.
-     * @return The root node for the document.
+     * @return the root node for the document
      */
     //TODO: should be removed, as super.jsxGet_documentElement should not be Html dependent
     @Override
@@ -218,7 +218,7 @@ public class XMLDocument extends Document {
     
     /**
      * Gets the JavaScript property "parseError" for the document.
-     * @return The ParserError object for the document.
+     * @return the ParserError object for the document
      */
     public XMLDOMParseError jsxGet_parseError() {
         if (parseError_ == null) {
@@ -231,7 +231,7 @@ public class XMLDocument extends Document {
 
     /**
      * Contains the XML representation of the node and all its descendants.
-     * @return An XML representation of this node and all its descendants.
+     * @return an XML representation of this node and all its descendants
      */
     public String jsxGet_xml() {
         final XMLSerializer seralizer = new XMLSerializer();
@@ -242,7 +242,7 @@ public class XMLDocument extends Document {
 
     /**
      * Gets the current white space handling.
-     * @return the current white space handling.
+     * @return the current white space handling
      */
     public boolean jsxGet_preserveWhiteSpace() {
         return preserveWhiteSpace_;
@@ -250,7 +250,7 @@ public class XMLDocument extends Document {
 
     /**
      * Specifies the white space handling.
-     * @param preserveWhiteSpace white space handling.
+     * @param preserveWhiteSpace white space handling
      */
     public void jsxSet_preserveWhiteSpace(final boolean preserveWhiteSpace) {
         this.preserveWhiteSpace_ = preserveWhiteSpace;
@@ -261,8 +261,8 @@ public class XMLDocument extends Document {
      * <a href="http://msdn2.microsoft.com/en-us/library/ms766391.aspx">second-level properties</a>
      * on the DOM object.
      *
-     * @param name The name of the property to be set.
-     * @param value The value of the specified property.
+     * @param name the name of the property to be set
+     * @param value the value of the specified property
      */
     public void jsxFunction_setProperty(final String name, final String value) {
         //empty implementation
@@ -270,8 +270,8 @@ public class XMLDocument extends Document {
 
     /**
      * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
-     * @param expression A string specifying an XPath expression.
-     * @return list of the found elements.
+     * @param expression A string specifying an XPath expression
+     * @return list of the found elements
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
         final HTMLCollection collection = new HTMLCollection(this);
@@ -281,8 +281,8 @@ public class XMLDocument extends Document {
 
     /**
      * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
-     * @param expression A string specifying an XPath expression.
-     * @return the first node that matches the given pattern-matching operation.
+     * @param expression A string specifying an XPath expression
+     * @return the first node that matches the given pattern-matching operation
      *         If no nodes match the expression, returns a null value.
      */
     public Object jsxFunction_selectSingleNode(final String expression) {
@@ -297,8 +297,8 @@ public class XMLDocument extends Document {
 
     /**
      * Returns all the descendant elements with the specified tag name.
-     * @param tagName the name to search for.
-     * @return all the descendant elements with the specified tag name.
+     * @param tagName the name to search for
+     * @return all the descendant elements with the specified tag name
      */
     @Override
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {

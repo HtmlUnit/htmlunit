@@ -129,9 +129,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Creates an instance of HtmlPage.
      *
-     * @param originatingUrl The URL that was used to load this page.
-     * @param webResponse The web response that was used to create this page
-     * @param webWindow The window that this page is being loaded into.
+     * @param originatingUrl the URL that was used to load this page
+     * @param webResponse the web response that was used to create this page
+     * @param webWindow the window that this page is being loaded into
      */
     public HtmlPage(final URL originatingUrl, final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
@@ -147,8 +147,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Initialize this page.
-     * @throws IOException If an IO problem occurs.
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @throws IOException if an IO problem occurs
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
     @Override
@@ -166,7 +166,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Clean up this page.
-     * @throws IOException If an IO problem occurs.
+     * @throws IOException if an IO problem occurs
      */
     @Override
     public void cleanUp() throws IOException {
@@ -183,7 +183,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Gets the root HtmlElement of this document.
-     * @return The root element
+     * @return the root element
      */
     public HtmlElement getDocumentHtmlElement() {
         if (documentElement_ == null) {
@@ -376,7 +376,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * The sources of this information are from 1).meta element which
      * http-equiv attribute value is 'content-type', or if not from
      * the response header.
-     * @return the value of charset.
+     * @return the value of charset
      */
     public String getPageEncoding() {
         if (originalCharset_ != null) {
@@ -410,8 +410,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Create a new HTML element with the given tag name.
      *
-     * @param tagName The tag name, preferably in lowercase
-     * @return the new HTML element.
+     * @param tagName the tag name, preferably in lowercase
+     * @return the new HTML element
      */
     public HtmlElement createHtmlElement(final String tagName) {
         final String tagLower = tagName.toLowerCase();
@@ -428,9 +428,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Create a new HtmlElement with the given namespace and qualified name.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @return the new HTML element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @return the new HTML element
      */
     public HtmlElement createHtmlElementNS(final String namespaceURI, final String qualifiedName) {
         final String tagLower = qualifiedName.toLowerCase().substring(qualifiedName.indexOf(':') + 1);
@@ -514,11 +514,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Returns the HtmlAnchor with the specified name.
+     * Returns the {@link HtmlAnchor} with the specified name.
      *
-     * @param name The name to search by
-     * @return See above
-     * @throws ElementNotFoundException If the anchor could not be found.
+     * @param name the name to search by
+     * @return the {@link HtmlAnchor} with the specified name
+     * @throws ElementNotFoundException if the anchor could not be found
      */
     public HtmlAnchor getAnchorByName(final String name) throws ElementNotFoundException {
         return (HtmlAnchor) getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "name", name);
@@ -527,9 +527,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Returns the {@link HtmlAnchor} with the specified href.
      *
-     * @param href The string to search by
-     * @return The HtmlAnchor
-     * @throws ElementNotFoundException If the anchor could not be found.
+     * @param href the string to search by
+     * @return the HtmlAnchor
+     * @throws ElementNotFoundException if the anchor could not be found
      */
     public HtmlAnchor getAnchorByHref(final String href) throws ElementNotFoundException {
         return (HtmlAnchor) getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "href", href);
@@ -537,7 +537,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Returns a list of all anchors contained in this page.
-     * @return the list of {@link HtmlAnchor} in this page.
+     * @return the list of {@link HtmlAnchor} in this page
      */
     @SuppressWarnings("unchecked")
     public List<HtmlAnchor> getAnchors() {
@@ -546,9 +546,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Returns the first anchor that contains the specified text.
-     * @param text The text to search for
-     * @return The first anchor that was found.
-     * @throws ElementNotFoundException If no anchors are found with the specified text
+     * @param text the text to search for
+     * @return the first anchor that was found
+     * @throws ElementNotFoundException if no anchors are found with the specified text
      */
     public HtmlAnchor getFirstAnchorByText(final String text) throws ElementNotFoundException {
         WebAssert.notNull("text", text);
@@ -563,8 +563,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Returns the first form that matches the specified name.
-     * @param name The name to search for
-     * @return The first form.
+     * @param name the name to search for
+     * @return the first form
      * @exception ElementNotFoundException If no forms match the specified result.
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
@@ -579,8 +579,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Returns a list of all the forms in the page.
-     * @return All the forms.
+     * Returns a list of all the forms in this page.
+     * @return all the forms in this page
      */
     @SuppressWarnings("unchecked")
     public List<HtmlForm> getForms() {
@@ -588,11 +588,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * Given a relative URL (ie /foo), returns a fully qualified URL based on
+     * Given a relative URL (ie <tt>/foo</tt>), returns a fully-qualified URL based on
      * the URL that was used to load this page.
      *
-     * @param relativeUrl The relative URL
-     * @return See above
+     * @param relativeUrl the relative URL
+     * @return the fully-qualified URL for the specified relative URL
      * @exception MalformedURLException If an error occurred when creating a URL object
      */
     @SuppressWarnings("unchecked")
@@ -655,8 +655,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Given a target attribute value, resolve the target using a base target for the page.
      *
-     * @param elementTarget The target specified as an attribute of the element.
-     * @return The resolved target to use for the element.
+     * @param elementTarget the target specified as an attribute of the element
+     * @return the resolved target to use for the element
      */
     public String getResolvedTarget(final String elementTarget) {
         final List< ? extends HtmlElement> baseElements = getDocumentHtmlElement().getHtmlElementsByTagName("base");
@@ -678,7 +678,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Returns a list of ids (strings) that correspond to the tabbable elements
      * in this page. Return them in the same order specified in {@link #getTabbableElements}
      *
-     * @return The list of id's
+     * @return the list of id's
      */
     public List<String> getTabbableElementIds() {
         final List<String> list = new ArrayList<String>();
@@ -715,7 +715,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * The following elements support the <tt>tabindex</tt> attribute: A, AREA, BUTTON,
     * INPUT, OBJECT, SELECT, and TEXTAREA.<p>
     *
-    * @return A list containing all the tabbable elements in proper tab order.
+    * @return all the tabbable elements in proper tab order
     */
     public List<HtmlElement> getTabbableElements() {
         final List<String> tags = Arrays
@@ -786,8 +786,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
     *
-    * @param accessKey The key to look for
-    * @return The HTML element that is assigned to the specified key or null
+    * @param accessKey the key to look for
+    * @return the HTML element that is assigned to the specified key or null
     *      if no elements can be found that match the specified key.
     */
     public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
@@ -814,8 +814,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
     *
-    * @param accessKey The key to look for
-    * @return A list of HTML elements that are assigned to the specified accesskey.
+    * @param accessKey the key to look for
+    * @return the elements that are assigned to the specified accesskey
     */
     public List<HtmlElement> getHtmlElementsByAccessKey(final char accessKey) {
         final List<HtmlElement> elements = new ArrayList<HtmlElement>();
@@ -841,11 +841,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * The usage would be similar to what can be achieved to execute JavaScript in the current page
      * by entering a "javascript:...some js code..." in the URL field of a "normal" browser.
      * <p>
-     * <b>Note: </b> the provided code won't be executed if JavaScript has been disabled on the WebClient
+     * <b>Note:</b> the provided code won't be executed if JavaScript has been disabled on the WebClient
      * (see {@link WebClient#isJavaScriptEnabled()}.
-     * @param sourceCode The JavaScript code to execute.
-     * @return A ScriptResult which will contain both the current page (which may be different than
-     * the previous page) and a JavaScript result object.
+     * @param sourceCode the JavaScript code to execute
+     * @return a ScriptResult which will contain both the current page (which may be different than
+     * the previous page) and a JavaScript result object
      */
     public ScriptResult executeJavaScript(final String sourceCode) {
         return executeJavaScriptIfPossible(sourceCode, "injected script", 1);
@@ -864,13 +864,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * handlers execute as needed..
      * </p>
      *
-     * @param sourceCode The JavaScript code to execute.
-     * @param sourceName The name for this chunk of code. This name will be displayed
+     * @param sourceCode the JavaScript code to execute
+     * @param sourceName the name for this chunk of code. This name will be displayed
      * in any error messages.
-     * @param htmlElement The HTML element for which this script is being executed.
+     * @param htmlElement the HTML element for which this script is being executed
      * This element will be the context during the JavaScript execution. If null,
      * the context will default to the window.
-     * @return A ScriptResult which will contain both the current page (which may be different than
+     * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
      * @deprecated use {@link #executeJavaScript(String)} instead
      */
@@ -894,11 +894,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * handlers execute as needed..
      * </p>
      *
-     * @param sourceCode The JavaScript code to execute.
-     * @param sourceName The name for this chunk of code. This name will be displayed
+     * @param sourceCode the JavaScript code to execute
+     * @param sourceName the name for this chunk of code. This name will be displayed
      * in any error messages.
      * @param startLine the line at which the script source starts
-     * @return A ScriptResult which will contain both the current page (which may be different than
+     * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(String sourceCode, final String sourceName, final int startLine) {
@@ -930,13 +930,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      *
      * Execute a Function in the given context.
      *
-     * @param function The JavaScript Function to call.
-     * @param thisObject The "this" object to be used during invocation.
-     * @param args The arguments to pass into the call.
-     * @param htmlElementScope The HTML element for which this script is being executed.
+     * @param function the JavaScript Function to call
+     * @param thisObject the "this" object to be used during invocation
+     * @param args the arguments to pass into the call
+     * @param htmlElementScope the HTML element for which this script is being executed
      * This element will be the context during the JavaScript execution. If null,
      * the context will default to the page.
-     * @return A ScriptResult which will contain both the current page (which may be different than
+     * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
      */
     public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
@@ -961,7 +961,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Returns the log object for this element.
-     * @return The log object for this element.
+     * @return the log object for this element
      */
     protected Log getJsLog() {
         return javascriptLog_;
@@ -970,8 +970,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * @param srcAttribute The source attribute from the script tag.
-     * @param charset The charset attribute from the script tag.
+     * @param srcAttribute the source attribute from the script tag
+     * @param charset the charset attribute from the script tag
      */
     void loadExternalJavaScriptFile(final String srcAttribute, final String charset) {
         if (getWebClient().isJavaScriptEnabled()) {
@@ -1009,8 +1009,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * is actually JavaScript.
      * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
      * are content types case insensitive.
-     * @param typeAttribute The type attribute specified in the script tag.
-     * @param languageAttribute The language attribute specified in the script tag.
+     * @param typeAttribute the type attribute specified in the script tag
+     * @param languageAttribute the language attribute specified in the script tag
      * @return true if the script is JavaScript
      */
     public static boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
@@ -1102,7 +1102,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Returns the title of this page or an empty string if the title wasn't specified.
      *
-     * @return the title of this page or an empty string if the title wasn't specified.
+     * @return the title of this page or an empty string if the title wasn't specified
      */
     public String getTitleText() {
         final HtmlTitle titleElement = getTitleElement();
@@ -1115,7 +1115,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Sets the text for the title of this page. If there is not a title element
      * on this page, then one has to be generated.
-     * @param message The new text
+     * @param message the new text
      */
     public void setTitleText(final String message) {
         HtmlTitle titleElement = getTitleElement();
@@ -1143,8 +1143,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Gets the first child of startElement that is an instance of the given class.
-     * @param startElement The parent element
-     * @param clazz The class to search for.
+     * @param startElement the parent element
+     * @param clazz the class to search for
      * @return <code>null</code> if no child found
      */
     private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class< ? > clazz) {
@@ -1160,7 +1160,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Gets the title element for this page. Returns null if one is not found.
      *
-     * @return the title element for this page or null if this is not one.
+     * @return the title element for this page or null if this is not one
      */
     private HtmlTitle getTitleElement() {
         final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentHtmlElement(), HtmlHead.class);
@@ -1174,8 +1174,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Look for and execute any appropriate event handlers. Look for body
      * and frame tags.
-     * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}.
-     * @return true if user accepted onbeforeunload (not relevant to other events).
+     * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}
+     * @return true if user accepted onbeforeunload (not relevant to other events)
      */
     @SuppressWarnings("unchecked")
     private boolean executeEventHandlersIfNeeded(final String eventType) {
@@ -1316,7 +1316,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Returns an auto-refresh string if specified. This will look in both the meta
      * tags (taking care of &lt;noscript&gt; if any) and inside the HTTP response headers.
-     * @return the auto-refresh string.
+     * @return the auto-refresh string
      */
     private String getRefreshStringOrNull() {
         final boolean javaScriptEnabled = getWebClient().isJavaScriptEnabled();
@@ -1421,8 +1421,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Returns the first frame contained in this page with the specified name.
-     * @param name The name to search for
-     * @return The first frame found.
+     * @param name the name to search for
+     * @return the first frame found
      * @exception ElementNotFoundException If no frame exist in this page with the specified name.
      */
     public FrameWindow getFrameByName(final String name) throws ElementNotFoundException {
@@ -1439,10 +1439,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Simulate pressing an access key. This may change the focus, may click buttons and may invoke
      * JavaScript.
      *
-     * @param accessKey The key that will be pressed.
-     * @return The element that has the focus after pressing this access key or null if no element
+     * @param accessKey the key that will be pressed
+     * @return the element that has the focus after pressing this access key or null if no element
      * has the focus.
-     * @throws IOException If an io error occurs during the processing of this access key. This
+     * @throws IOException if an io error occurs during the processing of this access key. This
      * would only happen if the access key triggered a button which in turn caused a page load.
      */
     public HtmlElement pressAccessKey(final char accessKey) throws IOException {
@@ -1488,7 +1488,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Move the focus to the next element in the tab order. To determine the specified tab
      * order, refer to {@link HtmlPage#getTabbableElements()}
      *
-     * @return The element that has focus after calling this method.
+     * @return the element that has focus after calling this method
      */
     public HtmlElement tabToNextElement() {
         final List<HtmlElement> elements = getTabbableElements();
@@ -1526,7 +1526,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Move the focus to the previous element in the tab order. To determine the specified tab
      * order, refer to {@link HtmlPage#getTabbableElements()}
      *
-     * @return The element that has focus after calling this method.
+     * @return the element that has focus after calling this method
      */
     public HtmlElement tabToPreviousElement() {
         final List<HtmlElement> elements = getTabbableElements();
@@ -1681,7 +1681,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Removes an element and optionally its children from the ID and name maps, if necessary.
      * @param element the element to be removed from the ID and name maps
      * @param recurse indicates if children must be removed too
-     * @param descendant indicates of the element was descendant of this HtmlPage, but now its parent might be null.
+     * @param descendant indicates of the element was descendant of this HtmlPage, but now its parent might be null
      */
     void removeMappedElement(final HtmlElement element, final boolean recurse, final boolean descendant) {
         if (descendant || isDescendant(element)) {
@@ -1710,7 +1710,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * @param node the node that has just been added to the document.
+     * @param node the node that has just been added to the document
      */
     void notifyNodeAdded(final DomNode node) {
         if (node instanceof HtmlElement) {
@@ -1745,7 +1745,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Loads the content of the contained frames. This is done after the page is completely
      * loaded to allow script contained in the frames to reference elements from the
      * page located after the closing </frame> tag.
-     * @throws FailingHttpStatusCodeException If the server returns a failing status code AND the property
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
     void loadFrames() throws FailingHttpStatusCodeException {
@@ -1772,7 +1772,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Gives a basic representation for debugging purposes.
-     * @return a basic representation.
+     * @return a basic representation
      */
     @Override
     public String toString() {
@@ -1788,8 +1788,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Moves the focus to the specified component. This will trigger any relevant JavaScript
      * event handlers.
      *
-     * @param newElement The element that will receive the focus, use <code>null</code> to remove focus from any element
-     * @return true if the specified element now has the focus.
+     * @param newElement the element that will receive the focus, use <code>null</code> to remove focus from any element
+     * @return true if the specified element now has the focus
      * @see #getElementWithFocus()
      * @see #tabToNextElement()
      * @see #tabToPreviousElement()
@@ -1805,8 +1805,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Moves the focus to the specified element. This will trigger any relevant JavaScript
      * event handlers.
      *
-     * @param newElement The element that will receive the focus, use <code>null</code> to remove focus from any element
-     * @return true if the specified element now has the focus.
+     * @param newElement the element that will receive the focus, use <code>null</code> to remove focus from any element
+     * @return true if the specified element now has the focus
      * @see #getFocusedElement()
      * @see #tabToNextElement()
      * @see #tabToPreviousElement()
@@ -1847,7 +1847,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Returns the element with the focus or null if no element has the focus.
-     * @return The element with focus or null.
+     * @return the element with focus or null
      * @see #moveFocusToElement(HtmlElement)
      * @deprecated As of 2.0, please use {@link #getFocusedElement()} instead.
      */
@@ -1857,7 +1857,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Returns the element with the focus or null if no element has the focus.
-     * @return The element with focus or null.
+     * @return the element with focus or null
      * @see #setFocusedElement(HtmlElement)
      */
     public HtmlElement getFocusedElement() {
@@ -1885,7 +1885,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * Select the specified radio button in the page (outside any &lt;form&gt;).
      *
-     * @param radioButtonInput The radio Button
+     * @param radioButtonInput the radio Button
      */
     @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
@@ -1913,7 +1913,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Creates a clone of this instance, and clears cached state
      * to be not shared with the original.
      *
-     * @return a clone of this instance.
+     * @return a clone of this instance
      */
     @Override
     protected Object clone() {
@@ -1951,7 +1951,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Adds an HtmlAttributeChangeListener to the listener list.
      * The listener is registered for all attributes of all HtmlElements contained in this page.
      *
-     * @param listener the attribute change listener to be added.
+     * @param listener the attribute change listener to be added
      * @see #removeHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void addHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
@@ -1971,7 +1971,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * This method should be used to remove HtmlAttributeChangeListener that were registered
      * for all attributes of all HtmlElements contained in this page.
      *
-     * @param listener the attribute change listener to be removed.
+     * @param listener the attribute change listener to be removed
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     public void removeHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
@@ -2060,7 +2060,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * @return true if the OnbeforeunloadHandler has accepted to change the page.
+     * @return true if the OnbeforeunloadHandler has accepted to change the page
      */
     public boolean isOnbeforeunloadAccepted() {
         return executeEventHandlersIfNeeded(Event.TYPE_BEFORE_UNLOAD);

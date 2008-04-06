@@ -163,8 +163,8 @@ public class Event extends SimpleScriptable {
 
     /**
      * Creates a new event instance.
-     * @param domNode The DOM node that triggered the event.
-     * @param type The event type.
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
      */
     public Event(final DomNode domNode, final String type) {
         this(domNode, type, false, false, false);
@@ -172,8 +172,8 @@ public class Event extends SimpleScriptable {
 
     /**
      * Creates a new event instance.
-     * @param domNode The DOM node that triggered the event.
-     * @param type The event type.
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
@@ -196,9 +196,9 @@ public class Event extends SimpleScriptable {
 
     /**
      * Creates a new event instance for a keypress event.
-     * @param domNode the DOM node that triggered the event.
-     * @param type The event type.
-     * @param keyCode The key code associated with the event.
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param keyCode the key code associated with the event
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
@@ -232,7 +232,7 @@ public class Event extends SimpleScriptable {
     
     /**
      * Returns the object that fired the event. This is an IE-only property.
-     * @return The object that fired the event.
+     * @return the object that fired the event
      */
     public Object jsxGet_srcElement() {
         return srcElement_;
@@ -240,7 +240,7 @@ public class Event extends SimpleScriptable {
 
     /**
      * Sets the object that fired the event. This is an IE-only property.
-     * @param srcElement The object that fired the event.
+     * @param srcElement the object that fired the event
      */
     public void jsxSet_srcElement(final Object srcElement) {
         srcElement_ = srcElement;
@@ -248,7 +248,7 @@ public class Event extends SimpleScriptable {
 
     /**
      * Returns the event target to which the event was originally dispatched.
-     * @return The event target to which the event was originally dispatched.
+     * @return the event target to which the event was originally dispatched
      */
     public Object jsxGet_target() {
         return target_;
@@ -257,7 +257,7 @@ public class Event extends SimpleScriptable {
     /**
      * Returns the event target whose event listeners are currently being processed. This
      * is useful during event capturing and event bubbling.
-     * @return The current event target.
+     * @return the current event target
      */
     public Object jsxGet_currentTarget() {
         return currentTarget_;
@@ -273,7 +273,7 @@ public class Event extends SimpleScriptable {
 
     /**
      * Returns the event type.
-     * @return The event type.
+     * @return the event type
      */
     public String jsxGet_type() {
         return type_;
@@ -281,7 +281,7 @@ public class Event extends SimpleScriptable {
 
     /**
      * Sets the event type.
-     * @param eventType The event type.
+     * @param eventType the event type
      */
     public void setEventType(final String eventType) {
         type_ = eventType;
@@ -297,56 +297,56 @@ public class Event extends SimpleScriptable {
 
     /**
      * Returns the key code associated with the event.
-     * @return The key code associated with the event.
+     * @return the key code associated with the event
      */
     public Object jsxGet_keyCode() {
         return keyCode_;
     }
 
     /**
-     * @return whether SHIFT has been pressed during this event or not.
+     * @return whether SHIFT has been pressed during this event or not
      */
     public boolean jsxGet_shiftKey() {
         return shiftKey_;
     }
 
     /**
-     * @param shiftKey whether SHIFT has been pressed during this event or not.
+     * @param shiftKey whether SHIFT has been pressed during this event or not
      */
     protected void setShiftKey(final boolean shiftKey) {
         shiftKey_ = shiftKey;
     }
 
     /**
-     * @return whether CTRL has been pressed during this event or not.
+     * @return whether CTRL has been pressed during this event or not
      */
     public boolean jsxGet_ctrlKey() {
         return ctrlKey_;
     }
 
     /**
-     * @param ctrlKey whether CTRL has been pressed during this event or not.
+     * @param ctrlKey whether CTRL has been pressed during this event or not
      */
     protected void setCtrlKey(final boolean ctrlKey) {
         ctrlKey_ = ctrlKey;
     }
 
     /**
-     * @return whether ALT has been pressed during this event or not.
+     * @return whether ALT has been pressed during this event or not
      */
     public boolean jsxGet_altKey() {
         return altKey_;
     }
 
     /**
-     * @param altKey whether ALT has been pressed during this event or not.
+     * @param altKey whether ALT has been pressed during this event or not
      */
     protected void setAltKey(final boolean altKey) {
         altKey_ = altKey;
     }
 
     /**
-     * @return the current event phase for the event.
+     * @return the current event phase for the event
      */
     public int jsxGet_eventPhase() {
         return eventPhase_;
@@ -366,28 +366,28 @@ public class Event extends SimpleScriptable {
     }
 
     /**
-     * @return whether or not this event bubbles.
+     * @return whether or not this event bubbles
      */
     public boolean jsxGet_bubbles() {
         return bubbles_;
     }
 
     /**
-     * @return whether or not this event can be canceled.
+     * @return whether or not this event can be canceled
      */
     public boolean jsxGet_cancelable() {
         return cancelable_;
     }
 
     /**
-     * @return indicates if event propagation is stopped.
+     * @return indicates if event propagation is stopped
      */
     public boolean jsxGet_cancelBubble() {
         return stopPropagation_;
     }
 
     /**
-     * @param newValue indicates if event propagation is stopped.
+     * @param newValue indicates if event propagation is stopped
      */
     public void jsxSet_cancelBubble(final boolean newValue) {
         stopPropagation_ = newValue;
@@ -410,7 +410,7 @@ public class Event extends SimpleScriptable {
 
     /**
      * Returns the return value associated with the event.
-     * @return The return value associated with the event.
+     * @return the return value associated with the event
      */
     public Object jsxGet_returnValue() {
         return returnValue_;
@@ -418,7 +418,7 @@ public class Event extends SimpleScriptable {
     
     /**
      * Sets the return value associated with the event.
-     * @param returnValue The return value associated with the event.
+     * @param returnValue the return value associated with the event
      */
     public void jsxSet_returnValue(final Object returnValue) {
         returnValue_ = returnValue;
@@ -447,7 +447,7 @@ public class Event extends SimpleScriptable {
 
     /**
      * Returns if the preventDefault() method has been called for this event.
-     * @return if the preventDefault() method has been called for this event.
+     * @return if the preventDefault() method has been called for this event
      */
     public boolean isPreventDefault() {
         return preventDefault_;

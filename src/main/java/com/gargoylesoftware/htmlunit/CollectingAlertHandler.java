@@ -60,7 +60,7 @@ public class CollectingAlertHandler implements AlertHandler {
     /**
      * Create an instance with the specified list.
      *
-     * @param list The list to store alerts in.
+     * @param list the list to store alerts in
      */
     public CollectingAlertHandler(final List<String> list) {
         WebAssert.notNull("list", list);
@@ -71,8 +71,8 @@ public class CollectingAlertHandler implements AlertHandler {
      * Handle the alert. This implementation will store the message in a list
      * for retrieval later.
      *
-     * @param page The page that triggered the alert
-     * @param message The message in the alert.
+     * @param page the page that triggered the alert
+     * @param message the message in the alert
      */
     public void handleAlert(final Page page, final String message) {
         collectedAlerts_.add(message);

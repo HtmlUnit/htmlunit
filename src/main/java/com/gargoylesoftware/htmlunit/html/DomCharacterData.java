@@ -127,7 +127,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
 
     /**
      * Inserts a string into character data.
-     * @param offset The position within the first character at which the string is to be inserted
+     * @param offset the position within the first character at which the string is to be inserted
      * @param arg the string to insert
      */
     public void insertData(final int offset, final String arg) {

@@ -68,7 +68,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
     /**
      * Returns the item at the given index.
      * @param index the index
-     * @return the item at the given position.
+     * @return the item at the given position
      */
     public Object jsxFunction_item(final int index) {
         return elements_.get(index);
@@ -107,8 +107,8 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
 
     /**
      * Returns the item at the given index.
-     * @param name the item name.
-     * @return the item with the given name.
+     * @param name the item name
+     * @return the item with the given name
      */
     public Object jsxFunction_namedItem(final String name) {
         for (final Object element : elements_) {
@@ -131,7 +131,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
 
     /**
      * Gets the array size.
-     * @return the number elements.
+     * @return the number elements
      */
     public int jsxGet_length() {
         return elements_.size();

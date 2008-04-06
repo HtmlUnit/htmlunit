@@ -91,9 +91,9 @@ public class HtmlForm extends ClickableElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param htmlPage The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param htmlPage the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlForm(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
@@ -108,8 +108,8 @@ public class HtmlForm extends ClickableElement {
      * treat this as if it was called by JavaScript. In this case, the onsubmit
      * handler will not get executed.
      *
-     * @param submitElement The element that caused the submit to occur
-     * @return A new Page that reflects the results of this submission
+     * @param submitElement the element that caused the submit to occur
+     * @return a new page that reflects the results of this submission
      * @exception IOException If an IO error occurs
      */
     public Page submit(final SubmittableElement submitElement) throws IOException {

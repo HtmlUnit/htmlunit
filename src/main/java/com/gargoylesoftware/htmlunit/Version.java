@@ -54,8 +54,8 @@ public final class Version {
 
     /**
      * The main entry point into this class.
-     * @param args The arguments passed on the command line
-     * @throws Exception If an error occurs
+     * @param args the arguments passed on the command line
+     * @throws Exception if an error occurs
      */
     public static void main(final String args[]) throws Exception {
         if (args.length == 1 && args[0].equals("-SanityCheck")) {
@@ -86,7 +86,7 @@ public final class Version {
     
     /**
      * Returns the current implementation version.
-     * @return the current implementation version.
+     * @return the current implementation version
      */
     public static String getProductVersion() {
         return Version.class.getPackage().getImplementationVersion();
@@ -94,7 +94,7 @@ public final class Version {
     
     /**
      * Returns the copyright notice.
-     * @return the copyright notice.
+     * @return the copyright notice
      */
     public static String getCopyright() {
         return "Copyright (C) 2002-2008 Gargoyle Software Inc. All rights reserved.";

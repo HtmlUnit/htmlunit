@@ -119,9 +119,9 @@ public abstract class WebTestCase {
 
     /**
      * Load a page with the specified HTML using the default browser version.
-     * @param html The HTML to use.
-     * @return The new page.
-     * @throws Exception if something goes wrong.
+     * @param html the HTML to use
+     * @return the new page
+     * @throws Exception if something goes wrong
      */
     public static final HtmlPage loadPage(final String html) throws Exception {
         return loadPage(html, null);
@@ -130,10 +130,10 @@ public abstract class WebTestCase {
     /**
      * Load a page with the specified HTML and collect alerts into the list.
      * @param browserVersion the browser version to use
-     * @param html The HTML to use.
-     * @param collectedAlerts The list to hold the alerts.
-     * @return The new page.
-     * @throws Exception If something goes wrong.
+     * @param html the HTML to use
+     * @param collectedAlerts the list to hold the alerts
+     * @return the new page
+     * @throws Exception if something goes wrong
      */
     public static final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List<String> collectedAlerts) throws Exception {
@@ -143,10 +143,10 @@ public abstract class WebTestCase {
     /**
      * User the default browser version to load a page with the specified HTML
      * and collect alerts into the list.
-     * @param html The HTML to use.
-     * @param collectedAlerts The list to hold the alerts.
-     * @return The new page.
-     * @throws Exception If something goes wrong.
+     * @param html the HTML to use
+     * @param collectedAlerts the list to hold the alerts
+     * @return the new page
+     * @throws Exception if something goes wrong
      */
     public static final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
         return loadPage(BrowserVersion.getDefault(), html, collectedAlerts, URL_GARGOYLE);
@@ -184,7 +184,7 @@ public abstract class WebTestCase {
 
     /**
      * Returns the log that is being used for all testing objects.
-     * @return The log.
+     * @return the log
      */
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
@@ -192,11 +192,11 @@ public abstract class WebTestCase {
 
     /**
      * Loads a page with the specified HTML and collect alerts into the list.
-     * @param html The HTML to use.
-     * @param collectedAlerts The list to hold the alerts.
-     * @param url The URL that will use as the document host for this page
-     * @return The new page.
-     * @throws Exception If something goes wrong.
+     * @param html the HTML to use
+     * @param collectedAlerts the list to hold the alerts
+     * @param url the URL that will use as the document host for this page
+     * @return the new page
+     * @throws Exception if something goes wrong
      */
     protected static final HtmlPage loadPage(final String html, final List<String> collectedAlerts,
             final URL url) throws Exception {
@@ -207,11 +207,11 @@ public abstract class WebTestCase {
     /**
      * Load a page with the specified HTML and collect alerts into the list.
      * @param browserVersion the browser version to use
-     * @param html The HTML to use.
-     * @param collectedAlerts The list to hold the alerts.
-     * @param url The URL that will use as the document host for this page
-     * @return The new page.
-     * @throws Exception If something goes wrong.
+     * @param html the HTML to use
+     * @param collectedAlerts the list to hold the alerts
+     * @param url the URL that will use as the document host for this page
+     * @return the new page
+     * @throws Exception if something goes wrong
      */
     protected static final HtmlPage loadPage(final BrowserVersion browserVersion,
             final String html, final List<String> collectedAlerts, final URL url) throws Exception {
@@ -230,7 +230,7 @@ public abstract class WebTestCase {
 
     /**
      * Assert that the specified object is null.
-     * @param object The object to check.
+     * @param object the object to check
      */
     public static void assertNull(final Object object) {
         Assert.assertNull("Expected null but found [" + object + "]", object);
@@ -248,8 +248,8 @@ public abstract class WebTestCase {
 
     /**
      * Asserts the two objects are equal.
-     * @param expected the expected object.
-     * @param actual the object to test.
+     * @param expected the expected object
+     * @param actual the object to test
      */
     protected void assertEquals(final Object expected, final Object actual) {
         Assert.assertEquals(expected, actual);
@@ -312,7 +312,7 @@ public abstract class WebTestCase {
 
     /**
      * Assert the specified condition is true.
-     * @param condition condition to test.
+     * @param condition condition to test
      */
     protected void assertTrue(final boolean condition) {
         Assert.assertTrue(condition);
@@ -320,8 +320,8 @@ public abstract class WebTestCase {
 
     /**
      * Assert the specified condition is true.
-     * @param message message to show.
-     * @param condition condition to test.
+     * @param message message to show
+     * @param condition condition to test
      */
     protected void assertTrue(final String message, final boolean condition) {
         Assert.assertTrue(message, condition);
@@ -329,7 +329,7 @@ public abstract class WebTestCase {
 
     /**
      * Assert the specified condition is false.
-     * @param condition condition to test.
+     * @param condition condition to test
      */
     protected void assertFalse(final boolean condition) {
         Assert.assertFalse(condition);
@@ -338,9 +338,9 @@ public abstract class WebTestCase {
     /**
      * Returns an input stream for the specified file name. Refer to {@link #getFileObject(String)}
      * for details on how the file is located.
-     * @param fileName The base file name.
-     * @return The input stream.
-     * @throws FileNotFoundException If the file cannot be found.
+     * @param fileName the base file name
+     * @return the input stream
+     * @throws FileNotFoundException if the file cannot be found
      */
     public static InputStream getFileAsStream(final String fileName) throws FileNotFoundException {
         return new BufferedInputStream(new FileInputStream(getFileObject(fileName)));
@@ -351,8 +351,8 @@ public abstract class WebTestCase {
      * <code>new File(fileName)</code> because it will adjust the location of the file
      * depending on how the code is being executed.
      *
-     * @param fileName The base filename.
-     * @return The new File object.
+     * @param fileName the base filename
+     * @return the new File object
      * @throws FileNotFoundException if !file.exists()
      */
     public static File getFileObject(final String fileName) throws FileNotFoundException {
@@ -510,7 +510,7 @@ public abstract class WebTestCase {
     /**
      * Finds from the call stack the active running JUnit test case
      * @return the test case method
-     * @throws RuntimeException if no method could be found.
+     * @throws RuntimeException if no method could be found
      */
     private Method findRunningJUnitTestMethod() {
         final Class< ? > cl = getClass();
@@ -539,7 +539,7 @@ public abstract class WebTestCase {
     /**
      * From Junit. Test if the method is a junit test.
      * @param method the method
-     * @return <code>true</code> if this is a junit test.
+     * @return <code>true</code> if this is a junit test
      */
     private boolean isPublicTestMethod(final Method method) {
         return method.getParameterTypes().length == 0
@@ -599,7 +599,7 @@ public abstract class WebTestCase {
     
     /**
      * Returns a newly created WebClient with the current {@link BrowserVersion}.
-     * @return a newly created WebClient with the current {@link BrowserVersion}.
+     * @return a newly created WebClient with the current {@link BrowserVersion}
      */
     protected final WebClient getWebClient() {
         return new WebClient(getBrowserVersion());
@@ -607,7 +607,7 @@ public abstract class WebTestCase {
     
     /**
      * Returns the current {@link BrowserVersion}.
-     * @return current {@link BrowserVersion}.
+     * @return current {@link BrowserVersion}
      */
     protected final BrowserVersion getBrowserVersion() {
         if (browserVersion_ == null) {
@@ -622,9 +622,9 @@ public abstract class WebTestCase {
     /**
      * Load a page with the specified HTML using the current browser version, and asserts the alerts
      * equal the expected alerts.
-     * @param html The HTML to use.
-     * @return The new page.
-     * @throws Exception if something goes wrong.
+     * @param html the HTML to use
+     * @return the new page
+     * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
         if (expectedAlerts_ == null) {

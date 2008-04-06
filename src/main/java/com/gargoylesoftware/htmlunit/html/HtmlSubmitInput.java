@@ -68,9 +68,9 @@ public class HtmlSubmitInput extends HtmlInput {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -88,10 +88,10 @@ public class HtmlSubmitInput extends HtmlInput {
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
-     * @param defaultPage The default page to return if the action does not
+     * @param defaultPage the default page to return if the action does not
      * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * @return the page that is currently loaded after execution of this method
+     * @throws IOException if an IO error occurred
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {

@@ -95,7 +95,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Returns the value of the JavaScript attribute "name".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_name() {
         return getHtmlForm().getNameAttribute();
@@ -103,7 +103,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Sets the value of the JavaScript attribute "name".
-     * @param name The new value.
+     * @param name the new value
      */
     public void jsxSet_name(final String name) {
         WebAssert.notNull("name", name);
@@ -112,7 +112,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Returns the value of the JavaScript attribute "elements".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public HTMLCollection jsxGet_elements() {
         if (elements_ == null) {
@@ -129,7 +129,7 @@ public class HTMLFormElement extends HTMLElement {
      * Returns the value of the JavaScript attribute "length".
      * Does not count input type=image elements as browsers (IE6, Mozilla 1.7) do
      * (cf <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/length.asp">MSDN doc</a>)
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public int jsxGet_length() {
         final int all = jsxGet_elements().jsxGet_length();
@@ -139,7 +139,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Returns the value of the JavaScript attribute "action".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_action() {
         return getHtmlForm().getActionAttribute();
@@ -147,7 +147,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Sets the value of the JavaScript attribute "action".
-     * @param action The new value.
+     * @param action the new value
      */
     public void jsxSet_action(final String action) {
         WebAssert.notNull("action", action);
@@ -156,7 +156,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Returns the value of the JavaScript attribute "method".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_method() {
         return getHtmlForm().getMethodAttribute();
@@ -164,7 +164,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Sets the value of the JavaScript attribute "method".
-     * @param method The new value.
+     * @param method the new value
      */
     public void jsxSet_method(final String method) {
         WebAssert.notNull("method", method);
@@ -173,7 +173,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Returns the value of the JavaScript attribute "target".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_target() {
         return getHtmlForm().getTargetAttribute();
@@ -197,7 +197,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Sets the value of the JavaScript attribute "target".
-     * @param target The new value.
+     * @param target the new value
      */
     public void jsxSet_target(final String target) {
         WebAssert.notNull("target", target);
@@ -206,7 +206,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Returns the value of the JavaScript attribute "encoding".
-     * @return The value of this attribute.
+     * @return the value of this attribute
      */
     public String jsxGet_encoding() {
         return getHtmlForm().getEnctypeAttribute();
@@ -214,7 +214,7 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Sets the value of the JavaScript attribute "encoding".
-     * @param encoding The new value.
+     * @param encoding the new value
      */
     public void jsxSet_encoding(final String encoding) {
         WebAssert.notNull("encoding", encoding);
@@ -312,9 +312,9 @@ public class HTMLFormElement extends HTMLElement {
 
     /**
      * Returns the specified indexed property.
-     * @param index The index of the property.
-     * @param start The scriptable object that was originally queried for this property.
-     * @return The property.
+     * @param index the index of the property
+     * @param start the scriptable object that was originally queried for this property
+     * @return the property
      */
     @Override
     public Object get(final int index, final Scriptable start) {

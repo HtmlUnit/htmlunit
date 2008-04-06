@@ -57,8 +57,8 @@ public interface WebConnection {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Submits a request and retrieves a response.
-     * @param webRequestSettings Settings to make the request with.
-     * @return The response to the request defined by the specified request settings.
+     * @param webRequestSettings Settings to make the request with
+     * @return the response to the request defined by the specified request settings
      * @exception IOException If an IO error occurs.
      */
     WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException;
@@ -67,7 +67,7 @@ public interface WebConnection {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Return the web client.
-     * @return The web client.
+     * @return the web client
      */
     WebClient getWebClient();
 
@@ -75,7 +75,7 @@ public interface WebConnection {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Return the {@link HttpState} that is being used.
-     * @return the state.
+     * @return the state
      */
     HttpState getState();
 

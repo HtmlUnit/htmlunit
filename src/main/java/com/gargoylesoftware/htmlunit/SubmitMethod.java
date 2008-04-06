@@ -112,9 +112,9 @@ public final class SubmitMethod implements Serializable {
     }
 
     /**
-     * Returns the name of this SubmitMethod.
+     * Returns the name of this submit method.
      *
-     * @return See above
+     * @return the name of this submit method
      */
     public String getName() {
         return name_;
@@ -122,7 +122,7 @@ public final class SubmitMethod implements Serializable {
 
     /**
      * Returns the constant that matches the given name (case insensitive).
-     * @param name The name to search by
+     * @param name the name to search by
      * @return see above
      */
     public static SubmitMethod getInstance(final String name) {
@@ -136,8 +136,7 @@ public final class SubmitMethod implements Serializable {
 
     /**
      * Returns a string representation of this object.
-     *
-     * @return See above
+     * @return a string representation of this object
      */
     @Override
     public String toString() {

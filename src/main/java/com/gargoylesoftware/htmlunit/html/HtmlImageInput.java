@@ -69,9 +69,9 @@ public class HtmlImageInput extends HtmlInput {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     HtmlImageInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -80,13 +80,7 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     * Returns an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted.<p>
-     *
-     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
-     *
-     * @return See above
+     * {@inheritDoc}
      */
     @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
@@ -114,7 +108,7 @@ public class HtmlImageInput extends HtmlInput {
      * support this method so it is made protected here. Those subclasses
      * that wish to expose it will override and make it public.
      *
-     * @return The Page that is the result of submitting this page to the server
+     * @return the Page that is the result of submitting this page to the server
      * @exception IOException If an io error occurs
      */
     @Override
@@ -129,10 +123,10 @@ public class HtmlImageInput extends HtmlInput {
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
-     * @param defaultPage The default page to return if the action does not
+     * @param defaultPage the default page to return if the action does not
      * load a new page.
-     * @return The page that is currently loaded after execution of this method
-     * @throws IOException If an IO error occurred
+     * @return the page that is currently loaded after execution of this method
+     * @throws IOException if an IO error occurred
      */
     @Override
     protected Page doClickAction(final Page defaultPage) throws IOException {
@@ -149,9 +143,9 @@ public class HtmlImageInput extends HtmlInput {
      * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
-     * @param x The x coordinate of the pointing device at the time of clicking
-     * @param y The y coordinate of the pointing device at the time of clicking
-     * @return The page that is loaded after the click has taken place.
+     * @param x the x coordinate of the pointing device at the time of clicking
+     * @param y the y coordinate of the pointing device at the time of clicking
+     * @return the page that is loaded after the click has taken place
      * @exception IOException If an io error occurs
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */

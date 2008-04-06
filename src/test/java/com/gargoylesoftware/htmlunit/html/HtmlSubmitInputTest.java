@@ -138,7 +138,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testDefaultValue() throws Exception {
@@ -173,7 +173,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testEmptyValue() throws Exception {
@@ -201,7 +201,7 @@ public class HtmlSubmitInputTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testOutsideForm() throws Exception {

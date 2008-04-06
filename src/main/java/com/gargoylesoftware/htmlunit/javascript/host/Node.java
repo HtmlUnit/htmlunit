@@ -118,7 +118,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Gets the JavaScript property "nodeType" for the current node.
-     * @return The node type
+     * @return the node type
      */
     public short jsxGet_nodeType() {
         return getDomNodeOrDie().getNodeType();
@@ -126,7 +126,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Gets the JavaScript property "nodeName" for the current node.
-     * @return The node name.
+     * @return the node name
      */
     public String jsxGet_nodeName() {
         final DomNode domNode = getDomNodeOrDie();
@@ -143,7 +143,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Gets the JavaScript property "nodeValue" for the current node.
-     * @return The node value
+     * @return the node value
      */
     public String jsxGet_nodeValue() {
         return getDomNodeOrDie().getNodeValue();
@@ -151,7 +151,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Sets the JavaScript property "nodeValue" for the current node.
-     * @param newValue The new node value.
+     * @param newValue the new node value
      */
     public void jsxSet_nodeValue(final String newValue) {
         getDomNodeOrDie().setNodeValue(newValue);
@@ -159,8 +159,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Adds a DOM node to the node.
-     * @param childObject The node to add to this node.
-     * @return The newly added child node.
+     * @param childObject the node to add to this node
+     * @return the newly added child node
      */
     public Object jsxFunction_appendChild(final Object childObject) {
         Object appendedChild = null;
@@ -190,8 +190,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Duplicate an XML node.
-     * @param deep If true, recursively clone all descendants. Otherwise, just clone this node.
-     * @return The newly cloned node.
+     * @param deep If true, recursively clone all descendants. Otherwise, just clone this node
+     * @return the newly cloned node
      */
     public Object jsxFunction_cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
@@ -202,9 +202,9 @@ public class Node extends SimpleScriptable {
     /**
      * Add a DOM node as a child to this node before the referenced
      * node. If the referenced node is null, append to the end.
-     * @param newChildObject The node to add to this node
-     * @param refChildObject The node before which to add the new child
-     * @return The newly added child node.
+     * @param newChildObject the node to add to this node
+     * @param refChildObject the node before which to add the new child
+     * @return the newly added child node
      */
     public Object jsxFunction_insertBefore(
             final Object newChildObject, final Object refChildObject) {
@@ -266,9 +266,9 @@ public class Node extends SimpleScriptable {
      * the references may be used completely interchangeably, such that all attributes
      * have the same values and calling the same DOM method on either reference always has exactly the same effect.
      *
-     * @param other The node to test against.
+     * @param other the node to test against
      *
-     * @return whether this node is the same node as the given one.
+     * @return whether this node is the same node as the given one
      */
     public boolean jsxFunction_isSameNode(final Object other) {
         return other == this;
@@ -276,8 +276,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Removes a DOM node from this node.
-     * @param childObject The node to remove from this node.
-     * @return The removed child node..
+     * @param childObject the node to remove from this node
+     * @return the removed child node.
      */
     public Object jsxFunction_removeChild(final Object childObject) {
         Object removedChild = null;
@@ -295,7 +295,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Returns whether this node has any children.
-     * @return boolean true if this node has any children, false otherwise.
+     * @return boolean true if this node has any children, false otherwise
      */
     public boolean jsxFunction_hasChildNodes() {
         return getDomNodeOrDie().getChildren().iterator().hasNext();
@@ -303,7 +303,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Returns the child nodes of the current element.
-     * @return The child nodes of the current element.
+     * @return the child nodes of the current element
      */
     public Object jsxGet_childNodes() {
         if (childNodes_ == null) {
@@ -358,7 +358,7 @@ public class Node extends SimpleScriptable {
     /**
      * Gets the JavaScript property "parentNode" for the node that
      * contains the current node.
-     * @return The parent node
+     * @return the parent node
      */
     public Object jsxGet_parentNode() {
         return getJavaScriptNode(getDomNodeOrDie().getParentNode());
@@ -367,7 +367,7 @@ public class Node extends SimpleScriptable {
     /**
      * Gets the JavaScript property "nextSibling" for the node that
      * contains the current node.
-     * @return The next sibling node or null if the current node has
+     * @return the next sibling node or null if the current node has
      * no next sibling.
      */
     public Object jsxGet_nextSibling() {
@@ -377,7 +377,7 @@ public class Node extends SimpleScriptable {
     /**
      * Gets the JavaScript property "previousSibling" for the node that
      * contains the current node.
-     * @return The previous sibling node or null if the current node has
+     * @return the previous sibling node or null if the current node has
      * no previous sibling.
      */
     public Object jsxGet_previousSibling() {
@@ -387,7 +387,7 @@ public class Node extends SimpleScriptable {
     /**
      * Gets the JavaScript property "firstChild" for the node that
      * contains the current node.
-     * @return The first child node or null if the current node has
+     * @return the first child node or null if the current node has
      * no children.
      */
     public Object jsxGet_firstChild() {
@@ -397,7 +397,7 @@ public class Node extends SimpleScriptable {
     /**
      * Gets the JavaScript property "lastChild" for the node that
      * contains the current node.
-     * @return The last child node or null if the current node has
+     * @return the last child node or null if the current node has
      * no children.
      */
     public Object jsxGet_lastChild() {
@@ -406,8 +406,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Gets the JavaScript node for a given DomNode.
-     * @param domNode The DomNode.
-     * @return The JavaScript node or null if the DomNode was null.
+     * @param domNode the DomNode
+     * @return the JavaScript node or null if the DomNode was null
      */
     protected Object getJavaScriptNode(final DomNode domNode) {
         if (domNode == null) {
@@ -474,8 +474,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Executes the event on this object only (needed for instance for onload on (i)frame tags).
-     * @param event the event.
-     * @return the result.
+     * @param event the event
+     * @return the result
      */
     public ScriptResult executeEvent(final Event event) {
         if (eventListenersContainer_ != null) {
@@ -509,8 +509,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Fires the event on the node with capturing and bubbling phase.
-     * @param event the event.
-     * @return the result.
+     * @param event the event
+     * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
@@ -598,8 +598,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Gets an event handler.
-     * @param eventName the event name (ex: "onclick").
-     * @return the handler function, <code>null</code> if the property is null or not a function.
+     * @param eventName the event name (ex: "onclick")
+     * @return the handler function, <code>null</code> if the property is null or not a function
      */
     public Function getEventHandler(final String eventName) {
         if (eventListenersContainer_ == null) {
@@ -610,8 +610,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Defines an event handler.
-     * @param eventName the event name (like "onclick").
-     * @param eventHandler the handler (<code>null</code> to reset it).
+     * @param eventName the event name (like "onclick")
+     * @param eventHandler the handler (<code>null</code> to reset it)
      */
     public void setEventHandler(final String eventName, final Function eventHandler) {
         setEventHandlerProp(eventName, eventHandler);
@@ -619,8 +619,8 @@ public class Node extends SimpleScriptable {
 
     /**
      * Defines an event handler (or maybe any other object).
-     * @param eventName the event name (like "onclick").
-     * @param value the property (<code>null</code> to reset it).
+     * @param eventName the event name (like "onclick")
+     * @param value the property (<code>null</code> to reset it)
      */
     protected void setEventHandlerProp(final String eventName, final Object value) {
         getEventListenersContainer().setEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2), value);
@@ -629,7 +629,7 @@ public class Node extends SimpleScriptable {
     /**
      * Gets the property defined as event handler (not necessary a Function if something else has been set).
      * @param eventName the event name (like "onclick")
-     * @return the property.
+     * @return the property
      */
     protected Object getEventHandlerProp(final String eventName) {
         if (eventListenersContainer_ == null) {
@@ -642,7 +642,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Returns the owner document.
-     * @return the document.
+     * @return the document
      */
     public Object jsxGet_ownerDocument() {
         return ((SgmlPage) getDomNodeOrDie().getPage()).getScriptObject();

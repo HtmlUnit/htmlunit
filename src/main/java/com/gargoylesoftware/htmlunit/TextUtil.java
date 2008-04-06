@@ -64,9 +64,9 @@ public final class TextUtil {
 
     /**
      * Returns true if the string starts with the specified prefix, irrespective of case.
-     * @param stringToCheck The string to check
-     * @param prefix The prefix
-     * @return true if the string starts with the prefix.
+     * @param stringToCheck the string to check
+     * @param prefix the prefix
+     * @return true if the string starts with the prefix
      */
     public static boolean startsWithIgnoreCase(final String stringToCheck, final String prefix) {
         WebAssert.notNull("stringToCheck", stringToCheck);
@@ -87,8 +87,8 @@ public final class TextUtil {
 
     /**
      * Convert a string into an input stream.
-     * @param content The string
-     * @return The resulting input stream.
+     * @param content the string
+     * @return the resulting input stream
      */
     public static InputStream toInputStream(final String content) {
         try {
@@ -102,10 +102,10 @@ public final class TextUtil {
 
     /**
      * Convert a string into an input stream.
-     * @param content The string
-     * @param encoding The encoding to use when converting the string to a stream.
-     * @return The resulting input stream.
-     * @throws UnsupportedEncodingException If the encoding is not supported.
+     * @param content the string
+     * @param encoding the encoding to use when converting the string to a stream
+     * @return the resulting input stream
+     * @throws UnsupportedEncodingException if the encoding is not supported
      */
     public static InputStream toInputStream(
             final String content,
@@ -136,8 +136,8 @@ public final class TextUtil {
     /**
      * Convert a string into a byte array using a default encoding {@link #DEFAULT_CHARSET}.
      *
-     * @param content The string to convert, assumed to be {@link #DEFAULT_CHARSET} encoded
-     * @return The String as a byte[]. If the default encoding is not supported an empty byte[] will be returned.
+     * @param content the string to convert, assumed to be {@link #DEFAULT_CHARSET} encoded
+     * @return the String as a byte[]. If the default encoding is not supported an empty byte[] will be returned
      */
     public static byte[] stringToByteArray(final String content) {
         return stringToByteArray(content, DEFAULT_CHARSET);
@@ -146,10 +146,10 @@ public final class TextUtil {
     /**
      * Convert a string into a byte array using the given encoding.
      *
-     * @param charset The name of a supported charset
-     * @param content The string to convert
+     * @param charset the name of a supported charset
+     * @param content the string to convert
      *
-     * @return The String as a byte[]. If the specified encoding is not supported an empty byte[] will be returned.
+     * @return the String as a byte[]. If the specified encoding is not supported an empty byte[] will be returned
      */
     public static byte[] stringToByteArray(final String content, final String charset) {
         byte[] contentBytes;

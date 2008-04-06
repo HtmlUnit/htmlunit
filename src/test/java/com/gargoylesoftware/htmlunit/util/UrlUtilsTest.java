@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class UrlUtilsTest extends WebTestCase {
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void getUrlWithNewProtocol() throws Exception {
@@ -62,7 +62,7 @@ public class UrlUtilsTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void getUrlWithNewHost() throws Exception {
@@ -72,7 +72,7 @@ public class UrlUtilsTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void getUrlWithNewPort() throws Exception {
@@ -82,7 +82,7 @@ public class UrlUtilsTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void getUrlWithNewPath() throws Exception {
@@ -92,7 +92,7 @@ public class UrlUtilsTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void getUrlWithNewRef() throws Exception {
@@ -110,7 +110,7 @@ public class UrlUtilsTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void getUrlWithNewQuery() throws Exception {

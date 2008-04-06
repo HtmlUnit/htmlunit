@@ -55,9 +55,9 @@ public abstract class TableRowGroup extends ClickableElement {
     /**
      * Creates an instance of TableRowGroup.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     protected TableRowGroup(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -68,7 +68,7 @@ public abstract class TableRowGroup extends ClickableElement {
     /**
      * Returns a list of table rows contained in this element.
      *
-     * @return a list of table rows.
+     * @return a list of table rows
      */
     public final List<HtmlTableRow> getRows() {
         final List<HtmlTableRow> resultList = new ArrayList<HtmlTableRow>();
@@ -87,7 +87,7 @@ public abstract class TableRowGroup extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
+     * @return the value of the attribute "align"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -99,7 +99,7 @@ public abstract class TableRowGroup extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "char"
+     * @return the value of the attribute "char"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
@@ -111,7 +111,7 @@ public abstract class TableRowGroup extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "charoff"
+     * @return the value of the attribute "charoff"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
@@ -123,7 +123,7 @@ public abstract class TableRowGroup extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "valign"
+     * @return the value of the attribute "valign"
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {

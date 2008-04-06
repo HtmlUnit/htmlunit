@@ -109,7 +109,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Returns the event handler that fires on every state change.
-     * @return The event handler that fires on every state change.
+     * @return the event handler that fires on every state change
      */
     public Function jsxGet_onreadystatechange() {
         return stateChangeHandler_;
@@ -117,7 +117,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Sets the event handler that fires on every state change.
-     * @param stateChangeHandler The event handler that fires on every state change.
+     * @param stateChangeHandler the event handler that fires on every state change
      */
     public void jsxSet_onreadystatechange(final Function stateChangeHandler) {
         stateChangeHandler_ = stateChangeHandler;
@@ -128,8 +128,8 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Sets the state as specified and invokes the state change handler if one has been set.
-     * @param state The new state.
-     * @param context The context within which the state change handler is to be invoked;
+     * @param state the new state
+     * @param context the context within which the state change handler is to be invoked;
      *                if <tt>null</tt>, the current thread's context is used.
      */
     private void setState(final int state, Context context) {
@@ -173,7 +173,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      *   <li>3 = interactive</li>
      *   <li>4 = complete</li>
      * </ul>
-     * @return The current state of the HTTP request.
+     * @return the current state of the HTTP request
      */
     public int jsxGet_readyState() {
         return state_;
@@ -181,7 +181,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Returns a string version of the data retrieved from the server.
-     * @return A string version of the data retrieved from the server.
+     * @return a string version of the data retrieved from the server
      */
     public String jsxGet_responseText() {
         if (webResponse_ != null) {
@@ -195,7 +195,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Returns a DOM-compatible document object version of the data retrieved from the server.
-     * @return A DOM-compatible document object version of the data retrieved from the server.
+     * @return a DOM-compatible document object version of the data retrieved from the server
      */
     public Object jsxGet_responseXML() {
         if (webResponse_.getContentType().contains("xml")) {
@@ -228,7 +228,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     /**
      * Returns the numeric status returned by the server, such as 404 for "Not Found"
      * or 200 for "OK".
-     * @return The numeric status returned by the server.
+     * @return the numeric status returned by the server
      */
     public int jsxGet_status() {
         if (webResponse_ != null) {
@@ -242,7 +242,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Returns the string message accompanying the status code, such as "Not Found" or "OK".
-     * @return The string message accompanying the status code.
+     * @return the string message accompanying the status code
      */
     public String jsxGet_statusText() {
         if (webResponse_ != null) {
@@ -263,7 +263,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Returns the labels and values of all the HTTP headers.
-     * @return The labels and values of all the HTTP headers.
+     * @return the labels and values of all the HTTP headers
      */
     public String jsxFunction_getAllResponseHeaders() {
         if (webResponse_ != null) {
@@ -281,8 +281,8 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Retrieves the value of an HTTP header from the response body.
-     * @param headerName The (case-insensitive) name of the header to retrieve.
-     * @return The value of the specified HTTP header.
+     * @param headerName the (case-insensitive) name of the header to retrieve
+     * @return the value of the specified HTTP header
      */
     public String jsxFunction_getResponseHeader(final String headerName) {
         if (webResponse_ != null) {
@@ -296,11 +296,11 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Assigns the destination URL, method and other optional attributes of a pending request.
-     * @param method The method to use to send the request to the server (GET, POST, etc).
-     * @param url The URL to send the request to.
-     * @param async Whether or not to send the request to the server asynchronously.
-     * @param user If authentication is needed for the specified URL, the username to use to authenticate.
-     * @param password If authentication is needed for the specified URL, the password to use to authenticate.
+     * @param method the method to use to send the request to the server (GET, POST, etc)
+     * @param url the URL to send the request to
+     * @param async Whether or not to send the request to the server asynchronously
+     * @param user If authentication is needed for the specified URL, the username to use to authenticate
+     * @param password If authentication is needed for the specified URL, the password to use to authenticate
      */
     public void jsxFunction_open(final String method, final String url, final boolean async,
         final String user, final String password) {
@@ -332,7 +332,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * Sends the specified content to the server in an HTTP request and receives the response.
-     * @param content The body of the message being sent with the request.
+     * @param content the body of the message being sent with the request
      */
     public void jsxFunction_send(final Object content) {
         prepareRequest(content);
@@ -414,8 +414,8 @@ public class XMLHttpRequest extends SimpleScriptable {
     /**
      * Sets the specified header to the specified value. The <tt>open</tt> method must be
      * called before this method, or an error will occur.
-     * @param name The name of the header being set.
-     * @param value The value of the header being set.
+     * @param name the name of the header being set
+     * @param value the value of the header being set
      */
     public void jsxFunction_setRequestHeader(final String name, final String value) {
         if (requestSettings_ != null) {

@@ -107,7 +107,7 @@ public class HtmlTableRowTest extends WebTestCase {
 
     /**
      * Ensure that the clones are not the originals.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testClonesAreDistinct() throws Exception {
@@ -126,7 +126,7 @@ public class HtmlTableRowTest extends WebTestCase {
 
     /**
      * Ensure that the cloned row has no parent.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testClonedRowHasNullParent() throws Exception {
@@ -135,7 +135,7 @@ public class HtmlTableRowTest extends WebTestCase {
 
     /**
      * Ensure that the cloned row's children are not those of the original.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testClonedRowHasDifferentChildren() throws Exception {
@@ -155,7 +155,7 @@ public class HtmlTableRowTest extends WebTestCase {
 
     /**
      * Ensure that the cloned cell has the cloned row as its parent.
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testClonedCellHasClonedRowAsParent() throws Exception {
@@ -331,7 +331,7 @@ public class HtmlTableRowTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSimpleScriptable() throws Exception {

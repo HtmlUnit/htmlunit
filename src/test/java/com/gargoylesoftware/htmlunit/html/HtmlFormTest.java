@@ -731,7 +731,7 @@ public class HtmlFormTest extends WebTestCase {
      * Test that {@link HtmlForm#getTextAreaByName(String)} returns
      * the first textarea with the given name.
      *
-     * @throws Exception If the test page can't be loaded.
+     * @throws Exception if the test page can't be loaded
      */
     @Test
     public void testGetTextAreaByName() throws Exception {
@@ -764,7 +764,7 @@ public class HtmlFormTest extends WebTestCase {
      * Test that {@link HtmlForm#getButtonByName(String)} returns
      * the first button with the given name.
      *
-     * @throws Exception If the test page can't be loaded.
+     * @throws Exception if the test page can't be loaded
      */
     @Test
     public void testGetButtonByName() throws Exception {
@@ -795,7 +795,7 @@ public class HtmlFormTest extends WebTestCase {
 
     /**
      * Tests that the result of the form will get loaded into the window specified by "target".
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testSubmitToTargetWindow() throws Exception {
@@ -1004,9 +1004,9 @@ public class HtmlFormTest extends WebTestCase {
 
     /**
      * Utility for {@link #testUrlAfterSubmit()}
-     * @param method The form method to use
-     * @param action The form action to use
-     * @param expectedUrlEnd The expected URL
+     * @param method the form method to use
+     * @param action the form action to use
+     * @param expectedUrlEnd the expected URL
      * @throws Exception if the test fails
      */
     private void testUrlAfterSubmit(final URL url, final String method, final String action,
@@ -1031,9 +1031,9 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * Utility for {@link #testUrlAfterSubmit()}. Calls {@link #testUrlAfterSubmit(URL, String, String, String)} with
      * URL_GARGOYLE.
-     * @param method The form method to use
-     * @param action The form action to use
-     * @param expectedUrlEnd The expected URL
+     * @param method the form method to use
+     * @param action the form action to use
+     * @param expectedUrlEnd the expected URL
      * @throws Exception if the test fails
      */
     private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
@@ -1115,7 +1115,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSumbit_submitInputValue() throws Exception {
@@ -1142,7 +1142,7 @@ public class HtmlFormTest extends WebTestCase {
 
     /**
      * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1822108&group_id=47038&atid=448266.
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSubmitWithOnClickThatReturnsFalse() throws Exception {
@@ -1183,7 +1183,7 @@ public class HtmlFormTest extends WebTestCase {
     /**
      * Tests that submitting a form without parameters does not trail the URL with a question mark (IE only).
      *
-     * @throws Exception If the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void testSubmitURLWithoutParameters() throws Exception {
@@ -1217,7 +1217,7 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test page can't be loaded.
+     * @throws Exception if the test page can't be loaded
      */
     @Test
     public void malformedHtml_nestedForms() throws Exception {

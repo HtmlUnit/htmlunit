@@ -67,7 +67,7 @@ public class XMLDOMParseError extends SimpleScriptable {
     
     /**
      * Returns the error code of the last parse error.
-     * @return the error code of the last parse error.
+     * @return the error code of the last parse error
      */
     public int jsxGet_errorCode() {
         return errorCode_;
@@ -75,21 +75,21 @@ public class XMLDOMParseError extends SimpleScriptable {
 
     /**
      * Returns the absolute file position where the error occurred.
-     * @return the absolute file position where the error occurred.
+     * @return the absolute file position where the error occurred
      */
     public int jsxGet_filepos() {
         return filepos_;
     }
     /**
      * Returns the line number that contains the error.
-     * @return the line number that contains the error.
+     * @return the line number that contains the error
      */
     public int jsxGet_line() {
         return line_;
     }
     /**
      * Returns the character position within the line where the error occurred.
-     * @return the character position within the line where the error occurred.
+     * @return the character position within the line where the error occurred
      */
     public int jsxGet_linepos() {
         return linepos_;
@@ -97,7 +97,7 @@ public class XMLDOMParseError extends SimpleScriptable {
 
     /**
      * Returns the reason for the error.
-     * @return the reason for the error.
+     * @return the reason for the error
      */
     public String jsxGet_reason() {
         return reason_;
@@ -105,7 +105,7 @@ public class XMLDOMParseError extends SimpleScriptable {
 
     /**
      * Returns the full text of the line containing the error.
-     * @return the full text of the line containing the error.
+     * @return the full text of the line containing the error
      */
     public String jsxGet_srcText() {
         return srcText_;
@@ -113,7 +113,7 @@ public class XMLDOMParseError extends SimpleScriptable {
 
     /**
      * Returns the URL of the XML document containing the last error.
-     * @return the URL of the XML document containing the last error.
+     * @return the URL of the XML document containing the last error
      */
     public String jsxGet_url() {
         return url_;

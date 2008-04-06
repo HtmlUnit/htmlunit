@@ -71,7 +71,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     /**
      * Creates an instance.
      *
-     * @param page The page that contains this element
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     public HtmlInput(final HtmlPage page, final Map<String, HtmlAttr> attributes) {
@@ -81,9 +81,9 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The page that contains this element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the page that contains this element
      * @param attributes the initial attributes
      */
     public HtmlInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -94,9 +94,10 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
 
     /**
      * Sets the content of the "value" attribute, executing onchange handlers if appropriate.
-     * @param newValue The new content
-     * @return the page that occupies this window after this value is set.
-     * It may be the same window or it may be a freshly loaded one.
+     * This method returns the page conained by this element's window after the value is set,
+     * which may or may not be the same as the original page.
+     * @param newValue the new content
+     * @return the page conained by this element's window after the value is set
      */
     public Page setValueAttribute(final String newValue) {
         WebAssert.notNull("newValue", newValue);
@@ -106,13 +107,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
     }
 
     /**
-     * Returns an array of KeyValuePairs that are the values that will be sent
-     * back to the server whenever the current form is submitted.<p>
-     *
-     * THIS METHOD IS INTENDED FOR THE USE OF THE FRAMEWORK ONLY AND SHOULD NOT
-     * BE USED BY CONSUMERS OF HTMLUNIT. USE AT YOUR OWN RISK.
-     *
-     * @return See above
+     * {@inheritDoc}
      */
     public NameValuePair[] getSubmitKeyValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
@@ -131,8 +126,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "type"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "type" or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         return getAttributeValue("type");
@@ -143,8 +137,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "name"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "name" or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
         return getAttributeValue("name");
@@ -155,8 +148,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.</p>
      *
-     * @return The value of the attribute "value" or an empty string if that
-     * attribute isn't defined
+     * @return the value of the attribute "value" or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
         return getAttributeValue("value");
@@ -167,28 +159,21 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "checked"
-     * or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "checked" or an empty string if that attribute isn't defined
      */
     public final String getCheckedAttribute() {
         return getAttributeValue("checked");
     }
 
     /**
-     * Returns the value of the attribute "disabled". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute.
-     *
-     * @return The value of the attribute "disabled"
-     * or an empty string if that attribute isn't defined.
+     * {@inheritDoc}
      */
     public final String getDisabledAttribute() {
         return getAttributeValue("disabled");
     }
 
     /**
-     * Returns true if the disabled attribute is set for this element.
-     * @return Return true if this is disabled.
+     * {@inheritDoc}
      */
     public final boolean isDisabled() {
         return isAttributeDefined("disabled");
@@ -199,7 +184,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "readonly"
+     * @return the value of the attribute "readonly"
      * or an empty string if that attribute isn't defined.
      */
     public final String getReadOnlyAttribute() {
@@ -211,7 +196,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "size"
+     * @return the value of the attribute "size"
      * or an empty string if that attribute isn't defined.
      */
     public final String getSizeAttribute() {
@@ -223,7 +208,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "maxlength"
+     * @return the value of the attribute "maxlength"
      * or an empty string if that attribute isn't defined.
      */
     public final String getMaxLengthAttribute() {
@@ -235,7 +220,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "src"
+     * @return the value of the attribute "src"
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
@@ -247,7 +232,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "alt"
+     * @return the value of the attribute "alt"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAltAttribute() {
@@ -259,7 +244,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "usemap"
+     * @return the value of the attribute "usemap"
      * or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
@@ -271,7 +256,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "tabindex"
+     * @return the value of the attribute "tabindex"
      * or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
@@ -283,7 +268,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accesskey"
+     * @return the value of the attribute "accesskey"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
@@ -295,7 +280,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onfocus"
+     * @return the value of the attribute "onfocus"
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
@@ -307,7 +292,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onblur"
+     * @return the value of the attribute "onblur"
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
@@ -319,7 +304,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onselect"
+     * @return the value of the attribute "onselect"
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnSelectAttribute() {
@@ -331,7 +316,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "onchange"
+     * @return the value of the attribute "onchange"
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnChangeAttribute() {
@@ -343,7 +328,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "accept"
+     * @return the value of the attribute "accept"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAcceptAttribute() {
@@ -355,7 +340,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
+     * @return the value of the attribute "align"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -382,8 +367,8 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
 
     /**
      * Sets the default value, optionally also modifying the current value.
-     * @param defaultValue The new default value.
-     * @param modifyValue Whether or not to set the current value to the default value.
+     * @param defaultValue the new default value
+     * @param modifyValue Whether or not to set the current value to the default value
      */
     protected void setDefaultValue(final String defaultValue, final boolean modifyValue) {
         defaultValue_ = defaultValue;
@@ -447,9 +432,9 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
-     * @param x The x coordinate of the pointing device at the time of clicking
-     * @param y The y coordinate of the pointing device at the time of clicking
-     * @return The page that is loaded after the click has taken place.
+     * @param x the x coordinate of the pointing device at the time of clicking
+     * @param y the y coordinate of the pointing device at the time of clicking
+     * @return the page that is loaded after the click has taken place
      * @exception IOException If an io error occurs
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
@@ -467,8 +452,8 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * This means that the element must have an onchange script, script must be enabled
      * and the change in the element must not have been triggered by a script.
      *
-     * @param htmlElement The element that contains the onchange attribute.
-     * @return The page that occupies this window after this method completes. It
+     * @param htmlElement the element that contains the onchange attribute
+     * @return the page that occupies this window after this method completes. It
      * may be this or it may be a freshly loaded page.
      */
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {

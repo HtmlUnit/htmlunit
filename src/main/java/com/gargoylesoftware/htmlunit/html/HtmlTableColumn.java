@@ -58,9 +58,9 @@ public class HtmlTableColumn extends ClickableElement {
     /**
      * Create an instance of HtmlTableColumn
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlTableColumn(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -73,7 +73,7 @@ public class HtmlTableColumn extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "span"
+     * @return the value of the attribute "span"
      * or an empty string if that attribute isn't defined.
      */
     public final String getSpanAttribute() {
@@ -85,7 +85,7 @@ public class HtmlTableColumn extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "width"
+     * @return the value of the attribute "width"
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
@@ -97,7 +97,7 @@ public class HtmlTableColumn extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "align"
+     * @return the value of the attribute "align"
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
@@ -109,7 +109,7 @@ public class HtmlTableColumn extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "char"
+     * @return the value of the attribute "char"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
@@ -121,7 +121,7 @@ public class HtmlTableColumn extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "charoff"
+     * @return the value of the attribute "charoff"
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
@@ -133,7 +133,7 @@ public class HtmlTableColumn extends ClickableElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "valign"
+     * @return the value of the attribute "valign"
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {

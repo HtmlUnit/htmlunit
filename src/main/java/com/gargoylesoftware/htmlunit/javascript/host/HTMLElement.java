@@ -144,7 +144,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the value of the "all" property.
-     * @return The value of the "all" property
+     * @return the value of the "all" property
      */
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
@@ -183,7 +183,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the runtime style object for this element.
-     * @return the runtime style object for this element.
+     * @return the runtime style object for this element
      */
     public CSSStyleDeclaration jsxGet_runtimeStyle() {
         return style_;
@@ -191,7 +191,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the DOM node that corresponds to this JavaScript object.
-     * @param domNode The DOM node.
+     * @param domNode the DOM node
      */
     @Override
     public void setDomNode(final DomNode domNode) {
@@ -231,7 +231,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the element ID.
-     * @return The ID of this element.
+     * @return the ID of this element
      */
     public String jsxGet_id() {
         return getHtmlElementOrDie().getId();
@@ -239,7 +239,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the identifier this element.
-     * @param newId The new identifier of this element.
+     * @param newId the new identifier of this element
      */
     public void jsxSet_id(final String newId) {
         getHtmlElementOrDie().setId(newId);
@@ -247,7 +247,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the element title.
-     * @return The ID of this element.
+     * @return the ID of this element
      */
     public String jsxGet_title() {
         return getHtmlElementOrDie().getAttributeValue("title");
@@ -255,7 +255,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the title of this element.
-     * @param newTitle The new identifier of this element.
+     * @param newTitle the new identifier of this element
      */
     public void jsxSet_title(final String newTitle) {
         getHtmlElementOrDie().setAttributeValue("title", newTitle);
@@ -263,7 +263,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns true if this element is disabled.
-     * @return True if this element is disabled.
+     * @return true if this element is disabled
      */
     public boolean jsxGet_disabled() {
         return getHtmlElementOrDie().isAttributeDefined("disabled");
@@ -271,7 +271,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets whether or not to disable this element.
-     * @param disabled True if this is to be disabled.
+     * @param disabled True if this is to be disabled
      */
     public void jsxSet_disabled(final boolean disabled) {
         final HtmlElement element = getHtmlElementOrDie();
@@ -285,7 +285,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the tag name of this element.
-     * @return The tag name in uppercase.
+     * @return the tag name in uppercase
      */
     public String jsxGet_tagName() {
         String tagName = getHtmlElementOrDie().getTagName();
@@ -297,7 +297,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns The URI that identifies an XML namespace.
-     * @return The URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
      */
     public String jsxGet_namespaceURI() {
         return getHtmlElementOrDie().getNamespaceURI();
@@ -305,7 +305,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns The local name (without prefix).
-     * @return The local name (without prefix).
+     * @return the local name (without prefix)
      */
     public String jsxGet_localName() {
         String localName = getHtmlElementOrDie().getLocalName();
@@ -317,7 +317,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns The Namespace prefix.
-     * @return The Namespace prefix.
+     * @return the Namespace prefix
      */
     public String jsxGet_prefix() {
         return getHtmlElementOrDie().getPrefix();
@@ -365,8 +365,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the specified attribute.
-     * @param attributeName attribute name.
-     * @return The value of the specified attribute, <code>null</code> if the attribute is not defined
+     * @param attributeName attribute name
+     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
     public String jsxFunction_getAttribute(final String attributeName) {
         final String value = getHtmlElementOrDie().getAttributeValue(attributeName);
@@ -382,7 +382,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the specified attribute.
      * @param namespaceURI the namespace URI
      * @param localName the local name of the attribute to look for
-     * @return The value of the specified attribute, <code>null</code> if the attribute is not defined
+     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
     public String jsxFunction_getAttributeNS(final String namespaceURI, final String localName) {
         return getHtmlElementOrDie().getAttributeNS(namespaceURI, localName);
@@ -466,7 +466,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Gets the attribute node for the specified attribute.
      * @param attributeName the name of the attribute to retrieve
-     * @return the attribute node for the specified attribute.
+     * @return the attribute node for the specified attribute
      */
     public Object jsxFunction_getAttributeNode(final String attributeName) {
         final Attribute att = new Attribute();
@@ -478,8 +478,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the attribute node for the specified attribute.
-     * @param newAtt the attribute to set.
-     * @return the replaced attribute node, if any.
+     * @param newAtt the attribute to set
+     * @return the replaced attribute node, if any
      */
     public Attribute jsxFunction_setAttributeNode(final Attribute newAtt) {
         final String name = newAtt.jsxGet_name();
@@ -511,7 +511,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns the class defined for this element.
-     * @return the class name.
+     * @return the class name
      */
     public Object jsxGet_className() {
         return getHtmlElementOrDie().getAttributeValue("class");
@@ -519,7 +519,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientHeight" attribute.
-     * @return the clientHeight attribute.
+     * @return the clientHeight attribute
      */
     public int jsxGet_clientHeight() {
         final boolean includePadding = !getBrowserVersion().isIE();
@@ -529,7 +529,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns "clientWidth" attribute.
-     * @return the clientWidth attribute.
+     * @return the clientWidth attribute
      */
     public int jsxGet_clientWidth() {
         final boolean includePadding = !getBrowserVersion().isIE();
@@ -539,7 +539,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Sets the class attribute for this element.
-     * @param className - the new class name.
+     * @param className - the new class name
      */
     public void jsxSet_className(final String className) {
         getHtmlElementOrDie().setAttributeValue("class", className);
@@ -547,7 +547,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the innerHTML attribute.
-     * @return the contents of this node as HTML.
+     * @return the contents of this node as HTML
      */
     public String jsxGet_innerHTML() {
         final StringBuilder buf = new StringBuilder();
@@ -558,7 +558,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the innerText attribute.
-     * @return the contents of this node as text.
+     * @return the contents of this node as text
      */
     public String jsxGet_innerText() {
         final StringBuilder buf = new StringBuilder();
@@ -569,7 +569,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Gets the textContent attribute.
-     * @return the contents of this node as text.
+     * @return the contents of this node as text
      */
     public String jsxGet_textContent() {
         return jsxGet_innerText();
@@ -988,7 +988,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the screen's available height. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the screen's available height.
+     * @return the screen's available height
      */
     public int getAvailHeight() {
         return getWindow().jsxGet_screen().jsxGet_availHeight();
@@ -997,7 +997,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the screen's available width. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the screen's available width.
+     * @return the screen's available width
      */
     public int getAvailWidth() {
         return getWindow().jsxGet_screen().jsxGet_availWidth();
@@ -1006,7 +1006,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the screen's buffer depth. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the screen's buffer depth.
+     * @return the screen's buffer depth
      */
     public int getBufferDepth() {
         return getWindow().jsxGet_screen().jsxGet_bufferDepth();
@@ -1028,7 +1028,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the screen's color depth. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the screen's color depth.
+     * @return the screen's color depth
      */
     public int getColorDepth() {
         return getWindow().jsxGet_screen().jsxGet_colorDepth();
@@ -1037,7 +1037,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the connection type being used. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the connection type being used.
+     * @return the connection type being used
      * Current implementation always return "modem"
      */
     public String getConnectionType() {
@@ -1047,7 +1047,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns <tt>true</tt> if cookies are enabled. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return whether or not cookies are enabled.
+     * @return whether or not cookies are enabled
      */
     public boolean getCookieEnabled() {
         return getWindow().jsxGet_navigator().jsxGet_cookieEnabled();
@@ -1056,7 +1056,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the type of CPU used. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the type of CPU used.
+     * @return the type of CPU used
      */
     public String getCpuClass() {
         return getWindow().jsxGet_navigator().jsxGet_cpuClass();
@@ -1065,7 +1065,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the screen's height. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the screen's height.
+     * @return the screen's height
      */
     public int getHeight() {
         return getWindow().jsxGet_screen().jsxGet_height();
@@ -1074,7 +1074,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns <tt>true</tt> if Java is enabled. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return whether or not Java is enabled.
+     * @return whether or not Java is enabled
      */
     public boolean getJavaEnabled() {
         return getWindow().jsxGet_navigator().jsxFunction_javaEnabled();
@@ -1083,7 +1083,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the platform used. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the platform used.
+     * @return the platform used
      */
     public String getPlatform() {
         return getWindow().jsxGet_navigator().jsxGet_platform();
@@ -1092,7 +1092,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the system language. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the system language.
+     * @return the system language
      */
     public String getSystemLanguage() {
         return getWindow().jsxGet_navigator().jsxGet_systemLanguage();
@@ -1101,7 +1101,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the user language. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the user language.
+     * @return the user language
      */
     public String getUserLanguage() {
         return getWindow().jsxGet_navigator().jsxGet_userLanguage();
@@ -1110,7 +1110,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the screen's width. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
-     * @return the screen's width.
+     * @return the screen's width
      */
     public int getWidth() {
         return getWindow().jsxGet_screen().jsxGet_width();
@@ -1153,7 +1153,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Downloads all the components queued via {@link #addComponentRequest(String, String, String)}.
-     * @return <tt>true</tt> if the components are downloaded successfully.
+     * @return <tt>true</tt> if the components are downloaded successfully
      * Current implementation always return <code>false</code>
      */
     public boolean doComponentRequest() {
@@ -1164,7 +1164,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the version of the specified component.
      * @param id the identifier for the component whose version is to be returned
      * @param idType the type of identifier specified
-     * @return the version of the specified component.
+     * @return the version of the specified component
      */
     public String getComponentVersion(final String id, final String idType) {
         if ("{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}".equals(id)) { //Yahoo Messenger
@@ -1178,7 +1178,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param id the identifier for the component to check for
      * @param idType the type of id specified
      * @param minVersion the minimum version to check for
-     * @return <tt>true</tt> if the specified component is installed.
+     * @return <tt>true</tt> if the specified component is installed
      */
     public boolean isComponentInstalled(final String id, final String idType, final String minVersion) {
         return false;
@@ -1187,11 +1187,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     //----------------------- START #default#download BEHAVIOR -----------------------
     /**
      * Implementation of the IE behavior #default#download.
-     * @param uri The URI of the download source
+     * @param uri the URI of the download source
      * @param callback the method which should be called when the download is finished
      * @see <a href="http://msdn.microsoft.com/workshop/author/behaviors/reference/methods/startdownload.asp">
      * MSDN documentation</a>
-     * @throws MalformedURLException If the URL cannot be created
+     * @throws MalformedURLException if the URL cannot be created
      */
     public void startDownload(final String uri, final Function callback) throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
@@ -1217,8 +1217,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         private final Function callback_;
 
         /**
-         * @param url The URL to download
-         * @param callback The function to callback
+         * @param url the URL to download
+         * @param callback the function to callback
          */
         public DownloadBehaviorDownloader(final URL url, final Function callback) {
             super("Downloader for behavior #default#download '" + url + "'");
@@ -1605,7 +1605,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the JavaScript property "parentElement".
      * <p>It is identical to {@link #jsxGet_parentNode()}
      * with the exception of <tt>HTML</tt>, which has a <tt>null</tt> parent element.
-     * @return The parent element
+     * @return the parent element
      * @see #jsxGet_parentNode()
      */
     public Object jsxGet_parentElement() {
@@ -1626,7 +1626,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     
     /**
      * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
-     * @return an object that specifies the bounds of a collection of TextRectangle objects.
+     * @return an object that specifies the bounds of a collection of TextRectangle objects
      */
     public TextRectangle jsxFunction_getBoundingClientRect() {
         final TextRectangle textRectangle = new TextRectangle();
@@ -1638,7 +1638,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Retrieves a collection of rectangles that describes the layout of the contents of an object
      * or range within the client. Each rectangle describes a single line.
-     * @return a collection of rectangles that describes the layout of the contents.
+     * @return a collection of rectangles that describes the layout of the contents
      */
     public Object jsxFunction_getClientRects() {
         return new NativeArray(0);
@@ -1647,11 +1647,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Sets an expression for the specified HTMLElement.
      *
-     * @param propertyName Specifies the name of the property to which expression is added.
-     * @param expression specifies any valid script statement without quotations or semicolons.
+     * @param propertyName Specifies the name of the property to which expression is added
+     * @param expression specifies any valid script statement without quotations or semicolons
      *        This string can include references to other properties on the current page.
      *        Array references are not allowed on object properties included in this script.
-     * @param language specified the language used.
+     * @param language specified the language used
      */
     public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
         //empty implementation
@@ -1660,8 +1660,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Removes the expression from the specified property.
      *
-     * @param propertyName Specifies the name of the property from which to remove an expression.
-     * @return true if the expression was successfully removed.
+     * @param propertyName Specifies the name of the property from which to remove an expression
+     * @return true if the expression was successfully removed
      */
     public boolean jsxFunction_removeExpression(final String propertyName) {
         return true;
@@ -1670,7 +1670,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Retrieves an auto-generated, unique identifier for the object.
      * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
-     * @return an auto-generated, unique identifier for the object.
+     * @return an auto-generated, unique identifier for the object
      */
     public String jsxGet_uniqueID() {
         if (uniqueID_ == null) {
@@ -1721,7 +1721,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the HTML element that corresponds to this JavaScript object or throw an exception
      * if one cannot be found.
-     * @return The HTML element
+     * @return the HTML element
      * @exception IllegalStateException If the HTML element could not be found.
      */
     public final HtmlElement getHtmlElementOrDie() throws IllegalStateException {
@@ -1731,7 +1731,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Returns the HTML element that corresponds to this JavaScript object
      * or null if an element hasn't been set.
-     * @return The HTML element or null
+     * @return the HTML element or null
      */
     public final HtmlElement getHtmlElementOrNull() {
         return (HtmlElement) getDomNodeOrNull();

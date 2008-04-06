@@ -63,8 +63,8 @@ public class UIEvent extends Event {
     /**
      * Creates a new UI event instance.
      *
-     * @param domNode The DOM node that triggered the event.
-     * @param type The event type.
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed

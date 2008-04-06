@@ -87,14 +87,14 @@ public class Sarissa0993Test extends WebTestCase {
     /**
      * Returns the Sarissa version being tested.
      *
-     * @return the Sarissa version being tested.
+     * @return the Sarissa version being tested
      */
     protected String getVersion() {
         return "0.9.9.3";
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void sarissa() throws Exception {
@@ -102,7 +102,7 @@ public class Sarissa0993Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void xmlHttpRequest() throws Exception {
@@ -110,7 +110,7 @@ public class Sarissa0993Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void xmlSerializer() throws Exception {
@@ -118,7 +118,7 @@ public class Sarissa0993Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void domParser() throws Exception {
@@ -126,7 +126,7 @@ public class Sarissa0993Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void xmlDocument() throws Exception {
@@ -134,7 +134,7 @@ public class Sarissa0993Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void xmlElement() throws Exception {
@@ -142,7 +142,7 @@ public class Sarissa0993Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If an error occurs.
+     * @throws Exception if an error occurs
      */
     @Test
     public void xsltProcessor() throws Exception {
@@ -161,7 +161,7 @@ public class Sarissa0993Test extends WebTestCase {
     /**
      * This is used in case a failing test is expected to happen.
      *
-     * @param expectedResult in the form of "+++F+++" (see the results in a real browser).
+     * @param expectedResult in the form of "+++F+++" (see the results in a real browser)
      */
     private void test(final String testName, final String expectedResult) throws Exception {
         final HtmlAnchor anchor =
@@ -206,7 +206,7 @@ public class Sarissa0993Test extends WebTestCase {
     }
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers(Browser.NONE)

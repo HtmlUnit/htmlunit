@@ -89,7 +89,7 @@ public class HtmlFileInputTest extends WebTestCase {
     private Server server_;
 
     /**
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testFileInput() throws Exception {
@@ -212,7 +212,7 @@ public class HtmlFileInputTest extends WebTestCase {
      * Test for http://issues.apache.org/jira/browse/HTTPCLIENT-293,
      * which is related to http://sourceforge.net/tracker/index.php?func=detail&aid=1818569&group_id=47038&atid=448266
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
@@ -248,7 +248,7 @@ public class HtmlFileInputTest extends WebTestCase {
      *
      * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1818569&group_id=47038&atid=448266
      *
-     * @throws Exception If the test fails.
+     * @throws Exception if the test fails
      */
     @Test
     public void testUploadFileWithNonASCIIName() throws Exception {

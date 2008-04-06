@@ -66,7 +66,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#getAttributeValue(String)} with a lower case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void getAttributeLowerCase() throws IOException {
@@ -76,7 +76,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#getAttributeValue(String)} with a mixed case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void getAttributeMixedCase() throws IOException {
@@ -86,7 +86,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#getAttributeValue(String)} with an upper case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void getAttributeUpperCase() throws IOException {
@@ -96,7 +96,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#setAttributeValue(String,String)} with a lower case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void setAttributeLowerCase() throws IOException {
@@ -107,7 +107,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#setAttributeValue(String,String)} with a mixed case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void setAttributeMixedCase() throws IOException {
@@ -118,7 +118,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#setAttributeValue(String,String)} with an upper case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void setAttributeUpperCase() throws IOException {
@@ -129,7 +129,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#removeAttribute(String)} with a lower case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void removeAttributeLowerCase() throws IOException {
@@ -140,7 +140,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#removeAttribute(String)} with a mixed case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void removeAttributeMixedCase() throws IOException {
@@ -151,7 +151,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#removeAttribute(String)} with an upper case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void removeAttributeUpperCase() throws IOException {
@@ -162,7 +162,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#isAttributeDefined(String)} with a lower case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void isAttributeDefinedLowerCase() throws IOException {
@@ -172,7 +172,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#isAttributeDefined(String)} with a mixed case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void isAttributeDefinedMixedCase() throws IOException {
@@ -182,7 +182,7 @@ public class AttributeCaseTest extends WebTestCase {
 
     /**
      * Tests {@link HtmlElement#isAttributeDefined(String)} with an upper case name.
-     * @throws IOException If the test fails
+     * @throws IOException if the test fails
      */
     @Test
     public void isAttributeDefinedUpperCase() throws IOException {

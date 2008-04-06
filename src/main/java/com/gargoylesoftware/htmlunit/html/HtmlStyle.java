@@ -58,9 +58,9 @@ public class HtmlStyle extends HtmlElement {
     /**
      * Create an instance of HtmlStyle
      *
-     * @param namespaceURI the URI that identifies an XML namespace.
-     * @param qualifiedName The qualified name of the element type to instantiate
-     * @param page The HtmlPage that contains this element.
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
     HtmlStyle(final String namespaceURI, final String qualifiedName, final HtmlPage page,
@@ -73,7 +73,7 @@ public class HtmlStyle extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "lang" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "lang" or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
         return getAttributeValue("lang");
@@ -84,7 +84,7 @@ public class HtmlStyle extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "xml:lang" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "xml:lang" or an empty string if that attribute isn't defined
      */
     public final String getXmlLangAttribute() {
         return getAttributeValue("xml:lang");
@@ -95,7 +95,7 @@ public class HtmlStyle extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "dir" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "dir" or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
         return getAttributeValue("dir");
@@ -106,7 +106,7 @@ public class HtmlStyle extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "type" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "type" or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
         return getAttributeValue("type");
@@ -117,7 +117,7 @@ public class HtmlStyle extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "media" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "media" or an empty string if that attribute isn't defined
      */
     public final String getMediaAttribute() {
         return getAttributeValue("media");
@@ -128,7 +128,7 @@ public class HtmlStyle extends HtmlElement {
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
-     * @return The value of the attribute "title" or an empty string if that attribute isn't defined.
+     * @return the value of the attribute "title" or an empty string if that attribute isn't defined
      */
     public final String getTitleAttribute() {
         return getAttributeValue("title");

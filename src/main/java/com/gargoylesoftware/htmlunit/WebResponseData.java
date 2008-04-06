@@ -127,10 +127,10 @@ public class WebResponseData implements Serializable {
      * If the response headers indicate that the data has been compressed,
      * the data stream is handled appropriately. If the specified stream is
      * <tt>null</tt>, this method returns <tt>null</tt>.
-     * @param stream The input stream which contains the body.
-     * @param headers The response headers.
-     * @return The specified body stream, as a byte array.
-     * @throws IOException If a stream error occurs.
+     * @param stream the input stream which contains the body
+     * @param headers the response headers
+     * @return the specified body stream, as a byte array
+     * @throws IOException if a stream error occurs
      */
     protected byte[] getBody(InputStream stream, final List<NameValuePair> headers) throws IOException {
         if (stream == null) {
@@ -152,7 +152,7 @@ public class WebResponseData implements Serializable {
 
     /**
      * Returns the response body.
-     * @return response body.
+     * @return response body
      */
     public byte[] getBody() {
         return body_;
