@@ -402,9 +402,9 @@
             <version>1.7R1</version>
         </dependency>
         <dependency>
-            <groupId>nekohtml</groupId>
-            <artifactId>nekohtml-hu</artifactId>
-            <version>1.9.6.3</version>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.7</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
