@@ -33,6 +33,13 @@
         <password>my_login_password</password>
       -->
     </server>
+    <server>
+      <id>htmlunit-m2-repo</id>
+      <username>mguillem</username>
+      <!-- optional element:
+        <password>my_login_password</password>
+      -->
+    </server>
   </servers>
   ...
 </settings>
@@ -72,11 +79,8 @@
                         in and tag the repository (to https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/tags/) 
                         with a name like this "HtmlUnit-1dot1" that reflects the current build version.
                     </li>
-                    <li>
-                    	Build the maven bundle with 
-                        <source> mvn source:jar javadoc:jar repository:bundle-create</source>
-                        and open an upload request to the maven repository as 
-                        <a href="http://maven.apache.org/guides/mini/guide-central-repository-upload.html">described here</a>.
+                    <li>Deploy the release to HtmlUnit Maven repository (which is synchronized with the main repository)
+                        <source>mvn deploy</source>
                     </li>
                     <li>
                         Deploy the site documentation.

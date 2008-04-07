@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="2.0-prerelease" description="Migration to Java 5, improvements particularly in JavaScript support">
+        <release version="2.0" date="Apr 7, 2008" description="Migration to Java 5, implementation of org.w3c.dom.*, better support for incorrect html code, large improvements in JavaScript support (GWT 1.4 tests now pass, ...)">
             <action type="update" dev="asashour">
                 Upgrade NekoHtml to 1.9.7.
             </action>
