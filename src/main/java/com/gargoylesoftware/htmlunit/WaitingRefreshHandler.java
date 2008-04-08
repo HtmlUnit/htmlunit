@@ -74,8 +74,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
     }
 
     /**
-     * Create a WaitingRefreshHandler that will always wait whatever time the server or
-     * content asks.
+     * Creates a new refresh handler that will always wait whatever time the server or content asks.
      */
     public WaitingRefreshHandler() {
         maxwait_ = 0;
