@@ -807,7 +807,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * below this one. Otherwise, the new node will not have any children. The page reference
      * will always be the same as this node's.
      * @return a new node
-     * @deprecated As of 2.0, please use {@link #cloneNode()} instead.
+     * @deprecated As of 2.0, please use {@link #cloneNode(boolean)} instead.
      */
     public DomNode cloneDomNode(final boolean deep) {
         return cloneNode(deep);
@@ -864,7 +864,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Appends a child node to this node.
      * @param node the node to append
      * @return the node added
-     * @deprecated As of 2.0, please use {@link #appendChild()} instead.
+     * @deprecated As of 2.0, please use {@link #appendChild(Node)} instead.
      */
     public DomNode appendDomChild(final DomNode node) {
         return appendChild((DomNode) node);
