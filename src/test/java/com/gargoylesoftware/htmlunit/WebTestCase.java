@@ -353,7 +353,7 @@ public abstract class WebTestCase {
      *
      * @param fileName the base filename
      * @return the new File object
-     * @throws FileNotFoundException if !file.exists()
+     * @throws FileNotFoundException if the file doesn't exist
      */
     public static File getFileObject(final String fileName) throws FileNotFoundException {
         final String localizedName = fileName.replace('/', File.separatorChar);

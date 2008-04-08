@@ -130,16 +130,16 @@ public class FormField extends HTMLElement {
     }
 
     /**
-     * Sets the onchange event handler for this element.
-     * @param onchange the new handler
+     * Sets the <tt>onchange</tt> event handler for this element.
+     * @param onchange the <tt>onchange</tt> event handler for this element
      */
     public void jsxSet_onchange(final Object onchange) {
         setEventHandlerProp("onchange", onchange);
     }
 
     /**
-     * Gets the onchange event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onchange</tt> event handler for this element.
+     * @return the <tt>onchange</tt> event handler for this element
      */
     public Function jsxGet_onchange() {
         return getEventHandler("onchange");

@@ -78,7 +78,7 @@ public final class XPathUtils {
      */
     public static List<Object> getByXPath(final Node node, final String xpathExpr) {
         if (xpathExpr == null) {
-            throw new NullPointerException("Null is not a valid xpath expression");
+            throw new NullPointerException("Null is not a valid XPath expression");
         }
 
         final List<Object> list = new ArrayList<Object>();

@@ -86,8 +86,8 @@ public class RowContainer extends HTMLElement {
     }
 
     /**
-     * Gets the xpath expression allowing to get the rows of the container relatively to the container.
-     * @return the expression
+     * Returns the XPath expression, relative to this node, enabling the retrieval of this container's rows.
+     * @return the XPath expression, relative to this node, enabling the retrieval of this container's rows
      */
     protected String getXPathRows() {
         return "./tr";

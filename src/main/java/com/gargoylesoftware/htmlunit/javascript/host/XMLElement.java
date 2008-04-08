@@ -62,7 +62,7 @@ public class XMLElement extends Node {
     private static final long serialVersionUID = 5616690634173934926L;
 
     /**
-     * Applies the specified xpath expression to this node's context and returns the generated list of matching nodes.
+     * Applies the specified XPath expression to this node's context and returns the generated list of matching nodes.
      * @param expression a string specifying an XPath expression
      * @return list of the found elements
      */

@@ -626,8 +626,8 @@ public class JavaScriptEngine implements Serializable {
 
     /**
      * Caches a parsed script.
-     * @param webResponse the response corresponding to the script code. A weak reference to this object
-     * will be used as key for the cache.
+     * @param webResponse the response corresponding to the script code; a weak reference to this object
+     *        will be used as the key for the cache
      * @param script the parsed script to cache
      */
     public void cacheScript(final WebResponse webResponse, final Script script) {

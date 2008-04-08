@@ -61,17 +61,18 @@ public class WaitingRefreshHandler implements RefreshHandler {
     private static final Log LOG = LogFactory.getLog(ThreadManager.class);
 
     private final int maxwait_;
+
     /**
-     * Create a WaitingRefreshHandler that will wait whatever time the server or
-     * content asks unless it it longer than maxwait.
+     * Creates a new refresh handler that will wait whatever time the server or content asks, unless
+     * it it longer than <tt>maxwait</tt>. A value of <tt>maxwait</tt> that is less than <tt>1</tt>
+     * will cause the refresh handler to always wait for whatever time the server or content requests.
      *
-     * @param maxwait the maximum wait time before the refresh (in seconds). A value
-     * less than one (1) will cause WaitingRefreshHandler to wait for whatever time the server or content asks.
+     * @param maxwait the maximum wait time before the refresh (in seconds)
      */
     public WaitingRefreshHandler(final int maxwait) {
         maxwait_ = maxwait;
     }
-    
+
     /**
      * Create a WaitingRefreshHandler that will always wait whatever time the server or
      * content asks.
@@ -79,7 +80,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
     public WaitingRefreshHandler() {
         maxwait_ = 0;
     }
-    
+
     /**
      * Refreshes the specified page using the specified URL after the specified number
      * of seconds.

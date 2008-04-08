@@ -180,16 +180,16 @@ public class HTMLFormElement extends HTMLElement {
     }
 
     /**
-     * Gets the onsubmit event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onsubmit</tt> event handler for this element.
+     * @return the <tt>onsubmit</tt> event handler for this element
      */
     public Object jsxGet_onsubmit() {
         return getEventHandlerProp("onsubmit");
     }
 
     /**
-     * Sets the onsubmit event handler for this element.
-     * @param onsubmit the new handler
+     * Sets the <tt>onsubmit</tt> event handler for this element.
+     * @param onsubmit the <tt>onsubmit</tt> event handler for this element
      */
     public void jsxSet_onsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);

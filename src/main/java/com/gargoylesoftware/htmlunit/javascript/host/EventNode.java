@@ -59,256 +59,256 @@ public class EventNode extends Node {
     private static final long serialVersionUID = 4894810197917509182L;
 
     /**
-     * Sets the onclick event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onclick</tt> event handler for this element.
+     * @param handler the <tt>onclick</tt> event handler for this element
      */
     public void jsxSet_onclick(final Object handler) {
         setEventHandlerProp("onclick", handler);
     }
 
     /**
-     * Gets the onclick event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onclick</tt> event handler for this element.
+     * @return the <tt>onclick</tt> event handler for this element
      */
     public Object jsxGet_onclick() {
         return getEventHandlerProp("onclick");
     }
 
     /**
-     * Sets the ondblclick event handler for this element.
-     * @param handler the new handler
-     **/
+     * Sets the <tt>ondblclick</tt> event handler for this element.
+     * @param handler the <tt>ondblclick</tt> event handler for this element
+     */
     public void jsxSet_ondblclick(final Object handler) {
         setEventHandlerProp("ondblclick", handler);
     }
 
     /**
-     * Gets the ondblclick event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>ondblclick</tt> event handler for this element.
+     * @return the <tt>ondblclick</tt> event handler for this element
      */
     public Object jsxGet_ondblclick() {
         return getEventHandlerProp("ondblclick");
     }
 
     /**
-     * Sets the onblur event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onblur</tt> event handler for this element.
+     * @param handler the <tt>onblur</tt> event handler for this element
      */
     public void jsxSet_onblur(final Object handler) {
         setEventHandlerProp("onblur", handler);
     }
 
     /**
-     * Gets the onblur event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onblur</tt> event handler for this element.
+     * @return the <tt>onblur</tt> event handler for this element
      */
     public Object jsxGet_onblur() {
         return getEventHandlerProp("onblur");
     }
 
     /**
-     * Sets the onfocus event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onfocus</tt> event handler for this element.
+     * @param handler the <tt>onfocus</tt> event handler for this element
      */
     public void jsxSet_onfocus(final Object handler) {
         setEventHandlerProp("onfocus", handler);
     }
 
     /**
-     * Gets the onfocus event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onfocus</tt> event handler for this element.
+     * @return the <tt>onfocus</tt> event handler for this element
      */
     public Object jsxGet_onfocus() {
         return getEventHandlerProp("onfocus");
     }
 
     /**
-     * Sets the onfocusin event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onfocusin</tt> event handler for this element.
+     * @param handler the <tt>onfocusin</tt> event handler for this element
      */
     public void jsxSet_onfocusin(final Object handler) {
         setEventHandlerProp("onfocusin", handler);
     }
 
     /**
-     * Gets the onfocusin event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onfocusin</tt> event handler for this element.
+     * @return the <tt>onfocusin</tt> event handler for this element
      */
     public Object jsxGet_onfocusin() {
         return getEventHandlerProp("onfocusin");
     }
 
     /**
-     * Sets the onfocusout event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onfocusout</tt> event handler for this element.
+     * @param handler the <tt>onfocusout</tt> event handler for this element
      */
     public void jsxSet_onfocusout(final Object handler) {
         setEventHandlerProp("onfocusout", handler);
     }
 
     /**
-     * Gets the onfocusout event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onfocusout</tt> event handler for this element.
+     * @return the <tt>onfocusout</tt> event handler for this element
      */
     public Object jsxGet_onfocusout() {
         return getEventHandlerProp("onfocusout");
     }
 
     /**
-     * Sets the onkeydown event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onkeydown</tt> event handler for this element.
+     * @param handler the <tt>onkeydown</tt> event handler for this element
      */
     public void jsxSet_onkeydown(final Object handler) {
         setEventHandlerProp("onkeydown", handler);
     }
 
     /**
-     * Gets the onkeydown event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onkeydown</tt> event handler for this element.
+     * @return the <tt>onkeydown</tt> event handler for this element
      */
     public Object jsxGet_onkeydown() {
         return getEventHandlerProp("onkeydown");
     }
 
     /**
-     * Sets the onkeypress event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onkeypress</tt> event handler for this element.
+     * @param handler the <tt>onkeypress</tt> event handler for this element
      */
     public void jsxSet_onkeypress(final Object handler) {
         setEventHandlerProp("onkeypress", handler);
     }
 
     /**
-     * Gets the onkeypress event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onkeypress</tt> event handler for this element.
+     * @return the <tt>onkeypress</tt> event handler for this element
      */
     public Object jsxGet_onkeypress() {
         return getEventHandlerProp("onkeypress");
     }
 
     /**
-     * Sets the onkeyup event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onkeyup</tt> event handler for this element.
+     * @param handler the <tt>onkeyup</tt> event handler for this element
      */
     public void jsxSet_onkeyup(final Object handler) {
         setEventHandlerProp("onkeyup", handler);
     }
 
     /**
-     * Gets the onkeyup event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onkeyup</tt> event handler for this element.
+     * @return the <tt>onkeyup</tt> event handler for this element
      */
     public Object jsxGet_onkeyup() {
         return getEventHandlerProp("onkeyup");
     }
 
     /**
-     * Sets the onmousedown event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onmousedown</tt> event handler for this element.
+     * @param handler the <tt>onmousedown</tt> event handler for this element
      */
     public void jsxSet_onmousedown(final Object handler) {
         setEventHandlerProp("onmousedown", handler);
     }
 
     /**
-     * Gets the onmousedown event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onmousedown</tt> event handler for this element.
+     * @return the <tt>onmousedown</tt> event handler for this element
      */
     public Object jsxGet_onmousedown() {
         return getEventHandlerProp("onmousedown");
     }
 
     /**
-     * Sets the onmousemove event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onmousemove</tt> event handler for this element.
+     * @param handler the <tt>onmousemove</tt> event handler for this element
      */
     public void jsxSet_onmousemove(final Object handler) {
         setEventHandlerProp("onmousemove", handler);
     }
 
     /**
-     * Gets the onmousemove event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onmousemove</tt> event handler for this element.
+     * @return the <tt>onmousemove</tt> event handler for this element
      */
     public Object jsxGet_onmousemove() {
         return getEventHandlerProp("onmousemove");
     }
 
     /**
-     * Sets the onmouseout event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onmouseout</tt> event handler for this element.
+     * @param handler the <tt>onmouseout</tt> event handler for this element
      */
     public void jsxSet_onmouseout(final Object handler) {
         setEventHandlerProp("onmouseout", handler);
     }
 
     /**
-     * Gets the onmouseout event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onmouseout</tt> event handler for this element.
+     * @return the <tt>onmouseout</tt> event handler for this element
      */
     public Object jsxGet_onmouseout() {
         return getEventHandlerProp("onmouseout");
     }
 
     /**
-     * Sets the onmouseover event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onmouseover</tt> event handler for this element.
+     * @param handler the <tt>onmouseover</tt> event handler for this element
      */
     public void jsxSet_onmouseover(final Object handler) {
         setEventHandlerProp("onmouseover", handler);
     }
 
     /**
-     * Gets the onmouseover event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onmouseover</tt> event handler for this element.
+     * @return the <tt>onmouseover</tt> event handler for this element
      */
     public Object jsxGet_onmouseover() {
         return getEventHandlerProp("onmouseover");
     }
 
     /**
-     * Sets the onmouseup event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onmouseup</tt> event handler for this element.
+     * @param handler the <tt>onmouseup</tt> event handler for this element
      */
     public void jsxSet_onmouseup(final Object handler) {
         setEventHandlerProp("onmouseup", handler);
     }
 
     /**
-     * Gets the onmouseup event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onmouseup</tt> event handler for this element.
+     * @return the <tt>onmouseup</tt> event handler for this element
      */
     public Object jsxGet_onmouseup() {
         return getEventHandlerProp("onmouseup");
     }
 
     /**
-     * Sets the oncontextmenu event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>oncontextmenu</tt> event handler for this element.
+     * @param handler the <tt>oncontextmenu</tt> event handler for this element
      */
     public void jsxSet_oncontextmenu(final Object handler) {
         setEventHandlerProp("oncontextmenu", handler);
     }
 
     /**
-     * Gets the oncontextmenu event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>oncontextmenu</tt> event handler for this element.
+     * @return the <tt>oncontextmenu</tt> event handler for this element
      */
     public Object jsxGet_oncontextmenu() {
         return getEventHandlerProp("oncontextmenu");
     }
 
     /**
-     * Sets the onresize event handler for this element.
-     * @param handler the new handler
+     * Sets the <tt>onresize</tt> event handler for this element.
+     * @param handler the <tt>onresize</tt> event handler for this element
      */
     public void jsxSet_onresize(final Object handler) {
         setEventHandlerProp("onresize", handler);
     }
 
     /**
-     * Gets the onresize event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onresize</tt> event handler for this element.
+     * @return the <tt>onresize</tt> event handler for this element
      */
     public Object jsxGet_onresize() {
         return getEventHandlerProp("onresize");

@@ -82,7 +82,7 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * @return the <code>java.io.File</code> object if the file exists, else <code>null</code>
+     * @return the {@link File} object if the file exists, else <tt>null</tt>
      */
     public File getFile() {
         return fileObject_;

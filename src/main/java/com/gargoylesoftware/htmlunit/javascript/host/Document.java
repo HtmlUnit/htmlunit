@@ -1245,13 +1245,11 @@ public class Document extends EventNode {
     /**
      * Implementation of the {@link org.w3c.dom.events.DocumentEvent} interface's
      * {@link org.w3c.dom.events.DocumentEvent#createEvent(String)} method. The method creates an
-     * event of the specified type.
+     * uninitialized event of the specified type.
      *
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-DocumentEvent">DocumentEvent</a>
      * @param eventType the event type to create
-     * @return the associated event object for that type. The event object will NOT have had its
-     *         initialization method called. It is up to the caller of the method to initialize the
-     *         event.
+     * @return an event object for the specified type
      * @throws DOMException if the event type is not supported (will have a type of
      *         DOMException.NOT_SUPPORTED_ERR)
      */
@@ -1374,7 +1372,7 @@ public class Document extends EventNode {
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536419.aspx">MSDN documentation</a>
      * @param cmd the command identifier
      * @param userInterface display a user interface if the command supports one
-     * @param value the string, number, or other value to assign. Possible values depend on the command
+     * @param value the string, number, or other value to assign (possible values depend on the command)
      * @return <code>true></code> if the command is successful
      */
     public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {

@@ -144,22 +144,23 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Init the content of this collection. The elements will be "calculated" at each
-     * access using the xpath applied on the node.
-     * @param node the node to serve as root for the xpath expression
-     * @param xpath the xpath giving the elements of the collection
+     * Initializes the content of this collection. The elements will be "calculated" at each
+     * access using the specified XPath expression, applied to the specified node.
+     * @param node the node to serve as root for the XPath expression
+     * @param xpath the XPath expression which determines the elements of the collection
      */
     public void init(final DomNode node, final String xpath) {
         init(node, xpath, NOPTransformer.INSTANCE);
     }
 
     /**
-     * Init the content of this collection. The elements will be "calculated" at each
-     * access using the xpath applied on the node and transformed using the transformer.
-     * @param node the node to serve as root for the xpath expression
-     * @param xpath the xpath giving the elements of the collection
-     * @param transformer the transformer allowing to get the expected objects from the xpath
-     * evaluation
+     * Initializes the content of this collection. The elements will be "calculated" at each
+     * access using the specified XPath expression, applied to the specified node, and
+     * transformed using the specified transformer.
+     * @param node the node to serve as root for the XPath expression
+     * @param xpath the XPath expression which determines the elements of the collection
+     * @param transformer the transformer enabling the retrieval of the expected objects from
+     *        the results of the XPath evaluation
      */
     public void init(final DomNode node, final String xpath, final Transformer transformer) {
         if (node != null) {
@@ -176,7 +177,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Init the collection. The elements will be "calculated" as the children of the node.
+     * Initializes the collection. The elements will be "calculated" as the children of the node.
      * @param node the node to grab children from
      */
     public void initFromChildren(final DomNode node) {

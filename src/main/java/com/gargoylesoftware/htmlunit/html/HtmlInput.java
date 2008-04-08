@@ -453,8 +453,8 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * and the change in the element must not have been triggered by a script.
      *
      * @param htmlElement the element that contains the onchange attribute
-     * @return the page that occupies this window after this method completes. It
-     * may be this or it may be a freshly loaded page.
+     * @return the page that occupies this window after this method completes (may or
+     *         may not be the same as the original page)
      */
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
         final HtmlPage page = htmlElement.getPage();

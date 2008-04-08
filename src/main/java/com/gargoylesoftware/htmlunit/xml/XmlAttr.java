@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * An attribute of an element. Attributes are stored in {@link XmlElement},
- * but the xpath engine expects attributes to be in a {@link DomNode}.
+ * but the XPath engine expects attributes to be in a {@link DomNode}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -62,10 +62,10 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     private String value_;
 
     /**
-     * Instantiate a new attribute.
+     * Instantiates a new attribute.
      *
      * @param xmlElement the parent element
-     * @param mapEntry the wrapped Map.Entry
+     * @param mapEntry the wrapped map entry
      * @deprecated Use constructor with explicit names.
      */
     public XmlAttr(final XmlElement xmlElement, final Map.Entry<String, String> mapEntry) {
@@ -75,10 +75,10 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
     }
 
     /**
-     * Instantiate a new attribute.
+     * Instantiates a new attribute.
      *
      * @param page the page that the attribute belongs to
-     * @param namespaceURI the namespace that defines the attribute name. May be null
+     * @param namespaceURI the namespace that defines the attribute name (may be <tt>null</tt>)
      * @param qualifiedName the name of the attribute
      * @param value the value of the attribute
      */

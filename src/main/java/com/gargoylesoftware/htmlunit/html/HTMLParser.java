@@ -242,7 +242,7 @@ public final class HTMLParser {
      * @param webWindow the web window into which the page is to be loaded
      * @return the page object which forms the root of the DOM tree, or <code>null</code> if the &lt;HTML&gt;
      * tag is missing
-     * @throws java.io.IOException IO error
+     * @throws IOException if there is an IO error
      */
     public static HtmlPage parse(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final URL url = webResponse.getUrl();

@@ -155,7 +155,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
     }
 
     /**
-     * Tests xpath where results are attributes.
+     * Tests XPath where results are attributes.
      * @throws Exception if test fails
      */
     @Test

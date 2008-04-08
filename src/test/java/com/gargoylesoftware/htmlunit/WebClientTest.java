@@ -1048,8 +1048,8 @@ public class WebClientTest extends WebTestCase {
     /**
      * Returns a loaded page for one of the keyboard tests.
      * @param webClient the WebClient to load the page from
-     * @param tabIndexValues the tab index values. One input will be created for each item
-     * in this list.
+     * @param tabIndexValues the tab index values; one input will be created for each item
+     *        in this list
      * @return the loaded page
      * @throws Exception if something goes wrong
      */

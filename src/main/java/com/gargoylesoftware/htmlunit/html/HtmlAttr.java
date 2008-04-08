@@ -43,7 +43,7 @@ import org.w3c.dom.TypeInfo;
 
 /**
  * An attribute of an element. Attributes are stored in {@link HtmlElement},
- * but the xpath engine expects attributes to be in a {@link DomNode}.
+ * but the XPath engine expects attributes to be in a {@link DomNode}.
  *
  * @version $Revision$
  * @author Denis N. Antonioli

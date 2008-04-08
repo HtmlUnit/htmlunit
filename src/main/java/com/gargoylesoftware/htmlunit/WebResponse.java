@@ -104,9 +104,9 @@ public interface WebResponse {
     SubmitMethod getRequestMethod();
 
     /**
-     * Returns the response headers as a List of {@link org.apache.commons.httpclient.NameValuePair}s.
+     * Returns the response headers as a list of {@link org.apache.commons.httpclient.NameValuePair}s.
      *
-     * @return a List of {@link org.apache.commons.httpclient.NameValuePair}s
+     * @return the response headers as a list of {@link org.apache.commons.httpclient.NameValuePair}s
      */
     List<NameValuePair> getResponseHeaders();
 

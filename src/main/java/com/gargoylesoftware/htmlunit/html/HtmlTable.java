@@ -392,8 +392,8 @@ public class HtmlTable extends ClickableElement {
 
         /**
          * Sets the internal position to the next row, starting at the given node.
-         * @param node the node to mark as the next row. If this is not a row, the
-         * next reachable row will be marked.
+         * @param node the node to mark as the next row; if this is not a row, the
+         *        next reachable row will be marked.
          */
         private void setNextRow(final DomNode node) {
             nextRow_ = null;

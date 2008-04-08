@@ -84,12 +84,12 @@ public class XSLTProcessor extends SimpleScriptable {
     }
 
     /**
-     * Import the stylesheet into this XSLTProcessor for transformations.
+     * Imports the specified stylesheet into this XSLTProcessor for transformations. The specified node
+     * may be either a document node or an element node. If it is a document node, then the document can
+     * contain either a XSLT stylesheet or a LRE stylesheet. If it is an element node, it must be the
+     * xsl:stylesheet (or xsl:transform) element of an XSLT stylesheet.
      *
-     * @param style the root-node of a XSLT stylesheet. This can be either a document node or an element node
-     *              If a document node then the document can contain either a XSLT stylesheet or a LRE stylesheet.
-     *              If the argument is an element node it must be the xsl:stylesheet (or xsl:transform) element
-     *              of an XSLT stylesheet.
+     * @param style the root-node of an XSLT stylesheet (may be a document node or an element node)
      */
     public void jsxFunction_importStylesheet(final Node style) {
         style_ = style;

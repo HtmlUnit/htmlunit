@@ -124,12 +124,12 @@ public final class UrlUtils {
 
     /**
      * Creates a new URL based on the specified fragments.
-     * @param protocol the protocol to use. May not be <tt>null</tt>
-     * @param host the host to use. May not be <tt>null</tt>
-     * @param port the port to use. May be <tt>-1</tt> if no port is specified
-     * @param path the path to use. May be <tt>null</tt> and may omit the initial <tt>'/'</tt>
-     * @param ref the reference to use. May be <tt>null</tt>. Must not include the <tt>'#'</tt>
-     * @param query the query to use. May be <tt>null</tt>. Must not include the <tt>'?'</tt>
+     * @param protocol the protocol to use (may not be <tt>null</tt>)
+     * @param host the host to use (may not be <tt>null</tt>)
+     * @param port the port to use (may be <tt>-1</tt> if no port is specified)
+     * @param path the path to use (may be <tt>null</tt> and may omit the initial <tt>'/'</tt>)
+     * @param ref the reference to use (may be <tt>null</tt> and must not include the <tt>'#'</tt>)
+     * @param query the query to use (may be <tt>null</tt> and must not include the <tt>'?'</tt>)
      * @return a new URL based on the specified fragments
      * @throws MalformedURLException if there is a problem creating the new URL
      */

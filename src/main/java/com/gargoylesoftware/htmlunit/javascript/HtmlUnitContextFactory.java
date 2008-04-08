@@ -89,7 +89,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * Returns the number of milliseconds a script is allowed to execute before
      * being terminated. A value of 0 or less means no timeout.
      *
-     * @return the timeout value. Default value is 0
+     * @return the timeout value (default value is <tt>0</tt>)
      */
     public static long getTimeout() {
         return Timeout_;

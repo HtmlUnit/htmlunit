@@ -40,7 +40,7 @@ package com.gargoylesoftware.htmlunit.html;
 import org.xml.sax.Attributes;
 
 /**
- * Specification of a factory capable of creating HtmlElement objects.
+ * Specification of a factory capable of creating {@link HtmlElement} objects.
  *
  * @version $Revision$
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -48,30 +48,29 @@ import org.xml.sax.Attributes;
  */
 public interface IElementFactory {
     /**
-     * Creates an element according to this factory's specification.
-     * @param page the enclosing page for the new element. Note that the element is <em>not</em> yet added
-     * into the DOM tree.
-     * @param tagName the tag name. Most factories will be responsible for a specific tag, but this
-     * parameter is passed in for factories that don't follow this rule
-     * @param attributes the attributes encountered during XML/HTML parsing. Possibly <code>null</code>
-     * if no attributes specified
+     * Creates an element according to this factory's specification. Note that even though this method
+     * takes a page parameter, the element is <em>not</em> automatically added to the page's DOM tree.
+     *
+     * @param page the enclosing page for the new element
+     * @param tagName the tag name (most factories will be responsible for a specific tag, but this
+     *        parameter is passed in for factories that don't follow this rule)
+     * @param attributes the attributes encountered during XML/HTML parsing (possibly <tt>null</tt>
+     *        if no attributes specified
      * @return the newly created and initialized element
      */
-    HtmlElement createElement(
-            final HtmlPage page, final String tagName,
-            final Attributes attributes);
+    HtmlElement createElement(final HtmlPage page, final String tagName, final Attributes attributes);
 
     /**
-     * Creates an element according to this factory's specification.
-     * @param page the enclosing page for the new element. Note that the element is <em>not</em> yet added
-     * into the DOM tree.
+     * Creates an element according to this factory's specification. Note that even though this method
+     * takes a page parameter, the element is <em>not</em> automatically added to the page's DOM tree.
+     *
+     * @param page the enclosing page for the new element
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @param attributes the attributes encountered during XML/HTML parsing. Possibly <code>null</code>
-     * if no attributes specified
+     * @param attributes the attributes encountered during XML/HTML parsing (possibly <tt>null</tt>
+     *        if no attributes specified
      * @return the newly created and initialized element
      */
-    HtmlElement createElementNS(
-            final HtmlPage page, final String namespaceURI, final String qualifiedName,
-            final Attributes attributes);
+    HtmlElement createElementNS(final HtmlPage page, final String namespaceURI, final String qualifiedName,
+        final Attributes attributes);
 }

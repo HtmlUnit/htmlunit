@@ -865,13 +865,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * </p>
      *
      * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name for this chunk of code. This name will be displayed
-     * in any error messages.
-     * @param htmlElement the HTML element for which this script is being executed
-     * This element will be the context during the JavaScript execution. If null,
-     * the context will default to the window.
-     * @return a ScriptResult which will contain both the current page (which may be different than
-     * the previous page and a JavaScript result object.
+     * @param sourceName the name for this chunk of code (will be displayed in error messages)
+     * @param htmlElement the HTML element for which this script is being executed; will be the
+     *        context during the JavaScript execution; if <tt>null</tt>, the context will default
+     *        to the window
+     * @return a ScriptResult which will contain both the current page (which may be different
+     *         than the previous page and a JavaScript result object
      * @deprecated use {@link #executeJavaScript(String)} instead
      */
     public ScriptResult executeJavaScriptIfPossible(final String sourceCode, final String sourceName,
@@ -895,8 +894,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * </p>
      *
      * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name for this chunk of code. This name will be displayed
-     * in any error messages.
+     * @param sourceName the name for this chunk of code (will be displayed in error messages)
      * @param startLine the line at which the script source starts
      * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page and a JavaScript result object.
@@ -1442,8 +1440,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @param accessKey the key that will be pressed
      * @return the element that has the focus after pressing this access key or null if no element
      * has the focus.
-     * @throws IOException if an io error occurs during the processing of this access key. This
-     * would only happen if the access key triggered a button which in turn caused a page load.
+     * @throws IOException if an IO error occurs during the processing of this access key (this
+     *         would only happen if the access key triggered a button which in turn caused a page load)
      */
     public HtmlElement pressAccessKey(final char accessKey) throws IOException {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
@@ -1889,14 +1887,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @SuppressWarnings("unchecked")
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
-        //May be done in single xpath search?
+        // May be done in single XPath search?
         final List<HtmlRadioButtonInput> pageInputs =
             (List<HtmlRadioButtonInput>) getByXPath("//input[lower-case(@type)='radio' "
                 + "and @name='" + radioButtonInput.getNameAttribute() + "']");
         final List<HtmlRadioButtonInput> formInputs =
             (List<HtmlRadioButtonInput>) getByXPath("//form//input[lower-case(@type)='radio' "
                 + "and @name='" + radioButtonInput.getNameAttribute() + "']");
-            
+
         pageInputs.removeAll(formInputs);
 
         for (final HtmlRadioButtonInput input : pageInputs) {

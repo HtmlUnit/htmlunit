@@ -38,18 +38,19 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A handler for JavaScript window.confirm(). Confirms are triggered when the JavaScript
- * method Window.confirm() is called.
+ * A handler for the JavaScript function <tt>window.confirm()</tt>. Confirms
+ * are triggered when the JavaScript function <tt>window.confirm()</tt> is invoked.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface ConfirmHandler {
     /**
-     * Handle an alert for the given page.
-     * @param page the page on which the alert occurred
-     * @param message the message in the alert
-     * @return true if we are simulating the ok button. False for the cancel button
+     * Handles a confirm for the specified page.
+     * @param page the page on which the confirm occurred
+     * @param message the message in the confirm
+     * @return <tt>true</tt> if we are simulating clicking the OK button,
+     *         <tt>false</tt> if we are simulating clicking the Cancel button
      */
     boolean handleConfirm(final Page page, final String message);
 }

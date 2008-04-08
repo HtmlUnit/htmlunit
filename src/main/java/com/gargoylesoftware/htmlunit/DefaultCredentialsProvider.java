@@ -136,13 +136,13 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds NTLM credentials for the specified username/password on the specified host/port.
-     * @param username the username for the new credentials. This should not include the domain to authenticate with
-     * For example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
+     * @param username the username for the new credentials; should not include the domain to authenticate with;
+     *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not
      * @param password the password for the new credentials
      * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param clientHost the host the authentication request is originating from. Essentially, the computer name for
-     * this machine.
+     * @param clientHost the host the authentication request is originating from; essentially, the computer name for
+     *        this machine.
      * @param clientDomain the domain to authenticate within
      */
     public void addNTLMCredentials(final String username, final String password, final String host,
@@ -155,13 +155,13 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
     /**
      * Adds NTLM proxy credentials for the specified username/password on the specified host/port.
-     * @param username the username for the new credentials. This should not include the domain to authenticate with
-     * For example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
+     * @param username the username for the new credentials; should not include the domain to authenticate with;
+     *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
      * @param password the password for the new credentials
      * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param clientHost the host the authentication request is originating from. Essentially, the computer name for
-     * this machine.
+     * @param clientHost the host the authentication request is originating from; essentially, the computer name for
+     *        this machine
      * @param clientDomain the domain to authenticate within
      */
     public void addNTLMProxyCredentials(final String username, final String password, final String host,

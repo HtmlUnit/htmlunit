@@ -114,16 +114,16 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the onload event handler for this element.
-     * @param eventHandler the new handler
+     * Sets the <tt>onload</tt> event handler for this element.
+     * @param eventHandler the <tt>onload</tt> event handler for this element
      */
     public void jsxSet_onload(final Object eventHandler) {
         setEventHandlerProp("onload", eventHandler);
     }
 
     /**
-     * Gets the onload event handler for this element.
-     * @return <code>org.mozilla.javascript.Function</code>
+     * Returns the <tt>onload</tt> event handler for this element.
+     * @return the <tt>onload</tt> event handler for this element
      */
     public Object jsxGet_onload() {
         return getEventHandlerProp("onload");

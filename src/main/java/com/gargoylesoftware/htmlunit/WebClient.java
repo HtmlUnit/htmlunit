@@ -375,8 +375,8 @@ public class WebClient implements Serializable {
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
      *
      * @param opener the web window that initiated the request
-     * @param target the name of the window to be opened. This is the name that would
-     * be passed into the JavaScript open() method.
+     * @param target the name of the window to be opened (the name that will be passed into the
+     *        JavaScript <tt>open()</tt> method)
      * @param params any parameters
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property

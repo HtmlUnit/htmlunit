@@ -38,18 +38,17 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * A handler for onbeforeunload event.
+ * A handler for <tt>onbeforeunload</tt> events.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 public interface OnbeforeunloadHandler {
-
     /**
-     * Handle an onbeforeunload event for the given page.
+     * Handles an <tt>onbeforeunload</tt> event for the specified page.
      * @param page the page on which the event occurred
-     * @param message the message in the event
-     * @return true if we are simulating the ok button. False for the cancel button
+     * @param returnValue the event's <tt>returnValue</tt>
+     * @return <tt>true</tt> to accept the event, <tt>false</tt> otherwise
      */
-    boolean handleEvent(final Page page, final String message);
+    boolean handleEvent(final Page page, final String returnValue);
 }

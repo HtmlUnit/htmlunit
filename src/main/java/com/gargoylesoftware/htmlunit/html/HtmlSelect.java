@@ -264,8 +264,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @param isSelected true if the option is to become selected
      * @param optionValue the value of the option that is to change
-     * @return the page that occupies this window after this change is made. It
-     * may be the same window or it may be a freshly loaded one.
+     * @return the page that occupies this window after this change is made (may or
+     *         may not be the same as the original page)
      */
     public Page setSelectedAttribute(final String optionValue, final boolean isSelected) {
         try {
@@ -284,8 +284,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption the value of the option that is to change
-     * @return the page that occupies this window after this change is made. It
-     * may be the same window or it may be a freshly loaded one.
+     * @return the page that occupies this window after this change is made (may or
+     *         may not be the same as the original page)
      */
     public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         if (isSelected) {

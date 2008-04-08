@@ -189,8 +189,8 @@ public class Node extends SimpleScriptable {
     }
 
     /**
-     * Duplicate an XML node.
-     * @param deep If true, recursively clone all descendants. Otherwise, just clone this node
+     * Clones this node.
+     * @param deep if <tt>true</tt>, recursively clones all descendants
      * @return the newly cloned node
      */
     public Object jsxFunction_cloneNode(final boolean deep) {
@@ -277,7 +277,7 @@ public class Node extends SimpleScriptable {
     /**
      * Removes a DOM node from this node.
      * @param childObject the node to remove from this node
-     * @return the removed child node.
+     * @return the removed child node
      */
     public Object jsxFunction_removeChild(final Object childObject) {
         Object removedChild = null;

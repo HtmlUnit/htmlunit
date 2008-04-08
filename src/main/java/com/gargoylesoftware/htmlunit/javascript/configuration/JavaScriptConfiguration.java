@@ -542,7 +542,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Returns the class for the given class name.
-     * @param classname the classname that you want the implementing class for. For testing only
+     * @param classname the classname that you want the implementing class for  (for testing only)
      * @return the class for the given class name
      */
     protected Class< ? > getClassObject(final String classname) {
