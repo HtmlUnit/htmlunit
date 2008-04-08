@@ -77,7 +77,7 @@
                     <li>
                         Assuming that everything has gone smoothly so far, make sure everything is checked
                         in and tag the repository (to https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/tags/) 
-                        with a name like this "HtmlUnit-1dot1" that reflects the current build version.
+                        with a name like this "HtmlUnit-2.0" that reflects the current build version.
                     </li>
                     <li>Deploy the release to HtmlUnit Maven repository (which is synchronized with the main repository)
                         <source>mvn deploy</source>

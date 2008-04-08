@@ -78,23 +78,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <!-- There is clover plugin in 'reporting' section -->
-                <artifactId>maven-clover-plugin</artifactId>
-                <groupId>com.atlassian.maven.plugins</groupId>
-                <configuration>
-                    <licenseLocation>${basedir}/clover.license</licenseLocation>
-                    <jdk>1.5</jdk>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>instrument</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
     <reporting>
@@ -106,10 +89,9 @@
                     <excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl:com.gargoylesoftware.htmlunit.html.xpath</excludePackageNames>
                     <links>
                         <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
-                        <link>http://jakarta.apache.org/commons/logging/apidocs/</link>
-                        <link>http://jakarta.apache.org/commons/codec/apidocs/</link>
-                        <link>http://jakarta.apache.org/commons/httpclient/apidocs/</link>
-                        <link>http://www.jaxen.org/apidocs/</link>
+                        <link>http://commons.apache.org/logging/apidocs/</link>
+                        <link>http://commons.apache.org/codec/apidocs/</link>
+                        <link>http://hc.apache.org/httpclient-3.x/apidocs/</link>
                     </links>
                     <stylesheet>maven</stylesheet>
                 </configuration>
@@ -143,14 +125,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jdepend-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-clover-plugin</artifactId>
-                <configuration>
-                    <licenseLocation>${basedir}/clover.license</licenseLocation>
-                    <jdk>1.5</jdk>
-                </configuration>
             </plugin>
         </plugins>
     </reporting>
