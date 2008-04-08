@@ -53,7 +53,7 @@ mvn2home
 				defaultsuffix="@users.sourceforge.net"
 				reportsuccess="always"
 				logdir="&basedir;/htmlunit/cruisecontrol/logs"
-				xsldir="&basedir;/htmlunit/cruisecontrol/checkout/cruise/reporting-app/xsl"
+				xslfile="&basedir;/htmlunit/cruisecontrol/checkout/cruise/htmlmail.xsl"
 				>
 				<always address="mguillemot@yahoo.fr"/>
 				<always address="build-support@canoo.com"/>
