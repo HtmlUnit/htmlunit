@@ -142,7 +142,11 @@ public class HTMLInputElement extends FormField {
      * Select this element.
      */
     public void jsxFunction_select() {
-        ((HtmlTextInput) getDomNodeOrDie()).select();
+        final HtmlInput input = getHtmlInputOrDie();
+        if (input instanceof HtmlTextInput) {
+            ((HtmlTextInput) getDomNodeOrDie()).select();
+        }
+        // currently nothing for other input types
     }
 
     /**

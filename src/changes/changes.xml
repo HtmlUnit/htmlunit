@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.1-SNAPSHOT" description="something">
+            <action type="fix" dev="mguillem">
+                JavaScript: fixed ClassCastException occuring when select() is called on form elements other than
+                text inputs.
+            </action>
             <action type="remove" dev="asashour">
                 Remove deprecated HtmlPage.executeJavaScriptIfPossible(), XmlAttr Map.Entry constructor
                 and WebClient.assertionFailed() 

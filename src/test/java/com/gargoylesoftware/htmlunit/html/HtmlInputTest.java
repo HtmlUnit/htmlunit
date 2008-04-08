@@ -282,4 +282,32 @@ public final class HtmlInputTest extends WebTestCase {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Tests that clicking a radio button will select it.
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void testSelect() throws Exception {
+        final String content
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var form = document.getElementById('form1');\n"
+            + "    for (var i=0; i<form.elements.length; ++i)\n"
+            + "      form.elements[i].select();\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<input type='radio' name='foo' value='1'/>\n"
+            + "<input type='password' name='pwd'/>\n"
+            + "<input type='checkbox' name='cb'/>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
+            + "<textarea name='t'></textarea>\n"
+            + "</form></body></html>";
+        
+        createTestPageForRealBrowserIfNeeded(content, new String[] {});
+        loadPage(content);
+    }
 }
