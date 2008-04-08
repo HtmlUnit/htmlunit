@@ -1132,7 +1132,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * @return an iterator over the children of this node
-     * @deprecated After 1.14, use {@link #getChildren()}.
+     * @deprecated As of 2.0, use {@link #getChildren()}.
      */
     public Iterator<DomNode> getChildIterator() {
         return new ChildIterator();

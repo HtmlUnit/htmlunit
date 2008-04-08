@@ -590,31 +590,6 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Throw an exception with the specified message. If junit is found in the
-     * classpath then a junit.framework.AssertionFailedError will be thrown
-     * (the same behavior as calling fail() in junit). If junit is not found
-     * then an IllegalStateException will be thrown instead of the
-     * AssertionFailedError. <p>
-     *
-     * Override this to provide custom behavior.
-     *
-     * @param message the failure message
-     * @deprecated
-     * @see WebAssert
-     */
-    public void assertionFailed(final String message) {
-        try {
-            final Class< ? > clazz = Class.forName("junit.framework.AssertionFailedError");
-            final Constructor< ? > constructor = clazz.getConstructor(new Class[]{String.class});
-            final Error error = (Error) constructor.newInstance(new Object[]{message});
-            throw error;
-        }
-        catch (final Exception e) {
-            throw new IllegalStateException(message);
-        }
-    }
-
-    /**
      * This method is intended for testing only - use at your own risk.
      * @return the current JavaScript engine (never <code>null</code>)
      */

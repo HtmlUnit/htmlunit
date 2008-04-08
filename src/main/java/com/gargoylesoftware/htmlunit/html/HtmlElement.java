@@ -538,7 +538,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return an iterator over the {@link HtmlAttr} objects representing the
      * attributes of this element.
      * The elements are ordered as found in the HTML source code.
-     * @deprecated As of version 2.0
+     * @deprecated As of 2.0
      */
     public Iterator<HtmlAttr> getAttributeEntriesIterator() {
         return getAttributesCollection().iterator();
@@ -1008,7 +1008,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
     /**
      * @return an iterator over the HtmlElement children of this object, i.e. excluding the non-element nodes
-     * @deprecated After 1.14, use {@link #getChildElements()}.
+     * @deprecated As of 2.0, use {@link #getChildElements()}.
      */
     public final Iterator<HtmlElement> getChildElementsIterator() {
         return new ChildElementsIterator();

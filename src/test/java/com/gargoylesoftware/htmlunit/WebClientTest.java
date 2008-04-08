@@ -163,23 +163,6 @@ public class WebClientTest extends WebTestCase {
     }
 
     /**
-     * Test that {@link WebClient#assertionFailed(String)} actually throws an exception.
-     * @deprecated
-     */
-    @Test
-    public void testAssertionFailed() {
-        final WebClient client = new WebClient();
-
-        try {
-            client.assertionFailed("foobar");
-            fail("Expected AssertionFailedError");
-        }
-        catch (final junit.framework.AssertionFailedError e) {
-            assertEquals("foobar", e.getMessage());
-        }
-    }
-
-    /**
      * Test that the {@link WebWindowEvent#CHANGE} window event gets fired at the
      * appropriate time.
      * @throws Exception if something goes wrong
