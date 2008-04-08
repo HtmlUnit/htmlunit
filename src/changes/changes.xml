@@ -13,7 +13,7 @@
             </action>
             <action type="remove" dev="asashour">
                 Remove deprecated HtmlPage.executeJavaScriptIfPossible(), XmlAttr Map.Entry constructor
-                and WebClient.assertionFailed() 
+                and WebClient.assertionFailed()
             </action>
         </release>
         <release version="2.0" date="Apr 7, 2008" description="Migration to Java 5, implementation of org.w3c.dom.*, better support for incorrect html code, large improvements in JavaScript support (GWT 1.4 tests now pass, ...)">
