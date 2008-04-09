@@ -263,7 +263,7 @@
                 JavaScript: add support for Range.createContextualFragment (FF only).
             </action>
             <action type="update" dev="asashour">
-                JavaScript: <code>__proto__</code> is only defined for Firefox.
+                JavaScript: <![CDATA[<code>]]>__proto__<![CDATA[</code>]]> is only defined for Firefox.
             </action>
             <action type="fix" dev="mguillem" id="1464948">
                 Handle line comments in multiline onXxxx events handlers declarations.
@@ -331,7 +331,7 @@
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: HTMLCollection should not have 'tags' property in Firefox
-                (except for <code>document.all</code>).
+                (except for <![CDATA[<code>]]>document.all<![CDATA[</code>]]>).
             </action>
             <action type="add" dev="asashour">
                 HtmlTextInput and HtmlTextArea: Add support for select(), and fix tabIndex JavaScript property.
