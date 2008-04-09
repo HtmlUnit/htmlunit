@@ -75,15 +75,17 @@ public class CodeStyleTest {
      */
     @After
     public void after() {
+        final StringBuilder sb = new StringBuilder();
         for (final String error : errors_) {
-            System.err.println(error);
+            sb.append("\n" + error);
         }
+        
         final int errorsNumber = errors_.size();
         if (errorsNumber == 1) {
-            fail("CodeStyle error");
+            fail("CodeStyle error: " + sb);
         }
         else if (errorsNumber > 1) {
-            fail("CodeStyle " + errorsNumber + " errors");
+            fail("CodeStyle " + errorsNumber + " errors: " + sb);
         }
     }
 
