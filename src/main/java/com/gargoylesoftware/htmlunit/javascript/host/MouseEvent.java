@@ -91,8 +91,8 @@ public class MouseEvent extends UIEvent {
     /** The button code for IE (1: left button, 4: middle button, 2: right button). */
     private static final int[] buttonCodeToIE = {1, 4, 2};
 
-    /** The mouse event's horizontal and vertical coordinates. */
-    private int screenX_, screenY_;
+    /** The mouse event's coordinates; initially <tt>null</tt> and lazily initialized for performance reasons. */
+    private Integer screenX_, screenY_;
 
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;
@@ -135,11 +135,6 @@ public class MouseEvent extends UIEvent {
         else {
             setDetail(1);
         }
-
-        // compute coordinates from the node
-        final HTMLElement target = (HTMLElement) jsxGet_target();
-        screenX_ = target.getPosX() + 10;
-        screenY_ = target.getPosY() + 10;
     }
 
     /**
@@ -162,14 +157,21 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
      */
     public int jsxGet_clientX() {
-        return screenX_;
+        return jsxGet_screenX();
     }
 
     /**
-     * The horizontal coordinate at which the event occurred relative to the origin of the screen coordinate system.
+     * The horizontal coordinate at which the event occurred relative to the origin of the screen
+     * coordinate system. The value of this attribute is initialized lazily, in order to optimize
+     * performance (it requires CSS parsing).
+     *
      * @return the horizontal coordinate
      */
     public int jsxGet_screenX() {
+        if (screenX_ == null) {
+            final HTMLElement target = (HTMLElement) jsxGet_target();
+            screenX_ = target.getPosX() + 10;
+        }
         return screenX_;
     }
 
@@ -179,7 +181,7 @@ public class MouseEvent extends UIEvent {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageX">Mozilla doc</a>
      */
     public int jsxGet_pageX() {
-        return screenX_;
+        return jsxGet_screenX();
     }
 
     /**
@@ -187,14 +189,21 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenY()})
      */
     public int jsxGet_clientY() {
-        return screenY_;
+        return jsxGet_screenY();
     }
 
     /**
-     * The vertical coordinate at which the event occurred relative to the origin of the screen coordinate system.
+     * The vertical coordinate at which the event occurred relative to the origin of the screen
+     * coordinate system. The value of this attribute is initialized lazily, in order to optimize
+     * performance (it requires CSS parsing).
+     *
      * @return the vertical coordinate
      */
     public int jsxGet_screenY() {
+        if (screenY_ == null) {
+            final HTMLElement target = (HTMLElement) jsxGet_target();
+            screenY_ = target.getPosY() + 10;
+        }
         return screenY_;
     }
 
@@ -204,7 +213,7 @@ public class MouseEvent extends UIEvent {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageY">Mozilla doc</a>
      */
     public int jsxGet_pageY() {
-        return screenY_;
+        return jsxGet_screenY();
     }
 
     /**
