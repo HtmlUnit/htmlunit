@@ -510,17 +510,16 @@ public class WindowTest extends WebTestCase {
             + "</script></head>\n"
             + "<body></body></html>";
 
+        final String[] expectedAlerts = {"about:blank"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlertsMoz = {"null"};
         loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        createTestPageForRealBrowserIfNeeded(content, expectedAlertsMoz);
-        assertEquals(expectedAlertsMoz, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
 
         collectedAlerts.clear();
-        final String[] expectedAlertsIE = {"about:blank"};
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-        createTestPageForRealBrowserIfNeeded(content, expectedAlertsIE);
-        assertEquals(expectedAlertsIE, collectedAlerts);
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

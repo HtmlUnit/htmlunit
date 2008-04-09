@@ -307,13 +307,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     private URL makeUrlForOpenWindow(final String urlString) {
         if (urlString.length() == 0) {
-            // IE handles "" as "about:blank" in window.open
-            if (getBrowserVersion().isIE()) {
-                return WebClient.URL_ABOUT_BLANK;
-            }
-            else {
-                return null;
-            }
+            return WebClient.URL_ABOUT_BLANK;
         }
 
         try {

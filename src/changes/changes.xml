@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.1-SNAPSHOT" description="something">
+            <action type="fix" dev="mguillem" id="1584437">
+                JavaScript: window.open without URL provided returns blank window when simulating Firefox too.
+            </action>
             <action type="fix" dev="mguillem" id="1794764">
                 JavaScript: clear existing events handlers when page's content is changed with document.write.
             </action>
