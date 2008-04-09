@@ -166,7 +166,7 @@ public class XPathResult extends SimpleScriptable {
      */
     public int jsxGet_snapshotLength() {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
-            throw Context.reportRuntimeError("Can not get snapshotLength for type: " + resultType_);
+            throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
         }
         return result_.size();
     }
@@ -177,7 +177,7 @@ public class XPathResult extends SimpleScriptable {
      */
     public Node jsxGet_singleNodeValue() {
         if (resultType_ != ANY_UNORDERED_NODE_TYPE && resultType_ != FIRST_ORDERED_NODE_TYPE) {
-            throw Context.reportRuntimeError("Can not get singleNodeValue for type: " + resultType_);
+            throw Context.reportRuntimeError("Cannot get singleNodeValue for type: " + resultType_);
         }
         if (!result_.isEmpty()) {
             return (Node) ((DomNode) result_.get(0)).getScriptObject();
@@ -193,7 +193,7 @@ public class XPathResult extends SimpleScriptable {
      */
     public Node jsxFunction_iterateNext() {
         if (resultType_ != UNORDERED_NODE_ITERATOR_TYPE && resultType_ != ORDERED_NODE_ITERATOR_TYPE) {
-            throw Context.reportRuntimeError("Can not get iterateNext for type: " + resultType_);
+            throw Context.reportRuntimeError("Cannot get iterateNext for type: " + resultType_);
         }
         if (iteratorIndex_ < result_.size()) {
             return (Node) ((DomNode) result_.get(iteratorIndex_++)).getScriptObject();
@@ -211,7 +211,7 @@ public class XPathResult extends SimpleScriptable {
      */
     public Node jsxFunction_snapshotItem(final int index) {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
-            throw Context.reportRuntimeError("Can not get snapshotLength for type: " + resultType_);
+            throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
         }
         if (index >= 0 && index < result_.size()) {
             return (Node) ((DomNode) result_.get(index)).getScriptObject();
@@ -227,7 +227,7 @@ public class XPathResult extends SimpleScriptable {
      */
     public double jsxGet_numberValue() {
         if (resultType_ != NUMBER_TYPE) {
-            throw Context.reportRuntimeError("Can not get numberValue for type: " + resultType_);
+            throw Context.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
         }
         return ((Number) result_.get(0)).doubleValue();
     }
@@ -238,7 +238,7 @@ public class XPathResult extends SimpleScriptable {
      */
     public boolean jsxGet_booleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
-            throw Context.reportRuntimeError("Can not get booleanValue for type: " + resultType_);
+            throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
         return ((Boolean) result_.get(0)).booleanValue();
     }
@@ -249,7 +249,7 @@ public class XPathResult extends SimpleScriptable {
      */
     public String jsxGet_stringValue() {
         if (resultType_ != STRING_TYPE) {
-            throw Context.reportRuntimeError("Can not get stringValue for type: " + resultType_);
+            throw Context.reportRuntimeError("Cannot get stringValue for type: " + resultType_);
         }
         return (String) result_.get(0);
     }

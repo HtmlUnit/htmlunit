@@ -1166,7 +1166,7 @@ public class Document extends EventNode {
 
         if (newDomain.indexOf(".") == -1
                 || !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
-            throw Context.reportRuntimeError("Illegal domain value, can not set domain from: \""
+            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain + "\"");
         }
 

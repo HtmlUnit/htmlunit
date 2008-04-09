@@ -310,7 +310,7 @@ public class JavaScriptEngine implements Serializable {
                 scriptable.defineProperty(constant, value, ScriptableObject.CONST);
             }
             catch (final Exception e) {
-                throw Context.reportRuntimeError("Can not get field '" + constant + "' for type: "
+                throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
                     + config.getClassName());
             }
         }

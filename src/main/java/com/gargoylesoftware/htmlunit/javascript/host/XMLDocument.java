@@ -193,7 +193,7 @@ public class XMLDocument extends Document {
             scriptable = new TextImpl();
         }
         else {
-            throw new IllegalArgumentException("Can not make scriptable for " + domNode);
+            throw new IllegalArgumentException("Cannot make scriptable for " + domNode);
         }
         
         scriptable.setPrototype(getPrototype(scriptable.getClass()));

@@ -260,7 +260,7 @@ public class BrowserRunner extends CompositeRunner {
                     for (final Browser browser : browsers.value()) {
                         if (browser == Browser.NONE && browsers.value().length > 1) {
                             errors.add(new Exception("Method " + method.getName()
-                                    + " can not have Browser.NONE along with other Browsers."));
+                                    + " cannot have Browser.NONE along with other Browsers."));
                         }
                     }
                 }

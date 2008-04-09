@@ -2303,7 +2303,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * IE has a bug which returns the element by name if it can not find it by ID.
+     * IE has a bug which returns the element by name if it cannot find it by ID.
      * @throws Exception if the test fails
      */
     @Test
@@ -2326,7 +2326,7 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
-     * IE has a bug which returns the element by name if it can not find it by ID.
+     * IE has a bug which returns the element by name if it cannot find it by ID.
      * @throws Exception if the test fails
      */
     @Test
