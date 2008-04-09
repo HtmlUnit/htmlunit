@@ -53,7 +53,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test of coding style for things that can not be detected by Checkstyle.
+ * Test of coding style for things that cannot be detected by Checkstyle.
  *
  * @version $Revision$
  * @author Ahmed Ashour
