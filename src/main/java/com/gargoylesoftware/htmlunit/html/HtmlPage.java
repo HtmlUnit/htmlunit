@@ -154,6 +154,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
+        setReadyState(READY_STATE_COMPLETE);
         getDocumentHtmlElement().setReadyState(READY_STATE_COMPLETE);
         if (!getWebClient().getBrowserVersion().isIE()) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);

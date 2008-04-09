@@ -1108,12 +1108,7 @@ public class Document extends EventNode {
      */
     public String jsxGet_readyState() {
         final DomNode node = getDomNodeOrDie();
-        if (node instanceof HtmlPage) {
-            return ((HtmlPage) node).getDocumentHtmlElement().getReadyState();
-        }
-        else {
-            return node.getReadyState();
-        }
+        return node.getReadyState();
     }
 
     /**

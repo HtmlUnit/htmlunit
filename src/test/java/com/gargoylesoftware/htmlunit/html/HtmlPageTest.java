@@ -1835,4 +1835,20 @@ public class HtmlPageTest extends WebTestCase {
         assertEquals(4, divs.getLength());
     }
 
+    /**
+     * HtmlPage.getReadyState() should give the same information than the document element.
+     * @see <a href="http://sf.net/tracker/index.php?func=detail&aid=1592733&group_id=47038&atid=448266">1592733</a>
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void testReadyState() throws Exception {
+        final String htmlContent
+            = "<html><head><title>test</title></head>\n"
+            + "<body><table>\n"
+            + "<tr><form><td>a</td></form></tr>\n"
+            + "</table></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+        assertEquals(DomNode.READY_STATE_COMPLETE, page.getReadyState());
+    }
 }
