@@ -147,20 +147,135 @@ public class Stylesheet extends SimpleScriptable {
                 final SelectorList selectors = styleRule.getSelectors();
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
-                    final String xpath = translateToXPath(selector);
-                    if (xpath != null) {
-                        final List< ? extends Object> results = page.getByXPath(xpath);
-                        if (results.contains(e)) {
-                            final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
-                            for (int k = 0; k < dec.getLength(); k++) {
-                                final String name = dec.item(k);
-                                final String value = dec.getPropertyValue(name);
-                                style.setLocalStyleAttribute(name, value);
+                    final boolean mayBeSelected = maySelect(selector, e);
+                    if (getLog().isDebugEnabled()) {
+                        getLog().debug("maySelect: " + mayBeSelected + " " + selector);
+                    }
+                    // this could be improved here with a distinction between selector that are sure
+                    // to select a node (like *) and selectors where we don't know
+                    if (mayBeSelected) {
+                        final String xpath = translateToXPath(selector);
+                        if (xpath != null) {
+                            final List< ? extends Object> results = page.getByXPath(xpath);
+                            if (results.contains(e)) {
+                                final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
+                                for (int k = 0; k < dec.getLength(); k++) {
+                                    final String name = dec.item(k);
+                                    final String value = dec.getPropertyValue(name);
+                                    style.setLocalStyleAttribute(name, value);
+                                }
                             }
                         }
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Indicates if the selector has some chance to apply on the element
+     * @param selector a selector
+     * @param element the element to test on
+     * @return <code>false</code> if it doesn't apply, <code>true</code> if it apply or may apply
+     */
+    boolean maySelect(final Selector selector, final HtmlElement element) {
+        final String tagName = element.getTagName();
+        switch (selector.getSelectorType()) {
+            case Selector.SAC_ANY_NODE_SELECTOR:
+                return true;
+            case Selector.SAC_COMMENT_NODE_SELECTOR:
+            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
+            case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
+                return false;
+            case Selector.SAC_CHILD_SELECTOR:
+                final DescendantSelector cs = (DescendantSelector) selector;
+                return maySelect(cs.getSimpleSelector(), element);
+            case Selector.SAC_CONDITIONAL_SELECTOR:
+                final ConditionalSelector conditional = (ConditionalSelector) selector;
+                if (!maySelect(conditional.getSimpleSelector(), element)) {
+                    return false;
+                }
+                final Condition condition = conditional.getCondition();
+                return maySelect(condition, element);
+            case Selector.SAC_DESCENDANT_SELECTOR:
+                final DescendantSelector ds = (DescendantSelector) selector;
+                return maySelect(ds.getSimpleSelector(), element);
+            case Selector.SAC_ELEMENT_NODE_SELECTOR:
+                final ElementSelector es = (ElementSelector) selector;
+                final String name = es.getLocalName();
+                if (name != null) {
+                    return tagName.equalsIgnoreCase(name);
+                }
+                else {
+                    return true;
+                }
+            case Selector.SAC_NEGATIVE_SELECTOR:
+            case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
+            case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
+            case Selector.SAC_TEXT_NODE_SELECTOR:
+                return false;
+            case Selector.SAC_ROOT_NODE_SELECTOR:
+                return tagName.equalsIgnoreCase("html");
+            default:
+                getLog().error("Unknown selector type '" + selector.getSelectorType() + "'.");
+                return false;
+        }
+    }
+
+    /**
+     * Indicates if the condition has some chance to apply on the element
+     * @param condition a condition
+     * @param element the element to test on
+     * @return <code>false</code> if it doesn't apply, <code>true</code> if it apply or may apply
+     */
+    boolean maySelect(final Condition condition, final HtmlElement element) {
+        switch (condition.getConditionType()) {
+            case Condition.SAC_ID_CONDITION:
+                final AttributeCondition ac4 = (AttributeCondition) condition;
+                return ac4.getValue().equals(element.getId());
+            case Condition.SAC_CLASS_CONDITION:
+                final AttributeCondition ac3 = (AttributeCondition) condition;
+                return element.getAttribute("class").toString().contains(ac3.getValue());
+            case Condition.SAC_AND_CONDITION:
+                final CombinatorCondition cc1 = (CombinatorCondition) condition;
+                return maySelect(cc1.getFirstCondition(), element) && maySelect(cc1.getSecondCondition(), element);
+                /*
+            case Condition.SAC_ATTRIBUTE_CONDITION:
+                final AttributeCondition ac1 = (AttributeCondition) condition;
+                if (ac1.getSpecified()) {
+                    return "@" + ac1.getLocalName() + " = '" + ac1.getValue() + "'";
+                }
+                else {
+                    return "@" + ac1.getLocalName();
+                }
+            case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
+                final AttributeCondition ac2 = (AttributeCondition) condition;
+                return "@" + ac2.getLocalName() + " = '" + ac2.getValue() + "' " + "or starts-with( @"
+                                + ac2.getLocalName() + ", concat( '" + ac2.getValue() + "', '-' ) )";
+            case Condition.SAC_CONTENT_CONDITION:
+                return null;
+            case Condition.SAC_LANG_CONDITION:
+                return null;
+            case Condition.SAC_NEGATIVE_CONDITION:
+                return null;
+            case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
+                final AttributeCondition ac5 = (AttributeCondition) condition;
+                return "contains( concat(' ', @" + ac5.getLocalName() + ", ' '), " + "concat(' ', '"
+                                + ac5.getValue() + "', ' ') )";
+            case Condition.SAC_ONLY_CHILD_CONDITION:
+                return null;
+            case Condition.SAC_ONLY_TYPE_CONDITION:
+                return null;
+            case Condition.SAC_OR_CONDITION:
+                final CombinatorCondition cc2 = (CombinatorCondition) condition;
+                return "(" + translateToXPath(cc2.getFirstCondition()) + ") or ("
+                                + translateToXPath(cc2.getSecondCondition()) + ")";
+            case Condition.SAC_POSITIONAL_CONDITION:
+                return null;
+            case Condition.SAC_PSEUDO_CLASS_CONDITION:
+                return null;*/
+            default:
+                return true;
         }
     }
 
