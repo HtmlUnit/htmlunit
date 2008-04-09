@@ -398,34 +398,19 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
-    @Alerts()
+    @Alerts("1")
     @NotYetImplemented
-    public void iterator() throws Exception {
+    public void passFunctionAsParameter() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "  Object.extend = function(destination, source) {\n"
-            + "    for (var property in source) {\n"
-            + "      destination[property] = source[property];\n"
-            + "    }\n"
-            + "    return destination;\n"
-            + "  };\n"
+            + "  function run(fun) {\n"
+            + "    fun('alert(1)');\n"
+            + "  }\n"
             + "\n"
-            + "  Object.extend(Array.prototype, {\n"
-            + "    _each: function(some_function) {\n"
-            + "      for (var i=0;i<this.length;i++)\n"
-            + "        some_function(this[i]);\n"
-            + "    },\n"
-            + "    each: function(some_function) {\n"
-            + "      this._each(function(value) {\n"
-            + "        some_function(value)\n"
-            + "      })\n"
-            + "    }\n"
-            + "  });\n"
-            + "\n"
-            + "  var x = [ 'a', 'b', 'c' ];\n"
-            + "  x.each(new function(a, b) { });\n"
-            + "</script></head><body>\n"
+            + "  function test() {\n"
+            + "    run(eval);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts(html);
