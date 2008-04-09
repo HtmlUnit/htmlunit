@@ -8,6 +8,9 @@
     <body>
         <release version="2.1-SNAPSHOT" description="Bug fixes and performance improvements">
             <action type="update" dev="sdanig">
+                CSS parsing optimization: avoid parsing CSS selectors multiple times.
+            </action>
+            <action type="update" dev="sdanig">
                 Initialize mouse event coordinates lazily, in order to avoid unnecessary CSS processing overhead.
             </action>
             <action type="fix" dev="mguillem" id="1584437">

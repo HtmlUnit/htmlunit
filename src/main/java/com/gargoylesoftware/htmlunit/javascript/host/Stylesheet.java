@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -53,12 +52,12 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
-import org.w3c.dom.css.CSSStyleRule;
 import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS21;
@@ -144,9 +143,8 @@ public class Stylesheet extends SimpleScriptable {
         for (int i = 0; i < rules.getLength(); i++) {
             final CSSRule rule = rules.item(i);
             if (rule.getType() == CSSRule.STYLE_RULE) {
-                final CSSStyleRule styleRule = (CSSStyleRule) rule;
-                final String s = styleRule.getSelectorText();
-                final SelectorList selectors = parseSelectors(new InputSource(new StringReader(s)));
+                final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
+                final SelectorList selectors = styleRule.getSelectors();
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
                     final String xpath = translateToXPath(selector);
