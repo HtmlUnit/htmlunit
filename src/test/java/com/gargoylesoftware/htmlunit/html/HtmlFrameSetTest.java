@@ -317,9 +317,6 @@ public class HtmlFrameSetTest extends WebTestCase {
      */
     @Test
     public void frameReloadsAnother() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final URL framesetURL = new URL("http://domain/frameset.html");
         final URL leftURL = new URL("http://domain/left.html");
         final URL rightURL = new URL("http://domain/right.html");
@@ -377,9 +374,9 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(framesetURL);
         final HtmlPage leftPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
-        final HtmlPage rightPage = (HtmlPage) page.getFrames().get(1).getEnclosedPage();
-        assertTrue(rightPage.asXml().contains("version 1"));
+        final WebWindow rightWindow = page.getFrames().get(1);
+        assertTrue(((HtmlPage) rightWindow.getEnclosedPage()).asXml().contains("version 1"));
         leftPage.getAnchors().get(0).click();
-        assertTrue(rightPage.asXml().contains("version 2"));
+        assertTrue(((HtmlPage) rightWindow.getEnclosedPage()).asXml().contains("version 2"));
     }
 }

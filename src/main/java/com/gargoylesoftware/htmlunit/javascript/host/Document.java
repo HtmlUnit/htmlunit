@@ -703,8 +703,9 @@ public class Document extends EventNode {
             getLog().warn("close() called when document is not open.");
         }
         else {
-            final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString());
             final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+            final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(),
+                page.getWebResponse().getUrl());
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
 

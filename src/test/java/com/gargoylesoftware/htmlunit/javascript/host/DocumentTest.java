@@ -1604,6 +1604,29 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void locationAfterWrite() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "function test() { \n"
+            + "  alert(document.location);\n"
+            + "  document.open();\n"
+            + "  document.write('<html><body onload=\"alert(document.location)\"></body></html>');\n"
+            + "  document.close();\n"
+            + "}"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final String[] expectedAlerts = {URL_GARGOYLE.toExternalForm(), URL_GARGOYLE.toExternalForm()};
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
      * Verifies that calls to document.open() are ignored while the page's HTML is being parsed.
      * @throws Exception if an error occurs
      */

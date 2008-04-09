@@ -1082,7 +1082,7 @@ public class WebClientTest extends WebTestCase {
     public void testLoadWebResponseInto() throws Exception {
         final WebClient webClient = new WebClient();
         final WebResponse webResponse = new StringWebResponse(
-            "<html><head><title>first</title></head><body></body></html>");
+            "<html><head><title>first</title></head><body></body></html>", URL_GARGOYLE);
 
         final Page page = webClient.loadWebResponseInto(webResponse, webClient.getCurrentWindow());
         assertTrue(HtmlPage.class.isInstance(page));

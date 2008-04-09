@@ -7,13 +7,19 @@
 
     <body>
         <release version="2.1-SNAPSHOT" description="something">
+            <action type="fix" dev="mguillem" id="1794764">
+                JavaScript: clear existing events handlers when page's content is changed with document.write.
+            </action>
             <action type="fix" dev="mguillem">
-                JavaScript: fixed ClassCastException occuring when select() is called on form elements other than
+                JavaScript: fixed document.location in pages created with document.write.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: fixed ClassCastException occurring when select() is called on form elements other than
                 text inputs.
             </action>
             <action type="remove" dev="asashour">
                 Remove deprecated HtmlPage.executeJavaScriptIfPossible(), XmlAttr Map.Entry constructor
-                and WebClient.assertionFailed()
+                and WebClient.assertionFailed().
             </action>
         </release>
         <release version="2.0" date="Apr 7, 2008" description="Migration to Java 5, implementation of org.w3c.dom.*, better support for incorrect html code, large improvements in JavaScript support (GWT 1.4 tests now pass, ...)">

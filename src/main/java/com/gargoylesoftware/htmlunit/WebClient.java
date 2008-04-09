@@ -1422,7 +1422,7 @@ public class WebClient implements Serializable {
             url.toExternalForm(), "JavaScript URL", 1);
 
         final String contentString = scriptResult.getJavaScriptResult().toString();
-        return new StringWebResponse(contentString, charset);
+        return new StringWebResponse(contentString, charset, url);
     }
 
     /**

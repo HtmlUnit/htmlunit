@@ -506,6 +506,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // variable to be the page. If this isn't set then SimpleScriptable.get()
             // won't work properly
             setDomNode(htmlPage);
+            eventListenersContainer_ = null;
 
             WebAssert.notNull("document_", document_);
             document_.setDomNode(htmlPage);

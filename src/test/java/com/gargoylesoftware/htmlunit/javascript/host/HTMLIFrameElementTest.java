@@ -245,6 +245,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "    }\n"
             + "</script></body></html>";
         final String[] expected = {"false", "false", "true", "true", "true", "object", "object"};
+        createTestPageForRealBrowserIfNeeded(html, expected);
         final List<String> actual = new ArrayList<String>();
         loadPage(html, actual);
         assertEquals(expected, actual);

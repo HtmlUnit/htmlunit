@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,40 +70,6 @@ public class StringWebResponse extends WebResponseImpl {
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
         compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
         return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
-    }
-
-    /**
-     * Helper method for constructors. Gets the default URL that is used
-     * if none is specified. Mostly exists to deal with the checked exception
-     * on the URL constructor.
-     *
-     * @return the default URL
-     */
-    private static URL getURL() {
-        try {
-            return new URL("http://HtmlUnitStringWebResponse");
-        }
-        catch (final MalformedURLException e) {
-            // Theoretically impossible
-            throw new IllegalStateException(e.toString());
-        }
-    }
-
-    /**
-     * Creates an instance.
-     * @param content the content to return
-     */
-    public StringWebResponse(final String content) {
-        super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), getURL(), SubmitMethod.GET, 0);
-    }
-
-    /**
-     * Creates an instance.
-     * @param content the content to return
-     * @param charset the charset used to convert the content
-     */
-    public StringWebResponse(final String content, final String charset) {
-        super(getWebResponseData(content, charset), charset, getURL(), SubmitMethod.GET, 0);
     }
 
     /**
