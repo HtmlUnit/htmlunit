@@ -74,12 +74,12 @@ public class StyleSheetTest extends WebTestCase {
     public void selects() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head><body>\n"
-            + "<form name='f1' class='foo' class='yui-log'>"
-            + "<div><div><input name='i1' id='m1'></div></div>"
-            + "<input name='i2' class='yui-log'>"
-            + "<button name='b1' class='yui-log'>"
-            + "<button name='b2'>"
-            + "</form>"
+            + "<form name='f1' class='foo' class='yui-log'>\n"
+            + "<div><div><input name='i1' id='m1'></div></div>\n"
+            + "<input name='i2' class='yui-log'>\n"
+            + "<button name='b1' class='yui-log'>\n"
+            + "<button name='b2'>\n"
+            + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
@@ -119,7 +119,7 @@ public class StyleSheetTest extends WebTestCase {
     public void owningNodeOwningElement() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
-                + "function test(){"
+                + "function test(){\n"
                 + "  var myStyle = document.getElementById('myStyle');\n"
                 + "  var stylesheet = document.styleSheets[0];\n"
                 + "  alert(stylesheet);\n"
@@ -151,7 +151,7 @@ public class StyleSheetTest extends WebTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function test(){"
+                + "  function test(){\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
                 + "      alert(document.styleSheets[0].cssRules.length);\n"
                 + "    else\n"

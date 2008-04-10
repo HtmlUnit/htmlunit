@@ -75,7 +75,7 @@ public class NodeTest extends WebTestCase {
     public void test_hasChildNodes_true() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
-                + "function doTest(){"
+                + "function doTest(){\n"
                 + "    alert(document.getElementById('myNode').hasChildNodes());\n"
                 + "}\n"
                 + "</script>\n"
@@ -98,7 +98,7 @@ public class NodeTest extends WebTestCase {
     public void test_hasChildNodes_false() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
-                + "function doTest(){"
+                + "function doTest(){\n"
                 + "    alert(document.getElementById('myNode').hasChildNodes());\n"
                 + "}\n"
                 + "</script>\n"
@@ -208,7 +208,7 @@ public class NodeTest extends WebTestCase {
     public void testNodeNameIsUppercase() throws Exception {
         final String content = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
-                + "function doTest(){"
+                + "function doTest(){\n"
                 + "    alert(document.getElementById('myNode').nodeName);\n"
                 + "}\n"
                 + "</script>\n"
