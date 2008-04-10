@@ -962,4 +962,32 @@ public class HtmlElementTest extends WebTestCase {
         body.appendChild(newDiv);
         assertEquals(4, divs.getLength());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void type() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myInput').value);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <input id='myButton' type='button' onclick='test()'>\n"
+            + "  <input id='myInput' onclick='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"Hello Cruel World"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = (HtmlPage) loadPage(BrowserVersion.getDefault(), html, collectedAlerts);
+        final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
+        input.type("Hello Cruel World");
+        assertEquals("Hello Cruel World", input.getValueAttribute());
+        ((HtmlButtonInput) page.getHtmlElementById("myButton")).click();
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }
