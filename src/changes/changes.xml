@@ -7,7 +7,7 @@
 
     <body>
         <release version="2.1-SNAPSHOT" description="Bug fixes and performance improvements">
-            <action type="fix" dev="mguillem" id="1592733">
+            <action type="fix" dev="asashour">
                 HtmlTextInput and HtmlTextArea: fix type() space.
             </action>
             <action type="update" dev="mguillem" id="1592733">
