@@ -69,7 +69,7 @@ import com.steadystate.css.parser.SACParserCSS21;
 import com.steadystate.css.parser.SelectorListImpl;
 
 /**
- * A JavaScript object for a stylesheet.
+ * A JavaScript object for a Stylesheet.
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535871.aspx">MSDN doc</a>
  * @version $Revision$
@@ -92,6 +92,8 @@ public class Stylesheet extends SimpleScriptable {
 
     /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
+    
+    private com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList cssRules_;
 
     /**
      * Creates a new empty stylesheet.
@@ -118,7 +120,7 @@ public class Stylesheet extends SimpleScriptable {
      *
      * @return the wrapped stylesheet
      */
-    private CSSStyleSheet getWrappedSheet() {
+    CSSStyleSheet getWrappedSheet() {
         if (wrapped_ == null) {
             if (source_ != null) {
                 wrapped_ = parseCSS(source_);
@@ -391,5 +393,24 @@ public class Stylesheet extends SimpleScriptable {
         else {
             return super.getDefaultValue(hint);
         }
+    }
+    
+    /**
+     * Retrieves a collection of rules defined in a style sheet.
+     * @return a collection of rules defined in a style sheet.
+     */
+    public com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList jsxGet_rules() {
+        return jsxGet_cssRules();
+    }
+
+    /**
+     * Returns a collection of rules defined in a style sheet.
+     * @return a collection of rules defined in a style sheet.
+     */
+    public com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList jsxGet_cssRules() {
+        if (cssRules_ == null) {
+            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList(this);
+        }
+        return cssRules_;
     }
 }

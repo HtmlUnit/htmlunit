@@ -359,7 +359,7 @@ public class CodeStyleTest {
                             + " should never directly instantiate WebClient, please use getWebClient() instead.");
                     }
                     if (line.contains("notYetImplemented()")) {
-                        addFailure("Use @NotYetImplemented instead of  notYetImplemented() in "
+                        addFailure("Use @NotYetImplemented instead of notYetImplemented() in "
                             + relativePath + ", line: " + index);
                     }
                 }

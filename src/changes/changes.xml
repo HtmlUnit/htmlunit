@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.1-SNAPSHOT" description="Bug fixes and performance improvements">
+            <action type="add" dev="asashour">
+                JavaScript: add initial support for CSSRuleList.
+            </action>
             <action type="fix" dev="asashour">
                 HtmlTextInput and HtmlTextArea: fix type() space.
             </action>
