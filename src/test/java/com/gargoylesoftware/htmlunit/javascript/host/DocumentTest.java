@@ -2793,6 +2793,42 @@ public class DocumentTest extends WebTestCase {
     }
    
    /**
+    * Test for bug 1678826.
+    * https://sourceforge.net/tracker/index.php?func=detail&aid=1678826&group_id=47038&atid=448266
+    * @throws Exception if the test fails
+    */
+    @Test
+    public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
+
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.getElementById('inner1').parentNode.id);\n"
+            + "    alert(document.getElementById('inner2').parentNode.id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<script>\n"
+            + "document.write('<div id=\"outer\">');"
+            + "document.write('<br id=\"br1\">');"
+            + "document.write('<div id=\"inner1\"/>');"
+            + "document.write('<hr id=\"hr1\"/>');"
+            + "document.write('<div id=\"inner2\"/>');"
+            + "document.write('</div>');"
+            + "</script>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = {"outer", "inner"};
+        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(content, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+     
+     /**
      * @throws Exception if the test fails
      */
     @Test
