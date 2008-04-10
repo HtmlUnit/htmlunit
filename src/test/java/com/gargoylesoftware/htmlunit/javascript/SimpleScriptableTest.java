@@ -136,6 +136,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("ActiveXObject");
         names.remove("BoxObject");
         names.remove("ComputedCSSStyleDeclaration");
+        names.remove("CSSRuleList");
         names.remove("CSSStyleDeclaration");
         names.remove("Document");
         names.remove("DOMImplementation");
