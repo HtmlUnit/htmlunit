@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -70,7 +71,7 @@ public class StyleSheetTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.NONE)
-    public void testSelects() throws Exception {
+    public void selects() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head><body>\n"
             + "<form name='f1' class='foo' class='yui-log'>"
@@ -115,7 +116,7 @@ public class StyleSheetTest extends WebTestCase {
     @Test
     @Alerts(IE = {"[object]", "undefined", "false", "[object]", "true" },
             FF = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" })
-    public void testOwningNodeOwningElement() throws Exception {
+    public void owningNodeOwningElement() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
                 + "function test(){"
@@ -129,6 +130,34 @@ public class StyleSheetTest extends WebTestCase {
                 + "}\n"
                 + "</script>\n"
                 + "<style id='myStyle' type='text/css'></style>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("4")
+    @NotYetImplemented
+    public void rules() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BODY { background-color: white; color: black; }\n"
+                + "  H1 { font: 8pt Arial bold; }\n"
+                + "  P  { font: 10pt Arial; text-indent: 0.5in; }\n"
+                + "  A  { text-decoration: none; color: blue; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){"
+                + "    if (document.styleSheets[0].cssRules)\n"
+                + "      alert(document.styleSheets[0].cssRules.length);\n"
+                + "    else\n"
+                + "      alert(document.styleSheets[0].rules.length);\n"
+                + "  }\n"
+                + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
 
