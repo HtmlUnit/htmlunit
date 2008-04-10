@@ -170,18 +170,18 @@
         <developerConnection>scm:svn:https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit</developerConnection>
         <url>http://htmlunit.svn.sourceforge.net/viewvc/htmlunit</url>
     </scm>
-        <ciManagement>
-            <system>Cruise Control</system>
-            <url>http://build.canoo.com/htmlunit</url>
-        </ciManagement>
-        <mailingLists>
-            <mailingList>
-                <name>HtmlUnit Users</name>
-                <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
-                <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
-                <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</archive>
-                <post>htmlunit-user@lists.sourceforge.net</post>
-            </mailingList>
+    <ciManagement>
+        <system>Cruise Control</system>
+        <url>http://build.canoo.com/htmlunit</url>
+    </ciManagement>
+    <mailingLists>
+        <mailingList>
+            <name>HtmlUnit Users</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</unsubscribe>
+            <archive>http://lists.sourceforge.net/lists/listinfo/htmlunit-user</archive>
+            <post>htmlunit-user@lists.sourceforge.net</post>
+        </mailingList>
         <mailingList>
             <name>HtmlUnit Developers</name>
             <subscribe>http://lists.sourceforge.net/lists/listinfo/htmlunit-develop</subscribe>
