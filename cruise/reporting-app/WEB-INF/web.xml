@@ -93,7 +93,7 @@
         <servlet-class>net.sourceforge.cruisecontrol.servlet.FileServlet</servlet-class>
         <init-param>
             <param-name>rootDir</param-name>
-            <param-value>/opt/htmlunit/cruisecontrol/checkout/target</param-value>
+            <param-value>/opt/htmlunit/cruisecontrol/checkout/artifacts</param-value>
         </init-param>
     </servlet>
 
