@@ -70,17 +70,17 @@ public class StyleSheetTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.NONE)
-    public void testMaySelect() throws Exception {
+    public void testSelects() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head><body>\n"
             + "<form name='f1' class='foo' class='yui-log'>"
-            + "<input name='i1' id='m1'>"
+            + "<div><div><input name='i1' id='m1'></div></div>"
             + "<input name='i2' class='yui-log'>"
             + "<button name='b1' class='yui-log'>"
             + "<button name='b2'>"
             + "</form>"
             + "</body></html>";
-        
+
         final HtmlPage page = loadPage(html);
         final HtmlElement body = page.getBody();
         final HtmlForm form = page.getFormByName("f1");
@@ -91,37 +91,22 @@ public class StyleSheetTest extends WebTestCase {
 
         final Stylesheet stylesheet = new Stylesheet();
         Selector selector = parseSelector("*.yui-log input { }");
-        assertFalse(stylesheet.maySelect(selector, body));
-        assertFalse(stylesheet.maySelect(selector, form));
-        assertTrue(stylesheet.maySelect(selector, input1));
-        assertTrue(stylesheet.maySelect(selector, input2));
-        assertFalse(stylesheet.maySelect(selector, button1));
-        assertFalse(stylesheet.maySelect(selector, button2));
+        assertFalse(stylesheet.selects(selector, body));
+        assertFalse(stylesheet.selects(selector, form));
+        assertTrue(stylesheet.selects(selector, input1));
+        assertTrue(stylesheet.selects(selector, input2));
+        assertFalse(stylesheet.selects(selector, button1));
+        assertFalse(stylesheet.selects(selector, button2));
 
         selector = parseSelector("#m1 { margin: 3px; }");
-        assertTrue(stylesheet.maySelect(selector, input1));
-        assertFalse(stylesheet.maySelect(selector, input2));
+        assertTrue(stylesheet.selects(selector, input1));
+        assertFalse(stylesheet.selects(selector, input2));
     }
 
     private Selector parseSelector(final String rule) {
         final Stylesheet stylesheet = new Stylesheet();
-
         final SelectorList selectors = stylesheet.parseSelectors(new InputSource(new StringReader(rule)));
         return selectors.item(0);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(Browser.NONE)
-    public void testTranslateToXPath() throws Exception {
-        final Stylesheet stylesheet = new Stylesheet();
-        final String s = "*.yui-log input { }";
-
-        final Selector selector = parseSelector(s);
-        assertEquals("//*[contains( concat(' ', @class, ' '), concat(' ', 'yui-log', ' ') )]//input",
-            stylesheet.translateToXPath(selector));
     }
 
     /**

@@ -38,24 +38,29 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
+import org.w3c.css.sac.ContentCondition;
 import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.ElementSelector;
 import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.LangCondition;
+import org.w3c.css.sac.NegativeCondition;
+import org.w3c.css.sac.NegativeSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
+import org.w3c.css.sac.SiblingSelector;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.css.CSSStyleSheet;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
@@ -135,7 +140,6 @@ public class Stylesheet extends SimpleScriptable {
      */
     void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
         final HtmlElement e = element.getHtmlElementOrDie();
-        final HtmlPage page = e.getPage();
         final CSSRuleList rules = getWrappedSheet().getCssRules();
         if (rules == null) {
             return;
@@ -147,24 +151,13 @@ public class Stylesheet extends SimpleScriptable {
                 final SelectorList selectors = styleRule.getSelectors();
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
-                    final boolean mayBeSelected = maySelect(selector, e);
-                    if (getLog().isDebugEnabled()) {
-                        getLog().debug("maySelect: " + mayBeSelected + " " + selector);
-                    }
-                    // this could be improved here with a distinction between selector that are sure
-                    // to select a node (like *) and selectors where we don't know
-                    if (mayBeSelected) {
-                        final String xpath = translateToXPath(selector);
-                        if (xpath != null) {
-                            final List< ? extends Object> results = page.getByXPath(xpath);
-                            if (results.contains(e)) {
-                                final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
-                                for (int k = 0; k < dec.getLength(); k++) {
-                                    final String name = dec.item(k);
-                                    final String value = dec.getPropertyValue(name);
-                                    style.setLocalStyleAttribute(name, value);
-                                }
-                            }
+                    final boolean selected = selects(selector, e);
+                    if (selected) {
+                        final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
+                        for (int k = 0; k < dec.getLength(); k++) {
+                            final String name = dec.item(k);
+                            final String value = dec.getPropertyValue(name);
+                            style.setLocalStyleAttribute(name, value);
                         }
                     }
                 }
@@ -173,109 +166,133 @@ public class Stylesheet extends SimpleScriptable {
     }
 
     /**
-     * Indicates if the selector has some chance to apply on the element
-     * @param selector a selector
-     * @param element the element to test on
-     * @return <code>false</code> if it doesn't apply, <code>true</code> if it apply or may apply
+     * Returns <tt>true</tt> if the specified selector selects the specified element.
+     *
+     * TODO: needs review; may not be fully finished.
+     *
+     * @param selector the selector to test
+     * @param element the element to test
+     * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
-    boolean maySelect(final Selector selector, final HtmlElement element) {
+    boolean selects(final Selector selector, final HtmlElement element) {
         final String tagName = element.getTagName();
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return true;
-            case Selector.SAC_COMMENT_NODE_SELECTOR:
-            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-            case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
-                return false;
             case Selector.SAC_CHILD_SELECTOR:
                 final DescendantSelector cs = (DescendantSelector) selector;
-                return maySelect(cs.getSimpleSelector(), element);
-            case Selector.SAC_CONDITIONAL_SELECTOR:
-                final ConditionalSelector conditional = (ConditionalSelector) selector;
-                if (!maySelect(conditional.getSimpleSelector(), element)) {
-                    return false;
-                }
-                final Condition condition = conditional.getCondition();
-                return maySelect(condition, element);
+                final HtmlElement parent = (HtmlElement) element.getParentNode();
+                return selects(cs.getSimpleSelector(), element) && parent != null
+                    && selects(cs.getAncestorSelector(), parent);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                return maySelect(ds.getSimpleSelector(), element);
+                if (selects(ds.getSimpleSelector(), element)) {
+                    DomNode ancestor = element.getParentNode();
+                    while (ancestor instanceof HtmlElement) {
+                        if (selects(ds.getAncestorSelector(), (HtmlElement) ancestor)) {
+                            return true;
+                        }
+                        ancestor = ancestor.getParentNode();
+                    }
+                }
+                return false;
+            case Selector.SAC_CONDITIONAL_SELECTOR:
+                final ConditionalSelector conditional = (ConditionalSelector) selector;
+                final Condition condition = conditional.getCondition();
+                return selects(conditional.getSimpleSelector(), element) && selects(condition, element);
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
-                if (name != null) {
-                    return tagName.equalsIgnoreCase(name);
-                }
-                else {
-                    return true;
-                }
+                return name == null || tagName.equalsIgnoreCase(name);
+            case Selector.SAC_ROOT_NODE_SELECTOR:
+                return HtmlHtml.TAG_NAME.equalsIgnoreCase(tagName);
+            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
+                final SiblingSelector ss = (SiblingSelector) selector;
+                final HtmlElement pre = (HtmlElement) element.getPreviousSibling();
+                return pre != null && selects(ss.getSelector(), pre) && selects(ss.getSiblingSelector(), element);
             case Selector.SAC_NEGATIVE_SELECTOR:
-            case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
+                final NegativeSelector ns = (NegativeSelector) selector;
+                return !selects(ns.getSimpleSelector(), element);
             case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
+            case Selector.SAC_COMMENT_NODE_SELECTOR:
+            case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
+            case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
             case Selector.SAC_TEXT_NODE_SELECTOR:
                 return false;
-            case Selector.SAC_ROOT_NODE_SELECTOR:
-                return tagName.equalsIgnoreCase("html");
             default:
-                getLog().error("Unknown selector type '" + selector.getSelectorType() + "'.");
+                getLog().error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
                 return false;
         }
     }
 
     /**
-     * Indicates if the condition has some chance to apply on the element
-     * @param condition a condition
-     * @param element the element to test on
-     * @return <code>false</code> if it doesn't apply, <code>true</code> if it apply or may apply
+     * Returns <tt>true</tt> if the specified condition selects the specified element.
+     *
+     * TODO: needs review; may not be fully finished.
+     *
+     * @param condition the condition to test
+     * @param element the element to test
+     * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
-    boolean maySelect(final Condition condition, final HtmlElement element) {
+    boolean selects(final Condition condition, final HtmlElement element) {
         switch (condition.getConditionType()) {
             case Condition.SAC_ID_CONDITION:
                 final AttributeCondition ac4 = (AttributeCondition) condition;
                 return ac4.getValue().equals(element.getId());
             case Condition.SAC_CLASS_CONDITION:
                 final AttributeCondition ac3 = (AttributeCondition) condition;
-                return element.getAttribute("class").toString().contains(ac3.getValue());
+                final String v3 = ac3.getValue();
+                final String a3 = element.getAttributeValue("class");
+                return a3.equals(v3) || a3.startsWith(v3 + " ") || a3.endsWith(" " + v3) || a3.contains(" " + v3 + " ");
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return maySelect(cc1.getFirstCondition(), element) && maySelect(cc1.getSecondCondition(), element);
-                /*
+                return selects(cc1.getFirstCondition(), element) && selects(cc1.getSecondCondition(), element);
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
-                    return "@" + ac1.getLocalName() + " = '" + ac1.getValue() + "'";
+                    return element.getAttributeValue(ac1.getLocalName()).equals(ac1.getValue());
                 }
                 else {
-                    return "@" + ac1.getLocalName();
+                    return element.hasAttribute(ac1.getLocalName());
                 }
             case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac2 = (AttributeCondition) condition;
-                return "@" + ac2.getLocalName() + " = '" + ac2.getValue() + "' " + "or starts-with( @"
-                                + ac2.getLocalName() + ", concat( '" + ac2.getValue() + "', '-' ) )";
-            case Condition.SAC_CONTENT_CONDITION:
-                return null;
-            case Condition.SAC_LANG_CONDITION:
-                return null;
-            case Condition.SAC_NEGATIVE_CONDITION:
-                return null;
+                final String v = ac2.getValue();
+                final String a = element.getAttributeValue(ac2.getLocalName());
+                return a.equals(v) || a.startsWith(v + "-") || a.endsWith("-" + v) || a.contains("-" + v + "-");
             case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac5 = (AttributeCondition) condition;
-                return "contains( concat(' ', @" + ac5.getLocalName() + ", ' '), " + "concat(' ', '"
-                                + ac5.getValue() + "', ' ') )";
-            case Condition.SAC_ONLY_CHILD_CONDITION:
-                return null;
-            case Condition.SAC_ONLY_TYPE_CONDITION:
-                return null;
+                final String v2 = ac5.getValue();
+                final String a2 = element.getAttributeValue(ac5.getLocalName());
+                return a2.equals(v2) || a2.startsWith(v2 + " ") || a2.endsWith(" " + v2) || a2.contains(" " + v2 + " ");
             case Condition.SAC_OR_CONDITION:
                 final CombinatorCondition cc2 = (CombinatorCondition) condition;
-                return "(" + translateToXPath(cc2.getFirstCondition()) + ") or ("
-                                + translateToXPath(cc2.getSecondCondition()) + ")";
+                return selects(cc2.getFirstCondition(), element) || selects(cc2.getSecondCondition(), element);
+            case Condition.SAC_NEGATIVE_CONDITION:
+                final NegativeCondition nc = (NegativeCondition) condition;
+                return !selects(nc.getCondition(), element);
+            case Condition.SAC_ONLY_CHILD_CONDITION:
+                return element.getParentNode().getChildNodes().getLength() == 1;
+            case Condition.SAC_CONTENT_CONDITION:
+                final ContentCondition cc = (ContentCondition) condition;
+                return element.asText().contains(cc.getData());
+            case Condition.SAC_LANG_CONDITION:
+                final LangCondition lc = (LangCondition) condition;
+                for (HtmlElement e = element; e != null; e = (HtmlElement) e.getParentNode()) {
+                    if (e.getAttributeValue("lang").startsWith(lc.getLang())) {
+                        return true;
+                    }
+                }
+                return false;
+            case Condition.SAC_ONLY_TYPE_CONDITION:
+                final String tagName = element.getTagName();
+                return element.getPage().getElementsByTagName(tagName).getLength() == 1;
             case Condition.SAC_POSITIONAL_CONDITION:
-                return null;
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
-                return null;*/
+                return false;
             default:
-                return true;
+                getLog().error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
+                return false;
         }
     }
 
@@ -338,138 +355,6 @@ public class Stylesheet extends SimpleScriptable {
         }
         catch (final IOException e) {
             return "";
-        }
-    }
-
-    /**
-     * Translates the specified selector to an XPath expression. If the specified selector is a type
-     * of selector that we don't care about, this method returns <tt>null</tt>. See <a
-     * href="http://plasmasturm.org/log/444/">this page</a> for more information.
-     *
-     * @param selector the selector to be translated
-     * @return an XPath version of the specified selector
-     */
-    String translateToXPath(final Selector selector) {
-        final String response;
-        switch (selector.getSelectorType()) {
-            case Selector.SAC_ANY_NODE_SELECTOR:
-                return "*";
-            case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
-                return null;
-            case Selector.SAC_CHILD_SELECTOR:
-                final DescendantSelector cs = (DescendantSelector) selector;
-                final String p = translateToXPath(cs.getAncestorSelector());
-                final String c = translateToXPath(cs.getSimpleSelector());
-                response = p + "/" + c;
-                break;
-            case Selector.SAC_COMMENT_NODE_SELECTOR:
-                return null;
-            case Selector.SAC_CONDITIONAL_SELECTOR:
-                final ConditionalSelector conditional = (ConditionalSelector) selector;
-                String e = translateToXPath(conditional.getSimpleSelector());
-                final String cond = translateToXPath(conditional.getCondition());
-                if (cond != null) {
-                    if (e.equals("*")) {
-                        e = "//*";
-                    }
-                    response = e + "[" + cond + "]";
-                }
-                else {
-                    response = e;
-                }
-                break;
-            case Selector.SAC_DESCENDANT_SELECTOR:
-                final DescendantSelector ds = (DescendantSelector) selector;
-                final String a = translateToXPath(ds.getAncestorSelector());
-                final String d = translateToXPath(ds.getSimpleSelector());
-                response = a + "//" + d;
-                break;
-            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-                return null;
-            case Selector.SAC_ELEMENT_NODE_SELECTOR:
-                final ElementSelector es = (ElementSelector) selector;
-                final String name = es.getLocalName();
-                if (name != null) {
-                    response = "//" + name;
-                }
-                else {
-                    response = "*";
-                }
-                break;
-            case Selector.SAC_NEGATIVE_SELECTOR:
-                return null;
-            case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
-                return null;
-            case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
-                return null;
-            case Selector.SAC_ROOT_NODE_SELECTOR:
-                return "html";
-            case Selector.SAC_TEXT_NODE_SELECTOR:
-                return null;
-            default:
-                getLog().error("Unknown selector type '" + selector.getSelectorType() + "'.");
-                return null;
-        }
-        
-        return response.replaceAll("/{3,}", "//");
-    }
-
-    /**
-     * Translates the specified selector condition to an XPath expression. If the specified
-     * condition is a type of condition that we don't care about, this method returns <tt>null</tt>.
-     * See <a href="http://plasmasturm.org/log/444/">this page</a> for more information.
-     *
-     * @param condition the selector condition to be translated
-     * @return an XPath version of the specified selector condition
-     */
-    private String translateToXPath(final Condition condition) {
-        switch (condition.getConditionType()) {
-            case Condition.SAC_AND_CONDITION:
-                final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return "(" + translateToXPath(cc1.getFirstCondition()) + ") and ("
-                                + translateToXPath(cc1.getSecondCondition()) + ")";
-            case Condition.SAC_ATTRIBUTE_CONDITION:
-                final AttributeCondition ac1 = (AttributeCondition) condition;
-                if (ac1.getSpecified()) {
-                    return "@" + ac1.getLocalName() + " = '" + ac1.getValue() + "'";
-                }
-                else {
-                    return "@" + ac1.getLocalName();
-                }
-            case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-                final AttributeCondition ac2 = (AttributeCondition) condition;
-                return "@" + ac2.getLocalName() + " = '" + ac2.getValue() + "' " + "or starts-with( @"
-                                + ac2.getLocalName() + ", concat( '" + ac2.getValue() + "', '-' ) )";
-            case Condition.SAC_CLASS_CONDITION:
-                final AttributeCondition ac3 = (AttributeCondition) condition;
-                return "contains( concat(' ', @class, ' '), concat(' ', '" + ac3.getValue() + "', ' ') )";
-            case Condition.SAC_CONTENT_CONDITION:
-                return null;
-            case Condition.SAC_ID_CONDITION:
-                final AttributeCondition ac4 = (AttributeCondition) condition;
-                return "@id='" + ac4.getValue() + "'";
-            case Condition.SAC_LANG_CONDITION:
-                return null;
-            case Condition.SAC_NEGATIVE_CONDITION:
-                return null;
-            case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
-                final AttributeCondition ac5 = (AttributeCondition) condition;
-                return "contains( concat(' ', @" + ac5.getLocalName() + ", ' '), " + "concat(' ', '"
-                                + ac5.getValue() + "', ' ') )";
-            case Condition.SAC_ONLY_CHILD_CONDITION:
-                return null;
-            case Condition.SAC_ONLY_TYPE_CONDITION:
-                return null;
-            case Condition.SAC_OR_CONDITION:
-                final CombinatorCondition cc2 = (CombinatorCondition) condition;
-                return "(" + translateToXPath(cc2.getFirstCondition()) + ") or ("
-                                + translateToXPath(cc2.getSecondCondition()) + ")";
-            case Condition.SAC_POSITIONAL_CONDITION:
-                return null;
-            case Condition.SAC_PSEUDO_CLASS_CONDITION:
-                return null;
-            default:
-                return null;
         }
     }
 
