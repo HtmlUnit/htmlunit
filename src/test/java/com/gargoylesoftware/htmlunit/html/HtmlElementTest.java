@@ -968,9 +968,6 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void type() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myInput').value);\n"

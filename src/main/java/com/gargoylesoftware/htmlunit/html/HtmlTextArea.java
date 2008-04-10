@@ -416,7 +416,7 @@ public class HtmlTextArea extends ClickableElement implements DisabledElement, S
         final Page page = super.type(c, shiftKey, ctrlKey, altKey);
 
         //TODO: handle backspace
-        if (!Character.isWhitespace(c) && !preventDefault_) {
+        if ((c == ' ' || !Character.isWhitespace(c)) && !preventDefault_) {
             setText(getText() + c);
         }
         return page;

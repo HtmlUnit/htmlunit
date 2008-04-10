@@ -87,7 +87,7 @@ public class HtmlTextInput extends HtmlInput {
         final Page page = super.type(c, shiftKey, ctrlKey, altKey);
 
         //TODO: handle backspace
-        if (!Character.isWhitespace(c) && !preventDefault_) {
+        if ((c == ' ' || !Character.isWhitespace(c)) && !preventDefault_) {
             setValueAttribute(getValueAttribute() + c);
         }
         return page;
