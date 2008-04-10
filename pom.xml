@@ -78,6 +78,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>moveFiles</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <mkdir dir="${basedir}/artifacts"/>
+                                <delete includeemptydirs="true">
+                                    <fileset dir="${basedir}/artifacts" includes="**/*"/>
+                                </delete>
+                                <copy todir="${basedir}/artifacts">
+                                    <fileset dir="${basedir}/target">
+                                        <include name="*.jar"/>
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <reporting>

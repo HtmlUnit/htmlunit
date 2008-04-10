@@ -44,7 +44,7 @@ mvn2home
 		        >
                     <property name="reporting-app-dir" value="&basedir;/htmlunit/&hostname;/htmlunit/"/>
             </antpublisher>
-			<artifactspublisher dir="&basedir;/htmlunit/cruisecontrol/checkout/target" dest="htmlunit" />
+			<artifactspublisher dir="&basedir;/htmlunit/cruisecontrol/checkout/artifacts" dest="htmlunit" />
 			<!-- htmlemail is used only for explicit subscribers -->
 			<htmlemail
 				buildresultsurl="http://&hostname;/htmlunit/"
