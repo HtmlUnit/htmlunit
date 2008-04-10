@@ -6,7 +6,7 @@
     </properties>
 
     <body>
-        <release version="2.1-SNAPSHOT" description="Bug fixes and performance improvements">
+        <release version="2.0.1-SNAPSHOT" description="Performance improvements and bug fixes">
             <action type="add" dev="asashour">
                 JavaScript: add initial support for CSSRuleList.
             </action>
