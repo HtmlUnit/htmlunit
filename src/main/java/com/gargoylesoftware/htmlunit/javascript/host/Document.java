@@ -413,8 +413,8 @@ public class Document extends EventNode {
         int tagNameBeginIndex = 0;
         int scriptTagCount = 0;
         boolean tagIsOpen = true;
-        for (int index = 0; index < content.length(); index++) {
-            final char currentChar = content.charAt(index);
+        int index = 0;
+        for (final char currentChar : content.toCharArray()) {
             switch (tagState) {
                 case tagOutside:
                     if (currentChar == '<') {
@@ -461,6 +461,7 @@ public class Document extends EventNode {
                 default:
                     // nothing
             }
+            index++;
         }
         if (scriptTagCount > 0 || tagState != tagOutside) {
             return false;

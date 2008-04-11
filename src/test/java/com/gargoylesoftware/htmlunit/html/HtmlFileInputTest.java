@@ -336,8 +336,8 @@ public class HtmlFileInputTest extends WebTestCase {
                     for (final FileItem item : (List<FileItem>) upload.parseRequest(request)) {
                         if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
-                            for (int i = 0; i < path.length(); i++) {
-                                writer.write(Integer.toHexString(path.charAt(i)).toUpperCase() + " ");
+                            for (final char ch : path.toCharArray()) {
+                                writer.write(Integer.toHexString(ch).toUpperCase() + " ");
                             }
                             writer.write("<br>");
                             writer.write(item.getFieldName());

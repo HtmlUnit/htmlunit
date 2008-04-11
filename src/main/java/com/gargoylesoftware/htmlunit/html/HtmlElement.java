@@ -718,8 +718,8 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @exception IOException If an IO error occurs
      */
     public void type(final String text) throws IOException {
-        for (int i = 0; i < text.length(); i++) {
-            type(text.charAt(i));
+        for (final char ch : text.toCharArray()) {
+            type(ch);
         }
     }
 
@@ -734,8 +734,9 @@ public abstract class HtmlElement extends DomElement implements Element {
      */
     public void type(final String text, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
-        for (int i = 0; i < text.length(); i++) {
-            type(text.charAt(i), shiftKey, ctrlKey, altKey);
+        for (final char ch : text.toCharArray()) {
+            type(ch, shiftKey, ctrlKey, altKey);
+            type(ch);
         }
     }
 

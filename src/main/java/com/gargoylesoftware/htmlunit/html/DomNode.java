@@ -694,10 +694,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected static String reduceWhitespace(final String text) {
         final StringBuilder buffer = new StringBuilder(text.length());
-        final int length = text.length();
         boolean whitespace = false;
-        for (int i = 0; i < length; i++) {
-            final char ch = text.charAt(i);
+        for (final char ch : text.toCharArray()) {
 
             // Translate non-breaking space to regular space.
             if (ch == (char) 160) {
