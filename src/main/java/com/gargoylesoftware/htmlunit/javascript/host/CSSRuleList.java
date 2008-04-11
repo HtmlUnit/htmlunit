@@ -37,6 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.mozilla.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -49,18 +54,18 @@ public class CSSRuleList extends SimpleScriptable {
 
     private static final long serialVersionUID = 6068213884501456020L;
 
-    private final Stylesheet stylesheet_;
+    private final org.w3c.dom.css.CSSRuleList rules_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
      */
     @Deprecated
     public CSSRuleList() {
-        stylesheet_ = null;
+        rules_ = null;
     }
 
     CSSRuleList(final Stylesheet stylesheet) {
-        stylesheet_ = stylesheet;
+        rules_ = stylesheet.getWrappedSheet().getCssRules();
         setParentScope(stylesheet.getParentScope());
         setPrototype(getPrototype(getClass()));
     }
@@ -70,6 +75,65 @@ public class CSSRuleList extends SimpleScriptable {
      * @return the length of this list.
      */
     public int jsxGet_length() {
-        return stylesheet_.getWrappedSheet().getCssRules().getLength();
+        if (rules_ != null) {
+            return rules_.getLength();
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the item in the given index.
+     * @param index the index
+     * @return the item in the given index
+     */
+    public Object jsxFunction_item(final int index) {
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public Object[] getIds() {
+        final List<String> idList = new ArrayList<String>();
+
+        final int length = jsxGet_length();
+        if (!getBrowserVersion().isIE()) {
+            for (int i = 0; i < length; i++) {
+                idList.add(Integer.toString(i));
+            }
+
+            idList.add("length");
+            idList.add("item");
+        }
+        else {
+            idList.add("length");
+
+            for (int i = 0; i < length; i++) {
+                idList.add(Integer.toString(i));
+            }
+        }
+        return idList.toArray();
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public boolean has(final String name, final Scriptable start) {
+        if (name.equals("length") || name.equals("item")) {
+            return true;
+        }
+        try {
+            final int index = Integer.parseInt(name);
+            final int length = jsxGet_length();
+            if (index >= 0 && index < length) {
+                return true;
+            }
+        }
+        catch (final Exception e) {
+            //ignore
+        }
+        return false;
     }
 }

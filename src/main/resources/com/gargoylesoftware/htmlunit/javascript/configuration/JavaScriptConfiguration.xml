@@ -71,6 +71,9 @@
 
     <class name="CSSRuleList" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList" JSObject="true">
         <property name="length" readable="true" writable="false"/>
+        <function name="item">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class name="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSStyleDeclaration" JSObject="true">

@@ -542,9 +542,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         CollectionUtils.transform(elements, transformer_);
 
         if (!getBrowserVersion().isIE()) {
-            int index = 0;
-            for (final Object child : elements) {
-                idList.add(Integer.toString(index++));
+            final int length = getElements().size();
+            for (int i = 0; i < length; i++) {
+                idList.add(Integer.toString(i));
             }
             
             idList.add("length");

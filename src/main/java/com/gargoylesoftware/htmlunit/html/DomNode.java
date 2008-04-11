@@ -489,23 +489,44 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public String getTextContent() throws DOMException {
-        throw new UnsupportedOperationException("DomNode.getTextContent is not yet implemented.");
+        switch (getNodeType()) {
+            case ELEMENT_NODE:
+            case ATTRIBUTE_NODE:
+            case ENTITY_NODE:
+            case ENTITY_REFERENCE_NODE:
+            case DOCUMENT_FRAGMENT_NODE:
+                final StringBuilder builder = new StringBuilder();
+                for (final DomNode child : getChildren()) {
+                    final short childType = child.getNodeType();
+                    if (childType != COMMENT_NODE && childType != PROCESSING_INSTRUCTION_NODE) {
+                        builder.append(child.getTextContent());
+                    }
+                }
+                return builder.toString();
+
+            case TEXT_NODE:
+            case CDATA_SECTION_NODE:
+            case COMMENT_NODE:
+            case PROCESSING_INSTRUCTION_NODE:
+                return getNodeValue();
+
+            default:
+                return null;
+        }
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public void setTextContent(final String textContent) throws DOMException {
-        throw new UnsupportedOperationException("DomNode.setTextContent is not yet implemented.");
+        removeAllChildren();
+        appendChild(new DomText(getPage(), textContent));
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public boolean isSameNode(final Node other) {
         return other == this;

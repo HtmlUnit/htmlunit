@@ -219,7 +219,8 @@ public class StyleSheetTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF = { "4", "0", "1", "2", "3", "length", "item" },
+            IE = { "4", "length", "0", "1", "2", "3" })
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -230,10 +231,14 @@ public class StyleSheetTest extends WebTestCase {
                 + "</style>\n"
                 + "<script>\n"
                 + "  function test(){\n"
+                + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
-                + "      alert(document.styleSheets[0].cssRules.length);\n"
+                + "      rules = document.styleSheets[0].cssRules;\n"
                 + "    else\n"
-                + "      alert(document.styleSheets[0].rules.length);\n"
+                + "      rules = document.styleSheets[0].rules;\n"
+                + "    alert(rules.length);\n"
+                + "    for (var i in rules)\n"
+                + "      alert(i);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
