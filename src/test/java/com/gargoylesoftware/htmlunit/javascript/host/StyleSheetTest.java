@@ -70,7 +70,7 @@ public class StyleSheetTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.NONE)
-    public void selects() throws Exception {
+    public void selects_miscSelectors() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head><body>\n"
             + "<form name='f1' class='foo' class='yui-log'>\n"
@@ -101,6 +101,86 @@ public class StyleSheetTest extends WebTestCase {
         selector = parseSelector("#m1 { margin: 3px; }");
         assertTrue(stylesheet.selects(selector, input1));
         assertFalse(stylesheet.selects(selector, input2));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_anyNodeSelector() throws Exception {
+        testSelects("* { color: red; }", true, true, true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_childSelector() throws Exception {
+        testSelects("body > div { color: red; }", false, true, false);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_descendantSelector() throws Exception {
+        testSelects("body span { color: red; }", false, false, true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_elementSelector() throws Exception {
+        testSelects("div { color: red; }", false, true, false);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_directAdjacentSelector() throws Exception {
+        testSelects("span + span { color: red; }", false, false, true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_conditionalSelector_idCondition() throws Exception {
+        testSelects("span#s { color: red; }", false, false, true);
+        testSelects("#s { color: red; }", false, false, true);
+        testSelects("span[id=s] { color: red; }", false, false, true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void selects_conditionalSelector_classCondition() throws Exception {
+        testSelects("div.bar { color: red; }", false, true, false);
+        testSelects(".bar { color: red; }", false, true, false);
+        testSelects("div[class~=bar] { color: red; }", false, true, false);
+    }
+
+    private void testSelects(final String css, final boolean b, final boolean d, final boolean s) throws Exception {
+        final String html =
+              "<html><body id='b'>\n"
+            + "<div id='d' class='foo bar'><span>x</span><span id='s'>a</span>b</div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final Selector selector = parseSelector(css);
+        final Stylesheet sheet = new Stylesheet();
+        assertEquals(b, sheet.selects(selector, page.getHtmlElementById("b")));
+        assertEquals(d, sheet.selects(selector, page.getHtmlElementById("d")));
+        assertEquals(s, sheet.selects(selector, page.getHtmlElementById("s")));
     }
 
     private Selector parseSelector(final String rule) {

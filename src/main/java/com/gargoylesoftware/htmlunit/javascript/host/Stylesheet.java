@@ -170,8 +170,6 @@ public class Stylesheet extends SimpleScriptable {
     /**
      * Returns <tt>true</tt> if the specified selector selects the specified element.
      *
-     * TODO: needs review; may not be fully finished.
-     *
      * @param selector the selector to test
      * @param element the element to test
      * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
@@ -210,8 +208,10 @@ public class Stylesheet extends SimpleScriptable {
                 return HtmlHtml.TAG_NAME.equalsIgnoreCase(tagName);
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
-                final HtmlElement pre = (HtmlElement) element.getPreviousSibling();
-                return pre != null && selects(ss.getSelector(), pre) && selects(ss.getSiblingSelector(), element);
+                final DomNode prev = element.getPreviousSibling();
+                return prev instanceof HtmlElement
+                    && selects(ss.getSelector(), (HtmlElement) prev)
+                    && selects(ss.getSiblingSelector(), element);
             case Selector.SAC_NEGATIVE_SELECTOR:
                 final NegativeSelector ns = (NegativeSelector) selector;
                 return !selects(ns.getSimpleSelector(), element);
@@ -229,8 +229,6 @@ public class Stylesheet extends SimpleScriptable {
 
     /**
      * Returns <tt>true</tt> if the specified condition selects the specified element.
-     *
-     * TODO: needs review; may not be fully finished.
      *
      * @param condition the condition to test
      * @param element the element to test
