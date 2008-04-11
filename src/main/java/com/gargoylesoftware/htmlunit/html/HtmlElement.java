@@ -736,7 +736,6 @@ public abstract class HtmlElement extends DomElement implements Element {
         throws IOException {
         for (final char ch : text.toCharArray()) {
             type(ch, shiftKey, ctrlKey, altKey);
-            type(ch);
         }
     }
 
