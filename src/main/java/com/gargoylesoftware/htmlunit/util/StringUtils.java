@@ -74,8 +74,8 @@ public final class StringUtils {
      * @return <tt>true</tt> if the specified string contains whitespace, <tt>false</tt> otherwise
      */
     public static boolean containsWhitespace(final String s) {
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (Character.isWhitespace(s.charAt(i))) {
+        for (final char c : s.toCharArray()) {
+            if (Character.isWhitespace(c)) {
                 return true;
             }
         }
