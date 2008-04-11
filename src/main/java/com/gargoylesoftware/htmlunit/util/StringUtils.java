@@ -42,6 +42,7 @@ package com.gargoylesoftware.htmlunit.util;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 public final class StringUtils {
 
@@ -63,24 +64,7 @@ public final class StringUtils {
      * @return the escaped form of the specified string
      */
     public static String escapeXmlChars(final String s) {
-        final StringBuilder sb = new StringBuilder(s.length() * 2);
-        for (int i = 0; i < s.length(); i++) {
-            final char c = s.charAt(i);
-            switch (c) {
-                case '<':
-                    sb.append("&lt;");
-                    break;
-                case '>':
-                    sb.append("&gt;");
-                    break;
-                case '&':
-                    sb.append("&amp;");
-                    break;
-                default:
-                    sb.append(c);
-            }
-        }
-        return sb.toString();
+        return s.replace("<", "&lt;").replace(">", "&gt;").replace("&", "&amp;");
     }
 
     /**
@@ -90,13 +74,11 @@ public final class StringUtils {
      * @return <tt>true</tt> if the specified string contains whitespace, <tt>false</tt> otherwise
      */
     public static boolean containsWhitespace(final String s) {
-        for (int i = 0; i < s.length(); i++) {
-            final char c = s.charAt(i);
-            if (Character.isWhitespace(c)) {
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (Character.isWhitespace(s.charAt(i))) {
                 return true;
             }
         }
         return false;
     }
-
 }
