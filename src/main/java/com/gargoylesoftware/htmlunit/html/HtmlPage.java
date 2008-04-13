@@ -204,17 +204,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public HtmlElement getBody() {
         final HtmlElement doc = getDocumentElement();
-        if (doc == null) {
-            return null;
+        if (doc != null) {
+            for (final DomNode node : doc.getChildren()) {
+                if (node instanceof HtmlBody || node instanceof HtmlFrameSet) {
+                    return (HtmlElement) node;
+                }
+            }
         }
-
-        final List<String> tagNames = Arrays.asList(new String[] {"body", "frameset"});
-        final List< ? extends HtmlElement> elements = doc.getHtmlElementsByTagNames(tagNames);
-        if (elements.isEmpty()) {
-            return null;
-        }
-
-        return elements.get(0);
+        return null;
     }
 
     /**
