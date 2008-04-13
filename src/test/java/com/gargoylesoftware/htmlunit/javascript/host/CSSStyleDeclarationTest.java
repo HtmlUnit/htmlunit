@@ -37,17 +37,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -60,14 +63,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class CSSStyleDeclarationTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "black", "pink", "color: pink;" })
     public void style_OneCssAttribute() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var node = document.getElementById('div1');\n"
@@ -79,14 +84,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
-        final String[] expectedAlerts = {"black", "pink", "color: pink;"};
-        createTestPageForRealBrowserIfNeeded(firstContent, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(firstContent, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
-
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
     }
 
@@ -94,8 +92,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "black", "pink" })
     public void style_MultipleCssAttributes() throws Exception {
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var style = document.getElementById('div1').style;\n"
@@ -106,11 +105,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(firstContent, collectedAlerts);
-
-        final String[] expectedAlerts = {"black", "pink"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
 
         assertEquals(
             "background: blue; color: pink; foo: bar;",
@@ -121,8 +116,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "null", "", "pink" })
     public void style_OneUndefinedCssAttribute() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var style = document.getElementById('div1').style;\n"
@@ -133,13 +129,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
-        final String[] expectedAlerts = {"null", "", "pink"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
-
+        final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("color: pink;", page.getHtmlElementById("div1").getAttributeValue("style"));
     }
 
@@ -149,6 +139,8 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = {"", "hidden", "" },
+            FF = {"", "hidden", "undefined" })
     public void mozillaStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -161,22 +153,17 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
-
-        final String[] expectedAlerts = {"", "hidden", "undefined"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    @Alerts("")
     public void ieStyle() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var oDiv = document.getElementById('div1');\n"
@@ -186,13 +173,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
 
-        final String[] expectedAlerts = {""};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -212,7 +193,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
              + "<span id='red' onclick='test(this)'>foo</span>\n"
              + "</body></html>";
 
-        final HtmlPage page = loadPage(content);
+        final HtmlPage page = loadPage(getBrowserVersion(), content, null);
         ((ClickableElement) page.getHtmlElementById("red")).click();
     }
 
@@ -220,8 +201,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "string", "string", "string", "undefined" })
     public void accessProperties() throws Exception {
-        final String content = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title><script>\n"
                 + "function doTest() {\n"
                 + "    var oDiv = document.getElementById('div1');\n"
                 + "    alert(typeof oDiv.style.visibility);\n"
@@ -231,13 +213,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
-
-        final String[] expectedAlerts = {"string", "string", "string", "undefined"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -245,8 +221,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("123")
     public void setStylePropertyNonString() throws Exception {
-        final String content = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title><script>\n"
                 + "function doTest() {\n"
                 + "    var oDiv1 = document.getElementById('div1');\n"
                 + "    oDiv1.style.pixelLeft = 123;\n"
@@ -254,32 +231,17 @@ public class CSSStyleDeclarationTest extends WebTestCase {
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
-
-        final String[] expectedAlerts = {"123"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts("blue")
     public void getPropertyValue() throws Exception {
-        getPropertyValue(BrowserVersion.FIREFOX_2);
-        try {
-            getPropertyValue(BrowserVersion.INTERNET_EXPLORER_7_0);
-            fail("getPropertyValue is not supported in IE");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-
-    private void getPropertyValue(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var oDiv1 = document.getElementById('div1');\n"
             + "    alert(oDiv1.style.getPropertyValue('background'));\n"
@@ -287,18 +249,15 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='background: blue'>foo</div></body></html>";
-
-        final String[] expectedAlerts = {"blue"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(browserVersion, content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts({ "30px", "", "30px", "arial", "", "arial" })
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
@@ -316,22 +275,15 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script>\n"
             + "<span id='span'>x</span>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        final String[] expected = {"30px", "", "30px", "arial", "", "arial"};
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = {"", "alpha(opacity=50)" }, FF = {"undefined", "undefined" })
     public void styleFilter() throws Exception {
-        styleFilter(BrowserVersion.INTERNET_EXPLORER_6_0, new String[] {"", "alpha(opacity=50)"});
-        styleFilter(BrowserVersion.FIREFOX_2, new String[] {"undefined", "undefined"});
-    }
-
-    private void styleFilter(final BrowserVersion browserVersion, final String[] expected) throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
             + "      var div1 = document.getElementById('div1');\n"
@@ -343,28 +295,16 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<div id='div1'>foo</div>\n"
             + "<div id='div2' style='filter:alpha(opacity=50)'>bar</div>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(browserVersion, html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void setExpression() throws Exception {
-        setExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
-        try {
-            setExpression(BrowserVersion.FIREFOX_2);
-            fail("setExpression is not defined for Firefox");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-    
-    private void setExpression(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
             + "     div1.style.setExpression('title','id');\n"
@@ -372,27 +312,16 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-
-        loadPage(browserVersion, content, null);
+        loadPage(getBrowserVersion(), html, null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     public void removeExpression() throws Exception {
-        removeExpression(BrowserVersion.INTERNET_EXPLORER_7_0);
-        try {
-            removeExpression(BrowserVersion.FIREFOX_2);
-            fail("removeExpression is not defined for Firefox");
-        }
-        catch (final Exception e) {
-            //expected
-        }
-    }
-    
-    private void removeExpression(final BrowserVersion browserVersion) throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var div1 = document.getElementById('div1');\n"
             + "     div1.style.setExpression('title','id');\n"
@@ -401,16 +330,16 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-
-        loadPage(browserVersion, content, null);
+        loadPage(getBrowserVersion(), html, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" })
     public void borderStyles() throws Exception {
-        final String content
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var oDiv = document.getElementById('div1');\n"
@@ -434,18 +363,14 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
-
-        final String[] expectedAlerts = {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
     
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE)
     public void properties() throws Exception {
         properties(BrowserVersion.INTERNET_EXPLORER_6_0, "clear posRight backgroundRepeat borderTopStyle "
             + "marginTop fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor "
@@ -524,6 +449,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE)
     public void properties2() throws Exception {
         properties2(BrowserVersion.INTERNET_EXPLORER_7_0, "clear backgroundRepeat borderTopStyle marginTop "
             + "fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor overflowX "
@@ -599,8 +525,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "", "", "15px", "italic", "", "italic" })
     public void cssText() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var style = document.getElementById('myDiv').style;\n"
             + "     alert(style.fontSize);\n"
@@ -615,19 +542,17 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"", "", "15px", "italic", "", "italic"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts({ "1px", "solid", "red" })
     public void border() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "     var style = document.getElementById('myDiv').style;\n"
             + "     alert(style.getPropertyValue('border-top-width'));\n"
@@ -637,17 +562,15 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv' style='border: red 1px solid'/>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"1px", "solid", "red"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.FIREFOX_2)
+    @Alerts({ "1256px", "auto" })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -660,19 +583,16 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv1'/>\n"
             + "  <div id='myDiv2' style='display:none'/>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"1256px", "auto"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(BrowserVersion.FIREFOX_2, content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "true", "false" })
     public void display() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
             + "    myDiv.style.display='none';\n"
@@ -683,19 +603,16 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"true", "false"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1px", "2px" })
     public void resettingValue() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
             + "    myDiv.style.marginTop='1px';\n"
@@ -707,18 +624,16 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"1px", "2px"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "2px", "30px" })
     public void resettingValue2() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
             + "    myDiv.style.marginTop='2px';\n"
@@ -731,10 +646,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"2px", "30px"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -743,6 +655,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({
+            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
+            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px" })
     public void marginAllvsMarginSingle() throws Exception {
         final String html =
               "<html>\n"
@@ -785,12 +700,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "        <div id='m6' style='margin: 2px; margin-left: 7px;'>m6</div>\n"
             + "    </body>\n"
             + "</html>";
-        final String[] expected = {
-            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
-            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -799,6 +709,9 @@ public class CSSStyleDeclarationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({
+        "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
+        "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px" })
     public void paddingAllvsPaddingSingle() throws Exception {
         final String html =
               "<html>\n"
@@ -841,12 +754,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "        <div id='m6' style='padding: 2px; padding-left: 7px;'>m6</div>\n"
             + "    </body>\n"
             + "</html>";
-        final String[] expected = {
-            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
-            "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"};
-        final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
-        assertEquals(expected, actual);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -906,8 +814,7 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "<body onload='test()'><div id='d' style='" + style + "'>foo</div></body></html>";
         final String[] expected = {expectedValue};
         final List<String> actual = new ArrayList<String>();
-        loadPage(html, actual);
+        loadPage(getBrowserVersion(), html, actual);
         assertEquals(expected, actual);
     }
-
 }

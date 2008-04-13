@@ -211,7 +211,6 @@ public class StyleSheetTest extends WebTestCase {
                 + "<style id='myStyle' type='text/css'></style>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-
         loadPageWithAlerts(html);
     }
 
@@ -243,7 +242,6 @@ public class StyleSheetTest extends WebTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-
         loadPageWithAlerts(html);
     }
 }
