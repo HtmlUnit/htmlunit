@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -220,10 +219,11 @@ public class HTMLTableElement extends RowContainer {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     protected Object insertRow(final int index) {
         // check if a tbody should be created
-        final List<String> tagNames = Arrays.asList(new String[] {"tbody", "thead", "tfoot"});
-        final List< ? extends HtmlElement> rowContainers = getHtmlElementOrDie().getHtmlElementsByTagNames(tagNames);
+        final List< ? extends HtmlElement> rowContainers = (List< ? extends HtmlElement>)
+            getHtmlElementOrDie().getByXPath("//tbody | //thead | //tfoot");
         if (rowContainers.isEmpty() || index == 0) {
             final HtmlElement tBody = getHtmlElementOrDie().appendChildIfNoneExists("tbody");
             return ((RowContainer) getScriptableFor(tBody)).insertRow(0);

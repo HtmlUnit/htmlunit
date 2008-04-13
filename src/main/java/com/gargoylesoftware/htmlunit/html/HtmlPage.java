@@ -1191,8 +1191,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         }
 
         // the event of the contained frames or iframe tags
-        final List<BaseFrame> frames = (List<BaseFrame>)
-            getDocumentElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"frame", "iframe" }));
+        final List<BaseFrame> frames = (List<BaseFrame>) getDocumentElement().getByXPath("//frame | //iframe");
         for (final BaseFrame frame : frames) {
             final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
             if (frameTagEventHandler != null) {
@@ -1745,9 +1744,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      */
+    @SuppressWarnings("unchecked")
     void loadFrames() throws FailingHttpStatusCodeException {
-        final List<String> frameTags = Arrays.asList(new String[] {"frame", "iframe"});
-        final List< ? extends HtmlElement> frames = getDocumentElement().getHtmlElementsByTagNames(frameTags);
+        final List<BaseFrame> frames = (List<BaseFrame>) getDocumentElement().getByXPath("//frame | //iframe");
         for (final HtmlElement element : frames) {
             final BaseFrame frame = (BaseFrame) element;
             // test if the frame should really be loaded:
