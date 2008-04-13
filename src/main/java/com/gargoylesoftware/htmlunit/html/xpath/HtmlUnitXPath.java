@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @author Ahmed Ashour
  * @deprecated As of 2.0, please use {@link DomNode#getByXPath(String)} instead.
  */
+@Deprecated
 public class HtmlUnitXPath {
     private String xpathExpr_;
 
@@ -59,6 +60,7 @@ public class HtmlUnitXPath {
      * @param xpathExpr the XPath expression
      * @deprecated As of 2.0, please use {@link DomNode#getByXPath(String)} instead.
      */
+    @Deprecated
     public HtmlUnitXPath(final String xpathExpr) {
         xpathExpr_ = xpathExpr;
     }
@@ -71,6 +73,7 @@ public class HtmlUnitXPath {
      * @return the first node selected by this XPath expression
      * @deprecated As of 2.0, please use {@link DomNode#getFirstByXPath(String)} instead.
      */
+    @Deprecated
     public Object selectSingleNode(final Object node) {
         if (!(node instanceof DomNode)) {
             throw new IllegalArgumentException("" + node + " must be DomNode.");
@@ -87,6 +90,7 @@ public class HtmlUnitXPath {
      * @return the node-set of all items selected by this XPath expression
      * @deprecated As of 2.0, please use {@link DomNode#getByXPath(String)} instead.
      */
+    @Deprecated
     public List< ? extends Object> selectNodes(final Object node) {
         if (!(node instanceof DomNode)) {
             throw new IllegalArgumentException("" + node + " must be DomNode.");
@@ -104,6 +108,7 @@ public class HtmlUnitXPath {
      * @return the string-value of the result of evaluating this expression with the specified context node
      * @deprecated As of 2.0, please use {@link DomNode#getByXPath(String)} instead.
      */
+    @Deprecated
     public String stringValueOf(final Object node) {
         if (!(node instanceof DomNode)) {
             throw new IllegalArgumentException("" + node + " must be DomNode.");

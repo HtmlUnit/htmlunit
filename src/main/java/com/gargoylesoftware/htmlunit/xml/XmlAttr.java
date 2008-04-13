@@ -68,6 +68,7 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
      * @param mapEntry the wrapped map entry
      * @deprecated Use constructor with explicit names.
      */
+    @Deprecated
     public XmlAttr(final XmlElement xmlElement, final Map.Entry<String, String> mapEntry) {
         super(null, mapEntry.getKey(), xmlElement.getPage());
         value_ = mapEntry.getValue();

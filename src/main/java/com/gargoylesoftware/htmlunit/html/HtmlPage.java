@@ -194,6 +194,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the root element
      * @deprecated As of 2.1, please use {@link #getDocumentElement()} instead.
      */
+    @Deprecated
     public HtmlElement getDocumentHtmlElement() {
         return getDocumentElement();
     }
@@ -872,6 +873,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      *         than the previous page and a JavaScript result object
      * @deprecated As of 1.14, use {@link #executeJavaScript(String)} instead
      */
+    @Deprecated
     public ScriptResult executeJavaScriptIfPossible(final String sourceCode, final String sourceName,
         final HtmlElement htmlElement) {
 
@@ -1793,6 +1795,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
      * @deprecated As of 2.0, please use {@link #setFocusedElement(HtmlElement)} instead.
      */
+    @Deprecated
     public boolean moveFocusToElement(final HtmlElement newElement) {
         return setFocusedElement(newElement);
     }
@@ -1847,6 +1850,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @see #moveFocusToElement(HtmlElement)
      * @deprecated As of 2.0, please use {@link #getFocusedElement()} instead.
      */
+    @Deprecated
     public HtmlElement getElementWithFocus() {
         return getFocusedElement();
     }

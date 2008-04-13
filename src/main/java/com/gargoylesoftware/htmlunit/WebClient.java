@@ -602,6 +602,7 @@ public class WebClient implements Serializable {
      * @deprecated As of 1.14
      * @see WebAssert
      */
+    @Deprecated
     public void assertionFailed(final String message) {
         try {
             final Class< ? > clazz = Class.forName("junit.framework.AssertionFailedError");
@@ -840,6 +841,7 @@ public class WebClient implements Serializable {
      * @return the first window
      * @deprecated since 2.0
      */
+    @Deprecated
     public WebWindow popFirstWindow() {
         synchronized (firstWindowStack_) {
             return (WebWindow) firstWindowStack_.pop();
@@ -850,6 +852,7 @@ public class WebClient implements Serializable {
      * Clears the first window for this client.
      * @deprecated since 2.0
      */
+    @Deprecated
     public void pushClearFirstWindow() {
         synchronized (firstWindowStack_) {
             firstWindowStack_.push(null);

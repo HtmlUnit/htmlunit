@@ -540,6 +540,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * The elements are ordered as found in the HTML source code.
      * @deprecated As of 2.0
      */
+    @Deprecated
     public Iterator<HtmlAttr> getAttributeEntriesIterator() {
         return getAttributesCollection().iterator();
     }
@@ -1010,6 +1011,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return an iterator over the HtmlElement children of this object, i.e. excluding the non-element nodes
      * @deprecated As of 2.0, use {@link #getChildElements()}.
      */
+    @Deprecated
     public final Iterator<HtmlElement> getChildElementsIterator() {
         return new ChildElementsIterator();
     }

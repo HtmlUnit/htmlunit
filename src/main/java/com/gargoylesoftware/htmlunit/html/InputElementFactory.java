@@ -154,6 +154,7 @@ public final class InputElementFactory implements IElementFactory {
      * @return the log
      * @deprecated As of 2.0, use local log variable enclosed in a conditional block.
      */
+    @Deprecated
     protected Log getLog() {
         return mainLog_;
     }

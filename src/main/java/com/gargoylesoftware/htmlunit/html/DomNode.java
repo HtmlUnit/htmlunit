@@ -155,6 +155,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Never call this, used for Serialization.
      * @deprecated
      */
+    @Deprecated
     protected DomNode() {
         this(null);
     }
@@ -271,6 +272,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return this node's last child node, or <tt>null</tt> if this node doesn't have any children
      * @deprecated As of 2.0, please use {@link #getLastChild()} instead.
      */
+    @Deprecated
     public DomNode getLastDomChild() {
         return getLastChild();
     }
@@ -287,6 +289,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return this node's parent node, or <tt>null</tt> if this is the root node
      * @deprecated As of 2.0, please use {@link #getParentNode()} instead.
      */
+    @Deprecated
     public DomNode getParentDomNode() {
         return getParentNode();
     }
@@ -317,6 +320,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return this node's previous sibling, or <tt>null</tt> if this node is its parent's first child
      * @deprecated As of 2.0, please use {@link #getPreviousSibling()} instead.
      */
+    @Deprecated
     public DomNode getPreviousDomSibling() {
         return getPreviousSibling();
     }
@@ -333,6 +337,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return this node's next sibling node, or <tt>null</tt> if this node is its parent's last child
      * @deprecated As of 2.0, please use {@link #getNextSibling()} instead.
      */
+    @Deprecated
     public DomNode getNextDomSibling() {
         return getNextSibling();
     }
@@ -349,6 +354,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return this node's first child node, or <tt>null</tt> if this node does not have any children
      * @deprecated As of 2.0, please use {@link #getFirstChild()} instead.
      */
+    @Deprecated
     public DomNode getFirstDomChild() {
         return getFirstChild();
     }
@@ -728,6 +734,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return the log object for this element
      * @deprecated As of 2.0, use local log variables enclosed in a conditional block.
      */
+    @Deprecated
     protected final Log getLog() {
         return LogFactory.getLog(getClass());
     }
@@ -828,6 +835,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return a new node
      * @deprecated As of 2.0, please use {@link #cloneNode(boolean)} instead.
      */
+    @Deprecated
     public DomNode cloneDomNode(final boolean deep) {
         return cloneNode(deep);
     }
@@ -885,6 +893,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return the node added
      * @deprecated As of 2.0, please use {@link #appendChild(Node)} instead.
      */
+    @Deprecated
     public DomNode appendDomChild(final DomNode node) {
         return appendChild((DomNode) node);
     }
@@ -1153,6 +1162,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return an iterator over the children of this node
      * @deprecated As of 2.0, use {@link #getChildren()}.
      */
+    @Deprecated
     public Iterator<DomNode> getChildIterator() {
         return new ChildIterator();
     }
