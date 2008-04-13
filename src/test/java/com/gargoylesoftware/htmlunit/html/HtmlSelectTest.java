@@ -590,7 +590,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlSelect select = (HtmlSelect) page.getDocumentHtmlElement().getHtmlElementsByTagName("select").get(0);
+        final HtmlSelect select = (HtmlSelect) page.getDocumentElement().getHtmlElementsByTagName("select").get(0);
         assertEquals("foo\nbar\nbaz", select.asText());
     }
 

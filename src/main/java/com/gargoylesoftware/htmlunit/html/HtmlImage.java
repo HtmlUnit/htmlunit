@@ -246,7 +246,7 @@ public class HtmlImage extends ClickableElement {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
-            final HtmlElement doc = getPage().getDocumentHtmlElement();
+            final HtmlElement doc = getPage().getDocumentElement();
             final HtmlMap map = (HtmlMap) doc.getOneHtmlElementByAttribute("map", "name", mapName);
             for (final HtmlElement element : map.getChildElements()) {
                 if (element instanceof HtmlArea) {

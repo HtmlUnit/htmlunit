@@ -155,7 +155,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         loadFrames();
         setReadyState(READY_STATE_COMPLETE);
-        getDocumentHtmlElement().setReadyState(READY_STATE_COMPLETE);
+        getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         if (!getWebClient().getBrowserVersion().isIE()) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
@@ -178,15 +178,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     /**
      * {@inheritDoc}
      */
-    public Element getDocumentElement() {
-        return getDocumentHtmlElement();
-    }
-
-    /**
-     * Gets the root HtmlElement of this document.
-     * @return the root element
-     */
-    public HtmlElement getDocumentHtmlElement() {
+    public HtmlElement getDocumentElement() {
         if (documentElement_ == null) {
             DomNode childNode = getFirstChild();
             while (childNode != null && !(childNode instanceof HtmlElement)) {
@@ -198,11 +190,20 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
+     * Gets the root HtmlElement of this document.
+     * @return the root element
+     * @deprecated As of 2.1, please use {@link #getDocumentElement()} instead.
+     */
+    public HtmlElement getDocumentHtmlElement() {
+        return getDocumentElement();
+    }
+
+    /**
      * Returns the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist.
      * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or <tt>null</tt> if it does not yet exist
      */
     public HtmlElement getBody() {
-        final HtmlElement doc = getDocumentHtmlElement();
+        final HtmlElement doc = getDocumentElement();
         if (doc == null) {
             return null;
         }
@@ -252,7 +253,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public Element getElementById(final String elementId) {
         try {
-            return getDocumentHtmlElement().getHtmlElementById(elementId);
+            return getDocumentElement().getHtmlElementById(elementId);
         }
         catch (final ElementNotFoundException e) {
             return null;
@@ -522,7 +523,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws ElementNotFoundException if the anchor could not be found
      */
     public HtmlAnchor getAnchorByName(final String name) throws ElementNotFoundException {
-        return (HtmlAnchor) getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "name", name);
+        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "name", name);
     }
 
     /**
@@ -533,7 +534,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws ElementNotFoundException if the anchor could not be found
      */
     public HtmlAnchor getAnchorByHref(final String href) throws ElementNotFoundException {
-        return (HtmlAnchor) getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "href", href);
+        return (HtmlAnchor) getDocumentElement().getOneHtmlElementByAttribute("a", "href", href);
     }
 
     /**
@@ -542,7 +543,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @SuppressWarnings("unchecked")
     public List<HtmlAnchor> getAnchors() {
-        return (List<HtmlAnchor>) getDocumentHtmlElement().getHtmlElementsByTagName("a");
+        return (List<HtmlAnchor>) getDocumentElement().getHtmlElementsByTagName("a");
     }
 
     /**
@@ -570,7 +571,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
         final List< ? extends HtmlElement> forms =
-            getDocumentHtmlElement().getHtmlElementsByAttribute("form", "name", name);
+            getDocumentElement().getHtmlElementsByAttribute("form", "name", name);
         if (forms.size() == 0) {
             throw new ElementNotFoundException("form", "name", name);
         }
@@ -585,7 +586,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @SuppressWarnings("unchecked")
     public List<HtmlForm> getForms() {
-        return (List<HtmlForm>) getDocumentHtmlElement().getHtmlElementsByTagName("form");
+        return (List<HtmlForm>) getDocumentElement().getHtmlElementsByTagName("form");
     }
 
     /**
@@ -600,7 +601,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public URL getFullyQualifiedUrl(String relativeUrl)
         throws MalformedURLException {
 
-        final List<HtmlBase> baseElements = (List<HtmlBase>) getDocumentHtmlElement().getHtmlElementsByTagName("base");
+        final List<HtmlBase> baseElements = (List<HtmlBase>) getDocumentElement().getHtmlElementsByTagName("base");
         URL baseUrl;
         if (baseElements.isEmpty()) {
             baseUrl = getWebResponse().getUrl();
@@ -660,7 +661,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the resolved target to use for the element
      */
     public String getResolvedTarget(final String elementTarget) {
-        final List< ? extends HtmlElement> baseElements = getDocumentHtmlElement().getHtmlElementsByTagName("base");
+        final List< ? extends HtmlElement> baseElements = getDocumentElement().getHtmlElementsByTagName("base");
         final String resolvedTarget;
         if (baseElements.isEmpty()) {
             resolvedTarget = elementTarget;
@@ -1122,7 +1123,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             if (mainLog_.isDebugEnabled()) {
                 mainLog_.debug("No title element, creating one");
             }
-            final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentHtmlElement(), HtmlHead.class);
+            final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
             if (head == null) {
                 // perhaps should we create head too?
                 throw new IllegalStateException("Headelement was not defined for this page");
@@ -1162,7 +1163,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the title element for this page or null if this is not one
      */
     private HtmlTitle getTitleElement() {
-        final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentHtmlElement(), HtmlHead.class);
+        final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
         if (head != null) {
             return (HtmlTitle) getFirstChildElement(head, HtmlTitle.class);
         }
@@ -1184,7 +1185,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
         final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
         if (jsWindow != null) {
-            final HtmlElement element = getDocumentHtmlElement();
+            final HtmlElement element = getDocumentElement();
             final Event event = new Event(element, eventType);
             element.fireEvent(event);
             if (!isOnbeforeunloadAccepted(this, event)) {
@@ -1194,7 +1195,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
         // the event of the contained frames or iframe tags
         final List<BaseFrame> frames = (List<BaseFrame>)
-            getDocumentHtmlElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"frame", "iframe" }));
+            getDocumentElement().getHtmlElementsByTagNames(Arrays.asList(new String[]{"frame", "iframe" }));
         for (final BaseFrame frame : frames) {
             final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
             if (frameTagEventHandler != null) {
@@ -1338,7 +1339,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (!getWebClient().getBrowserVersion().isIE()) {
             return;
         }
-        final HtmlElement doc = getDocumentHtmlElement();
+        final HtmlElement doc = getDocumentElement();
         for (final HtmlScript script : (List<HtmlScript>) doc.getHtmlElementsByTagName("script")) {
             if (script.isDeferred()) {
                 script.executeScriptIfNeeded(true);
@@ -1357,7 +1358,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (!getWebClient().getBrowserVersion().isIE()) {
             return;
         }
-        final HtmlElement doc = getDocumentHtmlElement();
+        final HtmlElement doc = getDocumentElement();
         for (final HtmlScript script : (List<HtmlScript>) doc.getHtmlElementsByTagName("script")) {
             if (script.isDeferred()) {
                 script.setReadyStateComplete();
@@ -1749,7 +1750,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     void loadFrames() throws FailingHttpStatusCodeException {
         final List<String> frameTags = Arrays.asList(new String[] {"frame", "iframe"});
-        final List< ? extends HtmlElement> frames = getDocumentHtmlElement().getHtmlElementsByTagNames(frameTags);
+        final List< ? extends HtmlElement> frames = getDocumentElement().getHtmlElementsByTagNames(frameTags);
         for (final HtmlElement element : frames) {
             final BaseFrame frame = (BaseFrame) element;
             // test if the frame should really be loaded:
@@ -1766,7 +1767,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @Override
     public String asXml() {
-        return getDocumentHtmlElement().asXml();
+        return getDocumentElement().asXml();
     }
 
     /**
@@ -1871,7 +1872,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     @SuppressWarnings("unchecked")
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
         final String nameLC = httpEquiv.toLowerCase();
-        final List<HtmlMeta> tags = (List<HtmlMeta>) getDocumentHtmlElement().getHtmlElementsByTagName("meta");
+        final List<HtmlMeta> tags = (List<HtmlMeta>) getDocumentElement().getHtmlElementsByTagName("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
             if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {

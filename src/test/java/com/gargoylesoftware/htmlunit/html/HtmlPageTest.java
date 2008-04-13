@@ -978,7 +978,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlElement root = page.getDocumentHtmlElement();
+        final HtmlElement root = page.getDocumentElement();
 
         assertNotNull(root);
         assertEquals("html", root.getTagName());
@@ -996,7 +996,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlElement root = page.getDocumentHtmlElement();
+        final HtmlElement root = page.getDocumentElement();
 
         assertEquals(org.w3c.dom.Node.DOCUMENT_NODE, page.getNodeType());
         assertEquals(org.w3c.dom.Node.ELEMENT_NODE, root.getNodeType());
@@ -1404,12 +1404,12 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
-        final HtmlElement id1 = (HtmlElement) page.getDocumentHtmlElement().getLastChild().getLastChild();
+        final HtmlElement id1 = (HtmlElement) page.getDocumentElement().getLastChild().getLastChild();
         assertEquals("id1", id1.getId());
         assertSame(id1, page.getHtmlElementById("id1"));
         final HtmlPage clone = (HtmlPage) page.cloneNode(true);
         assertSame(id1, page.getHtmlElementById("id1"));
-        final HtmlElement id1clone = (HtmlElement) clone.getDocumentHtmlElement().getLastChild().getLastChild();
+        final HtmlElement id1clone = (HtmlElement) clone.getDocumentElement().getLastChild().getLastChild();
         assertNotSame(id1, id1clone);
         assertEquals("id1", id1clone.getId());
         assertSame(id1clone, clone.getHtmlElementById("id1"));
@@ -1441,8 +1441,8 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlPage clone = (HtmlPage) page.cloneNode(true);
         assertTrue(page != clone);
-        final HtmlElement doc = page.getDocumentHtmlElement();
-        final HtmlElement docclone = clone.getDocumentHtmlElement();
+        final HtmlElement doc = page.getDocumentElement();
+        final HtmlElement docclone = clone.getDocumentElement();
         assertTrue(doc != docclone);
     }
 

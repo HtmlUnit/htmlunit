@@ -134,7 +134,7 @@ public abstract class JQueryTestBase extends WebTestCase {
             getLog().info("Test result for " + getVersion() + " written to: " + f.getAbsolutePath());
         }
 
-        final HtmlElement doc = page.getDocumentHtmlElement();
+        final HtmlElement doc = page.getDocumentElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getHtmlElementById("tests");
         final Iterable<HtmlElement> i = tests.getChildElements();
         return i.iterator();

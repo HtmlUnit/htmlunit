@@ -249,7 +249,7 @@ public final class WebAssert {
      */
     public static void assertLinkPresent(final HtmlPage page, final String id) {
         try {
-            page.getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "id", id);
+            page.getDocumentElement().getOneHtmlElementByAttribute("a", "id", id);
         }
         catch (final ElementNotFoundException e) {
             final String msg = "The page does not contain a link with ID '" + id + "'.";
@@ -265,7 +265,7 @@ public final class WebAssert {
      */
     public static void assertLinkNotPresent(final HtmlPage page, final String id) {
         try {
-            page.getDocumentHtmlElement().getOneHtmlElementByAttribute("a", "id", id);
+            page.getDocumentElement().getOneHtmlElementByAttribute("a", "id", id);
             // Not expected.
             final String msg = "The page contains a link with ID '" + id + "'.";
             throw new AssertionError(msg);
@@ -436,7 +436,7 @@ public final class WebAssert {
     public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
         final List<String> tags =
             Arrays.asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
-        for (final HtmlElement element : page.getDocumentHtmlElement().getHtmlElementsByTagNames(tags)) {
+        for (final HtmlElement element : page.getDocumentElement().getHtmlElementsByTagNames(tags)) {
             final Short tabIndex = element.getTabIndex();
             if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
                 final String s = element.getAttributeValue("tabindex");

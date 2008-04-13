@@ -121,7 +121,7 @@ class JavaScriptBackgroundJob implements Runnable {
                             function_,
                             window_,
                             new Object[0],
-                            htmlPage.getDocumentHtmlElement());
+                            htmlPage.getDocumentElement());
                 }
                 if (Thread.currentThread().isInterrupted()) {
                     getLog().debug("JavaScript " + label_ + " thread interrupted; clearTimeout() probably called.");

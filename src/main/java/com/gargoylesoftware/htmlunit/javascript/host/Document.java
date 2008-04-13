@@ -366,7 +366,7 @@ public class Document extends EventNode {
 
         // Get the node at which the parsed content should be added.
         HtmlElement current;
-        final HtmlElement doc = page.getDocumentHtmlElement();
+        final HtmlElement doc = page.getDocumentElement();
         HtmlElement body = page.getBody();
         if (body == null) {
             // The body doesn't exist yet! Add it.
@@ -722,7 +722,7 @@ public class Document extends EventNode {
      * @return the root node for the document
      */
     public SimpleScriptable jsxGet_documentElement() {
-        return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentHtmlElement());
+        return getScriptableFor(((HtmlPage) getDomNodeOrDie()).getDocumentElement());
     }
 
     /**
@@ -952,7 +952,7 @@ public class Document extends EventNode {
         Object result = null;
         try {
             final HtmlElement htmlElement =
-                ((HtmlPage) getDomNodeOrDie()).getDocumentHtmlElement().getHtmlElementById(id);
+                ((HtmlPage) getDomNodeOrDie()).getDocumentElement().getHtmlElementById(id);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {

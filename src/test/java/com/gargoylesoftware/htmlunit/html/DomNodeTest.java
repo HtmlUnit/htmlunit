@@ -75,7 +75,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         Assert.assertEquals("Element should have attribute", true, node.hasAttributes());
     }
 
@@ -89,7 +89,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         final DomNode parent = node.getParentNode();
         Assert.assertEquals("Element should not have attribute", false, parent.hasAttributes());
     }
@@ -104,7 +104,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have attribute", false, child.hasAttributes());
     }
@@ -119,7 +119,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
@@ -134,7 +134,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
     }
@@ -149,7 +149,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getLocalName());
     }
@@ -164,7 +164,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         final DomNode child = node.getFirstChild();
         child.setPrefix("bar"); // This does nothing.
         Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
@@ -184,7 +184,7 @@ public class DomNodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
         node.removeAllChildren();
         Assert.assertEquals("Did not remove all nodes", null, node.getFirstChild());
     }
@@ -199,7 +199,7 @@ public class DomNodeTest extends WebTestCase {
             + "<br><div id='tag'/><br><div id='tag2'/></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
 
         final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextSibling();
@@ -238,7 +238,7 @@ public class DomNodeTest extends WebTestCase {
             + "<br><div id='tag'/></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
 
         final AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(null, "id", "id", null, "newElt");
@@ -277,7 +277,7 @@ public class DomNodeTest extends WebTestCase {
             + "<br><div><div id='tag'/></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
 
         final DomNode parent = node.getParentNode();
 
@@ -307,7 +307,7 @@ public class DomNodeTest extends WebTestCase {
             + "<br><div id='tag'/><br></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentHtmlElement().getHtmlElementById("tag");
+        final DomNode node = page.getDocumentElement().getHtmlElementById("tag");
 
         final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextSibling();
@@ -460,7 +460,7 @@ public class DomNodeTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(html);
         final DescendantElementsIterator iterator = (DescendantElementsIterator)
-            page.getDocumentHtmlElement().getAllHtmlChildElements().iterator();
+            page.getDocumentElement().getAllHtmlChildElements().iterator();
         assertEquals("", iterator.nextElement().getId());
         assertEquals("0", iterator.nextElement().getId());
         assertEquals("I", iterator.nextElement().getId());

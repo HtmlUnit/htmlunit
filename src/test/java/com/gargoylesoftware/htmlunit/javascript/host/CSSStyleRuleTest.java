@@ -43,6 +43,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link CSSStyleRule}.
@@ -60,6 +61,7 @@ public class CSSStyleRuleTest extends WebTestCase {
     @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1",
             "[object CSSStyleDeclaration]" },
             IE = { "[object]", "H1", "false", "[object]" })
+    @NotYetImplemented
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

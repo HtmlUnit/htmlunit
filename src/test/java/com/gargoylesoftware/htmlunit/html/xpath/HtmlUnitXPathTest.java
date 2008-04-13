@@ -74,8 +74,8 @@ public class HtmlUnitXPathTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(content);
-        assertEquals(page.getDocumentHtmlElement(), page.getFirstByXPath("/html"));
-        assertEquals(page.getDocumentHtmlElement().getFirstChild(), page.getFirstByXPath("/html/head"));
+        assertEquals(page.getDocumentElement(), page.getFirstByXPath("/html"));
+        assertEquals(page.getDocumentElement().getFirstChild(), page.getFirstByXPath("/html/head"));
         assertEquals(page.getHtmlElementById("myLink"), page.getFirstByXPath("/html/body/a"));
         assertEquals("Test page", ((DomText) page.getFirstByXPath("/html/head/title/text()")).getNodeValue());
     }
