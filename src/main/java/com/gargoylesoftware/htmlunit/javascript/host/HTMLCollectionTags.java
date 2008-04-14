@@ -44,18 +44,19 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HTMLCollectionTags extends HTMLCollection {
 
     private static final long serialVersionUID = -1772897974886997756L;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      * Don't call.
      */
     @Deprecated
     public HTMLCollectionTags() {
-        // nothing
+        // Empty.
     }
 
     /**
@@ -72,19 +73,9 @@ public class HTMLCollectionTags extends HTMLCollection {
      */
     @Override
     protected Object equivalentValues(final Object other) {
-        if (other == this) {
-            return Boolean.TRUE;
+        if (!(other instanceof HTMLCollectionTags)) {
+            return Boolean.FALSE;
         }
-        else if (other instanceof HTMLCollectionTags) {
-            final HTMLCollectionTags otherArray = (HTMLCollectionTags) other;
-            if (getNode() == otherArray.getNode()
-                    && getXpath().toString().equals(otherArray.getXpath().toString())
-                    && getTransformer().equals(otherArray.getTransformer())) {
-                return Boolean.TRUE;
-            }
-            return NOT_FOUND;
-        }
-
         return super.equivalentValues(other);
     }
 }

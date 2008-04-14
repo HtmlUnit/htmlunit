@@ -642,27 +642,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * @return the XPath
-     */
-    protected String getXpath() {
-        return xpath_;
-    }
-
-    /**
-     * @return the node
-     */
-    protected DomNode getNode() {
-        return node_;
-    }
-
-    /**
-     * @return the transformer
-     */
-    protected Transformer getTransformer() {
-        return transformer_;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public int getLength() {
