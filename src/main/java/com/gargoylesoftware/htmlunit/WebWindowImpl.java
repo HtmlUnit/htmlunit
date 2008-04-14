@@ -59,7 +59,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private Object scriptObject_;
-    private ThreadManager threadManager_ = new ThreadManager();
+    private ThreadManager threadManager_ = new ThreadManager(this);
     private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
     private String name_ = "";
 

@@ -326,33 +326,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Makes the job object for setTimeout and setInterval
-     *
-     * @param codeToExec either a Function or a String of the JavaScript code
-     * @param timeout time to wait
-     * @param thisWindow the window to associate the thread with
-     * @param loopForever if the thread should keep looping (setTimeout vs setInterval)
-     * @return the job
-     */
-    private static JavaScriptBackgroundJob createJavaScriptBackgroundJob(final Object codeToExec,
-            final int timeout, final Window thisWindow, final boolean loopForever, final String label) {
-        if (codeToExec == null) {
-            throw Context.reportRuntimeError("Function not provided");
-        }
-        else if (codeToExec instanceof String) {
-            final String scriptString = (String) codeToExec;
-            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptString, loopForever, label);
-        }
-        else if (codeToExec instanceof Function) {
-            final Function scriptFunction = (Function) codeToExec;
-            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptFunction, loopForever, label);
-        }
-        else {
-            throw Context.reportRuntimeError("Unknown type for function");
-        }
-    }
-
-    /**
      * Sets a chunk of JavaScript to be invoked at some specified time later.
      * The invocation occurs only if the window is opened after the delay
      * and does not contain an other page than the one that originated the setTimeout.
@@ -373,8 +346,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final int timeout = getIntArg(1, args, 0);
 
         thisWindow.getLog().debug("setTimeout(" + codeToExec + ", " + timeout + ")");
-        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, false, "setTimeout");
-        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job, "window.setTimeout");
+        final int id = thisWindow.getWebWindow().getThreadManager()
+            .registerJob(codeToExec, timeout, "window.setTimeout");
         return id;
     }
 
@@ -384,7 +357,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
     public void jsxFunction_clearTimeout(final int timeoutId) {
-        getWebWindow().getThreadManager().stopThread(timeoutId);
+        getWebWindow().getThreadManager().removeJob(timeoutId);
     }
 
     /**
@@ -1030,8 +1003,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final int timeout = getIntArg(1, args, 0);
 
         thisWindow.getLog().debug("setInterval(" + codeToExec + ", " + timeout + ")");
-        final Runnable job = createJavaScriptBackgroundJob(codeToExec, timeout, thisWindow, true, "setInterval");
-        final int id = thisWindow.getWebWindow().getThreadManager().startThread(job, "window.setInterval");
+        final int id = thisWindow.getWebWindow().getThreadManager()
+            .registerRecurringJob(codeToExec, timeout, "window.setInterval");
         return id;
     }
 
@@ -1043,7 +1016,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * MSDN documentation</a>
      */
     public void jsxFunction_clearInterval(final int intervalID) {
-        getWebWindow().getThreadManager().stopThread(intervalID);
+        getWebWindow().getThreadManager().removeJob(intervalID);
     }
 
     /**
@@ -1130,6 +1103,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final StyleSheetList sheets = document_.jsxGet_styleSheets();
         for (int i = 0; i < sheets.jsxGet_length(); i++) {
             final Stylesheet sheet = sheets.jsxFunction_item(i);
+            getLog().debug("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
             sheet.modifyIfNecessary(style, e);
         }
 

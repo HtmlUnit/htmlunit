@@ -45,6 +45,10 @@ import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -64,6 +68,12 @@ public class ThreadManager {
 
     /** Map of threads, keyed on thread ID. Use a tree map for deterministic iteration. */
     private Map<Integer, Thread> threadMap_ = Collections.synchronizedMap(new TreeMap<Integer, Thread>());
+
+    private final WebWindow window_;
+
+    ThreadManager(final WebWindow window) {
+        window_ = window;
+    }
 
     /**
      * @return the number of tracked threads
@@ -151,6 +161,17 @@ public class ThreadManager {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Removes the job with the given id for schedule.
+     * @param id the ID of the job to remove
+     */
+    // this should totally replace stopThread in the future
+    public void removeJob(final int id) {
+        stopThread(id);
+    }
+
+    /**
      * Wait for any executing background threads to complete.
      *
      * @param maxWaitMillis the maximum time that should be waited, in milliseconds
@@ -212,4 +233,61 @@ public class ThreadManager {
         return "ThreadManager: " + threadMap_;
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Registers a JavaScript code to be executed at the given time.
+     * @param codeToExec the string or function to execute
+     * @param timeout the time to wait before to executed the code
+     * @param description the job description
+     * @return the ID of the registered job, suitable for use in JavaScript and required
+     * when calling {@link #removeJob(int)}
+     */
+    public int registerJob(final Object codeToExec, final int timeout, final String description) {
+        final JavaScriptBackgroundJob job = createJavaScriptBackgroundJob(codeToExec, timeout, false, description);
+        return startThread(job, description);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Registers a JavaScript code to be executed at the given intervals.
+     * @param codeToExec the string or function to execute
+     * @param interval the time to wait between two executions
+     * @param description the job description
+     * @return the ID of the registered job, suitable for use in JavaScript and required
+     * when calling {@link #removeJob(int)}
+     */
+    public int registerRecurringJob(final Object codeToExec, final int interval, final String description) {
+        final JavaScriptBackgroundJob job = createJavaScriptBackgroundJob(codeToExec, interval, true, description);
+        return startThread(job, description);
+    }
+    
+    /**
+     * Makes the job object for setTimeout and setInterval
+     *
+     * @param codeToExec either a Function or a String of the JavaScript code
+     * @param timeout time to wait
+     * @param thisWindow the window to associate the thread with
+     * @param loopForever if the thread should keep looping (setTimeout vs setInterval)
+     * @return the job
+     */
+    private JavaScriptBackgroundJob createJavaScriptBackgroundJob(final Object codeToExec,
+            final int timeout, final boolean loopForever, final String label) {
+        final Window thisWindow = (Window) window_.getScriptObject();
+        if (codeToExec == null) {
+            throw Context.reportRuntimeError("Function not provided");
+        }
+        else if (codeToExec instanceof String) {
+            final String scriptString = (String) codeToExec;
+            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptString, loopForever, label);
+        }
+        else if (codeToExec instanceof Function) {
+            final Function scriptFunction = (Function) codeToExec;
+            return new JavaScriptBackgroundJob(thisWindow, timeout, scriptFunction, loopForever, label);
+        }
+        else {
+            throw Context.reportRuntimeError("Unknown type for function");
+        }
+    }
 }
