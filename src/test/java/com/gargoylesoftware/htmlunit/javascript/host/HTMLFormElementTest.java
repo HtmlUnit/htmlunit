@@ -317,7 +317,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
-        return (HtmlForm) page.getForms().get(0);
+        return page.getForms().get(0);
     }
 
     /**
@@ -517,7 +517,7 @@ public class HTMLFormElementTest extends WebTestCase {
             final String s1 = expected[i];
             final String s2;
             if (collected.size() > i) {
-                s2 = (String) collected.get(i);
+                s2 = collected.get(i);
             }
             else {
                 s2 = null;

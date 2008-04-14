@@ -90,9 +90,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
             getLog().info("Re-synchronized call to " + requestSettings.getURL());
             return true;
         }
-        else {
-            return !async;
-        }
+        return !async;
     }
 
     /**

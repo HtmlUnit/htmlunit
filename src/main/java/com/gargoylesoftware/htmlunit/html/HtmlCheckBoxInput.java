@@ -119,9 +119,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
         if (isChecked()) {
             return "checked";
         }
-        else {
-            return "unchecked";
-        }
+        return "unchecked";
     }
 
     /**

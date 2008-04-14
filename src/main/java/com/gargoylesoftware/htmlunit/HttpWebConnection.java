@@ -140,10 +140,8 @@ public class HttpWebConnection extends WebConnectionImpl {
                 newRequest.setAdditionalHeaders(webRequestSettings.getAdditionalHeaders());
                 return getResponse(newRequest);
             }
-            else {
-                e.printStackTrace();
-                throw new RuntimeException("HTTP Error: " + e.getMessage());
-            }
+            e.printStackTrace();
+            throw new RuntimeException("HTTP Error: " + e.getMessage());
         }
         finally {
             onResponseGenerated(httpMethod);
@@ -258,7 +256,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                     partList.add(newPart);
                 }
                 Part[] parts = new Part[partList.size()];
-                parts = (Part[]) partList.toArray(parts);
+                parts = partList.toArray(parts);
                 method.setRequestEntity(new MultipartRequestEntity(parts, method.getParams()));
             }
         }

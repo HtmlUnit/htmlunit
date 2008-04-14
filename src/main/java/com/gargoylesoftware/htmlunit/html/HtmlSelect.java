@@ -108,7 +108,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
         if (getSelectedOptions().isEmpty() && size <= 1 && !isMultipleSelectEnabled()) {
             final List<HtmlOption> options = getOptions();
             if (!options.isEmpty()) {
-                final HtmlOption first = (HtmlOption) options.get(0);
+                final HtmlOption first = options.get(0);
                 first.setSelectedInternal(true);
             }
         }
@@ -298,10 +298,8 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
             doSelectOption(selectedOption, isSelected);
             return HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }
-        else {
-            // nothing to do
-            return getPage();
-        }
+        // nothing to do
+        return getPage();
     }
 
     private void doSelectOption(final HtmlOption selectedOption,
@@ -369,9 +367,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
         if (options.size() > 0) {
             return options.get(0).getValueAttribute();
         }
-        else {
-            return "";
-        }
+        return "";
     }
 
     /**

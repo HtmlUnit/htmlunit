@@ -213,10 +213,8 @@ public class HTMLSelectElement extends FormField {
         if (selectedOptions.isEmpty()) {
             return -1;
         }
-        else {
-            final List<HtmlOption> allOptions = htmlSelect.getOptions();
-            return allOptions.indexOf(selectedOptions.get(0));
-        }
+        final List<HtmlOption> allOptions = htmlSelect.getOptions();
+        return allOptions.indexOf(selectedOptions.get(0));
     }
 
     /**
@@ -252,9 +250,7 @@ public class HTMLSelectElement extends FormField {
         if (selectedOptions.isEmpty()) {
             return "";
         }
-        else {
-            return selectedOptions.get(0).getValueAttribute();
-        }
+        return selectedOptions.get(0).getValueAttribute();
     }
 
     /**

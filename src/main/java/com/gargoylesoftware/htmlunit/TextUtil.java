@@ -80,9 +80,7 @@ public final class TextUtil {
         if (stringToCheck.length() < prefixLength) {
             return false;
         }
-        else {
-            return stringToCheck.substring(0, prefixLength).toLowerCase().equals(prefix.toLowerCase());
-        }
+        return stringToCheck.substring(0, prefixLength).toLowerCase().equals(prefix.toLowerCase());
     }
 
     /**

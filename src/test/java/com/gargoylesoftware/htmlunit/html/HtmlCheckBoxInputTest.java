@@ -230,7 +230,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
             + "<body onload='init()'>\n"
             + "<input type='checkbox' id='checkbox1'/>\n"
             + "</body></html>";
-        final HtmlPage page = (HtmlPage) loadPage(browserVersion, html, null);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlCheckBoxInput checkbox1 = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
         checkbox1.click();
         assertFalse(checkbox1.isChecked());

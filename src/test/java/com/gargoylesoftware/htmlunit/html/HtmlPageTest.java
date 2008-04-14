@@ -218,7 +218,7 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlButton button = form.getButtonByName("button1");
         assertSame("button1", button, form.getButtonByName("button1"));
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         assertSame("select1", select, form.getSelectsByName("select1").get(0));
 
         final HtmlOption option = select.getOptionByValue("option1");
@@ -513,7 +513,7 @@ public class HtmlPageTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) page.getAnchors().get(0);
+        final HtmlAnchor anchor = page.getAnchors().get(0);
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         
         final String[] expectedIncorrectness = {
@@ -1016,7 +1016,7 @@ public class HtmlPageTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlAnchor link = (HtmlAnchor) page.getAnchors().get(0);
+        final HtmlAnchor link = page.getAnchors().get(0);
         link.click();
     }
 
@@ -1772,7 +1772,7 @@ public class HtmlPageTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) page.getAnchors().get(0);
+        final HtmlAnchor anchor = page.getAnchors().get(0);
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         
         assertEquals(new String[] {expectedMessage}, collectedConfirms);

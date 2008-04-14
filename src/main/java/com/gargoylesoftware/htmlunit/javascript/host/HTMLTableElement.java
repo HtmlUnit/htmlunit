@@ -81,9 +81,7 @@ public class HTMLTableElement extends RowContainer {
         if (captions.isEmpty()) {
             return null;
         }
-        else {
-            return getScriptableFor(captions.get(0));
-        }
+        return getScriptableFor(captions.get(0));
     }
 
     /**
@@ -96,9 +94,7 @@ public class HTMLTableElement extends RowContainer {
         if (tfoots.isEmpty()) {
             return null;
         }
-        else {
-            return getScriptableFor(tfoots.get(0));
-        }
+        return getScriptableFor(tfoots.get(0));
     }
 
     /**
@@ -111,9 +107,7 @@ public class HTMLTableElement extends RowContainer {
         if (theads.isEmpty()) {
             return null;
         }
-        else {
-            return getScriptableFor(theads.get(0));
-        }
+        return getScriptableFor(theads.get(0));
     }
 
     /**
@@ -228,9 +222,7 @@ public class HTMLTableElement extends RowContainer {
             final HtmlElement tBody = getHtmlElementOrDie().appendChildIfNoneExists("tbody");
             return ((RowContainer) getScriptableFor(tBody)).insertRow(0);
         }
-        else {
-            return super.insertRow(index);
-        }
+        return super.insertRow(index);
     }
 
     /**

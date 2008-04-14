@@ -135,9 +135,7 @@ public class SimpleScriptable extends ScriptableObject {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
         }
-        else {
-            return domNode_;
-        }
+        return domNode_;
     }
 
     /**
@@ -205,9 +203,7 @@ public class SimpleScriptable extends ScriptableObject {
         if (scriptObject != null) {
             return (SimpleScriptable) scriptObject;
         }
-        else {
-            return makeScriptableFor(domNode);
-        }
+        return makeScriptableFor(domNode);
     }
 
     /**
@@ -231,7 +227,7 @@ public class SimpleScriptable extends ScriptableObject {
         }
         else {
             try {
-                scriptable = (SimpleScriptable) javaScriptClass.newInstance();
+                scriptable = javaScriptClass.newInstance();
             }
             catch (final Exception e) {
                 throw Context.throwAsScriptRuntimeEx(e);
@@ -289,9 +285,7 @@ public class SimpleScriptable extends ScriptableObject {
         if (index >= args.length) {
             return defaultValue;
         }
-        else {
-            return args[index];
-        }
+        return args[index];
     }
 
     /**
@@ -349,19 +343,13 @@ public class SimpleScriptable extends ScriptableObject {
             if (getBrowserVersion().isIE()) {
                 return "[object]"; // the super helpful IE solution
             }
-            else {
-                final Window window = (Window) getTopLevelScope(this);
-                if (ScriptableObject.getProperty(window, getClassName()) == this) {
-                    return "[" + getClassName() + "]";
-                }
-                else {
-                    return "[object " + getClassName() + "]"; // not fully correct as htmlunit names are not FF ones
-                }
+            final Window window = (Window) getTopLevelScope(this);
+            if (ScriptableObject.getProperty(window, getClassName()) == this) {
+                return "[" + getClassName() + "]";
             }
+            return "[object " + getClassName() + "]"; // not fully correct as htmlunit names are not FF ones
         }
-        else {
-            return super.getDefaultValue(hint);
-        }
+        return super.getDefaultValue(hint);
     }
 
     /**
@@ -384,9 +372,7 @@ public class SimpleScriptable extends ScriptableObject {
         if (top instanceof Window) {
             return (Window) top;
         }
-        else {
-            throw new RuntimeException("Unable to find window associated with " + s);
-        }
+        throw new RuntimeException("Unable to find window associated with " + s);
     }
 
     /**

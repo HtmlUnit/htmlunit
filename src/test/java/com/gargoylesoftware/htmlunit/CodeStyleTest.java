@@ -130,7 +130,7 @@ public class CodeStyleTest {
     /**
      * Ensures that no opening curly bracket exists by itself in a single line.
      */
-    private void openingCurlyBracket(final List<String> lines, final String path) throws IOException {
+    private void openingCurlyBracket(final List<String> lines, final String path) {
         int index = 1;
         for (final String line : lines) {
             if (line.trim().equals("{")) {
@@ -143,7 +143,7 @@ public class CodeStyleTest {
     /**
      * Checks the year in the source.
      */
-    private void year(final List<String> lines, final String path) throws IOException {
+    private void year(final List<String> lines, final String path) {
         assertTrue("Incorrect year in " + path, lines.get(1).contains("Copyright (c) 2002-"
             + Calendar.getInstance().get(Calendar.YEAR)));
     }
@@ -151,7 +151,7 @@ public class CodeStyleTest {
     /**
      * Checks the JavaDoc first line, it should not be empty, and should not start with lower-case.
      */
-    private void javaDocFirstLine(final List<String> lines, final String relativePath) throws IOException {
+    private void javaDocFirstLine(final List<String> lines, final String relativePath) {
         for (int index = 1; index < lines.size(); index++) {
             final String previousLine = lines.get(index - 1);
             final String currentLine = lines.get(index);
@@ -172,7 +172,7 @@ public class CodeStyleTest {
     /**
      * Checks the method first line, it should not be empty.
      */
-    private void methodFirstLine(final List<String> lines, final String relativePath) throws IOException {
+    private void methodFirstLine(final List<String> lines, final String relativePath) {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             if (lines.get(index + 1).trim().length() == 0
@@ -190,7 +190,7 @@ public class CodeStyleTest {
     /**
      * Checks the method last line, it should not be empty.
      */
-    private void methodLastLine(final List<String> lines, final String relativePath) throws IOException {
+    private void methodLastLine(final List<String> lines, final String relativePath) {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);

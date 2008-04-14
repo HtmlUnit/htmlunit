@@ -373,9 +373,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (value == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
-        else {
-            return value;
-        }
+        return value;
     }
 
     /**
@@ -620,7 +618,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // Add the attributes. IE does not use quotes, FF does.
             for (final HtmlAttr attr : element.getAttributesCollection()) {
                 final String name = attr.getName();
-                final String value = (String) attr.getHtmlValue();
+                final String value = attr.getHtmlValue();
                 final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
                 buffer.append(' ').append(name).append("=");
                 if (quote) {
@@ -735,10 +733,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 if (append) {
                     return target.appendChild(domNode);
                 }
-                else {
-                    target.insertBefore(domNode);
-                    return domNode;
-                }
+                target.insertBefore(domNode);
+                return domNode;
             }
         };
 
@@ -814,9 +810,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             return object;
         }
-        else {
-            throw Context.reportRuntimeError("Passed object is not an element: " + object);
-        }
+        throw Context.reportRuntimeError("Passed object is not an element: " + object);
     }
 
     /**
@@ -876,9 +870,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (append) {
             return new Object[] {node, Boolean.TRUE};
         }
-        else {
-            return new Object[] {node, Boolean.FALSE};
-        }
+        return new Object[] {node, Boolean.FALSE};
     }
     
     /**
@@ -1326,9 +1318,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // compute appropriate offsetHeight to make as if mouse event produced within this element
             return event.jsxGet_clientY() - getPosY() + 50;
         }
-        else {
-            return jsxGet_currentStyle().getCalculatedHeight(true, true);
-        }
+        return jsxGet_currentStyle().getCalculatedHeight(true, true);
     }
 
     /**
@@ -1345,9 +1335,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // compute appropriate offsetwidth to make as if mouse event produced within this element
             return event.jsxGet_clientX() - getPosX() + 50;
         }
-        else {
-            return jsxGet_currentStyle().getCalculatedWidth(true, true);
-        }
+        return jsxGet_currentStyle().getCalculatedWidth(true, true);
     }
 
     /**
@@ -1372,7 +1360,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         HTMLElement element = this;
         while (element != null) {
             cumulativeOffset += element.jsxGet_offsetLeft();
-            element = (HTMLElement) element.jsxGet_offsetParent();
+            element = element.jsxGet_offsetParent();
         }
         return cumulativeOffset;
     }
@@ -1386,7 +1374,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         HTMLElement element = this;
         while (element != null) {
             cumulativeOffset += element.jsxGet_offsetTop();
-            element = (HTMLElement) element.jsxGet_offsetParent();
+            element = element.jsxGet_offsetParent();
         }
         return cumulativeOffset;
     }
@@ -1406,7 +1394,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         int left = 0;
-        final HTMLElement offsetParent = (HTMLElement) jsxGet_offsetParent();
+        final HTMLElement offsetParent = jsxGet_offsetParent();
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
@@ -1453,7 +1441,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         int top = 0;
-        final HTMLElement offsetParent = (HTMLElement) jsxGet_offsetParent();
+        final HTMLElement offsetParent = jsxGet_offsetParent();
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
@@ -1612,9 +1600,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if ("html".equalsIgnoreCase(getDomNodeOrDie().getNodeName())) {
             return null;
         }
-        else {
-            return jsxGet_parentNode();
-        }
+        return jsxGet_parentNode();
     }
 
     /**

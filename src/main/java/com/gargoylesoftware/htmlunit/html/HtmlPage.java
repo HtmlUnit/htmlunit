@@ -573,9 +573,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (forms.size() == 0) {
             throw new ElementNotFoundException("form", "name", name);
         }
-        else {
-            return (HtmlForm) forms.get(0);
-        }
+        return (HtmlForm) forms.get(0);
     }
 
     /**
@@ -608,7 +606,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             if (baseElements.size() > 1) {
                 notifyIncorrectness("Multiple 'base' detected, only the first is used.");
             }
-            final HtmlBase htmlBase = (HtmlBase) baseElements.get(0);
+            final HtmlBase htmlBase = baseElements.get(0);
             boolean insideHead = false;
             for (DomNode parent = htmlBase.getParentNode(); parent != null; parent = parent.getParentNode()) {
                 if (parent instanceof HtmlHead) {
@@ -795,9 +793,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         if (elements.isEmpty()) {
             return null;
         }
-        else {
-            return elements.get(0);
-        }
+        return elements.get(0);
     }
 
    /**
@@ -1568,7 +1564,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @throws ElementNotFoundException if no element was found that matches the id
      */
     public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
-        final List<HtmlElement> elements = (List<HtmlElement>) idMap_.get(id);
+        final List<HtmlElement> elements = idMap_.get(id);
         if (elements != null) {
             return elements.get(0);
         }
@@ -1584,13 +1580,11 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the HTML elements with the specified name attribute
      */
     public List<HtmlElement> getHtmlElementsByName(final String name) {
-        final List<HtmlElement> list = (List<HtmlElement>) nameMap_.get(name);
+        final List<HtmlElement> list = nameMap_.get(name);
         if (list != null) {
             return Collections.unmodifiableList(list);
         }
-        else {
-            return Collections.emptyList();
-        }
+        return Collections.emptyList();
     }
 
     /**
@@ -1602,8 +1596,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return the HTML elements with the specified string for their name or ID
      */
     public List<HtmlElement> getHtmlElementsByIdAndOrName(final String idAndOrName) {
-        final List<HtmlElement> list1 = (List<HtmlElement>) idMap_.get(idAndOrName);
-        final List<HtmlElement> list2 = (List<HtmlElement>) nameMap_.get(idAndOrName);
+        final List<HtmlElement> list1 = idMap_.get(idAndOrName);
+        final List<HtmlElement> list2 = nameMap_.get(idAndOrName);
         final List<HtmlElement> list = new ArrayList<HtmlElement>();
         if (list1 != null) {
             list.addAll(list1);
@@ -2027,9 +2021,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             if (attributeListeners_ != null) {
                 return new ArrayList<HtmlAttributeChangeListener>(attributeListeners_);
             }
-            else {
-                return null;
-            }
+            return null;
         }
     }
 

@@ -134,9 +134,7 @@ public class HtmlImageInput extends HtmlInput {
         if (form != null) {
             return form.submit(this);
         }
-        else {
-            return super.doClickAction(defaultPage);
-        }
+        return super.doClickAction(defaultPage);
     }
 
     /**

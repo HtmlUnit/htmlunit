@@ -155,42 +155,38 @@ public class DebugFrameImpl implements DebugFrame {
                 // A named function -- we can just return the name.
                 return name;
             }
-            else {
-                // An anonymous function -- try to figure out how it was referenced.
-                // For example, someone may have set foo.prototype.bar = function() { ... };
-                // And then called fooInstance.bar() -- in which case it's "named" bar.
-                for (final Object id : thisObj.getIds()) {
-                    if (id instanceof String) {
-                        final String s = (String) id;
-                        if (thisObj instanceof ScriptableObject) {
-                            Object o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, false);
-                            if (o == null) {
-                                o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, true);
-                                if (o != null && o instanceof Callable) {
-                                    return "__defineSetter__ " + s;
-                                }
-                            }
-                            else if (o != null && o instanceof Callable) {
-                                return "__defineGetter__ " + s;
+            // An anonymous function -- try to figure out how it was referenced.
+            // For example, someone may have set foo.prototype.bar = function() { ... };
+            // And then called fooInstance.bar() -- in which case it's "named" bar.
+            for (final Object id : thisObj.getIds()) {
+                if (id instanceof String) {
+                    final String s = (String) id;
+                    if (thisObj instanceof ScriptableObject) {
+                        Object o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, false);
+                        if (o == null) {
+                            o = ((ScriptableObject) thisObj).getGetterOrSetter(s, 0, true);
+                            if (o != null && o instanceof Callable) {
+                                return "__defineSetter__ " + s;
                             }
                         }
-                        final Object o = thisObj.get(s, thisObj);
-                        if (o instanceof NativeFunction) {
-                            final NativeFunction f = (NativeFunction) o;
-                            if (f.getDebuggableView() == this.functionOrScript_) {
-                                return s;
-                            }
+                        else if (o instanceof Callable) {
+                            return "__defineGetter__ " + s;
+                        }
+                    }
+                    final Object o = thisObj.get(s, thisObj);
+                    if (o instanceof NativeFunction) {
+                        final NativeFunction f = (NativeFunction) o;
+                        if (f.getDebuggableView() == this.functionOrScript_) {
+                            return s;
                         }
                     }
                 }
-                // Unable to intuit a name -- doh!
-                return "[anonymous]";
             }
+            // Unable to intuit a name -- doh!
+            return "[anonymous]";
         }
-        else {
-            // Just a script -- no function name.
-            return "[script]";
-        }
+        // Just a script -- no function name.
+        return "[script]";
     }
 
     /**
@@ -204,9 +200,7 @@ public class DebugFrameImpl implements DebugFrame {
         if (index >= 0 && this.functionOrScript_.getParamCount() > index) {
             return this.functionOrScript_.getParamOrVarName(index);
         }
-        else {
-            return "???";
-        }
+        return "???";
     }
 
     /**
@@ -235,9 +229,7 @@ public class DebugFrameImpl implements DebugFrame {
         if (first != Integer.MAX_VALUE) {
             return String.valueOf(first);
         }
-        else {
-            return "???";
-        }
+        return "???";
     }
 
 }

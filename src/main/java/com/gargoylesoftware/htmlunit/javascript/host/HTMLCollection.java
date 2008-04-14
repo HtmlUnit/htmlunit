@@ -227,10 +227,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             final int i = n.intValue();
             return get(i, this);
         }
-        else {
-            final String key = String.valueOf(o);
-            return get(key, this);
-        }
+        final String key = String.valueOf(o);
+        return get(key, this);
     }
 
     /**
@@ -246,9 +244,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (index >= 0 && index < elements.size()) {
             return getScriptableFor(transformer_.transform(elements.get(index)));
         }
-        else {
-            return NOT_FOUND;
-        }
+        return NOT_FOUND;
     }
 
     /**
@@ -318,9 +314,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 if (value.equals("default")) {
                     return Boolean.TRUE;
                 }
-                else {
-                    return Boolean.FALSE;
-                }
+                return Boolean.FALSE;
             }
         }
         return null;
@@ -425,9 +419,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (object == NOT_FOUND) {
             return null;
         }
-        else {
-            return object;
-        }
+        return object;
     }
 
     /**
@@ -483,9 +475,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                     && transformer_.equals(otherArray.transformer_)) {
                 return Boolean.TRUE;
             }
-            else {
-                return NOT_FOUND;
-            }
+            return NOT_FOUND;
         }
 
         return super.equivalentValues(other);
@@ -521,9 +511,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             }
             return false;
         }
-        else {
-            return getWithPreemption(name) != NOT_FOUND;
-        }
+        return getWithPreemption(name) != NOT_FOUND;
     }
 
     /**

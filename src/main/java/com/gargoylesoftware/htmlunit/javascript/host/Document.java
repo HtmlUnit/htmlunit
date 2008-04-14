@@ -311,16 +311,12 @@ public class Document extends EventNode {
         if (thisObj instanceof Document) {
             return (Document) thisObj;
         }
-        else {
-            final Window window = getWindow(thisObj);
-            final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
-            if (browser.isIE()) {
-                return window.jsxGet_document();
-            }
-            else {
-                throw Context.reportRuntimeError("Function can't be used detached from document");
-            }
+        final Window window = getWindow(thisObj);
+        final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
+        if (browser.isIE()) {
+            return window.jsxGet_document();
         }
+        throw Context.reportRuntimeError("Function can't be used detached from document");
     }
 
     /**
@@ -630,9 +626,7 @@ public class Document extends EventNode {
         if (referrer == null) {
             return "";
         }
-        else {
-            return referrer;
-        }
+        return referrer;
     }
 
     /**
@@ -750,10 +744,8 @@ public class Document extends EventNode {
             // Firefox does not allow insertion at the document level.
             throw new RuntimeException("Node cannot be inserted at the specified point in the hierarchy.");
         }
-        else {
-            // We're emulating IE; we can allow insertion.
-            return super.jsxFunction_appendChild(childObject);
-        }
+        // We're emulating IE; we can allow insertion.
+        return super.jsxFunction_appendChild(childObject);
     }
 
     /**
@@ -969,7 +961,7 @@ public class Document extends EventNode {
 
             final BrowserVersion browser = getBrowserVersion();
             if (browser.isIE()) {
-                final HTMLCollection elements = (HTMLCollection) jsxFunction_getElementsByName(id);
+                final HTMLCollection elements = jsxFunction_getElementsByName(id);
                 result = elements.get(0, elements);
                 if (result instanceof UniqueTag) {
                     return null;
@@ -1020,7 +1012,7 @@ public class Document extends EventNode {
      * @return the imported node that belongs to this Document
      */
     public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
-        return ((DomNode) importedNode.getDomNodeOrDie().cloneNode(deep)).getScriptObject();
+        return importedNode.getDomNodeOrDie().cloneNode(deep).getScriptObject();
     }
 
     /**
@@ -1043,14 +1035,12 @@ public class Document extends EventNode {
             return NOT_FOUND;
         }
         if (elements.size() == 1) {
-            final HtmlElement element = (HtmlElement) elements.get(0);
+            final HtmlElement element = elements.get(0);
             final String tagName = element.getTagName();
             if (HtmlImage.TAG_NAME.equals(tagName) || HtmlForm.TAG_NAME.equals(tagName)) {
                 return getScriptableFor(element);
             }
-            else {
-                return NOT_FOUND;
-            }
+            return NOT_FOUND;
         }
         // The shortcut wasn't enough, which means we probably need to perform the XPath operation anyway.
         // Note that the XPath expression below HAS TO MATCH the tag name checks performed in the shortcut above.
@@ -1077,9 +1067,7 @@ public class Document extends EventNode {
         if (body != null) {
             return body.getScriptObject();
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -1251,7 +1239,7 @@ public class Document extends EventNode {
      *         DOMException.NOT_SUPPORTED_ERR)
      */
     public Event jsxFunction_createEvent(final String eventType) throws DOMException {
-        final Class< ? extends Event> clazz = (Class< ? extends Event>) SUPPORTED_EVENT_TYPE_MAP.get(eventType);
+        final Class< ? extends Event> clazz = SUPPORTED_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Event Type is not supported: " + eventType);
         }

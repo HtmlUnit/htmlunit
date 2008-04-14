@@ -85,9 +85,7 @@ public class ScriptException extends RuntimeException {
         if (throwable == null) {
             return "null";
         }
-        else {
-            return throwable.getMessage();
-        }
+        return throwable.getMessage();
     }
 
     /**

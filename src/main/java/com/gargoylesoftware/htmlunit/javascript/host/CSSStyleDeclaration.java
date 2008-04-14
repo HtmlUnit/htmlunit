@@ -155,9 +155,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         if (element != null && element.getValue() != null) {
             return element.getValue();
         }
-        else {
-            return "";
-        }
+        return "";
     }
 
     /**
@@ -4003,9 +4001,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         if (getBrowserVersion().isIE()) {
             return 0;
         }
-        else {
-            return "";
-        }
+        return "";
     }
 
     /**
@@ -4205,10 +4201,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
         if (jsElement_ == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
-        else {
-            final String style = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
-            return "CSSStyleDeclaration for '" + style + "'";
-        }
+        final String style = jsElement_.getHtmlElementOrDie().getAttributeValue("style");
+        return "CSSStyleDeclaration for '" + style + "'";
     }
 
     /**

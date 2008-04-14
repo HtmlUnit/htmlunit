@@ -138,8 +138,8 @@ public final class HtmlInputTest extends WebTestCase {
         final List<HtmlRadioButtonInput> radioButtons = form.getRadioButtonsByName("radio1");
         assertEquals(2, radioButtons.size());
 
-        assertFalse(((HtmlRadioButtonInput) radioButtons.get(0)).isChecked());
-        assertTrue(((HtmlRadioButtonInput) radioButtons.get(1)).isChecked());
+        assertFalse(radioButtons.get(0).isChecked());
+        assertTrue(radioButtons.get(1).isChecked());
     }
 
     /**

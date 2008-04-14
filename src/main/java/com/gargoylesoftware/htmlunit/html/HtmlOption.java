@@ -98,21 +98,17 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
         if (selected == isSelected()) {
             return getPage();
         }
-        else {
-            final HtmlSelect select = getEnclosingSelect();
-            if (select != null) {
-                if (!select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
-                    selected = true;
-                }
-                return select.setSelectedAttribute(this, selected);
+        final HtmlSelect select = getEnclosingSelect();
+        if (select != null) {
+            if (!select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
+                selected = true;
             }
-            else {
-                // for instance from JS for an option created by document.createElement('option')
-                // and not yet added to a select
-                setSelectedInternal(selected);
-                return getPage();
-            }
+            return select.setSelectedAttribute(this, selected);
         }
+        // for instance from JS for an option created by document.createElement('option')
+        // and not yet added to a select
+        setSelectedInternal(selected);
+        return getPage();
     }
     
     /**

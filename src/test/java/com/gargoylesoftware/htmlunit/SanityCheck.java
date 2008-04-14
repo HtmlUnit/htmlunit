@@ -223,7 +223,7 @@ public final class SanityCheck {
             webClient.getPage("http://www.adobe.com/products/acrobat/readstep2.html")));
     }
 
-    private String getPrintEnvUrl() throws MalformedURLException {
+    private String getPrintEnvUrl() {
         return "http://htmlunit.sourceforge.net/cgi-bin/printenv";
     }
 

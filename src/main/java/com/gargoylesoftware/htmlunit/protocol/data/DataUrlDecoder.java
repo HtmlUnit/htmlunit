@@ -122,13 +122,9 @@ public class DataUrlDecoder {
             if (beforeData.contains(";")) {
                 return StringUtils.substringBefore(beforeData, ";");
             }
-            else {
-                return beforeData;
-            }
+            return beforeData;
         }
-        else {
-            return DEFAULT_MEDIA_TYPE;
-        }
+        return DEFAULT_MEDIA_TYPE;
     }
 
     /**

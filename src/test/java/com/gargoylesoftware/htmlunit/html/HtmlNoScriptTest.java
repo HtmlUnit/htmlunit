@@ -144,7 +144,7 @@ public class HtmlNoScriptTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage firstPage = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) firstPage.getForms().get(0);
+        final HtmlForm form = firstPage.getForms().get(0);
         final HtmlPage secondPage = (HtmlPage) form.submit((SubmittableElement) null);
         
         final MockWebConnection mockWebConnection = getMockConnection(secondPage);

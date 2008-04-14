@@ -146,7 +146,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @Override
     public Scriptable getPrototype(final Class< ? extends SimpleScriptable> jsClass) {
-        return (Scriptable) prototypes_.get(jsClass);
+        return prototypes_.get(jsClass);
     }
 
     /**
@@ -186,9 +186,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     + message + "\") no confirm handler installed, simulating the OK button");
             return true;
         }
-        else {
-            return handler.handleConfirm(document_.getHtmlPage(), message);
-        }
+        return handler.handleConfirm(document_.getHtmlPage(), message);
     }
 
     /**
@@ -202,9 +200,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             getLog().warn("window.prompt(\"" + message + "\") no prompt handler installed");
             return null;
         }
-        else {
-            return handler.handlePrompt(document_.getHtmlPage(), message);
-        }
+        return handler.handlePrompt(document_.getHtmlPage(), message);
     }
 
     /**
@@ -315,9 +311,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             if (page != null && page instanceof HtmlPage) {
                 return ((HtmlPage) page).getFullyQualifiedUrl(urlString);
             }
-            else {
-                return new URL(urlString);
-            }
+            return new URL(urlString);
         }
         catch (final MalformedURLException e) {
             getLog().error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
@@ -528,9 +522,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (window instanceof FrameWindow) {
             return ((FrameWindow) window).getFrameElement().getScriptObject();
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -547,9 +539,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     if (obj instanceof BaseFrame) {
                         return ((BaseFrame) obj).getEnclosedWindow();
                     }
-                    else {
-                        return ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
-                    }
+                    return ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
                 }
             };
             frames_.init(page, xpath, toEnclosedWindow);
@@ -730,13 +720,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             if (body != null) {
                 return body.getEventHandler("onload");
             }
-            else {
-                return null;
-            }
+            return null;
         }
-        else {
-            return onload;
-        }
+        return onload;
     }
 
     /**
@@ -845,7 +831,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // this tests are quite silly and should be removed when custom JS objects have a clean
             // way to get the WebClient they are running in.
             if (domNode != null) {
-                final HTMLCollection array = (HTMLCollection) document_.jsxFunction_getElementsByName(name);
+                final HTMLCollection array = document_.jsxFunction_getElementsByName(name);
                 final int length = array.jsxGet_length();
                 if (length == 1) {
                     result = array.get(0, array);
@@ -1097,7 +1083,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
 
         final HTMLElement e = (HTMLElement) element;
-        final CSSStyleDeclaration original = (CSSStyleDeclaration) e.jsxGet_style();
+        final CSSStyleDeclaration original = e.jsxGet_style();
         style = new ComputedCSSStyleDeclaration(original);
 
         final StyleSheetList sheets = document_.jsxGet_styleSheets();

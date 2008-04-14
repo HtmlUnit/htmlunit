@@ -99,9 +99,7 @@ public class HtmlSubmitInput extends HtmlInput {
         if (form != null) {
             return form.submit(this);
         }
-        else {
-            return super.doClickAction(defaultPage);
-        }
+        return super.doClickAction(defaultPage);
     }
 
     /**
@@ -154,8 +152,6 @@ public class HtmlSubmitInput extends HtmlInput {
         if (getNameAttribute().length() != 0 && !isAttributeDefined("value")) {
             return new NameValuePair[]{new NameValuePair(getNameAttribute(), DEFAULT_VALUE)};
         }
-        else {
-            return super.getSubmitKeyValuePairs();
-        }
+        return super.getSubmitKeyValuePairs();
     }
 }

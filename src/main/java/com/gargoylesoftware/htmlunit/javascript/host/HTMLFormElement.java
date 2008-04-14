@@ -321,8 +321,6 @@ public class HTMLFormElement extends HTMLElement {
         if (getDomNodeOrNull() == null) {
             return NOT_FOUND; // typically for the prototype
         }
-        else {
-            return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
-        }
+        return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
     }
 }

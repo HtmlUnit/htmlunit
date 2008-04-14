@@ -86,9 +86,7 @@ public class HtmlResetInput extends HtmlInput {
         if (form != null) {
             return form.reset();
         }
-        else {
-            return super.doClickAction(defaultPage);
-        }
+        return super.doClickAction(defaultPage);
     }
 
     /**

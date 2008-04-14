@@ -250,11 +250,11 @@ public final class ClassConfiguration {
      * @return the PropertyInfo for the given property name
      */
     protected PropertyInfo getPropertyInfo(final String propertyName) {
-        return (PropertyInfo) propertyMap_.get(propertyName);
+        return propertyMap_.get(propertyName);
     }
 
     private FunctionInfo getFunctionInfo(final String functionName) {
-        return (FunctionInfo) functionMap_.get(functionName);
+        return functionMap_.get(functionName);
     }
 
     /**

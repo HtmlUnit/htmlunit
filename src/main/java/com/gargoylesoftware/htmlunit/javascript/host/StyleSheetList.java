@@ -113,8 +113,8 @@ public class StyleSheetList extends SimpleScriptable {
      */
     public Stylesheet jsxFunction_item(final int index) {
         final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
-        final DomNode node = (DomNode) element.getDomNodeOrDie();
-        Stylesheet sheet = (Stylesheet) sheets_.get(node);
+        final DomNode node = element.getDomNodeOrDie();
+        Stylesheet sheet = sheets_.get(node);
         if (sheet == null) {
             if (node instanceof HtmlStyle) {
                 final HtmlStyle style = (HtmlStyle) node;

@@ -105,15 +105,11 @@ public final class Util {
                 if (node == null) {
                     return null;
                 }
-                else {
-                    final DomNode sibling = node.getNextSibling();
-                    if (sibling == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return sibling;
-                    }
+                final DomNode sibling = node.getNextSibling();
+                if (sibling == null) {
+                    return getFirstNode(node.getParentNode());
                 }
+                return sibling;
             }
 
             @Override
@@ -121,18 +117,14 @@ public final class Util {
                 if (node == null) {
                     return null;
                 }
-                else {
-                    DomNode n = node.getFirstChild();
-                    if (n == null) {
-                        n = node.getNextSibling();
-                    }
-                    if (n == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return n;
-                    }
+                DomNode n = node.getFirstChild();
+                if (n == null) {
+                    n = node.getNextSibling();
                 }
+                if (n == null) {
+                    return getFirstNode(node.getParentNode());
+                }
+                return n;
             }
         };
     }
@@ -150,33 +142,25 @@ public final class Util {
                 if (node == null) {
                     return null;
                 }
-                else {
-                    final DomNode sibling = node.getPreviousSibling();
-                    if (sibling == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return sibling;
-                    }
+                final DomNode sibling = node.getPreviousSibling();
+                if (sibling == null) {
+                    return getFirstNode(node.getParentNode());
                 }
+                return sibling;
             }
             @Override
             protected DomNode getNextNode(final DomNode node) {
                 if (node == null) {
                     return null;
                 }
-                else {
-                    DomNode n = node.getLastChild();
-                    if (n == null) {
-                        n = node.getPreviousSibling();
-                    }
-                    if (n == null) {
-                        return getFirstNode(node.getParentNode());
-                    }
-                    else {
-                        return n;
-                    }
+                DomNode n = node.getLastChild();
+                if (n == null) {
+                    n = node.getPreviousSibling();
                 }
+                if (n == null) {
+                    return getFirstNode(node.getParentNode());
+                }
+                return n;
             }
         };
     }

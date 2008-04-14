@@ -80,7 +80,7 @@ public class HtmlTextInput extends HtmlInput {
     @Override
     public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+        if (isDisabled()) {
             return getPage();
         }
         preventDefault_ = false;

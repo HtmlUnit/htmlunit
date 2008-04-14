@@ -192,14 +192,12 @@ public final class HTMLParser {
      * @return a factory for creating HtmlElements representing the given tag
      */
     public static IElementFactory getFactory(final String tagName) {
-        final IElementFactory result = (IElementFactory) ELEMENT_FACTORIES.get(tagName);
+        final IElementFactory result = ELEMENT_FACTORIES.get(tagName);
 
         if (result != null) {
             return result;
         }
-        else {
-            return UnknownElementFactory.instance;
-        }
+        return UnknownElementFactory.instance;
     }
 
     /**
@@ -479,7 +477,7 @@ public final class HTMLParser {
 
             handleCharacters();
 
-            final DomNode previousNode = (DomNode) stack_.pop(); //remove currentElement from stack
+            final DomNode previousNode = stack_.pop(); //remove currentElement from stack
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
             previousNode.onAllChildrenAddedToPage();
 
@@ -489,7 +487,7 @@ public final class HTMLParser {
             }
 
             if (!stack_.isEmpty()) {
-                currentNode_ = (DomNode) stack_.peek();
+                currentNode_ = stack_.peek();
             }
         }
 
@@ -525,14 +523,12 @@ public final class HTMLParser {
          * @return the pre-registered element factory for the tag, or an UnknownElementFactory
          */
         private IElementFactory getElementFactory(final String tagName) {
-            final IElementFactory factory = (IElementFactory) ELEMENT_FACTORIES.get(tagName);
+            final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
             if (factory != null) {
                 return factory;
             }
-            else {
-                return UnknownElementFactory.instance;
-            }
+            return UnknownElementFactory.instance;
         }
 
         /** @inheritDoc ContentHandler#endDocument() */

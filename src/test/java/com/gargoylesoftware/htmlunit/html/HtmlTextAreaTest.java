@@ -172,7 +172,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<textarea id='text1'></textarea>\n"
             + "</body></html>";
 
-        final HtmlPage page = (HtmlPage) loadPage(browserVersion, html, null);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlTextArea text1 = (HtmlTextArea) page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getText());

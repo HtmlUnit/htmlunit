@@ -100,26 +100,22 @@ public class HtmlArea extends ClickableElement {
                 return page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();
             }
-            else {
-                final URL url;
-                try {
-                    url = enclosingPage.getFullyQualifiedUrl(getHrefAttribute());
-                }
-                catch (final MalformedURLException e) {
-                    throw new IllegalStateException(
+            final URL url;
+            try {
+                url = enclosingPage.getFullyQualifiedUrl(getHrefAttribute());
+            }
+            catch (final MalformedURLException e) {
+                throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute());
-                }
-                final WebRequestSettings settings = new WebRequestSettings(url);
-                final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-                return webClient.getPage(
+            }
+            final WebRequestSettings settings = new WebRequestSettings(url);
+            final WebWindow webWindow = enclosingPage.getEnclosingWindow();
+            return webClient.getPage(
                     webWindow,
                     enclosingPage.getResolvedTarget(getTargetAttribute()),
                     settings);
-            }
         }
-        else {
-            return defaultPage;
-        }
+        return defaultPage;
     }
 
     /**

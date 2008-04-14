@@ -142,7 +142,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 context = Context.getCurrentContext();
             }
             final Scriptable scope = stateChangeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             
             final int nbExecutions;
             if (async_ && STATE_LOADING == state) {
@@ -187,10 +187,8 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getContentAsString();
         }
-        else {
-            getLog().debug("XMLHttpRequest.responseText was retrieved before the response was available.");
-            return "";
-        }
+        getLog().debug("XMLHttpRequest.responseText was retrieved before the response was available.");
+        return "";
     }
 
     /**
@@ -218,11 +216,9 @@ public class XMLHttpRequest extends SimpleScriptable {
                 return null;
             }
         }
-        else {
-            getLog().debug("XMLHttpRequest.responseXML was called but the response is "
-                    + webResponse_.getContentType());
-            return null;
-        }
+        getLog().debug("XMLHttpRequest.responseXML was called but the response is "
+                + webResponse_.getContentType());
+        return null;
     }
 
     /**
@@ -234,10 +230,8 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getStatusCode();
         }
-        else {
-            getLog().error("XMLHttpRequest.status was retrieved before the response was available.");
-            return 0;
-        }
+        getLog().error("XMLHttpRequest.status was retrieved before the response was available.");
+        return 0;
     }
 
     /**
@@ -248,10 +242,8 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
         }
-        else {
-            getLog().error("XMLHttpRequest.statusText was retrieved before the response was available.");
-            return null;
-        }
+        getLog().error("XMLHttpRequest.statusText was retrieved before the response was available.");
+        return null;
     }
 
     /**
@@ -273,10 +265,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             return buffer.toString();
         }
-        else {
-            getLog().error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
-            return null;
-        }
+        getLog().error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
+        return null;
     }
 
     /**
@@ -288,10 +278,8 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ != null) {
             return webResponse_.getResponseHeaderValue(headerName);
         }
-        else {
-            getLog().error("XMLHttpRequest.getResponseHeader() was called before the response was available.");
-            return null;
-        }
+        getLog().error("XMLHttpRequest.getResponseHeader() was called before the response was available.");
+        return null;
     }
 
     /**

@@ -65,7 +65,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "<body>\n"
             + "<input id='text1'/>\n"
             + "</body></html>";
-        final HtmlPage page = (HtmlPage) loadPage(html);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abcd", text1.getValueAttribute());
@@ -97,7 +97,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "<input id='text1'/>\n"
             + "</body></html>";
 
-        final HtmlPage page = (HtmlPage) loadPage(browserVersion, html, null);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getValueAttribute());

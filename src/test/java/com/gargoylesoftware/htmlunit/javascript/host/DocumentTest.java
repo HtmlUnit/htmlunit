@@ -2755,7 +2755,7 @@ public class DocumentTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage framesetPage = (HtmlPage) client.getPage(framesetURL);
-        final FrameWindow frame = (FrameWindow) framesetPage.getFrames().get(0);
+        final FrameWindow frame = framesetPage.getFrames().get(0);
 
         assertNotNull(frame);
         assertEquals(frameURL.toExternalForm(), frame.getEnclosedPage().getWebResponse().getUrl().toExternalForm());

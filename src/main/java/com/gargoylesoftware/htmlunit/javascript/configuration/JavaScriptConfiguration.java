@@ -160,8 +160,10 @@ public final class JavaScriptConfiguration {
             if (reader == null) {
                 getLog().error("Unable to load JavaScriptConfiguration.xml");
             }
-            loadConfiguration(reader);
-            reader.close();
+            else {
+                loadConfiguration(reader);
+                reader.close();
+            }
         }
         catch (final Exception e) {
             getLog().error("Error when loading JavascriptConfiguration.xml", e);
@@ -462,7 +464,7 @@ public final class JavaScriptConfiguration {
      * @return true if they match
      */
     protected boolean classConfigEquals(final String classname, final ClassConfiguration config) {
-        final ClassConfiguration myConfig = (ClassConfiguration) configuration_.get(classname);
+        final ClassConfiguration myConfig = configuration_.get(classname);
         return config.equals(myConfig);
     }
     
@@ -479,7 +481,7 @@ public final class JavaScriptConfiguration {
      * @return the class configuration for the supplied JavaScript class name
      */
     public ClassConfiguration getClassConfiguration(final String classname) {
-        return (ClassConfiguration) configuration_.get(classname);
+        return configuration_.get(classname);
     }
 
     private boolean testToIncludeForBrowserConstraint(final Element element, final BrowserVersion browser) {
@@ -546,7 +548,7 @@ public final class JavaScriptConfiguration {
      * @return the class for the given class name
      */
     protected Class< ? > getClassObject(final String classname) {
-        final ClassConfiguration config = (ClassConfiguration) configuration_.get(classname);
+        final ClassConfiguration config = configuration_.get(classname);
         return config.getLinkedClass();
     }
 
@@ -572,7 +574,7 @@ public final class JavaScriptConfiguration {
         ClassConfiguration config;
         Method theMethod;
         while (classname.length() > 0) {
-            config = (ClassConfiguration) configuration_.get(classname);
+            config = configuration_.get(classname);
             if (config == null) {
                 return null;
             }
@@ -589,7 +591,7 @@ public final class JavaScriptConfiguration {
         String workname = classname;
         ClassConfiguration config;
         while (workname.length() > 0) {
-            config = (ClassConfiguration) configuration_.get(workname);
+            config = configuration_.get(workname);
             final ClassConfiguration.PropertyInfo info = config.getPropertyInfo(propertyName);
             if (info != null) {
                 return info;
@@ -621,7 +623,7 @@ public final class JavaScriptConfiguration {
         ClassConfiguration config;
         Method theMethod;
         while (classname.length() > 0) {
-            config = (ClassConfiguration) configuration_.get(classname);
+            config = configuration_.get(classname);
             theMethod = config.getPropertyWriteMethod(propertyName);
             if (theMethod != null) {
                 return theMethod;
@@ -654,7 +656,7 @@ public final class JavaScriptConfiguration {
         ClassConfiguration config;
         Method theMethod;
         while (classname.length() > 0) {
-            config = (ClassConfiguration) configuration_.get(classname);
+            config = configuration_.get(classname);
             theMethod = config.getFunctionMethod(functionName);
             if (theMethod != null) {
                 return theMethod;
@@ -700,7 +702,7 @@ public final class JavaScriptConfiguration {
      * @return the classname
      */
     private String getClassnameForClass(final Class< ? > clazz) {
-        final String name = (String) ClassnameMap_.get(clazz.getName());
+        final String name = ClassnameMap_.get(clazz.getName());
         if (name == null) {
             throw new IllegalStateException("Did not find the mapping of the class to the classname for "
                 + clazz.getName());

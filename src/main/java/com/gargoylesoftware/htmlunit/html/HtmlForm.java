@@ -200,9 +200,7 @@ public class HtmlForm extends ClickableElement {
         if (getAcceptCharsetAttribute().length() > 0) {
             return getAcceptCharsetAttribute().trim().replaceAll("[ ,].*", "");
         }
-        else {
-            return getPage().getPageEncoding();
-        }
+        return getPage().getPageEncoding();
     }
 
     /**
@@ -361,9 +359,7 @@ public class HtmlForm extends ClickableElement {
         if (inputs.size() == 0) {
             throw new ElementNotFoundException("input", "name", name);
         }
-        else {
-            return (HtmlInput) inputs.get(0);
-        }
+        return (HtmlInput) inputs.get(0);
     }
 
     /**
@@ -390,9 +386,7 @@ public class HtmlForm extends ClickableElement {
         if (list.isEmpty()) {
             throw new ElementNotFoundException("select", "name", name);
         }
-        else {
-            return list.get(0);
-        }
+        return list.get(0);
     }
 
     /**
@@ -419,9 +413,7 @@ public class HtmlForm extends ClickableElement {
         if (list.isEmpty()) {
             throw new ElementNotFoundException("button", "name", name);
         }
-        else {
-            return list.get(0);
-        }
+        return list.get(0);
     }
 
     /**
@@ -448,9 +440,7 @@ public class HtmlForm extends ClickableElement {
         if (list.isEmpty()) {
             throw new ElementNotFoundException("textarea", "name", name);
         }
-        else {
-            return (HtmlTextArea) list.get(0);
-        }
+        return list.get(0);
     }
 
     /**

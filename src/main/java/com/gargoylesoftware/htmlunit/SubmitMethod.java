@@ -126,7 +126,7 @@ public final class SubmitMethod implements Serializable {
      * @return see above
      */
     public static SubmitMethod getInstance(final String name) {
-        final SubmitMethod method = (SubmitMethod) methods_.get(name.toLowerCase());
+        final SubmitMethod method = methods_.get(name.toLowerCase());
         if (method == null) {
             throw new IllegalArgumentException("No method found for [" + name + "]");
         }

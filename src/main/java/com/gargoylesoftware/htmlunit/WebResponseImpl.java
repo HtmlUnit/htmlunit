@@ -139,9 +139,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
             if (body != null) {
                 return new String(body, getContentCharSet());
             }
-            else {
-                return null;
-            }
+            return null;
         }
         catch (final UnsupportedEncodingException e) {
             return null;
@@ -156,9 +154,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
         if (body != null) {
             return new ByteArrayInputStream(body);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**

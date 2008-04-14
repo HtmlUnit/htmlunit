@@ -980,7 +980,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final String[] expectedAlerts = {"Hello Cruel World"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = (HtmlPage) loadPage(BrowserVersion.getDefault(), html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.getDefault(), html, collectedAlerts);
         final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
         input.type("Hello Cruel World");
         assertEquals("Hello Cruel World", input.getValueAttribute());

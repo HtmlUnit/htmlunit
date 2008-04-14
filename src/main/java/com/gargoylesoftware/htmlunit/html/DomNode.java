@@ -262,9 +262,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // last child is stored as the previous sibling of first child
             return firstChild_.previousSibling_;
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -310,9 +308,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // previous sibling of first child points to last child
             return null;
         }
-        else {
-            return previousSibling_;
-        }
+        return previousSibling_;
     }
 
     /**
@@ -895,7 +891,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     @Deprecated
     public DomNode appendDomChild(final DomNode node) {
-        return appendChild((DomNode) node);
+        return appendChild(node);
     }
 
     /**
@@ -1187,9 +1183,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 nextNode_ = nextNode_.nextSibling_;
                 return currentNode_;
             }
-            else {
-                throw new NoSuchElementException();
-            }
+            throw new NoSuchElementException();
         }
 
         /** Removes the current object. */
@@ -1271,9 +1265,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (next == null) {
                 return getNextElementUpwards(parent);
             }
-            else {
-                return (HtmlElement) next;
-            }
+            return (HtmlElement) next;
         }
 
         private HtmlElement getFirstChildElement(final DomNode parent) {
@@ -1322,8 +1314,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         
         for (final Iterator<DomNode> it = getChildren().iterator(); it.hasNext();) {
-            final DomNode child = (DomNode) it.next();
-            child.removeAllChildren();
+            it.next().removeAllChildren();
             it.remove();
         }
     }
@@ -1354,9 +1345,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (results.isEmpty()) {
             return null;
         }
-        else {
-            return results.get(0);
-        }
+        return results.get(0);
     }
 
     /**
@@ -1397,9 +1386,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (nodeIndex == 1 && total == 1) {
             return getNodeName();
         }
-        else {
-            return getNodeName() + '[' + nodeIndex + ']';
-        }
+        return getNodeName() + '[' + nodeIndex + ']';
     }
 
     /**
@@ -1496,9 +1483,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (domListeners_ != null) {
                 return new ArrayList<DomChangeListener>(domListeners_);
             }
-            else {
-                return null;
-            }
+            return null;
         }
     }
 }

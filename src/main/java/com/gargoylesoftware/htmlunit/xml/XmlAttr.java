@@ -109,7 +109,7 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public String getNodeValue() {
-        return (String) getValue();
+        return getValue();
     }
 
     /**

@@ -197,8 +197,6 @@ public class RowContainer extends HTMLElement {
             targetRow.getDomNodeOrDie().insertBefore(sourceRow.getDomNodeOrDie());
             return sourceRow;
         }
-        else {
-            return null;
-        }
+        return null;
     }
 }

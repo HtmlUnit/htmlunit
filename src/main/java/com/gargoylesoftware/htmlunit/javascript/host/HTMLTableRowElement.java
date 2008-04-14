@@ -124,8 +124,6 @@ public class HTMLTableRowElement extends HTMLElement {
             }
             return row.getScriptableFor(newCell);
         }
-        else {
-            throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
-        }
+        throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
     }
 }

@@ -49,7 +49,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -93,7 +92,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlBody body = (HtmlBody) page.getFirstByXPath("/html/body");
 
-        assertEquals((HtmlAnchor) page.getHtmlElementById("myLink"), (HtmlAnchor) body.getFirstByXPath("./a"));
+        assertEquals(page.getHtmlElementById("myLink"), body.getFirstByXPath("./a"));
     }
 
     /**

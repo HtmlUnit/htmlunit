@@ -258,21 +258,15 @@ public class HtmlImage extends ClickableElement {
             }
             return super.doClickAction(defaultPage);
         }
-        else {
-            final HtmlAnchor anchor = (HtmlAnchor) getEnclosingElement("a");
-            if (anchor == null) {
-                return super.doClickAction(defaultPage);
-            }
-            else {
-                if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
-                    final String suffix = "?" + lastClickX_ + "," + lastClickY_;
-                    return anchor.doClickAction(defaultPage, suffix);
-                }
-                else {
-                    return anchor.doClickAction(defaultPage);
-                }
-            }
+        final HtmlAnchor anchor = (HtmlAnchor) getEnclosingElement("a");
+        if (anchor == null) {
+            return super.doClickAction(defaultPage);
         }
+        if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
+            final String suffix = "?" + lastClickX_ + "," + lastClickY_;
+            return anchor.doClickAction(defaultPage, suffix);
+        }
+        return anchor.doClickAction(defaultPage);
     }
 
 }

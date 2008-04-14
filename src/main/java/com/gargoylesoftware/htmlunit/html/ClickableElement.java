@@ -133,7 +133,7 @@ public abstract class ClickableElement extends StyledElement {
             return getPage();
         }
 
-        final HtmlPage page = (HtmlPage) getPage();
+        final HtmlPage page = getPage();
 
         boolean stateUpdated = false;
         if (isStateUpdateFirst()) {
@@ -152,9 +152,7 @@ public abstract class ClickableElement extends StyledElement {
         if (stateUpdated || ScriptResult.isFalse(scriptResult) || event.isPreventDefault()) {
             return currentPage;
         }
-        else {
-            return doClickAction(currentPage);
-        }
+        return doClickAction(currentPage);
     }
 
     /**
@@ -203,9 +201,7 @@ public abstract class ClickableElement extends StyledElement {
         if (scriptResult == null) {
             return clickPage;
         }
-        else {
-            return scriptResult.getNewPage();
-        }
+        return scriptResult.getNewPage();
     }
 
     /**

@@ -126,7 +126,7 @@ public abstract class BaseFrame extends StyledElement {
         if (src.length() != 0) {
             final URL url;
             try {
-                url = ((HtmlPage) getPage()).getFullyQualifiedUrl(src);
+                url = getPage().getFullyQualifiedUrl(src);
             }
             catch (final MalformedURLException e) {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");

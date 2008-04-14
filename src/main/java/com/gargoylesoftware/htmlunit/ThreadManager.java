@@ -154,7 +154,7 @@ public class ThreadManager {
      * @param threadID the ID of the thread to stop
      */
     public void stopThread(final int threadID) {
-        final Thread thread = (Thread) threadMap_.get(new Integer(threadID));
+        final Thread thread = threadMap_.get(new Integer(threadID));
         if (thread != null) {
             thread.interrupt();
         }

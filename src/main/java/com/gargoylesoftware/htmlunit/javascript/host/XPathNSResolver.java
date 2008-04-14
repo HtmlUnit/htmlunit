@@ -71,9 +71,7 @@ public class XPathNSResolver extends SimpleScriptable {
         if (element_ instanceof HTMLElement) {
             return XmlUtil.lookupNamespaceURI((HtmlElement) ((HTMLElement) element_).getDomNodeOrDie(), prefix);
         }
-        else {
-            return XmlUtil.lookupNamespaceURI((XmlElement) ((XMLElement) element_).getDomNodeOrDie(), prefix);
-        }
+        return XmlUtil.lookupNamespaceURI((XmlElement) ((XMLElement) element_).getDomNodeOrDie(), prefix);
     }
 
 }

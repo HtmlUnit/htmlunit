@@ -156,9 +156,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (currentValue.length() == 0) {
             return defaultValue;
         }
-        else {
-            return currentValue;
-        }
+        return currentValue;
     }
 
     /**
@@ -398,9 +396,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (defaultValue == null) {
             return "block";
         }
-        else {
-            return defaultValue;
-        }
+        return defaultValue;
     }
 
     /**

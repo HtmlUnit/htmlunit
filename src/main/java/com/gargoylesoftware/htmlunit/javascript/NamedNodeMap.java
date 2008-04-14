@@ -111,9 +111,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
             final DomNode attr = (DomNode) map.nodes_.getValue(index);
             return attr.getScriptObject();
         }
-        else {
-            return NOT_FOUND;
-        }
+        return NOT_FOUND;
     }
 
     /**
@@ -126,9 +124,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attr != null) {
             return attr.getScriptObject();
         }
-        else {
-            return NOT_FOUND;
-        }
+        return NOT_FOUND;
     }
     
     /**
@@ -141,9 +137,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (attr != null) {
             return attr.getScriptObject();
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**

@@ -170,9 +170,7 @@ public class XmlPage extends SgmlPage implements Document {
         if (node_ != null) {
             return node_.getOwnerDocument();
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**

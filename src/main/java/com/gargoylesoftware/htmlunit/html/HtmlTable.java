@@ -159,7 +159,7 @@ public class HtmlTable extends ClickableElement {
     public final HtmlTableRow getRowById(final String id) throws ElementNotFoundException {
         final RowIterator iterator = new RowIterator();
         while (iterator.hasNext()) {
-            final HtmlTableRow row = (HtmlTableRow) iterator.next();
+            final HtmlTableRow row = iterator.next();
             if (row.getIdAttribute().equals(id)) {
                 return row;
             }
@@ -385,9 +385,7 @@ public class HtmlTable extends ClickableElement {
                 setNextRow(nextRow_.getNextSibling());
                 return result;
             }
-            else {
-                throw new NoSuchElementException();
-            }
+            throw new NoSuchElementException();
         }
 
         /**

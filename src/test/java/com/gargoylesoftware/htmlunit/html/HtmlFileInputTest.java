@@ -129,7 +129,7 @@ public class HtmlFileInputTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
+        final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
         fileInput.setValueAttribute(fileURL);
         f.submit((SubmittableElement) null);
@@ -160,7 +160,7 @@ public class HtmlFileInputTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
+        final HtmlForm f = firstPage.getForms().get(0);
         f.submit((SubmittableElement) null);
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertEquals("image", pair.getName());
@@ -188,7 +188,7 @@ public class HtmlFileInputTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlForm f = (HtmlForm) firstPage.getForms().get(0);
+        final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
 
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
@@ -271,7 +271,7 @@ public class HtmlFileInputTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) client.getPage(
                 new URL("http://localhost:" + HttpWebConnectionTest.PORT + "/upload1"));
 
-        final HtmlForm form = (HtmlForm) firstPage.getForms().get(0);
+        final HtmlForm form = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) form.getInputByName("myInput");
         fileInput.setValueAttribute(path);
         

@@ -844,7 +844,7 @@ public class WebClient implements Serializable {
     @Deprecated
     public WebWindow popFirstWindow() {
         synchronized (firstWindowStack_) {
-            return (WebWindow) firstWindowStack_.pop();
+            return firstWindowStack_.pop();
         }
     }
 
@@ -1145,7 +1145,7 @@ public class WebClient implements Serializable {
                 setCurrentWindow(new TopLevelWindow("", this));
             }
             else {
-                setCurrentWindow((WebWindow) webWindows_.get(0));
+                setCurrentWindow(webWindows_.get(0));
             }
         }
         fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
@@ -1264,7 +1264,7 @@ public class WebClient implements Serializable {
         }
 
         for (int i = 0; i < tokens.size(); i++) {
-            final String oneToken = (String) tokens.get(i);
+            final String oneToken = tokens.get(i);
             if (oneToken.length() == 0 || oneToken.equals(".")) {
                 tokens.remove(i--);
             }
@@ -1366,10 +1366,8 @@ public class WebClient implements Serializable {
                 }
             };
         }
-        else {
-            final byte[] data = IOUtils.toByteArray(new FileInputStream(file));
-            return new BinaryWebResponse(data, url, contentType);
-        }
+        final byte[] data = IOUtils.toByteArray(new FileInputStream(file));
+        return new BinaryWebResponse(data, url, contentType);
     }
 
     /**
@@ -1620,9 +1618,7 @@ public class WebClient implements Serializable {
 
             return new URL(newUrl.toString());
         }
-        else {
-            return url;
-        }
+        return url;
     }
 
     /**

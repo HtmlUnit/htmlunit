@@ -108,7 +108,7 @@ public class Cache implements Serializable {
     protected void deleteOverflow() {
         synchronized (entries_) {
             while (entries_.size() > maxSize_) {
-                final Entry oldestEntry = (Entry) Collections.min(entries_.values());
+                final Entry oldestEntry = Collections.min(entries_.values());
                 entries_.remove(oldestEntry.response_.getUrl());
             }
         }
@@ -171,7 +171,7 @@ public class Cache implements Serializable {
                 date = DateUtil.parseDate(value);
             }
             catch (final DateParseException e) {
-                date = null;
+                //empty
             }
         }
         return date;
@@ -203,16 +203,14 @@ public class Cache implements Serializable {
         if (!SubmitMethod.GET.equals(request.getSubmitMethod())) {
             return null;
         }
-        final Entry cachedEntry = (Entry) entries_.get(request.getURL());
+        final Entry cachedEntry = entries_.get(request.getURL());
         if (cachedEntry == null) {
             return null;
         }
-        else {
-            synchronized (entries_) {
-                cachedEntry.touch();
-            }
-            return cachedEntry.response_;
+        synchronized (entries_) {
+            cachedEntry.touch();
         }
+        return cachedEntry.response_;
     }
 
     /**

@@ -62,9 +62,7 @@ class EventListenersContainer {
             if (useCapture) {
                 return capturingHandlers_;
             }
-            else {
-                return bubblingHandlers_;
-            }
+            return bubblingHandlers_;
         }
     }
     
@@ -88,14 +86,12 @@ class EventListenersContainer {
             getLog().debug(type + " listener already registered, skipping it (" + listener + ")");
             return false;
         }
-        else {
-            listeners.add(listener);
-            return true;
-        }
+        listeners.add(listener);
+        return true;
     }
 
     private Handlers getHandlersOrCreateIt(final String type) {
-        Handlers handlers = (Handlers) eventHandlers_.get(type.toLowerCase());
+        Handlers handlers = eventHandlers_.get(type.toLowerCase());
         if (handlers == null) {
             handlers = new Handlers();
             eventHandlers_.put(type.toLowerCase(), handlers);
@@ -129,14 +125,12 @@ class EventListenersContainer {
     }
 
     public Object getEventHandlerProp(final String eventName) {
-        final Handlers handlers = (Handlers) eventHandlers_.get(eventName);
+        final Handlers handlers = eventHandlers_.get(eventName);
         if (handlers == null) {
             return null;
         }
-        else {
-            // TODO: handle differences between IE and FF: null vs undefined
-            return handlers.handler_;
-        }
+        // TODO: handle differences between IE and FF: null vs undefined
+        return handlers.handler_;
     }
 
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event,

@@ -116,9 +116,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
         if (getNamespaceURI() == null) {
             return getLocalName();
         }
-        else {
-            return getQualifiedName();
-        }
+        return getQualifiedName();
     }
 
     /**
@@ -129,14 +127,12 @@ public class XmlElement extends DomNamespaceNode implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED}
      */
     public final String getAttributeValue(final String attributeName) {
-        final XmlAttr attr = (XmlAttr) attributes_.get(attributeName);
+        final XmlAttr attr = attributes_.get(attributeName);
 
         if (attr != null) {
             return attr.getNodeValue();
         }
-        else {
-            return ATTRIBUTE_NOT_DEFINED;
-        }
+        return ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
@@ -227,7 +223,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI != null) {
-            final String prefix = (String) namespaces_.get(namespaceURI);
+            final String prefix = namespaces_.get(namespaceURI);
             if (prefix != null) {
                 qualifiedName = prefix + ':' + localName;
             }
@@ -248,7 +244,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
      */
     @SuppressWarnings("unchecked")
     static Map<String, XmlAttr> createAttributeMap(final int attributeCount) {
-        return (Map<String, XmlAttr>) ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
+        return ListOrderedMap.decorate(new HashMap(attributeCount)); // preserve insertion order
     }
 
     /**
@@ -295,7 +291,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
             printWriter.print(" ");
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(((XmlAttr) attributes_.get(name)).getNodeValue()));
+            printWriter.print(StringEscapeUtils.escapeXml(attributes_.get(name).getNodeValue()));
             printWriter.print("\"");
         }
     }
@@ -316,9 +312,7 @@ public class XmlElement extends DomNamespaceNode implements Element {
         if (attr != null) {
             return attr.getValue();
         }
-        else {
-            return "";
-        }
+        return "";
     }
 
     /**

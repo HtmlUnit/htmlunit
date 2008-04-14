@@ -170,9 +170,7 @@ public class XMLAttribute extends SimpleScriptable {
             final SimpleScriptable documentScriptable = getScriptableFor(parent_.getPage());
             return documentScriptable;
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -207,9 +205,6 @@ public class XMLAttribute extends SimpleScriptable {
         if (parent_ != null) {
             return parent_.getAttributeValue(name_);
         }
-        else {
-            return value_;
-        }
+        return value_;
     }
-
 }

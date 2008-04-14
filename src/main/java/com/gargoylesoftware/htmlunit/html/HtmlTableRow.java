@@ -226,9 +226,7 @@ public class HtmlTableRow extends ClickableElement {
                 setNextCell(nextCell_.getNextSibling());
                 return result;
             }
-            else {
-                throw new NoSuchElementException();
-            }
+            throw new NoSuchElementException();
         }
 
         /**

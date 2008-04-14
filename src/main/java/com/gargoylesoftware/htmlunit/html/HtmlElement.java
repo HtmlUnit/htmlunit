@@ -189,7 +189,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
         if (namespaceURI != null) {
-            final String prefix = (String) namespaces_.get(namespaceURI);
+            final String prefix = namespaces_.get(namespaceURI);
             if (prefix != null) {
                 qualifiedName = prefix + ':' + localName;
             }
@@ -258,13 +258,11 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue(final String attributeName) {
-        final HtmlAttr attr = (HtmlAttr) attributes_.get(attributeName.toLowerCase());
+        final HtmlAttr attr = attributes_.get(attributeName.toLowerCase());
         if (attr != null) {
             return attr.getNodeValue();
         }
-        else {
-            return ATTRIBUTE_NOT_DEFINED;
-        }
+        return ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
@@ -573,9 +571,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (getNamespaceURI() == null) {
             return getLocalName().toLowerCase();
         }
-        else {
-            return getQualifiedName();
-        }
+        return getQualifiedName();
     }
 
     /** @return the node type */
@@ -659,9 +655,7 @@ public abstract class HtmlElement extends DomElement implements Element {
             if (l >= 0 && l <= Short.MAX_VALUE) {
                 return new Short(new Long(l).shortValue());
             }
-            else {
-                return TAB_INDEX_OUT_OF_BOUNDS;
-            }
+            return TAB_INDEX_OUT_OF_BOUNDS;
         }
         catch (final NumberFormatException e) {
             return null;
@@ -781,9 +775,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         if (form != null && c == '\n' && isSubmittableByEnter()) {
             return form.submit((SubmittableElement) this);
         }
-        else {
-            return getPage();
-        }
+        return getPage();
     }
 
     /**
@@ -838,7 +830,7 @@ public abstract class HtmlElement extends DomElement implements Element {
             printWriter.print(" ");
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(StringEscapeUtils.escapeXml(((HtmlAttr) attributes_.get(name)).getNodeValue()));
+            printWriter.print(StringEscapeUtils.escapeXml(attributes_.get(name).getNodeValue()));
             printWriter.print("\"");
         }
     }
@@ -1063,9 +1055,7 @@ public abstract class HtmlElement extends DomElement implements Element {
                 setNextElement(nextElement_);
                 return result;
             }
-            else {
-                throw new NoSuchElementException();
-            }
+            throw new NoSuchElementException();
         }
 
         private void setNextElement(final DomNode node) {

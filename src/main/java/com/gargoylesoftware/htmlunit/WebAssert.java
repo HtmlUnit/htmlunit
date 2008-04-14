@@ -460,9 +460,7 @@ public final class WebAssert {
                 if (list.contains(key)) {
                     throw new AssertionError("The access key '" + key + "' is not unique.");
                 }
-                else {
-                    list.add(key);
-                }
+                list.add(key);
             }
         }
     }
@@ -480,9 +478,7 @@ public final class WebAssert {
                 if (list.contains(id)) {
                     throw new AssertionError("The element ID '" + id + "' is not unique.");
                 }
-                else {
-                    list.add(id);
-                }
+                list.add(id);
             }
         }
     }

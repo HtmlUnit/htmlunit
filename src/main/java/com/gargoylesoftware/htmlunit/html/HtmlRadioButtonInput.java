@@ -144,9 +144,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         if (isChecked()) {
             return "checked";
         }
-        else {
-            return "unchecked";
-        }
+        return "unchecked";
     }
 
     /**

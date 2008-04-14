@@ -290,9 +290,7 @@ public class XMLDocument extends Document {
         if (collection.jsxGet_length() > 0) {
             return collection.get(0, collection);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**

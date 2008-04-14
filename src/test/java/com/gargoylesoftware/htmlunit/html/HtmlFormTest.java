@@ -1174,7 +1174,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlForm form = (HtmlForm) page.getForms().get(0);
+        final HtmlForm form = page.getForms().get(0);
         final HtmlSubmitInput submit = (HtmlSubmitInput) form.getInputByName("mySubmit");
         submit.click();
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1210,7 +1210,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlForm form = (HtmlForm) page.getForms().get(0);
+        final HtmlForm form = page.getForms().get(0);
         final HtmlSubmitInput submit = (HtmlSubmitInput) form.getInputByName("mySubmit");
         final HtmlPage secondPage = (HtmlPage) submit.click();
         assertEquals(expectedURL, secondPage.getWebResponse().getUrl());

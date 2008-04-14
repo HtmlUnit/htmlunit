@@ -103,32 +103,28 @@ public class HtmlAnchor extends ClickableElement {
                         + "', using href '" + href + "'");
         }
 
-        if (href != null && href.length() > 0 && !href.startsWith("#")) {
+        if (href.length() > 0 && !href.startsWith("#")) {
             final HtmlPage page = getPage();
             if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
                 return page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();
             }
-            else {
-                final URL url = page.getFullyQualifiedUrl(href);
-                final WebRequestSettings settings = new WebRequestSettings(url);
-                settings.addAdditionalHeader("Referer", page.getWebResponse().getUrl().toExternalForm());
-                if (mainLog_.isDebugEnabled()) {
-                    mainLog_.debug(
+            final URL url = page.getFullyQualifiedUrl(href);
+            final WebRequestSettings settings = new WebRequestSettings(url);
+            settings.addAdditionalHeader("Referer", page.getWebResponse().getUrl().toExternalForm());
+            if (mainLog_.isDebugEnabled()) {
+                mainLog_.debug(
                         "Getting page for " + url.toExternalForm()
-                                + ", derived from href '" + href
-                                + "', using the originating URL "
-                                + page.getWebResponse().getUrl());
-                }
-                return page.getWebClient().getPage(
-                        page.getEnclosingWindow(),
-                        page.getResolvedTarget(getTargetAttribute()),
-                        settings);
+                        + ", derived from href '" + href
+                        + "', using the originating URL "
+                        + page.getWebResponse().getUrl());
             }
+            return page.getWebClient().getPage(
+                    page.getEnclosingWindow(),
+                    page.getResolvedTarget(getTargetAttribute()),
+                    settings);
         }
-        else {
-            return defaultPage;
-        }
+        return defaultPage;
     }
 
     /**

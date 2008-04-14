@@ -82,9 +82,7 @@ public class HTMLCollectionTags extends HTMLCollection {
                     && getTransformer().equals(otherArray.getTransformer())) {
                 return Boolean.TRUE;
             }
-            else {
-                return NOT_FOUND;
-            }
+            return NOT_FOUND;
         }
 
         return super.equivalentValues(other);

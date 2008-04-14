@@ -182,9 +182,7 @@ public class XPathResult extends SimpleScriptable {
         if (!result_.isEmpty()) {
             return (Node) ((DomNode) result_.get(0)).getScriptObject();
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -198,9 +196,7 @@ public class XPathResult extends SimpleScriptable {
         if (iteratorIndex_ < result_.size()) {
             return (Node) ((DomNode) result_.get(iteratorIndex_++)).getScriptObject();
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -216,9 +212,7 @@ public class XPathResult extends SimpleScriptable {
         if (index >= 0 && index < result_.size()) {
             return (Node) ((DomNode) result_.get(index)).getScriptObject();
         }
-        else {
-            return null;
-        }
+        return null;
     }
     
     /**

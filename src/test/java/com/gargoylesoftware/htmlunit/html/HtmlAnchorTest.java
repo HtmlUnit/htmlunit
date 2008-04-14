@@ -474,7 +474,7 @@ public class HtmlAnchorTest extends WebTestCase {
             + "<a href='" + URL_SECOND + "' id='a1'>Test</a>\n"
             + "</body></html>";
 
-        final HtmlPage page = (HtmlPage) loadPage(browserVersion, html, null);
+        final HtmlPage page = loadPage(browserVersion, html, null);
         final HtmlAnchor a1 = (HtmlAnchor) page.getHtmlElementById("a1");
         final HtmlPage secondPage = (HtmlPage) a1.click();
         assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getUrl());

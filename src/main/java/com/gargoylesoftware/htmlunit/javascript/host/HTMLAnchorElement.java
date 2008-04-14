@@ -159,9 +159,7 @@ public class HTMLAnchorElement extends HTMLElement {
         if (query == null) {
             return "";
         }
-        else {
-            return "?" + query;
-        }
+        return "?" + query;
     }
 
     /**
@@ -199,9 +197,7 @@ public class HTMLAnchorElement extends HTMLElement {
         if (hash == null) {
             return "";
         }
-        else {
-            return hash;
-        }
+        return hash;
     }
 
     /**
@@ -230,9 +226,7 @@ public class HTMLAnchorElement extends HTMLElement {
         if (port == -1) {
             return host;
         }
-        else {
-            return host + ":" + port;
-        }
+        return host + ":" + port;
     }
 
     /**
@@ -315,9 +309,7 @@ public class HTMLAnchorElement extends HTMLElement {
         if (port == -1) {
             return "";
         }
-        else {
-            return String.valueOf(port);
-        }
+        return String.valueOf(port);
     }
 
     /**

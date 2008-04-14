@@ -108,9 +108,7 @@ public class Location extends SimpleScriptable {
         if (hint == null || String.class.equals(hint)) {
             return jsxGet_href();
         }
-        else {
-            return super.getDefaultValue(hint);
-        }
+        return super.getDefaultValue(hint);
     }
 
     /**
@@ -122,9 +120,7 @@ public class Location extends SimpleScriptable {
         if (window_ != null) {
             return jsxGet_href();
         }
-        else {
-            return "[Uninitialized]";
-        }
+        return "[Uninitialized]";
     }
 
     /**
@@ -186,9 +182,7 @@ public class Location extends SimpleScriptable {
         if (page == null) {
             return UNKNOWN;
         }
-        else {
-            return page.getWebResponse().getUrl().toExternalForm();
-        }
+        return page.getWebResponse().getUrl().toExternalForm();
     }
 
     /**
@@ -236,9 +230,7 @@ public class Location extends SimpleScriptable {
         if (search == null) {
             return "";
         }
-        else {
-            return "?" + search;
-        }
+        return "?" + search;
     }
 
     /**
@@ -262,9 +254,7 @@ public class Location extends SimpleScriptable {
         if (hash_ == null) {
             return "";
         }
-        else {
-            return hash_;
-        }
+        return hash_;
     }
 
     /**
@@ -318,9 +308,7 @@ public class Location extends SimpleScriptable {
         if (port == -1) {
             return host;
         }
-        else {
-            return host + ":" + port;
-        }
+        return host + ":" + port;
     }
 
     /**
@@ -379,9 +367,7 @@ public class Location extends SimpleScriptable {
         if (port == -1) {
             return "";
         }
-        else {
-            return String.valueOf(port);
-        }
+        return String.valueOf(port);
     }
 
     /**

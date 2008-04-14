@@ -134,7 +134,7 @@ public class ScriptableWrapper extends ScriptableObject {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        final Method propertyGetter = (Method) properties_.get(name);
+        final Method propertyGetter = properties_.get(name);
         final Object response;
         if (propertyGetter != null) {
             response = invoke(propertyGetter);
@@ -206,9 +206,7 @@ public class ScriptableWrapper extends ScriptableObject {
             return Context.javaToJS(byIndex, ScriptableObject
                     .getTopLevelScope(start));
         }
-        else {
-            return super.get(index, start);
-        }
+        return super.get(index, start);
     }
 
     /**
@@ -221,9 +219,7 @@ public class ScriptableWrapper extends ScriptableObject {
         if (hint == null || String.class == null) {
             return jsToString();
         }
-        else {
-            return super.getDefaultValue(hint);
-        }
+        return super.getDefaultValue(hint);
     }
 
     /**

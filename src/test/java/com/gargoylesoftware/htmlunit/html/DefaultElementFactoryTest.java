@@ -91,15 +91,15 @@ public class DefaultElementFactoryTest extends WebTestCase {
         final Iterator<HtmlAttr> attributeEntriesIterator = anchor.getAttributesCollection().iterator();
 
         // Verify if the attributes are in ascending order of name.
-        HtmlAttr htmlAttr = (HtmlAttr) attributeEntriesIterator.next();
+        HtmlAttr htmlAttr = attributeEntriesIterator.next();
         assertEquals("href", htmlAttr.getNodeName());
         assertEquals("http://www.google.com", htmlAttr.getHtmlValue());
 
-        htmlAttr = (HtmlAttr) attributeEntriesIterator.next();
+        htmlAttr = attributeEntriesIterator.next();
         assertEquals("tabindex", htmlAttr.getNodeName());
         assertEquals("2", htmlAttr.getHtmlValue());
 
-        htmlAttr = (HtmlAttr) attributeEntriesIterator.next();
+        htmlAttr = attributeEntriesIterator.next();
         assertEquals("accesskey", htmlAttr.getNodeName());
         assertEquals("F", htmlAttr.getHtmlValue());
     }

@@ -327,9 +327,7 @@ public class WebClientTest extends WebTestCase {
                     setResponse(webRequestSettings.getURL(), secondContent);
                     return response;
                 }
-                else {
-                    return super.getResponse(webRequestSettings);
-                }
+                return super.getResponse(webRequestSettings);
             }
         };
         webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
@@ -1457,7 +1455,7 @@ public class WebClientTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final HtmlPage pageInFrame = (HtmlPage) ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
-        ((HtmlAnchor) pageInFrame.getAnchors().get(0)).click();
+        pageInFrame.getAnchors().get(0).click();
 
         final String[] expectedAlerts = {"null", "null"};
         assertEquals(expectedAlerts, collectedAlerts);

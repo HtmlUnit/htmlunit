@@ -252,9 +252,7 @@ public class Stylesheet extends SimpleScriptable {
                 if (ac1.getSpecified()) {
                     return element.getAttributeValue(ac1.getLocalName()).equals(ac1.getValue());
                 }
-                else {
-                    return element.hasAttribute(ac1.getLocalName());
-                }
+                return element.hasAttribute(ac1.getLocalName());
             case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac2 = (AttributeCondition) condition;
                 final String v = ac2.getValue();
@@ -384,13 +382,9 @@ public class Stylesheet extends SimpleScriptable {
             if (getBrowserVersion().isIE()) {
                 return "[object]"; // the super helpful IE solution
             }
-            else {
-                return "[object CSSStyleSheet]";
-            }
+            return "[object CSSStyleSheet]";
         }
-        else {
-            return super.getDefaultValue(hint);
-        }
+        return super.getDefaultValue(hint);
     }
     
     /**

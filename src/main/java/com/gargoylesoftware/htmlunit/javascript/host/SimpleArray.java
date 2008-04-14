@@ -82,9 +82,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
         if (response != null) {
             return response;
         }
-        else {
-            return Context.getUndefinedValue();
-        }
+        return Context.getUndefinedValue();
     }
 
     /**
@@ -100,9 +98,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
         if (index >= 0 && index < elements.size()) {
             return elements.get(index);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**

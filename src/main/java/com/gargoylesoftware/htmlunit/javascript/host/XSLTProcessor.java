@@ -128,7 +128,7 @@ public class XSLTProcessor extends SimpleScriptable {
     private Object transform(final Node source) {
         try {
             Source xmlSource = new DOMSource(source.getDomNodeOrDie());
-            final Source xsltSource = new DOMSource(((Node) style_).getDomNodeOrDie());
+            final Source xsltSource = new DOMSource(style_.getDomNodeOrDie());
 
             final org.w3c.dom.Document containerDocument =
                 DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -143,18 +143,16 @@ public class XSLTProcessor extends SimpleScriptable {
             }
             transformer.transform(xmlSource, result);
             
-            final org.w3c.dom.Node transformedNode = (org.w3c.dom.Node) result.getNode();
+            final org.w3c.dom.Node transformedNode = result.getNode();
             if (transformedNode.getFirstChild().getNodeType() == Node.ELEMENT_NODE) {
                 return transformedNode;
             }
-            else {
-                //output is not DOM (text)
-                xmlSource = new DOMSource(source.getDomNodeOrDie());
-                final StringWriter writer = new StringWriter();
-                final Result streamResult = new StreamResult(writer);
-                transformer.transform(xmlSource, streamResult);
-                return writer.toString();
-            }
+            //output is not DOM (text)
+            xmlSource = new DOMSource(source.getDomNodeOrDie());
+            final StringWriter writer = new StringWriter();
+            final Result streamResult = new StreamResult(writer);
+            transformer.transform(xmlSource, streamResult);
+            return writer.toString();
         }
         catch (final Exception e) {
             throw Context.reportRuntimeError("Exception: " + e);
@@ -184,7 +182,7 @@ public class XSLTProcessor extends SimpleScriptable {
     private void transform(final Node source, final DomNode parent) {
         final Object result = transform(source);
         if (result instanceof org.w3c.dom.Node) {
-            final NodeList children = (NodeList) ((org.w3c.dom.Node) result).getChildNodes();
+            final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
                 XmlUtil.appendChild(parent.getPage(), parent, children.item(i));
             }
@@ -282,7 +280,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Starts the transformation process or resumes a previously failed transformation.
      */
     public void jsxFunction_transform() {
-        final Node input = (Node) input_;
+        final Node input = input_;
         final SgmlPage page = (SgmlPage) input.getDomNodeOrDie().getPage();
 
         if (output_ == null || !(output_ instanceof Node)) {
@@ -291,7 +289,7 @@ public class XSLTProcessor extends SimpleScriptable {
             node.setParentScope(getParentScope());
             node.setPrototype(getPrototype(node.getClass()));
             node.setDomNode(fragment);
-            output_ = (Node) fragment.getScriptObject();
+            output_ = fragment.getScriptObject();
         }
 
         transform(input_, ((Node) output_).getDomNodeOrDie());

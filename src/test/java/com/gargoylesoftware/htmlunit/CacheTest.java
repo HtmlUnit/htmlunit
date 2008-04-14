@@ -78,7 +78,7 @@ public class CacheTest extends WebTestCase {
         final WebResponse response = new DummyWebResponse() {
             @Override
             public String getResponseHeaderValue(final String headerName) {
-                return (String) headers.get(headerName);
+                return headers.get(headerName);
             }
         };
 

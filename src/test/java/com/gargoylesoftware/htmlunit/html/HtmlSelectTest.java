@@ -84,7 +84,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Test that the select is being correctly identified as a submittable element
@@ -118,7 +118,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         assertNotNull(select);
 
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
@@ -151,7 +151,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Change the value
@@ -185,7 +185,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Change the value
@@ -220,7 +220,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final List<HtmlOption> expected = new ArrayList<HtmlOption>();
         expected.add(select.getOptionByValue("option1"));
         expected.add(select.getOptionByValue("option3"));
@@ -248,7 +248,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final List<HtmlOption> expected = new ArrayList<HtmlOption>();
         expected.add(select.getOptionByValue("option3"));
 
@@ -275,7 +275,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final List<HtmlOption> expected = new ArrayList<HtmlOption>();
         expected.add(select.getOptionByValue("option1"));
 
@@ -355,7 +355,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
 
         final List<HtmlOption> expectedOptions = new ArrayList<HtmlOption>();
         expectedOptions.add(select.getOptionByValue("option1"));
@@ -405,7 +405,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select2").get(0);
+        final HtmlSelect select = form.getSelectsByName("select2").get(0);
         assertEquals("s2o2", select.getOptionByValue("option2").asText());
 
         assertEquals(select.getOption(2), select.getOptionByValue("s2o3"));
@@ -429,7 +429,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
-        final HtmlSelect select = (HtmlSelect) form.getSelectsByName("select1").get(0);
+        final HtmlSelect select = form.getSelectsByName("select1").get(0);
 
         // Change the value
         select.setSelectedAttribute("option3", true);

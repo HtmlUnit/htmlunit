@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -211,7 +210,7 @@ public class JavaScriptEngine implements Serializable {
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
                     if (!getWebClient().getBrowserVersion().isIE()) {
-                        final Scriptable obj = (Scriptable) config.getLinkedClass().newInstance();
+                        final Scriptable obj = config.getLinkedClass().newInstance();
                         obj.put("prototype", obj, prototype);
                         obj.setPrototype(prototype);
                         obj.setParentScope(window);
@@ -243,7 +242,7 @@ public class JavaScriptEngine implements Serializable {
                 prototype = prototype.getPrototype(); // "double prototype" hack for FF
             }
             if (!StringUtils.isEmpty(config.getExtendedClass())) {
-                final Scriptable parentPrototype = (Scriptable) prototypesPerJSName.get(config.getExtendedClass());
+                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClass());
                 prototype.setPrototype(parentPrototype);
             }
             else {
@@ -283,7 +282,7 @@ public class JavaScriptEngine implements Serializable {
      * @return the created prototype
      */
     private Scriptable configureClass(final ClassConfiguration config, final Scriptable window)
-        throws InstantiationException, IllegalAccessException, InvocationTargetException {
+        throws InstantiationException, IllegalAccessException {
 
         final Class< ? > jsHostClass = config.getLinkedClass();
         final ScriptableObject prototype = (ScriptableObject) jsHostClass.newInstance();
@@ -541,7 +540,7 @@ public class JavaScriptEngine implements Serializable {
         }
 
         public final Object run(final Context cx) {
-            final Boolean javaScriptAlreadyRunning = (Boolean) javaScriptRunning_.get();
+            final Boolean javaScriptAlreadyRunning = javaScriptRunning_.get();
             javaScriptRunning_.set(Boolean.TRUE);
 
             try {
@@ -555,21 +554,17 @@ public class JavaScriptEngine implements Serializable {
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw scriptException;
                 }
-                else {
-                    // use a ScriptException to log it because it provides good information
-                    // on the source code
-                    getLog().info("Caught script exception", scriptException);
-                    return null;
-                }
+                // use a ScriptException to log it because it provides good information
+                // on the source code
+                getLog().info("Caught script exception", scriptException);
+                return null;
             }
             catch (final TimeoutError e) {
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw new RuntimeException(e);
                 }
-                else {
-                    getLog().info("Caught script timeout error", e);
-                    return null;
-                }
+                getLog().info("Caught script timeout error", e);
+                return null;
             }
             finally {
                 javaScriptRunning_.set(javaScriptAlreadyRunning);
@@ -621,7 +616,7 @@ public class JavaScriptEngine implements Serializable {
      * @return the parsed script
      */
     public Script getCachedScript(final WebResponse webResponse) {
-        return (Script) cachedScripts_.get(webResponse);
+        return cachedScripts_.get(webResponse);
     }
 
     /**

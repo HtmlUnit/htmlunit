@@ -95,7 +95,7 @@ public class MockWebConnection extends WebConnectionImpl {
 
         lastRequest_ = webRequestSettings;
 
-        WebResponseData response = (WebResponseData) responseMap_.get(url.toExternalForm());
+        WebResponseData response = responseMap_.get(url.toExternalForm());
         if (response == null) {
             response = defaultResponse_;
             if (response == null) {

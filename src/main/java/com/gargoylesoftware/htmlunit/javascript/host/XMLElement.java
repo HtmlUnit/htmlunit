@@ -83,9 +83,7 @@ public class XMLElement extends Node {
         if (collection.jsxGet_length() > 0) {
             return collection.get(0, collection);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     /**
@@ -135,10 +133,9 @@ public class XMLElement extends Node {
         if (value == XmlElement.ATTRIBUTE_NOT_DEFINED) {
             return null;
         }
-        else {
-            return value;
-        }
+        return value;
     }
+
     /**
      * Sets an attribute.
      *

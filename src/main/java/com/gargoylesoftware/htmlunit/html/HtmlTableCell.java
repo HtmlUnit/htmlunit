@@ -74,9 +74,7 @@ public abstract class HtmlTableCell extends ClickableElement {
         if (spanString == null || spanString.length() == 0) {
             return 1;
         }
-        else {
-            return Integer.parseInt(spanString);
-        }
+        return Integer.parseInt(spanString);
     }
 
     /**
@@ -88,9 +86,7 @@ public abstract class HtmlTableCell extends ClickableElement {
         if (spanString == null || spanString.length() == 0) {
             return 1;
         }
-        else {
-            return Integer.parseInt(spanString);
-        }
+        return Integer.parseInt(spanString);
     }
 
     /**
