@@ -534,7 +534,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
             }
-            
+
             idList.add("length");
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_2);
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
@@ -572,32 +572,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 }
                 else {
                     getLog().debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
-                }
-            }
-
-            if (xpath_ != null) {
-                // See if there are any elements in the element array with the specified name.
-                final HTMLCollection array = new HTMLCollection(this);
-                final String newCondition = "@name";
-                final String currentXPathExpr = xpath_.toString();
-                final String xpathExpr;
-                if (currentXPathExpr.endsWith("]")) {
-                    xpathExpr = currentXPathExpr.substring(0, currentXPathExpr.length() - 1)
-                        + " and " + newCondition + "]";
-                }
-                else {
-                    xpathExpr = currentXPathExpr + "[" + newCondition + "]";
-                }
-                array.init(node_, xpathExpr);
-
-                for (final Object next : array.getElements()) {
-                    if (next instanceof HtmlElement) {
-                        final HtmlElement element = (HtmlElement) next;
-                        final String name = element.getAttribute("name");
-                        if (name != null && !idList.contains(name)) {
-                            idList.add(name);
-                        }
-                    }
                 }
             }
         }
