@@ -344,19 +344,19 @@ public class HtmlFrameSetTest extends WebTestCase {
             + "</html>";
 
         final String leftHtml
-            = "<html>"
+            = "<html>\n"
             + "<body onLoad=\"parent.writeLeftFrame()\">\n"
             + "  This is the initial left frame, to be overwritten immediately (onLoad).\n"
             + "</body></html>";
 
         final String rightHtml
-            = "<html>"
+            = "<html>\n"
             + "<body>\n"
             + "  This is the right frame, version 1.\n"
             + "</body></html>";
 
         final String right2Html
-            = "<html>"
+            = "<html>\n"
             + "<body>\n"
             + "  This is the right frame, version 2.\n"
             + "</body></html>";

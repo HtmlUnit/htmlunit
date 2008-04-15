@@ -444,9 +444,9 @@ public class HtmlSelectTest extends WebTestCase {
     @Test
     public void testSetSelectionOnOptionWithNoName() throws Exception {
         final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
-            + "<select name='select' multiple size='5'>"
-            + "<option value='1'>111</option>"
-            + "<option id='option2'>222</option>"
+            + "<select name='select' multiple size='5'>\n"
+            + "<option value='1'>111</option>\n"
+            + "<option id='option2'>222</option>\n"
             + "</select>\n"
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();

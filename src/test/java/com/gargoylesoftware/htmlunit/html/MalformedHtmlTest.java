@@ -64,8 +64,8 @@ public class MalformedHtmlTest extends WebTestCase {
             + "    alert('in test');\n"
             + "    alert(document.getElementById('span1').parentNode.tagName);\n"
             + "}\n"
-            + "</script>"
-            + "<span id='span1'>hello</span>"
+            + "</script>\n"
+            + "<span id='span1'>hello</span>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -86,16 +86,16 @@ public class MalformedHtmlTest extends WebTestCase {
             + "    alert(document.forms[0].elements[2].name);\n"
             + "    alert(document.getElementById('text4').form);\n"
             + "}\n"
-            + "</script>"
+            + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "<div>"
-            + "<form action='foo'>"
-            + "<input type='text' name='text1'/>"
-            + "<input type='text' name='text2'/>"
-            + "</div>"
-            + "<input type='text' name='text3'/>"
-            + "</form>"
-            + "<input type='text' name='text4' id='text4'/>"
+            + "<div>\n"
+            + "<form action='foo'>\n"
+            + "<input type='text' name='text1'/>\n"
+            + "<input type='text' name='text2'/>\n"
+            + "</div>\n"
+            + "<input type='text' name='text3'/>\n"
+            + "</form>\n"
+            + "<input type='text' name='text4' id='text4'/>\n"
             + "</body></html>";
 
         loadPageWithAlerts(content);
