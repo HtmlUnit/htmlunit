@@ -179,7 +179,7 @@ JUnit results available here: ${test.reports.dir}/index.html
         <sequential>
             <mkdir dir="${jars.dir}/@{type}/"/>
             <get usetimestamp="true"
-                src="http://htmlunit.sourceforge.net/m2-repo-snapshots/@{project}/@{project}-hu/@{version}/@{jarName}"
+                src="http://htmlunit.sourceforge.net/m2-repo-snapshots/@{project}/@{version}/@{jarName}"
                 dest="${jars.dir}/@{type}/@{jarName}"/>
         </sequential>
     </macrodef>
@@ -208,7 +208,8 @@ JUnit results available here: ${test.reports.dir}/index.html
         <get-dependency project="commons-io" jarName="commons-io-1.4.jar"/>
         <get-dependency project="commons-lang" jarName="commons-lang-2.4.jar"/>
         <get-dependency project="commons-collections" jarName="commons-collections-3.2.jar"/>
-        <get-dependency project="rhino" jarName="js-1.7R1.jar"/>
+        <get-snapshot-dependency project="net/sourceforge/htmlunit/htmlunit-core-js" version="0.1-SNAPSHOT"
+            jarname="htmlunit-core-js-0.1-20080408.105714-1.jar"/>
 
         <!-- test -->
         <get-dependency type="test" project="junit" jarName="junit-4.4.jar"/>
