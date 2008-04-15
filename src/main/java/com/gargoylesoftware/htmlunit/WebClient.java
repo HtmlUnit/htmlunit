@@ -90,7 +90,19 @@ import com.gargoylesoftware.htmlunit.ssl.InsecureSSLProtocolSocketFactory;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
- * An object that represents a web browser.
+ * The main starting point in HtmlUnit: this class simulates a web browser.
+ * <p>
+ * A standard usage of HtmlUnit will start with using the {@link #getPage(String)} method
+ * (or {@link #getPage(URL)}) to load a first {@link Page}
+ * and will continue with further processing on this page depending on its type.
+ * </p>
+ * <b>Example:</b><br>
+ * <br>
+ * <code>
+ * final WebClient webClient = new WebClient();<br/>
+ * final {@link HtmlPage} startPage = ({@link HtmlPage}) webClient.getPage("http://htmlunit.sf.net");<br/>
+ * assertEquals("HtmlUnit - Welcome to HtmlUnit", startPage.{@link HtmlPage#getTitleText() getTitleText}());
+ * </code>
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -295,41 +307,16 @@ public class WebClient implements Serializable {
 
     /**
      * Send a request to a server and return a Page that represents the
-     * response from the server. This page will be used to populate this frame.<p>
+     * response from the server. This page will be used to populate the provided window.
+     * <p>
+     * The returned {@link Page} will be created by the {@link PageCreator}
+     * configured by {@link #setPageCreator(PageCreator)}, if any.
+     * <p>
+     * The {@link DefaultPageCreator} will create a {@link Page} depending on the content type of the HTTP response,
+     * basically {@link HtmlPage} for HTML content, {@link com.gargoylesoftware.htmlunit.xml.XmlPage} for XML content,
+     * {@link TextPage} for other text content and {@link UnexpectedPage} for anything else.
      *
-     * The type of Page will depend on the content type of the HTTP response. <p />
-     *
-     *  <table>
-     *    <tr>
-     *      <th>Content type</th>
-     *      <th>Type of page</th>
-     *    </tr>
-     *    <tr>
-     *      <td>"text/html"</td>
-     *      <td>{@link com.gargoylesoftware.htmlunit.html.HtmlPage}</td>
-     *    </tr>
-     *    <tr>
-     *      <td>"text/xhtml"</td>
-     *      <td>{@link com.gargoylesoftware.htmlunit.html.HtmlPage}</td>
-     *    </tr>
-     *    <tr>
-     *      <td>"application/xhtml+xml"</td>
-     *      <td>{@link com.gargoylesoftware.htmlunit.html.HtmlPage} for now, in the
-     *          future it will be XML validated as well
-     *      </td>
-     *    </tr>
-     *    <tr>
-     *      <td>"text/*"</td>
-     *      <td>{@link com.gargoylesoftware.htmlunit.TextPage}</td>
-     *    </tr>
-     *    <tr>
-     *      <td>Anything else</td>
-     *      <td>{@link com.gargoylesoftware.htmlunit.UnexpectedPage}</td>
-     *    </tr>
-     *  </table>
-     *
-     *
-     * @param webWindow the WebWindow to load this request into
+     * @param webWindow the WebWindow to load the result of the request into
      * @param parameters Parameter object for the web request
      * @return the page returned by the server when the specified request was made in the specified window
      * @throws IOException if an IO error occurs
@@ -389,7 +376,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenient method to build an URL and load it into the current WebWindow.
+     * Convenient method to build an URL and load it into the current WebWindow as it would be done
+     * by {@link #getPage(WebWindow, WebRequestSettings)}.
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -402,7 +390,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Convenient method to load a URL into the current WebWindow.
+     * Convenient method to load a URL into the current WebWindow as it would be done
+     * by {@link #getPage(WebWindow, WebRequestSettings)}.
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -614,7 +603,7 @@ public class WebClient implements Serializable {
             throw new IllegalStateException(message);
         }
     }
- 
+
     /**
      * This method is intended for testing only - use at your own risk.
      * @return the current JavaScript engine (never <code>null</code>)
@@ -1752,7 +1741,7 @@ public class WebClient implements Serializable {
     public int getTimeout() {
         return timeout_;
     }
-    
+
     /**
      * Sets the timeout of the WebConnection. Set to zero (the default) for an infinite wait.
      *
@@ -1804,7 +1793,7 @@ public class WebClient implements Serializable {
         }
         incorrectnessListener_ = listener;
     }
-    
+
     /**
      * Gets the current Ajax controller.
      * @return the controller

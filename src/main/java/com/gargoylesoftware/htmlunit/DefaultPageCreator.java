@@ -51,6 +51,45 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * also protected createXXXXPage() methods for creating the Page types HtmlUnit
  * already knows about for your custom content types.
  *
+ * <p />
+ * Following table shows the type of {@Page} created depending on the content type:<br>
+ * <br>
+ *  <table border="1" width="50%">
+ *    <tr>
+ *      <th>Content type</th>
+ *      <th>Type of page</th>
+ *    </tr>
+ *    <tr>
+ *      <td>text/html<br/>
+ *      text/xhtml<br/>
+ *      *xhtml+xml
+ *      </td>
+ *      <td>{@link HtmlPage}</td>
+ *    </tr>
+ *    <tr>
+ *      <td>text/xml<br/>
+ *      application/xml<br/>
+ *      text/vnd.wap.wml<br/>
+ *      *+xml
+ *      </td>
+ *      <td>{@link XmlPage}</td>
+ *    </tr>
+ *    <tr>
+ *      <td>text/javascript<br/>
+ *      application/x-javascript
+ *      </td>
+ *      <td>{@link JavaScriptPage}</td>
+ *    </tr>
+ *    <tr>
+ *      <td>text/*</td>
+ *      <td>{@link TextPage}</td>
+ *    </tr>
+ *    <tr>
+ *      <td>Anything else</td>
+ *      <td>{@link UnexpectedPage}</td>
+ *    </tr>
+ *  </table>
+ *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -116,7 +155,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
         newPage = HTMLParser.parse(webResponse, webWindow);
         return newPage;
     }
-    
+
     /**
      * Creates a JavaScriptPage for this WebResponse.
      *

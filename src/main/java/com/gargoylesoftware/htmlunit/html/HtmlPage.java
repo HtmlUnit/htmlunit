@@ -94,7 +94,28 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A representation of an HTML page returned from a server. This class is the DOM Document implementation.
+ * A representation of an HTML page returned from a server.
+ * <p>
+ * This class provides different methods to access the page's content like
+ * {@link #getForms()}, {@link #getAnchors()}, {@link #getElementById(String)}, ... as well as the
+ * very powerful inherited methods {@link #getByXPath(String)} and {@link #getFirstByXPath(String)}
+ * for fine grained user specific access to child nodes.
+ * </p>
+ * <p>
+ * Child elements allowing user interaction provide methods for this purpose like {@link HtmlAnchor#click()},
+ * {@link HtmlInput#type(String)}, {@link HtmlOption#setSelected(boolean)}, ...
+ * </p>
+ * <p>
+ * HtmlPage instances should not be instantiated directly. They will be returned by {@link WebClient#getPage(String)}
+ * when the content type of the server's response is <code>text/html</code> (or one of its variations).<br>
+ * <br/>
+ * <b>Example:</b><br/>
+ * <br/>
+ * <code>
+ * final HtmlPage page =
+ * (HtmlPage) webClient.{@link WebClient#getPage(String) getPage}("http://mywebsite/some/page.html");
+ * </code>
+ * </p>
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -128,6 +149,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
     /**
      * Creates an instance of HtmlPage.
+     * An HtmlPage instance is normally retrieved with {@link WebClient#getPage(String)}.
      *
      * @param originatingUrl the URL that was used to load this page
      * @param webResponse the web response that was used to create this page
@@ -406,7 +428,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public Element createElement(final String tagName) {
         return createHtmlElement(tagName);
     }
-    
+
     /**
      * Create a new HTML element with the given tag name.
      *
@@ -614,12 +636,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                     break;
                 }
             }
-            
+
             //http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#edef-BASE
             if (!insideHead) {
                 notifyIncorrectness("Element 'base' must appear in <head>, it is ignored.");
             }
-            
+
             final String href = htmlBase.getHrefAttribute();
             if (!insideHead || StringUtils.isEmpty(href)) {
                 baseUrl = getWebResponse().getUrl();
