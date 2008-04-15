@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>htmlunit</artifactId>
     <groupId>net.sourceforge.htmlunit</groupId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.1</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -513,21 +513,4 @@
             <layout>default</layout>
         </repository>
     </repositories>
-
-    <!-- Maven plugin snapshot repo required for Checkstyle plugin 2.2-SNAPSHOT. -->
-    <!-- See http://maven.apache.org/guides/development/guide-plugin-snapshot-repositories.html -->
-    <pluginRepositories>
-        <pluginRepository>
-            <id>apache.org</id>
-            <name>Maven Plugin Snapshots</name>
-            <url>http://people.apache.org/repo/m2-snapshot-repository</url>
-            <releases><enabled>false</enabled></releases>
-            <snapshots><enabled>true</enabled></snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>atlassian-m2-repository</id>
-            <name>Atlassian Maven 2.x Repository</name>
-            <url>http://repository.atlassian.com/maven2</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>
