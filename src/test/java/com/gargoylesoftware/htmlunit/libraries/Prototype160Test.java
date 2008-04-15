@@ -83,14 +83,10 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Fixed if {@link com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest#arrayedMap()} is fixed.
      * @throws Exception if test fails
      */
     @Test
     public void base() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "base.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 35, 225, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 35, 225, 0, 0);

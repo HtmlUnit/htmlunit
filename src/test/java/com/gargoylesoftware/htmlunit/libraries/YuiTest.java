@@ -41,7 +41,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -83,9 +82,7 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void animation() throws Exception {
-        final List<String> l = new ArrayList<String>();
-        l.add("test_onStart");
-        doTest(BrowserVersion.FIREFOX_2, "animation.html", l);
+        doTest(BrowserVersion.FIREFOX_2, "animation.html", emptyList_);
     }
 
     /**
@@ -93,9 +90,6 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void tabView() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         // The tabview YUI test has a background thread that runs. We want to set the
         // maximum wait time to 5 seconds as that gives enough time for execution without
         // causing the test to run forever.
@@ -126,9 +120,6 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void colorPicker() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest(BrowserVersion.FIREFOX_2, "colorpicker.html", emptyList_);
     }
 
@@ -175,9 +166,6 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void dom() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         doTest(BrowserVersion.FIREFOX_2, "dom.html", emptyList_);
     }
 
@@ -227,7 +215,7 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void yuiLoader() throws Exception {
-        doTest(BrowserVersion.FIREFOX_2, "yuiloader.html", Collections.singletonList("test_calculate"));
+        doTest(BrowserVersion.FIREFOX_2, "yuiloader.html", emptyList_);
     }
 
     /**

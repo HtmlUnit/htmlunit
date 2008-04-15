@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import java.io.File;
 import java.io.StringReader;
 import java.util.List;
 
@@ -47,6 +48,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -146,8 +148,7 @@ public class Sarissa0993Test extends WebTestCase {
      */
     @Test
     public void xsltProcessor() throws Exception {
-        //should be ++++F+++ (when property order rhino issue is fixed)
-        test("XSLTProcessorTestCase", "+++++++F");
+        test("XSLTProcessorTestCase", "++++F+++");
     }
 
     private void test(final String testName) throws Exception {
@@ -188,6 +189,14 @@ public class Sarissa0993Test extends WebTestCase {
                 final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
                 Page_ = (HtmlPage) client.getPage(url);
                 ((HtmlButton) Page_.getFirstByXPath("//button")).click();
+                
+                // dump the result page
+                if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
+                    final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
+                    final File f = new File(tmpDir, "sarissa0993_result.html");
+                    FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
+                    getLog().info("Test result written to: " + f.getAbsolutePath());
+                }
             }
         }
     }

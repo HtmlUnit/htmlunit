@@ -6,6 +6,14 @@
     </properties>
 
     <body>
+        <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+            <action type="fix" dev="mguillem">
+                JavaScript: object properties now returned in creation order.
+            </action>
+            <action type="update" dev="mguillem">
+                Use HtmlUnit-core-js (which is a Rhino fork) instead of Rhino.
+            </action>
+        </release>
         <release version="2.1" date="Apr 15, 2008" description="Performance improvements in CSS processing and a few bug fixes">
             <action type="update" dev="asashour">
                 Deprecate HtmlPage.getDocumentHtmlElement().

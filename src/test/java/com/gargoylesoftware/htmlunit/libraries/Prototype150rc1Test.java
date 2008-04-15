@@ -65,9 +65,6 @@ public class Prototype150rc1Test extends WebTestCase {
      */
     @Test
     public void ajax() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         final String filename = "ajax.html";
         test(BrowserVersion.INTERNET_EXPLORER_7_0, filename, 3, 11, 0, 0);
         test(BrowserVersion.FIREFOX_2, filename, 3, 11, 0, 0);

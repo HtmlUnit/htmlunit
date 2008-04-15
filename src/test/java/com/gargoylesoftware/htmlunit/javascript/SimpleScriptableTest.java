@@ -295,7 +295,6 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     @Test
     @Alerts({ "x1", "x2", "x3", "x4", "x5" })
-    @NotYetImplemented
     public void arrayedMap() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
