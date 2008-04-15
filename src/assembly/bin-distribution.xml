@@ -16,8 +16,8 @@
     </files>
     <fileSets>
         <fileSet>
-            <directory>${basedir}/target/site</directory>
-            <outputDirectory>/docs</outputDirectory>
+            <directory>${basedir}/target/site/apidocs</directory>
+            <outputDirectory>/apidocs</outputDirectory>
         </fileSet>
     </fileSets>
     <dependencySets>
