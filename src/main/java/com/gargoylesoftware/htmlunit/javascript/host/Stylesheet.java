@@ -40,13 +40,18 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
 import org.w3c.css.sac.ContentCondition;
 import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.ElementSelector;
+import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.LangCondition;
 import org.w3c.css.sac.NegativeCondition;
@@ -94,6 +99,25 @@ public class Stylesheet extends SimpleScriptable {
     private final HTMLElement ownerNode_;
     
     private com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList cssRules_;
+
+    private static final ErrorHandler CSS_ERROR_HANDLER = new ErrorHandler() {
+        private final Log log_ = LogFactory.getLog(Stylesheet.class);
+
+        public void error(final CSSParseException exception) throws CSSException {
+            log_.warn("CSS error: " + buildMessage(exception));
+        }
+        public void fatalError(final CSSParseException exception) throws CSSException {
+            log_.warn("CSS fatal error: " + buildMessage(exception));
+        }
+        public void warning(final CSSParseException exception) throws CSSException {
+            log_.warn("CSS warning: " + buildMessage(exception));
+        }
+        private String buildMessage(final CSSParseException exception) {
+            return exception.getURI()
+                + " [" + exception.getLineNumber() + ":" + exception.getColumnNumber() + "] "
+                + exception.getMessage();
+        }
+    };
 
     /**
      * Creates a new empty stylesheet.
@@ -305,6 +329,7 @@ public class Stylesheet extends SimpleScriptable {
         CSSStyleSheet ss;
         try {
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            parser.setErrorHandler(CSS_ERROR_HANDLER);
             ss = parser.parseStyleSheet(source, null, null);
         }
         catch (final Exception e) {
@@ -318,7 +343,7 @@ public class Stylesheet extends SimpleScriptable {
         }
         return ss;
     }
-
+    
     /**
      * Parses the selectors at the specified input source. If anything at all goes wrong, this
      * method returns an empty selector list.
@@ -330,6 +355,7 @@ public class Stylesheet extends SimpleScriptable {
         SelectorList selectors;
         try {
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            parser.setErrorHandler(CSS_ERROR_HANDLER);
             selectors = parser.parseSelectors(source);
         }
         catch (final Exception e) {
