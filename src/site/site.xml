@@ -29,6 +29,10 @@
             <item name="Logging" href="/logging.html"/>
             <item name="FAQ" href="/faq.html"/>
         </menu>
+        <menu name="Support">
+            <item name="Mailing lists" href="/mail-lists.html"/>
+            <item name="Professional support" href="/professionalSupport.html"/>
+        </menu>
         <menu name="Developer docs">
             <item name="Getting Latest Code" href="/gettingLatestCode.html"/>
             <item name="Coding conventions" href="/codingConventions.html"/>
