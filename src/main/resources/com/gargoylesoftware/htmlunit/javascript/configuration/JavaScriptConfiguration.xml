@@ -631,7 +631,7 @@
     </class>
 
     <class name="CSSStyleRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSStyleRule" JSObject="true">
-        <property name="selectorText" readable="true" writable="false"/>
+        <property name="selectorText" readable="true" writable="true"/>
         <property name="style" notImplemented="true" readable="true" writable="false"/>
     </class>
 

@@ -37,7 +37,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-
 /**
  * A JavaScript object for a CSSStyleRule.
  *
@@ -83,5 +82,4 @@ public class CSSStyleRule extends CSSRule {
     public void jsxSet_selectorText(final String selectorText) {
         ((org.w3c.dom.css.CSSStyleRule) getRule()).setSelectorText(selectorText);
     }
-
 }
