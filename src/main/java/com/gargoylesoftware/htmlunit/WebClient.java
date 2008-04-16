@@ -142,6 +142,7 @@ public class WebClient implements Serializable {
     private JavaScriptEngine scriptEngine_;
     private boolean javaScriptEnabled_ = true;
     private boolean cookiesEnabled_ = true;
+    private boolean cssEnabled_ = true;
     private boolean popupBlockerEnabled_;
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
@@ -625,7 +626,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Enable/disable JavaScript support. By default, this property is enabled.
+     * Enables/disables JavaScript support. By default, this property is enabled.
      *
      * @param enabled <tt>true</tt> to enable JavaScript support
      */
@@ -643,7 +644,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Enable/disable cookie support. By default, this property is enabled.
+     * Enables/disables cookie support. By default, this property is enabled.
      *
      * @param enabled <tt>true</tt> to enable cookie support
      */
@@ -658,6 +659,24 @@ public class WebClient implements Serializable {
      */
     public boolean isCookiesEnabled() {
         return cookiesEnabled_;
+    }
+
+    /**
+     * Enables/disables CSS support. By default, this property is enabled.
+     *
+     * @param enabled <tt>true</tt> to enable CSS support
+     */
+    public void setCssEnabled(final boolean enabled) {
+        cssEnabled_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if CSS is enabled.
+     *
+     * @return <tt>true</tt> if CSS is enabled
+     */
+    public boolean isCssEnabled() {
+        return cssEnabled_;
     }
 
     /**

@@ -88,6 +88,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Hans Donner
  * @author Paul King
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class WebClientTest extends WebTestCase {
 
@@ -1698,8 +1699,47 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testPlusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
-
         final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
         assertEquals("http://host/search/my+category/", page.getWebResponse().getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testCssEnablementControlsCssLoading() throws Exception {
+        final WebClient client = new WebClient();
+        final MockWebConnection conn = new MockWebConnection(client);
+        client.setWebConnection(conn);
+
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link href='" + URL_SECOND + "' rel='stylesheet'></link>\n"
+            + "  </head>\n"
+            + "  <body onload='alert(document.styleSheets.length)'>\n"
+            + "    <div>abc</div>\n"
+            + "  </body>\n"
+            + "</html>";
+        conn.setResponse(URL_FIRST, html);
+
+        final String css = ".foo { color: green; }";
+        conn.setResponse(URL_SECOND, css, 200, "OK", "text/css", new ArrayList<NameValuePair>());
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        client.getPage(URL_FIRST);
+        assertEquals(new String[]{"1"}, actual);
+
+        actual.clear();
+        client.setCssEnabled(false);
+        client.getPage(URL_FIRST);
+        assertEquals(new String[]{"0"}, actual);
+
+        actual.clear();
+        client.setCssEnabled(true);
+        client.getPage(URL_FIRST);
+        assertEquals(new String[]{"1"}, actual);
     }
 }

@@ -52,10 +52,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * An ordered list of stylesheets, accessible via <tt>document.styleSheets</tt>, as specified by the
+ * <p>An ordered list of stylesheets, accessible via <tt>document.styleSheets</tt>, as specified by the
  * <a href="http://www.w3.org/TR/DOM-Level-2-Style/stylesheets.html#StyleSheets-StyleSheetList">DOM
  * Level 2 Style spec</a> and the <a href="http://developer.mozilla.org/en/docs/DOM:document.styleSheets">Gecko
- * DOM Guide</a>.
+ * DOM Guide</a>.</p>
+ *
+ * <p>If CSS is disabled via {@link com.gargoylesoftware.htmlunit.WebClient#setCssEnabled(boolean)}, instances
+ * of this class will always be empty. This allows us to check for CSS enablement/disablement in a single
+ * location, without having to sprinkle checks throughout the code.</p>
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -92,8 +96,13 @@ public class StyleSheetList extends SimpleScriptable {
     public StyleSheetList(final Document document) {
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
+
         nodes_ = new HTMLCollection(document);
-        nodes_.init(document.getHtmlPage(), ".//style | .//link[lower-case(@rel)='stylesheet']");
+
+        final boolean cssEnabled = getWindow().getWebWindow().getWebClient().isCssEnabled();
+        if (cssEnabled) {
+            nodes_.init(document.getHtmlPage(), ".//style | .//link[lower-case(@rel)='stylesheet']");
+        }
     }
 
     /**
