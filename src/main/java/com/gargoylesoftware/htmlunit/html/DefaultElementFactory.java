@@ -62,8 +62,7 @@ class DefaultElementFactory implements IElementFactory {
      * @param attributes initial attributes, possibly <code>null</code>
      * @return the newly created element
      */
-    public HtmlElement createElement(
-            final HtmlPage page, final String tagName, final Attributes attributes) {
+    public HtmlElement createElement(final HtmlPage page, final String tagName, final Attributes attributes) {
         return createElementNS(page, null, tagName, attributes);
     }
 

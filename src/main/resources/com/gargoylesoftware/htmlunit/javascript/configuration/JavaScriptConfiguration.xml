@@ -69,6 +69,45 @@
         JSObject="true">
     </class>
 
+    <class name="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSRule" JSObject="false">
+        <constant name="UNKNOWN_RULE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="STYLE_RULE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="CHARSET_RULE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="IMPORT_RULE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="MEDIA_RULE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="FONT_FACE_RULE">
+            <browser name="Firefox"/>
+        </constant>
+        <constant name="PAGE_RULE">
+            <browser name="Firefox"/>
+        </constant>
+        <property name="type" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cssText" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="parentStyleSheet" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="parentRule" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="readOnly" notImplemented="true" readable="true" writable="false">
+            <browser name="Microsoft Internet Explorer"/>
+        </property>
+    </class>
+
     <class name="CSSRuleList" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSRuleList" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item">
@@ -589,6 +628,11 @@
                 descr="MSDN documentation"/>
             <browser name="Microsoft Internet Explorer"/>
         </function>
+    </class>
+
+    <class name="CSSStyleRule" extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.CSSStyleRule" JSObject="true">
+        <property name="selectorText" readable="true" writable="false"/>
+        <property name="style" notImplemented="true" readable="true" writable="false"/>
     </class>
 
     <class name="Document" extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Document"

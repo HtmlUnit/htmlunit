@@ -37,115 +37,51 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.mozilla.javascript.Scriptable;
-
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * A JavaScript object for a CSSRuleList.
+ * A JavaScript object for a CSSStyleRule.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class CSSRuleList extends SimpleScriptable {
+public class CSSStyleRule extends CSSRule {
 
-    private static final long serialVersionUID = 6068213884501456020L;
-
-    private final Stylesheet stylesheet_;
-    private final org.w3c.dom.css.CSSRuleList rules_;
+    private static final long serialVersionUID = 207943879569003822L;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
      */
     @Deprecated
-    public CSSRuleList() {
-        stylesheet_ = null;
-        rules_ = null;
-    }
-
-    CSSRuleList(final Stylesheet stylesheet) {
-        stylesheet_ = stylesheet;
-        rules_ = stylesheet.getWrappedSheet().getCssRules();
-        setParentScope(stylesheet.getParentScope());
-        setPrototype(getPrototype(getClass()));
-    }
-    
-    /**
-     * Returns the length of this list.
-     * @return the length of this list.
-     */
-    public int jsxGet_length() {
-        if (rules_ != null) {
-            return rules_.getLength();
-        }
-        return 0;
+    public CSSStyleRule() {
     }
 
     /**
-     * Returns the item in the given index.
-     * @param index the index
-     * @return the item in the given index
+     * Creates a new instance.
+     * @param stylesheet the Stylesheet of this rule.
+     * @param rule the wrapped rule
      */
-    public Object jsxFunction_item(final int index) {
-        return null;
+    protected CSSStyleRule(final Stylesheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+        super(stylesheet, rule);
     }
 
     /**
-     * {@inheritDoc}.
+     * Returns the textual representation of the selector for the rule set.
+     * @return the textual representation of the selector for the rule set
      */
-    @Override
-    public Object[] getIds() {
-        final List<String> idList = new ArrayList<String>();
-
-        final int length = jsxGet_length();
+    public String jsxGet_selectorText() {
+        String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
         if (!getBrowserVersion().isIE()) {
-            for (int i = 0; i < length; i++) {
-                idList.add(Integer.toString(i));
-            }
-
-            idList.add("length");
-            idList.add("item");
+            selectorText = selectorText.toLowerCase();
         }
-        else {
-            idList.add("length");
-
-            for (int i = 0; i < length; i++) {
-                idList.add(Integer.toString(i));
-            }
-        }
-        return idList.toArray();
+        return selectorText;
     }
 
     /**
-     * {@inheritDoc}.
+     * Sets the textual representation of the selector for the rule set.
+     * @param selectorText the textual representation of the selector for the rule set
      */
-    @Override
-    public boolean has(final String name, final Scriptable start) {
-        if (name.equals("length") || name.equals("item")) {
-            return true;
-        }
-        try {
-            final int index = Integer.parseInt(name);
-            final int length = jsxGet_length();
-            if (index >= 0 && index < length) {
-                return true;
-            }
-        }
-        catch (final Exception e) {
-            //ignore
-        }
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final int index, final Scriptable start) {
-        return CSSRule.create(stylesheet_, rules_.item(index));
+    public void jsxSet_selectorText(final String selectorText) {
+        ((org.w3c.dom.css.CSSStyleRule) getRule()).setSelectorText(selectorText);
     }
 
 }

@@ -219,16 +219,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
                 if (values.length > 1) {
                     return values[1];
                 }
-                else {
-                    return values[0];
-                }
+                return values[0];
             case BOTTOM:
                 if (values.length > 2) {
                     return values[2];
                 }
-                else {
-                    return values[0];
-                }
+                return values[0];
             case LEFT:
                 if (values.length > 3) {
                     return values[3];
@@ -316,7 +312,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /**
      * Returns the current style element index. An index is assigned to each style element so that
-     * we can determine which style elements have precendence over others.
+     * we can determine which style elements have precedence over others.
      *
      * This method also takes care of incrementing the index for the next use.
      *

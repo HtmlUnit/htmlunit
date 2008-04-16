@@ -58,10 +58,8 @@ public class CSSStyleRuleTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1",
-            "[object CSSStyleDeclaration]" },
-            IE = { "[object]", "H1", "false", "[object]" })
-    @NotYetImplemented
+    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1" },
+            IE = { "[object]", "H1" })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -84,9 +82,42 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "      alert(r.parentStyleSheet);\n"
                 + "      alert(r.parentRule);\n"
                 + "      alert(r.selectorText);\n"
-                + "      alert(r.style);\n"
                 + "    } else {\n"
                 + "      alert(r.selectorText);\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "[object CSSStyleDeclaration]" },
+            IE = { "false", "[object]" })
+    @NotYetImplemented
+    public void testStyle() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BODY { background-color: white; color: black; }\n"
+                + "  H1 { font: 8pt Arial bold; }\n"
+                + "  P  { font: 10pt Arial; text-indent: 0.5in; }\n"
+                + "  A  { text-decoration: none; color: blue; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var rules;\n"
+                + "    if (document.styleSheets[0].cssRules)\n"
+                + "      rules = document.styleSheets[0].cssRules;\n"
+                + "    else\n"
+                + "      rules = document.styleSheets[0].rules;\n"
+                + "    var r = rules[1];\n"
+                + "    if (r.type) {\n"
+                + "      alert(r.style);\n"
+                + "    } else {\n"
                 + "      alert(r.readOnly);\n"
                 + "      alert(r.style);\n"
                 + "    }\n"
