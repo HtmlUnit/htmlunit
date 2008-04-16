@@ -162,7 +162,7 @@ public class Prototype160Test extends WebTestCase {
     }
 
     /**
-     * Fails due to bug in Rhino: "encodeURIComponent wrongly uses lowercase for hex representation"
+     * Fails due to bug in Rhino: "encodeURIComponent wrongly uses lowercase for hex representation".
      * https://bugzilla.mozilla.org/show_bug.cgi?id=429121
      * @throws Exception if test fails
      */
