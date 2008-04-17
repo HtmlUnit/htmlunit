@@ -120,13 +120,14 @@ public class HtmlForm extends ClickableElement {
             if (submitElement != null) {
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
                 if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                    return scriptResult.getNewPage();
+                    return (P) scriptResult.getNewPage();
                 }
             }
 
             final String action = getActionAttribute();
             if (TextUtil.startsWithIgnoreCase(action, JAVASCRIPT_PREFIX)) {
-                return htmlPage.executeJavaScriptIfPossible(action, "Form action", getStartLineNumber()).getNewPage();
+                return (P) htmlPage.executeJavaScriptIfPossible(action, "Form action",
+                    getStartLineNumber()).getNewPage();
             }
         }
         else {
@@ -186,7 +187,7 @@ public class HtmlForm extends ClickableElement {
         settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getUrl().toExternalForm());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return htmlPage.getWebClient().getPage(
+        return (P) htmlPage.getWebClient().getPage(
                 webWindow,
                 htmlPage.getResolvedTarget(getTargetAttribute()),
                 settings);

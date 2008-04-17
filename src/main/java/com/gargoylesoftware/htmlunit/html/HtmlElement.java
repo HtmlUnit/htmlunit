@@ -745,8 +745,9 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P type(final char c) throws IOException {
-        return type(c, false, false, false);
+        return (P) type(c, false, false, false);
     }
 
     /**
@@ -776,7 +777,7 @@ public abstract class HtmlElement extends DomElement implements Element {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            return form.submit((SubmittableElement) this);
+            return (P) form.submit((SubmittableElement) this);
         }
         return (P) getPage();
     }

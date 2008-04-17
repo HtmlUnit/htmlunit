@@ -130,7 +130,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         if (changed) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
             if (scriptResult != null) {
-                page = scriptResult.getNewPage();
+                page = (P) scriptResult.getNewPage();
             }
         }
         return page;

@@ -441,13 +441,12 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @exception IOException If an io error occurs
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P click(final int x, final int y)
-        throws
-            IOException,
-            ElementNotFoundException {
+        throws IOException, ElementNotFoundException {
 
         // By default this is no different than a click without coordinates.
-        return click();
+        return (P) click();
     }
     
     /**

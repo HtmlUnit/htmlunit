@@ -113,8 +113,9 @@ public class HtmlImageInput extends HtmlInput {
      * @exception IOException If an io error occurs
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <P extends Page> P click() throws IOException {
-        return click(0, 0);
+        return (P) click(0, 0);
     }
 
     /**
@@ -131,12 +132,13 @@ public class HtmlImageInput extends HtmlInput {
      * @throws IOException if an IO error occurred
      */
     @Override
+    @SuppressWarnings("unchecked")
     protected <P extends Page> P doClickAction(final Page defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
-            return form.submit(this);
+            return (P) form.submit(this);
         }
-        return super.doClickAction(defaultPage);
+        return (P) super.doClickAction(defaultPage);
     }
 
     /**
@@ -151,11 +153,12 @@ public class HtmlImageInput extends HtmlInput {
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <P extends Page> P click(final int x, final int y) throws IOException, ElementNotFoundException {
         wasPositionSpecified_ = true;
         xPosition_ = x;
         yPosition_ = y;
-        return super.click();
+        return (P) super.click();
     }
 
     /**

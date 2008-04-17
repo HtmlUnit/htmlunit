@@ -92,8 +92,9 @@ public abstract class ClickableElement extends StyledElement {
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P click() throws IOException {
-        return click(false, false, false);
+        return (P) click(false, false, false);
     }
 
     /**

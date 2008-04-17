@@ -287,8 +287,9 @@ public abstract class BaseFrame extends StyledElement {
      * @see WebWindow#getEnclosedPage()
      * @return the currently loaded page in the enclosed window, or <tt>null</tt> if no page has been loaded
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P getEnclosedPage() {
-        return getEnclosedWindow().getEnclosedPage();
+        return (P) getEnclosedWindow().getEnclosedPage();
     }
 
     /**

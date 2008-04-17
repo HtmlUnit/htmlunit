@@ -327,10 +327,11 @@ public class WebClient implements Serializable {
      *
      * @see WebRequestSettings
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final WebWindow webWindow, final WebRequestSettings parameters)
         throws IOException, FailingHttpStatusCodeException {
 
-        final P page = webWindow.getEnclosedPage();
+        final P page = (P) webWindow.getEnclosedPage();
         if (page != null && page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (!htmlPage.isOnbeforeunloadAccepted()) {
@@ -354,7 +355,7 @@ public class WebClient implements Serializable {
         loadWebResponseInto(webResponse, webWindow);
         throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
 
-        return webWindow.getEnclosedPage();
+        return (P) webWindow.getEnclosedPage();
     }
 
     /**
@@ -373,9 +374,10 @@ public class WebClient implements Serializable {
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
-        return getPage(openTargetWindow(opener, target, "_self"), params);
+        return (P) getPage(openTargetWindow(opener, target, "_self"), params);
     }
 
     /**
@@ -389,9 +391,10 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @throws MalformedURLException if no URL can be created from the provided string
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final String url) throws IOException, FailingHttpStatusCodeException,
         MalformedURLException {
-        return getPage(new URL(url));
+        return (P) getPage(new URL(url));
     }
 
     /**
@@ -404,8 +407,9 @@ public class WebClient implements Serializable {
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-        return getPage(getCurrentWindow(), new WebRequestSettings(url));
+        return (P) getPage(getCurrentWindow(), new WebRequestSettings(url));
     }
 
     /**
@@ -418,9 +422,10 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @see #getPage(WebWindow,WebRequestSettings)
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final WebRequestSettings request) throws IOException,
             FailingHttpStatusCodeException {
-        return getPage(getCurrentWindow(), request);
+        return (P) getPage(getCurrentWindow(), request);
     }
 
     /**
@@ -436,10 +441,10 @@ public class WebClient implements Serializable {
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return the newly created page
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P loadWebResponseInto(
             final WebResponse webResponse, final WebWindow webWindow)
-        throws
-            IOException, FailingHttpStatusCodeException {
+        throws IOException, FailingHttpStatusCodeException {
 
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
@@ -450,7 +455,7 @@ public class WebClient implements Serializable {
             oldPage.cleanUp();
         }
 
-        final P newPage = pageCreator_.createPage(webResponse, webWindow);
+        final P newPage = (P) pageCreator_.createPage(webResponse, webWindow);
 
         synchronized (firstWindowStack_) {
             if (!firstWindowStack_.empty() && firstWindowStack_.peek() == null) {

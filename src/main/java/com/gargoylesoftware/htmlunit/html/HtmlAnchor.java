@@ -308,10 +308,11 @@ public class HtmlAnchor extends ClickableElement {
      * @return the page opened by this link, nested in a new {@link com.gargoylesoftware.htmlunit.TopLevelWindow}
      * @throws MalformedURLException if the href could not be converted to a valid URL
      */
+    @SuppressWarnings("unchecked")
     public final <P extends Page> P openLinkInNewWindow() throws MalformedURLException {
         final URL target = getPage().getFullyQualifiedUrl(getHrefAttribute());
         final String windowName = "HtmlAnchor.openLinkInNewWindow() target";
         final WebWindow newWindow = getPage().getWebClient().openWindow(target, windowName);
-        return newWindow.getEnclosedPage();
+        return (P) newWindow.getEnclosedPage();
     }
 }
