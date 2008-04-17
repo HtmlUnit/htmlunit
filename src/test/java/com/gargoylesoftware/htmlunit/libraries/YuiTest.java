@@ -81,14 +81,6 @@ public class YuiTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void autocomplete() throws Exception {
-        doTest(BrowserVersion.FIREFOX_2, "autocomplete.html", emptyList_);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     public void animation() throws Exception {
         doTest(BrowserVersion.FIREFOX_2, "animation.html", emptyList_);
     }
