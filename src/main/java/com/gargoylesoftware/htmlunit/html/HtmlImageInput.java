@@ -131,10 +131,11 @@ public class HtmlImageInput extends HtmlInput {
      * @throws IOException if an IO error occurred
      */
     @Override
+    @SuppressWarnings("unchecked")
     protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
-            return form.submit(this);
+            return (P) form.submit(this);
         }
         return super.doClickAction(defaultPage);
     }

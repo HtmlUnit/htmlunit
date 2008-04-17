@@ -38,7 +38,7 @@
 package com.gargoylesoftware.htmlunit;
 
 /**
- * Test http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5003431.
+ * Test.
  *
  * @version $Revision: 2936 $
  * @author Invisible Man
@@ -56,7 +56,7 @@ final class TempTest {
 
     static <T> T nil() { return (new SomeType<T>()).mt_; }
 
-    public static void test() {
-        nil().getClass();
+    protected static <T> T test() {
+        return nil();
     }
 }

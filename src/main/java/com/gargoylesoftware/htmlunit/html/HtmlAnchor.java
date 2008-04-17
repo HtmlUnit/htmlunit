@@ -94,6 +94,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
+    @SuppressWarnings("unchecked")
     protected <P extends Page> P doClickAction(final P defaultPage, final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
 
@@ -107,7 +108,7 @@ public class HtmlAnchor extends ClickableElement {
         if (href.length() > 0 && !href.startsWith("#")) {
             final HtmlPage page = getPage();
             if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
-                return page.executeJavaScriptIfPossible(
+                return (P) page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();
             }
             final URL url = page.getFullyQualifiedUrl(href);
@@ -120,7 +121,7 @@ public class HtmlAnchor extends ClickableElement {
                         + "', using the originating URL "
                         + page.getWebResponse().getUrl());
             }
-            return page.getWebClient().getPage(
+            return (P) page.getWebClient().getPage(
                     page.getEnclosingWindow(),
                     page.getResolvedTarget(getTargetAttribute()),
                     settings);

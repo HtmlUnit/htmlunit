@@ -94,16 +94,17 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         final String type = getTypeAttribute().toLowerCase();
 
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             if (type.equals("submit")) {
-                return form.submit(this);
+                return (P) form.submit(this);
             }
             else if (type.equals("reset")) {
-                return form.reset();
+                return (P) form.reset();
             }
         }
 

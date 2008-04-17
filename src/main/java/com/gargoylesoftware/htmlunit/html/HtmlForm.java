@@ -243,7 +243,7 @@ public class HtmlForm extends ClickableElement {
         final HtmlPage htmlPage = getPage();
         final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
         if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-            return scriptResult.getNewPage();
+            return (P) scriptResult.getNewPage();
         }
 
         for (final HtmlElement next : getAllHtmlChildElements()) {

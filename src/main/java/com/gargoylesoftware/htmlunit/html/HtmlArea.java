@@ -89,6 +89,7 @@ public class HtmlArea extends ClickableElement {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         final HtmlPage enclosingPage = getPage();
         final WebClient webClient = enclosingPage.getWebClient();
@@ -97,7 +98,7 @@ public class HtmlArea extends ClickableElement {
         if (href != null && href.length() > 0) {
             final HtmlPage page = getPage();
             if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
-                return page.executeJavaScriptIfPossible(
+                return (P) page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();
             }
             final URL url;
@@ -110,7 +111,7 @@ public class HtmlArea extends ClickableElement {
             }
             final WebRequestSettings settings = new WebRequestSettings(url);
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-            return webClient.getPage(
+            return (P) webClient.getPage(
                     webWindow,
                     enclosingPage.getResolvedTarget(getTargetAttribute()),
                     settings);
