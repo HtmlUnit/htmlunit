@@ -807,15 +807,17 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
     *
     * @param accessKey the key to look for
+    * @param <H> the HTML element that is assigned to the specified key or null
     * @return the HTML element that is assigned to the specified key or null
     *      if no elements can be found that match the specified key.
     */
-    public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
+    @SuppressWarnings("unchecked")
+	public <H extends HtmlElement> H getHtmlElementByAccessKey(final char accessKey) {
         final List<HtmlElement> elements = getHtmlElementsByAccessKey(accessKey);
         if (elements.isEmpty()) {
             return null;
         }
-        return elements.get(0);
+        return (H) elements.get(0);
     }
 
    /**
