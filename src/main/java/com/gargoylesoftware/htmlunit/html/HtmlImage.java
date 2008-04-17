@@ -237,6 +237,8 @@ public class HtmlImage extends ClickableElement {
 
     /**
      * Performs the click action on the enclosing A tag (if any).
+     *
+     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred

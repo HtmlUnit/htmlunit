@@ -687,7 +687,8 @@ public class WebClientTest extends WebTestCase {
          * {@inheritDoc}
          */
         @SuppressWarnings("unchecked")
-        public <P extends Page> P createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        public <P extends Page> P createPage(final WebResponse webResponse, final WebWindow webWindow)
+            throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
             collectedPages_.add(page);

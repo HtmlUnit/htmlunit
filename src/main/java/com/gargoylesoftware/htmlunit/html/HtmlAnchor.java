@@ -88,6 +88,7 @@ public class HtmlAnchor extends ClickableElement {
      * Same as {@link #doClickAction(Page)}, except that it accepts an href suffix, needed when a click is
      * performed on an image map to pass information on the click position.
      *
+     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
      * @return the page that is currently loaded after execution of this method
@@ -134,6 +135,7 @@ public class HtmlAnchor extends ClickableElement {
      * behavior is to open the HREF page, or execute the HREF if it is a
      * javascript: URL.
      *
+     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs

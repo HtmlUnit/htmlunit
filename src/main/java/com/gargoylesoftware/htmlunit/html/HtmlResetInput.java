@@ -75,6 +75,7 @@ public class HtmlResetInput extends HtmlInput {
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
+     * @param <P> type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred
