@@ -62,6 +62,8 @@ import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -79,6 +81,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
 public class GWT14Test extends WebTestCase {
@@ -468,6 +471,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.NONE)
     public void dateGetTimezoneOffset() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -479,9 +483,21 @@ public class GWT14Test extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
-        timeZone = timeZone.substring(1, 3);
-        final String[] expectedAlerts = {timeZone};
+        final String timeZone = new SimpleDateFormat("Z").format(Calendar.getInstance().getTime());
+        final String hour = timeZone.substring(1, 3);
+        String strMinutes = timeZone.substring(3, 5);
+        final int minutes = Integer.parseInt(strMinutes);
+        final StringBuilder sb = new StringBuilder();
+        if (minutes != 0) {
+            sb.append(hour.substring(1));
+            strMinutes = String.valueOf((double) minutes / 60);
+            strMinutes = strMinutes.substring(1);
+            sb.append(strMinutes);
+        }
+        else {
+            sb.append(hour);
+        }
+        final String[] expectedAlerts = {sb.toString()};
         final List<String> collectedAlerts = new ArrayList<String>();
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
         loadPage(content, collectedAlerts);
