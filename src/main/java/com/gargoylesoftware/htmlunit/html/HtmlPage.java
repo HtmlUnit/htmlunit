@@ -812,7 +812,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     *      if no elements can be found that match the specified key.
     */
     @SuppressWarnings("unchecked")
-	public <H extends HtmlElement> H getHtmlElementByAccessKey(final char accessKey) {
+    public <H extends HtmlElement> H getHtmlElementByAccessKey(final char accessKey) {
         final List<HtmlElement> elements = getHtmlElementsByAccessKey(accessKey);
         if (elements.isEmpty()) {
             return null;
@@ -1410,7 +1410,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         for (final WebWindow window : getFrames()) {
             getWebClient().deregisterWebWindow(window);
             if (window.getEnclosedPage() instanceof HtmlPage) {
-                final HtmlPage page = (HtmlPage) window.getEnclosedPage();
+                final HtmlPage page = window.getEnclosedPage();
                 if (page != null) {
                     // seems quite silly, but for instance if the src attribute of an iframe is not
                     // set, the error only occurs when leaving the page
@@ -1955,7 +1955,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Override cloneNode to add cloned elements to the clone, not to the original.
      */
     @Override
-    public DomNode cloneNode(final boolean deep) {
+    public HtmlPage cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s

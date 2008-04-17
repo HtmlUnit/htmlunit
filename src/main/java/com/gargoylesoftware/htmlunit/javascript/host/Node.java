@@ -477,7 +477,7 @@ public class Node extends SimpleScriptable {
      */
     public ScriptResult executeEvent(final Event event) {
         if (eventListenersContainer_ != null) {
-            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+            final HtmlPage page = getDomNodeOrDie().getPage();
             final boolean isIE = getBrowserVersion().isIE();
             final Window window = (Window) page.getEnclosingWindow().getScriptObject();
             final Object[] args = new Object[] {event};
@@ -511,7 +511,7 @@ public class Node extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+        final HtmlPage page = getDomNodeOrDie().getPage();
         final boolean isIE = getBrowserVersion().isIE();
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         final Object[] args = new Object[] {event};

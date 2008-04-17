@@ -99,7 +99,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
-        final HtmlPage secondPage = (HtmlPage) checkBox.click();
+        final HtmlPage secondPage = checkBox.click();
 
         final String[] expectedAlerts = {"foo", "click"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -128,7 +128,7 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
 
-        final HtmlPage secondPage = (HtmlPage) checkBox.click();
+        final HtmlPage secondPage = checkBox.click();
 
         assertNotSame(page, secondPage);
         assertTrue(checkBox.isChecked());
@@ -197,10 +197,10 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlCheckBoxInput radio = page.getHtmlElementById("myCheckbox");
 
-        final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);
+        final HtmlPage secondPage = radio.setChecked(true);
 
         assertEquals("Second", secondPage.getTitleText());
     }

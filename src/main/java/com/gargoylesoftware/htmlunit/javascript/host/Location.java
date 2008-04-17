@@ -195,7 +195,7 @@ public class Location extends SimpleScriptable {
     public void jsxSet_href(final String newLocation) throws IOException {
         // URL should be resolved from the page in which the js is executed
         // cf test FrameTest#testLocation
-        final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
+        final HtmlPage page = getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
 
         if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);

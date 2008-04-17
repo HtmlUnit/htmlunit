@@ -302,13 +302,13 @@ public class HtmlAnchor extends ClickableElement {
      * menu to open in a new window.
      *
      * It should be noted that even web browsers will sometimes not give the expected result when using this
-     * method of following links. Links that have no real href and rely on JavaScript to do their work will
-     * fail.
+     * method of following links. Links that have no real href and rely on JavaScript to do their work will fail.
      *
+     * @param <P> the page opened by this link
      * @return the page opened by this link, nested in a new {@link com.gargoylesoftware.htmlunit.TopLevelWindow}
      * @throws MalformedURLException if the href could not be converted to a valid URL
      */
-    public final Page openLinkInNewWindow() throws MalformedURLException {
+    public final <P extends Page> P openLinkInNewWindow() throws MalformedURLException {
         final URL target = getPage().getFullyQualifiedUrl(getHrefAttribute());
         final String windowName = "HtmlAnchor.openLinkInNewWindow() target";
         final WebWindow newWindow = getPage().getWebClient().openWindow(target, windowName);

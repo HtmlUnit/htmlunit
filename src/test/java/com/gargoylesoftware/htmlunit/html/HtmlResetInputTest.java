@@ -104,7 +104,7 @@ public class HtmlResetInputTest extends WebTestCase {
         assertEquals("Flintstone", ((HtmlHiddenInput) page.getHtmlElementById("hidden1")).getValueAttribute());
         assertEquals("Flintstone", ((HtmlIsIndex) page.getHtmlElementById("isindex1")).getValue());
 
-        final HtmlPage secondPage = (HtmlPage) resetInput.click();
+        final HtmlPage secondPage = resetInput.click();
         assertSame(page, secondPage);
 
         // Check to make sure all the values have been set back to their original values.

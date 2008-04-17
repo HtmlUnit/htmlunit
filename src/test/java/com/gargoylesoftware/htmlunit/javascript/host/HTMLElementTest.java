@@ -1028,7 +1028,7 @@ public class HTMLElementTest extends WebTestCase {
         webConnection.setResponse(content1Url, content1);
         webConnection.setResponse(content2Url, content2);
         client.setWebConnection(webConnection);
-        final HtmlPage page = (HtmlPage) client.getPage(content1Url);
+        final HtmlPage page = client.getPage(content1Url);
         final String[] expectedAlerts = {
             "isHomePage = false",
             "isHomePage = true",
@@ -1361,7 +1361,7 @@ public class HTMLElementTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
         final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
         webClient.setAlertHandler(clientCollectedAlertsHandler);
-        final HtmlPage clientPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage clientPage = webClient.getPage(URL_FIRST);
         final HtmlAnchor clientHashAnchor = clientPage.getAnchorByName("hash");
         clientHashAnchor.click();
 

@@ -80,7 +80,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
@@ -112,7 +112,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
@@ -158,12 +158,12 @@ public class HtmlInlineFrameTest extends WebTestCase {
     
         client.setWebConnection(webConnection);
     
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
     
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
         assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
-        final HtmlPage iframePage = (HtmlPage) iframe.getEnclosedPage();
+        final HtmlPage iframePage = iframe.getEnclosedPage();
         assertEquals("Second", iframePage.getTitleText());
     
         // the nested frame should not have been loaded
@@ -207,7 +207,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
         final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");

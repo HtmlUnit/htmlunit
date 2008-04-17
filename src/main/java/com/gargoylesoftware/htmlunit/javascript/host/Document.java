@@ -333,7 +333,7 @@ public class Document extends EventNode {
         // If the page isn't currently being parsed (i.e. this call to write() or writeln()
         // was triggered by an event, setTimeout(), etc), then the new content will replace
         // the entire page. Basically, we make an implicit open() call.
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
+        final HtmlPage page = getDomNodeOrDie();
         if (!page.isBeingParsed()) {
             writeInCurrentDocument_ = false;
         }
@@ -670,7 +670,7 @@ public class Document extends EventNode {
         // Any open() invocations are ignored during the parsing stage, because write() and
         // writeln() invocations will directly append content to the current insertion point.
         final Document document = (Document) scriptable;
-        final HtmlPage page = (HtmlPage) document.getDomNodeOrDie();
+        final HtmlPage page = document.getDomNodeOrDie();
         if (page.isBeingParsed()) {
             document.getLog().warn("Ignoring call to open() during the parsing stage.");
             return null;
@@ -698,7 +698,7 @@ public class Document extends EventNode {
             getLog().warn("close() called when document is not open.");
         }
         else {
-            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+            final HtmlPage page = getDomNodeOrDie().getPage();
             final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(),
                 page.getWebResponse().getUrl());
             final WebClient webClient = page.getWebClient();
@@ -1023,7 +1023,7 @@ public class Document extends EventNode {
      */
     @Override
     protected Object getWithPreemption(final String name) {
-        final HtmlPage page = (HtmlPage) getDomNodeOrNull();
+        final HtmlPage page = getDomNodeOrNull();
         if (page == null) {
             return NOT_FOUND;
         }

@@ -93,7 +93,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) (client.getPage("http://x"));
+        final HtmlPage page = (client.getPage("http://x"));
                 
         final HtmlAnchor anchor = page.getAnchorByName("testanchor");
         

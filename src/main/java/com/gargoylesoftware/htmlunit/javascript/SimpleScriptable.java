@@ -127,24 +127,28 @@ public class SimpleScriptable extends ScriptableObject {
     /**
      * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
+     * @param <D> the DOM node
      * @return the DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
-    public final DomNode getDomNodeOrDie() throws IllegalStateException {
+    @SuppressWarnings("unchecked")
+    public final <D extends DomNode> D getDomNodeOrDie() throws IllegalStateException {
         if (domNode_ == null) {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
         }
-        return domNode_;
+        return (D) domNode_;
     }
 
     /**
      * Returns the DOM node that corresponds to this JavaScript object
      * or null if a node hasn't been set.
+     * @param <D> the DOM node
      * @return the DOM node or null
      */
-    public final DomNode getDomNodeOrNull() {
-        return domNode_;
+    @SuppressWarnings("unchecked")
+    public final <D extends DomNode> D getDomNodeOrNull() {
+        return (D) domNode_;
     }
 
     /**

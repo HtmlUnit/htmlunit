@@ -143,7 +143,7 @@ public class NodeTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("foo", page.getTitleText());
 
         final String[] expectedAlerts = {"true", "true"};

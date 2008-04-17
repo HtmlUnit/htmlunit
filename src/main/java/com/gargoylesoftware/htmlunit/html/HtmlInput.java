@@ -99,7 +99,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @param newValue the new content
      * @return the page conained by this element's window after the value is set
      */
-    public Page setValueAttribute(final String newValue) {
+    public HtmlPage setValueAttribute(final String newValue) {
         WebAssert.notNull("newValue", newValue);
         setAttributeValue("value", newValue);
 
@@ -412,12 +412,14 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * the attribute. Note that the returned page may or may not be the original page, depending on
      * the presence of JavaScript event handlers, etc.
      *
+     * @param <P> the page that occupies this input's window after setting the attribute
      * @param isChecked <tt>true</tt> if this element is to be selected
      * @return the page that occupies this input's window after setting the attribute
      */
-    public Page setChecked(final boolean isChecked) {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P setChecked(final boolean isChecked) {
         // By default this returns the current page. Derived classes will override.
-        return getPage();
+        return (P) getPage();
     }
 
     /**
@@ -432,13 +434,14 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
+     * @param <P> the page that is loaded after the click has taken place
      * @param x the x coordinate of the pointing device at the time of clicking
      * @param y the y coordinate of the pointing device at the time of clicking
      * @return the page that is loaded after the click has taken place
      * @exception IOException If an io error occurs
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
-    public Page click(final int x, final int y)
+    public <P extends Page> P click(final int x, final int y)
         throws
             IOException,
             ElementNotFoundException {
@@ -456,7 +459,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @return the page that occupies this window after this method completes (may or
      *         may not be the same as the original page)
      */
-    static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
+    static HtmlPage executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
         final HtmlPage page = htmlElement.getPage();
 
         final JavaScriptEngine engine = htmlElement.getPage().getWebClient().getJavaScriptEngine();

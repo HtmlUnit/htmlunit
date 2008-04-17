@@ -176,13 +176,13 @@ public class ThreadManagerTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
         final ThreadManager innerThreadManager = iframe.getEnclosedWindow().getThreadManager();
         Assert.assertEquals("inner frame should show child thread", 1, innerThreadManager.activeCount());
 
         final HtmlAnchor anchor = page.getHtmlElementById("clickme");
-        final HtmlPage newPage = (HtmlPage) anchor.click();
+        final HtmlPage newPage = anchor.click();
 
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());

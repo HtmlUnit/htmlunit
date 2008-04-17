@@ -313,7 +313,7 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
         form.submit((SubmittableElement) null);
@@ -342,7 +342,7 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
         form.submit((SubmittableElement) null);
@@ -685,8 +685,8 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlPage page2 = page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
         assertEquals("page 2", page2.getTitleText());
     }
 

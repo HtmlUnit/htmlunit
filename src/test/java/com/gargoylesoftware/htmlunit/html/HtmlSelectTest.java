@@ -91,7 +91,7 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo",
                 secondPage.getWebResponse().getUrl());
@@ -124,7 +124,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo",
                 secondPage.getWebResponse().getUrl());
@@ -158,7 +158,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.setSelectedAttribute("option3", true);
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
@@ -193,7 +193,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.setSelectedAttribute("option2", true);
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
 
         assertEquals("url",
                 URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo",

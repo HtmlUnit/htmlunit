@@ -229,10 +229,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns the page that contains this node.
+     *
+     * @param <P> the page that contains this node
      * @return the page that contains this node
      */
-    public Page getPage() {
-        return page_;
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getPage() {
+        return (P) page_;
     }
     
     /**

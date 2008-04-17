@@ -294,7 +294,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         final String user, final String password) {
         // (URL + Method + User + Password) become a WebRequestSettings instance.
         
-        containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        containingPage_ = getWindow().getWebWindow().getEnclosedPage();
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
@@ -326,7 +326,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         prepareRequest(content);
 
         final AjaxController ajaxController = getWindow().getWebWindow().getWebClient().getAjaxController();
-        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final HtmlPage page = getWindow().getWebWindow().getEnclosedPage();
         final boolean synchron = ajaxController.processSynchron(page, requestSettings_, async_);
         if (synchron) {
             doSend(Context.getCurrentContext());

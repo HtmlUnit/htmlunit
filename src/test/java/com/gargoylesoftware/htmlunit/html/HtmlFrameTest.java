@@ -104,7 +104,7 @@ public class HtmlFrameTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         final HtmlFrame frame1 = page.getHtmlElementById("frame1");
@@ -159,7 +159,7 @@ public class HtmlFrameTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
         
         // loads something else to trigger frame de-registration
@@ -241,7 +241,7 @@ public class HtmlFrameTest extends WebTestCase {
         conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
         conn.setResponse(new URL(URL_FIRST, "3.html"), frame3);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
 
         assertEquals("page 3", ((HtmlPage) page.getFrameByName("f2").getEnclosedPage()).getTitleText());
     }

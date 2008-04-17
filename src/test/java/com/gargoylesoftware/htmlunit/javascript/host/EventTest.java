@@ -311,7 +311,7 @@ public class EventTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = (HtmlPage) button.click(shiftKey, ctrlKey, altKey);
+        final HtmlPage secondPage = button.click(shiftKey, ctrlKey, altKey);
 
         assertEquals(expectedAlerts, collectedAlerts);
 

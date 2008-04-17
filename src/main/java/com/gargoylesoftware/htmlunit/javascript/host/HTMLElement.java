@@ -1186,7 +1186,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @throws MalformedURLException if the URL cannot be created
      */
     public void startDownload(final String uri, final Function callback) throws MalformedURLException {
-        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final HtmlPage page = getWindow().getWebWindow().getEnclosedPage();
         final URL url = page.getFullyQualifiedUrl(uri);
         if (!page.getWebResponse().getUrl().getHost().equals(url.getHost())) {
             throw Context.reportRuntimeError("Not authorized url: " + url);

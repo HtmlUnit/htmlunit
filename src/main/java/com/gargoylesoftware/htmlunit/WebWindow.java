@@ -64,9 +64,10 @@ public interface WebWindow {
     /**
      * Returns the currently loaded page or null if no page has been loaded.
      *
+     * @param <P> the currently loaded page or null if no page has been loaded
      * @return the currently loaded page or null if no page has been loaded
      */
-    Page getEnclosedPage();
+    <P extends Page> P getEnclosedPage();
 
     /**
      * Sets the currently loaded page.

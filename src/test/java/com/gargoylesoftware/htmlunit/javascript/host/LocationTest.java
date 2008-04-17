@@ -129,7 +129,7 @@ public class LocationTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("test2", page.getTitleText());
 
         final String[] expectedAlerts = {"ok"};
@@ -240,9 +240,9 @@ public class LocationTest extends WebTestCase {
         final List<String> actual = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(actual));
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlAnchor anchor = page.getHtmlElementById("a");
-        final HtmlPage page2 = (HtmlPage) anchor.click();
+        final HtmlPage page2 = anchor.click();
 
         // Verify that it worked.
         final String[] expected = new String[] {"", "#b"};
@@ -270,7 +270,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
@@ -292,7 +292,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
@@ -314,7 +314,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
@@ -336,7 +336,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
@@ -358,7 +358,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
@@ -380,7 +380,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getWebResponse().getUrl().toExternalForm());
     }
@@ -408,7 +408,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("Second", page.getTitleText());
     }
 
@@ -434,7 +434,7 @@ public class LocationTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("Second", page.getTitleText());
     }
 
@@ -454,7 +454,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = page1.getHtmlElementById("link1");
-        final HtmlPage page2 = (HtmlPage) link.click();
+        final HtmlPage page2 = link.click();
 
         assertEquals(page1.getTitleText(), page2.getTitleText());
         assertNotSame(page1, page2);
@@ -491,11 +491,11 @@ public class LocationTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals(3, webClient.getWebWindows().size());
         assertEquals("Start content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());
         
-        final HtmlPage menuPage = (HtmlPage) page.getFrameByName("menu").getEnclosedPage();
+        final HtmlPage menuPage = page.getFrameByName("menu").getEnclosedPage();
         ((ClickableElement) menuPage.getHtmlElementById("myLink")).click();
         assertEquals(3, webClient.getWebWindows().size());
         assertEquals("Test", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).getTitleText());

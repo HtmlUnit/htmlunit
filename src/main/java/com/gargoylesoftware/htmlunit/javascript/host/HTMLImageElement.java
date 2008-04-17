@@ -107,7 +107,7 @@ public class HTMLImageElement extends HTMLElement {
         }
         // this is an image instantiated in js with "new Image()" and not yet added to the DOM tree.
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
-        final HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+        final HtmlPage currentPage = webClient.getCurrentWindow().getEnclosedPage();
         try {
             return currentPage.getFullyQualifiedUrl(src_).toExternalForm();
         }

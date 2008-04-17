@@ -124,7 +124,7 @@ public final class SanityCheck {
     private void ibm() throws Exception {
         final WebClient webClient = new WebClient(BROWSER_VERSION);
         webClient.setRedirectEnabled(true);
-        final HtmlPage page = (HtmlPage) webClient.getPage("http://www.ibm.com/");
+        final HtmlPage page = webClient.getPage("http://www.ibm.com/");
         assertEquals("http://www.ibm.com/us/", page.getWebResponse().getUrl());
     }
 
@@ -177,7 +177,7 @@ public final class SanityCheck {
     private void yahooLogin_secure() throws Exception {
         try {
             final WebClient webClient = new WebClient(BROWSER_VERSION);
-            final HtmlPage page = (HtmlPage) webClient.getPage("https://login.yahoo.com/");
+            final HtmlPage page = webClient.getPage("https://login.yahoo.com/");
             final HtmlForm form = page.getFormByName("login_form");
             assertNotNull(form);
         }
@@ -234,7 +234,7 @@ public final class SanityCheck {
      */
     private void getMethodWithParameters() throws Exception {
         final WebClient webClient = new WebClient();
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
+        final HtmlPage firstPage = webClient.getPage(getPrintEnvUrl());
 
         assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
 
@@ -242,7 +242,7 @@ public final class SanityCheck {
         assertEquals("get", form.getMethodAttribute());
 
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals("GET", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("textfield1=*&button1=PushMe", secondPage.getHtmlElementById("QUERY_STRING").asText());
         assertEquals("", secondPage.getHtmlElementById("CONTENT").asText());
@@ -254,7 +254,7 @@ public final class SanityCheck {
      */
     private void postMethodWithDuplicateParameters() throws Exception {
         final WebClient webClient = new WebClient();
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
+        final HtmlPage firstPage = webClient.getPage(getPrintEnvUrl());
 
         assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
 
@@ -264,7 +264,7 @@ public final class SanityCheck {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
         button.setAttributeValue("name", "textfield1");
 
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
         assertEquals("textfield1=*&textfield1=PushMe", secondPage.getHtmlElementById("CONTENT").asText());
@@ -277,7 +277,7 @@ public final class SanityCheck {
      */
     private void postMethodWithParameters() throws Exception {
         final WebClient webClient = new WebClient();
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(getPrintEnvUrl());
+        final HtmlPage firstPage = webClient.getPage(getPrintEnvUrl());
 
         assertEquals("GET", firstPage.getHtmlElementById("REQUEST_METHOD").asText());
 
@@ -285,7 +285,7 @@ public final class SanityCheck {
         form.setMethodAttribute("post");
 
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button1");
-        final HtmlPage secondPage = (HtmlPage) button.click();
+        final HtmlPage secondPage = button.click();
         assertEquals("POST", secondPage.getHtmlElementById("REQUEST_METHOD").asText());
         assertEquals("", secondPage.getHtmlElementById("QUERY_STRING").asText());
         assertEquals("textfield1=*&button1=PushMe", secondPage.getHtmlElementById("CONTENT").asText());

@@ -317,6 +317,7 @@ public class WebClient implements Serializable {
      * basically {@link HtmlPage} for HTML content, {@link com.gargoylesoftware.htmlunit.xml.XmlPage} for XML content,
      * {@link TextPage} for other text content and {@link UnexpectedPage} for anything else.
      *
+     * @param <P> the new page
      * @param webWindow the WebWindow to load the result of the request into
      * @param parameters Parameter object for the web request
      * @return the page returned by the server when the specified request was made in the specified window
@@ -326,10 +327,10 @@ public class WebClient implements Serializable {
      *
      * @see WebRequestSettings
      */
-    public Page getPage(final WebWindow webWindow, final WebRequestSettings parameters)
+    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequestSettings parameters)
         throws IOException, FailingHttpStatusCodeException {
 
-        final Page page = webWindow.getEnclosedPage();
+        final P page = webWindow.getEnclosedPage();
         if (page != null && page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (!htmlPage.isOnbeforeunloadAccepted()) {
@@ -362,6 +363,7 @@ public class WebClient implements Serializable {
      * <p>Open a new web window and populate it with a page loaded by
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
      *
+     * @param <P> the new page
      * @param opener the web window that initiated the request
      * @param target the name of the window to be opened (the name that will be passed into the
      *        JavaScript <tt>open()</tt> method)
@@ -371,7 +373,7 @@ public class WebClient implements Serializable {
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
-    public Page getPage(final WebWindow opener, final String target, final WebRequestSettings params)
+    public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequestSettings params)
         throws FailingHttpStatusCodeException, IOException {
         return getPage(openTargetWindow(opener, target, "_self"), params);
     }
@@ -379,6 +381,7 @@ public class WebClient implements Serializable {
     /**
      * Convenient method to build an URL and load it into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequestSettings)}.
+     * @param <P> the new page
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -386,25 +389,28 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @throws MalformedURLException if no URL can be created from the provided string
      */
-    public Page getPage(final String url) throws IOException, FailingHttpStatusCodeException, MalformedURLException {
+    public <P extends Page> P getPage(final String url) throws IOException, FailingHttpStatusCodeException,
+        MalformedURLException {
         return getPage(new URL(url));
     }
 
     /**
      * Convenient method to load a URL into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequestSettings)}.
+     * @param <P> the new page
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
-    public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
+    public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), new WebRequestSettings(url));
     }
 
     /**
      * Convenient method to load a web request into the current WebWindow.
+     * @param <P> the new page
      * @param request the request parameters
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -412,7 +418,7 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @see #getPage(WebWindow,WebRequestSettings)
      */
-    public Page getPage(final WebRequestSettings request) throws IOException,
+    public <P extends Page> P getPage(final WebRequestSettings request) throws IOException,
             FailingHttpStatusCodeException {
         return getPage(getCurrentWindow(), request);
     }
@@ -422,6 +428,7 @@ public class WebClient implements Serializable {
      * get inserted into the WebWindow. All initialization and event notification
      * will be handled here.
      *
+     * @param <P> the newly created page
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
      * @throws IOException if an IO error occurs
@@ -429,7 +436,7 @@ public class WebClient implements Serializable {
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return the newly created page
      */
-    public Page loadWebResponseInto(
+    public <P extends Page> P loadWebResponseInto(
             final WebResponse webResponse, final WebWindow webWindow)
         throws
             IOException, FailingHttpStatusCodeException {
@@ -443,7 +450,7 @@ public class WebClient implements Serializable {
             oldPage.cleanUp();
         }
 
-        final Page newPage = pageCreator_.createPage(webResponse, webWindow);
+        final P newPage = pageCreator_.createPage(webResponse, webWindow);
 
         synchronized (firstWindowStack_) {
             if (!firstWindowStack_.empty() && firstWindowStack_.peek() == null) {
@@ -928,7 +935,7 @@ public class WebClient implements Serializable {
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, "_blank");
-        final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
+        final HtmlPage openerPage = opener.getEnclosedPage();
         if (url != null) {
             try {
                 final WebRequestSettings settings = new WebRequestSettings(url);

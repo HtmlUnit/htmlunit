@@ -532,7 +532,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public HTMLCollection jsxGet_frames() {
         if (frames_ == null) {
             final String xpath = ".//*[(name() = 'frame' or name() = 'iframe')]";
-            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
+            final HtmlPage page = getWebWindow().getEnclosedPage();
             frames_ = new HTMLCollection(this);
             final Transformer toEnclosedWindow = new Transformer() {
                 public Object transform(final Object obj) {
@@ -715,7 +715,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final Object onload = getEventListenersContainer().getEventHandlerProp("load");
         if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
-            final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
+            final HtmlPage page = webWindow_.getEnclosedPage();
             final HtmlElement body = page.getBody();
             if (body != null) {
                 return body.getEventHandler("onload");

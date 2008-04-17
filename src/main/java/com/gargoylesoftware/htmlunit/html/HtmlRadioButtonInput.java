@@ -102,12 +102,14 @@ public class HtmlRadioButtonInput extends HtmlInput {
     /**
      * Sets the "checked" attribute.
      *
+     * @param <P> the page that occupies this input's window after setting the attribute
      * @param isChecked true if this element is to be selected
      * @return the page that occupies this window after setting checked status
      * It may be the same window or it may be a freshly loaded one.
      */
     @Override
-    public Page setChecked(final boolean isChecked) {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P setChecked(final boolean isChecked) {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = isChecked() != isChecked;
 
@@ -123,7 +125,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        Page page = getPage();
+        P page = (P) getPage();
 
         if (changed) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);

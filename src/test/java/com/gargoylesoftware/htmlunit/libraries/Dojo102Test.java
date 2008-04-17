@@ -80,7 +80,7 @@ public class Dojo102Test extends WebTestCase {
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_2);
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/util/doh/runner.html";
 
-        final HtmlPage page = (HtmlPage) client.getPage(url);
+        final HtmlPage page = client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         final HtmlElement logBody = page.getHtmlElementById("logBody");

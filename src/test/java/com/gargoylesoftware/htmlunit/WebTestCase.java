@@ -573,7 +573,7 @@ public abstract class WebTestCase {
 
             final WebClient client = new WebClient(browserVersion);
         
-            final HtmlPage page = (HtmlPage) client.getPage(url);
+            final HtmlPage page = client.getPage(url);
             final HtmlElement want = page.getHtmlElementById(browserKey);
             
             final HtmlElement got = page.getHtmlElementById("log");
@@ -642,7 +642,7 @@ public abstract class WebTestCase {
         webConnection.setResponse(URL_GARGOYLE, html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlPage page = client.getPage(URL_GARGOYLE);
         assertEquals(expectedAlerts_, collectedAlerts);
         return page;
     }

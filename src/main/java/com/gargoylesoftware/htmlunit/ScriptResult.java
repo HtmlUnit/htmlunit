@@ -70,10 +70,12 @@ public final class ScriptResult {
 
     /**
      * Returns the page that is loaded at the end of the script execution.
+     * @param <P> the new page
      * @return the new page
      */
-    public Page getNewPage() {
-        return newPage_;
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P getNewPage() {
+        return (P) newPage_;
     }
     
     /**

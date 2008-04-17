@@ -99,7 +99,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    public Page setChecked(final boolean isChecked) {
+    public HtmlPage setChecked(final boolean isChecked) {
         if (isChecked) {
             setAttributeValue("checked", "checked");
         }

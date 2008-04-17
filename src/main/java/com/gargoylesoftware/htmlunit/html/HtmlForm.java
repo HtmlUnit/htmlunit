@@ -108,11 +108,13 @@ public class HtmlForm extends ClickableElement {
      * treat this as if it was called by JavaScript. In this case, the onsubmit
      * handler will not get executed.
      *
+     * @param <P> the new page that reflects the results of this submission
      * @param submitElement the element that caused the submit to occur
      * @return a new page that reflects the results of this submission
      * @exception IOException If an IO error occurs
      */
-    public Page submit(final SubmittableElement submitElement) throws IOException {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P submit(final SubmittableElement submitElement) throws IOException {
         final HtmlPage htmlPage = getPage();
         if (htmlPage.getWebClient().isJavaScriptEnabled()) {
             if (submitElement != null) {
@@ -131,7 +133,7 @@ public class HtmlForm extends ClickableElement {
             if (TextUtil.startsWithIgnoreCase(getActionAttribute(), JAVASCRIPT_PREFIX)) {
                 // The action is JavaScript but JavaScript isn't enabled.
                 // Return the current page.
-                return htmlPage;
+                return (P) htmlPage;
             }
         }
 

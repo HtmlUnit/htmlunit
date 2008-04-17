@@ -88,10 +88,11 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
      *
+     * @param <P> the page that occupies this element's window after the element has been clicked
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
-    public Page click() throws IOException {
+    public <P extends Page> P click() throws IOException {
         return click(false, false, false);
     }
 
@@ -101,19 +102,22 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
      *
+     * @param <P> the page that occupies this element's window after the element has been clicked
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the click
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the click
      * @param altKey <tt>true</tt> if ALT is pressed during the click
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
-    public Page click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey) throws IOException {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return getPage();
+            return (P) getPage();
         }
         final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT);
-        return click(event);
+        return (P) click(event);
     }
 
     /**
@@ -212,12 +216,14 @@ public abstract class ClickableElement extends StyledElement {
      * <p>The default implementation returns the current page. Subclasses requiring different
      * behavior (like {@link HtmlSubmitInput}) will override this method.</p>
      *
+     * @param <P> the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
-    protected Page doClickAction(final Page defaultPage) throws IOException {
-        return defaultPage;
+    @SuppressWarnings("unchecked")
+    protected <P extends Page> P doClickAction(final Page defaultPage) throws IOException {
+        return (P) defaultPage;
     }
 
     /**

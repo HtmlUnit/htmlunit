@@ -216,7 +216,7 @@ public final class HTMLParser {
      * @throws IOException if an IO error occurs
      */
     public static void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
-        final HtmlPage page = (HtmlPage) parent.getPage();
+        final HtmlPage page = parent.getPage();
         final URL url = page.getWebResponse().getUrl();
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
@@ -364,7 +364,7 @@ public final class HTMLParser {
          */
         private HtmlUnitDOMBuilder(final DomNode page, final URL url) {
             super(new HTMLConfiguration());
-            this.page_ = (HtmlPage) page.getPage();
+            this.page_ = page.getPage();
 
             currentNode_ = page;
             stack_.push(currentNode_);

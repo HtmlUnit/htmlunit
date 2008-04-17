@@ -109,7 +109,7 @@ class JavaScriptBackgroundJob implements Runnable {
                     return;
                 }
 
-                final HtmlPage htmlPage = (HtmlPage) window_.getWebWindow().getEnclosedPage();
+                final HtmlPage htmlPage = window_.getWebWindow().getEnclosedPage();
                 if (function_ == null) {
                     htmlPage.executeJavaScriptIfPossible(
                             script_,

@@ -90,7 +90,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
@@ -124,7 +124,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
@@ -183,11 +183,11 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage framesPage = (HtmlPage) webClient.getPage(framesURL);
+        final HtmlPage framesPage = webClient.getPage(framesURL);
         assertEquals("Frames", framesPage.getTitleText());
 
         final WebWindow menuWebWindow = webClient.getWebWindowByName("menu");
-        final HtmlPage menuPage = (HtmlPage) menuWebWindow.getEnclosedPage();
+        final HtmlPage menuPage = menuWebWindow.getEnclosedPage();
         assertEquals("Menu", menuPage.getTitleText());
 
         final WebWindow testWebWindow = webClient.getWebWindowByName("test");
@@ -239,7 +239,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage framesPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage framesPage = webClient.getPage(URL_FIRST);
         assertEquals("Main", framesPage.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -269,7 +269,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
@@ -372,8 +372,8 @@ public class HtmlFrameSetTest extends WebTestCase {
         webConnection.setResponse(right2URL, right2Html);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) client.getPage(framesetURL);
-        final HtmlPage leftPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
+        final HtmlPage page = client.getPage(framesetURL);
+        final HtmlPage leftPage = page.getFrames().get(0).getEnclosedPage();
         final WebWindow rightWindow = page.getFrames().get(1);
         assertTrue(((HtmlPage) rightWindow.getEnclosedPage()).asXml().contains("version 1"));
         leftPage.getAnchors().get(0).click();

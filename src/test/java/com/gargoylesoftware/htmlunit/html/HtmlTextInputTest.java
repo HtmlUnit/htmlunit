@@ -124,11 +124,11 @@ public class HtmlTextInputTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
         
         final HtmlTextInput textInput = firstPage.getHtmlElementById("myText");
 
-        final HtmlPage secondPage = (HtmlPage) textInput.type('\n');
+        final HtmlPage secondPage = textInput.type('\n');
         assertEquals("Second", secondPage.getTitleText());
     }
 
