@@ -400,7 +400,7 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Parses out the values for the property.
+     * Parses out the values for the constant.
      *
      * @param classConfiguration the configuration that is being built
      * @param element the property element
