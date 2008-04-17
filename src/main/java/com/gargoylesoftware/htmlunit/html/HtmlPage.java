@@ -807,7 +807,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
     *
     * @param accessKey the key to look for
-    * @param <H> the HTML element that is assigned to the specified key or null
+    * @param <H> the type of the HTML element that is assigned to the specified key or null
     * @return the HTML element that is assigned to the specified key or null
     *      if no elements can be found that match the specified key.
     */
@@ -1584,7 +1584,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * first one.
      *
      * @param id the ID value to search by
-     * @param <H> the HTML element with the specified ID
+     * @param <H> the type of the HTML element with the specified ID
      * @return the HTML element with the specified ID
      * @throws ElementNotFoundException if no element was found that matches the id
      */

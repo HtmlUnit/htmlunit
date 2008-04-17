@@ -127,7 +127,7 @@ public class SimpleScriptable extends ScriptableObject {
     /**
      * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
-     * @param <D> the DOM node
+     * @param <D> the type of the DOM node
      * @return the DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
@@ -143,7 +143,7 @@ public class SimpleScriptable extends ScriptableObject {
     /**
      * Returns the DOM node that corresponds to this JavaScript object
      * or null if a node hasn't been set.
-     * @param <D> the DOM node
+     * @param <D> the type of the DOM node
      * @return the DOM node or null
      */
     @SuppressWarnings("unchecked")

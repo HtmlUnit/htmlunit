@@ -53,7 +53,7 @@ public interface PageCreator {
     /**
      * Create a Page object for the specified web response.
      *
-     * @param <P> the new page
+     * @param <P> the type of the new page
      * @param webResponse the response from the server
      * @param webWindow the window that this page will be loaded into
      * @exception IOException If an io problem occurs

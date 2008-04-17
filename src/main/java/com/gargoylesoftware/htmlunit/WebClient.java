@@ -317,7 +317,7 @@ public class WebClient implements Serializable {
      * basically {@link HtmlPage} for HTML content, {@link com.gargoylesoftware.htmlunit.xml.XmlPage} for XML content,
      * {@link TextPage} for other text content and {@link UnexpectedPage} for anything else.
      *
-     * @param <P> the new page
+     * @param <P> the type of the new page
      * @param webWindow the WebWindow to load the result of the request into
      * @param parameters Parameter object for the web request
      * @return the page returned by the server when the specified request was made in the specified window
@@ -363,7 +363,7 @@ public class WebClient implements Serializable {
      * <p>Open a new web window and populate it with a page loaded by
      * {@link #getPage(WebWindow,WebRequestSettings)}</p>
      *
-     * @param <P> the new page
+     * @param <P> the type of the new page
      * @param opener the web window that initiated the request
      * @param target the name of the window to be opened (the name that will be passed into the
      *        JavaScript <tt>open()</tt> method)
@@ -381,7 +381,7 @@ public class WebClient implements Serializable {
     /**
      * Convenient method to build an URL and load it into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequestSettings)}.
-     * @param <P> the new page
+     * @param <P> the type of the new page
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -397,7 +397,7 @@ public class WebClient implements Serializable {
     /**
      * Convenient method to load a URL into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequestSettings)}.
-     * @param <P> the new page
+     * @param <P> the type of the new page
      * @param url the URL of the new content
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -410,7 +410,7 @@ public class WebClient implements Serializable {
 
     /**
      * Convenient method to load a web request into the current WebWindow.
-     * @param <P> the new page
+     * @param <P> the type of the new page
      * @param request the request parameters
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -428,7 +428,7 @@ public class WebClient implements Serializable {
      * get inserted into the WebWindow. All initialization and event notification
      * will be handled here.
      *
-     * @param <P> the newly created page
+     * @param <P> the type of the newly created page
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
      * @throws IOException if an IO error occurs

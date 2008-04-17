@@ -740,7 +740,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
      * submits the enclosed form.
      *
-     * @param <P> the page that occupies this window after typing
+     * @param <P> the type of the page that occupies this window after typing
      * @param c the character you with to simulate typing
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
@@ -755,7 +755,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
      * submits the enclosed form.
      *
-     * @param <P> the page that occupies this window after typing
+     * @param <P> the type of the page that occupies this window after typing
      * @param c the character you with to simulate typing
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing

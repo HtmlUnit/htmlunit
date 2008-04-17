@@ -88,7 +88,7 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
      *
-     * @param <P> the page that occupies this element's window after the element has been clicked
+     * @param <P> the type of the page that occupies this element's window after the element has been clicked
      * @return the page that occupies this element's window after the element has been clicked
      * @exception IOException if an IO error occurs
      */
@@ -102,7 +102,7 @@ public abstract class ClickableElement extends StyledElement {
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
      *
-     * @param <P> the page that occupies this element's window after the element has been clicked
+     * @param <P> the type of the page that occupies this element's window after the element has been clicked
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the click
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the click
      * @param altKey <tt>true</tt> if ALT is pressed during the click
@@ -216,7 +216,7 @@ public abstract class ClickableElement extends StyledElement {
      * <p>The default implementation returns the current page. Subclasses requiring different
      * behavior (like {@link HtmlSubmitInput}) will override this method.</p>
      *
-     * @param <P> the page that is currently loaded after execution of this method
+     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs

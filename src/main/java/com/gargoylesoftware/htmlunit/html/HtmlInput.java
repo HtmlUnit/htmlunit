@@ -412,7 +412,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * the attribute. Note that the returned page may or may not be the original page, depending on
      * the presence of JavaScript event handlers, etc.
      *
-     * @param <P> the page that occupies this input's window after setting the attribute
+     * @param <P> the type of the page that occupies this input's window after setting the attribute
      * @param isChecked <tt>true</tt> if this element is to be selected
      * @return the page that occupies this input's window after setting the attribute
      */
@@ -434,7 +434,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
-     * @param <P> the page that is loaded after the click has taken place
+     * @param <P> the type of the page that is loaded after the click has taken place
      * @param x the x coordinate of the pointing device at the time of clicking
      * @param y the y coordinate of the pointing device at the time of clicking
      * @return the page that is loaded after the click has taken place

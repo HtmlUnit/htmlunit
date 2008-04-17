@@ -108,7 +108,7 @@ public class HtmlForm extends ClickableElement {
      * treat this as if it was called by JavaScript. In this case, the onsubmit
      * handler will not get executed.
      *
-     * @param <P> the new page that reflects the results of this submission
+     * @param <P> the type of the new page that reflects the results of this submission
      * @param submitElement the element that caused the submit to occur
      * @return a new page that reflects the results of this submission
      * @exception IOException If an IO error occurs

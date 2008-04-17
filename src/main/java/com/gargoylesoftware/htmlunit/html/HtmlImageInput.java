@@ -108,7 +108,7 @@ public class HtmlImageInput extends HtmlInput {
      * support this method so it is made protected here. Those subclasses
      * that wish to expose it will override and make it public.
      *
-     * @param <P> the Page that is the result of submitting this page to the server
+     * @param <P> the type of the Page that is the result of submitting this page to the server
      * @return the Page that is the result of submitting this page to the server
      * @exception IOException If an io error occurs
      */
@@ -124,7 +124,7 @@ public class HtmlImageInput extends HtmlInput {
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
-     * @param <P> the page that is currently loaded after execution of this method
+     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not
      * load a new page.
      * @return the page that is currently loaded after execution of this method
@@ -143,7 +143,7 @@ public class HtmlImageInput extends HtmlInput {
      * Simulate clicking this input with a pointing device. The x and y coordinates
      * of the pointing device will be sent to the server.
      *
-     * @param <P> the page that is loaded after the click has taken place
+     * @param <P> the type of the page that is loaded after the click has taken place
      * @param x the x coordinate of the pointing device at the time of clicking
      * @param y the y coordinate of the pointing device at the time of clicking
      * @return the page that is loaded after the click has taken place
