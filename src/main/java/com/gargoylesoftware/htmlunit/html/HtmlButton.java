@@ -94,7 +94,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * {@inheritDoc}
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         final String type = getTypeAttribute().toLowerCase();
 
         final HtmlForm form = getEnclosingForm();

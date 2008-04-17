@@ -287,7 +287,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @return the page that occupies this window after this change is made (may or
      *         may not be the same as the original page)
      */
-    public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
+    public HtmlPage setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         if (isSelected) {
             getPage().setFocusedElement(this);
         }

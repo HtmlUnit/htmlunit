@@ -1446,6 +1446,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public HtmlPage getPage() {
         return (HtmlPage) super.getPage();
     }

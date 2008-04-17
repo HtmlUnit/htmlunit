@@ -235,9 +235,11 @@ public class HtmlForm extends ClickableElement {
      * reset. Note that the returned page may or may not be the same as the original page, based on JavaScript
      * event handlers, etc.
      *
+     * @param <P> the type of the page contained by this form's window after the reset
      * @return the page contained by this form's window after the reset
      */
-    public Page reset() {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P reset() {
         final HtmlPage htmlPage = getPage();
         final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
         if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
@@ -250,7 +252,7 @@ public class HtmlForm extends ClickableElement {
             }
         }
 
-        return htmlPage;
+        return (P) htmlPage;
     }
 
     /**

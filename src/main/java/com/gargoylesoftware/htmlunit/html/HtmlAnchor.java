@@ -93,7 +93,7 @@ public class HtmlAnchor extends ClickableElement {
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
-    protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
+    protected <P extends Page> P doClickAction(final P defaultPage, final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
 
         if (mainLog_.isDebugEnabled()) {
@@ -139,7 +139,7 @@ public class HtmlAnchor extends ClickableElement {
      * @throws IOException if an IO error occurs
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         return doClickAction(defaultPage, "");
     }
 

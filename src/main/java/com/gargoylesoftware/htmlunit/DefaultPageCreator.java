@@ -110,12 +110,14 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     /**
      * Create a Page object for the specified web response.
      *
+     * @param <P> the type of the new page object
      * @param webResponse the response from the server
      * @param webWindow the window that this page will be loaded into
      * @exception IOException If an io problem occurs
      * @return the new page object
      */
-    public Page createPage(
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P createPage(
             final WebResponse webResponse,
             final WebWindow webWindow)
         throws
@@ -139,7 +141,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
         else {
             newPage = createUnexpectedPage(webResponse, webWindow);
         }
-        return newPage;
+        return (P) newPage;
     }
 
     /**

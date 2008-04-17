@@ -674,6 +674,7 @@ public class WebClientTest extends WebTestCase {
     /** A PageCreator that collects data. */
     private class CollectingPageCreator implements PageCreator {
         private final List<Page> collectedPages_;
+
         /**
          * Creates an instance.
          * @param list the list that will contain the data
@@ -681,19 +682,16 @@ public class WebClientTest extends WebTestCase {
         public CollectingPageCreator(final List<Page> list) {
             collectedPages_ = list;
         }
-        
+
         /**
-         * Creates a page.
-         * @param webResponse the web response
-         * @param webWindow the web window
-         * @return the new page
-         * @throws IOException if an IO problem occurs
+         * {@inheritDoc}
          */
-        public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
+        @SuppressWarnings("unchecked")
+        public <P extends Page> P createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
             collectedPages_.add(page);
-            return page;
+            return (P) page;
         }
     }
 

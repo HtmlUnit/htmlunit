@@ -125,20 +125,17 @@ public class HtmlImageInput extends HtmlInput {
      * requiring different behavior (like {@link HtmlSubmitInput}) will override this
      * method.
      *
-     * @param <P> the type of the page that is currently loaded after execution of this method
-     * @param defaultPage the default page to return if the action does not
-     * load a new page.
+     * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred
      */
     @Override
-    @SuppressWarnings("unchecked")
-    protected <P extends Page> P doClickAction(final Page defaultPage) throws IOException {
+    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
-            return (P) form.submit(this);
+            return form.submit(this);
         }
-        return (P) super.doClickAction(defaultPage);
+        return super.doClickAction(defaultPage);
     }
 
     /**

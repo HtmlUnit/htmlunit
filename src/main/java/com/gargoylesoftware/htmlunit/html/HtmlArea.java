@@ -89,7 +89,7 @@ public class HtmlArea extends ClickableElement {
      * {@inheritDoc}
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         final HtmlPage enclosingPage = getPage();
         final WebClient webClient = enclosingPage.getWebClient();
 

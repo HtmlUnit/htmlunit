@@ -222,9 +222,8 @@ public abstract class ClickableElement extends StyledElement {
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
-    protected <P extends Page> P doClickAction(final Page defaultPage) throws IOException {
-        return (P) defaultPage;
+    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
+        return defaultPage;
     }
 
     /**

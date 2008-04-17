@@ -94,7 +94,7 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * @return the page that occupies this window after this change is made (may or
      *         may not be the same as the original page)
      */
-    public Page setSelected(boolean selected) {
+    public HtmlPage setSelected(boolean selected) {
         if (selected == isSelected()) {
             return getPage();
         }
@@ -228,9 +228,10 @@ public class HtmlOption extends ClickableElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    protected Page doClickAction(final Page defaultPage) throws IOException {
+    @SuppressWarnings("unchecked")
+    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
         if (!isSelected()) {
-            return setSelected(true);
+            return (P) setSelected(true);
         }
         return defaultPage;
     }
