@@ -84,7 +84,7 @@ public class HtmlTableRowTest extends WebTestCase {
     public void setUp() throws Exception {
         page_ = loadPage(htmlContent);
         
-        table_ = (HtmlTable) page_.getHtmlElementById("table");
+        table_ = page_.getHtmlElementById("table");
         tbody_ = (HtmlTableBody) table_.getFirstChild();
         row_ = table_.getRow(0);
         cell_ = row_.getCell(0);

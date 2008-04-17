@@ -313,7 +313,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("First", page.getTitleText());
 
-        final HtmlInlineFrame iframe = (HtmlInlineFrame) page.getHtmlElementById("iframe1");
+        final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
         assertEquals(URL_SECOND.toExternalForm(), iframe.getSrcAttribute());
         assertEquals("Second", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
 

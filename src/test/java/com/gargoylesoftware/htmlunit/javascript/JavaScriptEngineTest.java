@@ -114,7 +114,7 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
-        final HtmlTextInput textInput = (HtmlTextInput) page.getHtmlElementById("textfield1");
+        final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("foo", textInput.getValueAttribute());
     }
 
@@ -160,7 +160,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<String> collectedAlerts = null;
         final HtmlPage page = loadPage(content, collectedAlerts);
 
-        final HtmlTextInput textInput = (HtmlTextInput) page.getHtmlElementById("textfield1");
+        final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("blue", textInput.getValueAttribute());
     }
 
@@ -302,7 +302,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final ClickableElement div = ((ClickableElement) page.getHtmlElementById("testdiv"));
+        final ClickableElement div = page.getHtmlElementById("testdiv");
 
         page.getAnchors().get(0).click();
         // ignore response, and click in the page again
@@ -341,7 +341,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final HtmlScript htmlScript = (HtmlScript) page.getHtmlElementById("script1");
+        final HtmlScript htmlScript = page.getHtmlElementById("script1");
         assertNotNull(htmlScript);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -464,7 +464,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          * detect encoding from meta tag
          */
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final HtmlScript htmlScript = (HtmlScript) page.getHtmlElementById("script1");
+        final HtmlScript htmlScript = page.getHtmlElementById("script1");
 
         assertNotNull(htmlScript);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -474,7 +474,7 @@ public class JavaScriptEngineTest extends WebTestCase {
          */
         collectedAlerts.clear();
         final HtmlPage page2 = (HtmlPage) client.getPage("http://www.gargoylesoftware.com/hidden");
-        final HtmlScript htmlScript2 = (HtmlScript) page2.getHtmlElementById("script2");
+        final HtmlScript htmlScript2 = page2.getHtmlElementById("script2");
 
         assertNotNull(htmlScript2);
         assertEquals(expectedAlerts, collectedAlerts);

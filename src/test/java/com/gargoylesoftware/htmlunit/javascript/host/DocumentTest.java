@@ -1394,7 +1394,7 @@ public class DocumentTest extends WebTestCase {
         final HtmlPage mainPage = (HtmlPage) webClient.getPage("http://main");
         assertEquals("Main", mainPage.getTitleText());
 
-        final HtmlInlineFrame iFrame = (HtmlInlineFrame) mainPage.getHtmlElementById("iframe");
+        final HtmlInlineFrame iFrame = mainPage.getHtmlElementById("iframe");
 
         assertEquals(URL_SECOND.toExternalForm(), iFrame.getSrcAttribute());
 
@@ -1598,7 +1598,7 @@ public class DocumentTest extends WebTestCase {
         HtmlPage page = loadPage(browserVersion, html, actual);
         assertEquals("click", page.getBody().asText());
 
-        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
+        final HtmlSpan span = page.getHtmlElementById("s");
         page = (HtmlPage) span.click();
         assertEquals("12", page.getBody().asText());
     }
@@ -3029,7 +3029,7 @@ public class DocumentTest extends WebTestCase {
 
         final String expected = "#document-fragment_null_11_null_0_";
         final HtmlPage page = loadPage(content);
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
     }
 
@@ -3393,7 +3393,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(version, html, actual);
-        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
+        final HtmlSpan span = page.getHtmlElementById("s");
         span.click();
         assertEquals(expected, actual);
     }

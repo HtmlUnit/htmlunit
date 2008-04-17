@@ -631,7 +631,7 @@ public class DomNodeTest extends WebTestCase {
 
         page.addDomChangeListener(listener1);
 
-        final HtmlButtonInput myButton = (HtmlButtonInput) page.getHtmlElementById("myButton");
+        final HtmlButtonInput myButton = page.getHtmlElementById("myButton");
         myButton.click();
 
         final String[] expectedValues = {"in listener 1"};

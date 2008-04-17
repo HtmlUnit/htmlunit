@@ -79,7 +79,7 @@ public class HtmlButtonTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
+        final HtmlButton button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = (HtmlPage) button.click();
 
@@ -102,7 +102,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
+        final HtmlButton button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = (HtmlPage) button.click();
 
@@ -125,7 +125,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
+        final HtmlButton button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = (HtmlPage) button.click();
 
@@ -158,8 +158,8 @@ public class HtmlButtonTest extends WebTestCase {
             + "<button type='reset' id='resetButton' value='pushme'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
-        final HtmlButton resetInput = (HtmlButton) page.getHtmlElementById("resetButton");
+        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlButton resetInput = page.getHtmlElementById("resetButton");
 
         // change all the values to something else
         ((HtmlRadioButtonInput) form.getFirstByXPath(
@@ -211,7 +211,7 @@ public class HtmlButtonTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
+        final HtmlButton button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = (HtmlPage) button.click();
 
@@ -262,7 +262,7 @@ public class HtmlButtonTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
+        final HtmlButton button = page.getHtmlElementById("button");
         assertEquals(expectedType, button.getTypeAttribute());
         
         final HtmlPage page2 = (HtmlPage) button.click();

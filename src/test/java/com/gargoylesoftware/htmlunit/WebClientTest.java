@@ -183,7 +183,7 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("a2");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
 
         final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(
@@ -270,11 +270,11 @@ public class WebClientTest extends WebTestCase {
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final HtmlInlineFrame frame = (HtmlInlineFrame) firstPage.getHtmlElementById("frame1");
+        final HtmlInlineFrame frame = firstPage.getHtmlElementById("frame1");
         final HtmlPage thirdPage = (HtmlPage) frame.getEnclosedPage();
 
         // Load the second page
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("a2");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals("second", secondPage.getTitleText());
 

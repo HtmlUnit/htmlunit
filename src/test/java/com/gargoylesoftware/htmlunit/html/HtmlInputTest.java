@@ -77,7 +77,7 @@ public final class HtmlInputTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getFirstByXPath(
             "//input[@type='radio' and @name='foo' and @value='2']");
@@ -109,7 +109,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlCheckBoxInput checkbox = (HtmlCheckBoxInput) form.getInputByName("foo");
         Assert.assertFalse("Initial state", checkbox.isChecked());
@@ -133,7 +133,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final List<HtmlRadioButtonInput> radioButtons = form.getRadioButtonsByName("radio1");
         assertEquals(2, radioButtons.size());
@@ -155,7 +155,7 @@ public final class HtmlInputTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlTextInput input = (HtmlTextInput) form.getInputByName("text1");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -175,7 +175,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlCheckBoxInput input = (HtmlCheckBoxInput) form.getInputByName("checkbox1");
         assertEquals("on", input.getValueAttribute());
     }
@@ -196,7 +196,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlRadioButtonInput radioButton = (HtmlRadioButtonInput) form.getFirstByXPath(
                 "//input[@type='radio' and @name='foo' and @value='2']");
@@ -219,7 +219,7 @@ public final class HtmlInputTest extends WebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         assertEquals("text", form.getInputByName("foo").getTypeAttribute());
     }

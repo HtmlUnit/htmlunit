@@ -272,7 +272,7 @@ public class YuiTest extends WebTestCase {
         final HtmlElement doc = page.getDocumentElement();
 
         if (buttonToPush != null) {
-            final HtmlButtonInput button = ((HtmlButtonInput) page.getHtmlElementById(buttonToPush));
+            final HtmlButtonInput button = page.getHtmlElementById(buttonToPush);
             button.click();
         }
 

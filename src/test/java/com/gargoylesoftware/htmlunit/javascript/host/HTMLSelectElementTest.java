@@ -137,7 +137,7 @@ public class HTMLSelectElementTest extends WebTestCase {
         final String[] expectedAlerts = {"3", "1", "3", "2"};
         assertEquals(expectedAlerts, collectedAlerts);
 
-        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         final HtmlPage newPage = (HtmlPage) button.click();
 
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
@@ -169,7 +169,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
-        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         final HtmlPage newPage = (HtmlPage) button.click();
 
         assertEquals("http://test?select1=option3&submit=button", newPage.getWebResponse().getUrl());

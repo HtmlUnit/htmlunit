@@ -67,7 +67,7 @@ public class HtmlButtonInputTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("button");
+        final HtmlButtonInput button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = (HtmlPage) button.click();
 

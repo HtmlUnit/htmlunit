@@ -241,7 +241,7 @@ public class LocationTest extends WebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(actual));
 
         final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a");
+        final HtmlAnchor anchor = page.getHtmlElementById("a");
         final HtmlPage page2 = (HtmlPage) anchor.click();
 
         // Verify that it worked.
@@ -453,7 +453,7 @@ public class LocationTest extends WebTestCase {
             + "</html>";
 
         final HtmlPage page1 = loadPage(content);
-        final HtmlAnchor link = (HtmlAnchor) page1.getHtmlElementById("link1");
+        final HtmlAnchor link = page1.getHtmlElementById("link1");
         final HtmlPage page2 = (HtmlPage) link.click();
 
         assertEquals(page1.getTitleText(), page2.getTitleText());

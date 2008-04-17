@@ -66,7 +66,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "<input id='text1'/>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
+        final HtmlTextInput text1 = page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abcd", text1.getValueAttribute());
     }
@@ -98,7 +98,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);
-        final HtmlTextInput text1 = (HtmlTextInput) page.getHtmlElementById("text1");
+        final HtmlTextInput text1 = page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getValueAttribute());
     }
@@ -126,7 +126,7 @@ public class HtmlTextInputTest extends WebTestCase {
 
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         
-        final HtmlTextInput textInput = (HtmlTextInput) firstPage.getHtmlElementById("myText");
+        final HtmlTextInput textInput = firstPage.getHtmlElementById("myText");
 
         final HtmlPage secondPage = (HtmlPage) textInput.type('\n');
         assertEquals("Second", secondPage.getTitleText());

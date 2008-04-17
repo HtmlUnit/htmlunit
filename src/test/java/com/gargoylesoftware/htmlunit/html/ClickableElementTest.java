@@ -1015,9 +1015,9 @@ public class ClickableElementTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(content);
-        final HtmlBody body = (HtmlBody) page.getHtmlElementById("myBody");
+        final HtmlBody body = page.getHtmlElementById("myBody");
         body.dblClick();
-        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
         assertEquals("click-dblclick-", textArea.getText());
     }
 

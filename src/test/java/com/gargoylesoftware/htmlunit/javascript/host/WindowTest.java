@@ -117,7 +117,7 @@ public class WindowTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertNotNull("secondPage", secondPage);
         assertEquals("Second", secondPage.getTitleText());
@@ -157,7 +157,7 @@ public class WindowTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertNotSame(firstPage, secondPage);
 
@@ -210,7 +210,7 @@ public class WindowTest extends WebTestCase {
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
         assertEquals(firstWebWindow, firstWebWindow.getTopWindow());
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals("Second", secondPage.getTitleText());
         assertNotSame(firstPage, secondPage);
@@ -259,7 +259,7 @@ public class WindowTest extends WebTestCase {
         assertEquals("First", firstPage.getTitleText());
         final WebWindow firstWindow = firstPage.getEnclosingWindow();
 
-        final HtmlInlineFrame secondFrame = (HtmlInlineFrame) firstPage.getHtmlElementById("secondFrame");
+        final HtmlInlineFrame secondFrame = firstPage.getHtmlElementById("secondFrame");
         final HtmlPage secondPage = (HtmlPage) secondFrame.getEnclosedPage();
         assertEquals("Second", secondPage.getTitleText());
         try {
@@ -269,7 +269,7 @@ public class WindowTest extends WebTestCase {
         catch (final WebWindowNotFoundException exception) {
             fail("Expected secondFrame would be found before click.");
         }
-        final HtmlAnchor anchor = (HtmlAnchor) secondPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = secondPage.getHtmlElementById("link");
         final HtmlPage thirdPage = (HtmlPage) anchor.click();
         assertEquals("Third", thirdPage.getTitleText());
         final WebWindow thirdWindow = thirdPage.getEnclosingWindow();
@@ -321,7 +321,7 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("Second", secondPage.getTitleText());
@@ -369,17 +369,17 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
         assertEquals("First", firstPage.getTitleText());
-        final HtmlInlineFrame secondFrame = (HtmlInlineFrame) firstPage.getHtmlElementById("secondFrame");
+        final HtmlInlineFrame secondFrame = firstPage.getHtmlElementById("secondFrame");
         final HtmlPage secondPage = (HtmlPage) secondFrame.getEnclosedPage();
         assertEquals("Second", secondPage.getTitleText());
-        final HtmlInlineFrame thirdFrame = (HtmlInlineFrame) secondPage.getHtmlElementById("thirdFrame");
+        final HtmlInlineFrame thirdFrame = secondPage.getHtmlElementById("thirdFrame");
         final HtmlPage thirdPage = (HtmlPage) thirdFrame.getEnclosedPage();
         assertEquals("Third", thirdPage.getTitleText());
 
         assertSame(webClient.getCurrentWindow(), firstWebWindow);
         assertNotSame(firstWebWindow, secondPage);
 
-        final HtmlAnchor anchor = (HtmlAnchor) thirdPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = thirdPage.getHtmlElementById("link");
         final HtmlPage fourthPage = (HtmlPage) anchor.click();
         final WebWindow fourthWebWindow = fourthPage.getEnclosingWindow();
         assertSame(firstWebWindow, fourthWebWindow);
@@ -436,17 +436,17 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
         assertEquals("First", firstPage.getTitleText());
-        final HtmlInlineFrame secondFrame = (HtmlInlineFrame) firstPage.getHtmlElementById("secondFrame");
+        final HtmlInlineFrame secondFrame = firstPage.getHtmlElementById("secondFrame");
         final HtmlPage secondPage = (HtmlPage) secondFrame.getEnclosedPage();
         assertEquals("Second", secondPage.getTitleText());
-        final HtmlInlineFrame thirdFrame = (HtmlInlineFrame) secondPage.getHtmlElementById("thirdFrame");
+        final HtmlInlineFrame thirdFrame = secondPage.getHtmlElementById("thirdFrame");
         final HtmlPage thirdPage = (HtmlPage) thirdFrame.getEnclosedPage();
         assertEquals("Third", thirdPage.getTitleText());
 
         assertSame(webClient.getCurrentWindow(), firstWebWindow);
         assertNotSame(firstWebWindow, secondFrame);
 
-        final HtmlAnchor anchor = (HtmlAnchor) thirdPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = thirdPage.getHtmlElementById("link");
         final HtmlPage fourthPage = (HtmlPage) anchor.click();
         final WebWindow fourthWebWindow = fourthPage.getEnclosingWindow();
         assertSame(secondFrame.getEnclosedWindow(), fourthWebWindow);
@@ -1278,12 +1278,12 @@ public class WindowTest extends WebTestCase {
         final HtmlPage firstPage = (HtmlPage) webClient.getPage("http://opener/test/a.html");
         assertEquals("A", firstPage.getTitleText());
 
-        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         final HtmlPage secondPage = (HtmlPage) buttonA.click();
         assertNotNull("B", secondPage);
         assertEquals("B", secondPage.getTitleText());
 
-        final HtmlButton buttonB = (HtmlButton) secondPage.getHtmlElementById("clickme");
+        final HtmlButton buttonB = secondPage.getHtmlElementById("clickme");
         final HtmlPage thirdPage = (HtmlPage) buttonB.click();
         assertNotNull("C", thirdPage);
         assertEquals("C", thirdPage.getTitleText());
@@ -1967,7 +1967,7 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("image/gif", secondPage.getWebResponse().getContentType());
@@ -2012,7 +2012,7 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/plain", secondPage.getWebResponse().getContentType());
@@ -2057,7 +2057,7 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/xml", secondPage.getWebResponse().getContentType());
@@ -2102,7 +2102,7 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/javascript", secondPage.getWebResponse().getContentType());
@@ -2148,7 +2148,7 @@ public class WindowTest extends WebTestCase {
 
         final WebWindow firstWebWindow = firstPage.getEnclosingWindow();
 
-        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
         assertEquals("text/html", secondPage.getWebResponse().getContentType());
@@ -2195,7 +2195,7 @@ public class WindowTest extends WebTestCase {
         conn.setResponse(URL_SECOND, secondContent);
         
         final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlButton buttonA = (HtmlButton) firstPage.getHtmlElementById("clickme");
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         
         buttonA.click();
         final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();

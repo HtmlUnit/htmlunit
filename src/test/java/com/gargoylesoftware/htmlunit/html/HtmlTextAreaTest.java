@@ -71,7 +71,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
@@ -96,7 +96,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         textArea.setText("Flintstone");
@@ -118,7 +118,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
@@ -137,7 +137,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<textarea name='textArea2'></textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea1 = form.getTextAreaByName("textArea1");
         assertEquals("<textarea name=\"textArea1\"> foo \n bar </textarea>", textArea1.asXml());
@@ -173,7 +173,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);
-        final HtmlTextArea text1 = (HtmlTextArea) page.getHtmlElementById("text1");
+        final HtmlTextArea text1 = page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getText());
     }

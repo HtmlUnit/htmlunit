@@ -91,7 +91,7 @@ public class HtmlAreaTest extends WebTestCase {
         final WebClient client = createWebClient("");
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlArea area = (HtmlArea) page.getHtmlElementById("third");
+        final HtmlArea area = page.getHtmlElementById("third");
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage thirdPage = (HtmlPage) area.click();
@@ -108,7 +108,7 @@ public class HtmlAreaTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlArea area = (HtmlArea) page.getHtmlElementById("second");
+        final HtmlArea area = page.getHtmlElementById("second");
 
         final HtmlPage thirdPage = (HtmlPage) area.click();
         assertEquals(new String[] {"foo"}, collectedAlerts);
@@ -125,7 +125,7 @@ public class HtmlAreaTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlArea area = (HtmlArea) page.getHtmlElementById("second");
+        final HtmlArea area = page.getHtmlElementById("second");
 
         final HtmlPage thirdPage = (HtmlPage) area.click();
         assertEquals(new String[] {"foo"}, collectedAlerts);
@@ -144,7 +144,7 @@ public class HtmlAreaTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlArea area = (HtmlArea) page.getHtmlElementById("a2");
+        final HtmlArea area = page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
@@ -174,7 +174,7 @@ public class HtmlAreaTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
-        final HtmlArea area = (HtmlArea) page.getHtmlElementById("a2");
+        final HtmlArea area = page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 

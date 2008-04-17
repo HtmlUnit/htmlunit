@@ -647,7 +647,7 @@ public class HTMLFormElementTest extends WebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
-        final HtmlAnchor link = (HtmlAnchor) page.getHtmlElementById("link1");
+        final HtmlAnchor link = page.getHtmlElementById("link1");
         link.click();
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -787,7 +787,7 @@ public class HTMLFormElementTest extends WebTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
-        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button1");
+        final HtmlButton button = page.getHtmlElementById("button1");
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("second", secondPage.getTitleText());
         assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getUrl());
@@ -861,7 +861,7 @@ public class HTMLFormElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         button.click();
         final String[] expectedAlerts = {"hi!"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -885,7 +885,7 @@ public class HTMLFormElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         button.click();
         final String[] expectedAlerts = {"hi!"};
         assertEquals(expectedAlerts, collectedAlerts);
