@@ -46,6 +46,10 @@ import java.util.TreeMap;
 import org.apache.commons.lang.math.NumberUtils;
 import org.mozilla.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlHead;
+
 /**
  * A JavaScript object for a ComputedCSSStyleDeclaration.
  *
@@ -1133,44 +1137,110 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * Returns the computed top (Y coordinate), relative to the node's parent.
-     * @return the computed top (Y coordinate), relative to the node's parent
+     * Returns the computed top (Y coordinate), relative to the node's parent's top edge.
+     * @return the computed top (Y coordinate), relative to the node's parent's top edge
      */
     int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
-        int top = intValue(jsxGet_top());
+        final String p = jsxGet_position();
+        final String t = jsxGet_top();
+        final String b = jsxGet_bottom();
+
+        int top;
+        if ("absolute".equals(p) && !"auto".equals(t)) {
+            // No need to calculate displacement caused by sibling nodes.
+            top = intValue(t);
+        }
+        else if ("absolute".equals(p) && !"auto".equals(b)) {
+            // Estimate the vertical displacement caused by *all* siblings.
+            // This is very rough, and doesn't even take position or display types into account (hence the
+            // need for the explicit check for HtmlHead elements, which are display:none in regular UAs).
+            // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
+            top = 0;
+            DomNode child = this.getHTMLElement().getDomNodeOrDie().getParentNode().getFirstChild();
+            while (child != null) {
+                if (child instanceof HtmlElement && !(child instanceof HtmlHead)) {
+                    top += 20;
+                }
+                child = child.getPreviousSibling();
+            }
+            top -= intValue(b);
+        }
+        else {
+            // Estimate the vertical displacement caused by *previous* siblings.
+            // This is very rough, and doesn't even take position or display types into account (hence the
+            // need for the explicit check for HtmlHead elements, which are display:none in regular UAs).
+            top = 0;
+            DomNode prev = this.getHTMLElement().getDomNodeOrDie().getPreviousSibling();
+            while (prev != null) {
+                if (prev instanceof HtmlElement && !(prev instanceof HtmlHead)) {
+                    top += 20;
+                }
+                prev = prev.getPreviousSibling();
+            }
+        }
+
         if (includeMargin) {
             final int margin = intValue(jsxGet_marginTop());
             top += margin;
         }
+
         if (includeBorder) {
             final int border = intValue(jsxGet_borderTopWidth());
             top += border;
         }
+
         if (includePadding) {
             final int padding = intValue(jsxGet_paddingTop());
             top += padding;
         }
+
         return top;
     }
 
     /**
-     * Returns the computed left (X coordinate), relative to the node's parent.
-     * @return the computed left (X coordinate), relative to the node's parent
+     * Returns the computed left (X coordinate), relative to the node's parent's left edge.
+     * @return the computed left (X coordinate), relative to the node's parent's left edge
      */
     int getLeft(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
-        int left = intValue(jsxGet_left());
+        final String p = jsxGet_position();
+        final String l = jsxGet_left();
+        final String r = jsxGet_right();
+
+        int left;
+        if ("absolute".equals(p) && !"auto".equals(l)) {
+            // No need to calculate displacement caused by sibling nodes.
+            left = intValue(l);
+        }
+        else if ("absolute".equals(p) && !"auto".equals(r)) {
+            // We *should* calculate the horizontal displacement caused by *all* siblings.
+            // However, that would require us to retrieve computed styles for all siblings,
+            // and that sounds like a lot of work. We'll use a bogus parent width until a
+            // scenario arises that requires a more exact calculation.
+            left = 200 - intValue(r);
+        }
+        else {
+            // We *should* calculate the horizontal displacement caused by *previous* siblings.
+            // However, that would require us to retrieve computed styles for these siblings,
+            // and that also sounds like a lot of work. We'll just use 0, which is actually correct
+            // for block elements.
+            left = 0;
+        }
+
         if (includeMargin) {
             final int margin = intValue(jsxGet_marginLeft());
             left += margin;
         }
+
         if (includeBorder) {
             final int border = intValue(jsxGet_borderLeftWidth());
             left += border;
         }
+
         if (includePadding) {
             final int padding = intValue(jsxGet_paddingLeft());
             left += padding;
         }
+
         return left;
     }
 

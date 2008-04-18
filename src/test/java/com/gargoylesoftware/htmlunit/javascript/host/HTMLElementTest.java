@@ -1642,6 +1642,36 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Minimal flow/layouting test: verifies that the <tt>offsetTop</tt> property changes depending
+     * on previous siblings. In the example below, the second div is below the first one, so its
+     * offsetTop must be greater than zero. This sort of test is part of the Dojo unit tests, so
+     * this needs to pass for the Dojo unit tests to pass.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOffsetTopWithPreviousSiblings() throws Exception {
+        final String html = "<html>\n"
+            + "    <head>\n"
+            + "        <script>\n"
+            + "            function test() {\n"
+            + "                alert(document.getElementById('d1').offsetTop > 0);\n"
+            + "                alert(document.getElementById('d2').offsetTop > 0);\n"
+            + "            }\n"
+            + "        </script>\n"
+            + "    </head>\n"
+            + "    <body style='padding: 0px; margin: 0px;' onload='test()'>\n"
+            + "        <div id='d1'>foo</div>\n"
+            + "        <div id='d2'>bar</div>\n"
+            + "    </body>\n"
+            + "</html>";
+        final String[] expected = new String[] {"false", "true"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
+
+    /**
      * Test scrolls (real values don't matter currently).
      *
      * @throws Exception if the test fails
