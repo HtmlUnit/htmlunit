@@ -52,6 +52,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -271,7 +272,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             else {
                 cachedElements_ = new ArrayList<Object>();
             }
-            final boolean isXmlPage = node_ != null && node_.getPage() instanceof XmlPage;
+            final boolean isXmlPage = node_ != null && ((Page) node_.getPage()) instanceof XmlPage;
 
             final boolean isIE = getBrowserVersion().isIE();
 

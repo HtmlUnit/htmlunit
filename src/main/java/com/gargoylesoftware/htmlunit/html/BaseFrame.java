@@ -158,7 +158,7 @@ public abstract class BaseFrame extends StyledElement {
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (url.sameFile(window.getEnclosedPage().getWebResponse().getUrl())) {
+            if (url.sameFile(((Page) window.getEnclosedPage()).getWebResponse().getUrl())) {
                 return true;
             }
             if (window == window.getParentWindow()) { // should getParentWindow() return null on top windows?

@@ -48,6 +48,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -241,7 +242,7 @@ public class SimpleScriptable extends ScriptableObject {
         // necessity) if navigation has continued, the window may contain an other page as the one to which
         // the current node belongs to.
         // See test JavaScriptEngineTest#testScopeInInactivePage
-        if (domNode.getPage().getEnclosingWindow().getEnclosedPage() == domNode.getPage()) {
+        if (((Page) domNode.getPage()).getEnclosingWindow().getEnclosedPage() == (Page) domNode.getPage()) {
             scriptable.setParentScope(getWindow());
         }
         else {

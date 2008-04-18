@@ -95,7 +95,7 @@ public class Location extends SimpleScriptable {
     public void initialize(final Window window) {
         window_ = window;
         if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl().getRef();
+            hash_ = ((Page) window_.getWebWindow().getEnclosedPage()).getWebResponse().getUrl().getRef();
         }
     }
 
@@ -407,7 +407,7 @@ public class Location extends SimpleScriptable {
      * @return this location's current URL
      */
     private URL getUrl() {
-        return window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
+        return ((Page) window_.getWebWindow().getEnclosedPage()).getWebResponse().getUrl();
     }
 
     /**

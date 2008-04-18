@@ -1409,7 +1409,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public void deregisterFramesIfNeeded() {
         for (final WebWindow window : getFrames()) {
             getWebClient().deregisterWebWindow(window);
-            if (window.getEnclosedPage() instanceof HtmlPage) {
+            if (((Page) window.getEnclosedPage()) instanceof HtmlPage) {
                 final HtmlPage page = window.getEnclosedPage();
                 if (page != null) {
                     // seems quite silly, but for instance if the src attribute of an iframe is not
@@ -1774,7 +1774,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
-            if (frame.getEnclosedPage().getWebResponse().getUrl() == WebClient.URL_ABOUT_BLANK) {
+            if (((Page) frame.getEnclosedPage()).getWebResponse().getUrl() == WebClient.URL_ABOUT_BLANK) {
                 frame.loadInnerPage();
             }
         }
@@ -1861,7 +1861,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
         // If a page reload happened as a result of the focus change then obviously this
         // element will not have the focus because its page has gone away.
-        return this == getEnclosingWindow().getEnclosedPage();
+        return this == (Page) getEnclosingWindow().getEnclosedPage();
     }
 
     /**

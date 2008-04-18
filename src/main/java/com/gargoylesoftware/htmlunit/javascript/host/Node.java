@@ -121,7 +121,7 @@ public class Node extends SimpleScriptable {
      * @return the node type
      */
     public short jsxGet_nodeType() {
-        return getDomNodeOrDie().getNodeType();
+        return ((DomNode) getDomNodeOrDie()).getNodeType();
     }
 
     /**
@@ -146,7 +146,7 @@ public class Node extends SimpleScriptable {
      * @return the node value
      */
     public String jsxGet_nodeValue() {
-        return getDomNodeOrDie().getNodeValue();
+        return ((DomNode) getDomNodeOrDie()).getNodeValue();
     }
 
     /**
@@ -154,7 +154,7 @@ public class Node extends SimpleScriptable {
      * @param newValue the new node value
      */
     public void jsxSet_nodeValue(final String newValue) {
-        getDomNodeOrDie().setNodeValue(newValue);
+        ((DomNode) getDomNodeOrDie()).setNodeValue(newValue);
     }
 
     /**
@@ -243,14 +243,14 @@ public class Node extends SimpleScriptable {
                 appendedChild = newChildObject;
             }
             else {
-                getDomNodeOrDie().appendChild(newChildNode);
+                ((DomNode) getDomNodeOrDie()).appendChild(newChildNode);
             }
 
             //if parentNode is null in IE, create a DocumentFragment to be the parentNode
-            if (getDomNodeOrDie().getParentNode() == null
+            if (((DomNode) getDomNodeOrDie()).getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE()) {
                 final DomDocumentFragment fragment =
-                    ((HtmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
+                    ((HtmlPage) ((DomNode) getDomNodeOrDie()).getPage()).createDomDocumentFragment();
                 fragment.appendChild(getDomNodeOrDie());
             }
         }
@@ -296,7 +296,7 @@ public class Node extends SimpleScriptable {
      * @return boolean true if this node has any children, false otherwise
      */
     public boolean jsxFunction_hasChildNodes() {
-        return getDomNodeOrDie().getChildren().iterator().hasNext();
+        return ((DomNode) getDomNodeOrDie()).getChildren().iterator().hasNext();
     }
 
     /**
@@ -324,7 +324,7 @@ public class Node extends SimpleScriptable {
             final DocumentFragment fragment = (DocumentFragment) newChildObject;
             Node firstNode = null;
             final Node refChildObject = (Node) ((Node) oldChildObject).jsxGet_nextSibling();
-            for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
+            for (final DomNode node : ((DomNode) fragment.getDomNodeOrDie()).getChildren()) {
                 if (firstNode == null) {
                     jsxFunction_replaceChild(node.getScriptObject(), oldChildObject);
                     firstNode = (Node) node.getScriptObject();
@@ -359,7 +359,7 @@ public class Node extends SimpleScriptable {
      * @return the parent node
      */
     public Object jsxGet_parentNode() {
-        return getJavaScriptNode(getDomNodeOrDie().getParentNode());
+        return getJavaScriptNode(((DomNode) getDomNodeOrDie()).getParentNode());
     }
 
     /**
@@ -369,7 +369,7 @@ public class Node extends SimpleScriptable {
      * no next sibling.
      */
     public Object jsxGet_nextSibling() {
-        return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
+        return getJavaScriptNode(((DomNode) getDomNodeOrDie()).getNextSibling());
     }
 
     /**
@@ -379,7 +379,7 @@ public class Node extends SimpleScriptable {
      * no previous sibling.
      */
     public Object jsxGet_previousSibling() {
-        return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
+        return getJavaScriptNode(((DomNode) getDomNodeOrDie()).getPreviousSibling());
     }
 
     /**
@@ -389,7 +389,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_firstChild() {
-        return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
+        return getJavaScriptNode(((DomNode) getDomNodeOrDie()).getFirstChild());
     }
 
     /**
@@ -399,7 +399,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     public Object jsxGet_lastChild() {
-        return getJavaScriptNode(getDomNodeOrDie().getLastChild());
+        return getJavaScriptNode(((DomNode) getDomNodeOrDie()).getLastChild());
     }
 
     /**
@@ -477,7 +477,7 @@ public class Node extends SimpleScriptable {
      */
     public ScriptResult executeEvent(final Event event) {
         if (eventListenersContainer_ != null) {
-            final HtmlPage page = getDomNodeOrDie().getPage();
+            final HtmlPage page = ((DomNode) getDomNodeOrDie()).getPage();
             final boolean isIE = getBrowserVersion().isIE();
             final Window window = (Window) page.getEnclosingWindow().getScriptObject();
             final Object[] args = new Object[] {event};
@@ -511,7 +511,7 @@ public class Node extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
-        final HtmlPage page = getDomNodeOrDie().getPage();
+        final HtmlPage page = ((DomNode) getDomNodeOrDie()).getPage();
         final boolean isIE = getBrowserVersion().isIE();
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         final Object[] args = new Object[] {event};
@@ -633,9 +633,7 @@ public class Node extends SimpleScriptable {
         if (eventListenersContainer_ == null) {
             return null;
         }
-        else {
-            return eventListenersContainer_.getEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2));
-        }
+        return eventListenersContainer_.getEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2));
     }
 
     /**
@@ -643,6 +641,6 @@ public class Node extends SimpleScriptable {
      * @return the document
      */
     public Object jsxGet_ownerDocument() {
-        return ((SgmlPage) getDomNodeOrDie().getPage()).getScriptObject();
+        return ((SgmlPage) ((DomNode) getDomNodeOrDie()).getPage()).getScriptObject();
     }
 }
