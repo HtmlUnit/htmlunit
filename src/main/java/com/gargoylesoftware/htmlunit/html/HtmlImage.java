@@ -237,14 +237,12 @@ public class HtmlImage extends ClickableElement {
 
     /**
      * Performs the click action on the enclosing A tag (if any).
-     *
-     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage) throws IOException {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);

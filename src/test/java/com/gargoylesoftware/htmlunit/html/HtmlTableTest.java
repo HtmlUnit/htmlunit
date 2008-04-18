@@ -73,7 +73,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
         Assert.assertEquals("cell1 contents", "cell1", cell1.asText());
@@ -106,7 +106,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
         Assert.assertEquals("cell (0,0) contents", "row 1 col 1", cell1.asText());
@@ -141,7 +141,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final HtmlTableCell cell = table.getCellAt(99, 0);
         Assert.assertNull("cell", cell);
@@ -165,7 +165,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final List<HtmlTableRow> expectedRows = new ArrayList<HtmlTableRow>();
         expectedRows.add(table.getRowById("row1"));
@@ -202,7 +202,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         final List<HtmlTableRow> expectedRows = new ArrayList<HtmlTableRow>();
         expectedRows.add(table.getRowById("row1"));
@@ -241,7 +241,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         assertNotNull(table.getHeader());
         assertNotNull(table.getFooter());
@@ -270,7 +270,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         assertEquals(null, table.getHeader());
         assertEquals(null, table.getFooter());
@@ -292,7 +292,7 @@ public class HtmlTableTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlTable table = page.getHtmlElementById("table1");
+        final HtmlTable table = (HtmlTable) page.getHtmlElementById("table1");
 
         assertEquals("MyCaption", table.getCaptionText());
     }
@@ -317,13 +317,13 @@ public class HtmlTableTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         // Check that a <tbody> was inserted properly
-        final HtmlTableDataCell cell1 = page.getHtmlElementById("cell1");
+        final HtmlTableDataCell cell1 = (HtmlTableDataCell) page.getHtmlElementById("cell1");
         assertTrue(HtmlTableRow.class.isInstance(cell1.getParentNode()));
         assertTrue(HtmlTableBody.class.isInstance(cell1.getParentNode().getParentNode()));
         assertTrue(HtmlTable.class.isInstance(cell1.getParentNode().getParentNode().getParentNode()));
 
         // Check that the existing <tbody> wasn't messed up.
-        final HtmlTableDataCell cell2 = page.getHtmlElementById("cell2");
+        final HtmlTableDataCell cell2 = (HtmlTableDataCell) page.getHtmlElementById("cell2");
         assertTrue(HtmlTableRow.class.isInstance(cell2.getParentNode()));
         assertTrue(HtmlTableBody.class.isInstance(cell2.getParentNode().getParentNode()));
         assertTrue(HtmlTable.class.isInstance(cell2.getParentNode().getParentNode().getParentNode()));

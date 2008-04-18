@@ -81,7 +81,7 @@ public class Popup extends SimpleScriptable {
         // create the "page" associated to the document
         final WebWindow popupPseudoWindow = new PopupPseudoWebWindow(openerWindow.getWebClient());
         // take the WebResponse of the opener (not really correct, but...)
-        final WebResponse webResponse = ((Page) openerWindow.getEnclosedPage()).getWebResponse();
+        final WebResponse webResponse = openerWindow.getEnclosedPage().getWebResponse();
         final HtmlPage popupPage = new HtmlPage(null, webResponse, popupPseudoWindow);
         setDomNode(popupPage);
         popupPseudoWindow.setEnclosedPage(popupPage);

@@ -476,7 +476,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse("");
         client.setWebConnection(webConnection);
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getWebResponse().getUrl());
         assertEquals("foo", page.getTitleText());
     }
@@ -914,7 +914,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         connection.setResponse(new URL(URL_FIRST, "page2.html"), content2);
         webClient.setWebConnection(connection);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final DomChangeListener listener = new DomChangeListener() {
             public void nodeAdded(final DomChangeEvent event) {
                 // nothing

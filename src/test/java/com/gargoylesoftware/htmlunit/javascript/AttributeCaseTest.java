@@ -197,7 +197,7 @@ public class AttributeCaseTest extends WebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
-        page_ = client.getPage(URL_GARGOYLE);
+        page_ = (HtmlPage) client.getPage(URL_GARGOYLE);
 
         element_ = page_.getHtmlElementById(elementId);
     }

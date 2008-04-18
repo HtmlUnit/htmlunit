@@ -58,7 +58,6 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -219,8 +218,7 @@ public class JavaScriptEngine implements Serializable {
                         // use this instance in prototype map to allow instanceof to work
                         prototype = obj;
 
-                        if (obj.getClass() == Element.class
-                            && ((Page) webWindow.getEnclosedPage()) instanceof HtmlPage) {
+                        if (obj.getClass() == Element.class && webWindow.getEnclosedPage() instanceof HtmlPage) {
                             final DomNode domNode =
                                 new HtmlElement(null, "", (HtmlPage) webWindow.getEnclosedPage(), null) {
                                     private static final long serialVersionUID = -5614158965497997095L;

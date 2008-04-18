@@ -45,7 +45,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -74,7 +73,7 @@ public class EventHandler extends BaseFunction {
         eventName_ = eventName;
 
         final String functionSignature;
-        if (((Page) node.getPage()).getEnclosingWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (node.getPage().getEnclosingWindow().getWebClient().getBrowserVersion().isIE()) {
             functionSignature = "function()";
         }
         else {

@@ -740,14 +740,12 @@ public abstract class HtmlElement extends DomElement implements Element {
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
      * submits the enclosed form.
      *
-     * @param <P> the type of the page that occupies this window after typing
      * @param c the character you with to simulate typing
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P type(final char c) throws IOException {
-        return (P) type(c, false, false, false);
+    public Page type(final char c) throws IOException {
+        return type(c, false, false, false);
     }
 
     /**
@@ -756,7 +754,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
      * submits the enclosed form.
      *
-     * @param <P> the type of the page that occupies this window after typing
      * @param c the character you with to simulate typing
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
@@ -764,11 +761,10 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+    public Page type(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return (P) getPage();
+            return getPage();
         }
 
         fireEvent(new Event(this, Event.TYPE_KEY_DOWN, c, shiftKey, ctrlKey, altKey));
@@ -777,9 +773,9 @@ public abstract class HtmlElement extends DomElement implements Element {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            return (P) form.submit((SubmittableElement) this);
+            return form.submit((SubmittableElement) this);
         }
-        return (P) getPage();
+        return getPage();
     }
 
     /**
@@ -1446,7 +1442,6 @@ public abstract class HtmlElement extends DomElement implements Element {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     public HtmlPage getPage() {
         return (HtmlPage) super.getPage();
     }

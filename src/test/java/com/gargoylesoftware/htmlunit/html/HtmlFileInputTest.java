@@ -128,7 +128,7 @@ public class HtmlFileInputTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
         fileInput.setValueAttribute(fileURL);
@@ -159,7 +159,7 @@ public class HtmlFileInputTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
         f.submit((SubmittableElement) null);
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
@@ -187,7 +187,7 @@ public class HtmlFileInputTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = (HtmlFileInput) f.getInputByName("image");
 
@@ -268,7 +268,7 @@ public class HtmlFileInputTest extends WebTestCase {
         assertTrue(file.exists());
         
         final WebClient client = new WebClient(browserVersion);
-        final HtmlPage firstPage = client.getPage(
+        final HtmlPage firstPage = (HtmlPage) client.getPage(
                 new URL("http://localhost:" + HttpWebConnectionTest.PORT + "/upload1"));
 
         final HtmlForm form = firstPage.getForms().get(0);
@@ -276,7 +276,7 @@ public class HtmlFileInputTest extends WebTestCase {
         fileInput.setValueAttribute(path);
         
         final HtmlSubmitInput submitInput = (HtmlSubmitInput) form.getInputByValue("Upload");
-        final HtmlPage secondPage = submitInput.click();
+        final HtmlPage secondPage = (HtmlPage) submitInput.click();
 
         final String response = secondPage.getWebResponse().getContentAsString();
 

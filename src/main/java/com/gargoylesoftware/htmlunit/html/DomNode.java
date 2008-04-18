@@ -229,13 +229,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns the page that contains this node.
-     *
-     * @param <P> the type of the page that contains this node
      * @return the page that contains this node
      */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage() {
-        return (P) page_;
+    public Page getPage() {
+        return page_;
     }
     
     /**
@@ -746,7 +743,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public String asXml() {
         String charsetName = null;
-        if (((Page) getPage()) instanceof HtmlPage) {
+        if (getPage() instanceof HtmlPage) {
             charsetName = ((HtmlPage) getPage()).getPageEncoding();
         }
         final StringWriter stringWriter = new StringWriter();
@@ -878,8 +875,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // move the node
             basicAppend(domNode);
             // trigger events
-            if (!(this instanceof DomDocumentFragment)
-                && (((Page) getPage()) instanceof HtmlPage || this instanceof HtmlPage)) {
+            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
                 ((HtmlPage) getPage()).notifyNodeAdded(domNode);
             }
             fireNodeAdded(this, domNode);
@@ -906,7 +902,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param destination the node to which this node's children should be moved before this node is removed
      */
     void quietlyRemoveAndMoveChildrenTo(final DomNode destination) {
-        if (((Page) destination.getPage()) != ((Page) getPage())) {
+        if (destination.getPage() != getPage()) {
             throw new RuntimeException("Cannot perform quiet move on nodes from different pages.");
         }
         for (DomNode child : getChildren()) {
@@ -1014,7 +1010,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newNode.parent_ = parent_;
         newNode.setPage(page_);
 
-        if (((Page) getPage()) instanceof HtmlPage) {
+        if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).notifyNodeAdded(newNode);
         }
         fireNodeAdded(this, newNode);
@@ -1064,7 +1060,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final DomNode exParent = parent_;
         basicRemove();
         
-        if (((Page) getPage()) instanceof HtmlPage) {
+        if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).notifyNodeRemoved(this);
         }
 
@@ -1274,7 +1270,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         private HtmlElement getFirstChildElement(final DomNode parent) {
             if (parent instanceof HtmlNoScript
-                    && ((Page) getPage()).getEnclosingWindow().getWebClient().isJavaScriptEnabled()) {
+                    && getPage().getEnclosingWindow().getWebClient().isJavaScriptEnabled()) {
                 return null;
             }
             DomNode node = parent.getFirstChild();
@@ -1398,7 +1394,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param message the notification to send to the registered {@link IncorrectnessListener}
      */
     protected void notifyIncorrectness(final String message) {
-        final WebClient client = ((Page) getPage()).getEnclosingWindow().getWebClient();
+        final WebClient client = getPage().getEnclosingWindow().getWebClient();
         final IncorrectnessListener incorrectnessListener = client.getIncorrectnessListener();
         incorrectnessListener.notify(message, this);
     }

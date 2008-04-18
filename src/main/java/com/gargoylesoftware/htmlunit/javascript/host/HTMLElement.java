@@ -60,7 +60,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -684,7 +683,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomNode domNode = getDomNodeOrDie();
         domNode.removeAllChildren();
 
-        final DomNode node = new DomText(((DomNode) getDomNodeOrDie()).getPage(), value);
+        final DomNode node = new DomText(getDomNodeOrDie().getPage(), value);
         domNode.appendChild(node);
 
         //if the parentNode has null parentNode in IE,
@@ -1187,7 +1186,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @throws MalformedURLException if the URL cannot be created
      */
     public void startDownload(final String uri, final Function callback) throws MalformedURLException {
-        final HtmlPage page = getWindow().getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         final URL url = page.getFullyQualifiedUrl(uri);
         if (!page.getWebResponse().getUrl().getHost().equals(url.getHost())) {
             throw Context.reportRuntimeError("Not authorized url: " + url);
@@ -1261,9 +1260,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public boolean isHomePage(final String url) {
         try {
             final URL newUrl = new URL(url);
-            final URL currentUrl = ((Page) ((DomNode) getDomNodeOrDie()).getPage()).getWebResponse().getUrl();
-            final String home = ((Page) ((DomNode) getDomNodeOrDie())
-                .getPage()).getEnclosingWindow().getWebClient().getHomePage();
+            final URL currentUrl = getDomNodeOrDie().getPage().getWebResponse().getUrl();
+            final String home = getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().getHomePage();
             final boolean sameDomains = newUrl.getHost().equalsIgnoreCase(currentUrl.getHost());
             final boolean isHomePage = (home != null && home.equals(url));
             return (sameDomains && isHomePage);
@@ -1279,7 +1277,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param url the new homepage URL
      */
     public void setHomePage(final String url) {
-        ((Page) ((DomNode) getDomNodeOrDie()).getPage()).getEnclosingWindow().getWebClient().setHomePage(url);
+        getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().setHomePage(url);
     }
 
     /**
@@ -1288,8 +1286,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @throws IOException if loading home page fails
      */
     public void navigateHomePage() throws IOException {
-        final WebClient webClient =
-            ((Page) ((DomNode) getDomNodeOrDie()).getPage()).getEnclosingWindow().getWebClient();
+        final WebClient webClient = getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient();
         webClient.getPage(webClient.getHomePage());
     }
 
@@ -1600,7 +1597,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see #jsxGet_parentNode()
      */
     public Object jsxGet_parentElement() {
-        if ("html".equalsIgnoreCase(((DomNode) getDomNodeOrDie()).getNodeName())) {
+        if ("html".equalsIgnoreCase(getDomNodeOrDie().getNodeName())) {
             return null;
         }
         return jsxGet_parentNode();

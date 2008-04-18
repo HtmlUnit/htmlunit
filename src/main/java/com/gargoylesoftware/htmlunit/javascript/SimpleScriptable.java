@@ -48,7 +48,6 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -128,28 +127,24 @@ public class SimpleScriptable extends ScriptableObject {
     /**
      * Returns the DOM node that corresponds to this JavaScript object or throw
      * an exception if one cannot be found.
-     * @param <D> the type of the DOM node
      * @return the DOM node
      * @exception IllegalStateException If the DOM node could not be found.
      */
-    @SuppressWarnings("unchecked")
-    public final <D extends DomNode> D getDomNodeOrDie() throws IllegalStateException {
+    public final DomNode getDomNodeOrDie() throws IllegalStateException {
         if (domNode_ == null) {
             final String clazz = getClass().getName();
             throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
         }
-        return (D) domNode_;
+        return domNode_;
     }
 
     /**
      * Returns the DOM node that corresponds to this JavaScript object
      * or null if a node hasn't been set.
-     * @param <D> the type of the DOM node
      * @return the DOM node or null
      */
-    @SuppressWarnings("unchecked")
-    public final <D extends DomNode> D getDomNodeOrNull() {
-        return (D) domNode_;
+    public final DomNode getDomNodeOrNull() {
+        return domNode_;
     }
 
     /**
@@ -242,7 +237,7 @@ public class SimpleScriptable extends ScriptableObject {
         // necessity) if navigation has continued, the window may contain an other page as the one to which
         // the current node belongs to.
         // See test JavaScriptEngineTest#testScopeInInactivePage
-        if (((Page) domNode.getPage()).getEnclosingWindow().getEnclosedPage() == (Page) domNode.getPage()) {
+        if (domNode.getPage().getEnclosingWindow().getEnclosedPage() == domNode.getPage()) {
             scriptable.setParentScope(getWindow());
         }
         else {

@@ -103,10 +103,10 @@ public class HtmlAnchorTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a2");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         final List<NameValuePair> expectedParameters = Collections.emptyList();
         final MockWebConnection webConnection = getMockConnection(secondPage);
@@ -129,10 +129,10 @@ public class HtmlAnchorTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlAnchor anchor = page.getHtmlElementById("a1");
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a1");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         // The URL shouldn't contain the anchor since isn't sent to the server
         assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
@@ -163,12 +163,12 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertEquals("Second", secondPage.getTitleText());
@@ -197,12 +197,12 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertSame(page, secondPage);
@@ -230,12 +230,12 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final List< ? > expectedParameters = Collections.EMPTY_LIST;
@@ -260,11 +260,11 @@ public class HtmlAnchorTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         assertEquals(new String[] {"clicked"}, collectedAlerts);
         assertSame(page, secondPage);
@@ -291,12 +291,12 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a2");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         assertSame(page, secondPage);
@@ -351,9 +351,9 @@ public class HtmlAnchorTest extends WebTestCase {
         conn.setResponse(URL_SECOND, secondContent);
         conn.setResponse(URL_THIRD, thirdContent);
         client.setWebConnection(conn);
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlAnchor a = firstPage.getHtmlElementById("link");
-        final HtmlPage secondPage = a.click();
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor a = (HtmlAnchor) firstPage.getHtmlElementById("link");
+        final HtmlPage secondPage = (HtmlPage) a.click();
         Assert.assertEquals("url", URL_SECOND, secondPage.getWebResponse().getUrl());
         Assert.assertEquals("title", "Page B", secondPage.getTitleText());
     }
@@ -369,11 +369,11 @@ public class HtmlAnchorTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlAnchor anchor = page.getHtmlElementById("a1");
+        final HtmlAnchor anchor = (HtmlAnchor) page.getHtmlElementById("a1");
 
         Assert.assertEquals("size incorrect before test", 1, page.getWebClient().getWebWindows().size());
 
-        final HtmlPage secondPage = anchor.openLinkInNewWindow();
+        final HtmlPage secondPage = (HtmlPage) anchor.openLinkInNewWindow();
 
         assertNotSame("new page not returned", page, secondPage);
         assertTrue("new page in wrong window type",
@@ -403,8 +403,8 @@ public class HtmlAnchorTest extends WebTestCase {
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(conn);
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlAnchor a = firstPage.getHtmlElementById("link");
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor a = (HtmlAnchor) firstPage.getHtmlElementById("link");
         a.click();
 
         final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
@@ -437,9 +437,9 @@ public class HtmlAnchorTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlAnchor anchor = firstPage.getHtmlElementById("clickme");
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         Assert.assertEquals("Second window did not open", 2, client.getWebWindows().size());
         assertNotSame("New Page was not returned", firstPage, secondPage);
@@ -475,8 +475,8 @@ public class HtmlAnchorTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);
-        final HtmlAnchor a1 = page.getHtmlElementById("a1");
-        final HtmlPage secondPage = a1.click();
+        final HtmlAnchor a1 = (HtmlAnchor) page.getHtmlElementById("a1");
+        final HtmlPage secondPage = (HtmlPage) a1.click();
         assertEquals(URL_GARGOYLE, secondPage.getWebResponse().getUrl());
     }
 }

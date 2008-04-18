@@ -333,7 +333,7 @@ public class Document extends EventNode {
         // If the page isn't currently being parsed (i.e. this call to write() or writeln()
         // was triggered by an event, setTimeout(), etc), then the new content will replace
         // the entire page. Basically, we make an implicit open() call.
-        final HtmlPage page = getDomNodeOrDie();
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie();
         if (!page.isBeingParsed()) {
             writeInCurrentDocument_ = false;
         }
@@ -670,7 +670,7 @@ public class Document extends EventNode {
         // Any open() invocations are ignored during the parsing stage, because write() and
         // writeln() invocations will directly append content to the current insertion point.
         final Document document = (Document) scriptable;
-        final HtmlPage page = document.getDomNodeOrDie();
+        final HtmlPage page = (HtmlPage) document.getDomNodeOrDie();
         if (page.isBeingParsed()) {
             document.getLog().warn("Ignoring call to open() during the parsing stage.");
             return null;
@@ -698,7 +698,7 @@ public class Document extends EventNode {
             getLog().warn("close() called when document is not open.");
         }
         else {
-            final HtmlPage page = ((DomNode) getDomNodeOrDie()).getPage();
+            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
             final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(),
                 page.getWebResponse().getUrl());
             final WebClient webClient = page.getWebClient();
@@ -777,8 +777,7 @@ public class Document extends EventNode {
             if (tagName.startsWith("<") && browserVersion.isIE()) {
                 try {
                     final HtmlElement proxyNode =
-                        new HtmlDivision(null, HtmlDivision.TAG_NAME,
-                            (HtmlPage) ((DomNode) getDomNodeOrDie()).getPage(), null);
+                        new HtmlDivision(null, HtmlDivision.TAG_NAME, (HtmlPage) getDomNodeOrDie().getPage(), null);
                     HTMLParser.parseFragment(proxyNode, tagName);
                     final DomNode resultNode = proxyNode.getFirstChild();
                     resultNode.removeAllChildren();
@@ -801,7 +800,7 @@ public class Document extends EventNode {
                     }
                 }
 
-                final Page page = ((DomNode) getDomNodeOrDie()).getPage();
+                final Page page = getDomNodeOrDie().getPage();
                 final DomNode element;
                 if (page instanceof HtmlPage) {
                     element = ((HtmlPage) page).createHtmlElement(tagName);
@@ -838,7 +837,7 @@ public class Document extends EventNode {
         Object result = NOT_FOUND;
         try {
             final HtmlElement htmlElement =
-                ((HtmlPage) ((DomNode) getDomNodeOrDie()).getPage()).createHtmlElementNS(namespaceURI, qualifiedName);
+                ((HtmlPage) getDomNodeOrDie().getPage()).createHtmlElementNS(namespaceURI, qualifiedName);
             final Object jsElement = getScriptableFor(htmlElement);
 
             if (jsElement == NOT_FOUND) {
@@ -861,8 +860,7 @@ public class Document extends EventNode {
      * @return a newly created document fragment
      */
     public Object jsxFunction_createDocumentFragment() {
-        final DomDocumentFragment fragment =
-            ((SgmlPage) ((DomNode) getDomNodeOrDie()).getPage()).createDomDocumentFragment();
+        final DomDocumentFragment fragment = ((SgmlPage) getDomNodeOrDie().getPage()).createDomDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));
@@ -909,7 +907,7 @@ public class Document extends EventNode {
     public Object jsxFunction_createTextNode(final String newData) {
         Object result = NOT_FOUND;
         try {
-            final DomNode domNode = new DomText(((DomNode) getDomNodeOrDie()).getPage(), newData);
+            final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
             final Object jsElement = getScriptableFor(domNode);
 
             if (jsElement == NOT_FOUND) {
@@ -1014,7 +1012,7 @@ public class Document extends EventNode {
      * @return the imported node that belongs to this Document
      */
     public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
-        return ((DomNode) importedNode.getDomNodeOrDie()).cloneNode(deep).getScriptObject();
+        return importedNode.getDomNodeOrDie().cloneNode(deep).getScriptObject();
     }
 
     /**
@@ -1025,7 +1023,7 @@ public class Document extends EventNode {
      */
     @Override
     protected Object getWithPreemption(final String name) {
-        final HtmlPage page = getDomNodeOrNull();
+        final HtmlPage page = (HtmlPage) getDomNodeOrNull();
         if (page == null) {
             return NOT_FOUND;
         }
@@ -1336,7 +1334,7 @@ public class Document extends EventNode {
             xPathResult.setParentScope(getParentScope());
             xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
         }
-        xPathResult.init(((DomNode) contextNode.getDomNodeOrDie()).getByXPath(expression), type);
+        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
         return xPathResult;
     }
 

@@ -108,33 +108,30 @@ public class HtmlForm extends ClickableElement {
      * treat this as if it was called by JavaScript. In this case, the onsubmit
      * handler will not get executed.
      *
-     * @param <P> the type of the new page that reflects the results of this submission
      * @param submitElement the element that caused the submit to occur
      * @return a new page that reflects the results of this submission
      * @exception IOException If an IO error occurs
      */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P submit(final SubmittableElement submitElement) throws IOException {
+    public Page submit(final SubmittableElement submitElement) throws IOException {
         final HtmlPage htmlPage = getPage();
         if (htmlPage.getWebClient().isJavaScriptEnabled()) {
             if (submitElement != null) {
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
                 if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-                    return (P) scriptResult.getNewPage();
+                    return scriptResult.getNewPage();
                 }
             }
 
             final String action = getActionAttribute();
             if (TextUtil.startsWithIgnoreCase(action, JAVASCRIPT_PREFIX)) {
-                return (P) htmlPage.executeJavaScriptIfPossible(action, "Form action",
-                    getStartLineNumber()).getNewPage();
+                return htmlPage.executeJavaScriptIfPossible(action, "Form action", getStartLineNumber()).getNewPage();
             }
         }
         else {
             if (TextUtil.startsWithIgnoreCase(getActionAttribute(), JAVASCRIPT_PREFIX)) {
                 // The action is JavaScript but JavaScript isn't enabled.
                 // Return the current page.
-                return (P) htmlPage;
+                return htmlPage;
             }
         }
 
@@ -187,7 +184,7 @@ public class HtmlForm extends ClickableElement {
         settings.addAdditionalHeader("Referer", htmlPage.getWebResponse().getUrl().toExternalForm());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        return (P) htmlPage.getWebClient().getPage(
+        return htmlPage.getWebClient().getPage(
                 webWindow,
                 htmlPage.getResolvedTarget(getTargetAttribute()),
                 settings);
@@ -235,15 +232,13 @@ public class HtmlForm extends ClickableElement {
      * reset. Note that the returned page may or may not be the same as the original page, based on JavaScript
      * event handlers, etc.
      *
-     * @param <P> the type of the page contained by this form's window after the reset
      * @return the page contained by this form's window after the reset
      */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P reset() {
+    public Page reset() {
         final HtmlPage htmlPage = getPage();
         final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
         if (scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult())) {
-            return (P) scriptResult.getNewPage();
+            return scriptResult.getNewPage();
         }
 
         for (final HtmlElement next : getAllHtmlChildElements()) {
@@ -252,7 +247,7 @@ public class HtmlForm extends ClickableElement {
             }
         }
 
-        return (P) htmlPage;
+        return htmlPage;
     }
 
     /**

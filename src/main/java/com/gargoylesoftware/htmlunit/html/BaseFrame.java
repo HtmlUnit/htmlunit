@@ -158,7 +158,7 @@ public abstract class BaseFrame extends StyledElement {
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (url.sameFile(((Page) window.getEnclosedPage()).getWebResponse().getUrl())) {
+            if (url.sameFile(window.getEnclosedPage().getWebResponse().getUrl())) {
                 return true;
             }
             if (window == window.getParentWindow()) { // should getParentWindow() return null on top windows?
@@ -282,14 +282,11 @@ public abstract class BaseFrame extends StyledElement {
     /**
      * Returns the currently loaded page in the enclosed window.
      * This is a facility method for <code>getEnclosedWindow().getEnclosedPage()</code>.
-     *
-     * @param <P> the type of the currently loaded page in the enclosed window
      * @see WebWindow#getEnclosedPage()
      * @return the currently loaded page in the enclosed window, or <tt>null</tt> if no page has been loaded
      */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P getEnclosedPage() {
-        return (P) getEnclosedWindow().getEnclosedPage();
+    public Page getEnclosedPage() {
+        return getEnclosedWindow().getEnclosedPage();
     }
 
     /**

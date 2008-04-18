@@ -150,7 +150,7 @@ public class GWT14Test extends WebTestCase {
         final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/I18N.html?locale=fr";
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         //visible space in browser is not normal space but '\u00A0' instead, as noted by the following test in browser:
@@ -196,7 +196,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String expectedValue) {
-        final HtmlTableDataCell cell = page.getHtmlElementById(id);
+        final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
         tableDataCell(cell, expectedValue);
     }
 
@@ -246,7 +246,7 @@ public class GWT14Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     private void i18n(final HtmlPage page, final String id, final String[] expectedValues) {
-        final HtmlTableDataCell cell = page.getHtmlElementById(id);
+        final HtmlTableDataCell cell = (HtmlTableDataCell) page.getHtmlElementById(id);
         final Object child = cell.getFirstChild();
         if (child instanceof HtmlSelect) {
             final HtmlSelect select = (HtmlSelect) child;
@@ -371,7 +371,7 @@ public class GWT14Test extends WebTestCase {
         final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/DynaTable.html";
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
 
         final String[] firstRow = {"Inman Mendez",
             "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
@@ -407,7 +407,7 @@ public class GWT14Test extends WebTestCase {
         final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/KitchenSink.html";
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
 
         final HtmlDivision infoDiv = (HtmlDivision) page.getFirstByXPath("//div[@class='ks-Info']");
@@ -450,7 +450,7 @@ public class GWT14Test extends WebTestCase {
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         }
 
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
         page.getEnclosingWindow().getThreadManager().joinAll(10000);
         return page;
     }

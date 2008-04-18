@@ -95,7 +95,7 @@ public class UIEventTest extends WebTestCase {
         final String[] expected = {"undefined", "[object Window]"};
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        final HtmlButtonInput button = page.getHtmlElementById("b");
+        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("b");
         button.click();
         assertEquals(expected, actual);
     }

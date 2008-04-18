@@ -63,7 +63,7 @@ public class HtmlHiddenInputTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlInput input = page.getHtmlElementById("foo");
+        final HtmlInput input = (HtmlInput) page.getHtmlElementById("foo");
         assertEquals("", input.asText());
     }
 }

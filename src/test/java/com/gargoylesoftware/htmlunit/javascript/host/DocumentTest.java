@@ -196,11 +196,11 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("", page.getTitleText());
 
         final HtmlAnchor testAnchor = page.getAnchorByName("testJavascript");
-        final HtmlPage secondPage = testAnchor.click();
+        final HtmlPage secondPage = (HtmlPage) testAnchor.click();
         assertEquals("second", secondPage.getTitleText());
     }
 
@@ -887,7 +887,7 @@ public class DocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"http://script"};
@@ -1349,7 +1349,7 @@ public class DocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         try {
@@ -1391,14 +1391,14 @@ public class DocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage mainPage = webClient.getPage("http://main");
+        final HtmlPage mainPage = (HtmlPage) webClient.getPage("http://main");
         assertEquals("Main", mainPage.getTitleText());
 
-        final HtmlInlineFrame iFrame = mainPage.getHtmlElementById("iframe");
+        final HtmlInlineFrame iFrame = (HtmlInlineFrame) mainPage.getHtmlElementById("iframe");
 
         assertEquals(URL_SECOND.toExternalForm(), iFrame.getSrcAttribute());
 
-        final HtmlPage enclosedPage = iFrame.getEnclosedPage();
+        final HtmlPage enclosedPage = (HtmlPage) iFrame.getEnclosedPage();
         // This will blow up if the script hasn't been written to the document
         // and executed so the second page has been loaded.
         enclosedPage.getHtmlElementById("second");
@@ -1598,8 +1598,8 @@ public class DocumentTest extends WebTestCase {
         HtmlPage page = loadPage(browserVersion, html, actual);
         assertEquals("click", page.getBody().asText());
 
-        final HtmlSpan span = page.getHtmlElementById("s");
-        page = span.click();
+        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
+        page = (HtmlPage) span.click();
         assertEquals("12", page.getBody().asText());
     }
 
@@ -1657,7 +1657,7 @@ public class DocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         assertEquals(new String[] {"http://ref"}, collectedAlerts);
@@ -2034,7 +2034,7 @@ public class DocumentTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"one", "two", "three", "four" };
@@ -2476,7 +2476,7 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         client.setWebConnection(webConnection);
         webConnection.setResponse(URL_FIRST, content);
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         assertTrue(page.asText().indexOf("Hello World") >= 0);
     }
 
@@ -2499,7 +2499,7 @@ public class DocumentTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client);
         client.setWebConnection(webConnection);
         webConnection.setResponse(URL_FIRST, content);
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final List<HtmlAnchor> anchorList = page.getAnchors();
         assertEquals(1, anchorList.size());
         final HtmlAnchor anchor = anchorList.get(0);
@@ -2754,7 +2754,7 @@ public class DocumentTest extends WebTestCase {
         webConnection.setResponseAsGenericHtml(blankURL, "blank");
         client.setWebConnection(webConnection);
 
-        final HtmlPage framesetPage = client.getPage(framesetURL);
+        final HtmlPage framesetPage = (HtmlPage) client.getPage(framesetURL);
         final FrameWindow frame = framesetPage.getFrames().get(0);
 
         assertNotNull(frame);
@@ -3029,7 +3029,7 @@ public class DocumentTest extends WebTestCase {
 
         final String expected = "#document-fragment_null_11_null_0_";
         final HtmlPage page = loadPage(content);
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals(expected, textArea.getText());
     }
 
@@ -3393,7 +3393,7 @@ public class DocumentTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(version, html, actual);
-        final HtmlSpan span = page.getHtmlElementById("s");
+        final HtmlSpan span = (HtmlSpan) page.getHtmlElementById("s");
         span.click();
         assertEquals(expected, actual);
     }

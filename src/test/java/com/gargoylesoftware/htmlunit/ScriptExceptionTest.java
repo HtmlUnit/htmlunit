@@ -151,7 +151,7 @@ public final class ScriptExceptionTest extends WebTestCase {
         final URL url = getClass().getClassLoader().getResource(fileName);
         assertNotNull(url);
         try {
-            final HtmlPage page = webClient.getPage(url);
+            final HtmlPage page = (HtmlPage) webClient.getPage(url);
             ((ClickableElement) page.getHtmlElementById("clickMe")).click();
             fail();
         }

@@ -103,7 +103,7 @@ public class XMLSerializerTest extends WebTestCase {
             + "</body></html>";
         
         final HtmlPage page = loadPage(browserVersion, content, null);
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
 
@@ -163,7 +163,7 @@ public class XMLSerializerTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);
-        final HtmlTextArea textArea = page.getHtmlElementById("myTextArea");
+        final HtmlTextArea textArea = (HtmlTextArea) page.getHtmlElementById("myTextArea");
         assertEquals(expectedString, textArea.getText());
     }
 }

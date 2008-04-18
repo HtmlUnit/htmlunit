@@ -68,10 +68,10 @@ public class HtmlLabelTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlCheckBoxInput checkBox = page.getHtmlElementById("testCheckbox");
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("testCheckbox");
 
         assertFalse(checkBox.isChecked());
-        final HtmlLabel label = page.getHtmlElementById("testLabel");
+        final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("testLabel");
         label.click();
         assertTrue(checkBox.isChecked());
         final String[] expectedAlerts = {"label", "checkbox"};
@@ -94,11 +94,11 @@ public class HtmlLabelTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlCheckBoxInput checkBox = page.getHtmlElementById("testCheckbox");
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("testCheckbox");
 
-        final HtmlLabel label = page.getHtmlElementById("testLabel1");
+        final HtmlLabel label = (HtmlLabel) page.getHtmlElementById("testLabel1");
         assertTrue(checkBox == label.getReferencedElement());
-        final HtmlLabel label2 = page.getHtmlElementById("testLabel2");
+        final HtmlLabel label2 = (HtmlLabel) page.getHtmlElementById("testLabel2");
         assertNull(label2.getReferencedElement());
     }
 

@@ -144,8 +144,7 @@ public abstract class SgmlPage extends DomNode implements Page {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public SgmlPage getPage() {
+    public Page getPage() {
         return this;
     }
 

@@ -99,8 +99,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public HtmlPage setChecked(final boolean isChecked) {
+    public Page setChecked(final boolean isChecked) {
         if (isChecked) {
             setAttributeValue("checked", "checked");
         }
@@ -130,7 +129,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
-    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage) throws IOException {
         setChecked(!isChecked());
         return super.doClickAction(defaultPage);
     }

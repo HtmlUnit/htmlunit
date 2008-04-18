@@ -41,7 +41,6 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -109,7 +108,7 @@ public class RowContainer extends HTMLElement {
         final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rowCount);
         if (rowIndexValid) {
             final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(rowIndex));
-            ((DomNode) row.getDomNodeOrDie()).remove();
+            row.getDomNodeOrDie().remove();
         }
     }
 
@@ -163,18 +162,18 @@ public class RowContainer extends HTMLElement {
     protected Object insertRow(final int index) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
-        final HtmlElement newRow = ((HtmlPage) ((DomNode) getDomNodeOrDie()).getPage()).createHtmlElement("tr");
+        final HtmlElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createHtmlElement("tr");
         if (rowCount == 0) {
-            ((DomNode) getDomNodeOrDie()).appendChild(newRow);
+            getDomNodeOrDie().appendChild(newRow);
         }
         else {
             final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index >= rowCount - 1) {
-                ((DomNode) row.getDomNodeOrDie()).getParentNode().appendChild(newRow);
+                row.getDomNodeOrDie().getParentNode().appendChild(newRow);
             }
             else {
-                ((DomNode) row.getDomNodeOrDie()).insertBefore(newRow);
+                row.getDomNodeOrDie().insertBefore(newRow);
             }
         }
         return getScriptableFor(newRow);
@@ -195,7 +194,7 @@ public class RowContainer extends HTMLElement {
         if (sourceIndexValid && targetIndexValid) {
             final SimpleScriptable sourceRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(sourceIndex));
             final SimpleScriptable targetRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(targetIndex));
-            ((DomNode) targetRow.getDomNodeOrDie()).insertBefore(sourceRow.getDomNodeOrDie());
+            targetRow.getDomNodeOrDie().insertBefore(sourceRow.getDomNodeOrDie());
             return sourceRow;
         }
         return null;

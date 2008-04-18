@@ -182,8 +182,8 @@ public class WebClientTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_GARGOYLE);
-        final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_GARGOYLE);
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("a2");
 
         final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(
@@ -192,7 +192,7 @@ public class WebClientTest extends WebTestCase {
         assertEquals(firstExpectedEvents, eventCatcher.getEvents());
 
         eventCatcher.clear();
-        final HtmlPage secondPage = anchor.click();
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
 
         final List<WebWindowEvent> secondExpectedEvents = Arrays.asList(new WebWindowEvent[] {
             new WebWindowEvent(
@@ -225,7 +225,7 @@ public class WebClientTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("foo", firstPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
@@ -264,18 +264,18 @@ public class WebClientTest extends WebTestCase {
 
         client.setWebConnection(webConnection);
 
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlPage firstPage = (HtmlPage) client.getPage(URL_FIRST);
         assertEquals("first", firstPage.getTitleText());
 
         final EventCatcher eventCatcher = new EventCatcher();
         eventCatcher.listenTo(client);
 
-        final HtmlInlineFrame frame = firstPage.getHtmlElementById("frame1");
-        final HtmlPage thirdPage = frame.getEnclosedPage();
+        final HtmlInlineFrame frame = (HtmlInlineFrame) firstPage.getHtmlElementById("frame1");
+        final HtmlPage thirdPage = (HtmlPage) frame.getEnclosedPage();
 
         // Load the second page
-        final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
-        final HtmlPage secondPage = anchor.click();
+        final HtmlAnchor anchor = (HtmlAnchor) firstPage.getHtmlElementById("a2");
+        final HtmlPage secondPage = (HtmlPage) anchor.click();
         assertEquals("second", secondPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
@@ -334,7 +334,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
+        final HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
         final WebResponse webResponse = page.getWebResponse();
         // A redirect should have happened
         assertEquals(200, webResponse.getStatusCode());
@@ -599,7 +599,7 @@ public class WebClientTest extends WebTestCase {
         //
         // Second time redirection is turned on (default setting)
         //
-        page = webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
+        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
         webResponse = page.getWebResponse();
         if (expectedRedirectedRequestMethod == null) {
             // No redirect should have happened
@@ -620,7 +620,7 @@ public class WebClientTest extends WebTestCase {
         // Second time redirection is turned off
         //
         webClient.setRedirectEnabled(false);
-        page = webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
+        page = (HtmlPage) webClient.getPage(new WebRequestSettings(url, initialRequestMethod));
         webResponse = page.getWebResponse();
         assertEquals(statusCode, webResponse.getStatusCode());
         assertEquals(initialRequestMethod, webConnection.getLastMethod());
@@ -674,7 +674,6 @@ public class WebClientTest extends WebTestCase {
     /** A PageCreator that collects data. */
     private class CollectingPageCreator implements PageCreator {
         private final List<Page> collectedPages_;
-
         /**
          * Creates an instance.
          * @param list the list that will contain the data
@@ -682,17 +681,19 @@ public class WebClientTest extends WebTestCase {
         public CollectingPageCreator(final List<Page> list) {
             collectedPages_ = list;
         }
-
+        
         /**
-         * {@inheritDoc}
+         * Creates a page.
+         * @param webResponse the web response
+         * @param webWindow the web window
+         * @return the new page
+         * @throws IOException if an IO problem occurs
          */
-        @SuppressWarnings("unchecked")
-        public <P extends Page> P createPage(final WebResponse webResponse, final WebWindow webWindow)
-            throws IOException {
+        public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
             final Page page = new TextPage(webResponse, webWindow);
             webWindow.setEnclosedPage(page);
             collectedPages_.add(page);
-            return (P) page;
+            return page;
         }
     }
 
@@ -713,7 +714,7 @@ public class WebClientTest extends WebTestCase {
 
         final String urlString = "http://first?a=b";
         final URL url = new URL(urlString);
-        final HtmlPage page = client.getPage(new WebRequestSettings(url, SubmitMethod.POST));
+        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(url, SubmitMethod.POST));
 
         assertEquals(urlString, page.getWebResponse().getUrl());
     }
@@ -735,7 +736,7 @@ public class WebClientTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final Page page2 = page.getAnchors().get(0).click();
         assertEquals("http://first/foo.html?id=UYIUYTY//YTYUY..F", page2.getWebResponse().getUrl());
     }
@@ -757,31 +758,31 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         // with query string not encoded
-        HtmlPage page = client.getPage("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8));
+        HtmlPage page = (HtmlPage) client.getPage("http://first?a=b c&d=" + ((char) 0xE9) + ((char) 0xE8));
         assertEquals("http://first?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
 
         // with query string already encoded
-        page = client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
+        page = (HtmlPage) client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
         assertEquals("http://first?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getUrl());
 
         // with query string partially encoded
-        page = client.getPage("http://first?a=b%20c&d=e f");
+        page = (HtmlPage) client.getPage("http://first?a=b%20c&d=e f");
         assertEquals("http://first?a=b%20c&d=e%20f", page.getWebResponse().getUrl());
 
         // with anchor
-        page = client.getPage("http://first?a=b c#myAnchor");
+        page = (HtmlPage) client.getPage("http://first?a=b c#myAnchor");
         assertEquals("http://first?a=b%20c#myAnchor", page.getWebResponse().getUrl());
 
         // with query string containing encoded "&", "=", "+", ",", and "$"
-        page = client.getPage("http://first?a=%26%3D%20%2C%24");
+        page = (HtmlPage) client.getPage("http://first?a=%26%3D%20%2C%24");
         assertEquals("http://first?a=%26%3D%20%2C%24", page.getWebResponse().getUrl());
 
         // with character to encode in path
-        page = client.getPage("http://first/page 1.html");
+        page = (HtmlPage) client.getPage("http://first/page 1.html");
         assertEquals("http://first/page%201.html", page.getWebResponse().getUrl());
 
         // with character to encode in path
-        page = client.getPage("http://first/page 1.html");
+        page = (HtmlPage) client.getPage("http://first/page 1.html");
         assertEquals("http://first/page%201.html", page.getWebResponse().getUrl());
     }
 
@@ -807,7 +808,7 @@ public class WebClientTest extends WebTestCase {
 
         final WebClient client = new WebClient();
         final URL url = new URL("file://" + tmpFile.getCanonicalPath());
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
 
         assertEquals(htmlContent, page.getWebResponse().getContentAsString());
         assertEquals("text/html", page.getWebResponse().getContentType());
@@ -817,7 +818,7 @@ public class WebClientTest extends WebTestCase {
         // Test a file URL with a query portion (needs to work for Dojo, for example).
 
         final URL url2 = new URL(url.toExternalForm() + "?with=query");
-        final HtmlPage page2 = client.getPage(url2);
+        final HtmlPage page2 = (HtmlPage) client.getPage(url2);
 
         assertEquals(htmlContent, page2.getWebResponse().getContentAsString());
         assertEquals("text/html", page2.getWebResponse().getContentType());
@@ -827,7 +828,7 @@ public class WebClientTest extends WebTestCase {
         // Test a file URL with a ref portion (needs to work for Dojo, for example).
 
         final URL url3 = new URL(url.toExternalForm() + "#reference");
-        final HtmlPage page3 = client.getPage(url3);
+        final HtmlPage page3 = (HtmlPage) client.getPage(url3);
 
         assertEquals(htmlContent, page3.getWebResponse().getContentAsString());
         assertEquals("text/html", page3.getWebResponse().getContentType());
@@ -889,7 +890,7 @@ public class WebClientTest extends WebTestCase {
 
         final URL url = URL_FIRST;
 
-        final HtmlPage page = webClient.getPage(url);
+        final HtmlPage page = (HtmlPage) webClient.getPage(url);
         assertEquals("Second", page.getTitleText());
     }
 
@@ -1082,8 +1083,11 @@ public class WebClientTest extends WebTestCase {
         final WebResponse webResponse = new StringWebResponse(
             "<html><head><title>first</title></head><body></body></html>", URL_GARGOYLE);
 
-        final HtmlPage page = webClient.loadWebResponseInto(webResponse, webClient.getCurrentWindow());
-        assertEquals("first", page.getTitleText());
+        final Page page = webClient.loadWebResponseInto(webResponse, webClient.getCurrentWindow());
+        assertTrue(HtmlPage.class.isInstance(page));
+
+        final HtmlPage htmlPage = (HtmlPage) page;
+        assertEquals("first", htmlPage.getTitleText());
     }
 
     /**
@@ -1113,7 +1117,7 @@ public class WebClientTest extends WebTestCase {
             assertEquals(e.getStatusMessage(), "BOOM");
             assertEquals(firstContent, e.getResponse().getContentAsString());
         }
-        final HtmlPage page = webClient.getCurrentWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
         assertEquals("Hello World", page.getTitleText());
     }
 
@@ -1422,7 +1426,7 @@ public class WebClientTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         for (int i = 0; i < 100; i++) {
             page.getFormByName("myform").submit((SubmittableElement) null);
         }
@@ -1450,8 +1454,8 @@ public class WebClientTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlPage pageInFrame = ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage pageInFrame = (HtmlPage) ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
         pageInFrame.getAnchors().get(0).click();
 
         final String[] expectedAlerts = {"null", "null"};

@@ -187,7 +187,7 @@ public class Sarissa0993Test extends WebTestCase {
             if (Page_ == null) {
                 final WebClient client = getWebClient();
                 final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/test/testsarissa.html";
-                Page_ = client.getPage(url);
+                Page_ = (HtmlPage) client.getPage(url);
                 ((HtmlButton) Page_.getFirstByXPath("//button")).click();
                 
                 // dump the result page

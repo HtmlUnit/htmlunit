@@ -82,7 +82,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
@@ -91,7 +91,7 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo",
                 secondPage.getWebResponse().getUrl());
@@ -116,7 +116,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         assertNotNull(select);
@@ -124,7 +124,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo",
                 secondPage.getWebResponse().getUrl());
@@ -149,7 +149,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
@@ -158,7 +158,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.setSelectedAttribute("option3", true);
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
@@ -183,7 +183,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
@@ -193,7 +193,7 @@ public class HtmlSelectTest extends WebTestCase {
         select.setSelectedAttribute("option2", true);
 
         // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         assertEquals("url",
                 URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo",
@@ -218,7 +218,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final List<HtmlOption> expected = new ArrayList<HtmlOption>();
@@ -246,7 +246,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final List<HtmlOption> expected = new ArrayList<HtmlOption>();
@@ -273,7 +273,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
         final List<HtmlOption> expected = new ArrayList<HtmlOption>();
@@ -299,7 +299,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlSelect select = page.getHtmlElementById("mySelect");
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("mySelect");
 
         assertEquals(Collections.EMPTY_LIST, select.getSelectedOptions());
     }
@@ -322,7 +322,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectByName("select1");
 
@@ -353,7 +353,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
 
@@ -380,7 +380,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlSelect select = page.getHtmlElementById("select1");
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("select1");
         assertTrue(select.isMultipleSelectEnabled());
     }
 
@@ -403,7 +403,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select2").get(0);
         assertEquals("s2o2", select.getOptionByValue("option2").asText());
@@ -427,7 +427,7 @@ public class HtmlSelectTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
 
@@ -452,7 +452,7 @@ public class HtmlSelectTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
-        final HtmlOption option = page.getHtmlElementById("option2");
+        final HtmlOption option = (HtmlOption) page.getHtmlElementById("option2");
         option.setSelected(true);
     }
 
@@ -481,7 +481,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlSelect theSelect = page.getHtmlElementById("theSelect");
+        final HtmlSelect theSelect = (HtmlSelect) page.getHtmlElementById("theSelect");
         assertNotNull(theSelect);
 
         assertEquals(4, theSelect.getOptions().size());
@@ -529,7 +529,7 @@ public class HtmlSelectTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlSelect theSelect = page.getHtmlElementById("theSelect");
+        final HtmlSelect theSelect = (HtmlSelect) page.getHtmlElementById("theSelect");
 
         assertNotNull(theSelect);
         assertEquals(3, theSelect.getOptions().size());
@@ -570,7 +570,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlSelect select = page.getHtmlElementById("mySelect");
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("mySelect");
 
         assertEquals("", select.asText());
     }
@@ -620,7 +620,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
 
-        final HtmlSelect select = page.getHtmlElementById("mySelect");
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("mySelect");
         final HtmlOption option = select.getOptionByValue("option2");
         final Page page2 = select.setSelectedAttribute(option, true);
         assertEquals(page, page2);
@@ -642,7 +642,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlOption option1 = page.getHtmlElementById("option1");
+        final HtmlOption option1 = (HtmlOption) page.getHtmlElementById("option1");
         assertEquals("about:blank", option1.click().getWebResponse().getUrl());
     }
 
@@ -703,7 +703,7 @@ public class HtmlSelectTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.emptyList(), collectedAlerts);
 
-        final HtmlSelect select = page.getHtmlElementById("select1");
+        final HtmlSelect select = (HtmlSelect) page.getHtmlElementById("select1");
         assertNull(page.getFocusedElement());
         select.getOption(0).setSelected(true);
         assertSame(select, page.getFocusedElement());

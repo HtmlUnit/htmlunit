@@ -189,7 +189,7 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox1");
+        final HtmlCheckBoxInput checkBox = (HtmlCheckBoxInput) page.getHtmlElementById("checkbox1");
         assertFalse(checkBox.isChecked());
         ((HtmlAnchor) page.getHtmlElementById("clickme")).click();
         assertTrue(checkBox.isChecked());
@@ -226,9 +226,9 @@ public class HTMLInputElementTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final HtmlRadioButtonInput radioA = page.getHtmlElementById("radioA");
-        final HtmlRadioButtonInput radioB = page.getHtmlElementById("radioB");
-        final HtmlRadioButtonInput radioC = page.getHtmlElementById("radioC");
+        final HtmlRadioButtonInput radioA = (HtmlRadioButtonInput) page.getHtmlElementById("radioA");
+        final HtmlRadioButtonInput radioB = (HtmlRadioButtonInput) page.getHtmlElementById("radioB");
+        final HtmlRadioButtonInput radioC = (HtmlRadioButtonInput) page.getHtmlElementById("radioC");
         assertTrue(radioA.isChecked());
         assertFalse(radioB.isChecked());
         assertFalse(radioC.isChecked());
@@ -313,7 +313,7 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
         form.submit((SubmittableElement) null);
@@ -342,7 +342,7 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
 
         final HtmlForm form = page.getFormByName("form1");
         form.submit((SubmittableElement) null);
@@ -685,8 +685,8 @@ public class HTMLInputElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlPage page2 = page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getInputByName("field1").setValueAttribute("bla");
         assertEquals("page 2", page2.getTitleText());
     }
 
@@ -743,7 +743,7 @@ public class HTMLInputElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, content, null);
-        final HtmlTextInput input = page.getHtmlElementById("myInput");
+        final HtmlTextInput input = (HtmlTextInput) page.getHtmlElementById("myInput");
         assertEquals("me te", input.getSelectedText());
     }
 }

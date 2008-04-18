@@ -79,7 +79,7 @@ public class HtmlResetInputTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
         
-        final HtmlForm form = page.getHtmlElementById("form1");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
         final HtmlResetInput resetInput = (HtmlResetInput) form.getInputByName("resetButton");
 
         // change all the values to something else
@@ -104,7 +104,7 @@ public class HtmlResetInputTest extends WebTestCase {
         assertEquals("Flintstone", ((HtmlHiddenInput) page.getHtmlElementById("hidden1")).getValueAttribute());
         assertEquals("Flintstone", ((HtmlIsIndex) page.getHtmlElementById("isindex1")).getValue());
 
-        final HtmlPage secondPage = resetInput.click();
+        final HtmlPage secondPage = (HtmlPage) resetInput.click();
         assertSame(page, secondPage);
 
         // Check to make sure all the values have been set back to their original values.
@@ -133,7 +133,7 @@ public class HtmlResetInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlResetInput input = page.getHtmlElementById("myInput");
+        final HtmlResetInput input = (HtmlResetInput) page.getHtmlElementById("myInput");
         input.click();
         
         assertEquals(expectedAlerts, collectedAlerts);

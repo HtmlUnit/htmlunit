@@ -79,9 +79,9 @@ public class HtmlButtonTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = page.getHtmlElementById("button");
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         final String[] expectedAlerts = {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -102,9 +102,9 @@ public class HtmlButtonTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = page.getHtmlElementById("button");
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         final String[] expectedAlerts = {"foo", "bar"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -125,9 +125,9 @@ public class HtmlButtonTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = page.getHtmlElementById("button");
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         final String[] expectedAlerts = {"foo", "reset"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -158,8 +158,8 @@ public class HtmlButtonTest extends WebTestCase {
             + "<button type='reset' id='resetButton' value='pushme'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
-        final HtmlForm form = page.getHtmlElementById("form1");
-        final HtmlButton resetInput = page.getHtmlElementById("resetButton");
+        final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
+        final HtmlButton resetInput = (HtmlButton) page.getHtmlElementById("resetButton");
 
         // change all the values to something else
         ((HtmlRadioButtonInput) form.getFirstByXPath(
@@ -183,7 +183,7 @@ public class HtmlButtonTest extends WebTestCase {
         assertEquals("Flintstone", ((HtmlHiddenInput) page.getHtmlElementById("hidden1")).getValueAttribute());
         assertEquals("Flintstone", ((HtmlIsIndex) page.getHtmlElementById("isindex1")).getValue());
 
-        final HtmlPage secondPage = resetInput.click();
+        final HtmlPage secondPage = (HtmlPage) resetInput.click();
         assertSame(page, secondPage);
 
         // Check to make sure all the values have been set back to their original values.
@@ -211,9 +211,9 @@ public class HtmlButtonTest extends WebTestCase {
             + "</form></body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = page.getHtmlElementById("button");
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = button.click();
+        final HtmlPage secondPage = (HtmlPage) button.click();
 
         final String[] expectedAlerts = {"bar"};
         assertEquals(expectedAlerts, collectedAlerts);
@@ -261,11 +261,11 @@ public class HtmlButtonTest extends WebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlButton button = page.getHtmlElementById("button");
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
         assertEquals(expectedType, button.getTypeAttribute());
         
-        final HtmlPage page2 = button.click();
+        final HtmlPage page2 = (HtmlPage) button.click();
         final List<NameValuePair> expectedParameters;
         final String expectedSecondPageTitle;
         if (expectedType.equals("submit")) {

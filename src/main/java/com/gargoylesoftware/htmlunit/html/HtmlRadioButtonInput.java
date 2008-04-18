@@ -102,14 +102,12 @@ public class HtmlRadioButtonInput extends HtmlInput {
     /**
      * Sets the "checked" attribute.
      *
-     * @param <P> the type of the page that occupies this input's window after setting the attribute
      * @param isChecked true if this element is to be selected
      * @return the page that occupies this window after setting checked status
      * It may be the same window or it may be a freshly loaded one.
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P setChecked(final boolean isChecked) {
+    public Page setChecked(final boolean isChecked) {
         final HtmlForm form = getEnclosingForm();
         final boolean changed = isChecked() != isChecked;
 
@@ -125,12 +123,12 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        P page = (P) getPage();
+        Page page = getPage();
 
         if (changed) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
             if (scriptResult != null) {
-                page = (P) scriptResult.getNewPage();
+                page = scriptResult.getNewPage();
             }
         }
         return page;
@@ -153,13 +151,13 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * Override of default clickAction that makes this radio button the selected
      * one when it is clicked.
      *
-     * @param <P> the type of the page that is currently loaded after execution of this method
-     * @param defaultPage the default page to return if the action does not load a new page
+     * @param defaultPage the default page to return if the action does not
+     * load a new page.
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage) throws IOException {
         setChecked(true);
         return defaultPage;
     }

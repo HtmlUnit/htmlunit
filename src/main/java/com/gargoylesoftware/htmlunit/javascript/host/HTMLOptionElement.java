@@ -73,7 +73,7 @@ public class HTMLOptionElement extends HTMLElement {
      */
     public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
-        final HtmlPage page = getWindow().getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         AttributesImpl attributes = null;
         if (defaultSelected) {
             attributes = new AttributesImpl();

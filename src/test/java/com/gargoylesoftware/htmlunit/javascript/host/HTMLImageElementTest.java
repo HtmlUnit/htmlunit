@@ -99,7 +99,7 @@ public class HTMLImageElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(content, null);
-        final HtmlImage image = page.getHtmlElementById("anImage");
+        final HtmlImage image = (HtmlImage) page.getHtmlElementById("anImage");
         assertEquals("bar.gif", image.getSrcAttribute());
     }
     

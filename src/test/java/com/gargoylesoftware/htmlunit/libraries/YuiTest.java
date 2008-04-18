@@ -268,11 +268,11 @@ public class YuiTest extends WebTestCase {
         assertNotNull(url);
 
         final WebClient client = new WebClient(version);
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
         final HtmlElement doc = page.getDocumentElement();
 
         if (buttonToPush != null) {
-            final HtmlButtonInput button = page.getHtmlElementById(buttonToPush);
+            final HtmlButtonInput button = ((HtmlButtonInput) page.getHtmlElementById(buttonToPush));
             button.click();
         }
 

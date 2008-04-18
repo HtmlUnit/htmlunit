@@ -88,14 +88,12 @@ public class HtmlAnchor extends ClickableElement {
      * Same as {@link #doClickAction(Page)}, except that it accepts an href suffix, needed when a click is
      * performed on an image map to pass information on the click position.
      *
-     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
-    protected <P extends Page> P doClickAction(final P defaultPage, final String hrefSuffix) throws IOException {
+    protected Page doClickAction(final Page defaultPage, final String hrefSuffix) throws IOException {
         final String href = getHrefAttribute() + hrefSuffix;
 
         if (mainLog_.isDebugEnabled()) {
@@ -108,7 +106,7 @@ public class HtmlAnchor extends ClickableElement {
         if (href.length() > 0 && !href.startsWith("#")) {
             final HtmlPage page = getPage();
             if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
-                return (P) page.executeJavaScriptIfPossible(
+                return page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber()).getNewPage();
             }
             final URL url = page.getFullyQualifiedUrl(href);
@@ -121,7 +119,7 @@ public class HtmlAnchor extends ClickableElement {
                         + "', using the originating URL "
                         + page.getWebResponse().getUrl());
             }
-            return (P) page.getWebClient().getPage(
+            return page.getWebClient().getPage(
                     page.getEnclosingWindow(),
                     page.getResolvedTarget(getTargetAttribute()),
                     settings);
@@ -136,13 +134,12 @@ public class HtmlAnchor extends ClickableElement {
      * behavior is to open the HREF page, or execute the HREF if it is a
      * javascript: URL.
      *
-     * @param <P> the type of the page that is currently loaded after execution of this method
      * @param defaultPage the default page to return if the action does not load a new page
      * @return the page that is currently loaded after execution of this method
      * @throws IOException if an IO error occurs
      */
     @Override
-    protected <P extends Page> P doClickAction(final P defaultPage) throws IOException {
+    protected Page doClickAction(final Page defaultPage) throws IOException {
         return doClickAction(defaultPage, "");
     }
 
@@ -305,17 +302,16 @@ public class HtmlAnchor extends ClickableElement {
      * menu to open in a new window.
      *
      * It should be noted that even web browsers will sometimes not give the expected result when using this
-     * method of following links. Links that have no real href and rely on JavaScript to do their work will fail.
+     * method of following links. Links that have no real href and rely on JavaScript to do their work will
+     * fail.
      *
-     * @param <P> the type of the page opened by this link
      * @return the page opened by this link, nested in a new {@link com.gargoylesoftware.htmlunit.TopLevelWindow}
      * @throws MalformedURLException if the href could not be converted to a valid URL
      */
-    @SuppressWarnings("unchecked")
-    public final <P extends Page> P openLinkInNewWindow() throws MalformedURLException {
+    public final Page openLinkInNewWindow() throws MalformedURLException {
         final URL target = getPage().getFullyQualifiedUrl(getHrefAttribute());
         final String windowName = "HtmlAnchor.openLinkInNewWindow() target";
         final WebWindow newWindow = getPage().getWebClient().openWindow(target, windowName);
-        return (P) newWindow.getEnclosedPage();
+        return newWindow.getEnclosedPage();
     }
 }

@@ -123,7 +123,7 @@ public class XMLDocument extends Document {
             getLog().debug("XMLDocument.load(): 'async' is true, currently treated as false.");
         }
         try {
-            final HtmlPage htmlPage = getWindow().getWebWindow().getEnclosedPage();
+            final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
             final WebRequestSettings settings = new WebRequestSettings(htmlPage.getFullyQualifiedUrl(xmlSrouce));
             final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(settings);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow(), false);
@@ -301,7 +301,7 @@ public class XMLDocument extends Document {
     @Override
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(this);
-        collection.init(((DomNode) getDomNodeOrDie()).getFirstChild(), "//" + tagName);
+        collection.init(getDomNodeOrDie().getFirstChild(), "//" + tagName);
         return collection;
     }
 

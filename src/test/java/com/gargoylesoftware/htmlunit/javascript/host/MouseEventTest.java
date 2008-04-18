@@ -74,10 +74,10 @@ public class MouseEventTest extends WebTestCase {
         assertNotNull(url);
 
         final WebClient client = new WebClient(browser);
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
         assertEquals("Mouse Event coordinates", page.getTitleText());
 
-        final HtmlTextArea textarea = page.getHtmlElementById("myTextarea");
+        final HtmlTextArea textarea = (HtmlTextArea) page.getHtmlElementById("myTextarea");
         assertEquals("", textarea.asText());
 
         ((ClickableElement) page.getHtmlElementById("div1")).click();

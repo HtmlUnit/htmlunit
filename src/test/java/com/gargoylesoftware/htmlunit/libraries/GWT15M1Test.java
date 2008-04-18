@@ -114,7 +114,7 @@ public class GWT15M1Test extends WebTestCase {
         final WebClient client = new WebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/DynaTable.html";
-        final HtmlPage page = client.getPage(url);
+        final HtmlPage page = (HtmlPage) client.getPage(url);
 
         final String[] firstRow = {"Inman Mendez",
             "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};

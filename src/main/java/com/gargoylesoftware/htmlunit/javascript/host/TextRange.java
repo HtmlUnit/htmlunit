@@ -59,7 +59,7 @@ public class TextRange extends SimpleScriptable {
      * @return the text contained within the range
      */
     public String jsxGet_text() {
-        final HtmlPage page = getWindow().getDomNodeOrDie();
+        final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
         final HtmlElement focused = page.getFocusedElement();
         if (focused instanceof HtmlTextInput) {
             final HtmlTextInput input = (HtmlTextInput) focused;

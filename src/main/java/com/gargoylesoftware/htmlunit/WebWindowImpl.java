@@ -99,9 +99,8 @@ public abstract class WebWindowImpl implements WebWindow {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P getEnclosedPage() {
-        return (P) enclosedPage_;
+    public Page getEnclosedPage() {
+        return enclosedPage_;
     }
 
     /**

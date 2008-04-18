@@ -137,8 +137,8 @@ public class HTMLSelectElementTest extends WebTestCase {
         final String[] expectedAlerts = {"3", "1", "3", "2"};
         assertEquals(expectedAlerts, collectedAlerts);
 
-        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
-        final HtmlPage newPage = button.click();
+        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+        final HtmlPage newPage = (HtmlPage) button.click();
 
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
 
@@ -169,8 +169,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
-        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
-        final HtmlPage newPage = button.click();
+        final HtmlSubmitInput button = (HtmlSubmitInput) page.getHtmlElementById("clickMe");
+        final HtmlPage newPage = (HtmlPage) button.click();
 
         assertEquals("http://test?select1=option3&submit=button", newPage.getWebResponse().getUrl());
     }
@@ -812,7 +812,7 @@ public class HTMLSelectElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         final HtmlForm form = page.getFormByName("form1");
         final HtmlSelect select = form.getSelectByName("select1");
         final Page page2 = select.setSelectedAttribute("option2", true);
@@ -932,8 +932,8 @@ public class HTMLSelectElementTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, content);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlPage page2 = page.getFormByName("test").getSelectByName("select1").getOption(0).click();
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        final HtmlPage page2 = (HtmlPage) page.getFormByName("test").getSelectByName("select1").getOption(0).click();
         assertEquals("page 2", page2.getTitleText());
     }
 

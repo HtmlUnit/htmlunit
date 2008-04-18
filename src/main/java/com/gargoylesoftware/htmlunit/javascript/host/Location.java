@@ -95,7 +95,7 @@ public class Location extends SimpleScriptable {
     public void initialize(final Window window) {
         window_ = window;
         if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            hash_ = ((Page) window_.getWebWindow().getEnclosedPage()).getWebResponse().getUrl().getRef();
+            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl().getRef();
         }
     }
 
@@ -195,7 +195,7 @@ public class Location extends SimpleScriptable {
     public void jsxSet_href(final String newLocation) throws IOException {
         // URL should be resolved from the page in which the js is executed
         // cf test FrameTest#testLocation
-        final HtmlPage page = getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
 
         if (newLocation.startsWith(JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
@@ -407,7 +407,7 @@ public class Location extends SimpleScriptable {
      * @return this location's current URL
      */
     private URL getUrl() {
-        return ((Page) window_.getWebWindow().getEnclosedPage()).getWebResponse().getUrl();
+        return window_.getWebWindow().getEnclosedPage().getWebResponse().getUrl();
     }
 
     /**

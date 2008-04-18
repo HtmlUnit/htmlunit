@@ -114,7 +114,7 @@ public class HTMLFrameElementTest extends WebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);

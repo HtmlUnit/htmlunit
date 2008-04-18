@@ -807,17 +807,15 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
     *
     * @param accessKey the key to look for
-    * @param <H> the type of the HTML element that is assigned to the specified key or null
     * @return the HTML element that is assigned to the specified key or null
     *      if no elements can be found that match the specified key.
     */
-    @SuppressWarnings("unchecked")
-    public <H extends HtmlElement> H getHtmlElementByAccessKey(final char accessKey) {
+    public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
         final List<HtmlElement> elements = getHtmlElementsByAccessKey(accessKey);
         if (elements.isEmpty()) {
             return null;
         }
-        return (H) elements.get(0);
+        return elements.get(0);
     }
 
    /**
@@ -1409,8 +1407,8 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public void deregisterFramesIfNeeded() {
         for (final WebWindow window : getFrames()) {
             getWebClient().deregisterWebWindow(window);
-            if (((Page) window.getEnclosedPage()) instanceof HtmlPage) {
-                final HtmlPage page = window.getEnclosedPage();
+            if (window.getEnclosedPage() instanceof HtmlPage) {
+                final HtmlPage page = (HtmlPage) window.getEnclosedPage();
                 if (page != null) {
                     // seems quite silly, but for instance if the src attribute of an iframe is not
                     // set, the error only occurs when leaving the page
@@ -1584,15 +1582,13 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * first one.
      *
      * @param id the ID value to search by
-     * @param <H> the type of the HTML element with the specified ID
      * @return the HTML element with the specified ID
      * @throws ElementNotFoundException if no element was found that matches the id
      */
-    @SuppressWarnings("unchecked")
-    public <H extends HtmlElement> H getHtmlElementById(final String id) throws ElementNotFoundException {
+    public HtmlElement getHtmlElementById(final String id) throws ElementNotFoundException {
         final List<HtmlElement> elements = idMap_.get(id);
         if (elements != null) {
-            return (H) elements.get(0);
+            return elements.get(0);
         }
         throw new ElementNotFoundException("*", "id", id);
     }
@@ -1774,7 +1770,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
-            if (((Page) frame.getEnclosedPage()).getWebResponse().getUrl() == WebClient.URL_ABOUT_BLANK) {
+            if (frame.getEnclosedPage().getWebResponse().getUrl() == WebClient.URL_ABOUT_BLANK) {
                 frame.loadInnerPage();
             }
         }
@@ -1861,7 +1857,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
 
         // If a page reload happened as a result of the focus change then obviously this
         // element will not have the focus because its page has gone away.
-        return this == (Page) getEnclosingWindow().getEnclosedPage();
+        return this == getEnclosingWindow().getEnclosedPage();
     }
 
     /**
@@ -1955,7 +1951,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Override cloneNode to add cloned elements to the clone, not to the original.
      */
     @Override
-    public HtmlPage cloneNode(final boolean deep) {
+    public DomNode cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s

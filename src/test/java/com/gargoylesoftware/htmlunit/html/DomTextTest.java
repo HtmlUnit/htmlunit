@@ -175,7 +175,7 @@ public class DomTextTest extends WebTestCase {
         webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, "UTF-8"), 200, "OK", "text/html");
         client.setWebConnection(webConnection);
 
-        final HtmlPage page = client.getPage(URL_GARGOYLE);
+        final HtmlPage page = (HtmlPage) client.getPage(URL_GARGOYLE);
         final String xml = page.getHtmlElementById("foo").getFirstChild().asXml().trim();
         assertEquals(expectedValues.length, xml.length());
         int index = 0;

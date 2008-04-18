@@ -215,7 +215,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final ClickableElement element = page.getHtmlElementById("clickId");
+        final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
         element.type('A');
         element.type('B');
         element.click();
@@ -251,7 +251,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(content, collectedAlerts);
-        final ClickableElement element = page.getHtmlElementById("clickId");
+        final ClickableElement element = (ClickableElement) page.getHtmlElementById("clickId");
         element.type('A', shiftKey, ctrlKey, altKey);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -309,9 +309,9 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final HtmlButton button = page.getHtmlElementById("button");
+        final HtmlButton button = (HtmlButton) page.getHtmlElementById("button");
 
-        final HtmlPage secondPage = button.click(shiftKey, ctrlKey, altKey);
+        final HtmlPage secondPage = (HtmlPage) button.click(shiftKey, ctrlKey, altKey);
 
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -348,7 +348,7 @@ public class EventTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(version, content, collectedAlerts);
-        final ClickableElement clickable = page.getHtmlElementById("clickId");
+        final ClickableElement clickable = (ClickableElement) page.getHtmlElementById("clickId");
         clickable.click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -702,7 +702,7 @@ public class EventTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(browser, html, actual);
-        final HtmlDivision div = page.getHtmlElementById("div");
+        final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("div");
         div.click();
         assertEquals(expected, actual);
     }
@@ -763,7 +763,7 @@ public class EventTest extends WebTestCase {
         final String[] expected = {"capturing", "at target", "bubbling"};
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, actual);
-        final HtmlButtonInput button = page.getHtmlElementById("b");
+        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("b");
         button.click();
         assertEquals(expected, actual);
     }

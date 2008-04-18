@@ -77,7 +77,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByName("button");
-        final HtmlPage secondPage = imageInput.click();
+        final HtmlPage secondPage = (HtmlPage) imageInput.click();
         assertNotNull(secondPage);
 
         final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
@@ -108,7 +108,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByName("button");
-        final HtmlPage secondPage = imageInput.click(100, 200);
+        final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
         final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
@@ -139,7 +139,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlImageInput imageInput = (HtmlImageInput) form.getInputByValue("foo");
-        final HtmlPage secondPage = imageInput.click(100, 200);
+        final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
         final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
