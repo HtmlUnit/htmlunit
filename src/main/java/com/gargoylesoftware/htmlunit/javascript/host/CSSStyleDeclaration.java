@@ -175,6 +175,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      *
      * @param name1 the name of the first style attribute
      * @param name2 the name of the second style attribute
+     * @param shorthand the type of shorthand value to return, if any
      * @param camelCase whether or not the names are expected to be in camel case
      * @return the value of one of the two named style attributes
      */
