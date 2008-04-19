@@ -345,4 +345,25 @@ public class HTMLSelectElement extends FormField {
     public void jsxSet_size(final String size) {
         getHtmlElementOrDie().setAttributeValue("size", size);
     }
+
+    /**
+     * Returns <tt>true</tt> if the <tt>multiple</tt> attribute is set.
+     * @return <tt>true</tt> if the <tt>multiple</tt> attribute is set
+     */
+    public boolean jsxGet_multiple() {
+        return getHtmlElementOrDie().isAttributeDefined("multiple");
+    }
+
+    /**
+     * Sets or clears the <tt>multiple</tt> attribute.
+     * @param multiple <tt>true</tt> to set the <tt>multiple</tt> attribute, <tt>false</tt> to clear it
+     */
+    public void jsxSet_multiple(final boolean multiple) {
+        if (multiple) {
+            getHtmlElementOrDie().setAttribute("multiple", "multiple");
+        }
+        else {
+            getHtmlElementOrDie().removeAttribute("multiple");
+        }
+    }
 }

@@ -1087,4 +1087,36 @@ public class HTMLSelectElementTest extends WebTestCase {
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testMultiple() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(document.f['s1'].multiple);\n"
+            + "    alert(document.f['s2'].multiple);\n"
+            + "    document.f['s1'].multiple = false;\n"
+            + "    alert(document.f['s1'].multiple);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='f'>\n"
+            + "    <select name='s1' multiple>\n"
+            + "        <option name='option1'>One</option>\n"
+            + "        <option name='option2'>Two</option>\n"
+            + "        <option name='option3'>Three</option>\n"
+            + "    </select>\n"
+            + "    <select name='s2'>\n"
+            + "        <option name='option4'>Four</option>\n"
+            + "        <option name='option5'>Five</option>\n"
+            + "        <option name='option6'>Six</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String[] expected = {"true", "false", "false"};
+        final List<String> actual = new ArrayList<String>();
+        loadPage(html, actual);
+        assertEquals(expected, actual);
+    }
 }
