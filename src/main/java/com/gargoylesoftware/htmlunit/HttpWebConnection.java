@@ -59,10 +59,15 @@ import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.auth.CredentialsProvider;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.HeadMethod;
+import org.apache.commons.httpclient.methods.OptionsMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.methods.TraceMethod;
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
@@ -332,12 +337,26 @@ public class HttpWebConnection extends WebConnectionImpl {
 
     private HttpMethodBase buildHttpMethod(final SubmitMethod submitMethod, final String path) {
         final HttpMethodBase method;
-
         if (SubmitMethod.GET == submitMethod) {
             method = new GetMethod(path);
         }
         else if (SubmitMethod.POST == submitMethod) {
             method = new PostMethod(path);
+        }
+        else if (SubmitMethod.PUT == submitMethod) {
+            method = new PutMethod(path);
+        }
+        else if (SubmitMethod.DELETE == submitMethod) {
+            method = new DeleteMethod(path);
+        }
+        else if (SubmitMethod.OPTIONS == submitMethod) {
+            method = new OptionsMethod(path);
+        }
+        else if (SubmitMethod.HEAD == submitMethod) {
+            method = new HeadMethod(path);
+        }
+        else if (SubmitMethod.TRACE == submitMethod) {
+            method = new TraceMethod(path);
         }
         else {
             throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
