@@ -45,6 +45,8 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.mozilla.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -75,25 +77,38 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
 
     /** The element to which this style belongs. */
     private HTMLElement jsElement_;
+    
+    /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
+    private org.w3c.dom.css.CSSStyleDeclaration styleDeclaration_;
 
     /** The current style element index. */
     private long currentElementIndex_;
 
     /**
-     * Create an instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
     public CSSStyleDeclaration() {
         // Empty.
     }
 
     /**
-     * Create an instance and set its parent scope to the one of the provided element.
+     * Creates an instance and set its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
      */
     CSSStyleDeclaration(final HTMLElement element) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
         initialize(element);
+    }
+
+    /**
+     * Creates an instance and set its parent scope to the one of the provided element.
+     * @param element the element to which this style is bound
+     */
+    CSSStyleDeclaration(final Scriptable parentScope, final org.w3c.dom.css.CSSStyleDeclaration styleDeclaration) {
+        setParentScope(parentScope);
+        setPrototype(getPrototype(getClass()));
+        styleDeclaration_ = styleDeclaration;
     }
 
     HTMLElement getHTMLElement() {
@@ -150,7 +165,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      * @param camelCase whether or not the name is expected to be in camel case
      * @return the named style attribute value, or an empty string if it is not found
      */
-    private String getStyleAttribute(final String name, final boolean camelCase) {
+    private String getStyleAttribute(String name, final boolean camelCase) {
+        if (styleDeclaration_ != null) {
+            if (camelCase) {
+                name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
+            }
+            return styleDeclaration_.getPropertyValue(name);
+        }
         final StyleElement element = getStyleMap(camelCase).get(name);
         if (element != null && element.getValue() != null) {
             return element.getValue();
@@ -248,23 +269,28 @@ public class CSSStyleDeclaration extends SimpleScriptable implements Cloneable {
      */
     protected void setStyleAttribute(String name, final String newValue) {
         name = name.replaceAll("([A-Z])", "-$1").toLowerCase();
-        removeStyleAttribute(name);
-        final Map<String, StyleElement> styleMap = getStyleMap(false);
-        if (newValue.trim().length() != 0) {
-            final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
-            styleMap.put(name, element);
+        if (styleDeclaration_ != null) {
+            styleDeclaration_.setProperty(name, newValue, null);
+        }
+        else {
+            removeStyleAttribute(name);
+            final Map<String, StyleElement> styleMap = getStyleMap(false);
+            if (newValue.trim().length() != 0) {
+                final StyleElement element = new StyleElement(name, newValue, getCurrentElementIndex());
+                styleMap.put(name, element);
 
-            final StringBuilder buffer = new StringBuilder();
-            for (final StyleElement e : styleMap.values()) {
-                buffer.append(" ");
-                buffer.append(e.getName());
-                buffer.append(": ");
-                buffer.append(e.getValue());
-                buffer.append(";");
+                final StringBuilder buffer = new StringBuilder();
+                for (final StyleElement e : styleMap.values()) {
+                    buffer.append(" ");
+                    buffer.append(e.getName());
+                    buffer.append(": ");
+                    buffer.append(e.getValue());
+                    buffer.append(";");
+                }
+                buffer.deleteCharAt(0);
+
+                jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
             }
-            buffer.deleteCharAt(0);
-
-            jsElement_.getHtmlElementOrDie().setAttributeValue("style", buffer.toString());
         }
     }
 

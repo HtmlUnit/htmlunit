@@ -82,4 +82,12 @@ public class CSSStyleRule extends CSSRule {
     public void jsxSet_selectorText(final String selectorText) {
         ((org.w3c.dom.css.CSSStyleRule) getRule()).setSelectorText(selectorText);
     }
+
+    /**
+     * Returns the declaration-block of this rule set.
+     * @return the declaration-block of this rule set
+     */
+    public CSSStyleDeclaration jsxGet_style() {
+        return new CSSStyleDeclaration(getParentScope(), ((org.w3c.dom.css.CSSStyleRule) getRule()).getStyle());
+    }
 }

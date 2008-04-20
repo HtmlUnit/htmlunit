@@ -43,6 +43,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -58,8 +59,8 @@ public class CSSStyleRuleTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1" },
-            IE = { "[object]", "H1" })
+    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "red" },
+            IE = { "[object]", "H1", "", "red" })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -85,6 +86,9 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "    } else {\n"
                 + "      alert(r.selectorText);\n"
                 + "    }\n"
+                + "    alert(r.style.backgroundColor);\n"
+                + "    r.style.backgroundColor = 'red';\n"
+                + "    alert(r.style.backgroundColor);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -96,10 +100,9 @@ public class CSSStyleRuleTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "[object CSSStyleDeclaration]" },
-            IE = { "false", "[object]" })
-    @NotYetImplemented
-    public void testStyle() throws Exception {
+    @Alerts(IE = { "false" })
+    @NotYetImplemented({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
+    public void testReadOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
@@ -115,11 +118,8 @@ public class CSSStyleRuleTest extends WebTestCase {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    if (r.type) {\n"
-                + "      alert(r.style);\n"
-                + "    } else {\n"
+                + "    if (!r.type) {\n"
                 + "      alert(r.readOnly);\n"
-                + "      alert(r.style);\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script>\n"
