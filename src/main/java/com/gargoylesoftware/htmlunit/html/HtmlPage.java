@@ -1932,7 +1932,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * @return a clone of this instance
      */
     @Override
-    protected Object clone() {
+    protected HtmlPage clone() {
         try {
             final HtmlPage result = (HtmlPage) super.clone();
             result.documentElement_ = null;
@@ -1951,7 +1951,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      * Override cloneNode to add cloned elements to the clone, not to the original.
      */
     @Override
-    public DomNode cloneNode(final boolean deep) {
+    public HtmlPage cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
         if (deep) {
             // fix up idMap_ and result's idMap_s
