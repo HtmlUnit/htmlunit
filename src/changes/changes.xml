@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+            <action type="fix" dev="asashour" id="1946994">
+                HtmlPage: cloned page handles XPath.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: Add select.multiple support.
             </action>

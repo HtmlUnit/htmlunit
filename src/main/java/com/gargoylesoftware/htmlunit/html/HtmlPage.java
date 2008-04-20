@@ -1953,6 +1953,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     @Override
     public HtmlPage cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
+        result.setScriptObject(getScriptObject());
         if (deep) {
             // fix up idMap_ and result's idMap_s
             for (final HtmlElement child : result.getAllHtmlChildElements()) {

@@ -1851,4 +1851,20 @@ public class HtmlPageTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         assertEquals(DomNode.READY_STATE_COMPLETE, page.getReadyState());
     }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void cloneNode() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        page.getByXPath("//p");
+        final HtmlPage clonedPage = page.cloneNode(true);
+        clonedPage.getByXPath("//p");
+    }
 }
