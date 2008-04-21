@@ -335,12 +335,12 @@ public class HttpWebConnectionTest {
      *
      * @param resouceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
-     * @param servlets map of {Class, String} pairs: Class is the class, while String is the path spec
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class 
      * @return the started web server
      * @throws Exception if the test fails
      */
     public static Server startWebServer(final String resouceBase, final String[] classpath,
-            final Map<Class< ? extends Servlet>, String> servlets)
+            final Map<String, Class< ? extends Servlet>> servlets)
         throws Exception {
         final Server server = new Server(PORT);
 
@@ -348,8 +348,8 @@ public class HttpWebConnectionTest {
         context.setContextPath("/");
         context.setResourceBase(resouceBase);
         
-        for (final Class< ? extends Servlet> servlet : servlets.keySet()) {
-            final String pathSpec = servlets.get(servlet);
+        for (final String pathSpec : servlets.keySet()) {
+            final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
             context.addServlet(servlet, pathSpec);
             
         }

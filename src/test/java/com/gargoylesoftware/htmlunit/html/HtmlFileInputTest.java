@@ -225,8 +225,8 @@ public class HtmlFileInputTest extends WebTestCase {
         final File file = new File(new URI(path));
         assertTrue(file.exists());
         
-        final Map<Class< ? extends Servlet>, String> servlets = new HashMap<Class< ? extends Servlet>, String>();
-        servlets.put(Upload2Servlet.class, "/upload2");
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/upload2", Upload2Servlet.class);
 
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
         final PostMethod filePost = new PostMethod("http://localhost:" + HttpWebConnectionTest.PORT + "/upload2");
@@ -252,9 +252,9 @@ public class HtmlFileInputTest extends WebTestCase {
      */
     @Test
     public void testUploadFileWithNonASCIIName() throws Exception {
-        final Map<Class< ? extends Servlet>, String> servlets = new HashMap<Class< ? extends Servlet>, String>();
-        servlets.put(Upload1Servlet.class, "/upload1");
-        servlets.put(Upload2Servlet.class, "/upload2");
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/upload1", Upload1Servlet.class);
+        servlets.put("/upload2", Upload2Servlet.class);
         server_ = HttpWebConnectionTest.startWebServer("./", null, servlets);
 
         testUploadFileWithNonASCIIName(BrowserVersion.FIREFOX_2);
