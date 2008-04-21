@@ -43,6 +43,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.util.URIUtil;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -182,7 +185,19 @@ public class Location extends SimpleScriptable {
         if (page == null) {
             return UNKNOWN;
         }
-        return page.getWebResponse().getUrl().toExternalForm();
+        try {
+            URL url = page.getWebResponse().getUrl();
+            final boolean encodeHash = !getBrowserVersion().isIE();
+            final String hash = getHash(encodeHash);
+            if (hash != null) {
+                url = UrlUtils.getUrlWithNewRef(url, hash);
+            }
+            return url.toExternalForm();
+        }
+        catch (final MalformedURLException e) {
+            getLog().error(e.getMessage(), e);
+            return page.getWebResponse().getUrl().toExternalForm();
+        }
     }
 
     /**
@@ -251,26 +266,59 @@ public class Location extends SimpleScriptable {
      * MSDN Documentation</a>
      */
     public String jsxGet_hash() {
-        if (hash_ == null) {
+        final String hash = getHash(false);
+        if (hash != null) {
+            return "#" + hash;
+        }
+        else {
             return "";
         }
-        return hash_;
+    }
+
+    private String getHash(final boolean encoded) {
+        if (hash_ == null || hash_.length() == 0) {
+            return null;
+        }
+        else {
+            if (encoded) {
+                try {
+                    return URIUtil.encodeQuery(hash_);
+                }
+                catch (final URIException e) {
+                    getLog().error(e.getMessage(), e);
+                }
+            }
+            return hash_;
+        }
     }
 
     /**
      * Sets the hash portion of the location URL (the portion following the '#').
+     *
      * @param hash the new hash portion of the location URL
-     * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">
-     * MSDN Documentation</a>
+     * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/hash.asp">MSDN Docs</a>
      */
-    public void jsxSet_hash(String hash) throws Exception {
+    public void jsxSet_hash(String hash) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
-        if (!hash.startsWith("#")) {
-            hash = "#" + hash;
+        try {
+            if (hash != null) {
+                if (hash.startsWith("#")) {
+                    hash = hash.substring(1);
+                }
+                final boolean decodeHash = !getBrowserVersion().isIE();
+                if (decodeHash) {
+                    hash = URIUtil.decode(hash);
+                }
+                hash_ = hash;
+            }
+            else {
+                hash_ = null;
+            }
         }
-        hash_ = hash;
+        catch (final URIException e) {
+            getLog().error(e.getMessage(), e);
+        }
     }
 
     /**

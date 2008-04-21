@@ -45,6 +45,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -205,7 +206,7 @@ public class LocationTest extends WebTestCase {
         // Try page with all the appropriate parts
         client.getPage("http://www.first:77/foo?bar#wahoo");
         expectedAlerts = new String[] {
-            "wahoo",                             // hash
+            "#wahoo",                            // hash
             "www.first:77",                      // host
             "www.first",                         // hostname
             "http://www.first:77/foo?bar#wahoo", // href
@@ -251,6 +252,35 @@ public class LocationTest extends WebTestCase {
         // Verify that we didn't reload the page.
         assertTrue(page == page2);
         assertEquals(URL_FIRST, conn.getLastWebRequestSettings().getURL());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testSetHash_Encoding() throws Exception {
+        testSetHash_Encoding(BrowserVersion.FIREFOX_2,
+            "#a b", "http://www.gargoylesoftware.com/#a%20b",
+            "#a b", "http://www.gargoylesoftware.com/#a%20b");
+        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_6_0,
+            "#a b", "http://www.gargoylesoftware.com/#a b",
+            "#a%20b", "http://www.gargoylesoftware.com/#a%20b");
+        testSetHash_Encoding(BrowserVersion.INTERNET_EXPLORER_7_0,
+            "#a b", "http://www.gargoylesoftware.com/#a b",
+            "#a%20b", "http://www.gargoylesoftware.com/#a%20b");
+    }
+
+    private void testSetHash_Encoding(final BrowserVersion version, final String... expected) throws Exception {
+        final String html =
+              "<html><head><title>Test</title></head><body>\n"
+            + "<a id='a' onclick='location.hash=\"a b\"; alert(location.hash); alert(location.href);'>go1</a>\n"
+            + "<a id='b' onclick='location.hash=\"a%20b\"; alert(location.hash); alert(location.href);'>go2</a>\n"
+            + "</body></html>";
+        final List<String> actual = new ArrayList<String>();
+        final HtmlPage page = loadPage(version, html, actual);
+        ((HtmlAnchor) page.getHtmlElementById("a")).click();
+        ((HtmlAnchor) page.getHtmlElementById("b")).click();
+        assertEquals(expected, actual);
     }
 
     /**
