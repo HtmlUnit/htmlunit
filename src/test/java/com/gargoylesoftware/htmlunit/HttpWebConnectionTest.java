@@ -335,7 +335,7 @@ public class HttpWebConnectionTest {
      *
      * @param resouceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
-     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class 
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @return the started web server
      * @throws Exception if the test fails
      */
