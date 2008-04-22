@@ -115,11 +115,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @exception IOException If an io problem occurs
      * @return the new page object
      */
-    public Page createPage(
-            final WebResponse webResponse,
-            final WebWindow webWindow)
-        throws
-            IOException {
+    public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final String contentType = webResponse.getContentType().toLowerCase();
         final Page newPage;
 
@@ -151,9 +147,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @throws IOException if the page could not be created
      */
     protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final HtmlPage newPage;
-        newPage = HTMLParser.parse(webResponse, webWindow);
-        return newPage;
+        return HTMLParser.parse(webResponse, webWindow);
     }
 
     /**
@@ -164,8 +158,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return the newly created JavaScriptPage
      */
     protected JavaScriptPage createJavaScriptPage(final WebResponse webResponse, final WebWindow webWindow) {
-        final JavaScriptPage newPage;
-        newPage = new JavaScriptPage(webResponse, webWindow);
+        final JavaScriptPage newPage = new JavaScriptPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
@@ -178,8 +171,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return the newly created TextPage
      */
     protected TextPage createTextPage(final WebResponse webResponse, final WebWindow webWindow) {
-        final TextPage newPage;
-        newPage = new TextPage(webResponse, webWindow);
+        final TextPage newPage = new TextPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
@@ -192,8 +184,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return the newly created UnexpectedPage
      */
     protected UnexpectedPage createUnexpectedPage(final WebResponse webResponse, final WebWindow webWindow) {
-        final UnexpectedPage newPage;
-        newPage = new UnexpectedPage(webResponse, webWindow);
+        final UnexpectedPage newPage = new UnexpectedPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
     }
