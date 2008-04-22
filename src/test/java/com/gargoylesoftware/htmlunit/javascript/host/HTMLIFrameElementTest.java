@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -57,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
 public class HTMLIFrameElementTest extends WebTestCase {
 
@@ -143,10 +145,9 @@ public class HTMLIFrameElementTest extends WebTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
-              
+
         final WebClient webClient = new WebClient();
-        final MockWebConnection webConnection =
-            new MockWebConnection(webClient);
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
 
         webConnection.setDefaultResponse(frameContent);
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -157,6 +158,41 @@ public class HTMLIFrameElementTest extends WebTestCase {
 
         final String[] expectedAlerts = {"IFRAME"};
         webClient.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testOnLoadCalledEachTimeFrameContentChanges() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body>\n"
+            + "    <iframe id='i' onload='alert(\"loaded\");'></iframe>\n"
+            + "    <div id='d1' onclick='i.contentWindow.location.replace(\"blah.html\")'>1</div>\n"
+            + "    <div id='d2' onclick='i.contentWindow.location.href=\"blah.html\"'>2</div>\n"
+            + "    <script>var i = document.getElementById(\"i\")</script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String frameHtml = "<html><body>foo</body></html>";
+
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+
+        webConnection.setDefaultResponse(frameHtml);
+        webConnection.setResponse(URL_FIRST, html);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = (HtmlPage) webClient.getPage(URL_FIRST);
+        ((HtmlDivision) page.getHtmlElementById("d1")).click();
+        ((HtmlDivision) page.getHtmlElementById("d2")).click();
+
+        final String[] expectedAlerts = {"loaded", "loaded", "loaded"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

@@ -1196,11 +1196,14 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
      */
     @SuppressWarnings("unchecked")
     private boolean executeEventHandlersIfNeeded(final String eventType) {
+        // If JavaScript isn't enabled, there's nothing for us to do.
         if (!getWebClient().isJavaScriptEnabled()) {
             return true;
         }
 
-        final Window jsWindow = (Window) getEnclosingWindow().getScriptObject();
+        // Execute the specified event on the document element.
+        final WebWindow window = getEnclosingWindow();
+        final Window jsWindow = (Window) window.getScriptObject();
         if (jsWindow != null) {
             final HtmlElement element = getDocumentElement();
             final Event event = new Event(element, eventType);
@@ -1210,9 +1213,10 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             }
         }
 
-        // the event of the contained frames or iframe tags
-        final List<BaseFrame> frames = (List<BaseFrame>) getDocumentElement().getByXPath("//frame | //iframe");
-        for (final BaseFrame frame : frames) {
+        // If this page was loaded in a frame, execute the version of the event specified on the frame tag.
+        if (window instanceof FrameWindow) {
+            final FrameWindow fw = (FrameWindow) window;
+            final BaseFrame frame = fw.getFrameElement();
             final Function frameTagEventHandler = frame.getEventHandler("on" + eventType);
             if (frameTagEventHandler != null) {
                 if (mainLog_.isDebugEnabled()) {
@@ -1225,6 +1229,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 }
             }
         }
+
         return true;
     }
 

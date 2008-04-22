@@ -8,6 +8,10 @@
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
             <action type="fix" dev="sdanig">
+                Any onload events specified on frames and iframes are executed each time the frame
+                content changes -- not just the first time that the frame loads.
+            </action>
+            <action type="fix" dev="sdanig">
                 Make UTF-8 the default encoding for all XMLHttpRequests.
             </action>
             <action type="fix" dev="sdanig">
