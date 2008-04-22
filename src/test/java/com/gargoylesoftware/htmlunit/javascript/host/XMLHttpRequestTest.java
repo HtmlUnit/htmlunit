@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -1093,5 +1094,47 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * Verifies that the default encoding for an XMLHttpRequest is UTF-8.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testDefaultEncodingIsUTF8() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "        alert(request.responseText);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String response = "ol\u00E9";
+        final byte[] responseBytes = response.getBytes("UTF-8");
+
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setResponse(URL_SECOND, responseBytes, 200, "OK", "text/html", new ArrayList<NameValuePair>());
+        client.setWebConnection(webConnection);
+        client.getPage(URL_FIRST);
+
+        final String[] alerts = {response};
+        assertEquals(alerts, collectedAlerts);
     }
 }

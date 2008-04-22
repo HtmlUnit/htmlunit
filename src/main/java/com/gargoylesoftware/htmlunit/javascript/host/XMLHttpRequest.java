@@ -293,11 +293,11 @@ public class XMLHttpRequest extends SimpleScriptable {
     public void jsxFunction_open(final String method, final String url, final boolean async,
         final String user, final String password) {
         // (URL + Method + User + Password) become a WebRequestSettings instance.
-        
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
+            settings.setCharset("UTF-8");
             settings.addAdditionalHeader("Referer", containingPage_.getWebResponse().getUrl().toExternalForm());
             final SubmitMethod submitMethod = SubmitMethod.getInstance(method);
             settings.setSubmitMethod(submitMethod);
@@ -354,23 +354,23 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * Prepares the WebRequestSettings that will be sent
+     * Prepares the WebRequestSettings that will be sent.
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
         if (SubmitMethod.POST.equals(requestSettings_.getSubmitMethod())
-                && content != null && !Context.getUndefinedValue().equals(content)) {
+            && content != null
+            && !Context.getUndefinedValue().equals(content)) {
             final String body = Context.toString(content);
             if (body.length() > 0) {
                 getLog().debug("Setting request body to: " + body);
                 requestSettings_.setRequestBody(body);
-                requestSettings_.setCharset("UTF-8");
             }
         }
     }
 
     /**
-     * The real send job
+     * The real send job.
      * @param content the content to send
      * @param context the current context
      */
@@ -413,7 +413,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             throw Context.reportRuntimeError("The open() method must be called before setRequestHeader().");
         }
     }
-    
+
     /**
      * Override the mime type returned by the server (if any). This may be used, for example, to force a stream
      * to be treated and parsed as text/xml, even if the server does not report it as such.

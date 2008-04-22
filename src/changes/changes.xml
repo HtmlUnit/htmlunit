@@ -8,6 +8,9 @@
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
             <action type="fix" dev="sdanig">
+                Make UTF-8 the default encoding for all XMLHttpRequests.
+            </action>
+            <action type="fix" dev="sdanig">
                 Encode and decode location.hash when emulating Firefox.
             </action>
             <action type="fix" dev="asashour" id="1946994">
