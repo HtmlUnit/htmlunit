@@ -44,12 +44,14 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -58,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
  * @author Marc Guillemot
+ * @author Sudhan Moghe
  */
 public class HTMLAnchorElementTest extends WebTestCase {
 
@@ -185,6 +188,39 @@ public class HTMLAnchorElementTest extends WebTestCase {
         assertEquals("http://www.gargoylesoftware.com/foo.html",  page2.getWebResponse().getUrl());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testJavaScriptAnchorClick() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "</script></head><body>\n"
+            + "<a id='link1' href='#' onclick='document.form1.submit()'>link 1</a>\n"
+            + "<form name='form1' action='" + URL_SECOND + "' method='post'>\n"
+            + "<input type=button id='button1' value='Test' onclick='document.getElementById(\"link1\").click()'>\n"
+            + "<input name='testText'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final String secondContent
+            = "<html>\n"
+            + "<head><title>Second</title></head>\n"
+            + "</html>";
+
+        final WebClient client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7_0);
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, secondContent);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final HtmlButtonInput button = (HtmlButtonInput) page.getHtmlElementById("button1");
+        final HtmlPage page2 = (HtmlPage) button.click();
+
+        assertEquals("Second",  page2.getTitleText());
+    }
+    
     /**
      * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038.
      * In href, "this" should be the window and not the link.

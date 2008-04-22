@@ -975,6 +975,9 @@
         <property name="text" notImplemented="true" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <function name="click">
+            <browser name="Microsoft Internet Explorer"/>
+        </function>
     </class>
 
     <class name="HTMLAppletElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLAppletElement"

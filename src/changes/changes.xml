@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+            <action type="add" dev="asashour" id="1948777" due-to="Sudhan Moghe">
+                JavaScript: add support for HTMLAnchorElement.click().
+            </action>
             <action type="fix" dev="sdanig">
                 Any onload events specified on frames and iframes are executed each time the frame
                 content changes -- not just the first time that the frame loads.
