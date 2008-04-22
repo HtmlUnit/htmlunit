@@ -66,21 +66,21 @@ public class HTMLBodyElementTest extends WebTestCase {
 
     private void testDefaultPaddingAndMargins(final BrowserVersion version, final String... expected) throws Exception {
         final String html =
-            "    <html>\n"
-            + "        <head>\n"
-            + "            <script>\n"
-            + "                function test() {\n"
-            + "                    var b = document.getElementById('body');\n"
-            + "                    var s = b.currentStyle ? b.currentStyle : getComputedStyle(b, null);\n"
-            + "                    alert(s.padding + ',' + s.paddingLeft + ',' + s.paddingRight + ',' + s.paddingTop + ',' + s.paddingBottom);\n"
-            + "                    alert(b.style.padding + ',' + b.style.paddingLeft + ',' + b.style.paddingRight + ',' + b.style.paddingTop + ',' + b.style.paddingBottom);\n"
-            + "                    alert(s.margin + ',' + s.marginLeft + ',' + s.marginRight + ',' + s.marginTop + ',' + s.marginBottom);\n"
-            + "                    alert(b.style.margin + ',' + b.style.marginLeft + ',' + b.style.marginRight + ',' + b.style.marginTop + ',' + b.style.marginBottom);\n"
-            + "                }\n"
-            + "            </script>\n"
-            + "        </head>\n"
-            + "        <body id='body' onload='test()'>blah</body>\n"
-            + "    </html>";
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        var s = b.currentStyle ? b.currentStyle : getComputedStyle(b, null);\n"
+            + "        alert(s.padding + ',' + s.paddingLeft + ',' + s.paddingRight + ',' + s.paddingTop + ',' + s.paddingBottom);\n"
+            + "        alert(b.style.padding + ',' + b.style.paddingLeft + ',' + b.style.paddingRight + ',' + b.style.paddingTop + ',' + b.style.paddingBottom);\n"
+            + "        alert(s.margin + ',' + s.marginLeft + ',' + s.marginRight + ',' + s.marginTop + ',' + s.marginBottom);\n"
+            + "        alert(b.style.margin + ',' + b.style.marginLeft + ',' + b.style.marginRight + ',' + b.style.marginTop + ',' + b.style.marginBottom);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(version, html, actual);
         assertEquals(expected, actual);

@@ -88,7 +88,7 @@ public class ScreenTest extends WebTestCase {
             + "           var myExpr = 'window.screen.' + i;\n"
             + "           var result = eval(myExpr);\n"
             + "           if (props[i] != result) {\n"
-            + "               alert(myExpr + ': ' + result + ' != ' + props[i]);\n"
+            + "             alert(myExpr + ': ' + result + ' != ' + props[i]);\n"
             + "           }\n"
             + "           nbTests++;\n"
             + "       }\n"

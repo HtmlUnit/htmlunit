@@ -60,28 +60,27 @@ public class BoxObjectTest extends WebTestCase {
     @Test
     public void testElementAttributes() throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <body onload='test()'>\n"
-            + "            <span id='foo'>foo</span><div id='d'><span id='a'>a</span><span id='b'>b</span></div><span id='bar'>bar</span>\n"
-            + "            <script>\n"
-            + "                function test() {\n"
-            + "                    \n"
-            + "                    var div = document.getElementById('d');\n"
-            + "                    var spanFoo = document.getElementById('foo');\n"
-            + "                    var spanA = document.getElementById('a');\n"
-            + "                    var spanB = document.getElementById('b');\n"
-            + "                    var spanBar = document.getElementById('bar');\n"
-            + "                    \n"
-            + "                    var box = document.getBoxObjectFor(div);\n"
-            + "                    alert(box.element == div);\n"
-            + "                    alert(box.firstChild == spanA);\n"
-            + "                    alert(box.lastChild == spanB);\n"
-            + "                    alert(box.previousSibling == spanFoo);\n"
-            + "                    alert(box.nextSibling == spanBar);\n"
-            + "                }\n"
-            + "            </script>\n"
-            + "        </body>\n"
-            + "    </html>";
+              "<html>\n"
+            + "  <body onload='test()'>\n"
+            + "    <span id='foo'>foo</span><div id='d'><span id='a'>a</span><span id='b'>b</span></div><span id='bar'>bar</span>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var div = document.getElementById('d');\n"
+            + "        var spanFoo = document.getElementById('foo');\n"
+            + "        var spanA = document.getElementById('a');\n"
+            + "        var spanB = document.getElementById('b');\n"
+            + "        var spanBar = document.getElementById('bar');\n"
+            + "\n"
+            + "        var box = document.getBoxObjectFor(div);\n"
+            + "        alert(box.element == div);\n"
+            + "        alert(box.firstChild == spanA);\n"
+            + "        alert(box.lastChild == spanB);\n"
+            + "        alert(box.previousSibling == spanFoo);\n"
+            + "        alert(box.nextSibling == spanBar);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
         final String[] expected = {"true", "true", "true", "true", "true"};
         final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
@@ -95,21 +94,21 @@ public class BoxObjectTest extends WebTestCase {
     @Test
     public void testPositionAndSizeAttributes() throws Exception {
         final String html =
-              "    <html>\n"
-            + "        <body onload='test()'>\n"
-            + "            <style>#d { position:absolute; left:50px; top:100px; width:500px; height:400px; border:3px; padding: 5px; margin: 23px; }</style>\n"
-            + "            <div id='d'>daniel</div>\n"
-            + "            <script>\n"
-            + "                function test() {\n"
-            + "                    var div = document.getElementById('d');\n"
-            + "                    var box = document.getBoxObjectFor(div);\n"
-            + "                    alert(box.x + '-' + box.y);\n"
-            + "                    alert(box.screenX + '-' + box.screenY);\n"
-            + "                    alert(box.width + '-' + box.height);\n"
-            + "                }\n"
-            + "            </script>\n"
-            + "        </body>\n"
-            + "    </html>";
+              "<html>\n"
+            + "  <body onload='test()'>\n"
+            + "    <style>#d { position:absolute; left:50px; top:100px; width:500px; height:400px; border:3px; padding: 5px; margin: 23px; }</style>\n"
+            + "    <div id='d'>daniel</div>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var div = document.getElementById('d');\n"
+            + "        var box = document.getBoxObjectFor(div);\n"
+            + "        alert(box.x + '-' + box.y);\n"
+            + "        alert(box.screenX + '-' + box.screenY);\n"
+            + "        alert(box.width + '-' + box.height);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
         final String[] expected = {"73-123", "73-244", "510-410"};
         final List<String> actual = new ArrayList<String>();
         loadPage(BrowserVersion.FIREFOX_2, html, actual);
