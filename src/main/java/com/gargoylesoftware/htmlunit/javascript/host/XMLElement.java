@@ -41,11 +41,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.mozilla.javascript.NativeArray;
-import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
@@ -104,23 +103,7 @@ public class XMLElement extends Node {
         for (final XmlAttr attr : attributes.values()) {
             list.add(attr.getScriptObject());
         }
-        return new NativeArray(list.toArray()) {
-            private static final long serialVersionUID = 4370316794526432724L;
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public Object get(final String name, final Scriptable start) {
-                for (int i = 0; i < getLength(); i++) {
-                    final XMLAttribute attribute = (XMLAttribute) get(i, start);
-                    if (attribute.jsxGet_name().equals(name)) {
-                        return attribute;
-                    }
-                }
-                return super.get(name, start);
-            }
-        };
+        return new NamedNodeMap((XmlElement) getDomNodeOrDie());
     }
 
     /**

@@ -97,6 +97,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         for (final XmlAttr attr : element.getAttributesMap().values()) {
             nodes_.put(attr.getName(), attr);
         }
+        setParentScope(element.getScriptObject());
+        setPrototype(getPrototype(getClass()));
     }
 
     /**

@@ -66,7 +66,7 @@ public class XMLElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAttributes() throws Exception {
+    public void attributes() throws Exception {
         final String firstContent = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -123,7 +123,7 @@ public class XMLElementTest extends WebTestCase {
     @Test
     @Browsers({ Browser.INTERNET_EXPLORER_6, Browser.INTERNET_EXPLORER_7 })
     @Alerts({ "true", "1", "title" })
-    public void testSelectNodes() throws Exception {
+    public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -167,7 +167,7 @@ public class XMLElementTest extends WebTestCase {
      */
     @Test
     @Alerts({ "true", "2", "1" })
-    public void testRemoveChild() throws Exception {
+    public void removeChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -207,7 +207,7 @@ public class XMLElementTest extends WebTestCase {
     @Test
     @Alerts(IE = { "lbl_SettingName", "outerHTML", "Item" },
             FF = { "lbl_SettingName", "outerHTML", "undefined" })
-    public void testGetAttributeNode() throws Exception {
+    public void getAttributeNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
@@ -346,13 +346,13 @@ public class XMLElementTest extends WebTestCase {
     @Test
     @Browsers(Browser.FIREFOX_2)
     @Alerts("false")
-    public void testHasAttribute() throws Exception {
+    public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
             + "    doc.load('" + URL_SECOND + "');\n"
-            + "    alert(doc.documentElement.hasAttribute('hehe'));\n"
+            + "    alert(doc.documentElement.hasAttribute('something'));\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -365,6 +365,48 @@ public class XMLElementTest extends WebTestCase {
         
         final String xml
             = "<books>\n"
+            + "  <book>\n"
+            + "    <title>Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = getWebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, xml, "text/xml");
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void attributes2() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    alert(doc.documentElement.attributes.getNamedItem('library') != undefined);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String xml
+            = "<books library=\"Hope\">\n"
             + "  <book>\n"
             + "    <title>Immortality</title>\n"
             + "    <author>John Smith</author>\n"
