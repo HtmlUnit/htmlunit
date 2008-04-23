@@ -142,10 +142,7 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void dataSource() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "datasource.html", emptyList_);
+        doTest(BrowserVersion.FIREFOX_2, "datasource.html", emptyList_, "btnRun");
     }
 
     /**
@@ -156,7 +153,7 @@ public class YuiTest extends WebTestCase {
         if (notYetImplemented()) {
             return;
         }
-        doTest(BrowserVersion.FIREFOX_2, "datatable.html", emptyList_);
+        doTest(BrowserVersion.FIREFOX_2, "datatable.html", emptyList_, "btnRun");
     }
 
     /**
