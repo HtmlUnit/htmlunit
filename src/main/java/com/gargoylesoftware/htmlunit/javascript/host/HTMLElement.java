@@ -207,7 +207,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         for (final DomAttr attr : htmlElt.getAttributesCollection()) {
             final String eventName = attr.getName();
             if (eventName.startsWith("on")) {
-                createEventHandler(eventName, attr.getHtmlValue());
+                createEventHandler(eventName, attr.getValue());
             }
         }
     }
@@ -618,7 +618,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // Add the attributes. IE does not use quotes, FF does.
             for (final DomAttr attr : element.getAttributesCollection()) {
                 final String name = attr.getName();
-                final String value = attr.getHtmlValue();
+                final String value = attr.getValue();
                 final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
                 buffer.append(' ').append(name).append("=");
                 if (quote) {
@@ -762,7 +762,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final AttributesImpl attributes = new AttributesImpl();
         for (final DomAttr entry : element.getAttributesCollection()) {
             final String name = entry.getName();
-            final String value = entry.getHtmlValue();
+            final String value = entry.getValue();
             attributes.addAttribute(null, name, name, null, value);
         }
 

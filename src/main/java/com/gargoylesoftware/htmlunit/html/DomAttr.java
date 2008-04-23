@@ -92,7 +92,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public String getNodeValue() {
-        return getHtmlValue();
+        return getValue();
     }
 
     /**
@@ -117,7 +117,9 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * TODO: not required?
      *
      * @return the value of wrapped map entry
+     * @deprecated As of 2.2, please use {@link #getValue()} instead.
      */
+    @Deprecated
     public String getHtmlValue() {
         return getValue();
     }
@@ -137,7 +139,9 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      *
      * @param value the attribute's new value
      * @return the attribute's old value
+     * @deprecated As of 2.2, please use {@link #setValue(String)} instead.
      */
+    @Deprecated
     public String setHtmlValue(final String value) {
         final String oldValue = value_;
         value_ = value;
@@ -146,7 +150,6 @@ public class DomAttr extends DomNamespaceNode implements Attr {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public Element getOwnerElement() {
         return (Element) getParentNode();

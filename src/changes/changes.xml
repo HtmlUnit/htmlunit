@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+            <action type="update" dev="asashour">
+                DomAttr: deprecate getHtmlValue() and setHtmlValue().
+            </action>
             <action type="remove" dev="asashour">
                 INCOMPATIBLE CHANGE: HtmlAttr and XmlAttr are no more used, use DomAttr instead.
             </action>

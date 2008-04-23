@@ -162,7 +162,7 @@ class DefaultElementFactory implements IElementFactory {
             if (attributeMap != null) {
                 final DomAttr srcAttribute = attributeMap.get("src");
                 if (srcAttribute != null) {
-                    srcAttribute.setHtmlValue(srcAttribute.getHtmlValue().trim());
+                    srcAttribute.setValue(srcAttribute.getValue().trim());
                 }
             }
             element = new HtmlFrame(namespaceURI, qualifiedName, page, attributeMap);
@@ -210,7 +210,7 @@ class DefaultElementFactory implements IElementFactory {
             if (attributeMap != null) {
                 final DomAttr srcAttribute = attributeMap.get("src");
                 if (srcAttribute != null) {
-                    srcAttribute.setHtmlValue(srcAttribute.getHtmlValue().trim());
+                    srcAttribute.setValue(srcAttribute.getValue().trim());
                 }
             }
             element = new HtmlInlineFrame(namespaceURI, qualifiedName, page, attributeMap);

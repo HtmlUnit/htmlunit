@@ -131,7 +131,7 @@ public class HtmlSubmitInput extends HtmlInput {
         printWriter.print(getTagName());
 
         for (final DomAttr attribute : getAttributesCollection()) {
-            if (!attribute.getNodeName().equals("value") || !attribute.getHtmlValue().equals(DEFAULT_VALUE)) {
+            if (!attribute.getNodeName().equals("value") || !attribute.getValue().equals(DEFAULT_VALUE)) {
                 printWriter.print(" ");
                 final String name = attribute.getNodeName();
                 printWriter.print(name);

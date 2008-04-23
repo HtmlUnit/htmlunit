@@ -125,20 +125,20 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link DomAttr#getHtmlValue()}.
+     * Tests {@link DomAttr#getValue()}.
      */
     @Test
     public void testGetValue() {
-        assertEquals(ENTRY_VALUE, htmlAttr_.getHtmlValue());
+        assertEquals(ENTRY_VALUE, htmlAttr_.getValue());
     }
 
     /**
-     * Tests {@link DomAttr#setHtmlValue(String)}.
+     * Tests {@link DomAttr#setValue(String)}.
      */
     @Test
     public void testSetValue() {
-        htmlAttr_.setHtmlValue("foo");
-        assertEquals("foo", htmlAttr_.getHtmlValue());
+        htmlAttr_.setValue("foo");
+        assertEquals("foo", htmlAttr_.getValue());
     }
 
     /**
