@@ -429,10 +429,8 @@ public class WebClient implements Serializable {
      * {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return the newly created page
      */
-    public Page loadWebResponseInto(
-            final WebResponse webResponse, final WebWindow webWindow)
-        throws
-            IOException, FailingHttpStatusCodeException {
+    public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow)
+        throws IOException, FailingHttpStatusCodeException {
 
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
