@@ -707,8 +707,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Returns the onload property (caution this is not necessary a function if something else has
-     * been set).
+     * Returns the onload property. Note that this is not necessarily a function if something else has been set.
      * @return the onload property
      */
     public Object jsxGet_onload() {
