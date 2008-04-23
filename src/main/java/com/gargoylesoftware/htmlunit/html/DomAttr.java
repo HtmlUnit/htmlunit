@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * An attribute of an element. Attributes are stored in {@link HtmlElement},
  * but the XPath engine expects attributes to be in a {@link DomNode}.
  *
- * @version $Revision: 2836 $
+ * @version $Revision$
  * @author Denis N. Antonioli
  * @author David K. Taylor
  * @author Ahmed Ashour
