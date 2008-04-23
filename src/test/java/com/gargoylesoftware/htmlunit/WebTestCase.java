@@ -620,6 +620,14 @@ public abstract class WebTestCase {
     }
 
     /**
+     * Returns the expected alerts.
+     * @return the expected alerts
+     */
+    protected String[] getExpectedAlerts() {
+        return expectedAlerts_;
+    }
+
+    /**
      * Load a page with the specified HTML using the current browser version, and asserts the alerts
      * equal the expected alerts.
      * @param html the HTML to use
