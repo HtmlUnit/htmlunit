@@ -365,10 +365,9 @@ public class XmlElement extends DomNamespaceNode implements Element {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public boolean hasAttribute(final String name) {
-        throw new UnsupportedOperationException("XmlElement.hasAttribute is not yet implemented.");
+        return attributes_.containsKey(name);
     }
 
     /**

@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+            <action type="add" dev="asashour">
+                JavaScript: add support for XMLElement.hasAttribute() (FF only).
+            </action>
             <action type="add" dev="asashour" id="1948777" due-to="Sudhan Moghe">
                 JavaScript: add support for HTMLAnchorElement.click().
             </action>

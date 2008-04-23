@@ -233,4 +233,13 @@ public class XMLElement extends Node {
         collection.init(domNode, xpath);
         return collection;
     }
+
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    public boolean jsxFunction_hasAttribute(final String name) {
+        return ((XmlElement) getDomNodeOrDie()).hasAttribute(name);
+    }
 }
