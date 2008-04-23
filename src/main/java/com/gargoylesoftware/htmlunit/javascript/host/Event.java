@@ -229,7 +229,7 @@ public class Event extends SimpleScriptable {
     void endFire() {
         Context.getCurrentContext().removeThreadLocal(KEY_CURRENT_EVENT);
     }
-    
+
     /**
      * Returns the object that fired the event. This is an IE-only property.
      * @return the object that fired the event
@@ -252,6 +252,14 @@ public class Event extends SimpleScriptable {
      */
     public Object jsxGet_target() {
         return target_;
+    }
+
+    /**
+     * Sets the event target.
+     * @param target the event target
+     */
+    public void setTarget(final Object target) {
+        target_ = target;
     }
 
     /**

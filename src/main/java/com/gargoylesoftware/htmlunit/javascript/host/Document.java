@@ -1245,6 +1245,7 @@ public class Document extends EventNode {
         }
         try {
             final Event event = clazz.newInstance();
+            event.setTarget(this);
             event.setEventType(eventType);
             event.setParentScope(getWindow());
             event.setPrototype(getPrototype(clazz));

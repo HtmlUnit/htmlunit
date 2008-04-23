@@ -1675,6 +1675,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
     public boolean jsxFunction_dispatchEvent(final Event event) {
+        event.setTarget(this);
         final HtmlElement element = getHtmlElementOrDie();
         if (event instanceof MouseEvent && element instanceof ClickableElement) {
             if (event.jsxGet_type().equals(MouseEvent.TYPE_CLICK)) {

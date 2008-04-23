@@ -3037,14 +3037,14 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void createEvents_FF() throws Exception {
-        createEvents_FF("Event", true, BrowserVersion.FIREFOX_2);
-        createEvents_FF("Events", true, BrowserVersion.FIREFOX_2);
-        createEvents_FF("HTMLEvents", true, BrowserVersion.FIREFOX_2);
-        createEvents_FF("Bogus", false, BrowserVersion.FIREFOX_2);
+    public void createEvent_FF() throws Exception {
+        createEvent_FF("Event", true, BrowserVersion.FIREFOX_2);
+        createEvent_FF("Events", true, BrowserVersion.FIREFOX_2);
+        createEvent_FF("HTMLEvents", true, BrowserVersion.FIREFOX_2);
+        createEvent_FF("Bogus", false, BrowserVersion.FIREFOX_2);
     }
 
-    private void createEvents_FF(final String eventType, final boolean isSupportedType,
+    private void createEvent_FF(final String eventType, final boolean isSupportedType,
         final BrowserVersion version) throws Exception {
         final String content =
               "<html><head><title>foo</title><script>\n"
@@ -3067,6 +3067,33 @@ public class DocumentTest extends WebTestCase {
             assertTrue("Test was not expected to fail, but did with message " + e.getMessage() + " for type="
                 + eventType, !isSupportedType);
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void createEvent_FF_Target() throws Exception {
+        final String html =
+              "<html>\n"
+            + "    <body onload='test()'>\n"
+            + "        <div id='d' onclick='alert(event.target)'>abc</div>\n"
+            + "        <script>\n"
+            + "            function test() {\n"
+            + "                var event = document.createEvent('MouseEvents');\n"
+            + "                alert(event.target == document);\n"
+            + "                event.initMouseEvent('click', true, true, window,\n"
+            + "                    1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
+            + "                alert(event.target == document);\n"
+            + "                document.getElementById('d').dispatchEvent(event);\n"
+            + "            }\n"
+            + "        </script>\n"
+            + "    </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final String[] expected = new String[] {"true", "true", "[object HTMLDivElement]"};
+        assertEquals(expected, actual);
     }
 
     /**

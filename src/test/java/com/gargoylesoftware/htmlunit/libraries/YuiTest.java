@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  *
  * @version $Revision$
  * @author Rob Di Marco
+ * @author Daniel Gredler
  */
 public class YuiTest extends WebTestCase {
 
@@ -109,10 +110,7 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void calendar() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "calendar.html", emptyList_);
+        doTest(BrowserVersion.FIREFOX_2, "calendar.html", emptyList_, "btnRun");
     }
 
     /**

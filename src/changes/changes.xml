@@ -6,7 +6,10 @@
     </properties>
 
     <body>
-        <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+        <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig">
+                JavaScript: initialize event.target correctly when using createEvent and dispatchEvent (FF only).
+            </action>
             <action type="update" dev="asashour">
                 DomAttr: deprecate getHtmlValue() and setHtmlValue().
             </action>
