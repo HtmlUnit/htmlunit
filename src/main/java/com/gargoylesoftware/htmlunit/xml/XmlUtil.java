@@ -59,6 +59,7 @@ import org.xml.sax.SAXParseException;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -160,7 +161,7 @@ public final class XmlUtil {
         if (source.getNodeType() == Node.TEXT_NODE) {
             return new DomText(page, source.getNodeValue());
         }
-        final Map<String, XmlAttr> attributes = new HashMap<String, XmlAttr>();
+        final Map<String, DomAttr> attributes = new HashMap<String, DomAttr>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
             final Node attribute = nodeAttributes.item(i);
@@ -171,8 +172,8 @@ public final class XmlUtil {
             else {
                 qualifiedName = attribute.getLocalName();
             }
-            final XmlAttr xmlAttribute =
-                new XmlAttr(page, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
+            final DomAttr xmlAttribute =
+                new DomAttr(page, attribute.getNamespaceURI(), qualifiedName, attribute.getNodeValue());
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
         String localName = source.getLocalName();
@@ -270,7 +271,7 @@ public final class XmlUtil {
      * @return the prefix bound to the namespace URI; or null if there is no such namespace
      */
     public static String lookupPrefix(final XmlElement element, final String namespace) {
-        final Map<String, XmlAttr> attributes = element.getAttributesMap();
+        final Map<String, DomAttr> attributes = element.getAttributesMap();
         for (final String name : attributes.keySet()) {
             if (name.startsWith("xmlns:") && attributes.get(name).getValue().equals(namespace)) {
                 return name.substring(6);

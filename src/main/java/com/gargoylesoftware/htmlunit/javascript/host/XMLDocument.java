@@ -50,13 +50,14 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebResponseImpl;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -184,9 +185,9 @@ public class XMLDocument extends Document {
         if (domNode instanceof XmlElement) {
             scriptable = new XMLElement();
         }
-        else if (domNode instanceof XmlAttr) {
-            final XMLAttribute attribute = new XMLAttribute();
-            attribute.init(domNode.getNodeName(), (XmlElement) domNode.getParentNode());
+        else if (domNode instanceof DomAttr) {
+            final Attr attribute = new Attr();
+            attribute.init(domNode.getNodeName(), (DomElement) domNode.getParentNode());
             scriptable = attribute;
         }
         else if (domNode instanceof DomText || domNode instanceof DomCData || domNode instanceof DomComment) {

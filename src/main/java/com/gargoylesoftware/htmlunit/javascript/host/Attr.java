@@ -37,9 +37,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
  * A JavaScript object for an Attribute.
@@ -51,7 +53,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class Attribute extends SimpleScriptable {
+public class Attr extends SimpleScriptable {
 
     private static final long serialVersionUID = 3256441425892750900L;
 
@@ -67,24 +69,24 @@ public class Attribute extends SimpleScriptable {
     private String value_;
 
     /**
-     * The HTML element to which this attribute belongs. May be <tt>null</tt> if
+     * The element to which this attribute belongs. May be <tt>null</tt> if
      * document.createAttribute() has been called but element.setAttributeNode()
      * has not been called yet, or if document.setAttributeNode() has been called
      * and this is the replaced attribute returned by said method.
      */
-    private HtmlElement parent_;
+    private DomElement parent_;
 
     /**
      * Create an instance. JavaScript objects must have a default constructor.
      */
-    public Attribute() { }
+    public Attr() { }
 
     /**
      * Initializes this attribute.
      * @param name the name of the attribute
      * @param parent the parent HTML element
      */
-    public void init(final String name, final HtmlElement parent) {
+    public void init(final String name, final DomElement parent) {
         name_ = name;
         parent_ = parent;
         if (parent_ == null) {
@@ -102,7 +104,7 @@ public class Attribute extends SimpleScriptable {
         super.setDomNode(domNode, assignScriptObject);
 
         final String name = domNode.getNodeName();
-        final HtmlElement parent = (HtmlElement) domNode.getParentNode();
+        final DomElement parent = (DomElement) domNode.getParentNode();
         this.init(name, parent);
     }
 
@@ -111,7 +113,12 @@ public class Attribute extends SimpleScriptable {
      */
     public void detachFromParent() {
         if (parent_ != null) {
-            value_ = parent_.getAttributeValue(name_);
+            if (parent_ instanceof HtmlElement) {
+                value_ = ((HtmlElement) parent_).getAttributeValue(name_);
+            }
+            else {
+                value_ = ((XmlElement) parent_).getAttributeValue(name_);
+            }
         }
         parent_ = null;
     }
@@ -222,7 +229,10 @@ public class Attribute extends SimpleScriptable {
      */
     public String jsxGet_value() {
         if (parent_ != null) {
-            return parent_.getAttributeValue(name_);
+            if (parent_ instanceof HtmlElement) {
+                return ((HtmlElement) parent_).getAttributeValue(name_);
+            }
+     	    return ((XmlElement) parent_).getAttributeValue(name_);
         }
         return value_;
     }
@@ -233,7 +243,10 @@ public class Attribute extends SimpleScriptable {
      */
     public void jsxSet_value(final String value) {
         if (parent_ != null) {
-            parent_.setAttributeValue(name_, value);
+            if (parent_ instanceof HtmlElement) {
+                ((HtmlElement) parent_).setAttributeValue(name_, value);
+            }
+            ((XmlElement) parent_).setAttributeValue(name_, value);
         }
         else {
             value_ = value;

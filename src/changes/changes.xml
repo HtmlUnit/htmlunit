@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+            <action type="remove" dev="asashour">
+                INCOMPATIBLE CHANGE: HtmlAttr and XmlAttr are no more used, use DomAttr instead.
+            </action>
             <action type="fix" dev="asashour" id="1942640">
                 JavaScript: fix XMLElement.attributes.
             </action>

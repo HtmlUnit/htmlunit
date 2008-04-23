@@ -75,7 +75,7 @@ class DefaultElementFactory implements IElementFactory {
      */
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
-        final Map<String, HtmlAttr> attributeMap = setAttributes(page, attributes);
+        final Map<String, DomAttr> attributeMap = setAttributes(page, attributes);
 
         final HtmlElement element;
         final String tagName;
@@ -160,7 +160,7 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlFrame.TAG_NAME)) {
             if (attributeMap != null) {
-                final HtmlAttr srcAttribute = attributeMap.get("src");
+                final DomAttr srcAttribute = attributeMap.get("src");
                 if (srcAttribute != null) {
                     srcAttribute.setHtmlValue(srcAttribute.getHtmlValue().trim());
                 }
@@ -208,7 +208,7 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlInlineFrame.TAG_NAME)) {
             if (attributeMap != null) {
-                final HtmlAttr srcAttribute = attributeMap.get("src");
+                final DomAttr srcAttribute = attributeMap.get("src");
                 if (srcAttribute != null) {
                     srcAttribute.setHtmlValue(srcAttribute.getHtmlValue().trim());
                 }
@@ -350,8 +350,8 @@ class DefaultElementFactory implements IElementFactory {
      * @param attributes the SAX attributes
      * @return the map of attribute values for {@link HtmlElement}s
      */
-    static Map<String, HtmlAttr> setAttributes(final HtmlPage page, final Attributes attributes) {
-        Map<String, HtmlAttr> attributeMap = null;
+    static Map<String, DomAttr> setAttributes(final HtmlPage page, final Attributes attributes) {
+        Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
             attributeMap = HtmlElement.createAttributeMap(attributes.getLength());
             for (int i = 0; i < attributes.getLength(); i++) {

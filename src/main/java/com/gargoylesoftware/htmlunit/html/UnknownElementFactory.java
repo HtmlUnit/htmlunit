@@ -73,7 +73,7 @@ public final class UnknownElementFactory implements IElementFactory {
      */
     public HtmlElement createElementNS(final HtmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
-        final Map<String, HtmlAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
+        final Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
         return new HtmlUnknownElement(page, namespaceURI, qualifiedName, attributeMap);
     }
 }

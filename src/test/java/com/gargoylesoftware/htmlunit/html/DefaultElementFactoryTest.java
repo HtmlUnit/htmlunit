@@ -88,10 +88,10 @@ public class DefaultElementFactoryTest extends WebTestCase {
      */
     private void verifyAttributes(final HtmlAnchor anchor) {
         // Get the attributes iterator
-        final Iterator<HtmlAttr> attributeEntriesIterator = anchor.getAttributesCollection().iterator();
+        final Iterator<DomAttr> attributeEntriesIterator = anchor.getAttributesCollection().iterator();
 
         // Verify if the attributes are in ascending order of name.
-        HtmlAttr htmlAttr = attributeEntriesIterator.next();
+        DomAttr htmlAttr = attributeEntriesIterator.next();
         assertEquals("href", htmlAttr.getNodeName());
         assertEquals("http://www.google.com", htmlAttr.getHtmlValue());
 

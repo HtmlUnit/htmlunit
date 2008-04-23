@@ -874,9 +874,9 @@ public class Document extends EventNode {
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name
      */
-    public Attribute jsxFunction_createAttribute(final String attributeName) {
-        final Attribute att = new Attribute();
-        att.setPrototype(getPrototype(Attribute.class));
+    public Attr jsxFunction_createAttribute(final String attributeName) {
+        final Attr att = new Attr();
+        att.setPrototype(getPrototype(Attr.class));
         att.setParentScope(getWindow());
         att.init(attributeName, null);
         return att;

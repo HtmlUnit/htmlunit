@@ -68,7 +68,7 @@ public class HtmlMeta extends HtmlElement {
      * @param attributes the initial attributes
      */
     HtmlMeta(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         
         if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {

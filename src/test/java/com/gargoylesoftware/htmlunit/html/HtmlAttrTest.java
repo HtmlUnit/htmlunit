@@ -50,7 +50,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * Tests for {@link HtmlAttr}.
+ * Tests for {@link DomAttr}.
  *
  * @version $Revision$
  * @author Denis N. Antonioli
@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 public class HtmlAttrTest extends WebTestCase {
 
     /** Test object. */
-    private HtmlAttr htmlAttr_;
+    private DomAttr htmlAttr_;
 
     /** Single test key value. */
     private static final String ENTRY_KEY = "key";
@@ -72,7 +72,7 @@ public class HtmlAttrTest extends WebTestCase {
     static final HtmlElement HTML_ELEMENT;
 
     static {
-        final Map<String, HtmlAttr> emptyMap = Collections.emptyMap();
+        final Map<String, DomAttr> emptyMap = Collections.emptyMap();
         HTML_ELEMENT = new HtmlElement(null, "dummy", null, emptyMap) {
             private static final long serialVersionUID = -3099722791571459332L;
 
@@ -88,12 +88,12 @@ public class HtmlAttrTest extends WebTestCase {
      */
     @Before
     public void setUp() {
-        htmlAttr_ = new HtmlAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
+        htmlAttr_ = new DomAttr(null, null, ENTRY_KEY, ENTRY_VALUE);
         htmlAttr_.setParentNode(HTML_ELEMENT);
     }
 
     /**
-     * Tests {@link HtmlAttr#getName()}.
+     * Tests {@link DomAttr#getName()}.
      */
     @Test
     public void testGetName() {
@@ -101,7 +101,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlAttr#getNodeName()}.
+     * Tests {@link DomAttr#getNodeName()}.
      */
     @Test
     public void testGetNodeName() {
@@ -109,7 +109,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlAttr#getNodeType()}.
+     * Tests {@link DomAttr#getNodeType()}.
      */
     @Test
     public void testGetNodeType() {
@@ -117,7 +117,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlAttr#getNodeValue()}.
+     * Tests {@link DomAttr#getNodeValue()}.
      */
     @Test
     public void testGetNodeValue() {
@@ -125,7 +125,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlAttr#getHtmlValue()}.
+     * Tests {@link DomAttr#getHtmlValue()}.
      */
     @Test
     public void testGetValue() {
@@ -133,7 +133,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlAttr#setHtmlValue(String)}.
+     * Tests {@link DomAttr#setHtmlValue(String)}.
      */
     @Test
     public void testSetValue() {
@@ -142,7 +142,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Tests {@link HtmlAttr#getParentNode()}.
+     * Tests {@link DomAttr#getParentNode()}.
      */
     @Test
     public void testGetParent() {
@@ -150,7 +150,7 @@ public class HtmlAttrTest extends WebTestCase {
     }
 
     /**
-     * Test nodeType of {@link HtmlAttr}.
+     * Test nodeType of {@link DomAttr}.
      *
      * @throws Exception if the test fails
      */

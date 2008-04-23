@@ -45,6 +45,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNamespaceNode;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
@@ -54,7 +55,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @deprecated As of 2.2, no more used, please use {@link DomAttr} instead.
  */
+@Deprecated
 public class XmlAttr extends DomNamespaceNode implements Attr {
 
     private static final long serialVersionUID = 4832218455328064213L;
@@ -138,7 +141,7 @@ public class XmlAttr extends DomNamespaceNode implements Attr {
      * @param parent the parent node
      */
     @Override
-    protected void setParentNode(final DomNode parent) {
+    public void setParentNode(final DomNode parent) {
         super.setParentNode(parent);
     }
 

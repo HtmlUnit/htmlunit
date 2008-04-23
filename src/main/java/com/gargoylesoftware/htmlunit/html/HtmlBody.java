@@ -70,7 +70,7 @@ public class HtmlBody extends ClickableElement {
      *        tag does not exist or has not yet been parsed)
      */
     public HtmlBody(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes, final boolean temporary) {
+            final Map<String, DomAttr> attributes, final boolean temporary) {
 
         super(namespaceURI, qualifiedName, page, attributes);
 

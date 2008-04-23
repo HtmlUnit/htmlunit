@@ -293,10 +293,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * Sets the parent node.
      * @param parent the parent node
      */
-    protected void setParentNode(final DomNode parent) {
+    public void setParentNode(final DomNode parent) {
         parent_ = parent;
     }
 
@@ -848,7 +849,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public ScriptableObject getScriptObject() {
         if (scriptObject_ == null) {
-            if (this == page_) {
+            if (this == getPage()) {
                 throw new IllegalStateException("No script object associated with the Page");
             }
             scriptObject_ = ((SimpleScriptable) ((DomNode) page_).getScriptObject()).makeScriptableFor(this);

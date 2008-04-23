@@ -424,7 +424,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         document_.setParentScope(this);
         document_.setPrototype(getPrototype(Document.class));
         document_.setWindow(this);
-        if (webWindow.getEnclosedPage() instanceof HtmlPage) {
+        if (webWindow.getEnclosedPage() instanceof DomNode) {
             document_.setDomNode((DomNode) webWindow.getEnclosedPage());
         }
 

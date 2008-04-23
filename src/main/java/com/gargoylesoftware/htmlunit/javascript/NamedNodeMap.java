@@ -43,10 +43,9 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 
 /**
@@ -81,7 +80,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      */
     public NamedNodeMap(final HtmlElement element) {
-        for (final HtmlAttr attr : element.getAttributesCollection()) {
+        for (final DomAttr attr : element.getAttributesCollection()) {
             nodes_.put(attr.getName(), attr);
         }
         setParentScope(element.getScriptObject());
@@ -94,7 +93,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param element the owning element
      */
     public NamedNodeMap(final XmlElement element) {
-        for (final XmlAttr attr : element.getAttributesMap().values()) {
+        for (final DomAttr attr : element.getAttributesMap().values()) {
             nodes_.put(attr.getName(), attr);
         }
         setParentScope(element.getScriptObject());

@@ -21,8 +21,8 @@
         <browser name="Microsoft Internet Explorer" min-version="4"/>
     </class>
 
-    <class name="Attribute" classname="com.gargoylesoftware.htmlunit.javascript.host.Attribute"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAttr">
+    <class name="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.Attr"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomAttr">
         <property name="expando" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
         <property name="lastChild" readable="true" writable="false"/>
@@ -2038,24 +2038,6 @@
                 descr="MSDN documentation"/>
         </function>
         <function name="setTimeout"/>
-    </class>
-
-    <class name="XMLAttribute" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLAttribute"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.xml.XmlAttr">
-        <property name="expando" readable="true" writable="false"/>
-        <property name="firstChild" readable="true" writable="false"/>
-        <property name="lastChild" readable="true" writable="false"/>
-        <property name="name" readable="true" writable="false"/>
-        <property name="nextSibling" readable="true" writable="false"/>
-        <property name="nodeName" readable="true" writable="false"/>
-        <property name="nodeType" readable="true" writable="false"/>
-        <property name="nodeValue" readable="true" writable="false"/>
-        <property name="ownerDocument" readable="true" writable="false"/>
-        <property name="parentNode" readable="true" writable="false"/>
-        <property name="previousSibling" readable="true" writable="false"/>
-        <property name="specified" readable="true" writable="false"/>
-        <!-- value should be writable -->
-        <property name="value" readable="true" writable="false"/>
     </class>
 
     <class name="XMLDocument" extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.XMLDocument"

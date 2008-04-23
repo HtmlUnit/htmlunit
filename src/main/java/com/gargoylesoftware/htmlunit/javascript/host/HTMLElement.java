@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -70,7 +71,6 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
-import com.gargoylesoftware.htmlunit.html.HtmlAttr;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -204,7 +204,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
          * Should be called only on construction.
          */
         final HtmlElement htmlElt = (HtmlElement) domNode;
-        for (final HtmlAttr attr : htmlElt.getAttributesCollection()) {
+        for (final DomAttr attr : htmlElt.getAttributesCollection()) {
             final String eventName = attr.getName();
             if (eventName.startsWith("on")) {
                 createEventHandler(eventName, attr.getHtmlValue());
@@ -467,8 +467,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the attribute node for the specified attribute
      */
     public Object jsxFunction_getAttributeNode(final String attributeName) {
-        final Attribute att = new Attribute();
-        att.setPrototype(getPrototype(Attribute.class));
+        final Attr att = new Attr();
+        att.setPrototype(getPrototype(Attr.class));
         att.setParentScope(getWindow());
         att.init(attributeName, getHtmlElementOrDie());
         return att;
@@ -479,10 +479,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param newAtt the attribute to set
      * @return the replaced attribute node, if any
      */
-    public Attribute jsxFunction_setAttributeNode(final Attribute newAtt) {
+    public Attr jsxFunction_setAttributeNode(final Attr newAtt) {
         final String name = newAtt.jsxGet_name();
         final String value = newAtt.jsxGet_value();
-        final Attribute replacedAtt = (Attribute) jsxFunction_getAttributeNode(name);
+        final Attr replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
         replacedAtt.detachFromParent();
         getHtmlElementOrDie().setAttributeValue(name, value);
         return replacedAtt;
@@ -616,7 +616,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
-            for (final HtmlAttr attr : element.getAttributesCollection()) {
+            for (final DomAttr attr : element.getAttributesCollection()) {
                 final String name = attr.getName();
                 final String value = attr.getHtmlValue();
                 final boolean quote = !ie || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value);
@@ -760,7 +760,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected AttributesImpl readAttributes(final HtmlElement element) {
         final AttributesImpl attributes = new AttributesImpl();
-        for (final HtmlAttr entry : element.getAttributesCollection()) {
+        for (final DomAttr entry : element.getAttributesCollection()) {
             final String name = entry.getName();
             final String value = entry.getHtmlValue();
             attributes.addAttribute(null, name, name, null, value);

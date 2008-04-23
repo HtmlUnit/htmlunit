@@ -77,7 +77,7 @@ public class HtmlButton extends ClickableElement implements DisabledElement, Sub
      * @param attributes the initial attributes
      */
     HtmlButton(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

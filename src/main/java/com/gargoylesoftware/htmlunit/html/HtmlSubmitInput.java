@@ -74,7 +74,7 @@ public class HtmlSubmitInput extends HtmlInput {
      * @param attributes the initial attributes
      */
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         if (getPage().getWebClient().getBrowserVersion().isIE() && !isAttributeDefined("value")) {
             setAttributeValue("value", DEFAULT_VALUE);
@@ -130,7 +130,7 @@ public class HtmlSubmitInput extends HtmlInput {
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
 
-        for (final HtmlAttr attribute : getAttributesCollection()) {
+        for (final DomAttr attribute : getAttributesCollection()) {
             if (!attribute.getNodeName().equals("value") || !attribute.getHtmlValue().equals(DEFAULT_VALUE)) {
                 printWriter.print(" ");
                 final String name = attribute.getNodeName();

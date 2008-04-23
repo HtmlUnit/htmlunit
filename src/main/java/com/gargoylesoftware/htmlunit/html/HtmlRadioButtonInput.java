@@ -74,7 +74,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      * @param attributes the initial attributes
      */
     HtmlRadioButtonInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
 
         // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified

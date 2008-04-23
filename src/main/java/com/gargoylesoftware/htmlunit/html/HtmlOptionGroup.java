@@ -65,7 +65,7 @@ public class HtmlOptionGroup extends ClickableElement implements DisabledElement
      * @param attributes the initial attributes
      */
     HtmlOptionGroup(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

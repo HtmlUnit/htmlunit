@@ -64,7 +64,7 @@ public class HtmlHeading6 extends ClickableElement {
      * @param attributes the initial attributes
      */
     HtmlHeading6(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

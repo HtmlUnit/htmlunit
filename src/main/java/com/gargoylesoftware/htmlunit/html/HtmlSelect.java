@@ -79,7 +79,7 @@ public class HtmlSelect extends ClickableElement implements DisabledElement, Sub
      * @param attributes the initial attributes
      */
     HtmlSelect(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

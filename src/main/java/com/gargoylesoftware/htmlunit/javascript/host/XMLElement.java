@@ -43,9 +43,9 @@ import java.util.Map;
 
 import org.mozilla.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
-import com.gargoylesoftware.htmlunit.xml.XmlAttr;
 import com.gargoylesoftware.htmlunit.xml.XmlElement;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
@@ -98,9 +98,9 @@ public class XMLElement extends Node {
      * @return the attributes of this XML element
      */
     public Object jsxGet_attributes() {
-        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
+        final Map<String, com.gargoylesoftware.htmlunit.html.DomAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
         final List<ScriptableObject> list = new ArrayList<ScriptableObject>();
-        for (final XmlAttr attr : attributes.values()) {
+        for (final DomAttr attr : attributes.values()) {
             list.add(attr.getScriptObject());
         }
         return new NamedNodeMap((XmlElement) getDomNodeOrDie());
@@ -148,8 +148,8 @@ public class XMLElement extends Node {
      * @return the Attr node with the specified name or <code>null</code> if there is no such attribute
      */
     public Object jsxFunction_getAttributeNode(final String name) {
-        final Map<String, XmlAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
-        for (final XmlAttr attr : attributes.values()) {
+        final Map<String, DomAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
+        for (final DomAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
                 return attr.getScriptObject();
             }

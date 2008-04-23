@@ -74,7 +74,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlInput(final HtmlPage page, final Map<String, HtmlAttr> attributes) {
+    public HtmlInput(final HtmlPage page, final Map<String, DomAttr> attributes) {
         this(null, TAG_NAME, page, attributes);
     }
 
@@ -87,7 +87,7 @@ public abstract class HtmlInput extends ClickableElement implements DisabledElem
      * @param attributes the initial attributes
      */
     public HtmlInput(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         defaultValue_ = getValueAttribute();
     }

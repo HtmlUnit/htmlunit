@@ -1145,7 +1145,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
                 // perhaps should we create head too?
                 throw new IllegalStateException("Headelement was not defined for this page");
             }
-            final Map<String, HtmlAttr> emptyMap = Collections.emptyMap();
+            final Map<String, DomAttr> emptyMap = Collections.emptyMap();
             titleElement = new HtmlTitle(null, HtmlTitle.TAG_NAME, this, emptyMap);
             if (head.getFirstChild() != null) {
                 head.getFirstChild().insertBefore(titleElement);

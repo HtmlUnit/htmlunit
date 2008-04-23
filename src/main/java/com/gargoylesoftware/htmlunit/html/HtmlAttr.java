@@ -49,7 +49,9 @@ import org.w3c.dom.TypeInfo;
  * @author Denis N. Antonioli
  * @author David K. Taylor
  * @author Ahmed Ashour
- */
+ * @deprecated As of 2.2, no more used, pleas use {@link DomAttr} instead.
+*/
+@Deprecated
 public class HtmlAttr extends DomNamespaceNode implements Attr {
 
     private static final long serialVersionUID = 4832218455328064213L;

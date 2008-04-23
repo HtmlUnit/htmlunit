@@ -63,7 +63,7 @@ public class HtmlParameter extends HtmlElement {
      * @param attributes the initial attributes
      */
     HtmlParameter(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

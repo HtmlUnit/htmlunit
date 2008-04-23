@@ -64,7 +64,7 @@ public class HtmlUnorderedList extends ClickableElement {
      * @param attributes the initial attributes
      */
     HtmlUnorderedList(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

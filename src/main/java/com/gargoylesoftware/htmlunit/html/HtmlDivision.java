@@ -66,7 +66,7 @@ public class HtmlDivision extends ClickableElement {
      * @param attributes the initial attributes
      */
     public HtmlDivision(final String namespaceURI, final String qualifiedName, final HtmlPage page,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
 

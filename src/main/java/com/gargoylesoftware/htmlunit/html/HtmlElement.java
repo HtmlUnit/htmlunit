@@ -116,7 +116,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     private final transient Log mainLog_ = LogFactory.getLog(getClass());
 
     /** The map holding the attributes, keyed by name. */
-    private Map<String, HtmlAttr> attributes_;
+    private Map<String, DomAttr> attributes_;
 
     /** The map holding the namespaces, keyed by URI. */
     private Map<String, String> namespaces_ = new HashMap<String, String>();
@@ -133,13 +133,13 @@ public abstract class HtmlElement extends DomElement implements Element {
      * <code>null</code>. The map will be stored as is, not copied.
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final HtmlPage htmlPage,
-            final Map<String, HtmlAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, htmlPage);
         if (attributes != null) {
             attributes_ = attributes;
             // The HtmlAttr objects are created before the HtmlElement, so we need to go set the
             // parent HtmlElement, now. Also index the namespaces while we are at it.
-            for (final HtmlAttr entry : attributes_.values()) {
+            for (final DomAttr entry : attributes_.values()) {
                 entry.setParentNode(this);
                 final String attrNamespaceURI = entry.getNamespaceURI();
                 if (attrNamespaceURI != null) {
@@ -160,7 +160,7 @@ public abstract class HtmlElement extends DomElement implements Element {
     public DomNode cloneNode(final boolean deep) {
         final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
         newNode.attributes_ = createAttributeMap(attributes_.size());
-        for (final HtmlAttr attr : attributes_.values()) {
+        for (final DomAttr attr : attributes_.values()) {
             newNode.setAttributeValue(attr.getNamespaceURI(), attr.getQualifiedName(), attr.getNodeValue());
         }
         return newNode;
@@ -258,7 +258,7 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
     public final String getAttributeValue(final String attributeName) {
-        final HtmlAttr attr = attributes_.get(attributeName.toLowerCase());
+        final DomAttr attr = attributes_.get(attributeName.toLowerCase());
         if (attr != null) {
             return attr.getNodeValue();
         }
@@ -317,7 +317,7 @@ public abstract class HtmlElement extends DomElement implements Element {
         }
 
         getPage().removeMappedElement(this);
-        final HtmlAttr newAttr = addAttributeToMap(getPage(), attributes_, namespaceURI,
+        final DomAttr newAttr = addAttributeToMap(getPage(), attributes_, namespaceURI,
             qualifiedName.toLowerCase(), value);
         if (namespaceURI != null) {
             namespaces_.put(namespaceURI, newAttr.getPrefix());
@@ -533,13 +533,13 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * @return an iterator over the {@link HtmlAttr} objects representing the
+     * @return an iterator over the {@link DomAttr} objects representing the
      * attributes of this element.
      * The elements are ordered as found in the HTML source code.
      * @deprecated As of 2.0
      */
     @Deprecated
-    public Iterator<HtmlAttr> getAttributeEntriesIterator() {
+    public Iterator<DomAttr> getAttributeEntriesIterator() {
         return getAttributesCollection().iterator();
     }
 
@@ -552,10 +552,10 @@ public abstract class HtmlElement extends DomElement implements Element {
     }
 
     /**
-     * @return a collection of {@link HtmlAttr} objects representing the
+     * @return a collection of {@link DomAttr} objects representing the
      * attributes of this element. The elements are ordered as found in the HTML source code.
      */
-    public Collection<HtmlAttr> getAttributesCollection() {
+    public Collection<DomAttr> getAttributesCollection() {
         return attributes_.values();
     }
 
@@ -1073,8 +1073,8 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @return the attribute map
      */
     @SuppressWarnings("unchecked")
-    static Map<String, HtmlAttr> createAttributeMap(final int attributeCount) {
-        return ListOrderedMap.decorate(new HashMap<String, HtmlAttr>(attributeCount)); // preserve insertion order
+    static Map<String, DomAttr> createAttributeMap(final int attributeCount) {
+        return ListOrderedMap.decorate(new HashMap<String, DomAttr>(attributeCount)); // preserve insertion order
     }
 
     /**
@@ -1084,9 +1084,9 @@ public abstract class HtmlElement extends DomElement implements Element {
      * @param qualifiedName the qualified name of the attribute
      * @param value the value of the attribute
      */
-    static HtmlAttr addAttributeToMap(final HtmlPage page, final Map<String, HtmlAttr> attributeMap,
+    static DomAttr addAttributeToMap(final HtmlPage page, final Map<String, DomAttr> attributeMap,
             final String namespaceURI, final String qualifiedName, final String value) {
-        final HtmlAttr newAttr = new HtmlAttr(page, namespaceURI, qualifiedName, value);
+        final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value);
         attributeMap.put(qualifiedName, newAttr);
         return newAttr;
     }
