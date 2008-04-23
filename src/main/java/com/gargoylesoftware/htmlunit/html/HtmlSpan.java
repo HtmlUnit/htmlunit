@@ -48,6 +48,7 @@ import java.util.Map;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Rodney Gitzel
+ * @author Sudhan Moghe
  */
 public class HtmlSpan extends ClickableElement {
 
@@ -83,5 +84,13 @@ public class HtmlSpan extends ClickableElement {
     @Override
     protected boolean isTrimmedText() {
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
     }
 }

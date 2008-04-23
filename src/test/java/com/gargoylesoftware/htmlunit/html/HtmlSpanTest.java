@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  */
 public class HtmlSpanTest extends WebTestCase {
 
@@ -99,5 +100,20 @@ public class HtmlSpanTest extends WebTestCase {
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_2, html, collectedAlerts);
         assertTrue(HtmlAddress.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testEmptyTag() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head><body>\n"
+            + "<span id='myId'></span>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlSpan htmlSpan = (HtmlSpan) page.getHtmlElementById("myId");
+        assertTrue(htmlSpan.asXml().contains("</span>"));
     }
 }

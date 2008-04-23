@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Move to HtmlUnit-core-js">
+            <action type="update" dev="asashour" id="1948777" due-to="Sudhan Moghe">
+                &lt;span&gt;: empty tag is expanded as required by browsers.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add support for XMLElement.hasAttribute() (FF only).
             </action>
