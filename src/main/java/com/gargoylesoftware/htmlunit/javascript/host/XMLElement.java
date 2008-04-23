@@ -98,7 +98,7 @@ public class XMLElement extends Node {
      * @return the attributes of this XML element
      */
     public Object jsxGet_attributes() {
-        final Map<String, com.gargoylesoftware.htmlunit.html.DomAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
+        final Map<String, DomAttr> attributes = ((XmlElement) getDomNodeOrDie()).getAttributesMap();
         final List<ScriptableObject> list = new ArrayList<ScriptableObject>();
         for (final DomAttr attr : attributes.values()) {
             list.add(attr.getScriptObject());

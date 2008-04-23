@@ -232,7 +232,7 @@ public class Attr extends SimpleScriptable {
             if (parent_ instanceof HtmlElement) {
                 return ((HtmlElement) parent_).getAttributeValue(name_);
             }
-     	    return ((XmlElement) parent_).getAttributeValue(name_);
+            return ((XmlElement) parent_).getAttributeValue(name_);
         }
         return value_;
     }
