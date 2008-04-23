@@ -235,9 +235,9 @@ public class XMLElement extends Node {
     }
 
     /**
-     * 
-     * @param name
-     * @return
+     * Returns true when an attribute with a given name is specified on this element or has a default value.
+     * @param name the name of the attribute to look for
+     * @return true if an attribute with the given name is specified on this element or has a default value
      */
     public boolean jsxFunction_hasAttribute(final String name) {
         return ((XmlElement) getDomNodeOrDie()).hasAttribute(name);
