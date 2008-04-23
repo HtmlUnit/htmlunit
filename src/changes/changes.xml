@@ -13,7 +13,7 @@
             <action type="fix" dev="asashour" id="1942640">
                 JavaScript: fix XMLElement.attributes.
             </action>
-            <action type="update" dev="asashour" id="1948777" due-to="Sudhan Moghe">
+            <action type="update" dev="asashour" id="1947877" due-to="Sudhan Moghe">
                 &lt;span&gt;: empty tag is expanded as required by browsers.
             </action>
             <action type="add" dev="asashour">
