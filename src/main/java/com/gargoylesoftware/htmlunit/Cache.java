@@ -38,7 +38,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,8 +61,17 @@ public class Cache implements Serializable {
 
     private static final long serialVersionUID = -3864114727885057419L;
 
+    /** The maximum size of the cache. */
     private int maxSize_ = 20;
-    private final Map<URL, Entry> entries_ = Collections.synchronizedMap(new HashMap<URL, Entry>(maxSize_));
+
+    /**
+     * The map which holds the cached responses. Note that we key on the string version of URLs, rather than
+     * on the URLs themselves. This is done for performance, because a) the {@link java.net.URL#hashCode()}
+     * method is synchronized, and b) the {@link java.net.URL#hashCode()} method triggers DNS lookups of the
+     * URL hostnames' IPs. As of this writing, the HtmlUnit unit tests run ~20% faster whey keying on strings
+     * rather than on {@link java.net.URL} instances.
+     */
+    private final Map<String, Entry> entries_ = Collections.synchronizedMap(new HashMap<String, Entry>(maxSize_));
 
     /**
      * A cache entry.
@@ -97,7 +105,7 @@ public class Cache implements Serializable {
      */
     public void cacheIfNeeded(final WebRequestSettings request, final WebResponse response) {
         if (isCacheable(request, response)) {
-            entries_.put(response.getUrl(), new Entry(response));
+            entries_.put(response.getUrl().toString(), new Entry(response));
             deleteOverflow();
         }
     }
@@ -109,7 +117,7 @@ public class Cache implements Serializable {
         synchronized (entries_) {
             while (entries_.size() > maxSize_) {
                 final Entry oldestEntry = Collections.min(entries_.values());
-                entries_.remove(oldestEntry.response_.getUrl());
+                entries_.remove(oldestEntry.response_.getUrl().toString());
             }
         }
     }
@@ -203,7 +211,7 @@ public class Cache implements Serializable {
         if (!SubmitMethod.GET.equals(request.getSubmitMethod())) {
             return null;
         }
-        final Entry cachedEntry = entries_.get(request.getURL());
+        final Entry cachedEntry = entries_.get(request.getURL().toString());
         if (cachedEntry == null) {
             return null;
         }
