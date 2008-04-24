@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="sdanig">
+                JavaScript: add support for the link.href, link.type and link.rel properties.
+            </action>
             <action type="fix" dev="sdanig">
                 JavaScript: initialize event.target correctly when using createEvent and dispatchEvent (FF only).
             </action>

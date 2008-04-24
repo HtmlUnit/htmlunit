@@ -1363,6 +1363,9 @@
 
     <class name="HTMLLinkElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLLinkElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
+        <property name="href" readable="true" writable="true"/>
+        <property name="rel" readable="true" writable="true"/>
+        <property name="type" readable="true" writable="true"/>
     </class>
 
     <class name="HTMLMapElement" extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.HTMLMapElement"

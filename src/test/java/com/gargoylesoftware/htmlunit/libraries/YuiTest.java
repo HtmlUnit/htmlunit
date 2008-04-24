@@ -41,6 +41,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -199,10 +200,8 @@ public class YuiTest extends WebTestCase {
      */
     @Test
     public void yuiLoaderConfig() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_2, "yuiloader_config.html", emptyList_);
+        // The "test_page_modules" test fails in FF, too, so it's OK.
+        doTest(BrowserVersion.FIREFOX_2, "yuiloader_config.html", Arrays.asList("test_page_modules"));
     }
 
     /**

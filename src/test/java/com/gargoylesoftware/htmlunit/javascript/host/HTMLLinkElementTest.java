@@ -37,86 +37,52 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
- * The JavaScript object "HTMLLinkElement".
+ * Unit tests for {@link HTMLLinkElement}.
  *
  * @version $Revision$
- * @author Ahmed Ashour
+ * @author Daniel Gredler
  */
-public class HTMLLinkElement extends HTMLElement {
-
-    private static final long serialVersionUID = -6381573516360300401L;
+public class HTMLLinkElementTest extends WebTestCase {
 
     /**
-     * Create an instance.
-     */
-    public HTMLLinkElement() {
-        // Empty.
-    }
-
-    /**
-     * Sets the href property.
-     * @param href href attribute value
-     */
-    public void jsxSet_href(final String href) {
-        getHtmlElementOrDie().setAttributeValue("href", href);
-    }
-
-    /**
-     * Returns the value of the href property.
-     * @return the href property
      * @throws Exception if an error occurs
      */
-    public String jsxGet_href() throws Exception {
-        final HtmlLink link = (HtmlLink) getHtmlElementOrDie();
-        final String href = link.getHrefAttribute();
-        if (href.length() == 0) {
-            return href;
-        }
-        try {
-            return link.getPage().getFullyQualifiedUrl(href).toString();
-        }
-        catch (final MalformedURLException e) {
-            return href;
-        }
-    }
-
-    /**
-     * Sets the rel property.
-     * @param rel rel attribute value
-     */
-    public void jsxSet_rel(final String rel) {
-        getHtmlElementOrDie().setAttributeValue("rel", rel);
-    }
-
-    /**
-     * Returns the value of the rel property.
-     * @return the rel property
-     * @throws Exception if an error occurs
-     */
-    public String jsxGet_rel() throws Exception {
-        return ((HtmlLink) getHtmlElementOrDie()).getRelAttribute();
-    }
-
-    /**
-     * Sets the type property.
-     * @param type type attribute value
-     */
-    public void jsxSet_type(final String type) {
-        getHtmlElementOrDie().setAttributeValue("type", type);
-    }
-
-    /**
-     * Returns the value of the type property.
-     * @return the type property
-     * @throws Exception if an error occurs
-     */
-    public String jsxGet_type() throws Exception {
-        return ((HtmlLink) getHtmlElementOrDie()).getTypeAttribute();
+    @Test
+    public void basicLinkAttributes() throws Exception {
+        final String html =
+              "<html>\n"
+            + "    <body onload='test()'>\n"
+            + "        <script>\n"
+            + "            function test() {\n"
+            + "                var s = document.createElement('link');\n"
+            + "                alert(s.href);\n"
+            + "                alert(s.type);\n"
+            + "                alert(s.rel);\n"
+            + "                s.href= 'test.css';\n"
+            + "                s.type = 'text/css';\n"
+            + "                s.rel = 'stylesheet';\n"
+            + "                alert(s.href);\n"
+            + "                alert(s.type);\n"
+            + "                alert(s.rel);\n"
+            + "            }\n"
+            + "        </script>\n"
+            + "    </body>\n"
+            + "</html>";
+        final List<String> actual = new ArrayList<String>();
+        loadPage(BrowserVersion.FIREFOX_2, html, actual);
+        final String[] expected = new String[] {
+            "", "", "",
+            "http://www.gargoylesoftware.com/test.css", "text/css", "stylesheet"};
+        assertEquals(expected, actual);
     }
 
 }
