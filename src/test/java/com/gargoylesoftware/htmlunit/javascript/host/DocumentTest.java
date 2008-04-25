@@ -2042,6 +2042,52 @@ public class DocumentTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void cookie_write() throws Exception {
+        cookie_write(true);
+        cookie_write(false);
+    }
+
+    private void cookie_write(final boolean cookiesEnabled) throws Exception {
+        final String html =
+              "<html>\n"
+            + "    <head>\n"
+            + "        <script>\n"
+            + "            alert(navigator.cookieEnabled);\n"
+            + "            alert(document.cookie);\n"
+            + "            document.cookie = 'foo=bar';\n"
+            + "            alert(document.cookie);\n"
+            + "        </script>\n"
+            + "    </head>\n"
+            + "    <body>abc</body>\n"
+            + "</html>";
+
+        final WebClient client = new WebClient();
+        client.setCookiesEnabled(cookiesEnabled);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection(client);
+        conn.setDefaultResponse(html);
+        client.setWebConnection(conn);
+
+        client.getPage("http://www.microsoft.com/");
+
+        final String[] expected;
+        if (cookiesEnabled) {
+            expected = new String[] {"true", "", "foo=bar"};
+        }
+        else {
+            expected = new String[] {"false", "", ""};
+        }
+
+        assertEquals(expected, actual);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

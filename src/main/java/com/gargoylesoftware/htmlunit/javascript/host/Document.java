@@ -519,17 +519,22 @@ public class Document extends EventNode {
     }
 
     /**
-     * Adds a cookie.
+     * Adds a cookie, as long as cookies are enabled.
      * @see <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/cookie.asp">
      * MSDN documentation</a>
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
     public void jsxSet_cookie(final String newCookie) {
-        final HttpState state = getHtmlPage().getWebClient().getWebConnection().getState();
-
-        final Cookie cookie = buildCookie(newCookie, getHtmlPage().getWebResponse().getUrl());
-        state.addCookie(cookie);
-        getLog().info("Added cookie: " + cookie);
+        final WebClient client = getHtmlPage().getWebClient();
+        if (client.isCookiesEnabled()) {
+            final HttpState state = client.getWebConnection().getState();
+            final Cookie cookie = buildCookie(newCookie, getHtmlPage().getWebResponse().getUrl());
+            state.addCookie(cookie);
+            getLog().debug("Added cookie: " + cookie);
+        }
+        else {
+            getLog().debug("Skipped adding cookie:" + newCookie);
+        }
     }
 
     /**

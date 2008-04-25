@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="fix" dev="sdanig" id="1951179">
+                JavaScript: don't store cookies when document.cookie is set and cookies are disabled.
+            </action>
             <action type="add" dev="sdanig">
                 JavaScript: add support for the link.href, link.type and link.rel properties.
             </action>
