@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,7 +49,10 @@ import java.util.Set;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/Plugin.html">XUL Planet</a>
  */
-public class PluginConfiguration {
+public class PluginConfiguration implements Serializable {
+
+    private static final long serialVersionUID = -3160049910272683027L;
+
     private String description_;
     private String filename_;
     private String name_;
@@ -57,7 +61,10 @@ public class PluginConfiguration {
     /**
      * Holds information about a single mime type associated with a plugin.
      */
-    public static class MimeType {
+    public static class MimeType implements Serializable {
+
+        private static final long serialVersionUID = 3775313058008352464L;
+
         private String description_;
         private String suffixes_;
         private String type_;

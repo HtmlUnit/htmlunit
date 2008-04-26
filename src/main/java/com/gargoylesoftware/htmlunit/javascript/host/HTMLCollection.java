@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -578,7 +579,11 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         return idList.toArray();
     }
 
-    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
+        Serializable {
+
+        private static final long serialVersionUID = 5296270270141251350L;
+
         /**
          * {@inheritDoc}
          */

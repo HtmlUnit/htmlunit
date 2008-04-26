@@ -76,7 +76,9 @@ public class Cache implements Serializable {
     /**
      * A cache entry.
      */
-    private class Entry implements Comparable<Entry> {
+    private class Entry implements Comparable<Entry>, Serializable {
+
+        private static final long serialVersionUID = 588400350259242484L;
         private final WebResponse response_;
         private long lastAccess_;
         
