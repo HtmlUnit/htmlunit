@@ -1945,7 +1945,6 @@ public class HtmlPageTest extends WebTestCase {
             }
             resp.getWriter().write(builder.toString());
         }
-
     }
 
     /**

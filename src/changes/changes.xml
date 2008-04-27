@@ -8,8 +8,9 @@
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
             <action type="add" dev="asashour" id="1946000">
-                HtmlPage: add refresh(), and deprecate HttpWebConnection.newWebResponseInstance()
-                which is replaced with another method with different parameters.
+                HtmlPage: add refresh(), deprecate HttpWebConnection.newWebResponseInstance()
+                (replaced with another method with different parameters),
+                and deprecate one of WebResponseImpl constructors (with replacement).
             </action>
             <action type="update" dev="asashour">
                 WebRequestSettings: deprecate getURL() and setURL(), use getUrl() and setUrl().

@@ -499,7 +499,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @param requestMethod the method used to get this response
      * @param loadTime How long the response took to be sent
      * @return the new WebResponse
-     * @deprecated No more used,
+     * @deprecated As of 2.2, no more used,
      *     please use {@link #newWebResponseInstance(String, WebResponseData, long, WebRequestSettings)} instead
      */
     @Deprecated

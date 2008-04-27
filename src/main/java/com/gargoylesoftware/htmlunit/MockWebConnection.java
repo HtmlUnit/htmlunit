@@ -105,8 +105,7 @@ public class MockWebConnection extends WebConnectionImpl {
             }
         }
 
-        return new WebResponseImpl(response, webRequestSettings.getCharset(),
-                webRequestSettings.getUrl(), webRequestSettings.getSubmitMethod(), 0);
+        return new WebResponseImpl(response, webRequestSettings.getCharset(), webRequestSettings, 0);
     }
 
     /**

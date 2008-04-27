@@ -78,7 +78,7 @@ public class WebResponseImpl implements WebResponse, Serializable {
      */
     public WebResponseImpl(final WebResponseData responseData, final URL url,
             final SubmitMethod requestMethod, final long loadTime) {
-        this(responseData, TextUtil.DEFAULT_CHARSET, url, requestMethod, loadTime);
+        this(responseData, TextUtil.DEFAULT_CHARSET, new WebRequestSettings(url, requestMethod), loadTime);
     }
 
     /**
@@ -89,7 +89,9 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * @param url               Where this response came from
      * @param requestMethod     the method used to get this response
      * @param loadTime          How long the response took to be sent
+     * @deprecated As of 2.2, please use {@link #WebResponseImpl(WebResponseData, String, WebRequestSettings, long)}.
      */
+    @Deprecated
     public WebResponseImpl(final WebResponseData responseData, final String charset,
             final URL url, final SubmitMethod requestMethod, final long loadTime) {
         this(responseData, charset, new WebRequestSettings(url, requestMethod), loadTime);
