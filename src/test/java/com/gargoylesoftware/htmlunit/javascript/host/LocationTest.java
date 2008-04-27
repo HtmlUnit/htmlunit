@@ -251,7 +251,7 @@ public class LocationTest extends WebTestCase {
 
         // Verify that we didn't reload the page.
         assertTrue(page == page2);
-        assertEquals(URL_FIRST, conn.getLastWebRequestSettings().getURL());
+        assertEquals(URL_FIRST, conn.getLastWebRequestSettings().getUrl());
     }
 
     /**

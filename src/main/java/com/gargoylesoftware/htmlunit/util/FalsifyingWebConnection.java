@@ -83,8 +83,8 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      */
     protected WebResponse deliverFromAlternateUrl(final WebRequestSettings webRequestSettings, final URL url)
         throws IOException {
-        final URL originalUrl = webRequestSettings.getURL();
-        webRequestSettings.setURL(url);
+        final URL originalUrl = webRequestSettings.getUrl();
+        webRequestSettings.setUrl(url);
         final WebResponse resp = super.getResponse(webRequestSettings);
         return new WebResponseWrapper(resp) {
             @Override

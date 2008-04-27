@@ -89,7 +89,7 @@ public class MockWebConnection extends WebConnectionImpl {
      */
     @Override
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-        final URL url = webRequestSettings.getURL();
+        final URL url = webRequestSettings.getUrl();
 
         getLog().debug("Getting response for " + url.toExternalForm());
 
@@ -106,7 +106,7 @@ public class MockWebConnection extends WebConnectionImpl {
         }
 
         return new WebResponseImpl(response, webRequestSettings.getCharset(),
-                webRequestSettings.getURL(), webRequestSettings.getSubmitMethod(), 0);
+                webRequestSettings.getUrl(), webRequestSettings.getSubmitMethod(), 0);
     }
 
     /**

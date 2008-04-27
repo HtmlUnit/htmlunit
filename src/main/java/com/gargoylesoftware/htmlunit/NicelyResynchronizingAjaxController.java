@@ -87,7 +87,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
             final boolean async) {
         
         if (async && isInOriginalThread()) {
-            getLog().info("Re-synchronized call to " + requestSettings.getURL());
+            getLog().info("Re-synchronized call to " + requestSettings.getUrl());
             return true;
         }
         return !async;

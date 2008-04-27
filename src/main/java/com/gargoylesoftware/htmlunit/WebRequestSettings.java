@@ -74,7 +74,7 @@ public class WebRequestSettings {
      * @param target the URL for this request
      */
     public WebRequestSettings(final URL target) {
-        setURL(target);
+        setUrl(target);
     }
 
     /**
@@ -100,15 +100,33 @@ public class WebRequestSettings {
 
     /**
      * @return the URL
+     * @deprecated As of 2.2, use {@link #getUrl()} instead.
      */
+    @Deprecated
     public URL getURL() {
         return url_;
     }
 
     /**
+     * @return the URL
+     */
+    public URL getUrl() {
+        return url_;
+    }
+
+    /**
+     * @param url the new URL
+     * @deprecated As of 2.2, user {@link #setUrl(URL)} instead.
+     */
+    @Deprecated
+    public void setURL(final URL url) {
+        url_ = url;
+    }
+
+    /**
      * @param url the new URL
      */
-    public void setURL(final URL url) {
+    public void setUrl(final URL url) {
         url_ = url;
     }
 

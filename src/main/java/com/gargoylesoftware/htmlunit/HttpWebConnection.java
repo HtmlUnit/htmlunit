@@ -111,7 +111,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      */
     @Override
     public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-        final URL url = webRequestSettings.getURL();
+        final URL url = webRequestSettings.getUrl();
 
         final HttpClient httpClient = getHttpClient();
 
@@ -169,7 +169,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      */
     private HostConfiguration getHostConfiguration(final WebRequestSettings webRequestSettings) {
         final HostConfiguration hostConfiguration = new HostConfiguration();
-        final URL url = webRequestSettings.getURL();
+        final URL url = webRequestSettings.getUrl();
         final URI uri;
         try {
             uri = new URI(url.toExternalForm(), false);
@@ -196,7 +196,7 @@ public class HttpWebConnection extends WebConnectionImpl {
     private HttpMethodBase makeHttpMethod(final WebRequestSettings webRequestSettings)
         throws IOException {
 
-        String path = webRequestSettings.getURL().getPath();
+        String path = webRequestSettings.getUrl().getPath();
         if (path.length() == 0) {
             path = "/";
         }
@@ -208,7 +208,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
 
             if (webRequestSettings.getRequestParameters().isEmpty()) {
-                final String queryString = webRequestSettings.getURL().getQuery();
+                final String queryString = webRequestSettings.getUrl().getQuery();
                 httpMethod.setQueryString(queryString);
             }
             else {
@@ -221,7 +221,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             final EntityEnclosingMethod method = (EntityEnclosingMethod) httpMethod;
             method.getParams().setContentCharset(webRequestSettings.getCharset());
 
-            final String queryString = webRequestSettings.getURL().getQuery();
+            final String queryString = webRequestSettings.getUrl().getQuery();
             if (queryString != null) {
                 method.setQueryString(queryString);
             }

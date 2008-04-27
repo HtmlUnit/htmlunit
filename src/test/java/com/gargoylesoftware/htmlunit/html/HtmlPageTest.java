@@ -1344,7 +1344,7 @@ public class HtmlPageTest extends WebTestCase {
                 }
                 content += "</head><body></body></html>";
                 nbCalls_++;
-                return new StringWebResponse(content, settings.getURL()) {
+                return new StringWebResponse(content, settings.getUrl()) {
                     private static final long serialVersionUID = 4945986137562358686L;
 
                     @Override

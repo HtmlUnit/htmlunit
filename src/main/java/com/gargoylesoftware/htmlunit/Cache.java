@@ -213,7 +213,7 @@ public class Cache implements Serializable {
         if (!SubmitMethod.GET.equals(request.getSubmitMethod())) {
             return null;
         }
-        final Entry cachedEntry = entries_.get(request.getURL().toString());
+        final Entry cachedEntry = entries_.get(request.getUrl().toString());
         if (cachedEntry == null) {
             return null;
         }

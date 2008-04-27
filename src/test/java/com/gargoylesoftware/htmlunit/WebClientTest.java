@@ -325,7 +325,7 @@ public class WebClientTest extends WebTestCase {
                 ++count_;
                 if (count_ == 1) {
                     final WebResponse response = super.getResponse(webRequestSettings);
-                    setResponse(webRequestSettings.getURL(), secondContent);
+                    setResponse(webRequestSettings.getUrl(), secondContent);
                     return response;
                 }
                 return super.getResponse(webRequestSettings);
@@ -530,7 +530,7 @@ public class WebClientTest extends WebTestCase {
                 }
                 else if (count_ == nbRedirections) {
                     final WebResponse response = super.getResponse(webRequestSettings);
-                    setResponse(webRequestSettings.getURL(), secondContent);
+                    setResponse(webRequestSettings.getUrl(), secondContent);
                     return response;
                 }
                 else {

@@ -677,7 +677,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         final MockWebConnection webConnection = new MockWebConnection(client) {
             @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-                collectedAlerts.add(webRequestSettings.getURL().toExternalForm());
+                collectedAlerts.add(webRequestSettings.getUrl().toExternalForm());
                 return super.getResponse(webRequestSettings);
             }
         };
@@ -725,7 +725,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         final WebRequestSettings settings = webConnection.getLastWebRequestSettings();
-        assertEquals(urlPage2, settings.getURL());
+        assertEquals(urlPage2, settings.getUrl());
         assertEquals(URL_FIRST.toExternalForm(), settings.getAdditionalHeaders().get("Referer"));
     }
 
@@ -793,7 +793,7 @@ public class XMLHttpRequestTest extends WebTestCase {
         client.getPage(URL_FIRST);
 
         final WebRequestSettings settings = webConnection.getLastWebRequestSettings();
-        assertEquals(urlPage2, settings.getURL());
+        assertEquals(urlPage2, settings.getUrl());
         assertEquals(method, settings.getSubmitMethod());
     }
 
@@ -892,7 +892,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
             @Override
             public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
-                final String url = webRequestSettings.getURL().toExternalForm();
+                final String url = webRequestSettings.getUrl().toExternalForm();
                 
                 synchronized (this) {
                     while (!gotFoo1_ && url.endsWith("foo2.txt")) {

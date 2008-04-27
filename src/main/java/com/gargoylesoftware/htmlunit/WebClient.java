@@ -341,9 +341,9 @@ public class WebClient implements Serializable {
         getLog().debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
 
         final WebResponse webResponse;
-        final String protocol = parameters.getURL().getProtocol();
+        final String protocol = parameters.getUrl().getProtocol();
         if (protocol.equals("javascript")) {
-            webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getURL(), parameters.getCharset());
+            webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getUrl(), parameters.getCharset());
         }
         else {
             webResponse = loadWebResponse(parameters);
@@ -1315,7 +1315,7 @@ public class WebClient implements Serializable {
     }
 
     private WebResponse makeWebResponseForDataUrl(final WebRequestSettings webRequestSettings) throws IOException {
-        final URL url = webRequestSettings.getURL();
+        final URL url = webRequestSettings.getUrl();
         final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
         DataUrlDecoder decoder;
         try {
@@ -1474,12 +1474,12 @@ public class WebClient implements Serializable {
         }
 
         final WebResponse response;
-        final String protocol = webRequestSettings.getURL().getProtocol();
+        final String protocol = webRequestSettings.getUrl().getProtocol();
         if (protocol.equals("about")) {
-            response = makeWebResponseForAboutUrl(webRequestSettings.getURL());
+            response = makeWebResponseForAboutUrl(webRequestSettings.getUrl());
         }
         else if (protocol.equals("file")) {
-            response = makeWebResponseForFileUrl(webRequestSettings.getURL(), webRequestSettings.getCharset());
+            response = makeWebResponseForFileUrl(webRequestSettings.getUrl(), webRequestSettings.getCharset());
         }
         else if (protocol.equals("data")) {
             if (browserVersion_.isNetscape()) {
@@ -1507,7 +1507,7 @@ public class WebClient implements Serializable {
                 final int nbAllowedRedirections)
         throws
             IOException {
-        final URL url = webRequestSettings.getURL();
+        final URL url = webRequestSettings.getUrl();
         final SubmitMethod method = webRequestSettings.getSubmitMethod();
         final List<NameValuePair> parameters = webRequestSettings.getRequestParameters();
 
@@ -1520,7 +1520,7 @@ public class WebClient implements Serializable {
         // If the request settings don't specify a custom proxy, use the default client proxy...
         if (webRequestSettings.getProxyHost() == null) {
             // ...unless the host needs to bypass the configured client proxy!
-            if (!shouldBypassProxy(webRequestSettings.getURL().getHost())) {
+            if (!shouldBypassProxy(webRequestSettings.getUrl().getHost())) {
                 webRequestSettings.setProxyHost(proxyHost_);
                 webRequestSettings.setProxyPort(proxyPort_);
             }
@@ -1529,7 +1529,7 @@ public class WebClient implements Serializable {
         //TODO: this should probably be handled inside of WebRequestSettings and
         // could cause a bug if anything above here reads the URL again
         final URL fixedUrl = encodeUrl(url);
-        webRequestSettings.setURL(fixedUrl);
+        webRequestSettings.setUrl(fixedUrl);
 
         // adds the headers that are sent on every request
         webRequestSettings.getAdditionalHeaders().putAll(requestHeaders_);
