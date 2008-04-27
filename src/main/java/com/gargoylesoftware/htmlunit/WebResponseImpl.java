@@ -63,11 +63,10 @@ public class WebResponseImpl implements WebResponse, Serializable {
     private static final long serialVersionUID = 2842434739251092348L;
 
     private final transient Log log_ = LogFactory.getLog(WebResponseImpl.class);
-    private URL url_;
-    private SubmitMethod requestMethod_;
     private long loadTime_;
     private WebResponseData responseData_;
     private String charset_;
+    private WebRequestSettings requestSettings_;
 
     /**
      * Constructs with all data.
@@ -93,10 +92,22 @@ public class WebResponseImpl implements WebResponse, Serializable {
      */
     public WebResponseImpl(final WebResponseData responseData, final String charset,
             final URL url, final SubmitMethod requestMethod, final long loadTime) {
+        this(responseData, charset, new WebRequestSettings(url, requestMethod), loadTime);
+    }
+
+    /**
+     * Constructs with all data.
+     *
+     * @param responseData      Data that was send back
+     * @param charset           Charset used if not returned in the response
+     * @param requestSettings   the request settings used to get this response
+     * @param loadTime          How long the response took to be sent
+     */
+    public WebResponseImpl(final WebResponseData responseData, final String charset,
+            final WebRequestSettings requestSettings, final long loadTime) {
         responseData_ = responseData;
         charset_ = charset;
-        url_ = url;
-        requestMethod_ = requestMethod;
+        requestSettings_ = requestSettings;
         loadTime_ = loadTime;
     }
 
@@ -161,14 +172,14 @@ public class WebResponseImpl implements WebResponse, Serializable {
      * {@inheritDoc}
      */
     public URL getUrl() {
-        return url_;
+        return getRequestSettings().getUrl();
     }
 
     /**
      * {@inheritDoc}
      */
     public SubmitMethod getRequestMethod() {
-        return requestMethod_;
+        return getRequestSettings().getSubmitMethod();
     }
 
     /**
@@ -286,4 +297,10 @@ public class WebResponseImpl implements WebResponse, Serializable {
         return responseData_.getBody();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public WebRequestSettings getRequestSettings() {
+        return requestSettings_;
+    }
 }

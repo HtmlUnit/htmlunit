@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 import org.apache.commons.httpclient.methods.PostMethod;
 
 /**
@@ -44,8 +46,11 @@ import org.apache.commons.httpclient.methods.PostMethod;
  *
  * @version $Revision$
  * @author Brad Clarke
+ * @author Ahmed Ashour
  */
-public final class FormEncodingType {
+public final class FormEncodingType implements Serializable {
+
+    private static final long serialVersionUID = -7341913381207910442L;
 
     /** URL-encoded form encoding. */
     public static final FormEncodingType URL_ENCODED = new FormEncodingType(PostMethod.FORM_URL_ENCODED_CONTENT_TYPE);

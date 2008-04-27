@@ -121,7 +121,8 @@ public class HttpWebConnection extends WebConnectionImpl {
             final long startTime = System.currentTimeMillis();
             final int responseCode = httpClient.executeMethod(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
-            return makeWebResponse(responseCode, httpMethod, url, endTime - startTime, webRequestSettings.getCharset());
+            return makeWebResponse(responseCode, httpMethod, webRequestSettings, endTime - startTime,
+                webRequestSettings.getCharset());
         }
         catch (final HttpException e) {
             // KLUDGE: hitting www.yahoo.com will cause an exception to be thrown while
@@ -453,7 +454,7 @@ public class HttpWebConnection extends WebConnectionImpl {
      * Converts the HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final int statusCode, final HttpMethodBase method,
-            final URL originatingURL, final long loadTime, final String charset) throws IOException {
+            final WebRequestSettings requestSettings, final long loadTime, final String charset) throws IOException {
 
         String statusMessage = method.getStatusText();
         if (statusMessage == null || statusMessage.length() == 0) {
@@ -467,9 +468,7 @@ public class HttpWebConnection extends WebConnectionImpl {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
         final WebResponseData responseData = newWebResponseDataInstance(statusMessage, headers, statusCode, method);
-
-        final SubmitMethod requestMethod = SubmitMethod.getInstance(method.getName());
-        return newWebResponseInstance(charset, responseData, loadTime, requestMethod, originatingURL);
+        return newWebResponseInstance(charset, responseData, loadTime, requestSettings);
     }
 
     /**
@@ -500,7 +499,10 @@ public class HttpWebConnection extends WebConnectionImpl {
      * @param requestMethod the method used to get this response
      * @param loadTime How long the response took to be sent
      * @return the new WebResponse
+     * @deprecated No more used,
+     *     please use {@link #newWebResponseInstance(String, WebResponseData, long, WebRequestSettings)} instead
      */
+    @Deprecated
     protected WebResponse newWebResponseInstance(
             final String charset,
             final WebResponseData responseData,
@@ -508,6 +510,23 @@ public class HttpWebConnection extends WebConnectionImpl {
             final SubmitMethod requestMethod,
             final URL originatingURL) {
         return new WebResponseImpl(responseData, charset, originatingURL, requestMethod, loadTime);
+    }
+
+    /**
+     * Constructs an appropriate WebResponse.
+     * May be overridden by subclasses to return a specialized WebResponse.
+     * @param responseData Data that was send back
+     * @param charset Charset used if not returned in the response
+     * @param requestSettings the request settings used to get this response
+     * @param loadTime How long the response took to be sent
+     * @return the new WebResponse
+     */
+    protected WebResponse newWebResponseInstance(
+            final String charset,
+            final WebResponseData responseData,
+            final long loadTime,
+            final WebRequestSettings requestSettings) {
+        return new WebResponseImpl(responseData, charset, requestSettings, loadTime);
     }
 
     private void writeRequestHeadersToHttpMethod(final HttpMethod httpMethod,

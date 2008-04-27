@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,8 +56,9 @@ import org.apache.commons.lang.ClassUtils;
  * @author Hans Donner
  * @author Ahmed Ashour
  */
-public class WebRequestSettings {
+public class WebRequestSettings implements Serializable {
 
+    private static final long serialVersionUID = -7405507885099274031L;
     private URL url_;
     private String proxyHost_;
     private int proxyPort_;

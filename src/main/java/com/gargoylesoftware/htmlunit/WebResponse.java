@@ -51,6 +51,7 @@ import org.apache.commons.httpclient.NameValuePair;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public interface WebResponse {
     /**
@@ -135,5 +136,10 @@ public interface WebResponse {
      * @return response body
      */
     byte[] getResponseBody();
-}
 
+    /**
+     * Returns the request settings.
+     * @return the request settings
+     */
+    WebRequestSettings getRequestSettings();
+}

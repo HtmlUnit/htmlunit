@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class CacheTest extends WebTestCase {
@@ -269,6 +270,10 @@ class DummyWebResponse implements WebResponse {
     }
 
     public URL getUrl() {
+        throw new RuntimeException("not implemented");
+    }
+    
+    public WebRequestSettings getRequestSettings() {
         throw new RuntimeException("not implemented");
     }
 }

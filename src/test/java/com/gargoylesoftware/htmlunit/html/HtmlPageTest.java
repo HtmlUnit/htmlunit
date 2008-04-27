@@ -47,25 +47,36 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.NameValuePair;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -93,6 +104,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeLis
  * @author Ahmed Ashour
  */
 public class HtmlPageTest extends WebTestCase {
+
+    private Server server_;
 
     /**
      * @exception Exception If the test fails
@@ -1866,5 +1879,82 @@ public class HtmlPageTest extends WebTestCase {
         page.getByXPath("//p");
         final HtmlPage clonedPage = page.cloneNode(true);
         clonedPage.getByXPath("//p");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void refresh() throws Exception {
+        final Map<String, Class< ? extends Servlet>> map = new HashMap<String, Class< ? extends Servlet>>();
+        map.put("/one.html", RefreshServlet.class);
+        map.put("/two.html", RefreshServlet.class);
+        server_ = HttpWebConnectionTest.startWebServer(".", null, map);
+        final WebClient client = new WebClient();
+        final HtmlPage page = (HtmlPage) client.getPage("http://localhost:" + HttpWebConnectionTest.PORT + "/one.html");
+        final HtmlSubmitInput submit = (HtmlSubmitInput) page.getHtmlElementById("myButton");
+        final HtmlPage secondPage = (HtmlPage) submit.click();
+        assertEquals("0\nPOST\nsome_name some_value\n", secondPage.getWebResponse().getContentAsString());
+        final HtmlPage secondPage2 = (HtmlPage) secondPage.refresh();
+        assertEquals("1\nPOST\nsome_name some_value\n", secondPage2.getWebResponse().getContentAsString());
+    }
+
+    /**
+     * Refresh servlet.
+     */
+    public static class RefreshServlet extends HttpServlet {
+
+        private int counter_;
+
+        private static final long serialVersionUID = 4970162835902592484L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            final Writer writer = resp.getWriter();
+            resp.setContentType("text/html");
+            final String response = "<html>\n"
+                + "<body>\n"
+                + "  <div id='counter'>" + counter_++ + "</div>\n"
+                + "  <form action='two.html' method='post'>\n"
+                + "  <input type='hidden' name='some_name' value='some_value'>\n"
+                + "  <input id='myButton' type='submit'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+            writer.write(response);
+            writer.close();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        @SuppressWarnings("unchecked")
+        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            resp.setContentType("text/html");
+            final StringBuilder builder = new StringBuilder();
+            builder.append(counter_++).append("\n");
+            builder.append(req.getMethod()).append("\n");
+            for (final Enumeration en = req.getParameterNames(); en.hasMoreElements();) {
+                final String name = (String) en.nextElement();
+                final String value = req.getParameter(name);
+                builder.append(name).append(' ').append(value).append('\n');
+            }
+            resp.getWriter().write(builder.toString());
+        }
+
+    }
+
+    /**
+     * Performs post-test deconstruction.
+     * @throws Exception if an error occurs
+     */
+    @After
+    public void after() throws Exception {
+        HttpWebConnectionTest.stopWebServer(server_);
+        server_ = null;
     }
 }

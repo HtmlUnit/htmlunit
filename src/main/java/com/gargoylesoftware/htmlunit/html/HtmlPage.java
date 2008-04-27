@@ -2108,4 +2108,12 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         parserCount_--;
     }
 
+    /**
+     * Refreshes the page by sending the same parameters as previously sent to get this page.
+     * @return the newly loaded page.
+     * @throws IOException if an IO problem occurs
+     */
+    public Page refresh() throws IOException {
+        return getWebClient().getPage(getWebResponse().getRequestSettings());
+    }
 }

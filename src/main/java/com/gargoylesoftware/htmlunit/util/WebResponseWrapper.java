@@ -45,6 +45,7 @@ import java.util.List;
 import org.apache.commons.httpclient.NameValuePair;
 
 import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
@@ -55,6 +56,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class WebResponseWrapper implements WebResponse {
     private final WebResponse wrappedWebResponse_;
@@ -167,4 +169,11 @@ public class WebResponseWrapper implements WebResponse {
         return wrappedWebResponse_.getUrl();
     }
 
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getRequestSettings() on the wrapped connection object.
+     */
+    public WebRequestSettings getRequestSettings() {
+        return wrappedWebResponse_.getRequestSettings();
+    }
 }

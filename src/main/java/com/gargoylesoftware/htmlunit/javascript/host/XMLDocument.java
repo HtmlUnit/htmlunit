@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -156,7 +157,7 @@ public class XMLDocument extends Document {
         try {
             final List<NameValuePair> emptyList = Collections.emptyList();
             final WebResponseData data = new WebResponseData(strXML.getBytes(), HttpStatus.SC_OK, null, emptyList);
-            final WebResponse webResponse = new WebResponseImpl(data, null, null, 0);
+            final WebResponse webResponse = new WebResponseImpl(data, (URL) null, null, 0);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
             setDomNode(page);
             return true;
