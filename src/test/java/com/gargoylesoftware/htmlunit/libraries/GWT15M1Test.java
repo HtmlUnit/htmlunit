@@ -43,11 +43,15 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -62,6 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class GWT15M1Test extends WebTestCase {
 
     private Server server_;
@@ -107,11 +112,12 @@ public class GWT15M1Test extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented(Browser.FIREFOX_2)
     public void dynaTable() throws Exception {
         server_ = HttpWebConnectionTest.startWebServer("src/test/resources/gwt/" + getDirectory() + "/DynaTable",
                 new String[] {"src/test/resources/gwt/" + getDirectory() + "/gwt-servlet.jar"});
         
-        final WebClient client = new WebClient();
+        final WebClient client = getWebClient();
 
         final String url = "http://localhost:" + HttpWebConnectionTest.PORT + "/DynaTable.html";
         final HtmlPage page = (HtmlPage) client.getPage(url);
