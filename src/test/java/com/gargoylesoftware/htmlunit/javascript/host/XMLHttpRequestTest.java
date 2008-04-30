@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertSame;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,9 +50,9 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -755,19 +757,19 @@ public class XMLHttpRequestTest extends WebTestCase {
      */
     @Test
     public void testMethods() throws Exception {
-        testMethod(SubmitMethod.GET);
-        testMethod(SubmitMethod.HEAD);
-        testMethod(SubmitMethod.DELETE);
-        testMethod(SubmitMethod.POST);
-        testMethod(SubmitMethod.PUT);
-        testMethod(SubmitMethod.OPTIONS);
-        testMethod(SubmitMethod.TRACE);
+        testMethod(HttpMethod.GET);
+        testMethod(HttpMethod.HEAD);
+        testMethod(HttpMethod.DELETE);
+        testMethod(HttpMethod.POST);
+        testMethod(HttpMethod.PUT);
+        testMethod(HttpMethod.OPTIONS);
+        testMethod(HttpMethod.TRACE);
     }
 
     /**
      * @throws Exception if the test fails
      */
-    private void testMethod(final SubmitMethod method) throws Exception {
+    private void testMethod(final HttpMethod method) throws Exception {
         final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {\n"
             + " if (window.XMLHttpRequest)\n"
@@ -778,7 +780,7 @@ public class XMLHttpRequestTest extends WebTestCase {
             + "function test()\n"
             + "{\n"
             + " req = getXMLHttpRequest();\n"
-            + " req.open('" + method.getName() + "', 'foo.xml', false);\n"
+            + " req.open('" + method.name().toLowerCase() + "', 'foo.xml', false);\n"
             + " req.send('');\n"
             + "}\n"
             + "</script></head>\n"
@@ -794,7 +796,7 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final WebRequestSettings settings = webConnection.getLastWebRequestSettings();
         assertEquals(urlPage2, settings.getUrl());
-        assertEquals(method, settings.getSubmitMethod());
+        assertSame(method, settings.getHttpMethod());
     }
 
     /**

@@ -139,7 +139,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         buffer.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
         buffer.append("fileName: '" + f.getName() + "', ");
         buffer.append("contentType: '" + response.getContentType() + "', ");
-        buffer.append("method: '" + settings.getSubmitMethod().getName() + "', ");
+        buffer.append("method: '" + settings.getHttpMethod().name() + "', ");
         buffer.append("url: '" + response.getUrl() + "', ");
         buffer.append("headers: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");

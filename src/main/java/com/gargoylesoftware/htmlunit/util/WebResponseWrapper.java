@@ -44,7 +44,7 @@ import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
 
-import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
@@ -117,7 +117,7 @@ public class WebResponseWrapper implements WebResponse {
      * {@inheritDoc}
      * The default behavior of this method is to return getRequestMethod() on the wrapped connection object.
      */
-    public SubmitMethod getRequestMethod() {
+    public HttpMethod getRequestMethod() {
         return wrappedWebResponse_.getRequestMethod();
     }
 

@@ -102,7 +102,7 @@ public interface WebResponse {
      * Returns the method used for the request resulting into this response.
      * @return the method
      */
-    SubmitMethod getRequestMethod();
+    HttpMethod getRequestMethod();
 
     /**
      * Returns the response headers as a list of {@link org.apache.commons.httpclient.NameValuePair}s.

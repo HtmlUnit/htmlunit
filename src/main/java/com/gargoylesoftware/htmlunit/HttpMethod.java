@@ -37,57 +37,29 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 /**
- * Tests for {@link ImmediateRefreshHandler}.
+ * Represents the various ways a page can be submitted.
+ *
+ * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>
  *
  * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
-public final class ImmediateRefreshHandlerTest extends WebTestCase {
-
-    /**
-     * Regression test for bug 1211980: redirect on the same page after a post.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testRefreshSamePageAfterPost() throws Exception {
-        final WebClient client = getWebClient();
-        client.setRefreshHandler(new ImmediateRefreshHandler());
-        
-        // connection will return a page with <meta ... refresh> for the first call
-        // and the same page without it for the other calls
-        final MockWebConnection webConnection = new MockWebConnection(client) {
-            private int nbCalls_ = 0;
-            @Override
-            public WebResponse getResponse(final WebRequestSettings settings) throws IOException {
-                String content = "<html><head>\n";
-                if (nbCalls_ == 0) {
-                    content += "<meta http-equiv='refresh' content='0;url="
-                        + URL_GARGOYLE.toExternalForm()
-                        + "'>\n";
-                }
-                content += "</head><body></body></html>";
-                nbCalls_++;
-                return new StringWebResponse(content, settings.getUrl()) {
-                    private static final long serialVersionUID = -4739710581533574855L;
-
-                    @Override
-                    public HttpMethod getRequestMethod() {
-                        return settings.getHttpMethod();
-                    }
-                };
-            }
-        };
-        client.setWebConnection(webConnection);
-        
-        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
-        settings.setHttpMethod(HttpMethod.POST);
-        client.getPage(settings);
-    }
+public enum HttpMethod  {
+    /** OPTIONS. */
+    OPTIONS,
+    /** GET. */
+    GET,
+    /** HEAD. */
+    HEAD,
+    /** POST. */
+    POST,
+    /** PUT. */
+    PUT,
+    /** DELETE. */
+    DELETE,
+    /** TRACE. */
+    TRACE
 }

@@ -47,7 +47,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -72,7 +72,7 @@ public class WebConnectionWrapperTest extends WebTestCase {
         final HttpState state = new HttpState();
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", emptyList);
-        final WebResponse response = new WebResponseImpl(data, URL_FIRST, SubmitMethod.GET, 0);
+        final WebResponse response = new WebResponseImpl(data, URL_FIRST, HttpMethod.GET, 0);
         final WebClient webClient = new WebClient();
         final WebRequestSettings settings = new WebRequestSettings(URL_FIRST);
         final String[] lastMethodCalled = {""};

@@ -49,7 +49,6 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
@@ -141,7 +140,7 @@ public class HttpWebConnection extends WebConnectionImpl {
                 }
                 //TODO: There might be a bug here since the original encoding type is lost.
                 final WebRequestSettings newRequest = new WebRequestSettings(new URL(buffer.toString()));
-                newRequest.setSubmitMethod(webRequestSettings.getSubmitMethod());
+                newRequest.setHttpMethod(webRequestSettings.getHttpMethod());
                 newRequest.setRequestParameters(webRequestSettings.getRequestParameters());
                 newRequest.setAdditionalHeaders(webRequestSettings.getAdditionalHeaders());
                 return getResponse(newRequest);
@@ -204,7 +203,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         else if (path.startsWith("//")) {
             path = "//" + path; // cf https://issues.apache.org/jira/browse/HTTPCLIENT-727
         }
-        final HttpMethodBase httpMethod = buildHttpMethod(webRequestSettings.getSubmitMethod(), path);
+        final HttpMethodBase httpMethod = buildHttpMethod(webRequestSettings.getHttpMethod(), path);
         if (!(httpMethod instanceof EntityEnclosingMethod)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
 
@@ -336,31 +335,39 @@ public class HttpWebConnection extends WebConnectionImpl {
         return part;
     }
 
-    private HttpMethodBase buildHttpMethod(final SubmitMethod submitMethod, final String path) {
+    private HttpMethodBase buildHttpMethod(final HttpMethod submitMethod, final String path) {
         final HttpMethodBase method;
-        if (SubmitMethod.GET == submitMethod) {
-            method = new GetMethod(path);
-        }
-        else if (SubmitMethod.POST == submitMethod) {
-            method = new PostMethod(path);
-        }
-        else if (SubmitMethod.PUT == submitMethod) {
-            method = new PutMethod(path);
-        }
-        else if (SubmitMethod.DELETE == submitMethod) {
-            method = new DeleteMethod(path);
-        }
-        else if (SubmitMethod.OPTIONS == submitMethod) {
-            method = new OptionsMethod(path);
-        }
-        else if (SubmitMethod.HEAD == submitMethod) {
-            method = new HeadMethod(path);
-        }
-        else if (SubmitMethod.TRACE == submitMethod) {
-            method = new TraceMethod(path);
-        }
-        else {
-            throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
+        switch (submitMethod) {
+            case GET:
+                method = new GetMethod(path);
+                break;
+                
+            case POST:
+                method = new PostMethod(path);
+                break;
+                
+            case PUT:
+                method = new PutMethod(path);
+                break;
+                
+            case DELETE:
+                method = new DeleteMethod(path);
+                break;
+                
+            case OPTIONS:
+                method = new OptionsMethod(path);
+                break;
+                
+            case HEAD:
+                method = new HeadMethod(path);
+                break;
+                
+            case TRACE:
+                method = new TraceMethod(path);
+                break;
+                
+            default:
+                throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
         }
         return method;
     }
@@ -529,7 +536,7 @@ public class HttpWebConnection extends WebConnectionImpl {
         return new WebResponseImpl(responseData, charset, requestSettings, loadTime);
     }
 
-    private void writeRequestHeadersToHttpMethod(final HttpMethod httpMethod,
+    private void writeRequestHeadersToHttpMethod(final org.apache.commons.httpclient.HttpMethod httpMethod,
             final Map<String, String> requestHeaders) {
         synchronized (requestHeaders) {
             for (final Map.Entry<String, String> entry : requestHeaders.entrySet()) {

@@ -37,6 +37,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +47,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -84,7 +86,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         expectedParameters.add(new NameValuePair("enterSomeText", "Flintstone"));
 
         assertEquals("url", URL_GARGOYLE, secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
     }
 

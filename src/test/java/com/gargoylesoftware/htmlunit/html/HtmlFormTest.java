@@ -56,9 +56,9 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -109,7 +109,7 @@ public class HtmlFormTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        Assert.assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -197,7 +197,7 @@ public class HtmlFormTest extends WebTestCase {
 
         ((ClickableElement) page.getHtmlElementById("button")).click();
 
-        assertEquals(SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame(HttpMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -906,7 +906,7 @@ public class HtmlFormTest extends WebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.setWebConnection(webConnection);
 
-        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST);
+        final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST);
 
         final HtmlPage page = (HtmlPage) client.getPage(settings);
         final HtmlInput submitButton = (HtmlInput) page.getHtmlElementById("submitButton");

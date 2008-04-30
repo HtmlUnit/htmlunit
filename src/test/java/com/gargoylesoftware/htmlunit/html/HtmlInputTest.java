@@ -38,6 +38,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,8 +47,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -91,7 +92,7 @@ public final class HtmlInputTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?foo=2&button=foo",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 

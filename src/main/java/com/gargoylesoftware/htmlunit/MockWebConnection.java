@@ -113,8 +113,8 @@ public class MockWebConnection extends WebConnectionImpl {
      *
      * @return the method that was used in the last call to submitRequest()
      */
-    public SubmitMethod getLastMethod() {
-        return lastRequest_.getSubmitMethod();
+    public HttpMethod getLastMethod() {
+        return lastRequest_.getHttpMethod();
     }
 
     /**

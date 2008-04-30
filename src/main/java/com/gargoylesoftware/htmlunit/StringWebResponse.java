@@ -78,7 +78,7 @@ public class StringWebResponse extends WebResponseImpl {
      * @param originatingURL the URL that this should be associated with
      */
     public StringWebResponse(final String content, final URL originatingURL) {
-        super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), originatingURL, SubmitMethod.GET, 0);
+        super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), originatingURL, HttpMethod.GET, 0);
     }
 
     /**
@@ -89,6 +89,6 @@ public class StringWebResponse extends WebResponseImpl {
      */
     public StringWebResponse(final String content, final String charset, final URL originatingURL) {
         super(getWebResponseData(content, charset), charset,
-            new WebRequestSettings(originatingURL, SubmitMethod.GET), 0);
+            new WebRequestSettings(originatingURL, HttpMethod.GET), 0);
     }
 }

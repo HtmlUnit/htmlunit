@@ -55,9 +55,9 @@ import org.apache.commons.lang.StringUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -136,20 +136,20 @@ public class HtmlForm extends ClickableElement {
         }
 
         final List<NameValuePair> parameters = getParameterListForSubmit(submitElement);
-        final SubmitMethod method;
+        final HttpMethod method;
         final String methodAttribute = getMethodAttribute();
         if ("post".equalsIgnoreCase(methodAttribute)) {
-            method = SubmitMethod.POST;
+            method = HttpMethod.POST;
         }
         else {
             if (!"get".equalsIgnoreCase(methodAttribute) && methodAttribute.trim().length() > 0) {
                 notifyIncorrectness("Incorrect submit method >" + getMethodAttribute() + "<. Using >GET<.");
             }
-            method = SubmitMethod.GET;
+            method = HttpMethod.GET;
         }
 
         String actionUrl = getActionAttribute();
-        if (SubmitMethod.GET.equals(method)) {
+        if (HttpMethod.GET == method) {
             final String anchor = StringUtils.substringAfter(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
 

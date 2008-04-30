@@ -46,6 +46,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.mozilla.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
@@ -157,7 +158,7 @@ public class XMLDocument extends Document {
         try {
             final List<NameValuePair> emptyList = Collections.emptyList();
             final WebResponseData data = new WebResponseData(strXML.getBytes(), HttpStatus.SC_OK, null, emptyList);
-            final WebResponse webResponse = new WebResponseImpl(data, (URL) null, null, 0);
+            final WebResponse webResponse = new WebResponseImpl(data, (URL) null, (HttpMethod) null, 0);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
             setDomNode(page);
             return true;

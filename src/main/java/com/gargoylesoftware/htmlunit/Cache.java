@@ -132,8 +132,7 @@ public class Cache implements Serializable {
      * @return <code>true</code> if the response should be cached
      */
     protected boolean isCacheable(final WebRequestSettings request, final  WebResponse response) {
-        return SubmitMethod.GET.equals(response.getRequestMethod())
-            && isJavaScript(response) && !isDynamicContent(response);
+        return HttpMethod.GET == response.getRequestMethod() && isJavaScript(response) && !isDynamicContent(response);
     }
 
     /**
@@ -210,7 +209,7 @@ public class Cache implements Serializable {
      * @return the cached content corresponding to the specified request
      */
     public WebResponse getCachedContent(final WebRequestSettings request) {
-        if (!SubmitMethod.GET.equals(request.getSubmitMethod())) {
+        if (HttpMethod.GET != request.getHttpMethod()) {
             return null;
         }
         final Entry cachedEntry = entries_.get(request.getUrl().toString());

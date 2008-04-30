@@ -76,6 +76,7 @@ import org.w3c.dom.NodeList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.HttpWebConnectionTest;
 import com.gargoylesoftware.htmlunit.ImmediateRefreshHandler;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
@@ -83,7 +84,6 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
@@ -189,7 +189,7 @@ public class HtmlPageTest extends WebTestCase {
         final URL expectedUrl = new URL("http://www.gargoylesoftware.com/formSubmit");
         final URL actualUrl = secondPage.getWebResponse().getUrl();
         assertEquals("url", expectedUrl, actualUrl);
-        Assert.assertEquals("method", SubmitMethod.POST, webConnection.getLastMethod());
+        Assert.assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
@@ -1361,8 +1361,8 @@ public class HtmlPageTest extends WebTestCase {
                     private static final long serialVersionUID = 4945986137562358686L;
 
                     @Override
-                    public SubmitMethod getRequestMethod() {
-                        return settings.getSubmitMethod();
+                    public HttpMethod getRequestMethod() {
+                        return settings.getHttpMethod();
                     }
                 };
             }
@@ -1370,7 +1370,7 @@ public class HtmlPageTest extends WebTestCase {
         client.setWebConnection(webConnection);
         
         final WebRequestSettings settings = new WebRequestSettings(URL_GARGOYLE);
-        settings.setSubmitMethod(SubmitMethod.POST);
+        settings.setHttpMethod(HttpMethod.POST);
         client.getPage(settings);
     }
 

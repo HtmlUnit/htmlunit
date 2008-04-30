@@ -38,14 +38,15 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -80,7 +81,7 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=foo",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
     /**
@@ -104,7 +105,7 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?textArea1=Flintstone",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
     
     /**

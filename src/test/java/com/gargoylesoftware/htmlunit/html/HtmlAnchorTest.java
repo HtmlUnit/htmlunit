@@ -52,8 +52,8 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -112,7 +112,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final MockWebConnection webConnection = getMockConnection(secondPage);
 
         assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }
@@ -241,7 +241,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final List< ? > expectedParameters = Collections.EMPTY_LIST;
 
         assertEquals("url", "http://www.foo2.com", secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
         assertNotNull(secondPage);
     }

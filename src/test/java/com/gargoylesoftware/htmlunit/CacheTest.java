@@ -245,7 +245,7 @@ class DummyWebResponse implements WebResponse {
         throw new RuntimeException("not implemented");
     }
 
-    public SubmitMethod getRequestMethod() {
+    public HttpMethod getRequestMethod() {
         throw new RuntimeException("not implemented");
     }
 

@@ -155,7 +155,7 @@ public class WebClientTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         try {
-            client.getPage(new WebRequestSettings(URL_GARGOYLE, SubmitMethod.POST));
+            client.getPage(new WebRequestSettings(URL_GARGOYLE, HttpMethod.POST));
             fail("Expected FailingHttpStatusCodeException");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -296,8 +296,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection301_MovedPermanently_GetMethod() throws Exception {
         final int statusCode = 301;
-        final SubmitMethod initialRequestMethod = SubmitMethod.GET;
-        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
+        final HttpMethod initialRequestMethod = HttpMethod.GET;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
@@ -334,13 +334,13 @@ public class WebClientTest extends WebTestCase {
         webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
         webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, SubmitMethod.POST));
+        final HtmlPage page = (HtmlPage) webClient.getPage(new WebRequestSettings(URL_FIRST, HttpMethod.POST));
         final WebResponse webResponse = page.getWebResponse();
         // A redirect should have happened
         assertEquals(200, webResponse.getStatusCode());
         assertEquals(URL_FIRST, webResponse.getUrl());
         assertEquals("Second", page.getTitleText());
-        assertEquals(SubmitMethod.GET, webResponse.getRequestMethod());
+        assertSame(HttpMethod.GET, webResponse.getRequestMethod());
     }
 
     /**
@@ -354,8 +354,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection301_MovedPermanently_PostMethod() throws Exception {
         final int statusCode = 301;
-        final SubmitMethod initialRequestMethod = SubmitMethod.POST;
-        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
+        final HttpMethod initialRequestMethod = HttpMethod.POST;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
         doTestRedirectionSameUrlAfterPost(statusCode);
@@ -374,8 +374,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection302_MovedTemporarily_PostMethod() throws Exception {
         final int statusCode = 302;
-        final SubmitMethod initialRequestMethod = SubmitMethod.POST;
-        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
+        final HttpMethod initialRequestMethod = HttpMethod.POST;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
         doTestRedirectionSameUrlAfterPost(statusCode);
@@ -388,8 +388,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection302_MovedTemporarily_GetMethod() throws Exception {
         final int statusCode = 302;
-        final SubmitMethod initialRequestMethod = SubmitMethod.GET;
-        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
+        final HttpMethod initialRequestMethod = HttpMethod.GET;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
@@ -400,7 +400,7 @@ public class WebClientTest extends WebTestCase {
      */
     @Test
     public void testRedirection302_MovedTemporarily_CommaInParameters() throws Exception {
-        doTestRedirection(302, SubmitMethod.GET, SubmitMethod.GET, URL_SECOND + "/foo.html?foo1=abc&foo2=1,2,3,4");
+        doTestRedirection(302, HttpMethod.GET, HttpMethod.GET, URL_SECOND + "/foo.html?foo1=abc&foo2=1,2,3,4");
     }
 
     /**
@@ -410,8 +410,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection303_SeeOther_GetMethod() throws Exception {
         final int statusCode = 303;
-        final SubmitMethod initialRequestMethod = SubmitMethod.GET;
-        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
+        final HttpMethod initialRequestMethod = HttpMethod.GET;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
@@ -423,8 +423,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection303_SeeOther_PostMethod() throws Exception {
         final int statusCode = 303;
-        final SubmitMethod initialRequestMethod = SubmitMethod.POST;
-        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
+        final HttpMethod initialRequestMethod = HttpMethod.POST;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
         doTestRedirectionSameUrlAfterPost(statusCode);
@@ -437,8 +437,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection307_TemporaryRedirect_GetMethod() throws Exception {
         final int statusCode = 307;
-        final SubmitMethod initialRequestMethod = SubmitMethod.GET;
-        final SubmitMethod expectedRedirectedRequestMethod = SubmitMethod.GET;
+        final HttpMethod initialRequestMethod = HttpMethod.GET;
+        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
@@ -450,8 +450,8 @@ public class WebClientTest extends WebTestCase {
     @Test
     public void testRedirection307_TemporaryRedirect_PostMethod() throws Exception {
         final int statusCode = 307;
-        final SubmitMethod initialRequestMethod = SubmitMethod.POST;
-        final SubmitMethod expectedRedirectedRequestMethod = null;
+        final HttpMethod initialRequestMethod = HttpMethod.POST;
+        final HttpMethod expectedRedirectedRequestMethod = null;
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
     }
@@ -467,8 +467,8 @@ public class WebClientTest extends WebTestCase {
      */
     private void doTestRedirection(
             final int statusCode,
-            final SubmitMethod initialRequestMethod,
-            final SubmitMethod expectedRedirectedRequestMethod)
+            final HttpMethod initialRequestMethod,
+            final HttpMethod expectedRedirectedRequestMethod)
         throws Exception {
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod,
@@ -487,8 +487,8 @@ public class WebClientTest extends WebTestCase {
      */
     private void doTestRedirection(
             final int statusCode,
-            final SubmitMethod initialRequestMethod,
-            final SubmitMethod expectedRedirectedRequestMethod,
+            final HttpMethod initialRequestMethod,
+            final HttpMethod expectedRedirectedRequestMethod,
             final String newLocation)
         throws Exception {
 
@@ -558,8 +558,8 @@ public class WebClientTest extends WebTestCase {
      */
     private void doTestRedirection(
             final int statusCode,
-            final SubmitMethod initialRequestMethod,
-            final SubmitMethod expectedRedirectedRequestMethod,
+            final HttpMethod initialRequestMethod,
+            final HttpMethod expectedRedirectedRequestMethod,
             final String newLocation,
             final boolean useProxy)
         throws Exception {
@@ -714,7 +714,7 @@ public class WebClientTest extends WebTestCase {
 
         final String urlString = "http://first?a=b";
         final URL url = new URL(urlString);
-        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(url, SubmitMethod.POST));
+        final HtmlPage page = (HtmlPage) client.getPage(new WebRequestSettings(url, HttpMethod.POST));
 
         assertEquals(urlString, page.getWebResponse().getUrl());
     }

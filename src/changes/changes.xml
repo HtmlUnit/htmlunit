@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: Replace SubmitMethod with HttpMethod (some methods with incompatible return types).
+            </action>
             <action type="add" dev="asashour" id="1946000">
                 HtmlPage: add refresh(), deprecate HttpWebConnection.newWebResponseInstance()
                 (replaced with another method with different parameters),

@@ -62,7 +62,7 @@ public class WebRequestSettings implements Serializable {
     private URL url_;
     private String proxyHost_;
     private int proxyPort_;
-    private SubmitMethod submitMethod_ = SubmitMethod.GET;
+    private HttpMethod httpMethod_ = HttpMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map<String, String> additionalHeaders_ = new HashMap<String, String>();
     private CredentialsProvider credentialsProvider_;
@@ -94,10 +94,21 @@ public class WebRequestSettings implements Serializable {
     /**
      * @param target the URL for this request
      * @param submitMethod the submitMethod to set
+     * @deprecated As of 2.2, please use {@link #WebRequestSettings(URL, HttpMethod)} instead.
      */
+    @Deprecated
     public WebRequestSettings(final URL target, final SubmitMethod submitMethod) {
         this(target);
         setSubmitMethod(submitMethod);
+    }
+
+    /**
+     * @param target the URL for this request
+     * @param submitMethod the submitMethod to set
+     */
+    public WebRequestSettings(final URL target, final HttpMethod submitMethod) {
+        this(target);
+        setHttpMethod(submitMethod);
     }
 
     /**
@@ -213,7 +224,7 @@ public class WebRequestSettings implements Serializable {
                        + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
-        if (submitMethod_ != SubmitMethod.POST) {
+        if (httpMethod_ != HttpMethod.POST) {
             final String msg = "The request body may only be set for POST requests!";
             throw new RuntimeException(msg);
         }
@@ -222,16 +233,34 @@ public class WebRequestSettings implements Serializable {
 
     /**
      * @return the submitMethod
+     * @deprecated As of 2.2, please use {@link #getHttpMethod()} instead.
      */
+    @Deprecated
     public SubmitMethod getSubmitMethod() {
-        return submitMethod_;
+        return SubmitMethod.getInstance(httpMethod_.name());
+    }
+
+    /**
+     * @return the submitMethod
+     */
+    public HttpMethod getHttpMethod() {
+        return httpMethod_;
     }
 
     /**
      * @param submitMethod the submitMethod to set
+     * @deprecated As of 2.2, please use {@link #setHttpMethod(HttpMethod)} instead.
      */
+    @Deprecated
     public void setSubmitMethod(final SubmitMethod submitMethod) {
-        submitMethod_ = submitMethod;
+        setHttpMethod(HttpMethod.valueOf(submitMethod.getName().toUpperCase()));
+    }
+    
+    /**
+     * @param submitMethod the submitMethod to set
+     */
+    public void setHttpMethod(final HttpMethod submitMethod) {
+        httpMethod_ = submitMethod;
     }
     
     /**
@@ -283,7 +312,7 @@ public class WebRequestSettings implements Serializable {
 
         buffer.append("[<");
         buffer.append("url=\"" + url_.toExternalForm() + "\"");
-        buffer.append(", " + submitMethod_);
+        buffer.append(", " + httpMethod_);
         buffer.append(", " + encodingType_);
         buffer.append(", " + requestParameters_);
         buffer.append(", " + additionalHeaders_);

@@ -51,7 +51,7 @@ import org.mozilla.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -299,8 +299,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             final WebRequestSettings settings = new WebRequestSettings(fullUrl);
             settings.setCharset("UTF-8");
             settings.addAdditionalHeader("Referer", containingPage_.getWebResponse().getUrl().toExternalForm());
-            final SubmitMethod submitMethod = SubmitMethod.getInstance(method);
-            settings.setSubmitMethod(submitMethod);
+            final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
+            settings.setHttpMethod(submitMethod);
             if (user != null) {
                 final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
                 dcp.addCredentials(user, password);
@@ -358,7 +358,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
-        if (SubmitMethod.POST.equals(requestSettings_.getSubmitMethod())
+        if (HttpMethod.POST == requestSettings_.getHttpMethod()
             && content != null
             && !Context.getUndefinedValue().equals(content)) {
             final String body = Context.toString(content);

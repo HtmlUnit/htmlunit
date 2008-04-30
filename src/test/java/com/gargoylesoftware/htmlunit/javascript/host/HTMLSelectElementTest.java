@@ -37,6 +37,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -44,14 +45,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
@@ -143,7 +143,7 @@ public class HTMLSelectElementTest extends WebTestCase {
         final MockWebConnection webConnection = (MockWebConnection) newPage.getWebClient().getWebConnection();
 
         assertEquals("http://test?submit=button", newPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
     /**

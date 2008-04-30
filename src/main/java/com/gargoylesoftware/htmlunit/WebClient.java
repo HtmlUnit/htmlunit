@@ -1327,7 +1327,7 @@ public class WebClient implements Serializable {
         responseHeaders.add(new NameValuePair("content-type",
             decoder.getMediaType() + ";charset=" + decoder.getCharset()));
         final WebResponseData data = new WebResponseData(url.openStream(), 200, "OK", responseHeaders);
-        return new WebResponseImpl(data, url, webRequestSettings.getSubmitMethod(), 0);
+        return new WebResponseImpl(data, url, webRequestSettings.getHttpMethod(), 0);
     }
 
     private WebResponse makeWebResponseForAboutUrl(final URL url) {
@@ -1395,7 +1395,7 @@ public class WebClient implements Serializable {
         }
 
         private BinaryWebResponse(final byte[] data, final URL originatingURL, final String contentType) {
-            super(getWebResponseData(data, contentType), originatingURL, SubmitMethod.GET, 0);
+            super(getWebResponseData(data, contentType), originatingURL, HttpMethod.GET, 0);
             data_ = data;
         }
 
@@ -1508,7 +1508,7 @@ public class WebClient implements Serializable {
         throws
             IOException {
         final URL url = webRequestSettings.getUrl();
-        final SubmitMethod method = webRequestSettings.getSubmitMethod();
+        final HttpMethod method = webRequestSettings.getHttpMethod();
         final List<NameValuePair> parameters = webRequestSettings.getRequestParameters();
 
         WebAssert.notNull("url", url);
@@ -1556,7 +1556,7 @@ public class WebClient implements Serializable {
 
             getLog().debug("Got a redirect status code [" + statusCode + "] new location=[" + locationString + "]");
 
-            if (webRequestSettings.getSubmitMethod().equals(SubmitMethod.GET)
+            if (webRequestSettings.getHttpMethod() == HttpMethod.GET
                     && webResponse.getUrl().toExternalForm().equals(locationString)) {
 
                 if (nbAllowedRedirections == 0) {
@@ -1570,7 +1570,7 @@ public class WebClient implements Serializable {
                 }
             }
             else if ((statusCode == HttpStatus.SC_MOVED_PERMANENTLY || statusCode == HttpStatus.SC_TEMPORARY_REDIRECT)
-                && method.equals(SubmitMethod.GET)) {
+                && method.equals(HttpMethod.GET)) {
 
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
                 wrs.setRequestParameters(parameters);
@@ -1578,7 +1578,7 @@ public class WebClient implements Serializable {
             }
             else if (statusCode <= HttpStatus.SC_SEE_OTHER) {
                 final WebRequestSettings wrs = new WebRequestSettings(newUrl);
-                wrs.setSubmitMethod(SubmitMethod.GET);
+                wrs.setHttpMethod(HttpMethod.GET);
                 return loadWebResponse(wrs);
             }
         }

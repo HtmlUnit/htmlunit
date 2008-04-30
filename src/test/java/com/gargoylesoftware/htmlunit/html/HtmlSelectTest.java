@@ -46,12 +46,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SubmitMethod;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -95,7 +94,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option2&button=foo",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
@@ -128,7 +127,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?button=foo",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
@@ -162,7 +161,7 @@ public class HtmlSelectTest extends WebTestCase {
 
         assertEquals("url", URL_GARGOYLE.toExternalForm() + "?select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 
@@ -198,7 +197,7 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals("url",
                 URL_GARGOYLE.toExternalForm() + "?select1=option1&select1=option2&select1=option3&button=foo",
                 secondPage.getWebResponse().getUrl());
-        Assert.assertEquals("method", SubmitMethod.GET, webConnection.getLastMethod());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
 

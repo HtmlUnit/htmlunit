@@ -48,7 +48,9 @@ import java.util.Map;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @deprecated As of 2.2, please use {@link HttpMethod} instead.
  */
+@Deprecated
 public final class SubmitMethod implements Serializable {
 
     private static final long serialVersionUID = 6202782549629170616L;
