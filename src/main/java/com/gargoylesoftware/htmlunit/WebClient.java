@@ -44,7 +44,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -575,32 +574,6 @@ public class WebClient implements Serializable {
      */
     public CredentialsProvider getCredentialsProvider() {
         return credentialsProvider_;
-    }
-
-    /**
-     * Throw an exception with the specified message. If junit is found in the
-     * classpath then a junit.framework.AssertionFailedError will be thrown
-     * (the same behavior as calling fail() in junit). If junit is not found
-     * then an IllegalStateException will be thrown instead of the
-     * AssertionFailedError. <p>
-     *
-     * Override this to provide custom behavior.
-     *
-     * @param message the failure message
-     * @deprecated As of 1.14
-     * @see WebAssert
-     */
-    @Deprecated
-    public void assertionFailed(final String message) {
-        try {
-            final Class< ? > clazz = Class.forName("junit.framework.AssertionFailedError");
-            final Constructor< ? > constructor = clazz.getConstructor(new Class[]{String.class});
-            final Error error = (Error) constructor.newInstance(new Object[]{message});
-            throw error;
-        }
-        catch (final Exception e) {
-            throw new IllegalStateException(message);
-        }
     }
 
     /**

@@ -870,35 +870,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     }
 
     /**
-     * <p>
-     * Execute the specified JavaScript if a JavaScript engine was successfully
-     * instantiated. If this JavaScript causes the current page to be reloaded
-     * (through location="" or form.submit()) then return the new page. Otherwise
-     * return the current page.
-     * </p>
-     * <p><b>Please note:</b> Although this method is public, it is not intended for
-     * general execution of JavaScript. Users of HtmlUnit should interact with the pages
-     * as a user would by clicking on buttons or links and having the JavaScript event
-     * handlers execute as needed..
-     * </p>
-     *
-     * @param sourceCode the JavaScript code to execute
-     * @param sourceName the name for this chunk of code (will be displayed in error messages)
-     * @param htmlElement the HTML element for which this script is being executed; will be the
-     *        context during the JavaScript execution; if <tt>null</tt>, the context will default
-     *        to the window
-     * @return a ScriptResult which will contain both the current page (which may be different
-     *         than the previous page and a JavaScript result object
-     * @deprecated As of 1.14, use {@link #executeJavaScript(String)} instead
-     */
-    @Deprecated
-    public ScriptResult executeJavaScriptIfPossible(final String sourceCode, final String sourceName,
-        final HtmlElement htmlElement) {
-
-        return executeJavaScriptIfPossible(sourceCode, sourceName, 1);
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * <p>
      * Execute the specified JavaScript if a JavaScript engine was successfully

@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="remove" dev="asashour">
+                Remove deprecated HtmlPage.executeJavaScriptIfPossible() and WebClient.assertionFailed().
+            </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: Replace SubmitMethod with HttpMethod (some methods with incompatible return types).
             </action>
