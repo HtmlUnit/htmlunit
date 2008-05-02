@@ -388,4 +388,26 @@ public class HtmlUnitRegExpProxyTest extends WebTestCase {
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * Tests usage of regex with non escaped curly braces, such as is used by dhtmlGrid.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testBackSpace() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var regexp = /[p\\bz]/g;\n"
+            + "    var str = 'aapbzb' + String.fromCharCode(8);\n"
+            + "    alert(str.replace(regexp, '-'))\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        
+        final String[] expectedAlerts = {"aa-b-b-"};
+        final List<String> collectedAlerts = new ArrayList<String>();
+        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
+        loadPage(html, collectedAlerts);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 }

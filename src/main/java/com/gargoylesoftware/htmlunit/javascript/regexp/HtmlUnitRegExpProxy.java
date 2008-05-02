@@ -241,6 +241,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         
         private String jsRegExpToJavaRegExp(String re) {
             re = re.replaceAll("\\[\\^\\\\\\d\\]", ".");
+            re = re.replaceAll("\\[([^\\]]*)\\\\b([^\\]]*)\\]", "[$1\\\\cH$2]"); // [...\b...] -> [...\cH...]
             re = escapeJSCurly(re);
             return re;
         }
