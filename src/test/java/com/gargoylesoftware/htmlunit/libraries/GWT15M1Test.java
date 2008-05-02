@@ -205,6 +205,6 @@ public class GWT15M1Test extends WebTestCase {
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
         final HtmlDivision div = (HtmlDivision) page.getHtmlElementById("debugDiv");
-        assertEquals("before, after, second.html, third.html, ", div.asText());
+        assertEquals("before, after, second.html, third.html, ", div.getFirstChild().getNodeValue());
     }
 }
