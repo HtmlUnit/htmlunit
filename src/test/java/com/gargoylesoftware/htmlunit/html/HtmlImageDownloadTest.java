@@ -62,7 +62,6 @@ public class HtmlImageDownloadTest extends WebTestCase {
     private URL url_;
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -72,7 +71,6 @@ public class HtmlImageDownloadTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -82,7 +80,6 @@ public class HtmlImageDownloadTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -92,7 +89,6 @@ public class HtmlImageDownloadTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -101,8 +97,7 @@ public class HtmlImageDownloadTest extends WebTestCase {
         Assert.assertNotNull("ImageReader should not be null", htmlimage.getImageReader());
     }
 
-     /**
-     *
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -120,7 +115,6 @@ public class HtmlImageDownloadTest extends WebTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -152,7 +146,6 @@ public class HtmlImageDownloadTest extends WebTestCase {
 
     /**
      * Common code for the tests to load the testpage and fecth the HtmlImage object.
-     *
      * @param id value of img id attribute
      * @return the found HtmlImage
      * @throws Exception if an error occurs
