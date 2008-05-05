@@ -184,17 +184,6 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Executes the content as a script if said content is a text node.
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode appendChild(final Node node) {
-        final DomNode response = super.appendChild(node);
-        executeInlineScriptIfNeeded(false);
-        return response;
-    }
-
-    /**
      * If setting the <tt>src</tt> attribute, this method executes the new JavaScript if necessary
      * (behavior varies by browser version). {@inheritDoc}
      */
@@ -222,7 +211,7 @@ public class HtmlScript extends HtmlElement {
      * the script itself, if necessary. {@inheritDoc}
      */
     @Override
-    protected void onAddedToPage() {
+    protected void onAllChildrenAddedToPage() {
         if (mainLog_.isDebugEnabled()) {
             mainLog_.debug("Script node added: " + asXml());
         }
@@ -232,7 +221,7 @@ public class HtmlScript extends HtmlElement {
             setReadyStateComplete();
             executeScriptIfNeeded(true);
         }
-        super.onAddedToPage();
+        super.onAllChildrenAddedToPage();
     }
 
     /**

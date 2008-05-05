@@ -131,22 +131,22 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * The line number in the source page where the DOM node starts.
      */
-    private int startLineNumber_;
+    private int startLineNumber_ = -1;
 
     /**
      * The column number in the source page where the DOM node starts.
      */
-    private int startColumnNumber_;
+    private int startColumnNumber_ = -1;
 
     /**
      * The line number in the source page where the DOM node ends.
      */
-    private int endLineNumber_;
+    private int endLineNumber_ = -1;
 
     /**
      * The column number in the source page where the DOM node ends.
      */
-    private int endColumnNumber_;
+    private int endColumnNumber_ = -1;
 
     private List<DomChangeListener> domListeners_;
     private final transient Object domListeners_lock_ = new Object();
@@ -167,10 +167,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected DomNode(final Page page) {
         readyState_ = READY_STATE_LOADING;
         page_ = page;
-        startLineNumber_ = 0;
-        startColumnNumber_ = 0;
-        endLineNumber_ = 0;
-        endColumnNumber_ = 0;
     }
 
     /**
@@ -213,7 +209,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns the line number in the source page where the DOM node ends.
-     * @return the line number in the source page where the DOM node ends
+     * @return 0 if no information on the line number is available (for instance for nodes dynamically added),
+     * -1 if the end tag has not yet been parsed (during page loading)
      */
     public int getEndLineNumber() {
         return endLineNumber_;
@@ -221,7 +218,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns the column number in the source page where the DOM node ends.
-     * @return the column number in the source page where the DOM node ends
+     * @return 0 if no information on the line number is available (for instance for nodes dynamically added),
+     * -1 if the end tag has not yet been parsed (during page loading)
      */
     public int getEndColumnNumber() {
         return endColumnNumber_;
@@ -875,6 +873,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             // move the node
             basicAppend(domNode);
+            if (domNode.getStartLineNumber() == -1) { // dynamically added node, not parsed
+                domNode.onAddedToPage();
+                domNode.onAllChildrenAddedToPage();
+            }
+
             // trigger events
             if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage || this instanceof HtmlPage)) {
                 ((HtmlPage) getPage()).notifyNodeAdded(domNode);
