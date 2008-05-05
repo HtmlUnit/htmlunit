@@ -38,9 +38,18 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Iterator;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
+import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
  * Wrapper for the HTML element "img".
@@ -50,6 +59,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author <a href="mailto:knut.johannes.dahle@gmail.com">Knut Johannes Dahle</a>
  */
 public class HtmlImage extends ClickableElement {
 
@@ -59,6 +69,9 @@ public class HtmlImage extends ClickableElement {
     public static final String TAG_NAME = "img";
     private int lastClickX_;
     private int lastClickY_;
+    private WebResponse imageWebResponse_;
+    private ImageReader imageReader_;
+    private boolean downloaded_;
 
     /**
      * Creates a new instance.
@@ -203,6 +216,97 @@ public class HtmlImage extends ClickableElement {
      */
     public final String getVspaceAttribute() {
         return getAttributeValue("vspace");
+    }
+
+    /**
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
+     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
+     * object for later use.<br/>
+     *
+     * @return returns the real height of the image.
+     * @throws IOException if an error occurs while downloading the image or reading it.
+     */
+    public int getHeight() throws IOException {
+        readImageIfNeeded();
+        return imageReader_.getHeight(0);
+    }
+
+    /**
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
+     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
+     * object for later use.<br/>
+     *
+     * @return returns the real width of the image.
+     * @throws IOException if an error occurs while downloading the image or reading it.
+     */
+    public int getWidth() throws IOException {
+        readImageIfNeeded();
+        return imageReader_.getWidth(0);
+    }
+
+    /**
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
+     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
+     * object for later use.<br/>
+     *
+     * @return the ImageReader representing the image from the download stream.
+     * @throws IOException if an error occurs while downloading the image and if its of a
+     * unsupported content-type.
+     */
+    public ImageReader getImageReader() throws IOException {
+        readImageIfNeeded();
+        return imageReader_;
+    }
+
+    /**
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
+     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
+     * object for later use.<br/>
+     *
+     * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
+     * @return <code>null</code> if no download should be performed and when this wasn't already done. The response
+     * received when performing a request for the image referenced by this tag otherwise.
+     * @throws IOException if an error occurs while downloading the image.
+     */
+    public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
+        if (downloadIfNeeded) {
+            downloadImageIfNeeded();
+        }
+        return imageWebResponse_;
+    }
+
+    /**
+     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK.</span><br/>
+     * If the image is not already downloaded it triggers a download. Then it stores the image in the HtmlImage
+     * object for later use.<br/>
+     *
+     * Download the image specified in the src attribute.
+     *
+     * @throws IOException if an error occurs while downloading the image or if the stream is of a
+     * unsupported content-type
+     */
+    private void downloadImageIfNeeded() throws IOException {
+        if (!downloaded_) {
+            final HtmlPage page = getPage();
+            final WebClient webclient = page.getWebClient();
+
+            final URL url = page.getFullyQualifiedUrl(getSrcAttribute());
+            imageWebResponse_ = webclient.loadWebResponse(new WebRequestSettings(url));
+            downloaded_ = true;
+        }
+    }
+
+    private void readImageIfNeeded() throws IOException {
+        downloadImageIfNeeded();
+        if (imageReader_ == null) {
+            final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
+            final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
+            if (!iter.hasNext()) {
+                throw new IOException("No image detected in response");
+            }
+            imageReader_ = iter.next();
+            imageReader_.setInput(iis);
+        }
     }
 
     /**
