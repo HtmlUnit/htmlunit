@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.ClickableElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -62,6 +63,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Rodney Gitzel
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleDeclarationTest extends WebTestCase {
@@ -372,52 +374,317 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void properties() throws Exception {
-        properties(BrowserVersion.INTERNET_EXPLORER_6_0, "clear posRight backgroundRepeat borderTopStyle "
-            + "marginTop fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor "
-            + "overflowX paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display "
-            + "textDecorationLineThrough marginBottom textKashidaSpace borderCollapse textDecorationBlink "
-            + "scrollbarFaceColor backgroundAttachment borderRightStyle fontStyle textUnderlinePosition textIndent "
-            + "textDecorationOverline msInterpolationMode layoutGridMode right pageBreakAfter background filter "
-            + "borderColor posWidth left minHeight rubyOverhang layoutGrid visibility verticalAlign borderBottomWidth "
-            + "scrollbarShadowColor textTransform lineBreak scrollbarArrowColor margin borderBottomColor "
-            + "borderTopWidth behavior letterSpacing layoutFlow font borderTopColor paddingBottom whiteSpace overflow "
-            + "borderBottomStyle cssText width clip cursor fontSize imeMode backgroundPosition color paddingRight "
-            + "textAutospace pageBreakBefore direction bottom fontFamily unicodeBidi posHeight posBottom "
-            + "borderRightColor styleFloat textJustify backgroundColor posTop zIndex borderLeftStyle zoom "
-            + "listStyleImage wordSpacing textDecoration borderBottom layoutGridChar tableLayout border textAlign "
-            + "backgroundPositionY backgroundImage borderWidth borderTop textJustifyTrim minWidth "
-            + "scrollbar3dLightColor fontWeight scrollbarDarkShadowColor textAlignLast posLeft maxHeight "
-            + "borderRightWidth paddingTop wordBreak textOverflow rubyPosition borderStyle wordWrap position "
-            + "overflowY textDecorationUnderline layoutGridLine top textDecorationNone writingMode height "
-            + "scrollbarTrackColor listStyle borderRight scrollbarBaseColor marginRight marginLeft layoutGridType "
-            + "textKashida rubyAlign borderLeft ");
-        properties(BrowserVersion.FIREFOX_2, "length cssText azimuth background backgroundAttachment "
-            + "backgroundColor backgroundImage backgroundPosition backgroundRepeat border borderCollapse borderColor "
-            + "borderSpacing borderStyle borderTop borderRight borderBottom borderLeft borderTopColor "
-            + "borderRightColor borderBottomColor borderLeftColor borderTopStyle borderRightStyle borderBottomStyle "
-            + "borderLeftStyle borderTopWidth borderRightWidth borderBottomWidth borderLeftWidth borderWidth bottom "
-            + "captionSide clear clip color content counterIncrement counterReset cue cueAfter cueBefore cursor "
-            + "direction display elevation emptyCells cssFloat font fontFamily fontSize fontSizeAdjust fontStretch "
-            + "fontStyle fontVariant fontWeight height left letterSpacing lineHeight listStyle listStyleImage "
-            + "listStylePosition listStyleType margin marginTop marginRight marginBottom marginLeft markerOffset marks "
-            + "maxHeight maxWidth minHeight minWidth orphans outline outlineColor outlineStyle outlineWidth overflow "
-            + "padding paddingTop paddingRight paddingBottom paddingLeft page pageBreakAfter pageBreakBefore "
-            + "pageBreakInside pause pauseAfter pauseBefore pitch pitchRange position quotes richness right size speak "
-            + "speakHeader speakNumeral speakPunctuation speechRate stress tableLayout textAlign textDecoration "
-            + "textIndent textShadow textTransform top unicodeBidi verticalAlign visibility voiceFamily volume "
-            + "whiteSpace widows width wordSpacing zIndex MozAppearance MozBackgroundClip MozBackgroundInlinePolicy "
-            + "MozBackgroundOrigin MozBinding MozBorderBottomColors MozBorderLeftColors MozBorderRightColors "
-            + "MozBorderTopColors MozBorderRadius MozBorderRadiusTopleft MozBorderRadiusTopright "
-            + "MozBorderRadiusBottomleft MozBorderRadiusBottomright MozBoxAlign MozBoxDirection MozBoxFlex "
-            + "MozBoxOrient MozBoxOrdinalGroup MozBoxPack MozBoxSizing MozColumnCount MozColumnWidth MozColumnGap "
-            + "MozFloatEdge MozForceBrokenImageIcon MozImageRegion MozMarginEnd MozMarginStart MozOpacity MozOutline "
-            + "MozOutlineColor MozOutlineRadius MozOutlineRadiusTopleft MozOutlineRadiusTopright "
-            + "MozOutlineRadiusBottomleft MozOutlineRadiusBottomright MozOutlineStyle MozOutlineWidth "
-            + "MozOutlineOffset MozPaddingEnd MozPaddingStart MozUserFocus MozUserInput MozUserModify MozUserSelect "
-            + "opacity outlineOffset overflowX overflowY ");
+        properties(BrowserVersion.INTERNET_EXPLORER_6_0, new String[]{
+            "background",
+            "backgroundAttachment",
+            "backgroundColor",
+            "backgroundImage",
+            "backgroundPosition",
+            "backgroundPositionX",
+            "backgroundPositionY",
+            "backgroundRepeat",
+            "behavior",
+            "border",
+            "borderBottom",
+            "borderBottomColor",
+            "borderBottomStyle",
+            "borderBottomWidth",
+            "borderCollapse",
+            "borderColor",
+            "borderLeft",
+            "borderLeftColor",
+            "borderLeftStyle",
+            "borderLeftWidth",
+            "borderRight",
+            "borderRightColor",
+            "borderRightStyle",
+            "borderRightWidth",
+            "borderStyle",
+            "borderTop",
+            "borderTopColor",
+            "borderTopStyle",
+            "borderTopWidth",
+            "borderWidth",
+            "bottom",
+            "clear",
+            "clip",
+            "color",
+            "cssText",
+            "cursor",
+            "direction",
+            "display",
+            "filter",
+            "font",
+            "fontFamily",
+            "fontSize",
+            "fontStyle",
+            "fontVariant",
+            "fontWeight",
+            "height",
+            "imeMode",
+            "layoutFlow",
+            "layoutGrid",
+            "layoutGridChar",
+            "layoutGridLine",
+            "layoutGridMode",
+            "layoutGridType",
+            "left",
+            "letterSpacing",
+            "lineBreak",
+            "lineHeight",
+            "listStyle",
+            "listStyleImage",
+            "listStylePosition",
+            "listStyleType",
+            "margin",
+            "marginBottom",
+            "marginLeft",
+            "marginRight",
+            "marginTop",
+            "maxHeight",
+            "maxWidth",
+            "minHeight",
+            "minWidth",
+            "msInterpolationMode",
+            "overflow",
+            "overflowX",
+            "overflowY",
+            "padding",
+            "paddingBottom",
+            "paddingLeft",
+            "paddingRight",
+            "paddingTop",
+            "pageBreakAfter",
+            "pageBreakBefore",
+            "position",
+            "posBottom",
+            "posHeight",
+            "posLeft",
+            "posRight",
+            "posTop",
+            "posWidth",
+            "right",
+            "rubyAlign",
+            "rubyOverhang",
+            "rubyPosition",
+            "scrollbar3dLightColor",
+            "scrollbarArrowColor",
+            "scrollbarBaseColor",
+            "scrollbarDarkShadowColor",
+            "scrollbarFaceColor",
+            "scrollbarHighlightColor",
+            "scrollbarShadowColor",
+            "scrollbarTrackColor",
+            "styleFloat",
+            "tableLayout",
+            "textAlign",
+            "textAlignLast",
+            "textAutospace",
+            "textDecoration",
+            "textDecorationBlink",
+            "textDecorationLineThrough",
+            "textDecorationNone",
+            "textDecorationOverline",
+            "textDecorationUnderline",
+            "textIndent",
+            "textJustify",
+            "textJustifyTrim",
+            "textKashida",
+            "textKashidaSpace",
+            "textOverflow",
+            "textTransform",
+            "textUnderlinePosition",
+            "top",
+            "unicodeBidi",
+            "verticalAlign",
+            "visibility",
+            "whiteSpace",
+            "width",
+            "wordBreak",
+            "wordSpacing",
+            "wordWrap",
+            "writingMode",
+            "zIndex",
+            "zoom"
+        });
+        properties(BrowserVersion.FIREFOX_2, new String[]{
+            "azimuth",
+            "background",
+            "backgroundAttachment",
+            "backgroundColor",
+            "backgroundImage",
+            "backgroundPosition",
+            "backgroundRepeat",
+            "border",
+            "borderBottom",
+            "borderBottomColor",
+            "borderBottomStyle",
+            "borderBottomWidth",
+            "borderCollapse",
+            "borderColor",
+            "borderLeft",
+            "borderLeftColor",
+            "borderLeftStyle",
+            "borderLeftWidth",
+            "borderRight",
+            "borderRightColor",
+            "borderRightStyle",
+            "borderRightWidth",
+            "borderSpacing",
+            "borderStyle",
+            "borderTop",
+            "borderTopColor",
+            "borderTopStyle",
+            "borderTopWidth",
+            "borderWidth",
+            "bottom",
+            "captionSide",
+            "clear",
+            "clip",
+            "color",
+            "content",
+            "counterIncrement",
+            "counterReset",
+            "cssFloat",
+            "cssText",
+            "cue",
+            "cueAfter",
+            "cueBefore",
+            "cursor",
+            "direction",
+            "display",
+            "elevation",
+            "emptyCells",
+            "font",
+            "fontFamily",
+            "fontSize",
+            "fontSizeAdjust",
+            "fontStretch",
+            "fontStyle",
+            "fontVariant",
+            "fontWeight",
+            "height",
+            "left",
+            "length",
+            "letterSpacing",
+            "lineHeight",
+            "listStyle",
+            "listStyleImage",
+            "listStylePosition",
+            "listStyleType",
+            "margin",
+            "marginBottom",
+            "marginLeft",
+            "marginRight",
+            "marginTop",
+            "markerOffset",
+            "marks",
+            "maxHeight",
+            "maxWidth",
+            "minHeight",
+            "minWidth",
+            "MozAppearance",
+            "MozBackgroundClip",
+            "MozBackgroundInlinePolicy",
+            "MozBackgroundOrigin",
+            "MozBinding",
+            "MozBorderBottomColors",
+            "MozBorderLeftColors",
+            "MozBorderRadius",
+            "MozBorderRadiusBottomleft",
+            "MozBorderRadiusBottomright",
+            "MozBorderRadiusTopleft",
+            "MozBorderRadiusTopright",
+            "MozBorderRightColors",
+            "MozBorderTopColors",
+            "MozBoxAlign",
+            "MozBoxDirection",
+            "MozBoxFlex",
+            "MozBoxOrdinalGroup",
+            "MozBoxOrient",
+            "MozBoxPack",
+            "MozBoxSizing",
+            "MozColumnCount",
+            "MozColumnGap",
+            "MozColumnWidth",
+            "MozFloatEdge",
+            "MozForceBrokenImageIcon",
+            "MozImageRegion",
+            "MozMarginEnd",
+            "MozMarginStart",
+            "MozOpacity",
+            "MozOutline",
+            "MozOutlineColor",
+            "MozOutlineOffset",
+            "MozOutlineRadius",
+            "MozOutlineRadiusBottomleft",
+            "MozOutlineRadiusBottomright",
+            "MozOutlineRadiusTopleft",
+            "MozOutlineRadiusTopright",
+            "MozOutlineStyle",
+            "MozOutlineWidth",
+            "MozPaddingEnd",
+            "MozPaddingStart",
+            "MozUserFocus",
+            "MozUserInput",
+            "MozUserModify",
+            "MozUserSelect",
+            "opacity",
+            "orphans",
+            "outline",
+            "outlineColor",
+            "outlineOffset",
+            "outlineStyle",
+            "outlineWidth",
+            "overflow",
+            "overflowX",
+            "overflowY",
+            "padding",
+            "paddingBottom",
+            "paddingLeft",
+            "paddingRight",
+            "paddingTop",
+            "page",
+            "pageBreakAfter",
+            "pageBreakBefore",
+            "pageBreakInside",
+            "pause",
+            "pauseAfter",
+            "pauseBefore",
+            "pitch",
+            "pitchRange",
+            "position",
+            "quotes",
+            "richness",
+            "right",
+            "size",
+            "speak",
+            "speakHeader",
+            "speakNumeral",
+            "speakPunctuation",
+            "speechRate",
+            "stress",
+            "tableLayout",
+            "textAlign",
+            "textDecoration",
+            "textIndent",
+            "textShadow",
+            "textTransform",
+            "top",
+            "unicodeBidi",
+            "verticalAlign",
+            "visibility",
+            "voiceFamily",
+            "volume",
+            "whiteSpace",
+            "widows",
+            "width",
+            "wordSpacing",
+            "zIndex"
+        });
     }
 
-    private void properties(final BrowserVersion browserVersion, final String expectedText) throws Exception {
+    private void properties(final BrowserVersion browserVersion, final String[] expectedProperties) throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -436,14 +703,14 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);
-        final List<String> expectedStyles = Arrays.asList(expectedText.split(" "));
+        final List<String> expectedStyles = Arrays.asList(expectedProperties);
         Collections.sort(expectedStyles);
         final List<String> collectedStyles =
             Arrays.asList(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText().split(" "));
         Collections.sort(collectedStyles);
         assertEquals(expectedStyles.toString(), collectedStyles.toString());
     }
-
+    
     /**
      * Test types of properties.
      * @throws Exception if the test fails
@@ -451,50 +718,304 @@ public class CSSStyleDeclarationTest extends WebTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void properties2() throws Exception {
-        properties2(BrowserVersion.INTERNET_EXPLORER_7_0, "clear backgroundRepeat borderTopStyle marginTop "
-            + "fontVariant listStylePosition backgroundPositionX lineHeight scrollbarHighlightColor overflowX "
-            + "paddingLeft maxWidth borderLeftWidth padding listStyleType borderLeftColor display marginBottom "
-            + "textKashidaSpace borderCollapse scrollbarFaceColor backgroundAttachment borderRightStyle fontStyle "
-            + "textUnderlinePosition textIndent msInterpolationMode layoutGridMode right pageBreakAfter background "
-            + "filter borderColor left minHeight rubyOverhang layoutGrid visibility verticalAlign borderBottomWidth "
-            + "scrollbarShadowColor textTransform lineBreak scrollbarArrowColor margin borderBottomColor "
-            + "borderTopWidth behavior letterSpacing layoutFlow font borderTopColor paddingBottom whiteSpace overflow "
-            + "borderBottomStyle cssText width clip cursor fontSize imeMode backgroundPosition color paddingRight "
-            + "textAutospace pageBreakBefore direction bottom fontFamily unicodeBidi borderRightColor styleFloat "
-            + "textJustify backgroundColor borderLeftStyle zoom listStyleImage wordSpacing textDecoration "
-            + "borderBottom layoutGridChar tableLayout border textAlign backgroundPositionY backgroundImage "
-            + "borderWidth borderTop textJustifyTrim minWidth scrollbar3dLightColor fontWeight "
-            + "scrollbarDarkShadowColor textAlignLast maxHeight borderRightWidth paddingTop wordBreak textOverflow "
-            + "rubyPosition borderStyle wordWrap position overflowY layoutGridLine top writingMode height "
-            + "scrollbarTrackColor listStyle borderRight scrollbarBaseColor marginRight marginLeft layoutGridType "
-            + "textKashida rubyAlign borderLeft ");
-        properties2(BrowserVersion.FIREFOX_2, "cssText azimuth background backgroundAttachment backgroundColor "
-            + "backgroundImage backgroundPosition backgroundRepeat border borderCollapse borderColor borderSpacing "
-            + "borderStyle borderTop borderRight borderBottom borderLeft borderTopColor borderRightColor "
-            + "borderBottomColor borderLeftColor borderTopStyle borderRightStyle borderBottomStyle borderLeftStyle "
-            + "borderTopWidth borderRightWidth borderBottomWidth borderLeftWidth borderWidth bottom captionSide clear "
-            + "clip color content counterIncrement counterReset cue cueAfter cueBefore cursor direction display "
-            + "elevation emptyCells cssFloat font fontFamily fontSize fontSizeAdjust fontStretch fontStyle "
-            + "fontVariant fontWeight height left letterSpacing lineHeight listStyle listStyleImage listStylePosition "
-            + "listStyleType margin marginTop marginRight marginBottom marginLeft markerOffset marks maxHeight "
-            + "maxWidth minHeight minWidth orphans outline outlineColor outlineStyle outlineWidth overflow padding "
-            + "paddingTop paddingRight paddingBottom paddingLeft page pageBreakAfter pageBreakBefore pageBreakInside "
-            + "pause pauseAfter pauseBefore pitch pitchRange position quotes richness right size speak speakHeader "
-            + "speakNumeral speakPunctuation speechRate stress tableLayout textAlign textDecoration textIndent "
-            + "textShadow textTransform top unicodeBidi verticalAlign visibility voiceFamily volume whiteSpace widows "
-            + "width wordSpacing zIndex MozAppearance MozBackgroundClip MozBackgroundInlinePolicy MozBackgroundOrigin "
-            + "MozBinding MozBorderBottomColors MozBorderLeftColors MozBorderRightColors MozBorderTopColors "
-            + "MozBorderRadius MozBorderRadiusTopleft MozBorderRadiusTopright MozBorderRadiusBottomleft "
-            + "MozBorderRadiusBottomright MozBoxAlign MozBoxDirection MozBoxFlex MozBoxOrient MozBoxOrdinalGroup "
-            + "MozBoxPack MozBoxSizing MozColumnCount MozColumnWidth MozColumnGap MozFloatEdge "
-            + "MozForceBrokenImageIcon MozImageRegion MozMarginEnd MozMarginStart MozOpacity MozOutline "
-            + "MozOutlineColor MozOutlineRadius MozOutlineRadiusTopleft MozOutlineRadiusTopright "
-            + "MozOutlineRadiusBottomleft MozOutlineRadiusBottomright MozOutlineStyle MozOutlineWidth "
-            + "MozOutlineOffset MozPaddingEnd MozPaddingStart MozUserFocus MozUserInput MozUserModify MozUserSelect "
-            + "opacity outlineOffset overflowX overflowY ");
+        properties2(BrowserVersion.INTERNET_EXPLORER_6_0, new String[]{
+            "background",
+            "backgroundAttachment",
+            "backgroundColor",
+            "backgroundImage",
+            "backgroundPosition",
+            "backgroundPositionX",
+            "backgroundPositionY",
+            "backgroundRepeat",
+            "behavior",
+            "border",
+            "borderBottom",
+            "borderBottomColor",
+            "borderBottomStyle",
+            "borderBottomWidth",
+            "borderCollapse",
+            "borderColor",
+            "borderLeft",
+            "borderLeftColor",
+            "borderLeftStyle",
+            "borderLeftWidth",
+            "borderRight",
+            "borderRightColor",
+            "borderRightStyle",
+            "borderRightWidth",
+            "borderStyle",
+            "borderTop",
+            "borderTopColor",
+            "borderTopStyle",
+            "borderTopWidth",
+            "borderWidth",
+            "bottom",
+            "clear",
+            "clip",
+            "color",
+            "cssText",
+            "cursor",
+            "direction",
+            "display",
+            "filter",
+            "font",
+            "fontFamily",
+            "fontSize",
+            "fontStyle",
+            "fontVariant",
+            "fontWeight",
+            "height",
+            "imeMode",
+            "layoutFlow",
+            "layoutGrid",
+            "layoutGridChar",
+            "layoutGridLine",
+            "layoutGridMode",
+            "layoutGridType",
+            "left",
+            "letterSpacing",
+            "lineBreak",
+            "lineHeight",
+            "listStyle",
+            "listStyleImage",
+            "listStylePosition",
+            "listStyleType",
+            "margin",
+            "marginBottom",
+            "marginLeft",
+            "marginRight",
+            "marginTop",
+            "maxHeight",
+            "maxWidth",
+            "minHeight",
+            "minWidth",
+            "msInterpolationMode",
+            "overflow",
+            "overflowX",
+            "overflowY",
+            "padding",
+            "paddingBottom",
+            "paddingLeft",
+            "paddingRight",
+            "paddingTop",
+            "pageBreakAfter",
+            "pageBreakBefore",
+            "position",
+            "right",
+            "rubyAlign",
+            "rubyOverhang",
+            "rubyPosition",
+            "scrollbar3dLightColor",
+            "scrollbarArrowColor",
+            "scrollbarBaseColor",
+            "scrollbarDarkShadowColor",
+            "scrollbarFaceColor",
+            "scrollbarHighlightColor",
+            "scrollbarShadowColor",
+            "scrollbarTrackColor",
+            "styleFloat",
+            "tableLayout",
+            "textAlign",
+            "textAlignLast",
+            "textAutospace",
+            "textDecoration",
+            "textIndent",
+            "textJustify",
+            "textJustifyTrim",
+            "textKashida",
+            "textKashidaSpace",
+            "textOverflow",
+            "textTransform",
+            "textUnderlinePosition",
+            "top",
+            "unicodeBidi",
+            "verticalAlign",
+            "visibility",
+            "whiteSpace",
+            "width",
+            "wordBreak",
+            "wordSpacing",
+            "wordWrap",
+            "writingMode",
+            "zoom"
+        });
+        properties2(BrowserVersion.FIREFOX_2, new String[]{
+            "azimuth",
+            "background",
+            "backgroundAttachment",
+            "backgroundColor",
+            "backgroundImage",
+            "backgroundPosition",
+            "backgroundRepeat",
+            "border",
+            "borderBottom",
+            "borderBottomColor",
+            "borderBottomStyle",
+            "borderBottomWidth",
+            "borderCollapse",
+            "borderColor",
+            "borderLeft",
+            "borderLeftColor",
+            "borderLeftStyle",
+            "borderLeftWidth",
+            "borderRight",
+            "borderRightColor",
+            "borderRightStyle",
+            "borderRightWidth",
+            "borderSpacing",
+            "borderStyle",
+            "borderTop",
+            "borderTopColor",
+            "borderTopStyle",
+            "borderTopWidth",
+            "borderWidth",
+            "bottom",
+            "captionSide",
+            "clear",
+            "clip",
+            "color",
+            "content",
+            "counterIncrement",
+            "counterReset",
+            "cssFloat",
+            "cssText",
+            "cue",
+            "cueAfter",
+            "cueBefore",
+            "cursor",
+            "direction",
+            "display",
+            "elevation",
+            "emptyCells",
+            "font",
+            "fontFamily",
+            "fontSize",
+            "fontSizeAdjust",
+            "fontStretch",
+            "fontStyle",
+            "fontVariant",
+            "fontWeight",
+            "height",
+            "left",
+            "letterSpacing",
+            "lineHeight",
+            "listStyle",
+            "listStyleImage",
+            "listStylePosition",
+            "listStyleType",
+            "margin",
+            "marginBottom",
+            "marginLeft",
+            "marginRight",
+            "marginTop",
+            "markerOffset",
+            "marks",
+            "maxHeight",
+            "maxWidth",
+            "minHeight",
+            "minWidth",
+            "MozAppearance",
+            "MozBackgroundClip",
+            "MozBackgroundInlinePolicy",
+            "MozBackgroundOrigin",
+            "MozBinding",
+            "MozBorderBottomColors",
+            "MozBorderLeftColors",
+            "MozBorderRadius",
+            "MozBorderRadiusBottomleft",
+            "MozBorderRadiusBottomright",
+            "MozBorderRadiusTopleft",
+            "MozBorderRadiusTopright",
+            "MozBorderRightColors",
+            "MozBorderTopColors",
+            "MozBoxAlign",
+            "MozBoxDirection",
+            "MozBoxFlex",
+            "MozBoxOrdinalGroup",
+            "MozBoxOrient",
+            "MozBoxPack",
+            "MozBoxSizing",
+            "MozColumnCount",
+            "MozColumnGap",
+            "MozColumnWidth",
+            "MozFloatEdge",
+            "MozForceBrokenImageIcon",
+            "MozImageRegion",
+            "MozMarginEnd",
+            "MozMarginStart",
+            "MozOpacity",
+            "MozOutline",
+            "MozOutlineColor",
+            "MozOutlineOffset",
+            "MozOutlineRadius",
+            "MozOutlineRadiusBottomleft",
+            "MozOutlineRadiusBottomright",
+            "MozOutlineRadiusTopleft",
+            "MozOutlineRadiusTopright",
+            "MozOutlineStyle",
+            "MozOutlineWidth",
+            "MozPaddingEnd",
+            "MozPaddingStart",
+            "MozUserFocus",
+            "MozUserInput",
+            "MozUserModify",
+            "MozUserSelect",
+            "opacity",
+            "orphans",
+            "outline",
+            "outlineColor",
+            "outlineOffset",
+            "outlineStyle",
+            "outlineWidth",
+            "overflow",
+            "overflowX",
+            "overflowY",
+            "padding",
+            "paddingBottom",
+            "paddingLeft",
+            "paddingRight",
+            "paddingTop",
+            "page",
+            "pageBreakAfter",
+            "pageBreakBefore",
+            "pageBreakInside",
+            "pause",
+            "pauseAfter",
+            "pauseBefore",
+            "pitch",
+            "pitchRange",
+            "position",
+            "quotes",
+            "richness",
+            "right",
+            "size",
+            "speak",
+            "speakHeader",
+            "speakNumeral",
+            "speakPunctuation",
+            "speechRate",
+            "stress",
+            "tableLayout",
+            "textAlign",
+            "textDecoration",
+            "textIndent",
+            "textShadow",
+            "textTransform",
+            "top",
+            "unicodeBidi",
+            "verticalAlign",
+            "visibility",
+            "voiceFamily",
+            "volume",
+            "whiteSpace",
+            "widows",
+            "width",
+            "wordSpacing",
+            "zIndex"
+        });
     }
 
-    private void properties2(final BrowserVersion browserVersion, final String expectedText) throws Exception {
+    private void properties2(final BrowserVersion browserVersion, final String[] expectedProperties) throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -513,12 +1034,51 @@ public class CSSStyleDeclarationTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(browserVersion, html, null);
-        final List<String> expectedStyles = Arrays.asList(expectedText.split(" "));
+        final List<String> expectedStyles = Arrays.asList(expectedProperties);
         Collections.sort(expectedStyles);
         final List<String> collectedStyles =
             Arrays.asList(((HtmlTextArea) page.getHtmlElementById("myTextarea")).getText().split(" "));
         Collections.sort(collectedStyles);
         assertEquals(expectedStyles, collectedStyles);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"number", "0", "1", "2", "3", "5", "5", "6", "7", "9" },
+            FF = {"string", "", "1", "2", "2", "2", "5",  "5", "5", "5" })
+    @NotYetImplemented
+    public void zIndex() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var style = document.getElementById('myDiv').style;\n"
+            + "  alert(typeof style.zIndex);\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = 1;\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = 2.0;\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = 3.1;\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = 4.6;\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = '5';\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = '6.0';\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = '7.1';\n"
+            + "  alert(style.zIndex);\n"
+            + "  style.zIndex = '8.6';\n"
+            + "  alert(style.zIndex);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
     }
 
     /**
