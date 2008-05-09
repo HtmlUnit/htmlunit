@@ -204,6 +204,9 @@ public class Stylesheet extends SimpleScriptable {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return true;
             case Selector.SAC_CHILD_SELECTOR:
+                if (element.getParentNode() == element.getPage()) {
+                    return false;
+                }
                 final DescendantSelector cs = (DescendantSelector) selector;
                 final HtmlElement parent = (HtmlElement) element.getParentNode();
                 return selects(cs.getSimpleSelector(), element) && parent != null

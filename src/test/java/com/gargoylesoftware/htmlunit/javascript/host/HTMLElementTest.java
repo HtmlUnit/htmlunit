@@ -1855,6 +1855,32 @@ public class HTMLElementTest extends WebTestCase {
     }
 
     /**
+     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1960512&group_id=47038.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testOffsetParent_withSelectors() throws Exception {
+        final String html = "<html><head><style>"
+            + "div ul > li {"
+            + "  font-size: xx-small;"
+            + "}"
+            + "</style><script>"
+            + "function test() {"
+            + "  var divThing = document.getElementById('outer');"
+            + "  while (divThing) {"
+            + "    divThing = divThing.offsetParent;"
+            + "  }"
+            + "}"
+            + "</script></head>"
+            + "<body onload='test()'>"
+            + "<div id='outer'></div>"
+            + "</body>"
+            + "</html>";
+        
+        loadPage(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
