@@ -76,6 +76,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mozilla.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -343,6 +344,10 @@ public class WebClient implements Serializable {
         final String protocol = parameters.getUrl().getProtocol();
         if (protocol.equals("javascript")) {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getUrl(), parameters.getCharset());
+            if (webWindow.getEnclosedPage() != null && webWindow.getEnclosedPage().getWebResponse() == webResponse) {
+                // a javascript:... url with result of type undefined didn't changed the page
+                return webWindow.getEnclosedPage();
+            }
         }
         else {
             webResponse = loadWebResponse(parameters);
@@ -386,7 +391,7 @@ public class WebClient implements Serializable {
      * @throws MalformedURLException if no URL can be created from the provided string
      */
     public Page getPage(final String url) throws IOException, FailingHttpStatusCodeException, MalformedURLException {
-        return getPage(new URL(url));
+        return getPage(makeUrl(url));
     }
 
     /**
@@ -1416,19 +1421,31 @@ public class WebClient implements Serializable {
     }
 
     private WebResponse makeWebResponseForJavaScriptUrl(final WebWindow webWindow, final URL url,
-            final String charset) {
-        if (!(webWindow instanceof FrameWindow)) {
-            throw new IllegalArgumentException(
-                "JavaScript URLs can only be used to load content into frames and iframes");
+            final String charset) throws FailingHttpStatusCodeException, IOException {
+
+        final HtmlPage page;
+        if (webWindow instanceof FrameWindow) {
+            final FrameWindow frameWindow = (FrameWindow) webWindow;
+            page = frameWindow.getEnclosingPage();
         }
-
-        final FrameWindow frameWindow = (FrameWindow) webWindow;
-        final HtmlPage enclosingPage = frameWindow.getEnclosingPage();
-        final ScriptResult scriptResult = enclosingPage.executeJavaScriptIfPossible(
+        else {
+            Page currentPage = webWindow.getEnclosedPage();
+            if (currentPage == null) {
+                // starting with a javascript url, quickly fill an about:blank
+                currentPage = getPage(webWindow, new WebRequestSettings(WebClient.URL_ABOUT_BLANK));
+            }
+            page = (HtmlPage) currentPage;
+        }
+        final ScriptResult scriptResult = page.executeJavaScriptIfPossible(
             url.toExternalForm(), "JavaScript URL", 1);
-
-        final String contentString = scriptResult.getJavaScriptResult().toString();
-        return new StringWebResponse(contentString, charset, url);
+        if (scriptResult.getJavaScriptResult() instanceof Undefined) {
+            // no new webresponse to produce
+            return page.getWebResponse();
+        }
+        else {
+            final String contentString = scriptResult.getJavaScriptResult().toString();
+            return new StringWebResponse(contentString, charset, url);
+        }
     }
 
     /**

@@ -1742,4 +1742,31 @@ public class WebClientTest extends WebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(new String[]{"1"}, actual);
     }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void testGetPageJavascriptProtocol() throws Exception {
+        final WebClient webClient = new WebClient();
+        final MockWebConnection webConnection = new MockWebConnection(webClient);
+        webConnection.setDefaultResponse("<html><head><title>Hello World</title></head><body></body></html>");
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        
+        Page page = webClient.getPage("javascript:void(alert(document.location))");
+        assertEquals("about:blank", page.getWebResponse().getUrl());
+        assertEquals(new String[] {"about:blank"}, collectedAlerts);
+        collectedAlerts.clear();
+        
+        page = webClient.getPage(URL_FIRST);
+        final Page page2 = webClient.getPage("javascript:void(alert(document.title))");
+        assertSame(page, page2);
+        assertEquals(new String[] {"Hello World"}, collectedAlerts);
+        
+        webClient.getPage("javascript:void(document.body.setAttribute('foo', window.screen.availWidth))");
+        assertEquals("1024", ((HtmlPage) page).getBody().getAttribute("foo"));
+    }
 }

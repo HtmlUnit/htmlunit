@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="mguillem">
+                Allow to directly invoke URLs with javascript protocol.
+            </action>
             <action type="add" dev="mguillem" id="1954183">
                 Add facilities on HtmlImage to download the referenced image and read it.
             </action>
