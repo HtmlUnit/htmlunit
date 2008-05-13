@@ -38,8 +38,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.Collections;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.ArrayUtils;
@@ -68,6 +71,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Stuart Begg
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
 public class XMLHttpRequest extends SimpleScriptable {
@@ -87,6 +91,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     private int state_;
     private Function stateChangeHandler_;
+    private Function errorHandler_;
     private WebRequestSettings requestSettings_;
     private boolean async_;
     private int threadID_;
@@ -161,6 +166,42 @@ public class XMLHttpRequest extends SimpleScriptable {
                 getLog().debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
                 getLog().debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
+        }
+    }
+
+    /**
+     * Returns the event handler that fires on error.
+     * @return the event handler that fires on error
+     */
+    public Function jsxGet_onerror() {
+        return errorHandler_;
+    }
+
+    /**
+     * Sets the event handler that fires on error.
+     * @param errorHandler the event handler that fires on error
+     */
+    public void jsxSet_onerror(final Function errorHandler) {
+        errorHandler_ = errorHandler;
+    }
+
+    /**
+     * Invokes the onerror handler if one has been set.
+     * @param context the context within which the onerror handler is to be invoked;
+     *                if <tt>null</tt>, the current thread's context is used.
+     */
+    private void processError(Context context) {
+        if (errorHandler_ != null && !getBrowserVersion().isIE()) {
+            if (context == null) {
+                context = Context.getCurrentContext();
+            }
+            final Scriptable scope = errorHandler_.getParentScope();
+            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
+
+            getLog().debug("Calling onerror handler");
+            jsEngine.callFunction(containingPage_, errorHandler_, context, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
+            getLog().debug("onerror handler: " + context.decompileFunction(errorHandler_, 4));
+            getLog().debug("Calling onerror handler done.");
         }
     }
 
@@ -371,7 +412,6 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     /**
      * The real send job.
-     * @param content the content to send
      * @param context the current context
      */
     private void doSend(final Context context) {
@@ -379,6 +419,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         try {
             setState(STATE_LOADED, context);
             final WebResponse webResponse = wc.loadWebResponse(requestSettings_);
+            getLog().debug("Web response loaded successfully.");
             if (overriddenMimeType_ == null) {
                 webResponse_ = webResponse;
             }
@@ -394,8 +435,10 @@ public class XMLHttpRequest extends SimpleScriptable {
             setState(STATE_COMPLETED, context);
         }
         catch (final IOException e) {
-            setState(STATE_LOADING, context);
-            throw Context.reportRuntimeError("Unable to send the XMLHttpRequest: " + e);
+            getLog().debug("IOException: returning a network error response.");
+            webResponse_ = new NetworkErrorWebResponse(requestSettings_);
+            setState(STATE_COMPLETED, context);
+            processError(context);
         }
     }
 
@@ -423,5 +466,65 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public void jsxFunction_overrideMimeType(final String mimeType) {
         overriddenMimeType_ = mimeType;
+    }
+
+    private static final class NetworkErrorWebResponse implements WebResponse {
+        private final WebRequestSettings webRequestSettings_;
+
+        private NetworkErrorWebResponse(final WebRequestSettings webRequestSettings) {
+            webRequestSettings_ = webRequestSettings;
+        }
+
+        public int getStatusCode() {
+            return 0;
+        }
+
+        public String getStatusMessage() {
+            return "";
+        }
+
+        public String getContentType() {
+            return "";
+        }
+
+        public String getContentAsString() {
+            return "";
+        }
+
+        public InputStream getContentAsStream() throws IOException {
+            return null;
+        }
+
+        public URL getUrl() {
+            return webRequestSettings_.getUrl();
+        }
+
+        public HttpMethod getRequestMethod() {
+            return webRequestSettings_.getHttpMethod();
+        }
+
+        public List<NameValuePair> getResponseHeaders() {
+            return Collections.emptyList();
+        }
+
+        public String getResponseHeaderValue(final String headerName) {
+            return "";
+        }
+
+        public long getLoadTimeInMilliSeconds() {
+            return 0;
+        }
+
+        public String getContentCharSet() {
+            return "";
+        }
+
+        public byte[] getResponseBody() {
+            return new byte[0];
+        }
+
+        public WebRequestSettings getRequestSettings() {
+            return webRequestSettings_;
+        }
     }
 }

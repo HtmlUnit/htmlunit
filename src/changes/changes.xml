@@ -7,6 +7,10 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="add" dev="mguillem" id="1962847" due-to="Stuart Begg">
+                JavaScript: improved behaviorof XMLHttpRequest in network error handling.
+                Added support for the onError callback (FF only). 
+            </action>
             <action type="fix" dev="mguillem" id="1960512">
                 Fixed ClassCastException in CSS child selector processing.
             </action>

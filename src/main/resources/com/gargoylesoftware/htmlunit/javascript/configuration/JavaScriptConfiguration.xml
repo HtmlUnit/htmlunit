@@ -2140,6 +2140,7 @@
         <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
         <browser name="Firefox"/>
         <property name="onreadystatechange" readable="true" writable="true"/>
+        <property name="onerror" readable="true" writable="true"/>
         <property name="readyState" readable="true" writable="false"/>
         <property name="responseText" readable="true" writable="false"/>
         <property name="responseXML" readable="true" writable="false"/>

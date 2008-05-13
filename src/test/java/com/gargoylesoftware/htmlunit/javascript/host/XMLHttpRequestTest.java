@@ -70,8 +70,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Stuart Begg
  */
 public class XMLHttpRequestTest extends WebTestCase {
+
+    private static final String MSG_NO_CONTENT = "no Content";
+    private static final String MSG_PROCESSING_ERROR = "error processing";
 
     private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNINITIALIZED);
     private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_LOADING);
@@ -234,6 +238,67 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
         assertEquals(alerts, collectedAlerts);
+    }
+
+    /**
+     * Tests asynchronous use of XMLHttpRequest, where the XHR request fails due to IOException (Connection refused).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testAsyncUseWithNetworkConnectionFailure() throws Exception {
+        testAsyncUseWithNetworkConnectionFailure(BrowserVersion.FIREFOX_2,
+            UNINITIALIZED, LOADING, LOADING, LOADED, COMPLETED, MSG_NO_CONTENT, MSG_PROCESSING_ERROR);
+        testAsyncUseWithNetworkConnectionFailure(BrowserVersion.INTERNET_EXPLORER_6_0,
+            UNINITIALIZED, LOADING, LOADING, LOADED, COMPLETED, MSG_NO_CONTENT);
+    }
+
+    void testAsyncUseWithNetworkConnectionFailure(final BrowserVersion browserVersion, final String... alerts)
+        throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<title>XMLHttpRequest Test</title>\n"
+            + "<script>\n"
+            + "var request;\n"
+            + "function testAsync() {\n"
+            + "  if (window.XMLHttpRequest)\n"
+            + "    request = new XMLHttpRequest();\n"
+            + "  else if (window.ActiveXObject)\n"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request.onreadystatechange = onReadyStateChange;\n"
+            + "  request.onerror = onError;\n"
+            + "  alert(request.readyState);\n"
+            + "  request.open('GET', '" + URL_SECOND + "', true);\n"
+            + "  request.send('');\n"
+            + "}\n"
+            + "function onError() {\n"
+            + "  alert('" + MSG_PROCESSING_ERROR + "');\n"
+            + "}\n"
+            + "function onReadyStateChange() {\n"
+            + "  alert(request.readyState);\n"
+            + "  if (request.readyState == 4) {\n"
+            + "    if (request.responseText.length == 0)\n"
+            + "      alert('" + MSG_NO_CONTENT + "');"
+            + "    else\n"
+            + "      throw 'Unexpected content, should be zero length but is: \"' + request.responseText + '\"';\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='testAsync()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebClient client = new WebClient(browserVersion);
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new DisconnectedMockWebConnection(client);
+        webConnection.setResponse(URL_FIRST, html);
+        client.setWebConnection(webConnection);
+        final Page page = client.getPage(URL_FIRST);
+
+        assertTrue("thread failed to stop in 1 second", page.getEnclosingWindow().getThreadManager().joinAll(1000));
+        assertEquals("Checking alerts for browser: " + browserVersion.getUserAgent() , alerts, collectedAlerts);
     }
 
     /**
@@ -1138,5 +1203,22 @@ public class XMLHttpRequestTest extends WebTestCase {
 
         final String[] alerts = {response};
         assertEquals(alerts, collectedAlerts);
+    }
+
+    /**
+     * Connection refused WebConnection for URL_SECOND.
+     */
+    private static final class DisconnectedMockWebConnection extends MockWebConnection {
+        private DisconnectedMockWebConnection(final WebClient webClient) {
+            super(webClient);
+        }
+
+        @Override
+        public WebResponse getResponse(final WebRequestSettings webRequestSettings) throws IOException {
+            if (webRequestSettings.getUrl().equals(URL_SECOND)) {
+                throw new IOException("Connection refused");
+            }
+            return super.getResponse(webRequestSettings);
+        }
     }
 }

@@ -380,6 +380,9 @@
         <contributor>
             <name>Dmitri Zoubkov</name>
         </contributor>
+        <contributor>
+            <name>Stuart Begg</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
