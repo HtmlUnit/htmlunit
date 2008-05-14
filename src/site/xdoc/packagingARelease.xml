@@ -61,6 +61,9 @@
                         Update the version number and release date in src/changes/changes.xml
                     </li>
                     <li>
+                        Remove pom.xml reference to any snapshot repository (needed for Maven upload request).
+                    </li>
+                    <li>
                         Increase Java heap space by setting the environment variable
                         <source>MAVEN_OPTS="-Xms256m -Xmx512m"</source>
                         Then build the zip files
@@ -85,6 +88,9 @@
                     <li>
                         Deploy the site documentation.
                         <source>mvn site:deploy</source>
+                    </li>
+                    <li>
+                        Add pom.xml reference to previously removed snapshot repository.
                     </li>
                 </ol>
             </p>
