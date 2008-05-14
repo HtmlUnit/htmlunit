@@ -901,16 +901,9 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
             sourceCode = sourceCode.substring(prefixLength);
         }
 
-        final WebWindow window = getEnclosingWindow();
-        getWebClient().pushClearFirstWindow();
         final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);
 
-        WebWindow firstWindow = getWebClient().popFirstWindow();
-        if (firstWindow == null) {
-            firstWindow = window;
-        }
-
-        return new ScriptResult(result, firstWindow.getEnclosedPage());
+        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
     /**
@@ -930,9 +923,6 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
     public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
             final Object[] args, final DomNode htmlElementScope) {
 
-        final WebWindow window = getEnclosingWindow();
-        getWebClient().pushClearFirstWindow();
-
         if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
@@ -940,11 +930,7 @@ public final class HtmlPage extends SgmlPage implements Cloneable, Document {
         final JavaScriptEngine engine = getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
-        WebWindow firstWindow = getWebClient().popFirstWindow();
-        if (firstWindow == null) {
-            firstWindow = window;
-        }
-        return new ScriptResult(result, firstWindow.getEnclosedPage());
+        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
     }
 
     /**

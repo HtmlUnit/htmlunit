@@ -83,7 +83,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Simulates clicking on this element, returning the page that occupies this element's window
+     * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
@@ -96,7 +96,7 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Simulates clicking on this element, returning the page that occupies this element's window
+     * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
@@ -119,7 +119,7 @@ public abstract class ClickableElement extends StyledElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Simulates clicking on this element, returning the page that occupies this element's window
+     * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc.
@@ -156,8 +156,8 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Simulates double-clicking on this element, returning the page that occupies this element's window
-     * after the element has been double-clicked. Note that the returned page may or may not be the same
+     * Simulates double-clicking on this element, returning the page in the window that has the focus
+     * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc. Note also that {@link #click()} is automatically called first.
      *
@@ -169,8 +169,8 @@ public abstract class ClickableElement extends StyledElement {
     }
 
     /**
-     * Simulates double-clicking on this element, returning the page that occupies this element's window
-     * after the element has been double-clicked. Note that the returned page may or may not be the same
+     * Simulates double-clicking on this element, returning the page in the window that has the focus
+     * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
      * action listeners, etc. Note also that {@link #click(boolean, boolean, boolean)} is automatically
      * called first.

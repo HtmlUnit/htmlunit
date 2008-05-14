@@ -7,6 +7,9 @@
 
     <body>
         <release version="2.2-SNAPSHOT" description="Bugfixes and move to HtmlUnit-core-js (Rhino fork)">
+            <action type="update" dev="mguillem">
+                Improved logic to detect the window with the focus.
+            </action>
             <action type="add" dev="mguillem" id="1962847" due-to="Stuart Begg">
                 JavaScript: improved behaviorof XMLHttpRequest in network error handling.
                 Added support for the onError callback (FF only).

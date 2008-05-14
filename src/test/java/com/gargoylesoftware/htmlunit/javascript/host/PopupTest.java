@@ -37,13 +37,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.html.ClickableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link Popup}.
@@ -51,11 +57,13 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class PopupTest extends WebTestCase {
 
     /**
      * Just test that a standard use of popup works without exception.
      * @throws Exception if the test fails
+     * TODO: it should fail when simulating FF as createPopup() is only for IE
      */
     @Test
     public void testPopup() throws Exception {
@@ -70,5 +78,32 @@ public class PopupTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(BrowserVersion.INTERNET_EXPLORER_6_0, content, collectedAlerts);
+    }
+
+    /**
+     * Test that the opened window becomes the current one.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testPopupWindowBecomesCurrent() throws Exception {
+        final String content = "<html><head><title>First</title><body>\n"
+            + "<span id='button' onClick='openPopup()'>Push me</span>\n"
+            + "<SCRIPT>\n"
+            + "function openPopup()  { \n "
+            + "window.open('', '_blank', 'width=640, height=600, scrollbars=yes'); "
+            + "alert('Pop-up window is Open');\n "
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(content, collectedAlerts);
+        final ClickableElement button = (ClickableElement) page.getHtmlElementById("button");
+
+        final HtmlPage secondPage = (HtmlPage) button.click();
+        final String[] expectedAlerts = {"Pop-up window is Open"};
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals("about:blank", secondPage.getWebResponse().getUrl());
+        assertSame(secondPage.getEnclosingWindow(), secondPage.getWebClient().getCurrentWindow());
     }
 }

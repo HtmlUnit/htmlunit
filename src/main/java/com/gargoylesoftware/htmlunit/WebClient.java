@@ -168,6 +168,7 @@ public class WebClient implements Serializable {
 
     private WebWindow currentWindow_;
     private Stack<WebWindow> firstWindowStack_ = new Stack<WebWindow>();
+    private final Stack<WebWindow> windows_ = new Stack<WebWindow>();
     private int timeout_;
     private HTMLParserListener htmlParserListener_;
     private OnbeforeunloadHandler onbeforeunloadHandler_;
@@ -231,7 +232,9 @@ public class WebClient implements Serializable {
         catch (final NoClassDefFoundError e) {
             scriptEngine_ = null;
         }
+
         // The window must be constructed after the script engine.
+        addWebWindowListener(new CurrentWindowTracker());
         currentWindow_ = new TopLevelWindow("", this);
         HtmlUnitContextFactory.putThreadLocal(browserVersion);
     }
@@ -1854,5 +1857,60 @@ public class WebClient implements Serializable {
             throw new IllegalArgumentException("cache should not be null!");
         }
         cache_ = cache;
+    }
+
+    /**
+     * Inspired from WebTest's logic to track the current response
+     */
+    class CurrentWindowTracker implements WebWindowListener, Serializable {
+        private static final long serialVersionUID = -987538223249485123L;
+
+        public void webWindowClosed(final WebWindowEvent event) {
+            final WebWindow window = event.getWebWindow();
+            windows_.remove(window);
+            if (window.equals(getCurrentWindow())) {
+                setCurrentWindow(windows_.peek());
+            }
+        }
+
+        public void webWindowContentChanged(final WebWindowEvent event) {
+            final WebWindow window = event.getWebWindow();
+
+            final boolean takeItAsNew;
+            if (window instanceof TopLevelWindow && event.getOldPage() == null) {
+                takeItAsNew = true;
+            }
+            // content loaded in an other window as the "current" one
+            // by js becomes "current" only if new top window is opened
+            else if (getJavaScriptEngine().isScriptRunning()) {
+                if (window instanceof FrameWindow
+                    && !HtmlPage.READY_STATE_COMPLETE.equals(
+                        ((FrameWindow) window).getEnclosingPage().getDocumentElement().getReadyState())) {
+                    // Content of frame window has changed without javascript while enclosing page is loading,
+                    // it will NOT become current response");
+                    takeItAsNew = false;
+                }
+                else {
+                    // Content of window changed without javascript, it will become current response
+                    takeItAsNew = true;
+                }
+            }
+            else {
+                // Content of window changed with javascript, it will NOT become current response
+                takeItAsNew = false;
+            }
+
+            if (takeItAsNew) {
+                setCurrentWindow(window);
+            }
+        }
+
+        /**
+         * @see com.gargoylesoftware.htmlunit.WebWindowListener#webWindowOpened
+         */
+        public void webWindowOpened(final WebWindowEvent event) {
+            windows_.push(event.getWebWindow());
+            // page is not loaded yet, don't set it now as current window
+        }
     }
 }

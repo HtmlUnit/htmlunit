@@ -812,15 +812,16 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = (HtmlPage) client.getPage(URL_FIRST);
+        final WebWindow firstWindow  = client.getCurrentWindow();
+        Assert.assertEquals("first window name", "", firstWindow.getName());
+        assertSame(page, firstWindow.getEnclosedPage());
+
         final HtmlForm form = (HtmlForm) page.getHtmlElementById("form1");
 
         final HtmlSubmitInput button = (HtmlSubmitInput) form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage) button.click();
         assertEquals("window2", secondPage.getEnclosingWindow().getName());
-
-        final WebWindow firstWindow  = client.getCurrentWindow();
-        Assert.assertEquals("first window name", "", firstWindow.getName());
-        assertSame(page, firstWindow.getEnclosedPage());
+        assertSame(secondPage.getEnclosingWindow(), client.getCurrentWindow());
     }
 
     /**
